@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "1.0.*@dev"
+        "sylius/resource": "0.10.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -36,7 +36,7 @@
     "target-dir": "Sylius/Component/Addressing",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

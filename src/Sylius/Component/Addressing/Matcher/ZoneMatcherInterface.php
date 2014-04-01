@@ -16,8 +16,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
- * Zone matcher interface.
- *
  * Service implementing this interface should be able to find
  * best matching zones for provided address model.
  *
@@ -26,7 +24,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 interface ZoneMatcherInterface
 {
     /**
-     * Returns best matching zone for given address.
+     * Returns the best matching zone for given address.
      *
      * @param AddressInterface $address
      *

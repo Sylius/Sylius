@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php":                            ">=5.3.3",
+        "php":                          ">=5.3.3",
 
         "doctrine/doctrine-bundle":       "~1.3@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
@@ -30,22 +30,22 @@
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
         "swiftmailer/swiftmailer":        "~5.0",
-        "sylius/addressing-bundle":       "0.9.*@dev",
-        "sylius/cart-bundle":             "0.9.*@dev",
-        "sylius/flow-bundle":             "0.9.*@dev",
-        "sylius/inventory-bundle":        "0.9.*@dev",
-        "sylius/money-bundle":            "0.9.*@dev",
-        "sylius/order-bundle":            "0.9.*@dev",
-        "sylius/payments-bundle":         "0.9.*@dev",
-        "sylius/payum-bundle":            "0.9.*@dev",
-        "sylius/product-bundle":          "0.9.*@dev",
-        "sylius/promotions-bundle":       "0.9.*@dev",
-        "sylius/resource-bundle":         "0.9.*@dev",
-        "sylius/settings-bundle":         "0.9.*@dev",
-        "sylius/shipping-bundle":         "0.9.*@dev",
-        "sylius/taxation-bundle":         "0.9.*@dev",
-        "sylius/taxonomies-bundle":       "0.9.*@dev",
-        "sylius/variable-product-bundle": "0.9.*@dev",
+        "sylius/addressing-bundle":       "0.10.*@dev",
+        "sylius/cart-bundle":             "0.10.*@dev",
+        "sylius/flow-bundle":             "0.10.*@dev",
+        "sylius/inventory-bundle":        "0.10.*@dev",
+        "sylius/money-bundle":            "0.10.*@dev",
+        "sylius/order-bundle":            "0.10.*@dev",
+        "sylius/payments-bundle":         "0.10.*@dev",
+        "sylius/payum-bundle":            "0.10.*@dev",
+        "sylius/product-bundle":          "0.10.*@dev",
+        "sylius/promotions-bundle":       "0.10.*@dev",
+        "sylius/resource-bundle":         "0.10.*@dev",
+        "sylius/settings-bundle":         "0.10.*@dev",
+        "sylius/shipping-bundle":         "0.10.*@dev",
+        "sylius/taxation-bundle":         "0.10.*@dev",
+        "sylius/taxonomies-bundle":       "0.10.*@dev",
+        "sylius/variable-product-bundle": "0.10.*@dev",
         "symfony-cmf/block-bundle":       "1.0.*",
         "symfony-cmf/content-bundle":     "1.0.*",
         "symfony-cmf/menu-bundle":        "1.0.*",
@@ -73,7 +73,7 @@
     "target-dir": "Sylius/Bundle/CoreBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }
