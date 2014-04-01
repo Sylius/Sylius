@@ -114,8 +114,8 @@ sylius:
         locale:
             index: Locales
         new: New
-        product_option:
-            index: Product options
+        option:
+            index: Options
         order:
             index: Orders
         page:
