@@ -9,7 +9,7 @@ sylius:
         meta_description: Meta description
     product_variant:
         available_on: Available on
-    prototype:
+    product_prototype:
         name: Name
         attributes: Attributes
         options: Options

@@ -2,7 +2,7 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Backend/Prototype:macros.html.twig' import list %}
+{% from 'SyliusWebBundle:Backend/ProductPrototype:macros.html.twig' import list %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -14,15 +14,15 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_prototype_create'), 'sylius.prototype.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_prototype_create'), 'sylius.prototype.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.option.manage'|trans) }}
         {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.property.manage'|trans) }}
     </div>
     <h1><i class="glyphicon glyphicon-compressed"></i> {{ 'sylius.prototype.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(prototypes) }}
-{{ list(prototypes) }}
-{{ pagination(prototypes) }}
+{{ pagination(product_prototypes) }}
+{{ list(product_prototypes) }}
+{{ pagination(product_prototypes) }}
 
 {% endblock %}

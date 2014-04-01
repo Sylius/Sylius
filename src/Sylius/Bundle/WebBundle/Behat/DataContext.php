@@ -528,7 +528,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $data = $table->getRowsHash();
 
         foreach (explode(',', $data['options']) as $optionName) {
-            $prototype->addOption($this->findOneByName('option', trim($optionName)));
+            $prototype->addOption($this->findOneByName('product_option', trim($optionName)));
         }
 
         foreach (explode(',', $data['attributes']) as $attributeName) {

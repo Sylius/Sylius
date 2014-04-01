@@ -62,6 +62,11 @@ class PrototypeType extends AbstractType
                 'multiple' => true,
                 'label'    => 'sylius.form.product_prototype.attributes'
             ))
+            ->add('options', 'sylius_product_option_choice', array(
+                'required' => false,
+                'multiple' => true,
+                'label'    => 'sylius.form.product_prototype.options'
+            ))
         ;
     }
 

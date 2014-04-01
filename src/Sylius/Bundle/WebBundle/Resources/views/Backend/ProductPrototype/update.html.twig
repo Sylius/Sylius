@@ -5,8 +5,8 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_prototype_index') }}">{{ 'sylius.breadcrumb.prototype.index'|trans }}</a></li>
-    <li>{{ prototype.name }}</li>
+    <li><a href="{{ path('sylius_backend_product_prototype_index') }}">{{ 'sylius.breadcrumb.prototype.index'|trans }}</a></li>
+    <li>{{ product_prototype.name }}</li>
     <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
 </ol>
 {% endblock %}
@@ -18,9 +18,9 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_prototype_update', {'id': prototype.id}) }}" method="post" class="form-horizontal" novalidate>
+<form action="{{ path('sylius_backend_product_prototype_update', {'id': product_prototype.id}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Prototype:_form.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/ProductPrototype:_form.html.twig' %}
     {{ update() }}
 </form>
 {% endblock %}
