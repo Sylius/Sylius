@@ -11,7 +11,7 @@ sylius_account_order_invoice:
     pattern: /invoice/{number}.{_format}
     methods:  [GET]
     defaults:
-        _controller: SyliusWebBundle:Frontend/Account/Order:renderInvoice
+        _controller: sylius.controller.frontend.account.order:renderInvoiceAction
         _format: pdf
     requirements:
         _format: html|pdf
@@ -20,5 +20,4 @@ sylius_account_order_show:
     pattern: /{number}
     methods: [GET]
     defaults: 
-        _controller: SyliusWebBundle:Frontend/Account/Order:showOrder
-
+        _controller: sylius.controller.frontend.account.order:showAction
