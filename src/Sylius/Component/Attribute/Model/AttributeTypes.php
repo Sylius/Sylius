@@ -22,7 +22,7 @@ class AttributeTypes
     const CHOICE     = 'choice';
     const MONEY      = 'money';
     const NUMBER     = 'number';
-    const PERCENTAGE = 'percentage';
+    const PERCENTAGE = 'percent';
     const TEXT       = 'text';
 
     public static function getChoices()
