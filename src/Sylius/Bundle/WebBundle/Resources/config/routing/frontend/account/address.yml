@@ -2,58 +2,41 @@
 # (c) Paweł Jędrzejewski
 
 sylius_account_address_index:
-    pattern: /addresses
+    pattern: /
     methods: [GET]
     defaults:
-      _controller: sylius.controller.address:indexAction
-      _sylius:
-        template: SyliusWebBundle:Frontend/Account:Address/index.html.twig
+      _controller: sylius.controller.frontend.account.address:indexAction
 
 sylius_account_address_create:
-    pattern: /address/new
+    pattern: /new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.address:createAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Account:Address/create.html.twig
-            redirect:
-                route: sylius_account_address_index
-                parameters: {}
+        _controller: sylius.controller.frontend.account.address:createAction
 
 sylius_account_address_update:
-    pattern: /address/{id}/edit
+    pattern: /{id}/edit
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.address:updateAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Account:Address/update.html.twig
-            redirect:
-                route: sylius_account_address_index
-                parameters: {}
+        _controller: sylius.controller.frontend.account.address:updateAction
 
 sylius_account_address_delete:
-    pattern: /address/{id}/delete
+    pattern: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.address:deleteAction
-        _sylius:
-            template: SyliusWebBundle:Frontend/Account:Address/delete.html.twig
-            redirect:
-                route: sylius_account_address_index
-                parameters: {}
+        _controller: sylius.controller.frontend.account.address:deleteAction
 
 sylius_account_address_set_default_billing:
-    pattern: /address/{id}/default/billing
+    pattern: /{id}/default/billing
     methods: [GET]
     defaults:
-        _controller: sylius.controller.address:setAsDefaultBillingAddressAction
+        _controller: sylius.controller.frontend.account.address:setAsBillingAction
     requirements:
         id:  \d+
 
 sylius_account_address_set_default_shipping:
-    pattern: /address/{id}/default/shipping
+    pattern: /{id}/default/shipping
     methods: [GET]
     defaults:
-        _controller: sylius.controller.address:setAsDefaultShippingAddressAction
+        _controller: sylius.controller.frontend.account.address:setAsShippingAction
     requirements:
         id:  \d+

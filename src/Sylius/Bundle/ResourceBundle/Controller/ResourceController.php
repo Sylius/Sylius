@@ -32,18 +32,22 @@ class ResourceController extends FOSRestController
      * @var Configuration
      */
     protected $config;
+
     /**
      * @var FlashHelper
      */
     protected $flashHelper;
+
     /**
      * @var DomainManager
      */
     protected $domainManager;
+
     /**
      * @var ResourceResolver
      */
     protected $resourceResolver;
+
     /**
      * @var RedirectHandler
      */

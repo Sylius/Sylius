@@ -27,43 +27,43 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class OrderController extends Controller
 {
     /**
-     * List orders of the current user
+     * List orders of the current user.
      *
      * @return Response
      */
-    public function indexOrderAction()
+    public function indexAction()
     {
         $orders = $this
             ->getOrderRepository()
-            ->findByUser($this->getUser(), array('updatedAt' => 'desc'));
+            ->findByUser($this->getUser(), array('updatedAt' => 'desc'))
+        ;
 
-        return $this->render(
-            'SyliusWebBundle:Frontend/Account:Order/index.html.twig',
-            array('orders' => $orders)
-        );
+        return $this->render('SyliusWebBundle:Frontend/Account:Order/index.html.twig', array(
+            'orders' => $orders
+        ));
     }
 
     /**
-     * Get single order of the current user
+     * Get single order of the current user.
      *
      * @param string $number
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
-    public function showOrderAction($number)
+    public function showAction($number)
     {
         $order = $this->findOrderOr404($number);
 
-        return $this->render(
-            'SyliusWebBundle:Frontend/Account:Order/show.html.twig',
-            array('order' => $order)
-        );
+        return $this->render('SyliusWebBundle:Frontend/Account:Order/show.html.twig', array(
+            'order' => $order
+        ));
     }
 
     /**
-     * Renders an invoice as PDF
+     * Renders an invoice as PDF.
      *
      * @param Request $request
      * @param string  $number
@@ -124,6 +124,7 @@ class OrderController extends Controller
      * @param string $number
      *
      * @return OrderInterface
+     *
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
