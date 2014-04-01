@@ -11,8 +11,8 @@
     'use strict';
 
     $(document).ready(function() {
-        toogleChoices($('#sylius_property_type').val());
-        $('#sylius_property_type').change(function (e) {
+        toogleChoices($('#sylius_product_attribute_type').val());
+        $('#sylius_product_attribute_type').change(function (e) {
             toogleChoices($(this).val());
         });
         $('.delete-link').each(function () {
@@ -28,7 +28,7 @@
 
             var collectionContainer = $('#' + $(this).data('collection'));
             var item = $('#' + $(this).data('collection') + ' .control-group:last-child');
-            var removeLink = $('<a class="btn btn-danger sylius_property_choices_' + (collectionContainer.children().length - 1) + '_delete" href="#"><i class="icon-trash"></i></a>');
+            var removeLink = $('<a class="btn btn-danger sylius_product_attribute_choices_' + (collectionContainer.children().length - 1) + '_delete" href="#"><i class="icon-trash"></i></a>');
             removeLink.on('click', function(e) {
                 e.preventDefault();
 
@@ -41,9 +41,9 @@
     function toogleChoices(value)
     {
        if (value === 'choice') {
-           $('.property-choices-container').show();
+           $('.attribute-choices-container').show();
        } else {
-           $('.property-choices-container').hide();
+           $('.attribute-choices-container').hide();
        }
     }
 })( jQuery );
