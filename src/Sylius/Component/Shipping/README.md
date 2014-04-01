@@ -20,4 +20,3 @@ Documentation
 -------------
 
 Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Shipping/index.html).
- 

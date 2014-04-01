@@ -19,6 +19,9 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 /**
  * Default zone matcher.
  *
+ * This implementation can match addresses against zones by country and province.
+ * It also handles sub-zones.
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMatcher implements ZoneMatcherInterface

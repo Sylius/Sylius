@@ -20,32 +20,31 @@
         }
     ],
     "require": {
-        "php":                            ">=5.3.3",
+        "php":                          ">=5.3.3",
 
-        "symfony/framework-bundle":       "~2.3",
-        "sylius/product-bundle":          "0.9.*@dev",
-        "sylius/variable-product-bundle": "0.9.*@dev",
-        "sylius/cart-bundle":             "0.9.*@dev",
-        "sylius/order-bundle":            "0.9.*@dev",
-        "sylius/money-bundle":            "0.9.*@dev",
-        "sylius/taxation-bundle":         "0.9.*@dev",
-        "sylius/shipping-bundle":         "0.9.*@dev",
-        "sylius/addressing-bundle":       "0.9.*@dev",
-        "sylius/promotions-bundle":       "0.9.*@dev",
-        "sylius/inventory-bundle":        "0.9.*@dev",
-        "sylius/taxonomies-bundle":       "0.9.*@dev",
-        "sylius/settings-bundle":         "0.9.*@dev",
-        "sylius/payum-bundle":            "0.9.*@dev",
-        "sylius/payments-bundle":         "0.9.*@dev",
-        "sylius/flow-bundle":             "0.9.*@dev",
-        "sylius/resource-bundle":         "0.9.*@dev",
-        "friendsofsymfony/user-bundle":   "2.0.*@dev",
-        "jms/serializer-bundle":          "0.12.*",
-        "knplabs/gaufrette":              "0.2.*@dev",
-        "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
-        "mathiasverraes/money":           "*@dev",
-        "swiftmailer/swiftmailer":        "~5.0",
-        "hwi/oauth-bundle":               "0.3.*"
+        "symfony/framework-bundle":     "~2.3",
+        "sylius/product-bundle":        "0.10.*@dev",
+        "sylius/cart-bundle":           "0.10.*@dev",
+        "sylius/order-bundle":          "0.10.*@dev",
+        "sylius/money-bundle":          "0.10.*@dev",
+        "sylius/taxation-bundle":       "0.10.*@dev",
+        "sylius/shipping-bundle":       "0.10.*@dev",
+        "sylius/addressing-bundle":     "0.10.*@dev",
+        "sylius/promotions-bundle":     "0.10.*@dev",
+        "sylius/inventory-bundle":      "0.10.*@dev",
+        "sylius/taxonomy-bundle":       "0.10.*@dev",
+        "sylius/settings-bundle":       "0.10.*@dev",
+        "sylius/payum-bundle":          "0.10.*@dev",
+        "sylius/payment-bundle":        "0.10.*@dev",
+        "sylius/flow-bundle":           "0.10.*@dev",
+        "sylius/resource-bundle":       "0.10.*@dev",
+        "friendsofsymfony/user-bundle": "2.0.*@dev",
+        "jms/serializer-bundle":        "0.12.*",
+        "knplabs/gaufrette":            "0.2.*@dev",
+        "knplabs/knp-gaufrette-bundle": "0.2.*@dev",
+        "mathiasverraes/money":         "*@dev",
+        "swiftmailer/swiftmailer":      "~5.0",
+        "hwi/oauth-bundle":             "0.3.*"
     },
     "require-dev": {
         "fzaninotto/faker": "1.2.*",
@@ -53,7 +52,7 @@
         "symfony/form":     "~2.3"
     },
     "suggest": {
-        "sylius/web-bundle": "Provides default web interface",
+        "sylius/web-bundle":      "Provides default web interface",
         "sylius/fixtures-bundle": "Provides default Sylius fixtures"
     },
     "config": {
@@ -65,7 +64,7 @@
     "target-dir": "Sylius/Bundle/CoreBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

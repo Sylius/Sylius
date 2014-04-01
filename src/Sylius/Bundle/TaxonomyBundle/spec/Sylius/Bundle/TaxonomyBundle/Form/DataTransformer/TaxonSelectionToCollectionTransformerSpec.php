@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer;
+namespace spec\Sylius\Bundle\TaxonomyBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-// Since the root namespace "spec" is not in our autoload
+// Since the root namespace "spec" is not in our autoload.
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
 class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
@@ -30,7 +30,7 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomiesBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer');
+        $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\DataTransformer\TaxonSelectionToCollectionTransformer');
     }
 
     function it_does_transform_null_value()

@@ -41,7 +41,7 @@
     "target-dir": "Sylius/Bundle/PaymentBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

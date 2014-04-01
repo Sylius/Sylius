@@ -23,9 +23,9 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/money-bundle":      "0.9.*@dev",
-        "sylius/order-bundle":      "0.9.*@dev",
-        "sylius/resource-bundle":   "0.9.*@dev"
+        "sylius/money-bundle":      "0.10.*@dev",
+        "sylius/order-bundle":      "0.10.*@dev",
+        "sylius/resource-bundle":   "0.10.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
@@ -42,7 +42,7 @@
     "target-dir": "Sylius/Bundle/CartBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }
