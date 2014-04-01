@@ -87,8 +87,8 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     private function createSubjectServices(ContainerBuilder $container, $driver, $subject, array $config)
     {
-        $attributeAlias = $subject.'_'.'attribute';
-        $attributeValueAlias = $subject.'_'.'attribute_value';
+        $attributeAlias = $subject.'_attribute';
+        $attributeValueAlias = $subject.'_attribute_value';
 
         $attributeClasses = $config[$attributeAlias];
         $attributeValueClasses = $config[$attributeValueAlias];
