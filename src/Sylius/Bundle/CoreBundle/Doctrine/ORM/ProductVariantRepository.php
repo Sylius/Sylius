@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\VariantRepository as BaseVariantRepository;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
  * Product variant repository.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class ProductVariantRepository extends BaseVariantRepository
+class ProductVariantRepository extends BaseVariantRepository implements ProductVariantRepositoryInterface
 {
     public function getFormQueryBuilder()
     {

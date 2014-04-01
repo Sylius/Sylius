@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
-use Sylius\Bundle\CoreBundle\Repository\VariantRepository;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -28,12 +28,11 @@ class AddProductConfigurationType extends AbstractType
     protected $validationGroups;
 
     /**
-     * Variant repository
-     * @var VariantRepository
+     * @var ProductVariantRepositoryInterface
      */
     protected $variantRepository;
 
-    public function __construct(array $validationGroups, VariantRepository $variantRepository)
+    public function __construct(array $validationGroups, ProductVariantRepositoryInterface $variantRepository)
     {
         $this->validationGroups  = $validationGroups;
         $this->variantRepository = $variantRepository;
