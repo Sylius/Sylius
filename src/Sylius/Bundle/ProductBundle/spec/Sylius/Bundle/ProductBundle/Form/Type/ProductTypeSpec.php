@@ -51,12 +51,6 @@ class ProductTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('availableOn', 'datetime', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('attributes', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)

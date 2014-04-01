@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\VariantInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
@@ -51,7 +51,7 @@ class ProductVariantSpec extends ObjectBehavior
         $this->setPrice(499)->getPrice()->shouldReturn(499);
     }
 
-    function it_should_inherit_price_from_master_variant(VariantInterface $masterVariant)
+    function it_should_inherit_price_from_master_variant(ProductVariantInterface $masterVariant)
     {
         $masterVariant->isMaster()->willReturn(true);
         $masterVariant->getAvailableOn()->willReturn(new \DateTime('yesterday'));
