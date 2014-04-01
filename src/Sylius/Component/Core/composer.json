@@ -23,7 +23,7 @@
         "php": ">=5.3.3",
 
         "sylius/resource":   "0.10.*@dev",
-        "sylius/order":      "0.10.*@dev"
+        "sylius/order":      "0.10.*@dev",
         "sylius/product":    "0.10.*@dev",
         "sylius/cart":       "0.10.*@dev",
         "sylius/order":      "0.10.*@dev",
