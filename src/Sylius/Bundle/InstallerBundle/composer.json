@@ -20,16 +20,16 @@
         }
     ],
     "require": {
-        "php":                      ">=5.3.3",
+        "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/resource-bundle":   "0.9.*@dev",
-        "sylius/flow-bundle":       "0.9.*@dev"
+        "sylius/resource-bundle":   "0.10.*@dev",
+        "sylius/flow-bundle":       "0.10.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":          "~2.0",
-        "symfony/form":             "~2.2",
-        "symfony/validator":        "~2.2"
+        "phpspec/phpspec":   "~2.0",
+        "symfony/form":      "~2.2",
+        "symfony/validator": "~2.2"
     },
     "config": {
         "bin-dir": "bin"
@@ -40,7 +40,7 @@
     "target-dir": "Sylius/Bundle/InstallerBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }
