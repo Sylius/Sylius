@@ -24,6 +24,8 @@
         "doctrine/doctrine-bundle":             "~1.3@dev",
         "doctrine/doctrine-cache-bundle":       "~1.0",
         "doctrine/orm":                         "~2.3",
+        "doctrine/migrations":                  "dev-master",
+        "doctrine/doctrine-migrations-bundle":  "dev-master",
         "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "hwi/oauth-bundle":                     "0.3.*",
