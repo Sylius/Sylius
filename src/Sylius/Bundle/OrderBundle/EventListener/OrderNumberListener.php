@@ -66,6 +66,10 @@ class OrderNumberListener
     public function generateOrderNumber(GenericEvent $event)
     {
         $order = $event->getSubject();
+        
+        if (null !== $order->getNumber()) {
+            return;
+        }
 
         $number = $this->numberRepository->createNew();
         $number->setOrder($order);
