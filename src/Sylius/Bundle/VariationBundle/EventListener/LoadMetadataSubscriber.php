@@ -65,7 +65,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'targetEntity'  => $class['variable'],
                 'inversedBy'    => 'variants',
                 'joinColumns'   => array(array(
-                    'name'                 => 'object_id',
+                    'name'                 => $variable.'_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'onDelete'             => 'CASCADE'

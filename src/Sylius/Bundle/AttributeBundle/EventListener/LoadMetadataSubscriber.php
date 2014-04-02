@@ -55,7 +55,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     {
         $metadata = $eventArgs->getClassMetadata();
 
-        foreach ($this->subjects as $class) {
+        foreach ($this->subjects as $subject => $class) {
             if ($class['attribute_value']['model'] !== $metadata->getName()) {
                 continue;
             }
@@ -65,7 +65,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'targetEntity'  => $class['subject'],
                 'inversedBy'    => 'attributes',
                 'joinColumns'   => array(array(
-                    'name'                 => 'subject_id',
+                    'name'                 => $subject.'_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'onDelete'             => 'CASCADE'
