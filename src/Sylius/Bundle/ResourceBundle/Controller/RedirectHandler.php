@@ -46,14 +46,14 @@ class RedirectHandler
         if (   $request->hasSession()
             && $request->isMethod('GET')
             && 'referer' === $this->config->getRedirectRoute('show')
-            && $referer = $request->headers->get('referer')
+            && $request->headers->has('referer')
         ) {
             $session  = $request->getSession();
             $referers = $session->get('sylius_resource_referers', array());
             $uriHash = md5($request->getUri());
 
             if (!isset($referers[$uriHash])) {
-                $referers[$uriHash] = $referer;
+                $referers[$uriHash] = $request->headers->get('referer');
                 $session->set('sylius_resource_referers', $referers);
             }
         }
