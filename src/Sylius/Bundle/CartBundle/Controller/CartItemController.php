@@ -119,6 +119,8 @@ class CartItemController extends Controller
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
 
             return $this->redirectToCartSummary();
+        } elseif ($item->getQuantity() === $cart->getTotalQuantity()) {
+            return $this->redirect($this->generateUrl('sylius_cart_clear'));
         }
 
         $event = new CartItemEvent($cart, $item);
