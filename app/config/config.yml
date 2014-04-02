@@ -66,6 +66,12 @@ doctrine_phpcr:
     odm:
         auto_mapping: true
 
+doctrine_migrations:
+    dir_name: %kernel.root_dir%/migrations
+    namespace: Sylius\Migrations
+    table_name: sylius_migrations
+    name: Sylius Migrations
+
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
