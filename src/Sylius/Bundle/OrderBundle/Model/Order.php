@@ -361,6 +361,16 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function clearAdjustments()
+    {
+        $this->adjustments->clear();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
