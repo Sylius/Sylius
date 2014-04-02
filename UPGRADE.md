@@ -30,6 +30,22 @@ $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Provider\CartPr
 $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Storage\CartStorageInterface/Sylius\\Component\\Cart\\Storage\\CartStorageInterface/g' {} \;
 ```
 
+### Core
+
+All Symfony independent code has been moved to ``Sylius\Component\Core`` namespace.
+Variant model has been renamed to ProductVariant and VariantImage to ProductVariantImage.
+
+``` bash
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Model\\Variant/Sylius\\Component\\Core\\Model\\ProductVariant/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Model/Sylius\\Component\\Core\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Calculator/Sylius\\Component\\Core\\Calculator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\OrderProcessing/Sylius\\Component\\Core\\OrderProcessing/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Promotion/Sylius\\Component\\Core\\Promotion/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Uploader/Sylius\\Component\\Core\\Uploader/g' {} \;
+```
+
+### Inventory
+
 ### Inventory
 
 Model classes and all Symfony-agnostic services have been moved to ``Sylius\Component\Inventory`` namespace.
@@ -109,4 +125,92 @@ $ find ./src -type f -exec sed -i 's/sylius.repository.product_property/sylius.r
 $ find ./src -type f -exec sed -i 's/sylius.repository.property/sylius.repository.product_attribute/g' {} \;
 $ find ./src -type f -exec sed -i 's/sylius.repository.prototype/sylius.repository.product_prototype/g' {} \;
 $ find ./src -type f -exec sed -i 's/sylius.repository.variant/sylius.repository.product_variant/g' {} \;
+```
+
+### Promotion
+
+PromotionsBundle has been renamed to PromotionBundle.
+Model classes interfaces have been moved to ``Sylius\Component\Promotion`` namespace.
+
+``` bash
+$ find ./src -type f -exec sed -i 's/PromotionsBundle/PromotionBundle/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Model/Sylius\\Component\\Promotion\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Action/Sylius\\Component\\Promotion\\Action/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Checker/Sylius\\Component\\Promotion\\Checker/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Generator/Sylius\\Component\\Promotion\\Generator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Processor/Sylius\\Component\\Promotion\\Processor/g' {} \;
+```
+
+Configuration root node has been adjusted as well.
+
+Before:
+
+```
+sylius_promotions:
+    driver: doctrine/orm
+```
+
+After:
+
+```
+sylius_promotion:
+    driver: doctrine/orm
+```
+
+### Resource
+
+ResourceBundle model interfaces have been moved to ``Sylius\Component\Resource`` namespace.
+``RepositoryInterface`` has been moved to ``Repository`` namespace under the component.
+
+``` bash
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ResourceBundle\\Model/Sylius\\Component\\Resource\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Resource\\Model\\RepositoryInterface/Sylius\\Component\\Resource\\Repository\\RepositoryInterface/g' {} \;
+```
+
+### Shipping
+
+Model classes and Symfony agnostic services & interfaces have been moved to ``Sylius\Component\Shipping`` namespace.
+
+``` bash
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Model/Sylius\\Component\\Shipping\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Calculator/Sylius\\Component\\Shipping\\Calculator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Checker/Sylius\\Component\\Shipping\\Checker/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Resolver/Sylius\\Component\\Shipping\\Resolver/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Processor/Sylius\\Component\\Shipping\\Processor/g' {} \;
+```
+
+### Taxation
+
+Model classes and Symfony agnostic services have been moved to ``Sylius\Component\Taxation`` namespace.
+
+``` bash
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxationBundle\\Model/Sylius\\Component\\Taxation\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxationBundle\\Calculator/Sylius\\Component\\Taxation\\Calculator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxationBundle\\Resolver/Sylius\\Component\\Taxation\\Resolver/g' {} \;
+```
+
+### Taxonomy
+
+TaxonomiesBundle has been renamed to TaxonomyBundle.
+Model classes interfaces have been moved to ``Sylius\Component\Taxonomy`` namespace.
+
+``` bash
+$ find ./src -type f -exec sed -i 's/TaxonomiesBundle/TaxonomyBundle/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxonomyBundle\\Model/Sylius\\Component\\Taxonomy\\Model/g' {} \;
+```
+
+Configuration root node has been adjusted as well.
+
+Before:
+
+```
+sylius_taxonomies:
+    driver: doctrine/orm
+```
+
+After:
+
+```
+sylius_taxonomy:
+    driver: doctrine/orm
 ```
