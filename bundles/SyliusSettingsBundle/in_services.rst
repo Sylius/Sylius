@@ -27,7 +27,7 @@ Loading the settings
 
         public function applyTaxes(Order $order)
         {
-            $taxationSettings = $this->settingsManager->load('taxation');
+            $taxationSettings = $this->settingsManager->loadSettings('taxation');
             $itemsTotal = $order->getItemsTotal();
 
             $order->setTaxTotal($taxationSettings->get('rate') * $itemsTotal);
