@@ -99,7 +99,7 @@ class Zone implements ZoneInterface
     public function setType($type)
     {
         if (!in_array($type, self::getTypes())) {
-            throw new \InvalidArgumentException('Wrong zone type supplied');
+            throw new \InvalidArgumentException('Wrong zone type supplied.');
         }
 
         $this->type = $type;
@@ -114,21 +114,7 @@ class Zone implements ZoneInterface
      */
     public static function getTypes()
     {
-        return array_keys(self::getTypeChoices());
-    }
-
-    /**
-     * Used in form choice field.
-     *
-     * @return array
-     */
-    public static function getTypeChoices()
-    {
-        return array(
-            self::TYPE_COUNTRY   => 'Country',
-            self::TYPE_PROVINCE  => 'Province',
-            self::TYPE_ZONE      => 'Zone',
-        );
+        return array(self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE);
     }
 
     /**
