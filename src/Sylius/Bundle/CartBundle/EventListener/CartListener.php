@@ -75,20 +75,12 @@ class CartListener implements EventSubscriberInterface
     {
         $cart = $event->getCart();
         $cart->addItem($event->getItem());
-
-        if ($event->isFresh()) {
-            $this->refreshCart($cart);
-        }
     }
 
     public function removeItem(CartEvent $event)
     {
         $cart = $event->getCart();
         $cart->removeItem($event->getItem());
-
-        if ($event->isFresh()) {
-            $this->refreshCart($cart);
-        }
     }
 
     public function clearCart(CartEvent $event)
@@ -108,23 +100,11 @@ class CartListener implements EventSubscriberInterface
             $valid  = 0 === count($errors);
         }
 
-        if ($event->isFresh()) {
-            $this->refreshCart($cart);
-        }
-
         if ($valid) {
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
 
             $this->cartProvider->setCart($cart);
         }
-    }
-
-    /**
-     * @param CartInterface $cart
-     */
-    protected function refreshCart(CartInterface $cart)
-    {
-        $cart->calculateTotal();
     }
 }
