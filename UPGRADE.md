@@ -11,6 +11,10 @@ Its functionality extracted into two separate bundles - SyliusAttributeBundle & 
 
 Property model has been renamed to Attribute.
 
+Before performing this procedure, please create a safe backup of your database.
+This upgrade changes significantly the way product attributes and options are stored in the database.
+We do provide a way to migrate your data, but no rollback will be possible in case of a problem.
+
 ### Addressing
 
 Model classes and ZoneMatcher services have been moved to ``Sylius\Component\Addressing`` namespace.
@@ -26,8 +30,8 @@ Model classes and several services have been moved to ``Sylius\Component\Cart`` 
 
 ``` bash
 $ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Model/Sylius\\Component\\Cart\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Provider\CartProviderInterface/Sylius\\Component\\Cart\\Provider\\CartProviderInterface/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Storage\CartStorageInterface/Sylius\\Component\\Cart\\Storage\\CartStorageInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Provider\\CartProviderInterface/Sylius\\Component\\Cart\\Provider\\CartProviderInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Storage\\CartStorageInterface/Sylius\\Component\\Cart\\Storage\\CartStorageInterface/g' {} \;
 ```
 
 ### Core
