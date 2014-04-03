@@ -197,6 +197,14 @@ class OrderItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
+    public function clearAdjustments()
+    {
+        return $this->adjustments->clear();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function calculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;

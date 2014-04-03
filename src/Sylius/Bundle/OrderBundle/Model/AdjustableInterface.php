@@ -49,6 +49,11 @@ interface AdjustableInterface
     public function getAdjustmentsTotal();
 
     /**
+     * Clears all adjustments.
+     */
+    public function clearAdjustments();
+
+    /**
      * Calculate adjustments total.
      */
     public function calculateAdjustmentsTotal();
