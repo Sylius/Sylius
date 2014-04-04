@@ -4,6 +4,12 @@ Sylius Documentation
 `Sylius`_ is a modern e-commerce solution for PHP, based on
 `Symfony2 Framework`_.
 
+.. note::
+
+    This documentation assumes you have a working knowledge of the Symfony2
+    Framework. If you haven't, please start by reading the `Quick Tour`_ from
+    the Symfony documentation.
+
 The Book
 --------
 
@@ -67,3 +73,4 @@ A guide to contribute to Sylius.
 
 .. _Sylius: http://sylius.org
 .. _`Symfony Framework`: http://symfony.com
+.. _`Quick Tour`: http://symfony.com/doc/current/quick_tour
