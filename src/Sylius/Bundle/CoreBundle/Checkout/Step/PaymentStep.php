@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**

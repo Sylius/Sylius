@@ -12,9 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartItemType as BaseCartItemType;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -35,10 +34,10 @@ class CartItemType extends BaseCartItemType
         parent::buildForm($builder, $options);
 
         if (isset($options['product']) && $options['product']->hasVariants()) {
-            $type = Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod() ? 'sylius_variant_choice' : 'sylius_variant_match';
+            $type = Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod() ? 'sylius_product_variant_choice' : 'sylius_product_variant_match';
 
             $builder->add('variant', $type, array(
-                'product'  => $options['product']
+                'variable'  => $options['product']
             ));
         }
     }
@@ -59,7 +58,7 @@ class CartItemType extends BaseCartItemType
                 'product'
             ))
             ->setAllowedTypes(array(
-                'product' => array('Sylius\Bundle\VariableProductBundle\Model\VariableProductInterface')
+                'product' => array('Sylius\Component\Core\Model\ProductInterface')
             ))
         ;
     }

@@ -55,12 +55,17 @@ class PrototypeType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.label.prototype.name'
+                'label' => 'sylius.form.product_prototype.name'
             ))
-            ->add('properties', 'sylius_property_choice', array(
+            ->add('attributes', 'sylius_product_attribute_choice', array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.label.prototype.properties'
+                'label'    => 'sylius.form.product_prototype.attributes'
+            ))
+            ->add('options', 'sylius_product_option_choice', array(
+                'required' => false,
+                'multiple' => true,
+                'label'    => 'sylius.form.product_prototype.options'
             ))
         ;
     }
@@ -83,6 +88,6 @@ class PrototypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_prototype';
+        return 'sylius_product_prototype';
     }
 }

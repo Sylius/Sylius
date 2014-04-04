@@ -1,0 +1,53 @@
+{% macro list(prototypes) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if prototypes|length > 0 %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.prototype.name'|trans) }}</th>
+            <th>{{ 'sylius.prototype.options'|trans }}</th>
+            <th>{{ 'sylius.prototype.attributes'|trans }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.prototype.updated_at'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for prototype in prototypes %}
+        <tr id="{{ prototype.id }}">
+            <td>{{ prototype.id }}</td>
+            <td>{{ prototype.name }}</td>
+            <td>
+                <ul>
+                    {% for option in prototype.options %}
+                    <li>{{ option.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for attribute in prototype.attributes %}
+                    <li>{{ attribute.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ prototype.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_product_prototype_build', {'id': prototype.id}), 'sylius.prototype.build'|trans) }}
+                {{ buttons.edit(path('sylius_backend_product_prototype_update', {'id': prototype.id})) }}
+                {{ buttons.delete(path('sylius_backend_product_prototype_delete', {'id': prototype.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.prototype.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

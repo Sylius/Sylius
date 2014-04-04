@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
 use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -93,12 +93,9 @@ class CartListener implements EventSubscriberInterface
     public function saveCart(CartEvent $event)
     {
         $cart  = $event->getCart();
-        $valid = true;
 
-        if (!$event->isValid()) {
-            $errors = $this->validator->validate($cart);
-            $valid  = 0 === count($errors);
-        }
+        $errors = $this->validator->validate($cart);
+        $valid  = 0 === count($errors);
 
         if ($valid) {
             $this->cartManager->persist($cart);

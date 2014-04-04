@@ -30,15 +30,17 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_addressing',
         'sylius_inventory',
         'sylius_money',
-        'sylius_payments',
+        'sylius_payment',
         'sylius_payum',
         'sylius_product',
-        'sylius_promotions',
+        'sylius_promotion',
         'sylius_order',
         'sylius_settings',
         'sylius_shipping',
         'sylius_taxation',
-        'sylius_taxonomies',
+        'sylius_taxonomy',
+        'sylius_attribute',
+        'sylius_variation',
     );
 
     private $emails = array(

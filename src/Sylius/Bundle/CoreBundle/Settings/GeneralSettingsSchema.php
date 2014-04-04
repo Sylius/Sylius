@@ -14,9 +14,9 @@ namespace Sylius\Bundle\CoreBundle\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\Constraints\Currency;
+use Symfony\Component\Validator\Constraints\Locale;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * General settings schema.

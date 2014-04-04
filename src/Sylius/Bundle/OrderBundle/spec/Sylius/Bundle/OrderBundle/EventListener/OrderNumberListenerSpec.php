@@ -11,13 +11,13 @@
 
 namespace spec\Sylius\Bundle\OrderBundle\EventListener;
 
-use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface;
-use Sylius\Bundle\OrderBundle\Repository\NumberRepositoryInterface;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
-use Sylius\Bundle\OrderBundle\Model\NumberInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Doctrine\Common\Persistence\ObjectManager;
+use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Generator\OrderNumberGeneratorInterface;
+use Sylius\Component\Order\Model\NumberInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Repository\NumberRepositoryInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

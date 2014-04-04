@@ -6,7 +6,7 @@ sylius_core:
 sylius_installer:
     classes:
         user:
-            model: Sylius\Bundle\CoreBundle\Model\User
+            model: Sylius\Component\Core\Model\User
 
 sylius_money:
     currency: %sylius.currency%
@@ -22,48 +22,53 @@ sylius_cart:
 
 sylius_settings: ~
 
-sylius_taxonomies:
+sylius_taxonomy:
     classes:
         taxonomy:
-            model: Sylius\Bundle\CoreBundle\Model\Taxonomy
+            model: Sylius\Component\Core\Model\Taxonomy
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
         taxon:
-            model: Sylius\Bundle\CoreBundle\Model\Taxon
+            model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
+
 sylius_product:
+    driver: doctrine/orm
     classes:
         product:
-            model: Sylius\Bundle\CoreBundle\Model\Product
+            model: Sylius\Component\Core\Model\Product
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
-            repository: Sylius\Bundle\CoreBundle\Repository\ProductRepository
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
 
-sylius_variable_product:
+sylius_attribute: ~
+
+sylius_variation:
     classes:
-        variant:
-            model: Sylius\Bundle\CoreBundle\Model\Variant
-            repository: Sylius\Bundle\CoreBundle\Repository\VariantRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\VariantType
+        product:
+            variant:
+                model: Sylius\Component\Core\Model\ProductVariant
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
+                form: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
 
 sylius_taxation:
     classes:
         tax_rate:
-            model: Sylius\Bundle\CoreBundle\Model\TaxRate
+            model: Sylius\Component\Core\Model\TaxRate
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
 
 sylius_shipping:
     classes:
         shipment:
-            model: Sylius\Bundle\CoreBundle\Model\Shipment
-            repository: Sylius\Bundle\CoreBundle\Repository\ShipmentRepository
+            model: Sylius\Component\Core\Model\Shipment
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
         shipment_item:
-            model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
+            model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
-            model: Sylius\Bundle\CoreBundle\Model\ShippingMethod
+            model: Sylius\Component\Core\Model\ShippingMethod
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
 
-sylius_promotions:
+sylius_promotion:
     classes:
         promotion_subject:
             model: %sylius.model.order.class%
@@ -73,11 +78,11 @@ sylius_inventory:
     track_inventory: %sylius.inventory.tracking_enabled%
     classes:
         inventory_unit:
-            model: Sylius\Bundle\CoreBundle\Model\InventoryUnit
+            model: Sylius\Component\Core\Model\InventoryUnit
         stockable:
-            model: %sylius.model.variant.class%
+            model: %sylius.model.product_variant.class%
 
-sylius_payments:
+sylius_payment:
     classes:
         payment:
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
@@ -91,34 +96,34 @@ sylius_payum: ~
 sylius_addressing:
     classes:
         address:
-            controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController
+            controller: Sylius\Bundle\CoreBundle\Controller\AddressController
 
 sylius_order:
     classes:
         order:
-            model: Sylius\Bundle\CoreBundle\Model\Order
+            model: Sylius\Component\Core\Model\Order
             controller: Sylius\Bundle\CoreBundle\Controller\OrderController
-            repository: Sylius\Bundle\CoreBundle\Repository\OrderRepository
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
-            model: Sylius\Bundle\CoreBundle\Model\OrderItem
+            model: Sylius\Component\Core\Model\OrderItem
 
 sylius_resource:
     resources:
         sylius.user:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Model\User
+                model: Sylius\Component\Core\Model\User
                 controller: Sylius\Bundle\CoreBundle\Controller\UserController
-                repository: Sylius\Bundle\CoreBundle\Repository\UserRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
         sylius.group:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Model\Group
+                model: Sylius\Component\Core\Model\Group
         sylius.locale:
             driver: doctrine/orm
             classes:
-                model: Sylius\Bundle\CoreBundle\Model\Locale
+                model: Sylius\Component\Core\Model\Locale
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
         sylius.block:
             driver: doctrine/phpcr-odm
@@ -128,4 +133,8 @@ sylius_resource:
             driver: doctrine/phpcr-odm
             classes:
                 model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
-                repository: Sylius\Bundle\CoreBundle\Repository\PageRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PageRepository
+
+sylius_pricing:
+    forms:
+        - sylius_product_variant

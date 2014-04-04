@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InventoryBundle\Twig;
 
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
  * Inventory management helper methods.

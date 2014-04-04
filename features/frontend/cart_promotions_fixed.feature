@@ -6,62 +6,62 @@ Feature: Checkout fixed discount promotions
 
     Background:
         Given I am logged in as user "klaus@example.com"
-        And the following countries exist:
-          | name    |
-          | Germany |
-          | Poland  |
-        And there are following taxonomies defined:
-          | name     |
-          | Category |
-        And taxonomy "Category" has following taxons:
-          | Clothing > Ubuntu T-Shirts |
-          | Clothing > Debian T-Shirts |
-        And the following products exist:
-          | name    | price | taxons          |
-          | Buzz    | 500   | Debian T-Shirts |
-          | Potato  | 200   | Debian T-Shirts |
-          | Woody   | 125   | Debian T-Shirts |
-          | Sarge   | 25    | Debian T-Shirts |
-          | Etch    | 20    | Debian T-Shirts |
-          | Lenny   | 15    | Debian T-Shirts |
-          | Ubu     | 200   | Ubuntu T-Shirts |
-        And the following promotions exist:
-          | name                | description                                       |
-          | 3 items             | Discount for orders with at least 3 items         |
-          | 300 EUR             | Discount for orders over 300 EUR                  |
-          | Shipping to Germany | Discount for orders with shipping country Germany |
-          | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
-          | 3rd order           | Discount for 3rd order                            |
-        And promotion "3 items" has following rules defined:
-          | type       | configuration        |
-          | Item count | Count: 3,Equal: true |
-        And promotion "3 items" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 15    |
-        And promotion "300 EUR" has following rules defined:
-          | type       | configuration |
-          | Item total | Amount: 300   |
-        And promotion "300 EUR" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 40    |
-        And promotion "Shipping to Germany" has following rules defined:
-          | type       | configuration |
-          | Shipping country | Country: Germany |
-        And promotion "Shipping to Germany" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 40    |
-        And promotion "Ubuntu T-Shirts" has following rules defined:
-          | type     | configuration          |
-          | Taxonomy | Taxons: Ubuntu T-Shirts,Exclude: 0 |
-        And promotion "Ubuntu T-Shirts" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 40    |
-        And promotion "3rd order" has following rules defined:
-          | type      | configuration |
-          | Nth order | Nth: 3        |
-        And promotion "3rd order" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 10    |
+          And the following countries exist:
+            | name    |
+            | Germany |
+            | Poland  |
+          And there are following taxonomies defined:
+            | name     |
+            | Category |
+          And taxonomy "Category" has following taxons:
+            | Clothing > Ubuntu T-Shirts |
+            | Clothing > Debian T-Shirts |
+          And the following products exist:
+            | name    | price | taxons          |
+            | Buzz    | 500   | Debian T-Shirts |
+            | Potato  | 200   | Debian T-Shirts |
+            | Woody   | 125   | Debian T-Shirts |
+            | Sarge   | 25    | Debian T-Shirts |
+            | Etch    | 20    | Debian T-Shirts |
+            | Lenny   | 15    | Debian T-Shirts |
+            | Ubu     | 200   | Ubuntu T-Shirts |
+          And the following promotions exist:
+            | name                | description                                       |
+            | 3 items             | Discount for orders with at least 3 items         |
+            | 300 EUR             | Discount for orders over 300 EUR                  |
+            | Shipping to Germany | Discount for orders with shipping country Germany |
+            | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
+            | 3rd order           | Discount for 3rd order                            |
+          And promotion "3 items" has following rules defined:
+            | type       | configuration        |
+            | Item count | Count: 3,Equal: true |
+          And promotion "3 items" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 15    |
+          And promotion "300 EUR" has following rules defined:
+            | type       | configuration |
+            | Item total | Amount: 300   |
+          And promotion "300 EUR" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 40    |
+          And promotion "Shipping to Germany" has following rules defined:
+            | type       | configuration |
+            | Shipping country | Country: Germany |
+          And promotion "Shipping to Germany" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 40    |
+          And promotion "Ubuntu T-Shirts" has following rules defined:
+            | type     | configuration          |
+            | Taxonomy | Taxons: Ubuntu T-Shirts,Exclude: 0 |
+          And promotion "Ubuntu T-Shirts" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 40    |
+          And promotion "3rd order" has following rules defined:
+            | type      | configuration |
+            | Nth order | Nth: 3        |
+          And promotion "3rd order" has following actions defined:
+            | type           | configuration |
+            | Fixed discount | Amount: 10    |
 
     Scenario: Fixed discount promotion is applied when the cart
               has the required amount

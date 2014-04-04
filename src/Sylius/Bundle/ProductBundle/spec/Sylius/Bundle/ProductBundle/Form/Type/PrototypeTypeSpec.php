@@ -45,7 +45,13 @@ class PrototypeTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('properties', 'sylius_property_choice', Argument::any())
+            ->add('attributes', 'sylius_product_attribute_choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('options', 'sylius_product_option_choice', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -62,6 +68,6 @@ class PrototypeTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_prototype');
+        $this->getName()->shouldReturn('sylius_product_prototype');
     }
 }

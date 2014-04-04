@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Model\VariantImage;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sylius\Component\Core\Model\ProductVariantImage;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Default product images.
@@ -30,7 +30,7 @@ class LoadImagesData extends DataFixture
 
         $path = __DIR__.'/../../Resources/fixtures';
         foreach ($finder->files()->in($path) as $img) {
-            $image = new VariantImage();
+            $image = new ProductVariantImage();
             $image->setFile(new UploadedFile($img->getRealPath(), $img->getFilename()));
             $uploader->upload($image);
 

@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>Creating product <small>Use this form to create new product</small></h1>
-<hr />
-
-<form action="{{ path('sylius_product_create') }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusVariableProductBundle:Product:_form.html.twig' %}
-    {{ actions.create(path('sylius_product_index')) }}
-</form>

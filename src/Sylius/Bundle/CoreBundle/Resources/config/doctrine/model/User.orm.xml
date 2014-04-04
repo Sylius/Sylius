@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\User" table="sylius_user">
+    <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -30,20 +30,20 @@
         <field name="facebookId" column="facebook_id" type="string" nullable="true" />
         <field name="googleId" column="google_id" type="string" nullable="true" />
 
-        <one-to-many field="orders" target-entity="Sylius\Bundle\OrderBundle\Model\OrderInterface" mapped-by="user">
+        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
 
-        <one-to-one field="billingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="billing_address_id" />
         </one-to-one>
-        <one-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="shipping_address_id" />
         </one-to-one>
 
-        <many-to-many field="addresses" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <many-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-table name="sylius_user_address">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>
@@ -57,7 +57,7 @@
             </cascade>
         </many-to-many>
 
-        <many-to-many field="groups" target-entity="Sylius\Bundle\CoreBundle\Model\GroupInterface">
+        <many-to-many field="groups" target-entity="Sylius\Component\Core\Model\GroupInterface">
             <join-table name="sylius_user_group">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>

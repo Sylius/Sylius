@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Bundle\PricingBundle\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Resolver\ItemResolverInterface;
+use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\CoreBundle\Calculator\PriceCalculatorInterface;
 
 /**
  * Item resolver for cart bundle.
@@ -43,7 +43,7 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Prica calculator.
      *
-     * @var PriceCalculatorInterface
+     * @var DelegatingCalculatorInterface
      */
     protected $priceCalculator;
 
@@ -78,6 +78,7 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Constructor.
      *
+<<<<<<< HEAD
      * @param CartProviderInterface          $cartProvider
      * @param PriceCalculatorInterface       $priceCalculator
      * @param RepositoryInterface            $productRepository
@@ -92,14 +93,30 @@ class ItemResolver implements ItemResolverInterface
         FormFactoryInterface           $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker
+=======
+     * @param CartProviderInterface              $cartProvider
+     * @param RepositoryInterface                $productRepository
+     * @param FormFactory                        $formFactory
+     * @param AvailabilityCheckerInterface       $availabilityChecker
+     * @param RestrictedZoneCheckerInterface     $restrictedZoneChecker
+     * @param DelegatingCalculatorInterface $priceCalculator
+     */
+    public function __construct(
+        CartProviderInterface              $cartProvider,
+        RepositoryInterface                $productRepository,
+        FormFactory                        $formFactory,
+        AvailabilityCheckerInterface       $availabilityChecker,
+        RestrictedZoneCheckerInterface     $restrictedZoneChecker,
+        DelegatingCalculatorInterface $priceCalculator
+>>>>>>> Initial PricingBundle concept
     )
     {
         $this->cartProvider = $cartProvider;
-        $this->priceCalculator = $priceCalculator;
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
         $this->availabilityChecker = $availabilityChecker;
         $this->restrictedZoneChecker = $restrictedZoneChecker;
+        $this->priceCalculator = $priceCalculator;
     }
 
     /**
@@ -109,7 +126,6 @@ class ItemResolver implements ItemResolverInterface
     {
         $id = $this->resolveItemIdentifier($data);
 
-        /* @var $product Product */
         if (!$product = $this->productRepository->find($id)) {
             throw new ItemResolvingException('Requested product was not found.');
         }
@@ -118,7 +134,6 @@ class ItemResolver implements ItemResolverInterface
         $form = $this->formFactory->create('sylius_cart_item', null, array('product' => $product));
 
         $form->submit($data);
-        /* @var $item OrderItem */
         $item = $form->getData();
 
         // If our product has no variants, we simply set the master variant of it.
@@ -133,12 +148,18 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Submitted form is invalid.');
         }
 
-        $item->setUnitPrice(
-            $this->priceCalculator->calculate($variant)
-        );
-
+        $cart = $this->cartProvider->getCart();
         $quantity = $item->getQuantity();
-        foreach ($this->cartProvider->getCart()->getItems() as $cartItem) {
+
+        $context = array('quantity' => $quantity);
+
+        if (null !== $user = $cart->getUser()) {
+            $context['groups'] = $user->getGroups();
+        }
+
+        $item->setUnitPrice($this->priceCalculator->calculate($variant, $context));
+
+        foreach ($cart->getItems() as $cartItem) {
             if ($cartItem->equals($item)) {
                 $quantity += $cartItem->getQuantity();
                 break;

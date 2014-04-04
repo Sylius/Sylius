@@ -16,7 +16,14 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\ProductBundle\Model\Product">
+    <class name="Sylius\Component\Product\Model\Product">
+        <getter property="masterVariant">
+            <constraint name="Valid" />
+        </getter>
+        <getter property="variants">
+            <constraint name="Valid" />
+        </getter>
+
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.product.name.not_blank</option>
@@ -41,56 +48,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="properties">
+        <property name="attributes">
             <constraint name="Valid" />
         </property>
     </class>
 
-    <class name="Sylius\Bundle\ProductBundle\Model\Property">
-        <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">sylius.property.name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.property.name.min_length</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.property.name.max_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="presentation">
-            <constraint name="NotBlank">
-                <option name="message">sylius.property.presentation.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.property.presentation.min_length</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.property.presentation.max_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="Sylius\Bundle\ProductBundle\Model\ProductProperty">
-        <property name="property">
-            <constraint name="NotBlank">
-                <option name="message">sylius.product_property.property.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="value">
-            <constraint name="NotBlank">
-                <option name="message">sylius.product_property.value.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="Sylius\Bundle\ProductBundle\Model\Prototype">
+    <class name="Sylius\Component\Product\Model\Prototype">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.prototype.name.not_blank</option>

@@ -17,10 +17,10 @@ use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PaymentsBundle\Model\Payment;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface as PaymentModelInterface;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Bundle\PaymentBundle\SyliusPaymentEvents;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\Model\Payment;
+use Sylius\Component\Payment\Model\PaymentInterface as PaymentModelInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class NotifyOrderActionSpec extends ObjectBehavior
