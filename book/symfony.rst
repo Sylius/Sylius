@@ -4,23 +4,22 @@
 Symfony
 =======
 
-Sylius is built on top of `Symfony2 <http://symfony.com>`_, a modern framework
-for PHP. If you are familiar with this tool, you can safely skip this quick
-introduction. You should feel like home when working with Sylius.
+Sylius is built on top of `Symfony2`_, a modern framework for PHP. If you are
+familiar with this tool, you can safely skip this quick introduction. You
+should feel like home when working with Sylius.
 
 HTTP Fundamentals
 -----------------
 
-HTTP (Hypertext Transfer Protocol) is a text language that allows
-two machines to communicate with each other.
+HTTP (Hypertext Transfer Protocol) is a text language that allows two machines
+to communicate with each other. Symfony2 is built from the ground-up around
+this protocol.
 
-Symfony2 is built from the ground-up around this protocol.
+Each time any client wants to access Sylius store page, it all starts with a
+*request*. This text message, created by the browser, is sent to a server,
+which should return a proper response.
 
-Each time any client wants to access Sylius store page, it all starts with a *request*.
-This text message, created by the browser, is sent to a server, which should 
-return a proper response.
-
-In HTTP, message can look something like this:
+In HTTP, the message can look something like this:
 
 .. code-block:: text
 
@@ -29,12 +28,12 @@ In HTTP, message can look something like this:
     Accept: text/html
     User-Agent: Mozilla/5.0 (Macintosh)
 
-The URI (e.g. ``/``, ``/products/nike-t-shirt``) is the unique location
-that identifies the resource the client wants. The HTTP tells the app
-what client wants to *do* with the resource. 
+The URI (e.g. ``/`` or ``/products/nike-t-shirt``) is the unique location that
+identifies the resource the client wants. The HTTP tells the app what client
+wants to *do* with the resource.
 
-The HTTP methods are the *verbs* of the request and define the few common 
-ways that you can act upon the resource:
+The HTTP methods are the *verbs* of the request and define the few common ways
+that you can act upon the resource:
 
 +----------+---------------------------------------+
 | *GET*    | Retrieve the resource from the server |
@@ -68,23 +67,26 @@ Based on the request, the server will return a response.
 Controllers
 -----------
 
-A controller is a PHP function you create that takes information from the
-HTTP request, then constructs and returns an HTTP response. 
-The response could be an HTML page representing a product, an XML document with all 
-informations about particular order, a serialized JSON product representation, an image, a redirect, a 404 error...
+A controller is a PHP function that you create that takes information from the
+HTTP request, then constructs and returns an HTTP response. The response
+could be an HTML page representing a product, an XML document with all
+informations about particular order, a serialized JSON product representation,
+an image, a redirect, a 404 error, etc.
 
 The following controller would render a page that simply prints ``Hello world!``::
 
     use Symfony\Component\HttpFoundation\Response;
 
+    // ...
     public function helloAction()
     {
         return new Response('Hello world!');
     }
 
-Every page you see in Sylius store is a result of controller action.
-When you view a product page, list all products or display login form, it's always a result
-of this simple schema, where *controller creates a Response based on current Request*.
+Every page you see in Sylius store is a result of controller action. When you
+view a product page, list all products or display login form, it's always a
+result of this simple schema, where *controller creates a Response based on
+current Request*.
 
 Routing
 -------
@@ -93,7 +95,7 @@ Routing
 
     To be written.
 
-Twig - Templating engine
+Twig - Templating Engine
 ------------------------
 
 .. note::
@@ -103,16 +105,24 @@ Twig - Templating engine
 Final Thoughts
 --------------
 
-Symfony2 is very flexible web application framework. To work with Sylius you need to know 
-only the fundamentals, but we encourage you to learn more about this awesome tool. 
-It will give you better understanding of Sylius internals, and allow you to 
-create really advanced e-commerce projects on top of that knowledge.
+Symfony2 is very flexible web application framework. To work with Sylius you
+need to know only the fundamentals, but it is recommended to learn more about
+this awesome tool. It will give you better understanding of Sylius internals,
+and allow you to create really advanced e-commerce projects on top of that
+knowledge.
 
-Learn more from the Symfony documentation
-----------------------------
+Learn More from the Symfony Documentation
+-----------------------------------------
 
-* `Symfony2 and HTTP Fundamentals <http://symfony.com/doc/current/book/http_fundamentals.html>`_
-* `Controller <http://symfony.com/doc/current/book/controller.html>`_
-* `Routing <http://symfony.com/doc/current/book/routing.html>`_
-* `Templating and Twig <http://symfony.com/doc/current/book/templating.html>`_
-* `Databases and Doctrine <http://symfony.com/doc/current/book/doctrine.html>`_
+* `Symfony2 and HTTP Fundamentals`_
+* `Controller`_
+* `Routing`_
+* `Templating and Twig`_
+* `Databases and Doctrine`_
+
+.. _Symfony2: http://symfony.com
+.. _`Symfony2 and HTTP Fundamentals`: ttp://symfony.com/doc/current/book/http_fundamentals.html
+.. _`Controller`: http://symfony.com/doc/current/book/controller.html
+.. _`Routing`: http://symfony.com/doc/current/book/routing.html
+.. _`Templating and Twig`: http://symfony.com/doc/current/book/templating.html
+.. _`Databases and Doctrine`: http://symfony.com/doc/current/book/doctrine.html

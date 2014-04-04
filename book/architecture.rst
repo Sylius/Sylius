@@ -1,10 +1,11 @@
 .. index::
    single: Architecture
 
-Architecture basics
+Architecture Basics
 ===================
 
-Main architecture unit in the Sylius project is a standard Symfony2 **bundle**.
+Main architecture unit in the Sylius project is a standard Symfony2
+**bundle**.
 
 Bundles, Core and Web Interface
 -------------------------------
