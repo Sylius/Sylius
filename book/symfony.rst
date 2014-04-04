@@ -30,7 +30,7 @@ In HTTP, the message can look something like this:
 
 The URI (e.g. ``/`` or ``/products/nike-t-shirt``) is the unique location that
 identifies the resource the client wants. The HTTP tells the app what client
-wants to *do* with the resource. 
+wants to *do* with the resource.
 
 The HTTP methods are the *verbs* of the request and define the few common ways
 that you can act upon the resource:
@@ -106,7 +106,7 @@ Final Thoughts
 --------------
 
 Symfony2 is very flexible web application framework. To work with Sylius you
-need to know only the fundamentals, but we encourage you to learn more about
+need to know only the fundamentals, but it is recommended to learn more about
 this awesome tool. It will give you better understanding of Sylius internals,
 and allow you to create really advanced e-commerce projects on top of that
 knowledge.
