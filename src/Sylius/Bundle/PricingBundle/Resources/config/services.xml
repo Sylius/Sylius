@@ -22,17 +22,17 @@
         <parameter key="sylius.form.type.price_calculator.volume_based.class">Sylius\Bundle\PricingBundle\Form\Type\VolumeBasedConfigurationType</parameter>
 
         <parameter key="sylius.registry.price_calculator.class">Sylius\Bundle\ResourceBundle\Registry\ServiceRegistry</parameter>
-        <parameter key="sylius.price_calculator.class">Sylius\Bundle\PricingBundle\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius.price_calculator.class">Sylius\Component\Pricing\Calculator\DelegatingCalculator</parameter>
 
-        <parameter key="sylius.price_calculator.standard.class">Sylius\Bundle\PricingBundle\Calculator\StandardCalculator</parameter>
-        <parameter key="sylius.price_calculator.volume_based.class">Sylius\Bundle\PricingBundle\Calculator\VolumeBasedCalculator</parameter>
+        <parameter key="sylius.price_calculator.standard.class">Sylius\Component\Pricing\Calculator\StandardCalculator</parameter>
+        <parameter key="sylius.price_calculator.volume_based.class">Sylius\Component\Pricing\Calculator\VolumeBasedCalculator</parameter>
 
         <parameter key="sylius.twig.pricing.class">Sylius\Bundle\PricingBundle\Twig\SyliusPricingExtension</parameter>
     </parameters>
 
     <services>
         <service id="sylius.registry.price_calculator" class="%sylius.registry.price_calculator.class%">
-            <argument>Sylius\Bundle\PricingBundle\Calculator\CalculatorInterface</argument>
+            <argument>Sylius\Component\Pricing\Calculator\CalculatorInterface</argument>
         </service>
 
         <service id="sylius.form.type.price_calculator_choice" class="%sylius.form.type.price_calculator_choice.class%">
