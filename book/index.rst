@@ -4,7 +4,6 @@ The Book
 .. toctree::
     :hidden:
 
-    symfony
     introduction
     installation
     architecture
