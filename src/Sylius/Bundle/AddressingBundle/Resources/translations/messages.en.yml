@@ -21,6 +21,10 @@ sylius:
             members: Members
             name: Name
             type: Type
+            types:
+                country: Country
+                province: Province
+                zone: Zone
         zone_member_country:
             country: Country
         zone_member_province:
