@@ -1,8 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: sylius.yml }
-    - { resource: payum.yml }
+    - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -67,111 +66,9 @@ doctrine_phpcr:
     odm:
         auto_mapping: true
 
-stof_doctrine_extensions:
-    default_locale: %sylius.locale%
-    orm:
-        default:
-            tree: true
-            sluggable: true
-            timestampable: true
-            softdeleteable: true
-            loggable: true
-            sortable: true
-
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: %sylius.model.user.class%
-    group:
-        group_class: Sylius\Bundle\CoreBundle\Model\Group
-    profile:
-        form:
-            type: sylius_user_profile
-    registration:
-        form:
-            type: sylius_user_registration
-
-hwi_oauth:
-    firewall_name: main
-    resource_owners:
-        amazon:
-            type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid%
-            client_secret: %sylius.oauth.amazon.clientsecret%
-        facebook:
-            type:          facebook
-            client_id:     %sylius.oauth.facebook.clientid%
-            client_secret: %sylius.oauth.facebook.clientsecret%
-        google:
-            type:          google
-            client_id:     %sylius.oauth.google.clientid%
-            client_secret: %sylius.oauth.google.clientsecret%
-            scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
-
-doctrine_cache:
-    providers:
-        sylius_settings: %sylius.cache%
-
-knp_gaufrette:
-    adapters:
-        sylius_image:
-            local:
-                directory:  %kernel.root_dir%/../web/media/image
-                create:     true
-    filesystems:
-        sylius_image:
-            adapter: sylius_image
-
-liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image
-    filter_sets:
-        sylius_small:
-            filters:
-                thumbnail: { size: [120, 90], mode: outbound }
-        sylius_medium:
-            filters:
-                thumbnail: { size: [240, 180], mode: outbound }
-        sylius_large:
-            filters:
-                thumbnail: { size: [640, 480], mode: outbound }
-
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     /usr/bin/wkhtmltopdf
-        options:    []
-    image:
-        enabled:    true
-        binary:     /usr/bin/wkhtmltoimage
-        options:    []
-
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.block.service.text:
-
-cmf_core:
-    publish_workflow: false
-
-cmf_block:
-    persistence:
-        phpcr:
-            block_basepath: /cms/blocks
-
-cmf_content:
-    persistence:
-        phpcr:
-            content_basepath: /cms/pages
-
-cmf_routing:
-    dynamic:
-        generic_controller: cmf_content.controller:indexAction
-        persistence:
-            phpcr: ~

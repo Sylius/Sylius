@@ -1,0 +1,18 @@
+cmf_core:
+    publish_workflow: false
+
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/blocks
+
+cmf_content:
+    persistence:
+        phpcr:
+            content_basepath: /cms/pages
+
+cmf_routing:
+    dynamic:
+        generic_controller: cmf_content.controller:indexAction
+        persistence:
+            phpcr: ~
