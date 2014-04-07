@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sylius.form.type.simple_block" class="%sylius.form.type.simple_block.class%">
+            <argument>%sylius.model.simple_block.class%</argument>
+            <argument>%sylius.validation_group.simple_block%</argument>
+            <tag name="form.type" alias="sylius_simple_block" />
+        </service>
+        <service id="sylius.form.type.string_block" class="%sylius.form.type.string_block.class%">
+            <argument>%sylius.model.string_block.class%</argument>
+            <argument>%sylius.validation_group.string_block%</argument>
+            <tag name="form.type" alias="sylius_string_block" />
+        </service>
+        <service id="sylius.form.type.reference_block" class="%sylius.form.type.reference_block.class%">
+            <argument>%sylius.model.reference_block.class%</argument>
+            <argument>%sylius.validation_group.reference_block%</argument>
+            <tag name="form.type" alias="sylius_reference_block" />
+        </service>
+        <service id="sylius.form.type.action_block" class="%sylius.form.type.action_block.class%">
+            <argument>%sylius.model.action_block.class%</argument>
+            <argument>%sylius.validation_group.action_block%</argument>
+            <tag name="form.type" alias="sylius_action_block" />
+        </service>
+        <service id="sylius.form.type.menu_block" class="%sylius.form.type.menu_block.class%">
+            <argument>%sylius.model.menu_block.class%</argument>
+            <argument>%sylius.validation_group.menu_block%</argument>
+            <tag name="form.type" alias="sylius_menu_block" />
+        </service>
+
+        <service id="sylius.form.type.route" class="%sylius.form.type.route.class%">
+            <argument>%sylius.model.route.class%</argument>
+            <argument>%sylius.validation_group.route%</argument>
+            <tag name="form.type" alias="sylius_route" />
+        </service>
+        <service id="sylius.form.type.redirect_route" class="%sylius.form.type.redirect_route.class%">
+            <argument>%sylius.model.redirect_route.class%</argument>
+            <argument>%sylius.validation_group.redirect_route%</argument>
+            <tag name="form.type" alias="sylius_redirect_route" />
+        </service>
+
+        <service id="sylius.form.type.menu" class="%sylius.form.type.menu.class%">
+            <argument>%sylius.model.menu.class%</argument>
+            <argument>%sylius.validation_group.menu%</argument>
+            <tag name="form.type" alias="sylius_menu" />
+        </service>
+        <service id="sylius.form.type.menu_node" class="%sylius.form.type.menu_node.class%">
+            <argument>%sylius.model.menu_node.class%</argument>
+            <argument>%sylius.validation_group.menu_node%</argument>
+            <tag name="form.type" alias="sylius_menu_node" />
+        </service>
+
+        <service id="sylius.form.type.static_content" class="%sylius.form.type.static_content.class%">
+            <argument>%sylius.model.static_content.class%</argument>
+            <argument>%sylius.validation_group.static_content%</argument>
+            <tag name="form.type" alias="sylius_static_content" />
+        </service>
+    </services>
+
+</container>

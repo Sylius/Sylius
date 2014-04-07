@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>{{ 'sylius.block.id'|trans }}</th>
-                <th>{{ sylius_resource_sort('title', 'sylius.block.title'|trans) }}</th>
+                <th>{{ sylius_resource_sort('body', 'sylius.block.body'|trans) }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.block.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
@@ -18,12 +18,12 @@
         {% for block in blocks %}
             <tr id="{{ block.id }}">
                 <td><i>{{ block.id }}</i></td>
-                <td>{{ block.title }}</td>
+                <td>{{ block.body }}</td>
                 <td>{{ block.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">
-                    {{ buttons.edit(path('sylius_backend_block_update', {'id': block.id})) }}
-                    {{ buttons.delete(path('sylius_backend_block_delete', {'id': block.id})) }}
+                    {{ buttons.edit(path('sylius_backend_string_block_update', {'id': block.id})) }}
+                    {{ buttons.delete(path('sylius_backend_string_block_delete', {'id': block.id})) }}
                    </div>
                 </td>
             </tr>

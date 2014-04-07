@@ -74,6 +74,11 @@ fos_user:
         form:
             type: sylius_user_registration
 
+fos_rest:
+    view:
+        formats:
+            json: true
+
 hwi_oauth:
     firewall_name: main
     resource_owners:

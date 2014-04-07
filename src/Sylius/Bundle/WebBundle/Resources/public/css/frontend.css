@@ -4,6 +4,10 @@ body {
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+a.create-ui-toggle {
+    background-image: url("/bundles/syliusweb/img/logo.png");
+}
+
 h1.logo {
 }
 

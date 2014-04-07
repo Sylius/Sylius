@@ -27,3 +27,9 @@ doctrine_cache:
     providers:
         phpcr_meta: %sylius.cache%
         phpcr_nodes: %sylius.cache%
+
+cmf_create:
+    role: ROLE_SYLIUS_ADMIN
+    persistence:
+        phpcr:
+            image: false

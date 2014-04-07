@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="jumbotron">
-    <h1>{{ 'sylius.homepage.splash.headline'|trans }}</h1>
+    <h1>{{ sonata_block_render({'name': '/cms/blocks/welcome-text'}) }}</h1>
     <p class="lead">{{ 'sylius.homepage.splash.subheadline'|trans }}</p>
 </div>
 

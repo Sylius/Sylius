@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Doctrine\ODM\PHPCR;
+namespace Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 
 /**
- * Page repository.
+ * Static content repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PageRepository extends DocumentRepository
+class StaticContentRepository extends DocumentRepository
 {
-    public function findPage($id)
+    public function findStaticContent($id)
     {
         return $this->find('/cms/pages/'.$id);
     }

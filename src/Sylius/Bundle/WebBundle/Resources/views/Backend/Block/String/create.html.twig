@@ -5,7 +5,7 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_block_index') }}">{{ 'sylius.breadcrumb.block.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_string_block_index') }}">{{ 'sylius.breadcrumb.block.index'|trans }}</a></li>
     <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
 </ol>
 {% endblock %}
@@ -17,8 +17,8 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_block_create') }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusWebBundle:Backend/Block:_form.html.twig' %}
+<form action="{{ path('sylius_backend_string_block_create') }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusWebBundle:Backend/Block/String:_form.html.twig' %}
     {{ create() }}
 </form>
 {% endblock %}
