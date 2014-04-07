@@ -9,20 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle;
+namespace Sylius\Bundle\SequenceBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Sales order management bundle.
+ * Sequence system for ecommerce Symfony2 applications.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusOrderBundle extends Bundle
+class SyliusSequenceBundle extends Bundle
 {
     /**
      * Return array of currently supported drivers.
@@ -42,17 +43,15 @@ class SyliusOrderBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Component\Order\Model\OrderInterface'      => 'sylius.model.order.class',
-            'Sylius\Component\Order\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
-            'Sylius\Component\Order\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
+            'Sylius\Component\Sequence\Model\SequenceInterface' => 'sylius.model.sequence.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_order', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_sequence', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Component\Order\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Sequence\Model',
         );
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_order.driver.doctrine/orm'));
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_settings.driver.doctrine/orm'));
     }
 }

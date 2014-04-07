@@ -1,0 +1,43 @@
+{
+    "name": "sylius/sequence-bundle",
+    "type": "symfony-bundle",
+    "description": "Sequence system for Symfony2 applications.",
+    "keywords": ["config", "configuration", "sequence", "shop", "webshop", "ecommerce"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "symfony/framework-bundle": "~2.3",
+        "sylius/resource-bundle":   "0.10.*@dev",
+        "sylius/sequence":          "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\SequenceBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

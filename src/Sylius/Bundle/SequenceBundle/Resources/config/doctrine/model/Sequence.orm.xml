@@ -16,17 +16,12 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Order\Model\Number" table="sylius_number">
+    <mapped-superclass name="Sylius\Component\Sequence\Model\Sequence" table="sylius_sequence">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
-        <one-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface">
-            <join-column name="order_id" referenced-column-name="id" nullable="false" />
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-one>
+        <field name="index" column="idx" type="integer" />
+        <field name="type" type="string" unique="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

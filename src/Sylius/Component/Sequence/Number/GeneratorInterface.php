@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order\Generator;
+namespace Sylius\Component\Sequence\Number;
 
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
- * Order number generator interface.
+ * Number generator interface.
  * The implementation should generate next order number.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderNumberGeneratorInterface
+interface GeneratorInterface
 {
     /**
-     * Generate next available order number.
+     * Generate and apply next available number for given subject.
      *
-     * @param OrderInterface $order
+     * @param SequenceSubjectInterface $subject
      */
-    public function generate(OrderInterface $order);
+    public function generate(SequenceSubjectInterface $subject);
 }
