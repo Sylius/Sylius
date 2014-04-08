@@ -20,6 +20,7 @@ use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Security step.
@@ -71,6 +72,7 @@ class SecurityStep extends CheckoutStep
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $this->dispatchEvent(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($form, $request));
 
+            $this->authenticateUser($user);
             $this->saveUser($user);
 
             $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
@@ -130,5 +132,17 @@ class SecurityStep extends CheckoutStep
         $this->get('fos_user.user_manager')->updateUser($user, true);
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_COMPLETE, $order);
+    }
+
+    /**
+     * Authenticate the given user
+     *
+     * @param UserInterface $user
+     */
+    protected function authenticateUser(UserInterface $user)
+    {
+        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
+        $securityContext = $this->container->get('security.context');
+        $securityContext->setToken($token);
     }
 }
