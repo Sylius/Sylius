@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "7f102e8dd116c2536edb45d56b5a19ed",
+    "hash": "8cc0f82d66bf1261aa1f1db8e72a180d",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -1837,7 +1837,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1995,6 +1995,42 @@
                 "webinterface"
             ],
             "time": "2013-06-08 14:08:19"
+        },
+        {
+            "name": "klarna/checkout",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/klarna/kco_php.git",
+                "reference": "bbfcee7f368f302159791a56dba0419ecb975146"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/klarna/kco_php/zipball/bbfcee7f368f302159791a56dba0419ecb975146",
+                "reference": "bbfcee7f368f302159791a56dba0419ecb975146",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.16"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "~1.5",
+                "phpunit/phpunit": "~3.7",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Klarna": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Wrapper for the Klarna Checkout API",
+            "homepage": "http://developers.klarna.com",
+            "time": "2014-03-27 13:35:56"
         },
         {
             "name": "knplabs/gaufrette",
@@ -2937,21 +2973,22 @@
         },
         {
             "name": "payum/payum",
-            "version": "0.7.2",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "480d08d26bc6563a8247d114a8f24fa7e27c7565"
+                "reference": "266d6eb738286a4e53968d143a9658228513c357"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/480d08d26bc6563a8247d114a8f24fa7e27c7565",
-                "reference": "480d08d26bc6563a8247d114a8f24fa7e27c7565",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/266d6eb738286a4e53968d143a9658228513c357",
+                "reference": "266d6eb738286a4e53968d143a9658228513c357",
                 "shasum": ""
             },
             "require": {
                 "ajbdev/authorizenet-php-api": "1.1.*",
                 "ext-soap": "*",
+                "klarna/checkout": "~1",
                 "kriswallsmith/buzz": "*",
                 "omnipay/omnipay": "~1.0",
                 "paypal/rest-api-sdk-php": "0.5.*",
@@ -2976,17 +3013,25 @@
                 "ext-curl": "*",
                 "ext-pdo_sqlite": "*",
                 "phpunit/phpunit": "3.7.*",
-                "psr/log": "~1.0"
+                "psr/log": "~1.0",
+                "symfony/http-foundation": "~2",
+                "symfony/http-kernel": "~2",
+                "symfony/routing": "~2",
+                "zendframework/zend-db": "~2"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "If you want to store models to mongo doctrin2 ODM",
                 "doctrine/orm": "If you want to store models to database using doctrin2 ORM",
-                "monolog/monolog": "In case you want to use PSR-3 logger"
+                "monolog/monolog": "In case you want to use PSR-3 logger",
+                "symfony/http-foundation": "If you want to use HttpRequestVerifier from symfony's bridge",
+                "symfony/http-kernel": "If you want to use HttpRequestVerifier from symfony's bridge",
+                "symfony/routing": "If you want to use TokenFactory from symfony's bridge",
+                "zendframework/zend-db": "If you want to store models to Zend Db ORM"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.7-dev"
+                    "dev-master": "0.8-dev"
                 }
             },
             "autoload": {
@@ -3030,33 +3075,33 @@
                 "paypal rest",
                 "recurring payment"
             ],
-            "time": "2014-01-18 16:09:23"
+            "time": "2014-04-08 07:00:48"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "0.7.3",
+            "version": "0.8.0",
             "target-dir": "Payum/Bundle/PayumBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "742d7f812172e23127a681c07e7ec86477ceb73f"
+                "reference": "b0de2b28189965be282a2643d442ab46d5de0e2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/742d7f812172e23127a681c07e7ec86477ceb73f",
-                "reference": "742d7f812172e23127a681c07e7ec86477ceb73f",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/b0de2b28189965be282a2643d442ab46d5de0e2d",
+                "reference": "b0de2b28189965be282a2643d442ab46d5de0e2d",
                 "shasum": ""
             },
             "require": {
-                "payum/core": "0.7.*",
+                "payum/core": "0.8.*",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": "~2.0",
                 "twig/twig": "*"
             },
             "require-dev": {
                 "doctrine/orm": "*",
-                "payum/core": "0.7.*",
-                "phpunit/phpunit": "*",
+                "payum/payum": "0.8.*@dev",
+                "phpunit/phpunit": "~3.7",
                 "symfony/browser-kit": "~2.0",
                 "symfony/class-loader": "~2.0"
             },
@@ -3072,7 +3117,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.7-dev"
+                    "dev-master": "0.8-dev"
                 }
             },
             "autoload": {
@@ -3098,7 +3143,7 @@
                     "homepage": "https://github.com/Payum/PayumBundle/contributors"
                 }
             ],
-            "description": "Rich payment solutions for symfony2. Paypal, payex, authorize.net, be2bill, omnipay, recurring paymens, instant notifications and many more",
+            "description": "Rich payment solutions for symfony2. Paypal, payex, authorize.net, be2bill, omnipay, recurring payments, instant notifications and many more",
             "homepage": "http://payum.forma-dev.com",
             "keywords": [
                 "authorize.net",
@@ -3113,7 +3158,7 @@
                 "paypal pro checkout",
                 "recurring payment"
             ],
-            "time": "2014-01-20 08:51:01"
+            "time": "2014-04-02 11:31:03"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3696,7 +3741,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Chris Corbyn"
@@ -5943,8 +5990,8 @@
         "knplabs/knp-gaufrette-bundle": 20,
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
-        "white-october/pagerfanta-bundle": 20,
-        "pagerfanta/pagerfanta": 20
+        "pagerfanta/pagerfanta": 20,
+        "white-october/pagerfanta-bundle": 20
     },
     "platform": {
         "php": ">=5.3.3"
