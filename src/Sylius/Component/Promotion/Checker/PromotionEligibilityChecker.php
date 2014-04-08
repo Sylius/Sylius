@@ -24,6 +24,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Checks if promotion rules are eligible.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
@@ -87,9 +88,10 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
         $checker = $this->registry->getChecker($rule->getType());
+        $coupon = $subject->getPromotionCoupon();
 
         if (!$checker->isEligible($subject, $rule->getConfiguration())) {
-            if ($promotion->isCouponBased() && $promotion === $subject->getPromotionCoupon()->getPromotion()) {
+            if (null !== $coupon && $promotion->isCouponBased() && $promotion === $coupon->getPromotion()) {
                 $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
             }
 
