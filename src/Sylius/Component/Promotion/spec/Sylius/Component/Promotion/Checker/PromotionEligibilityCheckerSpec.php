@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
@@ -20,7 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -76,6 +76,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn(array($rule));
+        $promotion->isCouponBased()->willReturn(false);
 
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->willReturn(array());
@@ -113,8 +114,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(false);
         $promotion->isCouponBased()->willReturn(true);
-        $promotion->hasCoupons()->willReturn(true);
-        $promotion->hasCoupon($coupon)->willReturn(false);
+        $coupon->getPromotion()->willReturn(null);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
@@ -132,11 +132,10 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(false);
-        $promotion->isCouponBased()->willReturn(false);
-        $promotion->hasCoupons()->willReturn(true);
-        $promotion->hasCoupon($coupon)->willReturn(true);
+        $promotion->isCouponBased()->willReturn(true);
+        $coupon->getPromotion()->willReturn($promotion);
 
-        $dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, new GenericEvent($promotion))->shouldBeCalled();
+        $dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, Argument::any())->shouldBeCalled();
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
