@@ -44,7 +44,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $subjects = array();
 
         foreach ($config['classes'] as $subject => $parameters) {
-            $subjects[] = $parameters;
+            $subjects[$subject] = $parameters;
             unset($parameters['subject']);
 
             foreach ($parameters as $resource => $classes) {

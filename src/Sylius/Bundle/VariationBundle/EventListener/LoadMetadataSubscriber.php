@@ -79,7 +79,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'type'          => ClassMetadataInfo::MANY_TO_MANY,
                 'targetEntity'  => $class['option_value']['model'],
                 'joinTable'     => array(
-                    'name' => $variable.'_variant_option_value',
+                    'name' => sprintf('sylius_%s_variant_option_value', $variable),
                     'joinColumns'   => array(array(
                         'name'                 => 'variant_id',
                         'referencedColumnName' => 'id',
