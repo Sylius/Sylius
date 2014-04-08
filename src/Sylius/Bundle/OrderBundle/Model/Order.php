@@ -407,8 +407,11 @@ class Order implements OrderInterface
     {
         $this->calculateItemsTotal();
         $this->calculateAdjustmentsTotal();
+        $this->total = $this->itemsTotal;
 
-        $this->total = $this->itemsTotal + $this->adjustmentsTotal;
+        if (!$this->isEmpty()) {
+            $this->total += $this->adjustmentsTotal;
+        }
 
         if ($this->total < 0) {
             $this->total = 0;
