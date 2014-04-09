@@ -33,6 +33,7 @@
                         ));
 
                         $provinceContainer.fadeIn();
+                        $provinceContainer.find('select').data('select', 'selectize').selectize();
                     });
                 }
             });

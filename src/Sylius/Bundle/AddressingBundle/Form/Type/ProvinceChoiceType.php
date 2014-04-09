@@ -61,7 +61,8 @@ class ProvinceChoiceType extends AbstractType
                 'choice_list' => $choiceList,
                 'country'     => null,
                 'label'   => 'sylius.form.address.province',
-                'empty_value' => 'sylius.form.province.select'
+                'empty_value' => 'sylius.form.province.select',
+                'attr'  => array('data-select' => 'selectize')
             ))
         ;
     }

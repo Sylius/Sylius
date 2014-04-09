@@ -23,7 +23,7 @@
                         });
                     } else {
                         provinceContainer.fadeOut('slow', function () {
-                            $('select.select2').select2();
+                            $("select[data-select='selectize']").selectize();
                             provinceContainer.html(response.content.replace('name="sylius_address_province"', 'name="sylius_address[province]"'));
                             provinceContainer.fadeIn();
                         });
