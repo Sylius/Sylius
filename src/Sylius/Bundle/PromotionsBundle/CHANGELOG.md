@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.9.0
+
+* Release before the components extraction.
+* Move assets to ``public/`` folder.
+
 ### v0.8.0
 
 * Support exclusive promotions.

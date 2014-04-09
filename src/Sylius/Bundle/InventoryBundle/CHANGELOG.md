@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.9.0
+
+* Release before components.
+* Introduced ``InStock`` validation constraint.
+
 ### v0.8.0
 
 * Convert translations to YAML.

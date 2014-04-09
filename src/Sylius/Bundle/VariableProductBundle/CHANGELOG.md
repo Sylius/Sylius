@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### v0.9.0
+
+* Release before the components extraction.
+* **DEPRACIATION**.
+
 ### v0.8.0
 
 * Convert translations to YAML format.
