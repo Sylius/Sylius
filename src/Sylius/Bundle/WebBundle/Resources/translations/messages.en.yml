@@ -374,11 +374,6 @@ sylius:
         shipping_charges: Shipping charges
         shipping_total: Shipping total
         show_header: Order #%number%
-        state:
-            cart_locked: Cart locked
-            checkout: Checkout
-            order_confimed: Order confirmed
-            ordered: Ordered
         tax_total: Tax total
         taxes: Taxes
         total: Total

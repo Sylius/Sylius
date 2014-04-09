@@ -31,10 +31,10 @@
                 </a>
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
+                {{ misc.payment_state(order.paymentState) }}
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
+                {{ misc.shipment_state(order.shippingState) }}
             </td>
             <td>
                 <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
@@ -89,10 +89,10 @@
                 </a>
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
+                {{ misc.payment_state(order.paymentState) }}
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
+                {{ misc.shipment_state(order.shippingState) }}
             </td>
             <td style="width: 20%">
                 {{ order.user.fullname }}<br>

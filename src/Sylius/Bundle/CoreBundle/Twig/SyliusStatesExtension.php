@@ -28,6 +28,7 @@ class SyliusStatesExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
+            new \Twig_SimpleFilter('sylius_order_label_type', array($this, 'orderLabel'), array('is_safe' => array('html'))),
             new \Twig_SimpleFilter('sylius_payment_label_type', array($this, 'paymentLabel'), array('is_safe' => array('html'))),
             new \Twig_SimpleFilter('sylius_shipment_label_type', array($this, 'shipmentLabel'), array('is_safe' => array('html'))),
         );
@@ -46,6 +47,7 @@ class SyliusStatesExtension extends \Twig_Extension
             case PaymentInterface::STATE_NEW:
                 return 'primary';
                 break;
+
             case PaymentInterface::STATE_PENDING:
             case PaymentInterface::STATE_PROCESSING:
                 return 'warning';
@@ -84,6 +86,7 @@ class SyliusStatesExtension extends \Twig_Extension
             case OrderShippingStates::CHECKOUT:
                 return 'primary';
                 break;
+
             case OrderShippingStates::BACKORDER:
             case OrderShippingStates::ONHOLD:
                 return 'warning';
@@ -100,6 +103,34 @@ class SyliusStatesExtension extends \Twig_Extension
 
             case OrderShippingStates::CANCELLED:
                 return 'danger';
+                break;
+            
+            default:
+                return 'default';
+                break;
+        }
+    }
+
+    /**
+     * Receives order state and returns css label class.
+     *
+     * @param string $orderState
+     *
+     * @return string
+     */
+    public function orderLabel($orderState)
+    {
+        switch ($orderState) {
+            case 1:
+                return 'warning';
+                break;
+
+            case 3:
+                return 'info';
+                break;
+
+            case 4:
+                return 'success';
                 break;
             
             default:

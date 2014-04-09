@@ -1,4 +1,11 @@
 sylius:
+    order:
+        state:
+            0: State
+            1: Checkout
+            2: Cart locked
+            3: Ordered
+            4: Order confirmed
     payment:
         state:
             0: State
