@@ -20,7 +20,7 @@ class NumberRepository extends EntityRepository implements NumberRepositoryInter
     public function getLastNumber()
     {
         try {
-            return $this->getQueryBuilder()
+            return (int) $this->getQueryBuilder()
                 ->select($this->getAlias().'.id')
                 ->orderBy($this->getAlias().'.id', 'desc')
                 ->setMaxResults(1)

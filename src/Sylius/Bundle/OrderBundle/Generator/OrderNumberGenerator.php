@@ -53,8 +53,8 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     public function __construct(NumberRepositoryInterface $numberRepository, $numberLength = 9, $startNumber = 1)
     {
         $this->numberRepository = $numberRepository;
-        $this->numberLength = $numberLength;
-        $this->startNumber = $startNumber;
+        $this->numberLength = (int) $numberLength;
+        $this->startNumber = (int) $startNumber;
     }
 
     /**
@@ -80,6 +80,6 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
             return $this->startNumber;
         }
 
-        return (int) $number + 1;
+        return $this->startNumber + $number;
     }
 }
