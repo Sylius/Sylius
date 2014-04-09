@@ -262,12 +262,14 @@ class ResourceController extends FOSRestController
         }
 
         $criteria = array_merge($default, $criteria);
-
-        if (!$resource = $this->resourceResolver->getResource(
+        
+        $resource = $this->resourceResolver->getResource(
             $this->getRepository(),
             'findOneBy',
-            array($this->config->getCriteria($criteria)))
-        ) {
+            array($this->config->getCriteria($criteria))
+        );
+
+        if (!$resource) {
             throw new NotFoundHttpException(
                 sprintf(
                     'Requested %s does not exist with these criteria: %s.',
