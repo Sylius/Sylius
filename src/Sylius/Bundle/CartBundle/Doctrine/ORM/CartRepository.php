@@ -39,4 +39,23 @@ class CartRepository extends OrderRepository implements CartRepositoryInterface
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCartByIdentifier($identifier)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.id', ':id'))
+            ->andWhere($queryBuilder->expr()->in($this->getAlias().'.state', array(OrderInterface::STATE_CART, OrderInterface::STATE_CART_LOCKED)))
+            ->setParameter('id', $identifier)
+        ;
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

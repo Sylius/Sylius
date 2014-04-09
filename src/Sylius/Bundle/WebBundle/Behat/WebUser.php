@@ -440,6 +440,14 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Then /^My cart state changes to pending$/
+     */
+    public function cartStateChangeToPending()
+    {
+        $this->getDataContext()->changeCartToPending();
+    }
+
+    /**
      * @When /^I click "([^"]+)"$/
      */
     public function iClick($link)
