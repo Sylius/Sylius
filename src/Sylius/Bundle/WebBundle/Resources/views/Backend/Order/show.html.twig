@@ -51,7 +51,7 @@
                 <div class="list-group-item-text">
                     <a href="{{ path('sylius_backend_payment_update', {'id': order.payment.id}) }}">{{ order.payment.method }} - {{ order.payment.amount|sylius_price(order.payment.currency) }}</a>
                     <div class="pull-right">
-                        {{ misc.state_label(order.payment.state, 'payment') }}
+                        {{ misc.payment_state(order.payment.state) }}
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         <li>
                             <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">{{ shipment.method.name }}</a>
                             <div class="pull-right">
-                                <span class="label label-primary">{{ shipment.state|title }}</span>
+                                {{ misc.shipment_state(shipment.state) }}
                             </div>
                         </li>
                     {% else %}

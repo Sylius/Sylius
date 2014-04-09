@@ -377,36 +377,11 @@ sylius:
         shipping_charges: Shipping charges
         shipping_total: Shipping total
         show_header: Order #%number%
-        state:
-            cart_locked: Cart locked
-            checkout: Checkout
-            order_confimed: Order confirmed
-            ordered: Ordered
         tax_total: Tax total
         taxes: Taxes
         total: Total
         update_header: Editing order
         user: User
-    shipment:
-        ship: Ship
-        created_at: Created at
-        id: ID
-        index_header: Shipments
-        inventory_state: Inventory state
-        manage: Manage shipments
-        method: Method
-        modified: Modified
-        name: Name
-        no_items: There are no items to display.
-        no_results: There are no shipments to display.
-        order: Order
-        show_header: Shipment details
-        sku: SKU
-        state: State
-        tracking_code: Tracking Code
-        update: Edit
-        update_header: Editing shipment
-        updated_at: Last update
     order_item:
         product: Item
         quantity: Qty
@@ -434,16 +409,6 @@ sylius:
         manage: Manage payments
         method: Method
         no_results: There are no payments configured.
-        state:
-            0: State
-            checkout: Checkout
-            completed: Completed
-            failed: Failed
-            new: New
-            pending: Pending
-            processing: Processing
-            unknown: Unknown
-            void: Void
         update_header: Editing payment
         updated_at: Last update
     payment_method:
@@ -578,6 +543,25 @@ sylius:
     settings:
         general_header: General settings
         taxation_header: Taxation settings
+    shipment:
+        ship: Ship
+        created_at: Created at
+        id: ID
+        index_header: Shipments
+        inventory_state: Inventory state
+        manage: Manage shipments
+        method: Method
+        modified: Modified
+        name: Name
+        no_items: There are no items to display.
+        no_results: There are no shipments to display.
+        order: Order
+        show_header: Shipment details
+        sku: SKU
+        tracking_code: Tracking Code
+        update: Edit
+        update_header: Editing shipment
+        updated_at: Last update
     shipment_category:
         manage: Manage shipping categories
     shipping_address: Shipping address
