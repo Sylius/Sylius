@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8cc0f82d66bf1261aa1f1db8e72a180d",
+    "hash": "7563b3a8f83a8305afccd5987866ee1a",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -37,6 +37,110 @@
                 "payment"
             ],
             "time": "2013-02-11 21:09:06"
+        },
+        {
+            "name": "beelab/bowerphp",
+            "version": "v0.1.5-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bee-Lab/bowerphp.git",
+                "reference": "8728b244d40abd6d02a55794dcc14585e0734dc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bee-Lab/bowerphp/zipball/8728b244d40abd6d02a55794dcc14585e0734dc6",
+                "reference": "8728b244d40abd6d02a55794dcc14585e0734dc6",
+                "shasum": ""
+            },
+            "require": {
+                "camspiers/json-pretty": "1.0.*",
+                "doctrine/cache": "~1.3",
+                "guzzle/guzzle": "3.8.*",
+                "knplabs/gaufrette": "0.1.*",
+                "php": ">=5.3.2",
+                "symfony/console": "~2.3",
+                "symfony/finder": "~2.2",
+                "symfony/process": "~2.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "bin/bowerphp"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Bowerphp": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Massimiliano Arione",
+                    "email": "massimiliano.arione@bee-lab.net"
+                },
+                {
+                    "name": "Mauro D'Alatri",
+                    "email": "mauro.dalatri@bee-lab.net"
+                }
+            ],
+            "description": "An implementation of bower in PHP",
+            "keywords": [
+                "dependency",
+                "frontend",
+                "package"
+            ],
+            "time": "2014-02-20 15:15:08"
+        },
+        {
+            "name": "camspiers/json-pretty",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/camspiers/json-pretty.git",
+                "reference": "2378ac3e8e798e9c55bd3c194238cde35af93817"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/camspiers/json-pretty/zipball/2378ac3e8e798e9c55bd3c194238cde35af93817",
+                "reference": "2378ac3e8e798e9c55bd3c194238cde35af93817",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "pimple/pimple": "Useful for dependency injection"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Camspiers": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cam Spiers",
+                    "email": "cameron@heyday.co.nz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides support for json pretty printing in php 5.3",
+            "time": "2014-01-24 12:31:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1238,82 +1342,67 @@
             "time": "2014-01-12 16:34:06"
         },
         {
-            "name": "guzzle/common",
+            "name": "guzzle/guzzle",
             "version": "v3.8.1",
-            "target-dir": "Guzzle/Common",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/common.git",
-                "reference": "67f6c3fd04bae387d47c2a673fa623ed8f4189bb"
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/common/zipball/67f6c3fd04bae387d47c2a673fa623ed8f4189bb",
-                "reference": "67f6c3fd04bae387d47c2a673fa623ed8f4189bb",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
+                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
+                "ext-curl": "*",
+                "php": ">=5.3.3",
                 "symfony/event-dispatcher": ">=2.1"
             },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Guzzle\\Common": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Common libraries used by Guzzle",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "collection",
-                "common",
-                "event",
-                "exception"
-            ],
-            "time": "2014-01-28 22:29:15"
-        },
-        {
-            "name": "guzzle/http",
-            "version": "v3.8.1",
-            "target-dir": "Guzzle/Http",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/http.git",
-                "reference": "565fd64be16d91c840f497c5de76f86d54a822d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/http/zipball/565fd64be16d91c840f497c5de76f86d54a822d8",
-                "reference": "565fd64be16d91c840f497c5de76f86d54a822d8",
-                "shasum": ""
-            },
-            "require": {
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
                 "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
                 "guzzle/parser": "self.version",
-                "guzzle/stream": "self.version",
-                "php": ">=5.3.2"
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
             },
-            "suggest": {
-                "ext-curl": "*"
+            "require-dev": {
+                "doctrine/cache": "*",
+                "monolog/monolog": "1.*",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "1.0.*",
+                "symfony/class-loader": "*",
+                "zendframework/zend-cache": "<2.3",
+                "zendframework/zend-log": "<2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.7-dev"
+                    "dev-master": "3.8-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
-                    "Guzzle\\Http": ""
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1325,115 +1414,24 @@
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
                 }
             ],
-            "description": "HTTP libraries used by Guzzle",
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
-                "Guzzle",
                 "client",
                 "curl",
+                "framework",
                 "http",
-                "http client"
+                "http client",
+                "rest",
+                "web service"
             ],
-            "time": "2014-01-23 18:23:29"
-        },
-        {
-            "name": "guzzle/parser",
-            "version": "v3.8.1",
-            "target-dir": "Guzzle/Parser",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/parser.git",
-                "reference": "3f52387052f2e4ef083145a0f73c3654aa14e086"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/parser/zipball/3f52387052f2e4ef083145a0f73c3654aa14e086",
-                "reference": "3f52387052f2e4ef083145a0f73c3654aa14e086",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Guzzle\\Parser": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Interchangeable parsers used by Guzzle",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "URI Template",
-                "cookie",
-                "http",
-                "message",
-                "url"
-            ],
-            "time": "2013-10-24 00:04:09"
-        },
-        {
-            "name": "guzzle/stream",
-            "version": "v3.8.1",
-            "target-dir": "Guzzle/Stream",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/stream.git",
-                "reference": "fa8af730ca714861c0001cfba64aaecc5f21bb96"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/stream/zipball/fa8af730ca714861c0001cfba64aaecc5f21bb96",
-                "reference": "fa8af730ca714861c0001cfba64aaecc5f21bb96",
-                "shasum": ""
-            },
-            "require": {
-                "guzzle/common": "self.version",
-                "php": ">=5.3.2"
-            },
-            "suggest": {
-                "guzzle/http": "To convert Guzzle request objects to PHP streams"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Guzzle\\Stream": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle stream wrapper component",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "Guzzle",
-                "component",
-                "stream"
-            ],
-            "time": "2014-01-28 22:14:17"
+            "time": "2014-01-28 22:29:15"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -1958,7 +1956,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2743,7 +2741,7 @@
                     "name": "Mathias Verraes",
                     "email": "mathias@verraes.net",
                     "homepage": "http://verraes.net",
-                    "role": "Developer"
+                    "role": "Developer of wrapped Money library"
                 }
             ],
             "description": "PHP implementation of Fowler's Money pattern",
@@ -3886,9 +3884,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Chris Corbyn"
@@ -6138,7 +6134,8 @@
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
         "pagerfanta/pagerfanta": 20,
-        "white-october/pagerfanta-bundle": 20
+        "white-october/pagerfanta-bundle": 20,
+        "beelab/bowerphp": 15
     },
     "platform": {
         "php": ">=5.3.3"
