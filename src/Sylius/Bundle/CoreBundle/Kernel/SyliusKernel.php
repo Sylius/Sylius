@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 abstract class SyliusKernel extends Kernel
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.10.0-dev';
 
     /**
      * {@inheritdoc}
@@ -72,7 +72,7 @@ abstract class SyliusKernel extends Kernel
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
-            new \JMS\SerializerBundle\JMSSerializerBundle($this),
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
