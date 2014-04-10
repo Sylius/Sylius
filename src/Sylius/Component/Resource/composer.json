@@ -29,9 +29,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Resource\\": "" }
+        "psr-4": { "Sylius\\Component\\Resource\\": "" }
     },
-    "target-dir": "Sylius/Component/Resource",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Resource\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

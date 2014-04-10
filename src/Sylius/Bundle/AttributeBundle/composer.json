@@ -34,9 +34,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\AttributeBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\AttributeBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/AttributeBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\AttributeBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

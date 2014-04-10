@@ -27,13 +27,12 @@
     "require-dev": {
         "phpspec/phpspec": "~2.0"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Order\\": "" }
+        "psr-4": { "Sylius\\Component\\Order\\": "" }
     },
-    "target-dir": "Sylius/Component/Order",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Order\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

@@ -31,9 +31,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Addressing\\": "" }
+        "psr-4": { "Sylius\\Component\\Addressing\\": "" }
     },
-    "target-dir": "Sylius/Component/Addressing",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Addressing\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

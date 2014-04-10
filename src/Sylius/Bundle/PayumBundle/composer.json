@@ -36,9 +36,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\PayumBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\PayumBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/PayumBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

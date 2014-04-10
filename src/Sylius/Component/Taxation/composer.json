@@ -31,9 +31,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Taxation\\": "" }
+        "psr-4": { "Sylius\\Component\\Taxation\\": "" }
     },
-    "target-dir": "Sylius/Component/Taxation",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Taxation\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

@@ -31,9 +31,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Taxonomy\\": "" }
+        "psr-4": { "Sylius\\Component\\Taxonomy\\": "" }
     },
-    "target-dir": "Sylius/Component/Taxonomy",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Taxonomy\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

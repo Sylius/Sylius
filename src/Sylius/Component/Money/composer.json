@@ -33,9 +33,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Money\\": "" }
+        "psr-4": { "Sylius\\Component\\Money\\": "" }
     },
-    "target-dir": "Sylius/Component/Money",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Money\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

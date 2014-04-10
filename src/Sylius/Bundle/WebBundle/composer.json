@@ -32,9 +32,8 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\WebBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\WebBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/WebBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"
