@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\Zone;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -60,7 +60,11 @@ class ZoneType extends AbstractType
             ))
             ->add('type', 'choice', array(
                 'label'   => 'sylius.form.zone.type',
-                'choices' => Zone::getTypeChoices(),
+                'choices' => array(
+                    ZoneInterface::TYPE_COUNTRY  => 'sylius.form.zone.types.country',
+                    ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
+                    ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
+                ),
             ))
             ->add('members', 'sylius_zone_member_collection', array(
                 'label' => 'sylius.form.zone.members'

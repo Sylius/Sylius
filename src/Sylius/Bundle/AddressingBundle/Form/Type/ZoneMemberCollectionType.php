@@ -52,8 +52,8 @@ class ZoneMemberCollectionType extends AbstractType
     /**
      * Builds prototypes for each of the form types used for the collection.
      *
-     * @param FormBuilderInterface  $builder
-     * @param array                 $options
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      *
      * @return array
      */
@@ -76,10 +76,10 @@ class ZoneMemberCollectionType extends AbstractType
     /**
      * Builds an individual prototype.
      *
-     * @param FormBuilderInterface      $builder
-     * @param string                    $name
-     * @param string|FormTypeInterface  $type
-     * @param array                     $options
+     * @param FormBuilderInterface     $builder
+     * @param string                   $name
+     * @param string|FormTypeInterface $type
+     * @param array                    $options
      *
      * @return FormBuilderInterface
      */
