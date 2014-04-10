@@ -21,9 +21,9 @@
     ],
     "require": {
         "php": ">=5.3.3",
-
-        "sylius/resource":  "0.10.*@dev"
-        "sylius/attribute": "0.10.*@dev"
+ 
+        "sylius/resource":  "0.10.*@dev",
+        "sylius/attribute": "0.10.*@dev",
         "sylius/variation": "0.10.*@dev"
     },
     "require-dev": {
