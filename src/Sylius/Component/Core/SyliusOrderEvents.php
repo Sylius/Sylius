@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle;
+namespace Sylius\Component\Core;
 
-use Sylius\Bundle\OrderBundle\SyliusOrderEvents as BaseSyliusOrderEvents;
+use Sylius\Component\Order\SyliusOrderEvents as BaseSyliusOrderEvents;
 
 class SyliusOrderEvents extends BaseSyliusOrderEvents
 {

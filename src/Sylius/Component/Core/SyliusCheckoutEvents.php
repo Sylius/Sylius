@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Checkout;
+namespace Sylius\Component\Core;
 
 /**
  * Sylius checkout events.

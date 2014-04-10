@@ -24,7 +24,7 @@ interface BackordersHandlerInterface
     /**
      * Processes given inventory units and marks backorders if any.
      *
-     * @param array|Collection $inventoryUnits
+     * @param StockableInterface[]|Collection $inventoryUnits
      */
     public function processBackorders($inventoryUnits);
 

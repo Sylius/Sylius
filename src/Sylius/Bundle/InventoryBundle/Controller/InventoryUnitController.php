@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InventoryBundle\Controller;
 
-use Sylius\Bundle\InventoryBundle\SyliusInventoryUnitEvents;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Inventory\SyliusInventoryUnitEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 

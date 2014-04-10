@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CartBundle\Purger\PurgerInterface;
-use Sylius\Bundle\CoreBundle\Model\InventoryUnitInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Cart\Purger\PurgerInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * Purge expired pending orders
