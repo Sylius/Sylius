@@ -32,6 +32,12 @@
         "payum/payum-bundle":     "0.8.*",
         "payum/payum":            "0.8.*"
     },
+    "suggest": {
+        "sylius/core-bundle":    "If you want to integrate payum's purchase step to checkout process",
+        "sylius/taxonomies-bundle": "If you want to add tax details to payment",
+        "sylius/addressing-bundle": "If you want to add billing or shipping details to payment",
+        "sylius/promotions-bundle": "If you want to add promotion details to payment"
+    },
     "config": {
         "bin-dir": "bin"
     },

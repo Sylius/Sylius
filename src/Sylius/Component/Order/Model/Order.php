@@ -79,6 +79,13 @@ class Order implements OrderInterface
     protected $total = 0;
 
     /**
+     * Currency ISO code.
+     *
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * Whether order was confirmed.
      *
      * @var Boolean
@@ -396,6 +403,24 @@ class Order implements OrderInterface
     public function setTotal($total)
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
 
         return $this;
     }

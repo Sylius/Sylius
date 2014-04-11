@@ -63,13 +63,6 @@ class Order extends Cart implements OrderInterface
     protected $payment;
 
     /**
-     * Currency ISO code.
-     *
-     * @var string
-     */
-    protected $currency;
-
-    /**
      * Promotion coupon
      *
      * @var CouponInterface
@@ -412,24 +405,6 @@ class Order extends Cart implements OrderInterface
     public function getPromotionSubjectItemCount()
     {
         return $this->items->count();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-
-        return $this;
     }
 
     /**

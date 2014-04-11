@@ -15,7 +15,9 @@ use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Payment\Model\PaymentAwareInterface;
+use Sylius\Component\Order\Model\UserAwareInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -52,7 +54,7 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
             throw new LogicException('The action can be run only when http request is set.');
         }
 
-        /** @var OrderInterface $order */
+        /** @var OrderInterface|PaymentAwareInterface $order */
         $order = $request->getModel();
         $payment = $order->getPayment();
 
@@ -60,13 +62,19 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
 
         if (empty($details)) {
             $details['AMOUNT'] = $order->getTotal();
-            $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
             $details['HIDECLIENTEMAIL'] = 'yes';
             $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
             $details['CLIENTIP'] = $this->httpRequest->getClientIp();
-            $details['CLIENTIDENT'] = $order->getUser()->getId();
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
             $details['ORDERID'] = $order->getId();
+
+            if ($order instanceof UserAwareInterface) {
+                $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
+                $details['CLIENTIDENT'] = method_exists('getId', $order->getUser()) ? $order->getUser()->getId() : uniqid();
+            } else {
+                $details['CLIENTEMAIL'] = 'unknown@example.com';
+                $details['CLIENTIDENT'] = uniqid();
+            }
 
             $payment->setDetails($details);
         }
@@ -92,7 +100,8 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof OrderInterface &&
+            $request->getModel() instanceof PaymentAwareInterface
         ;
     }
 }

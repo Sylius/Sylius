@@ -17,6 +17,7 @@ use Payum\Core\Request\SecuredCaptureRequest;
 use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\Model\PaymentAwareInterface;
 
 class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
 {
@@ -30,7 +31,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
+        /** @var OrderInterface|PaymentAwareInterface $order */
         $order = $request->getModel();
         $payment = $order->getPayment();
 
@@ -38,12 +39,14 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         if (empty($details)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
+            $creditCard = $obtainCreditCardRequest->getCreditCard();
+
             $details = array(
                 'card' => new SensitiveValue(array(
-                    'number' => $obtainCreditCardRequest->getCreditCard()->getNumber(),
-                    'expiryMonth' => $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(),
-                    'expiryYear' => $obtainCreditCardRequest->getCreditCard()->getExpiryYear(),
-                    'cvv' => $obtainCreditCardRequest->getCreditCard()->getSecurityCode()
+                    'number' => $creditCard->getNumber(),
+                    'expiryMonth' => $creditCard->getExpiryMonth(),
+                    'expiryYear' => $creditCard->getExpiryYear(),
+                    'cvv' => $creditCard->getSecurityCode()
                 )),
                 'amount' => number_format($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
@@ -70,7 +73,8 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof OrderInterface &&
+            $request->getModel() instanceof PaymentAwareInterface
         ;
     }
 }

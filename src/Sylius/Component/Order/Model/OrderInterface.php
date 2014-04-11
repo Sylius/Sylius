@@ -143,6 +143,22 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     public function setTotal($total);
 
     /**
+     * Get currency.
+     *
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * Set currency.
+     *
+     * @param string
+     *
+     * @return OrderInterface
+     */
+    public function setCurrency($currency);
+
+    /**
      * Calculate total.
      * Items total + Adjustments total.
      */
