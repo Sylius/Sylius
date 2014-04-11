@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentBundle;
+namespace Sylius\Component\Inventory;
 
-final class SyliusPaymentEvents
+class SyliusInventoryUnitEvents
 {
-    const PRE_STATE_CHANGE = 'sylius.payment.pre_state_change';
-
-    const POST_STATE_CHANGE = 'sylius.payment.post_state_change';
+    const PRE_STATE_CHANGE  = 'sylius.inventory_unit.pre_state_change';
+    const POST_STATE_CHANGE = 'sylius.inventory_unit.post_state_change';
 }

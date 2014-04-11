@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ShippingBundle\SyliusShipmentEvents;
+use Sylius\Component\Shipping\SyliusShipmentEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 

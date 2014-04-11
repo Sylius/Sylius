@@ -14,9 +14,9 @@ namespace spec\Sylius\Bundle\CartBundle\Provider;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Storage\CartStorageInterface;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

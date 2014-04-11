@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle;
+namespace Sylius\Component\Cart;
 
 final class SyliusCartEvents
 {

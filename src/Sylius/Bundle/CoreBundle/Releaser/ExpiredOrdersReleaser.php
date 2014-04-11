@@ -11,11 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Releaser;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Core\SyliusOrderEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

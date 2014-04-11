@@ -50,7 +50,7 @@ interface InventoryOperatorInterface
     /**
      * Decrease stock by count of given inventory units.
      *
-     * @param array|Collection $inventoryUnits
+     * @param StockableInterface[]|Collection $inventoryUnits
      */
     public function decrease($inventoryUnits);
 }

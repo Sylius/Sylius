@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\OmnipayBundle\DependencyInjection;
 
+use Omnipay\Common\CreditCard;
+use Omnipay\Common\GatewayFactory;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Omnipay\Common\GatewayFactory;
-use Omnipay\Common\CreditCard;
 
 /**
  * This class contains the configuration information for the bundle.

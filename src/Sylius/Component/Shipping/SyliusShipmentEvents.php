@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ShippingBundle;
+namespace Sylius\Component\Shipping;
 
 class SyliusShipmentEvents
 {
-    const PRE_SHIP = 'sylius.shipment.pre_ship';
+    const PRE_SHIP  = 'sylius.shipment.pre_ship';
     const POST_SHIP = 'sylius.shipment.post_ship';
 }

@@ -13,8 +13,6 @@ namespace Sylius\Bundle\AttributeBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
  * Doctrine listener used to manipulate mappings.

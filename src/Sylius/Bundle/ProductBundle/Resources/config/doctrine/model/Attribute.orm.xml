@@ -12,7 +12,7 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+        >
 
     <mapped-superclass name="Sylius\Component\Product\Model\Attribute" table="sylius_product_attribute">
     </mapped-superclass>

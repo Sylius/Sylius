@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\ProductBundle\Validator;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Validator\ExecutionContext;
 
 /**
