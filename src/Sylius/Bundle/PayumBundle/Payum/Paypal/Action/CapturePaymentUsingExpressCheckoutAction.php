@@ -11,24 +11,24 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
-use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Payum\Core\Security\GenericTokenFactoryInterface;
 
 class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
 {
     /**
-     * @var TokenFactory
+     * @var GenericTokenFactoryInterface
      */
     protected $tokenFactory;
 
     /**
-     * @param TokenFactory $tokenFactory
+     * @param GenericTokenFactoryInterface $tokenFactory
      */
-    public function __construct(TokenFactory $tokenFactory)
+    public function __construct(GenericTokenFactoryInterface $tokenFactory)
     {
         $this->tokenFactory = $tokenFactory;
     }
@@ -49,8 +49,6 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
         $order = $payment->getOrder();
 
         if (empty($details)) {
-            $details['RETURNURL'] = $request->getToken()->getTargetUrl();
-            $details['CANCELURL'] = $request->getToken()->getTargetUrl();
             $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
                 $request->getToken()->getPaymentName(),
                 $payment
