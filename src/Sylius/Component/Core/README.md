@@ -24,7 +24,7 @@ Support
 
 If you have a question regarding the usage of this library, please ask on
 [Stackoverflow](http://stackoverflow.com). You should use "sylius"
-tag when posting and make sure to [browse existing questions](http://http://stackoverflow.com/questions/tagged/sylius).
+tag when posting and make sure to [browse existing questions](http://stackoverflow.com/questions/tagged/sylius).
 
 Sylius on Twitter
 -----------------
