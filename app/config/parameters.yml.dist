@@ -43,3 +43,13 @@ parameters:
     sylius.inventory.holding.duration: 15 minutes
 
     sylius.order.pending.duration: 3 hours
+
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr_workspace: default
+    phpcr_user: admin
+    phpcr_pass: admin
