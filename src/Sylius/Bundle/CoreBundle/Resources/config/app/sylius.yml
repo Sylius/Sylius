@@ -133,4 +133,4 @@ sylius_resource:
             driver: doctrine/phpcr-odm
             classes:
                 model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PageRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ODM\PHPCR\PageRepository
