@@ -32,9 +32,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Cart\\": "" }
+        "psr-4": { "Sylius\\Component\\Cart\\": "" }
     },
-    "target-dir": "Sylius/Component/Cart",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Cart\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

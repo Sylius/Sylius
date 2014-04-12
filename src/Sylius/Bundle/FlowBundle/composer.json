@@ -28,9 +28,11 @@
         "symfony/yaml": "~2.1"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\FlowBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\FlowBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/FlowBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\FlowBundle\\Tests\\": "Tests/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

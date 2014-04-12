@@ -30,9 +30,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\OmnipayBundle": "" }
+        "psr-4": { "Sylius\\Bundle\\OmnipayBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/OmnipayBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\OmnipayBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

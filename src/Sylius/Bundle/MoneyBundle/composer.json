@@ -37,9 +37,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\MoneyBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\MoneyBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/MoneyBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\MoneyBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

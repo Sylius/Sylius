@@ -31,9 +31,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Inventory\\": "" }
+        "psr-4": { "Sylius\\Component\\Inventory\\": "" }
     },
-    "target-dir": "Sylius/Component/Inventory",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Inventory\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

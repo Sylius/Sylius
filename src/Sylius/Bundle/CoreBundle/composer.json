@@ -36,16 +36,15 @@
         "sylius/inventory-bundle":        "0.10.*@dev",
         "sylius/money-bundle":            "0.10.*@dev",
         "sylius/order-bundle":            "0.10.*@dev",
-        "sylius/payments-bundle":         "0.10.*@dev",
+        "sylius/payment-bundle":          "0.10.*@dev",
         "sylius/payum-bundle":            "0.10.*@dev",
         "sylius/product-bundle":          "0.10.*@dev",
-        "sylius/promotions-bundle":       "0.10.*@dev",
+        "sylius/promotion-bundle":        "0.10.*@dev",
         "sylius/resource-bundle":         "0.10.*@dev",
         "sylius/settings-bundle":         "0.10.*@dev",
         "sylius/shipping-bundle":         "0.10.*@dev",
         "sylius/taxation-bundle":         "0.10.*@dev",
-        "sylius/taxonomies-bundle":       "0.10.*@dev",
-        "sylius/variable-product-bundle": "0.10.*@dev",
+        "sylius/taxonomy-bundle":         "0.10.*@dev",
         "symfony-cmf/block-bundle":       "1.0.*",
         "symfony-cmf/content-bundle":     "1.0.*",
         "symfony-cmf/menu-bundle":        "1.0.*",
@@ -68,9 +67,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CoreBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\CoreBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/CoreBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\CoreBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

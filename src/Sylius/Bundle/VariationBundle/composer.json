@@ -37,9 +37,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\VariationBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\VariationBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/VariationBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\VariationBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

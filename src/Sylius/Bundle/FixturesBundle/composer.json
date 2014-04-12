@@ -32,9 +32,8 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\FixturesBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\FixturesBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/FixturesBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

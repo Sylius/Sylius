@@ -22,8 +22,6 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource":   "0.10.*@dev",
-        "sylius/order":      "0.10.*@dev",
         "sylius/product":    "0.10.*@dev",
         "sylius/cart":       "0.10.*@dev",
         "sylius/order":      "0.10.*@dev",
@@ -31,7 +29,7 @@
         "sylius/taxation":   "0.10.*@dev",
         "sylius/shipping":   "0.10.*@dev",
         "sylius/addressing": "0.10.*@dev",
-        "sylius/promotions": "0.10.*@dev",
+        "sylius/promotion":  "0.10.*@dev",
         "sylius/inventory":  "0.10.*@dev",
         "sylius/taxonomy":   "0.10.*@dev",
         "sylius/payment":    "0.10.*@dev",
@@ -44,9 +42,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Core\\": "" }
+        "psr-4": { "Sylius\\Component\\Core\\": "" }
     },
-    "target-dir": "Sylius/Component/Core",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Core\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"

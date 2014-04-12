@@ -37,9 +37,11 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\CartBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\CartBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/CartBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\CartBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"
