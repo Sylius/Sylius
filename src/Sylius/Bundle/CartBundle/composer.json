@@ -25,7 +25,8 @@
         "symfony/framework-bundle": "~2.3",
         "sylius/order-bundle":      "0.10.*@dev",
         "sylius/money-bundle":      "0.10.*@dev",
-        "sylius/resource-bundle":   "0.10.*@dev"
+        "sylius/resource-bundle":   "0.10.*@dev",
+        "sylius/cart":              "0.10.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
