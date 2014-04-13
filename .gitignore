@@ -12,6 +12,7 @@ web/bundles/*
 web/css/*
 web/js/*
 web/assets/compiled/*
+web/assets/vendor/*
 web/media/*
 
 bin/behat
