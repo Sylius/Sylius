@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -60,8 +61,9 @@ class InventoryUnitListener
         $unit = $event->getSubject();
 
         if (!$unit instanceof InventoryUnitInterface) {
-            throw new \InvalidArgumentException(
-                'Inventory unit listener requires event subject to be instance of "Sylius\Component\Core\Model\InventoryUnitInterface"'
+            throw new UnexpectedTypeException(
+                $unit,
+                'Sylius\Component\Core\Model\InventoryUnitInterface'
             );
         }
 

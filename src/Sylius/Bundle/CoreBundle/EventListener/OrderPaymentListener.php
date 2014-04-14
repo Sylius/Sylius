@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\SyliusOrderEvents;
@@ -101,8 +102,9 @@ class OrderPaymentListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order payment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 
@@ -114,10 +116,10 @@ class OrderPaymentListener
         $payment = $event->getSubject();
 
         if (!$payment instanceof PaymentInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                'Order payment listener requires event subject to be instance of "Sylius\Component\Payment\Model\PaymentInterface", %s given.',
-                is_object($payment) ? get_class($payment) : gettype($payment)
-            ));
+            throw new UnexpectedTypeException(
+                $payment,
+                'Sylius\Component\Payment\Model\PaymentInterface'
+            );
         }
 
         $order = $this->orderRepository->findOneBy(array('payment' => $payment));
@@ -142,8 +144,9 @@ class OrderPaymentListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order payment listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 

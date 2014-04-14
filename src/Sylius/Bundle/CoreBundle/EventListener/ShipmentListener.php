@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
@@ -100,8 +102,9 @@ class ShipmentListener
         $shipment = $event->getSubject();
 
         if (!$shipment instanceof ShipmentInterface) {
-            throw new \InvalidArgumentException(
-                'Order shipping listener requires event subject to be instance of "Sylius\Component\Core\Model\ShipmentInterface"'
+            throw new UnexpectedTypeException(
+                $shipment,
+                'Sylius\Component\Core\Model\ShipmentInterface'
             );
         }
 
@@ -113,8 +116,9 @@ class ShipmentListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order shipping listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderItemInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 

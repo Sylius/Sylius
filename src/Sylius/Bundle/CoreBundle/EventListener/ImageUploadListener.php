@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -31,7 +32,10 @@ class ImageUploadListener
     {
         $subject = $event->getSubject();
         if (!$subject instanceof ProductInterface && !$subject instanceof ProductVariantInterface) {
-            throw new \InvalidArgumentException('ProductInterface or ProductVariantInterface expected.');
+            throw new UnexpectedTypeException(
+                $subject,
+                'Sylius\Component\Core\Model\ProductInterface or Sylius\Component\Core\Model\ProductVariantInterface'
+            );
         }
 
         $variant = $subject instanceof ProductVariantInterface ? $subject : $subject->getMasterVariant();
@@ -46,7 +50,10 @@ class ImageUploadListener
         $subject = $event->getSubject();
 
         if (!$subject instanceof TaxonInterface) {
-            throw new \InvalidArgumentException('TaxonInterface expected.');
+            throw new UnexpectedTypeException(
+                $subject,
+                'Sylius\Component\Taxonomy\Model\TaxonInterface'
+            );
         }
 
         if ($subject->hasFile()) {
@@ -60,7 +67,10 @@ class ImageUploadListener
         $subject = $event->getSubject();
 
         if (!$subject instanceof TaxonomyInterface) {
-            throw new \InvalidArgumentException('TaxonomyInterface expected.');
+            throw new UnexpectedTypeException(
+                $subject,
+                'Sylius\Component\Taxonomy\Model\TaxonomyInterface'
+            );
         }
 
         if ($subject->getRoot()->hasFile()) {
