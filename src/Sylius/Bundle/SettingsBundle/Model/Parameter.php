@@ -47,7 +47,9 @@ class Parameter implements ParameterInterface
     protected $value;
 
     /**
-     * {@inheritdoc}
+     * Gets Parameter id
+     *
+     * @return int
      */
     public function getId()
     {
