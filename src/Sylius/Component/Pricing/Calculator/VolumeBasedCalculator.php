@@ -47,9 +47,8 @@ class VolumeBasedCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFormType()
+    public function getFormType()
     {
-        return 'sylius_price_calculator_volume_based';
+        return DefaultCalculators::VOLUME_BASED;
     }
 }
-

@@ -32,9 +32,9 @@ interface CalculatorInterface
     public function calculate(PriceableInterface $subject, array $configuration, array $context = array());
 
     /**
-     * Get calculator configuration form type, if any required.
+     * Get calculator type.
      *
-     * @return string|Boolean Returns false if configuration is not required
+     * @return string
      */
-    public function getConfigurationFormType();
+    public function getType();
 }

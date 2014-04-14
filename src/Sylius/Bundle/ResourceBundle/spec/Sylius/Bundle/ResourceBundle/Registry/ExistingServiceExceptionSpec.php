@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Action\Registry;
+namespace spec\Sylius\Bundle\ResourceBundle\Registry;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Model\RuleInterface;

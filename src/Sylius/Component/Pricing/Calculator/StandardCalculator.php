@@ -31,9 +31,8 @@ class StandardCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFormType()
+    public function getType()
     {
-        return false;
+        return DefaultCalculators::STANDARD;
     }
 }
-
