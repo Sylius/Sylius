@@ -25,31 +25,26 @@ class LoadUsersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $user = $this->getUserRepository()->createNew();
-
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
-        $user->setEmail('sylius@example.com');
-        $user->setPlainPassword('sylius');
-        $user->setEnabled(true);
-        $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
-        $user->setCurrency('EUR');
+        $user = $this->createUser(
+            'sylius@example.com',
+            'sylius',
+            true,
+            array('ROLE_SYLIUS_ADMIN')
+        );
 
         $manager->persist($user);
         $manager->flush();
 
-        $this->setReference('User-Administrator', $user);
+        $this->setReference('Sylius.User-Administrator', $user);
 
         for ($i = 1; $i <= 15; $i++) {
-            $user = $this->getUserRepository()->createNew();
-
             $username = $this->faker->username;
 
-            $user->setFirstname($this->faker->firstName);
-            $user->setLastname($this->faker->lastName);
-            $user->setEmail($username.'@example.com');
-            $user->setPlainPassword($username);
-            $user->setEnabled($this->faker->boolean());
+            $user = $this->createUser(
+                $username.'@example.com',
+                $username,
+                $this->faker->boolean()
+            );
 
             $manager->persist($user);
 
@@ -57,6 +52,21 @@ class LoadUsersData extends DataFixture
         }
 
         $manager->flush();
+    }
+
+    protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
+    {
+        $user = $this->getUserRepository()->createNew();
+
+        $user->setFirstname($this->faker->firstName);
+        $user->setLastname($this->faker->lastName);
+        $user->setEmail($email);
+        $user->setPlainPassword($password);
+        $user->setRoles($roles);
+        $user->setCurrency($currency);
+        $user->setEnabled($enabled);
+
+        return $user;
     }
 
     /**

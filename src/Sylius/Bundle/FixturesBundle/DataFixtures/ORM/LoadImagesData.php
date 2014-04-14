@@ -23,13 +23,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class LoadImagesData extends DataFixture
 {
+    protected $path = '/../../Resources/fixtures';
+
     public function load(ObjectManager $manager)
     {
         $finder = new Finder();
         $uploader = $this->get('sylius.image_uploader');
 
-        $path = __DIR__.'/../../Resources/fixtures';
-        foreach ($finder->files()->in($path) as $img) {
+        foreach ($finder->files()->in(__DIR__.$this->path) as $img) {
             $image = new ProductVariantImage();
             $image->setFile(new UploadedFile($img->getRealPath(), $img->getFilename()));
             $uploader->upload($image);
