@@ -16,13 +16,13 @@ Feature: User groups management
             | Administrators      | ROLE_SYLIUS_ADMIN |
             | Sales               | ROLE_SYLIUS_SALES |
           And there are following users:
-            | email              | enabled | groups                | address                                                |
-            | marc@example.com   | yes     | Administrators, Sales | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-            | jane@example.com   | yes     | Sales                 | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-            | beth@example.com   | no      | Wholesale Customers   | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
-            | martha@example.com | yes     | Retail Customers      |                                                        |
-            | rick@example.com   | no      | Retail Customers      | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
-            | dale@example.com   | yes     | Wholesale Customers   |                                                        |
+            | email              | username | enabled | groups                | address                                                |
+            | marc@example.com   | marc     | yes     | Administrators, Sales | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
+            | jane@example.com   | jane     | yes     | Sales                 | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
+            | beth@example.com   | beth     | no      | Wholesale Customers   | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
+            | martha@example.com | martha   | yes     | Retail Customers      |                                                        |
+            | rick@example.com   | rick     | no      | Retail Customers      | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
+            | dale@example.com   | dale     | yes     | Wholesale Customers   |                                                        |
 
     Scenario: Seeing index of all groups
         Given I am on the dashboard page

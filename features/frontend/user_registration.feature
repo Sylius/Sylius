@@ -6,8 +6,8 @@ Feature: User registration
 
     Background:
         Given there are following users:
-            | email       | password |
-            | bar@bar.com | foo      |
+            | email       | username | password |
+            | bar@bar.com | bar      | foo      |
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage
@@ -16,6 +16,7 @@ Feature: User registration
             | First name   | John        |
             | Last name    | Doe         |
             | Email        | foo@bar.com |
+            | Username     | foo         |
             | Password     | bar         |
             | Verification | bar         |
           And I press "Register"
@@ -27,6 +28,7 @@ Feature: User registration
           And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com |
+            | Username     | foo         |
             | Password     | bar         |
             | Verification | foo         |
           And I press "Register"
@@ -38,6 +40,7 @@ Feature: User registration
           And I follow "Register"
          When I fill in the following:
             | Email        | bar@bar.com |
+            | Username     | bar         |
             | Password     | bar         |
             | Verification | bar         |
           And I press "Register"
@@ -49,6 +52,7 @@ Feature: User registration
           And I follow "Register"
          When I fill in the following:
             | Email        | foo@bar.com  |
+            | Username     | foo          |
             | Password     | bar          |
             | Verification | bar          |
           And I press "Register"

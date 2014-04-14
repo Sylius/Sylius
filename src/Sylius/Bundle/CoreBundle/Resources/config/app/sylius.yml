@@ -2,6 +2,8 @@ sylius_core:
     driver: doctrine/orm
     emails:
         enabled: false
+    user:
+        have_username: true
 
 sylius_installer:
     classes:

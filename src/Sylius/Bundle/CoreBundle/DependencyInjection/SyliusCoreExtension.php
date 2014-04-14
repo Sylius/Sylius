@@ -58,6 +58,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $loader->load('mailer/mailer.xml');
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
+        $this->loadUserConfiguration($config['user'], $container, $loader);
     }
 
     /**
@@ -92,5 +93,19 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
                 $loader->load('mailer/'.$emailType.'_listener.xml');
             }
         }
+    }
+
+    /**
+     * @param array            $config    The user section of the config for this bundle
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    protected function loadUserConfiguration(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $provider = boolval($config['have_username']) ? "fos_user.user_provider.username_email" : "fos_user.user_provider.username";
+        $container->setAlias('sylius_user_provider', $provider);
+
+        $userClass = boolval($config['have_username']) ? 'Sylius\Component\Core\Model\User': 'Sylius\Component\Core\Model\UserWithoutUsername';
+        $container->setParameter('sylius.model.user.class', $userClass);
     }
 }

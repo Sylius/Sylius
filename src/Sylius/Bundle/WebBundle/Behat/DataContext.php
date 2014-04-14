@@ -149,6 +149,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
     {
         foreach ($table->getHash() as $data) {
             $this->thereIsUser(
+                $data['username'],
                 $data['email'],
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
@@ -161,7 +162,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $this->getEntityManager()->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $flush = true)
+    public function thereIsUser($username, $email, $password, $role = null, $enabled = 'yes', $address = null, $flush = true)
     {
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
@@ -173,6 +174,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
             $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $user->setUsername($username);
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);
             $user->setPlainPassword($password);
