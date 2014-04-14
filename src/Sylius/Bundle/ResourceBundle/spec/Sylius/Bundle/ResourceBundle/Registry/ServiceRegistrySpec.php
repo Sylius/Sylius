@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Registry;
+namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouteCompilerInterface;
@@ -27,12 +27,12 @@ class ServiceRegistrySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Registry\ServiceRegistry');
+        $this->shouldHaveType('Sylius\Component\Registry\ServiceRegistry');
     }
 
     function it_implements_service_registry_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface');
+        $this->shouldImplement('Sylius\Component\Registry\ServiceRegistryInterface');
     }
 
     function it_initializes_services_array_by_default()
@@ -54,7 +54,7 @@ class ServiceRegistrySpec extends ObjectBehavior
         $this->register('test', $router);
 
         $this
-            ->shouldThrow('Sylius\Bundle\ResourceBundle\Registry\ExistingServiceException')
+            ->shouldThrow('Sylius\Component\Registry\ExistingServiceException')
             ->duringRegister('test', $router)
         ;
     }
@@ -85,7 +85,7 @@ class ServiceRegistrySpec extends ObjectBehavior
     function it_throws_exception_if_trying_to_get_service_of_non_existing_type()
     {
         $this
-            ->shouldThrow('Sylius\Bundle\ResourceBundle\Registry\NonExistingServiceException')
+            ->shouldThrow('Sylius\Component\Registry\NonExistingServiceException')
             ->duringGet('foo')
         ;
     }

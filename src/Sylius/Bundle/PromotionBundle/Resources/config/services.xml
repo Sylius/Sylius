@@ -26,8 +26,8 @@
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
         <parameter key="sylius.generator.instructions.class">Sylius\Component\Promotion\Generator\Instruction</parameter>
 
-        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Bundle\ResourceBundle\Registry\ServiceRegistry</parameter>
-        <parameter key="sylius.registry.promotion_action.class">Sylius\Bundle\ResourceBundle\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
         <parameter key="sylius.form.type.promotion.class">Sylius\Bundle\PromotionBundle\Form\Type\PromotionType</parameter>
         <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponType</parameter>

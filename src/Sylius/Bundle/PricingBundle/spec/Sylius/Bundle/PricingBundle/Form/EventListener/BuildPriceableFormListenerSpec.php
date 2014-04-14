@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PricingBundle\Calculator\CalculatorInterface;
 use Sylius\Bundle\PricingBundle\Model\PriceableInterface;;
-use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -21,7 +21,7 @@
         <parameter key="sylius.form.extension.priceable.class">Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension</parameter>
         <parameter key="sylius.form.type.price_calculator.volume_based.class">Sylius\Bundle\PricingBundle\Form\Type\VolumeBasedConfigurationType</parameter>
 
-        <parameter key="sylius.registry.price_calculator.class">Sylius\Bundle\ResourceBundle\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.price_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.price_calculator.class">Sylius\Component\Pricing\Calculator\DelegatingCalculator</parameter>
 
         <parameter key="sylius.price_calculator.standard.class">Sylius\Component\Pricing\Calculator\StandardCalculator</parameter>

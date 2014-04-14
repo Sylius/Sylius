@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PricingBundle\Calculator;
 
 use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
-use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * This class delegates the calculation of charge for particular subject

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use JMS\TranslationBundle\Annotation\Ignore;
-use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;

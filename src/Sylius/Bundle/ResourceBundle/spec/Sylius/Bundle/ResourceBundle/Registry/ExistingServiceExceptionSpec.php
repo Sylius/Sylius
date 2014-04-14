@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Registry;
+namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Model\RuleInterface;
@@ -26,7 +26,7 @@ class ExistingServiceExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Registry\ExistingServiceException');
+        $this->shouldHaveType('Sylius\Component\Registry\ExistingServiceException');
     }
 
     function it_is_an_exception()

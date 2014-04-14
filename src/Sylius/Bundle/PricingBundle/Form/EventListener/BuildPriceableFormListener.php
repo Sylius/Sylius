@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PricingBundle\Form\EventListener;
 
 use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
-use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

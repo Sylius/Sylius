@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Registry;
+namespace Sylius\Component\Registry;
 
 /**
  * Service registry interface.

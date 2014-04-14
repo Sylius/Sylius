@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
