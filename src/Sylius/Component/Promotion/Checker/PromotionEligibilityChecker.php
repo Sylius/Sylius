@@ -156,7 +156,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     private function isCouponEligibleToPromotion(PromotionInterface $promotion, CouponInterface $coupon = null)
     {
         if ($promotion->isCouponBased()) {
-            if (null !== $coupon && $promotion !== $coupon->getPromotion()) {
+            if (null === $coupon || $promotion !== $coupon->getPromotion()) {
                 return false;
             }
 
