@@ -131,6 +131,20 @@ $ find ./src -type f -exec sed -i 's/sylius.repository.prototype/sylius.reposito
 $ find ./src -type f -exec sed -i 's/sylius.repository.variant/sylius.repository.product_variant/g' {} \;
 ```
 
+Beware, the Doctrine relationship name has changed as well between `Variant` (now, `ProductVariant`) and `Product`. If you use it in custom repository methods, you need to adapt accordingly:
+
+Before:
+
+```
+variant.product
+```
+
+After:
+
+```
+product_variant.object
+```
+
 ### Promotion
 
 PromotionsBundle has been renamed to PromotionBundle.
