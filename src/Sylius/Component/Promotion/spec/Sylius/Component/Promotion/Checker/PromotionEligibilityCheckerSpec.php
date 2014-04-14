@@ -56,7 +56,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->willReturn(array());
 
-        $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $checker->isEligible($subject, array())->willReturn(true);
 
         $subject->getPromotionCoupon()->willReturn(null);
@@ -83,7 +83,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
         $rule->getConfiguration()->willReturn(array());
 
-        $registry->getChecker(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $checker->isEligible($subject, array())->willReturn(false);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);

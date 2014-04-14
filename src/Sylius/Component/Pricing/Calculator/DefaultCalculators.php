@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PricingBundle\Calculator;
+namespace Sylius\Component\Pricing\Calculator;
 
 /**
  * Default calculators.

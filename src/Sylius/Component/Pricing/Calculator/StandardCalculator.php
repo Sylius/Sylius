@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PricingBundle\Calculator;
+namespace Sylius\Component\Pricing\Calculator;
 
-use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
+use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
  * Standard pricing calculator.

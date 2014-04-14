@@ -13,10 +13,10 @@ namespace spec\Sylius\Bundle\CoreBundle\Cart;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\PricingBundle\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;

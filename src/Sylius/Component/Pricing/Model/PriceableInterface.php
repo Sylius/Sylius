@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PricingBundle\Model;
+namespace Sylius\Component\Pricing\Model;
 
 /**
  * Priceable interface.

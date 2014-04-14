@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Cart;
 
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Bundle\PricingBundle\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
@@ -20,6 +19,7 @@ use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,18 +80,18 @@ class ItemResolver implements ItemResolverInterface
      *
      * @param CartProviderInterface              $cartProvider
      * @param RepositoryInterface                $productRepository
-     * @param FormFactory                        $formFactory
+     * @param FormFactoryInterface               $formFactory
      * @param AvailabilityCheckerInterface       $availabilityChecker
      * @param RestrictedZoneCheckerInterface     $restrictedZoneChecker
      * @param DelegatingCalculatorInterface $priceCalculator
      */
     public function __construct(
-        CartProviderInterface              $cartProvider,
-        RepositoryInterface                $productRepository,
-        FormFactory                        $formFactory,
-        AvailabilityCheckerInterface       $availabilityChecker,
-        RestrictedZoneCheckerInterface     $restrictedZoneChecker,
-        DelegatingCalculatorInterface $priceCalculator
+        CartProviderInterface          $cartProvider,
+        RepositoryInterface            $productRepository,
+        FormFactoryInterface           $formFactory,
+        AvailabilityCheckerInterface   $availabilityChecker,
+        RestrictedZoneCheckerInterface $restrictedZoneChecker,
+        DelegatingCalculatorInterface  $priceCalculator
     )
     {
         $this->cartProvider = $cartProvider;
