@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\PricingBundle\Calculator\DefaultCalculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
@@ -36,6 +37,20 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var integer
      */
     protected $price;
+
+    /**
+     * The pricing calculator.
+     *
+     * @var string
+     */
+    protected $pricingCalculator = DefaultCalculators::STANDARD;
+
+    /**
+     * The pricing configuration.
+     *
+     * @var array
+     */
+    protected $pricingConfiguration = array();
 
     /**
      * On hold.
@@ -152,6 +167,42 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPricingCalculator()
+    {
+        return $this->pricingCalculator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPricingCalculator($calculator)
+    {
+        $this->pricingCalculator = $calculator;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPricingConfiguration()
+    {
+        return $this->pricingConfiguration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPricingConfiguration(array $configuration)
+    {
+        $this->pricingConfiguration = $configuration;
 
         return $this;
     }

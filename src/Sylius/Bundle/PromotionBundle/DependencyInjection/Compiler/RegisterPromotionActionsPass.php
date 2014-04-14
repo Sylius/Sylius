@@ -38,7 +38,7 @@ class RegisterPromotionActionsPass implements CompilerPassInterface
 
             $actions[$attributes[0]['type']] = $attributes[0]['label'];
 
-            $registry->addMethodCall('registerAction', array($attributes[0]['type'], new Reference($id)));
+            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
         }
 
         $container->setParameter('sylius.promotion_actions', $actions);

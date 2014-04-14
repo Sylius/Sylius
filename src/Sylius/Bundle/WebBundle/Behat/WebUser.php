@@ -695,6 +695,18 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I log in with "([^""]*)" and "([^""]*)"$/
+     */
+    public function iLogInWith($email, $password)
+    {
+        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+
+        $this->fillField('Email', $email);
+        $this->fillField('Password', $password);
+        $this->pressButton('login');
+    }
+
+    /**
      * @Given /^I am logged in user$/
      * @Given /^I am logged in as user "([^""]*)"$/
      */

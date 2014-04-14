@@ -12,8 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use JMS\TranslationBundle\Annotation\Ignore;
-use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
-use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -32,7 +31,7 @@ class PromotionType extends AbstractType
     protected $checkerRegistry;
     protected $actionRegistry;
 
-    public function __construct($dataClass, array $validationGroups, RuleCheckerRegistryInterface $checkerRegistry, PromotionActionRegistryInterface $actionRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $checkerRegistry, ServiceRegistryInterface $actionRegistry)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
@@ -87,13 +86,13 @@ class PromotionType extends AbstractType
         $prototypes = array();
         $prototypes['rules'] = array();
 
-        foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
+        foreach ($this->checkerRegistry->all() as $type => $checker) {
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
 
         $prototypes['actions'] = array();
 
-        foreach ($this->actionRegistry->getActions() as $type => $action) {
+        foreach ($this->actionRegistry->all() as $type => $action) {
             $prototypes['actions'][$type] = $builder->create('__name__', $action->getConfigurationFormType())->getForm();
         }
 

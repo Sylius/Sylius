@@ -18,6 +18,11 @@
             </div>
         </div>
         {{ form_row(form.price) }}
+        {{ form_row(form.pricingCalculator) }}
+        {% if form.pricingConfiguration is defined %}
+        {{ form_row(form.pricingConfiguration) }}
+        {% endif %}
+        <hr />
         {{ form_row(form.availableOnDemand) }}
         {{ form_row(form.onHand) }}
     </div>

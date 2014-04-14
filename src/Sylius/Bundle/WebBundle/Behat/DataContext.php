@@ -35,6 +35,7 @@ use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Bundle\PricingBundle\Calculator\DefaultCalculators as DefaultPriceCalculators;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -496,6 +497,62 @@ class DataContext extends BehatContext implements KernelAwareInterface
         foreach ($product->getVariants() as $variant) {
             $variant->setPrice($product->getMasterVariant()->getPrice());
         }
+
+        $manager = $this->getEntityManager();
+        $manager->persist($product);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^product "([^""]*)" has the following group based pricing:$/
+     */
+    public function productHasTheFollowingGroupBasedPricing($productName, TableNode $table)
+    {
+        $product = $this->findOneByName('product', $productName);
+        $masterVariant = $product->getMasterVariant();
+
+        $masterVariant->setPricingCalculator(Calculators::GROUP_BASED);
+        $configuration = array();
+
+        foreach ($table->getHash() as $data) {
+            $group = $this->findOneByName('group', trim($data['group']));
+            $configuration[$group->getId()] = (int) $data['price'] * 100;
+        }
+
+        $masterVariant->setPricingConfiguration($configuration);
+
+        $manager = $this->getEntityManager();
+        $manager->persist($product);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^product "([^""]*)" has the following volume based pricing:$/
+     */
+    public function productHasTheFollowingVolumeBasedPricing($productName, TableNode $table)
+    {
+        $product = $this->findOneByName('product', $productName);
+        $masterVariant = $product->getMasterVariant();
+
+        $masterVariant->setPricingCalculator(DefaultPriceCalculators::VOLUME_BASED);
+        $configuration = array();
+
+        foreach ($table->getHash() as $data) {
+          if (false !== strpos($data['range'], '+')) {
+                $min = null;
+                $max = (int) trim(str_replace('+', '', $data['range']));
+            } else {
+                list($min, $max) = array_map(function ($value) { return (int) trim($value); }, explode('-', $data['range']));
+            }
+
+            $configuration[] = array(
+                'min'   => $min,
+                'max'   => $max,
+                'price' => (int) $data['price'] * 100
+            );
+        }
+
+        $masterVariant->setPricingConfiguration($configuration);
 
         $manager = $this->getEntityManager();
         $manager->persist($product);

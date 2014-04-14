@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Registry\ServiceRegistryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class PromotionEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerRegistryInterface $registry, EventDispatcherInterface $dispatcher)
+    function let(ServiceRegistryInterface $registry, EventDispatcherInterface $dispatcher)
     {
         $this->beConstructedWith($registry, $dispatcher);
     }
@@ -49,6 +49,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(true);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $promotion->getRules()->willReturn(array($rule));
         $promotion->isCouponBased()->willReturn(false);
 
@@ -75,6 +76,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
         $promotion->hasRules()->willReturn(true);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
         $promotion->getRules()->willReturn(array($rule));
         $promotion->isCouponBased()->willReturn(false);
 
