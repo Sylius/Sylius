@@ -32,6 +32,8 @@ class PurchaseStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
 
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
+
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $order->getPayment()->getMethod()->getGateway(),
             $order,
@@ -56,6 +58,8 @@ class PurchaseStep extends CheckoutStep
         /** @var OrderInterface $order */
         $order = $status->getModel();
 
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
+
         if (!$order instanceof OrderInterface) {
             throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
         }
@@ -63,6 +67,8 @@ class PurchaseStep extends CheckoutStep
         $payment = $order->getPayment();
         $previousState = $order->getPayment()->getState();
         $payment->setState($status->getStatus());
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
 
         if ($previousState !== $payment->getState()) {
             $this->dispatchEvent(
