@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -51,8 +52,9 @@ class OrderStateListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order inventory listener requires event subject to be an instance of "Sylius\Component\Core\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 

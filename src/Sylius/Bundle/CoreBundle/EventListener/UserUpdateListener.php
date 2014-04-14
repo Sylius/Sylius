@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -34,8 +35,9 @@ class UserUpdateListener
         $user = $event->getSubject();
 
         if (!$user instanceof UserInterface) {
-            throw new \InvalidArgumentException(
-                'User update listener requires event subject to be instance of "FOS\UserBundle\Model\UserInterface".'
+            throw new UnexpectedTypeException(
+                $user,
+                'FOS\UserBundle\Model\UserInterface'
             );
         }
 

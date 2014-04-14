@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
@@ -68,8 +69,9 @@ class OrderPromotionListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order promotion listener requires event subject to be instance of "Sylius\Component\Core\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 
