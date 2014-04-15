@@ -90,9 +90,6 @@
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
-
-        <parameter key="sylius.twig.restricted_zone_extension.class">Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension</parameter>
-        <parameter key="sylius.twig.money.class">Sylius\Bundle\CoreBundle\Twig\SyliusMoneyExtension</parameter>
     </parameters>
 
     <services>
@@ -482,18 +479,6 @@
                 <argument key="facebook">facebookId</argument>
                 <argument key="google">googleId</argument>
             </argument>
-        </service>
-
-        <service id="sylius.twig.restricted_zone_extension" class="%sylius.twig.restricted_zone_extension.class%">
-            <argument type="service" id="sylius.checker.restricted_zone" />
-            <tag name="twig.extension" />
-        </service>
-        <service id="sylius.twig.money" class="%sylius.twig.money.class%">
-            <argument type="service" id="sylius.price_calculator.default" />
-            <argument type="service" id="sylius.currency_context" />
-            <argument type="service" id="sylius.currency_converter" />
-            <argument>%sylius.money.locale%</argument>
-            <tag name="twig.extension" />
         </service>
     </services>
 

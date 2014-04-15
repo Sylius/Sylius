@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\HttpKernel;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class SyliusResourceExtension extends \Twig_Extension
+class ResourceExtension extends \Twig_Extension
 {
     /**
      * @var string

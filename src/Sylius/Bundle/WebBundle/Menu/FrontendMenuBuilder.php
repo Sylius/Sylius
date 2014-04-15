@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
+use Sylius\Bundle\MoneyBundle\Twig\MoneyExtension;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -54,7 +54,7 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Money extension.
      *
-     * @var SyliusMoneyExtension
+     * @var MoneyExtension
      */
     protected $moneyExtension;
 
@@ -68,7 +68,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param RepositoryInterface      $exchangeRateRepository
      * @param RepositoryInterface      $taxonomyRepository
      * @param CartProviderInterface    $cartProvider
-     * @param SyliusMoneyExtension     $moneyExtension
+     * @param MoneyExtension           $moneyExtension
      */
     public function __construct(
         FactoryInterface         $factory,
@@ -78,7 +78,7 @@ class FrontendMenuBuilder extends MenuBuilder
         RepositoryInterface      $exchangeRateRepository,
         RepositoryInterface      $taxonomyRepository,
         CartProviderInterface    $cartProvider,
-        SyliusMoneyExtension     $moneyExtension
+        MoneyExtension           $moneyExtension
     )
     {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
@@ -159,7 +159,6 @@ class FrontendMenuBuilder extends MenuBuilder
         }
 
         if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
-
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),

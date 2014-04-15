@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.twig.extension.resource.class">Sylius\Bundle\ResourceBundle\Twig\ResourceExtension</parameter>
+
+        <parameter key="sylius.twig.extension.resource.pagination_template">SyliusResourceBundle:Twig:paginate.html.twig</parameter>
+        <parameter key="sylius.twig.extension.resource.sorting_template">SyliusResourceBundle:Twig:sorting.html.twig</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.twig.extension.resource" class="%sylius.twig.extension.resource.class%">
+            <argument type="service" id="service_container" />
+            <argument>%sylius.twig.extension.resource.pagination_template%</argument>
+            <argument>%sylius.twig.extension.resource.sorting_template%</argument>
+            <tag name="twig.extension" />
+            <tag name="kernel.event_listener" event="kernel.request" method="fetchRequest" />
+        </service>
+    </services>
+
+</container>

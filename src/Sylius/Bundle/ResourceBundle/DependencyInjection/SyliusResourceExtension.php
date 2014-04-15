@@ -35,6 +35,7 @@ class SyliusResourceExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+        $loader->load('twig.xml');
 
         $classes = isset($config['resources']) ? $config['resources'] : array();
 

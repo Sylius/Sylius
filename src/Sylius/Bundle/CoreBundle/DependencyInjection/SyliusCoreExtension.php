@@ -43,6 +43,12 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_variation',
     );
 
+    protected $configFiles = array(
+        'services',
+        'templating',
+        'twig',
+    );
+
     private $emails = array(
         'order_confirmation',
         'customer_welcome'

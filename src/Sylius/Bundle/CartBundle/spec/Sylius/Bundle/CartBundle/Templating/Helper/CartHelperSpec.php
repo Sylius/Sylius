@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CartBundle\Twig;
+namespace spec\Sylius\Bundle\CartBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Model\CartInterface;
@@ -20,10 +20,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-/**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
-class SyliusCartExtensionSpec extends ObjectBehavior
+class CartHelperSpec extends ObjectBehavior
 {
     function let(
         CartProviderInterface $cartProvider,
@@ -36,12 +33,12 @@ class SyliusCartExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Twig\SyliusCartExtension');
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\Templating\Helper\CartHelper');
     }
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
     function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, CartInterface $cart)

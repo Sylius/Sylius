@@ -9,39 +9,40 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\MoneyBundle\Twig;
+namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use Sylius\Component\Money\Context\CurrencyContextInterface;
 use Sylius\Component\Money\Converter\CurrencyConverterInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * Sylius money Twig helper.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
-class SyliusMoneyExtension extends \Twig_Extension
+class MoneyHelper extends Helper
 {
-    protected $currencyContext;
-    protected $formatter;
-    protected $converter;
+    /**
+     * @var CurrencyConverterInterface
+     */
+    private $converter;
+
+    /**
+     * @var CurrencyContextInterface
+     */
+    private $currencyContext;
+
+    /**
+     * @var \NumberFormatter
+     */
+    private $formatter;
+
+    /**
+     * @var string
+     */
+    private $pattern = '¤#,##0.00;-¤#,##0.00';
 
     public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, $locale = null)
     {
         $this->currencyContext = $currencyContext;
         $this->converter       = $converter;
         $this->formatter       = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
-        $this->formatter->setPattern("¤#,##0.00;-¤#,##0.00");
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
-    {
-        return array(
-            new \Twig_SimpleFilter('sylius_money', array($this, 'formatMoney'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFilter('sylius_price', array($this, 'formatPrice'), array('is_safe' => array('html'))),
-        );
+        $this->formatter->setPattern($this->pattern);
     }
 
     /**
@@ -62,7 +63,7 @@ class SyliusMoneyExtension extends \Twig_Extension
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
         }
 
-        return str_replace(' ', ' ', $result);
+        return $result;
     }
 
     /**
@@ -76,9 +77,8 @@ class SyliusMoneyExtension extends \Twig_Extension
     public function formatPrice($amount, $currency = null)
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
-        $amount   = $this->converter->convert($amount, $currency);
 
-        return $this->formatMoney($amount, $currency);
+        return $this->formatMoney($this->converter->convert($amount, $currency), $currency);
     }
 
     /**

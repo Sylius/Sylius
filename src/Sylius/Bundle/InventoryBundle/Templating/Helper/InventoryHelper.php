@@ -9,17 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Twig;
+namespace Sylius\Bundle\InventoryBundle\Templating\Helper;
 
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * Inventory management helper methods.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
-class SyliusInventoryExtension extends \Twig_Extension
+class InventoryHelper extends Helper
 {
     /**
      * Availability checker.
@@ -36,17 +32,6 @@ class SyliusInventoryExtension extends \Twig_Extension
     public function __construct(AvailabilityCheckerInterface $checker)
     {
         $this->checker = $checker;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
-    {
-        return array(
-             new \Twig_SimpleFunction('sylius_inventory_is_available', array($this, 'isStockAvailable')),
-             new \Twig_SimpleFunction('sylius_inventory_is_sufficient', array($this, 'isStockSufficient')),
-        );
     }
 
     /**

@@ -17,8 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.twig.money.class">Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension</parameter>
-
         <parameter key="sylius.form.type.money.class">Sylius\Bundle\MoneyBundle\Form\Type\MoneyType</parameter>
         <parameter key="sylius.form.type.exchange_rate.class">Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType</parameter>
 
@@ -39,13 +37,6 @@
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service>
-
-        <service id="sylius.twig.money" class="%sylius.twig.money.class%">
-            <argument type="service" id="sylius.currency_context" />
-            <argument type="service" id="sylius.currency_converter" />
-            <argument>%sylius.money.locale%</argument>
-            <tag name="twig.extension" />
         </service>
 
         <service id="sylius.form.type.money" class="%sylius.form.type.money.class%">
