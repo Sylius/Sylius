@@ -16,7 +16,7 @@ namespace Sylius\Component\Pricing\Calculator;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class DefaultCalculators
+class Calculators
 {
     // Standard pricing.
     const STANDARD     = 'standard';

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PricingBundle\Form\EventListener;
 
 use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -60,7 +61,7 @@ class BuildPriceableFormListener implements EventSubscriberInterface
         }
 
         if (!$priceable instanceof PriceableInterface) {
-            throw new \InvalidArgumentException('Priceable objects need to implement "Sylius\Bundle\PricingBundle\Model\PriceableInterface".');
+            throw new UnexpectedTypeException($priceable, 'Sylius\Component\Pricing\Model\PriceableInterface');
         }
 
         $this->addConfigurationFields($event->getForm(), $priceable->getPricingCalculator(), $priceable->getPricingConfiguration());

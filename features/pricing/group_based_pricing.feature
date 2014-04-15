@@ -1,8 +1,8 @@
-@checkout
-Feature: Cart pricing
-    In order to sell more
-    As a store owner
-    I want to have flexible cart pricing
+@pricing
+Feature: Group based pricing
+    In order to have different contracts
+    As a Store Owner
+    I want to configure prices per customer group
 
     Background:
         Given there are following taxonomies defined:
@@ -36,12 +36,6 @@ Feature: Cart pricing
             | group               | price |
             | Wholesale Customers | 39.49 |
             | Retail Customers    | 45.99 |
-          And product "Symfony Tee" has the following volume based pricing:
-            | range | price |
-            | 0-9   | 69.00 |
-            | 10-19 | 65.00 |
-            | 20-29 | 60.00 |
-            | 30+   | 55.99 |
 
     Scenario: Default price is used when user is not logged in
         Given I am on the store homepage
@@ -66,17 +60,3 @@ Feature: Cart pricing
          Then I should be on the cart summary page
           And "Tax total: €23.69" should appear on the page
           And "Grand total: €158.66" should appear on the page
-
-    Scenario: Price is calculated based on the quantity
-        Given I am on the store homepage
-         When I add product "Symfony Tee" to cart, with quantity "11"
-         Then I should be on the cart summary page
-          And "Tax total: €107.25" should appear on the page
-          And "Grand total: €882.25" should appear on the page
-
-    Scenario: Lower price is given for higher quantity
-        Given I am on the store homepage
-         When I add product "Symfony Tee" to cart, with quantity "25"
-         Then I should be on the cart summary page
-          And "Tax total: €225" should appear on the page
-          And "Grand total: €1725" should appear on the page

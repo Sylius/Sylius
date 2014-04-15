@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PricingBundle\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -49,9 +49,7 @@ class OrderPricingListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order promotion listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
+            throw new UnexpectedTypeException($order, 'Sylius\Component\Order\Model\OrderInterface');
         }
 
         $context = array();

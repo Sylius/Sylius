@@ -33,6 +33,6 @@ class StandardCalculator implements CalculatorInterface
      */
     public function getType()
     {
-        return DefaultCalculators::STANDARD;
+        return Calculators::STANDARD;
     }
 }

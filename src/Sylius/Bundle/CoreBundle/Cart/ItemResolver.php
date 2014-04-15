@@ -78,12 +78,12 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Constructor.
      *
-     * @param CartProviderInterface              $cartProvider
-     * @param RepositoryInterface                $productRepository
-     * @param FormFactoryInterface               $formFactory
-     * @param AvailabilityCheckerInterface       $availabilityChecker
-     * @param RestrictedZoneCheckerInterface     $restrictedZoneChecker
-     * @param DelegatingCalculatorInterface $priceCalculator
+     * @param CartProviderInterface          $cartProvider
+     * @param RepositoryInterface            $productRepository
+     * @param FormFactoryInterface           $formFactory
+     * @param AvailabilityCheckerInterface   $availabilityChecker
+     * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
+     * @param DelegatingCalculatorInterface  $priceCalculator
      */
     public function __construct(
         CartProviderInterface          $cartProvider,

@@ -35,7 +35,7 @@ use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Bundle\PricingBundle\Calculator\DefaultCalculators as DefaultPriceCalculators;
+use Sylius\Component\PricingBundle\Calculator\DefaultCalculators as DefaultPriceCalculators;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -511,7 +511,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $product = $this->findOneByName('product', $productName);
         $masterVariant = $product->getMasterVariant();
 
-        $masterVariant->setPricingCalculator(Calculators::GROUP_BASED);
+        $masterVariant->setPricingCalculator('group_based');
         $configuration = array();
 
         foreach ($table->getHash() as $data) {

@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Pricing;
+namespace Sylius\Component\Core\Pricing;
+
+use Sylius\Component\Pricing\Calculator\Calculators as BaseCalculators;
 
 /**
  * Core calculators.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-final class Calculators
+class Calculators extends BaseCalculators
 {
     // Group based pricing.
     const GROUP_BASED = 'group_based';
 }
-

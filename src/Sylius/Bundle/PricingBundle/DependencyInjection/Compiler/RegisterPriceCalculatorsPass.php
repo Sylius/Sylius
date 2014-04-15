@@ -35,6 +35,10 @@ class RegisterPriceCalculatorsPass implements CompilerPassInterface
         $calculators = array();
 
         foreach ($container->findTaggedServiceIds('sylius.price_calculator') as $id => $attributes) {
+            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
+                throw new \InvalidArgumentException('Tagged price calculator needs to have `type` and `label` attributes.');
+            }
+
             $calculators[$attributes[0]['type']] = $attributes[0]['label'];
 
             $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));

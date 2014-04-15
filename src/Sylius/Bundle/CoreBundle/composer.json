@@ -37,6 +37,7 @@
         "sylius/inventory-bundle":        "0.10.*@dev",
         "sylius/money-bundle":            "0.10.*@dev",
         "sylius/order-bundle":            "0.10.*@dev",
+        "sylius/pricing-bundle":          "0.10.*@dev",
         "sylius/payment-bundle":          "0.10.*@dev",
         "sylius/payum-bundle":            "0.10.*@dev",
         "sylius/product-bundle":          "0.10.*@dev",

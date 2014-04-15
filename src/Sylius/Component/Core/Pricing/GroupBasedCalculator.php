@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Pricing;
+namespace Sylius\Component\Core\Pricing;
 
-use Sylius\Bundle\PricingBundle\Calculator\CalculatorInterface;
-use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
+use Sylius\Component\Pricing\Model\PriceableInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Customer group based calculator.
@@ -34,11 +35,8 @@ class GroupBasedCalculator implements CalculatorInterface
         $price = null;
 
         foreach ($groups as $group) {
-            if ($group instanceof GroupInterface) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Pricing context variable "group" must be instance of "Sylius\Bundle\CoreBundle\Model\GroupInterface", "%s" given.',
-                    gettype($group)
-                ));
+            if (!$group instanceof GroupInterface) {
+                throw new UnexpectedTypeException($group, 'Sylius\Component\Core\Model\GroupInterface');
             }
 
             $id = $group->getId();
@@ -60,8 +58,8 @@ class GroupBasedCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationFormType()
+    public function getType()
     {
-        return 'sylius_price_calculator_group_based';
+        return Calculators::GROUP_BASED;
     }
 }

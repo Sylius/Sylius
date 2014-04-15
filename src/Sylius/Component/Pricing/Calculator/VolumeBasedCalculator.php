@@ -25,19 +25,15 @@ class VolumeBasedCalculator implements CalculatorInterface
      */
     public function calculate(PriceableInterface $subject, array $configuration, array $context = array())
     {
-        if (array_key_exists('quantity', $context)) {
-            $quantity = $context['quantity'];
-        } else {
-            $quantity = 1;
-        }
+        $quantity = array_key_exists('quantity', $context) ? $context['quantity'] : 1;
 
         foreach ($configuration as $range) {
             if (empty($range['max']) && $quantity > $range['min'])  {
-                $price = $range['price']; break;
+                return $range['price'];
             }
 
             if ($range['min'] <= $quantity && $quantity <= $range['max']) {
-                $price = $range['price']; break;
+                return $range['price'];
             }
         }
 
@@ -47,8 +43,8 @@ class VolumeBasedCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormType()
+    public function getType()
     {
-        return DefaultCalculators::VOLUME_BASED;
+        return Calculators::VOLUME_BASED;
     }
 }
