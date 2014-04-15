@@ -502,7 +502,7 @@ class Order implements OrderInterface
      */
     public function getTotalItems()
     {
-        return $this->countItems(); /** @TODO: We may want to delete that */
+        return $this->countItems();
     }
 
     /**
