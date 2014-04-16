@@ -14,6 +14,8 @@ doctrine:
     dbal:
         dbname:   %sylius.database.name%_test
         driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
+        logging: false
+        profiling: false
 
 sylius_money:
     currency: EUR
