@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

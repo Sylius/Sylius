@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -34,8 +34,9 @@ class OrderConfirmationEmailListener
     }
 
     /**
-     * @param  GenericEvent              $event
-     * @throws \InvalidArgumentException
+     * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
      */
     public function processOrderConfirmation(GenericEvent $event)
     {

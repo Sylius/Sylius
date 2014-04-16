@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Sylius\Bundle\CoreBundle\Mailer\CustomerWelcomeMailerInterface;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Sends Customer welcome email when triggered by event
@@ -41,7 +41,7 @@ class CustomerWelcomeEmailListener
     /**
      * @param FilterUserResponseEvent $event
      *
-     * @throws \InvalidArgumentException
+     * @throws UnexpectedTypeException
      */
     public function handleEvent(FilterUserResponseEvent $event)
     {

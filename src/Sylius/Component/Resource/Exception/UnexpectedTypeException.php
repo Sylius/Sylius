@@ -9,10 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Exception;
+namespace Sylius\Component\Resource\Exception;
 
 class UnexpectedTypeException extends \InvalidArgumentException
 {
+    /**
+     * @param mixed $value
+     * @param int   $expectedType
+     */
     public function __construct($value, $expectedType)
     {
         parent::__construct(sprintf(
