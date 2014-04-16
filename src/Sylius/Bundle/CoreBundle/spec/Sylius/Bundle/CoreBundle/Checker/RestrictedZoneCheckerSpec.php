@@ -34,7 +34,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
 
     function it_implements_Sylius_cart_item_resolver_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface');
+        $this->shouldImplement('Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface');
     }
 
     function it_is_not_restricted_if_user_is_not_authenticated(ProductInterface $product, $securityContext)

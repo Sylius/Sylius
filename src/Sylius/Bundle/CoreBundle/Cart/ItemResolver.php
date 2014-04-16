@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;

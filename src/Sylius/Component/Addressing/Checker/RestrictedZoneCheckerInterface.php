@@ -9,12 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Checker;
+namespace Sylius\Component\Addressing\Checker;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 
 interface RestrictedZoneCheckerInterface
 {
-    public function isRestricted(ProductInterface $product, AddressInterface $address = null);
+    /**
+     * @param object           $subject
+     * @param AddressInterface $address
+     *
+     * @return bool
+     */
+    public function isRestricted($subject, AddressInterface $address = null);
 }
