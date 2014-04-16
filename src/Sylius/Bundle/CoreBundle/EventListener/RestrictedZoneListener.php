@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

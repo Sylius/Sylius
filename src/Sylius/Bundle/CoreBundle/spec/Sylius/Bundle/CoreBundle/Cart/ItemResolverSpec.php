@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Cart;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Calculator\PriceCalculatorInterface;

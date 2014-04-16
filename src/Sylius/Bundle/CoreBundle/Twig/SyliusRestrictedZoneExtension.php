@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 class SyliusRestrictedZoneExtension extends \Twig_Extension
