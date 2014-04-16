@@ -75,6 +75,7 @@ doctrine_migrations:
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
+    port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
