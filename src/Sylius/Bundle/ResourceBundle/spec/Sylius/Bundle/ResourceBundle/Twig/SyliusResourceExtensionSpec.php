@@ -28,7 +28,7 @@ use Symfony\Component\Routing\RouterInterface;
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BaseExtensionSpec extends ObjectBehavior
+class SyliusResourceExtensionSpec extends ObjectBehavior
 {
     function let(ContainerInterface $container, RouterInterface $router, TwigEngine $templating)
     {
@@ -44,7 +44,7 @@ class BaseExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Twig\BaseExtension');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension');
     }
 
     function it_is_a_Twig_extension()
