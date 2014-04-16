@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -45,7 +45,7 @@ class OrderStateListener
      *
      * @param GenericEvent $event
      *
-     * @throws \InvalidArgumentException
+     * @throws UnexpectedTypeException
      */
     public function resolveOrderStates(GenericEvent $event)
     {

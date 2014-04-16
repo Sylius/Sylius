@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Sets currently selected currency on order object.

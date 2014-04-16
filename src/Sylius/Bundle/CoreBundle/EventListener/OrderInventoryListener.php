@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -94,6 +94,10 @@ class OrderInventoryListener
      * Gets order from event.
      *
      * @param GenericEvent $event
+     *
+     * @return OrderInterface
+     *
+     * @throws UnexpectedTypeException
      */
     protected function getOrder(GenericEvent $event)
     {
@@ -113,6 +117,10 @@ class OrderInventoryListener
      * Gets order from event.
      *
      * @param GenericEvent $event
+     *
+     * @return OrderInterface
+     *
+     * @throws UnexpectedTypeException
      */
     protected function getItem(GenericEvent $event)
     {

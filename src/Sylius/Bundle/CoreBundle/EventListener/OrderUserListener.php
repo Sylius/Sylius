@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 

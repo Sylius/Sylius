@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
