@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addClassesSection($rootNode);
         $this->addEmailsSection($rootNode);
+        $this->addUserSection($rootNode);
 
         return $treeBuilder;
     }
@@ -146,6 +147,25 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `user` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addUserSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('user')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('have_username')->defaultValue(false)->end()
                     ->end()
                 ->end()
             ->end()
