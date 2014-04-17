@@ -6,7 +6,6 @@ suites:
     Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
     Money            : { namespace: Sylius, spec_path: src/Sylius/Component/Money }
-    Omnipay          : { namespace: Sylius, spec_path: src/Sylius/Component/Omnipay }
     Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
     Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
     Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
@@ -26,7 +25,6 @@ suites:
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
     MoneyBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/MoneyBundle }
-    OmnipayBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/OmnipayBundle }
     OrderBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
     PaymentBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentBundle }
     PayumBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/PayumBundle }
