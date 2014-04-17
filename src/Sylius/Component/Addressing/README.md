@@ -1,4 +1,4 @@
-Addressing Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
+Addressing Component [![Build status...](https://secure.travis-ci.org/Sylius/Addressing.png?branch=master)](http://travis-ci.org/Sylius/Addressing)
 ====================
 
 Addresses management is a common task for almost every ecommerce project.  
@@ -18,7 +18,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusAddressingBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Addressing/index.html).
 
 Contributing
 ------------

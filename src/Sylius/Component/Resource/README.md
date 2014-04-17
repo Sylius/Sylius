@@ -1,5 +1,5 @@
-Resource Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusResourceBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusResourceBundle)
-====================
+Resource Component [![Build status...](https://secure.travis-ci.org/Sylius/Resource.png?branch=master)](http://travis-ci.org/Sylius/Resource)
+==================
 
 Resource management layer for Sylius and PHP apps.
 
@@ -11,7 +11,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Resource/index.html).
 
 Contributing
 ------------

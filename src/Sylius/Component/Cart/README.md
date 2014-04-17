@@ -1,4 +1,4 @@
-Cart Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCartBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCartBundle)
+Cart Component [![Build status...](https://secure.travis-ci.org/Sylius/Cart.png?branch=master)](http://travis-ci.org/Sylius/Cart)
 ==============
 
 Cart component is based on the Sylius order model and extends its
@@ -15,7 +15,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusCartBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Cart/index.html).
 
 Contributing
 ------------

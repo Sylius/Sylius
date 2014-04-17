@@ -1,4 +1,4 @@
-Variation Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusVariationBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusVariationBundle)
+Variation Component [![Build status...](https://secure.travis-ci.org/Sylius/Variation.png?branch=master)](http://travis-ci.org/Sylius/Variation)
 ===================
 
 Modern business applications often need to provide a system for entity
@@ -16,7 +16,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusVariationBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Variation/index.html).
 
 Contributing
 ------------

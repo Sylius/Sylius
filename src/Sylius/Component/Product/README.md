@@ -1,4 +1,4 @@
-Product Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusProductBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusProductBundle)
+Product Component [![Build status...](https://secure.travis-ci.org/Sylius/Product.png?branch=master)](http://travis-ci.org/Sylius/Product)
 =================
 
 Sylius product catalog comes with support of different product attributes,
@@ -15,7 +15,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusProductBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Product/index.html).
 
 Contributing
 ------------

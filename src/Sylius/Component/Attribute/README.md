@@ -1,4 +1,4 @@
-Attribute Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAttributeBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAttributeBundle)
+Attribute Component [![Build status...](https://secure.travis-ci.org/Sylius/Attribute.png?branch=master)](http://travis-ci.org/Sylius/Attribute)
 ===================
 
 Attributes engine for PHP objects.
@@ -11,7 +11,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusAttributeBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Attribute/index.html).
 
 Contributing
 ------------

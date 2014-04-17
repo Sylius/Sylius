@@ -1,5 +1,5 @@
-Taxation Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusTaxationBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusTaxationBundle)
-====================
+Taxation Component [![Build status...](https://secure.travis-ci.org/Sylius/Taxatione.png?branch=master)](http://travis-ci.org/Sylius/Taxation)
+==================
 
 Taxation needs to handle different type of items, zones and tax rates. Sylius
 component gives you basic models and system of calculators to easily handle
@@ -13,7 +13,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusTaxationBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Taxation/index.html).
 
 Contributing
 ------------
