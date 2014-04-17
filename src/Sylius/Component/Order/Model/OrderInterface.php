@@ -149,9 +149,9 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     public function calculateTotal();
 
     /**
-     * Returns number of items in cart.
+     * Alias of {@link countItems()}.
      *
-     * @return integer
+     * @deprecated To be removed in 1.0. Use {@link countItems()} instead.
      */
     public function getTotalItems();
 
