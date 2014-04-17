@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\EventListener;
 
-use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
+use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -89,13 +89,13 @@ class BuildPriceableFormListener implements EventSubscriberInterface
     protected function addConfigurationFields(FormInterface $form, $calculatorType, array $data = array())
     {
         $calculator = $this->calculatorRegistry->get($calculatorType);
-        $formType = $calculator->getConfigurationFormType();
+        $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
 
-        if (!$formType) {
+        try {
+            $configurationField = $this->factory->createNamed('pricingConfiguration', $formType, $data, array('auto_initialize' => false));
+        } catch (\InvalidArgumentException $e) {
             return;
         }
-
-        $configurationField = $this->factory->createNamed('pricingConfiguration', $formType, $data, array('auto_initialize' => false));
 
         $form->add($configurationField);
     }

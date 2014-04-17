@@ -68,13 +68,17 @@ class PriceableTypeExtension extends AbstractTypeExtension
         $prototypes['calculators'] = array();
 
         foreach ($this->calculatorRegistry->all() as $type => $calculator) {
-            $formType = $calculator->getConfigurationFormType();
+            $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
 
             if (!$formType) {
                 continue;
             }
 
-            $prototypes['calculators'][$type] = $builder->create('configuration', $formType)->getForm();
+            try {
+                $prototypes['calculators'][$type] = $builder->create('configuration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
         }
 
         $builder->setAttribute('prototypes', $prototypes);

@@ -9,43 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Pricing;
+namespace Sylius\Bundle\PricingBundle\Form\Type;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Group based pricing configuration form type.
+ * Volume based pricing configuration form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GroupBasedConfigurationType extends AbstractType
+class VolumeBasedConfigurationType extends AbstractType
 {
-    protected $groupRepository;
-
-    /**
-     * @param RepositoryInterface $groupRepository
-     */
-    public function __construct(RepositoryInterface $groupRepository)
-    {
-        $this->groupRepository = $groupRepository;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->groupRepository->findAll() as $group) {
-            $builder
-                ->add($group->getId(), 'sylius_money', array(
-                    'label'    => $group->getName(),
-                    'required' => false,
-                ))
-            ;
-        }
+        // Todo!
     }
 
     /**
@@ -65,7 +47,7 @@ class GroupBasedConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_price_calculator_group_based';
+        return 'sylius_price_calculator_volume_based';
     }
 }
 
