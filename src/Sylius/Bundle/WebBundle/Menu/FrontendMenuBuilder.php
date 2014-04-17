@@ -106,7 +106,7 @@ class FrontendMenuBuilder extends MenuBuilder
 
         if ($this->cartProvider->hasCart()) {
             $cart = $this->cartProvider->getCart();
-            $cartTotals = array('items' => $cart->getTotalItems(), 'total' => $cart->getTotal());
+            $cartTotals = array('items' => $cart->countItems(), 'total' => $cart->getTotal());
         } else {
             $cartTotals = array('items' => 0, 'total' => 0);
         }
