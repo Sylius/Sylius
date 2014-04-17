@@ -1,4 +1,4 @@
-Payment Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusPaymentBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusPaymentBundle)
+Payment Component [![Build status...](https://secure.travis-ci.org/Sylius/Payment.png?branch=master)](http://travis-ci.org/Sylius/Payment)
 =================
 
 Sylius Payment component **does not** provide any gateways. It is only a raw
@@ -13,7 +13,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusPaymentBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Payment/index.html).
 
 Contributing
 ------------

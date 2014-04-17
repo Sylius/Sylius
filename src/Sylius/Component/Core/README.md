@@ -1,4 +1,4 @@
-Core Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCoreBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCoreBundle)
+Core Component [![Build status...](https://secure.travis-ci.org/Sylius/Core.png?branch=master)](http://travis-ci.org/Sylius/Core)
 ==============
 
 Sylius core - it integrates all other components into e-commerce
@@ -12,7 +12,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusCoreBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Core/index.html).
 
 Contributing
 ------------

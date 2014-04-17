@@ -1,14 +1,7 @@
-Addressing Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusAddressingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusAddressingBundle)
-====================
+Money Component [![Build status...](https://secure.travis-ci.org/Sylius/Money.png?branch=master)](http://travis-ci.org/Sylius/Money)
+===============
 
-Addresses management is a common task for almost every ecommerce project.  
-This component provides basic models and services for handling addresses in
-your PHP application.
-
-Countries can contain multiple provinces (states).
-
-This component supports very flexible zones system, which allows you to group countries and provinces into geographical areas.
-Every address can be matched against all defined zones, which is useful for tax or shipping systems.
+Money converting engine for PHP objects.
 
 Sylius
 ------
@@ -18,7 +11,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusAddressingBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Money/index.html).
 
 Contributing
 ------------
@@ -51,4 +44,4 @@ Authors
 -------
 
 The component was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/Addressing/contributors).
+See the list of [contributors](https://github.com/Sylius/Money/contributors).

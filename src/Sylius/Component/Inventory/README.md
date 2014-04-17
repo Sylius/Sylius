@@ -1,4 +1,4 @@
-Inventory Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusInventoryBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusInventoryBundle)
+Inventory Component [![Build status...](https://secure.travis-ci.org/Sylius/Inventory.png?branch=master)](http://travis-ci.org/Sylius/Inventory)
 ===================
 
 Inventory management for PHP applications.
@@ -11,7 +11,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusInventoryBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Inventory/index.html).
 
 Contributing
 ------------

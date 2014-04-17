@@ -1,4 +1,4 @@
-Shipping Component [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShippingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusShippingBundle)
+Shipping Component [![Build status...](https://secure.travis-ci.org/Sylius/Shipping.png?branch=master)](http://travis-ci.org/Sylius/Shipping)
 ==================
 
 Sylius e-commerce Shipping component is a complete solution to manage
@@ -20,7 +20,7 @@ Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusShippingBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Shipping/index.html).
 
 Contributing
 ------------
