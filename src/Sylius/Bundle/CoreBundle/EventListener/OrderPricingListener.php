@@ -56,7 +56,7 @@ class OrderPricingListener
 
         if (null !== $user = $order->getUser()) {
             $context['user']   = $user;
-            $context['groups'] = $user->getGroups();
+            $context['groups'] = $user->getGroups()->toArray();
         }
 
         foreach ($order->getItems() as $item) {

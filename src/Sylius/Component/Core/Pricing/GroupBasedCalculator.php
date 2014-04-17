@@ -32,10 +32,9 @@ class GroupBasedCalculator implements CalculatorInterface
             return $subject->getPrice();
         }
 
-        $groups = $context['groups'];
         $price = null;
 
-        foreach ($groups as $group) {
+        foreach ($context['groups'] as $group) {
             if (!$group instanceof GroupInterface) {
                 throw new UnexpectedTypeException($group, 'Sylius\Component\Core\Model\GroupInterface');
             }

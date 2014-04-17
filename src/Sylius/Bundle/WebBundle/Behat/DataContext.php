@@ -155,6 +155,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
+                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
                 false
             );
         }
@@ -162,7 +163,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $this->getEntityManager()->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $flush = true)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true)
     {
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
@@ -187,6 +188,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
             }
 
             $this->getEntityManager()->persist($user);
+
+            foreach ($groups as $groupName) {
+                if ($group = $this->findOneByName('group', $groupName)) {
+                    $user->addGroup($group);
+                }
+            }
+
             if ($flush) {
                 $this->getEntityManager()->flush();
             }
@@ -306,7 +314,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, false);
+            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, array(), false);
             $user->addAddress($address);
             $manager->persist($address);
             $manager->persist($user);
@@ -516,7 +524,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $group = $this->findOneByName('group', trim($data['group']));
-            $configuration[$group->getId()] = (int) $data['price'] * 100;
+            $configuration[$group->getId()] = (float) $data['price'] * 100;
         }
 
         $masterVariant->setPricingConfiguration($configuration);

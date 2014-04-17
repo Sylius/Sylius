@@ -1,7 +1,7 @@
 @pricing
 Feature: Group based pricing
     In order to have different contracts
-    As a Store Owner
+    As a store owner
     I want to configure prices per customer group
 
     Background:
@@ -58,5 +58,16 @@ Feature: Group based pricing
         Given I log in with "martha@example.com" and "bar"
          When I add product "PHP Top" to cart, with quantity "3"
          Then I should be on the cart summary page
-          And "Tax total: €23.69" should appear on the page
-          And "Grand total: €158.66" should appear on the page
+          And "Tax total: €20.70" should appear on the page
+          And "Grand total: €158.67" should appear on the page
+
+    Scenario: Prices are calculated accordingly after security checkout step
+        Given I add product "PHP Top" to cart, with quantity "4"
+          And I go to the checkout start page
+          And I fill in the following:
+            | Email    | beth@example.com |
+            | Password | foo              |
+          And I press "Login"
+         When I go to the cart summary page
+         Then "Tax total: €23.69" should appear on the page
+          And "Grand total: €181.65" should appear on the page

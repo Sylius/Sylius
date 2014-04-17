@@ -26,6 +26,12 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusPricingExtension extends Extension
 {
+    protected $configFiles = array(
+        'services',
+        'templating',
+        'twig',
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -48,6 +54,8 @@ class SyliusPricingExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+        $loader->load('templating.xml');
+        $loader->load('twig.xml');
     }
 
     /**
