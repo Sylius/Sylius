@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -134,6 +133,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * Get the payment associated with the order.
      *
      * @return PaymentInterface
+     * @deprecated
      */
     public function getPayment();
 
@@ -141,6 +141,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * Set payment.
      *
      * @param PaymentInterface $payment
+     * @deprecated
      */
     public function setPayment(PaymentInterface $payment);
 

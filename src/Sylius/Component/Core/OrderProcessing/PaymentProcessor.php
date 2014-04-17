@@ -44,11 +44,11 @@ class PaymentProcessor implements PaymentProcessorInterface
     public function createPayment(OrderInterface $order)
     {
         $payment = $this->paymentRepository->createNew();
-
         $payment->setOrder($order);
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
-        $order->setPayment($payment);
+
+        $order->addPayment($payment);
 
         return $payment;
     }

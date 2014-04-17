@@ -93,11 +93,12 @@ class OrderPaymentListener
     public function updateOrderPayment(GenericEvent $event)
     {
         $order = $this->getOrder($event);
-        $payment = $order->getPayment();
 
-        if (null === $payment) {
-            throw new \InvalidArgumentException('Order\'s payment cannot be null.');
+        if ($order->getPayments()->isEmpty()) {
+            throw new \InvalidArgumentException('Order\'s payments cannot be empty.');
         }
+
+        $payment = $order->getPayments()->last();
 
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
@@ -113,7 +114,6 @@ class OrderPaymentListener
     public function voidOrderPayment(GenericEvent $event)
     {
         $payment = $this->getOrder($event)->getPayment();
-
         $this->factory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_VOID);
     }
 
@@ -128,7 +128,7 @@ class OrderPaymentListener
             );
         }
 
-        $order = $this->orderRepository->findOneBy(array('payment' => $payment));
+        $order = $payment->getOrder();
 
         if (null === $order) {
             throw new \RuntimeException(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));

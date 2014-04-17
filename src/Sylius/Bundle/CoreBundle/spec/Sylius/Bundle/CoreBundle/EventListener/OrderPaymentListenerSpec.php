@@ -18,7 +18,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\SyliusOrderEvents;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -100,16 +100,14 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         GenericEvent $event,
         PaymentInterface $payment,
         OrderInterface $order,
-        EntityRepository $repository,
         EventDispatcherInterface $dispatcher
     )
     {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+        $payment->getOrder()->willReturn($order);
 
         $event->getSubject()->willReturn($payment);
         $event->getArguments()->willReturn(array('foo' => 'bar'));
-
-        $repository->findOneBy(array('payment' => $payment))->willReturn($order);
 
         $dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldBeCalled();
         $dispatcher->dispatch(SyliusOrderEvents::POST_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldBeCalled();
@@ -121,16 +119,14 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         GenericEvent $event,
         PaymentInterface $payment,
         OrderInterface $order,
-        EntityRepository $repository,
         EventDispatcherInterface $dispatcher
     )
     {
         $payment->getState()->willReturn('anything_but_completed');
+        $payment->getOrder()->willReturn($order);
 
         $event->getSubject()->willReturn($payment);
         $event->getArguments()->willReturn(array('foo' => 'bar'));
-
-        $repository->findOneBy(array('payment' => $payment))->willReturn($order);
 
         $dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldNotBeCalled();
         $dispatcher->dispatch(SyliusOrderEvents::POST_PAY, Argument::type('Symfony\Component\EventDispatcher\GenericEvent'))->shouldNotBeCalled();

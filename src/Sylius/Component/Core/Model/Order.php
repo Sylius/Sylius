@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
@@ -61,13 +60,6 @@ class Order extends Cart implements OrderInterface
      * @var Collection|ShipmentInterface[]
      */
     protected $shipments;
-
-    /**
-     * Payment.
-     *
-     * @var PaymentInterface
-     */
-    protected $payment;
 
     /**
      * Currency ISO code.
@@ -282,25 +274,6 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPayment(PaymentInterface $payment)
-    {
-        $this->payment = $payment;
-        $this->paymentState = $payment->getState();
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPaymentState()
     {
         return $this->paymentState;
@@ -341,6 +314,22 @@ class Order extends Cart implements OrderInterface
         return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayment()
+    {
+        return $this->getPayments()->last();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPayment(PaymentInterface $payment)
+    {
+        $this->addPayment($payment);
     }
 
     /**

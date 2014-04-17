@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * Order state resolver.
@@ -27,7 +28,11 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        $order->setPaymentState($order->getPayment()->getState());
+        if (false === $order->getPayments()->isEmpty()) {
+            $order->setPaymentState($order->getPayments()->last()->getState());
+        } else {
+            $order->setPaymentState(PaymentInterface::STATE_NEW);
+        }
     }
 
     /**
