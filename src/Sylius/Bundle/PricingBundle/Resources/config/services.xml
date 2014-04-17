@@ -26,8 +26,6 @@
 
         <parameter key="sylius.price_calculator.standard.class">Sylius\Component\Pricing\Calculator\StandardCalculator</parameter>
         <parameter key="sylius.price_calculator.volume_based.class">Sylius\Component\Pricing\Calculator\VolumeBasedCalculator</parameter>
-
-        <parameter key="sylius.twig.pricing.class">Sylius\Bundle\PricingBundle\Twig\SyliusPricingExtension</parameter>
     </parameters>
 
     <services>
@@ -53,12 +51,6 @@
         <service id="sylius.price_calculator.volume_based" class="%sylius.price_calculator.volume_based.class%">
             <tag name="sylius.price_calculator" type="volume_based" label="Volume based" />
         </service>
-
-        <service id="sylius.twig.pricing" class="%sylius.twig.pricing.class%">
-            <argument type="service" id="sylius.price_calculator" />
-            <tag name="twig.extension" />
-        </service>
-
     </services>
 
 </container>

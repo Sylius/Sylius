@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Pricing;
 
+use Sylius\Component\Core\Model\GroupInterface;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;

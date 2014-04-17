@@ -71,7 +71,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $context = array('groups' => array($group));
         $group->getId()->shouldBeCalled()->willReturn(17);
 
-        $this->calculate($priceable, $configuration, $context)->shouldReturn(17);
+        $this->calculate($priceable, $configuration, $context)->shouldReturn(4599);
     }
 
     function it_returns_the_lowest_price_if_more_than_1_group_provided_in_context(PriceableInterface $priceable, GroupInterface $group1, GroupInterface $group2)

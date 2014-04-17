@@ -17,12 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.twig.extension.restricted_zone.class">Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension</parameter>
+        <parameter key="sylius.twig.extension.pricing.class">Sylius\Bundle\PricingBundle\Twig\PricingExtension</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.twig.extension.restricted_zone" class="%sylius.twig.extension.restricted_zone.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.restricted_zone" />
+        <service id="sylius.twig.extension.pricing" class="%sylius.twig.extension.pricing.class%" public="false">
+            <argument type="service" id="sylius.templating.helper.pricing" />
             <tag name="twig.extension" />
         </service>
     </services>

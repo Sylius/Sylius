@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PricingBundle\Twig;
 
+use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
@@ -19,23 +20,23 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusPricingExtension extends \Twig_Extension
+class PricingExtension extends \Twig_Extension
 {
     /**
-     * Price calculator.
+     * Templating helper.
      *
-     * @var DelegatingCalculatorInterface
+     * @var PricingHelper
      */
-    protected $priceCalculator;
+    protected $helper;
 
     /**
      * Constructor.
      *
-     * @param DelegatingCalculatorInterface $priceCalculator
+     * @param PricingHelper $helper
      */
-    public function __construct(DelegatingCalculatorInterface $priceCalculator)
+    public function __construct(PricingHelper $helper)
     {
-        $this->priceCalculator = $priceCalculator;
+        $this->helper = $helper;
     }
 
     /**
@@ -58,7 +59,7 @@ class SyliusPricingExtension extends \Twig_Extension
      */
     public function calculatePrice(PriceableInterface $priceable, array $context = array())
     {
-        return $this->priceCalculator->calculate($priceable, $context);
+        return $this->helper->calculatePrice($priceable, $context);
     }
 
     /**
