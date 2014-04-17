@@ -22,7 +22,6 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
-
     function let(
         SecurityContextInterface $securityContext,
         SessionInterface $session,

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ShippingBundle\Calculator;
+namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -22,12 +22,12 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Calculator\FlexibleRateCalculator');
+        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\FlexibleRateCalculator');
     }
 
     function it_should_implement_Sylius_shipping_calculator_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface');
+        $this->shouldImplement('Sylius\Component\Shipping\Calculator\CalculatorInterface');
     }
 
     function it_is_configurable()

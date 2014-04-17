@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Shipping\Calculator\Registry;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

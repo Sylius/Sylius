@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing;
+namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
@@ -82,7 +83,6 @@ class TaxationProcessor implements TaxationProcessorInterface
         $this->taxRateResolver = $taxRateResolver;
         $this->zoneMatcher = $zoneMatcher;
         $this->settings = $taxationSettings;
-
     }
 
     /**
@@ -90,34 +90,46 @@ class TaxationProcessor implements TaxationProcessorInterface
      */
     public function applyTaxes(OrderInterface $order)
     {
-        $order->removeTaxAdjustments(); // Remove all tax adjustments, we recalculate everything from scratch.
+        // Remove all tax adjustments, we recalculate everything from scratch.
+        $order->removeTaxAdjustments();
 
-        if (0 === count($order->getItems())) {
+        if ($order->getItems()->isEmpty()) {
             return;
         }
 
         $zone = null;
 
         if (null !== $order->getShippingAddress()) {
-            $zone = $this->zoneMatcher->match($order->getShippingAddress()); // Match the tax zone.
+            // Match the tax zone.
+            $zone = $this->zoneMatcher->match($order->getShippingAddress());
         }
 
         if ($this->settings->has('default_tax_zone')) {
-            $zone = $zone ?: $this->settings->get('default_tax_zone'); // If address does not match any zone, use the default one.
+            // If address does not match any zone, use the default one.
+            $zone = $zone ?: $this->settings->get('default_tax_zone');
         }
 
         if (null === $zone) {
             return;
         }
 
-        $taxes = array();
+        $taxes = $this->processTaxes($order, $zone);
 
+        $this->addAdjustments($taxes, $order);
+
+        $order->calculateTotal();
+    }
+
+    private function processTaxes(OrderInterface $order, $zone)
+    {
+        $taxes = array();
         foreach ($order->getItems() as $item) {
             $taxable = $item->getProduct();
             $rate = $this->taxRateResolver->resolve($taxable, array('zone' => $zone));
 
             if (null === $rate) {
-                continue; // Skip this item is there is not matching tax rate.
+                // Skip this item is there is not matching tax rate.
+                continue;
             }
 
             $rateName = $rate->getName();
@@ -134,9 +146,13 @@ class TaxationProcessor implements TaxationProcessorInterface
             );
         }
 
+        return $taxes;
+    }
+
+    private function addAdjustments(array $taxes, OrderInterface $order)
+    {
         foreach ($taxes as $description => $tax) {
             $adjustment = $this->adjustmentRepository->createNew();
-
             $adjustment->setLabel(OrderInterface::TAX_ADJUSTMENT);
             $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);
@@ -144,7 +160,5 @@ class TaxationProcessor implements TaxationProcessorInterface
 
             $order->addAdjustment($adjustment);
         }
-
-        $order->calculateTotal();
     }
 }

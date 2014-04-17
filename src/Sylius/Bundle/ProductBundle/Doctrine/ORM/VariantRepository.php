@@ -35,4 +35,3 @@ class VariantRepository extends EntityRepository
         return 'variant';
     }
 }
-

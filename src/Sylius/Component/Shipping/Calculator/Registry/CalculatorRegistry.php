@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Calculator\Registry;
 
-use Sylius\Bundle\ShippingBundle\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
 /**
  * Calculator registry.

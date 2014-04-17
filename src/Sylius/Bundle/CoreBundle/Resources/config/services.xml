@@ -33,8 +33,8 @@
         <parameter key="sylius.order_processing.state_resolver.class">Sylius\Component\Core\OrderProcessing\StateResolver</parameter>
         <parameter key="sylius.order_processing.shipment_factory.class">Sylius\Component\Core\OrderProcessing\ShipmentFactory</parameter>
         <parameter key="sylius.order_processing.payment_processor.class">Sylius\Component\Core\OrderProcessing\PaymentProcessor</parameter>
-        <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Component\Core\OrderProcessing\TaxationProcessor</parameter>
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
+        <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
 
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ShippingBundle\Calculator;
+namespace Sylius\Component\Shipping\Calculator;
 
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -21,6 +21,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 interface CalculatorInterface
 {
+    /**
+     * Is this shipping calculator configurable?
+     *
+     * @return bool
+     */
+    public function isConfigurable();
+
     /**
      * Calculate the shipping charge for given subject and configuration.
      *

@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\OrderProcessing;
+namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
@@ -38,7 +39,7 @@ class TaxationProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\TaxationProcessor');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor');
     }
 
     function it_implements_Sylius_taxation_processor_interface()
@@ -46,19 +47,28 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface');
     }
 
-    function it_doesnt_apply_any_taxes_if_order_has_no_items(OrderInterface $order)
+    function it_removes_existing_tax_adjustments(OrderInterface $order, Collection $collection)
     {
-        $order->getItems()->willReturn(array());
+        $collection->isEmpty()->willReturn(true);
+
+        $order->getItems()->willReturn($collection);
         $order->removeTaxAdjustments()->shouldBeCalled();
-        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->applyTaxes($order);
     }
 
-    function it_removes_existing_tax_adjustments(OrderInterface $order)
+    function it_doesnt_apply_any_taxes_if_zone_is_missing(OrderInterface $order, Collection $collection, $taxationSettings)
     {
-        $order->getItems()->willReturn(array());
+        $collection->isEmpty()->willReturn(false);
+
+        $order->getItems()->willReturn($collection);
         $order->removeTaxAdjustments()->shouldBeCalled();
+
+        $order->getShippingAddress()->willReturn(null);
+
+        $taxationSettings->has('default_tax_zone')->willReturn(false);
+
+        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->applyTaxes($order);
     }

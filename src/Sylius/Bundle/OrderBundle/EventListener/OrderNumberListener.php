@@ -50,6 +50,7 @@ class OrderNumberListener
      *
      * @param OrderNumberGeneratorInterface $generator
      * @param NumberRepositoryInterface     $numberRepository
+     * @param ObjectManager                 $numberManager
      */
     public function __construct(OrderNumberGeneratorInterface $generator, NumberRepositoryInterface $numberRepository, ObjectManager $numberManager)
     {
@@ -66,7 +67,7 @@ class OrderNumberListener
     public function generateOrderNumber(GenericEvent $event)
     {
         $order = $event->getSubject();
-        
+
         if (null !== $order->getNumber()) {
             return;
         }

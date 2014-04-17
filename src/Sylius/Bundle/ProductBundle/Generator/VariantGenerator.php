@@ -43,7 +43,7 @@ class VariantGenerator extends BaseVariantGenerator
     /**
      * Constructor.
      *
-     * @param RepositoryInterface         $variantRepository
+     * @param RepositoryInterface      $variantRepository
      * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
      */
