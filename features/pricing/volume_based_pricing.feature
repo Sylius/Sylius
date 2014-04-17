@@ -35,11 +35,11 @@ Feature: Volume based pricing
          When I add product "Symfony Tee" to cart, with quantity "11"
          Then I should be on the cart summary page
           And "Tax total: €107.25" should appear on the page
-          And "Grand total: €882.25" should appear on the page
+          And "Grand total: €822.25" should appear on the page
 
     Scenario: Lower price is given for higher quantity
         Given I am on the store homepage
          When I add product "Symfony Tee" to cart, with quantity "25"
          Then I should be on the cart summary page
-          And "Tax total: €225" should appear on the page
-          And "Grand total: €1725" should appear on the page
+          And "Tax total: €225.00" should appear on the page
+          And "Grand total: €1,725.00" should appear on the page

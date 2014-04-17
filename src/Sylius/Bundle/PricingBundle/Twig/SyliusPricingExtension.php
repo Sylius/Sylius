@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PricingBundle\Twig;
 
-use Sylius\Bundle\PricingBundle\Calculator\DelegatingCalculatorInterface;
-use Sylius\Bundle\PricingBundle\Model\PriceableInterface;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
  * Sylius pricing Twig helper.

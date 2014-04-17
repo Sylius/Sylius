@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Pricing\Calculators as PriceCalculators;
 use Sylius\Component\Money\Model\ExchangeRateInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -35,7 +36,6 @@ use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\PricingBundle\Calculator\DefaultCalculators as DefaultPriceCalculators;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -511,7 +511,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $product = $this->findOneByName('product', $productName);
         $masterVariant = $product->getMasterVariant();
 
-        $masterVariant->setPricingCalculator('group_based');
+        $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
         $configuration = array();
 
         foreach ($table->getHash() as $data) {
@@ -534,7 +534,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $product = $this->findOneByName('product', $productName);
         $masterVariant = $product->getMasterVariant();
 
-        $masterVariant->setPricingCalculator(DefaultPriceCalculators::VOLUME_BASED);
+        $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
         $configuration = array();
 
         foreach ($table->getHash() as $data) {

@@ -70,10 +70,10 @@
         </service>
 
         <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%">
-            <argument>Sylius\Bundle\PromotionsBundle\Checker\RuleCheckerInterface</argument>
+            <argument>Sylius\Component\Promotion\Checker\RuleCheckerInterface</argument>
         </service>
         <service id="sylius.registry.promotion_action" class="%sylius.registry.promotion_action.class%">
-            <argument>Sylius\Bundle\PromotionsBundle\Action\PromotionActionInterface</argument>
+            <argument>Sylius\Component\Promotion\Action\PromotionActionInterface</argument>
         </service>
 
         <service id="sylius.form.type.promotion" class="%sylius.form.type.promotion.class%">

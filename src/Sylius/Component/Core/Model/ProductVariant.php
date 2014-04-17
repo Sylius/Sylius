@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Pricing\Calculator\DefaultCalculators;
+use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
@@ -43,7 +43,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      *
      * @var string
      */
-    protected $pricingCalculator = DefaultCalculators::STANDARD;
+    protected $pricingCalculator = Calculators::STANDARD;
 
     /**
      * The pricing configuration.
