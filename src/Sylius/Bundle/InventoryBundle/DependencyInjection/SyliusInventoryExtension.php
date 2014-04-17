@@ -24,6 +24,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
 {
     protected $configFiles = array(
         'services',
+        'templating',
         'twig',
     );
 

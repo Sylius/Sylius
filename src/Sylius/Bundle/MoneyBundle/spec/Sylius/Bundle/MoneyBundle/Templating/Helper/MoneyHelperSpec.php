@@ -18,7 +18,7 @@ use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusMoneyExtensionSpec extends ObjectBehavior
+class MoneyHelperSpec extends ObjectBehavior
 {
     function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
     {
@@ -27,12 +27,12 @@ class SyliusMoneyExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension');
+        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper');
     }
 
     function it_is_a_Twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
     function it_formats_the_integer_amounts_into_string_representation($currencyContext)

@@ -21,7 +21,6 @@
         <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
-        <parameter key="sylius.twig.resource.class">Sylius\Bundle\ResourceBundle\Twig\SyliusResourceExtension</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
 
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
@@ -35,18 +34,11 @@
         <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
             <argument type="service" id="sylius.expresssion_language" />
         </service>
+
         <service id="sylius.expresssion_language" class="%sylius.expression_language.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
-        </service>
-
-        <service id="sylius.twig.resource" class="%sylius.twig.resource.class%">
-            <argument type="service" id="service_container" />
-            <argument>SyliusResourceBundle:Twig:paginate.html.twig</argument>
-            <argument>SyliusResourceBundle:Twig:sorting.html.twig</argument>
-            <tag name="twig.extension" />
-            <tag name="kernel.event_listener" event="kernel.request" method="fetchRequest" />
         </service>
 
         <service id="sylius.event_subscriber.load_metadata" class="%sylius.event_subscriber.load_metadata.class%">

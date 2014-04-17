@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Twig;
+namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension as BaseSyliusMoneyExtension;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper as BaseMoneyHelper;
 use Sylius\Component\Core\Calculator\PriceCalculatorInterface;
 use Sylius\Component\Core\Model\PriceableInterface;
 use Sylius\Component\Money\Context\CurrencyContextInterface;
 use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 
 /**
- * Sylius money Twig helper.
+ * Sylius core money templating helper.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusMoneyExtension extends BaseSyliusMoneyExtension
+class MoneyHelper extends BaseMoneyHelper
 {
-    protected $priceCalculator;
+    private $priceCalculator;
 
     public function __construct(
         PriceCalculatorInterface $priceCalculator,
@@ -38,13 +38,11 @@ class SyliusMoneyExtension extends BaseSyliusMoneyExtension
         parent::__construct($currencyContext, $converter, $locale);
     }
 
-    public function getFunctions()
-    {
-        return array(
-            new \Twig_SimpleFunction('sylius_calculate_price', array($this, 'calculatePrice'), array('is_safe' => array('html'))),
-        );
-    }
-
+    /**
+     * @param PriceableInterface $priceable
+     *
+     * @return integer
+     */
     public function calculatePrice(PriceableInterface $priceable)
     {
         return $this->priceCalculator->calculate($priceable);

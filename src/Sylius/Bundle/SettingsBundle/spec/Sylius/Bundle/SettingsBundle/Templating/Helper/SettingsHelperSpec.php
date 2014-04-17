@@ -15,10 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 
-/**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- */
-class SyliusSettingsExtensionSpec extends ObjectBehavior
+class SettingsHelperSpec extends ObjectBehavior
 {
     function let(SettingsManagerInterface $settingsManager)
     {
@@ -27,12 +24,12 @@ class SyliusSettingsExtensionSpec extends ObjectBehavior
 
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Twig\SyliusSettingsExtension');
+        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper');
     }
 
     function it_should_be_a_Twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
     function it_should_return_settings_by_namespace($settingsManager, Settings $settings)

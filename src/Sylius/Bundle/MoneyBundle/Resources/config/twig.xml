@@ -17,12 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.twig.extension.cart.class">Sylius\Bundle\CartBundle\Twig\CartExtension</parameter>
+        <parameter key="sylius.twig.extension.money.class">Sylius\Bundle\MoneyBundle\Twig\MoneyExtension</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.twig.extension.cart" class="%sylius.twig.extension.cart.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.cart" />
+        <service id="sylius.twig.extension.money" class="%sylius.twig.extension.money.class%" public="false">
+            <argument type="service" id="sylius.templating.helper.money" />
             <tag name="twig.extension" />
         </service>
     </services>

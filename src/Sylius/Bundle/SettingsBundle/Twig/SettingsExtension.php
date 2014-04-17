@@ -11,30 +11,26 @@
 
 namespace Sylius\Bundle\SettingsBundle\Twig;
 
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 
 /**
  * Sylius settings extension for Twig.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusSettingsExtension extends \Twig_Extension
+class SettingsExtension extends \Twig_Extension
 {
     /**
-     * Settings manager.
-     *
-     * @var SettingsManagerInterface
+     * @var SettingsHelper
      */
-    private $settingsManager;
+    private $helper;
 
     /**
-     * Constructor.
-     *
-     * @param SettingsManagerInterface $settingsManager
+     * @param SettingsHelper $helper
      */
-    public function __construct(SettingsManagerInterface $settingsManager)
+    public function __construct(SettingsHelper $helper)
     {
-        $this->settingsManager = $settingsManager;
+        $this->helper = $helper;
     }
 
     /**
@@ -57,7 +53,7 @@ class SyliusSettingsExtension extends \Twig_Extension
      */
     public function getSettings($namespace)
     {
-        return $this->settingsManager->loadSettings($namespace);
+        return $this->helper->getSettings($namespace);
     }
 
     /**
@@ -66,20 +62,10 @@ class SyliusSettingsExtension extends \Twig_Extension
      * @param string $name
      *
      * @return mixed
-     *
-     * @throws \InvalidArgumentException
      */
     public function getSettingsParameter($name)
     {
-        if (false === strpos($name, '.')) {
-            throw new \InvalidArgumentException(sprintf('Parameter must be in format "namespace.name", "%s" given', $name));
-        }
-
-        list($namespace, $name) = explode('.', $name);
-
-        $settings = $this->settingsManager->loadSettings($namespace);
-
-        return $settings->get($name);
+        return $this->helper->getSettingsParameter($name);
     }
 
     /**

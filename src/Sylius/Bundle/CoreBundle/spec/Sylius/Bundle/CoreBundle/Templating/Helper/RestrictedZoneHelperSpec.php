@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Twig;
+namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-class SyliusRestrictedZoneExtensionSpec extends ObjectBehavior
+class RestrictedZoneHelperSpec extends ObjectBehavior
 {
     function let(RestrictedZoneCheckerInterface $restrictedZoneChecker)
     {
@@ -24,12 +24,12 @@ class SyliusRestrictedZoneExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Twig\SyliusRestrictedZoneExtension');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper');
     }
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
     function it_uses_restricted_zone_checker($restrictedZoneChecker, ProductInterface $product)

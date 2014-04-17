@@ -199,6 +199,8 @@ abstract class AbstractResourceExtension extends Extension
      *
      * @param array            $config
      * @param ContainerBuilder $container
+     *
+     * @return array
      */
     protected function process(array $config, ContainerBuilder $container)
     {
