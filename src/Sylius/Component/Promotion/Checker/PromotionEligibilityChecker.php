@@ -100,12 +100,11 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
         }
 
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
-            if (null !== $coupon = $subject->getPromotionCoupon() && $promotion === $coupon->getPromotion()) {
+            $coupon = $subject->getPromotionCoupon();
+            if (null !== $coupon && $promotion === $coupon->getPromotion()) {
                 $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
             }
-        }
-
-        if ($subject instanceof PromotionCouponsAwareSubjectInterface) {
+        } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
             foreach ($subject->getPromotionCoupons() as $coupon) {
                 if ($promotion === $coupon->getPromotion()) {
                     $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
@@ -166,9 +165,9 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
      *
-     * @return Boolean
+     * @return bool
      */
-    private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    protected function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         if (!$promotion->isCouponBased()) {
             return true;
@@ -177,13 +176,16 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
         $eligible = false;
 
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
-            if (null !== $coupon = $subject->getPromotionCoupon() && $promotion === $coupon->getPromotion()) {
+            $coupon = $subject->getPromotionCoupon();
+            if (null !== $coupon && $promotion === $coupon->getPromotion()) {
                 $eligible = true;
             }
         } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
             foreach ($subject->getPromotionCoupons() as $coupon) {
                 if ($promotion === $coupon->getPromotion()) {
                     $eligible = true;
+
+                    break;
                 }
             }
         } else {
