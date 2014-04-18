@@ -252,8 +252,6 @@ form.form-signin .form-control:focus {
     color: #999;
     font-size: 1em;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 #sidebar li a:visited {
     color: #999;
@@ -426,6 +424,15 @@ input[type="file"] {
 
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .main-container .col-md-10 {
+        padding-left: 15px;
+    }
+}
+@media (max-width: 1350px) {
     .btn i {
         margin-right: 0;
     }
@@ -435,12 +442,34 @@ input[type="file"] {
     .table .btn {
         margin-bottom: 3px;
     }
-    .row {
-        margin-left: 0;
+
+    #sidebar span.nav-header span {
+        display: none;
+    }
+    #sidebar span.nav-header {
+        padding: 0;
+    }
+    #sidebar li a {
+        position: relative;
+        text-align: center;
+        font-size: 1.75em;
+    }
+    #sidebar li a i {
         margin-right: 0;
     }
-    .main-container .col-md-10 {
-        padding-left: 15px;
+    #sidebar li a span {
+        display: none;
+    }
+    #sidebar li a:hover span {
+        background: inherit;
+        border-radius: 0 3px 3px 0;
+        display: block;
+        font-size: 0.75em;
+        left: 68px;
+        padding: 15px;
+        position: absolute;
+        top: 0;
+        z-index: 1000;
     }
 }
 
