@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Mailer;
 use Sylius\Component\Core\Model\UserInterface;
 
 /**
- * CustomerWelcomeMailer implementation
+ * Customer welcome mailer implementation
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */

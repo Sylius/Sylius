@@ -16,7 +16,6 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use PHPCR\Util\NodeHelper;
-use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
 class LoadBlocksData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface

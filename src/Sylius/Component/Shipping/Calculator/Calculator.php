@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ShippingBundle\Calculator;
+namespace Sylius\Component\Shipping\Calculator;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 

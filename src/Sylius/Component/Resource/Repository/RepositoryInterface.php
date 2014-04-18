@@ -12,7 +12,6 @@
 namespace Sylius\Component\Resource\Repository;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Pagerfanta\Pagerfanta;
 
 /**
  * Model repository interface.
@@ -34,7 +33,7 @@ interface RepositoryInterface extends ObjectRepository
      * @param array $criteria
      * @param array $orderBy
      *
-     * @return Pagerfanta
+     * @return mixed
      */
     public function createPaginator(array $criteria = null, array $orderBy = null);
 }

@@ -36,7 +36,8 @@
         "sylius/resource":   "0.10.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec":              "~2.0",
+        "friendsofsymfony/user-bundle": "2.0.*@dev"
     },
     "config": {
         "bin-dir": "bin"

@@ -20,11 +20,11 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php":                  ">=5.3.3",
 
-        "symfony/intl":         "~2.3",
         "mathiasverraes/money": "*@dev",
-        "sylius/resource":      "0.10.*@dev"
+        "sylius/resource":      "0.10.*@dev",
+        "symfony/intl":         "~2.3"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"

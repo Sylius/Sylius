@@ -12,7 +12,6 @@
 namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * Should be implemented by models that support variants and options.

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Addressing\Matcher;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -20,13 +19,14 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberCountry;
 use Sylius\Component\Addressing\Model\ZoneMemberProvince;
 use Sylius\Component\Addressing\Model\ZoneMemberZone;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMatcherSpec extends ObjectBehavior
 {
-    function let(EntityRepository $repository)
+    function let(RepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }

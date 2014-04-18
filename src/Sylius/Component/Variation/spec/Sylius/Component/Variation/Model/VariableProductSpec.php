@@ -11,10 +11,7 @@
 
 namespace spec\Sylius\Component\Product\Model\Variable;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Variation\Model\OptionInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

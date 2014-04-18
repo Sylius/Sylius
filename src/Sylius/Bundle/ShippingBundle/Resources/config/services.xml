@@ -32,16 +32,16 @@
         <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker</parameter>
         <parameter key="sylius.shipping_rule_checker.item_count.class">Sylius\Component\Shipping\Checker\ItemCountRuleChecker</parameter>
 
-        <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlatRateCalculator</parameter>
+        <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Component\Shipping\Calculator\FlatRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.flat_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType</parameter>
 
-        <parameter key="sylius.shipping_calculator.per_item_rate.class">Sylius\Bundle\ShippingBundle\Calculator\PerItemRateCalculator</parameter>
+        <parameter key="sylius.shipping_calculator.per_item_rate.class">Sylius\Component\Shipping\Calculator\PerItemRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.per_item_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerItemRateConfigurationType</parameter>
 
-        <parameter key="sylius.shipping_calculator.flexible_rate.class">Sylius\Bundle\ShippingBundle\Calculator\FlexibleRateCalculator</parameter>
+        <parameter key="sylius.shipping_calculator.flexible_rate.class">Sylius\Component\Shipping\Calculator\FlexibleRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.flexible_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType</parameter>
 
-        <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Bundle\ShippingBundle\Calculator\WeightRateCalculator</parameter>
+        <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Component\Shipping\Calculator\WeightRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.weight_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
 
         <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>

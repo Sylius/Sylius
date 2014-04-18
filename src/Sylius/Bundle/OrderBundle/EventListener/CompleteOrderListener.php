@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -25,16 +26,15 @@ class CompleteOrderListener
      * Set an Order as completed
      *
      * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
      */
     public function completeOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                'Event subject must implement Sylius\\Bundle\\OrderBundle\\Model\\OrderInterface, %s given.',
-                is_object($order) ? get_class($order) : gettype($order)
-            ));
+            throw new UnexpectedTypeException($order, 'Sylius\Component\Order\Model\OrderInterface');
         }
 
         $order->complete();
