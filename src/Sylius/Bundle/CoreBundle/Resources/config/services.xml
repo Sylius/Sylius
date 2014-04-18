@@ -84,7 +84,7 @@
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
-
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
         <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
@@ -328,6 +328,11 @@
             <tag name="kernel.event_listener" event="sylius.payment.pre_state_change" method="updateOrderOnPayment" />
             <tag name="kernel.event_listener" event="sylius.order.pre_release" method="voidOrderPayment" />
         </service>
+        <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="event_dispatcher" />
+        </service>              
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
