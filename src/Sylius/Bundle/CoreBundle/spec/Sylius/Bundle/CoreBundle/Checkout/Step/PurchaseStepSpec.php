@@ -107,6 +107,22 @@ class PurchaseStepSpec extends ObjectBehavior
 
         $eventDispatcher
             ->dispatch(
+                SyliusCheckoutEvents::PURCHASE_INITIALIZE,
+                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+            )
+            ->shouldBeCalled()
+        ;
+
+        $eventDispatcher
+            ->dispatch(
+                SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE,
+                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+            )
+            ->shouldBeCalled()
+        ;
+
+        $eventDispatcher
+            ->dispatch(
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
                 Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
             )
@@ -148,6 +164,22 @@ class PurchaseStepSpec extends ObjectBehavior
                 $args[0]->setModel($order);
             }
         );
+
+        $eventDispatcher
+            ->dispatch(
+                SyliusCheckoutEvents::PURCHASE_INITIALIZE,
+                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+            )
+            ->shouldBeCalled()
+        ;
+
+        $eventDispatcher
+            ->dispatch(
+                SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE,
+                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
+            )
+            ->shouldBeCalled()
+        ;
 
         $eventDispatcher
             ->dispatch(
