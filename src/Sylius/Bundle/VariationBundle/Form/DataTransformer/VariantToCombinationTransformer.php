@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\DataTransformer;
 
+use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -50,7 +51,7 @@ class VariantToCombinationTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof VariantInterface) {
-            throw new UnexpectedTypeException($value, 'Sylius\Component\variable\Model\Variable\VariantInterface');
+            throw new UnexpectedTypeException($value, 'Sylius\Component\Variable\Model\VariantInterface');
         }
 
         return $value->getOptions();
@@ -69,6 +70,16 @@ class VariantToCombinationTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, '\Traversable or \ArrayAccess');
         }
 
+        return $this->matches($value);
+    }
+
+    /**
+     * @param OptionValueInterface[] $value
+     *
+     * @return null|VariantInterface
+     */
+    private function matches($value)
+    {
         foreach ($this->variable->getVariants() as $variant) {
             $matches = true;
 

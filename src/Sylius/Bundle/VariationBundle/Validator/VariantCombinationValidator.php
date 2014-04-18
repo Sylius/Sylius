@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Validator;
 
+use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -32,20 +33,28 @@ class VariantCombinationValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'Sylius\Component\Variation\Model\VariantInterface');
         }
 
-        $variant = $value;
-        $variable = $variant->getObject();
-
-        if (!$variable->hasVariants() || $variant->isMaster() || !$variable->hasOptions()) {
+        if ($value->isMaster()) {
             return;
         }
 
-        $matches = false;
-        $combination = array();
-
-        foreach ($variant->getOptions() as $option) {
-            $combination[] = $option;
+        $variable = $value->getObject();
+        if (!$variable->hasVariants() || !$variable->hasOptions()) {
+            return;
         }
 
+        if ($this->matches($value, $variable)) {
+            $this->context->addViolation($constraint->message);
+        }
+    }
+
+    /**
+     * @param VariantInterface  $variant
+     * @param VariableInterface $variable
+     *
+     * @return bool
+     */
+    private function matches(VariantInterface $variant, VariableInterface $variable)
+    {
         foreach ($variable->getVariants() as $existingVariant) {
             if ($variant === $existingVariant) {
                 continue;
@@ -53,19 +62,17 @@ class VariantCombinationValidator extends ConstraintValidator
 
             $matches = true;
 
-            foreach ($combination as $option) {
+            foreach ($variant->getOptions() as $option) {
                 if (!$existingVariant->hasOption($option)) {
                     $matches = false;
                 }
             }
 
             if ($matches) {
-                break;
+                return true;
             }
         }
 
-        if ($matches) {
-            $this->context->addViolation($constraint->message);
-        }
+        return false;
     }
 }
