@@ -52,6 +52,7 @@
         <parameter key="sylius.listener.order_user.class">Sylius\Bundle\CoreBundle\EventListener\OrderUserListener</parameter>
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
+        <parameter key="sylius.listener.confirm_order.class">Sylius\Bundle\CoreBundle\EventListener\ConfirmOrderListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -271,6 +272,9 @@
         </service>
         <service id="sylius.listener.inventory_unit" class="%sylius.listener.inventory_unit.class%">
             <tag name="kernel.event_listener" event="sylius.inventory_unit.pre_state_change" method="updateState" />
+        </service>
+        <service id="sylius.listener.confirm_order" class="%sylius.listener.confirm_order.class%">
+            <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="confirmOrder" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
