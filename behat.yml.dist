@@ -2,6 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 default:
+    formatter:
+        name:         pretty
+        parameters:
+            verbose:  true
+            paths:    false
+            snippets: false
     context:
         class: Sylius\Bundle\WebBundle\Behat\FeatureContext
     extensions:

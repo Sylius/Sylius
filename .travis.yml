@@ -36,30 +36,31 @@ before_script:
     - app/console cache:warmup --env=test > /dev/null
     - sh -e /etc/init.d/xvfb start
     - export DISPLAY=:99
-    - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar
-    - java -jar selenium-server-standalone-2.35.0.jar > /dev/null &
+    - wget http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
+    - java -jar selenium-server-standalone-2.41.0.jar > /dev/null &
     - sleep 5
 
 script:
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@account && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@addressing && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@cart && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@checkout && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@currencies && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@dashboard && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@homepage && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@inventory && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@orders && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@payments && ~@javascript'
-    - php -d memory_limit=4096M bin/behat --no-snippets --no-paths --verbose --tags '@products && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@promotions && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@settings && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@shipping && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@taxation && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@taxonomies && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@localization && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --no-snippets --no-paths --verbose --tags '@users && ~@javascript,@oauth'
     - bin/phpspec run -f dot
+
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@account && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@addressing && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@cart && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@checkout && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@currencies && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@dashboard && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@homepage && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@inventory && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@orders && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@payments && ~@javascript'
+    - php -d memory_limit=4096M bin/behat --stop-on-failure --tags '@products && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@promotions && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@settings && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@shipping && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@taxation && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@taxonomies && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@localization && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@users && ~@javascript,@oauth'
 
 notifications:
   email: "travis-ci@sylius.org"
