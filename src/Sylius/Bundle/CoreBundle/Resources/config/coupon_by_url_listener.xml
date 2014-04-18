@@ -1,0 +1,19 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.listener.coupon_by_url.class">Sylius\Bundle\CoreBundle\EventListener\CouponByUrlListener</parameter>        
+	</parameters>
+
+	<services>
+        <service id="sylius.listener.coupon_by_url" class="%sylius.listener.coupon_by_url.class%">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="session" />
+            <argument>%sylius.promotion_coupon_by_url.queryName%</argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="applyRequestToSessionCoupon" />
+            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="applySessionCouponToCart" />
+        </service>
+	</services>
+</container>

@@ -32,6 +32,12 @@ Feature: Checkout coupon promotions
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
 
+    Scenario: Coupon is applied when user lands on page with coupon code
+              in the url
+        Given I am on the store homepage with coupon parameter "XD0001"
+          And I added product "Etch" to cart, with quantity "6"
+         Then I should see "Your promotion coupon has been added to the cart"
+         
     Scenario: Promotion with coupons is applied when the customer
               has added a valid coupon
         Given I am on the store homepage
