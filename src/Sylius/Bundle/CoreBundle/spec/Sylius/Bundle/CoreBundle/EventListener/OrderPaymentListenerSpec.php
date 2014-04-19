@@ -81,6 +81,7 @@ class OrderPaymentListenerSpec extends ObjectBehavior
 
         $payment->setAmount(1000)->shouldBeCalled();
         $payment->setCurrency('USD')->shouldBeCalled();
+        $payment->setDetails(array())->shouldBeCalled();
 
         $this->updateOrderPayment($event);
     }
