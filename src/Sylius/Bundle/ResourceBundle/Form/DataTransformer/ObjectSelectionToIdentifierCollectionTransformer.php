@@ -67,6 +67,16 @@ class ObjectSelectionToIdentifierCollectionTransformer implements DataTransforme
             throw new UnexpectedTypeException($value, '\Traversable or \ArrayAccess');
         }
 
+        return $this->createCollection($value);
+    }
+
+    /**
+     * @param object[] $value
+     *
+     * @return ArrayCollection
+     */
+    private function createCollection($value)
+    {
         $collection = new ArrayCollection();
 
         foreach ($value as $objects) {

@@ -54,6 +54,11 @@ class TaxonSelectionToIdentifierCollectionTransformer implements DataTransformer
             throw new UnexpectedTypeException($value, '\Traversable or \ArrayAccess');
         }
 
+        return $this->createCollection($value);
+    }
+
+    private function createCollection($value)
+    {
         $taxons = new ArrayCollection();
 
         foreach ($value as $taxonomy) {
