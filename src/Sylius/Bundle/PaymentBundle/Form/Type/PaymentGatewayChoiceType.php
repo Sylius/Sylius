@@ -24,14 +24,14 @@ class PaymentGatewayChoiceType extends AbstractType
     /**
      * Choices.
      *
-     * @var array
+     * @var string[]
      */
     protected $gateways;
 
     /**
      * Constructor.
      *
-     * @param array $gateways
+     * @param string[] $gateways
      */
     public function __construct(array $gateways)
     {

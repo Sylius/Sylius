@@ -26,7 +26,7 @@ class SyliusPayumExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure(
+        list($config, $loader) = $this->configure(
             $config,
             new Configuration(),
             $container,
@@ -35,5 +35,11 @@ class SyliusPayumExtension extends AbstractResourceExtension
 
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
+
+        foreach ($config['gateways'] as $gateway => $enabled) {
+            if ($enabled) {
+                $this->loadConfigurationFile(array($gateway), $loader);
+            }
+        }
     }
 }
