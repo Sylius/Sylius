@@ -161,7 +161,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CartBundle\Model\CartItem">
+    <class name="Sylius\Component\Cart\Model\CartItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>
             <option name="groups">sylius</option>

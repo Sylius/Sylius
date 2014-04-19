@@ -61,7 +61,7 @@ fos_user:
     firewall_name: main
     user_class: %sylius.model.user.class%
     group:
-        group_class: Sylius\Bundle\CoreBundle\Model\Group
+        group_class: Sylius\Component\Core\Model\Group
     profile:
         form:
             type: sylius_user_profile

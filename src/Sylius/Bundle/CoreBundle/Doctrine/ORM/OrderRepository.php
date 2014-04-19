@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
-use Sylius\Bundle\OrderBundle\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 class OrderRepository extends CartRepository
 {
