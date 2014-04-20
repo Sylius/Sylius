@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
-use Sylius\Component\Sequence\Number\GeneratorInterface;
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -23,20 +23,20 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderNumberListener
 {
     /**
-     * Order number generator.
+     * Order number listener
      *
-     * @var GeneratorInterface
+     * @var NumberListener
      */
-    protected $generator;
+    protected $listener;
 
     /**
      * Constructor.
      *
-     * @param GeneratorInterface $generator
+     * @param NumberListener $listener
      */
-    public function __construct(GeneratorInterface $generator)
+    public function __construct(NumberListener $listener)
     {
-        $this->generator = $generator;
+        $this->listener = $listener;
     }
 
     /**
@@ -52,6 +52,6 @@ class OrderNumberListener
             return;
         }
 
-        $this->generator->generate($order);
+        $this->listener->enableEntity($order);
     }
 }

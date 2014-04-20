@@ -12,7 +12,6 @@
 namespace Sylius\Component\Sequence\Number;
 
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
-use Sylius\Component\Sequence\Manager\SequenceManagerInterface;
 
 /**
  * Default order number generator.
@@ -40,14 +39,11 @@ class SequentialGenerator extends AbstractGenerator implements GeneratorInterfac
     /**
      * Constructor.
      *
-     * @param SequenceManagerInterface $manager
-     * @param integer                  $numberLength
-     * @param integer                  $startNumber
+     * @param integer $numberLength
+     * @param integer $startNumber
      */
-    public function __construct(SequenceManagerInterface $manager, $numberLength = 9, $startNumber = 1)
+    public function __construct($numberLength = 9, $startNumber = 1)
     {
-        parent::__construct($manager);
-
         $this->numberLength = $numberLength;
         $this->startNumber  = $startNumber;
     }

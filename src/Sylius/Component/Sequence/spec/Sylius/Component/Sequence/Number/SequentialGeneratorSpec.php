@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Sequence\Number;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Sequence\Manager\SequenceManagerInterface;
+use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
@@ -21,56 +21,59 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  */
 class SequentialGeneratorSpec extends ObjectBehavior
 {
-    public function let(SequenceManagerInterface $manager)
-    {
-        $this->beConstructedWith($manager);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Sequence\Number\SequentialGenerator');
     }
 
-    function it_generates_000001_number_for_first_subject($manager, SequenceSubjectInterface $subject)
+    function it_generates_000001_number_for_first_subject(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         $subject->getNumber()->willReturn(null);
         $subject->getSequenceType()->willReturn('order');
 
-        $manager->setNextIndex('order')->shouldBeCalled()->willReturn(0);
+        $sequence->getIndex()->willReturn(0);
+        $sequence->incrementIndex()->shouldBeCalled();
+
         $subject->setNumber('000000001')->shouldBeCalled();
 
-        $this->generate($subject);
+        $this->generate($subject, $sequence);
     }
 
-    function it_generates_a_correct_number_for_following_subjects($manager, SequenceSubjectInterface $subject)
+    function it_generates_a_correct_number_for_following_subjects(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         $subject->getNumber()->willReturn(null);
         $subject->getSequenceType()->willReturn('order');
 
-        $manager->setNextIndex('order')->shouldBeCalled()->willReturn(222);
+        $sequence->getIndex()->willReturn(222);
+        $sequence->incrementIndex()->shouldBeCalled();
+
         $subject->setNumber('000000223')->shouldBeCalled();
 
-        $this->generate($subject);
+        $this->generate($subject, $sequence);
     }
 
-    function it_starts_at_start_number_if_specified($manager, SequenceSubjectInterface $subject)
+    function it_starts_at_start_number_if_specified(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
-        $this->beConstructedWith($manager, 6, 123);
+        $this->beConstructedWith(6, 123);
 
         $subject->getNumber()->willReturn(null);
         $subject->getSequenceType()->willReturn('order');
 
-        $manager->setNextIndex('order')->shouldBeCalled()->willReturn(0);
+        $sequence->getIndex()->willReturn(0);
+        $sequence->incrementIndex()->shouldBeCalled();
+
         $subject->setNumber('000123')->shouldBeCalled();
 
-        $this->generate($subject);
+        $this->generate($subject, $sequence);
     }
 
-    function it_leaves_existing_numbers_alone(SequenceSubjectInterface $subject)
+    function it_leaves_existing_numbers_alone(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         $subject->getNumber()->willReturn('123');
         $subject->setNumber(Argument::any())->shouldNotBeCalled();
 
-        $this->generate($subject);
+        $sequence->incrementIndex()->shouldNotBeCalled();
+
+        $this->generate($subject, $sequence);
     }
 }

@@ -7,9 +7,6 @@
 
     <parameters>
         <parameter key="sylius.listener.complete_order.class">Sylius\Bundle\OrderBundle\EventListener\CompleteOrderListener</parameter>
-
-        <!-- Generators -->
-        <parameter key="sylius.listener.order_number.class">Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener</parameter>
     </parameters>
 
     <services>
@@ -31,14 +28,6 @@
         
         <service id="sylius.listener.complete_order" class="%sylius.listener.complete_order.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="completeOrder" />
-        </service>
-
-        <!-- Generators -->
-        <service id="sylius.order.number_generator" alias="sylius.sequential_number_generator" />
-
-        <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
-            <argument type="service" id="sylius.order.number_generator" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
         </service>
     </services>
 </container>

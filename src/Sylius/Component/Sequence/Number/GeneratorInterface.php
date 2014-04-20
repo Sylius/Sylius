@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Sequence\Number;
 
+use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
@@ -25,6 +26,7 @@ interface GeneratorInterface
      * Generate and apply next available number for given subject.
      *
      * @param SequenceSubjectInterface $subject
+     * @param SequenceInterface        $sequence
      */
-    public function generate(SequenceSubjectInterface $subject);
+    public function generate(SequenceSubjectInterface $subject, SequenceInterface $sequence);
 }

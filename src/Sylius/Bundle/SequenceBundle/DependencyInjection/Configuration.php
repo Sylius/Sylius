@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addGeneratorsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -62,10 +63,27 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\\Component\\Sequence\\Model\\Sequence')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Sylius\\Bundle\\SequenceBundle\\Doctrine\\ORM\\SequenceRepository')->end()
+                                ->scalarNode('repository')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Doctrine\\ORM\\EntityRepository')->end()
                             ->end()
                         ->end()
                     ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `generators` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addGeneratorsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('generators')
+                ->useAttributeAsKey('interface')
+                ->prototype('scalar')
                 ->end()
             ->end()
         ;

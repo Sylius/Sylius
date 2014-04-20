@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SequenceBundle;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
+use Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler\RegisterGeneratorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -47,6 +47,7 @@ class SyliusSequenceBundle extends Bundle
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_sequence', $interfaces));
+        $container->addCompilerPass(new RegisterGeneratorsPass());
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Sequence\Model',

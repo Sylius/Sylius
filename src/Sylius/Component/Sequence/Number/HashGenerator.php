@@ -12,7 +12,6 @@
 namespace Sylius\Component\Sequence\Number;
 
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
-use Sylius\Component\Sequence\Manager\SequenceManagerInterface;
 use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 
 /**
@@ -27,10 +26,8 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
      */
     protected $subjectRepository;
 
-    public function __construct(SequenceManagerInterface $manager, HashSubjectRepositoryInterface $subjectRepository)
+    public function __construct(HashSubjectRepositoryInterface $subjectRepository)
     {
-        parent::__construct($manager);
-
         $this->subjectRepository = $subjectRepository;
     }
 

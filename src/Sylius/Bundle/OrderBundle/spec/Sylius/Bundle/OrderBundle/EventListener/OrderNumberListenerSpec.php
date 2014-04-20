@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\OrderBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Sequence\Number\GeneratorInterface;
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -22,9 +22,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderNumberListenerSpec extends ObjectBehavior
 {
-    public function let(GeneratorInterface $generator)
+    public function let(NumberListener $listener)
     {
-        $this->beConstructedWith($generator);
+        $this->beConstructedWith($listener);
     }
 
     function it_is_initializable()
@@ -32,13 +32,13 @@ class OrderNumberListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener');
     }
 
-    function it_generates_order_number($generator, GenericEvent $event, OrderInterface $order)
+    function it_generates_order_number($listener, GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
 
         $order->getNumber()->willReturn(null);
 
-        $generator->generate($order)->shouldBeCalled();
+        $listener->enableEntity($order)->shouldBeCalled();
 
         $this->generateOrderNumber($event);
     }

@@ -108,7 +108,9 @@ sylius_order:
         order_item:
             model: Sylius\Component\Core\Model\OrderItem
 
-sylius_sequence: ~
+sylius_sequence:
+    generators:
+        %sylius.model.order.class%: sylius.sequential_number_generator
 
 sylius_resource:
     resources:

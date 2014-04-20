@@ -11,14 +11,12 @@
 
 namespace Sylius\Component\Sequence\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-
 /**
  * Repository interface for model which needs number uniqueness check before applying (like random numbers)
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-interface HashSubjectRepositoryInterface extends RepositoryInterface
+interface HashSubjectRepositoryInterface
 {
     /**
      * Is the given number used?

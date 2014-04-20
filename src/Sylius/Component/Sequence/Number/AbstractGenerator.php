@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Sequence\Number;
 
+use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
-use Sylius\Component\Sequence\Manager\SequenceManagerInterface;
 
 /**
  * Default order number generator.
@@ -24,32 +24,17 @@ use Sylius\Component\Sequence\Manager\SequenceManagerInterface;
 abstract class AbstractGenerator implements GeneratorInterface
 {
     /**
-     * Sequence manager.
-     *
-     * @var SequenceManagerInterface
-     */
-    protected $manager;
-
-    /**
-     * Constructor.
-     *
-     * @param SequenceManagerInterface $manager
-     */
-    public function __construct(SequenceManagerInterface $manager)
-    {
-        $this->manager = $manager;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function generate(SequenceSubjectInterface $subject)
+    public function generate(SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         if (null !== $subject->getNumber()) {
             return;
         }
 
-        $subject->setNumber($this->generateNumber($this->manager->setNextIndex($subject->getSequenceType()), $subject));
+        $subject->setNumber($this->generateNumber($sequence->getIndex(), $subject));
+
+        $sequence->incrementIndex();
     }
 
     /**
