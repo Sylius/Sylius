@@ -15,6 +15,12 @@ Before performing this procedure, please create a safe backup of your database.
 This upgrade changes significantly the way product attributes and options are stored in the database.
 We do provide a way to migrate your data, but no rollback will be possible in case of a problem.
 
+### Updating your database
+
+To update your database, launch the command `php app/console doctrine:migrations:migrate 20140409203042`. Please, do not try to use the regular Doctrine command to perform this upgrade, otherwise you could loose some data. 
+
+More information on DoctrineMigration can be found [here](http://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html).
+
 ### Addressing
 
 Model classes and ZoneMatcher services have been moved to ``Sylius\Component\Addressing`` namespace.
