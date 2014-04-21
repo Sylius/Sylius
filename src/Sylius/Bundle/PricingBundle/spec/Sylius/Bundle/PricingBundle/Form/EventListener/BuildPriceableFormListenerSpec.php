@@ -13,8 +13,8 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\PricingBundle\Calculator\CalculatorInterface;
-use Sylius\Bundle\PricingBundle\Model\PriceableInterface;;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
+use Sylius\Component\Pricing\Model\PriceableInterface;;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
@@ -57,13 +57,13 @@ class BuildPriceableFormListenerSpec extends ObjectBehavior
         $event->getData()->shouldBeCalled()->willReturn($priceable);
         $event->getForm()->shouldBeCalled()->willReturn($form);
 
-        $calculator->getConfigurationFormType()->shouldBeCalled()->willReturn('foo');
+        $calculator->getType()->shouldBeCalled()->willReturn('foo');
         $calculatorRegistry->get('bar')->shouldBeCalled()->willReturn($calculator);
 
         $priceable->getPricingCalculator()->shouldBeCalled()->willReturn('bar');
         $priceable->getPricingConfiguration()->shouldBeCalled()->willReturn(array());
 
-        $factory->createNamed('configuration', 'foo', array(), Argument::any())->shouldBeCalled()->willReturn($field);
+        $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', array(), Argument::any())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);
