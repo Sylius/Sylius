@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -28,8 +29,36 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        if (!$order->hasPayments()) {
-            $order->setPaymentState($order->getPayments()->last()->getState());
+        if ($order->hasPayments()) {
+            /** @var $payments ArrayCollection */
+            $payments = $order->getPayments();
+            $completedPaymentTotal = 0;
+
+            /** @var $payment PaymentInterface */
+            foreach ($payments as $payment) {
+                if ($payment->getState() === PaymentInterface::STATE_COMPLETED) {
+                    $completedPaymentTotal += $payment->getAmount();
+                }
+            }
+
+            // Payment is completed if we have received full amount
+            if ($completedPaymentTotal === $order->getTotal()) {
+                $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
+                return;
+            }
+
+            // Payment is processing / pending if one of the payment is.
+            foreach(array(PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_PENDING) as $state) {
+                /** @var $payment PaymentInterface */
+                if ($payments->exists(function($key, $payment) use ($state) {
+                    return $payment->getState() === $state;
+                })) {
+                    $order->setPaymentState(PaymentInterface::STATE_PROCESSING);
+                    return;
+                }
+            }
+
+            $order->setPaymentState(PaymentInterface::STATE_NEW);
         } else {
             $order->setPaymentState(PaymentInterface::STATE_NEW);
         }
