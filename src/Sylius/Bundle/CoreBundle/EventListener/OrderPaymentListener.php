@@ -37,11 +37,6 @@ class OrderPaymentListener
     protected $paymentProcessor;
 
     /**
-     * @var EntityRepository
-     */
-    protected $orderRepository;
-
-    /**
      * @var EventDispatcherInterface
      */
     protected $dispatcher;
@@ -55,18 +50,15 @@ class OrderPaymentListener
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
-     * @param EntityRepository          $orderRepository
      * @param EventDispatcherInterface  $dispatcher
      * @param FactoryInterface          $factory
      */
     public function __construct(
         PaymentProcessorInterface $paymentProcessor,
-        EntityRepository $orderRepository,
         EventDispatcherInterface $dispatcher,
         FactoryInterface $factory
     ) {
         $this->paymentProcessor = $paymentProcessor;
-        $this->orderRepository  = $orderRepository;
         $this->dispatcher       = $dispatcher;
         $this->factory          = $factory;
     }
@@ -94,7 +86,7 @@ class OrderPaymentListener
     {
         $order = $this->getOrder($event);
 
-        if ($order->getPayments()->isEmpty()) {
+        if (!$order->hasPayments()) {
             throw new \InvalidArgumentException('Order\'s payments cannot be empty.');
         }
 
@@ -113,7 +105,7 @@ class OrderPaymentListener
      */
     public function voidOrderPayment(GenericEvent $event)
     {
-        $payment = $this->getOrder($event)->getPayment();
+        $payment = $this->getOrder($event)->getPayments()->last();
         $this->factory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_VOID);
     }
 

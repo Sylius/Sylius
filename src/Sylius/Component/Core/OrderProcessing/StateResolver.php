@@ -28,7 +28,7 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        if (false === $order->getPayments()->isEmpty()) {
+        if (!$order->hasPayments()) {
             $order->setPaymentState($order->getPayments()->last()->getState());
         } else {
             $order->setPaymentState(PaymentInterface::STATE_NEW);

@@ -11,10 +11,10 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Finite\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\SyliusOrderEvents;
@@ -27,9 +27,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderPaymentListenerSpec extends ObjectBehavior
 {
-    function let(PaymentProcessorInterface $processor, EntityRepository $repository, EventDispatcherInterface $dispatcher, FactoryInterface $factory)
+    function let(PaymentProcessorInterface $processor, EventDispatcherInterface $dispatcher, FactoryInterface $factory)
     {
-        $this->beConstructedWith($processor, $repository, $dispatcher, $factory);
+        $this->beConstructedWith($processor, $dispatcher, $factory);
     }
 
     function it_is_initializable()
@@ -64,7 +64,7 @@ class OrderPaymentListenerSpec extends ObjectBehavior
     function it_throws_exception_if_order_has_no_payment(GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
-        $order->getPayment()->willReturn(null);
+        $order->hasPayments()->willReturn(false);
 
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -72,13 +72,16 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_updates_payment(GenericEvent $event, OrderInterface $order, PaymentInterface $payment)
+    function it_updates_payment(GenericEvent $event, OrderInterface $order, ArrayCollection $payments, PaymentInterface $payment)
     {
         $event->getSubject()->willReturn($order);
 
-        $order->getPayment()->willReturn($payment);
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
         $order->getTotal()->willReturn(1000);
         $order->getCurrency()->willReturn('USD');
+
+        $payments->last()->willReturn($payment);
 
         $payment->setAmount(1000)->shouldBeCalled();
         $payment->setCurrency('USD')->shouldBeCalled();

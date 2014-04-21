@@ -15,15 +15,17 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Payment\Model\MultiplePaymentSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
 /**
  * Sylius core Order model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends CartInterface, PromotionSubjectInterface
+interface OrderInterface extends CartInterface, PromotionSubjectInterface, MultiplePaymentSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
@@ -132,7 +134,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Get the payment associated with the order.
      *
-     * @return PaymentInterface
+     * @return BasePaymentInterface
      * @deprecated
      */
     public function getPayment();
@@ -140,10 +142,10 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
     /**
      * Set payment.
      *
-     * @param PaymentInterface $payment
+     * @param BasePaymentInterface $payment
      * @deprecated
      */
-    public function setPayment(PaymentInterface $payment);
+    public function setPayment(BasePaymentInterface $payment);
 
     /**
      * Get the payment state.
@@ -174,42 +176,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return Collection|InventoryUnitInterface[]
      */
     public function getInventoryUnitsByVariant(ProductVariantInterface $variant);
-
-    /**
-     * Get all payments associated with this order.
-     *
-     * @return Collection|PaymentInterface[]
-     */
-    public function getPayments();
-
-    /**
-     * Check if order has any payments
-     *
-     * @return Boolean
-     */
-    public function hasPayments();
-
-    /**
-     * Add a payment.
-     *
-     * @param PaymentInterface $payment
-     */
-    public function addPayment(PaymentInterface $payment);
-
-    /**
-     * Remove a payment.
-     *
-     * @param PaymentInterface $payment
-     */
-    public function removePayment(PaymentInterface $payment);
-
-    /**
-     * Check if order has certain payment.
-     *
-     * @param PaymentInterface $payment
-     * @return Boolean
-     */
-    public function hasPayment(PaymentInterface $payment);
 
     /**
      * Get all shipments associated with this order.

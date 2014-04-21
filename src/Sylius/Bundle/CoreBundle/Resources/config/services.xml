@@ -320,7 +320,6 @@
         </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <argument type="service" id="sylius.order_processing.payment_processor" />
-            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="finite.factory" />
             <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />

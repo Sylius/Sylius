@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
@@ -50,7 +51,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Payments for this order.
      *
-     * @var Collection|PaymentInterface[]
+     * @var Collection|BasePaymentInterface[]
      */
     protected $payments;
 
@@ -80,7 +81,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var string
      */
-    protected $paymentState = PaymentInterface::STATE_NEW;
+    protected $paymentState = BasePaymentInterface::STATE_NEW;
 
     /**
      * Order shipping state.
@@ -327,7 +328,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setPayment(PaymentInterface $payment)
+    public function setPayment(BasePaymentInterface $payment)
     {
         $this->addPayment($payment);
     }
@@ -351,7 +352,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPayment(PaymentInterface $payment)
+    public function addPayment(BasePaymentInterface $payment)
     {
         if (!$this->hasPayment($payment)) {
             $payment->setOrder($this);
@@ -362,7 +363,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePayment(PaymentInterface $payment)
+    public function removePayment(BasePaymentInterface $payment)
     {
         if ($this->hasPayment($payment)) {
             $payment->setOrder(null);
@@ -373,7 +374,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPayment(PaymentInterface $payment)
+    public function hasPayment(BasePaymentInterface $payment)
     {
         return $this->payments->contains($payment);
     }
