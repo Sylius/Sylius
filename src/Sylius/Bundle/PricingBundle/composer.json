@@ -24,6 +24,7 @@
 
         "stof/doctrine-extensions-bundle": "1.1.*",
         "sylius/pricing":                  "0.10.*@dev"
+        "sylius/registry":                 "0.10.*@dev",
         "sylius/resource-bundle":          "0.10.*@dev",
         "symfony/framework-bundle":        "~2.3"
     },

@@ -19,11 +19,11 @@ before_script:
     - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
     - ulimit -n 10000
-    - sudo apt-get update
-    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl wkhtmltopdf
-    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
-    - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
-    - sudo /etc/init.d/apache2 restart
+#    - sudo apt-get update
+#    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl wkhtmltopdf
+#    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+#    - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
+#    - sudo /etc/init.d/apache2 restart
     - composer self-update
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
@@ -34,15 +34,16 @@ before_script:
     - app/console doctrine:schema:create --env=test > /dev/null
     - app/console doctrine:phpcr:repository:init --env=test > /dev/null
     - app/console cache:warmup --env=test > /dev/null
-    - sh -e /etc/init.d/xvfb start
-    - export DISPLAY=:99
-    - wget http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
-    - java -jar selenium-server-standalone-2.41.0.jar > /dev/null &
-    - sleep 5
+#    - sh -e /etc/init.d/xvfb start
+#    - export DISPLAY=:99
+#    - wget http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
+#    - java -jar selenium-server-standalone-2.41.0.jar > /dev/null &
+#    - sleep 5
 
 script:
     - bin/phpspec run -f dot
 
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@pricing && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@account && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@addressing && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@cart && ~@javascript'
@@ -63,5 +64,5 @@ script:
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@users && ~@javascript,@oauth'
 
 notifications:
-  email: "travis-ci@sylius.org"
-  irc:   "irc.freenode.org#sylius-dev"
+    email: "travis-ci@sylius.org"
+    irc:   "irc.freenode.org#sylius-dev"

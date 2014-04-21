@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
+        "sylius/registry": "0.10.*@dev",
         "sylius/resource": "0.10.*@dev"
     },
     "require-dev": {
