@@ -56,12 +56,12 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
             )->getTargetUrl();
             $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber();
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
-            $details['PAYMENTREQUEST_0_AMT'] = number_format($order->getTotal() / 100, 2);
-            $details['PAYMENTREQUEST_0_ITEMAMT'] = number_format($order->getTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
+            $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
 
             $m = 0;
             foreach ($order->getItems() as $item) {
-                $details['L_PAYMENTREQUEST_0_AMT'.$m] = number_format($item->getTotal()/$item->getQuantity()/100, 2);
+                $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal()/$item->getQuantity()/100, 2);
                 $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
                 $m++;
@@ -69,7 +69,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 
             if ($order->getTaxTotal() !== 0) {
                 $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = number_format($order->getTaxTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getTaxTotal() / 100, 2);
                 $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
 
                 $m++;
@@ -77,7 +77,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 
             if ($order->getPromotionTotal() !== 0) {
                 $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = number_format($order->getPromotionTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getPromotionTotal() / 100, 2);
                 $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
 
                 $m++;
@@ -85,7 +85,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
 
             if ($order->getShippingTotal() !== 0) {
                 $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = number_format($order->getShippingTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getShippingTotal() / 100, 2);
                 $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
             }
 
