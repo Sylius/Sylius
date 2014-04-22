@@ -37,7 +37,6 @@
     "autoload-dev": {
         "psr-4": { "spec\\Sylius\\Component\\Pricing\\": "spec/" }
     },
-    "target-dir": "Sylius/Component/Pricing",
     "extra": {
         "branch-alias": {
             "dev-master": "0.10-dev"
