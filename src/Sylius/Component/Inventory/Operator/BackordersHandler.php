@@ -13,6 +13,7 @@ namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
@@ -45,39 +46,25 @@ class BackordersHandler implements BackordersHandlerInterface
      */
     public function processBackorders($inventoryUnits)
     {
-        if (!is_array($inventoryUnits) && !$inventoryUnits instanceof Collection) {
+        if ($inventoryUnits instanceof Collection) {
+            if ($inventoryUnits->isEmpty()) {
+                return;
+            }
+
+            $stockable = $inventoryUnits->first()->getStockable();
+        } elseif (is_array($inventoryUnits)) {
+            if (empty($inventoryUnits)) {
+                return;
+            }
+
+            $stockable = $inventoryUnits[0]->getStockable();
+        } else {
             throw new \InvalidArgumentException('Inventory units value must be array or instance of "Doctrine\Common\Collections\Collection".');
         }
 
-        if (0 === count($inventoryUnits)) {
-            return;
-        }
+        $this->validateInventoryUnits($inventoryUnits);
 
-        foreach ($inventoryUnits as $inventoryUnit) {
-            if (!$inventoryUnit instanceof InventoryUnitInterface) {
-                throw new \InvalidArgumentException('Only InventoryUnitInterface objects can be processed.');
-            }
-        }
-
-        if ($inventoryUnits instanceof Collection) {
-            $stockable = $inventoryUnits->first()->getStockable();
-        } else {
-            $stockable = $inventoryUnits[0]->getStockable();
-        }
-
-        $onHand = $stockable->getOnHand();
-
-        // Backorder units.
-        $i = 0;
-
-        foreach ($inventoryUnits as $inventoryUnit) {
-            if ($stockable !== $inventoryUnit->getStockable()) {
-                throw new \InvalidArgumentException('Do not mix the inventory units when processing backorders.');
-            }
-            if (++$i > $onHand) {
-                $inventoryUnit->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-            }
-        }
+        $this->processInventoryUnits($inventoryUnits, $stockable, $stockable->getOnHand());
     }
 
     /**
@@ -105,5 +92,41 @@ class BackordersHandler implements BackordersHandlerInterface
         }
 
         $stockable->setOnHand($onHand);
+    }
+
+    /**
+     * @param InventoryUnit[] $inventoryUnits
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function validateInventoryUnits($inventoryUnits)
+    {
+        foreach ($inventoryUnits as $inventoryUnit) {
+            if (!$inventoryUnit instanceof InventoryUnitInterface) {
+                throw new \InvalidArgumentException('Only InventoryUnitInterface objects can be processed.');
+            }
+        }
+    }
+
+    /**
+     * @param InventoryUnit[]    $inventoryUnits
+     * @param StockableInterface $stockable
+     * @param int                $onHand
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function processInventoryUnits($inventoryUnits, StockableInterface $stockable, $onHand)
+    {
+        // Backorder units.
+        $i = 0;
+
+        foreach ($inventoryUnits as $inventoryUnit) {
+            if ($stockable !== $inventoryUnit->getStockable()) {
+                throw new \InvalidArgumentException('Do not mix the inventory units when processing backorders.');
+            }
+            if (++$i > $onHand) {
+                $inventoryUnit->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
+            }
+        }
     }
 }
