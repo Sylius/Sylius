@@ -45,7 +45,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
                     'expiryYear' => $obtainCreditCardRequest->getCreditCard()->getExpiryYear(),
                     'cvv' => $obtainCreditCardRequest->getCreditCard()->getSecurityCode()
                 )),
-                'amount' => number_format($order->getTotal() / 100, 2),
+                'amount' => round($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
             );
 
