@@ -17,6 +17,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -29,7 +30,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
-     * @var RuleCheckerRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $registry;
 
@@ -39,10 +40,10 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     protected $dispatcher;
 
     /**
-     * @param RuleCheckerRegistryInterface $registry
-     * @param EventDispatcherInterface     $dispatcher
+     * @param ServiceRegistryInterface $registry
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(RuleCheckerRegistryInterface $registry, EventDispatcherInterface $dispatcher)
+    public function __construct(ServiceRegistryInterface $registry, EventDispatcherInterface $dispatcher)
     {
         $this->registry = $registry;
         $this->dispatcher = $dispatcher;
@@ -87,7 +88,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      */
     private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
-        $checker = $this->registry->getChecker($rule->getType());
+        $checker = $this->registry->get($rule->getType());
         $coupon = $subject->getPromotionCoupon();
 
         if (!$checker->isEligible($subject, $rule->getConfiguration())) {

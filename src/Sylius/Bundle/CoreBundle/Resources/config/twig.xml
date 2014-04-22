@@ -17,7 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.twig.extension.money.class">Sylius\Bundle\CoreBundle\Twig\MoneyExtension</parameter>
         <parameter key="sylius.twig.extension.restricted_zone.class">Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension</parameter>
     </parameters>
 

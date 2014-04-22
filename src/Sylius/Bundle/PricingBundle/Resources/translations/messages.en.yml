@@ -1,0 +1,6 @@
+sylius:
+    form:
+        priceable:
+            price: Price
+            calculator: Pricing
+            configuration: Configuration

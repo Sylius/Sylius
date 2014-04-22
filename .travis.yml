@@ -51,17 +51,18 @@ script:
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@dashboard && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@homepage && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@inventory && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@localization && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@orders && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@payments && ~@javascript'
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --tags '@products && ~@javascript'
+    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@pricing && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@promotions && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@settings && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@shipping && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@taxation && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@taxonomies && ~@javascript'
-    - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@localization && ~@javascript'
     - php -d memory_limit=2048M bin/behat --stop-on-failure --tags '@users && ~@javascript,@oauth'
+    - php -d memory_limit=4096M bin/behat --stop-on-failure --tags '@products && ~@javascript'
 
 notifications:
-  email: "travis-ci@sylius.org"
-  irc:   "irc.freenode.org#sylius-dev"
+    email: "travis-ci@sylius.org"
+    irc:   "irc.freenode.org#sylius-dev"

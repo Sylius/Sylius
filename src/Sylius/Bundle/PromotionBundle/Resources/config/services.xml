@@ -26,8 +26,8 @@
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
         <parameter key="sylius.generator.instructions.class">Sylius\Component\Promotion\Generator\Instruction</parameter>
 
-        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistry</parameter>
-        <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Promotion\Action\Registry\PromotionActionRegistry</parameter>
+        <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
         <parameter key="sylius.form.type.promotion.class">Sylius\Bundle\PromotionBundle\Form\Type\PromotionType</parameter>
         <parameter key="sylius.form.type.promotion_coupon.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponType</parameter>
@@ -69,8 +69,12 @@
             <argument type="service" id="sylius.registry.promotion_action" />
         </service>
 
-        <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%" />
-        <service id="sylius.registry.promotion_action" class="%sylius.registry.promotion_action.class%" />
+        <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%">
+            <argument>Sylius\Component\Promotion\Checker\RuleCheckerInterface</argument>
+        </service>
+        <service id="sylius.registry.promotion_action" class="%sylius.registry.promotion_action.class%">
+            <argument>Sylius\Component\Promotion\Action\PromotionActionInterface</argument>
+        </service>
 
         <service id="sylius.form.type.promotion" class="%sylius.form.type.promotion.class%">
             <argument>%sylius.model.promotion.class%</argument>

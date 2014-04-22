@@ -9,8 +9,10 @@ suites:
     Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
     Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
     Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
+    Pricing          : { namespace: Sylius, spec_path: src/Sylius/Component/Pricing }
     Product          : { namespace: Sylius, spec_path: src/Sylius/Component/Product }
     Promotion        : { namespace: Sylius, spec_path: src/Sylius/Component/Promotion }
+    Registry         : { namespace: Sylius, spec_path: src/Sylius/Component/Registry }
     Resource         : { namespace: Sylius, spec_path: src/Sylius/Component/Resource }
     Settings         : { namespace: Sylius, spec_path: src/Sylius/Component/Settings }
     Shipping         : { namespace: Sylius, spec_path: src/Sylius/Component/Shipping }
@@ -28,6 +30,7 @@ suites:
     OrderBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
     PaymentBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentBundle }
     PayumBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/PayumBundle }
+    PricingBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PricingBundle }
     ProductBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/PromotionBundle }
     ResourceBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/ResourceBundle }

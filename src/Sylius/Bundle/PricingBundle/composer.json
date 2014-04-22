@@ -1,0 +1,49 @@
+{
+    "name": "sylius/pricing-bundle",
+    "type": "symfony-bundle",
+    "description": "Pricing system for Symfony2 projects.",
+    "keywords": ["shop", "ecommerce", "pricing", "coupons", "discounts", "sylius"],
+    "homepage": "http://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "stof/doctrine-extensions-bundle": "1.1.*",
+        "sylius/pricing":                  "0.10.*@dev"
+        "sylius/registry":                 "0.10.*@dev",
+        "sylius/resource-bundle":          "0.10.*@dev",
+        "symfony/framework-bundle":        "~2.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "2.0.*@dev",
+        "doctrine/orm":      "~2.2",
+        "symfony/form":      "~2.3",
+        "symfony/validator": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Sylius\\Bundle\\PricingBundle\\": "" }
+    },
+    "target-dir": "Sylius/Bundle/PricingBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "name": "sylius/pricing",
+    "type": "library",
+    "description": "Pricing component for PHP e-commerce applications.",
+    "keywords": ["shop", "ecommerce", "price", "pricing"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource": "0.10.*@dev",
+        "sylius/registry": "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Pricing\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\Sylius\\Component\\Pricing\\": "spec/" }
+    },
+    "target-dir": "Sylius/Component/Pricing",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

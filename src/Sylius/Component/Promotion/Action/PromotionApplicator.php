@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Action;
 
-use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -24,7 +24,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
 {
     protected $registry;
 
-    public function __construct(PromotionActionRegistryInterface $registry)
+    public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
     }
@@ -33,7 +33,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
     {
         foreach ($promotion->getActions() as $action) {
             $this->registry
-                ->getAction($action->getType())
+                ->get($action->getType())
                 ->execute($subject, $action->getConfiguration(), $promotion)
             ;
         }
@@ -45,7 +45,7 @@ class PromotionApplicator implements PromotionApplicatorInterface
     {
         foreach ($promotion->getActions() as $action) {
             $this->registry
-                ->getAction($action->getType())
+                ->get($action->getType())
                 ->revert($subject, $action->getConfiguration(), $promotion)
             ;
         }

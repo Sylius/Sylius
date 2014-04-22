@@ -11,8 +11,6 @@
 
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
 
-        <parameter key="sylius.price_calculator.default.class">Sylius\Component\Core\Calculator\DefaultPriceCalculator</parameter>
-
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
 
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
@@ -43,6 +41,7 @@
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
+        <parameter key="sylius.listener.order_pricing.class">Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.shipment.class">Sylius\Bundle\CoreBundle\EventListener\ShipmentListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
@@ -88,6 +87,9 @@
 
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
+        <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
+        <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
+
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
@@ -107,17 +109,14 @@
             <tag name="sylius.settings_schema" namespace="taxation" />
         </service>
 
-        <!-- calculators -->
-        <service id="sylius.price_calculator.default" class="%sylius.price_calculator.default.class%" />
-
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
             <argument type="service" id="sylius.cart_provider" />
-            <argument type="service" id="sylius.price_calculator.default" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.checker.restricted_zone" />
+            <argument type="service" id="sylius.price_calculator" />
         </service>
 
         <!-- checker -->
@@ -276,6 +275,12 @@
         <service id="sylius.listener.confirm_order" class="%sylius.listener.confirm_order.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="confirmOrder" />
         </service>
+        <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
+            <argument type="service" id="sylius.price_calculator" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculatePrices" />
+        </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
@@ -289,6 +294,7 @@
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="applyTaxes" />
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
@@ -345,7 +351,7 @@
         </service>
         <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
             <argument type="service" id="security.context" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setOrderUser" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setOrderUser" priority="100" />
             <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setOrderUser" />
         </service>
         <service id="sylius.listener.purchase" class="%sylius.listener.purchase.class%">
@@ -462,6 +468,14 @@
             <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
+        </service>
+
+        <service id="sylius.price_calculator.group_based" class="%sylius.price_calculator.group_based.class%">
+            <tag name="sylius.price_calculator" type="group_based" label="Customer group based" />
+        </service>
+        <service id="sylius.form.type.price_calculator.group_based" class="%sylius.form.type.price_calculator.group_based.class%">
+            <argument type="service" id="sylius.repository.group" />
+            <tag name="form.type" alias="sylius_price_calculator_group_based" />
         </service>
 
         <!-- money -->

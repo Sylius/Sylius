@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Pricing\Calculators as PriceCalculators;
 use Sylius\Component\Money\Model\ExchangeRateInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -154,6 +155,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
                 'ROLE_USER',
                 isset($data['enabled']) ? $data['enabled'] : true,
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
+                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
                 false
             );
         }
@@ -161,7 +163,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $this->getEntityManager()->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $flush = true)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true)
     {
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
@@ -186,6 +188,13 @@ class DataContext extends BehatContext implements KernelAwareInterface
             }
 
             $this->getEntityManager()->persist($user);
+
+            foreach ($groups as $groupName) {
+                if ($group = $this->findOneByName('group', $groupName)) {
+                    $user->addGroup($group);
+                }
+            }
+
             if ($flush) {
                 $this->getEntityManager()->flush();
             }
@@ -305,7 +314,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, false);
+            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, array(), false);
             $user->addAddress($address);
             $manager->persist($address);
             $manager->persist($user);
@@ -496,6 +505,62 @@ class DataContext extends BehatContext implements KernelAwareInterface
         foreach ($product->getVariants() as $variant) {
             $variant->setPrice($product->getMasterVariant()->getPrice());
         }
+
+        $manager = $this->getEntityManager();
+        $manager->persist($product);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^product "([^""]*)" has the following group based pricing:$/
+     */
+    public function productHasTheFollowingGroupBasedPricing($productName, TableNode $table)
+    {
+        $product = $this->findOneByName('product', $productName);
+        $masterVariant = $product->getMasterVariant();
+
+        $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
+        $configuration = array();
+
+        foreach ($table->getHash() as $data) {
+            $group = $this->findOneByName('group', trim($data['group']));
+            $configuration[$group->getId()] = (float) $data['price'] * 100;
+        }
+
+        $masterVariant->setPricingConfiguration($configuration);
+
+        $manager = $this->getEntityManager();
+        $manager->persist($product);
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^product "([^""]*)" has the following volume based pricing:$/
+     */
+    public function productHasTheFollowingVolumeBasedPricing($productName, TableNode $table)
+    {
+        $product = $this->findOneByName('product', $productName);
+        $masterVariant = $product->getMasterVariant();
+
+        $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
+        $configuration = array();
+
+        foreach ($table->getHash() as $data) {
+          if (false !== strpos($data['range'], '+')) {
+                $min = null;
+                $max = (int) trim(str_replace('+', '', $data['range']));
+            } else {
+                list($min, $max) = array_map(function ($value) { return (int) trim($value); }, explode('-', $data['range']));
+            }
+
+            $configuration[] = array(
+                'min'   => $min,
+                'max'   => $max,
+                'price' => (int) $data['price'] * 100
+            );
+        }
+
+        $masterVariant->setPricingConfiguration($configuration);
 
         $manager = $this->getEntityManager();
         $manager->persist($product);

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormListener;
-use Sylius\Component\Promotion\Action\Registry\PromotionActionRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -28,7 +28,7 @@ class ActionType extends AbstractType
     protected $validationGroups;
     protected $actionRegistry;
 
-    public function __construct($dataClass, array $validationGroups, PromotionActionRegistryInterface $actionRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $actionRegistry)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
