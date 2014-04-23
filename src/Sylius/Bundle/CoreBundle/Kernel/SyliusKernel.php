@@ -21,7 +21,12 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 abstract class SyliusKernel extends Kernel
 {
-    const VERSION = '0.10.0-dev';
+    const VERSION         = '0.10.0-dev';
+    const VERSION_ID      = '00100';
+    const MAJOR_VERSION   = '0';
+    const MINOR_VERSION   = '10';
+    const RELEASE_VERSION = '0';
+    const EXTRA_VERSION   = 'DEV';
 
     /**
      * {@inheritdoc}

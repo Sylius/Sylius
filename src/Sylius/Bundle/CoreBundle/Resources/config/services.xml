@@ -93,6 +93,8 @@
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
+
+        <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
     </parameters>
 
     <services>
@@ -498,6 +500,10 @@
                 <argument key="facebook">facebookId</argument>
                 <argument key="google">googleId</argument>
             </argument>
+        </service>
+
+        <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">
+            <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius" id="sylius" priority="255" />
         </service>
     </services>
 
