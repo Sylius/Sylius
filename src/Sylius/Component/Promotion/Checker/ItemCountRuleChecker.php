@@ -13,7 +13,6 @@ namespace Sylius\Component\Promotion\Checker;
 
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Checks if subject item count exceeds (or at least equal) to the configured count.
@@ -28,7 +27,7 @@ class ItemCountRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof PromotionCountableSubjectInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface');
+            return false;
         }
 
         if (isset($configuration['equal']) && $configuration['equal']) {

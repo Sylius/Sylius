@@ -77,6 +77,10 @@ class OrderPromotionListener
 
         $this->promotionProcessor->process($order);
 
+        foreach ($order->getItems() as $item) {
+            $this->promotionProcessor->process($item);
+        }
+
         $order->calculateTotal();
     }
 

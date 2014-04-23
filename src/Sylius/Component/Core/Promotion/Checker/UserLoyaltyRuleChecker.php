@@ -29,7 +29,7 @@ class UserLoyaltyRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            return false;
         }
 
         if (null === $user = $subject->getUser()) {

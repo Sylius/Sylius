@@ -443,7 +443,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectItemTotal()
+    public function getPromotionSubjectTotal()
     {
         return $this->getItemsTotal();
     }
@@ -451,7 +451,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectItemCount()
+    public function getPromotionSubjectCount()
     {
         return $this->items->count();
     }

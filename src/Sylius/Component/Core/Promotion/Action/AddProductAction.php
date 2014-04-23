@@ -11,11 +11,13 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Free product action.
@@ -55,6 +57,10 @@ class AddProductAction implements PromotionActionInterface
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
+        }
+
         $promotionItem = $this->createItem($configuration);
 
         foreach ($subject->getItems() as $item) {
@@ -71,6 +77,10 @@ class AddProductAction implements PromotionActionInterface
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
+        }
+
         $promotionItem = $this->createItem($configuration);
 
         foreach ($subject->getItems() as $item) {

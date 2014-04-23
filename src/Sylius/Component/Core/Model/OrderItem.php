@@ -13,6 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Cart\Model\CartItem;
+use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
 /**
@@ -36,11 +38,19 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     protected $inventoryUnits;
 
+    /**
+     * Promotions applied
+     *
+     * @var ArrayCollection
+     */
+    protected $promotions;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->inventoryUnits = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     /**
@@ -118,5 +128,75 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function hasInventoryUnit(InventoryUnitInterface $unit)
     {
         return $this->inventoryUnits->contains($unit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionSubjectTotal()
+    {
+        return $this->getTotal();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotion(PromotionInterface $promotion)
+    {
+        return $this->promotions->contains($promotion);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPromotion(PromotionInterface $promotion)
+    {
+        if (!$this->hasPromotion($promotion)) {
+            $this->promotions->add($promotion);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePromotion(PromotionInterface $promotion)
+    {
+        if ($this->hasPromotion($promotion)) {
+            $this->promotions->removeElement($promotion);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionAdjustments()
+    {
+        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
+            return Order::PROMOTION_ADJUSTMENT === $adjustment->getLabel();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePromotionAdjustments()
+    {
+        foreach ($this->getPromotionAdjustments() as $adjustment) {
+            $this->removeAdjustment($adjustment);
+        }
+
+        return $this;
     }
 }

@@ -16,6 +16,7 @@ use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Shipping discount action.
@@ -47,10 +48,7 @@ class ShippingDiscountAction implements PromotionActionInterface
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                '%s does not implement OrderInterface.',
-                get_class($subject)
-            ));
+            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
         $adjustment = $this->repository->createNew();
@@ -67,6 +65,10 @@ class ShippingDiscountAction implements PromotionActionInterface
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+        }
+
         $subject->removePromotionAdjustments();
     }
 

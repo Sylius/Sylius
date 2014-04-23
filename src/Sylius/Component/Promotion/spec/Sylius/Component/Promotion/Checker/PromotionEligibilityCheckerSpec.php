@@ -90,6 +90,35 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
+    function it_recognizes_subject_as_not_eligible_if_any_checker_recognize_it_as_not_eligible_even_when_coupon_matches(
+        $registry,
+        RuleCheckerInterface $checker,
+        PromotionCouponAwareSubjectInterface $subject,
+        PromotionInterface $promotion,
+        CouponInterface $coupon,
+        RuleInterface $rule
+    )
+    {
+        $promotion->getStartsAt()->willReturn(null);
+        $promotion->getEndsAt()->willReturn(null);
+        $promotion->getUsageLimit()->willReturn(null);
+        $promotion->hasRules()->willReturn(true);
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
+        $promotion->getRules()->willReturn(array($rule));
+        $promotion->isCouponBased()->willReturn(true);
+
+        $rule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $rule->getConfiguration()->willReturn(array());
+
+        $registry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($checker);
+        $checker->isEligible($subject, array())->willReturn(false);
+
+        $subject->getPromotionCoupon()->willReturn($coupon);
+        $coupon->getPromotion()->willReturn($promotion);
+
+        $this->isEligible($subject, $promotion)->shouldReturn(false);
+    }
+
     function it_recognizes_subject_as_eligible_if_promotion_have_no_coupon_codes(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion

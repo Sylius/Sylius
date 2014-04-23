@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -46,9 +47,16 @@ class PercentageDiscountAction implements PromotionActionInterface
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
+            throw new UnexpectedTypeException(
+                $subject,
+                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
+            );
+        }
+
         $adjustment = $this->repository->createNew();
 
-        $adjustment->setAmount(- $subject->getPromotionSubjectItemTotal() * ($configuration['percentage']));
+        $adjustment->setAmount(- $subject->getPromotionSubjectTotal() * ($configuration['percentage']));
         $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 
@@ -60,6 +68,13 @@ class PercentageDiscountAction implements PromotionActionInterface
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
+            throw new UnexpectedTypeException(
+                $subject,
+                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
+            );
+        }
+
         $subject->removePromotionAdjustments();
     }
 

@@ -92,7 +92,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
 
         if (!$checker->isEligible($subject, $rule->getConfiguration())) {
             if ($subject instanceof PromotionCouponAwareSubjectInterface
-                && null !== $coupon = $subject->getPromotionCoupon()
+                && null !== ($coupon = $subject->getPromotionCoupon())
                 && $promotion->isCouponBased()
                 && $promotion === $coupon->getPromotion()
             ) {
