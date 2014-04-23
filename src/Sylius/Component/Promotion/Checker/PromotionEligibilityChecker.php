@@ -14,6 +14,7 @@ namespace Sylius\Component\Promotion\Checker;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -69,11 +70,11 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             }
         }
 
-        if (!$this->isCouponEligibleToPromotion($promotion, $subject->getPromotionCoupon())) {
-            return false;
+        if (!$subject instanceof PromotionCouponAwareSubjectInterface) {
+            return true;
         }
 
-        return true;
+        return $this->isCouponEligibleToPromotion($promotion, $subject->getPromotionCoupon());
     }
 
     /**
@@ -88,10 +89,13 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
         $checker = $this->registry->get($rule->getType());
-        $coupon = $subject->getPromotionCoupon();
 
         if (!$checker->isEligible($subject, $rule->getConfiguration())) {
-            if (null !== $coupon && $promotion->isCouponBased() && $promotion === $coupon->getPromotion()) {
+            if ($subject instanceof PromotionCouponAwareSubjectInterface
+                && null !== $coupon = $subject->getPromotionCoupon()
+                && $promotion->isCouponBased()
+                && $promotion === $coupon->getPromotion()
+            ) {
                 $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
             }
 
@@ -155,14 +159,16 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      */
     private function isCouponEligibleToPromotion(PromotionInterface $promotion, CouponInterface $coupon = null)
     {
-        if ($promotion->isCouponBased()) {
-            if (null === $coupon || $promotion !== $coupon->getPromotion()) {
-                return false;
-            }
+        if (!$promotion->isCouponBased()) {
+            return true;
+        }
 
-            if (null !== $coupon) {
-                $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, new GenericEvent($promotion));
-            }
+        if (null === $coupon || $promotion !== $coupon->getPromotion()) {
+            return false;
+        }
+
+        if (null !== $coupon) {
+            $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, new GenericEvent($promotion));
         }
 
         return true;
