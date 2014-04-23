@@ -144,7 +144,7 @@ abstract class SyliusKernel extends Kernel
      */
     protected function isVagrantEnvironment()
     {
-        return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
+        return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT' || is_dir('/home/vagrant')) && is_dir('/dev/shm');
     }
 
     /**
