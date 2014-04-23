@@ -27,7 +27,7 @@
         "sylius/variation": "0.10.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*@dev"
+        "phpspec/phpspec": "~2.0"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Product\\": "" }

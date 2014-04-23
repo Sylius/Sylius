@@ -31,7 +31,7 @@
         "sylius/resource-bundle": "0.10.*@dev",
         "payum/payum-bundle":     "~0.8.5",
         "payum/core":             "~0.8.7",
-        "winzou/state-machine":   "~0.1"
+        "winzou/state-machine":   "~0.1.2"
     },
     "config": {
         "bin-dir": "bin"
@@ -46,5 +46,6 @@
         "branch-alias": {
             "dev-master": "0.10-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

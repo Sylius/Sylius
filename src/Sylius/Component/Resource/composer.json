@@ -24,7 +24,7 @@
 
         "doctrine/collections": "~1.0",
         "doctrine/common":      "~2.3",
-        "winzou/state-machine": "~0.1"
+        "winzou/state-machine": "~0.1.2"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
