@@ -1,0 +1,21 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {# Sylius Logo #}
+    {% set icon %}
+        <a href="http://sylius.org/">
+            <img width="26" height="28" alt="Sylius" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAcCAYAAAB/E6/TAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAB7lJREFUSMeNlW1wlNUVx//n3vs8zz672c2SdxJDCIRQEMJbjVQZYESlpZ0C0hYoI1BRYazWthR1tDPtjJ3WIrYdqVDkZQpFhPpCRy1iRQlFo1HkxSASDe8hb5Bsspvdze4+955+ICJ02uD5dD889/yf37n/cw7hK8SaT2tQ03AESirYUlFzIiK/dX21VxIIu38/c3ALiEpenLTkJmy8k56atIRfOvk+FlVMwtJhky7noGuJrDi4E0/u/zOQOwSzB1XLC90R4EJMFwTDE3uz7U3aliPAjAG2/9FIOvE7S0gV91JekS8bi8urMb145LWFltU9DyUVJAk62dkil5bd7HVEI86O0wce704llqeNFjl5uR3C74TAbA0O5ExLG/22Z7TMUj7tkwpPjb8DACD6E/rLjfNRbAfREGuDvyjXe7mnYdK21sOHLiZiKzJGa4sEsnr0DwYGwgsJhKZE18ZSd0DO13PKtMeGFpXfiF8eefXaQsvqnqew5cPsolHKdMVXtUY793HAHmE5dooNWyHH/8pLtTvfvr548PaKrLzRBJL13c07Hti3Bm+1Hqe/nf4QzAZn4539CzEBnV4voibl9hpvbsYYIUhk3Jxsx7GseFA6j8644duoPXbEnlw47OjdQ78xTJHI3Dlqxq+rBpSYEz0XZMxLY1Agp3+hOaXjuLbjlKppb4xmW+4fBRGYmYWSyBlYePyFO376yS59Qrw4bWn65bOH5W/qd6VzHP8Mv7Jbxg8oHTM0K1+70qaz8c7+zbDk/a2wpKIx4RJOeulgTXvjkV6TKSeQJ4hU2HIfi6STv1UklCWEV+gLUV3HaZpTOpaGZOVlHY40dWs2+EnllP6Fnm6owameDjTE2qVmo3OdwIMdqfifAHjMrCwhzXX+8K0ZNns9o2XYcnXI8uFMIiIPRZr0ANuPXNuPf0y+99p9tPidTQi52TSlcBh3JqNZr7UcO5LU6SEC5BmwcqV1Yky4pHpgINxZH2mmqcXD+VRXO4Zk5dKBjnOcYY0Hr0UEAM+d/hBP79uG/MHDpWbWYct3XySdeIYBDYAZUNmW78UXPv/39ytzyuXKm+fq9Qf34JtlVXhg+JSvPhkAYN47G1EezKeZJVXcnOwKbD71weGkl64gIgPAEEjlOoEH23tjTztSKc9or8Qfxi+G34IR4YEAAPVVhGYUj8LCvau5IdomDXPcL60nU9pbx2AGIA0Md2eSqyqCeXWGua5XZ6Qiodc2vns10XsXToL64CQRDBgAcGNe+eUP76nbhiJfiO4aMpHPJiL+PzTsPZjU6eEEMgDAzMJV9ifTi75209whE6NP1O+iJ8fN4pXH3sRDI2+7lP2j7mY8Uf86DDMCyhaamcYPuE43JbvQmoxiznVjEckk8PjR3ajOLZMMaJ+07ulMx581zBqABOABUCHLt/mjyLnFBU6WfO+25Xr63mfw48rJkAtefUbWnKynUf4Cvn/MNBQ7Id7dcoxr2j8jgFSxPxvLR0zjCRvm466xM5HrhrC+ej5K3NCx2ounZnusC/uoJAM6Y/S4kaGiFkHiwI6zBxUAcz7RBRq88Wc4ffE8RpcOkxUTqnRpTPywO5OMbH5pxetY1YaXX92ClVarLAvmozIr37jK4kORJglAu9JaciHVs+EKKmYw2ULFS/3hmxj4uFdnRKGbbeR3ly6aMTJ3kN4z55HOuqbPYQnpNie7ayorp94x4e45bjQndC5uMt2GCLVnDiPCWhW6QWyZuJCrsouP7mlrmOmxHthHJQiktTFOmvXE+YMmbFkx4tbM3vZGonmvrJ7fEu/6KzMOuZb9Tj6c57g4/NCFTHyeJGEkiaRD8vWgtDdNDpe/FSQrrVJxPBs5bgdtN+0K60dtvbFNjMtUuOK91h7par6v0Akomrj1V8jxBR7uSPY8AcAIIigh47BVQDqWkY6tpKVYSUkWyROOUFvzLP/WNf/6eSM/1gQActb+9QeTOl31BRUAMKAVkSzwBRf0eOltVLR6mWw936BvHz99W1cqMZ+ANDPblxzOICFYKKmVYwvls4Vl27AsK+Moa2/Q9m3efMOCbYtqt8xqS8V2MmCu2HFfvFd7ZbBgCt37xgZad/sSXv3RG6GdjQf2x9OpKkGk+csygJkvDRuQIUFG2pZUPpscnwPbdlrDbmB73EvNS6RTRUTEV0wcw2ARtvz7adGudUhkUjLouJqNGd3Y1fZuyssE/+vC1QuRmcFsAEBYSirbgu36YAV86Ot19JWPJRHl2oElIp5KojvRo89HO1RTPFJf4A/dq4QE41Ki/xVERCSEJCEke8ak40mv52IEXioDosv/5hFAQeXbWNdxZpP4TsU4JNnDGx+85nUn4+p4R/P2sM//ewJ90e39B0GQlApESEV7cEXJlC3k6RFZ+Q8vr5gKsXj0FNxaNgpoacL0oWO9T859KnZ976FHQra7m8EKl9ZB/8EMIkImmYKXSgNEJCEQkr5l9dHWjjcvfiYvcz6wZzMgJLqSMVFVWG7aY50FH7aerI1neocSyHCfm+j/1xNsDCzX0cGCXBmU9qrzvdEVrlDqaKzNu+rewn+uRSKTRsZ4EiDtKmtqW6L7bW2YiMAAiPtsfxXQl8dLLsvLOTr75luq7/KPTN7/wQ76ONbK/wGHo433c4246gAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNC0wNC0yM1QxMTozNDozNC0wNDowMMEvTCoAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTQtMDQtMjNUMTE6MzQ6MzQtMDQ6MDCwcvSWAAAAAElFTkSuQmCC" />
+
+            <span>{{ collector.version }}</span>
+        </a>
+    {% endset %}
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            Sylius <b>{{ collector.version }}</b>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <a href="http://docs.sylius.org/en/latest/" rel="help">Sylius Documentation</a>
+        </div>
+    {% endset %}
+    {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with {'link': false} %}
+{% endblock %}
