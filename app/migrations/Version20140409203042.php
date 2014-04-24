@@ -39,6 +39,7 @@ class Version20140409203042 extends AbstractMigration
         $this->addSql("ALTER TABLE sylius_product_prototype_attribute DROP FOREIGN KEY FK_99041F2A549213EC");
         $this->addSql("ALTER TABLE sylius_product_prototype_attribute CHANGE property_id attribute_id INT NOT NULL");
         $this->addSql("ALTER TABLE sylius_product_prototype_attribute ADD CONSTRAINT FK_E0C47001B6E62EFA FOREIGN KEY (attribute_id) REFERENCES sylius_product_attribute (id)");
+        $this->addSql("ALTER TABLE sylius_product_variant ADD pricing_calculator VARCHAR(255) NOT NULL, ADD pricing_configuration LONGTEXT NOT NULL COMMENT '(DC2Type:array)'");
         $this->addSql("UPDATE sylius_product_variant SET pricing_calculator = 'standard', pricing_configuration = 'a:0:{}'");
     }
 
