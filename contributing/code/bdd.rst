@@ -125,6 +125,20 @@ You can launch Selenium by issuing the following command:
 .. code-block:: bash
 
   $ java -jar selenium-server-standalone-2.33.0.jar
+  
+Configure behat for Selenium:
+
+.. code-block:: yaml
+
+    default:
+        ...
+        extensions:
+            Behat\MinkExtension\Extension:
+                default_session: selenium2
+                browser_name: firefox
+                base_url: http://sylius-test.local/app_test.php
+                selenium2:                    
+                    capabilities: { "browser": "firefox", "version": "28"}
 
 Run your scenario using the ``behat`` console:
 
