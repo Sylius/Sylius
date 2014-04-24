@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
-interface MultiplePaymentSubjectInterface
+interface PaymentsSubjectInterface
 {
     /**
      * Get all payments associated with the payment subject.

@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Payment\Model\MultiplePaymentSubjectInterface;
+use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
@@ -25,7 +25,7 @@ use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends CartInterface, PromotionSubjectInterface, MultiplePaymentSubjectInterface
+interface OrderInterface extends CartInterface, PromotionSubjectInterface, PaymentsSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';

@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
  * Order state resolver.
@@ -48,20 +48,22 @@ class StateResolver implements StateResolverInterface
             }
 
             // Payment is processing / pending if one of the payment is.
-            foreach(array(PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_PENDING) as $state) {
-                /** @var $payment PaymentInterface */
+            foreach(array(
+                        PaymentInterface::STATE_COMPLETED,
+                        PaymentInterface::STATE_PROCESSING,
+                        PaymentInterface::STATE_PENDING
+                    ) as $state) {
                 if ($payments->exists(function($key, $payment) use ($state) {
+                    /** @var $payment PaymentInterface */
                     return $payment->getState() === $state;
                 })) {
                     $order->setPaymentState(PaymentInterface::STATE_PROCESSING);
                     return;
                 }
             }
-
-            $order->setPaymentState(PaymentInterface::STATE_NEW);
-        } else {
-            $order->setPaymentState(PaymentInterface::STATE_NEW);
         }
+
+        $order->setPaymentState(PaymentInterface::STATE_NEW);
     }
 
     /**

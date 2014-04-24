@@ -54,7 +54,7 @@ class OrderRepository extends CartRepository
      * Get the order data for the details page.
      *
      * @param integer $id
-     * @return mixed
+     * @return OrderInterface|null
      */
     public function findForDetailsPage($id)
     {
