@@ -1,7 +1,5 @@
 $host_name = "sylius.dev"
 $db_name = "sylius"
-$db_name_dev = "${db_name}-dev"
-$db_name_tst = "${db_name}-tst"
 
 group { 'puppet': ensure => present }
 Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -128,19 +126,19 @@ class { 'mysql::server':
   override_options => { 'root_password' => '', },
 }
 
-database{ "sylius":
+database{ "${db_name}":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
 }
 
-database{ "sylius_dev":
+database{ "${db_name}_dev":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
 }
 
-database{ "sylius_test":
+database{ "${db_name}_test":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
