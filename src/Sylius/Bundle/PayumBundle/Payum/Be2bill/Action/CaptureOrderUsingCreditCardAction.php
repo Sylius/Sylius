@@ -17,7 +17,7 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
 use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -46,9 +46,9 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             throw new LogicException('The action can be run only when http request is set.');
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
+        $order = $payment->getOrder();
 
         $details = $payment->getDetails();
 
@@ -73,7 +73,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         }
 
         try {
-            $request->setModel($payment);
+            $request->setModel($details);
             $this->payment->execute($request);
 
             $request->setModel($order);
@@ -91,7 +91,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

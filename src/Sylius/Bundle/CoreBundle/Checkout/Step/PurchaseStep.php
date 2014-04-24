@@ -17,7 +17,7 @@ use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
@@ -35,9 +35,12 @@ class PurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
+        /** @var $payment PaymentInterface */
+        $payment = $order->getPayments()->last();
+
         $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $order->getPayment()->getMethod()->getGateway(),
-            $order,
+            $payment->getMethod()->getGateway(),
+            $payment,
             'sylius_checkout_forward',
             array('stepName' => $this->getName())
         );
@@ -50,14 +53,15 @@ class PurchaseStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
+        $token = $this->getHttpRequestVerifier()->verify($this->container->get('request_stack')->getCurrentRequest());
         $this->getHttpRequestVerifier()->invalidate($token);
 
         $status = new StatusRequest($token);
         $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
 
-        /** @var OrderInterface $order */
-        $order = $status->getModel();
+        /** @var $payment PaymentInterface */
+        $payment = $status->getModel();
+        $order = $payment->getOrder();
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
@@ -80,7 +84,7 @@ class PurchaseStep extends CheckoutStep
         if ($previousState !== $nextState) {
             $this->dispatchEvent(
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+                new GenericEvent($payment, array('previous_state' => $previousState))
             );
         }
 
@@ -89,11 +93,11 @@ class PurchaseStep extends CheckoutStep
         if ($previousState !== $nextState) {
             $this->dispatchEvent(
                 SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+                new GenericEvent($payment, array('previous_state' => $previousState))
             );
         }
 
-        $event = new PurchaseCompleteEvent($order->getPayment());
+        $event = new PurchaseCompleteEvent($payment);
         $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
 
         if ($event->hasResponse()) {

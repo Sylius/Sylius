@@ -15,6 +15,7 @@ use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\StatusRequestInterface;
 use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 class OrderStatusAction extends PaymentAwareAction
 {
@@ -28,10 +29,10 @@ class OrderStatusAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var Order $order */
-        $order = $request->getModel();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
 
-        $paymentDetails = $order->getPayment()->getDetails();
+        $paymentDetails = $payment->getDetails();
         if (empty($paymentDetails)) {
             $request->markNew();
 
@@ -54,7 +55,7 @@ class OrderStatusAction extends PaymentAwareAction
     {
         return
             $request instanceof StatusRequestInterface &&
-            $request->getModel() instanceof Order
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

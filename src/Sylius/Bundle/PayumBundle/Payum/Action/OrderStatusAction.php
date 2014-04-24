@@ -31,8 +31,8 @@ class OrderStatusAction extends PaymentAwareAction
         /** @var OrderInterface $order */
         $order = $request->getModel();
 
-        if ($order->getPayment()->getDetails()) {
-            $request->setModel($order->getPayment()->getDetails());
+        if ($order->getPayments()->last()->getDetails()) {
+            $request->setModel($order->getPayments()->last()->getDetails());
 
             $this->payment->execute($request);
 
