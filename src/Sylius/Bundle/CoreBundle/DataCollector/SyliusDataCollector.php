@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\DataCollector;
 
-use Sylius\Bundle\CoreBundle\Kernel\SyliusKernel;
+use Sylius\Bundle\CoreBundle\Kernel\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -23,7 +23,7 @@ class SyliusDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->data['version'] = SyliusKernel::VERSION;
+        $this->data['version'] = Kernel::VERSION;
     }
 
     /**
