@@ -23,7 +23,7 @@ finite_finite:
                 from: [new, pending]
                 to:   processing
             complete:
-                from: [pending, processing]
+                from: [new, pending, processing]
                 to:   completed
             fail:
                 from: [pending, processing]

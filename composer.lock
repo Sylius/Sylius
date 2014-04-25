@@ -4873,12 +4873,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yohang/Finite.git",
-                "reference": "0596a7bc31c4cb9eee83d20d7625cdc934b1120b"
+                "reference": "865dd79b2ab3da054587feeb686b438de0229bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yohang/Finite/zipball/0596a7bc31c4cb9eee83d20d7625cdc934b1120b",
-                "reference": "0596a7bc31c4cb9eee83d20d7625cdc934b1120b",
+                "url": "https://api.github.com/repos/yohang/Finite/zipball/865dd79b2ab3da054587feeb686b438de0229bbd",
+                "reference": "865dd79b2ab3da054587feeb686b438de0229bbd",
                 "shasum": ""
             },
             "require": {
@@ -4935,7 +4935,7 @@
                 "transition",
                 "workflow"
             ],
-            "time": "2014-04-21 09:48:32"
+            "time": "2014-04-25 12:31:21"
         }
     ],
     "packages-dev": [

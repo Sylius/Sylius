@@ -65,12 +65,18 @@ class PurchaseStep extends CheckoutStep
         }
 
         $payment = $order->getPayment();
-        $previousState = $order->getPayment()->getState();
-        $payment->setState($status->getStatus());
+        $previousState = $payment->getState();
+        $nextState = $status->getStatus();
+
+        $stateMachine = $this->get('finite.factory')->get($payment, 'sylius_payment');
+
+        if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
+            $stateMachine->apply($transition);
+        }
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
 
-        if ($previousState !== $payment->getState()) {
+        if ($previousState !== $nextState) {
             $this->dispatchEvent(
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
                 new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
@@ -79,7 +85,7 @@ class PurchaseStep extends CheckoutStep
 
         $this->getDoctrine()->getManager()->flush();
 
-        if ($previousState !== $payment->getState()) {
+        if ($previousState !== $nextState) {
             $this->dispatchEvent(
                 SyliusPaymentEvents::POST_STATE_CHANGE,
                 new GenericEvent($order->getPayment(), array('previous_state' => $previousState))

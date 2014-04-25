@@ -12,17 +12,18 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Payum\Core\Action\PaymentAwareAction;
+use Finite\Factory\FactoryInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredNotifyRequest;
 use Payum\Core\Request\SyncRequest;
+use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class NotifyOrderAction extends PaymentAwareAction
+class NotifyOrderAction extends AbstractPaymentStateAwareAction
 {
     /**
      * @var EventDispatcherInterface
@@ -37,9 +38,12 @@ class NotifyOrderAction extends PaymentAwareAction
     /**
      * @param EventDispatcherInterface $eventDispatcher
      * @param ObjectManager            $objectManager
+     * @param FactoryInterface         $factory
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager)
+    public function __construct(EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager, FactoryInterface $factory)
     {
+        parent::__construct($factory);
+
         $this->eventDispatcher = $eventDispatcher;
         $this->objectManager   = $objectManager;
     }
@@ -63,7 +67,11 @@ class NotifyOrderAction extends PaymentAwareAction
 
         $status = new StatusRequest($payment);
         $this->payment->execute($status);
-        $payment->setState($status->getStatus());
+
+        $previousState = $payment->getState();
+        $nextState = $status->getStatus();
+
+        $this->updatePaymentState($payment, $previousState, $nextState);
 
         if ($previousState !== $payment->getState()) {
             $this->eventDispatcher->dispatch(
