@@ -68,4 +68,3 @@ class GroupBasedConfigurationType extends AbstractType
         return 'sylius_price_calculator_group_based';
     }
 }
-

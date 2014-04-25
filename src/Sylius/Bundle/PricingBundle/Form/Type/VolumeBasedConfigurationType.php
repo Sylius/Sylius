@@ -50,4 +50,3 @@ class VolumeBasedConfigurationType extends AbstractType
         return 'sylius_price_calculator_volume_based';
     }
 }
-

@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Core\Pricing;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\GroupInterface;
-use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;;
 
 /**

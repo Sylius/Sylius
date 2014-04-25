@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**

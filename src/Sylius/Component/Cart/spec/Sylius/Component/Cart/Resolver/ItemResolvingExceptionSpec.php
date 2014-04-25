@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Cart\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>

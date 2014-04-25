@@ -89,7 +89,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $order->getPayment()->willReturn($paymentModel);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function($args) use ($paymentModel) {
+        $paymentModel->setState(Argument::type('string'))->will(function ($args) use ($paymentModel) {
             $paymentModel->getState()->willReturn($args[0]);
         });
 
@@ -132,7 +132,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $order->getPayment()->willReturn($paymentModel);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function($args) use ($paymentModel) {
+        $paymentModel->setState(Argument::type('string'))->will(function ($args) use ($paymentModel) {
             $paymentModel->getState()->willReturn($args[0]);
         });
 

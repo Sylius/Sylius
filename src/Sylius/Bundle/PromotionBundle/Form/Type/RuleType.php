@@ -13,7 +13,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormListener;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Promotion\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

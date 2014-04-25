@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Product\Model\AttributeTypes;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>

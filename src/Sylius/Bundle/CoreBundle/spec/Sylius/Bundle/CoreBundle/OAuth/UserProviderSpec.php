@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\OAuth;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class UserProviderSpec extends ObjectBehavior
 {

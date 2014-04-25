@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Twig;
+namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Money\Context\CurrencyContextInterface;

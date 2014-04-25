@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PricingBundle\Twig;
 
 use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
-use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**

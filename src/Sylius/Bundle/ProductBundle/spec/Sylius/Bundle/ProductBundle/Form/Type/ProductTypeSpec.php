@@ -80,7 +80,6 @@ class ProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
-
         $this->buildForm($builder, array());
     }
 
