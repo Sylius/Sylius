@@ -94,7 +94,7 @@ class OrderShippingListener
     {
         $this->shippingProcessor->updateShipmentStates(
             $this->getOrder($event)->getShipments(),
-            ShipmentInterface::STATE_ONHOLD,
+            'hold',
             ShipmentInterface::STATE_CHECKOUT
         );
     }
@@ -108,7 +108,7 @@ class OrderShippingListener
     {
         $this->shippingProcessor->updateShipmentStates(
             $this->getOrder($event)->getShipments(),
-            ShipmentInterface::STATE_READY,
+            'prepare',
             ShipmentInterface::STATE_ONHOLD
         );
     }

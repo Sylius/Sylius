@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Finite\Factory\FactoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
@@ -45,17 +46,28 @@ class OrderPaymentListener
     protected $dispatcher;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $factory;
+
+    /**
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
      * @param EntityRepository          $orderRepository
      * @param EventDispatcherInterface  $dispatcher
+     * @param FactoryInterface          $factory
      */
-    public function __construct(PaymentProcessorInterface $paymentProcessor, EntityRepository $orderRepository, EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        PaymentProcessorInterface $paymentProcessor,
+        EntityRepository $orderRepository,
+        EventDispatcherInterface $dispatcher,
+        FactoryInterface $factory
+    ) {
         $this->paymentProcessor = $paymentProcessor;
         $this->orderRepository  = $orderRepository;
         $this->dispatcher       = $dispatcher;
+        $this->factory          = $factory;
     }
 
     /**
@@ -99,16 +111,9 @@ class OrderPaymentListener
      */
     public function voidOrderPayment(GenericEvent $event)
     {
-        $order = $event->getSubject();
+        $payment = $this->getOrder($event)->getPayment();
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
-        }
-
-        $order->getPayment()->setState(PaymentInterface::STATE_VOID);
+        $this->factory->get($payment, 'sylius_payment')->apply('void');
     }
 
     public function updateOrderOnPayment(GenericEvent $event)
@@ -146,10 +151,7 @@ class OrderPaymentListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
+            throw new UnexpectedTypeException($order, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
         return $order;

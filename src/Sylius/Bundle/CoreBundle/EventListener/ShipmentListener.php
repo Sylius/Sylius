@@ -71,7 +71,7 @@ class ShipmentListener
 
         $this->shippingProcessor->updateShipmentStates(
             array($shipment),
-            $shipment::STATE_SHIPPED
+            'ship'
         );
 
         $this->stateResolver->resolveShippingState($order);
@@ -92,7 +92,7 @@ class ShipmentListener
 
         $this->shippingProcessor->updateShipmentStates(
             $order->getShipments(),
-            ShipmentInterface::STATE_CHECKOUT,
+            'release',
             ShipmentInterface::STATE_ONHOLD
         );
     }

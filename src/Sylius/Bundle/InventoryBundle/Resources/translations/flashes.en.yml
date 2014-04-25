@@ -1,5 +1,5 @@
 sylius:
     inventory_unit:
-        backordered: Inventory unit backordered.
+        backorder: Inventory unit backordered.
         sold: Inventory unit fulfilled.
-        returned: Inventory unit returned.
+        return: Inventory unit returned.

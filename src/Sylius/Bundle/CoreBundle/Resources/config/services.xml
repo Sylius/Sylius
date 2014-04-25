@@ -244,6 +244,7 @@
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="finite.factory" />
         </service>
 
         <service id="sylius.order.releaser" class="%sylius.order.releaser.class%">
@@ -272,9 +273,11 @@
             <tag name="doctrine.event_listener" event="onFlush" />
         </service>
         <service id="sylius.listener.inventory_unit" class="%sylius.listener.inventory_unit.class%">
+            <argument type="service" id="finite.factory" />
             <tag name="kernel.event_listener" event="sylius.inventory_unit.pre_state_change" method="updateState" />
         </service>
         <service id="sylius.listener.confirm_order" class="%sylius.listener.confirm_order.class%">
+            <argument type="service" id="finite.factory" />
             <tag name="kernel.event_listener" event="sylius.order.pre_pay" method="confirmOrder" />
         </service>
         <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
@@ -319,6 +322,7 @@
             <argument type="service" id="sylius.order_processing.payment_processor" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="finite.factory" />
             <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
             <tag name="kernel.event_listener" event="sylius.payment.pre_state_change" method="updateOrderOnPayment" />
