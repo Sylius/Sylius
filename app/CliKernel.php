@@ -11,6 +11,8 @@
 
 require_once __DIR__.'/AppKernel.php';
 
+use Symfony\Component\Config\Loader\LoaderInterface;
+
 /**
  * Sylius CLI application kernel.
  *
@@ -30,5 +32,15 @@ class CliKernel extends AppKernel
         );
 
         return array_merge($bundles, parent::registerBundles());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        parent::registerContainerConfiguration($loader);
+
+        $loader->load(__DIR__.'/config/migrations.yml');
     }
 }
