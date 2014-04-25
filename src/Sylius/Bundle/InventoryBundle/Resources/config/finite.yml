@@ -1,0 +1,26 @@
+finite_finite:
+    sylius_inventory_unit:
+        class:         %sylius.model.inventory_unit.class%
+        property_path: inventoryState
+        graph:         sylius_inventory_unit
+        states:
+            checkout:
+                type: initial
+            onhold:      ~
+            sold:       ~
+            backordered: ~
+            returned:
+                type: final
+        transitions:
+            hold:
+                from: [checkout]
+                to:   onhold
+            backorder:
+                from: [checkout, onhold]
+                to:   backordered
+            sold:
+                from: [checkout, onhold]
+                to:   sold
+            return:
+                from: [shipped]
+                to:   returned

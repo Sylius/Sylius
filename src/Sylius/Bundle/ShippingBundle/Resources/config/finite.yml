@@ -1,0 +1,62 @@
+finite_finite:
+    sylius_shipment:
+        class:         %sylius.model.shipment.class%
+        property_path: state
+        graph:         sylius_shipment
+        states:
+            checkout:
+                type: initial
+            onhold:      ~
+            ready:       ~
+            backordered: ~
+            shipped:     ~
+            cancelled:   ~
+            returned:
+                type: final
+        transitions:
+            hold:
+                from: [checkout]
+                to:   onhold
+            prepare:
+                from: [checkout, onhold]
+                to:   ready
+            ship:
+                from: [ready]
+                to:   shipped
+            return:
+                from: [shipped]
+                to:   returned
+
+    sylius_shipment_item:
+        class:         %sylius.model.shipment_item.class%
+        property_path: shippingState
+        graph:         sylius_shipment_item
+        states:
+            checkout:
+                type: initial
+            onhold:      ~
+            ready:       ~
+            backordered: ~
+            shipped:     ~
+            cancelled:   ~
+            returned:
+                type: final
+        transitions:
+            hold:
+                from: [checkout]
+                to:   onhold
+            release:
+                from: [onhold]
+                to:   checkout
+            backorder:
+                from: [checkout, onhold]
+                to:   backordered
+            prepare:
+                from: [checkout, onhold]
+                to:   ready
+            ship:
+                from: [ready]
+                to:   shipped
+            return:
+                from: [shipped]
+                to:   returned
