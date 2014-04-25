@@ -10,7 +10,8 @@ finite_finite:
             ready:       ~
             backordered: ~
             shipped:     ~
-            cancelled:   ~
+            cancelled:
+                type: final
             returned:
                 type: final
         transitions:
@@ -23,6 +24,9 @@ finite_finite:
             ship:
                 from: [ready]
                 to:   shipped
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to:   cancelled
             return:
                 from: [shipped]
                 to:   returned
@@ -38,7 +42,8 @@ finite_finite:
             ready:       ~
             backordered: ~
             shipped:     ~
-            cancelled:   ~
+            cancelled:
+                type: final
             returned:
                 type: final
         transitions:
@@ -57,6 +62,9 @@ finite_finite:
             ship:
                 from: [ready]
                 to:   shipped
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to:   cancelled
             return:
                 from: [shipped]
                 to:   returned

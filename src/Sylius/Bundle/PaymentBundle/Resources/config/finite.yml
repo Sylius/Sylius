@@ -16,7 +16,7 @@ finite_finite:
             refunded:
                 type: final
         transitions:
-            submit:
+            create:
                 from: [new]
                 to:   pending
             process:

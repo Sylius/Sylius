@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Finite\Factory\FactoryInterface;
 use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -39,7 +40,7 @@ class ConfirmOrderListener
     {
         $order = $this->getOrder($event);
 
-        $this->finiteFactory->get($order, 'sylius_order')->apply('confirm');
+        $this->finiteFactory->get($order, 'sylius_order')->apply(OrderTransitions::SYLIUS_CONFIRM);
     }
 
     protected function getOrder(GenericEvent $event)

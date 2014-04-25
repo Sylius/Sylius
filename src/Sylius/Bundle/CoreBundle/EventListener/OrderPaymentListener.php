@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -113,7 +114,7 @@ class OrderPaymentListener
     {
         $payment = $this->getOrder($event)->getPayment();
 
-        $this->factory->get($payment, 'sylius_payment')->apply('void');
+        $this->factory->get($payment, 'sylius_payment')->apply(PaymentTransitions::SYLIUS_VOID);
     }
 
     public function updateOrderOnPayment(GenericEvent $event)
