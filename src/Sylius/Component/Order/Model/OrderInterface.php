@@ -22,14 +22,14 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface OrderInterface extends AdjustableInterface, TimestampableInterface, SoftDeletableInterface
 {
-    const STATE_CART        = 1;
-    const STATE_CART_LOCKED = 2;
-    const STATE_PENDING     = 3;
-    const STATE_CONFIRMED   = 4;
-    const STATE_SHIPPED     = 5;
-    const STATE_ABANDONED   = 6;
-    const STATE_CANCELLED   = 7;
-    const STATE_RETURNED    = 8;
+    const STATE_CART        = 'cart';
+    const STATE_CART_LOCKED = 'cart_locked';
+    const STATE_PENDING     = 'pending';
+    const STATE_CONFIRMED   = 'confirmed';
+    const STATE_SHIPPED     = 'shipped';
+    const STATE_ABANDONED   = 'abandoned';
+    const STATE_CANCELLED   = 'cancelled';
+    const STATE_RETURNED    = 'returned';
 
     /**
      * Has the order been completed by user and can be handled.
