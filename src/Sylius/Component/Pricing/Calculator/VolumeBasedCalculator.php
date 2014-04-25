@@ -37,7 +37,7 @@ class VolumeBasedCalculator implements CalculatorInterface
             }
         }
 
-        return $price;
+        return $subject->getPrice();
     }
 
     /**
