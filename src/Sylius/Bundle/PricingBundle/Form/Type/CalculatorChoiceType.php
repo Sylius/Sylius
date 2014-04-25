@@ -66,4 +66,3 @@ class CalculatorChoiceType extends AbstractType
         return 'sylius_price_calculator_choice';
     }
 }
-

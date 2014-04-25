@@ -41,4 +41,4 @@ class SyliusDataCollector extends DataCollector
     {
         return 'sylius';
     }
-} 
+}

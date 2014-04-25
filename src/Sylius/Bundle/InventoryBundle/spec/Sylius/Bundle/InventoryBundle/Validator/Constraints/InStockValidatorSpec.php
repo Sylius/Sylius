@@ -71,4 +71,4 @@ class InStockValidatorSpec extends ObjectBehavior
 
         $this->validate($inventoryUnit, $constraint);
     }
-} 
+}

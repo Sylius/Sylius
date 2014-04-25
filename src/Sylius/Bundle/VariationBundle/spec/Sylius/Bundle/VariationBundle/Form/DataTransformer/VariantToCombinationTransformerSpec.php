@@ -93,4 +93,4 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
 
         $this->reverseTransform(array($optionValue))->shouldReturn(null);
     }
-} 
+}

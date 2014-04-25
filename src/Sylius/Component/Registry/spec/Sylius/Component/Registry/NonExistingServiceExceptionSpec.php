@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Model\RuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

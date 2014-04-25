@@ -28,7 +28,7 @@ class VolumeBasedCalculator implements CalculatorInterface
         $quantity = array_key_exists('quantity', $context) ? $context['quantity'] : 1;
 
         foreach ($configuration as $range) {
-            if (empty($range['max']) && $quantity > $range['min'])  {
+            if (empty($range['max']) && $quantity > $range['min']) {
                 return $range['price'];
             }
 

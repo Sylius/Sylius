@@ -88,7 +88,6 @@ class EntityRepositorySpec extends ObjectBehavior
             'bar' => 'baz',
         );
 
-
         foreach ($criteria as $property => $value) {
             $queryBuilder
                 ->expr()

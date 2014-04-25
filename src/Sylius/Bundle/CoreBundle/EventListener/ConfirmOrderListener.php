@@ -24,6 +24,7 @@ class ConfirmOrderListener
      * Set an Order as completed
      *
      * @param GenericEvent $event
+     *
      * @throws UnexpectedTypeException
      */
     public function confirmOrder(GenericEvent $event)

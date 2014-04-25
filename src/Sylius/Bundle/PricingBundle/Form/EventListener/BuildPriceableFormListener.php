@@ -71,7 +71,6 @@ class BuildPriceableFormListener implements EventSubscriberInterface
     {
         $data = $event->getData();
 
-
         if (empty($data) || !array_key_exists('pricingCalculator', $data)) {
             return;
         }
