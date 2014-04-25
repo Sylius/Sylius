@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-use Sylius\Bundle\CoreBundle\Kernel\Kernel;
+require_once __DIR__.'/AppKernel.php';
 
 /**
- * Sylius application kernel.
+ * Sylius CLI application kernel.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class AppKernel extends Kernel
+class CliKernel extends AppKernel
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,9 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            // Put here your own bundles
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
         );
 
         return array_merge($bundles, parent::registerBundles());

@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Kernel;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 /**
- * Sylius kernel.
+ * Sylius base application kernel.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class SyliusKernel extends Kernel
+abstract class Kernel extends BaseKernel
 {
     const VERSION         = '0.10.0-dev';
     const VERSION_ID      = '00100';
@@ -65,7 +65,7 @@ abstract class SyliusKernel extends Kernel
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
 
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -74,28 +74,22 @@ abstract class SyliusKernel extends Kernel
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
 
-            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-            new \Liip\ImagineBundle\LiipImagineBundle(),
-            new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
-            new \JMS\SerializerBundle\JMSSerializerBundle(),
-            new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
-            new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new \JMS\TranslationBundle\JMSTranslationBundle(),
+            new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Payum\Bundle\PayumBundle\PayumBundle(),
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new \JMS\TranslationBundle\JMSTranslationBundle(),
+            new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         );
 
-        if ('dev' === $this->environment) {
+        if (in_array($this->environment, array('dev', 'test'))) {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-        }
-
-        if (in_array($this->environment, array('dev', 'test')) && class_exists('Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle')) {
-            $bundles[] = new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
-            $bundles[] = new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle();
         }
 
         return $bundles;
