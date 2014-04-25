@@ -73,8 +73,8 @@ Add this VirtualHost configuration:
 
         RewriteEngine On
 
-        DocumentRoot /var/www/sylius/web>
-        <Directory /var/www/sylius/web
+        DocumentRoot /var/www/sylius/web
+        <Directory /var/www/sylius/web>
             Options Indexes FollowSymLinks MultiViews
             AllowOverride None
             Order allow,deny
