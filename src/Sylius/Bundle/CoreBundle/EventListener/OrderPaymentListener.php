@@ -90,14 +90,10 @@ class OrderPaymentListener
             throw new \InvalidArgumentException('Order\'s payments cannot be empty.');
         }
 
-        $payments = $order->getPayments();
-
-        foreach ($payments as $payment) {
-            if ($payment->getState() === PaymentInterface::STATE_NEW) {
-                $payment->setCurrency($order->getCurrency());
-                $payment->setAmount($order->getTotal());
-            }
-        }
+        /** @var $payment PaymentInterface */
+        $payment = $order->getPayments()->last();
+        $payment->setCurrency($order->getCurrency());
+        $payment->setAmount($order->getTotal());
     }
 
     /**
