@@ -28,7 +28,7 @@ class LoadCountriesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $countryRepository = $this->getCountryRepository();
-        $countries = Intl::getRegionBundle()->getCountryNames();
+        $countries = Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'));
 
         foreach ($countries as $isoName => $name) {
             $country = $countryRepository->createNew();
