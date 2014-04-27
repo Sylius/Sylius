@@ -100,11 +100,11 @@ abstract class Kernel extends BaseKernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $appDir = $this->getAppDir();
+        $rootDir = $this->getRootDir();
 
-        $loader->load($appDir.'/config/config_'.$this->environment.'.yml');
+        $loader->load($rootDir.'/config/config_'.$this->environment.'.yml');
 
-        if (is_file($file = $appDir.'/config/config_'.$this->environment.'.local.yml')) {
+        if (is_file($file = $rootDir.'/config/config_'.$this->environment.'.local.yml')) {
             $loader->load($file);
         }
     }
@@ -139,15 +139,5 @@ abstract class Kernel extends BaseKernel
     protected function isVagrantEnvironment()
     {
         return (getenv('HOME') === '/home/vagrant' || getenv('VAGRANT') === 'VAGRANT') && is_dir('/dev/shm');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getAppDir()
-    {
-        $reflection = new \ReflectionClass(get_class($this));
-
-        return dirname($reflection->getFilename());
     }
 }
