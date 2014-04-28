@@ -14,13 +14,14 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
  * Order interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderInterface extends AdjustableInterface, TimestampableInterface, SoftDeletableInterface
+interface OrderInterface extends AdjustableInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
 {
     const STATE_CART        = 1;
     const STATE_CART_LOCKED = 2;
@@ -56,20 +57,6 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
      * @param null|\DateTime $completedAt
      */
     public function setCompletedAt(\DateTime $completedAt = null);
-
-    /**
-     * Get order number.
-     *
-     * @return string
-     */
-    public function getNumber();
-
-    /**
-     * Set order number.
-     *
-     * @param string $number
-     */
-    public function setNumber($number);
 
     /**
      * Get order items.

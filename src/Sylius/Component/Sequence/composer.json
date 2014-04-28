@@ -1,0 +1,46 @@
+{
+    "name": "sylius/sequence",
+    "type": "library",
+    "description": "Component for handling sequences in PHP projects.",
+    "keywords": ["shop", "ecommerce", "sequence", "feature"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Alexandre Bacco",
+            "homepage": "http://alex.bacco.fr"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource": "0.10.*@dev",
+        "sylius/registry": "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Sequence\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

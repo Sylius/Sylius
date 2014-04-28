@@ -12,13 +12,14 @@
 namespace Sylius\Component\Order\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 
 /**
  * Order repository interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-interface OrderRepositoryInterface extends RepositoryInterface
+interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepositoryInterface
 {
     /**
      * Gets recently completed orders.

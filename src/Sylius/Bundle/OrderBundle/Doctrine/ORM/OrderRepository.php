@@ -42,6 +42,20 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function isNumberUsed($number)
+    {
+        return (bool) $this->createQueryBuilder('o')
+            ->select('COUNT(*) > 0')
+            ->where('o.number = :number')
+            ->setParameter('number', $number)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()

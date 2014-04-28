@@ -9,30 +9,40 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order\Generator;
+namespace Sylius\Component\Sequence\Number;
 
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
+use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 
 /**
  * Hash order number generator.
  *
  * @author Myke Hines <myke@webhines.com>
  */
-class HashOrderNumberGenerator extends OrderNumberGenerator implements OrderNumberGeneratorInterface
+class HashGenerator extends AbstractGenerator implements GeneratorInterface
 {
     /**
-     * {@inheritdoc}
-     * This generates a 3 by 7 by 7 digit order number (much like amazon's order identifier)
-     * e.g. 105-3958356-3707476
-     *
+     * @var HashSubjectRepositoryInterface
      */
-    public function generate(OrderInterface $order)
+    protected $subjectRepository;
+
+    public function __construct(HashSubjectRepositoryInterface $subjectRepository)
+    {
+        $this->subjectRepository = $subjectRepository;
+    }
+
+    /**
+     * {@inheritdoc}
+     * This generates a 3 by 7 by 7 digit number (much like amazon's order identifier)
+     * e.g. 105-3958356-3707476
+     */
+    protected function generateNumber($index, SequenceSubjectInterface $order)
     {
         do {
             $number = $this->generateSegment(3) . '-' . $this->generateSegment(7) . '-' . $this->generateSegment(7);
-        } while ($this->numberRepository->isUsed($number));
+        } while ($this->subjectRepository->isNumberUsed($number));
 
-        $order->setNumber($number);
+        return $number;
     }
 
     /**

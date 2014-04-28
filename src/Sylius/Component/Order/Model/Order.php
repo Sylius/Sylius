@@ -195,6 +195,14 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getSequenceType()
+    {
+        return 'order';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getItems()
     {
         return $this->items;

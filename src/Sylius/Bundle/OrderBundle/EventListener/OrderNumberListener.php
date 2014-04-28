@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Order\Generator\OrderNumberGeneratorInterface;
-use Sylius\Component\Order\Repository\NumberRepositoryInterface;
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -25,38 +23,20 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderNumberListener
 {
     /**
-     * Order number generator.
+     * Order number listener
      *
-     * @var OrderNumberGeneratorInterface
+     * @var NumberListener
      */
-    protected $generator;
-
-    /**
-     * Number repository.
-     *
-     * @var NumberRepositoryInterface
-     */
-    protected $numberRepository;
-
-    /**
-     * Number manager.
-     *
-     * @var ObjectManager
-     */
-    protected $numberManager;
+    protected $listener;
 
     /**
      * Constructor.
      *
-     * @param OrderNumberGeneratorInterface $generator
-     * @param NumberRepositoryInterface     $numberRepository
-     * @param ObjectManager                 $numberManager
+     * @param NumberListener $listener
      */
-    public function __construct(OrderNumberGeneratorInterface $generator, NumberRepositoryInterface $numberRepository, ObjectManager $numberManager)
+    public function __construct(NumberListener $listener)
     {
-        $this->generator = $generator;
-        $this->numberRepository = $numberRepository;
-        $this->numberManager = $numberManager;
+        $this->listener = $listener;
     }
 
     /**
@@ -72,11 +52,6 @@ class OrderNumberListener
             return;
         }
 
-        $number = $this->numberRepository->createNew();
-        $number->setOrder($order);
-
-        $this->numberManager->persist($number);
-
-        $this->generator->generate($order);
+        $this->listener->enableEntity($order);
     }
 }

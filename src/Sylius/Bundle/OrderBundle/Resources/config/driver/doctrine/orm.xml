@@ -18,7 +18,13 @@
 
     <parameters>
         <parameter key="sylius.repository.order.class">Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository</parameter>
-        <parameter key="sylius.repository.number.class">Sylius\Bundle\OrderBundle\Doctrine\ORM\NumberRepository</parameter>
+        <parameter key="sylius.listener.order_number.class">Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener</parameter>
     </parameters>
 
+    <services>
+        <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
+            <argument type="service" id="sylius.sequence.doctrine_number_listener" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" />
+        </service>
+    </services>
 </container>
