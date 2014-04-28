@@ -23,7 +23,7 @@
 
     <services>
         <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
-            <argument type="service" id="sylius.doctrine_number_listener" />
+            <argument type="service" id="sylius.sequence.doctrine_number_listener" />
             <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" />
         </service>
     </services>

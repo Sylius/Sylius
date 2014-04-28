@@ -14,8 +14,9 @@ namespace Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
+use Sylius\Component\Registry\NonExistingServiceException;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
-use Sylius\Component\Sequence\Registry\GeneratorRegistry;
 
 /**
  * Doctrine event listener
@@ -25,7 +26,7 @@ use Sylius\Component\Sequence\Registry\GeneratorRegistry;
 class NumberListener
 {
     /**
-     * @var GeneratorRegistry
+     * @var ServiceRegistryInterface
      */
     protected $registry;
 
@@ -49,7 +50,7 @@ class NumberListener
      */
     protected $listenerEnabled = false;
 
-    public function __construct(GeneratorRegistry $registry, EventManager $eventManager, $sequenceClass)
+    public function __construct(ServiceRegistryInterface $registry, EventManager $eventManager, $sequenceClass)
     {
         $this->registry      = $registry;
         $this->eventManager  = $eventManager;
@@ -83,10 +84,13 @@ class NumberListener
         $uow = $em->getUnitOfWork();
 
         foreach (array_merge($uow->getScheduledEntityUpdates(), $uow->getScheduledEntityInsertions()) as $entity) {
-            if (
-                $this->isEntityEnabled($entity)
-                && null !== $generator = $this->registry->getGenerator($entity)
-            ) {
+            if ($this->isEntityEnabled($entity)) {
+                try {
+                    $generator = $this->registry->get($entity);
+                } catch (NonExistingServiceException $e) {
+                    continue;
+                }
+
                 $sequence = $em
                     ->getRepository($this->sequenceClass)
                     ->findOneByType($entity->getSequenceType())

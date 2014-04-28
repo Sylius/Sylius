@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Sequence\Registry;
 
+use Sylius\Component\Registry\NonExistingServiceException;
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Sequence\Number\GeneratorInterface;
 
 /**
@@ -18,38 +20,25 @@ use Sylius\Component\Sequence\Number\GeneratorInterface;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class GeneratorRegistry
+class GeneratorRegistry extends ServiceRegistry
 {
-    /**
-     * @var array
-     */
-    protected $generators = array();
-
-    /**
-     * Increment the index and return the new index of the given type
-     *
-     * @param $interface string
-     * @param $generator GeneratorInterface
-     */
-    public function addGenerator($interface, GeneratorInterface $generator)
-    {
-        $this->generators[$interface] = $generator;
-    }
-
     /**
      * Return the generator used for the given entity
      *
-     * @param $entity
-     * @return null
+     * @param object $entity
+     *
+     * @return GeneratorInterface
+     *
+     * @throws NonExistingServiceException
      */
-    public function getGenerator($entity)
+    public function get($entity)
     {
-        foreach ($this->generators as $interface => $generator) {
+        foreach ($this->services as $interface => $generator) {
             if ($entity instanceof $interface) {
                 return $generator;
             }
         }
 
-        return null;
+        throw new NonExistingServiceException(get_class($entity));
     }
 }

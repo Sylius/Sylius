@@ -110,7 +110,7 @@ sylius_order:
 
 sylius_sequence:
     generators:
-        %sylius.model.order.class%: sylius.sequential_number_generator
+        %sylius.model.order.class%: sylius.sequence.sequential_number_generator
 
 sylius_resource:
     resources:

@@ -1,7 +1,7 @@
-SyliusSettingsBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSettingsBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusSettingsBundle)
+SyliusSequenceBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusSequenceBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusSequenceBundle)
 ====================
 
-Settings system with web editing interface for [**Symfony2**](http://symfony.com) applications.
+Sequence system with web editing interface for [**Symfony2**](http://symfony.com) applications.
 
 Sylius
 ------
@@ -19,7 +19,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusSettingsBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusSequenceBundle/index.html).
 
 Contributing
 ------------
@@ -45,7 +45,7 @@ If you want to keep up with updates, [follow the official Sylius account on twit
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/SyliusSettingsBundle/issues).
+This bundle uses [GitHub issues](https://github.com/Sylius/SyliusSequenceBundle/issues).
 If you have found bug, please create an issue.
 
 Versioning
@@ -65,10 +65,10 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusSettingsBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusSequenceBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------
 
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/SyliusSettingsBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/SyliusSequenceBundle/contributors).

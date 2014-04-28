@@ -17,12 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.doctrine_number_listener.class">Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener</parameter>
+        <parameter key="sylius.sequence.doctrine_number_listener.class">Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.doctrine_number_listener" class="%sylius.doctrine_number_listener.class%">
-            <argument type="service" id="sylius.generator_registry" />
+        <service id="sylius.sequence.doctrine_number_listener" class="%sylius.sequence.doctrine_number_listener.class%">
+            <argument type="service" id="sylius.registry.number_generator" />
             <argument type="service">
                 <service class="Doctrine\Common\EventManager" factory-service="doctrine.orm.entity_manager" factory-method="getEventManager" />
             </argument>
