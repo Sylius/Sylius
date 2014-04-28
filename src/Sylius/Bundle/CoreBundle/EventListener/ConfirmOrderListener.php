@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Finite\Factory\FactoryInterface;
 use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -20,6 +22,13 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class ConfirmOrderListener
 {
+    protected $finiteFactory;
+
+    public function __construct(FactoryInterface $finiteFactory)
+    {
+        $this->finiteFactory = $finiteFactory;
+    }
+
     /**
      * Set an Order as completed
      *
@@ -29,15 +38,19 @@ class ConfirmOrderListener
      */
     public function confirmOrder(GenericEvent $event)
     {
+        $order = $this->getOrder($event);
+
+        $this->finiteFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
+    }
+
+    protected function getOrder(GenericEvent $event)
+    {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Order\Model\OrderInterface'
-            );
+            throw new UnexpectedTypeException($order, 'Sylius\Component\Order\Model\OrderInterface');
         }
 
-        $order->setState(OrderInterface::STATE_CONFIRMED);
+        return $order;
     }
 }

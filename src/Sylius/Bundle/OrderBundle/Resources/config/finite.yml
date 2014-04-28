@@ -1,0 +1,34 @@
+finite_finite:
+    sylius_order:
+        class:         %sylius.model.order.class%
+        property_path: state
+        graph:         sylius_order
+        states:
+            cart:
+                type: initial
+            pending:   ~
+            confirmed: ~
+            shipped:   ~
+            abandoned: ~
+            cancelled: ~
+            returned:
+                type: final
+        transitions:
+            checkout:
+                from: [cart]
+                to:   pending
+            confirm:
+                from: [cart, pending]
+                to:   confirmed
+            ship:
+                from: [confirmed]
+                to:   shipped
+            abandon:
+                from: [cart, pending]
+                to:   abandoned
+            cancel:
+                from: [confirmed]
+                to:   cancelled
+            return:
+                from: [shipped]
+                to:   returned

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Finite\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
@@ -20,7 +21,9 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\Model\PaymentInterface as PaymentModelInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class NotifyOrderActionSpec extends ObjectBehavior
@@ -28,9 +31,10 @@ class NotifyOrderActionSpec extends ObjectBehavior
     function let(
         EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
-        PaymentInterface $payment
+        PaymentInterface $payment,
+        FactoryInterface $factory
     ) {
-        $this->beConstructedWith($eventDispatcher, $objectManager);
+        $this->beConstructedWith($eventDispatcher, $objectManager, $factory);
         $this->setPayment($payment);
     }
 
@@ -79,19 +83,22 @@ class NotifyOrderActionSpec extends ObjectBehavior
     }
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+        $factory,
         SecuredNotifyRequest $request,
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $sm
     ) {
         $request->getModel()->willReturn($order);
         $order->getPayment()->willReturn($paymentModel);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function ($args) use ($paymentModel) {
-            $paymentModel->getState()->willReturn($args[0]);
-        });
+
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->getTransitionToState('completed')->willReturn(null);
+        $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
 
         $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
 
@@ -121,19 +128,24 @@ class NotifyOrderActionSpec extends ObjectBehavior
     }
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+        $factory,
         SecuredNotifyRequest $request,
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
+        StateMachineInterface $sm
     ) {
         $request->getModel()->willReturn($order);
         $order->getPayment()->willReturn($paymentModel);
 
-        $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function ($args) use ($paymentModel) {
-            $paymentModel->getState()->willReturn($args[0]);
+        $paymentModel->getState()->willReturn(Payment::STATE_PENDING);
+
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->getTransitionToState('cancelled')->willReturn(PaymentTransitions::SYLIUS_CANCEL);
+        $sm->apply(PaymentTransitions::SYLIUS_CANCEL)->shouldBeCalled()->will(function ($args) use($paymentModel) {
+            $paymentModel->getState()->willReturn(Payment::STATE_CANCELLED);
         });
 
         $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);

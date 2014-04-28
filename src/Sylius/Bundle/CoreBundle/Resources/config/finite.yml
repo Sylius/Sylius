@@ -1,0 +1,67 @@
+finite_finite:
+    sylius_order_shipping:
+        class:         %sylius.model.order.class%
+        property_path: shippingState
+        graph:         sylius_order_shipping
+        states:
+            checkout:
+                type: initial
+            onhold:            ~
+            ready:             ~
+            backordered:       ~
+            partially_shipped: ~
+            shipped:           ~
+            cancelled:         ~
+            returned:
+                type: final
+        transitions:
+            hold:
+                from: [checkout]
+                to:   onhold
+            create:
+                from: [checkout, onhold]
+                to:   ready
+            ship:
+                from: [ready, partially_shipped]
+                to:   shipped
+            ship_partially:
+                from: [ready, partially_shipped]
+                to:   partially_shipped
+            return:
+                from: [partially_shipped, shipped]
+                to:   returned
+
+    sylius_order_payment:
+        class:         %sylius.model.order.class%
+        property_path: paymentState
+        graph:         sylius_order_payment
+        states:
+            new:
+                type: initial
+            pending:    ~
+            processing: ~
+            completed:  ~
+            failed:     ~
+            void:       ~
+            cancelled:  ~
+            refunded:
+                type: final
+        transitions:
+            create:
+                from: [new]
+                to:   pending
+            process:
+                from: [new, pending]
+                to:   processing
+            complete:
+                from: [pending, processing]
+                to:   completed
+            fail:
+                from: [pending, processing]
+                to:   failed
+            cancel:
+                from: [new, pending, processing]
+                to:   cancelled
+            refund:
+                from: [completed]
+                to:   refunded

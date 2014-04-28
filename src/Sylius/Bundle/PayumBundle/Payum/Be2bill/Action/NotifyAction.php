@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Finite\Factory\FactoryInterface;
 use Payum\Be2Bill\Api;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
-use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\NotifyRequest;
+use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\SyliusPaymentEvents;
@@ -28,7 +29,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class NotifyAction extends PaymentAwareAction
+class NotifyAction extends AbstractPaymentStateAwareAction
 {
     /**
      * @var Api
@@ -55,8 +56,16 @@ class NotifyAction extends PaymentAwareAction
      */
     protected $identifier;
 
-    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager, $identifier)
-    {
+    public function __construct(
+        Api $api,
+        OrderRepositoryInterface $orderRepository,
+        EventDispatcherInterface $eventDispatcher,
+        ObjectManager $objectManager,
+        FactoryInterface $factory,
+        $identifier
+    ) {
+        parent::__construct($factory);
+
         $this->api             = $api;
         $this->orderRepository = $orderRepository;
         $this->eventDispatcher = $eventDispatcher;
@@ -96,8 +105,6 @@ class NotifyAction extends PaymentAwareAction
             throw new BadRequestHttpException('Request amount cannot be verified against payment amount.');
         }
 
-        $previousState = $payment->getState();
-
         // Actually update payment details
         $details = array_merge($payment->getDetails(), $details);
         $payment->setDetails($details);
@@ -105,9 +112,12 @@ class NotifyAction extends PaymentAwareAction
         $status = new StatusRequest($order);
         $this->payment->execute($status);
 
-        $payment->setState($status->getStatus());
+        $previousState = $payment->getState();
+        $nextState = $status->getStatus();
 
-        if ($previousState !== $payment->getState()) {
+        $this->updatePaymentState($payment, $nextState);
+
+        if ($previousState !== $nextState) {
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
                 new GenericEvent($payment, array('previous_state' => $previousState))

@@ -25,6 +25,9 @@
 
         <parameter key="sylius.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
+
+        <!-- Sylius State Machine -->
+        <parameter key="finite.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
     </parameters>
 
     <services>

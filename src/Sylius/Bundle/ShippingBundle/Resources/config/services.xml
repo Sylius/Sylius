@@ -142,7 +142,9 @@
             <tag name="form.type" alias="sylius_shipment_tracking" />
         </service>
 
-        <service id="sylius.processor.shipment_processor" class="%sylius.processor.shipment_processor.class%" />
+        <service id="sylius.processor.shipment_processor" class="%sylius.processor.shipment_processor.class%">
+            <argument type="service" id="finite.factory" />
+        </service>
     </services>
 
 </container>

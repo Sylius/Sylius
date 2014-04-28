@@ -18,6 +18,7 @@ use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -71,7 +72,7 @@ class ShipmentListener
 
         $this->shippingProcessor->updateShipmentStates(
             array($shipment),
-            $shipment::STATE_SHIPPED
+            ShipmentTransitions::SYLIUS_SHIP
         );
 
         $this->stateResolver->resolveShippingState($order);
@@ -92,7 +93,7 @@ class ShipmentListener
 
         $this->shippingProcessor->updateShipmentStates(
             $order->getShipments(),
-            ShipmentInterface::STATE_CHECKOUT,
+            ShipmentTransitions::SYLIUS_RELEASE,
             ShipmentInterface::STATE_ONHOLD
         );
     }
@@ -102,10 +103,7 @@ class ShipmentListener
         $shipment = $event->getSubject();
 
         if (!$shipment instanceof ShipmentInterface) {
-            throw new UnexpectedTypeException(
-                $shipment,
-                'Sylius\Component\Core\Model\ShipmentInterface'
-            );
+            throw new UnexpectedTypeException($shipment, 'Sylius\Component\Core\Model\ShipmentInterface');
         }
 
         return $shipment;
@@ -116,10 +114,7 @@ class ShipmentListener
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
+            throw new UnexpectedTypeException($order, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
         return $order;

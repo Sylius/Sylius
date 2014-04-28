@@ -53,7 +53,8 @@
         "symfony/swiftmailer-bundle":           "2.3.*",
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
-        "white-october/pagerfanta-bundle":      "1.0.*@dev"
+        "white-october/pagerfanta-bundle":      "1.0.*@dev",
+        "yohang/finite":                        "~1.1@dev"
     },
     "require-dev": {
         "behat/behat":                       "~2.4",

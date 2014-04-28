@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Finite\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Order\InventoryUnitTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -23,6 +26,13 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class InventoryUnitListener
 {
+    protected $factory;
+
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
     /**
      * Update inventory unit state.
      *
@@ -34,26 +44,10 @@ class InventoryUnitListener
     {
         $unit = $this->getInventoryUnit($event);
 
-        $state = $event->getArgument('state');
+        $transitionName = $event->getArgument('transition');
 
-        $unit->setInventoryState($state);
-
-        switch ($state) {
-            case $unit::STATE_BACKORDERED:
-                $unit->setShippingState(ShipmentInterface::STATE_ONHOLD);
-                break;
-
-            case $unit::STATE_SOLD:
-                $unit->setShippingState(ShipmentInterface::STATE_READY);
-                break;
-
-            case $unit::STATE_RETURNED:
-                $unit->setShippingState(ShipmentInterface::STATE_RETURNED);
-                break;
-
-            default:
-                throw new \InvalidArgumentException(sprintf('Unexpected inventory state "%s".', $state));
-        }
+        $this->factory->get($unit, InventoryUnitTransitions::GRAPH)->apply($transitionName);
+        $this->factory->get($unit, ShipmentItemTransitions::GRAPH)->apply($transitionName);
     }
 
     private function getInventoryUnit(GenericEvent $event)
@@ -61,10 +55,7 @@ class InventoryUnitListener
         $unit = $event->getSubject();
 
         if (!$unit instanceof InventoryUnitInterface) {
-            throw new UnexpectedTypeException(
-                $unit,
-                'Sylius\Component\Core\Model\InventoryUnitInterface'
-            );
+            throw new UnexpectedTypeException($unit, 'Sylius\Component\Core\Model\InventoryUnitInterface');
         }
 
         return $unit;

@@ -12,9 +12,12 @@
 namespace Sylius\Component\Shipping\Processor;
 
 use Doctrine\Common\Collections\Collection;
+use Finite\Factory\FactoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\ShipmentItemTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 
 /**
  * Shipment processor.
@@ -24,9 +27,19 @@ use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 class ShipmentProcessor implements ShipmentProcessorInterface
 {
     /**
+     * @var FactoryInterface
+     */
+    protected $factory;
+
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function updateShipmentStates($shipments, $stateTo, $stateFrom = null)
+    public function updateShipmentStates($shipments, $transitionName, $stateFrom = null)
     {
         if (!is_array($shipments) && !$shipments instanceof Collection) {
             throw new \InvalidArgumentException('Shipments value must be array or instance of "Doctrine\Common\Collections\Collection".');
@@ -38,8 +51,8 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             }
 
             if (null === $stateFrom || $stateFrom === $shipment->getState()) {
-                $shipment->setState($stateTo);
-                $this->updateItemStates($shipment->getItems(), $stateTo, $stateFrom);
+                $this->factory->get($shipment, ShipmentTransitions::GRAPH)->apply($transitionName);
+                $this->updateItemStates($shipment->getItems(), $transitionName, $stateFrom);
             }
         }
     }
@@ -47,7 +60,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function updateItemStates($items, $stateTo, $stateFrom = null)
+    public function updateItemStates($items, $transitionName, $stateFrom = null)
     {
         if (!is_array($items) && !$items instanceof Collection) {
             throw new \InvalidArgumentException('Inventory items value must be array or instance of "Doctrine\Common\Collections\Collection".');
@@ -59,7 +72,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             }
 
             if (null === $stateFrom || $stateFrom === $item->getShippingState()) {
-                $item->setShippingState($stateTo);
+                $this->factory->get($item, ShipmentItemTransitions::GRAPH)->apply($transitionName);
             }
         }
     }

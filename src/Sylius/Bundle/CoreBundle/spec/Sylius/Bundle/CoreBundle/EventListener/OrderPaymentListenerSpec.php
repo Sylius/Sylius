@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use Finite\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -26,9 +27,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderPaymentListenerSpec extends ObjectBehavior
 {
-    function let(PaymentProcessorInterface $processor, EntityRepository $repository, EventDispatcherInterface $dispatcher)
+    function let(PaymentProcessorInterface $processor, EntityRepository $repository, EventDispatcherInterface $dispatcher, FactoryInterface $factory)
     {
-        $this->beConstructedWith($processor, $repository, $dispatcher);
+        $this->beConstructedWith($processor, $repository, $dispatcher, $factory);
     }
 
     function it_is_initializable()

@@ -34,6 +34,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -261,7 +262,7 @@ class DataContext extends BehatContext implements KernelAwareInterface
             $order->setCurrency('EUR');
             $order->complete();
 
-            $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentInterface::STATE_READY, ShipmentInterface::STATE_CHECKOUT);
+            $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentTransitions::SYLIUS_PREPARE, ShipmentInterface::STATE_CHECKOUT);
 
             $manager->persist($order);
 
