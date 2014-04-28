@@ -40,7 +40,7 @@ class ConfirmOrderListener
     {
         $order = $this->getOrder($event);
 
-        $this->finiteFactory->get($order, 'sylius_order')->apply(OrderTransitions::SYLIUS_CONFIRM);
+        $this->finiteFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
     }
 
     protected function getOrder(GenericEvent $event)

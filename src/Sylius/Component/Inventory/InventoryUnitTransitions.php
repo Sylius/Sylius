@@ -13,6 +13,8 @@ namespace Sylius\Component\Order;
 
 class InventoryUnitTransitions
 {
+    const GRAPH = 'sylius_inventory_unit';
+
     const SYLIUS_HOLD       = 'hold';
     const SYLIUS_BACKORDER  = 'backorder';
     const SYLIUS_SOLD       = 'sold';

@@ -17,6 +17,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\ShipmentItemTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -46,13 +48,13 @@ class ShipmentProcessorSpec extends ObjectBehavior
     )
     {
         $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-        $factory->get($shipment, 'sylius_shipment')->shouldBeCalled()->willReturn($sm);
+        $factory->get($shipment, ShipmentTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
         $sm->apply('transitionName')->shouldBeCalled();
 
         $shipment->getItems()->shouldBeCalled()->willReturn(array($item));
 
         $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-        $factory->get($item, 'sylius_shipment_item')->shouldBeCalled()->willReturn($sm);
+        $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
         $sm->apply('transitionName')->shouldBeCalled();
 
         $this->updateShipmentStates(array($shipment), 'transitionName', ShipmentInterface::STATE_READY);
@@ -78,7 +80,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
     {
         $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
 
-        $factory->get($item, 'sylius_shipment_item')->shouldBeCalled()->willReturn($sm);
+        $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
         $sm->apply('transitionName')->shouldBeCalled();
 
         $this->updateItemStates(array($item), 'transitionName', ShipmentInterface::STATE_READY);

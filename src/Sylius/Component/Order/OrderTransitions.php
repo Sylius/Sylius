@@ -13,6 +13,8 @@ namespace Sylius\Component\Order;
 
 class OrderTransitions
 {
+    const GRAPH = 'sylius_order';
+
     const SYLIUS_CHECKOUT = 'checkout';
     const SYLIUS_CONFIRM  = 'confirm';
     const SYLIUS_SHIP     = 'ship';

@@ -16,6 +16,8 @@ use Finite\Factory\FactoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\ShipmentItemTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 
 /**
  * Shipment processor.
@@ -49,7 +51,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             }
 
             if (null === $stateFrom || $stateFrom === $shipment->getState()) {
-                $this->factory->get($shipment, 'sylius_shipment')->apply($transitionName);
+                $this->factory->get($shipment, ShipmentTransitions::GRAPH)->apply($transitionName);
                 $this->updateItemStates($shipment->getItems(), $transitionName, $stateFrom);
             }
         }
@@ -70,7 +72,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             }
 
             if (null === $stateFrom || $stateFrom === $item->getShippingState()) {
-                $this->factory->get($item, 'sylius_shipment_item')->apply($transitionName);
+                $this->factory->get($item, ShipmentItemTransitions::GRAPH)->apply($transitionName);
             }
         }
     }

@@ -13,6 +13,8 @@ namespace Sylius\Component\Shipping;
 
 class ShipmentItemTransitions
 {
+    const GRAPH = 'sylius_shipment_item';
+
     const SYLIUS_HOLD      = 'hold';
     const SYLIUS_RELEASE   = 'release';
     const SYLIUS_BACKORDER = 'backorder';

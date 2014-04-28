@@ -13,8 +13,10 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Finite\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
+use Sylius\Component\Order\InventoryUnitTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -44,8 +46,8 @@ class InventoryUnitListener
 
         $transitionName = $event->getArgument('transition');
 
-        $this->factory->get($unit, 'sylius_inventory_unit')->apply($transitionName);
-        $this->factory->get($unit, 'sylius_shipping_unit')->apply($transitionName);
+        $this->factory->get($unit, InventoryUnitTransitions::GRAPH)->apply($transitionName);
+        $this->factory->get($unit, ShipmentItemTransitions::GRAPH)->apply($transitionName);
     }
 
     private function getInventoryUnit(GenericEvent $event)

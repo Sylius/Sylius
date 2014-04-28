@@ -114,7 +114,7 @@ class OrderPaymentListener
     {
         $payment = $this->getOrder($event)->getPayment();
 
-        $this->factory->get($payment, 'sylius_payment')->apply(PaymentTransitions::SYLIUS_VOID);
+        $this->factory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_VOID);
     }
 
     public function updateOrderOnPayment(GenericEvent $event)

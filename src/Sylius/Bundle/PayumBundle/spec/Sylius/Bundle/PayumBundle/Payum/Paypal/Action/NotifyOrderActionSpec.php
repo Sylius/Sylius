@@ -96,7 +96,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
 
-        $factory->get($paymentModel, 'sylius_payment')->willReturn($sm);
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
         $sm->getTransitionToState('completed')->willReturn(null);
         $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
 
@@ -142,7 +142,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
         $paymentModel->getState()->willReturn(Payment::STATE_PENDING);
 
-        $factory->get($paymentModel, 'sylius_payment')->willReturn($sm);
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
         $sm->getTransitionToState('cancelled')->willReturn(PaymentTransitions::SYLIUS_CANCEL);
         $sm->apply(PaymentTransitions::SYLIUS_CANCEL)->shouldBeCalled()->will(function ($args) use($paymentModel) {
             $paymentModel->getState()->willReturn(Payment::STATE_CANCELLED);

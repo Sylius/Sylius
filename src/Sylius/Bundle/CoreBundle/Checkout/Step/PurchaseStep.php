@@ -19,6 +19,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -68,7 +69,7 @@ class PurchaseStep extends CheckoutStep
         $previousState = $payment->getState();
         $nextState = $status->getStatus();
 
-        $stateMachine = $this->get('finite.factory')->get($payment, 'sylius_payment');
+        $stateMachine = $this->get('finite.factory')->get($payment, PaymentTransitions::GRAPH);
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
             $stateMachine->apply($transition);

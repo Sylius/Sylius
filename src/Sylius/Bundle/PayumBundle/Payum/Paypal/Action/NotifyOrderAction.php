@@ -71,7 +71,7 @@ class NotifyOrderAction extends AbstractPaymentStateAwareAction
         $previousState = $payment->getState();
         $nextState = $status->getStatus();
 
-        $this->updatePaymentState($payment, $previousState, $nextState);
+        $this->updatePaymentState($payment, $nextState);
 
         if ($previousState !== $payment->getState()) {
             $this->eventDispatcher->dispatch(

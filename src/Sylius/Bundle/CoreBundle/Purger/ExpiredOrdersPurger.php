@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Cart\Purger\PurgerInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\OrderTransitions;
 
 /**
  * Purge expired pending orders
@@ -95,7 +96,7 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     protected function purgeOrder(OrderInterface $order)
     {
-        $this->factory->get($order, 'sylius_order')->apply('abandon');
+        $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_ABANDON);
         $this->manager->persist($order);
     }
 }

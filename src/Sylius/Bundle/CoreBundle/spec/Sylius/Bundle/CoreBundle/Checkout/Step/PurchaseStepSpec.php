@@ -112,7 +112,7 @@ class PurchaseStepSpec extends ObjectBehavior
             }
         );
 
-        $factory->get($paymentModel, 'sylius_payment')->willReturn($sm);
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
         $sm->getTransitionToState('completed')->willReturn(PaymentTransitions::SYLIUS_COMPLETE);
         $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldBeCalled();
 
@@ -178,7 +178,7 @@ class PurchaseStepSpec extends ObjectBehavior
             }
         );
 
-        $factory->get($paymentModel, 'sylius_payment')->willReturn($sm);
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
         $sm->getTransitionToState('completed')->willReturn(null);
         $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
 
