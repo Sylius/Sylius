@@ -2,11 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
-    - { resource: @SyliusPaymentBundle/Resources/config/finite.yml }
-    - { resource: @SyliusShippingBundle/Resources/config/finite.yml }
-    - { resource: @SyliusOrderBundle/Resources/config/finite.yml }
-    - { resource: @SyliusInventoryBundle/Resources/config/finite.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/finite.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
