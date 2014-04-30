@@ -17,7 +17,7 @@ payum:
                 actions:
                     - sylius.payum.paypal.action.capture_order_using_express_checkout
                     - sylius.payum.paypal.action.notify_order
-                    - sylius.payum.action.order_status
+                    - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
 
             storages:
@@ -37,7 +37,7 @@ payum:
                 actions:
                     - sylius.payum.stripe.action.capture_order_using_credit_card
                     - sylius.payum.action.obtain_credit_card
-                    - sylius.payum.action.order_status
+                    - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
 
             storages:
@@ -58,7 +58,7 @@ payum:
                 actions:
                     - sylius.payum.be2bill.action.capture_order_using_credit_card
                     - sylius.payum.action.obtain_credit_card
-                    - sylius.payum.action.order_status
+                    - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
 
             storages:
@@ -79,7 +79,7 @@ payum:
                 actions:
                     - sylius.payum.be2bill.action.capture_order_using_be2bill_form
                     - sylius.payum.be2bill.action.notify
-                    - sylius.payum.action.order_status
+                    - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
 
             storages:

@@ -29,7 +29,7 @@
         <parameter key="sylius.payum.dummy.action.capture_order.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CaptureOrderAction</parameter>
         <parameter key="sylius.payum.dummy.action.order_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\OrderStatusAction</parameter>
 
-        <parameter key="sylius.payum.action.order_status.class">Sylius\Bundle\PayumBundle\Payum\Action\OrderStatusAction</parameter>
+        <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
         <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
         <parameter key="sylius.payum.action.execute_same_request_with_payment_details.class">Sylius\Bundle\PayumBundle\Payum\Action\ExecuteSameRequestWithPaymentDetailsAction</parameter>
     </parameters>
@@ -65,7 +65,7 @@
             <argument>id</argument>
         </service>
 
-        <service id="sylius.payum.action.order_status" class="%sylius.payum.action.order_status.class%" />
+        <service id="sylius.payum.action.payment_status" class="%sylius.payum.action.payment_status.class%" />
         <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%" />
         <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" >
             <argument type="service" id="form.factory" />
