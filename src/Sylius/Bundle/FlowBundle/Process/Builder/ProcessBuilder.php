@@ -124,11 +124,35 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function setDisplayRouteParams(array $params)
+    {
+        $this->assertHasProcess();
+
+        $this->process->setDisplayRouteParams($params);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setForwardRoute($route)
     {
         $this->assertHasProcess();
 
         $this->process->setForwardRoute($route);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setForwardRouteParams(array $params)
+    {
+        $this->assertHasProcess();
+
+        $this->process->setForwardRouteParams($params);
 
         return $this;
     }

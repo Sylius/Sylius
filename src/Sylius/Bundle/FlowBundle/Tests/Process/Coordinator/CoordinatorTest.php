@@ -85,6 +85,10 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             ->method('getDisplayRoute')
             ->will($this->returnValue('my_route'));
 
+        $process->expects($this->any())
+            ->method('getDisplayRouteParams')
+            ->will($this->returnValue(array()));
+
         $processBuilder = $this->getProcessBuilder($process);
 
         $processContext = $this->getProcessContext();

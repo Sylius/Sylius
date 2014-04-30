@@ -33,14 +33,14 @@ class Process implements ProcessInterface
      *
      * @var array
      */
-    protected $steps;
+    protected $steps = array();
 
     /**
      * Ordered steps.
      *
      * @var array
      */
-    protected $orderedSteps;
+    protected $orderedSteps = array();
 
     protected $validator;
 
@@ -52,22 +52,27 @@ class Process implements ProcessInterface
     protected $displayRoute;
 
     /**
+     * Display action route params.
+     *
+     * @var array
+     */
+    protected $displayRouteParams = array();
+
+    /**
      * Forward action route.
      *
      * @var string
      */
     protected $forwardRoute;
 
-    protected $redirect;
-
     /**
-     * Constructor.
+     * Forward action route params.
+     *
+     * @var array
      */
-    public function __construct()
-    {
-        $this->steps = array();
-        $this->orderedSteps = array();
-    }
+    protected $forwardRouteParams = array();
+
+    protected $redirect;
 
     /**
      * {@inheritdoc}
@@ -218,6 +223,22 @@ class Process implements ProcessInterface
     /**
      * {@inheritdoc}
      */
+    public function getDisplayRouteParams()
+    {
+        return $this->displayRouteParams;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDisplayRouteParams(array $params)
+    {
+        $this->displayRouteParams = $params;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getForwardRoute()
     {
         return $this->forwardRoute;
@@ -229,6 +250,22 @@ class Process implements ProcessInterface
     public function setForwardRoute($route)
     {
         $this->forwardRoute = $route;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForwardRouteParams()
+    {
+        return $this->forwardRouteParams;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setForwardRouteParams(array $params)
+    {
+        $this->forwardRouteParams = $params;
     }
 
     /**

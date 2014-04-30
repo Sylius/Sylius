@@ -63,11 +63,25 @@ interface ProcessBuilderInterface
     public function setDisplayRoute($route);
 
     /**
+     * Set additional forward route params.
+     *
+     * @param array $params
+     */
+    public function setDisplayRouteParams(array $params);
+
+    /**
      * Set forward route.
      *
      * @param string $route
      */
     public function setForwardRoute($route);
+
+    /**
+     * Set additional forward route params.
+     *
+     * @param array $params
+     */
+    public function setForwardRouteParams(array $params);
 
     /**
      * Set redirection route after completion.
