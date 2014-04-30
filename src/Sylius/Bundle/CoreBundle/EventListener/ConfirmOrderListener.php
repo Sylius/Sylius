@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Finite\Factory\FactoryInterface;
-use Sylius\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
