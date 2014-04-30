@@ -38,6 +38,7 @@ class OrderRepository extends CartRepository
      *
      * @param  UserInterface $user
      * @param  array         $sorting
+     *
      * @return array
      */
     public function findByUser(UserInterface $user, array $sorting = array())
@@ -54,6 +55,7 @@ class OrderRepository extends CartRepository
      * Get the order data for the details page.
      *
      * @param integer $id
+     *
      * @return OrderInterface|null
      */
     public function findForDetailsPage($id)

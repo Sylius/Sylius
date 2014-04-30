@@ -87,7 +87,7 @@ class OrderPaymentListener
         $order = $this->getOrder($event);
 
         if (!$order->hasPayments()) {
-            throw new \InvalidArgumentException('Order\'s payments cannot be empty.');
+            throw new \InvalidArgumentException('Order payments cannot be empty.');
         }
 
         /** @var $payment PaymentInterface */

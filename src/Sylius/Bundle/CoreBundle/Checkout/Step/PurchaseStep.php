@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -53,7 +54,7 @@ class PurchaseStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $token = $this->getHttpRequestVerifier()->verify($this->container->get('request_stack')->getCurrentRequest());
+        $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
         $this->getHttpRequestVerifier()->invalidate($token);
 
         $status = new StatusRequest($token);
@@ -63,7 +64,7 @@ class PurchaseStep extends CheckoutStep
         $payment = $status->getModel();
 
         if (!$payment instanceof PaymentInterface) {
-            throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
+            throw new UnexpectedTypeException($payment, 'Sylius\Component\Core\Model\PaymentInterface');
         }
 
         $order = $payment->getOrder();

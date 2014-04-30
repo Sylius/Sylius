@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -29,41 +28,36 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
+        $paymentState = PaymentInterface::STATE_NEW;
+
         if ($order->hasPayments()) {
-            /** @var $payments ArrayCollection */
             $payments = $order->getPayments();
             $completedPaymentTotal = 0;
 
-            /** @var $payment PaymentInterface */
             foreach ($payments as $payment) {
                 if ($payment->getState() === PaymentInterface::STATE_COMPLETED) {
                     $completedPaymentTotal += $payment->getAmount();
                 }
             }
 
-            // Payment is completed if we have received full amount
             if ($completedPaymentTotal === $order->getTotal()) {
-                $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
-                return;
-            }
-
-            // Payment is processing / pending if one of the payment is.
-            foreach(array(
+                // Payment is completed if we have received full amount.
+                $paymentState = PaymentInterface::STATE_COMPLETED;
+            } else {
+                // Payment is processing if one of the payment is.
+                if ($payments->exists(function($key, $payment) {
+                    return in_array($payment->getState(), array(
                         PaymentInterface::STATE_COMPLETED,
                         PaymentInterface::STATE_PROCESSING,
-                        PaymentInterface::STATE_PENDING
-                    ) as $state) {
-                if ($payments->exists(function($key, $payment) use ($state) {
-                    /** @var $payment PaymentInterface */
-                    return $payment->getState() === $state;
+                        PaymentInterface::STATE_PENDING,
+                    ));
                 })) {
-                    $order->setPaymentState(PaymentInterface::STATE_PROCESSING);
-                    return;
+                    $paymentState = PaymentInterface::STATE_PROCESSING;
                 }
             }
         }
 
-        $order->setPaymentState(PaymentInterface::STATE_NEW);
+        $order->setPaymentState($paymentState);
     }
 
     /**
