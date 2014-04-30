@@ -61,15 +61,15 @@ class PurchaseStep extends CheckoutStep
 
         /** @var $payment PaymentInterface */
         $payment = $status->getModel();
+
+        if (!$payment instanceof PaymentInterface) {
+            throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
+        }
+
         $order = $payment->getOrder();
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
-        if (!$order instanceof OrderInterface) {
-            throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
-        }
-
-        $payment = $order->getPayment();
         $previousState = $payment->getState();
         $nextState = $status->getStatus();
 
