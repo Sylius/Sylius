@@ -65,3 +65,15 @@ finite_finite:
             refund:
                 from: [completed]
                 to:   refunded
+
+    sylius_payment:
+        callbacks:
+            after:
+                - { on: 'complete', do: [@sylius.callback.order_payment, 'updateOrderOnPayment'], args: ['object'] }
+
+    sylius_order:
+        callbacks:
+            after:
+                - { on: 'confirm', do: [@sylius.order_processing.inventory_handler, 'updateInventory'],      args: ['object'] }
+                - { on: 'confirm', do: [@sylius.processor.shipment_processor,       'updateShipmentStates'], args: ['object.getShipments()', '"prepare"'] }
+                - { on: 'confirm', do: [@sylius.callback.coupon_usage,              'incrementCouponUsage'], args: ['object'] }

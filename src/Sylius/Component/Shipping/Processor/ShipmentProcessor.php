@@ -50,8 +50,9 @@ class ShipmentProcessor implements ShipmentProcessorInterface
                 throw new UnexpectedTypeException($shipment, 'Sylius\Component\Shipping\Model\ShipmentInterface');
             }
 
-            if (null === $stateFrom || $stateFrom === $shipment->getState()) {
-                $this->factory->get($shipment, ShipmentTransitions::GRAPH)->apply($transitionName);
+            $stateMachine = $this->factory->get($shipment, ShipmentTransitions::GRAPH);
+            if ((null === $stateFrom || $stateFrom === $shipment->getState()) && $stateMachine->can($transitionName)) {
+                $stateMachine->apply($transitionName);
                 $this->updateItemStates($shipment->getItems(), $transitionName, $stateFrom);
             }
         }
@@ -71,8 +72,9 @@ class ShipmentProcessor implements ShipmentProcessorInterface
                 throw new UnexpectedTypeException($item, 'Sylius\Component\Shipping\Model\ShipmentItemInterface');
             }
 
-            if (null === $stateFrom || $stateFrom === $item->getShippingState()) {
-                $this->factory->get($item, ShipmentItemTransitions::GRAPH)->apply($transitionName);
+            $stateMachine = $this->factory->get($item, ShipmentItemTransitions::GRAPH);
+            if ((null === $stateFrom || $stateFrom === $item->getShippingState()) && $stateMachine->can($transitionName)) {
+                $stateMachine->apply($transitionName);
             }
         }
     }

@@ -67,18 +67,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Update order inventory.
-     *
-     * @param GenericEvent $event
-     */
-    public function updateInventoryUnits(GenericEvent $event)
-    {
-        $this->inventoryHandler->updateInventory(
-            $this->getOrder($event)
-        );
-    }
-
-    /**
      * Update the inventory units.
      *
      * @param GenericEvent $event

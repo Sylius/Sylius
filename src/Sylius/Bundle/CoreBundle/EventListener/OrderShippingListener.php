@@ -100,20 +100,6 @@ class OrderShippingListener
         );
     }
 
-    /**
-     * Update shipment states after order is confirmed.
-     *
-     * @param GenericEvent $event
-     */
-    public function updateShipmentStatesReady(GenericEvent $event)
-    {
-        $this->shippingProcessor->updateShipmentStates(
-            $this->getOrder($event)->getShipments(),
-            ShipmentTransitions::SYLIUS_PREPARE,
-            ShipmentInterface::STATE_ONHOLD
-        );
-    }
-
     protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();

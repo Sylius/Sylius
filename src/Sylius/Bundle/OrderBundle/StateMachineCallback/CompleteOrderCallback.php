@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\EventListener;
+namespace Sylius\Bundle\OrderBundle\StateMachineCallback;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -20,23 +20,15 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CompleteOrderListener
+class CompleteOrderCallback
 {
     /**
      * Set an Order as completed
      *
-     * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
+     * @param OrderInterface $order
      */
-    public function completeOrder(GenericEvent $event)
+    public function completeOrder(OrderInterface $order)
     {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException($order, 'Sylius\Component\Order\Model\OrderInterface');
-        }
-
         $order->complete();
     }
 }

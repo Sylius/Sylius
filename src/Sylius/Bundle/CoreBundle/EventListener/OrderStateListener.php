@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Finite\Event\TransitionEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -41,23 +42,26 @@ class OrderStateListener
     }
 
     /**
-     * Get the order from event and run the inventory processor on it.
+     * Get the order from event and run the state resolver on it.
      *
      * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
      */
     public function resolveOrderStates(GenericEvent $event)
     {
-        $order = $event->getSubject();
+        $this->resolve($event->getSubject());
+    }
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
+    public function resolveOrderStatesFinite(TransitionEvent $event)
+    {
+        $order = $event->getStateMachine()->getObject();
+
+        if ($order instanceof OrderInterface) {
+            $this->resolve($order);
         }
+    }
 
+    protected function resolve(OrderInterface $order)
+    {
         $this->stateResolver->resolvePaymentState($order);
         $this->stateResolver->resolveShippingState($order);
     }

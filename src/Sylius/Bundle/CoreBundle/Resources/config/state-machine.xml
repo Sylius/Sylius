@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Callbacks -->
+        <parameter key="sylius.callback.order_payment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback</parameter>
+        <parameter key="sylius.callback.coupon_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback</parameter>
+    </parameters>
+
+    <services>
+        <!-- Callbacks -->
+        <service id="sylius.callback.order_payment" class="%sylius.callback.order_payment.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="finite.factory" />
+        </service>
+        <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />
+    </services>
+
+</container>

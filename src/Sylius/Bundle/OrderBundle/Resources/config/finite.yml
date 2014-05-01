@@ -10,7 +10,8 @@ finite_finite:
             confirmed: ~
             shipped:   ~
             abandoned: ~
-            cancelled: ~
+            cancelled:
+                type: final
             returned:
                 type: final
         transitions:
@@ -33,5 +34,6 @@ finite_finite:
                 from: [shipped]
                 to:   returned
         callbacks:
-            before:
-                - { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'], args: ['object'] }
+            after:
+                - { on: 'create', do: [@sylius.callback.complete_order,           'completeOrder'], args: ['object'] }
+                - { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'],  args: ['object'] }

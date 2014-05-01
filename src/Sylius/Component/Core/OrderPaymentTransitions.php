@@ -13,6 +13,8 @@ namespace Sylius\Component\Order;
 
 class OrderPaymentTransitions
 {
+    const GRAPH = 'sylius_order_payment';
+
     const SYLIUS_CREATE   = 'create';
     const SYLIUS_PROCESS  = 'process';
     const SYLIUS_COMPLETE = 'complete';

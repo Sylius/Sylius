@@ -12,10 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Finite\Factory\FactoryInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
-use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -109,29 +107,6 @@ class OrderPaymentListener
 
         foreach ($payments as $payment) {
             $this->factory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_VOID);
-        }
-    }
-
-    public function updateOrderOnPayment(GenericEvent $event)
-    {
-        $payment = $event->getSubject();
-
-        if (!$payment instanceof PaymentInterface) {
-            throw new UnexpectedTypeException(
-                $payment,
-                'Sylius\Component\Payment\Model\PaymentInterface'
-            );
-        }
-
-        $order = $payment->getOrder();
-
-        if (null === $order) {
-            throw new \RuntimeException(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
-        }
-
-        if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-            $this->dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, new GenericEvent($order, $event->getArguments()));
-            $this->dispatcher->dispatch(SyliusOrderEvents::POST_PAY, new GenericEvent($order, $event->getArguments()));
         }
     }
 
