@@ -14,7 +14,7 @@ finite_finite:
             returned:
                 type: final
         transitions:
-            checkout:
+            create:
                 from: [cart]
                 to:   pending
             confirm:
