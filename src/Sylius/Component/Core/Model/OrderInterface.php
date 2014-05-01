@@ -132,22 +132,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface, Payme
     public function removeShippingAdjustments();
 
     /**
-     * Get the payment associated with the order.
-     *
-     * @return BasePaymentInterface
-     * @deprecated
-     */
-    public function getPayment();
-
-    /**
-     * Set payment.
-     *
-     * @param BasePaymentInterface $payment
-     * @deprecated
-     */
-    public function setPayment(BasePaymentInterface $payment);
-
-    /**
      * Get the payment state.
      *
      * @return string

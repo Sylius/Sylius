@@ -320,22 +320,6 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPayment()
-    {
-        return $this->getPayments()->last();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPayment(BasePaymentInterface $payment)
-    {
-        $this->addPayment($payment);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPayments()
     {
         return $this->payments;
@@ -355,8 +339,8 @@ class Order extends Cart implements OrderInterface
     public function addPayment(BasePaymentInterface $payment)
     {
         if (!$this->hasPayment($payment)) {
-            $payment->setOrder($this);
             $this->payments->add($payment);
+            $payment->setOrder($this);
         }
     }
 
@@ -366,7 +350,6 @@ class Order extends Cart implements OrderInterface
     public function removePayment(BasePaymentInterface $payment)
     {
         if ($this->hasPayment($payment)) {
-            $payment->setOrder(null);
             $this->payments->removeElement($payment);
         }
     }

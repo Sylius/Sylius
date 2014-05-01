@@ -24,7 +24,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\SyliusCheckoutEvents;
-use Sylius\Component\Payment\Model\Payment;
+use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
@@ -99,16 +99,17 @@ class PurchaseStepSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $sm
     ) {
+        $order = new Order();
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_NEW);
-        $order = new Order();
-        $order->setPayment($paymentModel);
+        $paymentModel->setOrder($order);
+        $order->addPayment($paymentModel);
 
         $payment
             ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markSuccess();
-                $args[0]->setModel($order);
+                $args[0]->setModel($paymentModel);
             }
         );
 
@@ -165,16 +166,17 @@ class PurchaseStepSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $sm
     ) {
+        $order = new Order();
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_COMPLETED);
-        $order = new Order();
-        $order->setPayment($paymentModel);
+        $paymentModel->setOrder($order);
+        $order->addPayment($paymentModel);
 
         $payment
             ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markSuccess();
-                $args[0]->setModel($order);
+                $args[0]->setModel($paymentModel);
             }
         );
 
