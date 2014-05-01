@@ -25,9 +25,5 @@
             <argument>%sylius.validation_group.adjustment%</argument>
             <tag name="form.type" alias="sylius_adjustment" />
         </service>
-        
-        <service id="sylius.listener.complete_order" class="%sylius.listener.complete_order.class%">
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="completeOrder" />
-        </service>
     </services>
 </container>

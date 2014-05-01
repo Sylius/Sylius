@@ -32,3 +32,6 @@ finite_finite:
             return:
                 from: [shipped]
                 to:   returned
+        callbacks:
+            before:
+                - { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'], args: ['object'] }
