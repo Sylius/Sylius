@@ -7,10 +7,10 @@ Feature: Managing locales
     Background:
         Given I am logged in as administrator
           And there are following locales configured:
-            | code  | activated |
-            | de_DE | yes       |
-            | en_US | no        |
-            | fr_FR | yes       |
+            | code  | currency | activated |
+            | de_DE | EUR      | yes       |
+            | en_US | EUR      | yes       |
+            | fr_FR | EUR      | yes       |
 
     Scenario: Seeing index of all locales
         Given I am on the dashboard page
@@ -29,15 +29,17 @@ Feature: Managing locales
           And I follow "Create locale"
          Then I should be on the locale creation page
 
-    Scenario: Submitting invalid form without code
+    Scenario: Submitting invalid form without code & currency
         Given I am on the locale creation page
          When I press "Create"
          Then I should still be on the locale creation page
           And I should see "Please enter locale code"
+          And I should see "Please enter currency"
 
     Scenario: Creating new locale
         Given I am on the locale creation page
          When I fill in "Code" with "pl_PL"
+          And I fill in "Currency" with "PLN"
           And I press "Create"
          Then I should be on the locale index page
           And I should see "Locale has been successfully created."
@@ -45,9 +47,18 @@ Feature: Managing locales
     Scenario: Locales have to be unique
         Given I am on the locale creation page
          When I fill in "Code" with "de_DE"
+          And I fill in "Currency" with "EUR"
           And I press "Create"
          Then I should still be on the locale creation page
           And I should see "This locale already exists."
+
+    Scenario: Locale can contain few currencies
+        Given I am on the locale creation page
+         When I fill in "Code" with "de_DE"
+          And I fill in "Currency" with "USD"
+          And I press "Create"
+         Then I should be on the locale index page
+          And I should see "Locale has been successfully created."
 
     Scenario: Accessing the editing form from the list
         Given I am on the locale index page

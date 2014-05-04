@@ -32,12 +32,17 @@ class LocaleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
-                'label' => 'sylius.form.locale.code'
+            ->add('code', 'locale', array(
+                'label'       => 'sylius.form.locale.code',
+                'empty_value' => 'sylius.form.locale.select_code',
+            ))
+            ->add('currency', 'currency', array(
+                'label'       => 'sylius.form.locale.currency',
+                'empty_value' => 'sylius.form.locale.select_currency',
             ))
             ->add('enabled', 'checkbox', array(
-                'required' => false,
                 'label'    => 'sylius.form.locale.enabled',
+                'required' => false,
             ))
         ;
 

@@ -22,6 +22,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\LocaleInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -825,8 +826,10 @@ class DataContext extends BehatContext implements KernelAwareInterface
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
+            /* @var $locale LocaleInterface */
             $locale = $repository->createNew();
             $locale->setCode($data['code']);
+            $locale->setCurrency($data['currency']);
 
             if (isset($data['enabled'])) {
                 $locale->setEnabled('yes' === $data['enabled']);

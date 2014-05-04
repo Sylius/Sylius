@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('code', 'sylius.locale.code'|trans) }}</th>
+                <th>{{ sylius_resource_sort('currency', 'sylius.locale.currency'|trans) }}</th>
                 <th>{{ sylius_resource_sort('enabled', 'sylius.locale.enabled'|trans) }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.locale.updated_at'|trans) }}</th>
                 <th></th>
@@ -17,7 +18,8 @@
         <tbody>
         {% for locale in locales %}
             <tr id="{{ locale.id }}">
-                <td>{{ locale.code }}</td>
+                <td><span class="label label-primary">{{ locale.code }}</span></td>
+                <td><span class="label label-default">{{ locale.currency }}</span></td>
                 <td>
                     {{ misc.state_label(locale.enabled) }}
                 </td>

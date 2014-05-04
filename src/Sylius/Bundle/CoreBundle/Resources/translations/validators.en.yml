@@ -8,6 +8,8 @@ sylius:
         code:
             not_blank: Please enter locale code.
             unique: This locale already exists.
+        currency:
+            not_blank: Please enter currency.
     user:
         first_name:
             max: First name must be not be longer than {{ limit }} characters.
