@@ -25,7 +25,7 @@ interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepos
     /**
      * Gets recently completed orders.
      *
-     * @param integer $amount
+     * @param int $amount
      *
      * @return OrderInterface[]
      */

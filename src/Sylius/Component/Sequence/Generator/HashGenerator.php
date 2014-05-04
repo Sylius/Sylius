@@ -18,33 +18,16 @@ use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
  * Hash order number generator.
  *
  * @author Myke Hines <myke@webhines.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class HashGenerator extends AbstractGenerator implements GeneratorInterface
 {
     /**
-     * This generates a 3 by 7 by 7 digit number (much like amazon's order identifier)
-     * e.g. 105-3958356-3707476
-     */
-    const HASH_AMAZON = 'amazon';
-
-    /**
-     * @var HashSubjectRepositoryInterface
-     */
-    protected $subjectRepository;
-
-    /**
-     * @var string
-     */
-    protected $format;
-
-    /**
      * @param HashSubjectRepositoryInterface $subjectRepository
-     * @param string                         $format
      */
-    public function __construct(HashSubjectRepositoryInterface $subjectRepository, $format = self::HASH_AMAZON)
+    public function __construct(HashSubjectRepositoryInterface $subjectRepository)
     {
         $this->subjectRepository = $subjectRepository;
-        $this->format            = $format;
     }
 
     /**
@@ -53,21 +36,14 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
     protected function generateNumber($index, SequenceSubjectInterface $subject)
     {
         do {
-            switch ($this->format) {
-                case self::HASH_AMAZON:
-                    $number = $this->generateSegment(3) . '-' . $this->generateSegment(7) . '-' . $this->generateSegment(7);
-                    break;
-
-                default:
-                    $number = $this->generateSegment(10);
-            }
+            $number = $this->generateSegment(10);
         } while ($this->subjectRepository->isNumberUsed($number));
 
         return $number;
     }
 
     /**
-     * Generates a randomized segment
+     * Generates a randomized segment.
      *
      * @param int $length
      *
@@ -76,11 +52,11 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
     protected function generateSegment($length)
     {
         switch ($this->sequenceFormat) {
-            case self::FORMAT_STRING:
+            case GeneratorInterface::FORMAT_STRING:
                 $input = $this->generateRandomString();
                 break;
 
-            case self::FORMAT_MIXED:
+            case GeneratorInterface::FORMAT_MIXED:
                 $input = sha1(microtime(true));
                 break;
 
@@ -91,12 +67,12 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
 
         $segment = substr(str_pad($input, $length, 0, STR_PAD_LEFT), 0, $length);
 
-        if (self::FORMAT_DIGITS !== $this->sequenceFormat) {
-            if (self::CASE_UPPER === $this->formatCase) {
+        if (GeneratorInterface::FORMAT_DIGITS !== $this->sequenceFormat) {
+            if (GeneratorInterface::CASE_UPPER === $this->formatCase) {
                 return strtoupper($segment);
             }
 
-            if (self::CASE_LOWER === $this->formatCase) {
+            if (GeneratorInterface::CASE_LOWER === $this->formatCase) {
                 return strtolower($segment);
             }
         }
@@ -104,7 +80,14 @@ class HashGenerator extends AbstractGenerator implements GeneratorInterface
         return $segment;
     }
 
-    private function generateRandomString($length = 10)
+    /**
+     * Generates a random string.
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function generateRandomString($length = 10)
     {
         $characters   = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';

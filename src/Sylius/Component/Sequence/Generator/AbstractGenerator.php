@@ -26,12 +26,12 @@ abstract class AbstractGenerator implements GeneratorInterface
     /**
      * @var string
      */
-    protected $formatCase = self::CASE_MIXED;
+    protected $formatCase = GeneratorInterface::CASE_MIXED;
 
     /**
      * @var string
      */
-    protected $sequenceFormat = self::FORMAT_MIXED;
+    protected $sequenceFormat = GeneratorInterface::FORMAT_MIXED;
 
     /**
      * {@inheritdoc}

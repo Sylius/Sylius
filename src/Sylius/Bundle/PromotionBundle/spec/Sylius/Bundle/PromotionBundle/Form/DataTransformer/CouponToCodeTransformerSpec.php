@@ -48,7 +48,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
 
     function it_should_transform_coupon_into_its_code(CouponInterface $coupon)
     {
-        $coupon->getCode()->willReturn('C123');
+        $coupon->getNumber()->willReturn('C123');
 
         $this->transform($coupon)->shouldReturn('C123');
     }
@@ -61,7 +61,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
     function it_should_return_null_if_coupon_not_found_on_reverse_transform($couponRepository)
     {
         $couponRepository
-            ->findOneBy(array('code' => 'FREEIPHONE5'))
+            ->findOneBy(array('number' => 'FREEIPHONE5'))
             ->shouldBeCalled()
             ->willReturn(null)
         ;
@@ -74,7 +74,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         CouponInterface $coupon
     ) {
         $couponRepository
-            ->findOneBy(array('code' => 'FREEIPHONE5'))
+            ->findOneBy(array('number' => 'FREEIPHONE5'))
             ->shouldBeCalled()
             ->willReturn($coupon)
         ;

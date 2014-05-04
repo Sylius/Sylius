@@ -20,6 +20,7 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  * The implementation should generate next number.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 interface GeneratorInterface
 {

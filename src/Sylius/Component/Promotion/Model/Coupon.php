@@ -83,7 +83,7 @@ class Coupon implements CouponInterface
      */
     public function setNumber($number)
     {
-        $this->$number = $number;
+        $this->number = $number;
 
         return $this;
     }
