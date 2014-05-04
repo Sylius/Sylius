@@ -79,8 +79,9 @@ class NumberListener
     }
 
     /**
-     * Enable this listener for the given entity
-     * This will apply the number generator when this entity will be flushed
+     * Enable this listener for the given entity.
+     *
+     * This will apply the number generator when this entity will be pushed.
      *
      * @param SequenceSubjectInterface $subject
      */

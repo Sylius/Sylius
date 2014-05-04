@@ -13,7 +13,7 @@ namespace Sylius\Component\Sequence\Registry;
 
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistry;
-use Sylius\Component\Sequence\Number\GeneratorInterface;
+use Sylius\Component\Sequence\Generator\GeneratorInterface;
 
 /**
  * Registry for generators

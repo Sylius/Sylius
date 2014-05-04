@@ -9,19 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Sequence\Number;
+namespace Sylius\Component\Sequence\Generator;
 
 use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
  * Number generator interface.
- * The implementation should generate next order number.
+ *
+ * The implementation should generate next number.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface GeneratorInterface
 {
+    const CASE_UPPER = 'uppercase';
+    const CASE_LOWER = 'lowercase';
+    const CASE_MIXED = 'mixed-case';
+
+    const FORMAT_DIGITS = 0;
+    const FORMAT_STRING = 1;
+    const FORMAT_MIXED  = 2;
+
     /**
      * Generate and apply next available number for given subject.
      *
