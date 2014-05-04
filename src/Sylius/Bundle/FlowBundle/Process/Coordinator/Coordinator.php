@@ -222,9 +222,9 @@ class Coordinator implements CoordinatorInterface
         $this->context->addStepToHistory($step->getName());
 
         if (null !== $route = $process->getDisplayRoute()) {
-            $url = $this->router->generate($route, array(
-                'stepName' => $step->getName()
-            ));
+            $url = $this->router->generate($route, array_merge($process->getDisplayRouteParams(), array(
+                'stepName' => $step->getName(),
+            )));
 
             return new RedirectResponse($url);
         }
