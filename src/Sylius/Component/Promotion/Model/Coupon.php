@@ -30,7 +30,7 @@ class Coupon implements CouponInterface
      *
      * @var string
      */
-    protected $code;
+    protected $number;
 
     /**
      * Usage limit
@@ -73,19 +73,27 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function getNumber()
     {
-        return $this->code;
+        return $this->number;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function setNumber($number)
     {
-        $this->code = $code;
+        $this->$number = $number;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSequenceType()
+    {
+        return 'coupon';
     }
 
     /**

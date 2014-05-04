@@ -31,7 +31,7 @@
             <argument>%sylius.model.sequence.class%</argument>
         </service>
 
-        <service id="sylius.sequence.number_listener" class="%sylius.listener.order_number.class%" abstract="true">
+        <service id="sylius.sequence.number_listener" class="%sylius.sequence.number_listener.class%">
             <argument type="service" id="sylius.sequence.doctrine_number_listener" />
         </service>
     </services>
