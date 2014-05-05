@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Controller;
 
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
 use Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,8 +23,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProcessController extends ContainerAware
+class ProcessController
 {
+    /**
+     * @var CoordinatorInterface
+     */
+    protected $processCoordinator;
+
+    /**
+     * @var ProcessContextInterface
+     */
+    protected $processContext;
+    
+    public function __construct(CoordinatorInterface $processCoordinator, ProcessContextInterface $processContext)
+    {
+    	$this->processCoordinator = $processCoordinator;
+    	$this->processContext = $processContext;
+    }
+
     /**
      * Build and start process for given scenario.
      * This action usually redirects to first step.
@@ -35,9 +52,7 @@ class ProcessController extends ContainerAware
      */
     public function startAction(Request $request, $scenarioAlias)
     {
-        $coordinator = $this->container->get('sylius.process.coordinator');
-
-        return $coordinator->start($scenarioAlias, $request->query);
+        return $this->processCoordinator->start($scenarioAlias, $request->query);
     }
 
     /**
@@ -53,12 +68,10 @@ class ProcessController extends ContainerAware
      */
     public function displayAction(Request $request, $scenarioAlias, $stepName)
     {
-        $this->container->get('sylius.process.context')->setRequest($request);
-
-        $coordinator = $this->container->get('sylius.process.coordinator');
+        $this->processContext->setRequest($request);
 
         try {
-            return $coordinator->display($scenarioAlias, $stepName, $request->query);
+            return $this->processCoordinator->display($scenarioAlias, $stepName, $request->query);
         } catch (InvalidArgumentException $e) {
             throw new NotFoundHttpException('The step you are looking for is not found.', $e);
         }
@@ -75,10 +88,8 @@ class ProcessController extends ContainerAware
      */
     public function forwardAction(Request $request, $scenarioAlias, $stepName)
     {
-        $this->container->get('sylius.process.context')->setRequest($request);
+        $this->processContext->setRequest($request);
 
-        $coordinator = $this->container->get('sylius.process.coordinator');
-
-        return $coordinator->forward($scenarioAlias, $stepName);
+        return $this->processCoordinator->forward($scenarioAlias, $stepName);
     }
 }

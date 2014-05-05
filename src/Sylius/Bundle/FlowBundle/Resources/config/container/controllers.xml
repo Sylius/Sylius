@@ -23,9 +23,8 @@
 
     <services>
         <service id="sylius.controller.process" class="%sylius.controller.process.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+            <argument type="service" id="sylius.process.coordinator" />
+            <argument type="service" id="sylius.process.context" />
         </service>
     </services>
 
