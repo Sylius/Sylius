@@ -13,7 +13,7 @@ Feature: Currency selection
         And the following products exist:
           | name          | price | taxons       |
           | PHP Top       | 5.99  | PHP T-Shirts |
-        And there are following currencies:
+        And there are following currencies configured:
           | code | exchange rate | enabled |
           | EUR  | 1.00000       | yes     |
           | USD  | 0.76496       | yes     |
@@ -22,7 +22,7 @@ Feature: Currency selection
 
 
     Scenario: Only enabled currencies are visible to the user
-        When I go to the store homepage
+        Givem I am on the store homepage
         Then I should see 3 available currencies
          And I should see product prices in "EUR"
 

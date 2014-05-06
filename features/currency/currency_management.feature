@@ -10,7 +10,7 @@ Feature: Currency management
             | code | exchange rate | enabled |
             | USD  | 0.76496       | yes     |
             | GBP  | 1.16998       | no      |
-            | PLN  | 1.00000       | yes     |
+            | EUR  | 1.00000       | yes     |
             | AUD  | 0.73986       | yes     |
 
     Scenario: Browsing all configured currencies
@@ -44,17 +44,11 @@ Feature: Currency management
 
     Scenario: Creating new currency
         Given I am on the currency creation page
-         When I select "Polish Zloty" from "Currency"
+         When I select "Polish Zloty" from "Code"
           And I fill in "Exchange rate" with "0.235654"
           And I press "Create"
          Then I should be on the currency index page
           And I should see "currency has been successfully created."
-
-    Scenario: Created currencies appear in the list
-        Given I have configured currency "PLN"
-         When I go to the currency index page
-         Then I should see 4 currencies in the list
-          And I should see a currency with name "Polish Zloty" in that list
 
     Scenario: Accessing the currency edit form
         Given I am on the currency index page
@@ -66,7 +60,7 @@ Feature: Currency management
           And I fill in "Exchange rate" with "0.76498"
           And I press "Save changes"
          Then I should be on the currency index page
-          And I should see a currenct with exchange rate "0.76498"
+          And I should see currency with rate "0.76498" in the list
 
     @javascript
     Scenario: Deleting a currency

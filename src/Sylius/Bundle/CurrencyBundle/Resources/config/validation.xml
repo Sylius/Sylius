@@ -20,20 +20,24 @@
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.currency.code.unique</option>
+            <option name="groups">sylius</option>
         </constraint>
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.currency.code.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">3</option>
                 <option name="max">3</option>
                 <option name="exactMessage">sylius.currency.code.exact_length</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="exchangeRate">
             <constraint name="NotBlank">
                 <option name="message">sylius.currency.exchange_rate.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
