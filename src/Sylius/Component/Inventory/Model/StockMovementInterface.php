@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Inventory\Model;
 
-use Sylius\Component\Resource\Model\TimestampableInterface;
-
 /**
  * Stock movement.
  *
