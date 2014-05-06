@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -63,6 +64,13 @@ class Product extends BaseProduct implements ProductInterface
     protected $restrictedZone;
 
     /**
+     * Channels in which this product is available.
+     *
+     * @var ChannelInterface[]
+     */
+    protected $channels;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -71,6 +79,7 @@ class Product extends BaseProduct implements ProductInterface
 
         $this->setMasterVariant(new ProductVariant());
         $this->taxons = new ArrayCollection();
+        $this->channels = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
     }
@@ -275,6 +284,52 @@ class Product extends BaseProduct implements ProductInterface
     public function getImage()
     {
         return $this->getMasterVariant()->getImages()->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannels()
+    {
+        return $this->channels;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setChannels(Collection $channels)
+    {
+        $this->channels = $channels;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChannel(BaseChannelInterface $channel)
+    {
+        if (!$this->hasChannel($channel)) {
+            $this->channels->add($channel);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChannel(BaseChannelInterface $channel)
+    {
+        if ($this->hasChannel($channel)) {
+            $this->channels->removeElement($channel);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannel(BaseChannelInterface $channel)
+    {
+        return $this->channels->contains($channel);
     }
 
     /**

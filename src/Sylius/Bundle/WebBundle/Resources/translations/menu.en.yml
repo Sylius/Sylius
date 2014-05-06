@@ -11,6 +11,7 @@ sylius:
                 countries: Countries
                 customer: Customers
                 content: Content
+                channels: Channels
                 dashboard: Dashboard
                 currencies: Currencies
                 general_settings: General settings
@@ -50,6 +51,7 @@ sylius:
                 configuration: Configuration
                 content: Content
                 countries: Countries
+                channels: Channels
                 customer: Customers
                 dashboard: Dashboard
                 currencies: Currencies

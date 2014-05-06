@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -33,6 +34,13 @@ class Order extends Cart implements OrderInterface
      * @var UserInterface
      */
     protected $user;
+
+    /**
+     * Channel.
+     *
+     * @var ChannelInterface
+     */
+    protected $channel;
 
     /**
      * Order shipping address.
@@ -68,6 +76,13 @@ class Order extends Cart implements OrderInterface
      * @var string
      */
     protected $currency;
+
+    /**
+     * Exchange rate at the time of order completion.
+     *
+     * @var float
+     */
+    protected $exchangeRate = 1;
 
     /**
      * Promotion coupons.
@@ -132,9 +147,28 @@ class Order extends Cart implements OrderInterface
     public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
+
         if (null !== $this->user) {
             $this->email = $this->user->getEmail();
         }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setChannel(BaseChannelInterface $channel = null)
+    {
+        $this->channel = $channel;
 
         return $this;
     }
@@ -442,6 +476,24 @@ class Order extends Cart implements OrderInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExchangeRate()
+    {
+        return $this->exchangeRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExchangeRate($exchangeRate)
+    {
+        $this->exchangeRate = $exchangeRate;
 
         return $this;
     }

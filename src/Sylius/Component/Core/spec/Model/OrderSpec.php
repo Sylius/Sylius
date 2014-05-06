@@ -176,6 +176,17 @@ class OrderSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('PLN');
     }
 
+    function it_has_default_exchange_rate_equal_to_1()
+    {
+        $this->getExchangeRate()->shouldReturn(1);
+    }
+
+    function its_exchange_rate_is_mutable()
+    {
+        $this->setExchangeRate(1.25);
+        $this->getExchangeRate()->shouldReturn(1.25);
+    }
+
     function it_has_checkout_shipping_state_by_default()
     {
         $this->getShippingState()->shouldReturn(OrderShippingStates::CHECKOUT);

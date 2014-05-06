@@ -248,6 +248,8 @@ sylius:
             index: Taxonomies
         email:
             index: Emails
+        channel:
+            index: Channels
         update: Edit
         user:
             index: Users
@@ -627,6 +629,20 @@ sylius:
         update: Edit
         update_header: Editing shipment
         updated_at: Last update
+    channel:
+        create: Add channel
+        created_at: Created at
+        code: Code
+        enabled: Enabled
+        id: ID
+        index_header: Channels
+        manage: Manage channels
+        create_header: Add channel
+        name: Name
+        no_results: There are no channels configured.
+        update: Edit
+        update_header: Editing channel
+        updated_at: Last update
     order_item:
         product: Item
         quantity: Qty
@@ -725,6 +741,7 @@ sylius:
             options: Options
             product: Product
             attributes: Attributes
+            channels: Channels
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product

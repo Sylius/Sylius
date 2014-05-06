@@ -94,7 +94,7 @@ class GeneralSettingsSchema implements SchemaInterface
                     new Locale(),
                 )
             ))
-            ->add('currency', 'sylius_currency_choice', array(
+            ->add('currency', 'sylius_currency_code_choice', array(
                 'label'       => 'sylius.form.settings.general.currency',
                 'constraints' => array(
                     new NotBlank(),

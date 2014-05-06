@@ -1,0 +1,10 @@
+sylius:
+    form:
+        channel:
+            code: Code
+            name: Name
+            description: Description
+            url: URL
+            enabled: Enabled
+            type: Type
+            color: Color
