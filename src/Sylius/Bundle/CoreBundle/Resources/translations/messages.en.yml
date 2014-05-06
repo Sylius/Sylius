@@ -26,6 +26,12 @@ sylius:
         group:
             name: Name
             roles: Roles
+        channel:
+            taxonomies: Taxonomies
+            locales: Locales
+            currencies: Currencies
+            shipping_methods: Shipping Methods
+            payment_methods: Payment Methods
         image:
             file: Image
         locale:

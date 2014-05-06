@@ -266,6 +266,11 @@ class BackendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.emails', $section)));
 
+        $child->addChild('channels', array(
+            'route' => 'sylius_backend_channel_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.channels', $section)));
+
         $child->addChild('locales', array(
             'route' => 'sylius_backend_locale_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-flag'),

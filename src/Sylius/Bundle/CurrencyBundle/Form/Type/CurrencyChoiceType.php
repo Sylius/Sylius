@@ -11,26 +11,31 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Sylius currency choices type.
+ * Currency choice form form.
  *
- * @author Liverbool <nukboon@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyChoiceType extends AbstractType
+abstract class CurrencyChoiceType extends AbstractType
 {
+    /**
+     * Currency model class.
+     *
+     * @var string
+     */
+    protected $className;
 
     /**
-     * @var CurrencyProviderInterface
+     * Constructor.
+     *
+     * @param string $className
      */
-    protected $currencyProvider;
-
-    public function __construct(CurrencyProviderInterface $currencyProvider)
+    public function __construct($className)
     {
-        $this->currencyProvider = $currencyProvider;
+        $this->className = $className;
     }
 
     /**
@@ -38,23 +43,11 @@ class CurrencyChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $choices = null;
-
-        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
-            $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
-        }
-
-        $resolver->setDefaults(array(
-            'choices' => $choices,
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return 'choice';
+        $resolver
+            ->setDefaults(array(
+                'class' => $this->className
+            ))
+        ;
     }
 
     /**
