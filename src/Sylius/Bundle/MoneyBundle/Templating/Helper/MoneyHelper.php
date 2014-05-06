@@ -18,31 +18,29 @@ use Symfony\Component\Templating\Helper\Helper;
 class MoneyHelper extends Helper
 {
     /**
-     * @var CurrencyConverterInterface
+     * The locale used to format money.
+     *
+     * @var string
      */
-    private $converter;
+    private $locale;
 
     /**
-     * @var CurrencyContextInterface
+     * The default currency.
+     *
+     * @var string
      */
-    private $currencyContext;
+    private $currency;
 
     /**
      * @var \NumberFormatter
      */
     private $formatter;
 
-    /**
-     * @var string
-     */
-    private $pattern = '¤#,##0.00;-¤#,##0.00';
-
-    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, $locale = null)
+    public function __construct($locale, $currency)
     {
-        $this->currencyContext = $currencyContext;
-        $this->converter       = $converter;
-        $this->formatter       = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
-        $this->formatter->setPattern($this->pattern);
+        $this->locale = $locale;
+        $this->currency = $currency;
+        $this->formatter = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
     }
 
     /**
@@ -52,12 +50,13 @@ class MoneyHelper extends Helper
      * @param string|null $currency
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
     public function formatMoney($amount, $currency = null)
     {
-        $currency = $currency ?: $this->currencyContext->getDefaultCurrency();
-        $result   = $this->formatter->formatCurrency($amount / 100, $currency);
+        $currency = $currency ?: $this->getDefaultCurrency();
+        $result = $this->formatter->formatCurrency($amount / 100, $currency);
 
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
@@ -67,25 +66,20 @@ class MoneyHelper extends Helper
     }
 
     /**
-     * Convert price between currencies and format the amount to nice display form.
-     *
-     * @param integer     $amount
-     * @param string|null $currency
-     *
-     * @return string
-     */
-    public function formatPrice($amount, $currency = null)
-    {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
-
-        return $this->formatMoney($this->converter->convert($amount, $currency), $currency);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'sylius_money';
+    }
+
+    /**
+     * Get the default currency if none is provided as argument.
+     *
+     * @return string The currency code
+     */
+    protected function getDefaultCurrency()
+    {
+        return $this->currency;
     }
 }

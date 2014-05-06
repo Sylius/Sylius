@@ -448,9 +448,9 @@
         </service>
 
         <!-- money -->
-        <service id="sylius.currency_context" class="%sylius.currency_context.class%">
-            <argument type="service" id="security.context" />
+        <service id="sylius.context.currency" class="%sylius.context.currency.class%">
             <argument type="service" id="session" />
+            <argument type="service" id="security.context" />
             <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.manager.user" />
         </service>

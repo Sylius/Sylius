@@ -23,8 +23,8 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class CurrencyContextSpec extends ObjectBehavior
 {
     function let(
-        SecurityContextInterface $securityContext,
         SessionInterface $session,
+        SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
         ObjectManager $userManager,
         Settings $settings
@@ -33,7 +33,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $settingsManager->loadSettings('general')->shouldBeCalled()->willReturn($settings);
         $settings->get('currency')->shouldBeCalled()->willReturn('EUR');
 
-        $this->beConstructedWith($securityContext, $session, $settingsManager, $userManager);
+        $this->beConstructedWith($session, $securityContext, $settingsManager, $userManager);
     }
 
     function it_is_initializable()
@@ -43,7 +43,7 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_extends_Sylius_currency_context()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Context\CurrencyContext');
+        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Context\CurrencyContext');
     }
 
     function it_gets_default_currency()
