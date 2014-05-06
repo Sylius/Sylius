@@ -11,9 +11,6 @@
 
 namespace Sylius\Component\Shipping\Processor;
 
-use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShipmentItemInterface;
-
 /**
  * Shipment processor.
  *
@@ -25,17 +22,15 @@ interface ShipmentProcessorInterface
      * Update shipments state.
      *
      * @param ShipmentInterface[] $shipments
-     * @param string              $stateTo   ShipmentInterface::STATE_*
-     * @param string              $stateFrom ShipmentInterface::STATE_*
+     * @param string              $transition ShipmentTransitions::*
      */
-    public function updateShipmentStates($shipments, $stateTo, $stateFrom = null);
+    public function updateShipmentStates($shipments, $transition);
 
     /**
      * Update shipment items shipment state.
      *
      * @param ShipmentItemInterface[] $items
-     * @param string                  $stateTo   ShipmentInterface::STATE_*
-     * @param string                  $stateFrom ShipmentInterface::STATE_*
+     * @param string                  $transition ShipmentItemTransitions::*
      */
-    public function updateItemStates($items, $stateTo, $stateFrom = null);
+    public function updateItemStates($items, $transition);
 }

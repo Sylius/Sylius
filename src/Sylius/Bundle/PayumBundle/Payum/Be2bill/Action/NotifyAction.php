@@ -112,24 +112,11 @@ class NotifyAction extends AbstractPaymentStateAwareAction
         $status = new StatusRequest($order);
         $this->payment->execute($status);
 
-        $previousState = $payment->getState();
         $nextState = $status->getStatus();
 
         $this->updatePaymentState($payment, $nextState);
 
-        if ($previousState !== $nextState) {
-            $this->eventDispatcher->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-
-            $this->objectManager->flush();
-
-            $this->eventDispatcher->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-        }
+        $this->objectManager->flush();
 
         throw new ResponseInteractiveRequest(new Response('OK', 200));
     }

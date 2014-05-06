@@ -39,7 +39,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function updateShipmentStates($shipments, $transitionName, $stateFrom = null)
+    public function updateShipmentStates($shipments, $transition)
     {
         if (!is_array($shipments) && !$shipments instanceof Collection) {
             throw new \InvalidArgumentException('Shipments value must be array or instance of "Doctrine\Common\Collections\Collection".');
@@ -51,9 +51,9 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             }
 
             $stateMachine = $this->factory->get($shipment, ShipmentTransitions::GRAPH);
-            if ((null === $stateFrom || $stateFrom === $shipment->getState()) && $stateMachine->can($transitionName)) {
-                $stateMachine->apply($transitionName);
-                $this->updateItemStates($shipment->getItems(), $transitionName, $stateFrom);
+            if ($stateMachine->can($transition)) {
+                $stateMachine->apply($transition);
+                $this->updateItemStates($shipment->getItems(), $transition);
             }
         }
     }
@@ -61,7 +61,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function updateItemStates($items, $transitionName, $stateFrom = null)
+    public function updateItemStates($items, $transition)
     {
         if (!is_array($items) && !$items instanceof Collection) {
             throw new \InvalidArgumentException('Inventory items value must be array or instance of "Doctrine\Common\Collections\Collection".');
@@ -73,8 +73,8 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             }
 
             $stateMachine = $this->factory->get($item, ShipmentItemTransitions::GRAPH);
-            if ((null === $stateFrom || $stateFrom === $item->getShippingState()) && $stateMachine->can($transitionName)) {
-                $stateMachine->apply($transitionName);
+            if ($stateMachine->can($transition)) {
+                $stateMachine->apply($transition);
             }
         }
     }

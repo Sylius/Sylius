@@ -135,21 +135,6 @@ class PurchaseStepSpec extends ObjectBehavior
 
         $eventDispatcher
             ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
-
-        $eventDispatcher
-            ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,
                 Argument::type('Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent')
             )
@@ -200,20 +185,6 @@ class PurchaseStepSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldNotBeCalled()
-        ;
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldNotBeCalled()
-        ;
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,

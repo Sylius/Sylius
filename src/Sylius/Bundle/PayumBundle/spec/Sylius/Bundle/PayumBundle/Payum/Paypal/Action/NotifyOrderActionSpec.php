@@ -112,21 +112,6 @@ class NotifyOrderActionSpec extends ObjectBehavior
             }
         );
 
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldNotBeCalled()
-        ;
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldNotBeCalled()
-        ;
-
         $this->execute($request);
     }
 
@@ -162,23 +147,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
             }
         );
 
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
-
         $objectManager->flush()->shouldBeCalled();
-
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
 
         $this->execute($request);
     }

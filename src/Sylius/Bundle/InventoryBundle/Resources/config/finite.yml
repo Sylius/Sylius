@@ -18,8 +18,8 @@ finite_finite:
             backorder:
                 from: [checkout, onhold]
                 to:   backordered
-            sold:
-                from: [checkout, onhold]
+            sell:
+                from: [checkout, onhold, backordered]
                 to:   sold
             return:
                 from: [shipped]

@@ -69,11 +69,16 @@ finite_finite:
     sylius_payment:
         callbacks:
             after:
-                - { on: 'complete', do: [@sylius.callback.order_payment, 'updateOrderOnPayment'], args: ['object'] }
+                test: { on: 'complete', do: [@sylius.callback.order_payment, 'updateOrderOnPayment'], args: ['object'] }
 
     sylius_order:
         callbacks:
             after:
-                - { on: 'confirm', do: [@sylius.order_processing.inventory_handler, 'updateInventory'],      args: ['object'] }
-                - { on: 'confirm', do: [@sylius.processor.shipment_processor,       'updateShipmentStates'], args: ['object.getShipments()', '"prepare"'] }
-                - { on: 'confirm', do: [@sylius.callback.coupon_usage,              'incrementCouponUsage'], args: ['object'] }
+                sylius_inventory: { on: 'confirm', do: [@sylius.order_processing.inventory_handler, 'updateInventory'],      args: ['object'] }
+                sylius_shipment:  { on: 'confirm', do: [@sylius.processor.shipment_processor,       'updateShipmentStates'], args: ['object.getShipments()', '"prepare"'] }
+                sylius_coupon:    { on: 'confirm', do: [@sylius.callback.coupon_usage,              'incrementCouponUsage'], args: ['object'] }
+
+    sylius_inventory_unit:
+        callbacks:
+            after:
+                sylius_sync_shipping: { to: '-sold', do: [@finite.callback.cascade_transition, 'apply'], args: ['object', ~, '"sylius_shipping_item"'] }

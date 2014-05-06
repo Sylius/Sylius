@@ -21,6 +21,7 @@ sylius:
                 unknown: Unknown
                 void: Void
                 cancelled: Cancelled
+                refunded: Refunded
         payment_method:
             description: Description
             enabled: Enabled?

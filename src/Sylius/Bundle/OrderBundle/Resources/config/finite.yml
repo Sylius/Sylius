@@ -35,5 +35,5 @@ finite_finite:
                 to:   returned
         callbacks:
             after:
-                - { on: 'create', do: [@sylius.callback.complete_order,           'completeOrder'], args: ['object'] }
-                - { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'],  args: ['object'] }
+                sylius_complete: { on: 'create', do: [@sylius.callback.complete_order,           'completeOrder'], args: ['object'] }
+                sylius_number:   { on: 'create', do: [@sylius.sequence.doctrine_number_listener, 'enableEntity'],  args: ['object'] }
