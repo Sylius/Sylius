@@ -7,11 +7,11 @@ Feature: Currency management
     Background:
         Given I am logged in as administrator
           And there are following currencies configured:
-            | currency | exchange rate | enabled |
-            | USD      | 0.76496       | yes     |
-            | GBP      | 1.16998       | no      |
-            | PLN      | 1.00000       | yes     |
-            | AUD      | 0.73986       | yes     |
+            | code | exchange rate | enabled |
+            | USD  | 0.76496       | yes     |
+            | GBP  | 1.16998       | no      |
+            | PLN  | 1.00000       | yes     |
+            | AUD  | 0.73986       | yes     |
 
     Scenario: Browsing all configured currencies
         Given I am on the dashboard page

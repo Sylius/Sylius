@@ -102,7 +102,7 @@ class Currency implements CurrencyInterface
      */
     public function setExchangeRate($rate)
     {
-        $this->rate = $rate;
+        $this->exchangeRate = $rate;
 
         return $this;
     }

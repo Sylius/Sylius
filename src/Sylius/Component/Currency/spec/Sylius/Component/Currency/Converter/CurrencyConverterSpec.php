@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Currency\Converter;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Converter\UnavailableCurrencyException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -45,7 +46,7 @@ class CurrencyConverterSpec extends ObjectBehavior
         $currencyRepository->findOneBy(array('code' => 'EUR'))->shouldBeCalled()->willReturn(null);
 
         $this
-            ->shouldThrow(new UnavailableCurrencyException('Currency "EUR" is not available.'))
+            ->shouldThrow(new UnavailableCurrencyException('EUR'))
             ->duringConvert(6555, 'EUR')
         ;
     }

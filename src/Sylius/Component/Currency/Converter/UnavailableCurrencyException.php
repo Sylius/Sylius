@@ -12,19 +12,14 @@
 namespace Sylius\Component\Currency\Converter;
 
 /**
- * Interface to be implemented by the currency converter service.
+ * Exception thrown when someone requests unavailable currency.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CurrencyConverterInterface
+class UnavailableCurrencyException extends \InvalidArgumentException
 {
-    /**
-     * Convert the given value to equal amount with different currency.
-     *
-     * @param integer $value
-     * @param string  $code
-     *
-     * @return integer
-     */
-    public function convert($value, $code);
+    public function __construct($currency)
+    {
+        parent::__construct(sprintf('Currency "%s" is not available.', $currency));
+    }
 }

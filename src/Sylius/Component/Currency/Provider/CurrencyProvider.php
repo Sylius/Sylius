@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Currency\Converter;
+namespace Sylius\Component\Currency\Provider;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Default converter.
+ * Default provider returns all enabled currencies.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyConverter implements CurrencyConverterInterface
+class CurrencyProvider implements CurrencyProviderInterface
 {
     /**
      * Repository for currency model.
@@ -26,13 +26,6 @@ class CurrencyConverter implements CurrencyConverterInterface
      * @var RepositoryInterface
      */
     protected $currencyRepository;
-
-    /**
-     * Cache for the exchange rates.
-     *
-     * @var array
-     */
-    private $cache;
 
     /**
      * @param RepositoryInterface $currencyRepository
@@ -45,23 +38,8 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert($value, $code)
+    public function getAvailableCurrencies()
     {
-        $currency = $this->getCurrency($code);
-
-        if (null === $currency) {
-            throw new UnavailableCurrencyException($code);
-        }
-
-        return (int) round($value * $currency->getExchangeRate());
-    }
-
-    private function getCurrency($code)
-    {
-        if (isset($this->cache[$code])) {
-            return $this->cache[$code];
-        }
-
-        return $this->cache[$code] = $this->currencyRepository->findOneBy(array('code' => $code));
+        return $this->currencyRepository->findBy(array('enabled' => true));
     }
 }

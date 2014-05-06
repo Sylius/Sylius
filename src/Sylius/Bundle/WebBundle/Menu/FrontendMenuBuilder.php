@@ -84,7 +84,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
 
-        $this->$currencyProvider = $currencyProvider;
+        $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->moneyExtension = $moneyExtension;
@@ -116,12 +116,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
                 '%items%' => $cartTotals['items'],
-                '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
+                '%total%' => $this->moneyExtension->formatAmount($cartTotals['total'])
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
             '%items%' => $cartTotals['items'],
-            '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
+            '%total%' => $this->moneyExtension->formatAmount($cartTotals['total'])
         )));
 
         if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_USER')) {

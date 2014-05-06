@@ -39,10 +39,34 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
+        $this->addValidationGroupsSection($rootNode);
         $this->addClassesSection($rootNode);
 
         return $treeBuilder;
     }
+
+    /**
+     * Adds `validation_groups` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('validation_groups')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('currency')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
 
     /**
      * Adds `classes` section.

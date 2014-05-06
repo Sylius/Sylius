@@ -30,10 +30,18 @@ class CurrencyHelper extends Helper
      */
     private $currencyContext;
 
-    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
+    /**
+     * Money helper.
+     *
+     * @var MoneyHelper
+     */
+    private $moneyHelper;
+
+    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, MoneyHelper $moneyHelper)
     {
         $this->currencyContext = $currencyContext;
         $this->converter       = $converter;
+        $this->moneyHelper     = $moneyHelper;
     }
 
     /**
@@ -49,6 +57,22 @@ class CurrencyHelper extends Helper
         $currency = $currency ?: $this->currencyContext->getCurrency();
 
         return $this->converter->convert($amount, $currency);
+    }
+
+    /**
+     * Convert amount and format it!
+     *
+     * @param integer     $amount
+     * @param string|null $currency
+     *
+     * @return string
+     */
+    public function convertAndFormatAmount($amount, $currency = null)
+    {
+        $currency = $currency ?: $this->currencyContext->getCurrency();
+        $amount = $this->converter->convert($amount, $currency);
+
+        return $this->moneyHelper->formatAmount($amount, $currency);
     }
 
     /**

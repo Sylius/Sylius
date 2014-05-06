@@ -7,7 +7,6 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.currency.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.currency.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('code', 'sylius.currency.code'|trans) }}</th>
             <th>{{ sylius_resource_sort('exchangeRate', 'sylius.currency.exchange_rate'|trans) }}</th>
@@ -19,13 +18,12 @@
     <tbody>
     {% for currency in countries %}
         <tr id="{{ currency.id }}">
-            <td>{{ currency.id }}</td>
             <td>{{ currency.name }}</td>
             <td>{{ currency.code }}</td>
-            <td><span class="label label-primary">{{ currency.rate }}</span></td>
+            <td><span class="label label-primary">{{ currency.exchangeRate }}</span></td>
             <td>
-                <span class="label label-{{ payment_method.enabled ? 'success' : 'danger'}}">
-                    {{ payment_method.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                <span class="label label-{{ currency.enabled ? 'success' : 'danger'}}">
+                    {{ currency.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                 </span>
             </td>
             <td>{{ currency.updatedAt|date }}</td>

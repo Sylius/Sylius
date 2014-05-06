@@ -98,7 +98,7 @@ sylius_backend_payment:
 
 sylius_backend_currency:
     resource: @SyliusWebBundle/Resources/config/routing/backend/currency.yml
-    prefix: /exchange-rates
+    prefix: /currencies
 
 sylius_backend_country:
     resource: @SyliusWebBundle/Resources/config/routing/backend/country.yml

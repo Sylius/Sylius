@@ -52,7 +52,7 @@ class CurrencyType extends AbstractType
             ->add('code', 'currency', array(
                 'label' => 'sylius.form.currency.code'
             ))
-            ->add('exchange_rate', 'number', array(
+            ->add('exchangeRate', 'number', array(
                 'label' => 'sylius.form.currency.exchange_rate'
             ))
             ->add('enabled', 'checkbox', array(

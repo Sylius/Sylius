@@ -27,6 +27,7 @@
     <services>
         <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
             <argument>%sylius.model.currency.class%</argument>
+            <argument>%sylius.validation_group.currency%</argument>
             <tag name="form.type" alias="sylius_currency" />
         </service>
 

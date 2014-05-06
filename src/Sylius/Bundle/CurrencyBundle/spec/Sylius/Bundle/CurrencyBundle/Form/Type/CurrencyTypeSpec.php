@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Form\Type;
+namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -19,16 +19,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ExchangeRateTypeSpec extends ObjectBehavior
+class CurrencyTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ExchangeRate');
+        $this->beConstructedWith('Currency', array('sylius'));
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType');
+        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType');
     }
 
     function it_is_a_form_type()
@@ -39,13 +39,19 @@ class ExchangeRateTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('currency', 'currency', Argument::any())
+            ->add('code', 'currency', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('rate', 'text', Argument::any())
+            ->add('exchangeRate', 'number', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('enabled', 'checkbox', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -53,10 +59,15 @@ class ExchangeRateTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'ExchangeRate'))->shouldBeCalled();
+        $resolver->setDefaults(array('data_class' => 'Currency', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_has_valid_name()
+    {
+        $this->getName()->shouldReturn('sylius_currency');
     }
 }

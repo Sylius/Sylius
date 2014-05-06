@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\MoneyBundle\Twig;
+namespace spec\Sylius\Bundle\CurrencyBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class MoneyExtensionSpec extends ObjectBehavior
+class CurrencyExtensionSpec extends ObjectBehavior
 {
-    function let(MoneyHelper $helper)
+    function let(CurrencyHelper $helper)
     {
         $this->beConstructedWith($helper);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Twig\MoneyExtension');
+        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension');
     }
 
     function it_is_a_Twig_extension()

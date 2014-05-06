@@ -40,6 +40,7 @@ class CurrencyExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('sylius_currency', array($this, 'convertAmount')),
+            new \Twig_SimpleFilter('sylius_price', array($this, 'convertAndFormatAmount')),
         );
     }
 
@@ -54,6 +55,19 @@ class CurrencyExtension extends \Twig_Extension
     public function convertAmount($amount, $currency = null)
     {
         return $this->helper->convertAmount($amount, $currency);
+    }
+
+    /**
+     * Convert and format amount.
+     *
+     * @param integer     $amount
+     * @param string|null $currency
+     *
+     * @return string
+     */
+    public function convertAndFormatAmount($amount, $currency = null)
+    {
+        return $this->helper->convertAndFormatAmount($amount, $currency);
     }
 
     /**

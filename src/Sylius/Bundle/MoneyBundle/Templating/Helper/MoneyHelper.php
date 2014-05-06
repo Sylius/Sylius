@@ -53,7 +53,7 @@ class MoneyHelper extends Helper
      *
      * @throws \InvalidArgumentException
      */
-    public function formatMoney($amount, $currency = null)
+    public function formatAmount($amount, $currency = null)
     {
         $currency = $currency ?: $this->getDefaultCurrency();
         $result = $this->formatter->formatCurrency($amount / 100, $currency);

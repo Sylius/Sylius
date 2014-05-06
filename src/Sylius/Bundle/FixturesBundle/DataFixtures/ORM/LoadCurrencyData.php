@@ -16,11 +16,11 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 /**
- * Default exchange rate fixtures.
+ * Default currency fixtures.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class LoadExchangeRatesData extends DataFixture
+class LoadCurrencyData extends DataFixture
 {
     protected $currencies = array(
         'EUR' => 1.00,
@@ -33,15 +33,16 @@ class LoadExchangeRatesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $exchangeRateRepository = $this->getExchangeRateRepository();
+        $currencyRepository = $this->getCurrencyRepository();
 
-        foreach ($this->currencies as $currency => $rate) {
-            /* @var $exchangeRate ExchangeRateInterface */
-            $exchangeRate = $exchangeRateRepository->createNew();
-            $exchangeRate->setCurrency($currency);
-            $exchangeRate->setRate($rate);
+        foreach ($this->currencies as $code => $rate) {
+            $currency = $currencyRepository->createNew();
 
-            $manager->persist($exchangeRate);
+            $currency->setCode($code);
+            $currency->setRate($rate);
+            $currency->setEnabled(true);
+
+            $manager->persist($currency);
         }
 
         $manager->flush();
