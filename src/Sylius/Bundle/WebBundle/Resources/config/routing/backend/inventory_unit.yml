@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_inventory_unit_update_state:
+    path: /update-state/{id}/{transition}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.inventory_unit:updateStateAction

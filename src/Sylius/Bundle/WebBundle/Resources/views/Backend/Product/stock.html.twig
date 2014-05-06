@@ -1,0 +1,99 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusWebBundle:Backend/ProductVariant:macros.html.twig' import list as list_variants %}
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a></li>
+    <li>Stock</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+    {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if not product.deleted %}
+    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
+    {% endif %}
+    <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
+       <i class="glyphicon glyphicon-calendar"></i>
+        {{ 'sylius.history.header'|trans }}
+    </a>
+    </div>
+    <h1>
+        <i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}
+        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+    </h1>
+</div>
+
+<form method="post" action="{{ path('sylius_backend_product_stock', {'id': product.id}) }}" class="form-horizontal">
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary" value="Modify stock" />
+    </div>
+</form>
+
+{% if not product.hasVariants %}
+    {% set variants = [product.masterVariant] %}
+{% else %}
+    {% set variants = product.variants %}
+{% endif %}
+
+{% for variant in variants %}
+<table class="table table-bordered">
+    <thead>
+        <tr data-hook="admin_product_stock_management_index_headers">
+            <th>Item</th>
+            <th colspan="4"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="center-text">
+                <br>
+                {{ variant }} ({{ variant.id }})
+                <hr>
+                <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
+            <td colspan="4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Stock Location</th>
+                        <th>Count On Hand</th>
+                        <th>Count On Hold</th>
+                        <th>Available On Demand</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock_item in variant.stockItems %}
+                    {% set location = stock_item.location %}
+                    <tr>
+                        <td class="center-text">{{ location.name }} <a href="{{ path('sylius_backend_stock_movement_index', {'locationId': location.id}) }}"><i class="glyphicon glyphicon-info-sign"></i></a></td>
+                        <td class="center-text">{{ stock_item.onHand }}</td>
+                        <td class="center-text">{{ stock_item.onHold }}</td>
+                        <td class="center-text">
+                            <a href="{{ path('sylius_api_stock_item_update', {'id': stock_item.id}) }}" data-value="{{ stock_item.availableOnDemand }}" class="available-on-demand-toggle">
+                            {% if stock_item.availableOnDemand %}
+                                <i class="glyphicon glyphicon-ok-sign" style="color: #1abb9c;"></i>
+                            {% else %}
+                                <i class="glyphicon glyphicon-remove-sign" style="color: #d9534f;"></i>
+                            {% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endfor %}
+{% endblock %}

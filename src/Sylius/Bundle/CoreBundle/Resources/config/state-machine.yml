@@ -24,9 +24,9 @@ winzou_state_machine:
             finalize:
                 from: [payment]
                 to:   finalize
-            complete:
+            purchase:
                 from: [finalize]
-                to:   completed
+                to:   purchase
 
     sylius_order_shipping:
         class:         %sylius.model.order.class%

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Checker;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Quantifier\QuantifierInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
@@ -22,6 +23,11 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 class AvailabilityChecker implements AvailabilityCheckerInterface
 {
     /**
+     * @var QuantifierInterface
+     */
+    protected $quantifier;
+
+    /**
      * Are backorders enabled?
      *
      * @var bool
@@ -29,12 +35,12 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
     protected $backorders;
 
     /**
-     * Constructor.
-     *
-     * @param bool $backorders
+     * @param bool                $backorders
+     * @param QuantifierInterface $quantifier
      */
-    public function __construct($backorders)
+    public function __construct(QuantifierInterface $quantifier, $backorders)
     {
+        $this->quantifier = $quantifier;
         $this->backorders = (bool) $backorders;
     }
 
@@ -43,15 +49,7 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        if ($stockable instanceof SoftDeletableInterface && $stockable->isDeleted()) {
-            return false;
-        }
-
-        if ($this->backorders || $stockable->isAvailableOnDemand()) {
-            return true;
-        }
-
-        return 0 < ($stockable->getOnHand() - $stockable->getOnHold());
+        return $this->isStockGreaterThan($stockable, 0);
     }
 
     /**
@@ -59,14 +57,46 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
+        return $this->isStockGreaterThan($stockable, $quantity);
+    }
+
+    /**
+     * Check if stock is greater than specified amount.
+     *
+     * @param Stockableinterface $stockable
+     * @param integer            $quantity
+     */
+    private function isStockGreaterThan(StockableInterface $stockable, $quantity)
+    {
         if ($stockable instanceof SoftDeletableInterface && $stockable->isDeleted()) {
             return false;
         }
 
-        if ($this->backorders || $stockable->isAvailableOnDemand()) {
+        if ($this->backorders || $this->isBackorderable($stockable)) {
             return true;
         }
 
-        return $quantity <= ($stockable->getOnHand() - $stockable->getOnHold());
+        $onHand = $this->quantifier->getTotalOnHand($stockable);
+        $onHold = $this->quantifier->getTotalOnHold($onHold);
+
+        return 0 < ($onHand - $onHold);
+    }
+
+    /**
+     * Check if the item is backorderable in any of locations.
+     *
+     * @param StockableInterface $stockable
+     *
+     * @return Boolean
+     */
+    private function isBackorderable(StockableInterface $stockable)
+    {
+        foreach ($stockable->getStockItems() as $stockItem) {
+            if ($stockItem->isBackorderable()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

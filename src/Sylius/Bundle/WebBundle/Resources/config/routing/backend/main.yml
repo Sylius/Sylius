@@ -24,10 +24,6 @@ sylius_backend_product:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product.yml
     prefix: /products
 
-sylius_backend_inventory:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/inventory.yml
-    prefix: /inventory
-
 sylius_backend_product_variant:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product_variant.yml
     prefix: /products/{productId}/variants
@@ -91,6 +87,22 @@ sylius_backend_shipment:
 sylius_backend_email:
     resource: @SyliusWebBundle/Resources/config/routing/backend/email.yml
     prefix: /emails
+
+sylius_backend_stock_location:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/stock_location.yml
+    prefix: /stock-locations
+
+sylius_backend_stock_movement:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/stock_movement.yml
+    prefix: /stock-locations/{locationId}/stock-movements
+
+sylius_backend_stock_item:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/stock_item.yml
+    prefix: /stock-locations/{locationId}/stock-items
+
+sylius_backend_inventory_unit:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/inventory_unit.yml
+    prefix: /inventory-units
 
 sylius_backend_payment_method:
     resource: @SyliusWebBundle/Resources/config/routing/backend/payment_method.yml

@@ -8,6 +8,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>{{ sylius_resource_sort('stockLocation', 'sylius.shipment.stock_location'|trans) }}</th>
             <th>{{ sylius_resource_sort('order', 'sylius.shipment.order'|trans) }}</th>
             <th>{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
             <th>{{ sylius_resource_sort('state', 'sylius.shipment.state'|trans) }}</th>
@@ -23,6 +24,12 @@
         {% set address = order.shippingAddress %}
 
         <tr id="{{ shipment.id }}">
+            <td>
+                {{ shipment.stockLocation }}
+                <a href="{{ path('sylius_backend_stock_item_index', {'locationId': shipment.stockLocation.id}) }}">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                </a>
+            </td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': shipment.order.id}) }}" class="btn btn-primary btn-sm">
                    #{{ order.number }}

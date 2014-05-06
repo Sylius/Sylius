@@ -63,6 +63,10 @@ class OrderPricingListener
             $context['channel'] = array($order->getChannel());
         }
 
+        if (null !== $order->getChannel()) {
+            $context['channel'] = array($order->getChannel());
+        }
+
         foreach ($order->getItems() as $item) {
             if ($item->isImmutable()) {
                 continue;

@@ -81,6 +81,14 @@ sylius_api_channel:
     resource: @SyliusApiBundle/Resources/config/routing/channel.yml
     prefix: /channels
 
+sylius_api_stock_location:
+    resource: @SyliusApiBundle/Resources/config/routing/stock_location.yml
+    prefix: /stock-locations
+
+sylius_api_stock_item:
+    resource: @SyliusApiBundle/Resources/config/routing/stock_item.yml
+    prefix: /stock-items
+
 sylius_api_country:
     resource: @SyliusApiBundle/Resources/config/routing/country.yml
     prefix: /countries
@@ -100,3 +108,15 @@ sylius_api_user:
 sylius_api_setting:
     resource: @SyliusApiBundle/Resources/config/routing/setting.yml
     prefix: /settings
+
+sylius_api_password_resetting_request:
+    resource: @SyliusApiBundle/Resources/config/routing/password_resetting_request.yml
+    prefix: /password-resetting-requests
+
+sylius_api_taxon_index:
+    path: /taxons
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            sortable: true

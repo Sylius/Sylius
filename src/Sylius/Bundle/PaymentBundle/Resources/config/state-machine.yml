@@ -10,6 +10,7 @@ winzou_state_machine:
             pending:    ~
             processing: ~
             completed:  ~
+            authorized: ~
             failed:     ~
             cancelled:  ~
             void:       ~
@@ -21,11 +22,14 @@ winzou_state_machine:
             process:
                 from: [new, pending]
                 to:   processing
+            authorized:
+                from: [new, processing]
+                to:   authorized
             complete:
-                from: [new, pending, processing]
+                from: [new, pending, processing, authorized]
                 to:   completed
             fail:
-                from: [new, pending, processing]
+                from: [new, pending, processing, authorized]
                 to:   failed
             cancel:
                 from: [new, pending, processing]

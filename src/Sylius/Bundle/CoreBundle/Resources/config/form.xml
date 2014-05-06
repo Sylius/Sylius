@@ -27,6 +27,7 @@
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
+        <parameter key="sylius.form.type.product_stock.class">Sylius\Bundle\CoreBundle\Form\Type\ProductStockType</parameter>
 
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
 
@@ -37,6 +38,7 @@
         <parameter key="sylius.form.type.payment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\PaymentFilterType</parameter>
 
         <parameter key="sylius.form.type.price_calculator.channel_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType</parameter>
+        <parameter key="sylius.form.type.price_calculator.stock_location_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\StockLocationBasedConfigurationType</parameter>
         <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
         <parameter key="sylius.form.type.price_calculator.zone_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ZoneBasedConfigurationType</parameter>
 
@@ -93,6 +95,13 @@
                 <argument>sylius</argument>
             </argument>
             <tag name="form.type" alias="sylius_advanced_order" />
+        </service>
+        <service id="sylius.form.type.product_stock" class="%sylius.form.type.product_stock.class%">
+            <tag name="form.type" alias="sylius_product_stock" />
+        </service>
+        <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_user" />
         </service>
         <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
             <argument>%sylius.model.country.class%</argument>
@@ -169,6 +178,10 @@
         <service id="sylius.form.type.price_calculator.channel_based" class="%sylius.form.type.price_calculator.channel_based.class%">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" alias="sylius_price_calculator_channel_based" />
+        </service>
+        <service id="sylius.form.type.price_calculator.stock_location_based" class="%sylius.form.type.price_calculator.stock_location_based.class%">
+            <argument type="service" id="sylius.repository.stock_location" />
+            <tag name="form.type" alias="sylius_price_calculator_stock_location_based" />
         </service>
         <service id="sylius.form.type.price_calculator.group_based" class="%sylius.form.type.price_calculator.group_based.class%">
             <argument type="service" id="sylius.repository.group" />

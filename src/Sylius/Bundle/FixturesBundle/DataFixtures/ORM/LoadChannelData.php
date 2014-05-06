@@ -60,6 +60,7 @@ class LoadChannelData extends DataFixture
         $channel->setUrl($url);
         $channel->setCode($code);
         $channel->setName($name);
+
         $channel->setColor($this->faker->randomElement(array('Red', 'Green', 'Blue', 'Orange', 'Pink')));
 
         $this->setReference('Sylius.Channel.'.$code, $channel);

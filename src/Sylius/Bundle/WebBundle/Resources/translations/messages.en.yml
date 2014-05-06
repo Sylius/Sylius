@@ -183,6 +183,12 @@ sylius:
         customer:
             index: Customers
         dashboard: Dashboard
+        stock_location:
+            index: Stock locations
+        stock_movement:
+            index: Stock movements
+        stock_item:
+            index: Stock items
         edit: Edit
         contact_request:
             index: Contact requests
@@ -472,6 +478,32 @@ sylius:
         no_results: There are no locales configured.
         update_header: Edit locale
         updated_at: Last update
+    stock_movement:
+        id: ID
+        index_header: Stock movements index
+        no_results: There are no stock movements recorded for this location.
+        created_at: Happened at
+        stockable: Item
+        quantity: Quantity
+    stock_item:
+        index_header: Stock index
+        no_results: There are no stock items in given location.
+        updated_at: Last modified
+        stockable: Item
+        on_hand: On hand
+        on_hold: On hold
+    stock_location:
+        id: ID
+        name: Name
+        code: Code
+        create: Add Stock Location
+        create_header: Adding new Stock Location
+        enabled: Enabled
+        index_header: Index of all Stock Locations
+        no_results: There are no stock locations configured.
+        update_header: Edit Stock Location
+        updated_at: Last update
+        stock_movements: Stock movements
     login: Login
     login_header: Administration
     logo: Sylius
@@ -553,6 +585,7 @@ sylius:
             backorder: Backorder
             fulfill: Fulfill
             return: Return
+            sell: Sell
         shipping_address: Shipping address
         shipping_charges: Shipping charges
         shipping_total: Shipping total
@@ -621,6 +654,7 @@ sylius:
         created_at: Created at
         id: ID
         index_header: Shipments
+        stock_location: From
         inventory_state: Inventory state
         manage: Manage shipments
         method: Method
@@ -710,6 +744,7 @@ sylius:
         update_header: Editing payment method
         updated_at: Last update
     product:
+        stock: Stock
         add_attribute: Add attribute
         available_on: Available on
         available_on_demand: Available on demand
@@ -754,6 +789,7 @@ sylius:
             attributes: Attributes
             channels: Channels
             pricing: Pricing
+            stock: Stock
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product

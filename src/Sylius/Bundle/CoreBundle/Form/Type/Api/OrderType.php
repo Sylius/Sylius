@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Order form type for api creation.
@@ -28,21 +27,11 @@ class OrderType extends BaseOrderType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', 'sylius_user_choice', array(
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
-            ->add('currency', 'sylius_currency_code_choice', array(
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
-            ->add('channel', 'sylius_channel_choice', array(
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
+            ->add('user', 'sylius_user_choice')
+            ->add('currency', 'sylius_currency_code_choice')
+            ->add('channel', 'sylius_channel_choice')
+            ->add('email', 'email')
+            ->add('platformCode', 'text')
         ;
     }
 

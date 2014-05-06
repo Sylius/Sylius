@@ -26,7 +26,7 @@ interface ChannelRepositoryInterface
      * Find channel best matching given hostname.
      *
      * @param string $hostname
-     * @return mixed
+     * @return null|ChannelInterface
      * @throws NonUniqueResultException
      */
     public function findMatchingHostname($hostname);

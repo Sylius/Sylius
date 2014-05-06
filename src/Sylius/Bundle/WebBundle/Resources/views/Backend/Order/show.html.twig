@@ -94,6 +94,7 @@
                         {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
                     </h4>
                 </a>
+                <strong>({{ variant.sku }})</strong>
                 {% if product.hasOptions %}
                 <ul class="list-unstyled">
                     <li class="sku"><strong>{{ 'sylius.product.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
@@ -248,26 +249,26 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>{{ 'sylius.inventory_unit.sku'|trans }}</th>
                     <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
+                    <th>{{ 'sylius.shipment.stock_location'|trans }}</th>
                     <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
                     <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
-                    <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
-                    <th>{{ 'sylius.inventory_unit.updated_at'|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for unit in order.inventoryUnits %}
                 <tr>
-                    <td>{{ loop.index }}</td>
                     <td>{{ unit.stockable.sku }}</td>
                     <td>{{ unit.inventoryName }}</td>
+                    {% if unit.stockItem is not empty %}
+                    <td><strong>{{ unit.stockItem.location.code }}</strong></td>
+                    {% else %}
+                    <td>-</td>
+                    {% endif %}
                     <td>{{ unit.inventoryState|humanize }}</td>
                     <td>{{ unit.shippingState|humanize }}</td>
-                    <td>{{ unit.createdAt|date }}</td>
-                    <td>{{ unit.updatedAt|date }}</td>
                     <td>
                         {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
                             <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">

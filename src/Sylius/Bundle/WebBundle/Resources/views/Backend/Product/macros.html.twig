@@ -10,7 +10,6 @@
             <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
             <th class="info">{{ sylius_resource_sort('archetype', 'sylius.product.archetype'|trans) }}</th>
             <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
-            <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
             <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
             <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
             <th></th>
@@ -54,22 +53,6 @@
                     </div>
                 </div>
             </td>
-            {% if product.hasOptions %}
-                <td class="stock contain-variants text-muted">
-                    <em>{{ 'sylius.product.contain_variants'|trans }}</em>
-                </td>
-            {% else %}
-                {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
-                    <td class="stock in-stock">
-                        {{ product.masterVariant.onHand }}
-                    </td>
-                {% else %}
-                    <td class="stock out-of-stock text-muted">
-                        <em>{{ 'sylius.out_of_stock'|trans }}</em>
-                    </td>
-                {% endif %}
-            {% endif %}
-
 
             {# Retail Price #}
             {% if not product.hasOptions %}
@@ -89,6 +72,7 @@
                 {% if product.deleted %}
                     {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.product.delete_restore', null, 'btn btn-primary') }}
                 {% else %}
+                {{ buttons.show(path('sylius_backend_product_stock', {'id': product.id}), 'Stock'|trans) }}
                 {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
                 {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id})) }}
                 {% endif %}
