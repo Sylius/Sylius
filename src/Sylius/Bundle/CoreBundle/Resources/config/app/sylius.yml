@@ -39,6 +39,12 @@ sylius_api:
         api_user:
             model: %sylius.model.user.class%
 
+sylius_channel:
+    classes:
+        channel:
+            model: Sylius\Component\Core\Model\Channel
+            form: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
+
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
     classes:

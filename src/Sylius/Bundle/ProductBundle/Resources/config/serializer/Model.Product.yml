@@ -9,6 +9,9 @@ Sylius\Component\Product\Model\Product:
         name:
             expose: true
             type: string
+        description:
+            expose: true
+            type: string
         createdAt:
             expose: true
             type: DateTime

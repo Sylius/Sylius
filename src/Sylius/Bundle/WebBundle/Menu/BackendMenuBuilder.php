@@ -263,6 +263,11 @@ class BackendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-info-sign'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
 
+        $child->addChild('channels', array(
+            'route' => 'sylius_backend_channel_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.channels', $section)));
+
         $child->addChild('locales', array(
             'route' => 'sylius_backend_locale_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-flag'),
@@ -302,6 +307,11 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_shipping_method_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.shipping_methods', $section)));
+
+        $child->addChild('stock_locations', array(
+            'route' => 'sylius_backend_stock_location_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-folder-close'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stock_locations', $section)));
 
         $child->addChild('countries', array(
             'route' => 'sylius_backend_country_index',
