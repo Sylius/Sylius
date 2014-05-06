@@ -11,7 +11,8 @@ copyright = u'2011-2014, Paweł Jędrzejewski'
 version = ''
 release = ''
 exclude_patterns = []
-html_theme = 'default'
+html_theme = 'sylius_rtd_theme'
+html_theme_path = ["_themes"]
 htmlhelp_basename = 'Syliusdoc'
 man_pages = [
     ('index', 'sylius', u'Sylius Documentation',

@@ -1,5 +1,5 @@
-Bundles reference
-=================
+Symfony2 Ecommerce Bundles
+==========================
 
 .. toctree::
     :hidden:
@@ -19,6 +19,5 @@ Bundles reference
     SyliusTaxonomiesBundle/index
     SyliusSettingsBundle/index
     SyliusFlowBundle/index
-    SyliusBloggerBundle/index
 
 .. include:: /bundles/map.rst.inc

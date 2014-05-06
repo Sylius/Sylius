@@ -1,6 +1,9 @@
 Sylius Documentation
 ====================
 
+.. image:: /_images/logo.png
+   :alt:   Sylius Welcome Page
+
 `Sylius`_ is a modern e-commerce solution for PHP, based on
 `Symfony2 Framework`_.
 
@@ -58,6 +61,19 @@ Documentation of all Sylius bundles.
    bundles/index
 
 .. include:: /bundles/map.rst.inc
+
+Components
+----------
+
+E-Commerce components for PHP.
+
+.. toctree::
+   :hidden:
+
+   components/introduction
+   components/index
+
+.. include:: /components/map.rst.inc
 
 Contributing
 ------------
