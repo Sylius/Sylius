@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -37,9 +38,12 @@ class RestrictedZoneListener
 
     public function handleRestrictedZone(GenericEvent $event)
     {
-        $removed = false;
-        $cart = $this->cartProvider->getCart();
+        $cart = $event->getSubject();
+        if (!$cart instanceof CartInterface) {
+            $cart = $this->cartProvider->getCart();
+        }
 
+        $removed = false;
         foreach ($cart->getItems() as $item) {
             if ($this->restrictedZoneChecker->isRestricted($product = $item->getProduct(), $cart->getShippingAddress())) {
                 $cart->removeItem($item);
