@@ -31,7 +31,7 @@ class CliKernel extends AppKernel
             new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
         );
 
-        return array_merge($bundles, parent::registerBundles());
+        return array_merge(parent::registerBundles(), $bundles);
     }
 
     /**
