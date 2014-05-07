@@ -37,7 +37,7 @@
             <div class="sylius-assortment-variant-images-image">
                 <div class="control-group">
                     <div class="controls">
-                        <a href="{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}" target="_blank"><img class="img-polaroid" src="{{ imageForm.vars.value.path|imagine_filter('sylius_90x60') }}" alt="" /></a>
+                        <a href="{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}" target="_blank"><img class="img-polaroid" src="{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}" alt="" /></a>
                         &nbsp;
                         {{ form_widget(imageForm.file) }}
                         &nbsp;
