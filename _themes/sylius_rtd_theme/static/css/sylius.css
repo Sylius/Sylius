@@ -26,6 +26,11 @@
     border-top: 0;
     border-bottom: 0;
 }
+.wy-side-nav-logo {
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+}
 .wy-side-nav-search {
     margin-bottom: 30px;
 }
