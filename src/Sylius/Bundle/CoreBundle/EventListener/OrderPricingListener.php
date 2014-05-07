@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -42,7 +43,7 @@ class OrderPricingListener
      *
      * @param GenericEvent $event
      *
-     * @throws \InvalidArgumentException
+     * @throws UnexpectedTypeException
      */
     public function recalculatePrices(GenericEvent $event)
     {
