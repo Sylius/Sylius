@@ -17,8 +17,8 @@ Feature: Promotion rules based on expressions
             | name        | description                                |
             | opensky.com | Discount for users from opensky.com domain |
           And promotion "opensky.com" has following rules defined:
-            | type       | configuration                                         |
-            | Expression | expr: user.email matches ^[A-Z0-9._%+-]+@opensky.com$ |
+            | type       | configuration                                                                 |
+            | Expression | expr: user.getEmail() matches "/[_a-z0-9-]+(\.[_a-z0-9-]+)*@(?i)opensky.com/" |
           And promotion "opensky.com" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 20    |
