@@ -27,16 +27,18 @@ sylius_account_address_delete:
 
 sylius_account_address_set_default_billing:
     pattern: /{id}/default/billing
-    methods: [GET]
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.frontend.account.address:setAsBillingAction
+        _controller: sylius.controller.frontend.account.address:setAddressAsAction
+        type: billing
     requirements:
         id:  \d+
 
 sylius_account_address_set_default_shipping:
     pattern: /{id}/default/shipping
-    methods: [GET]
+    methods: [PATCH]
     defaults:
-        _controller: sylius.controller.frontend.account.address:setAsShippingAction
+        _controller: sylius.controller.frontend.account.address:setAddressAsAction
+        type: shipping
     requirements:
         id:  \d+

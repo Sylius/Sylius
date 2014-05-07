@@ -13,7 +13,9 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -109,47 +111,45 @@ class AddressController extends Controller
     }
 
     /**
-     * Set an address as default billing address for the current user.
+     * Set an address as default billing/shipping address for the current user.
+     *
+     * @param int    $id
+     * @param string $type
      *
      * @return RedirectResponse
+     *
+     * @throws NotFoundHttpException
      */
-    public function setAsBillingAction($id)
+    public function setAddressAsAction($id, $type)
     {
         $address = $this->findUserAddressOr404($id);
 
         $user = $this->getUser();
-        $user->setBillingAddress($address);
+
+        if ('billing' === $type) {
+            $user->setBillingAddress($address);
+
+            $this->addFlash('success', 'sylius.account.address.set_as_billing');
+        } elseif ('shipping' === $type) {
+            $user->setShippingAddress($address);
+
+            $this->addFlash('success', 'sylius.account.address.set_as_shipping');
+        } else {
+            throw new NotFoundHttpException();
+        }
 
         $manager = $this->getUserManager();
         $manager->persist($user);
         $manager->flush();
-
-        $this->addFlash('success', 'sylius.account.address.set_as_billing');
 
         return $this->redirectToIndex();
     }
 
     /**
-     * Set an address as shipping billing address for the current user.
+     * @param AddressInterface $address
      *
-     * @return RedirectResponse
+     * @return FormInterface
      */
-    public function setAsShippingAction($id)
-    {
-        $address = $this->findUserAddressOr404($id);
-
-        $user = $this->getUser();
-        $user->setShippingAddress($address);
-
-        $manager = $this->getUserManager();
-        $manager->persist($user);
-        $manager->flush();
-
-        $this->addFlash('success', 'sylius.account.address.set_as_shipping');
-
-        return $this->redirectToIndex();
-    }
-
     private function getAddressForm(AddressInterface $address)
     {
         return $this->get('form.factory')->create('sylius_address', $address);

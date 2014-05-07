@@ -36,7 +36,7 @@ sylius_backend_product_variant_delete:
 
 sylius_backend_product_variant_generate:
     pattern: /generate
-    methods: [GET]
+    methods: [PATCH]
     defaults:
         _controller: sylius.controller.product_variant:generateAction
         _sylius:

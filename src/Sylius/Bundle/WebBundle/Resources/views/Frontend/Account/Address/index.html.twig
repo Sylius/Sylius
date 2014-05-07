@@ -33,16 +33,15 @@
                             {% endif %}
 
                             {% if address != app.user.billingAddress %}
-                                {{ buttons.btn(
+                                {{ buttons.patch(
                                     path('sylius_account_address_set_default_billing', {'id': address.id}),
-                                    'sylius.account.address.action.billing', '', 'star-empty') }}
-                                <br>
+                                    'sylius.account.address.action.billing', 'star-empty') }}
                                 <br>
                             {% endif %}
                             {% if address != app.user.shippingAddress %}
-                                {{ buttons.btn(
+                                {{ buttons.patch(
                                     path('sylius_account_address_set_default_shipping', {'id': address.id}),
-                                    'sylius.account.address.action.shipping', '', 'star') }}
+                                    'sylius.account.address.action.shipping', 'star') }}
                             {% endif %}
                         </td>
                         <td>
