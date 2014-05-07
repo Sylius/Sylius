@@ -23,7 +23,7 @@ sylius:
         equal: Igual
       nth_order_configuration:
         nth: Enésimo
-      user_loyality_configuration:
+      user_loyalty_configuration:
         time: Hora
         unit:
           days: Días

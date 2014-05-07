@@ -23,7 +23,7 @@ sylius:
         equal: Gelijk
       nth_order_configuration:
         nth: Nde
-      user_loyality_configuration:
+      user_loyalty_configuration:
         time: Tijd
         unit:
           days: Dagen

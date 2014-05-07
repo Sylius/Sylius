@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserLoyalityRuleChecker implements RuleCheckerInterface
+class UserLoyaltyRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}
@@ -50,6 +50,6 @@ class UserLoyalityRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_user_loyality_configuration';
+        return 'sylius_promotion_rule_user_loyalty_configuration';
     }
 }
