@@ -77,6 +77,7 @@
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.expression_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ExpressionConfigurationType</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Component\Core\Promotion\Checker\UserLoyalityRuleChecker</parameter>
@@ -444,6 +445,9 @@
         <service id="sylius.form.type.promotion_action.shipping_discount_configuration" class="%sylius.form.type.promotion_action.shipping_discount_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_shipping_discount_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_action_shipping_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.expression_configuration" class="%sylius.form.type.promotion_rule.expression_configuration.class%">
+            <tag name="form.type" alias="sylius_promotion_rule_expression_configuration" />
         </service>
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
