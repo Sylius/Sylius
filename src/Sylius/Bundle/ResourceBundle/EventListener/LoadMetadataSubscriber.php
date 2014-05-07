@@ -88,8 +88,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
                 if ($parentMetadata->isMappedSuperclass) {
                     foreach ($parentMetadata->getAssociationMappings() as $key => $value) {
-                        if (ClassMetadataInfo::ONE_TO_MANY === $value['type'] ||
-                            ClassMetadataInfo::ONE_TO_ONE === $value['type']) {
+                        if ($this->hasRelation($value['type'])) {
                             $metadata->associationMappings[$key] = $value;
                         }
                     }
@@ -101,10 +100,22 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach ($metadata->getAssociationMappings() as $key => $value) {
-            if ($value['type'] === ClassMetadataInfo::ONE_TO_MANY ||
-                $value['type'] === ClassMetadataInfo::ONE_TO_ONE) {
+            if ($this->hasRelation($value['type'])) {
                 unset($metadata->associationMappings[$key]);
             }
         }
+    }
+
+    private function hasRelation($type)
+    {
+        return in_array(
+            $type,
+            array(
+                ClassMetadataInfo::MANY_TO_MANY,
+                ClassMetadataInfo::ONE_TO_MANY,
+                ClassMetadataInfo::ONE_TO_ONE
+            ),
+            true
+        );
     }
 }
