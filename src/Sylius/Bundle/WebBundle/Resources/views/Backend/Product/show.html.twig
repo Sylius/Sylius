@@ -187,7 +187,7 @@
 <div class="well well-sm">
     {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {% if product.hasOptions %}
-        {{ buttons.manage(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+        {{ buttons.patch(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
     {% endif %}
     <div class="pull-right">
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}

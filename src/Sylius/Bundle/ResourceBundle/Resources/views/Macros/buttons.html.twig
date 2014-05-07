@@ -51,3 +51,12 @@
     </button>
 </form>
 {% endmacro %}
+
+{% macro patch(url, message, icon) %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="PATCH">
+    <button class="btn btn-success" type="submit">
+        <i class="glyphicon glyphicon-{{ icon|default('transfer') }}"></i> <span>{{ message }}</span>
+    </button>
+</form>
+{% endmacro %}
