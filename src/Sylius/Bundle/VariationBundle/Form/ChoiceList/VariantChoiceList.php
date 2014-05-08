@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 /**
  * Variants choice list.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantChoiceList extends ObjectChoiceList
 {

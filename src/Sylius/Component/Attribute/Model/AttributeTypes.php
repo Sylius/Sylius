@@ -14,7 +14,7 @@ namespace Sylius\Component\Attribute\Model;
 /**
  * Default attribute types.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AttributeTypes
 {

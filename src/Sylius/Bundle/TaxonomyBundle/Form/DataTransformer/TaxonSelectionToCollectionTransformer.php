@@ -20,7 +20,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 /**
  * Transforms arrays of selected taxons into one collection.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierCollectionTransformer
 {

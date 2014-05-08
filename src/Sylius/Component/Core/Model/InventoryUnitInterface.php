@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 /**
  * Inventory unit interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface InventoryUnitInterface extends BaseInventoryUnitInterface, ShipmentItemInterface
 {

@@ -21,7 +21,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 /**
  * Sylius core product entity.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Product extends BaseProduct implements ProductInterface
 {

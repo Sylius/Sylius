@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 /**
  * Default cart entity repository.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class CartRepository extends OrderRepository implements CartRepositoryInterface

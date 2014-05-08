@@ -17,7 +17,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface as BaseTaxRateInterface;
 /**
  * Tax rate interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxRateInterface extends BaseTaxRateInterface
 {

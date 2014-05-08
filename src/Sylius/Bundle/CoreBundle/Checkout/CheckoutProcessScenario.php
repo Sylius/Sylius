@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 /**
  * Sylius checkout process.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CheckoutProcessScenario implements ProcessScenarioInterface
 {

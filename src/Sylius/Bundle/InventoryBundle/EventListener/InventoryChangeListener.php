@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Inventory change listener.
  * Fills backorders on inventory change.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryChangeListener implements InventoryChangeListenerInterface

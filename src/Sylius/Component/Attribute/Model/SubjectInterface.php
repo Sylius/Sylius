@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
  * Interface implemented by object which can be characterized
  * using the attributes.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SubjectInterface
 {

@@ -14,7 +14,7 @@ namespace Sylius\Component\Inventory\Model;
 /**
  * Stockable interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface StockableInterface
 {

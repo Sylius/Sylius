@@ -16,7 +16,7 @@ namespace Sylius\Component\Attribute\Model;
  *
  * This model associates the attribute with its value on the object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AttributeValueInterface
 {

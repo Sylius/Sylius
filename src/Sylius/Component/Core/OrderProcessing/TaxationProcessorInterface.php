@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
  * Order taxation processor.
  * Service implementing this service should apply taxes to given order.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxationProcessorInterface
 {

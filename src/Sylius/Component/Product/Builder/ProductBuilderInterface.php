@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\ProductInterface;
  *
  * Goal of service implementing this interface is to ease the process of programatically creating products.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductBuilderInterface
 {

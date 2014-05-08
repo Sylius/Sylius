@@ -16,7 +16,7 @@ use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 /**
  * Sylius settings extension for Twig.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsExtension extends \Twig_Extension
 {

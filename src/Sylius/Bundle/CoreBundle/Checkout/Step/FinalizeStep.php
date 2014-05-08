@@ -19,7 +19,7 @@ use Sylius\Component\Core\SyliusOrderEvents;
 /**
  * Final checkout step.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FinalizeStep extends CheckoutStep
 {

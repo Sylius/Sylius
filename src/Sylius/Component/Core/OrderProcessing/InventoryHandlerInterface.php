@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
  *
  * It also updates inventory after order is complete.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface InventoryHandlerInterface

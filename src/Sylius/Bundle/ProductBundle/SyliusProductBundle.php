@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Use *SyliusVariableProductBundle* to get variants, options and
  * customizations support.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusProductBundle extends Bundle
 {

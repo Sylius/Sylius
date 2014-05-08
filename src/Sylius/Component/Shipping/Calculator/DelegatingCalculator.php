@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  * This class delegates the calculation of charge for particular shipping subject
  * to a correct calculator instance, based on the name defined on the shipping method.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DelegatingCalculator implements DelegatingCalculatorInterface
 {

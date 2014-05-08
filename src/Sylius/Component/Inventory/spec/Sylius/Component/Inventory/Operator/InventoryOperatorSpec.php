@@ -19,7 +19,7 @@ use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryOperatorSpec extends ObjectBehavior

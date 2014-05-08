@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * If user is not logged in, displays login & registration form.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SecurityStep extends CheckoutStep
 {

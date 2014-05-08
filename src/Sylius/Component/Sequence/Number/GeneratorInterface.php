@@ -18,7 +18,7 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  * Number generator interface.
  * The implementation should generate next order number.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface GeneratorInterface
 {

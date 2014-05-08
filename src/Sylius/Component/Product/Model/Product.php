@@ -20,7 +20,7 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 /**
  * Sylius catalog product model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Product implements ProductInterface
 {

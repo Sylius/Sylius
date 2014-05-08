@@ -14,7 +14,7 @@ namespace Sylius\Component\Variation\Model;
 /**
  * Option value.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OptionValue implements OptionValueInterface
 {

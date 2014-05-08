@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
  * This listener adds configuration form to a method, if
  * selected calculator requires one.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildShippingMethodFormListener implements EventSubscriberInterface
 {

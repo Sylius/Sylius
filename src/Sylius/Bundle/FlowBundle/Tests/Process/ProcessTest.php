@@ -19,7 +19,7 @@ use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 /**
  * Process test.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class ProcessTest extends \PHPUnit_Framework_TestCase

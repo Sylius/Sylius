@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Array of OptionInterface objects should be passed as 'options' option to build proper
  * set of choice types with option values list.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OptionValueCollectionType extends AbstractType
 {

@@ -24,7 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * Sylius resource extension for Twig spec.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 class ResourceExtensionSpec extends ObjectBehavior

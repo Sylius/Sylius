@@ -16,7 +16,7 @@ use Sylius\Bundle\SettingsBundle\Model\Settings;
 /**
  * Settings provider interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SettingsManagerInterface
 {

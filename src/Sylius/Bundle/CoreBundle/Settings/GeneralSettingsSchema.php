@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * General settings schema.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class GeneralSettingsSchema implements SchemaInterface
 {

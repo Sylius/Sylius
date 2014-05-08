@@ -17,7 +17,7 @@ use Sylius\Component\Order\Model\OrderInterface;
  * Cart model interface.
  * All driver cart entities or documents should implement this interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CartInterface extends OrderInterface
 {

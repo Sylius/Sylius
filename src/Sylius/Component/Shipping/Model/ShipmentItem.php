@@ -14,7 +14,7 @@ namespace Sylius\Component\Shipping\Model;
 /**
  * Shipment item model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShipmentItem implements ShipmentItemInterface
 {

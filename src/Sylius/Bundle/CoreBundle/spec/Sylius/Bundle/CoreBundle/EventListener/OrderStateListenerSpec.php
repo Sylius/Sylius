@@ -17,7 +17,7 @@ use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderStateListenerSpec extends ObjectBehavior
 {

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * Form event listener that builds variant form dynamically based on data.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildVariantFormListener implements EventSubscriberInterface
 {

@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * This listener adds the province field to form if needed.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildAddressFormListener implements EventSubscriberInterface
 {

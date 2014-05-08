@@ -9,7 +9,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * Resource resolver spec.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ResourceResolverSpec extends ObjectBehavior
 {

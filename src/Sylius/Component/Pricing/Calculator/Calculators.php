@@ -14,7 +14,7 @@ namespace Sylius\Component\Pricing\Calculator;
 /**
  * Default calculators.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Calculators
 {

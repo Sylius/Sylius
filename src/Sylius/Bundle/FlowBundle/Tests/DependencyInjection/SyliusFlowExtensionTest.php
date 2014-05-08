@@ -18,7 +18,7 @@ use Symfony\Component\Yaml\Parser;
 /**
  * Dependency injection extension test.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusFlowExtensionTest extends \PHPUnit_Framework_TestCase
 {

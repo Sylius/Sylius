@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * Returns are shipping methods which support given shipping subject.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface MethodsResolverInterface
 {

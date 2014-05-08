@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderSpec extends ObjectBehavior
 {

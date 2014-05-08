@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 /**
  * Order state resolver.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class StateResolver implements StateResolverInterface
 {

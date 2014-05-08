@@ -17,7 +17,7 @@ use Sylius\Component\Attribute\Model\AttributeTypes;
 use Sylius\Component\Attribute\Model\SubjectInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AttributeValueSpec extends ObjectBehavior
 {

@@ -16,7 +16,7 @@ use Sylius\Component\Pricing\Calculator\Calculators as BaseCalculators;
 /**
  * Core calculators.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Calculators extends BaseCalculators
 {

@@ -20,7 +20,7 @@ use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 /**
  * Order inventory handler.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryHandler implements InventoryHandlerInterface

@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * Order shipping listener.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderShippingListener
 {

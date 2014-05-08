@@ -20,7 +20,7 @@ use Sylius\Component\Product\Model\PrototypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PrototypeBuilderSpec extends ObjectBehavior
 {

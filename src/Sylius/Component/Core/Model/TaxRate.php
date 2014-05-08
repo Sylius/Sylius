@@ -17,7 +17,7 @@ use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 /**
  * Tax rate applicable to selected zone.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {

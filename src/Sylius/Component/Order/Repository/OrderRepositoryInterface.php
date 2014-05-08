@@ -17,7 +17,7 @@ use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 /**
  * Order repository interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepositoryInterface
 {

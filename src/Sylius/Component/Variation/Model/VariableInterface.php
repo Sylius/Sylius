@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Should be implemented by models that support variants and options.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface VariableInterface
 {

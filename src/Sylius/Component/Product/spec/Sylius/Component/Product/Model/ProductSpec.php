@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\VariantInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductSpec extends ObjectBehavior
 {

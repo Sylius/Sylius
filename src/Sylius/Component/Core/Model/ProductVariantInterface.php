@@ -20,7 +20,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 /**
  * Sylius core product Variant interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductVariantInterface extends
     BaseVariantInterface,

@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
  * Promotion subject interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PromotionSubjectInterface
 {

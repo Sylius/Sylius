@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * Prototype builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PrototypeBuilder implements PrototypeBuilderInterface
 {

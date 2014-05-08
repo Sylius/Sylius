@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SettingsBundle\Schema;
 /**
  * Default schema registry.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SchemaRegistry implements SchemaRegistryInterface
 {

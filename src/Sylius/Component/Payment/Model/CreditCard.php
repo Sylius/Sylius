@@ -14,7 +14,7 @@ namespace Sylius\Component\Payment\Model;
 /**
  * Credit card model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CreditCard implements CreditCardInterface
 {

@@ -17,7 +17,7 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 /**
  * Order repository.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {

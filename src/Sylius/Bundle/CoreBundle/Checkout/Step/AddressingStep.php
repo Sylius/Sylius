@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
  * The addressing step of checkout.
  * User enters the shipping and shipping address.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AddressingStep extends CheckoutStep
 {

@@ -46,7 +46,7 @@ use Symfony\Component\PropertyAccess\StringUtil;
 /**
  * Data writing and reading context.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DataContext extends BehatContext implements KernelAwareInterface
 {

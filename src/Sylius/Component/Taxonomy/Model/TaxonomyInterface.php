@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Taxonomy model interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxonomyInterface
 {

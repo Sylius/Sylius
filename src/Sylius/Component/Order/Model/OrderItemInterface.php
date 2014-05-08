@@ -14,7 +14,7 @@ namespace Sylius\Component\Order\Model;
 /**
  * Interface for order line item model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderItemInterface extends AdjustableInterface
 {

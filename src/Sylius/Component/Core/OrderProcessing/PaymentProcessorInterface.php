@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 /**
  * Order payment processor interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PaymentProcessorInterface
 {

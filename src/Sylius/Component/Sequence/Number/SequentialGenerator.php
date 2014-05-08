@@ -16,7 +16,7 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 /**
  * Default order number generator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */

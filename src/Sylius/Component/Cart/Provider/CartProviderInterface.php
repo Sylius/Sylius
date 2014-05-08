@@ -17,7 +17,7 @@ use Sylius\Component\Cart\Model\CartInterface;
  * Interface for object that is accessor for cart.
  * It should retrieve existing cart or create new one based on storage.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CartProviderInterface
 {
