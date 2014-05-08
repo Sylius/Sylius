@@ -14,7 +14,7 @@ namespace Sylius\Component\Shipping\Model;
 /**
  * Shipping category model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingCategory implements ShippingCategoryInterface
 {

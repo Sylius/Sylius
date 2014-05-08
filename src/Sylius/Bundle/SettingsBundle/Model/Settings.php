@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SettingsBundle\Model;
 /**
  * Settings container.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Settings implements \ArrayAccess
 {

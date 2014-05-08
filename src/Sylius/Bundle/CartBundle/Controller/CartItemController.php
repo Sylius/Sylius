@@ -33,7 +33,7 @@ use Symfony\Component\HttpFoundation\Response;
  * The resolver is used to create a new cart item, based
  * on the data from current request.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartItemController extends Controller
 {

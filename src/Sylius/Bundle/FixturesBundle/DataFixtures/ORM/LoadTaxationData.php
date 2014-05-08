@@ -17,7 +17,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 /**
  * Basic taxation fixtures.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadTaxationData extends DataFixture
 {

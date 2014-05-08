@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
  * This interface can be implemented by any object, which needs to be
  * evaluated by default shipping calculators and rule checkers.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingSubjectInterface
 {

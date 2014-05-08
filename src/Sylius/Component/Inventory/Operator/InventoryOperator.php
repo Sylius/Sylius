@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * Default inventory operator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class InventoryOperator implements InventoryOperatorInterface

@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\HttpKernel;
 /**
  * Sylius resource twig helper.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */

@@ -16,7 +16,7 @@ use FOS\UserBundle\Model\GroupInterface as BaseGroupInterface;
 /**
  * Group model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface GroupInterface extends BaseGroupInterface
 {

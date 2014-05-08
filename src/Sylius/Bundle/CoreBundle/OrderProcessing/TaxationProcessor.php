@@ -22,7 +22,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 /**
  * Taxation processor.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationProcessor implements TaxationProcessorInterface
 {

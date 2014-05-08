@@ -20,7 +20,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * Backorders handler.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BackordersHandler implements BackordersHandlerInterface
 {

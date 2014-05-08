@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
  * Compiler pass which resolves interfaces into target entity names during
  * compile time of container.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
 {

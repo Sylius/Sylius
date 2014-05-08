@@ -23,7 +23,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * Order entity.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Order extends Cart implements OrderInterface
 {

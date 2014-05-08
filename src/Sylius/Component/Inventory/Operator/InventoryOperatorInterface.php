@@ -18,7 +18,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  * Stock operator interface.
  * Manage stock levels and inventory units.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface InventoryOperatorInterface

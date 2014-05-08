@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Model for orders.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Order implements OrderInterface
 {

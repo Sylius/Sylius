@@ -17,7 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 /**
  * Object to identifier transformer.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ObjectToIdentifierTransformer extends BaseTransformer implements ParameterTransformerInterface
 {

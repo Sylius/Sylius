@@ -14,7 +14,7 @@ namespace Sylius\Component\Attribute\Model;
 /**
  * Model for object attributes.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Attribute implements AttributeInterface
 {

@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 /**
  * Order item model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItem extends CartItem implements OrderItemInterface
 {

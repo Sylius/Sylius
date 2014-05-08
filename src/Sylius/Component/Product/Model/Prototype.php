@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Default prototype implementation.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Prototype implements PrototypeInterface
 {

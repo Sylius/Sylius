@@ -16,7 +16,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 /**
  * Volume based pricing calculator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VolumeBasedCalculator implements CalculatorInterface
 {

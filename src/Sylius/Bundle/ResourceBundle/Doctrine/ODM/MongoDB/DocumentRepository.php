@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * Doctrine ODM driver resource manager.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {

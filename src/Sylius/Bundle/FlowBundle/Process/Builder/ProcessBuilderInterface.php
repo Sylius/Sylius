@@ -18,7 +18,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 /**
  * Process builder interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProcessBuilderInterface
 {

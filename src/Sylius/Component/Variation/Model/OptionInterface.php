@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * Model implementing this interface represents the option type, which can be
  * attached to an object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OptionInterface extends TimestampableInterface
 {

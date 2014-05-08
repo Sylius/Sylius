@@ -14,7 +14,7 @@ namespace Sylius\Component\Inventory\Model;
 /**
  * Inventory unit model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnit implements InventoryUnitInterface
 {

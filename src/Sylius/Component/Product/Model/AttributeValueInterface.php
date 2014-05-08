@@ -16,7 +16,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeVal
 /**
  * Product to attribute relation interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AttributeValueInterface extends BaseAttributeValueInterface
 {

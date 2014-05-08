@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
  * The payment step of checkout.
  * User selects the payment method.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentStep extends CheckoutStep
 {

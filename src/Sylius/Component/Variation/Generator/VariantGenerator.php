@@ -27,7 +27,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
  * this service will create 9 Variant's and assign them to the
  * object. It ignores existing and invalid variants.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantGenerator implements VariantGeneratorInterface
 {

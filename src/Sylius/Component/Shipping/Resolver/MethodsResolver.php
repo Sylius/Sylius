@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * Default available methods resolver.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MethodsResolver implements MethodsResolverInterface
 {

@@ -17,7 +17,7 @@ use Sylius\Component\Product\Model\PrototypeInterface;
 /**
  * Prototype builder interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PrototypeBuilderInterface
 {

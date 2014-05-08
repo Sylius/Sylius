@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 /**
  * Shipping charges processor.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingChargesProcessor implements ShippingChargesProcessorInterface
 {

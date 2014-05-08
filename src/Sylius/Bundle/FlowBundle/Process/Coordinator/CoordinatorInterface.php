@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
  * This service coordinates the whole flow of process.
  * Executes steps and start flows.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CoordinatorInterface
 {

@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Default product attributes to play with Sylius.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadProductAttributeData extends DataFixture
 {

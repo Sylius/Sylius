@@ -14,7 +14,7 @@ namespace Sylius\Component\Taxation\Model;
 /**
  * Taxable interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxableInterface
 {

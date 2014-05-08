@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Tax category model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxCategory implements TaxCategoryInterface
 {

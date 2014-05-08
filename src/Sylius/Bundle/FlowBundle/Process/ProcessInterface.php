@@ -17,7 +17,7 @@ use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 /**
  * Interface for setup object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProcessInterface
 {

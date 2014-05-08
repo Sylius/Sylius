@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * Base controller for cart system controllers.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class Controller extends ResourceController
 {

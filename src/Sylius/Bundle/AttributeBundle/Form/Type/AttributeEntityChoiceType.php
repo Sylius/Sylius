@@ -14,7 +14,7 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type;
 /**
  * Attribute choice form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AttributeEntityChoiceType extends AttributeChoiceType
 {

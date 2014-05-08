@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 /**
  * Shipping method available for selected zone.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {

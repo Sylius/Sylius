@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * Shipping method interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingMethodInterface extends TimestampableInterface
 {

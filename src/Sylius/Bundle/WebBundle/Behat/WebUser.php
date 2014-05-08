@@ -30,7 +30,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Web user context.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class WebUser extends MinkContext implements KernelAwareInterface
 {

@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
  * Doctrine target entities resolver spec.
  * It adds proper method calls to doctrine listener.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
 {

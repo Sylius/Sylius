@@ -27,7 +27,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * Default coordinator implementation.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Coordinator implements CoordinatorInterface
 {

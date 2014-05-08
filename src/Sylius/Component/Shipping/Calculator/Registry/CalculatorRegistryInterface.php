@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 /**
  * Interface for calculator registry.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CalculatorRegistryInterface
 {

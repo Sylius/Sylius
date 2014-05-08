@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 /**
  * Default assortment products to play with Sylius.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadProductsData extends DataFixture
 {

@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Resource controller class provides several actions and methods for creating
  * pages and api for your cart system.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartController extends Controller
 {

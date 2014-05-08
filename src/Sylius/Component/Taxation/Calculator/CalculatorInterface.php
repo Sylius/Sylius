@@ -16,7 +16,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 /**
  * Tax calculator interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CalculatorInterface
 {

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SettingsBundle\Model;
 /**
  * Settings parameter model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Parameter implements ParameterInterface
 {

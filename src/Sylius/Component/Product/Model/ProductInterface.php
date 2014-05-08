@@ -19,7 +19,7 @@ use Sylius\Component\Variation\Model\VariableInterface;
 /**
  * Basic product interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductInterface extends
     SubjectInterface,

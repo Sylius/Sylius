@@ -14,7 +14,7 @@ namespace Sylius\Bundle\FlowBundle\Storage;
 /**
  * Storage interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface StorageInterface
 {

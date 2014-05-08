@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * This model represents single shipment.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Shipment implements ShipmentInterface, TimestampableInterface
 {

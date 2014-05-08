@@ -16,7 +16,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * Stock availability checker interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AvailabilityCheckerInterface
 {

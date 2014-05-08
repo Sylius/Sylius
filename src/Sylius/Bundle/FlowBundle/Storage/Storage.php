@@ -14,7 +14,7 @@ namespace Sylius\Bundle\FlowBundle\Storage;
 /**
  * Base storage class.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class Storage implements StorageInterface
 {

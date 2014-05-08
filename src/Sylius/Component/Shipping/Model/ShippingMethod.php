@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Shipping method model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingMethod implements ShippingMethodInterface
 {

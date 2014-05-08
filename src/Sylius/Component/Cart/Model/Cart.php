@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\Order;
  * All driver entities and documents should extend this class or implement
  * proper interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Cart extends Order implements CartInterface
 {

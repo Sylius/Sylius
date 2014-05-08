@@ -14,7 +14,7 @@ namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 /**
  * Taxonomy entity choice form.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxonomyEntityChoiceType extends TaxonomyChoiceType
 {

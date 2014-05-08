@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SettingsBundle\Schema;
 /**
  * Schema registry interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SchemaRegistryInterface
 {

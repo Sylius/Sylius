@@ -14,7 +14,7 @@ namespace Sylius\Bundle\TaxationBundle\Form\Type;
 /**
  * Tax category choice type for "doctrine/orm" driver.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxCategoryEntityType extends TaxCategoryChoiceType
 {

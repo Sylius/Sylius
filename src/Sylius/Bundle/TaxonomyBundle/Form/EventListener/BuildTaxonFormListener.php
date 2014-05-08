@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * Adds the parent taxon field choice based on the selected taxonomy.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildTaxonFormListener implements EventSubscriberInterface
 {

@@ -14,7 +14,7 @@ namespace Sylius\Component\Payment\Model;
 /**
  * Payment source interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PaymentSourceInterface
 {

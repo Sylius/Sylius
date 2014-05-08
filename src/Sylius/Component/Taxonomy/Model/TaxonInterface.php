@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 /**
  * Interface for taxons.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxonInterface extends SoftDeletableInterface
 {

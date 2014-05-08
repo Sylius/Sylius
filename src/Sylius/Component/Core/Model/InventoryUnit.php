@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
  * Custom inventory unit class.
  * Can be attached to order.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
 {
