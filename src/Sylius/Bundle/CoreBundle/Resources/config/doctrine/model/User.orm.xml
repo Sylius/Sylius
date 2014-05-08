@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
+    <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user" repository-class="Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -26,9 +26,6 @@
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
 
-        <field name="amazonId" column="amazon_id" type="string" nullable="true" />
-        <field name="facebookId" column="facebook_id" type="string" nullable="true" />
-        <field name="googleId" column="google_id" type="string" nullable="true" />
 
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
@@ -70,6 +67,12 @@
                 <cascade-all />
             </cascade>
         </many-to-many>
+
+        <one-to-many field="oauths" target-entity="Sylius\Component\Core\Model\UserOauth" mapped-by="user">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
 
 
         <field name="createdAt" column="created_at" type="datetime">

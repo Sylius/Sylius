@@ -22,9 +22,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
  */
 class User extends BaseUser implements UserInterface
 {
-    protected $amazonId;
-    protected $facebookId;
-    protected $googleId;
+
     protected $firstName;
     protected $lastName;
     protected $createdAt;
@@ -35,13 +33,14 @@ class User extends BaseUser implements UserInterface
     protected $billingAddress;
     protected $shippingAddress;
     protected $addresses;
+    protected $oauths;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->orders    = new ArrayCollection();
         $this->addresses = new ArrayCollection();
-
+        $this->oauths = new ArrayCollection();
         parent::__construct();
     }
 
@@ -63,77 +62,6 @@ class User extends BaseUser implements UserInterface
         return $this;
     }
 
-    /**
-     * Set ID of Amazon account attached to the user
-     *
-     * @param string $amazonId
-     *
-     * @return User
-     */
-    public function setAmazonId($amazonId)
-    {
-        $this->amazonId = $amazonId;
-
-        return $this;
-    }
-
-    /**
-     * Get ID of Amazon account attached to the user
-     *
-     * @return string|null
-     */
-    public function getAmazonId()
-    {
-        return $this->amazonId;
-    }
-
-    /**
-     * Set ID of Facebook account attached to the user
-     *
-     * @param string $facebookId
-     *
-     * @return User
-     */
-    public function setFacebookId($facebookId)
-    {
-        $this->facebookId = $facebookId;
-
-        return $this;
-    }
-
-    /**
-     * Get ID of Facebook account attached to the user
-     *
-     * @return string|null
-     */
-    public function getFacebookId()
-    {
-        return $this->facebookId;
-    }
-
-    /**
-     * Set ID of Google account attached to the user
-     *
-     * @param string $googleId
-     *
-     * @return User
-     */
-    public function setGoogleId($googleId)
-    {
-        $this->googleId = $googleId;
-
-        return $this;
-    }
-
-    /**
-     * Get ID of Google account attached to the user
-     *
-     * @return string|null
-     */
-    public function getGoogleId()
-    {
-        return $this->googleId;
-    }
 
     /**
      * {@inheritdoc}
@@ -348,5 +276,15 @@ class User extends BaseUser implements UserInterface
         $this->setUsernameCanonical($emailCanonical);
 
         return $this;
+    }
+
+    /**
+     * Get oauth ids
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOauths()
+    {
+        return $this->oauths;
     }
 }

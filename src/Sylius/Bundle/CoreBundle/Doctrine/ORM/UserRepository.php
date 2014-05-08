@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * User repository.
@@ -116,4 +117,31 @@ class UserRepository extends EntityRepository
             ->setParameter('to', $to)
         ;
     }
+
+    /**
+     * Finds a user by oauth id
+     *
+     * @param string $oauthOwners
+     * @param string $oauthId
+     * @return UserInterface
+     */
+    function findOneByOauth( $oauthOwner, $oauthId )
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT u FROM '.$this->_entityName.' u
+                JOIN u.oauths o
+                WHERE o.provider = :provider
+                AND o.canonicalId = :oauthId'
+            )->setParameter('provider', $oauthOwner)
+            ->setParameter('oauthId', $oauthId);
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+
 }

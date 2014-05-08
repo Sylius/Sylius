@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Sylius\Component\Core\Model\UserOauth" table="sylius_user_oauth">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="provider" type="string" length="255"  />
+        <field name="canonicalId" column="canonical_id" type="string" length="255"  />
+
+
+        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\User" inversed-by="oauths">
+            <join-column name="user_id" referenced-column-name="id" />
+        </many-to-one>
+
+    </entity>
+
+</doctrine-mapping>
