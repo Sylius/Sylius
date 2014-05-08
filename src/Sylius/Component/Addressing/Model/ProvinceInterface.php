@@ -18,11 +18,41 @@ namespace Sylius\Component\Addressing\Model;
  */
 interface ProvinceInterface
 {
+    /**
+     * @return mixed
+     */
     public function getId();
+
+    /**
+     * @return string
+     */
     public function getName();
+
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName($name);
+
+    /**
+     * @return string
+     */
     public function getIsoName();
+
+    /**
+     * @param string $isoName
+     * @return $this
+     */
     public function setIsoName($isoName);
+
+    /**
+     * @return CountryInterface
+     */
     public function getCountry();
+
+    /**
+     * @param CountryInterface $country
+     * @return $this
+     */
     public function setCountry(CountryInterface $country = null);
 }
