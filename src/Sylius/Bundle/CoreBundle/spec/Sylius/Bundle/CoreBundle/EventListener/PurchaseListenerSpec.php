@@ -146,12 +146,11 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->addFlash($event);
     }
 
-    function it_should_not_abandon_cart_if_payment_status_canceled(
+    function it_should_not_abandon_cart_if_payment_status_void(
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
 
         $cartProvider->abandonCart()->shouldNotBeCalled();
@@ -161,14 +160,45 @@ class PurchaseListenerSpec extends ObjectBehavior
         $this->abandonCart($event);
     }
 
+    function it_should_set_notice_flash_message_if_payment_status_void(
+        TranslatorInterface $translator,
+        FlashBagInterface $flashBag,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    ) {
+        $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
+
+        $translator
+            ->trans('sylius.checkout.canceled', array(), 'flashes')
+            ->shouldBeCalled()
+            ->willReturn('translated.sylius.checkout.canceled')
+        ;
+        $flashBag->add('notice','translated.sylius.checkout.canceled')->shouldBeCalled();
+
+        $this->addFlash($event);
+    }
+
+    function it_should_abandon_cart_if_payment_status_canceled(
+        CartProviderInterface $cartProvider,
+        PurchaseCompleteEvent $event,
+        PaymentInterface $payment
+    ) {
+        $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
+
+        $cartProvider->abandonCart()->shouldBeCalled();
+
+        $event->setResponse(new RedirectResponse('/payment'))->shouldNotBeCalled();
+
+        $this->abandonCart($event);
+    }
+
     function it_should_set_notice_flash_message_if_payment_status_canceled(
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
-        $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
+    ) {
+        $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
 
         $translator
             ->trans('sylius.checkout.canceled', array(), 'flashes')
@@ -184,8 +214,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ){
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
         $cartProvider->abandonCart()->shouldNotBeCalled();
