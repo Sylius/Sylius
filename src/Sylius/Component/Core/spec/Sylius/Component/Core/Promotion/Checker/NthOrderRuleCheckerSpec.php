@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Checker;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 
@@ -32,7 +34,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getUser()->shouldBeCalled()->willReturn(null);
+        $subject->getUser()->willReturn(null);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
@@ -40,11 +42,32 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_no_orders_as_not_eligible(
         OrderInterface $subject,
         UserInterface $user,
-        \Countable $orders
+        Collection $orders
     ) {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getOrders()->shouldBeCalled()->willReturn($orders);
-        $orders->count()->shouldBeCalled()->willReturn(0);
+        $subject->getUser()->willReturn($user);
+
+        $orders->isEmpty()->willReturn(true);
+
+        $user->getOrders()->willReturn($orders);
+
+        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
+    }
+
+    function it_should_recognize_subject_as_not_eligible_if_user_has_no_completed_orders(
+        OrderInterface $subject,
+        UserInterface $user,
+        Collection $orders,
+        Collection $filtered
+    )
+    {
+        $subject->getUser()->willReturn($user);
+
+        $filtered->count()->willReturn(0);
+
+        $orders->isEmpty()->willReturn(false);
+        $orders->filter(Argument::any())->willReturn($filtered);
+
+        $user->getOrders()->willReturn($orders);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
@@ -52,11 +75,17 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         OrderInterface $subject,
         UserInterface $user,
-        \Countable $orders
+        Collection $orders,
+        Collection $filtered
     ) {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getOrders()->shouldBeCalled()->willReturn($orders);
-        $orders->count()->shouldBeCalled()->willReturn(2);
+        $subject->getUser()->willReturn($user);
+
+        $filtered->count()->willReturn(2);
+
+        $orders->isEmpty()->willReturn(false);
+        $orders->filter(Argument::any())->willReturn($filtered);
+
+        $user->getOrders()->willReturn($orders);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
@@ -64,11 +93,17 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
         OrderInterface $subject,
         UserInterface $user,
-        \Countable $orders
+        Collection $orders,
+        Collection $filtered
     ) {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getOrders()->shouldBeCalled()->willReturn($orders);
-        $orders->count()->shouldBeCalled()->willReturn(12);
+        $subject->getUser()->willReturn($user);
+
+        $filtered->count()->willReturn(12);
+
+        $orders->isEmpty()->willReturn(false);
+        $orders->filter(Argument::any())->willReturn($filtered);
+
+        $user->getOrders()->willReturn($orders);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
@@ -76,11 +111,17 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
         OrderInterface $subject,
         UserInterface $user,
-        \Countable $orders
+        Collection $orders,
+        Collection $filtered
     ) {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getOrders()->shouldBeCalled()->willReturn($orders);
-        $orders->count()->shouldBeCalled()->willReturn(10);
+        $subject->getUser()->willReturn($user);
+
+        $filtered->count()->willReturn(10);
+
+        $orders->isEmpty()->willReturn(false);
+        $orders->filter(Argument::any())->willReturn($filtered);
+
+        $user->getOrders()->willReturn($orders);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(true);
     }

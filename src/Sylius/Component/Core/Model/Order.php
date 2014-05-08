@@ -233,9 +233,12 @@ class Order extends Cart implements OrderInterface
      */
     public function addPayment(BasePaymentInterface $payment)
     {
+        /** @var $payment PaymentInterface */
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
+
+            $this->setPaymentState($payment->getState());
         }
 
         return $this;
@@ -246,8 +249,10 @@ class Order extends Cart implements OrderInterface
      */
     public function removePayment(BasePaymentInterface $payment)
     {
+        /** @var $payment PaymentInterface */
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
+            $payment->setOrder(null);
         }
 
         return $this;

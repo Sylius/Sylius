@@ -17,10 +17,10 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LoadOrdersData extends DataFixture
@@ -52,7 +52,6 @@ class LoadOrdersData extends DataFixture
             $this->createShipment($order);
 
             $order->setCurrency($this->faker->randomElement(array('EUR', 'USD', 'GBP')));
-            $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
@@ -62,7 +61,15 @@ class LoadOrdersData extends DataFixture
             $order->calculateTotal();
             $order->complete();
 
-            $this->createPayment($order);
+            if ($i < 4) {
+                $order->setUser($this->getReference('Sylius.User-Administrator'));
+
+                $this->createPayment($order, PaymentInterface::STATE_COMPLETED);
+            } else {
+                $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
+
+                $this->createPayment($order);
+            }
 
             $this->setReference('Sylius.Order-'.$i, $order);
 
@@ -108,8 +115,9 @@ class LoadOrdersData extends DataFixture
 
     /**
      * @param OrderInterface $order
+     * @param null|string    $state
      */
-    protected function createPayment(OrderInterface $order)
+    protected function createPayment(OrderInterface $order, $state = null)
     {
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
@@ -117,7 +125,7 @@ class LoadOrdersData extends DataFixture
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
         $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
-        $payment->setState($this->getPaymentState());
+        $payment->setState(null === $state ? $this->getPaymentState() : $state);
         $payment->setDetails($this->faker->creditCardDetails());
 
         $order->addPayment($payment);
