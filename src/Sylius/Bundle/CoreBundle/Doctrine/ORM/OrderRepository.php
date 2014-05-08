@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use FOS\UserBundle\Model\UserInterface;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use Sylius\Component\Order\Model\OrderInterface;
-use Pagerfanta\PagerfantaInterface;
 
 class OrderRepository extends CartRepository
 {

@@ -13,23 +13,21 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Component\Core\Model\UserOauth" table="sylius_user_oauth">
+    <entity name="Sylius\Component\Core\Model\UserOAuth" table="sylius_user_oauth">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="provider" type="string" length="255"  />
-        <field name="canonicalId" column="canonical_id" type="string" length="255"  />
+        <field name="provider" type="string" />
+        <field name="identifier" type="string" />
+        <field name="accessToken" column="access_token" type="string" />
 
-
-        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\User" inversed-by="oauths">
+        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\User" inversed-by="oauth_accounts">
             <join-column name="user_id" referenced-column-name="id" />
         </many-to-one>
-
     </entity>
 
 </doctrine-mapping>

@@ -11,23 +11,22 @@
 
 namespace Sylius\Component\Core\Model;
 
-
-
 /**
- * User model.
+ * User OAuth model.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Sergio Marchesini
  */
-class UserOauth
+class UserOAuth
 {
-
     protected $id;
     protected $provider;
-    protected $canonicalId;
+    protected $identifier;
+    protected $accessToken;
+
+    /**
+     * @var UserInterface
+     */
     protected $user;
-
-
-
 
     /**
      * Get id
@@ -40,21 +39,7 @@ class UserOauth
     }
 
     /**
-     * Set provider
-     *
-     * @param string $provider
-     *
-     * @return UserOauth
-     */
-    public function setProvider($provider)
-    {
-        $this->provider = $provider;
-
-        return $this;
-    }
-
-    /**
-     * Get provider
+     * Get OAuth provider name.
      *
      * @return string
      */
@@ -64,42 +49,63 @@ class UserOauth
     }
 
     /**
-     * Set canonicalId
+     * Set OAuth provider name.
      *
-     * @param string $canonicalId
+     * @param string $provider
      *
-     * @return UserOauth
+     * @return self
      */
-    public function setCanonicalId($canonicalId)
+    public function setProvider($provider)
     {
-        $this->canonicalId = $canonicalId;
+        $this->provider = $provider;
 
         return $this;
     }
 
     /**
-     * Get canonicalId
+     * Get OAuth identifier.
      *
      * @return string
      */
-    public function getCanonicalId()
+    public function getIdentifier()
     {
-        return $this->canonicalId;
+        return $this->identifier;
     }
 
+    /**
+     * Set OAuth identifier.
+     *
+     * @param string $identifier
+     *
+     * @return self
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
 
-
+        return $this;
+    }
 
     /**
-     * Set user
+     * Get OAuth access token.
      *
-     * @param UserInterface $user
-     *
-     * @return UserOauth
+     * @return string
      */
-    public function setUser(UserInterface $user = null)
+    public function getAccessToken()
     {
-        $this->user = $user;
+        return $this->accessToken;
+    }
+
+    /**
+     * Set OAuth access token.
+     *
+     * @param string $accessToken
+     *
+     * @return self
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
 
         return $this;
     }
@@ -112,5 +118,19 @@ class UserOauth
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param UserInterface $user
+     *
+     * @return self
+     */
+    public function setUser(UserInterface $user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

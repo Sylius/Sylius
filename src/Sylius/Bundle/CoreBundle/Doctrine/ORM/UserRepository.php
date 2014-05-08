@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 
@@ -26,6 +27,7 @@ class UserRepository extends EntityRepository
      *
      * @param array $criteria
      * @param array $sorting
+     * @param bool  $deleted
      *
      * @return PagerfantaInterface
      */
@@ -69,6 +71,8 @@ class UserRepository extends EntityRepository
      * Get the user data for the details page.
      *
      * @param integer $id
+     *
+     * @return null|UserInterface
      */
     public function findForDetailsPage($id)
     {
@@ -89,6 +93,13 @@ class UserRepository extends EntityRepository
         return $result;
     }
 
+    /**
+     * @param \DateTime   $from
+     * @param \DateTime   $to
+     * @param null|string $status
+     *
+     * @return mixed
+     */
     public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
@@ -117,31 +128,4 @@ class UserRepository extends EntityRepository
             ->setParameter('to', $to)
         ;
     }
-
-    /**
-     * Finds a user by oauth id
-     *
-     * @param string $oauthOwners
-     * @param string $oauthId
-     * @return UserInterface
-     */
-    function findOneByOauth( $oauthOwner, $oauthId )
-    {
-        $query = $this->getEntityManager()
-            ->createQuery(
-                'SELECT u FROM '.$this->_entityName.' u
-                JOIN u.oauths o
-                WHERE o.provider = :provider
-                AND o.canonicalId = :oauthId'
-            )->setParameter('provider', $oauthOwner)
-            ->setParameter('oauthId', $oauthId);
-
-        try {
-            return $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
-    }
-
-
 }

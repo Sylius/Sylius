@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
@@ -22,7 +23,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
  */
 class User extends BaseUser implements UserInterface
 {
-
     protected $firstName;
     protected $lastName;
     protected $createdAt;
@@ -33,14 +33,15 @@ class User extends BaseUser implements UserInterface
     protected $billingAddress;
     protected $shippingAddress;
     protected $addresses;
-    protected $oauths;
+    protected $oauthAccounts;
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->orders    = new ArrayCollection();
-        $this->addresses = new ArrayCollection();
-        $this->oauths = new ArrayCollection();
+        $this->createdAt     = new \DateTime();
+        $this->orders        = new ArrayCollection();
+        $this->addresses     = new ArrayCollection();
+        $this->oauthAccounts = new ArrayCollection();
+
         parent::__construct();
     }
 
@@ -61,7 +62,6 @@ class User extends BaseUser implements UserInterface
 
         return $this;
     }
-
 
     /**
      * {@inheritdoc}
@@ -279,12 +279,12 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Get oauth ids
+     * Get connect OAuth accounts.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|UserOAuth[]
      */
-    public function getOauths()
+    public function getOAuthAccounts()
     {
-        return $this->oauths;
+        return $this->oauthAccounts;
     }
 }

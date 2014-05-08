@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user" repository-class="Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository">
+    <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -25,7 +25,6 @@
         <field name="currency" length="3" nullable="true" />
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
-
 
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
@@ -68,12 +67,11 @@
             </cascade>
         </many-to-many>
 
-        <one-to-many field="oauths" target-entity="Sylius\Component\Core\Model\UserOauth" mapped-by="user">
+        <one-to-many field="oauth_accounts" target-entity="Sylius\Component\Core\Model\UserOAuth" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

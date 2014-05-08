@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\OAuth;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\User;
-use Sylius\Component\Core\Model\UserOauth;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Sylius\Component\Core\Model\UserOAuth;
 use Symfony\Component\Security\Core\User\UserInterface;
-use \Doctrine\ORM\EntityManager;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
@@ -28,49 +28,52 @@ use \Doctrine\ORM\EntityManager;
  */
 class UserProvider extends FOSUBUserProvider
 {
+    /**
+     * @var ObjectManager
+     */
+    protected $om;
 
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var EntityRepository
      */
-    protected $em;
+    protected $repository;
 
     /**
      * Constructor.
      *
      * @param UserManagerInterface $userManager FOSUB user provider.
-     *
+     * @param ObjectManager        $om
+     * @param EntityRepository     $repository
      */
-    public function __construct( UserManagerInterface $userManager, EntityManager $em )
+    public function __construct(UserManagerInterface $userManager, ObjectManager $om, EntityRepository $repository)
     {
         $this->userManager = $userManager;
-        $this->em = $em;
+        $this->om          = $om;
+        $this->repository  = $repository;
     }
+
     /**
      * {@inheritDoc}
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $userOauthId= $response->getUsername();
-        $owner = $response->getResourceOwner()->getName();
-        $existingUser =  $this->userManager->findUserByOauth( $owner, $userOauthId );
-        if( null !== $existingUser )
-        {
-            return $existingUser;
+        $user = $this->repository->findOneBy(array(
+            'provider'   => $response->getResourceOwner()->getName(),
+            'identifier' => $response->getUsername()
+        ));
+
+        if (null !== $user) {
+            return $user;
         }
 
-
         if (null !== $response->getEmail()) {
-            $existingUser = $this->userManager->findUserByEmail($response->getEmail());
-            if (null !== $existingUser)
-            {
-                return $this->updateUserByOAuthUserResponse($existingUser, $response);
+            $user = $this->userManager->findUserByEmail($response->getEmail());
+            if (null !== $user) {
+                return $this->updateUserByOAuthUserResponse($user, $response);
             }
         }
 
-
-
         return $this->createUserByOAuthUserResponse($response);
-
     }
 
     /**
@@ -93,7 +96,6 @@ class UserProvider extends FOSUBUserProvider
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $user = $this->userManager->createUser();
-
 
         // set default values taken from OAuth sign-in provider account
         if (null !== $email = $response->getEmail()) {
@@ -126,18 +128,14 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
     {
-        $providerName = $response->getResourceOwner()->getName();
-        $userOauthId= $response->getUsername();
+        $oauth = new UserOAuth();
+        $oauth->setIdentifier($response->getUsername());
+        $oauth->setProvider($response->getResourceOwner()->getName());
+        $oauth->setAccessToken($response->getAccessToken());
+        $oauth->setUser($user);
 
-        $userOauth = new UserOauth();
-        $userOauth->setCanonicalId($userOauthId);
-        $userOauth->setProvider($providerName);
-
-        $userOauth->setUser($user);
-
-
-        $this->em->persist( $userOauth );
-        $this->em->flush();
+        $this->om->persist($oauth);
+        $this->om->flush();
 
         return $user;
     }

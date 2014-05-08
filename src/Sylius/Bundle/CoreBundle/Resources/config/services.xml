@@ -68,7 +68,6 @@
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
-        <parameter key="sylius.user_manager.class">Sylius\Bundle\CoreBundle\OAuth\UserManager</parameter>
 
         <!-- Promotion Form, Action & Checker -->
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
@@ -111,17 +110,6 @@
             <argument type="service" id="sylius.repository.zone" />
             <tag name="sylius.settings_schema" namespace="taxation" />
         </service>
-
-        <!-- user -->
-        <service id="sylius.user_manager" class="%sylius.user_manager.class%">
-            <argument type="service" id="security.encoder_factory" />
-            <argument type="service" id="fos_user.util.username_canonicalizer" />
-            <argument type="service" id="fos_user.util.email_canonicalizer" />
-            <argument type="service" id="fos_user.entity_manager" />
-            <argument>%sylius.model.user.class%</argument>
-        </service>
-
-
 
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
@@ -511,7 +499,8 @@
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
             <argument type="service" id="fos_user.user_manager" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.manager.user_oauth" />
+            <argument type="service" id="sylius.repository.user_oauth" />
         </service>
 
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">

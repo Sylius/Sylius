@@ -73,8 +73,6 @@ fos_user:
     registration:
         form:
             type: sylius_user_registration
-    service:
-          user_manager: sylius.user_manager
 
 hwi_oauth:
     firewall_name: main
