@@ -21,6 +21,8 @@ interface ProvinceInterface
     public function getId();
     public function getName();
     public function setName($name);
+    public function getIsoName();
+    public function setIsoName($isoName);
     public function getCountry();
     public function setCountry(CountryInterface $country = null);
 }
