@@ -31,7 +31,6 @@ sylius_taxonomy:
             model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
 
-
 sylius_product:
     driver: doctrine/orm
     classes:
