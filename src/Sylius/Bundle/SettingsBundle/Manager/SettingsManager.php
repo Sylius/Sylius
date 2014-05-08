@@ -161,8 +161,8 @@ class SettingsManager implements SettingsManagerInterface
                     ->setValue($value)
                 ;
 
+                /* @var $errors ConstraintViolationListInterface */
                 $errors = $this->validator->validate($parameter);
-                /* @var $errors ConstraintViolationListInterface*/
                 if (0 < $errors->count()) {
                     throw new ValidatorException($errors->get(0)->getMessage());
                 }
