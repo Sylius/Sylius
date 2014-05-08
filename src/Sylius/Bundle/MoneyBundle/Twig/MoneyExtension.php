@@ -16,7 +16,7 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
 /**
  * Sylius money Twig helper.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MoneyExtension extends \Twig_Extension
 {

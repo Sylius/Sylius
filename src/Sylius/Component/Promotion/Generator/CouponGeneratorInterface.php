@@ -16,7 +16,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * Coupon generator interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CouponGeneratorInterface
 {

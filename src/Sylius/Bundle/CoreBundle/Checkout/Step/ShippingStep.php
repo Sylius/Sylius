@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
  * Based on the user address, we present the available shipping methods,
  * and ask him to select his preferred one.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingStep extends CheckoutStep
 {

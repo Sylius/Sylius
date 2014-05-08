@@ -17,7 +17,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
 /**
  * Taxon interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxonInterface extends VariableTaxonInterface
 {

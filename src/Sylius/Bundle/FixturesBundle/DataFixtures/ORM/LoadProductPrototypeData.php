@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Sample product prototypes.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadProductPrototypeData extends DataFixture
 {

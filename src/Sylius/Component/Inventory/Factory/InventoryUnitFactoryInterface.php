@@ -17,7 +17,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * Inventory unit factory interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface InventoryUnitFactoryInterface
 {

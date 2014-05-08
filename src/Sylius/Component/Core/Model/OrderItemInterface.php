@@ -17,7 +17,7 @@ use Sylius\Component\Cart\Model\CartItemInterface;
 /**
  * Order item interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderItemInterface extends CartItemInterface
 {

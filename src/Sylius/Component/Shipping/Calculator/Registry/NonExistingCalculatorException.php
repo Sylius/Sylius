@@ -15,7 +15,7 @@ namespace Sylius\Component\Shipping\Calculator\Registry;
  * This exception should be thrown by calculator registry
  * when calculator with given name does not exist.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class NonExistingCalculatorException extends \InvalidArgumentException
 {

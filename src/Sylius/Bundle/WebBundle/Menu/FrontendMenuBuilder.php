@@ -26,7 +26,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * Frontend menu builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FrontendMenuBuilder extends MenuBuilder
 {

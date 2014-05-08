@@ -19,7 +19,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantUniqueValidatorSpec extends ObjectBehavior
 {

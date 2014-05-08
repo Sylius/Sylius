@@ -17,7 +17,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * Inventory management helper methods.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryExtension extends \Twig_Extension
 {

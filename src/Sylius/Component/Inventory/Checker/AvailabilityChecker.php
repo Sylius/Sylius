@@ -16,7 +16,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * Checks availability for given stockable object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AvailabilityChecker implements AvailabilityCheckerInterface
 {

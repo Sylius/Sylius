@@ -22,7 +22,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 /**
  * Coupon to code transformer.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CouponToCodeTransformer implements DataTransformerInterface
 {

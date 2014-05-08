@@ -14,7 +14,7 @@ namespace Sylius\Component\Payment\Model;
 /**
  * Payments method model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentMethod implements PaymentMethodInterface
 {

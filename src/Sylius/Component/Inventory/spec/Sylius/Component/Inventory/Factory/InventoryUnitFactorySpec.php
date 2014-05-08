@@ -17,7 +17,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnitFactorySpec extends ObjectBehavior
 {

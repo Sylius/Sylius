@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 /**
  * Shipping category choice type for "doctrine/orm" driver.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingCategoryEntityType extends ShippingCategoryChoiceType
 {

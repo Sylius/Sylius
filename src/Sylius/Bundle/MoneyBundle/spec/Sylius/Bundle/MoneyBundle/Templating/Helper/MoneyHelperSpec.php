@@ -16,7 +16,7 @@ use Sylius\Component\Money\Context\CurrencyContextInterface;
 use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MoneyHelperSpec extends ObjectBehavior
 {

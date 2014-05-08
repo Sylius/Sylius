@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Item resolver for cart bundle.
  * Returns proper item objects for cart add and remove actions.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemResolver implements ItemResolverInterface

@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * Unique variant property constraint.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  *
  * @Annotation
  */

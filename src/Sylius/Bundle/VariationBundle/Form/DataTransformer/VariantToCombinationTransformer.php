@@ -20,7 +20,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 /**
  * Option values combination to variant transformer.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantToCombinationTransformer implements DataTransformerInterface
 {

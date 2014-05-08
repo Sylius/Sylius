@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantCombinationSpec extends ObjectBehavior
 {

@@ -16,7 +16,7 @@ use Sylius\Component\Cart\Model\CartItemInterface;
 /**
  * Resolver returns cart item that needs to be added based on given data.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ItemResolverInterface
 {

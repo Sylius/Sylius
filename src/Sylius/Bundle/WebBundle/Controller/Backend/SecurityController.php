@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 /**
  * Backend security controller.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SecurityController extends Controller
 {

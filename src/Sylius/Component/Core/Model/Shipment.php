@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 /**
  * Shipment attached to order.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Shipment extends BaseShipment implements ShipmentInterface
 {

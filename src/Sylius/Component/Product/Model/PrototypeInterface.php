@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * Used to generate full product form.
  * It simplifies product creation.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PrototypeInterface extends TimestampableInterface
 {

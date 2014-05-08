@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Promotion\Generator;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InstructionSpec extends ObjectBehavior
 {

@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
  * This service keeps all calculators registered inside
  * container. Allows to retrieve them by name.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CalculatorRegistry implements CalculatorRegistryInterface
 {

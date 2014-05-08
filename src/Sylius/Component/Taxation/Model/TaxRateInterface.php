@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * Tax rate interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxRateInterface extends TimestampableInterface
 {

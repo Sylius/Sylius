@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * Delegating calculator.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface DelegatingCalculatorInterface
 {

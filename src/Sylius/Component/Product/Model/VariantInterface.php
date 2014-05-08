@@ -16,7 +16,7 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 /**
  * Product variant interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface VariantInterface extends BaseVariantInterface
 {

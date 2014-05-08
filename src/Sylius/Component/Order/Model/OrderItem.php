@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Model for order line items.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItem implements OrderItemInterface
 {

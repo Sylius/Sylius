@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Group fixtures.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadGroupsData extends DataFixture
 {

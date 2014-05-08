@@ -16,7 +16,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 /**
  * Price calculator interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CalculatorInterface
 {

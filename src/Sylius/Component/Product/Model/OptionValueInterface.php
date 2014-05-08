@@ -16,7 +16,7 @@ use Sylius\Component\Variation\Model\OptionValueInterface as BaseOptionValueInte
 /**
  * Product option values interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OptionValueInterface extends BaseOptionValueInterface
 {

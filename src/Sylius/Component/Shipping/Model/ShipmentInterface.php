@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Shipment interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShipmentInterface extends ShippingSubjectInterface
 {

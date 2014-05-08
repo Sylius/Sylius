@@ -14,7 +14,7 @@ namespace Sylius\Component\Taxation\Model;
 /**
  * Tax rate model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRate implements TaxRateInterface
 {

@@ -19,7 +19,7 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 /**
  * Order interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderInterface extends AdjustableInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
 {

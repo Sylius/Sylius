@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 /**
  * Base class for checkout steps.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class CheckoutStep extends ControllerStep
 {

@@ -15,7 +15,7 @@ namespace Sylius\Component\Cart\Resolver;
  * Exception which should be thrown by item resolver if anything failed.
  * The message should be displayed to user.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ItemResolvingException extends \InvalidArgumentException
 {

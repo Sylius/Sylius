@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMetho
 /**
  * Shipping method interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingMethodInterface extends BaseShippingMethodInterface
 {

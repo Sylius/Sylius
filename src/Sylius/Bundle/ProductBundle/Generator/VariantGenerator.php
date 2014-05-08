@@ -22,7 +22,7 @@ use Symfony\Component\Validator\ValidatorInterface;
 /**
  * Default product variants generator. It saves only valid variants.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantGenerator extends BaseVariantGenerator
 {

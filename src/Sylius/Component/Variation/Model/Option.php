@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Product option default implementation.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Option implements OptionInterface
 {

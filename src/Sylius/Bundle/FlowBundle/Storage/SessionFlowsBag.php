@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 /**
  * Separate session bag to store flows data.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SessionFlowsBag extends NamespacedAttributeBag
 {

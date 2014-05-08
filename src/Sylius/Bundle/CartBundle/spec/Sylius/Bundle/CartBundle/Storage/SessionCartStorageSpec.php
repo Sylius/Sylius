@@ -17,7 +17,7 @@ use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SessionCartStorageSpec extends ObjectBehavior
 {

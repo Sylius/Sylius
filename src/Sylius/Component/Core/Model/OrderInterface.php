@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * Sylius core Order model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderInterface extends CartInterface, PromotionSubjectInterface
 {

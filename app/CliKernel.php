@@ -16,7 +16,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 /**
  * Sylius CLI application kernel.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CliKernel extends AppKernel
 {

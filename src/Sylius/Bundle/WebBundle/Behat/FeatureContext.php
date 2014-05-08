@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * Sylius main feature context.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FeatureContext extends RawMinkContext implements KernelAwareInterface
 {

@@ -16,7 +16,7 @@ use Sylius\Component\Cart\Model\CartInterface;
 /**
  * Interface for service that stores current cart id.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CartStorageInterface
 {

@@ -8,7 +8,7 @@ use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 /**
  * Resource controller spec.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ResourceControllerSpec extends ObjectBehavior
 {

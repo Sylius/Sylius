@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Object variant model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Variant implements VariantInterface
 {

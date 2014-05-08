@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * Settings form factory.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsFormFactory implements SettingsFormFactoryInterface
 {

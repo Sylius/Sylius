@@ -18,7 +18,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * Default country fixtures.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadCountriesData extends DataFixture
 {

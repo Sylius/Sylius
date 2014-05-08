@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * Sample payment methods.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadPaymentMethodsData extends DataFixture
 {

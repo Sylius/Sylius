@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * Sets appropriate order number before saving.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderNumberListener

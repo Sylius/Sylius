@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
 {

@@ -14,7 +14,7 @@ namespace Sylius\Component\Taxonomy\Model;
 /**
  * Model for taxonomies.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Taxonomy implements TaxonomyInterface
 {

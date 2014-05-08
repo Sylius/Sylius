@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * Object variant interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface VariantInterface extends SoftDeletableInterface, TimestampableInterface
 {

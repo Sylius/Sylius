@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Shipping\Model;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingCategorySpec extends ObjectBehavior
 {
