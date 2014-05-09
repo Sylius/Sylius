@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f1fdcc85a759a0461ec67eff3b7f1726",
+    "hash": "99ac9795efc33cd508cea5740cedc4ab",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -2743,7 +2743,7 @@
                     "name": "Mathias Verraes",
                     "email": "mathias@verraes.net",
                     "homepage": "http://verraes.net",
-                    "role": "Developer of wrapped Money library"
+                    "role": "Developer"
                 }
             ],
             "description": "PHP implementation of Fowler's Money pattern",
@@ -4722,6 +4722,51 @@
                 "templating"
             ],
             "time": "2014-02-13 10:19:29"
+        },
+        {
+            "name": "umpirsky/composer-permissions-handler",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/umpirsky/PermissionsHandler.git",
+                "reference": "2512fe2eb4a02a8d745aa8b7718e99242b9083df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/umpirsky/PermissionsHandler/zipball/2512fe2eb4a02a8d745aa8b7718e99242b9083df",
+                "reference": "2512fe2eb4a02a8d745aa8b7718e99242b9083df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "symfony/process": "~2.4"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Umpirsky\\PermissionsHandler": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saša Stamenković",
+                    "email": "umpirsky@gmail.com",
+                    "homepage": "http://umpirsky.com"
+                }
+            ],
+            "description": "Composer script handling directories permissions by making them writable both by the web server and the command line user.",
+            "keywords": [
+                "permissions handling"
+            ],
+            "time": "2014-04-29 19:22:41"
         },
         {
             "name": "white-october/pagerfanta-bundle",
