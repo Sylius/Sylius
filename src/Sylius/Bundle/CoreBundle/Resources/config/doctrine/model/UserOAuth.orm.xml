@@ -23,7 +23,7 @@
 
         <field name="provider" type="string" />
         <field name="identifier" type="string" />
-        <field name="accessToken" column="access_token" type="string" />
+        <field name="accessToken" column="access_token" type="string" nullable="true" />
 
         <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="oauthAccounts">
             <join-column name="user_id" referenced-column-name="id" />
