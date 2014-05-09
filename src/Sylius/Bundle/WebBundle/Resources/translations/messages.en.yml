@@ -685,6 +685,11 @@ sylius:
         impersonate: Log in as this user
         manage: manage users
         no_results: There are no users to display.
+        oauth:
+            provider: OAuth Provider
+            identifier: Identifier
+            access_token: Access Token
+            none: No OAuth accounts connected.
         order:
             no_results: There are no orders for this user to display.
         orders: User orders
