@@ -95,8 +95,7 @@ class OrderShippingListener
     {
         $this->shippingProcessor->updateShipmentStates(
             $this->getOrder($event)->getShipments(),
-            ShipmentTransitions::SYLIUS_HOLD,
-            ShipmentInterface::STATE_CHECKOUT
+            ShipmentTransitions::SYLIUS_HOLD
         );
     }
 

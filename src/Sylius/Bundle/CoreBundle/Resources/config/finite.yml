@@ -69,7 +69,7 @@ finite_finite:
     sylius_payment:
         callbacks:
             after:
-                test: { on: 'complete', do: [@sylius.callback.order_payment, 'updateOrderOnPayment'], args: ['object'] }
+                sylius_update_order: { on: 'complete', do: [@sylius.callback.order_payment, 'updateOrderOnPayment'], args: ['object'] }
 
     sylius_order:
         callbacks:
@@ -81,4 +81,4 @@ finite_finite:
     sylius_inventory_unit:
         callbacks:
             after:
-                sylius_sync_shipping: { to: '-sold', do: [@finite.callback.cascade_transition, 'apply'], args: ['object', ~, '"sylius_shipping_item"'] }
+                sylius_sync_shipping: { to: '-sold', do: [@finite.callback.cascade_transition, 'apply'], args: ['object', 'null', '"sylius_shipping_item"'] }

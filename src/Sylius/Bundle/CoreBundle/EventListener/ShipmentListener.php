@@ -93,8 +93,7 @@ class ShipmentListener
 
         $this->shippingProcessor->updateShipmentStates(
             $order->getShipments(),
-            ShipmentTransitions::SYLIUS_RELEASE,
-            ShipmentInterface::STATE_ONHOLD
+            ShipmentTransitions::SYLIUS_RELEASE
         );
     }
 
