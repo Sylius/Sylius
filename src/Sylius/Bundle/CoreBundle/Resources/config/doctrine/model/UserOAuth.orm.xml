@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Sylius\Component\Core\Model\UserOAuth" table="sylius_user_oauth">
+    <mapped-superclass name="Sylius\Component\Core\Model\UserOAuth" table="sylius_user_oauth">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -25,9 +25,9 @@
         <field name="identifier" type="string" />
         <field name="accessToken" column="access_token" type="string" />
 
-        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\User" inversed-by="oauthAccounts">
+        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="oauthAccounts">
             <join-column name="user_id" referenced-column-name="id" />
         </many-to-one>
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

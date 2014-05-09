@@ -15,9 +15,9 @@ use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Model\UserOAuth;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends FOSUBUserProvider
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $oauthRepository;
 
@@ -37,9 +37,9 @@ class UserProvider extends FOSUBUserProvider
      * Constructor.
      *
      * @param UserManagerInterface $userManager     FOSUB user provider.
-     * @param EntityRepository     $oauthRepository
+     * @param RepositoryInterface  $oauthRepository
      */
-    public function __construct(UserManagerInterface $userManager, EntityRepository $oauthRepository)
+    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository)
     {
         $this->userManager     = $userManager;
         $this->oauthRepository = $oauthRepository;
@@ -74,8 +74,8 @@ class UserProvider extends FOSUBUserProvider
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
+        /* @var $user SyliusUserInterface */
         $this->updateUserByOAuthUserResponse($user, $response);
-        $this->userManager->updateUser($user);
     }
 
     /**
@@ -104,10 +104,7 @@ class UserProvider extends FOSUBUserProvider
 
         $user->setEnabled(true);
 
-        $this->updateUserByOAuthUserResponse($user, $response);
-        $this->userManager->updateUser($user);
-
-        return $user;
+        return $this->updateUserByOAuthUserResponse($user, $response);
     }
 
     /**
@@ -120,13 +117,15 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
     {
-        $oauth = new UserOAuth();
+        $oauth = $this->oauthRepository->createNew();
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
 
         /* @var $user SyliusUserInterface */
         $user->addOAuthAccount($oauth);
+
+        $this->userManager->updateUser($user);
 
         return $user;
     }
