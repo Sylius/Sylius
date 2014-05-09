@@ -55,7 +55,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
                 $request->getToken()->getPaymentName(),
                 $payment
             )->getTargetUrl();
-            $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber();
+            $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber().'-'.$payment->getId();
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
             $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
             $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
