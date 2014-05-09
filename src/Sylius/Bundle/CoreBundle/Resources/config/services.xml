@@ -499,7 +499,6 @@
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
             <argument type="service" id="fos_user.user_manager" />
-            <argument type="service" id="sylius.manager.user_oauth" />
             <argument type="service" id="sylius.repository.user_oauth" />
         </service>
 

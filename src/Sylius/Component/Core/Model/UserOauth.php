@@ -15,8 +15,9 @@ namespace Sylius\Component\Core\Model;
  * User OAuth model.
  *
  * @author Sergio Marchesini
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class UserOAuth
+class UserOAuth implements UserOAuthInterface
 {
     protected $id;
     protected $provider;
@@ -39,9 +40,7 @@ class UserOAuth
     }
 
     /**
-     * Get OAuth provider name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getProvider()
     {
@@ -49,11 +48,7 @@ class UserOAuth
     }
 
     /**
-     * Set OAuth provider name.
-     *
-     * @param string $provider
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setProvider($provider)
     {
@@ -63,9 +58,7 @@ class UserOAuth
     }
 
     /**
-     * Get OAuth identifier.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getIdentifier()
     {
@@ -73,11 +66,7 @@ class UserOAuth
     }
 
     /**
-     * Set OAuth identifier.
-     *
-     * @param string $identifier
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setIdentifier($identifier)
     {
@@ -87,9 +76,7 @@ class UserOAuth
     }
 
     /**
-     * Get OAuth access token.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getAccessToken()
     {
@@ -97,11 +84,7 @@ class UserOAuth
     }
 
     /**
-     * Set OAuth access token.
-     *
-     * @param string $accessToken
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setAccessToken($accessToken)
     {
@@ -111,9 +94,7 @@ class UserOAuth
     }
 
     /**
-     * Get user
-     *
-     * @return UserInterface
+     * {@inheritdoc}
      */
     public function getUser()
     {
@@ -121,11 +102,7 @@ class UserOAuth
     }
 
     /**
-     * Set user.
-     *
-     * @param UserInterface $user
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public function setUser(UserInterface $user)
     {

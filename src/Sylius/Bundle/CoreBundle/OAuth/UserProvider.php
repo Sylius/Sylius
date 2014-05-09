@@ -11,13 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\OAuth;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\User;
+use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Model\UserOAuth;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -25,31 +24,25 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
  *
  * @author Fabian Kiss <fabian.kiss@ymc.ch>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class UserProvider extends FOSUBUserProvider
 {
     /**
-     * @var ObjectManager
-     */
-    protected $om;
-
-    /**
      * @var EntityRepository
      */
-    protected $repository;
+    protected $oauthRepository;
 
     /**
      * Constructor.
      *
-     * @param UserManagerInterface $userManager FOSUB user provider.
-     * @param ObjectManager        $om
-     * @param EntityRepository     $repository
+     * @param UserManagerInterface $userManager     FOSUB user provider.
+     * @param EntityRepository     $oauthRepository
      */
-    public function __construct(UserManagerInterface $userManager, ObjectManager $om, EntityRepository $repository)
+    public function __construct(UserManagerInterface $userManager, EntityRepository $oauthRepository)
     {
-        $this->userManager = $userManager;
-        $this->om          = $om;
-        $this->repository  = $repository;
+        $this->userManager     = $userManager;
+        $this->oauthRepository = $oauthRepository;
     }
 
     /**
@@ -57,7 +50,7 @@ class UserProvider extends FOSUBUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = $this->repository->findOneBy(array(
+        $user = $this->oauthRepository->findOneBy(array(
             'provider'   => $response->getResourceOwner()->getName(),
             'identifier' => $response->getUsername()
         ));
@@ -82,7 +75,6 @@ class UserProvider extends FOSUBUserProvider
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
         $this->updateUserByOAuthUserResponse($user, $response);
-
         $this->userManager->updateUser($user);
     }
 
@@ -91,7 +83,7 @@ class UserProvider extends FOSUBUserProvider
      *
      * @param UserResponseInterface $response
      *
-     * @return User
+     * @return SyliusUserInterface
      */
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
@@ -112,8 +104,8 @@ class UserProvider extends FOSUBUserProvider
 
         $user->setEnabled(true);
 
-        $this->userManager->updateUser($user);
         $this->updateUserByOAuthUserResponse($user, $response);
+        $this->userManager->updateUser($user);
 
         return $user;
     }
@@ -132,10 +124,9 @@ class UserProvider extends FOSUBUserProvider
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
-        $oauth->setUser($user);
 
-        $this->om->persist($oauth);
-        $this->om->flush();
+        /* @var $user SyliusUserInterface */
+        $user->addOAuthAccount($oauth);
 
         return $user;
     }

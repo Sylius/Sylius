@@ -67,7 +67,7 @@
             </cascade>
         </many-to-many>
 
-        <one-to-many field="oauth_accounts" target-entity="Sylius\Component\Core\Model\UserOAuth" mapped-by="user">
+        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>

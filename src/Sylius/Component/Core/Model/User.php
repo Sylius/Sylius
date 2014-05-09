@@ -279,12 +279,44 @@ class User extends BaseUser implements UserInterface
     }
 
     /**
-     * Get connect OAuth accounts.
-     *
-     * @return Collection|UserOAuth[]
+     * {@inheritdoc}
      */
     public function getOAuthAccounts()
     {
         return $this->oauthAccounts;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOAuthAccount($provider)
+    {
+        if ($this->oauthAccounts->isEmpty()) {
+            return null;
+        }
+
+        $filtered = $this->oauthAccounts->filter(function ($oauth) use ($provider) {
+            /** @var $oauth UserOAuthInterface */
+            return $provider === $oauth->getProvider();
+        });
+
+        if ($filtered->isEmpty()) {
+            return null;
+        }
+
+        return $filtered->current();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOAuthAccount(UserOAuthInterface $oauth)
+    {
+        if (!$this->oauthAccounts->contains($oauth)) {
+            $this->oauthAccounts->add($oauth);
+            $oauth->setUser($this);
+        }
+
+        return $this;
     }
 }
