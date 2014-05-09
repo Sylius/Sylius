@@ -19,6 +19,7 @@
         </id>
 
         <field name="name" column="name" type="string" />
+        <field name="isoName" column="iso_name" type="string" nullable="true" />
 
         <many-to-one field="country" target-entity="Sylius\Component\Addressing\Model\CountryInterface" inversed-by="provinces">
             <join-column name="country_id" referenced-column-name="id" />
