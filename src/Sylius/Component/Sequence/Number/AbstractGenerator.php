@@ -42,6 +42,7 @@ abstract class AbstractGenerator implements GeneratorInterface
      *
      * @param int                      $index
      * @param SequenceSubjectInterface $subject
+     *
      * @return string
      */
     abstract protected function generateNumber($index, SequenceSubjectInterface $subject);

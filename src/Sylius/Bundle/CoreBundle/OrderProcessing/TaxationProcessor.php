@@ -124,22 +124,19 @@ class TaxationProcessor implements TaxationProcessorInterface
     {
         $taxes = array();
         foreach ($order->getItems() as $item) {
-            $taxable = $item->getProduct();
-            $rate = $this->taxRateResolver->resolve($taxable, array('zone' => $zone));
+            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
 
+            // Skip this item is there is not matching tax rate.
             if (null === $rate) {
-                // Skip this item is there is not matching tax rate.
                 continue;
             }
-
-            $rateName = $rate->getName();
 
             $item->calculateTotal();
 
             $amount = $this->calculator->calculate($item->getTotal(), $rate);
             $taxAmount = $rate->getAmountAsPercentage();
-            $description = sprintf('%s (%s%%)', $rateName, (float) $taxAmount);
-            
+            $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
+
             $taxes[$description] = array(
                 'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
                 'included' => $rate->isIncludedInPrice()
