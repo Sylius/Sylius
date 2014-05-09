@@ -69,7 +69,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             }
         }
 
-        if (!$this->isCouponEligibleToPromotion($promotion, $subject->getPromotionCoupon())) {
+        if (!$this->isCouponEligibleToPromotion($subject, $promotion)) {
             return false;
         }
 
@@ -85,7 +85,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
+    protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
         $checker = $this->registry->get($rule->getType());
         $coupon = $subject->getPromotionCoupon();
@@ -108,7 +108,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isEligibleToDates(PromotionInterface $promotion)
+    protected function isEligibleToDates(PromotionInterface $promotion)
     {
         $now = new \DateTime();
 
@@ -134,7 +134,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isEligibleToUsageLimit(PromotionInterface $promotion)
+    protected function isEligibleToUsageLimit(PromotionInterface $promotion)
     {
         if (null !== $usageLimit = $promotion->getUsageLimit()) {
             if ($promotion->getUsed() >= $usageLimit) {
@@ -148,14 +148,16 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
     /**
      * Checks is subject's coupon is eligible to promotion.
      *
-     * @param PromotionInterface   $promotion
-     * @param null|CouponInterface $coupon
+     * @param PromotionSubjectInterface $subject
+     * @param PromotionInterface        $promotion
      *
      * @return Boolean
      */
-    private function isCouponEligibleToPromotion(PromotionInterface $promotion, CouponInterface $coupon = null)
+    protected function isCouponEligibleToPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         if ($promotion->isCouponBased()) {
+            $coupon = $subject->getPromotionCoupon();
+
             if (null === $coupon || $promotion !== $coupon->getPromotion()) {
                 return false;
             }

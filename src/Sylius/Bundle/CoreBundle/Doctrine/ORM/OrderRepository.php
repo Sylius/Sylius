@@ -15,6 +15,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use Sylius\Component\Order\Model\OrderInterface;
 use Pagerfanta\PagerfantaInterface;
+use Sylius\Component\Core\Model\CouponInterface;
 
 class OrderRepository extends CartRepository
 {
@@ -162,6 +163,33 @@ class OrderRepository extends CartRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Gets the number of orders placed by a user
+     * for a particular coupon.
+     *
+     * @param UserInterface   $user
+     * @param CouponInterface $coupon
+     *
+     * @return int
+     */
+    public function countByUserAndCoupon(UserInterface $user, CouponInterface $coupon)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->join('o.promotionCoupon', 'coupon')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.completedAt is not null')
+            ->andWhere('o.promotionCoupon = :coupon')
+            ->setParameter('user', $user)
+            ->setParameter('coupon', $coupon);
+
+        return (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
