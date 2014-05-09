@@ -248,4 +248,11 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface, Payme
      * @return ShipmentInterface
      */
     public function getLastShipment();
+
+    /**
+     * Gets the last new payment of the order
+     *
+     * @return PaymentInterface
+     */
+    public function getLastNewPayment();
 }

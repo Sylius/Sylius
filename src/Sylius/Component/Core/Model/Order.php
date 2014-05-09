@@ -365,6 +365,16 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getLastNewPayment()
+    {
+        return $this->payments->filter(function(BasePaymentInterface $payment) {
+            return $payment->getState() === BasePaymentInterface::STATE_NEW;
+        })->last();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getShipments()
     {
         return $this->shipments;
