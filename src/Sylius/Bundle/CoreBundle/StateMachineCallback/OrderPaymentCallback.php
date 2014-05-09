@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
+use Doctrine\Common\Collections\Collection;
 use Finite\Factory\FactoryInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 
 /**
  * Synchronization between payments and their order.
@@ -34,26 +35,35 @@ class OrderPaymentCallback
     protected $factory;
 
     /**
-     * @param EntityRepository $orderRepository
      * @param FactoryInterface $factory
      */
-    public function __construct(EntityRepository $orderRepository, FactoryInterface $factory)
+    public function __construct(FactoryInterface $factory)
     {
-        $this->orderRepository  = $orderRepository;
         $this->factory          = $factory;
     }
 
     public function updateOrderOnPayment(PaymentInterface $payment)
     {
-        $order = $this->orderRepository->findOneBy(array('payment' => $payment));
+        $order = $payment->getOrder();
 
         if (null === $order) {
             throw new \RuntimeException(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
         }
 
-        // When multiple payments support:
-        // if total payment === order total
+        $total = 0;
+        foreach ($order->getPayments() as $payment) {
+            $total += $payment->getAmount();
+        }
 
-        $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
+        if ($total === $order->getTotal()) {
+            $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
+        }
+    }
+
+    public function voidPayments(Collection $payments, $transition)
+    {
+        foreach ($payments as $payment) {
+            $this->factory->get($payment, PaymentTransitions::GRAPH)->apply($transition);
+        }
     }
 }

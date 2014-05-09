@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order;
+namespace Sylius\Component\Inventory;
 
 class InventoryUnitTransitions
 {
@@ -17,6 +17,7 @@ class InventoryUnitTransitions
 
     const SYLIUS_HOLD       = 'hold';
     const SYLIUS_BACKORDER  = 'backorder';
-    const SYLIUS_SOLD       = 'sold';
+    const SYLIUS_SELL       = 'sell';
+    const SYLIUS_RELEASE    = 'release';
     const SYLIUS_RETURN     = 'return';
 }

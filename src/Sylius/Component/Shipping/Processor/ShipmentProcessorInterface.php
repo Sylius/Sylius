@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Shipping\Processor;
 
+use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+
 /**
  * Shipment processor.
  *

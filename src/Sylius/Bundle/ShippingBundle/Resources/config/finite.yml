@@ -18,6 +18,9 @@ finite_finite:
             hold:
                 from: [checkout]
                 to:   onhold
+            release:
+                from: [onhold]
+                to:   checkout
             prepare:
                 from: [checkout, onhold]
                 to:   ready

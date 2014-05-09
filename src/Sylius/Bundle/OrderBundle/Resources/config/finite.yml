@@ -7,6 +7,7 @@ finite_finite:
             cart:
                 type: initial
             pending:   ~
+            released:  ~
             confirmed: ~
             shipped:   ~
             abandoned: ~
@@ -18,8 +19,11 @@ finite_finite:
             create:
                 from: [cart]
                 to:   pending
+            release:
+                from: [pending]
+                to:   released
             confirm:
-                from: [cart, pending]
+                from: [cart, pending, released]
                 to:   confirmed
             ship:
                 from: [confirmed]

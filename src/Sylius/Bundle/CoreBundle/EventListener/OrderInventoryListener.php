@@ -55,18 +55,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Release order inventory.
-     *
-     * @param GenericEvent $event
-     */
-    public function releaseInventoryUnits(GenericEvent $event)
-    {
-        $this->inventoryHandler->releaseInventory(
-            $this->getOrder($event)
-        );
-    }
-
-    /**
      * Update the inventory units.
      *
      * @param GenericEvent $event

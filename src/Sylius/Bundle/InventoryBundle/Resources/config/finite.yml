@@ -15,6 +15,9 @@ finite_finite:
             hold:
                 from: [checkout]
                 to:   onhold
+            release:
+                from: [onhold]
+                to:   checkout
             backorder:
                 from: [checkout, onhold]
                 to:   backordered

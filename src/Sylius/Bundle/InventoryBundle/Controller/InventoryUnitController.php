@@ -12,8 +12,7 @@
 namespace Sylius\Bundle\InventoryBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Inventory\SyliusInventoryUnitEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Symfony\Component\HttpFoundation\Request;
 
 class InventoryUnitController extends ResourceController

@@ -15,6 +15,7 @@ use Finite\Factory\FactoryInterface;
 use Finite\StateMachine\StateMachineInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Resource\StateMachine\StateMachine;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
 use Sylius\Component\Shipping\ShipmentItemTransitions;
@@ -47,51 +48,50 @@ class ShipmentProcessorSpec extends ObjectBehavior
         StateMachineInterface $sm
     )
     {
-        $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-        $factory->get($shipment, ShipmentTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
-        $sm->apply('transitionName')->shouldBeCalled();
+        $factory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($sm);
+
+        $sm->can('transition')->willReturn(true);
+        $sm->apply('transition')->shouldBeCalled();
 
         $shipment->getItems()->shouldBeCalled()->willReturn(array($item));
 
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-        $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
-        $sm->apply('transitionName')->shouldBeCalled();
+        $factory->get($item, ShipmentItemTransitions::GRAPH)->willReturn($sm);
+        $sm->can('transition')->willReturn(true);
+        $sm->apply('transition')->shouldBeCalled();
 
-        $this->updateShipmentStates(array($shipment), 'transitionName', ShipmentInterface::STATE_READY);
+        $this->updateShipmentStates(array($shipment), 'transition');
     }
 
-    function it_does_not_update_shipment_states_if_state_from_does_not_match(
+    function it_does_not_update_shipment_states_if_transition_cannot(
         $factory,
         ShipmentInterface $shipment,
-        ShipmentItemInterface $item
-    )
-    {
-        $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        StateMachineInterface $sm
+    ) {
+        $factory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($sm);
 
-        $factory->get(Argument::any())->shouldNotBeCalled();
+        $sm->can('transition')->willReturn(false);
+        $sm->apply('transition')->shouldNotBeCalled();
 
-        $item->getShippingState()->shouldNotBeCalled();
-        $item->setShippingState(ShipmentInterface::STATE_SHIPPED)->shouldNotBeCalled();
-
-        $this->updateShipmentStates(array($shipment), 'transitionName', ShipmentInterface::STATE_READY);
+        $this->updateShipmentStates(array($shipment), 'transition');
     }
 
     function it_updates_item_states($factory, ShipmentItemInterface $item, StateMachineInterface $sm)
     {
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-
         $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
-        $sm->apply('transitionName')->shouldBeCalled();
 
-        $this->updateItemStates(array($item), 'transitionName', ShipmentInterface::STATE_READY);
+        $sm->can('transition')->willReturn(true);
+        $sm->apply('transition')->shouldBeCalled();
+
+        $this->updateItemStates(array($item), 'transition');
     }
 
-    function it_does_not_update_item_states_if_state_from_does_not_match($factory, ShipmentItemInterface $item)
+    function it_does_not_update_item_states_if_transition_cannot($factory, ShipmentItemInterface $item, StateMachine $sm)
     {
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        $factory->get($item, ShipmentItemTransitions::GRAPH)->willReturn($sm);
 
-        $factory->get(Argument::any())->shouldNotBeCalled();
+        $sm->can('transition')->willReturn(false);
+        $sm->apply('transition')->shouldNotBeCalled();
 
-        $this->updateItemStates(array($item), 'transitionName', ShipmentInterface::STATE_READY);
+        $this->updateItemStates(array($item), 'transition');
     }
 }
