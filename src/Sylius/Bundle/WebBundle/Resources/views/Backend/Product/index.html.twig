@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Product:macros.html.twig' import list %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
@@ -12,24 +12,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
-        {% if app.request.query.get('deleted') %}
-            <a href="{{ path('sylius_backend_product_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
-        {% else %}
-            <a href="{{ path('sylius_backend_product_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
-        {% endif %}
-    </div>
-    <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
-</div>
+{{ page.header('product.index', 'SyliusWebBundle:Backend/Product/Actions:_index.html.twig') }}
+{% render(controller('sylius.controller.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
 
-{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
-
-{{ pagination(products) }}
+{{ pagination.standard(products) }}
 {{ list(products) }}
-{{ pagination(products) }}
-
+{{ pagination.standard(products) }}
 {% endblock %}

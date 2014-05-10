@@ -37,6 +37,7 @@
         "knplabs/knp-snappy-bundle":            "*@dev",
         "liip/doctrine-cache-bundle":           "~1.0@dev",
         "liip/imagine-bundle":                  "~0.9",
+        "leafo/lessphp":                        "dev-master",
         "mathiasverraes/money":                 "*@dev",
         "pagerfanta/pagerfanta":                "1.0.*@dev",
         "payum/payum":                          "~0.9.0",
@@ -58,7 +59,8 @@
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "winzou/state-machine-bundle":          "~0.1.2",
         "willdurand/hateoas-bundle":            "@stable",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "beelab/bowerphp":                      "0.1.*@alpha"
     },
     "require-dev": {
         "behat/behat":                       "~3.0",

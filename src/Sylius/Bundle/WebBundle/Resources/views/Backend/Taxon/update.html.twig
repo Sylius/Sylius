@@ -1,8 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% set taxonomy = taxon.taxonomy %}
 
-{% block topbar %}
+{% import 'SyliusUiBundle::page.html.twig' as page  %}
+
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
@@ -13,15 +15,13 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.taxon.update_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('taxon.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
 {{ form_errors(form) }}
+{% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
+<input type="hidden" name="_method" value="PUT">
 
-<form action="{{ path('sylius_backend_taxon_update', {'taxonomyId': taxon.taxonomy.id, 'id': taxon.id}) }}" method="post"  class="form-horizontal" {{ form_enctype(form) }}novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
-    {{ update() }}
-</form>
+{{ form_end(form) }}
 {% endblock %}

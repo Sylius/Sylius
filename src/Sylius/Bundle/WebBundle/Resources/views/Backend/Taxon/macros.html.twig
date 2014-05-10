@@ -1,6 +1,6 @@
 {% macro list(taxonomy, taxons) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% if taxons|length > 0 %}
 <table class="table">
@@ -22,7 +22,7 @@
 
 {% macro tree(taxonomy, taxons) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
 
 {% for taxon in taxons %}
 <tr id="{{ taxon.id }}">

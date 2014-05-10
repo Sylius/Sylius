@@ -1,0 +1,67 @@
+{% macro boolean(value) %}
+{% if value %}
+    <span class="label-boolean label-true"><i class="fa fa-check"></i> {{ 'sylius.yes'|trans }}</span>
+{% else %}
+    <span class="label-boolean label-false"><i class="fa fa-times"></i> {{ 'sylius.no'|trans }}</span>
+{% endif %}
+{% endmacro %}
+
+{% macro status(value) %}
+{% if value %}
+    <span class="label label-status label-enabled"><i class="fa fa-circle"></i> {{ 'sylius.enabled'|trans }}</span>
+{% else %}
+    <span class="label label-status label-disabled"><i class="fa fa-circle"></i> {{ 'sylius.disabled'|trans }}</span>
+{% endif %}
+{% endmacro %}
+
+{% macro shipment_state(state) %}
+
+{% if state == 'pending' %}
+    {% set class = 'danger' %}
+{% elseif state == 'dispatched' %}
+    {% set class = 'info' %}
+{% elseif state == 'returned' %}
+    {% set class = 'warning' %}
+{% else %}
+    {% set class = 'success' %}
+{% endif %}
+<span class="label label-{{ class }} label-state">{{ state|trans }}</span>
+{% endmacro %}
+
+{% macro payment_state(state) %}
+
+{% if state is sameas('completed') %}
+    {% set class = 'label-success' %}
+{% elseif state in ['checkout', 'processing', 'new'] %}
+    {% set class = 'label-primary' %}
+{% else %}
+    {% set class = 'label-danger' %}
+{% endif %}
+<span class="label {{ class }}">{{ state|trans }}</span>
+{% endmacro %}
+
+{% macro order_shipping_state(state) %}
+
+{% if state == 'pending' %}
+    {% set class = 'danger' %}
+{% elseif state == 'dispatched' %}
+    {% set class = 'info' %}
+{% elseif state == 'returned' %}
+    {% set class = 'warning' %}
+{% else %}
+    {% set class = 'success' %}
+{% endif %}
+<span class="label label-{{ class }} label-state">{{ state|trans }}</span>
+{% endmacro %}
+
+{% macro order_payment_state(state) %}
+
+{% if state is sameas('completed') %}
+    {% set class = 'label-success' %}
+{% elseif state in ['checkout', 'processing', 'new'] %}
+    {% set class = 'label-primary' %}
+{% else %}
+    {% set class = 'label-danger' %}
+{% endif %}
+<span class="label {{ class }}">{{ state|trans }}</span>
+{% endmacro %}

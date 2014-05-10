@@ -1,8 +1,8 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
     <li><a href="{{ path('sylius_backend_group_index') }}">{{ 'sylius.breadcrumb.group.index'|trans }}</a></li>
@@ -12,15 +12,13 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.group.update_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_group_update', {'id': group.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('group.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
 {{ form_errors(form) }}
+{% include 'SyliusWebBundle:Backend/Group:_form.html.twig' %}
+<input type="hidden" name="_method" value="PUT">
 
-<form action="{{ path('sylius_backend_group_update', {'id': group.id}) }}" method="post" class="form-horizontal" novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Group:_form.html.twig' %}
-    {{ update() }}
-</form>
+{{ form_end(form) }}
 {% endblock %}

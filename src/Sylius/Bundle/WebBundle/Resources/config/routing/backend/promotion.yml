@@ -19,7 +19,7 @@ sylius_backend_promotion_create:
         _controller: sylius.controller.promotion:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Promotion:create.html.twig
-            redirect: sylius_backend_promotion_show
+            redirect: sylius_backend_promotion_update
 
 sylius_backend_promotion_update:
     pattern: /{id}/edit
@@ -28,7 +28,7 @@ sylius_backend_promotion_update:
         _controller: sylius.controller.promotion:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Promotion:update.html.twig
-            redirect: sylius_backend_promotion_show
+            redirect: sylius_backend_promotion_update
 
 sylius_backend_promotion_move_up:
     pattern: /{id}/move-up
@@ -56,14 +56,6 @@ sylius_backend_promotion_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_promotion_index
-
-sylius_backend_promotion_show:
-    pattern: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.promotion:showAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Promotion:show.html.twig
 
 sylius_backend_promotion_coupon:
     resource: @SyliusWebBundle/Resources/config/routing/backend/promotion_coupon.yml

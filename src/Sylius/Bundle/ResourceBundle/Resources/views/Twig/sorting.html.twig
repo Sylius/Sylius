@@ -1,10 +1,5 @@
-<a href="{{ url }}">
-    {{ label }}
-    {% if icon -%}
-        {%- if currentOrder == 'desc' -%}
-            <i class="glyphicon glyphicon-chevron-down"></i>
-        {%- else -%}
-            <i class="glyphicon glyphicon-chevron-up"></i>
-        {%- endif %}
-    {%- endif %}
+<a href="{{ url }}">{{ label }}
+{% if icon %}
+{%- if currentOrder == 'desc' -%}<i class="fa fa-chevron-down"></i>{%- else -%}<i class="fa fa-chevron-up"></i>{%- endif %}
+{% endif %}
 </a>

@@ -1,9 +1,7 @@
-{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+{% form_theme form 'SyliusWebBundle:Backend/Form:_default.html.twig' %}
 
-<fieldset>
-    {{ form_row(form.amount, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.method) }}
-    {{ form_row(form.state) }}
-</fieldset>
+{{ form_row(form.amount, {'attr': {'class': 'input-lg'}}) }}
+{{ form_row(form.method) }}
+{{ form_row(form.state) }}
 
 {{ form_rest(form) }}

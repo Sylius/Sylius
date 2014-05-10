@@ -27,9 +27,13 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle']
+    bundles:        [SyliusUiBundle, SyliusWebBundle]
     filters:
         cssrewrite: ~
+        lessphp:
+            apply_to: "\.less$"
+            formatter: compressed
+            preserve_comments: false
 
 doctrine:
     dbal:

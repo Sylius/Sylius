@@ -1,83 +1,74 @@
 {% macro list(promotions) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
 
 {% if promotions|length > 0 %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>{{ sylius_resource_sort('id', '#id') }}</th>
-                <th>{{ sylius_resource_sort('name', 'sylius.promotion.name'|trans) }}</th>
-                <th>{{ sylius_resource_sort('couponBased', 'sylius.promotion.coupon_based'|trans) }}</th>
-                <th>{{ sylius_resource_sort('usageLimit', 'sylius.promotion.usage_limit'|trans) }}</th>
-                <th>{{ sylius_resource_sort('used', 'sylius.promotion.used'|trans) }}</th>
-                <th>{{ sylius_resource_sort('exclusive', 'sylius.promotion.exclusive'|trans) }}</th>
-                <th>{{ sylius_resource_sort('priority', 'sylius.promotion.priority'|trans) }}</th>
-                <th>{{ sylius_resource_sort('startsAt', 'sylius.promotion.starts_at'|trans) }}</th>
-                <th>{{ sylius_resource_sort('endsAt', 'sylius.promotion.ends_at'|trans) }}</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for promotion in promotions %}
-            <tr id="{{ promotion.id }}">
-                <td>
-                    <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.id }}</a>
-                </td>
-                <td>
-                    <a href="{{ path('sylius_backend_promotion_show', {'id': promotion.id})}}" class="btn btn-link">{{ promotion.name }}</a>
-                    <p class="hidden-xs">{{ promotion.description }}</p>
-                </td>
-                <td>
-                    <span class="label label-{{ promotion.couponBased ? 'success' : 'default'}}">
-                        {{ promotion.couponBased ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                    </span>
-                </td>
-                <td>
-                    <span class="label label-info">
-                        {{ promotion.usageLimit|default('sylius.no'|trans) }}
-                    </span>
-                </td>
-                <td>
-                    <span class="label label-{{ promotion.used < promotion.usageLimit|default(1) ? 'success' : 'danger'}}">
-                        {{ promotion.used }}
-                    </span>
-                </td>
-                <td>
-                    <span class="label label-{{ promotion.exclusive ? 'info' : 'default'}}">
-                        {{ promotion.exclusive ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                    </span>
-                </td>
-                <td>{{ promotion.priority }}</td>
-                <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
-                <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
-                <td>
-                    <div class="pull-right">
-                        {{ buttons.move(path('sylius_backend_promotion_move_up', {'id': promotion.id}), 'up', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
-                        {{ buttons.move(path('sylius_backend_promotion_move_down', {'id': promotion.id}), 'down', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
-                        {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotion.id})) }}
-                        {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
-                        {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id') }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.promotion.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('couponBased', 'sylius.promotion.coupon_based'|trans) }}</th>
+            <th>{{ sylius_resource_sort('usageLimit', 'sylius.promotion.usage_limit'|trans) }}</th>
+            <th>{{ sylius_resource_sort('used', 'sylius.promotion.used'|trans) }}</th>
+            <th>{{ sylius_resource_sort('exclusive', 'sylius.promotion.exclusive'|trans) }}</th>
+            <th>{{ sylius_resource_sort('priority', 'sylius.promotion.priority'|trans) }}</th>
+            <th>{{ sylius_resource_sort('startsAt', 'sylius.promotion.starts_at'|trans) }}</th>
+            <th>{{ sylius_resource_sort('endsAt', 'sylius.promotion.ends_at'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for promotion in promotions %}
+        <tr id="{{ promotion.id }}">
+            <td>{{ promotion.id }}</td>
+            <td>
+                <a href="{{ path('sylius_backend_promotion_update', {'id': promotion.id})}}"><strong>{{ promotion.name }}</strong></a>
+                <p class="hidden-xs">{{ promotion.description }}</p>
+            </td>
+            <td>
+                {{ labels.boolean(promotion.couponBased) }}
+            </td>
+            <td>
+                {% if promotion.usageLimit > 0 %}
+                    <span class="label-status label-enabled"><i class="fa fa-signal"></i> {{ promotion.usageLimit}}</span>
+                {% else %}
+                    {{ labels.boolean(false) }}
+                {% endif %}
+            </td>
+            <td>
+                {% if promotion.used > 0 %}
+                    {% if promotion.usageLimit > promotion.used %}
+                        <span class="label-status label-enabled"><i class="fa fa-signal"></i> {{ promotion.used }}</span>
+                    {% else %}
+                        <span class="label-status label-disabled"><i class="fa fa-signal"></i> {{ promotion.used }}</span>
+                    {% endif %}
+                {% else %}
+                    <span class="label-status label-disabled"><i class="fa fa-signal"></i> {{ promotion.used }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {{ labels.boolean(promotion.exclusive) }}
+            </td>
+            <td>{{ promotion.priority }}</td>
+            <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
+            <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.move(path('sylius_backend_promotion_move_up', {'id': promotion.id}), 'up', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
+                    {{ buttons.move(path('sylius_backend_promotion_move_down', {'id': promotion.id}), 'down', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
+                    {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
+                    {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% else %}
-    {{ alerts.info('sylius.promotion.no_results'|trans) }}
+{{ alerts.info('sylius.promotion.no_results'|trans) }}
 {% endif %}
-
-{% endmacro %}
-
-{% macro configuration(configuration) %}
-
-<ul class="list-unstyled">
-{% for key, value in configuration %}
-    {% set value = value is sameas(false) ? '0' : value|join(', ') %}
-    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
-{% endfor %}
-</ul>
 
 {% endmacro %}

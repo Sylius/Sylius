@@ -1,7 +1,7 @@
 {% macro list(groups) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% if groups|length > 0 %}
 <table id="groups" class="table">
@@ -17,7 +17,7 @@
         {% for group in groups %}
         <tr id="{{ group.id }}">
             <td>{{ group.id }}</td>
-            <td>{{ group.name }}</td>
+            <td><a href="{{ path('sylius_backend_group_update', {'id': group.id}) }}"><strong>{{ group.name }}</strong></a></td>
             <td>
                 {% for role in group.roles %}
                     <span class="label label-primary">{{ role }}</span>

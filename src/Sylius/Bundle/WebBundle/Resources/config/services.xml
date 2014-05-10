@@ -11,12 +11,14 @@
         <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
 
         <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
-        <parameter key="sylius.controller.backend.security.class">Sylius\Bundle\WebBundle\Controller\Backend\SecurityController</parameter>
-        <parameter key="sylius.controller.backend.form.class">Sylius\Bundle\WebBundle\Controller\Backend\FormController</parameter>
 
         <parameter key="sylius.menu_builder.frontend.class">Sylius\Bundle\WebBundle\Menu\FrontendMenuBuilder</parameter>
+<<<<<<< HEAD
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.locale.class">Sylius\Bundle\WebBundle\Menu\LocaleMenuBuilder</parameter>
+=======
+        <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\Backend\MainMenuBuilder</parameter>
+>>>>>>> Final concept of SyliusUiBundle and reloaded backend
 
         <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
         <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
@@ -43,16 +45,6 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius.controller.backend.security" class="%sylius.controller.backend.security.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.backend.form" class="%sylius.controller.backend.form.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
 
         <service id="sylius.menu_builder.frontend" class="%sylius.menu_builder.frontend.class%">
             <argument type="service" id="knp_menu.factory" />
@@ -67,12 +59,6 @@
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
         </service>
-        <service id="sylius.menu_builder.backend" class="%sylius.menu_builder.backend.class%">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="security.context" />
-            <argument type="service" id="translator" />
-            <argument type="service" id="event_dispatcher" />
-        </service>
         <service id="sylius.menu_builder.locale" class="%sylius.menu_builder.locale.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.context" />
@@ -83,7 +69,7 @@
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
         </service>
-
+        <service id="sylius.menu_builder.backend" class="%sylius.menu_builder.backend.class%" parent="sylius.menu_builder" />
         <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createMainMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.frontend.main" />
@@ -107,7 +93,7 @@
             <tag name="knp_menu.menu" alias="sylius.frontend.social" />
         </service>
 
-        <service id="sylius.menu.backend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createMainMenu" scope="request">
+        <service id="sylius.menu.backend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend" factory-method="createMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.backend.main" />
         </service>

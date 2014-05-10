@@ -1,43 +1,18 @@
-<!DOCTYPE html>
+{% extends 'SyliusUiBundle:Security:layout.html.twig' %}
 
-<html>
-    <head>
-        <title>
-            {% block title %}
-                {{ 'sylius.meta.backend_title'|trans }}
-            {% endblock %}
-        </title>
-        <meta charset="UTF-8">
+{% block content %}
+<form method="post" action="{{ path('sylius_backend_security_login_check') }}" class="form-signin">
+    <img src="{{ asset('bundles/syliusui/img/swan.png') }}" class="swan" />
 
-        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-        <!--[if lt IE 9]>
-          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
 
-        {% block stylesheets %}
-            {% stylesheets output='assets/compiled/backend_login.css' filter='cssrewrite'
-                '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
-                '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
-                'bundles/syliusweb/css/backend.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-            {% endstylesheets %}
-        {% endblock %}
-    </head>
-    <body class="signin">
-        <form method="post" action="{{ path('sylius_backend_security_login_check') }}" class="form-signin">
-            <img src="{{ asset('bundles/syliusweb/img/swan.png') }}" class="swan" />
-
-            {% if error %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div>
-            {% endif %}
-
-            <input type="text" name="_username" class="form-control input-lg" placeholder="{{ 'sylius.email'|trans }}"><br>
-            <input type="password" name="_password" class="form-control input-lg" placeholder="{{ 'sylius.password'|trans }}">
-            <hr>
-            <button class="btn btn-block btn-lg btn-success" type="submit">{{ 'sylius.login'|trans }}</button>
-        </form>
-    </body>
-</html>
+    <input type="text" name="_username" class="form-control input-lg" placeholder="{{ 'sylius.email'|trans }}"><br>
+    <input type="password" name="_password" class="form-control input-lg" placeholder="{{ 'sylius.password'|trans }}">
+    <hr>
+    <button class="btn btn-block btn-lg btn-login" type="submit">{{ 'sylius.login'|trans }}</button>
+</form>
+{% endblock %}

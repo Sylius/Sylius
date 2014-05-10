@@ -1,17 +1,8 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
 
-{% block javascripts %}
-{{ parent() }}
-{% javascripts output='assets/compiled/backend_product_attribute.js'
-    'bundles/syliusweb/js/sylius-attribute-choices.js'
-%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock %}
-
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_product_attribute_index') }}">{{ 'sylius.breadcrumb.attribute.index'|trans }}</a></li>
@@ -21,15 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.product_attribute.update_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_product_attribute_update', {'id': product_attribute.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ form_errors(form) }}
+{{ page.header('product_attribute.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
-<form action="{{ path('sylius_backend_product_attribute_update', {'id': product_attribute.id}) }}" method="post" class="form-horizontal" novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/ProductAttribute:_form.html.twig' %}
-    {{ update() }}
-</form>
+{% include 'SyliusWebBundle:Backend/ProductAttribute:_form.html.twig' %}
+<input type="hidden" name="_method" value="PUT">
+
+{{ form_end(form) }}
 {% endblock %}

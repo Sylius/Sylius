@@ -1,0 +1,4 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans) }}
+{{ buttons.manage(path('sylius_backend_taxonomy_index'), 'sylius.taxonomy.manage'|trans) }}

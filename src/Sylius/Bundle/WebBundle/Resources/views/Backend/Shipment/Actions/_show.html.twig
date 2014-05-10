@@ -1,0 +1,5 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.manage(path('sylius_backend_shipment_index'), 'sylius.shipment.manage'|trans) }}
+{{ buttons.edit(path('sylius_backend_shipment_update', {'id': shipment.id}), 'sylius.shipment.update'|trans) }}
+{{ buttons.delete(path('sylius_backend_shipment_delete', {'id': shipment.id})) }}

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\MoneyBundle\Twig\MoneyExtension;
+use Sylius\Bundle\UiBundle\Menu\MenuBuilder;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -59,6 +60,9 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     protected $moneyExtension;
 
+    protected $translator;
+    protected $securityContext;
+
     /**
      * Constructor.
      *
@@ -82,12 +86,14 @@ class FrontendMenuBuilder extends MenuBuilder
         MoneyExtension            $moneyExtension
     )
     {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
+        parent::__construct($factory, $eventDispatcher);
 
         $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->moneyExtension = $moneyExtension;
+        $this->translator = $translator;
+        $this->securityContext = $securityContext;
     }
 
     /**
@@ -345,5 +351,10 @@ class FrontendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
 
         return $menu;
+    }
+
+    protected function translate($text)
+    {
+        return $this->translator->trans($text, array(), 'menu');
     }
 }

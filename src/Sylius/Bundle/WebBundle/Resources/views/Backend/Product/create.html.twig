@@ -1,18 +1,17 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
+{% import 'SyliusUiBundle::page.html.twig' as page  %}
 
 {% block javascripts %}
 {{ parent() }}
 {% javascripts output='assets/compiled/backend_product.js'
     'bundles/syliusshipping/js/prototype-handler.js'
-    'bundles/syliusweb/js/dynamic-property-types.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
@@ -21,14 +20,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus"></i> {{ 'sylius.product.create_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_user_create'), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ form_errors(form) }}
+{{ page.header('user.create', 'user', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
 
-<form action="{{ path('sylius_backend_product_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
-    {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
-    {{ create() }}
-</form>
+{% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
+
+{{ form_end(form) }}
 {% endblock %}

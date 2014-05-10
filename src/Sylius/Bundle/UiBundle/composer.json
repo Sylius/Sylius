@@ -1,0 +1,45 @@
+{
+    "name": "sylius/ui-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius UI bundle.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "ui",
+      "interface"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "knplabs/knp-menu-bundle":  "1.1.*",
+        "liip/imagine-bundle":      "~0.9",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\UiBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\Sylius\\Bundle\\UiBundle\\": "spec/" }
+    },
+    "target-dir": "Sylius/Bundle/UiBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

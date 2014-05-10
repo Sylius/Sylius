@@ -1,0 +1,4 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.create(path('sylius_backend_product_option_create'), 'sylius.product_option.create'|trans) }}
+{{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}

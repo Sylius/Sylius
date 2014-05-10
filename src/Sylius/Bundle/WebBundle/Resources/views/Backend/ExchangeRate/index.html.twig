@@ -1,0 +1,17 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% from 'SyliusWebBundle:Backend/ExchangeRate:macros.html.twig' import list %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.exchange_rate.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+{{ page.header('exchange_rate.index', 'dollar', 'SyliusWebBundle:Backend/ExchangeRate/Actions:_index.html.twig') }}
+
+{{ list(exchange_rates) }}
+{% endblock %}

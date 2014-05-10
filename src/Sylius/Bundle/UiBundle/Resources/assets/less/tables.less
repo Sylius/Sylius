@@ -1,0 +1,55 @@
+.box table {
+    margin-bottom: 0;
+}
+.table tbody > tr.sub-table > td {
+    padding-top: 0;
+    border-top: 0;
+}
+.table.table-bordered {
+    border-color: @color-border;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-color: @color-border;
+}
+.table > thead > tr > th {
+    vertical-align: middle;
+    border-bottom-width: 1px;
+    background-color: @color-near-white;
+    text-transform: uppercase;
+    color: @color-text;
+    font-weight: bold;
+    border-bottom: 1px solid @color-border;
+}
+.table > thead > tr > th a:link {
+    color: @color-text;
+}
+.table > thead > tr > th a:visited {
+    color: @color-text;
+}
+.table-headless tr:first-child td, th {
+    border-top: 0 !important;
+}
+
+.variant-table-toggle {
+    text-align: center;
+}
+.variant-table-toggle i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.table-inversed > thead > tr > th {
+    background-color: @color-gray;
+    color: @color-near-white;
+}
+.table-inversed > thead > tr > th a:link {
+    color: @color-near-white;
+}
+.table-inversed > thead > tr > th a:visited {
+    color: @color-near-white;
+}

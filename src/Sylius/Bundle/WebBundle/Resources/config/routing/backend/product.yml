@@ -18,7 +18,7 @@ sylius_backend_product_create:
         _controller: sylius.controller.product:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:create.html.twig
-            redirect: sylius_backend_product_show
+            redirect: sylius_backend_product_update
 
 sylius_backend_product_update:
     pattern: /{id}/edit
@@ -27,7 +27,9 @@ sylius_backend_product_update:
         _controller: sylius.controller.product:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:update.html.twig
-            redirect: sylius_backend_product_show
+            method: findForDetailsPage
+            arguments: [$id]
+            redirect: sylius_backend_product_update
 
 sylius_backend_product_delete:
     pattern: /{id}
@@ -45,15 +47,5 @@ sylius_backend_product_history:
         _controller: sylius.controller.product:historyAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:history.html.twig
-            method: findForDetailsPage
-            arguments: [$id]
-
-sylius_backend_product_show:
-    pattern: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product:showAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Product:show.html.twig
             method: findForDetailsPage
             arguments: [$id]

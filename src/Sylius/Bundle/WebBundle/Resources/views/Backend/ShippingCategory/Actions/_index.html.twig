@@ -1,0 +1,4 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.create(path('sylius_backend_shipping_category_create'), 'sylius.shipping_category.create'|trans) }}
+{{ buttons.manage(path('sylius_backend_shipping_method_index'), 'sylius.shipping_method.manage'|trans) }}

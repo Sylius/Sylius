@@ -1,0 +1,33 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_label %}
+{% spaceless %}
+    {% set label_attr = label_attr|merge({'class': label_attr.class|default('') ~ ' sr-only control-label'}) %}
+    {{ parent() }}
+{% endspaceless %}
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    {{ parent() }}
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_row %}
+{% spaceless %}
+<div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+    {{ form_label(form) }}
+    {{ form_widget(form) }}
+    {% for error in errors %}
+        <span class="help-block form-error">
+            {{
+                error.messagePluralization is null
+                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+            }}
+        </span>
+    {% endfor %}
+</div>
+{% endspaceless %}
+{% endblock form_row %}

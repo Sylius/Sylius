@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.controller.security.class">Sylius\Bundle\UiBundle\Controller\SecurityController</parameter>
+        <parameter key="sylius.controller.form.class">Sylius\Bundle\UiBundle\Controller\FormController</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.security" class="%sylius.controller.security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.form" class="%sylius.controller.form.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.menu_builder" abstract="true">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+    </services>
+
+</container>

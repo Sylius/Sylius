@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>
+        {% block title %}
+            {{ 'sylius.meta.title.default'|trans }}
+        {% endblock %}
+    </title>
+
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' %}
+    {% endblock %}
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrap">
+        {% block navbar %}
+            {% include 'SyliusUiBundle:Navbar:_default.html.twig' %}
+        {% endblock %}
+
+        <div class="container-fluid" id="main-container">
+        {% block main %}
+            {% include 'SyliusUiBundle::_flashes.html.twig' %}
+
+            {% block breadcrumb %}
+                {% include 'SyliusUiBundle:Breadcrumb:_default.html.twig' %}
+            {% endblock %}
+
+            <div class="col-md-12" id="content-container">
+            {% block content %}
+            {% endblock %}
+            </div>
+
+        {% endblock main %}
+        </div>
+    </div>
+
+    {% block modals %}
+        {# include 'SyliusUiBundle:Modal:_standard.html.twig' #}
+        {% include 'SyliusUiBundle:Modal:_confirmation.html.twig' %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {% include 'SyliusUiBundle::_javascripts.html.twig' %}
+    {% endblock %}
+</body>
+</html>

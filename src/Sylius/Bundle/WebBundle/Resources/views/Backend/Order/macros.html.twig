@@ -1,8 +1,8 @@
 {% macro list(orders, user) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
 
 {% set router_paramters = user is not null ? {'id' : user.id} : {} %}
 
@@ -31,13 +31,13 @@
                 </a>
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
+                {{ labels.order_payment_state(order.paymentState) }}
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
+                {{ labels.order_shipping_state(order.shippingState) }}
             </td>
             <td>
-                <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
+                <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_update', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
@@ -54,23 +54,18 @@
     </tbody>
 </table>
 {% else %}
-    {% if user is not null %}
-        {{ alerts.info('sylius.user.order.no_results'|trans) }}
-    {% else %}
-        {{ alerts.info('sylius.order.no_results'|trans) }}
-    {% endif %}
+{{ alerts.info('sylius.order.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}
 
 {% macro simple_list(orders) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
 
 {% if orders|length > 0 %}
-<table id="orders" class="table">
+<table id="orders" class="table table-inversed">
     <thead>
         <tr>
             <th>{{ 'sylius.order.number'|trans }}</th>
@@ -88,11 +83,11 @@
                 </a>
             </td>
             <td>
-                {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
+                {{ labels.payment_state(order.paymentState) }}
             </td>
             <td style="width: 20%">
                 {{ order.user.fullname }}<br>
-                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                <a href="{{ path('sylius_backend_user_update', {'id': order.user.id}) }}">
                     {{ order.user.email }}
                 </a>
             </td>
@@ -102,7 +97,7 @@
     </tbody>
 </table>
 {% else %}
-    {{ alerts.info('sylius.order.no_results'|trans) }}
+{{ alerts.info('sylius.order.no_results'|trans) }}
 {% endif %}
 
 {% endmacro %}

@@ -1,0 +1,9 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.create(path('sylius_backend_order_create'), 'sylius.order.create'|trans) }}
+
+{% if app.request.query.get('deleted') %}
+    {{ buttons.hide_deleted(path('sylius_backend_order_index', {'deleted': false})) }}
+{% else %}
+    {{ buttons.show_deleted(path('sylius_backend_order_index', {'deleted': true})) }}
+{% endif %}

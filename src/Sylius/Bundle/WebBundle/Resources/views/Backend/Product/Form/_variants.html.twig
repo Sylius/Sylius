@@ -1,0 +1,25 @@
+{% from 'SyliusWebBundle:Backend/ProductVariant:macros.html.twig' import list as list_variants %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{% form_theme form 'SyliusWebBundle:Backend/Form:_default.html.twig' %}
+
+<div class="tab-pane" id="variants">
+{% if form.options is defined %}
+    {{ form_row(form.options) }}
+{% endif %}
+
+{% if product.id is not empty and not product.deleted %}
+<div class="well well-sm">
+    {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
+    {% if product.hasOptions %}
+        {{ buttons.manage(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+    {% endif %}
+    <div class="pull-right">
+        <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
+    </div>
+</div>
+{% endif %}
+
+{{ list_variants(product.variants) }}
+
+</div>

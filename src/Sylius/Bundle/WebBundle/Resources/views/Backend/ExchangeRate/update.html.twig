@@ -1,0 +1,24 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_exchange_rate_index') }}">{{ 'sylius.breadcrumb.exchange_rate.index'|trans }}</a></li>
+    <li>{{ exchange_rate.currency }}</li>
+    <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+{{ form_start(form, {'action': path('sylius_backend_exchange_rate_update', {'id': exchange_rate.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('exchange_rate.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
+
+{{ form_errors(form) }}
+{% include 'SyliusWebBundle:Backend/ExchangeRate:_form.html.twig' %}
+<input type="hidden" name="_method" value="PUT">
+
+{{ form_end(form) }}
+{% endblock %}

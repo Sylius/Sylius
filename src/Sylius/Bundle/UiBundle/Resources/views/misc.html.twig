@@ -1,0 +1,27 @@
+{% macro configuration(configuration) %}
+<ul class="list-unstyled">
+{% for key, value in configuration %}
+    {% set value = value is sameas(false) ? '0' : value|join(', ') %}
+    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
+{% endfor %}
+</ul>
+{% endmacro %}
+
+{% macro changeset(data) %}
+<ul class="list-unstyled">
+{% for key, value in data %}
+    {% if value is iterable %}
+    <li>
+    <strong>{{ key|humanize }}</strong>:
+        {% if value is empty %}
+        []
+        {% else %}
+            {{ _self.changeset(value) }}
+        {% endif %}
+    </li>
+    {% else  %}
+    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+{% endmacro %}

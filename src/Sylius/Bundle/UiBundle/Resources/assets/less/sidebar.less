@@ -1,0 +1,32 @@
+#sidebar-container {
+    padding: 0;
+    height: 100%;
+    background-color: @color-gray;
+    overflow: hidden;
+}
+.sidebar {
+    background-color: @color-gray;
+    height: 100%;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+
+    li a {
+        color: @color-light-gray;
+        background-color: @color-gray;
+        font-size: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    li.active a {
+        color: @color-white;
+        background-color: @color-sylius;
+    }
+    li a:visited {
+        color: @color-light-gray;
+    }
+    li a:hover {
+        color: #fff;
+        background-color: @color-sylius;
+    }
+}

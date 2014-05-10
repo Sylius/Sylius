@@ -11,7 +11,6 @@
         {{ form_row(form.exclusive) }}
         {{ form_widget(form._token) }}
     </div>
-
     <div class="col-md-4">
         <div id="sylius_promotion_rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
             {% for ruleForm in form.rules %}

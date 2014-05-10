@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::pagination.html.twig' as misc %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
@@ -21,12 +21,12 @@
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
     <a href="{{ path(product) }}" class="btn btn-info">
-       <i class="glyphicon glyphicon-shopping-cart"></i>
+        <i class="glyphicon glyphicon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
     {% endif %}
     </div>
-    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+    <h1><i class="fa fa-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
 </div>
 
 {% include "SyliusWebBundle:Backend:_history_table.html.twig" %}
