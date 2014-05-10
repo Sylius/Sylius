@@ -12,6 +12,10 @@ parameters:
     sylius.mailer.user:               ~
     sylius.mailer.password:           ~
 
+    sylius.phpcr.workspace:           default
+    sylius.phpcr.user:                admin
+    sylius.phpcr.password:            admin
+
     sylius.locale:                    en
     sylius.secret:                    abc
 
