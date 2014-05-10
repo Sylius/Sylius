@@ -9,8 +9,8 @@
     <h1>{{ 'sylius.product.index_by_taxon_header'|trans({'%taxon%': taxon.name})|raw }}</h1>
 </div>
 
-{{ pagination(products) }}
+{{ pagination.standard(products) }}
 {{ list(products) }}
-{{ pagination(products) }}
+{{ pagination.standard(products) }}
 
 {% endblock %}

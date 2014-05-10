@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd src/Sylius/Bundle/UiBundle && ../../../../bin/bowerphp install

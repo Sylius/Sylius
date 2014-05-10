@@ -5,16 +5,17 @@ sylius_backend_security_login:
     pattern: /login
     methods: [GET]
     defaults:
-        _controller: sylius.controller.backend.security:loginAction
+        _controller: sylius.controller.security:loginAction
+        template: 'SyliusWebBundle:Backend/Security:login.html.twig'
 
 sylius_backend_security_login_check:
     pattern: /login-check
     methods: [POST]
     defaults:
-        _controller: sylius.controller.backend.security:checkAction
+        _controller: sylius.controller.security:checkAction
 
 sylius_backend_security_logout:
     pattern: /logout
     methods: [GET]
     defaults:
-        _controller: sylius.controller.backend.security:logoutAction
+        _controller: sylius.controller.security:logoutAction

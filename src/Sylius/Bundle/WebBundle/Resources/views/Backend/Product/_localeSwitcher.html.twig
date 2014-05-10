@@ -1,0 +1,10 @@
+<div class="btn-group btn-locale-selector">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <img class="flag flag-pl" />{{ product.name }} <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu">
+    {% for locale in ['us', 'pl', 'fr', 'de'] %}
+    <li><a href="#"><img class="flag flag-{{ locale }}" /> {{ product.name }}</a></li>
+    {% endfor %}
+</ul>
+</div>

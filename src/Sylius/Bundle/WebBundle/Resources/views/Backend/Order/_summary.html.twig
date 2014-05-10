@@ -1,0 +1,88 @@
+<table class="sylius-order-content-table table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'sylius.order_item.product'|trans }}</th>
+            <th>{{ 'sylius.order_item.quantity'|trans }}</th>
+            <th class="text-center">{{ 'sylius.order_item.unit_price'|trans }}</th>
+            <th class="text-right">{{ 'sylius.order_item.total'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items %}
+            {% include 'SyliusWebBundle:Backend/Order/Summary:_item.html.twig' %}
+        {% else %}
+        <tr>
+            <td colspan="6">
+                <hr />
+                <div class="alert alert-info">{{ 'sylius.order.no_items'|trans }}</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="active text-right" colspan="6">
+                <strong>{{ 'sylius.order.items_total'|trans }}</strong>:
+                <span class="amount">{{ order.itemsTotal|sylius_price(order.currency) }}</span>
+            </td>
+        </tr>
+        <tr class="taxes">
+            <td colspan="2">
+                {% if order.taxAdjustments|length > 0 %}
+                    <ul>
+                        {% for taxAdjustment in order.taxAdjustments %}
+                            <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted"><small>{{ 'sylius.order.no_taxes'|trans }}</small></p>
+                {% endif %}
+            </td>
+            <td class="text-right" colspan="3">
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>:
+                <span class="amount">{{ order.taxTotal|sylius_price(order.currency) }}</span>
+            </td>
+        </tr>
+        <tr class="shipping-charges">
+            <td colspan="2">
+                {% if order.shippingAdjustments|length > 0 %}
+                <ul>
+                        {% for adjustment in order.shippingAdjustments %}
+                            <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted"><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
+                {% endif %}
+            </td>
+            <td class="text-right" colspan="3">
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>:
+                <span class="amount">{{ order.shippingTotal|sylius_price(order.currency) }}</span>
+            </td>
+        </tr>
+        <tr class="promotion-discount">
+            <td colspan="2">
+                {% if order.promotionAdjustments|length > 0 %}
+                    <ul>
+                        {% for adjustment in order.promotionAdjustments %}
+                            <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted"><small>{{ 'sylius.checkout.finalize.order.no_promotion'|trans }}</small></p>
+                {% endif %}
+            </td>
+            <td class="text-right" colspan="3">
+                <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
+                <span class="amount">{{ order.promotionTotal|sylius_price(order.currency) }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="active text-right text-large" colspan="6">
+                <strong>{{ 'sylius.order.total'|trans }}</strong>:
+                <span class="amount">{{ order.total|sylius_price(order.currency) }}</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,8 +1,8 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% from 'SyliusUiBundle::forms.html.twig' import update %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
     <li><a href="{{ path('sylius_backend_payment_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
@@ -12,15 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.payment.update_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_payment_update', {'id': payment.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('payment.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
 {{ form_errors(form) }}
+{% include 'SyliusWebBundle:Backend/Payment:_form.html.twig' %}
 
-<form action="{{ path('sylius_backend_payment_update', {'id': payment.id}) }}" method="post" class="form-horizontal" novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/Payment:_form.html.twig' %}
-    {{ update() }}
-</form>
+{{ form_end(form) }}
 {% endblock %}

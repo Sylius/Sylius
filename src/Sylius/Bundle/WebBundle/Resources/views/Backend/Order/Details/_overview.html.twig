@@ -1,0 +1,43 @@
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
+
+<div class="tab-pane active" id="overview">
+<div class="row">
+    <div class="col col-md-3">
+        <div class="address-box">
+        <h4 class="overview-heading">{{ 'sylius.order.billing_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with { 'address': order.billingAddress } %}
+        </div>
+    </div>
+    <div class="col col-md-3">
+        <div class="address-box">
+        <h4 class="overview-heading">{{ 'sylius.order.shipping_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
+        </div>
+    </div>
+    <div class="col col-md-3">
+        <h4 class="overview-heading">{{ 'sylius.order.payments'|trans }}</h4>
+        <ul class="list-group">
+            {% for payment in [order.payment] %}
+            <li class="list-group-item">
+                <a href="{{ path('sylius_backend_payment_show', {'id': payment.id}) }}">#{{ payment.id }} / {{ payment.method }}</a>
+                {{ labels.payment_state(payment.state) }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col col-md-3">
+        <h4 class="overview-heading">{{ 'sylius.order.shipments'|trans }}</h4>
+        <ul class="list-group">
+            {% for shipment in order.shipments %}
+            <li class="list-group-item">
+                <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">#{{ shipment.id }} / {{ shipment.method }}</a>
+                {{ labels.shipment_state(shipment.state) }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% include 'SyliusWebBundle:Backend/Order:_summary.html.twig' %}
+
+</div>

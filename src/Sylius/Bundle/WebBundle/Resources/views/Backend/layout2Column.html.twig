@@ -1,0 +1,5 @@
+{% extends 'SyliusUiBundle::layout2Column.html.twig' %}
+
+{% block navbar %}
+    {% include 'SyliusUiBundle:Navbar:_default.html.twig' with {'menu': 'sylius.backend.main', route: 'sylius_backend_dashboard'} %}
+{% endblock %}

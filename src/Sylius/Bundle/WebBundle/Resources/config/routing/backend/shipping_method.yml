@@ -19,7 +19,7 @@ sylius_backend_shipping_method_create:
         _controller: sylius.controller.shipping_method:createAction
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:create.html.twig
-            redirect: sylius_backend_shipping_method_show
+            redirect: sylius_backend_shipping_method_update
 
 sylius_backend_shipping_method_update:
     pattern: /{id}/edit
@@ -28,7 +28,7 @@ sylius_backend_shipping_method_update:
         _controller: sylius.controller.shipping_method:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:update.html.twig
-            redirect: sylius_backend_shipping_method_show
+            redirect: sylius_backend_shipping_method_update
 
 sylius_backend_shipping_method_delete:
     pattern: /{id}
@@ -38,11 +38,3 @@ sylius_backend_shipping_method_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_shipping_method_index
-
-sylius_backend_shipping_method_show:
-    pattern: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.shipping_method:showAction
-        _sylius:
-            template: SyliusWebBundle:Backend/ShippingMethod:show.html.twig

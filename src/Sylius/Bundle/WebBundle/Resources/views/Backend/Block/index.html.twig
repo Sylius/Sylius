@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 {% from 'SyliusWebBundle:Backend/Block:macros.html.twig' import list %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.block.index'|trans }}</a></li>
@@ -16,11 +16,11 @@
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_block_create'), 'sylius.block.create'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.block.index_header'|trans|raw }}</h1>
+    <h1><i class="fa fa-flag"></i> {{ 'sylius.block.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(blocks) }}
+{{ pagination.standard(blocks) }}
 {{ list(blocks) }}
-{{ pagination(blocks) }}
+{{ pagination.standard(blocks) }}
 
 {% endblock %}

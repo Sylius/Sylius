@@ -1,36 +1,34 @@
 {% macro list(products) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% if products|length > 0 %}
-<table class="sylius-products-table table table-bordered">
+<table class="sylius-products-table table">
     <thead>
         <tr>
-            <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
-            <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
-            <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
-            <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
-            <th class="updated-at">{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
+            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
+            <th>{{ 'sylius.product.stock'|trans }}</th>
+            <th>{{ 'sylius.product.price'|trans }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'Updated At') }}</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
     {% for product in products %}
         <tr id="{{ product.id }}">
-            <td class="id">
-                {{ product.id }}
-            </td>
-            <td class="info">
+            <td>{{ product.id }}</td>
+            <td>
                 <div class="media">
-                    <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left"
+                    <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}" class="pull-left"
                        title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
                         <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">
                             <a class="name"
-                               href="{{ path('sylius_backend_product_show', {'id': product.id}) }}"
+                               href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
                                title="{{ 'sylius.product.view_details'|trans({'%product%': product.name})|escape('html_attr') }}">
                                 {{ product.name }}
                             </a>

@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Inventory:macros.html.twig' import list %}
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.inventory.index'|trans }}</li>
@@ -12,18 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
-    </div>
-    <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.stockable.index_header'|trans|raw }}</h1>
-</div>
+{{ page.header('stockable.index', 'tasks', 'SyliusWebBundle:Backend/Inventory/Actions:_index.html.twig') }}
 
-{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
+{% render(controller('sylius.controller.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
 
-{{ pagination(products) }}
+{{ pagination.standard(products) }}
 {{ list(products) }}
-{{ pagination(products) }}
-
+{{ pagination.standard(products) }}
 {% endblock %}

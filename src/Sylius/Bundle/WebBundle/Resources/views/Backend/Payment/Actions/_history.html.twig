@@ -1,0 +1,5 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}
+{{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
+{{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id})) }}

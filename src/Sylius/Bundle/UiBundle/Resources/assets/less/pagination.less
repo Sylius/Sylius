@@ -1,0 +1,35 @@
+.pagination {
+    margin: 0 0 15px 0;
+    border-radius: 0;
+}
+.pagination > li > a {
+    border-color: @color-border;
+    border-width: 1px;
+    background: @color-near-white;
+    color: @color-sylius;
+}
+.pagination > li > a:hover {
+    background: @color-sylius;
+    color: @color-white;
+}
+.pagination > li.disabled > a,
+.pagination > li.disabled > a:hover {
+    background: @color-near-white;
+    border-color: @color-light-gray;
+    color: @color-border;
+}
+.pagination > li.active > a,
+.pagination > li.active > a:hover {
+    background: @color-sylius;
+    border-color: @color-light-gray;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+}

@@ -1,0 +1,31 @@
+{% set variant = item.variant %}
+{% set product = variant.product %}
+
+<tr>
+    <td class="picture text-center">
+        <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
+           title="View {{ product.name|escape('html_attr') }} details.">
+            <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="" class="imgmedia-object" />
+        </a>
+    </td>
+    <td>
+        <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}">
+            <h4 class="name">{{ product.name }}</h4>
+        </a>
+        {% if product.hasOptions %}
+        <ul class="list-unstyled">
+            <li class="sku"><strong>{{ 'sylius.product.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
+            {% for option in variant.options %}
+            <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </td>
+    <td class="quantity text-center">{{ item.quantity }}</td>
+    <td class="unit-price text-center">
+        {{ item.unitPrice|sylius_price(order.currency) }}
+    </td>
+    <td class="total text-right">
+        {{ item.total|sylius_price(order.currency) }}
+    </td>
+</tr>

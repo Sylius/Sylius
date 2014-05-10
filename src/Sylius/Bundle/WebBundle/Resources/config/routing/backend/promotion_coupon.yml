@@ -18,7 +18,7 @@ sylius_backend_promotion_coupon_create:
         _sylius:
             template: SyliusWebBundle:Backend/Coupon:create.html.twig
             redirect:
-                route: sylius_backend_promotion_show
+                route: sylius_backend_promotion_update
                 parameters: {'id': $promotionId}
 
 sylius_backend_promotion_coupon_update:
@@ -29,7 +29,7 @@ sylius_backend_promotion_coupon_update:
         _sylius:
             template: SyliusWebBundle:Backend/Coupon:update.html.twig
             redirect:
-                route: sylius_backend_promotion_show
+                route: sylius_backend_promotion_update
                 parameters: {'id': $promotionId}
 
 sylius_backend_promotion_coupon_delete:

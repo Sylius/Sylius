@@ -1,0 +1,10 @@
+{% form_theme form 'SyliusWebBundle:Backend/Form:_default.html.twig' %}
+
+<div class="tab-pane" id="pricing">
+{{ form_row(form.masterVariant.price) }}
+{{ form_row(form.masterVariant.pricingCalculator) }}
+
+{% if form.masterVariant.pricingConfiguration is defined %}
+{{ form_row(form.masterVariant.pricingConfiguration) }}
+{% endif %}
+</div>

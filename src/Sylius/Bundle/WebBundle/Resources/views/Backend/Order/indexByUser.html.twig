@@ -1,5 +1,5 @@
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 {% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import list %}
 
 {{ list(orders, user) }}
-{{ pagination(orders, {'routeName' : 'sylius_backend_user_show', 'routeParams' : {'id' : user.id} }) }}
+{{ pagination.standard(orders, {'routeName' : 'sylius_backend_user_update', 'routeParams' : {'id' : user.id} }) }}

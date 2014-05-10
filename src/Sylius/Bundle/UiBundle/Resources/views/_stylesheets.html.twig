@@ -1,0 +1,9 @@
+{% stylesheets output='assets/compiled/sylius-ui.css' filter='cssrewrite' debug=false
+    '@SyliusUiBundle/Resources/assets/vendor/bootstrap/dist/css/bootstrap.css'
+    '@SyliusUiBundle/Resources/assets/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css'
+    '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'
+    'bundles/syliusui/flags.css'
+    '@SyliusUiBundle/Resources/assets/less/ui.less'
+%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}

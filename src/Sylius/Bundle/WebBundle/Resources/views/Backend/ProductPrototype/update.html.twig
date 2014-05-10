@@ -1,8 +1,8 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% from 'SyliusUiBundle::forms.html.twig' import update %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_product_prototype_index') }}">{{ 'sylius.breadcrumb.prototype.index'|trans }}</a></li>
@@ -12,15 +12,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1>{{ 'sylius.prototype.update_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_product_prototype_update', {'id': product_prototype.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ form_errors(form) }}
+{{ page.header('product_prototype.update', 'plus-circle', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
-<form action="{{ path('sylius_backend_product_prototype_update', {'id': product_prototype.id}) }}" method="post" class="form-horizontal" novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/ProductPrototype:_form.html.twig' %}
-    {{ update() }}
-</form>
+{% include 'SyliusWebBundle:Backend/ProductPrototype:_form.html.twig' %}
+<input type="hidden" name="_method" value="PUT">
+
+{{ form_end(form) }}
 {% endblock %}

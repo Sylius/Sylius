@@ -1,8 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
+{% set taxonomy = taxon.taxonomy %}
 
-{% block topbar %}
+{% import 'SyliusUiBundle::page.html.twig' as page  %}
+
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
@@ -12,14 +14,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.taxon.create_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('taxon.create', 'plus-circle', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
 
 {{ form_errors(form) }}
+{% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
 
-<form action="{{ path('sylius_backend_taxon_create', {'taxonomyId': taxon.taxonomy.id}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
-    {% include 'SyliusWebBundle:Backend/Taxon:_form.html.twig' %}
-    {{ create() }}
-</form>
+{{ form_end(form) }}
 {% endblock %}

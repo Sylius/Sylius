@@ -1,0 +1,6 @@
+{% form_theme form 'SyliusWebBundle:Backend/Form:_default.html.twig' %}
+
+{{ form_row(form.currency, {'attr': {'class': 'input-lg'}}) }}
+{{ form_row(form.rate, {'attr': {'class': 'input-sm'}}) }}
+
+{{ form_widget(form._token) }}

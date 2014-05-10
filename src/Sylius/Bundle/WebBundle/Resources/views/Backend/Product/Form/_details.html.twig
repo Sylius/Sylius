@@ -1,0 +1,24 @@
+{% form_theme form 'SyliusWebBundle:Backend/Form:_default.html.twig' %}
+
+<div class="tab-pane active" id="details">
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.masterVariant.sku) }}
+    {{ form_row(form.description, {'attr': {'class': 'input-lg', 'rows': 10}}) }}
+    {{ form_row(form.shortDescription, {'attr': {'class': 'input-lg', 'rows': 3}}) }}
+
+    {% for taxonomyForm in form.taxons %}
+        {{ form_row(taxonomyForm) }}
+    {% endfor %}
+
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.taxCategory) }}
+            {{ form_row(form.shippingCategory) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.restrictedZone) }}
+            {{ form_row(form.variantSelectionMethod) }}
+        </div>
+    </div>
+</div>

@@ -9,5 +9,5 @@ sylius_backend_promotion_rule_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect:
-                route: sylius_backend_promotion_show
+                route: sylius_backend_promotion_update
                 parameters: {'id': $promotionId}

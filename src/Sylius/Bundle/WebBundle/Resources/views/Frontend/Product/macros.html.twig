@@ -1,6 +1,6 @@
 {% macro list(products) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% for product in products %}
 {% include 'SyliusWebBundle:Frontend/Product:_single.html.twig' %}
@@ -13,7 +13,7 @@
 
 {% macro grid(products, size = 3) %}
 
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 <div class="row">
     {% for product in products %}

@@ -1,72 +1,61 @@
 sylius:
     backend:
-        menu:
-            main:
-                assortment: Assortment
-                configuration: Configuration
-                countries: Countries
-                customer: Customers
-                dashboard: Dashboard
-                currencies: Currencies
-                general_settings: General settings
-                homepage: Your store
-                locales: Locales
-                new_order: Add new order
-                new_promotion: Add new promotion
-                options: Manage product options
-                orders: Current orders
-                payment_methods: Payment methods
-                payments: Payments
-                products: Products
-                promotions: Promotions
-                attributes: Configure attributes
-                prototypes: Product prototypes
-                sales: Orders
-                shipments: Shipments
-                shipping_categories: Shipping categories
-                shipping_methods: Shipping methods
-                stockables: Inventory levels
-                tax_categories: Taxation categories
-                tax_rates: Tax rates
-                taxation_settings: Taxation settings
-                taxonomies: Categorization
-                users: Users
-                zones: Zones
-            sidebar:
-                assortment: Assortment
-                blocks: Blocks
-                configuration: Configuration
-                content: Content
-                countries: Countries
-                customer: Customers
-                dashboard: Dashboard
-                currencies: Currencies
-                general_settings: General settings
-                groups: Groups
-                homepage: Back to frontend
-                locales: Locales
-                new_order: Add new order
-                new_promotion: Add new promotion
-                options: Manage options
-                orders: Current orders
-                pages: Pages
-                payment_methods: Payment methods
-                payments: Payments
-                products: Products
-                promotions: Promotions
-                attributes: Configure attributes
-                prototypes: Product prototypes
-                sales: Orders
-                shipments: Shipments
-                shipping_categories: Shipping categories
-                shipping_methods: Shipping methods
-                stockables: Inventory levels
-                tax_categories: Taxation categories
-                tax_rates: Tax rates
-                taxation_settings: Taxation settings
-                taxonomies: Categorization
-                users: Users
-                zones: Zones
+        main:
+            products: Products
+            blocks: Blocks
+            configuration: Configuration
+            content: Content
+            countries: Countries
+            customer: Customers
+            dashboard: Dashboard
+            exchange_rates: Exchange rates
+            general_settings: General settings
+            groups: Groups
+            homepage: Back to frontend
+            locales: Locales
+            new_order: Add new order
+            new_promotion: Add new promotion
+            options: Manage options
+            orders: Current orders
+            pages: Pages
+            payment_methods: Payment methods
+            payments: Payments
+            products: Products
+            promotions: Promotions
+            attributes: Configure attributes
+            prototypes: Product prototypes
+            sales: Sales
+            shipments: Shipments
+            shipping_categories: Shipping categories
+            shipping_methods: Shipping methods
+            stockables: Inventory levels
+            tax_categories: Taxation categories
+            tax_rates: Tax rates
+            taxation_settings: Taxation settings
+            taxonomies: Categorization
+            marketing: Marketing
+            users: Users
+            zones: Zones
+        product:
+            details: Details
+            attributes: Attributes
+            seo: SEO
+            media: Media
+            pricing: Pricing
+            inventory: Inventory
+            variants: Variants
+        order:
+            overview: Overview
+            customer: Customer
+            shipments: Shipments
+            payments: Payments
+            inventory: Inventory
+            return_authorizations: Return Authorizations
+        user:
+            overview: Overview
+            details: Details
+            addresses: Address Book
+            orders: Orders
     frontend:
         menu:
             account:

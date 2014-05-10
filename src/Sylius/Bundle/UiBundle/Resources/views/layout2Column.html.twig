@@ -1,0 +1,24 @@
+{% extends 'SyliusUiBundle::layout.html.twig' %}
+
+{% block main %}
+<div id="breadcrumb-container">
+    {% block breadcrumb %}
+        {% include 'SyliusUiBundle:Breadcrumb:_default.html.twig' %}
+    {% endblock %}
+</div>
+
+<div class="col-md-2" id="sidebar-container">
+    <div class="sidebar">
+    {% block sidebar %}
+        {% include 'SyliusUiBundle:Sidebar:_default.html.twig' %}
+    {% endblock %}
+    </div>
+</div>
+<div class="col-md-10" id="content-container">
+
+    {% include 'SyliusUiBundle::_flashes.html.twig' %}
+
+    {% block content %}
+    {% endblock %}
+</div>
+{% endblock %}

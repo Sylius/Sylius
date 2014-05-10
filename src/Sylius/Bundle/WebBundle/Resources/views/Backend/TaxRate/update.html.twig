@@ -1,26 +1,24 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% import 'SyliusUiBundle::page.html.twig' as page  %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_tax_rate_index') }}">{{ 'sylius.breadcrumb.tax_rate.index'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_tax_rate_show', {'id': tax_rate.id}) }}">{{ tax_rate.name }}</a></li>
+    <li><a href="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}">{{ tax_rate.name }}</a></li>
     <li>{{ 'sylius.breadcrumb.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.tax_rate.update_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_tax_rate_update', {'id': tax_rate.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('tax_rate.update', 'plus-sign', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
 {{ form_errors(form) }}
+{% include 'SyliusWebBundle:Backend/TaxRate:_form.html.twig' %}
+<input type="hidden" name="_method" value="PUT">
 
-<form action="{{ path('sylius_backend_tax_rate_update', {'id': tax_rate.id}) }}" method="post" class="form-horizontal" novalidate>
-    <input type="hidden" name="_method" value="PUT">
-    {% include 'SyliusWebBundle:Backend/TaxRate:_form.html.twig' %}
-    {{ update() }}
-</form>
+{{ form_end(form) }}
 {% endblock %}

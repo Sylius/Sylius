@@ -1,0 +1,7 @@
+#!/bin/bash
+
+while true; do
+    touch ./src/Sylius/Bundle/UiBundle/Resources/assets/less/ui.less
+    app/console assetic:dump
+    sleep 30
+done

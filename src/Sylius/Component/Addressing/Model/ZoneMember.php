@@ -35,6 +35,14 @@ abstract class ZoneMember implements ZoneMemberInterface
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;

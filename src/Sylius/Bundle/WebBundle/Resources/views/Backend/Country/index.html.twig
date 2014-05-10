@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Country:macros.html.twig' import list %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.country.index'|trans }}</li>
@@ -12,16 +12,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_country_create'), 'sylius.country.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_zone_index'), 'sylius.zone.manage'|trans) }}
-    </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.country.index_header'|trans|raw }}</h1>
-</div>
+{{ page.header('country.index', 'flag', 'SyliusWebBundle:Backend/Country/Actions:_index.html.twig') }}
 
-{{ pagination(countries) }}
+{{ pagination.standard(countries) }}
 {{ list(countries) }}
-{{ pagination(countries) }}
-
+{{ pagination.standard(countries) }}
 {% endblock %}

@@ -1,8 +1,8 @@
 {% macro list(products) %}
 
 {% from 'SyliusWebBundle:Backend/ProductVariant:macros.html.twig' import list as list_variants %}
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% if products|length > 0 %}
 <table class="table" id="stockables">
@@ -26,7 +26,7 @@
                     {{ product.sku }}
                 </td>
                 <td>
-                    <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">
+                    <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}" class="btn btn-link">
                         <strong>{{ product.name }}</strong>
                     </a>
                 </td>
@@ -52,7 +52,7 @@
             </tr>
             {% if product.hasOptions %}
             <tr class="sub-table">
-                <td class="variant-table-toggle"><i class="glyphicon glyphicon-chevron-down"></i></td>
+                <td class="variant-table-toggle"><i class="fa fa-chevron-down"></i></td>
                 <td colspan="4">
                     <table class="table">
                         <thead>
