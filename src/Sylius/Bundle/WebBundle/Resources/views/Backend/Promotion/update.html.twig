@@ -14,10 +14,10 @@
 {% block content %}
 {{ form_start(form, {'action': path('sylius_backend_promotion_update', {'id': promotion.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ page.header('promotion.update', 'plus-sign', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
+{{ page.header('promotion.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
 {% include 'SyliusWebBundle:Backend/Promotion:_form.html.twig' %}
 <input type="hidden" name="_method" value="PUT">
 
-{{ form_end(form) }}
+{{ form_end(form, {'render_missing': false}) }}
 {% endblock %}

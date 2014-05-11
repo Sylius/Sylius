@@ -45,6 +45,7 @@ class UserMenuBuilder extends ContainerAware
 
         $menu
             ->addChild('overview', array('uri' => '#overview'))
+            ->setCurrent(true)
             ->setLinkAttribute('data-toggle', 'tab')
             ->setLabel('sylius.backend.user.overview')
         ;

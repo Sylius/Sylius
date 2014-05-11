@@ -1,7 +1,7 @@
 sylius:
     backend:
         main:
-            products: Products
+            catalog: Catalog
             blocks: Blocks
             configuration: Configuration
             content: Content

@@ -41,12 +41,12 @@
             <td>
                 {% if promotion.used > 0 %}
                     {% if promotion.usageLimit > promotion.used %}
-                        <span class="label-status label-enabled"><i class="fa fa-signal"></i> {{ promotion.used }}</span>
+                        <span class="label-count label-green">{{ promotion.used }}</span>
                     {% else %}
-                        <span class="label-status label-disabled"><i class="fa fa-signal"></i> {{ promotion.used }}</span>
+                        <span class="label-count label-red">{{ promotion.used }}</span>
                     {% endif %}
                 {% else %}
-                    <span class="label-status label-disabled"><i class="fa fa-signal"></i> {{ promotion.used }}</span>
+                    <span class="label-count label-red">{{ promotion.used }}</span>
                 {% endif %}
             </td>
             <td>

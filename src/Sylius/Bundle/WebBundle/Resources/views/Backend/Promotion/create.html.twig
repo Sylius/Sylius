@@ -13,9 +13,9 @@
 {% block content %}
 {{ form_start(form, {'action': path('sylius_backend_promotion_create'), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ page.header('promotion.create', 'plus-sign', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
+{{ page.header('promotion.create', 'plus-circle', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
 
 {% include 'SyliusWebBundle:Backend/Promotion:_form.html.twig' %}
 
-{{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

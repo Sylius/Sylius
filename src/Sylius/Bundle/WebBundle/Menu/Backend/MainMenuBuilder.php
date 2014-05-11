@@ -42,7 +42,7 @@ class MainMenuBuilder extends MenuBuilder
             ->setLabel('sylius.backend.main.dashboard')
         ;
 
-        $this->addProductsMenu($menu);
+        $this->addCatalogMenu($menu);
         $this->addSalesMenu($menu);
         $this->addMarketingMenu($menu);
         $this->addCustomersMenu($menu);
@@ -55,15 +55,15 @@ class MainMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Add products menu.
+     * Add catalog menu.
      *
      * @param ItemInterface $menu
      */
-    protected function addProductsMenu(ItemInterface $menu)
+    protected function addCatalogMenu(ItemInterface $menu)
     {
         $child = $menu
-            ->addChild('products')
-            ->setLabel('sylius.backend.main.products')
+            ->addChild('catalog')
+            ->setLabel('sylius.backend.main.catalog')
         ;
 
         $child

@@ -18,7 +18,7 @@
         <tr id="{{ tax_category.id }}">
             <td>{{ tax_category.id }}</td>
             <td>
-                <a href="path('sylius_backend_tax_category_update', {'id': tax_category.id})"><strong>{{ tax_category.name }}</strong></a>
+                <a href="{{ path('sylius_backend_tax_category_update', {'id': tax_category.id}) }}"><strong>{{ tax_category.name }}</strong></a>
                 <p>{{ tax_category.description|default('sylius.tax_category.no_description'|trans) }}</p>
             </td>
             <td>{{ tax_category.updatedAt|date }}</td>

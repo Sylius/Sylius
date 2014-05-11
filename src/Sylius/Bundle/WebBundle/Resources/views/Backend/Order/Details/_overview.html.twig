@@ -17,7 +17,7 @@
     <div class="col col-md-3">
         <h4 class="overview-heading">{{ 'sylius.order.payments'|trans }}</h4>
         <ul class="list-group">
-            {% for payment in [order.payment] %}
+            {% for payment in order.payments %}
             <li class="list-group-item">
                 <a href="{{ path('sylius_backend_payment_show', {'id': payment.id}) }}">#{{ payment.id }} / {{ payment.method }}</a>
                 {{ labels.payment_state(payment.state) }}
