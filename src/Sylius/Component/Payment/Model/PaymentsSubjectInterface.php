@@ -23,7 +23,7 @@ interface PaymentsSubjectInterface
     /**
      * Check if order has any payments
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasPayments();
 
@@ -45,7 +45,8 @@ interface PaymentsSubjectInterface
      * Check if the payment subject has certain payment.
      *
      * @param PaymentInterface $payment
-     * @return Boolean
+     *
+     * @return bool
      */
     public function hasPayment(PaymentInterface $payment);
 } 

@@ -365,10 +365,10 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastNewPayment()
+    public function getLastPayment($state = BasePaymentInterface::STATE_NEW)
     {
-        return $this->payments->filter(function(BasePaymentInterface $payment) {
-            return $payment->getState() === BasePaymentInterface::STATE_NEW;
+        return $this->payments->filter(function(BasePaymentInterface $payment) use ($state) {
+            return $payment->getState() === $state;
         })->last();
     }
 
@@ -526,7 +526,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Tells is the invoice of the order can be generated.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isInvoiceAvailable()
     {
