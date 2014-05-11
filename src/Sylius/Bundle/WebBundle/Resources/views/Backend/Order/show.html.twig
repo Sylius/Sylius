@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-{{ page.header('order.show', 'file', 'SyliusWebBundle:Backend/Order/Actions:_show.html.twig') }}
+{{ page.header('order.show', 'file', 'SyliusWebBundle:Backend/Order/Actions:_show.html.twig', {'order': order}) }}
 
 <div class="tab-content">
     {% include 'SyliusWebBundle:Backend/Order/Details:_overview.html.twig' %}

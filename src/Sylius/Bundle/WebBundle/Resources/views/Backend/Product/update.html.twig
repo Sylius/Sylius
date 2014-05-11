@@ -34,5 +34,5 @@
 {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
 <input type="hidden" name="_method" value="PUT">
 
-{{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

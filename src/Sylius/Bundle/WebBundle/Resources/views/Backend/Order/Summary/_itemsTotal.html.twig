@@ -1,0 +1,6 @@
+<tr>
+    <td class="active text-right" colspan="6">
+        <strong>{{ 'sylius.order.items_total'|trans }}</strong>:
+        <span class="amount">{{ order.itemsTotal|sylius_price(order.currency) }}</span>
+    </td>
+</tr>
