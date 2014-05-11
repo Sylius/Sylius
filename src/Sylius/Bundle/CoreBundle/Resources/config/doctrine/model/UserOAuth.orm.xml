@@ -21,6 +21,10 @@
             <generator strategy="AUTO" />
         </id>
 
+        <unique-constraints>
+            <unique-constraint columns="user_id,provider" name="user_provider" />
+        </unique-constraints>
+
         <field name="provider" type="string" />
         <field name="identifier" type="string" />
         <field name="accessToken" column="access_token" type="string" nullable="true" />
