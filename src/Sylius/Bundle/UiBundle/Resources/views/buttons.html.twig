@@ -43,6 +43,12 @@
 </a>
 {% endmacro %}
 
+{% macro back_to_list(url, message) %}
+<a href="{{ url }}" class="btn btn-default">
+    <i class="fa fa-arrow-circle-left"></i><span>{{ message is empty ? 'sylius.back_to_list'|trans : message }}</span>
+</a>
+{% endmacro %}
+
 {% macro history(url, message) %}
 <a href="{{ url }}" class="btn btn-info">
     <i class="fa fa-calendar"></i><span>{{ message is empty ? 'sylius.show_history'|trans : message }}</span>

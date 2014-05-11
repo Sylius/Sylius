@@ -1,0 +1,17 @@
+<tr class="shipping-charges">
+    <td colspan="2">
+        {% if order.shippingAdjustments|length > 0 %}
+        <ul>
+                {% for adjustment in order.shippingAdjustments %}
+                    <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted"><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
+        {% endif %}
+    </td>
+    <td class="text-right" colspan="3">
+        <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>:
+        <span class="amount">{{ order.shippingTotal|sylius_price(order.currency) }}</span>
+    </td>
+</tr>

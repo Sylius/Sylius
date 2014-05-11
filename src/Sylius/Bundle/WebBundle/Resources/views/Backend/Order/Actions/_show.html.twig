@@ -1,0 +1,4 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+{{ buttons.back_to_list(path('sylius_backend_order_index')) }}

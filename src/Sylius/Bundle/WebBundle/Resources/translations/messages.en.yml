@@ -618,6 +618,7 @@ sylius:
     show: details
     show_all: Show all
     show_deleted: Show deleted
+    back_to_list: Back to list
     stockable:
         index_header: Inventory <small>Here you can see current stock levels</small>
         name: name
