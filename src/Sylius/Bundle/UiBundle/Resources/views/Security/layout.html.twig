@@ -1,14 +1,32 @@
-{% extends 'SyliusUiBundle::layout.html.twig' %}
+<!DOCTYPE html>
 
-{% block navbar %}
-{% endblock %}
+<html>
+<head>
+    <title>
+        {% block title %}
+            {{ 'sylius.meta.title.default'|trans }}
+        {% endblock %}
+    </title>
 
-{% block breadcrumb %}
-{% endblock %}
+    <meta charset="UTF-8">
 
-{% block main %}
-<div class="col-md-12" id="sign-in-container">
-    {% block content %}
+    {% block stylesheets %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' %}
     {% endblock %}
-</div>
-{% endblock %}
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body class="sign-in">
+    <div id="sign-in-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block javascripts %}
+        {% include 'SyliusUiBundle::_javascripts.html.twig' %}
+    {% endblock %}
+</body>
+</html>

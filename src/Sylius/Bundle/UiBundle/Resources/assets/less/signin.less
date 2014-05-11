@@ -1,28 +1,31 @@
-div.signin {
+body.sign-in {
     padding-top: 200px;
-    background-color: #333;
+    background-color: @color-dark-gray;
 }
 img.swan {
     position: absolute;
     z-index: -1000;
-    margin-left: 350px;
-    margin-top: -50px;
+    margin-left: 335px;
+    margin-top: -70px;
     height: 300px;
 }
 form.form-signin {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -150px 0 0 -200px;
+    margin: 0 auto;
     padding: 40px;
-    background-color: #fff;
+    background-color: @color-near-white;
+    border: 1px solid @color-border;
     width: 400px;
     border-radius: 3px;
 
     label {
         font-weight: normal;
     }
+
+    .btn-login {
+        color: @color-white;
+        background-color: @color-sylius;
+    }
     .form-control:focus {
-        border-color: #1abb9c;
+        border-color: @color-sylius;
     }
 }
