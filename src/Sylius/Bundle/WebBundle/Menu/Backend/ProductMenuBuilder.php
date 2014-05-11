@@ -45,6 +45,7 @@ class ProductMenuBuilder extends ContainerAware
 
         $menu
             ->addChild('details', array('uri' => '#details'))
+            ->setCurrent(true)
             ->setLinkAttribute('data-toggle', 'tab')
             ->setLabel('sylius.backend.product.details')
         ;

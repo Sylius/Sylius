@@ -45,13 +45,9 @@ class OrderMenuBuilder extends ContainerAware
 
         $menu
             ->addChild('overview', array('uri' => '#overview'))
+            ->setCurrent(true)
             ->setLinkAttribute('data-toggle', 'tab')
             ->setLabel('sylius.backend.order.overview')
-        ;
-        $menu
-            ->addChild('customer', array('uri' => '#customer'))
-            ->setLinkAttribute('data-toggle', 'tab')
-            ->setLabel('sylius.backend.order.customer')
         ;
         $menu
             ->addChild('shipments', array('uri' => '#shipments'))
@@ -67,11 +63,6 @@ class OrderMenuBuilder extends ContainerAware
             ->addChild('inventory', array('uri' => '#inventory'))
             ->setLinkAttribute('data-toggle', 'tab')
             ->setLabel('sylius.backend.order.inventory')
-        ;
-        $menu
-            ->addChild('return_authorizations', array('uri' => '#return-authorizations'))
-            ->setLinkAttribute('data-toggle', 'tab')
-            ->setLabel('sylius.backend.order.return_authorizations')
         ;
 
         return $menu;

@@ -35,6 +35,7 @@ sylius:
             number: Number :
             payment_mode: Payment mode :
             placed_at: Placed at %at%
+            payments: Payments
             shipment:
                 pending: Pending
                 ready: Ready since %at%
@@ -361,8 +362,8 @@ sylius:
         no_shipping_charges: No shipping charges applied
         no_taxes: No taxes applied
         number: Number
-        payment: Payment
         payment_state: Payment state
+        payments: Payments
         payment_states:
             balance_due: Balance due
         promotion_total: Promotion total

@@ -1,2 +1,5 @@
+{% from 'SyliusWebBundle:Backend/Payment:macros.html.twig' import list %}
+
 <div class="tab-pane" id="payments">
+{{ list(order.payments) }}
 </div>

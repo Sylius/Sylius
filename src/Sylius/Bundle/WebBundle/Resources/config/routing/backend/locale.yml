@@ -9,8 +9,9 @@ sylius_backend_locale_index:
         _sylius:
             template: SyliusWebBundle:Backend/Locale:index.html.twig
             sortable: true
+            paginate: 50
             sorting:
-                code: desc
+                code: asc
 
 sylius_backend_locale_create:
     pattern: /new
