@@ -291,8 +291,8 @@ class Product implements ProductInterface
     public function removeAttribute(BaseAttributeValueInterface $attribute)
     {
         if ($this->hasAttribute($attribute)) {
-            $attribute->setProduct(null);
             $this->attributes->removeElement($attribute);
+            $attribute->setProduct(null);
         }
 
         return $this;
