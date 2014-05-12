@@ -66,7 +66,7 @@ let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle
     // src/App/AppBundle/Entity/Order.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\OrderBundle\Entity\Order as BaseOrder;
+    use Sylius\Component\Order\Model\Order as BaseOrder;
 
     class Order extends BaseOrder
     {
@@ -88,12 +88,13 @@ You should create a mapping file in your ``AppBundle``, put it inside the doctri
             <id name="id" column="id" type="integer">
                 <generator strategy="AUTO" />
             </id>
-            <one-to-many field="items" target-entity="Sylius\Bundle\OrderBundle\Model\OrderItemInterface" mapped-by="order" orphan-removal="true">
+            <one-to-many field="items" target-entity="Sylius\Component\Order\Model\OrderItemInterface" mapped-by="order" orphan-removal="true">
                 <cascade>
                     <cascade-all/>
                 </cascade>
             </one-to-many>
-            <one-to-many field="adjustments" target-entity="Sylius\Bundle\OrderBundle\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
+
+            <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
                 <cascade>
                     <cascade-all/>
                 </cascade>
@@ -112,7 +113,7 @@ Now let's assume you have a *Product* entity, which represents your main merchan
 
     Please remember that you can use anything else, *Product* here is just an obvious example, but it will work in similar way with other entities.
 
-All you need to do is making your *Product* entity to implement ``SellableInterface`` and configure it inside Symfony settings.
+All you need to do is making your *Product* entity to implement ``ProductInterface`` and configure it inside Symfony settings.
 
 .. code-block:: php
 
@@ -121,13 +122,13 @@ All you need to do is making your *Product* entity to implement ``SellableInterf
     // src/App/AppBundle/Entity/Product.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\OrderBundle\Model\SellableInterface;
+    use Sylius\Component\Product\Model\ProductInterface;
 
-    class Product implements SellableInterface
+    class Product implements ProductInterface
     {
         // Your code...
 
-        public function getSellableName()
+        public function getName()
         {
             // Here you just have to return the nice display name of your merchandise.
             return $this->name;
@@ -147,10 +148,16 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_order:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         classes:
-            sellable:
-                model: App\AppBundle\Entity\Product # Your product entity.
             order:
                 model: App\AppBundle\Entity\Order # The order entity.
+            order_item:
+                model: App\AppBundle\Entity\OrderItem # Your order item entity, if you need to override it
+
+    sylius_product:
+        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
+        classes:
+            product:
+                model: App\AppBundle\Entity\Product
 
 Updating database schema
 ------------------------

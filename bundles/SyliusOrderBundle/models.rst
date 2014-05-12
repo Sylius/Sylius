@@ -82,13 +82,13 @@ OrderItem basics
 
 An order item model has only the id as identifier, also it has the order to which it belongs, accessible via ``->getOrder()`` method.
 
-The sellable object can be retrieved and set, using the following setter and getter - ``->getSellable()`` & ``->setSellable(SellableInterface $sellable)``.
+The sellable object can be retrieved and set, using the following setter and getter - ``->getProduct()`` & ``->setVariant(ProductVariantInterface $variant)``.
 
 .. code-block:: php
 
     <?php
 
-    $item->setSellable($book);
+    $item->setVariant($book);
 
 .. note::
 
@@ -103,7 +103,7 @@ Each item also can calculate its total, using the quantity (``->getQuantity()``)
 
     $item = $itemRepository->createNew();
     $item
-        ->setSellable($book)
+        ->setVariant($book)
         ->setUnitPrice(2000)
         ->setQuantity(4)
         ->calculateTotal()
