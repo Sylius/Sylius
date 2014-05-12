@@ -25,21 +25,21 @@ class CartHelper extends Helper
      *
      * @var CartProviderInterface
      */
-    private $cartProvider;
+    protected $cartProvider;
 
     /**
      * Cart item manager.
      *
      * @var RepositoryInterface
      */
-    private $cartItemRepository;
+    protected $cartItemRepository;
 
     /**
      * Form factory.
      *
      * @var FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * Constructor.
