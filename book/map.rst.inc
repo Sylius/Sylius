@@ -2,3 +2,16 @@
 * :doc:`/book/installation`
 * :doc:`/book/architecture`
 * :doc:`/book/products`
+* :doc:`/book/addresses`
+* :doc:`/book/inventory`
+* :doc:`/book/orders`
+* :doc:`/book/shipments`
+* :doc:`/book/payments`
+* :doc:`/book/taxation`
+* :doc:`/book/pricing`
+* :doc:`/book/promotions`
+* :doc:`/book/users_and_groups`
+* :doc:`/book/currencies`
+* :doc:`/book/locales`
+* :doc:`/book/content`
+* :doc:`/book/settings`
