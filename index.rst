@@ -57,7 +57,6 @@ Documentation of all Sylius bundles.
 .. toctree::
    :hidden:
 
-   bundles/introduction
    bundles/index
 
 .. include:: /bundles/map.rst.inc
@@ -70,7 +69,6 @@ E-Commerce components for PHP.
 .. toctree::
    :hidden:
 
-   components/introduction
    components/index
 
 .. include:: /components/map.rst.inc

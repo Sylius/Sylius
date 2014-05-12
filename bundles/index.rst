@@ -7,16 +7,15 @@ Symfony2 Ecommerce Bundles
     general/index
     SyliusResourceBundle/index
     SyliusProductBundle/index
-    SyliusVariableProductBundle/index
     SyliusCartBundle/index
     SyliusOrderBundle/index
     SyliusAddressingBundle/index
     SyliusInventoryBundle/index
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
-    SyliusPromotionsBundle/index
+    SyliusPromotionBundle/index
     SyliusOmnipayBundle/index
-    SyliusTaxonomiesBundle/index
+    SyliusTaxonomyBundle/index
     SyliusSettingsBundle/index
     SyliusFlowBundle/index
 
