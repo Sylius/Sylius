@@ -14,36 +14,16 @@ namespace Sylius\Bundle\WebBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
- * Web user context.
+ * Web context.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class WebUser extends DataContext
+class WebContext extends DefaultContext
 {
-    /**
-     * Actions.
-     *
-     * @var array
-     */
-    protected $actions = array(
-        'viewing'  => 'show',
-        'creation' => 'create',
-        'editing'  => 'update',
-        'building' => 'build',
-    );
-
     /**
      * @Given /^go to "([^""]*)" tab$/
      */
@@ -452,7 +432,6 @@ class WebUser extends DataContext
      */
     public function iFillInCheckoutAddress($type, $country)
     {
-//        $this->iFillInAddress('sylius_checkout_addressing', $type, $country);
         $base = sprintf('sylius_checkout_addressing[%sAddress]', $type);
 
         $this->iFillInAddressFields($base, $country);
@@ -633,9 +612,8 @@ class WebUser extends DataContext
      */
     public function iShouldBeOnTheProductPage($name)
     {
-        $product = $this->findOneBy('product', array('name' => $name));
+        $this->iAmOnTheProductPage($name);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -645,10 +623,9 @@ class WebUser extends DataContext
      */
     public function iAmOnTheOrderPage($action, $number)
     {
-        $page = "sylius_account_order_$action";
         $order = $this->findOneBy('order', array('number' => $number));
 
-        $this->getSession()->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $order->getNumber())));
     }
 
     /**
@@ -657,10 +634,8 @@ class WebUser extends DataContext
      */
     public function iShouldBeOnTheOrderPage($action, $number)
     {
-        $page = "sylius_account_order_$action";
-        $order = $this->findOneBy('order', array('number' => $number));
+        $this->iAmOnTheOrderPage($action, $number);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl($page, array('number' => $order->getNumber())));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -675,14 +650,6 @@ class WebUser extends DataContext
     }
 
     /**
-     * @Given /^I am logged in as administrator$/
-     */
-    public function iAmLoggedInAsAdministrator()
-    {
-        $this->iAmLoggedInAsRole('ROLE_SYLIUS_ADMIN');
-    }
-
-    /**
      * @Given /^I log in with "([^""]*)" and "([^""]*)"$/
      */
     public function iLogInWith($email, $password)
@@ -692,15 +659,6 @@ class WebUser extends DataContext
         $this->fillField('Email', $email);
         $this->fillField('Password', $password);
         $this->pressButton('login');
-    }
-
-    /**
-     * @Given /^I am logged in user$/
-     * @Given /^I am logged in as user "([^""]*)"$/
-     */
-    public function iAmLoggedInUser($email = 'sylius@example.com')
-    {
-        $this->iAmLoggedInAsRole('ROLE_USER', $email);
     }
 
     /**
@@ -782,24 +740,25 @@ class WebUser extends DataContext
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
-        $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
-
-        foreach ($rows as $key => $row) {
-            if ($row->getText() === $property) {
-                $column = $key; break;
-            }
-        }
-
         $tr = $this->getSession()->getPage()->find('css', sprintf('table tbody tr:contains("%s")', $item));
 
         if (null === $tr) {
             throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
         }
 
-        $cols = $tr->findAll('css', 'td');
-        $value = $cols[$column]->getText();
+        $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
-        assertEquals($expectedValue, $value);
+        $column = null;
+        foreach ($rows as $key => $row) {
+            if ($row->getText() === $property) {
+                $column = $key;
+                break;
+            }
+        }
+
+        $cols = $tr->findAll('css', 'td');
+
+        \PHPUnit_Framework_Assert::assertEquals($expectedValue, $cols[$column]->getText());
     }
 
     /**
@@ -831,97 +790,5 @@ class WebUser extends DataContext
     protected function assertStatusCodeEquals($code)
     {
         $this->assertSession()->statusCodeEquals($code);
-    }
-
-    /**
-     * Get current user instance.
-     *
-     * @return null|UserInterface
-     *
-     * @throws \Exception
-     */
-    protected function getUser()
-    {
-        $token = $this->getSecurityContext()->getToken();
-
-        if (null === $token) {
-            throw new \Exception('No token found in security context.');
-        }
-
-        return $token->getUser();
-    }
-
-    /**
-     * Get security context.
-     *
-     * @return SecurityContextInterface
-     */
-    protected function getSecurityContext()
-    {
-        return $this->getContainer()->get('security.context');
-    }
-
-    /**
-     * Create user and login with given role.
-     *
-     * @param string $role
-     */
-    protected function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
-    {
-        $this->getDataContext()->thereIsUser($email, 'sylius', $role);
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
-
-        $this->fillField('Email', $email);
-        $this->fillField('Password', 'sylius');
-        $this->pressButton('login');
-    }
-
-    /**
-     * Generate page url.
-     * This method uses simple convention where page argument is prefixed
-     * with "sylius_" and used as route name passed to router generate method.
-     *
-     * @param string $page
-     * @param array  $parameters
-     *
-     * @return string
-     */
-    protected function generatePageUrl($page, array $parameters = array())
-    {
-        $route = str_replace(' ', '_', trim($page));
-        $routes = $this->getContainer()->get('router')->getRouteCollection();
-
-        if (null === $routes->get($route)) {
-            $route = 'sylius_'.$route;
-        }
-
-        if (null === $routes->get($route)) {
-            $route = str_replace('sylius_', 'sylius_backend_', $route);
-        }
-
-        $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
-        $route = str_replace(' ', '_', $route);
-
-        $path = $this->generateUrl($route, $parameters);
-
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
-            return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
-        }
-
-        return $path;
-    }
-
-    /**
-     * Generate url.
-     *
-     * @param string  $route
-     * @param array   $parameters
-     * @param Boolean $absolute
-     *
-     * @return string
-     */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
-    {
-        return $this->getService('router')->generate($route, $parameters, $absolute);
     }
 }
