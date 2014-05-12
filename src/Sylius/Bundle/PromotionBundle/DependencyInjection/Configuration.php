@@ -74,7 +74,7 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
-                        ->arrayNode('promotion_rule_user_loyality_configuration')
+                        ->arrayNode('promotion_rule_user_loyalty_configuration')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()

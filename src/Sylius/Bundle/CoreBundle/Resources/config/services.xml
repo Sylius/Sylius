@@ -71,13 +71,13 @@
 
         <!-- Promotion Form, Action & Checker -->
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
-        <parameter key="sylius.form.type.promotion_rule.user_loyality_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\UserLoyalityConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.user_loyalty_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\UserLoyaltyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.user_loyality.class">Sylius\Component\Core\Promotion\Checker\UserLoyalityRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
@@ -423,9 +423,9 @@
             <argument>%sylius.validation_group.promotion_rule_nth_order_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_nth_order_configuration" />
         </service>
-        <service id="sylius.form.type.promotion_rule.user_loyality_configuration" class="%sylius.form.type.promotion_rule.user_loyality_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_user_loyality_configuration%</argument>
-            <tag name="form.type" alias="sylius_promotion_rule_user_loyality_configuration" />
+        <service id="sylius.form.type.promotion_rule.user_loyalty_configuration" class="%sylius.form.type.promotion_rule.user_loyalty_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_user_loyalty_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_user_loyalty_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
@@ -443,8 +443,8 @@
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
         </service>
-        <service id="sylius.promotion_rule_checker.user_loyality" class="%sylius.promotion_rule_checker.user_loyality.class%">
-            <tag name="sylius.promotion_rule_checker" type="user_loyality" label="User loyality" />
+        <service id="sylius.promotion_rule_checker.user_loyalty" class="%sylius.promotion_rule_checker.user_loyalty.class%">
+            <tag name="sylius.promotion_rule_checker" type="user_loyalty" label="User loyalty" />
         </service>
         <service id="sylius.promotion_rule_checker.shipping_country" class="%sylius.promotion_rule_checker.shipping_country.class%">
             <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />

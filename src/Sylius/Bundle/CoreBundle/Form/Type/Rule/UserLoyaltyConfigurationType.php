@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Type;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserLoyalityConfigurationType extends AbstractType
+class UserLoyaltyConfigurationType extends AbstractType
 {
     protected $validationGroups;
 
@@ -38,26 +38,26 @@ class UserLoyalityConfigurationType extends AbstractType
     {
         $builder
             ->add('time', 'integer', array(
-                'label'       => 'sylius.form.rule.user_loyality_configuration.time',
+                'label'       => 'sylius.form.rule.user_loyalty_configuration.time',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
                 )
             ))
             ->add('unit', 'choice', array(
-                'label'       => 'sylius.form.rule.user_loyality_configuration.unit',
+                'label'       => 'sylius.form.rule.user_loyalty_configuration.unit',
                 'choices'     => array(
-                    'days'   => 'sylius.form.rule.user_loyality_configuration.unit.days',
-                    'weeks'  => 'sylius.form.rule.user_loyality_configuration.unit.weeks',
-                    'months' => 'sylius.form.rule.user_loyality_configuration.unit.months',
-                    'years'  => 'sylius.form.rule.user_loyality_configuration.unit.years',
+                    'days'   => 'sylius.form.rule.user_loyalty_configuration.unit.days',
+                    'weeks'  => 'sylius.form.rule.user_loyalty_configuration.unit.weeks',
+                    'months' => 'sylius.form.rule.user_loyalty_configuration.unit.months',
+                    'years'  => 'sylius.form.rule.user_loyalty_configuration.unit.years',
                 ),
                 'constraints' => array(
                     new NotBlank(),
                 )
             ))
             ->add('after', 'checkbox', array(
-                'label' => 'sylius.form.rule.user_loyality_configuration.after',
+                'label' => 'sylius.form.rule.user_loyalty_configuration.after',
             ))
         ;
     }
@@ -79,6 +79,6 @@ class UserLoyalityConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_user_loyality_configuration';
+        return 'sylius_promotion_rule_user_loyalty_configuration';
     }
 }

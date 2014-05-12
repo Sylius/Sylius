@@ -18,11 +18,11 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserLoyalityRuleCheckerSpec extends ObjectBehavior
+class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\UserLoyalityRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
@@ -32,7 +32,7 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getUser()->shouldBeCalled()->willReturn(null);
+        $subject->getUser()->willReturn(null);
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
@@ -42,8 +42,8 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         TimestampableInterface $user
     )
     {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime());
+        $subject->getUser()->willReturn($user);
+        $user->getCreatedAt()->willReturn(new \DateTime());
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
@@ -53,8 +53,8 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         TimestampableInterface $user
     )
     {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
+        $subject->getUser()->willReturn($user);
+        $user->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
     }
@@ -75,8 +75,8 @@ class UserLoyalityRuleCheckerSpec extends ObjectBehavior
         TimestampableInterface $user
     )
     {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime());
+        $subject->getUser()->willReturn($user);
+        $user->getCreatedAt()->willReturn(new \DateTime());
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(true);
     }
