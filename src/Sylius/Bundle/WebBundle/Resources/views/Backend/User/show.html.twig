@@ -6,14 +6,16 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
     <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.breadcrumb.user.index'|trans }}</a></li>
-    <li>{{ user.fullName  }}</li>
+    <li>{{ user.fullName }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.generic(path('sylius_account_homepage', { '_switch_user': user.username }), 'sylius.user.impersonate'|trans) }}
+        {% if user.id is not sameas(app.user.id) %}
+        {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': user.username}), 'sylius.user.impersonate'|trans) }}
+        {% endif %}
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
         {% if not user.deleted %}
         {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
@@ -23,54 +25,82 @@
     <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.user.show_header'|trans|raw }}</h1>
 </div>
 
+<div class="row">
+    <div class="col-md-7">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2">{{ 'sylius.user.general_info'|trans({'%username%': user.username}) }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>{{ 'sylius.user.id'|trans }}</strong></td>
+                <td>{{ user.id }}</td>
+            </tr>
+            {% if user.firstName %}
+                <tr>
+                    <td><strong>{{ 'sylius.user.first_name'|trans }}</strong></td>
+                    <td>{{ user.firstName }}</td>
+                </tr>
+            {% endif %}
+            {% if user.lastName %}
+                <tr>
+                    <td><strong>{{ 'sylius.user.last_name'|trans }}</strong></td>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.user.email'|trans }}</strong></td>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
+                <td>
+                        <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
+                            {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                        </span>
+                </td>
+            </tr>
+            {% if user.lastLogin %}
+                <tr>
+                    <td><strong>{{ 'sylius.user.last_login'|trans }}</strong></td>
+                    <td>{{ user.lastLogin|date }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th colspan="2">{{ 'sylius.user.general_info'|trans({'%username%': user.username}) }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>{{ 'sylius.user.id'|trans }}</strong></td>
-            <td>{{ user.id }}</td>
-        </tr>
-        {% if user.firstName %}
-            <tr>
-                <td><strong>{{ 'sylius.user.first_name'|trans }}</strong></td>
-                <td>{{ user.firstName }}</td>
-            </tr>
-        {% endif %}
-        {% if user.lastName %}
-            <tr>
-                <td><strong>{{ 'sylius.user.last_name'|trans }}</strong></td>
-                <td>{{ user.lastName }}</td>
-            </tr>
-        {% endif %}
-        <tr>
-            <td><strong>{{ 'sylius.user.username'|trans }}</strong></td>
-            <td>{{ user.username }}</td>
-        </tr>
-        <tr>
-            <td><strong>{{ 'sylius.user.email'|trans }}</strong></td>
-            <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-            <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
-            <td>
-                <span class="label label-{{ user.enabled ? 'success' : 'important'}}">
-                    {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
-            </td>
-        </tr>
-        {% if user.lastLogin %}
-        <tr>
-            <td><strong>{{ 'sylius.user.last_login'|trans }}</strong></td>
-            <td>{{ user.lastLogin|date }}</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
+    <div class="col-md-5">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.user.oauth.provider'|trans }}</th>
+                    <th>{{ 'sylius.user.oauth.identifier'|trans }}</th>
+                    <th>{{ 'sylius.user.oauth.access_token'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for oauth in user.oauthAccounts %}
+                <tr>
+                    <td>{{ oauth.provider }}</td>
+                    <td>{{ oauth.identifier }}</td>
+                    <td>{{ oauth.accessToken|default('<em>unknown</em>')|raw }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">{{ 'sylius.user.oauth.none'|trans }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div class="row">
     {% if user.shippingAddress %}
@@ -86,6 +116,7 @@
         </div>
     {% endif %}
 </div>
+
 <div class="row">
     <div class="col-md-12">
         {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}

@@ -125,4 +125,29 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
      * @return Boolean
      */
     public function hasAddress(AddressInterface $address);
+
+    /**
+     * Get connected OAuth accounts.
+     *
+     * @return Collection|UserOAuthInterface[]
+     */
+    public function getOAuthAccounts();
+
+    /**
+     * Get connected OAuth account.
+     *
+     * @param string $provider
+     *
+     * @return null|UserOAuthInterface
+     */
+    public function getOAuthAccount($provider);
+
+    /**
+     * Connect OAuth account.
+     *
+     * @param UserOAuthInterface $oauth
+     *
+     * @return self
+     */
+    public function addOAuthAccount(UserOAuthInterface $oauth);
 }

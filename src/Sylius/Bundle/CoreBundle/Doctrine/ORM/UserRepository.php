@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * User repository.
@@ -25,6 +27,7 @@ class UserRepository extends EntityRepository
      *
      * @param array $criteria
      * @param array $sorting
+     * @param bool  $deleted
      *
      * @return PagerfantaInterface
      */
@@ -68,6 +71,8 @@ class UserRepository extends EntityRepository
      * Get the user data for the details page.
      *
      * @param integer $id
+     *
+     * @return null|UserInterface
      */
     public function findForDetailsPage($id)
     {
@@ -88,6 +93,13 @@ class UserRepository extends EntityRepository
         return $result;
     }
 
+    /**
+     * @param \DateTime   $from
+     * @param \DateTime   $to
+     * @param null|string $status
+     *
+     * @return mixed
+     */
     public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);

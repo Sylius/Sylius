@@ -12,39 +12,61 @@
 namespace Sylius\Bundle\CoreBundle\OAuth;
 
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
-use Sylius\Component\Core\Model\User;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
+use Sylius\Component\Core\Model\UserOAuth;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
  *
  * @author Fabian Kiss <fabian.kiss@ymc.ch>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class UserProvider extends FOSUBUserProvider
 {
+    /**
+     * @var RepositoryInterface
+     */
+    protected $oauthRepository;
+
+    /**
+     * Constructor.
+     *
+     * @param UserManagerInterface $userManager     FOSUB user provider.
+     * @param RepositoryInterface  $oauthRepository
+     */
+    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository)
+    {
+        $this->userManager     = $userManager;
+        $this->oauthRepository = $oauthRepository;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        try {
-            return parent::loadUserByOAuthUserResponse($response);
-        } catch (UsernameNotFoundException $e) {
-            if (null !== $response->getEmail()) {
-                $user = $this->userManager->findUserByUsernameOrEmail($response->getEmail());
-            } else {
-                $user = $this->userManager->findUserByUsername($response->getNickname());
-            }
+        $user = $this->oauthRepository->findOneBy(array(
+            'provider'   => $response->getResourceOwner()->getName(),
+            'identifier' => $response->getUsername()
+        ));
 
-            if ($user) {
+        if (null !== $user) {
+            return $user;
+        }
+
+        if (null !== $response->getEmail()) {
+            $user = $this->userManager->findUserByEmail($response->getEmail());
+            if (null !== $user) {
                 return $this->updateUserByOAuthUserResponse($user, $response);
             }
-
-            return $this->createUserByOAuthUserResponse($response);
         }
+
+        return $this->createUserByOAuthUserResponse($response);
     }
 
     /**
@@ -52,9 +74,8 @@ class UserProvider extends FOSUBUserProvider
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
+        /* @var $user SyliusUserInterface */
         $this->updateUserByOAuthUserResponse($user, $response);
-
-        $this->userManager->updateUser($user);
     }
 
     /**
@@ -62,12 +83,11 @@ class UserProvider extends FOSUBUserProvider
      *
      * @param UserResponseInterface $response
      *
-     * @return User
+     * @return SyliusUserInterface
      */
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $user = $this->userManager->createUser();
-        $this->updateUserByOAuthUserResponse($user, $response);
 
         // set default values taken from OAuth sign-in provider account
         if (null !== $email = $response->getEmail()) {
@@ -84,9 +104,7 @@ class UserProvider extends FOSUBUserProvider
 
         $user->setEnabled(true);
 
-        $this->userManager->updateUser($user);
-
-        return $user;
+        return $this->updateUserByOAuthUserResponse($user, $response);
     }
 
     /**
@@ -99,9 +117,15 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
     {
-        $providerName = $response->getResourceOwner()->getName();
-        $providerNameSetter = 'set'.ucfirst($providerName).'Id';
-        $user->$providerNameSetter($response->getUsername());
+        $oauth = $this->oauthRepository->createNew();
+        $oauth->setIdentifier($response->getUsername());
+        $oauth->setProvider($response->getResourceOwner()->getName());
+        $oauth->setAccessToken($response->getAccessToken());
+
+        /* @var $user SyliusUserInterface */
+        $user->addOAuthAccount($oauth);
+
+        $this->userManager->updateUser($user);
 
         return $user;
     }

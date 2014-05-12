@@ -499,11 +499,7 @@
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
             <argument type="service" id="fos_user.user_manager" />
-            <argument type="collection">
-                <argument key="amazon">amazonId</argument>
-                <argument key="facebook">facebookId</argument>
-                <argument key="google">googleId</argument>
-            </argument>
+            <argument type="service" id="sylius.repository.user_oauth" />
         </service>
 
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">
