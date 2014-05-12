@@ -8,19 +8,20 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/order-bundle"
+    $ composer require sylius/order-bundle:*
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/order-bundle"
+    $ php composer.phar require sylius/order-bundle:*
 
 Adding required bundles to the kernel
 -------------------------------------
 
 First, you need to enable the bundle inside the kernel.
+
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
 Don't worry, everything was automatically installed via Composer.
 
@@ -35,6 +36,9 @@ Don't worry, everything was automatically installed via Composer.
         $bundles = array(
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
