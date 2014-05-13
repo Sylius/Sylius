@@ -3,7 +3,7 @@ imports:
 
 framework:
     test: ~
-    default_locale:  "en"
+    default_locale: "en"
     session:
         storage_id: session.storage.mock_file
 
@@ -12,12 +12,11 @@ swiftmailer:
 
 doctrine:
     dbal:
-        dbname:   %sylius.database.name%_test
-        driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
+        dbname: %sylius.database.name%_test
 
 sylius_money:
     currency: EUR
-    locale: en_US
+    locale:   en_US
 
 sylius_payment:
     gateways:
@@ -35,7 +34,4 @@ monolog:
         main:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.environment%.log
-            level: debug
-        firephp:
-            type:  firephp
-            level: info
+            level: error
