@@ -26,6 +26,7 @@
             <argument type="service">
                 <service class="Doctrine\Common\EventManager" factory-service="doctrine.orm.entity_manager" factory-method="getEventManager" />
             </argument>
+            <argument type="service" id="event_dispatcher" />
             <argument>%sylius.model.sequence.class%</argument>
         </service>
     </services>

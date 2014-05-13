@@ -17,11 +17,15 @@ use Doctrine\ORM\Events;
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
+use Sylius\Component\Sequence\SyliusSequenceEvents;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Doctrine event listener
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class NumberListener
 {
@@ -34,6 +38,11 @@ class NumberListener
      * @var EventManager
      */
     protected $eventManager;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
 
     /**
      * @var string
@@ -50,10 +59,15 @@ class NumberListener
      */
     protected $listenerEnabled = false;
 
-    public function __construct(ServiceRegistryInterface $registry, EventManager $eventManager, $sequenceClass)
-    {
+    public function __construct(
+        ServiceRegistryInterface $registry,
+        EventManager $eventManager,
+        EventDispatcherInterface $eventDispatcher,
+        $sequenceClass
+    ) {
         $this->registry      = $registry;
         $this->eventManager  = $eventManager;
+        $this->eventDispatcher  = $eventDispatcher;
         $this->sequenceClass = $sequenceClass;
     }
 
@@ -85,9 +99,16 @@ class NumberListener
 
         foreach (array_merge($uow->getScheduledEntityUpdates(), $uow->getScheduledEntityInsertions()) as $entity) {
             if ($this->isEntityEnabled($entity)) {
+                $event = new GenericEvent($entity);
+
                 try {
                     $generator = $this->registry->get($entity);
                 } catch (NonExistingServiceException $e) {
+                    $this->eventDispatcher->dispatch(
+                        sprintf(SyliusSequenceEvents::GENERATOR_NOT_FOUND, $entity->getSequenceType()),
+                        $event
+                    );
+
                     continue;
                 }
 
@@ -100,7 +121,17 @@ class NumberListener
                     $sequence = new $this->sequenceClass($entity->getSequenceType());
                 }
 
+                $this->eventDispatcher->dispatch(
+                    sprintf(SyliusSequenceEvents::PRE_GENERATE, $entity->getSequenceType()),
+                    $event
+                );
+
                 $generator->generate($entity, $sequence);
+
+                $this->eventDispatcher->dispatch(
+                    sprintf(SyliusSequenceEvents::POST_GENERATE, $entity->getSequenceType()),
+                    $event
+                );
 
                 $em->persist($sequence);
                 $uow->computeChangeSet($em->getClassMetadata(get_class($sequence)), $sequence);
