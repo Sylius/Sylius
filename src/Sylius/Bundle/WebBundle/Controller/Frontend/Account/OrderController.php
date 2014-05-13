@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-use Sylius\Bundle\CoreBundle\Repository\OrderRepository;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,10 +33,7 @@ class OrderController extends Controller
      */
     public function indexAction()
     {
-        $orders = $this
-            ->getOrderRepository()
-            ->findByUser($this->getUser(), array('updatedAt' => 'desc'))
-        ;
+        $orders = $this->getOrderRepository()->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'));
 
         return $this->render('SyliusWebBundle:Frontend/Account:Order/index.html.twig', array(
             'orders' => $orders
@@ -77,11 +74,11 @@ class OrderController extends Controller
         $order = $this->findOrderOr404($number);
 
         if (!$order->isInvoiceAvailable()) {
-            throw $this->createNotFoundException('The invoice can not yet be generated');
+            throw $this->createNotFoundException('The invoice can not yet be generated.');
         }
 
         $html = $this->renderView('SyliusWebBundle:Frontend/Account:Order/invoice.html.twig', array(
-            'order'  => $order
+            'order' => $order
         ));
 
         if ('html' === $request->attributes->get('_format')) {
@@ -104,14 +101,14 @@ class OrderController extends Controller
             $generator->getOutputFromHtml($html),
             200,
             array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="' . $order->getNumber() . '.pdf"'
+                'Content-Type'        => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $order->getNumber() . '.pdf"'
             )
         );
     }
 
     /**
-     * @return OrderRepository
+     * @return OrderRepositoryInterface
      */
     protected function getOrderRepository()
     {
@@ -130,7 +127,8 @@ class OrderController extends Controller
      */
     protected function findOrderOr404($number)
     {
-        if (null === $order = $this->getOrderRepository()->findOneByNumber($number)) {
+        /* @var $order OrderInterface */
+        if (null === $order = $this->getOrderRepository()->findOneBy(array('number' => $number))) {
             throw $this->createNotFoundException('The order does not exist.');
         }
 

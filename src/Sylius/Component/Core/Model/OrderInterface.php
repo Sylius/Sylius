@@ -170,7 +170,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface, Payme
     /**
      * Check if order has any shipments.
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasShipments();
 
@@ -193,7 +193,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface, Payme
      *
      * @param ShipmentInterface $shipment
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasShipment(ShipmentInterface $shipment);
 
@@ -237,7 +237,7 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface, Payme
     /**
      * Has any pending inventory?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isBackorder();
 
@@ -256,4 +256,11 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface, Payme
      * @return PaymentInterface
      */
     public function getLastPayment($state);
+
+    /**
+     * Tells is the invoice of the order can be generated.
+     *
+     * @return bool
+     */
+    public function isInvoiceAvailable();
 }
