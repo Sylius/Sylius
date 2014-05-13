@@ -21,16 +21,8 @@ Feature: Checkout product promotion
           | type       | configuration |
           | Item total | Amount: 100   |
         And promotion "Free product" has following actions defined:
-          | type        | configuration                    |
+          | type        | configuration                     |
           | Add product | variant:Lenny,quantity:1,price:10 |
-
-    Scenario: Free product is applied when the cart has the
-              required amount
-        Given I am on the store homepage
-         When I add product "Potato" to cart, with quantity "3"
-         Then I should be on the cart summary page
-          And "Lenny" should appear on the page
-          And "Grand total: €610.00" should appear on the page
 
     Scenario: Free product is not applied when the cart
               has not the required amount
@@ -39,3 +31,11 @@ Feature: Checkout product promotion
          Then I should be on the cart summary page
           And "Lenny" should not appear on the page
           And "Grand total: €20.00" should appear on the page
+
+    Scenario: Free product is applied when the cart has the
+              required amount
+        Given I am on the store homepage
+         When I add product "Potato" to cart, with quantity "3"
+         Then I should be on the cart summary page
+          And "Lenny" should appear on the page
+          And "Grand total: €610.00" should appear on the page
