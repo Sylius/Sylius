@@ -30,6 +30,7 @@
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "hwi/oauth-bundle":                     "0.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
+        "umpirsky/composer-permissions-handler":"~1.0",
         "jackalope/jackalope-doctrine-dbal":    "1.0.*",
         "jms/serializer-bundle":                "0.12.*",
         "jms/translation-bundle":               "1.1.*",
@@ -74,6 +75,7 @@
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Umpirsky\\PermissionsHandler\\ScriptHandler::setPermissions",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -98,6 +100,7 @@
         "symfony-web-dir": "web",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        }
+        },
+        "writable-dirs": ["app/cache", "app/logs"]
     }
 }
