@@ -63,11 +63,10 @@
         "behat/mink-extension":              "2.0.*@dev",
         "behat/mink-goutte-driver":          "@dev",
         "behat/mink-selenium2-driver":       "@dev",
-        "behat/symfony2-extension":          "*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",
         "phpspec/phpspec":                   "~2.0",
-        "phpunit/phpunit":                   "~3.7.28,~3.8"
+        "phpunit/phpunit":                   "~3.7"
     },
     "scripts": {
         "post-install-cmd": [
