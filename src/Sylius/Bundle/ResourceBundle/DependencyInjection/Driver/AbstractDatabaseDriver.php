@@ -52,10 +52,12 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
 
     public function load(array $classes)
     {
-        $this->container->setDefinition(
-            $this->getContainerKey('controller'),
-            $this->getControllerDefinition($classes['controller'])
-        );
+        if (isset($classes['controller'])) {
+            $this->container->setDefinition(
+                $this->getContainerKey('controller'),
+                $this->getControllerDefinition($classes['controller'])
+            );
+        }
 
         $this->container->setDefinition(
             $this->getContainerKey('repository'),
