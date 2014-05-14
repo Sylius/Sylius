@@ -58,11 +58,10 @@ doctrine:
 
 doctrine_phpcr:
     session:
-        backend:
-            type: doctrinedbal
-        workspace: default
-        username: admin
-        password: admin
+        backend: %phpcr_backend%
+        workspace: %phpcr_workspace%
+        username: %phpcr_user%
+        password: %phpcr_pass%
     odm:
         auto_mapping: true
 

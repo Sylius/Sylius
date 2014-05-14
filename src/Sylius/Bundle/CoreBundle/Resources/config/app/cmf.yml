@@ -16,3 +16,8 @@ cmf_routing:
         generic_controller: cmf_content.controller:indexAction
         persistence:
             phpcr: ~
+
+doctrine_cache:
+    providers:
+        phpcr_meta: %sylius.cache%
+        phpcr_nodes: %sylius.cache%
