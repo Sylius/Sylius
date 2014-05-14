@@ -68,9 +68,6 @@
         "phpspec/phpspec":                   "~2.0",
         "phpunit/phpunit":                   "~3.7"
     },
-    "provide": {
-        "phpcr/phpcr-implementation": "2.1.0"
-    },
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
