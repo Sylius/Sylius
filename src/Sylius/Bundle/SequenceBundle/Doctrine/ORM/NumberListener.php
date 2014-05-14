@@ -14,7 +14,6 @@ namespace Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
-use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 use Sylius\Component\Sequence\SyliusSequenceEvents;
@@ -101,16 +100,7 @@ class NumberListener
             if ($this->isEntityEnabled($entity)) {
                 $event = new GenericEvent($entity);
 
-                try {
-                    $generator = $this->registry->get($entity);
-                } catch (NonExistingServiceException $e) {
-                    $this->eventDispatcher->dispatch(
-                        sprintf(SyliusSequenceEvents::GENERATOR_NOT_FOUND, $entity->getSequenceType()),
-                        $event
-                    );
-
-                    continue;
-                }
+                $generator = $this->registry->get($entity);
 
                 $sequence = $em
                     ->getRepository($this->sequenceClass)

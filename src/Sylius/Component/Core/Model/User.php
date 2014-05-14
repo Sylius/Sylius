@@ -296,6 +296,7 @@ class User extends BaseUser implements UserInterface
 
         $filtered = $this->oauthAccounts->filter(function ($oauth) use ($provider) {
             /** @var $oauth UserOAuthInterface */
+
             return $provider === $oauth->getProvider();
         });
 

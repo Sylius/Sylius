@@ -34,11 +34,11 @@ class ProcessController
      * @var ProcessContextInterface
      */
     protected $processContext;
-    
+
     public function __construct(CoordinatorInterface $processCoordinator, ProcessContextInterface $processContext)
     {
-    	$this->processCoordinator = $processCoordinator;
-    	$this->processContext = $processContext;
+        $this->processCoordinator = $processCoordinator;
+        $this->processContext = $processContext;
     }
 
     /**
