@@ -10,7 +10,6 @@ default:
 
     suites:
         account:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -20,10 +19,9 @@ default:
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
             filters:
-                tags: "@account && ~@javascript,~@invoice"
+                tags: "@account && ~@javascript"
 
         addressing:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -34,7 +32,6 @@ default:
                 tags: "@addressing && ~@javascript"
 
         cart:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -45,7 +42,6 @@ default:
                 tags: "@cart && ~@javascript"
 
         checkout:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -59,7 +55,6 @@ default:
                 tags: "@checkout && ~@javascript"
 
         currencies:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -72,7 +67,6 @@ default:
                 tags: "@currencies && ~@javascript"
 
         dashboard:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -83,7 +77,6 @@ default:
                 tags: "@dashboard && ~@javascript"
 
         homepage:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -92,7 +85,6 @@ default:
                 tags: "@homepage && ~@javascript"
 
         inventory:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -103,7 +95,6 @@ default:
                 tags: "@inventory && ~@javascript"
 
         localization:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -113,7 +104,6 @@ default:
                 tags: "@localization && ~@javascript"
 
         oauth:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\OAuthContext
@@ -122,7 +112,6 @@ default:
                 tags: @oauth
 
         orders:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -135,7 +124,6 @@ default:
                 tags: "@orders && ~@javascript"
 
         payments:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -146,7 +134,6 @@ default:
                 tags: "@payments && ~@javascript"
 
         pricing:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -160,7 +147,6 @@ default:
                 tags: "@pricing && ~@javascript"
 
         products:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -174,7 +160,6 @@ default:
                 tags: "@products && ~@javascript"
 
         promotions:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -189,7 +174,6 @@ default:
                 tags: "@promotions && ~@javascript"
 
         settings:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -198,7 +182,6 @@ default:
                 tags: "@settings && ~@javascript"
 
         shipping:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -212,7 +195,6 @@ default:
                 tags: "@shipping && ~@javascript"
 
         taxation:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -224,7 +206,6 @@ default:
                 tags: "@taxation && ~@javascript"
 
         taxonomies:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
@@ -235,7 +216,6 @@ default:
                 tags: "@taxonomies && ~@javascript"
 
         users:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -246,7 +226,6 @@ default:
                 tags: "@users && ~@javascript"
 
         javascript:
-            paths:    [ %paths.base%/features ]
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
@@ -255,6 +234,7 @@ default:
                 - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
