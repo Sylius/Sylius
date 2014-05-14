@@ -13,7 +13,6 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\Mink\Exception\ExpectationException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
@@ -486,12 +485,7 @@ class WebContext extends DefaultContext
      */
     public function iShouldSeeAElementNear($element, $value)
     {
-        $tr = $this->getSession()->getPage()->find('css', sprintf('table tbody tr:contains("%s")', $value));
-
-        if (null === $tr) {
-            throw new ElementNotFoundException($this->getSession(), 'row', $value);
-        }
-
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
         $this->assertSession()->elementExists('css', $element, $tr);
     }
 
@@ -501,11 +495,7 @@ class WebContext extends DefaultContext
      */
     public function iClickNear($button, $value)
     {
-        $tr = $this->getSession()->getPage()->find('css', sprintf('table tbody tr:contains("%s")', $value));
-
-        if (null === $tr) {
-            throw new ElementNotFoundException($this->getSession(), 'row', $value);
-        }
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
 
         $locator = sprintf('button:contains("%s")', $button);
 
@@ -740,12 +730,7 @@ class WebContext extends DefaultContext
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
-        $tr = $this->getSession()->getPage()->find('css', sprintf('table tbody tr:contains("%s")', $item));
-
-        if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
-        }
-
+        $tr   = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
         $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
         $column = null;

@@ -58,10 +58,10 @@
         "yohang/finite":                        "~1.1@dev"
     },
     "require-dev": {
-        "behat/behat":                       "3.0.*@dev",
-        "behat/symfony2-extension":          "2.0.*@dev",
-        "behat/mink-extension":              "2.0.*@dev",
-        "behat/mink-goutte-driver":          "@dev",
+        "behat/behat":                       "~3.0",
+        "behat/symfony2-extension":          "~2.0@dev",
+        "behat/mink-extension":              "~2.0@dev",
+        "behat/mink-browserkit-driver":      "~1.2@dev",
         "behat/mink-selenium2-driver":       "@dev",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "fzaninotto/faker":                  "1.2.*",

@@ -47,25 +47,12 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     );
 
     /**
-     * Parameters.
-     *
-     * @var array
-     */
-    protected $parameters;
-
-    /**
      * @var KernelInterface
      */
     protected $kernel;
 
-    /**
-     * Initializes context with parameters from behat.yml.
-     *
-     * @param array $parameters
-     */
-    public function __construct(array $parameters = array())
+    public function __construct()
     {
-        $this->parameters = $parameters;
         $this->faker = FakerFactory::create();
     }
 
@@ -219,7 +206,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function generatePageUrl($page, array $parameters = array())
     {
-        $route = str_replace(' ', '_', trim($page));
+        $route  = str_replace(' ', '_', trim($page));
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 
         if (null === $routes->get($route)) {
@@ -233,13 +220,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
         $route = str_replace(' ', '_', $route);
 
-        $path = $this->generateUrl($route, $parameters);
-
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
-            return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
-        }
-
-        return $path;
+        return $this->locatePath($this->generateUrl($route, $parameters));
     }
 
     /**
