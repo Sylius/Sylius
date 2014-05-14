@@ -17,16 +17,16 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.payum.paypal.action.capture_order_using_express_checkout.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\CaptureOrderUsingExpressCheckoutAction</parameter>
+        <parameter key="sylius.payum.paypal.action.capture_payment_using_express_checkout.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\CapturePaymentUsingExpressCheckoutAction</parameter>
 
-        <parameter key="sylius.payum.stripe.action.capture_order_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Stripe\Action\CaptureOrderUsingCreditCardAction</parameter>
+        <parameter key="sylius.payum.stripe.action.capture_payment_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Stripe\Action\CapturePaymentUsingCreditCardAction</parameter>
         <parameter key="sylius.payum.paypal.action.notify_order.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\NotifyOrderAction</parameter>
 
-        <parameter key="sylius.payum.be2bill.action.capture_order_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\CaptureOrderUsingCreditCardAction</parameter>
-        <parameter key="sylius.payum.be2bill.action.capture_order_using_be2bill_form.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\CaptureOrderUsingBe2billFormAction</parameter>
+        <parameter key="sylius.payum.be2bill.action.capture_payment_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\CapturePaymentUsingCreditCardAction</parameter>
+        <parameter key="sylius.payum.be2bill.action.capture_payment_using_be2bill_form.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\CapturePaymentUsingBe2billFormAction</parameter>
         <parameter key="sylius.payum.be2bill.action.notify.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\NotifyAction</parameter>
 
-        <parameter key="sylius.payum.dummy.action.capture_order.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CaptureOrderAction</parameter>
+        <parameter key="sylius.payum.dummy.action.capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CapturePaymentAction</parameter>
         <parameter key="sylius.payum.dummy.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\PaymentStatusAction</parameter>
 
         <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
@@ -35,7 +35,8 @@
     </parameters>
 
     <services>
-        <service id="sylius.payum.paypal.action.capture_order_using_express_checkout" class="%sylius.payum.paypal.action.capture_order_using_express_checkout.class%">
+        <!-- PayPal -->
+        <service id="sylius.payum.paypal.action.capture_payment_using_express_checkout" class="%sylius.payum.paypal.action.capture_payment_using_express_checkout.class%">
             <argument type="service" id="payum.security.token_factory" />
         </service>
         <service id="sylius.payum.paypal.action.notify_order" class="%sylius.payum.paypal.action.notify_order.class%">
@@ -43,15 +44,17 @@
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="finite.factory" />
         </service>
-        <service id="sylius.payum.stripe.action.capture_order_using_credit_card" class="%sylius.payum.stripe.action.capture_order_using_credit_card.class%" />
+
+        <!-- Stripe -->
+        <service id="sylius.payum.stripe.action.capture_payment_using_credit_card" class="%sylius.payum.stripe.action.capture_payment_using_credit_card.class%" />
 
         <!-- be2bill -->
-        <service id="sylius.payum.be2bill.action.capture_order_using_credit_card" class="%sylius.payum.be2bill.action.capture_order_using_credit_card.class%">
+        <service id="sylius.payum.be2bill.action.capture_payment_using_credit_card" class="%sylius.payum.be2bill.action.capture_payment_using_credit_card.class%">
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
         </service>
-        <service id="sylius.payum.be2bill.action.capture_order_using_be2bill_form" class="%sylius.payum.be2bill.action.capture_order_using_be2bill_form.class%">
+        <service id="sylius.payum.be2bill.action.capture_payment_using_be2bill_form" class="%sylius.payum.be2bill.action.capture_payment_using_be2bill_form.class%">
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
@@ -65,6 +68,7 @@
             <argument>id</argument>
         </service>
 
+        <!-- Payum -->
         <service id="sylius.payum.action.payment_status" class="%sylius.payum.action.payment_status.class%" />
         <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%" />
         <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" >
@@ -75,8 +79,8 @@
             </call>
         </service>
 
-        <!-- dummy -->
-        <service id="sylius.payum.dummy.action.capture_order" class="%sylius.payum.dummy.action.capture_order.class%" />
+        <!-- Dummy -->
+        <service id="sylius.payum.dummy.action.capture_payment" class="%sylius.payum.dummy.action.capture_payment.class%" />
         <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%" />
     </services>
 

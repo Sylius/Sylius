@@ -18,7 +18,7 @@ use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
+class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 {
     /**
      * {@inheritdoc}

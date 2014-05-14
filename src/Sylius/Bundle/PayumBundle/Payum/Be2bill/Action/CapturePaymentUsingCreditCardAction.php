@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
+class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 {
     protected $httpRequest;
 

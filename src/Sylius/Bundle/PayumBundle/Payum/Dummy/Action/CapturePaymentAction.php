@@ -16,7 +16,7 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\CaptureRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-class CaptureOrderAction extends PaymentAwareAction
+class CapturePaymentAction extends PaymentAwareAction
 {
     /**
      * {@inheritDoc}

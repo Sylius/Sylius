@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
+class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
 {
     /**
      * @var Request

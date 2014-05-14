@@ -15,7 +15,7 @@ payum:
                         signature: %paypal.express_checkout.signature%
                         sandbox:   %paypal.express_checkout.sandbox%
                 actions:
-                    - sylius.payum.paypal.action.capture_order_using_express_checkout
+                    - sylius.payum.paypal.action.capture_payment_using_express_checkout
                     - sylius.payum.paypal.action.notify_order
                     - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
@@ -35,7 +35,7 @@ payum:
                     apiKey:   %stripe.secret_key%
                     testMode: %stripe.test_mode%
                 actions:
-                    - sylius.payum.stripe.action.capture_order_using_credit_card
+                    - sylius.payum.stripe.action.capture_payment_using_credit_card
                     - sylius.payum.action.obtain_credit_card
                     - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
@@ -56,7 +56,7 @@ payum:
                         password:   %be2bill.password%
                         sandbox:    %be2bill.sandbox%
                 actions:
-                    - sylius.payum.be2bill.action.capture_order_using_credit_card
+                    - sylius.payum.be2bill.action.capture_payment_using_credit_card
                     - sylius.payum.action.obtain_credit_card
                     - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
@@ -77,7 +77,7 @@ payum:
                         password:   %be2bill.password%
                         sandbox:    %be2bill.sandbox%
                 actions:
-                    - sylius.payum.be2bill.action.capture_order_using_be2bill_form
+                    - sylius.payum.be2bill.action.capture_payment_using_be2bill_form
                     - sylius.payum.be2bill.action.notify
                     - sylius.payum.action.payment_status
                     - sylius.payum.action.execute_same_request_with_payment_details
@@ -93,7 +93,7 @@ payum:
         dummy:
             custom:
                 actions:
-                    - sylius.payum.dummy.action.capture_order
+                    - sylius.payum.dummy.action.capture_payment
                     - sylius.payum.dummy.action.payment_status
 
             storages:
