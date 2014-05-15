@@ -29,6 +29,7 @@ class PaymentController extends ResourceController
         $stateMachine = $this->get('finite.factory')->get($payment, PaymentTransitions::GRAPH);
         if (!$stateMachine->can($transition)) {
             $this->flashHelper->setFlash('error', 'sylius.payment.transition_fail');
+
             return $this->redirectHandler->redirectToReferer();
         }
 

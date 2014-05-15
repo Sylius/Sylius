@@ -11,11 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BaseController;
-use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\PaymentTransitions;
-use Sylius\Component\Payment\SyliusPaymentEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BasePaymentController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class PaymentController extends BaseController
+class PaymentController extends BasePaymentController
 {
     /**
      * @param Request $request

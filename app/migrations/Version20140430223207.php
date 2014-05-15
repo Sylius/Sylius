@@ -38,7 +38,7 @@ class Version20140430223207 extends AbstractMigration
     public function down(Schema $schema)
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql", "Migration can only be executed safely on 'mysql'.");
-        
+
         $this->addSql("ALTER TABLE sylius_order ADD payment_id INT DEFAULT NULL");
         $this->addSql("ALTER TABLE sylius_order ADD CONSTRAINT FK_6196A1F94C3A3BB FOREIGN KEY (payment_id) REFERENCES sylius_payment (id)");
         $this->addSql("CREATE INDEX IDX_6196A1F94C3A3BB ON sylius_order (payment_id)");

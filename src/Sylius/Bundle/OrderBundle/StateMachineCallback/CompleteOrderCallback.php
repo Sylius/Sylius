@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\OrderBundle\StateMachineCallback;
 
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Set an Order as completed

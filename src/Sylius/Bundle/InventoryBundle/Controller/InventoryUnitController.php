@@ -24,6 +24,7 @@ class InventoryUnitController extends ResourceController
         $stateMachine = $this->get('finite.factory')->get($unit, InventoryUnitTransitions::GRAPH);
         if (!$stateMachine->can($transition)) {
             $this->flashHelper->setFlash('error', 'sylius.inventory_unit.transition_fail');
+
             return $this->redirectHandler->redirectToReferer();
         }
 

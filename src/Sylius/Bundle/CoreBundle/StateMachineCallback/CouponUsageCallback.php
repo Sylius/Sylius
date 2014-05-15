@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Increments coupon usage when a coupon is used by an order
