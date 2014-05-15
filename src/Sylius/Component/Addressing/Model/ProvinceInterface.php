@@ -30,6 +30,7 @@ interface ProvinceInterface
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name);
@@ -41,6 +42,7 @@ interface ProvinceInterface
 
     /**
      * @param string $isoName
+     *
      * @return $this
      */
     public function setIsoName($isoName);
@@ -52,6 +54,7 @@ interface ProvinceInterface
 
     /**
      * @param CountryInterface $country
+     *
      * @return $this
      */
     public function setCountry(CountryInterface $country = null);

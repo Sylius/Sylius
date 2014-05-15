@@ -15,7 +15,6 @@ use Finite\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Order\InventoryUnitTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

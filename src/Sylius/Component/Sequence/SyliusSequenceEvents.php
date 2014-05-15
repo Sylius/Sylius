@@ -15,5 +15,4 @@ class SyliusSequenceEvents
 {
     const PRE_GENERATE = 'sylius.sequence.%s.pre_generate';
     const POST_GENERATE = 'sylius.sequence.%s.post_generate';
-    const GENERATOR_NOT_FOUND = 'sylius.sequence.%s.generator_not_found';
 }
