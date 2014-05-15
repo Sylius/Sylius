@@ -17,13 +17,13 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
 use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
+class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 {
     protected $httpRequest;
 
@@ -46,9 +46,9 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             throw new LogicException('The action can be run only when http request is set.');
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
+        $order = $payment->getOrder();
 
         $details = $payment->getDetails();
 
@@ -61,7 +61,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             $details['CLIENTIP'] = $this->httpRequest->getClientIp();
             $details['CLIENTIDENT'] = $order->getUser()->getId();
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
-            $details['ORDERID'] = $order->getId();
+            $details['ORDERID'] = $order->getNumber().'-'.$payment->getId();
             $details['CARDCODE'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getNumber());
             $details['CARDCVV'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getSecurityCode());
             $details['CARDFULLNAME'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getCardholderName());
@@ -73,7 +73,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         }
 
         try {
-            $request->setModel($payment);
+            $request->setModel($details);
             $this->payment->execute($request);
 
             $request->setModel($order);
@@ -91,7 +91,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

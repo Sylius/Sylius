@@ -11,17 +11,18 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
+use Doctrine\Common\Collections\Collection;
 use Payum\Core\PaymentInterface as PayumPaymentInterface;
 use Payum\Core\Request\StatusRequestInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
-class OrderStatusActionSpec extends ObjectBehavior
+class PaymentStatusActionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Action\OrderStatusAction');
+        $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction');
     }
 
     function it_extends_payum_payment_aware_action()
@@ -30,11 +31,11 @@ class OrderStatusActionSpec extends ObjectBehavior
     }
 
     function it_should_support_status_request_with_order_model(
-        OrderInterface $order,
+        PaymentInterface $payment,
         StatusRequestInterface $statusRequest
     )
     {
-        $statusRequest->getModel()->willReturn($order);
+        $statusRequest->getModel()->willReturn($payment);
 
         $this->supports($statusRequest)->shouldReturn(true);
     }
@@ -64,22 +65,19 @@ class OrderStatusActionSpec extends ObjectBehavior
     }
 
     function it_should_mark_new_if_order_have_empty_payment_details(
-        OrderInterface $order,
         PaymentInterface $payment,
         StatusRequestInterface $statusRequest
     )
     {
-        $statusRequest->getModel()->willReturn($order);
-        $statusRequest->markNew()->shouldBeCalled();
-
-        $order->getPayment()->willReturn($payment);
         $payment->getDetails()->willReturn(array());
+
+        $statusRequest->getModel()->willReturn($payment);
+        $statusRequest->markNew()->shouldBeCalled();
 
         $this->execute($statusRequest);
     }
 
     function it_should_do_status_subrequest_with_payment_details_as_model(
-        OrderInterface $order,
         PaymentInterface $payment,
         StatusRequestInterface $statusRequest,
         PayumPaymentInterface $payment
@@ -87,13 +85,12 @@ class OrderStatusActionSpec extends ObjectBehavior
     {
         $details = array('foo' => 'foo', 'bar' => 'baz');
 
-        $statusRequest->getModel()->willReturn($order);
+        $statusRequest->getModel()->willReturn($payment);
         $statusRequest->setModel($details)->shouldBeCalled();
-        $statusRequest->setModel($order)->shouldBeCalled();
+        $statusRequest->setModel($payment)->shouldBeCalled();
 
         $payment->execute($statusRequest)->shouldBeCalled();
 
-        $order->getPayment()->willReturn($payment);
         $payment->getDetails()->willReturn($details);
 
         $this->setPayment($payment);

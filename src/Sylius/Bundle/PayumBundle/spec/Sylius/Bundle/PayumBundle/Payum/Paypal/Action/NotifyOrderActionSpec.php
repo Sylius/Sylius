@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Finite\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
@@ -19,8 +20,8 @@ use Payum\Core\Request\SecuredNotifyRequest;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface as PaymentModelInterface;
 use Sylius\Component\Payment\Model\Payment;
-use Sylius\Component\Payment\Model\PaymentInterface as PaymentModelInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
@@ -31,8 +32,8 @@ class NotifyOrderActionSpec extends ObjectBehavior
     function let(
         EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
-        PaymentInterface $payment,
-        FactoryInterface $factory
+        FactoryInterface $factory,
+        PaymentInterface $payment
     ) {
         $this->beConstructedWith($eventDispatcher, $objectManager, $factory);
         $this->setPayment($payment);
@@ -50,9 +51,9 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
     function it_should_supports_secured_notify_request_with_order_model(
         SecuredNotifyRequest $request,
-        OrderInterface $order
+        PaymentModelInterface $payment
     ) {
-        $request->getModel()->willReturn($order);
+        $request->getModel()->willReturn($payment);
 
         $this->supports($request)->shouldReturn(true);
     }
@@ -89,10 +90,12 @@ class NotifyOrderActionSpec extends ObjectBehavior
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
-        StateMachineInterface $sm
+        StateMachineInterface $sm,
+        Collection $payments
     ) {
-        $request->getModel()->willReturn($order);
-        $order->getPayment()->willReturn($paymentModel);
+        $request->getModel()->willReturn($paymentModel);
+        $order->getPayments()->willReturn($payments);
+        $payments->last()->willReturn($payment);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
 
@@ -135,10 +138,12 @@ class NotifyOrderActionSpec extends ObjectBehavior
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
-        StateMachineInterface $sm
+        StateMachineInterface $sm,
+        Collection $payments
     ) {
-        $request->getModel()->willReturn($order);
-        $order->getPayment()->willReturn($paymentModel);
+        $request->getModel()->willReturn($paymentModel);
+        $order->getPayments()->willReturn($payments);
+        $payments->last()->willReturn($payment);
 
         $paymentModel->getState()->willReturn(Payment::STATE_PENDING);
 

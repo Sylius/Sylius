@@ -13,11 +13,12 @@ namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
-class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
+class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
 {
     /**
      * @var TokenFactory
@@ -42,19 +43,19 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
-
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
         $details = $payment->getDetails();
+        $order = $payment->getOrder();
+
         if (empty($details)) {
             $details['RETURNURL'] = $request->getToken()->getTargetUrl();
             $details['CANCELURL'] = $request->getToken()->getTargetUrl();
             $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
                 $request->getToken()->getPaymentName(),
-                $order
+                $payment
             )->getTargetUrl();
-            $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber();
+            $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber().'-'.$payment->getId();
             $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
             $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
             $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
@@ -93,10 +94,15 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
         }
 
         try {
-            $request->setModel($payment);
+            $details = ArrayObject::ensureArrayObject($payment->getDetails());
+
+            $request->setModel($details);
             $this->payment->execute($request);
+
+            $payment->setDetails((array) $details);
             $request->setModel($order);
         } catch (\Exception $e) {
+            $payment->setDetails((array) $details);
             $request->setModel($order);
 
             throw $e;
@@ -110,7 +116,7 @@ class CaptureOrderUsingExpressCheckoutAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

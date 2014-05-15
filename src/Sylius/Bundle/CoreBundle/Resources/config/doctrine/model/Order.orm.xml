@@ -20,16 +20,15 @@
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one field="payment" target-entity="Sylius\Component\Payment\Model\PaymentInterface">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-            <join-column name="payment_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
-
         <many-to-one target-entity="Sylius\Component\Promotion\Model\CouponInterface" field="promotionCoupon">
             <join-column name="coupon_id" on-delete="SET NULL" />
         </many-to-one>
+
+        <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
         <one-to-many field="shipments" target-entity="Sylius\Component\Shipping\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
             <cascade>

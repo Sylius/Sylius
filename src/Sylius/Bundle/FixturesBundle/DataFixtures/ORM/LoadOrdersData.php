@@ -94,12 +94,13 @@ class LoadOrdersData extends DataFixture
     {
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
+        $payment->setOrder($order);
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
         $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState($this->getPaymentState());
 
-        $order->setPayment($payment);
+        $order->addPayment($payment);
 
         $this->get('event_dispatcher')->dispatch(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, new GenericEvent($order));
     }

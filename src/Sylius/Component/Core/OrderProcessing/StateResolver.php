@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
  * Order state resolver.
@@ -27,7 +28,36 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        $order->setPaymentState($order->getPayment()->getState());
+        $paymentState = PaymentInterface::STATE_NEW;
+
+        if ($order->hasPayments()) {
+            $payments = $order->getPayments();
+            $completedPaymentTotal = 0;
+
+            foreach ($payments as $payment) {
+                if ($payment->getState() === PaymentInterface::STATE_COMPLETED) {
+                    $completedPaymentTotal += $payment->getAmount();
+                }
+            }
+
+            if ($completedPaymentTotal === $order->getTotal()) {
+                // Payment is completed if we have received full amount.
+                $paymentState = PaymentInterface::STATE_COMPLETED;
+            } else {
+                // Payment is processing if one of the payment is.
+                if ($payments->exists(function($key, $payment) {
+                    return in_array($payment->getState(), array(
+                        PaymentInterface::STATE_COMPLETED,
+                        PaymentInterface::STATE_PROCESSING,
+                        PaymentInterface::STATE_PENDING,
+                    ));
+                })) {
+                    $paymentState = PaymentInterface::STATE_PROCESSING;
+                }
+            }
+        }
+
+        $order->setPaymentState($paymentState);
     }
 
     /**

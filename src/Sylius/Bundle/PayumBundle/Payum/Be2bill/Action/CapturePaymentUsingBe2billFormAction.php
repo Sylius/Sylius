@@ -15,13 +15,13 @@ use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
+class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
 {
     /**
      * @var Request
@@ -52,9 +52,9 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
             throw new LogicException('The action can be run only when http request is set.');
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
+        $order = $payment->getOrder();
 
         $details = $payment->getDetails();
 
@@ -66,13 +66,13 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
             $details['CLIENTIP'] = $this->httpRequest->getClientIp();
             $details['CLIENTIDENT'] = $order->getUser()->getId();
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
-            $details['ORDERID'] = $order->getId();
+            $details['ORDERID'] = $order->getNumber().'-'.$payment->getId();
 
             $payment->setDetails($details);
         }
 
         try {
-            $request->setModel($payment);
+            $request->setModel($details);
             $this->httpRequest->getSession()->set('payum_token', $request->getToken()->getHash());
 
             $this->payment->execute($request);
@@ -92,7 +92,7 @@ class CaptureOrderUsingBe2billFormAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

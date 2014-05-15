@@ -16,9 +16,9 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
 use Payum\Core\Security\SensitiveValue;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
-class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
+class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 {
     /**
      * {@inheritdoc}
@@ -30,20 +30,22 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
+        $order = $payment->getOrder();
 
         $details = $payment->getDetails();
         if (empty($details)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
+            $creditCard = $obtainCreditCardRequest->getCreditCard();
+
             $details = array(
                 'card' => new SensitiveValue(array(
-                    'number' => $obtainCreditCardRequest->getCreditCard()->getNumber(),
-                    'expiryMonth' => $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(),
-                    'expiryYear' => $obtainCreditCardRequest->getCreditCard()->getExpiryYear(),
-                    'cvv' => $obtainCreditCardRequest->getCreditCard()->getSecurityCode()
+                    'number'      => $creditCard->getNumber(),
+                    'expiryMonth' => $creditCard->getExpiryMonth(),
+                    'expiryYear'  => $creditCard->getExpiryYear(),
+                    'cvv'         => $creditCard->getSecurityCode()
                 )),
                 'amount' => round($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
@@ -53,7 +55,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
         }
 
         try {
-            $request->setModel($payment);
+            $request->setModel($details);
             $this->payment->execute($request);
             $request->setModel($order);
         } catch (\Exception $e) {
@@ -70,7 +72,7 @@ class CaptureOrderUsingCreditCardAction extends PaymentAwareAction
     {
         return
             $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

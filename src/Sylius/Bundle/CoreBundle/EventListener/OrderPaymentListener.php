@@ -37,11 +37,6 @@ class OrderPaymentListener
     protected $paymentProcessor;
 
     /**
-     * @var EntityRepository
-     */
-    protected $orderRepository;
-
-    /**
      * @var EventDispatcherInterface
      */
     protected $dispatcher;
@@ -55,18 +50,15 @@ class OrderPaymentListener
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
-     * @param EntityRepository          $orderRepository
      * @param EventDispatcherInterface  $dispatcher
      * @param FactoryInterface          $factory
      */
     public function __construct(
         PaymentProcessorInterface $paymentProcessor,
-        EntityRepository $orderRepository,
         EventDispatcherInterface $dispatcher,
         FactoryInterface $factory
     ) {
         $this->paymentProcessor = $paymentProcessor;
-        $this->orderRepository  = $orderRepository;
         $this->dispatcher       = $dispatcher;
         $this->factory          = $factory;
     }
@@ -93,12 +85,13 @@ class OrderPaymentListener
     public function updateOrderPayment(GenericEvent $event)
     {
         $order = $this->getOrder($event);
-        $payment = $order->getPayment();
 
-        if (null === $payment) {
-            throw new \InvalidArgumentException('Order\'s payment cannot be null.');
+        if (!$order->hasPayments()) {
+            throw new \InvalidArgumentException('Order payments cannot be empty.');
         }
 
+        /** @var $payment PaymentInterface */
+        $payment = $order->getPayments()->last();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
     }
@@ -112,9 +105,11 @@ class OrderPaymentListener
      */
     public function voidOrderPayment(GenericEvent $event)
     {
-        $payment = $this->getOrder($event)->getPayment();
+        $payments = $this->getOrder($event)->getPayments();
 
-        $this->factory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_VOID);
+        foreach ($payments as $payment) {
+            $this->factory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_VOID);
+        }
     }
 
     public function updateOrderOnPayment(GenericEvent $event)
@@ -128,7 +123,7 @@ class OrderPaymentListener
             );
         }
 
-        $order = $this->orderRepository->findOneBy(array('payment' => $payment));
+        $order = $payment->getOrder();
 
         if (null === $order) {
             throw new \RuntimeException(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));

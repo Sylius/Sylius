@@ -18,7 +18,7 @@ use Payum\Core\Request\SecuredNotifyRequest;
 use Payum\Core\Request\SyncRequest;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -58,9 +58,8 @@ class NotifyOrderAction extends AbstractPaymentStateAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
         $previousState = $payment->getState();
 
         $this->payment->execute(new SyncRequest($payment));
@@ -76,14 +75,14 @@ class NotifyOrderAction extends AbstractPaymentStateAwareAction
         if ($previousState !== $payment->getState()) {
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+                new GenericEvent($payment, array('previous_state' => $previousState))
             );
 
             $this->objectManager->flush();
 
             $this->eventDispatcher->dispatch(
                 SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
+                new GenericEvent($payment, array('previous_state' => $previousState))
             );
         }
     }
@@ -95,7 +94,7 @@ class NotifyOrderAction extends AbstractPaymentStateAwareAction
     {
         return
             $request instanceof SecuredNotifyRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

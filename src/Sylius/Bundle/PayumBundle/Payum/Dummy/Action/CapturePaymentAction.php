@@ -14,9 +14,9 @@ namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\CaptureRequest;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
-class CaptureOrderAction extends PaymentAwareAction
+class CapturePaymentAction extends PaymentAwareAction
 {
     /**
      * {@inheritDoc}
@@ -28,9 +28,10 @@ class CaptureOrderAction extends PaymentAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var OrderInterface $order */
-        $order = $request->getModel();
-        $payment = $order->getPayment();
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
+        $order = $payment->getOrder();
+
         $payment->setAmount($order->getTotal());
 
         $paymentDetails = $payment->getDetails();
@@ -48,7 +49,7 @@ class CaptureOrderAction extends PaymentAwareAction
     {
         return
             $request instanceof CaptureRequest &&
-            $request->getModel() instanceof OrderInterface
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

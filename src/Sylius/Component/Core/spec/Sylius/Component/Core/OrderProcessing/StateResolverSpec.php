@@ -11,9 +11,12 @@
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
+use Sylius\Component\Core\Model\Payment;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
 /**
@@ -85,5 +88,102 @@ class StateResolverSpec extends ObjectBehavior
 
         $order->setShippingState(OrderShippingStates::RETURNED)->shouldBeCalled();
         $this->resolveShippingState($order);
+    }
+
+    function it_marks_order_as_completed_if_fully_paid(
+        OrderInterface $order
+    )
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(10000);
+        $payment1->setState(PaymentInterface::STATE_COMPLETED);
+        $payments = new ArrayCollection(array($payment1));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+
+        $order->getTotal()->willReturn(10000);
+        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+        $this->resolvePaymentState($order);
+    }
+
+    function it_marks_order_as_completed_if_fully_paid_multiple_payments(
+        OrderInterface $order
+    )
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(6000);
+        $payment1->setState(PaymentInterface::STATE_COMPLETED);
+        $payment2 = new Payment();
+        $payment2->setAmount(4000);
+        $payment2->setState(PaymentInterface::STATE_COMPLETED);
+        $payments = new ArrayCollection(array($payment1, $payment2));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+
+        $order->getTotal()->willReturn(10000);
+        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+        $this->resolvePaymentState($order);
+    }
+
+    function it_marks_order_as_processing_if_partially_paid(
+        OrderInterface $order
+    )
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(6000);
+        $payment1->setState(PaymentInterface::STATE_COMPLETED);
+        $payment2 = new Payment();
+        $payment2->setAmount(4000);
+        $payment2->setState(PaymentInterface::STATE_NEW);
+        $payments = new ArrayCollection(array($payment1, $payment2));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+
+        $order->getTotal()->willReturn(10000);
+        $order->setPaymentState(PaymentInterface::STATE_PROCESSING)->shouldBeCalled();
+        $this->resolvePaymentState($order);
+    }
+
+    function it_marks_order_as_processing_if_one_of_the_payment_is_processing(
+        OrderInterface $order
+    )
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(6000);
+        $payment1->setState(PaymentInterface::STATE_PROCESSING);
+        $payment2 = new Payment();
+        $payment2->setAmount(4000);
+        $payment2->setState(PaymentInterface::STATE_NEW);
+        $payments = new ArrayCollection(array($payment1, $payment2));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+
+        $order->getTotal()->willReturn(10000);
+        $order->setPaymentState(PaymentInterface::STATE_PROCESSING)->shouldBeCalled();
+        $this->resolvePaymentState($order);
+    }
+
+    function it_marks_order_as_new_if_no_payment_is_in_process(
+        OrderInterface $order
+    )
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(6000);
+        $payment1->setState(PaymentInterface::STATE_NEW);
+        $payment2 = new Payment();
+        $payment2->setAmount(4000);
+        $payment2->setState(PaymentInterface::STATE_NEW);
+        $payments = new ArrayCollection(array($payment1, $payment2));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+
+        $order->getTotal()->willReturn(10000);
+        $order->setPaymentState(PaymentInterface::STATE_NEW)->shouldBeCalled();
+        $this->resolvePaymentState($order);
     }
 }

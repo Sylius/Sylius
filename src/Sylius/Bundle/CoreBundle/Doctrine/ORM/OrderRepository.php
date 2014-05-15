@@ -38,6 +38,7 @@ class OrderRepository extends CartRepository
      *
      * @param  UserInterface $user
      * @param  array         $sorting
+     *
      * @return array
      */
     public function findByUser(UserInterface $user, array $sorting = array())
@@ -54,6 +55,8 @@ class OrderRepository extends CartRepository
      * Get the order data for the details page.
      *
      * @param integer $id
+     *
+     * @return OrderInterface|null
      */
     public function findForDetailsPage($id)
     {
@@ -66,8 +69,8 @@ class OrderRepository extends CartRepository
             ->leftJoin('item.inventoryUnits', 'inventoryUnit')
             ->leftJoin('o.shipments', 'shipment')
             ->leftJoin('shipment.method', 'shippingMethod')
-            ->leftJoin('o.payment', 'payment')
-            ->leftJoin('payment.method', 'paymentMethod')
+            ->leftJoin('o.payments', 'payments')
+            ->leftJoin('payments.method', 'paymentMethods')
             ->leftJoin('item.variant', 'variant')
             ->leftJoin('variant.images', 'image')
             ->leftJoin('variant.object', 'product')
@@ -82,8 +85,8 @@ class OrderRepository extends CartRepository
             ->addSelect('inventoryUnit')
             ->addSelect('shipment')
             ->addSelect('shippingMethod')
-            ->addSelect('payment')
-            ->addSelect('paymentMethod')
+            ->addSelect('payments')
+            ->addSelect('paymentMethods')
             ->addSelect('variant')
             ->addSelect('image')
             ->addSelect('product')

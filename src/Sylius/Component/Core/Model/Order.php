@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
@@ -49,18 +49,18 @@ class Order extends Cart implements OrderInterface
     protected $billingAddress;
 
     /**
+     * Payments for this order.
+     *
+     * @var Collection|BasePaymentInterface[]
+     */
+    protected $payments;
+
+    /**
      * Shipments for this order.
      *
      * @var Collection|ShipmentInterface[]
      */
     protected $shipments;
-
-    /**
-     * Payment.
-     *
-     * @var PaymentInterface
-     */
-    protected $payment;
 
     /**
      * Currency ISO code.
@@ -81,7 +81,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var string
      */
-    protected $paymentState = PaymentInterface::STATE_NEW;
+    protected $paymentState = BasePaymentInterface::STATE_NEW;
 
     /**
      * Order shipping state.
@@ -105,6 +105,7 @@ class Order extends Cart implements OrderInterface
     {
         parent::__construct();
 
+        $this->payments = new ArrayCollection();
         $this->shipments = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
@@ -274,25 +275,6 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPayment()
-    {
-        return $this->payment;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPayment(PaymentInterface $payment)
-    {
-        $this->payment = $payment;
-        $this->paymentState = $payment->getState();
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPaymentState()
     {
         return $this->paymentState;
@@ -315,6 +297,7 @@ class Order extends Cart implements OrderInterface
     {
         $units = new ArrayCollection;
 
+        /** @var $item OrderItem */
         foreach ($this->getItems() as $item) {
             foreach ($item->getInventoryUnits() as $unit) {
                 $units->add($unit);
@@ -332,6 +315,61 @@ class Order extends Cart implements OrderInterface
         return $this->getInventoryUnits()->filter(function (InventoryUnitInterface $unit) use ($variant) {
             return $variant === $unit->getStockable();
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayments()
+    {
+        return !$this->payments->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(BasePaymentInterface $payment)
+    {
+        if (!$this->hasPayment($payment)) {
+            $this->payments->add($payment);
+            $payment->setOrder($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePayment(BasePaymentInterface $payment)
+    {
+        if ($this->hasPayment($payment)) {
+            $this->payments->removeElement($payment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayment(BasePaymentInterface $payment)
+    {
+        return $this->payments->contains($payment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastPayment($state = BasePaymentInterface::STATE_NEW)
+    {
+        return $this->payments->filter(function(BasePaymentInterface $payment) use ($state) {
+            return $payment->getState() === $state;
+        })->last();
     }
 
     /**
@@ -488,7 +526,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Tells is the invoice of the order can be generated.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isInvoiceAvailable()
     {

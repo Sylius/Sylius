@@ -15,16 +15,17 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
 /**
  * Sylius core Order model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PromotionSubjectInterface
+interface OrderInterface extends CartInterface, PromotionSubjectInterface, PaymentsSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
@@ -129,20 +130,6 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * Remove all shipping adjustments.
      */
     public function removeShippingAdjustments();
-
-    /**
-     * Get the payment associated with the order.
-     *
-     * @return PaymentInterface
-     */
-    public function getPayment();
-
-    /**
-     * Set payment.
-     *
-     * @param PaymentInterface $payment
-     */
-    public function setPayment(PaymentInterface $payment);
 
     /**
      * Get the payment state.
@@ -261,4 +248,13 @@ interface OrderInterface extends CartInterface, PromotionSubjectInterface
      * @return ShipmentInterface
      */
     public function getLastShipment();
+
+    /**
+     * Gets the last new payment of the order
+     *
+     * @param $state
+     *
+     * @return PaymentInterface
+     */
+    public function getLastPayment($state);
 }
