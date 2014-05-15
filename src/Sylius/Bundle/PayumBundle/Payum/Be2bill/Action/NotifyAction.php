@@ -19,8 +19,8 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\NotifyRequest;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\SyliusPaymentEvents;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,9 +37,9 @@ class NotifyAction extends AbstractPaymentStateAwareAction
     protected $api;
 
     /**
-     * @var OrderRepositoryInterface
+     * @var RepositoryInterface
      */
-    protected $orderRepository;
+    protected $paymentRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -58,7 +58,7 @@ class NotifyAction extends AbstractPaymentStateAwareAction
 
     public function __construct(
         Api $api,
-        OrderRepositoryInterface $orderRepository,
+        RepositoryInterface $paymentRepository,
         EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
         FactoryInterface $factory,
@@ -66,11 +66,11 @@ class NotifyAction extends AbstractPaymentStateAwareAction
     ) {
         parent::__construct($factory);
 
-        $this->api             = $api;
-        $this->orderRepository = $orderRepository;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->objectManager   = $objectManager;
-        $this->identifier      = $identifier;
+        $this->api               = $api;
+        $this->paymentRepository = $paymentRepository;
+        $this->eventDispatcher   = $eventDispatcher;
+        $this->objectManager     = $objectManager;
+        $this->identifier        = $identifier;
     }
 
     /**
@@ -93,13 +93,11 @@ class NotifyAction extends AbstractPaymentStateAwareAction
             throw new BadRequestHttpException('Order id cannot be guessed');
         }
 
-        $order = $this->orderRepository->findOneBy(array($this->identifier => $details['ORDERID']));
+        $payment = $this->paymentRepository->findOneBy(array($this->identifier => $details['ORDERID']));
 
-        if (null === $order) {
-            throw new BadRequestHttpException('Order cannot be retrieved.');
+        if (null === $payment) {
+            throw new BadRequestHttpException('Paymenet cannot be retrieved.');
         }
-
-        $payment = $order->getPayment();
 
         if ((int) $details['AMOUNT'] !== $payment->getAmount()) {
             throw new BadRequestHttpException('Request amount cannot be verified against payment amount.');
@@ -109,7 +107,7 @@ class NotifyAction extends AbstractPaymentStateAwareAction
         $details = array_merge($payment->getDetails(), $details);
         $payment->setDetails($details);
 
-        $status = new StatusRequest($order);
+        $status = new StatusRequest($payment);
         $this->payment->execute($status);
 
         $previousState = $payment->getState();
