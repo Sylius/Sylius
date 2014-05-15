@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\WebBundle\Behat;
+namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\MinkExtension\Context\RawMinkContext;
 

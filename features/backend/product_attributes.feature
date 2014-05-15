@@ -85,7 +85,7 @@ Feature: Product attributes
           And I should see "Attribute has been successfully created."
           And product attribute with following data should be created:
             | name | Book author |
-            | type | text        | 
+            | type | text        |
 
     Scenario Outline: Creating new attribute for type
         Given I am on the product attribute creation page
@@ -118,7 +118,7 @@ Feature: Product attributes
           And I click "Add choice"
           And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
           And I press "Create"
-          Then product attribute with following data should be created:
+         Then product attribute with following data should be created:
             | name         | Book author                      |
             | presentation | Author                           |
             | type         | choice                           |
@@ -137,7 +137,7 @@ Feature: Product attributes
           And I fill in "Choice 1" with "Jaroslaw Grzedowicz"
           And I remove attribute choice number 0
           And I press "Create"
-          Then product attribute with following data should be created:
+         Then product attribute with following data should be created:
             | name         | Book author         |
             | presentation | Author              |
             | type         | choice              |

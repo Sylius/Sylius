@@ -6,52 +6,52 @@ Feature: User account orders page
 
   Background:
     Given I am logged in user
-    And I am on my account homepage
-    And the following zones are defined:
-      | name         | type    | members                 |
-      | Scandinavia  | country | Norway, Sweden, Finland |
-      | France       | country | France                  |
-      | USA          | country | USA                     |
-    And there are following shipping categories:
-      | name    |
-      | Regular |
-      | Heavy   |
-    And the following shipping methods exist:
-      | category | zone          | name  |
-      | Regular  | Scandinavia   | DHL   |
-      | Heavy    | USA           | FedEx |
-      |          | France        | UPS   |
-    And the following products exist:
-      | name          | price | sku |
-      | Mug           | 5.99  | 456 |
-      | Sticker       | 10.00 | 213 |
-      | Book          | 22.50 | 948 |
-    And the following orders exist:
-      | user                    | shipment                 | address                                                           |
-      | sylius@example.com      | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
-      | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
-      | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
-      | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
-      | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
-    And order #000000001 has following items:
-      | product  | quantity |
-      | Mug      | 2        |
-      | Sticker  | 4        |
-      | Book     | 1        |
-    And order #000000007 has following items:
-      | product  | quantity |
-      | Mug      | 5        |
-      | Sticker  | 1        |
+      And I am on my account homepage
+      And the following zones are defined:
+        | name         | type    | members                 |
+        | Scandinavia  | country | Norway, Sweden, Finland |
+        | France       | country | France                  |
+        | USA          | country | USA                     |
+      And there are following shipping categories:
+        | name    |
+        | Regular |
+        | Heavy   |
+      And the following shipping methods exist:
+        | category | zone          | name  |
+        | Regular  | Scandinavia   | DHL   |
+        | Heavy    | USA           | FedEx |
+        |          | France        | UPS   |
+      And the following products exist:
+        | name          | price | sku |
+        | Mug           | 5.99  | 456 |
+        | Sticker       | 10.00 | 213 |
+        | Book          | 22.50 | 948 |
+      And the following orders exist:
+        | user                    | shipment                 | address                                                           |
+        | sylius@example.com      | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+        | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
+        | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
+        | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
+        | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
+        | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+        | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+        | linustorvalds@linux.com | DHL                      | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    |
+        | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+        | sylius@example.com      | UPS                      | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
+        | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
+      And order #000000001 has following items:
+        | product  | quantity |
+        | Mug      | 2        |
+        | Sticker  | 4        |
+        | Book     | 1        |
+      And order #000000007 has following items:
+        | product  | quantity |
+        | Mug      | 5        |
+        | Sticker  | 1        |
 
   Scenario: Viewing my account orders page
     Given I follow "My orders / my invoices"
-    Then I should be on my account orders page
+     Then I should be on my account orders page
 
   Scenario Outline: Viewing my orders
     Given I am on my account orders page
@@ -59,7 +59,7 @@ Feature: User account orders page
       And I should see 5 orders in the list
       And I should see "<myorder>"
       And I should not see "<order>"
-  Examples:
+    Examples:
       | myorder    | order    |
       | 000000001  | 000000002  |
       | 000000006  | 000000003  |
@@ -84,8 +84,8 @@ Feature: User account orders page
     Given I go to the order show page for <order>
      Then the response status code should be 403
 
-  Examples:
-      | order      |
+    Examples:
+      | order     |
       | 000000002 |
       | 000000003 |
       | 000000004 |
@@ -103,7 +103,7 @@ Feature: User account orders page
      Then I should not see "Tracking number" in the "#order-<order>" element
       And I should see "<state>" in the "#order-<order>" element
 
-  Examples:
+    Examples:
       | order     | state       |
       | 000000007 | Ready since |
 
@@ -117,7 +117,7 @@ Feature: User account orders page
      Then I should not see "Tracking number" in the "#information" element
       And I should see "<state>" in the "#information" element
 
-  Examples:
+    Examples:
       | order     | state       |
       | 000000007 | Ready since |
 
@@ -127,25 +127,26 @@ Feature: User account orders page
 
   Scenario: Checking that an invoice is not available for an order that has not been sent
     Given I am on my account orders page
-    Then I should not see an "#order-000000007-invoice" element
+     Then I should not see an "#order-000000007-invoice" element
 
+  @invoice
   Scenario: Generating an invoice for an order that has been sent
     Given I go to the order invoice page for 000000001
-    Then the response status code should be 200
+     Then the response status code should be 200
 
   Scenario: Trying to generate an invoice for an order that has not been sent
     Given I go to the order invoice page for 000000007
-    Then the response status code should be 404
+     Then the response status code should be 404
 
   Scenario Outline: Trying to generate an invoice of an order which is not mine
     Given I go to the order invoice page for <order>
-    Then the response status code should be 403
+     Then the response status code should be 403
 
-  Examples:
-    | order     |
-    | 000000002 |
-    | 000000003 |
-    | 000000004 |
-    | 000000005 |
-    | 000000008 |
-    | 000000011 |
+    Examples:
+      | order     |
+      | 000000002 |
+      | 000000003 |
+      | 000000004 |
+      | 000000005 |
+      | 000000008 |
+      | 000000011 |

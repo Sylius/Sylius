@@ -2,19 +2,253 @@
 # (c) Paweł Jędrzejewski
 
 default:
-    formatter:
-        name:         pretty
-        parameters:
+    formatters:
+        pretty:
             verbose:  true
             paths:    false
             snippets: false
-    context:
-        class: Sylius\Bundle\WebBundle\Behat\FeatureContext
+
+    suites:
+        account:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@account && ~@javascript"
+
+        addressing:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@addressing && ~@javascript"
+
+        cart:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@cart && ~@javascript"
+
+        checkout:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@checkout && ~@javascript"
+
+        currencies:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@currencies && ~@javascript"
+
+        dashboard:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@dashboard && ~@javascript"
+
+        homepage:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@homepage && ~@javascript"
+
+        inventory:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@inventory && ~@javascript"
+
+        localization:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@localization && ~@javascript"
+
+        oauth:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\OAuthContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: @oauth
+
+        orders:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@orders && ~@javascript"
+
+        payments:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@payments && ~@javascript"
+
+        pricing:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@pricing && ~@javascript"
+
+        products:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@products && ~@javascript"
+
+        promotions:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@promotions && ~@javascript"
+
+        settings:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@settings && ~@javascript"
+
+        shipping:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@shipping && ~@javascript"
+
+        taxation:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@taxation && ~@javascript"
+
+        taxonomies:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@taxonomies && ~@javascript"
+
+        users:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@users && ~@javascript"
+
+        javascript:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@javascript"
+
     extensions:
-        Behat\MinkExtension\Extension:
-            default_session: symfony2
-            goutte: ~
-            selenium2: ~
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+                javascript:
+                    selenium2: ~
             browser_name: firefox
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
+            show_auto:    false
+        Behat\Symfony2Extension: ~

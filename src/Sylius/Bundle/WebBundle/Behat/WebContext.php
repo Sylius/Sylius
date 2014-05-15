@@ -11,60 +11,18 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
-use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\Mink\Exception\ExpectationException;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
- * Web user context.
+ * Web context.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class WebUser extends MinkContext implements KernelAwareInterface
+class WebContext extends DefaultContext
 {
-    /**
-     * Actions.
-     *
-     * @var array
-     */
-    protected $actions = array(
-        'viewing'  => 'show',
-        'creation' => 'create',
-        'editing'  => 'update',
-        'building' => 'build',
-    );
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        // Sylius data creation context.
-        $this->useContext('data', new DataContext());
-        // Sylius OAuth context.
-        $this->useContext('oauth', new OAuthContext());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
     /**
      * @Given /^go to "([^""]*)" tab$/
      */
@@ -288,8 +246,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnTheShipmentPage($value)
     {
-        $shippingMethod = $this->getDataContext()->findOneBy('shipping_method', array('name' => $value));
-        $shipment = $this->getDataContext()->findOneBy('shipment', array('method' => $shippingMethod));
+        $shippingMethod = $this->findOneBy('shipping_method', array('name' => $value));
+        $shipment = $this->findOneBy('shipment', array('method' => $shippingMethod));
 
         $this->getSession()->visit($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
     }
@@ -302,7 +260,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     {
         $type = str_replace(' ', '_', $type);
 
-        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, array($property => $value));
 
         $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
     }
@@ -321,8 +279,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnTheShipmentPageWithMethod($value)
     {
-        $shippingMethod = $this->getDataContext()->findOneBy('shipping_method', array('name' => $value));
-        $shipment = $this->getDataContext()->findOneBy('shipment', array('method' => $shippingMethod));
+        $shippingMethod = $this->findOneBy('shipping_method', array('name' => $value));
+        $shipment = $this->findOneBy('shipment', array('method' => $shippingMethod));
 
         $this->assertSession()->addressEquals($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
         $this->assertStatusCodeEquals(200);
@@ -335,7 +293,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
     public function iShouldBeOnTheResourcePage($type, $property, $value)
     {
         $type = str_replace(' ', '_', $type);
-        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, array($property => $value));
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
@@ -358,7 +316,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $type = str_replace(' ', '_', $type);
 
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
-        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, array($property => $value));
 
         $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_%s', $type, $action), array('id' => $resource->getId())));
     }
@@ -379,10 +337,23 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $type = str_replace(' ', '_', $type);
 
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
-        $resource = $this->getDataContext()->findOneBy($type, array($property => $value));
+        $resource = $this->findOneBy($type, array($property => $value));
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
+    }
+
+    /**
+     * @Given /^I remove property choice number (\d+)$/
+     */
+    public function iRemovePropertyChoiceInput($number)
+    {
+        $this
+            ->getSession()
+            ->getPage()
+            ->find('css', sprintf('.sylius_property_choices_%d_delete', $number))
+            ->click()
+        ;
     }
 
     /**
@@ -398,7 +369,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmCreatingVariantOf($name)
     {
-        $product = $this->getDataContext()->findOneByName('product', $name);
+        $product = $this->findOneByName('product', $name);
 
         $this->getSession()->visit($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
     }
@@ -408,7 +379,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeCreatingVariantOf($name)
     {
-        $product = $this->getDataContext()->findOneByName('product', $name);
+        $product = $this->findOneByName('product', $name);
 
         $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
         $this->assertStatusCodeEquals(200);
@@ -444,7 +415,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClick($link)
     {
-        $this->getSession()->getPage()->clickLink($link);
+        $this->clickLink($link);
     }
 
     /**
@@ -460,7 +431,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iFillInCheckoutAddress($type, $country)
     {
-//        $this->iFillInAddress('sylius_checkout_addressing', $type, $country);
         $base = sprintf('sylius_checkout_addressing[%sAddress]', $type);
 
         $this->iFillInAddressFields($base, $country);
@@ -515,14 +485,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldSeeAElementNear($element, $value)
     {
-        $tr = $this->getSession()->getPage()->find('css',
-            sprintf('table tbody tr:contains("%s")', $value)
-        );
-
-        if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
-        }
-
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
         $this->assertSession()->elementExists('css', $element, $tr);
     }
 
@@ -532,13 +495,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClickNear($button, $value)
     {
-        $tr = $this->getSession()->getPage()->find('css',
-            sprintf('table tbody tr:contains("%s")', $value)
-        );
-
-        if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $value), $this->getSession());
-        }
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
 
         $locator = sprintf('button:contains("%s")', $button);
 
@@ -581,7 +538,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iLeaveFieldEmpty($field)
     {
-        $this->getSession()->getPage()->fillField($field, '');
+        $this->fillField($field, '');
     }
 
     /**
@@ -634,7 +591,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnTheProductPage($name)
     {
-        $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
+        $product = $this->findOneBy('product', array('name' => $name));
 
         $this->getSession()->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
     }
@@ -645,9 +602,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnTheProductPage($name)
     {
-        $product = $this->getDataContext()->findOneBy('product', array('name' => $name));
+        $this->iAmOnTheProductPage($name);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -657,10 +613,9 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iAmOnTheOrderPage($action, $number)
     {
-        $page = "sylius_account_order_$action";
-        $order = $this->getDataContext()->findOneBy('order', array('number' => $number));
+        $order = $this->findOneBy('order', array('number' => $number));
 
-        $this->getSession()->visit($this->generatePageUrl($page, array('number' => $order->getNumber())));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_order_'.$action, array('number' => $order->getNumber())));
     }
 
     /**
@@ -669,10 +624,8 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldBeOnTheOrderPage($action, $number)
     {
-        $page = "sylius_account_order_$action";
-        $order = $this->getDataContext()->findOneBy('order', array('number' => $number));
+        $this->iAmOnTheOrderPage($action, $number);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl($page, array('number' => $order->getNumber())));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -687,14 +640,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I am logged in as administrator$/
-     */
-    public function iAmLoggedInAsAdministrator()
-    {
-        $this->iAmLoggedInAsRole('ROLE_SYLIUS_ADMIN');
-    }
-
-    /**
      * @Given /^I log in with "([^""]*)" and "([^""]*)"$/
      */
     public function iLogInWith($email, $password)
@@ -704,15 +649,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
         $this->fillField('Email', $email);
         $this->fillField('Password', $password);
         $this->pressButton('login');
-    }
-
-    /**
-     * @Given /^I am logged in user$/
-     * @Given /^I am logged in as user "([^""]*)"$/
-     */
-    public function iAmLoggedInUser($email = 'sylius@example.com')
-    {
-        $this->iAmLoggedInAsRole('ROLE_USER', $email);
     }
 
     /**
@@ -754,9 +690,7 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iClickTheLoginWithButton($provider)
     {
-        $loginButton = $this->getSession()->getPage()->find('css',
-            sprintf('a.oauth-login-%s', strtolower($provider))
-        );
+        $loginButton = $this->getSession()->getPage()->find('css', sprintf('a.oauth-login-%s', strtolower($provider)));
         $loginButton->click();
 
         // Re-set default session
@@ -796,26 +730,20 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     public function iShouldSeeQuantityFor($property, $expectedValue, $item)
     {
+        $tr   = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $item));
         $rows = $this->getSession()->getPage()->findAll('css', 'table thead tr th');
 
+        $column = null;
         foreach ($rows as $key => $row) {
             if ($row->getText() === $property) {
-                $column = $key; break;
+                $column = $key;
+                break;
             }
         }
 
-        $tr = $this->getSession()->getPage()->find('css',
-            sprintf('table tbody tr:contains("%s")', $item)
-        );
-
-        if (null === $tr) {
-            throw new ExpectationException(sprintf('Table row with value "%s" does not exist', $expectedValue), $this->getSession());
-        }
-
         $cols = $tr->findAll('css', 'td');
-        $value = $cols[$column]->getText();
 
-        assertEquals($expectedValue, $value);
+        \PHPUnit_Framework_Assert::assertEquals($expectedValue, $cols[$column]->getText());
     }
 
     /**
@@ -846,132 +774,6 @@ class WebUser extends MinkContext implements KernelAwareInterface
      */
     protected function assertStatusCodeEquals($code)
     {
-        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
-            $this->assertSession()->statusCodeEquals($code);
-        }
-    }
-
-    /**
-     * Get data context.
-     *
-     * @return DataContext
-     */
-    protected function getDataContext()
-    {
-        return $this->getSubContext('data');
-    }
-
-    /**
-     * Get current user instance.
-     *
-     * @return null|UserInterface
-     *
-     * @throws \Exception
-     */
-    protected function getUser()
-    {
-        $token = $this->getSecurityContext()->getToken();
-
-        if (null === $token) {
-            throw new \Exception('No token found in security context.');
-        }
-
-        return $token->getUser();
-    }
-
-    /**
-     * Get security context.
-     *
-     * @return SecurityContextInterface
-     */
-    protected function getSecurityContext()
-    {
-        return $this->getContainer()->get('security.context');
-    }
-
-    /**
-     * Create user and login with given role.
-     *
-     * @param string $role
-     */
-    protected function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
-    {
-        $this->getDataContext()->thereIsUser($email, 'sylius', $role);
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
-
-        $this->fillField('Email', $email);
-        $this->fillField('Password', 'sylius');
-        $this->pressButton('login');
-    }
-
-    /**
-     * Generate page url.
-     * This method uses simple convention where page argument is prefixed
-     * with "sylius_" and used as route name passed to router generate method.
-     *
-     * @param string $page
-     * @param array  $parameters
-     *
-     * @return string
-     */
-    protected function generatePageUrl($page, array $parameters = array())
-    {
-        $route = str_replace(' ', '_', trim($page));
-        $routes = $this->getContainer()->get('router')->getRouteCollection();
-
-        if (null === $routes->get($route)) {
-            $route = 'sylius_'.$route;
-        }
-
-        if (null === $routes->get($route)) {
-            $route = str_replace('sylius_', 'sylius_backend_', $route);
-        }
-
-        $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
-        $route = str_replace(' ', '_', $route);
-
-        $path = $this->generateUrl($route, $parameters);
-
-        if ('Selenium2Driver' === strstr(get_class($this->getSession()->getDriver()), 'Selenium2Driver')) {
-            return sprintf('%s%s', $this->getMinkParameter('base_url'), $path);
-        }
-
-        return $path;
-    }
-
-    /**
-     * Generate url.
-     *
-     * @param string  $route
-     * @param array   $parameters
-     * @param Boolean $absolute
-     *
-     * @return string
-     */
-    protected function generateUrl($route, array $parameters = array(), $absolute = false)
-    {
-        return $this->getService('router')->generate($route, $parameters, $absolute);
-    }
-
-    /**
-     * Get service by id.
-     *
-     * @param string $id
-     *
-     * @return object
-     */
-    protected function getService($id)
-    {
-        return $this->getContainer()->get($id);
-    }
-
-    /**
-     * Returns Container instance.
-     *
-     * @return ContainerInterface
-     */
-    protected function getContainer()
-    {
-        return $this->kernel->getContainer();
+        $this->assertSession()->statusCodeEquals($code);
     }
 }

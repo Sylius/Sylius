@@ -6,9 +6,9 @@ Feature: Checkout usage limited promotions
 
     Background:
         Given the following promotions exist:
-          | name                             | description                                            | usage limit | used |
-          | 50% off over 200 EUR             | First 3 orders over 200 EUR have 50% discount!         | 3           | 0    |
-          | Free order with at least 3 items | First order with at least 3 items has 100% discount!   | 1           | 1    |
+          | name                             | description                                          | usage limit | used |
+          | 50% off over 200 EUR             | First 3 orders over 200 EUR have 50% discount!       | 3           | 0    |
+          | Free order with at least 3 items | First order with at least 3 items has 100% discount! | 1           | 1    |
         And promotion "50% off over 200 EUR" has following rules defined:
           | type       | configuration |
           | Item total | Amount: 200   |
