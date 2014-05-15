@@ -95,22 +95,7 @@ class OrderShippingListener
     {
         $this->shippingProcessor->updateShipmentStates(
             $this->getOrder($event)->getShipments(),
-            ShipmentTransitions::SYLIUS_HOLD,
-            ShipmentInterface::STATE_CHECKOUT
-        );
-    }
-
-    /**
-     * Update shipment states after order is confirmed.
-     *
-     * @param GenericEvent $event
-     */
-    public function updateShipmentStatesReady(GenericEvent $event)
-    {
-        $this->shippingProcessor->updateShipmentStates(
-            $this->getOrder($event)->getShipments(),
-            ShipmentTransitions::SYLIUS_PREPARE,
-            ShipmentInterface::STATE_ONHOLD
+            ShipmentTransitions::SYLIUS_HOLD
         );
     }
 

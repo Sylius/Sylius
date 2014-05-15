@@ -82,21 +82,7 @@ class PurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
 
-        if ($previousState !== $nextState) {
-            $this->dispatchEvent(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-        }
-
         $this->getDoctrine()->getManager()->flush();
-
-        if ($previousState !== $nextState) {
-            $this->dispatchEvent(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-        }
 
         $event = new PurchaseCompleteEvent($payment);
         $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);

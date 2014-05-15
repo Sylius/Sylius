@@ -63,6 +63,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
 
         $loader->load('mailer/mailer.xml');
+        $loader->load('state-machine.xml');
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
     }

@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order;
+namespace Sylius\Component\Core;
 
 class OrderPaymentTransitions
 {
+    const GRAPH = 'sylius_order_payment';
+
     const SYLIUS_CREATE   = 'create';
     const SYLIUS_PROCESS  = 'process';
     const SYLIUS_COMPLETE = 'complete';

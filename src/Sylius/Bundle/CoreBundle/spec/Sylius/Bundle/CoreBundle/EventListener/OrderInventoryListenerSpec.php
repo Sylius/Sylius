@@ -32,28 +32,6 @@ class OrderInventoryListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener');
     }
 
-    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
-    {
-        $event->getSubject()->willReturn($invalidSubject);
-
-        $this
-            ->shouldThrow('InvalidArgumentException')
-            ->duringUpdateInventoryUnits($event)
-        ;
-    }
-
-    function it_updates_inventory_units(
-            InventoryHandlerInterface $inventoryHandler,
-            GenericEvent $event,
-            OrderInterface $order
-    )
-    {
-        $event->getSubject()->willReturn($order);
-        $inventoryHandler->updateInventory($order)->shouldBeCalled();
-
-        $this->updateInventoryUnits($event);
-    }
-
     function it_creates_inventory_units(
             InventoryHandlerInterface $inventoryHandler,
             GenericEvent $event,

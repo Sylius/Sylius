@@ -9,29 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\InventoryBundle\Controller;
+namespace Sylius\Bundle\PaymentBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Inventory\InventoryUnitTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\HttpFoundation\Request;
 
-class InventoryUnitController extends ResourceController
+/**
+ * Payment controller.
+ *
+ * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ */
+class PaymentController extends ResourceController
 {
     public function updateStateAction(Request $request, $transition)
     {
-        $unit = $this->findOr404($request);
+        $payment = $this->findOr404($request);
 
-        $stateMachine = $this->get('finite.factory')->get($unit, InventoryUnitTransitions::GRAPH);
+        $stateMachine = $this->get('finite.factory')->get($payment, PaymentTransitions::GRAPH);
         if (!$stateMachine->can($transition)) {
-            $this->flashHelper->setFlash('error', 'sylius.inventory_unit.transition_fail');
+            $this->flashHelper->setFlash('error', 'sylius.payment.transition_fail');
             return $this->redirectHandler->redirectToReferer();
         }
 
         $stateMachine->apply($transition);
 
-        $this->domainManager->update($unit);
+        $this->domainManager->update($payment);
 
-        $this->flashHelper->setFlash('success', 'sylius.inventory_unit.'.$transition);
+        $this->flashHelper->setFlash('success', 'sylius.payment.'.$transition);
 
         return $this->redirectHandler->redirectToReferer();
     }

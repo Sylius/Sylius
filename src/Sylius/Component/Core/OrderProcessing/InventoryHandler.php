@@ -11,11 +11,14 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\Collection;
+use Finite\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
 use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
+use Sylius\Component\Inventory\InventoryUnitTransitions;
 
 /**
  * Order inventory handler.
@@ -40,15 +43,25 @@ class InventoryHandler implements InventoryHandlerInterface
     protected $inventoryUnitFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $factory;
+
+    /**
      * Constructor.
      *
      * @param InventoryOperatorInterface    $inventoryOperator
      * @param InventoryUnitFactoryInterface $inventoryUnitFactory
+     * @param FactoryInterface              $factory
      */
-    public function __construct(InventoryOperatorInterface $inventoryOperator, InventoryUnitFactoryInterface $inventoryUnitFactory)
-    {
-        $this->inventoryOperator = $inventoryOperator;
+    public function __construct(
+        InventoryOperatorInterface $inventoryOperator,
+        InventoryUnitFactoryInterface $inventoryUnitFactory,
+        FactoryInterface $factory
+    ) {
+        $this->inventoryOperator    = $inventoryOperator;
         $this->inventoryUnitFactory = $inventoryUnitFactory;
+        $this->factory              = $factory;
     }
 
     /**
@@ -79,14 +92,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function holdInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = 0;
-
-            foreach ($item->getInventoryUnits() as $unit) {
-                if (InventoryUnitInterface::STATE_CHECKOUT === $unit->getInventoryState()) {
-                    $unit->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
-                    $quantity++;
-                }
-            }
+            $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 
             $this->inventoryOperator->hold($item->getVariant(), $quantity);
         }
@@ -98,14 +104,7 @@ class InventoryHandler implements InventoryHandlerInterface
     public function releaseInventory(OrderInterface $order)
     {
         foreach ($order->getItems() as $item) {
-            $quantity = 0;
-
-            foreach ($item->getInventoryUnits() as $unit) {
-                if (InventoryUnitInterface::STATE_ONHOLD === $unit->getInventoryState()) {
-                    $unit->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT);
-                    $quantity++;
-                }
-            }
+            $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 
             $this->inventoryOperator->release($item->getVariant(), $quantity);
         }
@@ -121,12 +120,12 @@ class InventoryHandler implements InventoryHandlerInterface
             $quantity = 0;
 
             foreach ($units as $unit) {
-                if (in_array($unit->getInventoryState(), array(InventoryUnitInterface::STATE_ONHOLD, InventoryUnitInterface::STATE_CHECKOUT))) {
-                    if (InventoryUnitInterface::STATE_ONHOLD === $unit->getInventoryState()) {
+                $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+                if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_SELL)) {
+                    if ($stateMachine->can(InventoryUnitTransitions::SYLIUS_RELEASE)) {
                         $quantity++;
                     }
-
-                    $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+                    $stateMachine->apply(InventoryUnitTransitions::SYLIUS_SELL);
                 }
             }
 
@@ -142,5 +141,28 @@ class InventoryHandler implements InventoryHandlerInterface
         foreach ($units as $unit) {
             $item->addInventoryUnit($unit);
         }
+    }
+
+    /**
+     * Apply and count a transition on all given units
+     *
+     * @param Collection $units
+     * @param string     $transition
+     *
+     * @return int
+     */
+    protected function applyTransition(Collection $units, $transition)
+    {
+        $quantity = 0;
+
+        foreach ($units as $unit) {
+            $stateMachine = $this->factory->get($unit, InventoryUnitTransitions::GRAPH);
+            if ($stateMachine->can($transition)) {
+                $stateMachine->apply($transition);
+                $quantity++;
+            }
+        }
+
+        return $quantity;
     }
 }

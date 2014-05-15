@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order;
+namespace Sylius\Component\Core;
 
 class OrderShippingTransitions
 {
+    const GRAPH = 'sylius_order_shipping';
+
     const SYLIUS_HOLD           = 'hold';
     const SYLIUS_RELEASE        = 'release';
     const SYLIUS_BACKORDER      = 'backorder';

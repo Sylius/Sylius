@@ -82,22 +82,6 @@ class ShipmentListener
         }
     }
 
-    /**
-     * Set shipment status to checkout.
-     *
-     * @param GenericEvent $event
-     */
-    public function releaseOrderShipments(GenericEvent $event)
-    {
-        $order = $this->getOrder($event);
-
-        $this->shippingProcessor->updateShipmentStates(
-            $order->getShipments(),
-            ShipmentTransitions::SYLIUS_RELEASE,
-            ShipmentInterface::STATE_ONHOLD
-        );
-    }
-
     private function getShipment(GenericEvent $event)
     {
         $shipment = $event->getSubject();
@@ -107,16 +91,5 @@ class ShipmentListener
         }
 
         return $shipment;
-    }
-
-    private function getOrder(GenericEvent $event)
-    {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException($order, 'Sylius\Component\Core\Model\OrderInterface');
-        }
-
-        return $order;
     }
 }

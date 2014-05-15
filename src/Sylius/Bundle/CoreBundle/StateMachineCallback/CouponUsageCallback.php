@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -20,19 +20,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class CouponUsageListener
+class CouponUsageCallback
 {
-    public function handleCouponUsage(GenericEvent $event)
+    public function incrementCouponUsage(OrderInterface $order)
     {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
-        }
-
         if ($coupon = $order->getPromotionCoupon()) {
             $coupon->incrementUsed();
         }

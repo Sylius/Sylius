@@ -15,11 +15,14 @@ finite_finite:
             hold:
                 from: [checkout]
                 to:   onhold
+            release:
+                from: [onhold]
+                to:   checkout
             backorder:
                 from: [checkout, onhold]
                 to:   backordered
-            sold:
-                from: [checkout, onhold]
+            sell:
+                from: [checkout, onhold, backordered]
                 to:   sold
             return:
                 from: [shipped]

@@ -11,7 +11,8 @@ finite_finite:
             backordered:       ~
             partially_shipped: ~
             shipped:           ~
-            cancelled:         ~
+            cancelled:
+                type: final
             returned:
                 type: final
         transitions:
@@ -30,6 +31,9 @@ finite_finite:
             return:
                 from: [partially_shipped, shipped]
                 to:   returned
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to:   cancelled
 
     sylius_order_payment:
         class:         %sylius.model.order.class%
@@ -41,9 +45,11 @@ finite_finite:
             pending:    ~
             processing: ~
             completed:  ~
-            failed:     ~
             void:       ~
-            cancelled:  ~
+            failed:
+                type: final
+            cancelled:
+                type: final
             refunded:
                 type: final
         transitions:
@@ -65,3 +71,47 @@ finite_finite:
             refund:
                 from: [completed]
                 to:   refunded
+
+    sylius_payment:
+        callbacks:
+            after:
+                sylius_update_order:
+                    on:   'complete'
+                    do:   [@sylius.callback.order_payment, 'updateOrderOnPayment']
+                    args: ['object']
+
+    sylius_order:
+        callbacks:
+            after:
+                sylius_update_inventory:
+                    on:   'confirm'
+                    do:   [@sylius.order_processing.inventory_handler, 'updateInventory']
+                    args: ['object']
+                sylius_update_shipment:
+                    on:   'confirm'
+                    do:   [@sylius.processor.shipment_processor, 'updateShipmentStates']
+                    args: ['object.getShipments()', '"prepare"']
+                sylius_increment_coupon:
+                    on:   'confirm'
+                    do:   [@sylius.callback.coupon_usage, 'incrementCouponUsage']
+                    args: ['object']
+                sylius_release_inventory:
+                    on:   'release'
+                    do:   [@sylius.order_processing.inventory_handler, 'releaseInventory']
+                    args: ['object']
+                sylius_release_shipment:
+                    on:   'release'
+                    do:   [@sylius.processor.shipment_processor, 'updateShipmentStates']
+                    args: ['object.getShipments()', '"release"']
+                sylius_void_payment:
+                    on:   'release'
+                    do:   [@sylius.callback.order_payment, 'voidPayments']
+                    args: ['object.getPayments()', '"void"']
+
+    sylius_inventory_unit:
+        callbacks:
+            after:
+                sylius_sync_shipping:
+                    to:   '-sold'
+                    do:   [@finite.callback.cascade_transition, 'apply']
+                    args: ['object', 'event', 'null', '"sylius_shipment_item"']

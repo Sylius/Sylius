@@ -12,10 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Releaser;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Finite\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
-use Sylius\Component\Core\SyliusOrderEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Order\OrderTransitions;
 
 /**
  * Release expired orders.
@@ -39,17 +38,15 @@ class ExpiredOrdersReleaser implements ReleaserInterface
     protected $repository;
 
     /**
-     * Event dispatcher.
-     *
-     * @var EventDispatcherInterface
+     * @var FactoryInterface
      */
-    protected $dispatcher;
+    protected $factory;
 
-    public function __construct(ObjectManager $manager, OrderRepository $repository, EventDispatcherInterface $dispatcher)
+    public function __construct(ObjectManager $manager, OrderRepository $repository, FactoryInterface $factory)
     {
-        $this->manager = $manager;
+        $this->manager    = $manager;
         $this->repository = $repository;
-        $this->dispatcher = $dispatcher;
+        $this->factory    = $factory;
     }
 
     /**
@@ -60,13 +57,12 @@ class ExpiredOrdersReleaser implements ReleaserInterface
         $orders = $this->repository->findExpired($expiresAt);
 
         foreach ($orders as $order) {
-            $this->dispatcher->dispatch(SyliusOrderEvents::PRE_RELEASE, new GenericEvent($order));
-            $this->manager->persist($order);
+            $stateMachine = $this->factory->get($order, OrderTransitions::GRAPH);
+            if ($stateMachine->can(OrderTransitions::SYLIUS_RELEASE)) {
+                $stateMachine->apply(OrderTransitions::SYLIUS_RELEASE);
+            }
         }
-        $this->manager->flush();
 
-        foreach ($orders as $order) {
-            $this->dispatcher->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
-        }
+        $this->manager->flush();
     }
 }

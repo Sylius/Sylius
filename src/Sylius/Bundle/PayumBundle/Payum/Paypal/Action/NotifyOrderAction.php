@@ -19,7 +19,6 @@ use Payum\Core\Request\SyncRequest;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Payment\SyliusPaymentEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -60,31 +59,17 @@ class NotifyOrderAction extends AbstractPaymentStateAwareAction
 
         /** @var $payment PaymentInterface */
         $payment = $request->getModel();
-        $previousState = $payment->getState();
 
         $this->payment->execute(new SyncRequest($payment));
 
         $status = new StatusRequest($payment);
         $this->payment->execute($status);
 
-        $previousState = $payment->getState();
         $nextState = $status->getStatus();
 
         $this->updatePaymentState($payment, $nextState);
 
-        if ($previousState !== $payment->getState()) {
-            $this->eventDispatcher->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-
-            $this->objectManager->flush();
-
-            $this->eventDispatcher->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-        }
+        $this->objectManager->flush();
     }
 
     /**
