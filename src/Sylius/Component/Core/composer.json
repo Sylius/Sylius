@@ -33,7 +33,9 @@
         "sylius/inventory":  "0.10.*@dev",
         "sylius/taxonomy":   "0.10.*@dev",
         "sylius/payment":    "0.10.*@dev",
-        "sylius/resource":   "0.10.*@dev"
+        "sylius/resource":   "0.10.*@dev",
+
+        "knplabs/knp-gaufrette-bundle": "*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":              "~2.0",
