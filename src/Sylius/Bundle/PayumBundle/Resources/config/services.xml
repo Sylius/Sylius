@@ -61,7 +61,7 @@
         </service>
         <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class%">
             <argument type="service" id="payum.context.be2bill.api" />
-            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="finite.factory" />

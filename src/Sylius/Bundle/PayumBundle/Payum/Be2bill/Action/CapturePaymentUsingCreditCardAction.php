@@ -61,7 +61,7 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
             $details['CLIENTIP'] = $this->httpRequest->getClientIp();
             $details['CLIENTIDENT'] = $order->getUser()->getId();
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
-            $details['ORDERID'] = $order->getNumber().'-'.$payment->getId();
+            $details['ORDERID'] = $payment->getId();
             $details['CARDCODE'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getNumber());
             $details['CARDCVV'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getSecurityCode());
             $details['CARDFULLNAME'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getCardholderName());
