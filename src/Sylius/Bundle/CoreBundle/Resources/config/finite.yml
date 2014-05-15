@@ -11,7 +11,8 @@ finite_finite:
             backordered:       ~
             partially_shipped: ~
             shipped:           ~
-            cancelled:         ~
+            cancelled:
+                type: final
             returned:
                 type: final
         transitions:
@@ -30,6 +31,9 @@ finite_finite:
             return:
                 from: [partially_shipped, shipped]
                 to:   returned
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to:   cancelled
 
     sylius_order_payment:
         class:         %sylius.model.order.class%
@@ -41,9 +45,11 @@ finite_finite:
             pending:    ~
             processing: ~
             completed:  ~
-            failed:     ~
             void:       ~
-            cancelled:  ~
+            failed:
+                type: final
+            cancelled:
+                type: final
             refunded:
                 type: final
         transitions:

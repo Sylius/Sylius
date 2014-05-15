@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order;
+namespace Sylius\Component\Core;
 
 class OrderPaymentTransitions
 {
