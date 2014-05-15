@@ -54,7 +54,7 @@ class DoctrineTargetEntitiesResolver
      * @return string
      * @throws \InvalidArgumentException
      */
-    private function getInterface(ContainerBuilder $container, $key)
+    protected function getInterface(ContainerBuilder $container, $key)
     {
         if ($container->hasParameter($key)) {
             return $container->getParameter($key);
@@ -76,7 +76,7 @@ class DoctrineTargetEntitiesResolver
      * @return string
      * @throws \InvalidArgumentException
      */
-    private function getClass(ContainerBuilder $container, $key)
+    protected function getClass(ContainerBuilder $container, $key)
     {
         if ($container->hasParameter($key)) {
             return $container->getParameter($key);
