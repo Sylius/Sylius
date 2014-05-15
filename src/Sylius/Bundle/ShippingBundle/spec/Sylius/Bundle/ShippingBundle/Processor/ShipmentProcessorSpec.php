@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Shipping\Processor;
+namespace spec\Sylius\Bundle\ShippingBundle\Processor;
 
 use Finite\Factory\FactoryInterface;
 use Finite\StateMachine\StateMachineInterface;
@@ -32,7 +32,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Processor\ShipmentProcessor');
+        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessor');
     }
 
     function it_implements_Sylius_shipment_processor_interface()
@@ -47,14 +47,14 @@ class ShipmentProcessorSpec extends ObjectBehavior
         StateMachineInterface $sm
     )
     {
-        $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-        $factory->get($shipment, ShipmentTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
+        $shipment->getState()->willReturn(ShipmentInterface::STATE_READY);
+        $factory->get($shipment, ShipmentTransitions::GRAPH)->willReturn($sm);
         $sm->apply('transitionName')->shouldBeCalled();
 
         $shipment->getItems()->shouldBeCalled()->willReturn(array($item));
 
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
-        $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
+        $item->getShippingState()->willReturn(ShipmentInterface::STATE_READY);
+        $factory->get($item, ShipmentItemTransitions::GRAPH)->willReturn($sm);
         $sm->apply('transitionName')->shouldBeCalled();
 
         $this->updateShipmentStates(array($shipment), 'transitionName', ShipmentInterface::STATE_READY);
@@ -66,7 +66,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
         ShipmentItemInterface $item
     )
     {
-        $shipment->getState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        $shipment->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
 
         $factory->get(Argument::any())->shouldNotBeCalled();
 
@@ -78,9 +78,9 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
     function it_updates_item_states($factory, ShipmentItemInterface $item, StateMachineInterface $sm)
     {
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_READY);
+        $item->getShippingState()->willReturn(ShipmentInterface::STATE_READY);
 
-        $factory->get($item, ShipmentItemTransitions::GRAPH)->shouldBeCalled()->willReturn($sm);
+        $factory->get($item, ShipmentItemTransitions::GRAPH)->willReturn($sm);
         $sm->apply('transitionName')->shouldBeCalled();
 
         $this->updateItemStates(array($item), 'transitionName', ShipmentInterface::STATE_READY);
@@ -88,7 +88,7 @@ class ShipmentProcessorSpec extends ObjectBehavior
 
     function it_does_not_update_item_states_if_state_from_does_not_match($factory, ShipmentItemInterface $item)
     {
-        $item->getShippingState()->shouldBeCalled()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        $item->getShippingState()->willReturn(ShipmentInterface::STATE_SHIPPED);
 
         $factory->get(Argument::any())->shouldNotBeCalled();
 

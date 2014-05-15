@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Shipping\Processor;
+namespace Sylius\Bundle\ShippingBundle\Processor;
 
 use Doctrine\Common\Collections\Collection;
 use Finite\Factory\FactoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
+use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Component\Shipping\ShipmentItemTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 

@@ -46,7 +46,7 @@
 
         <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>
 
-        <parameter key="sylius.processor.shipment_processor.class">Sylius\Component\Shipping\Processor\ShipmentProcessor</parameter>
+        <parameter key="sylius.processor.shipment_processor.class">Sylius\Bundle\ShippingBundle\Processor\ShipmentProcessor</parameter>
     </parameters>
 
     <services>
