@@ -16,22 +16,8 @@ namespace Sylius\Component\Order\Model;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends AdjustableInterface
+interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
 {
-    /**
-     * Return order.
-     *
-     * @return OrderInterface
-     */
-    public function getOrder();
-
-    /**
-     * Set order.
-     *
-     * @param OrderInterface $order
-     */
-    public function setOrder(OrderInterface $order = null);
-
     /**
      * Get item quantity.
      *

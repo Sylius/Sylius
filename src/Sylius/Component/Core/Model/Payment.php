@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Payment\Model\Payment as BasePayment;
 
 /**
@@ -21,9 +22,9 @@ use Sylius\Component\Payment\Model\Payment as BasePayment;
 class Payment extends BasePayment implements PaymentInterface
 {
     /**
-     * Order.
+     * Order instance.
      *
-     * @var OrderInterface
+     * @var BaseOrderInterface
      */
     protected $order;
 
@@ -38,7 +39,7 @@ class Payment extends BasePayment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrder(OrderInterface $order = null)
+    public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
 

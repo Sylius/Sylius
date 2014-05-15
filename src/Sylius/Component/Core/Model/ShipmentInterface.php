@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Order\Model\OrderAwareInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 
 /**
@@ -18,19 +19,6 @@ use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentInterface extends BaseShipmentInterface
+interface ShipmentInterface extends BaseShipmentInterface, OrderAwareInterface
 {
-    /**
-     * Get the order.
-     *
-     * @return OrderInterface
-     */
-    public function getOrder();
-
-    /**
-     * Set the order.
-     *
-     * @param OrderInterface $order
-     */
-    public function setOrder(OrderInterface $order = null);
 }

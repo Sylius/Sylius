@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Order\Model\OrderAwareInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
 /**
@@ -18,19 +19,6 @@ use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
  *
  * @author Ka Yue Yeung <kayuey@gmail.com>
  */
-interface PaymentInterface extends BasePaymentInterface
+interface PaymentInterface extends BasePaymentInterface, OrderAwareInterface
 {
-    /**
-     * Get the order.
-     *
-     * @return OrderInterface
-     */
-    public function getOrder();
-
-    /**
-     * Set the order.
-     *
-     * @param OrderInterface $order
-     */
-    public function setOrder(OrderInterface $order = null);
 }

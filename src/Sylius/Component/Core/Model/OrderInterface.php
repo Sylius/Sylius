@@ -18,7 +18,6 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
 /**
  * Sylius core Order model.

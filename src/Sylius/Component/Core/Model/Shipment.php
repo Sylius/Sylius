@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
 /**
@@ -23,7 +24,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     /**
      * Order.
      *
-     * @var OrderInterface
+     * @var BaseOrderInterface
      */
     protected $order;
 
@@ -38,7 +39,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrder(OrderInterface $order = null)
+    public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
 
