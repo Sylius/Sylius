@@ -3,7 +3,14 @@
 <div class="tab-pane" id="attributes">
     <div id="sylius-assortment-product-attributes" class="collection-container" data-prototype="{{ ('<div id="sylius_product_attributes___name__">' ~ form_row(form.attributes.vars.prototype.attribute, {'attr': {'class': 'attribute-chooser'}}))|e }}{{ (form_row(form.attributes.vars.prototype.value) ~ '</div>')|e }}">
         {% for attributeForm in form.attributes %}
-            {{ form_widget(attributeForm) }}
+        <div class="sylius-assortment-product-attributes-attribute row">
+            <div class="col-md-10">
+                {{ form_widget(attributeForm) }}
+            </div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-danger" data-collection-button="delete" data-collection="sylius-assortment-product-attributes" data-collection-item="attribute"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.product.remove_attribute'|trans }}</a>
+            </div>
+        </div>
         {% endfor %}
         {% for key, prototype in form.attributes.vars.prototype.vars.prototypes %}
             <div id="attribute-prototype_{{ key }}" class="attribute-prototypes" data-prototype="{{ form_widget(prototype)|e }}"></div>

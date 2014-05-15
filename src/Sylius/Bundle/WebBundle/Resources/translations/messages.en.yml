@@ -485,6 +485,7 @@ sylius:
         price: Retail price
         attributes: Attributes
         restricted_zone: Restricted zone
+        remove_attribute: Remove attribute
         shipping_category: Shipping category
         show: View more
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>

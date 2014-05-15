@@ -32,7 +32,7 @@
         <field name="metaKeywords" column="meta_keywords" type="string" nullable="true" />
         <field name="metaDescription" column="meta_description" type="string" nullable="true" />
 
-        <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\AttributeValueInterface" mapped-by="subject">
+        <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\AttributeValueInterface" mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
