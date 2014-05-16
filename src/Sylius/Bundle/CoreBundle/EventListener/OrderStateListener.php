@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Finite\Event\TransitionEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Order\Model\OrderAwareInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -52,10 +53,12 @@ class OrderStateListener
 
     public function resolveOrderStatesFinite(TransitionEvent $event)
     {
-        $order = $event->getStateMachine()->getObject();
+        $resource = $event->getStateMachine()->getObject();
 
-        if ($order instanceof OrderInterface) {
-            $this->resolve($order);
+        if ($resource instanceof OrderInterface) {
+            $this->resolve($resource);
+        } elseif ($resource instanceof OrderAwareInterface && null !== $resource->getOrder()) {
+            $this->resolve($resource->getOrder());
         }
     }
 
