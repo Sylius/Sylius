@@ -25,6 +25,17 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
  */
 interface ProductInterface extends BaseProductInterface, TaxableInterface
 {
+    /*
+     * Variant selection methods.
+     *
+     * 1) Choice - A list of all variants is displayed to user.
+     *
+     * 2) Match  - Each product option is displayed as select field.
+     *             User selects the values and we match them to variant.
+     */
+    const VARIANT_SELECTION_CHOICE = 'choice';
+    const VARIANT_SELECTION_MATCH  = 'match';
+
     /**
      * Get product SKU.
      *

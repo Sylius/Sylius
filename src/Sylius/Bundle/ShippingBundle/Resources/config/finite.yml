@@ -6,6 +6,7 @@ finite_finite:
         states:
             checkout:
                 type: initial
+            pending:     ~
             onhold:      ~
             ready:       ~
             backordered: ~

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
 
@@ -46,6 +47,14 @@ class LoadCountriesData extends DataFixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 
     /**
@@ -120,13 +129,5 @@ class LoadCountriesData extends DataFixture
 
             $this->setReference('Sylius.Province.'.$isoName, $province);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }

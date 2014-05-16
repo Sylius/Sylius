@@ -11,21 +11,18 @@
 
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use PHPCR\Util\NodeHelper;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 
-class LoadBlocksData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+class LoadBlocksData extends DataFixture
 {
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $faker = FakerFactory::create();
         $session = $manager->getPhpcrSession();
 
         $basepath = $this->container->getParameter('cmf_block.persistence.phpcr.block_basepath');
@@ -38,15 +35,17 @@ class LoadBlocksData extends ContainerAware implements FixtureInterface, Ordered
         $contactBlock->setParentDocument($parent);
         $contactBlock->setName('contact');
         $contactBlock->setTitle('Contact us');
-        $contactBlock->setBody('<p>Call us '.$faker->phoneNumber.'!</p><p>'.$faker->paragraph.'</p>');
+        $contactBlock->setBody('<p>Call us '.$this->faker->phoneNumber.'!</p><p>'.$this->faker->paragraph.'</p>');
+
         $manager->persist($contactBlock);
 
         for ($i = 1; $i <= 3; $i++) {
             $block = $repository->createNew();
             $block->setParentDocument($parent);
             $block->setName('block-'.$i);
-            $block->setTitle(ucfirst($faker->word));
-            $block->setBody($faker->paragraph);
+            $block->setTitle(ucfirst($this->faker->word));
+            $block->setBody($this->faker->paragraph);
+
             $manager->persist($block);
         }
 

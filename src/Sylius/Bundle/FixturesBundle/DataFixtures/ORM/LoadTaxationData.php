@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
@@ -51,6 +53,14 @@ class LoadTaxationData extends DataFixture
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 3;
+    }
+
+    /**
      * Create tax category.
      *
      * @param string $name
@@ -60,11 +70,8 @@ class LoadTaxationData extends DataFixture
      */
     protected function createTaxCategory($name, $description)
     {
-        $category = $this
-            ->getTaxCategoryRepository()
-            ->createNew()
-        ;
-
+        /* @var $category TaxCategoryInterface */
+        $category = $this->getTaxCategoryRepository()->createNew();
         $category->setName($name);
         $category->setDescription($description);
 
@@ -86,11 +93,8 @@ class LoadTaxationData extends DataFixture
      */
     protected function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
     {
-        $rate = $this
-            ->getTaxRateRepository()
-            ->createNew()
-        ;
-
+        /* @var $rate TaxRateInterface */
+        $rate = $this->getTaxRateRepository()->createNew();
         $rate->setName($name);
         $rate->setZone($this->getZoneByName($zoneName));
         $rate->setAmount($amount);
@@ -100,13 +104,5 @@ class LoadTaxationData extends DataFixture
         $this->setReference('Sylius.TaxRate.'.$name, $rate);
 
         return $rate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 3;
     }
 }

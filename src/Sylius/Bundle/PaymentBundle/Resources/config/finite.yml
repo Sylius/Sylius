@@ -6,6 +6,7 @@ finite_finite:
         states:
             new:
                 type: initial
+            unknown:    ~
             pending:    ~
             processing: ~
             completed:  ~

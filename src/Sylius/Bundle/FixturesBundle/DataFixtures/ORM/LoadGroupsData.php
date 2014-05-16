@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\GroupInterface;
 
 /**
  * Group fixtures.
@@ -34,24 +36,29 @@ class LoadGroupsData extends DataFixture
         $manager->flush();
     }
 
-    protected function createGroup($name, array $roles = array())
-    {
-        $group = $this->getGroupRepository()->createNew();
-
-        $group->setName($name);
-        $group->setRoles($roles);
-
-        $this->setReference('Sylius.Group.'.$name, $group);
-
-        return $group;
-
-    }
-
     /**
      * {@inheritdoc}
      */
     public function getOrder()
     {
         return 1;
+    }
+
+    /**
+     * @param string $name
+     * @param array  $roles
+     *
+     * @return GroupInterface
+     */
+    protected function createGroup($name, array $roles = array())
+    {
+        /* @var $group GroupInterface */
+        $group = $this->getGroupRepository()->createNew();
+        $group->setName($name);
+        $group->setRoles($roles);
+
+        $this->setReference('Sylius.Group.'.$name, $group);
+
+        return $group;
     }
 }

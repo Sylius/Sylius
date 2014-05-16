@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
 
 /**
  * Default product options to play with Sylius.
@@ -58,18 +61,18 @@ class LoadProductOptionData extends DataFixture
      * @param string $name
      * @param string $presentation
      * @param array  $values
+     *
+     * @return OptionInterface
      */
     protected function createOption($name, $presentation, array $values)
     {
-        $option = $this
-            ->getProductOptionRepository()
-            ->createNew()
-        ;
-
+        /* @var $option OptionInterface */
+        $option = $this->getProductOptionRepository()->createNew();
         $option->setName($name);
         $option->setPresentation($presentation);
 
         foreach ($values as $text) {
+            /* @var $value OptionValueInterface */
             $value = $this->getProductOptionValueRepository()->createNew();
             $value->setValue($text);
 

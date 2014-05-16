@@ -13,8 +13,10 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\Product;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * Default assortment products to play with Sylius.
@@ -28,24 +30,19 @@ class LoadProductsData extends DataFixture
      *
      * @var integer
      */
-    private $totalVariants;
+    private $totalVariants = 0;
 
     /**
      * SKU collection.
      *
      * @var array
      */
-    private $skus;
+    private $skus = array();
 
     /**
-     * Constructor.
+     * @var string
      */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->skus = array();
-    }
+    private $productAttributeClass;
 
     /**
      * {@inheritdoc}
@@ -59,19 +56,19 @@ class LoadProductsData extends DataFixture
             switch (rand(0, 3)) {
                 case 0:
                     $manager->persist($this->createTShirt($i));
-                break;
+                    break;
 
                 case 1:
                     $manager->persist($this->createSticker($i));
-                break;
+                    break;
 
                 case 2:
                     $manager->persist($this->createMug($i));
-                break;
+                    break;
 
                 case 3:
                     $manager->persist($this->createBook($i));
-                break;
+                    break;
             }
 
             if (0 === $i % 20) {
@@ -96,16 +93,17 @@ class LoadProductsData extends DataFixture
      * Creates t-shirt product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createTShirt($i)
     {
         $product = $this->createProduct();
-
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
-        $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
 
@@ -137,6 +135,8 @@ class LoadProductsData extends DataFixture
      * Create sticker product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createSticker($i)
     {
@@ -146,7 +146,7 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Sticker "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
-        $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
 
@@ -173,6 +173,8 @@ class LoadProductsData extends DataFixture
      * Create mug product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createMug($i)
     {
@@ -203,6 +205,8 @@ class LoadProductsData extends DataFixture
      * Create book product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createBook($i)
     {
@@ -248,7 +252,8 @@ class LoadProductsData extends DataFixture
             $variant->setOnHand($this->faker->randomNumber(1));
 
             $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
-            $this->totalVariants++;
+
+            ++$this->totalVariants;
         }
     }
 
@@ -260,14 +265,10 @@ class LoadProductsData extends DataFixture
      */
     protected function addMasterVariant(ProductInterface $product, $sku = null)
     {
-        if (null === $sku) {
-            $sku = $this->getUniqueSku();
-        }
-
         $variant = $product->getMasterVariant();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
-        $variant->setSku($sku);
+        $variant->setSku(null === $sku ? $this->getUniqueSku() : $sku);
         $variant->setAvailableOn($this->faker->dateTimeThisYear);
         $variant->setOnHand($this->faker->randomNumber(1));
 
@@ -278,7 +279,8 @@ class LoadProductsData extends DataFixture
         $variant->addImage($image);
 
         $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
-        $this->totalVariants++;
+
+        ++$this->totalVariants;
 
         $product->setMasterVariant($variant);
     }
@@ -292,6 +294,7 @@ class LoadProductsData extends DataFixture
      */
     private function addAttribute(ProductInterface $product, $name, $value)
     {
+        /* @var $attribute AttributeValueInterface */
         $attribute = $this->getProductAttributeValueRepository()->createNew();
         $attribute->setAttribute($this->getReference('Sylius.Attribute.'.$name));
         $attribute->setProduct($product);
@@ -364,10 +367,7 @@ class LoadProductsData extends DataFixture
      */
     protected function createProduct()
     {
-        return $this
-            ->getProductRepository()
-            ->createNew()
-        ;
+        return $this->getProductRepository()->createNew();
     }
 
     /**
