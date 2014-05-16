@@ -51,4 +51,4 @@ interface PaymentsSubjectInterface
      * @return bool
      */
     public function hasPayment(PaymentInterface $payment);
-} 
+}

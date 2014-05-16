@@ -9,48 +9,63 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Callback;
+namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
+use Doctrine\Common\Collections\Collection;
 use Finite\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
-use Sylius\Component\Core\SyliusOrderEvents;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class OrderPaymentCallbackSpec extends ObjectBehavior
 {
-    function let(EntityRepository $repository, FactoryInterface $factory)
+    function let(FactoryInterface $factory)
     {
-        $this->beConstructedWith($repository, $factory);
+        $this->beConstructedWith($factory);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Callback\OrderPaymentCallback');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback');
     }
 
-    function it_dispatches_event_on_payment_if_complete(
+    function it_dispatches_event_on_payment_update(
         $factory,
-        $repository,
         PaymentInterface $payment,
         OrderInterface $order,
-        StateMachineInterface $sm
+        StateMachineInterface $sm,
+        Collection $payments
     ) {
-        $repository->findOneBy(array('payment' => $payment))->willReturn($order);
+        $payment->getOrder()->willReturn($order);
+
+        $order->getPayments()->willReturn($payments);
+        $order->getTotal()->willReturn(0);
+
+        $payments->getIterator()->willReturn(new \EmptyIterator());
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
         $sm->apply(OrderTransitions::SYLIUS_CONFIRM)->shouldBeCalled();
 
         $this->updateOrderOnPayment($payment);
+    }
+
+    function it_dispatches_event_for_void_payments(
+        $factory,
+        PaymentInterface $payment,
+        StateMachineInterface $sm,
+        Collection $payments
+    ) {
+        $payments->getIterator()->willReturn(new \ArrayIterator(array($payment)));
+
+        $factory->get($payment, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->apply(PaymentTransitions::SYLIUS_VOID)->shouldBeCalled();
+
+        $this->voidPayments($payments, PaymentTransitions::SYLIUS_VOID);
     }
 }
