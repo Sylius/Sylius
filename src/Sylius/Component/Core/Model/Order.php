@@ -32,7 +32,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var UserInterface
      */
-     protected $user;
+    protected $user;
 
     /**
      * Order shipping address.
@@ -94,7 +94,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotions applied
      *
-     * @var ArrayCollection
+     * @var Collection|PromotionInterface[]
      */
     protected $promotions;
 
@@ -295,7 +295,7 @@ class Order extends Cart implements OrderInterface
      */
     public function getInventoryUnits()
     {
-        $units = new ArrayCollection;
+        $units = new ArrayCollection();
 
         /** @var $item OrderItem */
         foreach ($this->getItems() as $item) {
@@ -524,17 +524,12 @@ class Order extends Cart implements OrderInterface
     }
 
     /**
-     * Tells is the invoice of the order can be generated.
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isInvoiceAvailable()
     {
         if (null !== $lastShipment = $this->getLastShipment()) {
-            return (in_array(
-                    $lastShipment->getState(),
-                    array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED))
-            );
+            return in_array($lastShipment->getState(), array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED));
         }
 
         return false;
