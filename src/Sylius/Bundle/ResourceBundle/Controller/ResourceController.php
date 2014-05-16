@@ -53,6 +53,11 @@ class ResourceController extends FOSRestController
      */
     protected $redirectHandler;
 
+    /**
+     * @var string
+     */
+    protected $stateMachineGraph;
+
     public function __construct(Configuration $config)
     {
         $this->config = $config;
@@ -227,6 +232,31 @@ class ResourceController extends FOSRestController
         $this->domainManager->delete($resource);
 
         return $this->redirectHandler->redirectToIndex();
+    }
+
+    public function updateStateAction(Request $request, $transition, $graph = null)
+    {
+        $resource = $this->findOr404($request);
+
+        if (null === $graph) {
+            $graph = $this->stateMachineGraph;
+        }
+
+        $stateMachine = $this->get('finite.factory')->get($resource, $graph);
+        if (!$stateMachine->can($transition)) {
+            throw new NotFoundHttpException(sprintf(
+                'The requested transition %s cannot be applied on the given %s with graph %s.',
+                $transition,
+                $this->config->getResourceName(),
+                $graph
+            ));
+        }
+
+        $stateMachine->apply($transition);
+
+        $this->domainManager->update($resource);
+
+        return $this->redirectHandler->redirectToReferer();
     }
 
     /**
