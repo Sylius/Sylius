@@ -28,7 +28,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * Subject.
      *
-     * @var SubjectInterface
+     * @var AttributeSubjectInterface
      */
     protected $subject;
 
@@ -73,7 +73,7 @@ class AttributeValue implements AttributeValueInterface
     /**
      * {@inheritdoc}
      */
-    public function setSubject(SubjectInterface $subject = null)
+    public function setSubject(AttributeSubjectInterface $subject = null)
     {
         $this->subject = $subject;
 

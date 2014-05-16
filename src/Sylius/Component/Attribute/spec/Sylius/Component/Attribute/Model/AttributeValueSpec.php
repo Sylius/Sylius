@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Attribute\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeTypes;
-use Sylius\Component\Attribute\Model\SubjectInterface;
+use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,13 +41,13 @@ class AttributeValueSpec extends ObjectBehavior
         $this->getSubject()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_a_subject(SubjectInterface $subject)
+    function it_allows_assigning_itself_to_a_subject(AttributeSubjectInterface $subject)
     {
         $this->setSubject($subject);
         $this->getSubject()->shouldReturn($subject);
     }
 
-    function it_allows_detaching_itself_from_a_subject(SubjectInterface $subject)
+    function it_allows_detaching_itself_from_a_subject(AttributeSubjectInterface $subject)
     {
         $this->setSubject($subject);
         $this->getSubject()->shouldReturn($subject);
