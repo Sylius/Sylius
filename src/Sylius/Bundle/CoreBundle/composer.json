@@ -49,19 +49,16 @@
         "sylius/taxonomy-bundle":         "0.10.*@dev",
         "sylius/attribute-bundle":        "0.10.*@dev",
         "sylius/variation-bundle":        "0.10.*@dev",
-        "symfony-cmf/block-bundle":       "1.0.*",
-        "symfony-cmf/content-bundle":     "1.0.*",
-        "symfony-cmf/menu-bundle":        "1.0.*",
-        "symfony-cmf/routing-bundle":     "1.1.*",
+        "symfony-cmf/block-bundle":       "1.1.*",
+        "symfony-cmf/content-bundle":     "1.1.*",
+        "symfony-cmf/menu-bundle":        "1.1.*",
+        "symfony-cmf/routing-bundle":     "1.2.*",
         "symfony/framework-bundle":       "~2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "1.2.*",
         "phpspec/phpspec":  "~2.0",
         "symfony/form":     "~2.3"
-    },
-    "provide": {
-        "phpcr/phpcr-implementation": "2.1.0"
     },
     "suggest": {
         "sylius/web-bundle":      "Provides default web interface",
