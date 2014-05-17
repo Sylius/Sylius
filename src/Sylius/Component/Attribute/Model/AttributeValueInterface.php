@@ -23,16 +23,16 @@ interface AttributeValueInterface
     /**
      * Get subject.
      *
-     * @return SubjectInterface
+     * @return AttributeSubjectInterface
      */
     public function getSubject();
 
     /**
      * Set subject.
      *
-     * @param SubjectInterface|null $subject
+     * @param AttributeSubjectInterface|null $subject
      */
-    public function setSubject(SubjectInterface $subject = null);
+    public function setSubject(AttributeSubjectInterface $subject = null);
 
     /**
      * Get attribute.

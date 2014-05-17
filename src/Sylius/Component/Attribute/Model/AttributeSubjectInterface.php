@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface SubjectInterface
+interface AttributeSubjectInterface
 {
     /**
      * Returns all product product properties.
