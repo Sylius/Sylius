@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Product\Model\AttributeInterface;
 
 /**
  * Default product attributes to play with Sylius.
@@ -68,12 +70,13 @@ class LoadProductAttributeData extends DataFixture
      *
      * @param string $name
      * @param string $presentation
+     *
+     * @return AttributeInterface
      */
-    private function createAttribute($name, $presentation)
+    protected function createAttribute($name, $presentation)
     {
-        $repository = $this->getProductAttributeRepository();
-
-        $attribute = $repository->createNew();
+        /* @var $attribute AttributeInterface */
+        $attribute = $this->getProductAttributeRepository()->createNew();
         $attribute->setName($name);
         $attribute->setPresentation($presentation);
 

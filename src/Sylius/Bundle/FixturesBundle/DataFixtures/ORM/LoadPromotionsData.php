@@ -13,7 +13,9 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
@@ -77,11 +79,7 @@ class LoadPromotionsData extends DataFixture
     protected function createRule($type, array $configuration)
     {
         /* @var $rule RuleInterface */
-        $rule = $this
-            ->getPromotionRuleRepository()
-            ->createNew()
-        ;
-
+        $rule = $this->getPromotionRuleRepository()->createNew();
         $rule->setType($type);
         $rule->setConfiguration($configuration);
 
@@ -99,11 +97,7 @@ class LoadPromotionsData extends DataFixture
     protected function createAction($type, array $configuration)
     {
         /* @var $action ActionInterface */
-        $action = $this
-            ->getPromotionActionRepository()
-            ->createNew()
-        ;
-
+        $action = $this->getPromotionActionRepository()->createNew();
         $action->setType($type);
         $action->setConfiguration($configuration);
 
@@ -123,11 +117,7 @@ class LoadPromotionsData extends DataFixture
     protected function createPromotion($name, $description, array $rules, array $actions)
     {
         /* @var $promotion PromotionInterface */
-        $promotion = $this
-            ->getPromotionRepository()
-            ->createNew()
-        ;
-
+        $promotion = $this->getPromotionRepository()->createNew();
         $promotion->setName($name);
         $promotion->setDescription($description);
 

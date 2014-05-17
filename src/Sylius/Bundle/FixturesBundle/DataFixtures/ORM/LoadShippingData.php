@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
@@ -43,10 +45,18 @@ class LoadShippingData extends DataFixture
         $config = array('amount' => 2350);
         $manager->persist($this->createShippingMethod('DHL', 'EU', DefaultCalculators::FLAT_RATE, $config));
 
-        $config =  array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
+        $config = array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
         $manager->persist($this->createShippingMethod('FedEx World Shipping', 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 4;
     }
 
     /**
@@ -59,11 +69,8 @@ class LoadShippingData extends DataFixture
      */
     protected function createShippingCategory($name, $description)
     {
-        $category = $this
-            ->getShippingCategoryRepository()
-            ->createNew()
-        ;
-
+        /* @var $category ShippingCategoryInterface */
+        $category = $this->getShippingCategoryRepository()->createNew();
         $category->setName($name);
         $category->setDescription($description);
 
@@ -85,11 +92,8 @@ class LoadShippingData extends DataFixture
      */
     protected function createShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
     {
-        $method = $this
-            ->getShippingMethodRepository()
-            ->createNew()
-        ;
-
+        /* @var $method ShippingMethodInterface */
+        $method = $this->getShippingMethodRepository()->createNew();
         $method->setName($name);
         $method->setZone($this->getZoneByName($zoneName));
         $method->setCalculator($calculator);
@@ -99,13 +103,5 @@ class LoadShippingData extends DataFixture
         $this->setReference('Sylius.ShippingMethod.'.$name, $method);
 
         return $method;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 4;
     }
 }

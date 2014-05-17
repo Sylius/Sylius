@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * Default taxonomies to play with Sylius.
@@ -37,26 +40,30 @@ class LoadTaxonomiesData extends DataFixture
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 5;
+    }
+
+    /**
      * Create and save taxonomy with given taxons.
      *
      * @param string $name
      * @param array  $taxons
+     *
+     * @return TaxonomyInterface
      */
     protected function createTaxonomy($name, array $taxons)
     {
-        $taxonomy = $this
-            ->getTaxonomyRepository()
-            ->createNew()
-        ;
-
+        /* @var $taxonomy TaxonomyInterface */
+        $taxonomy = $this->getTaxonomyRepository()->createNew();
         $taxonomy->setName($name);
 
         foreach ($taxons as $taxonName) {
-            $taxon = $this
-                ->getTaxonRepository()
-                ->createNew()
-            ;
-
+            /* @var $taxon TaxonInterface */
+            $taxon = $this->getTaxonRepository()->createNew();
             $taxon->setName($taxonName);
 
             $taxonomy->addTaxon($taxon);
@@ -66,10 +73,5 @@ class LoadTaxonomiesData extends DataFixture
         $this->setReference('Sylius.Taxonomy.'.$name, $taxonomy);
 
         return $taxonomy;
-    }
-
-    public function getOrder()
-    {
-        return 5;
     }
 }

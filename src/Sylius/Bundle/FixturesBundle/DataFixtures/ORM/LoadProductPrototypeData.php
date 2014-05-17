@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Product\Model\PrototypeInterface;
 
 /**
  * Sample product prototypes.
@@ -54,12 +56,13 @@ class LoadProductPrototypeData extends DataFixture
      * @param string $name
      * @param array  $options
      * @param array  $properties
+     *
+     * @return PrototypeInterface
      */
     protected function createPrototype($name, array $options, array $properties)
     {
-        $repository = $this->getProductPrototypeRepository();
-
-        $prototype = $repository->createNew();
+        /* @var $prototype PrototypeInterface */
+        $prototype = $this->getProductPrototypeRepository()->createNew();
         $prototype->setName($name);
 
         foreach ($options as $option) {

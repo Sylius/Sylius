@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 /**
  * Default exchange rate fixtures.
@@ -34,8 +36,8 @@ class LoadExchangeRatesData extends DataFixture
         $exchangeRateRepository = $this->getExchangeRateRepository();
 
         foreach ($this->currencies as $currency => $rate) {
+            /* @var $exchangeRate ExchangeRateInterface */
             $exchangeRate = $exchangeRateRepository->createNew();
-
             $exchangeRate->setCurrency($currency);
             $exchangeRate->setRate($rate);
 

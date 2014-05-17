@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
  * Sample payment methods.
@@ -52,11 +54,8 @@ class LoadPaymentMethodsData extends DataFixture
      */
     protected function createPaymentMethod($name, $gateway, $enabled = true)
     {
-        $method = $this
-            ->getPaymentMethodRepository()
-            ->createNew()
-        ;
-
+        /* @var $method PaymentMethodInterface */
+        $method = $this->getPaymentMethodRepository()->createNew();
         $method->setName($name);
         $method->setGateway($gateway);
         $method->setEnabled($enabled);

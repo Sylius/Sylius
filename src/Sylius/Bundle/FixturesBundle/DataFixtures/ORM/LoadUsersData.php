@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * User fixtures.
@@ -54,10 +56,27 @@ class LoadUsersData extends DataFixture
         $manager->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 1;
+    }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @param bool   $enabled
+     * @param array  $roles
+     * @param string $currency
+     *
+     * @return UserInterface
+     */
     protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
     {
+        /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
-
         $user->setFirstname($this->faker->firstName);
         $user->setLastname($this->faker->lastName);
         $user->setEmail($email);
@@ -67,13 +86,5 @@ class LoadUsersData extends DataFixture
         $user->setEnabled($enabled);
 
         return $user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }
