@@ -64,4 +64,4 @@ class BaseContext extends DefaultContext
         $manager->remove($this->findOneByName($resource, $name));
         $manager->flush();
     }
-} 
+}

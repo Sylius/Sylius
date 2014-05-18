@@ -35,7 +35,7 @@ class StateResolver implements StateResolverInterface
             $completedPaymentTotal = 0;
 
             foreach ($payments as $payment) {
-                if ($payment->getState() === PaymentInterface::STATE_COMPLETED) {
+                if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
                     $completedPaymentTotal += $payment->getAmount();
                 }
             }
@@ -45,7 +45,7 @@ class StateResolver implements StateResolverInterface
                 $paymentState = PaymentInterface::STATE_COMPLETED;
             } else {
                 // Payment is processing if one of the payment is.
-                if ($payments->exists(function($key, $payment) {
+                if ($payments->exists(function ($key, $payment) {
                     return in_array($payment->getState(), array(
                         PaymentInterface::STATE_COMPLETED,
                         PaymentInterface::STATE_PROCESSING,

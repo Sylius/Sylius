@@ -68,6 +68,7 @@ class ShipmentListener
     public function ship(GenericEvent $event)
     {
         $shipment = $this->getShipment($event);
+        /* @var $order OrderInterface */
         $order = $shipment->getOrder();
 
         $this->shippingProcessor->updateShipmentStates(

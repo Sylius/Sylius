@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 interface PaymentsSubjectInterface
 {
     /**
      * Get all payments associated with the payment subject.
      *
-     * @return PaymentInterface[]
+     * @return Collection|PaymentInterface[]
      */
     public function getPayments();
 
@@ -49,4 +51,4 @@ interface PaymentsSubjectInterface
      * @return bool
      */
     public function hasPayment(PaymentInterface $payment);
-} 
+}

@@ -30,7 +30,7 @@ class OrderController extends ResourceController
      */
     public function indexByUserAction(Request $request, $id)
     {
-        $user = $this->get('sylius.repository.user')->findOneById($id);
+        $user = $this->get('sylius.repository.user')->find($id);
 
         if (!$user) {
             throw new NotFoundHttpException('Requested user does not exist.');

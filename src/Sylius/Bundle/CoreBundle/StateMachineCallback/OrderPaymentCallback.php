@@ -25,11 +25,6 @@ use Sylius\Component\Payment\PaymentTransitions;
 class OrderPaymentCallback
 {
     /**
-     * @var EntityRepository
-     */
-    protected $orderRepository;
-
-    /**
      * @var FactoryInterface
      */
     protected $factory;
@@ -39,7 +34,7 @@ class OrderPaymentCallback
      */
     public function __construct(FactoryInterface $factory)
     {
-        $this->factory          = $factory;
+        $this->factory = $factory;
     }
 
     public function updateOrderOnPayment(PaymentInterface $payment)

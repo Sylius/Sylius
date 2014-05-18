@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\OrderBundle\StateMachineCallback;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CompleteOrderCallbackSpec extends ObjectBehavior
 {
