@@ -23,14 +23,15 @@ install:
 before_script:
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "memory_limit=4096M" >> sylius.ini
+    - phpenv config-add sylius.ini
 
     - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
     - composer self-update
+    - composer install --prefer-source --no-interaction
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
-    - composer install --prefer-source --no-interaction
-    - wget http://getcomposer.org/composer.phar
-    - php -d memory_limit=2048M composer.phar update doctrine/mongodb-odm
+    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction
 
     - app/console doctrine:database:create --env=test > /dev/null
     - app/console doctrine:schema:create --env=test > /dev/null
@@ -46,28 +47,28 @@ before_script:
 script:
     - bin/phpspec run -f dot
 
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=account
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=addressing
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=cart
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=checkout
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=currencies
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=dashboard
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=homepage
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=inventory
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=localization
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=oauth
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=orders
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=payments
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=pricing
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=products
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=promotions
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=settings
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=shipping
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=taxation
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=taxonomies
-    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=users
+    - bin/behat --stop-on-failure --suite=account
+    - bin/behat --stop-on-failure --suite=addressing
+    - bin/behat --stop-on-failure --suite=cart
+    - bin/behat --stop-on-failure --suite=checkout
+    - bin/behat --stop-on-failure --suite=currencies
+    - bin/behat --stop-on-failure --suite=dashboard
+    - bin/behat --stop-on-failure --suite=homepage
+    - bin/behat --stop-on-failure --suite=inventory
+    - bin/behat --stop-on-failure --suite=localization
+    - bin/behat --stop-on-failure --suite=oauth
+    - bin/behat --stop-on-failure --suite=orders
+    - bin/behat --stop-on-failure --suite=payments
+    - bin/behat --stop-on-failure --suite=pricing
+    - bin/behat --stop-on-failure --suite=products
+    - bin/behat --stop-on-failure --suite=promotions
+    - bin/behat --stop-on-failure --suite=settings
+    - bin/behat --stop-on-failure --suite=shipping
+    - bin/behat --stop-on-failure --suite=taxation
+    - bin/behat --stop-on-failure --suite=taxonomies
+    - bin/behat --stop-on-failure --suite=users
 
-#    - php -d memory_limit=4096M bin/behat --stop-on-failure --suite=javascript
+#    - bin/behat --stop-on-failure --suite=javascript
 
 notifications:
     email: "travis-ci@sylius.org"
