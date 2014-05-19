@@ -31,7 +31,7 @@
         "sylius/resource-bundle": "0.10.*@dev",
         "payum/payum-bundle":     "0.8.*",
         "payum/payum":            "0.8.*",
-        "yohang/finite":          "~1.1@dev"
+        "yohang/finite":          "dev-sylius"
     },
     "config": {
         "bin-dir": "bin"
@@ -46,5 +46,11 @@
         "branch-alias": {
             "dev-master": "0.10-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/winzou/Finite"
+        }
+    ]
 }
