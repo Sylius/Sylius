@@ -29,7 +29,7 @@
                         prototypePrefix = settings.prototypePrefix;
                     }
 
-                    var form = element.closest('div.form-group').parent();
+                    var form = element.closest('div.form-group');
                     var container = form.next();
                     var count = form.parents(':eq(1)').children().length - 1;
                     var prototype = $('#' + prototypePrefix + '_' + selectedValue)
