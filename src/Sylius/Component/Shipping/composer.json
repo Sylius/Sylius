@@ -24,7 +24,7 @@
 
         "sylius/resource":          "0.10.*@dev",
         "symfony/options-resolver": "~2.3",
-        "yohang/finite":            "~1.1@dev"
+        "yohang/finite":            "dev-sylius"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -42,5 +42,11 @@
         "branch-alias": {
             "dev-master": "0.10-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/winzou/Finite"
+        }
+    ]
 }
