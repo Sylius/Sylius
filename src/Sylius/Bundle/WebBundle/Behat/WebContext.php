@@ -593,7 +593,7 @@ class WebContext extends DefaultContext
     {
         $product = $this->findOneBy('product', array('name' => $name));
 
-        $this->getSession()->visit($this->generatePageUrl('sylius_product_show', array('slug' => $product->getSlug())));
+        $this->getSession()->visit($this->generatePageUrl($product));
     }
 
     /**
