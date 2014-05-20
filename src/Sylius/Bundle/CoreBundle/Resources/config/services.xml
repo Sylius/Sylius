@@ -21,7 +21,7 @@
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
         <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
         <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
-        <parameter key="sylius.checkout_step.purchase.class">Sylius\Bundle\CoreBundle\Checkout\Step\PurchaseStep</parameter>
+        <parameter key="sylius.checkout_step.purchase.class">Sylius\Bundle\CoreBundle\Checkout\Step\DummyPurchaseStep</parameter>
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>

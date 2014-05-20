@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->bolleanNode('overwrite_purchase_step')->isRequred()->defaultValue(true)->end()
             ->end()
         ;
 

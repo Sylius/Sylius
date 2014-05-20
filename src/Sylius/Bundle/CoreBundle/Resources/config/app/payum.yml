@@ -1,3 +1,6 @@
+sylius_payum:
+    overwrite_purchase_step: true
+
 payum:
     security:
         token_storage:
