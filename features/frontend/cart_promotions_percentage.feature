@@ -41,7 +41,7 @@ Feature: Checkout percentage discount promotions
          When I add product "Woody" to cart, with quantity "3"
          Then I should be on the cart summary page
           And "Promotion total: -€30.00" should appear on the page
-          And "Grand total: €345.00" should appear on the page
+          And "Grand total: €315.00" should appear on the page
 
     Scenario: Fixed discount promotion is not applied when the cart
               has not the required amount
@@ -76,5 +76,5 @@ Feature: Checkout percentage discount promotions
           And I added product "Buzz" to cart, with quantity "1"
          When I add product "Woody" to cart, with quantity "3"
          Then I should still be on the cart summary page
-          And "Promotion total: -€385.25" should appear on the page
-          And "Grand total: €1,289.75" should appear on the page
+          And "Promotion total: -€362.51" should appear on the page
+          And "Grand total: €1,186.40" should appear on the page
