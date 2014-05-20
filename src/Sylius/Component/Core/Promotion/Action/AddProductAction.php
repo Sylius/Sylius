@@ -57,6 +57,10 @@ class AddProductAction implements PromotionActionInterface
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if ($subject instanceof OrderItemInterface) {
+            return;
+        }
+
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
         }
@@ -77,6 +81,10 @@ class AddProductAction implements PromotionActionInterface
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        if ($subject instanceof OrderItemInterface) {
+            return;
+        }
+
         if (!$subject instanceof OrderInterface) {
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Order\Model\OrderInterface');
         }
