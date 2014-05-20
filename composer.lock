@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f0d55cc78d512a830328abb7f2e910f6",
+    "hash": "d21af0d2296a4bf4bbb1e0df9201c3f4",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
