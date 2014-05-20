@@ -34,6 +34,11 @@ finite_finite:
             return:
                 from: [shipped]
                 to:   returned
+        callbacks:
+            after:
+                sylius_sync_items:
+                    do:   [@finite.callback.cascade_transition, 'apply']
+                    args: ['object.getItems()', 'event', 'null', '"sylius_shipment_item"']
 
     sylius_shipment_item:
         class:         %sylius.model.shipment_item.class%

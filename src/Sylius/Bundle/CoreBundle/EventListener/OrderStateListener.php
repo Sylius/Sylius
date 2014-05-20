@@ -51,7 +51,7 @@ class OrderStateListener
         $this->resolve($event->getSubject());
     }
 
-    public function resolveOrderStatesFinite(TransitionEvent $event)
+    public function resolveOrderStatesOnTransition(TransitionEvent $event)
     {
         $resource = $event->getStateMachine()->getObject();
 

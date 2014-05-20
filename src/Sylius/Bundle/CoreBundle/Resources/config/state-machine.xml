@@ -9,6 +9,7 @@
         <!-- Callbacks -->
         <parameter key="sylius.callback.order_payment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback</parameter>
         <parameter key="sylius.callback.coupon_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback</parameter>
+        <parameter key="sylius.callback.order_shipment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderShipmentCallback</parameter>
     </parameters>
 
     <services>
@@ -16,7 +17,12 @@
         <service id="sylius.callback.order_payment" class="%sylius.callback.order_payment.class%">
             <argument type="service" id="finite.factory" />
         </service>
+
         <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />
+
+        <service id="sylius.callback.order_shipment" class="%sylius.callback.order_shipment.class%">
+            <argument type="service" id="finite.factory" />
+        </service>
     </services>
 
 </container>

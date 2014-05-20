@@ -53,7 +53,6 @@ class ShipmentProcessor implements ShipmentProcessorInterface
             $stateMachine = $this->factory->get($shipment, ShipmentTransitions::GRAPH);
             if ($stateMachine->can($transition)) {
                 $stateMachine->apply($transition);
-                $this->updateItemStates($shipment->getItems(), $transition);
             }
         }
     }

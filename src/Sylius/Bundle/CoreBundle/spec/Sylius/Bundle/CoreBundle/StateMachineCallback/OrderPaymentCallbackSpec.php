@@ -54,18 +54,4 @@ class OrderPaymentCallbackSpec extends ObjectBehavior
 
         $this->updateOrderOnPayment($payment);
     }
-
-    function it_dispatches_event_for_void_payments(
-        $factory,
-        PaymentInterface $payment,
-        StateMachineInterface $sm,
-        Collection $payments
-    ) {
-        $payments->getIterator()->willReturn(new \ArrayIterator(array($payment)));
-
-        $factory->get($payment, PaymentTransitions::GRAPH)->willReturn($sm);
-        $sm->apply(PaymentTransitions::SYLIUS_VOID)->shouldBeCalled();
-
-        $this->voidPayments($payments, PaymentTransitions::SYLIUS_VOID);
-    }
 }
