@@ -71,8 +71,9 @@ class ObtainCreditCardAction implements ActionInterface
         }
 
         $form = $this->createCreditCardForm();
-        $form->submit($this->httpRequest);
-        if ($form->isValid()) {
+
+        $form->handleRequest($this->httpRequest);
+        if ($form->isSubmitted() && $form->isValid()) {
             $request->setCreditCard($form->getData());
 
             return;
