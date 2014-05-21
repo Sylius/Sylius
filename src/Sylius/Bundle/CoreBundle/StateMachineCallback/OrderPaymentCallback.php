@@ -54,11 +54,4 @@ class OrderPaymentCallback
             $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
         }
     }
-
-    public function voidPayments(Collection $payments, $transition)
-    {
-        foreach ($payments as $payment) {
-            $this->factory->get($payment, PaymentTransitions::GRAPH)->apply($transition);
-        }
-    }
 }

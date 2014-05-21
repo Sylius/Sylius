@@ -86,7 +86,7 @@ class CoreContext extends DefaultContext
             $order->setCurrency('EUR');
             $order->complete();
 
-            $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentTransitions::SYLIUS_PREPARE, ShipmentInterface::STATE_CHECKOUT);
+            $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentTransitions::SYLIUS_PREPARE);
 
             $manager->persist($order);
 

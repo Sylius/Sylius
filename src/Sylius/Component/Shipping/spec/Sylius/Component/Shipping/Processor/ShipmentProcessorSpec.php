@@ -53,12 +53,6 @@ class ShipmentProcessorSpec extends ObjectBehavior
         $sm->can('transition')->willReturn(true);
         $sm->apply('transition')->shouldBeCalled();
 
-        $shipment->getItems()->shouldBeCalled()->willReturn(array($item));
-
-        $factory->get($item, ShipmentItemTransitions::GRAPH)->willReturn($sm);
-        $sm->can('transition')->willReturn(true);
-        $sm->apply('transition')->shouldBeCalled();
-
         $this->updateShipmentStates(array($shipment), 'transition');
     }
 

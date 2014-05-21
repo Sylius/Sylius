@@ -89,24 +89,25 @@ finite_finite:
                     args: ['object']
                 sylius_update_shipment:
                     on:   'confirm'
-                    do:   [@sylius.processor.shipment_processor, 'updateShipmentStates']
-                    args: ['object.getShipments()', '"prepare"']
+                    do:   [@finite.callback.cascade_transition, 'apply']
+                    args: ['object.getShipments()', 'event', '"prepare"', '"sylius_shipment"']
                 sylius_increment_coupon:
                     on:   'confirm'
                     do:   [@sylius.callback.coupon_usage, 'incrementCouponUsage']
                     args: ['object']
+
                 sylius_release_inventory:
                     on:   'release'
                     do:   [@sylius.order_processing.inventory_handler, 'releaseInventory']
                     args: ['object']
                 sylius_release_shipment:
                     on:   'release'
-                    do:   [@sylius.processor.shipment_processor, 'updateShipmentStates']
-                    args: ['object.getShipments()', '"release"']
+                    do:   [@finite.callback.cascade_transition, 'apply']
+                    args: ['object.getShipments()', 'event', '"release"', '"sylius_shipment"']
                 sylius_void_payment:
                     on:   'release'
-                    do:   [@sylius.callback.order_payment, 'voidPayments']
-                    args: ['object.getPayments()', '"void"']
+                    do:   [@finite.callback.cascade_transition, 'apply']
+                    args: ['object.getPayments()', 'event', '"void"', '"sylius_payment"']
 
     sylius_inventory_unit:
         callbacks:
@@ -115,3 +116,12 @@ finite_finite:
                     to:   '-sold'
                     do:   [@finite.callback.cascade_transition, 'apply']
                     args: ['object', 'event', 'null', '"sylius_shipment_item"']
+
+    sylius_shipment:
+        callbacks:
+            after:
+                sylius_sync_order_ship:
+                    to:   'shipped'
+                    do:   [@sylius.callback.order_shipment, 'updateOrderShippingState']
+                    args: ['object.getOrder()']
+

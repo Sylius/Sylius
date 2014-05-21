@@ -59,6 +59,6 @@ class OrderStateListenerSpec extends ObjectBehavior
         $stateResolver->resolveShippingState($order)->shouldBeCalled();
         $stateResolver->resolvePaymentState($order)->shouldBeCalled();
 
-        $this->resolveOrderStatesFinite($event);
+        $this->resolveOrderStatesOnTransition($event);
     }
 }

@@ -86,7 +86,7 @@
         <h4>{{ 'sylius.order.shipping_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': shipment.order.shippingAddress } %}
     </div>
-    {% if constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') != shipment.state %}
+    {% if finite_can(shipment, constant('Sylius\\Component\\Shipping\\ShipmentTransitions::SYLIUS_SHIP'), constant('Sylius\\Component\\Shipping\\ShipmentTransitions::GRAPH')) %}
         <div class="col-md-6">
             <form action="{{ path('sylius_backend_shipment_ship', {'id': shipment.id}) }}" method="post">
                 {% if shipment_tracking_form is defined %}
