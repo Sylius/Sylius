@@ -28,18 +28,18 @@
         </one-to-many>
 
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
-          <join-table name="sylius_promotion_order_item">
-              <join-columns>
-                  <join-column name="order_item_id" referenced-column-name="id" />
-              </join-columns>
-              <inverse-join-columns>
-                  <join-column name="promotion_id" referenced-column-name="id" />
-              </inverse-join-columns>
-          </join-table>
-          <cascade>
-              <cascade-persist />
-          </cascade>
-      </many-to-many>
+            <join-table name="sylius_promotion_order_item">
+                <join-columns>
+                    <join-column name="order_item_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="promotion_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>

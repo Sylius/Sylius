@@ -34,14 +34,14 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * Inventory units.
      *
-     * @var ArrayCollection|InventoryUnitInterface[]
+     * @var Collection|InventoryUnitInterface[]
      */
     protected $inventoryUnits;
 
     /**
      * Promotions applied
      *
-     * @var ArrayCollection
+     * @var Collection|PromotionInterface[]
      */
     protected $promotions;
 
