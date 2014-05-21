@@ -135,6 +135,9 @@
         "bin-dir": "bin"
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
