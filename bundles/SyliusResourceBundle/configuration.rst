@@ -72,6 +72,8 @@ You need to expose a semantic configuration for your bundle. The following examp
                     ->end()
                 ->end()
             ;
+
+            return $treeBuilder;
         }
     }
 
