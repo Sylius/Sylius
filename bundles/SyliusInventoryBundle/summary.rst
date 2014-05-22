@@ -39,5 +39,5 @@ If you want to see working implementation, try out the `Sylius sandbox applicati
 Bug tracking
 ------------
 
-This bundle uses `GitHub issues <https://github.com/Sylius/SyliusAddressingBundle/issues>`_.
+This bundle uses `GitHub issues <https://github.com/Sylius/Sylius/issues>`_.
 If you have found bug, please create an issue.

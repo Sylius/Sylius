@@ -27,5 +27,5 @@ There is also an example that shows how to integrate this bundle into `Symfony S
 Bug tracking
 ------------
 
-This bundle uses `GitHub issues <https://github.com/Sylius/SyliusFlowBundle/issues>`_.
+This bundle uses `GitHub issues <https://github.com/Sylius/Sylius/issues>`_.
 If you have found bug, please create an issue.
