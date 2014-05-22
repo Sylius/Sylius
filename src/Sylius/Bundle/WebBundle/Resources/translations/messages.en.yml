@@ -243,14 +243,14 @@ sylius:
     move_down: move down
     email: E-Mail
     exchange_rate:
-        create: Create exchange rate
-        create_header: New exchange rate
+        create: Create Exchange Rate
+        create_header: New Exchange Rate
         currency: currency
         id: ID
-        index_header: Exchange rates
+        index_header: Exchange Rates
         no_results: There are no exchange rates to display.
         rate: rate
-        update_header: Editing exchange rate
+        update_header: Edit Exchange Rate
         updated_at: last update
     filter: Filter
     form:
@@ -393,19 +393,19 @@ sylius:
         id: ID
         index_header: Shipments
         inventory_state: Inventory state
-        manage: Manage shipments
+        manage: Manage Shipments
         method: Method
         modified: Modified
         name: Name
         no_items: There are no items to display.
         no_results: There are no shipments to display.
         order: Order
-        show_header: Shipment details
+        show_header: Shipment Details
         sku: SKU
         state: State
         tracking_code: Tracking Code
         update: Edit
-        update_header: Editing shipment
+        update_header: Edit Shipment
         updated_at: Last update
     order_item:
         product: Item
@@ -442,6 +442,8 @@ sylius:
             new: New
             pending: Pending
             processing: Processing
+            refunded: Refunded
+            cancelled: Cancelled
             unknown: Unknown
             void: Void
         update_header: Editing payment
@@ -452,7 +454,7 @@ sylius:
         enabled: Is enabled?
         gateway: gateway
         id: ID
-        index_header: Payment methods
+        index_header: Payment Methods
         name: Name
         no_results: There are no payment methods configured.
         update_header: Editing payment method
@@ -577,8 +579,8 @@ sylius:
     save_changes: Save changes
     search: Search
     settings:
-        general_header: General settings
-        taxation_header: Taxation settings
+        general_header: General Settings
+        taxation_header: Taxation Settings
     shipment_category:
         manage: Manage shipping categories
     shipping_address: Shipping address
