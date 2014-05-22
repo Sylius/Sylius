@@ -3,7 +3,7 @@ sylius_core:
     emails:
         enabled: false
     routing:
-        Sylius\Component\Core\Model\Product:
+        %sylius.model.product.class%:
             field: slug
             prefix: /p
             defaults:
@@ -11,7 +11,7 @@ sylius_core:
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:show.html.twig
                     criteria: {slug: $slug}
-        Sylius\Component\Core\Model\Taxon:
+        %sylius.model.taxon.class%:
             field: permalink
             prefix: /t
             defaults:
