@@ -82,7 +82,12 @@ class ObtainCreditCardAction implements ActionInterface
         throw new ResponseInteractiveRequest(new Response(
             $this->templating->render('SyliusPayumBundle::Payum\Action\obtainCreditCard.html.twig', array(
                 'form' => $form->createView()
-            ))
+            )),
+            200,
+            array(
+                'Cache-Control' => 'no-store, no-cache, max-age=0, post-check=0, pre-check=0',
+                'Pragma' => 'no-cache',
+            )
         ));
     }
 
