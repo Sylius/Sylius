@@ -49,6 +49,7 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
         $order = $payment->getOrder();
 
         if (empty($details)) {
+            $details = new \ArrayObject;
             $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
                 $request->getToken()->getPaymentName(),
                 $payment
@@ -88,20 +89,18 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
                 $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
             }
 
-            $payment->setDetails($details);
+            $payment->setDetails((array) $details);
         }
 
         try {
-            $details = ArrayObject::ensureArrayObject($payment->getDetails());
-
             $request->setModel($details);
             $this->payment->execute($request);
 
             $payment->setDetails((array) $details);
-            $request->setModel($order);
+            $request->setModel($payment);
         } catch (\Exception $e) {
             $payment->setDetails((array) $details);
-            $request->setModel($order);
+            $request->setModel($payment);
 
             throw $e;
         }

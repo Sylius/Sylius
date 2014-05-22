@@ -55,6 +55,7 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
         if (empty($details)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
+            $details = new \ArrayObject;
             $details['AMOUNT'] = $order->getTotal();
             $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
             $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
@@ -69,16 +70,18 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
                     '%02d-%02d', $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(), substr($obtainCreditCardRequest->getCreditCard()->getExpiryYear(), -2)
             ));
 
-            $payment->setDetails($details);
+            $payment->setDetails((array) $details);
         }
 
         try {
             $request->setModel($details);
             $this->payment->execute($request);
 
-            $request->setModel($order);
+            $payment->setDetails((array) $details);
+            $request->setModel($payment);
         } catch (\Exception $e) {
-            $request->setModel($order);
+            $payment->setDetails((array) $details);
+            $request->setModel($payment);
 
             throw $e;
         }

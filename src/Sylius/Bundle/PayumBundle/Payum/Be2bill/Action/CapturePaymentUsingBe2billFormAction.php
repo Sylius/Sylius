@@ -59,6 +59,7 @@ class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
         $details = $payment->getDetails();
 
         if (empty($details)) {
+            $details = new \ArrayObject;
             $details['AMOUNT'] = $order->getTotal();
             $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
             $details['HIDECLIENTEMAIL'] = 'yes';
@@ -68,18 +69,20 @@ class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
             $details['ORDERID'] = $payment->getId();
 
-            $payment->setDetails($details);
+            $payment->setDetails((array) $details);
         }
 
         try {
-            $request->setModel($details);
             $this->httpRequest->getSession()->set('payum_token', $request->getToken()->getHash());
 
+            $request->setModel($details);
             $this->payment->execute($request);
 
-            $request->setModel($order);
+            $payment->setDetails((array) $details);
+            $request->setModel($payment);
         } catch (\Exception $e) {
-            $request->setModel($order);
+            $payment->setDetails((array) $details);
+            $request->setModel($payment);
 
             throw $e;
         }
