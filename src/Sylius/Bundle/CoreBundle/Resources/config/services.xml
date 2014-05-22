@@ -15,6 +15,8 @@
 
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
 
+        <parameter key="sylius.expression_language_factory.class">Sylius\Component\Core\ExpressionLanguage\ExpressionLanguageFactory</parameter>
+
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
 
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
@@ -71,11 +73,13 @@
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.expression_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ExpressionConfigurationType</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.expression.class">Sylius\Component\Core\Promotion\Checker\ExpressionRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
@@ -125,6 +129,8 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
+
+        <service id="sylius.expression_language_factory" class="%sylius.expression_language_factory.class%" />
 
         <!-- checkout -->
         <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">
@@ -413,6 +419,9 @@
             <argument>%sylius.validation_group.promotion_action_shipping_discount_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_action_shipping_discount_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_rule.expression_configuration" class="%sylius.form.type.promotion_rule.expression_configuration.class%">
+            <tag name="form.type" alias="sylius_promotion_rule_expression_configuration" />
+        </service>
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
         </service>
@@ -424,6 +433,10 @@
         </service>
         <service id="sylius.promotion_rule_checker.taxonomy" class="%sylius.promotion_rule_checker.taxonomy.class%">
             <tag name="sylius.promotion_rule_checker" type="taxonomy" label="Taxonomy" />
+        </service>
+        <service id="sylius.promotion_rule_checker.expression" class="%sylius.promotion_rule_checker.expression.class%">
+            <argument type="service" id="sylius.expression_language_factory" />
+            <tag name="sylius.promotion_rule_checker" type="expression" label="Expression" />
         </service>
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />

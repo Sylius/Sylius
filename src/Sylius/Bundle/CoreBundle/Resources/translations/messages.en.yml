@@ -8,6 +8,9 @@ sylius:
                 price: Unit price
                 quantity: Quantity
                 variant: Variant
+        rule:
+            expression_configuration:
+                expr: Expression
         block:
             body: Body
             id: ID
