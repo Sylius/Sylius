@@ -22,11 +22,8 @@ class DummyPurchaseStep extends AbstractPurchaseStep
      */
     protected function initializePurchase(OrderInterface $order, ProcessContextInterface $context)
     {
-        $form = $this->container->get('form.factory')->createNamed('sylius_checkout_purchase', 'form');
-
         return $this->render('SyliusWebBundle:Frontend/Checkout/Step:dummy_purchase.html.twig', array(
             'order'   => $order,
-            'form'    => $form,
             'context' => $context,
         ));
     }
