@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
-use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Sequence\Registry\NonExistingGeneratorException;
@@ -83,7 +83,7 @@ class NumberListener
         $this->entitiesEnabled[spl_object_hash($subject)] = true;
 
         if (!$this->listenerEnabled) {
-            $this->eventManager->addEventListener(Events::onFlush, $this);
+            $this->eventManager->addEventListener(Events::preFlush, $this);
             $this->listenerEnabled = true;
         }
     }
@@ -91,9 +91,9 @@ class NumberListener
     /**
      * Apply generator to all enabled entities
      *
-     * @param OnFlushEventArgs $args
+     * @param PreFlushEventArgs $args
      */
-    public function onFlush(OnFlushEventArgs $args)
+    public function preFlush(PreFlushEventArgs $args)
     {
         $em = $args->getEntityManager();
         $uow = $em->getUnitOfWork();
@@ -130,7 +130,6 @@ class NumberListener
                 );
 
                 $em->persist($sequence);
-                $uow->computeChangeSet($em->getClassMetadata(get_class($sequence)), $sequence);
             }
         }
     }
