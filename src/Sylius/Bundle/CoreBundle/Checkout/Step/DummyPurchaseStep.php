@@ -11,33 +11,36 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class DummyPurchaseStep extends AbstractPurchaseStep
 {
     /**
-     * @param OrderInterface $order
-     *
-     * @return Response
+     * {@inheritDoc}
      */
-    protected function initializePurchase(OrderInterface $order)
+    protected function initializePurchase(OrderInterface $order, ProcessContextInterface $context)
     {
-        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:purchase.html.twig', array(
+        $form = $this->container->get('form.factory')->createNamed('sylius_checkout_purchase', 'form');
+
+        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:dummy_purchase.html.twig', array(
             'order'   => $order,
+            'form'    => $form,
+            'context' => $context,
         ));
     }
 
     /**
-     * @param OrderInterface $order
+     * {@inheritDoc}
      */
-    protected function finalizePurchase(OrderInterface $order)
+    protected function finalizePurchase(OrderInterface $order, ProcessContextInterface $context)
     {
-        $order->getPayment()->setDetails(array(
-            'description' => 'The payment was done by PurchaseStep from CoreBundle. It simply change payment state to completed'
-        ));
+        $payment = $order->getPayments()->last();
 
-        $order->getPayment()->setState(PaymentInterface::STATE_COMPLETED);
+        $payment->setState(PaymentInterface::STATE_COMPLETED);
+        $payment->setDetails(array(
+            'description' => 'The payment was done by DummyPurchaseStep from the CoreBundle. It simply change payment state to completed. Consider changing it with real payment gateway.'
+        ));
     }
 }

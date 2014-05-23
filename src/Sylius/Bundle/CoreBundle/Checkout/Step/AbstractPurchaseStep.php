@@ -29,7 +29,7 @@ abstract class AbstractPurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
-        return $this->initializePurchase($this->getCurrentCart());
+        return $this->initializePurchase($this->getCurrentCart(), $context);
     }
 
     /**
@@ -40,9 +40,9 @@ abstract class AbstractPurchaseStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $payment = $order->getPayments()->last();
 
-        $this->finalizePurchase($order);
+        $this->finalizePurchase($order, $context);
 
-        $nextState = $payment->getStatus();
+        $nextState = $payment->getState();
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
@@ -68,13 +68,15 @@ abstract class AbstractPurchaseStep extends CheckoutStep
 
     /**
      * @param OrderInterface $order
+     * @param ProcessContextInterface $context
      *
      * @return Response
      */
-    abstract protected function initializePurchase(OrderInterface $order);
+    abstract protected function initializePurchase(OrderInterface $order, ProcessContextInterface $context);
 
     /**
      * @param OrderInterface $order
+     * @param ProcessContextInterface $context
      */
-    abstract protected function finalizePurchase(OrderInterface $order);
+    abstract protected function finalizePurchase(OrderInterface $order, ProcessContextInterface $context);
 }

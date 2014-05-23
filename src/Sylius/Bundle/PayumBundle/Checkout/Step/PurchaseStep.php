@@ -9,12 +9,13 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumCoreBundle\Checkout\Step;
+namespace Sylius\Bundle\PayumBundle\Checkout\Step;
 
-use Payum\Bundle\PayumBundle\Security\TokenFactory;
+use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\CoreBundle\Checkout\Step\AbstractPurchaseStep;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -24,9 +25,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class PurchaseStep extends AbstractPurchaseStep
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    protected function initializePurchase(OrderInterface $order)
+    protected function initializePurchase(OrderInterface $order, ProcessContextInterface $context)
     {
         $payment = $order->getPayments()->last();
 
@@ -41,11 +42,9 @@ class PurchaseStep extends AbstractPurchaseStep
     }
 
     /**
-     * @param OrderInterface $order
-     *
-     * @throws \RuntimeException if orders mismatched
+     * {@inheritDoc}
      */
-    protected function finalizePurchase(OrderInterface $order)
+    protected function finalizePurchase(OrderInterface $order, ProcessContextInterface $context)
     {
         $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
         $this->getHttpRequestVerifier()->invalidate($token);
@@ -73,7 +72,7 @@ class PurchaseStep extends AbstractPurchaseStep
     }
 
     /**
-     * @return TokenFactory
+     * @return GenericTokenFactoryInterface
      */
     protected function getTokenFactory()
     {
