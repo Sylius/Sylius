@@ -17,10 +17,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SyliusPayumExtension extends AbstractResourceExtension
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+        list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+
+        // to make it work sylius payum bundle has to be registered after sylius core one.
+        if ($config['overwrite_purchase_step']) {
+            $container->setParameter('sylius.checkout_step.purchase.class', '%sylius.payum.checkout_step.purchase.class%');
+        }
     }
 }

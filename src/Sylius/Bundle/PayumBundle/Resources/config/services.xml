@@ -32,6 +32,8 @@
         <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
         <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
         <parameter key="sylius.payum.action.execute_same_request_with_payment_details.class">Sylius\Bundle\PayumBundle\Payum\Action\ExecuteSameRequestWithPaymentDetailsAction</parameter>
+
+        <parameter key="sylius.payum.checkout_step.purchase.class">Sylius\Bundle\PayumBundle\Checkout\Step\PurchaseStep</parameter>
     </parameters>
 
     <services>
