@@ -17,7 +17,7 @@ finite_finite:
                 type: final
         transitions:
             create:
-                from: [cart, pending]
+                from: [cart]
                 to:   pending
             release:
                 from: [pending]
