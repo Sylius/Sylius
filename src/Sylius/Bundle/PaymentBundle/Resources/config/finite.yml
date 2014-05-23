@@ -10,7 +10,8 @@ finite_finite:
             pending:    ~
             processing: ~
             completed:  ~
-            failed:     ~
+            failed:
+                type: final
             cancelled:  ~
             void:
                 type: final
@@ -27,7 +28,7 @@ finite_finite:
                 from: [new, pending, processing]
                 to:   completed
             fail:
-                from: [pending, processing]
+                from: [new, pending, processing]
                 to:   failed
             cancel:
                 from: [new, pending, processing]
