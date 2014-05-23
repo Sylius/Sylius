@@ -112,7 +112,7 @@ sylius_payum: ~
 sylius_addressing:
     classes:
         address:
-            controller: Sylius\Bundle\CoreBundle\Controller\AddressController
+            controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController
 
 sylius_order:
     classes:
