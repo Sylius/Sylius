@@ -44,7 +44,7 @@ class CouponController extends ResourceController
 
         $form = $this->createForm('sylius_promotion_coupon_generate_instruction', new Instruction());
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
             $this->flashHelper->setFlash('success', 'generate');
 

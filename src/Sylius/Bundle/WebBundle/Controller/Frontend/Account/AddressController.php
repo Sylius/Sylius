@@ -47,7 +47,7 @@ class AddressController extends Controller
         $address = $this->getAddressRepository()->createNew();
         $form = $this->getAddressForm($address);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $user->addAddress($address);
 
             $manager = $this->getUserManager();
@@ -74,7 +74,7 @@ class AddressController extends Controller
         $address = $this->findUserAddressOr404($id);
         $form = $this->getAddressForm($address);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $manager = $this->getUserManager();
             $manager->persist($user);
             $manager->flush();

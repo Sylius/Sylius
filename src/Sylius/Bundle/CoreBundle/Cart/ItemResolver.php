@@ -112,10 +112,9 @@ class ItemResolver implements ItemResolverInterface
         }
 
         // We use forms to easily set the quantity and pick variant but you can do here whatever is required to create the item.
-        $form = $this->formFactory->create('sylius_cart_item', null, array('product' => $product));
+        $form = $this->formFactory->create('sylius_cart_item', $item, array('product' => $product));
 
         $form->submit($data);
-        $item = $form->getData();
 
         // If our product has no variants, we simply set the master variant of it.
         if (!$product->hasVariants()) {
