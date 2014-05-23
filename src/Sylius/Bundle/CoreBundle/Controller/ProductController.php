@@ -35,8 +35,6 @@ class ProductController extends ResourceController
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
-        $config = $this->getConfiguration();
-
         if ($request->attributes->has('_sylius_entity')) {
             $taxon = $request->attributes->get('_sylius_entity');
         } else {
