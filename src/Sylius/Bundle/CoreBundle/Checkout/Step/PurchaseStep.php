@@ -69,7 +69,6 @@ class PurchaseStep extends CheckoutStep
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
 
-        $previousState = $payment->getState();
         $nextState = $status->getStatus();
 
         $stateMachine = $this->get('finite.factory')->get($payment, PaymentTransitions::GRAPH);
