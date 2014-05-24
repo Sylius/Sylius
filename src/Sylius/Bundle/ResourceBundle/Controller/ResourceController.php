@@ -154,7 +154,7 @@ class ResourceController extends FOSRestController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
             if (null === $resource) {

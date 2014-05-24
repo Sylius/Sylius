@@ -49,7 +49,7 @@ class AddressingStep extends CheckoutStep
 
         $form = $this->createCheckoutAddressingForm($order);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
 
             $this->getManager()->persist($order);
