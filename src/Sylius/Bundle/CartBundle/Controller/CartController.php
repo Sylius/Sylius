@@ -39,10 +39,16 @@ class CartController extends Controller
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
-        return $this->render($this->config->getTemplate('summary.html'), array(
-            'cart' => $cart,
-            'form' => $form->createView()
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('summary.html'))
+            ->setData(array(
+                'cart' => $cart,
+                'form' => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**
@@ -78,10 +84,16 @@ class CartController extends Controller
             return $this->redirectToCartSummary();
         }
 
-        return $this->render($this->config->getTemplate('summary.html'), array(
-            'cart' => $cart,
-            'form' => $form->createView()
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('summary.html'))
+            ->setData(array(
+                'cart' => $cart,
+                'form' => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**
