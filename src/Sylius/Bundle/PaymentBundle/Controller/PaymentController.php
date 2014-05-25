@@ -13,7 +13,6 @@ namespace Sylius\Bundle\PaymentBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Payment\PaymentTransitions;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Payment controller.

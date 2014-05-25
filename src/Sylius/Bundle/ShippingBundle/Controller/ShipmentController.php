@@ -13,8 +13,6 @@ namespace Sylius\Bundle\ShippingBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Sylius\Component\Shipping\SyliusShipmentEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShipmentController extends ResourceController

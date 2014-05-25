@@ -11,11 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
-use Doctrine\Common\Collections\Collection;
 use Finite\Factory\FactoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Payment\PaymentTransitions;
 
 /**
  * Synchronization between payments and their order.

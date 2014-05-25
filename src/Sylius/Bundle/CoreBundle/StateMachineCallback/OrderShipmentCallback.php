@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Finite\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 
