@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Registry\NonExistingServiceException;
@@ -56,6 +57,11 @@ class NumberListener
     protected $entitiesEnabled = array();
 
     /**
+     * @var array
+     */
+    protected $sequences = array();
+
+    /**
      * @var bool
      */
     protected $listenerEnabled = false;
@@ -80,7 +86,7 @@ class NumberListener
      */
     public function enableEntity(SequenceSubjectInterface $subject)
     {
-        $this->entitiesEnabled[spl_object_hash($subject)] = true;
+        $this->entitiesEnabled[spl_object_hash($subject)] = $subject;
 
         if (!$this->listenerEnabled) {
             $this->eventManager->addEventListener(Events::preFlush, $this);
@@ -92,54 +98,54 @@ class NumberListener
      * Apply generator to all enabled entities
      *
      * @param PreFlushEventArgs $args
+     *
+     * @throws NonExistingGeneratorException if no generator is found for an enabled entity
      */
     public function preFlush(PreFlushEventArgs $args)
     {
         $em = $args->getEntityManager();
-        $uow = $em->getUnitOfWork();
 
-        foreach (array_merge($uow->getScheduledEntityUpdates(), $uow->getScheduledEntityInsertions()) as $entity) {
-            if ($this->isEntityEnabled($entity)) {
-                $event = new GenericEvent($entity);
-
-                try {
-                    $generator = $this->registry->get($entity);
-                } catch (NonExistingServiceException $e) {
-                    throw new NonExistingGeneratorException($entity, $e);
-                }
-
-                $sequence = $em
-                    ->getRepository($this->sequenceClass)
-                    ->findOneByType($entity->getSequenceType())
-                ;
-
-                if (null === $sequence) {
-                    $sequence = new $this->sequenceClass($entity->getSequenceType());
-                }
-
-                $this->eventDispatcher->dispatch(
-                    sprintf(SyliusSequenceEvents::PRE_GENERATE, $entity->getSequenceType()),
-                    $event
-                );
-
-                $generator->generate($entity, $sequence);
-
-                $this->eventDispatcher->dispatch(
-                    sprintf(SyliusSequenceEvents::POST_GENERATE, $entity->getSequenceType()),
-                    $event
-                );
-
-                $em->persist($sequence);
+        foreach ($this->entitiesEnabled as $entity) {
+            try {
+                $generator = $this->registry->get($entity);
+            } catch (NonExistingServiceException $e) {
+                throw new NonExistingGeneratorException($entity, $e);
             }
+
+            $sequence = $this->getSequence($entity->getSequenceType(), $em);
+
+            $event = new GenericEvent($entity);
+
+            $this->eventDispatcher->dispatch(
+                sprintf(SyliusSequenceEvents::PRE_GENERATE, $entity->getSequenceType()),
+                $event
+            );
+
+            $generator->generate($entity, $sequence);
+
+            $this->eventDispatcher->dispatch(
+                sprintf(SyliusSequenceEvents::POST_GENERATE, $entity->getSequenceType()),
+                $event
+            );
         }
     }
 
-    /**
-     * @param $entity
-     * @return bool
-     */
-    protected function isEntityEnabled($entity)
+    protected function getSequence($type, EntityManagerInterface $em)
     {
-        return isset($this->entitiesEnabled[spl_object_hash($entity)]);
+        if (isset($this->sequences[$type])) {
+            return $this->sequences[$type];
+        }
+
+        $sequence = $em
+            ->getRepository($this->sequenceClass)
+            ->findOneByType($type)
+        ;
+
+        if (null === $sequence) {
+            $sequence = new $this->sequenceClass($type);
+            $em->persist($sequence);
+        }
+
+        return $this->sequences[$type] = $sequence;
     }
 }

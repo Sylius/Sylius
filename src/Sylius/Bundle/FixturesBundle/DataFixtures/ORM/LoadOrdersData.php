@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\SyliusOrderEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -67,8 +68,9 @@ class LoadOrdersData extends DataFixture
             $this->setReference('Sylius.Order-'.$i, $order);
 
             $manager->persist($order);
-            $manager->flush();
         }
+
+        $manager->flush();
     }
 
     /**
@@ -142,7 +144,7 @@ class LoadOrdersData extends DataFixture
         $dispatcher = $this->get('event_dispatcher');
         $dispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
         $dispatcher->dispatch(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, new GenericEvent($order));
-        $dispatcher->dispatch(SyliusOrderEvents::PRE_CREATE, new GenericEvent($order));
+        $this->get('finite.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE);
     }
 
     protected function getPaymentState()

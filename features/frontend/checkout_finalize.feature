@@ -36,3 +36,7 @@ Feature: Checkout finalization
          When I click "Place order"
          Then I should be on the store homepage
           And I should see "Thank you for your order!"
+          And I am on my account orders page
+          And I should see "All your orders"
+          And I should see 1 orders in the list
+          And I should see "000000001"
