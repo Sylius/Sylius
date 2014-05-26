@@ -21,24 +21,6 @@ class SyliusPayumExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
-
-        $loader->load('payment/generic.xml');
-
-        if (class_exists('Payum\Be2Bill\PaymentFactory')) {
-            $loader->load('payment/be2bill.xml');
-        }
-
-        if (class_exists('Payum\Paypal\ExpressCheckout\Nvp\PaymentFactory')) {
-            $loader->load('payment/paypal_express_checkout_nvp.xml');
-        }
-
-        if (class_exists('Payum\Paypal\ExpressCheckout\Nvp\PaymentFactory')) {
-            $loader->load('payment/paypal_express_checkout_nvp.xml');
-        }
-
-        if (class_exists('Payum\OmnipayBridge\PaymentFactory')) {
-            $loader->load('payment/omnipay_bridge.xml');
-        }
+        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
     }
 }
