@@ -109,10 +109,7 @@ sylius_payment:
 
 sylius_payum: ~
 
-sylius_addressing:
-    classes:
-        address:
-            controller: Sylius\Bundle\CoreBundle\Controller\AddressController
+sylius_addressing: ~
 
 sylius_order:
     classes:
