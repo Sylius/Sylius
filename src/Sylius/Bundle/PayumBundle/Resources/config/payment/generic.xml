@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
+        <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
+        <parameter key="sylius.payum.action.execute_same_request_with_payment_details.class">Sylius\Bundle\PayumBundle\Payum\Action\ExecuteSameRequestWithPaymentDetailsAction</parameter>
+
+        <parameter key="sylius.payum.dummy.action.capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CapturePaymentAction</parameter>
+        <parameter key="sylius.payum.dummy.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\PaymentStatusAction</parameter>
+    </parameters>
+
+    <services>
+        <!-- Generic -->
+        <service id="sylius.payum.action.payment_status" class="%sylius.payum.action.payment_status.class%">
+            <tag name="payum.action" all="true" />
+        </service>
+        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%">
+            <tag name="payum.action" all="true" />
+        </service>
+        <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" >
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="templating" />
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+            <tag name="payum.action" all="true" />
+        </service>
+
+        <!-- Dummy -->
+        <service id="sylius.payum.dummy.action.capture_payment" class="%sylius.payum.dummy.action.capture_payment.class%" />
+        <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%" />
+    </services>
+
+</container>

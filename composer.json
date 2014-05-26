@@ -40,7 +40,7 @@
         "mathiasverraes/money":                 "*@dev",
         "pagerfanta/pagerfanta":                "1.0.*@dev",
         "payum/payum":                          "~0.8.2",
-        "payum/payum-bundle":                   "0.8.*",
+        "payum/payum-bundle":                   "~0.8.5",
         "sensio/distribution-bundle":           "2.3.*",
         "stof/doctrine-extensions-bundle":      "1.1.*",
         "symfony-cmf/block-bundle":             "1.1.*",
