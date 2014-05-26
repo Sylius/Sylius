@@ -69,6 +69,49 @@
         "phpspec/phpspec":                   "~2.0",
         "phpunit/phpunit":                   "~3.7"
     },
+    "replace": {
+        "sylius/addressing": "self.version",
+        "sylius/addressing-bundle": "self.version",
+        "sylius/attribute": "self.version",
+        "sylius/attribute-bundle": "self.version",
+        "sylius/cart": "self.version",
+        "sylius/cart-bundle": "self.version",
+        "sylius/core": "self.version",
+        "sylius/core-bundle": "self.version",
+        "sylius/fixtures-bundle": "self.version",
+        "sylius/flow-bundle": "self.version",
+        "sylius/installer-bundle": "self.version",
+        "sylius/inventory": "self.version",
+        "sylius/inventory-bundle": "self.version",
+        "sylius/money": "self.version",
+        "sylius/money-bundle": "self.version",
+        "sylius/order": "self.version",
+        "sylius/order-bundle": "self.version",
+        "sylius/payment": "self.version",
+        "sylius/payment-bundle": "self.version",
+        "sylius/payum-bundle": "self.version",
+        "sylius/pricing": "self.version",
+        "sylius/pricing-bundle": "self.version",
+        "sylius/product": "self.version",
+        "sylius/product-bundle": "self.version",
+        "sylius/promotion": "self.version",
+        "sylius/promotion-bundle": "self.version",
+        "sylius/registry": "self.version",
+        "sylius/resource": "self.version",
+        "sylius/resource-bundle": "self.version",
+        "sylius/sequence": "self.version",
+        "sylius/sequence-bundle": "self.version",
+        "sylius/settings-bundle": "self.version",
+        "sylius/shipping": "self.version",
+        "sylius/shipping-bundle": "self.version",
+        "sylius/taxation": "self.version",
+        "sylius/taxation-bundle": "self.version",
+        "sylius/taxonomy": "self.version",
+        "sylius/taxonomy-bundle": "self.version",
+        "sylius/variation": "self.version",
+        "sylius/variation-bundle": "self.version",
+        "sylius/web-bundle": "self.version"
+    },
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -92,6 +135,9 @@
         "bin-dir": "bin"
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
         "incenteev-parameters": {
