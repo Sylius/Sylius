@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use Finite\Event\TransitionEvent;
+use SM\Event\TransitionEvent;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
@@ -46,7 +46,7 @@ class OrderStateListenerSpec extends ObjectBehavior
         $this->resolveOrderStates($event);
     }
 
-    function it_resolves_order_states_with_finite_event(
+    function it_resolves_order_states_with_state_machine_event(
         StateResolverInterface $stateResolver,
         TransitionEvent $event,
         OrderInterface $order,

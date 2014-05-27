@@ -1,11 +1,11 @@
-finite_finite:
+winzou_state_machine:
     sylius_payment:
         class:         %sylius.model.payment.class%
         property_path: state
         graph:         sylius_payment
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            new:
-                type: initial
+            new:        ~
             unknown:    ~
             pending:    ~
             processing: ~
@@ -13,10 +13,8 @@ finite_finite:
             failed:
                 type: final
             cancelled:  ~
-            void:
-                type: final
-            refunded:
-                type: final
+            void:       ~
+            refunded:   ~
         transitions:
             create:
                 from: [new]

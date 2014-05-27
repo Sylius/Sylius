@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Finite\Event\TransitionEvent;
+use SM\Event\TransitionEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Order\Model\OrderAwareInterface;

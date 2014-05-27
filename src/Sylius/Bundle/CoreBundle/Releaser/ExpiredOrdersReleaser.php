@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Releaser;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Order\OrderTransitions;
 
@@ -57,10 +57,7 @@ class ExpiredOrdersReleaser implements ReleaserInterface
         $orders = $this->repository->findExpired($expiresAt);
 
         foreach ($orders as $order) {
-            $stateMachine = $this->factory->get($order, OrderTransitions::GRAPH);
-            if ($stateMachine->can(OrderTransitions::SYLIUS_RELEASE)) {
-                $stateMachine->apply(OrderTransitions::SYLIUS_RELEASE);
-            }
+            $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_RELEASE, true);
         }
 
         $this->manager->flush();

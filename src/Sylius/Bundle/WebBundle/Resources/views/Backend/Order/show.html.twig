@@ -56,7 +56,7 @@
                                 <div class="pull-right">
                                     {{ misc.state_label(payment.state, 'payment') }}
                                 </div>
-                                {% for transition in ['cancel', 'complete', 'refund'] if finite_can(payment, transition, 'sylius_payment') %}
+                                {% for transition in ['cancel', 'complete', 'refund'] if sm_can(payment, transition, 'sylius_payment') %}
                                     <form action="{{ path('sylius_backend_payment_update_state', {'id': payment.id, 'transition': transition}) }}" method="post">
                                         <input type="hidden" name="_method" value="PUT">
                                         <button class="btn btn-default" type="submit">
@@ -248,7 +248,7 @@
             <td>{{ unit.createdAt|date }}</td>
             <td>{{ unit.updatedAt|date }}</td>
             <td>
-                {% for transition in ['backorder', 'sell', 'return'] if finite_can(unit, transition, 'sylius_inventory_unit') %}
+                {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
                     <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">
                         <input type="hidden" name="_method" value="PUT">
                         <button class="btn btn-default" type="submit">

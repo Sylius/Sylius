@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;

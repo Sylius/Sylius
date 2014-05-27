@@ -71,7 +71,7 @@ class PurchaseStep extends CheckoutStep
 
         $nextState = $status->getStatus();
 
-        $stateMachine = $this->get('finite.factory')->get($payment, PaymentTransitions::GRAPH);
+        $stateMachine = $this->get('sm.factory')->get($payment, PaymentTransitions::GRAPH);
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
             $stateMachine->apply($transition);

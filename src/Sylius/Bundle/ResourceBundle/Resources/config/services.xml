@@ -27,7 +27,7 @@
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
 
         <!-- Sylius State Machine -->
-        <parameter key="finite.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
+        <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
     </parameters>
 
     <services>

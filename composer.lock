@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8848c6313c5c7f9c09d69e03618355b1",
+    "hash": "ecf1e44af8e52b56d059482436cb180a",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -4987,77 +4987,101 @@
             "time": "2014-05-16 12:34:51"
         },
         {
-            "name": "yohang/finite",
-            "version": "dev-sylius",
+            "name": "winzou/state-machine",
+            "version": "0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/winzou/Finite.git",
-                "reference": "8e040db0b801b2f2d5e268c0e0a216aeb1882204"
+                "url": "https://github.com/winzou/state-machine.git",
+                "reference": "c4c44621fd83eedf7cb3fa4fbfb04a82a53161d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/winzou/Finite/zipball/8e040db0b801b2f2d5e268c0e0a216aeb1882204",
-                "reference": "8e040db0b801b2f2d5e268c0e0a216aeb1882204",
+                "url": "https://api.github.com/repos/winzou/state-machine/zipball/c4c44621fd83eedf7cb3fa4fbfb04a82a53161d2",
+                "reference": "c4c44621fd83eedf7cb3fa4fbfb04a82a53161d2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "symfony/event-dispatcher": ">=2.1,<3.0",
+                "symfony/event-dispatcher": "~2.1",
                 "symfony/expression-language": "~2.4",
-                "symfony/options-resolver": ">=2.1,<3.0",
-                "symfony/property-access": ">=2.3,<3.0"
+                "symfony/property-access": "~2.1"
             },
             "require-dev": {
-                "pdepend/pdepend": "*",
-                "phpmd/phpmd": "*",
-                "phpunit/phpunit": ">=3.7,<4.0",
-                "pimple/pimple": ">=1.0,<2.0",
-                "symfony/dependency-injection": ">=2.1,<3.0",
-                "symfony/framework-bundle": ">=2.1,<3.0",
-                "symfony/security": ">=2.1,<3.0",
-                "twig/twig": ">=1.13,<2.0"
-            },
-            "suggest": {
-                "pimple/pimple": "Needed for use with PimpleFactory",
-                "symfony/dependency-injection": "Needed for use with Symfony DependencyInjection Factory",
-                "symfony/security": "Needed for using SecurityAwareStateMachine",
-                "symfony/yaml": "Yaml allows you to define your State graph in YAML"
+                "phpspec/phpspec": "~2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
-                    "Finite": "src/"
+                    "SM": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Yohan Giarelli",
-                    "email": "yohan@giarel.li",
-                    "homepage": "http://yohan.giarel.li"
+                    "name": "Alexandre Bacco",
+                    "email": "alexandre.bacco@gmail.com",
+                    "homepage": "http://alex.bacco.fr"
                 }
             ],
-            "description": "A simple PHP5.3+ Finite State Machine",
-            "homepage": "https://github.com/yohang/Finite",
+            "description": "A very lightweight yet powerful PHP state machine",
+            "homepage": "https://github.com/winzou/StateMachine",
+            "keywords": [
+                "callback",
+                "event",
+                "state",
+                "statemachine"
+            ],
+            "time": "2014-05-26 10:18:18"
+        },
+        {
+            "name": "winzou/state-machine-bundle",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/winzou/StateMachineBundle.git",
+                "reference": "0b81a55db1d1a3751426f2531442ad9c5432b812"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/0b81a55db1d1a3751426f2531442ad9c5432b812",
+                "reference": "0b81a55db1d1a3751426f2531442ad9c5432b812",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.3.0",
+                "symfony/framework-bundle": "~2.1",
+                "winzou/state-machine": "~0.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "winzou\\Bundle\\StateMachineBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Bacco",
+                    "email": "alexandre.bacco@gmail.com",
+                    "homepage": "http://alex.bacco.fr"
+                }
+            ],
+            "description": "Bundle for the very lightweight yet powerful PHP state machine",
             "keywords": [
                 "bundle",
-                "state",
                 "statemachine",
-                "symfony",
-                "transition",
-                "workflow"
+                "symfony"
             ],
-            "support": {
-                "source": "https://github.com/winzou/Finite/tree/sylius"
-            },
-            "time": "2014-05-16 07:54:19"
+            "time": "2014-05-27 04:23:03"
         }
     ],
     "packages-dev": [
@@ -6292,7 +6316,6 @@
         "mathiasverraes/money": 20,
         "pagerfanta/pagerfanta": 20,
         "white-october/pagerfanta-bundle": 20,
-        "yohang/finite": 20,
         "behat/symfony2-extension": 20,
         "behat/mink-extension": 20,
         "behat/mink-browserkit-driver": 20,

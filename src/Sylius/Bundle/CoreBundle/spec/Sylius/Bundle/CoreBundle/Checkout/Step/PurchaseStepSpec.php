@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
@@ -75,7 +75,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $container->get('doctrine')->willReturn($doctrine);
         $container->has('doctrine')->willReturn(true);
         $container->get('translator')->willReturn($translator);
-        $container->get('finite.factory')->willReturn($factory);
+        $container->get('sm.factory')->willReturn($factory);
 
         $this->setName('purchase');
 

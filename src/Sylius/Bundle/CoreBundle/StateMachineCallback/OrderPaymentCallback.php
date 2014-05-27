@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Core\Model\PaymentInterface;
 

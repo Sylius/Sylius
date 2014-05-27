@@ -244,7 +244,7 @@ class ResourceController extends FOSRestController
             $graph = $this->stateMachineGraph;
         }
 
-        $stateMachine = $this->get('finite.factory')->get($resource, $graph);
+        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
         if (!$stateMachine->can($transition)) {
             throw new NotFoundHttpException(sprintf(
                 'The requested transition %s cannot be applied on the given %s with graph %s.',

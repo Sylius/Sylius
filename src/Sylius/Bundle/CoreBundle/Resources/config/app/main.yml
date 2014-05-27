@@ -2,11 +2,11 @@ imports:
     - { resource: @SyliusCoreBundle/Resources/config/app/sylius.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/payum.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/cmf.yml }
-    - { resource: @SyliusPaymentBundle/Resources/config/finite.yml }
-    - { resource: @SyliusShippingBundle/Resources/config/finite.yml }
-    - { resource: @SyliusOrderBundle/Resources/config/finite.yml }
-    - { resource: @SyliusInventoryBundle/Resources/config/finite.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/finite.yml }
+    - { resource: @SyliusPaymentBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusShippingBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusOrderBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
 
 doctrine_cache:
     providers:
