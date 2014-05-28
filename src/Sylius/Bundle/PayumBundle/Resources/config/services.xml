@@ -36,52 +36,70 @@
 
     <services>
         <!-- PayPal -->
-        <service id="sylius.payum.paypal.action.capture_payment_using_express_checkout" class="%sylius.payum.paypal.action.capture_payment_using_express_checkout.class%">
+        <service id="sylius.payum.paypal.action.capture_payment_using_express_checkout" class="%sylius.payum.paypal.action.capture_payment_using_express_checkout.class%" public="false">
             <argument type="service" id="payum.security.token_factory" />
+
+            <tag name="payum.action" factory="paypal_express_checkout_nvp" />
         </service>
-        <service id="sylius.payum.paypal.action.notify_order" class="%sylius.payum.paypal.action.notify_order.class%">
+        <service id="sylius.payum.paypal.action.notify_order" class="%sylius.payum.paypal.action.notify_order.class%" public="false">
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="finite.factory" />
+
+            <tag name="payum.action" factory="paypal_express_checkout_nvp" />
         </service>
 
         <!-- Stripe -->
-        <service id="sylius.payum.stripe.action.capture_payment_using_credit_card" class="%sylius.payum.stripe.action.capture_payment_using_credit_card.class%" />
+        <service id="sylius.payum.stripe.action.capture_payment_using_credit_card" class="%sylius.payum.stripe.action.capture_payment_using_credit_card.class%" public="false">
+            <tag name="payum.action" factory="omnipay" />
+        </service>
 
         <!-- be2bill -->
-        <service id="sylius.payum.be2bill.action.capture_payment_using_credit_card" class="%sylius.payum.be2bill.action.capture_payment_using_credit_card.class%">
+        <service id="sylius.payum.be2bill.action.capture_payment_using_credit_card" class="%sylius.payum.be2bill.action.capture_payment_using_credit_card.class%" public="false">
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
+
+            <tag name="payum.action" factory="be2bill" />
         </service>
-        <service id="sylius.payum.be2bill.action.capture_payment_using_be2bill_form" class="%sylius.payum.be2bill.action.capture_payment_using_be2bill_form.class%">
+        <service id="sylius.payum.be2bill.action.capture_payment_using_be2bill_form" class="%sylius.payum.be2bill.action.capture_payment_using_be2bill_form.class%" public="false">
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
+
+            <tag name="payum.action" factory="be2bill" />
         </service>
-        <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class%">
+        <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class%" public="false">
             <argument type="service" id="payum.context.be2bill.api" />
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="finite.factory" />
             <argument>id</argument>
+
+            <tag name="payum.action" factory="be2bill" />
         </service>
 
         <!-- Payum -->
-        <service id="sylius.payum.action.payment_status" class="%sylius.payum.action.payment_status.class%" />
-        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%" />
-        <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" >
+        <service id="sylius.payum.action.payment_status" class="%sylius.payum.action.payment_status.class%" public="false">
+            <tag name="payum.action" all="true" />
+        </service>
+        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%" public="false">
+            <tag name="payum.action" all="true" />
+        </service>
+        <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" public="false">
             <argument type="service" id="form.factory" />
             <argument type="service" id="templating" />
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
+
+            <tag name="payum.action" all="true" />
         </service>
 
         <!-- Dummy -->
-        <service id="sylius.payum.dummy.action.capture_payment" class="%sylius.payum.dummy.action.capture_payment.class%" />
-        <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%" />
+        <service id="sylius.payum.dummy.action.capture_payment" class="%sylius.payum.dummy.action.capture_payment.class%"  public="false" />
+        <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%"  public="false" />
     </services>
 
 </container>

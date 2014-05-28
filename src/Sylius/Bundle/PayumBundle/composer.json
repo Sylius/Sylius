@@ -29,8 +29,8 @@
         "sylius/order-bundle":    "0.10.*@dev",
         "sylius/payment-bundle":  "0.10.*@dev",
         "sylius/resource-bundle": "0.10.*@dev",
-        "payum/payum-bundle":     "0.8.*",
-        "payum/payum":            "0.8.*",
+        "payum/payum-bundle":     "~0.8.5",
+        "payum/core":             "~0.8.7",
         "yohang/finite":          "dev-sylius"
     },
     "config": {
