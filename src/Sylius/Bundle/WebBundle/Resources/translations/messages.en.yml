@@ -240,7 +240,7 @@ sylius:
     delete: delete
     deleted: Deleted
     edit: edit
-    save: save
+    save: Save
     move_up: move up
     move_down: move down
     email: E-Mail

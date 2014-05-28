@@ -3,10 +3,16 @@
 {{ form_errors(form)  }}
 
 <div class="tab-content">
+    {% if user.id is not empty %}
     {% include 'SyliusWebBundle:Backend/User/Form:_overview.html.twig' %}
+    {% endif %}
+
     {% include 'SyliusWebBundle:Backend/User/Form:_details.html.twig' %}
+
+    {% if user.id is not empty %}
     {% include 'SyliusWebBundle:Backend/User/Form:_addresses.html.twig' %}
     {% include 'SyliusWebBundle:Backend/User/Form:_orders.html.twig' %}
+    {% endif %}
 </div>
 
 {{ form_rest(form) }}

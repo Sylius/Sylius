@@ -4,9 +4,10 @@
         {{ address.company }}<br/>
     {% endif %}
     {{ address.street }}<br/>
-    {{ address.city }}<br/>
+    {{ address.city }}
     {% if address.province %}
-        {{ address.province }}<br/>
+        ({{ address.province }})
     {% endif %}
+    <br/>
     {{ address.country|upper }} {{ address.postcode }}
 </address>

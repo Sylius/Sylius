@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-{{ form_start(form, {'action': path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+{{ form_start(form, {'action': path('sylius_backend_taxon_update', {'taxonomyId': taxonomy.id, 'id': taxon.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
 {{ page.header('taxon.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 

@@ -14,7 +14,7 @@
 {% block content %}
 {{ form_start(form, {'action': path('sylius_backend_promotion_update', {'id': promotion.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ page.header('promotion.update', 'pencil', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
+{{ page.header('promotion.update', 'pencil', 'SyliusWebBundle:Backend/Promotion/Actions:_update.html.twig', {'promotion': promotion}) }}
 
 {% include 'SyliusWebBundle:Backend/Promotion:_form.html.twig' %}
 <input type="hidden" name="_method" value="PUT">

@@ -43,27 +43,34 @@ class UserMenuBuilder extends ContainerAware
             ->setChildrenAttribute('class', 'nav')
         ;
 
-        $menu
-            ->addChild('overview', array('uri' => '#overview'))
-            ->setCurrent(true)
-            ->setLinkAttribute('data-toggle', 'tab')
-            ->setLabel('sylius.backend.user.overview')
-        ;
+        if (null !== $user->getId()) {
+            $menu
+                ->addChild('overview', array('uri' => '#overview'))
+                ->setCurrent(true)
+                ->setLinkAttribute('data-toggle', 'tab')
+                ->setLabel('sylius.backend.user.overview')
+            ;
+        }
+
         $menu
             ->addChild('details', array('uri' => '#details'))
+            ->setCurrent(true)
             ->setLinkAttribute('data-toggle', 'tab')
             ->setLabel('sylius.backend.user.details')
         ;
-        $menu
-            ->addChild('addresses', array('uri' => '#addresses'))
-            ->setLinkAttribute('data-toggle', 'tab')
-            ->setLabel('sylius.backend.user.addresses')
-        ;
-        $menu
-            ->addChild('orders', array('uri' => '#orders'))
-            ->setLinkAttribute('data-toggle', 'tab')
-            ->setLabel('sylius.backend.user.orders')
-        ;
+
+        if (null !== $user->getId()) {
+            $menu
+                ->addChild('addresses', array('uri' => '#addresses'))
+                ->setLinkAttribute('data-toggle', 'tab')
+                ->setLabel('sylius.backend.user.addresses')
+            ;
+            $menu
+                ->addChild('orders', array('uri' => '#orders'))
+                ->setLinkAttribute('data-toggle', 'tab')
+                ->setLabel('sylius.backend.user.orders')
+            ;
+        }
 
         return $menu;
     }

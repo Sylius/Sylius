@@ -114,10 +114,10 @@ class PromotionContext extends DefaultContext
             if (array_key_exists('used', $data) && '' !== $data['used']) {
                 $promotion->setUsed((int) $data['used']);
             }
-            if (array_key_exists('starts', $data)) {
+            if (isset($data['starts'])) {
                 $promotion->setStartsAt(new \DateTime($data['starts']));
             }
-            if (array_key_exists('ends', $data)) {
+            if (isset($data['ends'])) {
                 $promotion->setEndsAt(new \DateTime($data['ends']));
             }
 

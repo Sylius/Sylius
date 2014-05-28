@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-{{ page.header('promotion_coupon.index', 'ticket', 'SyliusWebBundle:Backend/Coupon/Actions:_index.html.twig') }}
+{{ page.header('promotion_coupon.index', 'ticket', 'SyliusWebBundle:Backend/Coupon/Actions:_index.html.twig', {'promotionId': promotionId}) }}
 
 {{ pagination.standard(promotion_coupons) }}
 {{ list(promotion_coupons) }}

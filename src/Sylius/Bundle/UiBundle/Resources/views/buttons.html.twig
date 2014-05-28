@@ -72,6 +72,10 @@
 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> {{ message|default('sylius.save_changes')|trans }}</button>
 {% endmacro %}
 
+{% macro form_generate(message) %}
+<button type="submit" class="btn btn-primary"><i class="fa fa-random"></i> {{ message|default('sylius.generate')|trans }}</button>
+{% endmacro %}
+
 {% macro form_cancel(url, message) %}
 <a href="{{ app.request.headers.get('referer', url|default('')) }}" class="btn btn-danger"><i class="fa fa-times"></i> {{ message|default('sylius.cancel')|trans }}</a>
 {% endmacro %}
