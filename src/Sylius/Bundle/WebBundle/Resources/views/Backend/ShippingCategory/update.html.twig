@@ -13,7 +13,7 @@
 {% block content %}
 {{ form_start(form, {'action': path('sylius_backend_shipping_category_update', {'id': shipping_category.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ page.header('shipping_category.create', 'plus-sign', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
+{{ page.header('shipping_category.update', 'plus-sign', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
 
 {% include 'SyliusWebBundle:Backend/ShippingCategory:_form.html.twig' %}
 <input type="hidden" name="_method" value="PUT">

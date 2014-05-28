@@ -6,9 +6,6 @@
   "private": true,
   "dependencies": {
     "bootstrap": "3.1.1",
-    "bootstrap-switch": "~3.0.0",
-    "eonasdan-bootstrap-datetimepicker": "~3.0.0",
-    "selectize": "0.9.0",
-    "chartjs": "*"
+    "bootstrap-switch": "~3.0.0"
   }
 }

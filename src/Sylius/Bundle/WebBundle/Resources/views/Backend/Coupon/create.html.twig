@@ -15,9 +15,9 @@
 {% endblock %}
 
 {% block content %}
-{{ form_start(form, {'action': path('sylius_backend_promotion_coupon_create'), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+{{ form_start(form, {'action': path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ page.header('promotion_coupon.create', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
+{{ page.header('promotion_coupon.create', 'plus-circle', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
 
 {{ form_errors(form) }}
 {% include 'SyliusWebBundle:Backend/Coupon:_form.html.twig' %}

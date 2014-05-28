@@ -1,5 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+
 {% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
@@ -11,9 +13,9 @@
 {% endblock %}
 
 {% block content %}
-{{ form_start(form, {'action': path('sylius_backend_promotion_coupon_generate', {'promotionId': 'promotion.id'}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+{{ form_start(form, {'action': path('sylius_backend_promotion_coupon_generate', {'promotionId': promotion.id}), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
 
-{{ page.header('promotion_coupon.generate', 'SyliusUiBundle:Form/Actions:_create.html.twig') }}
+{{ page.header('promotion_coupon.generate', 'cog', 'SyliusUiBundle:Form/Actions:_generate.html.twig') }}
 {{ form_errors(form) }}
 
 {% include 'SyliusWebBundle:Backend/Coupon:_generateForm.html.twig' %}

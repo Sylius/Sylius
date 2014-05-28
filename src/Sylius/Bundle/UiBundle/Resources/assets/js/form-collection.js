@@ -7,13 +7,13 @@
  * file that was distributed with this source code.
  */
 
-//; here is caused of twitter bootstrap do not have ; at the end of file
-;(function ( $ ) {
+(function ( $ ) {
     'use strict';
 
     $(document).ready(function() {
         $(document).on('click', 'a[data-collection-button="add"]', function(e) {
             e.preventDefault();
+
             var collectionContainer = $('#' + $(this).data('collection'));
             var prototype = $('#' + $(this).data('prototype')).data('prototype');
             var item = prototype.replace(/__name__/g, collectionContainer.children().length);
@@ -21,8 +21,9 @@
         });
         $(document).on('click', 'a[data-collection-button="delete"]', function(e) {
             e.preventDefault();
-            var item = $(this).closest('.sylius-assortment-variant-images-image');
+
+            var item = $(this).closest('.collection-item');
             item.remove();
         });
     });
-})( jQuery );
+})(jQuery);
