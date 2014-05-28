@@ -189,8 +189,10 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404($request);
         $form = $this->getForm($resource);
+        $method = $request->getMethod();
 
-        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
+        if (in_array($method, array('POST', 'PUT', 'PATCH')) &&
+            $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
             return $this->redirectHandler->redirectTo($resource);
@@ -274,6 +276,10 @@ class ResourceController extends FOSRestController
      */
     public function getForm($resource = null)
     {
+        if ($this->config->isApiRequest()) {
+            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
+        }
+
         return $this->createForm($this->config->getFormType(), $resource);
     }
 
