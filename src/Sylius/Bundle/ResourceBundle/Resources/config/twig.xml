@@ -25,7 +25,7 @@
 
     <services>
         <service id="sylius.twig.extension.resource" class="%sylius.twig.extension.resource.class%">
-            <argument type="service" id="service_container" />
+            <argument type="service" id="router" />
             <argument>%sylius.twig.extension.resource.pagination_template%</argument>
             <argument>%sylius.twig.extension.resource.sorting_template%</argument>
             <tag name="twig.extension" />
