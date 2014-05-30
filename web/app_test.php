@@ -16,28 +16,24 @@ use Symfony\Component\HttpFoundation\Request;
  * Testing environment.
  */
 
-if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
-    '127.0.0.1',
-    '172.33.33.1',
-    '::1',
-    '10.0.0.1'
-))) {
+require_once __DIR__.'/../app/bootstrap.php.cache';
+require_once __DIR__.'/../app/AppKernel.php';
+
+$request = Request::createFromGlobals();
+if (!in_array($request->getClientIp(), array('127.0.0.1', '172.33.33.1', '::1', '10.0.0.1'))) {
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+$app = new AppKernel('test', true);
 
-// Require kernel.
-require_once __DIR__.'/../app/AppKernel.php';
-
-// Initialize kernel and run the application.
-$kernel = new AppKernel('test', true);
-$request = Request::createFromGlobals();
+$stack = new Stack\Builder();
+$app   = $stack
+//    ->push('Sylius\Middleware\CookieGuard\CookieGuard')
+    ->push('Sylius\Middleware\Locale\NegotiateLocale')
+    ->resolve($app)
+;
 
 Request::enableHttpMethodParameterOverride();
 
-$response = $kernel->handle($request);
-$response->send();
-
-$kernel->terminate($request, $response);
+$app->terminate($request, $app->handle($request)->send());
