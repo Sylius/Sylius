@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -51,15 +53,19 @@ class ProductController extends ResourceController
             ->createByTaxonPaginator($taxon)
         ;
 
-        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
-        $paginator->setCurrentPage($request->query->get('page', 1));
-
-        return $this->render($this->config->getTemplate('indexByTaxon.html'), array(
-            'taxon'    => $taxon,
-            'products' => $paginator,
-        ));
+        return $this->renderResults($taxon, $paginator, 'indexByTaxon.html', $request->get('page', 1));
     }
 
+    /**
+     * List products categorized under given taxon (fetch by its ID).
+     *
+     * @param Request $request
+     * @param integer $id
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
     public function indexByTaxonIdAction(Request $request, $id)
     {
         $taxon = $this->get('sylius.repository.taxon')->find($id);
@@ -73,13 +79,7 @@ class ProductController extends ResourceController
             ->createByTaxonPaginator($taxon)
         ;
 
-        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
-        $paginator->setCurrentPage($request->query->get('page', 1));
-
-        return $this->render($this->config->getTemplate('productIndex.html'), array(
-            'taxon'    => $taxon,
-            'products' => $paginator,
-        ));
+        return $this->renderResults($taxon, $paginator, 'productIndex.html', $request->get('page', 1));
     }
 
     /**
@@ -128,5 +128,22 @@ class ProductController extends ResourceController
         }
 
         return parent::findOr404($request, $criteria);
+    }
+
+    private function renderResults(TaxonInterface $taxon, Pagerfanta $results, $template, $page)
+    {
+        $results->setCurrentPage($page, true, true);
+        $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate($template))
+            ->setData(array(
+                'taxon'    => $taxon,
+                'products' => $results,
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 }
