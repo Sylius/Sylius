@@ -1,0 +1,46 @@
+Sylius\Bundle\JobSchedulerBundle\Entity\Job:
+    type: entity
+    repositoryClass: Sylius\Bundle\JobSchedulerBundle\Entity\Repository\JobRepository
+    table: sylius_scheduler_job
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        command:
+            type: text
+        description:
+            type: string
+            length: 250
+            nullable: true
+        schedule:
+            type: string
+            length: 25
+        isRunning:
+            type: boolean
+        priority:
+            type: integer
+        environment:
+            type: string
+            length: 100
+            nullable: true
+        serverType:
+            type: string
+            length: 100
+            nullable: true
+        active:
+            type: boolean
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+    oneToMany:
+          logs:
+              targetEntity: \Sylius\Bundle\JobSchedulerBundle\Entity\JobLog
+              mappedBy: job
+              cascade: ["persist","remove"]
+    lifecycleCallbacks:
+        prePersist: [setCreatedAt]
+        preUpdate: [setUpdatedAt]

@@ -1,0 +1,29 @@
+Sylius\Bundle\JobSchedulerBundle\Entity\JobLog:
+    type: entity
+    table: sylius_scheduler_log
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        output:
+            type: text
+            nullable: true
+        errors:
+            type: text
+            nullable: true
+        status:
+            type: integer
+        startedAt:
+            type: string
+            nullable: true
+            column: started_at
+        finishedAt:
+            type: string
+            nullable: true
+            column: finished_at
+
+    manyToOne:
+        job:
+            targetEntity: Sylius\Bundle\JobSchedulerBundle\Entity\Job
+            mappedBy: logs

@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">{{ 'sylius.log.output_modal.header'|trans }}</h4>
+        </div>
+        <div class="modal-body">
+            {% if log %}
+
+                {{ log.output }}
+                {{ log.errors }}
+            {% else %}
+                {{ 'sylius.log.not_found'|trans }}
+            {% endif %}
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default"
+                    data-dismiss="modal">{{ 'sylius.log.output_modal.close_button'|trans }}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+{% macro list(jobs) %}
+
+
+    {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+    {% if jobs|length > 0 %}
+        <table class="table" id="job-table">
+            <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.job.command'|trans) }}</th>
+                <th>{{ sylius_resource_sort('type', 'sylius.job.running_time'|trans) }}</th>
+                <th>{{ sylius_resource_sort('type', 'sylius.job.is_running.header'|trans) }}</th>
+                <th>{{ sylius_resource_sort('type', 'sylius.job.last_status'|trans) }}</th>
+                <th>{{ sylius_resource_sort('type', 'sylius.job.last_run'|trans) }}</th>
+                <th>{{ sylius_resource_sort('type', 'sylius.job.active.column'|trans) }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                {% include 'SyliusJobSchedulerBundle:Job:_macro.html.twig' %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ alerts.info('sylius.job.no_results'|trans) }}
+    {% endif %}
+
+{% endmacro %}

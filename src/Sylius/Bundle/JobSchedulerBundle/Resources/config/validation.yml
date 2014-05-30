@@ -1,0 +1,6 @@
+Sylius\Bundle\JobSchedulerBundle\Entity\Job:
+    properties:
+        command:
+            - NotBlank: ~
+        schedule:
+            - NotBlank: ~

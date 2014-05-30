@@ -1,0 +1,45 @@
+{% macro list(logs) %}
+
+    {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+    {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+    {% if logs|length > 0 %}
+        <table class="table" id="log-table">
+            <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', '#id') }}</th>
+                <th>{{ sylius_resource_sort('status', 'sylius.log.status_header'|trans) }}</th>
+
+                <th>{{ sylius_resource_sort('startedAt', 'sylius.log.started_at'|trans) }}</th>
+                <th>{{ sylius_resource_sort('finishedAt', 'sylius.log.finished_at'|trans) }}</th>
+                <th>{{ 'sylius.log.running_time'|trans }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for log in logs %}
+                <tr id="{{ log.id }}">
+                    <td>{{ log.id }}</td>
+                    <td>{{ ("sylius.log.status." ~ log.status)|trans }}</td>
+
+                    <td>{{ log.startedAt|microtime_date }}</td>
+                    <td>{{ log.finishedAt|microtime_date }}</td>
+                    <td>{{ log.startedAt|microtime_exec_time(log.finishedAt) }}</td>
+                    <td>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default btn-see-log-output" data-toggle="modal"
+                               data-target="#logOutputModal"
+                               data-remote="{{ path('sylius_backend_log_see_output', { 'logId' : log.id  } ) }}">
+                                <i class="glyphicon glyphicon-book"></i><span>{{ 'sylius.log.action.see_output'|trans }}</span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ alerts.info('sylius.log.no_results'|trans) }}
+    {% endif %}
+
+{% endmacro %}

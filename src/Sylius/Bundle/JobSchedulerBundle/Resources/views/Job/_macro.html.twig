@@ -1,0 +1,44 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+<tr data-row-id="{{ job.id }}"
+    data-url-poll="{{ path('sylius_backend_job_is_running', {'id': job.id}) }}"
+    data-url-row-template="{{ path('sylius_backend_job_row_template', {'id': job.id}) }}">
+    <td>{{ job.id }}</td>
+    <td>{{ job.command }}</td>
+    <td>{{ job.schedule }}</td>
+    <td id="ir" data-is-running="{{ job.id }}">
+        <span data-running-id="{{ job.id }}" {% if job.getIsRunning == false %} style="display:none"{% endif %}>
+            {{ 'sylius.job.is_running.yes'|trans }}
+        </span>
+        <span data-not-running-id="{{ job.id }}" {% if job.getIsRunning == true %} style="display:none"{% endif %}>
+            {{ 'sylius.job.is_running.no'|trans }}
+        </span>
+        &nbsp;
+        <img data-img="{{ job.id }}" src="{{ asset('assets/img/spinner.gif') }}" style="display:none"/>
+    </td>
+    <td>{{ job.lastLog ? ("sylius.log.status." ~ job.lastLog.status)|trans : '-' }}</td>
+    <td>
+        {% if job.lastLog %}
+            {{ job.lastLog.startedAt|microtime_date }}
+            ({{ job.lastLog.startedAt|microtime_exec_time(job.lastLog.finishedAt) }})
+        {% else %}
+            -
+        {% endif %}
+
+    </td>
+    <td>{% if job.active %}{{ 'sylius.job.active.yes'|trans }}{% else %}{{ 'sylius.job.active.no'|trans }}{% endif %}</td>
+    <td>
+        <div class="pull-right">
+
+            <a href="{{ path('sylius_backend_log_index', {'jobId': job.id} ) }}" class="btn btn-default">
+                <i class="glyphicon glyphicon-book"></i><span>{{ 'sylius.job.action.show_logs'|trans }}</span>
+            </a>
+            {{ buttons.edit(path('sylius_backend_job_update', {'id': job.id})) }}
+            {{ buttons.delete(path('sylius_backend_job_delete', {'id': job.id})) }}
+            <a href="{{ path('sylius_backend_job_run', {'id': job.id} ) }}" class="btn btn-success btn-run--job"
+               data-job-id="{{ job.id }}">
+                <i class="glyphicon glyphicon-repeat"></i><span>{{ 'sylius.job.action.run'|trans }}</span>
+            </a>
+        </div>
+    </td>
+</tr>
