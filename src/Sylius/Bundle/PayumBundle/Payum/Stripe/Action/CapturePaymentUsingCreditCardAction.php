@@ -40,7 +40,7 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 
             $creditCard = $obtainCreditCardRequest->getCreditCard();
 
-            $details = array(
+            $details = new \ArrayObject(array(
                 'card' => new SensitiveValue(array(
                     'number'      => $creditCard->getNumber(),
                     'expiryMonth' => $creditCard->getExpiryMonth(),
@@ -49,17 +49,20 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
                 )),
                 'amount' => round($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
-            );
+            ));
 
-            $payment->setDetails($details);
+            $payment->setDetails((array) $details);
         }
 
         try {
             $request->setModel($details);
             $this->payment->execute($request);
-            $request->setModel($order);
+
+            $payment->setDetails((array) $details);
+            $request->setModel($payment);
         } catch (\Exception $e) {
-            $request->setModel($order);
+            $payment->setDetails((array) $details);
+            $request->setModel($payment);
 
             throw $e;
         }
