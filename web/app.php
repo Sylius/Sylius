@@ -11,6 +11,7 @@
 
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
+use Sylius\Bundle\CoreBundle\ErrorHandler\Production as ErrorHandler;
 
 /*
  * Sylius front controller.
@@ -31,6 +32,7 @@ $kernel = new AppKernel('prod', false);
 $request = Request::createFromGlobals();
 
 Request::enableHttpMethodParameterOverride();
+ErrorHandler::register();
 
 $response = $kernel->handle($request);
 $response->send();
