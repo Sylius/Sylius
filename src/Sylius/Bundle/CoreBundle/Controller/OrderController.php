@@ -12,8 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Core\SyliusOrderEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -61,11 +60,12 @@ class OrderController extends ResourceController
     {
         $order = $this->findOr404($request);
 
-        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::PRE_RELEASE, new GenericEvent($order));
+        $this->get('finite.factory')
+            ->get($order, OrderTransitions::GRAPH)
+            ->apply(OrderTransitions::SYLIUS_RELEASE)
+        ;
 
         $this->domainManager->update($order);
-
-        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
 
         return $this->redirectHandler->redirectToReferer();
     }
