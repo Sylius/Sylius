@@ -43,6 +43,8 @@ parameters:
     sylius.inventory.tracking_enabled: true
     sylius.inventory.holding.duration: 15 minutes
 
+    sylius.promotion.item_based: false
+
     sylius.order.pending.duration: 3 hours
 
     phpcr_backend:

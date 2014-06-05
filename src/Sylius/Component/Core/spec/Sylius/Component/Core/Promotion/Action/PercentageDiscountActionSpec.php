@@ -44,7 +44,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         PromotionInterface $promotion
     )
     {
-        $order->getPromotionSubjectItemTotal()->willReturn(10000);
+        $order->getPromotionSubjectTotal()->willReturn(10000);
         $adjustmentRepository->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');
 

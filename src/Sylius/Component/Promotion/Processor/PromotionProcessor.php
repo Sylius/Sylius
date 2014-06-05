@@ -28,6 +28,7 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $repository;
     protected $checker;
     protected $applicator;
+    protected $promotions;
 
     public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
@@ -42,10 +43,9 @@ class PromotionProcessor implements PromotionProcessorInterface
             $this->applicator->revert($subject, $promotion);
         }
 
-        $promotions = $this->repository->findActive();
         $eligiblePromotions = array();
 
-        foreach ($promotions as $promotion) {
+        foreach ($this->getActivePromotions() as $promotion) {
             if (!$this->checker->isEligible($subject, $promotion)) {
                 continue;
             }
@@ -60,5 +60,14 @@ class PromotionProcessor implements PromotionProcessorInterface
         foreach ($eligiblePromotions as $promotion) {
             $this->applicator->apply($subject, $promotion);
         }
+    }
+
+    protected function getActivePromotions()
+    {
+        if (null === $this->promotions) {
+            $this->promotions = $this->repository->findActive();
+        }
+
+        return $this->promotions;
     }
 }

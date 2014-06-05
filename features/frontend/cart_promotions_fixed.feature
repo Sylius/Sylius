@@ -69,7 +69,7 @@ Feature: Checkout fixed discount promotions
          When I add product "Woody" to cart, with quantity "3"
          Then I should be on the cart summary page
           And "Promotion total: -€40.00" should appear on the page
-          And "Grand total: €335.00" should appear on the page
+          And "Grand total: €295.00" should appear on the page
 
     Scenario: Fixed discount promotion is not applied when the cart
               has not the required amount
@@ -180,4 +180,4 @@ Feature: Checkout fixed discount promotions
          When I add product "Woody" to cart, with quantity "3"
          Then I should still be on the cart summary page
           And "Promotion total: -€55.00" should appear on the page
-          And "Grand total: €1,620.00" should appear on the page
+          And "Grand total: €1,500.00" should appear on the page

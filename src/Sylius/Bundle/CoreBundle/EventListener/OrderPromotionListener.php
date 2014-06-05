@@ -44,17 +44,29 @@ class OrderPromotionListener
     private $translator;
 
     /**
+     * @var Boolean
+     */
+    private $itemBased;
+
+    /**
      * Constructor.
      *
      * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
+     * @param Boolean                     $itemBased
      */
-    public function __construct(PromotionProcessorInterface $promotionProcessor, SessionInterface $session, TranslatorInterface $translator)
+    public function __construct(
+        PromotionProcessorInterface $promotionProcessor,
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        $itemBased
+    )
     {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
         $this->translator = $translator;
+        $this->itemBased = $itemBased;
     }
 
     /**
@@ -76,6 +88,12 @@ class OrderPromotionListener
         }
 
         $this->promotionProcessor->process($order);
+
+        if ($this->itemBased) {
+            foreach ($order->getItems() as $item) {
+                $this->promotionProcessor->process($item);
+            }
+        }
 
         $order->calculateTotal();
     }

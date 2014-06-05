@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Checker;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -29,7 +29,7 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            return false;
         }
 
         /* @var $item OrderItemInterface */
