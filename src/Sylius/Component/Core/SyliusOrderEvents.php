@@ -17,5 +17,4 @@ class SyliusOrderEvents extends BaseSyliusOrderEvents
 {
     const PRE_RELEASE = 'sylius.order.pre_release';
     const POST_RELEASE = 'sylius.order.post_release';
-    const PRE_SHIP = 'sylius.order.pre_ship';
 }
