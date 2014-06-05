@@ -19,7 +19,6 @@
     <parameters>
         <parameter key="sylius.form.type.money.class">Sylius\Bundle\MoneyBundle\Form\Type\MoneyType</parameter>
         <parameter key="sylius.form.type.exchange_rate.class">Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType</parameter>
-
         <parameter key="sylius.currency_context.class">Sylius\Bundle\MoneyBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.currency_converter.class">Sylius\Component\Money\Converter\CurrencyConverter</parameter>
     </parameters>

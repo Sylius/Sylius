@@ -18,13 +18,13 @@
 
     <parameters>
         <parameter key="sylius.promotion_processor.class">Sylius\Component\Promotion\Processor\PromotionProcessor</parameter>
-
         <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\PromotionEligibilityChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\ItemTotalRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.item_count.class">Sylius\Component\Promotion\Checker\ItemCountRuleChecker</parameter>
-
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
+
         <parameter key="sylius.generator.instructions.class">Sylius\Component\Promotion\Generator\Instruction</parameter>
+        <parameter key="sylius.generator.promotion_coupon.class">Sylius\Component\Promotion\Generator\CouponGenerator</parameter>
 
         <parameter key="sylius.registry.promotion_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.registry.promotion_action.class">Sylius\Component\Registry\ServiceRegistry</parameter>
@@ -37,14 +37,10 @@
         <parameter key="sylius.form.type.promotion_rule.item_total_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.item_count_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemCountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action_choice.class">Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType</parameter>
-
         <parameter key="sylius.form.type.promotion_action.fixed_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.percentage_discount_configuration.class">Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType</parameter>
-
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType</parameter>
-
         <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType</parameter>
-        <parameter key="sylius.generator.promotion_coupon.class">Sylius\Component\Promotion\Generator\CouponGenerator</parameter>
     </parameters>
 
     <services>
