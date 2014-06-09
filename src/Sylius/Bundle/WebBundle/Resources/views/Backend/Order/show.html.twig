@@ -268,7 +268,7 @@
     </tbody>
 </table>
 
-{% if finite_can(order, constant('Sylius\\Component\\Order\\OrderTransitions::SYLIUS_RELEASE'), constant('Sylius\\Component\\Order\\OrderTransitions::GRAPH')) %}
+{% if sm_can(order, constant('Sylius\\Component\\Order\\OrderTransitions::SYLIUS_RELEASE'), constant('Sylius\\Component\\Order\\OrderTransitions::GRAPH')) %}
     <form action="{{ path('sylius_backend_order_release_inventory', {'id': order.id}) }}" method="post">
         <input type="hidden" name="_method" value="PUT">
         <button class="btn btn-default" type="submit">

@@ -60,7 +60,7 @@ class OrderController extends ResourceController
     {
         $order = $this->findOr404($request);
 
-        $this->get('finite.factory')
+        $this->get('sm.factory')
             ->get($order, OrderTransitions::GRAPH)
             ->apply(OrderTransitions::SYLIUS_RELEASE)
         ;

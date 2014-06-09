@@ -10,8 +10,7 @@ winzou_state_machine:
             pending:    ~
             processing: ~
             completed:  ~
-            failed:
-                type: final
+            failed:     ~
             cancelled:  ~
             void:       ~
             refunded:   ~
