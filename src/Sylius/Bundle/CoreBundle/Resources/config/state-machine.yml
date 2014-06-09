@@ -1,20 +1,18 @@
-finite_finite:
+winzou_state_machine:
     sylius_order_shipping:
         class:         %sylius.model.order.class%
         property_path: shippingState
         graph:         sylius_order_shipping
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            checkout:
-                type: initial
+            checkout:          ~
             onhold:            ~
             ready:             ~
             backordered:       ~
             partially_shipped: ~
             shipped:           ~
-            cancelled:
-                type: final
-            returned:
-                type: final
+            cancelled:         ~
+            returned:          ~
         transitions:
             hold:
                 from: [checkout]
@@ -39,19 +37,16 @@ finite_finite:
         class:         %sylius.model.order.class%
         property_path: paymentState
         graph:         sylius_order_payment
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            new:
-                type: initial
+            new:        ~
             pending:    ~
             processing: ~
             completed:  ~
             void:       ~
-            failed:
-                type: final
-            cancelled:
-                type: final
-            refunded:
-                type: final
+            failed:     ~
+            cancelled:  ~
+            refunded:   ~
         transitions:
             create:
                 from: [new]
@@ -89,7 +84,7 @@ finite_finite:
                     args: ['object']
                 sylius_update_shipment:
                     on:   'confirm'
-                    do:   [@finite.callback.cascade_transition, 'apply']
+                    do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getShipments()', 'event', '"prepare"', '"sylius_shipment"']
                 sylius_increment_coupon:
                     on:   'confirm'
@@ -102,11 +97,11 @@ finite_finite:
                     args: ['object']
                 sylius_release_shipment:
                     on:   'release'
-                    do:   [@finite.callback.cascade_transition, 'apply']
+                    do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getShipments()', 'event', '"release"', '"sylius_shipment"']
                 sylius_void_payment:
                     on:   'release'
-                    do:   [@finite.callback.cascade_transition, 'apply']
+                    do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getPayments()', 'event', '"void"', '"sylius_payment"']
 
     sylius_inventory_unit:
@@ -114,7 +109,7 @@ finite_finite:
             after:
                 sylius_sync_shipping:
                     to:   '-sold'
-                    do:   [@finite.callback.cascade_transition, 'apply']
+                    do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object', 'event', 'null', '"sylius_shipment_item"']
 
     sylius_shipment:

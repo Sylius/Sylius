@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;

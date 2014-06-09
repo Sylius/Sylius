@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Doctrine\Common\Collections\Collection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;

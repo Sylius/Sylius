@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Purger;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Cart\Purger\PurgerInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;

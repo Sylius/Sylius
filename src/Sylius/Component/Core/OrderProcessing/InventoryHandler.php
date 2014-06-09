@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;

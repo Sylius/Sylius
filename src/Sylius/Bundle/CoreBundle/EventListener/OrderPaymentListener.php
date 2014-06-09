@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;

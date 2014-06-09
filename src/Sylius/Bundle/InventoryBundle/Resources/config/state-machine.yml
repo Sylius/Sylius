@@ -1,16 +1,15 @@
-finite_finite:
+winzou_state_machine:
     sylius_inventory_unit:
         class:         %sylius.model.inventory_unit.class%
         property_path: inventoryState
         graph:         sylius_inventory_unit
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            checkout:
-                type: initial
+            checkout:    ~
             onhold:      ~
-            sold:       ~
+            sold:        ~
             backordered: ~
-            returned:
-                type: final
+            returned:    ~
         transitions:
             hold:
                 from: [checkout]

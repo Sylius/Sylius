@@ -44,7 +44,7 @@
         <service id="sylius.payum.paypal.action.notify_order" class="%sylius.payum.paypal.action.notify_order.class%" public="false">
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
 
             <tag name="payum.action" factory="paypal_express_checkout_nvp" />
         </service>
@@ -74,7 +74,7 @@
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
             <argument>id</argument>
 
             <tag name="payum.action" factory="be2bill" />

@@ -15,13 +15,13 @@
     <services>
         <!-- Callbacks -->
         <service id="sylius.callback.order_payment" class="%sylius.callback.order_payment.class%">
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
         </service>
 
         <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />
 
         <service id="sylius.callback.order_shipment" class="%sylius.callback.order_shipment.class%">
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
         </service>
     </services>
 

@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;

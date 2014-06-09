@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Payum\Be2Bill\Api;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Exception\RequestNotSupportedException;

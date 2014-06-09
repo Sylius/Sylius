@@ -198,7 +198,7 @@
         <service id="sylius.order_processing.inventory_handler" class="%sylius.order_processing.inventory_handler.class%">
             <argument type="service" id="sylius.inventory_operator" />
             <argument type="service" id="sylius.inventory_unit_factory" />
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
         </service>
         <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
         <service id="sylius.order_processing.shipment_factory" class="%sylius.order_processing.shipment_factory.class%">
@@ -230,13 +230,13 @@
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
         </service>
 
         <service id="sylius.order.releaser" class="%sylius.order.releaser.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
         </service>
 
         <!-- listeners -->
@@ -266,7 +266,7 @@
             <argument type="service" id="sylius.order_processing.state_resolver" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.pre_complete" method="resolveOrderStates" priority="-100" />
-            <tag name="kernel.event_listener" event="finite.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
+            <tag name="kernel.event_listener" event="winzou.state_machine.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
@@ -285,7 +285,7 @@
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <argument type="service" id="sylius.order_processing.payment_processor" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="finite.factory" />
+            <argument type="service" id="sm.factory" />
             <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
         </service>

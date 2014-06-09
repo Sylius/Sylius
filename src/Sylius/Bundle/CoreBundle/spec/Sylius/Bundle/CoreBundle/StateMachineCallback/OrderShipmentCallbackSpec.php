@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Doctrine\Common\Collections\Collection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -51,8 +51,7 @@ class OrderShipmentCallbackSpec extends ObjectBehavior
 
         $sm2->can(ShipmentTransitions::SYLIUS_SHIP)->shouldBeCalled()->willReturn(false);
 
-        $sm1->can(OrderTransitions::SYLIUS_SHIP)->shouldBeCalled()->willReturn(true);
-        $sm1->apply(OrderTransitions::SYLIUS_SHIP)->shouldBeCalled();
+        $sm1->apply(OrderTransitions::SYLIUS_SHIP, true)->shouldBeCalled();
 
         $this->updateOrderShippingState($order);
     }
@@ -71,8 +70,7 @@ class OrderShipmentCallbackSpec extends ObjectBehavior
 
         $sm2->can(ShipmentTransitions::SYLIUS_SHIP)->shouldBeCalled()->willReturn(false);
 
-        $sm1->can(OrderTransitions::SYLIUS_SHIP)->shouldBeCalled()->willReturn(true);
-        $sm1->apply(OrderTransitions::SYLIUS_SHIP)->shouldBeCalled();
+        $sm1->apply(OrderTransitions::SYLIUS_SHIP, true)->shouldBeCalled();
 
         $this->updateOrderShippingState($order);
     }

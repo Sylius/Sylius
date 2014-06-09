@@ -1,20 +1,18 @@
-finite_finite:
+winzou_state_machine:
     sylius_shipment:
         class:         %sylius.model.shipment.class%
         property_path: state
         graph:         sylius_shipment
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            checkout:
-                type: initial
+            checkout:    ~
             pending:     ~
             onhold:      ~
             ready:       ~
             backordered: ~
             shipped:     ~
-            cancelled:
-                type: final
-            returned:
-                type: final
+            cancelled:   ~
+            returned:    ~
         transitions:
             hold:
                 from: [checkout]
@@ -37,24 +35,22 @@ finite_finite:
         callbacks:
             after:
                 sylius_sync_items:
-                    do:   [@finite.callback.cascade_transition, 'apply']
+                    do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getItems()', 'event', 'null', '"sylius_shipment_item"']
 
     sylius_shipment_item:
         class:         %sylius.model.shipment_item.class%
         property_path: shippingState
         graph:         sylius_shipment_item
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            checkout:
-                type: initial
+            checkout: ~
             onhold:      ~
             ready:       ~
             backordered: ~
             shipped:     ~
-            cancelled:
-                type: final
-            returned:
-                type: final
+            cancelled: ~
+            returned: ~
         transitions:
             hold:
                 from: [checkout]

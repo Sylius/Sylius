@@ -15,6 +15,12 @@ Before performing this procedure, please create a safe backup of your database.
 This upgrade changes significantly the way product attributes and options are stored in the database.
 We do provide a way to migrate your data, but no rollback will be possible in case of a problem.
 
+In addition to the components split, we have switched to state-machine in order to deal with states, instead of
+hard-coded states. You can now configure all the states you want and the transitions between them. Please refer to
+`state-machine.yml` that you can find in the bundles using it. *Most events have been replaced by state-machine events,
+much more powerful. Please update your listeners to make them callbacks of state-machine transitions. Again, please
+refer to the state-machine configuration files to do so.*
+
 ### Addressing
 
 Model classes and ZoneMatcher services have been moved to ``Sylius\Component\Addressing`` namespace.
