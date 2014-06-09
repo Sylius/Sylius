@@ -52,7 +52,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
 
         if (isset($config['events'])) {
-            $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
+            $listenerDefinition = $container->getDefinition('sylius.listener.inventory');
             foreach ($config['events'] as $event) {
                 $listenerDefinition->addTag('kernel.event_listener', array('event' => $event, 'method' => 'onInventoryChange'));
             }
