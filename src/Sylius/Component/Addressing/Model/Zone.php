@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\Collection;
  * Default zone model.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Zone implements ZoneInterface
 {
@@ -41,6 +42,13 @@ class Zone implements ZoneInterface
      * @var string
      */
     protected $type;
+
+    /**
+     * Zone scope.
+     *
+     * @var string
+     */
+    protected $scope;
 
     /**
      * Zone members.
@@ -115,6 +123,24 @@ class Zone implements ZoneInterface
     public static function getTypes()
     {
         return array(self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
+
+        return $this;
     }
 
     /**

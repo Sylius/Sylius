@@ -730,5 +730,6 @@ sylius:
         show_header: Zone details
         type: Type
         update_header: Editing zone
+        scope: Scope
     zone_member:
         members: Members

@@ -23,6 +23,7 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
  * It also handles sub-zones.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ZoneMatcher implements ZoneMatcherInterface
 {
@@ -46,11 +47,11 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function match(AddressInterface $address)
+    public function match(AddressInterface $address, $scope = null)
     {
         $zones = array();
 
-        foreach ($this->getZones() as $zone) {
+        foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;
             }
@@ -74,11 +75,11 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function matchAll(AddressInterface $address)
+    public function matchAll(AddressInterface $address, $scope = null)
     {
         $zones = array();
 
-        foreach ($this->getZones() as $zone) {
+        foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[] = $zone;
             }
@@ -138,10 +139,16 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * Gets all zones
      *
+     * @param string|null $scope
+     *
      * @return array $zones
      */
-    protected function getZones()
+    protected function getZones($scope = null)
     {
-        return $this->repository->findAll();
+        if (null === $scope) {
+            return $this->repository->findAll();
+        }
+
+        return $this->repository->findBy(array('scope' => $scope));
     }
 }

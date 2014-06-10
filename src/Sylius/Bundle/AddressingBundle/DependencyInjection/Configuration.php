@@ -22,6 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -42,6 +43,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addClassesSection($rootNode);
         $this->addValidationGroupsSection($rootNode);
+        $this->addScopesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -171,6 +173,18 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
+        ;
+    }
+
+    private function addScopesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('scopes')
+                    ->prototype('scalar')->end()
+                ->end()
+            ->end()
+
         ;
     }
 }

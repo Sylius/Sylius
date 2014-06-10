@@ -17,6 +17,7 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ZoneSpec extends ObjectBehavior
 {
@@ -89,11 +90,23 @@ class ZoneSpec extends ObjectBehavior
         $this->hasMember($member)->shouldReturn(false);
     }
 
+    function it_has_no_scope_by_default()
+    {
+        $this->getScope()->shouldReturn(null);
+    }
+
+    function its_scope_is_mutable()
+    {
+        $this->setScope('shipping');
+        $this->getScope()->shouldReturn('shipping');
+    }
+
     function it_has_fluent_interface(ZoneMemberInterface $member, Collection $members)
     {
         $this->setName('Yugoslavia')->shouldReturn($this);
         $this->setMembers($members)->shouldReturn($this);
         $this->addMember($member)->shouldReturn($this);
         $this->removeMember($member)->shouldReturn($this);
+        $this->setScope('shipping')->shouldReturn($this);
     }
 }

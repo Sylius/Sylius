@@ -9,6 +9,7 @@
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
                 <th>{{ sylius_resource_sort('name') }}</th>
                 <th>{{ sylius_resource_sort('type') }}</th>
+                <th>{{ sylius_resource_sort('scope') }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
                 <td>{{ zone.id }}</td>
                 <td>{{ zone.name }}</td>
                 <td>{{ zone.type }}</td>
+                <td>{{ zone.scope }}</td>
                 <td>
                     <div class="btn-group pull-right">
                         {{ buttons.edit(path('sylius_zone_update', {'id': zone.id})) }}

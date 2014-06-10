@@ -8,11 +8,11 @@ Feature: Zones
         Given I am logged in as administrator
           And there is default currency configured
           And there are following zones:
-            | name                      | type     | members                                       |
-            | Baltic states             | country  | Lithuania, Latvia, Estonia                    |
-            | USA GMT-8                 | province | Washington, Oregon, Nevada, Idaho, California |
-            | Baltic states + USA GMT-8 | zone     | Baltic states, USA GMT-8                      |
-            | Germany                   | country  | Germany                                       |
+            | name                      | type     | members                                       | scope      |
+            | Baltic states             | country  | Lithuania, Latvia, Estonia                    | content    |
+            | USA GMT-8                 | province | Washington, Oregon, Nevada, Idaho, California | shipping   |
+            | Baltic states + USA GMT-8 | zone     | Baltic states, USA GMT-8                      |            |
+            | Germany                   | country  | Germany                                       | price      |
 
     Scenario: Seeing index of all zones
         Given I am on the dashboard page
@@ -51,10 +51,12 @@ Feature: Zones
           And I select "Country" from "Type"
           And I click "Add member"
           And I select "Estonia" from "Country"
+          And I select "shipping" from "Scope"
          When I press "Create"
          Then I should be on the page of zone "EU"
           And I should see "Zone has been successfully created."
           And "Estonia" should appear on the page
+          And "shipping" should appear on the page
 
     Scenario: Created zones appear in the list
         Given I created zone "EU"

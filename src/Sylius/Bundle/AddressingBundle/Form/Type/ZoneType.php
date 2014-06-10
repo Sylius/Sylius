@@ -15,11 +15,13 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 
 /**
  * Zone form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ZoneType extends AbstractType
 {
@@ -38,15 +40,24 @@ class ZoneType extends AbstractType
     protected $validationGroups;
 
     /**
+     * Scopes.
+     *
+     * @var array
+     */
+    protected $scopeChoices;
+
+    /**
      * Constructor.
      *
-     * @param string   $dataClass
-     * @param string[] $validationGroups
+     * @param string $dataClass
+     * @param array  $validationGroups
+     * @param array  $scopeChoices
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
+        $this->scopeChoices = $scopeChoices;
     }
 
     /**
@@ -65,6 +76,10 @@ class ZoneType extends AbstractType
                     ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
                     ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
                 ),
+            ))
+            ->add('scope', 'choice', array(
+                'label'   => 'sylius.form.zone.scope',
+                'choices' => $this->scopeChoices,
             ))
             ->add('members', 'sylius_zone_member_collection', array(
                 'label' => 'sylius.form.zone.members'
