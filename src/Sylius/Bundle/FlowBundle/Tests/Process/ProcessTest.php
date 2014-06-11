@@ -297,6 +297,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process->setForwardRoute('forwardRoute');
         $process->setForwardRouteParams(array('foo' => 'bar'));
         $process->setRedirect('http://somepage');
+        $process->setRedirectParams(array('foo' => 'bar'));
         $process->setValidator(new ProcessValidator('An error occurred.', null, function () {
             return false;
         }));
@@ -308,6 +309,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('forwardRoute', $process->getForwardRoute());
         $this->assertSame(array('foo' => 'bar'), $process->getForwardRouteParams());
         $this->assertSame('http://somepage', $process->getRedirect());
+        $this->assertSame(array('foo' => 'bar'), $process->getRedirectParams());
         $this->assertSame(false, $validator->isValid());
     }
 
