@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
@@ -55,7 +56,7 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
         if (empty($details)) {
             $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
 
-            $details = new \ArrayObject;
+            $details = array();
             $details['AMOUNT'] = $order->getTotal();
             $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
             $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
@@ -72,6 +73,8 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 
             $payment->setDetails((array) $details);
         }
+
+        $details = ArrayObject::ensureArrayObject($details);
 
         try {
             $request->setModel($details);

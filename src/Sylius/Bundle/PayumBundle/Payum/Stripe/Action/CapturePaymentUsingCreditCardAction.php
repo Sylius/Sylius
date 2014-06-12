@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 
 use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
 use Payum\Core\Security\SensitiveValue;
@@ -40,7 +41,7 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
 
             $creditCard = $obtainCreditCardRequest->getCreditCard();
 
-            $details = new \ArrayObject(array(
+            $details = array(
                 'card' => new SensitiveValue(array(
                     'number'      => $creditCard->getNumber(),
                     'expiryMonth' => $creditCard->getExpiryMonth(),
@@ -49,10 +50,12 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
                 )),
                 'amount' => round($order->getTotal() / 100, 2),
                 'currency' => $order->getCurrency(),
-            ));
+            );
 
             $payment->setDetails((array) $details);
         }
+
+        $details = ArrayObject::ensureArrayObject($details);
 
         try {
             $request->setModel($details);
