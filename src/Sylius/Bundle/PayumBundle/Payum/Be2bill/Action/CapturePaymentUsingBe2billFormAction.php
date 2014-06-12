@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredCaptureRequest;
@@ -59,7 +60,7 @@ class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
         $details = $payment->getDetails();
 
         if (empty($details)) {
-            $details = new \ArrayObject;
+            $details = array();
             $details['AMOUNT'] = $order->getTotal();
             $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
             $details['HIDECLIENTEMAIL'] = 'yes';
@@ -71,6 +72,8 @@ class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
 
             $payment->setDetails((array) $details);
         }
+
+        $details = ArrayObject::ensureArrayObject($details);
 
         try {
             $this->httpRequest->getSession()->set('payum_token', $request->getToken()->getHash());
