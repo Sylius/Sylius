@@ -158,7 +158,7 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
+        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
