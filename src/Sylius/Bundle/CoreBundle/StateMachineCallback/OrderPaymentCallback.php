@@ -45,7 +45,9 @@ class OrderPaymentCallback
 
         $total = 0;
         foreach ($order->getPayments() as $payment) {
-            $total += $payment->getAmount();
+            if ($payment->getState() === PaymentInterface::STATE_COMPLETED) {
+                $total += $payment->getAmount();
+            }
         }
 
         if ($total === $order->getTotal()) {
