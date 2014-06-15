@@ -25,7 +25,9 @@
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "1.1.*",
         "sylius/resource-bundle":          "0.10.*@dev",
-        "sylius/product":                  "0.10.*@dev"
+        "sylius/product":                  "0.10.*@dev",
+        "sylius/attribute-bundle":         "0.10.*@dev",
+        "sylius/variation-bundle":         "0.10.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
