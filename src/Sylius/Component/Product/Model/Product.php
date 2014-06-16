@@ -353,14 +353,12 @@ class Product implements ProductInterface
      */
     public function setMasterVariant(BaseVariantInterface $masterVariant)
     {
-        if ($this->variants->contains($masterVariant)) {
-            return $this;
-        }
-
-        $masterVariant->setProduct($this);
         $masterVariant->setMaster(true);
 
-        $this->variants->add($masterVariant);
+        if (!$this->variants->contains($masterVariant)) {
+            $masterVariant->setProduct($this);
+            $this->variants->add($masterVariant);
+        }
 
         return $this;
     }
