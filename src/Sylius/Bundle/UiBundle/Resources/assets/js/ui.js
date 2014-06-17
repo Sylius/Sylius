@@ -15,6 +15,9 @@
             $(this).parent().parent().find('table tbody').toggle();
         });
 
-        $('.datepicker').datepicker({});
+        $('#content-container').css('min-height', $(window).height());
+    });
+    $(window).resize(function() {
+        $('#content-container').css('min-height', $(window).height());
     });
 })( jQuery );
