@@ -256,7 +256,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      *
      * @return PaymentInterface
      */
-    public function getLastPayment($state);
+    public function getLastPayment($state = PaymentInterface::STATE_NEW);
 
     /**
      * Tells is the invoice of the order can be generated.
