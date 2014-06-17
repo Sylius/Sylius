@@ -16,6 +16,7 @@ swiftmailer:
 doctrine:
     dbal:
         dbname: %sylius.database.name%_test
+        path:   %sylius.database.path%
 
 sylius_money:
     currency: EUR
