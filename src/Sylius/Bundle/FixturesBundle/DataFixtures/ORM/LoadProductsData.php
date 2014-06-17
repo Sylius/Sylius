@@ -33,13 +33,6 @@ class LoadProductsData extends DataFixture
     private $totalVariants = 0;
 
     /**
-     * SKU collection.
-     *
-     * @var array
-     */
-    private $skus = array();
-
-    /**
      * @var string
      */
     private $productAttributeClass;
@@ -341,13 +334,7 @@ class LoadProductsData extends DataFixture
      */
     protected function getUniqueSku($length = 5)
     {
-        do {
-            $sku = $this->faker->randomNumber($length);
-        } while (in_array($sku, $this->skus));
-
-        $this->skus[] = $sku;
-
-        return $sku;
+        return $this->faker->unique()->randomNumber($length);
     }
 
     /**
@@ -357,7 +344,7 @@ class LoadProductsData extends DataFixture
      */
     protected function getUniqueISBN()
     {
-        return $this->getUniqueSku(13);
+        return $this->faker->unique()->uuid();
     }
 
     /**
