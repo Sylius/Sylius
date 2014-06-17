@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-(function ( $ ) {
+(function ($) {
     'use strict';
 
     $(document).ready(function() {
@@ -16,10 +16,10 @@
 
             var collectionContainer = $('#' + $(this).data('collection'));
             var prototype = $('#' + $(this).data('prototype')).data('prototype');
-            var item = prototype.replace(/__name__/g, collectionContainer.children().length);
+            var item = prototype.replace(/__name__/g, collectionContainer.children('.collection-item').length);
             collectionContainer.append(item);
         });
-        $(document).on('click', 'a[data-collection-button="delete"]', function(e) {
+        $(document).on('click', 'a[data-collection-button="remove"]', function(e) {
             e.preventDefault();
 
             var item = $(this).closest('.collection-item');

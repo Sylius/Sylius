@@ -1,1 +1,7 @@
 {% extends 'SyliusUiBundle:Form:_default.html.twig' %}
+
+{% block _sylius_product_option_values_value_row %}
+<div class="collection-item">
+    {{ parent() }}
+</div>
+{% endblock %}

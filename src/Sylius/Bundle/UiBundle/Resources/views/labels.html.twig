@@ -15,7 +15,6 @@
 {% endmacro %}
 
 {% macro shipment_state(state) %}
-
 {% if state == 'pending' %}
     {% set class = 'danger' %}
 {% elseif state == 'dispatched' %}
@@ -29,7 +28,6 @@
 {% endmacro %}
 
 {% macro payment_state(state) %}
-
 {% if state is sameas('completed') %}
     {% set class = 'label-success' %}
 {% elseif state in ['checkout', 'processing', 'new'] %}
@@ -41,7 +39,6 @@
 {% endmacro %}
 
 {% macro order_shipping_state(state) %}
-
 {% if state == 'pending' %}
     {% set class = 'danger' %}
 {% elseif state == 'dispatched' %}
@@ -55,7 +52,6 @@
 {% endmacro %}
 
 {% macro order_payment_state(state) %}
-
 {% if state is sameas('completed') %}
     {% set class = 'label-success' %}
 {% elseif state in ['checkout', 'processing', 'new'] %}
