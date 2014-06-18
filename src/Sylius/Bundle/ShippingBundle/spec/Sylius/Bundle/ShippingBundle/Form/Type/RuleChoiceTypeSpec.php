@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShippingBundle\Model\RuleInterface;
+use Sylius\Component\Shipping\Model\RuleInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**

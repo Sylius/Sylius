@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Flexible shopping cart system for Symfony2 ecommerce applications.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusCartBundle extends Bundle
 {
@@ -42,14 +42,14 @@ class SyliusCartBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\CartBundle\Model\CartInterface'     => 'sylius.model.cart.class',
-            'Sylius\Bundle\CartBundle\Model\CartItemInterface' => 'sylius.model.cart_item.class',
+            'Sylius\Component\Cart\Model\CartInterface'     => 'sylius.model.cart.class',
+            'Sylius\Component\Cart\Model\CartItemInterface' => 'sylius.model.cart_item.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_order', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\CartBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Cart\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_order.driver.doctrine/orm'));

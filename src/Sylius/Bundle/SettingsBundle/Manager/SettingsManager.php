@@ -13,18 +13,18 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
-use Symfony\Component\Validator\ValidatorInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * Settings manager.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsManager implements SettingsManagerInterface
 {
@@ -65,7 +65,7 @@ class SettingsManager implements SettingsManagerInterface
 
     /**
      * Validator instance
-     * 
+     *
      * @var ValidatorInterface
      */
     protected $validator;
@@ -161,9 +161,9 @@ class SettingsManager implements SettingsManagerInterface
                     ->setValue($value)
                 ;
 
-                $errors = $this->validator->validate($parameter);
                 /* @var $errors ConstraintViolationListInterface */
-                if(0 < $errors->count()) {
+                $errors = $this->validator->validate($parameter);
+                if (0 < $errors->count()) {
                     throw new ValidatorException($errors->get(0)->getMessage());
                 }
 

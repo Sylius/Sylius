@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
-use Sylius\Bundle\ShippingBundle\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

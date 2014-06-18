@@ -11,13 +11,15 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
+use SM\Event\TransitionEvent;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderStateListenerSpec extends ObjectBehavior
 {
@@ -31,16 +33,6 @@ class OrderStateListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderStateListener');
     }
 
-    function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)
-    {
-        $event->getSubject()->willReturn($invalidSubject);
-
-        $this
-            ->shouldThrow('InvalidArgumentException')
-            ->duringResolveOrderStates($event)
-        ;
-    }
-
     function it_resolves_order_states(
             StateResolverInterface $stateResolver,
             GenericEvent $event,
@@ -52,5 +44,21 @@ class OrderStateListenerSpec extends ObjectBehavior
         $stateResolver->resolvePaymentState($order)->shouldBeCalled();
 
         $this->resolveOrderStates($event);
+    }
+
+    function it_resolves_order_states_with_state_machine_event(
+        StateResolverInterface $stateResolver,
+        TransitionEvent $event,
+        OrderInterface $order,
+        StateMachineInterface $sm
+    )
+    {
+        $event->getStateMachine()->willReturn($sm);
+        $sm->getObject()->willReturn($order);
+
+        $stateResolver->resolveShippingState($order)->shouldBeCalled();
+        $stateResolver->resolvePaymentState($order)->shouldBeCalled();
+
+        $this->resolveOrderStatesOnTransition($event);
     }
 }

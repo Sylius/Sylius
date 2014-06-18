@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Step filter event.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FilterStepEvent extends Event
 {

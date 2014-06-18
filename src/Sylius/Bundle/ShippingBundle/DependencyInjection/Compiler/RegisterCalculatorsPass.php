@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Registers all shipping calculators in calculator registry service.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RegisterCalculatorsPass implements CompilerPassInterface
 {
@@ -35,10 +35,12 @@ class RegisterCalculatorsPass implements CompilerPassInterface
         $calculators = array();
 
         foreach ($container->findTaggedServiceIds('sylius.shipping_calculator') as $id => $attributes) {
-            $name = $attributes[0]['calculator'];
-            $label = $attributes[0]['label'];
+            if (!isset($attributes[0]['calculator']) || !isset($attributes[0]['label'])) {
+                throw new \InvalidArgumentException('Tagged shipping calculators needs to have `calculator` and `label` attributes.');
+            }
 
-            $calculators[$name] = $label;
+            $name = $attributes[0]['calculator'];
+            $calculators[$name] = $attributes[0]['label'];
 
             $registry->addMethodCall('registerCalculator', array($name, new Reference($id)));
         }

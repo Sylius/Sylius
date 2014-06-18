@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      unique: Kód produktu musí byť unikátny.
+  variant:
+    sku:
+      unique: Kód variácie musí byť unikátny.

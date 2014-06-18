@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
@@ -46,11 +46,12 @@ class Configuration implements ConfigurationInterface
             ->end()
         ->end()
         ->validate()
-            ->ifTrue(function($array){
+            ->ifTrue(function ($array) {
                 return !isset($array['operator']);
             })
-            ->then(function($array){
+            ->then(function ($array) {
                 $array['operator'] = 'sylius.inventory_operator.'.($array['track_inventory'] ? 'default' : 'noop');
+
                 return $array;
             })
         ->end();
@@ -76,7 +77,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('inventory_unit')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\InventoryBundle\Model\InventoryUnit')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\InventoryUnit')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
                                 ->scalarNode('repository')->end()
                             ->end()

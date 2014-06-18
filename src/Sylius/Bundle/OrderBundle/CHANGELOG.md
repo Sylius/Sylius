@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+### v0.9.0
+
+* Release before the components extraction.
+* Add hash order generator.
+* Do not generate order number if it is already set.
+* Add ``clearAdjustments()`` method.
+
 ### v0.8.0
 
 * Convert translations to YAML.

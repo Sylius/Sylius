@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Mailer\CustomerWelcomeMailerInterface;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 class CustomerWelcomeEmailListenerSpec extends ObjectBehavior
 {

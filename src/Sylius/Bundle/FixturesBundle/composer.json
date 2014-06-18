@@ -20,24 +20,23 @@
         }
     ],
     "require": {
-        "php":                            ">=5.3.3",
+        "php": ">=5.3.3",
 
-        "sylius/core-bundle":             "0.9.*@dev"
+        "sylius/core-bundle": "0.10.*@dev"
     },
     "require-dev": {
-        "fzaninotto/faker": "1.2.*",
+        "fzaninotto/faker":                  "1.2.*",
         "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\FixturesBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\FixturesBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/FixturesBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

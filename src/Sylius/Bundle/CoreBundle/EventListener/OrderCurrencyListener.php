@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Money\Context\CurrencyContextInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Sets currently selected currency on order object.
@@ -34,8 +35,9 @@ class OrderCurrencyListener
         $order = $event->getCart();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order currency listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Resource resolver.

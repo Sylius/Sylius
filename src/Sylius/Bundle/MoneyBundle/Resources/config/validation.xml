@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\MoneyBundle\Model\ExchangeRate">
+    <class name="Sylius\Component\Money\Model\ExchangeRate">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">currency</option>
             <option name="message">sylius.exchange_rate.unique</option>

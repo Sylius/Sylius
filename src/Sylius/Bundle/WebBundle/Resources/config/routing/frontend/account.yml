@@ -7,9 +7,11 @@ sylius_account_homepage:
 
 sylius_account_order:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/order.yml
+    prefix: /orders
 
 sylius_account_address:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/address.yml
+    prefix: /addresses
 
 sylius_switch_user_return:
     pattern: /switch/{username}/exit

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InstallerBundle\Requirement;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use ReflectionExtension;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ExtensionsRequirements extends RequirementCollection
 {

@@ -11,23 +11,19 @@
 
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use PHPCR\Util\NodeHelper;
-use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
-use Symfony\Component\DependencyInjection\ContainerAware;
 
-class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
+class LoadPagesData extends DataFixture
 {
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $faker = FakerFactory::create();
         $session = $manager->getPhpcrSession();
 
         $basepath = $this->container->getParameter('cmf_routing.dynamic.persistence.phpcr.route_basepath');
@@ -48,7 +44,7 @@ class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedF
 
         $content = $repository->createNew();
         $content->setTitle('Terms of Service');
-        $content->setBody($faker->text(350));
+        $content->setBody($this->faker->text(350));
         $content->addRoute($route);
         $content->setParent($parent);
         $content->setName('terms-of-service');
@@ -62,7 +58,7 @@ class LoadPagesData extends ContainerAware implements FixtureInterface, OrderedF
 
         $content = $repository->createNew();
         $content->setTitle('About us');
-        $content->setBody($faker->text(300));
+        $content->setBody($this->faker->text(300));
         $content->addRoute($route);
         $content->setParent($parent);
         $content->setName('about-us');

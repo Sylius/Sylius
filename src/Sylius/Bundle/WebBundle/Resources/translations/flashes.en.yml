@@ -1,8 +1,8 @@
 sylius:
     account:
         address:
-            flash:
-                billing:
-                    success: The address has been successfully set as your default billing address.
-                shipping:
-                    success: The address has been successfully set as your default shipping address.
+            create: Your address has been successfully added.
+            update: Your address has been successfully updated.
+            delete: Your address has been successfully deleted.
+            set_as_billing: Your billing address has been changed.
+            set_as_shipping: Your shipping address has been changed.

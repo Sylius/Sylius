@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
@@ -19,12 +20,14 @@ use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use spec\Sylius\Bundle\CoreBundle\Fixture\RequestStack;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\Order;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\PaymentsBundle\Model\Payment;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Core\Model\Payment;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Payment\SyliusPaymentEvents;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface as DoctrinRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -51,7 +54,8 @@ class PurchaseStepSpec extends ObjectBehavior
         ObjectManager $objectManager,
         Session $session,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        FactoryInterface $factory
     ) {
         $requestStack->getCurrentRequest()->willReturn($request);
         $session->getFlashBag()->willReturn($flashBag);
@@ -71,6 +75,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $container->get('doctrine')->willReturn($doctrine);
         $container->has('doctrine')->willReturn(true);
         $container->get('translator')->willReturn($translator);
+        $container->get('sm.factory')->willReturn($factory);
 
         $this->setName('purchase');
 
@@ -88,33 +93,41 @@ class PurchaseStepSpec extends ObjectBehavior
     }
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+        $factory,
         ProcessContextInterface $context,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $sm
     ) {
+        $order = new Order();
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_NEW);
-        $order = new Order();
-        $order->setPayment($paymentModel);
+        $paymentModel->setOrder($order);
+        $order->addPayment($paymentModel);
 
         $payment
             ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markSuccess();
-                $args[0]->setModel($order);
+                $args[0]->setModel($paymentModel);
             }
         );
 
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->getTransitionToState('completed')->willReturn(PaymentTransitions::SYLIUS_COMPLETE);
+        $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldBeCalled();
+
         $eventDispatcher
             ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
+                SyliusCheckoutEvents::PURCHASE_INITIALIZE,
                 Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
             )
             ->shouldBeCalled()
         ;
+
         $eventDispatcher
             ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
+                SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE,
                 Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
             )
             ->shouldBeCalled()
@@ -132,37 +145,46 @@ class PurchaseStepSpec extends ObjectBehavior
     }
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+        $factory,
         ProcessContextInterface $context,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $sm
     ) {
+        $order = new Order();
         $paymentModel = new Payment();
         $paymentModel->setState(Payment::STATE_COMPLETED);
-        $order = new Order();
-        $order->setPayment($paymentModel);
+        $paymentModel->setOrder($order);
+        $order->addPayment($paymentModel);
 
         $payment
             ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markSuccess();
-                $args[0]->setModel($order);
+                $args[0]->setModel($paymentModel);
             }
         );
 
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->getTransitionToState('completed')->willReturn(null);
+        $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
+
         $eventDispatcher
             ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
+                SyliusCheckoutEvents::PURCHASE_INITIALIZE,
                 Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
             )
-            ->shouldNotBeCalled()
+            ->shouldBeCalled()
         ;
+
         $eventDispatcher
             ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
+                SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE,
                 Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
             )
-            ->shouldNotBeCalled()
+            ->shouldBeCalled()
         ;
+
         $eventDispatcher
             ->dispatch(
                 SyliusCheckoutEvents::PURCHASE_COMPLETE,

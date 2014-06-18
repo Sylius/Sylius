@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -22,21 +24,24 @@ use Symfony\Component\Intl\Intl;
  */
 class LoadZonesData extends DataFixture
 {
+    private $euCountries = array(
+        'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
+        'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
+        'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
+        'GB'
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $euCountries = array(
-            'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
-            'FR', 'IT', 'CY', 'LV', 'LV', 'LT', 'LU', 'HU', 'MT',
-            'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-            'GB'
+        $restOfWorldCountries = array_diff(
+            array_keys(Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'))),
+            $this->euCountries + array('US')
         );
 
-        $restOfWorldCountries = array_diff(array_keys(Intl::getRegionBundle()->getCountryNames()), $euCountries + array('US'));
-
-        $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $euCountries));
+        $manager->persist($eu = $this->createZone('EU', ZoneInterface::TYPE_COUNTRY, $this->euCountries));
         $manager->persist($this->createZone('USA', ZoneInterface::TYPE_COUNTRY, array('US')));
         $manager->persist($this->createZone('EU + USA', ZoneInterface::TYPE_ZONE, array('EU', 'USA')));
         $manager->persist($this->createZone('Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
@@ -50,6 +55,14 @@ class LoadZonesData extends DataFixture
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 2;
+    }
+
+    /**
      * Create a new zone instance of given type.
      *
      * @param string $name
@@ -60,12 +73,13 @@ class LoadZonesData extends DataFixture
      */
     protected function createZone($name, $type, array $members)
     {
+        /* @var $zone ZoneInterface */
         $zone = $this->getZoneRepository()->createNew();
-
         $zone->setName($name);
         $zone->setType($type);
 
         foreach ($members as $id) {
+            /* @var $zoneMember ZoneMemberInterface */
             $zoneMember = $this->getZoneMemberRepository($type)->createNew();
 
             if ($this->hasReference('Sylius.'.ucfirst($type).'.'.$id)) {
@@ -78,13 +92,5 @@ class LoadZonesData extends DataFixture
         $this->setReference('Sylius.Zone.'.$name, $zone);
 
         return $zone;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 2;
     }
 }

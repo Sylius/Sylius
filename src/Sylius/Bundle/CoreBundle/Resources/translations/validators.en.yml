@@ -17,7 +17,7 @@ sylius:
             max: Last name must be not be longer than {{ limit }} characters.
             min: Last name must be at least {{ limit }} characters long.
             not_blank: Please enter your last name.
-    variant:
+    product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.
             not_blank: Please enter on hand.

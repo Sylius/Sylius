@@ -17,7 +17,7 @@ use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 /**
  * Interface for setup object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProcessInterface
 {
@@ -145,6 +145,20 @@ interface ProcessInterface
     public function setDisplayRoute($route);
 
     /**
+     * Get additional display route parameters.
+     *
+     * @return array
+     */
+    public function getDisplayRouteParams();
+
+    /**
+     * Set additional display route params.
+     *
+     * @param array $params
+     */
+    public function setDisplayRouteParams(array $params);
+
+    /**
      * Get forward route.
      *
      * @return string
@@ -157,6 +171,20 @@ interface ProcessInterface
      * @param string $route
      */
     public function setForwardRoute($route);
+
+    /**
+     * Get additional forward route parameters.
+     *
+     * @return array
+     */
+    public function getForwardRouteParams();
+
+    /**
+     * Set additional forward route params.
+     *
+     * @param array $params
+     */
+    public function setForwardRouteParams(array $params);
 
     /**
      * Get step by index/order

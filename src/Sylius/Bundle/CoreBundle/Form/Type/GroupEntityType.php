@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 /**
  * Group choice form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class GroupEntityType extends GroupChoiceType
 {

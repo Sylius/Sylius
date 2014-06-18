@@ -1,0 +1,29 @@
+cmf_core:
+    publish_workflow: false
+
+cmf_block:
+    persistence:
+        phpcr:
+            block_basepath: /cms/blocks
+
+cmf_content:
+    persistence:
+        phpcr:
+            content_basepath: /cms/pages
+    default_template: SyliusWebBundle:Frontend/Page:show.html.twig
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            router.default: 100
+            sylius.dynamic_router: 50
+            cmf_routing.dynamic_router: 20
+    dynamic:
+        generic_controller: cmf_content.controller:indexAction
+        persistence:
+            phpcr: ~
+
+doctrine_cache:
+    providers:
+        phpcr_meta: %sylius.cache%
+        phpcr_nodes: %sylius.cache%

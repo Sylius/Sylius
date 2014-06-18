@@ -13,13 +13,15 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
  * Default assortment products to play with Sylius.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadProductsData extends DataFixture
 {
@@ -28,50 +30,38 @@ class LoadProductsData extends DataFixture
      *
      * @var integer
      */
-    private $totalVariants;
+    private $totalVariants = 0;
 
     /**
-     * SKU collection.
-     *
-     * @var array
+     * @var string
      */
-    private $skus;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->skus = array();
-    }
+    private $productAttributeClass;
 
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $this->productPropertyClass = $this->container->getParameter('sylius.model.product_property.class');
+        $this->productAttributeClass = $this->container->getParameter('sylius.model.product_attribute.class');
 
         // T-Shirts...
         for ($i = 1; $i <= 120; $i++) {
             switch (rand(0, 3)) {
                 case 0:
                     $manager->persist($this->createTShirt($i));
-                break;
+                    break;
 
                 case 1:
                     $manager->persist($this->createSticker($i));
-                break;
+                    break;
 
                 case 2:
                     $manager->persist($this->createMug($i));
-                break;
+                    break;
 
                 case 3:
                     $manager->persist($this->createBook($i));
-                break;
+                    break;
             }
 
             if (0 === $i % 20) {
@@ -96,16 +86,17 @@ class LoadProductsData extends DataFixture
      * Creates t-shirt product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createTShirt($i)
     {
         $product = $this->createProduct();
-
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
         $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
-        $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
 
@@ -113,15 +104,15 @@ class LoadProductsData extends DataFixture
 
         // T-Shirt brand.
         $randomBrand = $this->faker->randomElement(array('Nike', 'Adidas', 'Puma', 'Potato'));
-        $this->addProperty($product, 'T-Shirt brand', $randomBrand);
+        $this->addAttribute($product, 'T-Shirt brand', $randomBrand);
 
         // T-Shirt collection.
         $randomCollection = sprintf('Symfony2 %s %s', $this->faker->randomElement(array('Summer', 'Winter', 'Spring', 'Autumn')), rand(1995, 2012));
-        $this->addProperty($product, 'T-Shirt collection', $randomCollection);
+        $this->addAttribute($product, 'T-Shirt collection', $randomCollection);
 
         // T-Shirt material.
         $randomMaterial = $this->faker->randomElement(array('Polyester', 'Wool', 'Polyester 10% / Wool 90%', 'Potato 100%'));
-        $this->addProperty($product, 'T-Shirt material', $randomMaterial);
+        $this->addAttribute($product, 'T-Shirt material', $randomMaterial);
 
         $product->addOption($this->getReference('Sylius.Option.T-Shirt size'));
         $product->addOption($this->getReference('Sylius.Option.T-Shirt color'));
@@ -137,6 +128,8 @@ class LoadProductsData extends DataFixture
      * Create sticker product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createSticker($i)
     {
@@ -146,7 +139,7 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Sticker "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
-        $product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
 
@@ -154,11 +147,11 @@ class LoadProductsData extends DataFixture
 
         // Sticker resolution.
         $randomResolution = $this->faker->randomElement(array('Waka waka', 'FULL HD', '300DPI', '200DPI'));
-        $this->addProperty($product, 'Sticker resolution', $randomResolution);
+        $this->addAttribute($product, 'Sticker resolution', $randomResolution);
 
         // Sticker paper.
         $randomPaper = sprintf('Paper from tree %s', $this->faker->randomElement(array('Wung', 'Yang', 'Lemon-San', 'Me-Gusta')));
-        $this->addProperty($product, 'Sticker paper', $randomPaper);
+        $this->addAttribute($product, 'Sticker paper', $randomPaper);
 
         $product->addOption($this->getReference('Sylius.Option.Sticker size'));
 
@@ -173,6 +166,8 @@ class LoadProductsData extends DataFixture
      * Create mug product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createMug($i)
     {
@@ -188,7 +183,7 @@ class LoadProductsData extends DataFixture
         $this->setTaxons($product, array('Mugs', 'Mugland'));
 
         $randomMugMaterial = $this->faker->randomElement(array('Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand'));
-        $this->addProperty($product, 'Mug material', $randomMugMaterial);
+        $this->addAttribute($product, 'Mug material', $randomMugMaterial);
 
         $product->addOption($this->getReference('Sylius.Option.Mug type'));
 
@@ -203,6 +198,8 @@ class LoadProductsData extends DataFixture
      * Create book product.
      *
      * @param integer $i
+     *
+     * @return ProductInterface
      */
     protected function createBook($i)
     {
@@ -220,9 +217,9 @@ class LoadProductsData extends DataFixture
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
 
-        $this->addProperty($product, 'Book author', $author);
-        $this->addProperty($product, 'Book ISBN', $isbn);
-        $this->addProperty($product, 'Book pages', $this->faker->randomNumber(3));
+        $this->addAttribute($product, 'Book author', $author);
+        $this->addAttribute($product, 'Book ISBN', $isbn);
+        $this->addAttribute($product, 'Book pages', $this->faker->randomNumber(3));
 
         $this->setReference('Sylius.Product.'.$i, $product);
 
@@ -248,7 +245,8 @@ class LoadProductsData extends DataFixture
             $variant->setOnHand($this->faker->randomNumber(1));
 
             $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
-            $this->totalVariants++;
+
+            ++$this->totalVariants;
         }
     }
 
@@ -260,14 +258,10 @@ class LoadProductsData extends DataFixture
      */
     protected function addMasterVariant(ProductInterface $product, $sku = null)
     {
-        if (null === $sku) {
-            $sku = $this->getUniqueSku();
-        }
-
         $variant = $product->getMasterVariant();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
-        $variant->setSku($sku);
+        $variant->setSku(null === $sku ? $this->getUniqueSku() : $sku);
         $variant->setAvailableOn($this->faker->dateTimeThisYear);
         $variant->setOnHand($this->faker->randomNumber(1));
 
@@ -278,26 +272,28 @@ class LoadProductsData extends DataFixture
         $variant->addImage($image);
 
         $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
-        $this->totalVariants++;
+
+        ++$this->totalVariants;
 
         $product->setMasterVariant($variant);
     }
 
     /**
-     * Adds property to product with given value.
+     * Adds attribute to product with given value.
      *
      * @param ProductInterface $product
      * @param string           $name
      * @param string           $value
      */
-    protected function addProperty(ProductInterface $product, $name, $value)
+    private function addAttribute(ProductInterface $product, $name, $value)
     {
-        $property = $this->getProductPropertyRepository()->createNew();
-        $property->setProperty($this->getReference('Sylius.Property.'.$name));
-        $property->setProduct($product);
-        $property->setValue($value);
+        /* @var $attribute AttributeValueInterface */
+        $attribute = $this->getProductAttributeValueRepository()->createNew();
+        $attribute->setAttribute($this->getReference('Sylius.Attribute.'.$name));
+        $attribute->setProduct($product);
+        $attribute->setValue($value);
 
-        $product->addProperty($property);
+        $product->addAttribute($attribute);
     }
 
     /**
@@ -338,13 +334,7 @@ class LoadProductsData extends DataFixture
      */
     protected function getUniqueSku($length = 5)
     {
-        do {
-            $sku = $this->faker->randomNumber($length);
-        } while (in_array($sku, $this->skus));
-
-        $this->skus[] = $sku;
-
-        return $sku;
+        return $this->faker->unique()->randomNumber($length);
     }
 
     /**
@@ -354,7 +344,7 @@ class LoadProductsData extends DataFixture
      */
     protected function getUniqueISBN()
     {
-        return $this->getUniqueSku(13);
+        return $this->faker->unique()->uuid();
     }
 
     /**
@@ -364,10 +354,7 @@ class LoadProductsData extends DataFixture
      */
     protected function createProduct()
     {
-        return $this
-            ->getProductRepository()
-            ->createNew()
-        ;
+        return $this->getProductRepository()->createNew();
     }
 
     /**

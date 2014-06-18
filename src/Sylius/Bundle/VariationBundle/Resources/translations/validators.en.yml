@@ -1,0 +1,17 @@
+sylius:
+    option:
+        name:
+            not_blank: Please enter option name.
+            min_length: Option name must be at least 1 character long.|Option name must be at least {{ limit }} characters long.
+            max_length: Option name must not be longer than 1 character.|Option name must not be longer than {{ limit }} characters.
+        presentation:
+            not_blank: Please enter option presentation.
+            min_length: Option presentation must be at least 1 character long.|Option presentation must be at least {{ limit }} characters long.
+            max_length: Option presentation must not be longer than 1 character.|Option presentation must not be longer than {{ limit }} characters.
+        values:
+            min_count: Please add at least {{ limit }} option value.|Please add at least {{ limit }} option values.
+    option_value:
+        value:
+            not_blank: Please enter option value.
+    variant:
+        combination: Variant with this option set already exists.

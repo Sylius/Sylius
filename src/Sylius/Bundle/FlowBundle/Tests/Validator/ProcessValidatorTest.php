@@ -6,8 +6,6 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
-use Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader;
-use Symfony\Component\Templating\TemplateReference;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\PhpEngine;
 

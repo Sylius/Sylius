@@ -12,15 +12,15 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine ORM driver entity repository.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
@@ -161,12 +161,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
             if (null === $value) {
                 $queryBuilder
                     ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
-            } elseif (!is_array($value)) {
+            } elseif (is_array($value)) {
+                $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
+            } elseif ('' !== $value) {
                 $queryBuilder
                     ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
                     ->setParameter($property, $value);
-            } else {
-                $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
             }
         }
     }

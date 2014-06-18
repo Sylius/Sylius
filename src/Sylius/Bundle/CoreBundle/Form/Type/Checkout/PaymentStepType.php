@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * Checkout payment step form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentStepType extends AbstractType
 {
@@ -42,7 +42,7 @@ class PaymentStepType extends AbstractType
             ->add('paymentMethod', 'sylius_payment_method_choice', array(
                 'label'         => 'sylius.form.checkout.payment_method',
                 'expanded'      => true,
-                'property_path' => 'payment.method',
+                'property_path' => 'lastPayment.method',
                 'constraints'   => array(
                     $notBlank
                 )

@@ -12,23 +12,22 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use SM\Factory\FactoryInterface;
 use Payum\Be2Bill\Api;
 use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
-use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\NotifyRequest;
-use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class NotifyAction extends PaymentAwareAction
+class NotifyAction extends AbstractPaymentStateAwareAction
 {
     /**
      * @var Api
@@ -36,9 +35,9 @@ class NotifyAction extends PaymentAwareAction
     protected $api;
 
     /**
-     * @var OrderRepositoryInterface
+     * @var RepositoryInterface
      */
-    protected $orderRepository;
+    protected $paymentRepository;
 
     /**
      * @var EventDispatcherInterface
@@ -55,13 +54,21 @@ class NotifyAction extends PaymentAwareAction
      */
     protected $identifier;
 
-    public function __construct(Api $api, OrderRepositoryInterface $orderRepository, EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager, $identifier)
-    {
-        $this->api             = $api;
-        $this->orderRepository = $orderRepository;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->objectManager   = $objectManager;
-        $this->identifier      = $identifier;
+    public function __construct(
+        Api $api,
+        RepositoryInterface $paymentRepository,
+        EventDispatcherInterface $eventDispatcher,
+        ObjectManager $objectManager,
+        FactoryInterface $factory,
+        $identifier
+    ) {
+        parent::__construct($factory);
+
+        $this->api               = $api;
+        $this->paymentRepository = $paymentRepository;
+        $this->eventDispatcher   = $eventDispatcher;
+        $this->objectManager     = $objectManager;
+        $this->identifier        = $identifier;
     }
 
     /**
@@ -84,42 +91,28 @@ class NotifyAction extends PaymentAwareAction
             throw new BadRequestHttpException('Order id cannot be guessed');
         }
 
-        $order = $this->orderRepository->findOneBy(array($this->identifier => $details['ORDERID']));
+        $payment = $this->paymentRepository->findOneBy(array($this->identifier => $details['ORDERID']));
 
-        if (null === $order) {
-            throw new BadRequestHttpException('Order cannot be retrieved.');
+        if (null === $payment) {
+            throw new BadRequestHttpException('Paymenet cannot be retrieved.');
         }
-
-        $payment = $order->getPayment();
 
         if ((int) $details['AMOUNT'] !== $payment->getAmount()) {
             throw new BadRequestHttpException('Request amount cannot be verified against payment amount.');
         }
 
-        $previousState = $payment->getState();
-
         // Actually update payment details
         $details = array_merge($payment->getDetails(), $details);
         $payment->setDetails($details);
 
-        $status = new StatusRequest($order);
+        $status = new StatusRequest($payment);
         $this->payment->execute($status);
 
-        $payment->setState($status->getStatus());
+        $nextState = $status->getStatus();
 
-        if ($previousState !== $payment->getState()) {
-            $this->eventDispatcher->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
+        $this->updatePaymentState($payment, $nextState);
 
-            $this->objectManager->flush();
-
-            $this->eventDispatcher->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($payment, array('previous_state' => $previousState))
-            );
-        }
+        $this->objectManager->flush();
 
         throw new ResponseInteractiveRequest(new Response('OK', 200));
     }

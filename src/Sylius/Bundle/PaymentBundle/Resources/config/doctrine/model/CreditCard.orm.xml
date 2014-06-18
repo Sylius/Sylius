@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Sylius\Component\Payment\Model\CreditCard" table="sylius_credit_card">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="token" column="token" type="string" nullable="true" />
+        <field name="type" column="type" type="string" nullable="true" />
+        <field name="cardholderName" column="cardholder_name" type="string" nullable="true" />
+        <field name="number" column="number" type="string" nullable="true" />
+        <field name="securityCode" column="security_code" type="string" nullable="true" />
+        <field name="expiryMonth" column="expiry_month" type="integer" nullable="true" />
+        <field name="expiryYear" column="expiry_year" type="integer" nullable="true" />
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>

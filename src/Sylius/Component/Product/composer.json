@@ -1,0 +1,43 @@
+{
+    "name": "sylius/product",
+    "type": "library",
+    "description": "Product catalog system with support for product options and variants.",
+    "keywords": ["shop", "ecommerce", "products", "product", "assortment", "options", "variants"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+ 
+        "sylius/resource":  "0.10.*@dev",
+        "sylius/attribute": "0.10.*@dev",
+        "sylius/variation": "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Product\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Product\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

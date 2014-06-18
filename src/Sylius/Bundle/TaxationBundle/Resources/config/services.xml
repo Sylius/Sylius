@@ -19,10 +19,10 @@
     <parameters>
         <parameter key="sylius.form.type.tax_calculator_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType</parameter>
 
-        <parameter key="sylius.tax_calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator</parameter>
-        <parameter key="sylius.tax_calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator</parameter>
+        <parameter key="sylius.tax_calculator.class">Sylius\Component\Taxation\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius.tax_calculator.default.class">Sylius\Component\Taxation\Calculator\DefaultCalculator</parameter>
 
-        <parameter key="sylius.tax_rate_resolver.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
+        <parameter key="sylius.tax_rate_resolver.class">Sylius\Component\Taxation\Resolver\TaxRateResolver</parameter>
     </parameters>
 
     <services>

@@ -1,0 +1,45 @@
+{
+    "name": "sylius/promotion",
+    "type": "library",
+    "description": "Flexible promotion management for PHP applications.",
+    "keywords": ["shop", "ecommerce", "promotion", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/registry": "0.10.*@dev",
+        "sylius/resource": "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Promotion\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Promotion\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

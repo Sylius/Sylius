@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * Sets currently selected locale on request object.

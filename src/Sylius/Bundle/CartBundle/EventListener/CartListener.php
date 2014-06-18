@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Bundle\CartBundle\Event\CartItemEvent;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -71,24 +71,16 @@ class CartListener implements EventSubscriberInterface
         );
     }
 
-    public function addItem(CartEvent $event)
+    public function addItem(CartItemEvent $event)
     {
         $cart = $event->getCart();
         $cart->addItem($event->getItem());
-
-        if ($event->isFresh()) {
-            $this->refreshCart($cart);
-        }
     }
 
-    public function removeItem(CartEvent $event)
+    public function removeItem(CartItemEvent $event)
     {
         $cart = $event->getCart();
         $cart->removeItem($event->getItem());
-
-        if ($event->isFresh()) {
-            $this->refreshCart($cart);
-        }
     }
 
     public function clearCart(CartEvent $event)
@@ -101,16 +93,9 @@ class CartListener implements EventSubscriberInterface
     public function saveCart(CartEvent $event)
     {
         $cart  = $event->getCart();
-        $valid = true;
 
-        if (!$event->isValid()) {
-            $errors = $this->validator->validate($cart);
-            $valid  = 0 === count($errors);
-        }
-
-        if ($event->isFresh()) {
-            $this->refreshCart($cart);
-        }
+        $errors = $this->validator->validate($cart);
+        $valid  = 0 === count($errors);
 
         if ($valid) {
             $this->cartManager->persist($cart);
@@ -118,13 +103,5 @@ class CartListener implements EventSubscriberInterface
 
             $this->cartProvider->setCart($cart);
         }
-    }
-
-    /**
-     * @param CartInterface $cart
-     */
-    protected function refreshCart(CartInterface $cart)
-    {
-        $cart->calculateTotal();
     }
 }

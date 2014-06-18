@@ -100,7 +100,7 @@ class AddressType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => function(Options $options) use ($validationGroups) {
+                'validation_groups' => function (Options $options) use ($validationGroups) {
                     if ($options['shippable']) {
                         $validationGroups[] = 'shippable';
                     }

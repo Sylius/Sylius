@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.templating.helper.money.class">Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%">
+            <argument type="service" id="sylius.currency_context" />
+            <argument type="service" id="sylius.currency_converter" />
+            <argument>%sylius.money.locale%</argument>
+            <tag name="templating.helper" alias="sylius_money" />
+        </service>
+    </services>
+
+</container>

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CartBundle\Controller;
 
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CartBundle\Event\FlashEvent;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Resource controller class provides several actions and methods for creating
  * pages and api for your cart system.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartController extends Controller
 {
@@ -39,10 +39,16 @@ class CartController extends Controller
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
-        return $this->render($this->config->getTemplate('summary.html'), array(
-            'cart' => $cart,
-            'form' => $form->createView()
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('summary.html'))
+            ->setData(array(
+                'cart' => $cart,
+                'form' => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**
@@ -61,7 +67,7 @@ class CartController extends Controller
         $cart = $this->getCurrentCart();
         $form = $this->createForm('sylius_cart', $cart);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $event = new CartEvent($cart);
             $event->isFresh(true);
 
@@ -78,10 +84,16 @@ class CartController extends Controller
             return $this->redirectToCartSummary();
         }
 
-        return $this->render($this->config->getTemplate('summary.html'), array(
-            'cart' => $cart,
-            'form' => $form->createView()
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('summary.html'))
+            ->setData(array(
+                'cart' => $cart,
+                'form' => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**

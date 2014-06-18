@@ -4,7 +4,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Image">
+    <mapped-superclass name="Sylius\Component\Core\Model\Image">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

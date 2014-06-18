@@ -11,15 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\InventoryHandlerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Order inventory processing listener.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderInventoryListener
@@ -54,30 +55,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Release order inventory.
-     *
-     * @param GenericEvent $event
-     */
-    public function releaseInventoryUnits(GenericEvent $event)
-    {
-        $this->inventoryHandler->releaseInventory(
-            $this->getOrder($event)
-        );
-    }
-
-    /**
-     * Update order inventory.
-     *
-     * @param GenericEvent $event
-     */
-    public function updateInventoryUnits(GenericEvent $event)
-    {
-        $this->inventoryHandler->updateInventory(
-            $this->getOrder($event)
-        );
-    }
-
-    /**
      * Update the inventory units.
      *
      * @param GenericEvent $event
@@ -93,14 +70,19 @@ class OrderInventoryListener
      * Gets order from event.
      *
      * @param GenericEvent $event
+     *
+     * @return OrderInterface
+     *
+     * @throws UnexpectedTypeException
      */
     protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 
@@ -111,14 +93,19 @@ class OrderInventoryListener
      * Gets order from event.
      *
      * @param GenericEvent $event
+     *
+     * @return OrderInterface
+     *
+     * @throws UnexpectedTypeException
      */
     protected function getItem(GenericEvent $event)
     {
         $item = $event->getSubject();
 
         if (!$item instanceof OrderItemInterface) {
-            throw new \InvalidArgumentException(
-                'Order inventory listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderItemInterface"'
+            throw new UnexpectedTypeException(
+                $item,
+                'Sylius\Component\Core\Model\OrderItemInterface'
             );
         }
 

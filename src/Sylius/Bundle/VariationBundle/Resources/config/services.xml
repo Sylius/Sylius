@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.event_subscriber.variation.load_metadata.class">Sylius\Bundle\VariationBundle\EventListener\LoadMetadataSubscriber</parameter>
+
+        <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\VariationBundle\Validator\VariantUniqueValidator</parameter>
+        <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariationBundle\Validator\VariantCombinationValidator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.event_subscriber.variation.load_metadata" class="%sylius.event_subscriber.variation.load_metadata.class%">
+            <tag name="doctrine.event_subscriber" />
+            <argument>%sylius.variation.variables%</argument>
+        </service>
+
+        <service id="sylius.validator.variant.unique" class="%sylius.validator.variant.unique.class%">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="validator.constraint_validator" alias="sylius.validator.variant.unique" />
+        </service>
+        <service id="sylius.validator.variant.combination" class="%sylius.validator.variant.combination.class%">
+            <tag name="validator.constraint_validator" alias="sylius.validator.variant.combination" />
+        </service>
+    </services>
+
+</container>

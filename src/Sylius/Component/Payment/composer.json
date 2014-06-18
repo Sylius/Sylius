@@ -1,0 +1,41 @@
+{
+    "name": "sylius/payment",
+    "type": "library",
+    "description": "Flexible payments system for PHP e-commerce applications.",
+    "keywords": ["payments", "payment", "shop", "webshop", "ecommerce"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource": "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Payment\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Payment\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

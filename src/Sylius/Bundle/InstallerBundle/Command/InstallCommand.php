@@ -2,10 +2,10 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use RuntimeException;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -67,22 +67,44 @@ class InstallCommand extends ContainerAwareCommand
     {
         $output->writeln('<info>Setting up database.</info>');
 
-        $dialog = $this->getHelperSet()->get('dialog');
+        $this->setupDatabase($input, $output);
 
-        $this
-            ->runCommand('doctrine:database:create', $input, $output)
-            ->runCommand('doctrine:schema:create', $input, $output)
-            ->runCommand('doctrine:phpcr:repository:init', $input, $output)
-            ->runCommand('assetic:dump', $input, $output)
-        ;
-
-        if ($dialog->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {
-            $this->runCommand('doctrine:fixtures:load', $input, $output);
-            $this->runCommand('doctrine:phpcr:fixtures:load', $input, $output);
+        if ($this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load fixtures (Y/N)?</question>', false)) {
+            $this->setupFixtures($input, $output);
         }
 
         $output->writeln('');
         $output->writeln('<info>Administration setup.</info>');
+
+        $this->setupAdmin($output);
+
+        $output->writeln('');
+
+        return $this;
+    }
+
+    protected function setupDatabase(InputInterface $input, OutputInterface $output)
+    {
+        $this
+            ->runCommand('doctrine:database:create', $input, $output)
+            ->runCommand('doctrine:schema:create', $input, $output)
+            ->runCommand('doctrine:phpcr:repository:init', $input, $output)
+            ->runCommand('assets:install', $input, $output)
+            ->runCommand('assetic:dump', $input, $output)
+        ;
+    }
+
+    protected function setupFixtures(InputInterface $input, OutputInterface $output)
+    {
+        $this
+            ->runCommand('doctrine:fixtures:load', $input, $output)
+            ->runCommand('doctrine:phpcr:fixtures:load', $input, $output)
+        ;
+    }
+
+    protected function setupAdmin(OutputInterface $output)
+    {
+        $dialog = $this->getHelperSet()->get('dialog');
 
         $userClass = $this->getContainer()->getParameter('sylius.model.user.class');
         $user = new $userClass;
@@ -96,13 +118,9 @@ class InstallCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $em->persist($user);
         $em->flush();
-
-        $output->writeln('');
-
-        return $this;
     }
 
-    private function runCommand($command, InputInterface $input, OutputInterface $output)
+    protected function runCommand($command, InputInterface $input, OutputInterface $output)
     {
         $this
             ->getApplication()

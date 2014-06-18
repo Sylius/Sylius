@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\TaxationBundle\Model\TaxRate" table="sylius_tax_rate">
+    <mapped-superclass name="Sylius\Component\Taxation\Model\TaxRate" table="sylius_tax_rate">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -24,7 +24,7 @@
         <field name="includedInPrice" column="included_in_price" type="boolean" />
         <field name="calculator" column="calculator" type="string" />
 
-        <many-to-one field="category" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface" inversed-by="rates">
+        <many-to-one field="category" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface" inversed-by="rates">
             <join-column name="category_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 

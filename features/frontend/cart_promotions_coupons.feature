@@ -41,7 +41,7 @@ Feature: Checkout coupon promotions
          Then I should be on the cart summary page
           And I should see "Your promotion coupon has been added to the cart"
           And "Promotion total: -€5.00" should appear on the page
-          And "Grand total: €115.00" should appear on the page
+          And "Grand total: €110.00" should appear on the page
 
     Scenario: An invalid coupon can not be added to the cart
         Given I am on the store homepage

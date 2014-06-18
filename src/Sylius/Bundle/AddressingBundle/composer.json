@@ -23,8 +23,9 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "sylius/resource-bundle":          "0.9.*@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*"
+        "stof/doctrine-extensions-bundle": "1.1.*",
+        "sylius/resource-bundle":          "0.10.*@dev",
+        "sylius/addressing":               "0.10.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
@@ -36,12 +37,14 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\AddressingBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\AddressingBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/AddressingBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\AddressingBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

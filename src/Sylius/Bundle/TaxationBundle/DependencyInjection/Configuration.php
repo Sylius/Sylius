@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -61,7 +61,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('tax_category')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\TaxationBundle\Model\TaxCategory')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Taxation\Model\TaxCategory')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxCategoryType')->end()
@@ -70,7 +70,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('tax_rate')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\TaxationBundle\Model\TaxRate')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Taxation\Model\TaxRate')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\ResourceBundle\\Controller\\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\\Bundle\\TaxationBundle\\Form\\Type\\TaxRateType')->end()

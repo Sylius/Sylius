@@ -16,7 +16,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 /**
  * Base step class.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class Step implements StepInterface
 {

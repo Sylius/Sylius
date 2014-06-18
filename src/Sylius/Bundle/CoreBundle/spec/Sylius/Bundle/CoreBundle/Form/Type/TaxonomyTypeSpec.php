@@ -32,6 +32,6 @@ class TaxonomyTypeSpec extends ObjectBehavior
 
     function it_should_extend_Sylius_taxon_base_form_type()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyType');
+        $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyType');
     }
 }

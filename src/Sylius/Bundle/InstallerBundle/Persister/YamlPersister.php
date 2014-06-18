@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InstallerBundle\Persister;
 
-use Symfony\Component\Yaml\Yaml;
 use RuntimeException;
+use Symfony\Component\Yaml\Yaml;
 
 class YamlPersister
 {

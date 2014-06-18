@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class OrderUserListener
 {
@@ -34,10 +35,10 @@ class OrderUserListener
         }
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                'Order user listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface", "%s" given.',
-                is_object($order) ? get_class($order) : gettype($order)
-            ));
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
+            );
         }
 
         if (null === $user = $this->getUser()) {

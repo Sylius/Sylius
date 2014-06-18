@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 /**
  * Settings controller.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsController extends Controller
 {
@@ -46,7 +46,7 @@ class SettingsController extends Controller
 
         $form->setData($settings);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
                 $manager->saveSettings($namespace, $form->getData());

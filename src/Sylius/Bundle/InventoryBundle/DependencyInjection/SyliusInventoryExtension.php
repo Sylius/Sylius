@@ -17,13 +17,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Inventory dependency injection extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class SyliusInventoryExtension extends AbstractResourceExtension
 {
     protected $configFiles = array(
         'services',
+        'templating',
         'twig',
     );
 
@@ -51,7 +52,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
 
         if (isset($config['events'])) {
-            $listenerDefinition = $container->getDefinition('sylius.inventory_listener');
+            $listenerDefinition = $container->getDefinition('sylius.listener.inventory');
             foreach ($config['events'] as $event) {
                 $listenerDefinition->addTag('kernel.event_listener', array('event' => $event, 'method' => 'onInventoryChange'));
             }

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\WebBundle\Form;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Profile form.

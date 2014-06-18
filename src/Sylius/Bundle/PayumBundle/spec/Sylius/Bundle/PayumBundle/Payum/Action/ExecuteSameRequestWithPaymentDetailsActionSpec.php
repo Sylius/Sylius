@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
+use Payum\Core\PaymentInterface as PayumPaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Payum\Core\PaymentInterface as PayumPaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
 {

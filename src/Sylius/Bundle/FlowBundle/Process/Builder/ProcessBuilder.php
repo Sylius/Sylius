@@ -14,7 +14,6 @@ namespace Sylius\Bundle\FlowBundle\Process\Builder;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
-use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -125,11 +124,35 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function setDisplayRouteParams(array $params)
+    {
+        $this->assertHasProcess();
+
+        $this->process->setDisplayRouteParams($params);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setForwardRoute($route)
     {
         $this->assertHasProcess();
 
         $this->process->setForwardRoute($route);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setForwardRouteParams(array $params)
+    {
+        $this->assertHasProcess();
+
+        $this->process->setForwardRouteParams($params);
 
         return $this;
     }

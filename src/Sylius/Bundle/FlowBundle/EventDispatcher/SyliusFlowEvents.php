@@ -14,7 +14,7 @@ namespace Sylius\Bundle\FlowBundle\EventDispatcher;
 /**
  * Events.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SyliusFlowEvents
 {

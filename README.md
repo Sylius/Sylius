@@ -24,11 +24,10 @@ $ cd sylius
 $ php app/console sylius:install
 ```
 
-To be able to use included fixtures, that make testing and development phases much easier, you may need
-to run Composer tool with `--dev` option:
+To be able to use included fixtures, that make testing and development phases much easier:
 
 ```bash
-$ php composer.phar install --dev
+$ php composer.phar install
 $ php app/console doctrine:database:create
 $ php app/console doctrine:schema:create 
 $ php app/console doctrine:phpcr:repository:init
@@ -38,27 +37,27 @@ $ php app/console doctrine:phpcr:repository:init
 -----------------------------------
 
 You need to copy Behat default configuration file and enter your specific ``base_url``
-option there.
+option there:
 
 ```bash
 $ cp behat.yml.dist behat.yml
 $ vi behat.yml
 ```
 
-Then download [Selenium Server](http://seleniumhq.org/download/), and run it.
+Then download [Selenium Server](http://seleniumhq.org/download/), and run it:
 
 ```bash
-$ java -jar selenium-server-standalone-2.39.0.jar
+$ java -jar selenium-server-standalone-2.41.0.jar
 ```
 
-Then setup your test database
+Then setup your test database:
 
 ```bash
 $ php app/console doctrine:database:create --env=test
 $ php app/console doctrine:schema:create --env=test
 ```
 
-You can run Behat using the following command.
+You can run Behat using the following command:
 
 ```bash
 $ bin/behat
@@ -67,7 +66,7 @@ $ bin/behat
 Troubleshooting
 ---------------
 
-If something goes wrong, errors & exceptions are logged at the application level.
+If something goes wrong, errors & exceptions are logged at the application level:
 
 ```bash
 $ tail -f app/logs/prod.log

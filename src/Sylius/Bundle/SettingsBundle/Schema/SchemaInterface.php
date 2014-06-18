@@ -11,13 +11,12 @@
 
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
-use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Settings schema interface.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface SchemaInterface
 {

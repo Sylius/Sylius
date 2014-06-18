@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\VariableProductBundle\Form\Type\VariableProductType as BaseProductType;
-use Sylius\Bundle\CoreBundle\Model\Product;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Product form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductType extends BaseProductType
 {

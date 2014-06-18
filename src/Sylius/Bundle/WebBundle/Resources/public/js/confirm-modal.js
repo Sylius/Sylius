@@ -12,7 +12,7 @@
     $(document).ready(function() {
         var deleteButton;
 
-        $('.btn-confirm').click(function(e) {
+        $(document).on('click', '.btn-confirm',function(e) {
             e.preventDefault();
 
             deleteButton = $(this);

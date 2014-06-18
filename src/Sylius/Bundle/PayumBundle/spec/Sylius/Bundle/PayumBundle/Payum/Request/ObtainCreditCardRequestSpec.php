@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Request;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PaymentsBundle\Model\CreditCardInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\Model\CreditCardInterface;
 
 class ObtainCreditCardRequestSpec extends ObjectBehavior
 {

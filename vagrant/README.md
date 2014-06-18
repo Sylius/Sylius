@@ -29,7 +29,7 @@ From now you should be able to access your Sylius project at [http://sylius.dev/
 
 # Troubleshooting
 
-Using Symfony2 inside Vagrant can be slow due to synchronisation delay incurred by NFS. To avoid this, both locations have been have been moved to a shared memory segment under ``/dev/shm/sylius``.
+Using Symfony2 inside Vagrant can be slow due to synchronisation delay incurred by NFS. To avoid this, both locations have been moved to a shared memory segment under ``/dev/shm/sylius``.
 
 To view the application logs, run the following commands:
 

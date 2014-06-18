@@ -13,9 +13,9 @@ namespace Sylius\Bundle\MoneyBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Money bundle.
@@ -42,13 +42,13 @@ class SyliusMoneyBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $interfaces = array(
-            'Sylius\Bundle\MoneyBundle\Model\ExchangeRateInterface' => 'sylius.model.exchange_rate.class',
+            'Sylius\Component\Money\Model\ExchangeRateInterface' => 'sylius.model.exchange_rate.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_money', $interfaces));
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\MoneyBundle\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Money\Model',
         );
 
         $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_money.driver.doctrine/orm'));

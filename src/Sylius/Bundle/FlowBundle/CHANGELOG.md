@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+### v0.9.0
+
+* Release before components.
+
 ### v0.8.0
 
 * Make the validator extendable.

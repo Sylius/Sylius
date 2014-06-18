@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_product_attribute_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductAttribute:index.html.twig
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_backend_product_attribute_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_attribute:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductAttribute:create.html.twig
+            redirect: sylius_backend_product_attribute_index
+
+sylius_backend_product_attribute_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_attribute:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductAttribute:update.html.twig
+            redirect: sylius_backend_product_attribute_index
+
+sylius_backend_product_attribute_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_attribute:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_product_attribute_index

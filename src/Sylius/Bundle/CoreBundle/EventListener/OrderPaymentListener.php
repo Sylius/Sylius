@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\PaymentProcessorInterface;
-use Sylius\Bundle\CoreBundle\SyliusOrderEvents;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use SM\Factory\FactoryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Order payment listener.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderPaymentListener
 {
@@ -34,27 +34,30 @@ class OrderPaymentListener
     protected $paymentProcessor;
 
     /**
-     * @var EntityRepository
-     */
-    protected $orderRepository;
-
-    /**
      * @var EventDispatcherInterface
      */
     protected $dispatcher;
 
     /**
+     * @var FactoryInterface
+     */
+    protected $factory;
+
+    /**
      * Constructor.
      *
      * @param PaymentProcessorInterface $paymentProcessor
-     * @param EntityRepository          $orderRepository
      * @param EventDispatcherInterface  $dispatcher
+     * @param FactoryInterface          $factory
      */
-    public function __construct(PaymentProcessorInterface $paymentProcessor, EntityRepository $orderRepository, EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        PaymentProcessorInterface $paymentProcessor,
+        EventDispatcherInterface $dispatcher,
+        FactoryInterface $factory
+    ) {
         $this->paymentProcessor = $paymentProcessor;
-        $this->orderRepository  = $orderRepository;
         $this->dispatcher       = $dispatcher;
+        $this->factory          = $factory;
     }
 
     /**
@@ -79,72 +82,30 @@ class OrderPaymentListener
     public function updateOrderPayment(GenericEvent $event)
     {
         $order = $this->getOrder($event);
-        $payment = $order->getPayment();
 
-        if (null === $payment) {
-            throw new \InvalidArgumentException('Order\'s payment cannot be null.');
+        if (!$order->hasPayments()) {
+            throw new \InvalidArgumentException('Order payments cannot be empty.');
         }
 
+        /** @var $payment PaymentInterface */
+        $payment = $order->getPayments()->last();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
     }
 
     /**
-     * Get the order from event and void payment.
-     *
      * @param GenericEvent $event
      *
-     * @throws \InvalidArgumentException
-     */
-    public function voidOrderPayment(GenericEvent $event)
-    {
-        $order = $event->getSubject();
-
-        if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order payment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
-        }
-
-        $order->getPayment()->setState(PaymentInterface::STATE_VOID);
-    }
-
-    public function updateOrderOnPayment(GenericEvent $event)
-    {
-        $payment = $event->getSubject();
-
-        if (!$payment instanceof PaymentInterface) {
-            throw new \InvalidArgumentException(sprintf(
-                'Order payment listener requires event subject to be instance of "Sylius\Bundle\PaymentsBundle\Model\PaymentInterface", %s given.',
-                is_object($payment) ? get_class($payment) : gettype($payment)
-            ));
-        }
-
-        $order = $this->orderRepository->findOneBy(array('payment' => $payment));
-
-        if (null === $order) {
-            throw new \Exception(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
-        }
-
-        if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-            $this->dispatcher->dispatch(SyliusOrderEvents::PRE_PAY, new GenericEvent($order, $event->getArguments()));
-            $this->dispatcher->dispatch(SyliusOrderEvents::POST_PAY, new GenericEvent($order, $event->getArguments()));
-        }
-    }
-
-    /**
-     * @param  GenericEvent              $event
      * @return OrderInterface
-     * @throws \InvalidArgumentException
+     *
+     * @throws UnexpectedTypeException
      */
     protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order payment listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
-            );
+            throw new UnexpectedTypeException($order, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
         return $order;

@@ -72,6 +72,7 @@ class ProcessValidator implements ProcessValidatorInterface
      * Set validation
      *
      * @param callable $validation
+     *
      * @return $this
      */
     public function setValidation(\Closure $validation)
@@ -96,7 +97,7 @@ class ProcessValidator implements ProcessValidatorInterface
      */
     public function isValid()
     {
-        return (call_user_func($this->validation)) ? true : false;
+        return call_user_func($this->validation) ? true : false;
     }
 
     /**

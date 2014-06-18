@@ -2,8 +2,18 @@
 
 {% block form_widget %}
 {% spaceless %}
-    {{ parent() }}
-    <div class="configuration"></div>
+    {% if compound %}
+        <div {{ block('widget_container_attributes') }}>
+            {% if form.parent is empty %}
+                {{ form_errors(form) }}
+            {% endif %}
+            {{ block('form_rows') }}
+            {{ form_rest(form) }}
+            <div class="configuration"></div>
+        </div>
+    {% else %}
+        {{ block('form_widget_simple') }}
+    {% endif %}
 {% endspaceless %}
 {% endblock form_widget %}
 

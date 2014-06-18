@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Validator;
 
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Interface for process validation
@@ -25,6 +26,7 @@ interface ProcessValidatorInterface
      * Message to display on invalid.
      *
      * @param string $message
+     *
      * @return ProcessValidatorInterface
      */
     public function setMessage($message);
@@ -40,6 +42,7 @@ interface ProcessValidatorInterface
      * Set step name to go on error.
      *
      * @param string $stepName
+     *
      * @return ProcessValidatorInterface
      */
     public function setStepName($stepName);
@@ -59,7 +62,8 @@ interface ProcessValidatorInterface
     public function isValid();
 
     /**
-     * @param  StepInterface $step
+     * @param StepInterface $step
+     *
      * @return Response
      */
     public function getResponse(StepInterface $step);

@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\InventoryBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
-use Sylius\Bundle\InventoryBundle\Operator\BackordersHandlerInterface;
+use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\BackordersHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

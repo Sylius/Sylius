@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 /**
  * Carts extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
@@ -26,6 +26,7 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
 {
     protected $configFiles = array(
         'services',
+        'templating',
         'twig',
     );
 
@@ -64,10 +65,10 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         $container->prependExtensionConfig('sylius_order', array(
             'classes' => array(
                 'order_item' => array(
-                    'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
+                    'model' => 'Sylius\Component\Cart\Model\CartItem'
                 ),
                 'order' => array(
-                    'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
+                    'model' => 'Sylius\Component\Cart\Model\Cart'
                 )
             ))
         );

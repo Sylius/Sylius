@@ -21,6 +21,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusMoneyExtension extends AbstractResourceExtension
 {
+    protected $configFiles = array(
+        'services',
+        'templating',
+        'twig',
+    );
+
     /**
      * {@inheritdoc}
      */

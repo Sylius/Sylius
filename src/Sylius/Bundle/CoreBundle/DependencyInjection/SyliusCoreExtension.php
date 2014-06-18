@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * Core extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
@@ -30,15 +30,24 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_addressing',
         'sylius_inventory',
         'sylius_money',
-        'sylius_payments',
+        'sylius_payment',
         'sylius_payum',
         'sylius_product',
-        'sylius_promotions',
+        'sylius_promotion',
         'sylius_order',
         'sylius_settings',
         'sylius_shipping',
         'sylius_taxation',
-        'sylius_taxonomies',
+        'sylius_taxonomy',
+        'sylius_attribute',
+        'sylius_variation',
+        'sylius_sequence',
+    );
+
+    protected $configFiles = array(
+        'services',
+        'templating',
+        'twig',
     );
 
     private $emails = array(
@@ -54,6 +63,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
 
         $loader->load('mailer/mailer.xml');
+        $loader->load('state_machine.xml');
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
     }
@@ -70,6 +80,22 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
                 $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }
         }
+
+        $routeClasses = $controllerByClasses = $syliusByClasses = array();
+        foreach ($config['routing'] as $className => $routeConfig) {
+            $routeClasses[$className] = array(
+                'field' => $routeConfig['field'],
+                'prefix' => $routeConfig['prefix'],
+            );
+            $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
+            $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
+        }
+
+        $container->setParameter('sylius.route_classes', $routeClasses);
+        $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
+        $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
+        $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
+        $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
     }
 
     /**

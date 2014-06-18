@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
-use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
+use Doctrine\ODM\MongoDB\DocumentRepository as BaseDocumentRepository;
 use Pagerfanta\Adapter\DoctrineODMMongoDBAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine ODM driver resource manager.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {

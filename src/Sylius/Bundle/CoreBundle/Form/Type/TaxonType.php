@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType as BaseTaxonType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

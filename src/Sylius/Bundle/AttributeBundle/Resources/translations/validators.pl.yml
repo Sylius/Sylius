@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Proszę podać SKU produktu.
+      unique: Wartość SKU musi być unikatowa.
+    name:
+      not_blank: Proszę podać nazwę produktu.
+      min_length: 'Nazwa produktu musi składać się z co najmniej 1 znaku. |Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.'
+      max_length: 'Nazwa produktu nie może być dłuższa niż 1 znak. |Nazwa produktu nie może przekraczać {{ limit }} znaków.'
+    description:
+      not_blank: Proszę wprowadzić opis produktu.
+      min_length: 'Opis produktu musi składać się z  co najmniej 1 znaku. |Opis produktu musi składać się z  co najmniej {{ limit }} znaków.'
+  variant:
+    sku:
+      not_blank: Proszę podać SKU wariantu.
+      unique: Wartość SKU wariantu musi być unikatowa.
+  option:
+    name:
+      not_blank: Proszę wprowadzić nazwę opcji.
+      min_length: 'Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
+      max_length: 'Nazwa opcji nie może być dłuższa niż jeden znak. |Nazwa opcji nie może przekraczać {{ limit }} znaków.'
+    presentation:
+      not_blank: Proszę wprowadzić nazwę publiczną.
+      min_length: 'Nazwa publiczna powinna zawierać co najmniej jeden znak. |Nazwa publiczna nie może przekraczać {{ limit }} znaków.'
+      max_length: 'Nazwa publiczna nie może być dłuższy niż jeden znak. |Nazwa publiczna nie może być dłuższa niż {{ limit }} znaków.'

@@ -17,6 +17,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLan
 
 /**
  * Adds some function to the default ExpressionLanguage.
+ *
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class ExpressionLanguage extends BaseExpressionLanguage implements ContainerAwareInterface
@@ -27,38 +28,40 @@ class ExpressionLanguage extends BaseExpressionLanguage implements ContainerAwar
     protected $container;
 
     /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     *
-     * @api
+     * {@inheritdoc}
      */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function evaluate($expression, $values = array())
     {
-        $values["container"] = $this->container;
+        $values['container'] = $this->container;
 
         return parent::evaluate($expression, $values);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function registerFunctions()
     {
         parent::registerFunctions();
 
         $this->register('service', function ($arg) {
-                return sprintf('$this->get(%s)', $arg);
-            }, function (array $variables, $value) {
-                return $variables['container']->get($value);
-            });
+            return sprintf('$this->get(%s)', $arg);
+        }, function (array $variables, $value) {
+            return $variables['container']->get($value);
+        });
 
         $this->register('parameter', function ($arg) {
-                return sprintf('$this->getParameter(%s)', $arg);
-            }, function (array $variables, $value) {
-                return $variables['container']->getParameter($value);
-            });
+            return sprintf('$this->getParameter(%s)', $arg);
+        }, function (array $variables, $value) {
+            return $variables['container']->getParameter($value);
+        });
     }
 }

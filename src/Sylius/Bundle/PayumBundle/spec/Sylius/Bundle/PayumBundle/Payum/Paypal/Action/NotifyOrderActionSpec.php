@@ -11,16 +11,20 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
+use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\PaymentsBundle\Model\Payment;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface as PaymentModelInterface;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface as PaymentModelInterface;
+use Sylius\Component\Payment\Model\Payment;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Payment\SyliusPaymentEvents;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class NotifyOrderActionSpec extends ObjectBehavior
@@ -28,9 +32,10 @@ class NotifyOrderActionSpec extends ObjectBehavior
     function let(
         EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
+        FactoryInterface $factory,
         PaymentInterface $payment
     ) {
-        $this->beConstructedWith($eventDispatcher, $objectManager);
+        $this->beConstructedWith($eventDispatcher, $objectManager, $factory);
         $this->setPayment($payment);
     }
 
@@ -46,9 +51,9 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
     function it_should_supports_secured_notify_request_with_order_model(
         SecuredNotifyRequest $request,
-        OrderInterface $order
+        PaymentModelInterface $payment
     ) {
-        $request->getModel()->willReturn($order);
+        $request->getModel()->willReturn($payment);
 
         $this->supports($request)->shouldReturn(true);
     }
@@ -79,19 +84,24 @@ class NotifyOrderActionSpec extends ObjectBehavior
     }
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+        $factory,
         SecuredNotifyRequest $request,
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $sm,
+        Collection $payments
     ) {
-        $request->getModel()->willReturn($order);
-        $order->getPayment()->willReturn($paymentModel);
+        $request->getModel()->willReturn($paymentModel);
+        $order->getPayments()->willReturn($payments);
+        $payments->last()->willReturn($payment);
 
         $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function($args) use ($paymentModel) {
-            $paymentModel->getState()->willReturn($args[0]);
-        });
+
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->getTransitionToState('completed')->willReturn(null);
+        $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
 
         $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
 
@@ -102,38 +112,30 @@ class NotifyOrderActionSpec extends ObjectBehavior
             }
         );
 
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldNotBeCalled()
-        ;
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldNotBeCalled()
-        ;
-
         $this->execute($request);
     }
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+        $factory,
         SecuredNotifyRequest $request,
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
         EventDispatcherInterface $eventDispatcher,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
+        StateMachineInterface $sm,
+        Collection $payments
     ) {
-        $request->getModel()->willReturn($order);
-        $order->getPayment()->willReturn($paymentModel);
+        $request->getModel()->willReturn($paymentModel);
+        $order->getPayments()->willReturn($payments);
+        $payments->last()->willReturn($payment);
 
-        $paymentModel->getState()->willReturn(Payment::STATE_COMPLETED);
-        $paymentModel->setState(Argument::type('string'))->will(function($args) use ($paymentModel) {
-            $paymentModel->getState()->willReturn($args[0]);
+        $paymentModel->getState()->willReturn(Payment::STATE_PENDING);
+
+        $factory->get($paymentModel, PaymentTransitions::GRAPH)->willReturn($sm);
+        $sm->getTransitionToState('cancelled')->willReturn(PaymentTransitions::SYLIUS_CANCEL);
+        $sm->apply(PaymentTransitions::SYLIUS_CANCEL)->shouldBeCalled()->will(function ($args) use ($paymentModel) {
+            $paymentModel->getState()->willReturn(Payment::STATE_CANCELLED);
         });
 
         $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
@@ -145,23 +147,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
             }
         );
 
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
-
         $objectManager->flush()->shouldBeCalled();
-
-        $eventDispatcher
-            ->dispatch(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
-            )
-            ->shouldBeCalled()
-        ;
 
         $this->execute($request);
     }

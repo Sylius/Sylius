@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Taxation settings schema.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationSettingsSchema implements SchemaInterface
 {
@@ -51,7 +51,7 @@ class TaxationSettingsSchema implements SchemaInterface
                 'default_tax_zone'
             ))
             ->setAllowedTypes(array(
-                'default_tax_zone' => array('null', 'Sylius\Bundle\AddressingBundle\Model\ZoneInterface'),
+                'default_tax_zone' => array('null', 'Sylius\Component\Addressing\Model\ZoneInterface'),
             ))
             ->setTransformer('default_tax_zone', new ObjectToIdentifierTransformer($this->zoneRepository))
         ;

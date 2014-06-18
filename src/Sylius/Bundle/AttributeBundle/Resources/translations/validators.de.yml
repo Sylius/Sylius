@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Bitte geben Sie die Produkt Bestandseinheit an.
+      unique: Die Produkt Bestandseinheit muss eindeutig sein.
+    name:
+      not_blank: Bitte gib Sie einen Produktnamen an.
+      min_length: 'Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.'
+    description:
+      not_blank: Bitte geben Sie eine Produktbeschreibung an.
+      min_length: 'Die Produktbeschreibung muss mindestens 1 Zeichen lang sein.|Die Produktbeschreibung muss mindestens {{ limit }} Zeichen lang sein.'
+  variant:
+    sku:
+      not_blank: Bitte geben Sie die Bestandseinheit der Variante an.
+      unique: Die Bestandseinheit der Variante muss einzigartig sein.
+    combination: Die Variation mit den gewählten Einstellungen existiert schon.
+  option:
+    name:
+      not_blank: Bitte geben Sie einen Namen für die Option ein.
+      min_length: 'Der Name der Option muss mindestens 1 Zeichen lang sein.|Der Name der Option muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Der Name der Option darf nicht länger als 1 Zeichen sein.|Der Name der Option darf nicht länger als {{ limit }} Zeichen sein.'
+    presentation:
+      not_blank: Bitte geben Sie die Option für die Gestaltung an.
+      min_length: 'Die Option für die Gestaltung muss mindestens 1 Zeichen lang sein.|Die Option für die Gestaltung muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Die Option für die Gestaltung darf nicht länger als 1 Zeichen sein.|Die Option für die Gestaltung darf nicht länger als {{ limit }} Zeichen lang sein.'
+    values:
+      min_count: 'Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.'
+  option_value:
+    value:
+      not_blank: Bitte geben Sie einen Wert für diese Option ein.
+  property:
+    name:
+      not_blank: Bitte geben Sie einen Namen für diese Einstellung ein.
+      min_length: 'Der Name dieser Einstellung muss mindestens 1 Zeichen lang sein.|Der Name dieser Einstellung muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Der Name dieser Einstellung darf nicht länger als 1 Zeichen sein.|Der Name dieser Einstellung darf nicht länger als {{ limit }} Zeichen sein.'
+    presentation:
+      not_blank: Bitte geben Sie den Wert für die Gestaltung an.
+      min_length: 'Der Wert für die Gestaltung muss mindestens 1 Zeichen lang sein.|Der Wert für die Gestaltung muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Der Wert für die Gestaltung darf nicht länger als 1 Zeichen lang sein.|Der Wert für die Gestaltung darf nicht länger als {{ limit }} Zeichen lang sein.'
+  product_property:
+    property:
+      not_blank: Bitte wählen Sie eine Einstellung.
+    value:
+      not_blank: Bitte geben Sie einen Wert für diese Einstellung an.
+  prototype:
+    name:
+      not_blank: Bitte geben Sie einen Namen für dieses Muster an.
+      min_length: 'Der Name des Musters muss mindestens 1 Zeichen lang sein.|Der Name des Musters muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Der Name des Musters darf nicht länger als 1 Zeichen lang sein.|Der Name des Muster darf nicht länger als {{ limit }} Zeichen lang sein.'

@@ -26,22 +26,25 @@
     "require": {
         "php":                    ">=5.3.3",
 
-        "sylius/order-bundle":    "0.9.*@dev",
-        "sylius/payments-bundle": "0.9.*@dev",
-        "sylius/resource-bundle": "0.9.*@dev",
-        "payum/payum-bundle":     "~0.7.3",
-        "payum/payum":            "~0.7.2"
+        "sylius/order-bundle":    "0.10.*@dev",
+        "sylius/payment-bundle":  "0.10.*@dev",
+        "sylius/resource-bundle": "0.10.*@dev",
+        "payum/payum-bundle":     "~0.8.5",
+        "payum/core":             "~0.8.7",
+        "winzou/state-machine":   "~0.1"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\PayumBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\PayumBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/PayumBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

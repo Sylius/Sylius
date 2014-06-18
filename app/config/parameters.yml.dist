@@ -8,6 +8,7 @@ parameters:
 
     sylius.mailer.transport:          smtp
     sylius.mailer.host:               127.0.0.1
+    sylius.mailer.port:               ~
     sylius.mailer.user:               ~
     sylius.mailer.password:           ~
 
@@ -42,4 +43,16 @@ parameters:
     sylius.inventory.tracking_enabled: true
     sylius.inventory.holding.duration: 15 minutes
 
+    sylius.promotion.item_based: false
+
     sylius.order.pending.duration: 3 hours
+
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr_workspace: default
+    phpcr_user: admin
+    phpcr_pass: admin

@@ -75,7 +75,6 @@
         <tr>
             <th>{{ 'sylius.order.number'|trans }}</th>
             <th>{{ 'sylius.order.payment_state'|trans }}</th>
-            <th>{{ 'sylius.order.shipment_state'|trans }}</th>
             <th>{{ 'sylius.order.user'|trans }}</th>
             <th>{{ 'sylius.order.total'|trans }}</th>
         </tr>
@@ -90,9 +89,6 @@
             </td>
             <td>
                 {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
-            </td>
-            <td>
-                {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
             </td>
             <td style="width: 20%">
                 {{ order.user.fullname }}<br>

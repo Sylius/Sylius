@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Order form type.
  * We add two addresses to form, and that's all.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderType extends BaseOrderType
 {

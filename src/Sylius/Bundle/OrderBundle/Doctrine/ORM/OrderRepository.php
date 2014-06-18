@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\OrderBundle\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
  * Order repository.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
@@ -36,6 +36,20 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->orderBy('o.completedAt', 'desc')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isNumberUsed($number)
+    {
+        return (bool) $this->createQueryBuilder('o')
+            ->select('COUNT(*) > 0')
+            ->where('o.number = :number')
+            ->setParameter('number', $number)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 

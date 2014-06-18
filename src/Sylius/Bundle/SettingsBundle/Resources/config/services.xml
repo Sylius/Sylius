@@ -21,7 +21,6 @@
         <parameter key="sylius.settings.form_factory.class">Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory</parameter>
         <parameter key="sylius.settings.manager.class">Sylius\Bundle\SettingsBundle\Manager\SettingsManager</parameter>
         <parameter key="sylius.settings.schema_registry.class">Sylius\Bundle\SettingsBundle\Schema\SchemaRegistry</parameter>
-        <parameter key="sylius.settings.twig.class">Sylius\Bundle\SettingsBundle\Twig\SyliusSettingsExtension</parameter>
     </parameters>
 
     <services>
@@ -47,11 +46,6 @@
         </service>
 
         <service id="sylius.settings.schema_registry" class="%sylius.settings.schema_registry.class%" />
-
-        <service id="sylius.settings.twig" class="%sylius.settings.twig.class%">
-            <argument type="service" id="sylius.settings.manager" />
-            <tag name="twig.extension" />
-        </service>
     </services>
 
 </container>

@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';

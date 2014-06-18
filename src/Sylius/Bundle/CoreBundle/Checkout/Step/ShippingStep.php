@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
  * Based on the user address, we present the available shipping methods,
  * and ask him to select his preferred one.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingStep extends CheckoutStep
 {
@@ -61,7 +61,7 @@ class ShippingStep extends CheckoutStep
 
         $form = $this->createCheckoutShippingForm($order);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
             $this->getManager()->persist($order);
@@ -93,7 +93,7 @@ class ShippingStep extends CheckoutStep
         }
 
         return $this->createForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array('zone' => !empty($this->zones) ? array_map(function($zone) {
+            'criteria' => array('zone' => !empty($this->zones) ? array_map(function ($zone) {
                 return $zone->getId();
             }, $this->zones) : null)
         ));

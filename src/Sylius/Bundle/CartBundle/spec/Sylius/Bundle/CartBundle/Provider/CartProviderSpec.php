@@ -14,14 +14,14 @@ namespace spec\Sylius\Bundle\CartBundle\Provider;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CartBundle\Model\CartInterface;
-use Sylius\Bundle\CartBundle\Storage\CartStorageInterface;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Storage\CartStorageInterface;
+use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartProviderSpec extends ObjectBehavior
 {
@@ -42,7 +42,7 @@ class CartProviderSpec extends ObjectBehavior
 
     function it_implements_Sylius_cart_provider_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\CartBundle\Provider\CartProviderInterface');
+        $this->shouldImplement('Sylius\Component\Cart\Provider\CartProviderInterface');
     }
 
     function it_looks_for_cart_by_identifier_if_any_in_storage(

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<serializer>
-    <class name="Sylius\Bundle\VariableProductBundle\Model\Variant" exclusion-policy="ALL" xml-root-name="variant">
-    </class>
-</serializer>

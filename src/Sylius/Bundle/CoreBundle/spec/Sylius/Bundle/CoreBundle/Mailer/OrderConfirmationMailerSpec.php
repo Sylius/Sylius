@@ -13,8 +13,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Mailer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Mailer\TwigMailerInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 class OrderConfirmationMailerSpec extends ObjectBehavior
 {

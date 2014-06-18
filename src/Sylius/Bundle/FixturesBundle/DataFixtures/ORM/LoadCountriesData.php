@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
  * Default country fixtures.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LoadCountriesData extends DataFixture
 {
@@ -28,7 +29,7 @@ class LoadCountriesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $countryRepository = $this->getCountryRepository();
-        $countries = Intl::getRegionBundle()->getCountryNames();
+        $countries = Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'));
 
         foreach ($countries as $isoName => $name) {
             $country = $countryRepository->createNew();
@@ -46,6 +47,14 @@ class LoadCountriesData extends DataFixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 
     /**
@@ -112,20 +121,13 @@ class LoadCountriesData extends DataFixture
         $provinceRepository = $this->getProvinceRepository();
 
         foreach ($states as $isoName => $name) {
-            $province = $provinceRepository->createNew();
-            $province->setName($name);
-
+            $province = $provinceRepository->createNew()
+                ->setName($name)
+                ->setIsoName($isoName)
+            ;
             $country->addProvince($province);
 
             $this->setReference('Sylius.Province.'.$isoName, $province);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 }

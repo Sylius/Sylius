@@ -10,16 +10,13 @@ Feature: Product variants
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |
             | T-Shirt size  | Size         | S, M, L          |
-          And there are following properties:
-            | name           | presentation |
-            | T-Shirt fabric | T-Shirt      |
           And the following products exist:
-            | name           | price | options                     | properties             |
-            | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Wool   |
-            | Black T-Shirt  | 19.99 | T-Shirt size                | T-Shirt fabric: Cotton |
-            | Sylius T-Shirt | 12.99 | T-Shirt size, T-Shirt color | T-Shirt fabric: Cotton |
-            | Mug            | 5.99  |                             |                        |
-            | Sticker        | 10.00 |                             |                        |
+            | name           | price | options                     |
+            | Super T-Shirt  | 19.99 | T-Shirt size, T-Shirt color |
+            | Black T-Shirt  | 19.99 | T-Shirt size                |
+            | Sylius T-Shirt | 12.99 | T-Shirt size, T-Shirt color |
+            | Mug            | 5.99  |                             |
+            | Sticker        | 10.00 |                             |
           And product "Super T-Shirt" is available in all variations
 
     Scenario: Viewing a product without options
@@ -59,7 +56,7 @@ Feature: Product variants
 
     Scenario: Generating all possible variants of product
         Given I am viewing product "Black T-Shirt"
-         When I follow "Generate variants"
+         When I press "Generate variants"
          Then I should still be on the page of product with name "Black T-Shirt"
           And I should see "Variants have been successfully generated."
           And I should see 3 variants in the list
@@ -69,14 +66,14 @@ Feature: Product variants
          When I fill in "Price" with "19.99"
           And I select "L" from "T-Shirt size"
           And I press "Create"
-          And I follow "Generate variants"
+          And I press "Generate variants"
          Then I should still be on the page of product with name "Black T-Shirt"
           And I should see "Variants have been successfully generated."
           And I should see 3 variants in the list
 
     Scenario: Generating all possible variants of product with multiple options
         Given I am viewing product "Sylius T-Shirt"
-         When I follow "Generate variants"
+         When I press "Generate variants"
          Then I should still be on the page of product with name "Sylius T-Shirt"
           And I should see "Variants have been successfully generated."
           And I should see 9 variants in the list
@@ -87,7 +84,7 @@ Feature: Product variants
           And I select "L" from "T-Shirt size"
           And I select "Red" from "T-Shirt color"
           And I press "Create"
-          And I follow "Generate variants"
+          And I press "Generate variants"
          Then I should still be on the page of product with name "Sylius T-Shirt"
           And I should see "Variants have been successfully generated."
           And I should see 9 variants in the list

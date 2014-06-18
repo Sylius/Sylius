@@ -11,15 +11,14 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Sylius\Bundle\CartBundle\Event\CartItemEvent;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\CartBundle\Event\CartItemEvent;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
 
 /**
  * Cart item controller.
@@ -34,7 +33,7 @@ use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
  * The resolver is used to create a new cart item, based
  * on the data from current request.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartItemController extends Controller
 {
@@ -67,7 +66,6 @@ class CartItemController extends Controller
 
         $event = new CartItemEvent($cart, $item);
         $event->isFresh(true);
-        $event->isValid(false);
 
         // Update models
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);

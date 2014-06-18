@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CartBundle\Event\FlashEvent;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;

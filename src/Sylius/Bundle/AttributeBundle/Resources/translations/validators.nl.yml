@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Voer een product SKU in.
+      unique: Product SKU moet uniek zijn.
+    name:
+      not_blank: Voer een productnaam in.
+      min_length: 'Productnaam moet minstens 1 teken lang zijn.|Productnaam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Productnaam mag niet langer zijn dan 1 teken.|Productnaam mag niet langer zijn dan {{ limit }} tekens.'
+    description:
+      not_blank: Voer een product omschrijving in.
+      min_length: 'Product omschrijving moet minstens 1 teken lang zijn.|Product omschrijving moet minstens {{ limit }} tekens lang zijn.'
+  variant:
+    sku:
+      not_blank: Voer een variant SKU in.
+      unique: Variant SKU moet uniek zijn.
+    combination: Er bestaat al een variant met deze set opties.
+  option:
+    name:
+      not_blank: Voer een optie naam in.
+      min_length: 'Optie naam moet minstens 1 teken lang zijn.|Optie naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Optie naam mag niet langer zijn dan 1 teken.|Optie naam mag niet langer zijn dan {{ limit }} tekens.'
+    presentation:
+      not_blank: Voer een optie weergave in.
+      min_length: 'Optie weergave moet minstens 1 teken lang zijn.|Optie weergave moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Optie weergave mag niet langer zijn dan 1 teken.|Optie weergave mag niet langer zijn dan {{ limit }} tekens.'
+    values:
+      min_count: 'Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.'
+  option_value:
+    value:
+      not_blank: Voer een optie waarde in.
+  property:
+    name:
+      not_blank: Voer een eigenschap naam in.
+      min_length: 'Eigenschap naam moet minstens 1 teken lang zijn.|Eigenschap naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Eigenschap naam mag niet langer zijn dan 1 teken.|Eigenschap naam mag niet langer zijn dan {{ limit }} tekens.'
+    presentation:
+      not_blank: Voer een eigenschap weergave in.
+      min_length: 'Eigenschap weergave moet minstens 1 teken lang zijn.|Eigenschap weergave moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Eigenschap weergave mag niet langer zijn dan 1 teken.|Eigenschap weergave mag niet langer zijn dan {{ limit }} tekens.'
+  product_property:
+    property:
+      not_blank: Selecteer een eigenschap.
+    value:
+      not_blank: Voer een eigenschap waarde in.
+  prototype:
+    name:
+      not_blank: Voer een prototype naam in.
+      min_length: 'Prototype naam moet minstens 1 teken lang zijn.|Prototype naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Prototype naam mag niet langer zijn dan 1 teken.|Prototype naam mag niet langer zijn dan {{ limit }} tekens.'

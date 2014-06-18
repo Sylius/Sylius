@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ArrayToStringTransformerSpec extends ObjectBehavior
 {

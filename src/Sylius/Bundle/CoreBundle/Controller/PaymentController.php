@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BasePaymentController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,11 +21,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class PaymentController extends ResourceController
+class PaymentController extends BasePaymentController
 {
     /**
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function historyAction(Request $request)

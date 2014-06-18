@@ -12,7 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -33,16 +34,18 @@ class OrderConfirmationEmailListener
     }
 
     /**
-     * @param  GenericEvent              $event
-     * @throws \InvalidArgumentException
+     * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
      */
     public function processOrderConfirmation(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order confirmation email listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 

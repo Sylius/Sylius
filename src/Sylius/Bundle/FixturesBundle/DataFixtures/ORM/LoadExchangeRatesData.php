@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 /**
  * Default exchange rate fixtures.
@@ -20,6 +22,12 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class LoadExchangeRatesData extends DataFixture
 {
+    protected $currencies = array(
+        'EUR' => 1.00,
+        'USD' => 1.30,
+        'GBP' => 0.85
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -27,15 +35,9 @@ class LoadExchangeRatesData extends DataFixture
     {
         $exchangeRateRepository = $this->getExchangeRateRepository();
 
-        $currencies = array(
-            'EUR' => 1.00,
-            'USD' => 1.30,
-            'GBP' => 0.85
-        );
-
-        foreach ($currencies as $currency => $rate) {
+        foreach ($this->currencies as $currency => $rate) {
+            /* @var $exchangeRate ExchangeRateInterface */
             $exchangeRate = $exchangeRateRepository->createNew();
-
             $exchangeRate->setCurrency($currency);
             $exchangeRate->setRate($rate);
 

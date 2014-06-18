@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseListener
 {
@@ -61,6 +61,11 @@ class PurchaseListener
             case PaymentInterface::STATE_PENDING:
                 $type = 'notice';
                 $message = 'sylius.checkout.processing';
+                break;
+
+            case PaymentInterface::STATE_NEW:
+                $type = 'notice';
+                $message = 'sylius.checkout.new';
                 break;
 
             case PaymentInterface::STATE_VOID:

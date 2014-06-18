@@ -12,8 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ShippingBundle\SyliusShipmentEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShipmentController extends ResourceController
@@ -24,11 +23,13 @@ class ShipmentController extends ResourceController
         $form = $this->createForm('sylius_shipment_tracking', $shipment);
 
         if ($form->submit($request)->isValid()) {
-            $this->get('event_dispatcher')->dispatch(SyliusShipmentEvents::PRE_SHIP, new GenericEvent($shipment));
+            $this
+                ->get('sm.factory')
+                ->get($shipment, ShipmentTransitions::GRAPH)
+                ->apply(ShipmentTransitions::SYLIUS_SHIP)
+            ;
 
             $this->domainManager->update($shipment);
-
-            $this->get('event_dispatcher')->dispatch(SyliusShipmentEvents::POST_SHIP, new GenericEvent($shipment));
 
             $this->flashHelper->setFlash('success', 'sylius.shipment.ship.success');
 

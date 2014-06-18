@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -56,7 +56,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('exchange_rate')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\MoneyBundle\Model\ExchangeRate')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Money\Model\ExchangeRate')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType')->end()

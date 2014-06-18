@@ -24,7 +24,8 @@
 
         "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
-        "sylius/resource-bundle":   "0.9.*@dev",
+        "sylius/resource-bundle":   "0.10.*@dev",
+        "sylius/money":             "0.10.*@dev",
         "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
@@ -36,12 +37,14 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\MoneyBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\MoneyBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/MoneyBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\MoneyBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     }
 }

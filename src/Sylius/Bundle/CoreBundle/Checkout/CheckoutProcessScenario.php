@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * Sylius checkout process.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CheckoutProcessScenario implements ProcessScenarioInterface
 {

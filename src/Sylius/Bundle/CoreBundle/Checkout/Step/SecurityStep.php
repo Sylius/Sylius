@@ -15,9 +15,9 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\UserInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * If user is not logged in, displays login & registration form.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SecurityStep extends CheckoutStep
 {
@@ -38,7 +38,7 @@ class SecurityStep extends CheckoutStep
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {
             $this->saveUser($this->getUser());
-            
+
             return $this->complete();
         }
 
@@ -68,12 +68,11 @@ class SecurityStep extends CheckoutStep
 
         $this->dispatchEvent(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $this->dispatchEvent(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($form, $request));
+            $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
 
             $this->saveUser($user);
-
-            $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
 
             return $this->complete();
         }

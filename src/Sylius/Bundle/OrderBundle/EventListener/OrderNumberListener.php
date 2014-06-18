@@ -11,51 +11,32 @@
 
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
-use Sylius\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface;
-use Sylius\Bundle\OrderBundle\Repository\NumberRepositoryInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Sets appropriate order number before saving.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderNumberListener
 {
     /**
-     * Order number generator.
+     * Order number listener
      *
-     * @var OrderNumberGeneratorInterface
+     * @var NumberListener
      */
-    protected $generator;
-
-    /**
-     * Number repository.
-     *
-     * @var NumberRepositoryInterface
-     */
-    protected $numberRepository;
-
-    /**
-     * Number manager.
-     *
-     * @var ObjectManager
-     */
-    protected $numberManager;
+    protected $listener;
 
     /**
      * Constructor.
      *
-     * @param OrderNumberGeneratorInterface $generator
-     * @param NumberRepositoryInterface     $numberRepository
+     * @param NumberListener $listener
      */
-    public function __construct(OrderNumberGeneratorInterface $generator, NumberRepositoryInterface $numberRepository, ObjectManager $numberManager)
+    public function __construct(NumberListener $listener)
     {
-        $this->generator = $generator;
-        $this->numberRepository = $numberRepository;
-        $this->numberManager = $numberManager;
+        $this->listener = $listener;
     }
 
     /**
@@ -67,11 +48,10 @@ class OrderNumberListener
     {
         $order = $event->getSubject();
 
-        $number = $this->numberRepository->createNew();
-        $number->setOrder($order);
+        if (null !== $order->getNumber()) {
+            return;
+        }
 
-        $this->numberManager->persist($number);
-
-        $this->generator->generate($order);
+        $this->listener->enableEntity($order);
     }
 }

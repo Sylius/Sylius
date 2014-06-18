@@ -1,0 +1,44 @@
+{
+    "name": "sylius/attribute",
+    "type": "library",
+    "description": "Component for handling object attributes in PHP projects.",
+    "keywords": ["shop", "ecommerce", "attribute", "feature"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource": "0.10.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Attribute\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Attribute\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}

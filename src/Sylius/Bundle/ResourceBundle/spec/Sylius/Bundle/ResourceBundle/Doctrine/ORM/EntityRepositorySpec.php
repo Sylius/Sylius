@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -60,7 +60,7 @@ class EntityRepositorySpec extends ObjectBehavior
 
     function it_implements_Sylius_repository_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Model\RepositoryInterface');
+        $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
     function it_creates_new_resource_instance()
@@ -87,7 +87,6 @@ class EntityRepositorySpec extends ObjectBehavior
             'foo' => 'bar',
             'bar' => 'baz',
         );
-
 
         foreach ($criteria as $property => $value) {
             $queryBuilder

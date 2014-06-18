@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class OrderConfirmationEmailListenerSpec extends ObjectBehavior

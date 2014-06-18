@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Base province choice type.
@@ -60,7 +60,7 @@ class ProvinceChoiceType extends AbstractType
             ->setDefaults(array(
                 'choice_list' => $choiceList,
                 'country'     => null,
-                'label'   => 'sylius.form.address.province',
+                'label'       => 'sylius.form.address.province',
                 'empty_value' => 'sylius.form.province.select'
             ))
         ;

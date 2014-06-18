@@ -12,18 +12,23 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Model\AddressInterface;
-use Sylius\Bundle\CartBundle\SyliusCartEvents;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderItemInterface;
-use Sylius\Bundle\CoreBundle\Model\ShipmentInterface;
-use Sylius\Bundle\OrderBundle\SyliusOrderEvents;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Order\SyliusOrderEvents;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LoadOrdersData extends DataFixture
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load(ObjectManager $manager)
     {
         $orderRepository = $this->getOrderRepository();
@@ -33,13 +38,13 @@ class LoadOrdersData extends DataFixture
             /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
 
-            for ($j = 0; $j <= rand(3, 6); $j++) {
+            for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
                 /* @var $item OrderItemInterface */
                 $item = $orderItemRepository->createNew();
                 $item->setVariant($variant);
-                $item->setUnitPrice($variant->getPrice());
+                $item->setUnitPrice(1500);
                 $item->setQuantity(rand(1, 5));
 
                 $order->addItem($item);
@@ -63,10 +68,22 @@ class LoadOrdersData extends DataFixture
             $this->setReference('Sylius.Order-'.$i, $order);
 
             $manager->persist($order);
-            $manager->flush($order);
         }
+
+        $manager->flush();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 7;
+    }
+
+    /**
+     * @return AddressInterface
+     */
     protected function createAddress()
     {
         /* @var $address AddressInterface */
@@ -81,7 +98,7 @@ class LoadOrdersData extends DataFixture
             $isoName = $this->faker->countryCode;
         } while ('UK' === $isoName);
 
-        $country = $this->getReference('Sylius.Country.'.$isoName);
+        $country  = $this->getReference('Sylius.Country.'.$isoName);
         $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
 
         $address->setCountry($country);
@@ -90,16 +107,21 @@ class LoadOrdersData extends DataFixture
         return $address;
     }
 
+    /**
+     * @param OrderInterface $order
+     */
     protected function createPayment(OrderInterface $order)
     {
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
+        $payment->setOrder($order);
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
-        $payment->setAmount($order->getTotal($order));
+        $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState($this->getPaymentState());
+        $payment->setDetails($this->faker->creditCardDetails());
 
-        $order->setPayment($payment);
+        $order->addPayment($payment);
 
         $this->get('event_dispatcher')->dispatch(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, new GenericEvent($order));
     }
@@ -121,10 +143,9 @@ class LoadOrdersData extends DataFixture
     protected function dispatchEvents($order)
     {
         $dispatcher = $this->get('event_dispatcher');
-
         $dispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
         $dispatcher->dispatch(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, new GenericEvent($order));
-        $dispatcher->dispatch(SyliusOrderEvents::PRE_CREATE, new GenericEvent($order));
+        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE);
     }
 
     protected function getPaymentState()
@@ -135,27 +156,24 @@ class LoadOrdersData extends DataFixture
             PaymentInterface::STATE_NEW,
             PaymentInterface::STATE_PENDING,
             PaymentInterface::STATE_PROCESSING,
-            PaymentInterface::STATE_UNKNOWN,
             PaymentInterface::STATE_VOID,
             PaymentInterface::STATE_CANCELLED,
             PaymentInterface::STATE_REFUNDED,
+            PaymentInterface::STATE_UNKNOWN,
         )));
     }
 
     protected function getShipmentState()
     {
         return array_rand(array_flip(array(
+            ShipmentInterface::STATE_PENDING,
+            ShipmentInterface::STATE_ONHOLD,
             ShipmentInterface::STATE_CHECKOUT,
             ShipmentInterface::STATE_SHIPPED,
-            ShipmentInterface::STATE_PENDING,
             ShipmentInterface::STATE_READY,
+            ShipmentInterface::STATE_BACKORDERED,
             ShipmentInterface::STATE_RETURNED,
             ShipmentInterface::STATE_CANCELLED,
         )));
-    }
-
-    public function getOrder()
-    {
-        return 7;
     }
 }

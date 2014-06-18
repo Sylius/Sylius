@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,22 +32,31 @@ class ResourceController extends FOSRestController
      * @var Configuration
      */
     protected $config;
+
     /**
      * @var FlashHelper
      */
     protected $flashHelper;
+
     /**
      * @var DomainManager
      */
     protected $domainManager;
+
     /**
      * @var ResourceResolver
      */
     protected $resourceResolver;
+
     /**
      * @var RedirectHandler
      */
     protected $redirectHandler;
+
+    /**
+     * @var string
+     */
+    protected $stateMachineGraph;
 
     public function __construct(Configuration $config)
     {
@@ -145,7 +154,7 @@ class ResourceController extends FOSRestController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
             if (null === $resource) {
@@ -180,8 +189,10 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404($request);
         $form = $this->getForm($resource);
+        $method = $request->getMethod();
 
-        if (($request->isMethod('PUT') || $request->isMethod('POST')) && $form->submit($request)->isValid()) {
+        if (in_array($method, array('POST', 'PUT', 'PATCH')) &&
+            $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
             return $this->redirectHandler->redirectTo($resource);
@@ -225,6 +236,31 @@ class ResourceController extends FOSRestController
         return $this->redirectHandler->redirectToIndex();
     }
 
+    public function updateStateAction(Request $request, $transition, $graph = null)
+    {
+        $resource = $this->findOr404($request);
+
+        if (null === $graph) {
+            $graph = $this->stateMachineGraph;
+        }
+
+        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
+        if (!$stateMachine->can($transition)) {
+            throw new NotFoundHttpException(sprintf(
+                'The requested transition %s cannot be applied on the given %s with graph %s.',
+                $transition,
+                $this->config->getResourceName(),
+                $graph
+            ));
+        }
+
+        $stateMachine->apply($transition);
+
+        $this->domainManager->update($resource);
+
+        return $this->redirectHandler->redirectToReferer();
+    }
+
     /**
      * @return object
      */
@@ -240,6 +276,10 @@ class ResourceController extends FOSRestController
      */
     public function getForm($resource = null)
     {
+        if ($this->config->isApiRequest()) {
+            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
+        }
+
         return $this->createForm($this->config->getFormType(), $resource);
     }
 

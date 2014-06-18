@@ -14,13 +14,13 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\PaymentsBundle\SyliusPaymentEvents;
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PurchaseStep extends CheckoutStep
@@ -32,9 +32,14 @@ class PurchaseStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
 
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
+
+        /** @var $payment PaymentInterface */
+        $payment = $order->getPayments()->last();
+
         $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $order->getPayment()->getMethod()->getGateway(),
-            $order,
+            $payment->getMethod()->getGateway(),
+            $payment,
             'sylius_checkout_forward',
             array('stepName' => $this->getName())
         );
@@ -53,34 +58,30 @@ class PurchaseStep extends CheckoutStep
         $status = new StatusRequest($token);
         $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
 
-        /** @var OrderInterface $order */
-        $order = $status->getModel();
+        /** @var $payment PaymentInterface */
+        $payment = $status->getModel();
 
-        if (!$order instanceof OrderInterface) {
-            throw new \RuntimeException(sprintf('Expected order to be set as model but it is %s', get_class($order)));
+        if (!$payment instanceof PaymentInterface) {
+            throw new UnexpectedTypeException($payment, 'Sylius\Component\Core\Model\PaymentInterface');
         }
 
-        $payment = $order->getPayment();
-        $previousState = $order->getPayment()->getState();
-        $payment->setState($status->getStatus());
+        $order = $payment->getOrder();
 
-        if ($previousState !== $payment->getState()) {
-            $this->dispatchEvent(
-                SyliusPaymentEvents::PRE_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
-            );
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
+
+        $nextState = $status->getStatus();
+
+        $stateMachine = $this->get('sm.factory')->get($payment, PaymentTransitions::GRAPH);
+
+        if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
+            $stateMachine->apply($transition);
         }
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
 
         $this->getDoctrine()->getManager()->flush();
 
-        if ($previousState !== $payment->getState()) {
-            $this->dispatchEvent(
-                SyliusPaymentEvents::POST_STATE_CHANGE,
-                new GenericEvent($order->getPayment(), array('previous_state' => $previousState))
-            );
-        }
-
-        $event = new PurchaseCompleteEvent($order->getPayment());
+        $event = new PurchaseCompleteEvent($payment);
         $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
 
         if ($event->hasResponse()) {

@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SyliusPayumExtension extends AbstractResourceExtension
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {

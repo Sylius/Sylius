@@ -1,0 +1,89 @@
+payum:
+    security:
+        token_storage:
+            Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken:
+                doctrine:
+                    driver: orm
+
+    contexts:
+        paypal_express_checkout:
+            paypal_express_checkout_nvp:
+                api:
+                    options:
+                        username:  %paypal.express_checkout.username%
+                        password:  %paypal.express_checkout.password%
+                        signature: %paypal.express_checkout.signature%
+                        sandbox:   %paypal.express_checkout.sandbox%
+
+            storages:
+                Sylius\Component\Core\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Component\Core\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        stripe:
+            omnipay:
+                type: Stripe
+                options:
+                    apiKey:   %stripe.secret_key%
+                    testMode: %stripe.test_mode%
+
+            storages:
+                Sylius\Component\Core\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Component\Core\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        be2bill:
+            be2bill:
+                api:
+                    options:
+                        identifier: %be2bill.identifier%
+                        password:   %be2bill.password%
+                        sandbox:    %be2bill.sandbox%
+                actions:
+                    - sylius.payum.be2bill.action.capture_payment_using_credit_card
+
+            storages:
+                Sylius\Component\Core\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Component\Core\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        be2bill_onsite:
+            be2bill:
+                api:
+                    options:
+                        identifier: %be2bill.identifier%
+                        password:   %be2bill.password%
+                        sandbox:    %be2bill.sandbox%
+                actions:
+                    - sylius.payum.be2bill.action.capture_payment_using_be2bill_form
+
+            storages:
+                Sylius\Component\Core\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Component\Core\Model\Payment:
+                    doctrine:
+                        driver: orm
+
+        dummy:
+            custom:
+                actions:
+                    - sylius.payum.dummy.action.capture_payment
+                    - sylius.payum.dummy.action.payment_status
+
+            storages:
+                Sylius\Component\Core\Model\Order:
+                    doctrine:
+                        driver: orm
+                Sylius\Component\Core\Model\Payment:
+                    doctrine:
+                        driver: orm
