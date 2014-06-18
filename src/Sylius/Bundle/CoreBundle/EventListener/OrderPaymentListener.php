@@ -91,6 +91,7 @@ class OrderPaymentListener
         $payment = $order->getPayments()->last();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
+        $payment->setDetails(array());
     }
 
     /**
