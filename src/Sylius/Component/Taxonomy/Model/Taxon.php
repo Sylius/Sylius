@@ -403,4 +403,13 @@ class Taxon implements TaxonInterface
 
         return $this;
     }
+    
+    public function doPrePersist()
+    {
+        // make sure we have name_en
+        // usefull when load data fixture
+        if(empty($this->nameEn)) {
+            $this->setNameEn($this->getName());
+        }
+    }
 }
