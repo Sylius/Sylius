@@ -23,11 +23,12 @@
         </id>
 
         <field name="name" column="name" type="string" />
+        <field name="nameEn" column="name_en" type="string" />
         <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
+            <gedmo:slug fields="nameEn" unique="true" />
         </field>
         <field name="permalink" column="permalink" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" >
+            <gedmo:slug fields="nameEn" unique="true" >
             	<gedmo:handler class="Gedmo\Sluggable\Handler\TreeSlugHandler">
                     <gedmo:handler-option name="parentRelationField" value="parent"/>
                     <gedmo:handler-option name="separator" value="/"/>
