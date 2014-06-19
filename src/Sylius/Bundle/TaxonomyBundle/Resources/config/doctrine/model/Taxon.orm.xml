@@ -73,6 +73,10 @@
 
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:tree type="nested" />
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="doPrePersist"/>
+        </lifecycle-callbacks>
     </mapped-superclass>
 
 </doctrine-mapping>
