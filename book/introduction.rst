@@ -4,61 +4,49 @@
 Introduction to Sylius
 ======================
 
-There are several ways you can use Sylius for your project, but there are 2
-main use cases:
+Sylius is a game-changing e-commerce solution for PHP, based on the Symfony2 framework.
 
-#. You can use our main application, customize views, configuration and start
-   the project;
-#. You can use standalone bundles to build a solution that will fit the most
-   sophisticated needs.
+Philosophy
+----------
 
-Using Sylius as a Whole
------------------------
+Sylius is completely open source (MIT license) and free, maintained by diverse and creative community of developers and companies.
 
-Sylius project provides a **full stack e-commerce solution**. In further parts
-of The Book, you'll learn how to master it and develop your next project really
-quickly. Our main application called **Sylius** provides a complete webshop
-solution and some of its features include:
+What are our core values and what makes us different from other solutions?
 
-* Flexible product catalog, with multiple variants per product, options,
-  properties (think attributes) and prototypes.
-* Categorization engine, which allows you to categorize the products under
-  various taxonomies, by "Brand", "Category" or whatever you can imagine.
-* Inventory tracking system, where you can track every single unit of your
-  inventory or disable tracking at all.
-* Powerful shipping with configurable shipping categories, item sizes, weight,
-  shipments management and customizable cost calculators.
-* Taxation engine, with support for many different tax categories, rates and
-  zones.
-* Orders system allowing you to easily create and manage sales, with
-  super-flexible adjustments which can serve many different purposes, from
-  taxation & shipping to promotions and manual order total changes.
-* Customizable checkout process, built from reusable steps.
-* ... and more!
+* Components based approach
+* Unlimited flexibility and simple customization
+* Developer-friendly, using latest technologies
+* Developed using best practices and BDD approach
+* `Highest quality of code <https://scrutinizer-ci.com/g/Sylius/Sylius/>`_
 
-If that is what you were looking for, great! But there is other great news for
-you: All features mentioned above are available as individual bundles too.
+And much more, but we will let you discover it yourself.
 
-Leveraging Sylius Bundles
--------------------------
+The Three Natures of Sylius
+---------------------------
 
-Even if the main goal of the project is to provide the full stack solution
-mentioned above, the Sylius full stack solution is built on top of decoupled
-and independent bundles. Every functionality you like in the main Sylius
-application can be integrated into your existing project. You can also build a
-tailored solution from ground-up using those components. (**Bundles** in
-Symfony2 glossary)
+Sylius is constructed from fully decoupled and flexible e-commerce components for PHP. It is also a set of Symfony2 bundles, which integrate the components into the full-stack framework.
+On top of that, Sylius is also a complete e-commerce platform crafted from all these building blocks.
 
-If you have an existing Symfony2 application, for example: A book catalogue,
-you can use the :doc:`SyliusOrderBundle </bundles/SyliusOrderBundle/index>`
-and add orders management feature.
+It is your choice how to use Sylius, you can benefit from the components with any framework, integrate selected bundles into existing or new Symfony2 app or built your application on top of Sylius platform.
 
-Here is a full list of all available Sylius bundles:
+Sylius Platform
+---------------
 
-.. include:: /bundles/map.rst.inc
+This book is about our **full-stack e-commerce platform**, which is a standard Symfony application providing the most common webshop and a foundation for custom systems.
+
+Leveraging Symfony2 Bundles
+---------------------------
+
+If you prefer to build your very custom system step by step and from scratch, you can integrate the standalone Symfony2 bundles. For the installation instructions, please refer to the appropriate bundle documentation.
+
+E-Commerce Components for PHP
+-----------------------------
+
+If you use a different framework than Symfony, you are welcome to use Sylius components, which will make it much easier to implement a webshop with any PHP application and project.
+They provide you with default models, services and logic for all aspects of e-commerce, completely separated and ready to use.
 
 Final Thoughts
 --------------
 
-Now, depending on how you want to use Sylius, continue reading The Book, which
-covers the usage of the full stack solution or browse the Bundles Reference.
+Depending on how you want to use Sylius, continue reading The Book, which
+covers the usage of the full stack solution, browse the Bundles Reference or learn about The Components.

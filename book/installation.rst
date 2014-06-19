@@ -15,7 +15,13 @@ for PHP. It also assumes you have `Composer installed globally`_.
     If you downloaded the Composer phar archive, you should use
     ``php composer.phar`` where this guide uses ``composer``.
 
-To create a new project using Sylius, run this command:
+
+It can be installed using two different approaches, depending on your use case.
+
+Install to Contribute
+---------------------
+
+To install Sylius main application from our main repository and contribute, run the following command:
 
 .. code-block:: bash
 
@@ -28,9 +34,35 @@ place, run the following commands:
 
 .. code-block:: bash
 
-    # move to the newly created sylius directory
+    # Move to the newly created directory
     $ cd sylius
     $ php app/console sylius:install
+
+This package contains our main Sylius development repository, with all the components and bundles in the ``src/`` folder.
+
+For the contributing process questions, please refer to the [Contributing Guide].
+
+Bootstrap A New Sylius Project
+------------------------------
+
+To create a new project using Sylius Standard Edition, run this command:
+
+.. code-block:: bash
+
+    $ composer create-project -s dev sylius/sylius-standard acme
+
+This will create a new Symfony project in ``acme`` directory. When all the
+dependencies are installed, you'll be asked to fill the ``parameters.yml``
+file via interactive script. Please follow the steps. After everything is in
+place, run the following commands:
+
+.. code-block:: bash
+
+    # Move to the newly created directory
+    $ cd acme
+    $ php app/console sylius:install
+
+This package has the whole ``sylius/sylius`` package in vendors, so you can easily updated it and focus on your custom development.
 
 Accessing the Shop
 ------------------
