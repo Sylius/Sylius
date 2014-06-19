@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: A kosár tartalmának módosítása megtörtént.
+    cart_clear_completed: A kosár kiürítése megtörtént.
+    item_add_completed: A kiválasztott elem a kosárba került.
+    item_remove_completed: Az termék törölve lett a kosárból.
+    item_add_error: Hiba történt a kosárba helyezés közben.
+    item_remove_error: Hiba az elem kosárból való eltávolítása közben.

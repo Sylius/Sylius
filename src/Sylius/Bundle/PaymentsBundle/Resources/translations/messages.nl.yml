@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Naam van kaarthouder
+      expiry_month: Verval maand
+      expiry_year: Verval jaar
+      number: Kaartnummer
+      security_code: Beveiligingscode (CVV)
+      type: Kaarttype
+    payment:
+      amount: Betaal hoeveelheid
+      method: Betaalmethode
+      state:
+        0: Betaal status
+        checkout: Afrekenen
+        completed: Voltooid
+        failed: Mislukt
+        new: Nieuw
+        pending: In behandeling
+        processing: Verwerken
+        unknown: Onbekend
+        void: Leeg
+    payment_method:
+      description: Omschrijving
+      enabled: Actief?
+      gateway: Gateway
+      name: Naam

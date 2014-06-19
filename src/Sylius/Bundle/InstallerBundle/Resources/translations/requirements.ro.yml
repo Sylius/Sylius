@@ -1,3 +1,21 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: extensii
+    apc: APC
+    gd: GD
+    json_encode: JSON
+    "off": false
+    "on": true
+    pdo: PDO
+    php_xml: PHP-XML
+  filesystem:
+    not_exists: nu există
+  settings:
+    "off": false
+    "on": true
+    register_globals: register_globals
+    version: Versiunea PHP
+    version_recommanded: Versiunea PHP recomandată

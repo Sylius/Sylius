@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: ตั้งอยู่ที่เป็นค่าเริ่มต้นของที่อยู่การเรียกเก็บเงินเรียบร้อยแล้ว
+        shipping:
+          success: ตั้งอยู่ที่เป็นค่าเริ่มต้นของที่อยู่การจัดส่งสินค้าเรียบร้อยแล้ว

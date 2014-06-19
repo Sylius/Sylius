@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    order:
+      shipment:
+        pending: Venter
   add_to_cart: Legg i handlekurv
   address:
     city: By
@@ -19,6 +23,16 @@ sylius:
   backend:
     alert:
       info: Informasjon
+  block:
+    body: Kropp
+    id: ID
+    title: Tittel
+  breadcrumb:
+    group:
+      index: Grupper
+    new: Ny
+    property:
+      index: Egenskaper
   cancel: Avbryt
   cart:
     empty: Handlevognen er tom
@@ -57,14 +71,144 @@ sylius:
         shipping_address: Leveringsadresse
       order_item:
         quantity: Antall
+      product:
+        name: Navn
+    payment:
+      header: Betalingsmetode
+  country:
+    id: ID
+    name: Navn
+  exchange_rate:
+    id: ID
+  form:
+    login:
+      email: E-post
+      password: Passord
+    profile:
+      email: E-post
+      firstName: Fornavn
+      lastName: Etternavn
+  gallery:
+    next: Neste
+  group:
+    id: ID
+    index_header: Grupper
+    name: Navn
+    roles: Roller
+  inventory_unit:
+    name: Navn
+    sku: Strekkode
+  locale:
+    code: Kode
+    enabled: Aktivert
+  "no": false
   order:
+    billing_address: Fakturaadresse
+    id: ID
     items_total: Antall varer
     no_items: Denne ordren inneholder ingen varer
     no_shipping_charges: Ingen fraktkostnader lagt til
     no_taxes: Ingen mva lagt til
+    number: Nummer
+    payment_state: Betalingsstatus
+    shipment_states:
+      pending: Venter
+    shipping_address: Leveringsadresse
+    state:
+      checkout: Gå til kassen
+    user: Bruker
+  shipment:
+    id: ID
+    name: Navn
+    sku: Strekkode
   order_item:
     quantity: Antall
     sellable: Produkt
+    unit_price: Enhetspris
+  page:
+    body: Kropp
+    id: ID
+    title: Tittel
+  password: Passord
+  payment:
+    amount: Beløp
+    id: ID
+    state:
+      checkout: Gå til kassen
+      completed: Fullført
+      failed: Mislyktes
+      new: Ny
+      pending: Venter
+      processing: Behandler
+      unknown: Ukjent
+      void: Ugyldig
+  payment_method:
+    id: ID
+    name: Navn
   product:
+    available_on: Tilgjengelig
+    available_on_demand: Tilgjengelig på forespørsel
+    description: Beskrivelse
+    name: Navn
+    properties: Egenskaper
+    restricted_zone: Begrenset sone
+    shipping_category: Fraktkategori
+    sku: Strekkode
+    stock: På lager
     tabs:
+      images: Bilder
       product: Produkt
+      properties: Egenskaper
+    tax_category: Skattekategori
+    variant_selection_method: Metode for valg av variant
+  promotion:
+    actions: Handlinger
+    description: Beskrivelse
+    ends_at: Slutter på
+    id: ID
+    name: Navn
+    rules: Regler
+    starts_at: Starter på
+    usage_limit: Bruksgrense
+  promotion_action:
+    type: Type
+  promotion_rule:
+    type: Type
+  search: Søk
+  shipping_address: Leveringsadresse
+  shipping_category:
+    id: ID
+    name: Navn
+  shipping_method:
+    id: ID
+    name: Navn
+    zone: Sone
+  tax_category:
+    description: Beskrivelse
+    id: ID
+    name: Navn
+  tax_rate:
+    amount: Beløp
+    name: Navn
+    zone: Sone
+  taxon:
+    name: Navn
+  taxonomy:
+    name: Navn
+  unknown: Ukjent
+  user:
+    billing_address: Fakturaadresse
+    first_name: Fornavn
+    id: ID
+    last_name: Etternavn
+    shipping_address: Leveringsadresse
+    username: Brukernavn
+  variant:
+    available_on_demand: Tilgjengelig på forespørsel
+    price: Pris
+    sku: Strekkode
+    stock: På lager
+  "yes": true
+  zone:
+    name: Navn
+    type: Type

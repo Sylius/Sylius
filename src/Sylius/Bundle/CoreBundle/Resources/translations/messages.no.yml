@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Vennligst velg sendingsmetode.
+  form:
+    action:
+      add_product_configuration:
+        price: Enhetspris
+        quantity: Antall
+        variant: Variant
+    block:
+      body: Kropp
+      id: ID
+      title: Tittel
+    cart:
+      coupon: Kupong
+    checkout:
+      addressing:
+        different_billing_address: Bruk annen adresse for fakturering?
+      payment_method: Betalingsmetode
+      shipping_method: Fraktalternativ
+    group:
+      name: Navn
+      roles: Roller
+    image:
+      file: Bilde
+    locale:
+      code: Kode
+      enabled: Aktivert
+    order_filter:
+      created_at_from: Fra
+      created_at_to: Til
+      number: Nummer
+      total_from: Fra
+      total_to: Til
+    page:
+      body: Kropp
+      id: ID
+      title: Tittel
+    product:
+      restricted_zone: Begrenset sone
+      shipping_category: Fraktkategori
+      short_description: Kort beskrivelse
+      tax_category: Skattekategori
+      variant_selection_method: Metode for valg av variant
+    product_filter:
+      name: Navn
+      sku: Strekkode
+    settings:
+      general:
+        currency: Standard valuta
+        locale: Språk
+        meta_description: Metabeskrivelse
+        meta_keywords: Meta nøkkelord
+        title: Sidetittel
+      taxation:
+        default_tax_zone: Standard skattesone
+    shipment_filter:
+      created_at_from: Fra
+      created_at_to: Til
+      number: Ordrenummer
+      shipping_address: Leveringsadresse
+    shipping_method:
+      zone: Sone
+    taxon:
+      file: Velg bilde
+    taxonomy:
+      file: Velg bilde
+    user:
+      billing_address: Fakturaadresse
+      different_billing_address: Bruk annen adresse for fakturering?
+      enabled: Aktivert
+      first_name: Fornavn
+      groups: Grupper
+      last_name: Etternavn
+      password: Passord
+      shipping_address: Leveringsadresse
+    user_filter:
+      query: Søk
+    variant:
+      available_on_demand: Tilgjengelig på forespørsel
+      depth: Dybde
+      height: Høyde
+      images: Bilder
+      on_hand: På lager
+      price: Pris
+      sku: Strekkode
+      weight: Vekt
+      width: Bredde

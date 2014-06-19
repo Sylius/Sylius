@@ -1,3 +1,50 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: Το Sylius έχει εγκατασταθεί με επιτυχία.
+  form:
+    configuration:
+      database:
+        0: Σύνδεση βάσης δεδομένων
+        driver:
+          0: Οδηγός
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Διακομιστής
+        name: Ονομασία
+        password: Κωδικός πρόσβασης
+        port: Θύρα
+        user: Χρήστης
+      locale:
+        0: Τοπικές ρυθμίσεις
+        currency: Νόμισμα
+        locale: Τοπικές ρυθμίσεις
+      mailer:
+        host: Διακομιστής
+        password: Κωδικός πρόσβασης
+        transport:
+          gmail: Gmail
+          mail: Ταχυδρομείο
+          smtp: SMTP
+        user: Χρήστης
+    setup:
+      email: Ηλεκτρονικό ταχυδρομείο
+      plain_password: Κωδικός πρόσβασης
+      username: Όνομα χρήστη
+  process:
+    step:
+      check:
+        button:
+          back: Επιστροφή
+          install: Εγκατάσταση
+          next: Επόμενο
+        table:
+          required: απαιτείται
+          status: κατάσταση
+€: €

@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Vlasnik kartice
+      expiry_month: Mjesec isteka kartice
+      expiry_year: Godina isteka kartice
+      type: Tip kartice
+    payment:
+      amount: Iznos
+      method: Način plaćanja
+      state:
+        0: Stanje uplate
+        checkout: Blagajna
+        completed: Završeno
+        failed: Neuspješno
+        new: Novo
+        pending: Na čekanju
+        processing: U obradi
+        unknown: Nepoznato
+        void: Nevažeće
+    payment_method:
+      description: Opis
+      enabled: Omogući?
+      gateway: Gateway
+      name: Naziv

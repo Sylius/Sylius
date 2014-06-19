@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  option:
+    name:
+      not_blank: Voer een optie naam in.
+      min_length: 'Optie naam moet minstens 1 teken lang zijn.|Optie naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Optie naam mag niet langer zijn dan 1 teken.|Optie naam mag niet langer zijn dan {{ limit }} tekens.'
+    presentation:
+      not_blank: Voer een optie weergave in.
+      min_length: 'Optie weergave moet minstens 1 teken lang zijn.|Optie weergave moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Optie weergave mag niet langer zijn dan 1 teken.|Optie weergave mag niet langer zijn dan {{ limit }} tekens.'
+    values:
+      min_count: 'Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.'
+  option_value:
+    value:
+      not_blank: Voer een optie waarde in.
+  variant:
+    combination: Er bestaat al een variant met deze optie.

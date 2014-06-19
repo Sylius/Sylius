@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Название категории не должно быть длиннее {{ limit }} символов.'
+      min_length: 'Название категории должно содержать не менее {{ limit }} символов.'
+      not_blank: Пожалуйста, введите название категории доставки.
+  shipping_method:
+    name:
+      max_length: 'Название способа доставки не должно быть длиннее {{ limit }} символов.'
+      min_length: 'Название способа доставки должно содержать не менее {{ limit }} символов.'
+      not_blank: Пожалуйста, введите название способа доставки.

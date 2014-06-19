@@ -1,3 +1,63 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius foi instalado com sucesso.
+  form:
+    configuration:
+      database:
+        0: Conexão com a base de dados
+        driver:
+          0: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Servidor
+        name: Nome
+        password: Senha
+        port: Port
+        user: Usuário
+      locale:
+        0: Configurações locais
+        currency: Moeda
+        locale: Locale
+      mailer:
+        0: Configurações de Mailer
+        host: Servidor
+        password: Senha
+        transport:
+          0: Transporte
+          gmail: Gmail
+          mail: Mail
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Usuário
+    setup:
+      email: Email
+      load_fixtures: Carregar configurações
+      plain_password: Senha
+      username: Nome de usuário
+  process:
+    step:
+      check:
+        button:
+          back: Voltar
+          install: Instalar
+          next: Próxima
+        header: 'Requisitos de sistema Verifique <small>instalador do Sylius</small>'
+        table:
+          current: atual
+          required: requerido
+          status: status
+      configure:
+        header: 'Configuração <small>instalador Sylius</small>'
+      setup:
+        header: 'Administração de instalação <small>Instalador do Sylius </small>'
+      welcome:
+        content: '<p>Bem-vindo ao instalador Sylius.</p>'
+        header: 'Bem-vindo <small>instalador do Sylius</small>'
+€: €

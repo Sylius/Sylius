@@ -1,3 +1,53 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    sku:
+      not_blank: Kérjük, írja be a termék SKU azonosítóját.
+      unique: Az SKU azonosító egyedi kell legyen.
+    name:
+      not_blank: Kérjük, írja be a termék nevét.
+      min_length: 'Termék neve legalább 1 karakter hosszúnak kell lennie. |Termék neve legalább {{ limit }} karakter hosszú.'
+      max_length: 'Termék neve nem lehet hosszabb, mint 1 karakter. |Termék neve nem lehet hosszabb, mint {{ limit }} karakter.'
+    description:
+      not_blank: Kérjük, adjon meg termék leírást.
+      min_length: 'A termék leírás legalább 1 karakter hosszúnak kell lennie. |A termék leírás legalább {{ limit }} karakter hosszúnak kell lennie.'
+  variant:
+    sku:
+      not_blank: Kérjük, írjon be SKU változatot.
+      unique: Az SKU változatnak egyedinek kell lennie.
+    combination: A változat ebben a választék készletben már létezik.
+  option:
+    name:
+      not_blank: Kérjük, adja meg az opció nevét.
+      min_length: 'Az opciónév legalább 1 karakter hosszú kell legyen. | Az opciónév legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'Az opciónév nem lehet hosszabb, mint 1 karakter. |Az opciónév nem lehet hosszabb, mint {{ limit }} karakterek.'
+    presentation:
+      not_blank: Kérjük, adja meg az opció bemutatását.
+      min_length: 'Az opció bemutatása legalább 1 karakter hosszú kell legyen. | Az opció bemutatása legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'Az opció bemutatása nem lehet hosszabb mint 1 karakter. | Az opció bemutatása nem lehet hosszabb mint {{ limit }} karakter.'
+    values:
+      min_count: 'Kérjük, adjon meg legalább {{ limit }} opció értéket. | Kérjük adjon meg legalább {{ limit }} opció értéket.'
+  option_value:
+    value:
+      not_blank: Kérjük, adja meg az opció értékét.
+  property:
+    name:
+      not_blank: Kérjük, adja meg a tulajdonság nevét.
+      min_length: 'A tulajdonság neve legalább 1 karakter hosszú kell legyen. |A tulajdonság neve legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'A tulajdonság neve nem lehet hosszabb, mint 1 karakter. |A tulajdonság neve nem lehet hosszabb, mint {{ limit }} karakter.'
+    presentation:
+      not_blank: Kérjük, adja meg a tulajdonság bemutatását.
+      min_length: 'A tulajdonság bemutatása legalább 1 karakter hosszú kell legyen. | A tulajdonság bemutatása legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'A tulajdonság bemutása nem lehet hosszabb, mint 1 karakter. |A tulajdonság bemutatása nem lehet hosszabb, mint {{ limit }} karakter.'
+  product_property:
+    property:
+      not_blank: Kérjük, válassza ki a tulajdonságot.
+    value:
+      not_blank: Kérjük, írja be a termék tulajdonság értékét.
+  prototype:
+    name:
+      not_blank: Kérjük, írja be a prototípus nevét.
+      min_length: 'A prototípus neve legalább 1 karakter hosszú kell legyen. |A prototípus neve legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'A prototípus neve nem lehet hosszabb, mint 1 karakter. |A prototípus neve nem lehet hosszabb, mint {{ limit }} karakter.'

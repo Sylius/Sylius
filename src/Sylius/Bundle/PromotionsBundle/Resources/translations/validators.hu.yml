@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion:
+    description:
+      max_length: 'A promóció leírása nem lehet hosszabb, mint 1 karakter. |A promóció leírása nem lehet hosszabb, mint {{ limit }} karakterek.'
+      min_length: 'A promóció leírása legalább 1 karakter hosszú kell legyen. |A promóció leírása legalább {{ limit }} karakter hosszú kell legyen.'
+      not_blank: Kérjük, adja meg a promóció leírását.
+    name:
+      max_length: 'A promóció neve nem lehet hosszabb, mint 1 karakter. |A promóció neve nem lehet hosszabb, mint {{ limit }} karakter.'
+      min_length: 'A promóció neve legalább 1 karakter hosszú kell legyen. |A promóció neve legalább {{ limit }} karakter hosszú kell legyen.'
+      not_blank: Kérjük, adja meg a promóció nevét.
+  promotion_coupon:
+    code:
+      max_length: 'A kupon kód nem lehet hosszabb, mint 1 karakter. |A kupon kód nem lehet hosszabb, mint {{ limit }} karakterek.'
+      min_length: 'A kupon kódnak legalább 1 karakter hosszúnak kell lennie. |A kupon kódmak  legalább {{ limit }} karakter hosszú kell legyen.'
+      not_blank: Kérjük, írja be a kupon kódot.
+    usage_limit:
+      min: 'A kupon használati korlátozás legalább {{ limit }} kell legyen.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'A létrehozandó kuponok mennyisége legalább {{ limit }} kell legyen.'
+      not_blank: Kérjük, adja meg a létrehozandó kuponok mennyiségét.
+    usage_limit:
+      min: 'A létrehozott kuponok használati korlátozása legalább {{ limit }} kell legyen.'

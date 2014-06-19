@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: A város neve nem lehet hosszabb 255 karakternél.
+      min_length: A megadott város nevének legalább 2 karakter hosszúnak kell lennie.
+      not_blank: Kérjük, adja meg a város nevét.
+    country:
+      not_blank: Kérjük, hogy válassza ki az országot.
+    first_name:
+      max_length: A keresztnév nem lehet hosszabb 255 karakternél.
+      min_length: A keresztnévnek legalább 2 karakter hosszúnak kell lennie.
+      not_blank: Kérjük, hogy adja meg a keresztnevet.
+    last_name:
+      max_length: A vezetéknév nem lehet hosszabb 255 karakternél.
+      min_length: A vezetéknévnek legalább 2 karakter hosszúnak kell lennie.
+      not_blank: Kérjük, adja meg a vezetéknevet.
+    postcode:
+      max_length: Irányítószám nem lehet hosszabb, mint 255 karakter.
+      min_length: A megadott irányítószám legalább 2 karakter hosszú legyen.
+      not_blank: Kérjük, írja be irányítószámot.
+    province:
+      valid: Kérjük, válassza ki a megfelelő megyét/tartományt.
+    street:
+      max_length: Az utca elnevezése nem lehet hosszabb, mint 255 karakter.
+      min_length: Az utcanévnek legalább 2 karakter hosszúnak kell lennie.
+      not_blank: Kérjük, hogy adja meg az utca nevét.
+    not_shippable: Ez a cím nem egy érvényes szállítási cím.
+  country:
+    iso_name:
+      not_blank: Kérjük, írja be az ország ISO-kódját.
+    name:
+      max_length: Az ország neve nem lehet hosszabb, mint 255 karakter.
+      not_blank: Kérjük, írja be az ország nevét.
+  province:
+    name:
+      max_length: A megye/tartomány neve nem lehet hosszabb, mint 255 karakter.
+      min_length: Tartomány/megye nevének legalább 2 karakter hosszúnak kell lennie.
+      not_blank: Kérjük, írja be a tartomány/megye nevét.
+  zone:
+    members:
+      min_count: 'Kérjük, hogy adjon meg legalább {{limit}} zóna tagot.'
+    name:
+      max_length: A zóna elnevezése nem lehet hosszabb 255 karakternél.
+      not_blank: Kérjük, hogy írja be a zóna nevét.

@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Intestatario della carta
+      expiry_month: Mese di scadenza
+      expiry_year: Anno di scadenza
+      number: Numero della carta
+      security_code: Codice di sicurezza (CVV)
+      type: Tipo di carta
+    payment:
+      amount: Ammontare del pagamento
+      method: Metodo di pagamento
+      state:
+        0: Stato del pagamento
+        completed: Completato
+        failed: Fallimento
+        new: Nuovo
+        pending: In attesa
+        processing: In elaborazione
+        unknown: Sconosciuto
+        void: Nullo
+    payment_method:
+      description: Descrizione
+      enabled: Abilitato?
+      name: Nome

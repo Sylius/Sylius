@@ -1,40 +1,68 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
 sylius:
   checkout:
     shipping_method:
       not_blank: Per favore seleziona il metodo di spedizione.
   form:
+    action:
+      add_product_configuration:
+        price: Prezzo unitario
+        quantity: Quantità
+        variant: Variante
+    block:
+      body: Testo
+      id: ID
+      title: Titolo
+    cart:
+      coupon: Promozione
     checkout:
       addressing:
         different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
       payment_method: Metodo di pagamento
       shipping_method: Metodo di spedizione
+    group:
+      name: Nome
+      roles: Regole
     image:
       file: Immagine
+    locale:
+      code: Codice
+      enabled: Abilitato
     order_filter:
       created_at_from: Da
       created_at_to: A
       number: Numero
       total_from: Da
       total_to: A
+    page:
+      body: Testo
+      id: ID
+      title: Titolo
     product:
+      restricted_zone: Zona soggetta a restrizioni
+      shipping_category: Categoria di spedizione
       short_description: Descrizione breve
       tax_category: Aliquota
       variant_selection_method: Metodo di selezione delle varianti
     product_filter:
       name: Nome
+      sku: SKU
     settings:
       general:
         currency: Valuta predefinita
         locale: Lingua
+        meta_description: Meta description
+        meta_keywords: Meta keywords
         title: Titolo della pagina
       taxation:
         default_tax_zone: Aliquota predefinita
     shipment_filter:
       created_at_from: Da
       created_at_to: A
+      number: "Numero d'ordine"
     shipping_method:
       zone: Zona
     taxon:
@@ -46,12 +74,19 @@ sylius:
       different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
       enabled: Abilitato
       first_name: Nome
+      groups: Gruppi
       last_name: Cognome
+      password: Password
       shipping_address: Indirizzo di spedizione
     user_filter:
       query: Ricerca
     variant:
       available_on_demand: Disponibile su richiesta
+      depth: Profondità
+      height: Altezza
       images: Immagini
       on_hand: Disponibilità attuale
       price: Prezzo
+      sku: SKU
+      weight: Peso
+      width: Larghezza

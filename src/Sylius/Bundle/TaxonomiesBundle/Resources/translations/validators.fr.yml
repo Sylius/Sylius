@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: La taxon ne peux dépasser les 255 caractères.
+      not_blank: Veuillez saisir un nom pour la taxon.
+  taxonomy:
+    name:
+      max_length: La taxonomie ne peux dépasser les 255 caractères.
+      not_blank: Veuillez saisir un nom pour la taxonomie.

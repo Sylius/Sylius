@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    restricted_zone_removal: 'Produto %product% removido do carrinho, uma vez que o carrinho não está disponível em seu país.'
+  checkout:
+    restricted_zone: O produto não está disponível em seu país.
+    success: Obrigado pelo seu pedido!
+    canceled: Seu pagamento foi cancelado.
+    pending: O seu pagamento está pendente.
+    failed: Seu pagamento foi negado.
+    unknown: Erro não conhecido no processo de pagamento.
+    out_of_stock: 'Existe(m) %quantity% %name% no estoque.'

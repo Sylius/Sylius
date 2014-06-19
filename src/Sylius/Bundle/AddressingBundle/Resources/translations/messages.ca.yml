@@ -1,3 +1,32 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: Ciutat
+      company: Empresa
+      country: País
+      first_name: Nom
+      last_name: Cognoms
+      postcode: Codi postal
+      street: Carrer
+      province: Província
+    country:
+      iso_name: Nom ISO
+      name: Nom
+      provinces: Províncies
+      select: Tria
+    province:
+      name: Nom
+      select: Tria
+    zone:
+      members: Membres
+      name: Nom
+      type: Tipus
+    zone_member_country:
+      country: País
+    zone_member_province:
+      province: Província
+    zone_member_zone:
+      zone: Zona

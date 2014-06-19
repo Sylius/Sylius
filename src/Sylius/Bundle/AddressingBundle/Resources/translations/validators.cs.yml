@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Název města nesmí být delší než 255 znaků|Název města nesmí být delší než 255 znaků.
+      min_length: Název města musí mýt nejméně 2 znaky|Název města musí být dlouhé minimálně 2 znaky.
+      not_blank: Zadejte město.
+    country:
+      not_blank: Zvolte zemi.
+    first_name:
+      max_length: Křestní jméno nesmí být delší než 255 znaků|Křestní jméno nesmí být delší než 255 znaků.
+      min_length: Jméno musí být dlouhé nejméně 2 znaky|Jméno musí být dlouhé nejméně 2 znaky.
+      not_blank: Zadejte křestní jméno.
+    last_name:
+      max_length: Příjmení nesmí být delší než 255 znaků|Příjmení nesmí být delší než 255 znaků.
+      min_length: Příjmení musí být dlouhé nejméně 2 znaky|Příjmení musí být dlouhé nejméně 2 znaky.
+      not_blank: Zadejte příjmení.
+    postcode:
+      max_length: PSČ nesmí být delší než 255 znaků|PSČ nesmí být delší než 255 znaků.
+      min_length: PSČ musí být dlouhé nejméně 2 znaky|PSČ musí být dlouhé nejméně 2 znaky.
+      not_blank: Zadejte PSČ.
+    province:
+      valid: Vyberte správný název státu.
+    street:
+      max_length: Název ulice nesmí být delší než 255 znaků|Název ulice nesmí být delší než 255 znaků.
+      min_length: Název ulice musí být dlouhý nejméně 2 znaky|Název ulice musí být dlouhý nejméně 2 znaky.
+      not_blank: Zadejte ulici.
+    not_shippable: Tato adresa není platnou dodací destinací.
+  country:
+    iso_name:
+      not_blank: Zadejte prosím kód ISO země.
+    name:
+      max_length: Název země nesmí být delší než 255 znaků|Název země nesmí být delší než 255 znaků.
+      not_blank: Zadejte název země.
+  province:
+    name:
+      max_length: Název státu nesmí být delší než 255 znaků|Název státu nesmí být delší než 255 znaků.
+      min_length: Název státu musí být dlouhý nejméně 2 znaky|Název státu musí být dlouhý nejméně 2 znaky.
+      not_blank: Zadejte prosím název státu.
+  zone:
+    members:
+      min_count: 'Prosím přidejte alespoň {{ limit }} člena oblasti.'
+    name:
+      max_length: Název oblasti nesmí být delší než 255 znaků|Název oblasti nesmí být delší než 255 znaků.
+      not_blank: Prosím zadejte název oblasti.

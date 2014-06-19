@@ -1,3 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  tax_category:
+    name:
+      not_blank: Angiv moms kategorinavn.
+  tax_rate:
+    category:
+      not_blank: Angiv moms kategori.
+    name:
+      not_blank: Angiv moms sats navn.
+    amount:
+      not_blank: Angiv moms rate beløb.
+    calculator:
+      not_blank: Angiv moms beregning.

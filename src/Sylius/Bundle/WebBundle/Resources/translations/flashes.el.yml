@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Η διεύθυνση έχει οριστεί με επιτυχία ως η προεπιλεγμένη σας διεύθυνση χρέωσης.
+        shipping:
+          success: Η διεύθυνση έχει οριστεί με επιτυχία ως η προεπιλεγμένη σας διεύθυνση αποστολής.

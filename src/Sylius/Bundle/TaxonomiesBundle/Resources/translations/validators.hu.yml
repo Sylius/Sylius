@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: A taxon neve nem lehet hosszabb 255 karakternél.
+      not_blank: Kérjük, írja be a taxon nevét.
+  taxonomy:
+    name:
+      max_length: A taxonómia neve nem lehet hosszabb 255 karakternél.
+      not_blank: Kérjük, írja be a taxonómia nevét.

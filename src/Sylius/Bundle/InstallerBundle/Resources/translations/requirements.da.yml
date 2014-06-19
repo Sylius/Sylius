@@ -1,3 +1,39 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: udvidelser
+    accelerator:
+      help: Installer og aktiver en PHP accelerator ligesom APC (stærkt anbefalet).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Installer og aktiver %extension% udvidelsen.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: BOB
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: filsystem
+    cache:
+      - cache
+    exists: eksisterer
+    logs:
+      - logs
+    not_exists: Findes ikke
+  settings:
+    any: enhver
+    "off": false
+    "on": true
+    timezone: tidszone
+    version: PHP version
+    version_recommanded: Anbefalet PHP version

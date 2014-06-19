@@ -8,11 +8,13 @@ sylius:
         assortment: Assortimento
         configuration: Configurazione
         countries: Paesi
+        customer: Clienti
         dashboard: Pannello amministrazione
+        exchange_rates: Tassi di cambio
         general_settings: Impostazioni generali
         homepage: Il tuo negozio
         new_order: Aggiungi nuovo ordine
-        new_promotion: Aggiugngi nuova promozione
+        new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni prodotto
         orders: Ordini correnti
         payment_methods: Metodi di pagamento
@@ -30,19 +32,25 @@ sylius:
         tax_rates: Aliquote fiscali
         taxation_settings: Impostazioni fiscali
         taxonomies: Categorizzazione
+        users: Utenti
         zones: Zone
       sidebar:
         assortment: Assortimento
+        blocks: Blocchi
         configuration: Configurazione
+        content: Contenuto
         countries: Paesi
         customer: Clienti
         dashboard: Pannello amministrazione
+        exchange_rates: Tassi di cambio
         general_settings: Impostazioni generali
+        groups: Gruppi
         homepage: Torna al frontend
         new_order: Aggiungi nuovo ordine
         new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni
         orders: Ordini correnti
+        pages: Pagine
         payment_methods: Metodi di pagamento
         payments: Pagamenti
         products: Prodotti
@@ -63,11 +71,23 @@ sylius:
   frontend:
     menu:
       account:
+        addresses: Mia rubrica
+        homepage: Home
+        orders: Miei ordini / mie fatture
         password: La mia password
         profile: Le mie informazioni personali
         shop: Ritorna al negozio
+      currency: 'Visualizza prezzi in %currency%'
       main:
         account: Il mio account
         administration: Amministrazione
         cart: 'Vedi carrello (%items%) %total%'
+        login: Login
+        logout: Logout
         register: Registrati
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

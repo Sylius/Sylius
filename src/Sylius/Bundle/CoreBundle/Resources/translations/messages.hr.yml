@@ -1,3 +1,79 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Odaberite način dostave
+  form:
+    action:
+      add_product_configuration:
+        price: Jedinična cijena
+        quantity: Količina
+        variant: Varijanta
+    block:
+      body: Poruka
+      id: ID
+      title: Naslov
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Želim koristiti drugu adresu za račun.
+      payment_method: Način plaćanja
+      shipping_method: Vrsta dostave
+    group:
+      name: Naziv grupe
+      roles: Role (korisnička prava)
+    image:
+      file: Fotografija
+    locale:
+      code: ISO kod
+      enabled: Omogući
+    order_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Broj
+      total_from: Od
+      total_to: Do
+    page:
+      body: Sadržaj stranice
+      id: ID
+      title: Naslov
+    product:
+      restricted_zone: Ograničena zona pristupa
+      shipping_category: Kategorija pošiljke
+      short_description: Kratak opis
+      tax_category: Porezna kategorija
+      variant_selection_method: Način odabira varijante
+    product_filter:
+      name: Naziv
+      sku: KOD (SKU)
+    settings:
+      general:
+        currency: Zadana valuta
+        locale: Jezik
+        meta_description: Opis (Meta Description)
+        meta_keywords: Ključne riječi (Meta Keywords)
+        title: Naslov stranice
+      taxation:
+        default_tax_zone: Zadana porezna zona
+    shipment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Broj narudžbe
+      shipping_address: Pošalji na ime
+    shipping_method:
+      zone: Regija
+    taxon:
+      file: Odaberite sliku
+    user:
+      groups: Grupe
+      shipping_address: Adresa za dostavu
+    variant:
+      depth: Dubina
+      height: Visina
+      sku: KOD (SKU)
+      weight: Težina
+      width: Širina

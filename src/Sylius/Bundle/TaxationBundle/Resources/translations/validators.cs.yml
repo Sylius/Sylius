@@ -1,3 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  tax_category:
+    name:
+      not_blank: Zadejte prosím název kategorie daně.
+  tax_rate:
+    category:
+      not_blank: Vyberte prosím kategorii daně.
+    name:
+      not_blank: Zadejte prosím název sazby daně.
+    amount:
+      not_blank: Zadejte prosím čásku sazby daně.
+    calculator:
+      not_blank: Vyberte prosím daňovou kalkulačku.

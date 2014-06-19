@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Naziv kategorije ne smije biti dulji od {{ limit }} znakova.'
+      min_length: 'Naziv kategorije mora imati najmanje {{ limit }} znakova.'
+      not_blank: Unesite naziv dostavne kategorije.
+  shipping_method:
+    calculator:
+      max_length: Maksimalna dužina
+      min_length: Minimalna dužina
+      not_blank: Ne smije biti prazno
+    name:
+      max_length: 'Naziv tipa dostave ne smije biti dulji od {{ limit }} znakova.'
+      min_length: 'Naziv tipa dostave mora imati najmanje {{ limit }} znakova.'
+      not_blank: Unesite naziv tipa dostave.

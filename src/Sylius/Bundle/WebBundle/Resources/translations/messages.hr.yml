@@ -1,3 +1,170 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: Naslov
+sylius:
+  account:
+    address:
+      action:
+        billing: Postavi kao zadanu adresu za naplatu
+        create: Dodaj novu adresu
+        edit: Uredi
+        shipping: Postavi kao zadanu adresu za dostavu.
+    home:
+      "email: Email": '[empty string]'
+      "id: Customer ID": '[empty string]'
+    order:
+      "number: Number": '[empty string]'
+      "payment_mode: Payment mode": '[empty string]'
+      "shipment_mode: Shipment mode": '[empty string]'
+      "state: State": '[empty string]'
+    title: Moj profil
+  block:
+    body: Poruka
+    create: Napravi blok
+    create_header: Napravi novi blok sadržaja
+    id: ID
+    index_header: Blokovi sadržaja
+    no_results: Trenutno nemate nijedan spremljeni blok.
+    title: Naslov
+    update_header: Uredi blok sadržaja
+    updated_at: Zadnja izmjena
+  breadcrumb:
+    block:
+      index: Blokavi sadržaja
+    group:
+      index: Grupe
+    locale:
+      index: Lokaliteti
+    page:
+      index: Statičke stranice
+  browse_products: Pretraži proizvode
+  cart:
+    summary:
+      add_coupon: OK
+  checkout:
+    shipping:
+      error: Žao nam je, ali naša trgovina nije u mogućnosti dostaviti proizovde u državu koju ste izabrali.
+  confirmation:
+    message: Želiš li izvršiti brisanje?
+    title: Potvrda
+  country:
+    id: ID
+  created_at: Dodano
+  deleted: Izbrisano
+  email: E-Mail
+  exchange_rate:
+    id: ID
+  filter: Filter
+  form:
+    cart:
+      coupon: Ukoliko imate kupon za dodatni popust, unesite ga ovdje
+    option_value:
+      add_value: Dodaj vrijednost
+  group:
+    create: Napravi grupu
+    create_header: Dodaj novu grupu korisnika
+    id: ID
+    index_header: Grupe
+    name: Naziv grupe
+    no_results: Trenutno nemate ni jednu grupu korisnika.
+    roles: Role (korisnička prava)
+    update_header: Uredi grupu
+  hide_deleted: Sakrij izbrisano
+  history:
+    0: Povijest
+    action: Akcija
+    author: Autor
+    data: Podaci
+    logged_at: Zabilježeno na
+    version: Verzija
+  locale:
+    code: ISO kod
+    create: Dodaj lokale
+    create_header: Dodaj novi lokale
+    enabled: Omogući
+    index_header: Popis svih postavljeni lokaliteta
+    no_results: Trenutno nemate postavljene lokalitete.
+    update_header: Uredi lokalitet
+    updated_at: Zadnja izmjena
+  logo: Syius
+  na: N/A
+  "no": false
+  no_results: Nema rezultata
+  order:
+    id: ID
+    payment: Naplata
+    release_inventory: Oslobodi skladište
+    inventory_unit:
+      backorder: na čekanju
+      fulfill: Ispunjeno
+      return: Vraćeno
+    state:
+      cart_locked: Košarica zaključana
+      checkout: Blagajna
+      order_confimed: Narudžba potvrđena
+      ordered: Naručeno
+  shipment:
+    ship: Pošalji
+    id: ID
+    tracking_code: Kod za praćenje
+    update: Uredi
+    update_header: Uredi pošiljku
+  page:
+    body: Poruka
+    create: Dodaj novu stranicu
+    create_header: Dodaj novi statički sadržaj
+    id: ID
+    index_header: Stranice
+    no_results: Trenutno nema statičkog sadržaja za prikazati.
+    title: Naslov
+    update_header: Zadnja izmjena
+  payment:
+    id: ID
+    state:
+      0: Stanje
+      checkout: Blagajna
+      completed: Završeno
+      failed: Neuspješno
+      new: Novo
+      pending: Na čekanju
+      processing: U obradi
+      unknown: Nepoznato
+      void: Nevažeće
+  payment_method:
+    id: ID
+  product:
+    contain_variants: Postoje varijante
+    no_shipping_category: Nema kategoriju pošiljke
+    restricted_zone: Ograničena zona pristupa
+    shipping_category: Kategorija pošiljke
+    unavailable: Nedostupno
+    view_details: 'Pogledaj detalje za proizvod %product%.'
+  product_not_available_in_zone: Nije dostupno u vašoj državi.
+  promotion_coupon:
+    total_results:
+      Total: '%total%'
+  shipping_address: Adresa za dostavu
+  shipping_category:
+    id: ID
+  shipping_method:
+    id: ID
+  show_deleted: Prikaži izbrisano
+  stockable:
+    on_hold: Na stanju
+  tax_category:
+    id: ID
+  taxon:
+    product_index_header: 'Proizvodi kategorizirani kao %name%'
+  total_quantity: Ukupna kol
+  unknown: Nepoznato
+  user:
+    email: E-Mail
+    id: ID
+    impersonate: Prijavi se kao korisnik
+    registration_date: Datum registracije
+  variant:
+    sku: KOD (SKU)
+  "yes": true

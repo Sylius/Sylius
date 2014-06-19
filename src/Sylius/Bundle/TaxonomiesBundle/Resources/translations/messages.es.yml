@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Descripción
+      name: Nombre
+      parent: Padre
+      permalink: Link permanente
+    taxonomy:
+      name: Nombre
+  taxon:
+    create_taxon: Crear taxonomía
+    delete_taxonomy: Eliminar taxonomía
+    manage_taxonomies: Administrar taxonomías
+    no_taxonomies: No hay taxonomías para mostrar.
+    no_taxons: No hay taxonomías para mostrar.
+    update_taxonomy: Actualizar taxonomía

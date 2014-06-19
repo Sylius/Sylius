@@ -319,6 +319,7 @@ sylius:
     frontend_title: Sylius, современное решение электронной коммерции для Symfony2
   na: Н/Д
   newest: Новейшие продукты
+  "no": false
   no_results: Нет результатов
   option:
     create: Добавить опцию
@@ -449,6 +450,7 @@ sylius:
     index_header: 'Товары <small>Список всех товаров в вашем магазине</small>'
     manage: Редактировать товары
     name: Название
+    no_description: '<i>Нет описания...</i>'
     no_images: Нет изображений для данного товара
     no_options: Нет опций для данного товара
     no_properties: У этого товара не заданы свойства
@@ -683,7 +685,7 @@ sylius:
     sku: Артикул
     stock: Наличие
     update_header: Редактирование вариантов
-  "yes": да
+  "yes": true
   zone:
     add_member: Добавить
     create: Создать новую зону

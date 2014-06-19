@@ -4,13 +4,13 @@
 sylius:
   tax_category:
     name:
-      not_blank: Veuillez entrez le nom de la catégorie d’imposition.
+      not_blank: Veuillez entrez le nom de la catégorie de la taxe.
   tax_rate:
     category:
       not_blank: Veuillez sélectionner la catégorie de la taxe.
     name:
-      not_blank: Entrez le nom du taux de taxe.
+      not_blank: Veuillez entrer le nom de la taxe.
     amount:
-      not_blank: "Entrez le montant du taux d'impôt."
+      not_blank: Veuillez entrer le taux de la taxe.
     calculator:
-      not_blank: Sélectionnez le calculateur de taxe.
+      not_blank: Veuillez sélectionner le calculateur de la taxe.

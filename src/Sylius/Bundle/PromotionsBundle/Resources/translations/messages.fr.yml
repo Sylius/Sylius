@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Montant
+      percentage_discount_configuration:
+        percentage: Pourcentage
+      shipping_discount_configuration:
+        percentage: Pourcentage
+      type: Type
+    rule:
+      taxonomy_configuration:
+        taxons: Famille de tags
+        exclude: Exclure
+      item_count_configuration:
+        count: Nombre
+        equal: Supérieur ou égal
+      item_total_configuration:
+        amount: Montant
+        equal: Supérieur ou égal
+      nth_order_configuration:
+        nth: Nième
+      user_loyality_configuration:
+        time: Inscrit depuis
+        unit:
+          days: Jours
+          weeks: Semaines
+          months: Mois
+          years: Années
+          0: Unité
+        after: Utilisateur inscrit après cette période ?
+      shipping_country_configuration:
+        country: Pays
+      type: Type
+    coupon:
+      code: Code
+      usage_limit: "Limite d'utilisation"
+    coupon_generate_instruction:
+      amount: Montant
+      usage_limit: "Limite d'utilisation"
+    promotion:
+      actions: Actions
+      coupon_based: Comprend des coupons
+      description: Description
+      ends_at: Se termine le
+      name: Nom
+      rules: Règles
+      starts_at: Commence le
+      usage_limit: "Limite d'utilisation"

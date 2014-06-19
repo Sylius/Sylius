@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: A cím sikeresen beállítva, mint alapértelmezett számlázási cím.
+        shipping:
+          success: A cím sikeresen beállítva, mint alapértelmezett szállítási cím.

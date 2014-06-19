@@ -3,6 +3,6 @@
 
 sylius:
   inventory_unit:
-    backordered: En rupture de stock.
-    sold: Unité de stock remplie.
+    backordered: Unité de stock en réapprovisionnement.
+    sold: Unité de stock vendue.
     returned: Unité de stock retournée.

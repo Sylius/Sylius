@@ -5,12 +5,32 @@ sylius:
   form:
     address:
       city: Πόλη
+      company: Εταιρεία
+      country: Χώρα
+      first_name: Όνομα
+      last_name: Επώνυμο
       postcode: Ταχ. Κώδικας
       street: Οδός
       province: Επαρχία
     country:
       iso_name: Όνομα ISO
+      name: Ονομασία
+      provinces: Επαρχίες
+      select: Επιλέξτε
+    province:
+      name: Ονομασία
+      select: Επιλέξτε
     zone:
       members: Μέλη
+      name: Ονομασία
+      type: Τύπος
+      types:
+        country: Χώρα
+        province: Επαρχία
+        zone: Ζώνη
+    zone_member_country:
+      country: Χώρα
     zone_member_province:
       province: Επαρχία
+    zone_member_zone:
+      zone: Ζώνη

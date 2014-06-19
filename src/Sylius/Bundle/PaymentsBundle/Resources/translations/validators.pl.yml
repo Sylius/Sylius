@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: sylius.credit_card.cardholder_name.min_length
+      not_blank: sylius.credit_card.cardholder_name.not_blank
+    expiry_month:
+      max_range: sylius.credit_card.expiry_month.max_range
+      min_range: sylius.credit_card.expiry_month.min_range
+      not_blank: Proszę wybrać miesiąc wygaśnięcia.
+    number:
+      not_blank: Proszę wprowadzić numer karty.
+      luhn: sylius.credit_card.number.luhn
+    security_code:
+      not_blank: Proszę wprowadzić kod zabezpieczający.
+      max_length: sylius.credit_card.security_code.max_length
+      min_length: sylius.credit_card.security_code.min_length
+    expiry_year:
+      not_blank: Proszę wybrać rok wygaśnięcia.
+  payment_method:
+    gateway:
+      not_blank: Proszę wybrać bramkę płatności.
+    name:
+      max_length: 'Nazwa metody płatności powinna mieć mniej niż {{ limit }} znaków.'
+      min_length: 'Nazwa metody płatności musi składać się z co najmniej {{ limit }} znaków.'
+      not_blank: Proszę podać nazwę metody płatności.

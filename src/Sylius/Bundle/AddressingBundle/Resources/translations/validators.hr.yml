@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    street:
+      not_blank: Unesite naziv ulice.
+    not_shippable: Adresa koju ste unijeli nije valjano odredište.
+  country:
+    iso_name:
+      not_blank: Unesite ISO kod države.
+    name:
+      max_length: Naziv države ne smije biti duži od 255 znakova.|Naziv države ne smije biti duži od 255 znakova.
+      not_blank: Unesite naziv države.
+  province:
+    name:
+      max_length: Naziv regije ne smije biti duži od 255 znakova.|Naziv regije ne smije biti duži od 255 znakova.
+      not_blank: Unesite naziv regije.

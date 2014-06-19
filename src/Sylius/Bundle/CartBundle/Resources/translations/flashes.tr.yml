@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Alışveriş sepetiniz başarıyla güncellendi.
+    cart_clear_completed: Alışveriş sepetiniz başarıyla boşaltıldı.
+    item_add_completed: Ürün alışveriş spetinize eklendi.
+    item_remove_completed: Ürün alışveriş sepetinizden çıkartıldı.
+    item_add_error: Ürün alışveriş sepetinize eklenirken bir hata oluştu.
+    item_remove_error: Ürün alışveriş sepetinizden çıkartılırken bir hata oluştu.

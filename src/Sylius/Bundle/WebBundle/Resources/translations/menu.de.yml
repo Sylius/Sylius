@@ -9,9 +9,11 @@ sylius:
         configuration: Konfiguration
         countries: Länder
         customer: Kunden
+        dashboard: Dashboard
         exchange_rates: Wechselkurse
         general_settings: Allgemeine Einstellungen
         homepage: Dein Shop
+        locales: Gebietsschemata
         new_order: Neue Bestellung
         new_promotion: Neue Aktion
         options: Produktoptionen verwalten
@@ -32,16 +34,20 @@ sylius:
         taxation_settings: Besteuerung
         taxonomies: Kategorien
         users: Benutzer
-        zones: Gebiete
+        zones: Versandgebiete
       sidebar:
         assortment: Kollektionen
+        blocks: Blöcke
         configuration: Konfiguration
+        content: Inhalt
         countries: Länder
         customer: Kunden
+        dashboard: Dashboard
         exchange_rates: Wechselkurse
         general_settings: Allgemeine Einstellungen
         groups: Gruppen
         homepage: Zurück zum Frontend
+        locales: Gebietsschemata
         new_order: Neue Bestellung
         new_promotion: Neue Aktion hinzufügen
         options: Produktoptionen verwalten
@@ -63,11 +69,12 @@ sylius:
         taxation_settings: Gruppeneinstellungen
         taxonomies: Gruppierung
         users: Benutzer
-        zones: Gebiete
+        zones: Versandgebiete
   frontend:
     menu:
       account:
         addresses: Mein Adressbuch
+        homepage: Startseite
         orders: Meine Bestellungen / Meine Rechnungen
         password: Mein Passwort
         profile: Meine persönliche Informationen
@@ -75,4 +82,14 @@ sylius:
       currency: 'Zeige Preise in %currency%'
       main:
         account: Mein Account
+        administration: Administration
         cart: 'Einkaufswagen (%items%) %total%'
+        login: Anmelden
+        logout: Abmelden
+        register: Registrieren
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

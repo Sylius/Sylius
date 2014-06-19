@@ -4,8 +4,8 @@
 sylius:
   product:
     sku:
-      not_blank: Bitte geben Sie die Produkt Bestandseinheit an.
-      unique: Die Produkt Bestandseinheit muss eindeutig sein.
+      not_blank: Bitte geben Sie die Bestandseinheit an.
+      unique: Die Bestandseinheit muss eindeutig sein.
     name:
       not_blank: Bitte gib Sie einen Produktnamen an.
       min_length: 'Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.'
@@ -17,7 +17,7 @@ sylius:
     sku:
       not_blank: Bitte geben Sie die Bestandseinheit der Variante an.
       unique: Die Bestandseinheit der Variante muss einzigartig sein.
-    combination: Die Variation mit den gewählten Einstellungen existiert schon.
+    combination: Die Variante mit den gewählten Einstellungen existiert schon.
   option:
     name:
       not_blank: Bitte geben Sie einen Namen für die Option ein.

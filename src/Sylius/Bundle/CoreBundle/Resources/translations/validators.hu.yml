@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Csoport neve nem lehet hosszabb, mint {{ limit }} karakter.'
+      min: 'A csoportnévnek legalább {{limit}} karakter hosszúnak kell lennie.'
+      not_blank: Kérjük, írja be a csoport nevét.
+  locale:
+    code:
+      not_blank: Kérjük, írja be a hely kódját.
+      unique: A területi beállítás már létezik.
+  user:
+    first_name:
+      max: 'A keresztnév lehet nem lehet hosszabb, mint {{ limit }} karakter.'
+      min: 'Keresztnévnek legalább {{limit}} karakter hosszúnak kell lennie.'
+      not_blank: Kérjük, add meg a keresztneved.
+    last_name:
+      max: 'A vezetéknév nem lehet hosszabb, mint {{ limit }} karakter.'
+      min: 'A vezetéknévnek legalább {{limit}} karakter hosszúnak kell lennie.'
+      not_blank: Kérjük, add meg a vezetéknevedet.
+  variant:
+    onHand:
+      min: 'A készletnek nagyobbnak kell lenni mint {{ limit }}.'
+      not_blank: Kérjük, adja meg a készletet.
+    price:
+      min: Az ár nem lehet negatív szám.
+      not_blank: Kérjük, írja be az árat.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Kérjük, adjon meg szállítási módra vonatkozó sávot.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Kérjük adjon meg adó sávot.

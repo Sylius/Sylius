@@ -13,12 +13,22 @@ sylius:
       street: Adresa
       province: Provincia
     country:
+      iso_name: ISO názov
       name: Názov
+      provinces: Provincie
+      select: Vyberte
     province:
       name: Názov
+      select: Vyberte
     zone:
+      members: Členovia
       name: Názov
       type: Typ
+      types:
+        province: Provincia
+        zone: Zóna
+    zone_member_country:
+      country: Krajina
     zone_member_province:
       province: Provincia
     zone_member_zone:

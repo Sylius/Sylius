@@ -24,6 +24,10 @@ sylius:
       members: Kraje należące do strefy
       name: Nazwa
       type: Typ
+      types:
+        country: Kraj
+        province: Województwo
+        zone: Strefa
     zone_member_country:
       country: Kraj
     zone_member_province:

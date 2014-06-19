@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'De naam van de kaarthouder moet minstens {{ limit }} tekens lang zijn.'
+      not_blank: Vul de naam van de kaarthouder in.
+    expiry_month:
+      max_range: 'De vervalmaand moet tussen {{ min }} en {{ max }} liggen.'
+      min_range: 'De vervalmaand moet tussen {{ min }} en {{ max }} liggen.'
+      not_blank: Selecteer de vervalmaand.
+    number:
+      not_blank: Voer uw kaart nummer in.
+      luhn: Uw kaartnummer in ongeldig.
+    security_code:
+      not_blank: Vul de beveiligingscode in.
+      max_length: 'De creditcard CVV code moet tussen {{ min }} en {{ max }} tekens lang zijn.'
+      min_length: 'De creditcard CVV code moet tussen {{ min }} en {{ max }} tekens lang zijn.'
+    expiry_year:
+      not_blank: Selecteer het vervaljaar.
+  payment_method:
+    gateway:
+      not_blank: Selecteer een betaalmethode.
+    name:
+      max_length: 'Betaalmethode naam mag niet langer zijn dan {{ limit }} tekens.'
+      min_length: 'Betaalmethode naam moet minstens {{ limit }} tekens lang zijn.'
+      not_blank: Voer een betaalmethode naam in.

@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      cardholder_name: sylius.form.credit_card.cardholder_name
+      expiry_month: sylius.form.credit_card.expiry_month
+      expiry_year: sylius.form.credit_card.expiry_year
+      number: sylius.form.credit_card.number
+      security_code: sylius.form.credit_card.security_code
+      type: sylius.form.credit_card.type
+    payment:
+      amount: sylius.form.payment.amount
+      method: sylius.form.payment.method
+      state:
+        0: Status płatności
+        checkout: Koszyk
+        completed: Zakończone
+        failed: Niepowodzenie
+        new: Nowy
+        pending: Oczekujący
+        processing: W trakcie przetwarzania
+        unknown: Nieznany
+        void: Void
+    payment_method:
+      description: Opis
+      enabled: Aktywna?
+      gateway: Bramka
+      name: Nazwa
