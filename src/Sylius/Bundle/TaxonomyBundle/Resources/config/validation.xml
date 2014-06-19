@@ -42,6 +42,22 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="nameEn">
+            <constraint name="NotBlank">
+                <option name="message">sylius.taxon.name_en.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.taxon.name_en.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/^[a-zA-Z0-9\s\-\.]+$/</option>
+                <option name="message">sylius.taxon.name_en.not_match</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>
