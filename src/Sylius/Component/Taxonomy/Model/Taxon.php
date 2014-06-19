@@ -57,6 +57,13 @@ class Taxon implements TaxonInterface
     protected $name;
 
     /**
+     * Taxon translate slug name.
+     *
+     * @var string
+     */
+    protected $nameEn;
+
+    /**
      * Taxon slug.
      *
      * @var string
@@ -233,6 +240,24 @@ class Taxon implements TaxonInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNameEn()
+    {
+        return $this->nameEn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNameEn($slug)
+    {
+        $this->nameEn = $slug;
 
         return $this;
     }
