@@ -58,6 +58,9 @@ class TaxonType extends AbstractType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.taxon.name'
             ))
+            ->add('nameEn', 'text', array(
+                'label' => 'sylius.form.taxon.name_en'
+            ))
             ->add('permalink', 'text', array(
                 'required' => false,
                 'label' => 'sylius.form.taxon.permalink'

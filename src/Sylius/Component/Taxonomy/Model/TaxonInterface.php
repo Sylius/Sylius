@@ -101,6 +101,20 @@ interface TaxonInterface extends SoftDeletableInterface
     public function setName($name);
 
     /**
+     * Get taxon english name.
+     *
+     * @return string
+     */
+    public function getNameEn();
+
+    /**
+     * Set taxon name in english.
+     *
+     * @param string $name
+     */
+    public function setNameEn($name);
+
+    /**
      * Get slug.
      *
      * @return string

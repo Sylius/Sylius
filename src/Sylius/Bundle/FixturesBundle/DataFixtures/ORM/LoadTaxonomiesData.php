@@ -65,6 +65,7 @@ class LoadTaxonomiesData extends DataFixture
             /* @var $taxon TaxonInterface */
             $taxon = $this->getTaxonRepository()->createNew();
             $taxon->setName($taxonName);
+            $taxon->setNameEn($taxonName);
 
             $taxonomy->addTaxon($taxon);
             $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);

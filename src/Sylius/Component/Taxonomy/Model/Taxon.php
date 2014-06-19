@@ -57,6 +57,13 @@ class Taxon implements TaxonInterface
     protected $name;
 
     /**
+     * Taxon translate slug name.
+     *
+     * @var string
+     */
+    protected $nameEn;
+
+    /**
      * Taxon slug.
      *
      * @var string
@@ -240,6 +247,24 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function getNameEn()
+    {
+        return $this->nameEn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNameEn($slug)
+    {
+        $this->nameEn = $slug;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSlug()
     {
         return $this->slug;
@@ -377,5 +402,14 @@ class Taxon implements TaxonInterface
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+    
+    public function doPrePersist()
+    {
+        // make sure we have name_en
+        // usefull when load data fixture
+        if(empty($this->nameEn)) {
+            $this->setNameEn($this->getName());
+        }
     }
 }

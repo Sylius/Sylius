@@ -15,5 +15,22 @@
             $(this).parent().parent().find('table tbody').toggle();
         });
         $('.datepicker').datepicker({});
+
+        // Just for usability, Auto past taxon name into name_en input.
+        var taxonNameEn = $('#sylius_taxon_nameEn');
+        if(taxonNameEn.length) {
+            var taxonName = $('#sylius_taxon_name');
+            if(!taxonNameEn.val()) {
+                taxonName.keyup(function() {
+                    taxonNameEn.val(taxonName.val());
+                });
+            }
+
+            taxonNameEn.blur(function() {
+               if(!taxonNameEn.val()) {
+                   taxonNameEn.val(taxonName.val());
+               }
+            });
+        }
     });
 })( jQuery );
