@@ -22,11 +22,12 @@
             <order-by-field name="left" direction="ASC" />
         </order-by>
         <field name="name" column="name" type="string" />
+        <field name="nameEn" column="name_en" type="string" />
         <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
+            <gedmo:slug fields="nameEn" unique="true" />
         </field>
         <field name="permalink" column="permalink" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
+            <gedmo:slug fields="nameEn" unique="true" />
         </field>
         <field name="description" column="description" type="string" />
         <field name="left" column="tree_left" type="int">
