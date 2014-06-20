@@ -17,6 +17,7 @@ use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -25,6 +26,7 @@ class ProductBuilderSpec extends ObjectBehavior
 {
     function let(
         ProductInterface $product,
+        EventDispatcherInterface $eventDispatcher,
         ObjectManager $productManager,
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
@@ -32,6 +34,7 @@ class ProductBuilderSpec extends ObjectBehavior
     )
     {
         $this->beConstructedWith(
+            $eventDispatcher,
             $productManager,
             $productRepository,
             $attributeRepository,

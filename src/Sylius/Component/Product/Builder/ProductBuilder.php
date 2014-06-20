@@ -14,6 +14,8 @@ namespace Sylius\Component\Product\Builder;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Product builder with fluent interface.
@@ -41,6 +43,11 @@ class ProductBuilder implements ProductBuilderInterface
      * @var ProductInterface
      */
     protected $product;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
 
     /**
      * Product object manager.
@@ -71,15 +78,17 @@ class ProductBuilder implements ProductBuilderInterface
     protected $attributeValueRepository;
 
     public function __construct(
-        ObjectManager      $productManager,
+        EventDispatcherInterface $eventDispatcher,
+        ObjectManager $productManager,
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $attributeValueRepository
     )
     {
-        $this->productManager            = $productManager;
-        $this->productRepository         = $productRepository;
-        $this->attributeRepository        = $attributeRepository;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->productManager = $productManager;
+        $this->productRepository = $productRepository;
+        $this->attributeRepository = $attributeRepository;
         $this->attributeValueRepository = $attributeValueRepository;
     }
 
@@ -137,11 +146,31 @@ class ProductBuilder implements ProductBuilderInterface
      */
     public function save($flush = true)
     {
+        $this->eventDispatcher->dispatch(
+            'sylius.product.pre_create',
+            new ResourceEvent($this->product)
+        );
+
+        $this->eventDispatcher->dispatch(
+            'sylius.product_variant.pre_create',
+            new ResourceEvent($this->product->getMasterVariant())
+        );
+
         $this->productManager->persist($this->product);
 
         if ($flush) {
             $this->productManager->flush();
         }
+
+        $this->eventDispatcher->dispatch(
+            'sylius.product.post_create',
+            new ResourceEvent($this->product)
+        );
+
+        $this->eventDispatcher->dispatch(
+            'sylius.product_variant.post_create',
+            new ResourceEvent($this->product->getMasterVariant())
+        );
 
         return $this->product;
     }
