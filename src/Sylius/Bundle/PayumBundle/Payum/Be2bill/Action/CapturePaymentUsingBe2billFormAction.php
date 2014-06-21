@@ -70,7 +70,7 @@ class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
             $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
             $details['ORDERID'] = $payment->getId();
 
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
         }
 
         $details = ArrayObject::ensureArrayObject($details);
@@ -81,10 +81,10 @@ class CapturePaymentUsingBe2billFormAction extends PaymentAwareAction
             $request->setModel($details);
             $this->payment->execute($request);
 
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
             $request->setModel($payment);
         } catch (\Exception $e) {
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
             $request->setModel($payment);
 
             throw $e;
