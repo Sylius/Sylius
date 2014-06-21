@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
  *
  * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
  */
-class LoadMetadataSubscriber implements EventSubscriber
+class LoadORMMetadataSubscriber implements EventSubscriber
 {
     /**
      * @var array
