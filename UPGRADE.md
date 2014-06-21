@@ -134,26 +134,6 @@ sylius_payment:
     driver: doctrine/orm
 ```
 
-### Payum
-
-The be2bill payment factory does not support onsite payment any more. Use be2bill_onsite instead:
-
-```yaml
-payum:
-    contexts:
-        be2bill: ~
-```
-
-After:
-
-```yaml
-payum:
-    contexts:
-        be2bill_onsite: ~
-```
-
-Payum library and the bundle were upgraded up to 0.9. Check payum's [https://github.com/Payum/Payum/blob/master/UPGRADE.md](UPGRADE.md) and the bundle [UPGRADE.md](https://github.com/Payum/PayumBundle/blob/master/UPGRADE.md)
-
 ### Product
 
 Previously, ProductBundle provided basic product model with properties support.

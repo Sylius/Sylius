@@ -67,7 +67,7 @@
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
 
-            <tag name="payum.action" factory="be2bill_onsite" />
+            <tag name="payum.action" factory="be2bill" />
         </service>
         <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class%" public="false">
             <argument type="service" id="payum.context.be2bill.api" />
@@ -78,7 +78,6 @@
             <argument>id</argument>
 
             <tag name="payum.action" factory="be2bill" />
-            <tag name="payum.action" factory="be2bill_onsite" />
         </service>
 
         <!-- Payum -->
