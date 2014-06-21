@@ -108,7 +108,7 @@ winzou_state_machine:
         callbacks:
             after:
                 sylius_sync_shipping:
-                    to:   '-sold'
+                    excluded_to: [sold]
                     do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object', 'event', 'null', '"sylius_shipment_item"']
 
