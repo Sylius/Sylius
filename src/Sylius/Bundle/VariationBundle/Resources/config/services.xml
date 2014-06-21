@@ -19,7 +19,6 @@
     <parameters>
         <parameter key="sylius.event_subscriber.variation.load_metadata.class">Sylius\Bundle\VariationBundle\EventListener\LoadMetadataSubscriber</parameter>
 
-        <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\VariationBundle\Validator\VariantUniqueValidator</parameter>
         <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariationBundle\Validator\VariantCombinationValidator</parameter>
     </parameters>
 
@@ -29,10 +28,6 @@
             <argument>%sylius.variation.variables%</argument>
         </service>
 
-        <service id="sylius.validator.variant.unique" class="%sylius.validator.variant.unique.class%">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="validator.constraint_validator" alias="sylius.validator.variant.unique" />
-        </service>
         <service id="sylius.validator.variant.combination" class="%sylius.validator.variant.combination.class%">
             <tag name="validator.constraint_validator" alias="sylius.validator.variant.combination" />
         </service>
