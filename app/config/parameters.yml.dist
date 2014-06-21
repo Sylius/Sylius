@@ -3,6 +3,7 @@ parameters:
     sylius.database.host:             127.0.0.1
     sylius.database.port:             ~
     sylius.database.name:             sylius
+    sylius.database.path:             ~
     sylius.database.user:             root
     sylius.database.password:         ~
 
