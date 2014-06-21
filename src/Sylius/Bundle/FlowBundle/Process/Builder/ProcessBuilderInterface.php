@@ -91,6 +91,13 @@ interface ProcessBuilderInterface
     public function setRedirect($redirect);
 
     /**
+     * Set redirection route params.
+     *
+     * @param string $redirect
+     */
+    public function setRedirectParams($redirectParams);
+
+    /**
      * Validation of process, if returns false, process is suspended.
      *
      * @param \Closure $validator

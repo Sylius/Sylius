@@ -172,7 +172,7 @@ class Coordinator implements CoordinatorInterface
             if ($this->context->isLastStep()) {
                 $this->context->close();
 
-                $url = $this->router->generate($process->getRedirect());
+                $url = $this->router->generate($process->getRedirect(), $process->getRedirectParams());
 
                 return new RedirectResponse($url);
             }

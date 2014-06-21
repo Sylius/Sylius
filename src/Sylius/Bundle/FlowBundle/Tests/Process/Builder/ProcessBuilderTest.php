@@ -270,6 +270,26 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \RuntimeException
      */
+    public function shouldNotInjectRedirectParamsWithoutProcess()
+    {
+        $this->builder->setRedirectParams(array('foo' => 'bar'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldInjectRedirectParamsToProcess()
+    {
+        $this->builder->build($this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
+        $this->builder->setRedirectParams(array('foo' => 'bar'));
+
+        $this->assertEquals(array('foo' => 'bar'), $this->builder->getProcess()->getRedirectParams());
+    }
+
+    /**
+     * @test
+     * @expectedException \RuntimeException
+     */
     public function shouldNotInjectValidationClosureWithoutProcess()
     {
         $this->builder->validate(function () {

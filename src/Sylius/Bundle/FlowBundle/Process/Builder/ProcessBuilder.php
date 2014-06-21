@@ -172,6 +172,18 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function setRedirectParams(array $params)
+    {
+        $this->assertHasProcess();
+
+        $this->process->setRedirectParams($params);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function validate($validator)
     {
         $this->assertHasProcess();
