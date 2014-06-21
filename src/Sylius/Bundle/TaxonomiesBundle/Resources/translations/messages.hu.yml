@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Leírás
+      name: Név
+      parent: Szülő
+      permalink: Hivatkozás
+    taxonomy:
+      name: Név
+  taxon:
+    create_taxon: Hozzon létre Taxont
+    delete_taxonomy: Taxonómia törlése
+    manage_taxonomies: Taxonómiák kezelése
+    no_taxonomies: Nincsenek megjeleníthető taxonómiák.
+    no_taxons: Nincsenek megjeleníthető taxonok.
+    update_taxonomy: Taxonómia frissítése

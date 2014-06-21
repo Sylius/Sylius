@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Description
+      name: Nom
+      parent: Parent
+      permalink: Permalien
+    taxonomy:
+      name: Nom
+  taxon:
+    create_taxon: Créer une famille de tags
+    delete_taxonomy: Supprimer le tag
+    manage_taxonomies: Gérer les tags
+    no_taxonomies: Aucun tag à afficher.
+    no_taxons: Aucune famille de tag à afficher.
+    update_taxonomy: Mettre à jour le tag

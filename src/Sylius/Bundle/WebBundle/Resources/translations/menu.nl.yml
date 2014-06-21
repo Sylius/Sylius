@@ -13,21 +13,21 @@ sylius:
         exchange_rates: Wisselkoersen
         general_settings: Algemene instellingen
         homepage: Uw winkel
-        locales: Locaties
-        new_order: Voeg nieuwe bestelling toe
-        new_promotion: Voeg nieuwe promotie toe
+        locales: "Talen/Regio's"
+        new_order: Bestelling toevoegen
+        new_promotion: Kortingsactie toevoegen
         options: Productopties
         orders: Huidige bestellingen
-        payment_methods: Betaalmethodes
+        payment_methods: Betaalmethoden
         payments: Betalingen
         products: Producten
         promotions: Promoties
-        properties: Configureer eigenschappen
+        properties: Producteigenschappen
         prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
-        shipping_methods: Verzendmethodes
+        shipping_methods: Verzendmethoden
         stockables: Voorraad
         tax_categories: BTW-groepen
         tax_rates: BTW-tarieven
@@ -48,22 +48,22 @@ sylius:
         groups: Groepen
         homepage: Terug naar de voorkant
         locales: "Talen/Regio's"
-        new_order: Voeg nieuwe bestelling toe
-        new_promotion: Voeg nieuwe promotie toe
+        new_order: Bestelling toevoegen
+        new_promotion: Kortingsactie toevoegen
         options: Productopties
         orders: Huidige bestellingen
         pages: "Pagina's"
-        payment_methods: Betaalmethodes
+        payment_methods: Betaalmethoden
         payments: Betalingen
         products: Producten
         promotions: Promoties
-        properties: Configureer eigenschappen
+        properties: Producteigenschappen
         prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
         shipping_categories: Verzend categorieën
-        shipping_methods: Verzendmethodes
-        stockables: Inventaris niveaus
+        shipping_methods: Verzendmethoden
+        stockables: Voorraad
         tax_categories: Belasting categorieën
         tax_rates: Belastingtarieven
         taxation_settings: Belasting instellingen

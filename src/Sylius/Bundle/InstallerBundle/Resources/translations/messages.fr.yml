@@ -10,7 +10,7 @@ sylius:
       database:
         0: Connexion à la base de données
         driver:
-          0: Driver
+          0: Pilote
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -24,20 +24,20 @@ sylius:
       locale:
         0: Paramètres régionaux
         currency: Devise
-        locale: Paramètres régionaux
+        locale: Paramètre régional
       mailer:
-        0: "Paramètres de l'envoie"
+        0: "Paramètres pour l'envoi d'e-mail"
         host: Serveur
         password: Mot de passe
         transport:
           0: Transport
           gmail: Gmail
           mail: Mail
-          sendmail: Poste
+          sendmail: Sendmail
           smtp: SMTP
         user: Utilisateur
     setup:
-      email: Email
+      email: E-mail
       load_fixtures: Charger les données de test
       plain_password: Mot de passe
       username: Identifiant

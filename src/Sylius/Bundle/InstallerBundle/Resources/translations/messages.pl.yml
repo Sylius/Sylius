@@ -55,6 +55,8 @@ sylius:
           status: status
       configure:
         header: 'Konfiguracja <small>Instalatora Syliusa</small>'
+      setup:
+        header: 'Administracja <small>Instalator Sylius</small>'
       welcome:
         content: '<p>Witamy w instalatorze Syliusa.</p>'
         header: 'Witamy w instalatorze <small>Syliusa</small>'

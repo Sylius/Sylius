@@ -3,21 +3,40 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Anzahl
+        equal: Ist gleich
+      type: Typ
+    shipment:
+      state: Versandstatus
+      states:
+        checkout: Zur Kasse
+        dispatched: Versandt
+        pending: Ausstehend
+        ready: Bereit
+        shipped: Versandt
+        returned: Zurückgesandt
+      tracking_code: Tracking-Code
     shipping_calculator:
       flat_rate_configuration:
         amount: Anzahl
       flexible_rate_configuration:
         additional_item_cost: Preis jedes weiteren Artikels
-        additional_item_limit: Maximale anzahl weiterer Artikel
+        additional_item_limit: Maximale Anzahl weiterer Artikel
         first_item_cost: Preis des ersten Artikels
       per_item_rate_configuration:
         amount: Anzahl
       weight_rate_configuration:
         amount: Anzahl
+        division: Division
     shipping_category:
       description: Beschreibung
+      name: Name
     shipping_method:
       calculator: Rechner
       category: Kategorie
-      category_requirement: Kategorie benötigt
+      category_requirement: Kategorievoraussetzungen
       configuration: Einstellung
+      enabled: Aktiviert?
+      name: Name

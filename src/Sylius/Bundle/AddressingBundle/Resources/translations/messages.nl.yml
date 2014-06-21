@@ -24,6 +24,10 @@ sylius:
       members: Leden
       name: Naam
       type: Type
+      types:
+        country: Land
+        province: Provincie
+        zone: Zone
     zone_member_country:
       country: Land
     zone_member_province:

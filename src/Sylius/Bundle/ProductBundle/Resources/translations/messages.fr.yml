@@ -7,9 +7,9 @@ sylius:
       name: Nom
       description: Description
       properties: Propriétés
-      available_on: Disponible sur
+      available_on: Disponible le
       meta_keywords: Mots clés
-      meta_description: Méta description
+      meta_description: Meta description
     property:
       name: Nom interne
       presentation: Présentation

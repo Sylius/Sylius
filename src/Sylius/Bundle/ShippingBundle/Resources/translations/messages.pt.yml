@@ -1,3 +1,44 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: sylius.form.rule.item_count_configuration.count
+        equal: |
+          sylius.form.rule.item_count_configuration.equal
+          
+      type: sylius.form.rule.type
+    shipment:
+      state: Estado
+      states:
+        checkout: Finalizar compra
+        dispatched: Expedidos
+        pending: Pendente
+        ready: Pronto
+        shipped: Enviado
+        returned: Devolvido
+      tracking_code: Código de rastreamento
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Quantidade
+      flexible_rate_configuration:
+        additional_item_cost: Custo de item adicional
+        additional_item_limit: Limite de itens adicionais
+        first_item_cost: Custo do primeiro item
+      per_item_rate_configuration:
+        amount: Quantidade
+      weight_rate_configuration:
+        amount: Quantidade
+        division: Divisão
+    shipping_category:
+      description: Descrição
+      name: Nome
+    shipping_method:
+      calculator: Calculadora
+      category: Categoria
+      category_requirement: Requerimentos da categoria
+      configuration: Configuração
+      enabled: sylius.form.shipping_method.enabled
+      name: Nome

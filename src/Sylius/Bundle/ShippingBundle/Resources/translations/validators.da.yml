@@ -1,3 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Navnet på kategorien må ikke være længere end {{ limit }} tegn.'
+      min_length: 'Navnet på kategorien skal være mindst {{ limit }} tegn langt. '
+      not_blank: Angiv forsendelses kategori navn.
+  shipping_method:
+    name:
+      max_length: 'Forsendelsesmetode navn må ikke være længere end {{ limit }} tegn.'
+      not_blank: Angiv forsendelses metode navn.

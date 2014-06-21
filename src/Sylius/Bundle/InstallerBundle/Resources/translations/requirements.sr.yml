@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    "off": false
+    "on": true
+  settings:
+    "off": false
+    "on": true

@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Omschrijving
+      name: Naam
+      parent: Ouder
+      permalink: Permalink
+    taxonomy:
+      name: Naam
+  taxon:
+    create_taxon: Creëer Taxon
+    delete_taxonomy: Verwijder Taxonomie
+    manage_taxonomies: Beheer Taxonomieën
+    no_taxonomies: Geen taxonomieën om weer te geven.
+    no_taxons: Geen taxons om weer te geven.
+    update_taxonomy: Taxonomie bijwerken

@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Coșul de cumpărături a fost actualizat cu succes.
+    item_add_completed: Articolul a fost adăugat în coș.
+    item_remove_completed: Articolul a fost scos din coș.

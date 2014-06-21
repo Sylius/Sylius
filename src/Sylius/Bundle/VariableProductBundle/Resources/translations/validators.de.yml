@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  option:
+    name:
+      not_blank: Bitte Namen angeben.
+      min_length: 'Name muss mindestens 1 Zeichen lang sein.|Name muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Name darf nicht länger als 1 Zeichen sein.|Name darf nicht länger als {{ limit }} Zeichen sein.'
+    presentation:
+      not_blank: Bitte Präsentation angeben.
+      min_length: 'Präsentation muss mindestens 1 Zeichen lang sein.|Präsentation muss mindestens {{ limit }} Zeichen lang sein.'
+      max_length: 'Präsentation darf nicht länger als 1 Zeichen sein.|Präsentation darf nicht länger als {{ limit }} Zeichen sein.'
+    values:
+      min_count: 'Bitte füge mindestens {{ limit }} Wert hinzu.|Bitte füge mindestens {{ limit }} Werte hinzu.'
+  option_value:
+    value:
+      not_blank: Bitte Wert angeben.
+  variant:
+    combination: Variante mit Auswahl dieser Werte existiert schon.

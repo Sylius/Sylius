@@ -1,3 +1,42 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: расширения
+    accelerator:
+      0: Ускоритель
+      help: Установите и включите PHP-ускоритель, например APC (настоятельно рекомендуется).
+    apc: APC
+    ctype: CType
+    gd: GD
+    help: 'Установите и включите %extension%.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: файловая система
+    cache:
+      - кэш
+    exists: существует
+    logs:
+      - логи
+    not_exists: не существует
+    not_writable: не доступно для записи
+    writable: доступно для записи
+  settings:
+    0: Версия и параметры PHP
+    any: любой
+    "off": false
+    "on": true
+    version_recommanded: Рекомендуемая версия PHP

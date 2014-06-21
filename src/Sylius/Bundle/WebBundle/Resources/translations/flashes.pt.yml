@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: O endereço foi configurado com sucesso como seu padrão de endereço de cobrança.
+        shipping:
+          success: O endereço foi configurado com sucesso como seu padrão de endereço de entrega.

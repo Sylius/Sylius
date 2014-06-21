@@ -5,8 +5,29 @@ sylius:
   form:
     address:
       city: Şehir
+      company: Şirket
+      country: Ülke
+      first_name: Ad
+      last_name: Soyad
       postcode: Posta kodu
       street: Adres
       province: İl
+    country:
+      iso_name: Ülke kodu
+      name: Ülke adı
+      select: Ülke seçin
+    province:
+      select: Ülke seçin
+    zone:
+      members: Üyeler
+      name: Bölge adı
+      types:
+        country: Ülke
+        province: İl
+        zone: Bölge
+    zone_member_country:
+      country: Ülke
     zone_member_province:
       province: İl
+    zone_member_zone:
+      zone: Bölge

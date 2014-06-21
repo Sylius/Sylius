@@ -1,3 +1,119 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    firstname: Nama Depan
+    lastname: Nama belakang
+  block:
+    body: Body
+    id: ID
+    title: Judul
+  breadcrumb:
+    group:
+      index: Kelompok
+  cart:
+    summary:
+      unit_price: Harga
+  checkout:
+    finalize:
+      address:
+        firstname: Nama Depan
+        lastname: Nama belakang
+      order:
+        billing_address: Alamat Penagihan
+        shipping_address: Alamat pengiriman
+      product:
+        name: Nama
+  country:
+    id: ID
+    name: Nama
+  exchange_rate:
+    id: ID
+  form:
+    login:
+      password: Kata sandi
+    profile:
+      firstName: Nama Depan
+      lastName: Nama belakang
+  group:
+    id: ID
+    index_header: Kelompok
+    name: Nama
+    roles: Peran
+  inventory_unit:
+    name: Nama
+    sku: SKU
+  locale:
+    code: Kode
+    enabled: Diaktifkan
+  "no": false
+  order:
+    billing_address: Alamat Penagihan
+    id: ID
+    number: Nomor
+    shipping_address: Alamat pengiriman
+    user: Pengguna
+  shipment:
+    id: ID
+    name: Nama
+    sku: SKU
+  order_item:
+    unit_price: Harga Satuan
+  page:
+    body: Body
+    id: ID
+    title: Judul
+  password: Kata sandi
+  payment:
+    id: ID
+  payment_method:
+    id: ID
+    name: Nama
+  product:
+    available_on_demand: Tersedia
+    name: Nama
+    restricted_zone: Zona Terbatas
+    shipping_category: Kategori Pengiriman
+    sku: SKU
+    stock: Stok
+    tabs:
+      images: Gambar
+    tax_category: Kategori Pajak
+    variant_selection_method: Metode Pilih Varian
+  promotion:
+    id: ID
+    name: Nama
+  search: Cari
+  shipping_address: Alamat pengiriman
+  shipping_category:
+    id: ID
+    name: Nama
+  shipping_method:
+    id: ID
+    name: Nama
+    zone: Zona
+  tax_category:
+    id: ID
+    name: Nama
+  tax_rate:
+    name: Nama
+    zone: Zona
+  taxon:
+    name: Nama
+  taxonomy:
+    name: Nama
+  user:
+    billing_address: Alamat Penagihan
+    first_name: Nama Depan
+    id: ID
+    last_name: Nama belakang
+    shipping_address: Alamat pengiriman
+  variant:
+    available_on_demand: Tersedia
+    price: Harga
+    sku: SKU
+    stock: Stok
+  "yes": true
+  zone:
+    name: Nama

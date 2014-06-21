@@ -1,16 +1,714 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: email.order_confirmation.subject
 sylius:
+  account:
+    address:
+      action:
+        billing: Beállít mint alapértelmezett számlázási címet
+        create: Új cím létrehozása
+        delete: Törlés
+        edit: Szerkesztés
+        shipping: Beállít mint alapértelmezett szállítási cím
+      create: Új cím létrehozása
+      default:
+        billing: Alapértelmezett számlázási cím
+        no_billing: Nincs alapértelmezett számlázási cím megadva
+        no_shipping: Nincs alapértelmezett szállítási cím
+        shipping: Alapértelmezett szállítási cím
+      empty: Ön még nem adott meg címet.
+      list: Minden Ön által megadott cím
+      update: Címem szerkesztése
+    home:
+      outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát.
+      since: Ön ügyfél
+      welcome: Üdvözöljük az Ön tárhelyén
+    order:
+      created_at: Elhelyezve
+      details: Az Ön rendelésének részletei
+      download_invoice: Számla letöltése
+      empty: Ön még nem helyezte el a megrendelést.
+      invoice: Számla
+      list: Az Ön összes rendelése
+      placed_at: 'Elhelyezve %at%'
+      shipment:
+        pending: Függőben lévő
+        ready: 'Kész %at% óta'
+        returned: 'Visszaadott %at%'
+        shipped: 'Kiszállítva %at%'
+      total: Összesen
+      tracking_number: Kiszállítási szám
+    title: Az Ön fiókja
   add_to_cart: Kosárba
   address:
     city: Település
+    company: Cég
     country: Ország
     firstname: Keresztnév
     lastname: Vezetéknév
     postcode: Irányítószám
+    province: Tartomány/állam
+    street: Utca
+  alert:
+    error: Hiba
+    info: Információk
+    success: Siker
+    warning: Figyelmeztetés
+  backend:
+    alert:
+      info: Információk
+    dashboard:
+      chart_order_count: Rendelések száma
+      chart_order_total: Rendelés értéke
+      header: Admin felület
+      orders: Múlt heti rendelések
+      revenue: Múlt heti bevételek
+      subheader: Az Ön raktárának áttekintése
+    logout: Kilépés
+    quick_links:
+      add_product: Új termék
+      orders: Utolsó rendelések
+      products: Az Ön termékei
+      users: Felhasználók
+    statistics:
+      0: Ennek a hónapnak a statisztikája
+      orders_this_month: Rendelések összesen
+      registrations_this_month: Regisztrációk összesen
+      sales_this_month: Értékesítés
+  backend_welcome: 'Üdvözöljük <b>%name%</b>!'
+  block:
+    body: Törzs
+    create: Blokk létrehozása
+    create_header: Új tartalom blokk létrehozása
+    id: Azonosító
+    index_header: Tartalom építõelemei
+    no_results: Nincsenek blokkok a megjelenítéséhez.
+    title: Cím
+    update_header: Tartalmi blokk szerkesztése
+    updated_at: Utolsó frissítés
+  breadcrumb:
+    assortment: Választék
+    block:
+      index: Tartalom építõelemei
+    build: Létrehozás
+    configuration: Beállítások
+    country:
+      index: Országok
+    customers: Ügyfelek
+    edit: Szerkesztés
+    exchange_rate:
+      index: Átváltási árfolyamok
+    general_settings: Általános beállítások
+    generate: Generálás
+    group:
+      index: Csoportok
+    inventory:
+      index: Leltár
+    locale:
+      index: Területi beállítások
+    new: Új
+    option:
+      index: Beállítások
+    order:
+      index: Rendelések
+    page:
+      index: Statikus oldalak
+    payment:
+      index: Kifizetések
+    payment_method:
+      index: Fizetési módok
+    product:
+      index: Termékek
+    promotion:
+      index: Promóciók
+    promotion_coupon:
+      index: Kuponok
+    property:
+      index: Tulajdonságok
+    prototype:
+      index: Prototípusok
+    sales: Értékesítés
+    shipment:
+      index: Szállítmányok
+    shipping_category:
+      index: Szállítási kategóriák
+    shipping_method:
+      index: Szállítási módok
+    tax_category:
+      index: Adó kategóriák
+    tax_rate:
+      index: Adókulcsok
+    taxation_settings: Adózás-beállítások
+    taxonomy:
+      index: Taxonómiák
+    update: Szerkesztés
+    user:
+      index: Felhasználók
+    zone:
+      index: Zónák
+  browse_products: Termékek böngészése
+  cancel: Mégse
+  cart:
+    empty: Az Ön kosara üres
+    summary:
+      add_coupon: Rendben
+      checkout: Fizetés
+      clear: Kosár ürítése
+      grand_total: Végösszeg
+      product: Termék
+      quantity: Mennyiség
+      save: Mentés
+      total: Összesen
+      unit_price: Ár
+    summary_header: A kosár végösszege
+    total_items: '1 elem| % count % elemek'
   checkout:
+    addressing:
+      header: Címzési lépés
+    back: Vissza
     finalize:
       address:
         city: Település
+        country: Ország
+        firstname: Keresztnév
+        lastname: Vezetéknév
         postcode: Irányítószám
+        province: Tartomány/állam
+        street: Utca
+      header: Rendelés végösszege
+      order:
+        billing_address: Számlázási cím
+        items_total: Tételek összesen
+        no_items: Ez a rendelés nem tartalmaz elemeket
+        no_promotion: Promóció nem lett alkalmazva
+        no_shipping_charges: A szállítási díj nem lett alkalmazva
+        no_taxes: Az adó nem kett alkalmazva
+        promotion_discount: Promóciós-engedmények
+        promotion_total: A promóciók teljes összege
+        shipping_address: Szállítási cím
+        shipping_charges: Szállítási díjak
+        shipping_total: Szállítási díj összesen
+        tax_total: Adó összesen
+        taxes: Adók
+        total: Összesen
+      order_item:
+        quantity: Mennyiség
+        total: Összesen
+        unit_price: Egységár
+      place_order: Megrendelés
+      product:
+        name: Név
+    forward: Folytatás
+    payment:
+      header: Fizetési mód
+    security:
+      existing_customer: Meglévő ügyfél
+      header: 'Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>'
+      login: Bejelentkezés
+      new_customer: Új ügyfél
+      register: Regisztráció
+    shipping:
+      error: Elnézést, de webáruházunk nem tudja beszerezni a kiválasztott terméket a választott országban.
+      header: Szállítási mód
+  confirmation:
+    message: Szeretné törölni ezt az elemet?
+    title: Megerősítés
+  country:
+    add_province: Tartomány/megye hozzáadása
+    create: Ország létrehozása
+    create_header: Új ország
+    id: Azonosító
+    index_header: Országok
+    iso_name: ISO-név
+    manage: Országok kezelése
+    name: Név
+    no_results: Nincsenek konfigurált országok.
+    show_header: Ország részletek
+    update_header: Ország szerkesztése
+  create: Létrehozás
+  created_at: Készítetve
+  delete: törlés
+  deleted: Törölve
+  edit: szerkesztés
+  email: E-mail
+  exchange_rate:
+    create: Árfolyam létrehozása
+    create_header: Új árfolyam
+    currency: pénznem
+    id: Azonosító
+    index_header: Átváltási árfolyamok
+    no_results: Nincs árfolyam a megjelenítéséhez.
+    rate: arány
+    update_header: Árfolyam szerkesztése
+    updated_at: Utolsó frissítés
+  filter: Szűrő
+  form:
+    cart:
+      coupon: Ha van egy promóciós kuponja, adja meg itt
+    choose_file: Válassza ki a fájlt
+    frontend:
+      password:
+        confirmation: Megerősítés
+        current: Aktuális jelszó
+        new: Új jelszó
+        title: Jelszó módosítása
+      profile:
+        title: A személyes adatok szerkesztése
+    login:
+      email: E-mail
+      password: Jelszó
+    option_value:
+      add_value: Adja hozzá az értéket
+    profile:
+      email: E-mail
+      firstName: Keresztnév
+      lastName: Vezetéknév
+  gallery:
+    next: Következő
+    previous: Előző
+    slideshow: Diavetítés
+  generate: Generálás
+  group:
+    create: Csoport létrehozása
+    create_header: Új felhasználói csoportok hozzáadása
+    id: Azonosító
+    index_header: Csoportok
+    name: Név
+    no_results: Nincsenek megjeleníthető csoportok.
+    roles: Szerepek
+    update_header: Csoport szerkesztése
+  hide_deleted: Törölt elem elrejtése
+  history:
+    0: Előzmények
+    action: Műveletek
+    author: Szerző
+    data: Adatok
+    logged_at: 'Bejelentkezett:'
+    version: Verzió
+  homepage:
+    splash:
+      headline: Üdvözöljük a Syliusban
+      subheadline: Modern e-kereskedelmi rendszer Symfony2-ben
+  inventory_unit:
+    created_at: Készített
+    inventory_state: Leltár állapota
+    name: Név
+    no_results: Nincsenek készletegységek a megjelenítéséhez.
+    shipping_state: Szállítás állapota
+    sku: SKU
+    updated_at: Utolsó frissítés
+  locale:
+    code: Kód
+    create: Terület létrehozása
+    create_header: Új terület hozzáadása
+    enabled: Engedélyezve
+    index_header: Az összes konfigurált terület indexelése
+    no_results: Nincsenek konfigurált területek.
+    update_header: Terület szerkesztése
+    updated_at: Utolsó frissítés
+  login: Bejelentkezés
+  login_header: Adminisztráció
+  logo: Sylius
+  manage: Kezelés
+  meta:
+    backend_title: Sylius vezérlőpult.
+    frontend_description: A Sylius egy modern, PHP / Symfony2 alapú e-bolt megoldás.
+    frontend_keywords: sylius, ecommerce, symfony2, shop, cart, webshop
+    frontend_title: 'Sylius - modern ecommerce, Symfony2 alapokon'
+  na: N/A
+  newest: Legújabb termékek
+  "no": false
+  no_results: sylius.no_results
+  option:
+    create: Opció létrehozása
+    create_header: Új termék opció
+    index_header: Termék-opciók
+    manage: Beállítások kezelése
+    name: név
+    no_results: Nincsenek konfigurált opciók.
+    presentation: megjelenítés
+    update_header: Opció szerkesztés
+    updated_at: Utolsó frissítés
+    values: értékek
+  order:
+    billing_address: Számlázási cím
+    create: Rendelés létrehozása
+    create_header: Új rendelés
+    created_at: Létrehozás időpontja
+    general_info: Általános info
+    id: Azonosító
+    index_header: Függőben lévő rendelések
+    inventory_tracking: Leltár követés
+    items_total: Tételek összesen
+    manage: Megrendelések kezelése
+    no_items: Ez a rendelés nem tartalmaz elemeket
+    no_results: Nincsenek új megrendelések
+    no_shipments: Nincsenek kiszállítások ehhez a megrendeléshez
+    no_shipping_charges: A szállítási díj nem lett alkalmazva
+    no_taxes: Az adó nem kett alkalmazva
+    number: Szám
+    payment: Fizetés
+    payment_state: Fizetés állapota
+    payment_states:
+      balance_due: Esedékesség
+    promotion_total: A promóciók teljes összege
+    recent_header: Legutóbbi rendelések
+    shipment_state: Szállítási állapot
+    shipment_states:
+      pending: Függőben
+    shipments: Szállítások
+    release_inventory: Kibocsáthatható készlet
+    inventory_unit:
+      backorder: Előrendelés
+      fulfill: Teljesítés
+      return: Vissza
+    shipping_address: Szállítási cím
+    shipping_charges: Szállítási díjak
+    shipping_total: Szállítási díj összesen
+    show_header: Rendelés
+    state:
+      cart_locked: Kosár lezárva
+      checkout: Fizetés
+      order_confimed: Visszaigazolt rendelés
+      ordered: Megrendelve
+    tax_total: Adó összesen
+    taxes: Adók
+    total: Összesen
+    update_header: Rendelés szerkesztés
+    user: Felhasználó
+  shipment:
+    ship: Szállítás
+    created_at: Készítetve
+    id: Azonosító
+    index_header: Szállítások
+    inventory_state: Leltár állapota
+    manage: Szállítások kezelése
+    method: Mód
+    modified: Módosítva
+    name: Név
+    no_items: Nincsenek megjeleníthető tételek.
+    no_results: Nincsenek megjeleníthető kiszállítások.
+    order: Rendelés
+    show_header: Szállítás részletei
+    sku: SKU
+    state: Állapot
+    tracking_code: Követési kód
+    update: Szerkesztés
+    update_header: Szállítás szerkesztése
+    updated_at: Utolsó frissítés
+  order_item:
+    product: Cikk
+    quantity: Mennyiség
+    sellable: Termék
+    total: Összesen
+    unit_price: Egységár
+  out_of_stock: Nincs raktáron
+  page:
+    body: Törzs
+    create: Új oldal létrehozása
+    create_header: Új statikus tartalom létrehozása
+    id: Azonosító
+    index_header: Oldalak
+    no_results: Nincsenek megjeleníthető statikus lapok.
+    title: Cím
+    update_header: Utolsó frissítés
+  password: Jelszó
+  payment:
+    amount: Összeg
+    create: Fizetés létrehozása
+    create_header: Új fizetés
+    created_at: Készítetve
+    id: Azonosító
+    index_header: Fizetések
+    manage: Kifizetések kezelése
+    method: Mód
+    no_results: Nincsenek beállított kifizetések.
+    state:
+      0: Állapot
+      checkout: Fizetés
+      completed: Befejezve
+      failed: Sikertelen
+      new: Új
+      pending: Függőben
+      processing: Feldolgozás alatt
+      unknown: Ismeretlen
+      void: Hiányos
+    update_header: Kifizetés szerkesztése
+    updated_at: Utolsó frissítés
+  payment_method:
+    create: Fizetési mód létrehozása
+    create_header: Új fizetési mód
+    enabled: Engedélyezve?
+    gateway: átjáró
+    id: Azonosító
+    index_header: Fizetési módok
+    name: Név
+    no_results: Jelenleg nincs beállítva fizetési mód.
+    update_header: Fizetési mód módosítása
+    updated_at: Utolsó frissítés
+  product:
+    add_property: Tulajdonság hozzádása
+    available_on: A rendelkezésre álló
+    available_on_demand: Igény szerint rendelkezésre áll
+    categorization: Kategorizálás
+    contain_variants: Változatokat tartalmaz
+    create: Termék létrehozása
+    create_header: Új termék
+    description: Leírás
+    generate_variants: Változatok létrehozása
+    index_by_taxon_header: 'Termékek <small>"%taxon%" taxon alatt kategorizálva</small>'
+    index_header: 'Products <small>Az áruház összes termékének indexe</small>'
+    manage: Termékek kezelése
+    name: Név
+    no_description: '<i>Nincs leírás...</i>'
+    no_images: Nincs kép a termékről
+    no_options: Nincs a terméknek opciói
+    no_properties: A terméknek nincsenek tulajdonságai
+    no_results: Nincsenek megjeleníthető termékek.
+    no_shipping_category: Nincs szállítási kategória
+    no_short_description: '<i>Nincs rövid leírás</i>'
+    no_sku: Nincs SKU
+    no_tax_category: Nincs adókategória
+    no_taxons: A termékhez nem tartoznak taxonok
+    options: Beállítások
+    price: Kiskereskedelmi ár
+    properties: Tulajdonságok
+    restricted_zone: Tiltott zóna
+    shipping_category: Szállítási kategória
+    show: Bővebben...
+    show_header: 'Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>'
+    show_in_store: megtekintés az áruházban
+    sku: SKU
+    stock: Aktuális készlet
+    tabs:
+      categorization: Kategorizálás
+      images: Képek
+      options: Beállítások
+      product: Termék
+      properties: Tulajdonságok
+    tax_category: ÁFA-kategória
+    unavailable: Nem elérhető
+    update_header: Termék szerkesztése
+    updated_at: Utolsó frissítés
+    variant_selection_method: Változat kiválasztási módszer
+    view_details: '%product% részleteinek megtekintése.'
+  product_not_available_in_zone: Nem érhető el az Ön országában
+  promotion:
+    actions: Műveletek
+    add_action: Művelet hozzáadása
+    add_rule: Szabály hozzáadása
+    coupon_based: Kupon alapján?
+    create: Promóció létrehozása
+    create_header: Új promóció
+    created_at: Készítetve
+    description: Leírás
+    ends_at: Végződik
+    general_info: Általános info
+    id: Azonosító
+    index_header: Aktuális promóciók
+    manage: Promóciók kezelése
+    name: Név
+    no_results: Nincsenek beállított promóciók.
+    rules: Szabályok
+    show_header: Promóció részletei
+    starts_at: Kezdődik
+    update_header: Promóció szerkesztése
+    updated_at: Utolsó frissítés
+    usage_limit: Felhasználhatóság korlátozása
+    used: Használt
+  promotion_action:
+    configuration: Konfiguráció
+    type: Típus
+  promotion_coupon:
+    create: Kupon hozzáadása
+    create_header: Új kupon létrehozása
+    generate: Kuponok generálása
+    generate_header: Kuponok generálása
+    index: Kuponok listázása
+    index_header: Kuponok
+    no_results: Nincsenek megjeleníthető kuponok
+    total_results:
+      Total: '%total%'
+    update_header: Kupon szerkesztése
+  promotion_rule:
+    configuration: Konfiguráció
+    type: Típus
+  property:
+    add_choice: Lehetőség hozzáadása
+    create: Tulajdonság létrehozása
+    create_header: Új termék tulajdonság
+    index_header: Terméktulajdonságok
+    manage: Tulajdonságok kezelése
+    name: név
+    no_results: Nincsenek beállított tulajdonságok.
+    presentation: megjelenítés
+    type: típus
+    update_header: Tulajdonság szerkesztése
+    updated_at: Utolsó frissítés
+  prototype:
+    build: Prototípus felépítése
+    build_header: Termék felépítése prototípusból
+    create: Prototípus létrehozása
+    create_header: Új prototípus
+    index_header: Termék prototípusok
+    name: név
+    no_results: Nincsenek definiált prototípusok.
+    options: beállítások
+    properties: tulajdonságok
+    update_header: Prototípus szerkesztése
+    updated_at: Utolsó frissítés
+  province:
+    provinces: Tartományok
+  remember_me: Emlékezzen rám?
+  save_changes: Módosítások mentése
+  search: Keresés
+  settings:
+    general_header: Általános beállítások
+    taxation_header: Adózás-beállítások
+  shipment_category:
+    manage: Szállítási kategóriák kezelése
+  shipping_address: Szállítási cím
+  shipping_category:
+    create: Szállítási kategória létrehozása
+    create_header: Új szállítási kategória
+    id: Azonosító
+    index_header: Szállítási kategóriák
+    manage: Szállítási kategóriák kezelése
+    name: Név
+    no_results: Nincsenek konfigurált szállítási kategóriák.
+    update_header: Szállítási kategória szerkesztése
+    updated_at: Utolsó frissítés
+  shipping_method:
+    calculator: Számológép
+    category: Kategória
+    create: Szállítási mód létrehozása
+    create_header: Új szállítási mód
+    enabled: Engedélyezve?
+    id: Azonosító
+    index_header: Szállítási módok
+    manage: Szállítás módok kezelése
+    name: Név
+    no_results: Nincsenek konfigurált szállítási módok.
+    show_header: Szállítási mód részletei
+    update_header: Szállítási mód szerkesztése
+    updated_at: Utolsó frissítés
+    zone: Zóna
+  shop_by: 'Áruház:'
+  show: részletek
+  show_all: Összes megjelenítése
+  show_deleted: Töröltek megjelenítése
+  stockable:
+    index_header: 'Leltár <small>Az aktuális raktárkészlet</small>'
+    name: név
+    no_results: Nincsenek tételek raktárkészleten.
+    on_hand: Raktárkészlet
+    on_hold: viszatartva
+    sku: sku
+    updated_at: Utolsó frissítés
+  tax_category:
+    create: Adókategória létrehozása
+    create_header: Új adókategória
+    description: Leírás
+    id: Azonosító
+    index_header: Adózási kategóriák
+    manage: Adókategóriák kezelése
+    name: Név
+    no_description: Nincs Leírás
+    no_results: Nincsenek konfigurált adókategóriák.
+    update_header: Adókategória kezelése
+    updated_at: Utolsó frissítés
+  tax_rate:
+    amount: Összeg
+    calculator: Számológép
+    category: Kategória
+    create: Adókulcs létrehozása
+    create_header: Új adókulcs
+    included_in_price: Az ár tartalmazza?
+    index_header: Adókulcsok
+    manage: Adókulcsok kezelése
+    name: Név
+    no_results: Nincsenek konfigurált adókulcsok.
+    show_header: Adó mérték részletei
+    update_header: Adókulcs frissítése
+    updated_at: Utolsó frissítés
+    zone: Zóna
+  taxon:
+    create: Taxon létrehozása
+    create_header: Új taxon
+    image: Kép választása
+    name: Név
+    no_image: Ehhez a taxonhoz nem tartozik kép
+    no_results: Nincsenek megjeleníthető taxonok.
+    product_index_header: '"%name%" szerint kategorizált termékek'
+    update_header: Taxon szerkesztése
+  taxonomy:
+    create: Taxonómia létrehozása
+    create_header: Új taxonómia
+    image: Kép választása
+    index_header: 'Kategoriák <small>Itt láthatók a definiált taxonómiák</small>'
+    manage: Taxonómiák kezelése
+    name: Név
+    no_image: Ehhez a taxonómiához nem tartozik kép
+    no_results: Nincsenek definiált taxonómiák.
+    show_header: 'Taxonómia <small><strong>%name%</strong></small>'
+    update_header: Taxonómia szerkesztése
+  total_quantity: Össz mennyiség
+  unknown: Ismeretlen
+  user:
+    billing_address: Számlázási cím
+    create: felhasználó létrehozása
+    create_header: Új felhasználó
+    email: E-mail
+    enabled: Visszaigazolva?
+    filter:
+      all: Összes felhasználó
+      unconfirmed: Visszaigazolatlan fiókok
+    first_name: Keresztnév
+    general_info: '"%username%" általános infó'
+    id: Azonosító
+    index_header: 'Felhasználók <small>Az áruházban regisztált felhasználók</small>'
+    last_login: Utolsó bejelentkezés
+    last_name: Vezetéknév
+    impersonate: Bejelentkezés ezzel a felhasználóval
+    manage: felhasználók kezelése
+    no_results: Nincsenek megjeleníthető felhasználók.
+    order:
+      no_results: Ennek a felhasználónak nincsenek megrendelései.
+    orders: Felhasználó megrendelései
+    recent_header: Legutóbbi felhasználók
+    registration_date: Regisztráció dátuma
+    shipping_address: Szállítási cím
+    show_header: Felhasználói adatok
+    update_header: Felhasználó szerkesztése
+    username: Felhasználónév
+  variant:
+    add_image: Kép hozzáadása
+    availability: Elérhető
+    available_on_demand: Igény szerint rendelkezésre áll
+    create: Változat létrehozása
+    create_header: Új termék változat
+    delete_image: Kép törlése
+    last_update: Utolsó frissítés
+    no_results: Nincsenek megjeleníthető változatok.
+    options: Beállítások
+    price: Ár
+    sku: SKU
+    stock: Aktuális készlet
+    update_header: Változat szerkesztése
+  "yes": true
+  zone:
+    add_member: Tag hozzáadása
+    create: Zóna létrehozása
+    create_header: Új zóna
+    index_header: Zónák
+    manage: Zónák kezelése
+    name: Név
+    no_results: Nincsenek konfigulát zónák.
+    show_header: Zone részletek
+    type: Típus
+    update_header: Zóna szerkesztés
+  zone_member:
+    members: Tagok

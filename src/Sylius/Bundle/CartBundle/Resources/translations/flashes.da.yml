@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Indkøbskurven er blevet opdateret.
+    cart_clear_completed: Indkøbskurven er blevet tømt.
+    item_add_completed: Varen er blevet tilføjet til indkøbskurven.
+    item_remove_completed: Varen er blevet fjernet fra indkøbskurven.
+    item_add_error: Der opstod en fejl under tilføjelse af varen til indkøbskurven.
+    item_remove_error: Der opstod en fejl i forsøget på at fjerne en vare fra indkøbskurven.

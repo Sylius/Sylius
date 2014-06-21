@@ -23,6 +23,8 @@ sylius:
       list: Al uw adressen
       update: Bewerk mijn adres
     home:
+      email: ""
+      id: ""
       outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren.
       since: U bent klant sinds
       welcome: Welkom in uw account
@@ -33,12 +35,16 @@ sylius:
       empty: U heeft nog geen bestelling geplaatst.
       invoice: Factuur
       list: Uw bestellingen
+      number: ""
+      payment_mode: ""
       placed_at: 'Geplaatst op %at%'
       shipment:
         pending: In behandeling
         ready: 'Gereed sinds %at%'
         returned: 'Geretourneerd op %at%'
         shipped: 'Verzonden op %at%'
+      shipment_mode: ""
+      state: ""
       total: Totaal
       tracking_number: Tracking code
     title: Mijn account
@@ -320,6 +326,7 @@ sylius:
     frontend_title: Sylius, een moderne ecommerce oplossing voor Symfony2
   na: N/B
   newest: Nieuwste producten
+  "no": false
   no_results: Geen resultaten
   option:
     create: Nieuwe optie
@@ -636,16 +643,16 @@ sylius:
     zone: Zone
   taxon:
     create: Nieuwe taxon
-    create_header: Nieuwe taxon toevoegen
+    create_header: Taxon toevoegen
     image: Kies afbeelding
     name: Naam
     no_image: Er is geen afbeelding voor deze taxon
-    no_results: Er zijn geen taxons om weer te geven.
-    product_index_header: 'Producten gecategoriseerd als "%name%"'
+    no_results: Er zijn geen taxons gevonden.
+    product_index_header: 'Producten in "%name%"'
     update_header: Taxon bewerken
   taxonomy:
     create: Nieuwe taxonomie
-    create_header: Nieuwe taxonomie toevoegen
+    create_header: Taxonomie toevoegen
     image: Kies afbeelding
     index_header: 'Categorisering <small>Hier ziet u de gedefinieerde taxonomieën</small>'
     manage: Taxonomieën beheren
@@ -697,7 +704,7 @@ sylius:
     sku: SKU
     stock: Huidige voorraad
     update_header: Variant bewerken
-  "yes": Ja
+  "yes": true
   zone:
     add_member: Lid toevoegen
     create: Nieuwe zone

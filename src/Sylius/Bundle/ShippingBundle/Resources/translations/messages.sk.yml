@@ -3,7 +3,20 @@
 
 sylius:
   form:
+    shipment:
+      state: Štát
+      states:
+        ready: Pripravená
+      tracking_code: Sledovací kód
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Suma
+      per_item_rate_configuration:
+        amount: Suma
+      weight_rate_configuration:
+        amount: Suma
     shipping_category:
+      description: Popis
       name: Názov
     shipping_method:
       name: Názov

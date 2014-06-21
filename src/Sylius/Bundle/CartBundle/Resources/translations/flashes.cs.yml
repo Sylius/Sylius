@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Košík byl úspěšně aktualizován.
+    cart_clear_completed: Košík byl úspěšně vyprázdněn.
+    item_add_completed: Položka byla přidána do košíku.
+    item_remove_completed: Položka byla odebrána z košíku.
+    item_add_error: Nastala chyba při přidávání položky do košíku.
+    item_remove_error: Nastala chyba při odebírání položky z košíku.

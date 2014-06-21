@@ -1,3 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        configuration: Nastavení
+        countries: Země
+        customer: Zákazníci
+        general_settings: Obecná nastavení
+        homepage: Váš obchod
+        new_order: Přidat novou objednávku
+        options: Spravovat nastavení produktů
+        orders: Aktuální objednávky
+        payment_methods: Způsoby plateb
+        payments: Platby
+        products: Produkty
+        sales: Objednávky
+        shipments: Zásilky
+        shipping_methods: Způsoby dopravy
+        tax_rates: Daňové sazby
+        taxonomies: Kategorizace
+        users: Uživatelé
+        zones: Oblasti
+      sidebar:
+        configuration: Nastavení
+        content: Obsah
+        countries: Země
+        customer: Zákazníci
+        dashboard: Nástěnka
+        general_settings: Obecná nastavení
+        groups: Skupiny
+        homepage: Zpět na frontend
+        new_order: Přidat novou objednávku
+        options: Spravovat nastavení
+        orders: Aktuální objednávky
+        pages: Stránky
+        payment_methods: Způsoby plateb
+        payments: Platby
+        products: Produkty
+        sales: Objednávky
+        shipments: Zásilky
+        shipping_methods: Způsoby dopravy
+        tax_rates: Daňové sazby
+        taxonomies: Kategorizace
+        users: Uživatelé
+        zones: Oblasti
+  frontend:
+    menu:
+      main:
+        administration: Administrace

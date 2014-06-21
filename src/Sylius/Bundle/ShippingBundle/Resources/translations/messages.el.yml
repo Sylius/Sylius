@@ -1,3 +1,29 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    shipment:
+      state: Νομός
+      states:
+        checkout: Ολοκλήρωση αγορών
+        dispatched: Αποστέλλονται
+        pending: Σε εκκρεμότητα
+        ready: Έτοιμα
+        shipped: Αποστάλθηκαν
+        returned: Επεστράφησαν
+      tracking_code: Κωδικός παρακολούθησης
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Ποσό
+      per_item_rate_configuration:
+        amount: Ποσό
+      weight_rate_configuration:
+        amount: Ποσό
+    shipping_category:
+      description: Περιγραφή
+      name: Ονομασία
+    shipping_method:
+      category: Κατηγορία
+      configuration: Παραμετροποίηση
+      name: Ονομασία

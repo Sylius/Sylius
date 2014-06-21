@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion:
+    description:
+      max_length: 'La descripción de la promoción no debe tener más de 1 carácter.|La descripción de la promoción no debe tener más de {{ limit }} caracteres.'
+      min_length: 'La descripción de la promoción debe tener al menos 1 carácter.|La descripción de la promoción debe tener al menos {{ limit }} caracteres.'
+      not_blank: Por favor introduce la descripción de la promoción.
+    name:
+      max_length: 'El nombre de la promoción no debe tener más de 1 carácter.|El nombre de la promoción no debe tener más de {{ limit }} caracteres.'
+      min_length: 'El nombre de la promoción debe tener al menos 1 carácter.|El nombre de la promoción debe tener al menos {{ limit }} caracteres.'
+      not_blank: Por favor introduzca el nombre de la promoción.
+  promotion_coupon:
+    code:
+      max_length: 'El código del cupón no debe tener más de 1 carácter.|El código del cupón no debe tener más de {{ limit }} caracteres.'
+      min_length: 'El código del cupón debe tener al menos 1 carácter.|El código del cupón debe tener al menos {{ limit }} caracteres.'
+      not_blank: Por favor introduzca el código del cupón.
+    usage_limit:
+      min: 'El límite de uso del cupón debe ser al menos {{ limit }}.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'La cantidad de cupones a generar debe ser al menos {{ limit }}.'
+      not_blank: Por favor introduzca la cantidad de cupones a generar.
+    usage_limit:
+      min: 'El límite de uso de los cupones generados debe ser de al menos {{ limit }}.'

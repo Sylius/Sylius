@@ -139,6 +139,7 @@ sylius:
   logo: Sylius
   manage: Quản lý
   newest: Sản phẩm mới nhất
+  "no": false
   option:
     create: Tạo tùy chọn
     create_header: Tạo tuỳ chọn sản phẩm mới
@@ -196,3 +197,4 @@ sylius:
     email: Email
   variant:
     last_update: Cập nhật lần cuối
+  "yes": true

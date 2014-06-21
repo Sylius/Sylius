@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      percentage_discount_configuration:
+        percentage: Procent
+      shipping_discount_configuration:
+        percentage: Procent
+      type: Tip
+    rule:
+      item_total_configuration:
+        equal: Egal
+      user_loyality_configuration:
+        unit:
+          days: Zile
+          weeks: Săptămâni
+          months: Luni
+          years: Ani
+      type: Tip
+    coupon:
+      code: Cod
+    promotion:
+      actions: Acțiuni
+      description: Descriere
+      ends_at: Se termină la
+      starts_at: Începe la

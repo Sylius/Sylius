@@ -1,3 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  tax_category:
+    name:
+      not_blank: Kérjük, adja meg az adókategória nevét.
+  tax_rate:
+    category:
+      not_blank: Kérjük, válasszon adókategóriát.
+    name:
+      not_blank: Kérjük, adja meg az adó mértékének nevét.
+    amount:
+      not_blank: Kérjük, adja meg az adó mértékét.
+    calculator:
+      not_blank: Válasszon adó kalkulátort.

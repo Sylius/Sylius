@@ -1,3 +1,32 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    name:
+      not_blank: Inserisci il nome del prodotto.
+      min_length: 'Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.'
+      max_length: 'Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.'
+    description:
+      not_blank: Inserisci la descrizione del prodotto.
+      min_length: 'La descrizione del prodotto deve essere lunga almeno 1 carattere. |La descrizione del prodotto deve essere lungo almeno {{ limit }} caratteri.'
+  option:
+    name:
+      not_blank: "Inserisci il nome dell'opzione."
+      min_length: "Il nome dell'opzione deve essere lungo almeno 1 carattere. |Il nome dell'opzione deve essere lungo almeno {{ limit }} caratteri."
+      max_length: "Il nome dell'opzione non deve essere più lungo di 1 carattere. |Il nome dell'opzione non deve essere più lungo di {{ limit }} caratteri."
+    values:
+      min_count: "Aggiungere almeno {{ limit }} valore d'opzione. |Aggiungere almeno {{ limit }} valori di opzione."
+  option_value:
+    value:
+      not_blank: "Inserisci il valore dell'opzione."
+  property:
+    name:
+      not_blank: Inserisci il nome della proprietà.
+      min_length: 'Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.'
+      max_length: 'Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.'
+  product_property:
+    property:
+      not_blank: Si prega di selezionare una proprietà.
+    value:
+      not_blank: Inserisci il valore di proprietà del prodotto.

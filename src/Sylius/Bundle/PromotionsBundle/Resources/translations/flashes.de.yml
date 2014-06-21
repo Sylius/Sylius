@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Die Gutscheine wurden erfolgreich erstellt.
+    eligible: Ihr Gutschein wurde zum Warenkorb hinzugefügt.
+    invalid: Ihr Gutschein ist ungültig.
+    not_eligible: Ihr Warenkorb ist nicht berechtigt für diesen Promotion Gutschein.
