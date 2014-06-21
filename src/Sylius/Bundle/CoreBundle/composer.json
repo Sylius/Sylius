@@ -20,9 +20,8 @@
         }
     ],
     "require": {
-        "php":                          ">=5.3.3",
+        "php":                            ">=5.3.3",
 
-        "doctrine/doctrine-bundle":       "~1.3@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "hwi/oauth-bundle":               "0.3.*",
         "jms/serializer-bundle":          "0.12.*",
@@ -56,7 +55,7 @@
         "symfony/framework-bundle":       "~2.3"
     },
     "require-dev": {
-        "fzaninotto/faker": "1.2.*",
+        "fzaninotto/faker": "~1.2",
         "phpspec/phpspec":  "~2.0",
         "symfony/form":     "~2.3"
     },
@@ -77,5 +76,6 @@
         "branch-alias": {
             "dev-master": "0.10-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

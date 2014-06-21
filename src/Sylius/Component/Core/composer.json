@@ -33,7 +33,10 @@
         "sylius/inventory":  "0.10.*@dev",
         "sylius/taxonomy":   "0.10.*@dev",
         "sylius/payment":    "0.10.*@dev",
-        "sylius/resource":   "0.10.*@dev"
+        "sylius/pricing":    "0.10.*@dev",
+        "sylius/resource":   "0.10.*@dev",
+
+        "knplabs/gaufrette": "*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":              "~2.0",
@@ -52,5 +55,6 @@
         "branch-alias": {
             "dev-master": "0.10-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

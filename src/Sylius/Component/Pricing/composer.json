@@ -26,7 +26,7 @@
         "sylius/registry": "0.10.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*"
+        "phpspec/phpspec": "~2.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -35,7 +35,7 @@
         "psr-4": { "Sylius\\Component\\Pricing\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "spec\\Sylius\\Component\\Pricing\\": "spec/" }
+        "psr-4": { "Sylius\\Component\\Pricing\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {
