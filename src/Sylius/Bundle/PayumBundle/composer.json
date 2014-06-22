@@ -31,7 +31,7 @@
         "sylius/resource-bundle": "0.10.*@dev",
         "payum/payum-bundle":     "~0.8.5",
         "payum/core":             "~0.8.7",
-        "winzou/state-machine":   "~0.1.2"
+        "winzou/state-machine":   "~0.1"
     },
     "config": {
         "bin-dir": "bin"
