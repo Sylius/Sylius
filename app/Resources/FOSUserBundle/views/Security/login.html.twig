@@ -36,10 +36,16 @@
         <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
                 <label for="remember_me">
-                    {{ 'security.login.remember_me'|trans }}? &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    {{ 'security.login.remember_me'|trans }} &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                 </label>
             </div>
         </div>
+    </div>
+    <div class="pull-right">
+    	<p>
+    		<a href="{{ path('fos_user_resetting_request') }}" class="btn btn-info btn-sm">{{ 'security.login.forgot_password'|trans }}</a>
+    		<a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-sm">{{ 'security.login.no_account'|trans }}</a>
+    	</p>
     </div>
 </fieldset>
 <div class="form-actions clearfix">

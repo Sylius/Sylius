@@ -1,0 +1,9 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div class="alert alert-success">
+        {{ 'resetting.check_email'|trans({'%email%': email}) }}
+    </div>
+{% endblock %}
