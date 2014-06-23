@@ -36,6 +36,7 @@ interface ProcessBuilderInterface
      *
      * @param string               $name
      * @param string|StepInterface $step Step alias or instance
+     * @return $this
      */
     public function add($name, $step);
 
@@ -59,6 +60,7 @@ interface ProcessBuilderInterface
      * Set display route.
      *
      * @param string $route
+     * @return $this
      */
     public function setDisplayRoute($route);
 
@@ -66,6 +68,7 @@ interface ProcessBuilderInterface
      * Set additional forward route params.
      *
      * @param array $params
+     * @return $this
      */
     public function setDisplayRouteParams(array $params);
 
@@ -73,6 +76,7 @@ interface ProcessBuilderInterface
      * Set forward route.
      *
      * @param string $route
+     * @return $this
      */
     public function setForwardRoute($route);
 
@@ -80,6 +84,7 @@ interface ProcessBuilderInterface
      * Set additional forward route params.
      *
      * @param array $params
+     * @return $this
      */
     public function setForwardRouteParams(array $params);
 
@@ -87,20 +92,23 @@ interface ProcessBuilderInterface
      * Set redirection route after completion.
      *
      * @param string $redirect
+     * @return $this
      */
     public function setRedirect($redirect);
 
     /**
      * Set redirection route params.
      *
-     * @param string $redirect
+     * @param array $redirectParams
+     * @return $this
      */
-    public function setRedirectParams($redirectParams);
+    public function setRedirectParams(array $redirectParams);
 
     /**
      * Validation of process, if returns false, process is suspended.
      *
      * @param \Closure $validator
+     * @return $this
      */
     public function validate($validator);
 
