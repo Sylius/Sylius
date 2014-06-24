@@ -17,6 +17,7 @@ doctrine:
     dbal:
         dbname: %sylius.database.name%_test
         path:   %sylius.database.path%
+        driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
 
 sylius_money:
     currency: EUR
