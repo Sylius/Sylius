@@ -38,7 +38,7 @@ Feature: Exchange rates
     Scenario: Accessing the exchange rate creation form
         Given I am on the dashboard page
          When I follow "Exchange rates"
-          And I follow "Create exchange rate"
+          And I follow "Create Exchange Rate"
          Then I should be on the exchange rate creation page
 
     Scenario: Submitting form without rate filled
