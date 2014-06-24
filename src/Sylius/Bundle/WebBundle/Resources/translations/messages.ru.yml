@@ -319,11 +319,7 @@ sylius:
     frontend_title: Sylius, современное решение электронной коммерции для Symfony2
   na: Н/Д
   newest: Новейшие продукты
-<<<<<<< HEAD
   no: нет
-=======
-  "no": false
->>>>>>> 3bb3c590b82730f9eac95d33f69bb7abcca42949
   no_results: Нет результатов
   product_option:
     create: Добавить опцию
@@ -695,11 +691,7 @@ sylius:
     sku: Артикул
     stock: Наличие
     update_header: Редактирование вариантов
-<<<<<<< HEAD
   yes: да
-=======
-  "yes": true
->>>>>>> 3bb3c590b82730f9eac95d33f69bb7abcca42949
   zone:
     add_member: Добавить
     create: Создать новую зону

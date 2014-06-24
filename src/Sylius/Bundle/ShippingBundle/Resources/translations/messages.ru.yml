@@ -4,20 +4,12 @@
 sylius:
   form:
     shipment:
-<<<<<<< HEAD
-      state: Статус
-      states:
-        checkout: Оплачено
-        pending: Ожидает
-        ready: Готово к отправке
-=======
       state: Cтатус
       states:
         checkout: Оформление заказа
         dispatched: Отправлен
         pending: В обработке
         ready: Готов
->>>>>>> 3bb3c590b82730f9eac95d33f69bb7abcca42949
         shipped: Доставлено
         returned: Возвращено
         returned:   Возвращено
@@ -32,11 +24,7 @@ sylius:
       flexible_rate_configuration:
         label: Гибкая стоимость доставки
         additional_item_cost: Стоимость дополнительного товара
-<<<<<<< HEAD
-        additional_item_limit: 'Ограничение на количество предметов'
-=======
         additional_item_limit: Лимитировать дополнительные позиции
->>>>>>> 3bb3c590b82730f9eac95d33f69bb7abcca42949
         first_item_cost: Стоимость первого товара
 
       per_item_rate_configuration:
@@ -44,14 +32,10 @@ sylius:
         amount: Сумма
 
       weight_rate_configuration:
-<<<<<<< HEAD
         label: По весу
-        amount: Сумма
+        amount: Количество
         division: Деление
 
-=======
-        amount: Количество
->>>>>>> 3bb3c590b82730f9eac95d33f69bb7abcca42949
     shipping_category:
       description: Описание
       name: Название
