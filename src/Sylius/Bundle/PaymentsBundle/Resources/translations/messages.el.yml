@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Όνομα κατόχου της κάρτας
+      number: Αριθμός κάρτας
+      type: Τύπος κάρτας
+    payment:
+      amount: Ποσό πληρωμής
+      method: Τρόπος πληρωμής
+      state:
+        0: Κατάσταση πληρωμής
+        checkout: Ολοκλήρωση αγορών
+        pending: Σε εκκρεμότητα
+        processing: Σε εξέλιξη
+        unknown: Άγνωστο
+    payment_method:
+      description: Περιγραφή
+      gateway: Πύλη
+      name: Ονομασία

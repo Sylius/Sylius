@@ -3,6 +3,6 @@
 
 sylius:
   resource:
-    create: '%resource% a correctement été créé.'
-    update: '%resource% a correctement été mis à jour.'
-    delete: '%resource% a correctement été supprimé.'
+    create: '%resource% a bien été créé.'
+    update: '%resource% a bien été mis à jour.'
+    delete: '%resource% a bien été supprimé.'

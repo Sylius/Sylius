@@ -1,3 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      not_blank: Introduceți numele grupului.

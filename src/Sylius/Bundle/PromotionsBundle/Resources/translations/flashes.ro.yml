@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    invalid: Cuponul dumneavoastră de reducere nu este valid.

@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'O grupo não pode ser maior que {{ limit }} caracteres.'
+      min: 'O grupo deve ter pelo menos {{ limit }} caracteres.'
+      not_blank: Por favor, digite o nome do grupo.
+  locale:
+    code:
+      not_blank: Por favor, digite o código do locale.
+      unique: Este locale já existe.
+  user:
+    first_name:
+      max: 'O campo nome não pode ser maior que {{ limit }} caracteres.'
+      min: 'O nome deve ter pelo menos {{ limit }} caracteres.'
+      not_blank: Por favor, digite seu nome.
+    last_name:
+      max: 'O sobrenome deve ter pelo menos {{ limit }} caracteres.'
+      min: 'O sobrenome deve ter pelo menos {{ limit }} caracteres.'
+      not_blank: Por favor, digite seu sobrenome.
+  variant:
+    onHand:
+      min: 'O campo em mãos deve ser maior que {{limit}}'
+      not_blank: Por favor digite o campo em mãos.
+    price:
+      min: Preço não pode ser negativo.
+      not_blank: Por favor, digite o preço.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Por favor, digite o método de expedição desta zona.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Por favor, digite a taxa de imposto desta zona.

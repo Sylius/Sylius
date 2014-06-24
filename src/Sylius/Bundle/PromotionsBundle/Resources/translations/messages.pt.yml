@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Quantidade
+      percentage_discount_configuration:
+        percentage: 'Porcentagem %'
+      shipping_discount_configuration:
+        percentage: 'Porcentagem %'
+      type: Tipo
+    rule:
+      taxonomy_configuration:
+        taxons: Taxas
+        exclude: Excluir
+      item_count_configuration:
+        count: Contagem
+        equal: Igualdade
+      item_total_configuration:
+        amount: Quantidade
+        equal: Igualdade
+      nth_order_configuration:
+        nth: N-ésimo
+      user_loyality_configuration:
+        time: Tempo
+        unit:
+          days: Dias
+          weeks: Semanas
+          months: Meses
+          years: Anos
+          0: Unidade
+        after: Usuário criado após este período
+      shipping_country_configuration:
+        country: País
+      type: Tipo
+    coupon:
+      code: Código
+      usage_limit: Limite de utilização
+    coupon_generate_instruction:
+      amount: Quantidade
+      usage_limit: Limite de utilização
+    promotion:
+      actions: Ações
+      coupon_based: Cupom com base
+      description: Descrição
+      ends_at: Termina em
+      name: Nome
+      rules: Regras
+      starts_at: Começa em
+      usage_limit: Limite de utilização

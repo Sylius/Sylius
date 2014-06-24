@@ -49,7 +49,7 @@ class OrderPaymentCallbackSpec extends ObjectBehavior
         $payments->getIterator()->willReturn(new \EmptyIterator());
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
-        $sm->apply(OrderTransitions::SYLIUS_CONFIRM)->shouldBeCalled();
+        $sm->apply(OrderTransitions::SYLIUS_CONFIRM, true)->shouldBeCalled();
 
         $this->updateOrderOnPayment($payment);
     }

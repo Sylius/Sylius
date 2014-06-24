@@ -131,6 +131,20 @@ interface ProcessInterface
     public function setRedirect($redirect);
 
     /**
+     * Get redirection route params after complete.
+     *
+     * @return string
+     */
+    public function getRedirectParams();
+
+    /**
+     * Set redirection route params after complete.
+     *
+     * @param string $redirect
+     */
+    public function setRedirectParams(array $params);
+
+    /**
      * Get display route.
      *
      * @return string

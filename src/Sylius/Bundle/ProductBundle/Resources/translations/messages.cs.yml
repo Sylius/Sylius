@@ -1,3 +1,15 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  label:
+    product:
+      name: Název
+      description: Popis
+      properties: Vlastnosti
+      available_on: Dostupný od
+      meta_keywords: Meta klíčová slova
+      meta_description: Meta popis
+    prototype:
+      name: Jméno
+      properties: Vlastnosti

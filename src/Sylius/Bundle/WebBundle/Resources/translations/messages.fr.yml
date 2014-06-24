@@ -65,7 +65,7 @@ sylius:
       chart_order_total: Valeur de la commande
       header: Tableau de bord
       orders: Commandes la semaine dernière
-      revenue: Recettes de la semaine dernière
+      revenue: Ventes de la semaine dernière
       subheader: "Vue d'ensemble de votre magasin"
     logout: Déconnexion
     quick_links:
@@ -125,7 +125,7 @@ sylius:
     promotion:
       index: Promotions
     promotion_coupon:
-      index: Bons de réduction
+      index: Coupons de réduction
     property:
       index: Propriétés
     prototype:
@@ -211,7 +211,7 @@ sylius:
       new_customer: Nouveau client
       register: Créer un compte
     shipping:
-      error: "Nous sommes désolés, mais notre magasin n'est pas en mesure d'expédier le produit vers le pays que vous avez choisi."
+      error: "Nous sommes désolés, mais nous ne sommes pas en mesure d'expédier le produit vers le pays que vous avez choisi."
       header: Moyen de livraison
   confirmation:
     message: Souhaitez-vous supprimer cet élément ?
@@ -235,7 +235,7 @@ sylius:
   edit: Modifier
   email: E-mail
   exchange_rate:
-    create: Créer des taux de change
+    create: Créer un taux de change
     create_header: Nouveau taux de change
     currency: Devise
     id: ID
@@ -258,12 +258,12 @@ sylius:
       profile:
         title: Modifier vos informations personnelles
     login:
-      email: Email
+      email: E-mail
       password: Mot de passe
     option_value:
       add_value: Ajouter une valeur
     profile:
-      email: Email
+      email: E-mail
       firstName: Prénom
       lastName: Nom
   gallery:
@@ -286,7 +286,7 @@ sylius:
     action: Action
     author: Auteur
     data: Données
-    logged_at: Connecté le
+    logged_at: Enregistré le
     version: Version
   homepage:
     splash:
@@ -320,6 +320,7 @@ sylius:
     frontend_title: Sylius, boutique e-commerce pour Symfony2
   na: N/A
   newest: Nouveautés
+  "no": false
   no_results: Aucun résultat
   option:
     create: Créer une option
@@ -359,7 +360,7 @@ sylius:
     shipment_states:
       pending: En attente
     shipments: Expéditions
-    release_inventory: "Sorties d'inventaire"
+    release_inventory: Relâcher les unités de stock
     inventory_unit:
       backorder: Rupture de stock
       fulfill: Remplir
@@ -527,7 +528,7 @@ sylius:
     generate: Générer des coupons
     generate_header: Génération de coupons
     index: Liste des coupons
-    index_header: Bons de réduction
+    index_header: Coupons de réduction
     no_results: Aucun coupon
     total_results:
       Total: '%total%'
@@ -698,7 +699,7 @@ sylius:
     sku: Référence
     stock: Stock disponible
     update_header: "Edition d'une déclinaison"
-  "yes": oui
+  "yes": true
   zone:
     add_member: Ajouter un membre
     create: Créer une zone

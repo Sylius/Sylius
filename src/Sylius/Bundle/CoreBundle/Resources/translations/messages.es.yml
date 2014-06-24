@@ -44,7 +44,7 @@ sylius:
     product:
       restricted_zone: Zona restringida
       shipping_category: Categoría de envío
-      short_description: Breve descripción
+      short_description: Descripción breve
       tax_category: Categoría del impuesto
       variant_selection_method: Método de selección variante
     product_filter:
@@ -84,10 +84,10 @@ sylius:
     variant:
       available_on_demand: Disponible bajo demanda
       depth: Profundidad
-      height: Altura
+      height: Alto
       images: Imágenes
       on_hand: Existencias actuales
       price: Precio
       sku: SKU
       weight: Peso
-      width: Anchura
+      width: Ancho

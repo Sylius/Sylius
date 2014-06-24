@@ -17,6 +17,10 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariant" table="sylius_product_variant">
+        <indexes>
+            <index columns="sku"/>
+        </indexes>
+        
         <field name="sku" column="sku" type="string" nullable="true" />
 
         <field name="onHold" column="on_hold" type="integer" />

@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: O campo cidade não deve ser maior que 255 caracteres.
+      min_length: A cidade deve ter no mínimo 2 caracteres| A cidade deve ter no mínimo 2 caracteres.
+      not_blank: Por favor, digite a cidade.
+    country:
+      not_blank: Por favor, selecione um país.
+    first_name:
+      max_length: O nome não deve ter mais de 255 caracteres | O nome não deve ter mais que 255 caracteres.
+      min_length: O nome deve ter no mínimo 2 caracteres| O nome deve ter no mínimo 2 caracteres.
+      not_blank: Por favor, digite o nome.
+    last_name:
+      max_length: O nome não pode ter mais que 255 caracteres|O nome não pode ter mais que 255 caracteres.
+      min_length: O sobrenome não pode ter mais que 255 caracteres|O sobrenome não pode ter mais que 255 caracteres.
+      not_blank: Por favor, digite seu sobrenome.
+    postcode:
+      max_length: O CEP não pode ter mais que 255 caracteres|O CEP não pode ter mais que 255 caracteres.
+      min_length: O CEP deve ter pelo menos 2 caracteres|O CEP deve ter pelo menos 2 caracteres.
+      not_blank: Por favor, digite o CEP.
+    province:
+      valid: Por favor, selecione o estado.
+    street:
+      max_length: O campo rua não pode ter mais que 255 caracteres|O campo rua não pode ter mais que 255 caracteres.
+      min_length: O campo rua deve ter pelo menos 2 caracteres|O campo rua deve ter pelo menos 2 caracteres.
+      not_blank: Por favor, digite a rua.
+    not_shippable: Este endereço não é um endereço válido para envio.
+  country:
+    iso_name:
+      not_blank: Por favor, digite o código ISO do país.
+    name:
+      max_length: O nome do país deve ter no máximo 255 caracteres|O nome do país deve ter no máximo 255 caracteres.
+      not_blank: Por favor, digite o nome do país.
+  province:
+    name:
+      max_length: O campo estado deve ter no máximo 255 caracteres|O campo estado deve ter no máximo 255 caracteres.
+      min_length: O campo estado deve ter pelo menos 2 caracteres|O campo estado deve ter pelo menos 2 caracteres.
+      not_blank: Por favor, digite o nome do estado.
+  zone:
+    members:
+      min_count: 'Por favor, selecione pelo menos uma zona de {{limit}}.'
+    name:
+      max_length: O campo zona não pode ter mais que 255 caracteres|O campo zona não pode ter mais que 255 caracteres.
+      not_blank: Por favor, digite o nome da zona.

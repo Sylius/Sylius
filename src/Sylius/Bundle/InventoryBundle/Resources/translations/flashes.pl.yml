@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backordered: Asortyment zamówiony u dostawcy.
+    sold: Asortyment realizowany.
+    returned: Asortyment zwrócony.

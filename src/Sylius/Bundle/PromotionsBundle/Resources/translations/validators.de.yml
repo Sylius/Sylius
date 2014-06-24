@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion:
+    description:
+      max_length: 'Die Beschreibung darf nicht länger als 1 Zeichen sein.|Die Beschreibung darf nicht länger als {{ limit }} Zeichen sein.'
+      min_length: 'Die Beschreibung muss länger als 1 Zeichen sein.|Die Beschreibung muss mindestens {{ limit }} Zeichen lang sein.'
+      not_blank: Bitte geben Sie eine Beschreibung an.
+    name:
+      max_length: 'Der Name darf nicht länger als 1 Zeichen sein.|Der Name darf nicht länger als {{ limit }} Zeichen sein.'
+      min_length: 'Der Name muss mindestens 1 Zeichen lang sein.|Der Name muss mindestens {{ limit }} Zeichen lang sein.'
+      not_blank: Bitte geben Sie einen Namen an.
+  promotion_coupon:
+    code:
+      max_length: 'Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.'
+      min_length: 'Der Gutscheincode muss mindestens 1 Zeichen lang sein.|Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.'
+      not_blank: Bitte geben Sie einen Gutscheincode an.
+    usage_limit:
+      min: 'Das Nutzungslimit eines Gutscheincodes muss mindestens {{ limit }} sein.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'Die Anzahl der zu erstellenden Gutscheinodes muss mindestens {{ limit }} sein.'
+      not_blank: Bitte geben Sie die Anzahl der zu generierenden Gutscheincodes ein.
+    usage_limit:
+      min: 'Das Nutzungslimit der erstellen Gutscheincodes muss mindestens {{ limit }} sein.'

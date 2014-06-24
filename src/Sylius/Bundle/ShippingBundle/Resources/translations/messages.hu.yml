@@ -1,3 +1,42 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: sylius.form.rule.item_count_configuration.count
+        equal: sylius.form.rule.item_count_configuration.equal
+      type: sylius.form.rule.type
+    shipment:
+      state: Állapot
+      states:
+        checkout: Fizetés
+        dispatched: Feladva
+        pending: Függőben
+        ready: Kész
+        shipped: Kiszállítva
+        returned: Visszaküldött
+      tracking_code: Követési kód
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Összeg
+      flexible_rate_configuration:
+        additional_item_cost: További tétel költség
+        additional_item_limit: További tételek korlátozása
+        first_item_cost: Első tétel költsége
+      per_item_rate_configuration:
+        amount: Összeg
+      weight_rate_configuration:
+        amount: Összeg
+        division: Részleg
+    shipping_category:
+      description: Leírás
+      name: Név
+    shipping_method:
+      calculator: Számológép
+      category: Kategória
+      category_requirement: Kategória követelmény
+      configuration: Konfiguráció
+      enabled: sylius.form.shipping_method.enabled
+      name: Név

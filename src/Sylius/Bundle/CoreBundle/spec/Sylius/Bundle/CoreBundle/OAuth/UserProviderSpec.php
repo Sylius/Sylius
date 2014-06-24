@@ -42,6 +42,7 @@ class UserProviderSpec extends ObjectBehavior
     {
         $resourceOwner->getName()->willReturn('google');
 
+        $response->getEmail()->willReturn(null);
         $response->getUsername()->willReturn('username');
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
@@ -60,7 +61,7 @@ class UserProviderSpec extends ObjectBehavior
     }
 
     function it_should_return_user_if_relation_exists(
-        $oauthRepository, UserInterface $user, UserResponseInterface $response, ResourceOwnerInterface $resourceOwner
+        $oauthRepository, UserInterface $user, UserOAuthInterface $oauth, UserResponseInterface $response, ResourceOwnerInterface $resourceOwner
     )
     {
         $resourceOwner->getName()->willReturn('google');
@@ -68,7 +69,8 @@ class UserProviderSpec extends ObjectBehavior
         $response->getUsername()->willReturn('username');
         $response->getResourceOwner()->willReturn($resourceOwner);
 
-        $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn($user);
+        $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn($oauth);
+        $oauth->getUser()->willReturn($user);
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }

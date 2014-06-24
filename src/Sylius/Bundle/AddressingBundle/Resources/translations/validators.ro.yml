@@ -1,3 +1,25 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Oraşul nu trebuie să fie mai mare de 255 de caractere|Oraşul nu trebuie să fie mai mare de 255 de caractere.
+      min_length: Oraşul trebuie să contină cel puţin 2 caractere|Oraşul trebuie să contină cel puţin 2 caractere.
+      not_blank: Va rugam introduceti orasul.
+    country:
+      not_blank: Vă rugăm să alegeți o țară.
+    first_name:
+      max_length: Numele nu trebuie să fie mai mare de 255 de caractere|Numele nu trebuie să fie mai mare de 255 de caractere.
+      min_length: Prenumele trebuie să contină cel puţin 2 caractere|Prenumele trebuie să contină cel puţin 2 caractere.
+      not_blank: Vă rugăm să introduceţi prenumele.
+    last_name:
+      max_length: Numele nu trebuie să fie mai mare de 255 de caractere|Numele nu trebuie să fie mai mare de 255 de caractere.
+      min_length: Prenumele trebuie să contină cel puţin 2 caractere|Prenumele trebuie să contină cel puţin 2 caractere.
+      not_blank: Vă rugăm să introduceţi numele de familie.
+    postcode:
+      max_length: Codul poştal nu trebuie să fie mai mare de 255 de caractere|Cod poştal nu trebuie să fie mai mare de 255 de caractere.
+      min_length: Codul poştal trebuie să conţină cel puţin 2 caractere|Codul poştal trebuie să conţină cel puţin 2 caractere.
+      not_blank: Vă rugăm să introduceţi codul poştal.
+    province:
+      valid: Vă rugăm să selectaţi judeţul.

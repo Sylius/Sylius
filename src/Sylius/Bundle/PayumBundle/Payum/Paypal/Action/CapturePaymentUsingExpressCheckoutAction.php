@@ -89,7 +89,7 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
                 $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
             }
 
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
         }
 
         $details = ArrayObject::ensureArrayObject($details);
@@ -98,10 +98,10 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
             $request->setModel($details);
             $this->payment->execute($request);
 
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
             $request->setModel($payment);
         } catch (\Exception $e) {
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
             $request->setModel($payment);
 
             throw $e;

@@ -6,5 +6,15 @@ sylius:
     shipment:
       states:
         pending: In attesa
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Valore
+      per_item_rate_configuration:
+        amount: Valore
+      weight_rate_configuration:
+        amount: Valore
     shipping_category:
       description: Descrizione
+      name: Nome
+    shipping_method:
+      name: Nome

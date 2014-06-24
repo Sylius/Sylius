@@ -19,6 +19,9 @@ sylius:
   backend:
     alert:
       info: Informație
+  breadcrumb:
+    property:
+      index: Proprietăți
   cancel: Anuleazaă
   cart:
     empty: Coșul este gol
@@ -85,7 +88,10 @@ sylius:
   form:
     choose_file: Alege fișier
     login:
+      email: Email
       password: Parolă
+    profile:
+      email: Email
   generate: Generează
   homepage:
     splash:
@@ -96,6 +102,8 @@ sylius:
     inventory_state: Stare inventar
     name: Nume
     updated_at: Data modificării
+  locale:
+    code: Cod
   login_header: Administrare
   meta:
     backend_title: Panoul administrativ
@@ -103,6 +111,7 @@ sylius:
     frontend_keywords: sylius, e-commerce, symfony2, magazin, coș, webshop
     frontend_title: Sylius, e-commerce modern pentru Symfony2
   newest: Produse noi
+  "no": false
   option:
     create: Creează opțiune
     index_header: Opțiuni produs
@@ -138,6 +147,7 @@ sylius:
     name: Nume
     updated_at: Modificat
   product:
+    available_on: Disponibil din
     create: Creează produs
     create_header: Produs nou
     description: Descriere
@@ -149,10 +159,27 @@ sylius:
     no_options: Nu există opțiuni pentru acest produs
     no_properties: Produsul nu are proprietăți definite
     no_results: Nu există produse de afișat.
+    properties: Proprietăți
     tabs:
       product: Produs
+      properties: Proprietăți
+  promotion:
+    actions: Acțiuni
+    description: Descriere
+    ends_at: Se termină la
+    starts_at: Începe la
+  promotion_action:
+    type: Tip
   promotion_coupon:
     create: Adaugă cupon
     create_header: Creează cupon
+  promotion_rule:
+    type: Tip
+  tax_category:
+    description: Descriere
   user:
     email: E-mail
+    username: Nume de utilizator
+  "yes": true
+  zone:
+    type: Tip

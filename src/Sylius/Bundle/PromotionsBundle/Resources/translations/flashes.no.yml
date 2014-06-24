@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Kampanjekuponger ble generert uten feil.
+    eligible: Din kampanjekupong ble lagt til i handlekurven.
+    invalid: Din kampanjekupong er ikke gyldig.
+    not_eligible: Din handlekurv er ikke kvalifisert for denne kampanjekupongen.

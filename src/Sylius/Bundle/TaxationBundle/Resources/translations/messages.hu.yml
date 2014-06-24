@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    tax_category:
+      name: Név
+      description: Leírás
+    tax_rate:
+      category: Kategória
+      name: Név
+      amount: Összeg
+      included_in_price: Az ár tartalmazza?
+      calculator: Számológép

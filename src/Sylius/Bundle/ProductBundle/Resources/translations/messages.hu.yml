@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  label:
+    product:
+      name: Név
+      description: Leírás
+      properties: Tulajdonságok
+      available_on: A rendelkezésre álló
+      meta_keywords: Meta kulcsszavak
+      meta_description: Meta leírás
+    property:
+      name: Belső név
+      presentation: Bemutató
+    prototype:
+      name: Név
+      properties: Tulajdonságok

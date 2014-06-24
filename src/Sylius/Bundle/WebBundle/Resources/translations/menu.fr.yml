@@ -83,7 +83,7 @@ sylius:
       main:
         account: Mon compte
         administration: Administration
-        cart: 'Voir panier (%items%) %total%'
+        cart: 'Panier (%items%) %total%'
         login: Connexion
         logout: Déconnexion
         register: Créer un compte

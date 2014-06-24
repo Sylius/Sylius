@@ -1,3 +1,53 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    sku:
+      not_blank: Angiv produkt SKU.
+      unique: Produkt SKU skal være unik.
+    name:
+      not_blank: Indtast produktnavn.
+      min_length: 'Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.'
+    description:
+      not_blank: Angiv produktbeskrivelse.
+      min_length: 'Produktbeskrivelsen skal være mindst ét tegn langt. |Produktbeskrivelse skal være mindst {{ limit }} tegn langt.'
+  variant:
+    sku:
+      not_blank: Angiv variant SKU.
+      unique: Variant SKU skal være unik.
+    combination: Variant med denne indstilling eksisterer allerede.
+  option:
+    name:
+      not_blank: Indtast egenskabens systemnavn.
+      min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.'
+    presentation:
+      not_blank: Angiv egenskabens præsentation.
+      min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Egenskabens systemnavn må ikke være længere end 1 tegn.|Egenskabens navn må ikke være længere end {{ limit }} tegn.'
+    values:
+      min_count: 'Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.'
+  option_value:
+    value:
+      not_blank: Angiv egenskabens værdi.
+  property:
+    name:
+      not_blank: Angiv egenskabens navn.
+      min_length: 'Egenskabsnavnet skal være mindst ét tegn langt. |Egenskabsnavnet skal mindst {{ limit }} tegn langt.'
+      max_length: 'Egenskabens navn må ikke være længere end 1 tegn. |Egenskabens navn må ikke være længere end {{ limit }} tegn.'
+    presentation:
+      not_blank: Angiv venligst egenskabens præsentation.
+      min_length: 'Egenskabens præsentation skal være mindst ét tegn langt. |Egenskabens præsentation skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Egenskabens præsentation må ikke være længere end 1 tegn. |Egenskabens præsentation må ikke være længere end {{ limit }} tegn.'
+  product_property:
+    property:
+      not_blank: Vælg venligst egenskab.
+    value:
+      not_blank: Venligst angiv produktets egenskabsværdi.
+  prototype:
+    name:
+      not_blank: Angiv navnet på prototypen.
+      min_length: 'Navnet på prototypen skal være mindst ét tegn langt. |Navnet på prototypen skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Navnet på prototypen må ikke være længere end 1 tegn. |Navnet på prototypen må ikke være længere end {{ limit }} tegn.'

@@ -4,4 +4,15 @@
 sylius:
   label:
     product:
+      name: Nome
       description: Descrizione
+      properties: Proprietà
+      available_on: Disponibile
+      meta_keywords: Meta keywords
+      meta_description: Meta description
+    property:
+      name: Nome interno
+      presentation: Presentazione
+    prototype:
+      name: Nome
+      properties: Proprietà

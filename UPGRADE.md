@@ -21,6 +21,8 @@ hard-coded states. You can now configure all the states you want and the transit
 much more powerful. Please update your listeners to make them callbacks of state-machine transitions. Again, please
 refer to the state-machine configuration files to do so.*
 
+The signature of `PaymentInterface::setDetails` method was changed. Now it allows either array or instance of \Traversable. 
+
 ### Addressing
 
 Model classes and ZoneMatcher services have been moved to ``Sylius\Component\Addressing`` namespace.

@@ -245,6 +245,7 @@ sylius:
     frontend_keywords: sylius, eコマース, symfony2, ショップ, カート, ネットショップ
     frontend_title: Symfony2のeコマース、Sylius
   newest: 新着商品
+  "no": false
   option:
     create: 商品オプションを登録
     create_header: 商品オプション登録
@@ -560,7 +561,7 @@ sylius:
     price: 価格
     stock: 現在の在庫数
     update_header: バリエーションを編集
-  "yes": ○
+  "yes": true
   zone:
     add_member: 追加
     create: ゾーンを登録する

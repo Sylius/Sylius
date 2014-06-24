@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+
 /**
  * Payments model.
  *
@@ -234,8 +236,16 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function setDetails(array $details)
+    public function setDetails($details)
     {
+        if ($details instanceof \Traversable) {
+            $details = iterator_to_array($details);
+        }
+
+        if (false == is_array($details)) {
+            throw new UnexpectedTypeException($details, 'array');
+        }
+
         $this->details = $details;
 
         return $this;

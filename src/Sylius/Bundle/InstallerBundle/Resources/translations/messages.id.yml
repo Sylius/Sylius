@@ -1,3 +1,40 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius telah berhasil diinstal.
+  form:
+    configuration:
+      database:
+        0: Koneksi database
+        driver:
+          0: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Host
+        name: Nama
+        password: Kata sandi
+        port: Port
+        user: Pengguna
+      locale:
+        0: Pengaturan Locale
+        currency: Mata Uang
+        locale: Locale
+      mailer:
+        0: Pengaturan mailer
+        host: Host
+        password: Kata sandi
+        user: Pengguna
+    setup:
+      plain_password: Kata sandi
+  process:
+    step:
+      welcome:
+        content: '<p>Selamat datang di Sylius installer.</p>'
+        header: 'Selamat datang <small>Sylius installer</small>'
+€: €

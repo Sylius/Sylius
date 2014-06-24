@@ -3,28 +3,61 @@
 
 sylius:
   extensions:
-    0: Extensions
+    0: Erweiterungen
     accelerator:
+      0: Accelerator
       help: Installiere und aktiviere einen PHP Accelerator wie zum Beispiel APC (Dringend empfohlen).
-    gd: sylius.extensions.gd
+    apc: APC
+    ctype: Ctype
+    gd: GD
     help: 'Installiere und aktiviere die %extension% Erweiterung.'
-    on: An
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
   filesystem:
     0: Dateisystem
     cache:
-      - Cache
+      0: Cache
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existiert
     logs:
-      - Logs
+      0: Logs
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: Existiert nicht
     not_writable: Schreibgeschützt
+    parameters:
+      0: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
     writable: Beschreibbar
   settings:
     0: PHP Version und Einstellungen
     any: Jeder
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
     non_deprecated: Nicht veraltet
-    on: An
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: timezone
     timezone_deprecated:
-      - Veraltete Zeitzone
+      0: Veraltete Zeitzone
+      help: 'Zeituone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
     version: PHP Version
     version_recommanded: Empfohlene PHP Version

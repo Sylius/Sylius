@@ -65,6 +65,7 @@ sylius:
     security:
       login: Giriş
       new_customer: Yeni müşteri
+  "no": false
   order:
     items_total: Toplam tutar
     no_items: Bu siparişde ürün bulunmuyor
@@ -76,3 +77,4 @@ sylius:
   product:
     tabs:
       product: Ürün
+  "yes": true

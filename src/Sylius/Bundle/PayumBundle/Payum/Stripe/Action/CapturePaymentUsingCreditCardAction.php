@@ -52,7 +52,7 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
                 'currency' => $order->getCurrency(),
             );
 
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
         }
 
         $details = ArrayObject::ensureArrayObject($details);
@@ -61,10 +61,10 @@ class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
             $request->setModel($details);
             $this->payment->execute($request);
 
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
             $request->setModel($payment);
         } catch (\Exception $e) {
-            $payment->setDetails((array) $details);
+            $payment->setDetails($details);
             $request->setModel($payment);
 
             throw $e;

@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Handlevognen ble oppdatert.
+    cart_clear_completed: Handlevognen ble tømt.
+    item_add_completed: Varen ble lagt i handlevognen.
+    item_remove_completed: Varen ble fjernet fra handlevognen.
+    item_add_error: Det oppstod en feil da varen skulle legges i handlevognen.
+    item_remove_error: Det oppstod en feil da varen skulle fjernes fra handlevognen.

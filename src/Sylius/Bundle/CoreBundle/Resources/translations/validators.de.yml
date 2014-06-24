@@ -30,7 +30,7 @@ sylius:
 sylius_shipping:
   method:
     zone:
-      not_blank: Bitte Versandzone angeben.
+      not_blank: Bitte Versandgebiet angeben.
 sylius_taxation:
   rate:
     zone:

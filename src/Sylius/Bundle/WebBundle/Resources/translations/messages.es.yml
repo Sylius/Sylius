@@ -320,6 +320,7 @@ sylius:
     frontend_title: Sylius, e-commerce moderno para Symfony2
   na: N/A
   newest: Novedades
+  "no": false
   no_results: No results
   option:
     create: Añadir opción
@@ -697,7 +698,7 @@ sylius:
     sku: SKU
     stock: Stock actual
     update_header: Editar variante
-  "yes": Sí
+  "yes": true
   zone:
     add_member: Añadir miembro
     create: Crear zona
