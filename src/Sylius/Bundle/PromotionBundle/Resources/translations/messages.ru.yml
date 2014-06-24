@@ -34,3 +34,4 @@ sylius:
       rules: Правила
       starts_at: Старт
       usage_limit: Предел использования
+      exclusive: Эксклюзив

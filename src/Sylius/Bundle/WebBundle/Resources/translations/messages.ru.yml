@@ -125,7 +125,7 @@ sylius:
       index: Список рекламных акций
     promotion_coupon:
       index: sylius.breadcrumb.promotion_coupon.index
-    property:
+    attribute:
       index: Список свойств товаров
     prototype:
       index: Список прототипов
@@ -154,7 +154,7 @@ sylius:
     empty: Пустая
     summary:
       add_coupon: OK
-      checkout: Сверка
+      checkout: Оплата
       clear: Очистка корзины
       grand_total: Всего в корзине
       product: Продукт
@@ -319,8 +319,9 @@ sylius:
     frontend_title: Sylius, современное решение электронной коммерции для Symfony2
   na: Н/Д
   newest: Новейшие продукты
+  no: нет
   no_results: Нет результатов
-  option:
+  product_option:
     create: Добавить опцию
     create_header: Новая опция продукта
     index_header: Опции продуктов
@@ -363,7 +364,7 @@ sylius:
     show_header: Детали заказа
     state:
       cart_locked: Корзина заблокирована
-      checkout: Сверка
+      checkout: Оплачено
       order_confimed: Заказ подтвержден
       ordered: Заказан
     tax_total: Сумма налогов
@@ -372,7 +373,8 @@ sylius:
     update_header: Редактирование заказа
     user: Пользователь
   shipment:
-    created_at: created at
+    ship: Выслать
+    created_at: Создано
     id: ID
     index_header: Доставка
     inventory_state: inventory state
@@ -413,6 +415,7 @@ sylius:
     created_at: Создан
     id: ID
     index_header: Платежи
+    show_header: Детали платежа
     manage: Платежи
     method: Метод
     no_results: Способы оплаты не настроены.
@@ -438,10 +441,11 @@ sylius:
     name: Название
     updated_at: Последнее обновление
   product:
-    add_property: Добавить свойство
+    add_attribute: Добавить свойство
     available_on: Доступен с
     available_on_demand: Доступно по запросу
     categorization: Каталоги
+    contain_variants: Содержит варианты
     create: Создать товар
     create_header: Новый товар
     description: Описание
@@ -462,6 +466,7 @@ sylius:
     price: Розничная цена
     properties: Свойства
     restricted_zone: Зона ограничений
+    remove_attribute: Удалить свойство
     shipping_category: Категория доставки
     show: Посмотреть больше
     show_header: 'Детали товара <small>Просмотр товара "<strong>%product%</strong>"</small>'
@@ -473,7 +478,7 @@ sylius:
       images: Изображения
       options: Опции
       product: Товар
-      properties: Свойства
+      attributes: Свойства
     tax_category: Категория налогов
     unavailable: Недоступен
     update_header: Редактирование товара
@@ -504,6 +509,8 @@ sylius:
     updated_at: Последнее обновление
     usage_limit: Предел
     used: Использован
+    priority: Приоритет
+    exclusive: Эксклюзив
   promotion_action:
     configuration: Конфигурация
     type: Тип
@@ -521,7 +528,7 @@ sylius:
   promotion_rule:
     configuration: Конфигурация
     type: Тип
-  property:
+  product_attribute:
     add_choice: Добавить вариант
     create: Создать свойство
     create_header: Новое свойство товара
@@ -542,7 +549,7 @@ sylius:
     name: название
     no_results: Нет настроенных прототипов.
     options: опции
-    properties: свойства
+    attributes: свойства
     update_header: Редактирование прототипа
     updated_at: последнее изменение
   province:
@@ -683,7 +690,7 @@ sylius:
     sku: Артикул
     stock: Наличие
     update_header: Редактирование вариантов
-  "yes": да
+  yes: да
   zone:
     add_member: Добавить
     create: Создать новую зону

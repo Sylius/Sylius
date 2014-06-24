@@ -57,7 +57,7 @@ sylius:
         payments: Платежи
         products: Товары
         promotions: Рекламные акции
-        properties: Настройка свойств
+        attributes: Настройка свойств
         prototypes: Прототипы продуктов
         sales: Заказы
         shipments: Посылки

@@ -431,6 +431,7 @@ sylius:
         created_at: Created at
         id: ID
         index_header: Payments
+        show_header: Payment details
         manage: Manage payments
         method: Method
         no_results: There are no payments configured.

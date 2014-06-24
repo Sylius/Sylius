@@ -23,6 +23,8 @@ sylius:
         processing: Обрабатывается
         unknown: Неизвестен
         void: Пустой
+        cancelled: Отменен
+        refunded: Возврат
     payment_method:
       description: Описание
       enabled: Включен?
