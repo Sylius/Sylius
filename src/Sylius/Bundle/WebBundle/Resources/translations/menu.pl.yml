@@ -22,7 +22,7 @@ sylius:
         payments: Płatności
         products: Produkty
         promotions: Promocje
-        properties: Właściwości
+        attributes: Właściwości
         prototypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki
@@ -57,7 +57,7 @@ sylius:
         payments: Płatności
         products: Produkty
         promotions: Promocje
-        properties: Właściwości
+        attributes: Właściwości
         prototypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki

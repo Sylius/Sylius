@@ -22,7 +22,7 @@ sylius:
         payments: Pagos
         products: Productos
         promotions: Promociones
-        properties: Configurar propiedades
+        attributes: Configurar propiedades
         prototypes: Prototipos de producto
         sales: Pedidos
         shipments: Envíos
@@ -57,7 +57,7 @@ sylius:
         payments: Pagos
         products: Productos
         promotions: Promociones
-        properties: Configuración de propiedades
+        attributes: Configuración de propiedades
         prototypes: Prototipos de producto
         sales: Pedidos
         shipments: Envíos

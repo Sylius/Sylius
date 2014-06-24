@@ -481,7 +481,7 @@ sylius:
     no_taxons: มีไม่มีการจัดประเภทสำหรับผลิตภัณฑ์นี้
     options: ตัวเลือก
     price: ราคาขายปลีก
-    properties: คุณสมบัติ
+    attributes: คุณสมบัติ
     restricted_zone: จำกัดโซน
     shipping_category: ประเภทการจัดส่ง
     show: ดูเพิ่มเติม
@@ -494,7 +494,7 @@ sylius:
       images: ภาพ
       options: ตัวเลือก
       product: สินค้า
-      properties: คุณสมบัติ
+      attributes: คุณสมบัติ
     tax_category: ประเภทภาษี
     unavailable: ไม่สามารถใช้ได้
     update_header: แก้ไขสินค้า
@@ -563,7 +563,7 @@ sylius:
     name: ชื่อ
     no_results: ไม่มีการกำหนดต้นแบบสินค้าไว้
     options: ตัวเลือก
-    properties: คุณสมบัติ
+    attributes: คุณสมบัติ
     update_header: แก้ไขต้นแบบ
     updated_at: ปรับปรุงล่าสุด
   province:

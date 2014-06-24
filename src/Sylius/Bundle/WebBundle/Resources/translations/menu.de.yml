@@ -22,7 +22,7 @@ sylius:
         payments: Zahlungen
         products: Produkte
         promotions: Aktionen
-        properties: Eigenschaften
+        attributes: Eigenschaften
         prototypes: Prototypen
         sales: Aufträge
         shipments: Lieferungen
@@ -57,7 +57,7 @@ sylius:
         payments: Zahlungen
         products: Produkte
         promotions: Aktionen
-        properties: Eigenschaten
+        attributes: Eigenschaten
         prototypes: Prototypen
         sales: Aufträge
         shipments: Lieferungen

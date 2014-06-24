@@ -270,14 +270,14 @@ sylius:
     name: Názov
     no_description: '<i>Žiadny popis</i>'
     no_sku: Žiadny Kód
-    properties: Vlastnosti
+    attributes: Vlastnosti
     shipping_category: Prepravná kategória
     sku: Kód
     stock: Aktuálne skladom
     tabs:
       images: Obrázky
       product: Produkt
-      properties: Vlastnosti
+      attributes: Vlastnosti
     update_header: Úprava produktu
     updated_at: Posledná aktualizácia
   promotion:

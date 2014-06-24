@@ -243,7 +243,7 @@ sylius:
     name: Ονομασία
     options: Επιλογές
     price: Τιμή
-    properties: Ιδιότητες
+    attributes: Ιδιότητες
     restricted_zone: Απαγορευμένη ζώνη
     shipping_category: Κατηγορία αποστολής
     sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
@@ -253,7 +253,7 @@ sylius:
       images: Εικόνες
       options: Επιλογές
       product: Προϊόν
-      properties: Ιδιότητες
+      attributes: Ιδιότητες
     tax_category: Φορολογική κατηγορία
     variant_selection_method: Μέθοδος επιλογής παραλλαγής
   promotion:

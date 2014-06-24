@@ -475,7 +475,7 @@ sylius:
     no_taxons: A termékhez nem tartoznak taxonok
     options: Beállítások
     price: Kiskereskedelmi ár
-    properties: Tulajdonságok
+    attributes: Tulajdonságok
     restricted_zone: Tiltott zóna
     shipping_category: Szállítási kategória
     show: Bővebben...
@@ -488,7 +488,7 @@ sylius:
       images: Képek
       options: Beállítások
       product: Termék
-      properties: Tulajdonságok
+      attributes: Tulajdonságok
     tax_category: ÁFA-kategória
     unavailable: Nem elérhető
     update_header: Termék szerkesztése
@@ -557,7 +557,7 @@ sylius:
     name: név
     no_results: Nincsenek definiált prototípusok.
     options: beállítások
-    properties: tulajdonságok
+    attributes: tulajdonságok
     update_header: Prototípus szerkesztése
     updated_at: Utolsó frissítés
   province:

@@ -465,7 +465,7 @@ sylius:
     no_taxons: У этого товара не заданы категории
     options: Опции
     price: Розничная цена
-    properties: Свойства
+    attributes: Свойства
     restricted_zone: Зона ограничений
     remove_attribute: Удалить свойство
     shipping_category: Категория доставки

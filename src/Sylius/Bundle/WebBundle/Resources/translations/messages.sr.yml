@@ -321,7 +321,7 @@ sylius:
     no_taxons: sylius.product.no_taxons
     options: Opcije
     price: Prodajna cena
-    properties: Atributi
+    attributes: Atributi
     show: Više
     show_header: 'Detalji proizvoda <small>Pregled proizvoda "<strong>%product%</strong>"</small>'
     stock: Lager
@@ -330,7 +330,7 @@ sylius:
       images: Slike
       options: Opcije
       product: Proizvod
-      properties: Atributi
+      attributes: Atributi
     tax_category: Kategorija proizvoda
     update_header: Ažuriranje proizvoda
     updated_at: Ažurirano
@@ -392,7 +392,7 @@ sylius:
     name: ime
     no_results: Nema definisanih prototipova.
     options: opcije
-    properties: atributi
+    attributes: atributi
     update_header: Ažuriranje prototipa
     updated_at: Ažurirano
   province:
