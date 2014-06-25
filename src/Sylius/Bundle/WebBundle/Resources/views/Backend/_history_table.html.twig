@@ -19,7 +19,18 @@
                 {% if log.data is not empty %}
                 <ul>
                     {% for key, value in log.data %}
-                    <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
+                    <li>
+                        <strong>{{ key|humanize }}</strong>:
+                        {% if value is iterable %}
+                            <ul>
+                            {% for k, v in value %}
+                                <li>{{ k|humanize }}: {{ v }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </li>
                     {% endfor %}
                 </ul>
                 {% else %}
