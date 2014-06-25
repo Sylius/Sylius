@@ -23,6 +23,22 @@ cmf_routing:
         persistence:
             phpcr: ~
 
+cmf_create:
+    security:
+        role:            ROLE_SYLIUS_ADMIN
+        checker_service: ~
+
+    persistence:
+        phpcr:
+            enabled:      true
+            manager_name: ~
+
+## For CMF Create
+fos_rest:
+    view:
+        formats:
+            json: true
+
 doctrine_cache:
     providers:
         phpcr_meta: %sylius.cache%

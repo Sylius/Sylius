@@ -34,3 +34,6 @@ sylius_cart_save:
         _controller: sylius.controller.cart:saveAction
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
+
+create:
+    resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"

@@ -23,6 +23,9 @@
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
+            {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+				{% include "CmfCreateBundle::includecssfiles.html.twig" %}
+			{% endif %}
         {% endblock %}
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -118,6 +121,10 @@
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
+    	{% render(controller(
+            "cmf_create.jsloader.controller:includeJSFilesAction",
+            {"editor": "ckeditor", "_locale": app.request.locale }
+        )) %}
         {% endblock %}
     </body>
 </html>

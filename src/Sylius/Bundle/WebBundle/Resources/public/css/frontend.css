@@ -149,3 +149,9 @@ a.oauth-login {
 a.oauth-login:hover {
     text-decoration: none;
 }
+
+.create-ui-logo a.create-ui-toggle {
+    background-image: url('/bundles/syliusweb/img/swan-icon.png');
+    height: 45px;
+    cursor: pointer;
+}

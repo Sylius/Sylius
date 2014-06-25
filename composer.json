@@ -46,6 +46,7 @@
         "symfony-cmf/block-bundle":             "1.1.*",
         "symfony-cmf/content-bundle":           "1.1.*",
         "symfony-cmf/menu-bundle":              "1.1.*",
+        "symfony-cmf/create-bundle":            "1.1.*",
         "symfony-cmf/routing-bundle":           "1.2.*",
         "symfony/assetic-bundle":               "2.3.*",
         "symfony/expression-language":          "~2.4",
@@ -115,6 +116,7 @@
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Symfony\\Cmf\\Bundle\\CreateBundle\\Composer\\ScriptHandler::downloadCreateAndCkeditor",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
@@ -122,6 +124,7 @@
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Symfony\\Cmf\\Bundle\\CreateBundle\\Composer\\ScriptHandler::downloadCreateAndCkeditor",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
