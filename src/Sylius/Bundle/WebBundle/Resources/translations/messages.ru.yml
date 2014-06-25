@@ -97,6 +97,7 @@ sylius:
     country:
       index: Список стран
     customers: Клиенты
+    dashboard: Административная панель
     edit: Редактирование
     exchange_rate:
       index: Список курсов валют
@@ -139,7 +140,7 @@ sylius:
     tax_category:
       index: Список налоговых категорий
     tax_rate:
-      index: sylius.breadcrumb.tax_rate.index
+      index: Список налоговыйх ставок
     taxation_settings: Настройки налогооблажения
     taxonomy:
       index: Список каталогов
@@ -147,7 +148,7 @@ sylius:
     user:
       index: Список пользователей
     zone:
-      index: sylius.breadcrumb.zone.index
+      index: Список зон
   browse_products: Обзор продукции
   cancel: Отмена
   cart:
@@ -617,7 +618,7 @@ sylius:
   tax_rate:
     amount: Сумма
     calculator: Калькулятор
-    category: sylius.tax_rate.category
+    category: Категория
     create: Создать налоговую ставку
     create_header: Создание налоговой ставки
     included_in_price: Включено в цену?
@@ -628,7 +629,7 @@ sylius:
     show_header: Детали налоговой ставки
     update_header: Редактирование налоговой ставки
     updated_at: Последнее изменение
-    zone: sylius.tax_rate.zone
+    zone: Зона действия
   taxon:
     create: Создать категорию
     create_header: Новая категория
