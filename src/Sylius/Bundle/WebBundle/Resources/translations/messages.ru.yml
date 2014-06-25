@@ -450,6 +450,7 @@ sylius:
     create_header: Новый товар
     description: Описание
     generate_variants: Генерировать варианты
+    index_by_taxon_header: "%taxon%"
     index_header: 'Товары <small>Список всех товаров в вашем магазине</small>'
     manage: Редактировать товары
     name: Название
