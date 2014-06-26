@@ -11,23 +11,40 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 
-use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
+use Payum\Core\Action\ActionInterface;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\CaptureRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-class CapturePaymentAction extends AbstractCapturePaymentAction
+class CapturePaymentAction implements ActionInterface
 {
     /**
      * {@inheritDoc}
      */
-    protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
+    public function execute($request)
     {
+        /** @var $request CaptureRequest */
+        if (!$this->supports($request)) {
+            throw RequestNotSupportedException::createActionNotSupported($this, $request);
+        }
+
+        /** @var $payment PaymentInterface */
+        $payment = $request->getModel();
         if ($payment->getDetails()) {
             return;
         }
 
-        $payment->setDetails(array(
-            'captured' => true,
-        ));
+        $payment->setDetails(array('captured' => true));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supports($request)
+    {
+        return
+            $request instanceof CaptureRequest &&
+            $request->getModel() instanceof PaymentInterface
+        ;
     }
 }

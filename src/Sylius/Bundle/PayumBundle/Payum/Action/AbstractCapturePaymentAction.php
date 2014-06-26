@@ -32,7 +32,10 @@ abstract class AbstractCapturePaymentAction extends PaymentAwareAction
 
         /** @var $payment PaymentInterface */
         $payment = $request->getModel();
-        $details = ArrayObject::ensureArrayObject($this->composeDetails($payment, $request->getToken()));
+
+        $this->composeDetails($payment, $request->getToken());
+
+        $details = ArrayObject::ensureArrayObject($payment->getDetails());
 
         try {
             $request->setModel($details);
