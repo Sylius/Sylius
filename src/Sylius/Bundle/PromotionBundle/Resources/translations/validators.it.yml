@@ -1,3 +1,15 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  promotion:
+    description:
+      not_blank: Inserisci la descrizione della promozione.
+    name:
+      not_blank: Inserisci il nome della promozione.
+  promotion_coupon:
+    code:
+      not_blank: Per favore inserisci il codice coupon.
+  promotion_coupon_generate_instruction:
+    amount:
+      not_blank: Inserisci la quantità di coupon da generare.

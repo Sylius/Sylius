@@ -11,3 +11,10 @@ sylius:
       permalink: Link bezpośredni
     taxonomy:
       name: Nazwa
+  taxon:
+    create_taxon: Dodaj takson
+    delete_taxonomy: Usuń taksonomię
+    manage_taxonomies: Zarządzaj taksonomiami
+    no_taxonomies: Brak taksonomii.
+    no_taxons: Brak taksonów.
+    update_taxonomy: Zaktualizuj taksonomię
