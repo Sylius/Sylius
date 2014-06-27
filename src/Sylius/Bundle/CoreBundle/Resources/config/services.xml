@@ -40,6 +40,7 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
+        <parameter key="sylius.listener.product_update.class">Sylius\Bundle\CoreBundle\EventListener\ProductUpdateListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -350,6 +351,10 @@
         <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">
             <argument type="service" id="sylius.settings.manager" />
             <tag name="kernel.event_listener" event="kernel.request" method="setRequestLocale" />
+        </service>
+        <service id="sylius.listener.product_update" class="%sylius.listener.product_update.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="sylius.product.post_update" method="productUpdate" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
