@@ -77,7 +77,7 @@ class Variant extends BaseVariant implements VariantInterface
     {
         $this->availableOn = $availableOn;
 
-        if (null !== $this->object) {
+        if ($this->isMaster() && null !== $this->object) {
             $this->getProduct()->setAvailableOn($availableOn);
         }
 
