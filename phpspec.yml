@@ -25,11 +25,11 @@ suites:
     AttributeBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/AttributeBundle }
     CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
     CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
+    CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
     FlowBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
     MoneyBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/MoneyBundle }
-    CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
     OrderBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
     PaymentBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentBundle }
     PayumBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/PayumBundle }
