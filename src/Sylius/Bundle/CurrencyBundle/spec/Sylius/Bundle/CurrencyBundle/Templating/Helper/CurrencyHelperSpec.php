@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
@@ -20,9 +21,9 @@ use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
  */
 class CurrencyHelperSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
+    function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, MoneyHelper $moneyHelper)
     {
-        $this->beConstructedWith($currencyContext, $converter, 'en');
+        $this->beConstructedWith($currencyContext, $converter, $moneyHelper);
     }
 
     function it_is_initializable()

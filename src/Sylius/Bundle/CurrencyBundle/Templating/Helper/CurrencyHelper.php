@@ -31,8 +31,6 @@ class CurrencyHelper extends Helper
     private $currencyContext;
 
     /**
-     * Money helper.
-     *
      * @var MoneyHelper
      */
     private $moneyHelper;
