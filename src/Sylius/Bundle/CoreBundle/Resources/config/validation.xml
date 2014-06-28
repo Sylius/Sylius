@@ -141,25 +141,6 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Core\Model\Locale">
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">
-                <value>code</value>
-            </option>
-            <option name="message">sylius.locale.code.unique</option>
-            <option name="groups">
-                <value>sylius</value>
-            </option>
-        </constraint>
-        <property name="code">
-            <constraint name="NotBlank">
-                <option name="message">sylius.locale.code.not_blank</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
-        </property>
-    </class>
 
     <class name="Sylius\Component\Cart\Model\CartItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">

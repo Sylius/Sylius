@@ -202,6 +202,7 @@ default:
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:

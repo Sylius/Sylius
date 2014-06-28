@@ -43,7 +43,6 @@
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
-        <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
@@ -168,10 +167,6 @@
         <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
             <argument>%sylius.model.group.class%</argument>
             <tag name="form.type" alias="sylius_group" />
-        </service>
-        <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
-            <argument>%sylius.model.locale.class%</argument>
-            <tag name="form.type" alias="sylius_locale" />
         </service>
         <service id="sylius.form.type.block" class="%sylius.form.type.block.class%">
             <argument>%sylius.model.block.class%</argument>
@@ -350,10 +345,6 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
-        </service>
-        <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">
-            <argument type="service" id="sylius.settings.manager" />
-            <tag name="kernel.event_listener" event="kernel.request" method="setRequestLocale" />
         </service>
 
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">

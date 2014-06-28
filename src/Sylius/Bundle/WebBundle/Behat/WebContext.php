@@ -552,6 +552,42 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Then I should see :count available locales
+     */
+    public function iShouldSeeAvailableLocales($count)
+    {
+        $this->assertSession()->elementsCount('css', '.locale-menu ul li', $count);
+    }
+
+    /**
+     * @When I change the locale to :locale
+     */
+    public function iChangeTheLocaleTo($name)
+    {
+        $this->clickLink($name);
+    }
+
+    /**
+     * @Then I should browse the store in :locale
+     */
+    public function iShouldBrowseTheStoreInLocale($name)
+    {
+        switch ($name) {
+            case 'English':
+                $text = 'Welcome to Sylius';
+            break;
+            case 'Polish':
+                $text = 'Witaj w Sylius';
+            break;
+            case 'German':
+                $text = 'Willkommen bei Sylius';
+            break;
+        }
+
+        $this->assertSession()->pageTextContains($text);
+    }
+
+    /**
      * @Given /^I leave "([^"]*)" empty$/
      * @Given /^I leave "([^"]*)" field blank/
      */

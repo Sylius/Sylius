@@ -86,6 +86,8 @@
         "sylius/installer-bundle": "self.version",
         "sylius/inventory": "self.version",
         "sylius/inventory-bundle": "self.version",
+        "sylius/locale": "self.version",
+        "sylius/locale-bundle": "self.version",
         "sylius/money-bundle": "self.version",
         "sylius/order": "self.version",
         "sylius/order-bundle": "self.version",
