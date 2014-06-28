@@ -24,9 +24,9 @@
 
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "1.1.*",
-        "sylius/resource-bundle":          "0.10.*@dev",
-        "sylius/money-bundle":             "0.10.*@dev",
-        "sylius/shipping":                 "0.10.*@dev"
+        "sylius/resource-bundle":          "0.11.*@dev",
+        "sylius/money-bundle":             "0.11.*@dev",
+        "sylius/shipping":                 "0.11.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
@@ -44,7 +44,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.11-dev"
         }
     },
     "minimum-stability": "dev"

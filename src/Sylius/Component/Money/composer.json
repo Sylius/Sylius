@@ -23,7 +23,7 @@
         "php":                  ">=5.3.3",
 
         "mathiasverraes/money": "*@dev",
-        "sylius/resource":      "0.10.*@dev",
+        "sylius/resource":      "0.11.*@dev",
         "symfony/intl":         "~2.3"
     },
     "require-dev": {
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.11-dev"
         }
     }
 }

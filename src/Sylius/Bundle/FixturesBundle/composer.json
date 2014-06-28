@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/core-bundle": "0.10.*@dev"
+        "sylius/core-bundle": "0.11.*@dev"
     },
     "require-dev": {
         "fzaninotto/faker":                  "1.2.*",
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.11-dev"
         }
     }
 }

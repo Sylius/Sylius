@@ -23,9 +23,9 @@
         "php": ">=5.3.3",
 
         "stof/doctrine-extensions-bundle": "1.1.*",
-        "sylius/promotion":                "0.10.*@dev",
-        "sylius/registry":                 "0.10.*@dev",
-        "sylius/resource-bundle":          "0.10.*@dev",
+        "sylius/promotion":                "0.11.*@dev",
+        "sylius/registry":                 "0.11.*@dev",
+        "sylius/resource-bundle":          "0.11.*@dev",
         "symfony/framework-bundle":        "~2.3"
     },
     "require-dev": {
@@ -45,7 +45,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.11-dev"
         }
     },
     "minimum-stability": "dev"
