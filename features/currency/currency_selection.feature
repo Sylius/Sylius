@@ -22,35 +22,35 @@ Feature: Currency selection
 
 
     Scenario: Only enabled currencies are visible to the user
-        Givem I am on the store homepage
+        Given I am on the store homepage
         Then I should see 3 available currencies
-         And I should see product prices in "EUR"
+        And I should see product prices in "EUR"
 
     Scenario: Changing the currency converts the prices
               on the storefront
         Given I am on the store homepage
-         When I change the currency to "GBP"
-         Then I should see product prices in "GBP"
+        When I change the currency to "GBP"
+        Then I should see product prices in "GBP"
 
     Scenario: Switching the currency as a logged in customer
         Given I am logged in user
-          And I am on the store homepage
-         When I change the currency to "USD"
-         Then I should see product prices in "USD"
+        And I am on the store homepage
+        When I change the currency to "USD"
+        Then I should see product prices in "USD"
 
     Scenario: Correct exchange rate is applied to products
         Given I am on the store homepage
-         When I change the currency to "GBP"
-         Then I should see "6.83 £"
+        When I change the currency to "GBP"
+        Then I should see "£6.83"
 
     Scenario: Correct exchange rate is applied to products
         Given I am on the store homepage
-         When I change the currency to "GBP"
-         Then I should see "6.83 £"
+        When I change the currency to "GBP"
+        Then I should see "£6.83"
 
     Scenario: Correct unit price is displayed in the cart
         Given I am on the store homepage
-          And I change the currency to "GBP"
-          And I added product "PHP Top" to cart, with quantity "1"
-         When I go to the cart summary page
-          Then I should see item with unit price "6.83 £" in the list
+        And I change the currency to "GBP"
+        And I added product "PHP Top" to cart, with quantity "1"
+        When I go to the cart summary page
+        Then I should see item with unit price "£6.83" in the list

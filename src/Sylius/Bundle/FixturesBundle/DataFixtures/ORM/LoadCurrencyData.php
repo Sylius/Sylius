@@ -39,7 +39,7 @@ class LoadCurrencyData extends DataFixture
             $currency = $currencyRepository->createNew();
 
             $currency->setCode($code);
-            $currency->setRate($rate);
+            $currency->setExchangeRate($rate);
             $currency->setEnabled(true);
 
             $manager->persist($currency);
