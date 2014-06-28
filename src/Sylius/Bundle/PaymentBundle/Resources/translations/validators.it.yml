@@ -1,3 +1,26 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'Il nome del titolare della carta deve essere lungo almeno {{ limit }} caratteri.'
+      not_blank: Inserisci il nome del titolare della carta.
+    expiry_month:
+      max_range: 'Il mese di scadenza della carta di credito deve essere compreso tra {{ min }} e {{ max }}.'
+      min_range: 'Il mese di scadenza della carta di credito deve essere compreso tra {{ min }} e {{ max }}.'
+      not_blank: Si prega di selezionare il mese di scadenza.
+    number:
+      not_blank: Inserisci il numero della carta.
+      luhn: Il numero di carta di credito che hai inserito non è valido.
+    security_code:
+      not_blank: Inserisci il codice di sicurezza.
+      max_length: 'Il codice CVV della carta di credito deve essere compreso tra {{ min }} e {{ max }} caratteri.'
+      min_length: 'Il codice CVV della carta di credito deve essere compreso tra {{ min }} e {{ max }} caratteri.'
+    expiry_year:
+      not_blank: "Si prega di selezionare l'anno di scadenza."
+  payment_method:
+    name:
+      max_length: 'Il metodo di pagamento deve essere lungo {{ limit }} caratteri o meno.'
+      min_length: 'Il metodo di pagamento deve essere lungo almeno {{ limit }} caratteri.'
+      not_blank: Inserisci il nome del metodo di pagamento.

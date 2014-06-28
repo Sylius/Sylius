@@ -1,3 +1,26 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'Jméno držitele karty musí být alespoň {{ limit }} znaků dlouhé.'
+      not_blank: Zadejte prosím Jméno držitele karty.
+    expiry_month:
+      max_range: 'Měsíc vypršení platnosti karty musí být mezi {{ min }} max {{ max }}'
+      min_range: 'Měsíc vypršení platnosti karty musí být mezi {{ min }} a {{ max }}.'
+      not_blank: Vyberte prosím měsíc vypršení platnosti.
+    number:
+      not_blank: Zadejte prosím číslo karty.
+      luhn: Číslo kreditní karty, které jste zadali je neplatné.
+    security_code:
+      not_blank: Zadejte prosím bezpečnostní kód.
+      max_length: 'CW kreditní karty musí obsahovat mezi {{ min }} až {{ max }} znaky.'
+      min_length: 'CW kreditní karty musí obsahovat mezi {{ min }} až {{ max }} znaky.'
+    expiry_year:
+      not_blank: Vyberte prosím rok vypršení platnosti.
+  payment_method:
+    name:
+      max_length: 'Název metody platby musí obsahovat {{ limit }} znaků nebo méně.'
+      min_length: 'Název metody platby musí obsahovat alespoň {{ limit }} znaků.'
+      not_blank: Zadejte prosím název metody platby.
