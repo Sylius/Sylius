@@ -113,6 +113,13 @@ class Promotion implements PromotionInterface
     protected $actions;
 
     /**
+     * Associated actions
+     *
+     * @var Collection|ActionInterface[]
+     */
+    protected $orders;
+
+    /**
      * Last time updated
      *
      * @var \DateTime
@@ -460,6 +467,38 @@ class Promotion implements PromotionInterface
 
         return $this;
     }
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function hasOrders(ActionInterface $action)
+	{
+		return $this->orders->contains($action);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function addOrders(ActionInterface $action)
+	{
+		if (!$this->hasOrders($action)) {
+			$action->setPromotion($this);
+			$this->orders->add($action);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function removeOrders(ActionInterface $action)
+	{
+		$action->setPromotion(null);
+		$this->orders->removeElement($action);
+
+		return $this;
+	}
 
     /**
      * {@inheritdoc}
