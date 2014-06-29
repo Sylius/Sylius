@@ -29,6 +29,7 @@ Feature: Checkout taxation
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
           And I am logged in user
+          And there is default currency configured
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 

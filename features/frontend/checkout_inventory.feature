@@ -24,6 +24,7 @@ Feature: Checkout inventory
             | name        | gateway | enabled |
             | Credit Card | dummy   | yes     |
           And I am logged in as administrator
+          And there is default currency configured
 
     Scenario: Inventory is updated after buying products
         Given I added product "PHP Top" to cart, with quantity "4"

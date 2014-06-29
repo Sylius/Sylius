@@ -29,6 +29,7 @@ Feature: Checkout promotions with multiple rules and actions
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
+        And there is default currency configured
 
     Scenario: Several discounts are applied when a promotion has several
               actions and the cart fulfills all the rules

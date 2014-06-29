@@ -22,11 +22,20 @@ class MoneyContext extends DefaultContext
      */
     public function thereAreCurrencies(TableNode $table)
     {
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('currency');
+
+        foreach ($repository->findAll() as $currency) {
+            $manager->remove($currency);
+        }
+
+        $manager->flush();
+
         foreach ($table->getHash() as $data) {
             $this->thereIsCurrency($data['code'], $data['exchange rate'], 'yes' === $data['enabled'], false);
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
     }
 
     /**
@@ -49,5 +58,13 @@ class MoneyContext extends DefaultContext
         }
 
         return $currency;
+    }
+
+    /**
+     * @Given there is default currency configured
+     */
+    public function setupDefaultCurrency()
+    {
+        $this->thereIsCurrency('EUR');
     }
 }

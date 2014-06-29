@@ -6,6 +6,7 @@ Feature: Tax categories
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following tax categories:
             | name        |
             | Clothing    |

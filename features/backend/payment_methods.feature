@@ -6,6 +6,7 @@ Feature: Payment methods
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And the following payment methods exist:
             | name        | gateway |
             | Credit Card | stripe  |

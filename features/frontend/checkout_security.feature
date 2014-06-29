@@ -28,6 +28,7 @@ Feature: Checkout security
             | Dummy | dummy   | yes     |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
+          And there is default currency configured
 
     Scenario: Trying to sign in with bad credentials
               during the checkout

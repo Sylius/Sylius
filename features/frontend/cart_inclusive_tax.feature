@@ -10,6 +10,7 @@ Feature: Tax included in price
             | Category |
           And taxonomy "Category" has following taxons:
             | Clothing > PHP T-Shirts |
+          And there is default currency configured
           And the following zones are defined:
             | name  | type    | members        |
             | Germany | country | Germany        |

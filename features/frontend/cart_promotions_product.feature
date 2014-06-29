@@ -6,14 +6,14 @@ Feature: Checkout product promotion
 
     Background:
         Given the following products exist:
-          | name    | price |
-          | Buzz    | 500   |
-          | Potato  | 200   |
-          | Etch    | 20    |
-		  | Woody   | 125   |
-          | Sarge   | 25    |
-          | Lenny   | 15    |
-          | Ubu     | 200   |
+          | name   | price |
+          | Buzz   | 500   |
+          | Potato | 200   |
+          | Etch   | 20    |
+          | Woody  | 125   |
+          | Sarge  | 25    |
+          | Lenny  | 15    |
+          | Ubu    | 200   |
         And the following promotions exist:
           | name                | description                      |
           | Free product        | Almost free product over 100 eur |
@@ -23,6 +23,7 @@ Feature: Checkout product promotion
         And promotion "Free product" has following actions defined:
           | type        | configuration                     |
           | Add product | variant:Lenny,quantity:1,price:10 |
+        And there is default currency configured
 
     Scenario: Free product is not applied when the cart
               has not the required amount

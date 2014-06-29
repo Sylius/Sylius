@@ -6,6 +6,7 @@ Feature: Orders management
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |

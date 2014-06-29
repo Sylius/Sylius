@@ -24,6 +24,7 @@ Feature: Cart taxation
           And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 50    | PHP T-Shirts | Taxable Goods |
+        And there is default currency configured
 
     Scenario: No taxes are applied for unknown billing address
               when default tax zone is not configured

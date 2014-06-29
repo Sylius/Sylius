@@ -6,6 +6,7 @@ Feature: Shipping methods
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |

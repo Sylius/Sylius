@@ -22,6 +22,7 @@ Feature: Checkout finalization
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
+          And there is default currency configured
 
     Scenario: Placing the order
         Given I am logged in user

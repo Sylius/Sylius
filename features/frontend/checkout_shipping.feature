@@ -32,6 +32,7 @@ Feature: Checkout shipping
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
           And I am logged in user
+          And there is default currency configured
           And I added product "PHP Top" to cart
 
     Scenario: Only available methods are displayed to user for zone

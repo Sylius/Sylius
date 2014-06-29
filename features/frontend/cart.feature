@@ -25,6 +25,7 @@ Feature: Cart
           And product "Super T-Shirt" is available in all variations
           And product "Git T-Shirt" is available in all variations
           And product "Black T-Shirt" is available in all variations
+          And there is default currency configured
 
     Scenario: Seeing empty cart
         Given I am on the store homepage

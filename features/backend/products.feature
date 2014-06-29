@@ -6,6 +6,7 @@ Feature: Products
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following options:
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |

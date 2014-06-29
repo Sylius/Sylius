@@ -30,6 +30,7 @@ Feature: Checkout Payment
           And I fill in the shipping address to United Kingdom
           And I press "Continue"
           And I select the "DHL Express" radio button
+          And there is default currency configured
 
     Scenario: Accessing payment checkout step
         Given I press "Continue"
