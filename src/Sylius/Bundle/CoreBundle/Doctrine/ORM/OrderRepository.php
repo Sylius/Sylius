@@ -154,6 +154,12 @@ class OrderRepository extends CartRepository
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
             ;
         }
+        if (!empty($criteria['paymentState'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.paymentState', ':paymentState'))
+                ->setParameter('paymentState', $criteria['paymentState'])
+            ;
+        }
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
