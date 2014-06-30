@@ -19,9 +19,9 @@ namespace Sylius\Component\Promotion\Model;
 interface PromotionCouponAwareSubjectInterface extends PromotionSubjectInterface
 {
     /**
-     * Get associated coupon.
+     * Gets associated promotion coupons.
      *
      * @return null|CouponInterface
      */
-    public function getPromotionCoupon();
+    public function getPromotionCoupons();
 }

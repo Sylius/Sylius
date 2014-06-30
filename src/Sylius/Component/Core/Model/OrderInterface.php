@@ -16,7 +16,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
 
@@ -215,11 +215,25 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     public function setCurrency($currency);
 
     /**
-     * Set promotion coupon.
+     * Adds promotion coupon.
      *
-     * @param CouponInterface $coupon
+     * @param BaseCouponInterface $coupon
      */
-    public function setPromotionCoupon(CouponInterface $coupon = null);
+    public function addPromotionCoupon(BaseCouponInterface $coupon);
+
+    /**
+     * Removes promotion coupon.
+     *
+     * @param BaseCouponInterface $coupon
+     */
+    public function removePromotionCoupon(BaseCouponInterface $coupon);
+
+    /**
+     * Has promotion coupon?
+     *
+     * @param BaseCouponInterface $coupon
+     */
+    public function hasPromotionCoupon(BaseCouponInterface $coupon);
 
     /**
      * Get the shipping state.

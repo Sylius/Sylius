@@ -96,6 +96,8 @@ sylius_promotion:
     classes:
         promotion_subject:
             model: %sylius.model.order.class%
+        promotion_coupon:
+            model: Sylius\Component\Core\Model\Coupon
 
 sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
