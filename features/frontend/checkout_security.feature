@@ -5,7 +5,8 @@ Feature: Checkout security
     I want to login or register during checkout
 
     Background:
-        Given there are following taxonomies defined:
+        Given there is default currency configured
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -28,7 +29,6 @@ Feature: Checkout security
             | Dummy | dummy   | yes     |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
-          And there is default currency configured
 
     Scenario: Trying to sign in with bad credentials
               during the checkout

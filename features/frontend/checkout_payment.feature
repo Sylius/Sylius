@@ -5,7 +5,8 @@ Feature: Checkout Payment
     I want to be able to use checkout payment step
 
     Background:
-        Given there are following taxonomies defined:
+        Given there is default currency configured
+        And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:
@@ -30,7 +31,6 @@ Feature: Checkout Payment
           And I fill in the shipping address to United Kingdom
           And I press "Continue"
           And I select the "DHL Express" radio button
-          And there is default currency configured
 
     Scenario: Accessing payment checkout step
         Given I press "Continue"

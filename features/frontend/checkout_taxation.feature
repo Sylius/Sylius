@@ -28,8 +28,8 @@ Feature: Checkout taxation
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
-          And I am logged in user
           And there is default currency configured
+          And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 
