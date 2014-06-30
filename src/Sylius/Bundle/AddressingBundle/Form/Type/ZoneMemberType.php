@@ -32,15 +32,15 @@ abstract class ZoneMemberType extends AbstractType
     /**
      * Validation groups.
      *
-     * @var string
+     * @var string[]
      */
     protected $validationGroups;
 
     /**
      * Constructor.
      *
-     * @param string $dataClass
-     * @param array  $validationGroups
+     * @param string   $dataClass
+     * @param string[] $validationGroups
      */
     public function __construct($dataClass, array $validationGroups)
     {

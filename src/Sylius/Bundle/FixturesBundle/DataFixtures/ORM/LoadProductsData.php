@@ -33,17 +33,10 @@ class LoadProductsData extends DataFixture
     private $totalVariants = 0;
 
     /**
-     * @var string
-     */
-    private $productAttributeClass;
-
-    /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $this->productAttributeClass = $this->container->getParameter('sylius.model.product_attribute.class');
-
         // T-Shirts...
         for ($i = 1; $i <= 120; $i++) {
             switch (rand(0, 3)) {

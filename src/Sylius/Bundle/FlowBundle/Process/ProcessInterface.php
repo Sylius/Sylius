@@ -105,14 +105,14 @@ interface ProcessInterface
     /**
      * Get validator.
      *
-     * @return \Closure
+     * @return ProcessValidatorInterface
      */
     public function getValidator();
 
     /**
      * Set validator.
      *
-     * @param \Closure $validator
+     * @param ProcessValidatorInterface $validator
      */
     public function setValidator(ProcessValidatorInterface $validator);
 
@@ -140,7 +140,7 @@ interface ProcessInterface
     /**
      * Set redirection route params after complete.
      *
-     * @param string $redirect
+     * @param array $params
      */
     public function setRedirectParams(array $params);
 

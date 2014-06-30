@@ -21,14 +21,64 @@ use Doctrine\Common\Collections\Collection;
 interface CountryInterface
 {
     public function getId();
+
+    /**
+     * Get country name.
+     *
+     * @return string
+     */
     public function getName();
+
+    /**
+     * Set country name.
+     *
+     * @param string $name
+     */
     public function setName($name);
+
+    /**
+     * Get country ISO name.
+     *
+     * @return string
+     */
     public function getIsoName();
+
+    /**
+     * Set country ISO name.
+     *
+     * @param string $isoName
+     */
     public function setIsoName($isoName);
+
+    /**
+     * @return Collection|ProvinceInterface[]
+     */
     public function getProvinces();
+
+    /**
+     * @param Collection $provinces
+     */
     public function setProvinces(Collection $provinces);
+
+    /**
+     * @return bool
+     */
     public function hasProvinces();
+
+    /**
+     * @param ProvinceInterface $province
+     */
     public function addProvince(ProvinceInterface $province);
+
+    /**
+     * @param ProvinceInterface $province
+     */
     public function removeProvince(ProvinceInterface $province);
+
+    /**
+     * @param ProvinceInterface $province
+     *
+     * @return bool
+     */
     public function hasProvince(ProvinceInterface $province);
 }

@@ -44,7 +44,7 @@ class InsufficientStockExceptionListener
             return;
         }
 
-        $this->session->getFlashBag()->add(
+        $this->session->getBag('flashes')->add(
             'notice',
             $this->translator->trans(
                 'sylius.checkout.out_of_stock',

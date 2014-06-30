@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Exception\Driver;
+namespace Sylius\Component\Resource\Exception\Driver;
 
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>

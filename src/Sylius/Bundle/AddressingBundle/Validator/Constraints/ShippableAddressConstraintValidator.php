@@ -35,7 +35,7 @@ class ShippableAddressConstraintValidator extends ConstraintValidator
 
         $propertyPath = $this->context->getPropertyPath();
 
-        foreach ($this->context->getViolations()->getIterator() as $violation) {
+        foreach (iterator_to_array($this->context->getViolations()) as $violation) {
             if (0 === strpos($violation->getPropertyPath(), $propertyPath)) {
                 return;
             }

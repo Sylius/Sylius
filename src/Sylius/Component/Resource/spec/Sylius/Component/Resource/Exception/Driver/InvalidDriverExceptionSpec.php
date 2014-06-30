@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Exception\Driver;
+namespace spec\Sylius\Component\Resource\Exception\Driver;
 
 use PhpSpec\ObjectBehavior;
 
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class UnknownDriverExceptionSpec extends ObjectBehavior
+class InvalidDriverExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('driver');
+        $this->beConstructedWith('driver', 'className');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Exception\Driver\UnknownDriverException');
+        $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\InvalidDriverException');
     }
 
     function it_should_extends_exception()

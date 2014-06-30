@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as FakerFactory;
 use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 

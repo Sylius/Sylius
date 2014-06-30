@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Component\Taxation\Resolver;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  */
 class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $taxRateRepository)
+    function let(RepositoryInterface $taxRateRepository)
     {
         $this->beConstructedWith($taxRateRepository);
     }
@@ -63,7 +63,6 @@ class TaxRateResolverSpec extends ObjectBehavior
     }
 
     function it_returns_null_if_taxable_does_not_belong_to_any_category(
-        $taxRateRepository,
         TaxableInterface $taxable
     )
     {
