@@ -25,7 +25,6 @@
         "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
         "sylius/resource-bundle":   "0.11.*@dev",
-        "sylius/money":             "0.11.*@dev",
         "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
