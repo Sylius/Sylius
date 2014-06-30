@@ -6,6 +6,7 @@ Feature: Products filter
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And the following products exist:
             | name          | price | sku |
             | Super T-Shirt | 19.99 | 123 |

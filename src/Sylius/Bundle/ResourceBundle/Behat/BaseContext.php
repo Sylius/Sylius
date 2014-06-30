@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Symfony\Component\PropertyAccess\StringUtil;
 

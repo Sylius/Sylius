@@ -7,6 +7,7 @@ Feature: User account password change
     Background:
         Given I am logged in user
           And I am on my account homepage
+          And there is default currency configured
 
     Scenario: Viewing my password change page
         Given I follow "My password"

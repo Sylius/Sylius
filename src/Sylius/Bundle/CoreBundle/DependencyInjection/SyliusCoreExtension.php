@@ -29,7 +29,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     private $bundles = array(
         'sylius_addressing',
         'sylius_inventory',
-        'sylius_money',
+        'sylius_currency',
         'sylius_payment',
         'sylius_payum',
         'sylius_product',

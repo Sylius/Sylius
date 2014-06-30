@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext as BaseCurrencyContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -24,8 +24,8 @@ class CurrencyContext extends BaseCurrencyContext
     protected $userManager;
 
     public function __construct(
-        SecurityContextInterface $securityContext,
         SessionInterface $session,
+        SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
         ObjectManager $userManager
     ) {

@@ -6,6 +6,7 @@ Feature: User account addresses page
 
     Background:
         Given I am logged in user
+          And there is default currency configured
           And the following countries exist:
             | name    |
             | Germany |

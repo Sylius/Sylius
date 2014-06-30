@@ -7,6 +7,7 @@ Feature: User account orders page
   Background:
     Given I am logged in user
       And I am on my account homepage
+      And there is default currency configured
       And the following zones are defined:
         | name         | type    | members                 |
         | Scandinavia  | country | Norway, Sweden, Finland |

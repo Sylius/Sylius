@@ -14,6 +14,7 @@ namespace Sylius\Bundle\WebBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
@@ -527,9 +528,27 @@ class WebContext extends DefaultContext
     /**
      * @Then /^I should see product prices in "([^"]*)"$/
      */
-    public function iShouldSeeProductPricesIn($currency)
+    public function iShouldSeeProductPricesIn($code)
     {
-        $this->assertSession()->elementExists('css', sprintf('span.label:contains("%s")', $currency));
+        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($code);
+        $this->assertSession()->pageTextContains($symbol);
+    }
+
+    /**
+     * @Then I should see :count available currencies
+     */
+    public function iShouldSeeAvailableCurrencies($count)
+    {
+        $this->assertSession()->elementsCount('css', '.currency-menu ul li', $count);
+    }
+
+    /**
+     * @When I change the currency to :currency
+     */
+    public function iChangeTheCurrencyTo($code)
+    {
+        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($code);
+        $this->clickLink($symbol);
     }
 
     /**

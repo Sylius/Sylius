@@ -6,7 +6,7 @@ Feature: Sign in to the store via OAuth
 
     Background:
         Given I am not logged in
-          And I am on the store homepage
+        And I am on the store homepage
 
     Scenario Outline: Get to the OAuth login page
          When I follow "Login"

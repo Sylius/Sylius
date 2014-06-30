@@ -1,5 +1,0 @@
-sylius:
-    form:
-        exchange_rate:
-            currency: Currency
-            rate: Rate

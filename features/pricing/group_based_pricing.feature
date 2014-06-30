@@ -5,7 +5,8 @@ Feature: Group based pricing
     I want to configure prices per customer group
 
     Background:
-        Given there are following taxonomies defined:
+        Given there is default currency configured
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:

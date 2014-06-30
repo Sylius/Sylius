@@ -6,6 +6,7 @@ Feature: Managing locales
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following locales configured:
             | code  | activated |
             | de_DE | yes       |

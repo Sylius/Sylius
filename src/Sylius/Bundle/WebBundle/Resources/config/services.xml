@@ -58,7 +58,7 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sylius.repository.exchange_rate" />
+            <argument type="service" id="sylius.currency_provider" />
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.twig.extension.money" />

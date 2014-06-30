@@ -18,6 +18,7 @@ default:
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@account && ~@javascript"
 
@@ -28,6 +29,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@addressing && ~@javascript"
 
@@ -38,6 +40,7 @@ default:
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@cart && ~@javascript"
 
@@ -51,6 +54,7 @@ default:
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@checkout && ~@javascript"
 
@@ -73,6 +77,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@dashboard && ~@javascript"
 
@@ -81,6 +86,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@homepage && ~@javascript"
 
@@ -91,6 +97,7 @@ default:
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@inventory && ~@javascript"
 
@@ -100,6 +107,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@localization && ~@javascript"
 
@@ -120,6 +128,7 @@ default:
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@orders && ~@javascript"
 
@@ -130,6 +139,7 @@ default:
                 - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@payments && ~@javascript"
 
@@ -170,6 +180,7 @@ default:
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@promotions && ~@javascript"
 
@@ -178,6 +189,7 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@settings && ~@javascript"
 
@@ -191,6 +203,7 @@ default:
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@shipping && ~@javascript"
 
@@ -202,6 +215,7 @@ default:
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@taxation && ~@javascript"
 
@@ -212,6 +226,7 @@ default:
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@taxonomies && ~@javascript"
 
@@ -222,6 +237,7 @@ default:
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ProductBundle\Behat\ProductContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
             filters:
                 tags: "@users && ~@javascript"
 

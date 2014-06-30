@@ -34,6 +34,7 @@ Feature: Checkout percentage discount promotions
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
+        And there is default currency configured
 
     Scenario: Fixed discount promotion is applied when the cart
               has the required amount

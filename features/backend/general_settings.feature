@@ -6,6 +6,7 @@ Feature: General settings
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
 
     Scenario: Accessing the settings form
         Given I am on the dashboard page

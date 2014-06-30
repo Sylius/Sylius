@@ -32,6 +32,7 @@ Feature: Checkout addressing
             | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
             | USA          | FedEx         | Flat rate  | Amount: 6500  |
           And I am logged in user
+          And there is default currency configured
 
     Scenario: Filling the shipping address
         Given I added product "PHP Top" to cart

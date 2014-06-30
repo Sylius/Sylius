@@ -7,6 +7,7 @@ Feature: User account profile edition
     Background:
         Given I am logged in user
           And I am on my account homepage
+          And there is default currency configured
 
     Scenario: Viewing my personal information page
         Given I follow "My personal information"
