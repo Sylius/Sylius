@@ -30,8 +30,8 @@ class PromotionContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $coupon = $repository->createNew();
             $coupon->setCode($data['code']);
-            $coupon->setUsageLimit($data['usage limit']);
-            $coupon->setUsed($data['used']);
+            $coupon->setUsageLimit(isset($data['usage limit']) ? $data['usage limit'] : 0);
+            $coupon->setUsed(isset($data['used']) ? $data['used'] : 0);
 
             $promotion->addCoupon($coupon);
 
@@ -108,11 +108,11 @@ class PromotionContext extends DefaultContext
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);
 
-            if (array_key_exists('usage limit', $data)) {
-                $promotion->setUsageLimit($data['usage limit']);
+            if (array_key_exists('usage limit', $data) && '' !== $data['usage limit']) {
+                $promotion->setUsageLimit((int) $data['usage limit']);
             }
-            if (array_key_exists('used', $data)) {
-                $promotion->setUsed($data['used']);
+            if (array_key_exists('used', $data) && '' !== $data['used']) {
+                $promotion->setUsed((int) $data['used']);
             }
             if (array_key_exists('starts', $data)) {
                 $promotion->setStartsAt(new \DateTime($data['starts']));
