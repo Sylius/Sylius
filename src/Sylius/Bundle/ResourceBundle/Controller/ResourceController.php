@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
+use Hateoas\Representation\Factory\PagerfantaFactory;
+use Hateoas\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -126,6 +128,16 @@ class ResourceController extends FOSRestController
             );
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
+
+            if ($this->config->isApiRequest()) {
+                $resources = $this->getPagerfantaFactory()->createRepresentation(
+                    $resources,
+                    new Route(
+                        $request->attributes->get('_route'),
+                        $request->attributes->get('_route_params')
+                    )
+                );
+            }
         } else {
             $resources = $this->resourceResolver->getResource(
                 $repository,
@@ -156,6 +168,10 @@ class ResourceController extends FOSRestController
 
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
+
+            if ($this->config->isApiRequest()) {
+                return $this->handleView($this->view($resource));
+            }
 
             if (null === $resource) {
                 return $this->redirectHandler->redirectToIndex();
@@ -195,6 +211,10 @@ class ResourceController extends FOSRestController
             $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
+            if ($this->config->isApiRequest()) {
+                return $this->handleView($this->view($resource));
+            }
+
             return $this->redirectHandler->redirectTo($resource);
         }
 
@@ -232,6 +252,10 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404($request);
         $this->domainManager->delete($resource);
+
+        if ($this->config->isApiRequest()) {
+            return $this->handleView($this->view());
+        }
 
         return $this->redirectHandler->redirectToIndex();
     }
@@ -328,6 +352,12 @@ class ResourceController extends FOSRestController
         return $this->get($this->config->getServiceName('repository'));
     }
 
+    /**
+     * @param Request $request
+     * @param integer $movement
+     *
+     * @return RedirectResponse
+     */
     protected function move(Request $request, $movement)
     {
         $resource = $this->findOr404($request);
@@ -335,5 +365,13 @@ class ResourceController extends FOSRestController
         $this->domainManager->move($resource, $movement);
 
         return $this->redirectHandler->redirectToIndex();
+    }
+
+    /**
+     * @return PagerfantaFactory
+     */
+    protected function getPagerfantaFactory()
+    {
+        return new PagerfantaFactory('page', 'paginate');
     }
 }

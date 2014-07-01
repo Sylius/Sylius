@@ -56,7 +56,8 @@
         "symfony/symfony":                      "~2.3",
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
-        "winzou/state-machine-bundle":          "~0.1.2"
+        "winzou/state-machine-bundle":          "~0.1.2",
+        "willdurand/hateoas-bundle":            "@stable"
     },
     "require-dev": {
         "behat/behat":                       "~3.0",
