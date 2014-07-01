@@ -378,7 +378,7 @@ sylius:
         shipping_address: Shipping address
         shipping_charges: Shipping charges
         shipping_total: Shipping total
-        show_header: Order #%number%
+        show_header: "Order #%number%"
         state:
             cart_locked: Cart locked
             checkout: Checkout
@@ -438,12 +438,14 @@ sylius:
         no_results: There are no payments configured.
         state:
             0: State
+            cancelled: Cancelled
             checkout: Checkout
             completed: Completed
             failed: Failed
             new: New
             pending: Pending
             processing: Processing
+            refunded: Refunded
             unknown: Unknown
             void: Void
         update_header: Editing payment
