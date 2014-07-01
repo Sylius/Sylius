@@ -28,7 +28,7 @@ class Coupon extends BaseCoupon implements CouponInterface
         return $this->order;
     }
 
-    public function setOrder(BaseOrderInterface $order)
+    public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
 

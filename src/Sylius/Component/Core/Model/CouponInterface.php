@@ -22,5 +22,5 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 interface CouponInterface extends BaseCouponInterface
 {
     public function getOrder();
-    public function setOrder(BaseOrderInterface $order);
+    public function setOrder(BaseOrderInterface $order = null);
 }

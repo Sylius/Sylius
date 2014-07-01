@@ -30,8 +30,11 @@ class CartType extends BaseCartType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', array(
-                'label'  => 'sylius.form.cart.coupon'
+            ->add('promotionCoupons', 'collection', array(
+                'type'         => 'sylius_promotion_coupon_to_code',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ))
         ;
     }
