@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ce6725e2c59cee877ce9f3705de597e",
+    "hash": "800b8454f8953fcf09169bfc9a41767d",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -79,8 +79,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -154,8 +153,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -400,16 +398,15 @@
         {
             "name": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "target-dir": "Doctrine/Bundle/DoctrineBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "5173c05e65668449214373f1bf8997f73848d36c"
+                "reference": "e604136b2bfb95cfcade987ec21d69bf65975b71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/5173c05e65668449214373f1bf8997f73848d36c",
-                "reference": "5173c05e65668449214373f1bf8997f73848d36c",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/e604136b2bfb95cfcade987ec21d69bf65975b71",
+                "reference": "e604136b2bfb95cfcade987ec21d69bf65975b71",
                 "shasum": ""
             },
             "require": {
@@ -441,8 +438,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Bundle\\DoctrineBundle": ""
+                "psr-4": {
+                    "Doctrine\\Bundle\\DoctrineBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -477,7 +474,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2014-05-07 15:48:46"
+            "time": "2014-06-21 16:09:36"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -655,8 +652,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -746,12 +742,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "46a031ddaea47d0685200027cfe8c83b02aee6f6"
+                "reference": "77d9ffeb4702a8d2daab2888869786b01e609e0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/46a031ddaea47d0685200027cfe8c83b02aee6f6",
-                "reference": "46a031ddaea47d0685200027cfe8c83b02aee6f6",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/77d9ffeb4702a8d2daab2888869786b01e609e0c",
+                "reference": "77d9ffeb4702a8d2daab2888869786b01e609e0c",
                 "shasum": ""
             },
             "require": {
@@ -798,7 +794,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2014-03-16 19:02:43"
+            "time": "2014-06-29 17:28:09"
         },
         {
             "name": "doctrine/orm",
@@ -1108,12 +1104,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "a93c355d70fd57a8171faece7969a13cb9387efb"
+                "reference": "71ed2505443f375876a38e82ff0d1929d6078270"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/a93c355d70fd57a8171faece7969a13cb9387efb",
-                "reference": "a93c355d70fd57a8171faece7969a13cb9387efb",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/71ed2505443f375876a38e82ff0d1929d6078270",
+                "reference": "71ed2505443f375876a38e82ff0d1929d6078270",
                 "shasum": ""
             },
             "require": {
@@ -1168,19 +1164,19 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-06-08 14:16:45"
+            "time": "2014-06-13 14:56:35"
         },
         {
             "name": "gedmo/doctrine-extensions",
             "version": "v2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "shasum": ""
             },
@@ -2358,7 +2354,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2489,17 +2485,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
-                "reference": "9927cd482cd496d49a58cd153c4a09d9062b8276"
+                "reference": "cefcc47ad095bc4655d3a0151950ada796bc024d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/9927cd482cd496d49a58cd153c4a09d9062b8276",
-                "reference": "9927cd482cd496d49a58cd153c4a09d9062b8276",
+                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/cefcc47ad095bc4655d3a0151950ada796bc024d",
+                "reference": "cefcc47ad095bc4655d3a0151950ada796bc024d",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-snappy": "*",
                 "php": ">=5.3.2",
+                "symfony/finder": ">=2.0.0",
                 "symfony/framework-bundle": ">=2.0.0"
             },
             "type": "symfony-bundle",
@@ -2536,7 +2533,7 @@
                 "pdf",
                 "snappy"
             ],
-            "time": "2014-03-20 16:17:22"
+            "time": "2014-06-19 09:27:46"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2805,7 +2802,7 @@
                     "name": "Mathias Verraes",
                     "email": "mathias@verraes.net",
                     "homepage": "http://verraes.net",
-                    "role": "Developer"
+                    "role": "Developer of wrapped Money library"
                 }
             ],
             "description": "PHP implementation of Fowler's Money pattern",
@@ -3542,16 +3539,16 @@
         },
         {
             "name": "phpcr/phpcr-utils",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpcr/phpcr-utils.git",
-                "reference": "e50943432f8e26f9fc05af7994f8747ead3270fa"
+                "reference": "25e62cda03a43ded9f95830021aa1ff8e077997b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpcr/phpcr-utils/zipball/e50943432f8e26f9fc05af7994f8747ead3270fa",
-                "reference": "e50943432f8e26f9fc05af7994f8747ead3270fa",
+                "url": "https://api.github.com/repos/phpcr/phpcr-utils/zipball/25e62cda03a43ded9f95830021aa1ff8e077997b",
+                "reference": "25e62cda03a43ded9f95830021aa1ff8e077997b",
                 "shasum": ""
             },
             "require": {
@@ -3601,7 +3598,7 @@
                 "contentrepository",
                 "phpcr"
             ],
-            "time": "2014-02-02 18:30:21"
+            "time": "2014-06-17 13:04:25"
         },
         {
             "name": "phpoption/phpoption",
@@ -3726,9 +3723,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "The base bundle for the Symfony Distributions",
@@ -4841,9 +4836,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
@@ -4998,7 +4991,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -5108,16 +5101,16 @@
         },
         {
             "name": "winzou/state-machine-bundle",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/winzou/StateMachineBundle.git",
-                "reference": "0b81a55db1d1a3751426f2531442ad9c5432b812"
+                "reference": "b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/0b81a55db1d1a3751426f2531442ad9c5432b812",
-                "reference": "0b81a55db1d1a3751426f2531442ad9c5432b812",
+                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca",
+                "reference": "b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca",
                 "shasum": ""
             },
             "require": {
@@ -5151,7 +5144,7 @@
                 "statemachine",
                 "symfony"
             ],
-            "time": "2014-05-27 04:23:03"
+            "time": "2014-06-20 03:56:36"
         }
     ],
     "packages-dev": [
@@ -5718,9 +5711,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Symfony Community",

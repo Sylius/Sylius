@@ -31,7 +31,7 @@
         "hwi/oauth-bundle":                     "0.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope-doctrine-dbal":    "1.1.*",
-        "jms/serializer-bundle":                "0.12.*",
+        "jms/serializer-bundle":                "~0.12",
         "jms/translation-bundle":               "1.1.*",
         "knplabs/knp-gaufrette-bundle":         "*@dev",
         "knplabs/knp-snappy-bundle":            "*@dev",
