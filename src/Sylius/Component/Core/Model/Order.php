@@ -19,6 +19,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Order entity.
@@ -442,8 +443,16 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotionCoupon(BaseCouponInterface $coupon)
+    public function addPromotionCoupon($coupon)
     {
+        if (null === $coupon) {
+            return $this;
+        }
+
+        if (!$coupon instanceof BaseCouponInterface) {
+            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+        }
+
         if (!$this->hasPromotionCoupon($coupon)) {
             $coupon->setOrder($this);
             $this->promotionCoupons->add($coupon);
@@ -455,8 +464,16 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotionCoupon(BaseCouponInterface $coupon)
+    public function removePromotionCoupon($coupon)
     {
+        if (null === $coupon) {
+            return $this;
+        }
+
+        if (!$coupon instanceof BaseCouponInterface) {
+            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+        }
+
         if ($this->hasPromotionCoupon($coupon)) {
             $coupon->setOrder(null);
             $this->promotionCoupons->removeElement($coupon);
@@ -468,7 +485,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotionCoupon(BaseCouponInterface $coupon)
+    public function hasPromotionCoupon($coupon)
     {
         return $this->promotionCoupons->contains($coupon);
     }

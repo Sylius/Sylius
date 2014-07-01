@@ -219,21 +219,21 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      *
      * @param BaseCouponInterface $coupon
      */
-    public function addPromotionCoupon(BaseCouponInterface $coupon);
+    public function addPromotionCoupon($coupon);
 
     /**
      * Removes promotion coupon.
      *
      * @param BaseCouponInterface $coupon
      */
-    public function removePromotionCoupon(BaseCouponInterface $coupon);
+    public function removePromotionCoupon($coupon);
 
     /**
      * Has promotion coupon?
      *
      * @param BaseCouponInterface $coupon
      */
-    public function hasPromotionCoupon(BaseCouponInterface $coupon);
+    public function hasPromotionCoupon($coupon);
 
     /**
      * Get the shipping state.
