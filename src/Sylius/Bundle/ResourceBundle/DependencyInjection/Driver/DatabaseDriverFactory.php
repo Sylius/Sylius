@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
-use Sylius\Bundle\ResourceBundle\Exception\Driver\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**

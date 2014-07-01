@@ -30,10 +30,17 @@ class ProvinceType extends AbstractType
     protected $dataClass;
 
     /**
+     * Validation groups.
+     *
+     * @var string[]
+     */
+    protected $validationGroups;
+
+    /**
      * Constructor.
      *
-     * @param string $dataClass
-     * @param array  $validationGroups
+     * @param string   $dataClass
+     * @param string[] $validationGroups
      */
     public function __construct($dataClass, array $validationGroups)
     {

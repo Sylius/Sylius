@@ -52,7 +52,7 @@ class NumberListener
     protected $sequenceClass;
 
     /**
-     * @var array
+     * @var SequenceSubjectInterface[]
      */
     protected $entitiesEnabled = array();
 
@@ -80,7 +80,7 @@ class NumberListener
 
     /**
      * Enable this listener for the given entity
-     * This will apply the number generator when this entity will be fushed
+     * This will apply the number generator when this entity will be flushed
      *
      * @param SequenceSubjectInterface $subject
      */
@@ -138,7 +138,7 @@ class NumberListener
 
         $sequence = $em
             ->getRepository($this->sequenceClass)
-            ->findOneByType($type)
+            ->findOneBy(array('type' => $type))
         ;
 
         if (null === $sequence) {

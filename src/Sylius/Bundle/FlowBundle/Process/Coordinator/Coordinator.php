@@ -57,7 +57,7 @@ class Coordinator implements CoordinatorInterface
      *
      * @var array
      */
-    protected $scenarios;
+    protected $scenarios = array();
 
     /**
      * Constructor.
@@ -71,8 +71,6 @@ class Coordinator implements CoordinatorInterface
         $this->router = $router;
         $this->builder = $builder;
         $this->context = $context;
-
-        $this->scenarios = array();
     }
 
     /**
@@ -86,8 +84,8 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->close();
 
-        if (($validator = $this->context->isValid()) !== true) {
-            return $validator->getResponse($step);
+        if (!$this->context->isValid()) {
+            return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
         return $this->redirectToStepDisplayAction($process, $step, $queryParameters);
@@ -125,8 +123,8 @@ class Coordinator implements CoordinatorInterface
             return $this->redirectToStepDisplayAction($process, $step);
         }
 
-        if (($validator = $this->context->isValid()) !== true) {
-            return $validator->getResponse($step);
+        if (!$this->context->isValid()) {
+            return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
         $result = $step->displayAction($this->context);
@@ -145,8 +143,8 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->rewindHistory();
 
-        if (($validator = $this->context->isValid()) !== true) {
-            return $validator->getResponse($step);
+        if (!$this->context->isValid()) {
+            return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
         $result = $step->forwardAction($this->context);
@@ -231,8 +229,8 @@ class Coordinator implements CoordinatorInterface
 
         // Default parameters for display route
         $routeParameters = array(
-                'scenarioAlias' => $process->getScenarioAlias(),
-                'stepName'      => $step->getName(),
+            'scenarioAlias' => $process->getScenarioAlias(),
+            'stepName'      => $step->getName(),
         );
 
         if (null !== $queryParameters) {

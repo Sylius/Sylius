@@ -13,12 +13,10 @@ namespace Sylius\Bundle\CoreBundle\Routing;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Util\ClassUtils;
-
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\DoctrineProvider;
 
@@ -33,7 +31,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
 
     /**
      * @param ManagerRegistry $managerRegistry
-     * @param array $routeConfigs
+     * @param array           $routeConfigs
      */
     public function __construct(ManagerRegistry $managerRegistry, array $routeConfigs)
     {
@@ -150,8 +148,8 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * @param $entity
-     * @param $fieldName
+     * @param string $entity
+     * @param string $fieldName
      *
      * @return string
      */
@@ -161,7 +159,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * @param $entity
+     * @param object $entity
      *
      * @return Route
      */

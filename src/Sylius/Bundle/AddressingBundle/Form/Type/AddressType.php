@@ -34,7 +34,7 @@ class AddressType extends AbstractType
     /**
      * Validation groups.
      *
-     * @var string
+     * @var string[]
      */
     protected $validationGroups;
 
@@ -47,7 +47,7 @@ class AddressType extends AbstractType
      * Constructor.
      *
      * @param string                   $dataClass
-     * @param array                    $validationGroups
+     * @param string[]                 $validationGroups
      * @param EventSubscriberInterface $eventListener
      */
     public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventListener)
