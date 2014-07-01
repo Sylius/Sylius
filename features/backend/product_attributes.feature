@@ -6,6 +6,7 @@ Feature: Product attributes
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following attributes:
             | name               | presentation   |
             | T-Shirt collection | Collection     |

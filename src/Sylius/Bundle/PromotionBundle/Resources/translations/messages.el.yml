@@ -1,3 +1,43 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Ποσό
+      percentage_discount_configuration:
+        percentage: Ποσοστό
+      shipping_discount_configuration:
+        percentage: Ποσοστό
+      type: Τύπος
+    rule:
+      item_count_configuration:
+        count: Πλήθος
+      item_total_configuration:
+        amount: Ποσό
+      user_loyality_configuration:
+        time: Ώρα
+        unit:
+          days: Ημέρες
+          weeks: Εβδομάδες
+          months: Μήνες
+          years: Έτη
+          0: Μονάδα
+      shipping_country_configuration:
+        country: Χώρα
+      type: Τύπος
+    coupon:
+      code: Κώδικος
+      usage_limit: Όριο χρήσης
+    coupon_generate_instruction:
+      amount: Ποσό
+      usage_limit: Όριο χρήσης
+    promotion:
+      actions: Ενέργειες
+      description: Περιγραφή
+      ends_at: Τελειώνει σε
+      name: Ονομασία
+      rules: Κανόνες
+      starts_at: Αρχίζει με
+      usage_limit: Όριο χρήσης

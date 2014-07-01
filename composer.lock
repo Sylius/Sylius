@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7ef12a62e139ba4063d5a02e65eb48f2",
+    "hash": "4ce6725e2c59cee877ce9f3705de597e",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -79,7 +79,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -153,7 +154,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -653,7 +655,8 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/"
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -1172,12 +1175,12 @@
             "version": "v2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
+                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "shasum": ""
             },
@@ -2355,7 +2358,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2802,7 +2805,7 @@
                     "name": "Mathias Verraes",
                     "email": "mathias@verraes.net",
                     "homepage": "http://verraes.net",
-                    "role": "Developer of wrapped Money library"
+                    "role": "Developer"
                 }
             ],
             "description": "PHP implementation of Fowler's Money pattern",
@@ -2922,17 +2925,17 @@
             "time": "2012-04-23 22:52:11"
         },
         {
-            "name": "omnipay/omnipay",
-            "version": "v1.1.0",
+            "name": "omnipay/common",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/omnipay/omnipay.git",
-                "reference": "3c957cb44e383378a9ba9fa604c4da502deb747e"
+                "url": "https://github.com/omnipay/common.git",
+                "reference": "f7d50ce82f3528e7402500d8722391ebb69070b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/omnipay/omnipay/zipball/3c957cb44e383378a9ba9fa604c4da502deb747e",
-                "reference": "3c957cb44e383378a9ba9fa604c4da502deb747e",
+                "url": "https://api.github.com/repos/omnipay/common/zipball/f7d50ce82f3528e7402500d8722391ebb69070b8",
+                "reference": "f7d50ce82f3528e7402500d8722391ebb69070b8",
                 "shasum": ""
             },
             "require": {
@@ -2941,22 +2944,113 @@
                 "symfony/http-foundation": "~2.1"
             },
             "require-dev": {
-                "guzzle/plugin-mock": "~3.1",
-                "mockery/mockery": "~0.7",
-                "phpunit/phpunit": "~3.7.16",
-                "silex/silex": "1.0.*@dev",
-                "squizlabs/php_codesniffer": "~1.4.4",
-                "twig/twig": "~1.12"
+                "omnipay/tests": "~2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
+                    "dev-master": "2.0.x-dev"
+                },
+                "gateways": [
+                    "AuthorizeNet_AIM",
+                    "AuthorizeNet_SIM",
+                    "Buckaroo",
+                    "Buckaroo_Ideal",
+                    "Buckaroo_PayPal",
+                    "CardSave",
+                    "Coinbase",
+                    "Dummy",
+                    "Eway_Rapid",
+                    "FirstData_Connect",
+                    "GoCardless",
+                    "Manual",
+                    "Migs_ThreeParty",
+                    "Migs_TwoParty",
+                    "Mollie",
+                    "MultiSafepay",
+                    "Netaxept",
+                    "NetBanx",
+                    "PayFast",
+                    "Payflow_Pro",
+                    "PaymentExpress_PxPay",
+                    "PaymentExpress_PxPost",
+                    "PayPal_Express",
+                    "PayPal_Pro",
+                    "Pin",
+                    "SagePay_Direct",
+                    "SagePay_Server",
+                    "SecurePay_DirectPost",
+                    "Stripe",
+                    "TargetPay_Directebanking",
+                    "TargetPay_Ideal",
+                    "TargetPay_Mrcash",
+                    "TwoCheckout",
+                    "WorldPay"
+                ]
             },
             "autoload": {
                 "psr-0": {
-                    "Omnipay": "src/"
+                    "Omnipay\\Common\\": "src/"
+                },
+                "classmap": [
+                    "src/Omnipay/Omnipay.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Macneil",
+                    "email": "adrian@adrianmacneil.com"
+                },
+                {
+                    "name": "Omnipay Contributors",
+                    "homepage": "https://github.com/omnipay/common/contributors"
+                }
+            ],
+            "description": "Common components for Omnipay payment processing library",
+            "homepage": "https://github.com/omnipay/common",
+            "keywords": [
+                "gateway",
+                "merchant",
+                "omnipay",
+                "pay",
+                "payment",
+                "purchase"
+            ],
+            "time": "2014-05-12 00:54:17"
+        },
+        {
+            "name": "omnipay/stripe",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omnipay/stripe.git",
+                "reference": "99c82dc42c7c0b9ec58d8c4fb917f3dc5d1c23e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omnipay/stripe/zipball/99c82dc42c7c0b9ec58d8c4fb917f3dc5d1c23e2",
+                "reference": "99c82dc42c7c0b9ec58d8c4fb917f3dc5d1c23e2",
+                "shasum": ""
+            },
+            "require": {
+                "omnipay/common": "~2.0"
+            },
+            "require-dev": {
+                "omnipay/tests": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnipay\\Stripe\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2969,53 +3063,21 @@
                     "email": "adrian@adrianmacneil.com"
                 },
                 {
-                    "name": "Omnipay Community",
-                    "homepage": "https://github.com/omnipay/omnipay/graphs/contributors"
+                    "name": "Omnipay Contributors",
+                    "homepage": "https://github.com/omnipay/stripe/contributors"
                 }
             ],
-            "description": "A framework agnostic, multi-gateway payment processing library",
-            "homepage": "https://github.com/adrianmacneil/omnipay",
+            "description": "Stripe driver for the Omnipay payment processing library",
+            "homepage": "https://github.com/omnipay/stripe",
             "keywords": [
-                "2checkout",
-                "2co",
-                "auth.net",
-                "authorize",
-                "authorize.net",
-                "buckaroo",
-                "cardsave",
-                "commweb",
-                "dps",
-                "egate",
-                "eway",
-                "express",
                 "gateway",
-                "gocardless",
-                "ideal",
                 "merchant",
-                "migs",
-                "mollie",
-                "multisafepay",
-                "netaxept",
-                "netbanx",
+                "omnipay",
                 "pay",
-                "payfast",
-                "payflow",
                 "payment",
-                "paymentexpress",
-                "paypal",
-                "pin",
-                "purchase",
-                "rapid",
-                "sagepay",
-                "securepay",
-                "stripe",
-                "tala",
-                "tala-payments",
-                "targetpay",
-                "twocheckout",
-                "worldpay"
+                "stripe"
             ],
-            "time": "2013-10-19 17:21:33"
+            "time": "2014-04-08 07:07:41"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -3178,16 +3240,16 @@
         },
         {
             "name": "payum/payum",
-            "version": "0.8.8",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "023cc952b8be72c4c80d53a866b9ad68a8942a0e"
+                "reference": "f8d428a684eb1738b7cd029582111d165b27be52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/023cc952b8be72c4c80d53a866b9ad68a8942a0e",
-                "reference": "023cc952b8be72c4c80d53a866b9ad68a8942a0e",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/f8d428a684eb1738b7cd029582111d165b27be52",
+                "reference": "f8d428a684eb1738b7cd029582111d165b27be52",
                 "shasum": ""
             },
             "require": {
@@ -3195,7 +3257,7 @@
                 "ext-soap": "*",
                 "klarna/checkout": "~1",
                 "kriswallsmith/buzz": "*",
-                "omnipay/omnipay": "~1.0",
+                "omnipay/common": "~2.0",
                 "paypal/rest-api-sdk-php": "0.5.*",
                 "php": ">=5.3.2"
             },
@@ -3203,6 +3265,7 @@
                 "payum/authorize-net-aim": "self.version",
                 "payum/be2bill": "self.version",
                 "payum/core": "self.version",
+                "payum/klarna-checkout": "self.version",
                 "payum/offline": "self.version",
                 "payum/omnipay-bridge": "self.version",
                 "payum/payex": "self.version",
@@ -3217,6 +3280,7 @@
                 "doctrine/orm": "2.3.*",
                 "ext-curl": "*",
                 "ext-pdo_sqlite": "*",
+                "omnipay/dummy": "~2.0",
                 "phpunit/phpunit": "3.7.*",
                 "psr/log": "~1.0",
                 "symfony/http-foundation": "~2",
@@ -3236,7 +3300,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8-dev"
+                    "dev-master": "0.9-dev"
                 }
             },
             "autoload": {
@@ -3280,35 +3344,40 @@
                 "paypal rest",
                 "recurring payment"
             ],
-            "time": "2014-05-29 13:48:04"
+            "time": "2014-06-17 07:02:36"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "0.8.5",
+            "version": "0.9.0",
             "target-dir": "Payum/Bundle/PayumBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "476e684fc5161521e5bc17a50c87bcb25118bc1b"
+                "reference": "6ed060da68f62000ee1ab77b9a83484938ff4007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/476e684fc5161521e5bc17a50c87bcb25118bc1b",
-                "reference": "476e684fc5161521e5bc17a50c87bcb25118bc1b",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/6ed060da68f62000ee1ab77b9a83484938ff4007",
+                "reference": "6ed060da68f62000ee1ab77b9a83484938ff4007",
                 "shasum": ""
             },
             "require": {
-                "payum/core": "0.8.*",
+                "payum/core": "0.9.*",
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.0",
-                "twig/twig": "*"
+                "symfony/form": "~2.3",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/twig-bundle": "~2.3",
+                "symfony/validator": "~2.3"
             },
             "require-dev": {
                 "doctrine/orm": "*",
-                "payum/payum": "0.8.*@dev",
+                "omnipay/dummy": "~2.0",
+                "omnipay/paypal": "~2.0",
+                "omnipay/stripe": "~2.0",
+                "payum/payum": "0.9.*",
                 "phpunit/phpunit": "~3.7",
-                "symfony/browser-kit": "~2.0",
-                "symfony/class-loader": "~2.0"
+                "symfony/browser-kit": "~2.3",
+                "symfony/class-loader": "~2.3"
             },
             "suggest": {
                 "payum/authorize-net-aim": "If you want to use authorize.net gateway",
@@ -3322,7 +3391,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8-dev"
+                    "dev-master": "0.9-dev"
                 }
             },
             "autoload": {
@@ -3364,7 +3433,7 @@
                 "paypal pro checkout",
                 "recurring payment"
             ],
-            "time": "2014-05-26 13:29:20"
+            "time": "2014-06-17 07:58:36"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3657,7 +3726,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "The base bundle for the Symfony Distributions",
@@ -4770,7 +4841,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
@@ -4925,7 +4998,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -5645,7 +5718,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",

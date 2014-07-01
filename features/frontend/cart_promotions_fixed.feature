@@ -62,6 +62,7 @@ Feature: Checkout fixed discount promotions
           And promotion "3rd order" has following actions defined:
             | type           | configuration |
             | Fixed discount | Amount: 10    |
+        And there is default currency configured
 
     Scenario: Fixed discount promotion is applied when the cart
               has the required amount

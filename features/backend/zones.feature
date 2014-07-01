@@ -6,6 +6,7 @@ Feature: Zones
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following zones:
             | name                      | type     | members                                       |
             | Baltic states             | country  | Lithuania, Latvia, Estonia                    |

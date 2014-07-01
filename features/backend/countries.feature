@@ -6,6 +6,7 @@ Feature: Countries and provinces
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following countries:
             | name    | provinces                       |
             | France  | Lyon, Toulouse, Rennes, Nancy   |

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.context.currency.class">Sylius\Bundle\CurrencyBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.currency_converter.class">Sylius\Component\Currency\Converter\CurrencyConverter</parameter>
+        <parameter key="sylius.currency_provider.class">Sylius\Component\Currency\Provider\CurrencyProvider</parameter>
+
+        <parameter key="sylius.form.type_extension.money.class">Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
+            <argument>%sylius.model.currency.class%</argument>
+            <argument>%sylius.validation_group.currency%</argument>
+            <tag name="form.type" alias="sylius_currency" />
+        </service>
+
+        <service id="sylius.form.type_extension.money" class="%sylius.form.type_extension.money.class%">
+            <argument type="service" id="sylius.context.currency" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius.context.currency" class="%sylius.context.currency.class%">
+            <argument type="service" id="session" />
+            <argument>%sylius.money.currency%</argument>
+        </service>
+        <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+        <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+    </services>
+
+</container>

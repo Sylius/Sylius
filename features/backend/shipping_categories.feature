@@ -6,6 +6,7 @@ Feature: Shipping categories
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following shipping categories:
             | name    |
             | Regular |

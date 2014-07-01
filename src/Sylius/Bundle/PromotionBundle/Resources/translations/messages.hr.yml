@@ -1,3 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Iznos
+      percentage_discount_configuration:
+        percentage: Postotak
+      shipping_discount_configuration:
+        percentage: Postotak
+      type: Vrsta
+    rule:
+      taxonomy_configuration:
+        taxons: Taksoni
+        exclude: Ne uključuje
+      item_count_configuration:
+        count: Brojač
+        equal: Jednak
+      item_total_configuration:
+        amount: Iznosu
+        equal: Jednak
+      nth_order_configuration:
+        nth: N-ti
+      user_loyality_configuration:
+        time: Vrijeme
+        unit:
+          days: Dani
+          weeks: Tjedni
+          months: Mjeseci
+          years: Godine
+          0: Jedinica
+        after: Korisnik koji se registrirao unutar definiranog perioda
+      shipping_country_configuration:
+        country: Država
+      type: Tip
+    coupon:
+      code: Kod za popust
+      usage_limit: Ograničenje koda za popust
+    coupon_generate_instruction:
+      amount: Iznos
+      usage_limit: Ograničenje generiranih kodova
+    promotion:
+      actions: Akcije
+      coupon_based: Promocija bazirana na kuponima za popust
+      description: Opis
+      ends_at: Završava
+      name: Naziv promocije
+      rules: Pravila
+      starts_at: Počinje
+      usage_limit: Ograničenje

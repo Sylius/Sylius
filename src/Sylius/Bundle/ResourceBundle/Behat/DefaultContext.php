@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -65,9 +65,9 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * @AfterScenario
+     * @BeforeScenario
      */
-    public function purgeDatabase(AfterScenarioScope $scope)
+    public function purgeDatabase(BeforeScenarioScope $scope)
     {
         $purger = new ORMPurger($this->getService('doctrine.orm.entity_manager'));
         $purger->purge();

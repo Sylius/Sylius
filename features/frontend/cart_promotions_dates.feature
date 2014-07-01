@@ -32,6 +32,7 @@ Feature: Checkout limited time promotions
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
+        And there is default currency configured
 
     Scenario: Promotion is applied when the order date corresponds
               with promotion dates

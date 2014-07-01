@@ -6,6 +6,7 @@ Feature: taxonomies
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are following taxonomies defined:
             | name     |
             | Category |

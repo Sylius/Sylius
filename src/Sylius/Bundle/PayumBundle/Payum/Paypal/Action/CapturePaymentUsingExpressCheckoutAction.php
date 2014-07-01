@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
-use Payum\Core\Action\PaymentAwareAction;
-use Payum\Core\Bridge\Spl\ArrayObject;
-use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\SecuredCaptureRequest;
+use Payum\Core\Security\TokenInterface;
+use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Payum\Core\Security\GenericTokenFactoryInterface;
 
-class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
+class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAction
 {
     /**
      * @var GenericTokenFactoryInterface
@@ -36,86 +34,54 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
     /**
      * {@inheritDoc}
      */
-    public function execute($request)
+    protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
     {
-        /** @var $request SecuredCaptureRequest */
-        if (!$this->supports($request)) {
-            throw RequestNotSupportedException::createActionNotSupported($this, $request);
+        if ($payment->getDetails()) {
+            return;
         }
 
-        /** @var $payment PaymentInterface */
-        $payment = $request->getModel();
-        $details = $payment->getDetails();
         $order = $payment->getOrder();
 
-        if (empty($details)) {
-            $details = array();
-            $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
-                $request->getToken()->getPaymentName(),
-                $payment
-            )->getTargetUrl();
-            $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber().'-'.$payment->getId();
-            $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
-            $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
-            $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
+        $details = array();
+        $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
+            $token->getPaymentName(),
+            $payment
+        )->getTargetUrl();
+        $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber().'-'.$payment->getId();
+        $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
+        $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
+        $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
 
-            $m = 0;
-            foreach ($order->getItems() as $item) {
-                $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal()/$item->getQuantity()/100, 2);
-                $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
+        $m = 0;
+        foreach ($order->getItems() as $item) {
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal()/$item->getQuantity()/100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
-                $m++;
-            }
-
-            if ($order->getTaxTotal() !== 0) {
-                $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getTaxTotal() / 100, 2);
-                $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
-
-                $m++;
-            }
-
-            if ($order->getPromotionTotal() !== 0) {
-                $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getPromotionTotal() / 100, 2);
-                $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
-
-                $m++;
-            }
-
-            if ($order->getShippingTotal() !== 0) {
-                $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getShippingTotal() / 100, 2);
-                $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
-            }
-
-            $payment->setDetails($details);
+            $m++;
         }
 
-        $details = ArrayObject::ensureArrayObject($details);
+        if ($order->getTaxTotal() !== 0) {
+            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getTaxTotal() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
 
-        try {
-            $request->setModel($details);
-            $this->payment->execute($request);
-
-            $payment->setDetails($details);
-            $request->setModel($payment);
-        } catch (\Exception $e) {
-            $payment->setDetails($details);
-            $request->setModel($payment);
-
-            throw $e;
+            $m++;
         }
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function supports($request)
-    {
-        return
-            $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof PaymentInterface
-        ;
+        if ($order->getPromotionTotal() !== 0) {
+            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getPromotionTotal() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
+
+            $m++;
+        }
+
+        if ($order->getShippingTotal() !== 0) {
+            $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getShippingTotal() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
+        }
+
+        $payment->setDetails($details);
     }
 }

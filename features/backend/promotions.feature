@@ -6,6 +6,7 @@ Feature: Promotions
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And the following promotions exist:
             | name           | description                            | usage limit | used | starts     | ends       |
             | New Year       | New Year Sale for more than 3 items    |             |      | 2013-12-31 | 2014-01-03 |

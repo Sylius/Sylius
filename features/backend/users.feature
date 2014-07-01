@@ -6,6 +6,7 @@ Feature: Users management
 
     Background:
         Given I am logged in as administrator
+          And there is default currency configured
           And there are products:
             | name | price |
             | Mug  | 5.99  |

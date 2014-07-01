@@ -18,35 +18,53 @@ use Sylius\Component\Money\Model\ExchangeRateInterface;
 class MoneyContext extends DefaultContext
 {
     /**
-     * @Given /^there are following exchange rates:$/
+     * @Given /^there are following currencies configured:$/
      */
-    public function thereAreExchangeRates(TableNode $table)
+    public function thereAreCurrencies(TableNode $table)
     {
-        foreach ($table->getHash() as $data) {
-            $this->thereIsExchangeRate($data['currency'], $data['rate'], false);
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('currency');
+
+        foreach ($repository->findAll() as $currency) {
+            $manager->remove($currency);
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
+
+        foreach ($table->getHash() as $data) {
+            $this->thereIsCurrency($data['code'], $data['exchange rate'], 'yes' === $data['enabled'], false);
+        }
+
+        $manager->flush();
     }
 
     /**
-     * @Given /^I created exchange rate "([^""]*)"$/
+     * @Given /^I created currency "([^""]*)"$/
      */
-    public function thereIsExchangeRate($currency, $rate = 1, $flush = true)
+    public function thereIsCurrency($code, $rate = 1, $enabled = true, $flush = true)
     {
-        $repository = $this->getRepository('exchange_rate');
+        $repository = $this->getRepository('currency');
 
-        /* @var $exchangeRate ExchangeRateInterface */
-        $exchangeRate = $repository->createNew();
-        $exchangeRate->setCurrency($currency);
-        $exchangeRate->setRate($rate);
+        $currency = $repository->createNew();
+        $currency->setCode($code);
+        $currency->setExchangeRate($rate);
+        $currency->setEnabled($enabled);
 
         $manager = $this->getEntityManager();
-        $manager->persist($exchangeRate);
+        $manager->persist($currency);
+
         if ($flush) {
             $manager->flush();
         }
 
-        return $exchangeRate;
+        return $currency;
+    }
+
+    /**
+     * @Given there is default currency configured
+     */
+    public function setupDefaultCurrency()
+    {
+        $this->thereIsCurrency('EUR');
     }
 }

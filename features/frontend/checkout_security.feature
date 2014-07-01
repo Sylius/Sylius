@@ -5,7 +5,8 @@ Feature: Checkout security
     I want to login or register during checkout
 
     Background:
-        Given there are following taxonomies defined:
+        Given there is default currency configured
+          And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:

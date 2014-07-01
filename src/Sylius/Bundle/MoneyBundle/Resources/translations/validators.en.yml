@@ -1,7 +1,0 @@
-sylius:
-    exchange_rate:
-        currency:
-            not_blank: Please choose currency.
-        rate:
-            not_blank: Please enter rate.
-        unique: Currency must be unique.

@@ -19,6 +19,7 @@ Feature: Checkout starting
             | Super T-Shirt | 20.00 | T-Shirt color | T-Shirts     | match              |
             | PHP Top       | 5.99  |               | PHP T-Shirts |                    |
           And product "Super T-Shirt" is available in all variations
+          And there is default currency configured
 
     Scenario: There is no checkout for empty cart
         Given I am on the store homepage

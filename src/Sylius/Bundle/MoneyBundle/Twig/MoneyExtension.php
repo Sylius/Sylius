@@ -39,8 +39,7 @@ class MoneyExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('sylius_money', array($this, 'formatMoney')),
-            new \Twig_SimpleFilter('sylius_price', array($this, 'formatPrice')),
+            new \Twig_SimpleFilter('sylius_money', array($this, 'formatAmount')),
         );
     }
 
@@ -52,22 +51,9 @@ class MoneyExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function formatMoney($amount, $currency = null)
+    public function formatAmount($amount, $currency = null)
     {
-        return $this->helper->formatMoney($amount, $currency);
-    }
-
-    /**
-     * Convert price between currencies and format the amount to nice display form.
-     *
-     * @param integer     $amount
-     * @param string|null $currency
-     *
-     * @return string
-     */
-    public function formatPrice($amount, $currency = null)
-    {
-        return $this->helper->formatPrice($amount, $currency);
+        return $this->helper->formatAmount($amount, $currency);
     }
 
     /**

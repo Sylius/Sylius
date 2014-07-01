@@ -7,7 +7,7 @@ sylius:
                 countries: Countries
                 customer: Customers
                 dashboard: Dashboard
-                exchange_rates: Exchange rates
+                currencies: Currencies
                 general_settings: General settings
                 homepage: Your store
                 locales: Locales
@@ -40,7 +40,7 @@ sylius:
                 countries: Countries
                 customer: Customers
                 dashboard: Dashboard
-                exchange_rates: Exchange rates
+                currencies: Currencies
                 general_settings: General settings
                 groups: Groups
                 homepage: Back to frontend

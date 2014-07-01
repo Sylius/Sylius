@@ -34,6 +34,7 @@ Feature: Checkout usage limited promotions
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
+        And there is default currency configured
 
     Scenario: Promotion with usage limit is applied when the
               number of usage is not reached

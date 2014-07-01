@@ -26,6 +26,7 @@ Feature: Tax categories
             | name         | price | taxons       | tax category |
             | PHP Top      | 50    | PHP T-Shirts | Clothing     |
             | Golden Apple | 120   | Food         | Food         |
+        And there is default currency configured
 
     Scenario: Correct taxes are applied for one item
         Given the default tax zone is "UK"

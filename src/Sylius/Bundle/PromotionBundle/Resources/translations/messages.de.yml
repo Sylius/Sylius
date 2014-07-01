@@ -12,14 +12,31 @@ sylius:
         percentage: Prozent
       type: Typ
     rule:
+      taxonomy_configuration:
+        taxons: Gruppen
+        exclude: Ausschließen
       item_count_configuration:
         count: Anzahl
         equal: Gleich
       item_total_configuration:
         amount: Anzahl
         equal: Gleich
+      nth_order_configuration:
+        nth: 'N#'
+      user_loyality_configuration:
+        time: Zeit
+        unit:
+          days: Tage
+          weeks: Wochen
+          months: Monate
+          years: Jahre
+          0: Einheit
+        after: Nach diesem Zeitraum erstellter Benutzer
+      shipping_country_configuration:
+        country: Land
       type: Typ
     coupon:
+      code: Code
       usage_limit: Nutzungslimit
     coupon_generate_instruction:
       amount: Anzahl
@@ -28,7 +45,8 @@ sylius:
       actions: Aktionen
       coupon_based: Gutschein basiert auf
       description: Beschreibung
-      ends_at: Ended am
+      ends_at: Endet am
+      name: Name
       rules: Regeln
       starts_at: Beginnt am
       usage_limit: Nutzungslimit

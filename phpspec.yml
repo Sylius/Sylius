@@ -5,7 +5,7 @@ suites:
     Core             : { namespace: Sylius, spec_path: src/Sylius/Component/Core }
     Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
-    Money            : { namespace: Sylius, spec_path: src/Sylius/Component/Money }
+    Currency         : { namespace: Sylius, spec_path: src/Sylius/Component/Currency }
     Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
     Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
     Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
@@ -25,6 +25,7 @@ suites:
     AttributeBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/AttributeBundle }
     CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
     CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
+    CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
     FlowBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }

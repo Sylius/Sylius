@@ -103,8 +103,8 @@ sylius:
         customers: Customers
         dashboard: Dashboard
         edit: Edit
-        exchange_rate:
-            index: Exchange Rates
+        currency:
+            index: Currencies
         general_settings: General Settings
         generate: Generate
         group:
@@ -242,16 +242,18 @@ sylius:
     move_up: move up
     move_down: move down
     email: E-Mail
-    exchange_rate:
-        create: Create exchange rate
-        create_header: New exchange rate
-        currency: currency
+    currency:
+        create: Create currency
+        create_header: New currency
+        code: Code
         id: ID
-        index_header: Exchange rates
-        no_results: There are no exchange rates to display.
-        rate: rate
-        update_header: Editing exchange rate
-        updated_at: last update
+        name: Name
+        enabled: Enabled
+        index_header: Currencies
+        no_results: There are no currencies to display.
+        exchange_rate: Exchange rate
+        update_header: Editing currency
+        updated_at: Last update
     filter: Filter
     form:
         cart:
