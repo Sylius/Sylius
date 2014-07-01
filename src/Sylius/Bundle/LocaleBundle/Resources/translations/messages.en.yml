@@ -1,6 +1,5 @@
 sylius:
     form:
-        currency:
+        locale:
             code: Code
-            exchange_rate: Exchange rate
             enabled: Enabled

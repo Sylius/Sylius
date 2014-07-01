@@ -1,7 +1,5 @@
 sylius:
-    currency:
+    locale:
         code:
-            not_blank: Please choose currency code.
-            unique: Currency code must be unique.
-        exchange_rate:
-            not_blank: Please enter exchange rate.
+            not_blank: Please choose locale code.
+            unique: Locale code must be unique.
