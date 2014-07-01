@@ -19,7 +19,7 @@ sylius:
                 payments: Плаћања
                 products: Пороизводи
                 promotions: Промоције
-                properties: Конфигурација атрибута
+                attributes: Конфигурација атрибута
                 prototypes: Прототипови производа
                 sales: Наруџбине
                 shipments: Пошиљке
@@ -47,7 +47,7 @@ sylius:
                 payments: Плаћања
                 products: Производи
                 promotions: Промоције
-                properties: Конфигурација атрибута
+                attributes: Конфигурација атрибута
                 prototypes: Прототипови
                 sales: Наруџбине
                 shipments: Пошиљке

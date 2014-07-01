@@ -475,7 +475,7 @@ sylius:
     no_taxons: Brak przypisanych kategorii
     options: Warianty
     price: Cena detaliczna
-    properties: Właściwości
+    attributes: Właściwości
     restricted_zone: Strefa zamknięta
     shipping_category: Kategoria wysyłki
     show: Zobacz więcej
@@ -488,7 +488,7 @@ sylius:
       images: Zdjęcia
       options: Warianty
       product: Produkt
-      properties: Właściwości
+      attributes: Właściwości
     tax_category: Kategoria podatkowa
     unavailable: Niedostępne
     update_header: Edycja produktu
@@ -557,7 +557,7 @@ sylius:
     name: nazwa
     no_results: Brak zdefiniowanych prototypów.
     options: warianty
-    properties: właściwości
+    attributes: właściwości
     update_header: Edytowanie prototypu
     updated_at: ostatnia aktualizacja
   province:

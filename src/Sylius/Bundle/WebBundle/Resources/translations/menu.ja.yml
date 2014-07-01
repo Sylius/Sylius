@@ -20,7 +20,7 @@ sylius:
         payments: 入金管理
         products: 商品管理
         promotions: プロモーション管理
-        properties: 商品プロパティ管理
+        attributes: 商品プロパティ管理
         prototypes: 商品プロトタイプ管理
         sales: 注文管理
         shipments: 出荷管理
@@ -49,7 +49,7 @@ sylius:
         payments: 入金管理
         products: 商品管理
         promotions: プロモーション管理
-        properties: 商品プロパティ管理
+        attributes: 商品プロパティ管理
         prototypes: 商品プロトタイプ管理
         sales: 注文管理
         shipments: 出荷管理

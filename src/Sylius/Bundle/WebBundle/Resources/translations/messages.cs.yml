@@ -208,7 +208,7 @@ sylius:
     no_images: Pro tento produkt nejsou žádné obrázky
     no_options: Pro tento produkt nejsou žádné nastavení
     options: Možnosti
-    properties: Vlastnosti
+    attributes: Vlastnosti
     restricted_zone: Zóna s omezeným přístupem
     shipping_category: Typ dopravy
     sku: SKU
@@ -218,7 +218,7 @@ sylius:
       images: Obrázky
       options: Možnosti
       product: Produkt
-      properties: Vlastnosti
+      attributes: Vlastnosti
     tax_category: Typ daně
     variant_selection_method: Metoda výběru varianty
   promotion:

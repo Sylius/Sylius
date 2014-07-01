@@ -22,7 +22,7 @@ sylius:
         payments: Betalingen
         products: Producten
         promotions: Promoties
-        properties: Producteigenschappen
+        attributes: Producteigenschappen
         prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen
@@ -57,7 +57,7 @@ sylius:
         payments: Betalingen
         products: Producten
         promotions: Promoties
-        properties: Producteigenschappen
+        attributes: Producteigenschappen
         prototypes: Product prototypes
         sales: Bestellingen
         shipments: Verzendingen

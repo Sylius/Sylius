@@ -159,10 +159,10 @@ sylius:
     no_options: Nu există opțiuni pentru acest produs
     no_properties: Produsul nu are proprietăți definite
     no_results: Nu există produse de afișat.
-    properties: Proprietăți
+    attributes: Proprietăți
     tabs:
       product: Produs
-      properties: Proprietăți
+      attributes: Proprietăți
   promotion:
     actions: Acțiuni
     description: Descriere

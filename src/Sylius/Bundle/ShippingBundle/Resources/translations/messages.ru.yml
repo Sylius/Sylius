@@ -12,18 +12,30 @@ sylius:
         ready: Готов
         shipped: Доставлено
         returned: Возвращено
+        returned:   Возвращено
+        cancelled:  Отменено
       tracking_code: Код отслеживания
+
     shipping_calculator:
       flat_rate_configuration:
+        label: Единая ставка
         amount: Сумма
+
       flexible_rate_configuration:
+        label: Гибкая стоимость доставки
         additional_item_cost: Стоимость дополнительного товара
         additional_item_limit: Лимитировать дополнительные позиции
         first_item_cost: Стоимость первого товара
+
       per_item_rate_configuration:
+        label: По количеству
         amount: Сумма
+
       weight_rate_configuration:
+        label: По весу
         amount: Количество
+        division: Деление
+
     shipping_category:
       description: Описание
       name: Название

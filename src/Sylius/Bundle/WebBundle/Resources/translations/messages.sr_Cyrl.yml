@@ -244,7 +244,7 @@ sylius:
         no_taxons: сyлиус.продуцт.но_таxонс
         options: Опције
         price: Продајна цена
-        properties: Атрибути
+        attributes: Атрибути
         show: Више
         show_header: Детаљи производа <small>Преглед производа "<стронг>%product%</стронг>"</small>
         sku: СКУ
@@ -254,7 +254,7 @@ sylius:
             images: Слике
             options: Опције
             product: Производ
-            properties: Атрибути
+            attributes: Атрибути
         tax_category: Категорија производа
         update_header: Ажурирање производа
         updated_at: Ажурирано
@@ -316,7 +316,7 @@ sylius:
         name: име
         no_results: Нема дефинисаних прототипова.
         options: опције
-        properties: атрибути
+        attributes: атрибути
         update_header: Ажурирање прототипа
         updated_at: Ажурирано
     province:
