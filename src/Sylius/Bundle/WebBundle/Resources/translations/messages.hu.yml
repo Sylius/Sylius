@@ -80,7 +80,7 @@ sylius:
       products: Az Ön termékei
       users: Felhasználók
     statistics:
-      0: Ennek a hónapnak a statisztikája
+      header: Ennek a hónapnak a statisztikája
       orders_this_month: Rendelések összesen
       registrations_this_month: Regisztrációk összesen
       sales_this_month: Értékesítés
@@ -288,7 +288,7 @@ sylius:
     update_header: Csoport szerkesztése
   hide_deleted: Törölt elem elrejtése
   history:
-    0: Előzmények
+    header: Előzmények
     action: Műveletek
     author: Szerző
     data: Adatok
@@ -433,7 +433,7 @@ sylius:
     method: Mód
     no_results: Nincsenek beállított kifizetések.
     state:
-      0: Állapot
+      header: Állapot
       checkout: Fizetés
       completed: Befejezve
       failed: Sikertelen

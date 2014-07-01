@@ -35,7 +35,7 @@ class PaymentType extends AbstractResourceType
                 'label' => 'sylius.form.payment.amount'
             ))
             ->add('state', 'choice', array(
-                'label'   => 'sylius.form.payment.state',
+                'label'   => 'sylius.form.payment.state.header',
                 'choices' => array(
                     PaymentInterface::STATE_PROCESSING => 'sylius.form.payment.state.processing',
                     PaymentInterface::STATE_PENDING    => 'sylius.form.payment.state.pending',
@@ -45,7 +45,7 @@ class PaymentType extends AbstractResourceType
                     PaymentInterface::STATE_NEW        => 'sylius.form.payment.state.new',
                     PaymentInterface::STATE_CANCELLED  => 'sylius.form.payment.state.cancelled',
                     PaymentInterface::STATE_REFUNDED   => 'sylius.form.payment.state.refunded',
-                    PaymentInterface::STATE_UNKNOWN    => 'sylius.form.payment.state.unknown'
+                    PaymentInterface::STATE_UNKNOWN    => 'sylius.form.payment.state.unknown',
                 )
             ))
         ;

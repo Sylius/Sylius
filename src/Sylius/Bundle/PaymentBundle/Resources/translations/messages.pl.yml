@@ -14,7 +14,7 @@ sylius:
       amount: sylius.form.payment.amount
       method: sylius.form.payment.method
       state:
-        0: Status płatności
+        header: Status płatności
         checkout: Koszyk
         completed: Zakończone
         failed: Niepowodzenie

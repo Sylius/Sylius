@@ -77,7 +77,7 @@ sylius:
       products: I tuoi prodotti
       users: Utenti
     statistics:
-      0: Le statistiche di questo mese
+      header: Le statistiche di questo mese
       orders_this_month: Ordini totali
       registrations_this_month: Registrazioni totali
       sales_this_month: Vendite
@@ -283,7 +283,7 @@ sylius:
     update_header: Modifica il gruppo
   hide_deleted: Nascondi eliminati
   history:
-    0: Storico
+    header: Storico
     action: Azione
     author: Autore
     data: Data
@@ -419,7 +419,7 @@ sylius:
     method: Metodo
     no_results: Non ci sono pagamenti configurati.
     state:
-      0: Stato
+      header: Stato
       checkout: "Procedi all'acquisto"
       completed: Completato
       failed: Fallimento

@@ -80,7 +80,7 @@ sylius:
       products: สินค้าของคุณ
       users: ผู้ใช้
     statistics:
-      0: สถิติเดือนนี้
+      header: สถิติเดือนนี้
       orders_this_month: ใบสั่งซื้อทั้งหมด
       registrations_this_month: การลงทะเบียนทั้งหมด
       sales_this_month: ขาย
@@ -288,7 +288,7 @@ sylius:
     update_header: แก้ไขกลุ่ม
   hide_deleted: ซ่อนรายการที่ลบแล้ว
   history:
-    0: ประวัติย้อนหลัง
+    header: ประวัติย้อนหลัง
     action: การดำเนินการ
     author: ผู้เขียน
     data: ข้อมูล
@@ -433,7 +433,7 @@ sylius:
     method: วิธีการ
     no_results: ไม่มีการกำหนดรายการการชำระเงินไว้
     state:
-      0: สถานะ
+      header: สถานะ
       checkout: ชำระเงิน
       completed: เสร็จสมบูรณ์
       failed: ล้มเหลว

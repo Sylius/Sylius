@@ -55,7 +55,7 @@ sylius:
       products: Vaše produkty
       users: Používatelia
     statistics:
-      0: Mesačná štatistika
+      header: Mesačná štatistika
       sales_this_month: Predaj
   backend_welcome: 'Ahoj <b>%name%</b>!'
   block:
@@ -179,7 +179,7 @@ sylius:
     index_header: Skupiny
     name: Názov
   history:
-    0: História
+    header: História
     author: Autor
     version: Verzia
   homepage:
@@ -249,7 +249,7 @@ sylius:
     id: ID
     index_header: Platby
     state:
-      0: Štát
+      header: Štát
       completed: Dokončené
       failed: Neúspešné
     update_header: Úprava platby

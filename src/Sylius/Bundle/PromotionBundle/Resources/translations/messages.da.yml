@@ -28,7 +28,7 @@ sylius:
           weeks: Uger
           months: Måneder
           years: År
-          0: Enhed
+          header: Enhed
         after: Bruger oprettet efter denne periode
       shipping_country_configuration:
         country: Land

@@ -14,7 +14,7 @@ sylius:
       amount: Zahlungsbetrag
       method: Zahlungsweise
       state:
-        0: Zahlungsstatus
+        header: Zahlungsstatus
         checkout: Zur Kasse
         completed: Abgeschlossen
         failed: Fehlgeschlagen

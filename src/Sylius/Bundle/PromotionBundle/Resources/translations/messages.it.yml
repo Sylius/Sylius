@@ -29,7 +29,7 @@ sylius:
           weeks: Settimane
           months: Mesi
           years: Anni
-          0: Unità
+          header: Unità
         after: Utente creato dopo questo periodo
       shipping_country_configuration:
         country: Paese

@@ -80,7 +80,7 @@ sylius:
       products: Товары
       users: Пользователи
     statistics:
-      0: Статистика
+      header: Статистика
       orders_this_month: Заказов в этом месяце
       registrations_this_month: Регистраций в этом месяце
       sales_this_month: Продаж в этом месяце
@@ -288,7 +288,7 @@ sylius:
     update_header: Редактировать группу
   hide_deleted: Скрыть удаленные
   history:
-    0: Журнал
+    header: Журнал
     action: Действие
     author: Автор
     data: Данные
@@ -425,7 +425,7 @@ sylius:
     method: Метод
     no_results: Способы оплаты не настроены.
     state:
-      0: Cтатус
+      header: Cтатус
       checkout: Сверка
       completed: Завершен
       failed: Провален

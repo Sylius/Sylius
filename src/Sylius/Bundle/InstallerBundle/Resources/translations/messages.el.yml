@@ -8,9 +8,9 @@ sylius:
   form:
     configuration:
       database:
-        0: Σύνδεση βάσης δεδομένων
+        header: Σύνδεση βάσης δεδομένων
         driver:
-          0: Οδηγός
+          header: Οδηγός
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,7 +22,7 @@ sylius:
         port: Θύρα
         user: Χρήστης
       locale:
-        0: Τοπικές ρυθμίσεις
+        header: Τοπικές ρυθμίσεις
         currency: Νόμισμα
         locale: Τοπικές ρυθμίσεις
       mailer:

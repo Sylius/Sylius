@@ -225,7 +225,7 @@ sylius:
     index_header: Πληρωμές
     method: τρόπος
     state:
-      0: Νομός
+      header: Νομός
       checkout: Ολοκλήρωση αγορών
       pending: Σε εκκρεμότητα
       processing: Σε εξέλιξη

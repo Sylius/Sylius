@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    0: расширения
+    header: расширения
     accelerator:
-      0: Ускоритель
+      header: Ускоритель
       help: Установите и включите PHP-ускоритель, например APC (настоятельно рекомендуется).
     apc: APC
     ctype: CType
@@ -25,7 +25,7 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    0: файловая система
+    header: файловая система
     cache:
       0: кэш
       help:
@@ -44,7 +44,7 @@ sylius:
     vendors: поставщики
     writable: доступно для записи
   settings:
-    0: Версия и параметры PHP
+    header: Версия и параметры PHP
     any: любой
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc

@@ -30,7 +30,7 @@ sylius:
           weeks: Weken
           months: Maanden
           years: Jaren
-          0: Eenheid
+          header: Eenheid
         after: Gebruiker aangemaakt na deze periode
       shipping_country_configuration:
         country: Land

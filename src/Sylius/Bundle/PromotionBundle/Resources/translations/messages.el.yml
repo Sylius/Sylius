@@ -23,7 +23,7 @@ sylius:
           weeks: Εβδομάδες
           months: Μήνες
           years: Έτη
-          0: Μονάδα
+          header: Μονάδα
       shipping_country_configuration:
         country: Χώρα
       type: Τύπος

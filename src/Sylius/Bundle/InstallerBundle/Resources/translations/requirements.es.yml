@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    0: Extensiones
+    header: Extensiones
     accelerator:
-      0: Acelerador
+      header: Acelerador
       help: Instala y activa un acelerador PHP como APC (altamente recomendado).
     apc: APC
     ctype: Ctype
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    0: sistema de ficheros
+    header: sistema de ficheros
     cache:
-      0: cache
+      header: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existe
     logs:
-      0: logs
+      header: logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: No existe
     not_writable: Sin permisos de escritura
     parameters:
-      0: parameters.yml
+      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: Vendors
     writable: Con permisos de escritura
   settings:
-    0: Versión de PHP y configuración
+    header: Versión de PHP y configuración
     any: Cualquiera
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +57,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: Zona horaria
     timezone_deprecated:
-      0: Zona horaria obsoleta
+      header: Zona horaria obsoleta
       help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
     version: Versión de PHP
     version_recommanded: Versión de PHP recomendada

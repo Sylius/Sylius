@@ -27,7 +27,7 @@ sylius:
                     weeks: Weeks
                     months: Months
                     years: Years
-                    0: Unit
+                    header: Unit
                 after: User created after this period
             shipping_country_configuration:
                 country: Country
