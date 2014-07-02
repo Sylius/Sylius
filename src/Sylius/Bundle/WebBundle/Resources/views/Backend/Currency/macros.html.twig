@@ -1,7 +1,8 @@
 {% macro list(countries) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
 
 {% if countries|length > 0 %}
 <table class="table table-hover">
@@ -20,11 +21,9 @@
         <tr id="{{ currency.id }}">
             <td>{{ currency.name }}</td>
             <td>{{ currency.code }}</td>
-            <td><span class="label label-primary">{{ currency.exchangeRate }}</span></td>
+            <td>{{ currency.exchangeRate }}</td>
             <td>
-                <span class="label label-{{ currency.enabled ? 'success' : 'danger'}}">
-                    {{ currency.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
+                {{ labels.status(currency.enabled) }}
             </td>
             <td>{{ currency.updatedAt|date }}</td>
             <td>

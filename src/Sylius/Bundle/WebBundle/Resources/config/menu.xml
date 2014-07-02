@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.menu_builder.backend.main.class">Sylius\Bundle\WebBundle\Menu\Backend\MainMenuBuilder</parameter>
+
+        <parameter key="sylius.menu_builder.frontend.main.class">Sylius\Bundle\WebBundle\Menu\Frontend\MainMenuBuilder</parameter>
+        <parameter key="sylius.menu_builder.frontend.account.class">Sylius\Bundle\WebBundle\Menu\Frontend\AccountMenuBuilder</parameter>
+        <parameter key="sylius.menu_builder.frontend.user.class">Sylius\Bundle\WebBundle\Menu\Frontend\UserMenuBuilder</parameter>
+
+        <parameter key="sylius.menu_builder.currency.class">Sylius\Bundle\WebBundle\Menu\CurrencyMenuBuilder</parameter>
+        <parameter key="sylius.menu_builder.locale.class">Sylius\Bundle\WebBundle\Menu\LocaleMenuBuilder</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.menu_builder.currency" class="%sylius.menu_builder.currency.class%" parent="sylius.menu_builder">
+            <argument type="service" id="sylius.currency_provider" />
+        </service>
+        <service id="sylius.menu_builder.locale" class="%sylius.menu_builder.locale.class%" parent="sylius.menu_builder">
+            <argument type="service" id="sylius.locale_provider" />
+        </service>
+
+        <service id="sylius.menu_builder.frontend.main" class="%sylius.menu_builder.frontend.main.class%" parent="sylius.menu_builder">
+            <argument type="service" id="sylius.repository.taxonomy" />
+        </service>
+        <service id="sylius.menu_builder.frontend.user" class="%sylius.menu_builder.frontend.user.class%" parent="sylius.menu_builder">
+            <argument type="service" id="security.context" />
+        </service>
+        <service id="sylius.menu_builder.frontend.account" class="%sylius.menu_builder.frontend.account.class%" parent="sylius.menu_builder" />
+
+        <service id="sylius.menu_builder.backend.main" class="%sylius.menu_builder.backend.main.class%" parent="sylius.menu_builder" />
+
+        <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend.main" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.main" />
+        </service>
+        <service id="sylius.menu.frontend.account" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend.account" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.account" />
+        </service>
+        <service id="sylius.menu.frontend.user" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend.user" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.user" />
+        </service>
+        <service id="sylius.menu.frontend.currency" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.currency" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.currency" />
+        </service>
+        <service id="sylius.menu.frontend.locale" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.locale" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.locale" />
+        </service>
+
+        <service id="sylius.menu.backend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.backend.main" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.backend.main" />
+        </service>
+    </services>
+
+</container>

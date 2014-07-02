@@ -25,42 +25,42 @@ Feature: Zones
 
     Scenario: Accessing the zone creation form
         Given I am on the zone index page
-         When I follow "Create zone"
-         Then I should be on the zone creation page
+        When I follow "Create zone"
+        Then I should be on the zone creation page
 
     Scenario: Submitting invalid form
         Given I am on the zone creation page
-         When I press "Save"
-         Then I should still be on the zone creation page
-          And I should see "Please enter zone name."
+        When I press "Save"
+        Then I should still be on the zone creation page
+        And I should see "Please enter zone name."
 
     Scenario: Creating new zone requires adding at least 1 member
         Given I am on the zone creation page
-          And I fill in "Name" with "EU"
-         When I press "Save"
-         Then I should still be on the zone creation page
-          And I should see "Please add at least 1 zone member."
+        And I fill in "Name" with "EU"
+        When I press "Save"
+        Then I should still be on the zone creation page
+        And I should see "Please add at least 1 zone member."
 
     @javascript
     Scenario: Creating new zone built from countries
         Given I am on the zone creation page
-          And I fill in "Name" with "EU"
-          And I select "Country" from "Type"
-          And I click "Add member"
-          And I select "Estonia" from "Country"
-          And I select "shipping" from "Scope"
-         When I press "Create"
-         When I press "Save"
-         Then I should be on the page of zone "EU"
-          And I should see "Zone has been successfully created."
-          And "Estonia" should appear on the page
-          And "shipping" should appear on the page
+        And I fill in "Name" with "EU"
+        And I select "Country" from "Type"
+        And I click "Add member"
+        And I select "Estonia" from "Country"
+        And I select "shipping" from "Scope"
+        When I press "Create"
+        When I press "Save"
+        Then I should be on the page of zone "EU"
+        And I should see "Zone has been successfully created."
+        And "Estonia" should appear on the page
+        And "shipping" should appear on the page
 
     Scenario: Created zones appear in the list
         Given I created zone "EU"
-          And I go to the zone index page
-         Then I should see 5 zones in the list
-          And I should see zone with name "EU" in that list
+        And I go to the zone index page
+        Then I should see 5 zones in the list
+        And I should see zone with name "EU" in that list
 
     Scenario: Accessing the editing form from list
         Given I am on the zone index page

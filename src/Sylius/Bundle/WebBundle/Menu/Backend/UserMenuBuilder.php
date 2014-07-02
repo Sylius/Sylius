@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 /**
  * User menu builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class UserMenuBuilder extends ContainerAware
 {
@@ -54,7 +54,7 @@ class UserMenuBuilder extends ContainerAware
 
         $menu
             ->addChild('details', array('uri' => '#details'))
-            ->setCurrent(true)
+            ->setCurrent(null === $user->getId())
             ->setLinkAttribute('data-toggle', 'tab')
             ->setLabel('sylius.backend.user.details')
         ;

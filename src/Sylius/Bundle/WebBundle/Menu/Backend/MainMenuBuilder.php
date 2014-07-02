@@ -14,12 +14,11 @@ namespace Sylius\Bundle\WebBundle\Menu\Backend;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Event\MenuEvent;
 use Sylius\Bundle\UiBundle\Menu\MenuBuilder;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Main menu builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MainMenuBuilder extends MenuBuilder
 {
@@ -28,11 +27,9 @@ class MainMenuBuilder extends MenuBuilder
     /**
      * Builds backend main menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createMenu(Request $request)
+    public function createMenu()
     {
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
@@ -213,8 +210,8 @@ class MainMenuBuilder extends MenuBuilder
             ->setLabel('sylius.backend.main.payment_methods')
         ;
         $child
-            ->addChild('exchange_rates', array('route' => 'sylius_backend_exchange_rate_index'))
-            ->setLabel('sylius.backend.main.exchange_rates')
+            ->addChild('currencies', array('route' => 'sylius_backend_currency_index'))
+            ->setLabel('sylius.backend.main.currencies')
         ;
         $child
             ->addChild('taxation_settings', array('route' => 'sylius_backend_taxation_settings'))

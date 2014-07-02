@@ -39,7 +39,7 @@
     "target-dir": "Sylius/Bundle/UiBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.11-dev"
         }
     }
 }
