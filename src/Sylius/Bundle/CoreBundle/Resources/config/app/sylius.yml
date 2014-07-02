@@ -28,6 +28,8 @@ sylius_money:
     currency: %sylius.currency%
     locale: %sylius.locale%
 
+sylius_locale: ~
+
 sylius_currency: ~
 
 sylius_cart:

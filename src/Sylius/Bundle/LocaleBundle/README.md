@@ -1,7 +1,7 @@
-SyliusCurrencyBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusCurrencyBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusCurrencyBundle)
-====================
+SyliusLocaleBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusLocaleBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusLocaleBundle)
+==================
 
-[**Symfony2**](http://symfony.com) integration of Sylius Currency processing
+[**Symfony2**](http://symfony.com) integration of Sylius Locale processing
 component.
 
 Sylius
@@ -20,12 +20,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusInventoryBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusLocaleBundle/index.html).
 
 Contributing
 ------------
@@ -51,7 +46,7 @@ If you want to keep up with updates, [follow the official Sylius account on twit
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/SyliusCurrencyBundle/issues).
+This bundle uses [GitHub issues](https://github.com/Sylius/SyliusLocaleBundle/issues).
 If you have found bug, please create an issue.
 
 Versioning
@@ -71,10 +66,10 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusCurrencyBundle/blob/master/Currencys/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusLocaleBundle/blob/master/Locales/meta/LICENSE).
 
 Authors
 -------
 
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/SyliusCurrencyBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/SyliusLocaleBundle/contributors).
