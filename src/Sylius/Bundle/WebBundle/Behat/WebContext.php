@@ -13,6 +13,7 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -65,7 +66,11 @@ class WebContext extends DefaultContext
     public function iShouldBeOnThePage($page)
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($page));
-        $this->assertStatusCodeEquals(200);
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
     }
 
     /**
