@@ -253,7 +253,6 @@
             <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
         </service>
         <service id="sylius.listener.product_update" class="%sylius.listener.product_update.class%">
-            <argument type="service" id="fos_user.user_manager" />
             <tag name="kernel.event_listener" event="sylius.product.pre_update" method="preProductUpdate" />
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
