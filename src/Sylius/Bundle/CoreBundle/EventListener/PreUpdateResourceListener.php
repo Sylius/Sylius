@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Sylius\Component\Core\Model\Product;
 
 class PreUpdateResourceListener
 {
@@ -10,7 +11,7 @@ class PreUpdateResourceListener
     {
 
     	$resource = $event->getSubject();
-        if( $resource instanceof \Sylius\Component\Core\Model\Product )
+        if( $resource instanceof Product )
         {
             $images = $resource->getImages();
             foreach ( $images as $image ) {
