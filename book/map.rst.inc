@@ -1,6 +1,7 @@
 * :doc:`/book/introduction`
 * :doc:`/book/installation`
 * :doc:`/book/architecture`
+* :doc:`/book/state_machine`
 * :doc:`/book/products`
 * :doc:`/book/addresses`
 * :doc:`/book/inventory`
