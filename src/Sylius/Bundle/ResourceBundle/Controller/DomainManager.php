@@ -105,7 +105,19 @@ class DomainManager
 
             return null;
         }
+        
+        if( $resource instanceof \Sylius\Component\Core\Model\Product )
+        {
+            $images = $resource->getImages();
+            foreach ( $images as $image ) {
 
+                if( $image->getPath() == null )
+                {
+                    $resource->getImages()->removeElement( $image);
+                }
+            }
+        }
+        
         $this->manager->persist($resource);
         $this->manager->flush();
         $this->flashHelper->setFlash('success', $flash);
