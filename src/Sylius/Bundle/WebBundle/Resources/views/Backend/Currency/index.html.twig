@@ -1,6 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 {% from 'SyliusWebBundle:Backend/Currency:macros.html.twig' import list %}
 
 {% block topbar %}
@@ -11,13 +12,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_currency_create'), 'sylius.currency.create'|trans) }}
-    </div>
-    <h1><i class="glyphicon glyphicon-usd"></i> {{ 'sylius.currency.index_header'|trans|raw }}</h1>
-</div>
+{{ page.header('currency.index', 'usd', 'SyliusWebBundle:Backend/currency/Actions:_index.html.twig') }}
 
-{{ list(currencies) }}
-
+{{ pagination.standard(currencies) }}
+{{ list(currencies)  }}
+{{ pagination.standard(currencies) }}
 {% endblock %}

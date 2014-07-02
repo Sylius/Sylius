@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 /**
  * Order menu builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderMenuBuilder extends ContainerAware
 {

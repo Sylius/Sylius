@@ -14,7 +14,6 @@ namespace Sylius\Bundle\UiBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Abstract menu builder.

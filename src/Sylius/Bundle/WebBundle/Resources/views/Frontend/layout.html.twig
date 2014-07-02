@@ -28,7 +28,7 @@
         <div class="container">
         {% block header %}
             <div class="masthead pull-right">
-                {{ knp_menu_render('sylius.frontend.main', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                {{ knp_menu_render('sylius.frontend.user', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
             <div class="locale-menu masthead pull-right">
                 {{ knp_menu_render('sylius.frontend.locale', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
@@ -56,7 +56,7 @@
             <div class="col-md-3" id="sidebar">
                 {% block sidebar %}
                 <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
-                {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                {{ knp_menu_render('sylius.frontend.main', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
                 {{ sonata_block_render({'name': '/cms/blocks/contact'}) }}
 
@@ -96,7 +96,6 @@
                 <p class="text-muted">
                     &copy; Sylius, 2011 - {{ 'now'|date('Y') }}.
                 </p>
-                {{ knp_menu_render('sylius.frontend.social', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
         {% endblock %}
         </div>
