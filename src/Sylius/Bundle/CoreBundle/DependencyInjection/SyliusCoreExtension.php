@@ -67,6 +67,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $loader->load('state_machine.xml');
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
+        $this->loadCheckoutConfiguration($config['checkout'], $container);
     }
 
     /**
@@ -116,6 +117,13 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             if ($config['enabled'] && $config[$emailType]['enabled']) {
                 $loader->load('mailer/'.$emailType.'_listener.xml');
             }
+        }
+    }
+
+    protected function loadCheckoutConfiguration(array $config, ContainerBuilder $container)
+    {
+        foreach ($config['steps'] as $name => $step) {
+            $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
         }
     }
 }

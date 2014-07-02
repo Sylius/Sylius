@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -32,6 +33,7 @@ class Configuration implements ConfigurationInterface
         $this->addClassesSection($rootNode);
         $this->addEmailsSection($rootNode);
         $this->addRoutingSection($rootNode);
+        $this->addCheckoutSection($rootNode);
 
         return $treeBuilder;
     }
@@ -177,5 +179,56 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+    }
+
+    /**
+     * Adds `checkout` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addCheckoutSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('checkout')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('steps')
+                            ->addDefaultsIfNotSet()
+                            ->info('Templates used for steps in the checkout flow process')
+                            ->children()
+                                ->append($this->addCheckoutStepNode('security', 'SyliusWebBundle:Frontend/Checkout/Step:security.html.twig'))
+                                ->append($this->addCheckoutStepNode('addressing', 'SyliusWebBundle:Frontend/Checkout/Step:addressing.html.twig'))
+                                ->append($this->addCheckoutStepNode('shipping', 'SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig'))
+                                ->append($this->addCheckoutStepNode('payment', 'SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig'))
+                                ->append($this->addCheckoutStepNode('finalize', 'SyliusWebBundle:Frontend/Checkout/Step:finalize.html.twig'))
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Helper method to append checkout step nodes.
+     *
+     * @param $name
+     * @param $defaultTemplate
+     * @return NodeDefinition
+     */
+    private function addCheckoutStepNode($name, $defaultTemplate)
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root($name);
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('template')->defaultValue($defaultTemplate)->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }
