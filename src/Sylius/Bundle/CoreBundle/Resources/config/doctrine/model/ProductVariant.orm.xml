@@ -13,6 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
@@ -20,14 +21,16 @@
         <indexes>
             <index columns="sku"/>
         </indexes>
-        
+
         <field name="sku" column="sku" type="string" nullable="true" />
 
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean" />
 
-        <field name="price" column="price" type="integer" />
+        <field name="price" column="price" type="integer">
+            <gedmo:versioned />
+        </field>
         <field name="pricingCalculator" column="pricing_calculator" type="string" />
         <field name="pricingConfiguration" column="pricing_configuration" type="array" />
 
@@ -41,6 +44,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>
