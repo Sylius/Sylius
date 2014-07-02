@@ -44,7 +44,8 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.locale.class">Sylius\Bundle\CoreBundle\EventListener\LocaleListener</parameter>
-
+        <parameter key="sylius.listener.product_update.class">Sylius\Bundle\CoreBundle\EventListener\PreUpdateResourceListener</parameter>
+        
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
@@ -85,6 +86,7 @@
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
+   
     </parameters>
 
     <services>
@@ -249,6 +251,10 @@
             <argument type="service" id="fos_user.user_manager" />
             <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
             <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
+        </service>
+        <service id="sylius.listener.product_update" class="%sylius.listener.product_update.class%">
+            <argument type="service" id="fos_user.user_manager" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="preProductUpdate" />
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
