@@ -62,7 +62,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata);
     }
 
-    private function mapOneToMany(ClassMetadata $metadata)
+    protected function mapOneToMany(ClassMetadata $metadata)
     {
         foreach ($this->variables as $class) {
             if ($class['option']['model'] !== $metadata->getName()) {
@@ -78,7 +78,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function mapManyToOne(ClassMetadata $metadata)
+    protected function mapManyToOne(ClassMetadata $metadata)
     {
         foreach ($this->variables as $class) {
             if ($class['option_value']['model'] !== $metadata->getName()) {
@@ -99,7 +99,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
-    private function mapManyToMany(ClassMetadata $metadata)
+    protected function mapManyToMany(ClassMetadata $metadata)
     {
         foreach ($this->variables as $variable => $class) {
             if ($class['variant']['model'] !== $metadata->getName()) {
