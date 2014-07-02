@@ -26,6 +26,7 @@
         "sylius/cart":       "0.11.*@dev",
         "sylius/order":      "0.11.*@dev",
         "sylius/currency":   "0.11.*@dev",
+        "sylius/locale":     "0.11.*@dev",
         "sylius/taxation":   "0.11.*@dev",
         "sylius/shipping":   "0.11.*@dev",
         "sylius/addressing": "0.11.*@dev",

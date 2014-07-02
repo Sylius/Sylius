@@ -16,6 +16,7 @@
 
         <parameter key="sylius.menu_builder.frontend.class">Sylius\Bundle\WebBundle\Menu\FrontendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
+        <parameter key="sylius.menu_builder.locale.class">Sylius\Bundle\WebBundle\Menu\LocaleMenuBuilder</parameter>
 
         <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
         <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
@@ -72,6 +73,16 @@
             <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
         </service>
+        <service id="sylius.menu_builder.locale" class="%sylius.menu_builder.locale.class%">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.locale_provider" />
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+        </service>
 
         <service id="sylius.menu.frontend.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createMainMenu" scope="request">
             <argument type="service" id="request" />
@@ -79,6 +90,9 @@
         </service>
         <service id="sylius.menu.frontend.currency" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createCurrencyMenu">
             <tag name="knp_menu.menu" alias="sylius.frontend.currency" />
+        </service>
+        <service id="sylius.menu.frontend.locale" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.locale" factory-method="createMenu">
+            <tag name="knp_menu.menu" alias="sylius.frontend.locale" />
         </service>
         <service id="sylius.menu.frontend.taxonomies" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.frontend" factory-method="createTaxonomiesMenu" scope="request">
             <argument type="service" id="request" />

@@ -20,12 +20,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusInventoryBundle/index.html).
-
-Code examples
--------------
-
-If you want to see working implementation, try out the [Sylius sandbox application](http://github.com/Sylius/Sylius-Sandbox).
+Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusCurrencyBundle/index.html).
 
 Contributing
 ------------

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Model;
+namespace spec\Sylius\Component\Locale\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -17,12 +17,12 @@ class LocaleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Locale');
+        $this->shouldHaveType('Sylius\Component\Locale\Model\Locale');
     }
 
     function it_implements_Sylius_locale_interface()
     {
-        $this->shouldImplement('Sylius\Component\Core\Model\LocaleInterface');
+        $this->shouldImplement('Sylius\Component\Locale\Model\LocaleInterface');
     }
 
     function it_does_not_have_id_by_default()

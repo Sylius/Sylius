@@ -28,6 +28,8 @@ sylius_money:
     currency: %sylius.currency%
     locale: %sylius.locale%
 
+sylius_locale: ~
+
 sylius_currency: ~
 
 sylius_cart:
@@ -143,11 +145,6 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Component\Core\Model\Group
-        sylius.locale:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\Locale
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
         sylius.block:
             driver: doctrine/phpcr-odm
             classes:

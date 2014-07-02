@@ -37,6 +37,7 @@
         "sylius/money-bundle":            "0.11.*@dev",
         "sylius/currency-bundle":         "0.11.*@dev",
         "sylius/order-bundle":            "0.11.*@dev",
+        "sylius/locale-bundle":           "0.11.*@dev",
         "sylius/pricing-bundle":          "0.11.*@dev",
         "sylius/payment-bundle":          "0.11.*@dev",
         "sylius/payum-bundle":            "0.11.*@dev",

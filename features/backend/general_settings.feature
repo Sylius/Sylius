@@ -65,9 +65,9 @@ Feature: General settings
           And the "Default currency" field should contain "USD"
           And I should see "Settings have been successfully updated."
 
-    Scenario: Changing language
-        Given I am on the general settings page
-         When I select "Polish" from "Language"
-          And I press "Save changes"
-         Then I should still be on the general settings page
-          And I should see "Ustawienia ogólne"
+#   Scenario: Changing language
+#       Given I am on the general settings page
+#        When I select "Polish" from "Language"
+#         And I press "Save changes"
+#        Then I should still be on the general settings page
+#         And I should see "Ustawienia ogólne"

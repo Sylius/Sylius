@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,17 +22,26 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class LocaleType extends AbstractType
 {
+    /**
+     * @var string
+     */
     private $dataClass;
 
+    /**
+     * @param string $dataClass
+     */
     public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'text', array(
+            ->add('code', 'locale', array(
                 'label' => 'sylius.form.locale.code'
             ))
             ->add('enabled', 'checkbox', array(
@@ -43,6 +52,9 @@ class LocaleType extends AbstractType
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -53,6 +65,9 @@ class LocaleType extends AbstractType
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_locale';
