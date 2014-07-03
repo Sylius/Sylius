@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
@@ -25,12 +25,13 @@
         <field name="currency" length="3" nullable="true" />
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
-
-        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="billing_address_id" />
@@ -39,21 +40,26 @@
             <join-column name="shipping_address_id" />
         </one-to-one>
 
-        <many-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-table name="sylius_user_address">
-                <join-columns>
-                    <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="address_id" referenced-column-name="id" unique="true" on-delete="CASCADE"/>
-                </inverse-join-columns>
-            </join-table>
+        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>
-        </many-to-many>
+        </one-to-many>
+        <one-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface" mapped-by="user">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
 
         <many-to-many field="groups" target-entity="Sylius\Component\Core\Model\GroupInterface">
+            <cascade>
+                <cascade-all />
+            </cascade>
             <join-table name="sylius_user_group">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>
@@ -62,24 +68,7 @@
                     <join-column name="group_id" referenced-column-name="id" on-delete="CASCADE"/>
                 </inverse-join-columns>
             </join-table>
-            <cascade>
-                <cascade-all />
-            </cascade>
         </many-to-many>
-
-        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
-
-        <field name="createdAt" column="created_at" type="datetime">
-            <gedmo:timestampable on="create"/>
-        </field>
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
-        </field>
-        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>
