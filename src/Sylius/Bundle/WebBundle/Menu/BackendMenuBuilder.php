@@ -300,5 +300,10 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_zone_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-globe'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.zones', $section)));
+
+        $child->addChild('api_clients', array(
+            'route' => 'sylius_backend_api_client_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-globe'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.api_clients', $section)));
     }
 }

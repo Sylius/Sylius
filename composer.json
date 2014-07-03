@@ -57,7 +57,8 @@
         "twig/extensions":                      "1.0.*",
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "winzou/state-machine-bundle":          "~0.1.2",
-        "willdurand/hateoas-bundle":            "@stable"
+        "willdurand/hateoas-bundle":            "@stable",
+        "friendsofsymfony/oauth-server-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat":                       "~3.0",

@@ -128,6 +128,10 @@ sylius_backend_page:
     resource: @SyliusWebBundle/Resources/config/routing/backend/page.yml
     prefix: /pages
 
+sylius_backend_api_client:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/api_client.yml
+    prefix: /api-clients
+
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
     prefix: /settings
