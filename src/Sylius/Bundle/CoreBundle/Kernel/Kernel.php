@@ -60,6 +60,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
@@ -80,6 +81,7 @@ abstract class Kernel extends BaseKernel
 
             new \FOS\RestBundle\FOSRestBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),

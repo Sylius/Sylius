@@ -32,6 +32,11 @@ sylius_locale: ~
 
 sylius_currency: ~
 
+sylius_api:
+    classes:
+        api_user:
+            model: %sylius.model.user.class%
+
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
     classes:
