@@ -28,7 +28,7 @@
         <field name="onHand" column="on_hand" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean" />
 
-        <field name="price" column="price" type="integer">
+        <field name="price" column="price" type="float">
             <gedmo:versioned />
         </field>
         <field name="pricingCalculator" column="pricing_calculator" type="string" />
