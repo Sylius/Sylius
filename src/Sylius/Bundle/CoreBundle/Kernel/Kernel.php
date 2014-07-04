@@ -90,6 +90,7 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {

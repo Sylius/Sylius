@@ -30,7 +30,8 @@
         "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "~0.12",
         "white-october/pagerfanta-bundle": "1.0.*",
-        "doctrine/doctrine-bundle":        "~1.3@dev"
+        "doctrine/doctrine-bundle":        "~1.3@dev",
+        "willdurand/hateoas-bundle":       "@stable"
     },
     "require-dev": {
         "phpspec/phpspec":      "~2.0",
