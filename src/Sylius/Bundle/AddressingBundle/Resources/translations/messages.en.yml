@@ -25,6 +25,7 @@ sylius:
                 country: Country
                 province: Province
                 zone: Zone
+            scope: Scope
         zone_member_country:
             country: Country
         zone_member_province:

@@ -118,7 +118,11 @@ sylius_payment:
 
 sylius_payum: ~
 
-sylius_addressing: ~
+sylius_addressing:
+    scopes:
+        shipping: shipping
+        content: content
+        price: price
 
 sylius_order:
     classes:

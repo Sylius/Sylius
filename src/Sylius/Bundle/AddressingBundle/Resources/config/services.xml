@@ -51,6 +51,7 @@
         <service id="sylius.form.type.zone" class="%sylius.form.type.zone.class%">
             <argument>%sylius.model.zone.class%</argument>
             <argument>%sylius.validation_group.zone%</argument>
+            <argument>%sylius.scope.zone%</argument>
             <tag name="form.type" alias="sylius_zone" />
         </service>
         <service id="sylius.form.type.zone_member_country" class="%sylius.form.type.zone_member_country.class%">
