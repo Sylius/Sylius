@@ -23,16 +23,29 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ClientType extends AbstractType
 {
     /**
+     * Data class.
+     *
      * @var string
      */
-    private $dataClass;
+    protected $dataClass;
 
     /**
-     * @param string $dataClass
+     * Validation groups.
+     *
+     * @var array
      */
-    public function __construct($dataClass)
+    protected $validationGroups;
+
+    /**
+     * Constructor.
+     *
+     * @param string $dataClass
+     * @param array  $validationGroups
+     */
+    public function __construct($dataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -56,7 +69,7 @@ class ClientType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class'        => $this->dataClass,
-                'validation_groups' => array('sylius')
+                'validation_groups' => $this->validationGroups
             )
         );
     }

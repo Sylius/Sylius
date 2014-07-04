@@ -22,7 +22,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface">
+        <many-to-one field="user" target-entity="Sylius\Bundle\ApiBundle\Model\UserInterface">
             <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>
