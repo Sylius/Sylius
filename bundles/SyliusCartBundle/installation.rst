@@ -327,7 +327,7 @@ Put this minimal configuration inside your ``app/config/config.yml``.
     sylius_order:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         classes:
-            order
+            order:
                 model: App\AppBundle\Entity\Cart # If you have created a custom Cart entity.
             order_item:
                 model: App\AppBundle\Entity\CartItem # If you have created a custom CartItem entity.
