@@ -1,0 +1,7 @@
+Sylius\Bundle\CoreBundle\Model\User:
+    exclusion_policy: ALL
+    xml_root_name: user
+    properties:
+        email:
+            expose: true
+            type: string
