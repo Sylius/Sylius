@@ -217,7 +217,7 @@ class ResourceController extends FOSRestController
             $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($resource));
+                return $this->handleView($this->view($resource, 204));
             }
 
             return $this->redirectHandler->redirectTo($resource);
