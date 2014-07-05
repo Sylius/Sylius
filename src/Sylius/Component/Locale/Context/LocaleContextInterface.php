@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Locale\Context;
 
-use Sylius\Component\Model\LocaleInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * Interface to be implemented by the service providing the currently used
