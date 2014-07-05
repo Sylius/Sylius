@@ -102,6 +102,7 @@ abstract class Kernel extends BaseKernel
 
         if (in_array($this->environment, array('dev', 'test'))) {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new \h4cc\AliceFixturesBundle\h4ccAliceFixturesBundle();
         }
 
         return $bundles;

@@ -1,0 +1,7 @@
+{
+    "id": @integer@,
+    "name": "Heavy Stuff",
+    "description": "Requires special shipping",
+    "created_at": @string@,
+    "updated_at": @string@
+}
