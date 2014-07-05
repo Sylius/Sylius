@@ -1,0 +1,13 @@
+Sylius\Component\Addressing\Model\Zone:
+    poland_zone:
+        name: Poland
+    germany_and_france_zone:
+        name: Germany and France
+
+Sylius\Component\Addressing\Model\ZoneMemberCountry:
+    poland_zone_member:
+        country: @poland
+    germany_zone_member:
+        country:
+    france_zone_mbmer:
+        name: France
