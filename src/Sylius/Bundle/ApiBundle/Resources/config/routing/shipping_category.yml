@@ -32,3 +32,10 @@ sylius_api_shipping_category_delete:
     defaults:
         _controller: sylius.controller.shipping_category:deleteAction
         _format: json
+
+sylius_api_shipping_category_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipping_category:showAction
+        _format: json

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f66d773c79ded08ab8a3384c1e55827a",
+    "hash": "03c0442aafe103e2942501bd72ef12a8",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -38,6 +38,121 @@
                 "payment"
             ],
             "time": "2013-02-11 21:09:06"
+        },
+        {
+            "name": "coduo/php-matcher",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-matcher.git",
+                "reference": "f944b791635c851cd02ec4de447dfbe2ae6c99e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/f944b791635c851cd02ec4de447dfbe2ae6c99e6",
+                "reference": "f944b791635c851cd02ec4de447dfbe2ae6c99e6",
+                "shasum": ""
+            },
+            "require": {
+                "coduo/php-to-string": "0.1.*",
+                "php": ">=5.3.0",
+                "symfony/expression-language": "~2.4",
+                "symfony/property-access": "~2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Coduo\\PHPMatcher": "src/",
+                    "Coduo\\PHPMatcher\\Tests": "tests/"
+                },
+                "files": [
+                    "match.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl",
+                    "homepage": "http://brillante.pl"
+                },
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "keywords": [
+                "json",
+                "matcher",
+                "tests"
+            ],
+            "time": "2014-06-22 09:56:56"
+        },
+        {
+            "name": "coduo/php-to-string",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coduo/php-to-string.git",
+                "reference": "42092807d4efab4c0c6c7782ab085978de4f4ce9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/42092807d4efab4c0c6c7782ab085978de4f4ce9",
+                "reference": "42092807d4efab4c0c6c7782ab085978de4f4ce9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "coduo/phpspec-data-provider-extension": "dev-master",
+                "phpspec/phpspec": "2.0.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michał Dąbrowski",
+                    "email": "dabrowski@brillante.pl",
+                    "homepage": "http://brillante.pl"
+                },
+                {
+                    "name": "Norbert Orzechowicz",
+                    "email": "norbert@orzechowicz.pl"
+                }
+            ],
+            "keywords": [
+                "php",
+                "string",
+                "to",
+                "to string"
+            ],
+            "time": "2014-05-08 08:59:42"
         },
         {
             "name": "doctrine/annotations",
@@ -1289,6 +1404,56 @@
             "time": "2014-07-04 14:20:21"
         },
         {
+            "name": "fzaninotto/faker",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "010c7efedd88bf31141a02719f51fb44c732d5a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/010c7efedd88bf31141a02719f51fb44c732d5a0",
+                "reference": "010c7efedd88bf31141a02719f51fb44c732d5a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": [
+
+                ]
+            },
+            "autoload": {
+                "psr-0": {
+                    "Faker": "src/",
+                    "Faker\\PHPUnit": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2014-06-04 14:43:02"
+        },
+        {
             "name": "gedmo/doctrine-extensions",
             "version": "v2.3.9",
             "source": {
@@ -1565,6 +1730,63 @@
                 "stream"
             ],
             "time": "2014-05-01 21:36:02"
+        },
+        {
+            "name": "h4cc/alice-fixtures-bundle",
+            "version": "0.3.1",
+            "target-dir": "h4cc/AliceFixturesBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/h4cc/AliceFixturesBundle.git",
+                "reference": "11816777edfe992935a191b720c21bb362b58cb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/h4cc/AliceFixturesBundle/zipball/11816777edfe992935a191b720c21bb362b58cb2",
+                "reference": "11816777edfe992935a191b720c21bb362b58cb2",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "~2.1",
+                "nelmio/alice": "~1.5",
+                "php": ">=5.3.0",
+                "psr/log": "~1.0",
+                "symfony/finder": "~2.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+                "doctrine/orm": "~2.1",
+                "phpunit/phpunit": "~3.7",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "h4cc\\AliceFixturesBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julius Beckmann",
+                    "email": "github@h4cc.de"
+                }
+            ],
+            "description": "Symfony2 Bundle for loading fixture data with the Alice library.",
+            "keywords": [
+                "Symfony2",
+                "alice",
+                "doctrine",
+                "fixtures",
+                "loader",
+                "mongodb",
+                "orm"
+            ],
+            "time": "2014-02-04 10:52:19"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -3002,6 +3224,60 @@
                 "psr-3"
             ],
             "time": "2014-06-04 16:30:04"
+        },
+        {
+            "name": "nelmio/alice",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nelmio/alice.git",
+                "reference": "0730001c3be46dedf393ef4168d6239d9969c61c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/0730001c3be46dedf393ef4168d6239d9969c61c",
+                "reference": "0730001c3be46dedf393ef4168d6239d9969c61c",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1.0",
+                "php": ">=5.3",
+                "symfony/yaml": "~2.0"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.3",
+                "phpunit/phpunit": "3.7.*",
+                "symfony/property-access": "~2.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Nelmio\\Alice\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nelmio",
+                    "homepage": "http://nelm.io"
+                }
+            ],
+            "description": "Expressive fixtures generator",
+            "keywords": [
+                "Fixture",
+                "data",
+                "orm",
+                "test"
+            ],
+            "time": "2014-04-24 13:11:29"
         },
         {
             "name": "nikic/php-parser",
@@ -5979,56 +6255,6 @@
             "time": "2013-09-05 11:23:37"
         },
         {
-            "name": "fzaninotto/faker",
-            "version": "v1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "010c7efedd88bf31141a02719f51fb44c732d5a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/010c7efedd88bf31141a02719f51fb44c732d5a0",
-                "reference": "010c7efedd88bf31141a02719f51fb44c732d5a0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~1.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": [
-
-                ]
-            },
-            "autoload": {
-                "psr-0": {
-                    "Faker": "src/",
-                    "Faker\\PHPUnit": "test/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2014-06-04 14:43:02"
-        },
-        {
             "name": "instaclick/php-webdriver",
             "version": "1.4.0",
             "source": {
@@ -6631,6 +6857,7 @@
         "white-october/pagerfanta-bundle": 20,
         "willdurand/hateoas-bundle": 20,
         "friendsofsymfony/oauth-server-bundle": 20,
+        "h4cc/alice-fixtures-bundle": 0,
         "behat/symfony2-extension": 20,
         "behat/mink-extension": 20,
         "behat/mink-browserkit-driver": 20,
