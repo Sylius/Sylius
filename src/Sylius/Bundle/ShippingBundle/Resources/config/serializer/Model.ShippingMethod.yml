@@ -1,4 +1,4 @@
-Sylius\Bundle\ShippingBundle\Model\ShippingMethod:
+Sylius\Component\Shipping\Model\ShippingMethod:
     exclusion_policy: ALL
     xml_root_name: shipping-method
     properties:

@@ -1,4 +1,4 @@
-Sylius\Bundle\TaxationBundle\Model\TaxRate:
+Sylius\Component\Taxation\Model\TaxRate:
     exclusion_policy: ALL
     xml_root_name: tax-rate
     properties:
@@ -31,7 +31,7 @@ Sylius\Bundle\TaxationBundle\Model\TaxRate:
                 route: sylius_api_tax_rate_show
                 parameters:
                     id: expr(object.getId())
-        - rel: tax-category
+        - rel: category
           href:
                 route: sylius_api_tax_category_show
                 parameters:
