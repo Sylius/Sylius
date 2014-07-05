@@ -175,7 +175,7 @@ class ResourceController extends FOSRestController
             $resource = $this->domainManager->create($resource);
 
             if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($resource));
+                return $this->handleView($this->view($resource, 201));
             }
 
             if (null === $resource) {
@@ -250,7 +250,7 @@ class ResourceController extends FOSRestController
         $this->domainManager->delete($resource);
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view());
+            return $this->handleView($this->view(null, 204));
         }
 
         return $this->redirectHandler->redirectToIndex();
@@ -325,7 +325,7 @@ class ResourceController extends FOSRestController
     public function getForm($resource = null)
     {
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
+            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource, array('csrf_protection' => false));
         }
 
         return $this->createForm($this->config->getFormType(), $resource);

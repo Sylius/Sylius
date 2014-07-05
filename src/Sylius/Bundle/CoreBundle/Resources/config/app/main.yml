@@ -8,6 +8,9 @@ imports:
     - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
 
+twig:
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+
 doctrine_cache:
     providers:
         sylius_settings: %sylius.cache%
@@ -77,6 +80,7 @@ fos_user:
 fos_rest:
     view:
         formats:
+            xml: true
             json: true
 
 hwi_oauth:

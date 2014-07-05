@@ -1,0 +1,26 @@
+Sylius\Bundle\PaymntsBundle\Model\Zone:
+    exclusion_policy: ALL
+    xml_root_name: zone
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        type:
+            expose: true
+            type: string
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_zone_show
+                parameters:
+                    id: expr(object.getId())

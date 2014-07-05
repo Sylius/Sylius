@@ -58,6 +58,10 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
 
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
+
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
@@ -83,9 +87,7 @@ abstract class Kernel extends BaseKernel
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
 
-            new \FOS\RestBundle\FOSRestBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
@@ -96,7 +98,6 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {
