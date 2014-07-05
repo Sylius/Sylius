@@ -1,4 +1,4 @@
-Sylius\Bundle\ShippingBundle\Model\ShipmentItem:
+Sylius\Component\Shipping\Model\ShipmentItem:
     exclusion_policy: ALL
     xml_root_name: shipment-item
     properties:
