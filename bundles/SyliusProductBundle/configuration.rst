@@ -17,7 +17,7 @@ Configuration reference
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\AssortmentBundle\Form\Type\PropertyType
-            prototype:
+            product_prototype:
                 model: Sylius\Bundle\ProductBundle\Model\Prototype
                 controller: Sylius\Bundle\ProductBundle\Controller\PrototypeController
                 repository: ~
