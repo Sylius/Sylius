@@ -367,8 +367,8 @@ Templates
 We think that providing a sensible default template is really difficult, especially when a cart summary is not the simplest page.
 This is the reason why we do not currently include any, but if you have an idea for a good starter template, let us know!
 
-The bundle requires only the ``show.html`` template for cart summary page.
-The easiest way to override the view is by placing it here ``app/Resources/SyliusCartBundle/views/Cart/show.html.twig``.
+The bundle requires only the ``summary.html.twig`` template for cart summary page.
+The easiest way to override the view is by placing it here ``app/Resources/SyliusCartBundle/views/Cart/summary.html.twig``.
 
 .. note::
 
