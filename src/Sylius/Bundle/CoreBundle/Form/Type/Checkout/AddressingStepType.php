@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -46,6 +47,19 @@ class AddressingStepType extends AbstractType
                     $event->setData($data);
                 }
             })
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use($options) {
+                /* @var OrderInterface */
+                $order = $event->getData();
+
+                if ($order->getShippingAddress() === null) {
+                    $shippingAddress = clone $options['user']->getShippingAddress();
+                    $order->setShippingAddress($shippingAddress);
+                }
+                if ($order->getBillingAddress() === null) {
+                    $billingAddress = clone $options['user']->getBillingAddress();
+                    $order->setBillingAddress($billingAddress);
+                }
+            })
             ->add('shippingAddress', 'sylius_address', array('shippable' => true))
             ->add('billingAddress', 'sylius_address')
             ->add('differentBillingAddress', 'checkbox', array(
@@ -63,7 +77,8 @@ class AddressingStepType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => $this->dataClass,
-                'cascade_validation' => true
+                'cascade_validation' => true,
+                'user' => null
             ))
         ;
     }
