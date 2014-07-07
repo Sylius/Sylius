@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRepository;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
@@ -21,6 +22,9 @@ use Sylius\Component\Promotion\Model\RuleInterface;
  * Default promotion fixtures.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ *
+ * @method PromotionRepository getPromotionRuleRepository()
+ * @method PromotionRepository getPromotionRepository()
  */
 class LoadPromotionsData extends DataFixture
 {

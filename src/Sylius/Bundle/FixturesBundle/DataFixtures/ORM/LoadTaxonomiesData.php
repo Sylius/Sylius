@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
@@ -20,6 +21,9 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
  * Default taxonomies to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method TaxonRepository getTaxonomyRepository()
+ * @method TaxonRepository getTaxonRepository()
  */
 class LoadTaxonomiesData extends DataFixture
 {

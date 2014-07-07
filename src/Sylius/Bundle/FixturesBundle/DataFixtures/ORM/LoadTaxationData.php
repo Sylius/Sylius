@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -20,6 +21,9 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
  * Basic taxation fixtures.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method EntityRepository getTaxCategoryRepository()
+ * @method EntityRepository getTaxRateRepository()
  */
 class LoadTaxationData extends DataFixture
 {

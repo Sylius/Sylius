@@ -16,6 +16,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Bundle\ProductBundle\Generator\VariantGenerator;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -67,6 +68,10 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         return call_user_func_array(array($this, $method), $arguments);
     }
 
+    /**
+     * @param  string           $zoneType
+     * @return EntityRepository
+     */
     protected function getZoneMemberRepository($zoneType)
     {
         return $this->get('sylius.repository.zone_member_'.$zoneType);

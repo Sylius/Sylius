@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
 
@@ -20,6 +21,9 @@ use Symfony\Component\Intl\Intl;
  * Default country fixtures.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method EntityRepository getCountryRepository()
+ * @method EntityRepository getProvinceRepository()
  */
 class LoadCountriesData extends DataFixture
 {

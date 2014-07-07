@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Symfony\Component\Intl\Intl;
@@ -21,6 +22,8 @@ use Symfony\Component\Intl\Intl;
  * Default zone fixtures.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ *
+ * @method EntityRepository getZoneRepository()
  */
 class LoadZonesData extends DataFixture
 {

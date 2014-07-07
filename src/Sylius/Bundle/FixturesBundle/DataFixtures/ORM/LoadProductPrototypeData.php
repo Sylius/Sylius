@@ -13,12 +13,15 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\PrototypeInterface;
 
 /**
  * Sample product prototypes.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method EntityRepository getProductPrototypeRepository()
  */
 class LoadProductPrototypeData extends DataFixture
 {
