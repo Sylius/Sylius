@@ -74,7 +74,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             return true;
         }
 
-        return $this->areCouponsEligibleToPromotion($subject, $promotion);
+        return $this->areCouponsEligibleForPromotion($subject, $promotion);
     }
 
     /**
@@ -159,7 +159,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function areCouponsEligibleToPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         if (!$promotion->isCouponBased()) {
             return true;
