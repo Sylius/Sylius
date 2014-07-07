@@ -49,8 +49,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $securityContext,
         TokenInterface $token,
         UserInterface $user
-    )
-    {
+    ) {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
@@ -66,8 +65,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         UserInterface $user,
         AddressInterface $address,
         ProductInterface $product
-    )
-    {
+    ) {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
@@ -86,8 +84,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         AddressInterface $address,
         ProductInterface $product,
         ZoneInterface $zone
-    )
-    {
+    ) {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);
@@ -107,8 +104,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         AddressInterface $address,
         ProductInterface $product,
         ZoneInterface $zone
-    )
-    {
+    ) {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn($user);

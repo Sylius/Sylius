@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as PaymentModelInterface;
 use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\PaymentTransitions;
-use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -89,7 +88,6 @@ class NotifyOrderActionSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher,
         StateMachineInterface $sm,
         Collection $payments
     ) {
@@ -121,7 +119,6 @@ class NotifyOrderActionSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
-        EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
         StateMachineInterface $sm,
         Collection $payments

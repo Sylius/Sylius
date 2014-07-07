@@ -33,9 +33,15 @@ class ItemResolverSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
         DelegatingCalculatorInterface $priceCalculator
-    )
-    {
-        $this->beConstructedWith($cartProvider, $productRepository, $formFactory, $availabilityChecker, $restrictedZoneChecker, $priceCalculator);
+    ) {
+        $this->beConstructedWith(
+            $cartProvider,
+            $productRepository,
+            $formFactory,
+            $availabilityChecker,
+            $restrictedZoneChecker,
+            $priceCalculator
+        );
     }
 
     function it_is_initializable()
@@ -70,8 +76,11 @@ class ItemResolverSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_product_with_given_id_does_not_exist($productRepository, CartItemInterface $item, Request $request)
-    {
+    function it_throws_exception_if_product_with_given_id_does_not_exist(
+        $productRepository,
+        CartItemInterface $item,
+        Request $request
+    ) {
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(5);
 

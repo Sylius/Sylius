@@ -41,8 +41,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         UserInterface $user,
         \Countable $orders
-    )
-    {
+    ) {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
         $orders->count()->shouldBeCalled()->willReturn(0);
@@ -54,8 +53,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         UserInterface $user,
         \Countable $orders
-    )
-    {
+    ) {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
         $orders->count()->shouldBeCalled()->willReturn(2);
@@ -67,8 +65,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         UserInterface $user,
         \Countable $orders
-    )
-    {
+    ) {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
         $orders->count()->shouldBeCalled()->willReturn(12);
@@ -80,8 +77,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         UserInterface $user,
         \Countable $orders
-    )
-    {
+    ) {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getOrders()->shouldBeCalled()->willReturn($orders);
         $orders->count()->shouldBeCalled()->willReturn(10);

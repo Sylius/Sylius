@@ -31,8 +31,7 @@ class DefaultCalculatorSpec extends ObjectBehavior
 
     function it_calculates_tax_as_percentage_of_given_base_if_rate_is_not_included_in_price(
         TaxRateInterface $rate
-    )
-    {
+    ) {
         $rate->isIncludedInPrice()->willReturn(false);
         $rate->getAmount()->willReturn(0.23);
 
@@ -43,8 +42,7 @@ class DefaultCalculatorSpec extends ObjectBehavior
 
     function it_calculates_correct_tax_for_given_base_if_rate_is_included_in_price(
         TaxRateInterface $rate
-    )
-    {
+    ) {
         $rate->isIncludedInPrice()->willReturn(true);
         $rate->getAmount()->willReturn(0.23);
 

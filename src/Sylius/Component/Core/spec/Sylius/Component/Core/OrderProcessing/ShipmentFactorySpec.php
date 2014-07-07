@@ -44,8 +44,7 @@ class ShipmentFactorySpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ArrayCollection $shipments,
         InventoryUnitInterface $inventoryUnit
-    )
-    {
+    ) {
 
         $shipmentRepository
             ->createNew()
@@ -88,8 +87,7 @@ class ShipmentFactorySpec extends ObjectBehavior
         ArrayCollection $shipments,
         InventoryUnitInterface $inventoryUnit,
         InventoryUnitInterface $inventoryUnitWithoutShipment
-    )
-    {
+    ) {
         $shipments
             ->first()
             ->willReturn($shipment)

@@ -41,8 +41,7 @@ class ActionTypeSpec extends ObjectBehavior
     function it_should_build_form_with_action_choice_field(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
@@ -58,8 +57,7 @@ class ActionTypeSpec extends ObjectBehavior
     function it_should_add_build_promotion_action_event_subscriber(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $builder->add(Argument::any(), Argument::any(), Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 

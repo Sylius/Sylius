@@ -39,8 +39,10 @@ class SettingsHelperSpec extends ObjectBehavior
         $this->getSettings('taxation')->shouldReturn($settings);
     }
 
-    function it_should_return_settings_parameter_by_namespace_and_name($settingsManager, Settings $settings)
-    {
+    function it_should_return_settings_parameter_by_namespace_and_name(
+        SettingsManagerInterface$settingsManager,
+        Settings $settings
+    ) {
         $settingsManager->loadSettings('shipping')->shouldBeCalled()->willReturn($settings);
         $settings->get('price')->shouldBeCalled()->willReturn(19.99);
 

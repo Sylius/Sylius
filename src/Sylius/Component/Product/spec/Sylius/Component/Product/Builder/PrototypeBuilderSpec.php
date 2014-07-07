@@ -46,8 +46,7 @@ class PrototypeBuilderSpec extends ObjectBehavior
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         OptionInterface $option
-    )
-    {
+    ) {
         $prototype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
         $prototype->getOptions()->willReturn(array($option))->shouldBeCalled();
 

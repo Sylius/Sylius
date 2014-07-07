@@ -37,9 +37,13 @@ class UserProviderSpec extends ObjectBehavior
     }
 
     function it_should_connect_oauth_account_with_given_user(
-        $userManager, $oauthRepository, UserInterface $user, UserResponseInterface $response, ResourceOwnerInterface $resourceOwner, UserOAuthInterface $oauth
-    )
-    {
+        $userManager,
+        $oauthRepository,
+        UserInterface $user,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner,
+        UserOAuthInterface $oauth
+    ) {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn(null);
@@ -61,9 +65,12 @@ class UserProviderSpec extends ObjectBehavior
     }
 
     function it_should_return_user_if_relation_exists(
-        $oauthRepository, UserInterface $user, UserOAuthInterface $oauth, UserResponseInterface $response, ResourceOwnerInterface $resourceOwner
-    )
-    {
+        $oauthRepository,
+        UserInterface $user,
+        UserOAuthInterface $oauth,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner
+    ) {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getUsername()->willReturn('username');
@@ -76,9 +83,13 @@ class UserProviderSpec extends ObjectBehavior
     }
 
     function it_should_update_user_when_he_was_found_by_email(
-        $userManager, $oauthRepository, UserInterface $user, UserResponseInterface $response, ResourceOwnerInterface $resourceOwner, UserOAuthInterface $oauth
-    )
-    {
+        $userManager,
+        $oauthRepository,
+        UserInterface $user,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner,
+        UserOAuthInterface $oauth
+    ) {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn('username@email');
@@ -103,9 +114,13 @@ class UserProviderSpec extends ObjectBehavior
     }
 
     function it_should_create_new_user_when_none_was_found(
-        $userManager, $oauthRepository, UserInterface $user, UserResponseInterface $response, ResourceOwnerInterface $resourceOwner, UserOAuthInterface $oauth
-    )
-    {
+        $userManager,
+        $oauthRepository,
+        UserInterface $user,
+        UserResponseInterface $response,
+        ResourceOwnerInterface $resourceOwner,
+        UserOAuthInterface $oauth
+    ) {
         $resourceOwner->getName()->willReturn('google');
 
         $response->getEmail()->willReturn(null);

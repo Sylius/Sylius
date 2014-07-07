@@ -289,7 +289,7 @@ class ProductSpec extends ObjectBehavior
         $this->shouldNotBeDeleted();
     }
 
-    function it_has_fluent_interface(AttributeValueInterface $attribute)
+    function it_has_fluent_interface()
     {
         $date = new \DateTime();
 

@@ -82,8 +82,7 @@ class CartListenerSpec extends ObjectBehavior
         CartEvent $event,
         CartInterface $cart,
         ConstraintViolationListInterface $constraintList
-    )
-    {
+    ) {
         $constraintList->count()->willReturn(1);
         $event->getCart()->willReturn($cart);
         $validator->validate($cart)->shouldBeCalled()->willReturn($constraintList);

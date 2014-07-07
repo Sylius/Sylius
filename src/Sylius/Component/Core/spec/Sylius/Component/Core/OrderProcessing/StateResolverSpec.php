@@ -46,8 +46,7 @@ class StateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
-    )
-    {
+    ) {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
 
@@ -62,8 +61,7 @@ class StateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
-    )
-    {
+    ) {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
 
@@ -78,8 +76,7 @@ class StateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
-    )
-    {
+    ) {
         $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn(array($shipment1, $shipment2));
 
@@ -92,8 +89,7 @@ class StateResolverSpec extends ObjectBehavior
 
     function it_marks_order_as_completed_if_fully_paid(
         OrderInterface $order
-    )
-    {
+    ) {
         $payment1 = new Payment();
         $payment1->setAmount(10000);
         $payment1->setState(PaymentInterface::STATE_COMPLETED);
@@ -109,8 +105,7 @@ class StateResolverSpec extends ObjectBehavior
 
     function it_marks_order_as_completed_if_fully_paid_multiple_payments(
         OrderInterface $order
-    )
-    {
+    ) {
         $payment1 = new Payment();
         $payment1->setAmount(6000);
         $payment1->setState(PaymentInterface::STATE_COMPLETED);
@@ -127,9 +122,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_processing_if_partially_paid(
-        OrderInterface $order
-    )
+    function it_marks_order_as_processing_if_partially_paid(OrderInterface $order)
     {
         $payment1 = new Payment();
         $payment1->setAmount(6000);
@@ -147,9 +140,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_processing_if_one_of_the_payment_is_processing(
-        OrderInterface $order
-    )
+    function it_marks_order_as_processing_if_one_of_the_payment_is_processing(OrderInterface $order)
     {
         $payment1 = new Payment();
         $payment1->setAmount(6000);
@@ -167,9 +158,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_new_if_no_payment_is_in_process(
-        OrderInterface $order
-    )
+    function it_marks_order_as_new_if_no_payment_is_in_process(OrderInterface $order)
     {
         $payment1 = new Payment();
         $payment1->setAmount(6000);

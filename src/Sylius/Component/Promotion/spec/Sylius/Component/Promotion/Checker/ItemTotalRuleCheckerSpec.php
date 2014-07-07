@@ -36,22 +36,25 @@ class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_subject_total_is_less_then_configured(PromotionSubjectInterface $subject)
-    {
+    function it_should_recognize_subject_as_not_eligible_if_subject_total_is_less_then_configured(
+        PromotionSubjectInterface $subject
+    ) {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(400);
 
         $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_subject_total_is_greater_then_configured(PromotionSubjectInterface $subject)
-    {
+    function it_should_recognize_subject_as_eligible_if_subject_total_is_greater_then_configured(
+        PromotionSubjectInterface $subject
+    ) {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(600);
 
         $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_subject_total_is_equal_with_configured_depending_on_equal_setting(PromotionSubjectInterface $subject)
-    {
+    function it_should_recognize_subject_as_eligible_if_subject_total_is_equal_with_configured_depending_on_equal_setting(
+        PromotionSubjectInterface $subject
+    ) {
         $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(500);
 
         $this->isEligible($subject, array('amount' => 500, 'equal' => false))->shouldReturn(false);

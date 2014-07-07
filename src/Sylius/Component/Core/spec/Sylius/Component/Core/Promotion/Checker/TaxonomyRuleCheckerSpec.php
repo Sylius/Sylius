@@ -39,8 +39,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Taxon $taxon,
         Product $product,
         ArrayCollection $collection
-    )
-    {
+    ) {
         $configuration = array('taxons' => $collection, 'exclude' => false);
 
         $collection->contains(1)->willReturn(true);
@@ -59,8 +58,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Taxon $taxon,
         Product $product,
         ArrayCollection $collection
-    )
-    {
+    ) {
         $configuration = array('taxons' => $collection, 'exclude' => false);
 
         $collection->contains(1)->willReturn(false);
@@ -79,8 +77,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Taxon $taxon,
         Product $product,
         ArrayCollection $collection
-    )
-    {
+    ) {
         $configuration = array('taxons' => $collection, 'exclude' => true);
 
         $collection->contains(1)->willReturn(false);
@@ -99,8 +96,7 @@ class TaxonomyRuleCheckerSpec extends ObjectBehavior
         Taxon $taxon,
         Product $product,
         ArrayCollection $collection
-    )
-    {
+    ) {
         $configuration = array('taxons' => $collection, 'exclude' => true);
 
         $collection->contains(2)->willReturn(true);

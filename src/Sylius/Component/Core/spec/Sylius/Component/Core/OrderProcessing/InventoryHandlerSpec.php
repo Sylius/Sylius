@@ -32,8 +32,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         InventoryOperatorInterface $inventoryOperator,
         InventoryUnitFactory $inventoryUnitFactory,
         FactoryInterface $factory
-    )
-    {
+    ) {
         $this->beConstructedWith($inventoryOperator, $inventoryUnitFactory, $factory);
     }
 
@@ -53,14 +52,15 @@ class InventoryHandlerSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2
-    )
-    {
+    ) {
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
         $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection());
 
-        $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled()->willReturn(array($unit1, $unit2));
+        $inventoryUnitFactory->create($variant, 2, InventoryUnitInterface::STATE_CHECKOUT)
+            ->shouldBeCalled()
+            ->willReturn(array($unit1, $unit2));
 
         $item->addInventoryUnit($unit1)->shouldBeCalled();
         $item->addInventoryUnit($unit2)->shouldBeCalled();
@@ -73,10 +73,8 @@ class InventoryHandlerSpec extends ObjectBehavior
         OrderItemInterface $item,
         ProductVariantInterface $variant,
         InventoryUnitInterface $unit1,
-        InventoryUnitInterface $unit2,
-        ArrayCollection $units
-    )
-    {
+        InventoryUnitInterface $unit2
+    ) {
         $item->getInventoryUnits()->shouldBeCalled()->willReturn(new ArrayCollection(array($unit1)));
         $unit1->getStockable()->willReturn($variant);
         $unit2->getStockable()->willReturn($variant);
@@ -84,7 +82,9 @@ class InventoryHandlerSpec extends ObjectBehavior
         $item->getVariant()->willReturn($variant);
         $item->getQuantity()->willReturn(2);
 
-        $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)->shouldBeCalled()->willReturn(array($unit2));
+        $inventoryUnitFactory->create($variant, 1, InventoryUnitInterface::STATE_CHECKOUT)
+            ->shouldBeCalled()
+            ->willReturn(array($unit2));
 
         $item->addInventoryUnit($unit1)->shouldNotBeCalled();
         $item->addInventoryUnit($unit2)->shouldBeCalled();
@@ -102,8 +102,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $unit2,
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
-    )
-    {
+    ) {
         $order->getItems()->willReturn(array($item));
 
         $item->getVariant()->willReturn($variant);
@@ -133,8 +132,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $unit2,
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
-    )
-    {
+    ) {
         $order->getItems()->willReturn(array($item));
 
         $item->getVariant()->willReturn($variant);
@@ -164,8 +162,7 @@ class InventoryHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $unit2,
         StateMachineInterface $sm1,
         StateMachineInterface $sm2
-    )
-    {
+    ) {
         $order->getItems()->willReturn(array($item));
 
         $item->getVariant()->willReturn($variant);

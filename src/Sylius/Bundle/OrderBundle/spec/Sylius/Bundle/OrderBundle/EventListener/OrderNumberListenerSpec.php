@@ -32,7 +32,7 @@ class OrderNumberListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener');
     }
 
-    function it_generates_order_number($listener, GenericEvent $event, OrderInterface $order)
+    function it_generates_order_number(NumberListener $listener, GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
 

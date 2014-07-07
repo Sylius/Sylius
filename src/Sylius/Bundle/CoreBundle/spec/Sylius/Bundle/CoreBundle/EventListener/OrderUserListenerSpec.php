@@ -56,8 +56,7 @@ class OrderUserListenerSpec extends ObjectBehavior
         OrderInterface $order,
         TokenInterface $token,
         UserInterface $user
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($order);
 
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);

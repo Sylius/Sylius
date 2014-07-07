@@ -42,8 +42,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         OrderInterface $order,
         AdjustmentInterface $adjustment,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $adjustmentRepository->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');
 

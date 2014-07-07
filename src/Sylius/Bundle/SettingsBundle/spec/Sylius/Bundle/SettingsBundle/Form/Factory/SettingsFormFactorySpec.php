@@ -26,8 +26,7 @@ class SettingsFormFactorySpec extends ObjectBehavior
     function let(
         SchemaRegistryInterface $schemaRegistry,
         FormFactoryInterface $formFactory
-    )
-    {
+    ) {
         $this->beConstructedWith($schemaRegistry, $formFactory);
     }
 
@@ -47,8 +46,7 @@ class SettingsFormFactorySpec extends ObjectBehavior
         $formFactory,
         FormBuilder $formBuilder,
         Form $form
-    )
-    {
+    ) {
         $schemaRegistry->getSchema('general')->willReturn($schema);
         $formFactory->createBuilder('form', null, array('data_class' => null))->willReturn($formBuilder);
         $schema->buildForm($formBuilder)->shouldBeCalled()->willReturn($formBuilder);

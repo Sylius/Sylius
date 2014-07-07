@@ -36,22 +36,25 @@ class ItemCountRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(ShippingSubjectInterface $subject)
-    {
+    function it_should_recognize_subject_as_not_eligible_if_item_count_is_less_then_configured(
+        ShippingSubjectInterface $subject
+    ) {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(7);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(ShippingSubjectInterface $subject)
-    {
+    function it_should_recognize_subject_as_eligible_if_item_count_is_greater_then_configured(
+        ShippingSubjectInterface $subject
+    ) {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(12);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(ShippingSubjectInterface $subject)
-    {
+    function it_should_recognize_subject_as_eligible_if_item_count_is_equal_with_configured_depending_on_equal_setting(
+        ShippingSubjectInterface $subject
+    ) {
         $subject->getShippingItemCount()->shouldBeCalled()->willReturn(10);
 
         $this->isEligible($subject, array('count' => 10, 'equal' => false))->shouldReturn(false);

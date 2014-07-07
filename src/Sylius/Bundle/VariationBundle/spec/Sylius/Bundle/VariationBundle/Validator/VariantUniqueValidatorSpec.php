@@ -26,8 +26,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
     function let(
         ObjectRepository $variantRepository,
         ExecutionContextInterface $context
-    )
-    {
+    ) {
         $this->beConstructedWith($variantRepository);
         $this->initialize($context);
     }
@@ -47,8 +46,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         VariantInterface $variant,
         VariantInterface $conflictualVariant,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
             'message'  => 'Variant with given presentation already exists'
@@ -66,8 +64,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $variantRepository,
         VariantInterface $variant,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
             'message'  => 'Variant with given presentation already exists'
@@ -85,8 +82,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $variantRepository,
         VariantInterface $variant,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
             'message'  => 'Variant with given presentation already exists'

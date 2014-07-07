@@ -54,8 +54,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberProvince $memberProvince,
         ZoneInterface $zone
-    )
-    {
+    ) {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
         $address->getProvince()->shouldBeCalled()->willReturn($province);
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
@@ -72,8 +71,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberProvince $memberProvince,
         ZoneInterface $zone
-    )
-    {
+    ) {
         $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zone));
         $address->getProvince()->shouldBeCalled()->willReturn($province);
         $memberProvince->getProvince()->shouldBeCalled()->willReturn($province);
@@ -85,12 +83,12 @@ class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_should_match_address_by_country(
-        $repository,
+        RepositoryInterface$repository,
         CountryInterface $country,
         AddressInterface $address,
         ZoneMemberCountry $memberCountry,
-        ZoneInterface $zone)
-    {
+        ZoneInterface $zone
+    ) {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zone));
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
@@ -106,8 +104,8 @@ class ZoneMatcherSpec extends ObjectBehavior
         CountryInterface $country,
         AddressInterface $address,
         ZoneMemberCountry $memberCountry,
-        ZoneInterface $zone)
-    {
+        ZoneInterface $zone
+    ) {
         $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zone));
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
@@ -126,8 +124,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         ZoneInterface $subZone,
         ZoneMemberZone $memberZone,
         ZoneInterface $rootZone
-    )
-    {
+    ) {
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
         $subZone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
@@ -151,8 +148,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         ZoneInterface $subZone,
         ZoneMemberZone $memberZone,
         ZoneInterface $rootZone
-    )
-    {
+    ) {
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
         $subZone->getMembers()->shouldBeCalled()->willReturn(array($memberCountry));
@@ -177,8 +173,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberProvince $memberProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneProvince
-    )
-    {
+    ) {
         $address->getProvince()->willReturn($province);
         $address->getCountry()->willReturn($country);
         $memberProvince->getProvince()->willReturn($province);
@@ -205,8 +200,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberProvince $memberProvince,
         ZoneInterface $zoneCountry,
         ZoneInterface $zoneProvince
-    )
-    {
+    ) {
         $address->getProvince()->willReturn($province);
         $address->getCountry()->willReturn($country);
         $memberProvince->getProvince()->willReturn($province);
@@ -230,8 +224,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberCountry $memberCountry,
         ZoneInterface $zoneCountry
-    )
-    {
+    ) {
         $repository->findAll()->shouldBeCalled()->willReturn(array($zoneCountry));
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);
@@ -248,8 +241,7 @@ class ZoneMatcherSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneMemberCountry $memberCountry,
         ZoneInterface $zoneCountry
-    )
-    {
+    ) {
         $repository->findBy(array('scope' => 'shipping'))->shouldBeCalled()->willReturn(array($zoneCountry));
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $memberCountry->getCountry()->shouldBeCalled()->willReturn($country);

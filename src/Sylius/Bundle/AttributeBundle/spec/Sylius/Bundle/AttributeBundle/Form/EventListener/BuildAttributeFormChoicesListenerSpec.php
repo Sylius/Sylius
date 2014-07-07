@@ -38,8 +38,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         FormEvent $event,
         Form $form,
         $formFactory
-    )
-    {
+    ) {
         $event->getData()->willReturn(null);
         $event->getForm()->willReturn($form);
 
@@ -58,8 +57,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         AttributeInterface $attribute,
         Form $collectionField,
         $formFactory
-    )
-    {
+    ) {
         $event->getData()->willReturn($attribute);
         $event->getForm()->willReturn($form);
 
@@ -86,8 +84,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         AttributeInterface $attribute,
         Form $collectionField,
         $formFactory
-    )
-    {
+    ) {
         $event->getData()->willReturn($attribute);
         $event->getForm()->willReturn($form);
 
@@ -114,8 +111,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         AttributeInterface $attribute,
         Form $collectionField,
         $formFactory
-    )
-    {
+    ) {
         $attribute->getType()->willReturn(AttributeTypes::TEXT);
 
         $event->getData()->willReturn($attribute);

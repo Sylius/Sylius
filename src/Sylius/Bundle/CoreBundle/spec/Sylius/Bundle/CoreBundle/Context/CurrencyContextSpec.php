@@ -51,8 +51,11 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getDefaultCurrency()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session_if_there_is_no_user(TokenInterface $token, $securityContext, $session)
-    {
+    function it_gets_currency_from_session_if_there_is_no_user(
+        TokenInterface $token,
+        $securityContext,
+        $session
+    ) {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn(null);
@@ -61,8 +64,11 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('RSD');
     }
 
-    function it_gets_currency_from_user_if_authenticated(User $user, TokenInterface $token, $securityContext)
-    {
+    function it_gets_currency_from_user_if_authenticated(
+        User $user,
+        TokenInterface $token,
+        $securityContext
+    ) {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn($user);
@@ -71,7 +77,11 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('PLN');
     }
 
-    function it_sets_currency_to_session_if_there_is_no_user(TokenInterface $token, $securityContext, $session)
+    function it_sets_currency_to_session_if_there_is_no_user(
+        TokenInterface $token,
+        $securityContext,
+        $session
+    )
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
@@ -81,8 +91,11 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->setCurrency('PLN');
     }
 
-    function it_sets_currency_to_user_if_authenticated(User $user, TokenInterface $token, $securityContext)
-    {
+    function it_sets_currency_to_user_if_authenticated(
+        User $user,
+        TokenInterface $token,
+        $securityContext
+    ) {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn($user);

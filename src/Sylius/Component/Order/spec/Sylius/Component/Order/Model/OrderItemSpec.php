@@ -163,8 +163,10 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(18487);
     }
 
-    function it_ignores_neutral_adjustments_when_calculating_total(AdjustmentInterface $adjustment, AdjustmentInterface $neutralAdjustment)
-    {
+    function it_ignores_neutral_adjustments_when_calculating_total(
+        AdjustmentInterface $adjustment,
+        AdjustmentInterface $neutralAdjustment
+    ) {
         $this->setQuantity(13);
         $this->setUnitPrice(1499);
 

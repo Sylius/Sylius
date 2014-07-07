@@ -48,8 +48,9 @@ class PerItemRateCalculatorSpec extends ObjectBehavior
         $this->getConfigurationFormType()->shouldReturn('sylius_shipping_calculator_per_item_rate_configuration');
     }
 
-    function it_should_calculate_the_total_with_the_per_item_amount_configured_on_the_method(ShippingSubjectInterface $subject)
-    {
+    function it_should_calculate_the_total_with_the_per_item_amount_configured_on_the_method(
+        ShippingSubjectInterface $subject
+    ) {
         $subject->getShippingItemCount()->willReturn(11);
 
         $this->calculate($subject, array('amount' => 200))->shouldReturn(2200);

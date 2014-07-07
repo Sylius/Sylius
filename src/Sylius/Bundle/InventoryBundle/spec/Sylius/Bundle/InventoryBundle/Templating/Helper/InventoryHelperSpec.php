@@ -32,15 +32,19 @@ class InventoryHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_delegates_the_stock_availability_checking_to_the_checker($checker, StockableInterface $stockable)
-    {
+    function it_delegates_the_stock_availability_checking_to_the_checker(
+        $checker,
+        StockableInterface $stockable
+    ) {
         $checker->isStockAvailable($stockable)->shouldBeCalled()->willReturn(true);
 
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_delegates_the_stock_sufficiency_checking_to_the_checker($checker, StockableInterface $stockable)
-    {
+    function it_delegates_the_stock_sufficiency_checking_to_the_checker(
+        $checker,
+        StockableInterface $stockable
+    ) {
         $checker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(false);
 
         $this->isStockSufficient($stockable, 3)->shouldReturn(false);

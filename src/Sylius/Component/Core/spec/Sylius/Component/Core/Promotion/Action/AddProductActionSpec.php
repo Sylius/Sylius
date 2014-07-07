@@ -39,13 +39,13 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_adds_product_as_promotion(
-            RepositoryInterface $itemRepository,
-            RepositoryInterface $variantRepository,
-            OrderInterface $order,
-            OrderItemInterface $item,
-            ProductVariantInterface $variant,
-            PromotionInterface $promotion)
-    {
+        RepositoryInterface $itemRepository,
+        RepositoryInterface $variantRepository,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        ProductVariantInterface $variant,
+        PromotionInterface $promotion
+    ) {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 0);
 
         $variantRepository->find($configuration['variant'])->shouldBeCalled()->willReturn($variant);
@@ -68,8 +68,8 @@ class AddProductActionSpec extends ObjectBehavior
             OrderInterface $order,
             OrderItemInterface $item,
             ProductVariantInterface $variant,
-            PromotionInterface $promotion)
-    {
+            PromotionInterface $promotion
+    ) {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 1);
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
@@ -93,8 +93,8 @@ class AddProductActionSpec extends ObjectBehavior
             OrderInterface $order,
             OrderItemInterface $item,
             ProductVariantInterface $variant,
-            PromotionInterface $promotion)
-    {
+            PromotionInterface $promotion
+    ) {
         $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);

@@ -39,12 +39,12 @@ class PromotionApplicatorSpec extends ObjectBehavior
     }
 
     function it_should_execute_all_actions_registered(
-            ServiceRegistryInterface $registry,
-            PromotionActionInterface $action,
-            PromotionSubjectInterface $subject,
-            PromotionInterface $promotion,
-            ActionInterface $actionModel)
-    {
+        ServiceRegistryInterface $registry,
+        PromotionActionInterface $action,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        ActionInterface $actionModel
+    ) {
         $configuration = array();
 
         $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
@@ -60,12 +60,12 @@ class PromotionApplicatorSpec extends ObjectBehavior
     }
 
     function it_should_revert_all_actions_registered(
-            ServiceRegistryInterface $registry,
-            PromotionActionInterface $action,
-            PromotionSubjectInterface $subject,
-            PromotionInterface $promotion,
-            ActionInterface $actionModel)
-    {
+        ServiceRegistryInterface $registry,
+        PromotionActionInterface $action,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        ActionInterface $actionModel
+    ) {
         $configuration = array();
 
         $registry->get(ActionInterface::TYPE_FIXED_DISCOUNT)->shouldBeCalled()->willReturn($action);
