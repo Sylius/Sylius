@@ -23,9 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 class FormController extends Controller
 {
     /**
-     * Render form.
+     * @param string $type
+     * @param string $template
      *
-     * @param Request $request
+     * @return Response
      */
     public function showAction($type, $template)
     {

@@ -30,7 +30,7 @@ interface InventoryHandlerInterface
     /**
      * Processes inventory units.
      *
-     * @param OrderInterface $order
+     * @param OrderItemInterface $order
      */
     public function processInventoryUnits(OrderItemInterface $order);
 

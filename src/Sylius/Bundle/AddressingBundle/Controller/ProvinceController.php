@@ -106,6 +106,8 @@ class ProvinceController extends ResourceController
      * Create province choice form for given country.
      *
      * @param CountryInterface $country
+     *
+     * @return FormInterface
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {

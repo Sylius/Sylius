@@ -29,7 +29,7 @@ class LocaleMenuBuilder extends MenuBuilder
     /**
      * Locale repository.
      *
-     * @var RepositoryInterface
+     * @var LocaleProviderInterface
      */
     protected $localeProvider;
 
@@ -48,8 +48,7 @@ class LocaleMenuBuilder extends MenuBuilder
         TranslatorInterface       $translator,
         EventDispatcherInterface  $eventDispatcher,
         LocaleProviderInterface   $localeProvider
-    )
-    {
+    ) {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
 
         $this->localeProvider = $localeProvider;
