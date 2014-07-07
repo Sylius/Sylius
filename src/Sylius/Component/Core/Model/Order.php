@@ -454,7 +454,6 @@ class Order extends Cart implements OrderInterface
         }
 
         if (!$this->hasPromotionCoupon($coupon)) {
-            $coupon->setOrder($this);
             $this->promotionCoupons->add($coupon);
         }
 
@@ -475,7 +474,6 @@ class Order extends Cart implements OrderInterface
         }
 
         if ($this->hasPromotionCoupon($coupon)) {
-            $coupon->setOrder(null);
             $this->promotionCoupons->removeElement($coupon);
         }
 
