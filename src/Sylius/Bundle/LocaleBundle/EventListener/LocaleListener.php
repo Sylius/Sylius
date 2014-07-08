@@ -29,7 +29,7 @@ class LocaleListener implements EventSubscriberInterface
     protected $localeContext;
 
     /**
-     * @param LocaleContextinterface $localeContext
+     * @param LocaleContextInterface $localeContext
      */
     public function __construct(LocaleContextInterface $localeContext)
     {

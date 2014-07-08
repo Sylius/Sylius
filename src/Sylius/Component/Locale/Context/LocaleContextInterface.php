@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Locale\Context;
 
-use Sylius\Component\Locale\Model\LocaleInterface;
-
 /**
  * Interface to be implemented by the service providing the currently used
  * locale.
@@ -24,21 +22,21 @@ interface LocaleContextInterface
     /**
      * Get the default locale.
      *
-     * @return LocaleInterface
+     * @return string
      */
     public function getDefaultLocale();
 
     /**
      * Get the currently active locale.
      *
-     * @return LocaleInterface
+     * @return string
      */
     public function getLocale();
 
     /**
      * Set the currently active locale.
      *
-     * @param LocaleInterface $locale
+     * @param string $locale
      */
     public function setLocale($locale);
 }
