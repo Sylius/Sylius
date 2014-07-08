@@ -12,7 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * Cart form.
@@ -21,6 +24,21 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CartType extends BaseCartType
 {
+    protected $couponRepository;
+
+    /**
+     * Constructor.
+     *
+     * @param RepositoryInterface $couponRepository
+     * @param string              $dataClass        FQCN of cart model
+     * @param array               $validationGroups
+     */
+    public function __construct(RepositoryInterface $couponRepository, $dataClass, array $validationGroups)
+    {
+        $this->couponRepository = $couponRepository;
+
+        parent::__construct($dataClass, $validationGroups);
+    }
 
     /**
      * {@inheritdoc}
@@ -35,7 +53,19 @@ class CartType extends BaseCartType
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'label'        => 'sylius.form.cart.coupon',
             ))
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $data = $event->getData();
+
+                if ($data->getPromotionCoupons()->count() > 0) {
+                    return;
+                }
+
+                $data->addPromotionCoupon(
+                    $this->couponRepository->createNew()
+                );
+            })
         ;
     }
 }

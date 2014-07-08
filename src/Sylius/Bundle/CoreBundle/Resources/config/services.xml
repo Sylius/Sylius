@@ -347,6 +347,13 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
+        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
+            <argument type="service" id="sylius.repository.promotion_coupon"></argument>
+            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.validation_group.cart%</argument>
+            <tag name="form.type" alias="sylius_cart" />
+        </service>
+
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
             <argument>%sylius.model.product_variant_image.class%</argument>
             <tag name="form.type" alias="sylius_image" />
