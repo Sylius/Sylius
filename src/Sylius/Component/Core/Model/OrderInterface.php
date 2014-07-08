@@ -18,14 +18,14 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
 
 /**
  * Sylius core Order model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponAwareSubjectInterface
+interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';

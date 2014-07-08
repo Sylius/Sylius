@@ -12,16 +12,16 @@
 namespace Sylius\Component\Promotion\Model;
 
 /**
- * Coupon aware promotion subject interface.
+ * Coupons aware promotion subject interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionCouponAwareSubjectInterface extends PromotionSubjectInterface
+interface PromotionCouponsAwareSubjectInterface extends PromotionSubjectInterface
 {
     /**
-     * Gets associated promotion coupon.
+     * Gets associated promotion coupons.
      *
-     * @return null|CouponInterface
+     * @return CouponInterface[]
      */
-    public function getPromotionCoupon();
+    public function getPromotionCoupons();
 }
