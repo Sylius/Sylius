@@ -20,7 +20,7 @@
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
+        <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface" orphan-removal="true">
             <join-table name="order_promotion_coupons">
                 <join-columns>
                     <join-column name="order_id" referenced-column-name="id" />
