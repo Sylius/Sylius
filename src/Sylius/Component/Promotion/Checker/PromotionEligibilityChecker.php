@@ -86,7 +86,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
+    protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionInterface $promotion, RuleInterface $rule)
     {
         $checker = $this->registry->get($rule->getType());
 
@@ -112,7 +112,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isEligibleToDates(PromotionInterface $promotion)
+    protected function isEligibleToDates(PromotionInterface $promotion)
     {
         $now = new \DateTime();
 
@@ -138,7 +138,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isEligibleToUsageLimit(PromotionInterface $promotion)
+    protected function isEligibleToUsageLimit(PromotionInterface $promotion)
     {
         if (null !== $usageLimit = $promotion->getUsageLimit()) {
             if ($promotion->getUsed() >= $usageLimit) {
@@ -157,7 +157,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @return Boolean
      */
-    private function isCouponEligibleToPromotion(PromotionInterface $promotion, CouponInterface $coupon = null)
+    protected function isCouponEligibleToPromotion(PromotionInterface $promotion, CouponInterface $coupon = null)
     {
         if (!$promotion->isCouponBased()) {
             return true;
