@@ -69,7 +69,9 @@ class OrderPaymentListener
      */
     public function createOrderPayment(GenericEvent $event)
     {
-        $this->paymentProcessor->createPayment($this->getOrder($event));
+        if (false === $this->getOrder($event)->getLastPayment(PaymentInterface::STATE_NEW)) {
+            $this->paymentProcessor->createPayment($this->getOrder($event));
+        }
     }
 
     /**
