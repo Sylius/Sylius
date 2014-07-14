@@ -41,12 +41,12 @@ class OrderPromotionListener
     /**
      * @var TranslatorInterface
      */
-    private $translator;
+    protected $translator;
 
     /**
      * @var Boolean
      */
-    private $itemBased;
+    protected $itemBased;
 
     /**
      * Constructor.
