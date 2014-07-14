@@ -30,7 +30,7 @@ class CouponToCodeType extends AbstractType
      *
      * @var ObjectRepository
      */
-    private $couponRepository;
+    protected $couponRepository;
 
     /**
      * @var EventDispatcherInterface
