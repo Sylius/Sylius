@@ -15,15 +15,16 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**
  * Product interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ProductInterface extends BaseProductInterface, TaxableInterface
+interface ProductInterface extends BaseProductInterface, TaxableInterface, TaxonsAwareInterface
 {
     /*
      * Variant selection methods.
@@ -77,20 +78,6 @@ interface ProductInterface extends BaseProductInterface, TaxableInterface
      * @return string
      */
     public function getVariantSelectionMethodLabel();
-
-    /**
-     * Get taxons.
-     *
-     * @return Collection|TaxonInterface[]
-     */
-    public function getTaxons();
-
-    /**
-     * Set categorization taxons.
-     *
-     * @param Collection $taxons
-     */
-    public function setTaxons(Collection $taxons);
 
     /**
      * Get product short description.
