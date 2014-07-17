@@ -182,7 +182,7 @@ class Product extends BaseProduct implements ProductInterface
     public function removeTaxon(BaseTaxonInterface $taxon)
     {
         if ($this->hasTaxon($taxon)) {
-            $this->taxons->remove($taxon);
+            $this->taxons->removeElement($taxon);
         }
 
         return $this;
