@@ -368,7 +368,7 @@ class Order extends Cart implements OrderInterface
     public function getLastPayment($state = BasePaymentInterface::STATE_NEW)
     {
         if ($this->payments->isEmpty()) {
-            return null;
+            return false;
         }
 
         return $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
@@ -514,7 +514,7 @@ class Order extends Cart implements OrderInterface
     public function getLastShipment()
     {
         if ($this->shipments->isEmpty()) {
-            return null;
+            return false;
         }
 
         $last = $this->shipments->first();
