@@ -8,6 +8,7 @@ Feature: Checkout coupon promotions
         Given the following promotions exist:
           | name                      | description            |
           | Press campaign            | Coupon based promotion |
+          | New Year campaign         | Coupon based promotion |
         And promotion "Press campaign" has following rules defined:
           | type       | configuration |
           | Item total | Amount: 100   |
@@ -17,6 +18,14 @@ Feature: Checkout coupon promotions
         And promotion "Press campaign" has following coupons:
           | code   | usage limit | used |
           | XD0001 | 1           | 0    |
+        And promotion "New Year campaign" has following rules defined:
+          | type       | configuration |
+          | Item count | Count: 2      |
+        And promotion "New Year campaign" has following actions defined:
+          | type           | configuration |
+          | Fixed discount | Amount: 10     |
+        And promotion "New Year campaign" has following coupons:
+          | code   | usage limit | used |
           | XD0002 | 1           | 1    |
         And there are following taxonomies defined:
           | name     |
@@ -30,7 +39,7 @@ Feature: Checkout coupon promotions
           | Woody   | 125   | Debian T-Shirts |
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
-          | Lenny   | 15    | Debian T-Shirts |
+          | Lenny   | 1     | Debian T-Shirts |
         And there is default currency configured
 
     Scenario: Promotion with coupons is applied when the customer
@@ -68,10 +77,12 @@ Feature: Checkout coupon promotions
     Scenario: A valid coupon can not be added to the cart if its usage
               limit has been reached
         Given I am on the store homepage
-          And I added product "Etch" to cart, with quantity "5"
+          And I added product "Lenny" to cart
+          And I added product "Etch" to cart
+          And I added product "Sarge" to cart
          When I fill in "If you have a promotion coupon, enter it here" with "XD0002"
           And I press "OK"
          Then I should be on the cart summary page
           And I should see "Your cart is not eligible to this promotion coupon"
           And "Promotion total" should not appear on the page
-          And "Grand total: €100.00" should appear on the page
+          And "Grand total: €46.00" should appear on the page
