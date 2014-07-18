@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('secret', 'sylius.api_client.secret'|trans) }}</th>
-                <th>{{ sylius_resource_sort('updatedAt', 'sylius.api_client.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -17,7 +16,6 @@
         {% for api_client in api_clients %}
             <tr id="{{ api_client.id }}">
                 <td>{{ api_client.secret }}</td>
-                <td>{{ api_client.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_api_client_update', {'id': api_client.id})) }}
