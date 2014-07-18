@@ -107,7 +107,8 @@ abstract class AbstractResourceExtension extends Extension
                         '%s.%s.%s.class',
                         $this->applicationName,
                         $service === 'form' ? 'form.type' : $service,
-                        $model
+                        $model,
+                        isset($config['templates'][$model]) ? $config['templates'][$model] : null
                     ),
                     $class
                 );
