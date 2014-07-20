@@ -1,6 +1,6 @@
 <div class="product-box">
-    <a href="{{ path(product) }}"><h4>{{ product.name|truncate(18) }}</h4></a>
-    <a href="{{ path(product) }}">
+    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}"><h4>{{ product.name|truncate(18) }}</h4></a>
+    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}">
         <img class="img-rounded img-responsive" src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/262x255' }}" alt="{{ product.name }}" />
         <span class="label label-primary">{{ sylius_calculate_price(product.masterVariant)|sylius_price }}</span>
         <button class="btn btn-success btn-xs pull-right"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.add_to_cart'|trans }}</button>

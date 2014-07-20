@@ -200,17 +200,13 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      * This method uses simple convention where page argument is prefixed
      * with "sylius_" and used as route name passed to router generate method.
      *
-     * @param object|string $page
+     * @param string $page
      * @param array         $parameters
      *
      * @return string
      */
     protected function generatePageUrl($page, array $parameters = array())
     {
-        if (is_object($page)) {
-            return $this->locatePath($this->generateUrl($page, $parameters));
-        }
-
         $route  = str_replace(' ', '_', trim($page));
         $routes = $this->getContainer()->get('router')->getRouteCollection();
 

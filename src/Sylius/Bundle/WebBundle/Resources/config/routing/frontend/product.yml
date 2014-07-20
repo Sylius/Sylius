@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_product_index_by_taxon:
+    pattern: /t/{permalink}
+    requirements:
+      permalink: '[^\s]++'
+    defaults:
+        _controller: sylius.controller.product:indexByTaxonAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
+
+sylius_product_show:
+    pattern: /p/{slug}
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Product:show.html.twig
+            criteria: {slug: $slug}

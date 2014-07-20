@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_page_show:
+    pattern: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.page:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Page:show.html.twig
+            method: findPage
+            arguments: [$id]
+    requirements:
+        id: ".+"

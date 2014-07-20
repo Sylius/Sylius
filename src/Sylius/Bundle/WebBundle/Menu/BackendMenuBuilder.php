@@ -58,7 +58,7 @@ class BackendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.backend.menu.main.homepage'));
 
         $menu->addChild('logout', array(
-            'route' => 'fos_user_security_logout'
+            'route' => 'sylius_backend_security_logout'
         ))->setLabel($this->translate('sylius.backend.logout'));
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_MAIN, new MenuBuilderEvent($this->factory, $menu));

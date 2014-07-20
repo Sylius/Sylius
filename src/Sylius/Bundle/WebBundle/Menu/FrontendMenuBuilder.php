@@ -247,7 +247,8 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         foreach ($taxon->getChildren() as $child) {
             $childMenu = $menu->addChild($child->getName(), array(
-                'route'           => $child,
+                'route'           => 'sylius_product_index_by_taxon',
+                'routeParameters' => array('permalink' => $child->getPermalink()),
                 'labelAttributes' => array('icon' => 'icon-angle-right')
             ));
             if ($child->getPath()) {

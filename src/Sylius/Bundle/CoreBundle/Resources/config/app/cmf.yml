@@ -13,11 +13,6 @@ cmf_content:
     default_template: SyliusWebBundle:Frontend/Page:show.html.twig
 
 cmf_routing:
-    chain:
-        routers_by_id:
-            router.default: 100
-            sylius.dynamic_router: 50
-            cmf_routing.dynamic_router: 20
     dynamic:
         generic_controller: cmf_content.controller:indexAction
         persistence:

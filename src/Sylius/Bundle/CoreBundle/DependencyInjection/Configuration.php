@@ -32,7 +32,6 @@ class Configuration implements ConfigurationInterface
 
         $this->addClassesSection($rootNode);
         $this->addEmailsSection($rootNode);
-        $this->addRoutingSection($rootNode);
         $this->addCheckoutSection($rootNode);
 
         return $treeBuilder;
@@ -147,33 +146,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\ProductVariantImage')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                             ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `routing` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addRoutingSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->scalarNode('route_collection_limit')->defaultValue(0)->info('Limit the number of routes that are fetched when getting a collection, set to false to disable the limit.')->end()
-                ->scalarNode('route_uri_filter_regexp')->defaultValue('')->info('Regular expression filter which is used to skip the Sylius dynamic router for any request URI that matches.')->end()
-                ->arrayNode('routing')->isRequired()->cannotBeEmpty()
-                    ->info('Classes for which routes should be generated.')
-                    ->useAttributeAsKey('class_name')
-                    ->prototype('array')
-                    ->children()
-                        ->scalarNode('field')->isRequired()->cannotBeEmpty()->info('Field representing the URI path.')->end()
-                        ->scalarNode('prefix')->defaultValue('')->info('Prefix applied to all routes.')->end()
-                        ->arrayNode('defaults')->isRequired()->cannotBeEmpty()->info('Defaults to add to the generated route.')
-                            ->prototype('variable')
                         ->end()
                     ->end()
                 ->end()

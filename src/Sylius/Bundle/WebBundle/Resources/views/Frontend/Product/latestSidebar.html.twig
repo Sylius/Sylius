@@ -3,7 +3,7 @@
 <ul>
     {% for product in products %}
         <li>
-            <a href="{{ path(product) }}" class="btn btn-link">
+            <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-link">
                 <img class="thumbnail" src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="{{ product.name }}" />
                 <h4>{{ product.name }}</h4>
             </a>
