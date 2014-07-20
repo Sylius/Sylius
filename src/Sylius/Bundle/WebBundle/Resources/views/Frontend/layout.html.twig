@@ -70,7 +70,7 @@
                     <ul>
                     {% for child in cmf_children(cmf_find('/cms/pages')) %}
                         <li>
-                            <a href="{{ path(child) }}">{{ child.title|striptags }}</a>
+                            <a href="{{ path('sylius_page_show', {'id': child.name}) }}">{{ child.title|striptags }}</a>
                         </li>
                     {% endfor %}
                     </ul>

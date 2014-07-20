@@ -1,11 +1,11 @@
 <div class="row product">
     <div class="col-md-3">
-        <a href="{{ path(product) }}" class="thumbnail">
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="thumbnail">
             <img src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
         </a>
     </div>
     <div class="col-md-9">
-        <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
         <p>{{ product.shortDescription|default('sylius.product.no_description'|trans)|raw }}</p>
 
         <hr>
@@ -24,6 +24,6 @@
             {% endif %}
             </div>
         {% endif %}
-        <a href="{{ path(product) }}" class="btn btn-lg btn-info pull-right">{{ 'sylius.product.show'|trans }}</a>
+        <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-lg btn-info pull-right">{{ 'sylius.product.show'|trans }}</a>
     </div>
 </div>

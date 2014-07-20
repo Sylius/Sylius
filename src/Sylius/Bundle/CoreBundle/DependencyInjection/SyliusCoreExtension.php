@@ -83,22 +83,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
                 $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }
         }
-
-        $routeClasses = $controllerByClasses = $syliusByClasses = array();
-        foreach ($config['routing'] as $className => $routeConfig) {
-            $routeClasses[$className] = array(
-                'field' => $routeConfig['field'],
-                'prefix' => $routeConfig['prefix'],
-            );
-            $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
-            $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
-        }
-
-        $container->setParameter('sylius.route_classes', $routeClasses);
-        $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
-        $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
-        $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
-        $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
     }
 
     /**

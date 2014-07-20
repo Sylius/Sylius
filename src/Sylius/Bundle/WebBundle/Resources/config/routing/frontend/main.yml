@@ -9,6 +9,13 @@ sylius_currency:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/currency.yml
     prefix: /currency
 
+sylius_product:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/product.yml
+
+sylius_page:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/page.yml
+    prefix: /content
+
 sylius_checkout:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/checkout.yml
     prefix: /checkout
