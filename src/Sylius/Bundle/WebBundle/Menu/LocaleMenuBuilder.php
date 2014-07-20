@@ -41,19 +41,22 @@ class LocaleMenuBuilder extends MenuBuilder
      * @param SecurityContextInterface  $securityContext
      * @param TranslatorInterface       $translator
      * @param EventDispatcherInterface  $eventDispatcher
-     * @param LocaleProviderInterface $localeProvider
+     * @param LocaleProviderInterface   $localeProvider
+     * @param array                     $locales
      */
     public function __construct(
         FactoryInterface          $factory,
         SecurityContextInterface  $securityContext,
         TranslatorInterface       $translator,
         EventDispatcherInterface  $eventDispatcher,
-        LocaleProviderInterface   $localeProvider
+        LocaleProviderInterface   $localeProvider,
+        array                     $locales
     )
     {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
 
         $this->localeProvider = $localeProvider;
+        $this->locales        = $locales;
     }
 
     /**
@@ -69,13 +72,14 @@ class LocaleMenuBuilder extends MenuBuilder
             )
         ));
 
-        foreach ($this->localeProvider->getAvailableLocales() as $locale) {
-            $code = $locale->getCode();
-
-            $menu->addChild($code, array(
-                'route' => 'sylius_locale_change',
-                'routeParameters' => array('locale' => $code),
-            ))->setLabel(Intl::getLocaleBundle()->getLocaleName($code));
+        foreach ($this->locales as $locale) {
+            $menu->addChild(
+                $locale,
+                array(
+                    'route' => $this->request->attributes->get('_route'),
+                    'routeParameters' => array('_locale' => $locale),
+                )
+            )->setLabel(Intl::getLanguageBundle()->getLanguageName($locale));
         }
 
         return $menu;

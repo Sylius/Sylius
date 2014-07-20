@@ -14,6 +14,8 @@ parameters:
     sylius.mailer.password:           ~
 
     sylius.locale:                    en
+    sylius.locales:                   [%sylius.locale%, de, pl]
+    sylius.locale.strategy:           prefix
     sylius.secret:                    abc
 
     sylius.currency:                  EUR

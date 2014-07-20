@@ -14,15 +14,15 @@ security:
             pattern:     /administration/.*
             form_login:
                 provider:     fos_userbundle
-                login_path:   /administration/login
-                check_path:   /administration/login-check
-                failure_path: /administration/login
-                default_target_path: /administration/dashboard
+                login_path:   sylius_backend_security_login
+                check_path:   sylius_backend_security_login_check
+                failure_path: sylius_backend_security_login
+                default_target_path: sylius_backend_dashboard
                 use_forward:  false
                 use_referer:  true
             logout:
-                path:   /administration/logout
-                target: /administration/login
+                path:   sylius_backend_security_logout
+                target: sylius_backend_security_login
             anonymous: true
 
         oauth_token:
@@ -41,9 +41,9 @@ security:
             pattern:     /.*
             form_login:
                 provider: fos_userbundle
-                login_path: /login
-                check_path: /login_check
-                failure_path: /login
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                failure_path: fos_user_security_login
                 default_target_path: /
                 use_forward:  false
                 use_referer: true
@@ -55,14 +55,16 @@ security:
                 remember_me_parameter: _remember_me
             oauth:
                 resource_owners:
-                    amazon:   "/login/check-amazon"
-                    facebook: "/login/check-facebook"
-                    google:   "/login/check-google"
-                login_path:   /connect
-                failure_path: /connect
+                    amazon:   amazon_login
+                    facebook: facebook_login
+                    google:   google_login
+                login_path:   hwi_oauth_security
+                failure_path: hwi_oauth_security
                 oauth_user_provider:
                     service: sylius.oauth.user_provider
-            logout: true
+            logout:
+                path:   fos_user_security_logout
+                target: /
             anonymous: true
 
         dev:
@@ -70,10 +72,10 @@ security:
             security: false
 
     access_control:
-        - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/login.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/connect.*", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/resetting", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }

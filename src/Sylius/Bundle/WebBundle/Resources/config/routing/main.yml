@@ -7,6 +7,7 @@ sylius_frontend:
 sylius_backend:
     resource: @SyliusWebBundle/Resources/config/routing/backend/main.yml
     prefix: /administration
+    options: { i18n: false }
 
 sylius_province_choice_form:
     pattern: /province/choice-form

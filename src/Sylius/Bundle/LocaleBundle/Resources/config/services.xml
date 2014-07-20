@@ -38,7 +38,8 @@
         </service>
 
         <service id="sylius.event_listener.locale" class="%sylius.event_listener.locale.class%">
-            <argument type="service" id="sylius.context.locale" />
+            <argument type="string">%kernel.default_locale%</argument>
+            <argument type="string">%sylius.locale.strategy%</argument>
 
             <tag name="kernel.event_subscriber" />
         </service>

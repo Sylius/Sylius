@@ -90,3 +90,8 @@ hwi_oauth:
             client_id:     %sylius.oauth.google.clientid%
             client_secret: %sylius.oauth.google.clientsecret%
             scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+jms_i18n_routing:
+    default_locale: %sylius.locale%
+    locales:        %sylius.locales%
+    strategy:       %sylius.locale.strategy%
