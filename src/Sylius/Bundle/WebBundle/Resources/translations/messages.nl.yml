@@ -4,6 +4,8 @@
 email:
   order_confirmation:
     subject: Onderwerp
+  customer_welcome:
+    subject: Welkom
 sylius:
   account:
     address:
@@ -95,15 +97,30 @@ sylius:
     title: Titel
     update_header: Inhoud blok bewerken
     updated_at: Laatste update
+  api_client:
+    create: Aanmaken
+    create_header: API gebruiker aanmaken
+    index_header: API gebruiker aanmaken
+    secret: Geheime sluitel
+    updated_at: Laatst bijgewerkt
+    no_results: Geen resultaten
+    update_header: API gebruiker bijwerken
   breadcrumb:
     assortment: Assortiment
+    api_client:
+      index: API gebruikers
+    attribute:
+      index: Producteigenschappen
     block:
       index: Inhoud Blokken
     build: Bouwen
     configuration: Configuratie
     country:
       index: Landen
+    currency:
+      index: "Valuta's"
     customers: Klanten
+    dashboard: Dashboard
     edit: Bewerken
     exchange_rate:
       index: Wisselkoersen
@@ -132,6 +149,19 @@ sylius:
       index: Promoties
     promotion_coupon:
       index: Coupons
+      code: Code
+      total_results: Resultaten
+    promotion_coupon:
+      code: Code
+      create: Coupon toevoegen
+      create_header: Maak nieuwe coupon
+      generate: Genereer coupons
+      generate_header: Genereer coupons
+      index: Coupons
+      index_header: Coupons
+      no_results: Geen coupons
+      total_results: Totaal: %total%
+      update_header: Coupon bijwerken
     property:
       index: Eigenschappen
     prototype:
@@ -192,6 +222,7 @@ sylius:
         no_promotion: Geen promotie toegepast
         no_shipping_charges: Geen verzendkosten
         no_taxes: Geen belasting toegepast
+        no_payments: Geen betalingen
         promotion_discount: Korting
         promotion_total: Korting totaal
         shipping_address: Bezorgadres
@@ -240,20 +271,29 @@ sylius:
   deleted: Verwijderd
   edit: Bewerken
   email: E-mail
-  exchange_rate:
-    create: Creëer wisselkoers
-    create_header: Nieuwe wisselkoers aanmaken
-    currency: valuta
+  currency:
+    create: Creëer valuta
+    create_header: Nieuwe valuta aanmaken
+    code: Code
+    enabled: Actief
+    exchange_rate: Wisselkoers
     id: ID
-    index_header: Wisselkoersen
-    no_results: Er zijn geen wisselkoersen om weer te geven.
-    rate: koers
-    update_header: Wisselkoers bewerken
-    updated_at: laatste update
+    index_header: "Valuta's"
+    name: Naam
+    no_results: "Er zijn geen valuta's om weer te geven."
+    update_header: Valuta bewerken
+    updated_at: Laatste update
   filter: Filter
   form:
+    attribute:
+      name: Naam
+      presentation: Weergave
     cart:
       coupon: Vul hier een promotie coupon in, als u deze heeft
+    currency:
+      code: Code
+      exchange_rate: Wisselkoers
+      enabled: Actief
     choose_file: Kies bestand
     frontend:
       password:
@@ -328,7 +368,7 @@ sylius:
   newest: Nieuwste producten
   "no": false
   no_results: Geen resultaten
-  option:
+  product_option:
     create: Nieuwe optie
     create_header: Nieuwe product optie toevoegen
     index_header: Product opties
@@ -354,6 +394,7 @@ sylius:
     no_results: U heeft geen nieuwe bestellingen
     no_shipments: Er zijn geen verzendingen voor deze bestelling
     no_shipping_charges: Geen verzendkosten
+    no_payments: Geen betalingen
     no_taxes: Geen belastingen
     number: Nummer
     payment: Betaling
@@ -411,6 +452,8 @@ sylius:
     sellable: Product
     total: Totaal
     unit_price: Stukprijs
+  option:
+    values: Waardes
   out_of_stock: Geen voorraad
   page:
     body: Inhoud
@@ -432,6 +475,7 @@ sylius:
     manage: Betalingen beheren
     method: Betaalmethode
     no_results: Er zijn geen betaalmethoden geconfigureerd.
+    show_header: Betalingen
     state:
       0: Status
       checkout: Afrekenen
@@ -456,6 +500,8 @@ sylius:
     update_header: Betaalmethode bewerken
     updated_at: Laatst bijgewerkt
   product:
+    attributes: Attributen
+    add_attribute: Attribuut toevoegen
     add_property: Eigenschap toevoegen
     available_on: Beschikbaar op
     available_on_demand: Beschikbaar op aanvraag
@@ -469,6 +515,7 @@ sylius:
     index_header: 'Producten <small>Index van alle producten in uw winkel</small>'
     manage: Beheer producten
     name: Naam
+    no_attributes: Er zijn geen attributen voor dit product
     no_description: '<i>Geen omschrijving...</i>'
     no_images: Er zijn geen afbeeldingen voor dit product
     no_options: Er zijn geen opties voor dit product
@@ -482,6 +529,7 @@ sylius:
     options: Opties
     price: Retail prijs
     properties: Eigenschappen
+    remove_attribute: Verwijder attribuut
     restricted_zone: Beperkte zone
     shipping_category: Verzend categorie
     show: Bekijk details
@@ -490,6 +538,7 @@ sylius:
     sku: SKU
     stock: Huidige voorraad
     tabs:
+      attributes: Attributen
       categorization: Categorisering
       images: Afbeeldingen
       options: Opties
@@ -501,48 +550,7 @@ sylius:
     updated_at: Laatst bijgewerkt
     variant_selection_method: Variant selectiemethode
     view_details: 'Bekijk %product% details.'
-  product_not_available_in_zone: Niet beschikbaar in uw land
-  promotion:
-    actions: Acties
-    add_action: Actie toevoegen
-    add_rule: Regel toevoegen
-    coupon_based: Gebaseerd op een coupon?
-    create: Nieuwe promotie
-    create_header: Nieuwe promotie toevoegen
-    created_at: Aangemaakt op
-    description: Omschrijving
-    ends_at: Eindigt op
-    general_info: Algemene Info
-    id: ID
-    index_header: Huidige promoties
-    manage: Promoties beheren
-    name: Promoties beheren
-    no_results: Er zijn geen promoties geconfigureerd.
-    rules: Regels
-    show_header: Promotie details
-    starts_at: Begint op
-    update_header: Promotie bewerken
-    updated_at: Bijgewerkt op
-    usage_limit: Gebruikslimiet
-    used: Gebruikt
-  promotion_action:
-    configuration: Configuratie
-    type: Type
-  promotion_coupon:
-    create: Nieuwe coupon
-    create_header: Nieuwe coupon toevoegen
-    generate: Coupons genereren
-    generate_header: Genereer coupons
-    index: Lijst van coupons
-    index_header: Coupons
-    no_results: Er zijn geen coupons om weer te geven.
-    total_results:
-      Total: '%total%'
-    update_header: Coupon bewerken
-  promotion_rule:
-    configuration: Configuratie
-    type: Type
-  property:
+  product_attribute:
     add_choice: Keuze toevoegen
     create: Nieuwe eigenschap
     create_header: Nieuwe producteigenschap toevoegen
@@ -554,7 +562,53 @@ sylius:
     type: type
     update_header: Eigenschap bewerken
     updated_at: laatst bijgewerkt
+  product_not_available_in_zone: Niet beschikbaar in uw land
+  promotion:
+    actions: Acties
+    add_action: Actie toevoegen
+    add_rule: Regel toevoegen
+    coupon_based: Gebaseerd op een coupon?
+    create: Nieuwe promotie
+    create_header: Nieuwe promotie toevoegen
+    created_at: Aangemaakt op
+    description: Omschrijving
+    ends_at: Eindigt op
+    exclusive: Exclusief
+    general_info: Algemene Info
+    id: ID
+    index_header: Huidige promoties
+    manage: Promoties beheren
+    name: Promoties beheren
+    no_results: Er zijn geen promoties geconfigureerd.
+    priority: Prioriteit
+    rules: Regels
+    show_header: Promotie details
+    starts_at: Begint op
+    update_header: Promotie bewerken
+    updated_at: Bijgewerkt op
+    usage_limit: Gebruikslimiet
+    used: Gebruikt
+  promotion_action:
+    configuration: Configuratie
+    type: Type
+  promotion_coupon:
+    code: Code
+    create: Nieuwe coupon
+    create_header: Nieuwe coupon toevoegen
+    generate: Coupons genereren
+    generate_header: Genereer coupons
+    index: Lijst van coupons
+    index_header: Coupons
+    no_results: Er zijn geen coupons om weer te geven.
+    total_results: Totaal: %total%
+    update_header: Coupon bewerken
+  promotion_rule:
+    configuration: Configuratie
+    type: Type
+  property:
+    add_choice: Toevoeg keuze
   prototype:
+    attributes: Attributen
     build: Prototype bouwen
     build_header: Maak een product op basis van een prototype
     create: Nieuw prototype
@@ -681,6 +735,11 @@ sylius:
     impersonate: Inloggen als gebruiker
     manage: Gebruikers beheren
     no_results: Er zijn geen gebruikers om weer te geven.
+    oauth:
+      provider: OAuth Provider
+      identifier: Identifier
+      access_token: Access Token
+      none: No OAuth accounts connected.
     order:
       no_results: Er zijn geen bestellingen voor deze gebruiker om weer te geven.
     orders: Gebruiker bestellingen
@@ -716,5 +775,6 @@ sylius:
     show_header: Zone details
     type: Type
     update_header: Zone bewerken
+    scope: Veld van werkzaamheid
   zone_member:
     members: Leden

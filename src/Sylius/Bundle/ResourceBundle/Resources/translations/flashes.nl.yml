@@ -3,6 +3,8 @@
 
 sylius:
   resource:
-    create: '%resource% is succesvol aangemaakt.'
-    update: '%resource% is succesvol bijgewerkt.'
-    delete: '%resource% is succesvol verwijderd.'
+    create:   '%resource% is succesvol aangemaakt.'
+    delete:   '%resource% is succesvol verwijderd.'
+    generate: '%resource%s is succesvol gegenereerd.'
+    move:     '%resource% is succesvol verplaatst.'
+    update:   '%resource% is succesvol bijgewerkt.'
