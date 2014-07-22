@@ -101,7 +101,7 @@ Retrieving taxonomies is simpleas calling proper methods on the repository.
     {
         $repository = $this->container->get('sylius.repository.taxonomy');
 
-        $taxonomy = $repository->find(2); // Get taxonomy with id 4, returns null if not found.
+        $taxonomy = $repository->find(2); // Get taxonomy with id 2, returns null if not found.
         $taxonomy = $repository->findOneBy(array('name' => 'Specials')); // Get one taxonomy by defined criteria.
 
         $taxonomies = $repository->findAll(); // Load all the taxonomies!
