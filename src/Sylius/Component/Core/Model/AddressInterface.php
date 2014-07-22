@@ -32,5 +32,5 @@ interface AddressInterface extends BaseAddressInterface
      *
      * @param UserInterface $user
      */
-    public function setUser(UserInterface $user);
+    public function setUser(UserInterface $user = null);
 }
