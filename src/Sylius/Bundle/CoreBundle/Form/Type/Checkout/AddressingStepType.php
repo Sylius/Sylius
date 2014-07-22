@@ -53,14 +53,14 @@ class AddressingStepType extends AbstractType
                 $order = $event->getData();
                 /* @var $user UserInterface */
                 $user = $options['user'];
-
+                if (null === $user) {
+                    return;
+                }
                 if ($order->getShippingAddress() === null && $user->getShippingAddress() !== null) {
-                    $shippingAddress = clone $user->getShippingAddress();
-                    $order->setShippingAddress($shippingAddress);
+                    $order->setShippingAddress(clone $user->getShippingAddress());
                 }
                 if ($order->getBillingAddress() === null && $user->getBillingAddress() !== null) {
-                    $billingAddress = clone $user->getBillingAddress();
-                    $order->setBillingAddress($billingAddress);
+                    $order->setBillingAddress(clone $user->getBillingAddress());
                 }
             })
             ->add('shippingAddress', 'sylius_address', array('shippable' => true))
