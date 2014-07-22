@@ -49,13 +49,13 @@ class AddressingStepType extends AbstractType
                 }
             })
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use($options) {
-                /* @var $order OrderInterface */
-                $order = $event->getData();
                 /* @var $user UserInterface */
                 $user = $options['user'];
-                if (null === $user) {
+                if (null === $user || !$user instanceof UserInterface) {
                     return;
                 }
+                /* @var $order OrderInterface */
+                $order = $event->getData();
                 if ($order->getShippingAddress() === null && $user->getShippingAddress() !== null) {
                     $order->setShippingAddress(clone $user->getShippingAddress());
                 }
