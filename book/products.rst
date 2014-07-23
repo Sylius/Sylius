@@ -37,7 +37,7 @@ Every option type is represented by **ProductOption** and references multiple **
 Variants
 --------
 
-**ProductVariant** represents an unique combination of product options and can have its own pricing configuration, inventory tracking etc.
+**ProductVariant** represents a unique combination of product options and can have its own pricing configuration, inventory tracking etc.
 
 You are also able to use product variations system without the options at all.
 
