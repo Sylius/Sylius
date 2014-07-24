@@ -274,6 +274,16 @@ class Configuration
         return $this->get('sortable_position', 'position');
     }
 
+    public function getSerializationGroups()
+    {
+        return $this->get('serialization_groups', array());
+    }
+
+    public function getSerializationVersion()
+    {
+        return $this->get('serialization_version');
+    }
+
     protected function get($parameter, $default = null)
     {
         return isset($this->parameters[$parameter]) ? $this->parameters[$parameter] : $default;
