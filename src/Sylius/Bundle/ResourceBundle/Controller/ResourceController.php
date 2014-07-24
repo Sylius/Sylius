@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Hateoas\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\View\View;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -373,5 +374,17 @@ class ResourceController extends FOSRestController
     protected function getPagerfantaFactory()
     {
         return new PagerfantaFactory('page', 'paginate');
+    }
+
+    protected function handleView(View $view)
+    {
+        $handler = $this->get('fos_rest.view_handler');
+        $handler->setExclusionStrategyGroups($this->config->getSerializationGroups());
+
+        if ($version = $this->config->getSerializationVersion()) {
+            $handler->setExclusionStrategyVersion($version);
+        }
+
+        return $handler->handle($view);
     }
 }
