@@ -48,15 +48,6 @@ class LoadPromotionsData extends DataFixture
 
         $manager->persist($promotion);
 
-        $promotion = $this->createPromotion(
-            'Easter Egg',
-            'Easter Egg Sale for people who buy product from specific category.',
-            array($this->createRule('taxonomy', array('taxons' => new ArrayCollection(array($this->getReference('Sylius.Taxon.Bookmania')->getId())), 'exclude' => false))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
-        );
-
-        $manager->persist($promotion);
-
         $manager->flush();
     }
 
