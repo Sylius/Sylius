@@ -86,5 +86,5 @@ A guide to contribute to Sylius.
 .. include:: /contributing/map.rst.inc
 
 .. _Sylius: http://sylius.org
-.. _`Symfony Framework`: http://symfony.com
+.. _`Symfony2 Framework`: http://symfony.com
 .. _`Quick Tour`: http://symfony.com/doc/current/quick_tour
