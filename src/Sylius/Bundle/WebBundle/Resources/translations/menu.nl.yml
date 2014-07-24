@@ -36,12 +36,15 @@ sylius:
         users: Gebruikers
         zones: Zones
       sidebar:
+        attributes: Attributen
+        api_clients: API gebruikers
         assortment: Assortiment
         blocks: Blokken
         configuration: Configuratie
         content: Inhoud
         countries: Landen
         customer: Klanten
+        currencies: "Valuta's"
         dashboard: Dashboard
         exchange_rates: Wisselkoersen
         general_settings: Algemene instellingen

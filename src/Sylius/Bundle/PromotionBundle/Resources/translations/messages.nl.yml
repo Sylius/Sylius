@@ -46,6 +46,7 @@ sylius:
       coupon_based: Coupon gebaseerd
       description: Omschrijving
       ends_at: Eindigt op
+      exclusive: Exclusief
       name: Naam
       rules: Regels
       starts_at: Start op
