@@ -4,17 +4,17 @@
 sylius:
   address:
     city:
-      max_length: Le nom de la ville ne doit pas contenir plus de 255 caractères.
+      max_length: Le nom de la ville ne doit pas comporter plus de 255 caractères.
       min_length: Le nom de la ville doit comporter au moins 2 caractères.
       not_blank: Veuillez entrer une ville
     country:
       not_blank: Veuillez choisir un pays.
     first_name:
-      max_length: Le prénom ne doit pas contenir plus de 255 caractères.
+      max_length: Le prénom ne doit pas comporter plus de 255 caractères.
       min_length: Le prénom doit comporter au moins 2 caractères.
       not_blank: Veuillez entrer votre prénom.
     last_name:
-      max_length: Le nom ne doit pas contenir plus de 255 caractères.
+      max_length: Le nom ne doit pas comporter plus de 255 caractères.
       min_length: Le nom doit comporter au moins 2 caractères.
       not_blank: Veuillez entrer votre nom.
     postcode:

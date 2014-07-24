@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: O carrinho foi atualizado com sucesso.
+    cart_clear_completed: O carrinho foi esvaziado com sucesso.
+    item_add_completed: O item foi adicionado ao carrinho.
+    item_remove_completed: O item foi removido do carrinho.
+    item_add_error: Ocorreu um erro ao adicionar o item no carrinho.
+    item_remove_error: Ocorreu um erro ao remover um item do carrinho.

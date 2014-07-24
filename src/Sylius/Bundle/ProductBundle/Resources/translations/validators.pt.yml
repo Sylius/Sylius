@@ -1,3 +1,53 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    sku:
+      not_blank: Por favor, insira o SKU do produto.
+      unique: SKU de produto deve ser único.
+    name:
+      not_blank: Por favor, digite o nome do produto.
+      min_length: 'Nome do produto deve ser pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.'
+    description:
+      not_blank: Por favor, digite a descrição do produto.
+      min_length: 'Descrição do produto deve ser pelo menos 1 caracter. |Descrição do produto deve ser pelo menos {{limit}} caracteres.'
+  variant:
+    sku:
+      not_blank: Por favor insira a variante SKU.
+      unique: SKU variante deve ser único.
+    combination: Variante com esta opção definida já existe.
+  option:
+    name:
+      not_blank: Por favor, digite o nome de opção.
+      min_length: 'Nome da opção deve ter pelo menos 1 caracter. |Nome da opção deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Nome da opção não deve ser superior a 1 caractere. |Nome da opção não deve ter mais de {{limit}} caracteres.'
+    presentation:
+      not_blank: Por favor insira a apresentação da opção.
+      min_length: 'Apresentação de opção deve ter pelo menos 1 caracter. |Apresentação de opção deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Apresentação de opção não deve ser superior a 1 caractere. |Apresentação de opção não deve ter mais de {{limit}} caracteres.'
+    values:
+      min_count: 'Por favor, adicione pelo menos {{limite}} valores de opção. |Por favor, adicione pelo menos valores de opção de {{limit}}.'
+  option_value:
+    value:
+      not_blank: Por favor, insira o valor de opção.
+  property:
+    name:
+      not_blank: Por favor insira o nome da propriedade.
+      min_length: 'Nome do produto deve ter pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.'
+    presentation:
+      not_blank: Por favor insira a apresentação da propriedade.
+      min_length: 'Apresentação de propriedade deve ter pelo menos 1 caracter. |Apresentação de propriedade deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Apresentação de propriedade não deve ter mais de 1 caractere. |Apresentação de propriedade não deve ter mais de {{limit}} caracteres.'
+  product_property:
+    property:
+      not_blank: Por favor, selecione a propriedade.
+    value:
+      not_blank: Por favor digite o valor da propriedade de produto.
+  prototype:
+    name:
+      not_blank: Por favor, digite o nome do protótipo.
+      min_length: 'Nome do produto deve ter pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.'

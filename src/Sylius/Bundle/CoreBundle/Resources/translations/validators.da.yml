@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Navnet på gruppen må ikke være længere end {{ limit }} tegn.'
+      min: 'Navnet på gruppen skal være mindst {{ limit }} tegn langt.'
+      not_blank: Angiv navnet på gruppen.
+  locale:
+    code:
+      not_blank: Venligst angiv landekode.
+      unique: Denne landekode eksisterer allerede.
+  user:
+    first_name:
+      max: 'Fornavnet må ikke være længere end {{ limit }} tegn.'
+      min: 'Fornavnet skal være mindst {{ limit }} tegn langt.'
+      not_blank: Indtast dit fornavn.
+    last_name:
+      max: 'Efternavnet må ikke være længere end {{ limit }} tegn.'
+      min: 'Efternavnet skal være mindst {{ limit }} tegn langt.'
+      not_blank: Indtast dit efternavn.
+  variant:
+    onHand:
+      min: 'Lagerantal skal være større end {{ limit }}.'
+      not_blank: Angiv venligst lagerantal.
+    price:
+      min: Prisen må ikke være negativ.
+      not_blank: Angiv prisen.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Angiv forsendelses metode zone.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Angiv moms sats zone.

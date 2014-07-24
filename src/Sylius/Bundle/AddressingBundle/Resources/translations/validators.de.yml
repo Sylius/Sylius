@@ -41,7 +41,7 @@ sylius:
       not_blank: Bitte geben Sie Ihr Bundesland an.
   zone:
     members:
-      min_count: 'Bitte geben Sie mindestens {{ limit }} Bereiche an.'
+      min_count: 'Bitte geben Sie mindestens {{ limit }} Versandgebiete an.'
     name:
-      max_length: Der Name eines Bereiches darf nicht länger als 255 Zeichen sein|Der Name eines Bereiches darf nicht länger als 255 Zeichen sein.
-      not_blank: Bitte geben Sie den Namen des Bereiches an.
+      max_length: Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein|Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein.
+      not_blank: Bitte geben Sie den Namen des Versandgebietes an.

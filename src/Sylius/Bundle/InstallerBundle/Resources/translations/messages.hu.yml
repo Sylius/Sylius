@@ -1,3 +1,63 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: A Sylius sikeresen telepítve.
+  form:
+    configuration:
+      database:
+        0: Adatbázis-kapcsolat
+        driver:
+          0: Meghajtó
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Hoszt
+        name: Név
+        password: Jelszó
+        port: Port
+        user: Felhasználó
+      locale:
+        0: Területi beállítások
+        currency: Pénznem
+        locale: Terület
+      mailer:
+        0: A levelező rendszer beállításai
+        host: Hoszt
+        password: Jelszó
+        transport:
+          0: Transzport
+          gmail: Gmail
+          mail: Levél
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Felhasználó
+    setup:
+      email: E-mail
+      load_fixtures: Az előre rögzített adatok betöltése
+      plain_password: Jelszó
+      username: Felhasználónév
+  process:
+    step:
+      check:
+        button:
+          back: Vissza
+          install: Telepítés
+          next: Következő
+        header: 'Rendszerkövetelmények ellenőrzése <small>Sylius-telepítő</small>'
+        table:
+          current: aktuális
+          required: kötelező
+          status: állapot
+      configure:
+        header: 'Konfiguráció <small>Sylius-telepítő</small>'
+      setup:
+        header: 'Adminisztrációs eszközök telepítője <small>Sylius telepítő</small>'
+      welcome:
+        content: '<p>Üdvözöljük a Sylius telepítőjében.</p>'
+        header: 'Üdvözöljük a <small>Sylius telepítőjében</small>'
+€: €

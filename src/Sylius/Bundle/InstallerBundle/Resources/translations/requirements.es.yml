@@ -16,7 +16,8 @@ sylius:
     intl: Intl
     json_encode: JSON
     mbstring: Multibyte String
-    on: Activado
+    "off": false
+    "on": true
     pcre: PCRE
     pdo: PDO
     php_xml: PHP-XML
@@ -48,7 +49,8 @@ sylius:
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
     non_deprecated: No obsoleto
-    on: Activado
+    "off": false
+    "on": true
     register_globals: register_globals
     session:
       auto_start: session.auto_start

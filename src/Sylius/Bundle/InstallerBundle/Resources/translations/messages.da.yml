@@ -1,3 +1,57 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius er blevet installeret.
+  form:
+    configuration:
+      database:
+        0: Databaseforbindelsen
+        driver:
+          0: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Vært
+        name: Navn
+        password: Adgangskode
+        port: Port
+        user: Bruger
+      locale:
+        0: Landekode indstillinger
+        currency: Valuta
+        locale: Landekode
+      mailer:
+        0: Mail indstillinger
+        host: Vært
+        password: Adgangskode
+        transport:
+          0: Transport
+          gmail: Gmail
+          mail: Mail
+          smtp: SMTP
+        user: Bruger
+    setup:
+      email: Email
+      plain_password: Adgangskode
+      username: Brugernavn
+  process:
+    step:
+      check:
+        button:
+          back: Tilbage
+          install: Installer
+          next: Næste
+        table:
+          current: nuværende
+          required: krævet
+          status: status
+      configure:
+        header: 'Konfiguration <small>Sylius installer</small>'
+      setup:
+        header: 'Administration setup <small>Sylius installer</small>'
+€: €

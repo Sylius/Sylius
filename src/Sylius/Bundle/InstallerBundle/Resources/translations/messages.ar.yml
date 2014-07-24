@@ -1,3 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  flashes:
+    installed: تم بنجاح تثبيت سيلاس.
+  form:
+    configuration:
+      database:
+        0: اتصال قاعدة البيانات
+        driver:
+          0: برنامج التشغيل
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+        host: المضيف / Host
+      mailer:
+        host: المضيف / Host

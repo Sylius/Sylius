@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: อัปเดทตระกร้าสินค้าเสร็จเรียบร้อยแล้ว
+    cart_clear_completed: เคลียร์ตระกร้าสินค้าเสร็จเรียบร้อย
+    item_add_completed: เพิ่มรายการลงในตระกร้าสินค้าเรียบร้อยแล้ว
+    item_remove_completed: รายการสินค้าถูกลบออกจากตระกร้านสินค้าแล้ว
+    item_add_error: เกิดความผิดพลาดในขณะเพิ่มรายการสินค้าลงตระกร้า
+    item_remove_error: เกิดความผิดพลาดขึ้นในขณะเอาสินค้าออกจากตระกร้า

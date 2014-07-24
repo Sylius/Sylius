@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  option:
+    name:
+      not_blank: "Veuillez saisir le nom de l'option."
+      min_length: "Le nom de l'option doit être d'au moins 1 caractère.|Le nom de l'option doit être d'au moins {{ limit }} caractères."
+      max_length: "Le nom de l'option ne doit pas dépasser 1 caractère.|Le nom de l'option ne doit pas dépasser {{ limit }} caractères."
+    presentation:
+      not_blank: "Veuillez saisir la présentation de l'option."
+      min_length: "La présentation de l'option doit être d'au moins 1 caractère.|La présentation de l'option doit être d'au moins {{ limit }} caractères."
+      max_length: "La présentation de l'option ne doit pas dépasser 1 caractère.|La présentation de l'option ne doit pas dépasser {{ limit }} caractères."
+    values:
+      min_count: "Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option."
+  option_value:
+    value:
+      not_blank: "Veuillez saisir la valeur de l'option."
+  variant:
+    combination: La variante avec cette option existe déjà.

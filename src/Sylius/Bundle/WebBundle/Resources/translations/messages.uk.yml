@@ -1,3 +1,59 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    logout: Вихід
+    quick_links:
+      users: Користувачі
+  breadcrumb:
+    option:
+      index: Параметри
+    order:
+      index: Замовлення
+    product:
+      index: Продукти
+    user:
+      index: Користувачі
+    zone:
+      index: Пояси
+  cart:
+    summary:
+      checkout: Оформити замовлення
+  checkout:
+    back: Назад
+    security:
+      login: Логін
+      register: Зареєструватися
+  form:
+    login:
+      email: Email
+    option_value:
+      add_value: Додати значення
+    profile:
+      email: Email
+  gallery:
+    next: Наступний
+  login: Логін
+  "no": false
+  order:
+    state:
+      checkout: Оформити замовлення
+    user: Користувач
+  page:
+    index_header: Сторінки
+  payment:
+    state:
+      checkout: Оформити замовлення
+      failed: Помилка
+  product:
+    options: Параметри
+    tabs:
+      options: Параметри
+  user:
+    username: "Ім'я користувача"
+  variant:
+    options: Параметри
+  "yes": true
+  zone:
+    index_header: Пояси

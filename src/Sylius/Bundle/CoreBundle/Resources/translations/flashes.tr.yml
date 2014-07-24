@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    restricted_zone_removal: '%product% ülkenizde mevcut olmadığından alışveriş sepetinden silindi.'
+  checkout:
+    restricted_zone: Bu ürün sizin ülkenizde mevcut değil.
+    success: Siparişiniz için teşekkür ederiz!
+    canceled: Ödeme iptal edildi.
+    pending: Ödeme şu anda beklemede.
+    failed: Ödeme reddedildi.
+    unknown: Bilinmeyen ödeme hata.
+    out_of_stock: 'Sadece %quantity% adet %name% stokta var.'

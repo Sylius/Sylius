@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  option:
+    name:
+      not_blank: Kérjük, adja meg az opció nevét.
+      min_length: 'Az opciónév legalább 1 karakter hosszú kell legyen. | Az opciónév legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'Az opciónév nem lehet hosszabb, mint 1 karakter. |Az opciónév nem lehet hosszabb, mint {{ limit }} karakterek.'
+    presentation:
+      not_blank: Kérjük, adja meg az opció bemutatását.
+      min_length: 'Az opció bemutatása legalább 1 karakter hosszú kell legyen. | Az opció bemutatása legalább {{ limit }} karakter hosszú kell legyen.'
+      max_length: 'Az opció bemutatása nem lehet hosszabb mint 1 karakter. | Az opció bemutatása nem lehet hosszabb mint {{ limit }} karakter.'
+    values:
+      min_count: 'Kérjük, adjon meg legalább {{ limit }} opció értéket. | Kérjük adjon meg legalább {{ limit }} opció értéket.'
+  option_value:
+    value:
+      not_blank: Kérjük, adja meg az opció értékét.
+  variant:
+    combination: A változat ebben a választék készletben már létezik.

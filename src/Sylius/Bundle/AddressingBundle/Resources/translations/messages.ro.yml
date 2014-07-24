@@ -5,10 +5,30 @@ sylius:
   form:
     address:
       city: Oraș
+      company: Companie
+      country: Țară
+      first_name: Prenume
+      last_name: Nume
       postcode: Cod poștal
       street: Adresă
       province: Județ
     country:
       iso_name: cod ISO
+      name: Nume
+      provinces: Județe
+      select: Selectaţi
+    province:
+      name: Nume
+      select: Selectaţi
+    zone:
+      members: Membri
+      name: Nume
+      type: Tip
+      types:
+        province: Județ
+    zone_member_country:
+      country: Țară
     zone_member_province:
       province: Județ
+    zone_member_zone:
+      zone: Zonă

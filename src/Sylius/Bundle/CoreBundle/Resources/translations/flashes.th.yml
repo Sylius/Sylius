@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    restricted_zone_removal: 'สินค้า %product% ถูกนำออกจากรถเข็นเนื่องจากไม่มีในประเทศของคุณ'
+  checkout:
+    restricted_zone: สินค้านี้ไม่มีในประเทศของคุณ
+    success: ขอบคุณสำหรับการสั่งซื้อ
+    canceled: การชำระเงินถูกยกเลิก
+    pending: การชำระเงินยังอยู่ในระหว่างการพิจารณา
+    failed: การชำระเงินถูกปฏิเสธ
+    unknown: ไม่ทราบข้อผิดพลาดในการชำระเงิน
+    out_of_stock: 'มี %quantity% %name% เท่านั้น'

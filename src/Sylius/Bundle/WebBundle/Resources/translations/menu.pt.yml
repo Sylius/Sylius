@@ -1,3 +1,95 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Sortimento
+        configuration: Configuração
+        countries: Países
+        customer: Clientes
+        dashboard: Painel
+        exchange_rates: Taxas de câmbio
+        general_settings: Configurações gerais
+        homepage: Sua loja
+        locales: Localidades
+        new_order: Adicionar novo pedido
+        new_promotion: Adicionar nova promoção
+        options: Gerenciar opções de produto
+        orders: Pedidos atuais
+        payment_methods: Meios de pagamentos
+        payments: Pagamentos
+        products: Produtos
+        promotions: Promoções
+        properties: Configurar propriedades
+        prototypes: Protótipos de produtos
+        sales: Pedidos
+        shipments: Envios
+        shipping_categories: Categorias de envio
+        shipping_methods: Métodos de envio
+        stockables: Níveis de estoque
+        tax_categories: Categorias de tributação
+        tax_rates: Impostos
+        taxation_settings: Configurações de taxas
+        taxonomies: Categorização
+        users: Usuários
+        zones: Regiões
+      sidebar:
+        assortment: Sortimento
+        blocks: Blocos
+        configuration: Configuração
+        content: Conteúdo
+        countries: Países
+        customer: Clientes
+        dashboard: Painel
+        exchange_rates: Taxas de câmbio
+        general_settings: Configurações gerais
+        groups: Grupos
+        homepage: Volta para loja
+        locales: Localidades
+        new_order: Adicionar novo pedido
+        new_promotion: Adicionar nova promoção
+        options: Gerenciar opções
+        orders: Pedidos atuais
+        pages: Páginas
+        payment_methods: Meios de pagamentos
+        payments: Pagamentos
+        products: Produtos
+        promotions: Promoções
+        properties: Configurar propriedades
+        prototypes: Protótipos de produtos
+        sales: Pedidos
+        shipments: Envios
+        shipping_categories: Categorias de envio
+        shipping_methods: Métodos de envio
+        stockables: Níveis de estoque
+        tax_categories: Categorias de tributação
+        tax_rates: Impostos
+        taxation_settings: Configurações de taxas
+        taxonomies: Categorização
+        users: Usuários
+        zones: Regiões
+  frontend:
+    menu:
+      account:
+        addresses: Meu livro de endereços
+        homepage: Home
+        orders: Meus pedidos / minhas faturas
+        password: Minha senha
+        profile: Minhas informações pessoais
+        shop: Voltar para a loja
+      currency: 'Mostrar preços em %currency%'
+      main:
+        account: Minha conta
+        administration: Administração
+        cart: 'Ver carrinho (%items%)  %total%'
+        login: Login
+        logout: Sair
+        register: Registre-se
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google +
+        linkedin: LinkedIn
+        twitter: Twitter

@@ -1,10 +1,39 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: email.potvrzeni_objednavky.predmet
 sylius:
+  account:
+    address:
+      action:
+        billing: Nastavit jako výchozí fakturační adresu
+        create: Vytvořit novou adresu
+        delete: Odstranit
+        edit: Úpravy
+        shipping: Nastavit jako výchozí dodací adresu
+      create: Vytvořit novou adresu
+      default:
+        billing: Výchozí fakturační adresa
+        no_billing: Žádná výchozí fakturační adresa
+        no_shipping: Žádná výchozí dodací adresu
+        shipping: Výchozí dodací adresa
+      empty: Nevytvořili jste zatím žádnou adresu.
+      list: Všechny adresy
+      update: Upravit adresu
+    home:
+      since: Zákazníkem jste od
+    order:
+      details: Podrobnosti vaší objednávky
+      download_invoice: Stáhnout fakturu
+      invoice: Faktura
+      total: Celkem
+    title: Můj účet
   add_to_cart: Přidat do košíku
   address:
     city: Město
+    company: Firma
     country: Země
     firstname: Jméno
     lastname: Příjmení
@@ -19,6 +48,48 @@ sylius:
   backend:
     alert:
       info: Info
+    dashboard:
+      chart_order_count: Počet objednávek
+      orders: Objednávky za poslední týden
+      revenue: Příjmy za poslední týden
+    logout: Odhlásit
+    quick_links:
+      add_product: Nový produkt
+      users: Uživatelé
+    statistics:
+      orders_this_month: Celkem objednávek
+      registrations_this_month: Celkem registrací
+      sales_this_month: Prodeje
+  block:
+    body: Tělo
+    id: ID
+    title: Název
+  breadcrumb:
+    country:
+      index: Země
+    customers: Zákazníci
+    edit: Úpravy
+    group:
+      index: Skupiny
+    new: Nový
+    option:
+      index: Možnosti
+    order:
+      index: Objednávky
+    payment:
+      index: Platby
+    product:
+      index: Produkty
+    property:
+      index: Vlastnosti
+    sales: Prodeje
+    shipment:
+      index: Zásilky
+    update: Úpravy
+    user:
+      index: Uživatelé
+    zone:
+      index: Oblasti
   cancel: Zrušit
   cart:
     empty: Váš košík je prázdný
@@ -33,17 +104,167 @@ sylius:
       unit_price: Cena
     summary_header: Obsah košíku
   checkout:
+    back: Zpět
     finalize:
       address:
         city: Město
+        firstname: Křestní Jméno
+        lastname: Příjmení
         postcode: PSČ
         province: Provincie
         street: Ulice
+      order:
+        billing_address: Fakturační adresa
+        no_items: Tato objednávka neobsahuje žádné položky
+        shipping_address: Doručovací adresa
+        total: Celkem
       order_item:
         quantity: Množství
+        total: Celkem
+      product:
+        name: Jméno
+    payment:
+      header: Způsob platby
+  confirmation:
+    message: Chcete tuto položku odstranit?
+  country:
+    id: ID
+    index_header: Země
+    name: Jméno
+  exchange_rate:
+    id: ID
+  form:
+    login:
+      email: Email
+      password: Heslo
+    profile:
+      email: Email
+      firstName: Křestní Jméno
+      lastName: Příjmení
+  gallery:
+    next: Další
+  group:
+    id: ID
+    index_header: Skupiny
+    name: Jméno
+    roles: Role
+  inventory_unit:
+    name: Jméno
+    sku: SKU
+  locale:
+    code: Kód
+    enabled: Povoleno
+  login_header: Administrace
+  "no": false
+  option:
+    manage: Spravovat nastavení
+  order:
+    billing_address: Fakturační adresa
+    id: ID
+    index_header: Aktuální objednávky
+    no_items: Tato objednávka neobsahuje žádné položky
+    number: Číslo
+    payment_state: Stav platby
+    shipments: Zásilky
+    shipping_address: Doručovací adresa
+    total: Celkem
+    user: Uživatel
+  shipment:
+    id: ID
+    index_header: Zásilky
+    name: Jméno
+    sku: SKU
+    update: Úpravy
   order_item:
     quantity: Množství
     sellable: Produkt
+    total: Celkem
+    unit_price: Jednotná cena
+  page:
+    body: Tělo
+    id: ID
+    index_header: Stránky
+    title: Název
+  password: Heslo
+  payment:
+    id: ID
+    index_header: Platby
+    state:
+      completed: Dokončeno
+      failed: Neúspěšné
+      new: Nový
+      unknown: Neznámý
+  payment_method:
+    id: ID
+    index_header: Způsoby plateb
+    name: Jméno
   product:
+    available_on: Dostupný od
+    available_on_demand: K dispozici na požádání
+    categorization: Kategorizace
+    create_header: Nový produkt
+    description: Popis
+    name: Jméno
+    no_images: Pro tento produkt nejsou žádné obrázky
+    no_options: Pro tento produkt nejsou žádné nastavení
+    options: Možnosti
+    properties: Vlastnosti
+    restricted_zone: Zóna s omezeným přístupem
+    shipping_category: Typ dopravy
+    sku: SKU
+    stock: Aktuálně skladem
     tabs:
+      categorization: Kategorizace
+      images: Obrázky
+      options: Možnosti
       product: Produkt
+      properties: Vlastnosti
+    tax_category: Typ daně
+    variant_selection_method: Metoda výběru varianty
+  promotion:
+    description: Popis
+    id: ID
+    name: Jméno
+  search: Hledat
+  settings:
+    general_header: Obecná nastavení
+  shipping_address: Doručovací adresa
+  shipping_category:
+    id: ID
+    name: Jméno
+  shipping_method:
+    id: ID
+    index_header: Způsoby dopravy
+    name: Jméno
+    zone: Oblast
+  tax_category:
+    description: Popis
+    id: ID
+    name: Jméno
+  tax_rate:
+    included_in_price: Zahrnuto v ceně?
+    index_header: Daňové sazby
+    name: Jméno
+    zone: Oblast
+  taxon:
+    name: Jméno
+  taxonomy:
+    name: Jméno
+  unknown: Neznámý
+  user:
+    billing_address: Fakturační adresa
+    first_name: Křestní Jméno
+    id: ID
+    last_name: Příjmení
+    shipping_address: Doručovací adresa
+    username: Uživatelské jméno
+  variant:
+    available_on_demand: K dispozici na požádání
+    options: Možnosti
+    price: Cena
+    sku: SKU
+    stock: Aktuálně skladem
+  "yes": true
+  zone:
+    index_header: Oblasti
+    name: Jméno

@@ -1,3 +1,21 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    shipment:
+      states:
+        checkout: Gå til kassen
+        pending: Venter
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Beløp
+      per_item_rate_configuration:
+        amount: Beløp
+      weight_rate_configuration:
+        amount: Beløp
+    shipping_category:
+      description: Beskrivelse
+      name: Navn
+    shipping_method:
+      name: Navn

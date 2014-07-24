@@ -40,6 +40,7 @@ sylius:
       id: ID
       title: Názov
     product:
+      shipping_category: Prepravná kategória
       short_description: Krátky popis
     product_filter:
       name: Názov
@@ -50,6 +51,7 @@ sylius:
         locale: Jazyk
         meta_description: Meta popis
         meta_keywords: Meta kľúčové slová
+        title: Názov stránky
     shipment_filter:
       created_at_from: Od
       created_at_to: Do
@@ -72,7 +74,7 @@ sylius:
     user_filter:
       query: Vyhľadať
     variant:
-      available_on_demand: K dispozícii na objednávku
+      available_on_demand: Na objednávku
       depth: Hĺbka
       height: Výška
       images: Obrázky

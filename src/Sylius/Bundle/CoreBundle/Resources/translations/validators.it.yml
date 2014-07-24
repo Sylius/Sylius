@@ -2,6 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  group:
+    name:
+      max: 'Il nome del Gruppo non dovrebbe superare i {{ limit }} caratteri.'
+      min: 'Il nome del gruppo deve contenere almeno {{ limit }} caratteri.'
+      not_blank: Inserisci il nome del gruppo.
+  locale:
+    code:
+      not_blank: Per favore inserisci il CAP.
+      unique: Questo locale esiste già.
   user:
     first_name:
       max: 'Il nome non deve essere più lungo di {{ limit }} caratteri.'
@@ -16,7 +25,7 @@ sylius:
       min: 'La scorta di magazzino deve essere maggiore di {{ limit }}.'
       not_blank: Per favore inserisci la scorta di magazzino.
     price:
-      min: 'Il prezzo deve essere superiore a {{ limit }}.'
+      min: Il prezzo non può essere un valore negativo.
       not_blank: Per favore inserisci il prezzo.
 sylius_shipping:
   method:

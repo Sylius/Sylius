@@ -21,7 +21,7 @@ sylius:
     checkout:
       addressing:
         different_billing_address: Utiliser une adresse différente pour la facturation ?
-      payment_method: Mode de paiement
+      payment_method: Moyen de paiement
       shipping_method: Mode de livraison
     group:
       name: Nom
@@ -45,7 +45,7 @@ sylius:
       restricted_zone: Restriction de zone
       shipping_category: Catégorie de livraison
       short_description: Brève description
-      tax_category: Catégorie de TVA
+      tax_category: Catégorie de taxe
       variant_selection_method: Méthode de sélection de variante
     product_filter:
       name: Nom
@@ -63,7 +63,7 @@ sylius:
       created_at_from: De
       created_at_to: À
       number: Numéro de commande
-      shipping_address: Expédier au nom de
+      shipping_address: Expédié à
     shipping_method:
       zone: Zone
     taxon:

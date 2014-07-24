@@ -6,7 +6,7 @@ sylius:
     rule:
       item_count_configuration:
         count: Nombre
-        equal: Égale à
+        equal: Supérieur ou égal
       type: Type
     shipment:
       state: État

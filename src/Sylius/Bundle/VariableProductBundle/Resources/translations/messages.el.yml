@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    product:
+      options: Επιλογές
+    variant:
+      presentation: Παρουσίαση
+      available_on: Διαθέσιμο την
+    option:
+      name: Εσωτερικό όνομα
+      presentation: Παρουσίαση
+      values: Πιθανές τιμές
+    prototype:
+      options: Επιλογές

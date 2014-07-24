@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  option:
+    name:
+      not_blank: กรุณาระบุชื่อตัวเลือก
+  variant:
+    combination: มีการตั้งค่าตัวแปรของตัวเลือกนี้แล้ว

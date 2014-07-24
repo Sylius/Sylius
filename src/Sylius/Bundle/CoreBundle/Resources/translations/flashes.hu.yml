@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    restricted_zone_removal: 'Ez a termék: %product% törölve lett a kosárból, mivel nem áll rendelkezésre az Ön országában.'
+  checkout:
+    restricted_zone: Ez a termék nem áll rendelkezése az Ön országában.
+    success: Köszönjük a rendelést!
+    canceled: Az Ön fizetése törölve lett.
+    pending: Az Ön fizetése jelenleg folyamatban van.
+    failed: A fizetés el lett utasítva.
+    unknown: Ismeretlen hiba fizetés közben.
+    out_of_stock: 'A raktáron csak %quantity% %name% van.'
