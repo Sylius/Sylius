@@ -59,6 +59,11 @@ Except filtering, you can also sort users.
 
 Under that route, you can paginate over the users by their score.
 
+Using a custom repository method
+--------------------------------
+
+You can define your own repository method too, you can use the same way explained in <show_resource>
+
 Changing the "max per page" option of paginator
 -----------------------------------------------
 
@@ -104,11 +109,59 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
 
 That action will return the top 3 users by score, as the ``users`` variable.
 
+Updating the position of your resource
+--------------------------------------
+
+You need to define two routes, they will use to update the position of the resource.
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    my_route_move_up:
+        pattern: /{id}/move-up
+        methods: [PUT]
+        defaults:
+            _controller: sylius.controller.resource:moveUpAction
+            _sylius:
+                redirect: referer
+                sortable_position: priority # the default value is position
+
+    my_route_move_down:
+        pattern: /{id}/move-down
+        methods: [PUT]
+        defaults:
+            _controller: sylius.controller.resource:moveDownAction
+            _sylius:
+                redirect: referer
+                sortable_position: priority # the default value is position
+
+You need to update your doctrine mapping :
+
+.. code-block:: xml
+
+    <!-- resource.orm.xml -->
+
+    <field name="priority" type="integer">
+        <gedmo:sortable-position/>
+    </field>
+
+In your template, you can use the macro `move` to print the `move up` and `move down` buttons:
+
+.. code-block:: html
+
+    {# index.html.twig #}
+
+    {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+    {{ buttons.move(path('my_route_move_up', {'id': resource.id}), 'up', loop.first and not resources.hasPreviousPage, loop.last and not resources.hasNextPage) }}
+    {{ buttons.move(path('my_route_move_down', {'id': resource.id}), 'down', loop.first and not resources.hasPreviousPage, loop.last and not resources.hasNextPage) }}
+
 Twig Extensions
 ---------------
 
 sylius_resource_sort
---------------------
+++++++++++++++++++++
 
 **Parameters :**
     - **property (string) :** [Mandatory] Name of the property (defined in your resource)
@@ -130,7 +183,7 @@ This extension renders the following template : SyliusResourceBundle:Twig:pagina
     </div>
 
 sylius_resource_paginate
-------------------------
+++++++++++++++++++++++++
 
 **Parameters :**
     - **paginator (object) :** [Mandatory] An instance of PagerFanta
