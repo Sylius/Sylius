@@ -7,3 +7,5 @@ Domain management abstraction for PHP. It provides interface for most common ope
    :numbered:
 
    installation
+   model
+   repository
