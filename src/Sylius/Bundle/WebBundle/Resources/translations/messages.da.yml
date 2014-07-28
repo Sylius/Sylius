@@ -465,7 +465,7 @@ sylius:
     no_taxons: Der er ingen taxons til dette produkt
     options: Indstillinger
     price: Kostpris
-    properties: Egenskaber
+    attributes: Egenskaber
     restricted_zone: Begrænset zone
     shipping_category: Fragt kategori
     show: Se mere
@@ -476,7 +476,7 @@ sylius:
       images: Billeder
       options: Egenskaber
       product: Produkt
-      properties: Egenskaber
+      attributes: Egenskaber
     tax_category: Momskategori
     unavailable: Ikke tilgængelig
     update_header: Redigering af produkt

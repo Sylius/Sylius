@@ -22,7 +22,7 @@ sylius:
         payments: Plaćanja
         products: Proizvodi
         promotions: Promocije
-        properties: Uredi svojstva
+        attributes: Uredi svojstva
         prototypes: Prototipovi proizvoda
         sales: Narudžbe
         shipments: Pošiljke

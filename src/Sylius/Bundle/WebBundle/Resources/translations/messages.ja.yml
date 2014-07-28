@@ -358,7 +358,7 @@ sylius:
     no_taxons: カテゴリ未設定
     options: 商品オプション
     price: 販売価格
-    properties: 商品プロパティ
+    attributes: 商品プロパティ
     show: 詳細
     show_header: '商品詳細<small>"<strong>%product%</strong>"</small>'
     show_in_store: 販売ページへ
@@ -368,7 +368,7 @@ sylius:
       images: 商品画像
       options: 商品オプション設定
       product: 商品情報
-      properties: 商品オプション設定
+      attributes: 商品オプション設定
     tax_category: 税区分
     update_header: 商品を編集
     updated_at: 最終更新日時
@@ -432,7 +432,7 @@ sylius:
     name: プロトタイプ名
     no_results: 商品プロトタイプは登録されていません。
     options: 商品オプション
-    properties: 商品プロパティ
+    attributes: 商品プロパティ
     update_header: 商品プロトタイプの編集
     updated_at: 最終更新日時
   province:

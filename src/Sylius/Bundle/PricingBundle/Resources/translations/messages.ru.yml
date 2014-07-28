@@ -1,0 +1,6 @@
+sylius:
+    form:
+        priceable:
+            price: Цена
+            calculator: Ценообразование
+            configuration: Настройка

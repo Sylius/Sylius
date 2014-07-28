@@ -475,7 +475,7 @@ sylius:
     no_taxons: No taxons
     options: Opciones
     price: Precio
-    properties: Propiedades
+    attributes: Propiedades
     restricted_zone: Zona restringida
     shipping_category: Categoría de envío
     show: Ver más
@@ -488,7 +488,7 @@ sylius:
       images: Imágenes
       options: Opciones
       product: Producto
-      properties: Propiedades
+      attributes: Propiedades
     tax_category: Categoría de impuestos
     unavailable: No disponible
     update_header: Editar producto
@@ -557,7 +557,7 @@ sylius:
     name: Nombre
     no_results: No hay prototipos configurados
     options: Opciones
-    properties: Propiedades
+    attributes: Propiedades
     update_header: Actualizar encabezado
     updated_at: Última actualización
   province:

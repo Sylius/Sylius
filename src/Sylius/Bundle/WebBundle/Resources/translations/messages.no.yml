@@ -150,7 +150,7 @@ sylius:
     available_on_demand: Tilgjengelig på forespørsel
     description: Beskrivelse
     name: Navn
-    properties: Egenskaper
+    attributes: Egenskaper
     restricted_zone: Begrenset sone
     shipping_category: Fraktkategori
     sku: Strekkode
@@ -158,7 +158,7 @@ sylius:
     tabs:
       images: Bilder
       product: Produkt
-      properties: Egenskaper
+      attributes: Egenskaper
     tax_category: Skattekategori
     variant_selection_method: Metode for valg av variant
   promotion:

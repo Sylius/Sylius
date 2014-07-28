@@ -48,3 +48,4 @@ sylius:
             rules: Rules
             starts_at: Starts at
             usage_limit: Usage limit
+            exclusive: Exclusive

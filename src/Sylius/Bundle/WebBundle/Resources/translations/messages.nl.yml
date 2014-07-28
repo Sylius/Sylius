@@ -481,7 +481,7 @@ sylius:
     no_taxons: Er zijn geen taxons voor dit product
     options: Opties
     price: Retail prijs
-    properties: Eigenschappen
+    attributes: Eigenschappen
     restricted_zone: Beperkte zone
     shipping_category: Verzend categorie
     show: Bekijk details
@@ -494,7 +494,7 @@ sylius:
       images: Afbeeldingen
       options: Opties
       product: Product
-      properties: Eigenschappen
+      attributes: Eigenschappen
     tax_category: Belasting categorie
     unavailable: Onbeschikbaar
     update_header: Product bewerken
@@ -563,7 +563,7 @@ sylius:
     name: Naam
     no_results: Er zijn geen prototypes gedefinieerd.
     options: opties
-    properties: eigenschappen
+    attributes: eigenschappen
     update_header: Prototype bewerken
     updated_at: laatst bijgewerkt
   province:

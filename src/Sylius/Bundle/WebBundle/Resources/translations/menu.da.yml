@@ -22,7 +22,7 @@ sylius:
         payments: Betalinger
         products: Produkter
         promotions: Kampagner
-        properties: Konfigurer indstillinger
+        attributes: Konfigurer indstillinger
         prototypes: Produkt prototyper
         sales: Ordrer
         shipments: Forsendelser
@@ -57,7 +57,7 @@ sylius:
         payments: Betalinger
         products: Produkter
         promotions: Kampagner
-        properties: Konfigurer indstillinger
+        attributes: Konfigurer indstillinger
         prototypes: Produkt prototyper
         sales: Ordrer
         shipments: Forsendelser

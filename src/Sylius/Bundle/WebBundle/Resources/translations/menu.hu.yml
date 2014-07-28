@@ -22,7 +22,7 @@ sylius:
         payments: Fizetések
         products: Termékek
         promotions: Promóciók
-        properties: Tulajdonságok beállítása
+        attributes: Tulajdonságok beállítása
         prototypes: Termék prototípusok
         sales: Rendelések
         shipments: Szállítások
@@ -57,7 +57,7 @@ sylius:
         payments: Fizetések
         products: Termékek
         promotions: Promóciók
-        properties: Tulajdonságok beállítása
+        attributes: Tulajdonságok beállítása
         prototypes: Termék prototípusok
         sales: Rendelések
         shipments: Szállítások
