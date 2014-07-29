@@ -30,7 +30,7 @@ class TaxonomyRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnsupportedTypeException();
+            throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
         /* @var $item OrderItemInterface */
