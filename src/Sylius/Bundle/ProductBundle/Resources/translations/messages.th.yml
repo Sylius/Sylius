@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  label:
+    product:
+      name: ชื่อ
+      description: คำอธิบาย
+      properties: คุณสมบัติ
+      available_on: พร้อมจำหน่ายเมื่อ
+      meta_keywords: Meta Keywords
+      meta_description: Meta Description
+    property:
+      name: ชื่อภายใน
+      presentation: สื่อถึง
+    prototype:
+      name: ชื่อ
+      properties: คุณสมบัติ

@@ -23,6 +23,8 @@ sylius:
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
+      email: ""
+      id: ""
       outline: Disfruta de todas las características disponibles en tu espacio personal para ver, seguir y gestionar toda tu información.
       since: Eres cliente desde
       welcome: Bienvenido a tu espacio
@@ -33,12 +35,16 @@ sylius:
       empty: Aún no has hecho ningún pedido.
       invoice: Factura
       list: Todos tus pedidos
+      number: ""
+      payment_mode: ""
       placed_at: 'Hecho el %at%'
       shipment:
         pending: Pendiente
         ready: 'Preparado desde %at%'
         returned: 'Devuelto %at%'
         shipped: 'Enviado %at%'
+      shipment_mode: ""
+      state: ""
       total: Total
       tracking_number: Número de seguimiento
     title: Mi cuenta

@@ -23,6 +23,9 @@ sylius:
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
+      email: ""
+      id: ""
+      outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своими заказами.
       since: Вы являетесь клиентом с
       welcome: Добро пожаловать в ваш кабинет
     order:
@@ -32,12 +35,16 @@ sylius:
       empty: Вы еще не делали заказов.
       invoice: Счет-фактура
       list: Все ваши заказы
+      number: ""
+      payment_mode: ""
       placed_at: 'Заказано %at%'
       shipment:
         pending: Ожидает
         ready: 'Готово с %at%'
         returned: 'Возвращено %at%'
         shipped: 'Доставлено %at%'
+      shipment_mode: ""
+      state: ""
       total: Итого
       tracking_number: Номер для отслеживания
     title: Моя учетная запись
@@ -53,7 +60,7 @@ sylius:
     street: Улица
   alert:
     error: Ошибка
-    info: Инфо
+    info: Информация
     success: Успешно
     warning: Предупреждение
   backend:
@@ -83,7 +90,7 @@ sylius:
     create: Добавить блок
     create_header: Добавление нового блока
     id: ID
-    index_header: Блоки контента
+    index_header: Контентные блоки
     no_results: Нет блоков для отображения.
     title: Название
     update_header: Редактирование содержимого блока
@@ -151,7 +158,7 @@ sylius:
   browse_products: Обзор продукции
   cancel: Отмена
   cart:
-    empty: Пустая
+    empty: Ваша корзина пуста
     summary:
       add_coupon: OK
       checkout: Сверка
@@ -343,7 +350,7 @@ sylius:
     inventory_tracking: Отслеживание продаж
     items_total: Всего товаров
     manage: Управление заказами
-    no_items: Заказ не содержит продуктов
+    no_items: Заказ не содержит товаров
     no_results: У вас нет новых заказов
     no_shipping_charges: Нет затрат на доставку
     no_taxes: Налогами не облагается
@@ -364,7 +371,7 @@ sylius:
     show_header: Детали заказа
     state:
       cart_locked: Корзина заблокирована
-      checkout: Сверка
+      checkout: Оформить заказ
       order_confimed: Заказ подтвержден
       ordered: Заказан
     tax_total: Сумма налогов
@@ -515,7 +522,7 @@ sylius:
     generate: Генерировать купоны
     generate_header: Генерирование купонов
     index: Список купонов
-    index_header: sylius.promotion_coupon.index_header
+    index_header: Скидочные купоны
     no_results: Нет купонов для отображения.
     total_results:
       Total: '%total%'
@@ -629,7 +636,7 @@ sylius:
     name: Название
     no_image: Нет изображения для этой подкатегории
     no_results: Нет категорий для отображения.
-    product_index_header: 'Продукты категории «%name%»'
+    product_index_header: 'Товары категории «%name%»'
     update_header: Редактировать подкатегорию
   taxonomy:
     create: Создать каталог

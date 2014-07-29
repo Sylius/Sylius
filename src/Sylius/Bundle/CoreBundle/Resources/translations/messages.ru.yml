@@ -71,8 +71,8 @@ sylius:
     taxonomy:
       file: Выберите изображение
     user:
-      billing_address: Адрес для составления счета
-      different_billing_address: Использовать другой адрес для составления счета?
+      billing_address: Адрес для выставления счета
+      different_billing_address: Использовать другой адрес для выставления счета?
       enabled: Активен
       first_name: Имя
       groups: Группы

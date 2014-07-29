@@ -68,12 +68,26 @@ sylius:
       zone: Regija
     taxon:
       file: Odaberite sliku
+    taxonomy:
+      file: Odaberite sliku
     user:
+      billing_address: Adresa za dostavu
+      different_billing_address: Koristio bi drugu adresu za dostavu.
+      enabled: Aktivan
+      first_name: Ime
       groups: Grupe
+      last_name: Prezime
+      password: Lozinka
       shipping_address: Adresa za dostavu
+    user_filter:
+      query: Pretraga
     variant:
+      available_on_demand: Dostupno na zahtjev
       depth: Dubina
       height: Visina
+      images: Slike
+      on_hand: Treutno dostupno
+      price: Cijena
       sku: KOD (SKU)
       weight: Težina
       width: Širina

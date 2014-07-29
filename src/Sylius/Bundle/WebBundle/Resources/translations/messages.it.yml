@@ -20,6 +20,8 @@ sylius:
       list: Tutti i tuoi indirizzi
       update: Modifica il mio indirizzo
     home:
+      email: ""
+      id: ""
       outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati.
       since: Sei cliente dal
       welcome: Benvenuti nel vostro spazio
@@ -30,12 +32,16 @@ sylius:
       empty: Non hai ancora completato nessun ordine.
       invoice: Fattura
       list: Tutti i tuoi ordini
+      number: ""
+      payment_mode: ""
       placed_at: 'Ordinato il %at%'
       shipment:
         pending: In attesa
         ready: 'Pronto dal %at%'
         returned: 'Ritornato il %at%'
         shipped: 'Inviato il %at%'
+      shipment_mode: ""
+      state: ""
       total: Totale
       tracking_number: Numero di tracking
     title: Il mio account
@@ -428,6 +434,7 @@ sylius:
     create: Crea metodo di pagamento
     create_header: Nuovo metodo di pagamento
     enabled: Abilitato?
+    gateway: gateway
     id: ID
     index_header: Metodi di pagamento
     name: Nome
@@ -439,6 +446,7 @@ sylius:
     available_on: Disponibile
     available_on_demand: Disponibile su ordinazione
     categorization: Categorizzazione
+    contain_variants: Contiene varianti
     create: Crea prodotto
     create_header: Nuovo prodotto
     description: Descrizione

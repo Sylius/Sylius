@@ -4,7 +4,7 @@
 sylius:
   address:
     city:
-      max_length: La città non deve essere più lunga di 255 caratteri|La città non deve essere più lunga di 255 caratteri|La città non deve essere più lunga di 255 caratteri.
+      max_length: "Il nome della città non deve essere piu' lungo di 255 caratteri|Il nome della città non deve essere piu' lungo di 255 caratteri|Il nome della città non deve essere piu' lungo di 255 caratteri."
       min_length: La città deve essere lunga almeno due caratteri|La città deve essere lunga almeno due caratteri.
       not_blank: Inserisci la città.
     country:
@@ -27,6 +27,7 @@ sylius:
       max_length: "L'indirizzo non deve essere più lungo di 255 caratteri|L'indirizzo non deve essere più lungo di 255 caratteri."
       min_length: "L'indirizzo deve essere lungo almeno due caratteri|L'indirizzo deve essere lungo almeno due caratteri."
       not_blank: "Inserisci l'indirizzo."
+    not_shippable: Questo indirizzo non è una destinazione di spedizione valida.
   country:
     iso_name:
       not_blank: Inserisci il codice ISO della nazione.

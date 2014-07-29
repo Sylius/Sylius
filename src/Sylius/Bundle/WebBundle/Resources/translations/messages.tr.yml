@@ -2,6 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment:
+        pending: Beklemede
+      shipment_mode: ""
+      state: ""
   add_to_cart: Sepete ekle
   address:
     city: Şehir
@@ -19,6 +30,13 @@ sylius:
   backend:
     alert:
       info: Bilgilendirme
+  block:
+    id: ID
+    title: Başlık
+  breadcrumb:
+    new: Yeni
+    property:
+      index: Özellikler
   cancel: İptal
   cart:
     empty: Sepetiniz boş
@@ -65,16 +83,89 @@ sylius:
     security:
       login: Giriş
       new_customer: Yeni müşteri
+  country:
+    id: ID
+    name: Ad
+  exchange_rate:
+    id: ID
+  group:
+    id: ID
+    name: Ad
+    roles: Roller
+  inventory_unit:
+    name: Ad
+  locale:
+    code: Kod
+    enabled: Etkin
   "no": false
   order:
+    billing_address: Fatura adresi
+    id: ID
     items_total: Toplam tutar
     no_items: Bu siparişde ürün bulunmuyor
+    number: Sayı
+    payment_state: Ödeme durumu
+    shipment_states:
+      pending: Beklemede
+    state:
+      checkout: 'Ödeme  yap'
     tax_total: Toplam KDV
     taxes: Vergiler
+  shipment:
+    id: ID
+    name: Ad
   order_item:
     quantity: Adet
     sellable: Ürün
+    unit_price: Birim fiyatı
+  page:
+    id: ID
+    title: Başlık
+  payment:
+    id: ID
+    state:
+      checkout: 'Ödeme  yap'
+      completed: Tamamlandı
+      failed: Başarısız oldu
+      new: Yeni
+      pending: Beklemede
+      processing: İşlem Yapılıyor
+      unknown: Bilinmiyor
+      void: Boş
+  payment_method:
+    id: ID
+    name: Ad
   product:
+    description: Açıklama
+    name: Ad
+    properties: Özellikler
     tabs:
       product: Ürün
+      properties: Özellikler
+  promotion:
+    description: Açıklama
+    id: ID
+    name: Ad
+  shipping_category:
+    id: ID
+    name: Ad
+  shipping_method:
+    id: ID
+    name: Ad
+  tax_category:
+    description: Açıklama
+    id: ID
+    name: Ad
+  tax_rate:
+    name: Ad
+  taxon:
+    name: Ad
+  taxonomy:
+    name: Ad
+  unknown: Bilinmiyor
+  user:
+    billing_address: Fatura adresi
+    id: ID
   "yes": true
+  zone:
+    name: Ad

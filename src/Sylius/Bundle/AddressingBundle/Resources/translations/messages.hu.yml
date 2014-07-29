@@ -19,7 +19,7 @@ sylius:
       select: Válassza ki
     province:
       name: Név
-      select: Válassza ki
+      select: Válasszon
     zone:
       members: Tagok
       name: Név

@@ -23,6 +23,8 @@ sylius:
       list: Toutes vos adresses
       update: Modifier mon adresse
     home:
+      email: ""
+      id: ""
       outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données.
       since: Vous êtes client depuis
       welcome: Bienvenue dans votre espace
@@ -33,12 +35,16 @@ sylius:
       empty: "Vous n'avez passé aucune commande."
       invoice: Facture
       list: Toutes vos commandes
+      number: ""
+      payment_mode: ""
       placed_at: 'Commandé le %at%'
       shipment:
         pending: En attente
         ready: 'Prêt depuis %at%'
         returned: 'Retourné le %at%'
         shipped: 'Livré le %at%'
+      shipment_mode: ""
+      state: ""
       total: Total
       tracking_number: Numéro de suivi
     title: Mon compte

@@ -13,7 +13,7 @@ sylius:
       street: Straße
       province: Bundesland
     country:
-      iso_name: ISO Name
+      iso_name: ISO-Name
       name: Name
       provinces: Bundesländer
       select: Bundesland auswählen

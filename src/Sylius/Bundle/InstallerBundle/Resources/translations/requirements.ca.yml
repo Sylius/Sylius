@@ -3,8 +3,61 @@
 
 sylius:
   extensions:
+    0: extensions
+    accelerator:
+      0: Accelerador
+      help: Instal·lar i permetre un accelerador PHP com APC (altament recomanat).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: "Instal·lar i permetre l'extensió %extension%."
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
     "off": false
     "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Sessió
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: file system
+    cache:
+      0: cache
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: existeix
+    logs:
+      0: logs
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: no existeix
+    not_writable: Sense permís d`escriptura
+    parameters:
+      0: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: que es pugui escriure
   settings:
+    0: Versió de PHP i configuració
+    any: qualsevol
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: non deprecated
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: fus horari
+    timezone_deprecated:
+      0: Fus horari no aprovat
+      help: 'El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).'
+    version: Versió PHP
+    version_recommanded: Versió de PHP recomanada

@@ -7,5 +7,5 @@ sylius:
     cart_clear_completed: Il carrello è stato cancellato con successo.
     item_add_completed: "L'articolo è stato aggiunto al carrello."
     item_remove_completed: "L'articolo è stato rimosso dal carrello."
-    item_add_error: "Si è verificato un errore durante l'aggiunta di elementi al carrello."
+    item_add_error: "Si è verificato un errore durante l'aggiunta di un elemento al carrello."
     item_remove_error: "Si è verificato un errore durante la rimozione dell'articolo dal carrello."

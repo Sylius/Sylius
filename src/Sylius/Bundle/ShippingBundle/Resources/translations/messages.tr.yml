@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    shipment:
+      states:
+        checkout: 'Ödeme  yap'
+        pending: Beklemede
+    shipping_category:
+      description: Açıklama
+      name: Ad
+    shipping_method:
+      name: Ad

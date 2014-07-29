@@ -22,7 +22,9 @@ sylius:
         port: Porta
         user: Utente
       locale:
+        0: Impostazioni locali
         currency: Valuta
+        locale: Locale
       mailer:
         0: Impostazioni mailer
         host: Host
@@ -49,7 +51,7 @@ sylius:
         header: 'Requisiti di sistema verificare <small>Sylius installer</small>'
         table:
           current: corrente
-          required: obbligatorio
+          required: richiesto
           status: stato
       configure:
         header: 'Configurazione <small>Sylius installer</small>'

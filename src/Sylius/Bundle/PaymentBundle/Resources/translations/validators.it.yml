@@ -20,6 +20,8 @@ sylius:
     expiry_year:
       not_blank: "Si prega di selezionare l'anno di scadenza."
   payment_method:
+    gateway:
+      not_blank: Si prega di selezionare il gateway per il metodo di pagamento.
     name:
       max_length: 'Il metodo di pagamento deve essere lungo {{ limit }} caratteri o meno.'
       min_length: 'Il metodo di pagamento deve essere lungo almeno {{ limit }} caratteri.'

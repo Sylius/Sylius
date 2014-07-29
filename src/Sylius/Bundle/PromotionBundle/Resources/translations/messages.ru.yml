@@ -39,7 +39,7 @@ sylius:
       code: Код
       usage_limit: Предел использования
     coupon_generate_instruction:
-      amount: Сумма
+      amount: Количество
       usage_limit: Предел использования
     promotion:
       actions: Действия

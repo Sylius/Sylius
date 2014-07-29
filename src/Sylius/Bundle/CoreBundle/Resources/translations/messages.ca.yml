@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: "Si us plau seleccioneu el mètode d'enviament."
+  form:
+    action:
+      add_product_configuration:
+        price: Preu per unitat
+        quantity: Quantitat
+        variant: Variant
+    block:
+      body: Cos
+      id: ID
+      title: Títol
+    cart:
+      coupon: Cupó
+    checkout:
+      addressing:
+        different_billing_address: Utilitzar diferent adreça de facturació?
+      payment_method: Mètode de pagament
+      shipping_method: "Mètode d'enviament"
+    group:
+      name: Nom
+      roles: Rols
+    image:
+      file: Imatge
+    locale:
+      code: Codi
+      enabled: Activat
+    order_filter:
+      created_at_from: Des de
+      created_at_to: A
+      number: Nombre
+      total_from: Des de
+      total_to: A
+    page:
+      body: Cos
+      id: ID
+      title: Títol
+    product:
+      restricted_zone: Àrea restringida
+      shipping_category: "Categoria d'enviament"
+      short_description: Descripció breu
+      tax_category: "Categoria d'impost"
+      variant_selection_method: Mètode de selecció de variant
+    product_filter:
+      name: Nom
+      sku: SKU
+    settings:
+      general:
+        currency: Moneda predeterminada
+        locale: Llengua
+        meta_description: Metadescripció
+        meta_keywords: Meta keywords
+        title: Títol de pàgina
+      taxation:
+        default_tax_zone: "Zona d'impostos per defecte"
+    shipment_filter:
+      created_at_from: Des de
+      created_at_to: A
+      number: Número de comanda
+      shipping_address: Enviar al nom
+    shipping_method:
+      zone: Zona
+    taxon:
+      file: Seleccioneu la imatge
+    taxonomy:
+      file: Seleccioneu la imatge
+    user:
+      billing_address: Adreça de facturació
+      different_billing_address: Utilitzar diferent adreça de facturació?
+      enabled: Activat
+      first_name: Nom
+      groups: Grups
+      last_name: Cognoms
+      password: Contrasenya
+      shipping_address: "Adreça d'enviament"
+    user_filter:
+      query: Cerca
+    variant:
+      available_on_demand: Disponible sota demanda
+      depth: Profunditat
+      height: Alçada
+      images: Imatges
+      on_hand: Stock actual
+      price: Preu
+      sku: SKU
+      weight: Pes
+      width: Amplada

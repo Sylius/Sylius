@@ -3,12 +3,12 @@
 
 sylius:
   cart:
-    restricted_zone_removal: 'Prodotto %product% è stato rimosso dal carrello, poiché non è disponibile nel tuo paese.'
+    restricted_zone_removal: 'Il prodotto %product% è stato rimosso dal carrello, poiché non è disponibile nel tuo paese.'
   checkout:
     restricted_zone: Questo prodotto non è disponibile nel tuo paese.
     success: Grazie per il tuo ordine!
     canceled: Il pagamento è stato cancellato.
     pending: Il pagamento è attualmente in sospeso.
     failed: Il pagamento è stato rifiutato.
-    unknown: Errore sconosciuto di pagamento.
+    unknown: Errore sconosciuto durante il pagamento.
     out_of_stock: "C'è solo %quantity% %name% in magazzino."
