@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 sylius:
   cart:
     restricted_zone_removal: 'Proizvod %product% je uklonjen iz košarice jer nije dostupan u vašoj državi.'
@@ -8,7 +5,8 @@ sylius:
     restricted_zone: Ovaj proizvod nije dostupan u vašoj državi.
     success: Hvala na vašoj narudžbi!
     canceled: Vaša uplata je otkazana.
-    pending: Vaša uplata je trenutno na čekanju.
+    processing: Vaša uplata je u procesu naplate.
+    new: Vaša uplata je nova.
     failed: Vaša uplata je odbijena.
     unknown: Dogodila se pogreška prilikom plaćanja.
     out_of_stock: 'Na skladištu je ostalo još samo %quantity% komada %name%.'

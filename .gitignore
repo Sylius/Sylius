@@ -24,3 +24,9 @@ bin/phpcrodm.php
 bin/jackalope
 bin/phpunit
 vendor/*
+
+.idea/*
+nbproject/*
+
+composer.phar
+composer.lock

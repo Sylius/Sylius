@@ -1,6 +1,3 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
 email:
   order_confirmation:
     subject: Naslov
@@ -104,6 +101,7 @@ sylius:
     country:
       index: Države
     customers: Korisnici
+    dashboard: Kontrolna ploča
     edit: Uredi
     exchange_rate:
       index: Tečajna lista
@@ -175,6 +173,8 @@ sylius:
     addressing:
       header: Adresa
     back: Povratak
+    credit_card:
+      header: Detalji o plaćanju
     finalize:
       address:
         city: Grad
@@ -238,18 +238,22 @@ sylius:
   created_at: Dodano
   delete: Briši
   deleted: Izbrisano
-  edit: Uredi
-  email: E-Mail
-  exchange_rate:
-    create: Kreiraj tečaj
-    create_header: Novi tečaj
-    currency: Valuta
+  edit: edit
+  move_up: povuci iznad
+  move_down: povuci ispod
+  email: E-pošta
+  currency:
+    create: Kreiraj valutu
+    create_header: Nova valuta
+    code: Šifra
     id: ID
-    index_header: Tečajna lista
-    no_results: Nema tečajnih lista za prikaz.
-    rate: Tečaj
-    update_header: Uredi tečajnu vrijednost
-    updated_at: Zadnje osvježavanje
+    name: Naziv
+    enabled: Omogući
+    index_header: Valute
+    no_results: Nemate definiranih valuta
+    exchange_rate: Tečaj
+    update_header: Uređivanje valute
+    updated_at: Posljednja izmjena
   filter: Filter
   form:
     cart:
@@ -326,9 +330,9 @@ sylius:
     frontend_title: Sylius, moderna web trgovina za Symfony2
   na: N/A
   newest: Najnoviji proizvodi
-  "no": false
-  no_results: Nema rezultata
-  option:
+  no: Ne
+  no_results: sylius.no_results
+  product_option:
     create: Kreirajte opciju
     create_header: Nova opcija artikla
     index_header: Opcije artikla
@@ -434,12 +438,14 @@ sylius:
     no_results: Nema postavljenih tipova plaćanja.
     state:
       0: Stanje
+      cancelled: Otkazano
       checkout: Blagajna
       completed: Završeno
       failed: Neuspješno
       new: Novo
       pending: Na čekanju
       processing: U obradi
+      refunded: Moguć povrat novca
       unknown: Nepoznato
       void: Nevažeće
     update_header: Ažuriranje tipa plaćanja
@@ -482,7 +488,8 @@ sylius:
     options: Opcije
     price: Prodajna cijena
     properties: Atributi
-    restricted_zone: Ograničena zona pristupa
+    restricted_zone: Restricted zone
+    remove_attribute: Ukloni svojstvo
     shipping_category: Kategorija pošiljke
     show: Više
     show_header: Detalji artikla
@@ -524,11 +531,14 @@ sylius:
     update_header: Ažuriranje akcije
     updated_at: Ažurirano
     usage_limit: Ograničenje
-    used: Iskorišteno
+    used: Korišteno
+    priority: Prioritet
+    exclusive: Ekskluzivno
   promotion_action:
     configuration: Podešavanje
     type: Tip
   promotion_coupon:
+    code: Šifra
     create: Dodaj kod za popust
     create_header: Novi kod za popust
     generate: Generirajte kod za popust
@@ -536,13 +546,12 @@ sylius:
     index: Izlist kodova za popust
     index_header: sylius.promotion_coupon.index_header
     no_results: Nema kodova za prikaz.
-    total_results:
-      Total: '%total%'
+    total_results: Total: '%total%'
     update_header: Ažuriranje kupona
   promotion_rule:
     configuration: Podeševanje
     type: Tip
-  property:
+  product_attribute:
     add_choice: Dodajte izbor
     create: Novi atribut
     create_header: Novi atribut artikla
@@ -681,6 +690,11 @@ sylius:
     impersonate: Prijavi se kao korisnik
     manage: Upravljanje korisnicima
     no_results: Nema korisnika za prikaz.
+    oauth:
+        provider: OAuth pružatelj
+        identifier: Identifikator
+        access_token: Access Token
+        none: Nemate spojenih OAuth računa.
     order:
       no_results: Ovaj korisnik nije naručio putem web trgovine.
     orders: Narudžbe korisnika
@@ -704,7 +718,7 @@ sylius:
     sku: KOD (SKU)
     stock: Trenutno stanje
     update_header: Uređivanje modela
-  "yes": true
+  yes: true
   zone:
     add_member: Dodaj člana
     create: Kreiraj regiju
@@ -716,5 +730,6 @@ sylius:
     show_header: Detalji regije
     type: Tip
     update_header: Uređivanje regije
+    scope: Djelokrug
   zone_member:
     members: Članovi
