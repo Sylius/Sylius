@@ -80,8 +80,8 @@ Feature: Checkout coupon promotions
           And I added product "Lenny" to cart
           And I added product "Etch" to cart
           And I added product "Sarge" to cart
-         When I fill in "If you have a promotion coupon, enter it here" with "XD0002"
-          And I press "OK"
+         When I fill in "Code" with "XD0002"
+          And I press "Save"
          Then I should be on the cart summary page
           And I should see "Your cart is not eligible to this promotion coupon"
           And "Promotion total" should not appear on the page
