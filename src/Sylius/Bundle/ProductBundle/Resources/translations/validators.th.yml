@@ -1,3 +1,23 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    sku:
+      not_blank: กรุณาระบุ SKU ของสินค้า
+      unique: SKU ต้องไม่ซ้ำกัน
+    name:
+      not_blank: กรุณาระบุชื่อสินค้า
+      min_length: 'ชื่อสินค้าต้องยาวอย่างน้อย 1 ตัวอักษร|ชื่อสินค้าต้องอย่างน้อย {{ limit }} ตัวอักษร'
+      max_length: 'ชื่อสินค้าต้องไม่ยาวเกิน 1 ตัวอักษร|ชื่อสินค้าต้องไม่ยาวเกิน {{ limit }} ตัวอักษร'
+    description:
+      not_blank: กรุณาระบุรายละเอียดสินค้า
+      min_length: 'รายละเอียดสินค้าต้องมีความยาวมากกว่า 1 ตัวอักษร|รายละเอียดสินค้าต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร'
+  variant:
+    sku:
+      not_blank: 'กรุณาระบุ  SKU ของตัวแปร'
+      unique: SKU ของตัวแปรต้องไม่ซ้ำกัน
+    combination: มีการตั้งค่าตัวแปรของตัวเลือกนี้แล้ว
+  option:
+    name:
+      not_blank: กรุณาระบุชื่อตัวเลือก

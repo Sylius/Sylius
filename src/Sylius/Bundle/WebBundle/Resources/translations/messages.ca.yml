@@ -1,6 +1,227 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: email.order_confirmation.subject
 sylius:
+  account:
+    address:
+      action:
+        billing: Estableix com adreça de facturació per defecte
+        create: Crear una nova adreça
+        delete: Suprimir
+        edit: Editar
+        shipping: "Estableix com adreça d'enviament per defecte"
+      create: Crea una nova adreça
+      default:
+        billing: Adreça de facturació per defecte
+        no_billing: Cap adreça de facturació per defecte
+        no_shipping: "Cap adreça d'enviament per defecte"
+        shipping: "Adreça d'enviament per defecte"
+      empty: Encara no heu creat cap adreça.
+      list: Totes les teves adreces
+      update: Editar la meva adreça
+    home:
+      email: ""
+      id: ""
+      outline: Gaudeix de totes les característiques disponibles al teu espai personal. Pots veure, fer un seguiment i gestionar totes les teves dades.
+      since: Ets client des de
+      welcome: Benvingut al teu espai
+    order:
+      created_at: Situat a
+      details: Detalls de la teva comanda
+      download_invoice: Descarregar la factura
+      empty: Encara Ja heu fet cap comanda.
+      invoice: Factura
+      list: Totes les seves comandes
+      number: ""
+      payment_mode: ""
+      placed_at: 'Situat a %at%'
+      shipment:
+        pending: Pendent
+        ready: 'Preparat des de %at%'
+        returned: 'Retornat %at%'
+        shipped: 'Enviat %at%'
+      shipment_mode: ""
+      state: ""
+      total: Total
+      tracking_number: Número de seguiment
+    title: El meu compte
+  add_to_cart: Afegir a la cistella
+  address:
+    city: Ciutat
+    company: Empresa
+    country: País
+    firstname: Nom
+    lastname: Cognoms
+    postcode: Codi postal
+    province: Província
+    street: Carrer
+  alert:
+    error: Error
+    info: Informació
+    success: Realitzat amb èxit
+    warning: Avís
+  backend:
+    alert:
+      info: Informació
+    dashboard:
+      chart_order_count: Número de comandes
+      chart_order_total: Valor de la comanda
+      header: Quadre de comandament
+      orders: Comandes de la setmana passada
+      revenue: Ingressos de la setmana passada
+  block:
+    body: Cos
+    id: ID
+    title: Títol
+  breadcrumb:
+    edit: Editar
+    group:
+      index: Grups
+    new: Nou
+    update: Editar
+  cart:
+    summary:
+      checkout: Realitza la compra
+      total: Total
+      unit_price: Preu
+  checkout:
+    back: Enrera
+    finalize:
+      address:
+        city: Ciutat
+        firstname: Nom
+        lastname: Cognoms
+        postcode: Codi postal
+        province: Província
+        street: Carrer
+      order:
+        billing_address: Adreça de facturació
+        shipping_address: "Adreça d'enviament"
+        total: Total
+      order_item:
+        total: Total
+      product:
+        name: Nom
+    payment:
+      header: Mètode de pagament
+  country:
+    id: ID
+    name: Nom
+  exchange_rate:
+    id: ID
+  form:
+    login:
+      email: Correu electrònic
+      password: Contrasenya
+    profile:
+      email: Correu electrònic
+      firstName: Nom
+      lastName: Cognoms
+  gallery:
+    next: Següent
+  group:
+    id: ID
+    index_header: Grups
+    name: Nom
+    roles: Rols
+  inventory_unit:
+    name: Nom
+    sku: SKU
+  locale:
+    code: Codi
+    enabled: Activat
   "no": false
+  order:
+    billing_address: Adreça de facturació
+    id: ID
+    number: Nombre
+    payment_state: Estat de pagament
+    shipment_states:
+      pending: Pendent
+    shipping_address: "Adreça d'enviament"
+    state:
+      checkout: Realitza la compra
+    total: Total
+    user: Usuari
+  shipment:
+    id: ID
+    name: Nom
+    sku: SKU
+    update: Editar
+  order_item:
+    total: Total
+    unit_price: Preu per unitat
+  page:
+    body: Cos
+    id: ID
+    title: Títol
+  password: Contrasenya
+  payment:
+    id: ID
+    state:
+      checkout: Realitza la compra
+      completed: Completat
+      failed: "S'ha produït un error"
+      new: Nou
+      pending: Pendent
+      processing: Processant
+      unknown: Desconegut
+      void: Buit
+  payment_method:
+    id: ID
+    name: Nom
+  product:
+    available_on_demand: Disponible sota demanda
+    description: Descripció
+    name: Nom
+    restricted_zone: Àrea restringida
+    shipping_category: "Categoria d'enviament"
+    sku: SKU
+    stock: Stock actual
+    tabs:
+      images: Imatges
+    tax_category: "Categoria d'impost"
+    variant_selection_method: Mètode de selecció de variant
+  promotion:
+    description: Descripció
+    id: ID
+    name: Nom
+  search: Cerca
+  shipping_address: "Adreça d'enviament"
+  shipping_category:
+    id: ID
+    name: Nom
+  shipping_method:
+    id: ID
+    name: Nom
+    zone: Zona
+  tax_category:
+    description: Descripció
+    id: ID
+    name: Nom
+  tax_rate:
+    name: Nom
+    zone: Zona
+  taxon:
+    name: Nom
+  taxonomy:
+    name: Nom
+  unknown: Desconegut
+  user:
+    billing_address: Adreça de facturació
+    first_name: Nom
+    id: ID
+    last_name: Cognoms
+    shipping_address: "Adreça d'enviament"
+    username: "Nom d'usuari"
+  variant:
+    available_on_demand: Disponible sota demanda
+    price: Preu
+    sku: SKU
+    stock: Stock actual
   "yes": true
+  zone:
+    name: Nom

@@ -6,11 +6,11 @@ sylius:
     0: estensioni
     accelerator:
       0: Acceleratore
-      help: Installa ed attiva un acceleratore PHP come APC (altamente consigliato).
+      help: Installa e attiva un acceleratore PHP come APC (altamente consigliato).
     apc: APC
     ctype: CType
     gd: GD
-    help: "Installa ed attiva l'estensione %extension%."
+    help: "Installa e attiva l'estensione %extension%."
     iconv: Iconv
     icu: ICU
     intl: Intl
@@ -41,7 +41,7 @@ sylius:
       0: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
-    vendors: vendors
+    vendors: fornitori
     writable: scrivibile
   settings:
     0: Impostazioni e versione PHP

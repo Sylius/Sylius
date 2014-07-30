@@ -27,16 +27,37 @@ sylius:
   filesystem:
     0: файловая система
     cache:
-      - кэш
+      0: кэш
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: существует
     logs:
-      - логи
+      0: логи
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: не существует
     not_writable: не доступно для записи
+    parameters:
+      0: Parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: поставщики
     writable: доступно для записи
   settings:
     0: Версия и параметры PHP
     any: любой
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: не устаревшее
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: Часовой пояс
+    timezone_deprecated:
+      0: Устаревший часовой пояс
+      help: 'Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).'
+    version: Версия PHP
     version_recommanded: Рекомендуемая версия PHP

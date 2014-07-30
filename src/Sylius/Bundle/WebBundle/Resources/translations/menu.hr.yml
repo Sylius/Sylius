@@ -49,11 +49,44 @@ sylius:
         homepage: Povratak na web trgovinu
         locales: Lokaliteti
         new_order: Dodaj novu narudžbu
+        new_promotion: Dodaj novu akciju
+        options: Uredi opcije
+        orders: Trenutne narudžbe
         pages: Stranice
+        payment_methods: Načini plaćanja
+        payments: Plaćanja
+        products: Proizvodi
+        promotions: Akcije
+        properties: Uredi svojstva
+        prototypes: Prototipovi proizvoda
+        sales: Narudžbe
+        shipments: Pošiljke
+        shipping_categories: Kategorije pošiljki
+        shipping_methods: Načini slanja
+        stockables: Stanje skladišta
+        tax_categories: Postavke poreza
+        tax_rates: Stope poreza
+        taxation_settings: Postavke poreza
+        taxonomies: Kategorizacija
+        users: Korisnici
+        zones: Regije
   frontend:
     menu:
       account:
         addresses: Moj adresar
+        homepage: Početna
+        orders: Moje narudžbe / Računi
+        password: Lozinka
+        profile: Osobne informacije
+        shop: Povratak u web trgovinu
+      currency: 'Prikaži cijene u %currency%'
+      main:
+        account: Moj profil
+        administration: Administracija
+        cart: 'Pregledaj košaricu (%items%) %total%'
+        login: Prijavi se
+        logout: Odjavi se
+        register: Registracija
       social:
         facebook: Facebook
         github: GitHub

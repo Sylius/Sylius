@@ -1,3 +1,30 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Nom del titular de la tarja
+      expiry_month: Mes de caducitat
+      expiry_year: Any de venciment
+      number: Número de la targeta
+      security_code: Codi de seguretat (CVV)
+      type: Tipus de targeta
+    payment:
+      amount: Import a pagar
+      method: Mètode de pagament
+      state:
+        0: Estat de pagament
+        checkout: Realitza la compra
+        completed: Completat
+        failed: "S'ha produït un error"
+        new: Nou
+        pending: Pendent
+        processing: Processant
+        unknown: Desconegut
+        void: Buit
+    payment_method:
+      description: Descripció
+      enabled: Activat?
+      gateway: Pasarel·la
+      name: Nom

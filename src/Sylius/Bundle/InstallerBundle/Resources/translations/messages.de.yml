@@ -22,7 +22,7 @@ sylius:
         port: Datenbank Port
         user: Datenbankbenutzer
       locale:
-        0: Locale Einstellungen
+        0: Lokale Einstellungen
         currency: Währung
         locale: Gebietsschema
       mailer:

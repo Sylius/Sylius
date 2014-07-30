@@ -21,8 +21,16 @@ sylius:
       name: Naziv pokrajine
       select: Odaberite
     zone:
+      members: Članovi
+      name: Naziv regije
+      type: Vrsta
       types:
         country: Država
+        province: Županija
         zone: Regija
+    zone_member_country:
+      country: Država
     zone_member_province:
       province: Pokrajina
+    zone_member_zone:
+      zone: Regija

@@ -3,4 +3,6 @@
 
 sylius:
   inventory_unit:
+    backordered: Unità di magazzino in arretrato.
     sold: Unità di magazzino soddisfatte.
+    returned: Unità di magazzino restituite.

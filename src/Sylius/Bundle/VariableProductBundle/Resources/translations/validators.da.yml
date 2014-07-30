@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  option:
+    name:
+      not_blank: Indtast egenskabens systemnavn.
+      min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.'
+    presentation:
+      not_blank: Angiv egenskabens navn.
+      min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
+      max_length: 'Egenskabens navn må ikke være længere end 1 tegn.|Egenskabens navn må ikke være længere end {{ limit }} tegn.'
+    values:
+      min_count: 'Tilføj venligst mindst {{ limit }} værdi. |Tilføj venligst mindst {{ limit }} værdier.'
+  option_value:
+    value:
+      not_blank: Angiv egenskabens værdi.
+  variant:
+    combination: Variant med denne egenskab eksisterer allerede.

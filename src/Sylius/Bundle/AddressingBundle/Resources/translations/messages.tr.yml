@@ -17,6 +17,7 @@ sylius:
       name: Ülke adı
       select: Ülke seçin
     province:
+      name: Ad
       select: Ülke seçin
     zone:
       members: Üyeler

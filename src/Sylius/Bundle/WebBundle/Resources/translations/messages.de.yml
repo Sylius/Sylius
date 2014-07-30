@@ -220,7 +220,7 @@ sylius:
       error: Leider ist die Lieferung in das von Ihnen gewählte Land nicht möglich.
       header: Lieferverfahren
   confirmation:
-    message: Möchten Sie dieses Eintrag löschen?
+    message: Möchten Sie diesen Eintrag löschen?
     title: Bestätigung
   country:
     add_province: Bundesland hinzufügen

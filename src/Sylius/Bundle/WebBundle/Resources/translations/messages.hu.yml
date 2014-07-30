@@ -23,6 +23,8 @@ sylius:
       list: Minden Ön által megadott cím
       update: Címem szerkesztése
     home:
+      email: ""
+      id: ""
       outline: Élvezze az összes rendelkezésre álló funkciót, nyomon követheti, kezelheti az összes adatát.
       since: Ön ügyfél
       welcome: Üdvözöljük az Ön tárhelyén
@@ -33,12 +35,16 @@ sylius:
       empty: Ön még nem helyezte el a megrendelést.
       invoice: Számla
       list: Az Ön összes rendelése
+      number: ""
+      payment_mode: ""
       placed_at: 'Elhelyezve %at%'
       shipment:
         pending: Függőben lévő
         ready: 'Kész %at% óta'
         returned: 'Visszaadott %at%'
         shipped: 'Kiszállítva %at%'
+      shipment_mode: ""
+      state: ""
       total: Összesen
       tracking_number: Kiszállítási szám
     title: Az Ön fiókja

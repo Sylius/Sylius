@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: La ciutat no pot tenir més de 255 caràcters|La ciutat no pot tenir més de 255 caràcters.
+      min_length: La ciutat ha de tenir almenys 2 caràcters|La ciutat ha de tenir almenys 2 caràcters.
+      not_blank: Introdueix una ciutat.
+    country:
+      not_blank: Seleccioneu un país.
+    first_name:
+      max_length: El nom no pot tenir més de 255 caràcters|El nom no pot tenir més de 255 caràcters.
+      min_length: El nom ha de tenir almenys 2 caràcters|El nom ha de tenir almenys 2 caràcters.
+      not_blank: Introdueix el teu nom.
+    last_name:
+      max_length: Els cognoms no poden tenir més de 255 caràcters|Els cognoms no poden tenir més de 255 caràcters.
+      min_length: Els cognoms han de tenir almenys 2 caràcters|Els cognoms han de tenir almenys 2 caràcters.
+      not_blank: Introdueix els teus cognoms.
+    postcode:
+      max_length: El codi postal no pot tenir més de 255 caràcters|El codi postal no pot tenir més de 255 caràcters.
+      min_length: El codi postal ha de tenir almenys 2 caràcters|El codi postal ha de tenir almenys 2 caràcters.
+      not_blank: Introdueix el codi postal.
+    province:
+      valid: Introdueix una província correcta.
+    street:
+      max_length: El carrer no pot tenir més de 255 caràcters|El carrer no pot tenir més de 255 caràcters.
+      min_length: El carrer ha de tenir almenys 2 caràcters|El carrer ha de tenir almenys 2 caràcters.
+      not_blank: Introdueix un carrer.
+    not_shippable: "Aquesta adreça no és una destinació d'enviament vàlida."
+  country:
+    iso_name:
+      not_blank: Introdueix el codi ISO de país.
+    name:
+      max_length: El país no pot tenir més de 255 caràcters|El país no pot tenir més de 255 caràcters.
+      not_blank: Introdueix un país.
+  province:
+    name:
+      max_length: La província no pot tenir més de 255 caràcters|La província no pot tenir més de 255 caràcters.
+      min_length: La província ha de tenir almenys 2 caràcters|La província ha de tenir almenys 2 caràcters.
+      not_blank: Introdueix una província.
+  zone:
+    members:
+      min_count: 'Introdueix almenys {{ limit }} membres de zona.'
+    name:
+      max_length: La zona no pot tenir més de 255 caràcters|La zona no pot tenir més de 255 caràcters.
+      not_blank: Introdueix una zona.

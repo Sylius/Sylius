@@ -12,7 +12,7 @@ sylius:
     taxonomy:
       name: Name
   taxon:
-    create_taxon: Gruppe hinzufügen
+    create_taxon: Klassifizierung hinzufügen
     delete_taxonomy: Klassifizierung löschen
     manage_taxonomies: Klassifizierungen verwalten
     no_taxonomies: Keine Klassifizierungen zum anzeigen.

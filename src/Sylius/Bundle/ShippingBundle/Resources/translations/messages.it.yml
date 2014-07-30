@@ -5,16 +5,25 @@ sylius:
   form:
     shipment:
       states:
+        checkout: Checkout
+        dispatched: Evaso
         pending: In attesa
+        ready: Pronto
+        shipped: Spedito
+        returned: Restituito
+      tracking_code: Codice di monitoraggio della spedizione
     shipping_calculator:
       flat_rate_configuration:
-        amount: Valore
+        amount: Importo
       per_item_rate_configuration:
-        amount: Valore
+        amount: Importo
       weight_rate_configuration:
-        amount: Valore
+        amount: Importo
     shipping_category:
       description: Descrizione
       name: Nome
     shipping_method:
+      calculator: Calcolatore
+      category: Categoria
+      configuration: Configurazione
       name: Nome

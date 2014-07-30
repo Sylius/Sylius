@@ -10,3 +10,7 @@ sylius:
       permalink: Permalink
     taxonomy:
       name: Nome
+  taxon:
+    delete_taxonomy: Eliminare la tassonomia
+    manage_taxonomies: Gestire le tassonomie
+    no_taxonomies: Nessuna tassonomia da mostrare.

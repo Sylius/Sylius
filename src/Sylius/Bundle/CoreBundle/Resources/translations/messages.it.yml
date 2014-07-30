@@ -54,7 +54,7 @@ sylius:
       general:
         currency: Valuta predefinita
         locale: Lingua
-        meta_description: Meta description
+        meta_description: Meta descrizione
         meta_keywords: Meta keywords
         title: Titolo della pagina
       taxation:
@@ -63,6 +63,7 @@ sylius:
       created_at_from: Da
       created_at_to: A
       number: "Numero d'ordine"
+      shipping_address: Spedisci a
     shipping_method:
       zone: Zona
     taxon:

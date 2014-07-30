@@ -24,6 +24,10 @@ sylius:
       members: الأعضاء
       name: الاسم
       type: نوع
+      types:
+        country: البلد
+        province: مقاطعة
+        zone: المنطقة
     zone_member_country:
       country: البلد
     zone_member_province:
