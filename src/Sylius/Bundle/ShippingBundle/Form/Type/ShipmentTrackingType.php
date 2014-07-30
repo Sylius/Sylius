@@ -35,8 +35,7 @@ class ShipmentTrackingType extends AbstractType
                 'label' => 'sylius.form.shipment.tracking_code',
                 'attr' => array(
                     'placeholder' => 'sylius.form.shipment.tracking_code'
-                ),
-                'constraints' => array(new NotBlank())
+                )
             ))
         ;
 
