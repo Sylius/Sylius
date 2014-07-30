@@ -11,14 +11,9 @@
 
 namespace Sylius\Component\Promotion\Exception;
 
-class UnsupportedTypeException extends \InvalidArgumentException
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+
+class UnsupportedTypeException extends UnexpectedTypeException
 {
-    public function __construct($value, $expectedType)
-    {
-        parent::__construct(sprintf(
-            'Expected argument of type "%s", "%s" given.',
-            $expectedType,
-            is_object($value) ? get_class($value) : gettype($value)
-        ));
-    }
+
 }
