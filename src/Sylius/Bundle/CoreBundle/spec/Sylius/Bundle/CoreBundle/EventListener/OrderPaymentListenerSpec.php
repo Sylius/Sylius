@@ -12,13 +12,12 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
-use Sylius\Component\Core\SyliusOrderEvents;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -55,6 +54,8 @@ class OrderPaymentListenerSpec extends ObjectBehavior
     function it_creates_payment(GenericEvent $event, OrderInterface $order, PaymentProcessorInterface $processor)
     {
         $event->getSubject()->willReturn($order);
+
+        $order->getLastPayment()->willReturn(false);
 
         $processor->createPayment($order)->shouldBeCalled();
 
