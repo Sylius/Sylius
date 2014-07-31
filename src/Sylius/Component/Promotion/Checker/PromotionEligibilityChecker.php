@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Checker;
 
+use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -64,8 +65,12 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
 
         if ($promotion->hasRules()) {
             foreach ($promotion->getRules() as $rule) {
-                if (!$this->isEligibleToRule($subject, $promotion, $rule)) {
-                    return false;
+                try {
+                    if (!$this->isEligibleToRule($subject, $promotion, $rule)) {
+                        return false;
+                    }
+                } catch (UnsupportedTypeException $exception) {
+                    continue;
                 }
             }
         }
