@@ -21,6 +21,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusPromotionExtension extends AbstractResourceExtension
 {
+    protected $classesToCompile = array(
+        'Sylius\Component\Promotion\SyliusPromotionEvents',
+    );
+
     /**
      * {@inheritdoc}
      */

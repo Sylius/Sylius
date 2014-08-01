@@ -37,6 +37,7 @@ abstract class AbstractResourceExtension extends Extension
     protected $configFiles = array(
         'services',
     );
+    protected $classesToCompile = array();
 
     /**
      * {@inheritdoc}
@@ -88,6 +89,8 @@ abstract class AbstractResourceExtension extends Extension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
+
+        $this->addClassesToCompile($this->classesToCompile);
 
         return array($config, $loader);
     }

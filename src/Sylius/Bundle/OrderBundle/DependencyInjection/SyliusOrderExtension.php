@@ -21,6 +21,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusOrderExtension extends AbstractResourceExtension
 {
+    protected $classesToCompile = array(
+        'Sylius\Component\Order\OrderTransitions',
+        'Sylius\Component\Order\SyliusOrderEvents',
+    );
+
     /**
      * {@inheritdoc}
      */

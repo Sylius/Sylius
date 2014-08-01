@@ -21,6 +21,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusPaymentExtension extends AbstractResourceExtension
 {
+    protected $classesToCompile = array(
+        'Sylius\Component\Payment\PaymentTransitions',
+    );
+
     /**
      * {@inheritdoc}
      */

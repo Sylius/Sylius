@@ -30,6 +30,10 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         'twig',
     );
 
+    protected $classesToCompile = array(
+        'Sylius\Component\Cart\SyliusCartEvents',
+    );
+
     /**
      * {@inheritdoc}
      */

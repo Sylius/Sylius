@@ -28,6 +28,11 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         'twig',
     );
 
+    protected $classesToCompile = array(
+        'Sylius\Component\Inventory\InventoryUnitTransitions',
+        'Sylius\Component\Inventory\SyliusStockableEvents',
+    );
+
     /**
      * {@inheritdoc}
      */

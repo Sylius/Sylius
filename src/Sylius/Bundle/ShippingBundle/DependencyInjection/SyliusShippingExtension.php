@@ -21,6 +21,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusShippingExtension extends AbstractResourceExtension
 {
+    protected $classesToCompile = array(
+        'Sylius\Component\Shipment\ShipmentItemTransitions',
+        'Sylius\Component\Shipment\ShipmentTransitions',
+    );
+
     /**
      * {@inheritdoc}
      */
