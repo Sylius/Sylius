@@ -7,3 +7,4 @@ Powerful products catalog for PHP applications.
    :numbered:
 
    installation
+   models
