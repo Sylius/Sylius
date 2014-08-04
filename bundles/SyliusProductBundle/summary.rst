@@ -1,5 +1,8 @@
+Summary
+=======
+
 Configuration reference
-=======================
+-----------------------
 
 .. code-block:: yaml
 
@@ -8,17 +11,28 @@ Configuration reference
         engine: twig # Templating engine to use by default.
         classes:
             product:
-                model: ~ # The product model class.
+                model: Sylius\Component\Product\Model\Product
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\AssortmentBundle\Form\Type\ProductType
-            property:
-                model: Sylius\Bundle\ProductBundle\Model\Property
-                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                repository: ~
-                form: Sylius\Bundle\AssortmentBundle\Form\Type\PropertyType
             product_prototype:
-                model: Sylius\Bundle\ProductBundle\Model\Prototype
+                model: Sylius\Component\Product\Model\Prototype
                 controller: Sylius\Bundle\ProductBundle\Controller\PrototypeController
                 repository: ~
                 form: Sylius\Bundle\AssortmentBundle\Form\Type\PrototypeType
+        validation_groups:
+            product: [sylius] # Product validation groups.
+            product_prototype: [sylius] # Product prototype validation groups.
+Tests
+-----
+
+.. code-block:: bash
+
+    $ composer install --dev --prefer-dist
+    $ bin/phpspec run -fpretty --verbose
+
+Bug tracking
+------------
+
+This bundle uses `GitHub issues <https://github.com/Sylius/Sylius/issues>`_.
+If you have found bug, please create an issue.
