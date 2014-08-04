@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    address:
-      flash:
-        billing:
-          success: Uspješno ste postavili adresu kao zadanu adresu za plaćanje.
-        shipping:
-          success: Uspješno ste postavili adresu kao zadanu adresu za dostavu.
+    account:
+        address:
+            create: Uspješno ste dodali adresu.
+            update: Uspješno ste izmijenili adresu.
+            delete: Uspješno ste obrisali adresu.
+            set_as_billing: Vaša adresa za naplatu je uspješno postavljena.
+            set_as_shipping: Vaša adresa za dostavu je uspješno postavljena.

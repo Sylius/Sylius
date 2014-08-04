@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -37,6 +36,7 @@ sylius:
       number: Broj
       total_from: Od
       total_to: Do
+      payment_state: Stanje uplate
     page:
       body: Sadržaj stranice
       id: ID
