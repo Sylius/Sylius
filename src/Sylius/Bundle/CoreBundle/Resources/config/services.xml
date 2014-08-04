@@ -358,7 +358,7 @@
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
                 <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
-                    <argument>sylius_image</argument>
+                    <argument>%sylius.uploader.filesystem%</argument>
                 </service>
             </argument>
         </service>

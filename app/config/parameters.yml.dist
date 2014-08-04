@@ -48,6 +48,8 @@ parameters:
 
     sylius.order.pending.duration: 3 hours
 
+    sylius.uploader.filesystem: sylius_image
+
     phpcr_backend:
         type: doctrinedbal
         connection: default

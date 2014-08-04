@@ -20,7 +20,7 @@ knp_gaufrette:
                 create:     true
     filesystems:
         sylius_image:
-            adapter: sylius_image
+            adapter: %sylius.uploader.filesystem%
 
 liip_imagine:
     data_root: %kernel.root_dir%/../web/media/image
