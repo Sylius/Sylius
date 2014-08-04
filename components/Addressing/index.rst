@@ -11,3 +11,4 @@ The component provides you with basic Address, Country, Province and Zone models
    installation
    models
    zones
+   summary
