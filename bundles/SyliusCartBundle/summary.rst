@@ -35,10 +35,6 @@ Configuration reference
     $ composer install --dev --prefer-dist
     $ bin/phpspec run -f pretty
 
-Working examples
-----------------
-
-If you want to see working implementation, try out the `Sylius sandbox application <http://github.com/Sylius/Sylius-Sandbox>`_.
 
 Bug tracking
 ------------
