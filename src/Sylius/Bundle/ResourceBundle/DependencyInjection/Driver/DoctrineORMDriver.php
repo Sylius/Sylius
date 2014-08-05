@@ -21,6 +21,8 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrineORMDriver extends AbstractDatabaseDriver
 {
+    protected $repositoryClass = 'Sylius\\Bundle\\ResourceBundle\\Doctrine\\ORM\\EntityRepository';
+
     /**
      * {@inheritdoc}
      */
@@ -32,20 +34,42 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
+    protected function getManagerDefinition(array $classes)
+    {
+        $managerKey = $this->getContainerKey('manager', '.class');
+
+        if (isset($classes['manager'])) {
+            $this->managerClass = $classes['manager'];
+        } elseif ($this->container->hasParameter($managerKey)) {
+            $this->managerClass = $this->container->getParameter($managerKey);
+        }
+
+        $definition = new Definition($this->managerClass);
+        $definition->setArguments(array(
+            new Reference($this->getContainerKey('manager')),
+            new Reference('event_dispatcher'),
+            $this->prefix,
+            $this->resourceName,
+            $this->getClassMetadataDefinition($classes['model'])
+        ));
+
+        return $definition;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryKey = $this->getContainerKey('repository', '.class');
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
-
-        if ($this->container->hasParameter($repositoryKey)) {
-            $repositoryClass = $this->container->getParameter($repositoryKey);
-        }
 
         if (isset($classes['repository'])) {
-            $repositoryClass = $classes['repository'];
+            $this->repositoryClass = $classes['repository'];
+        } elseif ($this->container->hasParameter($repositoryKey)) {
+            $this->repositoryClass = $this->container->getParameter($repositoryKey);
         }
 
-        $definition = new Definition($repositoryClass);
+        $definition = new Definition($this->repositoryClass);
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
             $this->getClassMetadataDefinition($classes['model'])

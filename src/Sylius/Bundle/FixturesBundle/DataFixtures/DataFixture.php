@@ -57,19 +57,9 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $this->container = $container;
     }
 
-    public function __call($method, $arguments)
+    protected function getManager($name)
     {
-        $matches = array();
-        if (preg_match('/^get(.*)Repository$/', $method, $matches)) {
-            return $this->get('sylius.repository.'.$matches[1]);
-        }
-
-        return call_user_func_array(array($this, $method), $arguments);
-    }
-
-    protected function getZoneMemberRepository($zoneType)
-    {
-        return $this->get('sylius.repository.zone_member_'.$zoneType);
+        return $this->container->get('sylius.manager.'.$name);
     }
 
     /**
@@ -77,7 +67,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
      */
     protected function getVariantGenerator()
     {
-        return $this->get('sylius.generator.product_variant');
+        return $this->container->get('sylius.generator.product_variant');
     }
 
     /**

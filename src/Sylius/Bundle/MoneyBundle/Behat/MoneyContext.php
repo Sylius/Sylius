@@ -42,9 +42,7 @@ class MoneyContext extends DefaultContext
      */
     public function thereIsCurrency($code, $rate = 1, $enabled = true, $flush = true)
     {
-        $repository = $this->getRepository('currency');
-
-        $currency = $repository->createNew();
+        $currency = $this->getManager('currency')->createNew();
         $currency->setCode($code);
         $currency->setExchangeRate($rate);
         $currency->setEnabled($enabled);

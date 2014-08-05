@@ -13,6 +13,7 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -49,11 +50,11 @@ class AddressController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $user = $this->getUser();
-        $address = $this->getAddressRepository()->createNew();
+        $address = $this->getAddressManager()->createNew();
         $form = $this->getAddressForm($address);
 
         if ($form->handleRequest($request)->isValid()) {
+            $user = $this->getUser();
             $user->addAddress($address);
 
             $manager = $this->getUserManager();
@@ -188,11 +189,11 @@ class AddressController extends FOSRestController
     }
 
     /**
-     * @return RepositoryInterface
+     * @return DomainManager
      */
-    private function getAddressRepository()
+    private function getAddressManager()
     {
-        return $this->get('sylius.repository.address');
+        return $this->get('sylius.manager.address');
     }
 
     private function redirectToIndex()

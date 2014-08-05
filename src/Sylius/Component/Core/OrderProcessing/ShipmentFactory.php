@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Shipment factory.
@@ -22,20 +22,20 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ShipmentFactory implements ShipmentFactoryInterface
 {
     /**
-    * Shipment repository.
+    * Shipment manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManager
      */
-    protected $shipmentRepository;
+    protected $manager;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $shipmentRepository
+     * @param DomainManager $manager
      */
-    public function __construct(RepositoryInterface $shipmentRepository)
+    public function __construct(DomainManager $manager)
     {
-        $this->shipmentRepository = $shipmentRepository;
+        $this->manager = $manager;
     }
 
     /**
@@ -43,10 +43,10 @@ class ShipmentFactory implements ShipmentFactoryInterface
      */
     public function createShipment(OrderInterface $order)
     {
-        $shipment = $order->getShipments()->first();
-
-        if (!$shipment) {
-            $shipment = $this->shipmentRepository->createNew();
+        if (!$order->getShipments()->isEmpty()) {
+            $shipment = $order->getShipments()->first();
+        } else {
+            $shipment = $this->manager->createNew();
             $order->addShipment($shipment);
         }
 

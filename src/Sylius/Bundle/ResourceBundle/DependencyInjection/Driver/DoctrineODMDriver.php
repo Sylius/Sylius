@@ -21,6 +21,8 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrineODMDriver extends AbstractDatabaseDriver
 {
+    protected $repositoryClass = 'Sylius\\Bundle\\ResourceBundle\\Doctrine\\ODM\\MongoDB\\DocumentRepository';
+
     /**
      * {@inheritdoc}
      */
@@ -32,21 +34,41 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
+    protected function getManagerDefinition(array $classes)
+    {
+        if (isset($classes['manager'])) {
+            $this->managerClass = $classes['manager'];
+        }
+
+        $definition = new Definition($this->managerClass);
+        $definition->setArguments(array(
+            new Reference($this->getContainerKey('manager')),
+            new Reference('event_dispatcher'),
+            $this->prefix,
+            $this->resourceName,
+            $this->getClassMetadataDefinition($classes['model'])
+        ));
+
+        return $definition;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getRepositoryDefinition(array $classes)
     {
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
-
         if (isset($classes['repository'])) {
-            $repositoryClass = $classes['repository'];
+            $this->repositoryClass = $classes['repository'];
         }
 
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
         $unitOfWorkDefinition
             ->setFactoryService($this->getManagerServiceKey())
             ->setFactoryMethod('getUnitOfWork')
-            ->setPublic(false);
+            ->setPublic(false)
+        ;
 
-        $definition = new Definition($repositoryClass);
+        $definition = new Definition($this->repositoryClass);
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
             $unitOfWorkDefinition,

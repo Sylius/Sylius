@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
@@ -27,11 +28,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class AddProductAction implements PromotionActionInterface
 {
     /**
-     * OrderItem repository.
+     * Order item manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManager
      */
-    protected $itemRepository;
+    protected $itemManager;
 
     /**
      * Variant repository.
@@ -43,12 +44,12 @@ class AddProductAction implements PromotionActionInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $itemRepository
+     * @param DomainManager       $manager
      * @param RepositoryInterface $variantRepository
      */
-    public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    public function __construct(DomainManager $manager, RepositoryInterface $variantRepository)
     {
-        $this->itemRepository    = $itemRepository;
+        $this->itemManager       = $manager;
         $this->variantRepository = $variantRepository;
     }
 
@@ -120,7 +121,7 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        return $this->itemRepository->createNew()
+        return $this->itemManager->createNew()
             ->setVariant($variant)
             ->setQuantity((int) $configuration['quantity'])
             ->setUnitPrice((int) $configuration['price'])

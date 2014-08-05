@@ -55,8 +55,8 @@ class LoadPaymentMethodsData extends DataFixture
      */
     protected function createPaymentMethod($name, $gateway, $enabled = true)
     {
-        /* @var $method PaymentMethodInterface */
-        $method = $this->getPaymentMethodRepository()->createNew();
+        /** @var $method PaymentMethodInterface */
+        $method = $this->getManager('payment_method')->createNew();
         $method->setName($name);
         $method->setGateway($gateway);
         $method->setEnabled($enabled);

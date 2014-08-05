@@ -24,23 +24,23 @@ class PromotionContext extends DefaultContext
     {
         $promotion = $this->findOneByName('promotion', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_coupon');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('promotion_coupon');
 
         foreach ($table->getHash() as $data) {
-            $coupon = $repository->createNew();
+            $coupon = $manager->createNew();
             $coupon->setCode($data['code']);
             $coupon->setUsageLimit(isset($data['usage limit']) ? $data['usage limit'] : 0);
             $coupon->setUsed(isset($data['used']) ? $data['used'] : 0);
 
             $promotion->addCoupon($coupon);
 
-            $manager->persist($coupon);
+            $em->persist($coupon);
         }
 
         $promotion->setCouponBased(true);
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -50,22 +50,22 @@ class PromotionContext extends DefaultContext
     {
         $promotion = $this->findOneByName('promotion', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_rule');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('promotion_rule');
 
         foreach ($table->getHash() as $data) {
             $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
 
-            $rule = $repository->createNew();
+            $rule = $manager->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($configuration);
 
             $promotion->addRule($rule);
 
-            $manager->persist($rule);
+            $em->persist($rule);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -75,22 +75,22 @@ class PromotionContext extends DefaultContext
     {
         $promotion = $this->findOneByName('promotion', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion_action');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('promotion_action');
 
         foreach ($table->getHash() as $data) {
             $configuration = $this->cleanPromotionConfiguration($this->getConfiguration($data['configuration']));
 
-            $action = $repository->createNew();
+            $action = $manager->createNew();
             $action->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $action->setConfiguration($configuration);
 
             $promotion->addAction($action);
 
-            $manager->persist($action);
+            $em->persist($action);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -99,11 +99,11 @@ class PromotionContext extends DefaultContext
      */
     public function theFollowingPromotionsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('promotion');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('promotion');
 
         foreach ($table->getHash() as $data) {
-            $promotion = $repository->createNew();
+            $promotion = $manager->createNew();
 
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);
@@ -121,10 +121,10 @@ class PromotionContext extends DefaultContext
                 $promotion->setEndsAt(new \DateTime($data['ends']));
             }
 
-            $manager->persist($promotion);
+            $em->persist($promotion);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**

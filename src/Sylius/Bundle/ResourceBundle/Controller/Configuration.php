@@ -146,11 +146,6 @@ class Configuration
         return sprintf('%s.%s.%s', $this->bundlePrefix, $service, $this->resourceName);
     }
 
-    public function getEventName($event)
-    {
-        return sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $event);
-    }
-
     public function getTemplateName($name)
     {
         return sprintf('%s:%s.%s', $this->templateNamespace ?: ':', $name, $this->templatingEngine);

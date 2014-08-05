@@ -34,7 +34,7 @@ class TaxonomyContext extends DefaultContext
      */
     public function thereIsTaxonomy($name, $flush = true)
     {
-        $taxonomy = $this->getRepository('taxonomy')->createNew();
+        $taxonomy = $this->getManager('taxonomy')->createNew();
         $taxonomy->setName($name);
 
         $this->getEntityManager()->persist($taxonomy);
@@ -61,8 +61,8 @@ class TaxonomyContext extends DefaultContext
                 $taxonName = trim($taxonName);
 
                 if (!isset($taxons[$taxonName])) {
-                    /* @var $taxon TaxonInterface */
-                    $taxon = $this->getRepository('taxon')->createNew();
+                    /** @var $taxon TaxonInterface */
+                    $taxon = $this->getManager('taxon')->createNew();
                     $taxon->setName($taxonName);
 
                     $taxons[$taxonName] = $taxon;

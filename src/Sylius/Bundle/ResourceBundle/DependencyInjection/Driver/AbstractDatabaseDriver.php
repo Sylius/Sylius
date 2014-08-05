@@ -47,6 +47,11 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected $templates;
 
+    /**
+     * @var string
+     */
+    protected $managerClass = 'Sylius\\Bundle\\ResourceBundle\\Doctrine\\DomainManager';
+
     public function __construct(ContainerBuilder $container, $prefix, $resourceName, $managerName, $templates = null)
     {
         $this->container = $container;
@@ -64,6 +69,11 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
                 $this->getControllerDefinition($classes['controller'])
             );
         }
+
+        $this->container->setDefinition(
+            $this->getContainerKey('manager'),
+            $this->getManagerDefinition($classes)
+        );
 
         $this->container->setDefinition(
             $this->getContainerKey('repository'),
@@ -88,9 +98,18 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     abstract protected function getClassMetadataClassname();
 
     /**
-     * Get the respository service
+     * Get the manager service
      *
-     * @param array $classes
+     * @param string[] $classes
+     *
+     * @return Definition
+     */
+    abstract protected function getManagerDefinition(array $classes);
+
+    /**
+     * Get the repository service
+     *
+     * @param string[] $classes
      *
      * @return Definition
      */
@@ -164,8 +183,8 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     }
 
     /**
-     * @param string $key
-     * @param string $suffix
+     * @param string      $key
+     * @param null|string $suffix
      *
      * @return string
      */

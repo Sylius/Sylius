@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\Provider;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
@@ -37,7 +37,7 @@ class CartProvider implements CartProviderInterface
     /**
      * Cart manager.
      *
-     * @var ObjectManager
+     * @var DomainManager
      */
     protected $manager;
 
@@ -66,11 +66,11 @@ class CartProvider implements CartProviderInterface
      * Constructor.
      *
      * @param CartContextInterface     $context
-     * @param ObjectManager            $manager
+     * @param DomainManager            $manager
      * @param RepositoryInterface      $repository
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(CartContextInterface $context, ObjectManager $manager, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
+    public function __construct(CartContextInterface $context, DomainManager $manager, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
     {
         $this->context = $context;
         $this->manager = $manager;
@@ -99,7 +99,7 @@ class CartProvider implements CartProviderInterface
             return $this->cart;
         }
 
-        $this->cart = $this->repository->createNew();
+        $this->cart = $this->manager->create();
         $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, new CartEvent($this->cart));
 
         return $this->cart;

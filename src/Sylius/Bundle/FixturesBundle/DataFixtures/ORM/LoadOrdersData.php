@@ -30,18 +30,18 @@ class LoadOrdersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $orderRepository = $this->getOrderRepository();
-        $orderItemRepository = $this->getOrderItemRepository();
+        $orderManager     = $this->getManager('order');
+        $orderItemManager = $this->getManager('order_item');
 
         for ($i = 1; $i <= 50; $i++) {
-            /* @var $order OrderInterface */
-            $order = $orderRepository->createNew();
+            /** @var $order OrderInterface */
+            $order = $orderManager->createNew();
 
             for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
-                /* @var $item OrderItemInterface */
-                $item = $orderItemRepository->createNew();
+                /** @var $item OrderItemInterface */
+                $item = $orderItemManager->createNew();
                 $item->setVariant($variant);
                 $item->setUnitPrice(1500);
                 $item->setQuantity(rand(1, 5));
@@ -92,8 +92,8 @@ class LoadOrdersData extends DataFixture
      */
     protected function createAddress()
     {
-        /* @var $address AddressInterface */
-        $address = $this->getAddressRepository()->createNew();
+        /** @var $address AddressInterface */
+        $address = $this->getManager('address')->createNew();
         $address->setFirstname($this->faker->firstName);
         $address->setLastname($this->faker->lastName);
         $address->setCity($this->faker->city);
@@ -119,8 +119,8 @@ class LoadOrdersData extends DataFixture
      */
     protected function createPayment(OrderInterface $order, $state = null)
     {
-        /* @var $payment PaymentInterface */
-        $payment = $this->getPaymentRepository()->createNew();
+        /** @var $payment PaymentInterface */
+        $payment = $this->getManager('payment')->createNew();
         $payment->setOrder($order);
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
         $payment->setAmount($order->getTotal());
@@ -135,8 +135,8 @@ class LoadOrdersData extends DataFixture
 
     protected function createShipment(OrderInterface $order)
     {
-        /* @var $shipment ShipmentInterface */
-        $shipment = $this->getShipmentRepository()->createNew();
+        /** @var $shipment ShipmentInterface */
+        $shipment = $this->getManager('shipment')->createNew();
         $shipment->setMethod($this->getReference('Sylius.ShippingMethod.UPS Ground'));
         $shipment->setState($this->getShipmentState());
 

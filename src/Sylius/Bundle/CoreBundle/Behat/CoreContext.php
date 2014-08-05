@@ -73,10 +73,10 @@ class CoreContext extends DefaultContext
      */
     public function thereAreOrders(TableNode $table)
     {
-        $manager = $this->getEntityManager();
+        $em      = $this->getEntityManager();
         $finite  = $this->getService('sm.factory');
-        $orderRepository   = $this->getRepository('order');
-        $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
+        $manager = $this->getManager('order');
+        $shipmentProcessor = $this->getContainer()->get('sylius.processor.shipment_processor');
 
         /** @var $paymentMethod PaymentMethodInterface */
         $paymentMethod = $this->getRepository('payment_method')->createNew();
@@ -89,7 +89,7 @@ class CoreContext extends DefaultContext
             $address = $this->createAddress($data['address']);
 
             /* @var $order OrderInterface */
-            $order = $orderRepository->createNew();
+            $order = $manager->createNew();
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
@@ -112,14 +112,14 @@ class CoreContext extends DefaultContext
 
             $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentTransitions::SYLIUS_PREPARE);
 
-            $manager->persist($order);
+            $em->persist($order);
 
             $this->orders[$order->getNumber()] = $order;
 
             ++$currentOrderNumber;
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -127,8 +127,8 @@ class CoreContext extends DefaultContext
      */
     public function orderHasFollowingItems($number, TableNode $items)
     {
-        $manager = $this->getEntityManager();
-        $orderItemRepository = $this->getRepository('order_item');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('order_item');
 
         $order = $this->orders[$number];
 
@@ -136,14 +136,13 @@ class CoreContext extends DefaultContext
             $product = $this->findOneByName('product', trim($data['product']));
 
             /* @var $item OrderItemInterface */
-            $item = $orderItemRepository->createNew();
+            $item = $manager->createNew();
             $item->setVariant($product->getMasterVariant());
             $item->setUnitPrice($product->getMasterVariant()->getPrice());
             $item->setQuantity($data['quantity']);
 
             $order->addItem($item);
         }
-
 
         $order->calculateTotal();
         $order->complete();
@@ -153,8 +152,8 @@ class CoreContext extends DefaultContext
 
         $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
 
-        $manager->persist($order);
-        $manager->flush();
+        $em->persist($order);
+        $em->flush();
     }
 
     /**
@@ -184,11 +183,11 @@ class CoreContext extends DefaultContext
      */
     public function thereAreGroups(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('group');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('group');
 
         foreach ($table->getHash() as $data) {
-            $group = $repository->createNew();
+            $group = $manager->createNew();
             $group->setName(trim($data['name']));
 
             $roles = explode(',', $data['roles']);
@@ -196,10 +195,10 @@ class CoreContext extends DefaultContext
 
             $group->setRoles($roles);
 
-            $manager->persist($group);
+            $em->persist($group);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -227,7 +226,7 @@ class CoreContext extends DefaultContext
             $addressData = array_map('trim', $addressData);
 
             /* @var $user UserInterface */
-            $user = $this->getRepository('user')->createNew();
+            $user = $this->getManager('user')->createNew();
             $user->setFirstname($this->faker->firstName);
             $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
@@ -385,7 +384,7 @@ class CoreContext extends DefaultContext
     {
         /* @var $method ShippingMethodInterface */
         $method = $this
-            ->getRepository('shipping_method')
+            ->getManager('shipping_method')
             ->createNew()
         ;
 
@@ -410,21 +409,21 @@ class CoreContext extends DefaultContext
      */
     public function thereAreLocales(TableNode $table)
     {
-        $repository = $this->getRepository('locale');
-        $manager = $this->getEntityManager();
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('locale');
 
         foreach ($table->getHash() as $data) {
-            $locale = $repository->createNew();
+            $locale = $manager->createNew();
             $locale->setCode($data['code']);
 
             if (isset($data['enabled'])) {
                 $locale->setEnabled('yes' === $data['enabled']);
             }
 
-            $manager->persist($locale);
+            $em->persist($locale);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -461,7 +460,7 @@ class CoreContext extends DefaultContext
         list($firstname, $lastname) = explode(' ', $addressData[0]);
 
         /* @var $address AddressInterface */
-        $address = $this->getRepository('address')->createNew();
+        $address = $this->getManager('address')->createNew();
         $address->setFirstname(trim($firstname));
         $address->setLastname(trim($lastname));
         $address->setStreet($addressData[1]);
@@ -507,7 +506,7 @@ class CoreContext extends DefaultContext
         $shippingMethod = $this->getRepository('shipping_method')->findOneBy(array('name' => $shipmentData[0]));
 
         /* @var $shipment ShipmentInterface */
-        $shipment = $this->getRepository('shipment')->createNew();
+        $shipment = $this->getManager('shipment')->createNew();
         $shipment->setMethod($shippingMethod);
         if (isset($shipmentData[1])) {
             $shipment->setState($shipmentData[1]);

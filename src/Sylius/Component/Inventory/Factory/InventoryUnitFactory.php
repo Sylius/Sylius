@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -24,20 +25,20 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class InventoryUnitFactory implements InventoryUnitFactoryInterface
 {
     /**
-     * Inventory unit repository.
+     * Inventory unit manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManager
      */
-    protected $repository;
+    protected $manager;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $repository
+     * @param DomainManager $manager
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(DomainManager $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     /**
@@ -52,7 +53,7 @@ class InventoryUnitFactory implements InventoryUnitFactoryInterface
         $units = new ArrayCollection();
 
         for ($i = 0; $i < $quantity; $i++) {
-            $inventoryUnit = $this->repository->createNew();
+            $inventoryUnit = $this->manager->createNew();
             $inventoryUnit->setStockable($stockable);
             $inventoryUnit->setInventoryState($state);
 

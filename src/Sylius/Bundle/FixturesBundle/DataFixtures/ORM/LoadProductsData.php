@@ -280,8 +280,8 @@ class LoadProductsData extends DataFixture
      */
     private function addAttribute(ProductInterface $product, $name, $value)
     {
-        /* @var $attribute AttributeValueInterface */
-        $attribute = $this->getProductAttributeValueRepository()->createNew();
+        /** @var $attribute AttributeValueInterface */
+        $attribute = $this->getManager('product_attribute_value')->createNew();
         $attribute->setAttribute($this->getReference('Sylius.Attribute.'.$name));
         $attribute->setProduct($product);
         $attribute->setValue($value);
@@ -347,7 +347,7 @@ class LoadProductsData extends DataFixture
      */
     protected function createProduct()
     {
-        return $this->getProductRepository()->createNew();
+        return $this->getManager('product')->createNew();
     }
 
     /**

@@ -28,9 +28,9 @@ class LoadBlocksData extends DataFixture
         NodeHelper::createPath($session, $basepath);
 
         $parent = $manager->find(null, $basepath);
-        $repository = $this->container->get('sylius.repository.simple_block');
+        $blockManager = $this->getManager('simple_block');
 
-        $contactBlock = $repository->createNew();
+        $contactBlock = $blockManager->createNew();
         $contactBlock->setParentDocument($parent);
         $contactBlock->setName('contact');
         $contactBlock->setTitle('Contact us');
@@ -39,7 +39,7 @@ class LoadBlocksData extends DataFixture
         $manager->persist($contactBlock);
 
         for ($i = 1; $i <= 3; $i++) {
-            $block = $repository->createNew();
+            $block = $blockManager->createNew();
             $block->setParentDocument($parent);
             $block->setName('block-'.$i);
             $block->setTitle(ucfirst($this->faker->word));
@@ -48,9 +48,9 @@ class LoadBlocksData extends DataFixture
             $manager->persist($block);
         }
 
-        $repository = $this->container->get('sylius.repository.string_block');
+        $blockManager = $this->getManager('string_block');
 
-        $welcomeText = $repository->createNew();
+        $welcomeText = $blockManager->createNew();
         $welcomeText->setParentDocument($parent);
         $welcomeText->setName('welcome-text');
         $welcomeText->setBody('Welcome to Sylius e-commerce');

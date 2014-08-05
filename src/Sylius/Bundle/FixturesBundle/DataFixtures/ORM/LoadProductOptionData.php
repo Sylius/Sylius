@@ -66,14 +66,14 @@ class LoadProductOptionData extends DataFixture
      */
     protected function createOption($name, $presentation, array $values)
     {
-        /* @var $option OptionInterface */
-        $option = $this->getProductOptionRepository()->createNew();
+        /** @var $option OptionInterface */
+        $option = $this->getManager('product_option')->createNew();
         $option->setName($name);
         $option->setPresentation($presentation);
 
         foreach ($values as $text) {
-            /* @var $value OptionValueInterface */
-            $value = $this->getProductOptionValueRepository()->createNew();
+            /** @var $value OptionValueInterface */
+            $value = $this->getManager('product_option_value')->createNew();
             $value->setValue($text);
 
             $option->addValue($value);

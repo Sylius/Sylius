@@ -73,8 +73,8 @@ class LoadZonesData extends DataFixture
      */
     protected function createZone($name, $type, array $members)
     {
-        /* @var $zone ZoneInterface */
-        $zone = $this->getZoneRepository()->createNew();
+        /** @var $zone ZoneInterface */
+        $zone = $this->getManager('zone')->createNew();
         $zone->setName($name);
         $zone->setType($type);
 

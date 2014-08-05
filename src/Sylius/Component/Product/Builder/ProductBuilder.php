@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Builder;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -71,7 +72,7 @@ class ProductBuilder implements ProductBuilderInterface
     protected $attributeValueRepository;
 
     public function __construct(
-        ObjectManager      $productManager,
+        DomainManager       $productManager,
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $attributeValueRepository
@@ -102,7 +103,7 @@ class ProductBuilder implements ProductBuilderInterface
      */
     public function create($name)
     {
-        $this->product = $this->productRepository->createNew();
+        $this->product = $this->productManager->createNew();
         $this->product->setName($name);
 
         return $this;

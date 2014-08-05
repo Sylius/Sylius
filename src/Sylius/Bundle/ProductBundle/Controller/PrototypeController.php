@@ -67,7 +67,7 @@ class PrototypeController extends ResourceController
     /**
      * Get product controller.
      *
-     * @return Controller
+     * @return ResourceController
      */
     protected function getProductController()
     {

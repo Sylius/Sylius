@@ -15,6 +15,7 @@ use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Model\UserOAuthInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -29,6 +30,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends FOSUBUserProvider
 {
     /**
+     * @var DomainManager
+     */
+    protected $oauthManager;
+
+    /**
      * @var RepositoryInterface
      */
     protected $oauthRepository;
@@ -38,11 +44,13 @@ class UserProvider extends FOSUBUserProvider
      *
      * @param UserManagerInterface $userManager     FOSUB user provider.
      * @param RepositoryInterface  $oauthRepository
+     * @param DomainManager        $oauthManager
      */
-    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository)
+    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository, DomainManager $oauthManager)
     {
         $this->userManager     = $userManager;
         $this->oauthRepository = $oauthRepository;
+        $this->oauthManager    = $oauthManager;
     }
 
     /**
@@ -116,12 +124,13 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
     {
-        $oauth = $this->oauthRepository->createNew();
+        /** @var $oauth UserOAuthInterface */
+        $oauth = $this->oauthManager->createNew();
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
 
-        /* @var $user SyliusUserInterface */
+        /** @var $user SyliusUserInterface */
         $user->addOAuthAccount($oauth);
 
         $this->userManager->updateUser($user);

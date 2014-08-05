@@ -52,8 +52,8 @@ class LoadGroupsData extends DataFixture
      */
     protected function createGroup($name, array $roles = array())
     {
-        /* @var $group GroupInterface */
-        $group = $this->getGroupRepository()->createNew();
+        /** @var $group GroupInterface */
+        $group = $this->getManager('group')->createNew();
         $group->setName($name);
         $group->setRoles($roles);
 

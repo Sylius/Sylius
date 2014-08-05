@@ -21,6 +21,8 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrinePHPCRDriver extends AbstractDatabaseDriver
 {
+    protected $repositoryClass = 'Sylius\\Bundle\\ResourceBundle\\Doctrine\\ODM\\PHPCR\\DocumentRepository';
+
     /**
      * {@inheritdoc}
      */
@@ -32,15 +34,34 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getRepositoryDefinition(array $classes)
+    protected function getManagerDefinition(array $classes)
     {
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository';
-
-        if (isset($classes['repository'])) {
-            $repositoryClass  = $classes['repository'];
+        if (isset($classes['manager'])) {
+            $this->managerClass = $classes['manager'];
         }
 
-        $definition = new Definition($repositoryClass);
+        $definition = new Definition($this->managerClass);
+        $definition->setArguments(array(
+            new Reference($this->getContainerKey('manager')),
+            new Reference('event_dispatcher'),
+            $this->prefix,
+            $this->resourceName,
+            $this->getClassMetadataDefinition($classes['model'])
+        ));
+
+        return $definition;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getRepositoryDefinition(array $classes)
+    {
+        if (isset($classes['repository'])) {
+            $this->repositoryClass = $classes['repository'];
+        }
+
+        $definition = new Definition($this->repositoryClass);
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
             $this->getClassMetadataDefinition($classes['model']),

@@ -24,12 +24,12 @@ class PaymentContext extends DefaultContext
      */
     public function thereArePaymentMethods(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('payment_method');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('payment_method');
 
         foreach ($table->getHash() as $data) {
-            /* @var $method PaymentMethodInterface */
-            $method = $repository->createNew();
+            /** @var $method PaymentMethodInterface */
+            $method = $manager->createNew();
             $method->setName(trim($data['name']));
             $method->setGateway(trim($data['gateway']));
 
@@ -41,9 +41,9 @@ class PaymentContext extends DefaultContext
 
             $method->setEnabled($enabled);
 
-            $manager->persist($method);
+            $em->persist($method);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 }

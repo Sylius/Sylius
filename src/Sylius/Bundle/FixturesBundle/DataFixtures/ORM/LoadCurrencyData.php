@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * Default currency fixtures.
@@ -32,11 +33,11 @@ class LoadCurrencyData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $currencyRepository = $this->getCurrencyRepository();
+        $currencyRepository = $this->getManager('currency');
 
         foreach ($this->currencies as $code => $rate) {
+            /** @var $currency CurrencyInterface */
             $currency = $currencyRepository->createNew();
-
             $currency->setCode($code);
             $currency->setExchangeRate($rate);
             $currency->setEnabled(true);

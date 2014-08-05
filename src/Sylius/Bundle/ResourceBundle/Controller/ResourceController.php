@@ -15,6 +15,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -22,6 +24,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Base resource controller for Sylius.
@@ -87,12 +90,7 @@ class ResourceController extends FOSRestController
                 );
             }
 
-            $this->domainManager = new DomainManager(
-                $container->get($this->config->getServiceName('manager')),
-                $container->get('event_dispatcher'),
-                $this->config,
-                !$this->config->isApiRequest() ? $this->flashHelper : null
-            );
+            $this->domainManager = $container->get($this->config->getServiceName('manager'));
         }
     }
 
@@ -311,7 +309,7 @@ class ResourceController extends FOSRestController
      */
     public function createNew()
     {
-        return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
+        return $this->resourceResolver->createResource($this->getManager(), 'createNew');
     }
 
     /**
@@ -380,6 +378,14 @@ class ResourceController extends FOSRestController
     }
 
     /**
+     * @return DomainManager
+     */
+    public function getManager()
+    {
+        return $this->domainManager;
+    }
+
+    /**
      * @param Request $request
      * @param integer $movement
      *
@@ -388,8 +394,15 @@ class ResourceController extends FOSRestController
     protected function move(Request $request, $movement)
     {
         $resource = $this->findOr404($request);
+        $position = $this->config->getSortablePosition();
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue(
+            $resource,
+            $position,
+            $accessor->getValue($resource, $position) + $movement
+        );
 
-        $this->domainManager->move($resource, $movement);
+        $this->domainManager->update($resource, 'move');
 
         return $this->redirectHandler->redirectToIndex();
     }

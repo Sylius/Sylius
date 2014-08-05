@@ -13,6 +13,7 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
@@ -38,7 +39,7 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * Object manager.
      *
-     * @var ObjectManager
+     * @var DomainManager
      */
     protected $parameterManager;
 
@@ -74,12 +75,12 @@ class SettingsManager implements SettingsManagerInterface
      * Constructor.
      *
      * @param SchemaRegistryInterface $schemaRegistry
-     * @param ObjectManager           $parameterManager
+     * @param DomainManager           $parameterManager
      * @param RepositoryInterface     $parameterRepository
      * @param Cache                   $cache
      * @param ValidatorInterface      $validator
      */
-    public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, DomainManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->parameterManager = $parameterManager;
@@ -153,8 +154,7 @@ class SettingsManager implements SettingsManagerInterface
             if (isset($persistedParametersMap[$name])) {
                 $persistedParametersMap[$name]->setValue($value);
             } else {
-                $parameter = $this->parameterRepository->createNew();
-
+                $parameter = $this->parameterManager->createNew();
                 $parameter
                     ->setNamespace($namespace)
                     ->setName($name)
@@ -167,11 +167,9 @@ class SettingsManager implements SettingsManagerInterface
                     throw new ValidatorException($errors->get(0)->getMessage());
                 }
 
-                $this->parameterManager->persist($parameter);
+                $this->parameterManager->create($parameter);
             }
         }
-
-        $this->parameterManager->flush();
 
         $this->cache->save($namespace, $parameters);
     }
