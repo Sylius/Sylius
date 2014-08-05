@@ -35,7 +35,7 @@ class DomainManager
     private $eventDispatcher;
 
     /**
-     * @var FlashHelper
+     * @var null|FlashHelper
      */
     private $flashHelper;
 
@@ -47,13 +47,13 @@ class DomainManager
     public function __construct(
         ObjectManager $manager,
         EventDispatcherInterface $eventDispatcher,
-        FlashHelper $flashHelper,
-        Configuration $config
+        Configuration $config,
+        FlashHelper $flashHelper = null
     ) {
         $this->manager = $manager;
         $this->eventDispatcher = $eventDispatcher;
-        $this->flashHelper = $flashHelper;
         $this->config = $config;
+        $this->flashHelper = $flashHelper;
     }
 
     /**
@@ -63,22 +63,26 @@ class DomainManager
      */
     public function create($resource)
     {
-        /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            if (null !== $this->flashHelper) {
+                $this->flashHelper->setFlash(
+                    $event->getMessageType(),
+                    $event->getMessage(),
+                    $event->getMessageParameters()
+                );
+            }
 
             return null;
         }
 
         $this->manager->persist($resource);
         $this->manager->flush();
-        $this->flashHelper->setFlash('success', 'create');
+
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', 'create');
+        }
 
         $this->dispatchEvent('post_create', new ResourceEvent($resource));
 
@@ -93,28 +97,38 @@ class DomainManager
      */
     public function update($resource, $flash = 'update')
     {
-        /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            if (null !== $this->flashHelper) {
+                $this->flashHelper->setFlash(
+                    $event->getMessageType(),
+                    $event->getMessage(),
+                    $event->getMessageParameters()
+                );
+            }
 
             return null;
         }
 
         $this->manager->persist($resource);
         $this->manager->flush();
-        $this->flashHelper->setFlash('success', $flash);
+
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', $flash);
+        }
 
         $this->dispatchEvent('post_update', new ResourceEvent($resource));
 
         return $resource;
     }
 
+    /**
+     * @param object $resource
+     * @param int    $movement
+     *
+     * @return null|object
+     */
     public function move($resource, $movement)
     {
         $position = $this->config->getSortablePosition();
@@ -137,22 +151,26 @@ class DomainManager
      */
     public function delete($resource)
     {
-        /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            if (null !== $this->flashHelper) {
+                $this->flashHelper->setFlash(
+                    $event->getMessageType(),
+                    $event->getMessage(),
+                    $event->getMessageParameters()
+                );
+            }
 
             return null;
         }
 
         $this->manager->remove($resource);
         $this->manager->flush();
-        $this->flashHelper->setFlash('success', 'delete');
+
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', 'delete');
+        }
 
         $this->dispatchEvent('post_delete', new ResourceEvent($resource));
 
@@ -163,7 +181,7 @@ class DomainManager
      * @param string $name
      * @param Event  $event
      *
-     * @return Event
+     * @return ResourceEvent
      */
     public function dispatchEvent($name, Event $event)
     {

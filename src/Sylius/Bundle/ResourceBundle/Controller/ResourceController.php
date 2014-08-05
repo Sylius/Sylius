@@ -78,16 +78,20 @@ class ResourceController extends FOSRestController
         $this->resourceResolver = new ResourceResolver($this->config);
         if (null !== $container) {
             $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
-            $this->flashHelper = new FlashHelper(
-                $this->config,
-                $container->get('translator'),
-                $container->get('session')
-            );
+
+            if (!$this->config->isApiRequest()) {
+                $this->flashHelper = new FlashHelper(
+                    $this->config,
+                    $container->get('translator'),
+                    $container->get('session')
+                );
+            }
+
             $this->domainManager = new DomainManager(
                 $container->get($this->config->getServiceName('manager')),
                 $container->get('event_dispatcher'),
-                $this->flashHelper,
-                $this->config
+                $this->config,
+                !$this->config->isApiRequest() ? $this->flashHelper : null
             );
         }
     }
