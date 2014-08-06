@@ -11,13 +11,11 @@
 
 namespace Sylius\Bundle\ShippingBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Shipping component for Symfony2 applications.
@@ -27,12 +25,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusShippingBundle extends Bundle
+class SyliusShippingBundle extends AbstractResourceBundle
 {
     /**
-     * Return array of currently supported database drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -46,22 +42,39 @@ class SyliusShippingBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $interfaces = array(
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterCalculatorsPass());
+        $container->addCompilerPass(new RegisterRuleCheckersPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBundlePrefix()
+    {
+        return 'sylius_shipping';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getInterfaces()
+    {
+        return array(
             'Sylius\Component\Shipping\Model\ShipmentInterface'         => 'sylius.model.shipment.class',
             'Sylius\Component\Shipping\Model\ShipmentItemInterface'     => 'sylius.model.shipment_item.class',
             'Sylius\Component\Shipping\Model\ShippingCategoryInterface' => 'sylius.model.shipping_category.class',
             'Sylius\Component\Shipping\Model\ShippingMethodInterface'   => 'sylius.model.shipping_method.class',
             'Sylius\Component\Shipping\Model\RuleInterface'             => 'sylius.model.shipping_method_rule.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_shipping', $interfaces));
-        $container->addCompilerPass(new RegisterCalculatorsPass());
-        $container->addCompilerPass(new RegisterRuleCheckersPass());
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Shipping\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_shipping.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Component\Shipping\Model';
     }
 }
