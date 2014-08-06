@@ -16,16 +16,16 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
 
 /**
  * Sylius core Order model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponAwareSubjectInterface
+interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
@@ -215,11 +215,25 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     public function setCurrency($currency);
 
     /**
-     * Set promotion coupon.
+     * Adds promotion coupon.
      *
-     * @param CouponInterface $coupon
+     * @param BaseCouponInterface $coupon
      */
-    public function setPromotionCoupon(CouponInterface $coupon = null);
+    public function addPromotionCoupon($coupon);
+
+    /**
+     * Removes promotion coupon.
+     *
+     * @param BaseCouponInterface $coupon
+     */
+    public function removePromotionCoupon($coupon);
+
+    /**
+     * Has promotion coupon?
+     *
+     * @param BaseCouponInterface $coupon
+     */
+    public function hasPromotionCoupon($coupon);
 
     /**
      * Get the shipping state.

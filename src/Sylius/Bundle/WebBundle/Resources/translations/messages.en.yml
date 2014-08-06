@@ -158,7 +158,7 @@ sylius:
     cart:
         empty: Your cart is empty
         summary:
-            add_coupon: OK
+            add_coupon: Add coupon
             checkout: Checkout
             clear: Clear cart
             grand_total: Grand total
@@ -572,7 +572,7 @@ sylius:
         name: name
         no_results: There are no prototypes defined.
         options: options
-        attributes: 
+        attributes:
         update_header: Editing prototype
         updated_at: last update
     province:

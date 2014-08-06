@@ -208,7 +208,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function generatePageUrl($page, array $parameters = array())
     {
         if (is_object($page)) {
-            return $this->locatePath($this->generateUrl($page, $parameters));
+            return $this->generateUrl($page, $parameters);
         }
 
         $route  = str_replace(' ', '_', trim($page));
@@ -225,7 +225,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
         $route = str_replace(' ', '_', $route);
 
-        return $this->locatePath($this->generateUrl($route, $parameters));
+        return $this->generateUrl($route, $parameters);
     }
 
     /**
@@ -267,7 +267,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function generateUrl($route, array $parameters = array(), $absolute = false)
     {
-        return $this->getService('router')->generate($route, $parameters, $absolute);
+        return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
     }
 
     /**

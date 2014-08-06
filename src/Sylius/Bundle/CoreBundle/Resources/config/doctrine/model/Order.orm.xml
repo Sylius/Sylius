@@ -20,9 +20,16 @@
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <many-to-one target-entity="Sylius\Component\Promotion\Model\CouponInterface" field="promotionCoupon">
-            <join-column name="coupon_id" on-delete="SET NULL" />
-        </many-to-one>
+        <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface" orphan-removal="true">
+            <join-table name="order_promotion_coupons">
+                <join-columns>
+                    <join-column name="order_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="promotion_coupon_id" referenced-column-name="id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
 
         <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
             <cascade>

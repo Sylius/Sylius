@@ -17,8 +17,9 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Order entity.
@@ -70,11 +71,11 @@ class Order extends Cart implements OrderInterface
     protected $currency;
 
     /**
-     * Promotion coupon
+     * Promotion coupons.
      *
-     * @var CouponInterface
+     * @var BaseCouponInterface[]
      */
-    protected $promotionCoupon;
+    protected $promotionCoupons;
 
     /**
      * Order payment state.
@@ -107,6 +108,7 @@ class Order extends Cart implements OrderInterface
 
         $this->payments = new ArrayCollection();
         $this->shipments = new ArrayCollection();
+        $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
 
@@ -342,6 +344,8 @@ class Order extends Cart implements OrderInterface
             $this->payments->add($payment);
             $payment->setOrder($this);
         }
+
+        return $this;
     }
 
     /**
@@ -352,6 +356,8 @@ class Order extends Cart implements OrderInterface
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
         }
+
+        return $this;
     }
 
     /**
@@ -401,6 +407,8 @@ class Order extends Cart implements OrderInterface
             $shipment->setOrder($this);
             $this->shipments->add($shipment);
         }
+
+        return $this;
     }
 
     /**
@@ -412,6 +420,8 @@ class Order extends Cart implements OrderInterface
             $shipment->setOrder(null);
             $this->shipments->removeElement($shipment);
         }
+
+        return $this;
     }
 
     /**
@@ -425,19 +435,57 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionCoupon()
+    public function getPromotionCoupons()
     {
-        return $this->promotionCoupon;
+        return $this->promotionCoupons;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPromotionCoupon(CouponInterface $coupon = null)
+    public function addPromotionCoupon($coupon)
     {
-        $this->promotionCoupon = $coupon;
+        if (null === $coupon) {
+            return $this;
+        }
+
+        if (!$coupon instanceof BaseCouponInterface) {
+            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+        }
+
+        if (!$this->hasPromotionCoupon($coupon)) {
+            $this->promotionCoupons->add($coupon);
+        }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePromotionCoupon($coupon)
+    {
+        if (null === $coupon) {
+            return $this;
+        }
+
+        if (!$coupon instanceof BaseCouponInterface) {
+            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+        }
+
+        if ($this->hasPromotionCoupon($coupon)) {
+            $this->promotionCoupons->removeElement($coupon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotionCoupon($coupon)
+    {
+        return $this->promotionCoupons->contains($coupon);
     }
 
     /**
