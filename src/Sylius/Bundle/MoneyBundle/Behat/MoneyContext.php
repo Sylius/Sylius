@@ -13,7 +13,6 @@ namespace Sylius\Bundle\MoneyBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 class MoneyContext extends DefaultContext
 {

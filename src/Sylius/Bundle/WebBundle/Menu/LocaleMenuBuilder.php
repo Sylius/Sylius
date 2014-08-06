@@ -15,7 +15,6 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -37,11 +36,11 @@ class LocaleMenuBuilder extends MenuBuilder
     /**
      * Constructor.
      *
-     * @param FactoryInterface          $factory
-     * @param SecurityContextInterface  $securityContext
-     * @param TranslatorInterface       $translator
-     * @param EventDispatcherInterface  $eventDispatcher
-     * @param LocaleProviderInterface $localeProvider
+     * @param FactoryInterface         $factory
+     * @param SecurityContextInterface $securityContext
+     * @param TranslatorInterface      $translator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param LocaleProviderInterface  $localeProvider
      */
     public function __construct(
         FactoryInterface          $factory,

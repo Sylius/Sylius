@@ -67,7 +67,6 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
-
     /**
      * Adds `classes` section.
      *

@@ -12,7 +12,6 @@
 namespace Sylius\Component\Promotion\Checker;
 
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
-use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;

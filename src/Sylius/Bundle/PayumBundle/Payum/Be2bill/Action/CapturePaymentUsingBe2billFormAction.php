@@ -49,7 +49,9 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
 
     /**
      * @param PaymentInterface $payment
-     * @param TokenInterface $token
+     * @param TokenInterface   $token
+     *
+     * @throws LogicException
      */
     protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
     {

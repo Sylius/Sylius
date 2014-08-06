@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
-use Sylius\Component\Money\Context\CurrencyContextInterface;
-use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 class MoneyHelper extends Helper

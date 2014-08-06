@@ -48,7 +48,7 @@ class AddressingStepType extends AbstractType
                     $event->setData($data);
                 }
             })
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use($options) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
                 /* @var $user UserInterface */
                 $user = $options['user'];
                 if (null === $user || !$user instanceof UserInterface) {
