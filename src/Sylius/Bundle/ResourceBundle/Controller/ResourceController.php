@@ -168,7 +168,7 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            $resource = $this->domainManager->create($resource);
+            $resource = $this->domainManager->create($resource, !$this->config->isApiRequest());
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource));
@@ -210,7 +210,7 @@ class ResourceController extends FOSRestController
 
         if (in_array($method, array('POST', 'PUT', 'PATCH')) &&
             $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
+            $this->domainManager->update($resource, 'update', !$this->config->isApiRequest());
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource));
@@ -246,13 +246,14 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * @param  Request          $request
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request)
     {
         $resource = $this->findOr404($request);
-        $this->domainManager->delete($resource);
+        $this->domainManager->delete($resource, !$this->config->isApiRequest());
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view());
@@ -281,7 +282,7 @@ class ResourceController extends FOSRestController
 
         $stateMachine->apply($transition);
 
-        $this->domainManager->update($resource);
+        $this->domainManager->update($resource, 'update', !$this->config->isApiRequest());
 
         return $this->redirectHandler->redirectToReferer();
     }
@@ -363,7 +364,7 @@ class ResourceController extends FOSRestController
     {
         $resource = $this->findOr404($request);
 
-        $this->domainManager->move($resource, $movement);
+        $this->domainManager->move($resource, $movement, !$this->config->isApiRequest());
 
         return $this->redirectHandler->redirectToIndex();
     }

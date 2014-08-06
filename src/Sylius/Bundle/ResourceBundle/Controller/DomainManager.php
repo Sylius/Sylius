@@ -58,27 +58,33 @@ class DomainManager
 
     /**
      * @param object $resource
+     * @param bool   $setFlash
      *
      * @return object|null
      */
-    public function create($resource)
+    public function create($resource, $setFlash = true)
     {
         /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            if ($setFlash) {
+                $this->flashHelper->setFlash(
+                    $event->getMessageType(),
+                    $event->getMessage(),
+                    $event->getMessageParameters()
+                );
+            }
 
             return null;
         }
 
         $this->manager->persist($resource);
         $this->manager->flush();
-        $this->flashHelper->setFlash('success', 'create');
+
+        if ($setFlash) {
+            $this->flashHelper->setFlash('success', 'create');
+        }
 
         $this->dispatchEvent('post_create', new ResourceEvent($resource));
 
@@ -88,34 +94,47 @@ class DomainManager
     /**
      * @param object $resource
      * @param string $flash
+     * @param bool   $setFlash
      *
      * @return object|null
      */
-    public function update($resource, $flash = 'update')
+    public function update($resource, $flash = 'update', $setFlash = true)
     {
         /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            if ($setFlash) {
+                $this->flashHelper->setFlash(
+                    $event->getMessageType(),
+                    $event->getMessage(),
+                    $event->getMessageParameters()
+                );
+            }
 
             return null;
         }
 
         $this->manager->persist($resource);
         $this->manager->flush();
-        $this->flashHelper->setFlash('success', $flash);
+
+        if ($setFlash) {
+            $this->flashHelper->setFlash('success', $flash);
+        }
 
         $this->dispatchEvent('post_update', new ResourceEvent($resource));
 
         return $resource;
     }
 
-    public function move($resource, $movement)
+    /**
+     * @param object $resource
+     * @param int    $movement
+     * @param bool   $setFlash
+     *
+     * @return null|object
+     */
+    public function move($resource, $movement, $setFlash = true)
     {
         $position = $this->config->getSortablePosition();
 
@@ -127,15 +146,16 @@ class DomainManager
             $accessor->getValue($resource, $position) + $movement
         );
 
-        return $this->update($resource, 'move');
+        return $this->update($resource, 'move', $setFlash);
     }
 
     /**
      * @param object $resource
+     * @param bool   $setFlash
      *
      * @return object|null
      */
-    public function delete($resource)
+    public function delete($resource, $setFlash = true)
     {
         /** @var ResourceEvent $event */
         $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource));
@@ -152,7 +172,10 @@ class DomainManager
 
         $this->manager->remove($resource);
         $this->manager->flush();
-        $this->flashHelper->setFlash('success', 'delete');
+
+        if ($setFlash) {
+            $this->flashHelper->setFlash('success', 'delete');
+        }
 
         $this->dispatchEvent('post_delete', new ResourceEvent($resource));
 
