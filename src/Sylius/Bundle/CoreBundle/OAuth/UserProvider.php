@@ -15,9 +15,9 @@ use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Model\UserOAuthInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends FOSUBUserProvider
 {
     /**
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $oauthManager;
 
@@ -42,11 +42,11 @@ class UserProvider extends FOSUBUserProvider
     /**
      * Constructor.
      *
-     * @param UserManagerInterface $userManager     FOSUB user provider.
-     * @param RepositoryInterface  $oauthRepository
-     * @param DomainManager        $oauthManager
+     * @param UserManagerInterface   $userManager     FOSUB user provider.
+     * @param RepositoryInterface    $oauthRepository
+     * @param DomainManagerInterface $oauthManager
      */
-    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository, DomainManager $oauthManager)
+    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository, DomainManagerInterface $oauthManager)
     {
         $this->userManager     = $userManager;
         $this->oauthRepository = $oauthRepository;

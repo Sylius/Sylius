@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
@@ -32,7 +31,7 @@ class TaxationProcessor implements TaxationProcessorInterface
     /**
      * Adjustment manager.
      *
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $adjustmentManager;
 
@@ -67,14 +66,14 @@ class TaxationProcessor implements TaxationProcessorInterface
     /**
      * Constructor.
      *
-     * @param DomainManager            $adjustmentManager
+     * @param DomainManagerInterface   $adjustmentManager
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface     $zoneMatcher
      * @param Settings                 $taxationSettings
      */
     public function __construct(
-        DomainManager $adjustmentManager,
+        DomainManagerInterface $adjustmentManager,
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,

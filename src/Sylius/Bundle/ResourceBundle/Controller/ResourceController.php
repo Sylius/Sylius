@@ -15,8 +15,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -45,7 +44,7 @@ class ResourceController extends FOSRestController
     protected $flashHelper;
 
     /**
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $domainManager;
 
@@ -378,7 +377,7 @@ class ResourceController extends FOSRestController
     }
 
     /**
-     * @return DomainManager
+     * @return DomainManagerInterface
      */
     public function getManager()
     {

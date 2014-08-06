@@ -13,9 +13,8 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -189,7 +188,7 @@ class AddressController extends FOSRestController
     }
 
     /**
-     * @return DomainManager
+     * @return DomainManagerInterface
      */
     private function getAddressManager()
     {

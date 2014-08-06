@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * Payment processor.
@@ -24,16 +24,16 @@ class PaymentProcessor implements PaymentProcessorInterface
     /**
      * Payment manager.
      *
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $manager;
 
     /**
      * Constructor.
      *
-     * @param DomainManager $manager
+     * @param DomainManagerInterface $manager
      */
-    public function __construct(DomainManager $manager)
+    public function __construct(DomainManagerInterface $manager)
     {
         $this->manager = $manager;
     }

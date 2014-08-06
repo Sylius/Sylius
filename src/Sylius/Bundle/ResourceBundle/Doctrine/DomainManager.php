@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Doctrine;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -22,22 +23,32 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class DomainManager
+class DomainManager implements DomainManagerInterface
 {
     /**
      * @var ObjectManager
      */
-    private $manager;
+    protected $manager;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    protected $eventDispatcher;
 
     /**
      * @var string
      */
-    private $className;
+    protected $resourceName;
+
+    /**
+     * @var string
+     */
+    protected $bundlePrefix;
+
+    /**
+     * @var string
+     */
+    protected $className;
 
     public function __construct(
         ObjectManager $manager,
@@ -54,7 +65,7 @@ class DomainManager
     }
 
     /**
-     * @return object
+     * {@inheritdoc}
      */
     public function createNew()
     {
@@ -62,11 +73,11 @@ class DomainManager
     }
 
     /**
-     * @return object|null
+     * {@inheritdoc}
      */
     public function create()
     {
-        $resource = new $this->className();
+        $resource = $this->createNew();
         $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
 
         if ($event->isStopped()) {
@@ -82,9 +93,7 @@ class DomainManager
     }
 
     /**
-     * @param object $resource
-     *
-     * @return object|null
+     * {@inheritdoc}
      */
     public function update($resource)
     {
@@ -103,9 +112,7 @@ class DomainManager
     }
 
     /**
-     * @param object $resource
-     *
-     * @return object|null
+     * {@inheritdoc}
      */
     public function delete($resource)
     {
@@ -129,7 +136,7 @@ class DomainManager
      *
      * @return ResourceEvent
      */
-    public function dispatchEvent($name, Event $event)
+    protected function dispatchEvent($name, Event $event)
     {
         return $this->eventDispatcher->dispatch($this->getEventName($name), $event);
     }

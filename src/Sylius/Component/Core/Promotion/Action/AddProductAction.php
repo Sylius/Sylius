@@ -11,13 +11,13 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -30,7 +30,7 @@ class AddProductAction implements PromotionActionInterface
     /**
      * Order item manager.
      *
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $itemManager;
 
@@ -44,10 +44,10 @@ class AddProductAction implements PromotionActionInterface
     /**
      * Constructor.
      *
-     * @param DomainManager       $manager
-     * @param RepositoryInterface $variantRepository
+     * @param DomainManagerInterface $manager
+     * @param RepositoryInterface    $variantRepository
      */
-    public function __construct(DomainManager $manager, RepositoryInterface $variantRepository)
+    public function __construct(DomainManagerInterface $manager, RepositoryInterface $variantRepository)
     {
         $this->itemManager       = $manager;
         $this->variantRepository = $variantRepository;

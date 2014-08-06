@@ -20,7 +20,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -136,7 +136,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      *
      * @param string $resource
      *
-     * @return DomainManager
+     * @return DomainManagerInterface
      */
     protected function getManager($resource)
     {

@@ -12,10 +12,9 @@
 namespace Sylius\Component\Inventory\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * Default inventory operator.
@@ -27,16 +26,16 @@ class InventoryUnitFactory implements InventoryUnitFactoryInterface
     /**
      * Inventory unit manager.
      *
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $manager;
 
     /**
      * Constructor.
      *
-     * @param DomainManager $manager
+     * @param DomainManagerInterface $manager
      */
-    public function __construct(DomainManager $manager)
+    public function __construct(DomainManagerInterface $manager)
     {
         $this->manager = $manager;
     }

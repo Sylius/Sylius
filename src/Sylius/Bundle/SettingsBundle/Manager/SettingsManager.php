@@ -12,11 +12,10 @@
 namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
@@ -39,7 +38,7 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * Object manager.
      *
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $parameterManager;
 
@@ -75,12 +74,12 @@ class SettingsManager implements SettingsManagerInterface
      * Constructor.
      *
      * @param SchemaRegistryInterface $schemaRegistry
-     * @param DomainManager           $parameterManager
+     * @param DomainManagerInterface  $parameterManager
      * @param RepositoryInterface     $parameterRepository
      * @param Cache                   $cache
      * @param ValidatorInterface      $validator
      */
-    public function __construct(SchemaRegistryInterface $schemaRegistry, DomainManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, DomainManagerInterface $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->parameterManager = $parameterManager;

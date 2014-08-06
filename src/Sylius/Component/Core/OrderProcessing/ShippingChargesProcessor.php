@@ -11,10 +11,9 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 
 /**
@@ -27,7 +26,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     /**
      * Adjustment manager.
      *
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $manager;
 
@@ -41,10 +40,10 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     /**
      * Constructor.
      *
-     * @param DomainManager                 $manager
+     * @param DomainManagerInterface        $manager
      * @param DelegatingCalculatorInterface $calculator
      */
-    public function __construct(DomainManager $manager, DelegatingCalculatorInterface $calculator)
+    public function __construct(DomainManagerInterface $manager, DelegatingCalculatorInterface $calculator)
     {
         $this->manager = $manager;
         $this->calculator = $calculator;
