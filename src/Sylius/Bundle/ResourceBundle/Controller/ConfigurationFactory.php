@@ -19,19 +19,26 @@ namespace Sylius\Bundle\ResourceBundle\Controller;
 class ConfigurationFactory
 {
     /**
-     * Current request.
-     *
      * @var ParametersParser
      */
     protected $parametersParser;
 
     /**
+     * Default Settings
+     *
+     * @var array
+     */
+    protected $settings;
+
+    /**
      * Constructor.
      *
      * @param ParametersParser $parametersParser
+     * @param array $settings
      */
-    public function __construct(ParametersParser $parametersParser)
+    public function __construct(ParametersParser $parametersParser, array $settings)
     {
+        $this->settings = $settings;
         $this->parametersParser = $parametersParser;
     }
 
@@ -52,7 +59,8 @@ class ConfigurationFactory
             $bundlePrefix,
             $resourceName,
             $templateNamespace,
-            $templatingEngine
+            $templatingEngine,
+            $this->settings
         );
     }
 }

@@ -4,6 +4,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,18 +13,57 @@ use Symfony\Component\HttpFoundation\Request;
  * Resource controller configuration product.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
 class ConfigurationSpec extends ObjectBehavior
 {
-    function let(Request $request, ParametersParser $parser)
+    function let(Request $request, Parameters $parameters, ParametersParser $parser)
     {
-        $this->beConstructedWith($parser, 'sylius', 'product', 'SyliusWebBundle:Product', 'twig');
+        $this->beConstructedWith(
+            $parser,
+            'sylius',
+            'product',
+            'SyliusWebBundle:Product',
+            'twig',
+            array(
+                'paginate' => false,
+                'default_page_size' => 10,
+                'limit' => 10,
+                'sortable' => false,
+                'sorting' => null,
+                'filterable' => false,
+                'criteria' => null,
+            )
+        );
         $request->attributes = new ParameterBag();
+
+        $this->setRequest($request);
+        $this->setParameters($parameters);
     }
 
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+    }
+
+    function it_has_parameters()
+    {
+        $this->getParameters()->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\Parameters');
+    }
+
+    function its_parameter_is_mutable(Parameters $parameters)
+    {
+        $this->setParameters($parameters);
+    }
+
+    function it_has_request()
+    {
+        $this->getRequest()->shouldHaveType('Symfony\Component\HttpFoundation\Request');
+    }
+
+    function its_request_is_mutable(Request $request)
+    {
+        $this->setRequest($request);
     }
 
     function it_returns_assigned_bundle_prefix()
@@ -51,6 +91,20 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getTemplatingEngine()->shouldReturn('twig');
     }
 
+    function its_api_request_when_format_is_not_html(Request $request)
+    {
+        $this->setRequest($request);
+
+        $request->getRequestFormat()->willReturn('html');
+        $this->isApiRequest()->shouldReturn(false);
+
+        $request->getRequestFormat()->willReturn('xml');
+        $this->isApiRequest()->shouldReturn(true);
+
+        $request->getRequestFormat()->willReturn('json');
+        $this->isApiRequest()->shouldReturn(true);
+    }
+
     function it_generates_service_names()
     {
         $this->getServiceName('manager')->shouldReturn('sylius.manager.product');
@@ -70,8 +124,27 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getTemplateName('show.html')->shouldReturn('SyliusWebBundle:Product:show.html.twig');
         $this->getTemplateName('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
         $this->getTemplateName('update.html')->shouldReturn('SyliusWebBundle:Product:update.html.twig');
-
         $this->getTemplateName('custom.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
+    }
+
+    function it_generates_view_template(Parameters $parameters)
+    {
+        $parameters->get('template', 'SyliusWebBundle:Product:create.html.twig')
+            ->willReturn('SyliusWebBundle:Product:create.html.twig');
+        $this->getTemplate('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
+
+        $parameters->get('template', 'SyliusWebBundle:Product:create.html.twig')
+            ->willReturn('MyBundleWebBundle:Product:create.html.twig');
+        $this->getTemplate('create.html')->shouldReturn('MyBundleWebBundle:Product:create.html.twig');
+    }
+
+    function it_generates_form_type(Parameters $parameters)
+    {
+        $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
+        $this->getFormType()->shouldReturn('sylius_product');
+
+        $parameters->get('form', 'sylius_product')->willReturn('sylius_variant');
+        $this->getFormType()->shouldReturn('sylius_variant');
     }
 
     function it_generates_route_names()
@@ -81,247 +154,193 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRouteName('custom')->shouldReturn('sylius_product_custom');
     }
 
-    function its_not_sortable_by_default($request)
+    function it_generates_redirect_route(Parameters $parameters)
     {
-        $this->setRequest($request);
-        $this->isSortable()->shouldReturn(false);
+        $parameters->get('redirect')->willReturn(null);
+        $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
+
+        $parameters->get('redirect')->willReturn(array('route' => 'myRoute'));
+        $this->getRedirectRoute('show')->shouldReturn('myRoute');
+
+        $parameters->get('redirect')->willReturn('myRoute');
+        $this->getRedirectRoute('custom')->shouldReturn('myRoute');
     }
 
-    function its_not_filterable_by_default($request)
+    function it_returns_array_as_redirect_parameters(Parameters $parameters, ParametersParser $parser)
     {
-        $this->setRequest($request);
-        $this->isFilterable()->shouldReturn(false);
+        $parameters->get('redirect')->willReturn(null);
+        $this->getRedirectParameters()->shouldReturn(array());
+
+        $parameters->get('redirect')->willReturn('string');
+        $this->getRedirectParameters()->shouldReturn(array());
+
+        $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
+        $this->getRedirectParameters()->shouldReturn(array('myParameter'));
+
+        $params = array('myParameter');
+        $parameters->get('redirect')->willReturn(array('parameters' => array('myParameter')));
+        $parser->process($params, 'resource')->willReturn($params);
+        $this->getRedirectParameters('resource')->shouldReturn($params);
     }
 
-    function it_has_limit_equal_to_10_by_default($request)
+    function it_checks_limit_is_enable(Parameters $parameters)
     {
-        $this->setRequest($request);
+        $parameters->get('limit', Argument::any())->willReturn(10);
+        $this->isLimited()->shouldReturn(true);
+
+        $parameters->get('limit', Argument::any())->willReturn(null);
+        $this->isLimited()->shouldReturn(false);
+    }
+
+    function it_has_limit_parameter(Parameters $parameters)
+    {
+        $parameters->get('limit', false)->willReturn(true);
+        $parameters->get('limit', 10)->willReturn(10);
         $this->getLimit()->shouldReturn(10);
-    }
 
-    function its_paginated_by_default($request)
-    {
-        $this->setRequest($request);
-        $this->isPaginated()->shouldReturn(true);
-    }
-
-    function it_has_limit_equal_to_null_if_limit_is_set_to_false($request)
-    {
-        $request->attributes->set('_sylius', array('limit' => false));
-        $this->setRequest($request);
-
+        $parameters->get('limit', false)->willReturn(false);
+        $parameters->get('limit', 10)->willReturn(null);
         $this->getLimit()->shouldReturn(null);
     }
 
-    function its_pagination_max_per_page_is_equal_to_10_by_default($request)
+    function it_checks_paginate_is_enable(Parameters $parameters)
     {
-        $this->setRequest($request);
-        $this->getPaginationMaxPerPage()->shouldReturn(10);
-    }
+        $parameters->get('paginate', Argument::any())->willReturn(10);
+        $this->isPaginated()->shouldReturn(true);
 
-    function its_api_request_when_format_is_not_html($request)
-    {
-        $this->setRequest($request);
-
-        $request->getRequestFormat()->willReturn('html');
-        $this->isApiRequest()->shouldReturn(false);
-
-        $request->getRequestFormat()->willReturn('xml');
-        $this->isApiRequest()->shouldReturn(true);
-
-        $request->getRequestFormat()->willReturn('json');
-        $this->isApiRequest()->shouldReturn(true);
-    }
-
-    function it_generates_view_template_by_default($request)
-    {
-        $this->setRequest($request);
-        $this->getTemplate('create.html')->shouldReturn('SyliusWebBundle:Product:create.html.twig');
-    }
-
-    function it_gets_view_template_from_request_attributes_if_available($request)
-    {
-        $request->attributes->set('_sylius', array('template' => 'SyliusWebBundle:Product:custom.html.twig'));
-        $this->setRequest($request);
-
-        $this->getTemplate('create.html')->shouldReturn('SyliusWebBundle:Product:custom.html.twig');
-    }
-
-    function it_generates_form_type_by_default($request)
-    {
-        $this->setRequest($request);
-        $this->getFormType()->shouldReturn('sylius_product');
-    }
-
-    function it_gets_form_type_from_request_attributes_if_available($request)
-    {
-        $request->attributes->set('_sylius', array('form' => 'sylius_product_custom'));
-        $this->setRequest($request);
-
-        $this->getFormType()->shouldReturn('sylius_product_custom');
-    }
-
-    function it_generates_redirect_route_by_default($request)
-    {
-        $this->setRequest($request);
-
-        $this->getRedirectRoute('index')->shouldReturn('sylius_product_index');
-        $this->getRedirectRoute('show')->shouldReturn('sylius_product_show');
-        $this->getRedirectRoute('custom')->shouldReturn('sylius_product_custom');
-    }
-
-    function it_gets_redirect_route_from_request_attributes_if_available($request)
-    {
-        $request->attributes->set('_sylius', array('redirect' => 'sylius_product_custom'));
-        $this->setRequest($request);
-
-        $this->getRedirectRoute('index')->shouldReturn('sylius_product_custom');
-    }
-
-    function it_returns_empty_array_as_redirect_parameters_by_default($request)
-    {
-        $this->setRequest($request);
-        $this->getRedirectParameters()->shouldReturn(array());
-    }
-
-    function it_gets_redirect_route_and_parameters_from_request_attributes($request)
-    {
-        $redirect = array(
-            'route'      => 'sylius_list',
-            'parameters' => array('id' => 1)
-        );
-
-        $request->attributes->set('_sylius', array('redirect' => $redirect));
-        $this->setRequest($request);
-
-        $this->getRedirectRoute('index')->shouldReturn('sylius_list');
-        $this->getRedirectParameters()->shouldReturn(array('id' => 1));
-    }
-
-    function it_gets_criteria_from_request_attributes($request)
-    {
-        $request->attributes->set('_sylius', array('criteria' => array('enabled' => false)));
-        $this->setRequest($request);
-
-        $this->getCriteria()->shouldReturn(array('enabled' => false));
-    }
-
-    function it_gets_criteria_from_request_if_resources_are_filterable($request)
-    {
-        $request->get('criteria', Argument::any())->shouldBeCalled()->willReturn(array('locked' => false));
-        $request->attributes->set('_sylius', array(
-            'filterable' => true,
-            'criteria'   => array('enabled' => false)
-        ));
-
-        $this->setRequest($request);
-
-        $this->getCriteria()->shouldReturn(array('enabled' => false, 'locked' => false));
-    }
-
-    function it_does_not_get_criteria_from_request_if_resources_are_not_filterable($request)
-    {
-        $request->get('criteria', Argument::any())->shouldNotBeCalled();
-        $request->attributes->set('_sylius', array(
-            'filterable' => false,
-            'criteria'   => array('enabled' => false)
-        ));
-
-        $this->setRequest($request);
-
-        $this->getCriteria()->shouldReturn(array('enabled' => false));
-    }
-
-    function it_gets_sorting_from_request_if_resources_are_sortable($request)
-    {
-        $request->get('sorting', Argument::any())->willReturn(array('createdAt' => 'desc'));
-        $request->attributes->set('_sylius', array(
-            'sortable' => true,
-            'sorting'  => array('name' => 'asc')
-        ));
-
-        $this->setRequest($request);
-
-        $this->getSorting()->shouldReturn(array('name' => 'asc', 'createdAt' => 'desc'));
-    }
-
-    function it_does_not_get_sorting_from_request_if_resources_are_not_sortable($request)
-    {
-        $request->get('sorting', Argument::any())->shouldNotBeCalled();
-        $request->attributes->set('_sylius', array(
-            'sortable' => false,
-            'sorting'  => array('name' => 'asc')
-        ));
-
-        $this->setRequest($request);
-
-        $this->getSorting()->shouldReturn(array('name' => 'asc'));
-    }
-
-    function it_gets_sorting_from_request_attributes($request)
-    {
-        $request->attributes->set('_sylius', array('sorting' => array('createdAt' => 'asc')));
-        $this->setRequest($request);
-
-        $this->getSorting()->shouldReturn(array('createdAt' => 'asc'));
-    }
-
-    function it_is_not_paginated_if_paginate_option_is_set_to_false($request)
-    {
-        $request->attributes->set('_sylius', array('paginate' => false));
-        $this->setRequest($request);
-
+        $parameters->get('paginate', Argument::any())->willReturn(null);
         $this->isPaginated()->shouldReturn(false);
     }
 
-    function it_gets_pagination_max_per_page_from_request_attributes($request)
+    function it_has_paginate_parameter(Parameters $parameters)
     {
-        $request->attributes->set('_sylius', array('paginate' => 25));
-        $this->setRequest($request);
+        $parameters->get('paginate', 10)->willReturn(20);
+        $this->getPaginationMaxPerPage()->shouldReturn(20);
 
-        $this->getPaginationMaxPerPage()->shouldReturn(25);
+        $parameters->get('paginate', 10)->willReturn(10);
+        $this->getPaginationMaxPerPage()->shouldReturn(10);
     }
 
-    function it_gets_limit_from_request_attributes($request)
+    function it_checks_if_the_resource_is_filterable(Parameters $parameters)
     {
-        $request->attributes->set('_sylius', array('limit' => 20));
-        $this->setRequest($request);
+        $parameters->get('filterable', Argument::any())->willReturn(true);
+        $this->isFilterable()->shouldReturn(true);
 
-        $this->getLimit()->shouldReturn(20);
+        $parameters->get('filterable', Argument::any())->willReturn(null);
+        $this->isFilterable()->shouldReturn(false);
     }
 
-    function it_returns_given_method_by_default($request)
+    function it_has_criteria_parameter(Parameters $parameters, Request $request)
     {
-        $this->setRequest($request);
+        $defaultcriteria = array('property' => 'value');
+        $criteria = array('property' => 'myValue');
 
-        $this->getMethod('createPaginator')->shouldReturn('createPaginator');
+        $parameters->get('filterable', false)->willReturn(true);
+        $parameters->get('criteria', Argument::any())->willReturn($criteria);
+        $request->get('criteria', array())->willReturn(array());
+        $this->getCriteria()->shouldReturn($criteria);
+
+        $parameters->get('filterable', false)->willReturn(true);
+        $parameters->get('criteria', array())->willReturn(array());
+        $request->get('criteria', array())->willReturn(array());
+        $this->getCriteria($defaultcriteria)->shouldReturn($defaultcriteria);
+
+        $parameters->get('filterable', false)->willReturn(true);
+        $parameters->get('criteria', $criteria)->willReturn($criteria);
+        $request->get('criteria', array())->willReturn($criteria);
+        $this->getCriteria()->shouldReturn($criteria);
+    }
+
+    function it_checks_if_the_resource_is_sortable(Parameters $parameters)
+    {
+        $parameters->get('sortable', Argument::any())->willReturn(true);
+        $this->isSortable()->shouldReturn(true);
+
+        $parameters->get('sortable', Argument::any())->willReturn(null);
+        $this->isSortable()->shouldReturn(false);
+    }
+
+    function it_has_sorting_parameter(Parameters $parameters, Request $request)
+    {
+        $defaulSorting = array('property' => 'desc');
+        $sorting = array('property' => 'asc');
+
+        $parameters->get('sortable', false)->willReturn(true);
+        $parameters->get('sorting', array())->willReturn($sorting);
+        $request->get('sorting', array())->willReturn(array());
+        $this->getSorting()->shouldReturn($sorting);
+
+        $parameters->get('sortable', false)->willReturn(true);
+        $parameters->get('sorting', array())->willReturn(array());
+        $request->get('sorting', array())->willReturn(array());
+        $this->getSorting($defaulSorting)->shouldReturn($defaulSorting);
+
+        $parameters->get('sortable', false)->willReturn(true);
+        $parameters->get('sorting', $sorting)->willReturn($sorting);
+        $request->get('sorting', array())->willReturn($sorting);
+        $this->getSorting($defaulSorting)->shouldReturn($sorting);
+    }
+
+    function it_has_method_parameter(Parameters $parameters)
+    {
+        $parameters->get('method', 'myMethod')->willReturn('myMethod');
+        $this->getMethod('myMethod')->shouldReturn('myMethod');
+
+        $parameters->get('method', 'findBy')->willReturn('findBy');
         $this->getMethod('findBy')->shouldReturn('findBy');
     }
 
-    function it_gets_method_from_request_attributes_if_available($request)
+    function it_has_arguments_parameter(Parameters $parameters)
     {
-        $request->attributes->set('_sylius', array('method' => 'findLatest'));
-        $this->setRequest($request);
-
-        $this->getMethod('findBy')->shouldReturn('findLatest');
-    }
-
-    function it_returns_empty_array_as_method_arguments_by_default($request)
-    {
-        $this->setRequest($request);
+        $defaultArguments = array('property' => 'value');
+        $parameters->get('arguments', array())->willReturn(array());
         $this->getArguments()->shouldReturn(array());
+
+        $parameters->get('arguments', $defaultArguments)->willReturn($defaultArguments);
+        $this->getArguments($defaultArguments)->shouldReturn($defaultArguments);
+
+        $arguments = array('property' => 'myValue');
+        $parameters->get('arguments', $defaultArguments)->willReturn($arguments);
+        $this->getArguments($defaultArguments)->shouldReturn($arguments);
     }
 
-    function it_gets_method_and_arguments_from_request_attributes($request)
+    function it_has_factory_method_parameter(Parameters $parameters)
     {
-        $request->attributes->set('_sylius', array(
-            'method'    => 'findLatest',
-            'arguments' => array(9)
-        ));
+        $parameters->get('factory', array('method' => 'myDefaultMethod'))
+            ->willReturn(array('method' => 'myDefaultMethod'));
+        $this->getFactoryMethod('myDefaultMethod')->shouldReturn('myDefaultMethod');
 
-        $this->setRequest($request);
+        $parameters->get('factory', array('method' => 'myDefaultMethod'))
+            ->willReturn('myMethod');
+        $this->getFactoryMethod('myDefaultMethod')->shouldReturn('myMethod');
+    }
 
-        $this->getMethod('findOneBy')->shouldReturn('findLatest');
-        $this->getArguments()->shouldReturn(array(9));
+    function it_has_factory_arguments_parameter(Parameters $parameters)
+    {
+        $defaultArguments = array('arguments' => 'value');
+        $parameters->get('factory', array())->willReturn($defaultArguments);
+        $this->getFactoryArguments($defaultArguments)->shouldReturn('value');
+
+        $arguments = array('arguments' => 'myValue');
+        $parameters->get('factory', array())->willReturn($arguments);
+        $this->getFactoryArguments($defaultArguments)->shouldReturn('myValue');
+    }
+
+    function it_has_flash_message_parameter(Parameters $parameters)
+    {
+        $parameters->get('flash', 'sylius.product.message')->willReturn('sylius.product.message');
+        $this->getFlashMessage('message')->shouldReturn('sylius.product.message');
+
+        $parameters->get('flash', 'sylius.product.flash')->willReturn('sylius.product.myMessage');
+        $this->getFlashMessage('flash')->shouldReturn('sylius.product.myMessage');
+    }
+
+    function it_has_sortable_position_parameter(Parameters $parameters)
+    {
+        $parameters->get('sortable_position', 'position')->willReturn('position');
+        $this->getSortablePosition()->shouldReturn('position');
+
+        $parameters->get('sortable_position', 'position')->willReturn('myPosition');
+        $this->getSortablePosition()->shouldReturn('myPosition');
     }
 }

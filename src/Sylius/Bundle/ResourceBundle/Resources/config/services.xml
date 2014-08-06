@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory</parameter>
         <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
+        <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
@@ -26,6 +27,7 @@
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
+        <parameter key="sylius.event_subscriber.kernel_request.class">Sylius\Bundle\ResourceBundle\EventListener\KernelRequestSubscriber</parameter>
 
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
@@ -34,10 +36,12 @@
     <services>
         <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
             <argument type="service" id="sylius.controller.parameters_parser" />
+            <argument>%sylius.resource.settings%</argument>
         </service>
         <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
             <argument type="service" id="sylius.expresssion_language" />
         </service>
+        <service id="sylius.controller.parameters" class="%sylius.controller.parameters.class%" />
 
         <service id="sylius.expresssion_language" class="%sylius.expression_language.class%">
             <call method="setContainer">
@@ -54,6 +58,9 @@
             <tag name="doctrine_mongodb.odm.event_subscriber" />
         </service>
         <service id="sylius.event_subscriber.kernel_controller" class="%sylius.event_subscriber.kernel_controller.class%">
+            <argument type="service" id="sylius.controller.parameters_parser" />
+            <argument type="service" id="sylius.controller.parameters" />
+            <argument>%sylius.resource.settings%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
 
