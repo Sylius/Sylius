@@ -28,5 +28,6 @@ Please note that this bundle **is not an admin generator**. It won't create form
    Creating resource <create_resource>
    Updating resource <update_resource>
    Deleting resource <delete_resource>
+   Managing flash messages <flash>
    Defining custom action <custom_actions>
    summary
