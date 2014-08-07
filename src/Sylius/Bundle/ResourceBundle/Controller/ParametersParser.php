@@ -35,29 +35,32 @@ class ParametersParser
     /**
      * @param array   $parameters
      * @param Request $request
-     * @param array   $settings
      *
      * @return array
      */
-    public function parse(array $parameters, Request $request, array $settings = array())
+    public function parse(array $parameters, Request $request)
     {
+        if (!isset($parameterNames)) {
+            $parameterNames = array();
+        }
+
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
-                $parameters[$key] = $this->parse($value, $request, $settings);
+                list($parameters[$key] , $parameterNames[$key]) = $this->parse($value, $request);
             }
 
             if (is_string($value) && 0 === strpos($value, '$')) {
                 $parameterName = substr($value, 1);
                 $parameters[$key] = $request->get($parameterName);
-                $parameters['parameter_name'][$key] = $parameterName;
+                $parameterNames[$key] = $parameterName;
             }
 
             if (is_string($value) && 0 === strpos($value, 'expr:')) {
-                $parameters[$key] = $this->expression->evaluate(substr($value, 5));
+                $parameters = $this->expression->evaluate(substr($value, 5));
             }
         }
 
-        return $parameters;
+        return array($parameters, $parameterNames);
     }
 
     /**

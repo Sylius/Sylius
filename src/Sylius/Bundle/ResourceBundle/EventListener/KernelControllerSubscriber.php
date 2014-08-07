@@ -73,9 +73,10 @@ class KernelControllerSubscriber implements EventSubscriberInterface
 
             $parameters = $request->attributes->get('_sylius', array());
             $parameters = array_merge($this->settings, $parameters);
-            $parameters = $this->parametersParser->parse($parameters, $request);
+            list($parameters , $parameterNames) = $this->parametersParser->parse($parameters, $request);
 
             $this->parameters->replace($parameters);
+            $this->parameters->set('paramater_name', $parameterNames);
 
             $controller[0]->getConfiguration()->setRequest($request);
             $controller[0]->getConfiguration()->setParameters($this->parameters);
