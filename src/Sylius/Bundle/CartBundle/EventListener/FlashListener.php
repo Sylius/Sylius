@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\Event\FlashEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

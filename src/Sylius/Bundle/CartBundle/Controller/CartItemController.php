@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
-use Sylius\Bundle\CartBundle\Event\CartItemEvent;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\Event\CartItemEvent;
+use Sylius\Component\Cart\Event\FlashEvent;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;

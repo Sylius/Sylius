@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\Event\FlashEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -40,25 +40,21 @@ class FlashListenerSpec extends ObjectBehavior
 
         $event
             ->getMessage()
-            ->shouldBeCalled()
             ->willReturn($message)
         ;
 
         $event
             ->getName()
-            ->shouldBeCalled()
             ->willReturn(SyliusCartEvents::ITEM_ADD_ERROR)
         ;
 
         $session
             ->getBag(Argument::exact('flashes'))
-            ->shouldBeCalled()
             ->willReturn($flashBag)
         ;
 
         $flashBag
             ->add('error', $message)
-            ->shouldBeCalled()
             ->willReturn(null)
         ;
 
@@ -73,25 +69,21 @@ class FlashListenerSpec extends ObjectBehavior
 
         $event
             ->getMessage()
-            ->shouldBeCalled()
             ->willReturn($message)
         ;
 
         $event
             ->getName()
-            ->shouldBeCalled()
             ->willReturn(SyliusCartEvents::ITEM_ADD_COMPLETED)
         ;
 
         $session
             ->getBag(Argument::exact('flashes'))
-            ->shouldBeCalled()
             ->willReturn($flashBag)
         ;
 
         $flashBag
             ->add('success', $message)
-            ->shouldBeCalled()
             ->willReturn(null)
         ;
 
@@ -107,17 +99,14 @@ class FlashListenerSpec extends ObjectBehavior
         FlashBag $flashBag
     ) {
         $messages = array(SyliusCartEvents::ITEM_ADD_ERROR => 'Error occurred while adding item to cart.');
-        $this->messages = $messages;
 
         $event
             ->getMessage()
-            ->shouldBeCalled()
             ->willReturn(null)
         ;
 
         $event
             ->getName()
-            ->shouldBeCalled()
             ->willReturn(SyliusCartEvents::ITEM_ADD_ERROR)
         ;
 
@@ -129,13 +118,11 @@ class FlashListenerSpec extends ObjectBehavior
 
         $translator
             ->trans(Argument::cetera())
-            ->shouldBeCalled()
             ->willReturn($messages[SyliusCartEvents::ITEM_ADD_ERROR])
         ;
 
         $flashBag
             ->add('error', $messages[SyliusCartEvents::ITEM_ADD_ERROR])
-            ->shouldBeCalled()
             ->willReturn(null)
         ;
 
@@ -151,23 +138,19 @@ class FlashListenerSpec extends ObjectBehavior
         FlashBag $flashBag
     ) {
         $messages = array(SyliusCartEvents::ITEM_ADD_COMPLETED => 'The cart has been successfully updated.');
-        $this->messages = $messages;
 
         $event
             ->getMessage()
-            ->shouldBeCalled()
             ->willReturn(null)
         ;
 
         $event
             ->getName()
-            ->shouldBeCalled()
             ->willReturn(SyliusCartEvents::ITEM_ADD_COMPLETED)
         ;
 
         $session
             ->getBag(Argument::exact('flashes'))
-            ->shouldBeCalled()
             ->willReturn($flashBag)
         ;
 
@@ -179,7 +162,6 @@ class FlashListenerSpec extends ObjectBehavior
 
         $flashBag
             ->add('success', $messages[SyliusCartEvents::ITEM_ADD_COMPLETED])
-            ->shouldBeCalled()
             ->willReturn(null)
         ;
 

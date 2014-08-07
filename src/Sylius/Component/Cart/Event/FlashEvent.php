@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Event;
+namespace Sylius\Component\Cart\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
