@@ -12,18 +12,18 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeValueFormListener;
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Product\Model\AttributeInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Attribute value form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AttributeValueType extends AbstractType
+class AttributeValueType extends AbstractResourceType
 {
     /**
      * Attributes subject name.
@@ -33,31 +33,17 @@ class AttributeValueType extends AbstractType
     protected $subjectName;
 
     /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
      * Constructor.
      *
-     * @param string $subjectName
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $subjectName
      */
-    public function __construct($subjectName, $dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, $subjectName)
     {
+        parent::__construct($dataClass, $validationGroups);
+
         $this->subjectName = $subjectName;
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -90,18 +76,6 @@ class AttributeValueType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups
-            ))
-        ;
-    }
 
     /**
      * {@inheritdoc}

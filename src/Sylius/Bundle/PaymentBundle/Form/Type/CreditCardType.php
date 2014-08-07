@@ -11,26 +11,16 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Credit Card Form Type
  *
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
-class CreditCardType extends AbstractType
+class CreditCardType extends AbstractResourceType
 {
-    protected $dataClass;
-    protected $validationGroups;
-
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -58,16 +48,6 @@ class CreditCardType extends AbstractType
                   'label'   => 'sylius.form.credit_card.expiry_year',
                   'choices' =>  $this->getViableYears()
               ))
-        ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-            ))
         ;
     }
 

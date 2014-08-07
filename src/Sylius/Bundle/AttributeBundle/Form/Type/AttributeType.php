@@ -12,10 +12,9 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
 use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeTypes;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Attribute type.
@@ -23,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class AttributeType extends AbstractType
+class AttributeType extends AbstractResourceType
 {
     /**
      * Subject name.
@@ -33,31 +32,17 @@ class AttributeType extends AbstractType
     protected $subjectName;
 
     /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
      * Constructor.
      *
-     * @param string $subjectName
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $subjectName
      */
-    public function __construct($subjectName, $dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, $subjectName)
     {
+       parent::__construct($dataClass, $validationGroups);
+
         $this->subjectName = $subjectName;
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -76,19 +61,6 @@ class AttributeType extends AbstractType
                 'choices' => AttributeTypes::getChoices()
             ))
             ->addEventSubscriber(new BuildAttributeFormChoicesListener($builder->getFormFactory()))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups
-            ))
         ;
     }
 

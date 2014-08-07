@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Zone form type.
@@ -22,22 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ZoneType extends AbstractType
+class ZoneType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var string[]
-     */
-    protected $validationGroups;
-
     /**
      * Scopes.
      *
@@ -54,8 +39,8 @@ class ZoneType extends AbstractType
      */
     public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
         $this->scopeChoices = $scopeChoices;
     }
 
@@ -82,19 +67,6 @@ class ZoneType extends AbstractType
             ))
             ->add('members', 'sylius_zone_member_collection', array(
                 'label' => 'sylius.form.zone.members'
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }
