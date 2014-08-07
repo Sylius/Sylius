@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'sylius.order_item.product'|trans }}</th>
+            <th>{{ 'sylius.order_item.quantity'|trans }}</th>
+            <th class="text-center">{{ 'sylius.order_item.unit_price'|trans }}</th>
+            <th class="text-right">{{ 'sylius.order_item.total'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items %}
+            {% include 'SyliusWebBundle:Backend/Order/Summary:_item.html.twig' %}
+        {% else %}
+        <tr>
+            <td colspan="6">
+                <hr />
+                <div class="alert alert-info">{{ 'sylius.order.no_items'|trans }}</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        {% include 'SyliusWebBundle:Backend/Order/Summary:_itemsTotal.html.twig' %}
+        {% include 'SyliusWebBundle:Backend/Order/Summary:_taxes.html.twig' %}
+        {% include 'SyliusWebBundle:Backend/Order/Summary:_shipping.html.twig' %}
+        {% include 'SyliusWebBundle:Backend/Order/Summary:_promotions.html.twig' %}
+        {% include 'SyliusWebBundle:Backend/Order/Summary:_total.html.twig' %}
+    </tfoot>
+</table>

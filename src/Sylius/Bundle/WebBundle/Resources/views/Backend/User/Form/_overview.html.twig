@@ -1,0 +1,57 @@
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
+
+<div class="tab-pane active" id="overview">
+<div class="box box-green">
+    <h4 class="box-header">{{ 'sylius.user.personal_information'|trans }}</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-headless">
+                <tbody>
+                    <tr>
+                        <th>{{ 'sylius.user.id'|trans }}</th>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'sylius.user.last_logged_in'|trans }}</th>
+                        <td>{{ user.lastLogin|date }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'sylius.user.registration_date'|trans }}</th>
+                        <td>{{ user.createdAt|date }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'sylius.user.enabled'|trans }}</th>
+                        <td>{{ labels.boolean(user.enabled) }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'sylius.user.groups'|trans }}</th>
+                        <td>
+                            {% if user.groups|length > 0 %}
+                            <ul>
+                                {% for group in user.groups %}
+                                <li><a href="{{ path('sylius_backend_group_update', {'id': group.id}) }}">{{ group.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                {{ 'sylius.user.no_groups'|trans|raw }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            {% if user.billingAddress is not empty %}
+            <h4 class="simple-heading">{{ 'sylius.user.billing_address'|trans }}</h4>
+            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.billingAddress} %}
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            {% if user.shippingAddress is not empty %}
+            <h4 class="simple-heading">{{ 'sylius.user.shipping_address'|trans }}</h4>
+            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.shippingAddress} %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,4 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.create(path('sylius_backend_tax_category_create'), 'sylius.tax_category.create'|trans) }}
+{{ buttons.manage(path('sylius_backend_tax_rate_index'), 'sylius.tax_rate.manage'|trans) }}

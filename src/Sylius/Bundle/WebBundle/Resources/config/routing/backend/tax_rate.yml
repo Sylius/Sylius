@@ -19,7 +19,7 @@ sylius_backend_tax_rate_create:
         _controller: sylius.controller.tax_rate:createAction
         _sylius:
             template: SyliusWebBundle:Backend/TaxRate:create.html.twig
-            redirect: sylius_backend_tax_rate_show
+            redirect: sylius_backend_tax_rate_update
 
 sylius_backend_tax_rate_update:
     pattern: /{id}/edit
@@ -28,7 +28,7 @@ sylius_backend_tax_rate_update:
         _controller: sylius.controller.tax_rate:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/TaxRate:update.html.twig
-            redirect: sylius_backend_tax_rate_show
+            redirect: sylius_backend_tax_rate_update
 
 sylius_backend_tax_rate_delete:
     pattern: /{id}
@@ -38,11 +38,3 @@ sylius_backend_tax_rate_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_tax_rate_index
-
-sylius_backend_tax_rate_show:
-    pattern: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.tax_rate:showAction
-        _sylius:
-            template: SyliusWebBundle:Backend/TaxRate:show.html.twig

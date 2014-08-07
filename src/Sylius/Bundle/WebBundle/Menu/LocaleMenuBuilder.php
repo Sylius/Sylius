@@ -13,11 +13,10 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Sylius\Bundle\UiBundle\Menu\MenuBuilder;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Menu builder for selecting locales.
@@ -36,21 +35,17 @@ class LocaleMenuBuilder extends MenuBuilder
     /**
      * Constructor.
      *
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param LocaleProviderInterface  $localeProvider
+     * @param FactoryInterface          $factory
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param LocaleProviderInterface   $localeProvider
      */
     public function __construct(
-        FactoryInterface          $factory,
-        SecurityContextInterface  $securityContext,
-        TranslatorInterface       $translator,
-        EventDispatcherInterface  $eventDispatcher,
-        LocaleProviderInterface   $localeProvider
+        FactoryInterface         $factory,
+        EventDispatcherInterface $eventDispatcher,
+        LocaleProviderInterface  $localeProvider
     )
     {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
+        parent::__construct($factory, $eventDispatcher);
 
         $this->localeProvider = $localeProvider;
     }

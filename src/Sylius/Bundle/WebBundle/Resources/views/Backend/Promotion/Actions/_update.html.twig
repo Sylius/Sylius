@@ -1,0 +1,10 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{% if promotion.couponBased %}
+{{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
+{{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}
+{{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotion.id}), 'sylius.promotion_coupon.generate'|trans) }}
+{% endif %}
+
+{{ buttons.form_update() }}
+{{ buttons.form_cancel() }}

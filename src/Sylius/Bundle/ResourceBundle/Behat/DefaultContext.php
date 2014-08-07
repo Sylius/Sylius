@@ -222,6 +222,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             $route = str_replace('sylius_', 'sylius_backend_', $route);
         }
 
+        if (null === $routes->get($route)) {
+            $route = str_replace('sylius_backend_backend', 'sylius_backend', $route);
+            $route = str_replace('show', 'update', $route);
+        }
+
         $route = str_replace(array_keys($this->actions), array_values($this->actions), $route);
         $route = str_replace(' ', '_', $route);
 

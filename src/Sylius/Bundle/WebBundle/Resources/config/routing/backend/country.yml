@@ -18,7 +18,7 @@ sylius_backend_country_create:
         _controller: sylius.controller.country:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Country:create.html.twig
-            redirect: sylius_backend_country_show
+            redirect: sylius_backend_country_update
 
 sylius_backend_country_update:
     pattern: /{id}/edit
@@ -27,7 +27,7 @@ sylius_backend_country_update:
         _controller: sylius.controller.country:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Country:update.html.twig
-            redirect: sylius_backend_country_show
+            redirect: sylius_backend_country_update
 
 sylius_backend_country_delete:
     pattern: /{id}
@@ -37,11 +37,3 @@ sylius_backend_country_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_country_index
-
-sylius_backend_country_show:
-    pattern: /{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.country:showAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Country:show.html.twig

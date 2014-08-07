@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Group:macros.html.twig' import list  %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.group.index'|trans }}</li>
@@ -12,16 +12,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_group_create'), 'sylius.group.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
-    </div>
-    <h1><i class="glyphicon glyphicon-home"></i> {{ 'sylius.group.index_header'|trans|raw }}</h1>
-</div>
+{{ page.header('group.index', 'group', 'SyliusWebBundle:Backend/Group/Actions:_index.html.twig') }}
 
-{{ pagination(groups) }}
+{{ pagination.standard(groups) }}
 {{ list(groups)  }}
-{{ pagination(groups) }}
-
+{{ pagination.standard(groups) }}
 {% endblock %}

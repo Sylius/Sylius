@@ -1,7 +1,7 @@
 {% macro list(countries) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% if countries|length > 0 %}
 <table class="table table-condensed">
@@ -17,8 +17,8 @@
     {% for country in countries %}
         <tr id="{{ country.id }}">
             <td>{{ country.id }}</td>
-            <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
-            <td><span class="label label-primary">{{ country.isoName }}</span></td>
+            <td><a href="{{ path('sylius_backend_country_update', {'id': country.id}) }}">{{ country.name }}</a></td>
+            <td><img class="flag flag-{{ country.isoName|lower }}" /> {{ country.isoName }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}

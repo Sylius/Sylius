@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Configuration implements ConfigurationInterface
 {

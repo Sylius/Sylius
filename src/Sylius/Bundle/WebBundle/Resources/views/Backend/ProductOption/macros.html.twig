@@ -1,7 +1,7 @@
 {% macro list(options) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
 
 {% if options|length > 0 %}
     <table class="table">
@@ -10,7 +10,7 @@
                 <th>{{ sylius_resource_sort('id', '#id') }}</th>
                 <th>{{ sylius_resource_sort('name', 'sylius.product_option.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('presentation', 'sylius.product_option.presentation'|trans) }}</th>
-                <th>{{ 'sylius.option.values'|trans }}</th>
+                <th>{{ 'sylius.product_option.values'|trans }}</th>
                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.product_option.updated_at'|trans) }}</th>
                 <th></th>
             </tr>

@@ -16,7 +16,7 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
 /**
  * Sylius locale Twig helper.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class LocaleExtension extends \Twig_Extension
 {

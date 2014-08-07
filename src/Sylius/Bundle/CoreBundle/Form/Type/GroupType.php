@@ -29,6 +29,9 @@ class GroupType extends AbstractType
         $this->dataClass = $dataClass;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -36,12 +39,16 @@ class GroupType extends AbstractType
                 'label' => 'sylius.form.group.name'
             ))
             ->add('roles', 'list', array(
-                'label' => 'sylius.form.group.roles'
+                'required' => false,
+                'label'    => 'sylius.form.group.roles'
             ))
         ;
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -52,6 +59,10 @@ class GroupType extends AbstractType
         );
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_group';

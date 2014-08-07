@@ -12,6 +12,7 @@ web/bundles/*
 web/css/*
 web/js/*
 web/assets/compiled/*
+web/assets/vendor/*
 web/media/*
 
 bin/behat
@@ -23,4 +24,7 @@ bin/phpcrodm
 bin/phpcrodm.php
 bin/jackalope
 bin/phpunit
+bin/bowerphp
 vendor/*
+
+src/Sylius/Bundle/*/Resources/assets/vendor/*

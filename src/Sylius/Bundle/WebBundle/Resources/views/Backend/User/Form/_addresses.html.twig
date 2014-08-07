@@ -1,0 +1,33 @@
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+
+<div class="tab-pane" id="addresses">
+    {% for address in user.addresses %}
+    <div class="box">
+        <h4 class="box-header">
+            {{ address.fullName }}
+            <div class="pull-right">
+            {% if address == user.billingAddress %}
+                <span class="label label-primary">{{ 'sylius.user.billing_address'|trans }}</span>
+            {% endif %}
+            {% if address == user.shippingAddress %}
+                <span class="label label-warning">{{ 'sylius.user.shipping_address'|trans }}</span>
+            {% endif %}
+            </div>
+        </h4>
+        {% if address.company %}
+            {{ address.company }}<br/>
+        {% endif %}
+        {{ address.street }}<br/>
+        {{ address.city }}<br/>
+        {% if address.province %}
+            {{ address.province }}<br/>
+        {% endif %}
+        {{ address.country|upper }} {{ address.postcode }}
+    </div>
+    {% else %}
+    <div class="box">
+        <h4 class="box-header">{{ 'sylius.user.address_book'|trans }}</h4>
+        {{ alerts.info('sylius.user.no_addresses'|trans) }}
+    </div>
+    {% endfor %}
+</div>

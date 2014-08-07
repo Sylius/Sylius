@@ -45,4 +45,4 @@ sylius_backend_product_prototype_build:
         _controller: sylius.controller.product_prototype:buildAction
         _sylius:
             template: SyliusWebBundle:Backend/ProductPrototype:build.html.twig
-            redirect: sylius_backend_product_show
+            redirect: sylius_backend_product_update

@@ -1,0 +1,4 @@
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+
+{{ buttons.create(path('sylius_backend_payment_method_create'), 'sylius.payment_method.create'|trans) }}
+{{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}

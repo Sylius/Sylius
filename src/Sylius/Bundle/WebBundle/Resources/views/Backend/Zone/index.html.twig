@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 {% from 'SyliusWebBundle:Backend/Zone:macros.html.twig' import list %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.zone.index'|trans }}</li>
@@ -17,11 +17,11 @@
         {{ buttons.create(path('sylius_backend_zone_create'), 'sylius.zone.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_country_index'), 'sylius.country.manage'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.zone.index_header'|trans|raw }}</h1>
+    <h1><i class="fa fa-globe"></i> {{ 'sylius.zone.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(zones) }}
+{{ pagination.standard(zones) }}
 {{ list(zones) }}
-{{ pagination(zones) }}
+{{ pagination.standard(zones) }}
 
 {% endblock %}

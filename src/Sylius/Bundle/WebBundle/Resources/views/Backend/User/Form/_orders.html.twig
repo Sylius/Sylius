@@ -1,0 +1,3 @@
+<div class="tab-pane" id="orders">
+    {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}
+</div>

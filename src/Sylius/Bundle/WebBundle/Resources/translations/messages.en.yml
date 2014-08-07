@@ -35,6 +35,7 @@ sylius:
             number: Number :
             payment_mode: Payment mode :
             placed_at: Placed at %at%
+            payments: Payments
             shipment:
                 pending: Pending
                 ready: Ready since %at%
@@ -63,13 +64,12 @@ sylius:
     backend:
         alert:
             info: Information
+        dashboard_header: Administration dashboard <small>Overview of your store</small>
         dashboard:
             chart_order_count: Number of orders
             chart_order_total: Order value
-            header: Administration dashboard
             orders: Last week orders
             revenue: Last week revenue
-            subheader: Overview of your store
         logout: Logout
         quick_links:
             add_product: New product
@@ -77,7 +77,7 @@ sylius:
             products: Your products
             users: Users
         statistics:
-            0: This month's statistics
+            header: This month's statistics
             orders_this_month: Total orders
             registrations_this_month: Total registrations
             sales_this_month: Sales
@@ -107,6 +107,7 @@ sylius:
             index: Currencies
         general_settings: General Settings
         generate: Generate
+        history: History
         group:
             index: Groups
         inventory:
@@ -239,6 +240,7 @@ sylius:
     delete: delete
     deleted: Deleted
     edit: edit
+    save: Save
     move_up: move up
     move_down: move down
     email: E-Mail
@@ -291,8 +293,8 @@ sylius:
         roles: Roles
         update_header: Edit group
     hide_deleted: Hide deleted
+    show_history: History
     history:
-        0: History
         action: Action
         author: Author
         data: Data
@@ -360,8 +362,8 @@ sylius:
         no_shipping_charges: No shipping charges applied
         no_taxes: No taxes applied
         number: Number
-        payment: Payment
         payment_state: Payment state
+        payments: Payments
         payment_states:
             balance_due: Balance due
         promotion_total: Promotion total
@@ -435,6 +437,7 @@ sylius:
         index_header: Payments
         manage: Manage payments
         method: Method
+        history_header: History <small>Log of all changes</small>
         no_results: There are no payments configured.
         state:
             0: State
@@ -455,6 +458,7 @@ sylius:
         create_header: New payment method
         enabled: Is enabled?
         gateway: gateway
+        manage: Manage payment methods
         id: ID
         index_header: Payment methods
         name: Name
@@ -615,6 +619,7 @@ sylius:
     show: details
     show_all: Show all
     show_deleted: Show deleted
+    back_to_list: Back to list
     stockable:
         index_header: Inventory <small>Here you can see current stock levels</small>
         name: name
@@ -697,13 +702,19 @@ sylius:
             none: No OAuth accounts connected.
         order:
             no_results: There are no orders for this user to display.
-        orders: User orders
+        orders: Orders
         recent_header: Recent users
         registration_date: Registration date
         shipping_address: Shipping address
         show_header: User details
         update_header: Editing user
         username: Username
+        personal_information: Personal Information
+        account_details: Account Details
+        address_book: Account Details
+        last_logged_in: Last logged in
+        groups: Groups
+        no_groups: <i>Customer does not belong to any group...</i>
     variant:
         add_image: Add image
         availability: Availability
@@ -733,3 +744,6 @@ sylius:
         scope: Scope
     zone_member:
         members: Members
+    enabled: Enabled
+    disabled: Disabled
+    anonymous: Anonymous

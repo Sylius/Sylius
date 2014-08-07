@@ -1,0 +1,22 @@
+{% set variant = item.variant %}
+{% set product = variant.product %}
+
+<tr>
+    <td class="picture text-center" style="width: 130px;">
+        <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
+           title="View {{ product.name|escape('html_attr') }} details.">
+            <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="" class="imgmedia-object" />
+        </a>
+    </td>
+    <td>
+        <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"><strong>{{ product.name }}</strong></a><br>
+        <strong>{{ 'sylius.product.sku'|trans }}</strong>: {{ variant.sku|default('N/A') }}
+    </td>
+    <td class="quantity text-center">{{ item.quantity }}</td>
+    <td class="unit-price text-center">
+        {{ item.unitPrice|sylius_price(order.currency) }}
+    </td>
+    <td class="total text-right">
+        {{ item.total|sylius_price(order.currency) }}
+    </td>
+</tr>

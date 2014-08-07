@@ -1,8 +1,8 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.general_settings'|trans }}</li>
@@ -10,17 +10,20 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.settings.general_header'|trans|raw }}</h1>
-</div>
+{{ form_start(form, {'action': path('sylius_backend_general_settings'), 'method': 'POST', 'attr': {'class': 'form-horizontal'}}) }}
+
+{{ page.header('settings.general', 'cog', 'SyliusUiBundle:Form/Actions:_update.html.twig') }}
+
+{% include 'SyliusWebBundle:Backend/Settings:_nav.html.twig' %}
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_general_settings') }}" method="post" class="form-horizontal" novalidate>
-    {{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.meta_keywords, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.meta_description, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_rest(form) }}
-    {{ update() }}
-</form>
+<div class="box box-form">
+{{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
+{{ form_row(form.meta_keywords, {'attr': {'class': 'input-lg'}}) }}
+{{ form_row(form.meta_description, {'attr': {'class': 'input-lg'}}) }}
+{{ form_rest(form) }}
+</div>
+
+{{ form_end(form) }}
 {% endblock %}

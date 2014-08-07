@@ -1,7 +1,8 @@
 {% macro list(payment_methods) %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::alerts.html.twig' as alerts %}
+{% import 'SyliusUiBundle::buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle::labels.html.twig' as labels %}
 
 {% if payment_methods|length > 0 %}
 <table class="table">
@@ -20,14 +21,12 @@
         <tr id="{{ payment_method.id }}">
             <td>{{ payment_method.id }}</td>
             <td>
-                <strong>{{ payment_method.name }}</strong>
+                <a href="{{ path('sylius_backend_payment_method_update', {'id': payment_method.id}) }}"><strong>{{ payment_method.name }}</strong></a>
                 <p>{{ payment_method.description }}</p>
             </td>
-            <td><span class="label label-primary">{{ payment_method.gateway }}</span></td>
+            <td>{{ payment_method.gateway|humanize }}</td>
             <td>
-                <span class="label label-{{ payment_method.enabled ? 'success' : 'danger'}}">
-                    {{ payment_method.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                </span>
+                {{ labels.status(payment_method.enabled) }}
             </td>
             <td>{{ payment_method.updatedAt|date }}</td>
             <td>

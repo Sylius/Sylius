@@ -17,12 +17,6 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" type="text/css" />
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" type="text/css" />
-            {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-                'bundles/syliusweb/css/frontend.css'
-                'bundles/syliusweb/css/blueimp-gallery.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-            {% endstylesheets %}
         {% endblock %}
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -34,7 +28,7 @@
         <div class="container">
         {% block header %}
             <div class="masthead pull-right">
-                {{ knp_menu_render('sylius.frontend.main', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                {{ knp_menu_render('sylius.frontend.user', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
             <div class="locale-menu masthead pull-right">
                 {{ knp_menu_render('sylius.frontend.locale', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
@@ -62,7 +56,7 @@
             <div class="col-md-3" id="sidebar">
                 {% block sidebar %}
                 <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
-                {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+                {{ knp_menu_render('sylius.frontend.main', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
                 {{ sonata_block_render({'name': '/cms/blocks/contact'}) }}
 
@@ -97,30 +91,19 @@
             {% include 'SyliusWebBundle::gallery.html.twig' %}
         {% endblock %}
 
-        {# Confirmation modal #}
-        {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
-
         {% block footer %}
             <div class="footer">
                 <p class="text-muted">
                     &copy; Sylius, 2011 - {{ 'now'|date('Y') }}.
                 </p>
-                {{ knp_menu_render('sylius.frontend.social', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
         {% endblock %}
         </div>
 
         {# javascripts... #}
         {% block javascripts %}
-            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-        {% javascripts output='assets/compiled/frontend.js'
-            'bundles/syliusweb/js/jquery.blueimp-gallery.min.js'
-            'bundles/syliusweb/js/confirm-modal.js'
-            'bundles/syliusweb/js/frontend.js'
-        %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+            <script type="text/javascript" src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>

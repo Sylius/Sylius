@@ -1,0 +1,11 @@
+<div class="box">
+    <ul class="nav nav-pills nav-justified">
+        <li><a href="{{ path('sylius_backend_order_index') }}"><i class="fa fa-shopping-cart"></i> {{ 'sylius.backend.quick_links.orders'|trans }}</a></li>
+        <li><a href="{{ path('sylius_backend_user_index') }}"><i class="fa fa-user"></i> {{ 'sylius.backend.quick_links.users'|trans }}</a></li>
+    </ul>
+    <hr>
+    <ul class="nav nav-pills nav-justified">
+        <li><a href="{{ path('sylius_backend_product_index') }}"><i class="fa fa-folder-open"></i> {{ 'sylius.backend.quick_links.products'|trans }}</a></li>
+        <li><a href="{{ path('sylius_backend_product_create') }}"><i class="fa fa-plus"></i> {{ 'sylius.backend.quick_links.add_product'|trans }}</a></li>
+    </ul>
+</div>

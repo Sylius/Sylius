@@ -1,13 +1,12 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Backend/Product:macros.html.twig' import list as list_products %}
-{% from 'SyliusWebBundle:Backend/Taxon:macros.html.twig' import list as list_taxons %}
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-
 {% set taxonomy = taxon.taxonomy %}
 
-{% block topbar %}
+{% from 'SyliusWebBundle:Backend/Product:macros.html.twig' import list as list_products %}
+{% import 'SyliusUiBundle::page.html.twig' as page  %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
+
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
@@ -17,16 +16,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_taxonomy_index'), 'sylius.taxonomy.manage'|trans) }}
-    </div>
-    <h1><i class="glyphicon glyphicon-tags"></i> {{ 'sylius.taxon.product_index_header'|trans({'%name%': taxon.name})|raw }}</h1>
-</div>
+{{ page.header('taxon.product_index', 'list', 'SyliusWebBundle:Backend/Taxon/Actions:_productIndex.html.twig', {'taxonomy': taxonomy}) }}
 
-{{ pagination(products) }}
+{{ pagination.standard(products) }}
 {{ list_products(products) }}
-{{ pagination(products) }}
-
+{{ pagination.standard(products) }}
 {% endblock %}

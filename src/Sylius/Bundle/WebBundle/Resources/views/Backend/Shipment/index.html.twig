@@ -1,10 +1,10 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Shipment:macros.html.twig' import list %}
+{% import 'SyliusUiBundle::page.html.twig' as page %}
+{% import 'SyliusUiBundle::pagination.html.twig' as pagination %}
 
-{% block topbar %}
+{% block breadcrumb %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.shipment.index'|trans }}</li>
@@ -12,19 +12,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.order.manage'|trans) }}
-        {{ buttons.create(path('sylius_backend_shipping_category_index'), 'sylius.shipping_category.manage'|trans) }}
-        {{ buttons.create(path('sylius_backend_shipping_method_index'), 'sylius.shipping_method.manage'|trans) }}
-    </div>
-    <h1><i class="glyphicon glyphicon-plane"></i> {{ 'sylius.shipment.index_header'|trans|raw }}</h1>
-</div>
+{{ page.header('shipment.index', 'plane', 'SyliusWebBundle:Backend/Shipment/Actions:_index.html.twig') }}
 
-{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_shipment_filter', 'template': 'SyliusWebBundle:Backend/Shipment:filterForm.html.twig'})) %}
+{% render(controller('sylius.controller.form:filterAction', {'type': 'sylius_shipment_filter', 'template': 'SyliusWebBundle:Backend/Shipment:filterForm.html.twig'})) %}
 
-{{ pagination(shipments) }}
+{{ pagination.standard(shipments) }}
 {{ list(shipments) }}
-{{ pagination(shipments) }}
-
+{{ pagination.standard(shipments) }}
 {% endblock %}

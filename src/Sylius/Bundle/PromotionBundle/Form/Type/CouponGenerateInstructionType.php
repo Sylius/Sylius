@@ -38,7 +38,8 @@ class CouponGenerateInstructionType extends AbstractType
                 'label' => 'sylius.form.coupon_generate_instruction.amount'
             ))
             ->add('usageLimit', 'integer', array(
-                'label' => 'sylius.form.coupon_generate_instruction.usage_limit'
+                'required' => false,
+                'label'    => 'sylius.form.coupon_generate_instruction.usage_limit'
             ))
         ;
     }
