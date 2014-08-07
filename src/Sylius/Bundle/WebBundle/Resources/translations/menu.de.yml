@@ -14,8 +14,8 @@ sylius:
         general_settings: Allgemeine Einstellungen
         homepage: Dein Shop
         locales: Gebietsschemata
-        new_order: Neue Bestellung
-        new_promotion: Neue Aktion
+        new_order: Neue Bestellung hinzufügen
+        new_promotion: Neuen Gutschein hinzufügen
         options: Produktoptionen verwalten
         orders: Aktuelle Bestellungen
         payment_methods: Bezahlmethoden

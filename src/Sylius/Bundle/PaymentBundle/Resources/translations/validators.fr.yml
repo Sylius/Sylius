@@ -15,8 +15,6 @@ sylius:
       luhn: "Le numéro de carte bancaire fournit n'est pas valide."
     security_code:
       not_blank: Veuillez entrer le code de sécurité.
-      max_length: 'Le code de sécurité CVV de la carte bancaire doit faire entre {{ min }} et {{ max }} caractères.'
-      min_length: 'Le code de sécurité CVV de la carte bancaire doit faire entre {{ min }} et {{ max }} caractères.'
     expiry_year:
       not_blank: "Veuillez sélectionner l'année d'expiration."
   payment_method:

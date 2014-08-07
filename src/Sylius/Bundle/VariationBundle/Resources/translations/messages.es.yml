@@ -3,17 +3,10 @@
 
 sylius:
   form:
-    product:
-      options: Opciones
     variant:
       presentation: Presentación
-      available_on: Disponible desde
     option:
       name: Nombre interno
       presentation: Presentación
-      values: Posibles valores
     option_value:
       add_value: Añadir valor
-      value: Valor
-    prototype:
-      options: Opciones

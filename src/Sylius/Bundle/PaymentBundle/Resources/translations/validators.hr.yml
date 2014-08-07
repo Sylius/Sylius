@@ -15,8 +15,8 @@ sylius:
       luhn: Broj kreditne kartice koji ste unijeli nije valjan.
     security_code:
       not_blank: Unesite sigurnosni kod kartice.
-      max_length: 'CVV kod kreditne kartice mora biti između {{ min }} i {{ max }} znakova.'
-      min_length: 'CVV kod kreditne kartice mora biti između {{ min }} i {{ max }} znakova.'
+      max_length: 'CVV kod kreditne kartice mora imati najmanje {{ limit }} znamenke.'
+      min_length: 'CVV kod kreditne kartice ne može imati više od {{ limit }} znamenke.'
     expiry_year:
       not_blank: Odaberite godinu isteka valjanosti kartice.
   payment_method:

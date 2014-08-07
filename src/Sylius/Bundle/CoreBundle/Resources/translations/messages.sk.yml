@@ -30,8 +30,6 @@ sylius:
       code: Kód
       enabled: Povolené
     order_filter:
-      created_at_from: Od
-      created_at_to: Do
       number: Číslo
       total_from: Od
       total_to: Do

@@ -19,12 +19,19 @@ sylius:
       empty: Zatiaľ ste nevytvorili žiadnu adresu.
       list: Všetky vaše adresy
       update: Upraviť moju adresu
+    home:
+      email: ""
+      id: ""
     order:
       empty: Zatiaľ ste nevytvorili žiadnu objednávku.
       invoice: Faktúra
       list: Všetky vaše objednávky
+      number: ""
+      payment_mode: ""
       shipment:
         pending: Čakajúca
+      shipment_mode: ""
+      state: ""
       total: Spolu
       tracking_number: Sledovací kód
     title: Môj účet

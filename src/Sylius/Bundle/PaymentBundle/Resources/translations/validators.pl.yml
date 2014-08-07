@@ -15,8 +15,6 @@ sylius:
       luhn: sylius.credit_card.number.luhn
     security_code:
       not_blank: Proszę wprowadzić kod zabezpieczający.
-      max_length: sylius.credit_card.security_code.max_length
-      min_length: sylius.credit_card.security_code.min_length
     expiry_year:
       not_blank: Proszę wybrać rok wygaśnięcia.
   payment_method:

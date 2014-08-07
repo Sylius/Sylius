@@ -27,7 +27,7 @@ sylius:
       id: ""
       outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen.
       since: Kunde seit
-      welcome: Willkommen in deinen persönlichen Bereich
+      welcome: Willkommen in deinem persönlichen Bereich
     order:
       created_at: Bestellt am
       details: Bestelldetails
@@ -76,13 +76,13 @@ sylius:
     logout: Abmelden
     quick_links:
       add_product: Neues Produkt
-      orders: Neueste Bestellungen
+      orders: Letzte Bestellungen
       products: Ihre Produkte
       users: Benutzer
     statistics:
       0: Monatliche Statistiken
-      orders_this_month: Bestellungen Gesamt
-      registrations_this_month: Registrierungen Gesamt
+      orders_this_month: Gesamtbestellungen
+      registrations_this_month: Gesamteregistrierungen
       sales_this_month: Verkäufe
   backend_welcome: 'Hallo <b>%name%</b>!'
   block:
@@ -212,10 +212,10 @@ sylius:
       header: Zahlungsweise
     security:
       existing_customer: Existierender Benutzer
-      header: Sicherheit
+      header: 'Anmelden <small> oder neuen Benutzer anlegen</small>'
       login: Login
       new_customer: Neuer Benutzer
-      register: Kostenfrei regisrieren
+      register: Registrieren
     shipping:
       error: Leider ist die Lieferung in das von Ihnen gewählte Land nicht möglich.
       header: Lieferverfahren
@@ -224,15 +224,15 @@ sylius:
     title: Bestätigung
   country:
     add_province: Bundesland hinzufügen
-    create: Erstellen
-    create_header: Land erstellen
+    create: Land erstellen
+    create_header: Neues Land
     id: ID
     index_header: Länder
     iso_name: ISO Name
-    manage: Editieren
-    name: Land
-    no_results: Keine Ergebnisse
-    show_header: Land details
+    manage: Länder verwalten
+    name: Name
+    no_results: Es sind noch keine Länder konfiguriert.
+    show_header: Landdetails
     update_header: Land editieren
   create: Erstellen
   created_at: Erstellt am
@@ -330,51 +330,51 @@ sylius:
   no_results: Keine Ergebnisse
   option:
     create: Erstellen
-    create_header: Option erstellen
-    index_header: Optionen
+    create_header: Neue Produktoption
+    index_header: Produktoptionen
     manage: Optionen verwalten
     name: Name
-    no_results: Keine Ergebnisse
+    no_results: Es sind keine Optionen konfiguriert.
     presentation: Präsentation
     update_header: Option editieren
-    updated_at: Erstellt
+    updated_at: Letztes Update
     values: Werte
   order:
     billing_address: Rechnungsadresse
-    create: Bestellen
-    create_header: Bestellung
-    created_at: Erstellt am
-    general_info: Bestellinformation
+    create: Bestellreihenfolge
+    create_header: Neue Bestellung
+    created_at: Erstellungszeit
+    general_info: Allgemeine info
     id: ID
-    index_header: Bestellung
-    inventory_tracking: Bestandsverfolgung
-    items_total: Gesamt
+    index_header: Aktuelle Bestellungen
+    inventory_tracking: Warenbestandsverfolgung
+    items_total: Gesamtanzahl
     manage: Bestellungsverwaltung
-    no_items: Keine Artikel
-    no_results: Keine Ergebnisse
-    no_shipments: Kein Versand
+    no_items: Diese Bestellung hat keine Artikel
+    no_results: Sie haben keine neuen Bestellungen
+    no_shipments: Kein Versand für diese Bestellung
     no_shipping_charges: Keine Versandkosten
     no_taxes: Keine Steuern
     number: Nummer
     payment: Zahlung
     payment_state: Zahlungsstatus
     payment_states:
-      balance_due: Zahlungs fällig
+      balance_due: Zahlung fällig
     promotion_total: Reklame gesamt
     recent_header: Letzte Bestellungen
     shipment_state: Versandstatus
     shipment_states:
       pending: Ausstehend
-    shipments: Versand
+    shipments: Lieferungen
     release_inventory: Warenbestand freigeben
     inventory_unit:
       backorder: Lieferrückstand
       fulfill: Zu erfüllen
       return: Zurückschicken
-    shipping_address: Versandadresse
+    shipping_address: Lieferadresse
     shipping_charges: Versandkosten
     shipping_total: Versandkosten gesamt
-    show_header: Bestellung anzeigen
+    show_header: Reihenfolge
     state:
       cart_locked: Warenkorb gesperrt
       checkout: Zur Kasse
@@ -387,7 +387,7 @@ sylius:
     user: Benutzer
   shipment:
     ship: Lieferung
-    created_at: Erstellt
+    created_at: Erstellt am
     id: ID
     index_header: Versandarten
     inventory_state: Bestand Status
@@ -458,22 +458,22 @@ sylius:
   product:
     add_property: Eigenschaft hinzufügen
     available_on: Verfügbar ab
-    available_on_demand: Auf Nachfrage
+    available_on_demand: Auf Nachfrage verfügbar
     categorization: Kategorisierung
     contain_variants: Enthält Varianten
-    create: Erstellen
-    create_header: Produkt erstellen
+    create: Produkt erstellen
+    create_header: Neues Produkt
     description: Produktbeschreibung
     generate_variants: Generiere Varianten
     index_by_taxon_header: 'Produkte <small>kategorisiert als "%taxon%</small>"'
-    index_header: Produkt anzeigen
-    manage: Produkt verwalten
+    index_header: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
+    manage: Produkte verwalten
     name: Name
-    no_description: Keine Beschreibung
-    no_images: Keine Bilder vorhanden
+    no_description: '<i>Keine Beschreibung...</i>'
+    no_images: Keine Bilder für dieses Produkt vorhanden
     no_options: Es gibt keine Optionen für dieses Produkt
     no_properties: Es gibt keine Eigenschaften für dieses Produkt
-    no_results: Keine Ergebnisse
+    no_results: Keine Produkte anzeigbar.
     no_shipping_category: Keine Versandkategorie
     no_short_description: '<i>Keine Kurzbeschreibung</i>'
     no_sku: Keine Artikelpositionen verfügbar
@@ -484,8 +484,8 @@ sylius:
     properties: Eigenschaften
     restricted_zone: Beschränktes Versandgebiet
     shipping_category: Versandkategorie
-    show: Produkt anzeigen
-    show_header: Produktdetails anzeigen
+    show: Mehr anzeigen
+    show_header: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
     show_in_store: Im Shop anzeigen
     sku: Bestandseinheit
     stock: Aktueller Lagerbestand
@@ -509,7 +509,7 @@ sylius:
     coupon_based: Gutschein basierend?
     create: Aktion erstellen
     create_header: Neue Aktion
-    created_at: Erstellt
+    created_at: Erstellt am
     description: Beschreibung
     ends_at: Endet
     general_info: Allgemeine Informationen
@@ -572,33 +572,33 @@ sylius:
   save_changes: Änderungen speichern
   search: Suchen
   settings:
-    general_header: Verwaltung
-    taxation_header: Besteuerung
+    general_header: Allgemeine Einstellungen
+    taxation_header: Steuereinstellungen
   shipment_category:
     manage: Versandkategorie verwalten
   shipping_address: Lieferadresse
   shipping_category:
-    create: Erstellen
-    create_header: Versandkategorie erstellen
+    create: Versandkategorie erstellen
+    create_header: Neue Versandkategorie
     id: ID
     index_header: Versandkategorien
-    manage: Verwalten
+    manage: Versandkategorie verwalten
     name: Name
-    no_results: Keine Ergebnisse
-    update_header: Versandkategorien editieren
-    updated_at: Geändert
+    no_results: Es sind keine Versandkategorieren konfiguriert.
+    update_header: Versandkategorien bearbeiten
+    updated_at: Letztes Update
   shipping_method:
-    calculator: Versandart Rechner
+    calculator: Versandkostenrechner
     category: Kategorie
-    create: Erstellen
-    create_header: Versandart erstellen
-    enabled: Aktiv
+    create: Versandmethode erstellen
+    create_header: Neue Versandart
+    enabled: Aktiv?
     id: ID
-    index_header: Versandarten anzeigen
-    manage: Verwalten
+    index_header: Versandarten
+    manage: Versandarten verwalten
     name: Name
-    no_results: Keine Ergebnisse
-    show_header: Versandart Details
+    no_results: Es sind keine Versandarten konfiguriert.
+    show_header: Versandartenetails
     update_header: Versandart editieren
     updated_at: Zuletzt geändert
     zone: Versandgebiet
@@ -609,25 +609,25 @@ sylius:
   stockable:
     index_header: 'Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>'
     name: Name
-    no_results: Keine Ergebnisse
+    no_results: Keine Lagerbestand anzeigbar.
     on_hand: Verfügbar
     on_hold: Lagerbestand gesperrt
     sku: Bestandseinheit
     updated_at: Zuletzt geändert
   tax_category:
     create: Steuerkategorie erstellen
-    create_header: Steuerkategorie erstellen
+    create_header: Neue Steuerkategorie
     description: Beschreibung
     id: ID
     index_header: Steuerkategorien
-    manage: Verwalten
+    manage: Steuerkategorie verwalten
     name: Name
     no_description: Keine Beschreibung
-    no_results: Keine Ergebnisse
-    update_header: Steuerkategorie editieren
-    updated_at: Geändert
+    no_results: Es sind keine Steuerkategorien anzeigbar.
+    update_header: Steuerkategorie bearbeiten
+    updated_at: Letztes Update
   tax_rate:
-    amount: Satz
+    amount: Steuersatz
     calculator: Steuersatzrechner
     category: Kategorie
     create: Erstellen
@@ -693,28 +693,28 @@ sylius:
   variant:
     add_image: Bild hinzufügen
     availability: Verfügbarkeit
-    available_on_demand: Auf Nachfrage
-    create: Erstellen
-    create_header: Variante erstellen
+    available_on_demand: Auf Nachfrage verfügbar
+    create: Variante erstellen
+    create_header: Neue Produktvariante
     delete_image: Bild löschen
     last_update: Letztes Update
-    no_results: Keine Ergebnisse
+    no_results: Es können keine Varianten angezeigt werden.
     options: Optionen
     price: Preis
     sku: Bestandseinheit
     stock: Aktueller Lagerbestand
-    update_header: Variante editieren
+    update_header: Variante bearbeiten
   "yes": true
   zone:
     add_member: Mitglied hinzufügen
-    create: Hinzufügen
-    create_header: Gebiet erstellen
+    create: Gebiet hinzufügen
+    create_header: Neues Gebiet
     index_header: Gebiete
-    manage: Verwalten
+    manage: Gebiete verwalten
     name: Name
-    no_results: Keine Ergebnisse
-    show_header: Gebiete
+    no_results: Es sind keine Gebiete konfiguriert.
+    show_header: Gebietedetails
     type: Typ
-    update_header: Zone editieren
+    update_header: Gebiet bearbeiten
   zone_member:
     members: Mitglieder

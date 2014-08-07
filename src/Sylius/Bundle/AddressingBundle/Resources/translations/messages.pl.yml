@@ -28,6 +28,7 @@ sylius:
         country: Kraj
         province: Województwo
         zone: Strefa
+      scope: Zakres
     zone_member_country:
       country: Kraj
     zone_member_province:

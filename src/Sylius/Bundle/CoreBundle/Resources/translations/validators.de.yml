@@ -6,27 +6,27 @@ sylius:
     name:
       max: 'Gruppenname darf nicht länger als {{ limit }} Zeichen sein.'
       min: 'Gruppenname muss mindestens {{ limit }} Zeichen lang sein.'
-      not_blank: Bitte Gruppenname angeben.
+      not_blank: Bitte Gruppenname eingeben.
   locale:
     code:
-      not_blank: Bitte Locale-Code angeben.
+      not_blank: Bitte lokalen Code eingeben.
       unique: Locale existiert bereits.
   user:
     first_name:
       max: 'Vorname darf nicht länger als {{ limit }} Zeichen sein.'
       min: 'Vorname muss mindestens {{ limit }} Zeichen lang sein.'
-      not_blank: Bitte Vorname angeben.
+      not_blank: Bitte Vorname eingeben.
     last_name:
       max: 'Nachname darf nicht länger als {{ limit }} Zeichen sein.'
       min: 'Nachname muss mindestens {{ limit }} Zeichen lang sein.'
-      not_blank: Bitte Nachname angeben.
-  variant:
+      not_blank: Bitte Nachname eingeben.
+  product_variant:
     onHand:
-      min: 'Lagerbestand muss größer sein als {{ limit }}.'
-      not_blank: Bitte Lagerbestand angeben.
+      min: 'Menge muss größer sein als {{ limit }}.'
+      not_blank: Bitte verfügbare Menge eingeben.
     price:
       min: Preis darf nicht negativ sein.
-      not_blank: Bitte Preis angeben.
+      not_blank: Bitte Preis eingeben.
 sylius_shipping:
   method:
     zone:

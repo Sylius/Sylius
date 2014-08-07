@@ -2,6 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
   address:
     city: Thành phố
     company: Công ty
@@ -169,6 +178,9 @@ sylius:
     index_header: Phương thức thanh toán
     updated_at: Cập nhật lần cuối
   product:
+    options: Tùy chọn
+    tabs:
+      options: Tùy chọn
     updated_at: Cập nhật lần cuối
   promotion:
     created_at: Được tạo vào lúc
@@ -197,4 +209,5 @@ sylius:
     email: Email
   variant:
     last_update: Cập nhật lần cuối
+    options: Tùy chọn
   "yes": true

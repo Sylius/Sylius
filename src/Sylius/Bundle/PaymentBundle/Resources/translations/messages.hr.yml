@@ -23,6 +23,8 @@ sylius:
         processing: U obradi
         unknown: Nepoznato
         void: Nevažeće
+        cancelled: Otkazano
+        refunded: Refundirano
     payment_method:
       description: Opis
       enabled: Omogući?

@@ -5,8 +5,8 @@ sylius:
   extensions:
     0: Erweiterungen
     accelerator:
-      0: Accelerator
-      help: Installiere und aktiviere einen PHP Accelerator wie zum Beispiel APC (Dringend empfohlen).
+      0: Beschleuniger
+      help: Installiere und aktiviere einen PHP Beschleuniger wie zum Beispiel APC (Dringend empfohlen).
     apc: APC
     ctype: Ctype
     gd: GD
@@ -41,7 +41,7 @@ sylius:
       0: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
-    vendors: vendors
+    vendors: Verkäufer
     writable: Beschreibbar
   settings:
     0: PHP Version und Einstellungen
@@ -55,9 +55,9 @@ sylius:
     session:
       auto_start: session.auto_start
     short_open_tag: short_open_tag
-    timezone: timezone
+    timezone: Zeitzone
     timezone_deprecated:
       0: Veraltete Zeitzone
-      help: 'Zeituone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
+      help: 'Zeitzone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
     version: PHP Version
     version_recommanded: Empfohlene PHP Version

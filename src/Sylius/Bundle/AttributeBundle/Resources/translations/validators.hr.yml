@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: Naziv svojstva.
+      min_length: 'Naziv svojstva može imati min 1 znak. Naziv svojstva mora imati najmanje {{ limit }} znakova.'
+      max_length: 'Naziv svojstva ne smije imati više od 1 znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.'
+    presentation:
+      not_blank: Molim unesite prikaz atributa.
+      min_length: 'Prikaz atributa mora imati najmanje 1 znak.|Prikaz atributa mora imati najmanje {{ limit }} znakova.'
+      max_length: 'Prikaz atributa ne smije biti duži od 1 znaka.|Prikaz atributa ne smije biti duži od {{ limit }} znakova.'
+  attribute_value:
+    attribute:
+      not_blank: Molim označite svojstvo.
+    value:
+      not_blank: Molim unesite vrijednost svojstva.
