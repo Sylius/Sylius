@@ -26,7 +26,7 @@
                     <join-column name="order_id" referenced-column-name="id" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="promotion_coupon_id" referenced-column-name="id" unique="true" />
+                    <join-column name="promotion_coupon_id" referenced-column-name="id" />
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
