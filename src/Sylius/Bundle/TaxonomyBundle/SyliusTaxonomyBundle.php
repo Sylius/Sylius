@@ -43,7 +43,7 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Taxonomy\Model\TaxonomyInterface' => 'sylius.model.taxonomy.class',
@@ -54,7 +54,7 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Taxonomy\Model';
     }

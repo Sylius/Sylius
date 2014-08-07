@@ -43,7 +43,7 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Inventory\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
@@ -54,7 +54,7 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Inventory\Model';
     }

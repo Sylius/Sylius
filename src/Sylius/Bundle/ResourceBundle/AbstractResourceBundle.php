@@ -28,7 +28,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     public function build(ContainerBuilder $container)
     {
-        $interfaces = $this->getInterfaces();
+        $interfaces = $this->getModelInterfaces();
         if (!empty($interfaces)) {
             $container->addCompilerPass(
                 new ResolveDoctrineTargetEntitiesPass(
@@ -38,14 +38,14 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
             );
         }
 
-        if (null !== $this->getEntityNamespace()) {
+        if (null !== $this->getModelNamespace()) {
             $className = get_class($this);
             foreach ($className::getSupportedDrivers() as $driver) {
-                list($mappingsPassClassName, $manager) = $this->getDoctrineDriver($driver);
+                list($mappingsPassClassName, $manager) = $this->getXmlMappingDriverInfo($driver);
 
                 if (class_exists($mappingsPassClassName)) {
                     $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
-                        array($this->getConfigFilesPath() => $this->getEntityNamespace()),
+                        array($this->getConfigFilesPath() => $this->getModelNamespace()),
                         $manager,
                         sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                     ));
@@ -66,17 +66,17 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return array
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array();
     }
 
     /**
-     * Return the path to the Entity directory
+     * Return the directory where are stored the doctrine mapping
      *
      * @return string
      */
-    protected function getEntityDirectory()
+    protected function getDoctrineMappingDirectory()
     {
         return 'model';
     }
@@ -86,13 +86,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return null;
     }
 
     /**
-     * Return the entity manager
+     * Return informations used to initialize XML mapping driver
      *
      * @param string $driverType
      *
@@ -100,7 +100,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @throws UnknownDriverException
      */
-    protected function getDoctrineDriver($driverType)
+    protected function getXmlMappingDriverInfo($driverType)
     {
         switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
@@ -124,7 +124,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return the path to the xml directory
+     * Return the absolute path where are stored the doctrine mapping
      *
      * @return string
      */
@@ -133,7 +133,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         return sprintf(
             '%s/Resources/config/doctrine/%s',
             $this->getPath(),
-            strtolower($this->getEntityDirectory())
+            strtolower($this->getDoctrineMappingDirectory())
         );
     }
 }

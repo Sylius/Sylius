@@ -42,7 +42,7 @@ class SyliusAddressingBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Addressing\Model\AddressInterface'    => 'sylius.model.address.class',
@@ -56,7 +56,7 @@ class SyliusAddressingBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Addressing\Model';
     }

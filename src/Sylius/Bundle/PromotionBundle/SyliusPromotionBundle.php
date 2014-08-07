@@ -56,7 +56,7 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Promotion\Model\PromotionInterface'        => 'sylius.model.promotion.class',
@@ -70,7 +70,7 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Promotion\Model';
     }

@@ -42,7 +42,7 @@ class SyliusOrderBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Order\Model\OrderInterface'      => 'sylius.model.order.class',
@@ -54,7 +54,7 @@ class SyliusOrderBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Order\Model';
     }

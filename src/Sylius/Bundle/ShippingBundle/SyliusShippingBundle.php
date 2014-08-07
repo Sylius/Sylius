@@ -59,7 +59,7 @@ class SyliusShippingBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Shipping\Model\ShipmentInterface'         => 'sylius.model.shipment.class',
@@ -73,7 +73,7 @@ class SyliusShippingBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Shipping\Model';
     }

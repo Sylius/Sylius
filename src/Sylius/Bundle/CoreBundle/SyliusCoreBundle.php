@@ -54,7 +54,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Core\Model\UserInterface'                => 'sylius.model.user.class',
@@ -67,7 +67,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Core\Model';
     }

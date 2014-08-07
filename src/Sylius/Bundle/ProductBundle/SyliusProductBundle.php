@@ -46,7 +46,7 @@ class SyliusProductBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Product\Model\ProductInterface'        => 'sylius.model.product.class',
@@ -62,7 +62,7 @@ class SyliusProductBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Product\Model';
     }
