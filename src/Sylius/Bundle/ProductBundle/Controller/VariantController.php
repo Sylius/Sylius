@@ -38,8 +38,7 @@ class VariantController extends ResourceController
         $this->getGenerator()->generate($product);
 
         $manager = $this->get('sylius.manager.product');
-        $manager->persist($product);
-        $manager->flush();
+        $manager->update($product);
 
         $this->flashHelper->setFlash('success', 'generate');
 

@@ -50,13 +50,8 @@ class DomainManager implements DomainManagerInterface
      */
     protected $className;
 
-    public function __construct(
-        ObjectManager $manager,
-        EventDispatcherInterface $eventDispatcher,
-        $bundlePrefix,
-        $resourceName,
-        ClassMetadata $class
-    ) {
+    public function __construct(ObjectManager $manager, EventDispatcherInterface $eventDispatcher, $bundlePrefix, $resourceName, ClassMetadata $class)
+    {
         $this->manager = $manager;
         $this->eventDispatcher = $eventDispatcher;
         $this->bundlePrefix = $bundlePrefix;
@@ -75,11 +70,13 @@ class DomainManager implements DomainManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function create($resource = null, $eventName = 'create')
     {
-        $resource = $this->createNew();
-        $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
+        if (null === $resource) {
+            $resource = $this->createNew();
+        }
 
+        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
         if ($event->isStopped()) {
             return null;
         }
@@ -87,7 +84,7 @@ class DomainManager implements DomainManagerInterface
         $this->manager->persist($resource);
         $this->manager->flush();
 
-        $this->dispatchEvent('post_create', new ResourceEvent($resource));
+        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
 
         return $resource;
     }
@@ -95,10 +92,9 @@ class DomainManager implements DomainManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function update($resource)
+    public function update($resource, $eventName = 'update')
     {
-        $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource));
-
+        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
         if ($event->isStopped()) {
             return null;
         }
@@ -106,7 +102,7 @@ class DomainManager implements DomainManagerInterface
         $this->manager->persist($resource);
         $this->manager->flush();
 
-        $this->dispatchEvent('post_update', new ResourceEvent($resource));
+        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
 
         return $resource;
     }
@@ -114,9 +110,9 @@ class DomainManager implements DomainManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function delete($resource)
+    public function delete($resource, $eventName = 'delete')
     {
-        $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource));
+        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             return null;
@@ -125,9 +121,38 @@ class DomainManager implements DomainManagerInterface
         $this->manager->remove($resource);
         $this->manager->flush();
 
-        $this->dispatchEvent('post_delete', new ResourceEvent($resource));
+        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
 
         return $resource;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function bulk($action = 'create', array $resources)
+    {
+        if (!in_array($action, array('create', 'update', 'delete'))) {
+            throw new \InvalidArgumentException();
+        }
+
+        foreach ($resources as $resource) {
+            $event = $this->dispatchEvent('pre_'.$action, new ResourceEvent($resource));
+            if ($event->isStopped()) {
+                continue;
+            }
+
+            if ('delete' === $action) {
+                $this->manager->remove($resource);
+            } else {
+                $this->manager->persist($resource);
+            }
+
+            $this->dispatchEvent('post_'.$action, new ResourceEvent($resource));
+        }
+
+        $this->manager->flush();
+
+        return $resources;
     }
 
     /**

@@ -14,16 +14,16 @@ namespace spec\Sylius\Component\Inventory\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnitFactorySpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(DomainManagerInterface $manager)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($manager);
     }
 
     function it_is_initializable()
@@ -49,9 +49,9 @@ class InventoryUnitFactorySpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         InventoryUnitInterface $inventoryUnit3,
-        $repository
+        $manager
     ) {
-        $repository->createNew()->shouldBeCalled()->willReturn($inventoryUnit1, $inventoryUnit2, $inventoryUnit3);
+        $manager->createNew()->willReturn($inventoryUnit1, $inventoryUnit2, $inventoryUnit3);
 
         $inventoryUnit1->setStockable($stockable)->shouldBeCalled();
         $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();

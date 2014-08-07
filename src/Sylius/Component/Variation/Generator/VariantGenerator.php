@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Variation\Generator;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 
@@ -34,18 +34,18 @@ class VariantGenerator implements VariantGeneratorInterface
     /**
      * Variant manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManagerInterface
      */
-    protected $variantRepository;
+    protected $variantManager;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $variantRepository
+     * @param DomainManagerInterface $variantManager
      */
-    public function __construct(RepositoryInterface $variantRepository)
+    public function __construct(DomainManagerInterface $variantManager)
     {
-        $this->variantRepository = $variantRepository;
+        $this->variantManager = $variantManager;
     }
 
     /**
@@ -70,7 +70,7 @@ class VariantGenerator implements VariantGeneratorInterface
         $permutations = $this->getPermutations($optionSet);
 
         foreach ($permutations as $permutation) {
-            $variant = $this->variantRepository->createNew();
+            $variant = $this->variantManager->createNew();
             $variant->setObject($variable);
             $variant->setDefaults($variable->getMasterVariant());
 

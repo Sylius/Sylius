@@ -17,6 +17,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
@@ -27,13 +28,13 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 class TaxationProcessorSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $adjustmentRepository,
+        DomainManagerInterface $adjustmentManager,
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
         Settings $taxationSettings
     ) {
-        $this->beConstructedWith($adjustmentRepository, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings);
+        $this->beConstructedWith($adjustmentManager, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings);
     }
 
     function it_is_initializable()

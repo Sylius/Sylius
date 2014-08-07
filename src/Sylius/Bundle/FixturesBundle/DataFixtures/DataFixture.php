@@ -17,6 +17,7 @@ use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Bundle\ProductBundle\Generator\VariantGenerator;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -57,6 +58,11 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
         $this->container = $container;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return DomainManagerInterface
+     */
     protected function getManager($name)
     {
         return $this->container->get('sylius.manager.'.$name);

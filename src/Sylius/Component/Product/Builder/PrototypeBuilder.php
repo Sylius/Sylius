@@ -13,7 +13,7 @@ namespace Sylius\Component\Product\Builder;
 
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\PrototypeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * Prototype builder.
@@ -23,20 +23,20 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PrototypeBuilder implements PrototypeBuilderInterface
 {
     /**
-     * Product attribute repository.
+     * Product attribute value manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManagerInterface
      */
-    protected $attributeValueRepository;
+    protected $attributeValueManager;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $attributeValueRepository
+     * @param DomainManagerInterface $attributeValueManager
      */
-    public function __construct(RepositoryInterface $attributeValueRepository)
+    public function __construct(DomainManagerInterface $attributeValueManager)
     {
-        $this->attributeValueRepository = $attributeValueRepository;
+        $this->attributeValueManager = $attributeValueManager;
     }
 
     /**
@@ -45,7 +45,7 @@ class PrototypeBuilder implements PrototypeBuilderInterface
     public function build(PrototypeInterface $prototype, ProductInterface $product)
     {
         foreach ($prototype->getAttributes() as $attribute) {
-            $attributeValue = $this->attributeValueRepository->createNew();
+            $attributeValue = $this->attributeValueManager->createNew();
             $attributeValue->setAttribute($attribute);
 
             $product->addAttribute($attributeValue);

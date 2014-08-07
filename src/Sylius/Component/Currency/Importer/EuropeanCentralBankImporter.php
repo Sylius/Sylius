@@ -34,8 +34,6 @@ class EuropeanCentralBankImporter extends AbstractImporter
             foreach ($data[0]->children() as $child) {
                 $this->updateOrCreate($managedCurrencies, (string) $child->attributes()->currency, (float) $child->attributes()->rate);
             }
-
-            $this->manager->flush();
         }
     }
 }

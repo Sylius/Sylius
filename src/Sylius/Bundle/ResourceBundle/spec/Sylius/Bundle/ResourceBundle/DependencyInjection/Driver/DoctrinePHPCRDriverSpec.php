@@ -43,13 +43,13 @@ class DoctrinePHPCRDriverSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $container->setDefinition(
-            'prefix.repository.resource',
+            'prefix.manager.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
-        $container->setAlias(
-            'prefix.manager.resource',
-            Argument::type('Symfony\Component\DependencyInjection\Alias')
+        $container->setDefinition(
+            'prefix.repository.resource',
+            Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');

@@ -169,7 +169,7 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            $resource = $this->domainManager->create($resource);
+            $resource = $this->manageResource($resource, 'create');
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource, 201));
@@ -209,7 +209,7 @@ class ResourceController extends FOSRestController
         $form     = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
+            $this->manageResource($resource, 'update');
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource, 204));
@@ -241,7 +241,7 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->domainManager->delete($this->findOr404($request));
+        $this->manageResource($this->findOr404($request), 'delete');
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view());
@@ -402,6 +402,9 @@ class ResourceController extends FOSRestController
         );
 
         $this->domainManager->update($resource, 'move');
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', 'move');
+        }
 
         return $this->redirectHandler->redirectToIndex();
     }
@@ -424,5 +427,19 @@ class ResourceController extends FOSRestController
         }
 
         return $handler->handle($view);
+    }
+
+    private function manageResource($resource, $action)
+    {
+        if (!in_array($action, array('create', 'update', 'delete'))) {
+            throw new \InvalidArgumentException();
+        }
+
+        $resource = $this->domainManager->{$action}($resource);
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', $action);
+        }
+
+        return $resource;
     }
 }

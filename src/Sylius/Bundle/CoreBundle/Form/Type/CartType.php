@@ -30,7 +30,7 @@ class CartType extends BaseCartType
      * Constructor.
      *
      * @param string                 $dataClass        FQCN of cart model
-     * @param array                  $validationGroups
+     * @param string[]               $validationGroups
      * @param DomainManagerInterface $couponManager
      */
     public function __construct($dataClass, array $validationGroups, DomainManagerInterface $couponManager)

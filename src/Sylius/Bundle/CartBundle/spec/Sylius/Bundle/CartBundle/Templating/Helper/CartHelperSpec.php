@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -24,10 +25,10 @@ class CartHelperSpec extends ObjectBehavior
 {
     function let(
         CartProviderInterface $cartProvider,
-        RepositoryInterface $itemRepository,
+        DomainManagerInterface $cartItemManager,
         FormFactoryInterface $formFactory
     ) {
-        $this->beConstructedWith($cartProvider, $itemRepository, $formFactory);
+        $this->beConstructedWith($cartProvider, $cartItemManager, $formFactory);
     }
 
     function it_is_initializable()
@@ -48,28 +49,28 @@ class CartHelperSpec extends ObjectBehavior
     }
 
     function its_getItemFormView_returns_a_form_view_of_cart_item_form(
-        $itemRepository,
+        $cartItemManager,
         $formFactory,
         FormInterface $form,
         FormView $formView,
         CartItemInterface $item
     ) {
-        $itemRepository->createNew()->shouldBeCalled()->willReturn($item);
-        $formFactory->create('sylius_cart_item', $item, array())->shouldBeCalled()->willReturn($form);
+        $cartItemManager->createNew()->willReturn($item);
+        $formFactory->create('sylius_cart_item', $item, array())->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView()->shouldReturn($formView);
     }
 
     function its_getItemFormView_uses_given_options_when_creating_form(
-        $itemRepository,
+        $cartItemManager,
         $formFactory,
         FormInterface $form,
         FormView $formView,
         CartItemInterface $item
     ) {
-        $itemRepository->createNew()->shouldBeCalled()->willReturn($item);
-        $formFactory->create('sylius_cart_item', $item, array('foo' => 'bar'))->shouldBeCalled()->willReturn($form);
+        $cartItemManager->createNew()->willReturn($item);
+        $formFactory->create('sylius_cart_item', $item, array('foo' => 'bar'))->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView(array('foo' => 'bar'))->shouldReturn($formView);

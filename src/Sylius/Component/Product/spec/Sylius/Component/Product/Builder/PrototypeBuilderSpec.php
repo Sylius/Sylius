@@ -17,16 +17,16 @@ use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\PrototypeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PrototypeBuilderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $attributeValueRepository)
+    function let(DomainManagerInterface $attributeValueManager)
     {
-        $this->beConstructedWith($attributeValueRepository);
+        $this->beConstructedWith($attributeValueManager);
     }
 
     function it_is_initializable()
@@ -40,17 +40,17 @@ class PrototypeBuilderSpec extends ObjectBehavior
     }
 
     function it_assigns_prototype_attributes_and_options_to_product(
-        $attributeValueRepository,
+        $attributeValueManager,
         PrototypeInterface$prototype,
         ProductInterface $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         OptionInterface $option
     ) {
-        $prototype->getAttributes()->willReturn(array($attribute))->shouldBeCalled();
-        $prototype->getOptions()->willReturn(array($option))->shouldBeCalled();
+        $prototype->getAttributes()->willReturn(array($attribute));
+        $prototype->getOptions()->willReturn(array($option));
 
-        $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
+        $attributeValueManager->createNew()->willReturn($attributeValue);
         $attributeValue->setAttribute($attribute)->shouldBeCalled();
 
         $product->addAttribute($attributeValue)->shouldBeCalled();

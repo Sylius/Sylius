@@ -11,13 +11,13 @@
 
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -27,7 +27,7 @@ use Symfony\Component\Validator\ValidatorInterface;
  */
 class CartListenerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
+    function let(DomainManagerInterface $manager, ValidatorInterface $validator, CartProviderInterface $provider)
     {
         $this->beConstructedWith($manager, $validator, $provider);
     }
@@ -58,8 +58,7 @@ class CartListenerSpec extends ObjectBehavior
     function it_should_clear_a_cart_from_event(CartEvent $event, CartInterface $cart, $manager, $provider)
     {
         $event->getCart()->willReturn($cart);
-        $manager->remove($cart)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
+        $manager->delete($cart)->shouldBeCalled();
         $provider->abandonCart()->shouldBeCalled();
 
         $this->clearCart($event);
@@ -68,8 +67,7 @@ class CartListenerSpec extends ObjectBehavior
     function it_should_save_a_valid_cart($manager, $provider, CartEvent $event, CartInterface $cart)
     {
         $event->getCart()->willReturn($cart);
-        $manager->persist($cart)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
+        $manager->update($cart)->shouldBeCalled();
         $provider->setCart($cart)->shouldBeCalled();
 
         $this->saveCart($event);
@@ -87,8 +85,7 @@ class CartListenerSpec extends ObjectBehavior
         $event->getCart()->willReturn($cart);
         $validator->validate($cart)->shouldBeCalled()->willReturn($constraintList);
 
-        $manager->persist($cart)->shouldNotBeCalled();
-        $manager->flush()->shouldNotBeCalled();
+        $manager->update($cart)->shouldNotBeCalled();
         $provider->setCart($cart)->shouldNotBeCalled();
 
         $this->saveCart($event);

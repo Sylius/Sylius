@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Manager\DomainManagerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,7 @@ class AddressController extends FOSRestController
     /**
      * Get collection of user's addresses.
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $view = $this
             ->view()
@@ -57,8 +58,7 @@ class AddressController extends FOSRestController
             $user->addAddress($address);
 
             $manager = $this->getUserManager();
-            $manager->persist($user);
-            $manager->flush();
+            $manager->updateUser($user);
 
             $this->addFlash('success', 'sylius.account.address.create');
 
@@ -88,8 +88,7 @@ class AddressController extends FOSRestController
 
         if ($form->handleRequest($request)->isValid()) {
             $manager = $this->getUserManager();
-            $manager->persist($user);
-            $manager->flush();
+            $manager->updateUser($user);
 
             $this->addFlash('success', 'sylius.account.address.update');
 
@@ -100,7 +99,7 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/update.html.twig')
             ->setData(array(
-                'user'    => $this->getUser(),
+                'user'    => $user,
                 'address' => $address,
                 'form'    => $form->createView()
             ))
@@ -114,14 +113,13 @@ class AddressController extends FOSRestController
      */
     public function deleteAction($id)
     {
-        $user = $this->getUser();
         $address = $this->findUserAddressOr404($id);
 
+        $user = $this->getUser();
         $user->removeAddress($address);
 
         $manager = $this->getUserManager();
-        $manager->persist($user);
-        $manager->flush();
+        $manager->updateUser($user);
 
         $this->addFlash('success', 'sylius.account.address.delete');
 
@@ -157,16 +155,14 @@ class AddressController extends FOSRestController
         }
 
         $manager = $this->getUserManager();
-        $manager->persist($user);
-        $manager->flush();
+        $manager->updateUser($user);
 
         return $this->redirectToIndex();
     }
 
     protected function addFlash($type, $message)
     {
-        $translator = $this->get('translator');
-        $this->get('session')->getFlashBag()->add($type, $translator->trans($message, array(), 'flashes'));
+        $this->get('session')->getFlashBag()->add($type, $this->get('translator')->trans($message, array(), 'flashes'));
     }
 
     /**
@@ -180,11 +176,11 @@ class AddressController extends FOSRestController
     }
 
     /**
-     * @return ObjectManager
+     * @return UserManagerInterface
      */
     private function getUserManager()
     {
-        return $this->get('sylius.manager.user');
+        return $this->get('fos_user.user_manager');
     }
 
     /**
@@ -195,6 +191,14 @@ class AddressController extends FOSRestController
         return $this->get('sylius.manager.address');
     }
 
+    /**
+     * @return RepositoryInterface
+     */
+    private function getAddressRepository()
+    {
+        return $this->get('sylius.repository.address');
+    }
+
     private function redirectToIndex()
     {
         return $this->redirect($this->generateUrl('sylius_account_address_index'));
@@ -203,7 +207,7 @@ class AddressController extends FOSRestController
     /**
      * Accesses address or throws 403/404
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return AddressInterface
      *

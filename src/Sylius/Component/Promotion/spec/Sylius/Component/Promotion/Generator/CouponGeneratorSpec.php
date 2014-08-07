@@ -11,12 +11,12 @@
 
 namespace spec\Sylius\Component\Promotion\Generator;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository, ObjectManager $manager)
+    function let(RepositoryInterface $repository, DomainManagerInterface $manager)
     {
         $this->beConstructedWith($repository, $manager);
     }
@@ -49,15 +49,14 @@ class CouponGeneratorSpec extends ObjectBehavior
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);
 
-        $repository->createNew()->willReturn($coupon);
+        $manager->createNew()->willReturn($coupon);
+        $manager->create($coupon)->shouldBeCalled();
+
         $repository->findOneBy(Argument::any())->willReturn(null);
 
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
-
-        $manager->persist($coupon)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
 
         $this->generate($promotion, $instruction);
     }

@@ -18,12 +18,13 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Model\UserOAuthInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 class UserProviderSpec extends ObjectBehavior
 {
-    function let(UserManagerInterface $userManager, EntityRepository $oauthRepository)
+    function let(UserManagerInterface $userManager, EntityRepository $oauthRepository, DomainManagerInterface $domainManager)
     {
-        $this->beConstructedWith($userManager, $oauthRepository);
+        $this->beConstructedWith($userManager, $oauthRepository, $domainManager);
     }
 
     function it_is_initializable()
@@ -38,7 +39,7 @@ class UserProviderSpec extends ObjectBehavior
 
     function it_should_connect_oauth_account_with_given_user(
         $userManager,
-        $oauthRepository,
+        $domainManager,
         UserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
@@ -51,7 +52,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
 
-        $oauthRepository->createNew()->willReturn($oauth);
+        $domainManager->createNew()->willReturn($oauth);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
@@ -85,6 +86,7 @@ class UserProviderSpec extends ObjectBehavior
     function it_should_update_user_when_he_was_found_by_email(
         $userManager,
         $oauthRepository,
+        $domainManager,
         UserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
@@ -98,7 +100,8 @@ class UserProviderSpec extends ObjectBehavior
         $response->getAccessToken()->willReturn('access_token');
 
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
-        $oauthRepository->createNew()->willReturn($oauth);
+
+        $domainManager->createNew()->willReturn($oauth);
 
         $userManager->findUserByEmail('username@email')->willReturn($user);
 
@@ -116,6 +119,7 @@ class UserProviderSpec extends ObjectBehavior
     function it_should_create_new_user_when_none_was_found(
         $userManager,
         $oauthRepository,
+        $domainManager,
         UserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
@@ -130,7 +134,8 @@ class UserProviderSpec extends ObjectBehavior
         $response->getAccessToken()->willReturn('access_token');
 
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
-        $oauthRepository->createNew()->willReturn($oauth);
+
+        $domainManager->createNew()->willReturn($oauth);
 
         $userManager->createUser()->willReturn($user);
 

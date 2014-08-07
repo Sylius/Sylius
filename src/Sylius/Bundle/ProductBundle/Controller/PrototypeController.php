@@ -48,9 +48,8 @@ class PrototypeController extends ResourceController
         $form = $productController->getForm($product);
 
         if ($form->handleRequest($request)->isValid()) {
-            $manager = $this->get('doctrine')->getManager();
-            $manager->persist($product);
-            $manager->flush();
+            $manager = $this->get('sylius.manager.product');
+            $manager->create($product);
 
             $this->flashHelper->setFlash('success', 'Product has been successfully created.');
 

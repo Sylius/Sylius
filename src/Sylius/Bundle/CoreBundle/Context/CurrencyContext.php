@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -27,7 +27,7 @@ class CurrencyContext extends BaseCurrencyContext
         StorageInterface $storage,
         SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
-        ObjectManager $userManager
+        DomainManagerInterface $userManager
     ) {
         $this->securityContext = $securityContext;
         $this->settingsManager = $settingsManager;
@@ -53,13 +53,14 @@ class CurrencyContext extends BaseCurrencyContext
     public function setCurrency($currency)
     {
         if (null === $user = $this->getUser()) {
-            return parent::setCurrency($currency);
+            parent::setCurrency($currency);
+
+            return;
         }
 
         $user->setCurrency($currency);
 
-        $this->userManager->persist($user);
-        $this->userManager->flush();
+        $this->userManager->update($user);
     }
 
     protected function getUser()

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -79,8 +78,6 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
             $this->getContainerKey('repository'),
             $this->getRepositoryDefinition($classes)
         );
-
-        $this->setManagerAlias();
     }
 
     /**
@@ -163,14 +160,6 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         ;
 
         return $definition;
-    }
-
-    protected function setManagerAlias()
-    {
-        $this->container->setAlias(
-            $this->getContainerKey('manager'),
-            new Alias($this->getManagerServiceKey())
-        );
     }
 
     /**

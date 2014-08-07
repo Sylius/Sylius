@@ -48,8 +48,6 @@ class FlashHelper
      * @param string $type
      * @param string $eventName
      * @param array  $params
-     *
-     * @return mixed
      */
     public function setFlash($type, $eventName, $params = array())
     {

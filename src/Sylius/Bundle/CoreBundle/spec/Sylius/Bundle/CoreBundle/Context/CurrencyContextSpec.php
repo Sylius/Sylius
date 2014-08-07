@@ -11,12 +11,12 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -27,7 +27,7 @@ class CurrencyContextSpec extends ObjectBehavior
         StorageInterface $storage,
         SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
-        ObjectManager $userManager,
+        DomainManagerInterface $userManager,
         Settings $settings
     ) {
         $settingsManager->loadSettings('general')->willReturn($settings);

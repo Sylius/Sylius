@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\DomainManager;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -48,13 +48,13 @@ class ResourceResolver
     /**
      * Create resource.
      *
-     * @param DomainManager $manager
-     * @param string        $defaultMethod
-     * @param array         $defaultArguments
+     * @param DomainManagerInterface $manager
+     * @param string                 $defaultMethod
+     * @param array                  $defaultArguments
      *
      * @return object
      */
-    public function createResource(DomainManager $manager, $defaultMethod = 'create', array $defaultArguments = array())
+    public function createResource(DomainManagerInterface $manager, $defaultMethod = 'create', array $defaultArguments = array())
     {
         return call_user_func_array(array($manager, $this->config->getFactoryMethod($defaultMethod)), $this->config->getFactoryArguments($defaultArguments));
     }

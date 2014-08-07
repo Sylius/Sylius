@@ -37,7 +37,10 @@ class DoctrineORMDriverSpec extends ObjectBehavior
 
     function it_should_create_definition(ContainerBuilder $container)
     {
-        $container->hasParameter("prefix.repository.resource.class")->shouldBeCalled();
+        $container->hasParameter("prefix.manager.resource.class")->willReturn(true);
+        $container->getParameter("prefix.manager.resource.class")->shouldBeCalled();
+
+        $container->hasParameter('prefix.repository.resource.class')->willReturn(true);
 
         $container->setDefinition(
             'prefix.controller.resource',
@@ -45,13 +48,13 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $container->setDefinition(
-            'prefix.repository.resource',
+            'prefix.manager.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
-        $container->setAlias(
-            'prefix.manager.resource',
-            Argument::type('Symfony\Component\DependencyInjection\Alias')
+        $container->setDefinition(
+            'prefix.repository.resource',
+            Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
@@ -65,12 +68,10 @@ class DoctrineORMDriverSpec extends ObjectBehavior
 
     function it_should_create_definition_and_get_repository_in_container(ContainerBuilder $container)
     {
-        $container->hasParameter("prefix.repository.resource.class")
-            ->willReturn(true)
-            ->shouldBeCalled();
+        $container->hasParameter("prefix.manager.resource.class")->willReturn(true);
+        $container->getParameter("prefix.manager.resource.class")->shouldBeCalled();
 
-        $container->getParameter("prefix.repository.resource.class")
-            ->shouldBeCalled();
+        $container->hasParameter('prefix.repository.resource.class')->willReturn(true);
 
         $container->setDefinition(
             'prefix.controller.resource',
@@ -78,13 +79,13 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $container->setDefinition(
-            'prefix.repository.resource',
+            'prefix.manager.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
-        $container->setAlias(
-            'prefix.manager.resource',
-            Argument::type('Symfony\Component\DependencyInjection\Alias')
+        $container->setDefinition(
+            'prefix.repository.resource',
+            Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
 
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');

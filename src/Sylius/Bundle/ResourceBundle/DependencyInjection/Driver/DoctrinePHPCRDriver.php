@@ -42,7 +42,7 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
 
         $definition = new Definition($this->managerClass);
         $definition->setArguments(array(
-            new Reference($this->getContainerKey('manager')),
+            new Reference($this->getManagerServiceKey()),
             new Reference('event_dispatcher'),
             $this->prefix,
             $this->resourceName,
@@ -63,7 +63,7 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
 
         $definition = new Definition($this->repositoryClass);
         $definition->setArguments(array(
-            new Reference($this->getContainerKey('manager')),
+            new Reference($this->getManagerServiceKey()),
             $this->getClassMetadataDefinition($classes['model']),
         ));
 

@@ -63,16 +63,10 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
-    function it_creates_new_resource_instance()
-    {
-        $this->createNew()->shouldHaveType('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo');
-    }
-
     function it_returns_null_if_resource_not_found($queryBuilder, $query)
     {
         $queryBuilder
             ->andWhere('o.id = 3')
-            ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
 
@@ -91,25 +85,21 @@ class EntityRepositorySpec extends ObjectBehavior
         foreach ($criteria as $property => $value) {
             $queryBuilder
                 ->expr()
-                ->shouldBeCalled()
                 ->willReturn($expr)
             ;
 
             $expr
                 ->eq('o.'.$property, ':'.$property)
-                ->shouldBeCalled()
                 ->willReturn('o.'.$property.' = :'.$value)
             ;
 
             $queryBuilder
                 ->andWhere('o.'.$property.' = :'.$value)
-                ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
 
             $queryBuilder
                 ->setParameter($property, $value)
-                ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
         }
@@ -162,13 +152,11 @@ class EntityRepositorySpec extends ObjectBehavior
         foreach ($criteria as $property => $value) {
             $queryBuilder
                 ->expr()
-                ->shouldBeCalled()
                 ->willReturn($expr)
             ;
 
             $expr
                 ->in('o.'.$property, $value)
-                ->shouldBeCalled()
                 ->willReturn('o.'.$property.' IN (:'.$property.')')
             ;
 

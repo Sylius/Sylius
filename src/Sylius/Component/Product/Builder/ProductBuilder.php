@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Product\Builder;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -46,7 +45,7 @@ class ProductBuilder implements ProductBuilderInterface
     /**
      * Product object manager.
      *
-     * @var ObjectManager
+     * @var DomainManagerInterface
      */
     protected $productManager;
 
@@ -58,30 +57,37 @@ class ProductBuilder implements ProductBuilderInterface
     protected $productRepository;
 
     /**
-     * Attribute repository.
+     * Product attribute repository.
      *
      * @var RepositoryInterface
      */
     protected $attributeRepository;
 
     /**
-     * Product attribute repository.
+     * Product attribute manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManagerInterface
      */
-    protected $attributeValueRepository;
+    protected $attributeManager;
+
+    /**
+     * Product attribute value manager.
+     *
+     * @var DomainManagerInterface
+     */
+    protected $attributeValueManager;
 
     public function __construct(
         DomainManagerInterface $productManager,
-        RepositoryInterface    $productRepository,
         RepositoryInterface    $attributeRepository,
-        RepositoryInterface    $attributeValueRepository
+        DomainManagerInterface $attributeManager,
+        DomainManagerInterface $attributeValueManager
     )
     {
-        $this->productManager           = $productManager;
-        $this->productRepository        = $productRepository;
-        $this->attributeRepository      = $attributeRepository;
-        $this->attributeValueRepository = $attributeValueRepository;
+        $this->productManager        = $productManager;
+        $this->attributeRepository   = $attributeRepository;
+        $this->attributeManager      = $attributeManager;
+        $this->attributeValueManager = $attributeValueManager;
     }
 
     /**
@@ -114,17 +120,14 @@ class ProductBuilder implements ProductBuilderInterface
         $attribute = $this->attributeRepository->findOneBy(array('name' => $name));
 
         if (null === $attribute) {
-            $attribute = $this->attributeRepository->createNew();
-
+            $attribute = $this->attributeManager->createNew();
             $attribute->setName($name);
             $attribute->setPresentation($presentation ?: $name);
 
-            $this->productManager->persist($attribute);
-            $this->productManager->flush($attribute);
+            $this->productManager->create($attribute);
         }
 
-        $attributeValue = $this->attributeValueRepository->createNew();
-
+        $attributeValue = $this->attributeValueManager->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);
 
@@ -136,13 +139,9 @@ class ProductBuilder implements ProductBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function save($flush = true)
+    public function save()
     {
-        $this->productManager->persist($this->product);
-
-        if ($flush) {
-            $this->productManager->flush();
-        }
+        $this->productManager->create($this->product);
 
         return $this->product;
     }

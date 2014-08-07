@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -28,14 +28,14 @@ class CouponGenerator implements CouponGeneratorInterface
     protected $repository;
 
     /**
-     * @var ObjectManager
+     * @var DomainManagerInterface
      */
-    protected $manager;
+    protected $couponManager;
 
-    public function __construct(RepositoryInterface $repository, ObjectManager $manager)
+    public function __construct(RepositoryInterface $repository, DomainManagerInterface $couponManager)
     {
         $this->repository = $repository;
-        $this->manager = $manager;
+        $this->couponManager = $couponManager;
     }
 
     /**
@@ -44,15 +44,13 @@ class CouponGenerator implements CouponGeneratorInterface
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
-            $coupon = $this->repository->createNew();
+            $coupon = $this->couponManager->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
             $coupon->setUsageLimit($instruction->getUsageLimit());
 
-            $this->manager->persist($coupon);
+            $this->couponManager->create($coupon);
         }
-
-        $this->manager->flush();
     }
 
     /**

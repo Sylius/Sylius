@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Currency\Converter;
 
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -30,7 +31,7 @@ class CurrencyConverter implements CurrencyConverterInterface
     /**
      * Cache for the exchange rates.
      *
-     * @var array
+     * @var CurrencyInterface[]
      */
     private $cache;
 
@@ -56,6 +57,11 @@ class CurrencyConverter implements CurrencyConverterInterface
         return (int) round($value * $currency->getExchangeRate());
     }
 
+    /**
+     * @param string $code
+     *
+     * @return CurrencyInterface
+     */
     private function getCurrency($code)
     {
         if (isset($this->cache[$code])) {

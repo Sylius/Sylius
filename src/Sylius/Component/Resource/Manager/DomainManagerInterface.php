@@ -23,25 +23,42 @@ interface DomainManagerInterface
     /**
      * Create object in database.
      *
+     * @param null|object $resource
+     * @param string      $eventName
+     *
      * @return object|null
      */
-    public function create();
+    public function create($resource = null, $eventName = 'create');
 
     /**
      * Update object in database.
      *
      * @param object $resource
+     * @param string $eventName
      *
      * @return object|null
      */
-    public function update($resource);
+    public function update($resource, $eventName = 'update');
 
     /**
      * Remove object from database.
      *
      * @param object $resource
+     * @param string $eventName
      *
      * @return object|null
      */
-    public function delete($resource);
+    public function delete($resource, $eventName = 'delete');
+
+    /**
+     * Bulk action (create/update/delete).
+     *
+     * @param string   $action
+     * @param object[] $resources
+     *
+     * @return object[]
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function bulk($action = 'create', array $resources);
 }

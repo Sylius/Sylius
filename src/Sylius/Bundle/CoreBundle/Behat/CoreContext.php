@@ -88,7 +88,7 @@ class CoreContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
 
-            /* @var $order OrderInterface */
+            /** @var $order OrderInterface */
             $order = $manager->createNew();
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
@@ -135,7 +135,7 @@ class CoreContext extends DefaultContext
         foreach ($items->getHash() as $data) {
             $product = $this->findOneByName('product', trim($data['product']));
 
-            /* @var $item OrderItemInterface */
+            /** @var $item OrderItemInterface */
             $item = $manager->createNew();
             $item->setVariant($product->getMasterVariant());
             $item->setUnitPrice($product->getMasterVariant()->getPrice());
@@ -225,12 +225,13 @@ class CoreContext extends DefaultContext
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
 
-            /* @var $user UserInterface */
+            /** @var $user UserInterface */
             $user = $this->getManager('user')->createNew();
             $user->setFirstname($this->faker->firstName);
             $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
             $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $user->setUsername($email);
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);
             $user->setPlainPassword($password);
@@ -264,11 +265,11 @@ class CoreContext extends DefaultContext
      */
     public function productHasTheFollowingVolumeBasedPricing($productName, TableNode $table)
     {
-        /* @var $product ProductInterface */
+        /** @var $product ProductInterface */
         $product = $this->findOneByName('product', $productName);
         $masterVariant = $product->getMasterVariant();
 
-        /* @var $masterVariant ProductVariantInterface */
+        /** @var $masterVariant ProductVariantInterface */
         $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
         $configuration = array();
 
@@ -302,7 +303,7 @@ class CoreContext extends DefaultContext
         $product = $this->findOneByName('product', $productName);
         $masterVariant = $product->getMasterVariant();
 
-        /* @var $masterVariant ProductVariantInterface */
+        /** @var $masterVariant ProductVariantInterface */
         $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
         $configuration = array();
 
@@ -337,8 +338,8 @@ class CoreContext extends DefaultContext
      */
     public function thereIsTaxRate($amount, $name, $category, $zone, $includedInPrice = false, $flush = true)
     {
-        /* @var $rate TaxRateInterface */
-        $rate = $this->getRepository('tax_rate')->createNew();
+        /** @var $rate TaxRateInterface */
+        $rate = $this->getManager('tax_rate')->createNew();
         $rate->setName($name);
         $rate->setAmount($amount / 100);
         $rate->setIncludedInPrice($includedInPrice);
@@ -382,7 +383,7 @@ class CoreContext extends DefaultContext
      */
     public function thereIsShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $enabled = true, $flush = true)
     {
-        /* @var $method ShippingMethodInterface */
+        /** @var $method ShippingMethodInterface */
         $method = $this
             ->getManager('shipping_method')
             ->createNew()
@@ -459,7 +460,7 @@ class CoreContext extends DefaultContext
 
         list($firstname, $lastname) = explode(' ', $addressData[0]);
 
-        /* @var $address AddressInterface */
+        /** @var $address AddressInterface */
         $address = $this->getManager('address')->createNew();
         $address->setFirstname(trim($firstname));
         $address->setLastname(trim($lastname));
@@ -502,10 +503,10 @@ class CoreContext extends DefaultContext
         $shipmentData = explode(',', $string);
         $shipmentData = array_map('trim', $shipmentData);
 
-        /* @var $shippingMethod ShippingMethodInterface */
+        /** @var $shippingMethod ShippingMethodInterface */
         $shippingMethod = $this->getRepository('shipping_method')->findOneBy(array('name' => $shipmentData[0]));
 
-        /* @var $shipment ShipmentInterface */
+        /** @var $shipment ShipmentInterface */
         $shipment = $this->getManager('shipment')->createNew();
         $shipment->setMethod($shippingMethod);
         if (isset($shipmentData[1])) {

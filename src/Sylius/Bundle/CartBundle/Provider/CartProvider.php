@@ -99,8 +99,11 @@ class CartProvider implements CartProviderInterface
             return $this->cart;
         }
 
-        $this->cart = $this->manager->create();
+        $this->cart = $this->manager->createNew();
+
         $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, new CartEvent($this->cart));
+
+        $this->manager->create($this->cart);
 
         return $this->cart;
     }
