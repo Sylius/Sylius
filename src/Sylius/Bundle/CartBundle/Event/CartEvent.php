@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\Event;
 
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Resource\Event\ResourceEvent;
 
 /**
  * Cart event.
