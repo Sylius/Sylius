@@ -70,9 +70,8 @@ class AddressingContext extends DefaultContext
     public function thereAreFollowingZones(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-
             $scope = null;
-            if (array_key_exists('scope', $data) && strlen($data['scope']) > 0){
+            if (!empty($data['scope'])) {
                 $scope = $data['scope'];
             }
 

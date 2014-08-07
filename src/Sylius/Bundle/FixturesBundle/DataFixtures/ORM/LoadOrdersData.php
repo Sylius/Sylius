@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Order\SyliusOrderEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 

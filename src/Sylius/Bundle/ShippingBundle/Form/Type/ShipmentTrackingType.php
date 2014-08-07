@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -33,7 +32,7 @@ class ShipmentTrackingType extends AbstractType
         $builder
             ->add('tracking', 'text', array(
                 'label' => 'sylius.form.shipment.tracking_code',
-                'attr' => array(
+                'attr'  => array(
                     'placeholder' => 'sylius.form.shipment.tracking_code'
                 )
             ))

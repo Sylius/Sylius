@@ -13,7 +13,6 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
-use Sylius\Component\Money\Model\ExchangeRateInterface;
 
 /**
  * Default currency fixtures.
