@@ -19,4 +19,4 @@ interface ResourceBundleInterface
      * @return array
      */
     public static function getSupportedDrivers();
-} 
+}

@@ -56,9 +56,9 @@ class ResourceExtension extends \Twig_Extension
      * Constructor.
      *
      * @param RouterInterface $router
-     * @param Parameters $parameters
-     * @param $paginateTemplate
-     * @param $sortingTemplate
+     * @param Parameters      $parameters
+     * @param string          $paginateTemplate
+     * @param string          $sortingTemplate
      */
     public function __construct(RouterInterface $router, Parameters $parameters, $paginateTemplate, $sortingTemplate)
     {

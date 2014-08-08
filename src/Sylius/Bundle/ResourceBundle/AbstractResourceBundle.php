@@ -79,7 +79,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         return 'model';
     }
 
-
     /**
      * Return the entity namespace
      *
@@ -94,13 +93,14 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      * Return the entity manager
      *
      * @param string $driverType
+     *
      * @return array
      *
      * @throws UnknownDriverException
      */
     protected function getDoctrineDriver($driverType)
     {
-        switch($driverType) {
+        switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
                 return array(
                     'Doctrine\\Bundle\PHPCRBundle\\DependencyInjection\\Compiler\\DoctrinePhpcrMappingsPass',
