@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Releaser;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
@@ -33,7 +33,7 @@ class ExpiredOrdersReleaser implements ReleaserInterface
     /**
      * Order repository.
      *
-     * @var OrderRepository
+     * @var OrderRepositoryInterface
      */
     protected $repository;
 
@@ -42,7 +42,7 @@ class ExpiredOrdersReleaser implements ReleaserInterface
      */
     protected $factory;
 
-    public function __construct(ObjectManager $manager, OrderRepository $repository, FactoryInterface $factory)
+    public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
         $this->manager    = $manager;
         $this->repository = $repository;
