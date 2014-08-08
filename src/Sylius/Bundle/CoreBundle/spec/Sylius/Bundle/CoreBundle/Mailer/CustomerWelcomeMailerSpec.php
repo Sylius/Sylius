@@ -44,7 +44,12 @@ class CustomerWelcomeMailerSpec extends ObjectBehavior
 
         $user->getEmail()->willReturn('recipient@example.com');
 
-        $mailer->sendEmail('test-template.html.twig', array('user' => $user), 'from@example.com', 'recipient@example.com')->shouldBeCalled();
+        $mailer->sendEmail(
+            'test-template.html.twig',
+            array('user' => $user),
+            'from@example.com',
+            'recipient@example.com'
+        )->shouldBeCalled();
 
         $this->sendCustomerWelcome($user);
     }

@@ -41,8 +41,7 @@ class RuleTypeSpec extends ObjectBehavior
     function it_should_build_form_with_rule_choice_field(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 
@@ -58,8 +57,7 @@ class RuleTypeSpec extends ObjectBehavior
     function it_should_add_rule_event_subscriber(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
         $builder->getFormFactory()->willReturn($factory);
 

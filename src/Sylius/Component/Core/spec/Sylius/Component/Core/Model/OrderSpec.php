@@ -114,8 +114,7 @@ class OrderSpec extends ObjectBehavior
         OrderInterface $order,
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    )
-    {
+    ) {
         $shippingAdjustment->getLabel()->willReturn(OrderInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($order)->shouldBeCalled();
         $taxAdjustment->getLabel()->willReturn(OrderInterface::TAX_ADJUSTMENT);
@@ -128,8 +127,7 @@ class OrderSpec extends ObjectBehavior
     function it_should_return_shipping_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    )
-    {
+    ) {
         $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
@@ -142,8 +140,7 @@ class OrderSpec extends ObjectBehavior
     function it_should_remove_shipping_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    )
-    {
+    ) {
         $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
@@ -158,8 +155,7 @@ class OrderSpec extends ObjectBehavior
     function it_should_return_tax_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    )
-    {
+    ) {
         $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
@@ -172,8 +168,7 @@ class OrderSpec extends ObjectBehavior
     function it_should_remove_tax_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
-    )
-    {
+    ) {
         $this->addShippingAndTaxAdjustments($this, $shippingAdjustment, $taxAdjustment);
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
@@ -211,8 +206,7 @@ class OrderSpec extends ObjectBehavior
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
         OrderItemInterface $item
-    )
-    {
+    ) {
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_BACKORDERED);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 
@@ -228,8 +222,7 @@ class OrderSpec extends ObjectBehavior
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
          OrderItemInterface $item
-    )
-    {
+    ) {
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
 

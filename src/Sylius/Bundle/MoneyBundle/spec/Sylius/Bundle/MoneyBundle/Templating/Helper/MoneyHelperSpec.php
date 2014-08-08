@@ -33,7 +33,7 @@ class MoneyHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_formats_the_integer_amounts_into_string_representation($currencyContext)
+    function it_formats_the_integer_amounts_into_string_representation()
     {
         $this->formatAmount(15)->shouldReturn('0,15 €');
         $this->formatAmount(2500)->shouldReturn('25,00 €');
@@ -41,7 +41,7 @@ class MoneyHelperSpec extends ObjectBehavior
         $this->formatAmount(500)->shouldReturn('5,00 €');
     }
 
-    function it_allows_to_format_money_in_different_currencies($currencyContext)
+    function it_allows_to_format_money_in_different_currencies()
     {
         $this->formatAmount(15, 'USD')->shouldReturn('0,15 $');
         $this->formatAmount(2500, 'USD')->shouldReturn('25,00 $');

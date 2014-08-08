@@ -67,7 +67,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         RouterInterface $router,
         \Twig_Environment $twig,
-        Parameters $parameters
+        $parameters
     ) {
         $parameters->get('parameter_name')->willReturn(array());
         $parameters->get('sortable')->willReturn(true);
@@ -96,7 +96,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         RouterInterface $router,
         \Twig_Environment $twig,
-        Parameters $parameters,
+        $parameters,
         Request $request
     ) {
         $parameters->get('parameter_name')->willReturn(array());
@@ -126,7 +126,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         RouterInterface $router,
         \Twig_Environment $twig,
-        Parameters $parameters
+        $parameters
     ) {
         $parameters->get('sortable')->willReturn(true);
         $parameters->get('parameter_name')->willReturn(array());
@@ -155,7 +155,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         GetResponseEvent $event,
         RouterInterface $router,
         \Twig_Environment $twig,
-        Parameters $parameters
+        $parameters
     ) {
         $parameters->get('sortable')->willReturn(true);
         $parameters->get('parameter_name')->willReturn(array());
@@ -189,7 +189,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         Request $request, 
         GetResponseEvent $event, 
         \Twig_Environment $twig,
-        Parameters $parameters
+        $parameters
     ) {
         $parameters->get('sortable')->willReturn(false);
 
@@ -210,7 +210,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         Pagerfanta $paginator,
         RouterInterface $router,
         \Twig_Environment $twig,
-        Parameters $parameters
+        $parameters
     ) {
         $limits = array(10, 20);
 
@@ -255,7 +255,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         Pagerfanta $paginator,
         RouterInterface $router,
         \Twig_Environment $twig,
-        Parameters $parameters
+        $parameters
     ) {
         $limits = array(10, 20);
         $parameters->get('paginate')->willReturn(10);

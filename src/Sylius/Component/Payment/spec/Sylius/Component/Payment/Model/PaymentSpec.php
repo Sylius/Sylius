@@ -140,6 +140,7 @@ class PaymentSpec extends ObjectBehavior
 
     function its_throws_if_neither_array_or_traversable_given_as_details()
     {
-        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->duringSetDetails('invalidDetails');
+        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')
+            ->duringSetDetails('invalidDetails');
     }
 }

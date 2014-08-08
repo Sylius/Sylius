@@ -54,7 +54,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_transforms_array_into_string($coupon)
+    function it_transforms_array_into_string()
     {
         $this->transform(array('foo', 'bar', 'yo'))->shouldReturn('foo, bar, yo');
     }

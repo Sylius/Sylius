@@ -30,8 +30,7 @@ class CartProviderSpec extends ObjectBehavior
         ObjectManager $manager,
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->beConstructedWith($storage, $manager, $repository, $eventDispatcher);
     }
 
@@ -50,8 +49,7 @@ class CartProviderSpec extends ObjectBehavior
         $repository,
         $eventDispatcher,
         CartInterface $cart
-    )
-    {
+    ) {
         $storage->getCurrentCartIdentifier()->willReturn(3);
         $repository->find(3)->shouldBeCalled()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldNotBeCalled();
@@ -64,8 +62,7 @@ class CartProviderSpec extends ObjectBehavior
         $repository,
         $eventDispatcher,
         CartInterface $cart
-    )
-    {
+    ) {
         $storage->getCurrentCartIdentifier()->willReturn(null);
         $repository->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
@@ -78,8 +75,7 @@ class CartProviderSpec extends ObjectBehavior
         $repository,
         $eventDispatcher,
         CartInterface $cart
-    )
-    {
+    ) {
         $storage->getCurrentCartIdentifier()->willReturn(7);
         $repository->find(7)->shouldBeCalled()->willReturn(null);
         $repository->createNew()->willReturn($cart);
@@ -90,11 +86,9 @@ class CartProviderSpec extends ObjectBehavior
 
     function it_resets_current_cart_identifier_in_storage_when_abandoning_cart(
         $storage,
-        $storage,
         $eventDispatcher,
         CartInterface $cart
-    )
-    {
+    ) {
         $this->setCart($cart);
         $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
@@ -113,10 +107,8 @@ class CartProviderSpec extends ObjectBehavior
 
     function it_initializes_cart_while_validating_existence_and_if_there_is_no_identifier_in_storage(
         $storage,
-        $repository,
-        CartInterface $cart
-    )
-    {
+        $repository
+    ) {
         $storage->getCurrentCartIdentifier()->willReturn(null);
         $repository->find(Argument::any())->shouldNotBeCalled();
 
@@ -127,8 +119,7 @@ class CartProviderSpec extends ObjectBehavior
         $storage,
         $repository,
         CartInterface $cart
-    )
-    {
+    ) {
         $storage->getCurrentCartIdentifier()->willReturn(666);
         $repository->find(666)->shouldBeCalled()->willReturn($cart);
 

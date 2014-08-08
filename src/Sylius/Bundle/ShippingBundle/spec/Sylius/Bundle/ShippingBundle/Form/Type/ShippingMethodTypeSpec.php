@@ -32,8 +32,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         RuleCheckerRegistryInterface $checkerRegistry,
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
 
         $builder->getFormFactory()->willReturn($factory);
@@ -89,8 +88,10 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_adds_build_shipping_method_event_subscriber(FormBuilder $builder, $calculatorRegistry)
-    {
+    function it_adds_build_shipping_method_event_subscriber(
+        FormBuilder $builder,
+        $calculatorRegistry
+    ) {
         $calculatorRegistry->getCalculators()->willReturn(array());
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
 
@@ -114,8 +115,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $perItemFormBuilder,
         Form $perItemForm,
         PerItemRateCalculator $perItemRateCalculator
-    )
-    {
+    ) {
         $builder
             ->add(Argument::any(), Argument::cetera())
             ->willReturn($builder)

@@ -29,8 +29,7 @@ class ProductBuilderSpec extends ObjectBehavior
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $attributeValueRepository
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $productManager,
             $productRepository,
@@ -54,8 +53,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
-    )
-    {
+    ) {
         $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn($attribute);
         $attributeValueRepository->createNew()->shouldBeCalled()->willReturn($attributeValue);
 
@@ -74,8 +72,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $product,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue
-    )
-    {
+    ) {
         $attributeRepository->findOneBy(array('name' => 'collection'))->shouldBeCalled()->willReturn(null);
         $attributeRepository->createNew()->shouldBeCalled()->willReturn($attribute);
 
@@ -123,7 +120,7 @@ class ProductBuilderSpec extends ObjectBehavior
         $this->setDescription($description)->shouldReturn($this);
     }
 
-    function it_throws_exception_when_product_method_is_not_defined($product)
+    function it_throws_exception_when_product_method_is_not_defined()
     {
         $this->shouldThrow(new \BadMethodCallException('Product has no "getFoo()" method.'))->during('getFoo');
     }

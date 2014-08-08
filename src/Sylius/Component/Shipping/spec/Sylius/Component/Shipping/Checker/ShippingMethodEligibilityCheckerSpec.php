@@ -25,10 +25,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
-    function let(
-        RuleCheckerRegistryInterface $registry,
-        RuleCheckerInterface $checker
-    )
+    function let(RuleCheckerRegistryInterface $registry)
     {
         $this->beConstructedWith($registry);
     }
@@ -45,12 +42,11 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_all_checkers_approve_shipping_method(
         $registry,
-        $checker,
+        RuleCheckerInterface $checker,
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         RuleInterface $rule
-    )
-    {
+    ) {
         $configuration = array();
 
         $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
@@ -67,12 +63,11 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_any_checker_disapproves_shipping_method(
         $registry,
-        $checker,
+        RuleCheckerInterface $checker,
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         RuleInterface $rule
-    )
-    {
+    ) {
         $configuration = array();
 
         $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
@@ -92,8 +87,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
         ShippableInterface $shippable
-    )
-    {
+    ) {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->shouldBeCalled()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
 
@@ -106,8 +100,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
     function it_approves_category_requirement_if_no_category_is_required(
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod
-    )
-    {
+    ) {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn(null);
 
         $this->isCategoryEligible($subject, $shippingMethod)->shouldReturn(true);
@@ -119,8 +112,7 @@ class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingCategoryInterface $shippingCategory,
         ShippingCategoryInterface $shippingCategory2,
         ShippableInterface $shippable
-    )
-    {
+    ) {
         $shippingMethod->getCategory()->shouldBeCalled()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->shouldBeCalled()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
 

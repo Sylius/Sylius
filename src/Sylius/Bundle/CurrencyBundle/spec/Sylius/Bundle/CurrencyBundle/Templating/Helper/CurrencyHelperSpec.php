@@ -21,8 +21,11 @@ use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
  */
 class CurrencyHelperSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, MoneyHelper $moneyHelper)
-    {
+    function let(
+        CurrencyContextInterface $currencyContext,
+        CurrencyConverterInterface $converter,
+        MoneyHelper $moneyHelper
+    ) {
         $this->beConstructedWith($currencyContext, $converter, $moneyHelper);
     }
 
@@ -36,8 +39,10 @@ class CurrencyHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_allows_to_convert_prices_in_different_currencies($currencyContext, $converter)
-    {
+    function it_allows_to_convert_prices_in_different_currencies(
+        $currencyContext,
+        $converter
+    ) {
         $currencyContext->getCurrency()->willReturn('PLN');
 
         $converter->convert(15, 'USD')->shouldBeCalled()->willReturn(19);

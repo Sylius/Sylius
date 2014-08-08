@@ -61,7 +61,9 @@ class CurrencyTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Currency', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(
+            array('data_class' => 'Currency', 'validation_groups' => array('sylius'))
+        )->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

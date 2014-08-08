@@ -34,11 +34,10 @@ class OrderStateListenerSpec extends ObjectBehavior
     }
 
     function it_resolves_order_states(
-            StateResolverInterface $stateResolver,
-            GenericEvent $event,
-            OrderInterface $order
-    )
-    {
+        StateResolverInterface $stateResolver,
+        GenericEvent $event,
+        OrderInterface $order
+    ) {
         $event->getSubject()->willReturn($order);
         $stateResolver->resolveShippingState($order)->shouldBeCalled();
         $stateResolver->resolvePaymentState($order)->shouldBeCalled();
@@ -51,8 +50,7 @@ class OrderStateListenerSpec extends ObjectBehavior
         TransitionEvent $event,
         OrderInterface $order,
         StateMachineInterface $sm
-    )
-    {
+    ) {
         $event->getStateMachine()->willReturn($sm);
         $sm->getObject()->willReturn($order);
 

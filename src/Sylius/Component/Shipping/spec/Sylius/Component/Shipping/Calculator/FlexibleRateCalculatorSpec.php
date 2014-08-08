@@ -35,10 +35,16 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->shouldBeConfigurable();
     }
 
-    function it_has_required_first_and_additional_items_cost_with_limit_configuration_options(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array('additional_item_limit' => 0))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setRequired(array('first_item_cost', 'additional_item_cost'))->shouldBeCalled()->willReturn($resolver);
+    function it_has_required_first_and_additional_items_cost_with_limit_configuration_options(
+        OptionsResolverInterface $resolver
+    ) {
+        $resolver->setDefaults(array('additional_item_limit' => 0))
+            ->shouldBeCalled()
+            ->willReturn($resolver);
+
+        $resolver->setRequired(array('first_item_cost', 'additional_item_cost'))
+            ->shouldBeCalled()
+            ->willReturn($resolver);
 
         $resolver
             ->setAllowedTypes(array(
@@ -70,8 +76,9 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
         $this->calculate($shipment, $configuration)->shouldReturn(1000);
     }
 
-    function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items(ShipmentInterface $shipment)
-    {
+    function it_should_calculate_the_first_and_every_additional_item_cost_when_shipment_has_more_items(
+        ShipmentInterface $shipment
+    ) {
         $configuration = array(
             'first_item_cost'       => 1500,
             'additional_item_cost'  => 300,

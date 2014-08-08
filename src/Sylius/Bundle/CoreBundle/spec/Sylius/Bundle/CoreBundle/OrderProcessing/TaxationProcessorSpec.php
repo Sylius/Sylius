@@ -32,8 +32,7 @@ class TaxationProcessorSpec extends ObjectBehavior
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
         Settings $taxationSettings
-    )
-    {
+    ) {
         $this->beConstructedWith($adjustmentRepository, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings);
     }
 
@@ -57,8 +56,11 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->applyTaxes($order);
     }
 
-    function it_doesnt_apply_any_taxes_if_zone_is_missing(OrderInterface $order, Collection $collection, $taxationSettings)
-    {
+    function it_doesnt_apply_any_taxes_if_zone_is_missing(
+        OrderInterface $order,
+        Collection $collection,
+        $taxationSettings
+    ) {
         $collection->isEmpty()->willReturn(false);
 
         $order->getItems()->willReturn($collection);

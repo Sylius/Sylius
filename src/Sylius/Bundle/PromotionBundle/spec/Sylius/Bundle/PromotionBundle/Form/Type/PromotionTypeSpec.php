@@ -25,8 +25,7 @@ class PromotionTypeSpec extends ObjectBehavior
     function let(
         ServiceRegistryInterface $checkerRegistry,
         ServiceRegistryInterface $actionRegistry
-    )
-    {
+    ) {
         $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
     }
 

@@ -43,9 +43,12 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
     }
 
     function it_does_transform_collection_with_objects_value(
-        FakeEntity $entityOne, FakeEntity $entityTwo, FakeEntity $entityThree, FakeEntity $entityFour, Collection $collection
-    )
-    {
+        FakeEntity $entityOne,
+        FakeEntity $entityTwo,
+        FakeEntity $entityThree,
+        FakeEntity $entityFour,
+        Collection $collection
+    ) {
         $entityThree->getId()->willReturn(3);
         $entityFour->getId()->willReturn(4);
 
@@ -65,7 +68,8 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
 
     function it_does_not_reverse_transform_string_value()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringReverseTransform('string');
+        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+            ->duringReverseTransform('string');
     }
 
     function it_does_reverse_transform_array_value(FakeEntity $entity)

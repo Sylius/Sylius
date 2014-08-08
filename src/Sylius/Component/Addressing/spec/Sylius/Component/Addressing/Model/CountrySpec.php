@@ -108,8 +108,7 @@ class CountrySpec extends ObjectBehavior
     function it_has_fluent_interface(
         ProvinceInterface $province,
         Collection $provinces
-    )
-    {
+    ) {
         $this->setName('Poland')->shouldReturn($this);
         $this->setIsoName('PL')->shouldReturn($this);
 

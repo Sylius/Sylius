@@ -202,8 +202,7 @@ class AddressSpec extends ObjectBehavior
     function it_has_fluent_interface(
         CountryInterface $country,
         ProvinceInterface $province
-    )
-    {
+    ) {
         $this->setFirstName('John')->shouldReturn($this);
         $this->setLastName('Doe')->shouldReturn($this);
         $this->setStreet('Foo Street 3-44')->shouldReturn($this);

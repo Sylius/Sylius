@@ -72,8 +72,7 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod
-    )
-    {
+    ) {
         $adjustmentRepository->createNew()->willReturn($adjustment);
         $order->getShipments()->willReturn(array($shipment));
 

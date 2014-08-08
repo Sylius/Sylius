@@ -44,8 +44,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponsAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         RuleInterface $rule
-    )
-    {
+    ) {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
@@ -71,8 +70,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         RuleInterface $rule
-    )
-    {
+    ) {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
@@ -97,8 +95,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         CouponInterface $coupon,
         RuleInterface $rule
-    )
-    {
+    ) {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
@@ -122,8 +119,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
     function it_recognizes_subject_as_eligible_if_promotion_have_no_coupon_codes(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
@@ -137,8 +133,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponsAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         CouponInterface $coupon
-    )
-    {
+    ) {
         $subject->getPromotionCoupons()->willReturn(array($coupon));
 
         $promotion->getStartsAt()->willReturn(null);
@@ -159,8 +154,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         CouponInterface $coupon,
         RuleInterface $rule
-    )
-    {
+    ) {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
         $promotion->getUsageLimit()->willReturn(null);
@@ -185,8 +179,7 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponsAwareSubjectInterface $subject,
         PromotionInterface $promotion,
         CouponInterface $coupon
-    )
-    {
+    ) {
         $subject->getPromotionCoupons()->willReturn(array($coupon));
 
         $promotion->getStartsAt()->willReturn(null);

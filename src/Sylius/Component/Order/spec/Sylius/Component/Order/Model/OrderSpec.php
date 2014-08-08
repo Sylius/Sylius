@@ -125,8 +125,11 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(0);
     }
 
-    function it_calculates_correct_items_total(OrderItemInterface $item1, OrderItemInterface $item2, OrderItemInterface $item3)
-    {
+    function it_calculates_correct_items_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        OrderItemInterface $item3
+    ) {
         $item1->calculateTotal()->shouldBeCalled();
         $item2->calculateTotal()->shouldBeCalled();
         $item3->calculateTotal()->shouldBeCalled();

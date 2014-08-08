@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -36,8 +35,7 @@ class OrderInventoryListenerSpec extends ObjectBehavior
             InventoryHandlerInterface $inventoryHandler,
             GenericEvent $event,
             OrderItemInterface $item
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($item);
 
         $inventoryHandler->processInventoryUnits($item)->shouldBeCalled();

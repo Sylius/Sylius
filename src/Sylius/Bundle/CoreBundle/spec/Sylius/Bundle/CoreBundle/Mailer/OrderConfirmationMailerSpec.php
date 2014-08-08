@@ -46,7 +46,12 @@ class OrderConfirmationMailerSpec extends ObjectBehavior
         $user->getEmail()->willReturn('recipient@example.com');
         $order->getUser()->willReturn($user);
 
-        $mailer->sendEmail('test-template.html.twig', array('order' => $order), 'from@example.com', 'recipient@example.com')->shouldBeCalled();
+        $mailer->sendEmail(
+            'test-template.html.twig',
+            array('order' => $order),
+            'from@example.com',
+            'recipient@example.com'
+        )->shouldBeCalled();
 
         $this->sendOrderConfirmation($order);
     }

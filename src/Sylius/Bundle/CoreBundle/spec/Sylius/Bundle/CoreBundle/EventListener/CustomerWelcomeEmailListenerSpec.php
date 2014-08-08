@@ -28,8 +28,11 @@ class CustomerWelcomeEmailListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CustomerWelcomeEmailListener');
     }
 
-    function it_should_delegate_event_properly(FilterUserResponseEvent $event, UserInterface $user, $mailer)
-    {
+    function it_should_delegate_event_properly(
+        FilterUserResponseEvent $event,
+        UserInterface $user,
+        $mailer
+    ) {
         $user->isEnabled()->willReturn(true);
         $event->getUser()->willReturn($user);
         $mailer->sendCustomerWelcome($user)->shouldBeCalled();
@@ -37,8 +40,11 @@ class CustomerWelcomeEmailListenerSpec extends ObjectBehavior
         $this->handleEvent($event);
     }
 
-    function it_should_not_email_disabled_users(FilterUserResponseEvent $event, UserInterface $user, $mailer)
-    {
+    function it_should_not_email_disabled_users(
+        FilterUserResponseEvent $event,
+        UserInterface $user,
+        $mailer
+    ) {
         $user->isEnabled()->willReturn(false);
         $event->getUser()->willReturn($user);
         $mailer->sendCustomerWelcome($user)->shouldNotBeCalled();

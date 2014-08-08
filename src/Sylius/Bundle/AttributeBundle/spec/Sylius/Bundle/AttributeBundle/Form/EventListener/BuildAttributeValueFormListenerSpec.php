@@ -38,8 +38,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         Form $form,
         Form $valueField,
         $formFactory
-    )
-    {
+    ) {
         $event->getData()->willReturn(null);
         $event->getForm()->willReturn($form);
 
@@ -55,8 +54,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         AttributeValueInterface $productAttribute,
         Form $valueField,
         $formFactory
-    )
-    {
+    ) {
         $productAttribute->getType()->willReturn('checkbox');
         $productAttribute->getName()->willReturn('My name');
         $productAttribute->getConfiguration()->willReturn(array());
@@ -78,8 +76,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         AttributeValueInterface $productAttribute,
         Form $valueField,
         $formFactory
-    )
-    {
+    ) {
         $productAttribute->getType()->willReturn('choice');
         $productAttribute->getConfiguration()->willReturn(array(
             'choices' => array(

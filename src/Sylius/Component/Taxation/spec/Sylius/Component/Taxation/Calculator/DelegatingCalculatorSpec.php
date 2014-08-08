@@ -81,8 +81,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
     function it_should_complain_if_correct_calculator_doesnt_exist_for_given_rate(
         TaxRateInterface $rate,
         CalculatorInterface $calculator
-    )
-    {
+    ) {
         $this->registerCalculator('default', $calculator);
         $rate->getCalculator()->willReturn('custom');
 

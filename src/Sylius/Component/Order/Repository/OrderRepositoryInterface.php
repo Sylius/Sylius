@@ -24,6 +24,8 @@ interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepos
     /**
      * Gets recently completed orders.
      *
+     * @param integer $amount
+     *
      * @return array
      */
     public function findRecentOrders($amount = 10);
