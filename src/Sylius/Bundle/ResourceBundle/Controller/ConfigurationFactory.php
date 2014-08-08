@@ -34,7 +34,7 @@ class ConfigurationFactory
      * Constructor.
      *
      * @param ParametersParser $parametersParser
-     * @param array $settings
+     * @param array            $settings
      */
     public function __construct(ParametersParser $parametersParser, array $settings)
     {

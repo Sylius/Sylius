@@ -81,7 +81,6 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         return 'model';
     }
 
-
     /**
      * Return the entity namespace
      *

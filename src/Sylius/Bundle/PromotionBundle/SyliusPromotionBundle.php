@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\PromotionBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
