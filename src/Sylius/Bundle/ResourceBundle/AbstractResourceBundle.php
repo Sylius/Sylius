@@ -43,11 +43,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
             foreach ($className::getSupportedDrivers() as $driver) {
                 list($mappingsPassClassName, $manager) = $this->getDoctrineDriver($driver);
 
-                $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
-                    array($this->getConfigFilesPath() => $this->getEntityNamespace()),
-                    $manager,
-                    sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
-                ));
+                if (class_exists($mappingsPassClassName)) {
+                    $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
+                        array($this->getConfigFilesPath() => $this->getEntityNamespace()),
+                        $manager,
+                        sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
+                    ));
+                }
             }
         }
     }
@@ -94,16 +96,17 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      * Return the entity manager
      *
      * @param string $driverType
+     *
      * @return array
      *
      * @throws UnknownDriverException
      */
     protected function getDoctrineDriver($driverType)
     {
-        switch($driverType) {
+        switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
                 return array(
-                    'Doctrine\\Bundle\PHPCRBundle\\DependencyInjection\\Compiler\\DoctrinePhpcrMappingsPass',
+                    'Doctrine\\Bundle\\MongoDBBundle\\DependencyInjection\\Compiler\\DoctrineMongoDBMappingsPass',
                     array('doctrine_mongodb.odm.document_manager'),
                 );
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
@@ -113,7 +116,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                 );
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
                 return array(
-                    'Doctrine\\Bundle\\MongoDBBundle\\DependencyInjection\\Compiler\\DoctrineMongoDBMappingsPass',
+                    'Doctrine\\Bundle\\PHPCRBundle\\DependencyInjection\\Compiler\\DoctrinePhpcrMappingsPass',
                     array('doctrine_phpcr.odm.document_manager'),
                 );
         }

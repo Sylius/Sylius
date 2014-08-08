@@ -37,12 +37,14 @@
         "phpspec/phpspec":      "~2.0",
         "twig/twig":            "~1.11",
         "doctrine/orm":         "~2.3",
-        "doctrine/mongodb-odm": "1.0.*@dev"
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/phpcr-bundle": "~1.1"
     },
     "suggest": {
         "fsc/hateoas-bundle":   "0.3.*@dev",
         "doctrine/orm":         "~2.3",
-        "doctrine/mongodb-odm": "1.0.*@dev"
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/phpcr-bundle": "~1.1"
     },
     "config": {
         "bin-dir": "bin"
