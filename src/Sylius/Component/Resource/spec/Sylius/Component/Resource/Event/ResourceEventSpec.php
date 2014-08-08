@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Sylius\Bundle\ResourceBundle\Event;
+namespace spec\Sylius\Component\Resource\Event;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Sylius\Component\Resource\Event\ResourceEvent;
 
 class ResourceEventSpec extends ObjectBehavior
 {
@@ -15,7 +15,7 @@ class ResourceEventSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Event\ResourceEvent');
+        $this->shouldHaveType('Sylius\Component\Resource\Event\ResourceEvent');
     }
 
     function it_stops_event_propagation()

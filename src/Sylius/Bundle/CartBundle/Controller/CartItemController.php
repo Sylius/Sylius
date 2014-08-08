@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\CartBundle\Controller;
 
 use Sylius\Component\Cart\Event\CartItemEvent;
-use Sylius\Component\Cart\Event\FlashEvent;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Event\FlashEvent;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
