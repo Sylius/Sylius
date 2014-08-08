@@ -62,7 +62,7 @@
             <argument type="service" id="sylius.currency_provider" />
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
-            <argument type="service" id="sylius.twig.extension.money" />
+            <argument type="service" id="sylius.templating.helper.currency" />
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
