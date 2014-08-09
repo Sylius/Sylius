@@ -28,7 +28,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     public function build(ContainerBuilder $container)
     {
-        $interfaces = $this->getInterfaces($container);
+        $interfaces = $this->getInterfaces();
         if (!empty($interfaces)) {
             $container->addCompilerPass(
                 new ResolveDoctrineTargetEntitiesPass(
