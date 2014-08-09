@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Loader\XmlFileLoader;
 use Sylius\Component\Resource\Exception\Driver\InvalidDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -33,7 +33,7 @@ abstract class AbstractResourceExtension extends Extension
     const CONFIGURE_VALIDATORS = 8;
 
     protected $applicationName = 'sylius';
-    protected $configDirectory = '/../Resources/config';
+    protected $configDirectory = 'Resources/config';
     protected $configFiles = array(
         'services',
     );
@@ -62,12 +62,10 @@ abstract class AbstractResourceExtension extends Extension
     ) {
         $processor = new Processor();
         $config    = $processor->processConfiguration($configuration, $config);
-
         $config = $this->process($config, $container);
+        $loader = $this->getXmlLoaderFile($container);
 
-        $loader = new XmlFileLoader($container, new FileLocator($this->getConfigurationDirectory()));
-
-        $this->loadConfigurationFile($this->configFiles, $loader);
+        $loader->loadFiles($this->configFiles);
 
         if ($configure & self::CONFIGURE_DATABASE) {
             $this->loadDatabaseDriver($config, $loader, $container);
@@ -146,7 +144,7 @@ abstract class AbstractResourceExtension extends Extension
             throw new InvalidDriverException($driver, basename($bundle));
         }
 
-        $this->loadConfigurationFile(array(sprintf('driver/%s', $driver)), $loader);
+        $loader->loadDriver(array($driver));
 
         $container->setParameter($this->getAlias().'.driver', $driver);
         $container->setParameter($this->getAlias().'.driver.'.$driver, true);
@@ -165,34 +163,22 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
-     * @param array         $config
-     * @param XmlFileLoader $loader
-     */
-    protected function loadConfigurationFile(array $config, XmlFileLoader $loader)
-    {
-        foreach ($config as $filename) {
-            if (file_exists($file = sprintf('%s/%s.xml', $this->getConfigurationDirectory(), $filename))) {
-                $loader->load($file);
-            }
-        }
-    }
-
-    /**
-     * Get the configuration directory
+     * @param ContainerBuilder $containerBuilder
      *
-     * @return string
+     * @return XmlFileLoader
+     *
      * @throws \RuntimeException
      */
-    protected function getConfigurationDirectory()
+    protected function getXmlLoaderFile(ContainerBuilder $containerBuilder)
     {
         $reflector = new \ReflectionClass($this);
         $fileName = $reflector->getFileName();
 
-        if (!is_dir($directory = dirname($fileName) . $this->configDirectory)) {
-            throw new \RuntimeException(sprintf('The configuration directory "%s" does not exists.', $directory));
+        if (!is_dir($absolutePath = sprintf('%s/../%s/', dirname($fileName), $this->configDirectory))) {
+            throw new \RuntimeException(sprintf('The configuration directory "%s" does not exists.', $absolutePath));
         }
 
-        return $directory;
+        return new XmlFileLoader($containerBuilder, new FileLocator($absolutePath));
     }
 
     /**
