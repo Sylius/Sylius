@@ -382,8 +382,10 @@ class OrmFinder implements FinderInterface
             return $ids;
         }
 
-        $queryBuilder = $this->searchRepository->getProductsQueryBuilder();
+        $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
+            ->select('product')
+            ->from('Sylius\Component\Core\Model\Product', 'product')
             ->leftJoin('product.taxons', 'taxon')
             ->leftJoin('product.attributes', 'attribute')
             ->leftJoin('product.variants', 'variant')
