@@ -39,6 +39,10 @@ class OrmIndexer implements IndexerInterface
 
     const SPACER = ' ';
 
+    /**
+     * @param array                          $config
+     * @param ModelToElasticaAutoTransformer $transformer
+     */
     public function __construct(Array $config, ModelToElasticaAutoTransformer $transformer)
     {
         $this->config      = $config;

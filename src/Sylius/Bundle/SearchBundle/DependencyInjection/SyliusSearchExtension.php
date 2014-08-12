@@ -26,6 +26,10 @@ use Symfony\Component\DependencyInjection\DefinitionDecorator;
 class SyliusSearchExtension extends Extension
 {
 
+    /**
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();

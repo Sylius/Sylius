@@ -139,6 +139,9 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addIndexesSection(ArrayNodeDefinition $node)
     {
         $node

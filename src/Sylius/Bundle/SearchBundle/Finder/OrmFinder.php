@@ -420,6 +420,12 @@ class OrmFinder implements FinderInterface
         return $ids;
     }
 
+    /**
+     * @param array $ids
+     * @param array $filters
+     *
+     * @return array
+     */
     function getFilteredResultsForTerms(array $ids, array $filters)
     {
         foreach ($filters as $key => $filter) {
