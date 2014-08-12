@@ -19,5 +19,5 @@ sylius_account_order_invoice:
 sylius_account_order_show:
     pattern: /{number}
     methods: [GET]
-    defaults: 
+    defaults:
         _controller: sylius.controller.frontend.account.order:showAction

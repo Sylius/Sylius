@@ -30,7 +30,7 @@ interface VariantInterface extends BaseVariantInterface
     /**
      * Set product.
      *
-     * @param |null $product
+     * @param ProductInterface|null $product
      */
     public function setProduct(ProductInterface $product = null);
 

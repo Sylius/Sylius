@@ -71,8 +71,7 @@ abstract class MenuBuilder
         SecurityContextInterface $securityContext,
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->factory = $factory;
         $this->securityContext = $securityContext;
         $this->translator = $translator;
