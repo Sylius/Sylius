@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 
 /**
  * Product controller.
@@ -39,6 +40,9 @@ class ProductController extends ResourceController
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
+        $criteria = $request->get('sylius_filter_form');
+        unset($criteria['_token'], $criteria['filter']);
+
         if ($request->attributes->has('_sylius_entity')) {
             $taxon = $request->attributes->get('_sylius_entity');
         } else {
@@ -50,12 +54,15 @@ class ProductController extends ResourceController
             }
         }
 
-        $paginator = $this
-            ->getRepository()
-            ->createByTaxonPaginator($taxon)
-        ;
+        $finder = $this->get('sylius_search.finder')
+            ->setFacetGroup('categories_set')
+            ->find(new TaxonQuery($taxon, $request->query->get('filters')));
 
-        return $this->renderResults($taxon, $paginator, 'indexByTaxon.html', $request->get('page', 1));
+        $config = $this->container->getParameter("sylius_search.config");
+
+        $paginator = $finder->getPaginator();
+
+        return $this->renderResults($taxon, $paginator, 'indexByTaxon.html', $request->get('page', 1), $finder->getFacets(), $config['filters']['facets']);
     }
 
     /**
@@ -182,7 +189,7 @@ class ProductController extends ResourceController
         return parent::findOr404($request, $criteria);
     }
 
-    private function renderResults(TaxonInterface $taxon, Pagerfanta $results, $template, $page)
+    private function renderResults(TaxonInterface $taxon, Pagerfanta $results, $template, $page, $facets = null, $facetTags = null)
     {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -193,6 +200,8 @@ class ProductController extends ResourceController
             ->setData(array(
                 'taxon'    => $taxon,
                 'products' => $results,
+                'facets'   => $facets,
+                'facetTags' => $facetTags,
             ))
         ;
 

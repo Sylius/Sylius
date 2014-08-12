@@ -1,0 +1,14 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+{% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import grid %}
+{% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
+
+{% block content %}
+
+    {% if results %}
+        {{ pagination(results) }}
+        {{ grid(results) }}
+        {{ pagination(results) }}
+    {% endif %}
+
+{% endblock %}
+

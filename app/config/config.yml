@@ -80,3 +80,46 @@ swiftmailer:
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
+
+sylius_search:
+    form: 'SyliusSearchBundle::form.html.twig'
+    items_per_page: 9
+    driver: orm
+    orm_indexes:
+        product:
+            class: Sylius\Component\Core\Model\Product
+            mappings:
+                id: ~
+                name: ~
+                description: ~
+    filters:
+        search_filter:
+            enabled: true
+            taxonomy: category
+        facet_groups:
+            search_set:
+                values: [taxons, price, made_of, color]
+            categories_set:
+                values: [price, made_of, color]
+            all_set:
+                values: [taxons, price, made_of]
+        facets:
+            taxons:
+                display_name: 'Basic categories'
+                type: terms
+                value: ~
+            price:
+                display_name: 'Available prices'
+                type: range
+                values:
+                    - { from: 0, to: 2000}
+                    - { from: 2001, to: 5000}
+                    - { from: 5001, to: 10000}
+            made_of:
+                display_name: 'Material'
+                type: terms
+                value: ~
+            color:
+                display_name: 'Available colors'
+                type: terms
+                value: ~
