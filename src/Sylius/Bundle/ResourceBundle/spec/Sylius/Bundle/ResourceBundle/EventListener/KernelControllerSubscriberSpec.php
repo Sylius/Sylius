@@ -97,9 +97,10 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
                 'criteria' => null,
             ),
             $request
-        )->shouldBeCalled()->willReturn(array());
+        )->shouldBeCalled()->willReturn(array(array(), array()));
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
+        $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
 
         $this->onKernelController($event);
     }
@@ -132,9 +133,10 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
                 'criteria' => '$c',
             ),
             $request
-        )->shouldBeCalled()->willReturn(array());
+        )->shouldBeCalled()->willReturn(array(array(), array()));
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
+        $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
 
         $this->onKernelController($event);
     }
