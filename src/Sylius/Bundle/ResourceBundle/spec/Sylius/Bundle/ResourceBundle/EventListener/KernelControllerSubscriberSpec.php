@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -32,6 +33,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         Parameters $parameters,
         Request $request,
         ParameterBag $parameterBag,
+        HeaderBag $headerBag,
         FilterControllerEvent $event,
         ResourceController $resourceController,
         Configuration $configuration
@@ -43,6 +45,8 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $event->getRequest()->willReturn($request);
 
         $request->attributes = $parameterBag;
+        $request->headers    = $headerBag;
+
         $this->beConstructedWith(
             $parametersParser,
             $parameters,
@@ -75,13 +79,15 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     }
 
     function it_should_parse_empty_request(
-        FilterControllerEvent $event,
-        ParametersParser $parametersParser,
-        Parameters $parameters,
-        Request $request,
-        ParameterBag $parameterBag,
-        ResourceController $resourceController
+        $event,
+        $parametersParser,
+        $parameters,
+        $request,
+        $parameterBag,
+        $headerBag
     ) {
+        $headerBag->has('Accept')->willReturn(false);
+
         $parameterBag->get('_sylius', array())->willReturn(array());
 
         $request->get('criteria')->willReturn(array('product' => 10));
@@ -97,7 +103,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
                 'criteria' => null,
             ),
             $request
-        )->shouldBeCalled()->willReturn(array());
+        )->willReturn(array());
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
 
@@ -105,12 +111,15 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     }
 
     function it_should_parse_request(
-        FilterControllerEvent $event,
-        ParametersParser $parametersParser,
-        Parameters $parameters,
-        Request $request,
-        ParameterBag $parameterBag
+        $event,
+        $parametersParser,
+        $parameters,
+        $request,
+        $parameterBag,
+        $headerBag
     ) {
+        $headerBag->has('Accept')->willReturn(false);
+
         $parameterBag->get('_sylius', array())->willReturn(array(
             'paginate' => 20,
             'filterable' => true,
@@ -132,7 +141,48 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
                 'criteria' => '$c',
             ),
             $request
-        )->shouldBeCalled()->willReturn(array());
+        )->willReturn(array());
+
+        $parameters->replace(Argument::type('array'))->shouldBeCalled();
+
+        $this->onKernelController($event);
+    }
+
+    function it_should_parse_request_and_headers(
+        $event,
+        $parametersParser,
+        $parameters,
+        $request,
+        $parameterBag,
+        $headerBag
+    ) {
+        $headerBag->has('Accept')->willReturn(true);
+        $headerBag->get('Accept')->willReturn('Accept: application/json; version=1.0.1; groups=Default,Details');
+
+        $parameterBag->get('_sylius', array())->willReturn(array(
+            'paginate' => 20,
+            'filterable' => true,
+            'sorting' => '$sorting',
+            'sortable' => true,
+            'criteria' => '$c'
+        ));
+
+        $request->get('criteria')->willReturn(array('product' => 10));
+        $request->get('paginate')->willReturn(10);
+
+        $parametersParser->parse(
+            array(
+                'serialization_version' => '1.0.1',
+                'serialization_groups' => array('Default', 'Details'),
+                'paginate' => 20,
+                'limit' => false,
+                'sortable' => true,
+                'sorting' => '$sorting',
+                'filterable' => true,
+                'criteria' => '$c',
+            ),
+            $request
+        )->willReturn(array());
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
 

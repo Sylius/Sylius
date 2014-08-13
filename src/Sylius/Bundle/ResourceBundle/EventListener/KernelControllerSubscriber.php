@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
@@ -22,7 +23,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langade <arn0d.dev@gmail.com>
- *
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class KernelControllerSubscriber implements EventSubscriberInterface
 {
@@ -30,6 +31,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
      * @var ParametersParser
      */
     private $parametersParser;
+
     /**
      * @var Parameters
      */
@@ -40,11 +42,20 @@ class KernelControllerSubscriber implements EventSubscriberInterface
      */
     private $settings;
 
-    public function __construct(ParametersParser $parametersParser, Parameters $parameters, array $settings)
+    private $forceApiVersion = false;
+
+    private $apiVersionHeader = 'Accept';
+    private $apiGroupsHeader  = 'Accept';
+
+    private $apiVersionRegexp = '/(v|version)=(?P<version>[0-9\.]+)/i';
+    private $apiGroupsRegexp  = '/(g|groups)=(?P<groups>[a-z,]+)/i';
+
+    public function __construct(ParametersParser $parametersParser, Parameters $parameters, array $settings, $forceApiVersion = false)
     {
         $this->parametersParser = $parametersParser;
         $this->parameters = $parameters;
         $this->settings = $settings;
+        $this->forceApiVersion = $forceApiVersion;
     }
 
     /**
@@ -71,7 +82,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
         if ($controller[0] instanceof ResourceController) {
             $request = $event->getRequest();
 
-            $parameters = $request->attributes->get('_sylius', array());
+            $parameters = $this->parseApiData($request);
             $parameters = array_merge($this->settings, $parameters);
             $parameters = $this->parametersParser->parse($parameters, $request);
 
@@ -80,5 +91,32 @@ class KernelControllerSubscriber implements EventSubscriberInterface
             $controller[0]->getConfiguration()->setRequest($request);
             $controller[0]->getConfiguration()->setParameters($this->parameters);
         }
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return array
+     */
+    private function parseApiData(Request $request)
+    {
+        $data = array();
+        if ($request->headers->has($this->apiVersionHeader)) {
+            if (preg_match($this->apiVersionRegexp, $request->headers->get($this->apiVersionHeader), $matches)) {
+                $data['serialization_version'] = $matches['version'];
+            } elseif ($this->forceApiVersion) {
+                $data['serialization_version'] = '1.0';
+            }
+        } elseif ($this->forceApiVersion) {
+            $data['serialization_version'] = '1.0';
+        }
+
+        if ($request->headers->has($this->apiGroupsHeader)) {
+            if (preg_match($this->apiGroupsRegexp, $request->headers->get($this->apiGroupsHeader), $matches)) {
+                $data['serialization_groups'] = explode(',', $matches['groups']);
+            }
+        }
+
+        return array_merge($request->attributes->get('_sylius', array()), $data);
     }
 }
