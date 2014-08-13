@@ -1,4 +1,4 @@
-Sylius\Bundle\CoreBundle\Model\InventoryUnit:
+Sylius\Component\Core\Model\InventoryUnit:
     exclusion_policy: ALL
     xml_root_name: inventory-unit
     relations:

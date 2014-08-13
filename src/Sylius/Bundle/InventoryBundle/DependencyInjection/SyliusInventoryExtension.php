@@ -13,6 +13,7 @@ namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * Inventory extension.
@@ -20,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends AbstractResourceExtension
+class SyliusInventoryExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
         'services',
@@ -74,5 +75,24 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         }
 
         $container->setParameter('sylius.config.classes', $classes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if ($container->hasExtension('jms_serializer')) {
+            $container->prependExtensionConfig('jms_serializer', array(
+                'metadata' => array(
+                    'directories' => array(
+                        'sylius-inventory' => array(
+                            'namespace_prefix' => 'Sylius\\Component\\Inventory',
+                            'path'             => '@SyliusInventoryBundle/Resources/config/serializer'
+                        ),
+                    )
+                )
+            ));
+        }
     }
 }

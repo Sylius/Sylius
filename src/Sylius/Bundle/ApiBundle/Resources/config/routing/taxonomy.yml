@@ -6,7 +6,6 @@ sylius_api_taxonomy_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxonomy:indexAction
-        _format: json
         _sylius:
             sortable: true
 
@@ -33,4 +32,3 @@ sylius_api_taxonomy_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxonomy:showAction
-        _format: json

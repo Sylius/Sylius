@@ -28,4 +28,4 @@ Sylius\Component\Shipping\Model\Shipment:
           href:
                 route: sylius_api_shipping_method_show
                 parameters:
-                    id: expr(object.getMethoD().getId())
+                    id: expr(object.getMethod().getId())

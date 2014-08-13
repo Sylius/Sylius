@@ -6,19 +6,18 @@ sylius_api_payment_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment:indexAction
-        _format: json
         _sylius:
             sortable: true
 
 #sylius_api_payment_create:
-#    pattern: /new
-#    methods: [GET, POST]
+#    pattern: /
+#    methods: [POST]
 #    defaults:
 #        _controller: sylius.controller.payment:createAction
 
 #sylius_api_payment_update:
-#    pattern: /{id}/edit
-#    methods: [GET, PUT]
+#    pattern: /{id}
+#    methods: [PUT, PATCH]
 #    defaults:
 #        _controller: sylius.controller.payment:updateAction
 
@@ -33,4 +32,3 @@ sylius_api_payment_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment:deleteAction
-        _format: json

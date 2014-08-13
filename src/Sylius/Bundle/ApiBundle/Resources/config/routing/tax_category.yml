@@ -6,7 +6,6 @@ sylius_api_tax_category_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.tax_category:indexAction
-        _format: json
         _sylius:
             sortable: true
             sorting:
@@ -20,7 +19,7 @@ sylius_api_tax_category_create:
 
 sylius_api_tax_category_update:
     pattern: /{id}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.tax_category:updateAction
 
@@ -35,4 +34,3 @@ sylius_api_tax_category_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.tax_category:showAction
-        _format: json

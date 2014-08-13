@@ -78,10 +78,15 @@ fos_user:
             type: sylius_user_registration
 
 fos_rest:
+    disable_csrf_role: ROLE_API
     view:
         formats:
-            xml: true
+            xml:  true
             json: true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml', 'html'], fallback_format: json, prefer_extension: true }
 
 hwi_oauth:
     firewall_name: main

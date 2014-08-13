@@ -1,18 +1,12 @@
-Sylius\Bundle\PaymntsBundle\Model\Payment:
+Sylius\Component\Payment\Model\PaymentMethod:
     exclusion_policy: ALL
-    xml_root_name: payment
+    xml_root_name: payment-method
     properties:
         id:
             expose: true
             type: integer
             xml_attribute: true
-        amount:
-            expose: true
-            type: integer
-        currency:
-            expose: true
-            type: string
-        state:
+        name:
             expose: true
             type: string
         createdAt:
@@ -24,11 +18,6 @@ Sylius\Bundle\PaymntsBundle\Model\Payment:
     relations:
         - rel: self
           href:
-                route: sylius_api_payment_show
-                parameters:
-                    id: expr(object.getId())
-        - rel: payment-method
-          href:
                 route: sylius_api_payment_method_show
                 parameters:
-                    id: expr(object.getMethod().getId())
+                    id: expr(object.getId())

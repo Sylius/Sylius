@@ -6,7 +6,6 @@ sylius_api_country_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.country:indexAction
-        _format: json
 
 sylius_api_country_create:
     pattern: /
@@ -16,7 +15,7 @@ sylius_api_country_create:
 
 sylius_api_country_update:
     pattern: /{id}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.country:updateAction
 
@@ -31,4 +30,3 @@ sylius_api_country_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.country:showAction
-        _format: json

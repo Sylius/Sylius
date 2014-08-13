@@ -6,7 +6,6 @@ sylius_api_shipping_category_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.shipping_category:indexAction
-        _format: json
         _sylius:
             sortable: true
             sorting:
@@ -17,25 +16,21 @@ sylius_api_shipping_category_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.shipping_category:createAction
-        _format: json
 
 sylius_api_shipping_category_update:
     pattern: /{id}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.shipping_category:updateAction
-        _format: json
 
 sylius_api_shipping_category_delete:
     pattern: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.shipping_category:deleteAction
-        _format: json
 
 sylius_api_shipping_category_show:
     pattern: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.shipping_category:showAction
-        _format: json

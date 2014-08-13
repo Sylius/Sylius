@@ -1,4 +1,4 @@
-Sylius\Bundle\AddressingBundle\Model\Address:
+Sylius\Component\Addressing\Model\Address:
     exclusion_policy: ALL
     xml_root_name: address
     properties:
@@ -20,7 +20,7 @@ Sylius\Bundle\AddressingBundle\Model\Address:
           href:
                 route: sylius_api_country_show
                 parameters:
-                    id: expr(object.geCountry().getId())
+                    id: expr(object.getCountry().getId())
         - rel: province
           href:
                 route: sylius_api_province_show

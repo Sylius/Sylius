@@ -9,7 +9,7 @@ sylius_api_taxon_create:
 
 sylius_api_taxon_update:
     pattern: /{id}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.taxon:updateAction
 
