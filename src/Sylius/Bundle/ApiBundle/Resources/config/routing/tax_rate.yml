@@ -6,7 +6,6 @@ sylius_api_tax_rate_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.tax_rate:indexAction
-        _format: json
         _sylius:
             sortable: true
             sorting:
@@ -20,7 +19,7 @@ sylius_api_tax_rate_create:
 
 sylius_api_tax_rate_update:
     pattern: /{id}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.tax_rate:updateAction
 
@@ -35,4 +34,3 @@ sylius_api_tax_rate_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.tax_rate:showAction
-        _format: json

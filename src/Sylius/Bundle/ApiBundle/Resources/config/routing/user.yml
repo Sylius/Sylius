@@ -6,7 +6,6 @@ sylius_api_user_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.user:indexAction
-        _format: json
         _sylius:
             filterable: true
             sortable: true
@@ -24,4 +23,3 @@ sylius_api_user_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.user:showAction
-        _format: json

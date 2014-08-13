@@ -6,7 +6,6 @@ sylius_api_product_option_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_option:indexAction
-        _format: json
 
 sylius_api_product_option_create:
     pattern: /
@@ -16,7 +15,7 @@ sylius_api_product_option_create:
 
 sylius_api_product_option_update:
     pattern: /{id}
-    methods: [GET, PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_option:updateAction
 

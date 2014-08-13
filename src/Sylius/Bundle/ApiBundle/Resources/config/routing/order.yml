@@ -6,7 +6,6 @@ sylius_api_order_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexAction
-        _format: json
         _sylius:
             method: createFilterPaginator
             arguments: [$criteria, $sorting]
@@ -21,7 +20,7 @@ sylius_api_order_index:
 
 #sylius_api_order_update:
 #    pattern: /{id}
-#    methods: [PUT]
+#    methods: [PUT, PATCH]
 #    defaults:
 #        _controller: sylius.controller.order:updateAction
 
@@ -37,4 +36,3 @@ sylius_api_order_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:showAction
-        _format: json

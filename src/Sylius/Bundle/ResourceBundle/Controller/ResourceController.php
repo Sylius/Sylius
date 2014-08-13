@@ -209,15 +209,13 @@ class ResourceController extends FOSRestController
     public function updateAction(Request $request)
     {
         $resource = $this->findOr404($request);
-        $form = $this->getForm($resource);
-        $method = $request->getMethod();
+        $form     = $this->getForm($resource);
 
-        if (in_array($method, array('POST', 'PUT', 'PATCH')) &&
-            $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($resource, 204));
+                return $this->handleView($this->view($resource, 201));
             }
 
             return $this->redirectHandler->redirectTo($resource);
@@ -246,11 +244,10 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $resource = $this->findOr404($request);
-        $this->domainManager->delete($resource);
+        $this->domainManager->delete($this->findOr404($request));
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view(null, 204));
+            return $this->handleView($this->view());
         }
 
         return $this->redirectHandler->redirectToIndex();
@@ -325,7 +322,7 @@ class ResourceController extends FOSRestController
     public function getForm($resource = null)
     {
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource, array('csrf_protection' => false));
+            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
         }
 
         return $this->createForm($this->config->getFormType(), $resource);

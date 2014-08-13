@@ -1,4 +1,4 @@
-Sylius\Bundle\CoreBundle\Model\Property:
+Sylius\Component\Core\Model\Property:
     exclusion_policy: ALL
     xml_root_name: property
     properties:
