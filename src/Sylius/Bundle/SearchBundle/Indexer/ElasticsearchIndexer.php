@@ -23,9 +23,14 @@ use Doctrine\ORM\EntityManager;
  */
 class ElasticSearchIndexer implements IndexerInterface
 {
-    /* @var \Sylius\Bundle\CoreBundle\Kernel\Kernel */
+    /**
+     * @var Kernel
+     */
     private $kernel;
 
+    /**
+     * @var
+     */
     private $output;
 
     /**

@@ -41,7 +41,7 @@ class IndexCommand extends ContainerAwareCommand
     {
         $output->writeln('Index populate command');
 
-        $indexer = $this->getContainer()->get('sylius_search.command')->populate($this->getContainer()->get('doctrine.orm.entity_manager'));
+        $indexer = $this->getContainer()->get('sylius_search.command.indexer')->populate($this->getContainer()->get('doctrine.orm.entity_manager'));
 
         $output->writeln($indexer->getOutput());
     }

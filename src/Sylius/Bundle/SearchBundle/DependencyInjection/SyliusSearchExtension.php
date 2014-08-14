@@ -39,7 +39,7 @@ class SyliusSearchExtension extends AbstractResourceExtension
         $container->setParameter('sylius_search.config', $config);
 
         $commandClass = sprintf('sylius.search.%s.indexer', $config['driver']);
-        $container->setAlias('sylius_search.command', $commandClass);
+        $container->setAlias('sylius_search.command.indexer', $commandClass);
 
         $finderClass = sprintf('Sylius\Bundle\SearchBundle\Finder\%sFinder', $config['driver']);
         $container->setParameter('sylius_search.finder', $finderClass);

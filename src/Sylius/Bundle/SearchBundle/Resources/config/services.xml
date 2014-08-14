@@ -37,7 +37,7 @@
         </service>
 
         <!-- dummy service name, is being aliaced in dependency injection -->
-        <service id="sylius_search.command" />
+        <service id="sylius_search.command.indexer" />
 
         <service id="fos_elastica.index.populate" class="%fos_elastica.index.populate.class%" />
 
