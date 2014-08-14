@@ -18,15 +18,6 @@ use Sylius\Bundle\ApiBundle\Test\ApiTestCase;
  */
 class ShippingMethodApiTest extends ApiTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->loadFixtures('country');
-        $this->loadFixtures('zone');
-        $this->loadFixtures('shipping_method');
-    }
-
     public function testGetShippingMethod()
     {
         $method = $this->getLastResource('shipping_method');

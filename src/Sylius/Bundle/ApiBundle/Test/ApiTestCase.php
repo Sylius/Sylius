@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ApiBundle\Test;
 
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
-use h4cc\AliceFixturesBundle\Fixtures\FixtureSet;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 
@@ -22,10 +23,25 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
  */
 abstract class ApiTestCase extends BaseWebTestCase
 {
+    private $loader;
+
     public function setUp()
+    {
+        $bundle = $this->get('kernel')->getBundle('SyliusFixturesBundle');
+
+        $this->loader = new ContainerAwareLoader(static::createClient()->getContainer());
+        $this->loader->loadFromDirectory($bundle->getPath().'/DataFixtures/ORM');
+
+        $executor = new ORMExecutor($this->get('doctrine.orm.entity_manager'), new ORMPurger());
+        $executor->execute($this->loader->getFixtures(), true);
+    }
+
+    public function tearDown()
     {
         $purger = new ORMPurger($this->get('doctrine.orm.entity_manager'));
         $purger->purge();
+
+        unset($this->loader);
     }
 
     protected function assertJsonResponse($response, $statusCode = 200)
@@ -68,21 +84,11 @@ abstract class ApiTestCase extends BaseWebTestCase
         $this->assertTrue($result);
     }
 
-    protected function loadFixtures($filename)
-    {
-        $manager = $this->get('h4cc_alice_fixtures.manager');
-
-        $fixtureSet = new FixtureSet();
-        $fixtureSet->addFile(__DIR__.sprintf('/../Tests/Fixtures/%s.yml', $filename), 'yaml');
-
-        $manager->load($fixtureSet);
-    }
-
     protected function getLastResource($name)
     {
-        $resources = $this->get('sylius.repository.'.$name)->findAll();
+        $resources = $this->get('sylius.repository.'.$name)->findBy(array(), array('id' => 'DESC'), 1);
 
-        return array_pop($resources);
+        return current($resources);
     }
 
     protected function get($id)

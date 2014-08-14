@@ -69,7 +69,6 @@
         "behat/mink-browserkit-driver":      "~1.2",
         "behat/mink-selenium2-driver":       "~1.2",
         "behat/mink":                        "~1.6",
-        "h4cc/alice-fixtures-bundle":        "~0.3",
         "coduo/php-matcher":                 "~1.0",
         "fzaninotto/faker":                  "~1.2",
         "phpspec/phpspec":                   "~2.0",

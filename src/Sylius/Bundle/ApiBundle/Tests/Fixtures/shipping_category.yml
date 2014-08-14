@@ -1,7 +1,0 @@
-Sylius\Component\Shipping\Model\ShippingCategory:
-    light-goods:
-        name: Lightweight Goods
-        description: Very light merchandise for shipping
-    heavy-goods:
-        name: Heavy Stuff
-        description: Requires special shipping
