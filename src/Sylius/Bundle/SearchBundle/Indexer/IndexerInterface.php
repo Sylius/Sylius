@@ -31,10 +31,16 @@ interface IndexerInterface
      * by using events but ends up creating more complicated code than it suppose to be.
      *
      * @param EntityManager $em
-     * @param OutputInterface $output
      *
      * @return mixed
      */
-    public function populate(EntityManager $em, OutputInterface $output);
+    public function populate(EntityManager $em);
+
+    /**
+     * Gathers the command output for informing the user
+     *
+     * @return mixed
+     */
+    public function getOutput();
 
 }

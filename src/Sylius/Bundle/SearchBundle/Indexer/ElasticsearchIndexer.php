@@ -26,6 +26,8 @@ class ElasticSearchIndexer implements IndexerInterface
     /* @var \Sylius\Bundle\CoreBundle\Kernel\Kernel */
     private $kernel;
 
+    private $output;
+
     /**
      * @param Kernel $kernel
      */
@@ -37,7 +39,7 @@ class ElasticSearchIndexer implements IndexerInterface
     /**
      * {@inheritdoc}
      */
-    public function populate(EntityManager $em = null, OutputInterface $output = null)
+    public function populate(EntityManager $em = null)
     {
         $environment = $this->kernel->getEnvironment();
 
@@ -51,7 +53,15 @@ class ElasticSearchIndexer implements IndexerInterface
             throw new \RuntimeException($process->getErrorOutput());
         }
 
-        print $process->getOutput();
+        $this->output = $process->getOutput();
+
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getOutput() {
+        return $this->output;
+    }
 } 

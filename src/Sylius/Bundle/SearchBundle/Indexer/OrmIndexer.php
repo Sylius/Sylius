@@ -41,6 +41,11 @@ class OrmIndexer implements IndexerInterface
      */
     protected $transformer;
 
+    /**
+     * @var
+     */
+    private $output;
+
     const SPACER = ' ';
 
     /**
@@ -64,11 +69,27 @@ class OrmIndexer implements IndexerInterface
     /**
      * {@inheritdoc}
      */
-    public function populate(EntityManager $em = null, OutputInterface $output)
+    public function getOutput()
+    {
+        return $this->output;
+    }
+
+    /**
+     * @param $message
+     */
+    private function addToOutput($message)
+    {
+        $this->output .= $message . PHP_EOL;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function populate(EntityManager $em = null)
     {
         $this->setEntityManager($em);
 
-        $output->writeln('Reseting index');
+        $this->addToOutput('Reseting index');
 
         $connection = $em->getConnection();
 
@@ -85,11 +106,13 @@ class OrmIndexer implements IndexerInterface
         $connection->executeUpdate($q);
 
         foreach ($this->config['orm_indexes'] as $index) {
-            $this->createIndex($index['class'], $index['mappings'], $output);
+            $this->createIndex($index['class'], $index['mappings']);
         }
 
         $index = new Index('fulltext_search_idx', array('value'), false, false, array('fulltext'));
         $sm->createIndex($index, 'sylius_search_index');
+
+        return $this;
     }
 
     /**
@@ -99,7 +122,7 @@ class OrmIndexer implements IndexerInterface
      *
      * @internal param $table
      */
-    private function createIndex($entity, $fields, OutputInterface $output)
+    private function createIndex($entity, $fields)
     {
 
         $a = array_keys($fields);
@@ -107,7 +130,7 @@ class OrmIndexer implements IndexerInterface
             $value = 'u.' . $value;
         }
 
-        $output->writeln('Populating index table with ' . $entity . ' data');
+        $this->addToOutput('Populating index table with ' . $entity . ' data');
 
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
@@ -120,7 +143,7 @@ class OrmIndexer implements IndexerInterface
             $this->createIndexForEntity($entity, $fields, $element);
         }
 
-        $output->writeln('Index created successfully');
+        $this->addToOutput('Index created successfully');
     }
 
     /**
