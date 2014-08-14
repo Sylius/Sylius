@@ -18,13 +18,6 @@ use Sylius\Bundle\ApiBundle\Test\ApiTestCase;
  */
 class ShippingCategoryApiTest extends ApiTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->loadFixtures('shipping_category');
-    }
-
     public function testGetShippingCategory()
     {
         $category = $this->getLastResource('shipping_category');

@@ -1,7 +1,0 @@
-Sylius\Component\Taxation\Model\TaxCategory:
-    clothing:
-        name: Clothing
-        description: Clothing taxable goods
-    food:
-        name: Food
-        description: Food taxable goods
