@@ -19,7 +19,7 @@
 
 
     <entity repository-class="Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository"
-            name="Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex"
+            name="Sylius\Bundle\SearchBundle\Entity\SearchIndex"
             table="sylius_search_index">
 
         <options>

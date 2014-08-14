@@ -36,18 +36,10 @@
             <argument type="service" id="sylius.repository.product" />
         </service>
 
-        <service id="sylius_search" class="%sylius_search.engine%">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument>%sylius_search.config%</argument>
-            <argument type="service" id="sylius_search.repository" />
-            <argument type="service" id="service_container" />
-        </service>
-
         <!-- dummy service name, is being aliaced in dependency injection -->
         <service id="sylius_search.command" />
 
-        <service id="fos_elastica.index.populate" class="%fos_elastica.index.populate.class%">
-        </service>
+        <service id="fos_elastica.index.populate" class="%fos_elastica.index.populate.class%" />
 
         <service id="sylius_search.finder" class="%sylius_search.finder.class%">
             <argument type="service" id="sylius_search.repository" />

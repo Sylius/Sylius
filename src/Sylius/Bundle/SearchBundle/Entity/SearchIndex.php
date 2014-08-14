@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\SearchBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * SearchLog entity
+ * SearchIndex entity
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SyliusSearchIndex
+class SearchIndex
 {
     /**
      * @var integer

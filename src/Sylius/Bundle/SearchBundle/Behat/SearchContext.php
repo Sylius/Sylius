@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SearchBundle\Behat;
 
-use PhpSpec\Exception\Exception;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Process\Process;
@@ -61,7 +60,7 @@ class SearchContext extends DefaultContext
         $queryBuilder = $em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
             ;
@@ -69,7 +68,7 @@ class SearchContext extends DefaultContext
         $result = $queryBuilder->getQuery()->getResult();
 
         if (!$result) {
-            throw new Exception(
+            throw new \Exception(
                 "The entry does not exist in the index"
             );
         }else{
@@ -86,7 +85,7 @@ class SearchContext extends DefaultContext
         $queryBuilder = $em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
         ;
@@ -94,7 +93,7 @@ class SearchContext extends DefaultContext
         $result = $queryBuilder->getQuery()->getResult();
 
         if (!empty($result)) {
-            throw new Exception(
+            throw new \Exception(
                 "The entry does exist in the index"
             );
         }else{

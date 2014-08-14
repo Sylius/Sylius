@@ -36,14 +36,12 @@ class IndexCommand extends ContainerAwareCommand
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
-     *
-     * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Index populate command');
 
-        $this->getContainer()->get('sylius_search.command')->populate($this->getContainer()->get('doctrine.orm.entity_manager'));
+        $this->getContainer()->get('sylius_search.command')->populate($this->getContainer()->get('doctrine.orm.entity_manager'), $output);
 
         $output->writeln('Done');
     }

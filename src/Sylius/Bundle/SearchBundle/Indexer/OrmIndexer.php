@@ -11,9 +11,13 @@
 
 namespace Sylius\Bundle\SearchBundle\Indexer;
 
+use Doctrine\DBAL\Schema\Index;
 use Doctrine\ORM\EntityManager;
 use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
-use Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex;
+use JMS\TranslationBundle\Tests\Functional\Output;
+use Sylius\Bundle\SearchBundle\Entity\SearchIndex;
+use Symfony\Component\Console\Output\OutputInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Orm Indexer
@@ -60,48 +64,42 @@ class OrmIndexer implements IndexerInterface
     /**
      * {@inheritdoc}
      */
-    public function populate(EntityManager $em = null)
+    public function populate(EntityManager $em = null, OutputInterface $output)
     {
         $this->setEntityManager($em);
 
-        echo 'Reseting index' . PHP_EOL;
+        $output->writeln('Reseting index');
 
-        $sql  = 'show index from sylius_search_index';
-        $stmt = $this->em->getConnection()
-            ->prepare($sql);
-        $stmt->execute();
+        $connection = $em->getConnection();
 
-        $res = $stmt->fetchAll(\PDO::FETCH_COLUMN, 2);
+        $sm = $connection->getSchemaManager();
 
-        if (in_array('fulltext_search_idx', array_values($res))) {
-            $sql  = 'alter table sylius_search_index drop key fulltext_search_idx';
-            $stmt = $this->em->getConnection()
-                ->prepare($sql);
-            $stmt->execute();
+        $tableIndexes = array_keys($sm->listTableIndexes('sylius_search_index'));
+
+        if (in_array('fulltext_search_idx', array_values($tableIndexes))) {
+            $sm->dropIndex('fulltext_search_idx', 'sylius_search_index');
         }
 
-        $sql  = 'truncate sylius_search_index';
-        $stmt = $this->em->getConnection()
-            ->prepare($sql);
-        $stmt->execute();
+        $dbPlatform = $connection->getDatabasePlatform();
+        $q = $dbPlatform->getTruncateTableSQL('sylius_search_index');
+        $connection->executeUpdate($q);
 
         foreach ($this->config['orm_indexes'] as $index) {
-            $this->createIndex($index['class'], $index['mappings']);
+            $this->createIndex($index['class'], $index['mappings'], $output);
         }
 
-        $sql  = 'create fulltext index fulltext_search_idx on sylius_search_index (value)';
-        $stmt = $this->em->getConnection()
-            ->prepare($sql);
-        $stmt->execute();
+        $index = new Index('fulltext_search_idx', array('value'), false, false, array('fulltext'));
+        $sm->createIndex($index, 'sylius_search_index');
     }
 
     /**
      * @param $entity
      * @param $fields
+     * @param OutputInterface $output
      *
      * @internal param $table
      */
-    private function createIndex($entity, $fields)
+    private function createIndex($entity, $fields, OutputInterface $output)
     {
 
         $a = array_keys($fields);
@@ -109,7 +107,7 @@ class OrmIndexer implements IndexerInterface
             $value = 'u.' . $value;
         }
 
-        echo 'Populating index table with ' . $entity . ' data' . PHP_EOL;
+        $output->writeln('Populating index table with ' . $entity . ' data');
 
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
@@ -122,8 +120,7 @@ class OrmIndexer implements IndexerInterface
             $this->createIndexForEntity($entity, $fields, $element);
         }
 
-        echo 'Index created successfully' . PHP_EOL;
-
+        $output->writeln('Index created successfully');
     }
 
     /**
@@ -162,7 +159,7 @@ class OrmIndexer implements IndexerInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
@@ -170,19 +167,19 @@ class OrmIndexer implements IndexerInterface
 
         try {
 
-            $syliusSearchIndex = $queryBuilder->getQuery()->getSingleResult();
-            $syliusSearchIndex->setValue($content);
+            $searchIndex = $queryBuilder->getQuery()->getSingleResult();
+            $searchIndex->setValue($content);
 
         }catch(\Doctrine\ORM\NoResultException $e) {
 
-            $syliusSearchIndex = new SyliusSearchIndex();
+            $searchIndex = new SearchIndex();
 
-            $syliusSearchIndex->setItemId($entity->getId());
-            $syliusSearchIndex->setEntity($entityName);
-            $syliusSearchIndex->setValue($content);
+            $searchIndex->setItemId($entity->getId());
+            $searchIndex->setEntity($entityName);
+            $searchIndex->setValue($content);
         }
 
-        $this->getTagsForElementAndSave($entity, $syliusSearchIndex);
+        $this->getTagsForElementAndSave($entity, $searchIndex);
     }
 
     /**
@@ -192,7 +189,7 @@ class OrmIndexer implements IndexerInterface
     {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->delete('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex', 'u')
+            ->delete('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
@@ -203,18 +200,18 @@ class OrmIndexer implements IndexerInterface
 
     /**
      * @param $element
-     * @param $syliusSearchIndex
+     * @param $searchIndex
      */
-    public function getTagsForElementAndSave($element, $syliusSearchIndex)
+    public function getTagsForElementAndSave($element, $searchIndex)
     {
         /*
          * We bound orm with elasticsearch at this point. I could separate the logic but this
          * means that we will have logic duplication. Maybe this could be refactored in the future.
          */
         $elasticaDocument = $this->transformer->transform($element, array_flip(array_keys($this->config['filters']['facets'])));
-        $syliusSearchIndex->setTags(serialize($elasticaDocument->getData()));
+        $searchIndex->setTags(serialize($elasticaDocument->getData()));
 
-        $this->em->persist($syliusSearchIndex);
+        $this->em->persist($searchIndex);
         $this->em->flush();
     }
 

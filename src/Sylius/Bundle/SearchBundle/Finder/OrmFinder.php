@@ -24,31 +24,49 @@ use Symfony\Component\Config\Definition\Exception\Exception;
  */
 class OrmFinder implements FinderInterface
 {
-    /* @var */
+    /**
+     * @var
+     */
     private $searchRepository;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $config;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $productRepository;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $container;
 
-    /* @var \Doctrine\ORM\EntityManager */
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
     private $em;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $facets;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $paginator;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $facetGroup;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $targetIndex;
 
     /**
@@ -117,14 +135,13 @@ class OrmFinder implements FinderInterface
     {
         if ($queryObject instanceof SearchStringQuery) {
             return $this->getResults($queryObject);
-
-        }  elseif ($queryObject instanceof TaxonQuery) {
-            return $this->getResultsForTaxon($queryObject);
-
-        } else {
-            throw new Exception("finder can't handle this currently, feel free to implement it!");
         }
 
+        if ($queryObject instanceof TaxonQuery) {
+            return $this->getResultsForTaxon($queryObject);
+        }
+
+        throw new Exception("finder can't handle this currently, feel free to implement it!");
     }
 
     /**
@@ -148,7 +165,7 @@ class OrmFinder implements FinderInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
 
@@ -444,7 +461,7 @@ class OrmFinder implements FinderInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.id IN (:ids)')
             ->setParameter('ids', $ids);
 
@@ -471,20 +488,24 @@ class OrmFinder implements FinderInterface
      */
     public function query($searchTerm, EntityManager $em)
     {
-        $sql = 'select item_id, tags, entity from sylius_search_index WHERE MATCH(value) AGAINST (:searchterm)';
+        $queryBuilder = $em->createQueryBuilder();
+        $queryBuilder
+            ->select('u')
+            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
+            ->where('MATCH (u.value) AGAINST (:searchTerm) > 1')
+            ->setParameter('searchTerm', $searchTerm)
+            ;
 
-        $stmt = $em->getConnection()->prepare($sql);
-        $stmt->execute(array('searchterm' => strip_tags($searchTerm)));
-        $results = $stmt->fetchAll();
+        $results = $queryBuilder->getQuery()->getResult();
 
         $facets = array();
         foreach ($results as $result) {
 
-            if (isset($this->targetIndex) && $result['entity'] != $this->config['orm_indexes'][$this->targetIndex]['class']) {
+            if (isset($this->targetIndex) && $result->getEntity() != $this->config['orm_indexes'][$this->targetIndex]['class']) {
                 continue;
             }
 
-            $facets[$result['item_id']] = $result['tags'];
+            $facets[$result->getItemId()] = $result->getTags();
         }
 
         return $facets;
@@ -513,13 +534,11 @@ class OrmFinder implements FinderInterface
     {
         $rawFacets = array();
 
-        foreach ($result as $id => $tags) {
+        foreach ($result as $id => $serializedTags) {
             if (!in_array($id, $idsFromOtherFacets)) {
-                unset($result[$id]);
+                continue;
             }
-        }
 
-        foreach ($result as $serializedTags) {
             $tags = unserialize($serializedTags);
             foreach ($tags as $name => $value) {
 

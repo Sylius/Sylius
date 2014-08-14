@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Indexer;
 
 use Sylius\Bundle\CoreBundle\Kernel\Kernel;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManager;
 
@@ -36,7 +37,7 @@ class ElasticSearchIndexer implements IndexerInterface
     /**
      * {@inheritdoc}
      */
-    public function populate(EntityManager $em = null)
+    public function populate(EntityManager $em = null, OutputInterface $output = null)
     {
         $environment = $this->kernel->getEnvironment();
 

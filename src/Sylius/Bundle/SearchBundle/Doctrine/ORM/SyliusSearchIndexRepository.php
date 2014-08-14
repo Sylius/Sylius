@@ -21,12 +21,12 @@ use Doctrine\ORM\Query;
 class SyliusSearchIndexRepository
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var EntityManager
      */
     private $em;
 
     /**
-     * @var \Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository
+     * @var BaseProductRepository
      */
     private $productRepository;
 

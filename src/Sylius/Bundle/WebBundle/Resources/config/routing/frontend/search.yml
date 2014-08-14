@@ -3,5 +3,6 @@
 
 sylius_search_homepage:
     pattern: /
+    methods: [GET]
     defaults:
-      _controller: SyliusSearchBundle:Search:index
+      _controller: sylius.controller.search:indexAction

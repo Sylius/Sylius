@@ -33,6 +33,26 @@ class ProductRepository extends EntityRepository
     }
 
     /**
+     * Return products for the given taxon ids
+     *
+     * @param array $ids
+     *
+     * @return array
+     */
+    public function getProductsByTaxons(array $ids)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('product.taxons', 'taxon')
+            ->andWhere('taxon.id IN ( :ids )')
+            ->setParameter('ids', $ids)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getAlias()

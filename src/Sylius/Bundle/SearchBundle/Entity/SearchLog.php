@@ -11,8 +11,6 @@
 
 namespace Sylius\Bundle\SearchBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * SearchLog entity
  *

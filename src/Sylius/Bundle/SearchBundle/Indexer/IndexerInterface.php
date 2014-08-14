@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\SearchBundle\Indexer;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\Output\OutputInterface;
+
 
 /**
  * Interface IndexerInterface
@@ -29,9 +31,10 @@ interface IndexerInterface
      * by using events but ends up creating more complicated code than it suppose to be.
      *
      * @param EntityManager $em
+     * @param OutputInterface $output
      *
      * @return mixed
      */
-    public function populate(EntityManager $em);
+    public function populate(EntityManager $em, OutputInterface $output);
 
 }

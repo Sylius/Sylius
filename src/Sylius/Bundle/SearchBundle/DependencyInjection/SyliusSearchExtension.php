@@ -13,17 +13,15 @@ namespace Sylius\Bundle\SearchBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 /**
  * Class SyliusSearchExtension
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SyliusSearchExtension extends Extension
+class SyliusSearchExtension extends AbstractResourceExtension
 {
 
     /**
@@ -38,21 +36,17 @@ class SyliusSearchExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setParameter('search', $config['driver']);
         $container->setParameter('sylius_search.config', $config);
-
-        $searchClass = 'Sylius\Bundle\SearchBundle\Searcher\\'.$config['driver'].'Searcher';
-        $finderClass = 'Sylius\Bundle\SearchBundle\Finder\\'.$config['driver'].'Finder';
 
         $commandClass = sprintf('sylius.search.%s.indexer', $config['driver']);
         $container->setAlias('sylius_search.command', $commandClass);
 
-        $container->setParameter('sylius_search.engine', $searchClass);
+        $finderClass = sprintf('Sylius\Bundle\SearchBundle\Finder\%sFinder', $config['driver']);
         $container->setParameter('sylius_search.finder', $finderClass);
-        $container->setParameter('sylius_search.command', $commandClass);
-        $container->setParameter('sylius_search.form', $config['form']);
-        $container->setParameter('sylius_search.filter.enabled', $config['filters']['search_filter']['enabled']);
-        $container->setParameter('sylius_search.filter.taxonomy', $config['filters']['search_filter']['taxonomy']);
+
+        $container->setParameter('sylius_search.search.template', $config['search_form_template']);
+        $container->setParameter('sylius_search.pre_search_filter.enabled', $config['filters']['pre_search_filter']['enabled']);
+        $container->setParameter('sylius_search.pre_search_filter.taxon', $config['filters']['pre_search_filter']['taxonomy']);
     }
 
 }

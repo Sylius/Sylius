@@ -23,28 +23,44 @@ use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 class ElasticsearchFinder implements FinderInterface
 {
 
-    /* @var */
+    /**
+     * @var
+     */
     private $searchRepository;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $config;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $productRepository;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $container;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $facets;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $paginator;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $facetGroup;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $targetIndex;
 
     /**
@@ -111,14 +127,13 @@ class ElasticsearchFinder implements FinderInterface
     {
         if ($queryObject instanceof SearchStringQuery) {
             return $this->getResults($queryObject);
-
-        }  elseif ($queryObject instanceof TaxonQuery) {
-            return $this->getResultsForTaxon($queryObject);
-
-        } else {
-            throw new Exception("finder can't handle this currently, feel free to implement it!");
         }
 
+        if ($queryObject instanceof TaxonQuery) {
+            return $this->getResultsForTaxon($queryObject);
+        }
+
+        throw new Exception("finder can't handle this currently, feel free to implement it!");
     }
 
     /**
@@ -132,7 +147,7 @@ class ElasticsearchFinder implements FinderInterface
 
         $finder = $this->container->get('fos_elastica.index.sylius.product');
 
-        $elasticaQuery = $this->compileElasticsearchQuery(null, $query->getAppliedFilters(), $this->config, $query->getTaxon()->getName());
+        $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName());
 
         $products = $finder->search($elasticaQuery);
 
@@ -158,13 +173,12 @@ class ElasticsearchFinder implements FinderInterface
             $this->getConfiguredFilterSetsForFinders($this->facetGroup);
         }
 
+        $finder = $this->container->get('fos_elastica.index.sylius');
         if (isset($this->targetIndex)) {
             $finder = $this->container->get('fos_elastica.index.sylius.'.$this->targetIndex);
-        }else{
-            $finder = $this->container->get('fos_elastica.index.sylius');
         }
 
-        $elasticaQuery = $this->compileElasticsearchQuery(
+        $elasticaQuery = $this->compileElasticSearchStringQuery(
             $query->getSearchTerm(),
             $query->getAppliedFilters(),
             $this->config,
@@ -187,173 +201,83 @@ class ElasticsearchFinder implements FinderInterface
     }
 
     /**
-     * @param      $searchTerm
      * @param null $facets
      * @param      $configuration
-     * @param null $taxon
+     * @param      $taxon
      *
-     * @return \Elastica\Query
+     * @return mixed
      */
-    public function compileElasticsearchQuery($searchTerm, $facets = null, $configuration, $taxon = null)
+    public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon)
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter       = new \Elastica\Filter\Bool();
 
-        if (!$searchTerm) {
+        $query = new \Elastica\Query\Filtered();
+
+        $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+        $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+        $boolFilter->addMust($taxonFromRequestFilter);
+
+        $query->setFilter($boolFilter);
+
+        $elasticaQuery->setQuery($query);
+
+        return $this->compileElasticsearchQuery($elasticaQuery, $facets, $configuration);
+    }
+
+    /**
+     * @param      $searchTerm
+     * @param null $facets
+     * @param      $configuration
+     * @param      $preSearchTaxonFilter
+     *
+     * @return mixed
+     */
+    public function compileElasticSearchStringQuery($searchTerm, $facets = null, $configuration, $preSearchTaxonFilter)
+    {
+        $elasticaQuery = new \Elastica\Query();
+        $boolFilter       = new \Elastica\Filter\Bool();
+
+        // this is currently the only pre search filter and it's a taxon
+        // this should be abstracted out if other types of pre search filters are desired
+        if ($preSearchTaxonFilter != 'all') {
             $query = new \Elastica\Query\Filtered();
+            $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
 
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
-            $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+            $taxonFromRequestFilter->setTerms('taxons', array($preSearchTaxonFilter));
             $boolFilter->addMust($taxonFromRequestFilter);
 
             $query->setFilter($boolFilter);
-
-            $elasticaQuery->setQuery($query);
-
         } else {
-
-            if ($taxon != 'all') {
-                $query = new \Elastica\Query\Filtered();
-                $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
-
-                $taxonFromRequestFilter = new \Elastica\Filter\Terms();
-                $taxonFromRequestFilter->setTerms('taxons', array($taxon));
-                $boolFilter->addMust($taxonFromRequestFilter);
-
-                $query->setFilter($boolFilter);
-            } else {
-                $query = new \Elastica\Query\QueryString($searchTerm);
-            }
-
-            $elasticaQuery->setQuery($query);
+            $query = new \Elastica\Query\QueryString($searchTerm);
         }
 
-        foreach ($configuration['filters']['facets'] as $name => $facet) {
+        $elasticaQuery->setQuery($query);
 
-            // terms facet creation
-            if ($facet['type'] === 'terms') {
-                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
+        return $this->compileElasticsearchQuery($elasticaQuery, $facets, $configuration);
+    }
 
-                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Terms($name);
-                ${$name . 'Aggregation'}->setField($name);
-                ${$name . 'Aggregation'}->setSize(550);
-
-                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
-            }
-
-            // range facet creation
-            if ($facet['type'] === 'range') {
-
-                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
-
-                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Range($name);
-                foreach($facet['values'] as $value) {
-                    ${$name . 'Aggregation'}
-                        ->setField($name)
-                        ->addRange($value['from'], $value['to'])
-                    ;
-                }
-
-                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
-            }
-
-            if ($facet['type'] === 'attribute') {
-                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
-
-                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Terms($name);
-                ${$name . 'Aggregation'}->setField($name);
-
-                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
-            }
-        }
+    /**
+     * @param      $elasticaQuery
+     * @param null $facets
+     * @param      $configuration
+     *
+     * @return mixed
+     */
+    public function compileElasticsearchQuery($elasticaQuery, $facets = null, $configuration)
+    {
+        $aggregations = $this->createAggregations($configuration);
 
         if (!empty($facets)) {
 
-            $termFilters      = new \Elastica\Filter\Term();
-            $rangeFilters     = new \Elastica\Filter\Range();
-            $boolFilter       = new \Elastica\Filter\Bool();
+            list($termFilters, $rangeFilters, $boolFilter, $filters) = $this->applyFilterToElasticaQuery($facets, $elasticaQuery);
 
-            $filters = array();
-            foreach ($facets as $facet) {
-
-                if (strpos($facet[key($facet)], "|") !== false) {
-                    $filters[key($facet)] = array('ranges' => explode('|', $facet[key($facet)]));
-                } else {
-                    $filters[key($facet)] = array('term' => $facet[key($facet)]);
-                }
-            }
-
-            foreach ($filters as $name => $value) {
-
-                if (is_array($value[key($value)])) {
-                    foreach ($value as $range) {
-                        $rangeFilters->addField($name, array('gte' => $range[0], 'lte' => $range[1]));
-                        $boolFilter->addMust($rangeFilters);
-                    }
-                } else {
-                    $termFilters->setTerm($name, $value[key($value)]);
-                    $boolFilter->addMust($termFilters);
-                }
-            }
-
-
-            $elasticaQuery->setFilter($boolFilter);
-
-            foreach ($facets as $name => $facet) {
-
-                $normName = key($facet);
-
-                ${$normName . 'TermFilter'}      = new \Elastica\Filter\Term();
-                ${$normName . 'RangeFilter'}     = new \Elastica\Filter\Range();
-                ${$normName . 'BoolFilter'}      = new \Elastica\Filter\Bool();
-
-                foreach ($filters as $value) {
-
-                    if (is_array($value[key($value)])) {
-                        foreach ($value as $range) {
-                            ${$normName . 'RangeFilter'}->addField($name, array('gte' => $range[0], 'lte' => $range[1]));
-                            ${$normName . 'BoolFilter'}->addMust($rangeFilters);
-                        }
-                    } else {
-                        ${$normName . 'TermFilter'}->setTerm($name, $value[key($value)]);
-                        ${$normName . 'BoolFilter'}->addMust($termFilters);
-                    }
-                }
-
-            }
-
-            foreach ($this->config['filters']['facets'] as $name => $facet) {
-
-                foreach ($facets as $value) {
-
-                    if (count($facets)>=count($this->config['filters']['facets'])) {
-                        ${$name . 'AggregationFilter'}->setFilter($boolFilter);
-
-                    } elseif ($name!=key($value)) {
-                        if (isset(${key($value) . 'BoolFilter'})) {
-                            ${$name . 'AggregationFilter'}->setFilter(${key($value) . 'BoolFilter'});
-                        }
-                    }
-                }
-            }
+            $aggregations = $this->applyFiltersToIndividualAggregations($facets, $filters, $rangeFilters, $termFilters, $aggregations, $boolFilter);
 
         }
 
-        foreach ($configuration['filters']['facets'] as $name => $facet) {
-
-            if (!empty($facet)) {
-                $param = ${$name. 'AggregationFilter'}->hasParam('filter');
-
-                if ($param) {
-                    $elasticaQuery->addAggregation(${$name. 'AggregationFilter'});
-                } else {
-                    $elasticaQuery->addAggregation(${$name. 'Aggregation'});
-                }
-            } else {
-
-                $elasticaQuery->addAggregation(${$name. 'Aggregation'});
-            }
-        }
+        $this->applyAggregationsToElasticaQuery($configuration, $aggregations, $elasticaQuery);
 
         return $elasticaQuery;
     }
@@ -412,6 +336,207 @@ class ElasticsearchFinder implements FinderInterface
             }
         }
 
+    }
+
+    /**
+     * @param $searchTerm
+     * @param $taxon
+     * @param $boolFilter
+     * @param $elasticaQuery
+     */
+    public function applyElasticaQueryType($searchTerm, $taxon, $boolFilter, $elasticaQuery)
+    {
+        if (!$searchTerm) {
+            $query = new \Elastica\Query\Filtered();
+
+            $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+            $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+            $boolFilter->addMust($taxonFromRequestFilter);
+
+            $query->setFilter($boolFilter);
+
+            $elasticaQuery->setQuery($query);
+
+        } else {
+
+            if ($taxon != 'all') {
+                $query = new \Elastica\Query\Filtered();
+                $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
+
+                $taxonFromRequestFilter = new \Elastica\Filter\Terms();
+                $taxonFromRequestFilter->setTerms('taxons', array($taxon));
+                $boolFilter->addMust($taxonFromRequestFilter);
+
+                $query->setFilter($boolFilter);
+            } else {
+                $query = new \Elastica\Query\QueryString($searchTerm);
+            }
+
+            $elasticaQuery->setQuery($query);
+        }
+    }
+
+    /**
+     * @param $configuration
+     *
+     * @return array
+     */
+    public function createAggregations($configuration)
+    {
+        $aggregations = array();
+        foreach ($configuration['filters']['facets'] as $name => $facet) {
+
+            // terms facet creation
+            if ($facet['type'] === 'terms') {
+                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
+
+                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Terms($name);
+                ${$name . 'Aggregation'}->setField($name);
+                ${$name . 'Aggregation'}->setSize(550);
+
+                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
+            }
+
+            // range facet creation
+            if ($facet['type'] === 'range') {
+
+                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
+
+                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Range($name);
+                foreach ($facet['values'] as $value) {
+                    ${$name . 'Aggregation'}
+                        ->setField($name)
+                        ->addRange($value['from'], $value['to']);
+                }
+
+                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
+            }
+
+            $aggregations[$name]['aggregation']        = ${$name . 'Aggregation'};
+            $aggregations[$name]['aggregation_filter'] = ${$name . 'AggregationFilter'};
+        }
+
+        return $aggregations;
+    }
+
+    /**
+     * @param $facets
+     * @param $filters
+     * @param $rangeFilters
+     * @param $termFilters
+     * @param $aggregations
+     * @param $boolFilter
+     *
+     * @return array
+     */
+    public function applyFiltersToIndividualAggregations($facets, $filters, $rangeFilters, $termFilters, $aggregations, $boolFilter)
+    {
+        foreach ($facets as $name => $facet) {
+
+            $normName = key($facet);
+
+            ${$normName . 'BoolFilter'} = new \Elastica\Filter\Bool();
+
+            foreach ($filters as $value) {
+
+                if (is_array($value[key($value)])) {
+                    ${$normName . 'RangeFilter'} = new \Elastica\Filter\Range();
+
+                    foreach ($value as $range) {
+                        ${$normName . 'RangeFilter'}->addField($name, array('gte' => $range[0], 'lte' => $range[1]));
+                        ${$normName . 'BoolFilter'}->addMust($rangeFilters);
+                    }
+                } else {
+                    ${$normName . 'TermFilter'} = new \Elastica\Filter\Term();
+
+                    ${$normName . 'TermFilter'}->setTerm($name, $value[key($value)]);
+                    ${$normName . 'BoolFilter'}->addMust($termFilters);
+                }
+            }
+
+        }
+
+        foreach ($this->config['filters']['facets'] as $name => $facet) {
+
+            foreach ($facets as $value) {
+
+                if (count($facets) >= count($this->config['filters']['facets'])) {
+                    $aggregations[$name]['aggregation_filter']->setFilter($boolFilter);
+
+                } elseif ($name != key($value)) {
+                    if (isset(${key($value) . 'BoolFilter'})) {
+                        $aggregations[$name]['aggregation_filter']->setFilter(${key($value) . 'BoolFilter'});
+                    }
+                }
+            }
+        }
+
+        return $aggregations;
+    }
+
+    /**
+     * @param $facets
+     * @param $elasticaQuery
+     *
+     * @return array
+     */
+    public function applyFilterToElasticaQuery($facets, $elasticaQuery)
+    {
+        $termFilters  = new \Elastica\Filter\Term();
+        $rangeFilters = new \Elastica\Filter\Range();
+        $boolFilter   = new \Elastica\Filter\Bool();
+
+        $filters = array();
+        foreach ($facets as $facet) {
+
+            if (strpos($facet[key($facet)], "|") !== false) {
+                $filters[key($facet)] = array('ranges' => explode('|', $facet[key($facet)]));
+            } else {
+                $filters[key($facet)] = array('term' => $facet[key($facet)]);
+            }
+        }
+
+        foreach ($filters as $name => $value) {
+
+            if (is_array($value[key($value)])) {
+                foreach ($value as $range) {
+                    $rangeFilters->addField($name, array('gte' => $range[0], 'lte' => $range[1]));
+                    $boolFilter->addMust($rangeFilters);
+                }
+            } else {
+                $termFilters->setTerm($name, $value[key($value)]);
+                $boolFilter->addMust($termFilters);
+            }
+        }
+
+
+        $elasticaQuery->setFilter($boolFilter);
+
+        return array($termFilters, $rangeFilters, $boolFilter, $filters);
+    }
+
+    /**
+     * @param $configuration
+     * @param $aggregations
+     * @param $elasticaQuery
+     */
+    public function applyAggregationsToElasticaQuery($configuration, $aggregations, $elasticaQuery)
+    {
+        foreach ($configuration['filters']['facets'] as $name => $facet) {
+
+            if (!empty($facet)) {
+                $param = $aggregations[$name]['aggregation_filter']->hasParam('filter');
+
+                if ($param) {
+                    $elasticaQuery->addAggregation($aggregations[$name]['aggregation_filter']);
+                } else {
+                    $elasticaQuery->addAggregation($aggregations[$name]['aggregation']);
+                }
+            } else {
+
+                $elasticaQuery->addAggregation($aggregations[$name]['aggregation']);
+            }
+        }
     }
 
 }

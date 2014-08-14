@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\SearchBundle\Entity;
 use PhpSpec\ObjectBehavior;
 
-
 /**
  * @author agounaris <agounaris@gmail.com>
  */
@@ -20,7 +19,7 @@ class SyliusSearchIndexSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Entity\SyliusSearchIndex');
+        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Entity\SearchIndex');
     }
 
     function its_item_id_is_mutable()

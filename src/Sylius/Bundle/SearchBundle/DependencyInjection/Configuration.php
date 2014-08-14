@@ -52,11 +52,8 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->scalarNode('form')
+                ->scalarNode('search_form_template')
                     ->info('Define the search form')
-                ->end()
-                ->scalarNode('items_per_page')
-                    ->info('Define paginated items')
                 ->end()
             ->end()
         ;
@@ -73,7 +70,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('filters')
                     ->children()
-                        ->arrayNode('search_filter')
+                        ->arrayNode('pre_search_filter')
                             ->children()
                                 ->scalarNode('enabled')->end()
                                 ->scalarNode('taxonomy')->end()

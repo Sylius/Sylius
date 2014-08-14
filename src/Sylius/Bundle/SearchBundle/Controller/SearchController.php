@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\SearchBundle\Controller;
 
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\SearchBundle\Entity\SearchLog;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,13 +22,12 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SearchController extends Controller
+class SearchController extends ResourceController
 {
-
     /**
      * Search landing page.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
      * @return Response
      */
@@ -41,22 +40,22 @@ class SearchController extends Controller
                     $request->query->get('q'),
                     $request->query->get('search_param'),
                     $request->query->get('filters'),
-                    $this->container->getParameter('sylius_search.filter.enabled')
+                    $this->container->getParameter('sylius_search.pre_search_filter.enabled')
                 )
             );
 
         $selectedFilters = array();
-        if (is_array($request->query->get('filters'))) {
+        if ($request->query->has('filters')) {
             $selectedFilters = $request->query->get('filters');
         }
 
         $paginator = $finder->getPaginator();
         $facets = $finder->getFacets();
 
-        $config = $this->container->getParameter("sylius_search.config");
+        $searchConfig = $this->container->getParameter("sylius_search.config");
 
         if (isset($paginator)) {
-            $paginator->setMaxPerPage($config['items_per_page']);
+            $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
             $paginator->setCurrentPage($request->query->get('page', 1));
         }
 
@@ -66,12 +65,17 @@ class SearchController extends Controller
             $request->getClientIp()
         );
 
-        return $this->render('SyliusSearchBundle::search.html.twig', array(
-            'results' => $paginator,
-            'facets' => $facets,
-            'selectedFilters' => $selectedFilters,
-            'facetTags' => $config['filters']['facets'],
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate('SyliusSearchBundle::index.html.twig')
+            ->setData(array(
+                'results' => $paginator,
+                'facets' => $facets,
+                'selectedFilters' => $selectedFilters,
+                'facetTags' => $searchConfig['filters']['facets'],
+            ));
+
+        return $this->handleView($view);
     }
 
     /**
@@ -83,11 +87,11 @@ class SearchController extends Controller
     {
         $filters = array();
 
-        if ($this->container->getParameter('sylius_search.filter.enabled')) {
+        if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
             $taxonomy = $this->get('sylius.repository.taxonomy')
                 ->findOneBy(
                     array(
-                        'name' => strtoupper($this->container->getParameter('sylius_search.filter.taxonomy'))
+                        'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
                     )
                 );
 
@@ -100,11 +104,16 @@ class SearchController extends Controller
 
         }
 
-        return $this->render($this->container->getParameter('sylius_search.form'), array(
-            'filters' => $filters,
-            'searchTerm' => $request->query->get('q'),
-            'searchParam' => $request->query->get('search_param'),
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate($this->container->getParameter('sylius_search.search.template'))
+            ->setData(array(
+                'filters' => $filters,
+                'searchTerm' => $request->query->get('q'),
+                'searchParam' => $request->query->get('search_param'),
+            ));
+
+        return $this->handleView($view);
     }
 
     /**

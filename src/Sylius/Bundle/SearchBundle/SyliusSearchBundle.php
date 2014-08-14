@@ -11,13 +11,39 @@
 
 namespace Sylius\Bundle\SearchBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * Search bundle.
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SyliusSearchBundle extends Bundle
+class SyliusSearchBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSupportedDrivers()
+    {
+        return array(
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBundlePrefix()
+    {
+        return 'sylius_search';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityNamespace()
+    {
+        return 'Sylius\Bundle\SearchBundle\Entity';
+    }
 }
