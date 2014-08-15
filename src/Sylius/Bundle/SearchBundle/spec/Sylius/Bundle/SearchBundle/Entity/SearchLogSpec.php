@@ -10,6 +10,7 @@
  */
 
 namespace spec\Sylius\Bundle\SearchBundle\Entity;
+
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -27,12 +28,6 @@ class SearchLogSpec extends ObjectBehavior
     {
         $this->setSearchString('black');
         $this->getSearchString()->shouldReturn('black');
-    }
-
-    function its_client_is_mutable()
-    {
-        $this->setClient('Mozilla/5.0');
-        $this->getClient()->shouldReturn('Mozilla/5.0');
     }
 
     function its_remote_address_is_mutable()

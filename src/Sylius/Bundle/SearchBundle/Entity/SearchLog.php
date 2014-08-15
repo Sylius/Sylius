@@ -16,7 +16,7 @@ namespace Sylius\Bundle\SearchBundle\Entity;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SearchLog
+class SearchLog implements SearchLogInterface
 {
     /**
      * @var integer
@@ -38,11 +38,8 @@ class SearchLog
      */
     private $createdAt;
 
-
     /**
-     * Get id.
-     *
-     * @return integer 
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -50,10 +47,7 @@ class SearchLog
     }
 
     /**
-     * Set searchString
-     *
-     * @param string $searchString
-     * @return SearchLog
+     * {@inheritdoc}
      */
     public function setSearchString($searchString)
     {
@@ -63,9 +57,7 @@ class SearchLog
     }
 
     /**
-     * Get searchString.
-     *
-     * @return string 
+     * {@inheritdoc}
      */
     public function getSearchString()
     {
@@ -73,9 +65,7 @@ class SearchLog
     }
 
     /**
-     * @param $remoteAddress
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setRemoteAddress($remoteAddress)
     {
@@ -85,9 +75,7 @@ class SearchLog
     }
 
     /**
-     * Get remoteAddress
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getRemoteAddress()
     {
@@ -95,10 +83,7 @@ class SearchLog
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return SearchLog
+     * {@inheritdoc}
      */
     public function setCreatedAt($createdAt)
     {
@@ -108,9 +93,7 @@ class SearchLog
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime 
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {

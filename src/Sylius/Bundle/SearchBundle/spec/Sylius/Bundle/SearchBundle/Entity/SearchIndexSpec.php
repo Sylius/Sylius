@@ -10,12 +10,13 @@
  */
 
 namespace spec\Sylius\Bundle\SearchBundle\Entity;
+
 use PhpSpec\ObjectBehavior;
 
 /**
  * @author agounaris <agounaris@gmail.com>
  */
-class SyliusSearchIndexSpec extends ObjectBehavior
+class SearchIndexSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

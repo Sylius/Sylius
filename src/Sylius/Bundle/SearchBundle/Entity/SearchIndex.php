@@ -16,7 +16,7 @@ namespace Sylius\Bundle\SearchBundle\Entity;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class SearchIndex
+class SearchIndex implements SearchIndexInterface
 {
     /**
      * @var integer
@@ -48,11 +48,8 @@ class SearchIndex
      */
     private $createdAt;
 
-
     /**
-     * Get id
-     *
-     * @return integer 
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -60,10 +57,7 @@ class SearchIndex
     }
 
     /**
-     * Set itemId
-     *
-     * @param integer $itemId
-     * @return SyliusSearchIndex
+     * {@inheritdoc}
      */
     public function setItemId($itemId)
     {
@@ -73,9 +67,7 @@ class SearchIndex
     }
 
     /**
-     * Get itemId
-     *
-     * @return integer 
+     * {@inheritdoc}
      */
     public function getItemId()
     {
@@ -83,10 +75,7 @@ class SearchIndex
     }
 
     /**
-     * Set entity
-     *
-     * @param string $entity
-     * @return SyliusSearchIndex
+     * {@inheritdoc}
      */
     public function setEntity($entity)
     {
@@ -96,9 +85,7 @@ class SearchIndex
     }
 
     /**
-     * Get entity
-     *
-     * @return string 
+     * {@inheritdoc}
      */
     public function getEntity()
     {
@@ -106,10 +93,7 @@ class SearchIndex
     }
 
     /**
-     * Set value
-     *
-     * @param string $value
-     * @return SyliusSearchIndex
+     * {@inheritdoc}
      */
     public function setValue($value)
     {
@@ -119,9 +103,7 @@ class SearchIndex
     }
 
     /**
-     * Get value
-     *
-     * @return string 
+     * {@inheritdoc}
      */
     public function getValue()
     {
@@ -129,9 +111,7 @@ class SearchIndex
     }
 
     /**
-     * @param $tags
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setTags($tags)
     {
@@ -141,9 +121,7 @@ class SearchIndex
     }
 
     /**
-     * Get value
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getTags()
     {
@@ -151,10 +129,7 @@ class SearchIndex
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return SyliusSearchIndex
+     * {@inheritdoc}
      */
     public function setCreatedAt($createdAt)
     {
@@ -164,9 +139,7 @@ class SearchIndex
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime 
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {

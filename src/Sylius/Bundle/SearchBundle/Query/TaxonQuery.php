@@ -22,7 +22,7 @@ class TaxonQuery extends Query
     /**
      * @var Taxon
      */
-    private $taxon;
+    protected $taxon;
 
     /**
      * @param TaxonInterface $taxon

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\SearchBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\SearchBundle\Entity\SearchLog;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,11 +45,11 @@ class SearchController extends ResourceController
 
         $searchConfig = $this->container->getParameter("sylius_search.config");
 
+        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
+
         if ($paginator) {
             $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
-
-            $page = ($request->isMethod('GET'))? $request->query->get('page', 1):$request->request->get('page', 1);
-            $paginator->setCurrentPage($page);
+            $paginator->setCurrentPage($requestBag->get('page', 1));
         }
 
         $view = $this
@@ -61,8 +60,8 @@ class SearchController extends ResourceController
                 'facets' => $finder->getFacets(),
                 'facetTags' => $searchConfig['filters']['facets'],
                 'filters' => $finder->getFilters(),
-                'searchTerm' => ($request->isMethod('GET'))? $request->query->get('q'):$request->request->get('q'),
-                'searchParam' => ($request->isMethod('GET'))? $request->query->get('search_param'):$request->request->get('search_param'),
+                'searchTerm' => $requestBag->get('q'),
+                'searchParam' => $requestBag->get('search_param'),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
             ));
 
@@ -95,13 +94,15 @@ class SearchController extends ResourceController
 
         }
 
+        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
+
         $view = $this
             ->view()
             ->setTemplate($this->container->getParameter('sylius_search.search.template'))
             ->setData(array(
                 'filters' => $filters,
-                'searchTerm' => ($request->isMethod('GET'))? $request->query->get('q'):$request->request->get('q'),
-                'searchParam' => ($request->isMethod('GET'))? $request->query->get('search_param'):$request->request->get('search_param'),
+                'searchTerm' => $requestBag->get('q'),
+                'searchParam' => $requestBag->get('search_param'),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
             ));
 
