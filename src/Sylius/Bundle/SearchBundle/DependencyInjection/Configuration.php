@@ -32,11 +32,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_search');
 
-        $this->addFormSection($rootNode);
+
+        $this->addQueryLoggerSection($rootNode);
 
         $this->addFilterSection($rootNode);
 
         $this->addDriverSection($rootNode);
+
+        $this->addFormSection($rootNode);
 
         $this->addIndexesSection($rootNode);
 
@@ -131,6 +134,26 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')
                     ->info('Defaults to the first client defined')
+                ->end()
+                ->variableNode('request_method')->defaultValue('GET')->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addQueryLoggerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('query_logger')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                            ->variableNode('enabled')->defaultFalse()->end()
+                            ->variableNode('driver')->defaultValue('orm')->end()
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;

@@ -16,9 +16,10 @@ namespace Sylius\Bundle\SearchBundle\Query;
  */
 class Query
 {
-
-    /* @var */
-    private $appliedFilters;
+    /**
+     * @var
+     */
+    protected $appliedFilters;
 
     /**
      * @param $appliedFilters

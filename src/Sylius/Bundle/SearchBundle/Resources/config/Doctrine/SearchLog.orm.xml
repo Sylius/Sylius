@@ -25,8 +25,6 @@
 
     <field name="searchString" type="string" column="search_string" length="255"/>
 
-    <field name="client" type="string" column="client" length="255"/>
-
     <field name="remoteAddress" type="string" column="remote_address" length="20"/>
 
     <field name="createdAt" type="datetime" column="created_at">

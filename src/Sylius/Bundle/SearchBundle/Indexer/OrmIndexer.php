@@ -14,10 +14,8 @@ namespace Sylius\Bundle\SearchBundle\Indexer;
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\ORM\EntityManager;
 use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
-use JMS\TranslationBundle\Tests\Functional\Output;
 use Sylius\Bundle\SearchBundle\Entity\SearchIndex;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * Orm Indexer

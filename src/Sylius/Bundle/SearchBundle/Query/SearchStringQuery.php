@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Bundle\SearchBundle\Query;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -18,27 +19,37 @@ namespace Sylius\Bundle\SearchBundle\Query;
 class SearchStringQuery extends Query
 {
 
-    /* @var */
+    /**
+     * @var
+     */
     private $searchTerm;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $searchParam;
 
-    /* @var */
+    /**
+     * @var
+     */
     private $dropdownFilterEnabled;
 
     /**
-     * @param $searchTerm
-     * @param $searchParam
-     * @param $appliedFilters
-     * @param $dropdownFilterEnabled
+     * @var
      */
-    public function __construct($searchTerm, $searchParam, $appliedFilters, $dropdownFilterEnabled)
+    private $remoteAddress;
+
+    /**
+     * @param Request $request
+     * @param         $dropdownFilterEnabled
+     */
+    public function __construct(Request $request, $dropdownFilterEnabled)
     {
-        parent::setAppliedFilters($appliedFilters);
-        $this->searchTerm = $searchTerm;
-        $this->searchParam = $searchParam;
+        $this->setAppliedFilters(($request->isMethod('GET'))? $request->query->get('filters'):$request->request->get('filters'));
+        $this->searchTerm = ($request->isMethod('GET'))? $request->query->get('q'):$request->request->get('q');
+        $this->searchParam = ($request->isMethod('GET'))? $request->query->get('search_param'):$request->request->get('search_param');
         $this->dropdownFilterEnabled = $dropdownFilterEnabled;
+        $this->remoteAddress = $request->getClientIp();
     }
 
     /**
@@ -79,6 +90,14 @@ class SearchStringQuery extends Query
     public function isDropdownFilterEnabled()
     {
         return $this->dropdownFilterEnabled;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemoteAddress()
+    {
+        return $this->remoteAddress;
     }
 
 }

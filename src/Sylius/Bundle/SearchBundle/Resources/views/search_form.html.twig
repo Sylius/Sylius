@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <form action="{{ path('sylius_search_homepage') }}" class="input-group">
+        <form action="{{ path('sylius_search_homepage') }}" class="input-group" method="{{ requestMethod }}">
             <div class="input-group-btn search-panel">
                 {% if filters %}
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

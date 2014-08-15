@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
+use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
@@ -40,19 +41,24 @@ class OrmFinder implements FinderInterface
     private $productRepository;
 
     /**
-     * @var
-     */
-    private $container;
-
-    /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var EntityManager
      */
     private $em;
 
     /**
      * @var
      */
+    private $queryLogger;
+
+    /**
+     * @var
+     */
     private $facets;
+
+    /**
+     * @var
+     */
+    private $filters;
 
     /**
      * @var
@@ -70,19 +76,22 @@ class OrmFinder implements FinderInterface
     private $targetIndex;
 
     /**
-     * @param               $searchRepository
-     * @param               $config
-     * @param               $productRepository
-     * @param               $container
-     * @param EntityManager $em
+     * @param                      $searchRepository
+     * @param                      $config
+     * @param                      $productRepository
+     * @param EntityManager        $em
+     * @param QueryLoggerInterface $queryLogger
      */
-    public function __construct($searchRepository, $config, $productRepository, $container, EntityManager $em)
+    public function __construct($searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger)
     {
         $this->searchRepository  = $searchRepository;
         $this->config            = $config;
         $this->productRepository = $productRepository;
-        $this->container         = $container;
         $this->em                = $em;
+
+        if ($this->config['query_logger']['driver']) {
+            $this->queryLogger       = $queryLogger;
+        }
     }
 
     /**
@@ -99,6 +108,14 @@ class OrmFinder implements FinderInterface
     public function getFacets()
     {
         return $this->facets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFilters()
+    {
+        return $this->filters;
     }
 
     /**
@@ -134,6 +151,14 @@ class OrmFinder implements FinderInterface
     public function find(Query $queryObject)
     {
         if ($queryObject instanceof SearchStringQuery) {
+
+            if ($this->queryLogger->isEnabled()) {
+                $this->queryLogger->logStringQuery(
+                    $queryObject->getSearchTerm(),
+                    $queryObject->getRemoteAddress()
+                );
+            }
+
             return $this->getResults($queryObject);
         }
 
@@ -190,6 +215,7 @@ class OrmFinder implements FinderInterface
 
         $this->facets = $facets;
         $this->paginator = $paginator;
+        $this->filters = $query->getAppliedFilters();
 
         return $this;
     }
@@ -231,6 +257,7 @@ class OrmFinder implements FinderInterface
 
         $this->facets = $facets;
         $this->paginator = $paginator;
+        $this->filters = $query->getAppliedFilters();
 
         return $this;
     }

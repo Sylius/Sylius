@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SearchBundle\Accessor;
+namespace Sylius\Bundle\ProductBundle\Accessor;
 
 use Symfony\Component\PropertyAccess\Exception;
 use Symfony\Component\PropertyAccess\PropertyAccessor;

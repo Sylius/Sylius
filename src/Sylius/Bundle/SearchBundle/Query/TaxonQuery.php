@@ -10,7 +10,8 @@
  */
 
 namespace Sylius\Bundle\SearchBundle\Query;
-use Sylius\Component\Core\Model\Taxon;
+
+use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
  * @author agounaris <agounaris@gmail.com>
@@ -18,16 +19,18 @@ use Sylius\Component\Core\Model\Taxon;
 class TaxonQuery extends Query
 {
 
-    /* @var */
+    /**
+     * @var Taxon
+     */
     private $taxon;
 
     /**
-     * @param Taxon $taxon
-     * @param       $appliedFilters
+     * @param TaxonInterface $taxon
+     * @param                $appliedFilters
      */
-    public function __construct(Taxon $taxon, $appliedFilters)
+    public function __construct(TaxonInterface $taxon, $appliedFilters)
     {
-        parent::setAppliedFilters($appliedFilters);
+        $this->setAppliedFilters($appliedFilters);
         $this->taxon = $taxon;
     }
 

@@ -31,11 +31,6 @@ class SearchLog
     /**
      * @var string
      */
-    private $client;
-
-    /**
-     * @var string
-     */
     private $remoteAddress;
 
     /**
@@ -75,29 +70,6 @@ class SearchLog
     public function getSearchString()
     {
         return $this->searchString;
-    }
-
-    /**
-     * Set client.
-     *
-     * @param string $client
-     * @return SearchLog
-     */
-    public function setClient($client)
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    /**
-     * Get client.
-     *
-     * @return string 
-     */
-    public function getClient()
-    {
-        return $this->client;
     }
 
     /**

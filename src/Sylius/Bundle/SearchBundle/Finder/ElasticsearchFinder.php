@@ -14,6 +14,8 @@ namespace Sylius\Bundle\SearchBundle\Finder;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
+use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+
 
 /**
  * Elasticsearch Finder
@@ -41,12 +43,22 @@ class ElasticsearchFinder implements FinderInterface
     /**
      * @var
      */
-    private $container;
+    private $syliusIndex;
+
+    /**
+     * @var
+     */
+    private $queryLogger;
 
     /**
      * @var
      */
     private $facets;
+
+    /**
+     * @var
+     */
+    private $filters;
 
     /**
      * @var
@@ -64,17 +76,19 @@ class ElasticsearchFinder implements FinderInterface
     private $targetIndex;
 
     /**
-     * @param $searchRepository
-     * @param $config
-     * @param $productRepository
-     * @param $container
+     * @param                      $searchRepository
+     * @param                      $config
+     * @param                      $productRepository
+     * @param                      $syliusIndex
+     * @param QueryLoggerInterface $queryLogger
      */
-    public function __construct($searchRepository, $config, $productRepository, $container)
+    public function __construct($searchRepository, $config, $productRepository, $syliusIndex, QueryLoggerInterface $queryLogger)
     {
         $this->searchRepository = $searchRepository;
         $this->config = $config;
         $this->productRepository = $productRepository;
-        $this->container = $container;
+        $this->syliusIndex = $syliusIndex;
+        $this->queryLogger = $queryLogger;
     }
 
     /**
@@ -91,6 +105,14 @@ class ElasticsearchFinder implements FinderInterface
     public function getFacets()
     {
         return $this->facets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFilters()
+    {
+        return $this->filters;
     }
 
     /**
@@ -126,6 +148,14 @@ class ElasticsearchFinder implements FinderInterface
     public function find(Query $queryObject)
     {
         if ($queryObject instanceof SearchStringQuery) {
+
+            if ($this->queryLogger->isEnabled()) {
+                $this->queryLogger->logStringQuery(
+                    $queryObject->getSearchTerm(),
+                    $queryObject->getRemoteAddress()
+                );
+            }
+
             return $this->getResults($queryObject);
         }
 
@@ -145,11 +175,9 @@ class ElasticsearchFinder implements FinderInterface
             $this->getConfiguredFilterSetsForFinders($this->facetGroup);
         }
 
-        $finder = $this->container->get('fos_elastica.index.sylius.product');
+        $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), 'product');
 
-        $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName());
-
-        $products = $finder->search($elasticaQuery);
+        $products = $this->syliusIndex->search($elasticaQuery);
 
         $facets = null;
         if (isset($this->facetGroup)) {
@@ -160,6 +188,7 @@ class ElasticsearchFinder implements FinderInterface
 
         $this->facets = $facets;
         $this->paginator = $paginator;
+        $this->filters = $query->getAppliedFilters();
 
         return $this;
     }
@@ -173,19 +202,15 @@ class ElasticsearchFinder implements FinderInterface
             $this->getConfiguredFilterSetsForFinders($this->facetGroup);
         }
 
-        $finder = $this->container->get('fos_elastica.index.sylius');
-        if (isset($this->targetIndex)) {
-            $finder = $this->container->get('fos_elastica.index.sylius.'.$this->targetIndex);
-        }
-
         $elasticaQuery = $this->compileElasticSearchStringQuery(
             $query->getSearchTerm(),
             $query->getAppliedFilters(),
             $this->config,
-            $query->getSearchParam()
+            $query->getSearchParam(),
+            $this->targetIndex
         );
 
-        $products = $finder->search($elasticaQuery);
+        $products = $this->syliusIndex->search($elasticaQuery);
 
         $facets = null;
         if (isset($this->facetGroup)) {
@@ -196,6 +221,7 @@ class ElasticsearchFinder implements FinderInterface
 
         $this->facets = $facets;
         $this->paginator = $paginator;
+        $this->filters = $query->getAppliedFilters();
 
         return $this;
     }
@@ -204,13 +230,20 @@ class ElasticsearchFinder implements FinderInterface
      * @param null $facets
      * @param      $configuration
      * @param      $taxon
+     * @param      $type
      *
      * @return mixed
      */
-    public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon)
+    public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $type = null)
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter       = new \Elastica\Filter\Bool();
+
+        if ($type) {
+            $typeFilter = new \Elastica\Filter\Term();
+            $typeFilter->setTerm('_type', $type);
+            $boolFilter->addMust($typeFilter);
+        }
 
         $query = new \Elastica\Query\Filtered();
 
@@ -230,13 +263,20 @@ class ElasticsearchFinder implements FinderInterface
      * @param null $facets
      * @param      $configuration
      * @param      $preSearchTaxonFilter
+     * @param      $type
      *
      * @return mixed
      */
-    public function compileElasticSearchStringQuery($searchTerm, $facets = null, $configuration, $preSearchTaxonFilter)
+    public function compileElasticSearchStringQuery($searchTerm, $facets = null, $configuration, $preSearchTaxonFilter, $type = null)
     {
         $elasticaQuery = new \Elastica\Query();
-        $boolFilter       = new \Elastica\Filter\Bool();
+        $boolFilter    = new \Elastica\Filter\Bool();
+
+        if ($type) {
+            $typeFilter = new \Elastica\Filter\Term();
+            $typeFilter->setTerm('_type', $type);
+            $boolFilter->addMust($typeFilter);
+        }
 
         // this is currently the only pre search filter and it's a taxon
         // this should be abstracted out if other types of pre search filters are desired

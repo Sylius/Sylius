@@ -40,13 +40,13 @@ form: 'SyliusSearchBundle::form.html.twig'
 
 The actual form you want to use for performing a search. As long as the naming of the elements is the same you can define a new twig file with your own design.
 
-### Items per page
+### Request method
+
+The default value for both search and filter forms is GET but you can use post by adding the following snippet on the configuration
 
 ```yaml
-items_per_page: 9
+request_method: POST
 ```
-
-Pagination items for search results
 
 ### Driver
 
@@ -57,6 +57,20 @@ driver: orm
 Possible values: orm, elasticsearch
 
 If orm is selected the search uses mysql as engine, if elasticsearch is selected if uses the elasticsearch search engine, which must be configured through the fos_elastica bundle. For documentation on fos_elastica please check the [fos_elastica github page](https://github.com/FriendsOfSymfony/FOSElasticaBundle)
+
+### Query logger
+
+By default query logger is disabled.
+
+If you wish to using you need to add the following configuration parameters. Query logger currently supports orm for
+smaller websites and elasticsearch for one with higher transactions. In the future we need to introduce queue support.
+
+```yaml
+query_logger:
+    enabled: true
+    driver: orm
+```
+
 
 ### Indexes
 ```yaml
@@ -122,6 +136,11 @@ fos_elastica:
                          provider: ~
                          listener: ~
                          finder: ~
+
+                 search_log:
+                    mappings:
+                        search_term: ~
+                        ip_address: ~
 ```
 
 ### Filters

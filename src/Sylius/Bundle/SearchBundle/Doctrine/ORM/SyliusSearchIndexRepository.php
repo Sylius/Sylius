@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Doctrine\ORM\Query;
 
 /**
@@ -26,15 +26,15 @@ class SyliusSearchIndexRepository
     private $em;
 
     /**
-     * @var BaseProductRepository
+     * @var ProductRepository
      */
     private $productRepository;
 
     /**
      * @param EntityManager         $em
-     * @param BaseProductRepository $productRepository
+     * @param ProductRepository $productRepository
      */
-    public function __construct(EntityManager $em, BaseProductRepository $productRepository)
+    public function __construct(EntityManager $em, ProductRepository $productRepository)
     {
         $this->em = $em;
         $this->productRepository = $productRepository;
@@ -49,17 +49,19 @@ class SyliusSearchIndexRepository
      */
     public function getProductIdsFromTaxonName($taxonName)
     {
-
         // Gets the taxon ids
-        $query = $this->em->createQuery('SELECT u.id FROM Sylius\Component\Core\Model\Taxon u WHERE u.name = ?1');
-        $query->setParameter(1, $taxonName);
-        $taxonId = $query->getResult(Query::HYDRATE_SINGLE_SCALAR);
-
-        $filteredProducts = $this->productRepository->getProductsByTaxons(array($taxonId));
+        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder
+            ->select('product.id')
+            ->from('Sylius\Component\Core\Model\Product', 'product')
+            ->leftJoin('product.taxons', 'taxon')
+            ->where('taxon.name = :taxonName')
+            ->setParameter('taxonName', $taxonName)
+        ;
 
         $filteredIds = array();
-        foreach ($filteredProducts as $filteredProduct) {
-            $filteredIds[] = $filteredProduct->getId();
+        foreach ($queryBuilder->getQuery()->getResult(Query::HYDRATE_ARRAY) as $row) {
+            $filteredIds[] = $row['id'];
         }
 
         return $filteredIds;

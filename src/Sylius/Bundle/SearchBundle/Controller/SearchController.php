@@ -37,42 +37,33 @@ class SearchController extends ResourceController
             ->setTargetIndex('product')
             ->setFacetGroup('search_set')
             ->find(new SearchStringQuery(
-                    $request->query->get('q'),
-                    $request->query->get('search_param'),
-                    $request->query->get('filters'),
+                    $request,
                     $this->container->getParameter('sylius_search.pre_search_filter.enabled')
                 )
             );
 
-        $selectedFilters = array();
-        if ($request->query->has('filters')) {
-            $selectedFilters = $request->query->get('filters');
-        }
-
         $paginator = $finder->getPaginator();
-        $facets = $finder->getFacets();
 
         $searchConfig = $this->container->getParameter("sylius_search.config");
 
-        if (isset($paginator)) {
+        if ($paginator) {
             $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
-            $paginator->setCurrentPage($request->query->get('page', 1));
-        }
 
-        $this->logSearchString(
-            $request->query->get('q'),
-            $request->headers->get('User-Agent'),
-            $request->getClientIp()
-        );
+            $page = ($request->isMethod('GET'))? $request->query->get('page', 1):$request->request->get('page', 1);
+            $paginator->setCurrentPage($page);
+        }
 
         $view = $this
             ->view()
             ->setTemplate('SyliusSearchBundle::index.html.twig')
             ->setData(array(
                 'results' => $paginator,
-                'facets' => $facets,
-                'selectedFilters' => $selectedFilters,
+                'facets' => $finder->getFacets(),
                 'facetTags' => $searchConfig['filters']['facets'],
+                'filters' => $finder->getFilters(),
+                'searchTerm' => ($request->isMethod('GET'))? $request->query->get('q'):$request->request->get('q'),
+                'searchParam' => ($request->isMethod('GET'))? $request->query->get('search_param'):$request->request->get('search_param'),
+                'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
             ));
 
         return $this->handleView($view);
@@ -96,7 +87,7 @@ class SearchController extends ResourceController
                 );
 
             $filters = array();
-            if (!empty($taxonomy)) {
+            if ($taxonomy) {
                 foreach ($taxonomy->getTaxons() as $taxon) {
                     $filters[] = $taxon->getName();
                 }
@@ -109,34 +100,11 @@ class SearchController extends ResourceController
             ->setTemplate($this->container->getParameter('sylius_search.search.template'))
             ->setData(array(
                 'filters' => $filters,
-                'searchTerm' => $request->query->get('q'),
-                'searchParam' => $request->query->get('search_param'),
+                'searchTerm' => ($request->isMethod('GET'))? $request->query->get('q'):$request->request->get('q'),
+                'searchParam' => ($request->isMethod('GET'))? $request->query->get('search_param'):$request->request->get('search_param'),
+                'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
             ));
 
         return $this->handleView($view);
-    }
-
-    /**
-     * Logs a search
-     *
-     * TODO: I could move this to a listener hooked in a find event
-     *
-     * @param $searchString
-     * @param $userAgent
-     * @param $remoteAddress
-     *
-     * @internal param $request
-     */
-    private function logSearchString($searchString, $userAgent, $remoteAddress)
-    {
-        $searchLog = new SearchLog();
-
-        $searchLog->setSearchString($searchString);
-        $searchLog->setClient($userAgent);
-        $searchLog->setRemoteAddress($remoteAddress);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($searchLog);
-        $em->flush();
     }
 }

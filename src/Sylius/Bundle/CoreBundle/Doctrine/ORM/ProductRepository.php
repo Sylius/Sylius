@@ -30,7 +30,7 @@ class ProductRepository extends BaseProductRepository
      *
      * @return PagerfantaInterface
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria)
+    public function createByTaxonPaginator(TaxonInterface $taxon, $criteria = array())
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
@@ -40,12 +40,11 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('taxon', $taxon)
         ;
 
-        foreach($criteria as $key => $value) {
-
-            if (!empty($value)) {
+        foreach($criteria as $attributeName => $value) {
+            if ($value) {
                 $queryBuilder
-                    ->andWhere('product.'.$key.' IN (:'.$key.')')
-                    ->setParameter($key, $value)
+                    ->andWhere('product.'.$attributeName.' IN (:'.$attributeName.')')
+                    ->setParameter($attributeName, $value)
                 ;
             }
         }

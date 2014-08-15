@@ -18,16 +18,19 @@
 
     <parameters>
         <parameter key="sylius_search.searchindex.repository.class">Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository</parameter>
+
         <parameter key="fos_elastica.index.populate.class">FOS\ElasticaBundle\Command\PopulateCommand</parameter>
+
         <parameter key="sylius_search.orm.finder.class">Sylius\Bundle\SearchBundle\Finder\OrmFinder</parameter>
         <parameter key="sylius_search.elasticsearch.finder.class">Sylius\Bundle\SearchBundle\Finder\ElasticsearchFinder</parameter>
-        <parameter key="sylius_search.finder.class">%sylius_search.finder%</parameter>
-        <parameter key="sylius_search.finder.product_by_taxon.class">Sylius\Bundle\SearchBundle\Finder\ProductTaxonFinder</parameter>
-        <parameter key="sylius_search.finder.product_by_text.class">Sylius\Bundle\SearchBundle\Finder\ProductTextFinder</parameter>
-        <parameter key="sylius_search.finder.everything_by_text.class">Sylius\Bundle\SearchBundle\Finder\EverythingTextFinder</parameter>
+
         <parameter key="fos_elastica.model_to_elastica_transformer.class">FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer</parameter>
+
         <parameter key="sylius.search.orm.indexer.class">Sylius\Bundle\SearchBundle\Indexer\OrmIndexer</parameter>
         <parameter key="sylius.search.elasticsearch.indexer.class">Sylius\Bundle\SearchBundle\Indexer\ElasticsearchIndexer</parameter>
+
+        <parameter key="sylius_search.orm.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\OrmQueryLogger</parameter>
+        <parameter key="sylius_search.elasticsearch.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\ElasticsearchQueryLogger</parameter>
     </parameters>
 
     <services>
@@ -41,12 +44,23 @@
 
         <service id="fos_elastica.index.populate" class="%fos_elastica.index.populate.class%" />
 
-        <service id="sylius_search.finder" class="%sylius_search.finder.class%">
+        <!-- dummy service name, is being aliaced in dependency injection -->
+        <service id="sylius_search.finder" />
+
+        <service id="sylius_search.orm.finder" class="%sylius_search.orm.finder.class%">
             <argument type="service" id="sylius_search.repository" />
             <argument>%sylius_search.config%</argument>
             <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="service_container" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius_search.query.logger" on-invalid="ignore" />
+        </service>
+
+        <service id="sylius_search.elasticsearch.finder" class="%sylius_search.elasticsearch.finder.class%">
+            <argument type="service" id="sylius_search.repository" />
+            <argument>%sylius_search.config%</argument>
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="fos_elastica.index.sylius" on-invalid="ignore" />
+            <argument type="service" id="sylius_search.query.logger" on-invalid="ignore" />
         </service>
 
         <service id="sylius.search.transformers.model.product" class="%fos_elastica.model_to_elastica_transformer.class%">
@@ -54,8 +68,6 @@
                 <argument type="service" id="sylius.search.product.property_accessor" />
             </call>
         </service>
-
-        <service id="sylius.search.product.property_accessor" class="Sylius\Bundle\SearchBundle\Accessor\ProductAccessor" />
 
         <service id="sylius.search.orm.listener" class="Sylius\Bundle\SearchBundle\Listener\OrmListener">
             <argument type="service" id="sylius.search.orm.indexer" />
@@ -72,6 +84,19 @@
 
         <service id="sylius.search.elasticsearch.indexer" class="%sylius.search.elasticsearch.indexer.class%">
             <argument type="service" id="kernel" />
+        </service>
+
+        <!-- dummy service name, is being aliaced in dependency injection -->
+        <service id="sylius_search.query.logger" synthetic="true" />
+
+        <service id="sylius_search.orm.query.logger" class="%sylius_search.orm.query.logger.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%sylius_search.query.logger.enabled%</argument>
+        </service>
+
+        <service id="sylius_search.elasticsearch.query.logger" class="%sylius_search.elasticsearch.query.logger.class%">
+            <argument type="service" id="fos_elastica.index.sylius.search_log" on-invalid="ignore" />
+            <argument>%sylius_search.query.logger.enabled%</argument>
         </service>
     </services>
 
