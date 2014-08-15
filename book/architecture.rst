@@ -145,7 +145,7 @@ Displaying a resource with custom template and repository methods:
     # routing.yml
 
     app_product_show:
-        pattern: /products/{slug}
+        path: /products/{slug}
         methods: [GET]
         defaults:
             _controller: sylius.controller.product:showAction
@@ -161,7 +161,7 @@ Creating a product using custom form and redirection method:
     # routing.yml
 
     app_product_create:
-        pattern: /my-stores/{store}/products/new
+        path: /my-stores/{store}/products/new
         methods: [GET, POST]
         defaults:
             _controller: sylius.controller.product:createAction

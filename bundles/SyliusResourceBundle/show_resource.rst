@@ -14,7 +14,7 @@ The most basic action is **showAction**. It is used to display a single resource
     # routing.yml
 
     app_user_show:
-        pattern: /users/{id}
+        path: /users/{id}
         methods: [GET]
         defaults:
             _controller: app.controller.user:showAction
@@ -35,7 +35,7 @@ Okay, but what if you want now to display same User resource, but with a differe
     # routing.yml
 
     app_backend_user_show:
-        pattern: /backend/users/{id}
+        path: /backend/users/{id}
         methods: [GET]
         defaults:
             _controller: app.controller.user:showAction
@@ -55,7 +55,7 @@ Displaying the user by id can be boring... and let's say we do not want to allow
     # routing.yml
 
     app_user_show:
-        pattern: /users/{username}
+        path: /users/{username}
         methods: [GET]
         defaults:
             _controller: app.controller.user:showAction
@@ -78,7 +78,7 @@ Creating yet another action to change the method called could be a solution but 
     # routing.yml
 
     app_user_show:
-        pattern: /users/{username}
+        path: /users/{username}
         methods: [GET]
         defaults:
             _controller: app.controller.user:showAction

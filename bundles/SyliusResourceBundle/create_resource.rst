@@ -8,7 +8,7 @@ To display a form, handle submit or create a new resource via API, you should us
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -46,7 +46,7 @@ Just like for the **show** and **index** actions, you can customize the template
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -64,7 +64,7 @@ Below you can see the usage for specifying a custom form.
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -83,7 +83,7 @@ To use different method of your repository, you can simply configure the ``facto
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -97,7 +97,7 @@ Additionally, if you want to provide your custom method with arguments from the 
     # routing.yml
 
     app_user_create:
-        pattern: /users/{groupId}/new
+        path: /users/{groupId}/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -119,7 +119,7 @@ For example, to redirect user to list after successfully creating a new resource
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -133,7 +133,7 @@ You can also perform more complex redirects, with parameters. For example...
     # routing.yml
 
     app_user_create:
-        pattern: /competition/{competitionId}/users/new
+        path: /competition/{competitionId}/users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -149,7 +149,7 @@ In addition to the request parameters, you can access some of the newly created 
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction

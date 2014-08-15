@@ -9,7 +9,7 @@ In the default scenario, it will return an instance of paginator, with a list of
     # routing.yml
 
     app_user_index:
-        pattern: /users
+        path: /users
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -27,7 +27,7 @@ Just like for the **showAction**, you can override the default template and crit
     # routing.yml
 
     app_user_index_inactive:
-        pattern: /users/inactive
+        path: /users/inactive
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -48,7 +48,7 @@ Except filtering, you can also sort users.
     # routing.yml
 
     app_user_index_top:
-        pattern: /users/top
+        path: /users/top
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -69,7 +69,7 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
     # routing.yml
 
     app_user_index_top:
-        pattern: /users/top
+        path: /users/top
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -91,7 +91,7 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
     # routing.yml
 
     app_user_index_top3:
-        pattern: /users/top
+        path: /users/top
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
