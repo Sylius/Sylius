@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_currency_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.currency:indexAction
@@ -12,7 +12,7 @@ sylius_backend_currency_index:
             paginate: false
 
 sylius_backend_currency_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.currency:createAction
@@ -21,7 +21,7 @@ sylius_backend_currency_create:
             redirect: sylius_backend_currency_index
 
 sylius_backend_currency_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.currency:updateAction
@@ -30,7 +30,7 @@ sylius_backend_currency_update:
             redirect: sylius_backend_currency_index
 
 sylius_backend_currency_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.currency:deleteAction

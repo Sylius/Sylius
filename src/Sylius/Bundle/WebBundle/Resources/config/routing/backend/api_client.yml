@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_api_client_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.api_client:indexAction
@@ -10,7 +10,7 @@ sylius_backend_api_client_index:
             template: SyliusWebBundle:Backend/ApiClient:index.html.twig
 
 sylius_backend_api_client_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.api_client:createAction
@@ -19,7 +19,7 @@ sylius_backend_api_client_create:
             redirect: sylius_backend_api_client_update
 
 sylius_backend_api_client_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT, POST]
     defaults:
         _controller: sylius.controller.api_client:updateAction
@@ -28,7 +28,7 @@ sylius_backend_api_client_update:
             redirect: sylius_backend_api_client_update
 
 sylius_backend_api_client_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.api_client:deleteAction

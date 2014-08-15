@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_inventory_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
@@ -15,7 +15,7 @@ sylius_backend_inventory_index:
                 updatedAt: asc
 
 sylius_backend_inventory_unit_update_state:
-    pattern: /update-state/{id}/{transition}
+    path: /update-state/{id}/{transition}
     methods: [PUT]
     defaults:
         _controller: sylius.controller.inventory_unit:updateStateAction

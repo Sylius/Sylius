@@ -9,7 +9,7 @@ sylius_backend:
     prefix: /administration
 
 sylius_province_choice_form:
-    pattern: /province/choice-form
+    path: /province/choice-form
     defaults:
         _controller: sylius.controller.province:choiceFormAction
         _sylius:

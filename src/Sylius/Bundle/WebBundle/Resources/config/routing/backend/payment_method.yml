@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_payment_method_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment_method:indexAction
@@ -13,7 +13,7 @@ sylius_backend_payment_method_index:
                 name: desc
 
 sylius_backend_payment_method_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.payment_method:createAction
@@ -22,7 +22,7 @@ sylius_backend_payment_method_create:
             redirect: sylius_backend_payment_method_index
 
 sylius_backend_payment_method_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.payment_method:updateAction
@@ -31,7 +31,7 @@ sylius_backend_payment_method_update:
             redirect: sylius_backend_payment_method_index
 
 sylius_backend_payment_method_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.payment_method:deleteAction

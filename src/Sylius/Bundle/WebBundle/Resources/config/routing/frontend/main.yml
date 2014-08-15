@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_homepage:
-    pattern: /
+    path: /
     defaults: { _controller: sylius.controller.frontend.homepage:mainAction }
 
 sylius_currency:
@@ -26,14 +26,14 @@ sylius_cart:
     prefix: /cart
 
 sylius_cart_summary:
-    pattern: /cart
+    path: /cart
     defaults:
         _controller: sylius.controller.cart:summaryAction
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
 
 sylius_cart_save:
-    pattern: /cart/save
+    path: /cart/save
     defaults:
         _controller: sylius.controller.cart:saveAction
         _sylius:
