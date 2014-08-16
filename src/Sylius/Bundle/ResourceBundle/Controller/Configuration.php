@@ -243,7 +243,8 @@ class Configuration
         if ($this->isFilterable()) {
             $criteria = array_merge(
                 $criteria,
-                $this->parameters->get('criteria', $this->request->get('criteria', array()))
+                $this->parameters->get('criteria'),
+                $this->request->get('criteria', array())
             );
         }
 
@@ -260,7 +261,8 @@ class Configuration
         if ($this->isSortable()) {
             $sorting = array_merge(
                 $sorting,
-                $this->parameters->get('sorting', $this->request->get('sorting', array()))
+                $this->parameters->get('sorting'),
+                $this->request->get('sorting', array())
             );
         }
 
