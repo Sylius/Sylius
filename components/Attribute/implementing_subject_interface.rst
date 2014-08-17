@@ -1,7 +1,7 @@
-Implementing SubjectInterface
-=============================
+Implementing AttributeSubjectInterface
+======================================
 
-To characterize an object using attribute, it needs to implement the **SubjectInterface** interface:
+To characterize an object with attributes, the object class needs to implement the ``AttributeSubjectInterface``.
 
 * ``getAttributes()``
 * ``setAttributes(Collection $attributes)``
