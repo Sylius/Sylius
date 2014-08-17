@@ -58,6 +58,11 @@ class Currency implements CurrencyInterface
         $this->createdAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->code;
+    }
+
     public function getId()
     {
         return $this->id;
