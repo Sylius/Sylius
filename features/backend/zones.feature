@@ -5,8 +5,8 @@ Feature: Zones
     In order to apply taxes and allow shipping to geographical areas
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are following zones:
             | name                      | type     | members                                       | scope      |
             | Baltic states             | country  | Lithuania, Latvia, Estonia                    | content    |

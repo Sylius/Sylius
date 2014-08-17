@@ -11,6 +11,7 @@ Feature: Locale selection
             | en_US | yes     |
             | fr_FR | no      |
             | pl_PL | yes     |
+        And there is default currency configured
 
     Scenario: Only enabled locales are visible to the user
         Given I am on the store homepage

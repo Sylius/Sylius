@@ -5,8 +5,8 @@ Feature: Shipping categories
     I want to be able to manage shipping categories
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are following shipping categories:
             | name    |
             | Regular |

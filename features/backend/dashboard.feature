@@ -5,8 +5,8 @@ Feature: Store dashboard
     I need to be able to see sales info in backend dashboard
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |

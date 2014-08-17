@@ -8,6 +8,7 @@ Feature: Sign in to the store
         Given there are following users:
             | email       | password | enabled |
             | bar@foo.com | foo      | yes     |
+        And there is default currency configured
 
     Scenario: Log in with username and password
         Given I am on the store homepage

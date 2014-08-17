@@ -5,8 +5,8 @@ Feature: taxonomies
     I want to be able to manage taxonomies
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are following taxonomies defined:
             | name     |
             | Category |

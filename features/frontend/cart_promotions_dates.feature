@@ -39,5 +39,5 @@ Feature: Checkout limited time promotions
         Given I am on the store homepage
          When I added product "Sarge" to cart, with quantity "8"
          Then I should be on the cart summary page
-          And "Promotion total: -€20.00" should appear on the page
+          And "Promotion total: (€20.00)" should appear on the page
           And "Grand total: €160.00" should appear on the page

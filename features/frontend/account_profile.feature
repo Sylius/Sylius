@@ -5,9 +5,9 @@ Feature: User account profile edition
     I want to be able to edit my name and my email
 
     Background:
-        Given I am logged in user
+        Given there is default currency configured
+          And I am logged in user
           And I am on my account homepage
-          And there is default currency configured
 
     Scenario: Viewing my personal information page
         Given I follow "My personal information"

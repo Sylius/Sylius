@@ -5,8 +5,8 @@ Feature: Inventory tracking
     I want to be able to manage stock levels and availability
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are following options:
             | name          | presentation | values           |
             | T-Shirt color | Color        | Red, Blue, Green |

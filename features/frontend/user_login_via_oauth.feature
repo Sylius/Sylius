@@ -5,7 +5,8 @@ Feature: Sign in to the store via OAuth
     I need to be able to log in to the store
 
     Background:
-        Given I am not logged in
+        Given there is default currency configured
+        And I am not logged in
         And I am on the store homepage
 
     Scenario Outline: Get to the OAuth login page

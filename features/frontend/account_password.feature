@@ -5,9 +5,9 @@ Feature: User account password change
     I want to be able to change password
 
     Background:
-        Given I am logged in user
+        Given there is default currency configured
+          And I am logged in user
           And I am on my account homepage
-          And there is default currency configured
 
     Scenario: Viewing my password change page
         Given I follow "My password"

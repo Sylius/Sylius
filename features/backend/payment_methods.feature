@@ -5,8 +5,8 @@ Feature: Payment methods
     I want to be able to manage payment methods
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following payment methods exist:
             | name        | gateway |
             | Credit Card | stripe  |

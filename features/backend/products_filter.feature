@@ -5,8 +5,8 @@ Feature: Products filter
     I want to be able to filter list by name
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following products exist:
             | name          | price | sku |
             | Super T-Shirt | 19.99 | 123 |

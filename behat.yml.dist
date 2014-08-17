@@ -115,6 +115,7 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\CoreBundle\Behat\OAuthContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
             filters:
                 tags: @oauth
