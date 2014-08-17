@@ -22,35 +22,35 @@ use Doctrine\Common\Collections\Collection;
 interface AttributeSubjectInterface
 {
     /**
-     * Returns all product product properties.
+     * Returns all attributes of the subject.
      *
      * @return Collection|AttributeValueInterface[]
      */
     public function getAttributes();
 
     /**
-     * Sets all product product properties.
+     * Sets all attributes of the subject.
      *
-     * @param Collection $properties Array of AttributeValueInterface
+     * @param Collection $attributes Array of AttributeValueInterface
      */
-    public function setAttributes(Collection $properties);
+    public function setAttributes(Collection $attributes);
 
     /**
-     * Adds product attribute.
+     * Adds an attribute to the subject.
      *
      * @param AttributeValueInterface $attribute
      */
     public function addAttribute(AttributeValueInterface $attribute);
 
     /**
-     * Removes product attribute from product.
+     * Removes an attribute from the subject.
      *
      * @param AttributeValueInterface $attribute
      */
     public function removeAttribute(AttributeValueInterface $attribute);
 
     /**
-     * Checks whether product has given product attribute.
+     * Checks whether the subject has a given attribute.
      *
      * @param AttributeValueInterface $attribute
      *
@@ -59,7 +59,7 @@ interface AttributeSubjectInterface
     public function hasAttribute(AttributeValueInterface $attribute);
 
     /**
-     * Checks whether product has given product attribute, access by name.
+     * Checks whether the subject has a given attribute, access by name.
      *
      * @param string $attributeName
      *
@@ -68,7 +68,7 @@ interface AttributeSubjectInterface
     public function hasAttributeByName($attributeName);
 
     /**
-     * Returns a attribute by its name.
+     * Returns an attribute of the subject by its name.
      *
      * @param string $attributeName
      *
