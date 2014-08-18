@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Checker;
 
+use Symfony\Component\Security\Core\SecurityContextInterface;
+
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {

@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\InventoryBundle\Templating\Helper;
 
+use Symfony\Component\Templating\Helper\Helper;
+
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 class InventoryHelper extends Helper
 {

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\OrderProcessing;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,7 +27,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
  */
 class TaxationProcessorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         RepositoryInterface $adjustmentRepository,
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
@@ -36,17 +37,17 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($adjustmentRepository, $calculator, $taxRateResolver, $zoneMatcher, $taxationSettings);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor');
     }
 
-    function it_implements_Sylius_taxation_processor_interface()
+    public function it_implements_Sylius_taxation_processor_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface');
     }
 
-    function it_removes_existing_tax_adjustments(OrderInterface $order, Collection $collection)
+    public function it_removes_existing_tax_adjustments(OrderInterface $order, Collection $collection)
     {
         $collection->isEmpty()->willReturn(true);
 
@@ -56,7 +57,7 @@ class TaxationProcessorSpec extends ObjectBehavior
         $this->applyTaxes($order);
     }
 
-    function it_doesnt_apply_any_taxes_if_zone_is_missing(
+    public function it_doesnt_apply_any_taxes_if_zone_is_missing(
         OrderInterface $order,
         Collection $collection,
         $taxationSettings

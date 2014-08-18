@@ -13,6 +13,7 @@ namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectRepository;
+
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;

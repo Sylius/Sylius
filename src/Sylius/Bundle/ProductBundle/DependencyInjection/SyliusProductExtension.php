@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 /**
  * Sylius product catalog system container extension.

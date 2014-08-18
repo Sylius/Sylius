@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\CartBundle\Storage;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Storage\CartStorageInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Stores current cart id inside the user session.

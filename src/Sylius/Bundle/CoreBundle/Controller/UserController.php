@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 class UserController extends ResourceController
 {

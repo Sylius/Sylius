@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -20,24 +21,24 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
 {
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker');
     }
 
-    function it_should_be_Sylius_rule_checker()
+    public function it_should_be_Sylius_rule_checker()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
-    function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
+    public function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
         $subject->getUser()->willReturn(null);
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_user_is_created_after_configured(
+    public function it_should_recognize_subject_as_not_eligible_if_user_is_created_after_configured(
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
@@ -47,7 +48,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_user_is_created_before_configured(
+    public function it_should_recognize_subject_as_eligible_if_user_is_created_before_configured(
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
@@ -57,7 +58,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_user_is_created_after_configured(
+    public function it_should_recognize_subject_as_eligible_if_user_is_created_after_configured(
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
@@ -67,7 +68,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_user_is_created_before_configured(
+    public function it_should_recognize_subject_as_not_eligible_if_user_is_created_before_configured(
         OrderInterface $subject,
         TimestampableInterface $user
     ) {

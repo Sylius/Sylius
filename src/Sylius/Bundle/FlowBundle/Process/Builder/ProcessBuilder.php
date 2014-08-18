@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Builder;
 
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProcessBuilder implements ProcessBuilderInterface
 {

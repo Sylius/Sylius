@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
@@ -21,7 +23,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LoadOrdersData extends DataFixture
 {

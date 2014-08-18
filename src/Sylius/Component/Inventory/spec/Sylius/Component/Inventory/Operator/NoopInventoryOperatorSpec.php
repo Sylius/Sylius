@@ -18,12 +18,12 @@ use PhpSpec\ObjectBehavior;
  */
 class NoopInventoryOperatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\NoopInventoryOperator');
     }
 
-    function it_implements_Sylius_inventory_operator_interface()
+    public function it_implements_Sylius_inventory_operator_interface()
     {
         $this->shouldImplement('Sylius\Component\Inventory\Operator\InventoryOperatorInterface');
     }

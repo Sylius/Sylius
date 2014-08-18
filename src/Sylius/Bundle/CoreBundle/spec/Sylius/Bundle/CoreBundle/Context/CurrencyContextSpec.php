@@ -13,16 +13,17 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Component\Core\Model\User;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Component\Core\Model\User;
+
 class CurrencyContextSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SessionInterface $session,
         SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
@@ -36,22 +37,22 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->beConstructedWith($session, $securityContext, $settingsManager, $userManager);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Context\CurrencyContext');
     }
 
-    function it_extends_Sylius_currency_context()
+    public function it_extends_Sylius_currency_context()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Context\CurrencyContext');
     }
 
-    function it_gets_default_currency()
+    public function it_gets_default_currency()
     {
         $this->getDefaultCurrency()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session_if_there_is_no_user(
+    public function it_gets_currency_from_session_if_there_is_no_user(
         TokenInterface $token,
         $securityContext,
         $session
@@ -64,7 +65,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('RSD');
     }
 
-    function it_gets_currency_from_user_if_authenticated(
+    public function it_gets_currency_from_user_if_authenticated(
         User $user,
         TokenInterface $token,
         $securityContext
@@ -77,7 +78,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrency()->shouldReturn('PLN');
     }
 
-    function it_sets_currency_to_session_if_there_is_no_user(
+    public function it_sets_currency_to_session_if_there_is_no_user(
         TokenInterface $token,
         $securityContext,
         $session
@@ -91,7 +92,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->setCurrency('PLN');
     }
 
-    function it_sets_currency_to_user_if_authenticated(
+    public function it_sets_currency_to_user_if_authenticated(
         User $user,
         TokenInterface $token,
         $securityContext

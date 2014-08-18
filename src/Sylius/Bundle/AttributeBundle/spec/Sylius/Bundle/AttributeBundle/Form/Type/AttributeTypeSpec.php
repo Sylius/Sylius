@@ -13,10 +13,11 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -24,24 +25,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AttributeTypeSpec extends ObjectBehavior
 {
-    function let(FormBuilder $builder, FormFactoryInterface $formFactory)
+    public function let(FormBuilder $builder, FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith('server', 'Attribute', array('sylius'));
 
         $builder->getFormFactory()->willReturn($formFactory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener'))
@@ -70,14 +71,14 @@ class AttributeTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'Attribute', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_server_attribute');
     }

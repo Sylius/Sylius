@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 
 use Payum\Core\Security\SensitiveValue;
 use Payum\Core\Security\TokenInterface;
+
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\PaymentInterface;

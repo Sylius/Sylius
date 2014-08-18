@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 

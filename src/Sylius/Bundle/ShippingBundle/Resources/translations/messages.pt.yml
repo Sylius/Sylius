@@ -8,7 +8,7 @@ sylius:
         count: sylius.form.rule.item_count_configuration.count
         equal: |
           sylius.form.rule.item_count_configuration.equal
-          
+
       type: sylius.form.rule.type
     shipment:
       state: Estado

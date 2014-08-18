@@ -20,27 +20,27 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ServiceRegistrySpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Symfony\Component\Routing\RouterInterface');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Registry\ServiceRegistry');
     }
 
-    function it_implements_service_registry_interface()
+    public function it_implements_service_registry_interface()
     {
         $this->shouldImplement('Sylius\Component\Registry\ServiceRegistryInterface');
     }
 
-    function it_initializes_services_array_by_default()
+    public function it_initializes_services_array_by_default()
     {
         $this->all()->shouldReturn(array());
     }
 
-    function it_registers_service_with_given_type(RouterInterface $router)
+    public function it_registers_service_with_given_type(RouterInterface $router)
     {
         $this->has('test')->shouldReturn(false);
         $this->register('test', $router);
@@ -49,7 +49,7 @@ class ServiceRegistrySpec extends ObjectBehavior
         $this->get('test')->shouldReturn($router);
     }
 
-    function it_throws_exception_when_trying_to_register_service_with_taken_type(RouterInterface $router)
+    public function it_throws_exception_when_trying_to_register_service_with_taken_type(RouterInterface $router)
     {
         $this->register('test', $router);
 
@@ -59,7 +59,7 @@ class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_when_trying_to_register_service_without_required_interface(
+    public function it_throws_exception_when_trying_to_register_service_without_required_interface(
         RouteCompilerInterface $compiler
     ) {
         $this
@@ -68,7 +68,7 @@ class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_unregisters_service_with_given_type(RouterInterface $router)
+    public function it_unregisters_service_with_given_type(RouterInterface $router)
     {
         $this->register('foo', $router);
         $this->has('foo')->shouldReturn(true);
@@ -77,13 +77,13 @@ class ServiceRegistrySpec extends ObjectBehavior
         $this->has('foo')->shouldReturn(false);
     }
 
-    function it_retrieves_registered_service_by_type(RouterInterface $router)
+    public function it_retrieves_registered_service_by_type(RouterInterface $router)
     {
         $this->register('test', $router);
         $this->get('test')->shouldReturn($router);
     }
 
-    function it_throws_exception_if_trying_to_get_service_of_non_existing_type()
+    public function it_throws_exception_if_trying_to_get_service_of_non_existing_type()
     {
         $this
             ->shouldThrow('Sylius\Component\Registry\NonExistingServiceException')

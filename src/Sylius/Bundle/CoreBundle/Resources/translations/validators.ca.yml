@@ -36,5 +36,3 @@ sylius_taxation:
     zone:
       not_blank: |
         Introduïu la zona d'impost.
-        
-        

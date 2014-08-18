@@ -13,30 +13,31 @@ namespace spec\Sylius\Bundle\VariationBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Validator\ExecutionContextInterface;
+
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
 
 class VariantCombinationValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context)
+    public function let(ExecutionContextInterface $context)
     {
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\Validator\VariantCombinationValidator');
     }
 
-    function it_is_a_constraint_validator()
+    public function it_is_a_constraint_validator()
     {
         $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
     }
 
-    function it_should_not_add_violation_if_variant_is_master(VariantInterface $variant)
+    public function it_should_not_add_violation_if_variant_is_master(VariantInterface $variant)
     {
         $constraint = new VariantCombination(array(
             'message' => 'Variant with given presentation already exists'
@@ -47,7 +48,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_not_add_violation_if_variable_dont_have_options(
+    public function it_should_not_add_violation_if_variable_dont_have_options(
         VariantInterface $variant,
         VariableInterface $variable
     ) {
@@ -64,7 +65,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_not_add_violation_if_variable_dont_have_variants(
+    public function it_should_not_add_violation_if_variable_dont_have_variants(
         VariantInterface $variant,
         VariableInterface $variable
     ) {
@@ -81,7 +82,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_add_violation_if_variant_with_given_same_options_already_exists(
+    public function it_should_add_violation_if_variant_with_given_same_options_already_exists(
         VariantInterface $variant,
         VariantInterface $existingVariant,
         VariableInterface $variable,

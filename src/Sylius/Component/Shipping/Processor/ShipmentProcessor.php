@@ -13,6 +13,7 @@ namespace Sylius\Component\Shipping\Processor;
 
 use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
+
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;

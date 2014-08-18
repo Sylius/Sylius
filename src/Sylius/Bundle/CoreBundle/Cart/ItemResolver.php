@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
@@ -19,8 +22,6 @@ use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Item resolver for cart bundle.

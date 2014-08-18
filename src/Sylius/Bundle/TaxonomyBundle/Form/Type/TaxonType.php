@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
-use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener;
 
 /**
  * Taxon form type.

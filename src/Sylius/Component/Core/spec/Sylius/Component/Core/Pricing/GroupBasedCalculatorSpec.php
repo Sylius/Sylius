@@ -12,7 +12,9 @@
 namespace spec\Sylius\Component\Core\Pricing;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Core\Model\GroupInterface;
+
 use Sylius\Component\Pricing\Model\PriceableInterface;;
 
 /**
@@ -20,17 +22,17 @@ use Sylius\Component\Pricing\Model\PriceableInterface;;
  */
 class GroupBasedCalculatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Pricing\GroupBasedCalculator');
     }
 
-    function it_implements_Sylius_pricing_calculator_interface()
+    public function it_implements_Sylius_pricing_calculator_interface()
     {
         $this->shouldImplement('Sylius\Component\Pricing\Calculator\CalculatorInterface');
     }
 
-    function it_returns_default_price_if_groups_are_not_in_context(PriceableInterface $priceable)
+    public function it_returns_default_price_if_groups_are_not_in_context(PriceableInterface $priceable)
     {
         $configuration = array(
             42 => 4999,
@@ -44,7 +46,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, $context)->shouldReturn(5500);
     }
 
-    function it_returns_the_default_price_if_configuration_does_not_exist_for_group(
+    public function it_returns_the_default_price_if_configuration_does_not_exist_for_group(
         PriceableInterface $priceable,
         GroupInterface $group
     ) {
@@ -61,7 +63,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, $context)->shouldReturn(3500);
     }
 
-    function it_returns_the_price_for_group_if_configuration_exists(
+    public function it_returns_the_price_for_group_if_configuration_exists(
         PriceableInterface $priceable,
         GroupInterface $group
     ) {
@@ -77,7 +79,7 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, $context)->shouldReturn(4599);
     }
 
-    function it_returns_the_lowest_price_if_more_than_1_group_provided_in_context(
+    public function it_returns_the_lowest_price_if_more_than_1_group_provided_in_context(
         PriceableInterface $priceable,
         GroupInterface $group1,
         GroupInterface $group2

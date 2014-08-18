@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\EventListener;
 
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+
+use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * Form event listener that builds choices for attribute form.

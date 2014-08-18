@@ -15,22 +15,22 @@ use PhpSpec\ObjectBehavior;
 
 class OrderTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Order', array('sylius'));
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\OrderType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_extend_Sylius_order_form_type()
+    public function it_should_extend_Sylius_order_form_type()
     {
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\OrderType');
     }

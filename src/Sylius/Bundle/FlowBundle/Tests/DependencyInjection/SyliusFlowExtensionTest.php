@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\DependencyInjection;
 
-use Sylius\Bundle\FlowBundle\DependencyInjection\SyliusFlowExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
+
+use Sylius\Bundle\FlowBundle\DependencyInjection\SyliusFlowExtension;
 
 /**
  * Dependency injection extension test.

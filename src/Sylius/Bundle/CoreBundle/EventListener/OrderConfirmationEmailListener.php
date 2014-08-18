@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Sends Order Confirmation email when triggered by event

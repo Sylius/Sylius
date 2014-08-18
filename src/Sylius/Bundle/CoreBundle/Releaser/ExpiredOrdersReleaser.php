@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Releaser;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface;
+
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 

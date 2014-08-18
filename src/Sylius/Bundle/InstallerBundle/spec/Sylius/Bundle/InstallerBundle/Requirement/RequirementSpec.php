@@ -15,37 +15,37 @@ use PhpSpec\ObjectBehavior;
 
 class RequirementSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('PHP version', true, '5.4', '5.5', true, 'Please upgrade.');
     }
 
-    function it_gets_label()
+    public function it_gets_label()
     {
         $this->getLabel()->shouldReturn('PHP version');
     }
 
-    function it_gets_fulfilled()
+    public function it_gets_fulfilled()
     {
         $this->isFulfilled()->shouldReturn(true);
     }
 
-    function it_gets_expected()
+    public function it_gets_expected()
     {
         $this->getExpected()->shouldReturn('5.4');
     }
 
-    function it_gets_actual()
+    public function it_gets_actual()
     {
         $this->getActual()->shouldReturn('5.5');
     }
 
-    function it_gets_required()
+    public function it_gets_required()
     {
         $this->isRequired()->shouldReturn(true);
     }
 
-    function it_gets_help()
+    public function it_gets_help()
     {
         $this->getHelp()->shouldReturn('Please upgrade.');
     }

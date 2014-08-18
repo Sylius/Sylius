@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\SettingsBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Settings system for ecommerce Symfony2 applications.

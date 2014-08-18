@@ -12,8 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Doctrine\Common\Collections\Collection;
-use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
+use SM\Factory\FactoryInterface;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -24,17 +25,17 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
  */
 class OrderPaymentCallbackSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    public function let(FactoryInterface $factory)
     {
         $this->beConstructedWith($factory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback');
     }
 
-    function it_dispatches_event_on_payment_update(
+    public function it_dispatches_event_on_payment_update(
         $factory,
         PaymentInterface $payment,
         OrderInterface $order,

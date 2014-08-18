@@ -19,27 +19,27 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ShippingCategoryEntityTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('ShippingCategory');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryEntityType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_entity_type_as_parent()
+    public function it_has_entity_type_as_parent()
     {
         $this->getParent()->shouldReturn('entity');
     }
 
-    function it_defines_assigned_class_name(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_class_name(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('class' => 'ShippingCategory'))->shouldBeCalled();
 

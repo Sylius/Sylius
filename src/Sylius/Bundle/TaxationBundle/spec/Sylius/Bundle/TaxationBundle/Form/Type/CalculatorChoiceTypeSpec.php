@@ -19,32 +19,32 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array('calc1', 'calc2'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_tax_calculator_choice');
     }
 
-    function it_has_a_parent_type()
+    public function it_has_a_parent_type()
     {
         $this->getParent()->shouldReturn('choice');
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(

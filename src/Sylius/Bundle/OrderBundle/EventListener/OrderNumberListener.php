@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
-use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
+
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 
 /**
  * Sets appropriate order number before saving.

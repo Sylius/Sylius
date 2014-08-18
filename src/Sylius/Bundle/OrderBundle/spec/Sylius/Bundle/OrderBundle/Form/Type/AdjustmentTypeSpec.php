@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AdjustmentTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Adjustment', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
+    public function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
         $builder->add('label', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
@@ -45,7 +45,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -58,7 +58,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_adjustment');
     }

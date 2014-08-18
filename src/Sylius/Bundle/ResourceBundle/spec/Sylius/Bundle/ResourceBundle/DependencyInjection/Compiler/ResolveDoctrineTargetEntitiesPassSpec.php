@@ -23,24 +23,24 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 class ResolveDoctrineTargetEntitiesPassSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('sylius_resource', array());
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(
             'Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass'
         );
     }
 
-    function it_is_a_compiler_pass()
+    public function it_is_a_compiler_pass()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_should_resolve_entities(ContainerBuilder $container, Definition $resolverDefinition)
+    public function it_should_resolve_entities(ContainerBuilder $container, Definition $resolverDefinition)
     {
         $container->getParameter('sylius_resource.driver')
             ->shouldBeCalled()

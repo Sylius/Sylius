@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+
+use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Cart form.

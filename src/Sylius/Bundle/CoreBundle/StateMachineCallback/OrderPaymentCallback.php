@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use SM\Factory\FactoryInterface;
-use Sylius\Component\Order\OrderTransitions;
+
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Order\OrderTransitions;
 
 /**
  * Synchronization between payments and their order.

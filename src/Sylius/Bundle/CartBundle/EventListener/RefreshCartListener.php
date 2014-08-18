@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+
+use Sylius\Component\Cart\Model\CartInterface;
 
 /**
  * Ensure that the cart is refreshed before other listeners.

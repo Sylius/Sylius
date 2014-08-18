@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 
-use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+
+use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 
 /**
  * Settings form factory.

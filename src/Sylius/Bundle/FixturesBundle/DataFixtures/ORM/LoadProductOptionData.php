@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionValueInterface;

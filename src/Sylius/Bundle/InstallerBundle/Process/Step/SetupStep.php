@@ -15,9 +15,10 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
+
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
-use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 
 class SetupStep extends ControllerStep
 {

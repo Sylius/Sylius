@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Routing\RouterInterface;
+
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 
 /**
  * Sylius resource twig helper.

@@ -13,22 +13,23 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Bundle\CoreBundle\Mailer\CustomerWelcomeMailerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 
 class CustomerWelcomeEmailListenerSpec extends ObjectBehavior
 {
-    function let(CustomerWelcomeMailerInterface $mailer)
+    public function let(CustomerWelcomeMailerInterface $mailer)
     {
         $this->beConstructedWith($mailer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CustomerWelcomeEmailListener');
     }
 
-    function it_should_delegate_event_properly(
+    public function it_should_delegate_event_properly(
         FilterUserResponseEvent $event,
         UserInterface $user,
         $mailer
@@ -40,7 +41,7 @@ class CustomerWelcomeEmailListenerSpec extends ObjectBehavior
         $this->handleEvent($event);
     }
 
-    function it_should_not_email_disabled_users(
+    public function it_should_not_email_disabled_users(
         FilterUserResponseEvent $event,
         UserInterface $user,
         $mailer

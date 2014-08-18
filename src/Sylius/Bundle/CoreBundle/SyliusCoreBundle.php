@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * Sylius core bundle.

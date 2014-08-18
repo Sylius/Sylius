@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ShippingBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Symfony\Component\HttpFoundation\Request;
 
 class ShipmentController extends ResourceController
 {

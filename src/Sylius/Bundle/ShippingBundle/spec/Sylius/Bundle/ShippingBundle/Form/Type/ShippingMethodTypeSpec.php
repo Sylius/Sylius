@@ -13,21 +13,22 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
-use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
+use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CalculatorRegistryInterface $calculatorRegistry,
         RuleCheckerRegistryInterface $checkerRegistry,
         FormBuilder $builder,
@@ -39,12 +40,12 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $checkerRegistry->getCheckers()->willReturn(array());
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
     {
         $calculatorRegistry->getCalculators()->willReturn(array());
 
@@ -88,7 +89,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_adds_build_shipping_method_event_subscriber(
+    public function it_adds_build_shipping_method_event_subscriber(
         FormBuilder $builder,
         $calculatorRegistry
     ) {
@@ -106,7 +107,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_builds_prototypes_forms_for_calculators(
+    public function it_builds_prototypes_forms_for_calculators(
         $calculatorRegistry,
         FormBuilder $builder,
         FormBuilder $flatRateFormBuilder,
@@ -190,7 +191,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

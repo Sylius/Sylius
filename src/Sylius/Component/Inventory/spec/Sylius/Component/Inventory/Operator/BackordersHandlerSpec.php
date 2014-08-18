@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Inventory\Operator;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -23,22 +24,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class BackordersHandlerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    public function let(RepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\BackordersHandler');
    }
 
-    function it_implements_Sylius_inventory_backorders_handler_interface()
+    public function it_implements_Sylius_inventory_backorders_handler_interface()
     {
         $this->shouldImplement('Sylius\Component\Inventory\Operator\BackordersHandlerInterface');
     }
 
-    function it_backorders_units_if_quantity_is_greater_than_on_hand(
+    public function it_backorders_units_if_quantity_is_greater_than_on_hand(
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
@@ -57,7 +58,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $this->processBackorders(array($inventoryUnit1, $inventoryUnit2, $inventoryUnit3));
     }
 
-    function it_complains_if_inventory_units_contain_different_stockables(
+    public function it_complains_if_inventory_units_contain_different_stockables(
         StockableInterface $stockable1,
         StockableInterface $stockable2,
         InventoryUnitInterface $inventoryUnit1,
@@ -74,7 +75,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_partially_fills_backordered_units_if_not_enough_in_stock(
+    public function it_partially_fills_backordered_units_if_not_enough_in_stock(
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
@@ -102,7 +103,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $this->fillBackorders($stockable);
     }
 
-    function it_fills_all_backordered_units_if_enough_in_stock(
+    public function it_fills_all_backordered_units_if_enough_in_stock(
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
@@ -132,7 +133,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         $this->fillBackorders($stockable);
     }
 
-    function it_partially_fills_backordered_units_and_updates_stock_accordingly(
+    public function it_partially_fills_backordered_units_and_updates_stock_accordingly(
         StockableInterface $stockable,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,

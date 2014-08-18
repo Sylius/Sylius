@@ -12,9 +12,10 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Intl\Intl;
+
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Default country fixtures.

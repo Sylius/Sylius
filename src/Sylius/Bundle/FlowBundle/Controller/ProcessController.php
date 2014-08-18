@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\FlowBundle\Controller;
 
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
-use Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
+use Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException;
 
 /**
  * Process controller.

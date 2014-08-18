@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext as BaseCurrencyContext;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+
+use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 
 class CurrencyContext extends BaseCurrencyContext
 {

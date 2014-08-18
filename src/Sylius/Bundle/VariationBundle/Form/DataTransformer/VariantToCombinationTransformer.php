@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\DataTransformer;
 
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
+
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
-use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * Option values combination to variant transformer.

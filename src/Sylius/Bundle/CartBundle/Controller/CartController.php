@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
-use Sylius\Bundle\CartBundle\Event\CartEvent;
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
-use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+use Sylius\Bundle\CartBundle\Event\CartEvent;
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\SyliusCartEvents;
 
 /**
  * Default cart controller.

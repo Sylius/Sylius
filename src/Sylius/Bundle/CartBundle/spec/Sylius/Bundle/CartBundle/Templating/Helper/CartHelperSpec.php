@@ -12,17 +12,18 @@
 namespace spec\Sylius\Bundle\CartBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItemInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+
 class CartHelperSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CartProviderInterface $cartProvider,
         RepositoryInterface $itemRepository,
         FormFactoryInterface $formFactory
@@ -30,24 +31,24 @@ class CartHelperSpec extends ObjectBehavior
         $this->beConstructedWith($cartProvider, $itemRepository, $formFactory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Templating\Helper\CartHelper');
     }
 
-    function it_is_a_twig_extension()
+    public function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, CartInterface $cart)
+    public function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, CartInterface $cart)
     {
         $cartProvider->getCart()->willReturn($cart);
 
         $this->getCurrentCart()->shouldReturn($cart);
     }
 
-    function its_getItemFormView_returns_a_form_view_of_cart_item_form(
+    public function its_getItemFormView_returns_a_form_view_of_cart_item_form(
         $itemRepository,
         $formFactory,
         FormInterface $form,
@@ -61,7 +62,7 @@ class CartHelperSpec extends ObjectBehavior
         $this->getItemFormView()->shouldReturn($formView);
     }
 
-    function its_getItemFormView_uses_given_options_when_creating_form(
+    public function its_getItemFormView_uses_given_options_when_creating_form(
         $itemRepository,
         $formFactory,
         FormInterface $form,

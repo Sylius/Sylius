@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+
+use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * Configuration parameters parser.

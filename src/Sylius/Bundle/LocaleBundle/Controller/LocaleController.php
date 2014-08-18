@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\LocaleBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * Locale controller.

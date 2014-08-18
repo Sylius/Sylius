@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\VariationBundle\Validator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+
+use Sylius\Component\Variation\Model\VariantInterface;
 
 /**
  * Unique variant constraint validator.

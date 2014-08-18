@@ -2,12 +2,13 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Validator;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\PhpEngine;
+
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\PhpEngine;
 
 class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
 {

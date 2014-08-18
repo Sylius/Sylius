@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\TaxonomyBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
+
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
  * Transforms arrays of selected taxons into one collection.

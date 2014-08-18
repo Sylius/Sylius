@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 /**
  * Sylius shipping component extension.

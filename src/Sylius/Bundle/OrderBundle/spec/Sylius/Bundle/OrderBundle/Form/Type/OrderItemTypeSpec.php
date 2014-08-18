@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class OrderItemTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('OrderItem', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\OrderItemType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form_with_quantity_and_unit_price_fields(FormBuilderInterface $builder)
+    public function it_builds_form_with_quantity_and_unit_price_fields(FormBuilderInterface $builder)
     {
         $builder->add('quantity', 'integer', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('unitPrice', 'money', Argument::any())->shouldBeCalled()->willReturn($builder);
@@ -44,7 +44,7 @@ class OrderItemTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(
@@ -57,7 +57,7 @@ class OrderItemTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_order_item');
     }

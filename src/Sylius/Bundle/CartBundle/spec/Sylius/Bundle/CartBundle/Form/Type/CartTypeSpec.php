@@ -20,22 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CartTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Cart', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Form\Type\CartType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_items_collection(FormBuilder $builder)
+    public function it_builds_form_with_items_collection(FormBuilder $builder)
     {
         $builder
             ->add('items', 'collection', array('type' => 'sylius_cart_item'))
@@ -46,7 +46,7 @@ class CartTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

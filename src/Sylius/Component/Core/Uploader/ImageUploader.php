@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Uploader;
 
 use Gaufrette\Filesystem;
+
 use Sylius\Component\Core\Model\ImageInterface;
 
 class ImageUploader implements ImageUploaderInterface

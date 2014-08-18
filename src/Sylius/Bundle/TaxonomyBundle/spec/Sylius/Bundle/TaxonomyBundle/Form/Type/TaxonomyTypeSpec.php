@@ -21,29 +21,29 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonomyTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Taxonomy', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_name_field(FormBuilder $builder)
+    public function it_builds_form_with_name_field(FormBuilder $builder)
     {
         $builder->add('name', 'text', Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }
 
-    function it_defines_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

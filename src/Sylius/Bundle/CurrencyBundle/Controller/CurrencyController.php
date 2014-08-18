@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

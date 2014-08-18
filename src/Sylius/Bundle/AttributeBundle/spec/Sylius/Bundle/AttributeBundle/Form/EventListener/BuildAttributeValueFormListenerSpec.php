@@ -13,27 +13,28 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class BuildAttributeValueFormListenerSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    public function let(FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($formFactory);
     }
 
-    function it_subscribes_to_pre_set_data_event()
+    public function it_subscribes_to_pre_set_data_event()
     {
         self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'buildForm'));
     }
 
-    function it_builds_form_with_attribute_and_value_when_new_product_attribute(
+    public function it_builds_form_with_attribute_and_value_when_new_product_attribute(
         FormEvent $event,
         Form $form,
         Form $valueField,
@@ -48,7 +49,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $this->buildForm($event);
     }
 
-    function it_builds_value_field_base_on_product_attribute(
+    public function it_builds_value_field_base_on_product_attribute(
         FormEvent $event,
         Form $form,
         AttributeValueInterface $productAttribute,
@@ -70,7 +71,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
         $this->buildForm($event);
     }
 
-    function it_builds_options_base_on_product_attribute(
+    public function it_builds_options_base_on_product_attribute(
         FormEvent $event,
         Form $form,
         AttributeValueInterface $productAttribute,

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\MoneyBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 class MoneyContext extends DefaultContext

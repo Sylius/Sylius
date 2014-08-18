@@ -13,33 +13,34 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\Model\AttributeInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Product\Model\AttributeInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class AttributeValueTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('server', 'AttributeValue', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_attribute_types_prototype_and_passes_it_as_argument(
+    public function it_builds_attribute_types_prototype_and_passes_it_as_argument(
         FormBuilder $builder,
         FormBuilder $fieldBuilder,
         FormFactoryInterface $formFactory,
@@ -82,14 +83,14 @@ class AttributeValueTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'AttributeValue', 'validation_groups' => array('sylius')))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_valid_name()
+    public function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_server_attribute_value');
     }

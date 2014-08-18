@@ -18,27 +18,27 @@ use PhpSpec\ObjectBehavior;
  */
 class CartSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Cart\Model\Cart');
     }
 
-    function it_implements_Sylius_cart_interface()
+    public function it_implements_Sylius_cart_interface()
     {
         $this->shouldImplement('Sylius\Component\Cart\Model\CartInterface');
     }
 
-    function it_extends_Sylius_order()
+    public function it_extends_Sylius_order()
     {
         $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
-    function it_is_not_expired_by_default()
+    public function it_is_not_expired_by_default()
     {
         $this->shouldNotBeExpired();
     }
 
-    function it_is_not_expired_if_the_expiration_time_is_in_future()
+    public function it_is_not_expired_if_the_expiration_time_is_in_future()
     {
         $expiresAt = new \DateTime('tomorrow');
         $this->setExpiresAt($expiresAt);
@@ -46,7 +46,7 @@ class CartSpec extends ObjectBehavior
         $this->shouldNotBeExpired();
     }
 
-    function it_is_expired_if_the_expiration_time_is_in_past()
+    public function it_is_expired_if_the_expiration_time_is_in_past()
     {
         $expiresAt = new \DateTime('-1 hour');
         $this->setExpiresAt($expiresAt);

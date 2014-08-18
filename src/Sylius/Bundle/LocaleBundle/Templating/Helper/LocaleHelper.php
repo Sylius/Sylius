@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Templating\Helper\Helper;
+
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

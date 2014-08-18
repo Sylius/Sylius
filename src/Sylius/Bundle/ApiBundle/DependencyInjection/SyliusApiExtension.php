@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 /**
  * Api extension.

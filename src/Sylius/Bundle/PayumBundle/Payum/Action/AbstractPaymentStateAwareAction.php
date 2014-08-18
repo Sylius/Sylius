@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
-use SM\Factory\FactoryInterface;
 use Payum\Core\Action\PaymentAwareAction;
+use SM\Factory\FactoryInterface;
+
 use Sylius\Component\Payment\PaymentTransitions;
 
 /**

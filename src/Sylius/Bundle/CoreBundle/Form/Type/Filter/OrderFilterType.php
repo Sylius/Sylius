@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Filter;
 
-use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+
+use Sylius\Component\Core\Model\PaymentInterface;
 
 class OrderFilterType extends AbstractType
 {

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Pagerfanta\PagerfantaInterface;
+
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
 

@@ -23,12 +23,12 @@ use Symfony\Component\DependencyInjection\Definition;
  */
 class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver');
     }
 
-    function it_should_get_interfaces_from_the_container(ContainerBuilder $container, Definition $resolverDefinition)
+    public function it_should_get_interfaces_from_the_container(ContainerBuilder $container, Definition $resolverDefinition)
     {
         $resolverDefinition->hasTag('doctrine.event_listener')
             ->shouldBeCalled()
@@ -72,7 +72,7 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_get_interfaces(ContainerBuilder $container, Definition $resolverDefinition)
+    public function it_should_get_interfaces(ContainerBuilder $container, Definition $resolverDefinition)
     {
         $resolverDefinition->hasTag('doctrine.event_listener')
             ->shouldBeCalled()

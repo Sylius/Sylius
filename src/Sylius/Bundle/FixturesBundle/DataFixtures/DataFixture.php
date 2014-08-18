@@ -15,10 +15,11 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
-use Sylius\Bundle\ProductBundle\Generator\VariantGenerator;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
+use Sylius\Bundle\ProductBundle\Generator\VariantGenerator;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * Base data fixture.

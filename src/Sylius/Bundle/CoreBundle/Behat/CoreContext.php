@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -25,7 +27,6 @@ use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Pricing\Calculators as PriceCalculators;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CoreContext extends DefaultContext
 {

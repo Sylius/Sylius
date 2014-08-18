@@ -18,49 +18,49 @@ use PhpSpec\ObjectBehavior;
  */
 class ShippingCategorySpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Shipping\Model\ShippingCategory');
     }
 
-    function it_implements_Sylius_shipping_category_interface()
+    public function it_implements_Sylius_shipping_category_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Model\ShippingCategoryInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_is_unnamed_by_default()
+    public function it_is_unnamed_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Shippingable goods');
         $this->getName()->shouldReturn('Shippingable goods');
     }
 
-    function it_has_no_description_by_default()
+    public function it_has_no_description_by_default()
     {
         $this->getDescription()->shouldReturn(null);
     }
 
-    function its_description_is_mutable()
+    public function its_description_is_mutable()
     {
         $this->setDescription('All shippingable goods');
         $this->getDescription()->shouldReturn('All shippingable goods');
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -68,12 +68,12 @@ class ShippingCategorySpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime();
 

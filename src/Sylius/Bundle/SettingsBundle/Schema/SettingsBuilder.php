@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\SettingsBundle\Schema;
 
-use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 
 /**
  * Settings builder.

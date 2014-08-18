@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 class PromotionContext extends DefaultContext

@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\Extension;
 
-use Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormListener;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+
+use Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormListener;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * Priceable form extension.

@@ -13,15 +13,13 @@ namespace spec\Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Controller\Parameters;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
-use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Routing\RouterInterface;
+
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 
 /**
  * Sylius resource extension for Twig spec.
@@ -31,7 +29,7 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ResourceExtensionSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router, Parameters $parameters)
+    public function let(RouterInterface $router, Parameters $parameters)
     {
         $this->beConstructedWith(
             $router,
@@ -41,28 +39,28 @@ class ResourceExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Twig\ResourceExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }
 
-    function it_should_fetch_request(GetResponseEvent $event)
+    public function it_should_fetch_request(GetResponseEvent $event)
     {
         $this->fetchRequest($event);
     }
 
-    function it_should_define_twig_function()
+    public function it_should_define_twig_function()
     {
         $this->getFunctions()->shouldBeArray();
         $this->getFunctions()->shouldHaveCount(2);
     }
 
-    function it_should_render_a_sorting_link(
+    public function it_should_render_a_sorting_link(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -91,7 +89,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_desc_link(
+    public function it_should_render_a_sorting_desc_link(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -121,7 +119,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_asc_link(
+    public function it_should_render_a_sorting_asc_link(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -150,7 +148,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'otherName', 'fieldName');
     }
 
-    function it_should_render_a_sorting_link_with_custom_options(
+    public function it_should_render_a_sorting_link_with_custom_options(
         Request $request,
         GetResponseEvent $event,
         RouterInterface $router,
@@ -185,9 +183,9 @@ class ResourceExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_not_render_sorting_link(
-        Request $request, 
-        GetResponseEvent $event, 
+    public function it_should_not_render_sorting_link(
+        Request $request,
+        GetResponseEvent $event,
         \Twig_Environment $twig,
         $parameters
     ) {
@@ -204,7 +202,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName')->shouldReturn('fieldName');
     }
 
-    function it_should_render_a_paginate_select(
+    public function it_should_render_a_paginate_select(
         Request $request,
         GetResponseEvent $event,
         Pagerfanta $paginator,
@@ -249,7 +247,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderPaginateSelect($twig, $paginator, array(10, 20));
     }
 
-    function it_should_render_a_paginate_select_with_custom_options(
+    public function it_should_render_a_paginate_select_with_custom_options(
         Request $request,
         GetResponseEvent $event,
         Pagerfanta $paginator,
@@ -299,7 +297,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_have_a_name()
+    public function it_should_have_a_name()
     {
         $this->getName()->shouldReturn('sylius_resource');
     }

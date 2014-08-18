@@ -14,9 +14,10 @@ namespace Sylius\Bundle\WebBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
-use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+
+use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 /**
  * Web context.

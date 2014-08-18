@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use SM\Factory\FactoryInterface;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;

@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+
+use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class PurchaseListener
 {

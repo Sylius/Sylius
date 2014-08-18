@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Product\Builder;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
@@ -24,22 +25,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class PrototypeBuilderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $attributeValueRepository)
+    public function let(RepositoryInterface $attributeValueRepository)
     {
         $this->beConstructedWith($attributeValueRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Builder\PrototypeBuilder');
     }
 
-    function it_implements_Sylius_prototype_builder_interface()
+    public function it_implements_Sylius_prototype_builder_interface()
     {
         $this->shouldImplement('Sylius\Component\Product\Builder\PrototypeBuilderInterface');
     }
 
-    function it_assigns_prototype_attributes_and_options_to_product(
+    public function it_assigns_prototype_attributes_and_options_to_product(
         $attributeValueRepository,
         PrototypeInterface$prototype,
         ProductInterface $product,

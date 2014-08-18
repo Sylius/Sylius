@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 class InstallerScenarioSpec extends ObjectBehavior
 {
-    function it_is_a_process_step()
+    public function it_is_a_process_step()
     {
         $this->shouldBeAnInstanceOf('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface');
     }

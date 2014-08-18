@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\ChoiceList;
 
-use Sylius\Component\Variation\Model\VariableInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+
+use Sylius\Component\Variation\Model\VariableInterface;
 
 /**
  * Variants choice list.

@@ -15,13 +15,14 @@ use Doctrine\Common\EventManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Registry\NonExistingServiceException;
-use Sylius\Component\Sequence\Registry\NonExistingGeneratorException;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
+use Sylius\Component\Sequence\Registry\NonExistingGeneratorException;
 use Sylius\Component\Sequence\SyliusSequenceEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Doctrine event listener

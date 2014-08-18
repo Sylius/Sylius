@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 /**
  * Categorization bundle extension.

@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 
 /**
  * Abstract resource bundle.

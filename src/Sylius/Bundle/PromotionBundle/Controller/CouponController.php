@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\PromotionBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
-use Sylius\Component\Promotion\Generator\Instruction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
+use Sylius\Component\Promotion\Generator\Instruction;
 
 /**
  * Coupon controller.

@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BasePaymentController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Sylius\Bundle\PaymentBundle\Controller\PaymentController as BasePaymentController;
 
 /**
  * Payment controller.

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Repository;
 
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

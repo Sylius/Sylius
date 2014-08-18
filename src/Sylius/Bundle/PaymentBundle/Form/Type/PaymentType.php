@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * Payment form type.

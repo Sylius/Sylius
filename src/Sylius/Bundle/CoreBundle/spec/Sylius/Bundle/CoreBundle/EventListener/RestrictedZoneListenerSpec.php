@@ -14,20 +14,21 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class RestrictedZoneListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
         CartProviderInterface $cartProvider,
         ObjectManager $cartManager,
@@ -37,12 +38,12 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $this->beConstructedWith($restrictedZoneChecker, $cartProvider, $cartManager, $session, $translator);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener');
     }
 
-    function it_sets_cart_if_event_contains_invalid_data(
+    public function it_sets_cart_if_event_contains_invalid_data(
         $cartProvider,
         GenericEvent $event,
         OrderInterface $cart
@@ -58,7 +59,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $this->handleRestrictedZone($event);
     }
 
-    function it_uses_cart_from_event(
+    public function it_uses_cart_from_event(
         $cartProvider,
         GenericEvent $event,
         OrderInterface $cart
@@ -73,7 +74,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $this->handleRestrictedZone($event);
     }
 
-    function it_validates_every_cart_item(
+    public function it_validates_every_cart_item(
         $cartProvider,
         $restrictedZoneChecker,
         OrderItemInterface $item,
@@ -98,7 +99,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $this->handleRestrictedZone($event);
     }
 
-    function it_removes_invalid_cart_items(
+    public function it_removes_invalid_cart_items(
         $cartProvider,
         $restrictedZoneChecker,
         $session,

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Step;
 
-use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+
+use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 
 interface StepInterface
 {

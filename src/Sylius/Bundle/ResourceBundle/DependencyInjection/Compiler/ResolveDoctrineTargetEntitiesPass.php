@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * Resolves given target entities with container parameters.

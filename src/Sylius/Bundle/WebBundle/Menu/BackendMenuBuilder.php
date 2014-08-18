@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Symfony\Component\HttpFoundation\Request;
+
+use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 
 /**
  * Main menu builder.

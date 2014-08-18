@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
@@ -21,7 +22,7 @@ use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
  */
 class CurrencyHelperSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
         MoneyHelper $moneyHelper
@@ -29,17 +30,17 @@ class CurrencyHelperSpec extends ObjectBehavior
         $this->beConstructedWith($currencyContext, $converter, $moneyHelper);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_allows_to_convert_prices_in_different_currencies(
+    public function it_allows_to_convert_prices_in_different_currencies(
         $currencyContext,
         $converter
     ) {

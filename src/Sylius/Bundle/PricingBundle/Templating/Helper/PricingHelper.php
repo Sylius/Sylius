@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\PricingBundle\Templating\Helper;
 
+use Symfony\Component\Templating\Helper\Helper;
+
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * Sylius pricing templating helper.

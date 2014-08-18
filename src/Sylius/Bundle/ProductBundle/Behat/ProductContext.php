@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 class ProductContext extends DefaultContext

@@ -12,18 +12,19 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\ShipmentFactoryInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderShippingListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ShipmentFactoryInterface $shipmentFactory,
         ShipmentProcessorInterface $shippingProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
@@ -31,12 +32,12 @@ class OrderShippingListenerSpec extends ObjectBehavior
         $this->beConstructedWith($shipmentFactory, $shippingProcessor, $shippingChargesProcessor);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener');
     }
 
-    function it_throws_exception_if_event_has_non_order_subject(
+    public function it_throws_exception_if_event_has_non_order_subject(
         GenericEvent $event,
         \stdClass $invalidSubject
     ) {
@@ -48,7 +49,7 @@ class OrderShippingListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_calls_shipping_processor_on_order(
+    public function it_calls_shipping_processor_on_order(
         ShippingChargesProcessorInterface $shippingChargesProcessor,
         GenericEvent $event,
         OrderInterface $order

@@ -12,23 +12,24 @@
 namespace spec\Sylius\Bundle\FlowBundle\Process\Coordinator;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Routing\RouterInterface;
+
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 class CoordinatorSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
+    public function let(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
     {
         $this->beConstructedWith($router, $builder, $context);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator');
     }
 
-    function it_is_process_builder()
+    public function it_is_process_builder()
     {
         $this->shouldImplement('Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface');
     }

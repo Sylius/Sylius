@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -21,27 +22,27 @@ use Sylius\Component\Order\Model\OrderItemInterface;
  */
 class AdjustmentSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Order\Model\Adjustment');
     }
 
-    function it_implements_Sylius_adjustment_interface()
+    public function it_implements_Sylius_adjustment_interface()
     {
         $this->shouldImplement('Sylius\Component\Order\Model\AdjustmentInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_does_not_belong_to_an_adjustable_by_default()
+    public function it_does_not_belong_to_an_adjustable_by_default()
     {
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
+    public function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -50,7 +51,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn($orderItem);
     }
 
-    function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
+    public function it_allows_detaching_itself_from_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $this->setAdjustable($order);
         $this->getAdjustable()->shouldReturn($order);
@@ -65,52 +66,52 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_has_no_label_by_default()
+    public function it_has_no_label_by_default()
     {
         $this->getLabel()->shouldReturn(null);
     }
 
-    function its_label_is_mutable()
+    public function its_label_is_mutable()
     {
         $this->setLabel('Shipping Fee');
         $this->getLabel()->shouldReturn('Shipping Fee');
     }
 
-    function it_has_no_description_by_default()
+    public function it_has_no_description_by_default()
     {
         $this->getDescription()->shouldReturn(null);
     }
 
-    function its_description_is_mutable()
+    public function its_description_is_mutable()
     {
         $this->setDescription('Clothing tax (12%)');
         $this->getDescription()->shouldReturn('Clothing tax (12%)');
     }
 
-    function it_has_amount_equal_to_0_by_default()
+    public function it_has_amount_equal_to_0_by_default()
     {
         $this->getAmount()->shouldReturn(0);
     }
 
-    function its_amount_is_mutable()
+    public function its_amount_is_mutable()
     {
         $this->setAmount(399);
         $this->getAmount()->shouldReturn(399);
     }
 
-    function it_is_not_neutral_by_default()
+    public function it_is_not_neutral_by_default()
     {
         $this->shouldNotBeNeutral();
     }
 
-    function its_neutrality_is_mutable()
+    public function its_neutrality_is_mutable()
     {
         $this->shouldNotBeNeutral();
         $this->setNeutral(true);
         $this->shouldBeNeutral();
     }
 
-    function it_is_a_charge_if_amount_is_lesser_than_0()
+    public function it_is_a_charge_if_amount_is_lesser_than_0()
     {
         $this->setAmount(-4.99);
         $this->shouldBeCharge();
@@ -119,7 +120,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->shouldNotBeCharge();
     }
 
-    function it_is_a_credit_if_amount_is_greater_than_0()
+    public function it_is_a_credit_if_amount_is_greater_than_0()
     {
         $this->setAmount(29.99);
         $this->shouldBeCredit();
@@ -128,17 +129,17 @@ class AdjustmentSpec extends ObjectBehavior
         $this->shouldNotBeCredit();
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function it_has_fluent_interface(AdjustableInterface $adjustable)
+    public function it_has_fluent_interface(AdjustableInterface $adjustable)
     {
         $this->setAdjustable($adjustable)->shouldReturn($this);
         $this->setLabel('Shipping fee')->shouldReturn($this);

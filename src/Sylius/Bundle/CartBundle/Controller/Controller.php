@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Base controller for cart system controllers.

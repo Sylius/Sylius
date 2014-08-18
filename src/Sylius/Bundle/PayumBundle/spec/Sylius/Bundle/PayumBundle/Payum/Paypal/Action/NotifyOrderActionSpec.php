@@ -13,22 +13,23 @@ namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as PaymentModelInterface;
 use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class NotifyOrderActionSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
         FactoryInterface $factory,
@@ -38,17 +39,17 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->setPayment($payment);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Paypal\Action\NotifyOrderAction');
     }
 
-    function it_extends_payum_payment_aware_action()
+    public function it_extends_payum_payment_aware_action()
     {
         $this->shouldHaveType('Payum\Core\Action\PaymentAwareAction');
     }
 
-    function it_should_supports_secured_notify_request_with_order_model(
+    public function it_should_supports_secured_notify_request_with_order_model(
         SecuredNotifyRequest $request,
         PaymentModelInterface $payment
     ) {
@@ -57,24 +58,24 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->supports($request)->shouldReturn(true);
     }
 
-    function it_should_support_only_secured_request(ModelRequestInterface $request)
+    public function it_should_support_only_secured_request(ModelRequestInterface $request)
     {
         $this->supports($request)->shouldReturn(false);
     }
 
-    function it_should_not_support_notify_request_with_not_payment_model(SecuredNotifyRequest $request)
+    public function it_should_not_support_notify_request_with_not_payment_model(SecuredNotifyRequest $request)
     {
         $request->getModel()->willReturn(new \stdClass);
 
         $this->supports($request)->shouldReturn(false);
     }
 
-    function it_should_not_support_anything_not_model_request()
+    public function it_should_not_support_anything_not_model_request()
     {
         $this->supports(new \stdClass)->shouldReturn(false);
     }
 
-    function it_throws_exception_if_executing_not_supported_request()
+    public function it_throws_exception_if_executing_not_supported_request()
     {
         $this
             ->shouldThrow('Payum\Core\Exception\RequestNotSupportedException')
@@ -82,7 +83,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         ;
     }
 
-    function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
+    public function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         $factory,
         SecuredNotifyRequest $request,
         OrderInterface $order,
@@ -113,7 +114,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->execute($request);
     }
 
-    function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
+    public function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         $factory,
         SecuredNotifyRequest $request,
         OrderInterface $order,

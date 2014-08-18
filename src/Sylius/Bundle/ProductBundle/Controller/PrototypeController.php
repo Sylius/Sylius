@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\ProductBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Product\Builder\PrototypeBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Product\Builder\PrototypeBuilderInterface;
 
 /**
  * Prototype controller.

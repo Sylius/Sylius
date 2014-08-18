@@ -22,22 +22,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Taxon', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_name_and_permalink_and_description_fields(
+    public function it_builds_form_with_name_and_permalink_and_description_fields(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -53,7 +53,7 @@ class TaxonTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

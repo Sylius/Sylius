@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\SettingsBundle\Templating\Helper;
 
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Component\Templating\Helper\Helper;
+
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 
 class SettingsHelper extends Helper
 {

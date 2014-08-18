@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\CaptureRequest;
+
 use Sylius\Component\Core\Model\PaymentInterface;
 
 class CapturePaymentAction implements ActionInterface

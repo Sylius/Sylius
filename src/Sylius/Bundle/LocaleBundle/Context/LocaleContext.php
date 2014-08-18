@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\LocaleBundle\Context;
 
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * Default locale context implementation, which uses session to store the user selected locale.

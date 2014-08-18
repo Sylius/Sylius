@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -22,22 +23,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository)
+    public function let(RepositoryInterface $adjustmentRepository)
     {
         $this->beConstructedWith($adjustmentRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\FixedDiscountAction');
     }
 
-    function it_implements_Sylius_promotion_action_interface()
+    public function it_implements_Sylius_promotion_action_interface()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
-    function it_applies_fixed_discount_as_promotion_adjustment(
+    public function it_applies_fixed_discount_as_promotion_adjustment(
         $adjustmentRepository,
         OrderInterface $order,
         AdjustmentInterface $adjustment,

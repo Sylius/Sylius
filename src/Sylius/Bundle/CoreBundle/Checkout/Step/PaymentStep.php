@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Symfony\Component\Form\FormInterface;
+
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
-use Symfony\Component\Form\FormInterface;
 
 /**
  * The payment step of checkout.

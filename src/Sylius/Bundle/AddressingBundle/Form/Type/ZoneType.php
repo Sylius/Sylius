@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
  * Zone form type.

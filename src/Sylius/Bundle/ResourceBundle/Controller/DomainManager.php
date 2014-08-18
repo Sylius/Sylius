@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+
+use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
  * Domain manager.

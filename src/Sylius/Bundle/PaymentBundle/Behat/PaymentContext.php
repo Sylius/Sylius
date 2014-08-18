@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PaymentBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 

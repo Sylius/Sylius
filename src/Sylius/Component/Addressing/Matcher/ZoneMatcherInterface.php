@@ -12,6 +12,7 @@
 namespace Sylius\Component\Addressing\Matcher;
 
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 

@@ -20,11 +20,12 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 abstract class DefaultContext extends RawMinkContext implements Context, KernelAwareContext
 {

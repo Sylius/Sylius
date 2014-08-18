@@ -12,11 +12,12 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**

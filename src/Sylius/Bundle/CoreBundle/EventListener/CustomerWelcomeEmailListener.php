@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+
 use Sylius\Bundle\CoreBundle\Mailer\CustomerWelcomeMailerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;

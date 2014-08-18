@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\ShippingBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Shipping component for Symfony2 applications.

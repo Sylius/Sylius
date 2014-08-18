@@ -14,18 +14,19 @@ namespace spec\Sylius\Bundle\CartBundle\Provider;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Storage\CartStorageInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartProviderSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CartStorageInterface $storage,
         ObjectManager $manager,
         RepositoryInterface $repository,
@@ -34,17 +35,17 @@ class CartProviderSpec extends ObjectBehavior
         $this->beConstructedWith($storage, $manager, $repository, $eventDispatcher);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Provider\CartProvider');
     }
 
-    function it_implements_Sylius_cart_provider_interface()
+    public function it_implements_Sylius_cart_provider_interface()
     {
         $this->shouldImplement('Sylius\Component\Cart\Provider\CartProviderInterface');
     }
 
-    function it_looks_for_cart_by_identifier_if_any_in_storage(
+    public function it_looks_for_cart_by_identifier_if_any_in_storage(
         $storage,
         $repository,
         $eventDispatcher,
@@ -57,7 +58,7 @@ class CartProviderSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_creates_new_cart_if_there_is_no_identifier_in_storage(
+    public function it_creates_new_cart_if_there_is_no_identifier_in_storage(
         $storage,
         $repository,
         $eventDispatcher,
@@ -70,7 +71,7 @@ class CartProviderSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_creates_new_cart_if_identifier_is_wrong(
+    public function it_creates_new_cart_if_identifier_is_wrong(
         $storage,
         $repository,
         $eventDispatcher,
@@ -84,7 +85,7 @@ class CartProviderSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_resets_current_cart_identifier_in_storage_when_abandoning_cart(
+    public function it_resets_current_cart_identifier_in_storage_when_abandoning_cart(
         $storage,
         $eventDispatcher,
         CartInterface $cart
@@ -98,14 +99,14 @@ class CartProviderSpec extends ObjectBehavior
         $this->abandonCart();
     }
 
-    function it_sets_current_cart_identifier_when_setting_cart($storage, CartInterface $cart)
+    public function it_sets_current_cart_identifier_when_setting_cart($storage, CartInterface $cart)
     {
         $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $this->setCart($cart);
     }
 
-    function it_initializes_cart_while_validating_existence_and_if_there_is_no_identifier_in_storage(
+    public function it_initializes_cart_while_validating_existence_and_if_there_is_no_identifier_in_storage(
         $storage,
         $repository
     ) {
@@ -115,7 +116,7 @@ class CartProviderSpec extends ObjectBehavior
         $this->hasCart()->shouldReturn(false);
     }
 
-    function it_initializes_cart_while_validating_existence_and_if_there_is_identifier_in_storage(
+    public function it_initializes_cart_while_validating_existence_and_if_there_is_identifier_in_storage(
         $storage,
         $repository,
         CartInterface $cart

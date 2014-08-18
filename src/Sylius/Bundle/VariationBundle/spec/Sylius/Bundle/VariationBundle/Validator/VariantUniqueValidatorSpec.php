@@ -14,16 +14,17 @@ namespace spec\Sylius\Bundle\VariationBundle\Validator;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Validator\ExecutionContextInterface;
+
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantUnique;
 use Sylius\Component\Variation\Model\VariantInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantUniqueValidatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectRepository $variantRepository,
         ExecutionContextInterface $context
     ) {
@@ -31,17 +32,17 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\VariationBundle\Validator\VariantUniqueValidator');
     }
 
-    function it_is_a_constraint_validator()
+    public function it_is_a_constraint_validator()
     {
         $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
     }
 
-    function it_should_add_violation_if_variant_with_given_property_value_already_exists(
+    public function it_should_add_violation_if_variant_with_given_property_value_already_exists(
         $variantRepository,
         VariantInterface $variant,
         VariantInterface $conflictualVariant,
@@ -60,7 +61,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_not_add_violation_if_variant_with_given_property_value_does_not_exist(
+    public function it_should_not_add_violation_if_variant_with_given_property_value_does_not_exist(
         $variantRepository,
         VariantInterface $variant,
         $context
@@ -78,7 +79,7 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_not_add_violation_if_conflictual_variant_and_validated_one_are_the_same(
+    public function it_should_not_add_violation_if_conflictual_variant_and_validated_one_are_the_same(
         $variantRepository,
         VariantInterface $variant,
         $context

@@ -13,32 +13,33 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class RuleTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $checkerRegistry)
+    public function let(ServiceRegistryInterface $checkerRegistry)
     {
         $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\RuleType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_build_form_with_rule_choice_field(
+    public function it_should_build_form_with_rule_choice_field(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -54,7 +55,7 @@ class RuleTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_add_build_promotion_rule_event_subscriber(
+    public function it_should_add_build_promotion_rule_event_subscriber(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -70,7 +71,7 @@ class RuleTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

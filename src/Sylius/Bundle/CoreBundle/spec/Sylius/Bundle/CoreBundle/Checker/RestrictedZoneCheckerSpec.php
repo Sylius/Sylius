@@ -12,39 +12,40 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\UserInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneCheckerSpec extends ObjectBehavior
 {
-    function let(SecurityContextInterface $securityContext, ZoneMatcherInterface $zoneMatcher)
+    public function let(SecurityContextInterface $securityContext, ZoneMatcherInterface $zoneMatcher)
     {
         $this->beConstructedWith($securityContext, $zoneMatcher);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker');
     }
 
-    function it_implements_Sylius_cart_item_resolver_interface()
+    public function it_implements_Sylius_cart_item_resolver_interface()
     {
         $this->shouldImplement('Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface');
     }
 
-    function it_is_not_restricted_if_user_is_not_authenticated(ProductInterface $product, $securityContext)
+    public function it_is_not_restricted_if_user_is_not_authenticated(ProductInterface $product, $securityContext)
     {
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(false);
 
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_user_have_no_shipping_address(
+    public function it_is_not_restricted_if_user_have_no_shipping_address(
         ProductInterface $product,
         $securityContext,
         TokenInterface $token,
@@ -58,7 +59,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_product_have_no_restricted_zone(
+    public function it_is_not_restricted_if_product_have_no_restricted_zone(
         ProductInterface $product,
         $securityContext,
         TokenInterface $token,
@@ -75,7 +76,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_not_restricted_if_zone_matcher_does_not_match_users_shipping_address(
+    public function it_is_not_restricted_if_zone_matcher_does_not_match_users_shipping_address(
         ProductInterface $product,
         $securityContext,
         $zoneMatcher,
@@ -95,7 +96,7 @@ class RestrictedZoneCheckerSpec extends ObjectBehavior
         $this->isRestricted($product)->shouldReturn(false);
     }
 
-    function it_is_restricted_if_zone_matcher_match_users_shipping_address(
+    public function it_is_restricted_if_zone_matcher_match_users_shipping_address(
         ProductInterface $product,
         $securityContext,
         $zoneMatcher,

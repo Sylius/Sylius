@@ -13,8 +13,9 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPCR\Util\NodeHelper;
-use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
+
+use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 
 class LoadPagesData extends DataFixture
 {

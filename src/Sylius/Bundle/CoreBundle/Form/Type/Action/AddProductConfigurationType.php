@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Action;
 
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
+
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
  * Free product configuration form.

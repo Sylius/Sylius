@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
  * Account order controller.
