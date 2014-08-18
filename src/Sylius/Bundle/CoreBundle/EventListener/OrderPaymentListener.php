@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use SM\Factory\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Order payment listener.

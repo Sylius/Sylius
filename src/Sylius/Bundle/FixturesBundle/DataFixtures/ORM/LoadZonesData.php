@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Intl\Intl;
+
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Default zone fixtures.

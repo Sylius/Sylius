@@ -18,17 +18,17 @@ use PhpSpec\ObjectBehavior;
  */
 class CartItemSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Cart\Model\CartItem');
     }
 
-    function it_implements_Sylius_cart_item_interface()
+    public function it_implements_Sylius_cart_item_interface()
     {
         $this->shouldImplement('Sylius\Component\Cart\Model\CartItemInterface');
     }
 
-    function it_extends_Sylius_order_item()
+    public function it_extends_Sylius_order_item()
     {
         $this->shouldHaveType('Sylius\Component\Order\Model\OrderItem');
     }

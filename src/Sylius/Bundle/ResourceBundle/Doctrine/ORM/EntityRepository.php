@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityRepository as BaseEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**

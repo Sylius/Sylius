@@ -12,13 +12,14 @@
 namespace spec\Sylius\Bundle\CoreBundle\Mailer;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Bundle\CoreBundle\Mailer\TwigMailerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 
 class OrderConfirmationMailerSpec extends ObjectBehavior
 {
-    function let(TwigMailerInterface $mailer)
+    public function let(TwigMailerInterface $mailer)
     {
         $params = array(
             'template' => 'order-receipt-template',
@@ -28,17 +29,17 @@ class OrderConfirmationMailerSpec extends ObjectBehavior
         $this->beConstructedWith($mailer, $params);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailer');
     }
 
-    function it_implements_correct_interface()
+    public function it_implements_correct_interface()
     {
         $this->shouldImplement('Sylius\Bundle\CoreBundle\Mailer\OrderConfirmationMailerInterface');
     }
 
-    function it_sends_order_confirmation_email(OrderInterface $order, UserInterface $user, TwigMailerInterface $mailer)
+    public function it_sends_order_confirmation_email(OrderInterface $order, UserInterface $user, TwigMailerInterface $mailer)
     {
         $parameters = array('template' => 'test-template.html.twig', 'from_email' => 'from@example.com');
         $this->beConstructedWith($mailer, $parameters);

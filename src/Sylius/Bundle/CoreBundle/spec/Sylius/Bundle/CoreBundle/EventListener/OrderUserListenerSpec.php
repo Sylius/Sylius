@@ -13,25 +13,26 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
+
 class OrderUserListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderUserListener');
     }
 
-    function let(SecurityContextInterface $securityContext)
+    public function let(SecurityContextInterface $securityContext)
     {
         $this->beConstructedWith($securityContext);
     }
 
-    function it_throws_exception_when_object_is_not_user(GenericEvent $event, \stdClass $object)
+    public function it_throws_exception_when_object_is_not_user(GenericEvent $event, \stdClass $object)
     {
         $event->getSubject()->willReturn($object);
 
@@ -41,7 +42,7 @@ class OrderUserListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_when_context_doesnt_have_user(GenericEvent $event, OrderInterface $order)
+    public function it_does_nothing_when_context_doesnt_have_user(GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
 
@@ -50,7 +51,7 @@ class OrderUserListenerSpec extends ObjectBehavior
         $this->setOrderUser($event);
     }
 
-    function it_sets_user_on_order(
+    public function it_sets_user_on_order(
         SecurityContextInterface $securityContext,
         GenericEvent $event,
         OrderInterface $order,

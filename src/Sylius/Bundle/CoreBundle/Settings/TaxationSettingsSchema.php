@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Settings;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Symfony\Component\Form\FormBuilderInterface;
+
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Sylius\Bundle\SettingsBundle\Transformer\ObjectToIdentifierTransformer;
-use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Taxation settings schema.

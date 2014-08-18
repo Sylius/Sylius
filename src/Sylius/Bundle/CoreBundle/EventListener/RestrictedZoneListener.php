@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
 
 class RestrictedZoneListener
 {

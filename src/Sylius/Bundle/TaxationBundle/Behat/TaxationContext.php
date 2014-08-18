@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxationBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 

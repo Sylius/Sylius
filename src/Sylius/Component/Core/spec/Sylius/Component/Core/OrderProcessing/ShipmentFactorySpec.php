@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -23,22 +24,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ShipmentFactorySpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $shipmentRepository)
+    public function let(RepositoryInterface $shipmentRepository)
     {
         $this->beConstructedWith($shipmentRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\ShipmentFactory');
     }
 
-    function it_implements_Sylius_shipment_factory_interface()
+    public function it_implements_Sylius_shipment_factory_interface()
     {
         $this->shouldImplement('Sylius\Component\Core\OrderProcessing\ShipmentFactoryInterface');
     }
 
-    function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(
+    public function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(
         $shipmentRepository,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -81,7 +82,7 @@ class ShipmentFactorySpec extends ObjectBehavior
         $this->createShipment($order);
     }
 
-    function it_adds_new_inventory_units_to_existing_shipment(
+    public function it_adds_new_inventory_units_to_existing_shipment(
         OrderInterface $order,
         ShipmentInterface $shipment,
         ArrayCollection $shipments,

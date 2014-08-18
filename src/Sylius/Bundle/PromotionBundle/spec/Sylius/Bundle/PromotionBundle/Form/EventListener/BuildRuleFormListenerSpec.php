@@ -13,19 +13,20 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+
+use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class BuildRuleFormListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ServiceRegistryInterface $checkerRegistry,
         RuleCheckerInterface $checker,
         FormFactoryInterface $factory
@@ -36,17 +37,17 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
         $this->beConstructedWith($checkerRegistry, $factory);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormListener');
     }
 
-    function it_should_be_event_subscripber()
+    public function it_should_be_event_subscripber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_should_add_configuration_fields_in_pre_set_data(
+    public function it_should_add_configuration_fields_in_pre_set_data(
         $factory,
         FormEvent $event,
         RuleInterface $rule,

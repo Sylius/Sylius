@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\EventDispatcher\Event;
 
-use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\EventDispatcher\Event;
+
+use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
  * Step filter event.

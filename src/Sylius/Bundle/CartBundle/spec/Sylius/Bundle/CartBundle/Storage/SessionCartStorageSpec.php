@@ -12,38 +12,39 @@
 namespace spec\Sylius\Bundle\CartBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use Sylius\Bundle\CartBundle\Storage\SessionCartStorage;
 use Sylius\Component\Cart\Model\CartInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SessionCartStorageSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session)
+    public function let(SessionInterface $session)
     {
         $this->beConstructedWith($session);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\Storage\SessionCartStorage');
     }
 
-    function it_implements_Sylius_cart_storage_interface()
+    public function it_implements_Sylius_cart_storage_interface()
     {
         $this->shouldImplement('Sylius\Component\Cart\Storage\CartStorageInterface');
     }
 
-    function it_returns_cart_identifier_via_session($session)
+    public function it_returns_cart_identifier_via_session($session)
     {
         $session->get(SessionCartStorage::KEY)->willReturn(7);
 
         $this->getCurrentCartIdentifier()->shouldReturn(7);
     }
 
-    function it_sets_cart_identifier_via_session($session, CartInterface $cart)
+    public function it_sets_cart_identifier_via_session($session, CartInterface $cart)
     {
         $cart->getIdentifier()->will(function () {
             return 3;
@@ -57,7 +58,7 @@ class SessionCartStorageSpec extends ObjectBehavior
         $this->getCurrentCartIdentifier()->shouldReturn(3);
     }
 
-    function it_removes_the_saved_identifier_from_session_on_reset($session)
+    public function it_removes_the_saved_identifier_from_session_on_reset($session)
     {
         $session->remove(SessionCartStorage::KEY)->shouldBeCalled();
 

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Shipping\Model\RuleInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;

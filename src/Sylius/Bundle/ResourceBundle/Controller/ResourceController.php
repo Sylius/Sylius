@@ -11,17 +11,18 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Hateoas\Representation\Factory\PagerfantaFactory;
-use Hateoas\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Base resource controller for Sylius.

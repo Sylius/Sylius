@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
+
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**

@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\ProductBundle\Generator;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Validator\ValidatorInterface;
+
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Generator\VariantGenerator as BaseVariantGenerator;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * Default product variants generator. It saves only valid variants.

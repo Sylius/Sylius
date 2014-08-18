@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
+
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * Adds the parent taxon field choice based on the selected taxonomy.

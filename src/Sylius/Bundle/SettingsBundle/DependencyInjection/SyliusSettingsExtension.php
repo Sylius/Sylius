@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 /**
  * Settings system extension.

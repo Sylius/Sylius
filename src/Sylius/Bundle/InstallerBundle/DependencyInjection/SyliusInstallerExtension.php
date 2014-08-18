@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\InstallerBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 
 class SyliusInstallerExtension extends AbstractResourceExtension
 {

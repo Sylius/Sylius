@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\FlowBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
 use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterScenariosPass;
 use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterSessionBagsPass;
 use Sylius\Bundle\FlowBundle\DependencyInjection\Compiler\RegisterStepsPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Multiple action flows for Symfony2.

@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ObjectToIdentifierServicePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ObjectToIdentifierServicePass;
 
 /**
  * Resource bundle.

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 use Symfony\Component\Form\FormBuilderInterface;
+
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 
 /**
  * Order form type.

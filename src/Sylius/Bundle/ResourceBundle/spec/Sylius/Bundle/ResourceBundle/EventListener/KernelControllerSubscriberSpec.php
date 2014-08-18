@@ -13,22 +13,22 @@ namespace spec\Sylius\Bundle\ResourceBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Controller\Configuration;
-use Sylius\Bundle\ResourceBundle\Controller\Parameters;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+
+use Sylius\Bundle\ResourceBundle\Controller\Configuration;
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
 class KernelControllerSubscriberSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ParametersParser $parametersParser,
         Parameters $parameters,
         Request $request,
@@ -61,24 +61,24 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber');
     }
 
-    function it_is_event_suvscriver()
+    public function it_is_event_suvscriver()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_subscribes_events()
+    public function it_subscribes_events()
     {
         $this::getSubscribedEvents(array(
             'kernel.controller' => array('onKernelController', 0)
         ));
     }
 
-    function it_should_parse_empty_request(
+    public function it_should_parse_empty_request(
         $event,
         $parametersParser,
         $parameters,
@@ -111,7 +111,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $this->onKernelController($event);
     }
 
-    function it_should_parse_request(
+    public function it_should_parse_request(
         $event,
         $parametersParser,
         $parameters,
@@ -150,7 +150,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $this->onKernelController($event);
     }
 
-    function it_should_parse_request_and_headers(
+    public function it_should_parse_request_and_headers(
         $event,
         $parametersParser,
         $parameters,

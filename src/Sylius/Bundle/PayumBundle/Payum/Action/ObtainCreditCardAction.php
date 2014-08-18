@@ -15,12 +15,13 @@ use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\EngineInterface;
+
+use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 
 class ObtainCreditCardAction implements ActionInterface
 {

@@ -15,6 +15,7 @@ use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\ModelRequestInterface;
+
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 class ExecuteSameRequestWithPaymentDetailsAction extends PaymentAwareAction

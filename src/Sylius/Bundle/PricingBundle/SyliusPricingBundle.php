@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\PricingBundle;
 
-use Sylius\Bundle\PricingBundle\DependencyInjection\Compiler\RegisterPriceCalculatorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+use Sylius\Bundle\PricingBundle\DependencyInjection\Compiler\RegisterPriceCalculatorsPass;
 
 /**
  * Pricing bundle for e-commerce Symfony2 applications.

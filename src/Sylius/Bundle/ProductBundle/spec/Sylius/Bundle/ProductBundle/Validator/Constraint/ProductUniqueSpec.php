@@ -19,22 +19,22 @@ use Symfony\Component\Validator\Constraint;
  */
 class ProductUniqueSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(array('property' => 'name'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique');
     }
 
-    function it_is_a_validation_constraint()
+    public function it_is_a_validation_constraint()
     {
         $this->shouldHaveType('Symfony\Component\Validator\Constraint');
     }
 
-    function it_is_class_constraint()
+    public function it_is_class_constraint()
     {
         $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }

@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
+use Symfony\Component\Templating\Helper\Helper;
+
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 class RestrictedZoneHelper extends Helper
 {

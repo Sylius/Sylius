@@ -19,37 +19,37 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxCategoryEntityTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('TaxCategory');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryEntityType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_is_a_Sylius_tax_category_choice_type()
+    public function it_is_a_Sylius_tax_category_choice_type()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType');
     }
 
-    function it_has_a_parent_type()
+    public function it_has_a_parent_type()
     {
         $this->getParent()->shouldReturn('entity');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_tax_category_choice');
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(

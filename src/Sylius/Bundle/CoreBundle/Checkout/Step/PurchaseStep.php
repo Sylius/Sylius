@@ -14,6 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 use Payum\Bundle\PayumBundle\Security\TokenFactory;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
@@ -21,7 +23,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PurchaseStep extends CheckoutStep
 {

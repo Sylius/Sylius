@@ -18,17 +18,17 @@ use PhpSpec\ObjectBehavior;
  */
 class UnknownDriverExceptionSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('driver');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\UnknownDriverException');
     }
 
-    function it_should_extends_exception()
+    public function it_should_extends_exception()
     {
         $this->shouldHaveType('\Exception');
     }

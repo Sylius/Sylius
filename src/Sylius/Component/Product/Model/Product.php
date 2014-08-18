@@ -13,6 +13,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;

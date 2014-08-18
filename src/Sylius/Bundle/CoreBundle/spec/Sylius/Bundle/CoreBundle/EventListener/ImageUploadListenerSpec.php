@@ -12,26 +12,27 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $uploader)
+    public function let(ImageUploaderInterface $uploader)
     {
         $this->beConstructedWith($uploader);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener');
     }
 
-    function it_uses_image_uploader_to_upload_images(
+    public function it_uses_image_uploader_to_upload_images(
         GenericEvent $event,
         ProductVariantInterface $variant,
         ProductInterface $product,
@@ -47,7 +48,7 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $this->uploadProductImage($event);
     }
 
-    function it_uses_image_uploader_to_upload_taxon_image(
+    public function it_uses_image_uploader_to_upload_taxon_image(
         GenericEvent $event,
         Taxon $taxon,
         $uploader
@@ -59,7 +60,7 @@ class ImageUploadListenerSpec extends ObjectBehavior
         $this->uploadTaxonImage($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_a_product(
+    public function it_throws_exception_if_event_subject_is_not_a_product(
         GenericEvent $event,
         $uploader
     ) {

@@ -13,16 +13,17 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * Frontend menu builder.

@@ -15,11 +15,12 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Security step.

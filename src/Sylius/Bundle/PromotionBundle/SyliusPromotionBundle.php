@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\PromotionBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Promotions are used to give discounts or other types of rewards to customers.

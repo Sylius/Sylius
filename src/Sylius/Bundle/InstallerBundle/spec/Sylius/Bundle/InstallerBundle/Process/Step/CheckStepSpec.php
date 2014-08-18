@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 class CheckStepSpec extends ObjectBehavior
 {
-    function it_is_a_process_step()
+    public function it_is_a_process_step()
     {
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Process\Step\ControllerStep');
     }

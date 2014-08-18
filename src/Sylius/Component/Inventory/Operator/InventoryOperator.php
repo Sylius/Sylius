@@ -12,12 +12,13 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\SyliusStockableEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Default inventory operator.

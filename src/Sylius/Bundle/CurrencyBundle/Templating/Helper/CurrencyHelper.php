@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
+use Symfony\Component\Templating\Helper\Helper;
+
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

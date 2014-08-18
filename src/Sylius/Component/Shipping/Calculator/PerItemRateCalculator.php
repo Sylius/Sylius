@@ -11,8 +11,9 @@
 
 namespace Sylius\Component\Shipping\Calculator;
 
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
  * Calculator which charges a flat rate per item.

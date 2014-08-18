@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\ProductBundle\Validator;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * Unique product constraint validator.

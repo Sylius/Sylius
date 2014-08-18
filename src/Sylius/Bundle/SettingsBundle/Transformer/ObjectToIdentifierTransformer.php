@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\SettingsBundle\Transformer;
 
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer as BaseTransformer;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer as BaseTransformer;
 
 /**
  * Object to identifier transformer.

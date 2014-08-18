@@ -13,8 +13,9 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
+
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * User update listener.

@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
-use Sylius\Bundle\ResourceBundle\Controller\Parameters;
-use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * Doctrine listener used to set the request on the configurable controllers.

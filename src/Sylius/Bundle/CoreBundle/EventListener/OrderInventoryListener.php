@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Order inventory processing listener.

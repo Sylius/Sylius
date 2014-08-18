@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\TaxonomyBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 
 /**
  * Taxon controller.

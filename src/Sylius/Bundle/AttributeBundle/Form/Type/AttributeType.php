@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
-use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
+use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * Attribute type.

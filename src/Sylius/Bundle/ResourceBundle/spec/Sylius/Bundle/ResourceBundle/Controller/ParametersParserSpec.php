@@ -11,20 +11,21 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
+
+use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
 class ParametersParserSpec extends ObjectBehavior
 {
-    function let(ExpressionLanguage $expression)
+    public function let(ExpressionLanguage $expression)
     {
         $this->beConstructedWith($expression);
     }
 
-    function it_should_parse_parameters(Request $request)
+    public function it_should_parse_parameters(Request $request)
     {
         $request->get('criteria')->willReturn('New criteria');
         $request->get('sorting')->willReturn('New sorting');
@@ -47,7 +48,7 @@ class ParametersParserSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_parse_complex_parameters(Request $request)
+    public function it_should_parse_complex_parameters(Request $request)
     {
         $request->get('enable')->willReturn(true);
         $request->get('sorting')->willReturn('New sorting');

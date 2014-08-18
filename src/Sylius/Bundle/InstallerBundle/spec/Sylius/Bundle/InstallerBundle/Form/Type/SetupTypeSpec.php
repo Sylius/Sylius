@@ -17,17 +17,17 @@ use Symfony\Component\Form\FormBuilder;
 
 class SetupTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('User');
     }
 
-    function it_is_be_a_form_type()
+    public function it_is_be_a_form_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('username', 'text', Argument::any())

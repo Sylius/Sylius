@@ -13,28 +13,29 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+
+use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 {
-    function let(FormFactoryInterface $formFactory)
+    public function let(FormFactoryInterface $formFactory)
     {
         $this->beConstructedWith($formFactory);
     }
 
-    function it_subscribes_to_pre_set_data_event()
+    public function it_subscribes_to_pre_set_data_event()
     {
         self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'buildChoices'));
     }
 
-    function it_does_no_not_build_choices_collection_for_null(
+    public function it_does_no_not_build_choices_collection_for_null(
         FormEvent $event,
         Form $form,
         $formFactory
@@ -51,7 +52,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->buildChoices($event);
     }
 
-    function it_builds_choices_collection_for_new_object_without_type(
+    public function it_builds_choices_collection_for_new_object_without_type(
         FormEvent $event,
         Form $form,
         AttributeInterface $attribute,
@@ -78,7 +79,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->buildChoices($event);
     }
 
-    function it_builds_choices_collection_for_choice_attribute(
+    public function it_builds_choices_collection_for_choice_attribute(
         FormEvent $event,
         Form $form,
         AttributeInterface $attribute,
@@ -105,7 +106,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->buildChoices($event);
     }
 
-    function it_does_not_build_choices_collection_for_other_than_choice_attribute_types(
+    public function it_does_not_build_choices_collection_for_other_than_choice_attribute_types(
         FormEvent $event,
         Form $form,
         AttributeInterface $attribute,

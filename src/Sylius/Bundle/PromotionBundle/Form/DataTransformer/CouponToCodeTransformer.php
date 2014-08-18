@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\PromotionBundle\Form\DataTransformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+
+use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\SyliusPromotionEvents;
 
 /**
  * Coupon to code transformer.

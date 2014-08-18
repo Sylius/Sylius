@@ -12,6 +12,7 @@
 namespace Sylius\Component\Taxonomy\Repository;
 
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 

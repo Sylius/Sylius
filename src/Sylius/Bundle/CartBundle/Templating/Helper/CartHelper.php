@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\CartBundle\Templating\Helper;
 
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\Helper\Helper;
+
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class CartHelper extends Helper
 {

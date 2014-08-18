@@ -21,27 +21,27 @@ use Symfony\Component\Form\FormBuilder;
  */
 class AddressTypeSpec extends ObjectBehavior
 {
-    function let(EventSubscriberInterface $eventListener)
+    public function let(EventSubscriberInterface $eventListener)
     {
         $this->beConstructedWith('Address', array('sylius'), $eventListener);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\AddressType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_address');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder->addEventSubscriber(Argument::type('Symfony\Component\EventDispatcher\EventSubscriberInterface'))
             ->shouldBeCalled()

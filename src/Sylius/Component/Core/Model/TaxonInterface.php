@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+
 use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
 
 /**

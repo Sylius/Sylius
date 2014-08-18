@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\SettingsBundle\Controller;
 
-use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
+
+use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 
 /**
  * Settings controller.

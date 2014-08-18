@@ -28,7 +28,7 @@ require_once __DIR__.'/../../Fixture/Entity/Foo.php';
  */
 class EntityRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
+    public function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
         $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo';
 
@@ -53,22 +53,22 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($entityManager, $class);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
 
-    function it_implements_Sylius_repository_interface()
+    public function it_implements_Sylius_repository_interface()
     {
         $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
     }
 
-    function it_creates_new_resource_instance()
+    public function it_creates_new_resource_instance()
     {
         $this->createNew()->shouldHaveType('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo');
     }
 
-    function it_returns_null_if_resource_not_found($queryBuilder, $query)
+    public function it_returns_null_if_resource_not_found($queryBuilder, $query)
     {
         $queryBuilder
             ->andWhere('o.id = 3')
@@ -81,7 +81,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->find(3)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
+    public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
         $criteria = array(
             'foo' => 'bar',
@@ -117,7 +117,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->findOneBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
+    public function it_applies_criteria_when_finding_by($queryBuilder, Expr $expr)
     {
         $criteria = array(
             'foo' => 'bar',
@@ -153,7 +153,7 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
+    public function it_applies_criteria_when_finding_by_array($queryBuilder, Expr $expr)
     {
         $criteria = array(
             'baz' => array('foo', 'bar'),
@@ -182,12 +182,12 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_returns_null_if_there_are_no_resources()
+    public function it_returns_null_if_there_are_no_resources()
     {
         $this->findAll()->shouldReturn(null);
     }
 
-    function it_creates_Pagerfanta_paginator()
+    public function it_creates_Pagerfanta_paginator()
     {
         $this
             ->createPaginator()

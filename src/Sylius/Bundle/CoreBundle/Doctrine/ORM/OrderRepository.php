@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use FOS\UserBundle\Model\UserInterface;
 use Pagerfanta\PagerfantaInterface;
+
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

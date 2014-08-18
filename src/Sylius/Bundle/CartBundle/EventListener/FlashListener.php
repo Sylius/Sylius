@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
-use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+
+use Sylius\Bundle\CartBundle\Event\FlashEvent;
+use Sylius\Component\Cart\SyliusCartEvents;
 
 /**
  * Flash message listener.

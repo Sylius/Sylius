@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\Validator;
 
-use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Response;
+
+use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 
 /**
  * Interface for process validation

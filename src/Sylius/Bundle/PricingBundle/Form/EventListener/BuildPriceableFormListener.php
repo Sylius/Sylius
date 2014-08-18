@@ -11,14 +11,15 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\EventListener;
 
-use Sylius\Component\Pricing\Model\PriceableInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+
+use Sylius\Component\Pricing\Model\PriceableInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * This listener adds configuration form to the priceable object.

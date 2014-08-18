@@ -11,29 +11,30 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use SM\Event\TransitionEvent;
 use PhpSpec\ObjectBehavior;
+use SM\Event\TransitionEvent;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderStateListenerSpec extends ObjectBehavior
 {
-    function let(StateResolverInterface $stateResolver)
+    public function let(StateResolverInterface $stateResolver)
     {
         $this->beConstructedWith($stateResolver);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderStateListener');
     }
 
-    function it_resolves_order_states(
+    public function it_resolves_order_states(
         StateResolverInterface $stateResolver,
         GenericEvent $event,
         OrderInterface $order
@@ -45,7 +46,7 @@ class OrderStateListenerSpec extends ObjectBehavior
         $this->resolveOrderStates($event);
     }
 
-    function it_resolves_order_states_with_state_machine_event(
+    public function it_resolves_order_states_with_state_machine_event(
         StateResolverInterface $stateResolver,
         TransitionEvent $event,
         OrderInterface $order,

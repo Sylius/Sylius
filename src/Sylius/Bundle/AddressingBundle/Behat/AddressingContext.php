@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\AddressingBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Symfony\Component\Locale\Locale;
+
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Symfony\Component\Locale\Locale;
 
 class AddressingContext extends DefaultContext
 {

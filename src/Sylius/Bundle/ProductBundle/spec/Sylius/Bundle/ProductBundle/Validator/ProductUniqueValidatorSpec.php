@@ -14,32 +14,33 @@ namespace spec\Sylius\Bundle\ProductBundle\Validator;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Validator\ExecutionContext;
+
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductUnique;
 use Sylius\Component\Product\Model\ProductInterface;
-use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductUniqueValidatorSpec extends ObjectBehavior
 {
-    function let(ObjectRepository $productRepository, ExecutionContext $context)
+    public function let(ObjectRepository $productRepository, ExecutionContext $context)
     {
         $this->beConstructedWith($productRepository);
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator');
     }
 
-    function it_is_a_constraint_validator()
+    public function it_is_a_constraint_validator()
     {
         $this->shouldImplement('Symfony\Component\Validator\ConstraintValidator');
     }
 
-    function it_adds_violation_if_product_with_given_property_value_already_exists(
+    public function it_adds_violation_if_product_with_given_property_value_already_exists(
         $productRepository,
         ProductInterface $product,
         ProductInterface $conflictualProduct,
@@ -58,7 +59,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    function it_does_not_add_violation_if_product_with_given_property_value_does_not_exist(
+    public function it_does_not_add_violation_if_product_with_given_property_value_does_not_exist(
         $productRepository,
         ProductInterface $product,
         $context
@@ -76,7 +77,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $this->validate($product, $constraint);
     }
 
-    function it_does_not_add_violation_if_conflictual_product_and_validated_one_are_the_same(
+    public function it_does_not_add_violation_if_conflictual_product_and_validated_one_are_the_same(
         $productRepository,
         ProductInterface $product,
         $context

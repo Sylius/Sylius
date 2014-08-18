@@ -12,6 +12,7 @@
 namespace Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;

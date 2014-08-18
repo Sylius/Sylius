@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPCR\Util\NodeHelper;
+
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 
 class LoadBlocksData extends DataFixture

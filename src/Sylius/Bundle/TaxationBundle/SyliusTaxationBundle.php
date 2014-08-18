@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\TaxationBundle;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Taxation system for ecommerce Symfony2 applications.

@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\VariationBundle\Validator;
 
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+
+use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Variation\Model\VariantInterface;
 
 /**
  * Unique option values combination for variant.

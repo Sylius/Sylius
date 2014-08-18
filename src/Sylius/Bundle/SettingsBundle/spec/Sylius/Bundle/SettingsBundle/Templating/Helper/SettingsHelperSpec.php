@@ -12,34 +12,35 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 
 class SettingsHelperSpec extends ObjectBehavior
 {
-    function let(SettingsManagerInterface $settingsManager)
+    public function let(SettingsManagerInterface $settingsManager)
     {
         $this->beConstructedWith($settingsManager);
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper');
     }
 
-    function it_should_be_a_Twig_extension()
+    public function it_should_be_a_Twig_extension()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_should_return_settings_by_namespace($settingsManager, Settings $settings)
+    public function it_should_return_settings_by_namespace($settingsManager, Settings $settings)
     {
         $settingsManager->loadSettings('taxation')->shouldBeCalled()->willReturn($settings);
 
         $this->getSettings('taxation')->shouldReturn($settings);
     }
 
-    function it_should_return_settings_parameter_by_namespace_and_name(
+    public function it_should_return_settings_parameter_by_namespace_and_name(
         SettingsManagerInterface$settingsManager,
         Settings $settings
     ) {

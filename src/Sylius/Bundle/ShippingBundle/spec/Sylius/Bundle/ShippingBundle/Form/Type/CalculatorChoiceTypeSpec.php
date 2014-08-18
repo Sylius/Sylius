@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $choices = array(
             'flat_rate'     => 'Flat rate per shipment',
@@ -29,17 +29,17 @@ class CalculatorChoiceTypeSpec extends ObjectBehavior
         $this->beConstructedWith($choices);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_defines_calculator_choices(OptionsResolverInterface $resolver)
+    public function it_defines_calculator_choices(OptionsResolverInterface $resolver)
     {
         $choices = array(
             'flat_rate'     => 'Flat rate per shipment',

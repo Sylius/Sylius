@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

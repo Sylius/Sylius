@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\LocaleBundle\EventListener;
 
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * Used to set the right locale on the request.

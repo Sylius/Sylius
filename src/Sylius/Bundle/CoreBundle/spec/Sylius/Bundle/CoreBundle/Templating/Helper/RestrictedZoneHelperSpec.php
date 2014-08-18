@@ -12,27 +12,28 @@
 namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 class RestrictedZoneHelperSpec extends ObjectBehavior
 {
-    function let(RestrictedZoneCheckerInterface $restrictedZoneChecker)
+    public function let(RestrictedZoneCheckerInterface $restrictedZoneChecker)
     {
         $this->beConstructedWith($restrictedZoneChecker);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper');
     }
 
-    function it_is_a_twig_extension()
+    public function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_uses_restricted_zone_checker(
+    public function it_uses_restricted_zone_checker(
         $restrictedZoneChecker,
         ProductInterface $product
     ) {

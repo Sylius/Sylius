@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+
+use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
  * Validator which validates if an address is shippable

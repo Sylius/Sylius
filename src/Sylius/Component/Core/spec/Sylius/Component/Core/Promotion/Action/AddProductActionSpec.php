@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -23,22 +24,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class AddProductActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    public function let(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
     {
         $this->beConstructedWith($itemRepository, $variantRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\AddProductAction');
     }
 
-    function it_implements_Sylius_promotion_action_interface()
+    public function it_implements_Sylius_promotion_action_interface()
     {
         $this->shouldImplement('Sylius\Component\Promotion\Action\PromotionActionInterface');
     }
 
-    function it_adds_product_as_promotion(
+    public function it_adds_product_as_promotion(
         RepositoryInterface $itemRepository,
         RepositoryInterface $variantRepository,
         OrderInterface $order,
@@ -62,7 +63,7 @@ class AddProductActionSpec extends ObjectBehavior
         $this->execute($order, $configuration, $promotion);
     }
 
-    function it_does_not_add_product_if_exists(
+    public function it_does_not_add_product_if_exists(
             RepositoryInterface $variantRepository,
             RepositoryInterface $itemRepository,
             OrderInterface $order,
@@ -87,7 +88,7 @@ class AddProductActionSpec extends ObjectBehavior
         $this->execute($order, $configuration, $promotion);
     }
 
-    function it_reverts_product(
+    public function it_reverts_product(
             RepositoryInterface $variantRepository,
             RepositoryInterface $itemRepository,
             OrderInterface $order,

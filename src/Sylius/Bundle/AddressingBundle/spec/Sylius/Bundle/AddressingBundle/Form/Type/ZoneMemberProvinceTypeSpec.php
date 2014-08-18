@@ -21,32 +21,32 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ZoneMemberProvinceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('ZoneMember', array('sylius'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_is_a_Sylius_zone_member_type()
+    public function it_is_a_Sylius_zone_member_type()
     {
         $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType');
     }
 
-    function it_has_a_valid_name()
+    public function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_zone_member_province');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('province', 'sylius_province_choice', Argument::any())
@@ -61,7 +61,7 @@ class ZoneMemberProvinceTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(

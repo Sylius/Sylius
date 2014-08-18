@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Bundle\AddressingBundle\Form\EventListener\ResizeZoneMemberCollectionListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use Sylius\Bundle\AddressingBundle\Form\EventListener\ResizeZoneMemberCollectionListener;
 
 /**
  * Zone member collection form type.

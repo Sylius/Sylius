@@ -13,13 +13,14 @@ namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItemInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\ValidatorInterface;
+
 use Sylius\Bundle\CartBundle\Event\CartEvent;
 use Sylius\Bundle\CartBundle\Event\CartItemEvent;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Symfony\Component\Validator\ValidatorInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -27,17 +28,17 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 class CartListenerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
+    public function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider)
     {
         $this->beConstructedWith($manager, $validator, $provider);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CartBundle\EventListener\CartListener');
     }
 
-    function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
+    public function it_should_add_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
     {
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
@@ -46,7 +47,7 @@ class CartListenerSpec extends ObjectBehavior
         $this->addItem($event);
     }
 
-    function it_should_remove_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
+    public function it_should_remove_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
     {
         $event->getCart()->willReturn($cart);
         $event->getItem()->willReturn($cartItem);
@@ -55,7 +56,7 @@ class CartListenerSpec extends ObjectBehavior
         $this->removeItem($event);
     }
 
-    function it_should_clear_a_cart_from_event(CartEvent $event, CartInterface $cart, $manager, $provider)
+    public function it_should_clear_a_cart_from_event(CartEvent $event, CartInterface $cart, $manager, $provider)
     {
         $event->getCart()->willReturn($cart);
         $manager->remove($cart)->shouldBeCalled();
@@ -65,7 +66,7 @@ class CartListenerSpec extends ObjectBehavior
         $this->clearCart($event);
     }
 
-    function it_should_save_a_valid_cart($manager, $provider, CartEvent $event, CartInterface $cart)
+    public function it_should_save_a_valid_cart($manager, $provider, CartEvent $event, CartInterface $cart)
     {
         $event->getCart()->willReturn($cart);
         $manager->persist($cart)->shouldBeCalled();
@@ -75,7 +76,7 @@ class CartListenerSpec extends ObjectBehavior
         $this->saveCart($event);
     }
 
-    function it_should_not_save_an_invalid_cart(
+    public function it_should_not_save_an_invalid_cart(
         $manager,
         $provider,
         $validator,

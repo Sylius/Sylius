@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\FlowBundle\EventDispatcher\Event;
 
-use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Symfony\Component\EventDispatcher\Event;
+
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 
 /**
  * Process filter event.

@@ -15,22 +15,22 @@ use PhpSpec\ObjectBehavior;
 
 class TaxonomyTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('Taxonomy', array('sylius'));
     }
 
-    function it_should_be_initializable()
+    public function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType');
     }
 
-    function it_should_be_a_form_type()
+    public function it_should_be_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_extend_Sylius_taxon_base_form_type()
+    public function it_should_extend_Sylius_taxon_base_form_type()
     {
         $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonomyType');
     }

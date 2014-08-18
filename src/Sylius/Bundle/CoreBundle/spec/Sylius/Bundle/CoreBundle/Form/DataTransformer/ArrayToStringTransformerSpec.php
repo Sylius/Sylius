@@ -18,27 +18,27 @@ use PhpSpec\ObjectBehavior;
  */
 class ArrayToStringTransformerSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith(', ');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\DataTransformer\ArrayToStringTransformer');
     }
 
-    function it_implements_form_data_transformer_interface()
+    public function it_implements_form_data_transformer_interface()
     {
         $this->shouldImplement('Symfony\Component\Form\DataTransformerInterface');
     }
 
-    function it_returns_empty_string_if_array_is_empty()
+    public function it_returns_empty_string_if_array_is_empty()
     {
         $this->transform(array())->shouldReturn('');
     }
 
-    function it_throws_exception_if_not_array_transformed()
+    public function it_throws_exception_if_not_array_transformed()
     {
         $this
             ->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
@@ -46,7 +46,7 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_not_string_reverse_transformed()
+    public function it_throws_exception_if_not_string_reverse_transformed()
     {
         $this
             ->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
@@ -54,12 +54,12 @@ class ArrayToStringTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_transforms_array_into_string()
+    public function it_transforms_array_into_string()
     {
         $this->transform(array('foo', 'bar', 'yo'))->shouldReturn('foo, bar, yo');
     }
 
-    function it_returns_empty_array_if_blanks_string_reverse_transformed()
+    public function it_returns_empty_array_if_blanks_string_reverse_transformed()
     {
         $this->reverseTransform('')->shouldReturn(array());
     }
