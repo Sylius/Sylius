@@ -10,10 +10,9 @@
  */
 
 namespace spec\Sylius\Bundle\SearchBundle\Query;
-use PhpSpec\ObjectBehavior;
-use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\HttpFoundation\Request;
 
+use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author agounaris <agounaris@gmail.com>
@@ -21,15 +20,14 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchStringQuerySpec extends ObjectBehavior
 {
 
-    function let(Request $request, ParameterBag $bag)
+    function let()
     {
-        $bag->get('q')->willReturn('searchTerm');
-        $bag->get('search_param')->willReturn('all');
-        $bag->get('filters')->willReturn(array('test'));
+        $request = new Request();
+        $request->query->set('q', 'search term');
+        $request->query->set('search_param', 'all');
+        $request->query->set('filters', array('test'));
 
-        $request->query = $bag;
-
-        $this->beConstructedWith($bag, true);
+        $this->beConstructedWith($request, true);
     }
 
     function it_is_initializable()

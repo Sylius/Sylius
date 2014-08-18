@@ -13,11 +13,15 @@ namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOStatement;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository;
+use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 
 
 /**
@@ -29,16 +33,16 @@ class OrmFinderSpec extends ObjectBehavior
         SyliusSearchIndexRepository $searchRepository,
         $config,
         $productRepository,
-        $container,
-        EntityManager $entityManager
+        EntityManager $entityManager,
+        QueryLoggerInterface $queryLogger
     )
     {
         $this->beConstructedWith(
             $searchRepository,
             (array)$config,
             $productRepository,
-            $container,
-            $entityManager
+            $entityManager,
+            $queryLogger
         );
     }
 
@@ -142,31 +146,16 @@ class OrmFinderSpec extends ObjectBehavior
 
     public function it_performs_a_fulltext_query(
         EntityManagerInterface $entityManager,
-        Connection $connection,
-        PDOStatement $pdoStmt)
+        AbstractQuery $query,
+        $result = array()
+    )
     {
-        $result = array(
-            0 =>
-                array(
-                    'item_id' => '89',
-                    'tags'    => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:705;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-                    'entity'  => 'Sylius\Component\Core\Model\Product'),
-            1 =>
-                array(
-                    'item_id' => '67',
-                    'tags'    => 'a:4:{s:6:"taxons";a:2:{i:0;s:8:"T-Shirts";i:1;s:9:"SuperTees";}s:5:"price";i:2840;s:7:"made_of";a:1:{i:0;s:9:"Polyester";}s:5:"color";a:3:{i:0;s:3:"Red";i:1;s:4:"Blue";i:2;s:5:"Green";}}',
-                    'entity'  => 'Sylius\Component\Core\Model\Product')
-        );
+        $entityManager->createQuery(Argument::any())->shouldBeCalled()->willReturn($query);
+        $query->setParameter(Argument::any(), Argument::any())->shouldBeCalled()->willReturn($query);
 
-        $entityManager->getConnection()->shouldBeCalled()->willReturn($connection);
+        $query->getResult()->shouldBeCalled()->willReturn($result);
 
-        $connection->prepare(Argument::any())->shouldBeCalled()->willReturn($pdoStmt);
-
-        $pdoStmt->execute(Argument::any())->shouldBeCalled();
-
-        $pdoStmt->fetchAll()->willReturn($result);
-
-        $this->query('black', $entityManager, false)->shouldHaveCount(2);
+        $this->query('black', $entityManager)->shouldBeArray();
     }
 
 }

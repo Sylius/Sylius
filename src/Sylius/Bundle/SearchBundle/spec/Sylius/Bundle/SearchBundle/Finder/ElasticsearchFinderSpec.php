@@ -12,7 +12,10 @@
 namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository;
+use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -23,14 +26,16 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         SyliusSearchIndexRepository $searchRepository,
         $config,
         $productRepository,
-        $container
+        $container,
+        QueryLoggerInterface $queryLogger
     )
     {
         $this->beConstructedWith(
             $searchRepository,
             $config,
             $productRepository,
-            $container
+            $container,
+            $queryLogger
         );
     }
 
@@ -39,7 +44,7 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SearchBundle\Finder\ElasticsearchFinder');
     }
 
-    function it_compiles_an_elasticsearch_query()
+    function it_compiles_a_fulltext_elasticsearch_query()
     {
         $config = array(
             'filters' => array(
@@ -77,8 +82,48 @@ class ElasticsearchFinderSpec extends ObjectBehavior
 
         );
 
-        $this->compileElasticsearchQuery('modi', null, $config, null)->shouldHaveType('\Elastica\Query');
+        $this->compileElasticSearchStringQuery('modi', null, $config, 'all', null)->shouldHaveType('\Elastica\Query');
+    }
 
+    function it_compiles_a_taxon_elasticsearch_query()
+    {
+        $config = array(
+            'filters' => array(
+                'facets' => array(
+                    'taxons'  => array(
+                        'display_name' => 'Basic categories',
+                        'type'         => 'terms',
+                        'value'        => null,
+                        'values'       => array(),
+                    ),
+                    'price'   => array(
+                        'display_name' => 'Available prices',
+                        'type'         => 'range',
+                        'value'        => null,
+                        'values'       => array(
+                            array('from' => 0, 'to' => 2000),
+                            array('from' => 2001, 'to' => 5000),
+                            array('from' => 5001, 'to' => 10000),
+                        ),
+                    ),
+                    'made_of' => array(
+                        'display_name' => 'Material',
+                        'type'         => 'terms',
+                        'value'        => null,
+                        'values'       => array(),
+                    ),
+                    'color'   => array(
+                        'display_name' => 'Available colors',
+                        'type'         => 'terms',
+                        'value'        => null,
+                        'values'       => array(),
+                    ),
+                )
+            )
+
+        );
+
+        $this->compileElasticaTaxonQuery(null, $config, 'T-Shirts', null)->shouldHaveType('\Elastica\Query');
     }
 
 }

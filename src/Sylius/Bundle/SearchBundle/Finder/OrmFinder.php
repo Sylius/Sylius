@@ -88,10 +88,7 @@ class OrmFinder implements FinderInterface
         $this->config            = $config;
         $this->productRepository = $productRepository;
         $this->em                = $em;
-
-        if ($this->config['query_logger']['driver']) {
-            $this->queryLogger       = $queryLogger;
-        }
+        $this->queryLogger = $queryLogger;
     }
 
     /**
@@ -515,24 +512,18 @@ class OrmFinder implements FinderInterface
      */
     public function query($searchTerm, EntityManager $em)
     {
-        $queryBuilder = $em->createQueryBuilder();
-        $queryBuilder
-            ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
-            ->where('MATCH (u.value) AGAINST (:searchTerm) > 1')
-            ->setParameter('searchTerm', $searchTerm)
-            ;
-
-        $results = $queryBuilder->getQuery()->getResult();
+        $query = $em->createQuery('select u.itemId, u.tags, u.entity from Sylius\Bundle\SearchBundle\Entity\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm) > 0');
+        $query->setParameter('searchTerm', $searchTerm);
+        $results = $query->getResult();
 
         $facets = array();
         foreach ($results as $result) {
 
-            if (isset($this->targetIndex) && $result->getEntity() != $this->config['orm_indexes'][$this->targetIndex]['class']) {
+            if (isset($this->targetIndex) && $result['entity'] != $this->config['orm_indexes'][$this->targetIndex]['class']) {
                 continue;
             }
 
-            $facets[$result->getItemId()] = $result->getTags();
+            $facets[$result['itemId']] = $result['tags'];
         }
 
         return $facets;
