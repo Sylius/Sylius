@@ -22,7 +22,7 @@ Adding required bundles to the kernel
 
 First, you need to enable the bundle inside the kernel.
 If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to the kernel.
-This bundle also uses `LiipDoctrineCacheBundle`. Don't worry, everything was automatically installed via Composer.
+This bundle also uses `DoctrineCacheBundle`. Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
 
@@ -36,7 +36,7 @@ This bundle also uses `LiipDoctrineCacheBundle`. Don't worry, everything was aut
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
+            new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
@@ -58,9 +58,9 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_settings:
         driver: doctrine/orm
 
-    liip_doctrine_cache:
-        namespaces:
-            sylius_settings:
+    doctrine_cache:
+        providers:
+            sylius_settings: 
                 type: file_system
 
 Importing routing configuration
