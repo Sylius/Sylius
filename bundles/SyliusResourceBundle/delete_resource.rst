@@ -8,7 +8,7 @@ Deleting a resource is simple.
     # routing.yml
 
     app_user_delete:
-        pattern: /users/{id}
+        path: /users/{id}
         methods: [DELETE]
         defaults:
             _controller: app.controller.user:deleteAction
@@ -38,7 +38,7 @@ For example, you want to delete the user who belongs to particular company, not 
     # routing.yml
 
     app_user_delete:
-        pattern: /companies/{companyId}/users/{id}
+        path: /companies/{companyId}/users/{id}
         methods: [DELETE]
         defaults:
             _controller: app.controller.user:deleteAction
@@ -59,7 +59,7 @@ By default the controller will try to get the id of the resource and redirect to
     # routing.yml
 
     app_user_delete:
-        pattern: /competition/{competitionId}/users/{id}
+        path: /competition/{competitionId}/users/{id}
         methods: [DELETE]
         defaults:
             _controller: app.controller.user:deleteAction

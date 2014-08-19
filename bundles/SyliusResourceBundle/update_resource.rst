@@ -8,7 +8,7 @@ To display an edit form of a particular resource, change it or update it via API
     # routing.yml
 
     app_user_update:
-        pattern: /users/{id}/edit
+        path: /users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -47,7 +47,7 @@ Just like for other actions, you can customize the template.
     # routing.yml
 
     app_user_update:
-        pattern: /users/{id}/edit
+        path: /users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -64,7 +64,7 @@ Same way like for **createAction** you can override the default form.
     # routing.yml
 
     app_user_update:
-        pattern: /users/{id}/edit
+        path: /users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -82,7 +82,7 @@ By default, the **updateAction** will look for the resource by id. You can easil
     # routing.yml
 
     app_user_update:
-        pattern: /users/{username}/edit
+        path: /users/{username}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -99,7 +99,7 @@ By default the controller will try to get the id of resource and redirect to the
     # routing.yml
 
     app_user_update:
-        pattern: /users/{id}/edit
+        path: /users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
@@ -113,7 +113,7 @@ You can also perform more complex redirects, with parameters. For example...
     # routing.yml
 
     app_user_update:
-        pattern: /competition/{competitionId}/users/{id}/edit
+        path: /competition/{competitionId}/users/{id}/edit
         methods: [GET, PUT]
         defaults:
             _controller: app.controller.user:updateAction
