@@ -5,8 +5,8 @@ Feature: Users management
     I want to be able to list registered users
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are products:
             | name | price |
             | Mug  | 5.99  |

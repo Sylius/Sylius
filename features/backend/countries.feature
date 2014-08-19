@@ -5,8 +5,8 @@ Feature: Countries and provinces
     I want to be able to manage countries and their provinces
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are following countries:
             | name    | provinces                       |
             | France  | Lyon, Toulouse, Rennes, Nancy   |

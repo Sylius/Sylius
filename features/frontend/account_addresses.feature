@@ -5,8 +5,8 @@ Feature: User account addresses page
     I want to be able to add, edit or delete my shipping and billing addresses
 
     Background:
-        Given I am logged in user
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in user
           And the following countries exist:
             | name    |
             | Germany |

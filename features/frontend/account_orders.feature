@@ -5,9 +5,9 @@ Feature: User account orders page
   I want to be able to track and get an invoice of my sent orders
 
   Background:
-    Given I am logged in user
+    Given there is default currency configured
+      And I am logged in user
       And I am on my account homepage
-      And there is default currency configured
       And the following zones are defined:
         | name         | type    | members                 |
         | Scandinavia  | country | Norway, Sweden, Finland |

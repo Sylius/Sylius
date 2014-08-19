@@ -5,8 +5,7 @@ Feature: Managing locales
     I want to be able to configure locales
 
     Background:
-        Given I am logged in as administrator
-        And there are following currencies configured:
+        Given  there are following currencies configured:
             | code | exchange rate | enabled |
             | EUR  | 1.00000       | yes     |
         And there are following locales configured:
@@ -14,7 +13,7 @@ Feature: Managing locales
             | de_DE | yes       |
             | en_US | no        |
             | fr_FR | yes       |
-
+         And I am logged in as administrator
     Scenario: Seeing index of all locales
         Given I am on the dashboard page
         When I follow "Locales"

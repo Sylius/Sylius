@@ -5,8 +5,8 @@ Feature: Tax rates
     I want to be able to configure tax rates
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |

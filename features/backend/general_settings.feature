@@ -5,8 +5,8 @@ Feature: General settings
     I want to be able to edit general configuration
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
 
     Scenario: Accessing the settings form
         Given I am on the dashboard page

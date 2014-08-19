@@ -5,8 +5,8 @@ Feature: Promotions
     I want to be able to manage promotions
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following promotions exist:
             | name           | description                            | usage limit | used | starts     | ends       |
             | New Year       | New Year Sale for more than 3 items    |             |      | 2013-12-31 | 2014-01-03 |

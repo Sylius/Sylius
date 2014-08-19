@@ -5,8 +5,8 @@ Feature: Product attributes
     I want to be able to configure product attributes
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are following attributes:
             | name               | presentation   |
             | T-Shirt collection | Collection     |

@@ -60,7 +60,7 @@ class MoneyContext extends DefaultContext
     }
 
     /**
-     * @Given there is default currency configured
+     * @Given /^there is default currency configured$/
      */
     public function setupDefaultCurrency()
     {

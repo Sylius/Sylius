@@ -5,8 +5,8 @@ Feature: Taxation settings
     I want to be able to edit taxation configuration
 
     Background:
-        Given I am logged in as administrator
-          And there is default currency configured
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
