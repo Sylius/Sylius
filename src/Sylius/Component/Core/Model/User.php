@@ -258,28 +258,6 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
-    {
-        parent::setEmail($email);
-        $this->setUsername($email);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmailCanonical($emailCanonical)
-    {
-        parent::setEmailCanonical($emailCanonical);
-        $this->setUsernameCanonical($emailCanonical);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOAuthAccounts()
     {
         return $this->oauthAccounts;
