@@ -37,7 +37,7 @@ class SyliusPayumBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Payum\Core\Security\TokenInterface' => 'sylius.model.payment_security_token.class',
@@ -47,7 +47,7 @@ class SyliusPayumBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Bundle\PayumBundle\Model';
     }

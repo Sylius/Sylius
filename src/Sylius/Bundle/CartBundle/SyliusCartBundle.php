@@ -42,7 +42,7 @@ class SyliusCartBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Cart\Model\CartInterface'     => 'sylius.model.cart.class',
@@ -53,7 +53,7 @@ class SyliusCartBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Cart\Model';
     }

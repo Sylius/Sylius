@@ -54,7 +54,7 @@ class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Taxation\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
@@ -65,7 +65,7 @@ class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Taxation\Model';
     }

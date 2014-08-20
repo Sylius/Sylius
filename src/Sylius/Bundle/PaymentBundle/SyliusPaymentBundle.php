@@ -42,7 +42,7 @@ class SyliusPaymentBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getInterfaces()
+    protected function getModelInterfaces()
     {
         return array(
             'Sylius\Component\Payment\Model\CreditCardInterface'    => 'sylius.model.credit_card.class',
@@ -54,7 +54,7 @@ class SyliusPaymentBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelNamespace()
     {
         return 'Sylius\Component\Payment\Model';
     }
