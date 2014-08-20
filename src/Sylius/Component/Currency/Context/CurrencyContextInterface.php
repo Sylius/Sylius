@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Currency\Context;
 
-use Sylius\Component\Model\CurrencyInterface;
-
 /**
  * Interface to be implemented by the service providing the currently used
  * currency.
@@ -24,21 +22,21 @@ interface CurrencyContextInterface
     /**
      * Get the default currency.
      *
-     * @return CurrencyInterface
+     * @return string
      */
     public function getDefaultCurrency();
 
     /**
      * Get the currently active currency.
      *
-     * @return CurrencyInterface
+     * @return string
      */
     public function getCurrency();
 
     /**
      * Set the currently active currency.
      *
-     * @param CurrencyInterface $currency
+     * @param string $currency
      */
     public function setCurrency($currency);
 }
