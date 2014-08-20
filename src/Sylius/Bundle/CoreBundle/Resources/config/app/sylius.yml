@@ -186,6 +186,16 @@ sylius_search:
                 id: ~
                 name: ~
                 description: ~
+        promotion:
+            class: Sylius\Component\Promotion\Model\Promotion
+
+            mappings:
+                id: ~
+                name: ~
+                description: ~
+
+    custom_accessors:
+        - Sylius\Component\Product\Accessor\ProductAccessor
     filters:
         pre_search_filter:
             enabled: true
@@ -217,3 +227,74 @@ sylius_search:
                 display_name: 'Available colors'
                 type: terms
                 value: ~
+
+fos_elastica:
+     clients:
+         elasticsearch:
+            servers:
+                - { host: 10.0.0.100, port: 9200, logger: true }
+                - { host: 10.0.0.101, port: 9200, logger: true }
+           #for clustering you need to define the logger because of the https://github.com/FriendsOfSymfony/FOSElasticaBundle/issues/543
+     indexes:
+         sylius:
+             client: elasticsearch
+             finder: ~
+             settings:
+                 analysis:
+                     filter:
+                         synonym:
+                             type: synonym
+                             synonyms: synonym.txt
+                     analyzer:
+                         my_analyzer:
+                             filter: synonym
+                             type: standard
+                             tokenizer: standard
+             types:
+                 product:
+                     mappings:
+                         name:
+                             type: string
+                             analyzer: my_analyzer
+                         description: ~
+                         slug: ~
+                         color: ~
+                         price:
+                            type: integer
+                         taxons:
+                            type: string
+                            index: not_analyzed
+                         size: ~
+                         author: ~
+                         made_of:
+                            type: string
+                            index: not_analyzed
+
+                     persistence:
+                         driver: orm
+                         model: Sylius\Component\Core\Model\Product
+                         model_to_elastica_transformer:
+                            service: sylius.search.transformers.model.product
+                         provider: ~
+                         listener: ~
+                         finder: ~
+
+                 promotion:
+                     mappings:
+                         name: ~
+                         description: ~
+
+                     persistence:
+                         driver: orm
+                         model: Sylius\Component\Promotion\Model\Promotion
+                         model_to_elastica_transformer:
+                            service: sylius.search.transformers.model.product
+                         provider: ~
+                         listener: ~
+                         finder: ~
+
+
+                 search_log:
+                    mappings:
+                        search_term: ~
+                        ip_address: ~

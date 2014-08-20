@@ -184,7 +184,9 @@ class ElasticsearchFinder implements FinderInterface
             $facets = $this->transformFacetsForPresentation($products, $query->getAppliedFilters());
         }
 
-        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $this->getProductIdsFromFulltextSearch($products)));
+        $paginator = $this->productRepository->createByTaxonPaginator(
+            $query->getTaxon(), array('id' => $this->getProductIdsFromFulltextSearch($products))
+        );
 
         $this->facets = $facets;
         $this->paginator = $paginator;
@@ -210,14 +212,23 @@ class ElasticsearchFinder implements FinderInterface
             $this->targetIndex
         );
 
-        $products = $this->syliusIndex->search($elasticaQuery);
+        $objects = $this->syliusIndex->search($elasticaQuery);
+
+        $mapping = $this->syliusIndex->getMapping();
 
         $facets = null;
         if (isset($this->facetGroup)) {
-            $facets = $this->transformFacetsForPresentation($products, $query->getAppliedFilters());
+            $facets = $this->transformFacetsForPresentation($objects, $query->getAppliedFilters());
         }
 
-        $paginator = $this->searchRepository->createPaginator(array('id' => $this->getProductIdsFromFulltextSearch($products)));
+        $results = array();
+        foreach ($objects as $object) {
+            $results[$mapping[$object->getType()]['_meta']['model']][] = $object->getId();
+        }
+
+        $paginator = $this->searchRepository->getArrayPaginator(
+            $this->searchRepository->hydrateSearchResults($results)
+        );
 
         $this->facets = $facets;
         $this->paginator = $paginator;
@@ -344,25 +355,6 @@ class ElasticsearchFinder implements FinderInterface
         }
 
         return array_reverse($elasticaFacets);
-    }
-
-    /**
-     * @param $products
-     *
-     * @return array|null
-     */
-    private function getProductIdsFromFulltextSearch($products)
-    {
-        $ids = array();
-        foreach ($products as $product) {
-            $ids[] = $product->getId();
-        }
-
-        if (empty($ids)) {
-            return null;
-        }
-
-        return $ids;
     }
 
     /**

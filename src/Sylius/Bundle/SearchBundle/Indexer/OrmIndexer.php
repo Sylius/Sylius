@@ -116,7 +116,6 @@ class OrmIndexer implements IndexerInterface
     /**
      * @param $entity
      * @param $fields
-     * @param OutputInterface $output
      *
      * @internal param $table
      */
@@ -133,8 +132,7 @@ class OrmIndexer implements IndexerInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from($entity, 'u')
-            ->where('u.deletedAt IS NULL');
+            ->from($entity, 'u');
         $results = $queryBuilder->getQuery()->getResult();
 
         foreach ($results as $element) {

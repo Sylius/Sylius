@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius_search.searchindex.repository.class">Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository</parameter>
+        <parameter key="sylius_search.searchindex.repository.class">Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository</parameter>
 
         <parameter key="fos_elastica.index.populate.class">FOS\ElasticaBundle\Command\PopulateCommand</parameter>
 
@@ -31,6 +31,8 @@
 
         <parameter key="sylius_search.orm.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\OrmQueryLogger</parameter>
         <parameter key="sylius_search.elasticsearch.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\ElasticsearchQueryLogger</parameter>
+
+        <parameter key="sylius.search.product.property_accessor.class">Sylius\Bundle\SearchBundle\Accessor\PropertyAccessorAdaptor</parameter>
     </parameters>
 
     <services>
@@ -97,6 +99,10 @@
         <service id="sylius_search.elasticsearch.query.logger" class="%sylius_search.elasticsearch.query.logger.class%">
             <argument type="service" id="fos_elastica.index.sylius.search_log" on-invalid="ignore" />
             <argument>%sylius_search.query.logger.enabled%</argument>
+        </service>
+
+        <service id="sylius.search.product.property_accessor" class="%sylius.search.product.property_accessor.class%">
+            <argument>%sylius_search.custom.accessors%</argument>
         </service>
     </services>
 

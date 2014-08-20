@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ProductBundle\Accessor;
+namespace Sylius\Bundle\SearchBundle\Accessor;
 
 use Symfony\Component\PropertyAccess\Exception;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -26,38 +26,40 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class ProductAccessor extends PropertyAccessor
+class PropertyAccessorAdaptor extends PropertyAccessor
 {
+    protected $customAccessors;
+
+    public function __construct($customAccessors = array())
+    {
+        foreach ($customAccessors as $customAccessorClass) {
+            $this->customAccessors[] = new $customAccessorClass;
+        }
+    }
+
     /**
      * @param array|object                 $objectOrArray
      * @param string|PropertyPathInterface $propertyPath
      *
-     * @return array|mixed
+     * @return mixed
+     * @throws \Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
      */
     public function getValue($objectOrArray, $propertyPath)
     {
         try {
+            foreach ($this->customAccessors as $accessor) {
+
+                if ($accessor->canAccessObject($objectOrArray)) {
+                    return $accessor->accessObject($objectOrArray, $propertyPath);
+                }
+            }
+
             return parent::getValue($objectOrArray, $propertyPath);
-        }catch (Exception\NoSuchPropertyException $e){
-            $tags = array();
 
-            foreach ($objectOrArray->getAvailableVariants() as $variant) {
-                foreach ($variant->getOptions() as $option) {
-
-                    if (strtolower($option->getPresentation()) == strtolower($propertyPath)) {
-                        $tags[] = $option->getValue();
-                    }
-                }
-            }
-
-            foreach ($objectOrArray->getAttributes() as $attribute) {
-
-                if (strtolower(str_replace(' ', '_', $attribute->getPresentation())) == strtolower($propertyPath)) {
-                    $tags[] = $attribute->getValue();
-                }
-            }
-
-            return array_values(array_unique($tags));
+        }catch (Exception\NoSuchPropertyException $e) {
+            return null;
         }
+
     }
+
 }

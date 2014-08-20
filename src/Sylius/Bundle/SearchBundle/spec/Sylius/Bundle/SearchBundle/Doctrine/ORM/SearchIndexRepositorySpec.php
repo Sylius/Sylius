@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
-class SyliusSearchIndexRepositorySpec extends ObjectBehavior
+class SearchIndexRepositorySpec extends ObjectBehavior
 {
 
     function let(
@@ -30,7 +30,7 @@ class SyliusSearchIndexRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository');
+        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository');
     }
 
 }

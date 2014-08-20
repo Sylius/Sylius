@@ -32,3 +32,48 @@
 </div>
 
 {% endmacro %}
+
+{% macro my_grid(results, size = 3) %}
+
+    {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+    <div class="row">
+    {% for result in results %}
+        {% if result.taxons is defined %}
+            <div class="col-md-{{ 12 / size }}">
+                <div class="product-box">
+                    <a href="{{ path(result) }}"><h4>{{ result.name|truncate(18) }}</h4></a>
+                    <a href="{{ path(result) }}">
+                        <img class="img-rounded img-responsive" src="{{ result.image ? result.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/262x255' }}" alt="{{ result.name }}" />
+                        <span class="label label-primary">{{ sylius_calculate_price(result.masterVariant)|sylius_price }}</span>
+                        <button class="btn btn-success btn-xs pull-right"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+                    </a>
+                </div>
+            </div>
+            {% if 0 == loop.index % size %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endif %}
+
+        {% if result.exclusive is defined %}
+            <div class="col-md-{{ 12 / size }}">
+                <div class="product-box">
+                    <h4>{{ result.name|truncate(18) }}</h4>
+                    {{ result.description }}
+                </div>
+            </div>
+            {% if 0 == loop.index % size %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endif %}
+
+    {% else %}
+        <div class="col-md-12">
+            {{ alerts.info('sylius.product.no_results'|trans) }}
+        </div>
+    {% endfor %}
+    </div>
+
+{% endmacro %}

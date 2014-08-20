@@ -14,11 +14,14 @@ namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * @author agounaris <agounaris@gmail.com>
  */
-class SyliusSearchIndexRepository
+class SearchIndexRepository extends EntityRepository
 {
     /**
      * @var EntityManager
@@ -52,7 +55,7 @@ class SyliusSearchIndexRepository
         // Gets the taxon ids
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->select('product.id')
+            ->select('product')
             ->from('Sylius\Component\Core\Model\Product', 'product')
             ->leftJoin('product.taxons', 'taxon')
             ->where('taxon.name = :taxonName')
@@ -60,22 +63,40 @@ class SyliusSearchIndexRepository
         ;
 
         $filteredIds = array();
-        foreach ($queryBuilder->getQuery()->getResult(Query::HYDRATE_ARRAY) as $row) {
-            $filteredIds[] = $row['id'];
+        $products = $queryBuilder->getQuery()->getResult();
+
+        foreach ($products as $product) {
+            $filteredIds[get_class($product)][] = $product->getId();
         }
 
         return $filteredIds;
     }
 
     /**
-     * @param array $criteria
-     * @param array $orderBy
-     *
-     * @return mixed|\Pagerfanta\Pagerfanta
+     * @param $resultSet
+     * @return Pagerfanta
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null)
+    public function hydrateSearchResults($resultSetFromFulltextSearch = array())
     {
-        return $this->productRepository->createPaginator($criteria);
+        $results = array();
+        foreach ($resultSetFromFulltextSearch as $model=>$ids) {
+
+            $queryBuilder = $this->em->createQueryBuilder();
+            $queryBuilder
+                ->select('u')
+                ->from($model, 'u')
+                ->where('u.id IN (:ids)')
+                ->setParameter('ids', $ids)
+                ;
+
+            $objects = $queryBuilder->getQuery()->getResult();
+
+            foreach ($objects as $object) {
+                $results[] = $object;
+            }
+        }
+
+        return $results;
     }
 
     /**

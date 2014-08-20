@@ -23,7 +23,6 @@
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
-        <parameter key="sylius.search.product.property_accessor.class">Sylius\Bundle\ProductBundle\Accessor\ProductAccessor</parameter>
     </parameters>
 
     <services>
@@ -58,8 +57,6 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
         </service>
-
-        <service id="sylius.search.product.property_accessor" class="%sylius.search.product.property_accessor.class%" />
     </services>
 
 </container>

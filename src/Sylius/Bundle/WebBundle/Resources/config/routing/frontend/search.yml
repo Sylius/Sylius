@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius_search_homepage:
-    pattern: /
+    path: /
     defaults:
       _controller: sylius.controller.search:indexAction

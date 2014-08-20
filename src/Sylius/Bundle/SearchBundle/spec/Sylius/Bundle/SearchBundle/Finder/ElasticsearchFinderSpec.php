@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\SearchBundle\Finder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository;
+use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 
 
@@ -23,7 +23,7 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 class ElasticsearchFinderSpec extends ObjectBehavior
 {
     function let(
-        SyliusSearchIndexRepository $searchRepository,
+        SearchIndexRepository $searchRepository,
         $config,
         $productRepository,
         $container,

@@ -18,7 +18,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
 
-    <entity repository-class="Sylius\Bundle\SearchBundle\Doctrine\ORM\SyliusSearchIndexRepository"
+    <entity repository-class="Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository"
             name="Sylius\Bundle\SearchBundle\Entity\SearchIndex"
             table="sylius_search_index">
 

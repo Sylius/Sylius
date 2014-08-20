@@ -32,7 +32,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_search');
 
-
         $this->addQueryLoggerSection($rootNode);
 
         $this->addFilterSection($rootNode);
@@ -42,6 +41,8 @@ class Configuration implements ConfigurationInterface
         $this->addFormSection($rootNode);
 
         $this->addIndexesSection($rootNode);
+
+        $this->addAccessorsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -181,6 +182,17 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+    }
+
+    private function addAccessorsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('custom_accessors')
+                ->prototype('scalar')
+                ->end()
+            ->end()
+            ;
     }
 
 }

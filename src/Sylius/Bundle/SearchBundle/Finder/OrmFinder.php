@@ -228,29 +228,44 @@ class OrmFinder implements FinderInterface
         // get ids and tags from full text search
         $result = $this->query($query->getSearchTerm(), $this->em);
 
-        $ids = array_keys($result);
+        $finalResults = array();
 
-        //filter the ids if searchParam is not all
-        if ($query->getSearchParam() != 'all' && $query->isDropdownFilterEnabled()) {
-            $ids = array_intersect(array_keys($result), $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam()));
-        }
-
-        $appliedFilters = $query->getAppliedFilters();
-        if (!$appliedFilters) {
-            $appliedFilters = array();
-        }
-
-        $idsFromAllFacets = null;
         $facets = null;
-        if (!empty($ids)) {
-            list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($appliedFilters, $ids);
+        foreach ($result as $model => $element) {
 
-            if (isset($this->facetGroup)) {
-                $facets = $this->calculateNewFacets($result, $facetFilteredIds);
+            $ids = array_keys($element);
+
+            //filter the ids if searchParam is not all
+            if ($query->getSearchParam() != 'all' && $query->isDropdownFilterEnabled()) {
+                $ids = array_intersect(array_keys($element), $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam()));
+            }
+
+            $appliedFilters = $query->getAppliedFilters();
+            if (!$appliedFilters) {
+                $appliedFilters = array();
+            }
+
+            $idsFromAllFacets = null;
+
+            if (!empty($ids)) {
+                list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($appliedFilters, $ids, $model);
+
+                if (isset($this->facetGroup)) {
+                    $facets = $this->calculateNewFacets($element, $facetFilteredIds);
+                }
+            }
+
+            foreach($element as $id=>$tags) {
+                if (in_array($id, $idsFromAllFacets)) {
+                    $finalResults[$model][] = $id;
+                }
             }
         }
 
-        $paginator = $this->searchRepository->createPaginator(array('id' => $idsFromAllFacets));
+
+        $paginator = $this->searchRepository->getArrayPaginator(
+            $this->searchRepository->hydrateSearchResults($finalResults)
+        );
 
         $this->facets = $facets;
         $this->paginator = $paginator;
@@ -265,7 +280,7 @@ class OrmFinder implements FinderInterface
      *
      * @return array
      */
-    public function getFilteredIds($filters, $ids)
+    public function getFilteredIds($filters, $ids, $model)
     {
         // Build up lists of product ids for each facet and the total intersect of all for full filtered set
         $facetFilteredIds = array();
@@ -273,7 +288,7 @@ class OrmFinder implements FinderInterface
 
         foreach ($this->config['filters']['facets'] as $facetName => $facetConfig) {
             if ($thisFacetFilters = $this->getFiltersAppliedForFacet($facetName, $filters)) {
-                $facetFilteredIds[$facetName] = $this->getFilteredResults($ids, $thisFacetFilters);
+                $facetFilteredIds[$facetName] = $this->getFilteredResults($ids, $thisFacetFilters, $model);
             } else {
                 $facetFilteredIds[$facetName] = $ids;
             }
@@ -394,11 +409,11 @@ class OrmFinder implements FinderInterface
      *
      * @return array
      */
-    private function getFilteredResults(array $ids, array $filters)
+    private function getFilteredResults(array $ids, array $filters, $model)
     {
         $filteredIds = array_intersect(
-            $this->getFilteredResultsForRange($ids, $filters),
-            $this->getFilteredResultsForTerms($ids, $filters)
+            $this->getFilteredResultsForRange($ids, $filters, $model),
+            $this->getFilteredResultsForTerms($ids, $filters, $model)
         );
 
         return $filteredIds;
@@ -411,7 +426,7 @@ class OrmFinder implements FinderInterface
      *
      * @return array
      */
-    public function getFilteredResultsForRange(array $ids, array $filters)
+    public function getFilteredResultsForRange(array $ids, array $filters, $model)
     {
         foreach ($filters as $key => $filter) {
             if (strpos($filter[key($filter)], "|") === false) {
@@ -426,7 +441,7 @@ class OrmFinder implements FinderInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('product')
-            ->from('Sylius\Component\Core\Model\Product', 'product')
+            ->from($model, 'product')
             ->leftJoin('product.taxons', 'taxon')
             ->leftJoin('product.attributes', 'attribute')
             ->leftJoin('product.variants', 'variant')
@@ -516,17 +531,17 @@ class OrmFinder implements FinderInterface
         $query->setParameter('searchTerm', $searchTerm);
         $results = $query->getResult();
 
-        $facets = array();
+        $elements = array();
         foreach ($results as $result) {
 
             if (isset($this->targetIndex) && $result['entity'] != $this->config['orm_indexes'][$this->targetIndex]['class']) {
                 continue;
             }
 
-            $facets[$result['itemId']] = $result['tags'];
+            $elements[$result['entity']][$result['itemId']] = $result['tags'];
         }
 
-        return $facets;
+        return $elements;
     }
 
     /**

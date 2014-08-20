@@ -29,7 +29,7 @@
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
         "twig/twig":            "~1.11",
-        "doctrine/orm":         "~2.3",
+        "doctrine/orm":         "~2.3"
     },
     "config": {
         "bin-dir": "bin"
