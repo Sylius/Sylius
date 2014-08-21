@@ -431,6 +431,9 @@ sylius:
         create: Create payment
         create_header: New payment
         created_at: Created at
+        general_info: General payment info
+        history: History
+        history_header: History of payment
         id: ID
         index_header: Payments
         manage: Manage payments
@@ -450,6 +453,7 @@ sylius:
             void: Void
         update_header: Editing payment
         updated_at: Last update
+        update: Update
     payment_method:
         create: Create payment method
         create_header: New payment method

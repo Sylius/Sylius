@@ -30,7 +30,7 @@ class PaymentController extends BasePaymentController
      *
      * @throws NotFoundHttpException
      */
-    public function historyAction(Request $request)
+    public function showAction(Request $request)
     {
         $payment = $this->findOr404($request);
 
@@ -42,7 +42,7 @@ class PaymentController extends BasePaymentController
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
+            ->setTemplate($this->config->getTemplate('show.html'))
             ->setData(array(
                 $this->config->getResourceName() => $payment,
                 'logs'                           => $logRepository->getLogEntries($payment)
