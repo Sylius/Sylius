@@ -20,9 +20,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 class SyliusAttributeBundle extends AbstractResourceBundle
 {
     /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
