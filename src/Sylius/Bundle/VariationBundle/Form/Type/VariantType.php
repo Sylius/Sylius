@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\VariationBundle\Form\EventListener\BuildVariantFormListener;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantType extends AbstractType
+class VariantType extends AbstractResourceType
 {
     /**
      * Variable object name.
@@ -31,31 +31,17 @@ class VariantType extends AbstractType
     protected $variableName;
 
     /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
      * Constructor.
      *
-     * @param string $variableName
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $variableName
      */
-    public function __construct($variableName, $dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, $variableName)
     {
+        parent::__construct($dataClass, $validationGroups);
+
         $this->variableName = $variableName;
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -80,11 +66,11 @@ class VariantType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver
             ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-                'master'            => false
+                'master' => false
             ))
         ;
     }

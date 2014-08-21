@@ -91,7 +91,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $attributeFormType = new Definition($attributeClasses['form']);
         $attributeFormType
-            ->setArguments(array($subject, $attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%'))
+            ->setArguments(array($attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%', $subject))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeAlias))
         ;
 
@@ -111,7 +111,11 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $attributeValueFormType = new Definition($attributeValueClasses['form']);
         $attributeValueFormType
-            ->setArguments(array($subject, $attributeValueClasses['model'], '%sylius.validation_group.'.$attributeValueAlias.'%'))
+            ->setArguments(array(
+                $attributeValueClasses['model'],
+                '%sylius.validation_group.'.$attributeValueAlias.'%',
+                $subject
+            ))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeValueAlias))
         ;
 

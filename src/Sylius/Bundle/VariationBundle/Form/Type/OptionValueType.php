@@ -11,16 +11,15 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Option value type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OptionValueType extends AbstractType
+class OptionValueType extends AbstractResourceType
 {
     /**
      * Variable object name.
@@ -30,31 +29,17 @@ class OptionValueType extends AbstractType
     protected $variableName;
 
     /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
      * Constructor.
      *
-     * @param string $variableName
      * @param string $dataClass
      * @param array  $validationGroups
+     * @param string $variableName
      */
-    public function __construct($variableName, $dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, $variableName)
     {
+        parent::__construct($dataClass, $validationGroups);
+
         $this->variableName = $variableName;
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
     }
 
     /**
@@ -65,19 +50,6 @@ class OptionValueType extends AbstractType
         $builder
             ->add('value', 'text', array(
                 'label' => 'sylius.form.option_value.value'
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

@@ -11,43 +11,16 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Province form type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class ProvinceType extends AbstractType
+class ProvinceType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var string[]
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param string   $dataClass
-     * @param string[] $validationGroups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -56,19 +29,6 @@ class ProvinceType extends AbstractType
         $builder
             ->add('name', 'text', array(
                 'label' => 'sylius.form.province.name'
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

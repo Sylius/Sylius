@@ -164,6 +164,9 @@
         </service>
         <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
             <argument>%sylius.model.group.class%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
             <tag name="form.type" alias="sylius_group" />
         </service>
         <service id="sylius.form.type.block" class="%sylius.form.type.block.class%">
@@ -346,9 +349,9 @@
         </service>
 
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
-            <argument type="service" id="sylius.repository.promotion_coupon"></argument>
             <argument>%sylius.model.cart.class%</argument>
             <argument>%sylius.validation_group.cart%</argument>
+            <argument type="service" id="sylius.repository.promotion_coupon"></argument>
             <tag name="form.type" alias="sylius_cart" />
         </service>
 
@@ -391,8 +394,8 @@
             <tag name="form.type" alias="sylius_promotion_rule_user_loyalty_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
-            <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
             <argument>%sylius.model.country.class%</argument>
+            <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">

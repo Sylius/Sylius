@@ -11,9 +11,8 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Sylius currency form type.
@@ -21,28 +20,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyType extends AbstractType
+class CurrencyType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * @param string $dataClass
-     * @param array  $validationGroups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -57,19 +36,6 @@ class CurrencyType extends AbstractType
             ))
             ->add('enabled', 'checkbox', array(
                 'label' => 'sylius.form.currency.enabled'
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class' => $this->dataClass,
-                'validation_groups' => $this->validationGroups
             ))
         ;
     }

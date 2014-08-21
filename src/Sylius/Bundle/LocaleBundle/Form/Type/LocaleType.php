@@ -11,30 +11,16 @@
 
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Locale type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LocaleType extends AbstractType
+class LocaleType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
-    private $dataClass;
-
-    /**
-     * @param string $dataClass
-     */
-    public function __construct($dataClass)
-    {
-        $this->dataClass = $dataClass;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -50,19 +36,6 @@ class LocaleType extends AbstractType
             ))
         ;
 
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => array('sylius')
-            )
-        );
     }
 
     /**

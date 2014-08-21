@@ -29,15 +29,15 @@ class CartType extends BaseCartType
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $couponRepository
      * @param string              $dataClass        FQCN of cart model
      * @param array               $validationGroups
+     * @param RepositoryInterface $couponRepository
      */
-    public function __construct(RepositoryInterface $couponRepository, $dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, RepositoryInterface $couponRepository)
     {
-        $this->couponRepository = $couponRepository;
-
         parent::__construct($dataClass, $validationGroups);
+
+        $this->couponRepository = $couponRepository;
     }
 
     /**
