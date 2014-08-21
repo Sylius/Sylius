@@ -14,6 +14,11 @@ namespace Sylius\Bundle\InstallerBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * Installer extension.
+ *
+ * @author Saša Stamenković <umpirsky@gmail.com>
+ */
 class SyliusInstallerExtension extends AbstractResourceExtension
 {
     /**
