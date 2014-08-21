@@ -20,6 +20,7 @@
 
         <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
         <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
+        <parameter key="sylius.listener.registration.class">Sylius\Bundle\WebBundle\EventListener\RegistrationListener</parameter>
     </parameters>
 
     <services>
@@ -124,6 +125,11 @@
         <service id="sylius.user.registration.form.type" class="%sylius.form.frontend.registration.type.class%">
             <tag name="form.type" alias="sylius_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+        <service id="sylius.listener.registration" class="%sylius.listener.registration.class%">
+            <tag name="kernel.event_listener" event="fos_user.registration.success" method="handleEvent"/>
+            <argument type="service" id="security.http_utils"/>
         </service>
     </services>
 

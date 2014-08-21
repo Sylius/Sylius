@@ -47,6 +47,21 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     public function setUser(UserInterface $user);
 
     /**
+     * Get customer email
+     *
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * Set customer email
+     *
+     * @param string $email
+     * @return mixed
+     */
+    public function setEmail($email);
+
+    /**
      * Get shipping address.
      *
      * @return AddressInterface

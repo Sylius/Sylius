@@ -67,12 +67,16 @@
                 <tr>
                     <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
                     <td>
-                        {{ order.user.fullName }}<br>
-                        <strong>
-                            <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                                {{ order.user.username }}
-                            </a>
-                        </strong>
+                        {% if order.user %}
+                            {{ order.user.fullName }}<br>
+                            <strong>
+                                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                                    {{ order.user.username }}
+                                </a>
+                            </strong>
+                        {% else %}
+                            {{ order.email }}
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>

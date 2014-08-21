@@ -36,8 +36,22 @@
         <div class="well">
             <form action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
                 <fieldset>
+                    <legend>{{ 'sylius.checkout.security.guest'|trans }}</legend>
+                    {{ form_widget(guest_form) }}
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success btn-block">
+                        {{ 'sylius.checkout.security.proceed_order'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="well">
+            <form action="{{ path('fos_user_registration_register') }}" method="post" novalidate class="form-horizontal">
+                <fieldset>
                     <legend>{{ 'sylius.checkout.security.new_customer'|trans }}</legend>
                     {{ form_widget(registration_form) }}
+                    <input type="hidden" name="_target_path" value="sylius_checkout_security">
                 </fieldset>
                 <div class="form-actions">
                     <input type="submit" class="btn btn-success btn-block" value="{{ 'sylius.checkout.security.register'|trans }}" />

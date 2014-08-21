@@ -216,6 +216,8 @@ sylius:
             login: Login
             new_customer: New Customer
             register: Register
+            guest: Guest
+            proceed_order: Proceed with your order
         shipping:
             error: We're sorry, but our shop is not able to provide product shipping to country which you have chosen.
             header: Shipping method

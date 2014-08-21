@@ -50,6 +50,7 @@
         <field name="currency" length="3" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
+        <field type="string" name="email" column="email" nullable="true"/>
 
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">

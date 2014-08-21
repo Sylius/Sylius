@@ -16,6 +16,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
@@ -47,7 +48,7 @@ class SecurityStep extends CheckoutStep
 
         $this->overrideSecurityTargetPath();
 
-        return $this->renderStep($context, $this->getRegistrationForm());
+        return $this->renderStep($context, $this->getGuestForm($this->getCurrentCart()));
     }
 
     /**
@@ -59,40 +60,30 @@ class SecurityStep extends CheckoutStep
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
         $request = $this->getRequest();
+        $guestForm = $this->getGuestForm($order);
 
-        $user = $this->get('fos_user.user_manager')->createUser();
-        $user->setEnabled(true);
-
-        $form = $this->getRegistrationForm();
-        $form->setData($user);
-
-        $this->dispatchEvent(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
-
-        if ($form->handleRequest($request)->isValid()) {
-            $this->dispatchEvent(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($form, $request));
-            $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
-
-            $this->saveUser($user);
-
+        if ($guestForm->handleRequest($request)->isValid()) {
+            $this->getManager()->persist($order);
+            $this->getManager()->flush();
             return $this->complete();
         }
-
-        return $this->renderStep($context, $form);
+        return $this->renderStep($context, $this->getGuestForm($order));
     }
 
     /**
      * Render step.
      *
      * @param ProcessContextInterface $context
-     * @param FormInterface           $registrationForm
+     * @param FormInterface $guestForm
      *
      * @return Response
      */
-    protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm)
+    protected function renderStep(ProcessContextInterface $context, FormInterface $guestForm)
     {
         return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'context'           => $context,
-            'registration_form' => $registrationForm->createView(),
+            'registration_form' => $this->getRegistrationForm()->createView(),
+            'guest_form'        => $guestForm->createView(),
         ));
     }
 
@@ -104,6 +95,17 @@ class SecurityStep extends CheckoutStep
     protected function getRegistrationForm()
     {
         return $this->get('fos_user.registration.form.factory')->createForm();
+    }
+
+    /**
+     * Get guest form.
+     *
+     * @param OrderInterface $order
+     * @return FormInterface
+     */
+    protected function getGuestForm(OrderInterface $order)
+    {
+        return $this->createForm('sylius_checkout_guest', $order);
     }
 
     /**

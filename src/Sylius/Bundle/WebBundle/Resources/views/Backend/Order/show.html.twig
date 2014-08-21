@@ -41,7 +41,13 @@
             <dt>{{ 'sylius.order.created_at'|trans }}</dt>
             <dd>{{ order.createdAt|date }}</dd>
             <dt>Email</dt>
-            <dd>{{ order.user.email }}</dd>
+            <dd>
+                {% if order.user %}
+                    {{ order.user.email }}
+                {% else %}
+                    {{ order.email }}
+                {% endif %}
+            </dd>
         </dl>
     </div>
     <div class="col col-md-3">

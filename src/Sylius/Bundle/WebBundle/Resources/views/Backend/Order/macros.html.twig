@@ -37,7 +37,11 @@
                 {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
             </td>
             <td>
-                <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
+                {% if order.user %}
+                    <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
+                {% else %}
+                    <p>{{ order.email }}</p>
+                {% endif %}
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
@@ -91,10 +95,14 @@
                 {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
             </td>
             <td style="width: 20%">
-                {{ order.user.fullname }}<br>
-                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                    {{ order.user.email }}
-                </a>
+                {% if order.user %}
+                    {{ order.user.fullname }}<br>
+                    <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                        {{ order.user.email }}
+                    </a>
+                {% else %}
+                    {{ order.email }}
+                {% endif %}
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
         </tr>
