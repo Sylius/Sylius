@@ -73,8 +73,8 @@ class SearchIndexRepository extends EntityRepository
     }
 
     /**
-     * @param $resultSet
-     * @return Pagerfanta
+     * @param array $resultSetFromFulltextSearch
+     * @return array
      */
     public function hydrateSearchResults($resultSetFromFulltextSearch = array())
     {

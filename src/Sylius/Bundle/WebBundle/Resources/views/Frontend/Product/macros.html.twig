@@ -33,13 +33,14 @@
 
 {% endmacro %}
 
-{% macro my_grid(results, size = 3) %}
+{% macro multi_model_grid(results, size = 3) %}
 
     {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 
     <div class="row">
     {% for result in results %}
-        {% if result.taxons is defined %}
+        {# Products #}
+        {% if result is product %}
             <div class="col-md-{{ 12 / size }}">
                 <div class="product-box">
                     <a href="{{ path(result) }}"><h4>{{ result.name|truncate(18) }}</h4></a>
@@ -56,7 +57,8 @@
             {% endif %}
         {% endif %}
 
-        {% if result.exclusive is defined %}
+        {# Promotions #}
+        {% if result is promotion %}
             <div class="col-md-{{ 12 / size }}">
                 <div class="product-box">
                     <h4>{{ result.name|truncate(18) }}</h4>

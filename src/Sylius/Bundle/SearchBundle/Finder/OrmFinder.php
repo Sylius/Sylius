@@ -186,12 +186,15 @@ class OrmFinder implements FinderInterface
         $result       = array();
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->select('u.itemId, u.tags')
+            ->select('u.itemId, u.tags, u.entity')
             ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
 
         $res = $queryBuilder->getQuery()->getResult();
+
+        $model = $res[0]['entity'];
+
         foreach ($res as $facet) {
             $result[$facet['itemId']] = $facet['tags'];
         }
@@ -201,7 +204,7 @@ class OrmFinder implements FinderInterface
             $appliedFilters = array();
         }
 
-        list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($appliedFilters, $ids);
+        list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($appliedFilters, $ids, $model);
 
         $facets = null;
         if (isset($this->facetGroup)) {
@@ -229,15 +232,21 @@ class OrmFinder implements FinderInterface
         $result = $this->query($query->getSearchTerm(), $this->em);
 
         $finalResults = array();
+        $facets = array();
 
-        $facets = null;
-        foreach ($result as $model => $element) {
+        foreach ($result as $modelClass => $modelIdsToTags) {
 
-            $ids = array_keys($element);
+            $modelIds = array_keys($modelIdsToTags);
 
             //filter the ids if searchParam is not all
             if ($query->getSearchParam() != 'all' && $query->isDropdownFilterEnabled()) {
-                $ids = array_intersect(array_keys($element), $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam()));
+                $preFilteredModelIds = $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam());
+
+                if (isset($preFilteredModelIds[$modelClass])) {
+                    $modelIds = array_intersect($modelIds, $preFilteredModelIds[$modelClass]);
+                }else{
+                    $modelIds = array();
+                }
             }
 
             $appliedFilters = $query->getAppliedFilters();
@@ -245,23 +254,16 @@ class OrmFinder implements FinderInterface
                 $appliedFilters = array();
             }
 
-            $idsFromAllFacets = null;
+            $finalResults[$modelClass] = array();
 
-            if (!empty($ids)) {
-                list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($appliedFilters, $ids, $model);
+            if (!empty($modelIds)) {
+                list($modelIdsForFacets, $finalResults[$modelClass]) = $this->getFilteredIds($appliedFilters, $modelIds, $modelClass);
 
                 if (isset($this->facetGroup)) {
-                    $facets = $this->calculateNewFacets($element, $facetFilteredIds);
-                }
-            }
-
-            foreach($element as $id=>$tags) {
-                if (in_array($id, $idsFromAllFacets)) {
-                    $finalResults[$model][] = $id;
+                    $facets = array_merge_recursive($facets, $this->calculateNewFacets($modelIdsToTags, $modelIdsForFacets));
                 }
             }
         }
-
 
         $paginator = $this->searchRepository->getArrayPaginator(
             $this->searchRepository->hydrateSearchResults($finalResults)
@@ -277,12 +279,13 @@ class OrmFinder implements FinderInterface
     /**
      * @param $filters
      * @param $ids
+     * @param $model
      *
      * @return array
      */
     public function getFilteredIds($filters, $ids, $model)
     {
-        // Build up lists of product ids for each facet and the total intersect of all for full filtered set
+        // Build up lists of model ids for each facet and the total intersect of all for full filtered set
         $facetFilteredIds = array();
         $idsFromAllFacets = $ids;
 
@@ -293,7 +296,7 @@ class OrmFinder implements FinderInterface
                 $facetFilteredIds[$facetName] = $ids;
             }
 
-            // Intersect this (possibly filtered) set of products for the facet with the main list
+            // Intersect this (possibly filtered) set of model ids for the facet with the main list
             $idsFromAllFacets = array_intersect($idsFromAllFacets, $facetFilteredIds[$facetName]);
         }
 
@@ -400,98 +403,16 @@ class OrmFinder implements FinderInterface
     }
 
     /**
-     * Reduce the result set based on facets
+     * Tag based filtering
      *
      * @param array $ids
      * @param array $filters
-     *
-     * @internal param array $facets
-     *
-     * @return array
-     */
-    private function getFilteredResults(array $ids, array $filters, $model)
-    {
-        $filteredIds = array_intersect(
-            $this->getFilteredResultsForRange($ids, $filters, $model),
-            $this->getFilteredResultsForTerms($ids, $filters, $model)
-        );
-
-        return $filteredIds;
-    }
-
-
-    /**
-     * @param array $ids
-     * @param array $filters
+     * @param $model
      *
      * @return array
      */
-    public function getFilteredResultsForRange(array $ids, array $filters, $model)
+    function getFilteredResults(array $ids, array $filters, $model)
     {
-        foreach ($filters as $key => $filter) {
-            if (strpos($filter[key($filter)], "|") === false) {
-                unset($filters[$key]);
-            }
-        }
-
-        if (empty($filters)) {
-            return $ids;
-        }
-
-        $queryBuilder = $this->em->createQueryBuilder();
-        $queryBuilder
-            ->select('product')
-            ->from($model, 'product')
-            ->leftJoin('product.taxons', 'taxon')
-            ->leftJoin('product.attributes', 'attribute')
-            ->leftJoin('product.variants', 'variant')
-            ->where('product.id IN (:ids)')
-            ->setParameter('ids', $ids);
-
-        $orx = $queryBuilder->expr()->orX();
-
-
-        foreach ($filters as $separateFilter) {
-
-            $filter = $separateFilter[key($separateFilter)];
-
-            if (strpos($filter, "|")) {
-                $range = explode("|", $filter);
-
-                $orx->add('variant.price>=' . $range[0] . ' AND variant.price<=' . $range[1] . ' AND variant.master=1');
-            } elseif (strpos($filter, "taxon") !== false) {
-                $orx->add('taxon.name = \'' . $filter . '\'');
-            } elseif (strpos($filter, "_") !== false) {
-                $orx->add('attribute.value = \'' . $filter . '\'');
-            }
-        }
-
-        $queryBuilder->andWhere($orx);
-
-        $results = $queryBuilder->getQuery()->getResult();
-
-        $ids = array();
-        foreach ($results as $result) {
-            $ids[] = $result->getId();
-        }
-
-        return $ids;
-    }
-
-    /**
-     * @param array $ids
-     * @param array $filters
-     *
-     * @return array
-     */
-    function getFilteredResultsForTerms(array $ids, array $filters)
-    {
-        foreach ($filters as $key => $filter) {
-            if (strpos($filter[key($filter)], "|")) {
-                unset($filters[$key]);
-            }
-        }
-
         if (empty($filters)) {
             return $ids;
         }
@@ -501,17 +422,44 @@ class OrmFinder implements FinderInterface
         $queryBuilder
             ->select('u.itemId, u.tags')
             ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
-            ->where('u.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->where('u.itemId IN (:ids)')
+            ->andWhere('u.entity = :model')
+            ->setParameter('ids', $ids)
+            ->setParameter('model', $model)
+        ;
 
         $res = $queryBuilder->getQuery()->getResult();
+
         foreach ($res as $facet) {
 
             foreach ($filters as $separateFilter) {
                 $tags = unserialize($facet['tags']);
 
-                if (in_array(ucfirst($separateFilter[key($separateFilter)]), $tags[strtolower(key($separateFilter))])) {
-                    $result[$facet['itemId']] = $facet['tags'];
+                if ($separateFilter[key($separateFilter)] && $tags[strtolower(key($separateFilter))]) {
+
+                    // range filtering
+                    if (is_numeric($tags[strtolower(key($separateFilter))])) {
+                        $range = explode("|", $separateFilter[key($separateFilter)]);
+                        if ($tags[strtolower(key($separateFilter))] >= $range[0] && $tags[strtolower(key($separateFilter))] <= $range[1]) {
+                            $result[$facet['itemId']] = $facet['tags'];
+                        }
+                        // got the value, I don't want to move into more checks
+                        continue;
+                    }
+
+                    // filtering on an array of values
+                    if (is_array($tags[strtolower(key($separateFilter))]) && in_array(ucfirst($separateFilter[key($separateFilter)]), $tags[strtolower(key($separateFilter))])) {
+                        $result[$facet['itemId']] = $facet['tags'];
+
+                        // got the value, I don't want to move into more checks
+                        continue;
+                    }
+
+                    // filtering on a value
+                    if (is_string($tags[strtolower(key($separateFilter))]) && $separateFilter[key($separateFilter)] == $tags[strtolower(key($separateFilter))]) {
+                        $result[$facet['itemId']] = $facet['tags'];
+                    }
+
                 }
             }
         }
@@ -520,6 +468,8 @@ class OrmFinder implements FinderInterface
     }
 
     /**
+     * The fulltext database query
+     *
      * @param               $searchTerm
      * @param EntityManager $em
      *
@@ -573,14 +523,21 @@ class OrmFinder implements FinderInterface
             }
 
             $tags = unserialize($serializedTags);
+
             foreach ($tags as $name => $value) {
 
                 if (is_array($value)) {
                     foreach ($value as $v) {
                         $rawFacets[$name][] = $v;
                     }
-                } elseif (is_numeric($value)) {
+                }
+
+                if (is_numeric($value)) {
                     $rawFacets[$name][] = intval($value);
+                }
+
+                if (is_string($value)) {
+                    $rawFacets[$name][] = $value;
                 }
             }
         }

@@ -177,15 +177,21 @@ class ElasticsearchFinder implements FinderInterface
 
         $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), 'product');
 
-        $products = $this->syliusIndex->search($elasticaQuery);
+        $objects = $this->syliusIndex->search($elasticaQuery);
+        $mapping = $this->syliusIndex->getMapping();
 
         $facets = null;
         if (isset($this->facetGroup)) {
-            $facets = $this->transformFacetsForPresentation($products, $query->getAppliedFilters());
+            $facets = $this->transformFacetsForPresentation($objects, $query->getAppliedFilters());
         }
 
-        $paginator = $this->productRepository->createByTaxonPaginator(
-            $query->getTaxon(), array('id' => $this->getProductIdsFromFulltextSearch($products))
+        $results = array();
+        foreach ($objects as $object) {
+            $results[$mapping[$object->getType()]['_meta']['model']][] = $object->getId();
+        }
+
+        $paginator = $this->searchRepository->getArrayPaginator(
+            $this->searchRepository->hydrateSearchResults($results)
         );
 
         $this->facets = $facets;
@@ -213,7 +219,6 @@ class ElasticsearchFinder implements FinderInterface
         );
 
         $objects = $this->syliusIndex->search($elasticaQuery);
-
         $mapping = $this->syliusIndex->getMapping();
 
         $facets = null;
@@ -271,22 +276,23 @@ class ElasticsearchFinder implements FinderInterface
 
     /**
      * @param      $searchTerm
-     * @param null $facets
+     * @param null $appliedFilters
      * @param      $configuration
      * @param      $preSearchTaxonFilter
      * @param      $type
      *
      * @return mixed
      */
-    public function compileElasticSearchStringQuery($searchTerm, $facets = null, $configuration, $preSearchTaxonFilter, $type = null)
+    public function compileElasticSearchStringQuery($searchTerm, $appliedFilters = null, $configuration, $preSearchTaxonFilter, $type = null)
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter    = new \Elastica\Filter\Bool();
+        $query = new \Elastica\Query\QueryString($searchTerm);
 
         if ($type) {
-            $typeFilter = new \Elastica\Filter\Term();
-            $typeFilter->setTerm('_type', $type);
+            $typeFilter = new \Elastica\Filter\Type($type);
             $boolFilter->addMust($typeFilter);
+            $elasticaQuery->setFilter($boolFilter);
         }
 
         // this is currently the only pre search filter and it's a taxon
@@ -298,33 +304,30 @@ class ElasticsearchFinder implements FinderInterface
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
             $taxonFromRequestFilter->setTerms('taxons', array($preSearchTaxonFilter));
             $boolFilter->addMust($taxonFromRequestFilter);
-
-            $query->setFilter($boolFilter);
-        } else {
-            $query = new \Elastica\Query\QueryString($searchTerm);
+            $elasticaQuery->setFilter($boolFilter);
         }
 
         $elasticaQuery->setQuery($query);
 
-        return $this->compileElasticsearchQuery($elasticaQuery, $facets, $configuration);
+        return $this->compileElasticsearchQuery($elasticaQuery, $appliedFilters, $configuration);
     }
 
     /**
      * @param      $elasticaQuery
-     * @param null $facets
+     * @param null $appliedFilters
      * @param      $configuration
      *
      * @return mixed
      */
-    public function compileElasticsearchQuery($elasticaQuery, $facets = null, $configuration)
+    public function compileElasticsearchQuery($elasticaQuery, $appliedFilters = null, $configuration)
     {
         $aggregations = $this->createAggregations($configuration);
 
-        if (!empty($facets)) {
+        if (!empty($appliedFilters)) {
 
-            list($termFilters, $rangeFilters, $boolFilter, $filters) = $this->applyFilterToElasticaQuery($facets, $elasticaQuery);
+            list($termFilters, $rangeFilters, $boolFilter, $filters) = $this->applyFilterToElasticaQuery($appliedFilters, $elasticaQuery);
 
-            $aggregations = $this->applyFiltersToIndividualAggregations($facets, $filters, $rangeFilters, $termFilters, $aggregations, $boolFilter);
+            $aggregations = $this->applyFiltersToIndividualAggregations($appliedFilters, $filters, $rangeFilters, $termFilters, $aggregations, $boolFilter);
 
         }
 
@@ -453,7 +456,7 @@ class ElasticsearchFinder implements FinderInterface
 
     /**
      * @param $facets
-     * @param $filters
+     * @param $appliedFilters
      * @param $rangeFilters
      * @param $termFilters
      * @param $aggregations
@@ -461,7 +464,7 @@ class ElasticsearchFinder implements FinderInterface
      *
      * @return array
      */
-    public function applyFiltersToIndividualAggregations($facets, $filters, $rangeFilters, $termFilters, $aggregations, $boolFilter)
+    public function applyFiltersToIndividualAggregations($facets, $appliedFilters, $rangeFilters, $termFilters, $aggregations, $boolFilter)
     {
         foreach ($facets as $name => $facet) {
 
@@ -469,13 +472,13 @@ class ElasticsearchFinder implements FinderInterface
 
             ${$normName . 'BoolFilter'} = new \Elastica\Filter\Bool();
 
-            foreach ($filters as $value) {
+            foreach ($appliedFilters as $value) {
 
                 if (is_array($value[key($value)])) {
                     ${$normName . 'RangeFilter'} = new \Elastica\Filter\Range();
 
                     foreach ($value as $range) {
-                        ${$normName . 'RangeFilter'}->addField($name, array('gte' => $range[0], 'lte' => $range[1]));
+                        ${$normName . 'RangeFilter'}->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
                         ${$normName . 'BoolFilter'}->addMust($rangeFilters);
                     }
                 } else {
@@ -507,40 +510,38 @@ class ElasticsearchFinder implements FinderInterface
     }
 
     /**
-     * @param $facets
+     * @param $appliedFilters
      * @param $elasticaQuery
      *
      * @return array
      */
-    public function applyFilterToElasticaQuery($facets, $elasticaQuery)
+    public function applyFilterToElasticaQuery($appliedFilters, $elasticaQuery)
     {
-        $termFilters  = new \Elastica\Filter\Term();
+        $termFilters  = new \Elastica\Filter\Terms();
         $rangeFilters = new \Elastica\Filter\Range();
         $boolFilter   = new \Elastica\Filter\Bool();
 
         $filters = array();
-        foreach ($facets as $facet) {
+        foreach ($appliedFilters as $facet) {
 
             if (strpos($facet[key($facet)], "|") !== false) {
-                $filters[key($facet)] = array('ranges' => explode('|', $facet[key($facet)]));
+                $filters[key($facet)][] = array('range' => explode('|', $facet[key($facet)]));
             } else {
-                $filters[key($facet)] = array('term' => $facet[key($facet)]);
+                $filters[key($facet)][] = $facet[key($facet)];
             }
         }
 
         foreach ($filters as $name => $value) {
-
-            if (is_array($value[key($value)])) {
+            if (is_array($value[0])) {
                 foreach ($value as $range) {
-                    $rangeFilters->addField($name, array('gte' => $range[0], 'lte' => $range[1]));
+                    $rangeFilters->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
                     $boolFilter->addMust($rangeFilters);
                 }
-            } else {
-                $termFilters->setTerm($name, $value[key($value)]);
+            }else{
+                $termFilters->setTerms($name, $value);
                 $boolFilter->addMust($termFilters);
             }
         }
-
 
         $elasticaQuery->setFilter($boolFilter);
 

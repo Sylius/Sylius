@@ -104,6 +104,11 @@
         <service id="sylius.search.product.property_accessor" class="%sylius.search.product.property_accessor.class%">
             <argument>%sylius_search.custom.accessors%</argument>
         </service>
+
+        <service id="sylius_search.twig.instance_of_extension" class="Sylius\Bundle\SearchBundle\Twig\InstanceOfExtension" public="false">
+            <argument>%sylius_search.config%</argument>
+            <tag name="twig.extension" />
+        </service>
     </services>
 
 </container>
