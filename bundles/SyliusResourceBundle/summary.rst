@@ -7,6 +7,23 @@ Configuration reference
 .. code-block:: yaml
 
     sylius_resource:
+        settings:
+            # Enable pagination
+            paginate: true
+            # If the paginatio is disbale, you can specify a limit
+            limit: false
+            # If the paginatio is enable, you can specify the allowed page size
+            allowed_paginate: [10, 20, 30]
+            # Default page size
+            default_page_size: 10
+            # Enable sorting
+            sortable: false
+            # Default sorting parameters
+            sorting: []
+            # Enable filtering
+            filterable: false
+            # Default filtering parameters
+            criteria: []
         resources:
             app.user:
                 driver: doctrine/orm # Also supported - doctrine/mongodb-odm.
@@ -56,6 +73,10 @@ Route configuration reference
                 flash: sylius.product.create # string
                 # Name of the property used to manage the position of the resource
                 sortable_position: position # string
+                # API request, version used by the serializer
+                serialization_version: null
+                # API request, groups used by the serializer
+                serialization_groups: []
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

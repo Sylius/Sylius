@@ -1,5 +1,59 @@
-Configuration
-=============
+Configuring your bundle
+=======================
+
+Creating a XmlMappingDriver
+---------------------------
+
+.. code-block:: php
+
+    class MyBundle extends AbstractResourceBundle
+    {
+        // You need to specify a prefix for your bundle
+        protected function getBundlePrefix()
+        {
+            return 'app_bundle_name';
+        }
+
+        // You need specify the namespace where are stored your models
+        protected function getModelNamespace()
+        {
+            return 'MyApp\MyBundle\Model';
+        }
+
+        // You can specify the path where are stored the doctrine mapping, by default this method will returns
+        // model. This path is relative to the Resources/config/doctrine/.
+        protected function getDoctrineMappingDirectory()
+        {
+            return 'model';
+        }
+    }
+
+
+Using the ResolveDoctrineTargetEntitiesPass
+-------------------------------------------
+
+.. code-block:: php
+
+    class MyBundle extends AbstractResourceBundle
+    {
+        // You need to specify a prefix for your bundle
+        protected function getBundlePrefix()
+        {
+            return 'app_bundle_name';
+        }
+
+        // You need to specify the mapping between your intefaces and your models. Like the following example you can
+        // get the classname of your model in the container (See the following chapater for more informations).
+        protected function getModelInterfaces()
+        {
+            return array(
+                'MyApp\MyBundle\ModelInterface' => 'sylius.model.resource.class',
+            );
+        }
+    }
+
+Configuring your resources
+==========================
 
 There are two ways to configure the resources used by this bundle. You can manage your configuration for all yours bundles (explained in Basic Configuration) or into yours bundles (explained in Advanced configuration).
 
@@ -45,6 +99,23 @@ At this step:
 
 Advanced configuration
 ----------------------
+
+.. note::
+
+    Since the 0.11 your bundle class must implement `ResourceBundleInterface`, you must list the supported doctrine driver.
+    The available drivers are SyliusResourceBundle::DRIVER_DOCTRINE_ORM, SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM or SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
+
+.. code-block:: php
+
+    class MyBundle extends AbstractResourceBundle
+    {
+        public static function getSupportedDrivers()
+        {
+            return array(
+                SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            );
+        }
+    }
 
 You need to expose a semantic configuration for your bundle. The following example show you a basic `Configuration` that the resource bundle needs to work.
 
