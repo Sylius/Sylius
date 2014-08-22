@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Twig;
 
 /**
- * Search landing page controller.
+ * Twig extension to handle search result object templates
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */

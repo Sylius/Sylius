@@ -28,8 +28,14 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  */
 class PropertyAccessorAdaptor extends PropertyAccessor
 {
+    /**
+     * @var
+     */
     protected $customAccessors;
 
+    /**
+     * @param array $customAccessors
+     */
     public function __construct($customAccessors = array())
     {
         foreach ($customAccessors as $customAccessorClass) {

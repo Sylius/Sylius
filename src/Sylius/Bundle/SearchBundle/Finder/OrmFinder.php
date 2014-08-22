@@ -16,7 +16,6 @@ use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * OrmFinder
@@ -163,7 +162,7 @@ class OrmFinder implements FinderInterface
             return $this->getResultsForTaxon($queryObject);
         }
 
-        throw new Exception("finder can't handle this currently, feel free to implement it!");
+        throw new \InvalidArgumentException("finder can't handle this currently, feel free to implement it!");
     }
 
     /**
@@ -172,17 +171,18 @@ class OrmFinder implements FinderInterface
     public function getResultsForTaxon(TaxonQuery $query)
     {
         if (isset($this->facetGroup)) {
-            $this->getConfiguredFilterSetsForFinders($this->facetGroup);
+            $this->initializeFacetGroup($this->facetGroup);
         }
 
+        // first get ALL products from the taxon to get their ids
         $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array());
 
-        // calculates the facets of the result set
         $ids = array();
         foreach ($paginator as $product) {
             $ids[] = $product->getId();
         }
 
+        // now apply any filtered facets to reduce the available products
         $result       = array();
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
@@ -226,7 +226,7 @@ class OrmFinder implements FinderInterface
     public function getResults(SearchStringQuery $query)
     {
         if (isset($this->facetGroup)) {
-            $this->getConfiguredFilterSetsForFinders($this->facetGroup);
+            $this->initializeFacetGroup($this->facetGroup);
         }
         // get ids and tags from full text search
         $result = $this->query($query->getSearchTerm(), $this->em);
@@ -239,6 +239,7 @@ class OrmFinder implements FinderInterface
             $modelIds = array_keys($modelIdsToTags);
 
             //filter the ids if searchParam is not all
+            // TODO: Will refactor pre-search filtering into a service based on the finder configuration
             if ($query->getSearchParam() != 'all' && $query->isDropdownFilterEnabled()) {
                 $preFilteredModelIds = $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam());
 
@@ -328,7 +329,7 @@ class OrmFinder implements FinderInterface
                 }
             }
 
-            $facets[$facetName] = $this->getFacet($idsFromOtherFacets, $this->config['filters']['facets'], $facetName, $result);
+            $facets[$facetName] = $this->buildFacet($idsFromOtherFacets, $this->config['filters']['facets'], $facetName, $result);
         }
 
         return $facets;
@@ -344,14 +345,14 @@ class OrmFinder implements FinderInterface
      *
      * @return mixed
      */
-    public function getFacet($idsFromOtherFacets, $facets, $givenFacetName, $result)
+    public function buildFacet($idsFromOtherFacets, $facets, $givenFacetName, $result)
     {
         // gathers the appearance of the elements
-        $rawFacets = $this->calculateRawFacets($idsFromOtherFacets, $result);
+        $rawFacets = $this->calculatedFacetContentsFromResults($idsFromOtherFacets, $result);
 
         // formats the data for sending out the presentation array
         $facetConfig = $facets[$givenFacetName];
-        $finalFacets[$givenFacetName] = array();
+        $thisFacet = array();
 
         if (isset($rawFacets[$givenFacetName])) {
 
@@ -361,23 +362,23 @@ class OrmFinder implements FinderInterface
 
                     foreach ($facetConfig['values'] as $key => $range) {
                         if ($facet >= $range['from'] && $facet <= $range['to']) {
-                            if (empty ($finalFacets[$givenFacetName][$key])) {
-                                $finalFacets[$givenFacetName][$key] = array('from' => $range['from'], 'to' => $range['to'], 'doc_count' => 1);
+                            if (empty ($thisFacet[$key])) {
+                                $thisFacet[$key] = array('from' => $range['from'], 'to' => $range['to'], 'doc_count' => 1);
                             } else {
-                                $finalFacets[$givenFacetName][$key]['doc_count'] += 1;
+                                $thisFacet[$key]['doc_count'] += 1;
                             }
                         }
 
                     }
 
-                    asort($finalFacets[$givenFacetName]);
+                    asort($thisFacet);
                 } else {
-                    $finalFacets[$givenFacetName][] = array('key' => $facet, 'doc_count' => $count);
+                    $thisFacet[] = array('key' => $facet, 'doc_count' => $count);
                 }
             }
         }
 
-        return $finalFacets[$givenFacetName];
+        return $thisFacet;
     }
 
     /**
@@ -395,7 +396,7 @@ class OrmFinder implements FinderInterface
             $filterName = key($filter);
 
             if ($facetName == preg_replace('/\d/', '', $filterName)) {
-                $filtersForFacet[] = array($filterName => $filter[key($filter)]);
+                $filtersForFacet[] = array($filterName => $filter[$filterName]);
             }
         }
 
@@ -434,37 +435,38 @@ class OrmFinder implements FinderInterface
 
             foreach ($filters as $separateFilter) {
                 $tags = unserialize($facet['tags']);
+                $key = key($separateFilter);
 
-                if ($separateFilter[key($separateFilter)] && $tags[strtolower(key($separateFilter))]) {
+                if ($separateFilter[$key] && $tags[strtolower($key)]) {
 
                     // range filtering
-                    if (is_numeric($tags[strtolower(key($separateFilter))])) {
-                        $range = explode("|", $separateFilter[key($separateFilter)]);
-                        if ($tags[strtolower(key($separateFilter))] >= $range[0] && $tags[strtolower(key($separateFilter))] <= $range[1]) {
-                            $result[$facet['itemId']] = $facet['tags'];
+                    if (is_numeric($tags[strtolower($key)])) {
+                        $range = explode("|", $separateFilter[$key]);
+                        if ($tags[strtolower($key)] >= $range[0] && $tags[strtolower($key)] <= $range[1]) {
+                            $result[] = $facet['itemId'];
                         }
                         // got the value, I don't want to move into more checks
                         continue;
                     }
 
                     // filtering on an array of values
-                    if (is_array($tags[strtolower(key($separateFilter))]) && in_array(ucfirst($separateFilter[key($separateFilter)]), $tags[strtolower(key($separateFilter))])) {
-                        $result[$facet['itemId']] = $facet['tags'];
+                    if (is_array($tags[strtolower($key)]) && in_array(ucfirst($separateFilter[$key]), $tags[strtolower($key)])) {
+                        $result[] = $facet['itemId'];
 
                         // got the value, I don't want to move into more checks
                         continue;
                     }
 
                     // filtering on a value
-                    if (is_string($tags[strtolower(key($separateFilter))]) && $separateFilter[key($separateFilter)] == $tags[strtolower(key($separateFilter))]) {
-                        $result[$facet['itemId']] = $facet['tags'];
+                    if (is_string($tags[strtolower($key)]) && $separateFilter[$key] == $tags[strtolower($key)]) {
+                        $result[] = $facet['itemId'];
                     }
 
                 }
             }
         }
 
-        return array_keys($result);
+        return $result;
     }
 
     /**
@@ -495,9 +497,11 @@ class OrmFinder implements FinderInterface
     }
 
     /**
+     * This functions unsets the configured filters based on the facet groups
+     *
      * @param $filterSetName
      */
-    private function getConfiguredFilterSetsForFinders($filterSetName)
+    private function initializeFacetGroup($filterSetName)
     {
         foreach ($this->config['filters']['facets'] as $name => $value) {
             if (!in_array($name, $this->config['filters']['facet_groups'][$filterSetName]['values'])) {
@@ -513,7 +517,7 @@ class OrmFinder implements FinderInterface
      *
      * @return array
      */
-    public function calculateRawFacets($idsFromOtherFacets, $result)
+    public function calculatedFacetContentsFromResults($idsFromOtherFacets, $result)
     {
         $rawFacets = array();
 

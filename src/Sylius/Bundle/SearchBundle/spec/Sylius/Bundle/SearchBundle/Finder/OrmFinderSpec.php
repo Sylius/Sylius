@@ -110,7 +110,7 @@ class OrmFinderSpec extends ObjectBehavior
             117 => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:4188;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
         );
 
-        $this->getFacet($idsFromOtherFacets, $ormFacets, $givenFacetName, $result)->shouldHaveCount(6);
+        $this->buildFacet($idsFromOtherFacets, $ormFacets, $givenFacetName, $result)->shouldHaveCount(6);
 
     }
 
@@ -140,7 +140,7 @@ class OrmFinderSpec extends ObjectBehavior
             117 => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:4188;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
         );
 
-        $this->calculateRawFacets($idsFromOtherFacets, $result)->shouldHaveCount(4);
+        $this->calculatedFacetContentsFromResults($idsFromOtherFacets, $result)->shouldHaveCount(4);
 
     }
 

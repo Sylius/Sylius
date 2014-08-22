@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\SearchBundle\Finder;
 
+use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
-
 
 /**
  * Elasticsearch Finder
@@ -82,7 +82,7 @@ class ElasticsearchFinder implements FinderInterface
      * @param                      $syliusIndex
      * @param QueryLoggerInterface $queryLogger
      */
-    public function __construct($searchRepository, $config, $productRepository, $syliusIndex, QueryLoggerInterface $queryLogger)
+    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, $syliusIndex, QueryLoggerInterface $queryLogger)
     {
         $this->searchRepository = $searchRepository;
         $this->config = $config;
@@ -163,7 +163,7 @@ class ElasticsearchFinder implements FinderInterface
             return $this->getResultsForTaxon($queryObject);
         }
 
-        throw new Exception("finder can't handle this currently, feel free to implement it!");
+        throw new \InvalidArgumentException("finder can't handle this currently, feel free to implement it!");
     }
 
     /**
@@ -172,7 +172,7 @@ class ElasticsearchFinder implements FinderInterface
     public function getResultsForTaxon(TaxonQuery $query)
     {
         if (isset($this->facetGroup)) {
-            $this->getConfiguredFilterSetsForFinders($this->facetGroup);
+            $this->initializeFacetGroup($this->facetGroup);
         }
 
         $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), 'product');
@@ -207,7 +207,7 @@ class ElasticsearchFinder implements FinderInterface
     public function getResults(SearchStringQuery $query)
     {
         if (isset($this->facetGroup)) {
-            $this->getConfiguredFilterSetsForFinders($this->facetGroup);
+            $this->initializeFacetGroup($this->facetGroup);
         }
 
         $elasticaQuery = $this->compileElasticSearchStringQuery(
@@ -363,7 +363,7 @@ class ElasticsearchFinder implements FinderInterface
     /**
      * @param $filterSetName
      */
-    private function getConfiguredFilterSetsForFinders($filterSetName)
+    private function initializeFacetGroup($filterSetName)
     {
         foreach ($this->config['filters']['facets'] as $name => $value) {
             if (!in_array($name, $this->config['filters']['facet_groups'][$filterSetName]['values'])) {

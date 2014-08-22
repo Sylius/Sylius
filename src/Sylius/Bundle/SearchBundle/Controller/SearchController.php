@@ -33,7 +33,7 @@ class SearchController extends ResourceController
     public function indexAction(Request $request)
     {
         $finder = $this->get('sylius_search.finder')
-          //  ->setTargetIndex('promotion')
+            ->setTargetIndex('product')
             ->setFacetGroup('search_set')
             ->find(new SearchStringQuery(
                     $request,

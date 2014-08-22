@@ -29,6 +29,10 @@ use Symfony\Component\PropertyAccess\Exception;
 class ProductAccessor extends PropertyAccessor
 {
 
+    /**
+     * @param $object
+     * @return bool
+     */
     public function canAccessObject($object)
     {
 
@@ -39,6 +43,11 @@ class ProductAccessor extends PropertyAccessor
         return false;
     }
 
+    /**
+     * @param $objectOrArray
+     * @param $propertyPath
+     * @return array|mixed
+     */
     public function accessObject($objectOrArray, $propertyPath)
     {
         try {

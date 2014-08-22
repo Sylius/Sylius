@@ -242,6 +242,7 @@ class OrmIndexer implements IndexerInterface
      */
     public function compileSearchableContent($fields, $element)
     {
+        // TODO maybe I can use the property accessor here
         $content = '';
         foreach (array_keys(array_slice($fields, 1)) as $field) {
             $func = 'get' . ucfirst($field);
@@ -273,7 +274,8 @@ class OrmIndexer implements IndexerInterface
      *
      * @return string
      */
-    public function nestedValues($node) {
+    public function nestedValues($node)
+    {
         if (is_array($node)) {
             $ret = '';
             foreach($node as $key => $val)
