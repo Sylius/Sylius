@@ -43,59 +43,49 @@ class PromotionTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         $checkerRegistry,
         $actionRegistry
-    )
-    {
+    ) {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('description', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('exclusive', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('usageLimit', 'integer', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('startsAt', 'date', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('endsAt', 'date', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('couponBased', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('rules', 'collection', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('actions', 'collection', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

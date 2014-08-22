@@ -42,13 +42,28 @@ class TaxonTypeSpec extends ObjectBehavior
         FormFactoryInterface $factory
     ) {
         $builder->getFormFactory()->willReturn($factory);
-        $builder->addEventSubscriber(
-            Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener')
-        )->shouldBeCalled();
 
-        $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('permalink', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('description', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder
+            ->addEventSubscriber(
+                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener')
+            )
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('name', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('permalink', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('description', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

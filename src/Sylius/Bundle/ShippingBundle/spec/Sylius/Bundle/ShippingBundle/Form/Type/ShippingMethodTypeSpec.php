@@ -51,35 +51,26 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('category', 'sylius_shipping_category_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add(
-                'categoryRequirement',
-                'choice',
-                Argument::type('array')
-            )
-            ->shouldBeCalled()
+            ->add('categoryRequirement', 'choice', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
             ->add('enabled', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('calculator', 'sylius_shipping_calculator_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -97,7 +88,6 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener'))
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -120,6 +110,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->add(Argument::any(), Argument::cetera())
             ->willReturn($builder)
         ;
+
         $builder
             ->addEventSubscriber(Argument::any())
             ->willReturn($builder)
@@ -129,19 +120,20 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->getConfigurationFormType()
             ->willReturn('sylius_shipping_calculator_flat_rate_configuration')
         ;
+
         $flatRateCalculator
             ->isConfigurable()
             ->willReturn(true)
-            ->shouldBeCalled()
         ;
+
         $perItemRateCalculator
             ->getConfigurationFormType()
             ->willReturn('sylius_shipping_calculator_per_item_rate_configuration')
         ;
+
         $perItemRateCalculator
             ->isConfigurable()
             ->willReturn(true)
-            ->shouldBeCalled()
         ;
 
         $calculatorRegistry
@@ -152,13 +144,13 @@ class ShippingMethodTypeSpec extends ObjectBehavior
                     'per_item_rate' => $perItemRateCalculator
                 )
             )
-            ->shouldBeCalled()
         ;
 
         $flatRateFormBuilder
             ->getForm()
             ->willReturn($flatRateForm)
         ;
+
         $builder
             ->create('configuration', 'sylius_shipping_calculator_flat_rate_configuration')
             ->willReturn($flatRateFormBuilder)
@@ -168,6 +160,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->getForm()
             ->willReturn($perItemForm)
         ;
+
         $builder
             ->create('configuration', 'sylius_shipping_calculator_per_item_rate_configuration')
             ->willReturn($perItemFormBuilder)

@@ -40,19 +40,16 @@ class OptionTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('presentation', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('values', 'collection', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -61,7 +58,12 @@ class OptionTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Option', 'validation_groups' => array()))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Option',
+                'validation_groups' => array()
+            ))
+            ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
