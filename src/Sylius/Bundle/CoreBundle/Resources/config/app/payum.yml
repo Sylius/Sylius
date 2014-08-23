@@ -1,3 +1,7 @@
+parameters:
+    payum.template.layout: SyliusPayumBundle::layout.html.twig
+    payum.template.obtain_credit_card: SyliusPayumBundle:Action:obtainCreditCard.html.twig
+
 payum:
     storages:
         Sylius\Component\Core\Model\Order: { doctrine: orm }
@@ -33,6 +37,11 @@ payum:
                 identifier: %be2bill.identifier%
                 password:   %be2bill.password%
                 sandbox:    %be2bill.sandbox%
+
+        stripe_checkout:
+            stripe_checkout:
+                publishable_key: %stripe.publishable_key%
+                secret_key: %stripe.secret_key%
 
         dummy:
             custom:
