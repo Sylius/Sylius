@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
 use Payum\Core\PaymentInterface as PayumPaymentInterface;
-use Payum\Core\Request\ModelRequestInterface;
+use Payum\Core\Request\ModelAwareInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -30,7 +30,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
     }
 
     function it_should_support_model_request_with_payment_model_and_not_empty_details(
-        ModelRequestInterface $request,
+        ModelAwareInterface $request,
         PaymentInterface $payment
     ) {
         $request->getModel()->willReturn($payment);
@@ -40,7 +40,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
     }
 
     function it_should_not_support_model_request_with_payment_model_and_empty_details(
-        ModelRequestInterface $request,
+        ModelAwareInterface $request,
         PaymentInterface $payment
     ) {
         $request->getModel()->willReturn($payment);
@@ -49,7 +49,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
         $this->supports($request)->shouldReturn(false);
     }
 
-    function it_should_not_support_model_request_with_not_payment_model(ModelRequestInterface $request)
+    function it_should_not_support_model_request_with_not_payment_model(ModelAwareInterface $request)
     {
         $request->getModel()->willReturn(new \stdClass);
 
@@ -70,7 +70,7 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
     }
 
     function it_should_execute_same_request_with_details_wrapped_by_array_object(
-        ModelRequestInterface $request,
+        ModelAwareInterface $request,
         PaymentInterface $payment,
         PayumPaymentInterface $payumPayment
     ) {

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1400d98224539891324a2f1296babe80",
+    "hash": "f0bbe31e509c19cdf6be433216fbaff2",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -148,6 +148,17 @@
             ],
             "authors": [
                 {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com",
+                    "homepage": "http://www.instaclick.com"
+                },
+                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
@@ -231,7 +242,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -307,7 +318,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -660,7 +671,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -714,7 +725,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1002,6 +1013,38 @@
                 "phpcr"
             ],
             "time": "2014-06-19 14:44:37"
+        },
+        {
+            "name": "fp/klarna-invoice",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/formapro/KlarnaInvoice.git",
+                "reference": "0bfa6c7db932b98dbcadb0665c5ed587c302d302"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/formapro/KlarnaInvoice/zipball/0bfa6c7db932b98dbcadb0665c5ed587c302d302",
+                "reference": "0bfa6c7db932b98dbcadb0665c5ed587c302d302",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.16",
+                "phpxmlrpc/phpxmlrpc": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Klarna.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Wrapper for the Klarna Invoice API",
+            "homepage": "http://developers.klarna.com",
+            "time": "2014-08-22 08:04:40"
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
@@ -2069,9 +2112,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2210,9 +2253,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2508,7 +2551,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2857,7 +2900,7 @@
                     "name": "Mathias Verraes",
                     "email": "mathias@verraes.net",
                     "homepage": "http://verraes.net",
-                    "role": "Developer of wrapped Money library"
+                    "role": "Developer"
                 }
             ],
             "description": "PHP implementation of Fowler's Money pattern",
@@ -3342,39 +3385,44 @@
         },
         {
             "name": "payum/payum",
-            "version": "0.9.3",
+            "version": "0.11.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "15a76b087ce2873d77e4c5e831a3a7a3f84c5ce3"
+                "reference": "f3130bac8580d23057200417359051ebf103ec49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/15a76b087ce2873d77e4c5e831a3a7a3f84c5ce3",
-                "reference": "15a76b087ce2873d77e4c5e831a3a7a3f84c5ce3",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/f3130bac8580d23057200417359051ebf103ec49",
+                "reference": "f3130bac8580d23057200417359051ebf103ec49",
                 "shasum": ""
             },
             "require": {
                 "ajbdev/authorizenet-php-api": "1.1.*",
                 "ext-soap": "*",
+                "fp/klarna-invoice": "0.1.*",
                 "klarna/checkout": "~1",
                 "kriswallsmith/buzz": "*",
                 "omnipay/common": "~2.0",
                 "paypal/rest-api-sdk-php": "0.5.*",
-                "php": ">=5.3.2"
+                "php": ">=5.3.2",
+                "stripe/stripe-php": "~1.0",
+                "twig/twig": "~1.0"
             },
             "replace": {
                 "payum/authorize-net-aim": "self.version",
                 "payum/be2bill": "self.version",
                 "payum/core": "self.version",
                 "payum/klarna-checkout": "self.version",
+                "payum/klarna-invoice": "self.version",
                 "payum/offline": "self.version",
                 "payum/omnipay-bridge": "self.version",
                 "payum/payex": "self.version",
                 "payum/paypal-express-checkout-nvp": "self.version",
                 "payum/paypal-ipn": "self.version",
                 "payum/paypal-pro-checkout-nvp": "self.version",
-                "payum/paypal-rest": "self.version"
+                "payum/paypal-rest": "self.version",
+                "payum/stripe": "self.version"
             },
             "require-dev": {
                 "doctrine/mongodb": "1.0.*@dev",
@@ -3383,7 +3431,7 @@
                 "ext-curl": "*",
                 "ext-pdo_sqlite": "*",
                 "omnipay/dummy": "~2.0",
-                "phpunit/phpunit": "3.7.*",
+                "phpunit/phpunit": "~4.0",
                 "psr/log": "~1.0",
                 "symfony/http-foundation": "~2",
                 "symfony/http-kernel": "~2",
@@ -3394,7 +3442,7 @@
                 "doctrine/mongodb-odm": "If you want to store models to mongo doctrin2 ODM",
                 "doctrine/orm": "If you want to store models to database using doctrin2 ORM",
                 "monolog/monolog": "In case you want to use PSR-3 logger",
-                "symfony/http-foundation": "If you want to use HttpRequestVerifier or ResponseInteractiveRequest from symfony's bridge",
+                "symfony/http-foundation": "If you want to use HttpRequestVerifier or HttpResponse reply from symfony's bridge",
                 "symfony/http-kernel": "If you want to use HttpRequestVerifier from symfony's bridge",
                 "symfony/routing": "If you want to use TokenFactory from symfony's bridge",
                 "zendframework/zend-db": "If you want to store models to Zend Db ORM"
@@ -3402,7 +3450,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.9-dev"
+                    "dev-master": "0.11-dev"
                 }
             },
             "autoload": {
@@ -3416,20 +3464,20 @@
             ],
             "authors": [
                 {
-                    "name": "Payum project",
-                    "homepage": "http://payum.forma-dev.com/"
-                },
-                {
                     "name": "Community contributions",
                     "homepage": "https://github.com/Payum/Payum/contributors"
                 },
                 {
                     "name": "Kotlyar Maksim",
                     "email": "kotlyar.maksim@gmail.com"
+                },
+                {
+                    "name": "Payum project",
+                    "homepage": "http://payum.org/"
                 }
             ],
-            "description": "Domain friendly payment framework. Paypal, payex, authorize.net, be2bill, omnipay, recurring paymens, instant notifications and many more",
-            "homepage": "http://payum.forma-dev.com",
+            "description": "Domain friendly payment framework. Paypal, payex, authorize.net, be2bill, omnipay, recurring payments, instant notifications and many more",
+            "homepage": "http://payum.org",
             "keywords": [
                 "authorize.net",
                 "be2bill",
@@ -3444,27 +3492,30 @@
                 "paypal express",
                 "paypal pro",
                 "paypal rest",
-                "recurring payment"
+                "recurring payment",
+                "stripe",
+                "stripe checkout",
+                "stripe.js"
             ],
-            "time": "2014-07-21 19:58:24"
+            "time": "2014-09-29 11:31:51"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "0.9.1",
+            "version": "0.11.0",
             "target-dir": "Payum/Bundle/PayumBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "ecd57e5c3f8432ae90682f9134d4f28f87c2d6c0"
+                "reference": "9ab96b28039108f127843497837bd6d58855eb74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/ecd57e5c3f8432ae90682f9134d4f28f87c2d6c0",
-                "reference": "ecd57e5c3f8432ae90682f9134d4f28f87c2d6c0",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/9ab96b28039108f127843497837bd6d58855eb74",
+                "reference": "9ab96b28039108f127843497837bd6d58855eb74",
                 "shasum": ""
             },
             "require": {
-                "payum/core": "0.9.*",
+                "payum/core": "0.11.*",
                 "php": ">=5.3.2",
                 "symfony/form": "~2.3",
                 "symfony/framework-bundle": "~2.3",
@@ -3476,8 +3527,8 @@
                 "omnipay/dummy": "~2.0",
                 "omnipay/paypal": "~2.0",
                 "omnipay/stripe": "~2.0",
-                "payum/payum": "0.9.*",
-                "phpunit/phpunit": "~3.7",
+                "payum/payum": "0.11.*",
+                "phpunit/phpunit": "~4.0",
                 "symfony/browser-kit": "~2.3",
                 "symfony/class-loader": "~2.3"
             },
@@ -3488,12 +3539,13 @@
                 "payum/omnipay-bridge": "If you want to use omnipay provided gateways",
                 "payum/payex": "If you want to use payex gateway",
                 "payum/paypal-express-checkout-nvp": "If you want to use paypal express checkout nvp gateway",
-                "payum/paypal-pro-checkout-nvp": "If you want to use paypal pro checkout nvp gateway"
+                "payum/paypal-pro-checkout-nvp": "If you want to use paypal pro checkout nvp gateway",
+                "payum/stripe": "If you want to manage stripe.js or checkout payments"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.9-dev"
+                    "dev-master": "0.11-dev"
                 }
             },
             "autoload": {
@@ -3507,20 +3559,20 @@
             ],
             "authors": [
                 {
-                    "name": "Payum project",
-                    "homepage": "http://payum.forma-dev.com/"
-                },
-                {
                     "name": "Community contributions",
                     "homepage": "https://github.com/Payum/PayumBundle/contributors"
                 },
                 {
                     "name": "Kotlyar Maksim",
                     "email": "kotlyar.maksim@gmail.com"
+                },
+                {
+                    "name": "Payum project",
+                    "homepage": "http://payum.org/"
                 }
             ],
             "description": "Rich payment solutions for symfony2. Paypal, payex, authorize.net, be2bill, omnipay, recurring payments, instant notifications and many more",
-            "homepage": "http://payum.forma-dev.com",
+            "homepage": "http://payum.org",
             "keywords": [
                 "authorize.net",
                 "be2bill",
@@ -3533,9 +3585,13 @@
                 "paypal",
                 "paypal express checkout",
                 "paypal pro checkout",
-                "recurring payment"
+                "recurring payment",
+                "stripe",
+                "stripe checkout",
+                "stripe.js",
+                "symfony"
             ],
-            "time": "2014-09-04 11:42:38"
+            "time": "2014-09-11 07:31:31"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3571,9 +3627,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3739,9 +3795,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3753,6 +3809,42 @@
                 "type"
             ],
             "time": "2014-01-09 22:37:17"
+        },
+        {
+            "name": "phpxmlrpc/phpxmlrpc",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gggeek/phpxmlrpc.git",
+                "reference": "9b4a6c23f9d77c7c1e487f97d66b739b3cacf1bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gggeek/phpxmlrpc/zipball/9b4a6c23f9d77c7c1e487f97d66b739b3cacf1bf",
+                "reference": "9b4a6c23f9d77c7c1e487f97d66b739b3cacf1bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/xmlrpc.inc",
+                    "lib/xmlrpcs.inc"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A php library for building xmlrpc clients and servers",
+            "homepage": "http://gggeek.github.io/phpxmlrpc/",
+            "keywords": [
+                "webservices",
+                "xmlrpc"
+            ],
+            "time": "2014-06-15 19:48:04"
         },
         {
             "name": "psr/log",
@@ -4086,6 +4178,54 @@
                 "tree"
             ],
             "time": "2013-06-23 16:53:41"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v1.17.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "281c5b2717b50bc4cc8c4842b13856ff3431c878"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/281c5b2717b50bc4cc8c4842b13856ff3431c878",
+                "reference": "281c5b2717b50bc4cc8c4842b13856ff3431c878",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/Stripe/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "time": "2014-08-01 05:58:56"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5264,7 +5404,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -6151,7 +6291,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -6240,8 +6380,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",

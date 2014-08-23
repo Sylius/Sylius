@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Request;
 
-use Payum\Core\Request\BaseStatusRequest;
+use Payum\Core\Request\BaseGetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-class StatusRequest extends BaseStatusRequest
+class GetStatus extends BaseGetStatus
 {
     /**
      * {@inheritdoc}

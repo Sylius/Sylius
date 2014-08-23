@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\PayumBundle\Payum\Request;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-class StatusRequestSpec extends ObjectBehavior
+class GetStatusSpec extends ObjectBehavior
 {
     function let()
     {
@@ -23,12 +23,12 @@ class StatusRequestSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest');
+        $this->shouldHaveType('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus');
     }
 
     function it_extends_base_status_class()
     {
-        $this->shouldHaveType('Payum\Core\Request\BaseStatusRequest');
+        $this->shouldHaveType('Payum\Core\Request\BaseGetStatus');
     }
 
     function it_is_new_when_marked_as_new()
