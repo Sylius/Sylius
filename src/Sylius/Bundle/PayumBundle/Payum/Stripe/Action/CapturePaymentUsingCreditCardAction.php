@@ -16,9 +16,23 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 
 class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 {
+    /**
+     * @var CurrencyHelper
+     */
+    private $currencyHelper;
+
+    /**
+     * @param CurrencyHelper $currencyHelper
+     */
+    public function __construct(CurrencyHelper $currencyHelper)
+    {
+        $this->currencyHelper = $currencyHelper;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -34,6 +48,8 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 
         $creditCard = $obtainCreditCardRequest->getCreditCard();
 
+        $total = $this->currencyHelper->convertAmount($order->getTotal());
+
         $payment->setDetails(array(
             'card' => new SensitiveValue(array(
                 'number'      => $creditCard->getNumber(),
@@ -41,7 +57,7 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
                 'expiryYear'  => $creditCard->getExpiryYear(),
                 'cvv'         => $creditCard->getSecurityCode()
             )),
-            'amount' => round($order->getTotal() / 100, 2),
+            'amount' => round($total / 100, 2),
             'currency' => $order->getCurrency(),
         ));
     }
