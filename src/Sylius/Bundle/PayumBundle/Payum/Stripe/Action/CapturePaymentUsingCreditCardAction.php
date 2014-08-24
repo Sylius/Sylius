@@ -16,21 +16,21 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Component\Currency\Converter\CurrencyConverter;
 
 class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 {
     /**
-     * @var CurrencyHelper
+     * @var CurrencyConverter
      */
-    private $currencyHelper;
+    private $currencyConverter;
 
     /**
-     * @param CurrencyHelper $currencyHelper
+     * @param CurrencyConverter $currencyConverter
      */
-    public function __construct(CurrencyHelper $currencyHelper)
+    public function __construct(CurrencyConverter $currencyConverter)
     {
-        $this->currencyHelper = $currencyHelper;
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -48,7 +48,7 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 
         $creditCard = $obtainCreditCardRequest->getCreditCard();
 
-        $total = $this->currencyHelper->convertAmount($order->getTotal());
+        $total = $this->currencyConverter->convert($order->getTotal(), $order->getCurrency());
 
         $payment->setDetails(array(
             'card' => new SensitiveValue(array(

@@ -51,7 +51,7 @@
 
         <!-- Stripe -->
         <service id="sylius.payum.stripe.action.capture_payment_using_credit_card" class="%sylius.payum.stripe.action.capture_payment_using_credit_card.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.currency" />
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" factory="omnipay" />
         </service>
 
