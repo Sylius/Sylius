@@ -10,3 +10,4 @@ E-Commerce PHP library for creating and managing sales orders.
    order_and_items
    adjustments
    order_states
+   summary

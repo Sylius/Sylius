@@ -8,3 +8,4 @@ Powerful products catalog for PHP applications.
 
    installation
    models
+   summary

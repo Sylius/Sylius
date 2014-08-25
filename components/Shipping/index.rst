@@ -7,3 +7,4 @@ Shipments and shipping methods management for PHP E-Commerce apps. It contains f
    :numbered:
 
    installation
+   summary

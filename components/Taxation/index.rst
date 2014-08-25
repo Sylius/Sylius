@@ -7,3 +7,4 @@ Tax rates and tax classification for PHP apps. You can define different tax cate
    :numbered:
 
    installation
+   summary

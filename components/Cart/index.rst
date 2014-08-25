@@ -7,3 +7,4 @@ Common models, services and interface to handle a shopping cart in PHP e-commerc
    :numbered:
 
    installation
+   summary

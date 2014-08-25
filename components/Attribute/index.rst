@@ -10,3 +10,4 @@ Sylius component makes it easier to handle different types of attributes and att
    installation
    attributes_and_values
    implementing_subject_interface
+   summary
