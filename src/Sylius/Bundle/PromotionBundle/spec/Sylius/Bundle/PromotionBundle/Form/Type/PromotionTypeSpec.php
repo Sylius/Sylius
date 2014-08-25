@@ -70,13 +70,13 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('startsAt', 'date', Argument::any())
+            ->add('startsAt', 'datetime', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('endsAt', 'date', Argument::any())
+            ->add('endsAt', 'datetime', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

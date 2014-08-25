@@ -5,8 +5,8 @@
         {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
         {{ form_row(form.description) }}
         {{ form_row(form.usageLimit) }}
-        {{ form_row(form.startsAt) }}
-        {{ form_row(form.endsAt) }}
+        {{ form_row(form.startsAt, { 'attr': { 'class': 'datetimepicker' } }) }}
+        {{ form_row(form.endsAt, { 'attr': { 'class': 'datetimepicker' } }) }}
         {{ form_row(form.couponBased) }}
         {{ form_row(form.exclusive) }}
         {{ form_widget(form._token) }}
