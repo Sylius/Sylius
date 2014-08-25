@@ -1,66 +1,16 @@
-Configuring your bundle
-=======================
-
-Creating a XmlMappingDriver
----------------------------
-
-.. code-block:: php
-
-    class MyBundle extends AbstractResourceBundle
-    {
-        // You need to specify a prefix for your bundle
-        protected function getBundlePrefix()
-        {
-            return 'app_bundle_name';
-        }
-
-        // You need specify the namespace where are stored your models
-        protected function getModelNamespace()
-        {
-            return 'MyApp\MyBundle\Model';
-        }
-
-        // You can specify the path where are stored the doctrine mapping, by default this method will returns
-        // model. This path is relative to the Resources/config/doctrine/.
-        protected function getDoctrineMappingDirectory()
-        {
-            return 'model';
-        }
-    }
-
-
-Using the ResolveDoctrineTargetEntitiesPass
--------------------------------------------
-
-.. code-block:: php
-
-    class MyBundle extends AbstractResourceBundle
-    {
-        // You need to specify a prefix for your bundle
-        protected function getBundlePrefix()
-        {
-            return 'app_bundle_name';
-        }
-
-        // You need to specify the mapping between your intefaces and your models. Like the following example you can
-        // get the classname of your model in the container (See the following chapater for more informations).
-        protected function getModelInterfaces()
-        {
-            return array(
-                'MyApp\MyBundle\ModelInterface' => 'sylius.model.resource.class',
-            );
-        }
-    }
-
 Configuring your resources
 ==========================
 
-There are two ways to configure the resources used by this bundle. You can manage your configuration for all yours bundles (explained in Basic Configuration) or into yours bundles (explained in Advanced configuration).
+Now you need to configure your resources! It means that you will tell to this bundle what model, controller, repository, etc.
+is used for each configured resource. It exists two ways for doing that, we will call them **Basic configuration** and
+*Advanced configuration*. The first one is pretty easy because your just need to write configuration (in your config.yml, for example).
+The second one allows you to embed configuration into your bundles but you will need to write some lines of code.
+We will explain the both ways in the next chapters.
 
 Basic configuration
 -------------------
 
-In your `app/config.yml` (or in an imported configuration file), you need to define what resources you want to use :
+In your ``app/config.yml`` (or in an imported configuration file), you need to define what resources you want to use :
 
 .. code-block:: yaml
 
@@ -100,10 +50,11 @@ At this step:
 Advanced configuration
 ----------------------
 
-.. note::
+First you must list the supported doctrine driver by your bundle, the available drivers are:
 
-    Since the 0.11 your bundle class must implement `ResourceBundleInterface`, you must list the supported doctrine driver.
-    The available drivers are SyliusResourceBundle::DRIVER_DOCTRINE_ORM, SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM or SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
+* ``SyliusResourceBundle::DRIVER_DOCTRINE_ORM``
+* ``SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM``
+* ``SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM``
 
 .. code-block:: php
 
@@ -117,7 +68,11 @@ Advanced configuration
         }
     }
 
-You need to expose a semantic configuration for your bundle. The following example show you a basic `Configuration` that the resource bundle needs to work.
+.. note::
+
+    Since the ``0.11`` your bundle class must implement ``ResourceBundleInterface``.
+
+You need to expose a semantic configuration for your bundle. The following example show you a basic ``Configuration`` that the resource bundle needs to work.
 
 .. code-block:: php
 
@@ -178,7 +133,7 @@ You need to expose a semantic configuration for your bundle. The following examp
         }
     }
 
-The resource bundle provide you `AbstractResourceExtension`, your bundle extension have to extends it.
+The resource bundle provide you ``AbstractResourceExtension``, your bundle extension have to extends it.
 
 .. code-block:: php
 
@@ -209,14 +164,14 @@ The resource bundle provide you `AbstractResourceExtension`, your bundle extensi
         }
     }
 
-The last parameter of the `AbstractResourceExtension::configure()` allows you to define what functionalities you want to use :
+The last parameter of the ``AbstractResourceExtension::configure()`` allows you to define what functionalities you want to use :
 
- * CONFIGURE_LOADER : load yours service definitions located in `$applicationName`
- * CONFIGURE_PARAMETERS : set to the container the configured resource classes using the pattern `my_app.serviceType.resourceName.class`
-   For example : `sylius.controller.product.class`. For a form, it is a bit different : 'sylius.form.type.product.class'
- * CONFIGURE_VALIDATORS : set to the container the configured validation groups using the pattern `my_app.validation_group.modelName`
-   For example `sylius.validation_group.product`
- * CONFIGURE_DATABASE : Load the database driver, available drivers are `doctrine/orm`, `doctrine/mongodb-odm` and `doctrine/phpcr-odm`
+ * CONFIGURE_LOADER : load yours service definitions located in ``$applicationName``
+ * CONFIGURE_PARAMETERS : set to the container the configured resource classes using the pattern ``my_app.serviceType.resourceName.class``
+   For example : ``sylius.controller.product.class``. For a form, it is a bit different : 'sylius.form.type.product.class'
+ * CONFIGURE_VALIDATORS : set to the container the configured validation groups using the pattern ``my_app.validation_group.modelName``
+   For example ``sylius.validation_group.product``
+ * CONFIGURE_DATABASE : Load the database driver, available drivers are ``doctrine/orm``, ``doctrine/mongodb-odm`` and ``doctrine/phpcr-odm``
 
 At this step:
 
@@ -260,7 +215,7 @@ Combining the both configurations
 ---------------------------------
 
 For now, with the advanced configuration you can not use serveral drivers but they can be overwritten. Example, you want to use
-`doctrine/odm` for `my_other_entity` (see previous chapter), you just need to add this extra configuration to the `app/config.yml`.
+``doctrine/odm`` for ``my_other_entity`` (see previous chapter), you just need to add this extra configuration to the ``app/config.yml``.
 
 .. code-block:: yaml
 

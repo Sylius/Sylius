@@ -29,5 +29,7 @@ Please note that this bundle **is not an admin generator**. It won't create form
    Updating resource <update_resource>
    Deleting resource <delete_resource>
    Managing flash messages <flash>
+   Doctrine tools <doctrine>
+   Extra tools <extra_tools>
    Defining custom action <custom_actions>
    summary
