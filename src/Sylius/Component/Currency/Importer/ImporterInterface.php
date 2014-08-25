@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Currency\Provider;
+namespace Sylius\Component\Currency\Importer;
 
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-/**
- * This service returns all the available currencies.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- */
-interface CurrencyProviderInterface
+interface ImporterInterface
 {
     /**
-     * @return CurrencyInterface[]
+     * @param array $options
      */
-    public function getAvailableCurrencies();
+    public function configure(array $options = array());
+
+    /**
+     * @param CurrencyInterface[] $managedCurrencies
+     */
+    public function import(array $managedCurrencies = array());
 }
