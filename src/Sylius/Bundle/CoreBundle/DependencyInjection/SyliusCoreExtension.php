@@ -62,7 +62,12 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+        list($config, $loader) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
 
         $loader->load('mailer/mailer.xml');
         $loader->load('state_machine.xml');
@@ -121,6 +126,10 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
     protected function loadCheckoutConfiguration(array $config, ContainerBuilder $container)
     {
         foreach ($config['steps'] as $name => $step) {

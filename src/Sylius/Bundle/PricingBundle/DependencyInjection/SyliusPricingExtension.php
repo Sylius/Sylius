@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Pricing system dependency injection.
+ * Pricing extension
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
