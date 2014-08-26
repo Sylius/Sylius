@@ -19,13 +19,6 @@ namespace Sylius\Bundle\SearchBundle\Entity;
 interface SearchIndexInterface {
 
     /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId();
-
-    /**
      * Set itemId
      *
      * @param integer $itemId

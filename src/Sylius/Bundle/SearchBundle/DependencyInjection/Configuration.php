@@ -33,22 +33,18 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('sylius_search');
 
         $this->addQueryLoggerSection($rootNode);
-
         $this->addFilterSection($rootNode);
-
         $this->addDriverSection($rootNode);
-
         $this->addFormSection($rootNode);
-
         $this->addIndexesSection($rootNode);
-
         $this->addAccessorsSection($rootNode);
+        $this->addClassesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * adds form section
+     * Adds form section
      *
      * @param ArrayNodeDefinition $node
      */
@@ -64,7 +60,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * adds filter section
+     * Adds filter section
      *
      * @param ArrayNodeDefinition $node
      */
@@ -125,7 +121,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * adds driver section
+     * Adds driver section
      *
      * @param ArrayNodeDefinition $node
      */
@@ -142,6 +138,8 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Adds query logger section
+     *
      * @param ArrayNodeDefinition $node
      */
     private function addQueryLoggerSection(ArrayNodeDefinition $node)
@@ -161,6 +159,8 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Adds indexes section
+     *
      * @param ArrayNodeDefinition $node
      */
     private function addIndexesSection(ArrayNodeDefinition $node)
@@ -184,6 +184,11 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
+    /**
+     * Adds custom accessors section
+     *
+     * @param ArrayNodeDefinition $node
+     */
     private function addAccessorsSection(ArrayNodeDefinition $node)
     {
         $node
@@ -193,6 +198,29 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
             ;
+    }
+
+    /**
+     * Adds `classes` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('classes')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('driver')->defaultValue('doctrine/orm')->end()
+                            ->scalarNode('model')->defaultValue('Sylius\\Bundle\\SearchBundle\\Entity\\SearchIndex')->end()
+                            ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\SearchBundle\\Controller\\SearchController')->end()
+                            ->scalarNode('repository')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 
 }

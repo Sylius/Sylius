@@ -16,15 +16,8 @@ namespace Sylius\Bundle\SearchBundle\Entity;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-interface SearchLogInterface {
-
-    /**
-     * Get id.
-     *
-     * @return integer
-     */
-    public function getId();
-
+interface SearchLogInterface
+{
     /**
      * Set searchString
      *

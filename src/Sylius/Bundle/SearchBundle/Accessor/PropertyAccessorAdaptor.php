@@ -48,7 +48,6 @@ class PropertyAccessorAdaptor extends PropertyAccessor
      * @param string|PropertyPathInterface $propertyPath
      *
      * @return mixed
-     * @throws \Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
      */
     public function getValue($objectOrArray, $propertyPath)
     {
