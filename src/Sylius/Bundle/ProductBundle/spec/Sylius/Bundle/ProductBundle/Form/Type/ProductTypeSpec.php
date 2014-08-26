@@ -40,43 +40,36 @@ class ProductTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('masterVariant', 'sylius_product_variant', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('description', 'textarea', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('attributes', 'collection', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('options', 'sylius_product_option_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('metaKeywords', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('metaDescription', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -85,7 +78,12 @@ class ProductTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Product', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Product',
+                'validation_groups' => array('sylius')
+            ))
+            ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

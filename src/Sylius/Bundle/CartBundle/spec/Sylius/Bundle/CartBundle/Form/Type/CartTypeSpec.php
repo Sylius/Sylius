@@ -39,7 +39,6 @@ class CartTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('items', 'collection', array('type' => 'sylius_cart_item'))
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

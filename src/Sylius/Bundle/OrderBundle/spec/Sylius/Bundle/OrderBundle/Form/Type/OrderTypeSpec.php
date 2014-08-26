@@ -38,7 +38,8 @@ class OrderTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_items_collection_field(FormBuilderInterface $builder)
     {
-        $builder->add('items', 'collection', Argument::any())->shouldBeCalled();
+        $builder->add('items', 'collection', Argument::any())
+            ->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

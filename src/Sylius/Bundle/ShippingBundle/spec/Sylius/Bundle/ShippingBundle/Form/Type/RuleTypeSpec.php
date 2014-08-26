@@ -42,12 +42,18 @@ class RuleTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
-        $builder->addEventSubscriber(Argument::any())->willReturn($builder);
-        $builder->getFormFactory()->willReturn($factory);
+        $builder
+            ->getFormFactory()
+            ->willReturn($factory)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::any())
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('type', 'sylius_shipping_rule_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -58,12 +64,18 @@ class RuleTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
-        $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
-        $builder->getFormFactory()->willReturn($factory);
+        $builder
+            ->getFormFactory()
+            ->willReturn($factory)
+        ;
+
+        $builder
+            ->add(Argument::any(), Argument::cetera())
+            ->willReturn($builder)
+        ;
 
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener'))
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

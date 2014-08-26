@@ -40,19 +40,16 @@ class PrototypeTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('attributes', 'sylius_product_attribute_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('options', 'sylius_product_option_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -61,7 +58,11 @@ class PrototypeTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Prototype', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Prototype',
+                'validation_groups' => array('sylius')
+            ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

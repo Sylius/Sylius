@@ -40,19 +40,16 @@ class CurrencyTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('code', 'currency', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('exchangeRate', 'number', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('enabled', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -61,9 +58,12 @@ class CurrencyTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(
-            array('data_class' => 'Currency', 'validation_groups' => array('sylius'))
-        )->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Currency',
+                'validation_groups' => array('sylius')
+            ))
+            ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

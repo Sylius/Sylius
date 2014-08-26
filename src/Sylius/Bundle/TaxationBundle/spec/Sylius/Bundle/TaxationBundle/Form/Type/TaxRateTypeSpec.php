@@ -45,28 +45,28 @@ class TaxRateTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('category', 'sylius_tax_category_choice', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('amount', 'percent', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('includedInPrice', 'checkbox', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('calculator', 'sylius_tax_calculator_choice', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

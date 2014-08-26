@@ -36,14 +36,18 @@ class VariantTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Variant',
-            'validation_groups' => array()
-        ))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Variant',
+                'validation_groups' => array()
+            ))
+            ->shouldBeCalled();
 
-        $resolver->setDefaults(array(
-            'master' => false
-        ))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'master' => false
+            ))
+            ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }

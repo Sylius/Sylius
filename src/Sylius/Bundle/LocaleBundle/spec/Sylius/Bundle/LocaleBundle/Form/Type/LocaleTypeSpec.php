@@ -40,13 +40,11 @@ class LocaleTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('code', 'locale', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('enabled', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -55,7 +53,12 @@ class LocaleTypeSpec extends ObjectBehavior
 
     function it_should_define_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'Locale', 'validation_groups' => array('sylius')))->shouldBeCalled();
+        $resolver
+            ->setDefaults(array(
+                'data_class' => 'Locale',
+                'validation_groups' => array('sylius')
+            ))
+            ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
