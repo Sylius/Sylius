@@ -16,19 +16,19 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverter;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 {
     /**
-     * @var CurrencyConverter
+     * @var CurrencyConverterInterface
      */
     private $currencyConverter;
 
     /**
-     * @param CurrencyConverter $currencyConverter
+     * @param CurrencyConverterInterface $currencyConverter
      */
-    public function __construct(CurrencyConverter $currencyConverter)
+    public function __construct(CurrencyConverterInterface $currencyConverter)
     {
         $this->currencyConverter = $currencyConverter;
     }
