@@ -25,9 +25,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class SyliusCurrencyBundle extends Bundle
 {
     /**
-     * Return array of currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
