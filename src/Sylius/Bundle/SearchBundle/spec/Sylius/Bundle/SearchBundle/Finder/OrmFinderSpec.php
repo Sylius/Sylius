@@ -114,36 +114,6 @@ class OrmFinderSpec extends ObjectBehavior
 
     }
 
-    public function it_calculates_the_raw_facets()
-    {
-        $idsFromOtherFacets = array(
-            0 => 89,
-            1 => 67,
-            2 => 30,
-            3 => 103,
-            4 => 40,
-            5 => 62,
-            6 => 1,
-            7 => 42,
-            8 => 117,
-        );
-
-        $result = array(
-            89  => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:705;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-            67  => 'a:4:{s:6:"taxons";a:2:{i:0;s:8:"T-Shirts";i:1;s:9:"SuperTees";}s:5:"price";i:2840;s:7:"made_of";a:1:{i:0;s:9:"Polyester";}s:5:"color";a:3:{i:0;s:3:"Red";i:1;s:4:"Blue";i:2;s:5:"Green";}}',
-            30  => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:3905;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-            103 => 'a:4:{s:6:"taxons";a:2:{i:0;s:8:"T-Shirts";i:1;s:9:"SuperTees";}s:5:"price";i:6222;s:7:"made_of";a:1:{i:0;s:24:"Polyester 10% / Wool 90%";}s:5:"color";a:3:{i:0;s:3:"Red";i:1;s:4:"Blue";i:2;s:5:"Green";}}',
-            40  => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:4089;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-            62  => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:5979;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-            1   => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:449;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-            42  => 'a:4:{s:6:"taxons";a:2:{i:0;s:8:"Stickers";i:1;s:11:"Stickypicky";}s:5:"price";i:8330;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-            117 => 'a:4:{s:6:"taxons";a:2:{i:0;s:5:"Books";i:1;s:9:"Bookmania";}s:5:"price";i:4188;s:7:"made_of";a:0:{}s:5:"color";a:0:{}}',
-        );
-
-        $this->calculatedFacetContentsFromResults($idsFromOtherFacets, $result)->shouldHaveCount(4);
-
-    }
-
     public function it_performs_a_fulltext_query(
         EntityManagerInterface $entityManager,
         AbstractQuery $query,

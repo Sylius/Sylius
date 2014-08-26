@@ -336,7 +336,7 @@ class OrmFinder implements FinderInterface
     }
 
     /**
-     * Builds an individual facet category
+     * Builds facets
      *
      * @param $idsFromOtherFacets
      * @param $facets
@@ -347,38 +347,63 @@ class OrmFinder implements FinderInterface
      */
     public function buildFacet($idsFromOtherFacets, $facets, $givenFacetName, $result)
     {
-        // gathers the appearance of the elements
-        $rawFacets = $this->calculatedFacetContentsFromResults($idsFromOtherFacets, $result);
+        /*
+         * it is mandatory to build all the facets from scratch since they are always based
+         * on the $idsFromOtherFacets
+         */
+        $calculatedFacets = array();
 
-        // formats the data for sending out the presentation array
-        $facetConfig = $facets[$givenFacetName];
-        $thisFacet = array();
+        foreach ($result as $id => $serializedTags) {
+            if (!in_array($id, $idsFromOtherFacets)) {
+                continue;
+            }
 
-        if (isset($rawFacets[$givenFacetName])) {
+            $tags = unserialize($serializedTags);
 
-            foreach ($rawFacets[$givenFacetName] as $facet => $count) {
+            foreach ($tags as $name => $value) {
+                if ($name != $givenFacetName) {
+                    continue;
+                }
 
-                if (is_numeric($facet) && $facetConfig['type'] == 'range') {
+                if (is_array($value)) {
+                    foreach ($value as $v) {
+                        if (!isset($calculatedFacets[$name][$v])) {
+                            $calculatedFacets[$name][$v] = array('key' => $v, 'doc_count' => 1);
+                        } else {
+                            $calculatedFacets[$name][$v]['doc_count'] += 1;
+                        }
+                    }
+                }
 
-                    foreach ($facetConfig['values'] as $key => $range) {
-                        if ($facet >= $range['from'] && $facet <= $range['to']) {
-                            if (empty ($thisFacet[$key])) {
-                                $thisFacet[$key] = array('from' => $range['from'], 'to' => $range['to'], 'doc_count' => 1);
+                if (is_numeric($value)) {
+                    foreach ($facets[$name]['values'] as $key => $range) {
+                        if ($value >= $range['from'] && $value <= $range['to']) {
+                            if (empty($calculatedFacets[$name][$key])) {
+                                $calculatedFacets[$name][$key] = array('from' => $range['from'], 'to' => $range['to'], 'doc_count' => 1);
                             } else {
-                                $thisFacet[$key]['doc_count'] += 1;
+                                $calculatedFacets[$name][$key]['doc_count'] += 1;
                             }
                         }
-
                     }
+                    asort($calculatedFacets[$name]);
+                }
 
-                    asort($thisFacet);
-                } else {
-                    $thisFacet[] = array('key' => $facet, 'doc_count' => $count);
+                if (is_string($value)) {
+                    if (!isset($calculatedFacets[$name][$value])) {
+                        $calculatedFacets[$name][$value] = array('key' => $value, 'doc_count' => 1);
+                    } else {
+                        $calculatedFacets[$name][$value]['doc_count'] += 1;
+                    }
                 }
             }
         }
 
-        return $thisFacet;
+        // I want to return an empty array in case this facet has no tags
+        if (!isset($calculatedFacets[$givenFacetName])) {
+            return array();
+        }
+
+        return $calculatedFacets[$givenFacetName];
     }
 
     /**
@@ -510,48 +535,5 @@ class OrmFinder implements FinderInterface
         }
 
     }
-
-    /**
-     * @param $idsFromOtherFacets
-     * @param $result
-     *
-     * @return array
-     */
-    public function calculatedFacetContentsFromResults($idsFromOtherFacets, $result)
-    {
-        $rawFacets = array();
-
-        foreach ($result as $id => $serializedTags) {
-            if (!in_array($id, $idsFromOtherFacets)) {
-                continue;
-            }
-
-            $tags = unserialize($serializedTags);
-
-            foreach ($tags as $name => $value) {
-
-                if (is_array($value)) {
-                    foreach ($value as $v) {
-                        $rawFacets[$name][] = $v;
-                    }
-                }
-
-                if (is_numeric($value)) {
-                    $rawFacets[$name][] = intval($value);
-                }
-
-                if (is_string($value)) {
-                    $rawFacets[$name][] = $value;
-                }
-            }
-        }
-
-        foreach ($rawFacets as $name => $facet) {
-            $rawFacets[$name] = array_count_values($facet);
-        }
-
-        return $rawFacets;
-    }
-
 
 } 
