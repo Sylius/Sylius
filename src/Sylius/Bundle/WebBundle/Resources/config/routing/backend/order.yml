@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_order_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexAction
@@ -13,7 +13,7 @@ sylius_backend_order_index:
             paginate: 20
 
 sylius_backend_order_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.order:createAction
@@ -22,7 +22,7 @@ sylius_backend_order_create:
             redirect: sylius_backend_order_show
 
 sylius_backend_order_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
@@ -31,7 +31,7 @@ sylius_backend_order_update:
             redirect: sylius_backend_order_show
 
 sylius_backend_order_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.order:deleteAction
@@ -40,7 +40,7 @@ sylius_backend_order_delete:
             redirect: sylius_backend_order_index
 
 sylius_backend_order_show:
-    pattern: /{id}
+    path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:showAction
@@ -50,7 +50,7 @@ sylius_backend_order_show:
             arguments: [$id]
 
 sylius_backend_order_by_user:
-    pattern: /u/{id}
+    path: /u/{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:indexByUserAction
@@ -60,7 +60,7 @@ sylius_backend_order_by_user:
             sorting: { updatedAt: desc }
 
 sylius_backend_order_release_inventory:
-    pattern: /release-inventory/{id}
+    path: /release-inventory/{id}
     methods: [PUT]
     defaults:
         _controller: sylius.controller.order:releaseInventoryAction

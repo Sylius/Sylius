@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_general_settings:
-    pattern: /general
+    path: /general
     defaults:
         _controller: sylius.controller.settings:updateAction
         namespace: general
@@ -10,7 +10,7 @@ sylius_backend_general_settings:
         template: SyliusWebBundle:Backend/Settings:general.html.twig
 
 sylius_backend_taxation_settings:
-    pattern: /taxation
+    path: /taxation
     defaults:
         _controller: sylius.controller.settings:updateAction
         namespace: taxation

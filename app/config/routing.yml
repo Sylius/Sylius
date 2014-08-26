@@ -41,10 +41,10 @@ hwi_oauth_redirect:
     prefix: /login
 
 amazon_login:
-    pattern: /login/check-amazon
+    path: /login/check-amazon
 
 facebook_login:
-    pattern: /login/check-facebook
+    path: /login/check-facebook
 
 google_login:
-    pattern: /login/check-google
+    path: /login/check-google

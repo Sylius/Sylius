@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 #
 sylius_backend_promotion_coupon_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.promotion_coupon:indexAction
@@ -11,7 +11,7 @@ sylius_backend_promotion_coupon_index:
             criteria: { promotion: $promotionId }
 
 sylius_backend_promotion_coupon_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.promotion_coupon:createAction
@@ -22,7 +22,7 @@ sylius_backend_promotion_coupon_create:
                 parameters: {'id': $promotionId}
 
 sylius_backend_promotion_coupon_update:
-    pattern: /edit
+    path: /edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.promotion_coupon:updateAction
@@ -33,7 +33,7 @@ sylius_backend_promotion_coupon_update:
                 parameters: {'id': $promotionId}
 
 sylius_backend_promotion_coupon_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.promotion_coupon:deleteAction
@@ -42,7 +42,7 @@ sylius_backend_promotion_coupon_delete:
             redirect: referer
 
 sylius_backend_promotion_coupon_generate:
-    pattern: /generate
+    path: /generate
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.promotion_coupon:generateAction
