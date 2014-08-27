@@ -23,6 +23,10 @@ force the framework to treat the request as specified method.
 
     <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}">
         <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit">
+            Delete
+        </button>
+    </form>
 
 On submit, the delete action with the method DELETE, will remove and flush the resource.
 Then, by default it redirects to ``app_user_index`` to display the users index, but like for other actions - it's customizable.
