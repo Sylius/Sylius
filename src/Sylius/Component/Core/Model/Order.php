@@ -133,7 +133,9 @@ class Order extends Cart implements OrderInterface
     public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
-        $this->setEmail($this->user->getEmail());
+        if ($this->user) {
+            $this->setEmail($this->user->getEmail());
+        }
 
         return $this;
     }

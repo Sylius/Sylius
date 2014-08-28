@@ -75,7 +75,10 @@
                                 </a>
                             </strong>
                         {% else %}
-                            {{ order.email }}
+                            {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
+                            <strong>
+                                <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
+                            </strong>
                         {% endif %}
                     </td>
                 </tr>

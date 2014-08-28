@@ -11,10 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\UserEvent;
-use FOS\UserBundle\FOSUserEvents;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -65,6 +61,7 @@ class SecurityStep extends CheckoutStep
         if ($guestForm->handleRequest($request)->isValid()) {
             $this->getManager()->persist($order);
             $this->getManager()->flush();
+
             return $this->complete();
         }
         return $this->renderStep($context, $this->getGuestForm($order));

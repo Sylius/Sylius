@@ -351,6 +351,7 @@ sylius:
         create_header: New order
         created_at: Creation time
         general_info: General info
+        guest: Guest customer
         id: ID
         index_header: Current orders
         inventory_tracking: Inventory tracking

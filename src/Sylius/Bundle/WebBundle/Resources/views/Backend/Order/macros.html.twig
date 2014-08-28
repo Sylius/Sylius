@@ -40,7 +40,10 @@
                 {% if order.user %}
                     <p>{{ order.user.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a></p>
                 {% else %}
-                    <p>{{ order.email }}</p>
+                    <p>
+                        {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
+                        <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
+                    </p>
                 {% endif %}
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
@@ -101,7 +104,8 @@
                         {{ order.user.email }}
                     </a>
                 {% else %}
-                    {{ order.email }}
+                    {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}
+                    <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
                 {% endif %}
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
