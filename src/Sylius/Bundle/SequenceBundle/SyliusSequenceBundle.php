@@ -11,17 +11,17 @@
 
 namespace Sylius\Bundle\SequenceBundle;
 
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler\RegisterGeneratorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sequence system for ecommerce Symfony2 applications.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusSequenceBundle extends Bundle
+class SyliusSequenceBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
