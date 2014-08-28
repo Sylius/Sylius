@@ -71,7 +71,7 @@ class SecurityStep extends CheckoutStep
      * Render step.
      *
      * @param ProcessContextInterface $context
-     * @param FormInterface $guestForm
+     * @param FormInterface           $guestForm
      *
      * @return Response
      */
@@ -98,6 +98,7 @@ class SecurityStep extends CheckoutStep
      * Get guest form.
      *
      * @param OrderInterface $order
+     *
      * @return FormInterface
      */
     protected function getGuestForm(OrderInterface $order)

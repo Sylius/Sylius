@@ -57,6 +57,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * Set customer email
      *
      * @param string $email
+     *
      * @return mixed
      */
     public function setEmail($email);
