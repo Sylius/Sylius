@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\LocaleBundle;
 
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Locale bundle.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class SyliusLocaleBundle extends Bundle
+class SyliusLocaleBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
