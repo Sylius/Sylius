@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 #
 sylius_backend_taxon_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
@@ -13,7 +13,7 @@ sylius_backend_taxon_create:
                 parameters: {'id': $taxonomyId}
 
 sylius_backend_taxon_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.taxon:updateAction
@@ -24,7 +24,7 @@ sylius_backend_taxon_update:
                 parameters: {'id': $taxonomyId}
 
 sylius_backend_taxon_product_index:
-    pattern: /{id}/products
+    path: /{id}/products
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexByTaxonIdAction
@@ -33,7 +33,7 @@ sylius_backend_taxon_product_index:
             paginate: 30
 
 sylius_backend_taxon_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.taxon:deleteAction

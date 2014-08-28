@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_product_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
@@ -12,7 +12,7 @@ sylius_backend_product_index:
             arguments: [$criteria, $sorting, $deleted]
 
 sylius_backend_product_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product:createAction
@@ -21,7 +21,7 @@ sylius_backend_product_create:
             redirect: sylius_backend_product_show
 
 sylius_backend_product_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT, POST]
     defaults:
         _controller: sylius.controller.product:updateAction
@@ -30,7 +30,7 @@ sylius_backend_product_update:
             redirect: sylius_backend_product_show
 
 sylius_backend_product_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product:deleteAction
@@ -39,7 +39,7 @@ sylius_backend_product_delete:
             redirect: sylius_backend_product_index
 
 sylius_backend_product_history:
-    pattern: /{id}/history
+    path: /{id}/history
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:historyAction
@@ -49,7 +49,7 @@ sylius_backend_product_history:
             arguments: [$id]
 
 sylius_backend_product_show:
-    pattern: /{id}
+    path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:showAction

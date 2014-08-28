@@ -39,7 +39,6 @@ class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('amount', 'sylius_money', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

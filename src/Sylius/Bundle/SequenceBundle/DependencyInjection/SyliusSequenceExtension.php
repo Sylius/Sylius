@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Resource system extension.
+ * Sequence extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
@@ -26,7 +26,12 @@ class SyliusSequenceExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list ($config, ) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+        list ($config) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
 
         $container->setParameter('sylius.sequence.generators', $config['generators']);
     }

@@ -2,21 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius_cart_summary:
-    pattern: /
+    path: /
     defaults: { _controller: sylius.controller.cart:summaryAction }
 
 sylius_cart_save:
-    pattern: /save
+    path: /save
     defaults: { _controller: sylius.controller.cart:saveAction }
 
 sylius_cart_clear:
-    pattern: /clear
+    path: /clear
     defaults: { _controller: sylius.controller.cart:clearAction }
 
 sylius_cart_item_add:
-    pattern: /add
+    path: /add
     defaults: { _controller: sylius.controller.cart_item:addAction }
 
 sylius_cart_item_remove:
-    pattern: /{id}/remove
+    path: /{id}/remove
     defaults: { _controller: sylius.controller.cart_item:removeAction }

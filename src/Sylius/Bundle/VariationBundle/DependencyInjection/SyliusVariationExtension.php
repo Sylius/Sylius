@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * Sylius product catalog system container extension.
+ * Product catalog extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

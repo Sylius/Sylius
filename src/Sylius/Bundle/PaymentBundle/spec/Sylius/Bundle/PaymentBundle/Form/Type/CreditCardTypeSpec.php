@@ -21,58 +21,52 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CreditCardTypeSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->beConstructedWith('CreditCard', array('sylius'));
     }
 
-    public function it_is_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    public function it_builds_form_with_proper_fields(FormBuilder $builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('type', 'choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('cardholderName', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('number', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('securityCode', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('expiryMonth', 'choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('expiryYear', 'choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $this->buildForm($builder, array());
     }
 
-    public function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
+    function it_defines_assigned_data_class_and_validation_groups(OptionsResolverInterface $resolver)
     {
         $resolver
             ->setDefaults(array(

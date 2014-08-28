@@ -42,7 +42,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_shipped_if_all_shipments_devliered(
+    function it_marks_order_as_shipped_if_all_shipments_delivered(
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
@@ -57,7 +57,7 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_partially_shipped_if_not_all_shipments_devliered(
+    function it_marks_order_as_partially_shipped_if_not_all_shipments_delivered(
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2

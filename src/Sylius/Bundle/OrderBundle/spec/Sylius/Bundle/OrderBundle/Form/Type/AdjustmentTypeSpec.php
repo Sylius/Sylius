@@ -38,9 +38,20 @@ class AdjustmentTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
-        $builder->add('label', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('description', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('amount', 'money', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder
+            ->add('label', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('description', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('amount', 'money', Argument::any())
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

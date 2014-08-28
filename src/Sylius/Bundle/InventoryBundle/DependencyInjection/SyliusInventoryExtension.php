@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Inventory dependency injection extension.
+ * Inventory extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -33,7 +33,12 @@ class SyliusInventoryExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE);
+        list($config) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE
+        );
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
@@ -46,7 +51,10 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         $container->setParameter('sylius.model.inventory_unit.class', $classes['inventory_unit']['model']);
 
         if (array_key_exists('repository', $classes['inventory_unit'])) {
-            $container->setParameter('sylius.repository.inventory_unit.class', $classes['inventory_unit']['repository']);
+            $container->setParameter(
+                'sylius.repository.inventory_unit.class',
+                $classes['inventory_unit']['repository']
+            );
         }
 
         $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
@@ -54,7 +62,10 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         if (isset($config['events'])) {
             $listenerDefinition = $container->getDefinition('sylius.listener.inventory');
             foreach ($config['events'] as $event) {
-                $listenerDefinition->addTag('kernel.event_listener', array('event' => $event, 'method' => 'onInventoryChange'));
+                $listenerDefinition->addTag(
+                    'kernel.event_listener',
+                    array('event' => $event, 'method' => 'onInventoryChange')
+                );
             }
         }
 

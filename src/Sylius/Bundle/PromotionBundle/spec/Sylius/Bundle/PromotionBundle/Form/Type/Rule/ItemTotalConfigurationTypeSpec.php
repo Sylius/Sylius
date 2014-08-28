@@ -39,13 +39,11 @@ class ItemTotalConfigurationTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('amount', 'sylius_money', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('equal', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_index:
-    pattern: /
+    path: /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_backend_dashboard
         permanent: true
 
 sylius_backend_dashboard:
-    pattern: /dashboard
+    path: /dashboard
     defaults: { _controller: sylius.controller.backend.dashboard:mainAction }
 
 sylius_backend_user:

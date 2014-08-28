@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_product_prototype_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_prototype:indexAction
@@ -13,7 +13,7 @@ sylius_backend_product_prototype_index:
                 name: desc
 
 sylius_backend_product_prototype_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_prototype:createAction
@@ -22,7 +22,7 @@ sylius_backend_product_prototype_create:
             redirect: sylius_backend_product_prototype_index
 
 sylius_backend_product_prototype_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.product_prototype:updateAction
@@ -31,7 +31,7 @@ sylius_backend_product_prototype_update:
             redirect: sylius_backend_product_prototype_index
 
 sylius_backend_product_prototype_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_prototype:deleteAction
@@ -39,7 +39,7 @@ sylius_backend_product_prototype_delete:
             redirect: sylius_backend_product_prototype_index
 
 sylius_backend_product_prototype_build:
-    pattern: /{id}/build
+    path: /{id}/build
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_prototype:buildAction

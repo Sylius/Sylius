@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Settings system extension.
+ * Settings extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
@@ -32,7 +32,12 @@ class SyliusSettingsExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE);
+        list($config) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE
+        );
 
         $classes = $config['classes'];
         $parameterClasses = $classes['parameter'];

@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderNumberListenerSpec extends ObjectBehavior
 {
-    public function let(NumberListener $listener)
+    function let(NumberListener $listener)
     {
         $this->beConstructedWith($listener);
     }

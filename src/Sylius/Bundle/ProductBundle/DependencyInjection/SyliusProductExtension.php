@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
- * Sylius product catalog system container extension.
+ * Product catalog extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -27,7 +27,12 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
+        $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+        );
     }
 
     /**
@@ -41,6 +46,10 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         $this->prependVariation($container, $config);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
     private function prependAttribute(ContainerBuilder $container, array $config)
     {
         if (!$container->hasExtension('sylius_attribute')) {
@@ -62,6 +71,10 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         );
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
     private function prependVariation(ContainerBuilder $container, array $config)
     {
         if (!$container->hasExtension('sylius_variation')) {

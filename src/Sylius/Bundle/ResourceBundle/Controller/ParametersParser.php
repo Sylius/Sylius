@@ -56,7 +56,7 @@ class ParametersParser
             }
 
             if (is_string($value) && 0 === strpos($value, 'expr:')) {
-                $parameters = $this->expression->evaluate(substr($value, 5));
+                $parameters[$key] = $this->expression->evaluate(substr($value, 5));
             }
         }
 

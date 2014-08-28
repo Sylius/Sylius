@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_payment_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment:indexAction
@@ -13,7 +13,7 @@ sylius_backend_payment_index:
                 id: desc
 
 sylius_backend_payment_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.payment:createAction
@@ -22,7 +22,7 @@ sylius_backend_payment_create:
                 redirect: sylius_backend_payment_index
 
 sylius_backend_payment_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.payment:updateAction
@@ -31,7 +31,7 @@ sylius_backend_payment_update:
             redirect: sylius_backend_payment_index
 
 sylius_backend_payment_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.payment:deleteAction
@@ -40,7 +40,7 @@ sylius_backend_payment_delete:
             redirect: sylius_backend_payment_index
 
 sylius_backend_payment_history:
-    pattern: /{id}/history
+    path: /{id}/history
     methods: [GET]
     defaults:
         _controller: sylius.controller.payment:historyAction
@@ -48,7 +48,7 @@ sylius_backend_payment_history:
             template: SyliusWebBundle:Backend/Payment:history.html.twig
 
 sylius_backend_payment_update_state:
-    pattern: /update-state/{id}/{transition}
+    path: /update-state/{id}/{transition}
     methods: [PUT]
     defaults:
         _controller: sylius.controller.payment:updateStateAction

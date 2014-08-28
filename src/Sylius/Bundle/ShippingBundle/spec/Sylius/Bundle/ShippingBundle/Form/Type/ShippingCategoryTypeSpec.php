@@ -40,13 +40,11 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('description', 'textarea', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

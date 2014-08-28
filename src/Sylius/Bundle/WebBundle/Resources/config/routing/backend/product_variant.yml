@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_product_variant_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_variant:createAction
@@ -13,7 +13,7 @@ sylius_backend_product_variant_create:
                 parameters: {'id': $productId}
 
 sylius_backend_product_variant_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.product_variant:updateAction
@@ -24,7 +24,7 @@ sylius_backend_product_variant_update:
                 parameters: {'id': $productId}
 
 sylius_backend_product_variant_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
@@ -35,7 +35,7 @@ sylius_backend_product_variant_delete:
                 parameters: {'id': $productId}
 
 sylius_backend_product_variant_generate:
-    pattern: /generate
+    path: /generate
     methods: [PATCH]
     defaults:
         _controller: sylius.controller.product_variant:generateAction

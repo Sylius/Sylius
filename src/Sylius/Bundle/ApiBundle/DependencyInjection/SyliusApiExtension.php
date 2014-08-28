@@ -31,7 +31,12 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
+        $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+        );
     }
 
     /**
@@ -47,13 +52,11 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
 
         $container->prependExtensionConfig('fos_oauth_server', array(
             'db_driver'           => 'orm',
-
             'client_class'        => $config['classes']['api_client']['model'],
             'access_token_class'  => $config['classes']['api_access_token']['model'],
             'refresh_token_class' => $config['classes']['api_refresh_token']['model'],
             'auth_code_class'     => $config['classes']['api_auth_code']['model'],
-
-            'service' => array('user_provider' => 'fos_user.user_provider')
+            'service'             => array('user_provider' => 'fos_user.user_provider')
         ));
     }
 

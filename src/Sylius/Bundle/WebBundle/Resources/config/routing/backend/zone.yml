@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_zone_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.zone:indexAction
@@ -11,7 +11,7 @@ sylius_backend_zone_index:
             sortable: true
 
 sylius_backend_zone_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.zone:createAction
@@ -20,7 +20,7 @@ sylius_backend_zone_create:
             redirect: sylius_backend_zone_show
 
 sylius_backend_zone_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.zone:updateAction
@@ -29,7 +29,7 @@ sylius_backend_zone_update:
             redirect: sylius_backend_zone_show
 
 sylius_backend_zone_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.zone:deleteAction
@@ -38,7 +38,7 @@ sylius_backend_zone_delete:
             redirect: sylius_backend_zone_index
 
 sylius_backend_zone_show:
-    pattern: /{id}
+    path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.zone:showAction
