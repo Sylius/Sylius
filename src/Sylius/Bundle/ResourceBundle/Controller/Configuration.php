@@ -161,6 +161,15 @@ class Configuration
         return $this->parameters->get('template', $this->getTemplateName($name));
     }
 
+    public function getFilterFormType()
+    {
+        if ($this->isFilterable()) {
+            return $this->parameters->get('filter_form', sprintf('%s_%s', $this->bundlePrefix, $this->resourceName));
+        }
+
+        return null;
+    }
+
     public function getFormType()
     {
         return $this->parameters->get('form', sprintf('%s_%s', $this->bundlePrefix, $this->resourceName));

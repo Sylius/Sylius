@@ -154,8 +154,10 @@ class ResourceController extends FOSRestController
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData($resources)
+            ->setData(array(
+                $this->config->getPluralResourceName() => $resources,
+                'filterForm' => $this->getFilterForm($request)->createView(),
+            ))
         ;
 
         return $this->handleView($view);
@@ -239,18 +241,9 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function moveUpAction(Request $request)
-    {
-        return $this->move($request, 1);
-    }
-
-    public function moveDownAction(Request $request)
-    {
-        return $this->move($request, -1);
-    }
-
     /**
-     * @param  Request          $request
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request)
@@ -265,6 +258,35 @@ class ResourceController extends FOSRestController
         return $this->redirectHandler->redirectToIndex();
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function moveUpAction(Request $request)
+    {
+        return $this->move($request, 1);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function moveDownAction(Request $request)
+    {
+        return $this->move($request, -1);
+    }
+
+    /**
+     * @param Request $request
+     * @param string  $transition
+     * @param string  $graph
+     *
+     * @return RedirectResponse
+     *
+     * @throws NotFoundHttpException
+     */
     public function updateStateAction(Request $request, $transition, $graph = null)
     {
         $resource = $this->findOr404($request);
@@ -373,6 +395,20 @@ class ResourceController extends FOSRestController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return FormInterface|null
+     */
+    public function getFilterForm(Request $request = null)
+    {
+        if (null !== $formName = $this->config->getFilterFormType()) {
+            return $this->createForm($formName)->handleRequest($request);
+        }
+
+        return null;
+    }
+
+    /**
      * @return PagerfantaFactory
      */
     protected function getPagerfantaFactory()
@@ -380,6 +416,11 @@ class ResourceController extends FOSRestController
         return new PagerfantaFactory('page', 'paginate');
     }
 
+    /**
+     * @param View $view
+     *
+     * @return Response
+     */
     protected function handleView(View $view)
     {
         $handler = $this->get('fos_rest.view_handler');
