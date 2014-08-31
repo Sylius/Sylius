@@ -20,6 +20,7 @@
         <parameter key="sylius.form.type.price_calculator_choice.class">Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType</parameter>
         <parameter key="sylius.form.extension.priceable.class">Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension</parameter>
         <parameter key="sylius.form.type.price_calculator.volume_based.class">Sylius\Bundle\PricingBundle\Form\Type\VolumeBasedConfigurationType</parameter>
+        <parameter key="sylius.form.type.price_calculator.volume_based.configuration.class">Sylius\Bundle\PricingBundle\Form\Type\VolumePriceConfigurationType</parameter>
 
         <parameter key="sylius.registry.price_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.price_calculator.class">Sylius\Component\Pricing\Calculator\DelegatingCalculator</parameter>
@@ -39,6 +40,9 @@
         </service>
         <service id="sylius.form.type.price_calculator.volume_based" class="%sylius.form.type.price_calculator.volume_based.class%">
             <tag name="form.type" alias="sylius_price_calculator_volume_based" />
+        </service>
+        <service id="sylius.form.type.price_calculator.volume_based.configuration" class="%sylius.form.type.price_calculator.volume_based.configuration.class%">
+            <tag name="form.type" alias="sylius_price_calculator_volume_based_configuration" />
         </service>
 
         <service id="sylius.price_calculator" class="%sylius.price_calculator.class%">
