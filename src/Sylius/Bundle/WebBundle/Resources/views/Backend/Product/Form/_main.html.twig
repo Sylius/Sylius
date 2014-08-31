@@ -20,7 +20,7 @@
                 {% if form.masterVariant.pricingCalculator.vars.value == 'volume_based' %}
                     <div>
                         {{ form_label(form.masterVariant.pricingConfiguration) }}
-                        {% include "SyliusWebBundle:Backend/Product/Form/_volume_based_config.html.twig" %}
+                        {% include "SyliusWebBundle::Backend/Product/Form/_volume_based_config.html.twig" %}
                     </div>
                 {% else %}
                     {{ form_row(form.masterVariant.pricingConfiguration) }}
