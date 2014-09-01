@@ -65,6 +65,17 @@ class AddressSpec extends ObjectBehavior
         $this->getFullName()->shouldReturn('John Doe');
     }
 
+    function it_has_no_phone_number_by_default()
+    {
+        $this->getPhoneNumber()->shouldReturn(null);
+    }
+
+    function its_phone_number_is_mutable()
+    {
+        $this->setPhoneNumber('+48555123456');
+        $this->getPhoneNumber()->shouldReturn('+48555123456');
+    }
+
     function it_has_no_country_by_default()
     {
         $this->getCountry()->shouldReturn(null);
