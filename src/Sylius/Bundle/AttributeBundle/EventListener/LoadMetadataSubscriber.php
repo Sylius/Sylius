@@ -75,7 +75,6 @@ class LoadMetadataSubscriber implements EventSubscriber
             $attributeMapping = array(
                 'fieldName'     => 'attribute',
                 'targetEntity'  => $class['attribute']['model'],
-                'inversedBy'    => 'attributes',
                 'joinColumns'   => array(array(
                     'name'                 => 'attribute_id',
                     'referencedColumnName' => 'id',
