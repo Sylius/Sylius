@@ -52,7 +52,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('payment_security_token')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\PayumBundle\\Model\\PaymentSecurityToken')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                             ->end()
                         ->end()
