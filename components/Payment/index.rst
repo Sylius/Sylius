@@ -12,3 +12,4 @@ PHP library which provides abstraction of payments management. It ships with def
 
    installation
    summary
+   model
