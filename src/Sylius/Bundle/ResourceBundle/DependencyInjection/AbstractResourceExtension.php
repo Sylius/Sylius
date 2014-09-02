@@ -102,11 +102,15 @@ abstract class AbstractResourceExtension extends Extension
     {
         foreach ($classes as $model => $serviceClasses) {
             foreach ($serviceClasses as $service => $class) {
+                if (false !== strpos('form', $service)) {
+                    $service = sprintf('%s.type', $service);
+                }
+
                 $container->setParameter(
                     sprintf(
                         '%s.%s.%s.class',
                         $this->applicationName,
-                        $service === 'form' ? 'form.type' : $service,
+                        $service,
                         $model
                     ),
                     $class

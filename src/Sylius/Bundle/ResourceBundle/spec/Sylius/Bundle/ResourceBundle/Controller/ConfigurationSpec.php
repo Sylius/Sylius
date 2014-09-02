@@ -147,6 +147,20 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getFormType()->shouldReturn('sylius_variant');
     }
 
+    function it_generates_filter_form_type(Parameters $parameters)
+    {
+        $parameters->get('filterable', Argument::any())->willReturn(true);
+        $parameters->get('filter_form', 'sylius_product')->willReturn('sylius_product');
+        $this->getFilterFormType()->shouldReturn('sylius_product');
+
+        $parameters->get('filter_form', 'sylius_product')->willReturn('sylius_variant');
+        $this->getFilterFormType()->shouldReturn('sylius_variant');
+
+        $parameters->get('filterable', Argument::any())->willReturn(false);
+        $parameters->get('filter_form', 'sylius_product')->willReturn('sylius_variant');
+        $this->getFilterFormType()->shouldReturn(null);
+    }
+
     function it_generates_route_names()
     {
         $this->getRouteName('index')->shouldReturn('sylius_product_index');
