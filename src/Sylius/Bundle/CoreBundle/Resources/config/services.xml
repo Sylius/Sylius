@@ -463,6 +463,8 @@
             <argument type="service" id="sylius.repository.user_oauth" />
         </service>
 
+        <service id="sylius.payments.payment_manager" alias="sylius.payum.payment_manager" />
+
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">
             <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius" id="sylius" priority="255" />
         </service>
