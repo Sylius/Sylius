@@ -29,6 +29,14 @@ sylius_backend_product_update:
             template: SyliusWebBundle:Backend/Product:update.html.twig
             redirect: sylius_backend_product_show
 
+sylius_backend_product_revert:
+    path: /{id}/revert/{version}
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product:revertAction
+        _sylius:
+            redirect: sylius_backend_product_show
+
 sylius_backend_product_delete:
     path: /{id}
     methods: [DELETE]
