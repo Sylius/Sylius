@@ -58,6 +58,22 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             'auth_code_class'     => $config['classes']['api_auth_code']['model'],
             'service'             => array('user_provider' => 'fos_user.user_provider')
         ));
+
+        if (!$container->hasExtension('jms_serializer')) {
+            throw new \Exception('JMSSerializerBundle must be registered in kernel.');
+        }
+
+        $directories = array(
+            'sylius-core'     => array('namespace_prefix' => 'Sylius\\Component\\Core', 'path' => '@SyliusCoreBundle/Resources/config/serializer'),
+            'sylius-shipping' => array('namespace_prefix' => 'Sylius\\Component\\Shipping', 'path' => '@SyliusShippingBundle/Resources/config/serializer'),
+            'sylius-taxation' => array('namespace_prefix' => 'Sylius\\Component\\Taxation', 'path' => '@SyliusTaxationBundle/Resources/config/serializer'),
+        );
+
+        $container->prependExtensionConfig('jms_serializer', array(
+            'metadata' => array(
+                'directories' => $directories
+            )
+        ));
     }
 
 }

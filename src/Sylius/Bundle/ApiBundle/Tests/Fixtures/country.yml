@@ -1,0 +1,10 @@
+Sylius\Component\Addressing\Model\Country:
+    poland:
+        name: Poland
+        isoName: POL
+    germany:
+        name: Germany
+        isoName: GER
+    france:
+        name: France
+        isoName: FRA

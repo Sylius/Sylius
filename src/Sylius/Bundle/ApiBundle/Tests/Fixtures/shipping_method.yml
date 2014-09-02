@@ -1,0 +1,19 @@
+Sylius\Component\Core\Model\ShippingMethod:
+    ups:
+        name: UPS
+        description: Shipping internationally via UPS
+        enabled: true
+        zone: @germany_and_france_zone
+        calculator: flat_rate
+        configuration:
+            amount: 4000
+    fedex:
+        name: DHL
+        description: Local shippingk
+        zone: @poland_zone
+        enabled: false
+        calculator: flexible_rate
+        configuration:
+            first_item_cost: 4000
+            additional_item_cost: 50
+            additional_item_limit: 5
