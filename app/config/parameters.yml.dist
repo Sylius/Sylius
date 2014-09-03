@@ -18,6 +18,8 @@ parameters:
 
     sylius.currency:                  EUR
 
+    sylius.currency_importer.open_exchange_rates: EDITME
+
     sylius.cache:
         type: file_system
 

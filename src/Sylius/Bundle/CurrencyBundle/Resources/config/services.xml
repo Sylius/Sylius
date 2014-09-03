@@ -21,6 +21,9 @@
         <parameter key="sylius.currency_converter.class">Sylius\Component\Currency\Converter\CurrencyConverter</parameter>
         <parameter key="sylius.currency_provider.class">Sylius\Component\Currency\Provider\CurrencyProvider</parameter>
 
+        <parameter key="sylius.currency_importer.european_central_bank.class">Sylius\Component\Currency\Importer\EuropeanCentralBankImporter</parameter>
+        <parameter key="sylius.currency_importer.open_exchange_rates.class">Sylius\Component\Currency\Importer\OpenExchangeRatesImporter</parameter>
+
         <parameter key="sylius.form.type_extension.money.class">Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension</parameter>
     </parameters>
 
@@ -40,12 +43,29 @@
             <argument type="service" id="session" />
             <argument>%sylius.money.currency%</argument>
         </service>
+
         <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
             <argument type="service" id="sylius.repository.currency" />
         </service>
+
         <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
             <argument type="service" id="sylius.repository.currency" />
         </service>
+
+        <service id="sylius.currency_importer.european_central_bank" class="%sylius.currency_importer.european_central_bank.class%">
+            <argument type="service" id="sylius.manager.currency" />
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+        <service id="sylius.currency_importer.ecb" alias="sylius.currency_importer.european_central_bank" />
+
+        <service id="sylius.currency_importer.open_exchange_rates" class="%sylius.currency_importer.open_exchange_rates.class%">
+            <argument type="service" id="sylius.manager.currency" />
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="collection">
+                <argument>%sylius.currency_importer.open_exchange_rates%</argument>
+            </argument>
+        </service>
+        <service id="sylius.currency_importer.oer" alias="sylius.currency_importer.open_exchange_rates" />
     </services>
 
 </container>
