@@ -24,9 +24,16 @@
 
 {{ form_errors(form) }}
 
+{% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
 <form action="{{ path('sylius_backend_order_update', {'id': order.id, '_method': 'PUT'}) }}" method="post" class="form-horizontal" novalidate>
     <input type="hidden" name="_method" value="PUT">
     {% include 'SyliusWebBundle:Backend/Order:_form.html.twig' %}
     {{ update() }}
 </form>
+{% else %}
+<div class="well">
+    <h3>{{ 'sylius.order.immutable_warning'|trans }}</h3>
+</div>
+{% endif %}
+
 {% endblock %}

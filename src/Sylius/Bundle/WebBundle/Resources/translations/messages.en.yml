@@ -402,6 +402,7 @@ sylius:
         user: User
         currency: Currency
         state: State
+        immutable_warning: Already shipped orders are immutable.
         comment:
             header: Order comments
             comment: Comment

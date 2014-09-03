@@ -20,7 +20,9 @@
 <div class="page-header">
     <div class="actions-menu">
         {% if not order.deleted %}
-            {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+            {% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
+                {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+            {% endif %}
             {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
         {% endif %}
         <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
