@@ -34,7 +34,7 @@
     </div>
     <div class="col-md-6 checkout-new-customer">
         <div class="well">
-            <form action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
+            <form action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
                 <fieldset>
                     <legend>{{ 'sylius.checkout.security.new_customer'|trans }}</legend>
                     {{ form_widget(registration_form) }}

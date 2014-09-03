@@ -9,7 +9,7 @@
 
 {{ form_errors(form) }}
 
-<form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
+<form method="post" action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
 
 <fieldset>
 {% for shipment in order.shipments %}
@@ -24,7 +24,7 @@
 {{ form_widget(form._token) }}
 
 <div class="form-actions">
-    <a href="{{ path('sylius_checkout_display', {'stepName': context.previousStep.name}) }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
+    <a href="{{ path(context.process.displayRoute, {'stepName': context.previousStep.name}) }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.checkout.back'|trans }}</a> &nbsp;
     <button type="submit" class="btn btn-primary btn-lg">{{ 'sylius.checkout.forward'|trans }} <i class="icon-chevron-right"></i></button>
 </div>
 

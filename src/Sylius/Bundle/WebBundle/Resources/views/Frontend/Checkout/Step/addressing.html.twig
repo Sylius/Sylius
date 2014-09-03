@@ -16,7 +16,7 @@
 
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
 
-<form method="post" action="{{ path('sylius_checkout_forward', {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
+<form method="post" action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
 
 {{ form_errors(form) }}
 
