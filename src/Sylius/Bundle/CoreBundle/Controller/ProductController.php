@@ -104,6 +104,11 @@ class ProductController extends ResourceController
             $variants[] = $repository->getLogEntries($variant);
         }
 
+        $attributes = array();
+        foreach ($product->getAttributes() as $attribute) {
+            $attributes[] = $repository->getLogEntries($attribute);
+        }
+
         $options = array();
         if (empty($variants)) {
             foreach ($product->getOptions() as $option) {
@@ -117,9 +122,10 @@ class ProductController extends ResourceController
             ->setData(array(
                 'product' => $product,
                 'logs'    => array(
-                    'product'  => $repository->getLogEntries($product),
-                    'variants' => $variants,
-                    'options'  => $options,
+                    'product'    => $repository->getLogEntries($product),
+                    'variants'   => $variants,
+                    'attributes' => $attributes,
+                    'options'    => $options,
                 ),
             ))
         ;

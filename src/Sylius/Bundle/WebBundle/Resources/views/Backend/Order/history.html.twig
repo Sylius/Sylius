@@ -8,7 +8,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
     <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
-    <li>#{{ order.number }}</li>
+    <li><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></li>
     <li>{{ 'sylius.history.header'|trans }}</li>
 </ol>
 {% endblock %}
@@ -22,7 +22,7 @@
             {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
         {% endif %}
     </div>
-    <h1><span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}</h1>
+    <h1><span class="glyphicon glyphicon-calendar"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}</h1>
 </div>
 
 <ul class="nav nav-tabs">
@@ -35,23 +35,23 @@
 
 <div class="tab-content">
     <div class="tab-pane active" id="main">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'resource': order, 'logs': logs.order} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': logs.order} %}
     </div>
 
     <div class="tab-pane" id="items">
         {% for order_item in logs.order_items %}
-            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'resource': order, 'logs': order_item} %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': order_item} %}
         {% else %}
             {{ alerts.info('sylius.history.no_results'|trans) }}
         {% endfor %}
     </div>
 
     <div class="tab-pane" id="billing_address">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'resource': order, 'logs': logs.billing_address} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': logs.billing_address} %}
     </div>
 
     <div class="tab-pane" id="shipping_address">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'resource': order, 'logs': logs.shipping_address} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': logs.shipping_address} %}
     </div>
 </div>
 

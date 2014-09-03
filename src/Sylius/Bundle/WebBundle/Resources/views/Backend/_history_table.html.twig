@@ -23,7 +23,7 @@
     <tbody>
     {% for log in logs %}
         <tr>
-            <td><span class="label label-info">{{ log.action|upper }}</span></td>
+            <td><span class="label label-{{ log.action == 'danger' ? 'warning' : (log.action == 'update' ? 'success' : 'primary') }}">{{ log.action|upper }}</span></td>
             <td>{{ log.loggedAt|date }} (#{{ log.version }})</td>
             <td>
                 {% if log.data is not empty %}
@@ -50,7 +50,7 @@
             <td>{{ log.username|default('unknown') }}</td>
             <td>
                 {% if (log.version != 1 or length > 1) and not loop.first %}
-                    {{ buttons.patch(path(url, {'id': resource.id, 'version': log.version}), 'sylius.history.revert'|trans) }}
+                    {{ buttons.patch(path(url, {'id': log.objectId, 'version': log.version}), 'sylius.history.revert'|trans) }}
                 {% endif %}
             </td>
         </tr>
