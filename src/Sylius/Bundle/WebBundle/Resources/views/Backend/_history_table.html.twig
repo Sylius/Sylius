@@ -1,8 +1,8 @@
-{% macro formatValue(value) %}
+{% macro formatValue(key, value) %}
 {% if value.timestamp is defined %}
     {{ value|date() }}
-{% elseif (value.price is defined) or (value.unitPrice is defined) %}
-    {{ value|sylius_money }}
+{% elseif key == 'price' or key == 'unitPrice' %}
+    {{ value|sylius_price() }}
 {% else %}
     {{ value }}
 {% endif %}
@@ -34,11 +34,11 @@
                         {% if value is iterable %}
                             <ul>
                             {% for k, v in value %}
-                                <li>{{ k|humanize }}: {{ _self.formatValue(v) }}</li>
+                                <li>{{ k|humanize }}: {{ _self.formatValue(k, v) }}</li>
                             {% endfor %}
                             </ul>
                         {% else %}
-                            {{ _self.formatValue(value) }}
+                            {{ _self.formatValue(key, value) }}
                         {% endif %}
                     </li>
                     {% endfor %}

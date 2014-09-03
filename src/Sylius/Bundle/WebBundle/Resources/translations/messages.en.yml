@@ -508,6 +508,7 @@ sylius:
         no_tax_category: No tax category
         no_taxons: There are no taxons for this product
         options: Options
+        variants: Variants
         price: Retail price
         attributes: Attributes
         restricted_zone: Restricted zone
