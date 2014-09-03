@@ -45,6 +45,13 @@ class AdvancedOrderType extends OrderType
             ->add('currency', 'choice', array(
                 'choices' => $currencies,
             ))
+            ->add('promotionCoupons', 'collection', array(
+                'type'         => 'sylius_promotion_coupon_to_code',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label'        => 'sylius.form.order.coupons'
+            ))
             ->add('state', 'choice', array(
                 'choices' => array(
                     OrderInterface::STATE_CART        => 'sylius.order.state.checkout',

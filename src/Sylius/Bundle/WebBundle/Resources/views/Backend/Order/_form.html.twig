@@ -153,9 +153,28 @@
                 <p class="text-muted"><small>{{ 'sylius.checkout.finalize.order.no_promotion'|trans }}</small></p>
             {% endif %}
         </td>
-        <td class="text-right" colspan="3">
+        <td class="text-right" colspan="3" rowspan="2">
             <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
             <span class="amount">{{ order.promotionTotal|sylius_price(order.currency) }}</span>
+        </td>
+    </tr>
+    <tr class="promotion-discount">
+        <td colspan="3">
+            <h5>{{ 'sylius.order.promotion_coupons'|trans }}</h5>
+            {% if order.promotionCoupons|length > 0 %}
+                <ul class="list-unstyled" id="sylius-order-promotionCoupons">
+                    {% for coupon in order.promotionCoupons %}
+                        <li class="sylius-order-promotionCoupons-coupon">
+                            <a href="#" data-collection-button="delete" data-collection="sylius-order-promotionCoupons" data-collection-item="coupon">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            {{ adjustment.code }} - {{ coupon.promotion.description }} {{ coupon.promotion.amount|sylius_price(order.currency) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted"><small>{{ 'sylius.order.no_promotion'|trans }}</small></p>
+            {% endif %}
         </td>
     </tr>
     <tr>

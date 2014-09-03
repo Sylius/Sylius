@@ -307,6 +307,7 @@ sylius:
         logged_at: Logged at (version)
         revert: Revert
         no_results: There are no logged events to display.
+        empty: Empty
     homepage:
         splash:
             headline: Welcome to Sylius
@@ -403,6 +404,8 @@ sylius:
         currency: Currency
         state: State
         immutable_warning: Already shipped orders are immutable.
+        promotion_coupons: Coupons
+        no_promotion: No coupons were used.
         comment:
             header: Order comments
             comment: Comment

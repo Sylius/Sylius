@@ -53,7 +53,7 @@
             <dt>Email</dt>
             <dd>
                 {% if order.user %}
-                    {{ order.user.email }}
+                    <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a>
                 {% else %}
                     {{ order.email }}
                 {% endif %}

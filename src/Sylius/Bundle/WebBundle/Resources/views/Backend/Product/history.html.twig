@@ -60,6 +60,7 @@
         {% endfor %}
     </div>
 
+    {% if not product.hasVariants %}
     <div class="tab-pane" id="options">
         {% for option in logs.options %}
             {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_product_revert', 'logs': option} %}
@@ -67,6 +68,7 @@
             {{ alerts.info('sylius.history.no_results'|trans) }}
         {% endfor %}
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

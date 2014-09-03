@@ -3,6 +3,8 @@
     {{ value|date() }}
 {% elseif key == 'price' or key == 'unitPrice' %}
     {{ value|sylius_price() }}
+{% elseif value is empty %}
+    <em>{{ 'sylius.history.empty'|trans }}</em>
 {% else %}
     {{ value }}
 {% endif %}
@@ -49,7 +51,7 @@
             </td>
             <td>{{ log.username|default('unknown') }}</td>
             <td>
-                {% if (log.version != 1 or length > 1) and not loop.first %}
+                {% if (log.version != 1 or length > 1) and not loop.first and not disabled is defined %}
                     {{ buttons.patch(path(url, {'id': log.objectId, 'version': log.version}), 'sylius.history.revert'|trans) }}
                 {% endif %}
             </td>
