@@ -38,6 +38,7 @@
                     <join-column name="promotion_coupon_id" referenced-column-name="id" />
                 </inverse-join-columns>
             </join-table>
+            <gedmo:versioned />
         </many-to-many>
 
         <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
@@ -68,6 +69,7 @@
             <cascade>
                 <cascade-persist />
             </cascade>
+            <gedmo:versioned />
         </many-to-many>
 
         <gedmo:loggable />

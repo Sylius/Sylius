@@ -5,31 +5,29 @@
 {{ form_errors(form) }}
 
 <div class="row">
-    <div class="col col-md-5">
+    <div class="col col-md-4">
         <h4>{{ 'sylius.order.billing_address'|trans|title }}</h4>
 
         {{ form_widget(form.billingAddress) }}
     </div>
 
-    <div class="col col-md-5">
+    <div class="col col-md-4">
         <h4>{{ 'sylius.order.shipping_address'|trans|title }}</h4>
 
         {{ form_widget(form.shippingAddress) }}
     </div>
 
-    <div class="col col-md-2">
+    <div class="col col-md-4">
         <h4>Order Details</h4>
 
         <dl>
             <dt>{{ 'sylius.order.created_at'|trans }}</dt>
             <dd>{{ order.createdAt|date }}</dd>
-
-            <dt>{{ 'sylius.order.state'|trans }}</dt>
-            <dd>{{ misc.state_label(order.state, 'payment') }}</dd>
-
-            <dt>{{ 'sylius.order.currency'|trans }}</dt>
-            <dd>{{ order.currency }}</dd>
         </dl>
+
+        {{ form_row(form.state) }}
+
+        {{ form_row(form.currency) }}
     </div>
 </div>
 
@@ -38,6 +36,7 @@
 <table class="sylius-order-content-table table table-striped table-bordered">
     <thead>
     <tr>
+        <th style="width: 40px"></th>
         <th class="picture"></th>
         <th class="info">{{ 'sylius.order_item.product'|trans }}</th>
         <th class="quantity text-center">{{ 'sylius.order_item.quantity'|trans }}</th>
@@ -45,11 +44,16 @@
         <th class="total text-right">{{ 'sylius.order_item.total'|trans }}</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="sylius-order-items">
     {% for item in order.items %}
         {% set variant = item.variant %}
         {% set product = variant.product %}
-        <tr>
+        <tr class="sylius-order-items-item">
+            <td>
+                <a href="#" class="btn btn-default" data-collection-button="delete" data-collection="sylius-order-items" data-collection-item="item">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
             <td class="picture text-center">
                 <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" title="View {{ product.name|escape('html_attr') }} details.">
                     <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="" class="imgmedia-object" />
@@ -90,13 +94,13 @@
     </tbody>
     <tfoot>
     <tr>
-        <td class="active text-right" colspan="6">
+        <td class="active text-right" colspan="7">
             <strong>{{ 'sylius.order.items_total'|trans }}</strong>:
             <span class="amount">{{ order.itemsTotal|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr class="taxes">
-        <td colspan="2">
+        <td colspan="3">
             <h5>{{ 'sylius.order.taxes'|trans }}</h5>
             {% if order.taxAdjustments|length > 0 %}
                 <ul class="list-unstyled">
@@ -114,7 +118,7 @@
         </td>
     </tr>
     <tr class="shipping-charges">
-        <td colspan="2">
+        <td colspan="3">
             <h5>{{ 'sylius.order.shipping_charges'|trans }}</h5>
             {% if order.shippingAdjustments|length > 0 %}
                 <ul class="list-unstyled">
@@ -132,12 +136,17 @@
         </td>
     </tr>
     <tr class="promotion-discount">
-        <td colspan="2">
+        <td colspan="3">
             <h5>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</h5>
             {% if order.promotionAdjustments|length > 0 %}
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" id="sylius-order-promotions">
                     {% for adjustment in order.promotionAdjustments %}
-                        <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
+                        <li class="sylius-order-promotions-promotion">
+                            <a href="#" data-collection-button="delete" data-collection="sylius-order-promotions" data-collection-item="promotion">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            {{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }}
+                        </li>
                     {% endfor %}
                 </ul>
             {% else %}

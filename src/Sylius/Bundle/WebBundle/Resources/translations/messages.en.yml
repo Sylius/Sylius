@@ -400,6 +400,8 @@ sylius:
         total: Total
         update_header: Editing order
         user: User
+        currency: Currency
+        state: State
         comment:
             header: Order comments
             comment: Comment

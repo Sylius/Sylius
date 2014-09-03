@@ -20,6 +20,7 @@ sylius_backend_order_create:
         _sylius:
             template: SyliusWebBundle:Backend/Order:create.html.twig
             redirect: sylius_backend_order_show
+            form:     sylius_advanced_order
 
 sylius_backend_order_update:
     path: /{id}/edit
@@ -29,6 +30,7 @@ sylius_backend_order_update:
         _sylius:
             template: SyliusWebBundle:Backend/Order:update.html.twig
             redirect: sylius_backend_order_show
+            form:     sylius_advanced_order
 
 sylius_backend_order_revert:
     path: /{id}/revert/{version}
