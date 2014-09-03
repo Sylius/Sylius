@@ -40,7 +40,7 @@ class VolumeBasedConfigurationType extends AbstractType
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'by_reference'  => false,
-                'label'         => 'sylius.pricing.volume_based.label',
+                'label'         => 'sylius.form.pricing.volume_based.label',
                 'type'          => 'sylius_price_calculator_volume_based_configuration'
             ))
         ;
