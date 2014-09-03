@@ -1,6 +1,8 @@
 {% macro formatValue(value) %}
 {% if value.timestamp is defined %}
     {{ value|date() }}
+{% elseif (value.price is defined) or (value.unitPrice is defined) %}
+    {{ value|sylius_money }}
 {% else %}
     {{ value }}
 {% endif %}

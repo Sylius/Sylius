@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,16 +94,33 @@ class ProductController extends ResourceController
      */
     public function historyAction(Request $request)
     {
+        /** @var $product ProductInterface */
         $product = $this->findOr404($request);
 
-        $logEntryRepository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $variants = array();
+        foreach ($product->getVariants() as $variant) {
+            $variants[] = $repository->getLogEntries($variant);
+        }
+
+        $options = array();
+        if (empty($variants)) {
+            foreach ($product->getOptions() as $option) {
+                $options[] = $repository->getLogEntries($option);
+            }
+        }
 
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('history.html'))
             ->setData(array(
-                $this->config->getResourceName() => $product,
-                'logs'                           => $logEntryRepository->getLogEntries($product)
+                'product' => $product,
+                'logs'    => array(
+                    'product'  => $repository->getLogEntries($product),
+                    'variants' => $variants,
+                    'options'  => $options,
+                ),
             ))
         ;
 
