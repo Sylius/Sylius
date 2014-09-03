@@ -91,6 +91,19 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
+     * Sets messageType property
+     *
+     * @param string $messageType Should be one of ResourceEvent's TYPE constants
+     * @return $this
+     */
+    public function setMessageType($messageType)
+    {
+        $this->messageType = $messageType;
+
+        return $this;
+    }
+
+    /**
      * Get message property
      *
      * @return string $message
@@ -101,6 +114,19 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
+     * Sets message property
+     *
+     * @param string $message
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
      * Get messageParameters property
      *
      * @return string $messageParameters
@@ -108,5 +134,18 @@ class ResourceEvent extends GenericEvent
     public function getMessageParameters()
     {
         return $this->messageParameters;
+    }
+
+    /**
+     * Sets messageParameters property
+     *
+     * @param array $messageParameters
+     * @return $this
+     */
+    public function setMessageParameters(array $messageParameters)
+    {
+        $this->messageParameters = $messageParameters;
+
+        return $this;
     }
 }
