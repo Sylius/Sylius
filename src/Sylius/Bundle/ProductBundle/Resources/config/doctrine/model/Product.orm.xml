@@ -28,9 +28,15 @@
         <field name="description" column="description" type="text">
             <gedmo:versioned />
         </field>
-        <field name="availableOn" column="available_on" type="datetime" />
-        <field name="metaKeywords" column="meta_keywords" type="string" nullable="true" />
-        <field name="metaDescription" column="meta_description" type="string" nullable="true" />
+        <field name="availableOn" column="available_on" type="datetime">
+            <gedmo:versioned />
+        </field>
+        <field name="metaKeywords" column="meta_keywords" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
+        <field name="metaDescription" column="meta_description" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
 
         <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\AttributeValueInterface" mapped-by="subject" orphan-removal="true">
             <cascade>

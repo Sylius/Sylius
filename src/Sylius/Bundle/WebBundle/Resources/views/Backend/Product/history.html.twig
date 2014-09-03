@@ -9,7 +9,7 @@
     <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
     <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
     <li>{{ product.name }}</li>
-    <li>{{ 'sylius.history'|trans }}</li>
+    <li>{{ 'sylius.history.header'|trans }}</li>
 </ol>
 {% endblock %}
 
@@ -29,6 +29,6 @@
     <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
 </div>
 
-{% include "SyliusWebBundle:Backend:_history_table.html.twig" %}
+{% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_product_revert', 'resource': product} %}
 
 {% endblock %}

@@ -239,18 +239,9 @@ class ResourceController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function moveUpAction(Request $request)
-    {
-        return $this->move($request, 1);
-    }
-
-    public function moveDownAction(Request $request)
-    {
-        return $this->move($request, -1);
-    }
-
     /**
-     * @param  Request          $request
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request)
@@ -263,6 +254,34 @@ class ResourceController extends FOSRestController
         }
 
         return $this->redirectHandler->redirectToIndex();
+    }
+
+    /**
+     * @param Request $request
+     * @param int     $version
+     *
+     * @return RedirectResponse
+     */
+    public function revertAction(Request $request, $version)
+    {
+        $resource   = $this->findOr404($request);
+        $em         = $this->get('doctrine.orm.entity_manager');
+        $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
+        $repository->revert($resource, $version);
+
+        $this->domainManager->update($resource, 'revert');
+
+        return $this->redirectHandler->redirectTo($resource);
+    }
+
+    public function moveUpAction(Request $request)
+    {
+        return $this->move($request, 1);
+    }
+
+    public function moveDownAction(Request $request)
+    {
+        return $this->move($request, -1);
     }
 
     public function updateStateAction(Request $request, $transition, $graph = null)
