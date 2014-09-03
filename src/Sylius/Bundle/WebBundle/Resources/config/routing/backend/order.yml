@@ -30,6 +30,14 @@ sylius_backend_order_update:
             template: SyliusWebBundle:Backend/Order:update.html.twig
             redirect: sylius_backend_order_show
 
+sylius_backend_order_revert:
+    path: /{id}/revert/{version}
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.order:revertAction
+        _sylius:
+            redirect: sylius_backend_order_show
+
 sylius_backend_order_delete:
     path: /{id}
     methods: [DELETE]
@@ -38,6 +46,16 @@ sylius_backend_order_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_order_index
+
+sylius_backend_order_history:
+    path: /{id}/history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:historyAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:history.html.twig
+            method: findForDetailsPage
+            arguments: [$id]
 
 sylius_backend_order_show:
     path: /{id}

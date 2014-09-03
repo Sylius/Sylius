@@ -306,6 +306,7 @@ sylius:
         data: Data
         logged_at: Logged at (version)
         revert: Revert
+        no_results: There are no logged events to display.
     homepage:
         splash:
             headline: Welcome to Sylius
@@ -362,6 +363,7 @@ sylius:
         index_header: Current orders
         inventory_tracking: Inventory tracking
         items_total: Items total
+        items: Items
         manage: Manage orders
         no_items: This order does not contain any items
         no_results: You have no new orders
