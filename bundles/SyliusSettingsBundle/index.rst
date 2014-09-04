@@ -14,4 +14,4 @@ This bundle provides exactly this feature  - you only need to define the configu
    editing_settings
    in_templates
    in_services
-   Configuration reference <configuration>
+   summary

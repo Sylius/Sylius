@@ -7,25 +7,24 @@ Configuration reference
 .. code-block:: yaml
 
     sylius_cart:
-        driver: ~ # The driver used for persistence layer.
-        engine: twig # Templating engine to use by default.
-        resolver: ~ # Service id of cart item resolver.
-        provider: sylius.cart_provider.default # Cart provider service id.
-        storage: sylius.cart_storage.session # The id of cart storage for default provider.
+        # The driver used for persistence layer.
+        driver: ~
+        # Service id of cart item resolver.
+        resolver: ~
+        # Cart provider service id.
+        provider: sylius.cart_provider.default
+        # The id of cart storage for default provider.
+        storage: sylius.cart_storage.session
         classes:
             cart:
-                model: ~ # The cart model class.
                 controller: Sylius\Bundle\CartBundle\Controller\CartController
-                repository: ~ # You can override the repository class here.
-                form: Sylius\Bundle\CartBundle\Form\Type\CartType # The form type name to use.
+                form: Sylius\Bundle\CartBundle\Form\Type\CartType
             item:
-                model: ~ # The cart item model class.
                 controller: Sylius\Bundle\CartBundle\Controller\CartItemController
-                repository: ~ # You can override the repository class here.
-                form: Sylius\Bundle\CartBundle\Form\Type\CartItemType # The form type class name to use.
+                form: Sylius\Bundle\CartBundle\Form\Type\CartItemType
         validation_groups:
-            cart: [sylius] # Cart validation groups.
-            item: [sylius] # Cart item validation groups.
+            cart: [sylius]
+            item: [sylius]
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

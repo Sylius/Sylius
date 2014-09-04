@@ -29,4 +29,4 @@ This means you can for instance create the following promotions :
    applying_promotions
    coupon_based
    examples
-   configuration
+   summary
