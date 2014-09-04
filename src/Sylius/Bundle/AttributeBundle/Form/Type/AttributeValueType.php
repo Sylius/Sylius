@@ -76,7 +76,6 @@ class AttributeValueType extends AbstractResourceType
         }
     }
 
-
     /**
      * {@inheritdoc}
      */
