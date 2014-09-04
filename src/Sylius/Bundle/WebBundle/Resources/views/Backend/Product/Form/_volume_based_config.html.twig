@@ -19,41 +19,43 @@
     </tr>
 {% endmacro %}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>{{ "sylius.pricing.volume_based.min"|trans }}</th>
-        <th>{{ "sylius.pricing.volume_based.max"|trans }}</th>
-        <th>{{ "sylius.pricing.volume_based.price"|trans }}</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody id="sylius-assortment-product-pricing-ranks" class="collection-container"
-           data-prototype="{{ _self.volume_based_prototype(form)|e|trim }}">
-    {% for rank in form.masterVariant.pricingConfiguration.children %}
+<div class="col-lg-10">
+    <table class="table">
+        <thead>
         <tr>
-            <td>{{ form_widget(rank.children.min) }}</td>
-            <td>{{ form_widget(rank.children.max) }}</td>
-            <td>{{ form_widget(rank.children.price) }}</td>
-            <td>{{ _self.volume_based_delete() }}</td>
+            <th>{{ "sylius.pricing.volume_based.min"|trans }}</th>
+            <th>{{ "sylius.pricing.volume_based.max"|trans }}</th>
+            <th>{{ "sylius.pricing.volume_based.price"|trans }}</th>
+            <th></th>
         </tr>
-    {% else %}
+        </thead>
+        <tbody id="sylius-assortment-product-pricing-ranks" class="collection-container"
+               data-prototype="{{ _self.volume_based_prototype(form)|e }}">
+        {% for rank in form.masterVariant.pricingConfiguration.children %}
+            <tr>
+                <td>{{ form_widget(rank.children.min) }}</td>
+                <td>{{ form_widget(rank.children.max) }}</td>
+                <td>{{ form_widget(rank.children.price) }}</td>
+                <td>{{ _self.volume_based_delete() }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">{{ "sylius.pricing.volume_based.no_results"|trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
         <tr>
-            <td colspan="4">{{ "sylius.pricing.volume_based.no_results"|trans }}</td>
+            <th colspan="4">
+                <a href="#" class="btn btn-primary"
+                   data-collection-button="add"
+                   data-prototype="sylius-assortment-product-pricing-ranks"
+                   data-collection="sylius-assortment-product-pricing-ranks">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    {{ 'sylius.pricing.volume_based.button.add'|trans }}
+                </a>
+            </th>
         </tr>
-    {% endfor %}
-    </tbody>
-    <tfoot>
-    <tr>
-        <th colspan="4">
-            <a href="#" class="btn btn-primary"
-               data-collection-button="add"
-               data-prototype="sylius-assortment-product-pricing-ranks"
-               data-collection="sylius-assortment-product-pricing-ranks">
-                <span class="glyphicon glyphicon-plus"></span>
-                {{ 'sylius.pricing.volume_based.button.add'|trans }}
-            </a>
-        </th>
-    </tr>
-    </tfoot>
-</table>
+        </tfoot>
+    </table>
+</div>
