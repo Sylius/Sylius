@@ -49,6 +49,20 @@ interface AddressInterface extends TimestampableInterface
     public function setLastName($lastName);
 
     /**
+     * Get phone number.
+     *
+     * @return string
+     */
+    public function getPhoneNumber();
+
+    /**
+     * Set phone number.
+     *
+     * @param string $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber);
+
+    /**
      * Get company.
      *
      * @return string
@@ -65,7 +79,7 @@ interface AddressInterface extends TimestampableInterface
     /**
      * Get country.
      *
-     * @return CountryInterface $country
+     * @return CountryInterface
      */
     public function getCountry();
 
@@ -79,7 +93,7 @@ interface AddressInterface extends TimestampableInterface
     /**
      * Get province.
      *
-     * @return ProvinceInterface $province
+     * @return ProvinceInterface
      */
     public function getProvince();
 

@@ -56,6 +56,10 @@ class AddressType extends AbstractResourceType
             ->add('lastName', 'text', array(
                 'label' => 'sylius.form.address.last_name'
             ))
+            ->add('phoneNumber', 'text', array(
+                'required' => false,
+                'label'    => 'sylius.form.address.phone_number'
+            ))
             ->add('company', 'text', array(
                 'required' => false,
                 'label'    => 'sylius.form.address.company'

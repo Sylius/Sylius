@@ -58,6 +58,11 @@ class AddressTypeSpec extends ObjectBehavior
             ->willReturn($builder);
 
         $builder
+            ->add('phoneNumber', 'text', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder);
+
+        $builder
             ->add('company', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder);

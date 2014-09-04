@@ -16,13 +16,6 @@ use Symfony\Component\Templating\Helper\Helper;
 class MoneyHelper extends Helper
 {
     /**
-     * The locale used to format money.
-     *
-     * @var string
-     */
-    private $locale;
-
-    /**
      * The default currency.
      *
      * @var string
@@ -34,9 +27,12 @@ class MoneyHelper extends Helper
      */
     private $formatter;
 
+    /**
+     * @param string $locale   The locale used to format money.
+     * @param string $currency The default currency.
+     */
     public function __construct($locale, $currency)
     {
-        $this->locale = $locale;
         $this->currency = $currency;
         $this->formatter = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
     }

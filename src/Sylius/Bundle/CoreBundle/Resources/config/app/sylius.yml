@@ -123,6 +123,9 @@ sylius_addressing:
         shipping: shipping
         content: content
         price: price
+    classes:
+        address:
+            model: Sylius\Component\Core\Model\Address
 
 sylius_order:
     classes:

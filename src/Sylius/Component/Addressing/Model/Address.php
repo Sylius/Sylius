@@ -40,6 +40,13 @@ class Address implements AddressInterface
     protected $lastName;
 
     /**
+     * Phone number.
+     *
+     * @var string
+     */
+    protected $phoneNumber;
+
+    /**
      * Company.
      *
      * @var string
@@ -144,9 +151,30 @@ class Address implements AddressInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getFullName()
     {
         return $this->firstName.' '.$this->lastName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPhoneNumber()
+    {
+        return $this->company;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 
     /**

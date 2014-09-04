@@ -18,13 +18,6 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class TaxonSelectionToIdentifierCollectionTransformer implements DataTransformerInterface
 {
-    private $taxonomies;
-
-    public function __construct(array $taxonomies)
-    {
-        $this->taxonomies = $taxonomies;
-    }
-
     /**
      * {@inheritdoc}
      */
