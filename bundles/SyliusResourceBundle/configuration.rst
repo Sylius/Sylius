@@ -102,6 +102,18 @@ You need to expose a semantic configuration for your bundle. The following examp
                     ->end()
                 ->end()
 
+                // Configure the template namespace used by each resource
+                ->children()
+                    ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('my_entity')->defaultValue('MyCoreBundle:Entity')->end()
+                            ->scalarNode('my_other_entity')->defaultValue('MyOtherCoreBundle:Entity')->end()
+                        ->end()
+                    ->end()
+                ->end()
+
+
                 // The resources
                 ->children()
                     ->arrayNode('classes')
