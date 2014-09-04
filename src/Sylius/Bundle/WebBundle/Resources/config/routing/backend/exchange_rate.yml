@@ -37,3 +37,9 @@ sylius_backend_exchange_rate_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_exchange_rate_index
+
+sylius_backend_exchange_update_all_rates:
+    pattern: /update-all-rates
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.currency:updateAllRatesAction

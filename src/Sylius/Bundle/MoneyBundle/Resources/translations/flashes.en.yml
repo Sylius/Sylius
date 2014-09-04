@@ -1,0 +1,6 @@
+sylius:
+    exchange_rate:
+        update:
+            success: Exchange rates are updated.
+            error: There has been a problem while updating exchange rates.
+            provider_exception: There has been a problem in connection with exchange rate service. Please try later.

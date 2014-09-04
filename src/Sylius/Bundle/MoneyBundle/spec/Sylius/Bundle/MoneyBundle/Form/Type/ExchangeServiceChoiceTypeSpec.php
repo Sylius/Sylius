@@ -15,18 +15,18 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Ivan Djurdjevac <djurdjevac@gmail.com>
  */
-class MoneyTypeSpec extends ObjectBehavior
+class ExchangeServiceChoiceTypeSpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->beConstructedWith('PLN');
+        $this->beConstructedWith('ExchangeRateConfig');
     }
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\Type\MoneyType');
+        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\Type\ExchangeServiceChoiceType');
     }
 
     public function it_is_a_form_type()
@@ -34,15 +34,10 @@ class MoneyTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    public function it_has_money_type_as_parent()
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $this->getParent()->shouldReturn('money');
-    }
-
-    public function it_defines_assigned_currency_and_sets_divisor_to_100(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array('currency' => 'PLN', 'divisor' => 100))->shouldBeCalled();
-
+        $resolver->setDefaults(array('class' => 'ExchangeRateConfig'))->shouldBeCalled();
         $this->setDefaultOptions($resolver);
+
     }
 }

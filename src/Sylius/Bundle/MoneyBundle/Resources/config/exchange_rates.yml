@@ -1,0 +1,6 @@
+services:
+    sylius.exchange_rate.yahoo_provider: Yahoo Exchange Service
+    sylius.exchange_rate.google_provider: Google Exchange Service
+    sylius.exchange_rate.european_central_bank_provider: European Central Bank
+default_service:
+    sylius.exchange_rate.google_provider

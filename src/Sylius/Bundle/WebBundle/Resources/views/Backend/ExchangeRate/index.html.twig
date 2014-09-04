@@ -14,6 +14,7 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_exchange_rate_create'), 'sylius.exchange_rate.create'|trans) }}
+        {{ buttons.generic(path('sylius_backend_exchange_update_all_rates'), 'sylius.exchange_rate.update_all_rates'|trans, 'glyphicon glyphicon-refresh') }}
     </div>
     <h1><i class="glyphicon glyphicon-usd"></i> {{ 'sylius.exchange_rate.index_header'|trans|raw }}</h1>
 </div>

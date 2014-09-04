@@ -21,22 +21,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ExchangeRateTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('ExchangeRate');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType');
     }
 
-    function it_is_a_form_type()
+    public function it_is_a_form_type()
     {
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    public function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('currency', 'currency', Argument::any())
@@ -50,10 +50,16 @@ class ExchangeRateTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->add('baseRate', 'choice', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 
-    function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
+    public function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array('data_class' => 'ExchangeRate'))->shouldBeCalled();
 

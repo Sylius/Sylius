@@ -17,22 +17,22 @@ use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 class CurrencyConverterSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $exchangeRateRepository)
+    public function let(RepositoryInterface $exchangeRateRepository)
     {
         $this->beConstructedWith($exchangeRateRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverter');
     }
 
-    function it_implements_Sylius_exchange_rate_interface()
+    public function it_implements_Sylius_exchange_rate_interface()
     {
         $this->shouldImplement('Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface');
     }
 
-    function it_converts_to_any_currency(ExchangeRateInterface $exchangeRate, $exchangeRateRepository)
+    public function it_converts_to_any_currency(ExchangeRateInterface $exchangeRate, $exchangeRateRepository)
     {
         $exchangeRateRepository->findOneBy(array('currency' => 'USD'))->shouldBeCalled()->willReturn($exchangeRate);
         $exchangeRate->getRate()->shouldBeCalled()->willReturn(1.30);

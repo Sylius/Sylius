@@ -8,6 +8,7 @@ sylius:
                 customer: Customers
                 dashboard: Dashboard
                 exchange_rates: Exchange rates
+                exchange_rate_settings: Exchange rate settings
                 general_settings: General settings
                 homepage: Your store
                 locales: Locales
@@ -41,6 +42,7 @@ sylius:
                 customer: Customers
                 dashboard: Dashboard
                 exchange_rates: Exchange rates
+                exchange_rate_settings: Exchange rate settings
                 general_settings: General settings
                 groups: Groups
                 homepage: Back to frontend

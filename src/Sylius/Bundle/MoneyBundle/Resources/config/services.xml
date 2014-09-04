@@ -24,6 +24,18 @@
 
         <parameter key="sylius.currency_context.class">Sylius\Bundle\MoneyBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.currency_converter.class">Sylius\Bundle\MoneyBundle\Converter\CurrencyConverter</parameter>
+        <parameter key="sylius.exchange_rate.provider_factory.class">Sylius\Bundle\MoneyBundle\ExchangeRate\Provider\ProviderFactory</parameter>
+        <parameter key="sylius.settings_schema.exchange_rates.class">Sylius\Bundle\MoneyBundle\Settings\ExchangeRateSettingsSchema</parameter>
+        <parameter key="sylius.exchange_rate.services.class">Sylius\Bundle\MoneyBundle\Model\ExchangeRateService</parameter>
+        <parameter key="sylius.form.type.exchange_service_choice.class">Sylius\Bundle\MoneyBundle\Form\Type\ExchangeServiceChoiceType</parameter>
+        <parameter key="sylius.exchange_rate.config.class">Sylius\Bundle\MoneyBundle\Model\ExchangeRateConfig</parameter>
+
+        <parameter key="sylius.exchange_rate.updater.class">Sylius\Bundle\MoneyBundle\ExchangeRate\Updater\DatabaseUpdater</parameter>
+        <parameter key="sylius.exchange_rate.http_client.class">Guzzle\Http\Client</parameter>
+        <parameter key="sylius.exchange_rate.european_central_bank_provider.class">Sylius\Bundle\MoneyBundle\ExchangeRate\Provider\EuropeanCentralBankProvider</parameter>
+        <parameter key="sylius.exchange_rate.google_provider.class">Sylius\Bundle\MoneyBundle\ExchangeRate\Provider\GoogleProvider</parameter>
+        <parameter key="sylius.exchange_rate.yahoo_provider.class">Sylius\Bundle\MoneyBundle\ExchangeRate\Provider\YahooProvider</parameter>
+        <parameter key="sylius.exchange_rate.yaml_parser.class">Symfony\Component\Yaml\Parser</parameter>
     </parameters>
 
     <services>
@@ -31,10 +43,9 @@
             <argument>sylius</argument>
             <argument>exchange_rate</argument>
             <argument>SyliusMoneyBundle:ExchangeRate</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
         </service>
+
+        <!-- todo: Replace cart injection with exchange rates -->
         <service id="sylius.controller.currency" class="%sylius.controller.currency.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
@@ -64,6 +75,60 @@
         <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
             <argument type="service" id="sylius.repository.exchange_rate" />
         </service>
+
+        <service id="sylius.exchange_rate.http_client" class="%sylius.exchange_rate.http_client.class%">
+        </service>
+
+        <service id="sylius.exchange_rate.google_provider" class="%sylius.exchange_rate.google_provider.class%">
+            <argument type="service" id="sylius.exchange_rate.http_client" />
+        </service>
+
+        <service id="sylius.exchange_rate.yahoo_provider" class="%sylius.exchange_rate.yahoo_provider.class%">
+            <argument type="service" id="sylius.exchange_rate.http_client" />
+        </service>
+
+        <service id="sylius.exchange_rate.european_central_bank_provider" class="%sylius.exchange_rate.european_central_bank_provider.class%">
+            <argument type="service" id="sylius.exchange_rate.http_client" />
+        </service>
+
+        <service id="sylius.exchange_rate.provider_factory" class="%sylius.exchange_rate.provider_factory.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.exchange_rate.updater" class="%sylius.exchange_rate.updater.class%">
+            <argument type="service" id="sylius.exchange_rate.provider_factory" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.exchange_rate.services" class="%sylius.exchange_rate.services.class%">
+            <argument type="service" id="sylius.settings.manager" />
+            <argument type="service" id="sylius.exchange_rate.config" />
+        </service>
+        
+        <service id="sylius.exchange_rate.yaml_parser" class="%sylius.exchange_rate.yaml_parser.class%"/>
+        <service id="sylius.exchange_rate.config" class="%sylius.exchange_rate.config.class%">
+            <argument type="service" id="sylius.exchange_rate.yaml_parser" />
+        </service>
+
+        <service id="sylius.settings_schema.exchange_rates" class="%sylius.settings_schema.exchange_rates.class%">
+            <argument type="service" id="sylius.exchange_rate.config" />
+            <tag name="sylius.settings_schema" namespace="exchange_rates" />
+        </service>
+
+        <service id="sylius.form.type.exchange_service_choice" class="%sylius.form.type.exchange_service_choice.class%">
+            <argument type="service" id="sylius.exchange_rate.services" />
+            <tag name="form.type" alias="sylius_exchange_service_choice" />
+        </service>
+
+        <service id="sylius.exchange_rate.fetch_command" class="Sylius\Bundle\MoneyBundle\Command\FetchRatesCommand">
+            <tag name="console.command" />
+        </service>
+
+
     </services>
 
 </container>

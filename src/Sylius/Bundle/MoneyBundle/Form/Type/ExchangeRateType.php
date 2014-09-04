@@ -38,6 +38,14 @@ class ExchangeRateType extends AbstractType
             ->add('rate', 'text', array(
                 'label' => 'sylius.form.exchange_rate.rate'
             ))
+            ->add('baseRate', 'choice', array(
+                    'label' => 'sylius.form.exchange_rate.base_rate',
+                    'choices' => array(
+                        0 =>'sylius.no',
+                        1 => 'sylius.yes'
+                    )
+                )
+            );
         ;
     }
 

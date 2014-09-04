@@ -20,22 +20,22 @@ use Sylius\Bundle\MoneyBundle\Converter\CurrencyConverterInterface;
  */
 class SyliusMoneyExtensionSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
+    public function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
     {
         $this->beConstructedWith($currencyContext, $converter, 'en');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension');
     }
 
-    function it_is_a_Twig_extension()
+    public function it_is_a_Twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }
 
-    function it_formats_the_integer_amounts_into_string_representation($currencyContext)
+    public function it_formats_the_integer_amounts_into_string_representation($currencyContext)
     {
         $currencyContext->getDefaultCurrency()->willReturn('EUR');
 
@@ -45,7 +45,7 @@ class SyliusMoneyExtensionSpec extends ObjectBehavior
         $this->formatMoney(500)->shouldReturn('€5.00');
     }
 
-    function it_allows_to_format_money_in_different_currencies($currencyContext)
+    public function it_allows_to_format_money_in_different_currencies($currencyContext)
     {
         $currencyContext->getDefaultCurrency()->willReturn('EUR');
 
@@ -55,7 +55,7 @@ class SyliusMoneyExtensionSpec extends ObjectBehavior
         $this->formatMoney(500)->shouldReturn('€5.00');
     }
 
-    function it_allows_to_convert_prices_in_different_currencies($currencyContext, $converter)
+    public function it_allows_to_convert_prices_in_different_currencies($currencyContext, $converter)
     {
         $currencyContext->getCurrency()->willReturn('PLN');
 

@@ -5,3 +5,4 @@ sylius_currency_change:
     pattern: /change/{currency}
     defaults:
         _controller: sylius.controller.currency:changeAction
+

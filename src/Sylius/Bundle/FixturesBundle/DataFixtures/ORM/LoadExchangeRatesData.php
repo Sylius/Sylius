@@ -38,6 +38,10 @@ class LoadExchangeRatesData extends DataFixture
 
             $exchangeRate->setCurrency($currency);
             $exchangeRate->setRate($rate);
+            if ($currency == 'EUR')
+            {
+                $exchangeRate->setBaseRate(1);
+            }
 
             $manager->persist($exchangeRate);
         }

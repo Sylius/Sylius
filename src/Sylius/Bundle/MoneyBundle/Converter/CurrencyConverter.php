@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\MoneyBundle\Converter;
 
+use Sylius\Bundle\MoneyBundle\Converter\Exception\BaseCurrencyNotSetException;
 use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 
 class CurrencyConverter implements CurrencyConverterInterface
@@ -41,5 +42,21 @@ class CurrencyConverter implements CurrencyConverterInterface
         }
 
         return $this->cache[$currency] = $this->exchangeRateRepository->findOneBy(array('currency' => $currency));
+    }
+
+    /**
+     * Get base rate currency
+     * This currency can be used for conversion to other currencies
+     *
+     * @return mixed
+     * @throws BaseCurrencyNotSetException
+     */
+    public function getBaseCurrency()
+    {
+        if (!$baseExchangeRate = $this->exchangeRateRepository->findOneBy(array('baseRate' => 1))) {
+            throw new BaseCurrencyNotSetException;
+        }
+
+        return $baseExchangeRate->getCurrency();
     }
 }

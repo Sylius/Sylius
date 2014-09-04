@@ -15,3 +15,10 @@ sylius_backend_taxation_settings:
         _controller: sylius.controller.settings:updateAction
         namespace: taxation
         template: SyliusWebBundle:Backend/Settings:taxation.html.twig
+
+sylius_backend_exchange_rates_settings:
+    pattern: /exchange_rates
+    defaults:
+        _controller: sylius.controller.settings:updateAction
+        namespace: exchange_rates
+        template: SyliusWebBundle:Backend/Settings:exchange_rates.html.twig

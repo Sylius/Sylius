@@ -24,6 +24,7 @@
 
         <field name="currency" length="3" />
         <field name="rate" type="decimal" precision="10" scale="5" />
+        <field name="baseRate" column="base_rate" type="smallint" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

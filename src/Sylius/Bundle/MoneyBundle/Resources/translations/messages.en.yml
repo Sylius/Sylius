@@ -3,3 +3,4 @@ sylius:
         exchange_rate:
             currency: Currency
             rate: Rate
+            base_rate: Is base rate

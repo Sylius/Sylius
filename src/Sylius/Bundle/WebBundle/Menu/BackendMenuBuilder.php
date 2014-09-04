@@ -266,6 +266,11 @@ class BackendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-usd'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.exchange_rates', $section)));
 
+        $child->addChild('exchange_rates_settings', array(
+            'route' => 'sylius_backend_exchange_rates_settings',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.exchange_rate_settings', $section)));
+
         $child->addChild('taxation_settings', array(
             'route' => 'sylius_backend_taxation_settings',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),

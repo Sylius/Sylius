@@ -31,6 +31,11 @@ class ExchangeRate implements ExchangeRateInterface
     protected $rate;
 
     /**
+     * @var integer
+     */
+    protected $baseRate;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -39,13 +44,14 @@ class ExchangeRate implements ExchangeRateInterface
      * @var \DateTime
      */
     protected $updatedAt;
-    
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->baseRate = 0;
     }
 
     public function getId()
@@ -95,6 +101,22 @@ class ExchangeRate implements ExchangeRateInterface
         $this->rate = $rate;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBaseRate()
+    {
+        return $this->baseRate === 1;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBaseRate($baseRate)
+    {
+        $this->baseRate = $baseRate;
     }
 
     /**

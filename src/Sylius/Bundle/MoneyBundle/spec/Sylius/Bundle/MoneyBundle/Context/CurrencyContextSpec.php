@@ -16,34 +16,34 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session)
+    public function let(SessionInterface $session)
     {
         $this->beConstructedWith($session, 'EUR');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Context\CurrencyContext');
     }
 
-    function it_implements_Sylius_currency_context_interface()
+    public function it_implements_Sylius_currency_context_interface()
     {
         $this->shouldImplement('Sylius\Bundle\MoneyBundle\Context\CurrencyContextInterface');
     }
 
-    function it_gets_default_currency()
+    public function it_gets_default_currency()
     {
         $this->getDefaultCurrency()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session($session)
+    public function it_gets_currency_from_session($session)
     {
         $session->get('currency', 'EUR')->shouldBeCalled()->willReturn('RSD');
 
         $this->getCurrency()->shouldReturn('RSD');
     }
 
-    function it_sets_currency_to_session($session)
+    public function it_sets_currency_to_session($session)
     {
         $session->set('currency', 'PLN')->shouldBeCalled();
 
