@@ -1,7 +1,7 @@
 {% form_theme form 'SyliusWebBundle::forms.html.twig' %}
 
 {% macro imagePrototype() %}
-<div class="sylius-assortment-variant-images-image row" id="sylius_product_masterVariant_images___name__">
+<div class="sylius-assortment-product-images-image row" id="sylius_product_masterVariant_images___name__">
     <div class="col-md-1">
         <span class="thumbnail"></span>
     </div>
@@ -18,7 +18,7 @@
 <div class="tab-pane" id="images">
     <div id="sylius-assortment-product-images" data-toggle="modal-gallery" data-target="#modal-gallery" class="collection-container" data-prototype="{{ _self.imagePrototype()|e }}">
         {% for image in product.images %}
-        <div class="sylius-assortment-variant-images-image row">
+        <div class="sylius-assortment-product-images-image row">
             <div class="col-md-1">
                 {% if image.path|length > 0 %}
                 <a href="{{ image.path|imagine_filter('sylius_large') }}" data-gallery="gallery">
