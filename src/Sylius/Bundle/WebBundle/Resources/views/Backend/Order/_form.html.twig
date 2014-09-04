@@ -18,16 +18,23 @@
     </div>
 
     <div class="col col-md-4">
+        {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' %}
+
         <h4>Order Details</h4>
-
-        <dl>
-            <dt>{{ 'sylius.order.created_at'|trans }}</dt>
-            <dd>{{ order.createdAt|date }}</dd>
-        </dl>
-
-        {{ form_row(form.state) }}
-
-        {{ form_row(form.currency) }}
+        <div class="list-group">
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.created_at'|trans }}</h4>
+                <div class="list-group-item-text">{{ order.createdAt|date }}</div>
+            </div>
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.state'|trans }}</h4>
+                <div class="list-group-item-text">{{ form_widget(form.state) }}</div>
+            </div>
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">{{ 'sylius.order.currency'|trans }}</h4>
+                <div class="list-group-item-text">{{ form_widget(form.currency) }}</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -49,7 +56,7 @@
         {% set variant = item.variant %}
         {% set product = variant.product %}
         <tr class="sylius-order-items-item">
-            <td>
+            <td style="vertical-align: middle">
                 <a href="#" class="btn btn-default" data-collection-button="delete" data-collection="sylius-order-items" data-collection-item="item">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
@@ -91,6 +98,12 @@
             </td>
         </tr>
     {% endfor %}
+        <tr>
+            <td colspan="7">
+                <hr />
+                {{ form_widget(form.product) }}
+            </td>
+        </tr>
     </tbody>
     <tfoot>
     <tr>

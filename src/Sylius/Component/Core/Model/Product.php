@@ -312,4 +312,9 @@ class Product extends BaseProduct implements ProductInterface
             self::VARIANT_SELECTION_MATCH  => 'Options matching',
         );
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
