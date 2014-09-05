@@ -184,7 +184,6 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                 ->end()
             ->end()
-
         ;
     }
 }
