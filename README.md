@@ -24,14 +24,7 @@ $ cd sylius
 $ php app/console sylius:install
 ```
 
-To be able to use included fixtures, that make testing and development phases much easier:
-
-```bash
-$ php composer.phar install
-$ php app/console doctrine:database:create
-$ php app/console doctrine:schema:create 
-$ php app/console doctrine:phpcr:repository:init
-```
+The install script will give you the option to run fixtures that make testing and development phases much easier.
 
 [Behat](http://behat.org) scenarios
 -----------------------------------
