@@ -13,10 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 class AdvancedOrderType extends OrderType
 {
@@ -25,17 +22,11 @@ class AdvancedOrderType extends OrderType
      */
     protected $currencyProvider;
 
-    /**
-     * @var RepositoryInterface
-     */
-    protected $productRepository;
-
-    public function __construct($dataClass, array $validationGroups = array(), CurrencyProviderInterface $currencyProvider, RepositoryInterface $productRepository)
+    public function __construct($dataClass, array $validationGroups = array(), CurrencyProviderInterface $currencyProvider)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->currencyProvider  = $currencyProvider;
-        $this->productRepository = $productRepository;
+        $this->currencyProvider = $currencyProvider;
     }
 
     /**
@@ -54,16 +45,8 @@ class AdvancedOrderType extends OrderType
             ->add('currency', 'choice', array(
                 'choices' => $currencies,
             ))
-            ->add('product', 'choice', array(
-                'choices' => $this->productRepository->findAll(),
+            ->add('product', 'hidden', array(
                 'mapped'  => false,
-            ))
-            ->add('promotionCoupons', 'collection', array(
-                'type'         => 'sylius_promotion_coupon_to_code',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label'        => 'sylius.form.order.coupons'
             ))
             ->add('state', 'choice', array(
                 'choices' => array(

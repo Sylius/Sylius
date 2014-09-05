@@ -18,7 +18,9 @@
     </div>
 
     <div class="col col-md-4">
-        {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' %}
+        {% if order.id is defined %}
+            {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' %}
+        {% endif %}
 
         <h4>Order Details</h4>
         <div class="list-group">
@@ -77,7 +79,7 @@
                     <ul class="list-unstyled">
                         <li class="sku"><strong>{{ 'sylius.product.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
                         {% for option in variant.options %}
-                            <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
+                            <li><strong>{{ option.presentation }}</strong>: {{ option.value }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -93,19 +95,17 @@
     {% else %}
         <tr>
             <td colspan="6">
-                <hr />
                 <div class="alert alert-info">{{ 'sylius.order.no_items'|trans }}</div>
             </td>
         </tr>
     {% endfor %}
-        <tr>
-            <td colspan="7">
-                <hr />
-                {{ form_widget(form.product) }}
-            </td>
-        </tr>
     </tbody>
     <tfoot>
+    <tr>
+        <td colspan="7">
+            {{ form_widget(form.product, {'attr': {'class': 'select2'}}) }}
+        </td>
+    </tr>
     <tr>
         <td class="active text-right" colspan="7">
             <strong>{{ 'sylius.order.items_total'|trans }}</strong>:
@@ -152,42 +152,18 @@
         <td colspan="3">
             <h5>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</h5>
             {% if order.promotionAdjustments|length > 0 %}
-                <ul class="list-unstyled" id="sylius-order-promotions">
+                <ul class="list-unstyled">
                     {% for adjustment in order.promotionAdjustments %}
-                        <li class="sylius-order-promotions-promotion">
-                            <a href="#" data-collection-button="delete" data-collection="sylius-order-promotions" data-collection-item="promotion">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                            {{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }}
-                        </li>
+                        <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
             {% else %}
                 <p class="text-muted"><small>{{ 'sylius.checkout.finalize.order.no_promotion'|trans }}</small></p>
             {% endif %}
         </td>
-        <td class="text-right" colspan="3" rowspan="2">
+        <td class="text-right" colspan="3">
             <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
             <span class="amount">{{ order.promotionTotal|sylius_price(order.currency) }}</span>
-        </td>
-    </tr>
-    <tr class="promotion-discount">
-        <td colspan="3">
-            <h5>{{ 'sylius.order.promotion_coupons'|trans }}</h5>
-            {% if order.promotionCoupons|length > 0 %}
-                <ul class="list-unstyled" id="sylius-order-promotionCoupons">
-                    {% for coupon in order.promotionCoupons %}
-                        <li class="sylius-order-promotionCoupons-coupon">
-                            <a href="#" data-collection-button="delete" data-collection="sylius-order-promotionCoupons" data-collection-item="coupon">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                            {{ adjustment.code }} - {{ coupon.promotion.description }} {{ coupon.promotion.amount|sylius_price(order.currency) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p class="text-muted"><small>{{ 'sylius.order.no_promotion'|trans }}</small></p>
-            {% endif %}
         </td>
     </tr>
     <tr>

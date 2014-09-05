@@ -23,6 +23,7 @@
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.order_item.class">Sylius\Bundle\CoreBundle\Form\Type\OrderItemType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
         <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
@@ -97,7 +98,6 @@
                 <argument>sylius</argument>
             </argument>
             <argument type="service" id="sylius.currency_provider" />
-            <argument type="service" id="sylius.repository.product" />
             <tag name="form.type" alias="sylius_advanced_order" />
         </service>
 

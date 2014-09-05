@@ -15,6 +15,7 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -145,6 +146,31 @@ class ProductController extends ResourceController
         return $this->render('SyliusWebBundle:Backend/Product:filterForm.html.twig', array(
             'form' => $this->get('form.factory')->createNamed('criteria', 'sylius_product_filter', $request->query->get('criteria'))->createView()
         ));
+    }
+
+    // @todo refactor this when PRs about API & search get merged
+    public function searchAction(Request $request)
+    {
+        if (!$request->query->has('criteria')) {
+            throw new NotFoundHttpException();
+        }
+
+        /** @var $products ProductInterface[] */
+        $results  = array();
+        $products = $this->get('sylius.repository.product')->createFilterPaginator($request->query->get('criteria'));
+        $helper   = $this->get('sylius.templating.helper.currency');
+        foreach ($products as $product) {
+            $results[] = array(
+                'id'        => $product->getMasterVariant()->getId(),
+                'name'      => $product->getName(),
+                'image'     => $product->getImage()->getPath(),
+                'price'     => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
+                'raw_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
+                'desc'      => $product->getShortDescription(),
+            );
+        }
+
+        return new JsonResponse($results);
     }
 
     public function findOr404(Request $request, array $criteria = array())

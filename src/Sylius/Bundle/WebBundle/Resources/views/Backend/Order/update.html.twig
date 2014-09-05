@@ -11,6 +11,65 @@
 </ol>
 {% endblock %}
 
+{% block javascripts %}
+    {# @todo refactor this #}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        function format(product) {
+            return '<img src="/media/cache/sylius_small/'+product.image+'" alt="" class="imgmedia-object" /><h3>'+product.name+' ('+product.price+')</h3><p>'+product.desc+'</p><hr>';
+        }
+
+        $(document).ready(function() {
+            $(".select2").select2({
+                minimumInputLength: 3,
+                ajax: {
+                    url: "{{ url('sylius_backend_product_find') }}",
+                    dataType: 'json',
+                    data: function (term, page) {
+                        return {
+                            criteria: {
+                                name: term
+                            }
+                        };
+                    },
+                    results: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    }
+                },
+                formatResult: format,
+                escapeMarkup: function(m) { return m; }
+            }).on("select2-selecting", function(e) {
+                var number = $('.sylius-order-items-item').length;
+                if (number == 0) {
+                    $('#sylius-order-items').empty();
+                }
+
+                $('#sylius-order-items').append(
+                     '<tr class="sylius-order-items-item">'
+                    +'<td style="vertical-align: middle">'
+                    +'<a href="#" class="btn btn-default" data-collection-button="delete" data-collection="sylius-order-items" data-collection-item="item">'
+                    +'<span class="glyphicon glyphicon-trash"></span>'
+                    +'</a>'
+                    +'</td>'
+                    +'<td class="picture text-center">'
+                    +'<img src="/media/cache/sylius_small/'+e.choice.image+'" alt="" class="imgmedia-object" />'
+                    +'</td>'
+                    +'<td class="info">'
+                    +'<a><h4 class="name">'+e.choice.name+'</h4><input type="hidden" value="'+e.choice.id+'" name="sylius_advanced_order[items]['+number+'][variant]"></a>'
+                    +'</td>'
+                    +'<td class="quantity"><input type="number" id="sylius_advanced_order_items_'+number+'_quantity" name="sylius_advanced_order[items]['+number+'][quantity]" required="required" class=" form-control" value="1"></td>'
+                    +'<td class="unit-price">'
+                    +'<div class="input-group"><span class="input-group-addon">€ </span><input type="text" id="sylius_advanced_order_items_'+number+'_unitPrice" name="sylius_advanced_order[items]['+number+'][unitPrice]" required="required" class="form-control" value="'+ e.choice.raw_price+'"></div>'
+                    +'<td class="total text-right">'+e.choice.price+'</td>'
+                );
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">

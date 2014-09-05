@@ -97,10 +97,9 @@ class ProductRepository extends BaseProductRepository
      */
     public function findForDetailsPage($id)
     {
-        $queryBuilder = $this->getQueryBuilder();
-
         $this->_em->getFilters()->disable('softdeleteable');
 
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->leftJoin('variant.images', 'image')
             ->addSelect('image')
@@ -108,18 +107,16 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('id', $id)
         ;
 
-        $result = $queryBuilder
+        return $queryBuilder
             ->getQuery()
             ->getOneOrNullResult()
         ;
-
-        return $result;
     }
 
     /**
      * Find X recently added products.
      *
-     * @param integer $limit
+     * @param int $limit
      *
      * @return ProductInterface[]
      */

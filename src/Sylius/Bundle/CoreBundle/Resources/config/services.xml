@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Pawe³ Jêdrzejewski
+ (c) PaweÅ‚ JÄ™drzejewski
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -207,6 +207,8 @@
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
             <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
+            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="resolveInventoryState" priority="-100" />
         </service>
         <service id="sylius.listener.order_item_inventory" class="%sylius.listener.order_item_inventory.class%">
             <argument type="service" id="event_dispatcher" />
@@ -304,21 +306,6 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
-        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
-            <argument>%sylius.model.cart.class%</argument>
-            <argument>%sylius.validation_group.cart%</argument>
-            <argument type="service" id="sylius.repository.promotion_coupon" />
-            <tag name="form.type" alias="sylius_cart" />
-        </service>
-
-        <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
-            <argument>%sylius.model.product_variant_image.class%</argument>
-            <tag name="form.type" alias="sylius_image" />
-        </service>
-        <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
-            <tag name="form.type" alias="list" />
-        </service>
-
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
                 <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
@@ -361,12 +348,6 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
             <argument type="service" id="event_dispatcher" />
-        </service>
-
-        <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
-            <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>
 
         <service id="sylius.price_calculator.group_based" class="%sylius.price_calculator.group_based.class%">
