@@ -136,7 +136,10 @@
         ]
     },
     "autoload": {
-        "psr-0": { "Sylius\\": "src/" }
+        "psr-4": {
+            "Sylius\\": "src/Sylius/",
+            "Custom\\": "src/Custom/"
+        }
     },
     "config": {
         "bin-dir": "bin"
