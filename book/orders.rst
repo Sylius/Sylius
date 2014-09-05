@@ -9,7 +9,7 @@ Orders
 Customer Reference
 ------------------
 
-*Order* always holds a reference to specific *User*, which is available through ``getUser()`` method:
+*Order* holds a reference to specific *User*, which is available through ``getUser()`` method:
 
 .. code-block:: php
 
@@ -23,6 +23,8 @@ When creating order programatically, you can define the user yourself:
     $john = $this->get('sylius.repository.user')->find(3);
 
     $order->setUser($john);
+
+*Order* may not have reference to *User* in case when *Order* was created by guest.
 
 Billing and Shipping Address
 ----------------------------
