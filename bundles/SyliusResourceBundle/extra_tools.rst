@@ -71,7 +71,7 @@ You need use the following syntax *expr:resource.my_expression*.
     * ``parameter``: returns a specific parameter value, aka: ``expr:parameter("sylius.locale")``
 
 Event Dispatcher
-================
+----------------
 
 The methods ``ResourceController:createAction``, ``ResourceController:updateAction`` and ``ResourceController:deleteAction``
 throw events before and after executing any actions on the current resource. The name of the events used the following pattern
