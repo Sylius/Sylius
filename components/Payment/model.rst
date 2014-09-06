@@ -1,5 +1,8 @@
+Models
+======
+
 CreditCard
-==========
+----------
 
 Every credit card is represented by **CreditCard** instance and has following properties:
 
@@ -31,7 +34,7 @@ Every credit card is represented by **CreditCard** instance and has following pr
     witch will return the last 4 digits of card number
 
 Payment
-=======
+-------
 
 Every payment is represented by **Payment** instance and has following properties:
 
@@ -91,7 +94,7 @@ The following payment types are available :
     This model implements ``PaymentInterface``.
 
 PaymentMethod
-=============
+-------------
 
 Every method of payment is represented by **PaymentMethod** instance and has following properties:
 
@@ -118,7 +121,7 @@ Every method of payment is represented by **PaymentMethod** instance and has fol
     This model implements ``PaymentMethodInterface``.
 
 PaymentsSubjectInterface
-========================
+------------------------
 
 To characterize an object with payment, the object class needs to implement the ``PaymentsSubjectInterface``.
 
