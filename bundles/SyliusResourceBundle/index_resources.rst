@@ -172,7 +172,7 @@ sylius_resource_sort
         + **route (string) :** Key of the new route
         + **route_params (array) :** Additional route parameters
 
-This extension renders the following template : SyliusResourceBundle:Twig:paginate.html.twig
+This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig
 
 **Example :**
 
@@ -193,7 +193,7 @@ sylius_resource_paginate
         + **route (string) :** Key of the new route
         + **route_params (array) :** Additional route parameters
 
-This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig
+This extension renders the following template : SyliusResourceBundle:Twig:paginate.html.twig
 
 **Example :**
 
