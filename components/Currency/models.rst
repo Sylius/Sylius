@@ -1,5 +1,8 @@
+Models
+======
+
 Currency
-========
+--------
 
 Every currency is represented by **Currency** instance and has following properties:
 
@@ -18,7 +21,7 @@ Every currency is represented by **Currency** instance and has following propert
 +-----------------+-------------------------------------+------------+
 
 CurrencyInterface
-=================
+-----------------
 
 .. note::
 

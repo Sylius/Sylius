@@ -1,5 +1,5 @@
-CurrencyProvider
-================
+Currency provider
+=================
 
 The **CurrencyProvider** allows you to get the available currencies, it implements the ``CurrencyProviderInterface``.
 
