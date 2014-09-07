@@ -11,5 +11,6 @@ PHP library which provides abstraction of payments management. It ships with def
    :numbered:
 
    installation
-   summary
    model
+   summary
+
