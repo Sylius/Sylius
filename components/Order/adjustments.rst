@@ -6,29 +6,29 @@ Adjustments
 Their amount can be positive (charges - taxes, shipping fees etc.) or negative (discounts etc.).
 
 Adjustment Basics
-------------
+-----------------
 
 Adjustments have the following properties:
 
-+-------------------+-----------------------------------------+
-| Attribute         | Description                             |
-+===================+=========================================+
-| id                | Unique id of the adjustment             |
-+-------------------+-----------------------------------------+
-| adjustable        | Reference to Order or OrderItem         |
-+-------------------+-----------------------------------------+
-| label             | Type of the adjustment (e.g. "tax"")    |
-+-------------------+-----------------------------------------+
-| description       | e.g. "Clothing Tax 9%"                  |
-+-------------------+-----------------------------------------+
-| amount            | Integer amount                          |
-+-------------------+-----------------------------------------+
-| neutral           | Boolean flag of neutrality              |
-+-------------------+-----------------------------------------+
-| createdAt         | Date when adjustment was created        |
-+-------------------+-----------------------------------------+
-| updatedAt         | Date of last change                     |
-+-------------------+-----------------------------------------+
++-------------------+-----------------------------------------+-----------------------------------+
+| Attribute         | Description                             | Returned value                    |
++===================+=========================================+===================================+
+| id                | Unique id of the adjustment             | mixed                             |
++-------------------+-----------------------------------------+-----------------------------------+
+| adjustable        | Reference to Order or OrderItem         | OrderInterface|OrderItemInterface |
++-------------------+-----------------------------------------+-----------------------------------+
+| label             | Type of the adjustment (e.g. "tax"")    | string                            |
++-------------------+-----------------------------------------+-----------------------------------+
+| description       | e.g. "Clothing Tax 9%"                  | string                            |
++-------------------+-----------------------------------------+-----------------------------------+
+| amount            | Integer amount                          | integer                           |
++-------------------+-----------------------------------------+-----------------------------------+
+| neutral           | Boolean flag of neutrality              | boolean                           |
++-------------------+-----------------------------------------+-----------------------------------+
+| createdAt         | Date when adjustment was created        | \DateTime                         |
++-------------------+-----------------------------------------+-----------------------------------+
+| updatedAt         | Date of last change                     | \DateTime                         |
++-------------------+-----------------------------------------+-----------------------------------+
 
 Neutral Adjustments
 -------------------
@@ -36,7 +36,7 @@ Neutral Adjustments
 In some cases, you may want to use **Adjustment** just for displaying purposes.
 For example, when your order items have the tax already included in the price.
 
-Every **Adjustment** instance has the `neutral` property, which indicates if it should be counted against object total.
+Every **Adjustment** instance has the ``neutral`` property, which indicates if it should be counted against object total.
 
 .. code-block:: php
 

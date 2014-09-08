@@ -8,40 +8,40 @@ Order Basics
 
 Order is constructed with the following attributes:
 
-+-------------------+-----------------------------------------+
-| Attribute         | Description                             |
-+===================+=========================================+
-| id                | Unique id of the order                  |
-+-------------------+-----------------------------------------+
-| number            | Human-friendly number                   |
-+-------------------+-----------------------------------------+
-| state             | String represeting the status           |
-+-------------------+-----------------------------------------+
-| items             | Collection of OrderItems                |
-+-------------------+-----------------------------------------+
-| itemsTotal        | Total value of the items                |
-+-------------------+-----------------------------------------+
-| adjustments       | Collection of Adjustments               |
-+-------------------+-----------------------------------------+
-| adjustmentsTotal  | Total value of adjustments              |
-+-------------------+-----------------------------------------+
-| total             | Order grand total                       |
-+-------------------+-----------------------------------------+
-| confirmed         | Boolean indicator of order confirmation |
-+-------------------+-----------------------------------------+
-| confirmationToken | Random string for order confirmation    |
-+-------------------+-----------------------------------------+
-| createdAt         | Date when order was created             |
-+-------------------+-----------------------------------------+
-| updatedAt         | Date of last change                     |
-+-------------------+-----------------------------------------+
-| completedAt       | Checkout completion time                |
-+-------------------+-----------------------------------------+
-| deletedAt         | Date of deletion                        |
-+-------------------+-----------------------------------------+
++-------------------+-----------------------------------------+-----------------------+
+| Attribute         | Description                             | Returned value        |
++===================+=========================================+=======================+
+| id                | Unique id of the order                  | mixed                 |
++-------------------+-----------------------------------------+-----------------------+
+| number            | Human-friendly number                   | string                |
++-------------------+-----------------------------------------+-----------------------+
+| state             | String represeting the status           | string                |
++-------------------+-----------------------------------------+-----------------------+
+| items             | Collection of OrderItems                | OrderItemInterface[]  |
++-------------------+-----------------------------------------+-----------------------+
+| itemsTotal        | Total value of the items                | integer               |
++-------------------+-----------------------------------------+-----------------------+
+| adjustments       | Collection of Adjustments               | AdjustmentInterface[] |
++-------------------+-----------------------------------------+-----------------------+
+| adjustmentsTotal  | Total value of adjustments              | integer               |
++-------------------+-----------------------------------------+-----------------------+
+| total             | Order grand total                       | integer               |
++-------------------+-----------------------------------------+-----------------------+
+| confirmed         | Boolean indicator of order confirmation | boolean               |
++-------------------+-----------------------------------------+-----------------------+
+| confirmationToken | Random string for order confirmation    | string                |
++-------------------+-----------------------------------------+-----------------------+
+| createdAt         | Date when order was created             | \DateTime             |
++-------------------+-----------------------------------------+-----------------------+
+| updatedAt         | Date of last change                     | \DateTime             |
++-------------------+-----------------------------------------+-----------------------+
+| completedAt       | Checkout completion time                | \DateTime             |
++-------------------+-----------------------------------------+-----------------------+
+| deletedAt         | Date of deletion                        | \DateTime             |
++-------------------+-----------------------------------------+-----------------------+
 
 Each order has 2 main identifiers, an *ID* and a human-friendly *number*.
-You can access those by calling ``->getId()`` and ``-getNumber()`` respectively.
+You can access those by calling ``->getId()`` and ``->getNumber()`` respectively.
 The number is mutable, so you can change it by calling ``->setNumber('E001')`` on the order instance.
 
 .. code-block:: php
@@ -135,27 +135,27 @@ OrderItem Basics
 
 **OrderItem** model has the attributes listed below:
 
-+------------------+-----------------------------+
-| Attribute        | Description                 |
-+==================+=============================+
-| id               | Unique id of the item       |
-+------------------+-----------------------------+
-| order            | Reference to an Order       |
-+------------------+-----------------------------+
-| unitPrice        | The price of a single unit  |
-+------------------+-----------------------------+
-| quantity         | Quantity of sold item       |
-+------------------+-----------------------------+
-| adjustments      | Collection of Adjustments   |
-+------------------+-----------------------------+
-| adjustmentsTotal | Total value of adjustments  |
-+------------------+-----------------------------+
-| total            | Order grand total           |
-+------------------+-----------------------------+
-| createdAt        | Date when order was created |
-+------------------+-----------------------------+
-| updatedAt        | Date of last change         |
-+------------------+-----------------------------+
++------------------+-----------------------------+-----------------------+
+| Attribute        | Description                 | Returned value        |
++==================+=============================+=======================+
+| id               | Unique id of the item       | mixed                 |
++------------------+-----------------------------+-----------------------+
+| order            | Reference to an Order       | OrderInterface        |
++------------------+-----------------------------+-----------------------+
+| unitPrice        | The price of a single unit  | integer               |
++------------------+-----------------------------+-----------------------+
+| quantity         | Quantity of sold item       | integer               |
++------------------+-----------------------------+-----------------------+
+| adjustments      | Collection of Adjustments   | djustmentInterface[]  |
++------------------+-----------------------------+-----------------------+
+| adjustmentsTotal | Total value of adjustments  | integer               |
++------------------+-----------------------------+-----------------------+
+| total            | Order grand total           | integer               |
++------------------+-----------------------------+-----------------------+
+| createdAt        | Date when order was created | \DateTime             |
++------------------+-----------------------------+-----------------------+
+| updatedAt        | Date of last change         | \DateTime             |
++------------------+-----------------------------+-----------------------+
 
 An order item model has only the **id** property as identifier and it has the order reference, accessible via ``->getOrder()`` method.
 
