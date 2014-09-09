@@ -61,3 +61,43 @@ Using the ``ResolveDoctrineTargetEntitiesPass``
             );
         }
     }
+
+Doctrine mapping
+----------------
+
+This bundle use the ``loadClassMetadata`` doctrine event which occurs after the mapping metadata for a class has been loaded from
+a mapping source (annotations/xml/yaml). Every models can be declared as **mapped superclass**, this listener will transform
+them in an entity or document if they have not child.
+
+With this following mapping, Doctrine will create the table ``my_table`` with the column ``name``.
+
+.. code-block:: xml
+
+    <!-- Resoource/config/Model.orm.xml-->
+
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+        <mapped-superclass name="My/Bundle/Model" table="my_table">
+            <id name="id" column="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+
+            <field name="name" column="name" type="string" />
+        <mapped-superclass>
+    </doctrine-mapping>
+
+If you want to add an extra field, you can create a new model which extends ``My/Bundle/Model`` and its doctrine mapping
+like that :
+
+    <!-- Resoource/config/NewModel.orm.xml-->
+
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+        <entity name="My/OtherBundle/NewModel" table="my_new_table">
+            <field name="description" column="name" type="string" />
+        <entity>
+    </doctrine-mapping>
+
+.. note::
+
+    This functionality works for Doctrine ORM and ODM.
