@@ -164,7 +164,7 @@ class Address implements AddressInterface
      */
     public function getPhoneNumber()
     {
-        return $this->company;
+        return $this->phoneNumber;
     }
 
     /**
