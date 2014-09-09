@@ -103,6 +103,10 @@ winzou_state_machine:
                     on:   'release'
                     do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getPayments()', 'event', '"void"', '"sylius_payment"']
+                sylius_complete:
+                    on:   'create'
+                    do:   [@sylius.callback.complete_order, 'countSoldVariants'],
+                    args: ['object']
 
     sylius_inventory_unit:
         callbacks:

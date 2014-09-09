@@ -19,13 +19,15 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariant" table="sylius_product_variant">
         <indexes>
-            <index columns="sku"/>
+            <index columns="sku" />
+            <index columns="sold" />
         </indexes>
 
         <field name="sku" column="sku" type="string" nullable="true" />
 
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
+        <field name="sold" column="sold" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean" />
 
         <field name="price" column="price" type="integer">
