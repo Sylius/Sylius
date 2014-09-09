@@ -45,7 +45,7 @@ class CurrencyHelper extends Helper
     /**
      * Convert amount to target or currently used currency.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
      *
      * @return string
@@ -60,17 +60,18 @@ class CurrencyHelper extends Helper
     /**
      * Convert amount and format it!
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
+     * @param bool        $decimal
      *
      * @return string
      */
-    public function convertAndFormatAmount($amount, $currency = null)
+    public function convertAndFormatAmount($amount, $currency = null, $decimal = false)
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
         $amount = $this->converter->convert($amount, $currency);
 
-        return $this->moneyHelper->formatAmount($amount, $currency);
+        return $this->moneyHelper->formatAmount($amount, $currency, $decimal);
     }
 
     /**
