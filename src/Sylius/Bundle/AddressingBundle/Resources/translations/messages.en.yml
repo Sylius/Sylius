@@ -6,6 +6,7 @@ sylius:
             country: Country
             first_name: First name
             last_name: Last name
+            phone_number: Phone number
             postcode: Postcode
             street: Street
             province: Province

@@ -41,7 +41,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
     {
         $resourceController->getConfiguration()->willReturn($configuration);
 
-        $event->getController()->willreturn(array($resourceController));
+        $event->getController()->willReturn(array($resourceController));
         $event->getRequest()->willReturn($request);
 
         $request->attributes = $parameterBag;
@@ -66,7 +66,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber');
     }
 
-    function it_is_event_suvscriver()
+    function it_is_event_subscriber()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
@@ -108,6 +108,8 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
 
+        $parameterBag->get('_route_params', array())->willReturn(array());
+
         $this->onKernelController($event);
     }
 
@@ -146,6 +148,8 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
+
+        $parameterBag->get('_route_params', array())->willReturn(array());
 
         $this->onKernelController($event);
     }
@@ -188,6 +192,8 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
         $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
+
+        $parameterBag->get('_route_params', array())->willReturn(array());
 
         $this->onKernelController($event);
     }

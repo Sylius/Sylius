@@ -92,7 +92,7 @@ class ResourceExtension extends \Twig_Extension
      */
     public function fetchRequest(GetResponseEvent $event)
     {
-        if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
+        if (HttpKernel::MASTER_REQUEST !== $event->getRequestType()) {
             return;
         }
 
@@ -119,7 +119,7 @@ class ResourceExtension extends \Twig_Extension
         }
 
         $options = $this->getOptions($options, $this->sortingTemplate);
-        $sorting = $this->parameters->get('sorting', array('id' => 'asc'));
+        $sorting = $this->request->query->get($this->getParameterName('sorting'), $this->parameters->get($this->getParameterName('sorting'), array('id' => 'asc')));
         $currentOrder = null;
 
         if (isset($sorting[$property])) {

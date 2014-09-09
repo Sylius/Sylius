@@ -40,7 +40,7 @@ class PurchaseStep extends CheckoutStep
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
             $payment,
-            'sylius_checkout_forward',
+            $context->getProcess()->getForwardRoute(),
             array('stepName' => $this->getName())
         );
 

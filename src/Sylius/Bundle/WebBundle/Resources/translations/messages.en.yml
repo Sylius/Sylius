@@ -294,12 +294,12 @@ sylius:
         update_header: Edit group
     hide_deleted: Hide deleted
     history:
-        0: History
+        header: History
         action: Action
         author: Author
         data: Data
-        logged_at: Logged at
-        version: Version
+        logged_at: Logged at (version)
+        revert: Revert
     homepage:
         splash:
             headline: Welcome to Sylius

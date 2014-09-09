@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 /**
- * Doctrine listener used to set the request on the configurable controllers.
+ * Kernel listener used to set the request on the configurable controllers.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langade <arn0d.dev@gmail.com>
@@ -64,7 +64,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'kernel.controller' => array('onKernelController', 0)
+            'kernel.controller' => array('onKernelController', 0),
         );
     }
 
@@ -74,23 +74,36 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     public function onKernelController(FilterControllerEvent $event)
     {
         $controller = $event->getController();
-
         if (!is_array($controller)) {
             return;
         }
 
-        if ($controller[0] instanceof ResourceController) {
-            $request = $event->getRequest();
+        $controller = reset($controller);
+        if ($controller instanceof ResourceController) {
+            $this->processRequest($controller, $event->getRequest());
+        }
+    }
 
-            $parameters = $this->parseApiData($request);
-            $parameters = array_merge($this->settings, $parameters);
-            list($parameters , $parameterNames) = $this->parametersParser->parse($parameters, $request);
+    /**
+     * @param ResourceController $controller
+     * @param Request            $request
+     */
+    private function processRequest(ResourceController $controller, Request $request)
+    {
+        $parameters = array_merge($this->settings, $this->parseApiData($request));
+        list($parameters, $parameterNames) = $this->parametersParser->parse($parameters, $request);
 
-            $this->parameters->replace($parameters);
-            $this->parameters->set('paramater_name', $parameterNames);
+        $this->parameters->replace($parameters);
+        $this->parameters->set('paramater_name', $parameterNames);
 
-            $controller[0]->getConfiguration()->setRequest($request);
-            $controller[0]->getConfiguration()->setParameters($this->parameters);
+        $controller->getConfiguration()->setRequest($request);
+        $controller->getConfiguration()->setParameters($this->parameters);
+
+        $routeParams = $request->attributes->get('_route_params', array());
+        if (isset($routeParams['_sylius'])) {
+            unset($routeParams['_sylius']);
+
+            $request->attributes->set('_route_params', $routeParams);
         }
     }
 

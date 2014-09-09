@@ -73,7 +73,7 @@ class ResourceEvent extends GenericEvent
     /**
      * Get error property
      *
-     * @return Boolean $error
+     * @return bool
      */
     public function isStopped()
     {
@@ -83,7 +83,7 @@ class ResourceEvent extends GenericEvent
     /**
      * Get messageType property
      *
-     * @return string $messageType
+     * @return string
      */
     public function getMessageType()
     {
@@ -91,9 +91,23 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
+     * Sets messageType property
+     *
+     * @param string $messageType Should be one of ResourceEvent's TYPE constants
+     *
+     * @return $this
+     */
+    public function setMessageType($messageType)
+    {
+        $this->messageType = $messageType;
+
+        return $this;
+    }
+
+    /**
      * Get message property
      *
-     * @return string $message
+     * @return string
      */
     public function getMessage()
     {
@@ -101,12 +115,40 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
+     * Sets message property
+     *
+     * @param string $message
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
      * Get messageParameters property
      *
-     * @return string $messageParameters
+     * @return array
      */
     public function getMessageParameters()
     {
         return $this->messageParameters;
+    }
+
+    /**
+     * Sets messageParameters property
+     *
+     * @param array $messageParameters
+     *
+     * @return $this
+     */
+    public function setMessageParameters(array $messageParameters)
+    {
+        $this->messageParameters = $messageParameters;
+
+        return $this;
     }
 }

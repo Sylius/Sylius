@@ -16,13 +16,6 @@ use Symfony\Component\Templating\Helper\Helper;
 class MoneyHelper extends Helper
 {
     /**
-     * The locale used to format money.
-     *
-     * @var string
-     */
-    private $locale;
-
-    /**
      * The default currency.
      *
      * @var string
@@ -32,30 +25,45 @@ class MoneyHelper extends Helper
     /**
      * @var \NumberFormatter
      */
-    private $formatter;
+    private $formatterCurrency;
 
+    /**
+     * @var \NumberFormatter
+     */
+    private $formatterDecimal;
+
+    /**
+     * @param string $locale   The locale used to format money.
+     * @param string $currency The default currency.
+     */
     public function __construct($locale, $currency)
     {
-        $this->locale = $locale;
-        $this->currency = $currency;
-        $this->formatter = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
+        $this->currency          = $currency;
+        $this->formatterCurrency = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
+        $this->formatterDecimal  = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::DECIMAL);
     }
 
     /**
      * Format the money amount to nice display form.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
+     * @param bool        $decimal
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function formatAmount($amount, $currency = null)
+    public function formatAmount($amount, $currency = null, $decimal = false)
     {
-        $currency = $currency ?: $this->getDefaultCurrency();
-        $result = $this->formatter->formatCurrency($amount / 100, $currency);
+        if ($decimal) {
+            $formatter = $this->formatterDecimal;
+        } else {
+            $formatter = $this->formatterCurrency;
+        }
 
+        $currency = $currency ?: $this->getDefaultCurrency();
+        $result   = $formatter->formatCurrency($amount / 100, $currency);
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
         }

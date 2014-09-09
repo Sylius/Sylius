@@ -44,16 +44,17 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
+     * Adds `validation_groups` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -70,6 +71,19 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `classes` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
                     ->isRequired()
                     ->addDefaultsIfNotSet()
@@ -77,14 +91,14 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('cart')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartController')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('item')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartItemController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartItemController')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartItemType')->end()
                             ->end()
                         ->end()
