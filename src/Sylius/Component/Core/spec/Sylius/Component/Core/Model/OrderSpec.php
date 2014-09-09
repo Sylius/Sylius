@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -105,23 +105,6 @@ class OrderSpec extends ObjectBehavior
         $this->removeShipment($shipment);
 
         $this->hasShipment($shipment)->shouldReturn(false);
-    }
-
-    /**
-     * Helper method
-     */
-    protected function addShippingAndTaxAdjustments(
-        OrderInterface $order,
-        AdjustmentInterface $shippingAdjustment,
-        AdjustmentInterface $taxAdjustment
-    ) {
-        $shippingAdjustment->getLabel()->willReturn(OrderInterface::SHIPPING_ADJUSTMENT);
-        $shippingAdjustment->setAdjustable($order)->shouldBeCalled();
-        $taxAdjustment->getLabel()->willReturn(OrderInterface::TAX_ADJUSTMENT);
-        $taxAdjustment->setAdjustable($order)->shouldBeCalled();
-
-        $order->addAdjustment($shippingAdjustment);
-        $order->addAdjustment($taxAdjustment);
     }
 
     function it_should_return_shipping_adjustments(
@@ -232,5 +215,22 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item);
 
         $this->shouldNotBeBackorder();
+    }
+
+    /**
+     * Helper method
+     */
+    protected function addShippingAndTaxAdjustments(
+        OrderInterface $order,
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $taxAdjustment
+    ) {
+        $shippingAdjustment->getLabel()->willReturn(OrderInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->setAdjustable($order)->shouldBeCalled();
+        $taxAdjustment->getLabel()->willReturn(OrderInterface::TAX_ADJUSTMENT);
+        $taxAdjustment->setAdjustable($order)->shouldBeCalled();
+
+        $order->addAdjustment($shippingAdjustment);
+        $order->addAdjustment($taxAdjustment);
     }
 }
