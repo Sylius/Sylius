@@ -7,7 +7,6 @@
 
     <parameters>
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
-        <parameter key="sylius.subscriber.order_comment.class">Sylius\Bundle\OrderBundle\EventListener\OrderCommentSubscriber</parameter>
     </parameters>
 
     <services>
