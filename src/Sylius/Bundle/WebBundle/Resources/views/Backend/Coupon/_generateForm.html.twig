@@ -2,6 +2,8 @@
 
 <fieldset>
     {{ form_row(form.amount) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.value) }}
     {{ form_row(form.usageLimit) }}
     {{ form_row(form.expiresAt) }}
     {{ form_widget(form._token) }}

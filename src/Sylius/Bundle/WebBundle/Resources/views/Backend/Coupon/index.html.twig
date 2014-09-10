@@ -17,11 +17,11 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.show'|trans) }}
+        {{ buttons.show(path('sylius_backend_promotion_show', {'id': promotionId}), 'sylius.promotion_coupon.promotion_details'|trans) }}
         {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotionId}), 'sylius.promotion_coupon.create'|trans) }}
         {{ buttons.manage(path('sylius_backend_promotion_coupon_generate', {'promotionId': promotionId}), 'sylius.promotion_coupon.generate'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-ticket"></i> {{ 'sylius.promotion_coupon.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-barcode"></i> {{ 'sylius.promotion_coupon.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(promotion_coupons) }}

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,6 +27,19 @@ class CouponType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('type', 'choice', [
+                'label'   => 'sylius.form.coupon.type',
+                'choices' => [
+                    CouponInterface::TYPE_COUPON    => 'sylius.form.coupon.types.coupon',
+                    CouponInterface::TYPE_GIFT_CARD => 'sylius.form.coupon.types.gift_card',
+                ],
+            ])
+            ->add('code', 'text', [
+                'label' => 'sylius.form.coupon.code',
+            ])
+            ->add('amount', 'sylius_money', [
+                'label' => 'sylius.form.coupon.amount',
+            ])
             ->add('usageLimit', 'integer', [
                 'label' => 'sylius.form.coupon.usage_limit',
             ])

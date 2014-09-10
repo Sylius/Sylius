@@ -14,6 +14,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\PromotionRuleInterface;
+use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
@@ -69,7 +70,20 @@ class LoadPromotionsData extends DataFixture
 
         $manager->persist($promotion);
 
+        $promotion = $this->createPromotion(
+            'PM5',
+            'Gift cards',
+            'Simple gift cards with amount 50 EUR.',
+            array(),
+            array($this->createAction(ActionInterface::TYPE_GIFT_CARD_DISCOUNT, array())),
+            true
+        );
+
+        $manager->persist($promotion);
+
         $manager->flush();
+
+        $this->generateCoupons($promotion, 5, CouponInterface::TYPE_GIFT_CARD, null, 5000);
     }
 
     /**
@@ -124,15 +138,17 @@ class LoadPromotionsData extends DataFixture
      * @param string $description
      * @param array  $rules
      * @param array  $actions
+     * @param bool   $couponBased
      *
      * @return PromotionInterface
      */
-    protected function createPromotion($code, $name, $description, array $rules, array $actions)
+    protected function createPromotion($code, $name, $description, array $rules, array $actions, $couponBased = false)
     {
         /** @var $promotion PromotionInterface */
         $promotion = $this->getPromotionFactory()->createNew();
         $promotion->setName($name);
         $promotion->setDescription($description);
+        $promotion->setCouponBased($couponBased);
         $promotion->setCode($code);
 
         foreach ($rules as $rule) {
@@ -145,5 +161,26 @@ class LoadPromotionsData extends DataFixture
         $this->setReference('Sylius.Promotion.'.$name, $promotion);
 
         return $promotion;
+    }
+
+    /**
+     * Generate coupons for given promotion.
+     *
+     * @param PromotionInterface $promotion
+     * @param int                $amount
+     * @param string             $type
+     * @param null|int           $limit
+     * @param int                $value
+     */
+    protected function generateCoupons($promotion, $amount, $type, $limit = null, $value = 0)
+    {
+        $instruction = new Instruction();
+        $instruction->setAmount($amount);
+        $instruction->setType($type);
+        $instruction->setValue($value);
+        $instruction->setUsageLimit($limit);
+
+        $generator = $this->get('sylius.generator.promotion_coupon');
+        $generator->generate($promotion, $instruction);
     }
 }

@@ -40,8 +40,13 @@ sylius:
         coupon:
             usage_limit: Usage limit
             expires_at: Expires at
-        coupon_generate_instruction:
             amount: Amount
+            type: Coupon type
+            types:
+                coupon: Coupon
+                gift_card: Gift card
+        coupon_generate_instruction:
+            value: Gift card value
             usage_limit: Usage limit
             expires_at: Expires at
         promotion:

@@ -152,6 +152,11 @@ winzou_state_machine:
                     do:   [@sylius.callback.promotion_usage, 'decrementPromotionUsage']
                     args: ['object']
 
+                sylius_decrement_coupon:
+                    on:   'cancel'
+                    do:   [@sylius.callback.coupon_usage, 'decrementCouponUsage']
+                    args: ['object']
+
     sylius_inventory_unit:
         callbacks:
             after:

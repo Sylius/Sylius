@@ -1,7 +1,11 @@
 {% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
 
 <fieldset>
+    {% if promotion_coupon.id is empty %}
+    {{ form_row(form.type) }}
+    {% endif %}
     {{ form_row(form.code) }}
+    {{ form_row(form.amount) }}
     {{ form_row(form.usageLimit) }}
     {{ form_row(form.perCustomerUsageLimit) }}
     {{ form_row(form.expiresAt) }}

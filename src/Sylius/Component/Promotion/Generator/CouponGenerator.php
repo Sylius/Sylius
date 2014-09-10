@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -58,8 +59,14 @@ class CouponGenerator implements CouponGeneratorInterface
             $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
-            $coupon->setUsageLimit($instruction->getUsageLimit());
             $coupon->setExpiresAt($instruction->getExpiresAt());
+            $coupon->setType($instruction->getType());
+
+            if (CouponInterface::TYPE_COUPON === $instruction->getType()) {
+                $coupon->setUsageLimit($instruction->getUsageLimit());
+            } elseif (CouponInterface::TYPE_GIFT_CARD === $instruction->getType()) {
+                $coupon->setAmount($instruction->getValue());
+            }
 
             $generatedCoupons[] = $coupon;
 
