@@ -27,7 +27,7 @@ class SyliusOrderBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -45,9 +45,10 @@ class SyliusOrderBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
+            'Sylius\Component\Order\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
+            'Sylius\Component\Order\Model\CommentInterface'    => 'sylius.model.comment.class',
             'Sylius\Component\Order\Model\OrderInterface'      => 'sylius.model.order.class',
             'Sylius\Component\Order\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
-            'Sylius\Component\Order\Model\AdjustmentInterface' => 'sylius.model.adjustment.class',
         );
     }
 

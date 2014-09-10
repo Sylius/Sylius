@@ -1,6 +1,9 @@
 email:
     order_confirmation:
-        subject: email.order_confirmation.subject
+        subject: Your order was confirmed
+    order_comment:
+        subject: Your order was commented by shop stuff
+        header: Order Comment
 sylius:
     account:
         address:
@@ -276,6 +279,9 @@ sylius:
             email: Email
             firstName: First name
             lastName: Last name
+        comment:
+            comment: Comment
+            notify_customer: Notify Customer?
     gallery:
         next: Next
         previous: Previous
@@ -389,6 +395,17 @@ sylius:
         total: Total
         update_header: Editing order
         user: User
+        comment:
+            header: Order comments
+            comment: Comment
+            author: Author
+            created_at: Created at
+            notify: Notification
+            state: State
+            customer:
+                notified: Customer notified
+                not_notified: Customer not notified
+            no_comment: No comment
     shipment:
         ship: Ship
         created_at: Created at

@@ -223,64 +223,106 @@
 
 <hr/>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th colspan="8">{{ 'sylius.order.inventory_tracking'|trans }}</th>
-        </tr>
-        <tr>
-            <th>#</th>
-            <th>{{ 'sylius.inventory_unit.sku'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
-            <th>{{ 'sylius.inventory_unit.updated_at'|trans }}</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for unit in order.inventoryUnits %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ unit.stockable.sku }}</td>
-            <td>{{ unit.inventoryName }}</td>
-            <td>{{ unit.inventoryState|humanize }}</td>
-            <td>{{ unit.shippingState|humanize }}</td>
-            <td>{{ unit.createdAt|date }}</td>
-            <td>{{ unit.updatedAt|date }}</td>
-            <td>
-                {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
-                    <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">
-                        <input type="hidden" name="_method" value="PUT">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-share"></i> <span>{{ ('sylius.order.inventory_unit.' ~ transition)|trans }}</span>
-                        </button>
-                    </form>
-                {% endfor %}
-            </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="8">
-            {{ alerts.info('sylius.inventory_unit.no_results'|trans) }}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#comments" data-toggle="tab">{{ 'sylius.order.comment.header'|trans }}</a></li>
+    <li><a href="#inventory" data-toggle="tab">{{ 'sylius.order.inventory_tracking'|trans }}</a></li>
+</ul>
 
-{% if sm_can(order, constant('Sylius\\Component\\Order\\OrderTransitions::SYLIUS_RELEASE'), constant('Sylius\\Component\\Order\\OrderTransitions::GRAPH')) %}
-    <form action="{{ path('sylius_backend_order_release_inventory', {'id': order.id}) }}" method="post">
-        <input type="hidden" name="_method" value="PUT">
-        <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-repeat"></i> <span>{{ 'sylius.order.release_inventory'|trans }}</span>
-        </button>
-    </form>
-{% elseif 1 == order.shipments|length and constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_CONFIRMED') == order.state and constant('Sylius\\Component\\Payment\\Model\\PaymentInterface::STATE_COMPLETED') == order.paymentState %}
-    <form action="{{ path('sylius_backend_shipment_ship', {'id': order.shipments.current.id}) }}" method="post">
-        {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
-    </form>
-{% endif %}
+<div class="tab-content">
+    <div class="tab-pane active" id="comments">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'sylius.order.comment.comment'|trans }}</th>
+                <th>{{ 'sylius.order.comment.author'|trans }}</th>
+                <th>{{ 'sylius.order.comment.state'|trans }}</th>
+                <th>{{ 'sylius.order.comment.notify'|trans }}</th>
+                <th>{{ 'sylius.order.comment.created_at'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for comment in order.comments|reverse %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td><p>{{ comment.comment|default('sylius.order.comment.no_comment'|trans) }}</p></td>
+                    <td>{{ comment.author }}</td>
+                    <td>{{ misc.state_label(comment.state, 'order') }}</td>
+                    <td>
+                        <span class="label label-{{ comment.notifyCustomer ? 'primary' : 'info' }}">
+                            {{ (comment.notifyCustomer ? 'sylius.order.comment.customer.notified' : 'sylius.order.comment.customer.not_notified')|trans }}
+                        </span>
+                    </td>
+                    <td>{{ comment.createdAt|date }}</td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td colspan="6">
+                        {{ render(url('sylius_backend_order_comment_create', {'id': order.id})) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane" id="inventory">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ 'sylius.inventory_unit.sku'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
+                    <th>{{ 'sylius.inventory_unit.updated_at'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unit in order.inventoryUnits %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ unit.stockable.sku }}</td>
+                    <td>{{ unit.inventoryName }}</td>
+                    <td>{{ unit.inventoryState|humanize }}</td>
+                    <td>{{ unit.shippingState|humanize }}</td>
+                    <td>{{ unit.createdAt|date }}</td>
+                    <td>{{ unit.updatedAt|date }}</td>
+                    <td>
+                        {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
+                            <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">
+                                <input type="hidden" name="_method" value="PUT">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="glyphicon glyphicon-share"></i> <span>{{ ('sylius.order.inventory_unit.' ~ transition)|trans }}</span>
+                                </button>
+                            </form>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8">
+                    {{ alerts.info('sylius.inventory_unit.no_results'|trans) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% if sm_can(order, constant('Sylius\\Component\\Order\\OrderTransitions::SYLIUS_RELEASE'), constant('Sylius\\Component\\Order\\OrderTransitions::GRAPH')) %}
+        <form action="{{ path('sylius_backend_order_release_inventory', {'id': order.id}) }}" method="post">
+            <input type="hidden" name="_method" value="PUT">
+            <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-repeat"></i> <span>{{ 'sylius.order.release_inventory'|trans }}</span>
+            </button>
+        </form>
+    {% elseif 1 == order.shipments|length and constant('Sylius\\Component\\Order\\Model\\OrderInterface::STATE_CONFIRMED') == order.state and constant('Sylius\\Component\\Payment\\Model\\PaymentInterface::STATE_COMPLETED') == order.paymentState %}
+        <form action="{{ path('sylius_backend_shipment_ship', {'id': order.shipments.current.id}) }}" method="post">
+            {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
+        </form>
+    {% endif %}
+    </div>
+</div>
 
 {% endblock %}

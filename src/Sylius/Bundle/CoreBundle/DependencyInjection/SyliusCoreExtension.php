@@ -53,6 +53,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     );
 
     private $emails = array(
+        'order_comment',
         'order_confirmation',
         'customer_welcome'
     );

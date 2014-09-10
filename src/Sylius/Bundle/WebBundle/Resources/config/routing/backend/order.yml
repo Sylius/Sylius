@@ -64,3 +64,12 @@ sylius_backend_order_release_inventory:
     methods: [PUT]
     defaults:
         _controller: sylius.controller.order:releaseInventoryAction
+
+sylius_backend_order_comment_create:
+    path: /{id}/comment/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.comment:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:createComment.html.twig
+

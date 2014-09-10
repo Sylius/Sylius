@@ -64,6 +64,13 @@ class Order implements OrderInterface
     protected $adjustments;
 
     /**
+     * Comments.
+     *
+     * @var Collection|CommentInterface[]
+     */
+    protected $comments;
+
+    /**
      * Adjustments total.
      *
      * @var integer
@@ -127,6 +134,7 @@ class Order implements OrderInterface
     {
         $this->items = new ArrayCollection();
         $this->adjustments = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -388,6 +396,40 @@ class Order implements OrderInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addComment(CommentInterface $comment)
+    {
+        if (!$this->comments->contains($comment)) {
+            $comment->setOrder($this);
+            $this->comments->add($comment);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeComment(CommentInterface $comment)
+    {
+        if ($this->comments->contains($comment)) {
+            $comment->setOrder(null);
+            $this->comments->removeElement($comment);
+        }
+
+        return $this;
     }
 
     /**
