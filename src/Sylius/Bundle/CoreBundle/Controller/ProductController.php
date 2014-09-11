@@ -62,8 +62,6 @@ class ProductController extends ResourceController
 
         $paginator = $finder->getPaginator();
 
-        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
-
         return $this->renderResults(
             $taxon,
             $paginator,
@@ -72,8 +70,8 @@ class ProductController extends ResourceController
             $finder->getFacets(),
             $config['filters']['facets'],
             $finder->getFilters(),
-            $requestBag->get('q'),
-            $requestBag->get('search_param'),
+            $this->get('sylius_search.request_handler')->getQuery(),
+            $this->get('sylius_search.request_handler')->getSearchParam(),
             $this->container->getParameter('sylius_search.request.method')
         );
     }

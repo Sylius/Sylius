@@ -33,6 +33,8 @@
         <parameter key="sylius_search.elasticsearch.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\ElasticsearchQueryLogger</parameter>
 
         <parameter key="sylius.search.product.property_accessor.class">Sylius\Bundle\SearchBundle\Accessor\PropertyAccessorAdaptor</parameter>
+
+        <parameter key="sylius.search.request_handler">Sylius\Bundle\SearchBundle\Request\RequestHandler</parameter>
     </parameters>
 
     <services>
@@ -108,6 +110,10 @@
         <service id="sylius_search.twig.search_element_extension" class="Sylius\Bundle\SearchBundle\Twig\SearchElementExtension" public="false">
             <argument>%sylius_search.config%</argument>
             <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius_search.request_handler" class="%sylius.search.request_handler%" scope="request">
+            <argument type="service" id="request" />
         </service>
     </services>
 

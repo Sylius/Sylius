@@ -45,11 +45,9 @@ class SearchController extends ResourceController
 
         $searchConfig = $this->container->getParameter("sylius_search.config");
 
-        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
-
         if ($paginator) {
             $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
-            $paginator->setCurrentPage($requestBag->get('page', 1));
+            $paginator->setCurrentPage($this->get('sylius_search.request_handler')->getPage());
         }
 
         $view = $this
@@ -60,8 +58,8 @@ class SearchController extends ResourceController
                 'facets' => $finder->getFacets(),
                 'facetTags' => $searchConfig['filters']['facets'],
                 'filters' => $finder->getFilters(),
-                'searchTerm' => $requestBag->get('q'),
-                'searchParam' => $requestBag->get('search_param'),
+                'searchTerm' => $this->get('sylius_search.request_handler')->getQuery(),
+                'searchParam' => $this->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
             ));
 
@@ -94,15 +92,15 @@ class SearchController extends ResourceController
 
         }
 
-        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
+        $this->get('sylius_search.request_handler')->setRequest($request);
 
         $view = $this
             ->view()
             ->setTemplate($this->container->getParameter('sylius_search.search.template'))
             ->setData(array(
                 'filters' => $filters,
-                'searchTerm' => $requestBag->get('q'),
-                'searchParam' => $requestBag->get('search_param'),
+                'searchTerm' => $this->get('sylius_search.request_handler')->getQuery(),
+                'searchParam' => $this->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
             ));
 
