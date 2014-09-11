@@ -233,4 +233,17 @@ class OrderSpec extends ObjectBehavior
         $order->addAdjustment($shippingAdjustment);
         $order->addAdjustment($taxAdjustment);
     }
+
+    function it_should_allow_defining_email()
+    {
+        $this->setEmail('example@example.com');
+        $this->getEmail()->shouldReturn('example@example.com');
+    }
+
+    function it_should_allow_defining_email_from_user(UserInterface $user)
+    {
+        $user->getEmail()->willReturn('example@example.com');
+        $this->setUser($user);
+        $this->getEmail()->shouldReturn('example@example.com');
+    }
 }

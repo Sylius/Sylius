@@ -43,8 +43,7 @@ class OrderConfirmationMailerSpec extends ObjectBehavior
         $parameters = array('template' => 'test-template.html.twig', 'from_email' => 'from@example.com');
         $this->beConstructedWith($mailer, $parameters);
 
-        $user->getEmail()->willReturn('recipient@example.com');
-        $order->getUser()->willReturn($user);
+        $order->getEmail()->willReturn('recipient@example.com');
 
         $mailer->sendEmail(
             'test-template.html.twig',
