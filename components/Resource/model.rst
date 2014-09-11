@@ -7,9 +7,16 @@ SoftDeletableInterface
 This inferface will ask you to implement the following methods to your model, they will use by the soft
 `deletable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/softdeleteable.md>`_. :
 
-:isDeleted(): it will tell to you if the resource has been deleted (it must return a boolean)
-:getDeletedAt(): It will return the date when the resouce has been deleted (it must return a DateTime)
-:setDeletedAt(\DateTime $deletedAt):
++------------------------------------+------------------------------------------+-------------------+
+| Method                             | Description                              | Returned value    |
++====================================+==========================================+===================+
+| isDeleted()                        | Check if the resource has been deleted   | boolean           |
++------------------------------------+------------------------------------------+-------------------+
+| getDeletedAt()                     | Get the time of deletion                 | \DateTime         |
++------------------------------------+------------------------------------------+-------------------+
+| setDeletedAt(\DateTime $deletedAt) | Cet deletion time.                       | Void              |
++------------------------------------+------------------------------------------+-------------------+
+
 
 TimestampableInterface
 ----------------------
@@ -17,7 +24,14 @@ TimestampableInterface
 This inferface will ask you to implement the following methods to your model, they will use by the
 `timestampable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/timestampable.md/>`_. :
 
-:getCreatedAt(): it will return the date when the resource has been created (it must return a DateTime)
-:getUpdatedAt(): it will return the date when the resource has been updated for the last time (it must return a DateTime)
-:setCreatedAt(\DateTime $createdAt):
-:setUpdatedAt(\DateTime $updatedAt):
++------------------------------------+------------------------------------------+-------------------+
+| Method                             | Description                              | Returned value    |
++====================================+==========================================+===================+
+| getCreatedAt()                     | Get creation time                        | \DateTime         |
++------------------------------------+------------------------------------------+-------------------+
+| getUpdatedAt()                     | Get the time of last update              | \DateTime         |
++------------------------------------+------------------------------------------+-------------------+
+| setCreatedAt(\DateTime $createdAt) | Set creation time                        | Void              |
++------------------------------------+------------------------------------------+-------------------+
+| setUpdatedAt(\DateTime $updatedAt) | Set the time of last update              | Void              |
++------------------------------------+------------------------------------------+-------------------+
