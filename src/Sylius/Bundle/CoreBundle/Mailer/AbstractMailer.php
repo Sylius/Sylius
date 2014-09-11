@@ -46,7 +46,6 @@ abstract class AbstractMailer
      */
     protected function sendEmail(array $context, $recipient)
     {
-        echo $this->parameters['template'];
         $this->mailer->sendEmail(
             $this->parameters['template'],
             $context,
