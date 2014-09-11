@@ -30,6 +30,16 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * Gets the number of orders placed by the customer
+     * Gets orders that contain specific coupons.
+     *
+     * @param array $criteria
+     *
+     * @return OrderInterface[]
+     */
+    public function findWithCoupons(array $criteria = array());
+
+    /**
+     * Gets the number of orders placed by the user.
      * for a particular coupon.
      *
      * @param CustomerInterface $customer

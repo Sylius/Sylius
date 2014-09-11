@@ -20,6 +20,7 @@
         <parameter key="sylius.controller.frontend.homepage.class">Sylius\Bundle\WebBundle\Controller\Frontend\HomepageController</parameter>
         <parameter key="sylius.controller.frontend.account.address.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController</parameter>
         <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
+        <parameter key="sylius.controller.frontend.account.giftcard.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\GiftCardController</parameter>
 
         <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
         <parameter key="sylius.controller.backend.security.class">Sylius\Bundle\WebBundle\Controller\Backend\SecurityController</parameter>
@@ -42,6 +43,11 @@
             </call>
         </service>
         <service id="sylius.controller.frontend.account.order" class="%sylius.controller.frontend.account.order.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.frontend.account.giftcard" class="%sylius.controller.frontend.account.giftcard.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

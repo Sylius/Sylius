@@ -53,6 +53,7 @@ class CouponGeneratorSpec extends ObjectBehavior
     ) {
         $instruction->getAmount()->willReturn(1);
         $instruction->getUsageLimit()->willReturn(null);
+        $instruction->getType()->willReturn(CouponInterface::TYPE_COUPON);
         $instruction->getExpiresAt()->willReturn(null);
 
         $couponFactory->createNew()->willReturn($coupon);
@@ -61,6 +62,7 @@ class CouponGeneratorSpec extends ObjectBehavior
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
+        $coupon->setType(CouponInterface::TYPE_COUPON)->shouldBeCalled();
         $coupon->setExpiresAt(null)->shouldBeCalled();
 
         $manager->getFilters()->shouldBeCalled()->willReturn($filters);

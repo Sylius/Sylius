@@ -20,10 +20,10 @@ use Sylius\Component\Promotion\Model\CouponInterface;
  */
 class Instruction
 {
-    protected $amount     = 5;
-    protected $usageLimit = 1;
-    protected $value      = 0;
-    protected $type       = CouponInterface::TYPE_COUPON;
+    protected $amount = 5;
+    protected $value  = 0;
+    protected $type   = CouponInterface::TYPE_COUPON;
+    protected $usageLimit;
     protected $expiresAt;
 
     public function getAmount()
@@ -58,8 +58,6 @@ class Instruction
     public function setValue($value)
     {
         $this->value = $value;
-
-        return $this;
     }
 
     public function getUsageLimit()
@@ -70,8 +68,6 @@ class Instruction
     public function setUsageLimit($usageLimit)
     {
         $this->usageLimit = $usageLimit;
-
-        return $this;
     }
 
     public function getExpiresAt()

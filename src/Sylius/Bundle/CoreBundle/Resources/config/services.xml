@@ -415,7 +415,8 @@
         </service>
         <service id="sylius.promotion_action.gift_card_discount" class="%sylius.promotion_action.gift_card_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
-            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="sylius.originator" />
+            <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_action" type="gift_card_discount" label="Gift card discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">

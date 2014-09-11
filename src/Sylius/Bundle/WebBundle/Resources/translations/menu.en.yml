@@ -110,6 +110,7 @@ sylius:
                 addresses: My address book
                 homepage: Home
                 orders: My orders / my invoices
+                giftcards: My giftcards
                 password: My password
                 profile: My personal information
                 shop: Back to the shop
