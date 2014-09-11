@@ -32,6 +32,9 @@ class RequestHandler {
         $this->request = ($request->isMethod('GET'))? $request->query:$request->request;
     }
 
+    /**
+     * @param Request $request
+     */
     public function setRequest(Request $request) {
         $this->request = ($request->isMethod('GET'))? $request->query:$request->request;
     }
@@ -57,4 +60,4 @@ class RequestHandler {
         return $this->request->get('search_param');
     }
 
-} 
+}
