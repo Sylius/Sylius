@@ -33,6 +33,20 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     const STATE_RETURNED    = 'returned';
 
     /**
+     * Get customer email.
+     *
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * Set customer email.
+     *
+     * @param string $email
+     */
+    public function setEmail($email);
+
+    /**
      * Has the order been completed by user and can be handled.
      *
      * @return Boolean

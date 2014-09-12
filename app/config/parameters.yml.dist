@@ -48,6 +48,8 @@ parameters:
 
     sylius.promotion.item_based: false
 
+    sylius.order.allow_guest_order: false
+
     sylius.order.pending.duration: 3 hours
 
     sylius.uploader.filesystem: sylius_image

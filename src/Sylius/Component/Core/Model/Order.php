@@ -99,13 +99,6 @@ class Order extends Cart implements OrderInterface
     protected $promotions;
 
     /**
-     * Customer email
-     *
-     * @var string
-     */
-    protected $email;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -132,27 +125,9 @@ class Order extends Cart implements OrderInterface
     public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
-        if ($this->user) {
-            $this->setEmail($this->user->getEmail());
+        if (null !== $this->user) {
+            $this->email = $this->user->getEmail();
         }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
 
         return $this;
     }
