@@ -67,6 +67,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $onHand = 0;
 
     /**
+     * Sold amount.
+     *
+     * @var integer
+     */
+    protected $sold = 0;
+
+    /**
      * Is variant available on demand?
      *
      * @var Boolean
@@ -76,7 +83,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * Images.
      *
-     * @var Collection|VariantImageInterface[]
+     * @var Collection|ProductVariantImageInterface[]
      */
     protected $images;
 
@@ -251,6 +258,24 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         if (0 > $this->onHand) {
             $this->onHand = 0;
         }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSold($sold)
+    {
+        $this->sold = (int) $sold;
 
         return $this;
     }
