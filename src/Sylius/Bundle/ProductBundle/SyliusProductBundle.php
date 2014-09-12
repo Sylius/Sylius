@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\ProductBundle;
 
+use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ValidatorPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Product management bundle with highly flexible architecture.
@@ -33,6 +35,14 @@ class SyliusProductBundle extends AbstractResourceBundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new ValidatorPass());
     }
 
     /**
