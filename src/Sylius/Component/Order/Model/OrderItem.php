@@ -139,7 +139,7 @@ class OrderItem implements OrderItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
-        $this->unitPrice = $unitPrice;
+        $this->unitPrice = (int) $unitPrice;
 
         return $this;
     }
