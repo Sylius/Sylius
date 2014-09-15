@@ -9,21 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Repository;
+namespace Sylius\Component\Cart\Repository;
 
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
- * Order repository interface.
+ * Cart repository interface.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 interface CartRepositoryInterface extends OrderRepositoryInterface
 {
     /**
-     * Get expired carts
+     * Get expired carts.
      *
-     * @return array
+     * @return CartInterface[]
      */
     public function findExpiredCarts();
 }

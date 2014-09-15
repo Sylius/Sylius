@@ -11,9 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine;
 
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Sylius\Bundle\ResourceBundle\Event\ResourceEvent;
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -21,7 +22,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Domain manager.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DomainManager implements DomainManagerInterface
 {
@@ -56,7 +58,7 @@ class DomainManager implements DomainManagerInterface
         $this->eventDispatcher = $eventDispatcher;
         $this->bundlePrefix = $bundlePrefix;
         $this->resourceName = $resourceName;
-        $this->className = $class->name;
+        $this->className = $class->getName();
     }
 
     /**
@@ -70,89 +72,29 @@ class DomainManager implements DomainManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function create($resource = null, $eventName = 'create')
+    public function create($resource = null, $eventName = 'create', $flush = true, $transactional = true)
     {
         if (null === $resource) {
             $resource = $this->createNew();
         }
 
-        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
-        if ($event->isStopped()) {
-            return null;
-        }
-
-        $this->manager->persist($resource);
-        $this->manager->flush();
-
-        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
-
-        return $resource;
+        return $this->process($resource, 'persist', $eventName, $flush, $transactional);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function update($resource, $eventName = 'update')
+    public function update($resource, $eventName = 'update', $flush = true, $transactional = true)
     {
-        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
-        if ($event->isStopped()) {
-            return null;
-        }
-
-        $this->manager->persist($resource);
-        $this->manager->flush();
-
-        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
-
-        return $resource;
+        return $this->process($resource, 'persist', $eventName, $flush, $transactional);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function delete($resource, $eventName = 'delete')
+    public function delete($resource, $eventName = 'delete', $flush = true, $transactional = true)
     {
-        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
-
-        if ($event->isStopped()) {
-            return null;
-        }
-
-        $this->manager->remove($resource);
-        $this->manager->flush();
-
-        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
-
-        return $resource;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function bulk($action = 'create', array $resources)
-    {
-        if (!in_array($action, array('create', 'update', 'delete'))) {
-            throw new \InvalidArgumentException();
-        }
-
-        foreach ($resources as $resource) {
-            $event = $this->dispatchEvent('pre_'.$action, new ResourceEvent($resource));
-            if ($event->isStopped()) {
-                continue;
-            }
-
-            if ('delete' === $action) {
-                $this->manager->remove($resource);
-            } else {
-                $this->manager->persist($resource);
-            }
-
-            $this->dispatchEvent('post_'.$action, new ResourceEvent($resource));
-        }
-
-        $this->manager->flush();
-
-        return $resources;
+        return $this->process($resource, 'remove', $eventName, $flush, $transactional);
     }
 
     /**
@@ -166,6 +108,78 @@ class DomainManager implements DomainManagerInterface
         return $this->eventDispatcher->dispatch($this->getEventName($name), $event);
     }
 
+    /**
+     * @param object $resource
+     * @param string $action
+     * @param string $eventName
+     * @param bool   $flush
+     * @param bool   $transactional
+     *
+     * @return null|object
+     *
+     * @throws \Exception
+     */
+    protected function process($resource, $action, $eventName, $flush = true, $transactional = true)
+    {
+        if (!in_array($action, array('persist', 'remove'))) {
+            throw new \InvalidArgumentException(sprintf('Unknown object manager action called "%s".', $action));
+        }
+
+        $event = $this->dispatchEvent('pre_'.$eventName, new ResourceEvent($resource));
+
+        if ($event->isStopped()) {
+            return null;
+        }
+
+        $this->processManageAction($action, $resource, $flush, $transactional);
+
+        $this->dispatchEvent('post_'.$eventName, new ResourceEvent($resource));
+
+        return $resource;
+    }
+
+    /**
+     * @param string $action
+     * @param object $resource
+     * @param bool   $flush
+     * @param bool   $transactional
+     *
+     * @throws \Exception
+     */
+    private function processManageAction($action, $resource, $flush, $transactional)
+    {
+        if ($this->manager instanceof EntityManagerInterface) {
+            if ($transactional) {
+                $this->manager->beginTransaction();
+            }
+            try {
+                $this->manager->{$action}($resource);
+                if ($flush) {
+                    $this->manager->flush();
+                }
+                if ($transactional) {
+                    $this->manager->commit();
+                }
+            } catch (\Exception $e) {
+                if ($transactional) {
+                    $this->manager->rollback();
+                }
+
+                throw $e;
+            }
+        } else {
+            $this->manager->{$action}($resource);
+            if ($flush) {
+                $this->manager->flush();
+            }
+        }
+    }
+
+    /**
+     * @param string $eventName
+     *
+     * @return string
+     */
     private function getEventName($eventName)
     {
         return sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $eventName);

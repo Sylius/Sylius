@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Manager\DomainManagerInterface;
  */
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
-    function let(DomainManagerInterface $manager)
+    function let(DomainManagerInterface $manager, OriginatorInterface $originator)
     {
-        $this->beConstructedWith($manager);
+        $this->beConstructedWith($manager, $originator);
     }
 
     function it_is_initializable()
@@ -58,8 +58,6 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
 
-        $configuration = array('percentage' => 0.25);
-
-        $this->execute($order, $configuration, $promotion);
+        $this->execute($order, array('percentage' => 0.25), $promotion);
     }
 }

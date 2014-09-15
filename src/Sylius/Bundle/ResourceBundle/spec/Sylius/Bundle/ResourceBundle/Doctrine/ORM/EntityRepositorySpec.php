@@ -117,25 +117,21 @@ class EntityRepositorySpec extends ObjectBehavior
         foreach ($criteria as $property => $value) {
             $queryBuilder
                 ->expr()
-                ->shouldBeCalled()
                 ->willReturn($expr)
             ;
 
             $expr
                 ->eq('o.'.$property, ':'.$property)
-                ->shouldBeCalled()
                 ->willReturn('o.'.$property.' = :'.$value)
             ;
 
             $queryBuilder
                 ->andWhere('o.'.$property.' = :'.$value)
-                ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
 
             $queryBuilder
                 ->setParameter($property, $value)
-                ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
         }
@@ -162,7 +158,6 @@ class EntityRepositorySpec extends ObjectBehavior
 
             $queryBuilder
                 ->andWhere('o.'.$property.' IN (:'.$property.')')
-                ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
         }

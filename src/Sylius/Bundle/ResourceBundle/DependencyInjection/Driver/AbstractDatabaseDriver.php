@@ -34,7 +34,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     /**
      * @var string
      */
-    protected $managerName;
+    protected $objectManagerName;
 
     /**
      * @var string
@@ -51,12 +51,12 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected $managerClass = 'Sylius\\Bundle\\ResourceBundle\\Doctrine\\DomainManager';
 
-    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $managerName, $templates = null)
+    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $objectManagerName, $templates = null)
     {
         $this->container = $container;
         $this->prefix = $prefix;
         $this->resourceName = $resourceName;
-        $this->managerName = $managerName;
+        $this->objectManagerName = $objectManagerName;
         $this->templates = $templates;
     }
 

@@ -83,7 +83,7 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
      */
     protected function getManagerServiceKey()
     {
-        return sprintf('doctrine.orm.%s_entity_manager', $this->managerName);
+        return sprintf('doctrine.orm.%s_entity_manager', $this->objectManagerName);
     }
 
     /**

@@ -22,6 +22,8 @@
         <parameter key="sylius.model.cart.class">%sylius.model.order.class%</parameter>
         <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
 
+        <parameter key="sylius.manager.cart.class">Sylius\Bundle\CartBundle\Manager\CartManager</parameter>
+
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
 
         <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>

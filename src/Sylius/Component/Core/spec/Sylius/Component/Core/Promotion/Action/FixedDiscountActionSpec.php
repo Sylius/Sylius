@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Manager\DomainManagerInterface;
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    function let(DomainManagerInterface $manager)
+    function let(DomainManagerInterface $manager, OriginatorInterface $originator)
     {
-        $this->beConstructedWith($manager);
+        $this->beConstructedWith($manager, $originator);
     }
 
     function it_is_initializable()
@@ -56,8 +56,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
-        $configuration = array('amount' => 500);
 
-        $this->execute($order, $configuration, $promotion);
+        $this->execute($order, array('amount' => 500), $promotion);
     }
 }

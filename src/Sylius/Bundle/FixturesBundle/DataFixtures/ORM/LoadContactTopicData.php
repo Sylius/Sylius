@@ -26,11 +26,10 @@ class LoadContactTopicData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $contactTopicRepository = $this->getContactTopicRepository();
+        $contactTopicManager = $this->getManager('contact_topic');
 
         for ($i = 0; $i < 5; $i++) {
-            $contactTopic = $contactTopicRepository->createNew();
-
+            $contactTopic = $contactTopicManager->createNew();
             $contactTopic->setTitle($this->faker->sentence());
 
             $manager->persist($contactTopic);

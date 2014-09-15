@@ -25,16 +25,16 @@ class DatabaseDriverFactory
         ContainerBuilder $container,
         $prefix,
         $resourceName,
-        $managerName,
+        $objectManagerName,
         $templates = null
     ) {
         switch ($type) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return new DoctrineORMDriver($container, $prefix, $resourceName, $managerName, $templates);
+                return new DoctrineORMDriver($container, $prefix, $resourceName, $objectManagerName, $templates);
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
-                return new DoctrineODMDriver($container, $prefix, $resourceName, $managerName, $templates);
+                return new DoctrineODMDriver($container, $prefix, $resourceName, $objectManagerName, $templates);
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
-                return new DoctrinePHPCRDriver($container, $prefix, $resourceName, $managerName, $templates);
+                return new DoctrinePHPCRDriver($container, $prefix, $resourceName, $objectManagerName, $templates);
             default:
                 throw new UnknownDriverException($type);
         }

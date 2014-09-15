@@ -2,7 +2,7 @@
     "name": "sylius/resource-bundle",
     "type": "symfony-bundle",
     "description": "Resource component for Sylius.",
-    "keywords": ["resource", "storage", "persistence", "sylius"],
+    "keywords": ["resource", "storage", "persistence", "sylius", "rest"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -32,12 +32,12 @@
         "jms/serializer-bundle":           "~0.13",
         "white-october/pagerfanta-bundle": "~1.0",
         "doctrine/doctrine-bundle":        "~1.3",
-        "willdurand/hateoas-bundle":       "@stable"
+        "willdurand/hateoas-bundle":       "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":      "~2.0",
         "twig/twig":            "~1.11",
-        "doctrine/orm":         "~2.3",
+        "doctrine/orm":         "~2.4",
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/phpcr-bundle": "~1.1"
     },

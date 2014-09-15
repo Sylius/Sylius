@@ -75,16 +75,17 @@ class CoreContext extends DefaultContext
     {
         $em      = $this->getEntityManager();
         $finite  = $this->getService('sm.factory');
-        $manager = $this->getManager('order');
+        $manager = $this->getManager('payment_method');
         $shipmentProcessor = $this->getContainer()->get('sylius.processor.shipment_processor');
 
         /** @var $paymentMethod PaymentMethodInterface */
-        $paymentMethod = $this->getRepository('payment_method')->createNew();
+        $paymentMethod = $manager->createNew();
         $paymentMethod->setName('Stripe');
         $paymentMethod->setGateway('stripe');
-        $manager->persist($paymentMethod);
+        $manager->create($paymentMethod);
 
         $currentOrderNumber = 1;
+        $manager = $this->getManager('order');
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
 
@@ -481,7 +482,7 @@ class CoreContext extends DefaultContext
     private function createPayment(OrderInterface $order, PaymentMethodInterface $method)
     {
         /** @var $payment PaymentInterface */
-        $payment = $this->getRepository('payment')->createNew();
+        $payment = $this->getManager('payment')->createNew();
         $payment->setOrder($order);
         $payment->setMethod($method);
         $payment->setAmount($order->getTotal());
