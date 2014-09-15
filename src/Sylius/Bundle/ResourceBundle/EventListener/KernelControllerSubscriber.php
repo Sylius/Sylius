@@ -94,7 +94,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
         list($parameters, $parameterNames) = $this->parametersParser->parse($parameters, $request);
 
         $this->parameters->replace($parameters);
-        $this->parameters->set('paramater_name', $parameterNames);
+        $this->parameters->set('parameter_name', $parameterNames);
 
         $controller->getConfiguration()->setRequest($request);
         $controller->getConfiguration()->setParameters($this->parameters);
