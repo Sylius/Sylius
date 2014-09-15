@@ -8,6 +8,6 @@ Sylius component makes it easier to handle different types of attributes and att
    :numbered:
 
    installation
-   attributes_and_values
+   model
    implementing_subject_interface
    summary
