@@ -23,7 +23,7 @@ class ItemResolvingExceptionSpec  extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Cart\Resolver\ItemResolvingException');
     }
 
-    function is_is_an_invalid_argument_exception()
+    function it_is_an_invalid_argument_exception()
     {
         $this->shouldHaveType('\InvalidArgumentException');
     }
