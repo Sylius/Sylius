@@ -177,13 +177,12 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
+     * @param bool                      $eligible
      *
      * @return Boolean
      */
-    private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion, $eligible)
     {
-        $eligible = false;
-
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
             if (null !== $coupon = $subject->getPromotionCoupon() && $promotion === $coupon->getPromotion()) {
                 $eligible = true;
