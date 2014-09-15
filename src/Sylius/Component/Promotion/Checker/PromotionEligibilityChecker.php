@@ -63,19 +63,31 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             return false;
         }
 
+        $eligible = true;
+        $eligibleRules = false;
         if ($promotion->hasRules()) {
             foreach ($promotion->getRules() as $rule) {
                 try {
                     if (!$this->isEligibleToRule($subject, $promotion, $rule)) {
                         return false;
                     }
+
+                    $eligibleRules = true;
                 } catch (UnsupportedTypeException $exception) {
+                    if (!$eligibleRules) {
+                        $eligible = false;
+                    }
+
                     continue;
                 }
             }
         }
 
-        return $this->areCouponsEligibleForPromotion($subject, $promotion);
+        if (!$promotion->isCouponBased()) {
+            return $eligible;
+        }
+
+        return $this->areCouponsEligibleForPromotion($subject, $promotion, $eligible);
     }
 
     /**
@@ -170,10 +182,6 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      */
     private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        if (!$promotion->isCouponBased()) {
-            return true;
-        }
-
         $eligible = false;
 
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
