@@ -87,8 +87,8 @@ class ProductSpec extends ObjectBehavior
 
     function its_price_is_mutable()
     {
-        $this->setPrice(4.99);
-        $this->getPrice()->shouldReturn(4.99);
+        $this->setPrice(499);
+        $this->getPrice()->shouldReturn(499);
     }
 
     function its_variant_selection_method_is_choice_by_default()
