@@ -34,7 +34,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * The variant price.
      *
-     * @var integer
+     * @var float
      */
     protected $price;
 
