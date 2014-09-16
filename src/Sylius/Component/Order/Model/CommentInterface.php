@@ -70,4 +70,18 @@ interface CommentInterface extends TimestampableInterface
      * @param bool $notifyCustomer
      */
     public function setNotifyCustomer($notifyCustomer);
+
+    /**
+     * Returns info about comment author.
+     *
+     * @return null|string
+     */
+    public function getAuthor();
+
+    /**
+     * Sets info about comment author.
+     *
+     * @param string $author
+     */
+    public function setAuthor($author);
 }
