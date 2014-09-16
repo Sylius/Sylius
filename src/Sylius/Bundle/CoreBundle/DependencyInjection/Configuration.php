@@ -44,8 +44,8 @@ class Configuration implements ConfigurationInterface
 
         $emailNode
             ->addDefaultsIfNotSet()
+            ->canBeEnabled()
             ->children()
-                ->booleanNode('enabled')->defaultFalse()->end()
                 ->arrayNode('from_email')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -76,8 +76,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode($name)
                 ->addDefaultsIfNotSet()
                 ->canBeUnset()
+                ->canBeEnabled()
                 ->children()
-                    ->booleanNode('enabled')->defaultTrue()->end()
                     ->scalarNode('template')->defaultValue($template)->end()
                     ->arrayNode('from_email')
                     ->canBeUnset()

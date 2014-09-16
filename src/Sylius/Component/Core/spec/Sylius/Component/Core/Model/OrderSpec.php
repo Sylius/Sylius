@@ -204,7 +204,7 @@ class OrderSpec extends ObjectBehavior
     function it_not_a_backorder_if_contains_no_backordered_units(
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
-         OrderItemInterface $item
+        OrderItemInterface $item
     ) {
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
@@ -215,6 +215,13 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item);
 
         $this->shouldNotBeBackorder();
+    }
+
+    function it_should_allow_defining_email_from_user(UserInterface $user)
+    {
+        $user->getEmail()->willReturn('example@example.com');
+        $this->setUser($user);
+        $this->getEmail()->shouldReturn('example@example.com');
     }
 
     /**
@@ -232,18 +239,5 @@ class OrderSpec extends ObjectBehavior
 
         $order->addAdjustment($shippingAdjustment);
         $order->addAdjustment($taxAdjustment);
-    }
-
-    function it_should_allow_defining_email()
-    {
-        $this->setEmail('example@example.com');
-        $this->getEmail()->shouldReturn('example@example.com');
-    }
-
-    function it_should_allow_defining_email_from_user(UserInterface $user)
-    {
-        $user->getEmail()->willReturn('example@example.com');
-        $this->setUser($user);
-        $this->getEmail()->shouldReturn('example@example.com');
     }
 }

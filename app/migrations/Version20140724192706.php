@@ -14,7 +14,7 @@ class Version20140724192706 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql", "Migration can only be executed safely on 'mysql'.");
-        
+
         $this->addSql("ALTER TABLE sylius_order ADD email VARCHAR(255) DEFAULT NULL");
         $this->addSql("UPDATE sylius_order o SET email = (SELECT email FROM sylius_user u WHERE u.id = o.user_id) WHERE user_id IS NOT NULL");
     }
@@ -23,7 +23,7 @@ class Version20140724192706 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "mysql", "Migration can only be executed safely on 'mysql'.");
-        
+
         $this->addSql("ALTER TABLE sylius_order DROP email");
     }
 }
