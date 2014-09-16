@@ -17,6 +17,10 @@ sylius_checkout_security:
     path: /security
     defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'security' }
 
+sylius_checkout_security_forward:
+    path: /security/forward
+    defaults: { _controller: sylius.controller.process:forwardAction, scenarioAlias: 'sylius_checkout', 'stepName': 'security' }
+
 sylius_checkout_addressing:
     path: /addressing
     defaults: { _controller: sylius.controller.process:displayAction, scenarioAlias: 'sylius_checkout', 'stepName': 'addressing' }
