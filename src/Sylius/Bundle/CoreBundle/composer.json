@@ -23,7 +23,7 @@
         "php":                            ">=5.3.3",
 
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
-        "hwi/oauth-bundle":               "0.3.*",
+        "hwi/oauth-bundle":               "~0.3",
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/gaufrette":              "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",

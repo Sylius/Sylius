@@ -28,7 +28,7 @@
         "doctrine/doctrine-migrations-bundle":  "dev-master",
         "friendsofsymfony/rest-bundle":         "~1.0",
         "friendsofsymfony/user-bundle":         "2.0.*@dev",
-        "hwi/oauth-bundle":                     "0.3.*",
+        "hwi/oauth-bundle":                     "~0.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope-doctrine-dbal":    "1.1.*",
         "jms/serializer-bundle":                "~0.12",
