@@ -13,13 +13,13 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -115,7 +115,7 @@ class OrderSpec extends ObjectBehavior
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
 
-        $shippingAdjustments = $this->getShippingAdjustments();
+        $shippingAdjustments = $this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustments->count()->shouldReturn(1); //but here we only get shipping
         $shippingAdjustments->first()->shouldReturn($shippingAdjustment);
     }
@@ -129,10 +129,10 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
 
         $shippingAdjustment->setAdjustable(null)->shouldBeCalled();
-        $this->removeShippingAdjustments();
+        $this->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
         $this->getAdjustments()->count()->shouldReturn(1); //one has been removed
-        $this->getShippingAdjustments()->count()->shouldReturn(0); //shipping adjustment has been removed
+        $this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->count()->shouldReturn(0); //shipping adjustment has been removed
     }
 
     function it_should_return_tax_adjustments(
@@ -143,7 +143,7 @@ class OrderSpec extends ObjectBehavior
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
 
-        $taxAdjustments = $this->getTaxAdjustments();
+        $taxAdjustments = $this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         $taxAdjustments->count()->shouldReturn(1); //but here we only get tax
         $taxAdjustments->first()->shouldReturn($taxAdjustment);
     }
@@ -157,10 +157,10 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
 
         $taxAdjustment->setAdjustable(null)->shouldBeCalled();
-        $this->removeTaxAdjustments();
+        $this->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
 
         $this->getAdjustments()->count()->shouldReturn(1); //one has been removed
-        $this->getTaxAdjustments()->count()->shouldReturn(0); //tax adjustment has been removed
+        $this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->count()->shouldReturn(0); //tax adjustment has been removed
     }
 
     function it_should_not_have_currency_defined_by_default()
@@ -204,7 +204,7 @@ class OrderSpec extends ObjectBehavior
     function it_not_a_backorder_if_contains_no_backordered_units(
         InventoryUnitInterface $unit1,
         InventoryUnitInterface $unit2,
-         OrderItemInterface $item
+        OrderItemInterface $item
     ) {
         $unit1->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
         $unit2->getInventoryState()->willReturn(InventoryUnitInterface::STATE_SOLD);
@@ -219,15 +219,19 @@ class OrderSpec extends ObjectBehavior
 
     /**
      * Helper method
+     *
+     * @param OrderInterface      $order
+     * @param AdjustmentInterface $shippingAdjustment
+     * @param AdjustmentInterface $taxAdjustment
      */
     protected function addShippingAndTaxAdjustments(
         OrderInterface $order,
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
     ) {
-        $shippingAdjustment->getLabel()->willReturn(OrderInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->getLabel()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $shippingAdjustment->setAdjustable($order)->shouldBeCalled();
-        $taxAdjustment->getLabel()->willReturn(OrderInterface::TAX_ADJUSTMENT);
+        $taxAdjustment->getLabel()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $taxAdjustment->setAdjustable($order)->shouldBeCalled();
 
         $order->addAdjustment($shippingAdjustment);

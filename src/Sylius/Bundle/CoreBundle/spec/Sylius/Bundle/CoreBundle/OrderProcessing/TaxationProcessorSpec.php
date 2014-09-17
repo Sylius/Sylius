@@ -51,7 +51,7 @@ class TaxationProcessorSpec extends ObjectBehavior
         $collection->isEmpty()->willReturn(true);
 
         $order->getItems()->willReturn($collection);
-        $order->removeTaxAdjustments()->shouldBeCalled();
+        $order->removeAdjustments(Argument::any())->shouldBeCalled();
 
         $this->applyTaxes($order);
     }
@@ -64,7 +64,7 @@ class TaxationProcessorSpec extends ObjectBehavior
         $collection->isEmpty()->willReturn(false);
 
         $order->getItems()->willReturn($collection);
-        $order->removeTaxAdjustments()->shouldBeCalled();
+        $order->removeAdjustments(Argument::any())->shouldBeCalled();
 
         $order->getShippingAddress()->willReturn(null);
 

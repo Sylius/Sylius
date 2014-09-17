@@ -13,9 +13,8 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
@@ -46,8 +45,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_removes_existing_shipping_adjustments(OrderInterface $order)
     {
-        $order->getShipments()->shouldBeCalled()->willReturn(array());
-        $order->removeShippingAdjustments()->shouldBeCalled();
+        $order->getShipments()->willReturn(array());
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
 
         $order->calculateTotal()->shouldBeCalled();
 
@@ -56,8 +55,8 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
     {
-        $order->removeShippingAdjustments()->shouldBeCalled();
-        $order->getShipments()->shouldBeCalled()->willReturn(array());
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
+        $order->getShipments()->willReturn(array());
         $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $order->calculateTotal()->shouldBeCalled();
@@ -82,10 +81,10 @@ class ShippingChargesProcessorSpec extends ObjectBehavior
         $shippingMethod->getName()->willReturn('FedEx');
 
         $adjustment->setAmount(450)->shouldBeCalled();
-        $adjustment->setLabel(Order::SHIPPING_ADJUSTMENT)->shouldBeCalled();
+        $adjustment->setLabel(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('FedEx')->shouldBeCalled();
 
-        $order->removeShippingAdjustments()->shouldBeCalled();
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->addAdjustment($adjustment)->shouldBeCalled();
 
         $order->calculateTotal()->shouldBeCalled();
