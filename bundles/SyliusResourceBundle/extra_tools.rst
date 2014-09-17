@@ -77,14 +77,14 @@ The methods ``ResourceController:createAction``, ``ResourceController:updateActi
 throw events before and after executing any actions on the current resource. The name of the events used the following pattern
 ``app_name.resource.(pre|post)_(create|update|delete)``.
 
-First, you need to regrister event listeners, the following example show you how you can do that.
+First, you need to register event listeners, the following example show you how you can do that.
 
 .. code-block:: xml
 
     # services.xml
 
-    <service id="my_listener" class="MyBundle\MyEventListene%">
-        <tag name="kernel.event_listener" event="app.user.pre_update" method="onOrderPreUpate"/>
+    <service id="my_listener" class="MyBundle\MyEventListener%">
+        <tag name="kernel.event_listener" event="app.user.pre_update" method="onOrderPreUpdate"/>
     </service>
 
 

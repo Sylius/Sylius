@@ -7,7 +7,7 @@ Installation
 There are several ways to install Sylius.
 
 Either you're installing it to contribute, in which case you may prefer Sylius/Sylius,
-or you're bootstraping a new e-commerce project, and you'd prefer using Sylius/Sylius-Standard.
+or you're bootstrapping a new e-commerce project, and you'd prefer using Sylius/Sylius-Standard.
 
 .. warning::
 

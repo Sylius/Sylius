@@ -1,10 +1,10 @@
-Repository insterfaces
+Repository interfaces
 ======================
 
 RepositoryInterface
 -------------------
 
-This inferface will ask you to implement two methods to your repositories:
+This interface will ask you to implement two methods to your repositories:
 
 +----------------------------------------------------------------+--------------------------------------------+------------------+
 | Method                                                         | Description                                | Returned value   |

@@ -52,8 +52,8 @@ Using the ``ResolveDoctrineTargetEntitiesPass``
             return 'app_bundle_name';
         }
 
-        // You need to specify the mapping between your intefaces and your models. Like the following example you can
-        // get the classname of your model in the container (See the following chapater for more informations).
+        // You need to specify the mapping between your interfaces and your models. Like the following example you can
+        // get the classname of your model in the container (See the following chapter for more informations).
         protected function getModelInterfaces()
         {
             return array(
@@ -73,7 +73,7 @@ With this following mapping, Doctrine will create the table ``my_table`` with th
 
 .. code-block:: xml
 
-    <!-- Resoource/config/Model.orm.xml-->
+    <!-- Resource/config/Model.orm.xml-->
 
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
@@ -89,7 +89,7 @@ With this following mapping, Doctrine will create the table ``my_table`` with th
 If you want to add an extra field, you can create a new model which extends ``My/Bundle/Model`` and its doctrine mapping
 like that :
 
-    <!-- Resoource/config/NewModel.orm.xml-->
+    <!-- Resource/config/NewModel.orm.xml-->
 
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">

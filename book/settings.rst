@@ -11,8 +11,8 @@ General Settings
 
 ...
 
-Taxtion Settings
-----------------
+Taxation Settings
+-----------------
 
 ...
 

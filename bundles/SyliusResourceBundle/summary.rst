@@ -10,9 +10,9 @@ Configuration reference
         settings:
             # Enable pagination
             paginate: true
-            # If the paginatio is disbale, you can specify a limit
+            # If the pagination is disabled, you can specify a limit
             limit: false
-            # If the paginatio is enable, you can specify the allowed page size
+            # If the pagination is enabled, you can specify the allowed page size
             allowed_paginate: [10, 20, 30]
             # Default page size
             default_page_size: 10
