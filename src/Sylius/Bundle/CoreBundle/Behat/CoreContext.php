@@ -54,6 +54,14 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Given /^I am not logged in$/
+     */
+    public function iAmNotLoggedIn()
+    {
+        $this->getSession()->visit($this->generatePageUrl('fos_user_security_logout'));
+    }
+
+    /**
      * @Given /^there are following orders:$/
      * @Given /^the following orders exist:$/
      * @Given /^there are orders:$/

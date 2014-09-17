@@ -48,9 +48,19 @@ Feature: Checkout starting
          Then I should be redirected to the checkout addressing step
 
     Scenario: Not logged in users need to authenticate or register
-              new account in the store
+              new account in the store or be able to checkout as guest
         Given I added product "PHP Top" to cart
          When I go to the checkout start page
          Then I should be redirected to the checkout security step
           And I should see "Existing Customer"
           And I should see "New Customer"
+          And I should see "Guest"
+          And I should see "Proceed with your order"
+
+    Scenario: Not logged in users are starting checkout
+              can checkout using only email without registration
+        Given I added product "PHP Top" to cart
+         When I go to the checkout start page
+          And I fill in "sylius_checkout_guest[email]" with "example@example.com"
+          And I press "Proceed with your order"
+         Then I should be redirected to the checkout addressing step

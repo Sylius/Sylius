@@ -128,6 +128,7 @@ sylius_addressing:
             model: Sylius\Component\Core\Model\Address
 
 sylius_order:
+    guest_order: %sylius.order.allow_guest_order%
     classes:
         order:
             model: Sylius\Component\Core\Model\Order

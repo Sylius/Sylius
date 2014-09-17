@@ -122,9 +122,12 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
+        if (null !== $this->user) {
+            $this->email = $this->user->getEmail();
+        }
 
         return $this;
     }

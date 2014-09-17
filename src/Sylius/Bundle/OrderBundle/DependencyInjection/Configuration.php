@@ -37,6 +37,13 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->booleanNode('guest_order')
+                    ->beforeNormalization()
+                        ->ifString()
+                        ->then(function($v) { return (bool) $v; })
+                    ->end()
+                    ->defaultFalse()
+                ->end()
             ->end()
         ;
 
