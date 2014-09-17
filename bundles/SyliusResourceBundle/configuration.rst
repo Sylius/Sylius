@@ -226,7 +226,7 @@ You can overwrite the configuration of your bundle like that :
 Combining the both configurations
 ---------------------------------
 
-For now, with the advanced configuration you can not use serveral drivers but they can be overwritten. Example, you want to use
+For now, with the advanced configuration you can not use several drivers but they can be overwritten. Example, you want to use
 ``doctrine/odm`` for ``my_other_entity`` (see previous chapter), you just need to add this extra configuration to the ``app/config.yml``.
 
 .. code-block:: yaml

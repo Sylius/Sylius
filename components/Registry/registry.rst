@@ -1,4 +1,4 @@
-Regsitry
+Registry
 ========
 
 A registry object acts as a collection of objects. The sylius registry allows you to store object which implements
@@ -6,7 +6,7 @@ a specific interface. Let's see how it works!
 
 .. code-block:: php
 
-    // First you need to create the regsitry object and tell what kind of inteface that you want to work with.
+    // First you need to create the registry object and tell what kind of interface that you want to work with.
     $registry = new ServiceRegistry('Sylius\Component\Pricing\Calculator\CalculatorInterface');
 
     // After that you can register a object.

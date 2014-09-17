@@ -146,7 +146,7 @@ OrderItem Basics
 +------------------+-----------------------------+-----------------------+
 | quantity         | Quantity of sold item       | integer               |
 +------------------+-----------------------------+-----------------------+
-| adjustments      | Collection of Adjustments   | djustmentInterface[]  |
+| adjustments      | Collection of Adjustments   | adjustmentInterface[] |
 +------------------+-----------------------------+-----------------------+
 | adjustmentsTotal | Total value of adjustments  | integer               |
 +------------------+-----------------------------+-----------------------+

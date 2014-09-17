@@ -1,10 +1,10 @@
-Model insterfaces
+Model interfaces
 =================
 
 SoftDeletableInterface
 ----------------------
 
-This inferface will ask you to implement the following methods to your model, they will use by the soft
+This interface will ask you to implement the following methods to your model, they will use by the soft
 `deletable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/softdeleteable.md>`_. :
 
 +------------------------------------+------------------------------------------+-------------------+
@@ -21,7 +21,7 @@ This inferface will ask you to implement the following methods to your model, th
 TimestampableInterface
 ----------------------
 
-This inferface will ask you to implement the following methods to your model, they will use by the
+This interface will ask you to implement the following methods to your model, they will use by the
 `timestampable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/timestampable.md/>`_. :
 
 +------------------------------------+------------------------------------------+-------------------+

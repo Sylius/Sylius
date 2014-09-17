@@ -6,7 +6,7 @@ Currencies
 
 Sylius supports multiple currencies per store and makes it very easy to manage them.
 
-There are serveral approaches to processing several currencies, but we decided to use the simplest solution 
+There are several approaches to processing several currencies, but we decided to use the simplest solution
 we store all money values in the default currency and convert them to different currency with current rates or specific rates.
 
 Every currency is represented by *Currency* entity and holds basic information:

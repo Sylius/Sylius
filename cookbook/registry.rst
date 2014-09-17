@@ -1,5 +1,5 @@
-Using the registy in your bundle
-================================
+Using the registry in your bundle
+=================================
 
 We will to show you how to set up the sylius registry. In this example, we will register two price calculators.
 
@@ -42,10 +42,10 @@ We will to show you how to set up the sylius registry. In this example, we will 
                 return;
             }
     
-            $registryDefintion = $container->getDefinition('app.price.calculator.registry');
+            $registryDefinition = $container->getDefinition('app.price.calculator.registry');
     
             // You can register your services like this
-            $registryDefintion->addMethodCall(
+            $registryDefinition->addMethodCall(
                 'register',
                 array(
                     'default',
@@ -53,7 +53,7 @@ We will to show you how to set up the sylius registry. In this example, we will 
                 )
             );
 
-            $registryDefintion->addMethodCall(
+            $registryDefinition->addMethodCall(
                 'register',
                 array(
                     'custom',
