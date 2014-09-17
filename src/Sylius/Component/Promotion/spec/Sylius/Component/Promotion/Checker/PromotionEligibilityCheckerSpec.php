@@ -147,7 +147,6 @@ class PromotionEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_subject_as_not_eligible_if_promotion_subject_is_not_coupon_aware(
-        $dispatcher,
         $registry,
         RuleCheckerInterface $checker,
         PromotionSubjectInterface $subject,
