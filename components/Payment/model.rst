@@ -31,7 +31,7 @@ Every credit card is represented by **CreditCard** instance and has following pr
 .. note::
 
     This model implements ``CreditCardInterface``. You need to implement an extra method ``getMaskedNumber``
-    witch will return the last 4 digits of card number
+    which will return the last 4 digits of card number
 
 Payment
 -------
