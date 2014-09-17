@@ -95,7 +95,7 @@ class UserProvider extends FOSUBUserProvider
         }
 
         if (!$user->getUsername()) {
-            $user->setUsername($response->getEmail());
+            $user->setUsername($response->getEmail() ?: $response->getNickname());
         }
 
         // set random password to prevent issue with not nullable field & potential security hole

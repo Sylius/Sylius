@@ -87,7 +87,7 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
             return $eligible;
         }
 
-        return $this->areCouponsEligibleForPromotion($subject, $promotion, $eligible);
+        return $this->areCouponsEligibleForPromotion($subject, $promotion);
     }
 
     /**
@@ -177,12 +177,12 @@ class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterfac
      *
      * @param PromotionSubjectInterface $subject
      * @param PromotionInterface        $promotion
-     * @param bool                      $eligible
      *
      * @return Boolean
      */
-    private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion, $eligible)
+    private function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
+        $eligible = false;
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
             if (null !== $coupon = $subject->getPromotionCoupon() && $promotion === $coupon->getPromotion()) {
                 $eligible = true;
