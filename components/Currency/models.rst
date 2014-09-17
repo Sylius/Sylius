@@ -25,5 +25,5 @@ CurrencyInterface
 
 .. note::
 
-    This interface asks you to implement a extra method named ``CurrencyInterface::getName()`` witch will return the human-friendly
+    This interface asks you to implement a extra method named ``CurrencyInterface::getName()`` which will return the human-friendly
     name of the currency
