@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Saskia modu egokian eguneratu da.
+    cart_clear_completed: Saskia modu egokian hustu da.
+    item_add_completed: Item-a saskira gehitu da.
+    item_remove_completed: Item-a saskitik ezabatu da.
+    item_add_error: Item-a saskian gehitzerako orduan errore bat sortu da.
+    item_remove_error: Item-a saskitik ezabatzerako orduan errore bat sortu da.

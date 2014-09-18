@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Deskribapena
+      name: Izena
+      parent: Aita
+      permalink: Esteka iraunkorra
+    taxonomy:
+      name: Izena
+  taxon:
+    create_taxon: Sortu taxonomia
+    delete_taxonomy: Ezabatu taxonomia
+    manage_taxonomies: Taxonomiak kudeatu
+    no_taxonomies: Ez dago erakusteko taxonomiarik.
+    no_taxons: Ez dago erakusteko taxonomiarik.
+    update_taxonomy: Taxonomia eguneratu.

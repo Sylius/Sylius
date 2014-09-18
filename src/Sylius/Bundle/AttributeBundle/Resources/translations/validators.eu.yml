@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: Mesedez, sar ezazu produktuaren SKU.
+      unique: Produktuaren SKU-a bakarra izan behar da.
+    name:
+      not_blank: Mesedez, sar ezazu produktuaren izena.
+      min_length: 'Produktuaren izenak behintzat karaktere 1 eduki behar du.|Produktuaren izenak behintzat {{ limit }} karaktere eduki behar ditu.'
+      max_length: 'Produktuaren izenak gehienez karaktere 1 eduki behar du.|Produktuaren izenak gehienez {{limit}} karaktere eduki behar ditu.'
+    description:
+      not_blank: Mesedez, sar ezazu produktuaren deskribapena.
+      min_length: 'Produktuaren deskribapenak behintzat karaktere bat eduki behar du.|Produktuaren deskribapenak behintzat {{limit}} karaktere eduki behar ditu.'
+  variant:
+    sku:
+      not_blank: Mesedez, sar ezazu aldaeraren SKU-a.
+      unique: Aldaeraren SKU-a bakarra izan behar da.
+    combination: Aukera multzo hauek dituen aldaera bat jada existitzen da.
+  option:
+    name:
+      not_blank: Mesedez, sar ezazu aukeraren izena.
+      min_length: 'Aukeraren izenak behintzat karaktere 1 eduki behar du.|Aldaeraren izenak behintzat {{limit}} karaktere eduki behar ditu.'
+      max_length: 'Aukeraren izenak behintzat karaktere bat eduki behar du.|Aukeraren izenak {{limit}} karaktere eduki behar ditu.'
+    presentation:
+      not_blank: Mesedez, osa ezazu aukeraren aurkezpena.
+      min_length: 'Aukeraren aurkezpenak karaktere 1 eduki behar du.|Aukeraren deskribapenak behintzat {{limit}} karaktere eduki behar ditu.'
+      max_length: 'Aukeraren aurkezpenak gehienez karaktere 1 eduki behar du.|Aukeraren aurkezpenak gehienez {{limit}} karaktere eduki behar ditu.'
+    values:
+      min_count: 'Mesedez, gehi ezazu gutxienez balio {{limit}} aukerarentzako.|Mesedez, gehi ezazu gutxienez {{limit}} balio aukerarentzako.'
+  option_value:
+    value:
+      not_blank: Mesedez, sar ezazu aukeraren balio bat.
+  property:
+    name:
+      not_blank: Mesedez, sar ezazu propietatearen izena.
+      min_length: 'Propietatearen izenak 1 eduki behar du.|Propietatearen izenak behintzat {{limit}} karaktere eduki behar ditu.'
+      max_length: 'Propietatearen izenak gehienez karaktere 1 eduki behar du.|Propietatearen izenak gehienez {{limit}} karaktere eduki behar ditu.'
+    presentation:
+      not_blank: Mesedez, osa ezazu propietatearen aurkezpena.
+      min_length: 'Propietatearen aurkezpenak karaktere 1 eduki behar du.|Propietatearen deskribapenak behintzat {{limit}} karaktere eduki behar ditu.'
+      max_length: 'Propietatearen aurkezpenak gehienez karaktere 1 eduki behar du.|Propietatearen aurkezpenak gehienez {{limit}} karaktere eduki behar ditu.'
+  product_property:
+    property:
+      not_blank: Mesedez, hauta ezazu propietate bat.
+    value:
+      not_blank: Mesedez, hauta ezazu propietaren balio bat.
+  prototype:
+    name:
+      not_blank: Mesedez, sar ezazu prototipoaren izena.
+      min_length: 'Prototipoaren izenak karaktere 1 eduki behar du.|Prototipoaren izenak behintzat {{limit}} karaktere eduki behar ditu.'
+      max_length: 'Prototipoaren izenak gehienez karaktere 1 eduki behar du.|Prototipoaren izenak gehienez {{limit}} karaktere eduki behar ditu.'

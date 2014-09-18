@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backordered: Inbentario unitatea egiteke.
+    sold: Inbentario unitatea eginda.
+    returned: Inbentario unitatea itzulita.

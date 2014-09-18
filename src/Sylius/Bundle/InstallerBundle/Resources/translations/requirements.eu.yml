@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    0: Luzapenak
+    accelerator:
+      0: Azeleratzailea
+      help: Instala eta aktibatu PHP-ko azeleratzaile bat, adibidez APC (erabat gomendatua).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Instala eta aktibatu %extension% luzapena.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Sesioa
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: Fitxategi-sistema
+    cache:
+      0: cache
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: Existitzen da
+    logs:
+      0: logs
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: Ez da existitzen
+    not_writable: Idazkera baimenik gabe
+    parameters:
+      0: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: Vendors
+    writable: Idazkera baimenekin
+  settings:
+    0: PHP bertsioa eta konfigurazioa
+    any: Edozein
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: Ez zaharkitua
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: Ordutegi zona
+    timezone_deprecated:
+      0: Ordutegi zona zaharkitua
+      help: '%timezone% ordutegi zona zaharkitua dago. Konpon ezazu zure php.ini fitxategia (Ordutegi zona zaharkituen lista http://php.net/manual/en/timezones.others.php).'
+    version: PHP bertsioa
+    version_recommanded: PHP bertsio gomendatua

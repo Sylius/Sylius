@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Batzuk
+        configuration: Konfigurazioa
+        countries: Herrialdeak
+        customer: Bezeroak
+        dashboard: Panel orokorra
+        exchange_rates: Trukaneurriak
+        general_settings: Konfigurazio orokorra
+        homepage: Nire denda
+        locales: Hizkuntzak
+        new_order: Gehitu eskaera berria
+        new_promotion: Gehitu promozio berria
+        options: Produktuaren aukerak kudeatu
+        orders: Oraingo eskaerak
+        payment_methods: Ordainketa moduak
+        payments: Ordainketak
+        products: Produktuak
+        promotions: Promozioak
+        properties: Propietateak konfiguratu
+        prototypes: Produktuen propietateak
+        sales: Eskaerak
+        shipments: Bidalketak
+        shipping_categories: Bidalketa kategoriak
+        shipping_methods: Bidalketa metodoak
+        stockables: Inbentario mailak
+        tax_categories: Zerga kategoriak
+        tax_rates: Zerga tasak
+        taxation_settings: Zergen konfigurazioa
+        taxonomies: Kategorizazioa
+        users: Erabiltzaileak
+        zones: Zonak
+      sidebar:
+        assortment: Batzuk
+        blocks: Multzoak
+        configuration: Konfigurazioak
+        content: Edukia
+        countries: Herrialdeak
+        customer: Bezeroak
+        dashboard: Panel orokorra
+        exchange_rates: Trukaneurriak
+        general_settings: Konfigurazio orokorra
+        groups: Taldeak
+        homepage: Dendara itzuli
+        locales: Hizkuntzak
+        new_order: Eskaera berria gehitu
+        new_promotion: Promozio berria gehitu
+        options: Produktuaren aukerak kudeatu
+        orders: Oraingo eskaerak
+        pages: Orrialdeak
+        payment_methods: Ordainketa moduak
+        payments: Ordainketak
+        products: Produktuak
+        promotions: Promozioak
+        properties: Propietatearen konfigurazioa
+        prototypes: Produktuen prototipoak
+        sales: Eskaerak
+        shipments: Bidalketak
+        shipping_categories: Bidalketa kategoriak
+        shipping_methods: Bidalketa metodoak
+        stockables: Inbentario mailak
+        tax_categories: Zerga kategoriak
+        tax_rates: Zerga tasak
+        taxation_settings: Zergen konfigurazioa
+        taxonomies: Kategorizazioa
+        users: Erabiltzaileak
+        zones: Zonak
+  frontend:
+    menu:
+      account:
+        addresses: Nire helbideen libreta
+        homepage: Hasiera
+        orders: Nire eskaerak / nire fakturak
+        password: Nire pasahitza
+        profile: Nire informazio pertsonala
+        shop: Dendara itzuli
+      currency: 'Prezioak %currency%-n erakutsi'
+      main:
+        account: Nire kontua
+        administration: Administrazioa
+        cart: 'Saskia ikusi (%items%) %total%'
+        login: Saioa hasi
+        logout: Saioa itxi
+        register: Erregistratu
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

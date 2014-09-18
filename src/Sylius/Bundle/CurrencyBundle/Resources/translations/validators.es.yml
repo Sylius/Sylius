@@ -1,0 +1,7 @@
+sylius:
+    currency:
+        code:
+            not_blank: Por favor, elija el código de la moneda.
+            unique: El código de la moneda debe ser único.
+        exchange_rate:
+            not_blank: Por favor, introduzca la tasa de cambio.

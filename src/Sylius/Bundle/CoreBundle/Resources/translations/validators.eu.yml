@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  group:
+    name:
+      max: 'Taldearen izenak ez du/ditu {{limit}} karaktere baino gehiago eduki behar.'
+      min: 'Taldearen izenak gutxienez {{limit}} karaktere eduki behar du/ditu.'
+      not_blank: Mesedez, sar ezazu taldearen izena.
+  locale:
+    code:
+      not_blank: Mesedez, sar ezazu hizkuntzaren kodea.
+      unique: Hizkuntza hau jada existitzen da.
+  user:
+    first_name:
+      max: 'Izenak ez du/ditu {{limit}} karaktere baino gehiago eduki behar.'
+      min: 'Izenak gutxienez {{limit}} karaktere eduki behar du/ditu.'
+      not_blank: Mesedez, sar ezazu zure izena.
+    last_name:
+      max: 'Abizenek ez dute/dituzte {{limit}} karaktere baino gehiago eduki behar.'
+      min: 'Abizenek gutxienez {{limit}} karaktere eduki behar dute/dituzte.'
+      not_blank: Mesedez, sar itzazu zure abizenak.
+  variant:
+    onHand:
+      min: 'Existentziak {{limit}} baino handiagoak izan behar dira.'
+      not_blank: Mesedez, sar ezazu existentzia kopurua.
+    price:
+      min: Prezioa ezin da negatiboa izan.
+      not_blank: Mesedez, sar ezazu prezioa.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Mesedez, sar ezazu bidalketa metodoaren zona.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Mesedez, sar ezazu zona fiskala.

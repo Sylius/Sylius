@@ -1,0 +1,5 @@
+sylius:
+    payment:
+        complete: Ordainketa burutu da.
+        cancel: Ordainketa deuseztatua izan da.
+        transition_fail: Ekintza ezin daiteke burutu egungo ordainketa egoeragatik

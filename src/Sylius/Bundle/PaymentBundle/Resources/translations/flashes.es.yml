@@ -1,0 +1,5 @@
+sylius:
+    payment:
+        complete: El pago ha sido completado.
+        cancel: El pago ha sido cancelado.
+        transition_fail: La acción no se pudo realizar debido al estado actual del pago

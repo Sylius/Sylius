@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  label:
+    product:
+      name: Izena
+      description: Deskribapena
+      properties: Propietateak
+      available_on: -tik eskuragarri
+      meta_keywords: Meta hitz gakoak
+      meta_description: Meta deskribapena
+    property:
+      name: Barne izena
+      presentation: Aurkezpena
+    prototype:
+      name: Izena
+      properties: Propietateak

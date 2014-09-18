@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    restricted_zone_removal: '%product% produktua saskitik ezabatu da zure herrialdean eskuragai ez dagoelako.'
+  checkout:
+    restricted_zone: Produktu hau zure herrialdean ez dago eskuragai.
+    success: Eskerrik asko zure eskaeragatik!
+    canceled: Zure ordainketa ezeztatu da.
+    pending: Zure ordainketa egiteke dago oraindik.
+    failed: Zure ordainketa ez da onartu.
+    unknown: Ordainketa errore ezezaguna.
+    out_of_stock: 'Bakarrik %quantity% %name% daude stock-ean'

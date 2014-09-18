@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion:
+    description:
+      max_length: 'Promozioaren deskribapenak ez du karaktere 1 baino gehiago eduki behar.|Promozioaren deskribapenak ez ditu {{ limit }} karaktere baino gehiago eduki behar.'
+      min_length: 'Promozioaren deskribapenak behintzat karaktere 1 eduki behar du.|Promozioaren deskribapenak behintzat {{ karaktere }} eduki behar ditu.'
+      not_blank: Mesedez, sar ezazu promozioaren deskribapena.
+    name:
+      max_length: 'Promozioaren izenak ez du karaktere 1 baino gehiago eduki behar.|Promozioaren izenak ez ditu {{ limit }} karaktere baino gehiago eduki behar.'
+      min_length: 'Promozioaren izenak behintzat karaktere 1 eduki behar du.|Promozioaren izenak behintzat {{ karaktere }} eduki behar ditu.'
+      not_blank: Mesedez, sar ezazu promozioaren izena.
+  promotion_coupon:
+    code:
+      max_length: 'Kupoiaren kodeak ez du karaktere 1 baino gehiago eduki behar.|Kupoiaren kodeak ez ditu {{ limit }} karaktere baino gehiago eduki behar.'
+      min_length: 'Kupoiaren kodeak behintzat karaktere 1 eduki behar du.|Kupoiaren kodeak behintzat {{ karaktere }} eduki behar ditu.'
+      not_blank: Mesedez, sar ezazu kupoiaren kodea.
+    usage_limit:
+      min: 'Kupoiaren erabilgarritasun muga behintzat {{ limit }} izan behar da.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'Sortu behar diren kupoien kantitatea behintzat {{ limit }} izan behar da.'
+      not_blank: Mesedez, sar ezazu sortu behar diren kupoien kopurua.
+    usage_limit:
+      min: 'Sortutako kupoien erabilgarritasun muga behintzat {{ limit }} izan behar da.'

@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  tax_category:
+    name:
+      not_blank: Mesedez, sar ezazu zergaren kategoriaren izena.
+  tax_rate:
+    category:
+      not_blank: Mesedez, hauta ezazu zergaren kategoria.
+    name:
+      not_blank: Mesedez, sar ezazu zergaren izena.
+    amount:
+      not_blank: Mesedez, sar ezazu zergaren kantitatea.
+    calculator:
+      not_blank: Mesedez, sar ezazu zergaren kalkulagailua.

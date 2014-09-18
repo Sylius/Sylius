@@ -1,0 +1,20 @@
+sylius:
+    form:
+        priceable:
+            price: Precio
+            calculator: Fijación de precios
+            configuration: Configuración
+        pricing:
+            volume_based:
+                label: Configuración del fijador de precios
+                min: Volumen mínimo
+                max: Volumen máximo
+                price: Precio
+    pricing:
+        volume_based:
+            min: Volumen mínimo
+            max: Volumen máximo
+            price: Precio
+            no_results: Sin configuración del fijador de precios
+            button:
+                add: Añadir

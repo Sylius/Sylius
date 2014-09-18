@@ -1,0 +1,6 @@
+sylius:
+    form:
+        currency:
+            code: Código
+            exchange_rate: Tasa de cambio
+            enabled: Activado

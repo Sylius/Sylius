@@ -1,0 +1,7 @@
+sylius:
+    currency:
+        code:
+            not_blank: Mesedez, hauta ezazu monetaren kodea.
+            unique: Monetaren kodea bakarra izan behar da.
+        exchange_rate:
+            not_blank: Mesedez, sar ezazu trukaneurria.
