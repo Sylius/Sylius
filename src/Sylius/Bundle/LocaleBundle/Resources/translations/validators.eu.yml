@@ -1,0 +1,5 @@
+sylius:
+    locale:
+        code:
+            not_blank: Mesedez, aukera ezazu kode lokala.
+            unique: Kode lokala bakarra izan behar da.

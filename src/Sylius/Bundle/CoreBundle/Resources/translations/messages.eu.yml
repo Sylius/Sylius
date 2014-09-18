@@ -1,0 +1,93 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Mesedez, hauta ezazu bidalketa metodoa.
+  form:
+    action:
+      add_product_configuration:
+        price: Alearen prezioa
+        quantity: Kantitatea
+        variant: Aldaera
+    block:
+      body: Gorputza
+      id: ID
+      title: Titulua
+    cart:
+      coupon: Kupoia
+    checkout:
+      addressing:
+        different_billing_address: Helbide ezberdina erabili nahi al duzu fakturaziorako?
+      payment_method: Ordainketa metodoa
+      shipping_method: Bidaltze metodoa
+    group:
+      name: Nombre Izena
+      roles: Rolak
+    image:
+      file: Irudia
+    locale:
+      code: Kodea
+      enabled: Aktibatuta
+    order_filter:
+      created_at_from: -tik
+      created_at_to: -raino
+      number: Número Zenbakia
+      total_from: -tik
+      total_to: -raino
+    page:
+      body: Gorputza
+      id: ID
+      title: Titulua
+    product:
+      restricted_zone: Zona mugatua
+      shipping_category: Bidalketa kategoria
+      short_description: Deskribapen laburra
+      tax_category: Zergaren kategoria
+      variant_selection_method: Aldaeraren hautaketa metodoa
+    product_filter:
+      name: Izena
+      sku: SKU
+    settings:
+      general:
+        currency: Moneta lehenetsia
+        locale: Hizkuntza
+        meta_description: Meta deskribapena
+        meta_keywords: Meta hitz gakoak
+        title: Orrialdearen titulua
+      taxation:
+        default_tax_zone: Zona fiskal lehenetsia
+    shipment_filter:
+      created_at_from: -tik
+      created_at_to: -raino
+      number: Eskaera zenbakia
+      shipping_address: -ra bidali
+    shipping_method:
+      zone: Zona
+    taxon:
+      file: Irudia hautatu
+    taxonomy:
+      file: Irudia hautatu
+    user:
+      billing_address: Fakturazio helbidea
+      different_billing_address: Helbide ezberdina erabili nahi al duzu fakturaziorako?
+      enabled: Aktibatuta
+      first_name: Izena
+      groups: Taldeak
+      last_name: Abizenak
+      password: Pasahitza
+      shipping_address: Bidalketa helbidea
+    user_filter:
+      query: Bilaketa
+    variant:
+      available_on_demand: Eskuragai demandapean
+      depth: Sakontasuna
+      height: Altuera
+      images: Irudiak
+      on_hand: Oraingo stocka
+      price: Prezioa
+      sku: SKU
+      weight: Pisua
+      width: Zabalera

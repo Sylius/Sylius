@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Kantitatea
+        equal: Berdinak
+      type: Mota
+    shipment:
+      state: Egoera
+      states:
+        checkout: Eskaera burutu
+        dispatched: Salduta
+        pending: Egiteke
+        ready: Prest
+        shipped: Bidalia
+        returned: Itzulia
+      tracking_code: Jarraipen kodea
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Kantitatea
+      flexible_rate_configuration:
+        additional_item_cost: Artikuluaren kostu gehigarria
+        additional_item_limit: Artikulu gehigarrien muga
+        first_item_cost: Lehen artikuluaren kostua
+      per_item_rate_configuration:
+        amount: Kantitatea
+      weight_rate_configuration:
+        amount: Kantitatea
+        division: Dibisio
+    shipping_category:
+      description: Deskribapena
+      name: Izena
+    shipping_method:
+      calculator: Kalkulagailua
+      category: Kategoria
+      category_requirement: Kategoriaren baldintzak
+      configuration: Konfigurazioa
+      enabled: Aktibatuta
+      name: Izena

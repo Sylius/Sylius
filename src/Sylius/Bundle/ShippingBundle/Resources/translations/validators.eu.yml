@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Kategoriaren izenak ez du {{ limit }} karaktere baino gehiago eduki behar.'
+      min_length: 'Kategoriaren izenak gutxienez {{ limit }} karaktere eduki behar ditu.'
+      not_blank: Mesedez, sar ezazu bidalketaren kategoriaren izena.
+  shipping_method:
+    calculator:
+      max_length: Kalkulagailuaren izenak ez du 255 karaktere baino gehiago eduki behar.
+      min_length: Kalkulagailuaren izenak gutxienez 2 karaktere eduki behar ditu.
+      not_blank: Mesedez hauta ezazu kalkulagailu bat.
+    name:
+      max_length: 'Bidalketa metodoaren izenak ez du {{ limit }} karaktere baino gehiago eduki behar.'
+      min_length: 'Bidalketa metodoaren izenak gutxienez {{ limit }} karaktere eduki behar ditu.'
+      not_blank: Mesedez, sar ezazu bidalketa metodoaren izena.

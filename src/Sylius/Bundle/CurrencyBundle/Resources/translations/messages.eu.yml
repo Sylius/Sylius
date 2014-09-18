@@ -1,0 +1,6 @@
+sylius:
+    form:
+        currency:
+            code: Kodea
+            exchange_rate: Trukaneurria
+            enabled: Erabilgarri

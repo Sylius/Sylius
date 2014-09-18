@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+# Translated to Basque by Xabier Alejandro Azkune
+
+sylius:
+  option:
+    name:
+      not_blank: Mesedez, sar ezazu aukeraren izena.
+      min_length: 'Aukeraren izenak behintzat karaktere 1 eduki behar du.|Aukeraren izenak behintzat {{ limit }} karaktere eduki behar ditu.'
+      max_length: 'Aukeraren izenak gehienez karaktere 1 eduki behar du.|Aukeraren izenak gehienez {{ limit }} karaktere eduki behar ditu.'
+    presentation:
+      not_blank: Mesedez, osa ezazu aukeraren aurkezpena.
+      min_length: 'Aukeraren aurkezpenak behintzat karaktere 1 eduki behar du.|Aukeraren aurkezpenak behintzat {{ limit }} karaktere eduki behar ditu.'
+      max_length: 'Aukeraren aurkezpenak gehienez karaktere 1 eduki behar du.|Aukeraren aurkezpenak gehienez {{ limit }} karaktere eduki behar ditu.'
+    values:
+      min_count: 'Mesedez, gehi ezazu gutxienez balio {{ limit }} aukerarentzako.|Mesedez, gehi itzazu gutxienez {{ limit }} balio aukerarentzako.'
+  option_value:
+    value:
+      not_blank: Mesedez, sar ezazu aukeraren balio bat.
+  variant:
+    combination: Aukera multzo hauek dituen aldaera bat jada existitzen da.

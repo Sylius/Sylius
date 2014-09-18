@@ -1,0 +1,720 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+email:
+  order_confirmation:
+    subject: Subjektu
+sylius:
+  account:
+    address:
+      action:
+        billing: Fakturazio helbide lehenetsi bezala ezarri
+        create: Helbide berria sortu
+        delete: sylius.account.address.action.delete
+        edit: Editatu
+        shipping: Bidalketa helbide lehenetsi bezala ezarri
+      create: sylius.account.address.create
+      default:
+        billing: sylius.account.address.default.billing
+        no_billing: sylius.account.address.default.no_billing
+        no_shipping: sylius.account.address.default.no_shipping
+        shipping: sylius.account.address.default.shipping
+      empty: sylius.account.address.empty
+      list: sylius.account.address.list
+      update: sylius.account.address.update
+    home:
+      email: ""
+      id: ""
+      outline: Zure informazioa kudeatzeko, ikusteko eta jarraitzeko zure espazio pertsonalean eskuragarri dauden ezaugarri guztietaz goza ezazu.
+      since: Bezeroa -tik zara
+      welcome: Ongi etorri zure espaziora
+    order:
+      created_at: -(e)an egina
+      details: Zure eskaeraren xehetasunak
+      download_invoice: Faktura deskargatu
+      empty: Oraindik ez duzu eskaerarik egin.
+      invoice: Faktura
+      list: Zure eskaera guztiak
+      number: ""
+      payment_mode: ""
+      placed_at: '%at$-an egina'
+      shipment:
+        pending: Egiteke
+        ready: '%at%-tik prestatua'
+        returned: '%at%-n itzulia'
+        shipped: '%at%-n bidalia'
+      shipment_mode: ""
+      state: ""
+      total: Totala
+      tracking_number: Jarraipen zenbakia
+    title: Nire kontua
+  add_to_cart: Saskira gehitu
+  address:
+    city: Hiria
+    company: Enpresa
+    country: Herrialdea
+    firstname: Izena
+    lastname: Abizenak
+    postcode: Kode postala
+    province: Probintzia
+    street: Helbidea
+  alert:
+    error: Errorea
+    info: Informazioa
+    success: Arrakasta
+  backend:
+    warning: Oharra
+    alert:
+      info: Informazioa
+    dashboard:
+      chart_order_count: Eskaera kopurua
+      chart_order_total: Eskaeraren balioa
+      header: Administrazio panela
+      orders: Aurreko asteko eskaerak
+      revenue: Aurreko asteko diru-sarrerak
+      subheader: Zure dendaren laburpena
+    logout: Saioa itxi
+    quick_links:
+      add_product: Produktu berria
+      orders: Eskaerak
+      products: Produktuak
+      users: Erabiltzaileak
+    statistics:
+      0: Hilabetearen estatistikak
+      orders_this_month: Eskaerak
+      registrations_this_month: Erabiltzaileak
+      sales_this_month: Salmentak
+  backend_welcome: 'Kaixo <b>%name%</b>!'
+  block:
+    body: Gorputza
+    create: Multzoa sortu
+    create_header: Eduki-multzo berria sortzen
+    id: ID
+    index_header: Eduki-multzoak
+    no_results: Ez dago multzorik erakusteko.
+    title: Titulua
+    update_header: Eduki-multzoa editatzen
+    updated_at: Azken eguneratzea.
+  breadcrumb:
+    assortment: Batzuk
+    block:
+      index: Eduki-multzoak
+    build: sylius.breadcrumb.build
+    configuration: Konfigurazioa
+    country:
+      index: Herrialdeak
+    customers: Bezeroak
+    edit: Editatu
+    exchange_rate:
+      index: Truke-motak
+    general_settings: Konfigurazio orokorra
+    generate: sylius.breadcrumb.generate
+    group:
+      index: Taldeak
+    inventory:
+      index: Inbentarioa
+    locale:
+      index: Hizkuntzak
+    new: Berria
+    option:
+      index: Produktuaren aukerak
+    order:
+      index: Eskaerak
+    page:
+      index: Orrialde estatikoak
+    payment:
+      index: Ordainketak
+    payment_method:
+      index: Ordainketa metodoak
+    product:
+      index: Produktuak
+    promotion:
+      index: Promozioak
+    promotion_coupon:
+      index: sylius.breadcrumb.promotion_coupon.index
+    property:
+      index: Produktuaren propietateak
+    prototype:
+      index: Produktuaren prototipoak
+    sales: Salmentak
+    shipment:
+      index: Bidalketak
+    shipping_category:
+      index: Bidalketa-kategoriak
+    shipping_method:
+      index: Bidaltze metodoak
+    tax_category:
+      index: Zergen kategoria
+    tax_rate:
+      index: Zergak
+    taxation_settings: Zergen konfigurazioa
+    taxonomy:
+      index: Kategorizazioa
+    update: Eguneratu
+    user:
+      index: Erabiltzaileak
+    zone:
+      index: Zonak
+  browse_products: Produktuak ikusi
+  cancel: Ezeztatu
+  cart:
+    empty: Saskia hutsik dago
+    summary:
+      add_coupon: OK
+      checkout: Erosketa bukatu
+      clear: Saskia hustu
+      grand_total: Totala
+      product: Produktua
+      quantity: Kantitatea
+      save: Gorde
+      total: Totala
+      unit_price: Prezioa
+    summary_header: Laburpena
+    total_items: Artikulu guztiak
+  checkout:
+    addressing:
+      header: Entrega-helbidea
+    back: Itzuli
+    finalize:
+      address:
+        city: Hiria
+        country: Herrialdea
+        firstname: Izena
+        lastname: Abizenak
+        postcode: Kode postala
+        province: Probintzia
+        street: Helbidea
+      header: Eskaeraren laburpena
+      order:
+        billing_address: Fakturazio-helbidea
+        items_total: Totala
+        no_items: Eskaera honek ez dauka produkturik
+        no_promotion: Ez dira promozioak erantsi
+        no_shipping_charges: Bidaltze-gastuak ez dira eransten
+        no_taxes: Zergak ez erantsiak
+        promotion_discount: Deskontuak
+        promotion_total: Deskontu totala
+        shipping_address: Bidaltze-helbidea
+        shipping_charges: Bidalketa
+        shipping_total: Bidalketa totala
+        tax_total: Zerga totalak
+        taxes: Zergak
+        total: Totala
+      order_item:
+        quantity: Kantitatea
+        total: Totala
+        unit_price: Alearen prezioa
+      place_order: Eskaera egin
+      product:
+        name: Izena
+    forward: Hurrengoa
+    payment:
+      header: Ordainketa moduak
+    security:
+      existing_customer: Bezeroa existitzen da
+      header: 'Saioa hasi <small>edo kontu bat sortu</small>'
+      login: Saioa hasi
+      new_customer: Bezero berria
+      register: Kontu bat sortu
+    shipping:
+      error: Barkatu, baina gure dendak ez du produkturik bidaltzen aukeratu duzun herrialdera.
+      header: Bidaltze metodoak
+  confirmation:
+    message: Benetan elementu hau ezabatu nahi al duzu?
+    title: Egiaztapena
+  country:
+    add_province: Probintzia gehitu
+    create: Herrialde berria
+    create_header: Herrialde berria
+    id: ID
+    index_header: Herrialdeak
+    iso_name: ISO izena
+    manage: Herrialdeak kudeatu
+    name: Izena
+    no_results: Ez daude konfiguratutako herrialderik.
+    show_header: Herrialdearen xehetasunak
+    update_header: Herrialdea editatu
+  create: Sortu
+  created_at: sortzen
+  delete: Ezabatu
+  deleted: Ezabatua
+  edit: editatu
+  email: E-posta helbidea
+  exchange_rate:
+    create: Truka-neurria sortzen
+    create_header: Truka-neurri berria
+    currency: Moneta
+    id: ID
+    index_header: Truka-neurriak
+    no_results: Ez dago truka-neurririk erakusteko.
+    rate: Trukaketa
+    update_header: Truka-neurria editatzen
+    updated_at: Azken eguneraketa
+  filter: Iragazi
+  form:
+    cart:
+      coupon: Deskontu-kupoi bat badaukazu, sar ezazu hemen
+    choose_file: Fitxategia hautatu
+    frontend:
+      password:
+        confirmation: Egiaztapena
+        current: Egungo pasahitza
+        new: Pasahitz berria
+        title: Nire pasahitza aldatu
+      profile:
+        title: Nire informazio pertsonala editatu
+    login:
+      email: E-posta helbidea
+      password: Pasahitza
+    option_value:
+      add_value: Balioa gehitu
+    profile:
+      email: E-posta
+      firstName: Izena
+      lastName: Abizenak
+  gallery:
+    next: Hurrengoa
+    previous: Aurrekoa
+    slideshow: Aurkezpena
+  generate: Sortu
+  group:
+    create: Taldea sortu
+    create_header: Erabiltzaile talde berriak gehitzen
+    id: ID
+    index_header: Taldeak
+    name: Izena
+    no_results: Ez dago erakusteko talderik.
+    roles: Rolak
+    update_header: Taldea editatzen
+  hide_deleted: Ezabatuak ezkutatu
+  history:
+    0: Historia
+    action: Ekintza
+    author: Egilea
+    data: Data
+    logged_at: Saioa -n hasita
+    version: Bertsioa
+  homepage:
+    splash:
+      headline: Ongi etorri Sylius-era
+      subheadline: Symfony2-rentzako ecommerce-a
+  inventory_unit:
+    created_at: Sortze data
+    inventory_state: Inbentarioaren egoera
+    name: Izena
+    no_results: Ez dago alerik inbentarioan erakusteko
+    shipping_state: Bidalketaren egoera
+    sku: SKU
+    updated_at: Azken aldaketaren data
+  locale:
+    code: Kodea
+    create: Hizkuntza sortu
+    create_header: Hizkuntz berria gehitzen
+    enabled: Aktibatuta
+    index_header: Konfiguratutako hizkuntz guztien aurkibidea
+    no_results: Ez dago konfiguratutako hizkuntzik.
+    update_header: Hizkuntza editatu
+    updated_at: Azken eguneraketa.
+  login: Entrar
+  login_header: Administrazioa
+  logo: Sylius
+  manage: Administratu
+  meta:
+    backend_title: Administrazio panela
+    frontend_description: 'Sylius Symfony2 framework-ean oinarrituta eta PHP-n garatutako e-commerce soluzio modernoa da'
+    frontend_keywords: sylius, e-commerce, symfony2, denda, saskia, webshop
+    frontend_title: Sylius, Symfony2-rentzako e-commerce modernoa
+  na: N/A
+  newest: Nobedadeak
+  "no": false
+  no_results: Emaitzik ez
+  option:
+    create: Aukera gehitu
+    index_header: Produktuaren aukerak
+    create_header: Produktu aukera berria
+    manage: Aukerak kudeatu
+    name: Izena
+    no_results: Ez dago konfiguratutako aukerarik
+    presentation: Aurkezpena
+    update_header: Aukeraren edizioa
+    updated_at: Azken eguneratzea
+    values: Balioak
+  order:
+    billing_address: Fakturazio-helbidea 
+    create: Eskaera gehitu
+    create_header: Eskaera berria
+    created_at: Sortze data
+    general_info: Informazio orokorra
+    id: ID
+    index_header: Oraingo eskaerak
+    inventory_tracking: Inbentario kontrola
+    items_total: Totala
+    manage: Eskaerak kudeatu
+    no_items: Eskaera honek ez du produkturik
+    no_results: Ez duzu eskaera berririk
+    no_shipments: Ez dago bidalketarik eskaera honetarako
+    no_shipping_charges: Bidalketa zordunketak erantsi gabe
+    no_taxes: Zergarik gabe
+    number: Zenbakia
+    payment: Ordainketa
+    payment_state: Ordainketaren egoera
+    payment_states:
+      balance_due: Saldoa
+    promotion_total: Promozioaren totala
+    recent_header: Orain dela gutxiko eskaerak
+    shipment_state: Bidalketaren egoera
+    shipment_states:
+      pending: Egiteke
+    shipments: Bidalketak
+    release_inventory: Inbentarioa liberatu
+    inventory_unit:
+      backorder: Itxoiten
+      fulfill: Burutua
+      return: Itzuli
+    shipping_address: Bidalketa-helbidea
+    shipping_charges: Bidalketa zordunketak
+    shipping_total: Bidalketaren totala
+    show_header: Ordena erakutsi
+    state:
+      cart_locked: Saskia itxita
+      checkout: Eskaera burutu
+      order_confimed: Eskaera baieztatua
+      ordered: Eskatua
+    tax_total: Zergen totala
+    taxes: Zergak
+    total: Totala
+    update_header: Ordena editatu
+    user: Erabiltzailea
+  shipment:
+    ship: Bidalketa
+    created_at: Sortze-data
+    id: ID
+    index_header: Bidalketak
+    inventory_state: Inbentarioaren egoera
+    manage: Kudeatu
+    method: Metodoa
+    modified: Aldaketa data
+    name: Izena
+    no_items: Ez dago erakusteko produkturik
+    no_results: Ez dago bidalketarik
+    order: Ordena
+    show_header: Goiburua erakutsi
+    sku: SKU
+    state: Egoera
+    tracking_code: Jarraipen kodea
+    update: Editatu
+    update_header: Bidalketa editatzen
+    updated_at: Azken aldaketaren data
+  order_item:
+    product: sylius.order_item.product
+    quantity: Kantitatea
+    sellable: Produktua
+    total: Totala
+    unit_price: Alearen prezioa
+  out_of_stock: Stock gabe
+  page:
+    body: Gorputza
+    create: Orrialde berria sortu
+    create_header: Eduki estatiko berria sortzen
+    id: ID
+    index_header: Orrialdeak
+    no_results: Ez dago orrialde estatikorik erakusteko.
+    title: Titulua
+    update_header: Azken aldaketa
+  password: Pasahitza
+  payment:
+    amount: Kantitatea
+    create: Ordainketa sortu
+    create_header: Ordainketa berria
+    created_at: Sortze data
+    id: ID
+    index_header: Ordainketak
+    manage: sylius.payment.manage
+    method: Metodoa
+    no_results: Emaitzik gabe
+    state:
+      0: Egoera
+      checkout: Eskaera burutu
+      completed: Burutua
+      failed: Huts eginda
+      new: Berria
+      pending: Egiteke
+      processing: Prozesatzen
+      unknown: Ezezaguna
+      void: Hutsik
+    update_header: Ordainketa editatu
+    updated_at: Azken aldaketaren data
+  payment_method:
+    create: Ordainketa metodoa sortu
+    create_header: Ordainketa metodo berria
+    enabled: Gaitua
+    gateway: Sarrera
+    id: ID
+    index_header: Ordainketa metodoak
+    name: Izena
+    no_results: Ez dago ordainketa metodorik konfiguratuta
+    update_header: Ordainketa metodoa editatu
+    updated_at: Azken aldaketaren data
+  product:
+    add_property: Propietatea gehitu
+    available_on: -an eskuragarri
+    available_on_demand: Demandapean eskuragarri
+    categorization: Kategorizazioa
+    contain_variants: Aldaerak ditu
+    create: Produktua sortu
+    create_header: Produktu berria
+    description: Deskribapena
+    generate_variants: Aldaerar sortu
+    index_by_taxon_header: 'Produktuak <small>Taxonpean kategorizatuak "%taxon%"</small>'
+    index_header: Produktuak
+    manage: Produktuak kudeatu
+    name: Izena
+    no_description: '<i>Deskribapen barik...</i>'
+    no_images: Ez dago produktuaren irudirik
+    no_options: Ez dago aukerarik produktu honetarako
+    no_properties: Produktu honek ez dauka konfiguratutako propietaterik
+    no_results: Ez dago produkturik 
+    no_shipping_category: Bidalketa kategoriarik gabe
+    no_short_description: '<i>Deskribapen laburrik gabe</i>'
+    no_sku: '<i>Ez dauka SKU-rik</i>'
+    no_tax_category: Zerga kategoriarik gabe
+    no_taxons: Taxonik ez 
+    options: Aukerark
+    price: Prezioa 
+    properties: Propietateak
+    restricted_zone: Zona mugatua
+    shipping_category: Bidalketa kategoria
+    show: Gehiago ikusi
+    show_header: 'Produktuaren xehetasunak <small>"<strong>%product%</strong>"</small>'
+    show_in_store: Dendan erakutsi
+    sku: SKU
+    stock: Egungo stocka
+    tabs:
+      categorization: Kategorizazioa
+      images: Irudiak
+      options: Aukerak 
+      product: Produktua
+      properties: Propietateak
+    tax_category: Zerga kategoria
+    unavailable: Ez erabilgarria
+    update_header: Produktua editatu
+    updated_at: Azken aldaketa
+    variant_selection_method: Aldaeraren hautaketa metodoa
+    view_details: '%product%-aren xehetasunak ikusi.'
+  product_not_available_in_zone: Ez eskuragarri zure herrialdean
+  promotion:
+    actions: Ekintzak
+    add_action: Ekintza gehitu
+    add_rule: Araua gehitu 
+    coupon_based: Kupoietan oinarritua?
+    create: Promozioa sortu
+    create_header: Promozio berria
+    created_at: Sortze data
+    description: Deskribapena
+    ends_at: Amaiera data
+    general_info: Informazio orokorra
+    id: ID
+    index_header: Egungo promozioak
+    manage: Promozioak kudeatu
+    name: Izena
+    no_results: Ez dago konfiguratutako promoziorik
+    rules: Arauak
+    show_header: Promozioaren xehetasunak
+    starts_at: Hasiera data
+    update_header: Promozioa editatu
+    updated_at: Azken aldaketaren data
+    usage_limit: Promozioa erabiltzeko epea
+    used: Promozioa erabilia
+  promotion_action:
+    configuration: Konfigurazioa
+    type: Mota
+  promotion_coupon:
+    create: Kupoia gehitu
+    create_header: Kupoi berria sortu
+    generate: Kupoiak sortu
+    generate_header: Kupoiak sortzen 
+    index: Kupoiak zerrendatu
+    index_header: sylius.promotion_coupon.index_header
+    no_results: Ez dago kupoirik
+    total_results:
+      Total: '%total%'
+    update_header: Kupoia editatu
+  promotion_rule:
+    configuration: Konfigurazioa 
+    type: Mota
+  property:
+    add_choice: Hautaketa gehitu
+    create: Propietatea sortu
+    create_header: Propietate berria
+    index_header: Propietateak
+    manage: Kudeatu
+    name: Izena
+    no_results: Ez dago konfiguratutako propietaterik
+    presentation: Aurkezpena
+    type: Mota
+    update_header: Goiburua eguneratu
+    updated_at: Azken aldaketa
+  prototype:
+    build: Eraiki
+    build_header: Goiburua eraiki
+    create: Prototipoa sortu
+    create_header: Prototipo berria
+    index_header: Prototipoak
+    name: Izena
+    no_results: Ez dago konfiguratutako prototiporik
+    options: Aukerak
+    properties: Propietateak
+    update_header: Goiburua eguneratu
+    updated_at: Azken eguneratzea
+  province:
+    provinces: Probintziak
+  remember_me: Gogora nazazu
+  save_changes: Aldaketak gorde
+  search: Bilaketa
+  settings:
+    general_header: Goiburu orokorra
+    taxation_header: Zergaren goiburua
+  shipment_category:
+    manage: Kudeatu
+  shipping_address: Bidalketa helbidea
+  shipping_category:
+    create: Bidalketa kategoria sortu
+    create_header: Bidalketa kategoria berria
+    id: ID
+    index_header: Bidalketa kategoriak
+    manage: Kudeatu
+    name: Izena
+    no_results: Ez dago konfiguratutako erosketa kategoriarik
+    update_header: Eguneratu
+    updated_at: Azken aldaketaren data
+  shipping_method:
+    calculator: Kalkulatu
+    category: Kategoria
+    create: Bidalketa metodoa sortu
+    create_header: Bidalketa metodo berria
+    enabled: Erabilgarri
+    id: ID
+    index_header: Bidalketa metodoak
+    manage: Kudeatu
+    name: Izena
+    no_results: Emaitzik gabe
+    show_header: Erakutsi
+    update_header: Eguneratu
+    updated_at: Azken aldaketaren data
+    zone: Zona
+  shop_by: -k erosia
+  show: Erakutsi
+  show_all: Denak ikusi
+  show_deleted: Ezabatuak erakutsi
+  stockable:
+    index_header: 'Inbentarioa <small>Hemen egungo stock maila ikus dezakezu</small>'
+    name: Izena
+    no_results: Emaitzik gabe
+    on_hand: Stock maila
+    on_hold: eskuragarri
+    sku: sku
+    updated_at: Azken eguneratzea
+  tax_category:
+    create: Zerga kategoria sortu
+    create_header: Zerga kategoria berria
+    description: Deskribapena
+    id: ID
+    index_header: Zerga kategoriak
+    manage: Kudeatu
+    name: Izena
+    no_description: Deskribapenik ez
+    no_results: Ez dago konfiguratutako zerga kategoriarik
+    update_header: Eguneratu
+    updated_at: Azken aldaketaren data
+  tax_rate:
+    amount: Kantitatea
+    calculator: Kalkulagailua
+    category: Kategoria
+    create: Zerga tasa sortu
+    create_header: Zerga tasa berria
+    included_in_price: Prezioaren barnean?
+    index_header: Zerga tasak
+    manage: Kudeatu
+    name: Izena
+    no_results: Ez dago konfiguratutako zerga tasarik
+    show_header: Erakutsi
+    update_header: Eguneratu
+    updated_at: Azken eguneratzea
+    zone: Zona
+  taxon:
+    create: Taxona sortu
+    create_header: Taxon berria
+    image: Irudi bat aukeratu
+    name: Izena
+    no_image: Ez dago irudirik aukeratzeko
+    no_results: Ez dago konfiguratutako taxonik
+    product_index_header: '"%name%"-ren arabera sailkatutako produktuak'
+    update_header: Eguneratu
+  taxonomy:
+    create: Taxonomia sortu
+    create_header: Taxonomia berria
+    image: Irudi bat aukeratu
+    index_header: Taxonomiak
+    manage: sylius.taxonomy.manage
+    name: Izena
+    no_image: Ez dago irudirik taxonomia honetarako
+    no_results: Ez dago konfiguratutako taxonomiarik
+    show_header: Erakutsi
+    update_header: Eguneratu
+  total_quantity: Kantitate totala
+  unknown: Ezezaguna
+  user:
+    billing_address: Fakturazio-helbidea
+    create: Erabiltzailea sortu
+    create_header: Erabiltzaile berria
+    email: E-posta
+    enabled: Erabilgarri
+    filter:
+      all: Dena erakutsi
+      unconfirmed: Baieztatu gabe
+    first_name: Izena
+    general_info: Info orokorra
+    id: ID
+    index_header: Dendan erregistratutako erabiltzaile guztien zerrenda
+    last_login: Azken saio irekiera
+    last_name: Abizenak
+    impersonate: Erabiltzaile hau bezala hasi saioa
+    manage: Erabiltzailea kudeatu
+    no_results: Ez dago konfiguratutako erabiltzailerik
+    order:
+      no_results: Ez dago erabiltzaile honen eskaerarik erakusteko.
+    orders: Erabiltzailearen eskaerak
+    recent_header: Orain dela gutxiko erabiltzaileak
+    registration_date: Erregistroaren data
+    shipping_address: Bidaltze helbidea
+    show_header: Erakutsi
+    update_header: Erabiltzailea editatzen
+    username: Erabiltzaile izena
+  variant:
+    add_image: Irudia gehitu
+    availability: Erabilgarritasuna
+    available_on_demand: Demandapean erabilgarri
+    create: Aldaera sortu
+    create_header: Aldaera berria
+    delete_image: Irudia ezabatu
+    last_update: Azken eguneratzea
+    no_results: Ez dago konfiguratutako aldaerarik
+    options: Aukerak
+    price: Prezioa
+    sku: SKU
+    stock: Egungo stocka
+    update_header: Aldaera editatu
+  "yes": true
+  zone:
+    add_member: Kidea gehitu
+    create: Zona sorut
+    create_header: Zona berria
+    index_header: Zonak
+    manage: Zonak kudeatu
+    name: Izena
+    no_results: Ez dago konfiguratutko zonarik
+    show_header: Zonaren xehetasunak
+    type: Mota
+    update_header: Zona editatzen
+  zone_member:
+    members: Kideak

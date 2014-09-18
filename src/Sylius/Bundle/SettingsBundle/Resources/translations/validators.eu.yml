@@ -1,0 +1,10 @@
+sylius:
+    parameter:
+        namespace:
+            max_length: Namespace parametroak ez du 255 karaktere baino gehiago eduki behar.|Namespace parametroak ez du 255 karaktere baino gehiago eduki behar.
+            min_length: Namespace parametroak behintzat 2 karaktere eduki behar ditu.|Namespace parametroak behintzat 2 karaktere eduki behar ditu.
+            not_blank: Mesedez, hauta ezazu namespace bat parametro honentzako.
+        name:
+            max_length: Parametroaren izenak ez du 255 karaktere baino gehiago eduki behar.|Parametroaren izenak ez du 255 karaktere baino gehiago eduki behar.
+            min_length: Parametroaren izenak behintzat 2 karaktere eduki behar ditu.|Parametroaren izenak behintzat 2 karaktere eduki behar ditu.
+            not_blank: Mesedez, sar ezazu izen bat parametroarentzako.

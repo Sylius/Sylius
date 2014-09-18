@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    tax_category:
+      name: Izena
+      description: Deskribapena
+    tax_rate:
+      category: Kategoria
+      name: Izena
+      amount: Kantitatea
+      included_in_price: Prezioaren barnean?
+      calculator: Kalkulagailua

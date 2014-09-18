@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      max_length: Hiriaren izenak ez ditu 255 karaktere baino gehiago eduki behar|Hiriaren izenak ez ditu 255 karaktere baino gehiago eduki behar.
+      min_length: Hiriak behintzat 2 karaktere eduki behar ditu|Hiriak behintzat 2 karaktere eduki behar ditu.
+      not_blank: Sar ezazu hiria.
+    country:
+      not_blank: Herrialde bat aukeratu.
+    first_name:
+      max_length: Izenak 255 karaktere baino gutxiago eduki behar ditu|Izenak 255 karaktere baino gutxiago eduki behar ditu.
+      min_length: Izenak behintzat 2 karaktere eduki behar ditu|Izenak behintzat 2 karaktere eduki behar ditu.
+      not_blank: Sar ezazu izena.
+    last_name:
+      max_length: Abizenek 255 karaktere baino gutxiago eduki behar dituzte|Abizenek 255 karaktere baino gutxiago eduki behar dituzte.
+      min_length: Abizenek behintzat 2 karaktere eduki behar dituzte|Abizenek behintzat 2 karaktere eduki behar dituzte.
+      not_blank: Sar itzazu abizenak.
+    postcode:
+      max_length: Kode postalak ez ditu 255 karaktere baino gehiago eduki behar|Kode postalak ez ditu 255 karaktere baino gehiago eduki behar.
+      min_length: Kode postalak behintzat bi karaktere eduki behar ditu.
+      not_blank: Mesedez, sar ezazu kode postala.
+    province:
+      valid: Mesedez, aukera ezazu probintzia egokia.
+    street:
+      max_length: Kalearen izenak ez ditu 255 karaktere baino gehiago eduki behar
+      min_length: Kalearen izenak behintzat 2 karaktere eduki behar ditu.
+      not_blank: Mesedez, sar ezazu kalearen izena.
+    not_shippable: Helbide hau ez da helbide egoki bat.
+  country:
+    iso_name:
+      not_blank: Mesedez, sar ezazu herrialdearen ISO kodea.
+    name:
+      max_length: Herrialdearen izenak ez ditu 255 karaktere baino gehieago eduki behar.
+      not_blank: Mesedez sar ezazu herrialdearen izena.
+  province:
+    name:
+      max_length: Probintziaren izenak ez ditu 255 karaktere baino gehiago eduki behar.
+      min_length: Probintziaren izenak behintzat bi karaktere eduki behar ditu.
+      not_blank: Mesedez, sar ezazu probintziaren izena.
+  zone:
+    members:
+      min_count: 'Mesedez, sar ezazu/itzazu behintzat {{ limit }} zona-kide.'
+    name:
+      max_length: Zonaren izenak ez ditu 255 karaktere baino gehiago eduki behar.
+      not_blank: Mesedez, sar ezazu zonaren izena.

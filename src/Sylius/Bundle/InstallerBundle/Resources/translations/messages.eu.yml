@@ -1,0 +1,63 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius era egokian instalatu da.
+  form:
+    configuration:
+      database:
+        0: Datu baserako konexioa.
+        driver:
+          0: Driverra
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Zerbitzaria
+        name: Izena
+        password: Pasahitza
+        port: Portua
+        user: Erabiltzailea
+      locale:
+        0: Hizkuntzaren konfigurazioa
+        currency: Moneta
+        locale: Hizkuntza
+      mailer:
+        0: Mailerraren konfigurazioa
+        host: Zerbitzaria
+        password: Pasahitza
+        transport:
+          0: Garraioa
+          gmail: Gmail
+          mail: Posta
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Erabiltzailea
+    setup:
+      email: E-posta
+      load_fixtures: Proba datuak kargatu
+      plain_password: Pasahitza
+      username: Erabiltzailearen izena
+  process:
+    step:
+      check:
+        button:
+          back: Atzera
+          install: Instalatu
+          next: Hurrengoa
+        header: 'Sistemaren baldintzak konprobatu <small>Syliusen instalatzailea</small>'
+        table:
+          current: Oraingoa
+          required: Beharrezkoa
+          status: Egoera
+      configure:
+        header: 'Konfigurazioa <small>Syliusen instalatzailea</small>'
+      setup:
+        header: 'Administrazioaren konfigurazioa <small>Syliusen instalatzailea</small>'
+      welcome:
+        content: '<p>Ongi etorria Syliusen instalatzailera</p>'
+        header: 'Ongi etorri <small>Syliusen instalatzailea</small>'
+€: €

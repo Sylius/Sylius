@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Promozio kupoiak era egokian sortu dira.
+    eligible: Promozio kupoia saskira gehitu da.
+    invalid: Promozio kupoia ez da baliozkoa.
+    not_eligible: Promozioa ez da baliozkoa zure saskiarentzako.

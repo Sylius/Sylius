@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'Titularraren izenak behintzat {{limit}} karaktere eduki behar du/ditu.'
+      not_blank: Mesedez, sar ezazu txartelaren titularraren izena.
+    expiry_month:
+      max_range: 'Kreditu txartelaren iraungipen hilabetea {{min}} eta {{max}} artean egon behar da.'
+      min_range: 'Kreditu txartelaren iraungipen hilabetea {{min}} eta {{max}} artean egon behar da.'
+      not_blank: Mesedez, aukeratu iraungipen hilabetea.
+    number:
+      not_blank: Mesedez, sar ezazu kreditu txartelaren zenbakia.
+      luhn: Sartutako kreditu txartelaren zenbakia ez da zuzena.
+    security_code:
+      not_blank: Mesedez, sar ezazu segurtasun kodea.
+      max_length: 'Kreditu txartelaren CVV kodea {{min}} eta {{max}} karaktereen artean egon behar da.'
+      min_length: 'Kreditu txartelaren CVV kodea {{min}} eta {{max}} karaktereen artean egon behar da.'
+    expiry_year:
+      not_blank: Mesedez, hauta ezazu iraungipen urtea.
+  payment_method:
+    gateway:
+      not_blank: Mesedez, hauta ezazu ordainketa metodoaren pasagunea.
+    name:
+      max_length: 'Ordainketa metodoaren izenak {{limit}} karaktere edo gutxiago izan behar ditu.'
+      min_length: 'Ordainketa metodoaren izenak gutxienez {{limit}} karaktere eduki behar ditu.'
+      not_blank: Mesedez, sar ezazu ordainketa metodoaren izena.

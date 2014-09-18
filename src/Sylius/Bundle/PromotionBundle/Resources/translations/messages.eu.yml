@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Kantitatea
+      percentage_discount_configuration:
+        percentage: Portzentaia
+      shipping_discount_configuration:
+        percentage: Portzentaia
+      type: Mota
+    rule:
+      taxonomy_configuration:
+        taxons: Taxonomiak
+        exclude: Baztertu
+      item_count_configuration:
+        count: Zenbatzaile
+        equal: Berdin
+      item_total_configuration:
+        amount: Kantitatea
+        equal: Berdin
+      nth_order_configuration:
+        nth: Enegarren
+      user_loyality_configuration:
+        time: Ordua
+        unit:
+          days: Egunak
+          weeks: Asteak
+          months: Hilabeteak
+          years: Urteak
+          0: Unitatea
+        after: Denboraldi honen ostean sortutako erabiltzailea
+      shipping_country_configuration:
+        country: Herrialdea
+      type: Mota
+    coupon:
+      code: Kodea
+      usage_limit: Erabiltze muga
+    coupon_generate_instruction:
+      amount: Kantitatea
+      usage_limit: Erabiltze muga
+    promotion:
+      actions: Ekintzak
+      coupon_based: Kupoietan oinarritua
+      description: Deskribapena
+      ends_at: -an bukatzen da
+      name: Izena
+      rules: Arauak
+      starts_at: -an hasten da
+      usage_limit: Erabiltze muga

@@ -1,0 +1,36 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Hiria
+      company: Enpresa
+      country: Herialdea
+      first_name: Izena
+      last_name: Abizenak
+      postcode: Kode Postala
+      street: Kalea
+      province: Probintzia
+    country:
+      iso_name: ISO izena
+      name: Izena
+      provinces: Probintziak
+      select: Aukeratu
+    province:
+      name: Izena
+      select: Aukeratu
+    zone:
+      members: Kideak
+      name: Izena
+      type: Mota
+      types:
+        country: Herrialdea
+        province: Probintzia
+        zone: Zona
+    zone_member_country:
+      country: Herrialdea
+    zone_member_province:
+      province: Probintzia
+    zone_member_zone:
+      zone: Zona

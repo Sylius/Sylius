@@ -1,0 +1,20 @@
+sylius:
+    form:
+        priceable:
+            price: Prezio
+            calculator: Prezioen ezarpena
+            configuration: Konfigurazioa
+        pricing:
+            volume_based:
+                label: Prezioen ezarpenaren konfigurazioa
+                min: Bolumen minimoa
+                max: Bolumen maximoa
+                price: Prezioa
+    pricing:
+        volume_based:
+            min: Bolumen minimoa
+            max: Bolumen maximoa
+            price: Prezioa
+            no_results: Prezioen ezarpenaren konfigurazioarik gabe
+            button:
+                add: Gehitu

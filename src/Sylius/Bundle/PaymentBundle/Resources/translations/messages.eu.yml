@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Txartelaren titularraren izena
+      expiry_month: Epemugaren hilabeta
+      expiry_year: Epemugaren urtea
+      number: Txartelaren zenbakia
+      security_code: Segurtasun kodea (CVV)
+      type: Txartela-mota
+    payment:
+      amount: Ordainketaren zenbatekoa
+      method: Ordainketa modua
+      state:
+        0: Ordainketaren egoera
+        checkout: Eskaera burutu
+        completed: Eginda
+        failed: Huts eginda
+        new: Berria
+        pending: Egiteke
+        processing: Prozesatzen
+        unknown: Ezezaguna
+        void: Hutsik
+    payment_method:
+      description: Laburpena
+      enabled: Aktibatuta?
+      gateway: Esteka atea
+      name: Izena

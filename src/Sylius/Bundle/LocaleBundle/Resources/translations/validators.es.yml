@@ -1,0 +1,5 @@
+sylius:
+    locale:
+        code:
+            not_blank: Por favor elija el código local.
+            unique: El código local debe ser único.
