@@ -83,8 +83,8 @@ sylius:
       0: Hilabetearen estatistikak
       orders_this_month: Eskaerak
       registrations_this_month: Erabiltzaileak
-  backend_welcome: 'Kaixo <b>%name%</b>!'
       sales_this_month: Salmentak
+  backend_welcome: 'Kaixo <b>%name%</b>!'
   block:
     body: Gorputza
     create: Multzoa sortu
@@ -476,7 +476,7 @@ sylius:
     no_results: Ez dago produkturik 
     no_shipping_category: Bidalketa kategoriarik gabe
     no_short_description: '<i>Deskribapen laburrik gabe</i>'
-    no_sku: '<i>No tiene SKU</i>' '<i>Ez dauka SKU-rik</i>'
+    no_sku: '<i>Ez dauka SKU-rik</i>'
     no_tax_category: Zerga kategoriarik gabe
     no_taxons: Taxonik ez 
     options: Aukerark
@@ -500,7 +500,7 @@ sylius:
     update_header: Produktua editatu
     updated_at: Azken aldaketa
     variant_selection_method: Aldaeraren hautaketa metodoa
-    view_details: 'Ver detalles de %product%.' '%product%-aren xehetasunak ikusi.'
+    view_details: '%product%-aren xehetasunak ikusi.'
   product_not_available_in_zone: Ez eskuragarri zure herrialdean
   promotion:
     actions: Ekintzak
@@ -512,8 +512,8 @@ sylius:
     created_at: Sortze data
     description: Deskribapena
     ends_at: Amaiera data
-    general_info: sylius.promotion.general_info
-    id: sylius.promotion.id
+    general_info: Informazio orokorra
+    id: ID
     index_header: Egungo promozioak
     manage: Promozioak kudeatu
     name: Izena
