@@ -17,6 +17,11 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.default.controller.class">Sylius\Bundle\ResourceBundle\Controller\ResourceController</parameter>
+        <parameter key="sylius.orm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
+        <parameter key="sylius.mongodb-odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
+        <parameter key="sylius.phpcr-odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository</parameter>
+
         <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory</parameter>
         <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
         <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>

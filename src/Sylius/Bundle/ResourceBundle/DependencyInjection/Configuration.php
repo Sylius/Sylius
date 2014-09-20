@@ -23,7 +23,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractResourceConfiguration
 {
     /**
      * {@inheritdoc}
@@ -52,23 +52,26 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
-                            ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                            ->scalarNode('object_manager')->defaultValue('default')->end()
-                            ->scalarNode('templates')->cannotBeEmpty()->end()
-                            ->arrayNode('classes')
-                                ->children()
-                                    ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('repository')->end()
-                                    ->scalarNode('interface')->end()
-                                    ->scalarNode('translatable_fields')->end()
-                                ->end()
-                            ->end()
+                            ->append($this->createDriverNode())
+                            ->append($this->createObjectManagerNode('default'))
+                            ->append($this->createTemplateNode())
+                            ->append($this->createValidationGroupNode())
+                            ->append($this->createClassesNode())
+                            ->scalarNode('translatable_fields')->end()
                         ->end()
                     ->end()
                 ->end()
             ->end()
         ;
+    }
+
+    private function createClassesNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('classes');
+        $this->addClassesSection($node, array());
+
+        return $node;
     }
 
     /**
