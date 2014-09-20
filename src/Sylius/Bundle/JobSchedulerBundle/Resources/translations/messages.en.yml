@@ -1,0 +1,75 @@
+sylius:
+  job_scheduler:
+    settings:
+      edit: Edit Global Scheduler Settings
+      warning: Jobs are currently disabled, please edit global scheduler settings to enable them
+    update_header_1: Updating global scheduler Settings
+    update_header_2: Use this form to update global scheduler settings
+
+  job:
+    command: Command
+    running_time: Schedule
+    last_status: Last status
+    last_run: Last run (min:sec)
+    active:
+      column: Active
+      no: NO
+      yes: YES
+    create: Create new job
+    index_header: Jobs
+    no_results: There are no jobs
+    action:
+      show_logs: Show logs
+      run: Run
+    is_running:
+      no: NO
+      yes: YES
+      header: Is running
+
+    create_header_1: Creating  job
+    create_header_2: Use this form to create a new job
+    update_header_1: Updating job
+    update_header_2: Use this form to update existing job
+
+    run-confirmation:
+      title: Confirmation
+      message: Do you want to run this task?
+      cancel: Cancel
+      run: Run
+
+    message:
+      job-has-run-successfully: Job has run successfully.
+
+  log:
+    status_header: Status
+    status:
+      0: success
+      1: failed
+      2: running
+    started_at: Started
+    finished_at: Finished
+    running_time: Running time (min:sec)
+    index_header: Job logs
+    action:
+      see_output: See output
+    not_found: The log has not been found
+    output_modal:
+      header: Job output
+      close_button: Close
+    no_results: There are no logs for this job.
+
+  breadcrumb:
+    configuration: Configuration
+    job:
+      index: Jobs
+    log:
+      index: Job logs
+    settings:
+      index: Scheduler Settings
+
+  backend:
+    menu:
+      sidebar:
+        jobs: Jobs
+
+

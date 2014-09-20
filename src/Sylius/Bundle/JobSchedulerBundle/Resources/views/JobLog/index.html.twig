@@ -1,0 +1,34 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+
+{% block topbar %}
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+        <li><a href="{{ path('sylius_backend_job_index') }}">{{ 'sylius.breadcrumb.job.index'|trans }}</a></li>
+        <li>{{ 'sylius.breadcrumb.log.index'|trans }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="actions-menu">
+        </div>
+        <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.log.index_header'|trans|raw }}</h1>
+        <h4>{{ job.command }}</h4>
+        <h5>{{ job.description }}</h5>
+    </div>
+
+    {{ listContent.content|raw }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts output='assets/compiled/sylius/joblog.js'
+    '@SyliusJobSchedulerBundle/Resources/assets/js/joblog/index.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

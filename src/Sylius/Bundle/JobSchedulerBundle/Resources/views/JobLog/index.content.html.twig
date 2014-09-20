@@ -1,0 +1,12 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusJobSchedulerBundle:JobLog:macros.html.twig' import list %}
+
+{{ pagination(joblogs) }}
+{{ list(joblogs) }}
+{{ pagination(joblogs) }}
+
+<!-- Log output modal -->
+<div class="modal fade" id="logOutputModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+
+</div>

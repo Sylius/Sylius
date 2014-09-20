@@ -1,0 +1,14 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
+
+{% block content %}
+    <h1>{{ 'sylius.job.create_header_1' | trans }}
+        <small>{{ 'sylius.job.create_header_2' | trans }}</small>
+    </h1>
+    <hr/>
+    <form method="post" action="{{ path('sylius_backend_job_create') }}">
+        {% include 'SyliusJobSchedulerBundle:Job:_form.html.twig' %}
+        {{ actions.create(path('sylius_backend_job_index')) }}
+    </form>
+{% endblock %}

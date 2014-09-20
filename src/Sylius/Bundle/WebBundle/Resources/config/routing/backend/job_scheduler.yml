@@ -1,0 +1,81 @@
+sylius_backend_job_index:
+    pattern: /job
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.job:indexAction
+        _sylius:
+            template: SyliusJobSchedulerBundle:Job:index.html.twig
+            sortable: true
+
+sylius_backend_job_create:
+    pattern: /job/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.job:createAction
+        _sylius:
+            template: SyliusJobSchedulerBundle:Job:create.html.twig
+            redirect: sylius_backend_job_index
+
+sylius_backend_job_update:
+    pattern: /job/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.job:updateAction
+        _sylius:
+            template: SyliusJobSchedulerBundle:Job:update.html.twig
+            redirect: sylius_backend_job_index
+
+sylius_backend_job_delete:
+    pattern: /job/{id}/delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.job:deleteAction
+        _sylius:
+            template: SyliusJobSchedulerBundle:Job:delete.html.twig
+            redirect: sylius_backend_job_index
+
+sylius_backend_job_run:
+    pattern: /job/{id}/run
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.job:runAction
+
+sylius_backend_job_is_running:
+    pattern: /job/isrunnning/{id}
+    methods: [GET]
+    defaults:
+      _controller: sylius.controller.job:isRunningAction
+      _format: json
+
+sylius_backend_job_row_template:
+    pattern: /job/rowtemplate/{id}
+    methods: [GET]
+    defaults:
+      _controller: sylius.controller.job:rowTemplateAction
+      _format: html
+
+sylius_backend_log_index:
+    pattern: /job/log/{jobId}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.job_log:indexAction
+        _sylius:
+            template: SyliusJobSchedulerBundle:JobLog:index.content.html.twig
+            sortable: true
+            sorting:
+              startedAt: desc
+            criteria:
+              job: $jobId
+
+sylius_backend_log_see_output:
+    pattern: /job/log/{logId}/see-output
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.job_log:seeOutputAction
+
+sylius_backend_scheduler_settings_edit:
+    pattern: /job/settings
+    defaults:
+        _controller: sylius.controller.settings:updateAction
+        namespace: job_scheduler
+        template: SyliusJobSchedulerBundle:Settings:update.html.twig

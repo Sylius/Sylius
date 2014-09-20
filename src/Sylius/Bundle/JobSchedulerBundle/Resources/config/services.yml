@@ -1,0 +1,89 @@
+parameters:
+    sylius.scheduler.dispatcher.class: Sylius\Bundle\JobSchedulerBundle\Service\JobDispatcher
+
+    sylius.scheduler.process.listener: Sylius\Bundle\JobSchedulerBundle\EventListener\CronProcessListener
+
+    sylius.scheduler.settings.class: Sylius\Bundle\JobSchedulerBundle\Settings\JobSchedulerSettingsSchema
+
+    sylius.scheduler.job.entity.class: Sylius\Bundle\JobSchedulerBundle\Entity\Job
+    sylius.scheduler.job.manager.class: Sylius\Bundle\JobSchedulerBundle\Service\JobManager
+    sylius.job.form.type.class: Sylius\Bundle\JobSchedulerBundle\Form\Type\JobType
+
+    sylius.scheduler.log.class: Sylius\Bundle\JobSchedulerBundle\Entity\JobLog
+    sylius.scheduler.log.factory.class: Sylius\Bundle\JobSchedulerBundle\Service\JobLogFactory
+
+    sylius.scheduler.validator.class: Sylius\Bundle\JobSchedulerBundle\Validator\SchedulerValidator
+    sylius.scheduler.validator.schedule.class: Sylius\Bundle\JobSchedulerBundle\Validator\ScheduleValidator
+    sylius.scheduler.validator.server.type.class: Sylius\Bundle\JobSchedulerBundle\Validator\ServerTypeValidator
+    sylius.scheduler.validator.environment.class: Sylius\Bundle\JobSchedulerBundle\Validator\EnvironmentValidator
+    sylius.scheduler.validator.job.class: Sylius\Bundle\JobSchedulerBundle\Validator\JobValidator
+
+    sylius.twig.microtime.extension.class: Sylius\Bundle\JobSchedulerBundle\Twig\MicrotimeExtension
+
+services:
+
+    sylius.scheduler.event_listener.backend_menu_builder:
+        class: Sylius\Bundle\JobSchedulerBundle\EventListener\BackendMenuBuilderListener
+        tags:
+          - { name: kernel.event_listener, event: sylius.menu_builder.backend.sidebar, method: addBackendMenuItems}
+
+    sylius.scheduler.job:
+        class: %sylius.job.form.type.class%
+        arguments:
+            entity_class: %sylius.scheduler.job.entity.class%
+        tags:
+            - { name: form.type, alias: sylius_job }
+
+    sylius.scheduler.manager:
+        class: %sylius.scheduler.dispatcher.class%
+        arguments:
+          validator:   "@sylius.scheduler.validator"
+          job_manager: "@sylius.scheduler.job.manager"
+
+    sylius.scheduler.validator:
+        class: %sylius.scheduler.validator.class%
+        arguments:
+            settings_manager: "@sylius.settings.manager"
+            schedule_validator: "@sylius.schedule.job.validator"
+
+    sylius.scheduler.validator.server.type:
+        class: %sylius.scheduler.validator.server.type.class%
+
+    sylius.scheduler.validator.environment:
+        class: %sylius.scheduler.validator.environment.class%
+
+    sylius.scheduler.job.manager:
+        class: %sylius.scheduler.job.manager.class%
+        arguments:
+          em:               "@doctrine.orm.entity_manager"
+          job_validator:    "@sylius.scheduler.validator.job"
+          log_factory:      "@sylius.scheduler.log.factory"
+          kernel:           "@kernel"
+          dispatcher:       "@event_dispatcher"
+
+    sylius.schedule.job.validator:
+        class: %sylius.scheduler.validator.schedule.class%
+
+    sylius.scheduler.validator.job:
+        class: %sylius.scheduler.validator.job.class%
+        arguments:
+            environment_validator: "@sylius.scheduler.validator.environment"
+            server_type_validator: "@sylius.scheduler.validator.server.type"
+
+    sylius.scheduler.log:
+        class: %sylius.scheduler.log.class%
+
+    sylius.scheduler.log.factory:
+        class: %sylius.scheduler.log.factory.class%
+        arguments:
+          log: "@sylius.scheduler.log"
+
+    sylius.scheduler.settings:
+        class: %sylius.scheduler.settings.class%
+        tags:
+            - { name: sylius.settings_schema, namespace: "job_scheduler"}
+
+    sylius.twig.microtime.extension:
+        class: %sylius.twig.microtime.extension.class%
+        tags:
+            - { name: twig.extension }

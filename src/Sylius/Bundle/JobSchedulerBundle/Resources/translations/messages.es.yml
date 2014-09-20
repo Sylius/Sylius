@@ -1,0 +1,77 @@
+
+
+sylius:
+  job_scheduler:
+    settings:
+      edit: Editar ajustes globales
+      warning: Cron está desactivado, porfavor edite los ajustes globales si desea activarlo
+    update_header_1: Actualizar ajustes globales
+    update_header_2: Utilice este formulario para editar los ajustes globales
+
+  job:
+    command: Comando
+    running_time: Momento de ejecución
+    last_status: Último status
+    last_run: Última ejecución (min:sec)
+    active:
+      column: Activo
+      no: NO
+      yes: SÍ
+    create: Crear nueva tarea
+    index_header: Tareas
+    no_results: No hay tareas
+    action:
+      show_logs: Ver logs
+      run: Ejecutar
+    is_running:
+      no: NO
+      yes: SÍ
+      header: Está ejecutándose
+
+    create_header_1: Creando tarea
+    create_header_2: Utilice este formulario para crear una nueva tarea
+    update_header_1: Actualizando tarea
+    update_header_2: Utilice este formulario para actualizar una tarea
+
+    run-confirmation:
+      title: Confirmación
+      message: ¿Quiere ejecutar esta tarea?
+      cancel: Cancelar
+      run: Ejecutar
+
+    message:
+      job-has-run-successfully: La tarea se ha ejecutado correctamente.
+
+  log:
+    status_header: Status
+    status:
+      0: Exito
+      1: Fallido
+      2: En ejecución
+    started_at: Iniciado
+    finished_at: Terminado
+    running_time: Tiempo de ejecución (min:sec)
+    index_header: Logs
+    action:
+      see_output: Ver output
+    not_found: No se ha encontrado el log
+    output_modal:
+      header: Output
+      close_button: Cerrar
+    no_results: Esta tarea no tiene logs.
+
+  breadcrumb:
+    configuration: Configuración
+    job:
+      index: Tareas
+    log:
+      index: Logs
+    settings:
+      index: Ajustes
+
+  backend:
+    menu:
+      sidebar:
+        es: Cron
+
+

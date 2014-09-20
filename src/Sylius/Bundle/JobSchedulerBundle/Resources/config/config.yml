@@ -1,0 +1,17 @@
+sylius_resource:
+    resources:
+        sylius.job:
+            driver: doctrine/orm
+            templates: Sylius:Cron
+            classes:
+                model: Sylius\Bundle\JobSchedulerBundle\Entity\Job
+                controller: Sylius\Bundle\JobSchedulerBundle\Controller\JobController
+                repository: Sylius\Bundle\JobSchedulerBundle\Entity\Repository\JobRepository
+        sylius.joblog:
+            driver: doctrine/orm
+            templates: Sylius:Cron
+            classes:
+                model: Sylius\Bundle\JobSchedulerBundle\Entity\JobLog
+                controller: Sylius\Bundle\JobSchedulerBundle\Controller\JobLogController
+
+

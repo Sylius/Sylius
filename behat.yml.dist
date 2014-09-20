@@ -243,6 +243,18 @@ default:
             filters:
                 tags: "@users && ~@javascript"
 
+        job_scheduler:
+            paths:
+                feature: %paths.base%/src/Sylius/Bundle/JobSchedulerBundle
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\JobSchedulerBundle\Behat\JobSchedulerContext
+            filters:
+                tags: "@job_scheduler && ~@javascript"
+
         javascript:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext

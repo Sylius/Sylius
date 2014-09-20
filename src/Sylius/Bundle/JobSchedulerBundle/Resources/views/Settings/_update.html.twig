@@ -1,0 +1,16 @@
+<h1>{{ 'sylius.job_scheduler.update_header_1'|trans }}
+    <small>{{ 'sylius.job_scheduler.update_header_2' | trans }}</small>
+</h1>
+<hr/>
+
+<form action="{{ path('sylius_backend_scheduler_settings_edit') }}" method="post" class="form-horizontal">
+    {{ form_widget(form) }}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-lg"><i class="icon-save"></i> {{ 'sylius.save_changes'|trans }}
+        </button>
+        <a href="{{ path('sylius_backend_job_index') }}" class="btn btn-danger btn-lg"><i
+                    class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+    </div>
+
+</form>

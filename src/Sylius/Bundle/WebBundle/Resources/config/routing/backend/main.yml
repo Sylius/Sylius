@@ -138,3 +138,7 @@ sylius_backend_settings:
 
 sylius_backend_security:
     resource: @SyliusWebBundle/Resources/config/routing/backend/security.yml
+
+sylius_backend_job_scheduler:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/job_scheduler.yml
+

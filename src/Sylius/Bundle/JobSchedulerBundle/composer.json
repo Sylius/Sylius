@@ -1,0 +1,36 @@
+{
+    "name": "sylius/sylius-scheduler-bundle",
+    "description": "Sylius Scheduler Bundle",
+    "type": "symfony-bundle",
+    "keywords": ["scheduler", "cron", "administration"],
+    "homepage": "http://.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Chudzinski",
+            "email": "achudzinski@reiss.co.uk"
+        },
+        {
+            "name": "Gonzalo Vilaseca",
+            "email": "gvilaseca@reiss.co.uk"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "~2.3",
+        "sylius/resource-bundle": "1.0.*@dev",
+        "sylius/web-bundle": "1.0.*@dev",
+        "sylius/settings-bundle": "1.0.*@dev",
+        "sanpi/behatch-contexts": "*",
+        "sylius/web-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Bundle\\SchedulerBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

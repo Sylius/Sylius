@@ -1,0 +1,16 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
+
+{% block content %}
+    <h1>{{ 'sylius.job.update_header_1' | trans }}
+        <small>{{ 'sylius.job.update_header_2' | trans }}</small>
+    </h1>
+    <hr/>
+    <form action="{{ path('sylius_backend_job_update', {'id': job.id}) }}" method="post" class="form-horizontal"
+          novalidate>
+        {% include 'SyliusJobSchedulerBundle:Job:_form.html.twig' %}
+        {{ actions.update(path('sylius_backend_job_index')) }}
+        <input type="hidden" name="_method" value="PUT"/>
+    </form>
+{% endblock %}

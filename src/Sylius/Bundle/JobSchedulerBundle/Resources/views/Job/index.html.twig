@@ -1,0 +1,76 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusJobSchedulerBundle:Job:macros.html.twig' import list %}
+
+{% block topbar %}
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+        <li>{{ 'sylius.breadcrumb.job.index'|trans }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="actions-menu">
+            {{ buttons.create(path('sylius_backend_job_create'), 'sylius.job.create'|trans) }}
+
+            {{ buttons.create(path('sylius_backend_scheduler_settings_edit', {'namespace': 'job_scheduler'}), 'sylius.job_scheduler.settings.edit'|trans) }}
+
+        </div>
+        <h1><i class="glyphicon glyphicon-globe"></i> {{ 'sylius.job.index_header'|trans|raw }}</h1>
+    </div>
+
+
+    {% set enabled = sylius_settings_get('job_scheduler.enabled') %}
+
+    {% if not enabled %}
+        <div id="-settings-warning">
+            <div class="alert alert-warning">
+                {{ 'sylius.scheduler.settings.warning' | trans }}
+            </div>
+        </div>
+    {% endif %}
+
+    {{ pagination(jobs) }}
+    {{ list(jobs) }}
+    {{ pagination(jobs) }}
+
+    <div class="modal fade" id="run-job-confirmation-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{ 'sylius.job.run-confirmation.title'|trans }}</h4>
+                </div>
+
+                <div class="modal-body">
+                    {{ 'sylius.job.run-confirmation.message'|trans }}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal"><i
+                                class="glyphicon glyphicon-remove"></i> {{ 'sylius.job.run-confirmation.cancel'|trans }}
+                    </button>
+                    <a class="btn btn-danger" id="run-job-confirmation-modal-confirm">
+                        <i class="glyphicon glyphicon-ok"></i><span>{{ 'sylius.job.run-confirmation.run'|trans }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    '@SyliusJobSchedulerBundle/Resources/assets/js/job/index.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
