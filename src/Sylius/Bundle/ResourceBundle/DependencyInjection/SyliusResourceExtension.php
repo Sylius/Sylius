@@ -25,6 +25,22 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SyliusResourceExtension extends Extension
 {
+    protected $classesToCompile = array(
+        'Sylius\Bundle\ResourceBundle\Controller\Configuration',
+        'Sylius\Bundle\ResourceBundle\Controller\DomainManager',
+        'Sylius\Bundle\ResourceBundle\Controller\FlashHelper',
+        'Sylius\Bundle\ResourceBundle\Controller\ParametersParser',
+        'Sylius\Bundle\ResourceBundle\Controller\RedirectHandler',
+        'Sylius\Bundle\ResourceBundle\Controller\ResourceController',
+        'Sylius\Bundle\ResourceBundle\Controller\ResourceResolver',
+
+        'Sylius\Bundle\ResourceBundle\Event\ResourceEvent',
+
+        'Sylius\Component\Resource\Model\SoftDeletableInterface',
+        'Sylius\Component\Resource\Model\TimestampableInterface',
+        'Sylius\Component\Resource\Repository\RepositoryInterface',
+    );
+
     /**
      * {@inheritdoc}
      */

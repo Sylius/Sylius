@@ -23,6 +23,19 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  */
 class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    protected $configFiles = array(
+        'services',
+        'templating',
+        'twig',
+    );
+
+    protected $classesToCompile = array(
+        'Sylius\Component\Core\OrderPaymentTransitions',
+        'Sylius\Component\Core\OrderShippingTransitions',
+        'Sylius\Component\Core\SyliusCheckoutEvents',
+        'Sylius\Component\Core\SyliusOrderEvents',
+    );
+
     /**
      * @var array
      */
@@ -44,12 +57,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_attribute',
         'sylius_variation',
         'sylius_sequence',
-    );
-
-    protected $configFiles = array(
-        'services',
-        'templating',
-        'twig',
     );
 
     private $emails = array(

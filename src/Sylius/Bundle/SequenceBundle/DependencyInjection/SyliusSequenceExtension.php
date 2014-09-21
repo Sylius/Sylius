@@ -21,6 +21,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class SyliusSequenceExtension extends AbstractResourceExtension
 {
+    protected $classesToCompile = array(
+        'Sylius\Component\Sequence\SyliusSequenceEvents',
+    );
+
     /**
      * {@inheritdoc}
      */
