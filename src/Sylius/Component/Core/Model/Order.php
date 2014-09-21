@@ -14,7 +14,6 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -164,114 +163,6 @@ class Order extends Cart implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxTotal()
-    {
-        $taxTotal = 0;
-
-        foreach ($this->getTaxAdjustments() as $adjustment) {
-            $taxTotal += $adjustment->getAmount();
-        }
-
-        return $taxTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::TAX_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeTaxAdjustments()
-    {
-        foreach ($this->getTaxAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionTotal()
-    {
-        $promotionTotal = 0;
-
-        foreach ($this->getPromotionAdjustments() as $adjustment) {
-            $promotionTotal += $adjustment->getAmount();
-        }
-
-        return $promotionTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::PROMOTION_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePromotionAdjustments()
-    {
-        foreach ($this->getPromotionAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingTotal()
-    {
-        $shippingTotal = 0;
-
-        foreach ($this->getShippingAdjustments() as $adjustment) {
-            $shippingTotal += $adjustment->getAmount();
-        }
-
-        return $shippingTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::SHIPPING_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeShippingAdjustments()
-    {
-        foreach ($this->getShippingAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
 
         return $this;
     }

@@ -352,9 +352,15 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustments()
+    public function getAdjustments($type = null)
     {
-        return $this->adjustments;
+        if (null === $type) {
+            return $this->adjustments;
+        }
+
+        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
+            return $type === $adjustment->getLabel();
+        });
     }
 
     /**
@@ -394,9 +400,31 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAdjustmentsTotal()
+    public function getAdjustmentsTotal($type = null)
     {
-        return $this->adjustmentsTotal;
+        if (null === $type) {
+            return $this->adjustmentsTotal;
+        }
+
+        $total = 0;
+        foreach ($this->getAdjustments($type) as $adjustment) {
+            $total += $adjustment->getAmount();
+        }
+
+        return $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAdjustments($type)
+    {
+        foreach ($this->getAdjustments($type) as $adjustment) {
+            $adjustment->setAdjustable(null);
+            $this->adjustments->removeElement($adjustment);
+        }
+
+        return $this;
     }
 
     /**

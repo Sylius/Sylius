@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -46,7 +46,7 @@ interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterfac
     /**
      * Get all inventory units.
      *
-     * @return ArrayCollection|InventoryUnitInterface[]
+     * @return Collection|InventoryUnitInterface[]
      */
     public function getInventoryUnits();
 
@@ -72,16 +72,4 @@ interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterfac
      * @return Boolean
      */
     public function hasInventoryUnit(InventoryUnitInterface $unit);
-
-    /**
-     * Get all promotion adjustments.
-     *
-     * @return Collection|AdjustmentInterface[]
-     */
-    public function getPromotionAdjustments();
-
-    /**
-     * Remove all promotion adjustments.
-     */
-    public function removePromotionAdjustments();
 }

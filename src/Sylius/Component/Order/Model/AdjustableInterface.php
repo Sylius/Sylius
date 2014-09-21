@@ -23,9 +23,11 @@ interface AdjustableInterface
     /**
      * Return all adjustments attached to adjustable subject.
      *
+     * @param null|string $type
+     *
      * @return Collection|AdjustmentInterface[]
      */
-    public function getAdjustments();
+    public function getAdjustments($type = null);
 
     /**
      * Add adjustment.
@@ -44,9 +46,18 @@ interface AdjustableInterface
     /**
      * Get adjustments total.
      *
+     * @param null|string $type
+     *
      * @return integer
      */
-    public function getAdjustmentsTotal();
+    public function getAdjustmentsTotal($type = null);
+
+    /**
+     * Remove adjustment.
+     *
+     * @param string $type
+     */
+    public function removeAdjustments($type);
 
     /**
      * Clears all adjustments.

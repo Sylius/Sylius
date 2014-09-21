@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
@@ -58,7 +59,7 @@ class PercentageDiscountAction implements PromotionActionInterface
         $adjustment = $this->repository->createNew();
 
         $adjustment->setAmount(- $subject->getPromotionSubjectTotal() * ($configuration['percentage']));
-        $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT);
+        $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 
         $subject->addAdjustment($adjustment);
@@ -76,7 +77,7 @@ class PercentageDiscountAction implements PromotionActionInterface
             );
         }
 
-        $subject->removePromotionAdjustments();
+        $subject->removeAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT);
     }
 
     /**

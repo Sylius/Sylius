@@ -12,8 +12,8 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItem;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
@@ -176,27 +176,5 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function getPromotions()
     {
         return $this->promotions;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::PROMOTION_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePromotionAdjustments()
-    {
-        foreach ($this->getPromotionAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
-
-        return $this;
     }
 }

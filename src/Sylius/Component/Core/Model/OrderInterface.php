@@ -26,11 +26,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  */
 interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface
 {
-    // Labels for tax, shipping and promotion adjustments.
-    const TAX_ADJUSTMENT       = 'tax';
-    const SHIPPING_ADJUSTMENT  = 'shipping';
-    const PROMOTION_ADJUSTMENT = 'promotion';
-
     /**
      * Get user.
      *
@@ -72,63 +67,6 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @param AddressInterface $address
      */
     public function setBillingAddress(AddressInterface $address);
-
-    /**
-     * Get the tax total.
-     *
-     * @return float
-     */
-    public function getTaxTotal();
-
-    /**
-     * Get all tax adjustments.
-     *
-     * @return Collection|AdjustmentInterface[]
-     */
-    public function getTaxAdjustments();
-
-    /**
-     * Remove all tax adjustments.
-     */
-    public function removeTaxAdjustments();
-
-    /**
-     * Get the promotion total.
-     *
-     * @return float
-     */
-    public function getPromotionTotal();
-
-    /**
-     * Get all promotion adjustments.
-     *
-     * @return Collection|AdjustmentInterface[]
-     */
-    public function getPromotionAdjustments();
-
-    /**
-     * Remove all promotion adjustments.
-     */
-    public function removePromotionAdjustments();
-
-    /**
-     * Get shipping total.
-     *
-     * @return float
-     */
-    public function getShippingTotal();
-
-    /**
-     * Get all shipping adjustments.
-     *
-     * @return Collection|AdjustmentInterface[]
-     */
-    public function getShippingAdjustments();
-
-    /**
-     * Remove all shipping adjustments.
-     */
-    public function removeShippingAdjustments();
 
     /**
      * Get the payment state.

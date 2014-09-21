@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\OrderProcessing;
 
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -91,7 +92,7 @@ class TaxationProcessor implements TaxationProcessorInterface
     public function applyTaxes(OrderInterface $order)
     {
         // Remove all tax adjustments, we recalculate everything from scratch.
-        $order->removeTaxAdjustments();
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
 
         if ($order->getItems()->isEmpty()) {
             return;
@@ -150,7 +151,7 @@ class TaxationProcessor implements TaxationProcessorInterface
     {
         foreach ($taxes as $description => $tax) {
             $adjustment = $this->adjustmentRepository->createNew();
-            $adjustment->setLabel(OrderInterface::TAX_ADJUSTMENT);
+            $adjustment->setLabel(AdjustmentInterface::TAX_ADJUSTMENT);
             $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);
             $adjustment->setNeutral($tax['included']);
