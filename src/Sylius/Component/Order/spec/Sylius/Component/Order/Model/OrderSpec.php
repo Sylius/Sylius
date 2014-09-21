@@ -180,6 +180,7 @@ class OrderSpec extends ObjectBehavior
 
         $this->hasAdjustment($adjustment)->shouldReturn(true);
 
+        $adjustment->isLocked()->willReturn(false);
         $adjustment->setAdjustable(null)->shouldBeCalled();
         $this->removeAdjustment($adjustment);
 
@@ -189,6 +190,7 @@ class OrderSpec extends ObjectBehavior
     function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
+        $adjustment->isLocked()->willReturn(true);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
@@ -342,7 +344,7 @@ class OrderSpec extends ObjectBehavior
 
         $item1->equals($item2)->willReturn(true);
         $item2->equals($item1)->willReturn(true);
-        $item1->merge($item2, false)->willReturn($this)->shouldBeCalled();
+        $item1->merge($item2, false)->willReturn($this);
 
         $this
             ->addItem($item1)

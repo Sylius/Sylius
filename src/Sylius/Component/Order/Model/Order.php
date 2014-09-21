@@ -381,7 +381,7 @@ class Order implements OrderInterface
      */
     public function removeAdjustment(AdjustmentInterface $adjustment)
     {
-        if ($this->hasAdjustment($adjustment)) {
+        if (!$adjustment->isLocked() && $this->hasAdjustment($adjustment)) {
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
         }
@@ -420,6 +420,10 @@ class Order implements OrderInterface
     public function removeAdjustments($type)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
+            if ($adjustment->isLocked()) {
+                continue;
+            }
+
             $adjustment->setAdjustable(null);
             $this->adjustments->removeElement($adjustment);
         }
