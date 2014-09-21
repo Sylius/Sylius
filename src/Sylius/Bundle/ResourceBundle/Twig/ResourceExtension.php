@@ -30,27 +30,27 @@ class ResourceExtension extends \Twig_Extension
     /**
      * @var string
      */
-    private $paginateTemplate;
+    protected $paginateTemplate;
 
     /**
      * @var string
      */
-    private $sortingTemplate;
+    protected $sortingTemplate;
 
     /**
      * @var Parameters
      */
-    private $parameters;
+    protected $parameters;
 
     /**
      * @var Request
      */
-    private $request;
+    protected $request;
 
     /**
      * @var RouterInterface
      */
-    private $router;
+    protected $router;
 
     /**
      * Constructor.
@@ -74,16 +74,16 @@ class ResourceExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-             new \Twig_SimpleFunction(
-                 'sylius_resource_sort',
-                 array($this, 'renderSortingLink'),
-                 array('needs_environment' => true, 'is_safe' => array('html'))
-             ),
-             new \Twig_SimpleFunction(
-                 'sylius_resource_paginate',
-                 array($this, 'renderPaginateSelect'),
-                 array('needs_environment' => true, 'is_safe' => array('html'))
-             ),
+            new \Twig_SimpleFunction(
+                'sylius_resource_sort',
+                array($this, 'renderSortingLink'),
+                array('needs_environment' => true, 'is_safe' => array('html'))
+            ),
+            new \Twig_SimpleFunction(
+                'sylius_resource_paginate',
+                array($this, 'renderPaginateSelect'),
+                array('needs_environment' => true, 'is_safe' => array('html'))
+            ),
         );
     }
 
@@ -124,7 +124,7 @@ class ResourceExtension extends \Twig_Extension
 
         if (isset($sorting[$property])) {
             $currentOrder = $sorting[$property];
-            $order        = 'asc' === $sorting[$property] ? 'desc' : 'asc';
+            $order = 'asc' === $sorting[$property] ? 'desc' : 'asc';
         }
 
         $url = $this->router->generate(
@@ -155,7 +155,8 @@ class ResourceExtension extends \Twig_Extension
     {
         $parameterName = $this->parameters->get('parameter_name');
         if (false !== $this->parameters->get('paginate') &&
-            isset($parameterName['paginate'])) {
+            isset($parameterName['paginate'])
+        ) {
             $options = $this->getOptions($options, $this->paginateTemplate);
             $paginateName = $this->getParameterName('paginate');
             $limitOptions = !empty($limitOptions) ? $limitOptions : $this->parameters->get('allowed_paginate');
@@ -200,7 +201,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return array
      */
-    private function getRouteParams(array $params = array(), array $default = array())
+    protected function getRouteParams(array $params = array(), array $default = array())
     {
         return array_merge(
             $this->request->query->all(),
@@ -214,7 +215,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return mixed|null
      */
-    private function getRouteName($route = null)
+    protected function getRouteName($route = null)
     {
         return null === $route ? $this->request->attributes->get('_route') : $route;
     }
@@ -225,7 +226,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return array
      */
-    private function getOptions(array $options, $defaultTemplate)
+    protected function getOptions(array $options, $defaultTemplate)
     {
         if (!array_key_exists('template', $options)) {
             $options['template'] = $defaultTemplate;
@@ -247,7 +248,7 @@ class ResourceExtension extends \Twig_Extension
      *
      * @return string
      */
-    private function getParameterName($key)
+    protected function getParameterName($key)
     {
         $parameterName = $this->parameters->get('parameter_name');
         if (isset($parameterName[$key]) && !is_array($parameterName[$key])) {
