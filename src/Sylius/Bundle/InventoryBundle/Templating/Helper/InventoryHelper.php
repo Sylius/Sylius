@@ -39,7 +39,7 @@ class InventoryHelper extends Helper
      *
      * @param StockableInterface $stockable
      *
-     * @return Boolean
+     * @return bool
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
@@ -53,7 +53,7 @@ class InventoryHelper extends Helper
      * @param StockableInterface $stockable
      * @param integer            $quantity
      *
-     * @return Boolean
+     * @return bool
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {

@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -131,6 +132,17 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(false);
     }
 
+    function it_recognizes_stockable_as_not_available_if_variant_was_deleted(
+        SoftDeletableInterface $stockable
+    ) {
+        $this->beConstructedWith(false);
+
+        $stockable->isDeleted()->willReturn(true);
+        $stockable->isAvailableOnDemand()->shouldNotBeCalled();
+
+        $this->isStockAvailable($stockable)->shouldReturn(false);
+    }
+
     function it_recognizes_any_stockable_and_quantity_as_sufficient_if_backorders_are_enabled(
         StockableInterface $stockable
     ) {
@@ -166,5 +178,16 @@ class AvailabilityCheckerSpec extends ObjectBehavior
 
         $stockable->getOnHand()->willReturn(-5);
         $this->isStockSufficient($stockable, 3)->shouldReturn(true);
+    }
+
+    function it_recognizes_stockable_as_not_sufficient_if_variant_was_deleted(
+        SoftDeletableInterface $stockable
+    ) {
+        $this->beConstructedWith(false);
+
+        $stockable->isDeleted()->willReturn(true);
+        $stockable->isAvailableOnDemand()->shouldNotBeCalled();
+
+        $this->isStockSufficient($stockable)->shouldReturn(false);
     }
 }
