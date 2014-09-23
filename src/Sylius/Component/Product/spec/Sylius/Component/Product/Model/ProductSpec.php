@@ -159,6 +159,8 @@ class ProductSpec extends ObjectBehavior
         $variant->setProduct($this)->shouldBeCalled();
         $variant->setMaster(true)->shouldBeCalled();
 
+        $this->getMasterVariant()->shouldReturn(null);
+
         $this->setMasterVariant($variant);
     }
 
@@ -168,12 +170,34 @@ class ProductSpec extends ObjectBehavior
         $variant->isDeleted()->willReturn(false);
 
         $variant->setProduct($this)->shouldBeCalled();
+        $variant->setMaster(false)->shouldBeCalled();
         $variant->setMaster(true)->shouldBeCalled();
+
+        $this->getMasterVariant()->shouldReturn(null);
 
         $this->setMasterVariant($variant);
         $this->setMasterVariant($variant);
 
         $this->hasVariants()->shouldReturn(false);
+    }
+
+    function it_should_reset_old_master_variant_while_setting_new_one(VariantInterface $newMaster, VariantInterface $oldMaster)
+    {
+        $this->setMasterVariant($oldMaster);
+
+        $oldMaster->setProduct($this)->shouldBeCalled();
+        $oldMaster->isMaster()->willReturn(false);
+        $oldMaster->isDeleted()->willReturn(false);
+        $oldMaster->setMaster(false)->shouldBeCalled();
+
+        $newMaster->isMaster()->willReturn(true);
+        $newMaster->isDeleted()->willReturn(false);
+        $newMaster->setProduct($this)->shouldBeCalled();
+        $newMaster->setMaster(true)->shouldBeCalled();
+
+        $this->setMasterVariant($newMaster);
+
+        $this->hasVariants()->shouldReturn(true);
     }
 
     function its_hasVariants_should_return_false_if_no_variants_defined()

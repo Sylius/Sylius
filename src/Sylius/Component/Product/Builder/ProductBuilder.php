@@ -71,15 +71,15 @@ class ProductBuilder implements ProductBuilderInterface
     protected $attributeValueRepository;
 
     public function __construct(
-        ObjectManager      $productManager,
+        ObjectManager       $productManager,
         RepositoryInterface $productRepository,
         RepositoryInterface $attributeRepository,
         RepositoryInterface $attributeValueRepository
     )
     {
-        $this->productManager            = $productManager;
-        $this->productRepository         = $productRepository;
-        $this->attributeRepository        = $attributeRepository;
+        $this->productManager           = $productManager;
+        $this->productRepository        = $productRepository;
+        $this->attributeRepository      = $attributeRepository;
         $this->attributeValueRepository = $attributeValueRepository;
     }
 

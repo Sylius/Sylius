@@ -96,6 +96,13 @@ class Product implements ProductInterface
     protected $options;
 
     /**
+     * Product master variant.
+     *
+     * @var VariantInterface
+     */
+    protected $masterVariant;
+
+    /**
      * Creation time.
      *
      * @var \DateTime
@@ -339,13 +346,7 @@ class Product implements ProductInterface
      */
     public function getMasterVariant()
     {
-        foreach ($this->variants as $variant) {
-            if ($variant->isMaster()) {
-                return $variant;
-            }
-        }
-
-        return null;
+        return $this->masterVariant;
     }
 
     /**
@@ -353,12 +354,15 @@ class Product implements ProductInterface
      */
     public function setMasterVariant(BaseVariantInterface $masterVariant)
     {
+        if (null !== $this->masterVariant) {
+            $this->masterVariant->setMaster(false);
+        }
+
         $masterVariant->setMaster(true);
 
-        if (!$this->variants->contains($masterVariant)) {
-            $masterVariant->setProduct($this);
-            $this->variants->add($masterVariant);
-        }
+        $this->addVariant($masterVariant);
+
+        $this->masterVariant = $masterVariant;
 
         return $this;
     }
