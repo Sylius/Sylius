@@ -3,6 +3,7 @@ suites:
     Attribute        : { namespace: Sylius, spec_path: src/Sylius/Component/Attribute }
     Cart             : { namespace: Sylius, spec_path: src/Sylius/Component/Cart }
     Core             : { namespace: Sylius, spec_path: src/Sylius/Component/Core }
+    Contact          : { namespace: Sylius, spec_path: src/Sylius/Component/Contact }
     Currency         : { namespace: Sylius, spec_path: src/Sylius/Component/Currency }
     Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
