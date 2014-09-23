@@ -24,14 +24,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
 {
     /**
-     * Id.
-     *
-     * @var integer
-     */
-    protected $id;
-
-    /**
-     * Order.
+     * Order item.
      *
      * @var OrderItemInterface
      */
@@ -50,28 +43,6 @@ class InventoryUnit extends BaseInventoryUnit implements InventoryUnitInterface
      * @var string ShipmentInterface::STATE_*
      */
     protected $shippingState = ShipmentInterface::STATE_CHECKOUT;
-
-    /**
-     * Creation time.
-     *
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * Last update time.
-     *
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * {@inheritdoc}
