@@ -14,20 +14,20 @@ namespace Sylius\Component\Core\Pricing;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 
 /**
- * Customer group based calculator.
+ * Address zone based calculator.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class GroupBasedCalculator extends AbstractCalculator implements CalculatorInterface
+class ZoneBasedCalculator extends AbstractCalculator implements CalculatorInterface
 {
-    protected $parameterName = 'groups';
-    protected $className     = 'Sylius\Component\Core\Model\GroupInterface';
+    protected $parameterName = 'zones';
+    protected $className     = 'Sylius\Component\Addressing\Model\ZoneInterface';
 
     /**
      * {@inheritdoc}
      */
     public function getType()
     {
-        return Calculators::GROUP_BASED;
+        return Calculators::ZONE_BASED;
     }
 }
