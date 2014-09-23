@@ -17,7 +17,7 @@ namespace Sylius\Component\Core\Model;
  * @author Sergio Marchesini
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface UserOAuthInterface
+interface UserOAuthInterface extends UserAwareInterface
 {
     /**
      * Get OAuth provider name.
@@ -66,20 +66,4 @@ interface UserOAuthInterface
      * @return self
      */
     public function setAccessToken($accessToken);
-
-    /**
-     * Get user
-     *
-     * @return UserInterface
-     */
-    public function getUser();
-
-    /**
-     * Set user.
-     *
-     * @param UserInterface $user
-     *
-     * @return self
-     */
-    public function setUser(UserInterface $user);
 }

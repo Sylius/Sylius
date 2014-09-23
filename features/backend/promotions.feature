@@ -9,9 +9,9 @@ Feature: Promotions
           And I am logged in as administrator
           And the following promotions exist:
             | name           | description                            | usage limit | used | starts     | ends       |
-            | New Year       | New Year Sale for more than 3 items    |             |      | 2013-12-31 | 2014-01-03 |
-            | Christmas      | Christmas Sale for orders over 100 EUR |             |      | 2013-12-10 | 2013-12-25 |
-            | Press Campaign | Coupon based promotion                 |             |      |            |            |
+            | New Year       | New Year Sale for more than 3 items    | 0           | 0    | 2013-12-31 | 2014-01-03 |
+            | Christmas      | Christmas Sale for orders over 100 EUR | 0           | 0    | 2013-12-10 | 2013-12-25 |
+            | Press Campaign | Coupon based promotion                 | 0           | 0    |            |            |
             | Free orders    | First 3 orders have 100% discount!     | 3           | 0    |            |            |
           And promotion "New Year" has following rules defined:
             | type       | configuration |

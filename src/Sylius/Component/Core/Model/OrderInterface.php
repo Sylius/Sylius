@@ -24,22 +24,8 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface
+interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
 {
-    /**
-     * Get user.
-     *
-     * @return UserInterface
-     */
-    public function getUser();
-
-    /**
-     * Set user.
-     *
-     * @param UserInterface $user
-     */
-    public function setUser(UserInterface $user);
-
     /**
      * Get shipping address.
      *

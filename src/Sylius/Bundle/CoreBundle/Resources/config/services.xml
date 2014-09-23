@@ -81,7 +81,7 @@
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
-
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
@@ -452,6 +452,12 @@
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.promotion_action" type="add_product" label="Add product" />
+        </service>
+
+        <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">

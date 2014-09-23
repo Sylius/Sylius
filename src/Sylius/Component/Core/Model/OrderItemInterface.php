@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
