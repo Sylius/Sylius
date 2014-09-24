@@ -133,7 +133,7 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_stockable_as_not_available_if_variant_was_deleted(
-        SoftDeletableInterface $stockable
+        FakeStockableInterface $stockable
     ) {
         $this->beConstructedWith(false);
 
@@ -181,13 +181,18 @@ class AvailabilityCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_stockable_as_not_sufficient_if_variant_was_deleted(
-        SoftDeletableInterface $stockable
+        FakeStockableInterface $stockable
     ) {
         $this->beConstructedWith(false);
 
         $stockable->isDeleted()->willReturn(true);
         $stockable->isAvailableOnDemand()->shouldNotBeCalled();
 
-        $this->isStockSufficient($stockable)->shouldReturn(false);
+        $this->isStockSufficient($stockable, 3)->shouldReturn(false);
     }
+}
+
+interface FakeStockableInterface extends StockableInterface, SoftDeletableInterface
+{
+
 }
