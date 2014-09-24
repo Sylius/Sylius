@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Extension;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration;
-use Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper;
 use Sylius\Component\Resource\Exception\Driver\InvalidDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;

@@ -10,13 +10,13 @@
 
 namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Gedmo\Sluggable\SluggableListener;
-use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
-use Gedmo\Tool\Wrapper\AbstractWrapper;
+use Doctrine\Common\Persistence\ObjectManager;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Sluggable\Handler\SlugHandlerInterface;
+use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Tool\Wrapper\AbstractWrapper;
 
 /**
  * This is the handler for the permalink fields that are in translation entities

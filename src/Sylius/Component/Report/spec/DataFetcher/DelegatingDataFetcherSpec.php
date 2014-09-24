@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Report\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
+use Sylius\Component\Report\Model\ReportInterface;
 
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>

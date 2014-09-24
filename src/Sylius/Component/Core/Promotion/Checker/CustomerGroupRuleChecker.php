@@ -15,8 +15,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\User\Model\GroupInterface;
 use Sylius\Component\User\Model\GroupableInterface;
+use Sylius\Component\User\Model\GroupInterface;
 
 /**
  * Checks if customer is part of Group.

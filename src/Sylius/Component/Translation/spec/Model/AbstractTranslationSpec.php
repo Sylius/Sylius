@@ -4,8 +4,8 @@ namespace spec\Sylius\Component\Translation\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 
 class AbstractTranslationSpec extends ObjectBehavior
 {

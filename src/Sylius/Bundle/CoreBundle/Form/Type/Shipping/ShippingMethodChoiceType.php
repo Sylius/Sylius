@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping;
 
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType as BaseShippingMethodType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType as BaseShippingMethodType;
 
 /**
  * A select form which allows the user to select

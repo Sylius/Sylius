@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
+use Sylius\Bundle\ReportBundle\Renderer\ChartRenderer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\ReportBundle\Renderer\ChartRenderer;
 
 /**
  * Renderer configuration form type.

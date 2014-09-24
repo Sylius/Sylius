@@ -52,6 +52,7 @@ class CartItemController extends Controller
     {
         $cart = $this->getCurrentCart();
         $emptyItem = $this->createNew();
+        $emptyItem->setOrder($cart);
 
         $eventDispatcher = $this->getEventDispatcher();
 

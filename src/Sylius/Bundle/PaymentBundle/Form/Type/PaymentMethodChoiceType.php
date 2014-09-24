@@ -13,8 +13,6 @@ namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Core\Model\Order;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Payment\Calculator\FeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;

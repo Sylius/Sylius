@@ -12,6 +12,7 @@
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

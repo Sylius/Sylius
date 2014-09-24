@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Bundle\ResourceBundle\Behat\WebContext as BaseWebContext;
 use Symfony\Component\Intl\Intl;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Web context.

@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * Coupon generator interface.
