@@ -153,3 +153,32 @@ a.oauth-login {
 a.oauth-login:hover {
     text-decoration: none;
 }
+
+.create-ui-toolbar-wrapper {
+    background-color: #333 !important;
+}
+a.create-ui-toggle {
+    background-image: url('/bundles/syliusweb/img/logo.png') !important;
+    background-size: 36px 41px !important;
+    background-repeat: no-repeat !important;
+    cursor: pointer;
+}
+.create-ui-toolbar-wrapper a {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+}
+.create-ui-btn {
+    background-color: #333 !important;
+    border: 1px solid #1abb9c !important;
+    color: #1abb9c !important;
+}
+.create-ui-btn:hover {
+    background-color: #444 !important;
+    border: 1px solid #1abb9c !important;
+    color: #1abb9c !important;
+}
+[contenteditable="true"] {
+    outline: 1px solid #1abb9c !important;
+}
+[contenteditable="true"].inEditMode {
+    outline: 3px solid #1abb9c !important;
+}

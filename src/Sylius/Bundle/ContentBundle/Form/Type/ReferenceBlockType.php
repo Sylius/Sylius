@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ContentBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -20,34 +20,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class ReferenceBlockType extends AbstractType
+class ReferenceBlockType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -57,28 +31,8 @@ class ReferenceBlockType extends AbstractType
             ->add('id', 'text', array(
                 'label' => 'sylius.form.reference_block.id'
             ))
-            ->add('title', 'text', array(
-                'label' => 'sylius.form.reference_block.title'
-            ))
-            ->add('body', 'textarea', array(
-                'required' => false,
-                'label'    => 'sylius.form.reference_block.body',
-            ))
         ;
 
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups
-            )
-        );
     }
 
     /**

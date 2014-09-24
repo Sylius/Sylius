@@ -87,14 +87,6 @@
             </argument>
             <tag name="form.type" alias="sylius_group" />
         </service>
-        <service id="sylius.form.type.block" class="%sylius.form.type.block.class%">
-            <argument>%sylius.model.block.class%</argument>
-            <tag name="form.type" alias="sylius_block" />
-        </service>
-        <service id="sylius.form.type.page" class="%sylius.form.type.page.class%">
-            <argument>%sylius.model.page.class%</argument>
-            <tag name="form.type" alias="sylius_page" />
-        </service>
         <service id="sylius.form.type.advanced_order" class="%sylius.form.type.advanced_order.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument type="collection">

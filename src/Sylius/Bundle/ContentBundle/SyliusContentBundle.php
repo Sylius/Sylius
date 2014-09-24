@@ -12,19 +12,30 @@
 namespace Sylius\Bundle\ContentBundle;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 
 /**
  * Sylius content bundle.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusContentBundle extends Bundle
+class SyliusContentBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
     public static function getSupportedDrivers()
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBundlePrefix()
+    {
+        return 'sylius_addressing';
     }
 }

@@ -48,11 +48,6 @@
             <argument>%sylius.validation_group.menu%</argument>
             <tag name="form.type" alias="sylius_menu" />
         </service>
-        <service id="sylius.form.type.menu_node" class="%sylius.form.type.menu_node.class%">
-            <argument>%sylius.model.menu_node.class%</argument>
-            <argument>%sylius.validation_group.menu_node%</argument>
-            <tag name="form.type" alias="sylius_menu_node" />
-        </service>
 
         <service id="sylius.form.type.static_content" class="%sylius.form.type.static_content.class%">
             <argument>%sylius.model.static_content.class%</argument>
