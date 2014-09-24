@@ -115,9 +115,9 @@
     <tr class="taxes">
         <td colspan="3">
             <h5>{{ 'sylius.order.taxes'|trans }}</h5>
-            {% if order.taxAdjustments|length > 0 %}
+            {% if order.getAdjustments('tax')|length > 0 %}
                 <ul class="list-unstyled">
-                    {% for taxAdjustment in order.taxAdjustments %}
+                    {% for taxAdjustment in order.getAdjustments('tax') %}
                         <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
@@ -127,15 +127,15 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.order.tax_total'|trans }}</strong>:
-            <span class="amount">{{ order.taxTotal|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.getAdjustmentsTotal('tax')|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr class="shipping-charges">
         <td colspan="3">
             <h5>{{ 'sylius.order.shipping_charges'|trans }}</h5>
-            {% if order.shippingAdjustments|length > 0 %}
+            {% if order.getAdjustments('shipping')|length > 0 %}
                 <ul class="list-unstyled">
-                    {% for adjustment in order.shippingAdjustments %}
+                    {% for adjustment in order.getAdjustments('shipping') %}
                         <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
@@ -145,15 +145,15 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>:
-            <span class="amount">{{ order.shippingTotal|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.getAdjustmentsTotal('shipping')|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr class="promotion-discount">
         <td colspan="3">
             <h5>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</h5>
-            {% if order.promotionAdjustments|length > 0 %}
+            {% if order.getAdjustments('promotion')|length > 0 %}
                 <ul class="list-unstyled">
-                    {% for adjustment in order.promotionAdjustments %}
+                    {% for adjustment in order.getAdjustments('promotion') %}
                         <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
@@ -163,7 +163,7 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
-            <span class="amount">{{ order.promotionTotal|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.getAdjustmentsTotal('promotion')|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr>
