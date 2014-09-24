@@ -19,6 +19,7 @@ use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker as BasePromot
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -46,14 +47,14 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
     /**
      * {@inheritdoc}
      */
-    protected function areCouponsEligibleForPromotion(PromotionCouponAwareSubjectInterface $subject, PromotionInterface $promotion)
+    protected function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         if (!$subject instanceof UserAwareInterface) {
             return false;
         }
 
         // The user must be assigned to order
-        if (null !== $subject->getUser()) {
+        if (null !== $user = $subject->getUser()) {
             return false;
         }
 
@@ -63,12 +64,12 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
             $coupon = $subject->getPromotionCoupon();
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
-                $eligible = $this->isCouponEligibleToLimit($coupon, $subject->getUser(), $promotion);
+                $eligible = $this->isCouponEligibleToLimit($coupon, $user, $promotion);
             }
         } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
             foreach ($subject->getPromotionCoupons() as $coupon) {
                 if ($promotion === $coupon->getPromotion()) {
-                    $eligible = $this->isCouponEligibleToLimit($coupon, $subject->getUser(), $promotion);
+                    $eligible = $this->isCouponEligibleToLimit($coupon, $user, $promotion);
 
                     break;
                 }
@@ -108,6 +109,6 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
             return true;
         }
 
-        return true;
+        return false;
     }
 }
