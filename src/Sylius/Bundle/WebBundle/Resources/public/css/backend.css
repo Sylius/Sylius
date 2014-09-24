@@ -572,3 +572,12 @@ input[type="file"] {
     border-top-color: #333;
     color: #333;
 }
+
+.select2-results li {
+    float: left;
+    width: 99%;
+}
+.select2-results img {
+    float: left;
+    margin-right: 10px;
+}

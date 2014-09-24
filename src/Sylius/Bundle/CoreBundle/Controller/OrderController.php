@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,5 +69,43 @@ class OrderController extends ResourceController
         $this->domainManager->update($order);
 
         return $this->redirectHandler->redirectToReferer();
+    }
+
+    /**
+     * Get order history changes.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function historyAction(Request $request)
+    {
+        /** @var $order OrderInterface */
+        $order = $this->findOr404($request);
+
+        $repository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $items = array();
+        foreach ($order->getItems() as $item) {
+            $items[] = $repository->getLogEntries($item);
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('history.html'))
+            ->setData(array(
+                'order' => $order,
+                'logs'  => array(
+                    'order'            => $repository->getLogEntries($order),
+                    'order_items'      => $items,
+                    'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
+                    'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
+                ),
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 }

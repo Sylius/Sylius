@@ -11,11 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Order inventory processing listener.
@@ -64,6 +66,25 @@ class OrderInventoryListener
         $this->inventoryHandler->processInventoryUnits(
             $this->getItem($event)
         );
+    }
+
+    public function resolveInventoryState(GenericEvent $event)
+    {
+        $orderItem = $this->getItem($event);
+
+        $state = PropertyAccess::createPropertyAccessor()->getValue(
+            array(
+                OrderInterface::STATE_PENDING => InventoryUnitInterface::STATE_ONHOLD,
+                OrderInterface::STATE_SHIPPED => InventoryUnitInterface::STATE_SOLD,
+            ),
+            sprintf('[%s]', $orderItem->getOrder()->getState())
+        );
+
+        if (null !== $state) {
+            foreach ($orderItem->getInventoryUnits() as $inventoryUnit) {
+                $inventoryUnit->setInventoryState($state);
+            }
+        }
     }
 
     /**

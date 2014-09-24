@@ -18,12 +18,18 @@
 
 {% block content %}
 <div class="page-header">
-    {% if not order.deleted %}
     <div class="actions-menu">
-        {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
-        {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
+        {% if not order.deleted %}
+            {% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
+                {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+            {% endif %}
+            {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
+        {% endif %}
+        <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
+            <i class="glyphicon glyphicon-calendar"></i>
+            {{ 'sylius.history.header'|trans }}
+        </a>
     </div>
-    {% endif %}
     <h1>
         <span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}
         {% if order.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
@@ -47,7 +53,7 @@
             <dt>Email</dt>
             <dd>
                 {% if order.user %}
-                    {{ order.user.email }}
+                    <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a>
                 {% else %}
                     {{ order.email }}
                 {% endif %}
@@ -55,58 +61,11 @@
         </dl>
     </div>
     <div class="col col-md-3">
-        <div class="list-group">
-            <div class="list-group-item">
-                <h4 class="list-group-item-heading">{{ 'sylius.order.payment'|trans }}</h4>
-                <div class="list-group-item-text">
-                    <ul class="list-unstyled">
-                        {% for payment in order.payments %}
-                            <li>
-                                <a href="{{ path('sylius_backend_payment_history', {'id': payment.id}) }}">{{ payment.method }} - {{ payment.amount|sylius_price(payment.currency) }}</a>
-                                <div class="pull-right">
-                                    {{ misc.state_label(payment.state, 'payment') }}
-                                </div>
-                                {% for transition in ['cancel', 'complete', 'refund'] if sm_can(payment, transition, 'sylius_payment') %}
-                                    <form action="{{ path('sylius_backend_payment_update_state', {'id': payment.id, 'transition': transition}) }}" method="post">
-                                        <input type="hidden" name="_method" value="PUT">
-                                        <button class="btn btn-default" type="submit">
-                                            <i class="glyphicon glyphicon-share"></i> <span>{{ transition }}</span>
-                                        </button>
-                                    </form>
-                                {% endfor %}
-                            </li>
-                        {% else %}
-                            <li class="text-muted">
-                                {{ 'sylius.order.no_payments'|trans }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <h4 class="list-group-item-heading">{{ 'sylius.order.shipments'|trans }}</h4>
-                <div class="list-group-item-text">
-                    <ul class="list-unstyled">
-                    {% for shipment in order.shipments %}
-                        <li>
-                            <a href="{{ path('sylius_backend_shipment_show', {'id': shipment.id}) }}">{{ shipment.method.name }}</a>
-                            <div class="pull-right">
-                                <span class="label label-primary">{{ shipment.state|title }}</span>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li class="text-muted">
-                            {{ 'sylius.order.no_shipments'|trans }}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' %}
     </div>
 </div>
 
-<hr/>
+<hr>
 
 <table class="sylius-order-content-table table table-striped table-bordered">
     <thead>
@@ -231,7 +190,7 @@
     </tfoot>
 </table>
 
-<hr/>
+<hr>
 
 <ul class="nav nav-tabs">
     <li class="active"><a href="#comments" data-toggle="tab">{{ 'sylius.order.comment.header'|trans }}</a></li>

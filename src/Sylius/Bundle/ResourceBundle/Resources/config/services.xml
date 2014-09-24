@@ -22,6 +22,7 @@
         <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
+        <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
 
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
@@ -64,6 +65,10 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
+            <argument type="service" id="doctrine" />
+            <tag name="form.type" alias="entity_hidden" />
+        </service>
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
     </services>
 

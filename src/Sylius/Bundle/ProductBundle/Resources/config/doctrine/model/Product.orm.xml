@@ -42,12 +42,14 @@
             <cascade>
                 <cascade-all />
             </cascade>
+            <gedmo:versioned />
         </one-to-many>
 
         <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\VariantInterface" mapped-by="object">
             <cascade>
                 <cascade-all />
             </cascade>
+            <gedmo:versioned />
         </one-to-many>
 
         <many-to-many field="options" target-entity="Sylius\Component\Product\Model\OptionInterface">

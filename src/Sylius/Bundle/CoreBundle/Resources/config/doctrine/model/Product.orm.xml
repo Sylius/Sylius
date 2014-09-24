@@ -25,10 +25,12 @@
 
         <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
+            <gedmo:versioned />
         </many-to-one>
 
         <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
             <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" />
+            <gedmo:versioned />
         </many-to-one>
 
         <many-to-one field="restrictedZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">

@@ -32,6 +32,8 @@
             <cascade>
                 <cascade-all/>
             </cascade>
+
+            <gedmo:versioned />
         </one-to-many>
 
         <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
@@ -59,6 +61,7 @@
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <gedmo:soft-deleteable field-name="deletedAt" />
+        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

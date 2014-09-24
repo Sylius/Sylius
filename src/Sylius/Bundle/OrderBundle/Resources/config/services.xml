@@ -40,6 +40,11 @@
             <tag name="form.type" alias="sylius_order_item" />
         </service>
 
+
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
+
+        <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
+        </service>
     </services>
 </container>
