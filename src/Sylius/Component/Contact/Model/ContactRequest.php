@@ -74,42 +74,6 @@ class ContactRequest implements ContactRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setTopic($topic)
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
@@ -146,6 +110,24 @@ class ContactRequest implements ContactRequestInterface
     /**
      * {@inheritdoc}
      */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setMessage($message)
     {
         $this->message = $message;
@@ -159,6 +141,24 @@ class ContactRequest implements ContactRequestInterface
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTopic(ContactTopicInterface $topic)
+    {
+        $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTopic()
+    {
+        return $this->topic;
     }
 
     /**

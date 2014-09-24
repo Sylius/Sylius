@@ -1,0 +1,10 @@
+sylius:
+    contact_request:
+        first_name: First name
+        last_name: Last name
+        email: Email
+        message: Message
+    contact_topic:
+        title:
+            not_blank: Please choose currency code.
+            unique: Currency code must be unique.
