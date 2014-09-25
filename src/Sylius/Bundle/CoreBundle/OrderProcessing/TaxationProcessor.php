@@ -98,7 +98,7 @@ class TaxationProcessor implements TaxationProcessorInterface
             return;
         }
 
-       $zones = array();
+        $zones = array();
 
         if (null !== $order->getShippingAddress()) {
             // Match the tax zone.
