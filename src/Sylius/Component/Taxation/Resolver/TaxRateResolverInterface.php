@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Pawel Jedrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,12 +17,12 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 /**
  * Tax rate resolver interface.
  *
- * @author Pawel Jedrzejewski <pawel@sylius.org>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxRateResolverInterface
 {
     /**
-     * Get the tax rate(s) for given taxable good and context.
+     * Get the tax rate for given taxable good and context.
      *
      * @param TaxableInterface $taxable
      * @param array            $criteria
@@ -31,4 +31,3 @@ interface TaxRateResolverInterface
      */
     public function resolve(TaxableInterface $taxable, array $criteria = array());
 }
-

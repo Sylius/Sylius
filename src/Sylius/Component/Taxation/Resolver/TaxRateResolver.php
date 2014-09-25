@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Pawel Jedrzejewski
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,29 +11,29 @@
 
 namespace Sylius\Component\Taxation\Resolver;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 
 /**
  * Default tax rate resolver.
  *
- * @author Pawel Jedrzejewski <pawel@sylius.org>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRateResolver implements TaxRateResolverInterface
 {
     /**
      * Tax rate repository.
      *
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $taxRateRepository;
 
     /**
      * Tax rate repository.
      *
-     * @var ObjectRepository $taxRateRepository
+     * @var RepositoryInterface $taxRateRepository
      */
-    public function __construct(ObjectRepository $taxRateRepository)
+    public function __construct(RepositoryInterface $taxRateRepository)
     {
         $this->taxRateRepository = $taxRateRepository;
     }
@@ -52,4 +52,3 @@ class TaxRateResolver implements TaxRateResolverInterface
         return $this->taxRateRepository->findBy($criteria);
     }
 }
-
