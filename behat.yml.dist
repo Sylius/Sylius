@@ -58,6 +58,16 @@ default:
             filters:
                 tags: "@checkout && ~@javascript"
 
+        contact:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+            filters:
+                tags: "@contact && ~@javascript"
+
         currencies:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
