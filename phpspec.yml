@@ -28,7 +28,7 @@ suites:
     CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
     CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
     CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
-    ContactBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/ContactBundle }
+    ContactBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ContactBundle }
     FlowBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
