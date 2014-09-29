@@ -6,7 +6,10 @@
         <div class="col-md-6">
             {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
             {{ form_row(form.type) }}
+
+            {% if form.scope is defined %}
             {{ form_row(form.scope) }}
+            {% endif %}
         </div>
         <div class="col-md-6">
             <div class="control-group">

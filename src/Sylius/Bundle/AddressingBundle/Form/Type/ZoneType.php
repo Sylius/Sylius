@@ -33,9 +33,9 @@ class ZoneType extends AbstractResourceType
     /**
      * Constructor.
      *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param array  $scopeChoices
+     * @param string   $dataClass
+     * @param string[] $validationGroups
+     * @param string[] $scopeChoices
      */
     public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
     {
@@ -51,7 +51,7 @@ class ZoneType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.zone.name'
+                'label' => 'sylius.form.zone.name',
             ))
             ->add('type', 'choice', array(
                 'label'   => 'sylius.form.zone.type',
@@ -61,14 +61,21 @@ class ZoneType extends AbstractResourceType
                     ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
                 ),
             ))
-            ->add('scope', 'choice', array(
-                'label'   => 'sylius.form.zone.scope',
-                'choices' => $this->scopeChoices,
-            ))
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members'
+                'label' => 'sylius.form.zone.members',
             ))
         ;
+
+        if (!empty($this->scopeChoices)) {
+            $builder
+                ->add('scope', 'choice', array(
+                    'label'       => 'sylius.form.zone.scope',
+                    'empty_value' => 'sylius.form.zone.select_scope',
+                    'required'    => false,
+                    'choices'     => $this->scopeChoices,
+                ))
+            ;
+        }
     }
 
     /**
