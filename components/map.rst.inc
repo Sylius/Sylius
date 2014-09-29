@@ -1,6 +1,7 @@
 * :doc:`/components/Addressing/index`
 * :doc:`/components/Attribute/index`
 * :doc:`/components/Cart/index`
+* :doc:`/components/Contact/index`
 * :doc:`/components/Currency/index`
 * :doc:`/components/Inventory/index`
 * :doc:`/components/Order/index`
