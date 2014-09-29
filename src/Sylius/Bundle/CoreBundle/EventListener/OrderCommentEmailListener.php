@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Mailer\OrderCommentMailerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\OrderUpdateMailerInterface;
 use Sylius\Component\Order\Model\CommentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -24,11 +24,11 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class OrderCommentEmailListener
 {
     /**
-     * @var OrderCommentMailerInterface
+     * @var OrderUpdateMailerInterface
      */
     protected $mailer;
 
-    public function __construct(OrderCommentMailerInterface $mailer)
+    public function __construct(OrderUpdateMailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }
@@ -51,7 +51,7 @@ class OrderCommentEmailListener
 
         // Trigger notification?
         if ($comment->getNotifyCustomer()) {
-            $this->mailer->sendOrderComment($comment->getOrder(), $comment);
+            $this->mailer->sendOrderUpdate($comment->getOrder(), $comment);
         }
     }
 }
