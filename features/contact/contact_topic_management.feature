@@ -62,4 +62,4 @@ Feature: Contact topics management
         When I press "delete" near "Delivery"
         Then I should still be on the contact topic index page
         And I should see "Contact topic has been successfully deleted."
-        And I should not see contact topic with name "Delivery" in the list
+        And I should not see contact topic with title "Delivery" in the list

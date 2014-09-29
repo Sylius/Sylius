@@ -65,6 +65,7 @@ default:
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\ContactBundle\Behat\ContactContext
             filters:
                 tags: "@contact && ~@javascript"
 
