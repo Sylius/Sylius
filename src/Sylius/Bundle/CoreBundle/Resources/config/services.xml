@@ -69,6 +69,7 @@
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
+        <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
@@ -352,6 +353,10 @@
 
         <service id="sylius.price_calculator.group_based" class="%sylius.price_calculator.group_based.class%">
             <tag name="sylius.price_calculator" type="group_based" label="Customer group based" />
+        </service>
+
+        <service id="sylius.price_calculator.zone_based" class="%sylius.price_calculator.zone_based.class%">
+            <tag name="sylius.price_calculator" type="zone_based" label="Customer zone based" />
         </service>
 
         <!-- money -->

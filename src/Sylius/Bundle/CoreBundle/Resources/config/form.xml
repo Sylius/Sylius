@@ -26,11 +26,14 @@
         <parameter key="sylius.form.type.order_item.class">Sylius\Bundle\CoreBundle\Form\Type\OrderItemType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
+
         <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
         <parameter key="sylius.form.type.shipment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ShipmentFilterType</parameter>
+
         <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
+        <parameter key="sylius.form.type.price_calculator.zone_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ZoneBasedConfigurationType</parameter>
 
         <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.user_loyalty_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\UserLoyaltyConfigurationType</parameter>
@@ -146,6 +149,10 @@
         <service id="sylius.form.type.price_calculator.group_based" class="%sylius.form.type.price_calculator.group_based.class%">
             <argument type="service" id="sylius.repository.group" />
             <tag name="form.type" alias="sylius_price_calculator_group_based" />
+        </service>
+        <service id="sylius.form.type.price_calculator.zone_based" class="%sylius.form.type.price_calculator.zone_based.class%">
+            <argument type="service" id="sylius.repository.zone" />
+            <tag name="form.type" alias="sylius_price_calculator_zone_based" />
         </service>
     </services>
 

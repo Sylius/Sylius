@@ -22,4 +22,7 @@ class Calculators extends BaseCalculators
 {
     // Group based pricing.
     const GROUP_BASED = 'group_based';
+
+    // Address zone based pricing.
+    const ZONE_BASED = 'zone_based';
 }
