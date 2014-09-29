@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\CommentInterface;
 
 /**
- * OrderUpdateMailer implementation
+ * OrderCommentMailer implementation
  *
  * @author Myke Hines <myke@webhines.com>
  */
@@ -26,10 +26,16 @@ class OrderCommentMailer extends AbstractMailer implements OrderCommentMailerInt
      */
     public function sendOrderComment(OrderInterface $order, CommentInterface $comment = null)
     {
-        if (!$user = $order->getUser()) {
+        if ($user = $order->getUser()) {
+            $email = $user->getEmail();
+        } else {
+            $email = $order->getEmail();
+        }
+
+        if (!$email) {
             throw new \InvalidArgumentException('Order has to belong to a User.');
         }
 
-        $this->sendEmail(array('order' => $order, 'comment' => $comment), $user->getEmail());
+        $this->sendEmail(array('order' => $order, 'comment' => $comment), $email);
     }
 }
