@@ -11,6 +11,7 @@ sylius_backend_order_index:
             method: createFilterPaginator
             arguments: [$criteria, $sorting, $deleted]
             paginate: 20
+            sortable: true
 
 sylius_backend_order_create:
     path: /new
