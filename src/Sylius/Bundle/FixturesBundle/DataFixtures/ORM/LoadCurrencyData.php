@@ -13,11 +13,15 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Currency\Model\Currency;
 
 /**
  * Default currency fixtures.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ *
+ * @method EntityRepository getCurrencyRepository()
  */
 class LoadCurrencyData extends DataFixture
 {
@@ -32,9 +36,11 @@ class LoadCurrencyData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        /** @var EntityRepository $currencyRepository */
         $currencyRepository = $this->getCurrencyRepository();
 
         foreach ($this->currencies as $code => $rate) {
+            /** @var Currency $currency */
             $currency = $currencyRepository->createNew();
 
             $currency->setCode($code);

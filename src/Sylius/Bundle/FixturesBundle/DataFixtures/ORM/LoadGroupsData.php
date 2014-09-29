@@ -19,6 +19,8 @@ use Sylius\Component\Core\Model\GroupInterface;
  * Group fixtures.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method EntityRepository getGroupRepository()
  */
 class LoadGroupsData extends DataFixture
 {

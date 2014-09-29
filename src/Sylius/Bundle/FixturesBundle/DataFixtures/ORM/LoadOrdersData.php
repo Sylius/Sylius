@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -20,9 +22,17 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+/**
+ * @method OrderRepositoryInterface getOrderRepository()
+ * @method EntityRepository getOrderItemRepository()
+ * @method EntityRepository getAddressRepository()
+ * @method EntityRepository getPaymentRepository()
+ * @method ShipmentRepository getShipmentRepository()
+ */
 class LoadOrdersData extends DataFixture
 {
     /**

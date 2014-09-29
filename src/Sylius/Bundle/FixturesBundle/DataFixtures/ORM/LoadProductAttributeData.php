@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Product\Model\AttributeInterface;
 
@@ -19,6 +20,8 @@ use Sylius\Component\Product\Model\AttributeInterface;
  * Default product attributes to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method ProductRepository getProductAttributeRepository()
  */
 class LoadProductAttributeData extends DataFixture
 {

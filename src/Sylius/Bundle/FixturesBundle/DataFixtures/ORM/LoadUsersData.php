@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\UserInterface;
 
@@ -19,6 +20,8 @@ use Sylius\Component\Core\Model\UserInterface;
  * User fixtures.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method UserRepository getUserRepository()
  */
 class LoadUsersData extends DataFixture
 {

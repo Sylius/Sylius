@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionValueInterface;
 
@@ -20,6 +21,9 @@ use Sylius\Component\Product\Model\OptionValueInterface;
  * Default product options to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ *
+ * @method EntityRepository getProductOptionValueRepository()
+ * @method EntityRepository getProductOptionRepository()
  */
 class LoadProductOptionData extends DataFixture
 {
