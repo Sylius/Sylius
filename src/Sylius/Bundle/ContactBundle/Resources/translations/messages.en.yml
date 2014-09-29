@@ -5,5 +5,6 @@ sylius:
             last_name: Last name
             email: Email
             message: Message
+            topic: Topic
         contact_topic:
             title: Title

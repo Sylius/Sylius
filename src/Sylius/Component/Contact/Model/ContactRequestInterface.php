@@ -68,5 +68,5 @@ interface ContactRequestInterface extends TimestampableInterface
     /**
      * @param ContactTopicInterface $topic
      */
-    public function setTopic(ContactTopicInterface $topic);
+    public function setTopic(ContactTopicInterface $topic = null);
 }

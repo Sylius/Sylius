@@ -146,7 +146,7 @@ class ContactRequest implements ContactRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setTopic(ContactTopicInterface $topic)
+    public function setTopic(ContactTopicInterface $topic = null)
     {
         $this->topic = $topic;
 
