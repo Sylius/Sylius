@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface ContactRequestInterface extends TimestampableInterface
+interface RequestInterface extends TimestampableInterface
 {
     /**
      * @return string
@@ -61,12 +61,12 @@ interface ContactRequestInterface extends TimestampableInterface
     public function setMessage($message);
 
     /**
-     * @return ContactTopicInterface
+     * @return TopicInterface
      */
     public function getTopic();
 
     /**
-     * @param ContactTopicInterface $topic
+     * @param TopicInterface $topic
      */
-    public function setTopic(ContactTopicInterface $topic = null);
+    public function setTopic(TopicInterface $topic = null);
 }

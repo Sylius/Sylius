@@ -11,23 +11,23 @@
 
 namespace spec\Sylius\Component\Contact\Model;
 
-use Sylius\Component\Contact\Model\ContactTopicInterface;
+use Sylius\Component\Contact\Model\TopicInterface;
 
 use PhpSpec\ObjectBehavior;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class ContactRequestSpec extends ObjectBehavior
+class RequestSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Contact\Model\ContactRequest');
+        $this->shouldHaveType('Sylius\Component\Contact\Model\Request');
     }
 
     function it_implements_Sylius_contact_request_interface()
     {
-        $this->shouldImplement('Sylius\Component\Contact\Model\ContactRequestInterface');
+        $this->shouldImplement('Sylius\Component\Contact\Model\RequestInterface');
     }
 
     function it_has_no_id_by_default()
@@ -84,7 +84,7 @@ class ContactRequestSpec extends ObjectBehavior
         $this->getTopic()->shouldReturn(null);
     }
 
-    function its_topic_is_mutable(ContactTopicInterface $topic)
+    function its_topic_is_mutable(TopicInterface $topic)
     {
         $this->setTopic($topic);
         $this->getTopic()->shouldReturn($topic);

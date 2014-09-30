@@ -16,7 +16,7 @@ namespace Sylius\Component\Contact\Model;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class ContactRequest implements ContactRequestInterface
+class Request implements RequestInterface
 {
     /**
      * @var integer
@@ -44,7 +44,7 @@ class ContactRequest implements ContactRequestInterface
     protected $message;
 
     /**
-     * @var ContactTopicInterface
+     * @var TopicInterface
      */
     protected $topic;
 
@@ -146,7 +146,7 @@ class ContactRequest implements ContactRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setTopic(ContactTopicInterface $topic = null)
+    public function setTopic(TopicInterface $topic = null)
     {
         $this->topic = $topic;
 

@@ -16,7 +16,7 @@ namespace Sylius\Component\Contact\Model;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class ContactTopic implements ContactTopicInterface
+class Topic implements TopicInterface
 {
     /**
      * @var integer

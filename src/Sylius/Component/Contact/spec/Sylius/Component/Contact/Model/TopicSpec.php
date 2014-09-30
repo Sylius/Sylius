@@ -16,16 +16,16 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class ContactTopicSpec extends ObjectBehavior
+class TopicSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Contact\Model\ContactTopic');
+        $this->shouldHaveType('Sylius\Component\Contact\Model\Topic');
     }
 
     function it_implements_Sylius_contact_topic_interface()
     {
-        $this->shouldImplement('Sylius\Component\Contact\Model\ContactTopicInterface');
+        $this->shouldImplement('Sylius\Component\Contact\Model\TopicInterface');
     }
 
     function it_has_no_id_by_default()

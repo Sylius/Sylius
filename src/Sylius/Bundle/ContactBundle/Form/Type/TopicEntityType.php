@@ -9,23 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Contact\Model;
-
+namespace Sylius\Bundle\ContactBundle\Form\Type;
 
 /**
- * Interface for the model representing a contact topic.
+ * Contact topic choice type for "doctrine/orm" driver.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface ContactTopicInterface
+class TopicEntityType extends TopicChoiceType
 {
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getTitle();
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title);
-} 
+    public function getParent()
+    {
+        return 'entity';
+    }
+}

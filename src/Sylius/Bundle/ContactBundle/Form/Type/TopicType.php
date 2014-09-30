@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class ContactTopicType extends AbstractResourceType
+class TopicType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

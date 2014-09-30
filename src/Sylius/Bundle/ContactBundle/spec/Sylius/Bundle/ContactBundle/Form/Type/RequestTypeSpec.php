@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class ContactRequestTypeSpec extends ObjectBehavior
+class RequestTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -28,7 +28,7 @@ class ContactRequestTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ContactBundle\Form\Type\ContactRequestType');
+        $this->shouldHaveType('Sylius\Bundle\ContactBundle\Form\Type\RequestType');
     }
 
     function it_is_a_form_type()

@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-abstract class ContactTopicChoiceType extends AbstractType
+abstract class TopicChoiceType extends AbstractType
 {
     /**
      * Shipping category class name.

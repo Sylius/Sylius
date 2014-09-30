@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Contact\Model\ContactRequest">
+    <class name="Sylius\Component\Contact\Model\Request">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.contact_request.first_name.not_blank</option>
@@ -61,7 +61,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Contact\Model\ContactTopic">
+    <class name="Sylius\Component\Contact\Model\Topic">
         <property name="title">
             <constraint name="NotBlank">
                 <option name="message">sylius.contact_topic.title.not_blank</option>
