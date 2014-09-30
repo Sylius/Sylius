@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_string_block_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.string_block:indexAction
@@ -11,7 +11,7 @@ sylius_backend_string_block_index:
             sortable: true
 
 sylius_backend_string_block_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.string_block:createAction
@@ -20,7 +20,7 @@ sylius_backend_string_block_create:
             redirect: sylius_backend_string_block_index
 
 sylius_backend_string_block_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.string_block:updateAction
@@ -33,7 +33,7 @@ sylius_backend_string_block_update:
         id: ".+"
 
 sylius_backend_string_block_delete:
-    pattern: /{id}/delete
+    path: /{id}/delete
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.string_block:deleteAction
