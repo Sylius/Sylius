@@ -10,7 +10,7 @@ cmf_content:
     persistence:
         phpcr:
             content_basepath: /cms/pages
-    default_template: SyliusWebBundle:Frontend/Page:show.html.twig
+    default_template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
 
 cmf_routing:
     chain:
