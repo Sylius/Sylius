@@ -56,5 +56,4 @@ class ContactTopic implements ContactTopicInterface
     {
         return $this->title;
     }
-
-} 
+}

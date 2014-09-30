@@ -28,5 +28,4 @@ interface ContactTopicInterface
      * @param string $title
      */
     public function setTitle($title);
-
 } 

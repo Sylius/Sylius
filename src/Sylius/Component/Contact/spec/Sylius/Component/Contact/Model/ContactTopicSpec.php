@@ -43,5 +43,4 @@ class ContactTopicSpec extends ObjectBehavior
         $this->setTitle('Title');
         $this->getTitle()->shouldReturn('Title');
     }
-
 }
