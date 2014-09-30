@@ -42,7 +42,6 @@
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\ContentBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/ContentBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.11-dev"
