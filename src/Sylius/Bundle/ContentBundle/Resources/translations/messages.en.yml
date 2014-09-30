@@ -1,0 +1,5 @@
+sylius:
+    form:
+        string_block:
+            id: ID
+            body: Body

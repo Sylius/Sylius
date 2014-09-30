@@ -13,6 +13,10 @@ sylius_locale:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/locale.yml
     prefix: /locale
 
+sylius_static_content:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/static_content.yml
+    prefix: /content
+
 sylius_checkout:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/checkout.yml
     prefix: /checkout

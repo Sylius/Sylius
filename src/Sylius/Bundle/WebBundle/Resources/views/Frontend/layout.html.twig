@@ -23,6 +23,8 @@
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
+
+            {% include "CmfCreateBundle::includecssfiles.html.twig" %}
         {% endblock %}
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -121,6 +123,11 @@
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
+
+        {% render(controller(
+            "cmf_create.jsloader.controller:includeJSFilesAction",
+            {'_locale': app.request.locale, 'editor': 'hallo'}
+        )) %}
         {% endblock %}
     </body>
 </html>

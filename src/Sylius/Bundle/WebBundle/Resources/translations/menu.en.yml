@@ -50,6 +50,9 @@ sylius:
                 options: Manage options
                 orders: Current orders
                 pages: Pages
+                routes: Routes
+                redirects: Redirects
+                menus: Menus
                 payment_methods: Payment methods
                 payments: Payments
                 products: Products

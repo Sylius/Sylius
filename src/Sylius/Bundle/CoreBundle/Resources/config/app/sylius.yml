@@ -49,6 +49,12 @@ sylius_cart:
 
 sylius_settings: ~
 
+sylius_content:
+    driver: doctrine/phpcr-odm
+    classes:
+        static_content:
+            repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
+
 sylius_taxonomy:
     classes:
         taxonomy:
@@ -163,15 +169,6 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Component\Core\Model\Group
-        sylius.block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock
-        sylius.page:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ODM\PHPCR\PageRepository
 
 sylius_pricing:
     forms:
