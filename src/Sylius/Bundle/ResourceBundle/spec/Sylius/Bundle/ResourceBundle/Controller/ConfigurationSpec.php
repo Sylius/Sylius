@@ -230,43 +230,42 @@ class ConfigurationSpec extends ObjectBehavior
         $this->isFilterable()->shouldReturn(false);
     }
 
+    function it_has_no_filterable_parameter(Parameters $parameters)
+    {
+        $defaultCriteria = array('property' => 'myValue');
+
+        $parameters->get('filterable', false)->willReturn(false);
+
+        $this->getCriteria($defaultCriteria)->shouldBeArray();
+        $this->getCriteria($defaultCriteria)->shouldHaveCount(1);
+    }
+
     function it_has_criteria_parameter(Parameters $parameters, Request $request)
     {
-        $defaultcriteria = array('property' => 'value');
-        $criteria = array('property' => 'myValue');
+        $criteria = array('property' => 'myNewValue');
 
         $parameters->get('filterable', false)->willReturn(true);
         $parameters->get('criteria', Argument::any())->willReturn($criteria);
-        $request->get('criteria', array())->willReturn(array());
-        $this->getCriteria()->shouldReturn($criteria);
-
-        $parameters->get('filterable', false)->willReturn(true);
-        $parameters->get('criteria', array())->willReturn(array());
-        $request->get('criteria', array())->willReturn(array());
-        $this->getCriteria($defaultcriteria)->shouldReturn($defaultcriteria);
-
-        $parameters->get('filterable', false)->willReturn(true);
-        $parameters->get('criteria', $criteria)->willReturn($criteria);
-        $request->get('criteria', array())->willReturn($criteria);
+        $request->get('criteria', $criteria)->willReturn($criteria);
         $this->getCriteria()->shouldReturn($criteria);
     }
 
     function it_allows_to_override_criteria_parameter_in_route(Parameters $parameters, Request $request)
     {
         $criteria = array('property' => 'myValue');
-        $overridden_criteria = array('property' => 'myNewValue');
+        $overriddenCriteria = array('other_property' => 'myNewValue');
 
         $parameters->get('filterable', false)->willReturn(true);
-        $parameters->get('criteria', Argument::any())->willReturn($criteria);
-        $request->get('criteria', array())->willReturn($overridden_criteria);
+        $parameters->get('criteria', array())->willReturn($criteria);
+        $request->get('criteria', $criteria)->willReturn($overriddenCriteria);
 
-        $this->getCriteria()->shouldReturn($overridden_criteria);
+        $this->getCriteria()->shouldReturn($overriddenCriteria);
 
         $parameters->get('filterable', false)->willReturn(true);
         $parameters->get('criteria', Argument::any())->willReturn(array());
-        $request->get('criteria', array())->willReturn($overridden_criteria);
+        $request->get('criteria', array())->willReturn($overriddenCriteria);
 
-        $this->getCriteria($criteria)->shouldReturn($overridden_criteria);
+        $this->getCriteria($criteria)->shouldReturn($overriddenCriteria);
     }
 
     function it_checks_if_the_resource_is_sortable(Parameters $parameters)
@@ -280,41 +279,40 @@ class ConfigurationSpec extends ObjectBehavior
 
     function it_has_sorting_parameter(Parameters $parameters, Request $request)
     {
-        $defaulSorting = array('property' => 'desc');
         $sorting = array('property' => 'asc');
 
         $parameters->get('sortable', false)->willReturn(true);
-        $parameters->get('sorting', array())->willReturn($sorting);
-        $request->get('sorting', array())->willReturn(array());
+        $parameters->get('sorting', Argument::any())->willReturn($sorting);
+        $request->get('sorting', $sorting)->willReturn($sorting);
         $this->getSorting()->shouldReturn($sorting);
+    }
 
-        $parameters->get('sortable', false)->willReturn(true);
-        $parameters->get('sorting', array())->willReturn(array());
-        $request->get('sorting', array())->willReturn(array());
-        $this->getSorting($defaulSorting)->shouldReturn($defaulSorting);
+    function it_has_no_sortable_parameter(Parameters $parameters)
+    {
+        $defaultSorting = array('property' => 'desc');
 
-        $parameters->get('sortable', false)->willReturn(true);
-        $parameters->get('sorting', $sorting)->willReturn($sorting);
-        $request->get('sorting', array())->willReturn($sorting);
-        $this->getSorting($defaulSorting)->shouldReturn($sorting);
+        $parameters->get('sortable', false)->willReturn(false);
+
+        $this->getSorting($defaultSorting)->shouldBeArray();
+        $this->getSorting($defaultSorting)->shouldHaveCount(1);
     }
 
     function it_allows_to_override_sorting_parameter_in_route(Parameters $parameters, Request $request)
     {
         $sorting = array('property' => 'desc');
-        $overridden_sorting = array('property' => 'asc');
+        $overriddenSorting = array('other_property' => 'asc');
 
         $parameters->get('sortable', false)->willReturn(true);
-        $parameters->get('sorting', Argument::any())->willReturn($sorting);
-        $request->get('sorting', array())->willReturn($overridden_sorting);
+        $parameters->get('sorting', array())->willReturn($sorting);
+        $request->get('sorting', $sorting)->willReturn($overriddenSorting);
 
-        $this->getSorting()->shouldReturn($overridden_sorting);
+        $this->getSorting()->shouldReturn($overriddenSorting);
 
         $parameters->get('sortable', false)->willReturn(true);
         $parameters->get('sorting', Argument::any())->willReturn(array());
-        $request->get('sorting', array())->willReturn($overridden_sorting);
+        $request->get('sorting', array())->willReturn($overriddenSorting);
 
-        $this->getSorting($sorting)->shouldReturn($overridden_sorting);
+        $this->getSorting($sorting)->shouldReturn($overriddenSorting);
     }
 
     function it_has_method_parameter(Parameters $parameters)

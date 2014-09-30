@@ -210,7 +210,7 @@ class Configuration
 
     public function isLimited()
     {
-        return (boolean) $this->parameters->get('limit', $this->settings['limit']);
+        return (bool) $this->parameters->get('limit', $this->settings['limit']);
     }
 
     public function getLimit()
@@ -225,7 +225,7 @@ class Configuration
 
     public function isPaginated()
     {
-        return (boolean) $this->parameters->get('paginate', $this->settings['default_page_size']);
+        return (bool) $this->parameters->get('paginate', $this->settings['default_page_size']);
     }
 
     public function getPaginationMaxPerPage()
@@ -235,17 +235,13 @@ class Configuration
 
     public function isFilterable()
     {
-        return (boolean) $this->parameters->get('filterable', $this->settings['filterable']);
+        return (bool) $this->parameters->get('filterable', $this->settings['filterable']);
     }
 
     public function getCriteria(array $criteria = array())
     {
         if ($this->isFilterable()) {
-            $criteria = array_merge(
-                $criteria,
-                $this->parameters->get('criteria', array()),
-                $this->request->get('criteria', array())
-            );
+            return $this->request->get('criteria', $this->parameters->get('criteria', $criteria));
         }
 
         return $criteria;
@@ -253,17 +249,13 @@ class Configuration
 
     public function isSortable()
     {
-        return (Boolean) $this->parameters->get('sortable', $this->settings['sortable']);
+        return (bool) $this->parameters->get('sortable', $this->settings['sortable']);
     }
 
     public function getSorting(array $sorting = array())
     {
         if ($this->isSortable()) {
-            $sorting = array_merge(
-                $sorting,
-                $this->parameters->get('sorting', array()),
-                $this->request->get('sorting', array())
-            );
+            return $this->request->get('sorting', $this->parameters->get('sorting', $sorting));
         }
 
         return $sorting;

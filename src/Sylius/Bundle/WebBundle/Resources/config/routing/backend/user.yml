@@ -10,6 +10,7 @@ sylius_backend_user_index:
             template: SyliusWebBundle:Backend/User:index.html.twig
             method: createFilterPaginator
             arguments: [$criteria, $sorting, $deleted]
+            sortable: true
 
 sylius_backend_user_create:
     path: /new
