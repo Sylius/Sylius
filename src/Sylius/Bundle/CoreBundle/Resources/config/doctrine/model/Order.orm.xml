@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
@@ -32,10 +43,10 @@
         <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
             <join-table name="sylius_promotion_coupon_order">
                 <join-columns>
-                    <join-column name="order_id" referenced-column-name="id" />
+                    <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="promotion_coupon_id" referenced-column-name="id" />
+                    <join-column name="promotion_coupon_id" referenced-column-name="id" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
             <gedmo:versioned />
@@ -60,10 +71,10 @@
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
-                    <join-column name="order_id" referenced-column-name="id" />
+                    <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
-                    <join-column name="promotion_id" referenced-column-name="id" />
+                    <join-column name="promotion_id" referenced-column-name="id" on-delete="CASCADE" />
                 </inverse-join-columns>
             </join-table>
             <cascade>

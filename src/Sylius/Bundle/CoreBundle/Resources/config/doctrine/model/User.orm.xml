@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
@@ -33,11 +33,11 @@
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
-        <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="billing_address_id" />
+        <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface" orphan-removal="true">
+            <join-column name="billing_address_id" on-delete="CASCADE" />
         </one-to-one>
-        <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="shipping_address_id" />
+        <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface" orphan-removal="true">
+            <join-column name="shipping_address_id" on-delete="CASCADE" />
         </one-to-one>
 
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
@@ -45,12 +45,12 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface" mapped-by="user">
+        <one-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface" mapped-by="user" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
+        <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
