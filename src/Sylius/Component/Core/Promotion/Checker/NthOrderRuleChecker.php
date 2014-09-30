@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Core\Promotion\Checker;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -36,7 +38,7 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $user->getOrders()->count() == $configuration['nth'];
+        return $this->hasEligibleOrders($configuration['nth'], $user->getOrders());
     }
 
     /**
@@ -45,5 +47,19 @@ class NthOrderRuleChecker implements RuleCheckerInterface
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_rule_nth_order_configuration';
+    }
+
+    private function hasEligibleOrders($count, Collection $orders)
+    {
+        if ($orders->isEmpty()) {
+            return false;
+        }
+
+        $orders = $orders->filter(function ($order) {
+            /** @var $order OrderInterface */
+            return PaymentInterface::STATE_COMPLETED === $order->getPaymentState();
+        });
+
+        return $orders->count() === $count;
     }
 }
