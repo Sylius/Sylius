@@ -30,6 +30,7 @@
         </field>
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
+        <field name="immutable" column="is_immutable" type="boolean" />
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />

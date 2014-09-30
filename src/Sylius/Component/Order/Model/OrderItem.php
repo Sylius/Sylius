@@ -38,14 +38,14 @@ class OrderItem implements OrderItemInterface
     /**
      * Quantity.
      *
-     * @var integer
+     * @var int
      */
     protected $quantity = 1;
 
     /**
      * Unit price.
      *
-     * @var integer
+     * @var int
      */
     protected $unitPrice = 0;
 
@@ -59,16 +59,23 @@ class OrderItem implements OrderItemInterface
     /**
      * Adjustments total.
      *
-     * @var integer
+     * @var int
      */
     protected $adjustmentsTotal = 0;
 
     /**
      * Order item total.
      *
-     * @var integer
+     * @var int
      */
     protected $total = 0;
+
+    /**
+     * Order item is immutable?
+     *
+     * @var bool
+     */
+    protected $immutable = false;
 
     /**
      * Constructor.
@@ -293,13 +300,31 @@ class OrderItem implements OrderItemInterface
      */
     public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true)
     {
-        if ($throwOnInvalid && ! $orderItem->equals($this)) {
+        if ($throwOnInvalid && !$orderItem->equals($this)) {
             throw new \RuntimeException('Given item cannot be merged.');
         }
 
         if ($this !== $orderItem) {
             $this->quantity += $orderItem->getQuantity();
         }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isImmutable()
+    {
+        return $this->immutable;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImmutable($immutable)
+    {
+        $this->immutable = (bool) $immutable;
 
         return $this;
     }

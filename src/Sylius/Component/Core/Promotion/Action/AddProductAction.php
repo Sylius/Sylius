@@ -73,6 +73,8 @@ class AddProductAction implements PromotionActionInterface
             }
         }
 
+        $promotionItem->setImmutable(true);
+
         $subject->addItem($promotionItem);
     }
 
@@ -90,6 +92,7 @@ class AddProductAction implements PromotionActionInterface
         }
 
         $promotionItem = $this->createItem($configuration);
+        $promotionItem->setImmutable(true);
 
         foreach ($subject->getItems() as $item) {
             if ($item->equals($promotionItem)) {
