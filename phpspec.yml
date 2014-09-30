@@ -8,6 +8,7 @@ suites:
     Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
     Locale           : { namespace: Sylius, spec_path: src/Sylius/Component/Locale }
+    Newsletter       : { namespace: Sylius, spec_path: src/Sylius/Component/Newsletter }
     Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
     Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
     Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
