@@ -17,9 +17,11 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Driver\Connection;
+use Doctrine\ORM\EntityManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
+use Sylius\Bundle\CoreBundle\Tests\MySqlDriver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -70,9 +72,14 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     public function purgeDatabase(BeforeScenarioScope $scope)
     {
-        $purger = new ORMPurger($this->getService('doctrine.orm.entity_manager'));
+        $manager = $this->getEntityManager();
+        $this->disableMysqlForeignKeyChecks($manager->getConnection());
+
+        $purger = new ORMPurger($manager);
         $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
         $purger->purge();
+
+        $this->enableMysqlForeignKeyChecks($manager->getConnection());
     }
 
     /**
@@ -129,7 +136,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * Get entity manager.
      *
-     * @return ObjectManager
+     * @return EntityManager
      */
     protected function getEntityManager()
     {
@@ -313,5 +320,25 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function fixStepArgument($argument)
     {
         return str_replace('\\"', '"', $argument);
+    }
+
+    /**
+     * @param Connection $connection
+     */
+    private function disableMysqlForeignKeyChecks(Connection $connection)
+    {
+        if ($connection->getDriver() instanceof MysqlDriver) {
+            $connection->exec('SET foreign_key_checks=0');
+        }
+    }
+
+    /**
+     * @param Connection $connection
+     */
+    private function enableMysqlForeignKeyChecks(Connection $connection)
+    {
+        if ($connection->getDriver() instanceof MysqlDriver) {
+            $connection->exec('SET foreign_key_checks=1');
+        }
     }
 }
