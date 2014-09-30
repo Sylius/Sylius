@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
-use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\OrderTransitions;

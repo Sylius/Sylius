@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use SM\Event\TransitionEvent;
 use PhpSpec\ObjectBehavior;
+use SM\Event\TransitionEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;

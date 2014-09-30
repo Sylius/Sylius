@@ -69,16 +69,16 @@ class ProcessContext implements ProcessContextInterface
     /**
      * Progress in percents.
      *
-     * @var integer
+     * @var int
      */
-    protected $progress;
+    protected $progress = 0;
 
     /**
      * Was the context initialized?
      *
-     * @var Boolean
+     * @var bool
      */
-    protected $intitialized;
+    protected $initialized = false;
 
     /**
      * Constructor.
@@ -88,9 +88,6 @@ class ProcessContext implements ProcessContextInterface
     public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
-
-        $this->initialized = false;
-        $this->progress = 0;
     }
 
     /**
@@ -128,8 +125,8 @@ class ProcessContext implements ProcessContextInterface
 
         $validator = $this->process->getValidator();
 
-        if (null !== $validator && !$validator->isValid()) {
-            return $validator;
+        if (null !== $validator) {
+            return $validator->isValid();
         }
 
         $history = $this->getStepHistory();

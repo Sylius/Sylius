@@ -11,9 +11,8 @@
 
 namespace spec\Sylius\Component\Contact\Model;
 
-use Sylius\Component\Contact\Model\TopicInterface;
-
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Contact\Model\TopicInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Routing;
 
-use Symfony\Cmf\Component\Routing\ContentAwareGenerator as BaseContentAwareGenerator;
 use Doctrine\Common\Util\ClassUtils;
+use Symfony\Cmf\Component\Routing\ContentAwareGenerator as BaseContentAwareGenerator;
 
 class SyliusAwareGenerator extends BaseContentAwareGenerator
 {

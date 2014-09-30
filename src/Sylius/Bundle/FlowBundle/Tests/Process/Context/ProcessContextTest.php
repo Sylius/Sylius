@@ -223,7 +223,7 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
         $context->initialize($process, $steps[0]);
 
-        $this->assertTrue($context->isValid() !== true);
+        $this->assertFalse($context->isValid());
     }
 
     /**

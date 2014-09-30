@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Validator;
 
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -57,14 +59,14 @@ interface ProcessValidatorInterface
     /**
      * Check validation.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isValid();
 
     /**
      * @param StepInterface $step
      *
-     * @return Response
+     * @return ActionResult|Response|View
      */
     public function getResponse(StepInterface $step);
 }

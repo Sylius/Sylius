@@ -31,17 +31,20 @@ class Process implements ProcessInterface
     /**
      * Steps.
      *
-     * @var array
+     * @var StepInterface[]
      */
     protected $steps = array();
 
     /**
      * Ordered steps.
      *
-     * @var array
+     * @var StepInterface[]
      */
     protected $orderedSteps = array();
 
+    /**
+     * @var ProcessValidatorInterface
+     */
     protected $validator;
 
     /**

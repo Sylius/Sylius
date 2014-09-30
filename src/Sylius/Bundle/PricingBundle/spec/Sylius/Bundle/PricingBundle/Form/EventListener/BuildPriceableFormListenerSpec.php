@@ -14,11 +14,13 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
-use Sylius\Component\Pricing\Model\PriceableInterface;;
+use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+
+;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
