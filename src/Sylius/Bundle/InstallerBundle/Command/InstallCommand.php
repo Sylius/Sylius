@@ -96,10 +96,14 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupFixtures(InputInterface $input, OutputInterface $output)
     {
+        $doctrineConfig = $this->getContainer()->get('doctrine.orm.entity_manager')->getConnection()->getConfiguration();
+        $logger = $doctrineConfig->getSQLLogger();
+        $doctrineConfig->setSQLLogger(null);
         $this
             ->runCommand('doctrine:fixtures:load', $input, $output)
             ->runCommand('doctrine:phpcr:fixtures:load', $input, $output)
         ;
+        $doctrineConfig->setSQLLogger($logger);
     }
 
     protected function setupAdmin(OutputInterface $output)
