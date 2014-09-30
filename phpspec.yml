@@ -34,6 +34,7 @@ suites:
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
     LocaleBundle     : { namespace: Sylius, spec_path: src/Sylius/Bundle/LocaleBundle }
+    NewsletterBundle : { namespace: Sylius, spec_path: src/Sylius/Bundle/NewsletterBundle }
     MoneyBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/MoneyBundle }
     OrderBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
     PaymentBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentBundle }

@@ -1,0 +1,12 @@
+sylius:
+    form:
+        newsletter_subscriber:
+            email:
+                not_blank: Please enter email.
+                email: Email is invalid.
+                unique: Email must be unique.
+        newsletter_subscription_list:
+            name:
+                not_blank: Please enter name.
+                min_length: Name is too short.
+                max_length: Name is too long.

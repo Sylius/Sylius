@@ -45,6 +45,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_attribute',
         'sylius_variation',
         'sylius_sequence',
+        'sylius_newsletter',
     );
 
     protected $configFiles = array(
