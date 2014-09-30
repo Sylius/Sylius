@@ -32,6 +32,8 @@ sylius_locale: ~
 
 sylius_currency: ~
 
+sylius_contact: ~
+
 sylius_api:
     classes:
         api_user:

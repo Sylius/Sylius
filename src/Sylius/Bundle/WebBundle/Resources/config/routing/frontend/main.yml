@@ -38,3 +38,7 @@ sylius_cart_save:
         _controller: sylius.controller.cart:saveAction
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
+
+sylius_contact:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/contact.yml
+    prefix: /contact

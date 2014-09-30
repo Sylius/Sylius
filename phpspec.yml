@@ -3,6 +3,7 @@ suites:
     Attribute        : { namespace: Sylius, spec_path: src/Sylius/Component/Attribute }
     Cart             : { namespace: Sylius, spec_path: src/Sylius/Component/Cart }
     Core             : { namespace: Sylius, spec_path: src/Sylius/Component/Core }
+    Contact          : { namespace: Sylius, spec_path: src/Sylius/Component/Contact }
     Currency         : { namespace: Sylius, spec_path: src/Sylius/Component/Currency }
     Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
@@ -27,6 +28,7 @@ suites:
     CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
     CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
     CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
+    ContactBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ContactBundle }
     FlowBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
