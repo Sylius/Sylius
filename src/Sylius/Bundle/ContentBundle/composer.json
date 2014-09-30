@@ -40,7 +40,7 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\ContentBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\ContentBundle\\": "" }
     },
     "target-dir": "Sylius/Bundle/ContentBundle",
     "extra": {
