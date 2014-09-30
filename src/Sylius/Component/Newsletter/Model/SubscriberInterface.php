@@ -34,4 +34,24 @@ interface SubscriberInterface extends TimestampableInterface
      * @return string
      */
     public function getEmail();
+
+    /**
+     * @param SubscriptionListInterface $subscriptionList
+     */
+    public function addSubscriptionList(SubscriptionListInterface $subscriptionList);
+
+    /**
+     * @param SubscriptionListInterface $subscriptionList
+     */
+    public function removeSubscriptionList(SubscriptionListInterface $subscriptionList);
+
+    /**
+     * @param SubscriptionListInterface $subscriptionList
+     */
+    public function hasSubscriptionList(SubscriptionListInterface $subscriptionList);
+
+    /**
+     * @return Collection/SubscriptionListInterface[] $subscriptionList
+     */
+    public function getSubscriptionLists();
 }

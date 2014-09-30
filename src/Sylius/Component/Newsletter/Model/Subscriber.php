@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Newsletter\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Default subscriber representation.
  *
@@ -29,6 +32,11 @@ class Subscriber implements SubscriberInterface
     protected $email;
 
     /**
+     * @var Collection/SubscriptionList[]
+     */
+    protected $subscriptionLists;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -43,6 +51,7 @@ class Subscriber implements SubscriberInterface
      */
     public function __construct()
     {
+        $this->subscriptionLists = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -70,6 +79,49 @@ class Subscriber implements SubscriberInterface
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSubscriptionList(SubscriptionListInterface $subscriptionList)
+    {
+        if ($this->hasSubscriptionList($subscriptionList)) {
+            return $this;
+        }
+        $subscriptionList->addSubscriber($this);
+        $this->subscriptionLists->add($subscriptionList);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSubscriptionList(SubscriptionListInterface $subscriptionList)
+    {
+        if ($this->hasSubscriptionList($subscriptionList)) {
+            $subscriptionList->removeSubscriber($this);
+            $this->subscriptionLists->removeElement($subscriptionList);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSubscriptionList(SubscriptionListInterface $subscriptionList)
+    {
+        return $this->subscriptionLists->contains($subscriptionList);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubscriptionLists()
+    {
+        return $this->subscriptionLists;
     }
 
     /**

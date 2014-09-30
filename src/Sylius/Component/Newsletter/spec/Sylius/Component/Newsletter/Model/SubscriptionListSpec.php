@@ -66,6 +66,7 @@ class SubscriptionListSpec extends ObjectBehavior
         $this->hasSubscriber($subscriberInterface)->shouldReturn(false);
 
         $this->addSubscriber($subscriberInterface);
+        $subscriberInterface->addSubscriptionList($this)->shouldBeCalled();
         $this->hasSubscriber($subscriberInterface)->shouldReturn(true);
     }
 
@@ -77,6 +78,7 @@ class SubscriptionListSpec extends ObjectBehavior
         $this->hasSubscriber($subscriberInterface)->shouldReturn(true);
 
         $this->removeSubscriber($subscriberInterface);
+        $subscriberInterface->removeSubscriptionList($this)->shouldBeCalled();
         $this->hasSubscriber($subscriberInterface)->shouldReturn(false);
     }
 

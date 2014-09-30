@@ -26,28 +26,28 @@ class SubscriptionList implements SubscriptionListInterface
      *
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * Subscription name.
      *
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * Subscription description.
      *
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * Subscribers on the list.
      *
      * @var Collection/SubscriberInterface[]
      */
-    private $subscribers;
+    protected $subscribers;
 
     /**
      * Constructor.
@@ -110,6 +110,7 @@ class SubscriptionList implements SubscriptionListInterface
             return $this;
         }
 
+        $subscriber->addSubscriptionList($this);
         $this->subscribers->add($subscriber);
 
         return $this;
@@ -121,6 +122,7 @@ class SubscriptionList implements SubscriptionListInterface
     public function removeSubscriber(SubscriberInterface $subscriber)
     {
         if ($this->hasSubscriber($subscriber)) {
+            $subscriber->removeSubscriptionList($this);
             $this->subscribers->removeElement($subscriber);
         }
 

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Newsletter\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Newsletter\Model\SubscriptionListInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -42,6 +43,32 @@ class SubscriberSpec extends ObjectBehavior
     {
         $this->setEmail('michal@lakion.com');
         $this->getEmail()->shouldReturn('michal@lakion.com');
+    }
+
+    function it_creates_subscription_lists_collection_by_default()
+    {
+        $this->getSubscriptionLists()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    function it_adds_subscription_lists_properly(SubscriptionListInterface $subscriptionListInterface)
+    {
+        $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(false);
+
+        $this->addSubscriptionList($subscriptionListInterface);
+        $subscriptionListInterface->addSubscriber($this)->shouldBeCalled();
+        $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(true);
+    }
+
+    function it_removes_subscription_lists_properly(SubscriptionListInterface $subscriptionListInterface)
+    {
+        $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(false);
+
+        $this->addSubscriptionList($subscriptionListInterface);
+        $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(true);
+
+        $this->removeSubscriptionList($subscriptionListInterface);
+        $subscriptionListInterface->removeSubscriber($this)->shouldBeCalled();
+        $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(false);
     }
 
     function it_initializes_creation_date_by_default()
