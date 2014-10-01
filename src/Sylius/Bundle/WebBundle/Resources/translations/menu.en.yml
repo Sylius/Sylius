@@ -67,6 +67,7 @@ sylius:
                 shipments: Shipments
                 shipping_categories: Shipping categories
                 shipping_methods: Shipping methods
+                slideshow: Slideshow
                 stockables: Inventory levels
                 tax_categories: Taxation categories
                 tax_rates: Tax rates

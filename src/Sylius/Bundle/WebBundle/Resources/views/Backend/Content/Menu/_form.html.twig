@@ -1,0 +1,28 @@
+{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Content/Form:forms.html.twig' as forms %}
+
+<fieldset>
+<div class="row">
+    <div class="col-md-6 row-split">
+    {{ form_row(form.display) }}
+    {{ form_row(form.displayChildren) }}
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+    {{ form_row(form.label, {'attr': {'class': 'input-lg'}}) }}
+    {{ forms.readonly(form.parent,form.parent.vars.value,'/cms/menus') }}
+{#     {{ form_row(form.uri) }}#}
+{#     {{ form_row(form.route) }}#}
+    </div>
+    <div class="col-md-6">
+        <div id="sylius-menu-childrens" class="collection-container" data-prototype="
+         {% filter escape %}
+             {{ include('SyliusWebBundle:Backend/Content/Menu:_prototype.html.twig', { 'children': form.children.vars.prototype }) }}
+         {% endfilter %}">
+            {% for children in form.children %}
+                {{ include('SyliusWebBundle:Backend/Content/Menu:_prototype.html.twig') }}
+            {% endfor %}
+        </div>
+        <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="sylius-menu-childrens" data-collection="sylius-menu-childrens">{{ "sylius.form.menu.add_children"|trans }}</a>
+    </div>
+</fieldset>
+{{ form_widget(form._token) }}

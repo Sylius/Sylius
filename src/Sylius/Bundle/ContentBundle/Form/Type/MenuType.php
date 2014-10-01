@@ -27,13 +27,42 @@ class MenuType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.menu.id'
+            ->add('parent', null, array(
+                    'required' => true,
+                    'label' => 'sylius.form.menu.parent'
+            ))
+            ->add('label', 'text', array(
+                    'required' => true,
+                    'label' => 'sylius.form.menu.label'
             ))
             ->add('name', 'text', array(
-                'label' => 'sylius.form.menu.name'
+                    'required' => true,
+                    'label' => 'sylius.form.menu.name'
             ))
-        ;
+            ->add('children', 'collection', array(
+                       'type'         => 'sylius_menu_node',
+                       'allow_add'    => true,
+                       'allow_delete' => true,
+                       'by_reference' => false,
+                       'label'        => 'sylius.form.menu.childrens'
+             ))
+            ->add('uri', null, array(
+                    'required' => false,
+                    'label' => 'sylius.form.menu.uri'
+            ))
+            ->add('route', null, array(
+                    'required' => false,
+                    'label' => 'sylius.form.menu.route'
+            ))
+            ->add('display', null, array(
+                    'required' => false,
+                    'label' => 'sylius.form.menu.display'
+            ))
+            ->add('displayChildren', null, array(
+                    'required' => false,
+                    'label' => 'sylius.form.menu.display_children'
+            ))
+            ;
 
     }
 

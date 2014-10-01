@@ -27,8 +27,11 @@ class SimpleBlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.simple_block.id'
+            ->add('parentDocument', null, array(
+                'label' => 'sylius.form.simple_block.parent'
+            ))
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.simple_block.internal_name'
             ))
             ->add('title', 'text', array(
                 'label' => 'sylius.form.simple_block.title'
