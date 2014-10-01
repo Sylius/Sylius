@@ -53,14 +53,7 @@ class ZoneType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.zone.name',
             ))
-            ->add('type', 'choice', array(
-                'label'   => 'sylius.form.zone.type',
-                'choices' => array(
-                    ZoneInterface::TYPE_COUNTRY  => 'sylius.form.zone.types.country',
-                    ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
-                    ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
-                ),
-            ))
+            ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
                 'label' => 'sylius.form.zone.members',
             ))

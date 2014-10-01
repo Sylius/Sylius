@@ -35,6 +35,17 @@ class ZoneMatcher implements ZoneMatcherInterface
     protected $repository;
 
     /**
+     * Zone matching priorities.
+     *
+     * @var array
+     */
+    protected $priorities = array(
+        ZoneInterface::TYPE_PROVINCE,
+        ZoneInterface::TYPE_COUNTRY,
+        ZoneInterface::TYPE_ZONE,
+    );
+
+    /**
      * Constructor.
      *
      * @param ObjectRepository $repository
@@ -57,13 +68,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             }
         }
 
-        $priorities = array(
-            ZoneInterface::TYPE_PROVINCE,
-            ZoneInterface::TYPE_COUNTRY,
-            ZoneInterface::TYPE_ZONE
-        );
-
-        foreach ($priorities as $priority) {
+        foreach ($this->priorities as $priority) {
             if (isset($zones[$priority])) {
                 return $zones[$priority];
             }
