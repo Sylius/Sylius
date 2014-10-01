@@ -16,15 +16,17 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Originator\OriginatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class FixedDiscountActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository)
+    function let(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator)
     {
-        $this->beConstructedWith($adjustmentRepository);
+        $this->beConstructedWith($adjustmentRepository, $originator);
     }
 
     function it_is_initializable()
@@ -39,6 +41,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
 
     function it_applies_fixed_discount_as_promotion_adjustment(
         $adjustmentRepository,
+        $originator,
         OrderInterface $order,
         AdjustmentInterface $adjustment,
         PromotionInterface $promotion
@@ -49,6 +52,8 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $adjustment->setAmount(-500)->shouldBeCalled();
         $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('promotion description')->shouldBeCalled();
+
+        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 
         $order->addAdjustment($adjustment)->shouldBeCalled();
         $configuration = array('amount' => 500);
