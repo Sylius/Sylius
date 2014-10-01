@@ -18,8 +18,10 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Connection;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
+use Sylius\Bundle\CoreBundle\Tests\MySqlDriver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -70,13 +72,21 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     public function purgeDatabase(BeforeScenarioScope $scope)
     {
-        $entityManager = $this->getService('doctrine.orm.entity_manager');
-        $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
+        $entityManager = $this->getEntityManager();
+        $this->disableMysqlForeignKeyChecks($entityManager->getConnection());
 
         $purger = new ORMPurger($entityManager);
         $purger->purge();
 
-        $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
+        $this->enableMysqlForeignKeyChecks($entityManager->getConnection());
+    }
+
+    /**
+     * Selects option in select field with specified id|name|label|value.
+     */
+    public function selectOption($select, $option)
+    {
+        $this->getSession()->getPage()->selectFieldOption($this->fixStepArgument($select), $this->fixStepArgument($option));
     }
 
     /**
@@ -300,14 +310,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     }
 
     /**
-     * Selects option in select field with specified id|name|label|value.
-     */
-    public function selectOption($select, $option)
-    {
-        $this->getSession()->getPage()->selectFieldOption($this->fixStepArgument($select), $this->fixStepArgument($option));
-    }
-
-    /**
      * Returns fixed step argument (with \\" replaced back to ").
      *
      * @param string $argument
@@ -317,5 +319,29 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function fixStepArgument($argument)
     {
         return str_replace('\\"', '"', $argument);
+    }
+
+    /**
+     * Disable mysql foreign key checks cause of references error on mysql >= 5.5
+     *
+     * @param Connection $connection
+     */
+    private function disableMysqlForeignKeyChecks(Connection $connection)
+    {
+        if ($connection->getDriver() instanceof MySqlDriver)
+        {
+            $connection->executeUpdate("SET foreign_key_checks = 0;");
+        }
+    }
+
+    /**
+     * @param Connection $connection
+     */
+    private function enableMysqlForeignKeyChecks(Connection $connection)
+    {
+        if ($connection->getDriver() instanceof MySqlDriver)
+        {
+            $connection->executeUpdate("SET foreign_key_checks = 1;");
+        }
     }
 }
