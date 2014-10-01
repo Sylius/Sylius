@@ -20,9 +20,13 @@
         <parameter key="sylius.form.type.country_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\CountryEntityChoiceType</parameter>
         <parameter key="sylius.form.type.province_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType</parameter>
         <parameter key="sylius.form.type.zone_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneEntityChoiceType</parameter>
+        <parameter key="sylius.form.type.zone_type_choice.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType</parameter>
         <parameter key="sylius.form.type.zone_member_collection.class">Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCollectionType</parameter>
+
         <parameter key="sylius.form.listener.address.class">Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormListener</parameter>
+
         <parameter key="sylius.zone_matcher.class">Sylius\Component\Addressing\Matcher\ZoneMatcher</parameter>
+
         <parameter key="sylius.validator.shippable_address.class">Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator</parameter>
         <parameter key="sylius.validator.valid_province_address.class">Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator</parameter>
     </parameters>
@@ -81,6 +85,9 @@
         <service id="sylius.form.type.zone_choice" class="%sylius.form.type.zone_choice.class%">
             <argument>%sylius.model.zone.class%</argument>
             <tag name="form.type" alias="sylius_zone_choice" />
+        </service>
+        <service id="sylius.form.type.zone_type_choice" class="%sylius.form.type.zone_type_choice.class%">
+            <tag name="form.type" alias="sylius_zone_type_choice" />
         </service>
 
         <service id="sylius.form.listener.address" class="%sylius.form.listener.address.class%">
