@@ -48,23 +48,23 @@ class OrderPricingListener
     public function recalculatePrices(GenericEvent $event)
     {
         $order = $event->getSubject();
-
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException($order, 'Sylius\Component\Order\Model\OrderInterface');
         }
 
         $context = array();
-
         if (null !== $user = $order->getUser()) {
             $context['user']   = $user;
             $context['groups'] = $user->getGroups()->toArray();
         }
 
         foreach ($order->getItems() as $item) {
-            $priceable = $item->getVariant();
+            if ($item->isImmutable()) {
+                continue;
+            }
 
             $context['quantity'] = $item->getQuantity();
-            $item->setUnitPrice($this->priceCalculator->calculate($priceable, $context));
+            $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
         }
 
         $order->calculateTotal();

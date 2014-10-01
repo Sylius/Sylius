@@ -48,12 +48,13 @@ class AddProductActionSpec extends ObjectBehavior
     ) {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 0);
 
-        $variantRepository->find($configuration['variant'])->shouldBeCalled()->willReturn($variant);
+        $variantRepository->find($configuration['variant'])->willReturn($variant);
 
         $itemRepository->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->shouldBeCalled()->willReturn($item);
-        $item->setVariant($variant)->shouldBeCalled()->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->shouldBeCalled()->willReturn($item);
+        $item->setUnitPrice($configuration['price'])->willReturn($item);
+        $item->setVariant($variant)->willReturn($item);
+        $item->setQuantity($configuration['quantity'])->willReturn($item);
+        $item->setImmutable(true)->shouldBeCalled();
 
         $order->getItems()->willReturn(array());
 
@@ -63,21 +64,21 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_does_not_add_product_if_exists(
-            RepositoryInterface $variantRepository,
-            RepositoryInterface $itemRepository,
-            OrderInterface $order,
-            OrderItemInterface $item,
-            ProductVariantInterface $variant,
-            PromotionInterface $promotion
+        RepositoryInterface $variantRepository,
+        RepositoryInterface $itemRepository,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        ProductVariantInterface $variant,
+        PromotionInterface $promotion
     ) {
         $configuration = array('variant' => 500, 'quantity' => 2, 'price' => 1);
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
         $itemRepository->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->shouldBeCalled()->willReturn($item);
-        $item->setVariant($variant)->shouldBeCalled()->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->shouldBeCalled()->willReturn($item);
+        $item->setUnitPrice($configuration['price'])->willReturn($item);
+        $item->setVariant($variant)->willReturn($item);
+        $item->setQuantity($configuration['quantity'])->willReturn($item);
         $item->equals($item)->willReturn(true);
 
         $order->getItems()->willReturn(array($item));
@@ -88,22 +89,23 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_reverts_product(
-            RepositoryInterface $variantRepository,
-            RepositoryInterface $itemRepository,
-            OrderInterface $order,
-            OrderItemInterface $item,
-            ProductVariantInterface $variant,
-            PromotionInterface $promotion
+        RepositoryInterface $variantRepository,
+        RepositoryInterface $itemRepository,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        ProductVariantInterface $variant,
+        PromotionInterface $promotion
     ) {
         $configuration = array('variant' => 500, 'quantity' => 3, 'price' => 2);
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
         $itemRepository->createNew()->willReturn($item);
-        $item->setUnitPrice($configuration['price'])->shouldBeCalled()->willReturn($item);
-        $item->setVariant($variant)->shouldBeCalled()->willReturn($item);
-        $item->setQuantity($configuration['quantity'])->shouldBeCalled()->willReturn($item);
+        $item->setUnitPrice($configuration['price'])->willReturn($item);
+        $item->setVariant($variant)->willReturn($item);
+        $item->setQuantity($configuration['quantity'])->willReturn($item);
         $item->equals($item)->willReturn(true);
+        $item->setImmutable(true)->shouldBeCalled();
 
         $order->getItems()->willReturn(array($item));
 
