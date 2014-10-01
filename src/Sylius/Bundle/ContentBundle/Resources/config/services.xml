@@ -31,6 +31,16 @@
             <argument>%sylius.validation_group.menu_block%</argument>
             <tag name="form.type" alias="sylius_menu_block" />
         </service>
+        <service id="sylius.form.type.imagine_block" class="%sylius.form.type.imagine_block.class%">
+            <argument>%sylius.model.imagine_block.class%</argument>
+            <argument>%sylius.validation_group.imagine_block%</argument>
+            <tag name="form.type" alias="sylius_imagine_block" />
+        </service>
+        <service id="sylius.form.type.slideshow_block" class="%sylius.form.type.slideshow_block.class%">
+            <argument>%sylius.model.slideshow_block.class%</argument>
+            <argument>%sylius.validation_group.slideshow_block%</argument>
+            <tag name="form.type" alias="sylius_slideshow_block" />
+        </service>
 
         <service id="sylius.form.type.route" class="%sylius.form.type.route.class%">
             <argument>%sylius.model.route.class%</argument>
@@ -46,7 +56,13 @@
         <service id="sylius.form.type.menu" class="%sylius.form.type.menu.class%">
             <argument>%sylius.model.menu.class%</argument>
             <argument>%sylius.validation_group.menu%</argument>
+            <argument type="string" id="menu_basepath">%cmf_menu.persistence.phpcr.menu_basepath%</argument>
             <tag name="form.type" alias="sylius_menu" />
+        </service>
+        <service id="sylius.form.type.menu_node" class="%sylius.form.type.menu_node.class%">
+            <argument>%sylius.model.menu_node.class%</argument>
+            <argument>%sylius.validation_group.menu_node%</argument>
+            <tag name="form.type" alias="sylius_menu_node" />
         </service>
 
         <service id="sylius.form.type.static_content" class="%sylius.form.type.static_content.class%">

@@ -31,6 +31,13 @@ class ReferenceBlockType extends AbstractResourceType
             ->add('id', 'text', array(
                 'label' => 'sylius.form.reference_block.id'
             ))
+            ->add('title', 'text', array(
+                'label' => 'sylius.form.reference_block.title'
+            ))
+            ->add('body', 'textarea', array(
+                'required' => false,
+                'label'    => 'sylius.form.reference_block.body',
+            ))
         ;
 
     }

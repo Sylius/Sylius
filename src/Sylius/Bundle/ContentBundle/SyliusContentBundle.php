@@ -36,6 +36,6 @@ class SyliusContentBundle extends AbstractResourceBundle
      */
     protected function getBundlePrefix()
     {
-        return 'sylius_addressing';
+        return 'sylius_content';
     }
 }

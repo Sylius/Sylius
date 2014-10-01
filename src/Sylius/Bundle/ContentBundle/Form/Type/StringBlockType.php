@@ -31,6 +31,9 @@ class StringBlockType extends AbstractResourceType
             ->add('id', 'text', array(
                 'label' => 'sylius.form.string_block.id'
             ))
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.string_block.name'
+            ))
             ->add('body', 'textarea', array(
                 'required' => false,
                 'label'    => 'sylius.form.string_block.body',

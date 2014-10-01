@@ -1,0 +1,27 @@
+
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Content/MenuNode:macros.html.twig' import list %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.content'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.menu_node.index'|trans }}</a></li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_menu_node_create'), 'sylius.menu_node.create'|trans) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.menu_node.index_header'|trans|raw }}</h1>
+</div>
+
+{{ pagination(menu_nodes) }}
+{{ list(menu_nodes) }}
+{{ pagination(menu_nodes) }}
+
+{% endblock %}
