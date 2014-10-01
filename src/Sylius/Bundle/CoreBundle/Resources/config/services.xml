@@ -75,6 +75,7 @@
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
+        <parameter key="sylius.originator.class">Sylius\Component\Core\Originator\Originator</parameter>
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
     </parameters>
@@ -330,6 +331,7 @@
         </service>
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="fixed_discount" label="Fixed discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
@@ -408,6 +410,9 @@
             <argument type="service" id="doctrine"/>
             <argument>%sylius.route_classes%</argument>
             <call method="setRouteCollectionLimit"><argument>%sylius.route_collection_limit%</argument></call>
+        </service>
+        <service id="sylius.originator" class="%sylius.originator.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
         <service id="sylius.enhancer.controllers_by_class" class="%cmf_routing.enhancer.field_by_class.class%">
             <argument>_sylius_entity</argument>

@@ -19,6 +19,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Originator\OriginatorInterface;
 
 /**
  * Fixed discount action.
@@ -35,13 +36,21 @@ class FixedDiscountAction implements PromotionActionInterface
     protected $repository;
 
     /**
+     * Originator, helps setting adjustment origin.
+     *
+     * @var OriginatorInterface
+     */
+    protected $originator;
+
+    /**
      * Constructor.
      *
      * @param RepositoryInterface $repository
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryInterface $repository, OriginatorInterface $originator)
     {
         $this->repository = $repository;
+        $this->originator = $originator;
     }
 
     /**
@@ -61,6 +70,7 @@ class FixedDiscountAction implements PromotionActionInterface
         $adjustment->setAmount(-$configuration['amount']);
         $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
+        $this->originator->setOrigin($adjustment, $promotion);
 
         $subject->addAdjustment($adjustment);
     }

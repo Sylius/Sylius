@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 
-interface AdjustmentInterface extends BaseAdjustmentInterface
+interface AdjustmentInterface extends BaseAdjustmentInterface, OriginAwareInterface
 {
     // Labels for tax, shipping and promotion adjustments.
     const TAX_ADJUSTMENT       = 'tax';
