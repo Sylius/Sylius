@@ -60,28 +60,28 @@ interface InventoryUnitInterface extends TimestampableInterface
     /**
      * Get inventory unit state.
      *
-     * @return integer
+     * @return string
      */
     public function getInventoryState();
 
     /**
      * Set inventory unit state.
      *
-     * @param integer $state
+     * @param string $state
      */
     public function setInventoryState($state);
 
     /**
      * Is in "sold" state?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isSold();
 
     /**
      * Is a backordered inventory unit?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isBackordered();
 }

@@ -52,7 +52,7 @@ class Order implements OrderInterface
     /**
      * Items total.
      *
-     * @var integer
+     * @var int
      */
     protected $itemsTotal = 0;
 
@@ -73,7 +73,7 @@ class Order implements OrderInterface
     /**
      * Adjustments total.
      *
-     * @var integer
+     * @var int
      */
     protected $adjustmentsTotal = 0;
 
@@ -81,14 +81,14 @@ class Order implements OrderInterface
      * Calculated total.
      * Items total + adjustments total.
      *
-     * @var integer
+     * @var int
      */
     protected $total = 0;
 
     /**
      * Whether order was confirmed.
      *
-     * @var Boolean
+     * @var bool
      */
     protected $confirmed = true;
 
@@ -121,9 +121,9 @@ class Order implements OrderInterface
     protected $deletedAt;
 
     /**
-     * State
+     * Order state.
      *
-     * @var integer
+     * @var string
      */
     protected $state = OrderInterface::STATE_CART;
 

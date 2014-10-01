@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Hateoas\Representation\Factory\PagerfantaFactory;
-use Hateoas\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;

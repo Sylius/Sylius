@@ -40,7 +40,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('guest_order')
                     ->beforeNormalization()
                         ->ifString()
-                        ->then(function($v) { return (bool) $v; })
+                        ->then(function ($v) { return (bool) $v; })
                     ->end()
                     ->defaultFalse()
                 ->end()

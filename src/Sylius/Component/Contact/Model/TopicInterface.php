@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Contact\Model;
 
-
 /**
  * Interface for the model representing a contact topic.
  *
@@ -28,4 +27,4 @@ interface TopicInterface
      * @param string $title
      */
     public function setTitle($title);
-} 
+}

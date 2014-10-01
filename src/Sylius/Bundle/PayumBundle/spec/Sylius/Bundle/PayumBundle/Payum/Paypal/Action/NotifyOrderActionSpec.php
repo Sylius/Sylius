@@ -13,12 +13,12 @@ namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Request\ModelRequestInterface;
 use Payum\Core\Request\SecuredNotifyRequest;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as PaymentModelInterface;
 use Sylius\Component\Payment\Model\Payment;

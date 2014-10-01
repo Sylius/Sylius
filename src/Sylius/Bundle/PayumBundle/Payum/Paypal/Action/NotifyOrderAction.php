@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\SecuredNotifyRequest;
 use Payum\Core\Request\SyncRequest;
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
 use Sylius\Component\Core\Model\PaymentInterface;

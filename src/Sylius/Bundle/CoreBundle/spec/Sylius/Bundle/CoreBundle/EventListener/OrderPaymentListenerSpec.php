@@ -12,9 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;

@@ -59,7 +59,7 @@ class SettingsManager implements SettingsManagerInterface
     /**
      * Runtime cache for resolved parameters
      *
-     * @var array
+     * @var Settings[]
      */
     protected $resolvedSettings = array();
 

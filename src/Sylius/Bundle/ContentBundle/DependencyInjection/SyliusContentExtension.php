@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Content extension.

@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ContentBundle;
 
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * Sylius content bundle.

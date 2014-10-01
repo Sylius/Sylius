@@ -14,8 +14,8 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItem;
-use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * Order item model.

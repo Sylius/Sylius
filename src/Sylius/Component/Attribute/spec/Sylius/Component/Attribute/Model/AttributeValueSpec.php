@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Attribute\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\Model\AttributeInterface;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
+use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

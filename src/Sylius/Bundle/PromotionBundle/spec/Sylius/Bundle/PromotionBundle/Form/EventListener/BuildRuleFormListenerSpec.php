@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
