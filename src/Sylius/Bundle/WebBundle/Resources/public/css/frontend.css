@@ -182,3 +182,24 @@ a.create-ui-toggle {
 [contenteditable="true"].inEditMode {
     outline: 3px solid #1abb9c !important;
 }
+
+#blueimp-gallery-slideshow-home {
+    /* Set the carousel width/height ratio to 16/9: */
+    padding-bottom: 35%;
+    box-shadow: 0px 0px;
+    background: none;
+}
+
+#blueimp-gallery-slideshow-sidebar {
+    /* Set the carousel width/height ratio to 16/9: */
+    padding-bottom: 35%;
+    box-shadow: 0px 0px;
+    background: none;
+}
+
+#blueimp-gallery-slideshow-full {
+    /* Set the carousel width/height ratio to 16/9: */
+    padding-bottom: 35%;
+    box-shadow: 0px 0px;
+    background: none;
+}

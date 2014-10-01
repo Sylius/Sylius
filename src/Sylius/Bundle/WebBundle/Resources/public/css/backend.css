@@ -582,3 +582,7 @@ input[type="file"] {
     float: left;
     margin-right: 10px;
 }
+
+#sylius-menu-childrens img {
+	margin-top: 20px;
+}

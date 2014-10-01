@@ -4,7 +4,7 @@
 {% createphp cmfMainContent as='rdf' noautotag %}
 <div {{ createphp_attributes(rdf) }}>
     <div class="page-header">
-        <h1 {{ createphp_attributes(rdf.title) }}>{{ createphp_content(rdf.title) }}</h1>
+        <h1 class="page-title" {{ createphp_attributes(rdf.title) }}>{{ createphp_content(rdf.title) }}</h1>
     </div>
 
     <div {{ createphp_attributes(rdf.body) }}>{{ createphp_content(rdf.body) }}</div>

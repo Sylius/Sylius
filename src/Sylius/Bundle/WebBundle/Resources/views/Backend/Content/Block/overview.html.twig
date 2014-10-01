@@ -1,0 +1,19 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.content'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.block.index'|trans }}</a></li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-th-large"></i> {{ 'sylius.block.index_header'|trans|raw }}</h1>
+</div>
+
+<ul class="nav nav-pills nav-justified">
+    <li><a href="{{ path('sylius_backend_simple_block_index') }}">{{ 'sylius.block.simple_blocks'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_string_block_index') }}">{{ 'sylius.block.string_blocks'|trans }}</a></li>
+</ul>
+{% endblock %}

@@ -21,6 +21,7 @@ twig:
     form:
         resources:
             - 'SyliusWebBundle::forms.html.twig'
+            - 'CmfMediaBundle:Form:fields.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
