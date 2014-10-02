@@ -53,46 +53,30 @@ class MenuNodeType extends AbstractResourceType
                 'label'    => 'sylius.form.menu_node_block.link_type',
             ))
             ->add('publishable', null, array(
-                    'required' => false,
-                    'label'    => 'sylius.form.menu_node_block.publishable',
+                'required' => false,
+                'label'    => 'sylius.form.menu_node_block.publishable',
             ))
             ->add('publishStartDate', 'text', array(
-                    'attr'      => array('class'=> 'datepicker'),
-                    'required'  => false,
-                    'label'     => 'sylius.form.menu_node_block.publish_start_date',
+                'attr'      => array('class'=> 'datepicker'),
+                'required'  => false,
+                'label'     => 'sylius.form.menu_node_block.publish_start_date',
             ))
             ->add('publishEndDate', 'text', array(
-                    'required' => false,
-                    'label'    => 'sylius.form.menu_node_block.publish_end_date',
+                'required' => false,
+                'label'    => 'sylius.form.menu_node_block.publish_end_date',
             ))
             ->add('route', null, array(
                 'label' => 'sylius.form.menu_node_block.route'
             ))
             ->add('content', null, array(
-                    'class' => 'Symfony\Cmf\Bundle\ContentBundle\Model\StaticContent',
-                    'property' => 'title',
-                    'label' => 'sylius.form.menu_node_block.content',
-                    'required' => false
+                'class' => 'Symfony\Cmf\Bundle\ContentBundle\Model\StaticContent',
+                'property' => 'title',
+                'label' => 'sylius.form.menu_node_block.content',
+                'required' => false
              ))
             ->add('uri', null, array(
                 'label' => 'sylius.form.menu_node_block.uri'
             ))
-//             ->add('routeParameters', null, array(
-//                     'required' => false,
-//                     'label'    => 'sylius.form.menu_node_block.route_parameters',
-//             ))
-//             ->add('childrenAttributes', null, array(
-//                     'required' => false,
-//                     'label'    => 'sylius.form.menu_node_block.children_attributes',
-//             ))
-//             ->add('linkAttributes', null, array(
-//                     'required' => false,
-//                     'label'    => 'sylius.form.menu_node_block.link_attributes',
-//             ))
-//             ->add('labelAttributes', null, array(
-//                     'required' => false,
-//                     'label'    => 'sylius.form.menu_node_block.label_attributes ',
-//             ))
             ;
 
     }
