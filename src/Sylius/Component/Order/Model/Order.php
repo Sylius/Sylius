@@ -424,8 +424,7 @@ class Order implements OrderInterface
                 continue;
             }
 
-            $adjustment->setAdjustable(null);
-            $this->adjustments->removeElement($adjustment);
+            $this->removeAdjustment($adjustment);
         }
 
         return $this;
