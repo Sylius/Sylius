@@ -314,7 +314,7 @@ sylius:
             email: Email
             password: Password
         menu:
-            add_children: Add children
+            add_menu_node: Add menu element
         option_value:
             add_value: Add value
         profile:
@@ -325,7 +325,7 @@ sylius:
             comment: Comment
             notify_customer: Notify Customer?
         slideshow:
-            add_children: Add children
+            add_slide: Add slide
     gallery:
         next: Next
         previous: Previous
