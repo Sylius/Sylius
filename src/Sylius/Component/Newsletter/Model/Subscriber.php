@@ -32,7 +32,7 @@ class Subscriber implements SubscriberInterface
     protected $email;
 
     /**
-     * @var Collection/SubscriptionList[]
+     * @var Collection/SubscriptionListInterface[]
      */
     protected $subscriptionLists;
 

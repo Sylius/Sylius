@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Newsletter\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -51,7 +52,7 @@ interface SubscriberInterface extends TimestampableInterface
     public function hasSubscriptionList(SubscriptionListInterface $subscriptionList);
 
     /**
-     * @return Collection/SubscriptionListInterface[] $subscriptionList
+     * @return Collection/SubscriptionListInterface[]
      */
     public function getSubscriptionLists();
 }

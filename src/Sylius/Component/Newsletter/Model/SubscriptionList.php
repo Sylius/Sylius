@@ -144,4 +144,8 @@ class SubscriptionList implements SubscriptionListInterface
     {
         return $this->subscribers;
     }
+
+    public function __toString() {
+        return $this->getName();
+    }
 }
