@@ -49,7 +49,11 @@ abstract class DiscountAction implements PromotionActionInterface
             );
         }
 
-        $subject->removeAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT);
+        foreach ($subject->getAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT) as $adjustment) {
+            if ($promotion  === $this->originator->getOrigin($adjustment)) {
+                $subject->removeAdjustment($adjustment);
+            }
+        }
     }
 
     protected function createAdjustment(PromotionInterface $promotion)

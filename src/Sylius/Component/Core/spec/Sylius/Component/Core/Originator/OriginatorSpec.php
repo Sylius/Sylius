@@ -36,12 +36,12 @@ class OriginatorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Core\Originator\OriginatorInterface');
     }
 
-    public function it_throw_exception_if_origin_is_not_an_object(OriginAwareInterface $originAware)
+    public function it_throws_exception_if_origin_is_not_an_object(OriginAwareInterface $originAware)
     {
         $this->shouldThrow('InvalidArgumentException')->duringSetOrigin($originAware, 'umpirsky');
     }
 
-    public function it_throw_exception_if_origin_have_no_id(OriginAwareInterface $originAware, PromotionInterface $promotion)
+    public function it_throws_exception_if_origin_has_no_id(OriginAwareInterface $originAware, PromotionInterface $promotion)
     {
         $this->shouldThrow('InvalidArgumentException')->duringSetOrigin($originAware, $promotion);
     }
