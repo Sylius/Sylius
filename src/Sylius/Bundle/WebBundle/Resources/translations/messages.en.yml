@@ -184,6 +184,10 @@ sylius:
             index: Shipping Categories
         shipping_method:
             index: Shipping Methods
+        subscriber:
+            index: Subscribers
+        subscription_list:
+            index: Subscription Lists
         tax_category:
             index: Tax Categories
         tax_rate:
@@ -743,6 +747,19 @@ sylius:
         on_hold: on hold
         sku: sku
         updated_at: last update
+    subscriber:
+        email: Email
+        create: Create Subscriber
+        index_header: Subscribers
+        create_header: Create Subscriber
+        update_header: Edit Subscriber
+    subscription_list:
+        name: Name
+        description: Description
+        create: Create Subscription List
+        index_header: Subscription Lists
+        create_header: Create Subscription List
+        update_header: Edit Subscription List
     tax_category:
         create: Create tax category
         create_header: New tax category

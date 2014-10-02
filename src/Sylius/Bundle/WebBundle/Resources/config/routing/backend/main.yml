@@ -132,6 +132,14 @@ sylius_backend_contact_request:
     resource: @SyliusWebBundle/Resources/config/routing/backend/contact_request.yml
     prefix: /contact-requests
 
+sylius_backend_subscriber:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/subscriber.yml
+    prefix: /subscribers
+
+sylius_backend_subscription_list:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/subscription_list.yml
+    prefix: /subscription-lists
+
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
     prefix: /settings

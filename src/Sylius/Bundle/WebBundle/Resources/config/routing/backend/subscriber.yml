@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_subscriber_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.subscriber:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Subscriber:index.html.twig
+            sortable: true
+            paginate: false
+
+sylius_backend_subscriber_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.subscriber:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Subscriber:create.html.twig
+            redirect: sylius_backend_subscriber_index
+
+sylius_backend_subscriber_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.subscriber:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Subscriber:update.html.twig
+            redirect: sylius_backend_subscriber_index
+
+sylius_backend_subscriber_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.subscriber:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_subscriber_index

@@ -1,0 +1,34 @@
+{% macro list(subscription_lists) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if subscription_lists|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('name', 'sylius.subscription_list.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('name', 'sylius.subscription_list.description'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for subscription_list in subscription_lists %}
+        <tr id="{{ subscription_list.id }}">
+            <td>{{ subscription_list.name }}</td>
+            <td>{{ subscription_list.description }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.edit(path('sylius_backend_subscription_list_update', {'id': subscription_list.id})) }}
+                {{ buttons.delete(path('sylius_backend_subscription_list_delete', {'id': subscription_list.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.subscription_list.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}
