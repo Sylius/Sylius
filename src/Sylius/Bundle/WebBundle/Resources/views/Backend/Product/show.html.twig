@@ -3,7 +3,7 @@
 {% from 'SyliusWebBundle:Backend/ProductVariant:macros.html.twig' import list as list_variants %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% from 'SyliusResourceBundle:Macros:labels.html.twig' import state_label %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -118,7 +118,7 @@
                 <tr>
                     <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
                     <td>
-                        {{ misc.state_label(product.masterVariant.availableOnDemand) }}
+                        {{ state_label(product.masterVariant.availableOnDemand) }}
                     </td>
                 </tr>
                 {% if product.restrictedZone %}
