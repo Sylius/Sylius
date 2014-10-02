@@ -33,6 +33,8 @@
         "sylius/addressing-bundle":       "0.11.*@dev",
         "sylius/api-bundle":              "0.11.*@dev",
         "sylius/cart-bundle":             "0.11.*@dev",
+        "sylius/contact-bundle":          "0.11.*@dev",
+        "sylius/content-bundle":          "0.11.*@dev",
         "sylius/flow-bundle":             "0.11.*@dev",
         "sylius/inventory-bundle":        "0.11.*@dev",
         "sylius/money-bundle":            "0.11.*@dev",
