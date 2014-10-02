@@ -18,7 +18,7 @@ Configuration reference
         # The availability checker service id.
         checker: sylius.availability_checker.default
         # The inventory operator service id.
-        operator: sylius_inventory.operator.default
+        operator: sylius.inventory_operator.default
         classes:
             inventory_unit:
                 model: Sylius\Component\Inventory\Model\InventoryUnit
