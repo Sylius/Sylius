@@ -28,5 +28,9 @@
             <argument>%sylius.validation_group.subscription_list%</argument>
             <tag name="form.type" alias="sylius_subscription_list"/>
         </service>
+        <service id="sylius.form.type.subscription_list_choice" class="%sylius.form.type.subscription_list_choice.class%">
+            <argument>%sylius.model.subscription_list.class%</argument>
+            <tag name="form.type" alias="sylius_subscription_list_choice" />
+        </service>
     </services>
 </container>

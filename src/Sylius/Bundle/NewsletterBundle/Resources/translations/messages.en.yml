@@ -2,6 +2,7 @@ sylius:
     form:
         subscriber:
             email: Email
+            subscription_lists: Subscription Lists
         subscription_list:
             name: Name
             description: Description

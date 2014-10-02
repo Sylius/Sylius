@@ -30,6 +30,10 @@ class SubscriberType extends AbstractResourceType
             ->add('email', 'email', array(
                 'label' => 'sylius.form.subscriber.email'
             ))
+            ->add('subscription_lists', 'sylius_subscription_list_choice', array(
+                'label'     => 'sylius.form.subscriber.subscription_lists',
+                'multiple'  => 'true',
+            ))
         ;
     }
 

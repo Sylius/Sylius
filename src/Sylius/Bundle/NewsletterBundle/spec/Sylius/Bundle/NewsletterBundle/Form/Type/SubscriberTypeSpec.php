@@ -42,6 +42,10 @@ class SubscriberTypeSpec extends ObjectBehavior
             ->add('email', 'email', Argument::any())
             ->willReturn($builder)
         ;
+        $builder
+            ->add('subscription_list', 'sylius_subscription_list_choice', Argument::any())
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }
