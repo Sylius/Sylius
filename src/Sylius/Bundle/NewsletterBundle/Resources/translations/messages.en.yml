@@ -1,7 +1,7 @@
 sylius:
     form:
-        newsletter_subscriber:
+        subscriber:
             email: Email
-        newsletter_subscription_list:
+        subscription_list:
             name: Name
             description: Description

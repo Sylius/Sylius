@@ -17,16 +17,16 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sylius.form.type.newsletter_subscriber" class="%sylius.form.type.newsletter_subscriber.class%">
-            <argument>%sylius.model.newsletter_subscriber.class%</argument>
-            <argument>%sylius.validation_group.newsletter_subscriber%</argument>
-            <tag name="form.type" alias="sylius_newsletter_subscriber"/>
+        <service id="sylius.form.type.subscriber" class="%sylius.form.type.subscriber.class%">
+            <argument>%sylius.model.subscriber.class%</argument>
+            <argument>%sylius.validation_group.subscriber%</argument>
+            <tag name="form.type" alias="sylius_subscriber"/>
         </service>
-        <service id="sylius.form.type.newsletter_subscription_list"
-                 class="%sylius.form.type.newsletter_subscription_list.class%">
-            <argument>%sylius.model.newsletter_subscription_list.class%</argument>
-            <argument>%sylius.validation_group.newsletter_subscription_list%</argument>
-            <tag name="form.type" alias="sylius_newsletter_subscription_list"/>
+        <service id="sylius.form.type.subscription_list"
+                 class="%sylius.form.type.subscription_list.class%">
+            <argument>%sylius.model.subscription_list.class%</argument>
+            <argument>%sylius.validation_group.subscription_list%</argument>
+            <tag name="form.type" alias="sylius_subscription_list"/>
         </service>
     </services>
 </container>

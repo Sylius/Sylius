@@ -28,10 +28,10 @@ class SubscriptionListType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.newsletter_subscription_list.name'
+                'label' => 'sylius.form.subscription_list.name'
             ))
             ->add('description', 'textarea', array(
-                'label' => 'sylius.form.newsletter_subscription_list.description'
+                'label' => 'sylius.form.subscription_list.description'
             ))
         ;
     }
@@ -41,6 +41,6 @@ class SubscriptionListType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_newsletter_subscription_list';
+        return 'sylius_subscription_list';
     }
 }

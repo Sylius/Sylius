@@ -45,8 +45,8 @@ class SyliusNewsletterBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Newsletter\Model\SubscriberInterface' => 'sylius.model.newsletter_subscriber.class',
-            'Sylius\Component\Newsletter\Model\SubscriptionListInterface' => 'sylius.model.newsletter_subscription_list.class',
+            'Sylius\Component\Newsletter\Model\SubscriberInterface' => 'sylius.model.subscriber.class',
+            'Sylius\Component\Newsletter\Model\SubscriptionListInterface' => 'sylius.model.subscription_list.class',
         );
     }
 

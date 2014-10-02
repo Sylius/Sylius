@@ -65,6 +65,6 @@ class SubscriptionListTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_newsletter_subscription_list');
+        $this->getName()->shouldReturn('sylius_subscription_list');
     }
 }

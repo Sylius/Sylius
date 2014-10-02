@@ -28,7 +28,7 @@ class SubscriberType extends AbstractResourceType
     {
         $builder
             ->add('email', 'email', array(
-                'label' => 'sylius.form.newsletter_subscriber.email'
+                'label' => 'sylius.form.subscriber.email'
             ))
         ;
     }
@@ -38,6 +38,6 @@ class SubscriberType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_newsletter_subscriber';
+        return 'sylius_subscriber';
     }
 }

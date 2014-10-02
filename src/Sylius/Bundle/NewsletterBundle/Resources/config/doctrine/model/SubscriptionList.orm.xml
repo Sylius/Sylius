@@ -22,8 +22,8 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="name" column="name" type="string"/>
-        <field name="description" column="description" type="string"/>
+        <field name="name" column="name" type="string" />
+        <field name="description" column="description" type="string" nullable="true" />
 
         <many-to-many field="subscribers" mapped-by="subscriptionLists"
                       target-entity="Sylius\Component\Newsletter\Model\Subscriber"/>
