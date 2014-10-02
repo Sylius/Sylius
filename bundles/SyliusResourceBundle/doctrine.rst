@@ -83,11 +83,14 @@ With this following mapping, Doctrine will create the table ``my_table`` with th
             </id>
 
             <field name="name" column="name" type="string" />
-        <mapped-superclass>
+        </mapped-superclass>
     </doctrine-mapping>
 
 If you want to add an extra field, you can create a new model which extends ``My/Bundle/Model`` and its doctrine mapping
 like that :
+
+
+.. code-block:: xml
 
     <!-- Resource/config/NewModel.orm.xml-->
 
@@ -95,7 +98,7 @@ like that :
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
         <entity name="My/OtherBundle/NewModel" table="my_new_table">
             <field name="description" column="name" type="string" />
-        <entity>
+        </entity>
     </doctrine-mapping>
 
 .. note::
