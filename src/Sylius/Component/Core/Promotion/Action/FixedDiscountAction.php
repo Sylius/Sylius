@@ -11,48 +11,20 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Core\Originator\OriginatorInterface;
 
 /**
  * Fixed discount action.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountAction implements PromotionActionInterface
+class FixedDiscountAction extends DiscountAction
 {
-    /**
-     * Adjustment repository.
-     *
-     * @var RepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * Originator, helps setting adjustment origin.
-     *
-     * @var OriginatorInterface
-     */
-    protected $originator;
-
-    /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository, OriginatorInterface $originator)
-    {
-        $this->repository = $repository;
-        $this->originator = $originator;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -65,29 +37,10 @@ class FixedDiscountAction implements PromotionActionInterface
             );
         }
 
-        $adjustment = $this->repository->createNew();
-
+        $adjustment = $this->createAdjustment($promotion);
         $adjustment->setAmount(-$configuration['amount']);
-        $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
-        $adjustment->setDescription($promotion->getDescription());
-        $this->originator->setOrigin($adjustment, $promotion);
 
         $subject->addAdjustment($adjustment);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
-    {
-        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
-            throw new UnexpectedTypeException(
-                $subject,
-                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
-            );
-        }
-
-        $subject->removeAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT);
     }
 
     /**

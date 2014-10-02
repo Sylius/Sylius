@@ -336,10 +336,12 @@
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="percentage_discount" label="Percentage discount" />
         </service>
         <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
+            <argument type="service" id="sylius.originator" />
             <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping discount" />
         </service>
         <service id="sylius.promotion_action.add_product" class="%sylius.promotion_action.add_product.class%">

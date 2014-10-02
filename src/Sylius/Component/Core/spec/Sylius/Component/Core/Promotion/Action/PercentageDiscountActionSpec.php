@@ -14,17 +14,19 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $adjustmentRepository)
+    function let(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator)
     {
-        $this->beConstructedWith($adjustmentRepository);
+        $this->beConstructedWith($adjustmentRepository, $originator);
     }
 
     function it_is_initializable()
@@ -39,6 +41,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
 
     function it_applies_percentage_discount_as_promotion_adjustment(
         $adjustmentRepository,
+        $originator,
         OrderInterface $order,
         AdjustmentInterface $adjustment,
         PromotionInterface $promotion
@@ -50,6 +53,9 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         $adjustment->setAmount(-2500)->shouldBeCalled();
         $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('promotion description')->shouldBeCalled();
+
+        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
+
         $order->addAdjustment($adjustment)->shouldBeCalled();
 
         $configuration = array('percentage' => 0.25);
