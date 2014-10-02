@@ -1,6 +1,3 @@
-'Slideshow Large (full width)': 'Slideshow Large (full width)'
-'Slideshow Medium (content)': 'Slideshow Medium (content)'
-'Slideshow Small (side)': 'Slideshow Small (side)'
 auto: auto
 route: route
 
@@ -12,6 +9,9 @@ sylius:
 
         imagine_block:
             internal_name: Internal name
+            slideshow_small: 'Slideshow Large (full width)'
+            slideshow_medium: 'Slideshow Medium (content)'
+            slideshow_large: 'Slideshow Small (side)'
 
         menu:
             childrens: Childrens

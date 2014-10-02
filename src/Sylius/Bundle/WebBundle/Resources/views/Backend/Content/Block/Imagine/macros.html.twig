@@ -10,7 +10,6 @@
             <tr>
                 <th>{{ 'sylius.block.imagine.id'|trans }}</th>
                 <th>{{ sylius_resource_sort('title', 'sylius.block.imagine.title'|trans) }}</th>
-{#                 <th>{{ sylius_resource_sort('updatedAt', 'sylius.block.imagine.updated_at'|trans) }}</th>#}
                 <th></th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             <tr id="{{ block.id }}">
                 <td><i>{{ block.id }}</i></td>
                 <td>{{ block.title | raw }}</td>
-{#                 <td>{{ block.updatedAt|date }}</td>#}
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_imagine_block_update', {'id': block.id})) }}

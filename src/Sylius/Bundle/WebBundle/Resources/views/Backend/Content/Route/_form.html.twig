@@ -3,10 +3,8 @@
 {% import 'SyliusWebBundle:Backend/Content/Form:forms.html.twig' as forms %}
 
 <fieldset>
-{#     {{ form_row(form.parent, {'attr': {'class': 'input-lg'}}) }}#}
     {{ forms.readonly(form.parent,form.parent.vars.value,'/cms/routes') }}
     {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-{#     {{ form_row(form.staticPrefix, {'attr': {'class': 'input-lg'}}) }}#}
     {{ form_row(form.content, {'attr': {'class': 'input-lg'}}) }}
 </fieldset>
 {{ form_widget(form._token) }}

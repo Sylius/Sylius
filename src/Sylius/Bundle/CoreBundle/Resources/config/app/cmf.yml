@@ -78,4 +78,4 @@ liip_imagine:
             format: jpg
             data_loader: cmf_media_doctrine_phpcr
             filters:
-                thumbnail: { size: [300, 150], mode: inset }            
+                thumbnail: { size: [300, 150], mode: inset }

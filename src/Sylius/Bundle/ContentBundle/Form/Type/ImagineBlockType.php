@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Menu block type.
+ * Imagine block type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
@@ -32,35 +32,22 @@ class ImagineBlockType extends AbstractResourceType
                 'label' => 'sylius.form.imagine_block.internal_name'
             ))
             ->add('label', 'text', array(
-                    'required' => false
+                'required' => false
             ))
             ->add('linkUrl', 'text', array(
-                    'required' => false
+                'required' => false
             ))
             ->add('filter', 'choice', array(
-                    'choices' => array(
-                            'slideshow_small' => 'Slideshow Small (side)',
-                            'slideshow_medium' => 'Slideshow Medium (content)',
-                            'slideshow_large' => 'Slideshow Large (full width)',
-                    ),
-                    'required' => false
+                'choices' => array(
+                        'slideshow_small'  => 'sylius.form.imagine_block.slideshow_small',
+                        'slideshow_medium' => 'sylius.form.imagine_block.slideshow_medium',
+                        'slideshow_large'  => 'sylius.form.imagine_block.slideshow_large',
+                ),
+                'required' => false
             ))
              ->add('image', 'cmf_media_image', array(
-                     'required' => false
+                'required' => false
              ))
-//             ->add('position', 'hidden', array(
-//                     'mapped' => false
-//             ))
-//             ->add('title', 'text', array(
-//                 'label' => 'sylius.form.imagine_block.title'
-//             ))
-//             ->add('children', 'collection', array(
-//                        'type'         => 'sylius_imagine_block',
-//                        'allow_add'    => true,
-//                        'allow_delete' => true,
-//                        'by_reference' => false,
-//                        'label'        => 'sylius.form.imagine_block.childrens'
-//              ))
             ;
 
     }
