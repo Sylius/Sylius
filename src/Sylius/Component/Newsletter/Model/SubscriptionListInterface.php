@@ -43,7 +43,7 @@ interface SubscriptionListInterface
     /**
      * @param string $description
      */
-    public function setDescription($description);
+    public function setDescription($description = null);
 
     /**
      * @param SubscriberInterface $subscriber

@@ -94,7 +94,7 @@ class SubscriptionList implements SubscriptionListInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription($description = null)
     {
         $this->description = $description;
 
