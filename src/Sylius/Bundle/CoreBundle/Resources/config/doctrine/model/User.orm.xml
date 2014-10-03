@@ -34,10 +34,10 @@
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="billing_address_id" />
+            <join-column name="billing_address_id" on-delete="SET NULL" />
         </one-to-one>
         <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="shipping_address_id" />
+            <join-column name="shipping_address_id"  on-delete="SET NULL" />
         </one-to-one>
 
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
