@@ -182,9 +182,9 @@ class Configuration
         if (is_array($redirect)) {
             if (!empty($redirect['referer_key'])) {
                 return 'referer';
-            } else {
-                return $redirect['route'];
             }
+            
+            return $redirect['route'];
         }
 
         return $redirect;
