@@ -54,7 +54,7 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
         }
 
         // The user must be assigned to order
-        if (null !== $user = $subject->getUser()) {
+        if (null === $user = $subject->getUser()) {
             return false;
         }
 
