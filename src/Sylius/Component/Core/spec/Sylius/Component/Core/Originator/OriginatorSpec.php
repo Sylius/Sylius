@@ -41,8 +41,10 @@ class OriginatorSpec extends ObjectBehavior
         $this->shouldThrow('InvalidArgumentException')->duringSetOrigin($originAware, 'umpirsky');
     }
 
-    public function it_throws_exception_if_origin_has_no_id(OriginAwareInterface $originAware, PromotionInterface $promotion)
+    public function it_throws_exception_if_origin_has_no_id(OriginAwareInterface $originAware, Promotion $promotion)
     {
+        $promotion->getId()->willReturn(null);
+
         $this->shouldThrow('InvalidArgumentException')->duringSetOrigin($originAware, $promotion);
     }
 
@@ -77,7 +79,7 @@ class OriginatorSpec extends ObjectBehavior
         $originAware->getOriginType()->willReturn('Sylius\Component\Promotion\Model\Promotion');
 
         $em->getRepository('Sylius\Component\Promotion\Model\Promotion')->shouldBeCalled()->willReturn($repository);
-        $repository->find(5)->shouldBeCalled()->willReturn($promotion);
+        $repository->findOneBy(array('id' => 5))->shouldBeCalled()->willReturn($promotion);
 
         $this->getOrigin($originAware)->shouldReturn($promotion);
     }

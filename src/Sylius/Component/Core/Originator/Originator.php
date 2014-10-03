@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Originator;
 
 use Sylius\Component\Core\Model\OriginAwareInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -20,11 +21,15 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class Originator implements OriginatorInterface
 {
-    private $em;
+    protected $em;
+    protected $accessor;
+    protected $identifier;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, $identifier = 'id')
     {
         $this->em = $em;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->identifier = $identifier;
     }
 
     public function getOrigin(OriginAwareInterface $originAware)
@@ -35,7 +40,9 @@ class Originator implements OriginatorInterface
 
         return $this->em
             ->getRepository($originAware->getOriginType())
-            ->find($originAware->getOriginId())
+            ->findOneBy(array(
+                $this->identifier => $originAware->getOriginId()
+            ))
         ;
     }
 
@@ -45,15 +52,15 @@ class Originator implements OriginatorInterface
             throw new UnexpectedTypeException($origin, 'object');
         }
 
-        if (!method_exists($origin, 'getId')) {
+        if (null === $id = $this->accessor->getValue($origin, $this->identifier)) {
             throw new \InvalidArgumentException(sprintf(
-                'Unable to get origin ID. %s->getId() method does not exist.',
-                get_class($origin)
+                'Origin %s is not set.',
+                $this->identifier
             ));
         }
 
         $originAware
-            ->setOriginId($origin->getId())
+            ->setOriginId($id)
             ->setOriginType(get_class($origin))
         ;
     }
