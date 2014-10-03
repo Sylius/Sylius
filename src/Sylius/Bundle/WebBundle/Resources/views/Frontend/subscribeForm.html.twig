@@ -1,0 +1,11 @@
+<form action="{{ path('sylius_subscribe') }}" method="post" class="form-horizontal" novalidate>
+
+    {{ form_errors(form) }}
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.subscription_lists) }}
+
+    <input type="submit" value="Subscribe" class="btn btn-primary" />
+
+    {{ form_rest(form) }}
+</form>

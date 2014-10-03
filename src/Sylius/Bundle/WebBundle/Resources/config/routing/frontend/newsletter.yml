@@ -1,0 +1,8 @@
+sylius_subscribe:
+    path: /subscribe
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.subscriber:createAction
+        _sylius:
+            redirect: sylius_homepage
+            template: SyliusWebBundle:Frontend:subscribe.html.twig

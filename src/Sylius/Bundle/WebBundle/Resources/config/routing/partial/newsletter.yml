@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_partial_subscribe_form:
+    path: /subscribe-form
+    defaults:
+        _controller: sylius.controller.subscriber:createAction
+        _sylius:
+            template: SyliusWebBundle:Frontend:subscribeForm.html.twig
