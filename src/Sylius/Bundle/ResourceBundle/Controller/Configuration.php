@@ -180,10 +180,40 @@ class Configuration
         }
 
         if (is_array($redirect)) {
-            return $redirect['route'];
+            if (!empty($redirect['referer_key'])) {
+                return 'referer';
+            } else {
+                return $redirect['route'];
+            }
         }
 
         return $redirect;
+    }
+
+    public function getRedirectHash()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (null === $redirect || !is_array($redirect) || empty($redirect['hash'])) {
+            return null;
+        }
+
+        return '#' . $redirect['hash'];
+    }
+
+    public function getRedirectReferer()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (!is_array($redirect)) {
+            return $this->request->headers->get('referer');
+        }
+
+        if (empty($redirect['referer_key'])) {
+            throw new \LogicException('Not found "referer_key".');
+        }
+
+        return $this->request->get($redirect['referer_key'], $this->request->headers->get('referer'));
     }
 
     /**
