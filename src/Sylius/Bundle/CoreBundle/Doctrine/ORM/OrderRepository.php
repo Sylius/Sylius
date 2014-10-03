@@ -199,6 +199,26 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function countByUserAndPaymentState(UserInterface $user, $state)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.paymentState = :state')
+            ->setParameter('user', $user)
+            ->setParameter('state', $state)
+        ;
+
+        return (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);

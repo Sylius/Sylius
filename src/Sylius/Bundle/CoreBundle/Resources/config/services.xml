@@ -316,6 +316,7 @@
         </service>
 
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
+            <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
         </service>
         <service id="sylius.promotion_rule_checker.user_loyalty" class="%sylius.promotion_rule_checker.user_loyalty.class%">
