@@ -94,3 +94,30 @@ sylius_backend_order_comment_create:
         _sylius:
             template: SyliusWebBundle:Backend/Order:createComment.html.twig
 
+sylius_backend_order_adjustment_index:
+    path: /{id}/adjustments
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:adjustments.html.twig
+
+sylius_backend_order_adjustment_lock:
+    path: /{id}/adjustment
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.adjustment:lockAction
+        _sylius:
+            redirect:
+                route: sylius_backend_order_adjustment_index
+                parameters: {'id': $id}
+
+sylius_backend_order_adjustment_delete:
+    path: /{orderId}/adjustment/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.adjustment:deleteAction
+        _sylius:
+            redirect:
+                route: sylius_backend_order_adjustment_index
+                parameters: {'id': $orderId}

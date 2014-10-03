@@ -128,6 +128,7 @@ class OrderSpec extends ObjectBehavior
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
 
+        $shippingAdjustment->isLocked()->willReturn(false);
         $shippingAdjustment->setAdjustable(null)->shouldBeCalled();
         $this->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
@@ -156,6 +157,7 @@ class OrderSpec extends ObjectBehavior
 
         $this->getAdjustments()->count()->shouldReturn(2); //both adjustments have been added
 
+        $taxAdjustment->isLocked()->willReturn(false);
         $taxAdjustment->setAdjustable(null)->shouldBeCalled();
         $this->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
 

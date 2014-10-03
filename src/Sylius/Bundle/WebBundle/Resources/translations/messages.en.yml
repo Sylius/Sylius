@@ -126,6 +126,7 @@ sylius:
             index: Options
         order:
             index: Orders
+            adjustments: Adjustments
         page:
             index: Static Pages
         payment:
@@ -410,7 +411,17 @@ sylius:
         state: State
         immutable_warning: Already shipped orders are immutable.
         promotion_coupons: Coupons
-        no_promotion: No coupons were used.
+        no_promotion: No coupons were used.order:
+        adjustments:
+            manage: Manage adjustments
+            label: Label
+            description: Description
+            amount: Amount
+            locked: Locked?
+            lock: Lock
+            unlock: Unlock
+            lock_all: Lock all adjustments
+            unlock_all: Unlock all adjustments
         comment:
             header: Order comments
             comment: Comment

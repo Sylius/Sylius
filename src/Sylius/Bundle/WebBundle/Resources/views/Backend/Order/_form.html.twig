@@ -2,6 +2,10 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+
 {{ form_errors(form) }}
 
 <div class="row">
@@ -115,10 +119,10 @@
     <tr class="taxes">
         <td colspan="3">
             <h5>{{ 'sylius.order.taxes'|trans }}</h5>
-            {% if order.getAdjustments('tax')|length > 0 %}
+            {% if not order.adjustments(taxAdjustment).isEmpty() %}
                 <ul class="list-unstyled">
-                    {% for taxAdjustment in order.getAdjustments('tax') %}
-                        <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
+                    {% for adjustment in order.adjustments(taxAdjustment) %}
+                        <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
             {% else %}
@@ -127,15 +131,15 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.order.tax_total'|trans }}</strong>:
-            <span class="amount">{{ order.getAdjustmentsTotal('tax')|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.adjustmentsTotal(taxAdjustment)|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr class="shipping-charges">
         <td colspan="3">
             <h5>{{ 'sylius.order.shipping_charges'|trans }}</h5>
-            {% if order.getAdjustments('shipping')|length > 0 %}
+            {% if not order.adjustments(shippingAdjustment).isEmpty() %}
                 <ul class="list-unstyled">
-                    {% for adjustment in order.getAdjustments('shipping') %}
+                    {% for adjustment in order.adjustments(shippingAdjustment) %}
                         <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
@@ -145,15 +149,15 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>:
-            <span class="amount">{{ order.getAdjustmentsTotal('shipping')|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr class="promotion-discount">
         <td colspan="3">
             <h5>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</h5>
-            {% if order.getAdjustments('promotion')|length > 0 %}
+            {% if not order.adjustments(promotionAdjustment).isEmpty() %}
                 <ul class="list-unstyled">
-                    {% for adjustment in order.getAdjustments('promotion') %}
+                    {% for adjustment in order.adjustments(promotionAdjustment) %}
                         <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }} </li>
                     {% endfor %}
                 </ul>
@@ -163,9 +167,19 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>:
-            <span class="amount">{{ order.getAdjustmentsTotal('promotion')|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.adjustmentsTotal(promotionAdjustment)|sylius_price(order.currency) }}</span>
         </td>
     </tr>
+    {% if not order.adjustments.isEmpty() %}
+        <tr>
+            <td class="text-right" colspan="6">
+                <a href="{{ path('sylius_backend_order_adjustment_index', {'id': order.id}) }}" class="btn btn-info">
+                    <i class="glyphicon glyphicon-tasks"></i>
+                    {{ 'sylius.order.adjustments.manage'|trans }}
+                </a>
+            </td>
+        </tr>
+    {% endif %}
     <tr>
         <td class="text-right active text-success lead" colspan="6">
             <strong>{{ 'sylius.order.total'|trans }}</strong>:

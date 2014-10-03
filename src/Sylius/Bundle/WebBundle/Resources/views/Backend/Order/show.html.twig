@@ -181,6 +181,16 @@
                 <span class="amount">{{ order.adjustmentsTotal(promotionAdjustment)|sylius_price(order.currency) }}</span>
             </td>
         </tr>
+        {% if not order.adjustments().isEmpty() %}
+        <tr>
+            <td class="text-right" colspan="6">
+                <a href="{{ path('sylius_backend_order_adjustment_index', {'id': order.id}) }}" class="btn btn-info">
+                    <i class="glyphicon glyphicon-tasks"></i>
+                    {{ 'sylius.order.adjustments.manage'|trans }}
+                </a>
+            </td>
+        </tr>
+        {% endif %}
         <tr>
             <td class="text-right active text-success lead" colspan="6">
                 <strong>{{ 'sylius.order.total'|trans }}</strong>:
