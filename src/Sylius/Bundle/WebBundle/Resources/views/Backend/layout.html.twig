@@ -30,7 +30,7 @@
     <body>
         {% include 'SyliusWebBundle:Backend:_navbar.html.twig' %}
         <div class="row main-container">
-            <div class="col-md-2 hidden-sm hidden-xs">
+            <div class="col-md-1 col-lg-2 hidden-sm hidden-xs">
                 {% block sidebar %}
                 <div id="sidebar">
                     <div class="sidebar-nav">
@@ -39,29 +39,31 @@
                 </div>
                 {% endblock %}
             </div>
-            <div class="col-md-10">
+
+            <div class="col-md-11 col-lg-10">
                 <div id="topbar">
                     {% block topbar %}
                     {% include 'SyliusWebBundle:Backend:_breadcrumb.html.twig' %}
                     {% endblock %}
                 </div>
+
                 <div id="content">
-                {% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
+                    {% include 'SyliusWebBundle:Backend:_flashes.html.twig' %}
 
-                {% block content %}
-                {% endblock %}
+                    {% block content %}
+                    {% endblock %}
 
-                <hr>
+                    <hr>
 
-                {# Gallery modal #}
-                {% include 'SyliusWebBundle::gallery.html.twig' %}
+                    {# Gallery modal #}
+                    {% include 'SyliusWebBundle::gallery.html.twig' %}
 
-                {# Confirmation modal #}
-                {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
+                    {# Confirmation modal #}
+                    {% include 'SyliusWebBundle::confirm-modal.html.twig' %}
 
-                <footer>
-                    <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
-                </footer>
+                    <footer>
+                        <p>&copy; <a href="http://Sylius.org">Sylius</a>, 2011 - {{ 'now'|date('Y') }}.</p>
+                    </footer>
                 </div>
             </div>
         </div>

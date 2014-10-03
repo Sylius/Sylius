@@ -80,7 +80,7 @@ sylius:
             products: Your products
             users: Users
         statistics:
-            0: This month's statistics
+            header: This month's statistics
             orders_this_month: Total orders
             registrations_this_month: Total registrations
             sales_this_month: Sales
