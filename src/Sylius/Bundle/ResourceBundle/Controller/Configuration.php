@@ -180,7 +180,7 @@ class Configuration
         }
 
         if (is_array($redirect)) {
-            if (!empty($redirect['referer_key'])) {
+            if (!empty($redirect['referer'])) {
                 return 'referer';
             }
             
@@ -209,11 +209,15 @@ class Configuration
             return $this->request->headers->get('referer');
         }
 
-        if (empty($redirect['referer_key'])) {
-            throw new \LogicException('Not found "referer_key".');
+        if (empty($redirect['referer'])) {
+            throw new \LogicException('Not found "referer key".');
         }
 
-        return $this->request->get($redirect['referer_key'], $this->request->headers->get('referer'));
+        if ($redirect['referer'] === true) {
+            return $this->request->headers->get('referer');
+        }
+
+        return $this->request->get($redirect['referer'], $this->request->headers->get('referer'));
     }
 
     /**
