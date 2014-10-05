@@ -67,6 +67,12 @@ abstract class AbstractCalculator
             return true;
         }
 
-        return !!count(array_filter(array_keys($configuration), 'is_string'));
+        foreach($configuration as $key => $value) {
+            if (!is_numeric($key)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
