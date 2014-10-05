@@ -57,4 +57,16 @@ abstract class AbstractCalculator
 
         return $price;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid(array $configuration)
+    {
+        if (empty($configuration)) {
+            return true;
+        }
+
+        return !!count(array_filter(array_keys($configuration), 'is_string'));
+    }
 }
