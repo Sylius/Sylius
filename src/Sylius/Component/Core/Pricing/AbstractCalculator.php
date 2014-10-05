@@ -67,7 +67,7 @@ abstract class AbstractCalculator
             return true;
         }
 
-        foreach($configuration as $key => $value) {
+        foreach(array_keys($configuration) as $key) {
             if (!is_numeric($key)) {
                 return false;
             }
