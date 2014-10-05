@@ -89,8 +89,8 @@ class Subscriber implements SubscriberInterface
         if ($this->hasSubscriptionList($subscriptionList)) {
             return $this;
         }
-        $subscriptionList->addSubscriber($this);
         $this->subscriptionLists->add($subscriptionList);
+        $subscriptionList->addSubscriber($this);
 
         return $this;
     }
@@ -101,8 +101,8 @@ class Subscriber implements SubscriberInterface
     public function removeSubscriptionList(SubscriptionListInterface $subscriptionList)
     {
         if ($this->hasSubscriptionList($subscriptionList)) {
-            $subscriptionList->removeSubscriber($this);
             $this->subscriptionLists->removeElement($subscriptionList);
+            $subscriptionList->removeSubscriber($this);
         }
 
         return $this;
