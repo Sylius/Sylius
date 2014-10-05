@@ -47,4 +47,18 @@ class VolumeBasedCalculator implements CalculatorInterface
     {
         return Calculators::VOLUME_BASED;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid(array $configuration)
+    {
+        foreach ($configuration as $range) {
+            if (!is_array($range) || !empty(array_diff(array_keys($range), array('min', 'max', 'price')))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
