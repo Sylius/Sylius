@@ -54,7 +54,13 @@ class VolumeBasedCalculator implements CalculatorInterface
     public function isValid(array $configuration)
     {
         foreach ($configuration as $range) {
-            if (!is_array($range) || !empty(array_diff(array_keys($range), array('min', 'max', 'price')))) {
+            if (!is_array($range)) {
+                return false;
+            }
+
+            $diff = array_diff(array_keys($range), array('min', 'max', 'price'));
+
+            if (!empty($diff)) {
                 return false;
             }
         }
