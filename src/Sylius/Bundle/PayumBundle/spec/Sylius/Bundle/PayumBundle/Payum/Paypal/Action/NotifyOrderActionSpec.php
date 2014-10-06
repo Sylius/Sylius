@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Core\PaymentInterface;
-use Payum\Core\Request\ModelRequestInterface;
-use Payum\Core\Request\SecuredNotifyRequest;
+use Payum\Core\Request\ModelAwareInterface;
+use Payum\Core\Request\SecuredNotify;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
@@ -49,7 +49,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
     }
 
     function it_should_supports_secured_notify_request_with_order_model(
-        SecuredNotifyRequest $request,
+        SecuredNotify $request,
         PaymentModelInterface $payment
     ) {
         $request->getModel()->willReturn($payment);
@@ -57,12 +57,12 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $this->supports($request)->shouldReturn(true);
     }
 
-    function it_should_support_only_secured_request(ModelRequestInterface $request)
+    function it_should_support_only_secured_request(ModelAwareInterface $request)
     {
         $this->supports($request)->shouldReturn(false);
     }
 
-    function it_should_not_support_notify_request_with_not_payment_model(SecuredNotifyRequest $request)
+    function it_should_not_support_notify_request_with_not_payment_model(SecuredNotify $request)
     {
         $request->getModel()->willReturn(new \stdClass);
 
@@ -84,7 +84,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
     function it_must_not_dispatch_pre_and_post_payment_state_changed_if_state_not_changed(
         $factory,
-        SecuredNotifyRequest $request,
+        SecuredNotify $request,
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
@@ -101,10 +101,10 @@ class NotifyOrderActionSpec extends ObjectBehavior
         $sm->getTransitionToState('completed')->willReturn(null);
         $sm->apply(PaymentTransitions::SYLIUS_COMPLETE)->shouldNotBeCalled();
 
-        $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
+        $payment->execute(Argument::type('Payum\Core\Request\Sync'))->willReturn(null);
 
         $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
             ->will(function ($args) {
                 $args[0]->markSuccess();
             }
@@ -115,7 +115,7 @@ class NotifyOrderActionSpec extends ObjectBehavior
 
     function it_must_dispatch_pre_and_post_payment_state_changed_if_state_changed(
         $factory,
-        SecuredNotifyRequest $request,
+        SecuredNotify $request,
         OrderInterface $order,
         PaymentModelInterface $paymentModel,
         PaymentInterface $payment,
@@ -135,10 +135,10 @@ class NotifyOrderActionSpec extends ObjectBehavior
             $paymentModel->getState()->willReturn(Payment::STATE_CANCELLED);
         });
 
-        $payment->execute(Argument::type('Payum\Core\Request\SyncRequest'))->willReturn(null);
+        $payment->execute(Argument::type('Payum\Core\Request\Sync'))->willReturn(null);
 
         $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
             ->will(function ($args) {
                 $args[0]->markCanceled();
             }

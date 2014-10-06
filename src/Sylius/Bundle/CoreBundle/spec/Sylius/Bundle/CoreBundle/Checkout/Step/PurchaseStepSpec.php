@@ -106,7 +106,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $order->addPayment($paymentModel);
 
         $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markSuccess();
                 $args[0]->setModel($paymentModel);
@@ -158,7 +158,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $order->addPayment($paymentModel);
 
         $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
             ->will(function ($args) use ($order, $paymentModel) {
                 $args[0]->markSuccess();
                 $args[0]->setModel($paymentModel);
