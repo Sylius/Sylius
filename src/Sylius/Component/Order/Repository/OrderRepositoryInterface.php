@@ -30,4 +30,13 @@ interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepos
      * @return OrderInterface[]
      */
     public function findRecentOrders($amount = 10);
+
+    /**
+     * Was that order number already used?
+     *
+     * @param int|string $number
+     *
+     * @return bool
+     */
+    public function isNumberUsed($number);
 }

@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Promotion\Checker;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
@@ -22,9 +22,23 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * Checks if users order is the nth one.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class NthOrderRuleChecker implements RuleCheckerInterface
 {
+    /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
+    /**
+     * @param OrderRepositoryInterface $orderRepository
+     */
+    public function __construct(OrderRepositoryInterface $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +52,7 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $this->hasEligibleOrders($configuration['nth'], $user->getOrders());
+        return $this->orderRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED) === $configuration['nth'];
     }
 
     /**
@@ -47,19 +61,5 @@ class NthOrderRuleChecker implements RuleCheckerInterface
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_rule_nth_order_configuration';
-    }
-
-    private function hasEligibleOrders($count, Collection $orders)
-    {
-        if ($orders->isEmpty()) {
-            return false;
-        }
-
-        $orders = $orders->filter(function ($order) {
-            /** @var $order OrderInterface */
-            return PaymentInterface::STATE_COMPLETED === $order->getPaymentState();
-        });
-
-        return $orders->count() === $count;
     }
 }
