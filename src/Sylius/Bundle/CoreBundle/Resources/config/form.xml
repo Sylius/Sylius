@@ -41,6 +41,8 @@
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
+
+        <parameter key="sylius.form.type.settings.currency_choice.class">Sylius\Bundle\CoreBundle\Form\Type\CurrencyChoiceType</parameter>
     </parameters>
 
     <services>
@@ -146,6 +148,12 @@
             <argument type="service" id="sylius.repository.zone" />
             <tag name="form.type" alias="sylius_price_calculator_zone_based" />
         </service>
+
+        <service id="sylius.form.type.settings.currency_choice" class="%sylius.form.type.settings.currency_choice.class%">
+            <argument type="service" id="sylius.repository.currency" />
+            <tag name="form.type" alias="sylius_currency_choice" />
+        </service>
+    </services>
     </services>
 
 </container>
