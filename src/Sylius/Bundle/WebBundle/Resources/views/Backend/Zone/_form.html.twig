@@ -20,7 +20,7 @@
                                 {% if member.offsetExists(form.type.vars.value) %}
                                     <div class="sylius-zone-members-{{ form.type.vars.value }} row" style="margin-bottom: 10px;">
                                         <div class="col-md-11">
-                                            {{ form_widget(member[form.type.vars.value], {'attr': {'class': 'select2 float-right input-large'}}) }}
+                                            {{ form_widget(member, {'attr': {'class': 'select2 float-right input-large'}}) }}
                                         </div>
                                         <div class="col-md-1">
                                             <a href="#" class="btn btn-danger float-left" data-collection-button="delete" data-collection="sylius-zone-members" data-collection-item="{{ form.type.vars.value }}"><i class="glyphicon glyphicon-trash icon-white"></i></a>

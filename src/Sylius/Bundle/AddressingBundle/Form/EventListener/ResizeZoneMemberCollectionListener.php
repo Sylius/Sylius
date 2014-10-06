@@ -100,7 +100,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      *
      * @throws UnexpectedTypeException
      */
-    public function preBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
         if (null === $data || '' === $data) {
