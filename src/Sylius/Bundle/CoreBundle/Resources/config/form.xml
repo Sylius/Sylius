@@ -150,7 +150,7 @@
         </service>
 
         <service id="sylius.form.type.currency_choice" class="%sylius.form.type.currency_choice.class%">
-            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.currency_provider" />
             <tag name="form.type" alias="sylius_currency_choice" />
         </service>
     </services>
