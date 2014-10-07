@@ -97,6 +97,8 @@ sylius:
         updated_at: Last update
         simple_blocks: Simple blocks
         string_blocks: String blocks
+        imagine_blocks: Imagine blocks
+        slideshow_blocks: Slideshow blocks
         imagine:
             create: Create imagine block
             create_header: Creating a new imagine block

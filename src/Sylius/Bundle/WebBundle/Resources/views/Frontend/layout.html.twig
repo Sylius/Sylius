@@ -80,8 +80,9 @@
                 {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
                 {{ sonata_block_render({'name': '/cms/blocks/contact'}) }}
+                {{ sonata_block_render({'name': '/cms/blocks/banner'}) }}
                 {% block slideshow_sidebar %}{% endblock %}
-                
+
                     <h2>Links</h2>
                     <ul>
                     {% for child in cmf_children(cmf_find('/cms/pages')) %}
@@ -93,6 +94,7 @@
                 {% endblock %}
             </div>
             <div class="col-md-9">
+                {{ sonata_block_render({'name': '/cms/blocks/slideshow-test'}) }}
                 {% block content %}
                 {% endblock %}
             </div>
