@@ -8,6 +8,7 @@ sylius:
             id: Id
 
         imagine_block:
+            parent: Parent
             internal_name: Internal name
             slideshow_small: 'Slideshow Large (full width)'
             slideshow_medium: 'Slideshow Medium (content)'

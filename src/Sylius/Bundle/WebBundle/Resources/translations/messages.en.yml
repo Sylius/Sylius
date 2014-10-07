@@ -103,7 +103,7 @@ sylius:
             id: Id
             index: Imagine Blocks
             index_header: Imagine blocks
-            title: Title
+            label: Label
             update_header: Editing imagine block
         slideshow:
             create: Create slideshow block

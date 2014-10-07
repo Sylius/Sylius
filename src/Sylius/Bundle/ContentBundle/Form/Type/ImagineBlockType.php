@@ -28,6 +28,9 @@ class ImagineBlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('parentDocument', null, array(
+                'label' => 'sylius.form.imagine_block.parent'
+            ))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.imagine_block.internal_name'
             ))
@@ -45,10 +48,10 @@ class ImagineBlockType extends AbstractResourceType
                 ),
                 'required' => false
             ))
-             ->add('image', 'cmf_media_image', array(
+            ->add('image', 'cmf_media_image', array(
                 'required' => false
-             ))
-            ;
+            ))
+        ;
 
     }
 
