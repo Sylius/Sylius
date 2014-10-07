@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Form\AbstractType;
