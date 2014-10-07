@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
  */
 class TaxonQuery extends Query
 {
-
     /**
      * @var Taxon
      */
@@ -28,9 +27,13 @@ class TaxonQuery extends Query
      * @param TaxonInterface $taxon
      * @param                $appliedFilters
      */
-    public function __construct(TaxonInterface $taxon, $appliedFilters)
+    public function __construct(TaxonInterface $taxon, $appliedFilters = array())
     {
-        $this->setAppliedFilters($appliedFilters);
+        if (! is_array($appliedFilters)) {
+            $appliedFilters = array();
+        }
+
+        $this->appliedFilters = $appliedFilters;
         $this->taxon = $taxon;
     }
 

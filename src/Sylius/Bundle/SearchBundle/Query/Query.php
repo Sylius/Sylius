@@ -22,6 +22,14 @@ class Query
     protected $appliedFilters;
 
     /**
+     * 
+     */
+    public function __construct()
+    {
+        $this->appliedFilters = array();
+    }
+
+    /**
      * @param $appliedFilters
      */
     public function setAppliedFilters($appliedFilters)

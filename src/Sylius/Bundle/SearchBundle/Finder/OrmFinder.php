@@ -174,7 +174,7 @@ class OrmFinder implements FinderInterface
             $this->initializeFacetGroup($this->facetGroup);
         }
 
-        // first get ALL products from the taxon to get their ids
+        // First get ALL products from the taxon to get their ids
         $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array());
 
         $ids = array();
@@ -182,8 +182,7 @@ class OrmFinder implements FinderInterface
             $ids[] = $product->getId();
         }
 
-        // now apply any filtered facets to reduce the available products
-        $result       = array();
+        // Now apply any filtered facets to reduce the available products
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags, u.entity')
@@ -191,30 +190,27 @@ class OrmFinder implements FinderInterface
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
 
-        $res = $queryBuilder->getQuery()->getResult();
+        $indexedItems = $queryBuilder->getQuery()->getResult();
 
-        $model = $res[0]['entity'];
+        // TODO: Need to configure / refactor this default!
+        $entityName = "Product";
 
-        foreach ($res as $facet) {
-            $result[$facet['itemId']] = $facet['tags'];
+        $facetsArray = array();
+
+        if ($indexedItems) {
+            $entityName = $indexedItems[0]['entity'];
         }
 
-        $appliedFilters = $query->getAppliedFilters();
-        if (!$appliedFilters) {
-            $appliedFilters = array();
+        list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($query->getAppliedFilters(), $ids, $entityName);
+
+        if (isset($this->facetGroup) && $indexedItems) {
+            foreach ($indexedItems as $item) {
+                $facetsArray[$item['itemId']] = $item['tags'];
+            }
+            $this->facets = $this->calculateNewFacets($facetsArray, $facetFilteredIds);
         }
 
-        list($facetFilteredIds, $idsFromAllFacets) = $this->getFilteredIds($appliedFilters, $ids, $model);
-
-        $facets = null;
-        if (isset($this->facetGroup)) {
-            $facets = $this->calculateNewFacets($result, $facetFilteredIds);
-        }
-
-        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets));
-
-        $this->facets = $facets;
-        $this->paginator = $paginator;
+        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets));
         $this->filters = $query->getAppliedFilters();
 
         return $this;

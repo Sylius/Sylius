@@ -67,7 +67,7 @@ class ProductController extends ResourceController
          */
         $finder = $this->get('sylius_search.finder')
             ->setFacetGroup('categories_set')
-            ->find(new TaxonQuery($taxon, $request->query->get('filters')));
+            ->find(new TaxonQuery($taxon, $request->query->get('filters', array())));
 
         $config = $this->container->getParameter("sylius_search.config");
 
