@@ -42,7 +42,7 @@ class CurrencyChoiceType extends AbstractType
         $choices = null;
 
         /** @var CurrencyInterface $currency */
-        foreach($this->currencyRepository->findAll() as $currency) {
+        foreach($this->currencyRepository->findBy(array('enabled' => true)) as $currency) {
             $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
         }
 
