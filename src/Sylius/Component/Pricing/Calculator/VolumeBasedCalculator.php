@@ -17,6 +17,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  * Volume based pricing calculator.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Liverbool <liverbool@gmail.com>
  */
 class VolumeBasedCalculator implements CalculatorInterface
 {
@@ -46,5 +47,25 @@ class VolumeBasedCalculator implements CalculatorInterface
     public function getType()
     {
         return Calculators::VOLUME_BASED;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid(array $configuration)
+    {
+        foreach ($configuration as $range) {
+            if (!is_array($range)) {
+                return false;
+            }
+
+            $diff = array_diff(array_keys($range), array('min', 'max', 'price'));
+
+            if (!empty($diff)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

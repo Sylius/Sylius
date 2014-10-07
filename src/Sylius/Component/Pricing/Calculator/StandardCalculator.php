@@ -17,6 +17,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  * Standard pricing calculator.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Liverbool <liverbool@gmail.com>
  */
 class StandardCalculator implements CalculatorInterface
 {
@@ -34,5 +35,13 @@ class StandardCalculator implements CalculatorInterface
     public function getType()
     {
         return Calculators::STANDARD;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid(array $configuration)
+    {
+        return true;
     }
 }
