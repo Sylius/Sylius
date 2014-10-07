@@ -4,11 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< Upstream, based on master
-    "hash": "5ccdf51f26190addaa3e19007b80c7c7",
-=======
-    "hash": "bb544a40ff3dee1a0907a40f7f944b6b",
->>>>>>> c82e4a2 Latest fix for ContentBundle
+    "hash": "74b91328cf1144bd4dd96654435e84c7",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
