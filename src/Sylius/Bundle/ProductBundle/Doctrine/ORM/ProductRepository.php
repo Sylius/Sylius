@@ -12,14 +12,23 @@
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
 /**
  * Default product repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductRepository extends EntityRepository
+class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatest($limit = 10)
+    {
+        return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
+    }
+
     /**
      * {@inheritdoc}
      */
