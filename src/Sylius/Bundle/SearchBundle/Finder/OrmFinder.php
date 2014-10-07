@@ -72,7 +72,7 @@ class OrmFinder implements FinderInterface
     /**
      * @var
      */
-    private $targetIndex;
+    private $targetType = [];
 
     /**
      * @param                      $searchRepository
@@ -115,13 +115,13 @@ class OrmFinder implements FinderInterface
     }
 
     /**
-     * @param $targetIndex
+     * @param $targetType
      *
      * @return $this
      */
-    public function setTargetIndex($targetIndex)
+    public function addTargetType($targetType)
     {
-        $this->targetIndex = $targetIndex;
+        $this->targetType[] = $targetType;
 
         return $this;
     }
@@ -511,8 +511,10 @@ class OrmFinder implements FinderInterface
         $elements = array();
         foreach ($results as $result) {
 
-            if (isset($this->targetIndex) && $result['entity'] != $this->config['orm_indexes'][$this->targetIndex]['class']) {
-                continue;
+            foreach ($this->targetType as $type) {
+                if ($result['entity'] != $this->config['orm_indexes'][$type]['class']) {
+                    continue;
+                }
             }
 
             $elements[$result['entity']][$result['itemId']] = $result['tags'];

@@ -32,8 +32,19 @@ class SearchController extends ResourceController
      */
     public function indexAction(Request $request)
     {
+        /**
+         * when using elastic search if you want to setup multiple indexes and control
+         * them separately you can do so by adding the index service with a setter
+         *
+         * ->setTargetIndex($this->get('fos_elastica.index.my_own_index'))
+         *
+         * where my_own_index is the index name used in the configuration
+         * fos_elastica:
+         *      indexes:
+         *          my_own_index:
+         */
         $finder = $this->get('sylius_search.finder')
-            ->setTargetIndex('product')
+            ->addTargetType('product')
             ->setFacetGroup('search_set')
             ->find(new SearchStringQuery(
                     $request,

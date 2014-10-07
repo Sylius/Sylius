@@ -43,11 +43,6 @@ class ElasticsearchFinder implements FinderInterface
     /**
      * @var
      */
-    private $syliusIndex;
-
-    /**
-     * @var
-     */
     private $queryLogger;
 
     /**
@@ -76,18 +71,23 @@ class ElasticsearchFinder implements FinderInterface
     private $targetIndex;
 
     /**
-     * @param                      $searchRepository
-     * @param                      $config
-     * @param                      $productRepository
-     * @param                      $syliusIndex
+     * @var
+     */
+    private $targetTypes = [];
+
+    /**
+     * @param SearchIndexRepository $searchRepository
+     * @param $config
+     * @param $productRepository
+     * @param $targetIndex
      * @param QueryLoggerInterface $queryLogger
      */
-    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, $syliusIndex, QueryLoggerInterface $queryLogger)
+    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, $targetIndex, QueryLoggerInterface $queryLogger)
     {
         $this->searchRepository = $searchRepository;
         $this->config = $config;
         $this->productRepository = $productRepository;
-        $this->syliusIndex = $syliusIndex;
+        $this->targetIndex = $targetIndex;
         $this->queryLogger = $queryLogger;
     }
 
@@ -123,6 +123,17 @@ class ElasticsearchFinder implements FinderInterface
     public function setTargetIndex($targetIndex)
     {
         $this->targetIndex = $targetIndex;
+
+        return $this;
+    }
+
+    /**
+     * @param $targetType
+     * @return $this
+     */
+    public function addTargetType($targetType)
+    {
+        $this->targetTypes[] = $targetType;
 
         return $this;
     }
@@ -177,8 +188,8 @@ class ElasticsearchFinder implements FinderInterface
 
         $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), 'product');
 
-        $objects = $this->syliusIndex->search($elasticaQuery);
-        $mapping = $this->syliusIndex->getMapping();
+        $objects = $this->targetIndex->search($elasticaQuery);
+        $mapping = $this->targetIndex->getMapping();
 
         $facets = null;
         if (isset($this->facetGroup)) {
@@ -215,11 +226,13 @@ class ElasticsearchFinder implements FinderInterface
             $query->getAppliedFilters(),
             $this->config,
             $query->getSearchParam(),
-            $this->targetIndex
+            $this->targetTypes
         );
 
-        $objects = $this->syliusIndex->search($elasticaQuery);
-        $mapping = $this->syliusIndex->getMapping();
+        $elasticaQuery->setSize(550);
+
+        $objects = $this->targetIndex->search($elasticaQuery);
+        $mapping = $this->targetIndex->getMapping();
 
         $facets = null;
         if (isset($this->facetGroup)) {
@@ -279,19 +292,22 @@ class ElasticsearchFinder implements FinderInterface
      * @param null $appliedFilters
      * @param      $configuration
      * @param      $preSearchTaxonFilter
-     * @param      $type
+     * @param      $types
      *
      * @return mixed
      */
-    public function compileElasticSearchStringQuery($searchTerm, $appliedFilters = null, $configuration, $preSearchTaxonFilter, $type = null)
+    public function compileElasticSearchStringQuery($searchTerm, $appliedFilters = null, $configuration, $preSearchTaxonFilter, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter    = new \Elastica\Filter\Bool();
         $query = new \Elastica\Query\QueryString($searchTerm);
 
-        if ($type) {
-            $typeFilter = new \Elastica\Filter\Type($type);
-            $boolFilter->addMust($typeFilter);
+        if (!empty($types)) {
+
+            foreach ($types as $type) {
+                $typeFilter = new \Elastica\Filter\Type($type);
+                $boolFilter->addMust($typeFilter);
+            }
             $elasticaQuery->setFilter($boolFilter);
         }
 
