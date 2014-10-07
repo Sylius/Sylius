@@ -35,4 +35,12 @@ class StandardCalculator implements CalculatorInterface
     {
         return Calculators::STANDARD;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid(array $configuration)
+    {
+        return true;
+    }
 }

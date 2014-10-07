@@ -180,10 +180,44 @@ class Configuration
         }
 
         if (is_array($redirect)) {
+            if (!empty($redirect['referer'])) {
+                return 'referer';
+            }
+            
             return $redirect['route'];
         }
 
         return $redirect;
+    }
+
+    public function getRedirectHash()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (null === $redirect || !is_array($redirect) || empty($redirect['hash'])) {
+            return null;
+        }
+
+        return '#' . $redirect['hash'];
+    }
+
+    public function getRedirectReferer()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (!is_array($redirect)) {
+            return $this->request->headers->get('referer');
+        }
+
+        if (empty($redirect['referer'])) {
+            throw new \LogicException('Not found "referer key".');
+        }
+
+        if ($redirect['referer'] === true) {
+            return $this->request->headers->get('referer');
+        }
+
+        return $this->request->get($redirect['referer'], $this->request->headers->get('referer'));
     }
 
     /**
@@ -195,7 +229,7 @@ class Configuration
     {
         $redirect = $this->parameters->get('redirect');
 
-        if (null === $redirect || !is_array($redirect)) {
+        if (null === $redirect || !is_array($redirect) || empty($redirect['parameters'])) {
             $redirect = array('parameters' => array());
         }
 

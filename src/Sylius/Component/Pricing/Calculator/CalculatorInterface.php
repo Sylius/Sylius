@@ -37,4 +37,12 @@ interface CalculatorInterface
      * @return string
      */
     public function getType();
+
+    /**
+     * Check valid configuration
+     *
+     * @param array $configuration
+     * @return bool
+     */
+    public function isValid(array $configuration);
 }

@@ -89,6 +89,10 @@ class BuildPriceableFormListener implements EventSubscriberInterface
     {
         $calculator = $this->calculatorRegistry->get($calculatorType);
         $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
+        
+        if (!$calculator->isValid($data)) {
+            $data = array();
+        }
 
         try {
             $configurationField = $this->factory->createNamed('pricingConfiguration', $formType, $data, array('auto_initialize' => false));
