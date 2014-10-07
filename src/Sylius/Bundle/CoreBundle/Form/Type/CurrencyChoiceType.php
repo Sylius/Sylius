@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -40,15 +41,14 @@ class CurrencyChoiceType extends AbstractType
     {
         $choices = null;
 
-        /** @var \Sylius\Component\Currency\Model\CurrencyInterface $currency */
+        /** @var CurrencyInterface $currency */
         foreach($this->currencyRepository->findAll() as $currency) {
             $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
         }
 
         $resolver->setDefaults(array(
-                'choices' => $choices
-            ))
-        ;
+            'choices' => $choices,
+        ));
     }
 
     /**
