@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1400d98224539891324a2f1296babe80",
+    "hash": "74b91328cf1144bd4dd96654435e84c7",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -231,7 +231,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -307,7 +307,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -394,12 +394,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "ccf213068a9cccc3dd7c41807782078368d09885"
+                "reference": "d9763ccbb637958133c42bdcc3d31c5a6821b9e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/ccf213068a9cccc3dd7c41807782078368d09885",
-                "reference": "ccf213068a9cccc3dd7c41807782078368d09885",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/d9763ccbb637958133c42bdcc3d31c5a6821b9e2",
+                "reference": "d9763ccbb637958133c42bdcc3d31c5a6821b9e2",
                 "shasum": ""
             },
             "require": {
@@ -465,7 +465,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2014-09-05 22:32:12"
+            "time": "2014-10-04 16:13:24"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -641,8 +641,7 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
+                    "homepage": "http://www.jwage.com/"
                 },
                 {
                     "name": "Guilherme Blanco",
@@ -660,7 +659,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -714,7 +713,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -786,16 +785,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.4.5",
+            "version": "v2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "c0d3cdbdfbf873871167050ab077e49b1ad02ab0"
+                "reference": "bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/c0d3cdbdfbf873871167050ab077e49b1ad02ab0",
-                "reference": "c0d3cdbdfbf873871167050ab077e49b1ad02ab0",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9",
+                "reference": "bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9",
                 "shasum": ""
             },
             "require": {
@@ -855,7 +854,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-09-22 21:58:51"
+            "time": "2014-10-06 13:22:50"
         },
         {
             "name": "doctrine/phpcr-bundle",
@@ -1010,12 +1009,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle.git",
-                "reference": "18eac304b53a2fa16bca5e2f2bdcc6cf6a88aa03"
+                "reference": "ab26212ee333456ae0d3a12e23832e1f87b25b87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/18eac304b53a2fa16bca5e2f2bdcc6cf6a88aa03",
-                "reference": "18eac304b53a2fa16bca5e2f2bdcc6cf6a88aa03",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/ab26212ee333456ae0d3a12e23832e1f87b25b87",
+                "reference": "ab26212ee333456ae0d3a12e23832e1f87b25b87",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1069,7 @@
                 "oauth2",
                 "server"
             ],
-            "time": "2014-09-16 00:41:15"
+            "time": "2014-10-04 17:05:53"
         },
         {
             "name": "friendsofsymfony/oauth2-php",
@@ -1207,12 +1206,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "96e4542c751e074ac018ff9e8915a444f16bd92f"
+                "reference": "3be6e7b86a397be785efee5490a7fc19aeae0381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/96e4542c751e074ac018ff9e8915a444f16bd92f",
-                "reference": "96e4542c751e074ac018ff9e8915a444f16bd92f",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3be6e7b86a397be785efee5490a7fc19aeae0381",
+                "reference": "3be6e7b86a397be785efee5490a7fc19aeae0381",
                 "shasum": ""
             },
             "require": {
@@ -1266,19 +1265,19 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-09-29 09:47:47"
+            "time": "2014-10-04 17:10:16"
         },
         {
             "name": "gedmo/doctrine-extensions",
             "version": "v2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "shasum": ""
             },
@@ -1966,9 +1965,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2069,9 +2068,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2139,9 +2138,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2210,9 +2209,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2232,16 +2231,16 @@
         },
         {
             "name": "klarna/checkout",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/klarna/kco_php.git",
-                "reference": "e15e8843566c18e4bdaeaf0e708093da0fcdced5"
+                "reference": "748fa73c86187a7b6e9c6ad86c6ce121869173fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/klarna/kco_php/zipball/e15e8843566c18e4bdaeaf0e708093da0fcdced5",
-                "reference": "e15e8843566c18e4bdaeaf0e708093da0fcdced5",
+                "url": "https://api.github.com/repos/klarna/kco_php/zipball/748fa73c86187a7b6e9c6ad86c6ce121869173fa",
+                "reference": "748fa73c86187a7b6e9c6ad86c6ce121869173fa",
                 "shasum": ""
             },
             "require": {
@@ -2265,7 +2264,7 @@
             ],
             "description": "Wrapper for the Klarna Checkout API",
             "homepage": "http://developers.klarna.com",
-            "time": "2014-09-05 13:24:09"
+            "time": "2014-10-06 08:03:01"
         },
         {
             "name": "knplabs/gaufrette",
@@ -2457,7 +2456,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2508,7 +2507,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2871,19 +2870,20 @@
         },
         {
             "name": "midgard/createphp",
-            "version": "0.9.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flack/createphp.git",
-                "reference": "6778131d33b5591ac49aaf95084f7ec6c285f5e4"
+                "reference": "8627540c62f0d73c15fbb5112ab266398a2a0159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flack/createphp/zipball/6778131d33b5591ac49aaf95084f7ec6c285f5e4",
-                "reference": "6778131d33b5591ac49aaf95084f7ec6c285f5e4",
+                "url": "https://api.github.com/repos/flack/createphp/zipball/8627540c62f0d73c15fbb5112ab266398a2a0159",
+                "reference": "8627540c62f0d73c15fbb5112ab266398a2a0159",
                 "shasum": ""
             },
             "require-dev": {
+                "doctrine/common": "~2.3.0",
                 "twig/twig": "~1.8"
             },
             "type": "library",
@@ -2913,7 +2913,7 @@
             "keywords": [
                 "rdfa"
             ],
-            "time": "2013-10-03 15:31:10"
+            "time": "2014-03-19 08:52:56"
         },
         {
             "name": "monolog/monolog",
@@ -3187,27 +3187,28 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/Pagerfanta.git",
-                "reference": "ac1edfdf81c91a0f1471769071011ebf9b055421"
+                "reference": "a874d3612d954dcbbb49e5ffe178890918fb76fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/ac1edfdf81c91a0f1471769071011ebf9b055421",
-                "reference": "ac1edfdf81c91a0f1471769071011ebf9b055421",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/a874d3612d954dcbbb49e5ffe178890918fb76fb",
+                "reference": "a874d3612d954dcbbb49e5ffe178890918fb76fb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": "2.3.*",
+                "doctrine/orm": "~2.3",
                 "doctrine/phpcr-odm": "1.*",
                 "jackalope/jackalope-doctrine-dbal": "1.*",
-                "jmikola/geojson": "1.0.*",
-                "mandango/mandango": "1.0.*@dev",
-                "phpunit/phpunit": "3.7.*",
+                "jmikola/geojson": "~1.0",
+                "mandango/mandango": "~1.0@dev",
+                "mandango/mondator": "~1.0@dev",
+                "phpunit/phpunit": "~4",
                 "propel/propel1": "~1.6",
-                "solarium/solarium": "3.1.*"
+                "ruflin/elastica": "~1.3",
+                "solarium/solarium": "~3.1"
             },
             "suggest": {
                 "doctrine/mongodb-odm": "To use the DoctrineODMMongoDBAdapter.",
@@ -3235,8 +3236,7 @@
             "authors": [
                 {
                     "name": "Pablo Díez",
-                    "email": "pablodip@gmail.com",
-                    "homepage": "http://github.com/pablodip"
+                    "email": "pablodip@gmail.com"
                 }
             ],
             "description": "Pagination for PHP 5.3",
@@ -3246,7 +3246,7 @@
                 "paginator",
                 "paging"
             ],
-            "time": "2014-06-02 09:21:14"
+            "time": "2014-10-06 10:57:25"
         },
         {
             "name": "paypal/rest-api-sdk-php",
@@ -3571,9 +3571,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -3739,9 +3739,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -4089,20 +4089,20 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.2.2",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "e02f71a35436af4bd58a1bd90116089e632e29e1"
+                "reference": "b86b927dfefdb56ab0b22d1350033d9a38e9f205"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/e02f71a35436af4bd58a1bd90116089e632e29e1",
-                "reference": "e02f71a35436af4bd58a1bd90116089e632e29e1",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/b86b927dfefdb56ab0b22d1350033d9a38e9f205",
+                "reference": "b86b927dfefdb56ab0b22d1350033d9a38e9f205",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.4"
+                "php": ">=5.3.3"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9.1"
@@ -4110,7 +4110,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.2-dev"
+                    "dev-master": "5.3-dev"
                 }
             },
             "autoload": {
@@ -4137,7 +4137,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-09-20 07:17:36"
+            "time": "2014-10-04 05:53:18"
         },
         {
             "name": "symfony-cmf/block-bundle",
@@ -4336,34 +4336,37 @@
         },
         {
             "name": "symfony-cmf/create-bundle",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "target-dir": "Symfony/Cmf/Bundle/CreateBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/CreateBundle.git",
-                "reference": "ba192e536c3a11eb1820bded99ff9924eff650c9"
+                "reference": "37d08e2c01b6e9bdd8c3a226a612cebf3be7e928"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/CreateBundle/zipball/ba192e536c3a11eb1820bded99ff9924eff650c9",
-                "reference": "ba192e536c3a11eb1820bded99ff9924eff650c9",
+                "url": "https://api.github.com/repos/symfony-cmf/CreateBundle/zipball/37d08e2c01b6e9bdd8c3a226a612cebf3be7e928",
+                "reference": "37d08e2c01b6e9bdd8c3a226a612cebf3be7e928",
                 "shasum": ""
             },
             "require": {
                 "friendsofsymfony/rest-bundle": "~1.0",
                 "jms/serializer-bundle": ">=0.12,<0.14",
-                "midgard/createphp": "0.9.*",
+                "midgard/createphp": "1.0.*",
                 "php": ">=5.3.3",
                 "symfony/assetic-bundle": "~2.1",
-                "symfony/framework-bundle": "~2.1"
+                "symfony/framework-bundle": "~2.3"
+            },
+            "require-dev": {
+                "symfony-cmf/testing": "1.1.*"
             },
             "suggest": {
-                "symfony-cmf/media-bundle": "When using the default image support, 1.0.*"
+                "symfony-cmf/media-bundle": "When using the default image support, 1.1.*"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -4386,7 +4389,70 @@
                 }
             ],
             "description": "Symfony Bundle for createphp and create.js. The easiest way to make any site editable and have semantic annotations with RDFa.",
-            "time": "2014-01-13 09:54:14"
+            "time": "2014-05-08 15:43:16"
+        },
+        {
+            "name": "symfony-cmf/media-bundle",
+            "version": "1.1.0",
+            "target-dir": "Symfony/Cmf/Bundle/MediaBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-cmf/MediaBundle.git",
+                "reference": "c6ed53fb25e656286147056c09d69dd319a2be5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-cmf/MediaBundle/zipball/c6ed53fb25e656286147056c09d69dd319a2be5c",
+                "reference": "c6ed53fb25e656286147056c09d69dd319a2be5c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.3"
+            },
+            "require-dev": {
+                "jms/serializer-bundle": "0.12.*",
+                "liip/imagine-bundle": "~0.12",
+                "mikey179/vfsstream": "~1.2",
+                "symfony-cmf/testing": "1.1.*"
+            },
+            "suggest": {
+                "helios-ag/fm-elfinder-bundle": "When using the elFinder media browser",
+                "jms/serializer-bundle": "When using the serializer handler",
+                "knplabs/gaufrette": "When using the Gaufrette adapter",
+                "liip/imagine-bundle": "To integrate with the Imagine library for processing images",
+                "phpcr/phpcr-utils": "When using the Gaufrette adapter",
+                "symfony-cmf/core-bundle": "Simplifies configuration with other CMF bundles, use PHP >=5.3.9 with PHPCR"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Cmf\\Bundle\\MediaBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony CMF Community",
+                    "homepage": "https://github.com/symfony-cmf/MediaBundle/contributors"
+                }
+            ],
+            "description": "Symfony CMF Media Bundle",
+            "homepage": "http://cmf.symfony.com",
+            "keywords": [
+                "Symfony CMF",
+                "image",
+                "media"
+            ],
+            "time": "2014-05-08 15:45:37"
         },
         {
             "name": "symfony-cmf/menu-bundle",
@@ -4991,9 +5057,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
@@ -5045,7 +5109,7 @@
                     "role": "Lead Developer"
                 },
                 {
-                    "name": "Armin Ronacher",
+                    "name": "Armin Ronacher2",
                     "email": "armin.ronacher@active-4.com",
                     "role": "Project Founder"
                 },
@@ -5373,16 +5437,16 @@
         },
         {
             "name": "winzou/state-machine-bundle",
-            "version": "v0.1.3",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/winzou/StateMachineBundle.git",
-                "reference": "b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca"
+                "reference": "6fa894a370f9424080bf798a6f98bb5648917386"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca",
-                "reference": "b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca",
+                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/6fa894a370f9424080bf798a6f98bb5648917386",
+                "reference": "6fa894a370f9424080bf798a6f98bb5648917386",
                 "shasum": ""
             },
             "require": {
@@ -5406,7 +5470,6 @@
             "authors": [
                 {
                     "name": "Alexandre Bacco",
-                    "email": "alexandre.bacco@gmail.com",
                     "homepage": "http://alex.bacco.fr"
                 }
             ],
@@ -5416,7 +5479,7 @@
                 "statemachine",
                 "symfony"
             ],
-            "time": "2014-06-20 03:56:36"
+            "time": "2014-07-31 07:48:15"
         }
     ],
     "packages-dev": [
@@ -5981,9 +6044,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Symfony Community",
@@ -6004,16 +6065,16 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "26404e0c90565b614ee76b988b9bc8790d77f590"
+                "reference": "8806c41c178ad4a2e87294b851d730779555d252"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/26404e0c90565b614ee76b988b9bc8790d77f590",
-                "reference": "26404e0c90565b614ee76b988b9bc8790d77f590",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8806c41c178ad4a2e87294b851d730779555d252",
+                "reference": "8806c41c178ad4a2e87294b851d730779555d252",
                 "shasum": ""
             },
             "require": {
@@ -6054,7 +6115,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-08-25 15:09:25"
+            "time": "2014-10-04 22:48:25"
         },
         {
             "name": "fzaninotto/faker",
@@ -6079,9 +6140,7 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": [
-
-                ]
+                "branch-alias": []
             },
             "autoload": {
                 "psr-0": {
@@ -6151,7 +6210,7 @@
                 {
                     "name": "Anthon Pang",
                     "email": "apang@softwaredevelopment.ca",
-                    "role": "developer"
+                    "role": "Fork Maintainer"
                 }
             ],
             "description": "PHP WebDriver for Selenium 2",
@@ -6240,8 +6299,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -6746,9 +6804,7 @@
             "time": "2013-01-13 10:24:48"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/doctrine-bundle": 20,
@@ -6767,7 +6823,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

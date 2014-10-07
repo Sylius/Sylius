@@ -33,6 +33,10 @@ class MenuBlockType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.menu_block.name'
             ))
+            ->add('body', 'textarea', array(
+                'required' => false,
+                'label'    => 'sylius.form.menu_block.body',
+            ))
         ;
 
     }

@@ -1,5 +1,87 @@
+auto: auto
+route: route
+
 sylius:
     form:
-        string_block:
-            id: ID
+        action_block:
+            action_name: Action name
+            id: Id
+
+        imagine_block:
+            internal_name: Internal name
+            slideshow_small: 'Slideshow Large (full width)'
+            slideshow_medium: 'Slideshow Medium (content)'
+            slideshow_large: 'Slideshow Small (side)'
+
+        menu:
+            childrens: Childrens
+            display: Display
+            display_children: Display children
+            label: Label
+            name: Name
+            parent: Parent
+            route: Route
+            uri: URI
+
+        menu_block:
             body: Body
+            id: Id
+            name: Name
+
+        menu_node_block:
+            content: Content
+            display: Display
+            display_children: Display children
+            internal_name: Internal name
+            label: Label
+            link_type: Link type
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
+            route: Route
+            uri: URI
+
+        redirect_route:
+            id: Id
+            name: Name
+            route_name: Route_name
+            uri: URI
+
+        reference_block:
+            body: Body
+            id: Id
+            title: Title
+
+        route:
+            content: Content
+            name: Name
+            parent: Parent
+
+        simple_block:
+            body: Body
+            internal_name: Internal name
+            parent: Parent
+            title: Title
+
+        slideshow_block:
+            childrens: Childrens
+            internal_name: Internal name
+            parent: Parent
+            title: Title
+
+        static_content:
+            body: Body
+            id: Id
+            internal_name: Internal name
+            menu_nodes: Menu nodes
+            parent: Parent
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
+            routes: Routes
+            title: Title
+
+        string_block:
+            body: Body
+            id: ID
+            name: Name

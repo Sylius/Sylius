@@ -27,11 +27,20 @@ class RouteType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.route.id'
+            ->add('name', null, array(
+                'label' => 'sylius.form.route.name'
             ))
-        ;
-
+            ->add('parent', null, array(
+                'label' => 'sylius.form.route.parent'
+            ))
+            ->add('content', null, array(
+                'class' => 'Symfony\Cmf\Bundle\ContentBundle\Model\StaticContent',
+                'property' => 'title',
+                'label' => 'sylius.form.route.content',
+                'required' => false
+            ))
+            ;
+            
     }
 
     /**

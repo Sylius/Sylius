@@ -95,12 +95,35 @@ sylius:
         title: Title
         update_header: Editing content block
         updated_at: Last update
+        simple_blocks: Simple blocks
+        string_blocks: String blocks
+        imagine:
+            create: Create imagine block
+            create_header: Creating a new imagine block
+            id: Id
+            index: Imagine Blocks
+            index_header: Imagine blocks
+            title: Title
+            update_header: Editing imagine block
+        slideshow:
+            create: Create slideshow block
+            create_header: Creating a new slideshow block
+            id: Id
+            index: Slideshow Blocks
+            index_header: Slideshow blocks
+            title: Title
+            update_header: Editing slideshow block
     breadcrumb:
         assortment: Assortment
         block:
             index: Content Blocks
+            imagine:
+                index: Imagine Blocks
+            slideshow:
+                index: Slideshow Blocks
         build: Build
         configuration: Configuration
+        content: Content
         country:
             index: Countries
         customers: Customers
@@ -111,6 +134,7 @@ sylius:
             show: Contact request
         contact_topic:
             index: Contact topics
+        content: Content
         currency:
             index: Currencies
         general_settings: General Settings
@@ -121,6 +145,10 @@ sylius:
             index: Inventory
         locale:
             index: Locales
+        menu:
+            index: Menus
+        menu_node:
+            index: Menu nodes
         new: New
         option:
             index: Options
@@ -143,6 +171,10 @@ sylius:
             index: Attributes
         prototype:
             index: Prototypes
+        redirect_route:
+            index: Redirect routes
+        route:
+            index: Routes
         sales: Sales
         shipment:
             index: Shipments
@@ -281,6 +313,8 @@ sylius:
         login:
             email: Email
             password: Password
+        menu:
+            add_menu_node: Add menu element
         option_value:
             add_value: Add value
         profile:
@@ -290,6 +324,8 @@ sylius:
         comment:
             comment: Comment
             notify_customer: Notify Customer?
+        slideshow:
+            add_slide: Add slide
     gallery:
         next: Next
         previous: Previous
@@ -339,6 +375,23 @@ sylius:
     login_header: Administration
     logo: Sylius
     manage: Manage
+    menu:
+        create: Create menu
+        create_header: Creating menu
+        id: ID
+        index_header: Menus
+        no_results: There are no menus to display.
+        title: Title
+        update_header: Editing menu
+    menu_node:
+        create: Create menu node
+        create_header: Creating menu node
+        id: ID
+        index_header: Menu nodes
+        no_results: There are no menu nodes to display.
+        parent: Parent
+        title: Title
+        update_header: Editing menu node
     meta:
         backend_title: Sylius Dashboard
         frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework.
@@ -347,7 +400,7 @@ sylius:
     na: N/A
     newest: Newest products
     no: no
-    no_results: sylius.no_results
+    no_results: No results
     product_option:
         create: Create option
         create_header: New product option
@@ -433,6 +486,26 @@ sylius:
                 notified: Customer notified
                 not_notified: Customer not notified
             no_comment: No comment
+    route:
+        create: Create route
+        create_header: Creating route
+        id: ID
+        index_header: Routes
+        name: Name
+        no_results: There are no routes to display.
+        page: Page
+        title: Title
+        update_header: Editing route
+        view: View
+    redirect_route:
+        create: Create redirect route
+        create_header: Creating redirect route
+        id: ID
+        index_header: Redirect route
+        no_results: There are no redirect routes to display.
+        title: Title
+        update_header: Editing redirect route
+        updated_at: Updated at
     shipment:
         ship: Ship
         created_at: Created at
