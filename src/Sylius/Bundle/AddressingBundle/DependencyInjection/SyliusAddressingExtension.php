@@ -13,7 +13,6 @@ namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * Addressing extension.
@@ -21,7 +20,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusAddressingExtension extends AbstractResourceExtension implements PrependExtensionInterface
+class SyliusAddressingExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -36,24 +35,5 @@ class SyliusAddressingExtension extends AbstractResourceExtension implements Pre
         );
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        if ($container->hasExtension('jms_serializer')) {
-            $container->prependExtensionConfig('jms_serializer', array(
-                'metadata' => array(
-                    'directories' => array(
-                        'sylius-addressing' => array(
-                            'namespace_prefix' => 'Sylius\\Component\\Addressing',
-                            'path'             => '@SyliusAddressingBundle/Resources/config/serializer'
-                        ),
-                    )
-                )
-            ));
-        }
     }
 }

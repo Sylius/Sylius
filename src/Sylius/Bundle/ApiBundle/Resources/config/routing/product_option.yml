@@ -2,25 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius_api_product_option_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_option:indexAction
 
 sylius_api_product_option_create:
-    pattern: /
+    path: /
     methods: [POST]
     defaults:
         _controller: sylius.controller.product_option:createAction
 
 sylius_api_product_option_update:
-    pattern: /{id}
+    path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_option:updateAction
 
 sylius_api_product_option_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_option:deleteAction

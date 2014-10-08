@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_api_user_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.user:indexAction
@@ -13,13 +13,13 @@ sylius_api_user_index:
                 id: desc
 
 sylius_api_user_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.user:deleteAction
 
 sylius_api_user_show:
-    pattern: /{id}
+    path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.user:showAction
