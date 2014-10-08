@@ -36,6 +36,25 @@ class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'          => array(
+                'ROLE_SYLIUS_TAXATION_ADMIN',
+            ),
+            'ROLE_SYLIUS_TAXATION_ADMIN' => array(
+                'ROLE_SYLIUS_TAXATION_LIST',
+                'ROLE_SYLIUS_TAXATION_SHOW',
+                'ROLE_SYLIUS_TAXATION_CREATE',
+                'ROLE_SYLIUS_TAXATION_UPDATE',
+                'ROLE_SYLIUS_TAXATION_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

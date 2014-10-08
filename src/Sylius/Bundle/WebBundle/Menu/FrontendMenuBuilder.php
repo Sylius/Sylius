@@ -122,7 +122,7 @@ class FrontendMenuBuilder extends MenuBuilder
             '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
         )));
 
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_USER')) {
+        if ($this->isGranted('ROLE_USER')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
             if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
@@ -157,14 +157,14 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
+        if ($this->isGranted('ROLE_SYLIUS_ADMIN') || $this->isGranted('ROLE_PREVIOUS_ADMIN')) {
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
                 'labelAttributes' => array('icon' => 'icon-briefcase icon-large', 'iconOnly' => false)
             );
 
-            if ($this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
+            if ($this->isGranted('ROLE_PREVIOUS_ADMIN')) {
                 $routeParams = array_merge($routeParams, array(
                     'route' => 'sylius_switch_user_return',
                     'routeParameters' => array(

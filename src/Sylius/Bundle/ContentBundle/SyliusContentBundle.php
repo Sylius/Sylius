@@ -30,4 +30,23 @@ class SyliusContentBundle extends AbstractResourceBundle
             SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'         => array(
+                'ROLE_SYLIUS_CONTENT_ADMIN',
+            ),
+            'ROLE_SYLIUS_CONTENT_ADMIN' => array(
+                'ROLE_SYLIUS_CONTENT_LIST',
+                'ROLE_SYLIUS_CONTENT_SHOW',
+                'ROLE_SYLIUS_CONTENT_CREATE',
+                'ROLE_SYLIUS_CONTENT_UPDATE',
+                'ROLE_SYLIUS_CONTENT_DELETE',
+            ),
+        );
+    }
 }

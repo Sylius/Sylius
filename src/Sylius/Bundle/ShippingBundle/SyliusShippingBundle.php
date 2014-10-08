@@ -41,6 +41,25 @@ class SyliusShippingBundle extends AbstractTranslationBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'          => array(
+                'ROLE_SYLIUS_SHIPPING_ADMIN',
+            ),
+            'ROLE_SYLIUS_SHIPPING_ADMIN' => array(
+                'ROLE_SYLIUS_SHIPPING_LIST',
+                'ROLE_SYLIUS_SHIPPING_SHOW',
+                'ROLE_SYLIUS_SHIPPING_CREATE',
+                'ROLE_SYLIUS_SHIPPING_UPDATE',
+                'ROLE_SYLIUS_SHIPPING_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

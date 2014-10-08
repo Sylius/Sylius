@@ -37,6 +37,25 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'           => array(
+                'ROLE_SYLIUS_PROMOTION_ADMIN',
+            ),
+            'ROLE_SYLIUS_PROMOTION_ADMIN' => array(
+                'ROLE_SYLIUS_PROMOTION_LIST',
+                'ROLE_SYLIUS_PROMOTION_SHOW',
+                'ROLE_SYLIUS_PROMOTION_CREATE',
+                'ROLE_SYLIUS_PROMOTION_UPDATE',
+                'ROLE_SYLIUS_PROMOTION_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

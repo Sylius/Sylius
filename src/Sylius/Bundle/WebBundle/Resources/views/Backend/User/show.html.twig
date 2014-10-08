@@ -1,6 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -13,14 +14,18 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {% if user.id is not sameas(app.user.id) and not user.deleted %}
-        {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': user.username}), 'sylius.user.impersonate'|trans) }}
-        {% endif %}
+        {% if is_granted('ROLE_SYLIUS_SUPER_ADMIN') and (user.id is not sameas(app.user.id)) and not user.deleted -%}
+            {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': user.username}), 'sylius.user.impersonate'|trans) }}
+        {%- endif %}
+
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
+
         {% if not user.deleted %}
-        {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-        {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, false, false) }}
-        {% endif %}
+            {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
+            {% if is_granted('ROLE_SYLIUS_SUPER_ADMIN') -%}
+                {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, false, false) }}
+            {%- endif -%}
+        {%- endif %}
     </div>
     <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.user.show_header'|trans|raw }}</h1>
 </div>
@@ -61,9 +66,7 @@
             <tr>
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
                 <td>
-                        <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
-                            {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                        </span>
+                    {{ misc.state_label(user.enabled) }}
                 </td>
             </tr>
             {% if user.lastLogin %}
@@ -79,11 +82,41 @@
     <div class="col-md-5">
         <table class="table table-bordered">
             <thead>
+            <tr>
+                <th>{{ 'sylius.group.name'|trans }}</th>
+                <th>{{ 'sylius.group.roles'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for group in user.groups %}
                 <tr>
-                    <th>{{ 'sylius.user.oauth.provider'|trans }}</th>
-                    <th>{{ 'sylius.user.oauth.identifier'|trans }}</th>
-                    <th>{{ 'sylius.user.oauth.access_token'|trans }}</th>
+                    <td>{{ group.name }}</td>
+                    <td>
+                        {% for role in group.roles %}
+                            <small><span class="label label-primary">{{ role }}</span></small>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {{ buttons.edit(path('sylius_backend_group_update', {'id': group.id})) }}
+                    </td>
                 </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">{{ 'sylius.group.no_results'|trans }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-5">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.user.oauth.provider'|trans }}</th>
+                <th>{{ 'sylius.user.oauth.identifier'|trans }}</th>
+                <th>{{ 'sylius.user.oauth.access_token'|trans }}</th>
+            </tr>
             </thead>
             <tbody>
             {% for oauth in user.oauthAccounts %}

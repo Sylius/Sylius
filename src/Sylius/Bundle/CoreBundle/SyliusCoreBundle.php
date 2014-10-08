@@ -38,6 +38,33 @@ class SyliusCoreBundle extends AbstractTranslationBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'       => array(
+                'ROLE_SYLIUS_USER_ADMIN',
+                'ROLE_SYLIUS_GROUP_ADMIN',
+            ),
+            'ROLE_SYLIUS_USER_ADMIN'  => array(
+                'ROLE_SYLIUS_USER_LIST',
+                'ROLE_SYLIUS_USER_SHOW',
+                'ROLE_SYLIUS_USER_CREATE',
+                'ROLE_SYLIUS_USER_UPDATE',
+                'ROLE_SYLIUS_USER_DELETE',
+            ),
+            'ROLE_SYLIUS_GROUP_ADMIN' => array(
+                'ROLE_SYLIUS_GROUP_LIST',
+                'ROLE_SYLIUS_GROUP_SHOW',
+                'ROLE_SYLIUS_GROUP_CREATE',
+                'ROLE_SYLIUS_GROUP_UPDATE',
+                'ROLE_SYLIUS_GROUP_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\SecurityRolesPass;
 use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Container;
@@ -52,6 +53,8 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
             );
         }
 
+        $container->addCompilerPass(new SecurityRolesPass());
+
         if (null !== $this->getModelNamespace()) {
             $className = get_class($this);
             foreach ($className::getSupportedDrivers() as $driver) {
@@ -87,6 +90,16 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                 }
             }
         }
+    }
+
+    /**
+     * Returns roles defined in this bundle.
+     *
+     * @return string[]
+     */
+    public static function getSecurityRoles()
+    {
+        return array();
     }
 
     /**

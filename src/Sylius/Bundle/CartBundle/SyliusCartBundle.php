@@ -34,6 +34,21 @@ class SyliusCartBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'      => array(
+                'ROLE_SYLIUS_CART_ADMIN',
+            ),
+            'ROLE_SYLIUS_CART_ADMIN' => array(
+                'ROLE_SYLIUS_ORDER_ADMIN',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getBundlePrefix()
     {
         return 'sylius_order';

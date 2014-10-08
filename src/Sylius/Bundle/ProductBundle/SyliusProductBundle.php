@@ -41,6 +41,25 @@ class SyliusProductBundle extends AbstractTranslationBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'         => array(
+                'ROLE_SYLIUS_PRODUCT_ADMIN',
+            ),
+            'ROLE_SYLIUS_PRODUCT_ADMIN' => array(
+                'ROLE_SYLIUS_PRODUCT_LIST',
+                'ROLE_SYLIUS_PRODUCT_SHOW',
+                'ROLE_SYLIUS_PRODUCT_CREATE',
+                'ROLE_SYLIUS_PRODUCT_UPDATE',
+                'ROLE_SYLIUS_PRODUCT_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

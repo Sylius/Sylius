@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Base resource controller for Sylius.
@@ -104,6 +105,10 @@ class ResourceController extends FOSRestController
      */
     public function showAction(Request $request)
     {
+        $resource = $this->findOr404($request);
+
+        $this->handlePermissions('SHOW', $resource);
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
@@ -121,6 +126,8 @@ class ResourceController extends FOSRestController
      */
     public function indexAction(Request $request)
     {
+        $this->handlePermissions('LIST');
+
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -170,8 +177,10 @@ class ResourceController extends FOSRestController
     public function createAction(Request $request)
     {
         $resource = $this->createNew();
-        $form = $this->getForm($resource);
 
+        $this->handlePermissions('CREATE', $resource);
+
+        $form = $this->getForm($resource);
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
@@ -210,8 +219,10 @@ class ResourceController extends FOSRestController
     public function updateAction(Request $request)
     {
         $resource = $this->findOr404($request);
-        $form     = $this->getForm($resource);
 
+        $this->handlePermissions('UPDATE', $resource);
+
+        $form = $this->getForm($resource);
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
@@ -245,7 +256,11 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->domainManager->delete($this->findOr404($request));
+        $resource = $this->findOr404($request);
+
+        $this->handlePermissions('DELETE', $resource);
+
+        $this->domainManager->delete($resource);
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view());
@@ -262,7 +277,10 @@ class ResourceController extends FOSRestController
      */
     public function revertAction(Request $request, $version)
     {
-        $resource   = $this->findOr404($request);
+        $resource = $this->findOr404($request);
+
+        $this->handlePermissions('REVERT', $resource);
+
         $em         = $this->get('doctrine.orm.entity_manager');
         $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
         $repository->revert($resource, $version);
@@ -285,6 +303,8 @@ class ResourceController extends FOSRestController
     public function updateStateAction(Request $request, $transition, $graph = null)
     {
         $resource = $this->findOr404($request);
+
+        $this->handlePermissions('STATE', $resource);
 
         if (null === $graph) {
             $graph = $this->stateMachineGraph;
@@ -386,13 +406,15 @@ class ResourceController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param integer $movement
+     * @param int     $movement
      *
      * @return RedirectResponse
      */
     protected function move(Request $request, $movement)
     {
         $resource = $this->findOr404($request);
+
+        $this->handlePermissions('MOVE', $resource);
 
         $this->domainManager->move($resource, $movement);
 
@@ -417,5 +439,15 @@ class ResourceController extends FOSRestController
         }
 
         return $handler->handle($view);
+    }
+
+    protected function handlePermissions($action, $resource = null)
+    {
+        if ($this->config->isBackendRequest() || $this->config->isApiRequest()) {
+            $role = strtoupper(sprintf('ROLE_SYLIUS_%s_%s', $this->config->getResourceName(), $action));
+            if (!$this->get('security.context')->isGranted($role, $resource)) {
+                throw new AccessDeniedException();
+            }
+        }
     }
 }

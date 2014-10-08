@@ -35,6 +35,25 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'           => array(
+                'ROLE_SYLIUS_INVENTORY_ADMIN',
+            ),
+            'ROLE_SYLIUS_INVENTORY_ADMIN' => array(
+                'ROLE_SYLIUS_INVENTORY_LIST',
+                'ROLE_SYLIUS_INVENTORY_SHOW',
+                'ROLE_SYLIUS_INVENTORY_CREATE',
+                'ROLE_SYLIUS_INVENTORY_UPDATE',
+                'ROLE_SYLIUS_INVENTORY_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

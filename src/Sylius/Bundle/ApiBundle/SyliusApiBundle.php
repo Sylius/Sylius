@@ -34,6 +34,25 @@ class SyliusApiBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'     => array(
+                'ROLE_SYLIUS_API_ADMIN',
+            ),
+            'ROLE_SYLIUS_API_ADMIN' => array(
+                'ROLE_SYLIUS_API_LIST',
+                'ROLE_SYLIUS_API_SHOW',
+                'ROLE_SYLIUS_API_CREATE',
+                'ROLE_SYLIUS_API_UPDATE',
+                'ROLE_SYLIUS_API_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

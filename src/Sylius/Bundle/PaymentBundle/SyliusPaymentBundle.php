@@ -34,6 +34,25 @@ class SyliusPaymentBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'         => array(
+                'ROLE_SYLIUS_PAYMENT_ADMIN',
+            ),
+            'ROLE_SYLIUS_PAYMENT_ADMIN' => array(
+                'ROLE_SYLIUS_PAYMENT_LIST',
+                'ROLE_SYLIUS_PAYMENT_SHOW',
+                'ROLE_SYLIUS_PAYMENT_CREATE',
+                'ROLE_SYLIUS_PAYMENT_UPDATE',
+                'ROLE_SYLIUS_PAYMENT_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

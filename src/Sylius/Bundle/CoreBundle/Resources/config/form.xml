@@ -93,6 +93,7 @@
             <argument type="collection">
                 <argument>sylius</argument>
             </argument>
+            <argument>%security.role_hierarchy.roles%</argument>
             <tag name="form.type" alias="sylius_group" />
         </service>
         <service id="sylius.form.type.advanced_order" class="%sylius.form.type.advanced_order.class%">
