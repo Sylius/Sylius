@@ -62,6 +62,8 @@ class BuildPriceableFormListenerSpec extends ObjectBehavior
         $priceable->getPricingCalculator()->shouldBeCalled()->willReturn('bar');
         $priceable->getPricingConfiguration()->shouldBeCalled()->willReturn(array());
 
+        $calculator->isValid(array())->shouldBeCalled()->willReturn(true);
+
         $factory->createNamed('pricingConfiguration', 'sylius_price_calculator_foo', array(), Argument::any())->shouldBeCalled()->willReturn($field);
         $form->add($field)->shouldBeCalled();
 
