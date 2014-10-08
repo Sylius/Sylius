@@ -6,4 +6,4 @@ Sylius\Component\Core\Model\InventoryUnit:
           href:
                 route: sylius_api_order_show
                 parameters:
-                    id: expr(object.getOrder().getId())
+                    id: expr(object.getOrderItem().getOrder().getId())

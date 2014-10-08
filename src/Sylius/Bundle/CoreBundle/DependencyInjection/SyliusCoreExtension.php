@@ -107,19 +107,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
         $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
         $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
-
-        if ($container->hasExtension('jms_serializer')) {
-            $container->prependExtensionConfig('jms_serializer', array(
-                'metadata' => array(
-                    'directories' => array(
-                        'sylius-core'     => array(
-                            'namespace_prefix' => 'Sylius\\Component\\Core',
-                            'path'             => '@SyliusCoreBundle/Resources/config/serializer'
-                        ),
-                    )
-                )
-            ));
-        }
     }
 
     /**

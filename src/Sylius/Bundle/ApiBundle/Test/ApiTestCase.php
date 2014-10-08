@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Symfony\Component\Finder\Finder;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
@@ -94,5 +95,35 @@ abstract class ApiTestCase extends BaseWebTestCase
     protected function get($id)
     {
         return static::createClient()->getContainer()->get($id);
+    }
+
+    protected static function getKernelClass()
+    {
+        if (isset($_SERVER['KERNEL_DIR'])) {
+            $dir = $_SERVER['KERNEL_DIR'];
+
+            if (!is_dir($dir)) {
+                $phpUnitDir = static::getPhpUnitXmlDir();
+                if (is_dir("$phpUnitDir/$dir")) {
+                    $dir = "$phpUnitDir/$dir";
+                }
+            }
+        } else {
+            $dir = static::getPhpUnitXmlDir();
+        }
+
+        $finder = new Finder();
+        $finder->name('CliKernel.php')->depth(0)->in($dir);
+        $results = iterator_to_array($finder);
+        if (!count($results)) {
+            throw new \RuntimeException('Either set KERNEL_DIR in your phpunit.xml according to http://symfony.com/doc/current/book/testing.html#your-first-functional-test or override the WebTestCase::createKernel() method.');
+        }
+
+        $file = current($results);
+        $class = $file->getBasename('.php');
+
+        require_once $file;
+
+        return $class;
     }
 }

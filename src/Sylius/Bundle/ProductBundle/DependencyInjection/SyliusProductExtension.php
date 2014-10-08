@@ -44,19 +44,6 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
         $this->prependAttribute($container, $config);
         $this->prependVariation($container, $config);
-
-        if ($container->hasExtension('jms_serializer')) {
-            $container->prependExtensionConfig('jms_serializer', array(
-                'metadata' => array(
-                    'directories' => array(
-                        'sylius-product' => array(
-                            'namespace_prefix' => 'Sylius\\Component\\Product',
-                            'path'             => '@SyliusProductBundle/Resources/config/serializer'
-                        ),
-                    )
-                )
-            ));
-        }
     }
 
     /**

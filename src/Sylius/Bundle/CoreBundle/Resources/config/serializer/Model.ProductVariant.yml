@@ -1,7 +1,7 @@
-Sylius\Component\Core\Model\Product:
+Sylius\Component\Core\Model\ProductVariant:
     exclusion_policy: ALL
-    xml_root_name: product
+    xml_root_name: variant
     properties:
-        shortDescription:
+        sku:
             expose: true
             type: string

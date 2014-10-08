@@ -81,12 +81,13 @@ fos_rest:
     disable_csrf_role: ROLE_API
     view:
         formats:
-            xml:  true
             json: true
+            xml:  true
         empty_content: 204
     format_listener:
         rules:
-            - { path: '^/api', priorities: ['json', 'xml', 'html'], fallback_format: json, prefer_extension: true }
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
 
 hwi_oauth:
     firewall_name: main
@@ -105,3 +106,28 @@ hwi_oauth:
             client_id:     %sylius.oauth.google.clientid%
             client_secret: %sylius.oauth.google.clientsecret%
             scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "%kernel.root_dir%/Resources/FOSUserBundle/serializer"
+            sylius-addressing:
+                namespace_prefix: "Sylius\\Component\\Addressing"
+                path: "@SyliusAddressingBundle/Resources/config/serializer"
+            sylius-core:
+                namespace_prefix: "Sylius\\Component\\Core"
+                path: "@SyliusCoreBundle/Resources/config/serializer"
+            sylius-inventory:
+                namespace_prefix: "Sylius\\Component\\Inventory"
+                path: "@SyliusInventoryBundle/Resources/config/serializer"
+            sylius-product:
+                namespace_prefix: "Sylius\\Component\\Product"
+                path: "@SyliusProductBundle/Resources/config/serializer"
+            sylius-shipping:
+                namespace_prefix: "Sylius\\Component\\Shipping"
+                path: "@SyliusShippingBundle/Resources/config/serializer"
+            sylius-taxation:
+                namespace_prefix: "Sylius\\Component\\Taxation"
+                path: "@SyliusTaxationBundle/Resources/config/serializer"

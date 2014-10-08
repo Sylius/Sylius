@@ -1,7 +1,7 @@
-Sylius\Component\Core\Model\Product:
+Sylius\Component\Core\Model\Order:
     exclusion_policy: ALL
-    xml_root_name: product
+    xml_root_name: order
     properties:
-        shortDescription:
+        currency:
             expose: true
             type: string

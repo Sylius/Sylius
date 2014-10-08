@@ -13,14 +13,13 @@ namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * Payments extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusPaymentExtension extends AbstractResourceExtension implements PrependExtensionInterface
+class SyliusPaymentExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -35,24 +34,5 @@ class SyliusPaymentExtension extends AbstractResourceExtension implements Prepen
         );
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        if ($container->hasExtension('jms_serializer')) {
-            $container->prependExtensionConfig('jms_serializer', array(
-                'metadata' => array(
-                    'directories' => array(
-                        'sylius-payment' => array(
-                            'namespace_prefix' => 'Sylius\\Component\\Payment',
-                            'path'             => '@SyliusPaymentBundle/Resources/config/serializer'
-                        ),
-                    )
-                )
-            ));
-        }
     }
 }

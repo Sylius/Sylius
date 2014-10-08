@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 #
 sylius_api_product_variant_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_variant:indexAction
@@ -13,13 +13,13 @@ sylius_api_product_variant_index:
                 master: false
 
 sylius_api_product_variant_create:
-    pattern: /
+    path: /
     methods: [POST]
     defaults:
         _controller: sylius.controller.product_variant:createAction
 
 sylius_api_product_variant_update:
-    pattern: /{id}
+    path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.product_variant:updateAction
@@ -30,7 +30,7 @@ sylius_api_product_variant_update:
                 master:  false
 
 sylius_api_product_variant_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_variant:deleteAction
@@ -41,7 +41,7 @@ sylius_api_product_variant_delete:
                 master:  false
 
 sylius_api_product_variant_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_variant:deleteAction

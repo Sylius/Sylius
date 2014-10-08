@@ -2,19 +2,19 @@
 # (c) Paweł Jędrzejewski
 #
 sylius_api_taxon_create:
-    pattern: /
+    path: /
     methods: [POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
 
 sylius_api_taxon_update:
-    pattern: /{id}
+    path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.taxon:updateAction
 
 sylius_api_taxon_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.taxon:deleteAction
