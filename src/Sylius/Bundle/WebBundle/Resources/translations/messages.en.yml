@@ -419,6 +419,7 @@ sylius:
         create: Create order
         create_header: New order
         created_at: Creation time
+        details: Order details
         general_info: General info
         guest: Guest customer
         id: ID
@@ -433,6 +434,7 @@ sylius:
         no_shipping_charges: No shipping charges applied
         no_taxes: No taxes applied
         number: Number
+        order_state: Order state
         payment: Payment
         payment_state: Payment state
         payment_states:
@@ -457,6 +459,10 @@ sylius:
             checkout: Checkout
             order_confimed: Order confirmed
             ordered: Ordered
+            shipped: Shipped
+            abandoned: Abandoned
+            cancelled: Cancelled
+            returned: Returned
         tax_total: Tax total
         taxes: Taxes
         total: Total

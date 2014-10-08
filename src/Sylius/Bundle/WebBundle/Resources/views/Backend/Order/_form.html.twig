@@ -26,14 +26,14 @@
             {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' %}
         {% endif %}
 
-        <h4>Order Details</h4>
+        <h4>{{ 'sylius.order.details'|trans }}</h4>
         <div class="list-group">
             <div class="list-group-item">
                 <h4 class="list-group-item-heading">{{ 'sylius.order.created_at'|trans }}</h4>
                 <div class="list-group-item-text">{{ order.createdAt|date }}</div>
             </div>
             <div class="list-group-item">
-                <h4 class="list-group-item-heading">{{ 'sylius.order.state'|trans }}</h4>
+                <h4 class="list-group-item-heading">{{ 'sylius.order.order_state'|trans }}</h4>
                 <div class="list-group-item-text">{{ form_widget(form.state) }}</div>
             </div>
             <div class="list-group-item">
