@@ -19,49 +19,49 @@ use PhpSpec\ObjectBehavior;
  */
 class SubscriptionListSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Newsletter\Model\SubscriptionList');
     }
 
-    function it_implements_Sylius_SubscriptionList_interface()
+    public function it_implements_Sylius_SubscriptionList_interface()
     {
         $this->shouldImplement('Sylius\Component\Newsletter\Model\SubscriptionListInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    public function it_has_no_name_by_default()
     {
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable()
+    public function its_name_is_mutable()
     {
         $this->setName('Newsletter');
         $this->getName()->shouldReturn('Newsletter');
     }
 
-    function it_has_no_description_by_default()
+    public function it_has_no_description_by_default()
     {
         $this->getDescription()->shouldReturn(null);
     }
 
-    function its_description_is_mutable()
+    public function its_description_is_mutable()
     {
         $this->setDescription('Newsletter subscription list');
         $this->getDescription()->shouldReturn('Newsletter subscription list');
     }
 
-    function it_creates_subscribers_collection_by_default()
+    public function it_creates_subscribers_collection_by_default()
     {
         $this->getSubscribers()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_subscribers_properly(SubscriberInterface $subscriberInterface)
+    public function it_adds_subscribers_properly(SubscriberInterface $subscriberInterface)
     {
         $this->hasSubscriber($subscriberInterface)->shouldReturn(false);
 
@@ -70,7 +70,7 @@ class SubscriptionListSpec extends ObjectBehavior
         $this->hasSubscriber($subscriberInterface)->shouldReturn(true);
     }
 
-    function it_removes_subscribers_properly(SubscriberInterface $subscriberInterface)
+    public function it_removes_subscribers_properly(SubscriberInterface $subscriberInterface)
     {
         $this->hasSubscriber($subscriberInterface)->shouldReturn(false);
 
@@ -81,5 +81,4 @@ class SubscriptionListSpec extends ObjectBehavior
         $subscriberInterface->removeSubscriptionList($this)->shouldBeCalled();
         $this->hasSubscriber($subscriberInterface)->shouldReturn(false);
     }
-
 }

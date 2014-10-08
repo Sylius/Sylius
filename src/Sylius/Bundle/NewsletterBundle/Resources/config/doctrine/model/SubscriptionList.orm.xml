@@ -26,6 +26,6 @@
         <field name="description" column="description" type="string" nullable="true" />
 
         <many-to-many field="subscribers" mapped-by="subscriptionLists"
-                      target-entity="Sylius\Component\Newsletter\Model\Subscriber"/>
+                      target-entity="Sylius\Component\Newsletter\Model\SubscriberInterface"/>
     </mapped-superclass>
 </doctrine-mapping>

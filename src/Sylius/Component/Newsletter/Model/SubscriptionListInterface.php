@@ -64,4 +64,4 @@ interface SubscriptionListInterface
      * @return Collection/SubscriberInterface[]
      */
     public function getSubscribers();
-} 
+}

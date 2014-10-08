@@ -64,5 +64,4 @@ class NewsletterContext extends DefaultContext
 
         $manager->flush();
     }
-
 }

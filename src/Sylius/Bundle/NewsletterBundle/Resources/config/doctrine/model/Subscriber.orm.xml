@@ -25,7 +25,7 @@
         <field name="email" column="email" type="string"/>
 
         <many-to-many field="subscriptionLists" inversed-by="subscribers"
-                      target-entity="Sylius\Component\Newsletter\Model\SubscriptionList">
+                      target-entity="Sylius\Component\Newsletter\Model\SubscriptionListInterface">
             <join-table name="sylius_subscribers_subscription_lists">
                 <join-columns>
                     <join-column name="subscriber_id" referenced-column-name="id"/>

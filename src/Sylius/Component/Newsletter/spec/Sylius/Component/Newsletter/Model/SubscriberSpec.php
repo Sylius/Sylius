@@ -19,38 +19,38 @@ use Sylius\Component\Newsletter\Model\SubscriptionListInterface;
  */
 class SubscriberSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Newsletter\Model\Subscriber');
     }
 
-    function it_implements_Sylius_subscriber_interface()
+    public function it_implements_Sylius_subscriber_interface()
     {
         $this->shouldImplement('Sylius\Component\Newsletter\Model\SubscriberInterface');
     }
 
-    function it_has_no_id_by_default()
+    public function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_email_by_default()
+    public function it_has_no_email_by_default()
     {
         $this->getEmail()->shouldReturn(null);
     }
 
-    function its_email_is_mutable()
+    public function its_email_is_mutable()
     {
         $this->setEmail('michal@lakion.com');
         $this->getEmail()->shouldReturn('michal@lakion.com');
     }
 
-    function it_creates_subscription_lists_collection_by_default()
+    public function it_creates_subscription_lists_collection_by_default()
     {
         $this->getSubscriptionLists()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_subscription_lists_properly(SubscriptionListInterface $subscriptionListInterface)
+    public function it_adds_subscription_lists_properly(SubscriptionListInterface $subscriptionListInterface)
     {
         $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(false);
 
@@ -59,7 +59,7 @@ class SubscriberSpec extends ObjectBehavior
         $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(true);
     }
 
-    function it_removes_subscription_lists_properly(SubscriptionListInterface $subscriptionListInterface)
+    public function it_removes_subscription_lists_properly(SubscriptionListInterface $subscriptionListInterface)
     {
         $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(false);
 
@@ -71,12 +71,12 @@ class SubscriberSpec extends ObjectBehavior
         $this->hasSubscriptionList($subscriptionListInterface)->shouldReturn(false);
     }
 
-    function it_initializes_creation_date_by_default()
+    public function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');
     }
 
-    function its_creation_date_is_mutable()
+    public function its_creation_date_is_mutable()
     {
         $date = new \DateTime();
 
@@ -84,12 +84,12 @@ class SubscriberSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn($date);
     }
 
-    function it_has_no_last_update_date_by_default()
+    public function it_has_no_last_update_date_by_default()
     {
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    public function its_last_update_date_is_mutable()
     {
         $date = new \DateTime();
 
