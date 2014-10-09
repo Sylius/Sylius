@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrencyContext implements CurrencyContextInterface
 {
+    const SESSION_KEY = '_sylius.currency';
+
     protected $session;
     protected $defaultCurrency;
 
@@ -38,7 +40,11 @@ class CurrencyContext implements CurrencyContextInterface
      */
     public function getCurrency()
     {
-        return $this->session->get('currency', $this->defaultCurrency);
+        if (!$this->session->isStarted()) {
+            return $this->defaultCurrency;
+        }
+
+        return $this->session->get(self::SESSION_KEY, $this->defaultCurrency);
     }
 
     /**
@@ -46,6 +52,6 @@ class CurrencyContext implements CurrencyContextInterface
      */
     public function setCurrency($currency)
     {
-        return $this->session->set('currency', $currency);
+        return $this->session->set(self::SESSION_KEY, $currency);
     }
 }
