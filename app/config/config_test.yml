@@ -3,6 +3,7 @@ imports:
 
 parameters:
     sylius.promotion.item_based: true
+    sylius.order.allow_guest_order: true
 
 framework:
     test: ~

@@ -53,10 +53,6 @@ class LocaleContext implements LocaleContextInterface
      */
     public function getLocale()
     {
-        if (!$this->session->isStarted()) {
-            return $this->defaultLocale;
-        }
-
         return $this->session->get(self::SESSION_KEY, $this->defaultLocale);
     }
 

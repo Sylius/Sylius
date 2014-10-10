@@ -12,9 +12,6 @@ Feature: Checkout coupon promotions
         And promotion "Press campaign" has following rules defined:
           | type       | configuration |
           | Item total | Amount: 100   |
-        And promotion "Press campaign" has following actions defined:
-          | type           | configuration |
-          | Fixed discount | Amount: 5     |
         And promotion "Press campaign" has following coupons:
           | code   | usage limit | used |
           | XD0001 | 1           | 0    |

@@ -5,7 +5,12 @@ Feature: General settings
     I want to be able to edit general configuration
 
     Background:
-        Given there is default currency configured
+        Given there are following currencies configured:
+            | code | exchange rate | enabled |
+            | USD  | 0.76496       | yes     |
+            | GBP  | 1.16998       | no      |
+            | EUR  | 1.00000       | yes     |
+            | AUD  | 0.73986       | yes     |
           And I am logged in as administrator
 
     Scenario: Accessing the settings form
