@@ -44,7 +44,8 @@ class AddressingContext extends DefaultContext
         if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
             $country = $this->getRepository('country')->createNew();
             $country->setName(trim($name));
-            $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+            $country->setIsoName(substr($name, 0, 3));
+            // $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
 
             if (null !== $provinces) {
                 $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
