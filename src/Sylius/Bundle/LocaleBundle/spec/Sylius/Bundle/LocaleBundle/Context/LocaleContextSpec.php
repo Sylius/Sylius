@@ -37,8 +37,15 @@ class LocaleContextSpec extends ObjectBehavior
         $this->getDefaultLocale()->shouldReturn('pl_PL');
     }
 
+    function it_returns_default_locale_if_session_has_not_been_started_yet($session)
+    {
+        $session->isStarted()->shouldBeCalled()->willReturn(false);
+        $this->getLocale()->shouldReturn('pl_PL');
+    }
+
     function it_gets_locale_from_session($session)
     {
+        $session->isStarted()->shouldBeCalled()->willReturn(true);
         $session->get(LocaleContext::SESSION_KEY, 'pl_PL')->shouldBeCalled()->willReturn('en_US');
 
         $this->getLocale()->shouldReturn('en_US');

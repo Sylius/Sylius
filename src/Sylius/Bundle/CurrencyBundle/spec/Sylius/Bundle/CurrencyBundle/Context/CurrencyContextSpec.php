@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Context;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
@@ -38,14 +39,15 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_gets_currency_from_session($session)
     {
-        $session->get('currency', 'EUR')->shouldBeCalled()->willReturn('RSD');
+        $session->isStarted()->shouldBeCalled()->willReturn(true);
+        $session->get(CurrencyContext::SESSION_KEY, 'EUR')->shouldBeCalled()->willReturn('RSD');
 
         $this->getCurrency()->shouldReturn('RSD');
     }
 
     function it_sets_currency_to_session($session)
     {
-        $session->set('currency', 'PLN')->shouldBeCalled();
+        $session->set(CurrencyContext::SESSION_KEY, 'PLN')->shouldBeCalled();
 
         $this->setCurrency('PLN');
     }

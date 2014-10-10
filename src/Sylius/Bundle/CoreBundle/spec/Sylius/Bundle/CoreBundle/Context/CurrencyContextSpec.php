@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Component\Core\Model\User;
@@ -59,7 +60,8 @@ class CurrencyContextSpec extends ObjectBehavior
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn(null);
-        $session->get('currency', 'EUR')->shouldBeCalled()->willReturn('RSD');
+        $session->isStarted()->shouldBeCalled()->willReturn(true);
+        $session->get(CurrencyContext::SESSION_KEY, 'EUR')->shouldBeCalled()->willReturn('RSD');
 
         $this->getCurrency()->shouldReturn('RSD');
     }
@@ -86,7 +88,7 @@ class CurrencyContextSpec extends ObjectBehavior
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
         $token->getUser()->shouldBeCalled()->willReturn(null);
-        $session->set('currency', 'PLN')->shouldBeCalled();
+        $session->set(CurrencyContext::SESSION_KEY, 'PLN')->shouldBeCalled();
 
         $this->setCurrency('PLN');
     }
