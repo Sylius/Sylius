@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class SessionCartStorage implements CartStorageInterface
 {
-    const KEY = '_sylius.cart-id';
+    const KEY = '_sylius.cart_id';
 
     /**
      * Session.
@@ -55,7 +55,9 @@ class SessionCartStorage implements CartStorageInterface
      */
     public function getCurrentCartIdentifier()
     {
-        return $this->session->get($this->key);
+        if ($this->session->isStarted()) {
+            return $this->session->get($this->key);
+        }
     }
 
     /**
