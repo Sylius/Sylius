@@ -13,7 +13,6 @@ namespace Sylius\Bundle\ContentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Slideshow block type.
@@ -44,7 +43,7 @@ class SlideshowBlockType extends AbstractResourceType
                 'by_reference' => false,
                 'label'        => 'sylius.form.slideshow_block.childrens'
              ))
-            ;
+        ;
 
     }
 
