@@ -30,7 +30,7 @@ class DatabaseDriverFactory
     ) {
         switch ($type) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return new DoctrineORMDriver($container, $prefix, $resourceName, $managerName,  $templates);
+                return new DoctrineORMDriver($container, $prefix, $resourceName, $managerName, $templates);
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
                 return new DoctrineODMDriver($container, $prefix, $resourceName, $managerName, $templates);
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
