@@ -20,14 +20,15 @@
         }
     ],
     "require": {
-        "php":                        ">=5.3.3",
+        "php":                               ">=5.3.3",
 
-        "sylius/resource-bundle":     "0.11.*@dev",
-        "symfony-cmf/block-bundle":   "1.0.*",
-        "symfony-cmf/content-bundle": "1.0.*",
-        "symfony-cmf/menu-bundle":    "1.0.*",
-        "symfony-cmf/routing-bundle": "1.1.*",
-        "symfony/framework-bundle":   "~2.3"
+        "jackalope/jackalope-doctrine-dbal": "1.0.*",
+        "sylius/resource-bundle":            "0.11.*@dev",
+        "symfony-cmf/block-bundle":          "1.0.*",
+        "symfony-cmf/content-bundle":        "1.0.*",
+        "symfony-cmf/menu-bundle":           "1.0.*",
+        "symfony-cmf/routing-bundle":        "1.1.*",
+        "symfony/framework-bundle":          "~2.3"
     },
     "require-dev": {
         "phpspec/phpspec":  "~2.0",
