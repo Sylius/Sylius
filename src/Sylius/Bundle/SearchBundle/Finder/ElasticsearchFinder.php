@@ -186,7 +186,7 @@ class ElasticsearchFinder implements FinderInterface
             $this->initializeFacetGroup($this->facetGroup);
         }
 
-        $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), 'product');
+        $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), $this->targetTypes);
 
         $objects = $this->targetIndex->search($elasticaQuery);
         $mapping = $this->targetIndex->getMapping();
@@ -257,21 +257,24 @@ class ElasticsearchFinder implements FinderInterface
 
     /**
      * @param null $facets
-     * @param      $configuration
-     * @param      $taxon
-     * @param      $type
+     * @param $configuration
+     * @param $taxon
+     * @param null $types
      *
      * @return mixed
      */
-    public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $type = null)
+    public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter       = new \Elastica\Filter\Bool();
 
-        if ($type) {
-            $typeFilter = new \Elastica\Filter\Term();
-            $typeFilter->setTerm('_type', $type);
-            $boolFilter->addMust($typeFilter);
+        if (!empty($types)) {
+
+            foreach ($types as $type) {
+                $typeFilter = new \Elastica\Filter\Type($type);
+                $boolFilter->addMust($typeFilter);
+            }
+            $elasticaQuery->setFilter($boolFilter);
         }
 
         $query = new \Elastica\Query\Filtered();
