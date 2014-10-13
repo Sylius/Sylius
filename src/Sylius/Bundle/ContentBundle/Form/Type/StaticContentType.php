@@ -25,7 +25,7 @@ class StaticContentType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('publishable', null, array(
