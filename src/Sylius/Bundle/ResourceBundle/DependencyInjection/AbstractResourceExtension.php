@@ -158,6 +158,7 @@ abstract class AbstractResourceExtension extends Extension
                     $container,
                     $this->applicationName,
                     $model,
+                    isset($config['object_manager']) ? $config['object_manager'] : 'default',
                     isset($config['templates'][$model]) ? $config['templates'][$model] : null
                 )->load($classes);
             }
