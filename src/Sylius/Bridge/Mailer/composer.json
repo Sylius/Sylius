@@ -1,0 +1,43 @@
+{
+    "name": "sylius/mailer-bridge",
+    "type": "symfony-bridge",
+    "description": "Sylius Mailer Bridge",
+    "keywords": [],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":       ">=5.3.3",
+
+        "twig/twig": "~1.11"
+    },
+    "require-dev": {
+        "swiftmailer/swiftmailer":    "~5.0",
+        "henrikbjorn/stampie-bundle": "~0.1@dev"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bridge\\Mailer\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bridge\\Mailer\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.11-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}

@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Mailer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Mailer\TwigMailerInterface;
+use Sylius\Bridge\Mailer\TwigMailerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 
 class CustomerWelcomeMailerSpec extends ObjectBehavior
@@ -39,12 +39,11 @@ class CustomerWelcomeMailerSpec extends ObjectBehavior
 
     function it_sends_customer_welcome_email(UserInterface $user, TwigMailerInterface $mailer)
     {
-        $parameters = array('template' => 'test-template.html.twig', 'from_email' => 'from@example.com');
-        $this->beConstructedWith($mailer, $parameters);
+        $this->beConstructedWith($mailer, array('template' => 'test-template.html.twig', 'from_email' => 'from@example.com'));
 
         $user->getEmail()->willReturn('recipient@example.com');
 
-        $mailer->sendEmail(
+        $mailer->send(
             'test-template.html.twig',
             array('user' => $user),
             'from@example.com',
