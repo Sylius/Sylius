@@ -64,6 +64,9 @@
         </service>
         <service id="sylius.checkout_form.guest" class="%sylius.checkout_form.guest.class%">
             <argument>%sylius.model.cart.class%</argument>
+            <argument type="collection">
+                <argument>Guest</argument>
+            </argument>
             <tag name="form.type" alias="sylius_checkout_guest" />
         </service>
 
