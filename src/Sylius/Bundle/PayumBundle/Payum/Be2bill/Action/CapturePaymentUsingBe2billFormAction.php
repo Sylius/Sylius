@@ -67,11 +67,11 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
 
         $details = array();
         $details['AMOUNT'] = $order->getTotal();
-        $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
+        $details['CLIENTEMAIL'] = $order->getEmail();
         $details['HIDECLIENTEMAIL'] = 'yes';
         $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
         $details['CLIENTIP'] = $this->httpRequest->getClientIp();
-        $details['CLIENTIDENT'] = $order->getUser()->getId();
+        $details['CLIENTIDENT'] = $order->getUser() ? $order->getUser()->getId() : $order->getEmail();
         $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
         $details['ORDERID'] = $payment->getId();
 
