@@ -21,6 +21,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  * Form event listener that builds choices for attribute form.
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
+ * @author Liverbool <liverbool@gmail.com>
  */
 class BuildAttributeFormChoicesListener implements EventSubscriberInterface
 {
@@ -46,7 +47,40 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'buildChoices');
+        return array(
+            FormEvents::PRE_SET_DATA    => 'buildChoices',
+            FormEvents::PRE_SUBMIT      => 'buildConfiguration',
+        );
+    }
+
+    /**
+     * Build configuration field for attribute form.
+     *
+     * @param FormEvent $event
+     */
+    public function buildConfiguration(FormEvent $event)
+    {
+        $data = $event->getData();
+        $choices = array();
+
+        if (AttributeTypes::CHOICE === $data['type'] && !empty($data['choices'])) {
+            $choices = $data['choices'];
+        }
+
+        $data['configuration'] = $choices;
+
+        if (!$event->getForm()->has('configuration')) {
+            $event->getForm()->add(
+                $this->factory->createNamed('configuration', 'collection', null, array(
+                    'allow_add'         => true,
+                    'allow_delete'      => true,
+                    'by_reference'      => false,
+                    'auto_initialize'   => false,
+                ))
+            );
+        }
+
+        $event->setData($data);
     }
 
     /**
@@ -64,14 +98,24 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
         $type = $attribute->getType();
 
         if (null === $type || AttributeTypes::CHOICE === $type) {
+            $data = null;
+            $config = $attribute->getConfiguration();
+
+            if (!empty($config['choices'])) {
+                $data = $config['choices'];
+            }
+
             $event->getForm()->add(
                 $this->factory->createNamed('choices', 'collection', null, array(
-                    'type'         => 'text',
-                    'allow_add'    => true,
-                    'allow_delete' => true,
-                    'by_reference' => false
-                ))
-            );
+                    'type'              => 'text',
+                    'allow_add'         => true,
+                    'allow_delete'      => true,
+                    'by_reference'      => false,
+                    'auto_initialize'   => false,
+                    'mapped'            => false,
+                    'data'              => $data,
+                )
+            ));
         }
     }
 }
