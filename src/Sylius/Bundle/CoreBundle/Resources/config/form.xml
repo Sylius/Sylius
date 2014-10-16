@@ -24,7 +24,6 @@
         <parameter key="sylius.checkout_form.guest.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\GuestType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
-        <parameter key="sylius.form.type.order_item.class">Sylius\Bundle\CoreBundle\Form\Type\OrderItemType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
 
