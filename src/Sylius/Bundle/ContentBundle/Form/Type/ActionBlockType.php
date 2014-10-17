@@ -34,7 +34,6 @@ class ActionBlockType extends AbstractResourceType
                 'label' => 'sylius.form.action_block.action_name',
             ))
         ;
-
     }
 
     /**

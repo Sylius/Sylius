@@ -39,8 +39,8 @@ class RouteType extends AbstractResourceType
                 'label' => 'sylius.form.route.content',
                 'required' => false
             ))
-            ;
-            
+        ;
+
     }
 
     /**

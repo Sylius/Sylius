@@ -62,7 +62,7 @@ class MenuType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.menu.display_children'
             ))
-            ;
+        ;
 
     }
 

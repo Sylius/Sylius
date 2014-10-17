@@ -13,27 +13,24 @@ namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * Content extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
-class SyliusContentExtension extends AbstractResourceExtension implements PrependExtensionInterface
+class SyliusContentExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
+        $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+        );
     }
 }
