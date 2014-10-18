@@ -33,11 +33,8 @@ class RouteType extends AbstractResourceType
             ->add('parent', null, array(
                 'label' => 'sylius.form.route.parent'
             ))
-            ->add('content', null, array(
-                'class' => 'Symfony\Cmf\Bundle\ContentBundle\Model\StaticContent',
-                'property' => 'title',
+            ->add('content', 'sylius_content_choice', array(
                 'label' => 'sylius.form.route.content',
-                'required' => false
             ))
         ;
 

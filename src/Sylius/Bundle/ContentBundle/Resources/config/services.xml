@@ -4,6 +4,11 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.content_choice.class">Sylius\Bundle\ContentBundle\Form\Type\ContentChoiceType</parameter>
+    </parameters>
+
     <services>
         <service id="sylius.form.type.simple_block" class="%sylius.form.type.simple_block.class%">
             <argument>%sylius.model.simple_block.class%</argument>
@@ -68,6 +73,11 @@
             <argument>%sylius.model.static_content.class%</argument>
             <argument>%sylius.validation_group.static_content%</argument>
             <tag name="form.type" alias="sylius_static_content" />
+        </service>
+
+        <service id="sylius.form.type.content_choice" class="%sylius.form.type.content_choice.class%">
+            <argument>%sylius.model.static_content.class%</argument>
+            <tag name="form.type" alias="sylius_content_choice" />
         </service>
     </services>
 </container>
