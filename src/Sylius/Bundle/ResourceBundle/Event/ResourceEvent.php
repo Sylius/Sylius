@@ -26,13 +26,6 @@ class ResourceEvent extends GenericEvent
     const TYPE_SUCCESS = 'success';
 
     /**
-     * Indicate if an error has been detected
-     *
-     * @var Boolean
-     */
-    protected $error = false;
-
-    /**
      * Message type
      *
      * @var string
@@ -62,7 +55,6 @@ class ResourceEvent extends GenericEvent
      */
     public function stop($message, $type = self::TYPE_ERROR, $parameters = array())
     {
-        $this->error = true;
         $this->messageType = $type;
         $this->message = $message;
         $this->messageParameters = $parameters;
@@ -71,13 +63,13 @@ class ResourceEvent extends GenericEvent
     }
 
     /**
-     * Get error property
+     * Alias
      *
      * @return bool
      */
     public function isStopped()
     {
-        return $this->error === true;
+        return $this->isPropagationStopped();
     }
 
     /**
