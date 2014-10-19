@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
  * Api extension.
@@ -22,10 +23,6 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  */
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
-    protected $configFiles = array(
-        'services',
-    );
-
     /**
      * {@inheritdoc}
      */
@@ -41,14 +38,16 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
 
     /**
      * {@inheritdoc}
+     *
+     * @throws ServiceNotFoundException
      */
     public function prepend(ContainerBuilder $container)
     {
-        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
-
         if (!$container->hasExtension('fos_oauth_server')) {
-            throw new \Exception('FOSOAuthServerBundle must be registered in kernel.');
+            throw new ServiceNotFoundException('FOSOAuthServerBundle must be registered in kernel.');
         }
+
+        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         $container->prependExtensionConfig('fos_oauth_server', array(
             'db_driver'           => 'orm',
@@ -56,8 +55,10 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             'access_token_class'  => $config['classes']['api_access_token']['model'],
             'refresh_token_class' => $config['classes']['api_refresh_token']['model'],
             'auth_code_class'     => $config['classes']['api_auth_code']['model'],
-            'service'             => array('user_provider' => 'fos_user.user_provider')
+
+            'service'             => array(
+                'user_provider' => 'fos_user.user_provider'
+            ),
         ));
     }
-
 }

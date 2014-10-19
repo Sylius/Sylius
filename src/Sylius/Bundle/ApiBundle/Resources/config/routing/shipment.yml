@@ -1,0 +1,36 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_shipment_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipment:indexAction
+        _sylius:
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_api_shipment_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.shipment:createAction
+
+sylius_api_shipment_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+
+sylius_api_shipment_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.shipment:deleteAction
+
+sylius_api_shipment_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shipment:showAction
