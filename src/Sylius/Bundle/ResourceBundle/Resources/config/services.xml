@@ -32,6 +32,7 @@
 
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
+        <parameter key="symfony.expression.language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
     </parameters>
 
     <services>
