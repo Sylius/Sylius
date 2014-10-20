@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\DependencyInjection;
 
-use Sylius\Bundle\FlowBundle\DependencyInjection\SyliusFlowExtension;
+use Sylius\Bundle\FlowBundle\DependencyInjection\SyliusFixturesExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Yaml\Parser;
 
@@ -28,7 +28,7 @@ class SyliusFlowExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowExceptionUnlessStorageConfigured()
     {
-        $extension = new SyliusFlowExtension();
+        $extension = new SyliusFixturesExtension();
 
         $config = $this->getEmptyConfig();
         $config['storage'] = '';
