@@ -325,7 +325,7 @@ class ResourceController extends FOSRestController
     public function getForm($resource = null)
     {
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
+            return $this->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
         }
 
         return $this->createForm($this->config->getFormType(), $resource);
