@@ -51,7 +51,7 @@ class CartProviderSpec extends ObjectBehavior
         CartInterface $cart
     ) {
         $storage->getCurrentCartIdentifier()->willReturn(3);
-        $repository->find(3)->shouldBeCalled()->willReturn($cart);
+        $repository->find(3)->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldNotBeCalled();
 
         $this->getCart()->shouldReturn($cart);
@@ -121,7 +121,7 @@ class CartProviderSpec extends ObjectBehavior
         CartInterface $cart
     ) {
         $storage->getCurrentCartIdentifier()->willReturn(666);
-        $repository->find(666)->shouldBeCalled()->willReturn($cart);
+        $repository->find(666)->willReturn($cart);
 
         $this->hasCart()->shouldReturn(true);
     }
