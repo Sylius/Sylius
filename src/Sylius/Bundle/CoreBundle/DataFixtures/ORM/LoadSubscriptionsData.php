@@ -60,7 +60,7 @@ class LoadSubscriptionsData extends DataFixture
 
         for ($j = 1;$j < rand(1, 5);$j++) {
             $item = $itemRepository->createNew();
-            $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS));
+            $variant = $this->getReference('Sylius.Variant-'.rand(0, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
 
             $item
                 ->setVariant($variant)
