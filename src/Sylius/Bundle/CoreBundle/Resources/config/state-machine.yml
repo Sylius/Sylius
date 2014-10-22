@@ -84,8 +84,8 @@ winzou_state_machine:
                     args: ['object']
                 sylius_update_shipment:
                     on:   'confirm'
-                    do:   [@sm.callback.cascade_transition, 'apply']
-                    args: ['object.getShipments()', 'event', '"prepare"', '"sylius_shipment"']
+                    do:   [@sylius.callback.shipment_states, 'updateOrderShipmentStates']
+                    args: ['object']
                 sylius_increment_coupon:
                     on:   'confirm'
                     do:   [@sylius.callback.coupon_usage, 'incrementCouponUsage']
