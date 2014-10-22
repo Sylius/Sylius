@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Finder;
 
 use Doctrine\ORM\EntityManager;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
@@ -178,8 +179,12 @@ class OrmFinder implements FinderInterface
         $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array());
 
         $ids = array();
-        foreach ($paginator as $product) {
-            $ids[] = $product->getId();
+        $pages = $paginator->getNbPages();
+        for ($i = 1; $i <= $pages; $i++) {
+            $paginator->setCurrentPage($i);
+            foreach ($paginator->getIterator() as $product) {
+                $ids[] = $product->getId();
+            }
         }
 
         // Now apply any filtered facets to reduce the available products
@@ -189,7 +194,6 @@ class OrmFinder implements FinderInterface
             ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
-
         $indexedItems = $queryBuilder->getQuery()->getResult();
 
         // TODO: Need to configure / refactor this default!

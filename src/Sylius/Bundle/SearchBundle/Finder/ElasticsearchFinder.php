@@ -76,6 +76,12 @@ class ElasticsearchFinder implements FinderInterface
     private $targetTypes = [];
 
     /**
+     * TODO: maybe this should go to configuration, you can use setResultSetSize on the finder object for now
+     * @var
+     */
+    private $resultSetSize = 100;
+
+    /**
      * @param SearchIndexRepository $searchRepository
      * @param $config
      * @param $productRepository
@@ -151,6 +157,18 @@ class ElasticsearchFinder implements FinderInterface
     }
 
     /**
+     * @param $size
+     *
+     * @return $this
+     */
+    public function setResultSetSize($size)
+    {
+        $this->resultSetSize = $size;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      *
      * TODO: a simple if does the job for now, in future this should move to a
@@ -187,6 +205,8 @@ class ElasticsearchFinder implements FinderInterface
         }
 
         $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), $this->targetTypes);
+
+        $elasticaQuery->setSize($this->resultSetSize);
 
         $objects = $this->targetIndex->search($elasticaQuery);
         $mapping = $this->targetIndex->getMapping();
@@ -229,7 +249,7 @@ class ElasticsearchFinder implements FinderInterface
             $this->targetTypes
         );
 
-        $elasticaQuery->setSize(550);
+        $elasticaQuery->setSize($this->resultSetSize);
 
         $objects = $this->targetIndex->search($elasticaQuery);
         $mapping = $this->targetIndex->getMapping();
