@@ -53,23 +53,18 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
             return false;
         }
 
-        // The user must be assigned to order
-        if (null === $user = $subject->getUser()) {
-            return false;
-        }
-
         $eligible = false;
 
         // Check to see if there is a per user usage limit on coupon
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
             $coupon = $subject->getPromotionCoupon();
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
-                $eligible = $this->isCouponEligibleToLimit($coupon, $user, $promotion);
+                $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getUser());
             }
         } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
             foreach ($subject->getPromotionCoupons() as $coupon) {
                 if ($promotion === $coupon->getPromotion()) {
-                    $eligible = $this->isCouponEligibleToLimit($coupon, $user, $promotion);
+                    $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getUser());
 
                     break;
                 }
@@ -85,7 +80,7 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
         return $eligible;
     }
 
-    private function isCouponEligibleToLimit(CouponInterface $coupon, UserInterface $user, PromotionInterface $promotion)
+    private function isCouponEligibleToLimit(CouponInterface $coupon, PromotionInterface $promotion, UserInterface $user = null)
     {
         if (!$coupon instanceof CouponInterface) {
             return true;
@@ -95,10 +90,14 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
             return true;
         }
 
-        return $this->isCouponEligible($coupon, $user, $promotion);
+        if (null === $user) {
+            return true;
+        }
+
+        return $this->isCouponEligible($coupon, $promotion, $user);
     }
 
-    private function isCouponEligible(CouponInterface $coupon, UserInterface $user, PromotionInterface $promotion)
+    private function isCouponEligible(CouponInterface $coupon, PromotionInterface $promotion, UserInterface $user)
     {
         $countPlacedOrders = $this->subjectRepository->countByUserAndCoupon($user, $coupon);
 
