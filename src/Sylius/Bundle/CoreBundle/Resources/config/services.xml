@@ -77,6 +77,40 @@
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
+
+        <parameter key="sylius.constant.event.address.post_update" type="constant">Sylius\Component\Core\SyliusAddressEvents::POST_UPDATE</parameter>
+        <parameter key="sylius.constant.event.cart.cart_change" type="constant">Sylius\Component\Cart\SyliusCartEvents::CART_CHANGE</parameter>
+        <parameter key="sylius.constant.event.cart.cart_initialize" type="constant">Sylius\Component\Cart\SyliusCartEvents::CART_INITIALIZE</parameter>
+        <parameter key="sylius.constant.event.checkout.addressing_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::ADDRESSING_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.checkout.addressing_pre_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.checkout.finalize_pre_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.checkout.finalize_initialize" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::FINALIZE_INITIALIZE</parameter>
+        <parameter key="sylius.constant.event.checkout.payment_initialize" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::PAYMENT_INITIALIZE</parameter>
+        <parameter key="sylius.constant.event.checkout.purchase_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::PURCHASE_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.checkout.purchase_pre_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.checkout.security_pre_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::SECURITY_PRE_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.checkout.shipping_initialize" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::SHIPPING_INITIALIZE</parameter>
+        <parameter key="sylius.constant.event.checkout.shipping_pre_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE</parameter>
+        <parameter key="sylius.constant.event.order_item.pre_create" type="constant">Sylius\Component\Core\SyliusOrderItemEvents::PRE_CREATE</parameter>
+        <parameter key="sylius.constant.event.order_item.pre_update" type="constant">Sylius\Component\Core\SyliusOrderItemEvents::PRE_UPDATE</parameter>
+        <parameter key="sylius.constant.event.product.pre_create" type="constant">Sylius\Component\Core\SyliusProductEvents::PRE_CREATE</parameter>
+        <parameter key="sylius.constant.event.product.pre_update" type="constant">Sylius\Component\Core\SyliusProductEvents::PRE_UPDATE</parameter>
+        <parameter key="sylius.constant.event.product_variant.pre_create" type="constant">Sylius\Component\Core\SyliusProductVariantEvents::PRE_CREATE</parameter>
+        <parameter key="sylius.constant.event.product_variant.pre_update" type="constant">Sylius\Component\Core\SyliusProductVariantEvents::PRE_UPDATE</parameter>
+        <parameter key="sylius.constant.event.promotion.coupon_invalid" type="constant">Sylius\Component\Promotion\SyliusPromotionEvents::COUPON_INVALID</parameter>
+        <parameter key="sylius.constant.event.promotion.coupon_eligible" type="constant">Sylius\Component\Promotion\SyliusPromotionEvents::COUPON_ELIGIBLE</parameter>
+        <parameter key="sylius.constant.event.promotion.coupon_not_eligible" type="constant">Sylius\Component\Promotion\SyliusPromotionEvents::COUPON_NOT_ELIGIBLE</parameter>
+        <parameter key="sylius.constant.event.taxon.pre_create" type="constant">Sylius\Component\Core\SyliusTaxonEvents::PRE_CREATE</parameter>
+        <parameter key="sylius.constant.event.taxon.pre_update" type="constant">Sylius\Component\Core\SyliusTaxonEvents::PRE_UPDATE</parameter>
+        <parameter key="sylius.constant.event.taxonomy.pre_create" type="constant">Sylius\Component\Core\SyliusTaxonomyEvents::PRE_CREATE</parameter>
+        <parameter key="sylius.constant.event.taxonomy.pre_update" type="constant">Sylius\Component\Core\SyliusTaxonomyEvents::PRE_UPDATE</parameter>
+        <parameter key="sylius.constant.event.user.post_create" type="constant">Sylius\Component\Core\SyliusUserEvents::POST_CREATE</parameter>
+        <parameter key="sylius.constant.event.user.post_update" type="constant">Sylius\Component\Core\SyliusUserEvents::POST_UPDATE</parameter>
+
+        <parameter key="doctrine.constant.event.pre_persist" type="constant">Doctrine\ORM\Events::prePersist</parameter>
+        <parameter key="doctrine.constant.event.on_flush" type="constant">Doctrine\ORM\Events::onFlush</parameter>
+        <parameter key="symfony.constant.event.http_kernel.exception" type="constant">Symfony\Component\HttpKernel\KernelEvents::EXCEPTION</parameter>
+        <parameter key="winzou.constant.event.sm.post_transition" type="constant">SM\Event\SMEvents::POST_TRANSITION</parameter>
     </parameters>
 
     <services>
@@ -200,70 +234,70 @@
         <!-- listeners -->
         <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
             <argument type="service" id="fos_user.user_manager" />
-            <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
-            <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.user.post_create%" method="processUser" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.user.post_update%" method="processUser" />
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="processInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="processInventoryUnits" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_create" method="resolveInventoryState" priority="-100" />
-            <tag name="kernel.event_listener" event="sylius.order_item.pre_update" method="resolveInventoryState" priority="-100" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.finalize_pre_complete%" method="holdInventoryUnits" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.order_item.pre_create%" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.order_item.pre_update%" method="processInventoryUnits" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.order_item.pre_create%" method="resolveInventoryState" priority="-100" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.order_item.pre_update%" method="resolveInventoryState" priority="-100" />
         </service>
         <service id="sylius.listener.order_item_inventory" class="%sylius.listener.order_item_inventory.class%">
             <argument type="service" id="event_dispatcher" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="onFlush" />
+            <tag name="doctrine.event_listener" event="%doctrine.constant.event.pre_persist%" />
+            <tag name="doctrine.event_listener" event="%doctrine.constant.event.on_flush%" />
         </service>
         <service id="sylius.listener.order_pricing" class="%sylius.listener.order_pricing.class%">
             <argument type="service" id="sylius.price_calculator" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculatePrices" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.initialize" method="recalculatePrices" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.cart.cart_change%" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.finalize_initialize%" method="recalculatePrices" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.security_pre_complete%" method="recalculatePrices" />
         </service>
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.pre_complete" method="resolveOrderStates" priority="-100" />
-            <tag name="kernel.event_listener" event="winzou.state_machine.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.finalize_pre_complete%" method="resolveOrderStates" priority="-100" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.purchase_pre_complete%" method="resolveOrderStates" priority="-100" />
+            <tag name="kernel.event_listener" event="%winzou.constant.event.sm.post_transition%" method="resolveOrderStatesOnTransition" priority="-100" />
         </service>
         <service id="sylius.listener.order_taxation" class="%sylius.listener.order_taxation.class%">
             <argument type="service" id="sylius.order_processing.taxation_processor" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="applyTaxes" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.cart.cart_change%" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.security_pre_complete%" method="applyTaxes" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.addressing_pre_complete%" method="applyTaxes" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
             <argument type="service" id="sylius.order_processing.shipment_factory" />
             <argument type="service" id="sylius.processor.shipment_processor" />
             <argument type="service" id="sylius.order_processing.shipping_processor" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.initialize" method="processOrderShipments" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderShippingCharges" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateShipmentStatesOnhold" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.shipping_initialize%" method="processOrderShipments" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.shipping_pre_complete%" method="processOrderShippingCharges" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.finalize_pre_complete%" method="updateShipmentStatesOnhold" />
         </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <argument type="service" id="sylius.order_processing.payment_processor" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sm.factory" />
-            <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.payment_initialize%" method="createOrderPayment" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.finalize_pre_complete%" method="updateOrderPayment" />
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <argument>%sylius.promotion.item_based%</argument>
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderPromotion" priority="-50" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.pre_complete" method="processOrderPromotion" />
-            <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
-            <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
-            <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.cart.cart_change%" method="processOrderPromotion" priority="-50" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.addressing_pre_complete%" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.shipping_pre_complete%" method="processOrderPromotion" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.promotion.coupon_invalid%" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.promotion.coupon_eligible%" method="handleCouponPromotion" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.promotion.coupon_not_eligible%" method="handleCouponPromotion" />
         </service>
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
             <argument type="service" id="sylius.context.currency" />
-            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderCurrency" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.cart.cart_initialize%" method="processOrderCurrency" />
         </service>
         <service id="sylius.listener.restricted_zone" class="%sylius.listener.restricted_zone.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
@@ -271,13 +305,13 @@
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
-            <tag name="kernel.event_listener" event="sylius.address.post_update" method="handleRestrictedZone" />
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.complete" method="handleRestrictedZone" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.address.post_update%" method="handleRestrictedZone" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.addressing_complete%" method="handleRestrictedZone" />
         </service>
         <service id="sylius.listener.order_user" class="%sylius.listener.order_user.class%">
             <argument type="service" id="security.context" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setOrderUser" priority="100" />
-            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setOrderUser" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.security_pre_complete%" method="setOrderUser" priority="100" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.cart.cart_initialize%" method="setOrderUser" />
         </service>
         <service id="sylius.listener.purchase" class="%sylius.listener.purchase.class%">
             <argument type="service" id="sylius.cart_provider" />
@@ -285,26 +319,26 @@
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <argument>sylius_checkout_payment</argument>
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.purchase_complete%" method="abandonCart" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.purchase_complete%" method="addFlash" />
         </service>
         <service id="sylius.listener.insufficient_stock_exception" class="%sylius.listener.insufficient_stock_exception.class%">
             <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <argument>sylius_cart_summary</argument>
-            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+            <tag name="kernel.event_listener" event="%symfony.constant.event.http_kernel.exception%" method="onKernelException" />
         </service>
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
             <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
-            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
-            <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.product.pre_create%" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.product.pre_update%" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.product_variant.pre_create%" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.product_variant.pre_update%" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.taxon.pre_create%" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.taxon.pre_update%" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.taxonomy.pre_create%" method="uploadTaxonomyImage" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.taxonomy.pre_update%" method="uploadTaxonomyImage" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">

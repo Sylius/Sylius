@@ -18,14 +18,17 @@
 
     <parameters>
         <parameter key="sylius.listener.customer_welcome.class">Sylius\Bundle\CoreBundle\EventListener\CustomerWelcomeEmailListener</parameter>
+
+        <parameter key="fos.constant.event.user.registration_completed" type="constant">FOS\UserBundle\FOSUserEvents::REGISTRATION_COMPLETED</parameter>
+        <parameter key="fos.constant.event.user.registration_confirmed" type="constant">FOS\UserBundle\FOSUserEvents::REGISTRATION_CONFIRMED</parameter>
     </parameters>
 
     <services>
 
         <service id="sylius.listener.customer_welcome" class="%sylius.listener.customer_welcome.class%">
             <argument type="service" id="sylius.mailer.customer_welcome" />
-            <tag name="kernel.event_listener" event="fos_user.registration.completed" method="handleEvent" />
-            <tag name="kernel.event_listener" event="fos_user.registration.confirmed" method="handleEvent" />
+            <tag name="kernel.event_listener" event="%fos.constant.event.user.registration_completed%" method="handleEvent" />
+            <tag name="kernel.event_listener" event="%fos.constant.event.user.registration_confirmed%" method="handleEvent" />
         </service>
 
     </services>

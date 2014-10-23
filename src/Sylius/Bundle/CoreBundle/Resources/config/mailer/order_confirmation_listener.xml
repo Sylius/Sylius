@@ -18,13 +18,15 @@
 
     <parameters>
         <parameter key="sylius.listener.order_confirmation_email.class">Sylius\Bundle\CoreBundle\EventListener\OrderConfirmationEmailListener</parameter>
+
+        <parameter key="sylius.constant.event.checkout.finalize_complete" type="constant">Sylius\Component\Core\SyliusCheckoutEvents::FINALIZE_COMPLETE</parameter>
     </parameters>
 
     <services>
 
         <service id="sylius.listener.order_confirmation_email" class="%sylius.listener.order_confirmation_email.class%">
             <argument type="service" id="sylius.mailer.order_confirmation" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.complete" method="processOrderConfirmation" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.checkout.finalize_complete%" method="processOrderConfirmation" />
         </service>
 
     </services>
