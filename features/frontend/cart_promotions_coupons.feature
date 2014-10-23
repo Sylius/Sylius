@@ -15,12 +15,15 @@ Feature: Checkout coupon promotions
         And promotion "Press campaign" has following coupons:
           | code   | usage limit | used |
           | XD0001 | 1           | 0    |
+        And promotion "Press campaign" has following actions defined:
+          | type           | configuration |
+          | Fixed discount | Amount: 5     |
         And promotion "New Year campaign" has following rules defined:
           | type       | configuration |
           | Item count | Count: 2      |
         And promotion "New Year campaign" has following actions defined:
           | type           | configuration |
-          | Fixed discount | Amount: 10     |
+          | Fixed discount | Amount: 10    |
         And promotion "New Year campaign" has following coupons:
           | code   | usage limit | used |
           | XD0002 | 1           | 1    |
@@ -47,7 +50,7 @@ Feature: Checkout coupon promotions
           And I press "Save"
          Then I should be on the cart summary page
           And I should see "Your promotion coupon has been added to the cart"
-          And "Promotion total: (€5.00)" should appear on the page
+          And "Promotion total: -€5.00" should appear on the page
           And "Grand total: €115.00" should appear on the page
 
     Scenario: An invalid coupon can not be added to the cart
