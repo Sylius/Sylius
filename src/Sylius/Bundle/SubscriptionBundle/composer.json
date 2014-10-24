@@ -12,6 +12,10 @@
             "homepage": "http://www.codemassacre.com"
         },
         {
+            "name": "Michael Mackus",
+            "email": "michaelmackus@gmail.com"
+        },
+        {
             "name": "Community contributions",
             "homepage": "https://github.com/Sylius/SyliusSubscriptionBundle/contributors"
         }
@@ -20,7 +24,7 @@
         "php":                             ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "sylius/resource-bundle":          "1.0.*@dev",
+        "sylius/resource-bundle":          "0.11.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*"
     },
     "require-dev": {
@@ -37,7 +41,7 @@
     "target-dir": "Sylius/Bundle/SubscriptionBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.11-dev"
         }
     }
 }
