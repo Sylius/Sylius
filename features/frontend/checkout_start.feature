@@ -55,7 +55,6 @@ Feature: Checkout starting
           And I should see "Existing Customer"
           And I should see "New Customer"
           And I should see "Guest"
-          And I should see "Proceed with your order"
 
     Scenario: Not logged in users are starting checkout
               can checkout using only email without registration
