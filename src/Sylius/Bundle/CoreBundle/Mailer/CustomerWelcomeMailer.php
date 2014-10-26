@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
+use Sylius\Bridge\Mailer\AbstractMailer;
 use Sylius\Component\Core\Model\UserInterface;
 
 /**
@@ -25,6 +26,6 @@ class CustomerWelcomeMailer extends AbstractMailer implements CustomerWelcomeMai
      */
     public function sendCustomerWelcome(UserInterface $user)
     {
-        $this->sendEmail(array('user' => $user), $user->getEmail());
+        $this->send(array('user' => $user), $user->getEmail());
     }
 }

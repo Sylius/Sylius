@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
+use Sylius\Bridge\Mailer\AbstractMailer;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\CommentInterface;
 
@@ -36,6 +37,6 @@ class OrderCommentMailer extends AbstractMailer implements OrderCommentMailerInt
             throw new \InvalidArgumentException('Order has to belong to a User.');
         }
 
-        $this->sendEmail(array('order' => $order, 'comment' => $comment), $email);
+        $this->send(array('order' => $order, 'comment' => $comment), $email);
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
+use Sylius\Bridge\Mailer\AbstractMailer;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -29,6 +30,6 @@ class OrderConfirmationMailer extends AbstractMailer implements OrderConfirmatio
             throw new \InvalidArgumentException('Order must contain customer email');
         }
 
-        $this->sendEmail(array('order' => $order), $email);
+        $this->send(array('order' => $order), $email);
     }
 }

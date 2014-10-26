@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Mailer;
+namespace Sylius\Bridge\Mailer;
 
 /**
- * Abstract mailer to simplify other mailer implementations
+ * Abstract mailer to simplify other mailer implementations.
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
@@ -36,7 +36,7 @@ abstract class AbstractMailer
      */
     public function __construct(TwigMailerInterface $mailer, array $parameters)
     {
-        $this->mailer = $mailer;
+        $this->mailer     = $mailer;
         $this->parameters = $parameters;
     }
 
@@ -44,9 +44,9 @@ abstract class AbstractMailer
      * @param array  $context
      * @param string $recipient
      */
-    protected function sendEmail(array $context, $recipient)
+    protected function send(array $context, $recipient)
     {
-        $this->mailer->sendEmail(
+        $this->mailer->send(
             $this->parameters['template'],
             $context,
             $this->parameters['from_email'],
