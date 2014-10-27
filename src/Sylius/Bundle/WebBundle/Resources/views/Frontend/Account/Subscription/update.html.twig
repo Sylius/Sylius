@@ -5,7 +5,7 @@
     <h4>{{ 'sylius.account.subscription.update'|trans }}</h4>
 
     {{ form_errors(form) }}
-    {{ form_start(form, { method: 'PUT' }) }}
+    {{ form_start(form, { method: 'PUT', attr: { class: 'form-horizontal' } }) }}
     {% include 'SyliusWebBundle:Frontend/Account/Subscription:_form.html.twig' %}
     {{ update() }}
     {{ form_end(form) }}

@@ -10,10 +10,10 @@
 */
 
 namespace Sylius\Bundle\SubscriptionBundle\EventListener;
+
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
-use Sylius\Bundle\SubscriptionBundle\Model\RecurringInterface;
-use Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface;
+use Sylius\Component\Subscription\Event\SubscriptionEvent;
+use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
 
 /**
  * MaxCyclesListener

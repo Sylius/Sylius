@@ -27,12 +27,12 @@
                     {% for item in subscription.items %}
                         <tr>
                             <td>
-                                <a href="{{ path('sylius_product_show', {'slug': item.product.slug}) }}">
-                                    <img class="thumbnail" src="{{ item.product.image ? item.product.image.path|imagine_filter('sylius_50x40') : 'http://placehold.it/50x40' }}" alt="{{ item.product.name }}" />
+                                <a href="{{ path(item.product) }}">
+                                    <img class="thumbnail" src="{{ item.product.image ? item.product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/120x90' }}" alt="{{ item.product.name }}" />
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ path('sylius_product_show', {'slug': item.product.slug}) }}">
+                                <a href="{{ path(item.product) }}">
                                     <strong>{{ item.product.name }}</strong>
                                 </a>
                                 <ul>

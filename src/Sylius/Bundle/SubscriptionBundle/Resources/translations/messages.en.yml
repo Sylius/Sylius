@@ -1,0 +1,9 @@
+sylius.form.subscription:
+    scheduled_date: Scheduled Date
+    interval: Interval
+    limit:
+        0: Limit
+        help: Leave empty for ongoing subscription.
+    interval_unit: Interval
+    interval_frequency: Frequency
+    max_cycles: Max Cycles

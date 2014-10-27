@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SubscriptionBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\SubscriptionBundle\Repository\SubscriptionRepositoryInterface;
+use Sylius\Component\Subscription\Repository\SubscriptionRepositoryInterface;
 
 /**
  * Subscription repository

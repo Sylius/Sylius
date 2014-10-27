@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\EventListener;
 
-
-use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
-use Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface;
-use Sylius\Bundle\SubscriptionBundle\Scheduler\RecurringSchedulerInterface;
+use Sylius\Component\Subscription\Event\SubscriptionEvent;
+use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
+use Sylius\Component\Subscription\Scheduler\RecurringSchedulerInterface;
 
 /**
  * RecurringSchedulerListener

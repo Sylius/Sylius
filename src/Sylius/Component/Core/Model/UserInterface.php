@@ -157,7 +157,7 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
     /**
      * Get subscriptions
      *
-     * @return SubscriptionInterface[]
+     * @return Collection|SubscriptionInterface[]
      */
     public function getSubscriptions();
 

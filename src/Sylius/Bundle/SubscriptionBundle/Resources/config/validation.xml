@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\SubscriptionBundle\Model\Subscription">
+    <class name="Sylius\Component\Subscription\Model\Subscription">
         <property name="scheduledDate">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>
@@ -24,7 +24,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscription">
+    <class name="Sylius\Component\Subscription\Model\RecurringSubscription">
         <property name="intervalUnit">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>
@@ -47,7 +47,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItem">
+    <class name="Sylius\Component\Subscription\Model\SubscriptionItem">
         <property name="quantity">
             <constraint name="Range">
                 <option name="min">0</option>

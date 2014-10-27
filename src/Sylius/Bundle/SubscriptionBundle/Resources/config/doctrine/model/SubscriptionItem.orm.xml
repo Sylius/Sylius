@@ -13,17 +13,16 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItem" table="sylius_subscription_item">
+    <mapped-superclass name="Sylius\Component\Subscription\Model\SubscriptionItem" table="sylius_subscription_item">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
         <field name="quantity" column="quantity" type="integer" nullable="false" />
 
-        <many-to-one field="subscription" target-entity="Sylius\Bundle\SubscriptionBundle\Model\SubscriptionInterface">
+        <many-to-one field="subscription" target-entity="Sylius\Component\Subscription\Model\SubscriptionInterface">
             <join-column name="subscription_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-
     </mapped-superclass>
 
 </doctrine-mapping>

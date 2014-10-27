@@ -13,7 +13,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscription" table="sylius_subscription">
+    <mapped-superclass name="Sylius\Component\Subscription\Model\RecurringSubscription" table="sylius_subscription">
         <field name="intervalUnit" column="interval_unit" type="string" nullable="false" />
         <field name="intervalFrequency" column="interval_frequency" type="integer" nullable="false" />
         <field name="maxCycles" column="max_cycles" type="integer" nullable="true" />

@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\SubscriptionBundle\Model\Subscription" table="sylius_subscription">
+    <mapped-superclass name="Sylius\Component\Subscription\Model\Subscription" table="sylius_subscription">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
@@ -26,7 +26,7 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <one-to-many field="items" target-entity="Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItemInterface" mapped-by="subscription" orphan-removal="true">
+        <one-to-many field="items" target-entity="Sylius\Component\Subscription\Model\SubscriptionItemInterface" mapped-by="subscription" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

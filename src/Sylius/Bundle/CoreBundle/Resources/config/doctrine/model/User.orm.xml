@@ -70,14 +70,13 @@
             </join-table>
         </many-to-many>
 
-        <one-to-many field="subscriptions" target-entity="Sylius\Bundle\SubscriptionBundle\Model\SubscriptionInterface" mapped-by="user">
+        <one-to-many field="subscriptions" target-entity="Sylius\Component\Subscription\Model\SubscriptionInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
 
         <gedmo:soft-deleteable field-name="deletedAt" />
-
     </mapped-superclass>
 
 </doctrine-mapping>

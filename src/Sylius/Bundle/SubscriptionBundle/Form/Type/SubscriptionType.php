@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\Form\Type;
 
-
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

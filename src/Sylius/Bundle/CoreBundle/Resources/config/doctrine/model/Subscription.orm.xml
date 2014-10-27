@@ -13,11 +13,11 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Bundle\CoreBundle\Model\Subscription" table="sylius_subscription">
-        <many-to-one field="user" target-entity="Sylius\Bundle\CoreBundle\Model\UserInterface" inversed-by="subscriptions">
+    <mapped-superclass name="Sylius\Component\Core\Model\Subscription" table="sylius_subscription">
+        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="subscriptions">
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <many-to-one field="shippingAddress" target-entity="Sylius\Bundle\AddressingBundle\Model\AddressInterface">
+        <many-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>

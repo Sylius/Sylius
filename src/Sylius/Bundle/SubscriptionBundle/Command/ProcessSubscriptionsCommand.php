@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\Command;
 
-use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent;
-use Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvents;
+use Sylius\Component\Subscription\Event\SubscriptionEvent;
+use Sylius\Component\Subscription\Event\SubscriptionEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

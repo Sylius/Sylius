@@ -16,7 +16,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.subscription.recurring_scheduler.class">Sylius\Bundle\SubscriptionBundle\Scheduler\RecurringScheduler</parameter>
+        <parameter key="sylius.subscription.recurring_scheduler.class">Sylius\Component\Subscription\Scheduler\RecurringScheduler</parameter>
         <parameter key="sylius.subscription.recurring_scheduler_listener.class">Sylius\Bundle\SubscriptionBundle\EventListener\RecurringSchedulerListener</parameter>
         <parameter key="sylius.subscription.max_cycles_listener.class">Sylius\Bundle\SubscriptionBundle\EventListener\MaxCyclesListener</parameter>
     </parameters>

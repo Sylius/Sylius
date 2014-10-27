@@ -155,14 +155,13 @@ sylius_sequence:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
 
 sylius_subscription:
-    driver: doctrine/orm
     classes:
         subscription:
-            model: Sylius\Bundle\CoreBundle\Model\Subscription
+            model: Sylius\Component\Core\Model\Subscription
             form:  Sylius\Bundle\SubscriptionBundle\Form\Type\RecurringSubscriptionType
             controller: Sylius\Bundle\WebBundle\Controller\Frontend\Account\SubscriptionController
         subscription_item:
-            model: Sylius\Bundle\CoreBundle\Model\SubscriptionItem
+            model: Sylius\Component\Core\Model\SubscriptionItem
 
 sylius_resource:
     resources:

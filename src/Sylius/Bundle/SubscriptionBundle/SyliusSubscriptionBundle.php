@@ -12,17 +12,15 @@
 namespace Sylius\Bundle\SubscriptionBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 
-class SyliusSubscriptionBundle extends Bundle
+class SyliusSubscriptionBundle extends AbstractResourceBundle
 {
     /**
-     * Return array of currently supported database drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -34,19 +32,27 @@ class SyliusSubscriptionBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getBundlePrefix()
     {
-        $interfaces = array(
-            'Sylius\Bundle\SubscriptionBundle\Model\SubscriptionInterface'         => 'sylius.model.subscription.class',
-            'Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItemInterface'     => 'sylius.model.subscription_item.class',
+        return 'sylius_subscription';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return array(
+            'Sylius\Component\Subscription\Model\SubscriptionInterface'     => 'sylius.model.subscription.class',
+            'Sylius\Component\Subscription\Model\SubscriptionItemInterface' => 'sylius.model.subscription_item.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_subscription', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\SubscriptionBundle\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_subscription.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Subscription\Model';
     }
 }

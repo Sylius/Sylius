@@ -196,7 +196,7 @@ class Configuration
         $redirect = $this->parameters->get('redirect');
 
         if (null === $redirect || !is_array($redirect)) {
-            return array();
+            $redirect = array('parameters' => array());
         }
 
         $parameters = $redirect['parameters'];

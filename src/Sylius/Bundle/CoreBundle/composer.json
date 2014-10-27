@@ -48,6 +48,7 @@
         "sylius/promotion-bundle":        "0.12.*@dev",
         "sylius/resource-bundle":         "0.12.*@dev",
         "sylius/settings-bundle":         "0.12.*@dev",
+        "sylius/subscription-bundle":     "0.12.*@dev",
         "sylius/shipping-bundle":         "0.12.*@dev",
         "sylius/taxation-bundle":         "0.12.*@dev",
         "sylius/taxonomy-bundle":         "0.12.*@dev",

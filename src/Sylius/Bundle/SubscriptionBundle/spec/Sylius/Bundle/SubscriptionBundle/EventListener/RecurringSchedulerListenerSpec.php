@@ -11,31 +11,28 @@
 
 namespace spec\Sylius\Bundle\SubscriptionBundle\EventListener;
 
-
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Subscription\Event\SubscriptionEvent;
+use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
+use Sylius\Component\Subscription\Scheduler\RecurringSchedulerInterface;
 
 class RecurringSchedulerListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SubscriptionBundle\EventListener\RecurringSchedulerListener');
     }
 
-    /**
-     * @param Sylius\Bundle\SubscriptionBundle\Scheduler\RecurringSchedulerInterface $scheduler
-     */
-    function let($scheduler)
+    public function let(RecurringSchedulerInterface $scheduler)
     {
         $this->beConstructedWith($scheduler);
     }
 
-    /**
-     * @param Sylius\Bundle\SubscriptionBundle\Model\RecurringSubscriptionInterface $subscription
-     * @param Sylius\Bundle\SubscriptionBundle\Event\SubscriptionEvent $event
-     */
-    function it_decrements_max_cycles($subscription, $event, $scheduler)
-    {
+    public function it_decrements_max_cycles(
+        RecurringSubscriptionInterface $subscription,
+        SubscriptionEvent $event,
+        RecurringSchedulerInterface $scheduler
+    ) {
         $event->getSubscription()->willReturn($subscription);
         $scheduler->schedule($subscription, $subscription)->shouldBeCalled();
 

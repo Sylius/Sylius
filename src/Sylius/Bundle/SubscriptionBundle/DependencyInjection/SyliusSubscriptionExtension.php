@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\DependencyInjection;
 
-use Sylius\Bundle\SubscriptionBundle\SyliusSubscriptionBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -22,72 +20,18 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class SyliusSubscriptionExtension extends Extension
+class SyliusSubscriptionExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $driver = $config['driver'];
-
-        if (!in_array($driver, SyliusSubscriptionBundle::getSupportedDrivers())) {
-            throw new \InvalidArgumentException(sprintf('Driver "%s" is unsupported for SyliusSubscriptionBundle', $driver));
-        }
-
-        $container->setParameter('sylius_subscription.driver', $driver);
-        $container->setParameter('sylius_subscription.driver.'.$driver, true);
-
-        $loader->load(sprintf('driver/%s.xml', $driver));
-        $loader->load('services.xml');
-
-        if ($config['recurring']) {
-            $loader->load('recurring.xml');
-        }
-
-        $classes = $config['classes'];
-
-        $this->mapClassParameters($classes, $container);
-        $this->mapValidationGroupParameters($config['validation_groups'], $container);
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
-    }
-
-    /**
-     * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
-     */
-    protected function mapClassParameters(array $classes, ContainerBuilder $container)
-    {
-        foreach ($classes as $model => $serviceClasses) {
-            foreach ($serviceClasses as $service => $class) {
-                $service = $service === 'form' ? 'form.type' : $service;
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
-            }
-        }
-    }
-
-    /**
-     * Remap validation group parameters.
-     *
-     * @param array            $validationGroups
-     * @param ContainerBuilder $container
-     */
-    protected function mapValidationGroupParameters(array $validationGroups, ContainerBuilder $container)
-    {
-        foreach ($validationGroups as $model => $groups) {
-            $container->setParameter(sprintf('sylius.validation_group.%s', $model), $groups);
-        }
+        $this->configure(
+            $configs,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+        );
     }
 }

@@ -93,7 +93,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Model\SubscriptionInterface $subscription
+     * @param Sylius\Component\Core\Model\SubscriptionInterface $subscription
      */
     function it_can_add_subscriptions($subscription)
     {
@@ -107,7 +107,7 @@ class UserSpec extends ObjectBehavior
     }
 
     /**
-     * @param Sylius\Bundle\CoreBundle\Model\SubscriptionInterface $subscription
+     * @param Sylius\Component\Core\Model\SubscriptionInterface $subscription
      */
     function it_can_remove_subscriptions($subscription)
     {

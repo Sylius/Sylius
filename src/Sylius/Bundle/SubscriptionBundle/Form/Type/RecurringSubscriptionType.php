@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\Form\Type;
 
-
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

@@ -12,29 +12,30 @@
 namespace spec\Sylius\Bundle\SubscriptionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormEvent;
+use Sylius\Component\Subscription\Model\SubscriptionInterface;
+use Sylius\Component\Subscription\Model\SubscriptionItemInterface;
 
 class SubscriptionTypeSubscriberSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SubscriptionBundle\Form\EventListener\SubscriptionTypeSubscriber');
     }
 
-    function it_implements_event_subscriber_interface()
+    public function it_implements_event_subscriber_interface()
     {
         $this->shouldImplement('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Sylius\Bundle\SubscriptionBundle\Model\SubscriptionInterface $subscription
-     * @param Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItemInterface $item
-     * @param Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItemInterface $itemZeroQuantity
-     * @param Symfony\Component\Form\Form $form
-     */
-    function it_removes_zero_quantity_items_from_subscription($event, $subscription, $item, $itemZeroQuantity, $form)
-    {
+    public function it_removes_zero_quantity_items_from_subscription(
+        FormEvent $event,
+        SubscriptionInterface $subscription,
+        SubscriptionItemInterface $item,
+        SubscriptionItemInterface $itemZeroQuantity,
+        Form $form
+    ) {
         $item->getQuantity()->willReturn(2);
         $itemZeroQuantity->getQuantity()->willReturn(0);
 
@@ -53,15 +54,13 @@ class SubscriptionTypeSubscriberSpec extends ObjectBehavior
         $this->onPostSubmit($event);
     }
 
-    /**
-     * @param Symfony\Component\Form\FormEvent $event
-     * @param Sylius\Bundle\SubscriptionBundle\Model\SubscriptionInterface $subscription
-     * @param Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItemInterface $item
-     * @param Sylius\Bundle\SubscriptionBundle\Model\SubscriptionItemInterface $itemZeroQuantity
-     * @param Symfony\Component\Form\Form $form
-     */
-    function it_does_not_remove_items_when_form_is_invalid($event, $subscription, $item, $itemZeroQuantity, $form)
-    {
+    public function it_does_not_remove_items_when_form_is_invalid(
+        FormEvent $event,
+        SubscriptionInterface $subscription,
+        SubscriptionItemInterface $item,
+        SubscriptionItemInterface $itemZeroQuantity,
+        Form $form
+    ) {
         $item->getQuantity()->willReturn(2);
         $itemZeroQuantity->getQuantity()->willReturn(0);
 
