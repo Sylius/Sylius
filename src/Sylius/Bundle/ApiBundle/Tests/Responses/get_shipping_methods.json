@@ -1,0 +1,83 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 3,
+    "_links": {
+        "self": {
+            "href": "\/api\/shipping-categories\/?page=1&paginate=10"
+        },
+        "first": {
+            "href": "\/api\/shipping-categories\/?page=1&paginate=10"
+        },
+        "last": {
+            "href": "\/api\/shipping-categories\/?page=1&paginate=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "name": "UPS",
+                "description": "Shipping internationally via UPS",
+                "enabled": true,
+                "calculator": "flat_rate",
+                "configuration": {
+                    "amount": 5000
+                },
+                "created_at": @string@,
+                "updated_at": @string@,
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                    "zone": {
+                        "href": @string@
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "DHL",
+                "description": "Fast local shipping",
+                "enabled": false,
+                "calculator": "flexible_rate",
+                "configuration": {
+                    "first_item_cost": 4000,
+                    "additional_item_cost": 50,
+                    "additional_item_limit": 5
+                },
+                "created_at": @string@,
+                "updated_at": @string@,
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                    "zone": {
+                        "href": @string@
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Poczta Polska",
+                "description": "Slow and cheap shipping",
+                "enabled": true,
+                "calculator": "flat_rate",
+                "configuration": {
+                    "amount": 2500
+                },
+                "created_at": @string@,
+                "updated_at": @string@,
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                    "zone": {
+                        "href": @string@
+                    }
+                }
+            }
+        ]
+    }
+}

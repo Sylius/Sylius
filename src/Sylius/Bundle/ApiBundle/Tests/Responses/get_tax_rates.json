@@ -1,0 +1,39 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/tax-rates\/?page=1&paginate=10"
+        },
+        "first": {
+            "href": "\/api\/tax-rates\/?page=1&paginate=10"
+        },
+        "last": {
+            "href": "\/api\/tax-rates\/?page=1&paginate=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "name": "Polish VAT",
+                "included_in_price": true,
+                "amount": 0.23000,
+                "calculator": "default",
+                "created_at": @string@,
+                "updated_at": @string@
+            },
+            {
+                "id": @integer@,
+                "name": "Germany and France Tax",
+                "included_in_price": false,
+                "amount": 0.21000,
+                "calculator": "custom",
+                "created_at": @string@,
+                "updated_at": @string@
+            }
+        ]
+    }
+}

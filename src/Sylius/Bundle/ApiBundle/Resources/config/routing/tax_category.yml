@@ -1,0 +1,36 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_tax_category_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.tax_category:indexAction
+        _sylius:
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_api_tax_category_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.tax_category:createAction
+
+sylius_api_tax_category_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.tax_category:updateAction
+
+sylius_api_tax_category_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.tax_category:deleteAction
+
+sylius_api_tax_category_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.tax_category:showAction
