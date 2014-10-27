@@ -1,0 +1,45 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/shipping-categories\/?page=1&paginate=10"
+        },
+        "first": {
+            "href": "\/api\/shipping-categories\/?page=1&paginate=10"
+        },
+        "last": {
+            "href": "\/api\/shipping-categories\/?page=1&paginate=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "name": "Lightweight Goods",
+                "description": "Very light merchandise for shipping",
+                "created_at": @string@,
+                "updated_at": @string@,
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "name": "Heavy Stuff",
+                "description": "Requires special shipping",
+                "created_at": @string@,
+                "updated_at": @string@,
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
+            }
+        ]
+    }
+}

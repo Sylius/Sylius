@@ -1,0 +1,26 @@
+Sylius\Component\Shipping\Model\ShippingCategory:
+    exclusion_policy: ALL
+    xml_root_name: shipping-category
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        description:
+            expose: true
+            type: string
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_shipping_category_show
+                parameters:
+                    id: expr(object.getId())
