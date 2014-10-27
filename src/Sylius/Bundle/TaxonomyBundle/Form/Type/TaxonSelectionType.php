@@ -71,7 +71,7 @@ class TaxonSelectionType extends AbstractType
             $builder->add($taxonomy->getId(), 'choice', array(
                 'choice_list' => new ObjectChoiceList($this->taxonRepository->getTaxonsAsList($taxonomy), null, array(), null, 'id'),
                 'multiple'    => $options['multiple'],
-                'label'       => /* @Ignore */ $taxonomy->getName(),
+                'label'       => $options['render_label'] ? $taxonomy->getName() : false
             ));
         }
     }
@@ -85,7 +85,7 @@ class TaxonSelectionType extends AbstractType
             ->setDefaults(array(
                 'data_class'         => null,
                 'multiple'           => true,
-                'render_label'       => false,
+                'render_label'       => true,
                 'model_transformer'  => TaxonSelectionToCollectionTransformer::class,
             ))
         ;
