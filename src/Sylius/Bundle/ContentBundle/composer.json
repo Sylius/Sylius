@@ -23,7 +23,7 @@
         "php":                               ">=5.3.3",
 
         "jackalope/jackalope-doctrine-dbal": "1.0.*",
-        "sylius/resource-bundle":            "0.11.*@dev",
+        "sylius/resource-bundle":            "0.12.*@dev",
         "symfony-cmf/block-bundle":          "1.0.*",
         "symfony-cmf/content-bundle":        "1.0.*",
         "symfony-cmf/menu-bundle":           "1.0.*",
@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     }
 }

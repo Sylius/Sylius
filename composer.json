@@ -150,7 +150,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

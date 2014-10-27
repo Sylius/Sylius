@@ -26,7 +26,7 @@
         "symfony/twig-bundle":             "~2.3",
         "symfony/expression-language":     "~2.4",
         "symfony/form":                    "~2.3",
-        "sylius/resource":                 "0.11.*@dev",
+        "sylius/resource":                 "0.12.*@dev",
         "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "~0.12",
         "white-october/pagerfanta-bundle": "1.0.*",
@@ -57,7 +57,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     },
     "minimum-stability": "dev"

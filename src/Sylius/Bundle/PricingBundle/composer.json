@@ -23,8 +23,8 @@
         "php": ">=5.3.3",
 
         "stof/doctrine-extensions-bundle": "1.1.*",
-        "sylius/pricing":                  "0.11.*@dev",
-        "sylius/resource-bundle":          "0.11.*@dev",
+        "sylius/pricing":                  "0.12.*@dev",
+        "sylius/resource-bundle":          "0.12.*@dev",
         "symfony/framework-bundle":        "~2.3"
     },
     "require-dev": {
@@ -44,7 +44,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     },
     "minimum-stability": "dev"
