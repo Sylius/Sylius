@@ -25,6 +25,18 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    const CLASS_CONTROLLER          = 'Sylius\Bundle\ResourceBundle\Controller\ResourceController';
+    const CLASS_CONFIGURATION       = 'Sylius\Bundle\ResourceBundle\Controller\Configuration';
+    const CLASS_REPOSITORY_ORM      = 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+    const CLASS_REPOSITORY_ODM      = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
+    const CLASS_REPOSITORY_PHPCR    = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository';
+
+    const PARAMETER_CONTROLLER          = 'sylius.controller.class';
+    const PARAMETER_CONFIGURATION       = 'sylius.configuration.class';
+    const PARAMETER_REPOSITORY_ORM      = 'sylius.repository.orm.class';
+    const PARAMETER_REPOSITORY_ODM      = 'sylius.repository.odm.mangodb.class';
+    const PARAMETER_REPOSITORY_PHPCR    = 'sylius.repository.odm.phpcr.class';
+
     /**
      * {@inheritdoc}
      */
@@ -57,7 +69,7 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('classes')
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                    ->scalarNode('controller')->defaultValue(self::CLASS_CONTROLLER)->end()
                                     ->scalarNode('repository')->end()
                                     ->scalarNode('interface')->end()
                                 ->end()

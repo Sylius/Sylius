@@ -37,6 +37,9 @@ class DoctrineODMDriverSpec extends ObjectBehavior
 
     function it_should_create_definition(ContainerBuilder $container)
     {
+        $container->hasParameter('sylius.configuration.class')
+            ->shouldBeCalled();
+
         $container->setDefinition(
             'prefix.controller.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')

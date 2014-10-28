@@ -69,11 +69,11 @@ abstract class AbstractResourceExtension extends Extension
 
         $this->loadConfigurationFile($this->configFiles, $loader);
 
+        $classes = $this->getClassesConfig($container, $config);
+
         if ($configure & self::CONFIGURE_DATABASE) {
             $this->loadDatabaseDriver($config, $loader, $container);
         }
-
-        $classes = isset($config['classes']) ? $config['classes'] : array();
 
         if ($configure & self::CONFIGURE_PARAMETERS) {
             $this->mapClassParameters($classes, $container);
@@ -194,6 +194,58 @@ abstract class AbstractResourceExtension extends Extension
         }
 
         return $directory;
+    }
+
+    /**
+     * Get classes configuration.
+     *
+     * @param ContainerBuilder  $container
+     * @param array             $config
+     *
+     * @return array
+     */
+    protected function getClassesConfig(ContainerBuilder $container, array &$config = null)
+    {
+        $classes = isset($config['classes']) ? $config['classes'] : array();
+
+        foreach ($classes as $key => &$value) {
+
+            if (isset($value['controller']) && $this->isDefaultClass($container, $value['controller'], Configuration::CLASS_CONTROLLER, Configuration::PARAMETER_CONTROLLER)) {
+                $value['controller'] = $container->getParameter(Configuration::PARAMETER_CONTROLLER);
+            }
+
+            if (isset($value['repository'])) {
+                if ($this->isDefaultClass($container, $value['repository'], Configuration::CLASS_REPOSITORY_ORM, Configuration::PARAMETER_REPOSITORY_ORM)) {
+                    $value['repository'] = $container->getParameter(Configuration::PARAMETER_REPOSITORY_ORM);
+                } elseif ($this->isDefaultClass($container, $value['repository'], Configuration::CLASS_REPOSITORY_ODM, Configuration::PARAMETER_REPOSITORY_ODM)) {
+                    $value['repository'] = $container->getParameter(Configuration::PARAMETER_REPOSITORY_ODM);
+                } elseif ($this->isDefaultClass($container, $value['repository'], Configuration::CLASS_REPOSITORY_PHPCR, Configuration::PARAMETER_REPOSITORY_PHPCR)) {
+                    $value['repository'] = $container->getParameter(Configuration::PARAMETER_REPOSITORY_PHPCR);
+                }
+            }
+        }
+
+        return $config['classes'] = $classes;
+    }
+
+    /**
+     * Check class is default and has parameter.
+     *
+     * @param ContainerBuilder  $container
+     * @param string            $userClass
+     * @param string            $defaultClass
+     * @param string            $parameterName
+     *
+     * @return bool
+     */
+    private function isDefaultClass(ContainerBuilder $container, $userClass, $defaultClass, $parameterName)
+    {
+        if (($userClass === $defaultClass || $userClass === $parameterName)
+            && $container->hasParameter($parameterName)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

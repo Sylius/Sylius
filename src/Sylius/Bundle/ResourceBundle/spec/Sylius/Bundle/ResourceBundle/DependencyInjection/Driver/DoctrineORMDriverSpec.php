@@ -39,6 +39,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
     {
         $container->hasParameter("prefix.repository.resource.class")->shouldBeCalled();
 
+        $container->hasParameter('sylius.configuration.class')
+            ->shouldBeCalled();
+
         $container->setDefinition(
             'prefix.controller.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
@@ -70,6 +73,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
             ->shouldBeCalled();
 
         $container->getParameter("prefix.repository.resource.class")
+            ->shouldBeCalled();
+
+        $container->hasParameter('sylius.configuration.class')
             ->shouldBeCalled();
 
         $container->setDefinition(

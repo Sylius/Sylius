@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -101,7 +102,13 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected function getConfigurationDefinition()
     {
-        $definition = new Definition('Sylius\Bundle\ResourceBundle\Controller\Configuration');
+        $class = Configuration::CLASS_CONFIGURATION;
+
+        if ($this->container->hasParameter(Configuration::PARAMETER_CONFIGURATION)) {
+            $class = $this->container->getParameter(Configuration::PARAMETER_CONFIGURATION);
+        }
+
+        $definition = new Definition($class);
         $definition
             ->setFactoryService('sylius.controller.configuration_factory')
             ->setFactoryMethod('createConfiguration')
