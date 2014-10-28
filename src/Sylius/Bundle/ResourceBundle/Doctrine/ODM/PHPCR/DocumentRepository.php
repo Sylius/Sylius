@@ -15,6 +15,8 @@ use Doctrine\ODM\PHPCR\DocumentRepository as BaseDocumentRepository;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 use Pagerfanta\Pagerfanta;
+use PHPCR\Util\PathHelper;
+use PHPCR\Util\UUIDHelper;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -25,6 +27,45 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class DocumentRepository extends BaseDocumentRepository implements RepositoryInterface
 {
+    /**
+     * Path to the root node in the repository under which documents of this
+     * admin should be created.
+     *
+     * @var string
+     */
+    private $rootPath = '/';
+
+    /**
+     * Set the root path in the repository. To be able to create new items,
+     * this path must already exist.
+     *
+     * @param string $rootPath
+     */
+    public function setRootPath($rootPath)
+    {
+        $this->rootPath = $rootPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRootPath()
+    {
+        return $this->rootPath;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId($id)
+    {
+        if (!UUIDHelper::isUUID($id)) {
+            $id = PathHelper::absolutizePath($id, $this->rootPath);
+        }
+
+        return $id;
+    }
+
     /**
      * {@inheritdoc}
      */
