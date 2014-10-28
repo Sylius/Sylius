@@ -53,10 +53,6 @@
         "sylius/taxonomy-bundle":         "0.12.*@dev",
         "sylius/attribute-bundle":        "0.12.*@dev",
         "sylius/variation-bundle":        "0.12.*@dev",
-        "symfony-cmf/block-bundle":       "1.1.*",
-        "symfony-cmf/content-bundle":     "1.1.*",
-        "symfony-cmf/menu-bundle":        "1.1.*",
-        "symfony-cmf/routing-bundle":     "1.2.*",
         "symfony/framework-bundle":       "~2.3"
     },
     "require-dev": {
