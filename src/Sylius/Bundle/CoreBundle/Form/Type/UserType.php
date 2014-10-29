@@ -18,15 +18,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends ProfileFormType
 {
-    /** @var string */
-    private $dataClass;
+    /**
+     * @var string[]
+     */
+    protected $roles;
+
+    /**
+     * @var string
+     */
+    protected $dataClass;
 
     /**
      * {@inheritdoc}
      */
-    public function __construct($dataClass)
+    public function __construct($dataClass, array $roles)
     {
         $this->dataClass = $dataClass;
+        $this->roles     = $roles;
     }
 
     /**
@@ -55,7 +63,14 @@ class UserType extends ProfileFormType
             ->add('groups', 'sylius_group_choice', array(
                 'label'    => 'sylius.form.user.groups',
                 'multiple' => true,
+                'expanded' => true,
                 'required' => false
+            ))
+            ->add('roles', 'choice', array(
+                'label'    => 'sylius.form.group.roles',
+                'multiple' => true,
+                'expanded' => true,
+                'choices'  => $this->parseRoles(),
             ))
             ->remove('username')
         ;
@@ -88,5 +103,34 @@ class UserType extends ProfileFormType
     public function getName()
     {
         return 'sylius_user';
+    }
+
+    /**
+     * @return string[]
+     */
+    private function parseRoles()
+    {
+        $choices = array();
+        foreach ($this->roles as $key => $roles) {
+            if (is_array($roles)) {
+                foreach ($roles as $role) {
+                    if ('ROLE_USER' === $role) {
+                        continue;
+                    }
+
+                    if (!isset($choices[$role])) {
+                        $choices[$key][$role] = $role;
+                    }
+                }
+            } else {
+                $choices[$roles] = $roles;
+            }
+        }
+
+        foreach (array('ROLE_SYLIUS_ADMIN', 'ROLE_SYLIUS_SUPER_ADMIN') as $role) {
+            $choices[$role] = array_merge($choices[$role], array($role => $role));
+        }
+
+        return $choices;
     }
 }

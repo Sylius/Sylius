@@ -444,7 +444,7 @@ class ResourceController extends FOSRestController
     protected function handlePermissions($action, $resource = null)
     {
         if ($this->config->isBackendRequest() || $this->config->isApiRequest()) {
-            $role = strtoupper(sprintf('ROLE_SYLIUS_%s_%s', $this->config->getResourceName(), $action));
+            $role = $this->config->getRequiredRole(strtoupper(sprintf('ROLE_SYLIUS_%s_%s', $this->config->getResourceName(), $action)));
             if (!$this->get('security.context')->isGranted($role, $resource)) {
                 throw new AccessDeniedException();
             }

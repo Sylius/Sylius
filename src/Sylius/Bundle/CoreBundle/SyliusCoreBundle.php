@@ -44,6 +44,7 @@ class SyliusCoreBundle extends AbstractTranslationBundle
             'ROLE_SYLIUS_ADMIN'       => array(
                 'ROLE_SYLIUS_USER_ADMIN',
                 'ROLE_SYLIUS_GROUP_ADMIN',
+                'ROLE_SYLIUS_SETTING_ADMIN',
             ),
             'ROLE_SYLIUS_USER_ADMIN'  => array(
                 'ROLE_SYLIUS_USER_LIST',
@@ -58,6 +59,10 @@ class SyliusCoreBundle extends AbstractTranslationBundle
                 'ROLE_SYLIUS_GROUP_CREATE',
                 'ROLE_SYLIUS_GROUP_UPDATE',
                 'ROLE_SYLIUS_GROUP_DELETE',
+            ),
+            'ROLE_SYLIUS_SETTING_ADMIN' => array(
+                'ROLE_SYLIUS_SETTING_GENERAL',
+                'ROLE_SYLIUS_SETTING_TAXATION',
             ),
         );
     }

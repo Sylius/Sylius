@@ -38,14 +38,14 @@ class SyliusApiBundle extends AbstractResourceBundle
     {
         return array(
             'ROLE_SYLIUS_ADMIN'     => array(
-                'ROLE_SYLIUS_API_ADMIN',
+                'ROLE_SYLIUS_API_CLIENT_ADMIN',
             ),
-            'ROLE_SYLIUS_API_ADMIN' => array(
-                'ROLE_SYLIUS_API_LIST',
-                'ROLE_SYLIUS_API_SHOW',
-                'ROLE_SYLIUS_API_CREATE',
-                'ROLE_SYLIUS_API_UPDATE',
-                'ROLE_SYLIUS_API_DELETE',
+            'ROLE_SYLIUS_API_CLIENT_ADMIN' => array(
+                'ROLE_SYLIUS_API_CLIENT_LIST',
+                'ROLE_SYLIUS_API_CLIENT_SHOW',
+                'ROLE_SYLIUS_API_CLIENT_CREATE',
+                'ROLE_SYLIUS_API_CLIENT_UPDATE',
+                'ROLE_SYLIUS_API_CLIENT_DELETE',
             ),
         );
     }

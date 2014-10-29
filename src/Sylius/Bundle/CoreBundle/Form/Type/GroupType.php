@@ -45,6 +45,7 @@ class GroupType extends AbstractResourceType
             ->add('roles', 'choice', array(
                 'label'    => 'sylius.form.group.roles',
                 'multiple' => true,
+                'expanded' => true,
                 'choices'  => $this->parseRoles(),
             ))
         ;

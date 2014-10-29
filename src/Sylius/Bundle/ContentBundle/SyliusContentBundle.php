@@ -38,14 +38,62 @@ class SyliusContentBundle extends AbstractResourceBundle
     {
         return array(
             'ROLE_SYLIUS_ADMIN'         => array(
-                'ROLE_SYLIUS_CONTENT_ADMIN',
+                'ROLE_SYLIUS_STATIC_CONTENT_ADMIN',
+                'ROLE_SYLIUS_MENU_ADMIN',
+                'ROLE_SYLIUS_ROUTE_LIST',
+                'ROLE_SYLIUS_IMAGINE_BLOCK_ADMIN',
+                'ROLE_SYLIUS_SIMPLE_BLOCK_ADMIN',
+                'ROLE_SYLIUS_SLIDESHOW_BLOCK_ADMIN',
+                'ROLE_SYLIUS_STRING_BLOCK_ADMIN',
             ),
-            'ROLE_SYLIUS_CONTENT_ADMIN' => array(
-                'ROLE_SYLIUS_CONTENT_LIST',
-                'ROLE_SYLIUS_CONTENT_SHOW',
-                'ROLE_SYLIUS_CONTENT_CREATE',
-                'ROLE_SYLIUS_CONTENT_UPDATE',
-                'ROLE_SYLIUS_CONTENT_DELETE',
+            'ROLE_SYLIUS_STATIC_CONTENT_ADMIN' => array(
+                'ROLE_SYLIUS_STATIC_CONTENT_LIST',
+                'ROLE_SYLIUS_STATIC_CONTENT_SHOW',
+                'ROLE_SYLIUS_STATIC_CONTENT_CREATE',
+                'ROLE_SYLIUS_STATIC_CONTENT_UPDATE',
+                'ROLE_SYLIUS_STATIC_CONTENT_DELETE',
+            ),
+            'ROLE_SYLIUS_MENU_ADMIN' => array(
+                'ROLE_SYLIUS_MENU_LIST',
+                'ROLE_SYLIUS_MENU_SHOW',
+                'ROLE_SYLIUS_MENU_CREATE',
+                'ROLE_SYLIUS_MENU_UPDATE',
+                'ROLE_SYLIUS_MENU_DELETE',
+            ),
+            'ROLE_SYLIUS_ROUTE_LIST' => array(
+                'ROLE_SYLIUS_ROUTE_LIST',
+                'ROLE_SYLIUS_ROUTE_SHOW',
+                'ROLE_SYLIUS_ROUTE_CREATE',
+                'ROLE_SYLIUS_ROUTE_UPDATE',
+                'ROLE_SYLIUS_ROUTE_DELETE',
+            ),
+            'ROLE_SYLIUS_IMAGINE_BLOCK_ADMIN' => array(
+                'ROLE_SYLIUS_IMAGINE_BLOCK_LIST',
+                'ROLE_SYLIUS_IMAGINE_BLOCK_SHOW',
+                'ROLE_SYLIUS_IMAGINE_BLOCK_CREATE',
+                'ROLE_SYLIUS_IMAGINE_BLOCK_UPDATE',
+                'ROLE_SYLIUS_IMAGINE_BLOCK_DELETE',
+            ),
+            'ROLE_SYLIUS_SIMPLE_BLOCK_ADMIN' => array(
+                'ROLE_SYLIUS_SIMPLE_BLOCK_LIST',
+                'ROLE_SYLIUS_SIMPLE_BLOCK_SHOW',
+                'ROLE_SYLIUS_SIMPLE_BLOCK_CREATE',
+                'ROLE_SYLIUS_SIMPLE_BLOCK_UPDATE',
+                'ROLE_SYLIUS_SIMPLE_BLOCK_DELETE',
+            ),
+            'ROLE_SYLIUS_SLIDESHOW_BLOCK_ADMIN' => array(
+                'ROLE_SYLIUS_SLIDESHOW_BLOCK_LIST',
+                'ROLE_SYLIUS_SLIDESHOW_BLOCK_SHOW',
+                'ROLE_SYLIUS_SLIDESHOW_BLOCK_CREATE',
+                'ROLE_SYLIUS_SLIDESHOW_BLOCK_UPDATE',
+                'ROLE_SYLIUS_SLIDESHOW_BLOCK_DELETE',
+            ),
+            'ROLE_SYLIUS_STRING_BLOCK_ADMIN' => array(
+                'ROLE_SYLIUS_STRING_BLOCK_LIST',
+                'ROLE_SYLIUS_STRING_BLOCK_SHOW',
+                'ROLE_SYLIUS_STRING_BLOCK_CREATE',
+                'ROLE_SYLIUS_STRING_BLOCK_UPDATE',
+                'ROLE_SYLIUS_STRING_BLOCK_DELETE',
             ),
         );
     }

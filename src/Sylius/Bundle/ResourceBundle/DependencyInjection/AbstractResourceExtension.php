@@ -264,6 +264,8 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
+     * Loads configuration files.
+     *
      * @param array           $config
      * @param LoaderInterface $loader
      */
@@ -277,7 +279,7 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
-     * Get the configuration directory
+     * Get the configuration directory.
      *
      * @return string
      * @throws \RuntimeException
@@ -308,6 +310,11 @@ abstract class AbstractResourceExtension extends Extension
         return $config;
     }
 
+    /**
+     * Returns the name of used bundle.
+     *
+     * @return string
+     */
     protected function getBundleName()
     {
         return str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));

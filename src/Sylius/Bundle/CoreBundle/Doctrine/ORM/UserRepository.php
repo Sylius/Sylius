@@ -48,6 +48,7 @@ class UserRepository extends EntityRepository
                 ->setParameter('query', '%'.$criteria['query'].'%')
             ;
         }
+
         if (isset($criteria['enabled'])) {
             $queryBuilder
                 ->andWhere('o.enabled = :enabled')
@@ -70,7 +71,7 @@ class UserRepository extends EntityRepository
     /**
      * Get the user data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */
@@ -88,6 +89,7 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
         $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
@@ -98,7 +100,7 @@ class UserRepository extends EntityRepository
      * @param \DateTime   $to
      * @param null|string $status
      *
-     * @return mixed
+     * @return int
      */
     public function countBetweenDates(\DateTime $from, \DateTime $to, $status = null)
     {

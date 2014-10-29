@@ -34,6 +34,8 @@ class LoadUsersData extends DataFixture
             array('ROLE_SYLIUS_ADMIN', 'ROLE_SYLIUS_SUPER_ADMIN')
         );
 
+        $user->addGroup($this->getReference('Sylius.Group.Administrators'));
+
         $manager->persist($user);
         $manager->flush();
 

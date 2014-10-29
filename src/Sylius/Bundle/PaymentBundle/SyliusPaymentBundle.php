@@ -39,6 +39,7 @@ class SyliusPaymentBundle extends AbstractResourceBundle
         return array(
             'ROLE_SYLIUS_ADMIN'         => array(
                 'ROLE_SYLIUS_PAYMENT_ADMIN',
+                'ROLE_SYLIUS_PAYMENT_METHOD_ADMIN',
             ),
             'ROLE_SYLIUS_PAYMENT_ADMIN' => array(
                 'ROLE_SYLIUS_PAYMENT_LIST',
@@ -46,6 +47,13 @@ class SyliusPaymentBundle extends AbstractResourceBundle
                 'ROLE_SYLIUS_PAYMENT_CREATE',
                 'ROLE_SYLIUS_PAYMENT_UPDATE',
                 'ROLE_SYLIUS_PAYMENT_DELETE',
+            ),
+            'ROLE_SYLIUS_PAYMENT_METHOD_ADMIN' => array(
+                'ROLE_SYLIUS_PAYMENT_METHOD_LIST',
+                'ROLE_SYLIUS_PAYMENT_METHOD_SHOW',
+                'ROLE_SYLIUS_PAYMENT_METHOD_CREATE',
+                'ROLE_SYLIUS_PAYMENT_METHOD_UPDATE',
+                'ROLE_SYLIUS_PAYMENT_METHOD_DELETE',
             ),
         );
     }

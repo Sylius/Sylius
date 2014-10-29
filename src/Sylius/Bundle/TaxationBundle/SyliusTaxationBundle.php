@@ -41,6 +41,8 @@ class SyliusTaxationBundle extends AbstractResourceBundle
         return array(
             'ROLE_SYLIUS_ADMIN'          => array(
                 'ROLE_SYLIUS_TAXATION_ADMIN',
+                'ROLE_SYLIUS_TAX_CATEGORY_ADMIN',
+                'ROLE_SYLIUS_TAX_RATE_ADMIN',
             ),
             'ROLE_SYLIUS_TAXATION_ADMIN' => array(
                 'ROLE_SYLIUS_TAXATION_LIST',
@@ -48,6 +50,20 @@ class SyliusTaxationBundle extends AbstractResourceBundle
                 'ROLE_SYLIUS_TAXATION_CREATE',
                 'ROLE_SYLIUS_TAXATION_UPDATE',
                 'ROLE_SYLIUS_TAXATION_DELETE',
+            ),
+            'ROLE_SYLIUS_TAX_CATEGORY_ADMIN' => array(
+                'ROLE_SYLIUS_TAX_CATEGORY_LIST',
+                'ROLE_SYLIUS_TAX_CATEGORY_SHOW',
+                'ROLE_SYLIUS_TAX_CATEGORY_CREATE',
+                'ROLE_SYLIUS_TAX_CATEGORY_UPDATE',
+                'ROLE_SYLIUS_TAX_CATEGORY_DELETE',
+            ),
+            'ROLE_SYLIUS_TAX_RATE_ADMIN' => array(
+                'ROLE_SYLIUS_TAX_RATE_LIST',
+                'ROLE_SYLIUS_TAX_RATE_SHOW',
+                'ROLE_SYLIUS_TAX_RATE_CREATE',
+                'ROLE_SYLIUS_TAX_RATE_UPDATE',
+                'ROLE_SYLIUS_TAX_RATE_DELETE',
             ),
         );
     }

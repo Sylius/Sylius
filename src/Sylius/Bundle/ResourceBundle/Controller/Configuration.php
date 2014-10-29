@@ -353,4 +353,9 @@ class Configuration
     {
         return $this->parameters->get('serialization_version');
     }
+
+    public function getRequiredRole($default)
+    {
+        return $this->parameters->get('required_role', $default);
+    }
 }

@@ -46,6 +46,9 @@ class SyliusProductBundle extends AbstractTranslationBundle
         return array(
             'ROLE_SYLIUS_ADMIN'         => array(
                 'ROLE_SYLIUS_PRODUCT_ADMIN',
+                'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_ADMIN',
+                'ROLE_SYLIUS_PRODUCT_PROTOTYPE_ADMIN',
+                'ROLE_SYLIUS_PRODUCT_OPTION_ADMIN',
             ),
             'ROLE_SYLIUS_PRODUCT_ADMIN' => array(
                 'ROLE_SYLIUS_PRODUCT_LIST',
@@ -53,6 +56,27 @@ class SyliusProductBundle extends AbstractTranslationBundle
                 'ROLE_SYLIUS_PRODUCT_CREATE',
                 'ROLE_SYLIUS_PRODUCT_UPDATE',
                 'ROLE_SYLIUS_PRODUCT_DELETE',
+            ),
+            'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_ADMIN' => array(
+                'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_LIST',
+                'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_SHOW',
+                'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_CREATE',
+                'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_UPDATE',
+                'ROLE_SYLIUS_PRODUCT_ATTRIBUTE_DELETE',
+            ),
+            'ROLE_SYLIUS_PRODUCT_PROTOTYPE_ADMIN' => array(
+                'ROLE_SYLIUS_PRODUCT_PROTOTYPE_LIST',
+                'ROLE_SYLIUS_PRODUCT_PROTOTYPE_SHOW',
+                'ROLE_SYLIUS_PRODUCT_PROTOTYPE_CREATE',
+                'ROLE_SYLIUS_PRODUCT_PROTOTYPE_UPDATE',
+                'ROLE_SYLIUS_PRODUCT_PROTOTYPE_DELETE',
+            ),
+            'ROLE_SYLIUS_PRODUCT_OPTION_ADMIN' => array(
+                'ROLE_SYLIUS_PRODUCT_OPTION_LIST',
+                'ROLE_SYLIUS_PRODUCT_OPTION_SHOW',
+                'ROLE_SYLIUS_PRODUCT_OPTION_CREATE',
+                'ROLE_SYLIUS_PRODUCT_OPTION_UPDATE',
+                'ROLE_SYLIUS_PRODUCT_OPTION_DELETE',
             ),
         );
     }

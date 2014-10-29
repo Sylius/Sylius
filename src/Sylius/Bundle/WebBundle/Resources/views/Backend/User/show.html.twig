@@ -31,7 +31,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -79,11 +79,11 @@
         </table>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-6">
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>{{ 'sylius.group.name'|trans }}</th>
+                <th>{{ 'sylius.user.group_name'|trans }}</th>
                 <th>{{ 'sylius.group.roles'|trans }}</th>
             </tr>
             </thead>
@@ -96,9 +96,6 @@
                             <small><span class="label label-primary">{{ role }}</span></small>
                         {% endfor %}
                     </td>
-                    <td>
-                        {{ buttons.edit(path('sylius_backend_group_update', {'id': group.id})) }}
-                    </td>
                 </tr>
             {% else %}
                 <tr>
@@ -109,7 +106,7 @@
         </table>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-6">
         <table class="table table-bordered">
             <thead>
             <tr>
