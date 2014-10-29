@@ -86,7 +86,7 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
             return true;
         }
 
-        if (0 === $coupon->getPerUserUsageLimit()) {
+        if (!$coupon->getPerUserUsageLimit()) {
             return true;
         }
 
