@@ -209,7 +209,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setAvailableOn(\DateTime $availableOn)
+    public function setAvailableOn(\DateTime $availableOn = null)
     {
         $this->availableOn = $availableOn;
 
