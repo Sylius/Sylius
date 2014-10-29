@@ -18,7 +18,6 @@
     <parameters>
         <parameter key="sylius.subscription.processor.class">Sylius\Component\Subscription\Processor\SubscriptionProcessor</parameter>
         <parameter key="sylius.form.type.subscription.class">Sylius\Bundle\SubscriptionBundle\Form\Type\SubscriptionType</parameter>
-        <parameter key="sylius.form.type.cart_item_subscription.class">Sylius\Bundle\SubscriptionBundle\Form\Type\CartItemSubscriptionType</parameter>
         <parameter key="sylius.form.subscriber.subscription.class">Sylius\Bundle\SubscriptionBundle\Form\EventListener\SubscriptionTypeSubscriber</parameter>
         <parameter key="sylius.listener.update_subscriptions.class">Sylius\Bundle\SubscriptionBundle\EventListener\UpdateSubscriptionsListener</parameter>
     </parameters>
@@ -47,13 +46,6 @@
                 <argument>sylius</argument>
             </argument>
             <tag name="form.type" alias="sylius_subscription" />
-        </service>
-        <service id="sylius.form.type.cart_item_subscription" class="%sylius.form.type.cart_item_subscription.class%">
-            <argument>%sylius.model.subscription.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-            </argument>
-            <tag name="form.type" alias="sylius_cart_item_subscription" />
         </service>
 
         <service id="sylius.listener.update_subscriptions" class="%sylius.listener.update_subscriptions.class%">

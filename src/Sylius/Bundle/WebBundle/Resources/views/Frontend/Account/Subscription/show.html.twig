@@ -21,7 +21,7 @@
 
     <div class="row">
         <label class="col-lg-2 control-label">{{ 'sylius.account.subscription.interval'|trans }}</label>
-        <div class="col-lg-10">{{ subscription.intervalFrequency }} {{ subscription.intervalUnit }}</div>
+        <div class="col-lg-10">{{ subscription.interval|sylius_interval }}</div>
     </div>
 
     <div class="row">

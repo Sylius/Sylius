@@ -18,11 +18,16 @@
 
     <parameters>
         <parameter key="sylius.twig.extension.restricted_zone.class">Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension</parameter>
+        <parameter key="sylius.twig.extension.date_interval.class">Sylius\Bundle\CoreBundle\Twig\DateIntervalExtension</parameter>
     </parameters>
 
     <services>
         <service id="sylius.twig.extension.restricted_zone" class="%sylius.twig.extension.restricted_zone.class%" public="false">
             <argument type="service" id="sylius.templating.helper.restricted_zone" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.twig.extension.date_interval" class="%sylius.twig.extension.date_interval.class%">
             <tag name="twig.extension" />
         </service>
     </services>

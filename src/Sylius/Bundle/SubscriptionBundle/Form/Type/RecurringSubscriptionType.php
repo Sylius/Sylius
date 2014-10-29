@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\SubscriptionBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * RecurringSubscriptionType
@@ -20,28 +21,42 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RecurringSubscriptionType extends SubscriptionType
 {
-    public static $intervalChoices = array(
-        'days' => "sylius.form.subscription.interval_units.days",
-        'months' => "sylius.form.subscription.interval_units.months",
-        'years' => "sylius.form.subscription.interval_units.years",
-    );
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('intervalUnit', 'choice', array(
-            'label' => 'sylius.form.subscription.interval_unit',
-            'choices' => self::$intervalChoices
-        ));
+        if (!$options['simple']) {
+            $builder
+                ->add('interval', 'sylius_date_interval', array(
+                    'label' => 'sylius.form.subscription.interval_unit'
+                ))
+                ->add('maxCycles', 'integer', array(
+                    'required' => false,
+                    'label' => 'sylius.form.subscription.max_cycles'
+                ))
+            ;
+        } else {
+            $builder
+                ->add('interval', 'sylius_date_interval', array(
+                    'label' => false,
+                    'required' => false
+                ))
+                ->remove('quantity')
+                ->remove('scheduledDate')
+                ->remove('maxCycles')
+            ;
+        }
+    }
 
-        $builder->add('intervalFrequency', 'integer', array(
-            'label' => 'sylius.form.subscription.interval_frequency'
-        ));
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
 
-        $builder->add('maxCycles', 'integer', array(
-            'required' => false,
-            'label' => 'sylius.form.subscription.max_cycles'
+        $resolver->setDefaults(array(
+            'simple' => false
         ));
     }
 }

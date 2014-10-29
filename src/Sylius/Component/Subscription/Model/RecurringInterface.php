@@ -23,16 +23,9 @@ interface RecurringInterface
     /**
      * Get unit of interval
      *
-     * @return string
+     * @return \DateInterval
      */
-    public function getIntervalUnit();
-
-    /**
-     * Get frequency of interval
-     *
-     * @return int
-     */
-    public function getIntervalFrequency();
+    public function getInterval();
 
     /**
      * Get max number of cycles of interval

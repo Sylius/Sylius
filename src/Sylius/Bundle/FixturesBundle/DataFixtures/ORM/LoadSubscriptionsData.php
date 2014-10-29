@@ -59,12 +59,15 @@ class LoadSubscriptionsData extends DataFixture
         ;
         $variant = $orderItem->getVariant();
 
+        $interval = new \DateInterval(
+            'P'.$this->faker->randomElement(array(15, 30, 60, 90)).'D'
+        );
+
         $subscription
             ->setUser($user)
             ->setScheduledDate($this->faker->dateTimeBetween('now', '+1 month'))
             ->setProcessedDate($this->faker->dateTimeBetween('now', '+1 month'))
-            ->setIntervalUnit('days')
-            ->setIntervalFrequency($this->faker->randomElement(array(15, 30, 60, 90)))
+            ->setInterval($interval)
             ->setMaxCycles($this->faker->randomElement(array(null, rand(1, 12))))
             ->setVariant($variant)
             ->setQuantity(rand(1, 5))

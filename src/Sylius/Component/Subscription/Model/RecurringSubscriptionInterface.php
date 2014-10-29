@@ -21,16 +21,10 @@ namespace Sylius\Component\Subscription\Model;
 interface RecurringSubscriptionInterface extends SubscriptionInterface, RecurringInterface
 {
     /**
-     * @param string $unit
+     * @param \DateInterval $interval
      * @return $this
      */
-    public function setIntervalUnit($unit);
-
-    /**
-     * @param int $frequency
-     * @return $this
-     */
-    public function setIntervalFrequency($frequency);
+    public function setInterval(\DateInterval $interval);
 
     /**
      * @param int $maxCycles

@@ -15,6 +15,11 @@ doctrine_cache:
     providers:
         sylius_settings: %sylius.cache%
 
+doctrine:
+    dbal:
+        types:
+            sylius_date_interval: Sylius\Bundle\CoreBundle\Doctrine\Types\DateIntervalType
+
 knp_gaufrette:
     adapters:
         sylius_image:

@@ -25,17 +25,8 @@
     </class>
 
     <class name="Sylius\Component\Subscription\Model\RecurringSubscription">
-        <property name="intervalUnit">
+        <property name="interval">
             <constraint name="NotBlank">
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="intervalFrequency">
-            <constraint name="NotBlank">
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Range">
-                <option name="min">1</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

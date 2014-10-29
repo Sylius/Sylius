@@ -11,7 +11,7 @@
     {# show subscription form if set #}
     {% if form.items[loop.index0].subscription is defined %}
         <td>
-            {{ form_row(form.items[loop.index0].subscription, {'label': false}) }}
+            {{ form_widget(form.items[loop.index0].subscription.interval, {'label': false}) }}
         </td>
         <td class="col-md-1">
             <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>

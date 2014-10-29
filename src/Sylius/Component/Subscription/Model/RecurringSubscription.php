@@ -19,14 +19,9 @@ namespace Sylius\Component\Subscription\Model;
 class RecurringSubscription extends Subscription implements RecurringSubscriptionInterface
 {
     /**
-     * @var string
+     * @var \DateInterval
      */
-    protected $intervalUnit;
-
-    /**
-     * @var int
-     */
-    protected $intervalFrequency;
+    protected $interval;
 
     /**
      * @var int
@@ -36,35 +31,17 @@ class RecurringSubscription extends Subscription implements RecurringSubscriptio
     /**
      * {@inheritdoc}
      */
-    public function getIntervalUnit()
+    public function getInterval()
     {
-        return $this->intervalUnit;
+        return $this->interval;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setIntervalUnit($unit)
+    public function setInterval(\DateInterval $interval)
     {
-        $this->intervalUnit = $unit;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIntervalFrequency()
-    {
-        return $this->intervalFrequency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setIntervalFrequency($frequency)
-    {
-        $this->intervalFrequency = $frequency;
+        $this->interval = $interval;
 
         return $this;
     }

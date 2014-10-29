@@ -27,7 +27,7 @@
                         </td>
                         <td>{{ subscription.scheduledDate|date }}</td>
                         <td>{{ subscription.quantity }}</td>
-                        <td>{{ subscription.intervalFrequency }} {{ subscription.intervalUnit }}</td>
+                        <td>{{ subscription.interval|sylius_interval }}</td>
                         <td>{{ subscription.maxCycles ?: 'sylius.account.subscription.no_limit'|trans }}</td>
                         <td>
                             {{ buttons.show(path('sylius_account_subscription_show', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}
