@@ -42,7 +42,7 @@ class SubscriptionProcessorSpec extends ObjectBehavior
     public function it_should_dispatch_events(
         SubscriptionRepositoryInterface $repository,
         EventDispatcher $dispatcher,
-        SubscriptionRepositoryInterface $subscription
+        SubscriptionInterface $subscription
     ) {
         $repository->findScheduled()->willReturn(array(
             $subscription

@@ -18,7 +18,6 @@
 
     <parameters>
         <parameter key="sylius.repository.subscription.class">Sylius\Bundle\SubscriptionBundle\Doctrine\ORM\SubscriptionRepository</parameter>
-        <parameter key="sylius.repository.subscription_item.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
     </parameters>
 
     <services>
@@ -35,21 +34,6 @@
                 </service>
             </argument>
         </service>
-
-        <service id="sylius.manager.subscription_item" alias="doctrine.orm.entity_manager" />
-        <service id="sylius.repository.subscription_item" class="%sylius.repository.subscription_item.class%">
-            <argument type="service" id="sylius.manager.subscription_item" />
-            <argument type="service">
-                <service
-                        factory-service="sylius.manager.subscription_item"
-                        factory-method="getClassMetadata"
-                        class="Doctrine\ORM\Mapping\ClassMetadata"
-                        >
-                    <argument>%sylius.model.subscription_item.class%</argument>
-                </service>
-            </argument>
-        </service>
-
     </services>
 
 </container>

@@ -27,6 +27,7 @@ interface SchedulableInterface
 
     /**
      * @param \DateTime $date
+     * @return $this
      */
     public function setScheduledDate(\DateTime $date);
 }

@@ -20,12 +20,19 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RecurringSubscriptionType extends SubscriptionType
 {
+    public static $intervalChoices = array(
+        'days' => "sylius.form.subscription.interval_units.days",
+        'months' => "sylius.form.subscription.interval_units.months",
+        'years' => "sylius.form.subscription.interval_units.years",
+    );
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('intervalUnit', 'text', array(
-            'label' => 'sylius.form.subscription.interval_unit'
+        $builder->add('intervalUnit', 'choice', array(
+            'label' => 'sylius.form.subscription.interval_unit',
+            'choices' => self::$intervalChoices
         ));
 
         $builder->add('intervalFrequency', 'integer', array(

@@ -34,9 +34,16 @@ class SubscriptionSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    public function it_initializes_items()
+    public function it_has_no_quantity_by_default()
     {
-        $this->getItems()->shouldImplement('Doctrine\Common\Collections\ArrayCollection');
+        $this->getQuantity()->shouldReturn(null);
+    }
+
+    public function its_quantity_is_mutable()
+    {
+        $this->setQuantity(5);
+
+        $this->getQuantity()->shouldReturn(5);
     }
 
     public function it_has_no_scheduled_date_by_default()
@@ -63,31 +70,5 @@ class SubscriptionSpec extends ObjectBehavior
 
         $this->setProcessedDate($date);
         $this->getProcessedDate()->shouldReturn($date);
-    }
-
-    public function it_has_no_items_by_default()
-    {
-        $this->countItems()->shouldReturn(0);
-    }
-
-    public function it_adds_items_properly(SubscriptionItemInterface $item)
-    {
-        $this->countItems()->shouldReturn(0);
-
-        $item->setSubscription($this)->shouldBeCalled();
-        $this->addItem($item)->shouldReturn($this);
-
-        $this->getItems()->first()->shouldReturn($item);
-        $this->countItems()->shouldReturn(1);
-    }
-
-    public function it_removes_items_properly(SubscriptionItemInterface $item)
-    {
-        $item->setSubscription($this)->shouldBeCalled();
-        $this->addItem($item);
-
-        $item->setSubscription(null)->shouldBeCalled();
-        $this->removeItem($item)->shouldReturn($this);
-        $this->countItems()->shouldReturn(0);
     }
 }

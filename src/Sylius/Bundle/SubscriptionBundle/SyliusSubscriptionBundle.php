@@ -11,11 +11,8 @@
 
 namespace Sylius\Bundle\SubscriptionBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SyliusSubscriptionBundle extends AbstractResourceBundle
 {
@@ -43,8 +40,7 @@ class SyliusSubscriptionBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Subscription\Model\SubscriptionInterface'     => 'sylius.model.subscription.class',
-            'Sylius\Component\Subscription\Model\SubscriptionItemInterface' => 'sylius.model.subscription_item.class',
+            'Sylius\Component\Subscription\Model\SubscriptionInterface' => 'sylius.model.subscription.class',
         );
     }
 

@@ -13,6 +13,8 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\SubscriptionInterface;
 
 /**
  * Sample subscription data
@@ -47,8 +49,15 @@ class LoadSubscriptionsData extends DataFixture
 
     public function createSubscription($user)
     {
+        /** @var SubscriptionInterface $subscription */
         $subscription = $this->getSubscriptionRepository()->createNew();
-        $itemRepository = $this->getSubscriptionItemRepository();
+
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $this->getReference('Sylius.Order-'.rand(1, 50))
+            ->getItems()
+            ->first()
+        ;
+        $variant = $orderItem->getVariant();
 
         $subscription
             ->setUser($user)
@@ -57,20 +66,11 @@ class LoadSubscriptionsData extends DataFixture
             ->setIntervalUnit('days')
             ->setIntervalFrequency($this->faker->randomElement(array(15, 30, 60, 90)))
             ->setMaxCycles($this->faker->randomElement(array(null, rand(1, 12))))
+            ->setVariant($variant)
+            ->setQuantity(rand(1, 5))
         ;
 
-        $max = rand(1, 5);
-        for ($j = 1; $j < $max; $j++) {
-            $item = $itemRepository->createNew();
-            $variant = $this->getReference('Sylius.Variant-'.rand(0, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
-
-            $item
-                ->setVariant($variant)
-                ->setQuantity(rand(1, 5))
-            ;
-
-            $subscription->addItem($item);
-        }
+        $orderItem->setSubscription($subscription);
 
         return $subscription;
     }
@@ -82,6 +82,6 @@ class LoadSubscriptionsData extends DataFixture
      */
     public function getOrder()
     {
-        return 7;
+        return 8;
     }
 }

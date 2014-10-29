@@ -11,49 +11,24 @@
 
 namespace Sylius\Bundle\SubscriptionBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SubscriptionType extends AbstractType
+class SubscriptionType extends AbstractResourceType
 {
-    /**
-     * Subscription class name.
-     *
-     * @var string
-     */
-    protected $className;
-
-    /**
-     * @var EventSubscriberInterface
-     */
-    protected $subscriber;
-
-    /**
-     * Constructor.
-     *
-     * @param string $className
-     */
-    public function __construct($className, EventSubscriberInterface $subscriber)
-    {
-        $this->className = $className;
-        $this->subscriber = $subscriber;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber($this->subscriber);
-
         $builder
             ->add('scheduledDate', 'date', array(
                 'label' => 'sylius.form.subscription.scheduled_date'
             ))
-            ->add('items', 'collection', array(
-                'type' => 'sylius_subscription_item',
+            ->add('quantity', 'integer', array(
+                'label' => 'sylius.form.subscription.quantity'
             ))
         ;
     }
@@ -63,10 +38,10 @@ class SubscriptionType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->className,
-                'validation_groups' => array('sylius'),
                 'cascade_validation' => true
             ))
         ;

@@ -11,6 +11,10 @@
 
 namespace Sylius\Component\Subscription\Repository;
 
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Subscription\Model\SubscriptionInterface;
+
 /**
  * Subscription repository interface
  *
@@ -19,10 +23,18 @@ namespace Sylius\Component\Subscription\Repository;
 interface SubscriptionRepositoryInterface
 {
     /**
-     * Get subscriptions scheduled for processing
+     * Get subscriptions scheduled for processing.
      *
      * @param \DateTime $date
-     * @return SubscriptionInterface[]
+     * @return Collection|SubscriptionInterface[]
      */
     public function findScheduled(\DateTime $date = null);
+
+    /**
+     * Get active subscriptions for user.
+     *
+     * @param UserInterface $user
+     * @return Collection|SubscriptionInterface[]
+     */
+    public function findByUser(UserInterface $user);
 }

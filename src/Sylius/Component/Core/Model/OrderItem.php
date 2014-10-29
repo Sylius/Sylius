@@ -45,6 +45,13 @@ class OrderItem extends CartItem implements OrderItemInterface
      */
     protected $promotions;
 
+    /**
+     * Subscription scheduled.
+     *
+     * @var SubscriptionInterface
+     */
+    protected $subscription;
+
     public function __construct()
     {
         parent::__construct();
@@ -175,5 +182,23 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSubscription(SubscriptionInterface $subscription = null)
+    {
+        $this->subscription = $subscription;
+
+        return $this;
     }
 }

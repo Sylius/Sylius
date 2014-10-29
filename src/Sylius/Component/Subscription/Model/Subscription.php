@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Subscription\Model;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -28,9 +26,9 @@ class Subscription implements SubscriptionInterface, TimestampableInterface
     protected $id;
 
     /**
-     * @var Collection|SubscriptionItem[]
+     * @var int
      */
-    protected $items;
+    protected $quantity;
 
     /**
      * @var \DateTime
@@ -57,7 +55,6 @@ class Subscription implements SubscriptionInterface, TimestampableInterface
      */
     public function __construct()
     {
-        $this->items = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -69,17 +66,19 @@ class Subscription implements SubscriptionInterface, TimestampableInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems()
+    public function getQuantity()
     {
-        return $this->items;
+        return $this->quantity;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function countItems()
+    public function setQuantity($quantity)
     {
-        return count($this->items);
+        $this->quantity = $quantity;
+
+        return $this;
     }
 
     /**
@@ -150,32 +149,6 @@ class Subscription implements SubscriptionInterface, TimestampableInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addItem(SubscriptionItemInterface $item)
-    {
-        if (!$this->items->contains($item)) {
-            $item->setSubscription($this);
-            $this->items->add($item);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeItem(SubscriptionItemInterface $item)
-    {
-        if ($this->items->contains($item)) {
-            $item->setSubscription(null);
-            $this->items->removeElement($item);
-        }
 
         return $this;
     }

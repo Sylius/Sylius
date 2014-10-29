@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\SubscriptionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -27,9 +25,7 @@ class SubscriptionController extends ResourceController
     {
         $config = $this->getConfiguration();
 
-        $subscriptions = $this
-            ->getRepository()
-            ->findBy(array('user' => $this->getUser()), array('scheduledDate' => 'desc'));
+        $subscriptions = $this->getRepository()->findByUser($this->getUser());
 
         $view = $this
             ->view()
@@ -56,7 +52,7 @@ class SubscriptionController extends ResourceController
     /**
      * Accesses subscription or throws 403
      *
-     * @param SubscriptionInterface $subscription
+     * @param  SubscriptionInterface $subscription
      * @throws AccessDeniedException
      */
     private function accessSubscriptionOr403(SubscriptionInterface $subscription)

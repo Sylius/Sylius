@@ -9,8 +9,9 @@
             <table id="subscriptions" class="table table-striped">
                 <thead>
                 <tr>
+                    <th>{{ 'sylius.account.subscription.product'|trans }}</th>
                     <th>{{ 'sylius.account.subscription.scheduled_date'|trans }}</th>
-                    <th>{{ 'sylius.account.subscription.num_items'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.quantity'|trans }}</th>
                     <th>{{ 'sylius.account.subscription.interval'|trans }}</th>
                     <th>{{ 'sylius.account.subscription.limit'|trans }}</th>
                     <th>&nbsp;</th>
@@ -19,8 +20,13 @@
                 <tbody>
                 {% for subscription in subscriptions %}
                     <tr class="subscription" id="subscription-{{ subscription.id }}">
+                        <td>
+                            <a href="{{ path(subscription.product) }}" class="thumbnail pull-left" style="margin-right: 15px;">
+                                <img src="{{ subscription.product.image ? subscription.product.image.path|imagine_filter('sylius_small', true) : 'http://placehold.it/90x60' }}" alt="{{ subscription.product.name }}" />
+                            </a>
+                        </td>
                         <td>{{ subscription.scheduledDate|date }}</td>
-                        <td>{{ subscription.countItems }}</td>
+                        <td>{{ subscription.quantity }}</td>
                         <td>{{ subscription.intervalFrequency }} {{ subscription.intervalUnit }}</td>
                         <td>{{ subscription.maxCycles ?: 'sylius.account.subscription.no_limit'|trans }}</td>
                         <td>

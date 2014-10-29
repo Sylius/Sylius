@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Subscription\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Subscription Interface
  *
@@ -27,31 +25,18 @@ interface SubscriptionInterface extends SchedulableInterface
 
     /**
      * @param \DateTime $date
-     * @return SubscriptionInterface
+     * @return $this
      */
     public function setProcessedDate(\DateTime $date);
 
     /**
-     * @return Collection|SubscriptionItemInterface[]
+     * @return int
      */
-    public function getItems();
+    public function getQuantity();
 
     /**
-     * @param SubscriptionItemInterface $item
-     * @return SubscriptionInterface
+     * @param int $quantity
+     * @return $this
      */
-    public function addItem(SubscriptionItemInterface $item);
-
-    /**
-     * @param SubscriptionItemInterface $item
-     * @return SubscriptionInterface
-     */
-    public function removeItem(SubscriptionItemInterface $item);
-
-    /**
-     * Returns number of subscription items.
-     *
-     * @return integer
-     */
-    public function countItems();
+    public function setQuantity($quantity);
 }

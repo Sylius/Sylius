@@ -22,19 +22,19 @@ interface RecurringSubscriptionInterface extends SubscriptionInterface, Recurrin
 {
     /**
      * @param string $unit
-     * @return RecurringSubscriptionInterface
+     * @return $this
      */
     public function setIntervalUnit($unit);
 
     /**
      * @param int $frequency
-     * @return RecurringSubscriptionInterface
+     * @return $this
      */
     public function setIntervalFrequency($frequency);
 
     /**
      * @param int $maxCycles
-     * @return RecurringSubscriptionInterface
+     * @return $this
      */
     public function setMaxCycles($maxCycles);
 }

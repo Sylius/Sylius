@@ -72,4 +72,18 @@ interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterfac
      * @return Boolean
      */
     public function hasInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
+     * Get subscription.
+     *
+     * @return SubscriptionInterface
+     */
+    public function getSubscription();
+
+    /**
+     * Sets subscription.
+     *
+     * @param null|SubscriptionInterface $subscription
+     */
+    public function setSubscription(SubscriptionInterface $subscription = null);
 }

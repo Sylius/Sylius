@@ -1,47 +1,9 @@
-<div class="row-fluid">
-    <div class="span4">
-        <div class="well">
-            {{ form_row(form.scheduledDate) }}
-            {{ form_row(form.intervalUnit, { attr: { class: 'span4' } }) }}
-            {{ form_row(form.intervalFrequency, { attr: { class: 'span4' } }) }}
-            {{ form_row(form.maxCycles, { attr: { class: 'span4' } }) }}
-        </div>
-    </div>
-    <div class="span8">
-
-        {% if subscription.items is not empty %}
-        <table class="table table-striped">
-            <tr>
-                <th colspan="2">{{ 'sylius.account.subscription.product'|trans }}</th>
-                <th>{{ 'sylius.account.subscription.quantity'|trans }}</th>
-            </tr>
-            {% for index, item in subscription.items %}
-                <tr>
-                    <td>
-                        <a href="{{ path(item.product) }}">
-                            <img class="thumbnail" src="{{ item.product.image ? item.product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/120x90' }}" alt="{{ item.product.name }}" />
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ path(item.product) }}">
-                            <strong>{{ item.product.name }}</strong>
-                        </a>
-                        <ul>
-                            {% for option in item.variant.options %}
-                                <li>{{ option.presentation }}: {{ option.value }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        {{ form_errors(form.items[index].quantity) }}
-                        {{ form_widget(form.items[index].quantity, { 'attr': { 'class': 'span2' } }) }}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-            <p class="label label-warning">{{ 'sylius.account.subscription.no_items'|trans }}</p>
-        {% endif %}
-
-    </div>
+<div class="row">
+    {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': subscription.variant}) }}
 </div>
+
+{{ form_row(form.scheduledDate) }}
+{{ form_row(form.quantity) }}
+{{ form_row(form.intervalUnit, { attr: { class: 'span4' } }) }}
+{{ form_row(form.intervalFrequency, { attr: { class: 'span4' } }) }}
+{{ form_row(form.maxCycles, { attr: { class: 'span4' } }) }}

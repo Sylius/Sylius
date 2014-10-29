@@ -54,12 +54,12 @@ sylius:
             update: Update Subscription
             create: New Subscription
             scheduled_date: Scheduled Date
-            num_items: Items
             interval: Interval
             limit: Limit
             no_limit: ongoing
             product: Product
             quantity: Qty
+            empty: No subscriptions found.
     add_to_cart: Add to cart
     address:
         city: City
@@ -219,6 +219,7 @@ sylius:
             grand_total: Grand total
             product: Product
             quantity: Qty
+            subscription: Subscription
             save: Save
             total: Total
             unit_price: Price

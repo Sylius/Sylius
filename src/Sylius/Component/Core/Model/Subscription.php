@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Subscription\Model\RecurringSubscription;
 
 /**
@@ -33,6 +34,20 @@ class Subscription extends RecurringSubscription implements SubscriptionInterfac
      * @var AddressInterface
      */
     protected $shippingAddress;
+
+    /**
+     * Product variant for subscription.
+     *
+     * @var VariantInterface
+     */
+    protected $variant;
+
+    /**
+     * Order item for subscription.
+     *
+     * @var OrderItemInterface
+     */
+    protected $orderItem;
 
     /**
      * {@inheritdoc}
@@ -66,5 +81,51 @@ class Subscription extends RecurringSubscription implements SubscriptionInterfac
     public function setShippingAddress(AddressInterface $address)
     {
         $this->shippingAddress = $address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariant()
+    {
+        return $this->variant;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVariant(VariantInterface $variant)
+    {
+        $this->variant = $variant;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct()
+    {
+        if (!$this->variant) {
+            return null;
+        }
+
+        return $this->variant->getProduct();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderItem()
+    {
+        return $this->orderItem;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOrderItem(OrderItemInterface $orderItem)
+    {
+        $this->orderItem = $orderItem;
     }
 }

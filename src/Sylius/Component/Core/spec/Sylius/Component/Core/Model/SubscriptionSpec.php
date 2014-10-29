@@ -12,8 +12,10 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 
 class SubscriptionSpec extends ObjectBehavior
 {
@@ -52,5 +54,31 @@ class SubscriptionSpec extends ObjectBehavior
     {
         $this->setShippingAddress($address);
         $this->getShippingAddress()->shouldReturn($address);
+    }
+
+    public function it_has_no_variant_by_default()
+    {
+        $this->getVariant()->shouldReturn(null);
+    }
+
+    public function its_variant_is_mutable(VariantInterface $variant)
+    {
+        $this->setVariant($variant);
+        $this->getVariant()->shouldReturn($variant);
+    }
+
+    public function it_should_return_product_from_variant(
+        VariantInterface $variant,
+        ProductInterface $product
+    ) {
+        $variant->getProduct()->willReturn($product);
+        $this->setVariant($variant);
+
+        $this->getProduct()->shouldReturn($product);
+    }
+
+    public function it_returns_no_product_by_default()
+    {
+        $this->getProduct()->shouldReturn(null);
     }
 }

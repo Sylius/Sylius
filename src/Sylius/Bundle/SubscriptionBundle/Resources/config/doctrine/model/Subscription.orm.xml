@@ -18,6 +18,7 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <field name="quantity" column="quantity" type="integer" nullable="false" />
         <field name="scheduledDate" column="scheduled_date" type="date" nullable="false" />
         <field name="processedDate" column="processed_date" type="date" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
@@ -26,11 +27,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <one-to-many field="items" target-entity="Sylius\Component\Subscription\Model\SubscriptionItemInterface" mapped-by="subscription" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>
