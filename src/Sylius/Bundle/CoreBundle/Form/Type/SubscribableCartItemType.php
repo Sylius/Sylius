@@ -16,7 +16,9 @@ class SubscribableCartItemType extends CartItemType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('subscription', 'sylius_cart_item_subscription');
+        $builder->add('subscription', 'sylius_cart_item_subscription', array(
+            'label' => 'sylius.form.subscription.label'
+        ));
 
         // remove subscription if fields not filled in form
         $builder->addEventListener(FormEvents::POST_SUBMIT,

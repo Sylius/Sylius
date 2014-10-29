@@ -1,4 +1,5 @@
 sylius.form.subscription:
+    label: Renew Every
     scheduled_date: Scheduled Date
     quantity: Quantity
     interval_unit: Interval

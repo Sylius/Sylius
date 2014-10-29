@@ -43,7 +43,8 @@ sylius_cart:
     resolver: sylius.cart_item_resolver.default
     classes:
         item:
-            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+#            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+            form: Sylius\Bundle\CoreBundle\Form\Type\SubscribableCartItemType
         cart:
             form: Sylius\Bundle\CoreBundle\Form\Type\CartType
 

@@ -132,3 +132,30 @@
         </div>
     {% endspaceless %}
 {% endblock %}
+
+{% block sylius_cart_item_subscription_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_errors(form) }}
+            {{ form_errors(form.intervalFrequency) }}
+            {{ form_errors(form.intervalUnit) }}
+
+            {{ form_label(form) }}
+
+            {% if label is not same as(false) %}
+                <div class="col-lg-10"><div class="row">
+            {% endif %}
+
+            <div class="col-lg-3" style="{% if label is sameas(false) %}padding: 0;{% endif %} padding-right: 5px;">
+                {{ form_widget(form.intervalFrequency) }}
+            </div>
+            <div class="col-lg-9" style="padding-left: 0">
+                {{ form_widget(form.intervalUnit) }}
+            </div>
+
+            {% if label is not same as(false) %}
+                </div></div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
