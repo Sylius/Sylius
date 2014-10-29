@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f34ed3b975a5f8a0d40975d4ef625cf3",
+    "hash": "1ecdecb2c07e82a2a64d99eb3d5273c3",
     "packages": [
         {
             "name": "ajbdev/authorizenet-php-api",
@@ -5439,16 +5439,16 @@
         },
         {
             "name": "winzou/state-machine-bundle",
-            "version": "v0.1.3",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/winzou/StateMachineBundle.git",
-                "reference": "b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca"
+                "reference": "5bae2f05c330ec26c0065caf7e6ee5f4873e3356"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca",
-                "reference": "b0dc9d4477c1d6f0ba0ea168b7abc58acb261bca",
+                "url": "https://api.github.com/repos/winzou/StateMachineBundle/zipball/5bae2f05c330ec26c0065caf7e6ee5f4873e3356",
+                "reference": "5bae2f05c330ec26c0065caf7e6ee5f4873e3356",
                 "shasum": ""
             },
             "require": {
@@ -5472,7 +5472,6 @@
             "authors": [
                 {
                     "name": "Alexandre Bacco",
-                    "email": "alexandre.bacco@gmail.com",
                     "homepage": "http://alex.bacco.fr"
                 }
             ],
@@ -5482,7 +5481,7 @@
                 "statemachine",
                 "symfony"
             ],
-            "time": "2014-06-20 03:56:36"
+            "time": "2014-10-29 05:25:26"
         }
     ],
     "packages-dev": [
@@ -6259,9 +6258,7 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": [
-
-                ]
+                "branch-alias": []
             },
             "autoload": {
                 "psr-0": {
@@ -7251,9 +7248,7 @@
             "time": "2014-03-07 15:35:33"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/doctrine-bundle": 20,
@@ -7271,7 +7266,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
