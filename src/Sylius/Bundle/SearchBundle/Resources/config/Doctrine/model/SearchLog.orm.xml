@@ -17,7 +17,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-  <entity name="Sylius\Bundle\SearchBundle\Entity\SearchLog" table="sylius_search_log">
+  <entity name="Sylius\Bundle\SearchBundle\Model\SearchLog" table="sylius_search_log">
 
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>

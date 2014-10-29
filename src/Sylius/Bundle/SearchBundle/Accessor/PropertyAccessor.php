@@ -12,12 +12,10 @@
 namespace Sylius\Bundle\SearchBundle\Accessor;
 
 use Symfony\Component\PropertyAccess\Exception;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessor as BasePropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
- * Product Accessor
- *
  * This class uses the property accessor to dynamically translate getters to values.
  * In case of sylius it extends the default functionality to include options and attributes.
  *
@@ -26,7 +24,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class PropertyAccessorAdaptor extends PropertyAccessor
+class PropertyAccessor extends BasePropertyAccessor
 {
     /**
      * @var

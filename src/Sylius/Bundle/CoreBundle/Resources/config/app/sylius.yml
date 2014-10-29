@@ -178,7 +178,13 @@ sylius_pricing:
 
 sylius_search:
     search_form_template: 'SyliusSearchBundle::search_form.html.twig'
-    driver: orm
+    driver: doctrine/orm
+    engine: orm
+    classes:
+       search:
+          model: Sylius\Bundle\SearchBundle\Model\SearchIndex
+       log:
+          model: Sylius\Bundle\SearchBundle\Model\SearchLog
     orm_indexes:
         product:
             class: Sylius\Component\Core\Model\Product
@@ -220,3 +226,4 @@ sylius_search:
                 display_name: 'Available colors'
                 type: terms
                 value: ~
+

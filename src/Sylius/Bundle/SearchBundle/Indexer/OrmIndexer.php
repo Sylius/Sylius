@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SearchBundle\Indexer;
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\ORM\EntityManager;
 use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
-use Sylius\Bundle\SearchBundle\Entity\SearchIndex;
+use Sylius\Bundle\SearchBundle\Model\SearchIndex;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -178,7 +178,7 @@ class OrmIndexer implements IndexerInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
@@ -208,7 +208,7 @@ class OrmIndexer implements IndexerInterface
     {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->delete('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
+            ->delete('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())

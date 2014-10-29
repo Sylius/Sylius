@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\QueryLogger;
 
 use Doctrine\ORM\EntityManager;
-use Sylius\Bundle\SearchBundle\Entity\SearchLog;
+use Sylius\Bundle\SearchBundle\Model\SearchLog;
 
 /**
  * @author agounaris <agounaris@gmail.com>

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\SearchBundle\Entity;
+namespace spec\Sylius\Bundle\SearchBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 

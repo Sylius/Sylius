@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\SearchBundle\Entity;
+namespace Sylius\Bundle\SearchBundle\Model;
 
 /**
  * SearchIndex entity

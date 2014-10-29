@@ -13,6 +13,8 @@ namespace Sylius\Bundle\SearchBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 
 /**
  * Search bundle.
@@ -21,6 +23,14 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
  */
 class SyliusSearchBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -42,8 +52,19 @@ class SyliusSearchBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getEntityNamespace()
+    protected function getModelInterfaces()
     {
-        return 'Sylius\Bundle\SearchBundle\Entity';
+        return array(
+            'Sylius\Bundle\SearchBundle\Model\SearchIndexInterface' => 'sylius.model.search.class',
+            'Sylius\Bundle\SearchBundle\Model\SearchLogInterface' => 'sylius.model.log.class',
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Bundle\SearchBundle\Model';
     }
 }

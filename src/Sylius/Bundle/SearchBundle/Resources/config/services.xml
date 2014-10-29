@@ -32,7 +32,7 @@
         <parameter key="sylius_search.orm.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\OrmQueryLogger</parameter>
         <parameter key="sylius_search.elasticsearch.query.logger.class">Sylius\Bundle\SearchBundle\QueryLogger\ElasticsearchQueryLogger</parameter>
 
-        <parameter key="sylius.search.product.property_accessor.class">Sylius\Bundle\SearchBundle\Accessor\PropertyAccessorAdaptor</parameter>
+        <parameter key="sylius.search.product.property_accessor.class">Sylius\Bundle\SearchBundle\Accessor\PropertyAccessor</parameter>
 
         <parameter key="sylius.search.request_handler">Sylius\Bundle\SearchBundle\Request\RequestHandler</parameter>
     </parameters>

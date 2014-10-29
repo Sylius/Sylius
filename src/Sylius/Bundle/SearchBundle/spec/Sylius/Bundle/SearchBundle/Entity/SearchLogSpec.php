@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\SearchBundle\Entity;
+namespace spec\Sylius\Bundle\SearchBundle\Model;
 
 use PhpSpec\ObjectBehavior;
 
@@ -21,7 +21,7 @@ class SearchLogSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Entity\SearchLog');
+        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Model\SearchLog');
     }
 
     function its_search_string_is_mutable()

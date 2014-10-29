@@ -52,11 +52,13 @@ class SearchIndexRepository extends EntityRepository
      */
     public function getProductIdsFromTaxonName($taxonName)
     {
+        $productClassName = $this->productRepository->getClassName();
+
         // Gets the taxon ids
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('product')
-            ->from('Sylius\Component\Core\Model\Product', 'product')
+            ->from($productClassName, 'product')
             ->leftJoin('product.taxons', 'taxon')
             ->where('taxon.name = :taxonName')
             ->setParameter('taxonName', $taxonName)
@@ -66,7 +68,7 @@ class SearchIndexRepository extends EntityRepository
         $products = $queryBuilder->getQuery()->getResult();
 
         foreach ($products as $product) {
-            $filteredIds[get_class($product)][] = $product->getId();
+            $filteredIds[$productClassName][] = $product->getId();
         }
 
         return $filteredIds;

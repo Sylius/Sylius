@@ -15,7 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
 
 /**
  * Class SyliusSearchExtension
@@ -31,24 +30,28 @@ class SyliusSearchExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
+        $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $config);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $classes = isset($config['classes']) ? $config['classes'] : array();
-        $this->createResourceServices($classes, $container);
-
         $container->setParameter('sylius_search.config', $config);
 
-        $commandClass = sprintf('sylius.search.%s.indexer', ucfirst($config['driver']));
+        $commandClass = sprintf('sylius.search.%s.indexer', ucfirst($config['engine']));
         $container->setAlias('sylius_search.command.indexer', $commandClass);
 
-        $finderClass = sprintf('sylius_search.%s.finder', ucfirst($config['driver']));
+        $finderClass = sprintf('sylius_search.%s.finder', ucfirst($config['engine']));
         $container->setAlias('sylius_search.finder', $finderClass);
 
-        $queryLoggerClass = sprintf('sylius_search.%s.query.logger', ucfirst($config['query_logger']['driver']));
+        $queryLoggerClass = sprintf('sylius_search.%s.query.logger', ucfirst($config['query_logger']['engine']));
         $container->setAlias('sylius_search.query.logger', $queryLoggerClass);
         $container->setParameter('sylius_search.query.logger.enabled', $config['query_logger']['enabled']);
 
@@ -58,23 +61,6 @@ class SyliusSearchExtension extends AbstractResourceExtension
         $container->setParameter('sylius_search.pre_search_filter.taxon', $config['filters']['pre_search_filter']['taxonomy']);
 
         $container->setParameter('sylius_search.custom.accessors', $config['custom_accessors']);
-    }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
-    private function createResourceServices(array $config, ContainerBuilder $container)
-    {
-        list($prefix, $resourceName) = explode('_', $this->getName());
-
-        DatabaseDriverFactory::get(
-            $config['driver'],
-            $container,
-            $prefix,
-            $resourceName,
-            array_key_exists('templates', $config) ? $config['templates'] : null
-        )->load($config);
     }
 
     /**

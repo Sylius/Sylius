@@ -191,7 +191,7 @@ class OrmFinder implements FinderInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags, u.entity')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.itemId IN (:ids)')
             ->setParameter('ids', $ids);
         $indexedItems = $queryBuilder->getQuery()->getResult();
@@ -447,7 +447,7 @@ class OrmFinder implements FinderInterface
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.itemId IN (:ids)')
             ->andWhere('u.entity = :model')
             ->setParameter('ids', $ids)
@@ -504,7 +504,7 @@ class OrmFinder implements FinderInterface
      */
     public function query($searchTerm, EntityManager $em)
     {
-        $query = $em->createQuery('select u.itemId, u.tags, u.entity from Sylius\Bundle\SearchBundle\Entity\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm) > 0');
+        $query = $em->createQuery('select u.itemId, u.tags, u.entity from Sylius\Bundle\SearchBundle\Model\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm) > 0');
         $query->setParameter('searchTerm', $searchTerm);
         $results = $query->getResult();
 

@@ -48,10 +48,10 @@ The default value for both search and filter forms is GET but you can use post b
 request_method: POST
 ```
 
-### Driver
+### Engine 
 
 ```yaml
-driver: orm
+engine: orm
 ```
 
 Possible values: orm, elasticsearch
@@ -68,7 +68,7 @@ smaller websites and elasticsearch for one with higher transactions. In the futu
 ```yaml
 query_logger:
     enabled: true
-    driver: orm
+    engine: orm
 ```
 
 
