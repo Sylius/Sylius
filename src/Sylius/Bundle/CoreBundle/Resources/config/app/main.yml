@@ -26,7 +26,10 @@ knp_gaufrette:
             adapter: %sylius.uploader.filesystem%
 
 liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/media/image
     filter_sets:
         sylius_small:
             filters:
