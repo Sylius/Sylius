@@ -22,18 +22,22 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/product":    "0.10.*@dev",
-        "sylius/cart":       "0.10.*@dev",
-        "sylius/order":      "0.10.*@dev",
-        "sylius/money":      "0.10.*@dev",
-        "sylius/taxation":   "0.10.*@dev",
-        "sylius/shipping":   "0.10.*@dev",
-        "sylius/addressing": "0.10.*@dev",
-        "sylius/promotion":  "0.10.*@dev",
-        "sylius/inventory":  "0.10.*@dev",
-        "sylius/taxonomy":   "0.10.*@dev",
-        "sylius/payment":    "0.10.*@dev",
-        "sylius/resource":   "0.10.*@dev"
+        "sylius/product":    "0.12.*@dev",
+        "sylius/cart":       "0.12.*@dev",
+        "sylius/order":      "0.12.*@dev",
+        "sylius/currency":   "0.12.*@dev",
+        "sylius/locale":     "0.12.*@dev",
+        "sylius/taxation":   "0.12.*@dev",
+        "sylius/shipping":   "0.12.*@dev",
+        "sylius/addressing": "0.12.*@dev",
+        "sylius/promotion":  "0.12.*@dev",
+        "sylius/inventory":  "0.12.*@dev",
+        "sylius/taxonomy":   "0.12.*@dev",
+        "sylius/payment":    "0.12.*@dev",
+        "sylius/pricing":    "0.12.*@dev",
+        "sylius/resource":   "0.12.*@dev",
+
+        "knplabs/gaufrette": "*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":              "~2.0",
@@ -50,7 +54,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.12-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

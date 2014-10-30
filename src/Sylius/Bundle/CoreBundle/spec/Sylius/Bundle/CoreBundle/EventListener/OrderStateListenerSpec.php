@@ -11,8 +11,8 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use Finite\Event\TransitionEvent;
 use PhpSpec\ObjectBehavior;
+use SM\Event\TransitionEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
@@ -34,11 +34,10 @@ class OrderStateListenerSpec extends ObjectBehavior
     }
 
     function it_resolves_order_states(
-            StateResolverInterface $stateResolver,
-            GenericEvent $event,
-            OrderInterface $order
-    )
-    {
+        StateResolverInterface $stateResolver,
+        GenericEvent $event,
+        OrderInterface $order
+    ) {
         $event->getSubject()->willReturn($order);
         $stateResolver->resolveShippingState($order)->shouldBeCalled();
         $stateResolver->resolvePaymentState($order)->shouldBeCalled();
@@ -46,13 +45,12 @@ class OrderStateListenerSpec extends ObjectBehavior
         $this->resolveOrderStates($event);
     }
 
-    function it_resolves_order_states_with_finite_event(
+    function it_resolves_order_states_with_state_machine_event(
         StateResolverInterface $stateResolver,
         TransitionEvent $event,
         OrderInterface $order,
         StateMachineInterface $sm
-    )
-    {
+    ) {
         $event->getStateMachine()->willReturn($sm);
         $sm->getObject()->willReturn($order);
 

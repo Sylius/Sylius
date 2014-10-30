@@ -30,7 +30,7 @@ interface StorageInterface
      *
      * @param string $key A unique key
      *
-     * @return Boolean Whether the storage has a value for this key
+     * @return bool Whether the storage has a value for this key
      */
     public function has($key);
 
@@ -40,7 +40,7 @@ interface StorageInterface
      * @param string $key     A unique key
      * @param mixed  $default
      *
-     * @return string|null The value in the storage or default if set or null if not found
+     * @return mixed|null The value in the storage or default if set or null if not found
      */
     public function get($key, $default = null);
 

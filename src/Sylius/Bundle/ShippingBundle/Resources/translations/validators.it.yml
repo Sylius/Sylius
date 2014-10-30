@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Il nome della categoria non deve essere più lungo di {{ limit }} caratteri.'
+      min_length: 'Il nome categoria deve essere lungo almeno {{ limit }} caratteri.'
+      not_blank: Inserisci il nome di categoria della spedizione.
+  shipping_method:
+    name:
+      max_length: 'Il metodo di spedizione non deve essere più lungo di {{ limit }} caratteri.'
+      min_length: 'Il metodo di spedizione deve essere lungo almeno {{ limit }} caratteri.'
+      not_blank: Inserisci il nome del metodo di spedizione.

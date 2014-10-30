@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -69,7 +69,9 @@ class OrderPaymentListener
      */
     public function createOrderPayment(GenericEvent $event)
     {
-        $this->paymentProcessor->createPayment($this->getOrder($event));
+        if (false === $this->getOrder($event)->getLastPayment()) {
+            $this->paymentProcessor->createPayment($this->getOrder($event));
+        }
     }
 
     /**

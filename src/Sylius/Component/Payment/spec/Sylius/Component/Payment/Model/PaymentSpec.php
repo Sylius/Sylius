@@ -123,4 +123,24 @@ class PaymentSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
+
+    function its_details_are_mutable()
+    {
+        $this->setDetails(array('foo', 'bar'));
+        $this->getDetails()->shouldReturn(array('foo', 'bar'));
+    }
+
+    function its_details_could_be_set_from_traversable()
+    {
+        $details = new \ArrayObject(array('foo', 'bar'));
+
+        $this->setDetails($details);
+        $this->getDetails()->shouldReturn(array('foo', 'bar'));
+    }
+
+    function it_throws_exception_if_details_given_are_neither_array_nor_traversable()
+    {
+        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')
+            ->duringSetDetails('invalidDetails');
+    }
 }

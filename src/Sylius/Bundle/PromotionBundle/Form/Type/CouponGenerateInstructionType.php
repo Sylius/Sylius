@@ -11,26 +11,16 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Coupon generate instruction type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CouponGenerateInstructionType extends AbstractType
+class CouponGenerateInstructionType extends AbstractResourceType
 {
-    protected $dataClass;
-    protected $validationGroups;
-
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -39,16 +29,6 @@ class CouponGenerateInstructionType extends AbstractType
             ))
             ->add('usageLimit', 'integer', array(
                 'label' => 'sylius.form.coupon_generate_instruction.usage_limit'
-            ))
-        ;
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
             ))
         ;
     }

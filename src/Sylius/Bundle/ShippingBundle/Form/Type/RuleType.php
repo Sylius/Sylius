@@ -11,30 +11,30 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener;
 use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Shipping rule form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RuleType extends AbstractType
+class RuleType extends AbstractResourceType
 {
-    protected $dataClass;
-    protected $validationGroups;
     protected $checkerRegistry;
 
     public function __construct($dataClass, array $validationGroups, RuleCheckerRegistryInterface $checkerRegistry)
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
         $this->checkerRegistry = $checkerRegistry;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -45,16 +45,9 @@ class RuleType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_shipping_rule';

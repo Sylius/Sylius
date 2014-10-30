@@ -1,3 +1,89 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Παρακαλούμε επιλέξτε μέθοδο αποστολής.
+  form:
+    action:
+      add_product_configuration:
+        price: Τιμή μονάδας
+        quantity: Ποσότητα
+        variant: Παραλλαγή
+    block:
+      id: ID
+      title: Τίτλος
+    cart:
+      coupon: Κουπόνι
+    checkout:
+      addressing:
+        different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
+      payment_method: Τρόπος Πληρωμής
+      shipping_method: Τρόπος Αποστολης
+    group:
+      name: Ονομασία
+      roles: Ρόλοι
+    image:
+      file: Εικόνα
+    locale:
+      code: Κώδικος
+      enabled: Ενεργοποιημένο
+    order_filter:
+      created_at_to: Προς
+      number: Αριθμός
+      total_from: Από
+      total_to: Προς
+    page:
+      id: ID
+      title: Τίτλος
+    product:
+      restricted_zone: Απαγορευμένη ζώνη
+      shipping_category: Κατηγορία αποστολής
+      short_description: Σύντομη περιγραφή
+      tax_category: Φορολογική κατηγορία
+      variant_selection_method: Μέθοδος επιλογής παραλλαγής
+    product_filter:
+      name: Ονομασία
+      sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+    settings:
+      general:
+        currency: Προεπιλεγμένο νόμισμα
+        locale: Γλώσσα
+        meta_description: Μετα-περιγραφή
+        meta_keywords: Μετα-λέξεις-κλειδιά
+        title: Τίτλος σελίδας
+      taxation:
+        default_tax_zone: Προεπιλεγμένη φορολογική ζώνη
+    shipment_filter:
+      created_at_from: Από
+      created_at_to: Προς
+      number: Αριθμός Παραγγελίας
+      shipping_address: Αποστολή στο όνομα
+    shipping_method:
+      zone: Ζώνη
+    taxon:
+      file: Επιλέξτε εικόνα
+    taxonomy:
+      file: Επιλέξτε εικόνα
+    user:
+      billing_address: Διεύθυνση τιμολόγησης
+      different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
+      enabled: Ενεργοποιημένο
+      first_name: Όνομα
+      groups: Ομάδες
+      last_name: Επώνυμο
+      password: Κωδικός πρόσβασης
+      shipping_address: Διεύθυνση αποστολής
+    user_filter:
+      query: Αναζήτηση
+    variant:
+      depth: Βάθος
+      height: Ύψος
+      images: Εικόνες
+      on_hand: Τρέχων απόθεμα
+      price: Τιμή
+      sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+      weight: Βάρος
+      width: Πλάτος

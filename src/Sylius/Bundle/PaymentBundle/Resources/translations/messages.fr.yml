@@ -12,7 +12,7 @@ sylius:
       type: Type de carte
     payment:
       amount: Montant du paiement
-      method: Mode de paiement
+      method: Moyen de paiement
       state:
         0: Etat du paiement
         checkout: Paiement

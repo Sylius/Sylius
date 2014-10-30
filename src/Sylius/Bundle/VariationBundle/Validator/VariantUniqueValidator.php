@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Validator;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
@@ -26,18 +26,18 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class VariantUniqueValidator extends ConstraintValidator
 {
     /**
-     * Variant manager.
+     * Variant repository.
      *
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $variantRepository;
 
     /**
      * Constructor.
      *
-     * @param ObjectRepository $variantRepository
+     * @param RepositoryInterface $variantRepository
      */
-    public function __construct(ObjectRepository $variantRepository)
+    public function __construct(RepositoryInterface $variantRepository)
     {
         $this->variantRepository = $variantRepository;
     }
@@ -54,8 +54,7 @@ class VariantUniqueValidator extends ConstraintValidator
         $variant = $value;
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $criteria = array($constraint->property => $accessor->getValue($variant, $constraint->property));
-        $conflictualVariant = $this->variantRepository->findOneBy($criteria);
+        $conflictualVariant = $this->variantRepository->findOneBy(array($constraint->property => $accessor->getValue($variant, $constraint->property)));
 
         if (null !== $conflictualVariant && $conflictualVariant !== $variant) {
             $this->context->addViolationAt($constraint->property, $constraint->message, array(

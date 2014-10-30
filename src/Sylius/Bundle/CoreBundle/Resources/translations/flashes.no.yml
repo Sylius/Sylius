@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    restricted_zone_removal: 'Produktet %product% er fjernet fra handlekurven, siden det ikke er tilgjengelig i ditt land.'
+  checkout:
+    restricted_zone: Dette produktet er ikke tilgjengelig i ditt land.
+    success: Takk for din ordre!
+    canceled: Betalingen ble avbrutt.
+    pending: Betalingen står på vent.
+    failed: Betaling ble avslått.
+    unknown: Ukjent betalingsproblem oppsto.
+    out_of_stock: 'Det er kun %quantity% %name% tilgjengelig på lager.'

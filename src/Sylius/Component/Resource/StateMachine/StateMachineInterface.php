@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Resource\StateMachine;
 
-use Finite\StateMachine\StateMachineInterface as BaseStateMachineInterface;
+use SM\StateMachine\StateMachineInterface as BaseStateMachineInterface;
 
 /**
  * Sylius State Machine
@@ -21,13 +21,12 @@ use Finite\StateMachine\StateMachineInterface as BaseStateMachineInterface;
 interface StateMachineInterface extends BaseStateMachineInterface
 {
     /**
-     * Returns the possible transition between given states
+     * Returns the possible transition to the given state
      * Returns null if no transition is possible
      *
-     * @param string      $toState
-     * @param string|null $fromState
+     * @param string $toState
      *
      * @return string|null
      */
-    public function getTransitionToState($toState, $fromState = null);
+    public function getTransitionToState($toState);
 }

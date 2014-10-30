@@ -4,5 +4,61 @@
 sylius:
   backend:
     menu:
+      main:
+        assortment: Sortiment
+        configuration: Konfigurácia
+        countries: Krajiny
+        customer: Zákazníci
+        exchange_rates: Výmenné kurzy
+        general_settings: Základné nastavenia
+        homepage: Zobraziť obchod
+        new_order: Pridať novú objednávku
+        options: Spravovať možnosti produktov
+        orders: Aktuálne objednávky
+        payments: Platby
+        products: Produkty
+        sales: Objednávky
+        shipments: Zásielky
+        users: Používatelia
+        zones: Zóny
       sidebar:
+        assortment: Sortiment
+        blocks: Bloky
+        configuration: Konfigurácia
+        content: Obsah
+        countries: Krajiny
+        customer: Zákazníci
+        exchange_rates: Výmenné kurzy
+        general_settings: Základné nastavenia
         groups: Skupiny
+        new_order: Pridať novú objednávku
+        orders: Aktuálne objednávky
+        pages: Stránky
+        payments: Platby
+        products: Produkty
+        sales: Objednávky
+        shipments: Zásielky
+        users: Používatelia
+        zones: Zóny
+  frontend:
+    menu:
+      account:
+        homepage: Domov
+        orders: Moje objednávky / moje faktúry
+        password: Moje heslo
+        profile: Moje osobné údaje
+        shop: Späť na obchod
+      currency: 'Zobraziť ceny v %currency%'
+      main:
+        account: Môj účet
+        administration: Administrácia
+        cart: 'Zobraziť košík (%items%) %total%'
+        login: Prihlásenie
+        logout: Odhlásiť
+        register: Registrovať
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

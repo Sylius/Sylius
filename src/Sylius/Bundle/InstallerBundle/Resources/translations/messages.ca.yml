@@ -1,3 +1,63 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '-> $'
+sylius:
+  flashes:
+    installed: "Sylius s'ha instal·lat correctament."
+  form:
+    configuration:
+      database:
+        0: Connexió a la base de dades
+        driver:
+          0: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Host
+        name: Nom
+        password: Contrasenya
+        port: Port
+        user: Usuari
+      locale:
+        0: Paràmetres locals
+        currency: Moneda
+        locale: Locale
+      mailer:
+        0: Configuració de Mailer
+        host: Host
+        password: Contrasenya
+        transport:
+          0: Transport
+          gmail: Gmail
+          mail: Correu
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Usuari
+    setup:
+      email: Correu electrònic
+      load_fixtures: Accessoris de càrrega
+      plain_password: Contrasenya
+      username: "Nom d'usuari"
+  process:
+    step:
+      check:
+        button:
+          back: Enrera
+          install: Instal·lar
+          next: Següent
+        header: 'Requisits del sistema comprovar <small>Sylius instal·lador</small>'
+        table:
+          current: actual
+          required: requerit
+          status: Estat
+      configure:
+        header: "Configuració <small>Sylius d'instal·lador</small>"
+      setup:
+        header: 'Configuració Administrador <small>  Instal·lador Sylius</small>'
+      welcome:
+        content: '<p>Benvingut al instal·lador de Sylius.</p>'
+        header: 'Benvingut al <small> Instal·lador Sylius instal·lador</small>'
+€: €

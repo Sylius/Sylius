@@ -6,8 +6,12 @@ sylius:
     name:
       max_length: 'Die Kategorie darf nicht länger als {{ limit }} Zeichen sein.'
       min_length: 'Die Kategorie muss mindestens {{ limit }} Zeichen lang sein.'
-      not_blank: Bitte geben Sie den Namen der Versandkosten Kategorie an.
+      not_blank: Bitte geben Sie den Namen der Versandkostenkategorie an.
   shipping_method:
+    calculator:
+      max_length: 'Eingabe darf nicht länger als {{ limit }} Zeichen sein.'
+      min_length: 'Die Eingabe muss mindestens {{ limit }} Zeichen lang sein.'
+      not_blank: Die Eingabe darf nicht leer sein.
     name:
       max_length: 'Der Name der Versandmethode darf nicht länger als {{ limit }} Zeichen sein.'
       min_length: 'Der Name der Versandmethode muss mindestens {{ limit }} Zeichen lang sein.'

@@ -12,8 +12,8 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -42,13 +42,12 @@ class FixedDiscountActionSpec extends ObjectBehavior
         OrderInterface $order,
         AdjustmentInterface $adjustment,
         PromotionInterface $promotion
-    )
-    {
+    ) {
         $adjustmentRepository->createNew()->willReturn($adjustment);
         $promotion->getDescription()->willReturn('promotion description');
 
         $adjustment->setAmount(-500)->shouldBeCalled();
-        $adjustment->setLabel(OrderInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $adjustment->setDescription('promotion description')->shouldBeCalled();
 
         $order->addAdjustment($adjustment)->shouldBeCalled();

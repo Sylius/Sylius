@@ -11,68 +11,54 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 
-use Payum\Core\Action\PaymentAwareAction;
-use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\SecuredCaptureRequest;
 use Payum\Core\Security\SensitiveValue;
+use Payum\Core\Security\TokenInterface;
+use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
-class CapturePaymentUsingCreditCardAction extends PaymentAwareAction
+class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 {
     /**
-     * {@inheritdoc}
+     * @var CurrencyConverterInterface
      */
-    public function execute($request)
+    private $currencyConverter;
+
+    /**
+     * @param CurrencyConverterInterface $currencyConverter
+     */
+    public function __construct(CurrencyConverterInterface $currencyConverter)
     {
-        /** @var $request SecuredCaptureRequest */
-        if (!$this->supports($request)) {
-            throw RequestNotSupportedException::createActionNotSupported($this, $request);
-        }
-
-        /** @var $payment PaymentInterface */
-        $payment = $request->getModel();
-        $order = $payment->getOrder();
-
-        $details = $payment->getDetails();
-        if (empty($details)) {
-            $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
-
-            $creditCard = $obtainCreditCardRequest->getCreditCard();
-
-            $details = array(
-                'card' => new SensitiveValue(array(
-                    'number'      => $creditCard->getNumber(),
-                    'expiryMonth' => $creditCard->getExpiryMonth(),
-                    'expiryYear'  => $creditCard->getExpiryYear(),
-                    'cvv'         => $creditCard->getSecurityCode()
-                )),
-                'amount' => round($order->getTotal() / 100, 2),
-                'currency' => $order->getCurrency(),
-            );
-
-            $payment->setDetails($details);
-        }
-
-        try {
-            $request->setModel($details);
-            $this->payment->execute($request);
-            $request->setModel($order);
-        } catch (\Exception $e) {
-            $request->setModel($order);
-
-            throw $e;
-        }
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function supports($request)
+    protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
     {
-        return
-            $request instanceof SecuredCaptureRequest &&
-            $request->getModel() instanceof PaymentInterface
-        ;
+        if ($payment->getDetails()) {
+            return;
+        }
+
+        $order = $payment->getOrder();
+
+        $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
+
+        $creditCard = $obtainCreditCardRequest->getCreditCard();
+
+        $total = $this->currencyConverter->convert($order->getTotal(), $order->getCurrency());
+
+        $payment->setDetails(array(
+            'card' => new SensitiveValue(array(
+                'number'      => $creditCard->getNumber(),
+                'expiryMonth' => $creditCard->getExpiryMonth(),
+                'expiryYear'  => $creditCard->getExpiryYear(),
+                'cvv'         => $creditCard->getSecurityCode()
+            )),
+            'amount' => round($total / 100, 2),
+            'currency' => $order->getCurrency(),
+        ));
     }
 }

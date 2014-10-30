@@ -6,10 +6,30 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.listener.order_update.class">Sylius\Bundle\OrderBundle\EventListener\OrderUpdateListener</parameter>
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.controller.comment" class="%sylius.controller.comment.class%">
+            <argument>sylius</argument>
+            <argument>comment</argument>
+            <argument>SyliusOrderBundle:Comment</argument>
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
+            <argument>%sylius.model.adjustment.class%</argument>
+            <argument>%sylius.validation_group.adjustment%</argument>
+            <tag name="form.type" alias="sylius_adjustment" />
+        </service>
+        <service id="sylius.form.type.comment" class="%sylius.form.type.comment.class%">
+            <argument>%sylius.model.comment.class%</argument>
+            <argument>%sylius.validation_group.comment%</argument>
+            <tag name="form.type" alias="sylius_comment" />
+        </service>
         <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_group.order%</argument>
@@ -20,11 +40,12 @@
             <argument>%sylius.validation_group.order_item%</argument>
             <tag name="form.type" alias="sylius_order_item" />
         </service>
-        <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
-            <argument>%sylius.model.adjustment.class%</argument>
-            <argument>%sylius.validation_group.adjustment%</argument>
-            <tag name="form.type" alias="sylius_adjustment" />
-        </service>
+
+
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
+
+        <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
+        </service>
     </services>
 </container>

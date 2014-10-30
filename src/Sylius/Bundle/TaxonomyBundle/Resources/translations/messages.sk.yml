@@ -4,6 +4,7 @@
 sylius:
   form:
     taxon:
+      description: Popis
       name: Názov
     taxonomy:
       name: Názov

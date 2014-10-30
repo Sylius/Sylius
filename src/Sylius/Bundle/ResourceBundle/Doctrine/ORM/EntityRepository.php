@@ -127,7 +127,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
     }
 
     /**
@@ -184,7 +184,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
-                $queryBuilder->orderBy($this->getPropertyName($property), $order);
+                $queryBuilder->addOrderBy($this->getPropertyName($property), $order);
             }
         }
     }

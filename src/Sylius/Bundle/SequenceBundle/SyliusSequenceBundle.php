@@ -11,24 +11,20 @@
 
 namespace Sylius\Bundle\SequenceBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler\RegisterGeneratorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sequence system for ecommerce Symfony2 applications.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusSequenceBundle extends Bundle
+class SyliusSequenceBundle extends AbstractResourceBundle
 {
     /**
-     * Return array of currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
@@ -42,17 +38,34 @@ class SyliusSequenceBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $interfaces = array(
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterGeneratorsPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBundlePrefix()
+    {
+        return 'sylius_sequence';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return array(
             'Sylius\Component\Sequence\Model\SequenceInterface' => 'sylius.model.sequence.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_sequence', $interfaces));
-        $container->addCompilerPass(new RegisterGeneratorsPass());
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Component\Sequence\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_settings.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Sequence\Model';
     }
 }

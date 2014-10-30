@@ -41,8 +41,11 @@ class OrderTaxationListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_calls_taxation_processor_on_order(TaxationProcessorInterface $taxationProcessor, GenericEvent $event, OrderInterface $order)
-    {
+    function it_calls_taxation_processor_on_order(
+        TaxationProcessorInterface $taxationProcessor,
+        GenericEvent $event,
+        OrderInterface $order
+    ) {
         $event->getSubject()->willReturn($order);
         $taxationProcessor->applyTaxes($order)->shouldBeCalled();
         $order->calculateTotal()->shouldBeCalled();

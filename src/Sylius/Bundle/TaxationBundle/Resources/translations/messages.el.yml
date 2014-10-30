@@ -1,3 +1,12 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    tax_category:
+      name: Ονομασία
+      description: Περιγραφή
+    tax_rate:
+      category: Κατηγορία
+      name: Ονομασία
+      amount: Ποσό

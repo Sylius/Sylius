@@ -1,3 +1,30 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Kártyabirtokos neve
+      expiry_month: Lejárati hónap
+      expiry_year: Lejárati év
+      number: Kártya száma
+      security_code: Biztonsági kód (CVV)
+      type: Kártya típusa
+    payment:
+      amount: Fizetendő összeg
+      method: Fizetési mód
+      state:
+        0: Fizetés állapota
+        checkout: Fizetés
+        completed: Befejezve
+        failed: Sikertelen
+        new: Új
+        pending: Függőben
+        processing: Feldolgozás alatt
+        unknown: Ismeretlen
+        void: Hiányos
+    payment_method:
+      description: Leírás
+      enabled: Engedélyezve?
+      gateway: Átjáró
+      name: Név

@@ -35,25 +35,21 @@ class PaymentMethodTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('description', 'textarea', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('enabled', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('gateway', 'sylius_payment_gateway_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

@@ -12,7 +12,7 @@
 namespace Sylius\Component\Shipping\Processor;
 
 use Doctrine\Common\Collections\Collection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentItemInterface;
@@ -50,10 +50,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
                 throw new UnexpectedTypeException($shipment, 'Sylius\Component\Shipping\Model\ShipmentInterface');
             }
 
-            $stateMachine = $this->factory->get($shipment, ShipmentTransitions::GRAPH);
-            if ($stateMachine->can($transition)) {
-                $stateMachine->apply($transition);
-            }
+            $this->factory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition, true);
         }
     }
 
@@ -71,10 +68,7 @@ class ShipmentProcessor implements ShipmentProcessorInterface
                 throw new UnexpectedTypeException($item, 'Sylius\Component\Shipping\Model\ShipmentItemInterface');
             }
 
-            $stateMachine = $this->factory->get($item, ShipmentItemTransitions::GRAPH);
-            if ($stateMachine->can($transition)) {
-                $stateMachine->apply($transition);
-            }
+            $this->factory->get($item, ShipmentItemTransitions::GRAPH)->apply($transition, true);
         }
     }
 }

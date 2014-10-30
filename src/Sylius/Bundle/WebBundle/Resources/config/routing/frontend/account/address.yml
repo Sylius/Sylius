@@ -2,31 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius_account_address_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
       _controller: sylius.controller.frontend.account.address:indexAction
 
 sylius_account_address_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.frontend.account.address:createAction
 
 sylius_account_address_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.frontend.account.address:updateAction
 
 sylius_account_address_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.frontend.account.address:deleteAction
 
 sylius_account_address_set_default_billing:
-    pattern: /{id}/default/billing
+    path: /{id}/default/billing
     methods: [PATCH]
     defaults:
         _controller: sylius.controller.frontend.account.address:setAddressAsAction
@@ -35,7 +35,7 @@ sylius_account_address_set_default_billing:
         id:  \d+
 
 sylius_account_address_set_default_shipping:
-    pattern: /{id}/default/shipping
+    path: /{id}/default/shipping
     methods: [PATCH]
     defaults:
         _controller: sylius.controller.frontend.account.address:setAddressAsAction

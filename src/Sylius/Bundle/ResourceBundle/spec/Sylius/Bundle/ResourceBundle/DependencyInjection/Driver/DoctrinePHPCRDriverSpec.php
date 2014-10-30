@@ -22,7 +22,7 @@ class DoctrinePHPCRDriverSpec extends ObjectBehavior
 {
     function let(ContainerBuilder $container)
     {
-        $this->beConstructedWith($container, 'prefix', 'resource');
+        $this->beConstructedWith($container, 'prefix', 'resource', 'default');
     }
 
     function it_is_initializable()
@@ -52,7 +52,7 @@ class DoctrinePHPCRDriverSpec extends ObjectBehavior
             Argument::type('Symfony\Component\DependencyInjection\Alias')
         )->shouldBeCalled();
 
-        $this->beConstructedWith($container, 'prefix', 'resource');
+        $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
         $this->load(array(
             'model' => 'Sylius\Model',

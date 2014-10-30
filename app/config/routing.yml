@@ -1,8 +1,24 @@
 sylius_installer:
     resource: @SyliusInstallerBundle/Resources/config/routing.yml
 
+sylius_api:
+    resource: @SyliusApiBundle/Resources/config/routing/main.yml
+    prefix: /api
+
 sylius_web:
     resource: @SyliusWebBundle/Resources/config/routing/main.yml
+
+create:
+    resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
+    
+create_image:
+    resource: "@CmfCreateBundle/Resources/config/routing/image.xml"
+
+cmf_media_file:
+    resource: "@CmfMediaBundle/Resources/config/routing/file.xml"
+
+cmf_media_image:
+    resource: "@CmfMediaBundle/Resources/config/routing/image.xml"
 
 payum_capture:
     resource: "@PayumBundle/Resources/config/routing/capture.xml"
@@ -29,6 +45,9 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /account
 
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /connect
@@ -38,10 +57,10 @@ hwi_oauth_redirect:
     prefix: /login
 
 amazon_login:
-    pattern: /login/check-amazon
+    path: /login/check-amazon
 
 facebook_login:
-    pattern: /login/check-facebook
+    path: /login/check-facebook
 
 google_login:
-    pattern: /login/check-google
+    path: /login/check-google

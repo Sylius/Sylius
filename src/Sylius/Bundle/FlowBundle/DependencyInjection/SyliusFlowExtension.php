@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Sylius flows extension.
+ * Flows extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

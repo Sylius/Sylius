@@ -17,6 +17,7 @@ sylius:
     sku:
       not_blank: Proszę podać SKU wariantu.
       unique: Wartość SKU wariantu musi być unikatowa.
+    combination: Warian z tą opcją już istnieje.
   option:
     name:
       not_blank: Proszę wprowadzić nazwę opcji.
@@ -26,3 +27,27 @@ sylius:
       not_blank: Proszę wprowadzić nazwę publiczną.
       min_length: 'Nazwa publiczna powinna zawierać co najmniej jeden znak. |Nazwa publiczna nie może przekraczać {{ limit }} znaków.'
       max_length: 'Nazwa publiczna nie może być dłuższy niż jeden znak. |Nazwa publiczna nie może być dłuższa niż {{ limit }} znaków.'
+    values:
+      min_count: '{1} Dodaj co najmniej 1 opcję.|]1,4]Dodaj co najmniej {{ limit }} opcje.|]4,Inf]Dodaj co najmniej {{ limit }} opcji.'
+  option_value:
+    value:
+      not_blank: Podaj wartość opcji.
+  property:
+    name:
+      not_blank: Podaj nazwę właściwości.
+      min_length: 'Nazwa właściwości musi mieć przynajmniej 1 znak.|Nazwa właściwości musi mieć przynajmniej {{ limit }} znaków.'
+      max_length: 'Nazwa produktu nie może być dłuższa niż 1 znak. |Nazwa produktu nie może przekraczać {{ limit }} znaków.'
+    presentation:
+      not_blank: Wprowadź opis właściwości.
+      min_length: 'Opis właściwości musi posiadać przynajmniej 1 znak.|Opis właściwości musi zawierać przynajmniej {{ limit }} znaków.'
+      max_length: 'Opis właściwości nie może być dłuższy niż 1 znak.|Opis właściwości nie może być dłuższy niż {{ limit }} znaków.'
+  product_property:
+    property:
+      not_blank: Wybierz właściwość.
+    value:
+      not_blank: Podaj właściwość produktu.
+  prototype:
+    name:
+      not_blank: Podaj nazwę prototypu.
+      min_length: 'Nazwa prototypu musi mieć co najmniej 1 znak.|Nazwa prototypu musi mieć co najmniej {{ limit }} znaków.'
+      max_length: 'Nazwa prototypu nie może być dłuższa niż 1 znak. |Nazwa prototypu nie może być dłuższa niż {{ limit }} znaków.'

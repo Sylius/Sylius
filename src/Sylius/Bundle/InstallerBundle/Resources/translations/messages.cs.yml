@@ -1,3 +1,63 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius byl úspěšně nainstalován.
+  form:
+    configuration:
+      database:
+        0: Připojení databáze
+        driver:
+          0: Ovladač
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Host
+        name: Jméno
+        password: Heslo
+        port: Port
+        user: Uživatel
+      locale:
+        0: Místní nastavení
+        currency: Měna
+        locale: Jazyk
+      mailer:
+        0: Nastavení mailera
+        host: Hostitel
+        password: Heslo
+        transport:
+          0: Doprava
+          gmail: Gmail
+          mail: Mail
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Uživatel
+    setup:
+      email: Email
+      load_fixtures: Nahrát výchozí data
+      plain_password: Heslo
+      username: Uživatelské jméno
+  process:
+    step:
+      check:
+        button:
+          back: Zpět
+          install: Instalovat
+          next: Další
+        header: 'Kontrola systémových požadavků <small>instalátoru Sylius</small>'
+        table:
+          current: aktuální
+          required: požadovaný
+          status: stav
+      configure:
+        header: 'Konfigurace <small>instalátoru Sylius</small>'
+      setup:
+        header: 'Instalace administračního rozhraní <small>instalátoru Sylius</small>'
+      welcome:
+        content: '<p>Vítá Vás instalátor Sylius.</p>'
+        header: 'Vítejte <small> Sylius instalátor </small>'
+€: €

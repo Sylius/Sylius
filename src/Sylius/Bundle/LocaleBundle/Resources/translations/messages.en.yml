@@ -1,0 +1,5 @@
+sylius:
+    form:
+        locale:
+            code: Code
+            enabled: Enabled

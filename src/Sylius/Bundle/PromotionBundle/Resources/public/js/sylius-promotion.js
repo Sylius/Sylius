@@ -30,18 +30,16 @@
                     }
 
                     var form = element.closest('div.form-group');
-                    var container = form.next();
-                    var count = form.parents(':eq(1)').children().length - 1;
+                    var count = form.parent().parent().parent().children().length - 1;
                     var prototype = $('#' + prototypePrefix + '_' + selectedValue)
                         .data('prototype')
                         .replace(/\[__name__\]/g, '[' + prototypePrefix + '][' + count + '][configuration]')
                         .replace(/__name__/g, count)
                     ;
 
+                    form = form.parent().parent();
+                    var container = form.children().last();
                     if (replace) {
-                        if (form.children().length > 1) {
-                            form.children().last().remove();
-                        }
                         container.html(prototype);
                     } else if (form.children().length <= 1) {
                         container.html(prototype);

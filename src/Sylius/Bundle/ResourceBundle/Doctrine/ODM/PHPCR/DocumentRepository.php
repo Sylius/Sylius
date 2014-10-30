@@ -80,9 +80,10 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
         foreach ($criteria as $property => $value) {
             if (!empty($value)) {
                 $queryBuilder
-                    ->andWhere($this->getPropertyName($property).' = :'.$property)
-                    ->setParameter($property, $value)
-                ;
+                    ->andWhere()
+                        ->eq()
+                            ->field($this->getPropertyName($property))
+                            ->literal($value);
             }
         }
     }

@@ -5,8 +5,32 @@ sylius:
   form:
     address:
       city: By
+      company: Firma
+      country: Land
+      first_name: Fornavn
+      last_name: Etternavn
       postcode: Postnummer
       street: Gate
       province: Provins
+    country:
+      iso_name: ISO navn
+      name: Navn
+      provinces: Fylker
+      select: Velg
+    province:
+      name: Navn
+      select: Velg
+    zone:
+      members: Medlemmer
+      name: Navn
+      type: Type
+      types:
+        country: Land
+        province: Provins
+        zone: Sone
+    zone_member_country:
+      country: Land
     zone_member_province:
-      province: Provins
+      province: Fylke
+    zone_member_zone:
+      zone: Sone

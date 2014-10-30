@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  exchange_rate:
+    currency:
+      not_blank: Kérjük, válasszon valutanemet.
+    rate:
+      not_blank: Adja meg az árfolyamot.
+    unique: A valutanemnek egyedinek kell lennie.

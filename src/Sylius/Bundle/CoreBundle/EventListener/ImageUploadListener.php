@@ -40,8 +40,14 @@ class ImageUploadListener
 
         $variant = $subject instanceof ProductVariantInterface ? $subject : $subject->getMasterVariant();
 
-        foreach ($variant->getImages() as $image) {
+        $images = $variant->getImages();
+        foreach ($images as $image) {
             $this->uploader->upload($image);
+
+            // Upload failed? Let's remove that image.
+            if (null === $image->getPath()) {
+                $images->removeElement($image);
+            }
         }
     }
 

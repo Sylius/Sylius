@@ -24,6 +24,10 @@ sylius:
       members: Области
       name: Название
       type: Тип
+      types:
+        country: Страна
+        province: Район
+        zone: Зона
     zone_member_country:
       country: Страна
     zone_member_province:

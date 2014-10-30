@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderNumberListenerSpec extends ObjectBehavior
 {
-    public function let(NumberListener $listener)
+    function let(NumberListener $listener)
     {
         $this->beConstructedWith($listener);
     }
@@ -32,7 +32,7 @@ class OrderNumberListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener');
     }
 
-    function it_generates_order_number($listener, GenericEvent $event, OrderInterface $order)
+    function it_generates_order_number(NumberListener $listener, GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
 

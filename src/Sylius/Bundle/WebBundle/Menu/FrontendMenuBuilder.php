@@ -13,8 +13,9 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\MoneyBundle\Twig\MoneyExtension;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -35,7 +36,7 @@ class FrontendMenuBuilder extends MenuBuilder
      *
      * @var RepositoryInterface
      */
-    protected $exchangeRateRepository;
+    protected $currencyProvider;
 
     /**
      * Taxonomy repository.
@@ -52,41 +53,41 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $cartProvider;
 
     /**
-     * Money extension.
+     * Currency converter helper.
      *
-     * @var MoneyExtension
+     * @var CurrencyHelper
      */
-    protected $moneyExtension;
+    protected $currencyHelper;
 
     /**
      * Constructor.
      *
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param RepositoryInterface      $exchangeRateRepository
-     * @param RepositoryInterface      $taxonomyRepository
-     * @param CartProviderInterface    $cartProvider
-     * @param MoneyExtension           $moneyExtension
+     * @param FactoryInterface          $factory
+     * @param SecurityContextInterface  $securityContext
+     * @param TranslatorInterface       $translator
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param CurrencyProviderInterface $currencyProvider
+     * @param RepositoryInterface       $taxonomyRepository
+     * @param CartProviderInterface     $cartProvider
+     * @param CurrencyHelper            $currencyHelper
      */
     public function __construct(
-        FactoryInterface         $factory,
-        SecurityContextInterface $securityContext,
-        TranslatorInterface      $translator,
-        EventDispatcherInterface $eventDispatcher,
-        RepositoryInterface      $exchangeRateRepository,
-        RepositoryInterface      $taxonomyRepository,
-        CartProviderInterface    $cartProvider,
-        MoneyExtension           $moneyExtension
+        FactoryInterface          $factory,
+        SecurityContextInterface  $securityContext,
+        TranslatorInterface       $translator,
+        EventDispatcherInterface  $eventDispatcher,
+        CurrencyProviderInterface $currencyProvider,
+        RepositoryInterface       $taxonomyRepository,
+        CartProviderInterface     $cartProvider,
+        CurrencyHelper            $currencyHelper
     )
     {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
 
-        $this->exchangeRateRepository = $exchangeRateRepository;
+        $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
-        $this->moneyExtension = $moneyExtension;
+        $this->currencyHelper = $currencyHelper;
     }
 
     /**
@@ -115,12 +116,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
                 '%items%' => $cartTotals['items'],
-                '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
+                '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
             '%items%' => $cartTotals['items'],
-            '%total%' => $this->moneyExtension->formatPrice($cartTotals['total'])
+            '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
         )));
 
         if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_USER')) {
@@ -158,7 +159,7 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
+        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
@@ -194,12 +195,14 @@ class FrontendMenuBuilder extends MenuBuilder
             )
         ));
 
-        foreach ($this->exchangeRateRepository->findAll() as $exchangeRate) {
-            $menu->addChild($exchangeRate->getCurrency(), array(
+        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
+            $code = $currency->getCode();
+
+            $menu->addChild($code, array(
                 'route' => 'sylius_currency_change',
-                'routeParameters' => array('currency' => $exchangeRate->getCurrency()),
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $exchangeRate->getCurrency()))),
-            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($exchangeRate->getCurrency()));
+                'routeParameters' => array('currency' => $code),
+                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $code))),
+            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($code));
         }
 
         return $menu;

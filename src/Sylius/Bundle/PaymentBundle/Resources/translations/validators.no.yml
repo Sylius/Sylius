@@ -1,3 +1,28 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'Kortinnehavers navn må være minst {{ limit }} tegn.'
+      not_blank: Skriv inn navnet på kortholderen.
+    expiry_month:
+      max_range: 'Kredittkortets utløpsmåned må være mellom {{ min }} og {{ max }}.'
+      min_range: 'Kredittkortets utløpsmåned må være mellom {{ min }} og {{ max }}.'
+      not_blank: Velg utløpsmåned.
+    number:
+      not_blank: Skriv inn kortnummeret.
+      luhn: Kredittkortnummeret du skrev inn er ugyldig.
+    security_code:
+      not_blank: Skriv inn sikkerhetskoden.
+      max_length: 'Kredittkortets CVV-kode må være mellom {{ min }} og {{ max }} tegn lang.'
+      min_length: 'Kredittkortets CVV-kode må være mellom {{ min }} og {{ max }} tegn lang.'
+    expiry_year:
+      not_blank: Velg utløpsår.
+  payment_method:
+    gateway:
+      not_blank: Vennligst velg betalingsmetode.
+    name:
+      max_length: 'Metodenavn må være {{ limit }} tegn lang eller mindre.'
+      min_length: 'Metodenavn må være minst {{ limit }} tegn.'
+      not_blank: Angi navnet på betalingsmetoden.

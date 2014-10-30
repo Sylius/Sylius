@@ -21,7 +21,7 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends AdjustableInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
+interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
 {
     const STATE_CART        = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
@@ -31,6 +31,20 @@ interface OrderInterface extends AdjustableInterface, TimestampableInterface, So
     const STATE_ABANDONED   = 'abandoned';
     const STATE_CANCELLED   = 'cancelled';
     const STATE_RETURNED    = 'returned';
+
+    /**
+     * Get customer email.
+     *
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * Set customer email.
+     *
+     * @param string $email
+     */
+    public function setEmail($email);
 
     /**
      * Has the order been completed by user and can be handled.

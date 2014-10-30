@@ -42,8 +42,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country
-    )
-    {
+    ) {
         $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $country->getId()->shouldBeCalled()->willReturn(2);
@@ -55,8 +54,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country
-    )
-    {
+    ) {
         $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
         $address->getCountry()->shouldBeCalled()->willReturn($country);
         $country->getId()->shouldBeCalled()->willReturn(1);

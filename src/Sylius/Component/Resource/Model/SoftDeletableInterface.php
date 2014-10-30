@@ -19,7 +19,7 @@ interface SoftDeletableInterface
     /**
      * Is item deleted?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isDeleted();
 

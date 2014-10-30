@@ -24,7 +24,7 @@ class ShipmentController extends ResourceController
 
         if ($form->submit($request)->isValid()) {
             $this
-                ->get('finite.factory')
+                ->get('sm.factory')
                 ->get($shipment, ShipmentTransitions::GRAPH)
                 ->apply(ShipmentTransitions::SYLIUS_SHIP)
             ;

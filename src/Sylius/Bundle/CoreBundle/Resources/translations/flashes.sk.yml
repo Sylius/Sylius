@@ -8,6 +8,7 @@ sylius:
     restricted_zone: Tento produkt nie je dostupný vo vašej krajine.
     success: Ďakujeme za vašu objednávku!
     canceled: Vaša platba bola zrušená.
+    pending: Vaša platba sa práve spracúva.
     failed: Vaša platba bola odmietnutá.
     unknown: Neznáma chyba platby.
     out_of_stock: 'K dispozícii je iba %quantity% %name% na sklade.'

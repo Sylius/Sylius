@@ -13,7 +13,9 @@ namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
@@ -64,7 +66,11 @@ class WebContext extends DefaultContext
     public function iShouldBeOnThePage($page)
     {
         $this->assertSession()->addressEquals($this->generatePageUrl($page));
-        $this->assertStatusCodeEquals(200);
+
+        try {
+            $this->assertStatusCodeEquals(200);
+        } catch (UnsupportedDriverActionException $e) {
+        }
     }
 
     /**
@@ -527,9 +533,63 @@ class WebContext extends DefaultContext
     /**
      * @Then /^I should see product prices in "([^"]*)"$/
      */
-    public function iShouldSeeProductPricesIn($currency)
+    public function iShouldSeeProductPricesIn($code)
     {
-        $this->assertSession()->elementExists('css', sprintf('span.label:contains("%s")', $currency));
+        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($code);
+        $this->assertSession()->pageTextContains($symbol);
+    }
+
+    /**
+     * @Then I should see :count available currencies
+     */
+    public function iShouldSeeAvailableCurrencies($count)
+    {
+        $this->assertSession()->elementsCount('css', '.currency-menu ul li', $count);
+    }
+
+    /**
+     * @When I change the currency to :currency
+     */
+    public function iChangeTheCurrencyTo($code)
+    {
+        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($code);
+        $this->clickLink($symbol);
+    }
+
+    /**
+     * @Then I should see :count available locales
+     */
+    public function iShouldSeeAvailableLocales($count)
+    {
+        $this->assertSession()->elementsCount('css', '.locale-menu ul li', $count);
+    }
+
+    /**
+     * @When I change the locale to :locale
+     */
+    public function iChangeTheLocaleTo($name)
+    {
+        $this->clickLink($name);
+    }
+
+    /**
+     * @Then I should browse the store in :locale
+     */
+    public function iShouldBrowseTheStoreInLocale($name)
+    {
+        switch ($name) {
+            case 'English':
+                $text = 'Welcome to Sylius';
+            break;
+            case 'Polish':
+                $text = 'Witaj w Sylius';
+            break;
+            case 'German':
+                $text = 'Willkommen bei Sylius';
+            break;
+        }
+
+        $this->assertSession()->pageTextContains($text);
     }
 
     /**

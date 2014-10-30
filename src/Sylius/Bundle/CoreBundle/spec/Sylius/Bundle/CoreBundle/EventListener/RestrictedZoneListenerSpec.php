@@ -27,8 +27,13 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class RestrictedZoneListenerSpec extends ObjectBehavior
 {
-    function let(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ObjectManager $cartManager, SessionInterface $session, TranslatorInterface $translator)
-    {
+    function let(
+        RestrictedZoneCheckerInterface $restrictedZoneChecker,
+        CartProviderInterface $cartProvider,
+        ObjectManager $cartManager,
+        SessionInterface $session,
+        TranslatorInterface $translator
+    ) {
         $this->beConstructedWith($restrictedZoneChecker, $cartProvider, $cartManager, $session, $translator);
     }
 
@@ -57,8 +62,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         $cartProvider,
         GenericEvent $event,
         OrderInterface $cart
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($cart);
 
         $cartProvider->getCart()->shouldNotBeCalled();
@@ -77,8 +81,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         OrderInterface $cart,
         ProductInterface $product,
         AddressInterface $address
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($cart);
 
         $cartProvider->getCart()->shouldNotBeCalled();
@@ -107,8 +110,7 @@ class RestrictedZoneListenerSpec extends ObjectBehavior
         ProductInterface $product,
         AddressInterface $address,
         FlashBag $flashBag
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($cart);
 
         $cartProvider->getCart()->shouldNotBeCalled();

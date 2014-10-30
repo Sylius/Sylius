@@ -72,7 +72,7 @@ interface ProductInterface extends
     /**
      * Check whether the product is available.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isAvailable();
 
@@ -86,9 +86,9 @@ interface ProductInterface extends
     /**
      * Set available on.
      *
-     * @param \DateTime $availableOn
+     * @param null|\DateTime $availableOn
      */
-    public function setAvailableOn(\DateTime $availableOn);
+    public function setAvailableOn(\DateTime $availableOn = null);
 
     /**
      * Get meta keywords.

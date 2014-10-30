@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'A kategória neve nem lehet hosszabb, mint {{ limit }} karakter.'
+      min_length: 'A kategória név legalább {{ limit }} karakter hosszú kell legyen.'
+      not_blank: Kérjük, írja be a szállítási kategória nevét.
+  shipping_method:
+    calculator:
+      max_length: sylius.shipping_method.calculator.max_length
+      min_length: sylius.shipping_method.calculator.min_length
+      not_blank: sylius.shipping_method.calculator.not_blank
+    name:
+      max_length: 'Szállítási mód neve nem lehet hosszabb, mint {{ limit }} karakter.'
+      min_length: 'Szállítás mód neve legalább {{ limit }} karakter hosszú kell legyen.'
+      not_blank: Kérjük, adja meg a szállítás módját.

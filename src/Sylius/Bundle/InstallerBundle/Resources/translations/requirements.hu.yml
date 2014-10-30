@@ -1,3 +1,63 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: Kiegészítések
+    accelerator:
+      0: Gyorsító
+      help: Telepítsd és engedélyezd a PHP gyorstárazók egyikét, pl. az APC-t (erősen ajánlott)!
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Telepítsd és engedélyezd a(z) %extension% kiegészítőt.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Munkamenet
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: file-rendszer
+    cache:
+      0: gyorsítótár
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: létezik
+    logs:
+      0: naplók
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: nem létezik
+    not_writable: nem írható
+    parameters:
+      0: Parameters.YML
+      help:
+        To set permissions run: 'sudo chmod a + w % path %'
+    vendors: vendors
+    writable: írható
+  settings:
+    0: PHP verzió és beállítások
+    any: bármely
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: nem elavult
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: időzóna
+    timezone_deprecated:
+      0: Elavult időzóna
+      help: 'Ez az időzóna %timezone% elavult. Javítsd ki a php.ini fájlban (a támogatott időzónákat itt találod a PHP súgójában: http://php.net/manual/en/timezones.others.php).'
+    version: PHP verzió
+    version_recommanded: Ajánlott PHP-verzió

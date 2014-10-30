@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Vyberte prosím způsob dopravy.
+  form:
+    action:
+      add_product_configuration:
+        price: Jednotná cena
+        quantity: Počet
+        variant: Varianta
+    block:
+      body: Tělo
+      id: ID
+      title: Název
+    cart:
+      coupon: Kupón
+    checkout:
+      addressing:
+        different_billing_address: Použít jinou adresu pro fakturaci?
+      payment_method: Způsob Platby
+      shipping_method: Způsob Dopravy
+    group:
+      name: Jméno
+      roles: Role
+    image:
+      file: Obrázek
+    locale:
+      code: Kód
+      enabled: Povoleno
+    order_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Číslo
+      total_from: Od
+      total_to: Do
+    page:
+      body: Tělo
+      id: ID
+      title: Název
+    product:
+      restricted_zone: Zóna s omezeným přístupem
+      shipping_category: Typ dopravy
+      short_description: Stručný popis
+      tax_category: Typ daně
+      variant_selection_method: Metoda výběru varianty
+    product_filter:
+      name: Název
+      sku: SKU
+    settings:
+      general:
+        currency: Výchozí měna
+        locale: Jazyk
+        meta_description: Meta popis
+        meta_keywords: Meta klíčová slova
+        title: Název stránky
+      taxation:
+        default_tax_zone: Výchozí sazba DPH
+    shipment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Číslo objednávky
+      shipping_address: Jméno příjemce
+    shipping_method:
+      zone: Oblast
+    taxon:
+      file: Vybrat obrázek
+    taxonomy:
+      file: Vybrat obrázek
+    user:
+      billing_address: Fakturační adresa
+      different_billing_address: Použít jinou adresu pro fakturaci?
+      enabled: Povoleno
+      first_name: Křestní Jméno
+      groups: Skupiny
+      last_name: Příjmení
+      password: Heslo
+      shipping_address: Doručovací adresa
+    user_filter:
+      query: Hledat
+    variant:
+      available_on_demand: K dispozici na požádání
+      depth: Hloubka
+      height: Výška
+      images: Obrázky
+      on_hand: Aktuálně skladem
+      price: Cena
+      sku: SKU
+      weight: Hmotnost
+      width: Šířka

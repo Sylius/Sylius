@@ -79,6 +79,7 @@ class LoadUsersData extends DataFixture
         $user = $this->getUserRepository()->createNew();
         $user->setFirstname($this->faker->firstName);
         $user->setLastname($this->faker->lastName);
+        $user->setUsername($email);
         $user->setEmail($email);
         $user->setPlainPassword($password);
         $user->setRoles($roles);

@@ -1,3 +1,54 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Lütfen kargoyu seçiniz.
+  form:
+    action:
+      add_product_configuration:
+        price: Birim fiyatı
+        quantity: Adet
+        variant: Çeşit
+    block:
+      id: ID
+      title: Başlık
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+      payment_method: Ödeme Şekli
+      shipping_method: Gönderim şekli
+    group:
+      name: Ad
+      roles: Roller
+    image:
+      file: Resim
+    locale:
+      code: Kod
+      enabled: Etkin
+    order_filter:
+      created_at_from: Kaynak
+      created_at_to: Hedef
+      number: Sayı
+      total_from: Kaynak
+      total_to: Hedef
+    page:
+      id: ID
+      title: Başlık
+    product_filter:
+      name: Ad
+    shipment_filter:
+      created_at_from: Kaynak
+      created_at_to: Hedef
+    taxon:
+      file: Resim seç
+    taxonomy:
+      file: Resim seç
+    user:
+      billing_address: Fatura adresi
+      different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+      enabled: Etkin

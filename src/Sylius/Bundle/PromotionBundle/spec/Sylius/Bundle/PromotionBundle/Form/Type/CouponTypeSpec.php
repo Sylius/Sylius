@@ -40,13 +40,11 @@ class CouponTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('code', 'text', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('usageLimit', 'integer', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

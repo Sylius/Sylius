@@ -22,7 +22,7 @@ class CouponUsageCallback
 {
     public function incrementCouponUsage(OrderInterface $order)
     {
-        if ($coupon = $order->getPromotionCoupon()) {
+        foreach ($order->getPromotionCoupons() as $coupon) {
             $coupon->incrementUsed();
         }
     }

@@ -23,6 +23,7 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
  * It also handles sub-zones.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ZoneMatcher implements ZoneMatcherInterface
 {
@@ -32,6 +33,17 @@ class ZoneMatcher implements ZoneMatcherInterface
      * @var ObjectRepository
      */
     protected $repository;
+
+    /**
+     * Zone matching priorities.
+     *
+     * @var array
+     */
+    protected $priorities = array(
+        ZoneInterface::TYPE_PROVINCE,
+        ZoneInterface::TYPE_COUNTRY,
+        ZoneInterface::TYPE_ZONE,
+    );
 
     /**
      * Constructor.
@@ -46,23 +58,17 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function match(AddressInterface $address)
+    public function match(AddressInterface $address, $scope = null)
     {
         $zones = array();
 
-        foreach ($this->getZones() as $zone) {
+        foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;
             }
         }
 
-        $priorities = array(
-            ZoneInterface::TYPE_PROVINCE,
-            ZoneInterface::TYPE_COUNTRY,
-            ZoneInterface::TYPE_ZONE
-        );
-
-        foreach ($priorities as $priority) {
+        foreach ($this->priorities as $priority) {
             if (isset($zones[$priority])) {
                 return $zones[$priority];
             }
@@ -74,11 +80,11 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * {@inheritdoc}
      */
-    public function matchAll(AddressInterface $address)
+    public function matchAll(AddressInterface $address, $scope = null)
     {
         $zones = array();
 
-        foreach ($this->getZones() as $zone) {
+        foreach ($this->getZones($scope) as $zone) {
             if ($this->addressBelongsToZone($address, $zone)) {
                 $zones[] = $zone;
             }
@@ -138,10 +144,16 @@ class ZoneMatcher implements ZoneMatcherInterface
     /**
      * Gets all zones
      *
+     * @param string|null $scope
+     *
      * @return array $zones
      */
-    protected function getZones()
+    protected function getZones($scope = null)
     {
-        return $this->repository->findAll();
+        if (null === $scope) {
+            return $this->repository->findAll();
+        }
+
+        return $this->repository->findBy(array('scope' => $scope));
     }
 }

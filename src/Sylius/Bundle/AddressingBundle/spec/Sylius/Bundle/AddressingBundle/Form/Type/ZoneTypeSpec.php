@@ -18,12 +18,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ZoneTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Zone', array('sylius'));
+        $this->beConstructedWith('Zone', array('sylius'), array('shipping', 'pricing'));
     }
 
     function it_is_initializable()
@@ -45,18 +46,23 @@ class ZoneTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
-            ->add('type', 'choice', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->add('type', 'sylius_zone_type_choice', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('scope', 'choice', Argument::any())
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('members', 'sylius_zone_member_collection', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }
@@ -70,7 +76,8 @@ class ZoneTypeSpec extends ObjectBehavior
                     'validation_groups' => array('sylius')
                 )
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->setDefaultOptions($resolver);
     }

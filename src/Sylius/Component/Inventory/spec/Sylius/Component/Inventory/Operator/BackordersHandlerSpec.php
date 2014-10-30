@@ -43,8 +43,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         InventoryUnitInterface $inventoryUnit3
-    )
-    {
+    ) {
         $inventoryUnit1->getStockable()->shouldBeCalled()->willReturn($stockable);
         $inventoryUnit2->getStockable()->shouldBeCalled()->willReturn($stockable);
         $inventoryUnit3->getStockable()->shouldBeCalled()->willReturn($stockable);
@@ -63,8 +62,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         StockableInterface $stockable2,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2
-    )
-    {
+    ) {
         $inventoryUnit1->getStockable()->shouldBeCalled()->willReturn($stockable1);
         $inventoryUnit2->getStockable()->shouldBeCalled()->willReturn($stockable2);
 
@@ -81,8 +79,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         ObjectRepository $repository
-    )
-    {
+    ) {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
         $stockable->setOnHand(0)->shouldBeCalled();
 
@@ -111,8 +108,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit2,
         InventoryUnitInterface $inventoryUnit3,
         ObjectRepository $repository
-    )
-    {
+    ) {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(3);
         $stockable->setOnHand(0)->shouldBeCalled();
 
@@ -141,8 +137,7 @@ class BackordersHandlerSpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         ObjectRepository $repository
-    )
-    {
+    ) {
         $stockable->getOnHand()->shouldBeCalled()->willReturn(5);
         $stockable->setOnHand(3)->shouldBeCalled();
 

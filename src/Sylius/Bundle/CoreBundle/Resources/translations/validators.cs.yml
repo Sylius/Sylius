@@ -1,3 +1,22 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Název skupiny nesmí být delší než {{ limit }} znaků.'
+      min: 'Název skupinu musí být alespoň {{ limit }} znaků dlouhý.'
+      not_blank: Zadejte název skupiny.
+  user:
+    first_name:
+      max: 'Křestní jméno nesmí být delší než {{ limit }} znaků.'
+      min: 'Křestní jméno musí být alespoň {{ limit }} znaků dlouhý.'
+      not_blank: Zadejte své křestní jméno.
+    last_name:
+      max: 'Příjmení nesmí být delší než {{ limit }} znaků.'
+      min: 'Příjmení musí být alespoň {{ limit }} znaků dlouhé.'
+      not_blank: Zadejte své příjmení.
+  variant:
+    price:
+      min: Cena nesmí být záporná.
+      not_blank: Zadejte cenu.

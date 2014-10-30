@@ -16,22 +16,22 @@ sylius:
         taxons: Famille de tags
         exclude: Exclure
       item_count_configuration:
-        count: Compte
-        equal: Égale à
+        count: Nombre
+        equal: Supérieur ou égal
       item_total_configuration:
         amount: Montant
-        equal: Égale à
+        equal: Supérieur ou égal
       nth_order_configuration:
         nth: Nième
-      user_loyalty_configuration:
-        time: Temps
+      user_loyality_configuration:
+        time: Inscrit depuis
         unit:
           days: Jours
           weeks: Semaines
           months: Mois
           years: Années
           0: Unité
-        after: Utilisateur créé après cette période
+        after: Utilisateur inscrit après cette période ?
       shipping_country_configuration:
         country: Pays
       type: Type
@@ -43,7 +43,7 @@ sylius:
       usage_limit: "Limite d'utilisation"
     promotion:
       actions: Actions
-      coupon_based: Basé sur des coupons
+      coupon_based: Comprend des coupons
       description: Description
       ends_at: Se termine le
       name: Nom

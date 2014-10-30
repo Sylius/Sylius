@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Por favor, selecione a forma de envio.
+  form:
+    action:
+      add_product_configuration:
+        price: Preço unitário
+        quantity: Quantidade
+        variant: Variante
+    block:
+      body: Conteúdo
+      id: ID
+      title: Título
+    cart:
+      coupon: Cupom
+    checkout:
+      addressing:
+        different_billing_address: Use o endereço diferente para cobrança?
+      payment_method: Forma de Pagamento
+      shipping_method: Método de envio
+    group:
+      name: Nome
+      roles: Papéis
+    image:
+      file: Imagem
+    locale:
+      code: Código
+      enabled: Ativado
+    order_filter:
+      created_at_from: De
+      created_at_to: Para
+      number: Número
+      total_from: De
+      total_to: Para
+    page:
+      body: Conteúdo
+      id: ID
+      title: Título
+    product:
+      restricted_zone: Zona restrita
+      shipping_category: Categoria de expedição
+      short_description: Breve descrição
+      tax_category: Categoria de imposto
+      variant_selection_method: Método de seleção da variação
+    product_filter:
+      name: Nome
+      sku: SKU
+    settings:
+      general:
+        currency: Moeda padrão
+        locale: Língua
+        meta_description: Meta descrição
+        meta_keywords: Meta palavra-chaves
+        title: Título da página
+      taxation:
+        default_tax_zone: Zona de imposto do padrão
+    shipment_filter:
+      created_at_from: De
+      created_at_to: Para
+      number: Número do pedido
+      shipping_address: Nome do meio de expedição
+    shipping_method:
+      zone: Zona
+    taxon:
+      file: Selecione a imagem
+    taxonomy:
+      file: Selecione a imagem
+    user:
+      billing_address: Endereço de cobrança
+      different_billing_address: Use o endereço diferente para cobrança?
+      enabled: Ativado
+      first_name: Nome
+      groups: Grupos
+      last_name: Sobrenome
+      password: Senha
+      shipping_address: Endereço de entrega
+    user_filter:
+      query: Pesquisar
+    variant:
+      available_on_demand: Disponível por demanda
+      depth: Profundidade
+      height: Altura
+      images: Imagens
+      on_hand: Estoque atual
+      price: Preço
+      sku: SKU
+      weight: Peso
+      width: Largura

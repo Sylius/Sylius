@@ -12,8 +12,10 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * Order item model.
@@ -32,15 +34,23 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * Inventory units.
      *
-     * @var ArrayCollection|InventoryUnitInterface[]
+     * @var Collection|InventoryUnitInterface[]
      */
     protected $inventoryUnits;
+
+    /**
+     * Promotions applied
+     *
+     * @var Collection|PromotionInterface[]
+     */
+    protected $promotions;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->inventoryUnits = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     /**
@@ -76,7 +86,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         return parent::equals($item) || ($item instanceof self
             && $item->getVariant() === $this->variant
-            && $item->getUnitPrice() === $this->getUnitPrice()
         );
     }
 
@@ -118,5 +127,53 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function hasInventoryUnit(InventoryUnitInterface $unit)
     {
         return $this->inventoryUnits->contains($unit);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionSubjectTotal()
+    {
+        return $this->getTotal();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotion(PromotionInterface $promotion)
+    {
+        return $this->promotions->contains($promotion);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPromotion(PromotionInterface $promotion)
+    {
+        if (!$this->hasPromotion($promotion)) {
+            $this->promotions->add($promotion);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePromotion(PromotionInterface $promotion)
+    {
+        if ($this->hasPromotion($promotion)) {
+            $this->promotions->removeElement($promotion);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
     }
 }

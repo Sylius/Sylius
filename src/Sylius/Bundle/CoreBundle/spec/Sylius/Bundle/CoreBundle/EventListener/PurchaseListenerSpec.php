@@ -48,8 +48,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
         $cartProvider->abandonCart()->shouldBeCalled();
@@ -64,8 +63,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
         $translator
@@ -82,8 +80,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
 
         $cartProvider->abandonCart()->shouldBeCalled();
@@ -98,8 +95,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
 
         $translator
@@ -116,8 +112,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
 
         $cartProvider->abandonCart()->shouldBeCalled();
@@ -132,8 +127,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
 
         $translator
@@ -150,8 +144,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
 
         $cartProvider->abandonCart()->shouldNotBeCalled();
@@ -166,8 +159,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
 
         $translator
@@ -184,8 +176,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
         $cartProvider->abandonCart()->shouldNotBeCalled();
@@ -199,8 +190,8 @@ class PurchaseListenerSpec extends ObjectBehavior
         TranslatorInterface $translator,
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
-        PaymentInterface $payment)
-    {
+        PaymentInterface $payment
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
 
         $translator
@@ -217,8 +208,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
 
         $cartProvider->abandonCart()->shouldNotBeCalled();
@@ -233,8 +223,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
-    )
-    {
+    ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
 
         $translator

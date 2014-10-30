@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
  * Zone interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface ZoneInterface
 {
@@ -52,6 +53,18 @@ interface ZoneInterface
      * @return ZoneInterface
      */
     public function setType($type);
+
+    /**
+     * @return string
+     */
+    public function getScope();
+
+    /**
+     * @param string $scope
+     *
+     * @return ZoneInterface
+     */
+    public function setScope($scope);
 
     /**
      * @return Collection|ZoneMemberInterface[]

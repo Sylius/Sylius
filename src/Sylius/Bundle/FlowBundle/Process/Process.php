@@ -31,17 +31,20 @@ class Process implements ProcessInterface
     /**
      * Steps.
      *
-     * @var array
+     * @var StepInterface[]
      */
     protected $steps = array();
 
     /**
      * Ordered steps.
      *
-     * @var array
+     * @var StepInterface[]
      */
     protected $orderedSteps = array();
 
+    /**
+     * @var ProcessValidatorInterface
+     */
     protected $validator;
 
     /**
@@ -72,7 +75,19 @@ class Process implements ProcessInterface
      */
     protected $forwardRouteParams = array();
 
+    /**
+     * Redirect route.
+     *
+     * @var string
+     */
     protected $redirect;
+
+    /**
+     * Redirect route params.
+     *
+     * @var array
+     */
+    protected $redirectParams = array();
 
     /**
      * {@inheritdoc}
@@ -282,6 +297,22 @@ class Process implements ProcessInterface
     public function setRedirect($redirect)
     {
         $this->redirect = $redirect;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRedirectParams()
+    {
+        return $this->redirectParams;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRedirectParams(array $params)
+    {
+        $this->redirectParams = $params;
     }
 
     /**

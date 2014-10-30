@@ -2,6 +2,7 @@
 <fieldset>
     {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.type) }}
+    {{ form_row(form.scope) }}
     <div class="control-group">
         {% for type in ['country', 'province', 'zone'] %}
             <div id="sylius-addressing-zone-members-{{ type }}" data-prototype="{{ form_widget(form.members.vars.prototypes['sylius_zone_member_' ~ type], {'attr': {'class': 'select2 input-lg'}})|e }}">

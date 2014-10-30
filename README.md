@@ -1,5 +1,10 @@
-Sylius [![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch=master)](http://travis-ci.org/Sylius/Sylius) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Sylius/Sylius/badges/quality-score.png?s=f6d89b8aad6e15cab61134e7c0544ee1313f7f31)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
-======
+![Sylius](https://dl.dropboxusercontent.com/u/46579820/sylius-logo.jpg)
+
+[![Gitter chat](https://badges.gitter.im/Sylius/Sylius.png)](https://gitter.im/Sylius/Sylius)
+[![License](https://poser.pugx.org/sylius/sylius/license.svg)](https://packagist.org/packages/sylius/sylius)
+[![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch=master)](http://travis-ci.org/Sylius/Sylius)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Sylius/Sylius/badges/quality-score.png?s=f6d89b8aad6e15cab61134e7c0544ee1313f7f31)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
+[![HHVM Status](http://hhvm.h4cc.de/badge/sylius/sylius.svg)](http://hhvm.h4cc.de/package/sylius/sylius)
 
 Sylius is an open source e-commerce solution for **PHP**, based on the [**Symfony2**](http://symfony.com) framework.
 
@@ -24,14 +29,7 @@ $ cd sylius
 $ php app/console sylius:install
 ```
 
-To be able to use included fixtures, that make testing and development phases much easier:
-
-```bash
-$ php composer.phar install
-$ php app/console doctrine:database:create
-$ php app/console doctrine:schema:create 
-$ php app/console doctrine:phpcr:repository:init
-```
+The install script will give you the option to run fixtures that make testing and development phases much easier.
 
 [Behat](http://behat.org) scenarios
 -----------------------------------

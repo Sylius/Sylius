@@ -16,7 +16,7 @@ interface ProductVariantImageInterface extends ImageInterface
     /**
      * Get product variant.
      *
-     * @return VariantInterface
+     * @return ProductVariantInterface
      */
     public function getVariant();
 

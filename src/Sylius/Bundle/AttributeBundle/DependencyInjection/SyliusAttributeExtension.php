@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * Sylius attributes system extension.
+ * Attribute extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -28,7 +28,11 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
+        $this->configure(
+            $config, new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+        );
     }
 
     /**
@@ -91,7 +95,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $attributeFormType = new Definition($attributeClasses['form']);
         $attributeFormType
-            ->setArguments(array($subject, $attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%'))
+            ->setArguments(array($attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%', $subject))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeAlias))
         ;
 
@@ -111,7 +115,11 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $attributeValueFormType = new Definition($attributeValueClasses['form']);
         $attributeValueFormType
-            ->setArguments(array($subject, $attributeValueClasses['model'], '%sylius.validation_group.'.$attributeValueAlias.'%'))
+            ->setArguments(array(
+                $attributeValueClasses['model'],
+                '%sylius.validation_group.'.$attributeValueAlias.'%',
+                $subject
+            ))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeValueAlias))
         ;
 

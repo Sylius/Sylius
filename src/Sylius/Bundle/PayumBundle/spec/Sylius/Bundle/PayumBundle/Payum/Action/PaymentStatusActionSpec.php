@@ -11,11 +11,9 @@
 
 namespace spec\Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Doctrine\Common\Collections\Collection;
 use Payum\Core\PaymentInterface as PayumPaymentInterface;
 use Payum\Core\Request\StatusRequestInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 class PaymentStatusActionSpec extends ObjectBehavior
@@ -33,8 +31,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
     function it_should_support_status_request_with_order_model(
         PaymentInterface $payment,
         StatusRequestInterface $statusRequest
-    )
-    {
+    ) {
         $statusRequest->getModel()->willReturn($payment);
 
         $this->supports($statusRequest)->shouldReturn(true);
@@ -42,8 +39,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
 
     function it_should_not_support_status_request_with_no_order_model(
         StatusRequestInterface $statusRequest
-    )
-    {
+    )  {
         $statusRequest->getModel()->willReturn('foo');
 
         $this->supports($statusRequest)->shouldReturn(false);
@@ -67,8 +63,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
     function it_should_mark_new_if_order_have_empty_payment_details(
         PaymentInterface $payment,
         StatusRequestInterface $statusRequest
-    )
-    {
+    ) {
         $payment->getDetails()->willReturn(array());
 
         $statusRequest->getModel()->willReturn($payment);
@@ -81,8 +76,7 @@ class PaymentStatusActionSpec extends ObjectBehavior
         PaymentInterface $payment,
         StatusRequestInterface $statusRequest,
         PayumPaymentInterface $payment
-    )
-    {
+    ) {
         $details = array('foo' => 'foo', 'bar' => 'baz');
 
         $statusRequest->getModel()->willReturn($payment);

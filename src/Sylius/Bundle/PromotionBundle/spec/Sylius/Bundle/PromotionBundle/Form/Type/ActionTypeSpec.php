@@ -41,14 +41,19 @@ class ActionTypeSpec extends ObjectBehavior
     function it_should_build_form_with_action_choice_field(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
-        $builder->addEventSubscriber(Argument::any())->willReturn($builder);
-        $builder->getFormFactory()->willReturn($factory);
+    ) {
+        $builder
+            ->getFormFactory()
+            ->willReturn($factory)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::any())
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('type', 'sylius_promotion_action_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
@@ -58,14 +63,19 @@ class ActionTypeSpec extends ObjectBehavior
     function it_should_add_build_promotion_action_event_subscriber(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
-        $builder->add(Argument::any(), Argument::any(), Argument::any())->willReturn($builder);
-        $builder->getFormFactory()->willReturn($factory);
+    ) {
+        $builder
+            ->getFormFactory()
+            ->willReturn($factory)
+        ;
+
+        $builder
+            ->add(Argument::any(), Argument::any(), Argument::any())
+            ->willReturn($builder)
+        ;
 
         $builder
             ->addEventSubscriber(Argument::type('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormListener'))
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

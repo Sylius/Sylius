@@ -16,6 +16,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
+use Sylius\Component\Core\Model\UserOAuthInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -49,13 +50,13 @@ class UserProvider extends FOSUBUserProvider
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = $this->oauthRepository->findOneBy(array(
+        $oauth = $this->oauthRepository->findOneBy(array(
             'provider'   => $response->getResourceOwner()->getName(),
             'identifier' => $response->getUsername()
         ));
 
-        if (null !== $user) {
-            return $user;
+        if ($oauth instanceof UserOAuthInterface) {
+            return $oauth->getUser();
         }
 
         if (null !== $response->getEmail()) {
@@ -93,9 +94,8 @@ class UserProvider extends FOSUBUserProvider
             $user->setEmail($email);
         }
 
-        // if username was not yet set (i.e. by internal call in `setEmail()`), use nickname
         if (!$user->getUsername()) {
-            $user->setUsername($response->getNickname());
+            $user->setUsername($response->getEmail() ?: $response->getNickname());
         }
 
         // set random password to prevent issue with not nullable field & potential security hole

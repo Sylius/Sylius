@@ -14,11 +14,13 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
-use Sylius\Component\Pricing\Model\PriceableInterface;;
+use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+
+;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,10 +29,8 @@ class BuildPriceableFormListenerSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $calculatorRegistry,
-        CalculatorInterface $calculator,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $this->beConstructedWith($calculatorRegistry, $factory);
     }
 
@@ -46,14 +46,13 @@ class BuildPriceableFormListenerSpec extends ObjectBehavior
 
     function it_should_add_configuration_fields_in_pre_set_data(
         $calculatorRegistry,
-        $calculator,
+        CalculatorInterface $calculator,
         $factory,
         FormEvent $event,
         PriceableInterface $priceable,
         Form $form,
         Form $field
-    )
-    {
+    ) {
         $event->getData()->shouldBeCalled()->willReturn($priceable);
         $event->getForm()->shouldBeCalled()->willReturn($form);
 

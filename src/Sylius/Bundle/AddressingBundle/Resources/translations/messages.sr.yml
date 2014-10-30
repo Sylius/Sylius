@@ -24,6 +24,8 @@ sylius:
       members: Članovi
       name: Ime
       type: Tip
+      types:
+        province: Provincija
     zone_member_country:
       country: Zemlja
     zone_member_province:

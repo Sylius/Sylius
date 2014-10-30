@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  label:
+    product:
+      name: Navn
+      description: Beskrivelse
+      properties: Egenskaber
+      available_on: Tilgængelig
+      meta_keywords: Meta søgeord
+      meta_description: Meta beskrivelse
+    property:
+      name: System navn
+      presentation: Præsentation
+    prototype:
+      name: Navn
+      properties: Egenskaber

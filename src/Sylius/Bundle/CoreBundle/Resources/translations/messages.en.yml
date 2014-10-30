@@ -19,6 +19,8 @@ sylius:
                 different_billing_address: Use different address for billing?
             payment_method: Payment Method
             shipping_method: Shipping Method
+        coupon:
+            per_user_usage_limit: Per-User Usage Limity
         group:
             name: Name
             roles: Roles
@@ -28,11 +30,12 @@ sylius:
             code: Code
             enabled: Enabled
         order_filter:
-            created_at_from: From
-            created_at_to: To
+            created_at_from: Created after
+            created_at_to: Created before
             number: Number
             total_from: From
             total_to: To
+            payment_state: Payment state
         page:
             body: Body
             id: ID

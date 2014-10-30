@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'ชื่อกลุ่มต้องยาวไม่เกิน {{ limit }} ตัวอักษร'
+      min: 'ชื่อกลุ่มต้องยาวอย่างน้อย {{ limit }} อักษร'
+      not_blank: กรุณาระบุชื่อกลุ่ม
+  locale:
+    code:
+      not_blank: ระบุรหัสภาษา
+      unique: มีภาษานี้อยู่แล้ว
+  user:
+    first_name:
+      max: 'ชื่อต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร'
+      min: 'ชื่อต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร'
+      not_blank: กรุณาระบุชื่อ
+    last_name:
+      max: 'นามสกุลต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร.'
+      min: 'นามสกุลต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร.'
+      not_blank: กรุณาระบุนามสกุลของคุณ
+  variant:
+    onHand:
+      min: 'On hand ต้องมากกว่า {{ limit }}'
+      not_blank: กรุณาระบุ on hand
+    price:
+      min: ราคาต้องไม่เป็นค่าลบ
+      not_blank: กรุณาระบุราคา
+sylius_shipping:
+  method:
+    zone:
+      not_blank: กรุณาระบุวิธีจัดส่งสำหรับโซน
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: กรุณาระบุอัตราภาษีสำหรับโซน

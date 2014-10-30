@@ -62,20 +62,24 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
 
     function it_should_not_reverse_transform_not_supported_data_and_throw_exception()
     {
-        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')->duringReverseTransform(new \stdClass());
+        $this->shouldThrow('Symfony\Component\Form\Exception\UnexpectedTypeException')
+            ->duringReverseTransform(new \stdClass());
     }
 
-    function it_should_reverse_transform_variable_without_variants_into_null(VariableInterface $variable, OptionValueInterface $optionValue)
-    {
+    function it_should_reverse_transform_variable_without_variants_into_null(
+        VariableInterface $variable,
+        OptionValueInterface $optionValue
+    ) {
         $variable->getVariants()->willReturn(array());
 
         $this->reverseTransform(array($optionValue))->shouldReturn(null);
     }
 
     function it_should_reverse_transform_variable_with_variants_if_options_match(
-        VariableInterface $variable, VariantInterface $variant, OptionValueInterface $optionValue
-    )
-    {
+        VariableInterface $variable,
+        VariantInterface $variant,
+        OptionValueInterface $optionValue
+    ) {
         $variable->getVariants()->willReturn(array($variant));
 
         $variant->hasOption($optionValue)->willReturn(true);
@@ -84,9 +88,10 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
     }
 
     function it_should_not_reverse_transform_variable_with_variants_if_options_not_match(
-        VariableInterface $variable, VariantInterface $variant, OptionValueInterface $optionValue
-    )
-    {
+        VariableInterface $variable,
+        VariantInterface $variant,
+        OptionValueInterface $optionValue
+    ) {
         $variable->getVariants()->willReturn(array($variant));
 
         $variant->hasOption($optionValue)->willReturn(false);

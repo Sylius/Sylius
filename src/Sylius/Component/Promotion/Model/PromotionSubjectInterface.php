@@ -22,28 +22,14 @@ use Doctrine\Common\Collections\Collection;
 interface PromotionSubjectInterface
 {
     /**
-     * Get associated coupon
-     *
-     * @return null|CouponInterface
-     */
-    public function getPromotionCoupon();
-
-    /**
-     * Get number of promotion subjects
+     * Get total of promotion subject.
      *
      * @return integer
      */
-    public function getPromotionSubjectItemCount();
+    public function getPromotionSubjectTotal();
 
     /**
-     * Get total of promotion subjects
-     *
-     * @return integer
-     */
-    public function getPromotionSubjectItemTotal();
-
-    /**
-     * Has Promotion
+     * Has Promotion.
      *
      * @param PromotionInterface $promotion
      *
@@ -52,7 +38,7 @@ interface PromotionSubjectInterface
     public function hasPromotion(PromotionInterface $promotion);
 
     /**
-     * Add Promotion
+     * Add Promotion.
      *
      * @param PromotionInterface $promotion
      *
@@ -61,7 +47,7 @@ interface PromotionSubjectInterface
     public function addPromotion(PromotionInterface $promotion);
 
     /**
-     * Remove Promotion
+     * Remove Promotion.
      *
      * @param PromotionInterface $promotion
      *
@@ -70,7 +56,7 @@ interface PromotionSubjectInterface
     public function removePromotion(PromotionInterface $promotion);
 
     /**
-     * Get Promotions
+     * Get Promotions.
      *
      * @return Collection|PromotionInterface[]
      */

@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -29,8 +29,7 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
         ServiceRegistryInterface $checkerRegistry,
         RuleCheckerInterface $checker,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $checker->getConfigurationFormType()->willReturn('sylius_promotion_rule_item_total_configuration');
         $checkerRegistry->get(Argument::any())->willReturn($checker);
 
@@ -48,14 +47,12 @@ class BuildRuleFormListenerSpec extends ObjectBehavior
     }
 
     function it_should_add_configuration_fields_in_pre_set_data(
-        $checkerRegistry,
         $factory,
         FormEvent $event,
         RuleInterface $rule,
         Form $form,
         Form $field
-    )
-    {
+    ) {
         $event->getData()->shouldBeCalled()->willReturn($rule);
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $rule->getType()->shouldBeCalled()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);

@@ -39,13 +39,11 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('count', 'integer', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
           ->add('equal', 'checkbox', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

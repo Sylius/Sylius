@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Nama grup tidak boleh lebih dari {{ limit }} characters.'
+      min: 'Nama grup setidaknya harus sepanjang {{ limit }} karakter.'
+      not_blank: Masukkan nama grup.
+  locale:
+    code:
+      not_blank: Masukkan kode lokal.
+      unique: Lokal ini sudah ada.
+  user:
+    first_name:
+      max: 'Nama depan tidak boleh lebih dari {{ limit }} karakter.'
+      min: 'Nama depan setidaknya harus sepanjang {{ limit }} karakter.'
+      not_blank: Masukkan nama depan Anda.
+    last_name:
+      max: 'Nama belakang tidak boleh lebih dari {{ limit }} karakter.'
+      min: 'Nama belakang setidaknya harus sepanjang {{ limit }} karakter.'
+      not_blank: Masukkan nama belakang.
+  variant:
+    onHand:
+      min: 'Yang dimiliki harus lebih besar dari {{ limit }}.'
+      not_blank: Masukkan yang dimiliki.
+    price:
+      min: Harga tidak boleh negatif.
+      not_blank: Masukkan harga.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Masukkan zona metode pengiriman.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Masukkan zona tarif pajak.

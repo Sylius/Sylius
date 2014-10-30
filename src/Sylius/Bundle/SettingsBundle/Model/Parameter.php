@@ -42,12 +42,12 @@ class Parameter implements ParameterInterface
     /**
      * Parameter value.
      *
-     * @var string
+     * @var mixed
      */
     protected $value;
 
     /**
-     * Gets Parameter id
+     * Get parameter id.
      *
      * @return int
      */

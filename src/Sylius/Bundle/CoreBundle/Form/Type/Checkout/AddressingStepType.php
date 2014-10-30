@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -22,15 +24,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AddressingStepType extends AbstractType
+class AddressingStepType extends AbstractResourceType
 {
-    protected $dataClass;
-
-    public function __construct($dataClass)
-    {
-        $this->dataClass = $dataClass;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -44,6 +39,21 @@ class AddressingStepType extends AbstractType
                     $data['billingAddress'] = $data['shippingAddress'];
 
                     $event->setData($data);
+                }
+            })
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+                /* @var $user UserInterface */
+                $user = $options['user'];
+                if (null === $user || !$user instanceof UserInterface) {
+                    return;
+                }
+                /* @var $order OrderInterface */
+                $order = $event->getData();
+                if ($order->getShippingAddress() === null && $user->getShippingAddress() !== null) {
+                    $order->setShippingAddress(clone $user->getShippingAddress());
+                }
+                if ($order->getBillingAddress() === null && $user->getBillingAddress() !== null) {
+                    $order->setBillingAddress(clone $user->getBillingAddress());
                 }
             })
             ->add('shippingAddress', 'sylius_address', array('shippable' => true))
@@ -60,9 +70,11 @@ class AddressingStepType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass,
+                'user' => null,
                 'cascade_validation' => true
             ))
         ;

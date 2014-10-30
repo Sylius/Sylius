@@ -2,11 +2,14 @@ imports:
     - { resource: @SyliusCoreBundle/Resources/config/app/sylius.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/payum.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/cmf.yml }
-    - { resource: @SyliusPaymentBundle/Resources/config/finite.yml }
-    - { resource: @SyliusShippingBundle/Resources/config/finite.yml }
-    - { resource: @SyliusOrderBundle/Resources/config/finite.yml }
-    - { resource: @SyliusInventoryBundle/Resources/config/finite.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/finite.yml }
+    - { resource: @SyliusPaymentBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusShippingBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusOrderBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
+    - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
+
+twig:
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
 doctrine_cache:
     providers:
@@ -20,10 +23,13 @@ knp_gaufrette:
                 create:     true
     filesystems:
         sylius_image:
-            adapter: sylius_image
+            adapter: %sylius.uploader.filesystem%
 
 liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/media/image
     filter_sets:
         sylius_small:
             filters:
@@ -74,6 +80,18 @@ fos_user:
         form:
             type: sylius_user_registration
 
+fos_rest:
+    disable_csrf_role: ROLE_API
+    view:
+        formats:
+            json: true
+            xml:  true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
+
 hwi_oauth:
     firewall_name: main
     resource_owners:
@@ -85,8 +103,34 @@ hwi_oauth:
             type:          facebook
             client_id:     %sylius.oauth.facebook.clientid%
             client_secret: %sylius.oauth.facebook.clientsecret%
+            scope:         "email"
         google:
             type:          google
             client_id:     %sylius.oauth.google.clientid%
             client_secret: %sylius.oauth.google.clientsecret%
             scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "%kernel.root_dir%/Resources/FOSUserBundle/serializer"
+            sylius-addressing:
+                namespace_prefix: "Sylius\\Component\\Addressing"
+                path: "@SyliusAddressingBundle/Resources/config/serializer"
+            sylius-core:
+                namespace_prefix: "Sylius\\Component\\Core"
+                path: "@SyliusCoreBundle/Resources/config/serializer"
+            sylius-inventory:
+                namespace_prefix: "Sylius\\Component\\Inventory"
+                path: "@SyliusInventoryBundle/Resources/config/serializer"
+            sylius-product:
+                namespace_prefix: "Sylius\\Component\\Product"
+                path: "@SyliusProductBundle/Resources/config/serializer"
+            sylius-shipping:
+                namespace_prefix: "Sylius\\Component\\Shipping"
+                path: "@SyliusShippingBundle/Resources/config/serializer"
+            sylius-taxation:
+                namespace_prefix: "Sylius\\Component\\Taxation"
+                path: "@SyliusTaxationBundle/Resources/config/serializer"

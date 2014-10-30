@@ -47,8 +47,10 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_not_add_violation_if_variable_dont_have_options(VariantInterface $variant, VariableInterface $variable)
-    {
+    function it_should_not_add_violation_if_variable_dont_have_options(
+        VariantInterface $variant,
+        VariableInterface $variable
+    ) {
         $constraint = new VariantCombination(array(
             'message' => 'Variant with given options already exists'
         ));
@@ -62,8 +64,10 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $this->validate($variant, $constraint);
     }
 
-    function it_should_not_add_violation_if_variable_dont_have_variants(VariantInterface $variant, VariableInterface $variable)
-    {
+    function it_should_not_add_violation_if_variable_dont_have_variants(
+        VariantInterface $variant,
+        VariableInterface $variable
+    ) {
         $constraint = new VariantCombination(array(
             'message' => 'Variant with given options already exists'
         ));
@@ -83,8 +87,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         VariableInterface $variable,
         OptionValueInterface $option,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantCombination(array(
             'message' => 'Variant with given options already exists'
         ));

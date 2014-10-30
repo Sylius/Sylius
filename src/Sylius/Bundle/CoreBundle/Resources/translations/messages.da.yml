@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Vælg venligst forsendelsesmetode.
+  form:
+    action:
+      add_product_configuration:
+        price: Enhedspris
+        quantity: Mængde
+        variant: Variant
+    block:
+      body: Krop
+      id: ID
+      title: Titel
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Brug anden faktureringsadresse?
+      payment_method: Betalingsmåde
+      shipping_method: Fragtmetoder
+    group:
+      name: Navn
+      roles: Roller
+    image:
+      file: Billede
+    locale:
+      code: Kode
+      enabled: Aktiveret
+    order_filter:
+      created_at_from: Fra
+      created_at_to: Til
+      number: Antallet
+      total_from: Fra
+      total_to: Til
+    page:
+      body: Krop
+      id: ID
+      title: Titel
+    product:
+      restricted_zone: Begrænset zone
+      shipping_category: Fragt kategori
+      short_description: Kort beskrivelse
+      tax_category: Momskategori
+      variant_selection_method: Variant udvælgelsesmetode
+    product_filter:
+      name: Navn
+      sku: SKU
+    settings:
+      general:
+        currency: Standard valuta
+        locale: Sprog
+        meta_description: Meta beskrivelse
+        meta_keywords: Meta søgeord
+        title: Sidetitel
+      taxation:
+        default_tax_zone: Standard moms zone
+    shipment_filter:
+      created_at_from: Fra
+      created_at_to: Til
+      number: Ordrenummer
+      shipping_address: Levering til navn
+    shipping_method:
+      zone: Zone
+    taxon:
+      file: Vælg billede
+    taxonomy:
+      file: Vælg billede
+    user:
+      billing_address: Faktureringsadresse
+      different_billing_address: Brug anden faktureringsadresse?
+      enabled: Aktiveret
+      first_name: Fornavn
+      groups: Grupper
+      last_name: Efternavn
+      password: Adgangskode
+      shipping_address: Leveringsadresse
+    user_filter:
+      query: Søg
+    variant:
+      available_on_demand: Tilgængelig for forudbestilling
+      depth: Dybde
+      height: Højde
+      images: Billeder
+      on_hand: Nuværende lager antal
+      price: Pris
+      sku: SKU
+      weight: Vægt
+      width: Bredde

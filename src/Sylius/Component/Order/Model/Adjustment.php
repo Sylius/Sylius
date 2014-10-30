@@ -56,7 +56,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * Adjustment amount.
      *
-     * @var integer
+     * @var int
      */
     protected $amount = 0;
 
@@ -64,9 +64,16 @@ class Adjustment implements AdjustmentInterface
      * Is adjustment neutral?
      * Should it modify the order total?
      *
-     * @var Boolean
+     * @var bool
      */
     protected $neutral = false;
+
+    /**
+     * Is adjustment locked?
+     *
+     * @var bool
+     */
+    protected $locked = false;
 
     /**
      * Creation time.
@@ -199,7 +206,35 @@ class Adjustment implements AdjustmentInterface
      */
     public function setNeutral($neutral)
     {
-        $this->neutral = (Boolean) $neutral;
+        $this->neutral = (bool) $neutral;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function lock()
+    {
+        $this->locked = true;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unlock()
+    {
+        $this->locked = false;
 
         return $this;
     }

@@ -1,0 +1,33 @@
+# Security
+security:
+    login:
+        email: "Email"
+        header: <h1>Connexion <small>Boutique LVP</small></h1>
+        info: Connectez vous en utilisant l'email "<strong>sylius@example.com</strong>" et "<strong>sylius</strong>" comme mot de passe.
+        forgot_password: Mot de passe oublié ?
+        no_account: Pas encore de compte ?
+        username: "Nom d'utilisateur"
+        password: "Mot de passe"
+
+# Registration
+registration:
+    register_header: <h1>Enregistrement <small>Créer votre compte</small></h1>
+    confirmed_header: <h1>Bienvenue <small>Votre compte a été créé avec succès</small></h1>
+
+# Form field labels
+form:
+    group_name: "Nom du groupe"
+    username: "Nom d'utilisateur"
+    email: "Adresse e-mail"
+    current_password: "Mot de passe actuel"
+    password: "Mot de passe"
+    password_confirmation: "Vérification"
+    new_password: "Nouveau mot de passe"
+    new_password_confirmation: "Vérification"
+
+# Password resetting
+resetting:
+    request:
+        header: <h1>Demande de réinitialisation de mot de passe</h1>
+    reset:
+        header: <h1>Réinitialiser votre mot de passe</h1>

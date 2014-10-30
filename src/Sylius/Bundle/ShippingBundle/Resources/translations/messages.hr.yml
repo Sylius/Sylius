@@ -1,3 +1,42 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Ograničenja na količinu
+        equal: Ograničenja na količinu jednaku
+      type: Tip ograničenja
+    shipment:
+      state: Stanje
+      states:
+        checkout: Blagajna
+        dispatched: Poslano
+        pending: Na čekanju
+        ready: Spremno
+        shipped: Poslano
+        returned: Vraćeno
+      tracking_code: Kod za praćenje
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Iznos
+      flexible_rate_configuration:
+        additional_item_cost: Trošak za dodani artikal
+        additional_item_limit: Ograničenje dodatnih artikala
+        first_item_cost: Trošak za prvi artikal
+      per_item_rate_configuration:
+        amount: Iznos
+      weight_rate_configuration:
+        amount: Iznos
+        division: Odjel
+    shipping_category:
+      description: Opis
+      name: Naziv
+    shipping_method:
+      calculator: Kalkulator
+      category: Kategorija
+      category_requirement: Zahtjevi kategorije
+      configuration: Postavke
+      enabled: Omogući?
+      name: Naziv

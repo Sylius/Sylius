@@ -11,12 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use FOS\UserBundle\Model\UserInterface;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-class OrderRepository extends CartRepository
+class OrderRepository extends CartRepository implements OrderRepositoryInterface
 {
     /**
      * Create user orders paginator.
@@ -154,6 +156,12 @@ class OrderRepository extends CartRepository
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
             ;
         }
+        if (!empty($criteria['paymentState'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.paymentState', ':paymentState'))
+                ->setParameter('paymentState', $criteria['paymentState'])
+            ;
+        }
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
@@ -165,6 +173,54 @@ class OrderRepository extends CartRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countByUserAndCoupon(UserInterface $user, CouponInterface $coupon)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->innerJoin('o.promotionCoupons', 'coupons')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.completedAt IS NOT NULL')
+            ->andWhere($queryBuilder->expr()->in('coupons', ':coupons'))
+            ->setParameter('user', $user)
+            ->setParameter('coupons', (array) $coupon)
+        ;
+
+        $count = (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countByUserAndPaymentState(UserInterface $user, $state)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.paymentState = :state')
+            ->setParameter('user', $user)
+            ->setParameter('state', $state)
+        ;
+
+        return (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)

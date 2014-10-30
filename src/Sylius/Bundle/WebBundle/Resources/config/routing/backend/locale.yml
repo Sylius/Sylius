@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_locale_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.locale:indexAction
@@ -13,7 +13,7 @@ sylius_backend_locale_index:
                 code: desc
 
 sylius_backend_locale_create:
-    pattern: /new
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.locale:createAction
@@ -22,7 +22,7 @@ sylius_backend_locale_create:
             redirect: sylius_backend_locale_index
 
 sylius_backend_locale_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.locale:updateAction
@@ -31,7 +31,7 @@ sylius_backend_locale_update:
             redirect: sylius_backend_locale_index
 
 sylius_backend_locale_delete:
-    pattern: /{id}/delete
+    path: /{id}/delete
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.locale:deleteAction

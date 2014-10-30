@@ -16,7 +16,7 @@
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_promotion_index'), 'sylius.promotion.manage'|trans) }}
         {{ buttons.edit(path('sylius_backend_promotion_update', {'id': promotion.id})) }}
-        {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id}), null, false, false) }}
+        {{ buttons.delete(path('sylius_backend_promotion_delete', {'id': promotion.id}), null, false, true) }}
     {% if promotion.couponBased %}
         {{ buttons.manage(path('sylius_backend_promotion_coupon_index', {'promotionId': promotion.id}), 'sylius.promotion_coupon.index'|trans) }}
         {{ buttons.create(path('sylius_backend_promotion_coupon_create', {'promotionId': promotion.id}), 'sylius.promotion_coupon.create'|trans) }}

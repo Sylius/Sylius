@@ -32,8 +32,10 @@ class RestrictedZoneHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Templating\Helper\Helper');
     }
 
-    function it_uses_restricted_zone_checker($restrictedZoneChecker, ProductInterface $product)
-    {
+    function it_uses_restricted_zone_checker(
+        $restrictedZoneChecker,
+        ProductInterface $product
+    ) {
         $restrictedZoneChecker->isRestricted($product)->shouldBeCalled($product)->willReturn(false);
         $this->isRestricted($product)->shouldReturn(false);
 

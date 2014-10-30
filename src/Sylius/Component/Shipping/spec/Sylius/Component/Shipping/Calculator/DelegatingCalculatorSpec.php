@@ -52,8 +52,7 @@ class DelegatingCalculatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $method,
         CalculatorInterface $calculator
-    )
-    {
+    ) {
         $shipment->getMethod()->willReturn($method);
 
         $method->getCalculator()->willReturn('default');

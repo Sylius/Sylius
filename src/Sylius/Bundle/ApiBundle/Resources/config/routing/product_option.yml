@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_product_option_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_option:indexAction
+
+sylius_api_product_option_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_option:createAction
+
+sylius_api_product_option_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_option:updateAction
+
+sylius_api_product_option_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_option:deleteAction

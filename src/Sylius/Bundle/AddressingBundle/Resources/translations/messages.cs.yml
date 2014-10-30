@@ -5,8 +5,31 @@ sylius:
   form:
     address:
       city: Město
+      company: Firma
+      country: Země
+      first_name: Křestní jméno
+      last_name: Příjmení
       postcode: PSČ
       street: Ulice
       province: Provincie
+    country:
+      iso_name: ISO název
+      name: Jméno
+      provinces: Provincie
+      select: Vybrat
+    province:
+      name: Jméno
+      select: Vybrat
+    zone:
+      members: Členové
+      name: Jméno
+      type: Typ
+      types:
+        province: Provincie
+        zone: Oblast
+    zone_member_country:
+      country: Země
     zone_member_province:
       province: Provincie
+    zone_member_zone:
+      zone: Oblast

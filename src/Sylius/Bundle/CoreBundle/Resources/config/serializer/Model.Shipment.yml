@@ -1,0 +1,9 @@
+Sylius\Component\Core\Model\Shipment:
+    exclusion_policy: ALL
+    xml_root_name: shipment
+    relations:
+        - rel: order
+          href:
+                route: sylius_api_order_show
+                parameters:
+                    id: expr(object.getOrder().getId())

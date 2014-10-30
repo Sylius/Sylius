@@ -1,3 +1,30 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    credit_card:
+      cardholder_name: Navn på kortinnehaver
+      expiry_month: Gyldig til måned
+      expiry_year: Utløpsår
+      number: Kortnummer
+      security_code: Sikkerhetskode (CVV)
+      type: Korttype
+    payment:
+      amount: Beløp
+      method: Betalingsmetode
+      state:
+        0: Betalingsstatus
+        checkout: Gå til kassen
+        completed: Fullført
+        failed: Mislyktes
+        new: Ny
+        pending: Venter
+        processing: Behandler
+        unknown: Ukjent
+        void: Ugyldig
+    payment_method:
+      description: Beskrivelse
+      enabled: Aktivert?
+      gateway: Rute
+      name: Navn

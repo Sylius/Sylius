@@ -38,6 +38,7 @@ class SessionCartStorageSpec extends ObjectBehavior
 
     function it_returns_cart_identifier_via_session($session)
     {
+        $session->isStarted()->shouldBeCalled()->willReturn(true);
         $session->get(SessionCartStorage::KEY)->willReturn(7);
 
         $this->getCurrentCartIdentifier()->shouldReturn(7);
@@ -45,6 +46,7 @@ class SessionCartStorageSpec extends ObjectBehavior
 
     function it_sets_cart_identifier_via_session($session, CartInterface $cart)
     {
+        $session->isStarted()->shouldBeCalled()->willReturn(true);
         $cart->getIdentifier()->will(function () {
             return 3;
         });

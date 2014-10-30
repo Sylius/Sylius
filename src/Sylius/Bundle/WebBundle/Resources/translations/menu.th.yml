@@ -1,3 +1,95 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: จัดประเภท
+        configuration: ตั้งค่าคอนฟิก
+        countries: ประเทศ
+        customer: ลูกค้า
+        dashboard: แดชบอร์ด
+        exchange_rates: อัตราแลกเปลี่ยน
+        general_settings: ตั้งค่าทั่วไป
+        homepage: ร้านค้าของคุณ
+        locales: ภาษาที่ใช้
+        new_order: เพิ่มใบสั่งซื้อใหม่
+        new_promotion: เพิ่มโปรโมชั่นใหม่
+        options: จัดการตัวเลือกสินค้า
+        orders: ใบสั่งซื้อปัจจุบัน
+        payment_methods: วิธีการชำระเงิน
+        payments: การชำระเงิน
+        products: สินค้า
+        promotions: ส่งเสริมการขาย
+        properties: กำหนดค่าคุณสมบัติ
+        prototypes: ต้นแบบสินค้า
+        sales: ใบสั่งซื้อ
+        shipments: การจัดส่งสินค้า
+        shipping_categories: ประเภทการจัดส่ง
+        shipping_methods: วิธีการจัดส่ง
+        stockables: สินค้าคงคลัง
+        tax_categories: ประเภทภาษี
+        tax_rates: อัตราภาษี
+        taxation_settings: การตั้งค่าภาษี
+        taxonomies: การจัดประเภท
+        users: ผู้ใช้
+        zones: โซน
+      sidebar:
+        assortment: จัดประเภท
+        blocks: บล็อก
+        configuration: ตั้งค่าคอนฟิก
+        content: เนื้อหา
+        countries: ประเทศ
+        customer: ลูกค้า
+        dashboard: แดชบอร์ด
+        exchange_rates: อัตราแลกเปลี่ยน
+        general_settings: ตั้งค่าทั่วไป
+        groups: กลุ่ม
+        homepage: กลับไปหน้าเว็บ
+        locales: ภาษาที่ใช้
+        new_order: เพิ่มใบสั่งซื้อใหม่
+        new_promotion: เพิ่มโปรโมชั่นใหม่
+        options: จัดการตัวเลือก
+        orders: ใบสั่งซื้อปัจจุบัน
+        pages: หน้า
+        payment_methods: วิธีการชำระเงิน
+        payments: การชำระเงิน
+        products: สินค้า
+        promotions: ส่งเสริมการขาย
+        properties: กำหนดค่าคุณสมบัติ
+        prototypes: ต้นแบบสินค้า
+        sales: ใบสั่งซื้อ
+        shipments: การจัดส่งสินค้า
+        shipping_categories: ประเภทการจัดส่ง
+        shipping_methods: วิธีการจัดส่ง
+        stockables: สินค้าคงคลัง
+        tax_categories: ประเภทภาษี
+        tax_rates: อัตราภาษี
+        taxation_settings: การตั้งค่าภาษี
+        taxonomies: การจัดประเภท
+        users: ผู้ใช้
+        zones: โซน
+  frontend:
+    menu:
+      account:
+        addresses: สมุดรายชื่อ
+        homepage: หน้าหลัก
+        orders: ใบสั่งซื้อ / ใบแจ้งหนี้ของฉัน
+        password: รหัสผ่านของฉัน
+        profile: ข้อมูลส่วนบุคคลของฉัน
+        shop: กลับไปที่ร้าน
+      currency: 'แสดงราคาในสกุลเงิน %currency%'
+      main:
+        account: บัญชีของฉัน
+        administration: การจัดการระบบ
+        cart: 'ตระกร้าสินค้า (%items%) %total%'
+        login: เข้าสู่ระบบ
+        logout: ออกจากระบบ
+        register: ลงทะเบียน
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google +
+        linkedin: LinkedIn
+        twitter: Twitter

@@ -44,7 +44,8 @@ class AddressingContext extends DefaultContext
         if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
             $country = $this->getRepository('country')->createNew();
             $country->setName(trim($name));
-            $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+            $country->setIsoName(substr($name, 0, 3));
+            // $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
 
             if (null !== $provinces) {
                 $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
@@ -70,7 +71,18 @@ class AddressingContext extends DefaultContext
     public function thereAreFollowingZones(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $this->thereIsZone($data['name'], $data['type'], explode(',', $data['members']), false);
+            $scope = null;
+            if (!empty($data['scope'])) {
+                $scope = $data['scope'];
+            }
+
+            $this->thereIsZone(
+                $data['name'],
+                $data['type'],
+                explode(',', $data['members']),
+                $scope,
+                false
+            );
         }
 
         $this->getEntityManager()->flush();
@@ -80,7 +92,7 @@ class AddressingContext extends DefaultContext
      * @Given /^I created zone "([^"]*)"$/
      * @Given /^there is zone "([^"]*)"$/
      */
-    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $flush = true)
+    public function thereIsZone($name, $type = ZoneInterface::TYPE_COUNTRY, array $members = array(), $scope = null, $flush = true)
     {
         $repository = $this->getRepository('zone');
 
@@ -88,6 +100,7 @@ class AddressingContext extends DefaultContext
         $zone = $repository->createNew();
         $zone->setName($name);
         $zone->setType($type);
+        $zone->setScope($scope);
 
         foreach ($members as $memberName) {
             $member = $this->getService('sylius.repository.zone_member_'.$type)->createNew();

@@ -12,31 +12,47 @@
 namespace Sylius\Component\Core\Promotion\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Checks if users order is the nth one.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class NthOrderRuleChecker implements RuleCheckerInterface
 {
+    /**
+     * @var OrderRepositoryInterface
+     */
+    private $orderRepository;
+
+    /**
+     * @param OrderRepositoryInterface $orderRepository
+     */
+    public function __construct(OrderRepositoryInterface $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
         if (null === $user = $subject->getUser()) {
             return false;
         }
 
-        return $user->getOrders()->count() == $configuration['nth'];
+        return $this->orderRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED) === $configuration['nth'];
     }
 
     /**

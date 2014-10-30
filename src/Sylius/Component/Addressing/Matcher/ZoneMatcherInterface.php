@@ -20,6 +20,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
  * best matching zones for provided address model.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface ZoneMatcherInterface
 {
@@ -27,17 +28,19 @@ interface ZoneMatcherInterface
      * Returns the best matching zone for given address.
      *
      * @param AddressInterface $address
+     * @param string|null      $scope
      *
      * @return ZoneInterface|null
      */
-    public function match(AddressInterface $address);
+    public function match(AddressInterface $address, $scope = null);
 
     /**
      * Returns all matching zones for given address.
      *
      * @param AddressInterface $address
+     * @param string|null      $scope
      *
      * @return Collection|ZoneInterface[]
      */
-    public function matchAll(AddressInterface $address);
+    public function matchAll(AddressInterface $address, $scope = null);
 }

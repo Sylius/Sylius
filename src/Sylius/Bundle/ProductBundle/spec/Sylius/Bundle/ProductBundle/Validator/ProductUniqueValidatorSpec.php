@@ -44,8 +44,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductInterface $conflictualProduct,
         $context
-    )
-    {
+    ) {
         $constraint = new ProductUnique(array(
             'property' => 'name',
             'message'  => 'Product with given name already exists.'
@@ -63,8 +62,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $productRepository,
         ProductInterface $product,
         $context
-    )
-    {
+    ) {
         $constraint = new ProductUnique(array(
             'property' => 'name',
             'message'  => 'Product with given name already exists.'
@@ -82,8 +80,7 @@ class ProductUniqueValidatorSpec extends ObjectBehavior
         $productRepository,
         ProductInterface $product,
         $context
-    )
-    {
+    ) {
         $constraint = new ProductUnique(array(
             'property' => 'name',
             'message'  => 'Product with given name already exists'

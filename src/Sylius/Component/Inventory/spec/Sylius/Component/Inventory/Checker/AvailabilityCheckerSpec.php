@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -43,8 +44,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_any_stockable_as_available_if_its_on_demand_and_backorders_are_disabled(StockableInterface $stockable)
-    {
+    function it_recognizes_any_stockable_as_available_if_its_on_demand_and_backorders_are_disabled(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(true);
@@ -52,8 +54,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_any_stockable_as_available_if_its_on_demand_and_backorders_are_disabled_and_on_hand_quantity_insufficient(StockableInterface $stockable)
-    {
+    function it_recognizes_any_stockable_as_available_if_its_on_demand_and_backorders_are_disabled_and_on_hand_quantity_insufficient(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(true);
@@ -78,8 +81,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_not_available_if_on_hold_quantity_is_same_as_on_hand(StockableInterface $stockable)
-    {
+    function it_recognizes_stockable_as_not_available_if_on_hold_quantity_is_same_as_on_hand(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(false);
@@ -89,8 +93,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(false);
     }
 
-    function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_then_on_hand(StockableInterface $stockable)
-    {
+    function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_then_on_hand(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(false);
@@ -100,8 +105,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_available_even_if_hand_quantity_is_lesser_than_or_equal_to_0_when_backorders_are_enabled(StockableInterface $stockable)
-    {
+    function it_recognizes_stockable_as_available_even_if_hand_quantity_is_lesser_than_or_equal_to_0_when_backorders_are_enabled(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(true);
 
         $stockable->getOnHand()->willReturn(0);
@@ -111,8 +117,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_lesser_than_or_equal_to_0(StockableInterface $stockable)
-    {
+    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_lesser_than_or_equal_to_0(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(false);
@@ -125,15 +132,28 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(false);
     }
 
-    function it_recognizes_any_stockable_and_quantity_as_sufficient_if_backorders_are_enabled(StockableInterface $stockable)
-    {
+    function it_recognizes_stockable_as_not_available_if_variant_was_deleted(
+        FakeStockableInterface $stockable
+    ) {
+        $this->beConstructedWith(false);
+
+        $stockable->isDeleted()->willReturn(true);
+        $stockable->isAvailableOnDemand()->shouldNotBeCalled();
+
+        $this->isStockAvailable($stockable)->shouldReturn(false);
+    }
+
+    function it_recognizes_any_stockable_and_quantity_as_sufficient_if_backorders_are_enabled(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(true);
 
         $this->isStockSufficient($stockable, 999)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_stock_sufficient_if_on_hand_quantity_is_greater_than_required_quantity(StockableInterface $stockable)
-    {
+    function it_recognizes_stockable_stock_sufficient_if_on_hand_quantity_is_greater_than_required_quantity(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(false);
@@ -146,8 +166,9 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockSufficient($stockable, 15)->shouldReturn(true);
     }
 
-    function it_recognizes_stock_sufficient_if_its_available_on_demand_and_backorders_are_disabled(StockableInterface $stockable)
-    {
+    function it_recognizes_stock_sufficient_if_its_available_on_demand_and_backorders_are_disabled(
+        StockableInterface $stockable
+    ) {
         $this->beConstructedWith(false);
 
         $stockable->isAvailableOnDemand()->willReturn(true);
@@ -158,4 +179,20 @@ class AvailabilityCheckerSpec extends ObjectBehavior
         $stockable->getOnHand()->willReturn(-5);
         $this->isStockSufficient($stockable, 3)->shouldReturn(true);
     }
+
+    function it_recognizes_stockable_as_not_sufficient_if_variant_was_deleted(
+        FakeStockableInterface $stockable
+    ) {
+        $this->beConstructedWith(false);
+
+        $stockable->isDeleted()->willReturn(true);
+        $stockable->isAvailableOnDemand()->shouldNotBeCalled();
+
+        $this->isStockSufficient($stockable, 3)->shouldReturn(false);
+    }
+}
+
+interface FakeStockableInterface extends StockableInterface, SoftDeletableInterface
+{
+
 }
