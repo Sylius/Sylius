@@ -11,15 +11,16 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Order item interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends CartItemInterface
+interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterface
 {
     /**
      * Get the product.
@@ -45,7 +46,7 @@ interface OrderItemInterface extends CartItemInterface
     /**
      * Get all inventory units.
      *
-     * @return ArrayCollection|InventoryUnitInterface[]
+     * @return Collection|InventoryUnitInterface[]
      */
     public function getInventoryUnits();
 

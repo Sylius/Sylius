@@ -21,6 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Order item inventory processing listener.
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderItemInventoryListener
 {
@@ -58,7 +59,9 @@ class OrderItemInventoryListener
         $eventManager = $em->getEventManager();
         $uow = $em->getUnitOfWork();
 
-        $eventManager->removeEventListener('onFlush', $this);
+        foreach ($listeners = $eventManager->getListeners('onFlush') as $listener) {
+            $eventManager->removeEventListener('onFlush', $listener);
+        }
 
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
             if ($this->supports($entity)) {
@@ -67,7 +70,9 @@ class OrderItemInventoryListener
             }
         }
 
-        $eventManager->addEventListener('onFlush', $this);
+        foreach ($listeners as $listener) {
+            $eventManager->addEventListener('onFlush', $listener);
+        }
     }
 
     protected function supports($entity)

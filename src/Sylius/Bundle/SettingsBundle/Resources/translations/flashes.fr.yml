@@ -3,4 +3,4 @@
 
 sylius:
   settings:
-    update: Les paramètres ont correctement été mis à jour.
+    update: Les paramètres ont bien été mis à jour.

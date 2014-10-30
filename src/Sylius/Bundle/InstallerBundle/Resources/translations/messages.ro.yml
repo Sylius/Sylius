@@ -1,3 +1,46 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius a fost instalat cu succes.
+  form:
+    configuration:
+      database:
+        0: Conexiune la baza de date
+        driver:
+          0: Driver
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        password: Parola
+        port: Port
+        user: Utilizator
+      locale:
+        locale: Setări regionale
+      mailer:
+        password: Parola
+        transport:
+          gmail: Gmail
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Utilizator
+    setup:
+      email: Email
+      plain_password: Parola
+      username: Nume de utilizator
+  process:
+    step:
+      check:
+        button:
+          back: Înapoi
+          install: Instalează
+        table:
+          required: necesare
+          status: stare
+      welcome:
+        content: '<p>Bun venit la programul de instalare Sylius.</p>'
+€: €

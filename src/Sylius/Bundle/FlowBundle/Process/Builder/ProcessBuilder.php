@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Process\Builder;
 
 use Sylius\Bundle\FlowBundle\Process\Process;
+use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
@@ -30,7 +31,7 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * Registered steps.
      *
-     * @var array
+     * @var StepInterface[]
      */
     protected $steps;
 
@@ -172,6 +173,18 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * {@inheritdoc}
      */
+    public function setRedirectParams(array $params)
+    {
+        $this->assertHasProcess();
+
+        $this->process->setRedirectParams($params);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function validate($validator)
     {
         $this->assertHasProcess();
@@ -181,7 +194,7 @@ class ProcessBuilder implements ProcessBuilderInterface
         }
 
         if (!$validator instanceof ProcessValidatorInterface) {
-            throw new \InvalidArumentException();
+            throw new \InvalidArgumentException();
         }
 
         $this->process->setValidator($validator);

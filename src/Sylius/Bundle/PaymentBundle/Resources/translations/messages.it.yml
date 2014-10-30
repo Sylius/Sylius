@@ -15,6 +15,7 @@ sylius:
       method: Metodo di pagamento
       state:
         0: Stato del pagamento
+        checkout: Checkout
         completed: Completato
         failed: Fallimento
         new: Nuovo
@@ -25,4 +26,5 @@ sylius:
     payment_method:
       description: Descrizione
       enabled: Abilitato?
+      gateway: Gateway
       name: Nome

@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Core\SyliusOrderEvents;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -61,12 +61,51 @@ class OrderController extends ResourceController
     {
         $order = $this->findOr404($request);
 
-        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::PRE_RELEASE, new GenericEvent($order));
+        $this->get('sm.factory')
+            ->get($order, OrderTransitions::GRAPH)
+            ->apply(OrderTransitions::SYLIUS_RELEASE)
+        ;
 
         $this->domainManager->update($order);
 
-        $this->get('event_dispatcher')->dispatch(SyliusOrderEvents::POST_RELEASE, new GenericEvent($order));
-
         return $this->redirectHandler->redirectToReferer();
+    }
+
+    /**
+     * Get order history changes.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function historyAction(Request $request)
+    {
+        /** @var $order OrderInterface */
+        $order = $this->findOr404($request);
+
+        $repository = $this->get('doctrine')->getManager()->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $items = array();
+        foreach ($order->getItems() as $item) {
+            $items[] = $repository->getLogEntries($item);
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('history.html'))
+            ->setData(array(
+                'order' => $order,
+                'logs'  => array(
+                    'order'            => $repository->getLogEntries($order),
+                    'order_items'      => $items,
+                    'billing_address'  => $repository->getLogEntries($order->getBillingAddress()),
+                    'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
+                ),
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 }

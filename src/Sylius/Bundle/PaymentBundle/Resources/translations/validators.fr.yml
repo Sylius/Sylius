@@ -15,14 +15,14 @@ sylius:
       luhn: "Le numéro de carte bancaire fournit n'est pas valide."
     security_code:
       not_blank: Veuillez entrer le code de sécurité.
-      max_length: 'Le code de sécurité CVV de la carte bancaire doit contenir au moins {{ min }} caractères et ne peux dépasser les {{ max }} chiffres.'
-      min_length: 'Le code de sécurité CVV de la carte bancaire doit contenir au moins {{ min }} caractères et ne peux dépasser les {{ max }} chiffres.'
+      max_length: 'Le code de sécurité CVV de la carte bancaire doit faire entre {{ min }} et {{ max }} caractères.'
+      min_length: 'Le code de sécurité CVV de la carte bancaire doit faire entre {{ min }} et {{ max }} caractères.'
     expiry_year:
       not_blank: "Veuillez sélectionner l'année d'expiration."
   payment_method:
     gateway:
-      not_blank: Veuillez sélectionner la passerelle de la méthode de paiement.
+      not_blank: Veuillez sélectionner la passerelle du moyen de paiement.
     name:
-      max_length: 'Le nom de la méthode de paiement doit être long de {{ limit }} caractères.'
-      min_length: 'Le nom de la méthode de paiement doit avoir au minimum {{ limit }} caractères.'
-      not_blank: Veuillez entrer le nom de la méthode de paiement.
+      max_length: 'Le nom du moyen de paiement doit contenir au plus {{ limit }} caractères.'
+      min_length: 'Le nom du moyen de paiement doit contenir au moins {{ limit }} caractères.'
+      not_blank: Veuillez entrer le nom du moyen de paiement.

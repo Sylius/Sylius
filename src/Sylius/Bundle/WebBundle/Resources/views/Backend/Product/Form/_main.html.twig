@@ -15,9 +15,18 @@
             <hr />
             {{ form_row(form.masterVariant.price) }}
             {{ form_row(form.masterVariant.pricingCalculator) }}
+
             {% if form.masterVariant.pricingConfiguration is defined %}
-            {{ form_row(form.masterVariant.pricingConfiguration) }}
+                {% if form.masterVariant.pricingCalculator.vars.value == 'volume_based' %}
+                    <div>
+                        {{ form_label(form.masterVariant.pricingConfiguration) }}
+                        {% include "SyliusWebBundle::Backend/Product/Form/_volume_based_config.html.twig" %}
+                    </div>
+                {% else %}
+                    {{ form_row(form.masterVariant.pricingConfiguration) }}
+                {% endif %}
             {% endif %}
+
             <hr />
             {{ form_row(form.taxCategory) }}
             {{ form_row(form.shippingCategory) }}

@@ -23,5 +23,7 @@ sylius:
     zone:
       members: Thành viên
       type: Phân loại
+      types:
+        province: Tỉnh
     zone_member_province:
       province: Tỉnh

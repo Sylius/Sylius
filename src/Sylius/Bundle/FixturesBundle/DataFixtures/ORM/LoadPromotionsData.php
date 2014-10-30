@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
  * Default promotion fixtures.
@@ -33,7 +32,7 @@ class LoadPromotionsData extends DataFixture
         $promotion = $this->createPromotion(
             'New Year',
             'New Year Sale for 3 and more items.',
-            array($this->createRule(RuleInterface::TYPE_ITEM_COUNT, array('count' => 3, 'equal' => true))),
+            array($this->createRule(PromotionRuleInterface::TYPE_ITEM_COUNT, array('count' => 3, 'equal' => true))),
             array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
         );
 
@@ -42,16 +41,25 @@ class LoadPromotionsData extends DataFixture
         $promotion = $this->createPromotion(
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
-            array($this->createRule(RuleInterface::TYPE_ITEM_TOTAL, array('amount' => 10000, 'equal' => true))),
+            array($this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, array('amount' => 10000, 'equal' => true))),
             array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 250)))
         );
 
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
-            'Easter Egg',
-            'Easter Egg Sale for people who buy product from specific category.',
-            array($this->createRule('taxonomy', array('taxons' => new ArrayCollection(array($this->getReference('Sylius.Taxon.Bookmania')->getId())), 'exclude' => false))),
+            '3rd order',
+            'Discount for 3rd order',
+            array($this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, array('nth' => 3))),
+            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
+        );
+
+        $manager->persist($promotion);
+
+        $promotion = $this->createPromotion(
+            'Shipping to Germany',
+            'Discount for orders with shipping country Germany',
+            array($this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, array('country' => $this->getReference('Sylius.Country.DE')->getId()))),
             array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
         );
 
@@ -74,11 +82,11 @@ class LoadPromotionsData extends DataFixture
      * @param string $type
      * @param array  $configuration
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     protected function createRule($type, array $configuration)
     {
-        /* @var $rule RuleInterface */
+        /** @var $rule PromotionRuleInterface */
         $rule = $this->getPromotionRuleRepository()->createNew();
         $rule->setType($type);
         $rule->setConfiguration($configuration);
@@ -96,7 +104,7 @@ class LoadPromotionsData extends DataFixture
      */
     protected function createAction($type, array $configuration)
     {
-        /* @var $action ActionInterface */
+        /** @var $action ActionInterface */
         $action = $this->getPromotionActionRepository()->createNew();
         $action->setType($type);
         $action->setConfiguration($configuration);
@@ -116,7 +124,7 @@ class LoadPromotionsData extends DataFixture
      */
     protected function createPromotion($name, $description, array $rules, array $actions)
     {
-        /* @var $promotion PromotionInterface */
+        /** @var $promotion PromotionInterface */
         $promotion = $this->getPromotionRepository()->createNew();
         $promotion->setName($name);
         $promotion->setDescription($description);

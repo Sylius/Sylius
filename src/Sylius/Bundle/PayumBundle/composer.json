@@ -26,12 +26,12 @@
     "require": {
         "php":                    ">=5.3.3",
 
-        "sylius/order-bundle":    "0.10.*@dev",
-        "sylius/payment-bundle":  "0.10.*@dev",
-        "sylius/resource-bundle": "0.10.*@dev",
-        "payum/payum-bundle":     "~0.8.5",
-        "payum/core":             "~0.8.7",
-        "yohang/finite":          "dev-sylius"
+        "sylius/order-bundle":    "0.12.*@dev",
+        "sylius/payment-bundle":  "0.12.*@dev",
+        "sylius/resource-bundle": "0.12.*@dev",
+        "payum/core":             "~0.9.0",
+        "payum/payum-bundle":     "~0.9.0",
+        "winzou/state-machine":   "~0.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -44,13 +44,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.12-dev"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/winzou/Finite"
-        }
-    ]
+    "minimum-stability": "dev"
 }

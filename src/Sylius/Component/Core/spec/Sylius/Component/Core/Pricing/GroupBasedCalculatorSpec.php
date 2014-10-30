@@ -13,7 +13,9 @@ namespace spec\Sylius\Component\Core\Pricing;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\GroupInterface;
-use Sylius\Component\Pricing\Model\PriceableInterface;;
+use Sylius\Component\Pricing\Model\PriceableInterface;
+
+;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -44,8 +46,10 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, $context)->shouldReturn(5500);
     }
 
-    function it_returns_the_default_price_if_configuration_does_not_exist_for_group(PriceableInterface $priceable, GroupInterface $group)
-    {
+    function it_returns_the_default_price_if_configuration_does_not_exist_for_group(
+        PriceableInterface $priceable,
+        GroupInterface $group
+    ) {
         $configuration = array(
             42 => 4999,
             17 => 4599,
@@ -59,8 +63,10 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, $context)->shouldReturn(3500);
     }
 
-    function it_returns_the_price_for_group_if_configuration_exists(PriceableInterface $priceable, GroupInterface $group)
-    {
+    function it_returns_the_price_for_group_if_configuration_exists(
+        PriceableInterface $priceable,
+        GroupInterface $group
+    ) {
         $configuration = array(
             42 => 4999,
             17 => 4599,
@@ -73,8 +79,11 @@ class GroupBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($priceable, $configuration, $context)->shouldReturn(4599);
     }
 
-    function it_returns_the_lowest_price_if_more_than_1_group_provided_in_context(PriceableInterface $priceable, GroupInterface $group1, GroupInterface $group2)
-    {
+    function it_returns_the_lowest_price_if_more_than_1_group_provided_in_context(
+        PriceableInterface $priceable,
+        GroupInterface $group1,
+        GroupInterface $group2
+    ) {
         $configuration = array(
             42 => 4999,
             17 => 4599,

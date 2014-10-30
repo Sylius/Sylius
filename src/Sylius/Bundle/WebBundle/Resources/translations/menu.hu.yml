@@ -1,3 +1,95 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Választék
+        configuration: Beállítások
+        countries: Országok
+        customer: Vásárlók
+        dashboard: Vezérlőpult
+        exchange_rates: Árfolyamok
+        general_settings: Általános beállítások
+        homepage: Saját bolt
+        locales: Területi beállítások
+        new_order: Új rendelés hozzáadása
+        new_promotion: Új promóció hozzáadása
+        options: Termék beállítások kezelése
+        orders: Függőben lévő rendelések
+        payment_methods: Fizetési módok
+        payments: Fizetések
+        products: Termékek
+        promotions: Promóciók
+        properties: Tulajdonságok beállítása
+        prototypes: Termék prototípusok
+        sales: Rendelések
+        shipments: Szállítások
+        shipping_categories: Szállítási kategóriák
+        shipping_methods: Szállítási módok
+        stockables: Készletszintek
+        tax_categories: Adózási kategóriák
+        tax_rates: Adókulcsok
+        taxation_settings: Adózás-beállítások
+        taxonomies: Kategorizálás
+        users: Felhasználók
+        zones: Zónák
+      sidebar:
+        assortment: Választék
+        blocks: Tömbök
+        configuration: Beállítások
+        content: Tartalom
+        countries: Országok
+        customer: Vásárlók
+        dashboard: Vezérlőpult
+        exchange_rates: Árfolyamok
+        general_settings: Általános beállítások
+        groups: Csoportok
+        homepage: Vissza az oldalra
+        locales: Területi beállítások
+        new_order: Új rendelés hozzáadása
+        new_promotion: Új promóció hozzáadása
+        options: Beállítások kezelése
+        orders: Függőben lévő rendelések
+        pages: Oldalak
+        payment_methods: Fizetési módok
+        payments: Fizetések
+        products: Termékek
+        promotions: Promóciók
+        properties: Tulajdonságok beállítása
+        prototypes: Termék prototípusok
+        sales: Rendelések
+        shipments: Szállítások
+        shipping_categories: Szállítási kategóriák
+        shipping_methods: Szállítási módok
+        stockables: Készletszintek
+        tax_categories: Adózási kategóriák
+        tax_rates: Adókulcsok
+        taxation_settings: Adózás-beállítások
+        taxonomies: Kategorizálás
+        users: Felhasználók
+        zones: Zónák
+  frontend:
+    menu:
+      account:
+        addresses: Címjegyzékem
+        homepage: Kezdőoldal
+        orders: Megrendeléseim / számláim
+        password: Jelszóm
+        profile: Személyes információk
+        shop: Vissza az áruházba
+      currency: 'Az árak megjelenítése %currency%'
+      main:
+        account: Az Ön fiókja
+        administration: Adminisztráció
+        cart: 'A kosár tartalma (%items%) %total%'
+        login: Bejelentkezés
+        logout: Kijelentkezés
+        register: Regisztráció
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

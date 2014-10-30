@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
-use Sylius\Bundle\ResourceBundle\Exception\Driver\InvalidDriverException;
+use Sylius\Component\Resource\Exception\Driver\InvalidDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -157,7 +157,9 @@ abstract class AbstractResourceExtension extends Extension
                     $driver,
                     $container,
                     $this->applicationName,
-                    $model
+                    $model,
+                    isset($config['object_manager']) ? $config['object_manager'] : 'default',
+                    isset($config['templates'][$model]) ? $config['templates'][$model] : null
                 )->load($classes);
             }
         }

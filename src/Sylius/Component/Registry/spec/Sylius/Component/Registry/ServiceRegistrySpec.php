@@ -59,8 +59,9 @@ class ServiceRegistrySpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_when_trying_to_register_service_without_required_interface(RouteCompilerInterface $compiler)
-    {
+    function it_throws_exception_when_trying_to_register_service_without_required_interface(
+        RouteCompilerInterface $compiler
+    ) {
         $this
             ->shouldThrow('InvalidArgumentException')
             ->duringRegister('test', $compiler)

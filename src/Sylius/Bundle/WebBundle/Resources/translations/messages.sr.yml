@@ -203,6 +203,7 @@ sylius:
     frontend_keywords: sylius, e-komerc, symfony2, prodavnica, korpa
     frontend_title: Sylius, moderni e-komerc za Symfony2
   newest: Najnoviji proizvodi
+  "no": false
   option:
     create: Kreirajte opciju
     create_header: Nova opcija proizvoda
@@ -509,7 +510,7 @@ sylius:
     price: Cena
     stock: Zalihe
     update_header: Ažuriranje varijante
-  "yes": da
+  "yes": true
   zone:
     add_member: Dodajte člana
     create: Kreirajte zonu

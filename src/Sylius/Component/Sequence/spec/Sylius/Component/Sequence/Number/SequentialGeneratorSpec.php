@@ -26,8 +26,10 @@ class SequentialGeneratorSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Sequence\Number\SequentialGenerator');
     }
 
-    function it_generates_000001_number_for_first_subject(SequenceSubjectInterface $subject, SequenceInterface $sequence)
-    {
+    function it_generates_000001_number_for_first_subject(
+        SequenceSubjectInterface $subject,
+        SequenceInterface $sequence
+    ) {
         $subject->getNumber()->willReturn(null);
         $subject->getSequenceType()->willReturn('order');
 
@@ -39,8 +41,10 @@ class SequentialGeneratorSpec extends ObjectBehavior
         $this->generate($subject, $sequence);
     }
 
-    function it_generates_a_correct_number_for_following_subjects(SequenceSubjectInterface $subject, SequenceInterface $sequence)
-    {
+    function it_generates_a_correct_number_for_following_subjects(
+        SequenceSubjectInterface $subject,
+        SequenceInterface $sequence
+    ) {
         $subject->getNumber()->willReturn(null);
         $subject->getSequenceType()->willReturn('order');
 

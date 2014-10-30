@@ -3,6 +3,7 @@ parameters:
     sylius.database.host:             127.0.0.1
     sylius.database.port:             ~
     sylius.database.name:             sylius
+    sylius.database.path:             ~
     sylius.database.user:             root
     sylius.database.password:         ~
 
@@ -16,6 +17,8 @@ parameters:
     sylius.secret:                    abc
 
     sylius.currency:                  EUR
+
+    sylius.currency_importer.open_exchange_rates: EDITME
 
     sylius.cache:
         type: file_system
@@ -43,7 +46,13 @@ parameters:
     sylius.inventory.tracking_enabled: true
     sylius.inventory.holding.duration: 15 minutes
 
+    sylius.promotion.item_based: false
+
+    sylius.order.allow_guest_order: false
+
     sylius.order.pending.duration: 3 hours
+
+    sylius.uploader.filesystem: sylius_image
 
     phpcr_backend:
         type: doctrinedbal

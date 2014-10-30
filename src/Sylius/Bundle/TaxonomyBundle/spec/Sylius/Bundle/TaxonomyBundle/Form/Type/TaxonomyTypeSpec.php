@@ -38,7 +38,10 @@ class TaxonomyTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_name_field(FormBuilder $builder)
     {
-        $builder->add('name', 'text', Argument::any())->shouldBeCalled();
+        $builder
+            ->add('name', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

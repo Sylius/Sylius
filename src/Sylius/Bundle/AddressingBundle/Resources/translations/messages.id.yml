@@ -1,3 +1,34 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: Kota
+      company: Perusahaan
+      country: Negara
+      first_name: Nama Depan
+      last_name: Nama belakang
+      postcode: Kodepos
+      street: Alamat
+      province: Provinsi
+    country:
+      iso_name: Nama ISO
+      name: Nama
+      provinces: Provinsi
+      select: Pilih
+    province:
+      name: Nama
+      select: Pilih
+    zone:
+      members: Anggota
+      name: Nama
+      type: Jenis
+      types:
+        zone: Zona
+    zone_member_country:
+      country: Negara
+    zone_member_province:
+      province: Provinsi
+    zone_member_zone:
+      zone: Zona

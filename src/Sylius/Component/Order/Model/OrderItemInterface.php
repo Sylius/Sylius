@@ -21,42 +21,42 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
     /**
      * Get item quantity.
      *
-     * @return integer
+     * @return int
      */
     public function getQuantity();
 
     /**
      * Set quantity.
      *
-     * @param integer $quantity
+     * @param int $quantity
      */
     public function setQuantity($quantity);
 
     /**
      * Get unit price of item.
      *
-     * @return integer
+     * @return int
      */
     public function getUnitPrice();
 
     /**
      * Define the unit price of item.
      *
-     * @param integer $unitPrice
+     * @param int $unitPrice
      */
     public function setUnitPrice($unitPrice);
 
     /**
      * Get item total.
      *
-     * @return integer
+     * @return int
      */
     public function getTotal();
 
     /**
      * Set item total.
      *
-     * @param integer $total
+     * @param int $total
      */
     public function setTotal($total);
 
@@ -72,7 +72,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
      *
      * @param OrderItemInterface $orderItem
      *
-     * @return Boolean
+     * @return bool
      */
     public function equals(OrderItemInterface $orderItem);
 
@@ -81,9 +81,17 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
      * the same cart item.
      *
      * @param OrderItemInterface $orderItem
-     * @param Boolean            $throwOnInvalid
-     *
-     * @return $this
+     * @param bool               $throwOnInvalid
      */
     public function merge(OrderItemInterface $orderItem, $throwOnInvalid = true);
+
+    /**
+     * @return bool
+     */
+    public function isImmutable();
+
+    /**
+     * @param bool $immutable
+     */
+    public function setImmutable($immutable);
 }

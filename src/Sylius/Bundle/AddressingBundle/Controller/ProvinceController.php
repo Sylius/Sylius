@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Controller;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -106,6 +107,8 @@ class ProvinceController extends ResourceController
      * Create province choice form for given country.
      *
      * @param CountryInterface $country
+     *
+     * @return FormInterface
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {

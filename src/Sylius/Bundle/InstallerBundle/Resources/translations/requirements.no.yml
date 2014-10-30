@@ -1,3 +1,63 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: utvidelser
+    accelerator:
+      0: Akselerator
+      help: Installere og aktivere en PHP-akselerator som APC (anbefales).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Installere og aktivere %extension% utvidelsen.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte streng
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Økt
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    0: filsystem
+    cache:
+      0: mellomlagring
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: finnes
+    logs:
+      0: logger
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: finnes ikke
+    not_writable: ikke skrivbar
+    parameters:
+      0: parameters.yml
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: leverandører
+    writable: skrivbar
+  settings:
+    0: PHP versjon og innstillinger
+    any: noen
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: ikke foreldet
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: tidssone
+    timezone_deprecated:
+      0: Utgått tidssone
+      help: 'Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).'
+    version: PHP-versjon
+    version_recommanded: Anbefalt PHP-versjon

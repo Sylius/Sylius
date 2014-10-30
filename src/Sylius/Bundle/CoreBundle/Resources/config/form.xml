@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
+        <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
+        <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
+        <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
+        <parameter key="sylius.checkout_form.guest.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\GuestType</parameter>
+
+        <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
+        <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
+
+        <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
+        <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
+        <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
+        <parameter key="sylius.form.type.shipment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ShipmentFilterType</parameter>
+
+        <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
+        <parameter key="sylius.form.type.price_calculator.zone_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ZoneBasedConfigurationType</parameter>
+
+        <parameter key="sylius.form.type.promotion_rule.nth_order_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\NthOrderConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.user_loyalty_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\UserLoyaltyConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
+    </parameters>
+
+    <services>
+        <!-- checkout forms -->
+        <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <tag name="form.type" alias="sylius_checkout_addressing" />
+        </service>
+        <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <tag name="form.type" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <argument type="service" id="translator" />
+            <tag name="form.type" alias="sylius_checkout_shipment" />
+        </service>
+        <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <tag name="form.type" alias="sylius_checkout_payment" />
+        </service>
+        <service id="sylius.checkout_form.guest" class="%sylius.checkout_form.guest.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <argument type="collection">
+                <argument>Guest</argument>
+            </argument>
+            <tag name="form.type" alias="sylius_checkout_guest" />
+        </service>
+
+        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.validation_group.cart%</argument>
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <tag name="form.type" alias="sylius_cart" />
+        </service>
+        <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
+            <argument>%sylius.model.product_variant_image.class%</argument>
+            <tag name="form.type" alias="sylius_image" />
+        </service>
+        <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
+            <tag name="form.type" alias="list" />
+        </service>
+        <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_user" />
+        </service>
+        <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
+            <argument>%sylius.model.group.class%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
+            <tag name="form.type" alias="sylius_group" />
+        </service>
+        <service id="sylius.form.type.advanced_order" class="%sylius.form.type.advanced_order.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
+            <argument type="service" id="sylius.currency_provider" />
+            <tag name="form.type" alias="sylius_advanced_order" />
+        </service>
+
+        <!-- filters -->
+        <service id="sylius.form.type.user_filter" class="%sylius.form.type.user_filter.class%">
+            <tag name="form.type" alias="sylius_user_filter" />
+        </service>
+        <service id="sylius.form.type.product_filter" class="%sylius.form.type.product_filter.class%">
+            <tag name="form.type" alias="sylius_product_filter" />
+        </service>
+        <service id="sylius.form.type.order_filter" class="%sylius.form.type.order_filter.class%">
+            <tag name="form.type" alias="sylius_order_filter" />
+        </service>
+        <service id="sylius.form.type.shipment_filter" class="%sylius.form.type.shipment_filter.class%">
+            <tag name="form.type" alias="sylius_shipment_filter" />
+        </service>
+
+        <!-- promotions -->
+        <service id="sylius.form.type.promotion_rule.nth_order_configuration" class="%sylius.form.type.promotion_rule.nth_order_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_nth_order_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_nth_order_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.user_loyalty_configuration" class="%sylius.form.type.promotion_rule.user_loyalty_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_user_loyalty_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_user_loyalty_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.shipping_country_configuration" class="%sylius.form.type.promotion_rule.shipping_country_configuration.class%">
+            <argument>%sylius.model.country.class%</argument>
+            <argument>%sylius.validation_group.promotion_rule_shipping_country_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_shipping_country_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_taxonomy_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_taxonomy_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.shipping_discount_configuration" class="%sylius.form.type.promotion_action.shipping_discount_configuration.class%">
+            <argument>%sylius.validation_group.promotion_action_shipping_discount_configuration%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_shipping_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.add_product_configuration" class="%sylius.form.type.promotion_action.add_product_configuration.class%">
+            <argument>%sylius.validation_group.promotion_action_add_product_configuration%</argument>
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
+        </service>
+
+        <service id="sylius.form.type.price_calculator.group_based" class="%sylius.form.type.price_calculator.group_based.class%">
+            <argument type="service" id="sylius.repository.group" />
+            <tag name="form.type" alias="sylius_price_calculator_group_based" />
+        </service>
+        <service id="sylius.form.type.price_calculator.zone_based" class="%sylius.form.type.price_calculator.zone_based.class%">
+            <argument type="service" id="sylius.repository.zone" />
+            <tag name="form.type" alias="sylius_price_calculator_zone_based" />
+        </service>
+    </services>
+
+</container>

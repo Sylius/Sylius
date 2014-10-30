@@ -1,6 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
 sylius:
   checkout:
     shipping_method:
@@ -12,6 +13,8 @@ sylius:
         quantity: Stückzahl
         variant: Variante
     block:
+      body: Inhalt
+      id: ID
       title: Titel
     cart:
       coupon: Gutschein
@@ -21,10 +24,12 @@ sylius:
       payment_method: Zahlungsmethode
       shipping_method: Versandarten
     group:
+      name: Name
       roles: Rollen
     image:
       file: Foto
     locale:
+      code: Code
       enabled: Aktiviert
     order_filter:
       created_at_from: Von
@@ -33,14 +38,17 @@ sylius:
       total_from: Von
       total_to: Bis
     page:
+      body: Inhalt
+      id: ID
       title: Titel
     product:
-      restricted_zone: Beschränktes Gebiet
+      restricted_zone: Beschränktes Versandgebiet
       shipping_category: Versandkategorie
       short_description: Kurzbeschreibung
       tax_category: Steuerkategorie
       variant_selection_method: Variantenauswahlmethode
     product_filter:
+      name: Name
       sku: Bestandseinheit
     settings:
       general:
@@ -57,7 +65,7 @@ sylius:
       number: Bestellnummer
       shipping_address: Liefern an
     shipping_method:
-      zone: Gebiet
+      zone: Versandgebiet
     taxon:
       file: Foto auswählen
     taxonomy:

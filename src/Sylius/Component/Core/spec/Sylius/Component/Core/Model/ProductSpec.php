@@ -17,6 +17,8 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -60,10 +62,33 @@ class ProductSpec extends ObjectBehavior
         $this->getTaxons()->shouldReturn($taxons);
     }
 
+    function it_can_get_taxons_from_specific_taxonomy(
+        TaxonInterface $taxon1,
+        TaxonInterface $taxon2,
+        TaxonInterface $taxon3,
+        TaxonomyInterface $taxonomy1,
+        TaxonomyInterface $taxonomy2
+    )
+    {
+        $taxon1->getTaxonomy()->willReturn($taxonomy1);
+        $taxon2->getTaxonomy()->willReturn($taxonomy1);
+        $taxon3->getTaxonomy()->willReturn($taxonomy2);
+
+        $taxonomy1->getName()->willReturn('Category');
+        $taxonomy2->getName()->willReturn('Brand');
+
+        $this->addTaxon($taxon1);
+        $this->addTaxon($taxon2);
+        $this->addTaxon($taxon3);
+
+        $this->getTaxons('category')->shouldHaveCount(2);
+        $this->getTaxons('brand')->shouldHaveCount(1);
+    }
+
     function its_price_is_mutable()
     {
-        $this->setPrice(4.99);
-        $this->getPrice()->shouldReturn(4.99);
+        $this->setPrice(499);
+        $this->getPrice()->shouldReturn(499);
     }
 
     function its_variant_selection_method_is_choice_by_default()

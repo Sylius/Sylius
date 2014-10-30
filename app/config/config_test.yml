@@ -1,6 +1,10 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+    sylius.promotion.item_based: true
+    sylius.order.allow_guest_order: true
+
 framework:
     test: ~
     default_locale: "en"
@@ -13,6 +17,8 @@ swiftmailer:
 doctrine:
     dbal:
         dbname: %sylius.database.name%_test
+        path:   %sylius.database.path%
+        driver_class: Sylius\Bundle\CoreBundle\Tests\MySqlDriver
 
 sylius_money:
     currency: EUR

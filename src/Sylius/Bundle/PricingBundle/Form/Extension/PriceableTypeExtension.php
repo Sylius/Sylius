@@ -74,7 +74,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
             }
 
             try {
-                $prototypes['calculators'][$type] = $builder->create('configuration', $formType)->getForm();
+                $prototypes['calculators'][$type] = $builder->create('pricingConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }

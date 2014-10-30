@@ -5,13 +5,32 @@ sylius:
   form:
     address:
       city: Cidade
+      company: Empresa
+      country: País
+      first_name: Nome
+      last_name: Sobrenome
       postcode: CEP
       street: Rua
       province: Estado
     country:
       iso_name: ISO
+      name: Nome
       provinces: Estados
+      select: Selecione
+    province:
+      name: Nome
+      select: Selecione
     zone:
       members: Membros
+      name: Nome
+      type: Tipo
+      types:
+        country: País
+        province: Estado
+        zone: Região
+    zone_member_country:
+      country: País
     zone_member_province:
       province: Estado
+    zone_member_zone:
+      zone: Zona

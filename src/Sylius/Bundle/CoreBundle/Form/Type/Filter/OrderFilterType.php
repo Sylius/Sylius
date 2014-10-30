@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Filter;
 
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -53,6 +54,22 @@ class OrderFilterType extends AbstractType
                 'attr'     => array(
                     'placeholder' => 'sylius.form.order_filter.created_at_to'
                 )
+            ))
+            ->add('paymentState', 'choice', array(
+                'required'    => false,
+                'label'       => 'sylius.form.order_filter.payment_state',
+                'empty_value' => 'sylius.form.order_filter.payment_state',
+                'choices'     => array(
+                    PaymentInterface::STATE_NEW        => 'sylius.payment.state.new',
+                    PaymentInterface::STATE_PENDING    => 'sylius.payment.state.pending',
+                    PaymentInterface::STATE_PROCESSING => 'sylius.payment.state.processing',
+                    PaymentInterface::STATE_COMPLETED  => 'sylius.payment.state.completed',
+                    PaymentInterface::STATE_FAILED     => 'sylius.payment.state.failed',
+                    PaymentInterface::STATE_CANCELLED  => 'sylius.payment.state.cancelled',
+                    PaymentInterface::STATE_VOID       => 'sylius.payment.state.void',
+                    PaymentInterface::STATE_REFUNDED   => 'sylius.payment.state.refunded',
+                    PaymentInterface::STATE_UNKNOWN    => 'sylius.payment.state.unknown',
+                ),
             ))
         ;
     }

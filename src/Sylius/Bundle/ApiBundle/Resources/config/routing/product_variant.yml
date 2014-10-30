@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+#
+sylius_api_product_variant_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            paginate: false
+            criteria:
+                product: $productId
+                master: false
+
+sylius_api_product_variant_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_variant:createAction
+
+sylius_api_product_variant_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_variant:updateAction
+        _sylius:
+            criteria:
+                id:      $id
+                product: $productId
+                master:  false
+
+sylius_api_product_variant_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_variant:deleteAction
+        _sylius:
+            criteria:
+                id:      $id
+                product: $productId
+                master:  false
+
+sylius_api_product_variant_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_variant:deleteAction
+        _sylius:
+            criteria:
+                id:      $id
+                product: $productId
+                master:  false

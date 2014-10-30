@@ -27,8 +27,7 @@ class OrderShippingListenerSpec extends ObjectBehavior
         ShipmentFactoryInterface $shipmentFactory,
         ShipmentProcessorInterface $shippingProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
-    )
-    {
+    ) {
         $this->beConstructedWith($shipmentFactory, $shippingProcessor, $shippingChargesProcessor);
     }
 
@@ -40,8 +39,7 @@ class OrderShippingListenerSpec extends ObjectBehavior
     function it_throws_exception_if_event_has_non_order_subject(
         GenericEvent $event,
         \stdClass $invalidSubject
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($invalidSubject);
 
         $this
@@ -51,11 +49,10 @@ class OrderShippingListenerSpec extends ObjectBehavior
     }
 
     function it_calls_shipping_processor_on_order(
-        $shippingChargesProcessor,
+        ShippingChargesProcessorInterface $shippingChargesProcessor,
         GenericEvent $event,
         OrderInterface $order
-    )
-    {
+    ) {
         $event->getSubject()->willReturn($order);
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
 

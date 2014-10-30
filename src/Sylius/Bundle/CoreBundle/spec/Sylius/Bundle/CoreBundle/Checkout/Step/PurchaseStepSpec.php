@@ -12,19 +12,19 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finite\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
 use spec\Sylius\Bundle\CoreBundle\Fixture\RequestStack;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\Order;
-use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\Model\Payment;
+use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
@@ -75,7 +75,7 @@ class PurchaseStepSpec extends ObjectBehavior
         $container->get('doctrine')->willReturn($doctrine);
         $container->has('doctrine')->willReturn(true);
         $container->get('translator')->willReturn($translator);
-        $container->get('finite.factory')->willReturn($factory);
+        $container->get('sm.factory')->willReturn($factory);
 
         $this->setName('purchase');
 

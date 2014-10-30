@@ -51,12 +51,7 @@ class TaxCategoryEntityTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver
-            ->setDefaults(
-                array(
-                    'class' => 'TaxCategory',
-                )
-            )
+        $resolver->setDefaults(array('class' => 'TaxCategory',))
             ->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);

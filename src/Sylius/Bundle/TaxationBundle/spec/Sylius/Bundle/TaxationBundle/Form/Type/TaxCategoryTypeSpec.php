@@ -45,13 +45,13 @@ class TaxCategoryTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('name', 'text', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $builder
             ->add('description', 'textarea', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

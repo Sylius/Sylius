@@ -8,6 +8,10 @@ sylius:
       min_length: 'Nazwa kategorii wysyłki musi mieć co najmniej {{ limit }} znaków.'
       not_blank: Proszę podać nazwę kategorii metody wysyłki.
   shipping_method:
+    calculator:
+      max_length: 'Wartość nie może być dłuższa niż {{ limit }} znaków.'
+      min_length: 'Wartość musi mieć co najmniej {{ limit }} znaków.'
+      not_blank: 'Wartość musi mieć co najmniej {{ limit }} znaków.'
     name:
       max_length: 'Nazwa metody wysyłki nie może być dłuższa niż {{ limit }} znaków.'
       min_length: 'Nazwa metody wysyłki musi mieć co najmniej {{ limit }} znaków.'

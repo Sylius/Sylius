@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
-use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
  * User model.
@@ -121,6 +120,7 @@ class User extends BaseUser implements UserInterface
     {
         if (!$this->hasAddress($address)) {
             $this->addresses[] = $address;
+            $address->setUser($this);
         }
 
         return $this;
@@ -132,6 +132,7 @@ class User extends BaseUser implements UserInterface
     public function removeAddress(AddressInterface $address)
     {
         $this->addresses->removeElement($address);
+        $address->setUser(null);
 
         return $this;
     }
@@ -261,7 +262,7 @@ class User extends BaseUser implements UserInterface
     public function setEmail($email)
     {
         parent::setEmail($email);
-        $this->setUsername($email);
+        parent::setUsername($email);
 
         return $this;
     }
@@ -272,7 +273,7 @@ class User extends BaseUser implements UserInterface
     public function setEmailCanonical($emailCanonical)
     {
         parent::setEmailCanonical($emailCanonical);
-        $this->setUsernameCanonical($emailCanonical);
+        parent::setUsernameCanonical($emailCanonical);
 
         return $this;
     }

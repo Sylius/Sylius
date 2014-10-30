@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_address_list:
-    pattern: /
+    path: /
     defaults:
         _controller: sylius.controller.address:indexAction
         _sortable: true
@@ -10,21 +10,21 @@ sylius_address_list:
             updatedAt: desc
 
 sylius_address_create:
-    pattern: /create
+    path: /create
     defaults:
         _controller: sylius.controller.address:createAction
 
 sylius_address_update:
-    pattern: /{id}/update
+    path: /{id}/update
     defaults:
         _controller: sylius.controller.address:updateAction
 
 sylius_address_delete:
-    pattern: /{id}/delete
+    path: /{id}/delete
     defaults:
         _controller: sylius.controller.address:deleteAction
 
 sylius_address_show:
-    pattern: /{id}
+    path: /{id}
     defaults:
         _controller: sylius.controller.address:showAction

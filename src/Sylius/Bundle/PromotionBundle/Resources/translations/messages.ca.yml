@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    coupon:
+      code: Codi
+    promotion:
+      description: Descripció
+      name: Nom

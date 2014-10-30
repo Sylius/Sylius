@@ -22,11 +22,11 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "0.10.*@dev",
-        "sylius/registry": "0.10.*@dev"
+        "sylius/resource": "0.12.*@dev",
+        "sylius/registry": "0.12.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*"
+        "phpspec/phpspec": "~2.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -35,11 +35,11 @@
         "psr-4": { "Sylius\\Component\\Pricing\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "spec\\Sylius\\Component\\Pricing\\": "spec/" }
+        "psr-4": { "Sylius\\Component\\Pricing\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.12-dev"
         }
     }
 }

@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  credit_card:
+    security_code:
+      not_blank: Introduceți codul de securitate.
+      max_length: 'Codul CVV al cardului trebuie să aibă între {{ min }} și {{ max }} caractere.'
+      min_length: 'Codul CVV al cardului trebuie să aibă între {{ min }} și {{ max }} caractere.'
+    expiry_year:
+      not_blank: Alegeți anul expirării.

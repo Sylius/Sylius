@@ -1,0 +1,6 @@
+sylius:
+    form:
+        currency:
+            code: Code
+            exchange_rate: Exchange rate
+            enabled: Enabled

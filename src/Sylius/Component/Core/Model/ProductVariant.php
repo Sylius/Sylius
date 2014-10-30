@@ -34,7 +34,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * The variant price.
      *
-     * @var integer
+     * @var int
      */
     protected $price;
 
@@ -55,28 +55,35 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * On hold.
      *
-     * @var integer
+     * @var int
      */
     protected $onHold = 0;
 
     /**
      * On hand stock.
      *
-     * @var integer
+     * @var int
      */
     protected $onHand = 0;
 
     /**
+     * Sold amount.
+     *
+     * @var int
+     */
+    protected $sold = 0;
+
+    /**
      * Is variant available on demand?
      *
-     * @var Boolean
+     * @var bool
      */
     protected $availableOnDemand = true;
 
     /**
      * Images.
      *
-     * @var Collection|VariantImageInterface[]
+     * @var Collection|ProductVariantImageInterface[]
      */
     protected $images;
 
@@ -166,7 +173,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setPrice($price)
     {
-        $this->price = $price;
+        $this->price = (int) $price;
 
         return $this;
     }
@@ -258,6 +265,24 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSold($sold)
+    {
+        $this->sold = (int) $sold;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getInventoryName()
     {
         return $this->getProduct()->getName();
@@ -276,7 +301,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (Boolean) $availableOnDemand;
+        $this->availableOnDemand = (bool) $availableOnDemand;
 
         return $this;
     }

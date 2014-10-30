@@ -13,12 +13,11 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\Model\Cart;
-use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Order entity.
@@ -70,11 +69,11 @@ class Order extends Cart implements OrderInterface
     protected $currency;
 
     /**
-     * Promotion coupon
+     * Promotion coupons.
      *
-     * @var CouponInterface
+     * @var BaseCouponInterface[]
      */
-    protected $promotionCoupon;
+    protected $promotionCoupons;
 
     /**
      * Order payment state.
@@ -107,6 +106,7 @@ class Order extends Cart implements OrderInterface
 
         $this->payments = new ArrayCollection();
         $this->shipments = new ArrayCollection();
+        $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
     }
 
@@ -121,9 +121,12 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
+        if (null !== $this->user) {
+            $this->email = $this->user->getEmail();
+        }
 
         return $this;
     }
@@ -160,114 +163,6 @@ class Order extends Cart implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxTotal()
-    {
-        $taxTotal = 0;
-
-        foreach ($this->getTaxAdjustments() as $adjustment) {
-            $taxTotal += $adjustment->getAmount();
-        }
-
-        return $taxTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::TAX_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeTaxAdjustments()
-    {
-        foreach ($this->getTaxAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionTotal()
-    {
-        $promotionTotal = 0;
-
-        foreach ($this->getPromotionAdjustments() as $adjustment) {
-            $promotionTotal += $adjustment->getAmount();
-        }
-
-        return $promotionTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPromotionAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::PROMOTION_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePromotionAdjustments()
-    {
-        foreach ($this->getPromotionAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingTotal()
-    {
-        $shippingTotal = 0;
-
-        foreach ($this->getShippingAdjustments() as $adjustment) {
-            $shippingTotal += $adjustment->getAmount();
-        }
-
-        return $shippingTotal;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAdjustments()
-    {
-        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) {
-            return Order::SHIPPING_ADJUSTMENT === $adjustment->getLabel();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeShippingAdjustments()
-    {
-        foreach ($this->getShippingAdjustments() as $adjustment) {
-            $this->removeAdjustment($adjustment);
-        }
 
         return $this;
     }
@@ -338,10 +233,15 @@ class Order extends Cart implements OrderInterface
      */
     public function addPayment(BasePaymentInterface $payment)
     {
+        /** @var $payment PaymentInterface */
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
+
+            $this->setPaymentState($payment->getState());
         }
+
+        return $this;
     }
 
     /**
@@ -349,9 +249,13 @@ class Order extends Cart implements OrderInterface
      */
     public function removePayment(BasePaymentInterface $payment)
     {
+        /** @var $payment PaymentInterface */
         if ($this->hasPayment($payment)) {
             $this->payments->removeElement($payment);
+            $payment->setOrder(null);
         }
+
+        return $this;
     }
 
     /**
@@ -368,7 +272,7 @@ class Order extends Cart implements OrderInterface
     public function getLastPayment($state = BasePaymentInterface::STATE_NEW)
     {
         if ($this->payments->isEmpty()) {
-            return null;
+            return false;
         }
 
         return $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
@@ -401,6 +305,8 @@ class Order extends Cart implements OrderInterface
             $shipment->setOrder($this);
             $this->shipments->add($shipment);
         }
+
+        return $this;
     }
 
     /**
@@ -412,6 +318,8 @@ class Order extends Cart implements OrderInterface
             $shipment->setOrder(null);
             $this->shipments->removeElement($shipment);
         }
+
+        return $this;
     }
 
     /**
@@ -425,17 +333,27 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionCoupon()
+    public function getPromotionCoupons()
     {
-        return $this->promotionCoupon;
+        return $this->promotionCoupons;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPromotionCoupon(CouponInterface $coupon = null)
+    public function addPromotionCoupon($coupon)
     {
-        $this->promotionCoupon = $coupon;
+        if (null === $coupon) {
+            return $this;
+        }
+
+        if (!$coupon instanceof BaseCouponInterface) {
+            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+        }
+
+        if (!$this->hasPromotionCoupon($coupon)) {
+            $this->promotionCoupons->add($coupon);
+        }
 
         return $this;
     }
@@ -443,7 +361,35 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectItemTotal()
+    public function removePromotionCoupon($coupon)
+    {
+        if (null === $coupon) {
+            return $this;
+        }
+
+        if (!$coupon instanceof BaseCouponInterface) {
+            throw new UnexpectedTypeException($coupon, 'Sylius\Component\Promotion\Model\CouponInterface');
+        }
+
+        if ($this->hasPromotionCoupon($coupon)) {
+            $this->promotionCoupons->removeElement($coupon);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotionCoupon($coupon)
+    {
+        return $this->promotionCoupons->contains($coupon);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPromotionSubjectTotal()
     {
         return $this->getItemsTotal();
     }
@@ -451,7 +397,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPromotionSubjectItemCount()
+    public function getPromotionSubjectCount()
     {
         return $this->items->count();
     }
@@ -514,7 +460,7 @@ class Order extends Cart implements OrderInterface
     public function getLastShipment()
     {
         if ($this->shipments->isEmpty()) {
-            return null;
+            return false;
         }
 
         $last = $this->shipments->first();

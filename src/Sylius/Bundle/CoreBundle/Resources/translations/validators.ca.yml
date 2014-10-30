@@ -1,3 +1,40 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Nom del grup no ser ha de ser més llarg de {{ limit }} caràcters.'
+      min: 'Nom del grup ha de ser almenys de {{ limit }} caràcters de longitud.'
+      not_blank: Introdueix un nom de grup.
+  locale:
+    code:
+      not_blank: Introduïu un codi local.
+      unique: Aquest codi local ja existeix.
+  user:
+    first_name:
+      max: 'El Nom no ser ha de ser més llarg de {{ limit }} caràcters.'
+      min: 'El Nom ha de ser almenys de {{ limit }} caràcters.'
+      not_blank: Si us plau, introdueix el teu nom.
+    last_name:
+      max: 'El  no ser ha de ser més llarg de {{ limit }} caràcters.'
+      min: 'El Cognom ha de ser almenysde {{ limit }}  caràcters.'
+      not_blank: Si us plau, introdueix el teu cognom.
+  variant:
+    onHand:
+      min: 'La disponibilitat ha de ser mes gran de {{ limit }}.'
+      not_blank: Si us plau introdueix la disponibilitat.
+    price:
+      min: El Preu no ha de ser negatiu.
+      not_blank: Si us plau introdueix el preu.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: "Introduïu la zona de mètode d'enviament."
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: |
+        Introduïu la zona d'impost.
+        
+        

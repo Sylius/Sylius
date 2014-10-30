@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backordered: Lagerenhet lagt til restordre.
+    sold: Lagerenheten oppfylt.
+    returned: Lagerenhet returnert.

@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backordered: Zaliha jedinica na čekanju.
+    sold: Zaliha jedinica ispunjena.
+    returned: Zaliha jedinica vraćena

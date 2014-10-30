@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  label:
+    product:
+      name: Nume
+      description: Descriere
+      properties: Proprietăți
+      available_on: Disponibil din
+      meta_keywords: Meta cuvinte cheie
+      meta_description: Meta descriere
+    property:
+      name: Denumire internă
+      presentation: Prezentare
+    prototype:
+      name: Nume
+      properties: Proprietăți

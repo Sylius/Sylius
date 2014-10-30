@@ -21,13 +21,14 @@ twig:
     form:
         resources:
             - 'SyliusWebBundle::forms.html.twig'
+            - 'CmfMediaBundle:Form:fields.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle']
+    bundles:        ['SyliusWebBundle', 'CmfCreateBundle']
     filters:
         cssrewrite: ~
 

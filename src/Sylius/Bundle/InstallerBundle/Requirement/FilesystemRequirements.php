@@ -15,7 +15,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class FilesystemRequirements extends RequirementCollection
 {
-    public function __construct(TranslatorInterface $translator, $root)
+    public function __construct(TranslatorInterface $translator, $root, $cacheDir, $logDir)
     {
         parent::__construct($translator->trans('sylius.filesystem', array(), 'requirements'));
 
@@ -33,19 +33,19 @@ class FilesystemRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.filesystem.cache', array(), 'requirements'),
-                $status = is_writable($root.'/cache'),
+                $status = is_writable($cacheDir),
                 $translator->trans('sylius.filesystem.writable', array(), 'requirements'),
                 $status ? $translator->trans('sylius.filesystem.writable', array(), 'requirements') : $translator->trans('sylius.filesystem.not_writable', array(), 'requirements'),
                 true,
-                $translator->trans('sylius.filesystem.cache.help', array('%path%' => $root.'/cache'), 'requirements')
+                $translator->trans('sylius.filesystem.cache.help', array('%path%' => $cacheDir), 'requirements')
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.filesystem.logs', array(), 'requirements'),
-                $status = is_writable($root.'/logs'),
+                $status = is_writable($logDir),
                 $writable,
                 $status ? $writable : $notWritable,
                 true,
-                $translator->trans('sylius.filesystem.logs.help', array('%path%' => $root.'/logs'), 'requirements')
+                $translator->trans('sylius.filesystem.logs.help', array('%path%' => $logDir), 'requirements')
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.filesystem.parameters', array(), 'requirements'),

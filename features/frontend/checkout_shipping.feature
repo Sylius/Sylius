@@ -31,6 +31,7 @@ Feature: Checkout shipping
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
+          And there is default currency configured
           And I am logged in user
           And I added product "PHP Top" to cart
 

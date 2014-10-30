@@ -39,21 +39,21 @@ interface ProcessInterface
      * Get a collection of steps.
      * Keys will be step names.
      *
-     * @return array
+     * @return StepInterface[]
      */
     public function getSteps();
 
     /**
      * Set steps.
      *
-     * @param array $steps
+     * @param StepInterface[] $steps
      */
     public function setSteps(array $steps);
 
     /**
      * Get steps in correct order.
      *
-     * @return array
+     * @return StepInterface[]
      */
     public function getOrderedSteps();
 
@@ -91,28 +91,28 @@ interface ProcessInterface
      *
      * @param string $name
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasStep($name);
 
     /**
      * Count all steps.
      *
-     * @return integer
+     * @return int
      */
     public function countSteps();
 
     /**
      * Get validator.
      *
-     * @return \Closure
+     * @return ProcessValidatorInterface
      */
     public function getValidator();
 
     /**
      * Set validator.
      *
-     * @param \Closure $validator
+     * @param ProcessValidatorInterface $validator
      */
     public function setValidator(ProcessValidatorInterface $validator);
 
@@ -129,6 +129,20 @@ interface ProcessInterface
      * @param string $redirect
      */
     public function setRedirect($redirect);
+
+    /**
+     * Get redirection route params after complete.
+     *
+     * @return array
+     */
+    public function getRedirectParams();
+
+    /**
+     * Set redirection route params after complete.
+     *
+     * @param array $params
+     */
+    public function setRedirectParams(array $params);
 
     /**
      * Get display route.
@@ -187,16 +201,16 @@ interface ProcessInterface
     public function setForwardRouteParams(array $params);
 
     /**
-     * Get step by index/order
+     * Get step by index/order.
      *
-     * @param string $index
+     * @param int $index
      *
      * @return StepInterface
      */
     public function getStepByIndex($index);
 
     /**
-     * Get step by name
+     * Get step by name.
      *
      * @param string $index
      *

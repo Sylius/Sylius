@@ -78,8 +78,7 @@ class ProductVariantSpec extends ObjectBehavior
     function it_returns_the_product_shipping_category(
         ProductInterface $product,
         ShippingCategoryInterface $shippingCategory
-    )
-    {
+    ) {
         $this->setProduct($product);
 
         $product->getShippingCategory()->willReturn($shippingCategory)->shouldBeCalled();

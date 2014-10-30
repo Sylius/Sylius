@@ -40,7 +40,7 @@ class PurchaseStep extends CheckoutStep
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
             $payment,
-            'sylius_checkout_forward',
+            $context->getProcess()->getForwardRoute(),
             array('stepName' => $this->getName())
         );
 
@@ -71,7 +71,7 @@ class PurchaseStep extends CheckoutStep
 
         $nextState = $status->getStatus();
 
-        $stateMachine = $this->get('finite.factory')->get($payment, PaymentTransitions::GRAPH);
+        $stateMachine = $this->get('sm.factory')->get($payment, PaymentTransitions::GRAPH);
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
             $stateMachine->apply($transition);

@@ -5,7 +5,8 @@ Feature: Shipping methods
     I want to be able to configure shipping methods
 
     Background:
-        Given I am logged in as administrator
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |

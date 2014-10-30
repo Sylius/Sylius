@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -53,10 +53,6 @@ class OrderShipmentCallback
             }
         }
 
-        $stateMachine = $this->factory->get($order, OrderTransitions::GRAPH);
-
-        if ($stateMachine->can(OrderTransitions::SYLIUS_SHIP)) {
-            $stateMachine->apply(OrderTransitions::SYLIUS_SHIP);
-        }
+        $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_SHIP, true);
     }
 }

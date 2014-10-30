@@ -1,6 +1,9 @@
 email:
     order_confirmation:
-        subject: email.order_confirmation.subject
+        subject: Your order was confirmed
+    order_comment:
+        subject: Your order was commented by shop stuff
+        header: Order Comment
 sylius:
     account:
         address:
@@ -77,7 +80,7 @@ sylius:
             products: Your products
             users: Users
         statistics:
-            0: This month's statistics
+            header: This month's statistics
             orders_this_month: Total orders
             registrations_this_month: Total registrations
             sales_this_month: Sales
@@ -92,19 +95,50 @@ sylius:
         title: Title
         update_header: Editing content block
         updated_at: Last update
+        simple_blocks: Simple blocks
+        string_blocks: String blocks
+        imagine_blocks: Imagine blocks
+        slideshow_blocks: Slideshow blocks
+        imagine:
+            create: Create imagine block
+            create_header: Creating a new imagine block
+            id: Id
+            index: Imagine Blocks
+            index_header: Imagine blocks
+            label: Label
+            update_header: Editing imagine block
+        slideshow:
+            create: Create slideshow block
+            create_header: Creating a new slideshow block
+            id: Id
+            index: Slideshow Blocks
+            index_header: Slideshow blocks
+            title: Title
+            update_header: Editing slideshow block
     breadcrumb:
         assortment: Assortment
         block:
             index: Content Blocks
+            imagine:
+                index: Imagine Blocks
+            slideshow:
+                index: Slideshow Blocks
         build: Build
         configuration: Configuration
+        content: Content
         country:
             index: Countries
         customers: Customers
         dashboard: Dashboard
         edit: Edit
-        exchange_rate:
-            index: Exchange Rates
+        contact_request:
+            index: Contact requests
+            show: Contact request
+        contact_topic:
+            index: Contact topics
+        content: Content
+        currency:
+            index: Currencies
         general_settings: General Settings
         generate: Generate
         group:
@@ -113,11 +147,16 @@ sylius:
             index: Inventory
         locale:
             index: Locales
+        menu:
+            index: Menus
+        menu_node:
+            index: Menu nodes
         new: New
         option:
             index: Options
         order:
             index: Orders
+            adjustments: Adjustments
         page:
             index: Static Pages
         payment:
@@ -134,6 +173,10 @@ sylius:
             index: Attributes
         prototype:
             index: Prototypes
+        redirect_route:
+            index: Redirect routes
+        route:
+            index: Routes
         sales: Sales
         shipment:
             index: Shipments
@@ -158,7 +201,7 @@ sylius:
     cart:
         empty: Your cart is empty
         summary:
-            add_coupon: OK
+            add_coupon: Add coupon
             checkout: Checkout
             clear: Clear cart
             grand_total: Grand total
@@ -216,6 +259,8 @@ sylius:
             login: Login
             new_customer: New Customer
             register: Register
+            guest: Guest
+            proceed_order: Proceed with your order
         shipping:
             error: We're sorry, but our shop is not able to provide product shipping to country which you have chosen.
             header: Shipping method
@@ -242,16 +287,18 @@ sylius:
     move_up: move up
     move_down: move down
     email: E-Mail
-    exchange_rate:
-        create: Create exchange rate
-        create_header: New exchange rate
-        currency: currency
+    currency:
+        create: Create currency
+        create_header: New currency
+        code: Code
         id: ID
-        index_header: Exchange rates
-        no_results: There are no exchange rates to display.
-        rate: rate
-        update_header: Editing exchange rate
-        updated_at: last update
+        name: Name
+        enabled: Enabled
+        index_header: Currencies
+        no_results: There are no currencies to display.
+        exchange_rate: Exchange rate
+        update_header: Editing currency
+        updated_at: Last update
     filter: Filter
     form:
         cart:
@@ -268,12 +315,19 @@ sylius:
         login:
             email: Email
             password: Password
+        menu:
+            add_menu_node: Add menu element
         option_value:
             add_value: Add value
         profile:
             email: Email
             firstName: First name
             lastName: Last name
+        comment:
+            comment: Comment
+            notify_customer: Notify Customer?
+        slideshow:
+            add_slide: Add slide
     gallery:
         next: Next
         previous: Previous
@@ -290,12 +344,14 @@ sylius:
         update_header: Edit group
     hide_deleted: Hide deleted
     history:
-        0: History
+        header: History
         action: Action
         author: Author
         data: Data
-        logged_at: Logged at
-        version: Version
+        logged_at: Logged at (version)
+        revert: Revert
+        no_results: There are no logged events to display.
+        empty: Empty
     homepage:
         splash:
             headline: Welcome to Sylius
@@ -321,6 +377,23 @@ sylius:
     login_header: Administration
     logo: Sylius
     manage: Manage
+    menu:
+        create: Create menu
+        create_header: Creating menu
+        id: ID
+        index_header: Menus
+        no_results: There are no menus to display.
+        title: Title
+        update_header: Editing menu
+    menu_node:
+        create: Create menu node
+        create_header: Creating menu node
+        id: ID
+        index_header: Menu nodes
+        no_results: There are no menu nodes to display.
+        parent: Parent
+        title: Title
+        update_header: Editing menu node
     meta:
         backend_title: Sylius Dashboard
         frontend_description: Sylius is modern ecommerce solution for PHP, based on the Symfony2 framework.
@@ -329,7 +402,7 @@ sylius:
     na: N/A
     newest: Newest products
     no: no
-    no_results: sylius.no_results
+    no_results: No results
     product_option:
         create: Create option
         create_header: New product option
@@ -346,11 +419,14 @@ sylius:
         create: Create order
         create_header: New order
         created_at: Creation time
+        details: Order details
         general_info: General info
+        guest: Guest customer
         id: ID
         index_header: Current orders
         inventory_tracking: Inventory tracking
         items_total: Items total
+        items: Items
         manage: Manage orders
         no_items: This order does not contain any items
         no_results: You have no new orders
@@ -358,6 +434,7 @@ sylius:
         no_shipping_charges: No shipping charges applied
         no_taxes: No taxes applied
         number: Number
+        order_state: Order state
         payment: Payment
         payment_state: Payment state
         payment_states:
@@ -376,17 +453,67 @@ sylius:
         shipping_address: Shipping address
         shipping_charges: Shipping charges
         shipping_total: Shipping total
-        show_header: Order #%number%
+        show_header: "Order #%number%"
         state:
             cart_locked: Cart locked
             checkout: Checkout
             order_confimed: Order confirmed
             ordered: Ordered
+            shipped: Shipped
+            abandoned: Abandoned
+            cancelled: Cancelled
+            returned: Returned
         tax_total: Tax total
         taxes: Taxes
         total: Total
         update_header: Editing order
         user: User
+        currency: Currency
+        state: State
+        immutable_warning: Already shipped orders are immutable.
+        promotion_coupons: Coupons
+        no_promotion: No coupons were used.order:
+        adjustments:
+            manage: Manage adjustments
+            label: Label
+            description: Description
+            amount: Amount
+            locked: Locked?
+            lock: Lock
+            unlock: Unlock
+            lock_all: Lock all adjustments
+            unlock_all: Unlock all adjustments
+        comment:
+            header: Order comments
+            comment: Comment
+            author: Author
+            created_at: Created at
+            notify: Notification
+            state: State
+            customer:
+                notified: Customer notified
+                not_notified: Customer not notified
+            no_comment: No comment
+    route:
+        create: Create route
+        create_header: Creating route
+        id: ID
+        index_header: Routes
+        name: Name
+        no_results: There are no routes to display.
+        page: Page
+        title: Title
+        update_header: Editing route
+        view: View
+    redirect_route:
+        create: Create redirect route
+        create_header: Creating redirect route
+        id: ID
+        index_header: Redirect route
+        no_results: There are no redirect routes to display.
+        title: Title
+        update_header: Editing redirect route
+        updated_at: Updated at
     shipment:
         ship: Ship
         created_at: Created at
@@ -436,12 +563,14 @@ sylius:
         no_results: There are no payments configured.
         state:
             0: State
+            cancelled: Cancelled
             checkout: Checkout
             completed: Completed
             failed: Failed
             new: New
             pending: Pending
             processing: Processing
+            refunded: Refunded
             unknown: Unknown
             void: Void
         update_header: Editing payment
@@ -482,6 +611,7 @@ sylius:
         no_tax_category: No tax category
         no_taxons: There are no taxons for this product
         options: Options
+        variants: Variants
         price: Retail price
         attributes: Attributes
         restricted_zone: Restricted zone
@@ -568,7 +698,7 @@ sylius:
         name: name
         no_results: There are no prototypes defined.
         options: options
-        attributes: 
+        attributes:
         update_header: Editing prototype
         updated_at: last update
     province:
@@ -726,5 +856,29 @@ sylius:
         show_header: Zone details
         type: Type
         update_header: Editing zone
+        scope: Scope
     zone_member:
         members: Members
+    contact_topic:
+        create: Create contact topic
+        create_header: New contact topic
+        id: ID
+        title: Title
+        index_header: Contact topics
+        no_results: There are no contact topics to display.
+        update_header: Editing contact topic
+        updated_at: Last update
+    contact_request:
+        create: Create contact request
+        create_header: New contact request
+        id: ID
+        firstName: First name
+        lastName: Last name
+        email: Email
+        message: Message
+        topic: Topic
+        index_header: Contact requests
+        no_results: There are no contact requests to display.
+        update_header: Editing contact request
+        updated_at: Last update
+        show_header: Contact request details

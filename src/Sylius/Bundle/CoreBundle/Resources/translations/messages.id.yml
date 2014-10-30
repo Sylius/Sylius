@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Silahkan Pilih metode pengiriman.
+  form:
+    action:
+      add_product_configuration:
+        price: Harga Satuan
+        quantity: Kuantitas
+        variant: Varian
+    block:
+      body: Body
+      id: ID
+      title: Judul
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: Menggunakan alamat berbeda untuk penagihan?
+      payment_method: Metode pembayaran
+      shipping_method: Metode pengiriman
+    group:
+      name: Nama
+      roles: Peran
+    image:
+      file: Gambar
+    locale:
+      code: Kode
+      enabled: Diaktifkan
+    order_filter:
+      created_at_from: Dari
+      created_at_to: Untuk
+      number: Nomor
+      total_from: Dari
+      total_to: Untuk
+    page:
+      body: Body
+      id: ID
+      title: Judul
+    product:
+      restricted_zone: Zona Terbatas
+      shipping_category: Kategori Pengiriman
+      short_description: Deskripsi singkat
+      tax_category: Kategori Pajak
+      variant_selection_method: Metode Pilih Varian
+    product_filter:
+      name: Nama
+      sku: SKU
+    settings:
+      general:
+        currency: Mata uang default
+        locale: Bahasa
+        meta_description: Meta Deskripsi
+        meta_keywords: Meta Kata Kunci
+        title: Judul Halaman
+      taxation:
+        default_tax_zone: Standar Zona Pajak
+    shipment_filter:
+      created_at_from: Dari
+      created_at_to: Untuk
+      number: Nomor Order
+      shipping_address: Kirim ke Nama
+    shipping_method:
+      zone: Zona
+    taxon:
+      file: Pilih Gambar
+    taxonomy:
+      file: Pilih Gambar
+    user:
+      billing_address: Alamat Penagihan
+      different_billing_address: Menggunakan alamat berbeda untuk penagihan?
+      enabled: Diaktifkan
+      first_name: Nama Depan
+      groups: Kelompok
+      last_name: Nama belakang
+      password: Kata sandi
+      shipping_address: Alamat pengiriman
+    user_filter:
+      query: Cari
+    variant:
+      available_on_demand: Tersedia
+      depth: Tebal
+      height: Tinggi
+      images: Gambar
+      on_hand: Stok
+      price: Harga
+      sku: SKU
+      weight: Berat
+      width: Lebar

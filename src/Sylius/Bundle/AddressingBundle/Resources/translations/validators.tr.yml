@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Şehir adı 255 karakterden daha uzun olmamalıdır.
+      min_length: Şehir adı, en az 2 karakter uzunluğunda olmalıdır.
+      not_blank: Şehir yazınız.
+    country:
+      not_blank: Lütfen ülkeyi seçiniz.
+    first_name:
+      max_length: İsim 255 karakterden uzun olmamalıdır.
+      min_length: İsim en az 2 karakter uzunluğunda olmalıdır.
+      not_blank: Lütfen adınızı girin.
+    last_name:
+      max_length: Soyadı 255 karakterden uzun olmamalıdır.
+      min_length: Soyadı en az 2 karakter uzunluğunda olmalıdır.
+      not_blank: Lütfen soyadı girin.
+    postcode:
+      max_length: Posta kodu 255 karakterden daha uzun olmamalıdır.
+      min_length: Posta kodu, en az 2 karakter uzunluğunda olmalıdır.
+      not_blank: Lütfen posta kodu yazınız.
+    province:
+      valid: Lütfen Yaşadığınız şehri seçiniz.
+    street:
+      max_length: Sokak adı 255 karakterden uzun olmamalıdır | Sokak adı 255 karakterden uzun olmamalıdır.
+      min_length: Sokak adı en az 2 karakter uzunluğunda olmalıdır | Sokak adı en az 2 karakter uzunluğunda olmalıdır.
+      not_blank: Lütfen sokak adı yazınız.
+    not_shippable: Bu adres uygun bir kargo varış adresi değildir.
+  country:
+    iso_name:
+      not_blank: Lütfen ülke kodunuzu yazınız.
+    name:
+      max_length: Ülke adı 255 karakterden uzun olmamalıdır | Ülke adı 255 karakterden uzun olmamalıdır.
+      not_blank: Lütfen ülke adını yazınız.
+  province:
+    name:
+      max_length: Şehir adı 255 karakterden uzun olmamalıdır | Şehir adı 255 karakterden uzun olmamalıdır.
+      min_length: Şehir adı en az 2 karakter uzunluğunda olmalıdır | Şehir adı en az 2 karakter uzunluğunda olmalıdır.
+      not_blank: Lütfen şehir adını yazınız.
+  zone:
+    members:
+      min_count: 'Lütfen en az {{ limit }} bölge üyesi ekleyiniz.'
+    name:
+      max_length: Bölge adı 255 karakterden uzun olmamalıdır | Bölge adı 255 karakterden uzun olmamalıdır.
+      not_blank: Lütfen bölge adını yazınız.

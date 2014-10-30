@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -32,6 +33,7 @@ class Configuration implements ConfigurationInterface
         $this->addClassesSection($rootNode);
         $this->addEmailsSection($rootNode);
         $this->addRoutingSection($rootNode);
+        $this->addCheckoutSection($rootNode);
 
         return $treeBuilder;
     }
@@ -42,8 +44,8 @@ class Configuration implements ConfigurationInterface
 
         $emailNode
             ->addDefaultsIfNotSet()
+            ->canBeEnabled()
             ->children()
-                ->booleanNode('enabled')->defaultFalse()->end()
                 ->arrayNode('from_email')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -55,6 +57,7 @@ class Configuration implements ConfigurationInterface
         ->end();
 
         $this->addEmailConfiguration($emailNode, 'order_confirmation', 'SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig');
+        $this->addEmailConfiguration($emailNode, 'order_comment', 'SyliusWebBundle:Frontend/Email:orderComment.html.twig');
         $this->addEmailConfiguration($emailNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
 
         return $emailNode;
@@ -74,8 +77,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode($name)
                 ->addDefaultsIfNotSet()
                 ->canBeUnset()
+                ->canBeEnabled()
                 ->children()
-                    ->booleanNode('enabled')->defaultTrue()->end()
                     ->scalarNode('template')->defaultValue($template)->end()
                     ->arrayNode('from_email')
                     ->canBeUnset()
@@ -123,30 +126,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\GroupType')->end()
                             ->end()
                         ->end()
-                        ->arrayNode('locale')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\Locale')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\LocaleType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('block')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\BlockType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('page')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\PageType')->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('product_variant_image')
                             ->addDefaultsIfNotSet()
                             ->children()
@@ -185,5 +164,56 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+    }
+
+    /**
+     * Adds `checkout` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addCheckoutSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('checkout')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('steps')
+                            ->addDefaultsIfNotSet()
+                            ->info('Templates used for steps in the checkout flow process')
+                            ->children()
+                                ->append($this->addCheckoutStepNode('security', 'SyliusWebBundle:Frontend/Checkout/Step:security.html.twig'))
+                                ->append($this->addCheckoutStepNode('addressing', 'SyliusWebBundle:Frontend/Checkout/Step:addressing.html.twig'))
+                                ->append($this->addCheckoutStepNode('shipping', 'SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig'))
+                                ->append($this->addCheckoutStepNode('payment', 'SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig'))
+                                ->append($this->addCheckoutStepNode('finalize', 'SyliusWebBundle:Frontend/Checkout/Step:finalize.html.twig'))
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Helper method to append checkout step nodes.
+     *
+     * @param $name
+     * @param $defaultTemplate
+     * @return NodeDefinition
+     */
+    private function addCheckoutStepNode($name, $defaultTemplate)
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root($name);
+
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('template')->defaultValue($defaultTemplate)->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }

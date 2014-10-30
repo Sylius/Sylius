@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_partial_product_latest:
-    pattern: /latest
+    path: /latest
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:

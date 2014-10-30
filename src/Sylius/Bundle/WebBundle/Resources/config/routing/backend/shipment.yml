@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_shipment_index:
-    pattern: /
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.shipment:indexAction
@@ -16,7 +16,7 @@ sylius_backend_shipment_index:
                 updatedAt: desc
 
 sylius_backend_shipment_update:
-    pattern: /{id}/edit
+    path: /{id}/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.shipment:updateAction
@@ -25,7 +25,7 @@ sylius_backend_shipment_update:
             redirect: sylius_backend_shipment_show
 
 sylius_backend_shipment_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.shipment:deleteAction
@@ -34,7 +34,7 @@ sylius_backend_shipment_delete:
             redirect: sylius_backend_shipment_index
 
 sylius_backend_shipment_show:
-    pattern: /{id}
+    path: /{id}
     methods: [GET]
     defaults:
         _controller: sylius.controller.shipment:showAction
@@ -42,7 +42,7 @@ sylius_backend_shipment_show:
             template: SyliusWebBundle:Backend/Shipment:show.html.twig
 
 sylius_backend_shipment_ship:
-    pattern: /ship/{id}
+    path: /ship/{id}
     methods: [PUT]
     defaults:
         _controller: sylius.controller.shipment:shipAction

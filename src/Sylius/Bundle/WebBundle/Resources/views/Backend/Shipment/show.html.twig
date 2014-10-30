@@ -1,6 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% set order = shipment.order %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
@@ -50,7 +51,7 @@
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.order.shipping_total'|trans }}</strong></td>
-                    <td>{{ order.shippingTotal|sylius_price(order.currency) }}</td>
+                    <td>{{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}</td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.shipment.state'|trans }}</strong></td>
@@ -67,12 +68,19 @@
                 <tr>
                     <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
                     <td>
-                        {{ order.user.fullName }}<br>
-                        <strong>
-                            <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                                {{ order.user.username }}
-                            </a>
-                        </strong>
+                        {% if order.user %}
+                            {{ order.user.fullName }}<br>
+                            <strong>
+                                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                                    {{ order.user.username }}
+                                </a>
+                            </strong>
+                        {% else %}
+                            {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
+                            <strong>
+                                <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
+                            </strong>
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>
@@ -86,7 +94,7 @@
         <h4>{{ 'sylius.order.shipping_address'|trans }}</h4>
         {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': shipment.order.shippingAddress } %}
     </div>
-    {% if finite_can(shipment, constant('Sylius\\Component\\Shipping\\ShipmentTransitions::SYLIUS_SHIP'), constant('Sylius\\Component\\Shipping\\ShipmentTransitions::GRAPH')) %}
+    {% if sm_can(shipment, constant('Sylius\\Component\\Shipping\\ShipmentTransitions::SYLIUS_SHIP'), constant('Sylius\\Component\\Shipping\\ShipmentTransitions::GRAPH')) %}
         <div class="col-md-6">
             <form action="{{ path('sylius_backend_shipment_ship', {'id': shipment.id}) }}" method="post">
                 {% if shipment_tracking_form is defined %}

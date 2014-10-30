@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -22,22 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class AddressType extends AbstractType
+class AddressType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var string
-     */
-    protected $validationGroups;
-
     /**
      * @var EventSubscriberInterface
      */
@@ -47,13 +33,13 @@ class AddressType extends AbstractType
      * Constructor.
      *
      * @param string                   $dataClass
-     * @param array                    $validationGroups
+     * @param string[]                 $validationGroups
      * @param EventSubscriberInterface $eventListener
      */
     public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventListener)
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
         $this->eventListener = $eventListener;
     }
 
@@ -69,6 +55,10 @@ class AddressType extends AbstractType
             ))
             ->add('lastName', 'text', array(
                 'label' => 'sylius.form.address.last_name'
+            ))
+            ->add('phoneNumber', 'text', array(
+                'required' => false,
+                'label'    => 'sylius.form.address.phone_number'
             ))
             ->add('company', 'text', array(
                 'required' => false,
@@ -95,11 +85,12 @@ class AddressType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $validationGroups = $this->validationGroups;
 
         $resolver
             ->setDefaults(array(
-                'data_class'        => $this->dataClass,
                 'validation_groups' => function (Options $options) use ($validationGroups) {
                     if ($options['shippable']) {
                         $validationGroups[] = 'shippable';

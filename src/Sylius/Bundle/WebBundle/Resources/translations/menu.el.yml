@@ -1,3 +1,56 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        configuration: Ρυθμίσεις παραμέτρων
+        countries: Χώρες
+        customer: Πελάτες
+        general_settings: Γενικές ρυθμίσεις
+        new_order: Προσθήκη νέας παραγγελίας
+        orders: Τρέχουσες παραγγελίες
+        payment_methods: Τρόποι πληρωμής
+        payments: Πληρωμές
+        products: Προϊόντα
+        promotions: Προσφορές
+        sales: Παραγγελίες
+        shipments: Αποστολές
+        tax_rates: Φορολογικοί συντελεστές
+        taxonomies: Κατηγοριοποίηση
+        users: Χρήστες
+        zones: Ζώνες
+      sidebar:
+        assortment: Κατάταξη
+        blocks: Μπλοκ
+        configuration: Ρύθμιση παραμέτρων
+        content: Περιεχόμενο
+        countries: Χώρες
+        customer: Πελάτες
+        exchange_rates: Συναλλαγματικές ισοτιμίες
+        general_settings: Γενικές ρυθμίσεις
+        groups: Ομάδες
+        locales: Τοπικές ρυθμίσεις
+        new_order: Προσθήκη νέας παραγγελίας
+        options: Διαχείριση επιλογών
+        orders: Τρέχουσες παραγγελίες
+        pages: Σελίδες
+        payment_methods: Τρόποι πληρωμής
+        payments: Πληρωμές
+        products: Προϊόντα
+        promotions: Προσφορές
+        sales: Παραγγελίες
+        shipments: Αποστολές
+        stockables: Επίπεδα αποθέματος
+        tax_rates: Φορολογικοί συντελεστές
+        taxonomies: Κατηγοριοποίηση
+        users: Χρήστες
+        zones: Ζώνες
+  frontend:
+    menu:
+      account:
+        homepage: Αρχική
+        orders: Οι παραγγελίες μου / τα τιμολόγια μου
+        password: Ο κωδικός μου
+        profile: Τα προσωπικά μου στοιχεία

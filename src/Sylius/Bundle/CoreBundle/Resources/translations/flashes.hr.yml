@@ -6,7 +6,9 @@ sylius:
     restricted_zone_removal: 'Proizvod %product% je uklonjen iz košarice jer nije dostupan u vašoj državi.'
   checkout:
     restricted_zone: Ovaj proizvod nije dostupan u vašoj državi.
+    success: Hvala na vašoj narudžbi!
     canceled: Vaša uplata je otkazana.
     pending: Vaša uplata je trenutno na čekanju.
     failed: Vaša uplata je odbijena.
     unknown: Dogodila se pogreška prilikom plaćanja.
+    out_of_stock: 'Na skladištu je ostalo još samo %quantity% komada %name%.'

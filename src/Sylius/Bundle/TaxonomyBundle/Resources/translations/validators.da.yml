@@ -1,3 +1,12 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  taxon:
+    name:
+      max_length: Navnet på den taksionomiske gruppe må ikke være længere end 255 tegn.
+      not_blank: Angiv navnet for den taksionomiske gruppe.
+  taxonomy:
+    name:
+      max_length: Taksonominavn må ikke være længere end 255 tegn.
+      not_blank: Angiv taksonominavn.

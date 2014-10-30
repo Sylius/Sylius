@@ -1,3 +1,93 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+---: ---
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Válasszon szállítási formát.
+  form:
+    action:
+      add_product_configuration:
+        price: Egységár
+        quantity: Mennyiség
+        variant: Változat
+    block:
+      body: Törzs
+      id: Azonosító
+      title: Cím
+    cart:
+      coupon: Kupon
+    checkout:
+      addressing:
+        different_billing_address: A számlázási címe különbözik a megadott címtől?
+      payment_method: Fizetési mód
+      shipping_method: Szállítási mód
+    group:
+      name: Név
+      roles: Szerepek
+    image:
+      file: Kép
+    locale:
+      code: Kód
+      enabled: Engedélyezve
+    order_filter:
+      created_at_from: -tól
+      created_at_to: -ig
+      number: Szám
+      total_from: -tól
+      total_to: -ig
+    page:
+      body: Törzs
+      id: Azonosító
+      title: Cím
+    product:
+      restricted_zone: Tiltott zóna
+      shipping_category: Szállítási kategória
+      short_description: Rövid leírás
+      tax_category: ÁFA-kategória
+      variant_selection_method: Változat kiválasztási módszer
+    product_filter:
+      name: Név
+      sku: SKU
+    settings:
+      general:
+        currency: Alapértelmezett pénznem
+        locale: Nyelv
+        meta_description: Meta leírás
+        meta_keywords: Meta kulcsszavak
+        title: Oldal címe
+      taxation:
+        default_tax_zone: Alapértelmezett adósáv
+    shipment_filter:
+      created_at_from: -tól
+      created_at_to: -ig
+      number: Rendelés azonosítója
+      shipping_address: Szállítás erre a névre
+    shipping_method:
+      zone: Zóna
+    taxon:
+      file: Kép kiválasztása
+    taxonomy:
+      file: Kép kiválasztása
+    user:
+      billing_address: Számlázási cím
+      different_billing_address: A számlázási címe különbözik a megadott címtől?
+      enabled: Engedélyezve
+      first_name: Keresztnév
+      groups: Csoportok
+      last_name: Vezetéknév
+      password: Jelszó
+      shipping_address: Szállítási cím
+    user_filter:
+      query: Keresés
+    variant:
+      available_on_demand: Igény szerint rendelkezésre áll
+      depth: Mélység
+      height: Magasság
+      images: Képek
+      on_hand: Aktuális készlet
+      price: Ár
+      sku: SKU
+      weight: Súly
+      width: Szélesség

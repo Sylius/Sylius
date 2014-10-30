@@ -29,11 +29,14 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     private $bundles = array(
         'sylius_addressing',
         'sylius_inventory',
-        'sylius_money',
+        'sylius_currency',
+        'sylius_contact',
+        'sylius_locale',
         'sylius_payment',
         'sylius_payum',
         'sylius_product',
         'sylius_promotion',
+        'sylius_api',
         'sylius_order',
         'sylius_settings',
         'sylius_shipping',
@@ -46,11 +49,13 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
     protected $configFiles = array(
         'services',
+        'form',
         'templating',
         'twig',
     );
 
     private $emails = array(
+        'order_comment',
         'order_confirmation',
         'customer_welcome'
     );
@@ -60,12 +65,18 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+        list($config, $loader) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
 
         $loader->load('mailer/mailer.xml');
-        $loader->load('state-machine.xml');
+        $loader->load('state_machine.xml');
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
+        $this->loadCheckoutConfiguration($config['checkout'], $container);
     }
 
     /**
@@ -115,6 +126,17 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             if ($config['enabled'] && $config[$emailType]['enabled']) {
                 $loader->load('mailer/'.$emailType.'_listener.xml');
             }
+        }
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function loadCheckoutConfiguration(array $config, ContainerBuilder $container)
+    {
+        foreach ($config['steps'] as $name => $step) {
+            $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
         }
     }
 }

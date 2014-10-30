@@ -3,7 +3,7 @@
 
 sylius:
   promotion_coupon:
-    generate: les coupons de promotion ont été générés avec succès.
+    generate: Les coupons de promotion ont été générés avec succès.
     eligible: Votre coupon de promotion a été ajouté au panier.
     invalid: "Votre coupon de promotion n'est pas valide."
     not_eligible: "Votre panier n'est pas éligible à ce coupon de promotion."

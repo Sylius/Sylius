@@ -40,8 +40,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_user_is_created_after_configured(
         OrderInterface $subject,
         TimestampableInterface $user
-    )
-    {
+    ) {
         $subject->getUser()->willReturn($user);
         $user->getCreatedAt()->willReturn(new \DateTime());
 
@@ -51,8 +50,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_eligible_if_user_is_created_before_configured(
         OrderInterface $subject,
         TimestampableInterface $user
-    )
-    {
+    ) {
         $subject->getUser()->willReturn($user);
         $user->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
@@ -62,8 +60,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_eligible_if_user_is_created_after_configured(
         OrderInterface $subject,
         TimestampableInterface $user
-    )
-    {
+    ) {
         $subject->getUser()->shouldBeCalled()->willReturn($user);
         $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
 
@@ -73,8 +70,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_user_is_created_before_configured(
         OrderInterface $subject,
         TimestampableInterface $user
-    )
-    {
+    ) {
         $subject->getUser()->willReturn($user);
         $user->getCreatedAt()->willReturn(new \DateTime());
 

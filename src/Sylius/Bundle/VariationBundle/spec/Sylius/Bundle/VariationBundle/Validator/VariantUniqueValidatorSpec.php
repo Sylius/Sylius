@@ -11,10 +11,10 @@
 
 namespace spec\Sylius\Bundle\VariationBundle\Validator;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantUnique;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
@@ -24,10 +24,9 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 class VariantUniqueValidatorSpec extends ObjectBehavior
 {
     function let(
-        ObjectRepository $variantRepository,
+        RepositoryInterface $variantRepository,
         ExecutionContextInterface $context
-    )
-    {
+    ) {
         $this->beConstructedWith($variantRepository);
         $this->initialize($context);
     }
@@ -47,15 +46,14 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         VariantInterface $variant,
         VariantInterface $conflictualVariant,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
             'message'  => 'Variant with given presentation already exists'
         ));
 
         $variant->getPresentation()->willReturn('IPHONE5WHITE');
-        $variantRepository->findOneBy(array('presentation' => 'IPHONE5WHITE'))->shouldBeCalled()->willReturn($conflictualVariant);
+        $variantRepository->findOneBy(array('presentation' => 'IPHONE5WHITE'))->willReturn($conflictualVariant);
 
         $context->addViolationAt('presentation', 'Variant with given presentation already exists', Argument::any())->shouldBeCalled();
 
@@ -66,15 +64,14 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $variantRepository,
         VariantInterface $variant,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
             'message'  => 'Variant with given presentation already exists'
         ));
 
         $variant->getPresentation()->willReturn('111AAA');
-        $variantRepository->findOneBy(array('presentation' => '111AAA'))->shouldBeCalled()->willReturn(null);
+        $variantRepository->findOneBy(array('presentation' => '111AAA'))->willReturn(null);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 
@@ -85,15 +82,14 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $variantRepository,
         VariantInterface $variant,
         $context
-    )
-    {
+    ) {
         $constraint = new VariantUnique(array(
             'property' => 'presentation',
             'message'  => 'Variant with given presentation already exists'
         ));
 
         $variant->getPresentation()->willReturn('111AAA');
-        $variantRepository->findOneBy(array('presentation' => '111AAA'))->shouldBeCalled()->willReturn($variant);
+        $variantRepository->findOneBy(array('presentation' => '111AAA'))->willReturn($variant);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 

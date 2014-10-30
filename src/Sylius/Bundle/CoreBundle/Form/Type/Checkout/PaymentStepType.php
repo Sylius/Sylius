@@ -11,9 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -21,15 +20,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentStepType extends AbstractType
+class PaymentStepType extends AbstractResourceType
 {
-    protected $dataClass;
-
-    public function __construct($dataClass)
-    {
-        $this->dataClass = $dataClass;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -46,18 +38,6 @@ class PaymentStepType extends AbstractType
                 'constraints'   => array(
                     $notBlank
                 )
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class' => $this->dataClass
             ))
         ;
     }

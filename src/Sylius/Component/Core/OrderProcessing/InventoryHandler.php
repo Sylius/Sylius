@@ -12,13 +12,13 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\Collection;
-use Finite\Factory\FactoryInterface;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface;
-use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Sylius\Component\Inventory\InventoryUnitTransitions;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 
 /**
  * Order inventory handler.

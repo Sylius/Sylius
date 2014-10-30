@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Taxation\Resolver;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 
 /**
@@ -24,16 +24,16 @@ class TaxRateResolver implements TaxRateResolverInterface
     /**
      * Tax rate repository.
      *
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
     protected $taxRateRepository;
 
     /**
      * Tax rate repository.
      *
-     * @var ObjectRepository $taxRateRepository
+     * @var RepositoryInterface $taxRateRepository
      */
-    public function __construct(ObjectRepository $taxRateRepository)
+    public function __construct(RepositoryInterface $taxRateRepository)
     {
         $this->taxRateRepository = $taxRateRepository;
     }

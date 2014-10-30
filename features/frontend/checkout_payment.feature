@@ -5,7 +5,8 @@ Feature: Checkout Payment
     I want to be able to use checkout payment step
 
     Background:
-        Given there are following taxonomies defined:
+        Given there is default currency configured
+        And there are following taxonomies defined:
             | name     |
             | Category |
           And taxonomy "Category" has following taxons:

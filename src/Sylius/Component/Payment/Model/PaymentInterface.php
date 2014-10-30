@@ -112,11 +112,11 @@ interface PaymentInterface extends TimestampableInterface
     public function setAmount($amount);
 
     /**
-     * @param array $details
+     * @param array|\Traversable $details
      *
      * @return PaymentInterface
      */
-    public function setDetails(array $details);
+    public function setDetails($details);
 
     /**
      * @return array

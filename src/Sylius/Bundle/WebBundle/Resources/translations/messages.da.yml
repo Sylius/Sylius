@@ -1,10 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: Ordrebekræftelse
 sylius:
   account:
     address:
       action:
+        billing: Indstil som standard faktureringsadresse
         create: Opret en ny adresse
         delete: Slet
         edit: Rediger
@@ -29,6 +33,7 @@ sylius:
       empty: Du har endnu ikke placeret nogle ordrer.
       invoice: Faktura
       list: Alle dine ordrer
+      placed_at: 'Placeret på %at%'
       shipment:
         pending: Afventende
         ready: 'Klar siden %at%'
@@ -61,8 +66,74 @@ sylius:
       header: Administration dashboard
       orders: Sidste uges ordrer
       revenue: Sidste uges indtægter
+      subheader: Oversigt over din butik
+    logout: Log af
+    quick_links:
+      add_product: Nyt produkt
+      orders: Seneste ordrer
+      products: Dine produkter
+      users: Brugere
+    statistics:
+      0: Statistik for denne måned
+      orders_this_month: Totale ordrer
+      registrations_this_month: Totale registreringer
+      sales_this_month: Salg
+  backend_welcome: 'Hej <b>%name%</b>!'
+  block:
+    body: Krop
+    create: Opret blok
+    create_header: Opretter ny indholdsblok
+    id: ID
+    index_header: Indhold bloks
+    no_results: Der er ingen blokke at vise.
+    title: Titel
+    update_header: Redigerer indholdsblok
+    updated_at: Seneste opdatering
   breadcrumb:
+    assortment: Sortiment
+    block:
+      index: Indholdsblokke
+    configuration: Konfiguration
+    country:
+      index: Lande
+    customers: Kunder
     edit: Rediger
+    exchange_rate:
+      index: Valutakurser
+    general_settings: Generelle indstillinger
+    generate: Generer
+    group:
+      index: Grupper
+    inventory:
+      index: Lager
+    locale:
+      index: Landekoder
+    new: Ny
+    option:
+      index: Indstillinger
+    order:
+      index: Ordrer
+    page:
+      index: Statiske sider
+    payment:
+      index: Betalinger
+    payment_method:
+      index: Betalingsmetoder
+    product:
+      index: Produkter
+    promotion:
+      index: Kampagner
+    promotion_coupon:
+      index: Kuponer
+    property:
+      index: Egenskaber
+    prototype:
+      index: Prototyper
+    sales: Salg
+    shipment:
+      index: Forsendelser
+    shipping_category:
+      index: Forsendelses kategorier
     shipping_method:
       index: Fragtmetoder
     tax_category:
@@ -70,6 +141,8 @@ sylius:
     tax_rate:
       index: Momssatser
     taxation_settings: Indstillinger for beskatning
+    taxonomy:
+      index: Taksonomier
     update: Rediger
     user:
       index: Brugere
@@ -83,6 +156,7 @@ sylius:
       add_coupon: OK
       checkout: Kassen
       clear: Tøm kurv
+      grand_total: Pris i alt
       product: Produkt
       quantity: Antal
       save: Gem
@@ -91,6 +165,8 @@ sylius:
     summary_header: Indkøbskurv oversigt
     total_items: '1 ting | %count% ting'
   checkout:
+    addressing:
+      header: Adressering trin
     back: Tilbage
     finalize:
       address:
@@ -108,21 +184,69 @@ sylius:
         no_items: Denne ordre indeholder ikke nogen varer
         no_promotion: Ingen kampagnekode
         no_shipping_charges: Ingen forsendelsesomkostninger
+        no_taxes: Ingen afgifter tilføjet
+        promotion_discount: Kampagne rabatter
+        promotion_total: Rabat total
         shipping_address: Leveringsadresse
         shipping_charges: Forsendelsesomkostninger
         shipping_total: Forsendelse i alt
+        tax_total: Moms i alt
         taxes: Moms
         total: Total
       order_item:
         quantity: Antal
         total: Total
         unit_price: Enhedspris
+      place_order: Afgiv ordre
+      product:
+        name: Navn
+    forward: Forsæt
+    payment:
+      header: Betalingsmåde
+    security:
+      existing_customer: Eksisterende kunde
+      header: 'Log ind <small>eller Opret ny konto</small>'
+      login: Log ind
+      new_customer: Ny kunde
+      register: Registrer
+    shipping:
+      error: Vi beklager, men vores butik kan ikke tilbyde forsendelse til landet, som du har valgt.
+      header: Fragtmetoder
+  confirmation:
+    message: Vil du slette dette element?
+    title: Bekræftelse
+  country:
+    add_province: Tilføj provins
+    create: Opret land
+    create_header: Nyt land
+    id: ID
+    index_header: Lande
+    iso_name: ISO navn
+    manage: Administrer lande
+    name: Navn
+    no_results: Der er ingen lande, der er konfigureret.
+    show_header: Lande detaljer
+    update_header: Redigering af land
+  create: Opret
+  created_at: Oprettet den
+  delete: Slet
+  deleted: Slettet
+  edit: Rediger
+  email: E-Mail
   exchange_rate:
+    create: Opret valutakurs
+    create_header: Ny valutakurs
+    currency: valuta
+    id: ID
+    index_header: Valutakurser
     no_results: Der er ingen valutakurser til at vise.
     rate: sats
+    update_header: Redigering valutakurs
     updated_at: sidste opdatering
   filter: Filter
   form:
+    cart:
+      coupon: Hvis du har en kampagne kupon, så indtast den her
     choose_file: Vælg Arkiv
     frontend:
       password:
@@ -144,12 +268,15 @@ sylius:
   gallery:
     next: Næste
     previous: Forrige
+    slideshow: Slideshow
   generate: Generer
   group:
     create: Opret gruppe
+    create_header: Tilføj nye brugergrupper
     id: ID
     index_header: Grupper
     name: Navn
+    no_results: Der er ingen grupper at vise.
     roles: Roller
     update_header: Rediger gruppe
   hide_deleted: Skjul slettede
@@ -168,33 +295,381 @@ sylius:
     created_at: Oprettet
     inventory_state: Lagerstatus
     name: Navn
+    no_results: Der er ingen lagerenheder at vise.
+    shipping_state: Forsendelsesstatus
+    sku: SKU
     updated_at: Sidste opdatering
   locale:
     code: Kode
+    create: Opret landestandard
+    create_header: Opretter landestandard
     enabled: Aktiveret
+    index_header: Indekset for alle konfigurerede landestandarder
+    no_results: Der er ingen landestandarder konfigureret.
+    update_header: Rediger landestandard
+    updated_at: Seneste opdatering
+  login: Log ind
+  login_header: Administration
+  logo: Sylius
+  manage: Administrer
+  meta:
+    backend_title: Sylius kontrolpanel.
+    frontend_description: Sylius er en moderne e-handelsløsning for PHP, baseret på Symfony2 frameworket.
+    frontend_keywords: sylius, e-handel, symfony2, shop, vogn, webshop
+    frontend_title: Sylius, moderne e-handel for Symfony2
+  na: N/A
+  newest: Nyeste produkter
+  "no": false
   option:
+    create: Opret indstilling
+    create_header: Ny produkt egenskab
+    index_header: Produkt egenskaber
+    manage: Administrer egenskaber
+    name: navn
+    no_results: Der er ingen egenskaber konfigureret.
+    presentation: præsentation
+    update_header: Redigerer egenskab
     updated_at: sidste opdatering
+    values: værdier
   order:
+    billing_address: Faktureringsadresse
+    create: Opret ordre
+    create_header: Ny ordre
+    created_at: Oprettelsestidspunkt
+    general_info: Generel info
+    id: ID
+    index_header: Nuværende ordrer
+    inventory_tracking: Lagerstyring
     items_total: Varer total
+    manage: Administrer ordrer
     no_items: Denne ordre indeholder ikke nogen varer
+    no_results: Du har ingen nye ordrer
+    no_shipments: Der er ingen forsendelser for denne ordre
     no_shipping_charges: Ingen forsendelsesomkostninger
+    no_taxes: Ingen afgifter tilføjet
+    number: Antallet
+    payment: Betaling
+    payment_state: Betalingsstatus
+    payment_states:
+      balance_due: Restbeløb
+    promotion_total: Rabat total
+    recent_header: De seneste ordrer
+    shipment_state: Forsendelsesstatus
+    shipment_states:
+      pending: Afventer
+    shipments: Forsendelser
+    release_inventory: Frigiv varer
+    inventory_unit:
+      backorder: Restordre
+      return: Returner
+    shipping_address: Leveringsadresse
     shipping_charges: Forsendelsesomkostninger
     shipping_total: Forsendelse i alt
+    show_header: Ordre
+    state:
+      cart_locked: Indkøbskurv låst
+      checkout: Til kassen
+      order_confimed: Ordren er bekræftet
+      ordered: Bestilt
+    tax_total: Moms i alt
     taxes: Moms
     total: Total
+    user: Bruger
   shipment:
+    created_at: Oprettet den
+    id: ID
+    index_header: Forsendelser
     inventory_state: Lagerstatus
+    manage: Administrer forsendelser
+    method: Metode
+    modified: Ændret
+    name: Navn
+    no_items: Der er ingen elementer at vise.
+    no_results: Der er ingen forsendelser at vise.
+    order: Ordre
+    show_header: Forsendelsesdetaljer
+    sku: SKU
+    state: Status
+    tracking_code: Sporingskode
     update: Rediger
+    update_header: Redigerer forsendelse
+    updated_at: Seneste opdatering
   order_item:
+    product: Varen
     quantity: Antal
     sellable: Produkt
     total: Total
+    unit_price: Enhedspris
+  out_of_stock: Udsolgt
+  page:
+    body: Krop
+    create: Opret ny side
+    create_header: Opret nyt statisk indhold
+    id: ID
+    index_header: Sider
+    no_results: Der er ingen statiske sider at vise.
+    title: Titel
+    update_header: Seneste opdatering
+  password: Adgangskode
+  payment:
+    amount: Beløb
+    create: Opret betaling
+    create_header: Ny betaling
+    created_at: Oprettet den
+    id: ID
+    index_header: Betalinger
+    manage: Administrer betalinger
+    method: Metode
+    no_results: Der er ingen betalingesmetoder konfigureret.
+    state:
+      0: Status
+      checkout: Til kassen
+      completed: Gennemført
+      failed: Mislykkedes
+      new: Ny
+      pending: Afventer
+      processing: Behandler
+      unknown: Ukendt
+    update_header: Redigerer betaling
+    updated_at: Seneste opdatering
+  payment_method:
+    create: Oprette betalingsmetode
+    create_header: Ny betalingsmetode
+    enabled: Er aktiveret?
+    gateway: gateway
+    id: ID
+    index_header: Betalingsmetoder
+    name: Navn
+    updated_at: Seneste opdatering
   product:
+    available_on: Tilgængelig
+    available_on_demand: Tilgængelig for restordre
+    categorization: Kategorisering
+    contain_variants: Indeholder varianter
+    create: Opret produkt
+    create_header: Nyt produkt
+    description: Beskrivelse
+    generate_variants: Generer varianter
+    index_by_taxon_header: 'Produkter <small>kategoriseret under "%taxon%" taxon</small>'
+    manage: Administrere produkter
+    name: Navn
+    no_description: '<i>Ingen beskrivelse...</i>'
+    no_images: Der er ingen billeder til dette produkt
+    no_options: Der er ingen indstillinger for dette produkt
+    no_properties: Dette produkt har ingen definerede egenskaber
+    no_results: Der er ingen produkter at vise.
+    no_shipping_category: Ingen forsendelses kategori
+    no_short_description: '<i>Ingen kort beskrivelse</i>'
+    no_sku: Ingen SKU
+    no_tax_category: Ingen momskategori
+    no_taxons: Der er ingen taxons til dette produkt
+    options: Indstillinger
+    price: Kostpris
+    properties: Egenskaber
+    restricted_zone: Begrænset zone
+    shipping_category: Fragt kategori
+    show: Se mere
+    sku: SKU
+    stock: Nuværende lager antal
     tabs:
+      categorization: Kategorisering
+      images: Billeder
+      options: Egenskaber
       product: Produkt
+      properties: Egenskaber
+    tax_category: Momskategori
+    unavailable: Ikke tilgængelig
+    update_header: Redigering af produkt
+    updated_at: Seneste opdatering
+    variant_selection_method: Variant udvælgelsesmetode
+    view_details: 'Vis %product% detaljer.'
+  product_not_available_in_zone: Ikke tilgængelig i dit land
+  promotion:
+    actions: Handlinger
+    add_action: Tilføj handling
+    add_rule: Tilføj regel
+    coupon_based: Kupon baseret?
+    create: Opret kampagne
+    create_header: Ny kampagne
+    created_at: Oprettet den
+    description: Beskrivelse
+    ends_at: Slutter den
+    general_info: Generel info
+    id: ID
+    index_header: Aktuelle kampagner
+    manage: Administrer kampagner
+    name: Navn
+    no_results: Der er ingen kampagner konfigureret.
+    rules: Regler
+    show_header: Kampagne detaljer
+    starts_at: Starter ved
+    update_header: Redigering af kampagne
+    updated_at: Seneste opdatering
+    usage_limit: Brugsgrænse
+    used: Brugt
+  promotion_action:
+    configuration: Konfiguration
+    type: Type
+  promotion_coupon:
+    create: Tilføj kupon
+    create_header: Opret ny kupon
+    generate: Generere kuponer
+    generate_header: Genererer kuponer
+    index: Kupon liste
+    index_header: Kuponer
+    no_results: Der er ingen kupon at vise.
+    total_results:
+      Total: '%total%'
+    update_header: Rediger kupon
+  promotion_rule:
+    configuration: Konfiguration
+    type: Type
   property:
+    add_choice: Tilføj valg
+    create: Opret egenskab
+    create_header: Ny produkt egenskab
+    index_header: Produkt egenskaber
+    manage: Administrer egenskaber
+    name: navn
+    no_results: Der er ingen egenskaber konfigureret.
+    presentation: præsentation
+    type: type
+    update_header: Redigering af egenskab
     updated_at: sidste opdatering
   prototype:
+    build: Skab prototype
+    build_header: Skaber produkt efter prototype
+    create: Opret prototype
+    create_header: Ny prototype
+    index_header: Produkt prototyper
+    name: navn
     updated_at: sidste opdatering
+  remember_me: Husk mig?
+  search: Søg
+  settings:
+    general_header: Generelle indstillinger
+    taxation_header: Indstillinger for moms
+  shipping_address: Leveringsadresse
+  shipping_category:
+    create: Opret shipping kategori
+    create_header: Ny shipping kategori
+    id: ID
+    index_header: Forsendelses kategorier
+    name: Navn
+    updated_at: Seneste opdatering
+  shipping_method:
+    calculator: Beregner
+    category: Kategori
+    enabled: Er aktiveret?
+    id: ID
+    index_header: Fragtmetoder
+    name: Navn
+    no_results: Der er ingen forsendelsesmetoder konfigureret.
+    show_header: Forsendelsesmetode detaljer
+    update_header: Redigering af forsendelsesmetode
+    updated_at: Seneste opdatering
+    zone: Zone
+  show: detaljer
+  show_all: Vis alle
+  show_deleted: Vis slettede
   stockable:
-    updated_at: sidste opdatering
+    index_header: 'Lager <small> Her kan du se det aktuelle lagerniveauer</small>'
+    name: navn
+    no_results: Der er ingen lagervarer at vise.
+    on_hand: lagerantal
+    on_hold: på hold
+    sku: SKU
+    updated_at: seneste opdatering
+  tax_category:
+    create: Opret moms kategori
+    create_header: Ny moms kategori
+    description: Beskrivelse
+    id: ID
+    index_header: Moms kategorier
+    manage: Administrer moms kategorier
+    name: Navn
+    no_description: Ingen beskrivelse
+    no_results: Der er ingen moms kategorier konfigureret.
+    update_header: Redigering af momskategori
+    updated_at: Seneste opdatering
+  tax_rate:
+    amount: Beløb
+    calculator: Beregner
+    category: Kategori
+    create: Opret moms rate
+    create_header: Ny moms sats
+    included_in_price: Inkluderet i prisen?
+    index_header: Momssatser
+    manage: Administrer moms satser
+    name: Navn
+    no_results: Der er ingen moms satser konfigureret.
+    show_header: Moms sats detaljer
+    update_header: Opdatering af moms sats
+    updated_at: Seneste opdatering
+    zone: Zone
+  taxon:
+    create: Opret taksionomisk gruppe
+    create_header: Ny taksionomisk gruppe
+    image: Vælg billede
+    name: Navn
+    no_image: Der er intet billede for denne taksinomiske gruppe
+    no_results: Der er ingen taksinomisk gruppe at vise.
+    product_index_header: 'Produkter kategoriseres som "%name%"'
+    update_header: Rediger taksionomisk gruppe
+  taxonomy:
+    create: Opret taksonomi
+    create_header: Ny taksonomi
+    image: Vælg billede
+    name: Navn
+    no_image: Der er intet billede for denne taksinomiske gruppe
+  total_quantity: Samlet antal
+  unknown: Ukendt
+  user:
+    billing_address: Faktureringsadresse
+    create: Opret bruger
+    create_header: Ny bruger
+    email: E-Mail
+    enabled: Bekræftet?
+    filter:
+      all: Vis alle brugere
+      unconfirmed: Ubekræftede konti
+    first_name: Fornavn
+    id: ID
+    last_login: Sidste login
+    last_name: Efternavn
+    impersonate: Log ind som denne bruger
+    no_results: Der er ingen brugere at vise.
+    order:
+      no_results: Der er ingen ordrer for denne bruger at vise.
+    orders: Brugerens ordrer
+    recent_header: De seneste brugere
+    registration_date: Registreringsdato
+    shipping_address: Leveringsadresse
+    show_header: Bruger detaljer
+    update_header: Rediger bruger
+    username: Brugernavn
+  variant:
+    add_image: Tilføj billede
+    availability: Tilgængelighed
+    available_on_demand: Tilgængelig for restordre
+    create: Opret variant
+    create_header: Nye produktvariant
+    delete_image: Slet billede
+    last_update: Seneste opdatering
+    no_results: Der er ingen varianter.
+    options: Egenskaber
+    price: Pris
+    sku: SKU
+    stock: Nuværende lager antal
+    update_header: Redigering af variant
+  "yes": true
+  zone:
+    add_member: Tilføj medlem
+    create: Opret zone
+    create_header: Ny zone
+    index_header: Zoner
+    manage: Administrer zoner
+    name: Navn
+    type: Type
+  zone_member:
+    members: Medlemmer

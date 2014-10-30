@@ -52,8 +52,10 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_should_find_object_when_identifier_reverse_transformed($repository, ParameterInterface $object)
-    {
+    function it_should_find_object_when_identifier_reverse_transformed(
+        $repository,
+        ParameterInterface $object
+    ) {
         $repository->findOneBy(array('name' => 'foo'))->shouldBeCalled()->willReturn($object);
 
         $this->reverseTransform('foo')->shouldReturn($object);

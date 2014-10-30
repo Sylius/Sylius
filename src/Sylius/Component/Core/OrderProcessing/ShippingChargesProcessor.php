@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
@@ -53,13 +54,14 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
      */
     public function applyShippingCharges(OrderInterface $order)
     {
-        $order->removeShippingAdjustments(); // Remove all shipping adjustments, we recalculate everything from scratch.
+        // Remove all shipping adjustments, we recalculate everything from scratch.
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
         foreach ($order->getShipments() as $shipment) {
             $shippingCharge = $this->calculator->calculate($shipment);
 
             $adjustment = $this->adjustmentRepository->createNew();
-            $adjustment->setLabel(OrderInterface::SHIPPING_ADJUSTMENT);
+            $adjustment->setLabel(AdjustmentInterface::SHIPPING_ADJUSTMENT);
             $adjustment->setAmount($shippingCharge);
             $adjustment->setDescription($shipment->getMethod()->getName());
 

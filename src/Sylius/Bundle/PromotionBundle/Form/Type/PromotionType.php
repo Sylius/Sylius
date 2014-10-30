@@ -12,29 +12,33 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use JMS\TranslationBundle\Annotation\Ignore;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Promotion form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionType extends AbstractType
+class PromotionType extends AbstractResourceType
 {
-    protected $dataClass;
-    protected $validationGroups;
+    /**
+     * @var ServiceRegistryInterface
+     */
     protected $checkerRegistry;
+
+    /**
+     * @var ServiceRegistryInterface
+     */
     protected $actionRegistry;
 
     public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $checkerRegistry, ServiceRegistryInterface $actionRegistry)
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
         $this->checkerRegistry = $checkerRegistry;
         $this->actionRegistry = $actionRegistry;
     }
@@ -111,19 +115,6 @@ class PromotionType extends AbstractType
                 $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
     }
 
     /**

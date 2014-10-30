@@ -8,6 +8,7 @@ Feature: User registration
         Given there are following users:
             | email       | password |
             | bar@bar.com | foo      |
+        And there is default currency configured
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage

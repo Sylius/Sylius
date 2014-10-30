@@ -53,8 +53,8 @@
 <hr>
 <div class="row">
     <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix form-horizontal">
-    {% if product.hasVariants %}
-        <div class="col-md-6">
+    <div class="col-md-6">
+        {% if product.hasVariants %}
             {% if product.isVariantSelectionMethodChoice %}
             <table class="table table-condensed">
                 <thead>
@@ -97,8 +97,13 @@
                     {{ form_widget(form.variant) }}
                 </div>
             {% endif %}
-        </div>
-    {% endif %}
+        {% else %}
+            <h4>
+                <span class="label label-success pull-right">{{ sylius_calculate_price(product.masterVariant)|sylius_price }}</span>
+                {{ 'sylius.variant.price'|trans }}
+            </h4>
+        {% endif %}
+    </div>
     <div class="col-md-6 pull-right">
         {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
             <span class="label label-warning">{{ 'sylius.out_of_stock'|trans }}</span>

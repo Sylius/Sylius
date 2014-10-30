@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Kota tidak boleh lebih dari 255 characters|Kota tidak boleh lebih dari 255 karakter.
+      min_length: Kota harus minimal 2 karakter huruf |Kota harus minimal 2 karakter huruf
+      not_blank: Silahkan masukkan nama kota.
+    country:
+      not_blank: Silakan pilih negara.
+    first_name:
+      max_length: Nama Depan tidak boleh lebih dari 255 characters|Nama Depan tidak boleh lebih dari 255 karakter.
+      min_length: Nama pertama harus minimal 2 karakter Huruf|Nama pertama harus minimal 2 karakter.
+      not_blank: Masukkan nama depan.
+    last_name:
+      max_length: Nama Belakang tidak boleh lebih dari 255 characters|Nama Belakang tidak boleh lebih dari 255 karakter.
+      min_length: Nama Belakang harus minimal 2 karakter Huruf|Nama Belakang harus minimal 2 karakter.
+      not_blank: Silahkan masukkan nama belakang.
+    postcode:
+      max_length: Kodepos tidak boleh lebih dari 255 karakter|Kodepos tidak boleh lebih dari 255 karakter.
+      min_length: Kode pos harus minimal 2 karakter angka / huruf|Kode pos harus minimal 2 karakter.
+      not_blank: Harap masukkan kode pos.
+    province:
+      valid: Silahkan pilih provinsi yang tepat.
+    street:
+      max_length: Jalan tidak boleh lebih dari 255 karakter|Jalan tidak boleh lebih dari 255 karakter.
+      min_length: Jalan harus minimal 2 karakter long|Jalan harus minimal 2 karakter.
+      not_blank: Masukkan Jalan / Alamat.
+    not_shippable: Alamat ini bukanlah tujuan pengiriman berlaku.
+  country:
+    iso_name:
+      not_blank: Masukkan kode ISO negara.
+    name:
+      max_length: Nama negara tidak boleh lebih dari 255 karakter|Nama negara tidak boleh lebih dari 255 karakter.
+      not_blank: Masukkan nama negara.
+  province:
+    name:
+      max_length: Nama Provinsi tidak boleh lebih dari 255 karakter|Nama Provinsi tidak boleh lebih dari 255 karakter.
+      min_length: Nama provinsi harus minimal 2 karakter long|Nama provinsi harus minimal 2 karakter.
+      not_blank: Masukkan nama provinsi.
+  zone:
+    members:
+      min_count: 'Harap tambahkan setidaknya {{batas}} zona anggota.'
+    name:
+      max_length: Nama Belakang tidak boleh lebih dari 255 karakter|Nama Belakang tidak boleh lebih dari 255 karakter.
+      not_blank: Masukkan nama zona.

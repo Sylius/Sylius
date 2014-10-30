@@ -24,6 +24,10 @@ sylius:
       members: Medlemmer
       name: Navn
       type: Type
+      types:
+        country: Land
+        province: Provins
+        zone: Zone
     zone_member_country:
       country: Land
     zone_member_province:

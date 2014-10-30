@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_index:
-    pattern: /
+    path: /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_backend_dashboard
         permanent: true
 
 sylius_backend_dashboard:
-    pattern: /dashboard
+    path: /dashboard
     defaults: { _controller: sylius.controller.backend.dashboard:mainAction }
 
 sylius_backend_user:
@@ -96,9 +96,9 @@ sylius_backend_payment:
     resource: @SyliusWebBundle/Resources/config/routing/backend/payment.yml
     prefix: /payments
 
-sylius_backend_exchange_rate:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/exchange_rate.yml
-    prefix: /exchange-rates
+sylius_backend_currency:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/currency.yml
+    prefix: /currencies
 
 sylius_backend_country:
     resource: @SyliusWebBundle/Resources/config/routing/backend/country.yml
@@ -120,13 +120,17 @@ sylius_backend_locale:
     resource: @SyliusWebBundle/Resources/config/routing/backend/locale.yml
     prefix: /locales
 
-sylius_backend_block:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/block.yml
-    prefix: /blocks
+sylius_backend_api_client:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/api_client.yml
+    prefix: /api-clients
 
-sylius_backend_page:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/page.yml
-    prefix: /pages
+sylius_backend_contact_topic:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/contact_topic.yml
+    prefix: /contact-topics
+
+sylius_backend_contact_request:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/contact_request.yml
+    prefix: /contact-requests
 
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
@@ -134,3 +138,8 @@ sylius_backend_settings:
 
 sylius_backend_security:
     resource: @SyliusWebBundle/Resources/config/routing/backend/security.yml
+
+sylius_backend_content:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/content/main.yml
+    prefix: /content
+    

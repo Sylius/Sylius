@@ -11,42 +11,37 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Zone form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ZoneType extends AbstractType
+class ZoneType extends AbstractResourceType
 {
     /**
-     * Data class.
+     * Scopes.
      *
-     * @var string
+     * @var array
      */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var string
-     */
-    protected $validationGroups;
+    protected $scopeChoices;
 
     /**
      * Constructor.
      *
-     * @param string $dataClass
-     * @param array  $validationGroups
+     * @param string   $dataClass
+     * @param string[] $validationGroups
+     * @param string[] $scopeChoices
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->scopeChoices = $scopeChoices;
     }
 
     /**
@@ -56,33 +51,24 @@ class ZoneType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.zone.name'
+                'label' => 'sylius.form.zone.name',
             ))
-            ->add('type', 'choice', array(
-                'label'   => 'sylius.form.zone.type',
-                'choices' => array(
-                    ZoneInterface::TYPE_COUNTRY  => 'sylius.form.zone.types.country',
-                    ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
-                    ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
-                ),
-            ))
+            ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members'
+                'label' => 'sylius.form.zone.members',
             ))
         ;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
+        if (!empty($this->scopeChoices)) {
+            $builder
+                ->add('scope', 'choice', array(
+                    'label'       => 'sylius.form.zone.scope',
+                    'empty_value' => 'sylius.form.zone.select_scope',
+                    'required'    => false,
+                    'choices'     => $this->scopeChoices,
+                ))
+            ;
+        }
     }
 
     /**

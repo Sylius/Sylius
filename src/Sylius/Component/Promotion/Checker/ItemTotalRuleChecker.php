@@ -26,10 +26,10 @@ class ItemTotalRuleChecker implements RuleCheckerInterface
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
         if (isset($configuration['equal']) && $configuration['equal']) {
-            return $subject->getPromotionSubjectItemTotal() >= $configuration['amount'];
+            return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
         }
 
-        return $subject->getPromotionSubjectItemTotal() > $configuration['amount'];
+        return $subject->getPromotionSubjectTotal() > $configuration['amount'];
     }
 
     /**

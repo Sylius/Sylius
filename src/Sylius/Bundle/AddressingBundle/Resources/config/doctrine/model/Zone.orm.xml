@@ -20,6 +20,7 @@
 
         <field name="name" column="name" type="string" />
         <field name="type" column="type" type="string" length="8" />
+        <field name="scope" column="scope" type="string" nullable="true"/>
 
         <one-to-many field="members" target-entity="Sylius\Component\Addressing\Model\ZoneMemberInterface" mapped-by="belongsTo">
             <cascade>

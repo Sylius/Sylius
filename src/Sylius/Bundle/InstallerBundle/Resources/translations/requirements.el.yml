@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  extensions:
+    0: επεκτάσεις
+    accelerator:
+      0: Επιταχυντής
+      help: Εγκαταστήστε και ενεργοποιήστε έναν επιταχυντή PHP όπως η APC (συνιστάται ιδιαίτερα).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    json_encode: JSON
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Συνεδρία
+    simplexml_import_dom: SimpleXML
+  filesystem:
+    0: σύστημα αρχείων
+    exists: υπάρχει
+    logs:
+      - αρχεία καταγραφής
+    not_exists: δεν υπάρχει
+    not_writable: χωρίς δυνατότητα εγγραφής
+    parameters:
+      - parameters.yml
+    writable: εγγράψιμο
+  settings:
+    0: Έκδοση PHP και ρυθμίσεις
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: μη παρωχημένο
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: ζώνη ώρας
+    timezone_deprecated:
+      0: Μη χρησιμοποιούμενη ζώνη ώρας
+      help: 'Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).'
+    version: Έκδοση PHP
+    version_recommanded: Προτεινόμενη έκδοση PHP

@@ -38,15 +38,21 @@ class ParametersParser
      *
      * @return array
      */
-    public function parse(array &$parameters, Request $request)
+    public function parse(array $parameters, Request $request)
     {
+        if (!isset($parameterNames)) {
+            $parameterNames = array();
+        }
+
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
-                $parameters[$key] = $this->parse($value, $request);
+                list($parameters[$key] , $parameterNames[$key]) = $this->parse($value, $request);
             }
 
             if (is_string($value) && 0 === strpos($value, '$')) {
-                $parameters[$key] = $request->get(substr($value, 1));
+                $parameterName = substr($value, 1);
+                $parameters[$key] = $request->get($parameterName);
+                $parameterNames[$key] = $parameterName;
             }
 
             if (is_string($value) && 0 === strpos($value, 'expr:')) {
@@ -54,7 +60,7 @@ class ParametersParser
             }
         }
 
-        return $parameters;
+        return array($parameters, $parameterNames);
     }
 
     /**

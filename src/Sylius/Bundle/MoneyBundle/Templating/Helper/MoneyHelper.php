@@ -11,54 +11,59 @@
 
 namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
-use Sylius\Component\Money\Context\CurrencyContextInterface;
-use Sylius\Component\Money\Converter\CurrencyConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 class MoneyHelper extends Helper
 {
     /**
-     * @var CurrencyConverterInterface
+     * The default currency.
+     *
+     * @var string
      */
-    private $converter;
-
-    /**
-     * @var CurrencyContextInterface
-     */
-    private $currencyContext;
+    private $currency;
 
     /**
      * @var \NumberFormatter
      */
-    private $formatter;
+    private $formatterCurrency;
 
     /**
-     * @var string
+     * @var \NumberFormatter
      */
-    private $pattern = '¤#,##0.00;-¤#,##0.00';
+    private $formatterDecimal;
 
-    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, $locale = null)
+    /**
+     * @param string $locale   The locale used to format money.
+     * @param string $currency The default currency.
+     */
+    public function __construct($locale, $currency)
     {
-        $this->currencyContext = $currencyContext;
-        $this->converter       = $converter;
-        $this->formatter       = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
-        $this->formatter->setPattern($this->pattern);
+        $this->currency          = $currency;
+        $this->formatterCurrency = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
+        $this->formatterDecimal  = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::DECIMAL);
     }
 
     /**
      * Format the money amount to nice display form.
      *
-     * @param integer     $amount
+     * @param int         $amount
      * @param string|null $currency
+     * @param bool        $decimal
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
-    public function formatMoney($amount, $currency = null)
+    public function formatAmount($amount, $currency = null, $decimal = false)
     {
-        $currency = $currency ?: $this->currencyContext->getDefaultCurrency();
-        $result   = $this->formatter->formatCurrency($amount / 100, $currency);
+        if ($decimal) {
+            $formatter = $this->formatterDecimal;
+        } else {
+            $formatter = $this->formatterCurrency;
+        }
 
+        $currency = $currency ?: $this->getDefaultCurrency();
+        $result   = $formatter->formatCurrency($amount / 100, $currency);
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
         }
@@ -67,25 +72,20 @@ class MoneyHelper extends Helper
     }
 
     /**
-     * Convert price between currencies and format the amount to nice display form.
-     *
-     * @param integer     $amount
-     * @param string|null $currency
-     *
-     * @return string
-     */
-    public function formatPrice($amount, $currency = null)
-    {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
-
-        return $this->formatMoney($this->converter->convert($amount, $currency), $currency);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getName()
     {
         return 'sylius_money';
+    }
+
+    /**
+     * Get the default currency if none is provided as argument.
+     *
+     * @return string The currency code
+     */
+    protected function getDefaultCurrency()
+    {
+        return $this->currency;
     }
 }

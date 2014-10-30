@@ -4,7 +4,13 @@
 sylius:
   product:
     sku:
+      not_blank: Prosím, zadajte kód produktu.
       unique: Kód produktu musí byť unikátny.
+    name:
+      not_blank: Prosím, zadajte názov produktu.
+    description:
+      not_blank: Prosím, zadajte popis produktu.
   variant:
     sku:
+      not_blank: Prosím, zadajte kód varianty.
       unique: Kód variácie musí byť unikátny.

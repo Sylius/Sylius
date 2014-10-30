@@ -56,6 +56,8 @@ class FlashHelper
         /** @var FlashBag $flashBag */
         $flashBag = $this->session->getBag('flashes');
         $flashBag->add($type, $this->generateFlashMessage($eventName, $params));
+
+        return $this;
     }
 
     /**

@@ -20,43 +20,43 @@
         }
     ],
     "require": {
-        "php":                          ">=5.3.3",
+        "php":                            ">=5.3.3",
 
-        "doctrine/doctrine-bundle":       "~1.3@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
-        "hwi/oauth-bundle":               "0.3.*",
+        "hwi/oauth-bundle":               "~0.3",
         "jms/serializer-bundle":          "0.12.*",
         "knplabs/gaufrette":              "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
         "swiftmailer/swiftmailer":        "~5.0",
-        "sylius/core":                    "0.10.*@dev",
-        "sylius/addressing-bundle":       "0.10.*@dev",
-        "sylius/cart-bundle":             "0.10.*@dev",
-        "sylius/flow-bundle":             "0.10.*@dev",
-        "sylius/inventory-bundle":        "0.10.*@dev",
-        "sylius/money-bundle":            "0.10.*@dev",
-        "sylius/order-bundle":            "0.10.*@dev",
-        "sylius/pricing-bundle":          "0.10.*@dev",
-        "sylius/payment-bundle":          "0.10.*@dev",
-        "sylius/payum-bundle":            "0.10.*@dev",
-        "sylius/product-bundle":          "0.10.*@dev",
-        "sylius/promotion-bundle":        "0.10.*@dev",
-        "sylius/resource-bundle":         "0.10.*@dev",
-        "sylius/settings-bundle":         "0.10.*@dev",
-        "sylius/shipping-bundle":         "0.10.*@dev",
-        "sylius/taxation-bundle":         "0.10.*@dev",
-        "sylius/taxonomy-bundle":         "0.10.*@dev",
-        "sylius/attribute-bundle":        "0.10.*@dev",
-        "sylius/variation-bundle":        "0.10.*@dev",
-        "symfony-cmf/block-bundle":       "1.1.*",
-        "symfony-cmf/content-bundle":     "1.1.*",
-        "symfony-cmf/menu-bundle":        "1.1.*",
-        "symfony-cmf/routing-bundle":     "1.2.*",
+        "sylius/core":                    "0.12.*@dev",
+        "sylius/addressing-bundle":       "0.12.*@dev",
+        "sylius/api-bundle":              "0.12.*@dev",
+        "sylius/cart-bundle":             "0.12.*@dev",
+        "sylius/contact-bundle":          "0.12.*@dev",
+        "sylius/content-bundle":          "0.12.*@dev",
+        "sylius/flow-bundle":             "0.12.*@dev",
+        "sylius/inventory-bundle":        "0.12.*@dev",
+        "sylius/money-bundle":            "0.12.*@dev",
+        "sylius/currency-bundle":         "0.12.*@dev",
+        "sylius/order-bundle":            "0.12.*@dev",
+        "sylius/locale-bundle":           "0.12.*@dev",
+        "sylius/pricing-bundle":          "0.12.*@dev",
+        "sylius/payment-bundle":          "0.12.*@dev",
+        "sylius/payum-bundle":            "0.12.*@dev",
+        "sylius/product-bundle":          "0.12.*@dev",
+        "sylius/promotion-bundle":        "0.12.*@dev",
+        "sylius/resource-bundle":         "0.12.*@dev",
+        "sylius/settings-bundle":         "0.12.*@dev",
+        "sylius/shipping-bundle":         "0.12.*@dev",
+        "sylius/taxation-bundle":         "0.12.*@dev",
+        "sylius/taxonomy-bundle":         "0.12.*@dev",
+        "sylius/attribute-bundle":        "0.12.*@dev",
+        "sylius/variation-bundle":        "0.12.*@dev",
         "symfony/framework-bundle":       "~2.3"
     },
     "require-dev": {
-        "fzaninotto/faker": "1.2.*",
+        "fzaninotto/faker": "~1.2",
         "phpspec/phpspec":  "~2.0",
         "symfony/form":     "~2.3"
     },
@@ -75,7 +75,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10-dev"
+            "dev-master": "0.12-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

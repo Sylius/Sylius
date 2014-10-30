@@ -23,9 +23,9 @@
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
         <parameter key="sylius.cart_storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
 
-        <parameter key="sylius.cart_listener.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
-        <parameter key="sylius.cart_flash_listener.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
-        <parameter key="sylius.refresh_cart_listener.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
+        <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
+        <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
+        <parameter key="sylius.listener.cart_refresh.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
 
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
     </parameters>
@@ -86,21 +86,21 @@
             <argument type="service" id="session" />
         </service>
 
-        <service id="sylius.cart_listener" class="%sylius.cart_listener.class%">
+        <service id="sylius.listener.cart" class="%sylius.listener.cart.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="validator" />
             <argument type="service" id="sylius.cart_provider" />
         </service>
 
-        <service id="sylius.cart_flash_listener" class="%sylius.cart_flash_listener.class%">
+        <service id="sylius.listener.cart_flash" class="%sylius.listener.cart_flash.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <call method="setMessages"/>
         </service>
 
-        <service id="sylius.refresh_cart_listener" class="%sylius.refresh_cart_listener.class%">
+        <service id="sylius.listener.cart_refresh" class="%sylius.listener.cart_refresh.class%">
             <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
         </service>
 

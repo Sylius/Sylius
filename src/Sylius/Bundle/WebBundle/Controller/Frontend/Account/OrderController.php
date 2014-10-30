@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
+use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class OrderController extends Controller
+class OrderController extends FOSRestController
 {
     /**
      * List orders of the current user.
@@ -35,9 +35,15 @@ class OrderController extends Controller
     {
         $orders = $this->getOrderRepository()->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'));
 
-        return $this->render('SyliusWebBundle:Frontend/Account:Order/index.html.twig', array(
-            'orders' => $orders
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate('SyliusWebBundle:Frontend/Account:Order/index.html.twig')
+            ->setData(array(
+                'orders' => $orders,
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**
@@ -54,9 +60,15 @@ class OrderController extends Controller
     {
         $order = $this->findOrderOr404($number);
 
-        return $this->render('SyliusWebBundle:Frontend/Account:Order/show.html.twig', array(
-            'order' => $order
-        ));
+        $view = $this
+            ->view()
+            ->setTemplate('SyliusWebBundle:Frontend/Account:Order/show.html.twig')
+            ->setData(array(
+                'order' => $order,
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**

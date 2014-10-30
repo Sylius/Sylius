@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -43,6 +44,7 @@ class PaymentProcessor implements PaymentProcessorInterface
      */
     public function createPayment(OrderInterface $order)
     {
+        /** @var $payment PaymentInterface */
         $payment = $this->paymentRepository->createNew();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());

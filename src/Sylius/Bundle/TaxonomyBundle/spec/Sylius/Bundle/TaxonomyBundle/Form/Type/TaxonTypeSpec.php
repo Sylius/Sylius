@@ -40,14 +40,30 @@ class TaxonTypeSpec extends ObjectBehavior
     function it_builds_form_with_name_and_permalink_and_description_fields(
         FormBuilder $builder,
         FormFactoryInterface $factory
-    )
-    {
+    ) {
         $builder->getFormFactory()->willReturn($factory);
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener'))->shouldBeCalled();
 
-        $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('permalink', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $builder->add('description', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder
+            ->addEventSubscriber(
+                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormListener')
+            )
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('name', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('permalink', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->add('description', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, array());
     }

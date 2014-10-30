@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: "La cistella de la compra s'ha actualitzat correctament."
+    cart_clear_completed: "La cistella de la compra s'ha esborrat amb èxit."
+    item_add_completed: "El producte s'ha afegit a la cistella."
+    item_remove_completed: "El producte s'ha esborrat de la cistella."
+    item_add_error: "S'ha produït un error al afegir el producte a la cistella."
+    item_remove_error: "S'ha produït un error en treure el producte de la cistella."

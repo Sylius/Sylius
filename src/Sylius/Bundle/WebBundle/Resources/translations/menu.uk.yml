@@ -1,3 +1,43 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        configuration: Конфігурація
+        products: Продукти
+        sales: Замовлення
+        users: Користувачі
+        zones: Пояси
+      sidebar:
+        new_order: Додати новий порядок
+        orders: Поточний замовлень
+        pages: Сторінки
+        payments: Платежі
+        products: Продукти
+        promotions: Промо-акції
+        sales: Замовлення
+        taxonomies: Категоризація
+        users: Користувачі
+        zones: Пояси
+  frontend:
+    menu:
+      account:
+        addresses: Мій адресної книги
+        homepage: Головна
+        orders: Мої накази / мої рахунки-фактури
+        password: Мій пароль
+        profile: Моя особиста інформація
+        shop: Назад до магазину
+      currency: 'Показати ціни в валюту %currency%'
+      main:
+        login: Логін
+        logout: Вихід
+        register: Зареєструватися
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google +
+        linkedin: LinkedIn
+        twitter: Twitter

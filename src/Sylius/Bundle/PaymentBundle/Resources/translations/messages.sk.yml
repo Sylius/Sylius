@@ -17,6 +17,7 @@ sylius:
         completed: Dokončené
         failed: Neúspešné
     payment_method:
+      description: Popis
       enabled: Povolené?
       gateway: Brána
       name: Názov

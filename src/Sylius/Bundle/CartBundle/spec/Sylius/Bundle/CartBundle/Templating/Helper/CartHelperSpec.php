@@ -26,8 +26,7 @@ class CartHelperSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         RepositoryInterface $itemRepository,
         FormFactoryInterface $formFactory
-    )
-    {
+    ) {
         $this->beConstructedWith($cartProvider, $itemRepository, $formFactory);
     }
 
@@ -54,8 +53,7 @@ class CartHelperSpec extends ObjectBehavior
         FormInterface $form,
         FormView $formView,
         CartItemInterface $item
-    )
-    {
+    ) {
         $itemRepository->createNew()->shouldBeCalled()->willReturn($item);
         $formFactory->create('sylius_cart_item', $item, array())->shouldBeCalled()->willReturn($form);
         $form->createView()->willReturn($formView);
@@ -69,8 +67,7 @@ class CartHelperSpec extends ObjectBehavior
         FormInterface $form,
         FormView $formView,
         CartItemInterface $item
-    )
-    {
+    ) {
         $itemRepository->createNew()->shouldBeCalled()->willReturn($item);
         $formFactory->create('sylius_cart_item', $item, array('foo' => 'bar'))->shouldBeCalled()->willReturn($form);
         $form->createView()->willReturn($formView);
