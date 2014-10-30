@@ -22,7 +22,7 @@
                     <tr class="subscription" id="subscription-{{ subscription.id }}">
                         <td>
                             <a href="{{ path(subscription.product) }}" class="thumbnail pull-left" style="margin-right: 15px;">
-                                <img src="{{ subscription.product.image ? subscription.product.image.path|imagine_filter('sylius_small', true) : 'http://placehold.it/90x60' }}" alt="{{ subscription.product.name }}" />
+                                <img src="{{ subscription.product.image ? subscription.product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="{{ subscription.product.name }}" />
                             </a>
                         </td>
                         <td>{{ subscription.scheduledDate|date }}</td>

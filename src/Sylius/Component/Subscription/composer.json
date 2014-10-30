@@ -35,7 +35,10 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Component\\Subscription\\": "" }
+        "psr-4": { "Sylius\\Component\\Subscription\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Subscription\\spec\\": "spec/" }
     },
     "target-dir": "Sylius/Component/Subscription",
     "extra": {

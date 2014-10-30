@@ -18,8 +18,8 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="quantity" column="quantity" type="integer" nullable="false" />
-        <field name="scheduledDate" column="scheduled_date" type="date" nullable="false" />
+        <field name="quantity" column="quantity" type="integer" />
+        <field name="scheduledDate" column="scheduled_date" type="date" />
         <field name="processedDate" column="processed_date" type="date" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
