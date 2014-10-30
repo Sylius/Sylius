@@ -35,7 +35,7 @@
         "jms/translation-bundle":               "1.1.*",
         "knplabs/knp-gaufrette-bundle":         "*@dev",
         "knplabs/knp-snappy-bundle":            "*@dev",
-        "liip/imagine-bundle":                  "~0.9",
+        "liip/imagine-bundle":                  "~1.0",
         "mathiasverraes/money":                 "*@dev",
         "payum/payum":                          "~0.9.0",
         "payum/payum-bundle":                   "~0.9.0",

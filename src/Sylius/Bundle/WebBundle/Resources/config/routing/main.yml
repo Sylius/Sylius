@@ -19,6 +19,5 @@ sylius_partial:
     resource: @SyliusWebBundle/Resources/config/routing/partial/main.yml
     prefix: /_partial
 
-_imagine:
-    resource: .
-    type:     imagine
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
