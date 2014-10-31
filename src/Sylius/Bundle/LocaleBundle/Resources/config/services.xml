@@ -17,9 +17,13 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.context.locale.class">Sylius\Bundle\LocaleBundle\Context\LocaleContext</parameter>
         <parameter key="sylius.locale_provider.class">Sylius\Component\Locale\Provider\LocaleProvider</parameter>
         <parameter key="sylius.event_listener.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
+
+        <parameter key="sylius.context.locale.class">Sylius\Component\Locale\Context\LocaleContext</parameter>
+
+        <parameter key="sylius.locale.storage.cookie.class">Sylius\Bundle\LocaleBundle\Storage\CookieStorage</parameter>
+        <parameter key="sylius.locale.storage.session.class">Sylius\Bundle\LocaleBundle\Storage\SessionStorage</parameter>
     </parameters>
 
     <services>
@@ -30,9 +34,19 @@
         </service>
 
         <service id="sylius.context.locale" class="%sylius.context.locale.class%">
-            <argument type="service" id="session" />
+            <argument /> <!-- Storage service name comes from config -->
             <argument>%sylius.locale%</argument>
         </service>
+
+        <service id="sylius.locale.storage.cookie" class="%sylius.locale.storage.cookie.class%" public="false">
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
+        </service>
+        <service id="sylius.locale.storage.session" class="%sylius.locale.storage.session.class%" public="false">
+            <argument type="service" id="session" />
+        </service>
+
         <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
             <argument type="service" id="sylius.repository.locale" />
         </service>

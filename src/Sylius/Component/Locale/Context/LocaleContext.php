@@ -9,34 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\LocaleBundle\Context;
+namespace Sylius\Component\Locale\Context;
 
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Locale\Storage\LocaleStorageInterface;
 
 /**
- * Default locale context implementation, which uses session to store the user selected locale.
+ * Default locale context implementation.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class LocaleContext implements LocaleContextInterface
 {
-    // Key used to store the locale in session.
-    const SESSION_KEY = '_sylius.locale';
-
-    /**
-     * @var SessionInterface
-     */
-    protected $session;
-
     /**
      * @var string
      */
     protected $defaultLocale;
 
-    public function __construct(SessionInterface $session, $defaultLocale)
+    /**
+     * Locale storage.
+     *
+     * @var LocaleStorageInterface
+     */
+    protected $storage;
+
+    public function __construct(LocaleStorageInterface $storage, $defaultLocale)
     {
-        $this->session = $session;
+        $this->storage = $storage;
         $this->defaultLocale = $defaultLocale;
     }
 
@@ -53,7 +52,7 @@ class LocaleContext implements LocaleContextInterface
      */
     public function getLocale()
     {
-        return $this->session->get(self::SESSION_KEY, $this->defaultLocale);
+        return $this->storage->getCurrentLocale($this->defaultLocale);
     }
 
     /**
@@ -61,6 +60,6 @@ class LocaleContext implements LocaleContextInterface
      */
     public function setLocale($locale)
     {
-        return $this->session->set(self::SESSION_KEY, $locale);
+        return $this->storage->setCurrentLocale($locale);
     }
 }
