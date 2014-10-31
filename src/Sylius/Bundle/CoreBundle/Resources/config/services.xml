@@ -362,7 +362,7 @@
 
         <!-- money -->
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
-            <argument type="service" id="session" />
+            <argument /> <!-- Storage service name comes from config -->
             <argument type="service" id="security.context" />
             <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.manager.user" />

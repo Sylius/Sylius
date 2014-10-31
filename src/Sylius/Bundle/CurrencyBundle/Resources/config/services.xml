@@ -41,7 +41,7 @@
         </service>
 
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
-            <argument type="service" id="session" />
+            <argument /> <!-- Storage service name comes from config -->
             <argument>%sylius.money.currency%</argument>
         </service>
 

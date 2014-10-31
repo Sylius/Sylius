@@ -9,19 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\LocaleBundle\Storage;
+namespace Sylius\Component\Storage;
 
-use Sylius\Component\Locale\Storage\LocaleStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class CookieStorage implements LocaleStorageInterface
+class CookieStorage implements StorageInterface
 {
-    // Key used to store the locale in cookie.
-    const COOKIE_KEY = '_sylius.locale';
-
     /**
      * @var Request
      */
@@ -38,16 +34,16 @@ class CookieStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentLocale($defaultLocale)
+    public function getData($key, $defaultLocale)
     {
-        return $this->request->cookies->get(self::COOKIE_KEY, $defaultLocale);
+        return $this->request->cookies->get($key, $defaultLocale);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrentLocale($locale)
+    public function setData($key, $locale)
     {
-        return $this->request->cookies->set(self::COOKIE_KEY, $locale);
+        $this->request->cookies->set($key, $locale);
     }
 }

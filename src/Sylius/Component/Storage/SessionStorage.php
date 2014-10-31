@@ -9,20 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\LocaleBundle\Storage;
+namespace Sylius\Component\Storage;
 
-use Sylius\Component\Locale\Storage\LocaleStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class SessionStorage implements LocaleStorageInterface
+class SessionStorage implements StorageInterface
 {
-    // Key used to store the locale in session.
-    const SESSION_KEY = '_sylius.locale';
-
     /**
      * @var SessionInterface
      */
@@ -36,16 +32,20 @@ class SessionStorage implements LocaleStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrentLocale($defaultLocale)
+    public function getData($key, $default)
     {
-        return $this->session->get(self::SESSION_KEY, $defaultLocale);
+        if (!$this->session->isStarted()) {
+            return $default;
+        }
+
+        return $this->session->get($key, $default);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrentLocale($locale)
+    public function setData($key, $value)
     {
-        return $this->session->set(self::SESSION_KEY, $locale);
+        $this->session->set($key, $value);
     }
 }

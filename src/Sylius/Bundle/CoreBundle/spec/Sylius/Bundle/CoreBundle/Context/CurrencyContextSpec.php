@@ -13,28 +13,27 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
-use Sylius\Component\Core\Model\User;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Storage\StorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
     function let(
-        SessionInterface $session,
+        StorageInterface $storage,
         SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
         ObjectManager $userManager,
         Settings $settings
-    )
-    {
-        $settingsManager->loadSettings('general')->shouldBeCalled()->willReturn($settings);
-        $settings->get('currency')->shouldBeCalled()->willReturn('EUR');
+    ) {
+        $settingsManager->loadSettings('general')->willReturn($settings);
+        $settings->get('currency')->willReturn('EUR');
 
-        $this->beConstructedWith($session, $securityContext, $settingsManager, $userManager);
+        $this->beConstructedWith($storage, $securityContext, $settingsManager, $userManager);
     }
 
     function it_is_initializable()
@@ -44,7 +43,7 @@ class CurrencyContextSpec extends ObjectBehavior
 
     function it_extends_Sylius_currency_context()
     {
-        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Context\CurrencyContext');
+        $this->shouldHaveType('Sylius\Component\Currency\Context\CurrencyContext');
     }
 
     function it_gets_default_currency()
@@ -55,26 +54,27 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_gets_currency_from_session_if_there_is_no_user(
         TokenInterface $token,
         $securityContext,
-        $session
+        $storage
     ) {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $token->getUser()->shouldBeCalled()->willReturn(null);
-        $session->isStarted()->shouldBeCalled()->willReturn(true);
-        $session->get(CurrencyContext::SESSION_KEY, 'EUR')->shouldBeCalled()->willReturn('RSD');
+        $securityContext->getToken()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+        $token->getUser()->willReturn(null);
+
+        $storage->getData(CurrencyContextInterface::STORAGE_KEY, 'EUR')->willReturn('RSD');
 
         $this->getCurrency()->shouldReturn('RSD');
     }
 
     function it_gets_currency_from_user_if_authenticated(
-        User $user,
+        UserInterface $user,
         TokenInterface $token,
         $securityContext
     ) {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getCurrency()->shouldBeCalled()->willReturn('PLN');
+        $securityContext->getToken()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+        $token->getUser()->willReturn($user);
+
+        $user->getCurrency()->willReturn('PLN');
 
         $this->getCurrency()->shouldReturn('PLN');
     }
@@ -82,25 +82,26 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_sets_currency_to_session_if_there_is_no_user(
         TokenInterface $token,
         $securityContext,
-        $session
-    )
-    {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $token->getUser()->shouldBeCalled()->willReturn(null);
-        $session->set(CurrencyContext::SESSION_KEY, 'PLN')->shouldBeCalled();
+        $storage
+    ) {
+        $securityContext->getToken()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+        $token->getUser()->willReturn(null);
+
+        $storage->setData(CurrencyContextInterface::STORAGE_KEY, 'PLN')->shouldBeCalled();
 
         $this->setCurrency('PLN');
     }
 
     function it_sets_currency_to_user_if_authenticated(
-        User $user,
+        UserInterface $user,
         TokenInterface $token,
         $securityContext
     ) {
-        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
-        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->shouldBeCalled()->willReturn(true);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
+        $securityContext->getToken()->willReturn($token);
+        $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
+        $token->getUser()->willReturn($user);
+
         $user->setCurrency('PLN')->shouldBeCalled();
 
         $this->setCurrency('PLN');
