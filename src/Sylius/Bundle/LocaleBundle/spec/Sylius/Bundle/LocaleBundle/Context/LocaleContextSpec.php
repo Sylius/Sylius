@@ -12,14 +12,14 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\LocaleBundle\Context\LocaleContext;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Prophecy\Argument;
+use Sylius\Component\Locale\Storage\LocaleStorageInterface;
 
 class LocaleContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session)
+    function let(LocaleStorageInterface $storage)
     {
-        $this->beConstructedWith($session, 'pl_PL');
+        $this->beConstructedWith($storage, 'pl_PL');
     }
 
     function it_is_initializable()
@@ -37,16 +37,16 @@ class LocaleContextSpec extends ObjectBehavior
         $this->getDefaultLocale()->shouldReturn('pl_PL');
     }
 
-    function it_gets_locale_from_session($session)
+    function it_gets_locale_from_session($storage)
     {
-        $session->get(LocaleContext::SESSION_KEY, 'pl_PL')->shouldBeCalled()->willReturn('en_US');
+        $storage->getCurrentLocale(Argument::any(), 'pl_PL')->willReturn('en_US');
 
         $this->getLocale()->shouldReturn('en_US');
     }
 
-    function it_sets_locale_to_session($session)
+    function it_sets_locale_to_session($storage)
     {
-        $session->set(LocaleContext::SESSION_KEY, 'en_GB')->shouldBeCalled();
+        $storage->setCurrentLocale(Argument::any(), 'en_GB')->shouldBeCalled();
 
         $this->setLocale('en_GB');
     }
