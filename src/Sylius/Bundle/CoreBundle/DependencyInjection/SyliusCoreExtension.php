@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Core extension.
@@ -77,6 +78,9 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
         $this->loadCheckoutConfiguration($config['checkout'], $container);
+
+        $definition = $container->findDefinition('sylius.context.currency');
+        $definition->replaceArgument(0, new Reference($config['currency_storage']));
     }
 
     /**

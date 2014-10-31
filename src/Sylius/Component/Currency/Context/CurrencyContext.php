@@ -9,21 +9,29 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CurrencyBundle\Context;
+namespace Sylius\Component\Currency\Context;
 
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Storage\StorageInterface;
 
 class CurrencyContext implements CurrencyContextInterface
 {
-    const SESSION_KEY = '_sylius.currency';
-
-    protected $session;
+    /**
+     * Default currency.
+     *
+     * @var string
+     */
     protected $defaultCurrency;
 
-    public function __construct(SessionInterface $session, $defaultCurrency)
+    /**
+     * Locale storage.
+     *
+     * @var StorageInterface
+     */
+    protected $storage;
+
+    public function __construct(StorageInterface $storage, $defaultCurrency)
     {
-        $this->session = $session;
+        $this->storage = $storage;
         $this->defaultCurrency = $defaultCurrency;
     }
 
@@ -40,11 +48,7 @@ class CurrencyContext implements CurrencyContextInterface
      */
     public function getCurrency()
     {
-        if (!$this->session->isStarted()) {
-            return $this->defaultCurrency;
-        }
-
-        return $this->session->get(self::SESSION_KEY, $this->defaultCurrency);
+        return $this->storage->getData(self::STORAGE_KEY, $this->defaultCurrency);
     }
 
     /**
@@ -52,6 +56,6 @@ class CurrencyContext implements CurrencyContextInterface
      */
     public function setCurrency($currency)
     {
-        return $this->session->set(self::SESSION_KEY, $currency);
+        return $this->storage->setData(self::STORAGE_KEY, $currency);
     }
 }

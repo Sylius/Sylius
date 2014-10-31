@@ -17,11 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.context.cart.class">Sylius\Component\Cart\Context\CartContext</parameter>
+
         <parameter key="sylius.model.cart.class">%sylius.model.order.class%</parameter>
         <parameter key="sylius.model.cart_item.class">%sylius.model.order_item.class%</parameter>
 
         <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
-        <parameter key="sylius.cart_storage.session.class">Sylius\Bundle\CartBundle\Storage\SessionCartStorage</parameter>
 
         <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartListener</parameter>
         <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashListener</parameter>
@@ -57,6 +58,10 @@
             </call>
         </service>
 
+        <service id="sylius.context.cart" class="%sylius.context.cart.class%">
+            <argument /> <!-- Storage service name comes from config -->
+        </service>
+
         <service id="sylius.manager.cart" alias="sylius.manager.order" />
         <service id="sylius.manager.cart_item" alias="sylius.manager.order_item" />
 
@@ -76,14 +81,10 @@
         </service>
 
         <service id="sylius.cart_provider.default" class="%sylius.cart_provider.default.class%">
-            <argument type="service" id="sylius.cart_storage" />
+            <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="sylius.repository.cart" />
             <argument type="service" id="event_dispatcher" />
-        </service>
-
-        <service id="sylius.cart_storage.session" class="%sylius.cart_storage.session.class%">
-            <argument type="service" id="session" />
         </service>
 
         <service id="sylius.listener.cart" class="%sylius.listener.cart.class%">

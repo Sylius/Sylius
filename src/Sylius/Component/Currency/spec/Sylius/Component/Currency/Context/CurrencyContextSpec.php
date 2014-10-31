@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CurrencyBundle\Context;
+namespace spec\Sylius\Component\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CurrencyBundle\Context\CurrencyContext;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Storage\StorageInterface;
 
 class CurrencyContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session)
+    function let(StorageInterface $storage)
     {
-        $this->beConstructedWith($session, 'EUR');
+        $this->beConstructedWith($storage, 'EUR');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Context\CurrencyContext');
+        $this->shouldHaveType('Sylius\Component\Currency\Context\CurrencyContext');
     }
 
     function it_implements_Sylius_currency_context_interface()
@@ -37,17 +37,16 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getDefaultCurrency()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session($session)
+    function it_gets_currency_from_session($storage)
     {
-        $session->isStarted()->shouldBeCalled()->willReturn(true);
-        $session->get(CurrencyContext::SESSION_KEY, 'EUR')->shouldBeCalled()->willReturn('RSD');
+        $storage->getData(CurrencyContextInterface::STORAGE_KEY, 'EUR')->willReturn('RSD');
 
         $this->getCurrency()->shouldReturn('RSD');
     }
 
-    function it_sets_currency_to_session($session)
+    function it_sets_currency_to_session($storage)
     {
-        $session->set(CurrencyContext::SESSION_KEY, 'PLN')->shouldBeCalled();
+        $storage->setData(CurrencyContextInterface::STORAGE_KEY, 'PLN')->shouldBeCalled();
 
         $this->setCurrency('PLN');
     }

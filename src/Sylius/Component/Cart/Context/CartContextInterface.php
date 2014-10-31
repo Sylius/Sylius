@@ -9,26 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Storage;
+namespace Sylius\Component\Cart\Context;
 
 use Sylius\Component\Cart\Model\CartInterface;
 
 /**
- * Interface for service that stores current cart id.
+ * Interface to be implemented by the service providing the currently used
+ * cart.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CartStorageInterface
+interface CartContextInterface
 {
+    // Key used to store the cart in storage.
+    const STORAGE_KEY = '_sylius.cart_id';
+
     /**
-     * Returns current cart id, used then to retrieve the cart.
+     * Get the currently active cart.
      *
-     * @return mixed
+     * @return string
      */
     public function getCurrentCartIdentifier();
 
     /**
-     * Sets current cart id and persists it.
+     * Set the currently active cart.
      *
      * @param CartInterface $cart
      */

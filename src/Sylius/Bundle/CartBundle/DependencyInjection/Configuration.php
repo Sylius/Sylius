@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('provider')->defaultValue('sylius.cart_provider.default')->end()
                 ->scalarNode('resolver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('storage')->defaultValue('sylius.cart_storage.session')->end()
+                ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 

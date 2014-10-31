@@ -17,7 +17,8 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.context.currency.class">Sylius\Bundle\CurrencyBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.context.currency.class">Sylius\Component\Currency\Context\CurrencyContext</parameter>
+
         <parameter key="sylius.currency_converter.class">Sylius\Component\Currency\Converter\CurrencyConverter</parameter>
         <parameter key="sylius.currency_provider.class">Sylius\Component\Currency\Provider\CurrencyProvider</parameter>
 
@@ -41,7 +42,7 @@
         </service>
 
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
-            <argument type="service" id="session" />
+            <argument /> <!-- Storage service name comes from config -->
             <argument>%sylius.money.currency%</argument>
         </service>
 

@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('storage')->defaultValue('sylius.locale.storage.session')->end()
+                ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 

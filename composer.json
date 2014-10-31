@@ -116,6 +116,7 @@
         "sylius/settings-bundle": "self.version",
         "sylius/shipping": "self.version",
         "sylius/shipping-bundle": "self.version",
+        "sylius/storage": "self.version",
         "sylius/taxation": "self.version",
         "sylius/taxation-bundle": "self.version",
         "sylius/taxonomy": "self.version",

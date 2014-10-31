@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\LocaleBundle\Context;
+namespace spec\Sylius\Component\Locale\Context;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Locale\Storage\LocaleStorageInterface;
+use Sylius\Component\Storage\StorageInterface;
 
 class LocaleContextSpec extends ObjectBehavior
 {
-    function let(LocaleStorageInterface $storage)
+    function let(StorageInterface $storage)
     {
         $this->beConstructedWith($storage, 'pl_PL');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Context\LocaleContext');
+        $this->shouldHaveType('Sylius\Component\Locale\Context\LocaleContext');
     }
 
     function it_implements_Sylius_locale_context_interface()
@@ -39,14 +39,14 @@ class LocaleContextSpec extends ObjectBehavior
 
     function it_gets_locale_from_session($storage)
     {
-        $storage->getCurrentLocale(Argument::any(), 'pl_PL')->willReturn('en_US');
+        $storage->getData(Argument::any(), 'pl_PL')->willReturn('en_US');
 
         $this->getLocale()->shouldReturn('en_US');
     }
 
     function it_sets_locale_to_session($storage)
     {
-        $storage->setCurrentLocale(Argument::any(), 'en_GB')->shouldBeCalled();
+        $storage->setData(Argument::any(), 'en_GB')->shouldBeCalled();
 
         $this->setLocale('en_GB');
     }
