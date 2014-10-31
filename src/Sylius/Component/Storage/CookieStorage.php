@@ -34,16 +34,32 @@ class CookieStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function getData($key, $defaultLocale)
+    public function hasData($key)
     {
-        return $this->request->cookies->get($key, $defaultLocale);
+        return $this->request->cookies->has($key);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setData($key, $locale)
+    public function getData($key, $default = null)
     {
-        $this->request->cookies->set($key, $locale);
+        return $this->request->cookies->get($key, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setData($key, $value)
+    {
+        $this->request->cookies->set($key, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeData($key)
+    {
+        $this->request->cookies->remove($key);
     }
 }

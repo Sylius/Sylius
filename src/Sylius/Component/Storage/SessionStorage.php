@@ -32,7 +32,19 @@ class SessionStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function getData($key, $default)
+    public function hasData($key)
+    {
+        if (!$this->session->isStarted()) {
+            return false;
+        }
+
+        return $this->session->has($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($key, $default = null)
     {
         if (!$this->session->isStarted()) {
             return $default;
@@ -47,5 +59,13 @@ class SessionStorage implements StorageInterface
     public function setData($key, $value)
     {
         $this->session->set($key, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeData($key)
+    {
+        $this->session->remove($key);
     }
 }

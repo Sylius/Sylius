@@ -13,6 +13,9 @@ namespace Sylius\Component\Storage;
 
 use Doctrine\Common\Cache\Cache;
 
+/**
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class DoctrineCacheStorage implements StorageInterface
 {
     /**
@@ -28,7 +31,15 @@ class DoctrineCacheStorage implements StorageInterface
     /**
      * {@inheritdoc}
      */
-    public function getData($key, $default)
+    public function hasData($key)
+    {
+        return $this->cache->contains($key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($key, $default = null)
     {
         $data = $this->cache->fetch($key);
         if ($data) {
@@ -44,5 +55,13 @@ class DoctrineCacheStorage implements StorageInterface
     public function setData($key, $value)
     {
         $this->cache->save($key, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeData($key)
+    {
+        $this->cache->delete($key);
     }
 }
