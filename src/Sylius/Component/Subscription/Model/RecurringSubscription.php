@@ -39,7 +39,7 @@ class RecurringSubscription extends Subscription implements RecurringSubscriptio
     /**
      * {@inheritdoc}
      */
-    public function setInterval(\DateInterval $interval)
+    public function setInterval(\DateInterval $interval = null)
     {
         $this->interval = $interval;
 

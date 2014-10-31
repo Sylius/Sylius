@@ -19,7 +19,16 @@
     <class name="Sylius\Component\Subscription\Model\Subscription">
         <property name="scheduledDate">
             <constraint name="NotBlank">
-                <option name="groups">sylius</option>
+                <option name="groups">Default</option>
+            </constraint>
+        </property>
+        <property name="quantity">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="groups">Default</option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="groups">Default</option>
             </constraint>
         </property>
     </class>
@@ -27,22 +36,17 @@
     <class name="Sylius\Component\Subscription\Model\RecurringSubscription">
         <property name="interval">
             <constraint name="NotBlank">
-                <option name="groups">sylius</option>
+                <option name="message">sylius.subscription.interval.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                    <value>Default</value>
+                </option>
             </constraint>
         </property>
         <property name="maxCycles">
             <constraint name="Range">
                 <option name="min">1</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="Sylius\Component\Subscription\Model\SubscriptionItem">
-        <property name="quantity">
-            <constraint name="Range">
-                <option name="min">0</option>
-                <option name="groups">sylius</option>
+                <option name="groups">Default</option>
             </constraint>
         </property>
     </class>

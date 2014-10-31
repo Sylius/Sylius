@@ -25,9 +25,8 @@ class SubscribableCartItemType extends CartItemType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('subscription', 'sylius_subscription', array(
-            'label' => 'sylius.form.subscription.label',
-            'simple' => true
+        $builder->add('subscription', 'sylius_simple_subscription', array(
+            'label' => 'sylius.form.subscription.label'
         ));
 
         // remove subscription if fields not filled in form
@@ -38,7 +37,7 @@ class SubscribableCartItemType extends CartItemType
                 /** @var SubscriptionInterface $subscription */
                 $subscription = $item->getSubscription();
 
-                if (null === $subscription || !$subscription->getInterval()) {
+                if (null === $subscription || null === $subscription->getInterval()) {
                     $item->setSubscription(null);
                 }
             }

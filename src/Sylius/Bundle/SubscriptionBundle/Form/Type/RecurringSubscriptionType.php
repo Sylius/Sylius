@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\SubscriptionBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * RecurringSubscriptionType
@@ -25,38 +24,24 @@ class RecurringSubscriptionType extends SubscriptionType
     {
         parent::buildForm($builder, $options);
 
-        if (!$options['simple']) {
-            $builder
-                ->add('interval', 'sylius_date_interval', array(
-                    'label' => 'sylius.form.subscription.interval_unit'
-                ))
-                ->add('maxCycles', 'integer', array(
-                    'required' => false,
-                    'label' => 'sylius.form.subscription.max_cycles'
-                ))
-            ;
-        } else {
-            $builder
-                ->add('interval', 'sylius_date_interval', array(
-                    'label' => false,
-                    'required' => false
-                ))
-                ->remove('quantity')
-                ->remove('scheduledDate')
-                ->remove('maxCycles')
-            ;
-        }
+        $builder
+            ->add('interval', 'sylius_date_interval', array(
+                'label' => 'sylius.form.subscription.interval',
+                'units' => $this->getIntervalUnits(),
+            ))
+            ->add('maxCycles', 'integer', array(
+                'required' => false,
+                'label' => 'sylius.form.subscription.max_cycles'
+            ))
+        ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    protected function getIntervalUnits()
     {
-        parent::setDefaultOptions($resolver);
-
-        $resolver->setDefaults(array(
-            'simple' => false
-        ));
+        return array(
+            'd' => 'sylius.form.subscription.interval_units.days',
+            'm' => 'sylius.form.subscription.interval_units.months',
+            'y' => 'sylius.form.subscription.interval_units.years',
+        );
     }
 }

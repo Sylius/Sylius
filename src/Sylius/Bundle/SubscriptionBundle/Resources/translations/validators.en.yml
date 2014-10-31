@@ -1,0 +1,3 @@
+sylius.subscription:
+    interval:
+        not_blank: Invalid subscription interval.

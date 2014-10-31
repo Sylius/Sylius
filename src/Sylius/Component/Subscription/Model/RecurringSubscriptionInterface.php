@@ -1,5 +1,4 @@
 <?php
-
 /*
 * This file is part of the Sylius package.
 *
@@ -21,14 +20,14 @@ namespace Sylius\Component\Subscription\Model;
 interface RecurringSubscriptionInterface extends SubscriptionInterface, RecurringInterface
 {
     /**
-     * @param \DateInterval $interval
+     * @param null|\DateInterval $interval
      * @return $this
      */
-    public function setInterval(\DateInterval $interval);
+    public function setInterval(\DateInterval $interval = null);
 
     /**
-     * @param int $maxCycles
+     * @param null|int $maxCycles
      * @return $this
      */
-    public function setMaxCycles($maxCycles);
+    public function setMaxCycles($maxCycles = null);
 }

@@ -39,12 +39,8 @@ class DateIntervalType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
-            ->setDefaults(array(
-                'units' => array(
-                    'd' => 'Days',
-                    'm' => 'Months',
-                    'y' => 'Years',
-                )
+            ->setRequired(array(
+                'units'
             ))
             ->setAllowedTypes(array(
                 'units' => 'array'

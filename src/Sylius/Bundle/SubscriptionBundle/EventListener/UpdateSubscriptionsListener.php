@@ -52,7 +52,9 @@ class UpdateSubscriptionsListener
 
             $subscription->setVariant($item->getVariant());
             $subscription->setQuantity($item->getQuantity());
-            $subscription->setScheduledDate(new \DateTime());
+            $subscription->setScheduledDate(
+                (new \DateTime())->add($subscription->getInterval())
+            );
 
             if (null !== $token = $this->securityContext->getToken()) {
                 $subscription->setUser($token->getUser());

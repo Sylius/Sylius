@@ -14,7 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
     <mapped-superclass name="Sylius\Component\Subscription\Model\RecurringSubscription" table="sylius_subscription">
-        <field name="interval" column="interval_frequency" type="sylius_date_interval" nullable="false" />
+        <field name="interval" column="interval_frequency" type="sylius_date_interval" />
         <field name="maxCycles" column="max_cycles" type="integer" nullable="true" />
     </mapped-superclass>
 
