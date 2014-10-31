@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CartBundle\Provider;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Cart\Storage\CartStorageInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,11 +28,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class CartProvider implements CartProviderInterface
 {
     /**
-     * Cart identifier storage.
+     * Cart context.
      *
-     * @var CartStorageInterface
+     * @var CartContextInterface
      */
-    protected $storage;
+    protected $context;
 
     /**
      * Cart manager.
@@ -65,14 +65,14 @@ class CartProvider implements CartProviderInterface
     /**
      * Constructor.
      *
-     * @param CartStorageInterface     $storage
+     * @param CartContextInterface     $context
      * @param ObjectManager            $manager
      * @param RepositoryInterface      $repository
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(CartStorageInterface $storage, ObjectManager $manager, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
+    public function __construct(CartContextInterface $context, ObjectManager $manager, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
     {
-        $this->storage = $storage;
+        $this->context = $context;
         $this->manager = $manager;
         $this->repository = $repository;
         $this->eventDispatcher = $eventDispatcher;
@@ -111,7 +111,7 @@ class CartProvider implements CartProviderInterface
     public function setCart(CartInterface $cart)
     {
         $this->cart = $cart;
-        $this->storage->setCurrentCartIdentifier($cart);
+        $this->context->setCurrentCartIdentifier($cart);
     }
 
     /**
@@ -124,7 +124,7 @@ class CartProvider implements CartProviderInterface
         }
 
         $this->cart = null;
-        $this->storage->resetCurrentCartIdentifier();
+        $this->context->resetCurrentCartIdentifier();
     }
 
     /**
@@ -145,7 +145,7 @@ class CartProvider implements CartProviderInterface
     private function initializeCart()
     {
         if (null === $this->cart) {
-            $cartIdentifier = $this->storage->getCurrentCartIdentifier();
+            $cartIdentifier = $this->context->getCurrentCartIdentifier();
             if ($cartIdentifier) {
                 $this->cart = $this->getCartByIdentifier($cartIdentifier);
             }

@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\CartBundle\Provider;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Storage\CartStorageInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -26,12 +26,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class CartProviderSpec extends ObjectBehavior
 {
     function let(
-        CartStorageInterface $storage,
+        CartContextInterface $context,
         ObjectManager $manager,
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->beConstructedWith($storage, $manager, $repository, $eventDispatcher);
+        $this->beConstructedWith($context, $manager, $repository, $eventDispatcher);
     }
 
     function it_is_initializable()
@@ -45,12 +45,12 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_looks_for_cart_by_identifier_if_any_in_storage(
-        $storage,
+        $context,
         $repository,
         $eventDispatcher,
         CartInterface $cart
     ) {
-        $storage->getCurrentCartIdentifier()->willReturn(3);
+        $context->getCurrentCartIdentifier()->willReturn(3);
         $repository->find(3)->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldNotBeCalled();
 
@@ -58,12 +58,12 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_creates_new_cart_if_there_is_no_identifier_in_storage(
-        $storage,
+        $context,
         $repository,
         $eventDispatcher,
         CartInterface $cart
     ) {
-        $storage->getCurrentCartIdentifier()->willReturn(null);
+        $context->getCurrentCartIdentifier()->willReturn(null);
         $repository->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
@@ -71,12 +71,12 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_creates_new_cart_if_identifier_is_wrong(
-        $storage,
+        $context,
         $repository,
         $eventDispatcher,
         CartInterface $cart
     ) {
-        $storage->getCurrentCartIdentifier()->willReturn(7);
+        $context->getCurrentCartIdentifier()->willReturn(7);
         $repository->find(7)->shouldBeCalled()->willReturn(null);
         $repository->createNew()->willReturn($cart);
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
@@ -85,42 +85,42 @@ class CartProviderSpec extends ObjectBehavior
     }
 
     function it_resets_current_cart_identifier_in_storage_when_abandoning_cart(
-        $storage,
+        $context,
         $eventDispatcher,
         CartInterface $cart
     ) {
         $this->setCart($cart);
-        $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
+        $context->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
-        $storage->resetCurrentCartIdentifier()->shouldBeCalled();
+        $context->resetCurrentCartIdentifier()->shouldBeCalled();
         $eventDispatcher->dispatch(SyliusCartEvents::CART_ABANDON, Argument::any())->shouldBeCalled();
 
         $this->abandonCart();
     }
 
-    function it_sets_current_cart_identifier_when_setting_cart($storage, CartInterface $cart)
+    function it_sets_current_cart_identifier_when_setting_cart($context, CartInterface $cart)
     {
-        $storage->setCurrentCartIdentifier($cart)->shouldBeCalled();
+        $context->setCurrentCartIdentifier($cart)->shouldBeCalled();
 
         $this->setCart($cart);
     }
 
     function it_initializes_cart_while_validating_existence_and_if_there_is_no_identifier_in_storage(
-        $storage,
+        $context,
         $repository
     ) {
-        $storage->getCurrentCartIdentifier()->willReturn(null);
+        $context->getCurrentCartIdentifier()->willReturn(null);
         $repository->find(Argument::any())->shouldNotBeCalled();
 
         $this->hasCart()->shouldReturn(false);
     }
 
     function it_initializes_cart_while_validating_existence_and_if_there_is_identifier_in_storage(
-        $storage,
+        $context,
         $repository,
         CartInterface $cart
     ) {
-        $storage->getCurrentCartIdentifier()->willReturn(666);
+        $context->getCurrentCartIdentifier()->willReturn(666);
         $repository->find(666)->willReturn($cart);
 
         $this->hasCart()->shouldReturn(true);

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Carts extension.
@@ -39,7 +40,9 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
-        $container->setAlias('sylius.cart_storage', $config['storage']);
+
+        $definition = $container->findDefinition('sylius.context.cart');
+        $definition->replaceArgument(0, new Reference($config['storage']));
 
         $classes = $config['classes'];
 
