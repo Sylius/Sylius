@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Subscription\Scheduler;
 
-use Sylius\Component\Subscription\Model\RecurringInterface;
+use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
 use Sylius\Component\Subscription\Model\SchedulableInterface;
 
 /**
@@ -27,7 +27,7 @@ interface RecurringSchedulerInterface
      * Schedules the next processing date
      *
      * @param SchedulableInterface $scheduleSubject
-     * @param RecurringInterface $recurring
+     * @param RecurringSubscriptionInterface $recurring
      */
-    public function schedule(SchedulableInterface $scheduleSubject, RecurringInterface $recurring);
+    public function schedule(SchedulableInterface $scheduleSubject, RecurringSubscriptionInterface $recurring);
 }

@@ -29,7 +29,7 @@
         "sylius/subscription":             "0.12.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":   "2.0.*@dev",
+        "phpspec/phpspec":   "~2.0",
         "symfony/form":      "~2.3",
         "symfony/validator": "~2.3"
     },
@@ -42,7 +42,6 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\SubscriptionBundle\\spec\\": "spec/" }
     },
-    "target-dir": "Sylius/Bundle/SubscriptionBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.12-dev"

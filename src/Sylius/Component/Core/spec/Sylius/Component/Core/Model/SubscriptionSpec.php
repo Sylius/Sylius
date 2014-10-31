@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 class SubscriptionSpec extends ObjectBehavior
 {
@@ -61,14 +61,14 @@ class SubscriptionSpec extends ObjectBehavior
         $this->getVariant()->shouldReturn(null);
     }
 
-    public function its_variant_is_mutable(VariantInterface $variant)
+    public function its_variant_is_mutable(ProductVariantInterface $variant)
     {
         $this->setVariant($variant);
         $this->getVariant()->shouldReturn($variant);
     }
 
     public function it_should_return_product_from_variant(
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         ProductInterface $product
     ) {
         $variant->getProduct()->willReturn($product);

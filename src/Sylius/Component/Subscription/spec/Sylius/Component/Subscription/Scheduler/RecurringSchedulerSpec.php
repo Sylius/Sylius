@@ -12,9 +12,8 @@
 namespace spec\Sylius\Component\Subscription\Scheduler;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Bundle\SubscriptionBundle\Scheduler\Sylius;
 use Sylius\Component\Subscription\Model\SchedulableInterface;
-use Sylius\Component\Subscription\Model\RecurringInterface;
+use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
 
 class RecurringSchedulerSpec extends ObjectBehavior
 {
@@ -30,12 +29,12 @@ class RecurringSchedulerSpec extends ObjectBehavior
 
     public function it_should_schedule_properly(
         SchedulableInterface $schedulable,
-        RecurringInterface $recurring
+        RecurringSubscriptionInterface $recurring
     ) {
-        $recurring->getIntervalUnit()->willReturn('days');
-        $recurring->getIntervalFrequency()->willReturn(5);
+        $interval = new \DateInterval('P3D');
+        $recurring->getInterval()->willReturn($interval);
 
-        $date = new \DateTime('+5 days');
+        $date = new \DateTime('+3 days');
 
         $schedulable->setScheduledDate($date)->shouldBeCalled();
 

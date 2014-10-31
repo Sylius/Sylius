@@ -50,10 +50,11 @@ class UpdateSubscriptionsListener
                 continue;
             }
 
+            $now = new \DateTime();
             $subscription->setVariant($item->getVariant());
             $subscription->setQuantity($item->getQuantity());
             $subscription->setScheduledDate(
-                (new \DateTime())->add($subscription->getInterval())
+                $now->add($subscription->getInterval())
             );
 
             if (null !== $token = $this->securityContext->getToken()) {

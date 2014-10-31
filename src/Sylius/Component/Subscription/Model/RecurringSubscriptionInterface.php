@@ -17,13 +17,27 @@ namespace Sylius\Component\Subscription\Model;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-interface RecurringSubscriptionInterface extends SubscriptionInterface, RecurringInterface
+interface RecurringSubscriptionInterface extends SubscriptionInterface
 {
+    /**
+     * Get unit of interval
+     *
+     * @return \DateInterval
+     */
+    public function getInterval();
+
     /**
      * @param null|\DateInterval $interval
      * @return $this
      */
     public function setInterval(\DateInterval $interval = null);
+
+    /**
+     * Get max number of cycles of interval
+     *
+     * @return int
+     */
+    public function getMaxCycles();
 
     /**
      * @param null|int $maxCycles

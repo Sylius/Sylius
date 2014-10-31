@@ -12,7 +12,7 @@
 namespace Sylius\Component\Subscription\Scheduler;
 
 use Sylius\Component\Subscription\Model\SchedulableInterface;
-use Sylius\Component\Subscription\Model\RecurringInterface;
+use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
 
 /**
  * RecurringScheduler implementation
@@ -24,10 +24,11 @@ class RecurringScheduler implements RecurringSchedulerInterface
     /**
      * {@inheritdoc}
      */
-    public function schedule(SchedulableInterface $scheduleSubject, RecurringInterface $recurring)
+    public function schedule(SchedulableInterface $scheduleSubject, RecurringSubscriptionInterface $recurring)
     {
+        $now = new \DateTime();
         $scheduleSubject->setScheduledDate(
-            new \DateTime(sprintf('+%s %s', $recurring->getIntervalFrequency(), $recurring->getIntervalUnit()))
+            $now->add($recurring->getInterval())
         );
     }
 }

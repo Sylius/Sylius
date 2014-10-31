@@ -1,6 +1,6 @@
 {
     "name": "sylius/subscription",
-    "type": "symfony-bundle",
+    "type": "library",
     "description": "Flexible subscription system for Symfony2 ecommerce applications.",
     "keywords": ["subscription", "club-membership", "recurring", "shop", "webshop", "ecommerce", "sylius"],
     "homepage": "http://sylius.org",
@@ -27,7 +27,7 @@
         "sylius/resource":                 "0.12.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":   "2.0.*@dev",
+        "phpspec/phpspec":   "~2.0",
         "symfony/form":      "~2.3",
         "symfony/validator": "~2.3"
     },
@@ -40,7 +40,6 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Component\\Subscription\\spec\\": "spec/" }
     },
-    "target-dir": "Sylius/Component/Subscription",
     "extra": {
         "branch-alias": {
             "dev-master": "0.12-dev"

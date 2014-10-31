@@ -28,26 +28,16 @@ class RecurringSubscriptionSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Subscription\Model\RecurringSubscriptionInterface');
     }
 
-    public function it_has_no_interval_unit_by_default()
+    public function it_has_no_interval_by_default()
     {
-        $this->getIntervalUnit()->shouldReturn(null);
+        $this->getInterval()->shouldReturn(null);
     }
 
-    public function its_interval_unit_is_mutable()
+    public function its_interval_is_mutable()
     {
-        $this->setIntervalUnit('days');
-        $this->getIntervalUnit()->shouldReturn('days');
-    }
-
-    public function it_has_no_interval_frequency_by_default()
-    {
-        $this->getIntervalFrequency()->shouldReturn(null);
-    }
-
-    public function its_interval_frequency_is_mutable()
-    {
-        $this->setIntervalFrequency(5);
-        $this->getIntervalFrequency()->shouldReturn(5);
+        $interval = new \DateInterval('P3D');
+        $this->setInterval($interval);
+        $this->getInterval()->shouldReturn($interval);
     }
 
     public function it_has_no_max_cycles_by_default()

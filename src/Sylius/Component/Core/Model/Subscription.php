@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Subscription\Model\RecurringSubscription;
 
 /**
@@ -38,7 +37,7 @@ class Subscription extends RecurringSubscription implements SubscriptionInterfac
     /**
      * Product variant for subscription.
      *
-     * @var VariantInterface
+     * @var ProductVariantInterface
      */
     protected $variant;
 
@@ -94,7 +93,7 @@ class Subscription extends RecurringSubscription implements SubscriptionInterfac
     /**
      * {@inheritdoc}
      */
-    public function setVariant(VariantInterface $variant)
+    public function setVariant(ProductVariantInterface $variant)
     {
         $this->variant = $variant;
 

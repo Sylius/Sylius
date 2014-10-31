@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Subscription\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Subscription\Model\SubscriptionItemInterface;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>

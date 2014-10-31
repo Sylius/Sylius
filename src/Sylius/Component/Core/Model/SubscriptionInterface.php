@@ -12,7 +12,6 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Subscription\Model\RecurringSubscriptionInterface;
-use Sylius\Component\Product\Model\VariantInterface;
 
 /**
  * SubscriptionInterface
@@ -21,19 +20,8 @@ use Sylius\Component\Product\Model\VariantInterface;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-interface SubscriptionInterface extends RecurringSubscriptionInterface
+interface SubscriptionInterface extends RecurringSubscriptionInterface, UserAwareInterface
 {
-    /**
-     * @return UserInterface
-     */
-    public function getUser();
-
-    /**
-     * @param UserInterface $user
-     * @return $this
-     */
-    public function setUser(UserInterface $user);
-
     /**
      * @return AddressInterface
      */
@@ -46,15 +34,15 @@ interface SubscriptionInterface extends RecurringSubscriptionInterface
     public function setShippingAddress(AddressInterface $address);
 
     /**
-     * @return VariantInterface
+     * @return ProductVariantInterface
      */
     public function getVariant();
 
     /**
-     * @param VariantInterface $variant
+     * @param ProductVariantInterface $variant
      * @return $this
      */
-    public function setVariant(VariantInterface $variant);
+    public function setVariant(ProductVariantInterface $variant);
 
     /**
      * @return null|ProductInterface
