@@ -117,4 +117,18 @@ interface ProductInterface extends
      * @param string $metaDescription
      */
     public function setMetaDescription($metaDescription);
+
+    /**
+     * Add association to product
+     *
+     * @param Association $association
+     */
+    public function addAssociation(Association $association);
+
+    /**
+     * Get associations
+     *
+     * @param Association[] $association
+     */
+    public function getAssociations();
 }

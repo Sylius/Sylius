@@ -13,3 +13,5 @@ sylius:
         name: Name
         attributes: Attributes
         options: Options
+    association_type:
+        name: Name

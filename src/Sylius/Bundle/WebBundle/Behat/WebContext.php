@@ -90,6 +90,14 @@ class WebContext extends DefaultContext
     }
 
     /**
+     * @Given I want to create new association type
+     */
+    public function iWantToCreateNewAssociationType()
+    {
+        $this->iAmOnThePage('association type creation');
+    }
+
+    /**
      * @Given /^I am on my account homepage$/
      */
     public function iAmOnMyAccountHomepage()

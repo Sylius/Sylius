@@ -72,6 +72,7 @@ sylius_product:
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+        association_type: ~
 
 sylius_attribute: ~
 

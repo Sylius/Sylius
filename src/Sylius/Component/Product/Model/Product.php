@@ -82,6 +82,13 @@ class Product implements ProductInterface
     protected $attributes;
 
     /**
+     * Product options.
+     *
+     * @var Collection|Association[]
+     */
+    protected $associations;
+
+    /**
      * Product variants.
      *
      * @var Collection|BaseVariantInterface[]
@@ -123,6 +130,7 @@ class Product implements ProductInterface
     {
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
+        $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -557,5 +565,24 @@ class Product implements ProductInterface
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+    /**
+     * @param Association $association
+     * @return
+     */
+    public function addAssociation(Association $association)
+    {
+        $this->associations[] = $association;
+
+        return $this;
+    }
+
+    /**
+     * @return Association[]
+     */
+    public function getAssociations()
+    {
+        return $this->associations->toArray();
     }
 }
