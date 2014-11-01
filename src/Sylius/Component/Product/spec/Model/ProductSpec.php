@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Product\Model\ArchetypeInterface;
+use Sylius\Component\Product\Model\Association;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -307,5 +308,18 @@ class ProductSpec extends ObjectBehavior
 
         $this->enable();
         $this->shouldBeEnabled();
+    }
+
+    function it_allows_to_add_assoication(Association $association1, Association $association2)
+    {
+        $this
+            ->addAssociation($association1)
+            ->addAssociation($association2)
+        ;
+
+        $this->getAssociations()->shouldReturn([
+            $association1,
+            $association2
+        ]);
     }
 }

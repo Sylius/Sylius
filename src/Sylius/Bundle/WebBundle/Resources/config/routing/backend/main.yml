@@ -24,6 +24,10 @@ sylius_backend_product:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product.yml
     prefix: /products
 
+sylius_backend_association_type:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/association_type.yml
+    prefix: /association-types
+
 sylius_backend_inventory:
     resource: @SyliusWebBundle/Resources/config/routing/backend/inventory.yml
     prefix: /inventory

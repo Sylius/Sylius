@@ -58,6 +58,7 @@ sylius:
                 archetypes: Product archetypes
                 assortment: Assortment
                 attributes: Configure attributes
+                association_type: Association Types
                 blocks: Blocks
                 channels: Channels
                 configuration: Configuration
