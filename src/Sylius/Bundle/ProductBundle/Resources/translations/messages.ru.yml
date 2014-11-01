@@ -16,3 +16,19 @@ sylius:
     archetype:
       name: Название
       properties: Свойства
+  form:
+    product:
+      name: Название
+      description: Описание
+      properties: Свойства
+      available_on: Доступно с
+      meta_keywords: Ключевые слова метаданных
+      meta_description: Описание метаданных
+    property:
+      name: Внутреннее название
+      presentation: Публичное название
+    prototype:
+      name: Название
+      properties: Свойства
+    association_type:
+      name: Название

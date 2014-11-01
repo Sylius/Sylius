@@ -54,6 +54,13 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $attributes;
 
     /**
+     * Product options.
+     *
+     * @var Collection|Association[]
+     */
+    protected $associations;
+
+    /**
      * Product variants.
      *
      * @var Collection|BaseVariantInterface[]
@@ -96,6 +103,7 @@ class Product extends AbstractTranslatable implements ProductInterface
         parent::__construct();
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
+        $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -556,5 +564,24 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected function getTranslationClass()
     {
         return get_class().'Translation';
+    }
+    /**
+     * @param Association $association
+     *
+     * @return $this
+     */
+    public function addAssociation(Association $association)
+    {
+        $this->associations[] = $association;
+
+        return $this;
+    }
+
+    /**
+     * @return Association[]
+     */
+    public function getAssociations()
+    {
+        return $this->associations->toArray();
     }
 }

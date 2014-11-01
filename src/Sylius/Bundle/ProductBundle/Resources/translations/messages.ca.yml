@@ -10,3 +10,13 @@ sylius:
       meta_description: Metadescripció
     archetype:
       name: Nom
+  form:
+    product:
+      name: Nom
+      description: Descripció
+      meta_keywords: Meta keywords
+      meta_description: Metadescripció
+    prototype:
+      name: Nom
+    association_type:
+      name: Nom

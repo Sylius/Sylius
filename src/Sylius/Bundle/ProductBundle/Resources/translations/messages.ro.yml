@@ -16,3 +16,19 @@ sylius:
     archetype:
       name: Nume
       properties: Proprietăți
+  form:
+    product:
+      name: Nume
+      description: Descriere
+      properties: Proprietăți
+      available_on: Disponibil din
+      meta_keywords: Meta cuvinte cheie
+      meta_description: Meta descriere
+    property:
+      name: Denumire internă
+      presentation: Prezentare
+    prototype:
+      name: Nume
+      properties: Proprietăți
+    association_type:
+      name: Nume
