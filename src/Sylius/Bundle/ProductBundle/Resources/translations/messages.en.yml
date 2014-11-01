@@ -14,3 +14,10 @@ sylius:
       parent: Parent
       attributes: Attributes
       options: Options
+        available_on: Available on
+    product_prototype:
+        name: Name
+        attributes: Attributes
+        options: Options
+    association_type:
+        name: Name

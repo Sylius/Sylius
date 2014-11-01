@@ -16,3 +16,19 @@ sylius:
     archetype:
       name: Name
       properties: Eigenschaften
+  form:
+    product:
+      name: Name
+      description: Beschreibung
+      properties: Eigenschaften
+      available_on: Verfügbar ab
+      meta_keywords: Meta-Keywords
+      meta_description: Meta-Beschreibung
+    property:
+      name: Interner Name
+      presentation: Präsentation
+    prototype:
+      name: Name
+      properties: Eigenschaften
+    association_type:
+      name: Name

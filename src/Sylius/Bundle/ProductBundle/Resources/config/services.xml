@@ -43,6 +43,16 @@
             <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product_translation" />
         </service>
+        <service id="sylius.form.type.association_type" class="%sylius.form.type.association_type.class%">
+            <argument>%sylius.model.association_type.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_association_type" />
+        </service>
+        <service id="sylius.form.type.product_prototype" class="%sylius.form.type.product_prototype.class%">
+            <argument>%sylius.model.product_prototype.class%</argument>
+            <argument>%sylius.validation_group.product_prototype%</argument>
+            <tag name="form.type" alias="sylius_product_prototype" />
+        </service>
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="sylius.repository.product" />

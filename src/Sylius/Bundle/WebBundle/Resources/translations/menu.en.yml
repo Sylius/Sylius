@@ -47,6 +47,7 @@ sylius:
             sidebar:
                 api_clients: API clients
                 assortment: Assortment
+                association_type: Association Types
                 blocks: Blocks
                 configuration: Configuration
                 content: Content

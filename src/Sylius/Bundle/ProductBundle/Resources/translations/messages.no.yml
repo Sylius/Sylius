@@ -16,3 +16,19 @@ sylius:
     archetype:
       name: Navn
       properties: Egenskaper
+  form:
+    product:
+      name: Navn
+      description: Beskrivelse
+      properties: Egenskaper
+      available_on: Tilgjengelig
+      meta_keywords: Meta nøkkelord
+      meta_description: Metabeskrivelse
+    property:
+      name: Internt navn
+      presentation: Presentasjon
+    prototype:
+      name: Navn
+      properties: Egenskaper
+    association_type:
+      name: Navn

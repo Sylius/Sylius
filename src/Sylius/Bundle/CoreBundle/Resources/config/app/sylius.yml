@@ -73,6 +73,7 @@ sylius_taxonomy:
             model: Sylius\Component\Core\Model\Taxon
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
+        association_type: ~
 
 sylius_product:
     classes:

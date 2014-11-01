@@ -15,3 +15,18 @@ sylius:
     archetype:
       name: Ονομασία
       properties: Ιδιότητες
+  form:
+    product:
+      name: Ονομασία
+      description: Περιγραφή
+      properties: Ιδιότητες
+      available_on: Διαθέσιμο την
+      meta_keywords: Μετα-λέξεις-κλειδιά
+      meta_description: Μετα-περιγραφή
+    property:
+      presentation: Παρουσίαση
+    prototype:
+      name: Ονομασία
+      properties: Ιδιότητες
+    association_type:
+      name: Ονομασία

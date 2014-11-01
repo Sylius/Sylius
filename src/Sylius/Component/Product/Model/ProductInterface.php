@@ -49,4 +49,46 @@ interface ProductInterface extends
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);
+
+    /**
+     * Get meta keywords.
+     *
+     * @return string
+     */
+    public function getMetaKeywords();
+
+    /**
+     * Set meta keywords for the product.
+     *
+     * @param string $metaKeywords
+     */
+    public function setMetaKeywords($metaKeywords);
+
+    /**
+     * Get meta description.
+     *
+     * @return string
+     */
+    public function getMetaDescription();
+
+    /**
+     * Set meta description for the product.
+     *
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription);
+
+    /**
+     * Add association to product
+     *
+     * @param Association $association
+     */
+    public function addAssociation(Association $association);
+
+    /**
+     * Get associations
+     *
+     * @param Association[] $association
+     */
+    public function getAssociations();
 }

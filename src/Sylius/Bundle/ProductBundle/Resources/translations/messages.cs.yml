@@ -13,3 +13,16 @@ sylius:
     archetype:
       name: Jméno
       properties: Vlastnosti
+  form:
+    product:
+      name: Název
+      description: Popis
+      properties: Vlastnosti
+      available_on: Dostupný od
+      meta_keywords: Meta klíčová slova
+      meta_description: Meta popis
+    prototype:
+      name: Jméno
+      properties: Vlastnosti
+    association_type:
+      name: Název

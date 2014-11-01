@@ -63,6 +63,13 @@ sylius:
             tracking_number: Tracking number
         title: My account
     add_to_cart: Add to cart
+    association_type:
+        index_header: Association Types
+        update_header: Edit Association Type
+        create_header: Create Association Type
+        name: Name
+        create: Create
+        update: Update
     address:
         city: City
         company: Company
@@ -219,6 +226,8 @@ sylius:
             index: Payment Methods
         product:
             index: Products
+        association_type:
+            index: Association Types
         promotion:
             index: Promotions
         promotion_coupon:

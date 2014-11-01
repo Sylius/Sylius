@@ -16,3 +16,19 @@ sylius:
     archetype:
       name: Naziv
       properties: Svojstva
+  form:
+    product:
+      name: Naziv
+      description: Opis
+      properties: Svojstva
+      available_on: Dostupan na
+      meta_keywords: Ključne riječi
+      meta_description: Opis
+    property:
+      name: Interni naziv
+      presentation: Prezentacija
+    prototype:
+      name: Naziv
+      properties: Svojstva
+    association_type:
+      name: Naziv
