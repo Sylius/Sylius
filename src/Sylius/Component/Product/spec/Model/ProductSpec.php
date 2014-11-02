@@ -316,4 +316,17 @@ class ProductSpec extends ObjectBehavior
             $association2
         ]);
     }
+
+    function it_allows_to_remove_assoication(Association $association1, Association $association2)
+    {
+        $this
+            ->addAssociation($association1)
+            ->addAssociation($association2)
+            ->removeAssociation($association2)
+        ;
+
+        $this->getAssociations()->shouldReturn([
+            $association1
+        ]);
+    }
 }

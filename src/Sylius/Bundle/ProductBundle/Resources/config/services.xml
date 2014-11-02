@@ -25,6 +25,8 @@
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
         <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType</parameter>
+
+        <parameter key="sylius.doctrine.association_inheritance_subscriber.class">Sylius\Bundle\ProductBundle\Doctrine\EventListener\AssociationInheritanceMetadataSubscriber</parameter>
     </parameters>
 
     <services>
@@ -62,7 +64,6 @@
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher"/>
         </service>
-
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
@@ -73,6 +74,11 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.manager.product" />
             <tag name="kernel.event_listener" event="sylius.product_archetype.pre_update" method="onArchetypeUpdate" />
+        </service>
+
+        <service id="sylius.doctrine.association_inheritance_subscriber" class="%sylius.doctrine.association_inheritance_subscriber.class%">
+            <argument>%sylius.association.discriminator_map%</argument>
+            <tag name="doctrine.event_subscriber" connection="default" />
         </service>
     </services>
 

@@ -41,6 +41,21 @@
             <gedmo:versioned />
         </one-to-many>
 
+        <many-to-many field="associations" target-entity="Sylius\Component\Product\Model\Association">
+            <join-table name="sylius_product_associations">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="association_id" referenced-column-name="id" unique="true" />
+                </inverse-join-columns>
+            </join-table>
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <gedmo:versioned />
+        </many-to-many>
+
         <many-to-many field="options" target-entity="Sylius\Component\Product\Model\OptionInterface">
             <cascade>
                 <cascade-persist />

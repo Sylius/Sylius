@@ -565,14 +565,27 @@ class Product extends AbstractTranslatable implements ProductInterface
     {
         return get_class().'Translation';
     }
+
     /**
      * @param Association $association
      *
-     * @return $this
+     * @return self
      */
     public function addAssociation(Association $association)
     {
         $this->associations[] = $association;
+
+        return $this;
+    }
+
+    /**
+     * @param Association $association
+     *
+     * @return self
+     */
+    public function removeAssociation(Association $association)
+    {
+        $this->associations->removeElement($association);
 
         return $this;
     }
