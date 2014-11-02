@@ -73,6 +73,9 @@ sylius_product:
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
         association_type: ~
+    product_association:
+        classes:
+            product: Sylius\Component\Product\Model\ProductAssociation
 
 sylius_attribute: ~
 
