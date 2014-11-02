@@ -87,6 +87,10 @@ sylius_product:
                 model: Sylius\Component\Core\Model\ProductTranslation
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
+        association_type: ~
+    product_association:
+        classes:
+            product: Sylius\Component\Product\Model\ProductAssociation
 
 
 sylius_archetype:

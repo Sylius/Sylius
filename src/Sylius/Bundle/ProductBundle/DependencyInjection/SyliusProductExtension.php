@@ -44,6 +44,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
         $this->prependAttribute($container, $config);
         $this->prependVariation($container, $config);
+        $this->prependProductAssociation($container, $config);
     }
 
     /**
@@ -109,5 +110,10 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                     )
                 ))
         );
+    }
+
+    private function prependProductAssociation(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('sylius.association.discriminator_map', $config['product_association']['classes']);
     }
 }
