@@ -48,6 +48,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addResourcesSection($rootNode);
+        $this->addAssociationSection($rootNode);
 
         return $treeBuilder;
     }
@@ -138,6 +139,30 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ProductBundle\Controller\AssociationTypeController')->end()
                                 ->scalarNode('repository')->defaultValue('Sylius\Bundle\ProductBundle\Doctrine\ORM\AssociationTypeRepository')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\AssociationTypeType')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `product_association` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addAssociationSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('product_association')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('classes')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('product')->defaultValue('Sylius\Component\Product\Model\ProductAssociation')->end()
                             ->end()
                         ->end()
                     ->end()

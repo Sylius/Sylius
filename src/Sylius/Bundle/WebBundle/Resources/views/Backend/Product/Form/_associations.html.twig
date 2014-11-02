@@ -1,9 +1,9 @@
 {% form_theme form 'SyliusWebBundle::forms.html.twig' %}
 
 <div class="tab-pane" id="associations">
-    <div id="sylius-assortment-product-attributes" class="collection-container" data-prototype="{{ ('<div id="sylius_product_attributes___name__">' ~ form_row(form.attributes.vars.prototype.attribute, {'attr': {'class': 'attribute-chooser'}}))|e }}{{ (form_row(form.attributes.vars.prototype.value) ~ '</div>')|e }}">
+    <div id="sylius-assortment-product-associations class="collection-container" data-prototype="{{ ('<div id="sylius_product_attributes___name__">' ~ form_row(form.attributes.vars.prototype.attribute, {'attr': {'class': 'attribute-chooser'}}))|e }}{{ (form_row(form.attributes.vars.prototype.value) ~ '</div>')|e }}">
         {% for attributeForm in form.attributes %}
-        <div class="sylius-assortment-product-attributes-attribute row">
+        <div class="sylius-assortment-product-associations-association row">
             <div class="col-md-10">
                 {{ form_widget(attributeForm) }}
             </div>
