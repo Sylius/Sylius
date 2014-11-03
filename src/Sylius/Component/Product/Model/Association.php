@@ -55,5 +55,28 @@ abstract class Association
         return $this->id;
     }
 
-    abstract function getAssociatedObject();
+    /**
+     * @return AssociationType
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType(AssociationType $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return (boolean) $this->deletedAt;
+    }
+
+    abstract public function getAssociatedObject();
 } 
