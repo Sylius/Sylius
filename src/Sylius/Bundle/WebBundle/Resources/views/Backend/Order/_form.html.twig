@@ -23,7 +23,7 @@
 
     <div class="col col-md-4">
         {% if order.id is defined %}
-            {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' %}
+            {% include 'SyliusWebBundle:Backend/Order:_details.html.twig' with {'hide_form': true} %}
         {% endif %}
 
         <h4>{{ 'sylius.order.details'|trans }}</h4>
