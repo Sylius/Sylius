@@ -211,10 +211,10 @@ class Configuration
         }
 
         if ($redirect['referer'] === true) {
-            return $this->request->headers->get('referer');
+            return $referer;
         }
 
-        return $redirect['referer'] ?: $referer;
+        return $redirect['referer'];
     }
 
     /**
