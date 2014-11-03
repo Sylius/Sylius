@@ -593,4 +593,9 @@ class Product extends AbstractTranslatable implements ProductInterface
     {
         return $this->associations->toArray();
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

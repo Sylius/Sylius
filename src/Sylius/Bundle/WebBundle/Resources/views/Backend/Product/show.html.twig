@@ -201,6 +201,29 @@
                 {% endfor %}
             </tbody>
         </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2">{{ 'sylius.product.associations'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for association in product.associations %}
+                <tr>
+                    <td class="sylius-association-type"><strong>{{ association.type.name }}</strong></td>
+                    <td>{{ association.associatedObject }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">
+                        <span class="label label-info">
+                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_associations'|trans }}
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 

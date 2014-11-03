@@ -38,6 +38,13 @@ class ProductType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false
             ))
+            ->add('associations', 'collection', array(
+                'required'     => false,
+                'type'         => 'sylius_product_association',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ))
             ->add('options', 'sylius_product_option_choice', array(
                 'required' => false,
                 'multiple' => true,

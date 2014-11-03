@@ -21,3 +21,6 @@ sylius:
         options: Options
     association_type:
         name: Name
+    association:
+        type: Association Type
+        product: Associated Product
