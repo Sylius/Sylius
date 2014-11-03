@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
-;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -34,7 +32,8 @@ class StandardCalculatorSpec extends ObjectBehavior
 
     function it_returns_the_default_price_stored_on_the_priceable_object(PriceableInterface $priceable)
     {
-        $priceable->getPrice()->shouldBeCalled()->willReturn(1299);
+        $priceable->getPrice()->willReturn(1299);
+
         $this->calculate($priceable, array())->shouldReturn(1299);
     }
 

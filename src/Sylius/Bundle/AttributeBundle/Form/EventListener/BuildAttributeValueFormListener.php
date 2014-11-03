@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\EventListener;
 
+use Sylius\Component\Attribute\Model\AttributeTypes;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -22,6 +24,7 @@ use Symfony\Component\Form\FormFactoryInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Liverbool <liverbool@gmail.com>
  */
 class BuildAttributeValueFormListener implements EventSubscriberInterface
 {
@@ -72,10 +75,46 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
             $options = array_merge($options, $attributeValue->getConfiguration());
         }
 
+        $this->verifyValue($attributeValue);
+
         // If we're editing the attribute value, let's just render the value field, not full selection.
         $form
             ->remove('attribute')
             ->add($this->factory->createNamed('value', $attributeValue->getType(), null, $options))
         ;
+    }
+
+    /**
+     * Verify value before set to form
+     *
+     * @param AttributeValueInterface $attributeValue
+     */
+    private function verifyValue(AttributeValueInterface $attributeValue)
+    {
+        switch ($attributeValue->getType()) {
+
+            case AttributeTypes::CHECKBOX:
+                if (!is_bool($attributeValue->getValue())) {
+                    $attributeValue->setValue(false);
+                }
+
+                break;
+
+            case AttributeTypes::CHOICE:
+                if (!is_array($attributeValue->getValue())) {
+                    $attributeValue->setValue(null);
+                }
+
+                break;
+
+            case AttributeTypes::MONEY:
+            case AttributeTypes::NUMBER:
+            case AttributeTypes::PERCENTAGE:
+                if (!is_numeric($attributeValue->getValue())) {
+                    $attributeValue->setValue(null);
+                }
+
+                break;
+        }
     }
 }

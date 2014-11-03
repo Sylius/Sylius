@@ -17,7 +17,8 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.context.currency.class">Sylius\Bundle\CurrencyBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.context.currency.class">Sylius\Component\Currency\Context\CurrencyContext</parameter>
+
         <parameter key="sylius.currency_converter.class">Sylius\Component\Currency\Converter\CurrencyConverter</parameter>
         <parameter key="sylius.currency_provider.class">Sylius\Component\Currency\Provider\CurrencyProvider</parameter>
 
@@ -25,6 +26,7 @@
         <parameter key="sylius.currency_importer.open_exchange_rates.class">Sylius\Component\Currency\Importer\OpenExchangeRatesImporter</parameter>
 
         <parameter key="sylius.form.type_extension.money.class">Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension</parameter>
+        <parameter key="sylius.form.type.currency_choice.class">Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType</parameter>
     </parameters>
 
     <services>
@@ -40,7 +42,7 @@
         </service>
 
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
-            <argument type="service" id="session" />
+            <argument /> <!-- Storage service name comes from config -->
             <argument>%sylius.money.currency%</argument>
         </service>
 
@@ -66,6 +68,11 @@
             </argument>
         </service>
         <service id="sylius.currency_importer.oer" alias="sylius.currency_importer.open_exchange_rates" />
+
+        <service id="sylius.form.type.currency_choice" class="%sylius.form.type.currency_choice.class%">
+            <argument type="service" id="sylius.currency_provider" />
+            <tag name="form.type" alias="sylius_currency_choice" />
+        </service>
     </services>
 
 </container>

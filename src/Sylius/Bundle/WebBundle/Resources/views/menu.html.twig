@@ -5,5 +5,5 @@
     {% if not item.labelAttribute('iconOnly') %}
         <span>{% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|trans|raw }}{% else %}{{ item.label|trans }}{% endif %}</span>
     {% endif %}
-    {% if item.labelAttribute('data-image') %}<img src="{{ item.labelAttribute('data-image')|imagine_filter('sylius_small', true) }}" alt="{{ item.name }}" class="menu-thumbnail"/>{% endif %}
+    {% if item.labelAttribute('data-image') %}<img src="{{ item.labelAttribute('data-image')|imagine_filter('sylius_small') }}" alt="{{ item.name }}" class="menu-thumbnail"/>{% endif %}
 {% endblock %}

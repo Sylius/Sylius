@@ -9,6 +9,7 @@ sylius_backend_promotion_coupon_index:
         _sylius:
             template: SyliusWebBundle:Backend/Coupon:index.html.twig
             criteria: { promotion: $promotionId }
+            filterable: true
 
 sylius_backend_promotion_coupon_create:
     path: /new

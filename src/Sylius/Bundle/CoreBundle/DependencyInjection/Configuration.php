@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('currency_storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 

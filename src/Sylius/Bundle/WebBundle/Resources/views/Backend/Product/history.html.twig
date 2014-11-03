@@ -40,13 +40,13 @@
 
 <div class="tab-content">
     <div class="tab-pane active" id="main">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_product_revert', 'logs': logs.product} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': logs.product} %}
 
         <hr>
 
         <h4>{{ 'sylius.product.variants'|trans }}</h4>
         {% for variant in logs.variants %}
-            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_product_revert', 'logs': variant} %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': variant} %}
         {% else %}
             {{ alerts.info('sylius.history.no_results'|trans) }}
         {% endfor %}
@@ -54,7 +54,7 @@
 
     <div class="tab-pane" id="attributes">
         {% for attribute in logs.attributes %}
-            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_product_revert', 'logs': attribute} %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': attribute} %}
         {% else %}
             {{ alerts.info('sylius.history.no_results'|trans) }}
         {% endfor %}
@@ -63,7 +63,7 @@
     {% if not product.hasVariants %}
     <div class="tab-pane" id="options">
         {% for option in logs.options %}
-            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_product_revert', 'logs': option} %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': option} %}
         {% else %}
             {{ alerts.info('sylius.history.no_results'|trans) }}
         {% endfor %}

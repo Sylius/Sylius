@@ -30,7 +30,7 @@ interface VariantInterface extends BaseVariantInterface
     /**
      * Set product.
      *
-     * @param ProductInterface|null $product
+     * @param null|ProductInterface $product
      */
     public function setProduct(ProductInterface $product = null);
 
@@ -49,7 +49,7 @@ interface VariantInterface extends BaseVariantInterface
     /**
      * Set available on.
      *
-     * @param \DateTime $availableOn
+     * @param null|\DateTime $availableOn
      */
-    public function setAvailableOn(\DateTime $availableOn);
+    public function setAvailableOn(\DateTime $availableOn = null);
 }

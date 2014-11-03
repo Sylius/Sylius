@@ -33,6 +33,8 @@ class ExpressionLanguage extends BaseExpressionLanguage implements ContainerAwar
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+
+        return $this;
     }
 
     /**
@@ -52,16 +54,24 @@ class ExpressionLanguage extends BaseExpressionLanguage implements ContainerAwar
     {
         parent::registerFunctions();
 
-        $this->register('service', function ($arg) {
-            return sprintf('$this->get(%s)', $arg);
-        }, function (array $variables, $value) {
-            return $variables['container']->get($value);
-        });
+        $this->register(
+            'service',
+            function ($arg) {
+                return sprintf('$this->get(%s)', $arg);
+            },
+            function (array $variables, $value) {
+                return $variables['container']->get($value);
+            }
+        );
 
-        $this->register('parameter', function ($arg) {
-            return sprintf('$this->getParameter(%s)', $arg);
-        }, function (array $variables, $value) {
-            return $variables['container']->getParameter($value);
-        });
+        $this->register(
+            'parameter',
+            function ($arg) {
+                return sprintf('$this->getParameter(%s)', $arg);
+            },
+            function (array $variables, $value) {
+                return $variables['container']->getParameter($value);
+            }
+        );
     }
 }

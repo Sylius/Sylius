@@ -193,6 +193,30 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->setParameter('coupons', (array) $coupon)
         ;
 
+        $count = (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countByUserAndPaymentState(UserInterface $user, $state)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.paymentState = :state')
+            ->setParameter('user', $user)
+            ->setParameter('state', $state)
+        ;
+
         return (int) $queryBuilder
             ->getQuery()
             ->getSingleScalarResult()

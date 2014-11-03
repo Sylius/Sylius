@@ -72,3 +72,12 @@ Feature: Checkout addressing
           And I fill in the billing address to USA
           And I press "Continue"
          Then I should be on the checkout shipping step
+
+    Scenario: Validating shipping country is entered
+        Given I am not logged in
+          And I added product "PHP Top" to cart
+         When I go to the checkout start page
+          And I fill in "sylius_checkout_guest[email]" with "example@example.com"
+          And I press "Proceed with your order"
+          And I press "Continue"
+         Then I should see "Please select country."

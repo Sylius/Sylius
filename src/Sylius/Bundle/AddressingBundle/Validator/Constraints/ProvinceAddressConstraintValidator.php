@@ -51,15 +51,15 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
      *
      * @param AddressInterface $address
      *
-     * @return boolean
+     * @return bool
      */
     protected function isProvinceValid(AddressInterface $address)
     {
-        if (null === $address->getCountry()) {
-            return false;
+        if (null === $country = $address->getCountry()) {
+            return true;
         }
 
-        if (!$address->getCountry()->hasProvinces()) {
+        if (!$country->hasProvinces()) {
             return true;
         }
 
@@ -67,7 +67,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
             return false;
         }
 
-        if ($address->getCountry()->hasProvince($address->getProvince())) {
+        if ($country->hasProvince($address->getProvince())) {
             return true;
         }
 

@@ -24,11 +24,17 @@ class StringBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
+            ->add('parentDocument', null, array(
+                'label' => 'sylius.form.simple_block.parent'
+            ))
             ->add('id', 'text', array(
                 'label' => 'sylius.form.string_block.id'
+            ))
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.string_block.name'
             ))
             ->add('body', 'textarea', array(
                 'required' => false,

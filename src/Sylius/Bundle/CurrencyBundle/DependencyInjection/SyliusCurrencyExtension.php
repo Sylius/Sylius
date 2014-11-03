@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CurrencyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Currency extension.
@@ -32,11 +33,14 @@ class SyliusCurrencyExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        list($config) = $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
         );
+
+        $definition = $container->findDefinition('sylius.context.currency');
+        $definition->replaceArgument(0, new Reference($config['storage']));
     }
 }

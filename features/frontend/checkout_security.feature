@@ -36,7 +36,7 @@ Feature: Checkout security
             | Email    | john@example.com |
             | Password | habababa         |
           And I press "Login"
-         Then I should see "Bad credentials"
+         Then I should see "Invalid credentials"
 
     Scenario: Signing in during the checkout
          When I fill in the following:

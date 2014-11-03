@@ -11,17 +11,23 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Checker;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class NthOrderRuleCheckerSpec extends ObjectBehavior
 {
+    public function let(OrderRepositoryInterface $ordersRepository)
+    {
+        $this->beConstructedWith($ordersRepository);
+    }
+
     function it_should_be_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker');
@@ -39,53 +45,14 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
-    function it_should_recognize_no_orders_as_not_eligible(
-        OrderInterface $subject,
-        UserInterface $user,
-        Collection $orders
-    ) {
-        $subject->getUser()->willReturn($user);
-
-        $orders->isEmpty()->willReturn(true);
-
-        $user->getOrders()->willReturn($orders);
-
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
-    }
-
-    function it_should_recognize_subject_as_not_eligible_if_user_has_no_completed_orders(
-        OrderInterface $subject,
-        UserInterface $user,
-        Collection $orders,
-        Collection $filtered
-    )
-    {
-        $subject->getUser()->willReturn($user);
-
-        $filtered->count()->willReturn(0);
-
-        $orders->isEmpty()->willReturn(false);
-        $orders->filter(Argument::any())->willReturn($filtered);
-
-        $user->getOrders()->willReturn($orders);
-
-        $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
-    }
-
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         OrderInterface $subject,
         UserInterface $user,
-        Collection $orders,
-        Collection $filtered
+        $ordersRepository
     ) {
         $subject->getUser()->willReturn($user);
 
-        $filtered->count()->willReturn(2);
-
-        $orders->isEmpty()->willReturn(false);
-        $orders->filter(Argument::any())->willReturn($filtered);
-
-        $user->getOrders()->willReturn($orders);
+        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(5);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
@@ -93,17 +60,11 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
         OrderInterface $subject,
         UserInterface $user,
-        Collection $orders,
-        Collection $filtered
+        $ordersRepository
     ) {
         $subject->getUser()->willReturn($user);
 
-        $filtered->count()->willReturn(12);
-
-        $orders->isEmpty()->willReturn(false);
-        $orders->filter(Argument::any())->willReturn($filtered);
-
-        $user->getOrders()->willReturn($orders);
+        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(12);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
@@ -111,17 +72,11 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
         OrderInterface $subject,
         UserInterface $user,
-        Collection $orders,
-        Collection $filtered
+        $ordersRepository
     ) {
         $subject->getUser()->willReturn($user);
 
-        $filtered->count()->willReturn(10);
-
-        $orders->isEmpty()->willReturn(false);
-        $orders->filter(Argument::any())->willReturn($filtered);
-
-        $user->getOrders()->willReturn($orders);
+        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(10);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(true);
     }

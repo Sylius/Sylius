@@ -39,23 +39,23 @@
 
 <div class="tab-content">
     <div class="tab-pane active" id="main">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': logs.order, 'disabled': disabled} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_order_revert', 'logs': logs.order, 'disabled': disabled} %}
     </div>
 
     <div class="tab-pane" id="items">
         {% for order_item in logs.order_items %}
-            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': order_item, 'disabled': disabled} %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_order_revert', 'logs': order_item, 'disabled': disabled} %}
         {% else %}
             {{ alerts.info('sylius.history.no_results'|trans) }}
         {% endfor %}
     </div>
 
     <div class="tab-pane" id="billing_address">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': logs.billing_address, 'disabled': disabled} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_order_revert', 'logs': logs.billing_address, 'disabled': disabled} %}
     </div>
 
     <div class="tab-pane" id="shipping_address">
-        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'url': 'sylius_backend_order_revert', 'logs': logs.shipping_address} %}
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_order_revert', 'logs': logs.shipping_address} %}
     </div>
 </div>
 

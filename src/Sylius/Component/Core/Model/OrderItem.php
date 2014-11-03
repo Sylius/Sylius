@@ -86,7 +86,6 @@ class OrderItem extends CartItem implements OrderItemInterface
     {
         return parent::equals($item) || ($item instanceof self
             && $item->getVariant() === $this->variant
-            && $item->getUnitPrice() === $this->getUnitPrice()
         );
     }
 

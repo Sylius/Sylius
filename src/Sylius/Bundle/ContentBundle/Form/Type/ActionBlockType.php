@@ -24,7 +24,7 @@ class ActionBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('id', 'text', array(
@@ -34,7 +34,6 @@ class ActionBlockType extends AbstractResourceType
                 'label' => 'sylius.form.action_block.action_name',
             ))
         ;
-
     }
 
     /**

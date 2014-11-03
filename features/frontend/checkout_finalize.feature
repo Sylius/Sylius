@@ -42,6 +42,21 @@ Feature: Checkout finalization
           And I should see 1 orders in the list
           And I should see "000000001"
 
+    Scenario: Placing the order as Guest without email address
+        Given I am not logged in
+          And I added product "PHP Top" to cart
+          And I go to the checkout start page
+         When I press "Proceed with your order"
+         Then I should see "This value should not be blank."
+
+    Scenario: Placing the order as Guest with invalid email address
+        Given I am not logged in
+          And I added product "PHP Top" to cart
+          And I go to the checkout start page
+         And I fill in "sylius_checkout_guest[email]" with "example"
+          And I press "Proceed with your order"
+         Then I should see "This value is not a valid email address."
+
     Scenario: Placing the order as Guest
         Given I am not logged in
           And I added product "PHP Top" to cart

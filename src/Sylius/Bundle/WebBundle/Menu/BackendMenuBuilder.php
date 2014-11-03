@@ -164,6 +164,18 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_static_content_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.pages', $section)));
+        $child->addChild('Menus', array(
+            'route' => 'sylius_backend_menu_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-list-alt'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.menus', $section)));
+        $child->addChild('Slideshow', array(
+            'route' => 'sylius_backend_slideshow_block_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-film'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.slideshow', $section)));
+        $child->addChild('Routes', array(
+            'route' => 'sylius_backend_route_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.routes', $section)));
     }
 
     /**

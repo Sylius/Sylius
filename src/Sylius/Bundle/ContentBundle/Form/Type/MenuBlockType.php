@@ -24,7 +24,7 @@ class MenuBlockType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('id', 'text', array(
@@ -32,6 +32,10 @@ class MenuBlockType extends AbstractResourceType
             ))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.menu_block.name'
+            ))
+            ->add('body', 'textarea', array(
+                'required' => false,
+                'label'    => 'sylius.form.menu_block.body',
             ))
         ;
 

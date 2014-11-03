@@ -21,10 +21,10 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  */
 abstract class Kernel extends BaseKernel
 {
-    const VERSION         = '0.11.0-dev';
-    const VERSION_ID      = '00110';
+    const VERSION         = '0.12.0-dev';
+    const VERSION_ID      = '00120';
     const MAJOR_VERSION   = '0';
-    const MINOR_VERSION   = '11';
+    const MINOR_VERSION   = '12';
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION   = 'DEV';
 
@@ -71,6 +71,7 @@ abstract class Kernel extends BaseKernel
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new \Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
+            new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
 
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
@@ -82,9 +83,11 @@ abstract class Kernel extends BaseKernel
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
 
-            new \FOS\RestBundle\FOSRestBundle(),
-            new \FOS\UserBundle\FOSUserBundle(),
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
+
+            new \FOS\UserBundle\FOSUserBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
@@ -95,7 +98,6 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {

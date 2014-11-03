@@ -23,6 +23,25 @@
         <property name="billingAddress">
             <constraint name="Valid" />
         </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>Guest</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">254</option>
+                <option name="groups">
+                    <value>Guest</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="groups">
+                    <value>Guest</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Sylius\Component\Core\Model\ProductVariant">

@@ -29,7 +29,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING);
 
     /**
-     * Gets the number of orders placed by a user
+     * Gets the number of orders placed by the user
      * for a particular coupon.
      *
      * @param UserInterface   $user
@@ -38,4 +38,15 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return int
      */
     public function countByUserAndCoupon(UserInterface $user, CouponInterface $coupon);
+
+    /**
+     * Gets the number of orders placed by the user
+     * with particular state.
+     *
+     * @param UserInterface $user
+     * @param string        $state
+     *
+     * @return int
+     */
+    public function countByUserAndPaymentState(UserInterface $user, $state);
 }

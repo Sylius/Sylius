@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Sylius\Bundle\CartBundle\Event\FlashEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Event\FlashEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 class FlashListener implements EventSubscriberInterface
 {
     /**
-     * @var array
+     * @var string[]
      */
     public $messages;
 
@@ -89,8 +89,8 @@ class FlashListener implements EventSubscriberInterface
         $this->addFlash('success', $event->getMessage(), $event->getName());
     }
 
-    private function addFlash($type, $message, $event)
+    private function addFlash($type, $message, $eventName)
     {
-        $this->session->getBag('flashes')->add($type, $message ?: $this->translator->trans($this->messages[$event], array(), 'flashes'));
+        $this->session->getBag('flashes')->add($type, $message ?: $this->translator->trans($this->messages[$eventName], array(), 'flashes'));
     }
 }

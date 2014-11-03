@@ -76,10 +76,9 @@ class UserRepository extends EntityRepository
      */
     public function findForDetailsPage($id)
     {
-        $queryBuilder = $this->getQueryBuilder();
-
         $this->_em->getFilters()->disable('softdeleteable');
 
+        $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
             ->setParameter('id', $id)
@@ -89,6 +88,8 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
     }

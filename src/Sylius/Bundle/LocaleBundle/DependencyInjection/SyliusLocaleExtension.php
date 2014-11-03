@@ -13,6 +13,7 @@ namespace Sylius\Bundle\LocaleBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Locale extension.
@@ -32,11 +33,14 @@ class SyliusLocaleExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        list($config) = $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
         );
+
+        $definition = $container->findDefinition('sylius.context.locale');
+        $definition->replaceArgument(0, new Reference($config['storage']));
     }
 }
