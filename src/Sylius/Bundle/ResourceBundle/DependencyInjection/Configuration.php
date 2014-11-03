@@ -54,6 +54,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                             ->scalarNode('templates')->cannotBeEmpty()->end()
+                            ->scalarNode('manager')->defaultValue('default')->end()
                             ->arrayNode('classes')
                                 ->children()
                                     ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
