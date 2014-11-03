@@ -22,6 +22,25 @@ Then it will try to create an ``app_user`` form, and set the newly created user 
 
 As a response, it will render the ``App:User:create.html.twig`` template with form view as the ``form`` variable.
 
+Declaring your form as a service
+--------------------------------
+
+As said previously, you need to declare your form as a service. Its name must be contructed with the following pattern ``application_resource`` (Example: ``sylius_product``).
+(see the **Configuration** chapter to see how configure your resources and your application name)
+
+.. code-block:: xml
+
+    <parameters>
+        <!-- If you use the basic configuration this paramter is not available in the container. You need to add it manually. -->
+        <parameter key="app.form.type.user.class">App\Byndle\Form\UserType</parameter>
+    </parameters>
+
+    <services>
+        <service id="app.form.type.user" class="%app.form.type.user.class%">
+            <tag name="form.type" alias="app_user" />
+        </service>
+    </services>
+
 Submitting the form
 -------------------
 
