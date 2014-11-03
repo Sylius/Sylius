@@ -180,10 +180,52 @@ class Configuration
         }
 
         if (is_array($redirect)) {
+            if (!empty($redirect['referer'])) {
+                return 'referer';
+            }
+
             return $redirect['route'];
         }
 
         return $redirect;
+    }
+
+    /**
+     * Get url hash fragment (#text) which is you configured.
+     *
+     * @return null|string
+     */
+    public function getRedirectHash()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (!is_array($redirect) || empty($redirect['hash'])) {
+            return null;
+        }
+
+        return '#' . $redirect['hash'];
+    }
+
+    /**
+     * Get redirect referer, This will detected by configuration
+     * If not exists, The `referrer` from headers will be used.
+     *
+     * @return null|string
+     */
+    public function getRedirectReferer()
+    {
+        $redirect = $this->parameters->get('redirect');
+        $referer = $this->request->headers->get('referer');
+
+        if (!is_array($redirect) || empty($redirect['referer'])) {
+            return $referer;
+        }
+
+        if ($redirect['referer'] === true) {
+            return $referer;
+        }
+
+        return $redirect['referer'];
     }
 
     /**
@@ -195,7 +237,7 @@ class Configuration
     {
         $redirect = $this->parameters->get('redirect');
 
-        if (null === $redirect || !is_array($redirect)) {
+        if (!is_array($redirect) || empty($redirect['parameters'])) {
             $redirect = array('parameters' => array());
         }
 
