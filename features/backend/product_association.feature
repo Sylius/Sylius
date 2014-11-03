@@ -41,13 +41,11 @@ Feature: Product association
       | New      |
 
 
-      @wip
     Scenario: Create association type
        Given I want to create new association type
        When I create "Cross sell" association type
-       Then I should be able to add "Cross sell" associations to any product
+       Then I should be able to add "Cross sell" associations to every product
 
-      @wip
     Scenario Outline: Associate product with others products
       Given there are following association types:
         | name       |

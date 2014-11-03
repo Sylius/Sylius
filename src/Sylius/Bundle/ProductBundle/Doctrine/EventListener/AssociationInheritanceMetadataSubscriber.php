@@ -25,7 +25,7 @@ class AssociationInheritanceMetadataSubscriber implements EventSubscriber
     /**
      * @var array
      */
-    private $discriminatorMap = [];
+    private $discriminatorMap = array();
 
     public function __construct($discriminatorMap)
     {
@@ -34,7 +34,7 @@ class AssociationInheritanceMetadataSubscriber implements EventSubscriber
 
     public function getSubscribedEvents()
     {
-        return ['loadClassMetadata'];
+        return array('loadClassMetadata');
     }
 
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)

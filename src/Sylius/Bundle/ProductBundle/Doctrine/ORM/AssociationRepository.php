@@ -14,17 +14,17 @@ namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
- * Default association type repository.
+ * Default association repository.
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class AssociationTypeRepository extends EntityRepository
+class AssociationRepository extends EntityRepository
 {
     /**
      * {@inheritdoc}
      */
     protected function getAlias()
     {
-        return 'association_type';
+        return 'association';
     }
 }

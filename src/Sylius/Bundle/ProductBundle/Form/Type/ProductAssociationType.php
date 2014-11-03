@@ -17,11 +17,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Association type form type.
+ * Association form type.
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class AssociationTypeType extends AbstractResourceType
+class ProductAssociationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -29,9 +29,18 @@ class AssociationTypeType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.association_type.name',
+            ->add('type', 'entity', array(
+                'label' => 'sylius.form.association.type',
+                'class' => 'Sylius\Component\Product\Model\AssociationType',
+                'property' => 'name',
                 'required' => true
+            ))
+            ->add('product', 'entity', array(
+                'label' => 'sylius.form.association.product',
+                'class' => 'Sylius\Component\Product\Model\Product',
+                'property' => 'name',
+                'required' => true,
+                'property_path' => 'associatedObject'
             ))
         ;
     }
@@ -41,7 +50,7 @@ class AssociationTypeType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_association_type';
+        return 'sylius_product_association';
     }
 
     /**
@@ -53,7 +62,7 @@ class AssociationTypeType extends AbstractResourceType
 
         $resolver->replaceDefaults(array(
             'empty_data' => function (FormInterface $form) {
-                return new $this->dataClass($form->get('name')->getData());
+                return new $this->dataClass($form->get('product')->getData(), $form->get('type')->getData());
             }
         ));
     }

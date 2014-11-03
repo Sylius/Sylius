@@ -19,10 +19,10 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith([
+        $this->beConstructedWith(array(
             'product' => 'Sylius\Component\Product\Model\ProductAssociation',
             'group'   => 'Cocoders\GroupProductAssociation\Model\GroupAssociation'
-        ]);
+        ));
     }
     function it_is_doctrine_event_subcriber()
     {
@@ -31,9 +31,9 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
 
     function it_subscribe_loadClassMetadata_event()
     {
-        $this->getSubscribedEvents()->shouldBe([
+        $this->getSubscribedEvents()->shouldBe(array(
             'loadClassMetadata'
-        ]);
+        ));
     }
 
     function it_set_discriminator_map_to_parent_association_mapping(
@@ -45,10 +45,10 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
         $metadata->getName()->willReturn('Sylius\Component\Product\Model\Association');
 
         $metadata
-            ->setDiscriminatorMap([
+            ->setDiscriminatorMap(array(
                 'product' => 'Sylius\Component\Product\Model\ProductAssociation',
                 'group'   => 'Cocoders\GroupProductAssociation\Model\GroupAssociation'
-            ])
+            ))
             ->shouldBeCalled()
         ;
 
