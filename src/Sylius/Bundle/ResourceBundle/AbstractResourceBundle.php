@@ -54,24 +54,22 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
             foreach ($className::getSupportedDrivers() as $driver) {
                 list($mappingsPassClassName, $manager) = $this->getMappingDriverInfo($driver);
 
-                if ($this->mappingFormat === self::MAPPING_XML) {
-                    if (class_exists($mappingsPassClassName)) {
+                if (class_exists($mappingsPassClassName)) {
+                    if (self::MAPPING_XML === $this->mappingFormat) {
                         $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
                             array($this->getConfigFilesPath() => $this->getModelNamespace()),
                             $manager,
                             sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                         ));
-                    }
-                } elseif ($this->mappingFormat === self::MAPPING_YAML) {
-                    if (class_exists($mappingsPassClassName)) {
+                    } elseif (self::MAPPING_YAML === $this->mappingFormat) {
                         $container->addCompilerPass($mappingsPassClassName::createYamlMappingDriver(
                             array($this->getConfigFilesPath() => $this->getModelNamespace()),
                             $manager,
                             sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                         ));
+                    } else {
+                        throw new InvalidConfigurationException("The 'mappingFormat' value is invalid, must be 'xml' or 'yml'.");
                     }
-                } else {
-                    throw new InvalidConfigurationException("The 'mappingFormat' value is invalid, must be 'xml' or 'yml'.");
                 }
             }
         }
