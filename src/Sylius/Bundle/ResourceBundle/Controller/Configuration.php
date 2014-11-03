@@ -183,7 +183,7 @@ class Configuration
             if (!empty($redirect['referer'])) {
                 return 'referer';
             }
-            
+
             return $redirect['route'];
         }
 
@@ -194,7 +194,7 @@ class Configuration
     {
         $redirect = $this->parameters->get('redirect');
 
-        if (null === $redirect || !is_array($redirect) || empty($redirect['hash'])) {
+        if (!is_array($redirect) || empty($redirect['hash'])) {
             return null;
         }
 
@@ -204,20 +204,17 @@ class Configuration
     public function getRedirectReferer()
     {
         $redirect = $this->parameters->get('redirect');
+        $referer = $this->request->headers->get('referer');
 
-        if (!is_array($redirect)) {
-            return $this->request->headers->get('referer');
-        }
-
-        if (empty($redirect['referer'])) {
-            throw new \LogicException('Not found "referer key".');
+        if (!is_array($redirect) || empty($redirect['referer'])) {
+            return $referer;
         }
 
         if ($redirect['referer'] === true) {
             return $this->request->headers->get('referer');
         }
 
-        return $this->request->get($redirect['referer'], $this->request->headers->get('referer'));
+        return $redirect['referer'] ?: $referer;
     }
 
     /**
@@ -229,7 +226,7 @@ class Configuration
     {
         $redirect = $this->parameters->get('redirect');
 
-        if (null === $redirect || !is_array($redirect) || empty($redirect['parameters'])) {
+        if (!is_array($redirect) || empty($redirect['parameters'])) {
             $redirect = array('parameters' => array());
         }
 
