@@ -154,6 +154,14 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getRouteName('custom')->shouldReturn('sylius_product_custom');
     }
 
+    function it_generates_redirect_referer(Parameters $parameters, Request $request, ParameterBag $bag)
+    {
+        $request->headers = $bag;
+        $bag->get('referer')->willReturn('http://myurl.com');
+        $parameters->get('redirect')->willReturn(array('referer' => 'http://myurl.com'));
+        $this->getRedirectReferer()->shouldReturn('http://myurl.com');
+    }
+
     function it_generates_redirect_route(Parameters $parameters)
     {
         $parameters->get('redirect')->willReturn(null);
