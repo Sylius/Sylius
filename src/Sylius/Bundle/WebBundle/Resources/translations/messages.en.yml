@@ -597,6 +597,8 @@ sylius:
         updated_at: Last update
     product:
         add_attribute: Add attribute
+        add_association: Add association
+        associations: Associated products
         available_on: Available on
         available_on_demand: Available on demand
         categorization: Categorization
@@ -613,6 +615,7 @@ sylius:
         no_images: There are no images for this product
         no_options: There are no options for this product
         no_attributes: This product has no attributes defined
+        no_associations: This product has no associations defined
         no_results: There are no products to display.
         no_shipping_category: No shipping category
         no_short_description: <i>No short description</i>
@@ -625,6 +628,7 @@ sylius:
         attributes: Attributes
         restricted_zone: Restricted zone
         remove_attribute: Remove attribute
+        remove_association: Remove
         shipping_category: Shipping category
         show: View more
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
@@ -637,6 +641,7 @@ sylius:
             options: Options
             product: Product
             attributes: Attributes
+            associations: Associations
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product

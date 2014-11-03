@@ -596,4 +596,9 @@ class Product implements ProductInterface
     {
         return $this->associations->toArray();
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

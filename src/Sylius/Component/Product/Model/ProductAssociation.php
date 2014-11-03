@@ -40,4 +40,11 @@ class ProductAssociation extends Association
     {
         return $this->product;
     }
+
+    final public function setAssociatedObject(ProductInterface $product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
 }
