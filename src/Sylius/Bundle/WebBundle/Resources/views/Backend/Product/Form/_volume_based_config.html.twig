@@ -30,9 +30,9 @@
         </tr>
         </thead>
         <tbody id="sylius-assortment-product-pricing-ranks" class="collection-container"
-               data-prototype="{{ _self.volume_based_prototype(form)|e }}">
+               data-prototype="{{ _self.volume_based_prototype(form)|e }}" data-is-php-array="true">
         {% for rank in form.masterVariant.pricingConfiguration.children %}
-            <tr>
+            <tr class="sylius-assortment-product-pricing-ranks-item">
                 <td>{{ form_widget(rank.children.min) }}</td>
                 <td>{{ form_widget(rank.children.max) }}</td>
                 <td>{{ form_widget(rank.children.price) }}</td>
