@@ -126,6 +126,7 @@ sylius_payment:
         dummy: Test
         stripe: Stripe
         be2bill: Be2Bill
+        stripe_checkout: Stripe Checkout
 
 sylius_payum: ~
 

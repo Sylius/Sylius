@@ -24,6 +24,9 @@ twig:
             - 'CmfMediaBundle:Form:fields.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    paths:
+        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Core/Resources/views: PayumCore
+        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Stripe/Resources/views: PayumStripe
 
 assetic:
     debug:          %kernel.debug%

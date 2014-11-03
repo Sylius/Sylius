@@ -29,8 +29,8 @@
         "sylius/order-bundle":    "0.12.*@dev",
         "sylius/payment-bundle":  "0.12.*@dev",
         "sylius/resource-bundle": "0.12.*@dev",
-        "payum/core":             "~0.9.0",
-        "payum/payum-bundle":     "~0.9.0",
+        "payum/core":             "~0.12.0",
+        "payum/payum-bundle":     "~0.12.0",
         "winzou/state-machine":   "~0.1"
     },
     "config": {

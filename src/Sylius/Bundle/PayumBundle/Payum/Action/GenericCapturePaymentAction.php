@@ -12,16 +12,15 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
 use Payum\Core\Action\PaymentAwareAction;
-use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Model\Order;
 use Payum\Core\Request\Capture;
-use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-abstract class AbstractCapturePaymentAction extends PaymentAwareAction
+class GenericCapturePaymentAction extends PaymentAwareAction
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @param $request Capture
      */
@@ -31,19 +30,28 @@ abstract class AbstractCapturePaymentAction extends PaymentAwareAction
 
         /** @var $payment PaymentInterface */
         $payment = $request->getModel();
+        $order = $payment->getOrder();
 
-        $this->composeDetails($payment, $request->getToken());
-
-        $details = ArrayObject::ensureArrayObject($payment->getDetails());
+        $payumOrder = new Order;
+        $payumOrder->setNumber($order->getNumber());
+        $payumOrder->setTotalAmount($order->getTotal());
+        $payumOrder->setCurrencyCode($order->getCurrency());
+        $payumOrder->setClientEmail($order->getUser() ? $order->getUser()->getEmail() : $order->getEmail());
+        $payumOrder->setClientId($order->getUser() ? $order->getUser()->getId() : $order->getEmail());
+        $payumOrder->setDescription(sprintf(
+            'Order containing %d items for a total of %01.2f',
+            $order->getItems()->count(), $order->getTotal() / 100
+        ));
+        $payumOrder->setDetails($payment->getDetails());
 
         try {
-            $request->setModel($details);
+            $request->setModel($payumOrder);
             $this->payment->execute($request);
 
-            $payment->setDetails($details);
+            $payment->setDetails($payumOrder->getDetails());
             $request->setModel($payment);
         } catch (\Exception $e) {
-            $payment->setDetails($details);
+            $payment->setDetails($payumOrder->getDetails());
             $request->setModel($payment);
 
             throw $e;
@@ -60,10 +68,4 @@ abstract class AbstractCapturePaymentAction extends PaymentAwareAction
             $request->getModel() instanceof PaymentInterface
         ;
     }
-
-    /**
-     * @param PaymentInterface $payment
-     * @param TokenInterface   $token
-     */
-    abstract protected function composeDetails(PaymentInterface $payment, TokenInterface $token);
 }

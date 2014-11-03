@@ -29,8 +29,8 @@
         <parameter key="sylius.payum.dummy.action.capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CapturePaymentAction</parameter>
         <parameter key="sylius.payum.dummy.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\PaymentStatusAction</parameter>
 
+        <parameter key="sylius.payum.action.generic_capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Action\GenericCapturePaymentAction</parameter>
         <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
-        <parameter key="sylius.payum.action.obtain_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Action\ObtainCreditCardAction</parameter>
         <parameter key="sylius.payum.action.execute_same_request_with_payment_details.class">Sylius\Bundle\PayumBundle\Payum\Action\ExecuteSameRequestWithPaymentDetailsAction</parameter>
     </parameters>
 
@@ -85,16 +85,10 @@
         <service id="sylius.payum.action.payment_status" class="%sylius.payum.action.payment_status.class%" public="false">
             <tag name="payum.action" all="true" />
         </service>
-        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%" public="false">
+        <service id="sylius.payum.action.generic_capture_payment" class="%sylius.payum.action.generic_capture_payment.class%" public="false">
             <tag name="payum.action" all="true" />
         </service>
-        <service id="sylius.payum.action.obtain_credit_card" class="%sylius.payum.action.obtain_credit_card.class%" public="false">
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="templating" />
-            <call method="setRequest">
-                <argument type="service" id="request" on-invalid="null" strict="false" />
-            </call>
-
+        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="%sylius.payum.action.execute_same_request_with_payment_details.class%" public="false">
             <tag name="payum.action" all="true" />
         </service>
 
