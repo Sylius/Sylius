@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
-;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

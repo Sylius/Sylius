@@ -15,10 +15,12 @@
         $(document).on('click', 'a[data-collection-button="add"]', function(e) {
             e.preventDefault();
             var collectionContainer = $('#' + $(this).data('collection'));
+            var isArray = collectionContainer.data('is-php-array');
             var prototype = $('#' + $(this).data('prototype')).data('prototype');
-            var item = prototype.replace(/__name__/g, collectionContainer.children().length);
+            var item = prototype.replace(/__name__/g, collectionContainer.children().length + (undefined == isArray ? 0 : 1));
             collectionContainer.append(item);
         });
+
         $(document).on('click', 'a[data-collection-button="delete"]', function(e) {
             e.preventDefault();
             var item = $(this).closest('.' + $(this).data('collection') + '-' + $(this).data('collection-item'));
