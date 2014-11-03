@@ -634,6 +634,11 @@ sylius:
         updated_at: Last update
         variant_selection_method: Variant selection method
         view_details: View %product% details.
+        volume_price: Volume based pricing
+        volume_based:
+            qty_min: Qty min
+            qty_max: Qty max
+            price: Price
     product_not_available_in_zone: Not available in your country
     promotion:
         actions: Actions
