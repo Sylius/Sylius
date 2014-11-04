@@ -5,6 +5,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Configuration;
+use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -26,6 +27,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $config->getRedirectParameters('resource')->willReturn(array());
         $config->getRedirectRoute('show')->willReturn('my_route');
         $router->generate('my_route', array())->willReturn('http://myurl.com');
+        $config->getRedirectHash()->willReturn(null);
 
         $this->redirectTo('resource')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
@@ -35,6 +37,7 @@ class RedirectHandlerSpec extends ObjectBehavior
         $config->getRedirectRoute('index')->willReturn('my_route');
         $config->getRedirectParameters()->willReturn(array());
         $router->generate('my_route', array())->willReturn('http://myurl.com');
+        $config->getRedirectHash()->willReturn(null);
 
         $this->redirectToIndex()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
@@ -47,8 +50,9 @@ class RedirectHandlerSpec extends ObjectBehavior
             ->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
-    function it_redirects()
+    function it_redirects($config)
     {
+        $config->getRedirectHash()->willReturn(null);
         $this->redirect('http://myurl.com')->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 
@@ -58,6 +62,8 @@ class RedirectHandlerSpec extends ObjectBehavior
 
         $bag->get('referer')->willReturn('http://myurl.com');
         $config->getRequest()->willreturn($request);
+        $config->getRedirectHash()->willReturn(null);
+        $config->getRedirectReferer()->willreturn('http://myurl.com');
 
         $this->redirectToReferer()->shouldHaveType('Symfony\Component\HttpFoundation\RedirectResponse');
     }
