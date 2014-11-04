@@ -15,7 +15,7 @@ use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Model\Order;
 use Payum\Core\Request\Capture;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class GenericCapturePaymentAction extends PaymentAwareAction
 {
@@ -32,11 +32,11 @@ class GenericCapturePaymentAction extends PaymentAwareAction
         $payment = $request->getModel();
         $order = $payment->getOrder();
 
-        $payumOrder = new Order;
+        $payumOrder = new Order();
         $payumOrder->setNumber($order->getNumber());
         $payumOrder->setTotalAmount($order->getTotal());
         $payumOrder->setCurrencyCode($order->getCurrency());
-        $payumOrder->setClientEmail($order->getUser() ? $order->getUser()->getEmail() : $order->getEmail());
+        $payumOrder->setClientEmail($order->getEmail());
         $payumOrder->setClientId($order->getUser() ? $order->getUser()->getId() : $order->getEmail());
         $payumOrder->setDescription(sprintf(
             'Order containing %d items for a total of %01.2f',

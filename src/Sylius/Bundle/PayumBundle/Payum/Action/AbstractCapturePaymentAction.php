@@ -16,7 +16,7 @@ use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Capture;
 use Payum\Core\Security\TokenInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 abstract class AbstractCapturePaymentAction extends PaymentAwareAction
 {

@@ -1,7 +1,3 @@
-parameters:
-    payum.template.layout: SyliusPayumBundle::layout.html.twig
-    payum.template.obtain_credit_card: SyliusPayumBundle:Action:obtainCreditCard.html.twig
-
 payum:
     storages:
         Sylius\Component\Core\Model\Order: { doctrine: orm }

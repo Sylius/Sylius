@@ -26,6 +26,8 @@
     "require": {
         "php":                    ">=5.3.3",
 
+        "sylius/core":            "0.12.*@dev",
+        "sylius/currency":        "0.12.*@dev",
         "sylius/order-bundle":    "0.12.*@dev",
         "sylius/payment-bundle":  "0.12.*@dev",
         "sylius/resource-bundle": "0.12.*@dev",
