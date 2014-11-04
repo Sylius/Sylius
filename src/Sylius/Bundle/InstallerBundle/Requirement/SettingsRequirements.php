@@ -108,6 +108,6 @@ class SettingsRequirements extends RequirementCollection
     {
         $value = ini_get($key);
 
-        return false != $value && 'off' !== $value;
+        return false !== $value && 'off' !== $value;
     }
 }

@@ -14,7 +14,6 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
-use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 
 class LoadPagesData extends DataFixture
 {
@@ -36,7 +35,6 @@ class LoadPagesData extends DataFixture
         $parent = $manager->find(null, $basepath);
         $repository = $this->container->get('sylius.repository.static_content');
         $routeRepository = $this->container->get('sylius.repository.route');
-
 
         // Terms of service.
         $route = $routeRepository->createNew();
