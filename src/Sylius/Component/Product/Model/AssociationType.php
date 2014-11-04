@@ -63,7 +63,7 @@ class AssociationType
 
     public function setName($name)
     {
-        if (null === $name || !trim(str_replace(["\n", "\t"], '', $name))) {
+        if (null === $name || !trim(str_replace(array("\n", "\t"), '', $name))) {
             throw new \InvalidArgumentException('Association type name cannot be empty.');
         }
         $this->name = $name;

@@ -317,10 +317,10 @@ class ProductSpec extends ObjectBehavior
             ->addAssociation($association2)
         ;
 
-        $this->getAssociations()->shouldReturn([
+        $this->getAssociations()->shouldReturn(array(
             $association1,
             $association2
-        ]);
+        ));
     }
 
     function it_allows_to_remove_assoication(Association $association1, Association $association2)
@@ -331,8 +331,8 @@ class ProductSpec extends ObjectBehavior
             ->removeAssociation($association2)
         ;
 
-        $this->getAssociations()->shouldReturn([
+        $this->getAssociations()->shouldReturn(array(
             $association1
-        ]);
+        ));
     }
 }

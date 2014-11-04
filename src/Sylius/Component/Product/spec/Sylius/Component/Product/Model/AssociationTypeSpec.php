@@ -34,19 +34,19 @@ class AssociationTypeSpec extends ObjectBehavior
 
     function it_cannot_be_created_with_empty_name()
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('__construct', ['']);
-        $this->shouldThrow('\InvalidArgumentException')->during('__construct', ['   ']);
-        $this->shouldThrow('\InvalidArgumentException')->during('__construct', ["\n"]);
-        $this->shouldThrow('\InvalidArgumentException')->during('__construct', ["\t"]);
-        $this->shouldThrow('\InvalidArgumentException')->during('__construct', [null]);
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array(''));
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array('   '));
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array("\n"));
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array("\t"));
+        $this->shouldThrow('\InvalidArgumentException')->during('__construct', array(null));
     }
 
     function it_does_not_allow_to_change_name_to_empty_one()
     {
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', ['']);
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', ['   ']);
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', ["\n"]);
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', ["\t"]);
-        $this->shouldThrow('\InvalidArgumentException')->during('setName', [null]);
+        $this->shouldThrow('\InvalidArgumentException')->during('setName', array(''));
+        $this->shouldThrow('\InvalidArgumentException')->during('setName', array('   '));
+        $this->shouldThrow('\InvalidArgumentException')->during('setName', array("\n"));
+        $this->shouldThrow('\InvalidArgumentException')->during('setName', array("\t"));
+        $this->shouldThrow('\InvalidArgumentException')->during('setName', array(null));
     }
 }
