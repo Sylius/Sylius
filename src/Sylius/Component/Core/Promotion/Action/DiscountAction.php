@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Originator\OriginatorInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -56,10 +56,14 @@ abstract class DiscountAction implements PromotionActionInterface
         }
     }
 
+    /**
+     * @param PromotionInterface $promotion
+     *
+     * @return AdjustmentInterface
+     */
     protected function createAdjustment(PromotionInterface $promotion)
     {
         $adjustment = $this->adjustmentRepository->createNew();
-
         $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
         $adjustment->setDescription($promotion->getDescription());
 

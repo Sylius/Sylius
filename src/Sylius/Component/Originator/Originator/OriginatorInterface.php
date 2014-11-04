@@ -9,15 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Originator;
+namespace Sylius\Component\Originator\Originator;
 
-use Sylius\Component\Core\Model\OriginAwareInterface;
+use Sylius\Component\Originator\Model\OriginAwareInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface OriginatorInterface
 {
+    /**
+     * @param OriginAwareInterface $originAware
+     *
+     * @return null|object
+     */
     public function getOrigin(OriginAwareInterface $originAware);
+
+    /**
+     * @param OriginAwareInterface $originAware
+     * @param object               $origin
+     */
     public function setOrigin(OriginAwareInterface $originAware, $origin);
 }

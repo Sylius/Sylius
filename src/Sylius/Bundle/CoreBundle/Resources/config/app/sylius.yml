@@ -150,8 +150,6 @@ sylius_order:
         order_item:
             model: Sylius\Component\Core\Model\OrderItem
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
-        adjustment:
-            model: Sylius\Component\Core\Model\Adjustment
 
 sylius_sequence:
     generators:

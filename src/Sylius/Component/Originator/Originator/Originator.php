@@ -9,36 +9,51 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Originator;
+namespace Sylius\Component\Originator\Originator;
 
-use Sylius\Component\Core\Model\OriginAwareInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Sylius\Component\Originator\Model\OriginAwareInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Originator implements OriginatorInterface
 {
-    protected $em;
+    /**
+     * @var ManagerRegistry
+     */
+    protected $manager;
+
+    /**
+     * @var PropertyAccessor
+     */
     protected $accessor;
+
+    /**
+     * @var string
+     */
     protected $identifier;
 
-    public function __construct(EntityManagerInterface $em, $identifier = 'id')
+    public function __construct(ManagerRegistry $manager, $identifier = 'id')
     {
-        $this->em = $em;
+        $this->manager = $manager;
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->identifier = $identifier;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOrigin(OriginAwareInterface $originAware)
     {
         if (null === $originAware->getOriginId() || null === $originAware->getOriginType()) {
             return null;
         }
 
-        return $this->em
+        return $this->manager
             ->getRepository($originAware->getOriginType())
             ->findOneBy(array(
                 $this->identifier => $originAware->getOriginId()
@@ -46,6 +61,9 @@ class Originator implements OriginatorInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOrigin(OriginAwareInterface $originAware, $origin)
     {
         if (!is_object($origin)) {
