@@ -15,7 +15,7 @@
 
     <entity name="Sylius\Component\Product\Model\ProductAssociation">
         <many-to-one field="product" target-entity="Sylius\Component\Product\Model\Product">
-            <join-column name="associated_product_id" referenced-column-name="id" />
+            <join-column name="associated_product_id" referenced-column-name="id" on-delete="CASCADE" />
         </many-to-one>
     </entity>
 
