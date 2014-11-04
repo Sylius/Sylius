@@ -157,49 +157,96 @@ In your template, you can use the macro `move` to print the `move up` and `move 
     {{ buttons.move(path('my_route_move_up', {'id': resource.id}), 'up', loop.first and not resources.hasPreviousPage, loop.last and not resources.hasNextPage) }}
     {{ buttons.move(path('my_route_move_down', {'id': resource.id}), 'down', loop.first and not resources.hasPreviousPage, loop.last and not resources.hasNextPage) }}
 
-Twig Extensions
----------------
+Listing tools
+-------------
 
-sylius_resource_sort
-++++++++++++++++++++
+Sorting your resources (sylius_resource_sort)
++++++++++++++++++++++++++++++++++++++++++++++
 
-**Parameters :**
-    - **property (string) :** [Mandatory] Name of the property (defined in your resource)
-    - **label (string) :** Label of the column on your grid (default : property name)
-    - **order (string) :** Default order, it can be asc or desc (default : asc)
-    - **options (array) :** Additional options, the extension can use a custom template or generate a custom route
-        + **template (string) :** Path to the template
-        + **route (string) :** Key of the new route
-        + **route_params (array) :** Additional route parameters
+This TWIG extension renders the title of your columns (in your table), it created the link used to sort your resources.
+
+Parameters
+##########
+
++-----------+-----------+---------+----------------------------------------------------------+
+| Parameter | Mandatory | Type    | Description                                              |
++===========+===========+=========+==========================================================+
+| property  | YES       | string  | Name of the property (attribute defined in your classes) |
++-----------+-----------+---------+----------------------------------------------------------+
+| label     | NO        | string  | Default order, it can be asc or desc (default : asc)     |
++-----------+-----------+---------+----------------------------------------------------------+
+| order     | NO        | string  | Unique id of the address                                 |
++-----------+-----------+---------+----------------------------------------------------------+
+| options   | NO        | array   | Additional options :                                     |
+|           |           |         | **template (string) :** Path to the template             |
+|           |           |         | **route (string) :** Key of the new route                |
+|           |           |         | **route_params (array) :** Additional route parameters   |
++-----------+-----------+---------+----------------------------------------------------------+
 
 This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig
 
-**Example :**
+Example
+#######
 
 .. code-block:: html
 
-    <div>
-        {{ sylius_resource_sort('productId', 'product.id'|trans) }}
-    </div>
+    <table>
+        <tr>
+            <td>
+                {{ sylius_resource_sort('productId', 'product.id'|trans) }}
+            </td>
+            <td>
+                {{ sylius_resource_sort('productName', 'product.name'|trans, 'desc', {'route': 'my_custom_route'}) }}
+            </td>
+        </tr>
+    <table>
 
-sylius_resource_paginate
-++++++++++++++++++++++++
+Number of item by page (sylius_resource_paginate)
++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Parameters :**
-    - **paginator (object) :** [Mandatory] An instance of PagerFanta
-    - **limits (array) :** [Mandatory] An array of paginate value
-    - **options (array) :** Additional options, the extension can use a custom template or generate a custom route
-        + **template (string) :** Path to the template
-        + **route (string) :** Key of the new route
-        + **route_params (array) :** Additional route parameters
+This TWIG extension renders a HTML select which allows the user to choose how many items he wants to display in the page.
+
+Parameters
+##########
+
++-----------+-----------+---------+----------------------------------------------------------+
+| Parameter | Mandatory | Type    | Description                                              |
++===========+===========+=========+==========================================================+
+| paginator | YES       | string  | An instance of PagerFanta                                |
++-----------+-----------+---------+----------------------------------------------------------+
+| limits    | YES       | string  | An array of paginate value                               |
++-----------+-----------+---------+----------------------------------------------------------+
+| options   | NO        | array   | Additional options :                                     |
+|           |           |         | **template (string) :** Path to the template             |
+|           |           |         | **route (string) :** Key of the new route                |
+|           |           |         | **route_params (array) :** Additional route parameters   |
++-----------+-----------+---------+----------------------------------------------------------+
 
 This extension renders the following template : SyliusResourceBundle:Twig:paginate.html.twig
 
-**Example :**
+Example
+#######
 
 .. code-block:: html
 
-    <div>
-        {{ sylius_resource_paginate(paginator, [10, 20, 30]) }}
-    </div>
-    
+    {{ sylius_resource_paginate(paginator, [10, 30, 50]) }}
+
+    <table>
+        <!-- ... -->
+    </table>
+
+    {{ sylius_resource_paginate(paginator, [10, 30, 50]) }}
+
+
+Rendering pagination
+++++++++++++++++++++
+
+For now, you need to create your own macro, it could look like :
+
+.. code-block:: html
+
+    {% macro pagination(paginator, options) %}
+        {% if paginator.haveToPaginate()|default(false) %}
+            {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
+        {% endif %}
+    {% endmacro %}
