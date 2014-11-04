@@ -22,6 +22,7 @@ use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
 class AssociationInheritanceMetadataSubscriber implements EventSubscriber
 {
     const ASSOCIATION_CLASS_NAME = 'Sylius\Component\Product\Model\Association';
+
     /**
      * @var array
      */
@@ -32,6 +33,9 @@ class AssociationInheritanceMetadataSubscriber implements EventSubscriber
         $this->discriminatorMap = $discriminatorMap;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getSubscribedEvents()
     {
         return array('loadClassMetadata');
@@ -44,7 +48,7 @@ class AssociationInheritanceMetadataSubscriber implements EventSubscriber
          */
         $metadata = $eventArgs->getClassMetadata();
 
-        if ($metadata->getName() != self::ASSOCIATION_CLASS_NAME) {
+        if ($metadata->getName() !== self::ASSOCIATION_CLASS_NAME) {
             return;
         }
 

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ProductBundle\Behat;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Product\Model\AssociationType;
@@ -43,7 +42,7 @@ class ProductAssociationContext extends DefaultContext
             ->getQuery()
             ->getOneOrNullResult()
        ;
-        $associationType = $this->getRepository('AssociationType')->findOneBy(['name' => $typeName]);
+        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $typeName));
         if (!$associationType) {
             throw new \InvalidArgumentException(sprintf('Association Type %s does not exists and it should', $typeName));
         }
@@ -106,11 +105,11 @@ class ProductAssociationContext extends DefaultContext
      */
     public function iShouldSeeThatIsConnectedWithByAssociation($productName, $associatedProductName, $associationTypeName)
     {
-        $product = $this->getRepository('Product')->findOneBy(['name' => $productName]);
-        $associatedProduct = $this->getRepository('Product')->findOneBy(['name' => $associatedProductName]);
-        $associationType = $this->getRepository('AssociationType')->findOneBy(['name' => $associationTypeName]);
+        $product = $this->getRepository('Product')->findOneBy(array('name' => $productName));
+        $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProductName));
+        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationTypeName));
 
-        $this->getSession()->visit($this->generateUrl('sylius_backend_product_update', ['id' => $product->getId()]));
+        $this->getSession()->visit($this->generateUrl('sylius_backend_product_update', array('id' => $product->getId())));
         $this->assertSession()->fieldValueEquals('sylius_product[associations][0][type]', $associationType->getId());
         $this->assertSession()->fieldValueEquals('sylius_product[associations][0][product]', $associatedProduct->getId());
     }
