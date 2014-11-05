@@ -14,8 +14,8 @@ namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 use Payum\Core\Request\ObtainCreditCard;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 {

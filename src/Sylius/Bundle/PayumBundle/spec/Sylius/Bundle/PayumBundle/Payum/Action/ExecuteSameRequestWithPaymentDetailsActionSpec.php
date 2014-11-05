@@ -31,7 +31,8 @@ class ExecuteSameRequestWithPaymentDetailsActionSpec extends ObjectBehavior
         $this->shouldHaveType('Payum\Core\Action\PaymentAwareAction');
     }
 
-    function it_should_support_request(Generic $request, PaymentInterface $payment) {
+    function it_should_support_request(Generic $request, PaymentInterface $payment)
+    {
         $request->getModel()->willReturn($payment);
         $payment->getDetails()->willReturn(array('foo' => 'foo'));
 
