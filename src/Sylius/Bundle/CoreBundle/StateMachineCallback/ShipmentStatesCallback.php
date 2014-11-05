@@ -38,10 +38,10 @@ class ShipmentStatesCallback
     }
 
     /**
-     * Update order's shippings state.
+     * Update order's shipping state.
      *
      * @param OrderInterface $order
-     * @param string $transition
+     * @param string         $transition
      */
     public function updateOrderShipmentStates(OrderInterface $order, $transition = ShipmentTransitions::SYLIUS_PREPARE)
     {

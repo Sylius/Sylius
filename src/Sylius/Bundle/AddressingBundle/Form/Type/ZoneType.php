@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
