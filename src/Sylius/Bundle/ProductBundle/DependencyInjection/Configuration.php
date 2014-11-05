@@ -22,6 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -66,6 +67,10 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
+                         ->arrayNode('product_translation')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
                     ->end()
                 ->end()
             ->end()
@@ -91,6 +96,17 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductType')->end()
+                                ->arrayNode('translatable_fields')
+                                    ->prototype('scalar')->end()
+                                    ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('product_translation')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\ProductTranslation')->end()
+                                ->scalarNode('repository')->end()
                             ->end()
                         ->end()
                         ->arrayNode('product_prototype')

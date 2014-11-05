@@ -11,12 +11,15 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Translation\Model\AbstractTranslatable;
+
 /**
  * Model for object attributes.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Attribute implements AttributeInterface
+class Attribute extends AbstractTranslatable implements AttributeInterface
 {
     /**
      * Attribute id.
@@ -26,13 +29,6 @@ class Attribute implements AttributeInterface
     protected $id;
 
     /**
-     * Internal name.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
      * Type.
      *
      * @var string
@@ -40,12 +36,11 @@ class Attribute implements AttributeInterface
     protected $type = AttributeTypes::TEXT;
 
     /**
-     * Presentation.
-     * Displayed to user.
+     * Internal name.
      *
      * @var string
      */
-    protected $presentation;
+    protected $name;
 
     /**
      * Attribute configuration.
@@ -70,6 +65,7 @@ class Attribute implements AttributeInterface
 
     public function __construct()
     {
+        parent::__construct();
         $this->createdAt = new \DateTime();
     }
 
@@ -112,7 +108,7 @@ class Attribute implements AttributeInterface
      */
     public function getPresentation()
     {
-        return $this->presentation;
+        return $this->translate()->getPresentation();
     }
 
     /**
@@ -120,7 +116,7 @@ class Attribute implements AttributeInterface
      */
     public function setPresentation($presentation)
     {
-        $this->presentation = $presentation;
+        $this->translate()->setPresentation($presentation);
 
         return $this;
     }

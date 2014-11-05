@@ -14,6 +14,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:prezent="prezent"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
@@ -21,21 +22,6 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
-        <field name="name" column="name" type="string" />
-        <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
-        </field>
-        <field name="permalink" column="permalink" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" >
-                <gedmo:handler class="Gedmo\Sluggable\Handler\RelativeSlugHandler">
-                    <gedmo:handler-option name="relationField" value="parent"/>
-                    <gedmo:handler-option name="relationSlugField" value="slug"/>
-                    <gedmo:handler-option name="separator" value="/"/>
-                </gedmo:handler>
-            </gedmo:slug>
-        </field>
-        <field name="description" column="description" type="text" nullable="true" />
 
         <many-to-one field="taxonomy" target-entity="Sylius\Component\Taxonomy\Model\TaxonomyInterface">
             <join-column name="taxonomy_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
@@ -73,6 +59,8 @@
 
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:tree type="nested" />
+        <!--TODO Core model is mapped, do a resolver-->
+        <prezent:translatable field="translations" target-entity="Sylius\Component\Core\Model\TaxonTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
     </mapped-superclass>
 
 </doctrine-mapping>

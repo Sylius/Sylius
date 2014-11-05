@@ -134,7 +134,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
-          And go to "attributes" tab
+          And go to "Attributes" tab
           And I click "Add attribute"
           And I select "T-Shirt fabric" from "Attribute"
           And I fill in "Value" with "Cotton"
@@ -150,7 +150,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
-          And go to "attributes" tab
+          And go to "Attributes" tab
           And I click "Add attribute"
           And I select "T-Shirt fare trade" from "Attribute"
           And I check "Value"
@@ -165,7 +165,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
-          And go to "attributes" tab
+          And go to "Attributes" tab
           And I click "Add attribute"
           And I select "Color" from "Attribute"
           And I select "red" from "Value"

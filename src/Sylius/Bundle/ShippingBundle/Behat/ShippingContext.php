@@ -74,4 +74,22 @@ class ShippingContext extends DefaultContext
 
         $manager->flush();
     }
+
+    /**
+     * @Given the shipping method translations exist
+     */
+    public function theShippingMethodTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $countryTranslation = $this->findOneByName('shipping_method_translation', $data['shipping_method']);
+            $country = $countryTranslation->getTranslatable();
+            $country
+                ->setCurrentLocale($data['locale'])
+                ->setName($data['name']);
+        }
+
+        $manager->flush();
+    }
 }

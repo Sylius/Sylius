@@ -20,6 +20,7 @@ use Sylius\Component\Product\Model\OptionValueInterface;
  * Default product options to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class LoadProductOptionData extends DataFixture
 {
@@ -29,19 +30,34 @@ class LoadProductOptionData extends DataFixture
     public function load(ObjectManager $manager)
     {
         // T-Shirt size option.
-        $option = $this->createOption('T-Shirt size', 'Size', array('S', 'M', 'L', 'XL', 'XXL'));
+        $option = $this->createOption(
+            'T-Shirt size',
+            array($this->defaultLocale => 'Size', 'es' => 'Talla'),
+            array('S', 'M', 'L', 'XL', 'XXL')
+        );
         $manager->persist($option);
 
         // T-Shirt color option.
-        $option = $this->createOption('T-Shirt color', 'Color', array('Red', 'Blue', 'Green'));
+        $option = $this->createOption(
+            'T-Shirt color',
+            array($this->defaultLocale => 'Color'),
+            array('Red', 'Blue', 'Green')
+        );
         $manager->persist($option);
 
         // Sticker size option.
-        $option = $this->createOption('Sticker size', 'Size', array('3"','5"','7"'));
+        $option = $this->createOption(
+            'Sticker size',
+            array($this->defaultLocale => 'Size', 'es' => 'Talla'),
+            array('3"', '5"', '7"'));
         $manager->persist($option);
 
         // Mug type option.
-        $option = $this->createOption('Mug type', 'Type', array('Medium mug','Double mug','MONSTER mug'));
+        $option = $this->createOption(
+            'Mug type',
+            array($this->defaultLocale => 'Type', 'es' => 'Tipo'),
+            array('Medium mug', 'Double mug', 'MONSTER mug')
+        );
         $manager->persist($option);
 
         $manager->flush();
@@ -59,17 +75,22 @@ class LoadProductOptionData extends DataFixture
      * Create an option.
      *
      * @param string $name
-     * @param string $presentation
+     * @param array  $presentationTranslation
      * @param array  $values
      *
      * @return OptionInterface
      */
-    protected function createOption($name, $presentation, array $values)
+    protected function createOption($name, array $presentationTranslation, array $values)
     {
         /* @var $option OptionInterface */
         $option = $this->getProductOptionRepository()->createNew();
         $option->setName($name);
-        $option->setPresentation($presentation);
+
+        foreach ($presentationTranslation as $locale => $presentation) {
+            $option->setCurrentLocale($locale);
+            $option->setPresentation($presentation);
+        }
+        $option->setCurrentLocale($this->defaultLocale);
 
         foreach ($values as $text) {
             /* @var $value OptionValueInterface */
@@ -79,7 +100,7 @@ class LoadProductOptionData extends DataFixture
             $option->addValue($value);
         }
 
-        $this->setReference('Sylius.Option.'.$name, $option);
+        $this->setReference('Sylius.Option.' . $name, $option);
 
         return $option;
     }

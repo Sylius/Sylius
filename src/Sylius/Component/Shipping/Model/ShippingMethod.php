@@ -13,13 +13,15 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * Shipping method model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethod implements ShippingMethodInterface
+class ShippingMethod extends AbstractTranslatable implements ShippingMethodInterface
 {
     /**
      * Shipping method identifier.
@@ -96,6 +98,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -105,7 +108,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
@@ -185,7 +188,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -193,7 +196,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
 
         return $this;
     }

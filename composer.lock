@@ -4,8 +4,74 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d6fa706b0b05fac0c7ee97b3bbb4391",
+    "hash": "e8c7bcc14cf72956a3960ee710cdc97a",
     "packages": [
+        {
+            "name": "a2lix/translation-form-bundle",
+            "version": "dev-master",
+            "target-dir": "A2lix/TranslationFormBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/a2lix/TranslationFormBundle.git",
+                "reference": "72936f6e11b8b3f4e81fe1cda352725ce30f23df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/a2lix/TranslationFormBundle/zipball/72936f6e11b8b3f4e81fe1cda352725ce30f23df",
+                "reference": "72936f6e11b8b3f4e81fe1cda352725ce30f23df",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/symfony": ">=2.3"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.3",
+                "gedmo/doctrine-extensions": "dev-wip-v2.4.0",
+                "knplabs/doctrine-behaviors": "1.0.x-dev",
+                "phpunit/phpunit": "~4.1"
+            },
+            "suggest": {
+                "a2lix/i18n-doctrine-bundle": "For A2lix strategy",
+                "gedmo/doctrine-extensions": "For Gedmo strategy",
+                "knplabs/doctrine-behaviors": "For Knp strategy",
+                "prezent/doctrine-translatable-bundle": "For Prezent strategy"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "A2lix\\TranslationFormBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David ALLIX",
+                    "homepage": "http://a2lix.fr"
+                }
+            ],
+            "description": "Translate your doctrine objects easily with some helps",
+            "homepage": "https://github.com/a2lix/TranslationFormBundle",
+            "keywords": [
+                "Symfony2",
+                "doctrine2",
+                "form",
+                "gedmo",
+                "i18n",
+                "internationalization",
+                "knplabs",
+                "translatable",
+                "translation"
+            ],
+            "time": "2014-11-10 15:04:07"
+        },
         {
             "name": "ajbdev/authorizenet-php-api",
             "version": "v1.1.8",
@@ -2633,7 +2699,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -4004,6 +4070,59 @@
             "time": "2014-06-15 19:48:04"
         },
         {
+            "name": "prezent/doctrine-translatable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Prezent/doctrine-translatable.git",
+                "reference": "49be30d155bf7aae3bf146a1fb64b3b28ebd14a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Prezent/doctrine-translatable/zipball/49be30d155bf7aae3bf146a1fb64b3b28ebd14a2",
+                "reference": "49be30d155bf7aae3bf146a1fb64b3b28ebd14a2",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.3,<2.6-dev",
+                "jms/metadata": "~1.1",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "doctrine/orm": ">=2.3,<2.6-dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Prezent\\Doctrine\\Translatable": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Prezent Internet B.V.",
+                    "email": "github@prezent.nl"
+                }
+            ],
+            "description": "Translatable behaviour extension for Doctrine2",
+            "homepage": "http://www.prezent.nl",
+            "keywords": [
+                "doctrine2",
+                "extensions",
+                "i18n",
+                "translatable"
+            ],
+            "time": "2014-12-02 15:13:31"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -5339,12 +5458,12 @@
             "version": "v1.16.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
+                "url": "https://github.com/fabpot/Twig.git",
                 "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "shasum": ""
             },
@@ -7471,7 +7590,9 @@
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
         "willdurand/hateoas-bundle": 20,
-        "friendsofsymfony/oauth-server-bundle": 20
+        "friendsofsymfony/oauth-server-bundle": 20,
+        "prezent/doctrine-translatable": 20,
+        "a2lix/translation-form-bundle": 20
     },
     "prefer-stable": false,
     "platform": {

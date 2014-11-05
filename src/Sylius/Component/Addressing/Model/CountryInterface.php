@@ -17,24 +17,11 @@ use Doctrine\Common\Collections\Collection;
  * Country interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface CountryInterface
+interface CountryInterface extends CountryTranslationInterface
 {
     public function getId();
-
-    /**
-     * Get country name.
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Set country name.
-     *
-     * @param string $name
-     */
-    public function setName($name);
 
     /**
      * Get country ISO name.

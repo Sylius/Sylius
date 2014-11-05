@@ -12,13 +12,21 @@
 namespace spec\Sylius\Component\Taxonomy\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonomyTranslation;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonomySpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Taxonomy\Model\Taxonomy');
@@ -32,6 +40,15 @@ class TaxonomySpec extends ObjectBehavior
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function it_calls_translation_to_string(TaxonomyTranslation $translation)
+    {
+        $translation->getLocale()->willReturn('en');
+        $translation->setTranslatable($this)->shouldBeCalled();
+        $this->addTranslation($translation);
+        $translation->__toString()->shouldBeCalled();
+        $this->__toString();
     }
 
     function it_has_no_root_by_default()
@@ -50,20 +67,22 @@ class TaxonomySpec extends ObjectBehavior
         $this->getName()->shouldReturn(null);
     }
 
-    function its_name_is_mutable(TaxonInterface $taxon)
+    function its_name_is_mutable(Taxon $taxon)
     {
         $taxon->setName('Brand')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
+        $taxon->setCurrentLocale('en')->shouldBeCalled();
         $this->setRoot($taxon);
 
         $this->setName('Brand');
         $this->getName()->shouldReturn('Brand');
     }
 
-    function it_also_sets_name_on_the_root_taxon(TaxonInterface $taxon)
+    function it_also_sets_name_on_the_root_taxon(Taxon $taxon)
     {
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
+        $taxon->setCurrentLocale('en')->shouldBeCalled();
         $this->setRoot($taxon);
 
         $this->setName('Category');

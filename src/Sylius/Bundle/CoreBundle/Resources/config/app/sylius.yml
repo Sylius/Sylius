@@ -61,10 +61,15 @@ sylius_taxonomy:
     classes:
         taxonomy:
             model: Sylius\Component\Core\Model\Taxonomy
+            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
+        taxonomy_translation:
+            model: Sylius\Component\Core\Model\TaxonomyTranslation
         taxon:
             model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
+        taxon_translation:
+            model: Sylius\Component\Core\Model\TaxonTranslation
 
 sylius_product:
     driver: doctrine/orm
@@ -100,7 +105,10 @@ sylius_shipping:
             model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
             model: Sylius\Component\Core\Model\ShippingMethod
+            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+        shipping_method_translation:
+            model: Sylius\Component\Core\Model\ShippingMethodTranslation
 
 sylius_promotion:
     classes:

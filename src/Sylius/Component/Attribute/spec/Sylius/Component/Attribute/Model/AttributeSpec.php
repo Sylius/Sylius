@@ -16,9 +16,15 @@ use Sylius\Component\Attribute\Model\AttributeTypes;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AttributeSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Attribute\Model\Attribute');

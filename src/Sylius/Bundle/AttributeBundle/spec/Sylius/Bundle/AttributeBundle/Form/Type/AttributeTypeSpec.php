@@ -21,6 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Leszek Prabucki <leszek.prabucki@gmail.pl>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AttributeTypeSpec extends ObjectBehavior
 {
@@ -50,13 +51,13 @@ class AttributeTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('name', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('presentation', 'text', Argument::any())
+            ->add('name', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

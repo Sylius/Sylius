@@ -11,15 +11,16 @@
 
 namespace Sylius\Bundle\TaxonomyBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * Flexible categorization system.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusTaxonomyBundle extends AbstractResourceBundle
+class SyliusTaxonomyBundle extends AbstractTranslationBundle
 {
     /**
      * {@inheritdoc}

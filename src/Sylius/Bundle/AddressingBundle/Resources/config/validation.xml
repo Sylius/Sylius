@@ -98,19 +98,6 @@
     </class>
 
     <class name="Sylius\Component\Addressing\Model\Country">
-        <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">sylius.country.name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.country.name.min_length</option>
-                <option name="maxMessage">sylius.country.name.max_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
         <property name="isoName">
             <constraint name="NotBlank">
                 <option name="message">sylius.country.iso_name.not_blank</option>
@@ -125,6 +112,25 @@
         </property>
         <property name="provinces">
             <constraint name="Valid" />
+        </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Addressing\Model\CountryTranslation">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.country.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.country.name.min_length</option>
+                <option name="maxMessage">sylius.country.name.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
     </class>
 

@@ -24,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ShippingMethodTypeSpec extends ObjectBehavior
 {
@@ -50,7 +51,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
 
         $builder->addEventSubscriber(Argument::any())->willReturn($builder);
         $builder
-            ->add('name', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->willReturn($builder)
         ;
 

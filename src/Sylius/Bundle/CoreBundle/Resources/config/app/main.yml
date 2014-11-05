@@ -134,3 +134,8 @@ jms_serializer:
             sylius-taxation:
                 namespace_prefix: "Sylius\\Component\\Taxation"
                 path: "@SyliusTaxationBundle/Resources/config/serializer"
+
+a2lix_translation_form:
+    locale_provider: sylius.locale_provider
+    manager_registry: doctrine
+    templating: "A2lixTranslationFormBundle::default.html.twig"

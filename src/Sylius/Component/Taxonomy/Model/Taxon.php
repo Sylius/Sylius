@@ -13,13 +13,15 @@ namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * Model for taxons.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Taxon implements TaxonInterface
+class Taxon extends AbstractTranslatable implements TaxonInterface
 {
     /**
      * Taxon id.
@@ -48,34 +50,6 @@ class Taxon implements TaxonInterface
      * @var Collection
      */
     protected $children;
-
-    /**
-     * Taxon name.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * Taxon slug.
-     *
-     * @var string
-     */
-    protected $slug;
-
-    /**
-     * Taxon permalink.
-     *
-     * @var string
-     */
-    protected $permalink;
-
-    /**
-     * Taxon description.
-     *
-     * @var string
-     */
-    protected $description;
 
     /**
      * Required by DoctrineExtensions.
@@ -110,6 +84,7 @@ class Taxon implements TaxonInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->children = new ArrayCollection();
     }
 
@@ -118,7 +93,7 @@ class Taxon implements TaxonInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
@@ -224,7 +199,7 @@ class Taxon implements TaxonInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -232,7 +207,7 @@ class Taxon implements TaxonInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
 
         return $this;
     }
@@ -242,7 +217,7 @@ class Taxon implements TaxonInterface
      */
     public function getSlug()
     {
-        return $this->slug;
+        return $this->translate()->getSlug();
     }
 
     /**
@@ -250,7 +225,7 @@ class Taxon implements TaxonInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->translate()->setSlug($slug);
 
         return $this;
     }
@@ -260,15 +235,20 @@ class Taxon implements TaxonInterface
      */
     public function getPermalink()
     {
-        if (null !== $this->permalink) {
-            return $this->permalink;
+        $permalink = $this->translate()->getPermalink();
+
+        if (null !== $permalink) {
+            return $permalink;
         }
 
         if (null === $this->parent) {
-            return $this->slug;
+            return $this->getSlug();
         }
 
-        return $this->permalink = $this->parent->getPermalink().'/'.$this->slug;
+        $permalink = $this->parent->getPermalink().'/'.$this->getSlug();
+        $this->setPermalink($permalink);
+
+        return $permalink;
     }
 
     /**
@@ -276,7 +256,7 @@ class Taxon implements TaxonInterface
      */
     public function setPermalink($permalink)
     {
-        $this->permalink = $permalink;
+        $this->translate()->setPermalink($permalink);
 
         return $this;
     }
@@ -286,7 +266,7 @@ class Taxon implements TaxonInterface
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->translate()->getDescription();
     }
 
     /**
@@ -294,7 +274,7 @@ class Taxon implements TaxonInterface
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->translate()->setDescription($description);
 
         return $this;
     }

@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  * Sylius base application kernel.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 abstract class Kernel extends BaseKernel
 {
@@ -58,6 +59,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\SearchBundle\SyliusSearchBundle(),
+            new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
 
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
@@ -100,6 +102,8 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
+            new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {
