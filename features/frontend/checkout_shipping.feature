@@ -24,10 +24,11 @@ Feature: Checkout shipping
             | Poland         |
             | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration |
-            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  |
-            | USA          | FedEx Premium | Flat rate  | Amount: 10000 |
+            | zone         | name          | calculator | configuration | enabled |
+            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  | yes     |
+            | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
+            | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
+            | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
@@ -35,7 +36,7 @@ Feature: Checkout shipping
           And I am logged in user
           And I added product "PHP Top" to cart
 
-    Scenario: Only available methods are displayed to user for zone
+    Scenario: Only enabled and available methods are displayed to user for zone
               depending on the shipping address zone
         Given I go to the checkout start page
           And I fill in the shipping address to United Kingdom
@@ -43,6 +44,7 @@ Feature: Checkout shipping
          Then I should be on the checkout shipping step
           And I should see "DHL Express"
           But I should not see "FedEx"
+          And I should not see "UPS Ground"
 
     Scenario: Shipping price is displayed when selecting the shipping method
         Given I go to the checkout start page
