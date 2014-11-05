@@ -23,15 +23,15 @@
         "php":                      ">=5.3.3",
 
         "sylius/resource-bundle":               "0.12.*@dev",
-        "sylius/fixtures-bundle":               "0.12.*@dev",
         "symfony/framework-bundle":             "~2.3",
         "friendsofsymfony/oauth-server-bundle": "~1.4"
     },
     "require-dev": {
-        "symfony/form":    "~2.3",
-        "twig/twig":       "~1.0",
-        "phpspec/phpspec": "~2.0",
-        "phpunit/phpunit": "~3.7"
+        "symfony/form":           "~2.3",
+        "twig/twig":              "~1.0",
+        "phpspec/phpspec":        "~2.0",
+        "phpunit/phpunit":        "~3.7",
+        "sylius/fixtures-bundle": "0.12.*@dev"
     },
     "config": {
         "bin-dir": "bin"
