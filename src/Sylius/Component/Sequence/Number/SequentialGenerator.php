@@ -11,17 +11,35 @@
 
 namespace Sylius\Component\Sequence\Number;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
- * Default order number generator.
+ * Sequential number generator.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class SequentialGenerator extends AbstractGenerator implements GeneratorInterface
+class SequentialGenerator implements GeneratorInterface
 {
+    /**
+     * @var array
+     */
+    protected $sequences = array();
+
+    /**
+     * @var RepositoryInterface
+     */
+    protected $sequenceRepository;
+
+    /**
+     * @var ObjectManager
+     */
+    protected $sequenceManager;
+
     /**
      * Order number max length.
      *
@@ -39,11 +57,19 @@ class SequentialGenerator extends AbstractGenerator implements GeneratorInterfac
     /**
      * Constructor.
      *
+     * @param RepositoryInterface $sequenceRepository
+     * @param ObjectManager $sequenceManager
      * @param integer $numberLength
      * @param integer $startNumber
      */
-    public function __construct($numberLength = 9, $startNumber = 1)
-    {
+    public function __construct(
+        RepositoryInterface $sequenceRepository,
+        ObjectManager $sequenceManager,
+        $numberLength = 9,
+        $startNumber = 1
+    ) {
+        $this->sequenceRepository = $sequenceRepository;
+        $this->manager = $sequenceManager;
         $this->numberLength = $numberLength;
         $this->startNumber  = $startNumber;
     }
@@ -51,10 +77,36 @@ class SequentialGenerator extends AbstractGenerator implements GeneratorInterfac
     /**
      * {@inheritdoc}
      */
-    protected function generateNumber($index, SequenceSubjectInterface $subject)
+    public function generate(SequenceSubjectInterface $subject)
     {
-        $number = $this->startNumber + $index;
+        if (null !== $subject->getNumber()) {
+            return;
+        }
 
-        return str_pad($number, $this->numberLength, 0, STR_PAD_LEFT);
+        $sequence = $this->getSequence($subject->getSequenceType());
+        $number = str_pad($sequence->getIndex(), $this->numberLength, 0, STR_PAD_LEFT);
+
+        $subject->setNumber($number);
+        $sequence->incrementIndex();
+    }
+
+    /**
+     * @param string $type
+     * @return SequenceInterface object
+     */
+    protected function getSequence($type)
+    {
+        if (isset($this->sequences[$type])) {
+            return $this->sequences[$type];
+        }
+
+        $sequence = $this->sequenceRepository->findOneBy(array('type' => $type));
+
+        if (null === $sequence) {
+            $sequence = $this->sequenceRepository->createNew()->setType($type)->setIndex($this->startNumber);
+            $this->sequenceManager->persist($sequence);
+        }
+
+        return $this->sequences[$type] = $sequence;
     }
 }

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Registry\NonExistingServiceException;
@@ -47,19 +46,9 @@ class NumberListener
     protected $eventDispatcher;
 
     /**
-     * @var string
-     */
-    protected $sequenceClass;
-
-    /**
      * @var SequenceSubjectInterface[]
      */
     protected $entitiesEnabled = array();
-
-    /**
-     * @var array
-     */
-    protected $sequences = array();
 
     /**
      * @var bool
@@ -75,7 +64,6 @@ class NumberListener
         $this->registry      = $registry;
         $this->eventManager  = $eventManager;
         $this->eventDispatcher  = $eventDispatcher;
-        $this->sequenceClass = $sequenceClass;
     }
 
     /**
@@ -103,16 +91,12 @@ class NumberListener
      */
     public function preFlush(PreFlushEventArgs $args)
     {
-        $em = $args->getEntityManager();
-
         foreach ($this->entitiesEnabled as $entity) {
             try {
                 $generator = $this->registry->get($entity);
             } catch (NonExistingServiceException $e) {
                 throw new NonExistingGeneratorException($entity, $e);
             }
-
-            $sequence = $this->getSequence($entity->getSequenceType(), $em);
 
             $event = new GenericEvent($entity);
 
@@ -121,31 +105,12 @@ class NumberListener
                 $event
             );
 
-            $generator->generate($entity, $sequence);
+            $generator->generate($entity);
 
             $this->eventDispatcher->dispatch(
                 sprintf(SyliusSequenceEvents::POST_GENERATE, $entity->getSequenceType()),
                 $event
             );
         }
-    }
-
-    protected function getSequence($type, EntityManagerInterface $em)
-    {
-        if (isset($this->sequences[$type])) {
-            return $this->sequences[$type];
-        }
-
-        $sequence = $em
-            ->getRepository($this->sequenceClass)
-            ->findOneBy(array('type' => $type))
-        ;
-
-        if (null === $sequence) {
-            $sequence = new $this->sequenceClass($type);
-            $em->persist($sequence);
-        }
-
-        return $this->sequences[$type] = $sequence;
     }
 }
