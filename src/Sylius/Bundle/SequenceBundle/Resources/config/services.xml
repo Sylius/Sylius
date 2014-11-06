@@ -8,8 +8,8 @@
     <parameters>
         <parameter key="sylius.registry.number_generator.class">Sylius\Component\Sequence\Registry\GeneratorRegistry</parameter>
         <parameter key="sylius.sequence.number_generator.interface">Sylius\Component\Sequence\Number\GeneratorInterface</parameter>
-        <parameter key="sylius.sequence.sequential_number_generator.class">Sylius\Component\Sequence\Number\SequentialGenerator</parameter>
-        <parameter key="sylius.sequence.hash_number_generator.class">Sylius\Component\Sequence\Number\HashGenerator</parameter>
+        <parameter key="sylius.sequence.sequential_number_generator.class">Sylius\Component\Sequence\Generator\SequentialGenerator</parameter>
+        <parameter key="sylius.sequence.hash_number_generator.class">Sylius\Component\Sequence\Generator\HashGenerator</parameter>
     </parameters>
 
     <services>
@@ -18,5 +18,6 @@
           <argument type="service" id="sylius.repository.sequence" />
           <argument type="service" id="sylius.manager.sequence" />
         </service>
+        <service id="sylius.sequence.hash_number_generator" class="%sylius.sequence.hash_number_generator.class%" />
     </services>
 </container>

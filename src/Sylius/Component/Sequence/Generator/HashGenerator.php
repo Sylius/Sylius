@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Sequence\Number;
+namespace Sylius\Component\Sequence\Generator;
 
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 use Sylius\Component\Sequence\Repository\SequenceSubjectRepositoryInterface;
