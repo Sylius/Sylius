@@ -34,8 +34,8 @@ class RegisterGeneratorsPass implements CompilerPassInterface
         $generators = $container->getParameter('sylius.sequence.generators');
         $registry   = $container->getDefinition('sylius.registry.number_generator');
 
-        foreach ($generators as $interface => $generator) {
-            $registry->addMethodCall('register', array($interface, new Reference($generator)));
+        foreach ($generators as $type => $generator) {
+            $registry->addMethodCall('register', array($type, new Reference($generator)));
         }
     }
 }

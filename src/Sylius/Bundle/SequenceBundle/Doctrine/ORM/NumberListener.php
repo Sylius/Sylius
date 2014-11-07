@@ -93,7 +93,7 @@ class NumberListener
     {
         foreach ($this->entitiesEnabled as $entity) {
             try {
-                $generator = $this->registry->get($entity);
+                $generator = $this->registry->get($entity->getSequenceType());
             } catch (NonExistingServiceException $e) {
                 throw new NonExistingGeneratorException($entity, $e);
             }

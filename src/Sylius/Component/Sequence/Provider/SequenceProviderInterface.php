@@ -13,6 +13,9 @@ namespace Sylius\Component\Sequence\Provider;
 
 use Sylius\Component\Sequence\Model\SequenceInterface;
 
+/**
+ * @author Daniel Richter <nexyz9@gmail.com>
+ */
 interface SequenceProviderInterface
 {
     /**

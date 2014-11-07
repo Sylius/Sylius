@@ -26,6 +26,9 @@ class HashGenerator implements GeneratorInterface
      */
     protected $subjectRepository;
 
+    /**
+     * @param SequenceSubjectRepositoryInterface $subjectRepository
+     */
     public function __construct(SequenceSubjectRepositoryInterface $subjectRepository)
     {
         $this->subjectRepository = $subjectRepository;

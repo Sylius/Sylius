@@ -34,5 +34,6 @@ class SyliusSequenceExtension extends AbstractResourceExtension
         );
 
         $container->setParameter('sylius.sequence.generators', $config['generators']);
+        $container->getDefinition('sylius.sequence.provider')->addArgument($config['start_indexes']);
     }
 }

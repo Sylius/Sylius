@@ -14,6 +14,9 @@ namespace Sylius\Component\Sequence\Provider;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @author Daniel Richter <nexyz9@gmail.com>
+ */
 class SequenceProvider implements SequenceProviderInterface
 {
     /**
@@ -49,7 +52,7 @@ class SequenceProvider implements SequenceProviderInterface
         array $startIndexes = array()
     ) {
         $this->sequenceRepository = $sequenceRepository;
-        $this->manager = $sequenceManager;
+        $this->sequenceManager = $sequenceManager;
         $this->startIndexes = $startIndexes;
     }
 
