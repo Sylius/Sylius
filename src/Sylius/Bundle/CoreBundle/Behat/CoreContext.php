@@ -362,6 +362,10 @@ class CoreContext extends DefaultContext
             $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
             $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
 
+            if (!isset($data['enabled'])) {
+                $data['enabled'] = 'yes';
+            }
+
             $this->thereIsShippingMethod($data['name'], $data['zone'], $calculator, $configuration, 'yes' === $data['enabled'], false);
         }
 
