@@ -29,6 +29,8 @@
         <parameter key="sylius.listener.cart_refresh.class">Sylius\Bundle\CartBundle\EventListener\RefreshCartListener</parameter>
 
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
+
+        <parameter key="sylius.constant.event.cart_change" type="constant">Sylius\Component\Cart\SyliusCartEvents::CART_CHANGE</parameter>
     </parameters>
 
     <services>
@@ -102,7 +104,7 @@
         </service>
 
         <service id="sylius.listener.cart_refresh" class="%sylius.listener.cart_refresh.class%">
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="refreshCart" priority="255" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.cart_change%" method="refreshCart" priority="255" />
         </service>
 
         <service id="sylius.cart.purger" class="%sylius.cart.purger.class%">

@@ -8,6 +8,8 @@
     <parameters>
         <parameter key="sylius.listener.order_update.class">Sylius\Bundle\OrderBundle\EventListener\OrderUpdateListener</parameter>
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
+
+        <parameter key="sylius.constant.event.order.pre_update" type="constant">Sylius\Component\Core\SyliusOrderEvents::PRE_UPDATE</parameter>
     </parameters>
 
     <services>
@@ -45,7 +47,7 @@
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
 
         <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
-            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
+            <tag name="kernel.event_listener" event="%sylius.constant.event.order.pre_update%" method="recalculateOrderTotal" />
         </service>
     </services>
 </container>

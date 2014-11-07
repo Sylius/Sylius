@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\SyliusOrderItemEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -50,7 +51,7 @@ class OrderItemInventoryListener
             return;
         }
 
-        $this->eventDispatcher->dispatch('sylius.order_item.pre_create', new GenericEvent($item));
+        $this->eventDispatcher->dispatch(SyliusOrderItemEvents::PRE_CREATE, new GenericEvent($item));
     }
 
     public function onFlush(OnFlushEventArgs $args)
@@ -65,7 +66,7 @@ class OrderItemInventoryListener
 
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
             if ($this->supports($entity)) {
-                $this->eventDispatcher->dispatch('sylius.order_item.pre_update', new GenericEvent($entity));
+                $this->eventDispatcher->dispatch(SyliusOrderItemEvents::PRE_UPDATE, new GenericEvent($entity));
                 $uow->commit($entity);
             }
         }
