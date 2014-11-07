@@ -13,36 +13,17 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Shipping discount action.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingDiscountAction implements PromotionActionInterface
+class ShippingDiscountAction extends DiscountAction
 {
-    /**
-     * Adjustment repository.
-     *
-     * @var RepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $repository
-     */
-    public function __construct(RepositoryInterface $repository)
-    {
-        $this->repository = $repository;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -52,24 +33,10 @@ class ShippingDiscountAction implements PromotionActionInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
-        $adjustment = $this->repository->createNew();
+        $adjustment = $this->createAdjustment($promotion);
         $adjustment->setAmount(- $subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        $adjustment->setLabel(AdjustmentInterface::PROMOTION_ADJUSTMENT);
-        $adjustment->setDescription($promotion->getDescription());
 
         $subject->addAdjustment($adjustment);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
-    {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
-        }
-
-        $subject->removeAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT);
     }
 
     /**
