@@ -14,7 +14,9 @@
     </parameters>
 
     <services>
-        <service id="sylius.registry.number_generator" class="%sylius.registry.number_generator.class%" />
+        <service id="sylius.registry.number_generator" class="%sylius.registry.number_generator.class%">
+          <argument type="string">Sylius\Component\Sequence\Generator\GeneratorInterface</argument>
+        </service>
         <service id="sylius.sequence.provider" class="%sylius.sequence.provider.class%">
           <argument type="service" id="sylius.repository.sequence" />
           <argument type="service" id="sylius.manager.sequence" />
