@@ -184,15 +184,11 @@ class ProductSpec extends ObjectBehavior
         $firstVariant->setMaster(true)->shouldBeCalled();
 
         $this->setMasterVariant($firstVariant);
-
         $this->getMasterVariant()->shouldReturn($firstVariant);
 
         $firstVariant->setMaster(false)->shouldBeCalled();
-        $secondVariant->setProduct($this)->shouldBeCalled();
-        $secondVariant->setMaster(true)->shouldBeCalled();
 
         $this->setMasterVariant($secondVariant);
-
         $this->getMasterVariant()->shouldReturn($secondVariant);
     }
 
