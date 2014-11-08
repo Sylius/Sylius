@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Sylius\Component\Variation\Model\VariantInterface;
 
 /**
  * Sylius catalog product model.
@@ -354,6 +355,12 @@ class Product implements ProductInterface
     public function setMasterVariant(BaseVariantInterface $masterVariant)
     {
         $masterVariant->setMaster(true);
+
+        foreach ($this->variants as $variant) {
+            if ($variant !== $masterVariant && $variant->isMaster()) {
+                $variant->setMaster(false);
+            }
+        }
 
         if (!$this->variants->contains($masterVariant)) {
             $masterVariant->setProduct($this);

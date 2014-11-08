@@ -176,6 +176,28 @@ class ProductSpec extends ObjectBehavior
         $this->hasVariants()->shouldReturn(false);
     }
 
+    function it_should_set_current_master_variant_to_false_when_changing_master_variant(VariantInterface $firstVariant, VariantInterface $secondVariant)
+    {
+        $firstVariant->isMaster()->willReturn(true);
+        $firstVariant->isDeleted()->willReturn(false);
+
+        $firstVariant->setProduct($this)->shouldBeCalled();
+        $firstVariant->setMaster(true)->shouldBeCalled();
+
+        $this->setMasterVariant($firstVariant);
+
+        $firstVariant->isMaster()->wilLReturn(true);
+        $firstVariant->setMaster(false)->shouldBeCalled();
+        $secondVariant->isDeleted()->willReturn(false);
+        $secondVariant->setProduct($this)->shouldBeCalled();
+        $secondVariant->setMaster(true)->shouldBeCalled();
+        $secondVariant->isMaster()->willReturn(false);
+
+        $this->setMasterVariant($secondVariant);
+
+        $this->hasVariants()->shouldReturn(true);
+    }
+
     function its_hasVariants_should_return_false_if_no_variants_defined()
     {
         $this->hasVariants()->shouldReturn(false);

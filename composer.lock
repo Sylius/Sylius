@@ -148,17 +148,6 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com",
-                    "homepage": "http://www.instaclick.com"
-                },
-                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
@@ -221,7 +210,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
+                    "name": "Jonathan H. Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -242,7 +231,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -794,12 +783,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "1a9dffa64e33fdc10f4b4c3f5d7230b74d4a1021"
+                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/1a9dffa64e33fdc10f4b4c3f5d7230b74d4a1021",
-                "reference": "1a9dffa64e33fdc10f4b4c3f5d7230b74d4a1021",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
+                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
                 "shasum": ""
             },
             "require": {
@@ -844,7 +833,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2014-08-18 18:03:07"
+            "time": "2014-10-30 14:49:25"
         },
         {
             "name": "doctrine/orm",
@@ -1103,12 +1092,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSOAuthServerBundle.git",
-                "reference": "ab26212ee333456ae0d3a12e23832e1f87b25b87"
+                "reference": "bbce53348576e8d6038902e7471a5c258a1bd19e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/ab26212ee333456ae0d3a12e23832e1f87b25b87",
-                "reference": "ab26212ee333456ae0d3a12e23832e1f87b25b87",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSOAuthServerBundle/zipball/bbce53348576e8d6038902e7471a5c258a1bd19e",
+                "reference": "bbce53348576e8d6038902e7471a5c258a1bd19e",
                 "shasum": ""
             },
             "require": {
@@ -1163,7 +1152,7 @@
                 "oauth2",
                 "server"
             ],
-            "time": "2014-10-04 17:05:53"
+            "time": "2014-11-06 08:02:11"
         },
         {
             "name": "friendsofsymfony/oauth2-php",
@@ -1223,12 +1212,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "f5491a956629282c6962a34087d21dd5f86d2d71"
+                "reference": "9d5f88edac5b8a5e7938c38aa00d75cd17aa88e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/f5491a956629282c6962a34087d21dd5f86d2d71",
-                "reference": "f5491a956629282c6962a34087d21dd5f86d2d71",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/9d5f88edac5b8a5e7938c38aa00d75cd17aa88e2",
+                "reference": "9d5f88edac5b8a5e7938c38aa00d75cd17aa88e2",
                 "shasum": ""
             },
             "require": {
@@ -1292,7 +1281,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2014-10-20 12:40:34"
+            "time": "2014-11-07 06:06:56"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2622,30 +2611,32 @@
         },
         {
             "name": "knplabs/knp-snappy",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/snappy.git",
-                "reference": "4bc7af878a003a2c1ef3c4d8b08851537cb07486"
+                "reference": "e5d1e7486d9344a6cc5c3194daad7a5141b92e6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/4bc7af878a003a2c1ef3c4d8b08851537cb07486",
-                "reference": "4bc7af878a003a2c1ef3c4d8b08851537cb07486",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/e5d1e7486d9344a6cc5c3194daad7a5141b92e6e",
+                "reference": "e5d1e7486d9344a6cc5c3194daad7a5141b92e6e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
+            "require-dev": {
+                "symfony/process": "~2.1"
+            },
             "suggest": {
-                "google/wkhtmltopdf-amd64": "Provide wkhtmltopdf-amd64 binary, use version `0.11.0-RC1` as dependency",
-                "google/wkhtmltopdf-i386": "Provide wkhtmltopdf-i386 binary, use version `0.11.0-RC1` as dependency",
-                "symfony/process": "Process Component of Symfony2."
+                "h4cc/wkhtmltopdf-amd64": "Provide wkhtmltopdf-amd64 binary, use version `0.12.0` as dependency",
+                "h4cc/wkhtmltopdf-i386": "Provide wkhtmltopdf-i386 binary, use version `0.12.0` as dependency"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.1.x-dev"
+                    "dev-master": "0.2.x-dev"
                 }
             },
             "autoload": {
@@ -2677,7 +2668,7 @@
                 "thumbnail",
                 "wkhtmltopdf"
             ],
-            "time": "2014-03-20 15:05:12"
+            "time": "2014-10-14 16:54:20"
         },
         {
             "name": "knplabs/knp-snappy-bundle",
@@ -3461,16 +3452,16 @@
         },
         {
             "name": "payum/payum",
-            "version": "0.12.1",
+            "version": "0.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "e1a622e7c5ad0b5e98f3f00fdf46ffcb8e39e75a"
+                "reference": "23b7dc91234cc23ca9a28cf1cbb40f171c8b76ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/e1a622e7c5ad0b5e98f3f00fdf46ffcb8e39e75a",
-                "reference": "e1a622e7c5ad0b5e98f3f00fdf46ffcb8e39e75a",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/23b7dc91234cc23ca9a28cf1cbb40f171c8b76ab",
+                "reference": "23b7dc91234cc23ca9a28cf1cbb40f171c8b76ab",
                 "shasum": ""
             },
             "require": {
@@ -3575,21 +3566,21 @@
                 "stripe checkout",
                 "stripe.js"
             ],
-            "time": "2014-10-31 09:06:22"
+            "time": "2014-11-07 21:38:52"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "0.12.0",
+            "version": "0.12.1",
             "target-dir": "Payum/Bundle/PayumBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "f7bde3d2d2fcce8ca931f13da32fb6049eb613ef"
+                "reference": "8430593fcd868e59ccf327a5ddb60b880a9a2cfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/f7bde3d2d2fcce8ca931f13da32fb6049eb613ef",
-                "reference": "f7bde3d2d2fcce8ca931f13da32fb6049eb613ef",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/8430593fcd868e59ccf327a5ddb60b880a9a2cfd",
+                "reference": "8430593fcd868e59ccf327a5ddb60b880a9a2cfd",
                 "shasum": ""
             },
             "require": {
@@ -3669,7 +3660,7 @@
                 "stripe.js",
                 "symfony"
             ],
-            "time": "2014-10-29 15:08:14"
+            "time": "2014-11-07 21:33:05"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -3778,16 +3769,16 @@
         },
         {
             "name": "phpcr/phpcr-utils",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpcr/phpcr-utils.git",
-                "reference": "dfe126ec3f00267a413bd78d8e76ea03a1091d06"
+                "reference": "08fd6d839407d6662452d0a1522d3f9493351bc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpcr/phpcr-utils/zipball/dfe126ec3f00267a413bd78d8e76ea03a1091d06",
-                "reference": "dfe126ec3f00267a413bd78d8e76ea03a1091d06",
+                "url": "https://api.github.com/repos/phpcr/phpcr-utils/zipball/08fd6d839407d6662452d0a1522d3f9493351bc2",
+                "reference": "08fd6d839407d6662452d0a1522d3f9493351bc2",
                 "shasum": ""
             },
             "require": {
@@ -3836,7 +3827,7 @@
                 "contentrepository",
                 "phpcr"
             ],
-            "time": "2014-10-24 15:07:34"
+            "time": "2014-11-07 16:21:22"
         },
         {
             "name": "phpoption/phpoption",
@@ -4009,16 +4000,16 @@
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "2.2.11",
+            "version": "2.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "1e6adfaa27f46d50973e6f14150e0585f876dd1e"
+                "reference": "ec47e5152ea9a2ea98cb284aa873d37edf903cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/1e6adfaa27f46d50973e6f14150e0585f876dd1e",
-                "reference": "1e6adfaa27f46d50973e6f14150e0585f876dd1e",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/ec47e5152ea9a2ea98cb284aa873d37edf903cd7",
+                "reference": "ec47e5152ea9a2ea98cb284aa873d37edf903cd7",
                 "shasum": ""
             },
             "require": {
@@ -4029,11 +4020,11 @@
                 "symfony/http-kernel": "~2.2"
             },
             "require-dev": {
-                "knplabs/knp-menu-bundle": "~1.1",
+                "knplabs/knp-menu-bundle": "~2.0",
                 "sonata-project/admin-bundle": "~2.2"
             },
             "suggest": {
-                "knplabs/knp-menu-bundle": "~1.1",
+                "knplabs/knp-menu-bundle": "~2.0",
                 "sonata-project/admin-bundle": "~2.2",
                 "sonata-project/cache-bundle": "~2.1"
             },
@@ -4069,7 +4060,7 @@
                 "block",
                 "sonata"
             ],
-            "time": "2014-02-21 14:01:24"
+            "time": "2014-09-11 10:42:35"
         },
         {
             "name": "sonata-project/cache",
@@ -4258,16 +4249,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v1.17.2",
+            "version": "v1.17.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "548ed675dc3b1dd6fa4d20b40867cb756e952d2a"
+                "reference": "d07ee46fe6862a36ca5cd30107493e1e335b35d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/548ed675dc3b1dd6fa4d20b40867cb756e952d2a",
-                "reference": "548ed675dc3b1dd6fa4d20b40867cb756e952d2a",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d07ee46fe6862a36ca5cd30107493e1e335b35d5",
+                "reference": "d07ee46fe6862a36ca5cd30107493e1e335b35d5",
                 "shasum": ""
             },
             "require": {
@@ -4302,7 +4293,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2014-09-23 22:42:10"
+            "time": "2014-11-07 04:41:03"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4358,23 +4349,23 @@
         },
         {
             "name": "symfony-cmf/block-bundle",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/BlockBundle.git",
-                "reference": "0aa2af904be382804f414ebaa0bc50df82c6f20d"
+                "reference": "e79b9daacd79f1590ff00f9b03e262c224550a0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/BlockBundle/zipball/0aa2af904be382804f414ebaa0bc50df82c6f20d",
-                "reference": "0aa2af904be382804f414ebaa0bc50df82c6f20d",
+                "url": "https://api.github.com/repos/symfony-cmf/BlockBundle/zipball/e79b9daacd79f1590ff00f9b03e262c224550a0e",
+                "reference": "e79b9daacd79f1590ff00f9b03e262c224550a0e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/phpcr-bundle": "~1.0",
                 "doctrine/phpcr-odm": "~1.0",
                 "php": ">=5.3.3",
-                "sonata-project/block-bundle": ">=2.2.8,<=2.2.11",
+                "sonata-project/block-bundle": ">=2.2.8,<=2.2.13",
                 "symfony-cmf/core-bundle": "~1.0",
                 "symfony/framework-bundle": "~2.3"
             },
@@ -4422,7 +4413,7 @@
                 "block",
                 "content fragments"
             ],
-            "time": "2014-10-21 15:13:15"
+            "time": "2014-11-05 13:06:21"
         },
         {
             "name": "symfony-cmf/content-bundle",
@@ -5186,25 +5177,31 @@
         },
         {
             "name": "twig/extensions",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig-extensions.git",
-                "reference": "c0ab818595338dd5569369bfce2552d02cec5d50"
+                "url": "https://github.com/twigphp/Twig-extensions.git",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/c0ab818595338dd5569369bfce2552d02cec5d50",
-                "reference": "c0ab818595338dd5569369bfce2552d02cec5d50",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
                 "shasum": ""
             },
             "require": {
                 "twig/twig": "~1.12"
             },
+            "require-dev": {
+                "symfony/translation": "~2.3"
+            },
+            "suggest": {
+                "symfony/translation": "Allow the time_diff output to be translated"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -5219,18 +5216,16 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
-            "homepage": "https://github.com/fabpot/Twig-extensions",
+            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
             "keywords": [
                 "i18n",
                 "text"
             ],
-            "time": "2014-07-05 10:01:35"
+            "time": "2014-10-30 14:30:03"
         },
         {
             "name": "twig/twig",
@@ -5492,7 +5487,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -6367,9 +6362,7 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": [
-
-                ]
+                "branch-alias": []
             },
             "autoload": {
                 "psr-0": {
@@ -6396,16 +6389,16 @@
         },
         {
             "name": "instaclick/php-webdriver",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/instaclick/php-webdriver.git",
-                "reference": "3cf130283b054b50119f887e11b9b5a648d785a9"
+                "reference": "a57b2bcd9467e217134a2248b261b8b3a90ccea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/3cf130283b054b50119f887e11b9b5a648d785a9",
-                "reference": "3cf130283b054b50119f887e11b9b5a648d785a9",
+                "url": "https://api.github.com/repos/instaclick/php-webdriver/zipball/a57b2bcd9467e217134a2248b261b8b3a90ccea0",
+                "reference": "a57b2bcd9467e217134a2248b261b8b3a90ccea0",
                 "shasum": ""
             },
             "require": {
@@ -6450,7 +6443,7 @@
                 "webdriver",
                 "webtest"
             ],
-            "time": "2014-05-08 04:19:19"
+            "time": "2014-05-12 21:03:05"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -7358,9 +7351,7 @@
             "time": "2014-03-07 15:35:33"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/doctrine-bundle": 20,
@@ -7378,7 +7369,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
