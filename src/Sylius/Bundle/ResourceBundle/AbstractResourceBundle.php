@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -20,9 +21,19 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Abstract resource bundle.
  *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 abstract class AbstractResourceBundle extends Bundle implements ResourceBundleInterface
 {
+    const MAPPING_XML = 'xml';
+    const MAPPING_YAML = 'yml';
+
+    /**
+     * Configure format of mapping files.
+     * @var string
+     */
+    protected $mappingFormat = self::MAPPING_XML;
+
     /**
      * {@inheritdoc}
      */
@@ -41,14 +52,24 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
         if (null !== $this->getModelNamespace()) {
             $className = get_class($this);
             foreach ($className::getSupportedDrivers() as $driver) {
-                list($mappingsPassClassName, $manager) = $this->getXmlMappingDriverInfo($driver);
+                list($mappingsPassClassName, $manager) = $this->getMappingDriverInfo($driver);
 
                 if (class_exists($mappingsPassClassName)) {
-                    $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
-                        array($this->getConfigFilesPath() => $this->getModelNamespace()),
-                        $manager,
-                        sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
-                    ));
+                    if (self::MAPPING_XML === $this->mappingFormat) {
+                        $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
+                            array($this->getConfigFilesPath() => $this->getModelNamespace()),
+                            $manager,
+                            sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
+                        ));
+                    } elseif (self::MAPPING_YAML === $this->mappingFormat) {
+                        $container->addCompilerPass($mappingsPassClassName::createYamlMappingDriver(
+                            array($this->getConfigFilesPath() => $this->getModelNamespace()),
+                            $manager,
+                            sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
+                        ));
+                    } else {
+                        throw new InvalidConfigurationException("The 'mappingFormat' value is invalid, must be 'xml' or 'yml'.");
+                    }
                 }
             }
         }
@@ -92,7 +113,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return informations used to initialize XML mapping driver
+     * Return informations used to initialize mapping driver
      *
      * @param string $driverType
      *
@@ -100,7 +121,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @throws UnknownDriverException
      */
-    protected function getXmlMappingDriverInfo($driverType)
+    protected function getMappingDriverInfo($driverType)
     {
         switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
