@@ -16,18 +16,22 @@ use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Base resource controller for Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class ResourceController extends FOSRestController
 {
@@ -57,6 +61,16 @@ class ResourceController extends FOSRestController
     protected $redirectHandler;
 
     /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * @var string
      */
     protected $stateMachineGraph;
@@ -75,6 +89,8 @@ class ResourceController extends FOSRestController
     {
         parent::setContainer($container);
 
+        $this->securityContext = $this->get('security.context');
+        $this->translator = $container->get('translator');
         $this->resourceResolver = new ResourceResolver($this->config);
         if (null !== $container) {
             $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
@@ -103,6 +119,8 @@ class ResourceController extends FOSRestController
      */
     public function showAction(Request $request)
     {
+        $this->validateAccess();
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
@@ -120,6 +138,8 @@ class ResourceController extends FOSRestController
      */
     public function indexAction(Request $request)
     {
+        $this->validateAccess();
+
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -168,6 +188,8 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
+        $this->validateAccess();
+
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
@@ -208,6 +230,8 @@ class ResourceController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
+        $this->validateAccess();
+
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
@@ -244,6 +268,8 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
+        $this->validateAccess();
+
         $this->domainManager->delete($this->findOr404($request));
 
         if ($this->config->isApiRequest()) {
@@ -261,6 +287,8 @@ class ResourceController extends FOSRestController
      */
     public function revertAction(Request $request, $version)
     {
+        $this->validateAccess();
+
         $resource   = $this->findOr404($request);
         $em         = $this->get('doctrine.orm.entity_manager');
         $repository = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
@@ -273,16 +301,22 @@ class ResourceController extends FOSRestController
 
     public function moveUpAction(Request $request)
     {
+        $this->validateAccess();
+
         return $this->move($request, 1);
     }
 
     public function moveDownAction(Request $request)
     {
+        $this->validateAccess();
+
         return $this->move($request, -1);
     }
 
     public function updateStateAction(Request $request, $transition, $graph = null)
     {
+        $this->validateAccess();
+
         $resource = $this->findOr404($request);
 
         if (null === $graph) {
@@ -406,5 +440,23 @@ class ResourceController extends FOSRestController
         }
 
         return $handler->handle($view);
+    }
+
+    /**
+     * Validate if the user can access to the route based on his roles
+     */
+    protected function validateAccess()
+    {
+        $roles = $this->config->getRoles();
+        if (is_null($roles)) {
+            return true;
+        } else {
+            foreach ($this->config->getRoles() as $role) {
+                if ($this->securityContext->isGranted($role)) {
+                    return true;
+                }
+            }
+        }
+        throw new AccessDeniedHttpException($this->translator->trans('sylius.route_access.forbidden'));
     }
 }

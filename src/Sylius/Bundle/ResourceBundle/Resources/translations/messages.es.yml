@@ -1,0 +1,3 @@
+sylius:
+    route_access:
+        forbidden: No es posible acceder a esta página!
