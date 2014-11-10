@@ -27,6 +27,7 @@
         "symfony-cmf/block-bundle":          "1.1.*",
         "symfony-cmf/content-bundle":        "1.1.*",
         "symfony-cmf/create-bundle":         "1.1.*",
+        "symfony-cmf/media-bundle":          "1.1.*",
         "symfony-cmf/menu-bundle":           "1.1.*",
         "symfony-cmf/routing-bundle":        "1.2.*",
         "symfony/framework-bundle":          "~2.3"
