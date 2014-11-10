@@ -58,8 +58,7 @@ class NumberListener
     public function __construct(
         ServiceRegistryInterface $registry,
         EventManager $eventManager,
-        EventDispatcherInterface $eventDispatcher,
-        $sequenceClass
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->registry      = $registry;
         $this->eventManager  = $eventManager;
@@ -85,11 +84,9 @@ class NumberListener
     /**
      * Apply generator to all enabled entities
      *
-     * @param PreFlushEventArgs $args
-     *
      * @throws NonExistingGeneratorException if no generator is found for an enabled entity
      */
-    public function preFlush(PreFlushEventArgs $args)
+    public function preFlush()
     {
         foreach ($this->entitiesEnabled as $entity) {
             try {
