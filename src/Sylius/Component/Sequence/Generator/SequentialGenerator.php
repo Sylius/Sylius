@@ -47,11 +47,13 @@ class SequentialGenerator implements GeneratorInterface
      *
      * @param SequenceProviderInterface $sequenceProvider
      * @param integer $numberLength
+     * @param integer $startNumber
      */
-    public function __construct(SequenceProviderInterface $sequenceProvider, $numberLength = 0)
+    public function __construct(SequenceProviderInterface $sequenceProvider, $numberLength = 9, $startNumber = 1)
     {
         $this->sequenceProvider = $sequenceProvider;
         $this->numberLength = $numberLength;
+        $this->startNumber = $startNumber;
     }
 
     /**
@@ -64,9 +66,18 @@ class SequentialGenerator implements GeneratorInterface
         }
 
         $sequence = $this->sequenceProvider->getSequence($subject->getSequenceType());
-        $number = str_pad($sequence->getIndex(), $this->numberLength, 0, STR_PAD_LEFT);
+        $number = $this->formatNumber($sequence->getIndex() + $this->startNumber);
 
         $subject->setNumber($number);
         $sequence->incrementIndex();
+    }
+
+    /**
+     * @param integer $number
+     * @return string
+     */
+    protected function formatNumber($number)
+    {
+        return str_pad($number, $this->numberLength, 0, STR_PAD_LEFT);
     }
 }

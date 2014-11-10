@@ -18,17 +18,20 @@ use PhpSpec\ObjectBehavior;
  */
 class SequenceSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->beConstructedWith('order');
+    }
+
     function it_increments_index()
     {
-        $this->setIndex(1);
-
         $this->incrementIndex();
 
-        $this->getIndex()->shouldReturn(2);
+        $this->getIndex()->shouldReturn(1);
     }
 
     function it_has_default_index()
     {
-        $this->getIndex()->shouldReturn(1);
+        $this->getIndex()->shouldReturn(0);
     }
 }

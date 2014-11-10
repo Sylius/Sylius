@@ -35,25 +35,17 @@ class SequenceProvider implements SequenceProviderInterface
     protected $sequenceManager;
 
     /**
-     * @var array
-     */
-    protected $startIndexes;
-
-    /**
      * Constructor.
      *
      * @param RepositoryInterface $sequenceRepository
      * @param ObjectManager $sequenceManager
-     * @param array $startIndexes
      */
     public function __construct(
         RepositoryInterface $sequenceRepository,
-        ObjectManager $sequenceManager,
-        array $startIndexes = array()
+        ObjectManager $sequenceManager
     ) {
         $this->sequenceRepository = $sequenceRepository;
         $this->sequenceManager = $sequenceManager;
-        $this->startIndexes = $startIndexes;
     }
 
     /**
@@ -68,12 +60,8 @@ class SequenceProvider implements SequenceProviderInterface
         $sequence = $this->sequenceRepository->findOneBy(array('type' => $type));
 
         if (null === $sequence) {
-            $sequence = $this->sequenceRepository->createNew();
-            $sequence->setType($type);
-
-            if (isset($this->startIndexes[$type])) {
-                $sequence->setIndex($this->startIndexes[$type]);
-            }
+            $sequenceClass = $this->sequenceRepository->getClassName();
+            $sequence = new $sequenceClass($type);
 
             $this->sequenceManager->persist($sequence);
         }

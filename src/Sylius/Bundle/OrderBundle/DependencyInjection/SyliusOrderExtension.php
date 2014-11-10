@@ -34,5 +34,6 @@ class SyliusOrderExtension extends AbstractResourceExtension
         );
 
         $container->setParameter('sylius.order.allow_guest_order', $config['guest_order']);
+        $container->setParameter('sylius.order.start_number', $config['start_number']);
     }
 }

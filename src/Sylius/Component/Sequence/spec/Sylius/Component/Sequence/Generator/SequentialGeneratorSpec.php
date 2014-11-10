@@ -30,7 +30,7 @@ class SequentialGeneratorSpec extends ObjectBehavior
     function let(SequenceProviderInterface $sequenceProvider, SequenceInterface $sequence)
     {
         $sequenceProvider->getSequence('order')->willReturn($sequence);
-        $sequence->getIndex()->willReturn(1);
+        $sequence->getIndex()->willReturn(0);
 
         $this->beConstructedWith($sequenceProvider);
     }
@@ -46,17 +46,62 @@ class SequentialGeneratorSpec extends ObjectBehavior
         $this->generate($subject);
     }
 
+    function it_generates_a_correct_number_for_following_subjects(SequenceSubjectInterface $subject, SequenceInterface $sequence)
+    {
+        $subject->getNumber()->willReturn(null);
+        $subject->getSequenceType()->willReturn('order');
+        $sequence->getIndex()->willReturn(222);
+
+        $sequence->incrementIndex()->shouldBeCalled();
+        $subject->setNumber('000000223')->shouldBeCalled();
+
+        $this->generate($subject);
+    }
+
     function it_correctly_pads_number(SequenceProviderInterface $sequenceProvider, SequenceSubjectInterface $subject, SequenceInterface $sequence)
+    {
+        $this->beConstructedWith($sequenceProvider, 4);
+
+        $subject->getNumber()->willReturn(null);
+        $subject->getSequenceType()->willReturn('order');
+
+        $sequence->getIndex()->willReturn(122);
+        $sequence->incrementIndex()->shouldBeCalled();
+
+        $subject->setNumber('0123')->shouldBeCalled();
+
+        $this->generate($subject, $sequence);
+    }
+
+    function it_can_omit_number_padding(SequenceProviderInterface $sequenceProvider, SequenceSubjectInterface $subject, SequenceInterface $sequence)
     {
         $this->beConstructedWith($sequenceProvider, 0);
 
         $subject->getNumber()->willReturn(null);
         $subject->getSequenceType()->willReturn('order');
 
-        $sequence->getIndex()->willReturn(123);
+        $sequence->getIndex()->willReturn(122);
         $sequence->incrementIndex()->shouldBeCalled();
 
         $subject->setNumber('123')->shouldBeCalled();
+
+        $this->generate($subject, $sequence);
+    }
+
+    function it_starts_at_start_number_if_specified(
+        SequenceProviderInterface $sequenceProvider,
+        SequenceSubjectInterface $subject,
+        SequenceInterface $sequence
+    ) {
+        $this->beConstructedWith($sequenceProvider, 9, 123);
+
+        $subject->getNumber()->willReturn(null);
+        $subject->getSequenceType()->willReturn('order');
+
+        $sequence->getIndex()->willReturn(0);
+        $sequence->incrementIndex()->shouldBeCalled();
+
+        $subject->setNumber('000000123')->shouldBeCalled();
 
         $this->generate($subject, $sequence);
     }

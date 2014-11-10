@@ -153,7 +153,7 @@ sylius_order:
 
 sylius_sequence:
     generators:
-        order: sylius.sequence.sequential_number_generator
+        order: sylius.order.sequential_number_generator
 
 sylius_resource:
     resources:

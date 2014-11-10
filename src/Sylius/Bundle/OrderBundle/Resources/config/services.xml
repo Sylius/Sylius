@@ -47,5 +47,11 @@
         <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
         </service>
+
+        <service id="sylius.order.sequential_number_generator" class="%sylius.sequence.sequential_number_generator.class%">
+            <argument type="service" id="sylius.sequence.provider" />
+            <argument>9</argument>
+            <argument>%sylius.order.start_number%</argument>
+        </service>
     </services>
 </container>

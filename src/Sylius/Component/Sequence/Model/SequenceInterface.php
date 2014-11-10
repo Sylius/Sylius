@@ -20,23 +20,10 @@ interface SequenceInterface
     public function getType();
 
     /**
-     * Set sequence type
-     * @param string $type
-     * @return $this
-     */
-    public function setType($type);
-
-    /**
      * Get the sequence index
      * @return integer
      */
     public function getIndex();
-
-    /**
-     * @param int $index
-     * @return $this
-     */
-    public function setIndex($index);
 
     /**
      * Increment sequence type

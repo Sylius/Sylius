@@ -23,13 +23,21 @@ class Sequence implements SequenceInterface
      * Sequence index
      * @var integer
      */
-    protected $index = 1;
+    protected $index = 0;
 
     /**
      * Sequence type
      * @var string
      */
     protected $type;
+
+    /**
+     * @param string $type
+     */
+    public function __construct($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * Get id
@@ -52,29 +60,9 @@ class Sequence implements SequenceInterface
     /**
      * {@inheritdoc}
      */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getIndex()
     {
         return $this->index;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setIndex($index)
-    {
-        $this->index = $index;
-
-        return $this;
     }
 
     /**
