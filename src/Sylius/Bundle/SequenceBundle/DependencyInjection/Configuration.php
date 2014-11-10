@@ -42,7 +42,6 @@ class Configuration implements ConfigurationInterface
 
         $this->addClassesSection($rootNode);
         $this->addGeneratorsSection($rootNode);
-        $this->addStartIndexesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -84,21 +83,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('generators')
                 ->prototype('scalar')
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `start_indexes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addStartIndexesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-            ->arrayNode('start_indexes')
-            ->prototype('scalar')
             ->end()
         ;
     }
