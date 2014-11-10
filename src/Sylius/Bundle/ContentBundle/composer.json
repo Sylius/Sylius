@@ -22,7 +22,7 @@
     "require": {
         "php":                               ">=5.3.3",
 
-        "jackalope/jackalope-doctrine-dbal": "1.0.*",
+        "jackalope/jackalope-doctrine-dbal": "1.1.*",
         "sylius/resource-bundle":            "0.12.*@dev",
         "symfony-cmf/block-bundle":          "1.1.*",
         "symfony-cmf/content-bundle":        "1.1.*",
