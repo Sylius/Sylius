@@ -28,6 +28,9 @@
         <field name="neutral" column="is_neutral" type="boolean" />
         <field name="locked" column="is_locked" type="boolean" />
 
+        <field name="originId" column="origin_id" type="integer" nullable="true" />
+        <field name="originType" column="origin_type" type="string" nullable="true" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

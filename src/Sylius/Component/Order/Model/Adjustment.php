@@ -76,6 +76,20 @@ class Adjustment implements AdjustmentInterface
     protected $locked = false;
 
     /**
+     * Origin identifier.
+     *
+     * @var int
+     */
+    protected $originId;
+
+    /**
+     * Origin type.
+     *
+     * @var string
+     */
+    protected $originType;
+
+    /**
      * Creation time.
      *
      * @var \DateTime
@@ -253,6 +267,42 @@ class Adjustment implements AdjustmentInterface
     public function isCredit()
     {
         return 0 < $this->amount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginId()
+    {
+        return $this->originId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginId($originId)
+    {
+        $this->originId = $originId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginType()
+    {
+        return $this->originType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginType($originType)
+    {
+        $this->originType = $originType;
+
+        return $this;
     }
 
     /**

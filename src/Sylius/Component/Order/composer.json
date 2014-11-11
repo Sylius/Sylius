@@ -22,8 +22,8 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "0.12.*@dev",
-        "sylius/sequence": "0.12.*@dev"
+        "sylius/originator": "0.12.*@dev",
+        "sylius/sequence":   "0.12.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"

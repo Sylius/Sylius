@@ -9,6 +9,7 @@ suites:
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
     Locale           : { namespace: Sylius, spec_path: src/Sylius/Component/Locale }
     Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
+    Originator       : { namespace: Sylius, spec_path: src/Sylius/Component/Originator }
     Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
     Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
     Pricing          : { namespace: Sylius, spec_path: src/Sylius/Component/Pricing }
