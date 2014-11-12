@@ -67,9 +67,11 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
                 $m++;
             }
 
-            if ($order->getTaxTotal() !== 0) {
+            $nonNeutralTaxTotal = $this->calculateNonNeutralTaxTotal($order);
+
+            if ($nonNeutralTaxTotal !== 0) {
                 $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
-                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getTaxTotal() / 100, 2);
+                $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($nonNeutralTaxTotal / 100, 2);
                 $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
 
                 $m++;
@@ -117,5 +119,19 @@ class CapturePaymentUsingExpressCheckoutAction extends PaymentAwareAction
             $request instanceof SecuredCaptureRequest &&
             $request->getModel() instanceof PaymentInterface
         ;
+    }
+
+    private function calculateNonNeutralTaxTotal($order)
+    {
+        $nonNeutralTaxTotal = 0;
+        $taxAdjustments = $order->getTaxAdjustments();
+
+        foreach ($taxAdjustments as $taxAdjustment) {
+            if(!$taxAdjustment->isNeutral()){
+                $nonNeutralTaxTotal = $taxAdjustment->getAmount();
+            }
+        }
+
+        return $nonNeutralTaxTotal;
     }
 }
