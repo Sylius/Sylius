@@ -1,0 +1,46 @@
+{
+    "name": "sylius/review-bundle",
+    "type": "symfony-bundle",
+    "description": "Review system for your Symfony2 applications.",
+    "keywords": ["shop", "ecommerce", "review"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "stof/doctrine-extensions-bundle": "1.1.*",
+        "sylius/resource-bundle":          "0.12.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "symfony/form":    "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ReviewBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\Sylius\\Bundle\\ReviewBundle\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.12-dev"
+        }
+    }
+}
