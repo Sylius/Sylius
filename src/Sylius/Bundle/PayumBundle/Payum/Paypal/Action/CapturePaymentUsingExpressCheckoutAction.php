@@ -61,7 +61,7 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
             $m++;
         }
 
-        if (0 !== $taxTotal = $order->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT)) {
+        if (0 !== $taxTotal = $this->calculateNonNeutralTaxTotal($order)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
             $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($taxTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
@@ -84,5 +84,19 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
         }
 
         $payment->setDetails($details);
+    }
+
+    private function calculateNonNeutralTaxTotal($order)
+    {
+        $nonNeutralTaxTotal = 0;
+        $taxAdjustments = $order->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
+
+        foreach ($taxAdjustments as $taxAdjustment) {
+            if(!$taxAdjustment->isNeutral()){
+                $nonNeutralTaxTotal = $taxAdjustment->getAmount();
+            }
+        }
+
+        return $nonNeutralTaxTotal;
     }
 }
