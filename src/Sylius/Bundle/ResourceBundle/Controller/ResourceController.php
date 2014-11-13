@@ -325,7 +325,13 @@ class ResourceController extends FOSRestController
             return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
         }
 
-        return $this->createForm($this->config->getFormType(), $resource);
+        $form =  $this->config->getFormType();
+
+        if (strpos($form, '\\') !== false) {
+            $form = new $form;
+        }
+
+        return $this->createForm($form, $resource);
     }
 
     /**
