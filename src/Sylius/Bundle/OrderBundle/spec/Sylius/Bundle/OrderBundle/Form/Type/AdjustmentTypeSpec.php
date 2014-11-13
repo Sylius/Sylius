@@ -49,7 +49,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('amount', 'money', Argument::any())
+            ->add('amount', 'sylius_money', Argument::any())
             ->willReturn($builder)
         ;
 
