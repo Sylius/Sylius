@@ -16,6 +16,8 @@ In the default scenario, it will return an instance of paginator, with a list of
 
 When you go to ``/users``, ResourceController will use the repository (``app.repository.user``) to create a paginator.
 The default template will be rendered - ``App:User:index.html.twig`` with the paginator as the ``users`` variable.
+A paginator can be a simple array if you disable the pagination otherwise it is a instance of ``Pagerfanta\Pagerfanta``
+which is the `library <https://github.com/whiteoctober/Pagerfanta>`_ used to manage the pagination.
 
 Overriding the template and criteria
 ------------------------------------
@@ -62,7 +64,12 @@ Under that route, you can paginate over the users by their score.
 Using a custom repository method
 --------------------------------
 
-You can define your own repository method too, you can use the same way explained in <show_resource>
+You can define your own repository method too, you can use the same way explained in <show_resource>.
+
+.. note::
+
+    If you want to paginate your resources you need to use ``EntityReposiory::getPaginator($queryBuilder)``.
+    It will transform your doctrine query builder into ``Pagerfanta\Pagerfanta`` object.
 
 Changing the "max per page" option of paginator
 -----------------------------------------------

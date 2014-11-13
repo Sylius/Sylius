@@ -29,4 +29,5 @@ For the current this resource, you can use ``my_app.entity_key.create``, ``my_ap
 
 .. note::
 
-    Caution: The domain used for translating flash messages is flashes. You need to create your own flashes.local.yml.
+    Caution: The domain used for translating flash messages is flashes. You need to create your own flashes.locale.yml (Exemple: flashes.en.yml).
+    
