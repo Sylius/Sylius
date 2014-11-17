@@ -69,4 +69,12 @@ interface StockItemInterface extends TimestampableInterface
      * @param integer $onHand
      */
     public function setOnHand($onHand);
+
+    /**
+     * Is stockable available on demand?
+     *
+     * @return Boolean
+     */
+    public function isAvailableOnDemand();
+    public function setAvailableOnDemand($availableOnDemand);
 }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Inventory\Model\StockLocationInterface as BaseStockLocationInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
@@ -29,6 +30,14 @@ class Shipment extends BaseShipment implements ShipmentInterface
     protected $order;
 
     /**
+     * StockLocation.
+     *
+     * @var BaseStockLocationInterface
+     */
+    protected $stockLocation;
+
+
+    /**
      * {@inheritdoc}
      */
     public function getOrder()
@@ -42,6 +51,24 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStockLocation()
+    {
+        return $this->stockLocation;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStockLocation(BaseStockLocationInterface $location = null)
+    {
+        $this->stockLocation = $location;
 
         return $this;
     }

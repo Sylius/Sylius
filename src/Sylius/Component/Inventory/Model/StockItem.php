@@ -42,11 +42,32 @@ class StockItem implements StockItemInterface
     protected $location;
 
     /**
+     * On hand quantity.
+     *
+     * @var integer
+     */
+    protected $onHand = 0;
+
+    /**
+     * On hold quantity.
+     *
+     * @var integer
+     */
+    protected $onHold = 0;
+
+    /**
      * Stock movements.
      *
      * @var StockMovementInterface[]
      */
     protected $stockMovements;
+
+    /**
+     * Available on demand?
+     *
+     * @var Boolean
+     */
+    protected $availableOnDemand = false;
 
     /**
      * Creation time.
@@ -105,6 +126,8 @@ class StockItem implements StockItemInterface
     public function setLocation(StockLocationInterface $location)
     {
         $this->location = $location;
+
+        return $this;
     }
 
     public function getStockMovements()
@@ -133,6 +156,42 @@ class StockItem implements StockItemInterface
     public function hasStockMovement(StockMovementInterface $movement)
     {
         return $this->stockMovements->contains($movement);
+    }
+
+    public function getOnHand()
+    {
+        return $this->onHand;
+    }
+
+    public function setOnHand($onHand)
+    {
+        $this->onHand = $onHand;
+
+        return $this;
+    }
+
+    public function getOnHold()
+    {
+        return $this->onHold;
+    }
+
+    public function setOnHold($onHold)
+    {
+        $this->onHold = $onHold;
+
+        return $this;
+    }
+
+    public function isAvailableOnDemand()
+    {
+        return $this->availableOnDemand;
+    }
+
+    public function setAvailableOnDemand($availableOnDemand)
+    {
+        $this->availableOnDemand = (Boolean) $availableOnDemand;
+
+        return $this;
     }
 
     /**

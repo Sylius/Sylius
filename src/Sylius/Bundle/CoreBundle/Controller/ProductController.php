@@ -182,6 +182,59 @@ class ProductController extends ResourceController
         return parent::findOr404($request, $criteria);
     }
 
+    public function stockAction(Request $request)
+    {
+        $product = $this->findOr404($request);
+
+        $form = $this->createForm('sylius_product_stock', null, array('product' => $product));
+
+        if ($form->handleRequest($request)->isValid()) {
+            $data = $form->getData();
+
+            $quantity = $data['quantity'];
+
+            if (!array_key_exists('variant', $data)) {
+                $variant = $product->getMasterVariant();
+            } else {
+                $variant = $data['variant'];
+            }
+
+            $stockItem = $this->getStockItemRepository()->findByStockableAndLocation($variant, $data['location']);
+            $operator = $this->getInventoryOperator();
+
+            if ($quantity > 0) {
+                $operator->increase($stockItem, $quantity);
+            } else {
+                $operator->decrease($stockItem, -1 * $quantity);
+            }
+
+            $this->domainManager->update($product);
+
+            return $this->redirectHandler->redirectTo($product);
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('stock.html.twig'))
+            ->setData(array(
+                'product'  => $product,
+                'form'     => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
+    }
+
+    private function getStockItemRepository()
+    {
+        return $this->get('sylius.repository.stock_item');
+    }
+
+    private function getInventoryOperator()
+    {
+        return $this->get('sylius.inventory_operator');
+    }
+
     private function renderResults(TaxonInterface $taxon, Pagerfanta $results, $template, $page)
     {
         $results->setCurrentPage($page, true, true);

@@ -91,6 +91,7 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function holdInventory(OrderInterface $order)
     {
+        return;
         foreach ($order->getItems() as $item) {
             $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_HOLD);
 

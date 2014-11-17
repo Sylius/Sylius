@@ -37,6 +37,7 @@ sylius:
                 taxonomies: Categorization
                 users: Users
                 zones: Zones
+                stock_locations: Stock locations
             sidebar:
                 assortment: Assortment
                 blocks: Blocks
@@ -44,6 +45,7 @@ sylius:
                 content: Content
                 countries: Countries
                 channels: Channels
+                stock_locations: Stock locations
                 customer: Customers
                 dashboard: Dashboard
                 currencies: Currencies

@@ -16,7 +16,7 @@ namespace Sylius\Component\Inventory\Model;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface StockMovementInterface extends TimestampableInterface
+interface StockMovementInterface
 {
     public function getQuantity();
     public function setQuantity($quantity);

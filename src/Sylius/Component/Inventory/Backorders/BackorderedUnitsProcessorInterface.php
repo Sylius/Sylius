@@ -15,23 +15,16 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Backorders handler interface.
+ * Backorders processor interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface BackordersHandlerInterface
+interface BackorderedUnitsProcessorInterface
 {
     /**
      * Processes given inventory units and marks backorders if any.
      *
-     * @param StockableInterface[]|Collection $inventoryUnits
+     * @param InventoryUnitInterface[]|Collection $inventoryUnits
      */
     public function processBackorders($inventoryUnits);
-
-    /**
-     * Update backordered inventory units if quantity is sufficient.
-     *
-     * @param StockableInterface $stockable
-     */
-    public function fillBackorders(StockableInterface $stockable);
 }

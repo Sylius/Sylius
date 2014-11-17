@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Inventory\Operator;
+namespace Sylius\Component\Inventory\Backorders;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -18,29 +18,12 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Backorders handler.
+ * Backordered units processor.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BackordersHandler implements BackordersHandlerInterface
+class BackorderedUnitsProcessor implements BackorderedUnitsProcessorInterface
 {
-    /**
-     * Inventory unit repository.
-     *
-     * @var ObjectRepository
-     */
-    protected $repository;
-
-    /**
-     * Constructor.
-     *
-     * @param ObjectRepository $repository
-     */
-    public function __construct(ObjectRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -65,33 +48,6 @@ class BackordersHandler implements BackordersHandlerInterface
         $this->validateInventoryUnits($inventoryUnits);
 
         $this->processInventoryUnits($inventoryUnits, $stockable, $stockable->getOnHand());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function fillBackorders(StockableInterface $stockable)
-    {
-        $onHand = $stockable->getOnHand();
-
-        if ($onHand <= 0) {
-            return;
-        }
-
-        $units = $this->repository->findBy(array(
-            'stockable'      => $stockable,
-            'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED
-        ), array('createdAt' => 'ASC'));
-
-        foreach ($units as $unit) {
-            $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-
-            if (--$onHand === 0) {
-                break;
-            }
-        }
-
-        $stockable->setOnHand($onHand);
     }
 
     /**

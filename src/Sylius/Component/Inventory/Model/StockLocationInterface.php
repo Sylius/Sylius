@@ -20,11 +20,11 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface StockLocationInterface extends TimestampableInterface
 {
+    public function getCode();
+    public function setCode($code);
+
     public function getName();
     public function setName($name);
-
-    public function getShipments();
-    public function hasShipment(ShipmentInterface $movement);
 
     public function getStockItems();
     public function addStockItem(StockItemInterface $movement);

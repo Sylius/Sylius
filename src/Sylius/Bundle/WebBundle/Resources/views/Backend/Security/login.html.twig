@@ -16,12 +16,13 @@
 
         {% block stylesheets %}
             {% stylesheets output='assets/compiled/backend_login.css' filter='cssrewrite'
-                '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
                 '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
-                'bundles/syliusweb/css/backend.css'
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
+
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/syliusweb/css/backend.css') }}" type="text/css" />
         {% endblock %}
     </head>
     <body class="signin">

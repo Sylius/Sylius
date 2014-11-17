@@ -120,6 +120,9 @@ sylius_inventory:
     classes:
         inventory_unit:
             model: Sylius\Component\Core\Model\InventoryUnit
+        stock_location:
+            model: Sylius\Component\Core\Model\StockLocation
+            form: Sylius\Bundle\CoreBundle\Form\Type\StockLocationType
         stockable:
             model: %sylius.model.product_variant.class%
 
@@ -128,6 +131,7 @@ sylius_payment:
         payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
     gateways:
         dummy: Test
         stripe: Stripe

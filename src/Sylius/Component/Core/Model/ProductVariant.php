@@ -81,6 +81,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $availableOnDemand = true;
 
     /**
+     * Stock items.
+     *
+     * @var Collection|StockItemInterface[]
+     */
+    protected $stockItems;
+
+    /**
      * Images.
      *
      * @var Collection|ProductVariantImageInterface[]
@@ -122,6 +129,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         parent::__construct();
 
+        $this->stockItems = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
 
@@ -130,7 +138,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         $string = $this->getProduct()->getName();
 
         if (!$this->getOptions()->isEmpty()) {
-            $string .= '(';
+            $string .= ' (';
 
             foreach ($this->getOptions() as $option) {
                 $string .= $option->getOption()->getName(). ': '.$option->getValue().', ';
@@ -217,54 +225,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isInStock()
-    {
-        return 0 < $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHold()
-    {
-        return $this->onHold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHold($onHold)
-    {
-        $this->onHold = $onHold;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHand()
-    {
-        return $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHand($onHand)
-    {
-        $this->onHand = $onHand;
-
-        if (0 > $this->onHand) {
-            $this->onHand = 0;
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getSold()
     {
         return $this->sold;
@@ -291,19 +251,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isAvailableOnDemand()
+    public function getStockItems()
     {
-        return $this->availableOnDemand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOnDemand($availableOnDemand)
-    {
-        $this->availableOnDemand = (bool) $availableOnDemand;
-
-        return $this;
+        return $this->stockItems;
     }
 
     /**

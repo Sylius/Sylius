@@ -43,6 +43,9 @@ interface InventoryUnitInterface extends TimestampableInterface
      */
     public function setStockable(StockableInterface $stockable);
 
+    public function getLocation();
+    public function setLocation(StockLocationInterface $location);
+
     /**
      * Get the SKU of stockable.
      *

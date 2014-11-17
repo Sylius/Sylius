@@ -114,6 +114,33 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
+     * Get the product data for the stock page.
+     *
+     * @param integer $id
+     *
+     * @return null|ProductInterface
+     */
+    public function findForStockPage($id)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->leftJoin('variant.stockItems', 'stockItem')
+            ->addSelect('stockItem')
+            ->leftJoin('stockItem.location', 'stockLocation')
+            ->addSelect('stockLocation')
+            ->andWhere($queryBuilder->expr()->eq('product.id', ':id'))
+            ->setParameter('id', $id)
+        ;
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * Find X recently added products.
      *
      * @param int $limit

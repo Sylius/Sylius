@@ -33,6 +33,13 @@ class InventoryUnit implements InventoryUnitInterface
     protected $stockable;
 
     /**
+     * Inventory location.
+     *
+     * @var StockLocationInterface
+     */
+    protected $location;
+
+    /**
      * State of the inventory unit.
      *
      * @var string
@@ -83,6 +90,25 @@ class InventoryUnit implements InventoryUnitInterface
     public function setStockable(StockableInterface $stockable)
     {
         $this->stockable = $stockable;
+
+        return $this;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocation(StockLocationInterface $location = null)
+    {
+        $this->location = $location;
 
         return $this;
     }

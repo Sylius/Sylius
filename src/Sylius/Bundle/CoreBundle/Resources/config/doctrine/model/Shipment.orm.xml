@@ -20,6 +20,10 @@
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="shipments">
             <join-column name="order_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
+
+        <many-to-one field="stockLocation" target-entity="Sylius\Component\Inventory\Model\StockLocationInterface">
+            <join-column name="stock_location_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

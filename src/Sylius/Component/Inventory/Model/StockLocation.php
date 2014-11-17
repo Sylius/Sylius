@@ -28,6 +28,7 @@ class StockLocation implements StockLocationInterface
     protected $id;
 
     protected $name;
+    protected $code;
     protected $enabled = true;
 
     /**
@@ -79,6 +80,14 @@ class StockLocation implements StockLocationInterface
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return sprintf('%s (%s)', $this->name, $this->code);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getId()
     {
         return $this->id;
@@ -96,6 +105,18 @@ class StockLocation implements StockLocationInterface
         return $this;
     }
 
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
     public function isEnabled()
     {
         return $this->enabled;
@@ -106,16 +127,6 @@ class StockLocation implements StockLocationInterface
         $this->enabled = (Boolean) $enabled;
 
         return $this;
-    }
-
-    public function getShipments()
-    {
-        return $this->shipments;
-    }
-
-    public function hasShipment(ShipmentInterface $shipment)
-    {
-        return $this->shipments->contains($shipment);
     }
 
     public function getStockItems()

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Inventory\Packaging\PackerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -29,31 +30,43 @@ class ShipmentFactory implements ShipmentFactoryInterface
     protected $shipmentRepository;
 
     /**
+     * @var PackerInterface
+     */
+    protected $packer;
+
+    /**
      * Constructor.
      *
      * @param RepositoryInterface $shipmentRepository
+     * @param PackerInterface     $packer
      */
-    public function __construct(RepositoryInterface $shipmentRepository)
+    public function __construct(RepositoryInterface $shipmentRepository, PackerInterface $packer)
     {
         $this->shipmentRepository = $shipmentRepository;
+        $this->packer = $packer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createShipment(OrderInterface $order)
+    public function createShipments(OrderInterface $order)
     {
-        $shipment = $order->getShipments()->first();
-
-        if (!$shipment) {
-            $shipment = $this->shipmentRepository->createNew();
-            $order->addShipment($shipment);
+        if (!$order->getShipments()->isEmpty()) {
+            return;
         }
 
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            if (null === $inventoryUnit->getShipment()) {
-                $shipment->addItem($inventoryUnit);
+        $packages = $this->packer->pack($order->getInventoryUnits());
+
+        foreach ($packages as $package) {
+            $shipment = $this->shipmentRepository->createNew();
+
+            $shipment->setStockLocation($package->getLocation());
+
+            foreach ($package->getInventoryUnits() as $unit) {
+                $shipment->addInventoryUnit($unit);
             }
+
+            $order->addShipment($shipment);
         }
     }
 }
