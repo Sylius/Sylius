@@ -15,11 +15,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipment filter type.
+ * Payment filter type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShipmentFilterType extends AbstractType
+class PaymentFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,30 +29,30 @@ class ShipmentFilterType extends AbstractType
         $builder
             ->add('number', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.shipment_filter.number',
+                'label'    => 'sylius.form.payment_filter.number',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.number'
+                    'placeholder' => 'sylius.form.payment_filter.number'
                 )
             ))
-            ->add('shippingAddress', 'text', array(
+            ->add('billingAddress', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.shipment_filter.shipping_address',
+                'label'    => 'sylius.form.payment_filter.billing_address',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.shipping_address'
+                    'placeholder' => 'sylius.form.payment_filter.billing_address'
                 )
             ))
             ->add('createdAtFrom', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.shipment_filter.created_at_from',
+                'label'    => 'sylius.form.payment_filter.created_at_from',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.created_at_from'
+                    'placeholder' => 'sylius.form.payment_filter.created_at_from'
                 )
             ))
             ->add('createdAtTo', 'text', array(
                 'required' => false,
-                'label'    => 'sylius.form.shipment_filter.created_at_to',
+                'label'    => 'sylius.form.payment_filter.created_at_to',
                 'attr'     => array(
-                    'placeholder' => 'sylius.form.shipment_filter.created_at_to'
+                    'placeholder' => 'sylius.form.payment_filter.created_at_to'
                 )
             ))
             ->add('channel', 'sylius_channel_choice', array(
@@ -67,6 +67,6 @@ class ShipmentFilterType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_shipment_filter';
+        return 'sylius_payment_filter';
     }
 }

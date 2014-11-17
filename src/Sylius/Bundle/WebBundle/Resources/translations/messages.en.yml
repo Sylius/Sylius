@@ -590,6 +590,7 @@ sylius:
         update_header: Last update
     password: Password
     payment:
+        order: Order
         amount: Amount
         create: Create payment
         create_header: New payment
@@ -668,6 +669,7 @@ sylius:
             product: Product
             attributes: Attributes
             channels: Channels
+            pricing: Pricing
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
@@ -760,6 +762,7 @@ sylius:
     shipment_category:
         manage: Manage shipping categories
     shipping_address: Shipping address
+    billing_address: Bill to
     shipping_category:
         create: Create shipping category
         create_header: New shipping category
