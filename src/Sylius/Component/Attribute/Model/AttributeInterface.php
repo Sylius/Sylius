@@ -69,4 +69,11 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);
+
+    /**
+     * Get all values associated with this attribute.
+     *
+     * @return AttributeValueInterface[]
+     */
+    public function getValues();
 }
