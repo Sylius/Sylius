@@ -40,6 +40,13 @@ class StockMovement implements StockMovementInterface
     protected $quantity;
 
     /**
+     * Transfer for this movement
+     *
+     * @var StockTransferInterface
+     */
+    protected $transfer;
+
+    /**
      * Get the id for the stock movement
      *
      * @return mixed
@@ -81,6 +88,24 @@ class StockMovement implements StockMovementInterface
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTransfer()
+    {
+        return $this->transfer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTransfer(StockTransferInterface $transfer)
+    {
+        $this->transfer = $transfer;
 
         return $this;
     }

@@ -38,4 +38,16 @@ interface StockMovementInterface
      * @return $this
      */
     public function setQuantity($quantity);
+
+    /**
+     * @return StockTransferInterface
+     */
+    public function getTransfer();
+
+    /**
+     * @param StockTransferInterface $transfer
+     *
+     * @return $this
+     */
+    public function setTransfer(StockTransferInterface $transfer);
 }
