@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ShipmentRepository extends EntityRepository
+class PaymentRepository extends EntityRepository
 {
     /**
      * Create filter paginator.
@@ -30,34 +30,34 @@ class ShipmentRepository extends EntityRepository
         $queryBuilder = $this->getCollectionQueryBuilder();
 
         $queryBuilder
-            ->leftJoin($this->getAlias().'.order', 'shipmentOrder')
-            ->leftJoin('shipmentOrder.shippingAddress', 'address')
-            ->addSelect('shipmentOrder')
+            ->leftJoin($this->getAlias().'.order', 'paymentOrder')
+            ->leftJoin('paymentOrder.billingAddress', 'address')
+            ->addSelect('paymentOrder')
             ->addSelect('address')
         ;
 
         if (!empty($criteria['number'])) {
             $queryBuilder
-                ->andWhere('shipmentOrder.number = :number')
+                ->andWhere('paymentOrder.number = :number')
                 ->setParameter('number', $criteria['number'])
             ;
         }
         if (!empty($criteria['channel'])) {
             $queryBuilder
-                ->andWhere('shipmentOrder.channel = :channel')
+                ->andWhere('paymentOrder.channel = :channel')
                 ->setParameter('channel', $criteria['channel'])
             ;
         }
-        if (!empty($criteria['shippingAddress'])) {
+        if (!empty($criteria['billingAddress'])) {
             $queryBuilder
-                ->andWhere('address.lastName LIKE :shippingAddress')
-                ->setParameter('shippingAddress', '%'.$criteria['shippingAddress'].'%')
+                ->andWhere('address.lastName LIKE :billingAddress')
+                ->setParameter('billingAddress', '%'.$criteria['billingAddress'].'%')
             ;
         }
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->gte($this->getAlias().'.createdAt', ':createdAtFrom'))
-                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00', strtotime($criteria['createdAtFrom'])))
+                ->setParameter('createdAtFrom', date('Y-m-d 00:00:00',strtotime($criteria['createdAtFrom'])))
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
@@ -81,6 +81,6 @@ class ShipmentRepository extends EntityRepository
 
     protected function getAlias()
     {
-        return 's';
+        return 'p';
     }
 }

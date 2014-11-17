@@ -74,6 +74,11 @@ sylius:
             created_at_to: To
             number: Order number
             shipping_address: Ship to name
+        payment_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Order number
+            billing_address: Bill to name
         shipping_method:
             zone: Zone
         taxon:

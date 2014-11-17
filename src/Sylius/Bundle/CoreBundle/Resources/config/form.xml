@@ -31,6 +31,7 @@
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
         <parameter key="sylius.form.type.shipment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ShipmentFilterType</parameter>
+        <parameter key="sylius.form.type.payment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\PaymentFilterType</parameter>
 
         <parameter key="sylius.form.type.price_calculator.channel_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType</parameter>
         <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
@@ -117,6 +118,9 @@
         </service>
         <service id="sylius.form.type.shipment_filter" class="%sylius.form.type.shipment_filter.class%">
             <tag name="form.type" alias="sylius_shipment_filter" />
+        </service>
+        <service id="sylius.form.type.payment_filter" class="%sylius.form.type.payment_filter.class%">
+            <tag name="form.type" alias="sylius_payment_filter" />
         </service>
 
         <!-- promotions -->

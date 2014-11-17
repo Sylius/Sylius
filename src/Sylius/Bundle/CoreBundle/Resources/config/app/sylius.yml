@@ -140,6 +140,7 @@ sylius_payment:
         payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
     gateways:
         dummy: Test
         offline: Offline

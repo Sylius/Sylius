@@ -98,31 +98,6 @@ class LoadOrdersData extends DataFixture
         return 7;
     }
 
-    /**
-     * @return AddressInterface
-     */
-    protected function createAddress()
-    {
-        /* @var $address AddressInterface */
-        $address = $this->getAddressRepository()->createNew();
-        $address->setFirstname($this->faker->firstName);
-        $address->setLastname($this->faker->lastName);
-        $address->setCity($this->faker->city);
-        $address->setStreet($this->faker->streetAddress);
-        $address->setPostcode($this->faker->postcode);
-
-        do {
-            $isoName = $this->faker->countryCode;
-        } while ('UK' === $isoName);
-
-        $country  = $this->getReference('Sylius.Country.'.$isoName);
-        $province = $country->hasProvinces() ? $this->faker->randomElement($country->getProvinces()->toArray()) : null;
-
-        $address->setCountry($country);
-        $address->setProvince($province);
-
-        return $address;
-    }
 
     /**
      * @param OrderInterface $order
