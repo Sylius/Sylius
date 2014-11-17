@@ -32,6 +32,7 @@ class User extends BaseUser implements UserInterface
     protected $shippingAddress;
     protected $addresses;
     protected $oauthAccounts;
+    protected $wishlist;
 
     public function __construct()
     {
@@ -317,5 +318,21 @@ class User extends BaseUser implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWishlist()
+    {
+        return $this->wishlist;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWishlist(WishlistInterface $wishlist)
+    {
+        $this->wishlist = $wishlist;
     }
 }

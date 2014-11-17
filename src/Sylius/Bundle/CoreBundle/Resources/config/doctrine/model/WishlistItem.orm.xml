@@ -13,10 +13,10 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\Address" table="sylius_address">
-        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="addresses">
-            <join-column name="user_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
-        </many-to-one>
+    <mapped-superclass name="Sylius\Component\Core\Model\WishlistItem" table="sylius_wishlist_item">
+        <field name="notifyOn" column="notify_on" type="integer" />
+
+        <one-to-one field="product" target-entity="Sylius\Component\Core\Model\ProductInterface"/>
     </mapped-superclass>
 
 </doctrine-mapping>

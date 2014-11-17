@@ -46,6 +46,8 @@
             </cascade>
         </one-to-one>
 
+        <one-to-one field="wishlist" target-entity="Sylius\Component\Core\Model\WishlistInterface" mapped-by="user"/>
+
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
                 <cascade-all />
