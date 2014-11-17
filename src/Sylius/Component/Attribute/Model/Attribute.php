@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Model for object attributes.
  *
@@ -53,6 +55,13 @@ class Attribute implements AttributeInterface
      * @var array
      */
     protected $configuration = array();
+
+    /**
+     * All values associated with this attribute.
+     *
+     * @var AttributeValueInterface[]
+     */
+    protected $values;
 
     /**
      * Creation time.
@@ -159,6 +168,14 @@ class Attribute implements AttributeInterface
         $this->configuration = $configuration;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
 
     /**
