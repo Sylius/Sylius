@@ -80,7 +80,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    abstract protected function getBundlePrefix();
+    protected function getBundlePrefix()
+    {
+        $className = get_class($this);
+        $classBaseName = substr(strrchr($className, '\\'), 1, -6);
+
+        return Container::underscore($classBaseName);
+    }
 
     /**
      * Target entities resolver configuration (Interface - Model)
