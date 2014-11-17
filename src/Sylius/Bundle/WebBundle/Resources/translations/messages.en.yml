@@ -145,6 +145,8 @@ sylius:
             index: Groups
         inventory:
             index: Inventory
+        stock_location:
+            index: Stock Locations
         locale:
             index: Locales
         menu:
@@ -299,6 +301,12 @@ sylius:
         exchange_rate: Exchange rate
         update_header: Editing currency
         updated_at: Last update
+    stock_location:
+            create: Create stock location
+            create_header: New stock location
+            name: Name
+            index_header: Stock locations
+            no_results: There are no stock locations to display
     filter: Filter
     form:
         cart:

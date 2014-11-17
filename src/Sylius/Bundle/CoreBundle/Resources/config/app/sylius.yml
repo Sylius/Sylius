@@ -118,6 +118,7 @@ sylius_inventory:
             model: %sylius.model.product_variant.class%
         stock_location:
             model: Sylius\Component\Inventory\Model\StockLocation
+            form: Sylius\Component\Inventory\Form\Type\StockLocationType
         stock_transfer:
             model: Sylius\Component\Inventory\Model\StockTransfer
         stock_movement:

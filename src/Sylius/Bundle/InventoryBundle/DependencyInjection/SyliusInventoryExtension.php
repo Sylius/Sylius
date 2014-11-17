@@ -48,6 +48,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         $classes = $config['classes'];
 
         $container->setParameter('sylius.controller.inventory_unit.class', $classes['inventory_unit']['controller']);
+        $container->setParameter('sylius.controller.stock_location.class', $classes['stock_location']['controller']);
         $container->setParameter('sylius.model.inventory_unit.class', $classes['inventory_unit']['model']);
 
         if (array_key_exists('repository', $classes['inventory_unit'])) {

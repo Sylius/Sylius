@@ -94,6 +94,8 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->isRequired()->defaultValue('Sylius\Component\Inventory\Model\StockLocation')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\StockLocationController')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\InventoryBundle\Form\Type\StockLocationType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('stock_movement')

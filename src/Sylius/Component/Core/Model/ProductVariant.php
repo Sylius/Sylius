@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
@@ -114,6 +115,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var float
      */
     protected $depth;
+
+    /**
+     * Stock Location
+     *
+     * @var StockLocationInterface
+     */
+    protected $location;
 
     /**
      * Override constructor to set on hand stock.
@@ -468,5 +476,27 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getShippingDepth()
     {
         return $this->getDepth();
+    }
+
+    /**
+     * TODO place in interface
+     * @return StockLocationInterface
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * TODO place in interface
+     * @param $location
+     *
+     * @return $this
+     */
+    public function setLocation(StockLocationInterface $location)
+    {
+        $this->location = $location;
+
+        return $this;
     }
 }
