@@ -16,6 +16,7 @@ use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ValidatorPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Product\Model\ArchetypeInterface;
+use Sylius\Component\Product\Model\AssociationTypeInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeTranslationInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
@@ -68,6 +69,7 @@ class SyliusProductBundle extends AbstractResourceBundle
             OptionInterface::class               => 'sylius.model.product_option.class',
             OptionValueInterface::class          => 'sylius.model.product_option_value.class',
             ArchetypeInterface::class            => 'sylius.model.product_archetype.class',
+            AssociationTypeInterface::class      => 'sylius.model.association_type.class'
         );
     }
 

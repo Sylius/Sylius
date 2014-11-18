@@ -32,7 +32,7 @@
         </field>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
-        <many-to-one field="type" target-entity="Sylius\Component\Product\Model\AssociationType">
+        <many-to-one field="type" target-entity="Sylius\Component\Product\Model\AssociationTypeInterface">
             <join-column name="type_id" referenced-column-name="id" />
         </many-to-one>
 

@@ -24,7 +24,7 @@ abstract class Association
     private $id;
 
     /**
-     * @var AssociationType
+     * @var AssociationTypeInterface
      */
     private $type;
 
@@ -43,7 +43,7 @@ abstract class Association
      */
     private $deletedAt;
 
-    public function __construct(AssociationType $type)
+    public function __construct(AssociationTypeInterface $type)
     {
         $this->type = $type;
         $this->createdAt = new \DateTime();
@@ -63,7 +63,7 @@ abstract class Association
         return $this->type;
     }
 
-    public function setType(AssociationType $type)
+    public function setType(AssociationTypeInterface $type)
     {
         $this->type = $type;
 
