@@ -12,6 +12,7 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxonInterface extends SoftDeletableInterface
+interface TaxonInterface extends SlugAwareInterface, SoftDeletableInterface
 {
     /**
      * Get the id of taxonomy.
@@ -106,20 +107,6 @@ interface TaxonInterface extends SoftDeletableInterface
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug();
-
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug);
 
     /**
      * Get permalink.

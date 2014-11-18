@@ -23,7 +23,7 @@ class WishlistItem implements WishlistItemInterface
     /**
      * Product.
      *
-     * @var ProductInterface
+     * @var ProductVariantInterface
      */
     protected $product;
 
@@ -37,6 +37,14 @@ class WishlistItem implements WishlistItemInterface
     /**
      * {@inheritdoc}
      */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getProduct()
     {
         return $this->product;
@@ -45,7 +53,7 @@ class WishlistItem implements WishlistItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductVariantInterface $product)
     {
         $this->product = $product;
     }

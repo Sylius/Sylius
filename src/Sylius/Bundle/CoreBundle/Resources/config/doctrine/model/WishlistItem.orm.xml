@@ -11,12 +11,19 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\WishlistItem" table="sylius_wishlist_item">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
         <field name="notifyOn" column="notify_on" type="integer" />
 
-        <one-to-one field="product" target-entity="Sylius\Component\Core\Model\ProductInterface"/>
+        <one-to-one field="product" target-entity="Sylius\Component\Core\Model\ProductVariantInterface"/>
     </mapped-superclass>
 
 </doctrine-mapping>

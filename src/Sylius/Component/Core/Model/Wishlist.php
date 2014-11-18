@@ -24,6 +24,28 @@ class Wishlist implements WishlistInterface
     protected $id;
 
     /**
+     * Name of saved wishlist.
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Permalink for the wishlist.
+     * Used in url to access it.
+     *
+     * @var string
+     */
+    protected $slug;
+
+    /**
+     * Is wishlist visible for others?
+     *
+     * @var bool
+     */
+    protected $public = false;
+
+    /**
      * Wishlist items.
      *
      * @var Collection|WishlistItemInterface[]
@@ -37,9 +59,82 @@ class Wishlist implements WishlistInterface
      */
     protected $user;
 
+    /**
+     * Creation time.
+     *
+     * @var \DateTime
+     */
+    protected $createdAt;
+
+    /**
+     * Last update time.
+     *
+     * @var \DateTime
+     */
+    protected $updatedAt;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSlug($slug = null)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPublic($public)
+    {
+        $this->public = (bool) $public;
     }
 
     /**
@@ -58,11 +153,17 @@ class Wishlist implements WishlistInterface
         $this->user = $user;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getItems()
     {
         return $this->items;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addItem(WishlistItemInterface $item)
     {
         if (!$this->items->contains($item)) {
@@ -70,10 +171,49 @@ class Wishlist implements WishlistInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeItem(WishlistItemInterface $item)
     {
         if ($this->items->contains($item)) {
-            $this->items->remove($item);
+            $this->items->removeElement($item);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

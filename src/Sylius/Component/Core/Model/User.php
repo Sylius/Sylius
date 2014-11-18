@@ -32,7 +32,7 @@ class User extends BaseUser implements UserInterface
     protected $shippingAddress;
     protected $addresses;
     protected $oauthAccounts;
-    protected $wishlist;
+    protected $wishlists;
 
     public function __construct()
     {
@@ -40,6 +40,7 @@ class User extends BaseUser implements UserInterface
         $this->orders        = new ArrayCollection();
         $this->addresses     = new ArrayCollection();
         $this->oauthAccounts = new ArrayCollection();
+        $this->wishlists     = new ArrayCollection();
 
         parent::__construct();
     }
@@ -323,16 +324,29 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getWishlist()
+    public function getWishlists()
     {
-        return $this->wishlist;
+        return $this->wishlists;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setWishlist(WishlistInterface $wishlist)
+    public function addWishlist(WishlistInterface $wishlist)
     {
-        $this->wishlist = $wishlist;
+        if (!$this->wishlists->contains($wishlist)) {
+            $this->wishlists->add($wishlist);
+            $wishlist->setUser($this);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeWishlist(WishlistInterface $wishlist)
+    {
+        if ($this->wishlists->contains($wishlist)) {
+            $this->wishlists->removeElement($wishlist);
+        }
     }
 }

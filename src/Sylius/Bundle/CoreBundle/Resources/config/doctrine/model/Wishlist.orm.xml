@@ -11,10 +11,34 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\WishlistInterface" table="sylius_wishlist">
-        <one-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="wishlist"/>
+    <mapped-superclass name="Sylius\Component\Core\Model\Wishlist" table="sylius_wishlist">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="name" type="string" />
+        <field name="public" column="is_public" type="boolean" />
+
+        <field name="slug" column="slug" type="string" unique="true">
+            <gedmo:slug fields="id,name" unique="true" />
+        </field>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="wishlists">
+            <join-column name="user_id" referenced-column-name="id" />
+        </many-to-one>
 
         <one-to-many field="items" target-entity="Sylius\Component\Core\Model\WishlistItemInterface"/>
     </mapped-superclass>
