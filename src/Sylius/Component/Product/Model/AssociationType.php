@@ -16,7 +16,7 @@ namespace Sylius\Component\Product\Model;
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class AssociationType
+class AssociationType implements AssociationTypeInterface
 {
     /**
      * @var mixed
