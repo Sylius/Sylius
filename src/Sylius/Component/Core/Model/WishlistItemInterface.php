@@ -17,14 +17,24 @@ interface WishlistItemInterface
     const NOTIFY_ON_STOCK_CHANGE = 2;
 
     /**
-     * @return ProductVariantInterface
+     * @return WishlistInterface
      */
-    public function getProduct();
+    public function getWishlist();
 
     /**
-     * @param ProductVariantInterface $product
+     * @param WishlistInterface $wishlist
      */
-    public function setProduct(ProductVariantInterface $product);
+    public function setWishlist(WishlistInterface $wishlist);
+
+    /**
+     * @return ProductVariantInterface
+     */
+    public function getVariant();
+
+    /**
+     * @param ProductVariantInterface $variant
+     */
+    public function setVariant(ProductVariantInterface $variant);
 
     /**
      * @return int

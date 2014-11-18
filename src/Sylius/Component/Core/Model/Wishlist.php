@@ -166,8 +166,13 @@ class Wishlist implements WishlistInterface
      */
     public function addItem(WishlistItemInterface $item)
     {
-        if (!$this->items->contains($item)) {
+        $items = $this->items->filter(function (WishlistItemInterface $existingItem) use ($item) {
+            return $existingItem->getVariant()->getId() === $item->getVariant()->getId();
+        });
+
+        if ($items->isEmpty()) {
             $this->items->add($item);
+            $item->setWishlist($this);
         }
     }
 
@@ -176,8 +181,12 @@ class Wishlist implements WishlistInterface
      */
     public function removeItem(WishlistItemInterface $item)
     {
-        if ($this->items->contains($item)) {
-            $this->items->removeElement($item);
+        $items = $this->items->filter(function (WishlistItemInterface $existingItem) use ($item) {
+            return $existingItem->getVariant()->getId() === $item->getVariant()->getId();
+        });
+
+        if (!$items->isEmpty()) {
+            $this->items->removeElement($items->current());
         }
     }
 

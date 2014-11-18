@@ -40,7 +40,11 @@
             <join-column name="user_id" referenced-column-name="id" />
         </many-to-one>
 
-        <one-to-many field="items" target-entity="Sylius\Component\Core\Model\WishlistItemInterface"/>
+        <one-to-many field="items" target-entity="Sylius\Component\Core\Model\WishlistItemInterface" mapped-by="wishlist">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>
