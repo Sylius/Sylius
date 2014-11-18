@@ -574,11 +574,11 @@ class ElasticsearchFinder implements FinderInterface
             if (is_array($value[0])) {
                 foreach ($value as $range) {
                     $rangeFilters->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
-                    $boolFilter->addMust($rangeFilters);
+                    $boolFilter->addShould($rangeFilters);
                 }
             }else{
                 $termFilters->setTerms($name, $value);
-                $boolFilter->addMust($termFilters);
+                $boolFilter->addShould($termFilters);
             }
         }
 
