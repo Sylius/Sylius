@@ -25,7 +25,6 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 interface ProductVariantInterface extends
     BaseVariantInterface,
     ShippableInterface,
-    StockableInterface,
     PriceableInterface
 {
     /**
@@ -109,4 +108,18 @@ interface ProductVariantInterface extends
      * @param float $depth
      */
     public function setDepth($depth);
+
+    /**
+     * Get stock keeping unit.
+     *
+     * @return mixed
+     */
+    public function getSku();
+
+    /**
+     * Get inventory displayed name.
+     *
+     * @return string
+     */
+    public function getInventoryName();
 }

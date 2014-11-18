@@ -16,18 +16,6 @@ namespace Sylius\Component\Inventory\Model;
 interface StockMovementInterface
 {
     /**
-     * @return StockableInterface
-     */
-    public function getStockable();
-
-    /**
-     * @param StockableInterface $stockable
-     *
-     * @return $this
-     */
-    public function setStockable(StockableInterface $stockable);
-
-    /**
      * @return int
      */
     public function getQuantity();
@@ -50,4 +38,16 @@ interface StockMovementInterface
      * @return $this
      */
     public function setTransfer(StockTransferInterface $transfer);
+
+    /**
+     * @return StockItemInterface
+     */
+    public function getStockItem();
+
+    /**
+     * @param StockItemInterface $stockItem
+     *
+     * @return $this
+     */
+    public function setStockItem(StockItemInterface $stockItem);
 }

@@ -51,6 +51,7 @@ class SyliusInventoryBundle extends AbstractResourceBundle
             'Sylius\Component\Inventory\Model\StockMovementInterface'  => 'sylius.model.stock_movement.class',
             'Sylius\Component\Inventory\Model\StockLocationInterface'  => 'sylius.model.stock_location.class',
             'Sylius\Component\Inventory\Model\StockTransferInterface'  => 'sylius.model.stock_transfer.class',
+            'Sylius\Component\Inventory\Model\StockItemInterface'      => 'sylius.model.stock_item.class',
         );
     }
 

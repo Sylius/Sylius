@@ -47,6 +47,11 @@ class StockMovement implements StockMovementInterface
     protected $transfer;
 
     /**
+     * @var StockItemInterface
+     */
+    protected $stockItem;
+
+    /**
      * Get the id for the stock movement
      *
      * @return mixed
@@ -54,24 +59,6 @@ class StockMovement implements StockMovementInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStockable()
-    {
-        return $this->stockable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setStockable(StockableInterface $stockable)
-    {
-        $this->stockable = $stockable;
-
-        return $this;
     }
 
     /**
@@ -106,6 +93,24 @@ class StockMovement implements StockMovementInterface
     public function setTransfer(StockTransferInterface $transfer)
     {
         $this->transfer = $transfer;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStockItem()
+    {
+        return $this->stockItem;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStockItem(StockItemInterface $stockItem)
+    {
+        $this->stockItem = $stockItem;
 
         return $this;
     }

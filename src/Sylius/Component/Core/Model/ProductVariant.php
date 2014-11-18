@@ -53,33 +53,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     protected $pricingConfiguration = array();
 
-    /**
-     * On hold.
-     *
-     * @var int
-     */
-    protected $onHold = 0;
-
-    /**
-     * On hand stock.
-     *
-     * @var int
-     */
-    protected $onHand = 0;
-
-    /**
-     * Sold amount.
-     *
-     * @var int
-     */
-    protected $sold = 0;
-
-    /**
-     * Is variant available on demand?
-     *
-     * @var bool
-     */
-    protected $availableOnDemand = true;
 
     /**
      * Images.
@@ -223,52 +196,11 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Sold amount.
+     *
+     * @var int
      */
-    public function isInStock()
-    {
-        return 0 < $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHold()
-    {
-        return $this->onHold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHold($onHold)
-    {
-        $this->onHold = $onHold;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHand()
-    {
-        return $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHand($onHand)
-    {
-        $this->onHand = $onHand;
-
-        if (0 > $this->onHand) {
-            $this->onHand = 0;
-        }
-
-        return $this;
-    }
+    protected $sold = 0;
 
     /**
      * {@inheritdoc}
@@ -296,23 +228,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         return $this->getProduct()->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableOnDemand()
-    {
-        return $this->availableOnDemand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOnDemand($availableOnDemand)
-    {
-        $this->availableOnDemand = (bool) $availableOnDemand;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}

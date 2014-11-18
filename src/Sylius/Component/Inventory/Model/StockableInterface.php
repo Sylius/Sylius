@@ -19,20 +19,6 @@ namespace Sylius\Component\Inventory\Model;
 interface StockableInterface
 {
     /**
-     * Get stock keeping unit.
-     *
-     * @return mixed
-     */
-    public function getSku();
-
-    /**
-     * Get inventory displayed name.
-     *
-     * @return string
-     */
-    public function getInventoryName();
-
-    /**
      * Simply checks if there any stock available.
      * It should also return true for items available on demand.
      *
