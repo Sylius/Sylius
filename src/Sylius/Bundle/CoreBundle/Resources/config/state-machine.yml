@@ -19,8 +19,8 @@ winzou_state_machine:
                 from: [addressing]
                 to:   shipping
             payment:
-                from: [payment]
-                to:   shipped
+                from: [shipping]
+                to:   payment
             finalize:
                 from: [payment]
                 to:   finalize
