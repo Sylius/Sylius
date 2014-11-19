@@ -18,6 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
+use Prezent\Doctrine\Translatable\TranslatableInterface;
 
 /**
  * Product interface.

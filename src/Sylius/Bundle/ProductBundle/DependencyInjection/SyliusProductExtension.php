@@ -63,6 +63,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                     'attribute'       => array(
                         'model' => 'Sylius\Component\Product\Model\Attribute'
                     ),
+                    'attribute_translation' => array(
+                        'model' => 'Sylius\Component\Product\Model\AttributeTranslation'
+                    ),
                     'attribute_value' => array(
                         'model' => 'Sylius\Component\Product\Model\AttributeValue'
                     ),

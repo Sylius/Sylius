@@ -18,8 +18,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * Shipping method interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ShippingMethodInterface extends TimestampableInterface
+interface ShippingMethodInterface extends TimestampableInterface, ShippingMethodTranslationInterface
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
@@ -79,20 +80,6 @@ interface ShippingMethodInterface extends TimestampableInterface
      * @param Boolean $enabled
      */
     public function setEnabled($enabled);
-
-    /**
-     * Get shipping method name.
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Set the name.
-     *
-     * @param string $name
-     */
-    public function setName($name);
 
     /**
      * Get calculator name assigned for this shipping method.

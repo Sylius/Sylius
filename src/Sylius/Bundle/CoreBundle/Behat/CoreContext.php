@@ -427,7 +427,7 @@ class CoreContext extends DefaultContext
      */
     public function productIsAvailableInAllVariations($productName)
     {
-        $product = $this->findOneByName('product', $productName);
+        $product =$this->findOneBy('product', array('name' => trim($productName)));
 
         $this->getService('sylius.generator.product_variant')->generate($product);
 

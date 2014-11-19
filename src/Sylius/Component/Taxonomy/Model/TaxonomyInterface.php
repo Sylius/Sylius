@@ -17,8 +17,9 @@ use Doctrine\Common\Collections\Collection;
  * Taxonomy model interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonomyInterface
+interface TaxonomyInterface extends TaxonomyTranslationInterface
 {
     /**
      * Get taxonomy id.

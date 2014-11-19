@@ -25,6 +25,7 @@ require_once __DIR__.'/../../Fixture/Entity/Foo.php';
  * Doctrine ORM driver entity repository spec.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class EntityRepositorySpec extends ObjectBehavior
 {
@@ -58,9 +59,9 @@ class EntityRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
 
-    function it_implements_Sylius_repository_interface()
+    function it_implements_Sylius_translatable_repository_interface()
     {
-        $this->shouldImplement('Sylius\Component\Resource\Repository\RepositoryInterface');
+        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface');
     }
 
     function it_creates_new_resource_instance()

@@ -27,8 +27,10 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.country.name'
+            ->add('translations', 'a2lix_translationsForms', array(
+                'form_type' => new CountryTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'required' => false,
+                'label'    => 'sylius.form.country.name'
             ))
             ->add('isoName', 'text', array(
                 'label' => 'sylius.form.country.iso_name'

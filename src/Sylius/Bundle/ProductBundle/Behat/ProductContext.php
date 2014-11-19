@@ -29,6 +29,8 @@ class ProductContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $product = $repository->createNew();
+            // Default language
+            $product->setCurrentLocale('en');
             $product->setName(trim($data['name']));
             $product->setDescription('...');
             $product->getMasterVariant()->setPrice($data['price'] * 100);
@@ -187,5 +189,37 @@ class ProductContext extends DefaultContext
         }
 
         return $attribute;
+    }
+
+    /**
+     * @Given /^the following product translations exist:$/
+     */
+    public function theFollowingProductTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $productTranslation = $this->findOneByName('product_translation', $data['product']);
+            $product = $productTranslation->getTranslatable();
+            //---One way
+            $product->setCurrentLocale($data['code']);
+            $product->setName($data['translation']);
+            $product->setDescription('...');
+            //Another way
+            //$product->translate($data['code'])->setName($data['translation']);
+        }
+
+        $manager->flush();
+    }
+
+
+    /**
+     * @Then :locale translation for product :productName should exist
+     */
+    public function translationForProductShouldExist($locale, $productName)
+    {
+        if (!$this->findOneByName('product_translation', $productName)) {
+            throw new \Exception('There is no translation for product'. $productName . ' in '.$locale . 'locale');
+        }
     }
 }

@@ -49,13 +49,22 @@ class LocaleListener implements EventSubscriberInterface
             return;
         }
 
+        // TODO At this point the session is not started
+        // so without this it will always return the default value
+        // This is not an elegant solution, maybe moving it to the storage
+        // and having the storage start the session or injecting session in localeContext
+//        $session = $event->getRequest()->getSession();
+//        if (!$session->isStarted()) {
+//            $session->start();
+//        }
+
         $request->setLocale($this->localeContext->getLocale() ?: $this->localeContext->getDefaultLocale());
     }
 
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::REQUEST => array(array('onKernelRequest', 17)),
+            KernelEvents::REQUEST => array(array('onKernelRequest', 35)),
         );
     }
 }

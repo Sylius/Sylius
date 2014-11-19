@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.locale_provider.class">Sylius\Component\Locale\Provider\LocaleProvider</parameter>
+        <parameter key="sylius.form.locale_provider.class">Sylius\Bundle\LocaleBundle\Provider\LocaleFormProvider</parameter>
         <parameter key="sylius.event_listener.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
 
         <parameter key="sylius.context.locale.class">Sylius\Component\Locale\Context\LocaleContext</parameter>
@@ -37,6 +38,11 @@
 
         <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
             <argument type="service" id="sylius.repository.locale" />
+        </service>
+
+        <service id="sylius.form.locale_provider" class="%sylius.form.locale_provider.class%">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%sylius.locale%</argument>
         </service>
 
         <service id="sylius.event_listener.locale" class="%sylius.event_listener.locale.class%">

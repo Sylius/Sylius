@@ -11,14 +11,15 @@
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
 
 /**
  * Default product repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductRepository extends EntityRepository
+class ProductRepository extends TranslatableEntityRepository
 {
     /**
      * {@inheritdoc}
@@ -26,6 +27,7 @@ class ProductRepository extends EntityRepository
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()
+            ->select($this->getAlias().', option, variant')
             ->select($this->getAlias().', option, variant')
             ->leftJoin($this->getAlias().'.options', 'option')
             ->leftJoin($this->getAlias().'.variants', 'variant')

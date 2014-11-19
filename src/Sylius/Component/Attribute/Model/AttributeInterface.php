@@ -17,8 +17,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * Attribute interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface AttributeInterface extends TimestampableInterface
+interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
 {
     /**
      * Get internal name.
@@ -33,20 +34,6 @@ interface AttributeInterface extends TimestampableInterface
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * The name displayed to user.
-     *
-     * @return string
-     */
-    public function getPresentation();
-
-    /**
-     * Set presentation.
-     *
-     * @param string $presentation
-     */
-    public function setPresentation($presentation);
 
     /**
      * The type of the attribute.

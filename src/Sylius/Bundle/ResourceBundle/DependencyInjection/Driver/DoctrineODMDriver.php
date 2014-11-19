@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class DoctrineODMDriver extends AbstractDatabaseDriver
 {
@@ -52,6 +53,7 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
             $unitOfWorkDefinition,
             $this->getClassMetadataDefinition($classes['model']),
         ));
+        $definition->addMethodCall('setCurrentLocale', array(new Reference('sylius.context.locale')));
 
         return $definition;
     }

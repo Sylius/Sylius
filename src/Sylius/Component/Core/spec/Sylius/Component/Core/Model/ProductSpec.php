@@ -22,6 +22,7 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductSpec extends ObjectBehavior
 {
@@ -38,17 +39,6 @@ class ProductSpec extends ObjectBehavior
     function it_extends_Sylius_product_model()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\Product');
-    }
-
-    function it_does_not_have_short_description_by_default()
-    {
-        $this->getShortDescription()->shouldReturn(null);
-    }
-
-    function its_short_description_is_mutable()
-    {
-        $this->setShortDescription('Amazing product...');
-        $this->getShortDescription()->shouldReturn('Amazing product...');
     }
 
     function it_initializes_taxon_collection_by_default()

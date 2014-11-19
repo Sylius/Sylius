@@ -34,9 +34,9 @@ class SessionStorage implements StorageInterface
      */
     public function hasData($key)
     {
-        if (!$this->session->isStarted()) {
-            return false;
-        }
+//        if (!$this->session->isStarted()) {
+//            return false;
+//        }
 
         return $this->session->has($key);
     }
@@ -46,11 +46,11 @@ class SessionStorage implements StorageInterface
      */
     public function getData($key, $default = null)
     {
-        if (!$this->session->isStarted()) {
-            return $default;
-        }
-
-        return $this->session->get($key, $default);
+//        if (!$this->session->isStarted()) {
+//            return $default;
+//        }
+        $a = $this->session->get($key, $default);
+        return $a;
     }
 
     /**
