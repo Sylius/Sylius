@@ -16,3 +16,5 @@ Sylius\Component\Core\Model\Order:
             expose: true
         payments:
             expose: true
+        completedAt:
+            expose: true

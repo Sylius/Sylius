@@ -15,6 +15,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
+use Sylius\Component\Core\SyliusOrderEvents;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +38,10 @@ class CheckoutController extends FOSRestController
 
         if (null === $transition = $stateMachine->getTransitionFromState($state)) {
             throw new \Exception('Invalid checkout flow configuration.');
+        }
+
+        if ($request->isMethod('GET') && $order->isCompleted()) {
+            return $this->handleView($this->view($order));
         }
 
         switch ($transition) {
@@ -156,6 +162,32 @@ class CheckoutController extends FOSRestController
         }
 
         return $this->handleView($this->view($form));
+    }
+
+    public function finalizeAction(Request $request, OrderInterface $order)
+    {
+        if ($request->isMethod('GET')) {
+            return $this->handleView($this->view($order));
+        }
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
+
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
+
+        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
+
+        $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
+        $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_FINALIZE);
+
+        $manager = $this->get('sylius.manager.order');
+        $manager->persist($order);
+        $manager->flush();
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
+        $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
+
+        return $this->handleView($this->view($order));
     }
 
     private function getOrderRepository()
