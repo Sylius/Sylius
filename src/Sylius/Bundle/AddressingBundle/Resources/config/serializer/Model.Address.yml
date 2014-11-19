@@ -6,7 +6,22 @@ Sylius\Component\Addressing\Model\Address:
             expose: true
             type: integer
             xml_attribute: true
-        name:
+        firstName:
+            expose: true
+            type: string
+        lastName:
+            expose: true
+            type: string
+        street:
+            expose: true
+            type: string
+        city:
+            expose: true
+            type: string
+        postcode:
+            expose: true
+            type: string
+        phoneNumber:
             expose: true
             type: string
         createdAt:

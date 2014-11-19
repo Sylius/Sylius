@@ -26,6 +26,13 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  */
 interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
 {
+    const CHECKOUT_STATE_CART       = 'cart';
+    const CHECKOUT_STATE_ADDRESSING = 'addressing';
+    const CHECKOUT_STATE_SHIPPING   = 'shipping';
+    const CHECKOUT_STATE_PAYMENT    = 'payment';
+    const CHECKOUT_STATE_FINALIZE   = 'finalize';
+    const CHECKOUT_STATE_COMPLETED  = 'completed';
+
     /**
      * Get shipping address.
      *
@@ -53,6 +60,20 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @param AddressInterface $address
      */
     public function setBillingAddress(AddressInterface $address);
+
+    /**
+     * Get the checkout state.
+     *
+     * @return string
+     */
+    public function getCheckoutState();
+
+    /**
+     * Set the checkout state.
+     *
+     * @param string $
+     */
+    public function setCheckoutState($checkoutState);
 
     /**
      * Get the payment state.

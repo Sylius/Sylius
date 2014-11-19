@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_checkout_proceed:
+    path: /{orderId}
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.checkout:proceedAction
