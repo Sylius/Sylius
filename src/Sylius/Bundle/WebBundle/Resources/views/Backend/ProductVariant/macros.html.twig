@@ -43,7 +43,15 @@
                     {{ variant.availableOnDemand ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                 </span>
             </td>
-            <td><span class="label label-{{ variant.inStock ? 'success' : 'important' }}">{{ variant.onHand }}</span></td>
+            {% if variant.inStock %}
+                <td class="stock in-stock">
+                    <em>{{ 'sylius.in_stock'|trans }}</em>
+                </td>
+            {% else %}
+                <td class="stock out-of-stock text-muted">
+                    <em>{{ 'sylius.out_of_stock'|trans }}</em>
+                </td>
+            {% endif %}
             <td>{{ variant.price|sylius_price }}</td>
             <td>
                 <div class="pull-right">

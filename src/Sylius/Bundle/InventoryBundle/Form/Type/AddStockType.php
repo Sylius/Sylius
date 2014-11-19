@@ -27,11 +27,21 @@ class AddStockType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('quantity', 'integer')
-            ->add('stockLocation', 'entity', array('class' => 'Sylius\Component\Inventory\Model\StockLocation', 'property' => 'name'))
-            ->add('productVariant', 'entity', array('class' => 'Sylius\Component\Core\Model\ProductVariant', 'choices' => $options['variants']))
-        ;
+        $builder->add('quantity', 'integer');
+        $builder->add(
+            'stockLocation',
+            'entity',
+            array('class' => 'Sylius\Component\Inventory\Model\StockLocation', 'property' => 'name')
+        );
+
+        //When a product doesn't have any variants don't show the dropdown
+        if (count($options['variants']) > 0) {
+            $builder->add(
+                'productVariant',
+                'entity',
+                array('class' => 'Sylius\Component\Core\Model\ProductVariant', 'choices' => $options['variants'])
+            );
+        }
     }
 
     /**

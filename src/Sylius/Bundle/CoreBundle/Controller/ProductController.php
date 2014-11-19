@@ -36,7 +36,6 @@ class ProductController extends ResourceController
      * @param string  $permalink
      *
      * @return Response
-     *
      * @throws NotFoundHttpException
      */
     public function indexByTaxonAction(Request $request, $permalink)
@@ -44,8 +43,7 @@ class ProductController extends ResourceController
         if ($request->attributes->has('_sylius_entity')) {
             $taxon = $request->attributes->get('_sylius_entity');
         } else {
-            $taxon = $this->get('sylius.repository.taxon')
-                ->findOneByPermalink($permalink);
+            $taxon = $this->get('sylius.repository.taxon')->findOneByPermalink($permalink);
 
             if (!isset($taxon)) {
                 throw new NotFoundHttpException('Requested taxon does not exist.');
@@ -111,19 +109,17 @@ class ProductController extends ResourceController
             }
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData(array(
-                'product' => $product,
-                'logs'    => array(
-                    'product'    => $repository->getLogEntries($product),
-                    'variants'   => $variants,
-                    'attributes' => $attributes,
-                    'options'    => $options,
-                ),
-            ))
-        ;
+        $view = $this->view()->setTemplate($this->config->getTemplate('history.html'))->setData(
+                array(
+                    'product' => $product,
+                    'logs'    => array(
+                        'product'    => $repository->getLogEntries($product),
+                        'variants'   => $variants,
+                        'attributes' => $attributes,
+                        'options'    => $options,
+                    ),
+                )
+            );
 
         return $this->handleView($view);
     }
@@ -206,6 +202,9 @@ class ProductController extends ResourceController
             $stock = $form->getData();
             $operator = $this->get('sylius.inventory_operator');
             $variant = $stock->getProductVariant();
+            if ($variant == null) {
+                $variant = $product->getMasterVariant();
+            }
             $stockItem = $variant->getStockItemForLocation($stock->getStockLocation());
 
             $operator->increase($stockItem, $stock->getQuantity());
@@ -215,9 +214,9 @@ class ProductController extends ResourceController
         }
 
         $view = $this->view()->setTemplate($this->config->getTemplate('stock.html'))->setData(
-            array (
+            array(
                 $this->config->getResourceName() => $product,
-                'form'    => $form->createView(),
+                'form'                           => $form->createView(),
             )
         );
 
