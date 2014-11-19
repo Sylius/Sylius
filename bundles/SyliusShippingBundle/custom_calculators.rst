@@ -90,6 +90,14 @@ First step is to define the configuration options, using the Symfony **OptionsRe
         {
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
         }
+        
+        /**
+        * {@inheritdoc}
+        */
+        public function isConfigurable()
+        {
+            return true;
+        }
 
         public function setConfiguration(OptionsResolverInterface $resolver)
         {
@@ -200,6 +208,14 @@ Finally, configure the calculator to use the form, by implementing simple ``getC
         {
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
         }
+        
+        /**
+        * {@inheritdoc}
+        */
+        public function isConfigurable()
+        {
+            return true;
+        }
 
         public function setConfiguration(OptionsResolverInterface $resolver)
         {
@@ -250,6 +266,14 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
             }
 
             return $this->dhlService->getShippingCostForWeight($subject->getShippingWeight());
+        }
+        
+        /**
+        * {@inheritdoc}
+        */
+        public function isConfigurable()
+        {
+            return true;
         }
 
         public function setConfiguration(OptionsResolverInterface $resolver)
