@@ -38,6 +38,11 @@ class OrderType extends BaseOrderType
                     new NotBlank()
                 )
             ))
+            ->add('channel', 'sylius_channel_choice', array(
+                'constraints' => array(
+                    new NotBlank()
+                )
+            ))
         ;
     }
 
