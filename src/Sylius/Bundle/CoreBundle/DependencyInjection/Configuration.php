@@ -161,6 +161,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('defaults')->isRequired()->cannotBeEmpty()->info('Defaults to add to the generated route.')
                             ->children()
                                 ->scalarNode('controller')->isRequired()->cannotBeEmpty()->info('Controller where the request should be routed.')->end()
+                                ->scalarNode('repository')->isRequired()->cannotBeEmpty()->info('Repository where the router will find the class.')->end()
                                 ->arrayNode('sylius')->isRequired()->cannotBeEmpty()->info('Sylius defaults to add to generated route.')
                                     ->useAttributeAsKey('sylius')
                                     ->prototype('variable')

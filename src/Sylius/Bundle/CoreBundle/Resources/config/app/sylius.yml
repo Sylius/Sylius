@@ -8,6 +8,7 @@ sylius_core:
             prefix: /p
             defaults:
                 controller: sylius.controller.product:showAction
+                repository: sylius.repository.product
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:show.html.twig
                     criteria: {slug: $slug}
@@ -16,6 +17,7 @@ sylius_core:
             prefix: /t
             defaults:
                 controller: sylius.controller.product:indexByTaxonAction
+                repository: sylius.repository.taxon
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
 

@@ -21,6 +21,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * Core extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
@@ -96,18 +97,20 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             }
         }
 
-        $routeClasses = $controllerByClasses = $syliusByClasses = array();
+        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = array();
         foreach ($config['routing'] as $className => $routeConfig) {
             $routeClasses[$className] = array(
                 'field'  => $routeConfig['field'],
                 'prefix' => $routeConfig['prefix'],
             );
             $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
+            $repositoryByClasses[$className] = $routeConfig['defaults']['repository'];
             $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
         }
 
         $container->setParameter('sylius.route_classes', $routeClasses);
         $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
+        $container->setParameter('sylius.repository_by_classes', $repositoryByClasses);
         $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
         $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
         $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
