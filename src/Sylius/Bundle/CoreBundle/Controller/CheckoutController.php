@@ -124,6 +124,40 @@ class CheckoutController extends FOSRestController
         return $this->handleView($this->view($form));
     }
 
+    public function paymentAction(Request $request, OrderInterface $order)
+    {
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
+
+        $form = $this->createCheckoutPaymentForm($order);
+
+        if ($request->isMethod('GET')) {
+            $form->handleRequest($request);
+
+            $paymentInfo = array(
+                'payment' => $order->getLastPayment(),
+                'methods'  => $form['paymentMethod']->getConfig()->getOption('choice_list')->getChoices(),
+            );
+
+            return $this->handleView($this->view($paymentInfo));
+        }
+
+        if ($form->handleRequest($request)->isValid()) {
+            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
+
+            $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
+            $stateMachine->apply(OrderCheckoutTransitions::SYLIUS_PAYMENT);
+
+            $this->getManager()->persist($order);
+            $this->getManager()->flush();
+
+            $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_COMPLETE, $order);
+
+            return $this->handleView($this->view($order));
+        }
+
+        return $this->handleView($this->view($form));
+    }
+
     private function getOrderRepository()
     {
         return $this->get('sylius.repository.order');
@@ -155,6 +189,11 @@ class CheckoutController extends FOSRestController
                 'enabled' => true,
             )
         ));
+    }
+
+    private function createCheckoutPaymentForm(OrderInterface $order)
+    {
+        return $this->createApiForm('sylius_checkout_payment', $order);
     }
 
     private function createApiForm($type, $value = null, array $options = array())

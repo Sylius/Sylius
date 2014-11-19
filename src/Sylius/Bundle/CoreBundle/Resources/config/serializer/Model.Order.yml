@@ -14,3 +14,5 @@ Sylius\Component\Core\Model\Order:
             expose: true
         shipments:
             expose: true
+        payments:
+            expose: true
