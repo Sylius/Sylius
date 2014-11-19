@@ -53,13 +53,17 @@ class CheckoutController extends FOSRestController
             break;
         }
 
-        throw new \Exception('Could not proceed with the checkout.');
+        throw new \Exception('Could not process checkout API request.');
     }
 
     public function addressingAction(Request $request, OrderInterface $order)
     {
         if ($order->isEmpty()) {
             //return new Response('Order cannot be empty!', 400);
+        }
+
+        if ($request->isMethod('GET')) {
+            return new Response('Method not allowed!', 405);
         }
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
@@ -88,6 +92,20 @@ class CheckoutController extends FOSRestController
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
 
         $form = $this->createCheckoutShippingForm($order);
+
+        if ($request->isMethod('GET')) {
+            $shipments = array();
+            $form->handleRequest($request);
+
+            foreach ($order->getShipments() as $key => $shipment) {
+                $shipments[] = array(
+                    'shipment' => $shipment,
+                    'methods'  => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
+                );
+            }
+
+            return $this->handleView($this->view($shipments));
+        }
 
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);

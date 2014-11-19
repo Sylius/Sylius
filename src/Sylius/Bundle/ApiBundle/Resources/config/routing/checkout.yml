@@ -3,6 +3,6 @@
 
 sylius_api_checkout_proceed:
     path: /{orderId}
-    methods: [POST]
+    methods: [GET, POST]
     defaults:
         _controller: sylius.controller.checkout:proceedAction

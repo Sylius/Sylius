@@ -12,3 +12,5 @@ Sylius\Component\Core\Model\Order:
             expose: true
         billingAddress:
             expose: true
+        shipments:
+            expose: true
