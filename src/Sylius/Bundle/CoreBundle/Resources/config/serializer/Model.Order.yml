@@ -2,6 +2,13 @@ Sylius\Component\Core\Model\Order:
     exclusion_policy: ALL
     xml_root_name: order
     properties:
+        checkoutState:
+            expose: true
+            type: string
         currency:
             expose: true
             type: string
+        shippingAddress:
+            expose: true
+        billingAddress:
+            expose: true

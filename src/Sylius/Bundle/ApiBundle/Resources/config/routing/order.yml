@@ -12,17 +12,13 @@ sylius_api_order_index:
         criteria: {}
         sorting: { updatedAt: desc }
 
-#sylius_api_order_create:
-#    path: /
-#    methods: [POST]
-#    defaults:
-#        _controller: sylius.controller.order:createAction
-
-#sylius_api_order_update:
-#    path: /{id}
-#    methods: [PUT, PATCH]
-#    defaults:
-#        _controller: sylius.controller.order:updateAction
+sylius_api_order_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order:createAction
+        _sylius:
+            form: sylius_api_order
 
 sylius_api_order_delete:
     path: /{id}
