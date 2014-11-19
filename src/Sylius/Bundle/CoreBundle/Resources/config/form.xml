@@ -32,6 +32,7 @@
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
         <parameter key="sylius.form.type.shipment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ShipmentFilterType</parameter>
 
+        <parameter key="sylius.form.type.price_calculator.channel_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType</parameter>
         <parameter key="sylius.form.type.price_calculator.group_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType</parameter>
         <parameter key="sylius.form.type.price_calculator.zone_based.class">Sylius\Bundle\CoreBundle\Form\Type\Pricing\ZoneBasedConfigurationType</parameter>
 
@@ -156,6 +157,10 @@
             <tag name="form.type" alias="sylius_promotion_action_add_product_configuration" />
         </service>
 
+        <service id="sylius.form.type.price_calculator.channel_based" class="%sylius.form.type.price_calculator.channel_based.class%">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type" alias="sylius_price_calculator_channel_based" />
+        </service>
         <service id="sylius.form.type.price_calculator.group_based" class="%sylius.form.type.price_calculator.group_based.class%">
             <argument type="service" id="sylius.repository.group" />
             <tag name="form.type" alias="sylius_price_calculator_group_based" />

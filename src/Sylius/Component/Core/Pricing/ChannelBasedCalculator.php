@@ -18,7 +18,7 @@ use Sylius\Component\Pricing\Calculator\CalculatorInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GroupBasedCalculator extends AbstractCalculator implements CalculatorInterface
+class ChannelBasedCalculator extends AbstractCalculator implements CalculatorInterface
 {
     protected $parameterName = 'channel';
     protected $className     = 'Sylius\Component\Core\Model\ChannelInterface';
@@ -28,6 +28,6 @@ class GroupBasedCalculator extends AbstractCalculator implements CalculatorInter
      */
     public function getType()
     {
-        return Calculators::GROUP_BASED;
+        return Calculators::CHANNEL_BASED;
     }
 }
