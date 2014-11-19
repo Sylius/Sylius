@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface StockItemInterface
+interface StockItemInterface extends InStockInterface
 {
     /**
      * Get related stockable object.
@@ -75,4 +75,32 @@ interface StockItemInterface
      * @return StockItemInterface
      */
     public function removeMovement(StockMovementInterface $movement);
+
+    /**
+     * Get stock on hold.
+     *
+     * @return integer
+     */
+    public function getOnHold();
+
+    /**
+     * Set stock on hold.
+     *
+     * @param integer
+     */
+    public function setOnHold($onHold);
+
+    /**
+     * Get stock on hand.
+     *
+     * @return integer
+     */
+    public function getOnHand();
+
+    /**
+     * Set stock on hand.
+     *
+     * @param integer $onHand
+     */
+    public function setOnHand($onHand);
 }

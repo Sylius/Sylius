@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StockItem implements StockItemInterface, StockableInterface
+class StockItem implements StockItemInterface
 {
     /**
      * Product id.
@@ -55,12 +55,6 @@ class StockItem implements StockItemInterface, StockableInterface
      */
     protected $onHand = 0;
 
-    /**
-     * Is variant available on demand?
-     *
-     * @var bool
-     */
-    protected $availableOnDemand = true;
 
     /**
      * @var StockMovement
@@ -147,14 +141,6 @@ class StockItem implements StockItemInterface, StockableInterface
     /**
      * {@inheritdoc}
      */
-    public function isInStock()
-    {
-        return 0 < $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOnHold()
     {
         return $this->onHold;
@@ -192,22 +178,11 @@ class StockItem implements StockItemInterface, StockableInterface
         return $this;
     }
 
-
     /**
      * {@inheritdoc}
      */
-    public function isAvailableOnDemand()
+    public function isInStock()
     {
-        return $this->availableOnDemand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOnDemand($availableOnDemand)
-    {
-        $this->availableOnDemand = (bool)$availableOnDemand;
-
-        return $this;
+        return 0 < $this->onHand;
     }
 }

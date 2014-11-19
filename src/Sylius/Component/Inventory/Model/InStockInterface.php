@@ -12,18 +12,17 @@
 namespace Sylius\Component\Inventory\Model;
 
 /**
- * Stockable interface.
+ * InStock interface.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Patrick Berenschot <p.berenschot@take-a-byte.eu>
  */
-interface StockableInterface extends InStockInterface
+interface InStockInterface
 {
-
-
     /**
-     * Is stockable available on demand?
+     * Simply checks if there any stock available.
+     * It should also return true for items available on demand.
      *
      * @return Boolean
      */
-    public function isAvailableOnDemand();
+    public function isInStock();
 }

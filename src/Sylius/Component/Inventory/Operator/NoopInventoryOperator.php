@@ -23,7 +23,7 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function increase(StockableInterface $stockable, $quantity)
+    public function increase(StockableInterface $stockItem, $quantity)
     {
         // nothing happens.
     }
@@ -39,7 +39,7 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function hold(StockableInterface $stockable, $quantity)
+    public function hold(StockableInterface $stockItem, $quantity)
     {
         // nothing happens
     }
@@ -47,7 +47,7 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function release(StockableInterface $stockable, $quantity)
+    public function release(StockableInterface $stockItem, $quantity)
     {
         // nothing happens
     }

@@ -186,6 +186,7 @@ sylius:
             index: Shipping Categories
         shipping_method:
             index: Shipping Methods
+        stock:  Stock
         tax_category:
             index: Tax Categories
         tax_rate:
@@ -639,6 +640,7 @@ sylius:
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
+        stock_header: Stock <small>For product "<strong>%product%</strong>"</small>
         updated_at: Last update
         variant_selection_method: Variant selection method
         view_details: View %product% details.

@@ -123,6 +123,8 @@ sylius_inventory:
             model: Sylius\Component\Inventory\Model\StockTransfer
         stock_movement:
             model: Sylius\Component\Inventory\Model\StockMovement
+        stock:
+            controller: Sylius\Bundle\InventoryBundle\Controller\StockController
 
 
 sylius_payment:

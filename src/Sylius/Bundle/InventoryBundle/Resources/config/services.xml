@@ -26,6 +26,7 @@
         <parameter key="sylius.listener.inventory.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
         <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
         <parameter key="sylius.form.type.stock_location.class">Sylius\Bundle\InventoryBundle\Form\Type\StockLocationType</parameter>
+        <parameter key="sylius.form.type.product_stock.class">Sylius\Bundle\InventoryBundle\Form\Type\AddStockType</parameter>
     </parameters>
 
     <services>
@@ -62,6 +63,12 @@
             <argument>%sylius.model.stock_location.class%</argument>
             <tag name="form.type" alias="sylius_stock_location" />
         </service>
+
+        <service id="sylius.form.type.product_stock" class="%sylius.form.type.product_stock.class%">
+            <argument>Sylius\Bundle\InventoryBundle\Model\AddStock</argument>
+            <tag name="form.type" alias="sylius_product_stock" />
+        </service>
+
     </services>
 
 </container>

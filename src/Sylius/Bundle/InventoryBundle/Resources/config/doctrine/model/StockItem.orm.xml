@@ -23,12 +23,11 @@
         </id>
         <field name="onHold" column="on_hold" type="integer"/>
         <field name="onHand" column="on_hand" type="integer"/>
-        <field name="availableOnDemand" column="available_on_demand" type="boolean"/>
 
         <many-to-one target-entity="Sylius\Component\Inventory\Model\StockLocationInterface" field="location">
             <join-column name="stock_location_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
-        <many-to-one target-entity="Sylius\Component\Inventory\Model\StockableInterface" field="stockable">
+        <many-to-one target-entity="Sylius\Component\Inventory\Model\StockableInterface" field="stockable" inversed-by="items">
             <join-column name="stockable_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
 
