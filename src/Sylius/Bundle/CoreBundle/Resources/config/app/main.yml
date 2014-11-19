@@ -134,6 +134,9 @@ jms_serializer:
             sylius-taxation:
                 namespace_prefix: "Sylius\\Component\\Taxation"
                 path: "@SyliusTaxationBundle/Resources/config/serializer"
+            sylius-taxonomy:
+                namespace_prefix: "Sylius\\Component\\Taxonomy"
+                path: "@SyliusTaxonomyBundle/Resources/config/serializer"
 
 a2lix_translation_form:
     locale_provider: sylius.locale_provider
