@@ -18,12 +18,17 @@
 
     <parameters>
         <parameter key="sylius.form.type.api.order.class">Sylius\Bundle\CoreBundle\Form\Type\Api\OrderType</parameter>
+        <parameter key="sylius.form.type.api.order_item.class">Sylius\Bundle\CoreBundle\Form\Type\Api\OrderItemType</parameter>
     </parameters>
 
     <services>
         <service id="sylius.form.type.api.order" class="%sylius.form.type.api.order.class%">
             <argument>%sylius.model.order.class%</argument>
             <tag name="form.type" alias="sylius_api_order" />
+        </service>
+        <service id="sylius.form.type.api.order_item" class="%sylius.form.type.api.order_item.class%">
+            <argument>%sylius.model.order_item.class%</argument>
+            <tag name="form.type" alias="sylius_api_order_item" />
         </service>
     </services>
 
