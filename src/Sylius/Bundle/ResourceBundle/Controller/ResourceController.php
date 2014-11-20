@@ -223,7 +223,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+            return $this->handleView($this->view($form, 400));
         }
 
         $view = $this

@@ -90,7 +90,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($order));
         }
 
-        return $this->handleView($this->view($form));
+        return $this->handleView($this->view($form, 400));
     }
 
     public function shippingAction(Request $request, OrderInterface $order)
@@ -127,7 +127,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($order));
         }
 
-        return $this->handleView($this->view($form));
+        return $this->handleView($this->view($form, 400));
     }
 
     public function paymentAction(Request $request, OrderInterface $order)
@@ -161,7 +161,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($order));
         }
 
-        return $this->handleView($this->view($form));
+        return $this->handleView($this->view($form, 400));
     }
 
     public function finalizeAction(Request $request, OrderInterface $order)
