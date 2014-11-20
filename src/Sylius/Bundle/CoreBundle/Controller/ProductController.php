@@ -62,6 +62,7 @@ class ProductController extends ResourceController
      * @param integer $id
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function indexByTaxonIdAction(Request $request, $id)
@@ -83,6 +84,7 @@ class ProductController extends ResourceController
      * @param Request $request
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function historyAction(Request $request)
