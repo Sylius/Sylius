@@ -33,9 +33,19 @@ class LoadOrdersData extends DataFixture
         $orderRepository = $this->getOrderRepository();
         $orderItemRepository = $this->getOrderItemRepository();
 
+        $channels = array(
+            'WEB-UK',
+            'WEB-DE',
+            'WEB-US',
+            'MOBILE'
+        );
+
         for ($i = 1; $i <= 50; $i++) {
             /* @var $order OrderInterface */
             $order = $orderRepository->createNew();
+            $channel = $this->getReference('Sylius.Channel.'.$this->faker->randomElement($channels));
+
+            $order->setChannel($channel);
 
             for ($j = 0, $items = rand(3, 6); $j <= $items; $j++) {
                 $variant = $this->getReference('Sylius.Variant-'.rand(1, SYLIUS_FIXTURES_TOTAL_VARIANTS - 1));
@@ -43,7 +53,7 @@ class LoadOrdersData extends DataFixture
                 /* @var $item OrderItemInterface */
                 $item = $orderItemRepository->createNew();
                 $item->setVariant($variant);
-                $item->setUnitPrice(1500);
+                $item->setUnitPrice($variant->getPrice());
                 $item->setQuantity(rand(1, 5));
 
                 $order->addItem($item);
