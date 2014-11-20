@@ -1,0 +1,10 @@
+sylius.form.subscription:
+    label: Renew Every
+    scheduled_date: Scheduled Date
+    quantity: Quantity
+    interval: Interval
+    interval_units:
+        days: Days
+        months: Months
+        years: Years
+    max_cycles: Max Cycles

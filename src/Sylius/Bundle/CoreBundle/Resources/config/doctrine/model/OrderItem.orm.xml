@@ -43,6 +43,10 @@
             <gedmo:versioned />
         </many-to-many>
 
+        <one-to-one field="subscription" target-entity="Sylius\Component\Subscription\Model\SubscriptionInterface" inversed-by="orderItem">
+            <join-column name="subscription_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+        </one-to-one>
+
         <gedmo:loggable />
     </mapped-superclass>
 

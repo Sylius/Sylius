@@ -32,7 +32,12 @@
             <th>#</th>
             <th>{{ 'sylius.cart.summary.product'|trans }}</th>
             <th>{{ 'sylius.cart.summary.quantity'|trans }}</th>
-            <th></th>
+            {% if form.items[0].subscription is defined %}
+                <th>{{ 'sylius.cart.summary.subscription'|trans }}</th>
+                <th></th>
+            {% else %}
+                <th colspan="2"></th>
+            {% endif %}
             <th>{{ 'sylius.cart.summary.unit_price'|trans }}</th>
             <th style="text-align: right;">{{ 'sylius.cart.summary.total'|trans }}</th>
         </tr>
@@ -45,18 +50,18 @@
     <tfoot>
         {% if cart.adjustmentsTotal(promotionAdjustment) %}
         <tr>
-            <td colspan="6" style="text-align: right;">
+            <td colspan="7" style="text-align: right;">
                 <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.adjustmentsTotal(promotionAdjustment)|sylius_price }}
             </td>
         </tr>
         {% endif %}
         <tr>
-            <td colspan="6" style="text-align: right;">
+            <td colspan="7" style="text-align: right;">
                 <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.adjustmentsTotal(shippingAdjustment)|sylius_price }}
             </td>
         </tr>
         <tr>
-            <td colspan="4">
+            <td colspan="5">
                 <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
                 <ul>
                 {% for taxAdjustment in cart.adjustments(taxAdjustment) %}
@@ -71,7 +76,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="6" style="text-align: right;">
+            <td colspan="7" style="text-align: right;">
                 <strong>{{ 'sylius.cart.summary.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}
             </td>
         </tr>

@@ -344,6 +344,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'icon-envelope', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
 
+        $child->addChild('subscriptions', array(
+            'route' => 'sylius_account_subscription_index',
+            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.subscriptions')),
+            'labelAttributes' => array('icon' => 'icon-repeat', 'iconOnly' => false)
+        ))->setLabel($this->translate('sylius.frontend.menu.account.subscriptions'));
+
         return $menu;
     }
 }

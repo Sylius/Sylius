@@ -110,8 +110,14 @@
         {% else %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
             {{ form_widget(form._token) }}
-            <br>
-            <br>
+
+            {% if form.subscription is defined %}
+                {{ form_row(form.subscription) }}
+                <br>
+            {% else %}
+                <br><br>
+            {% endif %}
+
             {% if sylius_is_restricted(product) %}
             <button disabled="disabled" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.product_not_available_in_zone'|trans }}</button>
             {% else %}

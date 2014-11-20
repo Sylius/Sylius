@@ -1,0 +1,44 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'sylius.account.subscription.list'|trans }}</h4>
+
+    <div class="row-fluid">
+        {% if subscriptions is not empty %}
+            <table id="subscriptions" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{ 'sylius.account.subscription.product'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.scheduled_date'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.quantity'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.interval'|trans }}</th>
+                    <th>{{ 'sylius.account.subscription.limit'|trans }}</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for subscription in subscriptions %}
+                    <tr class="subscription" id="subscription-{{ subscription.id }}">
+                        <td>
+                            <a href="{{ path(subscription.product) }}" class="thumbnail pull-left" style="margin-right: 15px;">
+                                <img src="{{ subscription.product.image ? subscription.product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="{{ subscription.product.name }}" />
+                            </a>
+                        </td>
+                        <td>{{ subscription.scheduledDate|date }}</td>
+                        <td>{{ subscription.quantity }}</td>
+                        <td>{{ subscription.interval|sylius_interval }}</td>
+                        <td>{{ subscription.maxCycles ?: 'sylius.account.subscription.no_limit'|trans }}</td>
+                        <td>
+                            {{ buttons.show(path('sylius_account_subscription_show', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}
+                            {{ buttons.edit(path('sylius_account_subscription_update', { 'id': subscription.id }), '', 'subscription-' ~ subscription.id ~ '-edit') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>{{ 'sylius.account.subscription.empty'|trans }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

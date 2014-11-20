@@ -1,0 +1,8 @@
+<div class="row">
+    {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': subscription.variant}) }}
+</div>
+
+{{ form_row(form.scheduledDate) }}
+{{ form_row(form.quantity) }}
+{{ form_row(form.interval) }}
+{{ form_row(form.maxCycles) }}

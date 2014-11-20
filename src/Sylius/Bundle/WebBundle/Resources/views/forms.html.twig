@@ -132,3 +132,30 @@
         </div>
     {% endspaceless %}
 {% endblock %}
+
+{% block sylius_date_interval_row %}
+    {% spaceless %}
+        <div class="{% if label is not sameas(false) %}form-group{% endif %}">
+            {{ form_errors(form) }}
+            {{ form_label(form) }}
+
+            {% if label is not sameas(false) %}<div class="col-lg-10">{% endif %}
+            {{ form_widget(form) }}
+            {% if label is not sameas(false) %}</div>{% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block sylius_date_interval_widget %}
+    {% spaceless %}
+        {{ form_errors(form.frequency) }}
+        {{ form_errors(form.unit) }}
+
+        <div class="col-lg-3" style="padding: 0 5px 0 0">
+            {{ form_widget(form.frequency) }}
+        </div>
+        <div class="col-lg-9" style="padding: 0">
+            {{ form_widget(form.unit) }}
+        </div>
+    {% endspaceless %}
+{% endblock %}

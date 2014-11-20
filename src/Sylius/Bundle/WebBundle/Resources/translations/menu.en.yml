@@ -84,6 +84,7 @@ sylius:
                 password: My password
                 profile: My personal information
                 shop: Back to the shop
+                subscriptions: My subscriptions
             currency: Show prices in %currency%
             main:
                 account: My account

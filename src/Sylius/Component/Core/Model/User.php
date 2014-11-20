@@ -32,6 +32,7 @@ class User extends BaseUser implements UserInterface
     protected $shippingAddress;
     protected $addresses;
     protected $oauthAccounts;
+    protected $subscriptions;
 
     public function __construct()
     {
@@ -39,6 +40,7 @@ class User extends BaseUser implements UserInterface
         $this->orders        = new ArrayCollection();
         $this->addresses     = new ArrayCollection();
         $this->oauthAccounts = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
 
         parent::__construct();
     }
@@ -319,5 +321,45 @@ class User extends BaseUser implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSubscription(SubscriptionInterface $subscription)
+    {
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions->add($subscription);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSubscription(SubscriptionInterface $subscription)
+    {
+        if ($this->subscriptions->contains($subscription)) {
+            $this->subscriptions->removeElement($subscription);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSubscription(SubscriptionInterface $subscription)
+    {
+        return $this->subscriptions->contains($subscription);
     }
 }

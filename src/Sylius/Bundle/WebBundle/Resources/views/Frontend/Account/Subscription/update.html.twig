@@ -1,0 +1,14 @@
+{% from 'SyliusWebBundle:Frontend/Macros:actions.html.twig' import update %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'sylius.account.subscription.update'|trans }}</h4>
+    <br>
+
+    {{ form_errors(form) }}
+    {{ form_start(form, { method: 'PUT', attr: { class: 'form-horizontal' } }) }}
+    {% include 'SyliusWebBundle:Frontend/Account/Subscription:_form.html.twig' %}
+    {{ update() }}
+    {{ form_end(form) }}
+
+{% endblock %}

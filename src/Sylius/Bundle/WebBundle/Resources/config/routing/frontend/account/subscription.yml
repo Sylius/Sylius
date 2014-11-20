@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_account_subscription_index:
+    pattern: /subscription
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.subscription:indexAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:Subscription/index.html.twig
+
+sylius_account_subscription_show:
+    pattern: /subscription/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.subscription:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:Subscription/show.html.twig
+
+sylius_account_subscription_update:
+    pattern: /subscription/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.subscription:updateAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:Subscription/update.html.twig
+            redirect:
+                route: sylius_account_subscription_index
+                parameters: {}
+
+sylius_account_subscription_delete:
+    pattern: /subscription/{id}/delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.subscription:deleteAction
+        _sylius:
+            redirect:
+                route: sylius_account_subscription_index
+                parameters: {}

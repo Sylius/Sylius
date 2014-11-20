@@ -1,0 +1,35 @@
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+    <h4>{{ 'sylius.account.subscription.details'|trans }}</h4>
+    <br>
+
+    <div class="row">
+        {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': subscription.variant}) }}
+    </div>
+
+    <div class="row">
+        <label class="col-lg-2 control-label">{{ 'sylius.account.subscription.scheduled_date'|trans }}</label>
+        <div class="col-lg-10">{{ subscription.scheduledDate|date }}</div>
+    </div>
+
+    <div class="row">
+        <label class="col-lg-2 control-label">{{ 'sylius.account.subscription.quantity'|trans }}</label>
+        <div class="col-lg-10">{{ subscription.quantity }}</div>
+    </div>
+
+    <div class="row">
+        <label class="col-lg-2 control-label">{{ 'sylius.account.subscription.interval'|trans }}</label>
+        <div class="col-lg-10">{{ subscription.interval|sylius_interval }}</div>
+    </div>
+
+    <div class="row">
+        <label class="col-lg-2 control-label">{{ 'sylius.account.subscription.limit'|trans }}</label>
+        <div class="col-lg-10">{{ subscription.maxCycles }}</div>
+    </div>
+
+    {{ buttons.edit(path('sylius_account_subscription_update', { id: subscription.id })) }}&nbsp;
+    {{ buttons.delete(path('sylius_account_subscription_delete', { id: subscription.id })) }}
+
+{% endblock %}

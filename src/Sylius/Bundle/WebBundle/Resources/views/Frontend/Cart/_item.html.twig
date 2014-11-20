@@ -7,9 +7,21 @@
     <td class="col-md-2">
         {{ form_row(form.items[loop.index0].quantity, {'label': false}) }}
     </td>
-    <td class="col-md-1">
-        <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
-    </td>
+
+    {# show subscription form if set #}
+    {% if form.items[loop.index0].subscription is defined %}
+        <td>
+            {{ form_widget(form.items[loop.index0].subscription.interval, {'label': false}) }}
+        </td>
+        <td class="col-md-1">
+            <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
+        </td>
+    {% else %}
+        <td class="col-md-1" colspan="2">
+            <a href="{{ path('sylius_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger"><i class="icon-trash icon-white"></i></a>
+        </td>
+    {% endif %}
+
     <td class="col-md-1">
         {{ item.unitPrice|sylius_price }}
     </td>
