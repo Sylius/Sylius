@@ -3,18 +3,22 @@ sylius:
         menu:
             main:
                 assortment: Assortment
+                blocks: Blocks
                 configuration: Configuration
                 countries: Countries
                 customer: Customers
+                content: Content
                 dashboard: Dashboard
                 currencies: Currencies
                 general_settings: General settings
+                groups: Groups
                 homepage: Your store
                 locales: Locales
                 new_order: Add new order
                 new_promotion: Add new promotion
                 options: Manage product options
                 orders: Current orders
+                pages: Pages
                 payment_methods: Payment methods
                 payments: Payments
                 products: Products
@@ -50,6 +54,9 @@ sylius:
                 options: Manage options
                 orders: Current orders
                 pages: Pages
+                routes: Routes
+                redirects: Redirects
+                menus: Menus
                 payment_methods: Payment methods
                 payments: Payments
                 products: Products
@@ -60,6 +67,7 @@ sylius:
                 shipments: Shipments
                 shipping_categories: Shipping categories
                 shipping_methods: Shipping methods
+                slideshow: Slideshow
                 stockables: Inventory levels
                 tax_categories: Taxation categories
                 tax_rates: Tax rates

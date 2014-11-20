@@ -21,19 +21,9 @@ security:
                 use_forward:  false
                 use_referer:  true
             logout:
-                path:   /administration/logout
+                path:   /logout
                 target: /administration/login
             anonymous: true
-
-        oauth_token:
-            pattern:  ^/oauth/v2/token
-            security: false
-
-        api:
-            pattern:    ^/api
-            fos_oauth:  true
-            stateless:  true
-            anonymous:  true
 
         main:
             switch_user: { role: ROLE_SYLIUS_ADMIN }
@@ -64,6 +54,16 @@ security:
                     service: sylius.oauth.user_provider
             logout: true
             anonymous: true
+
+        oauth_token:
+            pattern:  ^/oauth/v2/token
+            security: false
+
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  true
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

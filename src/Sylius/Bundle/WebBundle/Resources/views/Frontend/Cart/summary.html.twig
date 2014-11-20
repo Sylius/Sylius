@@ -2,6 +2,10 @@
 
 {% import 'SyliusWebBundle:Frontend/Macros:alerts.html.twig' as alerts %}
 
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+
 {% form_theme form _self %}
 
 {% block javascripts %}
@@ -39,23 +43,23 @@
         {% endfor %}
     </tbody>
     <tfoot>
-        {% if cart.promotionTotal %}
+        {% if cart.adjustmentsTotal(promotionAdjustment) %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.promotionTotal|sylius_price }}
+                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.adjustmentsTotal(promotionAdjustment)|sylius_price }}
             </td>
         </tr>
         {% endif %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.shippingTotal|sylius_price }}
+                <strong>{{ 'sylius.order.shipping_total'|trans }}</strong>: {{ cart.adjustmentsTotal(shippingAdjustment)|sylius_price }}
             </td>
         </tr>
         <tr>
             <td colspan="4">
                 <p><strong>{{ 'sylius.order.taxes'|trans }}</strong></p>
                 <ul>
-                {% for taxAdjustment in cart.taxAdjustments %}
+                {% for taxAdjustment in cart.adjustments(taxAdjustment) %}
                     <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price }} </li>
                 {% else %}
                     <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
@@ -63,7 +67,7 @@
                 </ul>
             </td>
             <td colspan="2" style="text-align: right;">
-                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.taxTotal|sylius_price }}
+                <strong>{{ 'sylius.order.tax_total'|trans }}</strong>: {{ cart.adjustmentsTotal(taxAdjustment)|sylius_price }}
             </td>
         </tr>
         <tr>

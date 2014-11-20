@@ -1,0 +1,50 @@
+{
+    "name": "sylius/content-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius content bundle.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                               ">=5.3.3",
+
+        "jackalope/jackalope-doctrine-dbal": "1.1.*",
+        "sylius/resource-bundle":            "0.12.*@dev",
+        "symfony-cmf/block-bundle":          "1.1.*",
+        "symfony-cmf/content-bundle":        "1.1.*",
+        "symfony-cmf/create-bundle":         "1.1.*",
+        "symfony-cmf/media-bundle":          "1.1.*",
+        "symfony-cmf/menu-bundle":           "1.1.*",
+        "symfony-cmf/routing-bundle":        "1.2.*",
+        "symfony/framework-bundle":          "~2.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec":  "~2.0",
+        "symfony/form":     "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ContentBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.12-dev"
+        }
+    }
+}

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -20,6 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * Sylius core bundle.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class SyliusCoreBundle extends AbstractResourceBundle
 {
@@ -41,6 +43,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new DoctrineSluggablePass());
+        $container->addCompilerPass(new RoutingRepositoryPass());
     }
 
     /**

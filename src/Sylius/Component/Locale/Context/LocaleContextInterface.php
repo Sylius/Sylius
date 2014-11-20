@@ -19,6 +19,9 @@ namespace Sylius\Component\Locale\Context;
  */
 interface LocaleContextInterface
 {
+    // Key used to store the locale in storage.
+    const STORAGE_KEY = '_sylius.locale';
+
     /**
      * Get the default locale.
      *

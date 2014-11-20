@@ -19,6 +19,9 @@ namespace Sylius\Component\Currency\Context;
  */
 interface CurrencyContextInterface
 {
+    // Key used to store the currency in storage.
+    const STORAGE_KEY = '_sylius.currency';
+
     /**
      * Get the default currency.
      *

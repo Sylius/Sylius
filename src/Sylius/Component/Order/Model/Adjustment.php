@@ -56,7 +56,7 @@ class Adjustment implements AdjustmentInterface
     /**
      * Adjustment amount.
      *
-     * @var integer
+     * @var int
      */
     protected $amount = 0;
 
@@ -64,9 +64,30 @@ class Adjustment implements AdjustmentInterface
      * Is adjustment neutral?
      * Should it modify the order total?
      *
-     * @var Boolean
+     * @var bool
      */
     protected $neutral = false;
+
+    /**
+     * Is adjustment locked?
+     *
+     * @var bool
+     */
+    protected $locked = false;
+
+    /**
+     * Origin identifier.
+     *
+     * @var int
+     */
+    protected $originId;
+
+    /**
+     * Origin type.
+     *
+     * @var string
+     */
+    protected $originType;
 
     /**
      * Creation time.
@@ -199,7 +220,35 @@ class Adjustment implements AdjustmentInterface
      */
     public function setNeutral($neutral)
     {
-        $this->neutral = (Boolean) $neutral;
+        $this->neutral = (bool) $neutral;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function lock()
+    {
+        $this->locked = true;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unlock()
+    {
+        $this->locked = false;
 
         return $this;
     }
@@ -218,6 +267,42 @@ class Adjustment implements AdjustmentInterface
     public function isCredit()
     {
         return 0 < $this->amount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginId()
+    {
+        return $this->originId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginId($originId)
+    {
+        $this->originId = $originId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginType()
+    {
+        return $this->originType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginType($originType)
+    {
+        $this->originType = $originType;
+
+        return $this;
     }
 
     /**

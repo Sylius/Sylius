@@ -25,6 +25,7 @@ interface PaymentInterface extends TimestampableInterface
     const STATE_PENDING    = 'pending';
     const STATE_PROCESSING = 'processing';
     const STATE_COMPLETED  = 'completed';
+    const STATE_AUTHORIZED = 'authorized';
     const STATE_FAILED     = 'failed';
     const STATE_CANCELLED  = 'cancelled';
     const STATE_VOID       = 'void';

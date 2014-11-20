@@ -28,14 +28,14 @@ Feature: Sign in to the store
             | Password | bar         |
           And I press "Login"
          Then I should be on login page
-          And I should see "Bad credentials"
+          And I should see "Invalid credentials"
 
     Scenario: Trying to login without credentials
         Given I am on the store homepage
           And I follow "Login"
          When I press "Login"
          Then I should be on login page
-          And I should see "Bad credentials"
+          And I should see "Invalid credentials"
 
     Scenario: Trying to login as non existing user
         Given I am on the store homepage
@@ -45,4 +45,4 @@ Feature: Sign in to the store
             | Password | bar  |
           And I press "Login"
          Then I should be on login page
-          And I should see "Bad credentials"
+          And I should see "Invalid credentials"

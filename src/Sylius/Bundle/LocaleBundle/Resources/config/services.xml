@@ -17,9 +17,10 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.context.locale.class">Sylius\Bundle\LocaleBundle\Context\LocaleContext</parameter>
         <parameter key="sylius.locale_provider.class">Sylius\Component\Locale\Provider\LocaleProvider</parameter>
         <parameter key="sylius.event_listener.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleListener</parameter>
+
+        <parameter key="sylius.context.locale.class">Sylius\Component\Locale\Context\LocaleContext</parameter>
     </parameters>
 
     <services>
@@ -30,9 +31,10 @@
         </service>
 
         <service id="sylius.context.locale" class="%sylius.context.locale.class%">
-            <argument type="service" id="session" />
+            <argument /> <!-- Storage service name comes from config -->
             <argument>%sylius.locale%</argument>
         </service>
+
         <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
             <argument type="service" id="sylius.repository.locale" />
         </service>

@@ -1,8 +1,8 @@
 {
     "name": "sylius/api-bundle",
     "type": "symfony-bundle",
-    "description": "Apis management for Symfony2 projects.",
-    "keywords": ["language", "localization", "api", "i18n", "internationalization"],
+    "description": "APIs management for Symfony2 projects.",
+    "keywords": ["api", "rest"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -22,14 +22,16 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "sylius/resource-bundle":               "0.11.*@dev",
-        "friendsofsymfony/oauth-server-bundle": "dev-master",
-        "symfony/framework-bundle":             "~2.3"
+        "sylius/resource-bundle":               "0.12.*@dev",
+        "symfony/framework-bundle":             "~2.3",
+        "friendsofsymfony/oauth-server-bundle": "~1.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
-        "symfony/form":    "~2.3",
-        "twig/twig":       "~1.0"
+        "symfony/form":           "~2.3",
+        "twig/twig":              "~1.0",
+        "phpspec/phpspec":        "~2.0",
+        "phpunit/phpunit":        "~3.7",
+        "sylius/fixtures-bundle": "0.12.*@dev"
     },
     "config": {
         "bin-dir": "bin"
@@ -42,7 +44,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     }
 }

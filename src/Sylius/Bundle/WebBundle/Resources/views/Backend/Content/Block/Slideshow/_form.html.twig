@@ -1,0 +1,32 @@
+{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+
+{% import 'SyliusWebBundle:Backend/Content/Form:forms.html.twig' as forms %}
+
+<fieldset>
+<div class="row">
+    <div class="col-md-6 row-split">
+        {{ forms.readonly(form.parentDocument,form.parentDocument.vars.value,'/cms/blocks') }}
+        {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+        {{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
+    </div>
+    <div class="col-md-6">
+        <div id="sylius-menu-childrens" class="collection-container" data-prototype="{{ _self.prototype(form.children.vars.prototype)|e }}">
+            {% for children in form.children %}
+                {{ _self.prototype(children) }}
+            {% endfor %}
+        </div>
+        <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="sylius-menu-childrens" data-collection="sylius-menu-childrens">{{ "sylius.form.slideshow.add_slide"|trans }}</a>
+    </div>
+</fieldset>
+{{ form_widget(form._token) }}
+
+{% macro prototype(item) %}
+    <div>
+        {{ form_row(item.name)  }}
+        {{ form_row(item.label)  }}
+        {{ form_row(item.linkUrl)  }}
+        {{ form_row(item.filter)  }}
+        {{ form_row(item.image)  }}
+    </div>
+    <hr />
+{% endmacro %}

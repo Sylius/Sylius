@@ -20,6 +20,9 @@ winzou_state_machine:
             release:
                 from: [onhold]
                 to:   checkout
+            backorder:
+                from: [checkout, onhold]
+                to:   backordered
             prepare:
                 from: [checkout, onhold]
                 to:   ready

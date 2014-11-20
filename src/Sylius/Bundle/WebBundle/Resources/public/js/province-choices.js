@@ -16,7 +16,10 @@
             var $provinceContainer = $select.closest('div.form-group').next('div.province-container');
             var provinceName = $select.attr('name').replace('country', 'province');
 
-            if (null === $select.val()) {
+            if ('' === $select.val()) {
+                $provinceContainer.fadeOut('slow', function () {
+                    $provinceContainer.html('');
+                });
                 return;
             }
 

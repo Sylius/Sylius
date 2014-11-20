@@ -11,12 +11,10 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
 
-use Payum\Core\Security\SensitiveValue;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
-use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 {
@@ -44,19 +42,9 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 
         $order = $payment->getOrder();
 
-        $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
-
-        $creditCard = $obtainCreditCardRequest->getCreditCard();
-
         $total = $this->currencyConverter->convert($order->getTotal(), $order->getCurrency());
 
         $payment->setDetails(array(
-            'card' => new SensitiveValue(array(
-                'number'      => $creditCard->getNumber(),
-                'expiryMonth' => $creditCard->getExpiryMonth(),
-                'expiryYear'  => $creditCard->getExpiryYear(),
-                'cvv'         => $creditCard->getSecurityCode()
-            )),
             'amount' => round($total / 100, 2),
             'currency' => $order->getCurrency(),
         ));

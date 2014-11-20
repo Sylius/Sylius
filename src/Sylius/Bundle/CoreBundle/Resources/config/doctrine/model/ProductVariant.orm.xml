@@ -46,6 +46,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+
         <gedmo:loggable />
     </mapped-superclass>
 

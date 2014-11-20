@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -33,9 +32,9 @@ class ZoneType extends AbstractResourceType
     /**
      * Constructor.
      *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param array  $scopeChoices
+     * @param string   $dataClass
+     * @param string[] $validationGroups
+     * @param string[] $scopeChoices
      */
     public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
     {
@@ -51,24 +50,24 @@ class ZoneType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.zone.name'
+                'label' => 'sylius.form.zone.name',
             ))
-            ->add('type', 'choice', array(
-                'label'   => 'sylius.form.zone.type',
-                'choices' => array(
-                    ZoneInterface::TYPE_COUNTRY  => 'sylius.form.zone.types.country',
-                    ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
-                    ZoneInterface::TYPE_ZONE     => 'sylius.form.zone.types.zone',
-                ),
-            ))
-            ->add('scope', 'choice', array(
-                'label'   => 'sylius.form.zone.scope',
-                'choices' => $this->scopeChoices,
-            ))
+            ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members'
+                'label' => 'sylius.form.zone.members',
             ))
         ;
+
+        if (!empty($this->scopeChoices)) {
+            $builder
+                ->add('scope', 'choice', array(
+                    'label'       => 'sylius.form.zone.scope',
+                    'empty_value' => 'sylius.form.zone.select_scope',
+                    'required'    => false,
+                    'choices'     => $this->scopeChoices,
+                ))
+            ;
+        }
     }
 
     /**

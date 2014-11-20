@@ -3,11 +3,13 @@ suites:
     Attribute        : { namespace: Sylius, spec_path: src/Sylius/Component/Attribute }
     Cart             : { namespace: Sylius, spec_path: src/Sylius/Component/Cart }
     Core             : { namespace: Sylius, spec_path: src/Sylius/Component/Core }
+    Contact          : { namespace: Sylius, spec_path: src/Sylius/Component/Contact }
     Currency         : { namespace: Sylius, spec_path: src/Sylius/Component/Currency }
     Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
     Locale           : { namespace: Sylius, spec_path: src/Sylius/Component/Locale }
     Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
+    Originator       : { namespace: Sylius, spec_path: src/Sylius/Component/Originator }
     Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
     Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
     Pricing          : { namespace: Sylius, spec_path: src/Sylius/Component/Pricing }
@@ -18,6 +20,7 @@ suites:
     Sequence         : { namespace: Sylius, spec_path: src/Sylius/Component/Sequence }
     Settings         : { namespace: Sylius, spec_path: src/Sylius/Component/Settings }
     Shipping         : { namespace: Sylius, spec_path: src/Sylius/Component/Shipping }
+    Storage          : { namespace: Sylius, spec_path: src/Sylius/Component/Storage }
     Taxation         : { namespace: Sylius, spec_path: src/Sylius/Component/Taxation }
     Taxonomy         : { namespace: Sylius, spec_path: src/Sylius/Component/Taxonomy }
     Variation        : { namespace: Sylius, spec_path: src/Sylius/Component/Variation }
@@ -27,6 +30,7 @@ suites:
     CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
     CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
     CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
+    ContactBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ContactBundle }
     FlowBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }

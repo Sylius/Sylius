@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use FOS\UserBundle\Model\UserInterface;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
+use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class OrderRepository extends CartRepository implements OrderRepositoryInterface
@@ -172,6 +173,54 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countByUserAndCoupon(UserInterface $user, CouponInterface $coupon)
+    {
+        $this->_em->getFilters()->disable('softdeleteable');
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->innerJoin('o.promotionCoupons', 'coupons')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.completedAt IS NOT NULL')
+            ->andWhere($queryBuilder->expr()->in('coupons', ':coupons'))
+            ->setParameter('user', $user)
+            ->setParameter('coupons', (array) $coupon)
+        ;
+
+        $count = (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countByUserAndPaymentState(UserInterface $user, $state)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder
+            ->select('count(o.id)')
+            ->andWhere('o.user = :user')
+            ->andWhere('o.paymentState = :state')
+            ->setParameter('user', $user)
+            ->setParameter('state', $state)
+        ;
+
+        return (int) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)

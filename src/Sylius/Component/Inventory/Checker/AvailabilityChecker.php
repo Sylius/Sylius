@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Checker;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * Checks availability for given stockable object.
@@ -23,18 +24,18 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
     /**
      * Are backorders enabled?
      *
-     * @var Boolean
+     * @var bool
      */
     protected $backorders;
 
     /**
      * Constructor.
      *
-     * @param Boolean $backorders
+     * @param bool $backorders
      */
     public function __construct($backorders)
     {
-        $this->backorders = (Boolean) $backorders;
+        $this->backorders = (bool) $backorders;
     }
 
     /**
@@ -42,7 +43,11 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        if (true === $this->backorders || $stockable->isAvailableOnDemand()) {
+        if ($stockable instanceof SoftDeletableInterface && $stockable->isDeleted()) {
+            return false;
+        }
+
+        if ($this->backorders || $stockable->isAvailableOnDemand()) {
             return true;
         }
 
@@ -54,7 +59,11 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        if (true === $this->backorders || $stockable->isAvailableOnDemand()) {
+        if ($stockable instanceof SoftDeletableInterface && $stockable->isDeleted()) {
+            return false;
+        }
+
+        if ($this->backorders || $stockable->isAvailableOnDemand()) {
             return true;
         }
 

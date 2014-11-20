@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_redirect_route_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.redirect_route:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Content/RedirectRoute:index.html.twig
+            sortable: true
+
+sylius_backend_redirect_route_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.redirect_route:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Content/RedirectRoute:create.html.twig
+            redirect: sylius_backend_redirect_route_index
+
+sylius_backend_redirect_route_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.redirect_route:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Content/RedirectRoute:update.html.twig
+            method: find
+            arguments: [$id]
+            redirect: sylius_backend_redirect_route_index
+    requirements:
+        id: ".+"
+
+sylius_backend_redirect_route_delete:
+    pattern: /{id}/delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.redirect_route:deleteAction
+        _sylius:
+            method: find
+            arguments: [$id]
+            redirect: sylius_backend_redirect_route_index
+    requirements:
+        id: ".+"

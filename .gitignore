@@ -2,6 +2,9 @@ app/*.cache
 app/cache
 app/logs
 
+app/check.php
+app/SymfonyRequirements.php
+
 app/config/parameters.yml
 app/config/*.local.yml
 app/config/deploy.rb

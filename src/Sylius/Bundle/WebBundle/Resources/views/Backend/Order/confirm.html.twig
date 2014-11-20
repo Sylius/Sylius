@@ -12,7 +12,7 @@
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button class="btn btn-danger">
-            <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
+            <span class="glyphicon glyphicon-trash"></span><span>{{ message is empty ? 'sylius.delete'|trans : message }}</span>
         </button>
     </form>
 </div>

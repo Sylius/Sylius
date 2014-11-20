@@ -23,6 +23,7 @@
         </id>
 
         <field name="number" column="number" type="string" unique="true" nullable="true" />
+        <field type="string" name="email" column="email" nullable="true"/>
 
         <field name="state" column="state" type="string" />
         <field name="completedAt" column="completed_at" type="datetime" nullable="true" />
@@ -31,6 +32,8 @@
             <cascade>
                 <cascade-all/>
             </cascade>
+
+            <gedmo:versioned />
         </one-to-many>
 
         <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
@@ -58,6 +61,7 @@
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <gedmo:soft-deleteable field-name="deletedAt" />
+        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

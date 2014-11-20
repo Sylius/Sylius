@@ -24,9 +24,9 @@
 
         "symfony/framework-bundle":  "~2.3",
         "knplabs/knp-menu-bundle":   "1.1.*",
-        "liip/imagine-bundle":       "~0.9",
+        "liip/imagine-bundle":       "~1.0",
         "knplabs/knp-snappy-bundle": "*@dev",
-        "sylius/core-bundle":        "0.11.*@dev"
+        "sylius/core-bundle":        "0.12.*@dev"
     },
     "config": {
         "bin-dir": "bin"
@@ -36,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     },
     "minimum-stability": "dev"

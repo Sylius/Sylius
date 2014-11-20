@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Originator\Model\OriginAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AdjustmentInterface extends TimestampableInterface
+interface AdjustmentInterface extends TimestampableInterface, OriginAwareInterface
 {
     /**
      * Get adjustment subject.
@@ -65,28 +66,28 @@ interface AdjustmentInterface extends TimestampableInterface
     /**
      * Get the adjustment amount.
      *
-     * @return integer
+     * @return int
      */
     public function getAmount();
 
     /**
      * Set the amount.
      *
-     * @param integer $amount
+     * @param int $amount
      */
     public function setAmount($amount);
 
     /**
      * Is adjustment neutral?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isNeutral();
 
     /**
      * Modify the neutrality of the adjustment.
      *
-     * @param Boolean $neutral
+     * @param bool $neutral
      */
     public function setNeutral($neutral);
 
@@ -95,7 +96,7 @@ interface AdjustmentInterface extends TimestampableInterface
      *
      * Adjustments with amount < 0 are called "charges".
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCharge();
 
@@ -104,7 +105,24 @@ interface AdjustmentInterface extends TimestampableInterface
      *
      * Adjustments with amount > 0 are called "credits".
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCredit();
+
+    /**
+     * Is adjustment locked?
+     *
+     * @return bool
+     */
+    public function isLocked();
+
+    /**
+     * Lock the adjustment.
+     */
+    public function lock();
+
+    /**
+     * Unlock the adjustment.
+     */
+    public function unlock();
 }

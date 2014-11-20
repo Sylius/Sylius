@@ -27,7 +27,8 @@ class SyliusCurrencyBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM
         );
     }
 

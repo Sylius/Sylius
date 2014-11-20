@@ -114,6 +114,7 @@ class OrderItemSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
 
         $adjustment->setAdjustable(null)->shouldBeCalled();
+        $adjustment->isLocked()->willReturn(false);
         $this->removeAdjustment($adjustment);
 
         $this->hasAdjustment($adjustment)->shouldReturn(false);
@@ -122,6 +123,7 @@ class OrderItemSpec extends ObjectBehavior
     function it_has_fluent_interface_for_adjustments_management(AdjustmentInterface $adjustment)
     {
         $this->addAdjustment($adjustment)->shouldReturn($this);
+        $adjustment->isLocked()->willReturn(true);
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 

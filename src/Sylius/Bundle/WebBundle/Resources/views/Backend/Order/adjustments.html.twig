@@ -1,0 +1,81 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% set editable = (not order.deleted) and (not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED')) %}
+
+{% block topbar %}
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.sales'|trans }}</li>
+        <li><a href="{{ path('sylius_backend_order_index') }}">{{ 'sylius.breadcrumb.order.index'|trans }}</a></li>
+        <li><a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">#{{ order.number }}</a></li>
+        <li>{{ 'sylius.breadcrumb.order.adjustments'|trans }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.show(path('sylius_backend_order_show', {'id': order.id})) }}
+        {% if not order.deleted %}
+            {% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
+                {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
+            {% endif %}
+        {% endif %}
+        <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
+            <i class="glyphicon glyphicon-calendar"></i>
+            {{ 'sylius.history.header'|trans }}
+        </a>
+    </div>
+    <h1>
+        <span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}
+        {% if order.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+    </h1>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'sylius.order.adjustments.label'|trans }}</th>
+            <th>{{ 'sylius.order.adjustments.description'|trans }}</th>
+            <th>{{ 'sylius.order.adjustments.amount'|trans }}</th>
+            <th>{{ 'sylius.order.adjustments.locked'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for adjustment in order.adjustments %}
+        <tr>
+            <td>
+                {{ adjustment.label }}
+            </td>
+            <td>
+                {{ adjustment.description }}
+            </td>
+            <td>
+                {{ adjustment.amount|sylius_price(order.currency) }}
+            </td>
+            <td>
+                {{ misc.state_label(adjustment.locked) }}
+            </td>
+            <td>
+                <div class="pull-right">
+                    {% if editable %}
+                        {{ buttons.patch(path('sylius_backend_order_adjustment_lock', {'id': order.id, 'adjustment': adjustment.id, 'lock': (not adjustment.locked)}), (adjustment.locked ? 'sylius.order.adjustments.unlock' : 'sylius.order.adjustments.lock')|trans, adjustment.locked ? 'ok' : 'lock', 'primary') }}
+                        {{ buttons.delete(path('sylius_backend_order_adjustment_delete', {'id': adjustment.id, 'orderId': order.id})) }}
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if editable %}
+    {{ buttons.patch(path('sylius_backend_order_adjustment_lock', {'id': order.id, 'lock': 1}), 'sylius.order.adjustments.lock_all'|trans, 'lock', 'primary') }}
+    {{ buttons.patch(path('sylius_backend_order_adjustment_lock', {'id': order.id, 'lock': 0}), 'sylius.order.adjustments.unlock_all'|trans, 'ok') }}
+{% endif %}
+
+{% endblock %}

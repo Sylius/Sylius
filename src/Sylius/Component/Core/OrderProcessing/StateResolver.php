@@ -13,8 +13,8 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
-use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 
 /**
  * Order state resolver.

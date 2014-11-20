@@ -25,10 +25,10 @@ class OrderConfirmationMailer extends AbstractMailer implements OrderConfirmatio
      */
     public function sendOrderConfirmation(OrderInterface $order)
     {
-        if (!$user = $order->getUser()) {
-            throw new \InvalidArgumentException('Order has to belong to a User');
+        if (!$email = $order->getEmail()) {
+            throw new \InvalidArgumentException('Order must contain customer email');
         }
 
-        $this->sendEmail(array('order' => $order), $user->getEmail());
+        $this->sendEmail(array('order' => $order), $email);
     }
 }

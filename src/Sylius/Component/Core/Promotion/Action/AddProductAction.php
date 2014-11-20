@@ -16,8 +16,8 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Free product action.
@@ -73,6 +73,8 @@ class AddProductAction implements PromotionActionInterface
             }
         }
 
+        $promotionItem->setImmutable(true);
+
         $subject->addItem($promotionItem);
     }
 
@@ -90,6 +92,7 @@ class AddProductAction implements PromotionActionInterface
         }
 
         $promotionItem = $this->createItem($configuration);
+        $promotionItem->setImmutable(true);
 
         foreach ($subject->getItems() as $item) {
             if ($item->equals($promotionItem)) {

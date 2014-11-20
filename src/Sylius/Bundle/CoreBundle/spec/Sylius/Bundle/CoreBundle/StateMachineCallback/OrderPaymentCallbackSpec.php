@@ -12,8 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use Doctrine\Common\Collections\Collection;
-use SM\Factory\FactoryInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -34,19 +35,44 @@ class OrderPaymentCallbackSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback');
     }
 
+    function it_dispatches_event_on_payment_update_and_will_update_order_state(
+        $factory,
+        PaymentInterface $payment,
+        OrderInterface $order,
+        StateMachineInterface $sm
+    ) {
+        $payment->getOrder()->willReturn($order);
+        $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
+
+        $order->getTotal()->willReturn(0);
+        $order->setPaymentState(PaymentInterface::STATE_CANCELLED)->shouldBeCalled();
+
+        $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
+        $sm->apply(OrderTransitions::SYLIUS_CONFIRM, true)->shouldBeCalled();
+
+        $this->updateOrderOnPayment($payment);
+    }
+
     function it_dispatches_event_on_payment_update(
         $factory,
         PaymentInterface $payment,
         OrderInterface $order,
         StateMachineInterface $sm,
-        Collection $payments
+        Collection $payments,
+        Collection $filteredPayments
     ) {
         $payment->getOrder()->willReturn($order);
+        $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+        $payment->getAmount()->willReturn(1000);
 
         $order->getPayments()->willReturn($payments);
-        $order->getTotal()->willReturn(0);
+        $order->getTotal()->willReturn(1000);
+        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
 
-        $payments->getIterator()->willReturn(new \EmptyIterator());
+        $payments->filter(Argument::any())->willReturn($filteredPayments);
+        $payments->count()->willReturn(1);
+
+        $filteredPayments->count()->willReturn(1);
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
         $sm->apply(OrderTransitions::SYLIUS_CONFIRM, true)->shouldBeCalled();

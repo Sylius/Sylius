@@ -29,9 +29,12 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->beConstructedWith($formFactory);
     }
 
-    function it_subscribes_to_pre_set_data_event()
+    function it_subscribes_to_pre_set_data_and_pre_submit_events()
     {
-        self::getSubscribedEvents()->shouldReturn(array('form.pre_set_data' => 'buildChoices'));
+        self::getSubscribedEvents()->shouldReturn(array(
+            'form.pre_set_data' => 'buildChoices',
+            'form.pre_bind'     => 'buildConfiguration',
+        ));
     }
 
     function it_does_no_not_build_choices_collection_for_null(
@@ -62,13 +65,17 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
 
         $attribute->getType()->willReturn(null);
+        $attribute->getConfiguration()->willReturn(array());
 
         $formFactory
             ->createNamed('choices', 'collection', null, array(
-                'type'         => 'text',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false
+                'type'              => 'text',
+                'allow_add'         => true,
+                'allow_delete'      => true,
+                'by_reference'      => false,
+                'auto_initialize'   => false,
+                'mapped'            => false,
+                'data'              => null,
             ))
             ->willReturn($collectionField)
             ->shouldBeCalled()
@@ -89,13 +96,17 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
 
         $attribute->getType()->willReturn(AttributeTypes::CHOICE);
+        $attribute->getConfiguration()->willReturn(array());
 
         $formFactory
             ->createNamed('choices', 'collection', null, array(
-                'type'         => 'text',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false
+                'type'              => 'text',
+                'allow_add'         => true,
+                'allow_delete'      => true,
+                'by_reference'      => false,
+                'auto_initialize'   => false,
+                'mapped'            => false,
+                'data'              => null,
             ))
             ->willReturn($collectionField)
             ->shouldBeCalled()
@@ -125,5 +136,32 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $form->add(Argument::any())->shouldNotBeCalled();
 
         $this->buildChoices($event);
+    }
+
+    function it_build_configuration_collection_type(
+        FormEvent $event,
+        Form $form,
+        Form $collectionField,
+        $formFactory
+    ) {
+        $event->getData()->willReturn(array('type' => 'foo'));
+        $event->getForm()->willReturn($form);
+        $form->has('configuration')->willReturn(false);
+
+        $formFactory
+            ->createNamed('configuration', 'collection', null, array(
+                'allow_add'         => true,
+                'allow_delete'      => true,
+                'by_reference'      => false,
+                'auto_initialize'   => false,
+            ))
+            ->willReturn($collectionField)
+            ->shouldBeCalled()
+        ;
+
+        $form->add($collectionField)->shouldBeCalled()->willReturn($form);
+        $event->setData(Argument::any())->shouldBeCalled();
+
+        $this->buildConfiguration($event);
     }
 }

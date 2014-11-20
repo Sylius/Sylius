@@ -14,7 +14,7 @@ namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -67,11 +67,11 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
 
         $details = array();
         $details['AMOUNT'] = $order->getTotal();
-        $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
+        $details['CLIENTEMAIL'] = $order->getEmail();
         $details['HIDECLIENTEMAIL'] = 'yes';
         $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
         $details['CLIENTIP'] = $this->httpRequest->getClientIp();
-        $details['CLIENTIDENT'] = $order->getUser()->getId();
+        $details['CLIENTIDENT'] = $order->getUser() ? $order->getUser()->getId() : $order->getEmail();
         $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
         $details['ORDERID'] = $payment->getId();
 

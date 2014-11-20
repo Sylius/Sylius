@@ -14,8 +14,10 @@ namespace Sylius\Bundle\CoreBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -23,6 +25,8 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Pricing\Calculators as PriceCalculators;
+use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -54,6 +58,14 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Given /^I am not logged in$/
+     */
+    public function iAmNotLoggedIn()
+    {
+        $this->getSession()->visit($this->generatePageUrl('fos_user_security_logout'));
+    }
+
+    /**
      * @Given /^there are following orders:$/
      * @Given /^the following orders exist:$/
      * @Given /^there are orders:$/
@@ -62,8 +74,15 @@ class CoreContext extends DefaultContext
     public function thereAreOrders(TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $orderRepository = $this->getRepository('order');
-        $shipmentProcessor = $this->getContainer()->get('sylius.processor.shipment_processor');
+        $finite  = $this->getService('sm.factory');
+        $orderRepository   = $this->getRepository('order');
+        $shipmentProcessor = $this->getService('sylius.processor.shipment_processor');
+
+        /** @var $paymentMethod PaymentMethodInterface */
+        $paymentMethod = $this->getRepository('payment_method')->createNew();
+        $paymentMethod->setName('Stripe');
+        $paymentMethod->setGateway('stripe');
+        $manager->persist($paymentMethod);
 
         $currentOrderNumber = 1;
         foreach ($table->getHash() as $data) {
@@ -81,7 +100,10 @@ class CoreContext extends DefaultContext
             }
 
             $order->setNumber(str_pad($currentOrderNumber, 9, 0, STR_PAD_LEFT));
-            $this->getService('event_dispatcher')->dispatch('sylius.order.pre_create', new GenericEvent($order));
+
+            $finite->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE);
+
+            $this->createPayment($order, $paymentMethod);
 
             $order->setCurrency('EUR');
             $order->complete();
@@ -124,7 +146,7 @@ class CoreContext extends DefaultContext
         $order->complete();
 
         $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
-        $this->getService('event_dispatcher')->dispatch('sylius.cart_change', new GenericEvent($order));
+        $this->getService('event_dispatcher')->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
 
         $manager->persist($order);
         $manager->flush();
@@ -340,7 +362,11 @@ class CoreContext extends DefaultContext
             $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_ITEM_RATE;
             $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
 
-            $this->thereIsShippingMethod($data['name'], $data['zone'], $calculator, $configuration, false);
+            if (!isset($data['enabled'])) {
+                $data['enabled'] = 'yes';
+            }
+
+            $this->thereIsShippingMethod($data['name'], $data['zone'], $calculator, $configuration, 'yes' === $data['enabled'], false);
         }
 
         $this->getEntityManager()->flush();
@@ -350,7 +376,7 @@ class CoreContext extends DefaultContext
      * @Given /^I created shipping method "([^""]*)" within zone "([^""]*)"$/
      * @Given /^There is shipping method "([^""]*)" within zone "([^""]*)"$/
      */
-    public function thereIsShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $flush = true)
+    public function thereIsShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = null, $enabled = true, $flush = true)
     {
         /* @var $method ShippingMethodInterface */
         $method = $this
@@ -362,6 +388,7 @@ class CoreContext extends DefaultContext
         $method->setZone($this->findOneByName('zone', $zoneName));
         $method->setCalculator($calculator);
         $method->setConfiguration($configuration ?: array('amount' => 2500));
+        $method->setEnabled($enabled);
 
         $manager = $this->getEntityManager();
         $manager->persist($method);
@@ -438,6 +465,25 @@ class CoreContext extends DefaultContext
         $address->setCountry($this->findOneByName('country', $addressData[4]));
 
         return $address;
+    }
+
+    /**
+     * Create an payment instance.
+     *
+     * @param OrderInterface         $order
+     * @param PaymentMethodInterface $method
+     */
+    private function createPayment(OrderInterface $order, PaymentMethodInterface $method)
+    {
+        /** @var $payment PaymentInterface */
+        $payment = $this->getRepository('payment')->createNew();
+        $payment->setOrder($order);
+        $payment->setMethod($method);
+        $payment->setAmount($order->getTotal());
+        $payment->setCurrency($order->getCurrency() ?: 'EUR');
+        $payment->setState(PaymentInterface::STATE_COMPLETED);
+
+        $order->addPayment($payment);
     }
 
     /**

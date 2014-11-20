@@ -8,4 +8,4 @@ Feature: Store homepage
         Given there is default currency configured
          When I go to the website root
          Then I should be on the homepage
-          And I should see "Welcome to Sylius"
+          And I should see "Modern ecommerce for Symfony2"

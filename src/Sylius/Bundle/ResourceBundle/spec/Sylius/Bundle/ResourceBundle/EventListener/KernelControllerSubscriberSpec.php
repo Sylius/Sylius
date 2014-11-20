@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
@@ -106,7 +105,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         )->willReturn(array(array(), array()));
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
-        $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
+        $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
 
         $parameterBag->get('_route_params', array())->willReturn(array());
 
@@ -147,7 +146,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         )->willReturn(array(array(), array()));
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
-        $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
+        $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
 
         $parameterBag->get('_route_params', array())->willReturn(array());
 
@@ -191,7 +190,7 @@ class KernelControllerSubscriberSpec extends ObjectBehavior
         )->willReturn(array(array(), array()));
 
         $parameters->replace(Argument::type('array'))->shouldBeCalled();
-        $parameters->set('paramater_name', Argument::type('array'))->shouldBeCalled();
+        $parameters->set('parameter_name', Argument::type('array'))->shouldBeCalled();
 
         $parameterBag->get('_route_params', array())->willReturn(array());
 

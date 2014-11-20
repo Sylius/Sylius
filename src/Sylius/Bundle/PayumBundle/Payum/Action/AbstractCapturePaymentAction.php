@@ -14,21 +14,20 @@ namespace Sylius\Bundle\PayumBundle\Payum\Action;
 use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\SecuredCaptureRequest;
+use Payum\Core\Request\Capture;
 use Payum\Core\Security\TokenInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 abstract class AbstractCapturePaymentAction extends PaymentAwareAction
 {
     /**
      * {@inheritdoc}
+     *
+     * @param $request Capture
      */
     public function execute($request)
     {
-        /** @var $request SecuredCaptureRequest */
-        if (!$this->supports($request)) {
-            throw RequestNotSupportedException::createActionNotSupported($this, $request);
-        }
+        RequestNotSupportedException::assertSupports($this, $request);
 
         /** @var $payment PaymentInterface */
         $payment = $request->getModel();
@@ -57,7 +56,7 @@ abstract class AbstractCapturePaymentAction extends PaymentAwareAction
     public function supports($request)
     {
         return
-            $request instanceof SecuredCaptureRequest &&
+            $request instanceof Capture &&
             $request->getModel() instanceof PaymentInterface
         ;
     }

@@ -34,7 +34,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * The variant price.
      *
-     * @var integer
+     * @var int
      */
     protected $price;
 
@@ -55,28 +55,28 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * On hold.
      *
-     * @var integer
+     * @var int
      */
     protected $onHold = 0;
 
     /**
      * On hand stock.
      *
-     * @var integer
+     * @var int
      */
     protected $onHand = 0;
 
     /**
      * Sold amount.
      *
-     * @var integer
+     * @var int
      */
     protected $sold = 0;
 
     /**
      * Is variant available on demand?
      *
-     * @var Boolean
+     * @var bool
      */
     protected $availableOnDemand = true;
 
@@ -301,7 +301,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (Boolean) $availableOnDemand;
+        $this->availableOnDemand = (bool) $availableOnDemand;
 
         return $this;
     }

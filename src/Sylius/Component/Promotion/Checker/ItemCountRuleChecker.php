@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Promotion\Checker;
 
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * Checks if subject item count exceeds (or at least equal) to the configured count.

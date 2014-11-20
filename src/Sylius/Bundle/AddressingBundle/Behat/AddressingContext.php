@@ -16,7 +16,6 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Symfony\Component\Locale\Locale;
 
 class AddressingContext extends DefaultContext
 {
@@ -44,7 +43,7 @@ class AddressingContext extends DefaultContext
         if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
             $country = $this->getRepository('country')->createNew();
             $country->setName(trim($name));
-            $country->setIsoName(array_search($name, Locale::getDisplayCountries(Locale::getDefault())));
+            $country->setIsoName(substr($name, 0, 3));
 
             if (null !== $provinces) {
                 $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;

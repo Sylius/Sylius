@@ -45,4 +45,3 @@ class Version20140710152234 extends AbstractMigration
         $this->addSql("ALTER TABLE sylius_address DROP user_id;");
     }
 }
-

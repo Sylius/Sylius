@@ -1,6 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% set order = shipment.order %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
@@ -50,7 +51,7 @@
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.order.shipping_total'|trans }}</strong></td>
-                    <td>{{ order.shippingTotal|sylius_price(order.currency) }}</td>
+                    <td>{{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}</td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.shipment.state'|trans }}</strong></td>
@@ -67,12 +68,19 @@
                 <tr>
                     <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
                     <td>
-                        {{ order.user.fullName }}<br>
-                        <strong>
-                            <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                                {{ order.user.username }}
-                            </a>
-                        </strong>
+                        {% if order.user %}
+                            {{ order.user.fullName }}<br>
+                            <strong>
+                                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
+                                    {{ order.user.username }}
+                                </a>
+                            </strong>
+                        {% else %}
+                            {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
+                            <strong>
+                                <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
+                            </strong>
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>

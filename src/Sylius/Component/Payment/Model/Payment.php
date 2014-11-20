@@ -242,7 +242,7 @@ class Payment implements PaymentInterface
             $details = iterator_to_array($details);
         }
 
-        if (false == is_array($details)) {
+        if (!is_array($details)) {
             throw new UnexpectedTypeException($details, 'array');
         }
 

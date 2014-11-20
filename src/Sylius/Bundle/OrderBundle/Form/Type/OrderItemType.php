@@ -30,8 +30,7 @@ class OrderItemType extends AbstractResourceType
             ->add('quantity', 'integer', array(
                 'label' => 'sylius.form.order_item.quantity'
             ))
-            ->add('unitPrice', 'money', array(
-                'divisor' => 100,
+            ->add('unitPrice', 'sylius_money', array(
                 'label'   => 'sylius.form.order_item.unit_price'
             ))
         ;

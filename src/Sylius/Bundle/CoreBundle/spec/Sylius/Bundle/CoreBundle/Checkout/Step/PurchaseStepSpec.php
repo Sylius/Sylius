@@ -12,19 +12,19 @@
 namespace spec\Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface;
 use Payum\Core\PaymentInterface;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Payum\Core\Security\TokenInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
 use spec\Sylius\Bundle\CoreBundle\Fixture\RequestStack;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\Order;
-use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\Model\Payment;
+use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\SyliusPaymentEvents;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
@@ -106,9 +106,9 @@ class PurchaseStepSpec extends ObjectBehavior
         $order->addPayment($paymentModel);
 
         $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
             ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markSuccess();
+                $args[0]->markCaptured();
                 $args[0]->setModel($paymentModel);
             }
         );
@@ -158,9 +158,9 @@ class PurchaseStepSpec extends ObjectBehavior
         $order->addPayment($paymentModel);
 
         $payment
-            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest'))
+            ->execute(Argument::type('Sylius\Bundle\PayumBundle\Payum\Request\GetStatus'))
             ->will(function ($args) use ($order, $paymentModel) {
-                $args[0]->markSuccess();
+                $args[0]->markCaptured();
                 $args[0]->setModel($paymentModel);
             }
         );

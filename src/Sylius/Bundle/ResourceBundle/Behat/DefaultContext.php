@@ -70,9 +70,13 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     public function purgeDatabase(BeforeScenarioScope $scope)
     {
-        $purger = new ORMPurger($this->getService('doctrine.orm.entity_manager'));
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
+        $entityManager = $this->getService('doctrine.orm.entity_manager');
+        $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
+
+        $purger = new ORMPurger($entityManager);
         $purger->purge();
+
+        $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
     }
 
     /**

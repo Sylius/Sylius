@@ -1,8 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_installer:
-    resource: @SyliusInstallerBundle/Resources/config/routing.yml
+    resource: "@SyliusInstallerBundle/Resources/config/routing.yml"
+
+sylius_api:
+    resource: "@SyliusApiBundle/Resources/config/routing/main.yml"
+    prefix: /api
 
 sylius_web:
-    resource: @SyliusWebBundle/Resources/config/routing/main.yml
+    resource: "@SyliusWebBundle/Resources/config/routing/main.yml"
+
+create:
+    resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
+    
+create_image:
+    resource: "@CmfCreateBundle/Resources/config/routing/image.xml"
+
+cmf_media_file:
+    resource: "@CmfMediaBundle/Resources/config/routing/file.xml"
+
+cmf_media_image:
+    resource: "@CmfMediaBundle/Resources/config/routing/image.xml"
 
 payum_capture:
     resource: "@PayumBundle/Resources/config/routing/capture.xml"

@@ -35,6 +35,9 @@ parameters:
     be2bill.password: EDITME
     be2bill.sandbox: true
 
+    stripe.publishable_key: EDITME
+    stripe.secret_key: EDITME
+
     sylius.oauth.amazon.clientid:       <amazon_client_id>
     sylius.oauth.amazon.clientsecret:   <amazon_client_secret>
     sylius.oauth.facebook.clientid:     <facebook_client_id>
@@ -47,6 +50,8 @@ parameters:
     sylius.inventory.holding.duration: 15 minutes
 
     sylius.promotion.item_based: false
+
+    sylius.order.allow_guest_order: false
 
     sylius.order.pending.duration: 3 hours
 

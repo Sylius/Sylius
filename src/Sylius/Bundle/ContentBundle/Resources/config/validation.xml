@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+                                        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.menu.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="label">
+            <constraint name="NotBlank">
+                <option name="message">sylius.menu.label.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.menu_node.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="label">
+            <constraint name="NotBlank">
+                <option name="message">sylius.menu_node.label.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.route.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="content">
+            <constraint name="NotBlank">
+                <option name="message">sylius.route.content.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.slideshow_block.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="title">
+            <constraint name="NotBlank">
+                <option name="message">sylius.slideshow_block.title.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.simple_block.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="title">
+            <constraint name="NotBlank">
+                <option name="message">sylius.simple_block.title.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="body">
+            <constraint name="NotBlank">
+                <option name="message">sylius.simple_block.body.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.static_content.name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="title">
+            <constraint name="NotBlank">
+                <option name="message">sylius.static_content.title.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="body">
+            <constraint name="NotBlank">
+                <option name="message">sylius.static_content.body.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

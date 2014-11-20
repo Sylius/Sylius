@@ -1,8 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 imports:
     - { resource: config.yml }
 
 parameters:
     sylius.promotion.item_based: true
+    sylius.order.allow_guest_order: true
 
 framework:
     test: ~

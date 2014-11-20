@@ -35,6 +35,11 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     /**
      * @var string
      */
+    protected $managerName;
+
+    /**
+     * @var string
+     */
     protected $resourceName;
 
     /**
@@ -42,11 +47,12 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected $templates;
 
-    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $templates = null)
+    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $managerName, $templates = null)
     {
         $this->container = $container;
         $this->prefix = $prefix;
         $this->resourceName = $resourceName;
+        $this->managerName = $managerName;
         $this->templates = $templates;
     }
 

@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
@@ -21,13 +24,17 @@ twig:
     form:
         resources:
             - 'SyliusWebBundle::forms.html.twig'
+            - 'CmfMediaBundle:Form:fields.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    paths:
+        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Core/Resources/views: PayumCore
+        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Stripe/Resources/views: PayumStripe
 
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle']
+    bundles:        ['SyliusWebBundle', 'CmfCreateBundle']
     filters:
         cssrewrite: ~
 
@@ -64,6 +71,7 @@ doctrine_phpcr:
         password: %phpcr_pass%
     odm:
         auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
 
 swiftmailer:
     transport: %sylius.mailer.transport%

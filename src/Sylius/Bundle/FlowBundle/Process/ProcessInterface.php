@@ -39,21 +39,21 @@ interface ProcessInterface
      * Get a collection of steps.
      * Keys will be step names.
      *
-     * @return array
+     * @return StepInterface[]
      */
     public function getSteps();
 
     /**
      * Set steps.
      *
-     * @param array $steps
+     * @param StepInterface[] $steps
      */
     public function setSteps(array $steps);
 
     /**
      * Get steps in correct order.
      *
-     * @return array
+     * @return StepInterface[]
      */
     public function getOrderedSteps();
 
@@ -91,14 +91,14 @@ interface ProcessInterface
      *
      * @param string $name
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasStep($name);
 
     /**
      * Count all steps.
      *
-     * @return integer
+     * @return int
      */
     public function countSteps();
 
@@ -133,7 +133,7 @@ interface ProcessInterface
     /**
      * Get redirection route params after complete.
      *
-     * @return string
+     * @return array
      */
     public function getRedirectParams();
 
@@ -201,16 +201,16 @@ interface ProcessInterface
     public function setForwardRouteParams(array $params);
 
     /**
-     * Get step by index/order
+     * Get step by index/order.
      *
-     * @param string $index
+     * @param int $index
      *
      * @return StepInterface
      */
     public function getStepByIndex($index);
 
     /**
-     * Get step by name
+     * Get step by name.
      *
      * @param string $index
      *

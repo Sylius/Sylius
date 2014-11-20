@@ -22,9 +22,9 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "sylius/currency":          "0.11.*@dev",
-        "sylius/money-bundle":      "0.11.*@dev",
-        "sylius/resource-bundle":   "0.11.*@dev",
+        "sylius/currency":          "0.12.*@dev",
+        "sylius/money-bundle":      "0.12.*@dev",
+        "sylius/resource-bundle":   "0.12.*@dev",
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.12-dev"
         }
     }
 }

@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
+use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Payum\Core\Security\GenericTokenFactoryInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAction
 {
@@ -60,28 +61,42 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
             $m++;
         }
 
-        if ($order->getTaxTotal() !== 0) {
+        if (0 !== $taxTotal = $this->calculateNonNeutralTaxTotal($order)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getTaxTotal() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($taxTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
 
             $m++;
         }
 
-        if ($order->getPromotionTotal() !== 0) {
+        if (0 !== $promotionTotal = $order->getAdjustmentsTotal(AdjustmentInterface::PROMOTION_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getPromotionTotal() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($promotionTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
 
             $m++;
         }
 
-        if ($order->getShippingTotal() !== 0) {
+        if (0 !== $shippingTotal = $order->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
-            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($order->getShippingTotal() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_AMT'.$m]  = round($shippingTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m]  = 1;
         }
 
         $payment->setDetails($details);
+    }
+
+    private function calculateNonNeutralTaxTotal($order)
+    {
+        $nonNeutralTaxTotal = 0;
+        $taxAdjustments = $order->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
+
+        foreach ($taxAdjustments as $taxAdjustment) {
+            if(!$taxAdjustment->isNeutral()){
+                $nonNeutralTaxTotal = $taxAdjustment->getAmount();
+            }
+        }
+
+        return $nonNeutralTaxTotal;
     }
 }

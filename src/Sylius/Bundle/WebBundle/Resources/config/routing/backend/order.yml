@@ -11,6 +11,7 @@ sylius_backend_order_index:
             method: createFilterPaginator
             arguments: [$criteria, $sorting, $deleted]
             paginate: 20
+            sortable: true
 
 sylius_backend_order_create:
     path: /new
@@ -20,6 +21,7 @@ sylius_backend_order_create:
         _sylius:
             template: SyliusWebBundle:Backend/Order:create.html.twig
             redirect: sylius_backend_order_show
+            form:     sylius_advanced_order
 
 sylius_backend_order_update:
     path: /{id}/edit
@@ -28,6 +30,15 @@ sylius_backend_order_update:
         _controller: sylius.controller.order:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Order:update.html.twig
+            redirect: sylius_backend_order_show
+            form:     sylius_advanced_order
+
+sylius_backend_order_revert:
+    path: /{id}/revert/{version}
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.order:revertAction
+        _sylius:
             redirect: sylius_backend_order_show
 
 sylius_backend_order_delete:
@@ -38,6 +49,16 @@ sylius_backend_order_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_order_index
+
+sylius_backend_order_history:
+    path: /{id}/history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:historyAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:history.html.twig
+            method: findForDetailsPage
+            arguments: [$id]
 
 sylius_backend_order_show:
     path: /{id}
@@ -73,3 +94,30 @@ sylius_backend_order_comment_create:
         _sylius:
             template: SyliusWebBundle:Backend/Order:createComment.html.twig
 
+sylius_backend_order_adjustment_index:
+    path: /{id}/adjustments
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Order:adjustments.html.twig
+
+sylius_backend_order_adjustment_lock:
+    path: /{id}/adjustment
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.adjustment:lockAction
+        _sylius:
+            redirect:
+                route: sylius_backend_order_adjustment_index
+                parameters: {'id': $id}
+
+sylius_backend_order_adjustment_delete:
+    path: /{orderId}/adjustment/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.adjustment:deleteAction
+        _sylius:
+            redirect:
+                route: sylius_backend_order_adjustment_index
+                parameters: {'id': $orderId}

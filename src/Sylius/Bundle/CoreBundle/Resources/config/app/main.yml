@@ -8,6 +8,9 @@ imports:
     - { resource: @SyliusInventoryBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusCoreBundle/Resources/config/state-machine.yml }
 
+twig:
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+
 doctrine_cache:
     providers:
         sylius_settings: %sylius.cache%
@@ -23,7 +26,10 @@ knp_gaufrette:
             adapter: %sylius.uploader.filesystem%
 
 liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/media/image
     filter_sets:
         sylius_small:
             filters:
@@ -74,6 +80,18 @@ fos_user:
         form:
             type: sylius_user_registration
 
+fos_rest:
+    disable_csrf_role: ROLE_API
+    view:
+        formats:
+            json: true
+            xml:  true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
+
 hwi_oauth:
     firewall_name: main
     resource_owners:
@@ -91,3 +109,28 @@ hwi_oauth:
             client_id:     %sylius.oauth.google.clientid%
             client_secret: %sylius.oauth.google.clientsecret%
             scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUB:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "%kernel.root_dir%/Resources/FOSUserBundle/serializer"
+            sylius-addressing:
+                namespace_prefix: "Sylius\\Component\\Addressing"
+                path: "@SyliusAddressingBundle/Resources/config/serializer"
+            sylius-core:
+                namespace_prefix: "Sylius\\Component\\Core"
+                path: "@SyliusCoreBundle/Resources/config/serializer"
+            sylius-inventory:
+                namespace_prefix: "Sylius\\Component\\Inventory"
+                path: "@SyliusInventoryBundle/Resources/config/serializer"
+            sylius-product:
+                namespace_prefix: "Sylius\\Component\\Product"
+                path: "@SyliusProductBundle/Resources/config/serializer"
+            sylius-shipping:
+                namespace_prefix: "Sylius\\Component\\Shipping"
+                path: "@SyliusShippingBundle/Resources/config/serializer"
+            sylius-taxation:
+                namespace_prefix: "Sylius\\Component\\Taxation"
+                path: "@SyliusTaxationBundle/Resources/config/serializer"

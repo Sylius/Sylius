@@ -8,8 +8,17 @@ sylius_backend_product_index:
         _controller: sylius.controller.product:indexAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:index.html.twig
+            sortable: true
             method: createFilterPaginator
             arguments: [$criteria, $sorting, $deleted]
+
+# @todo refactor this when PRs about API & search get merged
+sylius_backend_product_find:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:searchAction
+        _format: json
 
 sylius_backend_product_create:
     path: /new

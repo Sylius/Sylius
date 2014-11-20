@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_order_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
+        criteria: {}
+        sorting: { updatedAt: desc }
+
+#sylius_api_order_create:
+#    path: /
+#    methods: [POST]
+#    defaults:
+#        _controller: sylius.controller.order:createAction
+
+#sylius_api_order_update:
+#    path: /{id}
+#    methods: [PUT, PATCH]
+#    defaults:
+#        _controller: sylius.controller.order:updateAction
+
+sylius_api_order_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.order:deleteAction
+        _format: json
+
+sylius_api_order_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction

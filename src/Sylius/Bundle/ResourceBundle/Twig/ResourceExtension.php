@@ -250,7 +250,7 @@ class ResourceExtension extends \Twig_Extension
     private function getParameterName($key)
     {
         $parameterName = $this->parameters->get('parameter_name');
-        if (isset($parameterName[$key])) {
+        if (isset($parameterName[$key]) && !is_array($parameterName[$key])) {
             return $parameterName[$key];
         }
 

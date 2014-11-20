@@ -19,21 +19,28 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="firstName" column="first_name" type="string" />
-        <field name="lastName" column="last_name" type="string" />
+        <field name="firstName" column="first_name" type="string">
+            <gedmo:versioned />
+        </field>
+        <field name="lastName" column="last_name" type="string">
+            <gedmo:versioned />
+        </field>
 
-        <many-to-one field="country" target-entity="Sylius\Component\Addressing\Model\CountryInterface">
-            <join-column name="country_id" referenced-column-name="id" />
-        </many-to-one>
-        <many-to-one field="province" target-entity="Sylius\Component\Addressing\Model\ProvinceInterface">
-            <join-column name="province_id" referenced-column-name="id" />
-        </many-to-one>
-
-        <field name="phoneNumber" column="phone_number" type="string" nullable="true" />
-        <field name="street" column="street" type="string" />
-        <field name="company" column="company" type="string" nullable="true" />
-        <field name="city" column="city" type="string" />
-        <field name="postcode" column="postcode" type="string" />
+        <field name="phoneNumber" column="phone_number" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
+        <field name="street" column="street" type="string">
+            <gedmo:versioned />
+        </field>
+        <field name="company" column="company" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
+        <field name="city" column="city" type="string">
+            <gedmo:versioned />
+        </field>
+        <field name="postcode" column="postcode" type="string">
+            <gedmo:versioned />
+        </field>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
@@ -41,6 +48,18 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <many-to-one field="country" target-entity="Sylius\Component\Addressing\Model\CountryInterface">
+            <join-column name="country_id" referenced-column-name="id" />
+            <gedmo:versioned />
+        </many-to-one>
+
+        <many-to-one field="province" target-entity="Sylius\Component\Addressing\Model\ProvinceInterface">
+            <join-column name="province_id" referenced-column-name="id" />
+            <gedmo:versioned />
+        </many-to-one>
+
+        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

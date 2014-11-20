@@ -12,11 +12,9 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Core\Exception\LogicException;
-use Payum\Core\Security\SensitiveValue;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
-use Sylius\Bundle\PayumBundle\Payum\Request\ObtainCreditCardRequest;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -52,22 +50,14 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 
         $order = $payment->getOrder();
 
-        $this->payment->execute($obtainCreditCardRequest = new ObtainCreditCardRequest($order));
-
         $details = array();
         $details['AMOUNT'] = $order->getTotal();
-        $details['CLIENTEMAIL'] = $order->getUser()->getEmail();
+        $details['CLIENTEMAIL'] = $order->getEmail();
         $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
         $details['CLIENTIP'] = $this->httpRequest->getClientIp();
-        $details['CLIENTIDENT'] = $order->getUser()->getId();
+        $details['CLIENTIDENT'] = $order->getUser() ? $order->getUser()->getId() : $order->getEmail();
         $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
         $details['ORDERID'] = $payment->getId();
-        $details['CARDCODE'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getNumber());
-        $details['CARDCVV'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getSecurityCode());
-        $details['CARDFULLNAME'] = new SensitiveValue($obtainCreditCardRequest->getCreditCard()->getCardholderName());
-        $details['CARDVALIDITYDATE'] = new SensitiveValue(sprintf(
-            '%02d-%02d', $obtainCreditCardRequest->getCreditCard()->getExpiryMonth(), substr($obtainCreditCardRequest->getCreditCard()->getExpiryYear(), -2)
-        ));
 
         $payment->setDetails($details);
     }

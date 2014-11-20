@@ -31,7 +31,7 @@ class ProcessBuilder implements ProcessBuilderInterface
     /**
      * Registered steps.
      *
-     * @var array
+     * @var StepInterface[]
      */
     protected $steps;
 

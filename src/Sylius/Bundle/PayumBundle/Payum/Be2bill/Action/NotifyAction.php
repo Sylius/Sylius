@@ -12,13 +12,13 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface;
+use Payum\Core\Bridge\Symfony\Reply\HttpResponse;
+use Payum\Core\Request\Notify;
 use Payum\Be2Bill\Api;
-use Payum\Bundle\PayumBundle\Request\ResponseInteractiveRequest;
 use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\NotifyRequest;
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
-use Sylius\Bundle\PayumBundle\Payum\Request\StatusRequest;
+use Sylius\Bundle\PayumBundle\Payum\Request\GetStatus;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,10 +73,11 @@ class NotifyAction extends AbstractPaymentStateAwareAction
 
     /**
      * {@inheritDoc}
+     *
+     * @param $request Notify
      */
     public function execute($request)
     {
-        /** @var $request NotifyRequest */
         if (!$this->supports($request)) {
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
@@ -105,16 +106,16 @@ class NotifyAction extends AbstractPaymentStateAwareAction
         $details = array_merge($payment->getDetails(), $details);
         $payment->setDetails($details);
 
-        $status = new StatusRequest($payment);
+        $status = new GetStatus($payment);
         $this->payment->execute($status);
 
-        $nextState = $status->getStatus();
+        $nextState = $status->getValue();
 
         $this->updatePaymentState($payment, $nextState);
 
         $this->objectManager->flush();
 
-        throw new ResponseInteractiveRequest(new Response('OK', 200));
+        throw new HttpResponse(new Response('OK', 200));
     }
 
     /**
@@ -122,6 +123,6 @@ class NotifyAction extends AbstractPaymentStateAwareAction
      */
     public function supports($request)
     {
-        return $request instanceof NotifyRequest;
+        return $request instanceof Notify;
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,7 +42,7 @@ interface CoordinatorInterface
      * @param string       $stepName
      * @param ParameterBag $queryParameters
      *
-     * @return Response
+     * @return Response|View
      */
     public function display($scenarioAlias, $stepName, ParameterBag $queryParameters = null);
 
@@ -52,7 +53,7 @@ interface CoordinatorInterface
      * @param string $scenarioAlias
      * @param string $stepName
      *
-     * @return Response
+     * @return Response|View
      */
     public function forward($scenarioAlias, $stepName);
 

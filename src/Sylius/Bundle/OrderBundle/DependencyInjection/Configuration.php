@@ -37,6 +37,13 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->booleanNode('guest_order')
+                    ->beforeNormalization()
+                        ->ifString()
+                        ->then(function ($v) { return (bool) $v; })
+                    ->end()
+                    ->defaultFalse()
+                ->end()
             ->end()
         ;
 
@@ -114,7 +121,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\Adjustment')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\OrderBundle\Controller\AdjustmentController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType')->end()
                             ->end()

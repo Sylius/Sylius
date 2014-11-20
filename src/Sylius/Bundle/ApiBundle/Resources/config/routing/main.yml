@@ -1,0 +1,82 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_product:
+    resource: @SyliusApiBundle/Resources/config/routing/product.yml
+    prefix: /products
+
+sylius_api_product_variant:
+    resource: @SyliusApiBundle/Resources/config/routing/product_variant.yml
+    prefix: /products/{productId}/variants
+
+sylius_api_product_option:
+    resource: @SyliusApiBundle/Resources/config/routing/product_option.yml
+    prefix: /product-options
+
+sylius_api_product_attribute:
+    resource: @SyliusApiBundle/Resources/config/routing/product_attribute.yml
+    prefix: /product-attributes
+
+sylius_api_product_prototype:
+    resource: @SyliusApiBundle/Resources/config/routing/product_prototype.yml
+    prefix: /product-prototypes
+
+sylius_api_taxonomy:
+    resource: @SyliusApiBundle/Resources/config/routing/taxonomy.yml
+    prefix: /taxonomies
+
+sylius_api_taxon:
+    resource: @SyliusApiBundle/Resources/config/routing/taxon.yml
+    prefix: /taxonomies/{taxonomyId}/taxons
+
+sylius_api_order:
+    resource: @SyliusApiBundle/Resources/config/routing/order.yml
+    prefix: /orders
+
+sylius_api_promotion:
+    resource: @SyliusApiBundle/Resources/config/routing/promotion.yml
+    prefix: /promotions
+
+sylius_api_tax_category:
+    resource: @SyliusApiBundle/Resources/config/routing/tax_category.yml
+    prefix: /tax-categories
+
+sylius_api_tax_rate:
+    resource: @SyliusApiBundle/Resources/config/routing/tax_rate.yml
+    prefix: /tax-rates
+
+sylius_api_shipping_category:
+    resource: @SyliusApiBundle/Resources/config/routing/shipping_category.yml
+    prefix: /shipping-categories
+
+sylius_api_shipping_method:
+    resource: @SyliusApiBundle/Resources/config/routing/shipping_method.yml
+    prefix: /shipping-methods
+
+sylius_api_shipment:
+    resource: @SyliusApiBundle/Resources/config/routing/shipment.yml
+    prefix: /shipments
+
+sylius_api_payment_method:
+    resource: @SyliusApiBundle/Resources/config/routing/payment_method.yml
+    prefix: /payment-methods
+
+sylius_api_payment:
+    resource: @SyliusApiBundle/Resources/config/routing/payment.yml
+    prefix: /payments
+
+sylius_api_country:
+    resource: @SyliusApiBundle/Resources/config/routing/country.yml
+    prefix: /countries
+
+sylius_api_province:
+    resource: @SyliusApiBundle/Resources/config/routing/province.yml
+    prefix: /countries/{countryId}/provinces
+
+sylius_api_zone:
+    resource: @SyliusApiBundle/Resources/config/routing/zone.yml
+    prefix: /zones
+
+sylius_api_user:
+    resource: @SyliusApiBundle/Resources/config/routing/user.yml
+    prefix: /users

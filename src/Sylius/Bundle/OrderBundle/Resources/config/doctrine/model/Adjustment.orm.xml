@@ -22,17 +22,14 @@
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="adjustments">
-            <join-column name="order_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
-        <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="adjustments">
-            <join-column name="order_item_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
-
         <field name="label" column="label" type="string" />
         <field name="description" column="description" type="string" nullable="true" />
         <field name="amount" column="amount" type="integer" />
         <field name="neutral" column="is_neutral" type="boolean" />
+        <field name="locked" column="is_locked" type="boolean" />
+
+        <field name="originId" column="origin_id" type="integer" nullable="true" />
+        <field name="originType" column="origin_type" type="string" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
@@ -40,6 +37,14 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="adjustments">
+            <join-column name="order_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <many-to-one field="orderItem" target-entity="Sylius\Component\Order\Model\OrderItemInterface" inversed-by="adjustments">
+            <join-column name="order_item_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -36,7 +36,7 @@ Feature: Checkout security
             | Email    | john@example.com |
             | Password | habababa         |
           And I press "Login"
-         Then I should see "Bad credentials"
+         Then I should see "Invalid credentials"
 
     Scenario: Signing in during the checkout
          When I fill in the following:
@@ -79,5 +79,6 @@ Feature: Checkout security
             | fos_user_registration_form_plainPassword_first  | mikepass         |
             | fos_user_registration_form_plainPassword_second | mikepass         |
           And I press "Register"
-         Then I should see "Please enter your first name"
+         Then I should be on the checkout security forward step
+          And I should see "Please enter your first name"
           And I should see "Please enter your last name"

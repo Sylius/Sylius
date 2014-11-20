@@ -8,6 +8,7 @@ sylius_core:
             prefix: /p
             defaults:
                 controller: sylius.controller.product:showAction
+                repository: sylius.repository.product
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:show.html.twig
                     criteria: {slug: $slug}
@@ -16,6 +17,7 @@ sylius_core:
             prefix: /t
             defaults:
                 controller: sylius.controller.product:indexByTaxonAction
+                repository: sylius.repository.taxon
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
 
@@ -32,6 +34,8 @@ sylius_locale: ~
 
 sylius_currency: ~
 
+sylius_contact: ~
+
 sylius_api:
     classes:
         api_user:
@@ -46,6 +50,12 @@ sylius_cart:
             form: Sylius\Bundle\CoreBundle\Form\Type\CartType
 
 sylius_settings: ~
+
+sylius_content:
+    driver: doctrine/phpcr-odm
+    classes:
+        static_content:
+            repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
 
 sylius_taxonomy:
     classes:
@@ -96,6 +106,9 @@ sylius_promotion:
     classes:
         promotion_subject:
             model: %sylius.model.order.class%
+        promotion_coupon:
+            model: Sylius\Component\Core\Model\Coupon
+            form: Sylius\Bundle\CoreBundle\Form\Type\CouponType
 
 sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
@@ -115,6 +128,7 @@ sylius_payment:
         dummy: Test
         stripe: Stripe
         be2bill: Be2Bill
+        stripe_checkout: Stripe Checkout
 
 sylius_payum: ~
 
@@ -128,6 +142,7 @@ sylius_addressing:
             model: Sylius\Component\Core\Model\Address
 
 sylius_order:
+    guest_order: %sylius.order.allow_guest_order%
     classes:
         order:
             model: Sylius\Component\Core\Model\Order
@@ -136,6 +151,7 @@ sylius_order:
             form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
             model: Sylius\Component\Core\Model\OrderItem
+            form: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
 
 sylius_sequence:
     generators:
@@ -157,15 +173,6 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Component\Core\Model\Group
-        sylius.block:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock
-        sylius.page:
-            driver: doctrine/phpcr-odm
-            classes:
-                model: Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ODM\PHPCR\PageRepository
 
 sylius_pricing:
     forms:

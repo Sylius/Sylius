@@ -181,6 +181,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('scopes')
+                    ->useAttributeAsKey('name')
                     ->prototype('scalar')->end()
                 ->end()
             ->end()

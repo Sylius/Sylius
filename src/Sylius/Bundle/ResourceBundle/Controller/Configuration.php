@@ -180,10 +180,52 @@ class Configuration
         }
 
         if (is_array($redirect)) {
+            if (!empty($redirect['referer'])) {
+                return 'referer';
+            }
+
             return $redirect['route'];
         }
 
         return $redirect;
+    }
+
+    /**
+     * Get url hash fragment (#text) which is you configured.
+     *
+     * @return null|string
+     */
+    public function getRedirectHash()
+    {
+        $redirect = $this->parameters->get('redirect');
+
+        if (!is_array($redirect) || empty($redirect['hash'])) {
+            return null;
+        }
+
+        return '#' . $redirect['hash'];
+    }
+
+    /**
+     * Get redirect referer, This will detected by configuration
+     * If not exists, The `referrer` from headers will be used.
+     *
+     * @return null|string
+     */
+    public function getRedirectReferer()
+    {
+        $redirect = $this->parameters->get('redirect');
+        $referer = $this->request->headers->get('referer');
+
+        if (!is_array($redirect) || empty($redirect['referer'])) {
+            return $referer;
+        }
+
+        if ($redirect['referer'] === true) {
+            return $referer;
+        }
+
+        return $redirect['referer'];
     }
 
     /**
@@ -195,7 +237,7 @@ class Configuration
     {
         $redirect = $this->parameters->get('redirect');
 
-        if (null === $redirect || !is_array($redirect)) {
+        if (!is_array($redirect) || empty($redirect['parameters'])) {
             $redirect = array('parameters' => array());
         }
 
@@ -210,7 +252,7 @@ class Configuration
 
     public function isLimited()
     {
-        return (boolean) $this->parameters->get('limit', $this->settings['limit']);
+        return (bool) $this->parameters->get('limit', $this->settings['limit']);
     }
 
     public function getLimit()
@@ -225,7 +267,7 @@ class Configuration
 
     public function isPaginated()
     {
-        return (boolean) $this->parameters->get('paginate', $this->settings['default_page_size']);
+        return (bool) $this->parameters->get('paginate', $this->settings['default_page_size']);
     }
 
     public function getPaginationMaxPerPage()
@@ -235,17 +277,13 @@ class Configuration
 
     public function isFilterable()
     {
-        return (boolean) $this->parameters->get('filterable', $this->settings['filterable']);
+        return (bool) $this->parameters->get('filterable', $this->settings['filterable']);
     }
 
     public function getCriteria(array $criteria = array())
     {
         if ($this->isFilterable()) {
-            $criteria = array_merge(
-                $criteria,
-                $this->parameters->get('criteria', array()),
-                $this->request->get('criteria', array())
-            );
+            return $this->request->get('criteria', $this->parameters->get('criteria', $criteria));
         }
 
         return $criteria;
@@ -253,17 +291,13 @@ class Configuration
 
     public function isSortable()
     {
-        return (Boolean) $this->parameters->get('sortable', $this->settings['sortable']);
+        return (bool) $this->parameters->get('sortable', $this->settings['sortable']);
     }
 
     public function getSorting(array $sorting = array())
     {
         if ($this->isSortable()) {
-            $sorting = array_merge(
-                $sorting,
-                $this->parameters->get('sorting', array()),
-                $this->request->get('sorting', array())
-            );
+            return $this->request->get('sorting', $this->parameters->get('sorting', $sorting));
         }
 
         return $sorting;

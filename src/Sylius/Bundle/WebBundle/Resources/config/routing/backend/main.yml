@@ -120,17 +120,17 @@ sylius_backend_locale:
     resource: @SyliusWebBundle/Resources/config/routing/backend/locale.yml
     prefix: /locales
 
-sylius_backend_block:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/block.yml
-    prefix: /blocks
-
-sylius_backend_page:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/page.yml
-    prefix: /pages
-
 sylius_backend_api_client:
     resource: @SyliusWebBundle/Resources/config/routing/backend/api_client.yml
     prefix: /api-clients
+
+sylius_backend_contact_topic:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/contact_topic.yml
+    prefix: /contact-topics
+
+sylius_backend_contact_request:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/contact_request.yml
+    prefix: /contact-requests
 
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
@@ -138,3 +138,8 @@ sylius_backend_settings:
 
 sylius_backend_security:
     resource: @SyliusWebBundle/Resources/config/routing/backend/security.yml
+
+sylius_backend_content:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/content/main.yml
+    prefix: /content
+    

@@ -137,6 +137,27 @@
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
                 </tr>
+                {% if product.masterVariant.pricingCalculator == 'volume_based' %}
+                <tr>
+                    <td>{{ 'sylius.product.volume_price'|trans }}</td>
+                    <td>
+                        <table class="table table-bordered table-striped table-condensed">
+                            <tr>
+                                <th>{{ 'sylius.product.volume_based.price'|trans }}</th>
+                                <th>{{ 'sylius.product.volume_based.qty_min'|trans }}</th>
+                                <th>{{ 'sylius.product.volume_based.qty_max'|trans }}</th>
+                            </tr>
+                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not sameas(null) and pricing.price is not sameas(null)) %}
+                                <tr>
+                                    <td>{{ pricing.price|sylius_price }}</td>
+                                    <td>{{ pricing.min }}</td>
+                                    <td>{{ pricing.max|default('~') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>

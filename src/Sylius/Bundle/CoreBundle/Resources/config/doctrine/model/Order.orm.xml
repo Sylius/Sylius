@@ -3,14 +3,22 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Core\Model\Order" table="sylius_order">
+        <field name="currency" length="3">
+            <gedmo:versioned />
+        </field>
+        <field type="string" name="paymentState" column="payment_state" />
+        <field type="string" name="shippingState" column="shipping_state" />
+
         <many-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-persist/>
             </cascade>
             <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
+            <gedmo:versioned />
         </many-to-one>
 
         <many-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
@@ -18,6 +26,7 @@
                 <cascade-all/>
             </cascade>
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
+            <gedmo:versioned />
         </many-to-one>
 
         <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
@@ -29,6 +38,7 @@
                     <join-column name="promotion_coupon_id" referenced-column-name="id" />
                 </inverse-join-columns>
             </join-table>
+            <gedmo:versioned />
         </many-to-many>
 
         <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
@@ -47,10 +57,6 @@
             <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <field name="currency" length="3" />
-        <field type="string" name="paymentState" column="payment_state" />
-        <field type="string" name="shippingState" column="shipping_state" />
-
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
             <join-table name="sylius_promotion_order">
                 <join-columns>
@@ -63,7 +69,10 @@
             <cascade>
                 <cascade-persist />
             </cascade>
+            <gedmo:versioned />
         </many-to-many>
+
+        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>
