@@ -12,25 +12,13 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\AddressInterface as BaseAddressInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 
 /**
  * Address model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AddressInterface extends BaseAddressInterface
+interface AddressInterface extends BaseAddressInterface, CustomerAwareInterface
 {
-    /**
-     * Get user.
-     *
-     * @return UserInterface
-     */
-    public function getUser();
-
-    /**
-     * Set user.
-     *
-     * @param UserInterface $user
-     */
-    public function setUser(UserInterface $user = null);
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\Address as BaseAddress;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * Address entity.
@@ -21,27 +22,25 @@ use Sylius\Component\Addressing\Model\Address as BaseAddress;
 class Address extends BaseAddress implements AddressInterface
 {
     /**
-     * User.
+     * Customer.
      *
-     * @var UserInterface
+     * @var CustomerInterface
      */
-    protected $user;
+    protected $customer;
 
     /**
      * {@inheritdoc}
      */
-    public function getUser()
+    public function getCustomer()
     {
-        return $this->user;
+        return $this->customer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user = null)
+    public function setCustomer(CustomerInterface $customer = null)
     {
-        $this->user = $user;
-
-        return $this;
+        $this->customer = $customer;
     }
 }

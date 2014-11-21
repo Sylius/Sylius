@@ -24,7 +24,7 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
+interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface
 {
     const CHECKOUT_STATE_CART       = 'cart';
     const CHECKOUT_STATE_ADDRESSING = 'addressing';

@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
+
 /**
  * User OAuth model.
  *
@@ -104,7 +106,7 @@ class UserOAuth implements UserOAuthInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user)
+    public function setUser(BaseUserInterface $user = null)
     {
         $this->user = $user;
 

@@ -1,0 +1,45 @@
+{
+    "name": "sylius/customer",
+    "type": "library",
+    "description": "Sylius e-commerce component that holds details about customers.",
+    "keywords": ["shop", "ecommerce", "customer", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/addressing": "0.12.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Customer\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Customer\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.12-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}

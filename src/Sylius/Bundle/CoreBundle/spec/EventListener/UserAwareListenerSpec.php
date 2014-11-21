@@ -48,7 +48,7 @@ class UserAwareListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($resource);
 
-        $securityContext->getToken()->willReturn(null);
+        $order->setCustomer(Argument::any())->shouldNotBeCalled();
 
         $resource->setUser(Argument::any())->shouldNotBeCalled();
 
@@ -69,7 +69,7 @@ class UserAwareListenerSpec extends ObjectBehavior
 
         $token->getUser()->willReturn($user);
 
-        $resource->setUser($user)->shouldBeCalled();
+        $order->setCustomer($user)->shouldBeCalled();
 
         $this->setUser($event);
     }

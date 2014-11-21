@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -21,57 +22,8 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, IdentityInterface, TimestampableInterface
+interface UserInterface extends BaseUserInterface, CustomerAwareInterface, IdentityInterface, TimestampableInterface
 {
-    /**
-     * Get first name.
-     *
-     * @return string
-     */
-    public function getFirstName();
-
-    /**
-     * Set first name
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
-
-    /**
-     * Get last name.
-     *
-     * @return string
-     */
-    public function getLastName();
-
-    /**
-     * Set last name.
-     *
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
-
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string $currency
-     */
-    public function setCurrency($currency);
-
-    /**
-     * Get orders.
-     *
-     * @return Collection|OrderInterface[]
-     */
-    public function getOrders();
-
     /**
      * Get billing address.
      *
@@ -101,36 +53,6 @@ interface UserInterface extends BaseUserInterface, IdentityInterface, Timestampa
     public function setShippingAddress(AddressInterface $shippingAddress = null);
 
     /**
-     * Get addresses.
-     *
-     * @return Collection|AddressInterface[]
-     */
-    public function getAddresses();
-
-    /**
-     * Add address.
-     *
-     * @param AddressInterface $address
-     */
-    public function addAddress(AddressInterface $address);
-
-    /**
-     * Remove address.
-     *
-     * @param AddressInterface $address
-     */
-    public function removeAddress(AddressInterface $address);
-
-    /**
-     * Has address?
-     *
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
-    public function hasAddress(AddressInterface $address);
-
-    /**
      * Get connected OAuth accounts.
      *
      * @return Collection|UserOAuthInterface[]
@@ -154,4 +76,11 @@ interface UserInterface extends BaseUserInterface, IdentityInterface, Timestampa
      * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
+
+    /**
+     * Get orders.
+     *
+     * @return Collection|OrderInterface[]
+     */
+    public function getOrders();
 }

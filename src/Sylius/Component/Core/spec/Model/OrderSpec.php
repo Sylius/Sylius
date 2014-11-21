@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -46,10 +46,10 @@ class OrderSpec extends ObjectBehavior
         $this->getUser()->shouldReturn(null);
     }
 
-    function it_should_allow_defining_user(UserInterface $user)
+    function it_should_allow_defining_user(CustomerInterface $user)
     {
-        $this->setUser($user);
-        $this->getUser()->shouldReturn($user);
+        $this->setCustomer($user);
+        $this->getCustomer()->shouldReturn($user);
     }
 
     function it_should_not_have_shipping_address_by_default()
@@ -217,13 +217,6 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item);
 
         $this->shouldNotBeBackorder();
-    }
-
-    function it_should_allow_defining_email_from_user(UserInterface $user)
-    {
-        $user->getEmail()->willReturn('example@example.com');
-        $this->setUser($user);
-        $this->getEmail()->shouldReturn('example@example.com');
     }
 
     /**

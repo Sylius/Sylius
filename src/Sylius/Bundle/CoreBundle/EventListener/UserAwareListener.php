@@ -42,7 +42,7 @@ class UserAwareListener
             return;
         }
 
-        $resource->setUser($user);
+        $resource->setCustomer($user);
     }
 
     protected function getUser()

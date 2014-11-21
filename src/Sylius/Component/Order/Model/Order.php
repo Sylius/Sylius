@@ -13,6 +13,7 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * Model for orders.
@@ -55,6 +56,13 @@ class Order implements OrderInterface
      * @var int
      */
     protected $itemsTotal = 0;
+
+    /**
+     * Customer.
+     *
+     * @var CustomerInterface
+     */
+    protected $customer;
 
     /**
      * Adjustments.
@@ -135,13 +143,6 @@ class Order implements OrderInterface
     protected $state = OrderInterface::STATE_CART;
 
     /**
-     * Customer email.
-     *
-     * @var string
-     */
-    protected $email;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -164,19 +165,17 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
+    public function getCustomer()
     {
-        return $this->email;
+        return $this->customer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setCustomer(CustomerInterface $customer = null)
     {
-        $this->email = $email;
-
-        return $this;
+        $this->customer = $customer;
     }
 
     /**
