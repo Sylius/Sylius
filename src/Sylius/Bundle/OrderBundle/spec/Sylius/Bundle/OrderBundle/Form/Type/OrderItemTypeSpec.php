@@ -44,7 +44,7 @@ class OrderItemTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('unitPrice', 'money', Argument::any())
+            ->add('unitPrice', 'sylius_money', Argument::any())
             ->willReturn($builder)
         ;
 

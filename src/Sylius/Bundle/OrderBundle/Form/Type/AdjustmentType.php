@@ -34,8 +34,7 @@ class AdjustmentType extends AbstractResourceType
                 'label'    => 'sylius.form.adjustment.description',
                 'required' => false,
             ))
-            ->add('amount', 'money', array(
-                'divisor' => 100,
+            ->add('amount', 'sylius_money', array(
                 'label'   => 'sylius.form.adjustment.amount'
             ))
         ;

@@ -67,11 +67,8 @@ class MenuNodeType extends AbstractResourceType
             ->add('route', null, array(
                 'label' => 'sylius.form.menu_node_block.route'
             ))
-            ->add('content', null, array(
-                'class' => 'Symfony\Cmf\Bundle\ContentBundle\Model\StaticContent',
-                'property' => 'title',
+            ->add('content', 'sylius_content_choice', array(
                 'label' => 'sylius.form.menu_node_block.content',
-                'required' => false
              ))
             ->add('uri', null, array(
                 'label' => 'sylius.form.menu_node_block.uri'

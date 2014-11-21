@@ -19,7 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Doctrine\Common\Persistence\ObjectRepository;
 
+/**
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ */
 class RouteProvider extends DoctrineProvider implements RouteProviderInterface
 {
     /**
@@ -28,6 +32,13 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
      * @var array
      */
     protected $routeConfigs;
+
+    /**
+     * Contains an associative array of all the classes and the repositories needed in route generation
+     *
+     * @var ObjectRepository[]
+     */
+    protected $classRepositories = array();
 
     /**
      * @param ManagerRegistry $managerRegistry
@@ -51,8 +62,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             }
         }
 
-        $repositories = $this->getRepositories();
-        foreach ($repositories as $className => $repository) {
+        foreach ($this->classRepositories as $className => $repository) {
             $entity = $repository->findOneBy(array($this->routeConfigs[$className]['field'] => $name));
             if ($entity) {
                 return $this->createRouteFromEntity($entity);
@@ -73,8 +83,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             }
 
             $collection = new RouteCollection();
-            $repositories = $this->getRepositories();
-            foreach ($repositories as $className => $repository) {
+            foreach ($this->classRepositories as $className => $repository) {
                 $entities = $repository->findBy(array(), null, $this->routeCollectionLimit ?: null);
                 foreach ($entities as $entity) {
                     $name = $this->getFieldValue($entity, $this->routeConfigs[$className]['field']);
@@ -109,8 +118,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             return $collection;
         }
 
-        $repositories = $this->getRepositories();
-        foreach ($repositories as $className => $repository) {
+        foreach ($this->classRepositories as $className => $repository) {
             if ('' === $this->routeConfigs[$className]['prefix']
                 || 0 === strpos($path, $this->routeConfigs[$className]['prefix'])
             ) {
@@ -134,17 +142,14 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * @return array
+     * This method is called from a compiler pass
+     *
+     * @param string           $class
+     * @param ObjectRepository $repository
      */
-    protected function getRepositories()
+    public function addRepository($class, ObjectRepository $repository)
     {
-        $om = $this->getObjectManager();
-        $repositories = array();
-        foreach ($this->routeConfigs as $className => $foo) {
-            $repositories[$className] = $om->getRepository($className);
-        }
-
-        return $repositories;
+        $this->classRepositories[$class] = $repository;
     }
 
     /**

@@ -39,8 +39,8 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_adds_product_as_promotion(
-        RepositoryInterface $itemRepository,
-        RepositoryInterface $variantRepository,
+        $itemRepository,
+        $variantRepository,
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
@@ -64,8 +64,8 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_does_not_add_product_if_exists(
-        RepositoryInterface $variantRepository,
-        RepositoryInterface $itemRepository,
+        $variantRepository,
+        $itemRepository,
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
@@ -89,8 +89,8 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_reverts_product(
-        RepositoryInterface $variantRepository,
-        RepositoryInterface $itemRepository,
+        $variantRepository,
+        $itemRepository,
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
