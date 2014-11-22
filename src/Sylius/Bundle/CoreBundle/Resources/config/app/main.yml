@@ -134,3 +134,6 @@ jms_serializer:
             sylius-taxation:
                 namespace_prefix: "Sylius\\Component\\Taxation"
                 path: "@SyliusTaxationBundle/Resources/config/serializer"
+            sylius-taxonomy:
+                namespace_prefix: "Sylius\\Component\\Taxonomy"
+                path: "@SyliusTaxonomyBundle/Resources/config/serializer"

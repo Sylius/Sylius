@@ -23,6 +23,21 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
     /**
      * @{inheritDoc}
      */
+    public function getTransitionFromState($fromState)
+    {
+        foreach ($this->getPossibleTransitions() as $transition) {
+            $config = $this->config['transitions'][$transition];
+            if (in_array($fromState, $config['from'])) {
+                return $transition;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @{inheritDoc}
+     */
     public function getTransitionToState($toState)
     {
         foreach ($this->getPossibleTransitions() as $transition) {

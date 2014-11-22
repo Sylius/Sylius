@@ -9,3 +9,6 @@ Sylius\Component\Product\Model\Variant:
         availableOn:
             expose: true
             type: DateTime
+        object:
+            expose: true
+            serialized_name: product

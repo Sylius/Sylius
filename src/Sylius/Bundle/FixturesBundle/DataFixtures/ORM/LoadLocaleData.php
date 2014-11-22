@@ -15,16 +15,16 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 
 /**
- * Default currency fixtures.
+ * Default locale fixtures.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class LoadCurrencyData extends DataFixture
+class LoadLocaleData extends DataFixture
 {
-    protected $currencies = array(
-        'EUR' => 1.00,
-        'USD' => 1.30,
-        'GBP' => 0.85
+    protected $locales = array(
+        'en_US',
+        'en_GB',
+        'de_DE',
     );
 
     /**
@@ -32,18 +32,17 @@ class LoadCurrencyData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $currencyRepository = $this->getCurrencyRepository();
+        $localeRepository = $this->getLocaleRepository();
 
-        foreach ($this->currencies as $code => $rate) {
-            $currency = $currencyRepository->createNew();
+        foreach ($this->locales as $code) {
+            $locale = $localeRepository->createNew();
 
-            $currency->setCode($code);
-            $currency->setExchangeRate($rate);
-            $currency->setEnabled(true);
+            $locale->setCode($code);
+            $locale->setEnabled(true);
 
-            $this->setReference('Sylius.Currency.'.$code, $currency);
+            $this->setReference('Sylius.Locale.'.$code, $locale);
 
-            $manager->persist($currency);
+            $manager->persist($locale);
         }
 
         $manager->flush();

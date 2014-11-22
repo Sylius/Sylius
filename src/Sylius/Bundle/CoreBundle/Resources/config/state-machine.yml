@@ -1,4 +1,33 @@
 winzou_state_machine:
+    sylius_order_checkout:
+        class:         %sylius.model.order.class%
+        property_path: checkoutState
+        graph:         sylius_order_checkout
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            cart: ~
+            addressing: ~
+            shipping: ~
+            payment: ~
+            finalize: ~
+            completed: ~
+        transitions:
+            addressing:
+                from: [cart]
+                to:   addressing
+            shipping:
+                from: [addressing]
+                to:   shipping
+            payment:
+                from: [shipping]
+                to:   payment
+            finalize:
+                from: [payment]
+                to:   finalize
+            complete:
+                from: [finalize]
+                to:   completed
+
     sylius_order_shipping:
         class:         %sylius.model.order.class%
         property_path: shippingState

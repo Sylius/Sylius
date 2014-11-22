@@ -64,6 +64,6 @@ class CurrencyCodeChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_currency_core_choice';
+        return 'sylius_currency_code_choice';
     }
 }
