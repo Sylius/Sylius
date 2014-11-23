@@ -38,17 +38,22 @@ sylius:
                 country: Country
             type: Type
         coupon:
-            usage_limit: Usage limit
-            expires_at: Expires at
             amount: Amount
+            expires_at: Expires at
+            usage_limit: Usage limit
             type: Coupon type
             types:
                 coupon: Coupon
                 gift_card: Gift card
         coupon_generate_instruction:
-            value: Gift card value
+            amount: Amount
             usage_limit: Usage limit
             expires_at: Expires at
+            type: Coupon type
+            types:
+                coupon: Coupon
+                gift_card: Gift card
+            value: Gift card value
         promotion:
             actions: Actions
             add_action: Add action

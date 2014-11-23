@@ -13,10 +13,16 @@ namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 
 class CouponUsageCallbackSpec extends ObjectBehavior
 {
+    function let(OriginatorInterface $originator)
+    {
+        $this->beConstructedWith($originator);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback');
@@ -32,5 +38,17 @@ class CouponUsageCallbackSpec extends ObjectBehavior
         $coupon->getType()->willReturn(CouponInterface::TYPE_COUPON);
 
         $this->incrementCouponUsage($order);
+    }
+
+    function it_decrements_coupon_usage_if_coupon_was_set(
+        OrderInterface $order,
+        CouponInterface $coupon
+    ) {
+        $order->getPromotionCoupons()->willReturn(array($coupon));
+
+        $coupon->decrementUsed()->shouldBeCalled();
+        $coupon->getType()->willReturn(CouponInterface::TYPE_COUPON);
+
+        $this->decrementCouponUsage($order);
     }
 }

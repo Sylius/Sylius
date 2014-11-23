@@ -32,7 +32,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
             ->orderBy($this->getPropertyName('priority'), 'DESC')
         ;
 
-        $qb = $this->filterByActive($qb);
+        $this->filterByActive($qb);
 
         return $qb
             ->getQuery()

@@ -21,8 +21,8 @@ use Sylius\Component\Promotion\Model\CouponInterface;
 class Instruction
 {
     protected $amount = 5;
-    protected $value  = 0;
-    protected $type   = CouponInterface::TYPE_COUPON;
+    protected $value = 0;
+    protected $type = CouponInterface::TYPE_COUPON;
     protected $usageLimit;
     protected $expiresAt;
 
@@ -46,8 +46,6 @@ class Instruction
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     public function getValue()

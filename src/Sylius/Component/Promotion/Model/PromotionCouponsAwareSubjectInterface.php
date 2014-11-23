@@ -19,6 +19,21 @@ use Doctrine\Common\Collections\Collection;
 interface PromotionCouponsAwareSubjectInterface extends PromotionSubjectInterface
 {
     /**
+     * @param CouponInterface $coupon
+     */
+    public function addPromotionCoupon(CouponInterface $coupon);
+
+    /**
+     * @param CouponInterface $coupon
+     */
+    public function removePromotionCoupon(CouponInterface $coupon);
+
+    /**
+     * @param CouponInterface $coupon
+     */
+    public function hasPromotionCoupon(CouponInterface $coupon);
+
+    /**
      * @return Collection|CouponInterface[]
      */
     public function getPromotionCoupons();

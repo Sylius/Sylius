@@ -12,40 +12,37 @@
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * Gift card based discount action.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Saidul Islam <saidul.04@gmail.com>
  */
-class GiftCardDiscountAction extends DiscountAction implements PromotionActionInterface
+class GiftCardDiscountAction extends DiscountAction
 {
     /**
-     * Order repository.
-     *
      * @var OrderRepositoryInterface
      */
     protected $orderRepository;
 
     /**
-     * Constructor.
-     *
-     * @param RepositoryInterface      $adjustmentRepository
+     * @param FactoryInterface         $adjustmentFactory
      * @param OriginatorInterface      $originator
      * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(RepositoryInterface $adjustmentRepository, OriginatorInterface $originator, OrderRepositoryInterface $orderRepository)
+    public function __construct(FactoryInterface $adjustmentFactory, OriginatorInterface $originator, OrderRepositoryInterface $orderRepository)
     {
-        parent::__construct($adjustmentRepository, $originator);
+        parent::__construct($adjustmentFactory, $originator);
 
         $this->orderRepository = $orderRepository;
     }
@@ -56,17 +53,16 @@ class GiftCardDiscountAction extends DiscountAction implements PromotionActionIn
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
         if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $coupons = $subject->getPromotionCoupons()->filter(function ($item) {
-            /** @var $item CouponInterface */
+        $coupons = $subject->getPromotionCoupons()->filter(function (CouponInterface $item) {
             return CouponInterface::TYPE_GIFT_CARD === $item->getType() && $item->isValid();
         });
 
         if (!$coupons->isEmpty()) {
             $this->validateCoupons($coupons);
-            $this->processCoupons($subject, $promotion, $coupons);
+            $this->processCoupons($subject, $coupons);
         }
     }
 
@@ -79,6 +75,28 @@ class GiftCardDiscountAction extends DiscountAction implements PromotionActionIn
     }
 
     /**
+     * @param CouponInterface $coupon
+     * @param null|int $amount
+     *
+     * @return AdjustmentInterface
+     */
+    protected function createCouponAdjustment(CouponInterface $coupon, $amount = null)
+    {
+        /** @var AdjustmentInterface $adjustment */
+        $adjustment = $this->adjustmentFactory->createNew();
+        $adjustment->setType(AdjustmentInterface::PROMOTION_ADJUSTMENT);
+        $adjustment->setLabel($coupon->getType());
+
+        if (null !== $amount) {
+            $adjustment->setAmount($amount);
+        }
+
+        $this->originator->setOrigin($adjustment, $coupon);
+
+        return $adjustment;
+    }
+
+    /**
      * Fetch orders that contain specific coupons and validate amount,
      * if it's empty, remove it from current order otherwise reduce
      * amount for same coupon in current order.
@@ -88,9 +106,9 @@ class GiftCardDiscountAction extends DiscountAction implements PromotionActionIn
     private function validateCoupons(Collection $coupons)
     {
         /** @var $orders OrderInterface[] */
-        $orders = $this->orderRepository->findWithCoupons(array(
+        $orders = $this->orderRepository->findWithCoupons([
             'coupons' => $coupons->toArray(),
-        ));
+        ]);
         foreach ($orders as $order) {
             foreach ($order->getPromotionCoupons() as $orderCoupon) {
                 foreach ($coupons as $coupon) {
@@ -109,20 +127,18 @@ class GiftCardDiscountAction extends DiscountAction implements PromotionActionIn
     }
 
     /**
-     * @param OrderInterface               $subject
-     * @param PromotionInterface           $promotion
+     * @param OrderInterface $subject
      * @param Collection|CouponInterface[] $coupons
      */
-    private function processCoupons(OrderInterface $subject, PromotionInterface $promotion, Collection $coupons)
+    private function processCoupons(OrderInterface $subject, Collection $coupons)
     {
-        foreach ($coupons as $card) {
-            if ($subject->getTotal() < $card->getAmount()) {
-                $amount = $subject->getTotal();
-            } else {
-                $amount = $card->getAmount();
-            }
+        $subject->recalculateAdjustmentsTotal();
 
-            $subject->addAdjustment($this->createAdjustment($promotion, -$amount));
+        $total = $subject->getTotal();
+        foreach ($coupons as $card) {
+            $amount = $total < $card->getAmount() ? $total : $card->getAmount();
+
+            $subject->addAdjustment($this->createCouponAdjustment($card, -$amount));
         }
     }
 }

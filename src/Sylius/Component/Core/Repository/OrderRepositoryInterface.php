@@ -36,7 +36,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return OrderInterface[]
      */
-    public function findWithCoupons(array $criteria = array());
+    public function findWithCoupons(array $criteria = []);
 
     /**
      * Gets the number of orders placed by the user.

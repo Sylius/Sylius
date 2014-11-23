@@ -28,9 +28,9 @@ class CouponType extends AbstractResourceType
     {
         $builder
             ->add('type', 'choice', [
-                'label'   => 'sylius.form.coupon.type',
+                'label' => 'sylius.form.coupon.type',
                 'choices' => [
-                    CouponInterface::TYPE_COUPON    => 'sylius.form.coupon.types.coupon',
+                    CouponInterface::TYPE_COUPON => 'sylius.form.coupon.types.coupon',
                     CouponInterface::TYPE_GIFT_CARD => 'sylius.form.coupon.types.gift_card',
                 ],
             ])

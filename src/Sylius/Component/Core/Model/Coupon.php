@@ -36,7 +36,5 @@ class Coupon extends BaseCoupon implements CouponInterface
     public function setPerCustomerUsageLimit($perCustomerUsageLimit = 0)
     {
         $this->perCustomerUsageLimit = $perCustomerUsageLimit;
-
-        return $this;
     }
 }

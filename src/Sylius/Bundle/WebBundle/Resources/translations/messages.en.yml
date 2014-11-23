@@ -885,6 +885,7 @@ sylius:
         index: List coupons
         index_header: Coupons
         no_results: There are no coupon to display
+        per_customer_usage_limit: Per customer usage limit
         promotion_details: Promotion Details
         total_results: Total: %total%
         type: Coupon type

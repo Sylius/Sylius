@@ -47,7 +47,6 @@ class CouponTypeSpec extends ObjectBehavior
 
         $builder
             ->add('code', 'text', Argument::any())
-            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 
@@ -63,6 +62,11 @@ class CouponTypeSpec extends ObjectBehavior
 
         $builder
             ->add('expiresAt', 'date', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->willReturn($builder)
         ;
 

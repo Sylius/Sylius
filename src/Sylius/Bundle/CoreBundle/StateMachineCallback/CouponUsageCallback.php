@@ -21,6 +21,7 @@ use Sylius\Component\Promotion\Model\CouponInterface;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Saidul Islam <saidul.04@gmail.com>
  */
 class CouponUsageCallback
 {
@@ -40,8 +41,12 @@ class CouponUsageCallback
             $coupon->incrementUsed();
 
             if (CouponInterface::TYPE_GIFT_CARD === $coupon->getType()) {
-                $amount = $coupon->getAmount() - $order->getTotal();
-                $coupon->setAmount($amount < 0 ? 0 : $coupon->getAmount() + $order->getAdjustmentsTotal(AdjustmentInterface::PROMOTION_ADJUSTMENT));
+                foreach ($order->getAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT) as $adjustment) {
+                    if ($coupon === $this->originator->getOrigin($adjustment)) {
+                        $amount = $coupon->getAmount() + $adjustment->getAmount();
+                        $coupon->setAmount($amount < 0 ? 0 : $amount);
+                    }
+                }
             }
         }
     }
@@ -52,13 +57,11 @@ class CouponUsageCallback
             $coupon->decrementUsed();
 
             if (CouponInterface::TYPE_GIFT_CARD === $coupon->getType()) {
-                if (0 === $coupon->getAmount()) {
-                    $amount = $order->getAdjustmentsTotal(AdjustmentInterface::PROMOTION_ADJUSTMENT);
-                } else {
-                    $amount = $order->getAdjustmentsTotal(AdjustmentInterface::PROMOTION_ADJUSTMENT) + $coupon->getAmount();
+                foreach ($order->getAdjustments(AdjustmentInterface::PROMOTION_ADJUSTMENT) as $adjustment) {
+                    if ($coupon === $this->originator->getOrigin($adjustment)) {
+                        $coupon->setAmount($coupon->getAmount() - $adjustment->getAmount());
+                    }
                 }
-
-                $coupon->setAmount($amount);
             }
         }
     }

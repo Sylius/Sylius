@@ -16,6 +16,7 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Generator\Instruction;
 use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -74,8 +75,8 @@ class LoadPromotionsData extends DataFixture
             'PM5',
             'Gift cards',
             'Simple gift cards with amount 50 EUR.',
-            array(),
-            array($this->createAction(ActionInterface::TYPE_GIFT_CARD_DISCOUNT, array())),
+            [],
+            [$this->createAction(ActionInterface::TYPE_GIFT_CARD_DISCOUNT, [])],
             true
         );
 

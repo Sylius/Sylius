@@ -105,7 +105,6 @@ class PromotionContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $promotion = $factory->createNew();
-
             $promotion->setName($data['name']);
             $promotion->setDescription($data['description']);
             $promotion->setCode($data['code']);
@@ -188,7 +187,7 @@ class PromotionContext extends DefaultContext
                     $configuration[$key] = (int) $value / 100;
                     break;
                 case 'equal':
-                    $configuration[$key] = (Boolean) $value;
+                    $configuration[$key] = (bool) $value;
                     break;
                 default:
                     break;

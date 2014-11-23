@@ -210,10 +210,6 @@ class Coupon implements CouponInterface
             return false;
         }
 
-        if (null !== $this->expiresAt && $this->expiresAt < new \DateTime()) {
-            return false;
-        }
-
-        return true;
+        return null !== $this->expiresAt && $this->expiresAt > new \DateTime();
     }
 }

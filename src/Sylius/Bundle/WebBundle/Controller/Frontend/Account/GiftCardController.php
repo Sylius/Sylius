@@ -25,17 +25,17 @@ class GiftCardController extends FOSRestController
      */
     public function indexAction()
     {
-        $orders = $this->getOrderRepository()->findWithCoupons(array(
+        $orders = $this->getOrderRepository()->findWithCoupons([
             'type' => CouponInterface::TYPE_GIFT_CARD,
             'user' => $this->getUser(),
-        ));
+        ]);
 
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:giftcard.html.twig')
-            ->setData(array(
+            ->setData([
                 'orders' => $orders,
-            ))
+            ])
         ;
 
         return $this->handleView($view);

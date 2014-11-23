@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface CouponInterface extends CodeAwareInterface, SoftDeletableInterface, TimestampableInterface, ResourceInterface
 {
-    const TYPE_COUPON    = 'coupon';
+    const TYPE_COUPON = 'coupon';
     const TYPE_GIFT_CARD = 'gift_card';
 
     /**
@@ -69,7 +69,7 @@ interface CouponInterface extends CodeAwareInterface, SoftDeletableInterface, Ti
     public function setPromotion(PromotionInterface $promotion = null);
 
     /**
-     * @return \DateTime
+     * @return int
      */
     public function getAmount();
 
@@ -77,16 +77,6 @@ interface CouponInterface extends CodeAwareInterface, SoftDeletableInterface, Ti
      * @param int $amount
      */
     public function setAmount($amount);
-
-    /**
-     * @return null|\DateTime
-     */
-    public function getUpdatedAt();
-
-    /**
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
      * @return null|\DateTime

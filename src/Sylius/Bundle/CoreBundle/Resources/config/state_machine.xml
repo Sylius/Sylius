@@ -35,7 +35,9 @@
             <argument type="service" id="sm.factory" />
         </service>
 
-        <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />
+        <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%">
+            <argument type="service" id="sylius.originator" />
+        </service>
         <service id="sylius.callback.promotion_usage" class="%sylius.callback.promotion_usage.class%" />
 
         <service id="sylius.callback.order_shipment" class="%sylius.callback.order_shipment.class%">

@@ -399,7 +399,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findWithCoupons(array $criteria = array())
+    public function findWithCoupons(array $criteria = [])
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
