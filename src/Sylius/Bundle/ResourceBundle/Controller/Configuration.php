@@ -250,6 +250,16 @@ class Configuration
         return $parameters;
     }
 
+    /**
+     * Is softdelete filter?
+     *
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return (bool) $this->parameters->get('deletion', false);
+    }
+
     public function isLimited()
     {
         return (bool) $this->parameters->get('limit', $this->settings['limit']);

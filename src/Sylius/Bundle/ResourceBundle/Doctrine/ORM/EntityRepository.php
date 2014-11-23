@@ -83,12 +83,17 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
      * @param array   $orderBy
      * @param integer $limit
      * @param integer $offset
+     * @param bool    $deleted
      *
      * @return array
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null, $deleted = false)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $orderBy);
@@ -110,9 +115,13 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null)
+    public function createPaginator(array $criteria = null, array $orderBy = null, $deleted = false)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
 
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $orderBy);

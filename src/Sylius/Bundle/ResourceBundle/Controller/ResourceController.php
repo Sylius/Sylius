@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Sylius\Component\Resource\Model\RestorableInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -129,7 +130,7 @@ class ResourceController extends FOSRestController
             $resources = $this->resourceResolver->getResource(
                 $repository,
                 'createPaginator',
-                array($criteria, $sorting)
+                array($criteria, $sorting, $this->config->isDeleted())
             );
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -147,7 +148,7 @@ class ResourceController extends FOSRestController
             $resources = $this->resourceResolver->getResource(
                 $repository,
                 'findBy',
-                array($criteria, $sorting, $this->config->getLimit())
+                array($criteria, $sorting, $this->config->getLimit(), null, $this->config->isDeleted())
             );
         }
 
@@ -267,6 +268,31 @@ class ResourceController extends FOSRestController
         $repository->revert($resource, $version);
 
         $this->domainManager->update($resource, 'revert');
+
+        return $this->redirectHandler->redirectTo($resource);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function restoreAction(Request $request)
+    {
+        $this->domainManager->disableSoftDelete();
+
+        $resource = $this->findOr404($request);
+
+        if (!$resource instanceof RestorableInterface) {
+            $interface = "Sylius\\Component\\Resource\\Model\\RestorableInterface";
+            throw new NotFoundHttpException(sprintf(
+                "The %s's model must be implemented %s.", $this->config->getResourceName(), $interface
+            ));
+        }
+
+        $resource->restore();
+
+        $this->domainManager->update($resource, 'restore');
 
         return $this->redirectHandler->redirectTo($resource);
     }

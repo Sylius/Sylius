@@ -189,4 +189,20 @@ class DomainManager
 
         return $this->eventDispatcher->dispatch($name, $event);
     }
+
+    /**
+     * Disable softdelete filter
+     */
+    public function disableSoftDelete()
+    {
+        $this->manager->getFilters()->disable('softdeleteable');
+    }
+
+    /**
+     * Enable softdelete filter
+     */
+    public function enableSoftDelete()
+    {
+        $this->manager->getFilters()->enable('softdeleteable');
+    }
 }
