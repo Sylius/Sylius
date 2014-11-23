@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Stripe\Action;
+namespace Sylius\Bundle\CoreBundle\Payum\Stripe\Action;
 
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;

@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
+namespace Sylius\Bundle\CoreBundle\Payum\Paypal\Action;
 
 use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\TokenInterface;
