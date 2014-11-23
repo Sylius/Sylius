@@ -1,0 +1,112 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% block topbar %}
+    <ol class="breadcrumb">
+        <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+        <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+        <li><a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a></li>
+        <li>{{ 'sylius.breadcrumb.stock'|trans }}</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="actions-menu">
+            {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+        </div>
+        <h1>
+            <i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.stock_header'|trans({'%product%': product.name})|raw }}
+            {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+        </h1>
+    </div>
+    <form action="{{ path('sylius_backend_product_stock', {'id': product.id}) }}" method="post" class="form-horizontal"
+          novalidate>
+        {% include 'SyliusWebBundle:Backend/Product/Form:_stock.html.twig' %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg"><i
+                        class="icon-save"></i> {{ 'sylius.product_update_stock'|trans }}</button>
+            <a href="{{ app.request.headers.get('referer', path('sylius_backend_product_show', {'id': product.id})) }}"
+               class="btn btn-danger btn-lg"><i class="icon-remove"></i> {{ 'sylius.cancel'|trans }}</a>
+        </div>
+    </form>
+    {% if product.variants|length > 0 %}
+        <table class="table" id="stockables">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.product.header'|trans }}</th>
+                <th colspan="4">{{ 'sylius.stock_location.header'|trans }}</th>
+            </tr>
+            <tr>
+                <th>{{ sylius_resource_sort('sku', 'sylius.stockable.sku'|trans) }}</th>
+                <th>{{ sylius_resource_sort('stock_location', 'sylius.stock_location.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th> {# TODO fix sorting #}
+                <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for variant in product.variants %}
+            <td rowspan="{{ variant.stockItems|length + 1 }}">
+                <a href="{{ path('sylius_backend_product_variant_update', {'productId': product.id, 'id': variant.id}) }}"
+                   class="btn btn-link">
+                    <strong> {{ variant.optionsString }}</strong>
+                </a>
+            </td>
+            </tr>
+            <tr>
+                {% for item in variant.stockItems %}
+                <td>{{ item.stockLocation.name }}</td>
+                <td><span class="label label-{{ item.inStock ? 'success' : 'danger' }}">{{ item.onHand }}</span>
+                </td>
+                <td><span class="label label-{{ item.onHold ? 'warning' : 'success' }}">{{ item.onHold }}</span>
+                </td>
+            </tr>
+            <tr>
+                {% endfor %}
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    {% elseif product.masterVariant is not null %}
+        <table class="table" id="stockables">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.product.header'|trans }}</th>
+                <th colspan="4">{{ 'sylius.stock_location.header'|trans }}</th>
+            </tr>
+            <tr>
+                <th>{{ sylius_resource_sort('name', 'sylius.stockable.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('stock_location', 'sylius.stock_location.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th> {# TODO fix sorting #}
+                <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td rowspan="{{ product.masterVariant.stockItems|length + 1 }}">
+                <a href="{{ path('sylius_backend_product_update', {'id': product.id}) }}"
+                   class="btn btn-link">
+                    <strong> {{ product.name }}</strong>
+                </a>
+            </td>
+            </tr>
+            <tr>
+                {% for item in product.masterVariant.stockItems %}
+                <td>{{ item.stockLocation.name }}</td>
+                <td><span class="label label-{{ item.inStock ? 'success' : 'danger' }}">{{ item.onHand }}</span>
+                </td>
+                <td><span class="label label-{{ item.onHold ? 'warning' : 'success' }}">{{ item.onHold }}</span>
+                </td>
+            </tr>
+            <tr>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        {{ alerts.info('sylius.product.no_results'|trans) }}
+    {% endif %}
+{% endblock %}

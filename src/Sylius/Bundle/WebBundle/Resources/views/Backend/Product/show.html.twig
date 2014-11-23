@@ -129,10 +129,22 @@
                         </td>
                     </tr>
                 {% endif %}
+                {% if not product.hasVariants %}
                 <tr>
                     <td>{{ 'sylius.product.stock'|trans }}</td>
-                    <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
+                    <td>{% if product.masterVariant.stockItems|length > 0 %}
+                            <ul>
+                                {% for item in product.masterVariant.stockItems %}
+                                    <li><span class="label label-{{ item.inStock ? 'success' : 'important' }}">{{ item.stockLocation.name }}: {{ item.onHand }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span class="label label-info">
+                                <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_stock_items'|trans }}
+                            </span>
+                        {% endif %}</td>
                 </tr>
+                {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
@@ -210,6 +222,7 @@
     {% if product.hasOptions %}
         {{ buttons.patch(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
     {% endif %}
+    {{ buttons.create(path('sylius_backend_product_stock', {'id': product.id}), 'sylius.stock.manage'|trans) }}
     <div class="pull-right">
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>

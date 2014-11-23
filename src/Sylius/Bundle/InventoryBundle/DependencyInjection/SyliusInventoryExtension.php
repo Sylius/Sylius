@@ -48,6 +48,8 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         $classes = $config['classes'];
 
         $container->setParameter('sylius.controller.inventory_unit.class', $classes['inventory_unit']['controller']);
+        $container->setParameter('sylius.controller.stock_location.class', $classes['stock_location']['controller']);
+        $container->setParameter('sylius.controller.stock.class', $classes['stock']['controller']);
         $container->setParameter('sylius.model.inventory_unit.class', $classes['inventory_unit']['model']);
 
         if (array_key_exists('repository', $classes['inventory_unit'])) {
@@ -58,6 +60,10 @@ class SyliusInventoryExtension extends AbstractResourceExtension
         }
 
         $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
+        $container->setParameter('sylius.model.stock_location.class', $classes['stock_location']['model']);
+        $container->setParameter('sylius.model.stock_movement.class', $classes['stock_movement']['model']);
+        $container->setParameter('sylius.model.stock_transfer.class', $classes['stock_transfer']['model']);
+        $container->setParameter('sylius.model.stock_item.class', $classes['stock_item']['model']);
 
         if (isset($config['events'])) {
             $listenerDefinition = $container->getDefinition('sylius.listener.inventory');

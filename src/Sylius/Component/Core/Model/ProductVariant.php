@@ -14,6 +14,9 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
+use Sylius\Component\Inventory\Model\StockItem;
+use Sylius\Component\Inventory\Model\StockItemInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 
@@ -50,28 +53,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      *
      * @var array
      */
-    protected $pricingConfiguration = array();
-
-    /**
-     * On hold.
-     *
-     * @var int
-     */
-    protected $onHold = 0;
-
-    /**
-     * On hand stock.
-     *
-     * @var int
-     */
-    protected $onHand = 0;
-
-    /**
-     * Sold amount.
-     *
-     * @var int
-     */
-    protected $sold = 0;
+    protected $pricingConfiguration = array ();
 
     /**
      * Is variant available on demand?
@@ -116,6 +98,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $depth;
 
     /**
+     * Stock Items
+     *
+     * @var StockItemInterface[]|Collection
+     */
+    protected $items;
+
+    /**
      * Override constructor to set on hand stock.
      */
     public function __construct()
@@ -123,20 +112,31 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         parent::__construct();
 
         $this->images = new ArrayCollection();
+        $this->stockItems = new ArrayCollection();
     }
 
     public function __toString()
     {
         $string = $this->getProduct()->getName();
-
         if (!$this->getOptions()->isEmpty()) {
-            $string .= '(';
+            $string .= ' (' . $this->getOptionsString() . ')';
+        }
 
+        return $string;
+    }
+
+    /**
+     * Get the options in string format
+     * @return string
+     */
+    public function getOptionsString()
+    {
+        $string = "";
+        if (!$this->getOptions()->isEmpty()) {
             foreach ($this->getOptions() as $option) {
-                $string .= $option->getOption()->getName(). ': '.$option->getValue().', ';
+                $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
             }
-
-            $string = substr($string, 0, -2).')';
+            $string = substr($string, 0, -2);
         }
 
         return $string;
@@ -219,48 +219,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function isInStock()
     {
-        return 0 < $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHold()
-    {
-        return $this->onHold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHold($onHold)
-    {
-        $this->onHold = $onHold;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHand()
-    {
-        return $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHand($onHand)
-    {
-        $this->onHand = $onHand;
-
-        if (0 > $this->onHand) {
-            $this->onHand = 0;
+        foreach ($this->items as $item) {
+            if ($item->getOnHand() > 0) {
+                return true;
+            }
         }
 
-        return $this;
+        return false;
     }
+
+    /**
+     * Sold amount.
+     *
+     * @var int
+     */
+    protected $sold = 0;
 
     /**
      * {@inheritdoc}
@@ -301,7 +274,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setAvailableOnDemand($availableOnDemand)
     {
-        $this->availableOnDemand = (bool) $availableOnDemand;
+        $this->availableOnDemand = (bool)$availableOnDemand;
 
         return $this;
     }
@@ -468,5 +441,58 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getShippingDepth()
     {
         return $this->getDepth();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStockItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addStockItem(StockItemInterface $stockItem)
+    {
+        $stockItem->setStockable($this);
+
+        $this->items->add($stockItem);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeStockItem(StockItemInterface $stockItem)
+    {
+        $this->items->removeElement($stockItem);
+
+        return $this;
+    }
+
+    /**
+     * @param StockLocationInterface $location
+     *
+     * @return StockItemInterface
+     */
+    public function getStockItemForLocation(StockLocationInterface $location)
+    {
+        foreach ($this->items as $item) {
+            if ($item->getStockLocation() === $location) {
+                return $item;
+            }
+        }
+
+
+        //TODO, Remove this from the model and create stockItems for every location elsewere
+        $item = new StockItem();
+        $item->setStockLocation($location);
+
+        $this->addStockItem($item);
+
+        return $item;
     }
 }

@@ -10,3 +10,5 @@ sylius:
         failed: Your payment was declined.
         unknown: Unknown payment error.
         out_of_stock: There is only %quantity% %name% in the stock.
+    product:
+        stock: Stock has been updated

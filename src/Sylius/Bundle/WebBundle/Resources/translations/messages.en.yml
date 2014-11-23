@@ -145,6 +145,8 @@ sylius:
             index: Groups
         inventory:
             index: Inventory
+        stock_location:
+            index: Stock Locations
         locale:
             index: Locales
         menu:
@@ -184,6 +186,7 @@ sylius:
             index: Shipping Categories
         shipping_method:
             index: Shipping Methods
+        stock:  Stock
         tax_category:
             index: Tax Categories
         tax_rate:
@@ -299,6 +302,12 @@ sylius:
         exchange_rate: Exchange rate
         update_header: Editing currency
         updated_at: Last update
+    stock_location:
+            create: Create stock location
+            create_header: New stock location
+            name: Name
+            index_header: Stock locations
+            no_results: There are no stock locations to display
     filter: Filter
     form:
         cart:
@@ -541,6 +550,7 @@ sylius:
         total: Total
         unit_price: Unit price
     out_of_stock: Out of stock
+    in_stock: In stock
     page:
         body: Body
         create: Create new page
@@ -621,7 +631,7 @@ sylius:
         show_header: Product details <small>Viewing product "<strong>%product%</strong>"</small>
         show_in_store: show in store
         sku: SKU
-        stock: Current stock
+        stock: Stock
         tabs:
             categorization: Categorization
             images: Images
@@ -631,6 +641,7 @@ sylius:
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
+        stock_header: Stock <small>For product "<strong>%product%</strong>"</small>
         updated_at: Last update
         variant_selection_method: Variant selection method
         view_details: View %product% details.
@@ -847,7 +858,7 @@ sylius:
         options: Options
         price: Price
         sku: SKU
-        stock: Current stock
+        stock: Stock
         update_header: Editing variant
     yes: yes
     zone:

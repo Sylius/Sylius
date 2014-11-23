@@ -12,9 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\InventoryBundle\Model\AddStock;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +36,6 @@ class ProductController extends ResourceController
      * @param string  $permalink
      *
      * @return Response
-     *
      * @throws NotFoundHttpException
      */
     public function indexByTaxonAction(Request $request, $permalink)
@@ -42,18 +43,14 @@ class ProductController extends ResourceController
         if ($request->attributes->has('_sylius_entity')) {
             $taxon = $request->attributes->get('_sylius_entity');
         } else {
-            $taxon = $this->get('sylius.repository.taxon')
-                ->findOneByPermalink($permalink);
+            $taxon = $this->get('sylius.repository.taxon')->findOneByPermalink($permalink);
 
             if (!isset($taxon)) {
                 throw new NotFoundHttpException('Requested taxon does not exist.');
             }
         }
 
-        $paginator = $this
-            ->getRepository()
-            ->createByTaxonPaginator($taxon)
-        ;
+        $paginator = $this->getRepository()->createByTaxonPaginator($taxon);
 
         return $this->renderResults($taxon, $paginator, 'indexByTaxon.html', $request->get('page', 1));
     }
@@ -76,10 +73,7 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        $paginator = $this
-            ->getRepository()
-            ->createByTaxonPaginator($taxon)
-        ;
+        $paginator = $this->getRepository()->createByTaxonPaginator($taxon);
 
         return $this->renderResults($taxon, $paginator, 'productIndex.html', $request->get('page', 1));
     }
@@ -117,19 +111,17 @@ class ProductController extends ResourceController
             }
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
-            ->setData(array(
-                'product' => $product,
-                'logs'    => array(
-                    'product'    => $repository->getLogEntries($product),
-                    'variants'   => $variants,
-                    'attributes' => $attributes,
-                    'options'    => $options,
-                ),
-            ))
-        ;
+        $view = $this->view()->setTemplate($this->config->getTemplate('history.html'))->setData(
+                array(
+                    'product' => $product,
+                    'logs'    => array(
+                        'product'    => $repository->getLogEntries($product),
+                        'variants'   => $variants,
+                        'attributes' => $attributes,
+                        'options'    => $options,
+                    ),
+                )
+            );
 
         return $this->handleView($view);
     }
@@ -187,14 +179,48 @@ class ProductController extends ResourceController
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate($template))
-            ->setData(array(
-                'taxon'    => $taxon,
-                'products' => $results,
-            ))
-        ;
+        $view = $this->view()->setTemplate($this->config->getTemplate($template))->setData(
+                array (
+                    'taxon'    => $taxon,
+                    'products' => $results,
+                )
+            );
+
+        return $this->handleView($view);
+    }
+
+    public function stockAction(Request $request)
+    {
+        /** @var $product ProductInterface */
+        $product = $this->findOr404($request);
+
+        $form = $this->createForm('sylius_product_stock', new AddStock(), array('variants' => $product->getVariants()));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            /* @var $stock AddStock */
+            /* @var $operator InventoryOperatorInterface */
+            $stock = $form->getData();
+            $operator = $this->get('sylius.inventory_operator');
+            $variant = $stock->getProductVariant();
+            if ($variant == null) {
+                $variant = $product->getMasterVariant();
+            }
+            $stockItem = $variant->getStockItemForLocation($stock->getStockLocation());
+
+            $operator->increase($stockItem, $stock->getQuantity());
+            $this->domainManager->update($product);
+
+            $this->redirect($this->generateUrl("sylius_backend_product_stock", array("id" => $product->getId())));
+        }
+
+        $view = $this->view()->setTemplate($this->config->getTemplate('stock.html'))->setData(
+            array(
+                $this->config->getResourceName() => $product,
+                'form'                           => $form->createView(),
+            )
+        );
 
         return $this->handleView($view);
     }

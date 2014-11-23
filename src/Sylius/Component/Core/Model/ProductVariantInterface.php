@@ -13,6 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockItemInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
@@ -22,11 +24,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ProductVariantInterface extends
-    BaseVariantInterface,
-    ShippableInterface,
-    StockableInterface,
-    PriceableInterface
+interface ProductVariantInterface extends BaseVariantInterface, ShippableInterface, StockableInterface, PriceableInterface
 {
     /**
      * Get images.
@@ -109,4 +107,59 @@ interface ProductVariantInterface extends
      * @param float $depth
      */
     public function setDepth($depth);
+
+    /**
+     * Get stock keeping unit.
+     *
+     * @return mixed
+     */
+    public function getSku();
+
+    /**
+     * Set product SKU.
+     *
+     * @param string $sku
+     *
+     * @return ProductVariantInterface
+     */
+    public function setSku($sku);
+
+    /**
+     * Get inventory displayed name.
+     *
+     * @return string
+     */
+    public function getInventoryName();
+
+    /**
+     * Get all stockItems
+     *
+     * @return StockItemInterface[]|Collection
+     */
+    public function getStockItems();
+
+    /**
+     * Add a stockItem
+     *
+     * @param StockItemInterface $stockItem
+     *
+     * @return $this
+     */
+    public function addStockItem(StockItemInterface $stockItem);
+
+    /**
+     * Remove a  stockItem
+     *
+     * @param StockItemInterface $stockItem
+     *
+     * @return $this
+     */
+    public function removeStockItem(StockItemInterface $stockItem);
+
+    /**
+     * @param StockLocationInterface $location
+     *
+     * @return StockItemInterface
+     */
+    public function getStockItemForLocation(StockLocationInterface $location);
 }

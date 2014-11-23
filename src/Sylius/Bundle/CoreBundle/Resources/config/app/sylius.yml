@@ -118,6 +118,16 @@ sylius_inventory:
             model: Sylius\Component\Core\Model\InventoryUnit
         stockable:
             model: %sylius.model.product_variant.class%
+        stock_location:
+            model: Sylius\Component\Inventory\Model\StockLocation
+            form: Sylius\Component\Inventory\Form\Type\StockLocationType
+        stock_transfer:
+            model: Sylius\Component\Inventory\Model\StockTransfer
+        stock_movement:
+            model: Sylius\Component\Inventory\Model\StockMovement
+        stock:
+            controller: Sylius\Bundle\InventoryBundle\Controller\StockController
+
 
 sylius_payment:
     classes:

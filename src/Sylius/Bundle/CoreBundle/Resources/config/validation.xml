@@ -61,17 +61,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="onHand">
-            <constraint name="NotBlank">
-                <option name="message">sylius.product_variant.onHand.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Range">
-                <option name="min">0</option>
-                <option name="minMessage">sylius.product_variant.onHand.min</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
     </class>
 
     <class name="Sylius\Component\Core\Model\ShippingMethod">
