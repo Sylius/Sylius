@@ -13,7 +13,7 @@ namespace Sylius\Bundle\SearchBundle\Accessor;
 
 use Symfony\Component\PropertyAccess\Exception;
 use Symfony\Component\PropertyAccess\PropertyAccessor as BasePropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
  * This class uses the property accessor to dynamically translate getters to values.
@@ -27,7 +27,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 class PropertyAccessor extends BasePropertyAccessor
 {
     /**
-     * @var
+     * @var PropertyAccessorInterface[]
      */
     protected $customAccessors;
 
@@ -42,27 +42,20 @@ class PropertyAccessor extends BasePropertyAccessor
     }
 
     /**
-     * @param array|object                 $objectOrArray
-     * @param string|PropertyPathInterface $propertyPath
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getValue($objectOrArray, $propertyPath)
     {
         try {
             foreach ($this->customAccessors as $accessor) {
-
-                if ($accessor->canAccessObject($objectOrArray)) {
-                    return $accessor->accessObject($objectOrArray, $propertyPath);
+                if ($accessor->isReadable($objectOrArray, $propertyPath)) {
+                    return $accessor->getValue($objectOrArray, $propertyPath);
                 }
             }
 
             return parent::getValue($objectOrArray, $propertyPath);
-
-        }catch (Exception\NoSuchPropertyException $e) {
+        } catch (Exception\NoSuchPropertyException $e) {
             return null;
         }
-
     }
-
 }

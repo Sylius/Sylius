@@ -45,5 +45,4 @@ class IndexCommand extends ContainerAwareCommand
 
         $output->writeln($indexer->getOutput());
     }
-
 }

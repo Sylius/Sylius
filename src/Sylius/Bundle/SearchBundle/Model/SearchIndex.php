@@ -19,12 +19,12 @@ namespace Sylius\Bundle\SearchBundle\Model;
 class SearchIndex implements SearchIndexInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $itemId;
 

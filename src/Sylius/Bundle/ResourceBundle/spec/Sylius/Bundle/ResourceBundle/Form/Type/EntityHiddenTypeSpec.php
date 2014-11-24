@@ -11,10 +11,10 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

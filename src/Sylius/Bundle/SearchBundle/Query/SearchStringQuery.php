@@ -14,13 +14,12 @@ namespace Sylius\Bundle\SearchBundle\Query;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class SearchStringQuery extends Query
 {
-
     /**
-     * @var
+     * @var string
      */
     protected $searchTerm;
 
@@ -30,32 +29,32 @@ class SearchStringQuery extends Query
     protected $searchParam;
 
     /**
-     * @var
+     * @var bool
      */
     protected $dropdownFilterEnabled;
 
     /**
-     * @var
+     * @var string
      */
     protected $remoteAddress;
 
     /**
      * @param Request $request
-     * @param         $dropdownFilterEnabled
+     * @param bool    $dropDownFilterEnabled
      */
-    public function __construct(Request $request, $dropdownFilterEnabled)
+    public function __construct(Request $request, $dropDownFilterEnabled = false)
     {
-        $requestBag = ($request->isMethod('GET'))? $request->query:$request->request;
+        $requestBag = $request->isMethod('GET') ? $request->query : $request->request;
 
         $this->setAppliedFilters($requestBag->get('filters'));
         $this->searchTerm = $requestBag->get('q');
         $this->searchParam = $requestBag->get('search_param');
-        $this->dropdownFilterEnabled = $dropdownFilterEnabled;
+        $this->dropdownFilterEnabled = (bool) $dropDownFilterEnabled;
         $this->remoteAddress = $request->getClientIp();
     }
 
     /**
-     * @param $searchTerm
+     * @param string $searchTerm
      */
     public function setSearchTerm($searchTerm)
     {
@@ -63,7 +62,7 @@ class SearchStringQuery extends Query
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSearchTerm()
     {
@@ -87,7 +86,7 @@ class SearchStringQuery extends Query
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function isDropdownFilterEnabled()
     {
@@ -95,11 +94,10 @@ class SearchStringQuery extends Query
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getRemoteAddress()
     {
         return $this->remoteAddress;
     }
-
 }

@@ -12,8 +12,8 @@
 namespace Sylius\Component\Product\Accessor;
 
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\Exception;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * Product Accessor

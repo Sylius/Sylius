@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\SearchBundle\Indexer;
 
-use Sylius\Bundle\CoreBundle\Kernel\Kernel;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Process\Process;
 
 /**
  * Elasticsearch indexer
@@ -24,19 +23,19 @@ use Doctrine\ORM\EntityManager;
 class ElasticSearchIndexer implements IndexerInterface
 {
     /**
-     * @var Kernel
+     * @var KernelInterface
      */
     private $kernel;
 
     /**
-     * @var
+     * @var string
      */
     private $output;
 
     /**
-     * @param Kernel $kernel
+     * @param KernelInterface $kernel
      */
-    public function __construct(Kernel $kernel)
+    public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
     }
@@ -46,12 +45,7 @@ class ElasticSearchIndexer implements IndexerInterface
      */
     public function populate(EntityManager $em = null)
     {
-        $environment = $this->kernel->getEnvironment();
-
-        $populateCommand = sprintf("/console fos:elastica:populate --env=%s", $environment);
-
-        $command = $this->kernel->getRootDir() . $populateCommand;
-        $process = new Process($command);
+        $process = new Process(sprintf("%s/console fos:elastica:populate --env=%s", $this->kernel->getRootDir(), $this->kernel->getEnvironment()));
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -66,7 +60,8 @@ class ElasticSearchIndexer implements IndexerInterface
     /**
      * {@inheritdoc}
      */
-    public function getOutput() {
+    public function getOutput()
+    {
         return $this->output;
     }
-} 
+}

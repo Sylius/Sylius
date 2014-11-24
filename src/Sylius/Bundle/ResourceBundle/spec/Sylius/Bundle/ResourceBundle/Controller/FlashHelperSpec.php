@@ -4,10 +4,10 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 
 class FlashHelperSpec extends ObjectBehavior
 {

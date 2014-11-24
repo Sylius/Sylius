@@ -16,20 +16,21 @@ namespace Sylius\Bundle\SearchBundle\Model;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-interface SearchIndexInterface {
-
+interface SearchIndexInterface
+{
     /**
      * Set itemId
      *
-     * @param integer $itemId
-     * @return SyliusSearchIndex
+     * @param int $itemId
+     *
+     * @return SearchIndexInterface
      */
     public function setItemId($itemId);
 
     /**
      * Get itemId
      *
-     * @return integer
+     * @return int
      */
     public function getItemId();
 
@@ -37,7 +38,8 @@ interface SearchIndexInterface {
      * Set entity
      *
      * @param string $entity
-     * @return SyliusSearchIndex
+     *
+     * @return SearchIndexInterface
      */
     public function setEntity($entity);
 
@@ -52,7 +54,8 @@ interface SearchIndexInterface {
      * Set value
      *
      * @param string $value
-     * @return SyliusSearchIndex
+     *
+     * @return SearchIndexInterface
      */
     public function setValue($value);
 
@@ -81,7 +84,8 @@ interface SearchIndexInterface {
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return SyliusSearchIndex
+     *
+     * @return SearchIndexInterface
      */
     public function setCreatedAt($createdAt);
 
@@ -91,5 +95,4 @@ interface SearchIndexInterface {
      * @return \DateTime
      */
     public function getCreatedAt();
-
-} 
+}

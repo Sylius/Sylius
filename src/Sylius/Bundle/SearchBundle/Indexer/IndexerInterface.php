@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\SearchBundle\Indexer;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Console\Output\OutputInterface;
-
 
 /**
  * Interface IndexerInterface
@@ -22,7 +20,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 interface IndexerInterface
 {
-
     /**
      * Populates the index table.
      *
@@ -39,8 +36,7 @@ interface IndexerInterface
     /**
      * Gathers the command output for informing the user
      *
-     * @return mixed
+     * @return string
      */
     public function getOutput();
-
 }

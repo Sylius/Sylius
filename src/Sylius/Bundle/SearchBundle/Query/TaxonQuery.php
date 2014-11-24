@@ -11,46 +11,41 @@
 
 namespace Sylius\Bundle\SearchBundle\Query;
 
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class TaxonQuery extends Query
 {
     /**
-     * @var Taxon
+     * @var TaxonInterface
      */
     protected $taxon;
 
     /**
      * @param TaxonInterface $taxon
-     * @param                $appliedFilters
+     * @param mixed          $appliedFilters
      */
     public function __construct(TaxonInterface $taxon, $appliedFilters = array())
     {
-        if (! is_array($appliedFilters)) {
-            $appliedFilters = array();
-        }
-
-        $this->appliedFilters = $appliedFilters;
+        $this->appliedFilters = (array) $appliedFilters;
         $this->taxon = $taxon;
     }
 
     /**
-     * @param Taxon $taxon
+     * @param TaxonInterface $taxon
      */
-    public function setTaxon(Taxon $taxon)
+    public function setTaxon(TaxonInterface $taxon)
     {
         $this->taxon = $taxon;
     }
 
     /**
-     * @return Taxon
+     * @return TaxonInterface
      */
     public function getTaxon()
     {
         return $this->taxon;
     }
-
 } 

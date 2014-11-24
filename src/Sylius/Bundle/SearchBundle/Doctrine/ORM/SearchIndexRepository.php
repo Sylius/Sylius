@@ -12,10 +12,8 @@
 namespace Sylius\Bundle\SearchBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
-use Doctrine\ORM\Query;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -65,9 +63,8 @@ class SearchIndexRepository extends EntityRepository
         ;
 
         $filteredIds = array();
-        $products = $queryBuilder->getQuery()->getResult();
 
-        foreach ($products as $product) {
+        foreach ($queryBuilder->getQuery()->getResult() as $product) {
             $filteredIds[$productClassName][] = $product->getId();
         }
 
@@ -76,20 +73,20 @@ class SearchIndexRepository extends EntityRepository
 
     /**
      * @param array $resultSetFromFulltextSearch
+     *
      * @return array
      */
     public function hydrateSearchResults($resultSetFromFulltextSearch = array())
     {
         $results = array();
         foreach ($resultSetFromFulltextSearch as $model=>$ids) {
-
             $queryBuilder = $this->em->createQueryBuilder();
             $queryBuilder
                 ->select('u')
                 ->from($model, 'u')
                 ->where('u.id IN (:ids)')
                 ->setParameter('ids', $ids)
-                ;
+            ;
 
             $objects = $queryBuilder->getQuery()->getResult();
 
@@ -108,15 +105,14 @@ class SearchIndexRepository extends EntityRepository
      */
     public function getProductsByIds(array $ids)
     {
-        return $this->productRepository->findBy(array('id'=>$ids));
+        return $this->productRepository->findBy(array('id' => $ids));
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function getProductsQueryBuilder()
     {
         return $this->productRepository->getCollectionQueryBuilder();
     }
-
-} 
+}
