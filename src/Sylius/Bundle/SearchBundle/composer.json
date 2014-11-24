@@ -1,0 +1,49 @@
+{
+    "name": "sylius/search-bundle",
+    "type": "symfony-bundle",
+    "description": "Product catalog for your Symfony2 applications.",
+    "keywords": ["shop", "ecommerce", "products", "product", "search"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Argyrios Gounaris",
+            "homepage": "http://agounaris.github.io"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "friendsofsymfony/elastica-bundle": "~3.0.2",
+        "twig/twig":            "~1.11",
+        "doctrine/orm":         "~2.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "~2.0",
+        "twig/twig":            "~1.11",
+        "doctrine/orm":         "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\SearchBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\SearchBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.11-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}

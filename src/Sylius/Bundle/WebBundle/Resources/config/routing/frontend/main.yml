@@ -46,3 +46,7 @@ sylius_cart_save:
 sylius_contact:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/contact.yml
     prefix: /contact
+
+sylius_search:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/search.yml
+    prefix: /search

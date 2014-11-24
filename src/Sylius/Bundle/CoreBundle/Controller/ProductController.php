@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 
 /**
  * Product controller.
@@ -39,6 +40,9 @@ class ProductController extends ResourceController
      */
     public function indexByTaxonAction(Request $request, $permalink)
     {
+        $criteria = $request->get('sylius_filter_form');
+        unset($criteria['_token'], $criteria['filter']);
+
         if ($request->attributes->has('_sylius_entity')) {
             $taxon = $request->attributes->get('_sylius_entity');
         } else {
@@ -50,12 +54,37 @@ class ProductController extends ResourceController
             }
         }
 
-        $paginator = $this
-            ->getRepository()
-            ->createByTaxonPaginator($taxon)
-        ;
+        /**
+         * when using elastic search if you want to setup multiple indexes and control
+         * them separately you can do so by adding the index service with a setter
+         *
+         * ->setTargetIndex($this->get('fos_elastica.index.my_own_index'))
+         *
+         * where my_own_index is the index name used in the configuration
+         * fos_elastica:
+         *      indexes:
+         *          my_own_index:
+         */
+        $finder = $this->get('sylius_search.finder')
+            ->setFacetGroup('categories_set')
+            ->find(new TaxonQuery($taxon, $request->query->get('filters', array())));
 
-        return $this->renderResults($taxon, $paginator, 'indexByTaxon.html', $request->get('page', 1));
+        $config = $this->container->getParameter("sylius_search.config");
+
+        $paginator = $finder->getPaginator();
+
+        return $this->renderResults(
+            $taxon,
+            $paginator,
+            'indexByTaxon.html',
+            $request->get('page', 1),
+            $finder->getFacets(),
+            $config['filters']['facets'],
+            $finder->getFilters(),
+            $this->get('sylius_search.request_handler')->getQuery(),
+            $this->get('sylius_search.request_handler')->getSearchParam(),
+            $this->container->getParameter('sylius_search.request.method')
+        );
     }
 
     /**
@@ -182,7 +211,17 @@ class ProductController extends ResourceController
         return parent::findOr404($request, $criteria);
     }
 
-    private function renderResults(TaxonInterface $taxon, Pagerfanta $results, $template, $page)
+    private function renderResults(
+        TaxonInterface $taxon,
+        Pagerfanta $results,
+        $template, $page,
+        $facets = null,
+        $facetTags = null,
+        $filters = null,
+        $searchTerm = null,
+        $searchParam = null,
+        $requestMethod = null
+    )
     {
         $results->setCurrentPage($page, true, true);
         $results->setMaxPerPage($this->config->getPaginationMaxPerPage());
@@ -193,6 +232,12 @@ class ProductController extends ResourceController
             ->setData(array(
                 'taxon'    => $taxon,
                 'products' => $results,
+                'facets'   => $facets,
+                'facetTags' => $facetTags,
+                'filters' => $filters,
+                'searchTerm' => $searchTerm,
+                'searchParam' => $searchParam,
+                'requestMethod' => $requestMethod
             ))
         ;
 
