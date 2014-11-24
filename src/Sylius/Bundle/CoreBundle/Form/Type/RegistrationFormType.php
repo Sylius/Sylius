@@ -16,10 +16,21 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationFormType extends BaseType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstName', 'text', array('label' => 'sylius.form.user.first_name'));
-        $builder->add('lastName', 'text', array('label' => 'sylius.form.user.last_name'));
+        $builder
+            ->add('firstName', 'text', array(
+                'label'         => 'sylius.form.user.first_name',
+                'property_path' => 'customer.firstName',
+            ))
+            ->add('lastName', 'text', array(
+                'label'         => 'sylius.form.user.last_name',
+                'property_path' => 'customer.lastName',
+            ))
+        ;
 
         parent::buildForm($builder, $options);
 
@@ -27,6 +38,9 @@ class RegistrationFormType extends BaseType
         $builder->remove('username');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_user_registration';

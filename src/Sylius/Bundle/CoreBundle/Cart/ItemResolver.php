@@ -136,8 +136,8 @@ class ItemResolver implements ItemResolverInterface
 
         $context = array('quantity' => $quantity);
 
-        if (null !== $user = $cart->getUser()) {
-            $context['groups'] = $user->getGroups()->toArray();
+        if (null !== $customer = $cart->getCustomer()) {
+            $context['groups'] = $customer->getUser()->getGroups()->toArray();
         }
 
         $item->setUnitPrice($this->priceCalculator->calculate($variant, $context));

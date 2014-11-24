@@ -83,6 +83,8 @@
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
+        <parameter key="sylius.user_manager.class">Sylius\Bundle\CoreBundle\Security\UserManager</parameter>
+
         <!-- Data fetchers -->
         <parameter key="sylius.registry.report.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
@@ -458,6 +460,7 @@
             <argument>_sylius</argument>
             <argument>%sylius.sylius_by_classes%</argument>
         </service>
+        <service id="sylius.user_manager" class="%sylius.user_manager.class%" parent="fos_user.user_manager.default" public="true"/>
 
         <!-- Data fetchers -->
         <service id="sylius.registry.report.data_fetcher" class="%sylius.registry.report.class%">

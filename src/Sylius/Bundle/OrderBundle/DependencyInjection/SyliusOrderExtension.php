@@ -13,13 +13,14 @@ namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 /**
  * Order extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusOrderExtension extends AbstractResourceExtension
+class SyliusOrderExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -34,5 +35,23 @@ class SyliusOrderExtension extends AbstractResourceExtension
         );
 
         $container->setParameter('sylius.order.allow_guest_order', $config['guest_order']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('sylius_customer')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('sylius_customer', array(
+            'classes' => array(
+                'customer' => array(
+                    'model' => 'Sylius\Component\Order\Model\Customer'
+                ),
+            ))
+        );
     }
 }

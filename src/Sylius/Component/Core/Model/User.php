@@ -13,7 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\AddressInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -24,14 +25,28 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 class User extends BaseUser implements UserInterface
 {
     /**
-     * @var CustomerInterface
+     * Creation time.
+     *
+     * @var \DateTime
      */
-    protected $customer;
+    protected $createdAt;
+
+    /**
+     * Modification time.
+     *
+     * @var \DateTime
+     */
+    protected $updatedAt;
 
     /**
      * @var \DateTime
      */
     protected $deletedAt;
+
+    /**
+     * @var CustomerInterface
+     */
+    protected $customer;
 
     /**
      * @var AddressInterface
@@ -73,8 +88,12 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setCustomer(BaseCustomerInterface $customer = null)
     {
+        if (null !== $customer) {
+            $customer->setUser($this);
+        }
+
         $this->customer = $customer;
     }
 
@@ -100,6 +119,31 @@ class User extends BaseUser implements UserInterface
         parent::setUsernameCanonical($emailCanonical);
 
         return $this;
+    }
+
+    public function getFirstName()
+    {
+        return $this->customer->getFirstName();
+    }
+
+    public function getLastName()
+    {
+        return $this->customer->getLastName();
+    }
+
+    public function getFullName()
+    {
+        return $this->customer->getFullName();
+    }
+
+    public function getGender()
+    {
+        return $this->customer->getGender();
+    }
+
+    public function getCurrency()
+    {
+        return $this->customer->getCurrency();
     }
 
     /**
@@ -152,6 +196,38 @@ class User extends BaseUser implements UserInterface
     public function getShippingAddress()
     {
         return $this->shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**

@@ -70,7 +70,7 @@ abstract class CheckoutStep extends ControllerStep
     /**
      * Is user logged in?
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isUserLoggedIn()
     {

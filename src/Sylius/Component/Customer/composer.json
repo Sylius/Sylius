@@ -22,7 +22,8 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/addressing": "0.12.*@dev"
+        "sylius/addressing": "0.12.*@dev",
+        "symfony/security": "~2.4"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0"

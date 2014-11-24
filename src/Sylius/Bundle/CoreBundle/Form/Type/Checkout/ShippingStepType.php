@@ -30,7 +30,9 @@ class ShippingStepType extends AbstractResourceType
         $builder
             ->add('shipments', 'collection', array(
                 'type'    => 'sylius_checkout_shipment',
-                'options' => array('criteria' => $options['criteria'])
+                'options' => array(
+                    'criteria' => $options['criteria'],
+                ),
             ))
         ;
     }
@@ -44,10 +46,10 @@ class ShippingStepType extends AbstractResourceType
 
         $resolver
             ->setOptional(array(
-                'criteria'
+                'criteria',
             ))
             ->setAllowedTypes(array(
-                'criteria' => array('array')
+                'criteria' => array('array'),
             ))
         ;
     }

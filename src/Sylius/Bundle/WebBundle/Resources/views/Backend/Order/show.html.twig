@@ -52,10 +52,10 @@
             <dd>{{ order.createdAt|date }}</dd>
             <dt>Email</dt>
             <dd>
-                {% if order.user %}
-                    <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a>
+                {% if order.customer.user %}
+                    <a href="{{ path('sylius_backend_user_show', {'id': order.customer.user.id}) }}">{{ order.customer.email }}</a>
                 {% else %}
-                    {{ order.email }}
+                    {{ order.customer.email }}
                 {% endif %}
             </dd>
         </dl>

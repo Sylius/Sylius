@@ -69,7 +69,7 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/create.html.twig')
             ->setData(array(
-                'user' => $this->getUser(),
+                'user' => $user,
                 'form' => $form->createView()
             ))
         ;
@@ -100,7 +100,7 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/update.html.twig')
             ->setData(array(
-                'user'    => $this->getUser(),
+                'user'    => $user,
                 'address' => $address,
                 'form'    => $form->createView()
             ))

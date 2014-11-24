@@ -12,10 +12,10 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\AddressInterface;
 
 /**
-
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class UserSpec extends ObjectBehavior
@@ -40,50 +40,23 @@ class UserSpec extends ObjectBehavior
         $this->getBillingAddress()->shouldReturn(null);
     }
 
-    function its_addresses_is_collection()
+    function its_shipping_address_is_mutable(AddressInterface $address, CustomerInterface $customer)
     {
-        $this->getAddresses()->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
-    }
-
-    function it_has_no_addresses_by_default()
-    {
-        $this->getAddresses()->count()->shouldReturn(0);
-    }
-
-    function its_shipping_address_is_mutable(AddressInterface $address)
-    {
+        $this->setCustomer($customer);
         $this->setShippingAddress($address);
+
+        $customer->hasAddress($address)->willReturn(true);
+
         $this->getShippingAddress()->shouldReturn($address);
     }
 
-    function its_billing_address_is_mutable(AddressInterface $address)
+    function its_billing_address_is_mutable(AddressInterface $address, CustomerInterface $customer)
     {
+        $this->setCustomer($customer);
         $this->setBillingAddress($address);
+
+        $customer->hasAddress($address)->willReturn(true);
+
         $this->getBillingAddress()->shouldReturn($address);
-    }
-
-    function its_addresses_are_mutable(AddressInterface $address)
-    {
-        $this->addAddress($address);
-        $this->hasAddress($address)->shouldReturn(true);
-    }
-
-    function it_can_remove_addresses(AddressInterface $address)
-    {
-        $this->addAddress($address);
-        $this->removeAddress($address);
-        $this->hasAddress($address)->shouldReturn(false);
-    }
-
-    function it_adds_address_when_billing_address_is_set(AddressInterface $address)
-    {
-        $this->setBillingAddress($address);
-        $this->hasAddress($address)->shouldReturn(true);
-    }
-
-    function it_adds_address_when_shipping_address_is_set(AddressInterface $address)
-    {
-        $this->setShippingAddress($address);
-        $this->hasAddress($address)->shouldReturn(true);
     }
 }

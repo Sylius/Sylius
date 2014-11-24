@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
+use Sylius\Component\Customer\Model\AddressInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -76,11 +77,4 @@ interface UserInterface extends BaseUserInterface, CustomerAwareInterface, Ident
      * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
-
-    /**
-     * Get orders.
-     *
-     * @return Collection|OrderInterface[]
-     */
-    public function getOrders();
 }

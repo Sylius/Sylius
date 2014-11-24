@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Core\Model\UserAwareInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -42,12 +43,16 @@ class UserAwareListener
             return;
         }
 
+        if ($user instanceof CustomerAwareInterface) {
+            $user = $user->getCustomer();
+        }
+
         $resource->setCustomer($user);
     }
 
     protected function getUser()
     {
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->securityContext->isGranted('IS_CUSTOMER') || $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->securityContext->getToken()->getUser();
         }
     }

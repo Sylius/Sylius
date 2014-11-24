@@ -38,7 +38,7 @@ class OrderController extends ResourceController
 
         $paginator = $this
             ->getRepository()
-            ->createByUserPaginator($user, $this->config->getSorting())
+            ->createByCustomerPaginator($user->getCustomer(), $this->config->getSorting())
         ;
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);

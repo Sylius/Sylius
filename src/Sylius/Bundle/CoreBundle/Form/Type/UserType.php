@@ -36,10 +36,12 @@ class UserType extends ProfileFormType
     {
         $builder
             ->add('firstName', 'text', array(
-                'label' => 'sylius.form.user.first_name'
+                'label'         => 'sylius.form.user.first_name',
+                'property_path' => 'customer.firstName',
             ))
             ->add('lastName', 'text', array(
-                'label' => 'sylius.form.user.last_name'
+                'label'         => 'sylius.form.user.last_name',
+                'property_path' => 'customer.lastName',
             ))
         ;
 

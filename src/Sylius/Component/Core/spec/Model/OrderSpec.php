@@ -39,9 +39,9 @@ class OrderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
-    function it_should_not_have_user_defined_by_default()
+    function it_should_not_have_customer_defined_by_default()
     {
-        $this->getUser()->shouldReturn(null);
+        $this->getCustomer()->shouldReturn(null);
     }
 
     function it_should_initialize_inventory_units_collection_by_default()

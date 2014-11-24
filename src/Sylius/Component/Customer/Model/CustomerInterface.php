@@ -13,9 +13,13 @@ namespace Sylius\Component\Customer\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-interface CustomerInterface extends TimestampableInterface
+interface CustomerInterface extends TimestampableInterface, UserInterface
 {
+    const GENDER_FEMALE = 'female';
+    const GENDER_MALE   = 'male';
+
     /**
      * Get email address.
      *

@@ -37,7 +37,7 @@ class PaymentStepType extends AbstractResourceType
                 'property_path' => 'lastPayment.method',
                 'constraints'   => array(
                     $notBlank
-                )
+                ),
             ))
         ;
     }

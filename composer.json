@@ -68,6 +68,7 @@
         "symfony/monolog-bundle":               "~2.3",
         "symfony/options-resolver":             "~2.3",
         "symfony/property-access":              "~2.3",
+        "symfony/security":                     "~2.4",
         "symfony/swiftmailer-bundle":           "~2.3",
         "symfony/symfony":                      "~2.3",
         "symfony/twig-bundle":                  "~2.3",

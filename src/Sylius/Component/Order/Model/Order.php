@@ -14,7 +14,7 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Customer\Model\AddressInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
  * Model for orders.
@@ -195,7 +195,7 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setCustomer(BaseCustomerInterface $customer = null)
     {
         $this->customer = $customer;
     }
@@ -213,6 +213,8 @@ class Order implements OrderInterface
      */
     public function setShippingAddress(AddressInterface $address)
     {
+        $address->setCustomer(null);
+
         $this->shippingAddress = $address;
     }
 
@@ -229,6 +231,8 @@ class Order implements OrderInterface
      */
     public function setBillingAddress(AddressInterface $address)
     {
+        $address->setCustomer(null);
+
         $this->billingAddress = $address;
     }
 

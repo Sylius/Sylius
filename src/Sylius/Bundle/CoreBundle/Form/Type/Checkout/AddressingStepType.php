@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +33,13 @@ class AddressingStepType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('shippingAddress', 'sylius_address', array('shippable' => true))
+            ->add('billingAddress', 'sylius_address')
+            ->add('differentBillingAddress', 'checkbox', array(
+                'mapped'   => false,
+                'required' => false,
+                'label'    => 'sylius.form.checkout.addressing.different_billing_address',
+            ))
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $data = $event->getData();
 
@@ -44,31 +52,35 @@ class AddressingStepType extends AbstractResourceType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
                 /* @var $user UserInterface */
                 $user = $options['user'];
+                /* @var $order OrderInterface */
+                $order = $event->getData();
                 if (null === $user || !$user instanceof UserInterface) {
+                    if ($user instanceof CustomerInterface) {
+                        if (null !== $order->getShippingAddress()) {
+                            $user->addAddress($order->getShippingAddress());
+                        }
+
+                        if (null !== $order->getBillingAddress()) {
+                            $user->addAddress($order->getBillingAddress());
+                        }
+                    }
                     return;
                 }
 
-                /* @var $order OrderInterface */
+                /** @var $order OrderInterface */
                 $order = $event->getData();
-                if ($order->getShippingAddress() === null && $user->getShippingAddress() !== null) {
+                if (null === $order->getShippingAddress() && null !== $user->getShippingAddress()) {
                     $address = clone $user->getShippingAddress();
                     $address->setUser(null);
                     $order->setShippingAddress($address);
                 }
 
-                if ($order->getBillingAddress() === null && $user->getBillingAddress() !== null) {
+                if (null === $order->getBillingAddress() && null !== $user->getBillingAddress()) {
                     $address = clone $user->getBillingAddress();
                     $address->setUser(null);
                     $order->setBillingAddress($address);
                 }
             })
-            ->add('shippingAddress', 'sylius_address', array('shippable' => true))
-            ->add('billingAddress', 'sylius_address')
-            ->add('differentBillingAddress', 'checkbox', array(
-                'mapped'   => false,
-                'required' => false,
-                'label'    => 'sylius.form.checkout.addressing.different_billing_address'
-            ))
         ;
     }
 
@@ -82,7 +94,7 @@ class AddressingStepType extends AbstractResourceType
         $resolver
             ->setDefaults(array(
                 'user' => null,
-                'cascade_validation' => true
+                'cascade_validation' => true,
             ))
         ;
     }

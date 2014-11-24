@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\Email;
 
 /**
@@ -23,12 +24,30 @@ use Symfony\Component\Validator\Constraints\Email;
 class GuestType extends AbstractResourceType
 {
     /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
+
+    public function __construct($dataClass, array $validationGroups = array(), SecurityContextInterface $securityContext)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->securityContext = $securityContext;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $email = null;
+        if ($this->securityContext->isGranted('IS_CUSTOMER')) {
+            $email = $this->securityContext->getToken()->getUser()->getEmail();
+        }
+
         $builder
             ->add('email', 'email', array(
+                'empty_data'  => $email,
                 'constraints' => array(
                     new Email(),
                 ),

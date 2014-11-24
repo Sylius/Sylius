@@ -30,7 +30,7 @@ class CouponType extends BaseCouponType
 
         $builder
             ->add('perUserUsageLimit', 'integer', array(
-                'label' => 'sylius.form.coupon.per_user_usage_limit'
+                'label' => 'sylius.form.coupon.per_user_usage_limit',
             ))
         ;
     }

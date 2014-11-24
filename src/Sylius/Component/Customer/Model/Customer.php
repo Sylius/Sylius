@@ -16,9 +16,39 @@ use Doctrine\Common\Collections\Collection;
 
 class Customer implements CustomerInterface
 {
+    /**
+     * Id.
+     *
+     * @var mixed
+     */
+    protected $id;
+
+    /**
+     * Email address.
+     *
+     * @var string
+     */
     protected $email;
+
+    /**
+     * First name.
+     *
+     * @var string
+     */
     protected $firstName;
+
+    /**
+     * Last name.
+     *
+     * @var string
+     */
     protected $lastName;
+
+    /**
+     * Gender.
+     *
+     * @var string
+     */
     protected $gender;
 
     /**
@@ -56,9 +86,56 @@ class Customer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPassword()
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        return array('IS_CUSTOMER');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getEmail()
     {
-        $this->email;
+        return $this->email;
     }
 
     /**
@@ -114,7 +191,7 @@ class Customer implements CustomerInterface
      */
     public function getGender()
     {
-        $this->gender;
+        return $this->gender;
     }
 
     /**
@@ -122,7 +199,9 @@ class Customer implements CustomerInterface
      */
     public function setGender($gender)
     {
-        $this->gender = $gender;
+        if (CustomerInterface::GENDER_FEMALE === $gender || CustomerInterface::GENDER_MALE === $gender) {
+            $this->gender = $gender;
+        }
     }
 
     /**

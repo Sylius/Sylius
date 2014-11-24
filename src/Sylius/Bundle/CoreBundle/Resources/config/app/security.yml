@@ -5,8 +5,11 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email
+        sylius_customer:
+            entity: { class: %sylius.model.customer.class%, property: username }
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
+        Sylius\Component\Customer\Model\CustomerInterface: plaintext
     firewalls:
         administration:
             switch_user: true
@@ -35,6 +38,8 @@ security:
             switch_user: { role: ROLE_SYLIUS_ADMIN }
             context:     user
             pattern:     /.*
+            simple_preauth:
+                authenticator: sylius.customer_authenticator
             form_login:
                 provider: fos_userbundle
                 login_path: /login
