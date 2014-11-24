@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
-
 /**
  * User aware interface.
  *
@@ -30,7 +28,9 @@ interface UserAwareInterface
     /**
      * Set user.
      *
-     * @param BaseUserInterface $user
+     * @param UserInterface $user
+     *
+     * @return self
      */
-    public function setUser(BaseUserInterface $user = null);
+    public function setUser(UserInterface $user);
 }

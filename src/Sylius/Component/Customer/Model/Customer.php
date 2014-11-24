@@ -13,7 +13,6 @@ namespace Sylius\Component\Customer\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Addressing\Model\AddressInterface;
 
 class Customer implements CustomerInterface
 {
@@ -179,7 +178,7 @@ class Customer implements CustomerInterface
      */
     public function addAddress(AddressInterface $address)
     {
-        if (!$this->hasAddress($address)) {
+        if (!$this->addresses->contains($address)) {
             $this->addresses[] = $address;
             $address->setCustomer($this);
         }
@@ -190,8 +189,10 @@ class Customer implements CustomerInterface
      */
     public function removeAddress(AddressInterface $address)
     {
-        $this->addresses->removeElement($address);
-        $address->setCustomer(null);
+        if ($this->addresses->contains($address)) {
+            $this->addresses->removeElement($address);
+            $address->setCustomer(null);
+        }
     }
 
     /**

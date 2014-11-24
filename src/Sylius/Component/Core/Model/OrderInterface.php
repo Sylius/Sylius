@@ -34,34 +34,6 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     const CHECKOUT_STATE_COMPLETED  = 'completed';
 
     /**
-     * Get shipping address.
-     *
-     * @return AddressInterface
-     */
-    public function getShippingAddress();
-
-    /**
-     * Set shipping address.
-     *
-     * @param AddressInterface $address
-     */
-    public function setShippingAddress(AddressInterface $address);
-
-    /**
-     * Get billing address.
-     *
-     * @return AddressInterface
-     */
-    public function getBillingAddress();
-
-    /**
-     * Set billing address.
-     *
-     * @param AddressInterface $address
-     */
-    public function setBillingAddress(AddressInterface $address);
-
-    /**
      * Get the checkout state.
      *
      * @return string
@@ -141,22 +113,6 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @return bool
      */
     public function hasShipment(ShipmentInterface $shipment);
-
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string
-     *
-     * @return OrderInterface
-     */
-    public function setCurrency($currency);
 
     /**
      * Adds promotion coupon.

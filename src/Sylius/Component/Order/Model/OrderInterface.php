@@ -12,6 +12,7 @@
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customer\Model\AddressInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -36,7 +37,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Cus
     /**
      * Has the order been completed by user and can be handled.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCompleted();
 
@@ -76,7 +77,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Cus
     /**
      * Returns number of order items.
      *
-     * @return integer
+     * @return int
      */
     public function countItems();
 
@@ -99,14 +100,14 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Cus
      *
      * @param OrderItemInterface $item
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasItem(OrderItemInterface $item);
 
     /**
      * Get items total.
      *
-     * @return integer
+     * @return int
      */
     public function getItemsTotal();
 
@@ -119,14 +120,14 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Cus
     /**
      * Get order total.
      *
-     * @return integer
+     * @return int
      */
     public function getTotal();
 
     /**
      * Set total.
      *
-     * @param integer $total
+     * @param int $total
      */
     public function setTotal($total);
 
@@ -137,23 +138,16 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Cus
     public function calculateTotal();
 
     /**
-     * Alias of {@link countItems()}.
-     *
-     * @deprecated To be removed in 1.0. Use {@link countItems()} instead.
-     */
-    public function getTotalItems();
-
-    /**
      * Returns total quantity of items in cart.
      *
-     * @return integer
+     * @return int
      */
     public function getTotalQuantity();
 
     /**
      * Checks whether the cart is empty or not.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEmpty();
 
@@ -175,6 +169,48 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Cus
      * @param string $state
      */
     public function setState($state);
+
+    /**
+     * Get currency.
+     *
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * Set currency.
+     *
+     * @param string
+     */
+    public function setCurrency($currency);
+
+    /**
+     * Get shipping address.
+     *
+     * @return AddressInterface
+     */
+    public function getShippingAddress();
+
+    /**
+     * Set shipping address.
+     *
+     * @param AddressInterface $address
+     */
+    public function setShippingAddress(AddressInterface $address);
+
+    /**
+     * Get billing address.
+     *
+     * @return AddressInterface
+     */
+    public function getBillingAddress();
+
+    /**
+     * Set billing address.
+     *
+     * @param AddressInterface $address
+     */
+    public function setBillingAddress(AddressInterface $address);
 
     /**
      * Add an identity to this order.  Eg. external identity to refer to an ebay order id

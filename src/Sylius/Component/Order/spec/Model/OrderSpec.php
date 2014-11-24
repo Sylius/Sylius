@@ -13,6 +13,8 @@ namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Customer\Model\AddressInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\IdentityInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -87,6 +89,45 @@ class OrderSpec extends ObjectBehavior
     {
         $this->setNumber('001351');
         $this->getNumber()->shouldReturn('001351');
+    }
+
+    function it_should_not_have_currency_defined_by_default()
+    {
+        $this->getCurrency()->shouldReturn(null);
+    }
+
+    function it_should_allow_defining_currency()
+    {
+        $this->setCurrency('PLN');
+        $this->getCurrency()->shouldReturn('PLN');
+    }
+
+    function it_should_allow_defining_customer(CustomerInterface $user)
+    {
+        $this->setCustomer($user);
+        $this->getCustomer()->shouldReturn($user);
+    }
+
+    function it_should_not_have_shipping_address_by_default()
+    {
+        $this->getShippingAddress()->shouldReturn(null);
+    }
+
+    function it_should_allow_defining_shipping_address(AddressInterface $address)
+    {
+        $this->setShippingAddress($address);
+        $this->getShippingAddress()->shouldReturn($address);
+    }
+
+    function it_should_not_have_billing_address_by_default()
+    {
+        $this->getBillingAddress()->shouldReturn(null);
+    }
+
+    function it_should_allow_defining_billing_address(AddressInterface $address)
+    {
+        $this->setBillingAddress($address);
+        $this->getBillingAddress()->shouldReturn($address);
     }
 
     function it_creates_items_collection_by_default()

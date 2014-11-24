@@ -13,6 +13,7 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customer\Model\AddressInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
@@ -42,6 +43,13 @@ class Order implements OrderInterface
      * @var string
      */
     protected $number;
+
+    /**
+     * Currency ISO code.
+     *
+     * @var string
+     */
+    protected $currency;
 
     /**
      * Items in order.
@@ -143,6 +151,20 @@ class Order implements OrderInterface
     protected $state = OrderInterface::STATE_CART;
 
     /**
+     * Order shipping address.
+     *
+     * @var AddressInterface
+     */
+    protected $shippingAddress;
+
+    /**
+     * Order billing address.
+     *
+     * @var AddressInterface
+     */
+    protected $billingAddress;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -176,6 +198,54 @@ class Order implements OrderInterface
     public function setCustomer(CustomerInterface $customer = null)
     {
         $this->customer = $customer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingAddress(AddressInterface $address)
+    {
+        $this->shippingAddress = $address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBillingAddress(AddressInterface $address)
+    {
+        $this->billingAddress = $address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
     /**
@@ -614,14 +684,6 @@ class Order implements OrderInterface
     public function getState()
     {
         return $this->state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotalItems()
-    {
-        return $this->countItems();
     }
 
     /**

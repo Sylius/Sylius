@@ -9,10 +9,9 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Addressing\Model\AddressInterface as BaseAddressInterface;
-use Sylius\Component\Customer\Model\CustomerAwareInterface;
 
 /**
  * Address model.

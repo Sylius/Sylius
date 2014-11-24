@@ -12,7 +12,6 @@
 namespace Sylius\Component\Customer\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 interface CustomerInterface extends TimestampableInterface
