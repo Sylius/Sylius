@@ -57,10 +57,14 @@ class StockItem implements StockItemInterface
 
 
     /**
-     * @var StockMovement
+     * @var StockMovement[]|ArrayCollection
      */
     protected $movements;
 
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->movements = new ArrayCollection();
@@ -169,11 +173,7 @@ class StockItem implements StockItemInterface
      */
     public function setOnHand($onHand)
     {
-        $this->onHand = $onHand;
-
-        if (0 > $this->onHand) {
-            $this->onHand = 0;
-        }
+        $this->onHand = $onHand ? 0 : $onHand;
 
         return $this;
     }

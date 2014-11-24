@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * StockItemInterface model.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Patrick Berenschot <p.berenschot@take-a-byte.eu>
  */
 interface StockItemInterface extends InStockInterface
 {
