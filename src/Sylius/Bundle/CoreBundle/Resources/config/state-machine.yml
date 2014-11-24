@@ -108,6 +108,14 @@ winzou_state_machine:
                     on:   'create'
                     do:   [@sylius.callback.complete_order, 'countSoldVariants']
                     args: ['object']
+                sylius_increment_promotion:
+                    on:   'create'
+                    do:   [@sylius.callback.promotion_usage, 'incrementPromotionUsage']
+                    args: ['object']
+                sylius_decrement_promotion:
+                    on:   ['release', 'abandon']
+                    do:   [@sylius.callback.promotion_usage, 'decrementPromotionUsage']
+                    args: ['object']
 
     sylius_inventory_unit:
         callbacks:
