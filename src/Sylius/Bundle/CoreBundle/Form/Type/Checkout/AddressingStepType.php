@@ -47,13 +47,19 @@ class AddressingStepType extends AbstractResourceType
                 if (null === $user || !$user instanceof UserInterface) {
                     return;
                 }
+
                 /* @var $order OrderInterface */
                 $order = $event->getData();
                 if ($order->getShippingAddress() === null && $user->getShippingAddress() !== null) {
-                    $order->setShippingAddress(clone $user->getShippingAddress());
+                    $address = clone $user->getShippingAddress();
+                    $address->setUser(null);
+                    $order->setShippingAddress($address);
                 }
+
                 if ($order->getBillingAddress() === null && $user->getBillingAddress() !== null) {
-                    $order->setBillingAddress(clone $user->getBillingAddress());
+                    $address = clone $user->getBillingAddress();
+                    $address->setUser(null);
+                    $order->setBillingAddress($address);
                 }
             })
             ->add('shippingAddress', 'sylius_address', array('shippable' => true))
