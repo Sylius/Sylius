@@ -189,7 +189,7 @@ sylius_search:
           model: Sylius\Bundle\SearchBundle\Model\SearchLog
     orm_indexes:
         product:
-            class: Sylius\Component\Core\Model\Product
+            class: %sylius.model.product.class%
             mappings:
                 id: ~
                 name: ~
