@@ -1,7 +1,10 @@
 {% form_theme form 'SyliusWebBundle::forms.html.twig' %}
 
+{% import 'SyliusWebBundle:Backend/Content/Form:forms.html.twig' as forms %}
+
 <fieldset>
-    {{ form_row(form.id, {'attr': {'class': 'input-lg'}}) }}
+    {{ forms.readonly(form.parent,form.parent.vars.value,'/cms/pages') }}
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
     {{ form_row(form.body) }}
 </fieldset>
