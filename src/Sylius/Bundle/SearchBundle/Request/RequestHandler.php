@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\Request;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,46 +19,50 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class RequestHandler {
-
+class RequestHandler
+{
     /**
-     * @var \Symfony\Component\HttpFoundation\ParameterBag
+     * @var ParameterBag
      */
     private $request;
 
     /**
      * @param Request $request
      */
-    public function __construct(Request $request) {
-        $this->request = ($request->isMethod('GET'))? $request->query:$request->request;
+    public function __construct(Request $request)
+    {
+        $this->request = $request->isMethod('GET') ? $request->query : $request->request;
     }
 
     /**
      * @param Request $request
      */
-    public function setRequest(Request $request) {
-        $this->request = ($request->isMethod('GET'))? $request->query:$request->request;
+    public function setRequest(Request $request)
+    {
+        $this->request = $request->isMethod('GET') ? $request->query : $request->request;
     }
 
     /**
      * @return mixed
      */
-    public function getPage() {
+    public function getPage()
+    {
         return $this->request->get('page', 1);
     }
 
     /**
      * @return mixed
      */
-    public function getQuery() {
+    public function getQuery()
+    {
         return $this->request->get('q');
     }
 
     /**
      * @return mixed
      */
-    public function getSearchParam() {
+    public function getSearchParam()
+    {
         return $this->request->get('search_param');
     }
-
 }

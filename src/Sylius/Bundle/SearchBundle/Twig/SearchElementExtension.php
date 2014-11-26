@@ -23,15 +23,12 @@ class SearchElementExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        $getSearchResultSnippetFunction = new \Twig_SimpleFunction('getSearchResultSnippet', function ($object) {
-
-            $pathArray = explode('\\',get_class($object));
-
-            return 'SyliusSearchBundle:SearchResultSnippets:'.lcfirst(array_pop($pathArray)).'.html.twig';
-        });
-
         return array(
-            'getsearchresultsnippet' => $getSearchResultSnippetFunction
+            'getsearchresultsnippet' => new \Twig_SimpleFunction('getSearchResultSnippet', function ($object) {
+                $pathArray = explode('\\',get_class($object));
+
+                return 'SyliusSearchBundle:SearchResultSnippets:'.lcfirst(array_pop($pathArray)).'.html.twig';
+            }),
         );
     }
 
@@ -42,5 +39,4 @@ class SearchElementExtension extends \Twig_Extension
     {
         return 'search_element_extension';
     }
-
 }

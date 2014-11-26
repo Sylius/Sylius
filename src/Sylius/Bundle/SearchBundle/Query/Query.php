@@ -12,37 +12,28 @@
 namespace Sylius\Bundle\SearchBundle\Query;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class Query
 {
     /**
-     * @var
+     * @var array
      */
-    protected $appliedFilters;
+    protected $appliedFilters = array();
 
     /**
-     * 
+     * @param array $appliedFilters
      */
-    public function __construct()
-    {
-        $this->appliedFilters = array();
-    }
-
-    /**
-     * @param $appliedFilters
-     */
-    public function setAppliedFilters($appliedFilters)
+    public function setAppliedFilters(array $appliedFilters)
     {
         $this->appliedFilters = $appliedFilters;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getAppliedFilters()
     {
         return $this->appliedFilters;
     }
-
 } 

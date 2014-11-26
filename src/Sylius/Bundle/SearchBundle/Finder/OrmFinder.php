@@ -73,7 +73,7 @@ class OrmFinder implements FinderInterface
     /**
      * @var
      */
-    private $targetType = [];
+    private $targetType = array();
 
     /**
      * @param                      $searchRepository
@@ -148,7 +148,6 @@ class OrmFinder implements FinderInterface
     public function find(Query $queryObject)
     {
         if ($queryObject instanceof SearchStringQuery) {
-
             if ($this->queryLogger->isEnabled()) {
                 $this->queryLogger->logStringQuery(
                     $queryObject->getSearchTerm(),
@@ -373,9 +372,7 @@ class OrmFinder implements FinderInterface
                             $calculatedFacets[$name][$v]['doc_count'] += 1;
                         }
                     }
-                }
-
-                if (is_numeric($value)) {
+                } elseif (is_numeric($value)) {
                     foreach ($facets[$name]['values'] as $key => $range) {
                         if ($value >= $range['from'] && $value <= $range['to']) {
                             if (empty($calculatedFacets[$name][$key])) {
@@ -386,9 +383,7 @@ class OrmFinder implements FinderInterface
                         }
                     }
                     asort($calculatedFacets[$name]);
-                }
-
-                if (is_string($value)) {
+                } elseif (is_string($value)) {
                     if (!isset($calculatedFacets[$name][$value])) {
                         $calculatedFacets[$name][$value] = array('key' => $value, 'doc_count' => 1);
                     } else {
@@ -417,7 +412,6 @@ class OrmFinder implements FinderInterface
         $filtersForFacet = array();
 
         foreach ($filters as $filter) {
-
             $filterName = key($filter);
 
             if ($facetName == preg_replace('/\d/', '', $filterName)) {
@@ -457,13 +451,11 @@ class OrmFinder implements FinderInterface
         $res = $queryBuilder->getQuery()->getResult();
 
         foreach ($res as $facet) {
-
             foreach ($filters as $separateFilter) {
                 $tags = unserialize($facet['tags']);
                 $key = key($separateFilter);
 
                 if ($separateFilter[$key] && $tags[strtolower($key)]) {
-
                     // range filtering
                     if (is_numeric($tags[strtolower($key)])) {
                         $range = explode("|", $separateFilter[$key]);
@@ -486,7 +478,6 @@ class OrmFinder implements FinderInterface
                     if (is_string($tags[strtolower($key)]) && $separateFilter[$key] == $tags[strtolower($key)]) {
                         $result[] = $facet['itemId'];
                     }
-
                 }
             }
         }
@@ -510,7 +501,6 @@ class OrmFinder implements FinderInterface
 
         $elements = array();
         foreach ($results as $result) {
-
             foreach ($this->targetType as $type) {
                 if ($result['entity'] != $this->config['orm_indexes'][$type]['class']) {
                     continue;
@@ -535,7 +525,5 @@ class OrmFinder implements FinderInterface
                 unset($this->config['filters']['facets'][$name]);
             }
         }
-
     }
-
-} 
+}

@@ -11,10 +11,8 @@
 
 namespace spec\Sylius\Bundle\SearchBundle\Listener;
 
-use Doctrine\Common\EventArgs;
-use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PostFlushEventArgs;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SearchBundle\Indexer\OrmIndexer;
 
 /**

@@ -23,7 +23,6 @@ use Sylius\Bundle\SearchBundle\Indexer\OrmIndexer;
  */
 class OrmListener implements EventSubscriber
 {
-
     /**
      * @var
      */
@@ -64,7 +63,6 @@ class OrmListener implements EventSubscriber
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         if ($this->ormIndexer->isObjectIndexable($entity)) {
             $this->scheduledForInsertion[] = $entity;
         }
@@ -76,7 +74,6 @@ class OrmListener implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         if ($this->ormIndexer->isObjectIndexable($entity)) {
             $this->scheduledForInsertion[] = $entity;
         }
@@ -98,23 +95,20 @@ class OrmListener implements EventSubscriber
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
         if ($this->ormIndexer->isObjectIndexable($entity)) {
             $this->scheduledForDeletion[] = $entity;
         }
-
     }
 
     /**
-     * @param $args
+     * @param LifecycleEventArgs $args
      */
-    public function index($args)
+    public function index(LifecycleEventArgs $args)
     {
         // workaround to avoid circular reference of entity manager on indexer service definition
         $this->ormIndexer->setEntityManager($args->getEntityManager());
 
         if (count($this->scheduledForInsertion)) {
-
             // trick to clear the array and avoid looping
             $scheduledForInsertion = $this->scheduledForInsertion;
             $this->scheduledForInsertion = array();
@@ -123,11 +117,8 @@ class OrmListener implements EventSubscriber
         }
 
         if (count($this->scheduledForDeletion)) {
-
             //this uses dql
             $this->ormIndexer->removeMany($this->scheduledForDeletion);
         }
-
     }
-
-} 
+}

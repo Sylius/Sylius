@@ -21,6 +21,7 @@
         <parameter key="sylius.callback.shipment_states.class">Sylius\Bundle\CoreBundle\StateMachineCallback\ShipmentStatesCallback</parameter>
         <parameter key="sylius.callback.order_payment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback</parameter>
         <parameter key="sylius.callback.coupon_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback</parameter>
+        <parameter key="sylius.callback.promotion_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\PromotionUsageCallback</parameter>
         <parameter key="sylius.callback.order_shipment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderShipmentCallback</parameter>
     </parameters>
 
@@ -35,6 +36,7 @@
         </service>
 
         <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />
+        <service id="sylius.callback.promotion_usage" class="%sylius.callback.promotion_usage.class%" />
 
         <service id="sylius.callback.order_shipment" class="%sylius.callback.order_shipment.class%">
             <argument type="service" id="sm.factory" />

@@ -22,7 +22,8 @@ interface SearchLogInterface
      * Set searchString
      *
      * @param string $searchString
-     * @return SearchLog
+     *
+     * @return SearchLogInterface
      */
     public function setSearchString($searchString);
 
@@ -34,9 +35,9 @@ interface SearchLogInterface
     public function getSearchString();
 
     /**
-     * @param $remoteAddress
+     * @param string $remoteAddress
      *
-     * @return $this
+     * @return SearchLogInterface
      */
     public function setRemoteAddress($remoteAddress);
 
@@ -51,7 +52,8 @@ interface SearchLogInterface
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return SearchLog
+     *
+     * @return SearchLogInterface
      */
     public function setCreatedAt($createdAt);
 
@@ -61,5 +63,4 @@ interface SearchLogInterface
      * @return \DateTime
      */
     public function getCreatedAt();
-
-} 
+}

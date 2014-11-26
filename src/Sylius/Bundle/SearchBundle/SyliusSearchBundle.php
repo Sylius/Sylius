@@ -13,8 +13,6 @@ namespace Sylius\Bundle\SearchBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 
 /**
  * Search bundle.
@@ -26,18 +24,10 @@ class SyliusSearchBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -56,7 +46,7 @@ class SyliusSearchBundle extends AbstractResourceBundle
     {
         return array(
             'Sylius\Bundle\SearchBundle\Model\SearchIndexInterface' => 'sylius.model.search.class',
-            'Sylius\Bundle\SearchBundle\Model\SearchLogInterface' => 'sylius.model.log.class',
+            'Sylius\Bundle\SearchBundle\Model\SearchLogInterface'   => 'sylius.model.log.class',
         );
     }
 
