@@ -27,7 +27,7 @@
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
+        "phpspec/phpspec": "~2.1",
         "symfony/form":    "~2.3",
         "twig/twig":       "~1.0"
     },

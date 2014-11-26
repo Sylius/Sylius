@@ -88,7 +88,7 @@
         "behat/mink":                        "~1.6",
         "coduo/php-matcher":                 "~1.0",
         "fzaninotto/faker":                  "~1.2",
-        "phpspec/phpspec":                   "~2.0",
+        "phpspec/phpspec":                   "~2.1",
         "phpunit/phpunit":                   "~4.1"
     },
     "replace": {

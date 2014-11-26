@@ -32,7 +32,7 @@
         "doctrine/orm":                     "~2.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
+        "phpspec/phpspec": "~2.1",
         "sylius/taxonomy": "0.13.*@dev"
     },
     "config": {

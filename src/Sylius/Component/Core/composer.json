@@ -40,7 +40,7 @@
         "knplabs/gaufrette": "0.2.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":              "~2.0",
+        "phpspec/phpspec":              "~2.1",
         "friendsofsymfony/user-bundle": "2.0.*@dev"
     },
     "config": {
