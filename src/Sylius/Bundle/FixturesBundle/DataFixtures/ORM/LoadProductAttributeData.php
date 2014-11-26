@@ -27,31 +27,31 @@ class LoadProductAttributeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $attribute = $this->createAttribute('T-Shirt brand', 'Brand');
+        $attribute = $this->createAttribute('T-Shirt brand', array('en' => 'Brand', 'es' => 'Marca'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt collection', 'Collection');
+        $attribute = $this->createAttribute('T-Shirt collection', array('en' => 'Collection', 'es' => 'Coleccion'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt material', 'Made of');
+        $attribute = $this->createAttribute('T-Shirt material', array('en' => 'Made of', 'es' => 'Material'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker resolution', 'Print resolution');
+        $attribute = $this->createAttribute('Sticker resolution', array('en' => 'Print resolution', 'es' => 'Resolucion'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker paper', 'Paper');
+        $attribute = $this->createAttribute('Sticker paper', array('en' => 'Paper', 'es' => 'Papel'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Mug material', 'Material');
+        $attribute = $this->createAttribute('Mug material', array('en' => 'Material', 'es' => 'Material'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book author', 'Author');
+        $attribute = $this->createAttribute('Book author', array('en' => 'Author', 'es' => 'Autor'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book ISBN', 'ISBN');
+        $attribute = $this->createAttribute('Book ISBN', array('en' => 'ISBN', 'es' => 'ISBN'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book pages', 'Number of pages');
+        $attribute = $this->createAttribute('Book pages', array('en' => 'Number of pages', 'es' => 'Numero de paginas'));
         $manager->persist($attribute);
 
         $manager->flush();
@@ -73,12 +73,16 @@ class LoadProductAttributeData extends DataFixture
      *
      * @return AttributeInterface
      */
-    protected function createAttribute($name, $presentation)
+    protected function createAttribute($name, array $presentationTranslations)
     {
         /* @var $attribute AttributeInterface */
         $attribute = $this->getProductAttributeRepository()->createNew();
         $attribute->setName($name);
-        $attribute->setPresentation($presentation);
+
+        foreach ($presentationTranslations as $locale => $presentation) {
+            $attribute->setCurrentLocale($locale);
+            $attribute->setPresentation($presentation);
+        }
 
         $this->setReference('Sylius.Attribute.'.$name, $attribute);
 
