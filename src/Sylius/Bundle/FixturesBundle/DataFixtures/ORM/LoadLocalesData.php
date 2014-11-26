@@ -34,9 +34,8 @@ class LoadLocalesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $localeRepository = $this->getLocaleRepository();
-        $defaultLocale = $this->container->getParameter('sylius.locale');
 
-        $locales = array_merge($this->locales, array($defaultLocale => true));
+        $locales = array_merge($this->locales, array($this->defaultLocale => true));
 
         foreach ($locales as $code => $enabled) {
             $locale = $localeRepository->createNew();

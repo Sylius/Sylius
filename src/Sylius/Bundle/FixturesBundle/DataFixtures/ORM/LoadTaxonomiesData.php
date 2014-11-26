@@ -31,21 +31,21 @@ class LoadTaxonomiesData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->createTaxonomy(
-            array('en' => 'Category', 'es' => 'Categoria'),
+            array($this->defaultLocale => 'Category', 'es' => 'Categoria'),
             array(
-                array('en' => 'T-Shirts', 'es' => 'Camisetas'),
-                array('en' => 'Stickers', 'es' => 'Pegatinas'),
-                array('en' => 'Mugs', 'es' => 'Tazas'),
-                array('en' => 'Books', 'es' => 'Libros'),
+                array($this->defaultLocale => 'T-Shirts', 'es' => 'Camisetas'),
+                array($this->defaultLocale => 'Stickers', 'es' => 'Pegatinas'),
+                array($this->defaultLocale => 'Mugs', 'es' => 'Tazas'),
+                array($this->defaultLocale => 'Books', 'es' => 'Libros'),
             )));
 
         $manager->persist($this->createTaxonomy(
-            array('en' => 'Brand', 'es' => 'Marca'),
+            array($this->defaultLocale => 'Brand', 'es' => 'Marca'),
             array(
-                array('en' => 'SuperTees', 'es' => 'SuperCamisetas'),
-                array('en' => 'Stickypicky', 'es' => 'Pegapicky'),
-                array('en' => 'Mugland', 'es' => 'Mundotaza'),
-                array('en' => 'Bookmania', 'es' => 'Lbromania'),
+                array($this->defaultLocale => 'SuperTees', 'es' => 'SuperCamisetas'),
+                array($this->defaultLocale => 'Stickypicky', 'es' => 'Pegapicky'),
+                array($this->defaultLocale => 'Mugland', 'es' => 'Mundotaza'),
+                array($this->defaultLocale => 'Bookmania', 'es' => 'Lbromania'),
             )));
 
         $manager->flush();
@@ -78,7 +78,7 @@ class LoadTaxonomiesData extends DataFixture
         foreach ($taxonomyName as $locale => $name) {
             $taxonomy->setCurrentLocale($locale);
             $taxonomy->setName($name);
-            if ('en' == $locale) {
+            if ($this->defaultLocale == $locale) {
                 $this->setReference('Sylius.Taxonomy.' . $name, $taxonomy);
             }
         }
@@ -91,7 +91,7 @@ class LoadTaxonomiesData extends DataFixture
                 $taxon->setName($taxonName);
 
 
-                if ('en' == $locale) {
+                if ($this->defaultLocale == $locale) {
                     $this->setReference('Sylius.Taxon.' . $taxonName, $taxon);
                 }
             }

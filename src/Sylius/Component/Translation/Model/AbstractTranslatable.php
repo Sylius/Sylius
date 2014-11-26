@@ -77,8 +77,8 @@ abstract class AbstractTranslatable implements TranslatableInterface
      */
     public function addTranslation(TranslationInterface $translation)
     {
-        if (!$this->translations->contains($translation)) {
-            $this->translations[] = $translation;
+        if (!$this->translations->containsKey($translation->getLocale())) {
+            $this->translations->set($translation->getLocale(), $translation);
             $translation->setTranslatable($this);
         }
 

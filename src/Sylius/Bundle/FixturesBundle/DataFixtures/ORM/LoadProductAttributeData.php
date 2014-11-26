@@ -19,6 +19,7 @@ use Sylius\Component\Product\Model\AttributeInterface;
  * Default product attributes to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class LoadProductAttributeData extends DataFixture
 {
@@ -27,31 +28,31 @@ class LoadProductAttributeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $attribute = $this->createAttribute('T-Shirt brand', array('en' => 'Brand', 'es' => 'Marca'));
+        $attribute = $this->createAttribute('T-Shirt brand', array($this->defaultLocale => 'Brand', 'es' => 'Marca'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt collection', array('en' => 'Collection', 'es' => 'Coleccion'));
+        $attribute = $this->createAttribute('T-Shirt collection', array($this->defaultLocale => 'Collection', 'es' => 'Coleccion'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('T-Shirt material', array('en' => 'Made of', 'es' => 'Material'));
+        $attribute = $this->createAttribute('T-Shirt material', array($this->defaultLocale => 'Made of', 'es' => 'Material'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker resolution', array('en' => 'Print resolution', 'es' => 'Resolucion'));
+        $attribute = $this->createAttribute('Sticker resolution', array($this->defaultLocale => 'Print resolution', 'es' => 'Resolucion'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Sticker paper', array('en' => 'Paper', 'es' => 'Papel'));
+        $attribute = $this->createAttribute('Sticker paper', array($this->defaultLocale => 'Paper', 'es' => 'Papel'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Mug material', array('en' => 'Material', 'es' => 'Material'));
+        $attribute = $this->createAttribute('Mug material', array($this->defaultLocale => 'Material', 'es' => 'Material'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book author', array('en' => 'Author', 'es' => 'Autor'));
+        $attribute = $this->createAttribute('Book author', array($this->defaultLocale => 'Author', 'es' => 'Autor'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book ISBN', array('en' => 'ISBN', 'es' => 'ISBN'));
+        $attribute = $this->createAttribute('Book ISBN', array($this->defaultLocale => 'ISBN', 'es' => 'ISBN'));
         $manager->persist($attribute);
 
-        $attribute = $this->createAttribute('Book pages', array('en' => 'Number of pages', 'es' => 'Numero de paginas'));
+        $attribute = $this->createAttribute('Book pages', array($this->defaultLocale => 'Number of pages', 'es' => 'Numero de paginas'));
         $manager->persist($attribute);
 
         $manager->flush();
@@ -69,7 +70,7 @@ class LoadProductAttributeData extends DataFixture
      * Create attribute.
      *
      * @param string $name
-     * @param string $presentation
+     * @param array  $presentationTranslations
      *
      * @return AttributeInterface
      */

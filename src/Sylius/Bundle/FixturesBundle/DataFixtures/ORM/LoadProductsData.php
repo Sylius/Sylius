@@ -17,6 +17,7 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Faker\Factory as FakerFactory;
 
 /**
  * Default assortment products to play with Sylius.
@@ -31,6 +32,20 @@ class LoadProductsData extends DataFixture
      * @var integer
      */
     private $totalVariants = 0;
+
+    /**
+     * Fakers for all translations
+     *
+     * @var Factory[]
+     */
+    private $translationFakers = array();
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->translationFakers['es'] = FakerFactory::create('es');
+    }
 
     /**
      * {@inheritdoc}
@@ -86,9 +101,14 @@ class LoadProductsData extends DataFixture
     {
         $product = $this->createProduct();
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
+
+        $product->setCurrentLocale($this->defaultLocale);
         $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+
+        $this->createProductTranslation('es', $product, 'Camiseta "%s"');
+
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
@@ -132,6 +152,9 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Sticker "%s"', $this->faker->word));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+
+        $this->createProductTranslation('es', $product, 'Pegatina "%s"');
+
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
@@ -171,6 +194,8 @@ class LoadProductsData extends DataFixture
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
 
+        $this->createProductTranslation('es', $product, 'Taza "%s"');
+
         $this->addMasterVariant($product);
 
         $this->setTaxons($product, array('Mugs', 'Mugland'));
@@ -205,6 +230,8 @@ class LoadProductsData extends DataFixture
         $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
         $product->setDescription($this->faker->paragraph);
         $product->setShortDescription($this->faker->sentence);
+
+        $this->createProductTranslation('es', $product, 'Libro "%s"'.sprintf(' por "%s"', $author));
 
         $this->addMasterVariant($product, $isbn);
 
@@ -356,5 +383,18 @@ class LoadProductsData extends DataFixture
     protected function defineTotalVariants()
     {
         define('SYLIUS_FIXTURES_TOTAL_VARIANTS', $this->totalVariants);
+    }
+
+    private function createProductTranslation($locale, ProductInterface $product, $name)
+    {
+        $esFaker = $this->translationFakers[$locale];
+
+        $product->setCurrentLocale($locale);
+
+        $product->setName(sprintf($name, $esFaker->word));
+        $product->setDescription($esFaker->paragraph);
+        $product->setShortDescription($esFaker->sentence);
+
+        $product->setCurrentLocale($this->defaultLocale);
     }
 }
