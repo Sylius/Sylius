@@ -20,7 +20,6 @@ use Symfony\Component\Process\Process;
  */
 class SearchContext extends DefaultContext
 {
-
     /**
      * @Given /^I populate the index$/
      */
@@ -63,17 +62,16 @@ class SearchContext extends DefaultContext
             ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
-            ;
+        ;
 
         $result = $queryBuilder->getQuery()->getResult();
-
         if (!$result) {
             throw new \Exception(
                 "The entry does not exist in the index"
             );
-        }else{
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -91,13 +89,12 @@ class SearchContext extends DefaultContext
         ;
 
         $result = $queryBuilder->getQuery()->getResult();
-
         if (!empty($result)) {
             throw new \Exception(
                 "The entry does exist in the index"
             );
-        }else{
-            return true;
         }
+
+        return true;
     }
-} 
+}

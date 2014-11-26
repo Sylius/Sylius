@@ -15,7 +15,6 @@ use Doctrine\DBAL\Schema\Index;
 use Doctrine\ORM\EntityManager;
 use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
 use Sylius\Bundle\SearchBundle\Model\SearchIndex;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Orm Indexer

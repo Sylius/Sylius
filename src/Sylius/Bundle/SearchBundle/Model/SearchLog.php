@@ -19,7 +19,7 @@ namespace Sylius\Bundle\SearchBundle\Model;
 class SearchLog implements SearchLogInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 

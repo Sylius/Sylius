@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ApiBundle\Test;
 
-use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
+use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 use Symfony\Component\Finder\Finder;
 
 /**

@@ -13,8 +13,8 @@ namespace Sylius\Bundle\SearchBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Search landing page controller.
@@ -72,7 +72,8 @@ class SearchController extends ResourceController
                 'searchTerm' => $this->get('sylius_search.request_handler')->getQuery(),
                 'searchParam' => $this->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
-            ));
+            ))
+        ;
 
         return $this->handleView($view);
     }
@@ -88,11 +89,10 @@ class SearchController extends ResourceController
 
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
             $taxonomy = $this->get('sylius.repository.taxonomy')
-                ->findOneBy(
-                    array(
-                        'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
-                    )
-                );
+                ->findOneBy(array(
+                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
+                ))
+            ;
 
             $filters = array();
             if ($taxonomy) {
@@ -100,7 +100,6 @@ class SearchController extends ResourceController
                     $filters[] = $taxon->getName();
                 }
             }
-
         }
 
         $this->get('sylius_search.request_handler')->setRequest($request);
@@ -113,7 +112,8 @@ class SearchController extends ResourceController
                 'searchTerm' => $this->get('sylius_search.request_handler')->getQuery(),
                 'searchParam' => $this->get('sylius_search.request_handler')->getSearchParam(),
                 'requestMethod' => $this->container->getParameter('sylius_search.request.method'),
-            ));
+            ))
+        ;
 
         return $this->handleView($view);
     }

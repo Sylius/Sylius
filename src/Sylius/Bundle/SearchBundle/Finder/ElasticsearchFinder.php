@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\Finder;
 
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
@@ -24,9 +25,8 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
  */
 class ElasticsearchFinder implements FinderInterface
 {
-
     /**
-     * @var
+     * @var SearchIndexRepository
      */
     private $searchRepository;
 
@@ -36,12 +36,12 @@ class ElasticsearchFinder implements FinderInterface
     private $config;
 
     /**
-     * @var
+     * @var ProductRepository
      */
     private $productRepository;
 
     /**
-     * @var
+     * @var QueryLoggerInterface
      */
     private $queryLogger;
 
@@ -71,13 +71,13 @@ class ElasticsearchFinder implements FinderInterface
     private $targetIndex;
 
     /**
-     * @var
+     * @var array
      */
-    private $targetTypes = [];
+    private $targetTypes = array();
 
     /**
      * TODO: maybe this should go to configuration, you can use setResultSetSize on the finder object for now
-     * @var
+     * @var int
      */
     private $resultSetSize = 100;
 
@@ -157,7 +157,7 @@ class ElasticsearchFinder implements FinderInterface
     }
 
     /**
-     * @param $size
+     * @param int $size
      *
      * @return $this
      */
@@ -177,7 +177,6 @@ class ElasticsearchFinder implements FinderInterface
     public function find(Query $queryObject)
     {
         if ($queryObject instanceof SearchStringQuery) {
-
             if ($this->queryLogger->isEnabled()) {
                 $this->queryLogger->logStringQuery(
                     $queryObject->getSearchTerm(),
@@ -205,7 +204,6 @@ class ElasticsearchFinder implements FinderInterface
         }
 
         $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), $this->targetTypes);
-
         $elasticaQuery->setSize($this->resultSetSize);
 
         $objects = $this->targetIndex->search($elasticaQuery);
@@ -286,10 +284,9 @@ class ElasticsearchFinder implements FinderInterface
     public function compileElasticaTaxonQuery($facets = null, $configuration, $taxon, $types = null)
     {
         $elasticaQuery = new \Elastica\Query();
-        $boolFilter       = new \Elastica\Filter\Bool();
+        $boolFilter    = new \Elastica\Filter\Bool();
 
         if (!empty($types)) {
-
             foreach ($types as $type) {
                 $typeFilter = new \Elastica\Filter\Type($type);
                 $boolFilter->addMust($typeFilter);
@@ -326,7 +323,6 @@ class ElasticsearchFinder implements FinderInterface
         $query = new \Elastica\Query\QueryString($searchTerm);
 
         if (!empty($types)) {
-
             foreach ($types as $type) {
                 $typeFilter = new \Elastica\Filter\Type($type);
                 $boolFilter->addMust($typeFilter);
@@ -363,11 +359,9 @@ class ElasticsearchFinder implements FinderInterface
         $aggregations = $this->createAggregations($configuration);
 
         if (!empty($appliedFilters)) {
-
             list($termFilters, $rangeFilters, $boolFilter, $filters) = $this->applyFilterToElasticaQuery($appliedFilters, $elasticaQuery);
 
             $aggregations = $this->applyFiltersToIndividualAggregations($appliedFilters, $filters, $rangeFilters, $termFilters, $aggregations, $boolFilter);
-
         }
 
         $this->applyAggregationsToElasticaQuery($configuration, $aggregations, $elasticaQuery);
@@ -409,7 +403,6 @@ class ElasticsearchFinder implements FinderInterface
                 unset($this->config['filters']['facets'][$name]);
             }
         }
-
     }
 
     /**
@@ -430,9 +423,7 @@ class ElasticsearchFinder implements FinderInterface
             $query->setFilter($boolFilter);
 
             $elasticaQuery->setQuery($query);
-
         } else {
-
             if ($taxon != 'all') {
                 $query = new \Elastica\Query\Filtered();
                 $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
@@ -459,7 +450,6 @@ class ElasticsearchFinder implements FinderInterface
     {
         $aggregations = array();
         foreach ($configuration['filters']['facets'] as $name => $facet) {
-
             // terms facet creation
             if ($facet['type'] === 'terms') {
                 ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
@@ -473,7 +463,6 @@ class ElasticsearchFinder implements FinderInterface
 
             // range facet creation
             if ($facet['type'] === 'range') {
-
                 ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
 
                 ${$name . 'Aggregation'} = new \Elastica\Aggregation\Range($name);
@@ -506,13 +495,11 @@ class ElasticsearchFinder implements FinderInterface
     public function applyFiltersToIndividualAggregations($facets, $appliedFilters, $rangeFilters, $termFilters, $aggregations, $boolFilter)
     {
         foreach ($facets as $name => $facet) {
-
             $normName = key($facet);
 
             ${$normName . 'BoolFilter'} = new \Elastica\Filter\Bool();
 
             foreach ($appliedFilters as $value) {
-
                 if (is_array($value[key($value)])) {
                     ${$normName . 'RangeFilter'} = new \Elastica\Filter\Range();
 
@@ -522,21 +509,16 @@ class ElasticsearchFinder implements FinderInterface
                     }
                 } else {
                     ${$normName . 'TermFilter'} = new \Elastica\Filter\Term();
-
                     ${$normName . 'TermFilter'}->setTerm($name, $value[key($value)]);
                     ${$normName . 'BoolFilter'}->addMust($termFilters);
                 }
             }
-
         }
 
         foreach ($this->config['filters']['facets'] as $name => $facet) {
-
             foreach ($facets as $value) {
-
                 if (count($facets) >= count($this->config['filters']['facets'])) {
                     $aggregations[$name]['aggregation_filter']->setFilter($boolFilter);
-
                 } elseif ($name != key($value)) {
                     if (isset(${key($value) . 'BoolFilter'})) {
                         $aggregations[$name]['aggregation_filter']->setFilter(${key($value) . 'BoolFilter'});
@@ -562,7 +544,6 @@ class ElasticsearchFinder implements FinderInterface
 
         $filters = array();
         foreach ($appliedFilters as $facet) {
-
             if (strpos($facet[key($facet)], "|") !== false) {
                 $filters[key($facet)][] = array('range' => explode('|', $facet[key($facet)]));
             } else {
@@ -576,7 +557,7 @@ class ElasticsearchFinder implements FinderInterface
                     $rangeFilters->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
                     $boolFilter->addShould($rangeFilters);
                 }
-            }else{
+            } else {
                 $termFilters->setTerms($name, $value);
                 $boolFilter->addShould($termFilters);
             }
@@ -610,5 +591,4 @@ class ElasticsearchFinder implements FinderInterface
             }
         }
     }
-
 }

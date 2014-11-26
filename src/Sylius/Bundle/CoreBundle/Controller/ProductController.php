@@ -13,13 +13,13 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 
 /**
  * Product controller.

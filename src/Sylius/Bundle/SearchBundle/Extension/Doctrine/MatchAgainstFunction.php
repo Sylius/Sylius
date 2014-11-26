@@ -21,8 +21,8 @@ use Doctrine\ORM\Query\SqlWalker;
  *  "MATCH" "(" StateFieldPathExpression {"," StateFieldPathExpression}* ")" "AGAINST" "("
  *      StringPrimary ["BOOLEAN"] ["EXPAND"] ")"
  */
-class MatchAgainstFunction extends FunctionNode {
-
+class MatchAgainstFunction extends FunctionNode
+{
     /**
      * @var null
      */
@@ -46,7 +46,8 @@ class MatchAgainstFunction extends FunctionNode {
     /**
      * @param Parser $parser
      */
-    public function parse(Parser $parser) {
+    public function parse(Parser $parser)
+    {
         // match
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
@@ -91,7 +92,8 @@ class MatchAgainstFunction extends FunctionNode {
      *
      * @return string
      */
-    public function getSql(SqlWalker $walker) {
+    public function getSql(SqlWalker $walker)
+    {
         $fields = array();
         foreach ($this->pathExp as $pathExp) {
             $fields[] = $pathExp->dispatch($walker);

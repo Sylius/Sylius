@@ -43,5 +43,4 @@ interface FinderInterface
      * @return mixed
      */
     public function find(Query $queryObject);
-
-} 
+}
