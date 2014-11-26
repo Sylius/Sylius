@@ -28,9 +28,19 @@ class ProductType extends BaseProductType
         $builder
             ->add('taxons', 'entity', array(
                 'multiple' => true,
-                'label' => 'sylius.form.product.taxons',
                 'class' => 'Sylius\Component\Core\Model\Taxon'
             ))
+            ->add('price', 'sylius_money', array(
+                'property_path' => 'masterVariant.price'
+            ))
+            ->add('onHand', 'integer', array(
+                'property_path' => 'masterVariant.onHand'
+            ))
+            ->add('sku', 'text', array(
+                'property_path' => 'masterVariant.sku'
+            ))
+            ->remove('masterVariant')
+            ->remove('variantSelectionMethod')
         ;
     }
 
