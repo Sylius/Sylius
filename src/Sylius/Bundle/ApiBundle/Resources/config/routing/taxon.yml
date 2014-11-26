@@ -17,12 +17,16 @@ sylius_api_taxon_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
+        _sylius:
+            form: sylius_api_taxon
 
 sylius_api_taxon_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            form: sylius_api_taxon
 
 sylius_api_taxon_delete:
     path: /{id}

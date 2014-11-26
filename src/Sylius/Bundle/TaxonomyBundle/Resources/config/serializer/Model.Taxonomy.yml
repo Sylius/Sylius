@@ -9,6 +9,8 @@ Sylius\Component\Taxonomy\Model\Taxonomy:
         name:
             expose: true
             type: string
+        root:
+            expose: true
     relations:
         - rel: self
           href:
