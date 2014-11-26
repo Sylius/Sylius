@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\SearchBundle\Finder;
 
 use Doctrine\ORM\EntityManager;
-use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
@@ -23,120 +23,15 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class OrmFinder implements FinderInterface
+class OrmFinder extends AbstractFinder
 {
-    /**
-     * @var
-     */
-    private $searchRepository;
-
-    /**
-     * @var
-     */
-    private $config;
-
-    /**
-     * @var
-     */
-    private $productRepository;
-
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
-    /**
-     * @var
-     */
-    private $queryLogger;
-
-    /**
-     * @var
-     */
-    private $facets;
-
-    /**
-     * @var
-     */
-    private $filters;
-
-    /**
-     * @var
-     */
-    private $paginator;
-
-    /**
-     * @var
-     */
-    private $facetGroup;
-
-    /**
-     * @var
-     */
-    private $targetType = array();
-
-    /**
-     * @param                      $searchRepository
-     * @param                      $config
-     * @param                      $productRepository
-     * @param EntityManager        $em
-     * @param QueryLoggerInterface $queryLogger
-     */
-    public function __construct($searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger)
+    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger)
     {
         $this->searchRepository  = $searchRepository;
         $this->config            = $config;
         $this->productRepository = $productRepository;
         $this->em                = $em;
-        $this->queryLogger = $queryLogger;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPaginator()
-    {
-        return $this->paginator;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFacets()
-    {
-        return $this->facets;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFilters()
-    {
-        return $this->filters;
-    }
-
-    /**
-     * @param $targetType
-     *
-     * @return $this
-     */
-    public function addTargetType($targetType)
-    {
-        $this->targetType[] = $targetType;
-
-        return $this;
-    }
-
-    /**
-     * @param $facetGroup
-     *
-     * @return $this
-     */
-    public function setFacetGroup($facetGroup)
-    {
-        $this->facetGroup = $facetGroup;
-
-        return $this;
+        $this->queryLogger       = $queryLogger;
     }
 
     /**
@@ -227,32 +122,25 @@ class OrmFinder implements FinderInterface
         if (isset($this->facetGroup)) {
             $this->initializeFacetGroup($this->facetGroup);
         }
+
+        $finalResults = $facets = array();
+
         // get ids and tags from full text search
-        $result = $this->query($query->getSearchTerm(), $this->em);
-
-        $finalResults = array();
-        $facets = array();
-
-        foreach ($result as $modelClass => $modelIdsToTags) {
-
+        foreach ($this->query($query->getSearchTerm(), $this->em) as $modelClass => $modelIdsToTags) {
             $modelIds = array_keys($modelIdsToTags);
 
             //filter the ids if searchParam is not all
             // TODO: Will refactor pre-search filtering into a service based on the finder configuration
             if ($query->getSearchParam() != 'all' && $query->isDropdownFilterEnabled()) {
                 $preFilteredModelIds = $this->searchRepository->getProductIdsFromTaxonName($query->getSearchParam());
-
                 if (isset($preFilteredModelIds[$modelClass])) {
                     $modelIds = array_intersect($modelIds, $preFilteredModelIds[$modelClass]);
-                }else{
+                } else {
                     $modelIds = array();
                 }
             }
 
-            $appliedFilters = $query->getAppliedFilters();
-            if (!$appliedFilters) {
-                $appliedFilters = array();
-            }
+            $appliedFilters = $query->getAppliedFilters() ?: array();
 
             $finalResults[$modelClass] = array();
 
@@ -319,7 +207,6 @@ class OrmFinder implements FinderInterface
         $facets = array();
 
         foreach ($this->config['filters']['facets'] as $facetName => $ormFacet) {
-
             $idsFromOtherFacets = $ids;
             // Loop around other facets to get the intersect of all of their possibly filtered sets
             foreach ($facetFilteredIds as $otherFacetName => $otherFacetIds) {
@@ -358,7 +245,6 @@ class OrmFinder implements FinderInterface
             }
 
             $tags = unserialize($serializedTags);
-
             foreach ($tags as $name => $value) {
                 if ($name != $givenFacetName) {
                     continue;
@@ -431,13 +317,12 @@ class OrmFinder implements FinderInterface
      *
      * @return array
      */
-    function getFilteredResults(array $ids, array $filters, $model)
+    public function getFilteredResults(array $ids, array $filters, $model)
     {
         if (empty($filters)) {
             return $ids;
         }
 
-        $result       = array();
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u.itemId, u.tags')
@@ -448,9 +333,8 @@ class OrmFinder implements FinderInterface
             ->setParameter('model', $model)
         ;
 
-        $res = $queryBuilder->getQuery()->getResult();
-
-        foreach ($res as $facet) {
+        $result = array();
+        foreach ($queryBuilder->getQuery()->getResult() as $facet) {
             foreach ($filters as $separateFilter) {
                 $tags = unserialize($facet['tags']);
                 $key = key($separateFilter);
@@ -488,7 +372,7 @@ class OrmFinder implements FinderInterface
     /**
      * The fulltext database query
      *
-     * @param               $searchTerm
+     * @param string        $searchTerm
      * @param EntityManager $em
      *
      * @return array
@@ -497,11 +381,10 @@ class OrmFinder implements FinderInterface
     {
         $query = $em->createQuery('select u.itemId, u.tags, u.entity from Sylius\Bundle\SearchBundle\Model\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm) > 0');
         $query->setParameter('searchTerm', $searchTerm);
-        $results = $query->getResult();
 
         $elements = array();
-        foreach ($results as $result) {
-            foreach ($this->targetType as $type) {
+        foreach ($query->getResult() as $result) {
+            foreach ($this->targetTypes as $type) {
                 if ($result['entity'] != $this->config['orm_indexes'][$type]['class']) {
                     continue;
                 }

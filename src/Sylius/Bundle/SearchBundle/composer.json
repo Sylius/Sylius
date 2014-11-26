@@ -22,9 +22,10 @@
     "require": {
         "php": ">=5.3.3",
 
+        "sylius/product-bundle":            "0.12.*@dev",
         "sylius/resource-bundle":           "0.12.*@dev",
         "symfony/framework-bundle":         "~2.3",
-        "symfony/property-access":          "~2.5",
+        "symfony/property-access":          "~2.3",
 
         "friendsofsymfony/elastica-bundle": "~3.0.2",
         "twig/twig":                        "~1.11",

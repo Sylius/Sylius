@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\SearchBundle\Finder;
 
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
@@ -23,71 +22,14 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class ElasticsearchFinder implements FinderInterface
+class ElasticsearchFinder extends AbstractFinder
 {
-    /**
-     * @var SearchIndexRepository
-     */
-    private $searchRepository;
-
-    /**
-     * @var
-     */
-    private $config;
-
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
-    /**
-     * @var QueryLoggerInterface
-     */
-    private $queryLogger;
-
-    /**
-     * @var
-     */
-    private $facets;
-
-    /**
-     * @var
-     */
-    private $filters;
-
-    /**
-     * @var
-     */
-    private $paginator;
-
-    /**
-     * @var
-     */
-    private $facetGroup;
-
-    /**
-     * @var
-     */
-    private $targetIndex;
-
-    /**
-     * @var array
-     */
-    private $targetTypes = array();
-
     /**
      * TODO: maybe this should go to configuration, you can use setResultSetSize on the finder object for now
      * @var int
      */
     private $resultSetSize = 100;
 
-    /**
-     * @param SearchIndexRepository $searchRepository
-     * @param $config
-     * @param $productRepository
-     * @param $targetIndex
-     * @param QueryLoggerInterface $queryLogger
-     */
     public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, $targetIndex, QueryLoggerInterface $queryLogger)
     {
         $this->searchRepository = $searchRepository;
@@ -95,65 +37,6 @@ class ElasticsearchFinder implements FinderInterface
         $this->productRepository = $productRepository;
         $this->targetIndex = $targetIndex;
         $this->queryLogger = $queryLogger;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPaginator()
-    {
-        return $this->paginator;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFacets()
-    {
-        return $this->facets;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFilters()
-    {
-        return $this->filters;
-    }
-
-    /**
-     * @param $targetIndex
-     *
-     * @return $this
-     */
-    public function setTargetIndex($targetIndex)
-    {
-        $this->targetIndex = $targetIndex;
-
-        return $this;
-    }
-
-    /**
-     * @param $targetType
-     * @return $this
-     */
-    public function addTargetType($targetType)
-    {
-        $this->targetTypes[] = $targetType;
-
-        return $this;
-    }
-
-    /**
-     * @param $facetGroup
-     *
-     * @return $this
-     */
-    public function setFacetGroup($facetGroup)
-    {
-        $this->facetGroup = $facetGroup;
-
-        return $this;
     }
 
     /**
@@ -332,7 +215,7 @@ class ElasticsearchFinder implements FinderInterface
 
         // this is currently the only pre search filter and it's a taxon
         // this should be abstracted out if other types of pre search filters are desired
-        if ($preSearchTaxonFilter != 'all') {
+        if ('all' !== $preSearchTaxonFilter) {
             $query = new \Elastica\Query\Filtered();
             $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
 
@@ -376,21 +259,18 @@ class ElasticsearchFinder implements FinderInterface
      */
     public function transformFacetsForPresentation($elements)
     {
-        $tempFacets = $elements->getAggregations();
-
-        $elasticaFacets = array();
-
-        foreach($tempFacets as $name=>$facetData) {
+        $facets = array();
+        foreach ($elements->getAggregations() as $name => $facetData) {
             unset($facetData['doc_count']);
 
             if (isset($facetData[key($facetData)]['buckets'])) {
-                $elasticaFacets[key($facetData)] = $facetData[key($facetData)]['buckets'];
+                $facets[key($facetData)] = $facetData[key($facetData)]['buckets'];
             } else {
-                $elasticaFacets[$name] = $facetData['buckets'];
+                $facets[$name] = $facetData['buckets'];
             }
         }
 
-        return array_reverse($elasticaFacets);
+        return array_reverse($facets);
     }
 
     /**
@@ -424,7 +304,7 @@ class ElasticsearchFinder implements FinderInterface
 
             $elasticaQuery->setQuery($query);
         } else {
-            if ($taxon != 'all') {
+            if ('all' !== $taxon) {
                 $query = new \Elastica\Query\Filtered();
                 $query->setQuery(new \Elastica\Query\QueryString($searchTerm));
 
@@ -452,31 +332,29 @@ class ElasticsearchFinder implements FinderInterface
         foreach ($configuration['filters']['facets'] as $name => $facet) {
             // terms facet creation
             if ($facet['type'] === 'terms') {
-                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
+                ${$name.'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
 
-                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Terms($name);
-                ${$name . 'Aggregation'}->setField($name);
-                ${$name . 'Aggregation'}->setSize(550);
+                ${$name.'Aggregation'} = new \Elastica\Aggregation\Terms($name);
+                ${$name.'Aggregation'}->setField($name);
+                ${$name.'Aggregation'}->setSize(550);
 
-                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
-            }
+                ${$name.'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
+            } // range facet creation
+            elseif ('range' === $facet['type']) {
+                ${$name.'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
 
-            // range facet creation
-            if ($facet['type'] === 'range') {
-                ${$name . 'AggregationFilter'} = new \Elastica\Aggregation\Filter($name);
-
-                ${$name . 'Aggregation'} = new \Elastica\Aggregation\Range($name);
+                ${$name.'Aggregation'} = new \Elastica\Aggregation\Range($name);
                 foreach ($facet['values'] as $value) {
-                    ${$name . 'Aggregation'}
+                    ${$name.'Aggregation'}
                         ->setField($name)
                         ->addRange($value['from'], $value['to']);
                 }
 
-                ${$name . 'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
+                ${$name.'AggregationFilter'}->addAggregation(${$name . 'Aggregation'});
             }
 
-            $aggregations[$name]['aggregation']        = ${$name . 'Aggregation'};
-            $aggregations[$name]['aggregation_filter'] = ${$name . 'AggregationFilter'};
+            $aggregations[$name]['aggregation']        = ${$name.'Aggregation'};
+            $aggregations[$name]['aggregation_filter'] = ${$name.'AggregationFilter'};
         }
 
         return $aggregations;
@@ -497,20 +375,20 @@ class ElasticsearchFinder implements FinderInterface
         foreach ($facets as $name => $facet) {
             $normName = key($facet);
 
-            ${$normName . 'BoolFilter'} = new \Elastica\Filter\Bool();
+            ${$normName.'BoolFilter'} = new \Elastica\Filter\Bool();
 
             foreach ($appliedFilters as $value) {
                 if (is_array($value[key($value)])) {
-                    ${$normName . 'RangeFilter'} = new \Elastica\Filter\Range();
+                    ${$normName.'RangeFilter'} = new \Elastica\Filter\Range();
 
                     foreach ($value as $range) {
-                        ${$normName . 'RangeFilter'}->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
-                        ${$normName . 'BoolFilter'}->addMust($rangeFilters);
+                        ${$normName.'RangeFilter'}->addField($name, array('gte' => $range['range'][0], 'lte' => $range['range'][1]));
+                        ${$normName.'BoolFilter'}->addMust($rangeFilters);
                     }
                 } else {
-                    ${$normName . 'TermFilter'} = new \Elastica\Filter\Term();
-                    ${$normName . 'TermFilter'}->setTerm($name, $value[key($value)]);
-                    ${$normName . 'BoolFilter'}->addMust($termFilters);
+                    ${$normName.'TermFilter'} = new \Elastica\Filter\Term();
+                    ${$normName.'TermFilter'}->setTerm($name, $value[key($value)]);
+                    ${$normName.'BoolFilter'}->addMust($termFilters);
                 }
             }
         }
@@ -520,7 +398,7 @@ class ElasticsearchFinder implements FinderInterface
                 if (count($facets) >= count($this->config['filters']['facets'])) {
                     $aggregations[$name]['aggregation_filter']->setFilter($boolFilter);
                 } elseif ($name != key($value)) {
-                    if (isset(${key($value) . 'BoolFilter'})) {
+                    if (isset(${key($value).'BoolFilter'})) {
                         $aggregations[$name]['aggregation_filter']->setFilter(${key($value) . 'BoolFilter'});
                     }
                 }
@@ -576,7 +454,6 @@ class ElasticsearchFinder implements FinderInterface
     public function applyAggregationsToElasticaQuery($configuration, $aggregations, $elasticaQuery)
     {
         foreach ($configuration['filters']['facets'] as $name => $facet) {
-
             if (!empty($facet)) {
                 $param = $aggregations[$name]['aggregation_filter']->hasParam('filter');
 

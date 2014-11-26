@@ -24,7 +24,7 @@ class SearchStringQuery extends Query
     protected $searchTerm;
 
     /**
-     * @var
+     * @var string
      */
     protected $searchParam;
 
@@ -46,7 +46,7 @@ class SearchStringQuery extends Query
     {
         $requestBag = $request->isMethod('GET') ? $request->query : $request->request;
 
-        $this->setAppliedFilters($requestBag->get('filters', array()));
+        $this->appliedFilters = $requestBag->get('filters', array());
         $this->searchTerm = $requestBag->get('q');
         $this->searchParam = $requestBag->get('search_param');
         $this->dropdownFilterEnabled = (bool) $dropDownFilterEnabled;
@@ -70,7 +70,7 @@ class SearchStringQuery extends Query
     }
 
     /**
-     * @param $searchParam
+     * @param string $searchParam
      */
     public function setSearchParam($searchParam)
     {
@@ -78,7 +78,7 @@ class SearchStringQuery extends Query
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSearchParam()
     {

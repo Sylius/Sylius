@@ -15,38 +15,32 @@ use Doctrine\ORM\EntityManager;
 use Sylius\Bundle\SearchBundle\Model\SearchLog;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class OrmQueryLogger implements QueryLoggerInterface
 {
     /**
      * @var EntityManager
      */
-    protected $em;
+    private $em;
 
     /**
-     * @var
+     * @var bool
      */
     private $isEnabled;
 
-    /**
-     * @param EntityManager $em
-     * @param               $isEnabled
-     */
     public function __construct(EntityManager $em, $isEnabled)
     {
         $this->em = $em;
-        $this->isEnabled = $isEnabled;
+        $this->isEnabled = (bool) $isEnabled;
     }
 
     /**
-     * @param $searchTerm
-     * @param $ipAddress
+     * {@inheritdoc}
      */
     public function logStringQuery($searchTerm, $ipAddress)
     {
         $searchLog = new SearchLog();
-
         $searchLog->setSearchString($searchTerm);
         $searchLog->setRemoteAddress($ipAddress);
 
@@ -55,7 +49,7 @@ class OrmQueryLogger implements QueryLoggerInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function isEnabled()
     {

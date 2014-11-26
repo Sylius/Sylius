@@ -12,20 +12,18 @@
 namespace Sylius\Bundle\SearchBundle\QueryLogger;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 interface QueryLoggerInterface
 {
-
     /**
-     * @param $searchTerm
-     * @param $ipAddress
+     * @param string $searchTerm
+     * @param string $ipAddress
      */
     public function logStringQuery($searchTerm, $ipAddress);
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function isEnabled();
-
-} 
+}

@@ -17,7 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
  * This class uses the property accessor to dynamically translate getters to values.
- * In case of sylius it extends the default functionality to include options and attributes.
+ * In case of Sylius it extends the default functionality to include options and attributes.
  *
  * As a result someone can use any attribute or option name and get the value of it, something like a
  * dynamic getter. This class is quite useful and maybe it belongs to the product bundle itself rather than here.
@@ -32,7 +32,7 @@ class PropertyAccessor extends BasePropertyAccessor
     protected $customAccessors;
 
     /**
-     * @param array $customAccessors
+     * @param PropertyAccessorInterface[] $customAccessors
      */
     public function __construct($customAccessors = array())
     {

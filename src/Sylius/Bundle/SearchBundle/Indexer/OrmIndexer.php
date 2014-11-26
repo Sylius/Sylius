@@ -13,6 +13,7 @@ namespace Sylius\Bundle\SearchBundle\Indexer;
 
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 use FOS\ElasticaBundle\Transformer\ModelToElasticaAutoTransformer;
 use Sylius\Bundle\SearchBundle\Model\SearchIndex;
 
@@ -29,17 +30,17 @@ class OrmIndexer implements IndexerInterface
     private $config;
 
     /**
-     * @var
+     * @var EntityManager
      */
     private $em;
 
     /**
-     * @var
+     * @var ModelToElasticaAutoTransformer
      */
-    protected $transformer;
+    private $transformer;
 
     /**
-     * @var
+     * @var string
      */
     private $output;
 
@@ -49,7 +50,7 @@ class OrmIndexer implements IndexerInterface
      * @param array                          $config
      * @param ModelToElasticaAutoTransformer $transformer
      */
-    public function __construct(Array $config, ModelToElasticaAutoTransformer $transformer)
+    public function __construct(array $config, ModelToElasticaAutoTransformer $transformer)
     {
         $this->config      = $config;
         $this->transformer = $transformer;
@@ -76,7 +77,7 @@ class OrmIndexer implements IndexerInterface
      */
     private function addToOutput($message)
     {
-        $this->output .= $message . PHP_EOL;
+        $this->output .= $message.PHP_EOL;
     }
 
     /**
@@ -99,8 +100,7 @@ class OrmIndexer implements IndexerInterface
         }
 
         $dbPlatform = $connection->getDatabasePlatform();
-        $q = $dbPlatform->getTruncateTableSQL('sylius_search_index');
-        $connection->executeUpdate($q);
+        $connection->executeUpdate($dbPlatform->getTruncateTableSQL('sylius_search_index'));
 
         foreach ($this->config['orm_indexes'] as $index) {
             $this->createIndex($index['class'], $index['mappings']);
@@ -113,28 +113,26 @@ class OrmIndexer implements IndexerInterface
     }
 
     /**
-     * @param $entity
-     * @param $fields
+     * @param string $entity
+     * @param array  $fields
      *
      * @internal param $table
      */
-    private function createIndex($entity, $fields)
+    private function createIndex($entity, array $fields)
     {
-
-        $a = array_keys($fields);
-        foreach ($a as &$value) {
-            $value = 'u.' . $value;
+        foreach (array_keys($fields) as &$value) {
+            $value = 'u.'.$value;
         }
 
-        $this->addToOutput('Populating index table with ' . $entity . ' data');
+        $this->addToOutput(sprintf('Populating index table with "%s" data', $entity));
 
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from($entity, 'u');
-        $results = $queryBuilder->getQuery()->getResult();
+            ->from($entity, 'u')
+        ;
 
-        foreach ($results as $element) {
+        foreach ($queryBuilder->getQuery()->getResult() as $element) {
             $this->createIndexForEntity($entity, $fields, $element);
         }
 
@@ -146,7 +144,7 @@ class OrmIndexer implements IndexerInterface
      */
     public function insertMany(array $entities)
     {
-        foreach($entities as $entity) {
+        foreach ($entities as $entity) {
             $class = get_class($entity);
 
             $indexName = $this->nestedValues($this->config['orm_indexes'], $class);
@@ -160,15 +158,15 @@ class OrmIndexer implements IndexerInterface
      */
     public function removeMany(array $entities)
     {
-        foreach($entities as $entity) {
+        foreach ($entities as $entity) {
             $this->removeIndexForEntity($entity);
         }
     }
 
     /**
-     * @param $entityName
-     * @param $fields
-     * @param $entity
+     * @param string $entityName
+     * @param array  $fields
+     * @param object $entity
      */
     public function createIndexForEntity($entityName, $fields, $entity)
     {
@@ -181,17 +179,14 @@ class OrmIndexer implements IndexerInterface
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
-            ->setParameter(':entity_namespace', get_class($entity));
+            ->setParameter(':entity_namespace', get_class($entity))
+        ;
 
         try {
-
             $searchIndex = $queryBuilder->getQuery()->getSingleResult();
             $searchIndex->setValue($content);
-
-        }catch(\Doctrine\ORM\NoResultException $e) {
-
+        } catch (NoResultException $e) {
             $searchIndex = new SearchIndex();
-
             $searchIndex->setItemId($entity->getId());
             $searchIndex->setEntity($entityName);
             $searchIndex->setValue($content);
@@ -211,9 +206,10 @@ class OrmIndexer implements IndexerInterface
             ->where('u.itemId = :item_id')
             ->andWhere('u.entity = :entity_namespace')
             ->setParameter(':item_id', $entity->getId())
-            ->setParameter(':entity_namespace', get_class($entity));
+            ->setParameter(':entity_namespace', get_class($entity))
+        ;
 
-        $result = $queryBuilder->getQuery()->getResult();
+        $queryBuilder->getQuery()->getResult();
     }
 
     /**
@@ -223,7 +219,7 @@ class OrmIndexer implements IndexerInterface
     public function getTagsForElementAndSave($element, $searchIndex)
     {
         /*
-         * We bound orm with elasticsearch at this point. I could separate the logic but this
+         * We bound orm with ElasticSearch at this point. I could separate the logic but this
          * means that we will have logic duplication. Maybe this could be refactored in the future.
          */
         $elasticaDocument = $this->transformer->transform($element, array_flip(array_keys($this->config['filters']['facets'])));
@@ -234,12 +230,12 @@ class OrmIndexer implements IndexerInterface
     }
 
     /**
-     * @param $fields
-     * @param $element
+     * @param array  $fields
+     * @param object $element
      *
      * @return string
      */
-    public function compileSearchableContent($fields, $element)
+    public function compileSearchableContent(array $fields, $element)
     {
         // TODO maybe I can use the property accessor here
         $content = '';
@@ -252,15 +248,17 @@ class OrmIndexer implements IndexerInterface
     }
 
     /**
-     * Checks if the object is indexable or not.
+     * Checks if the object is index'able or not.
      *
      * @param object $object
+     *
      * @return bool
      */
     public function isObjectIndexable($object)
     {
+        $class = get_class($object);
         foreach ($this->config['orm_indexes'] as $index) {
-            if ($index['class'] == get_class($object) && $this->config['driver'] == 'orm') {
+            if ($index['class'] === $class && 'orm' === $this->config['driver']) {
                 return true;
             }
         }
@@ -277,11 +275,13 @@ class OrmIndexer implements IndexerInterface
     {
         if (is_array($node)) {
             $ret = '';
-            foreach($node as $key => $val)
+            foreach ($node as $key => $val) {
                 $ret = $this->nestedValues($key, $val);
+            }
+
             return $ret;
         }
+
         return $node;
     }
-
 }

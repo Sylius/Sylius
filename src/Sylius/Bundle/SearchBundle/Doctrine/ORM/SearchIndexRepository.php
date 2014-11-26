@@ -17,7 +17,7 @@ use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class SearchIndexRepository extends EntityRepository
 {
@@ -32,7 +32,7 @@ class SearchIndexRepository extends EntityRepository
     private $productRepository;
 
     /**
-     * @param EntityManager         $em
+     * @param EntityManager     $em
      * @param ProductRepository $productRepository
      */
     public function __construct(EntityManager $em, ProductRepository $productRepository)
@@ -42,7 +42,7 @@ class SearchIndexRepository extends EntityRepository
     }
 
     /**
-     * Returns the product ids for a given taxon
+     * Returns the product ids for a given taxon.
      *
      * @param $taxonName
      *
@@ -63,9 +63,8 @@ class SearchIndexRepository extends EntityRepository
         ;
 
         $filteredIds = array();
-
-        foreach ($queryBuilder->getQuery()->getResult() as $product) {
-            $filteredIds[$productClassName][] = $product->getId();
+        foreach ($queryBuilder->getQuery()->getArrayResult() as $product) {
+            $filteredIds[$productClassName][] = $product['id'];
         }
 
         return $filteredIds;
@@ -79,7 +78,7 @@ class SearchIndexRepository extends EntityRepository
     public function hydrateSearchResults($resultSetFromFulltextSearch = array())
     {
         $results = array();
-        foreach ($resultSetFromFulltextSearch as $model=>$ids) {
+        foreach ($resultSetFromFulltextSearch as $model => $ids) {
             $queryBuilder = $this->em->createQueryBuilder();
             $queryBuilder
                 ->select('u')
@@ -88,9 +87,7 @@ class SearchIndexRepository extends EntityRepository
                 ->setParameter('ids', $ids)
             ;
 
-            $objects = $queryBuilder->getQuery()->getResult();
-
-            foreach ($objects as $object) {
+            foreach ($queryBuilder->getQuery()->getResult() as $object) {
                 $results[] = $object;
             }
         }
