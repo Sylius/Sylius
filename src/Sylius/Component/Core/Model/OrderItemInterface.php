@@ -72,4 +72,32 @@ interface OrderItemInterface extends CartItemInterface, PromotionSubjectInterfac
      * @return Boolean
      */
     public function hasInventoryUnit(InventoryUnitInterface $unit);
+
+    /**
+     * Get item sku
+     *
+     * @return string
+     */
+    public function getSku();
+
+    /**
+     * Set item sku
+     *
+     * @param string $sku
+     */
+    public function setSku($sku);
+
+    /**
+     * Get item description
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * Set item description
+     *
+     * @param string $description
+     */
+    public function setDescription($description);
 }

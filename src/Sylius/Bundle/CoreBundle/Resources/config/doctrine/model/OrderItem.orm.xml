@@ -18,6 +18,9 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Core\Model\OrderItem" table="sylius_order_item">
+        <field name="sku" column="sku" type="string" />
+        <field name="description" column="description" type="string" />
+
         <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface">
             <join-column name="variant_id" referenced-column-name="id" nullable="false" />
         </many-to-one>

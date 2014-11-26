@@ -90,18 +90,10 @@
             <td class="info">
                 <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
                     <h4 class="name">
-                        {{ product.name }}
+                        {{ item.description }}
                         {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
                     </h4>
                 </a>
-                {% if product.hasOptions %}
-                <ul class="list-unstyled">
-                    <li class="sku"><strong>{{ 'sylius.product.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
-                    {% for option in variant.options %}
-                    <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
             </td>
             <td class="quantity text-center">{{ item.quantity }}</td>
             <td class="unit-price text-center">

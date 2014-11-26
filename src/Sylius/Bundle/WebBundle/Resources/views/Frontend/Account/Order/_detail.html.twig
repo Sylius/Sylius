@@ -42,7 +42,12 @@
             {% set product = item.product %}
             <tr>
                 <td>
-                    {{ include('SyliusWebBundle:Frontend/Product:_variant.html.twig', {'variant': item.variant}) }}
+                    <a href="{{ path(item.variant) }}" class="thumbnail pull-left" style="margin-right: 15px;">
+                        <img src="{{ item.variant.image ? item.variant.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" alt="{{ item.description }}" />
+                    </a>
+                    <div>
+                        <a href="{{ path(item.variant) }}"><strong>{{ item.description }}</strong></a>
+                    </div>
                 </td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.unitPrice|sylius_money }}</td>
