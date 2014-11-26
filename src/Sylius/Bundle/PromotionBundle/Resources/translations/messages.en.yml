@@ -12,6 +12,9 @@ sylius:
             taxonomy_configuration:
                 taxons: Taxons
                 exclude: Exclude
+            contains_product_configuration:
+                variants: Products
+                exclude: Exclude
             item_count_configuration:
                 count: Count
                 equal: Equal

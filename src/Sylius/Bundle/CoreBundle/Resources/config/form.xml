@@ -39,6 +39,7 @@
         <parameter key="sylius.form.type.promotion_rule.user_loyalty_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\UserLoyaltyConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxonomy_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonomyConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.contains_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ContainsProductConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
     </parameters>
@@ -134,6 +135,11 @@
         <service id="sylius.form.type.promotion_rule.taxonomy_configuration" class="%sylius.form.type.promotion_rule.taxonomy_configuration.class%">
             <argument>%sylius.validation_group.promotion_rule_taxonomy_configuration%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_taxonomy_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.contains_product_configuration" class="%sylius.form.type.promotion_rule.contains_product_configuration.class%">
+            <argument>%sylius.validation_group.promotion_rule_contains_product_configuration%</argument>
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="form.type" alias="sylius_promotion_rule_contains_product_configuration" />
         </service>
         <service id="sylius.form.type.promotion_action.shipping_discount_configuration" class="%sylius.form.type.promotion_action.shipping_discount_configuration.class%">
             <argument>%sylius.validation_group.promotion_action_shipping_discount_configuration%</argument>
