@@ -50,6 +50,7 @@
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
         <parameter key="sylius.listener.order_user.class">Sylius\Bundle\CoreBundle\EventListener\OrderUserListener</parameter>
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
+        <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
@@ -287,6 +288,9 @@
             <argument>sylius_checkout_payment</argument>
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
+        </service>
+        <service id="sylius.listener.checkout_addressing" class="%sylius.listener.checkout_addressing.class%">
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setUserAddressing" />
         </service>
         <service id="sylius.listener.insufficient_stock_exception" class="%sylius.listener.insufficient_stock_exception.class%">
             <argument type="service" id="router" />
