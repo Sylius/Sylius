@@ -16,10 +16,12 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
+
 /**
  * Default taxonomies to play with Sylius.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class LoadTaxonomiesData extends DataFixture
 {
@@ -28,13 +30,24 @@ class LoadTaxonomiesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createTaxonomy('Category', array(
-            'T-Shirts', 'Stickers', 'Mugs', 'Books'
-        )));
+        //TODO 'en' pillar parametro x defecto
+        $manager->persist($this->createTaxonomy(
+            array('en' => 'Category', 'es' => 'Categoria'),
+            array(
+                array('en' => 'T-Shirts', 'es' => 'Camisetas'),
+                array('en' => 'Stickers', 'es' => 'Pegatinas'),
+                array('en' => 'Mugs', 'es' => 'Tazas'),
+                array('en' => 'Books', 'es' => 'Libros'),
+            )));
 
-        $manager->persist($this->createTaxonomy('Brand', array(
-            'SuperTees', 'Stickypicky', 'Mugland', 'Bookmania'
-        )));
+        $manager->persist($this->createTaxonomy(
+            array('en' => 'Brand', 'es' => 'Marca'),
+            array(
+                array('en' => 'SuperTees', 'es' => 'SuperCamisetas'),
+                array('en' => 'Stickypicky', 'es' => 'Pegapicky'),
+                array('en' => 'Mugland', 'es' => 'Mundotaza'),
+                array('en' => 'Bookmania', 'es' => 'Lbromania'),
+            )));
 
         $manager->flush();
     }
@@ -55,22 +68,33 @@ class LoadTaxonomiesData extends DataFixture
      *
      * @return TaxonomyInterface
      */
-    protected function createTaxonomy($name, array $taxons)
+    protected function createTaxonomy(array $taxonomyName, array $taxonsArray)
     {
         /* @var $taxonomy TaxonomyInterface */
         $taxonomy = $this->getTaxonomyRepository()->createNew();
-        $taxonomy->setName($name);
 
-        foreach ($taxons as $taxonName) {
-            /* @var $taxon TaxonInterface */
-            $taxon = $this->getTaxonRepository()->createNew();
-            $taxon->setName($taxonName);
-
-            $taxonomy->addTaxon($taxon);
-            $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);
+        foreach ($taxonomyName as $locale => $name) {
+            $taxonomy->setCurrentLocale($locale);
+            $taxonomy->setName($name);
+            if ('en' == $locale) {
+                $this->setReference('Sylius.Taxonomy.' . $name, $taxonomy);
+            }
         }
 
-        $this->setReference('Sylius.Taxonomy.'.$name, $taxonomy);
+        foreach ($taxonsArray as $taxonArray) {
+            /* @var $taxon TaxonInterface */
+            $taxon = $this->getTaxonRepository()->createNew();
+            foreach ($taxonArray as $locale => $taxonName) {
+                $taxon->setCurrentLocale($locale);
+                $taxon->setName($taxonName);
+
+
+                if ('en' == $locale) {
+                    $this->setReference('Sylius.Taxon.' . $taxonName, $taxon);
+                }
+            }
+            $taxonomy->addTaxon($taxon);
+        }
 
         return $taxonomy;
     }
