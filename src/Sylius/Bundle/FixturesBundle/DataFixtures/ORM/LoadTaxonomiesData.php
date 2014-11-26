@@ -45,7 +45,7 @@ class LoadTaxonomiesData extends DataFixture
                 array($this->defaultLocale => 'SuperTees', 'es' => 'SuperCamisetas'),
                 array($this->defaultLocale => 'Stickypicky', 'es' => 'Pegapicky'),
                 array($this->defaultLocale => 'Mugland', 'es' => 'Mundotaza'),
-                array($this->defaultLocale => 'Bookmania', 'es' => 'Lbromania'),
+                array($this->defaultLocale => 'Bookmania', 'es' => 'Libromania'),
             )));
 
         $manager->flush();
