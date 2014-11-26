@@ -30,7 +30,6 @@ class LoadTaxonomiesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        //TODO 'en' pillar parametro x defecto
         $manager->persist($this->createTaxonomy(
             array('en' => 'Category', 'es' => 'Categoria'),
             array(
@@ -63,8 +62,11 @@ class LoadTaxonomiesData extends DataFixture
     /**
      * Create and save taxonomy with given taxons.
      *
-     * @param string $name
-     * @param array  $taxons
+     * @param array $taxonomyName
+     * @param array $taxonsArray
+     *
+     * @internal param string $name
+     * @internal param array $taxons
      *
      * @return TaxonomyInterface
      */
