@@ -29,7 +29,6 @@ class TaxonomyType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => new TaxonomyTranslationType($this->dataClass.'Translation', $this->validationGroups),
-                'required' => false,
                 'label'    => 'sylius.form.taxonomy.name'
             ))
         ;

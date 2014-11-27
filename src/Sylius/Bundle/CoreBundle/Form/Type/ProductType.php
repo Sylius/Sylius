@@ -33,7 +33,6 @@ class ProductType extends BaseProductType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => new ProductTranslationType($this->dataClass.'Translation', $this->validationGroups),
-                'required' => false,
                 'label'    => 'sylius.form.product.translations'
             ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(

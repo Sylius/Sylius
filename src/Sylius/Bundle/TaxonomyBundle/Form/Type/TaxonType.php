@@ -31,7 +31,6 @@ class TaxonType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => new TaxonTranslationType($this->dataClass.'Translation', $this->validationGroups),
-                'required' => false,
                 'label'    => 'sylius.form.taxon.name'
             ))
             ->add('permalink', 'text', array(

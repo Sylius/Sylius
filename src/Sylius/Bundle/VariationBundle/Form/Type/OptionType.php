@@ -54,7 +54,6 @@ class OptionType extends AbstractResourceType
             ))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => new OptionTranslationType($this->dataClass.'Translation', $this->validationGroups),
-                'required' => false,
                 'label'    => 'sylius.form.option.presentation'
             ))
             ->add('values', 'collection', array(

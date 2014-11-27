@@ -59,7 +59,6 @@ class AttributeType extends AbstractResourceType
                         $this->dataClass.'Translation',
                         $this->validationGroups,
                         $this->subjectName),
-                'required' => false,
                 'label' => 'sylius.form.attribute.presentation'
             ))
             ->add('type', 'choice', array(
