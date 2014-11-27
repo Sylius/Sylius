@@ -51,8 +51,7 @@ class Country extends AbstractTranslatable implements CountryInterface
 
     public function __toString()
     {
-        // TODO name might change depending on locale, is that ok?
-        return $this->translate()->getName();
+        return $this->translate()->__toString();
     }
 
     /**

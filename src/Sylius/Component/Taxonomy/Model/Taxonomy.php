@@ -41,7 +41,7 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     public function __toString()
     {
         //TODO name depends on translation, so we shouldn't use it!!
-        return $this->translate()->getName();
+        return $this->translate()->__toString();
     }
 
     /**

@@ -109,7 +109,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
