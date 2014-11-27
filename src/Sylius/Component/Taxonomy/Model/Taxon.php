@@ -246,7 +246,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
             return $this->getSlug();
         }
 
-        $permalink == $this->parent->getPermalink().'/'.$this->getSlug();
+        $permalink = $this->parent->getPermalink().'/'.$this->getSlug();
         $this->setPermalink($permalink);
 
         return $permalink;

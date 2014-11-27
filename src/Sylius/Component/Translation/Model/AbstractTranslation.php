@@ -58,11 +58,11 @@ class AbstractTranslation implements TranslationInterface
         $old = $this->translatable;
         $this->translatable = $translatable;
 
-        if ($old !== null) {
+        if (null !== $old) {
             $old->removeTranslation($this);
         }
 
-        if ($translatable !== null) {
+        if (null !== $translatable ) {
             $translatable->addTranslation($this);
         }
 

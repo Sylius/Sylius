@@ -51,7 +51,7 @@ class LocaleFormProvider extends BaseLocaleProvider implements LocaleProviderInt
         $locales = array();
         $availableLocales = $this->getAvailableLocales();
 
-        if (count($availableLocales) == 0) {
+        if (0 == count($availableLocales)) {
             return array($this->getDefaultLocale());
         }else{
             foreach ($availableLocales as $availableLocale) {
