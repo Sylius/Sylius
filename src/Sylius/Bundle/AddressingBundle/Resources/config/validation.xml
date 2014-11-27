@@ -113,6 +113,9 @@
         <property name="provinces">
             <constraint name="Valid" />
         </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
     </class>
 
     <class name="Sylius\Component\Addressing\Model\CountryTranslation">

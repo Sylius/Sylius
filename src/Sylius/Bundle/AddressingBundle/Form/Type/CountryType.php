@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Country form type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class CountryType extends AbstractResourceType
 {
@@ -29,7 +30,6 @@ class CountryType extends AbstractResourceType
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => new CountryTranslationType($this->dataClass.'Translation', $this->validationGroups),
-                'required' => false,
                 'label'    => 'sylius.form.country.name'
             ))
             ->add('isoName', 'text', array(

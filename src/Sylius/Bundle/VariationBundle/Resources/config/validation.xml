@@ -44,6 +44,9 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
     </class>
 
     <class name="Sylius\Component\Variation\Model\OptionTranslation">

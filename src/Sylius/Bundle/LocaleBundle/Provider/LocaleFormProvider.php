@@ -75,6 +75,6 @@ class LocaleFormProvider extends BaseLocaleProvider implements LocaleProviderInt
      */
     public function getRequiredLocales()
     {
-        return array();
+        return array($this->defaultLocale);
     }
 } 
