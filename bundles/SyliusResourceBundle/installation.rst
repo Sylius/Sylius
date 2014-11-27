@@ -44,6 +44,10 @@ You also need to enable HTTP method parameter override, by calling the following
 
 .. code-block:: php
 
+    <?php
+
+    // web/app{_dev|_test}.php
+
     use Symfony\Component\HttpFoundation\Request;
 
     Request::enableHttpMethodParameterOverride();
