@@ -138,5 +138,4 @@ jms_serializer:
 a2lix_translation_form:
     locale_provider: sylius.form.locale_provider
     manager_registry: doctrine
-    required_locales: [%sylius.locale%]
     templating: "A2lixTranslationFormBundle::default.html.twig"
