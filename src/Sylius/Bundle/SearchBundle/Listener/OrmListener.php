@@ -103,7 +103,7 @@ class OrmListener implements EventSubscriber
     /**
      * @param LifecycleEventArgs $args
      */
-    public function index(LifecycleEventArgs $args)
+    public function index(PostFlushEventArgs $args)
     {
         // workaround to avoid circular reference of entity manager on indexer service definition
         $this->ormIndexer->setEntityManager($args->getEntityManager());

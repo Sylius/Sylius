@@ -24,8 +24,15 @@ class SyliusSearchExtension extends AbstractResourceExtension
     /**
      * {@inheritdoc}
      */
-    protected function process(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container)
     {
+        list($config) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
+
         $container->setParameter('sylius_search.config', $config);
 
         $container->setAlias('sylius_search.command.indexer', sprintf('sylius.search.%s.indexer', ucfirst($config['engine'])));
