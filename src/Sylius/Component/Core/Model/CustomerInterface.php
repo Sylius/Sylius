@@ -15,4 +15,10 @@ use Sylius\Component\Order\Model\CustomerInterface as BaseCustomerInterface;
 
 interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface
 {
+    /**
+     * Is customer registered as normal user?
+     *
+     * @return bool
+     */
+    public function isRegistered();
 }

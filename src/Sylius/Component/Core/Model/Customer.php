@@ -35,4 +35,12 @@ class Customer extends BaseCustomer implements CustomerInterface
     {
         $this->user = $user;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRegistered()
+    {
+        return null !== $this->user;
+    }
 }

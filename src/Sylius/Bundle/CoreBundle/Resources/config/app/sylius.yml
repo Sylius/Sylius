@@ -243,6 +243,7 @@ sylius_customer:
     classes:
         customer:
             model: Sylius\Component\Core\Model\Customer
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository
 
 sylius_translation:
     default_mapping:

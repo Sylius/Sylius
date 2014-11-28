@@ -64,6 +64,7 @@ class AddressingStepType extends AbstractResourceType
                             $user->addAddress($order->getBillingAddress());
                         }
                     }
+
                     return;
                 }
 
@@ -71,13 +72,13 @@ class AddressingStepType extends AbstractResourceType
                 $order = $event->getData();
                 if (null === $order->getShippingAddress() && null !== $user->getShippingAddress()) {
                     $address = clone $user->getShippingAddress();
-                    $address->setUser(null);
+                    $address->setCustomer(null);
                     $order->setShippingAddress($address);
                 }
 
                 if (null === $order->getBillingAddress() && null !== $user->getBillingAddress()) {
                     $address = clone $user->getBillingAddress();
-                    $address->setUser(null);
+                    $address->setCustomer(null);
                     $order->setBillingAddress($address);
                 }
             })

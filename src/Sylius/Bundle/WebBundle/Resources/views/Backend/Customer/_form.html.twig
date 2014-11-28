@@ -1,0 +1,13 @@
+{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
+
+<div class="row">
+    <div class="col-md-12">
+        <fieldset>
+            {{ form_row(form.email) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.gender) }}
+        </fieldset>
+    </div>
+</div>
+{{ form_rest(form) }}

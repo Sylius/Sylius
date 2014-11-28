@@ -13,6 +13,7 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
+        {{ buttons.edit(path('sylius_backend_customer_show', {'id': user.customer.id}, 'sylius.user.customer_details')) }}
         {% if user.id is not sameas(app.user.id) and not user.deleted %}
         {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': user.username}), 'sylius.user.impersonate'|trans) }}
         {% endif %}
@@ -63,9 +64,9 @@
             <tr>
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
                 <td>
-                        <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
-                            {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
-                        </span>
+                    <span class="label label-{{ user.enabled ? 'success' : 'danger'}}">
+                        {{ user.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                    </span>
                 </td>
             </tr>
             {% if user.lastLogin %}
@@ -137,7 +138,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}
+        {% render(url('sylius_backend_order_by_customer', app.request.query.all|merge({id: user.customer.id}) )) %}
     </div>
 </div>
 

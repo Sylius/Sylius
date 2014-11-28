@@ -291,6 +291,11 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)))
         ;
 
+        $child->addChild('customers', array(
+            'route' => 'sylius_backend_customer_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-user'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)));
+
         if ($this->authorizationChecker->isGranted('sylius.user.index')) {
             $child->addChild('users', array(
                 'route' => 'sylius_backend_user_index',

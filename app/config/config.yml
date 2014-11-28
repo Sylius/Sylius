@@ -3,8 +3,7 @@
 
 imports:
     - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: migrations.yml }    
+    - { resource: migrations.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/security.yml }
 

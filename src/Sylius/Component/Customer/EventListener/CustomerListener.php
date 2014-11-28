@@ -32,4 +32,4 @@ class CustomerListener
 
         $event->setResponse($response);
     }
-} 
+}

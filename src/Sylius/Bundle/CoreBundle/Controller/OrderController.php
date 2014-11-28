@@ -22,38 +22,30 @@ class OrderController extends ResourceController
 {
     /**
      * @param Request $request
-     * @param integer $id
+     * @param int     $id
      *
      * @return Response
      *
      * @throws NotFoundHttpException
      */
-    public function indexByUserAction(Request $request, $id)
+    public function indexByCustomerAction(Request $request, $id)
     {
-        $user = $this->get('sylius.repository.user')->findForDetailsPage($id);
-
-        if (!$user) {
-            throw new NotFoundHttpException('Requested user does not exist.');
+        $customer = $this->get('sylius.repository.customer')->find($id);
+        if (!$customer) {
+            throw new NotFoundHttpException('Requested customer does not exist.');
         }
 
         $paginator = $this
             ->getRepository()
-            ->createByCustomerPaginator($user->getCustomer(), $this->config->getSorting())
+            ->createByCustomerPaginator($customer, $this->config->getSorting())
         ;
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
         $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
-        // Fetch and cache deleted orders
-        $entityManager = $this->get('doctrine.orm.entity_manager');
-        $entityManager->getFilters()->disable('softdeleteable');
-        $paginator->getCurrentPageResults();
-        $paginator->getNbResults();
-        $entityManager->getFilters()->enable('softdeleteable');
-
-        return $this->render('SyliusWebBundle:Backend/Order:indexByUser.html.twig', array(
-            'user'   => $user,
-            'orders' => $paginator
+        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
+            'customer' => $customer,
+            'orders'   => $paginator
         ));
     }
 

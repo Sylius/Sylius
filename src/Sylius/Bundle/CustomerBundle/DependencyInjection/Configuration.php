@@ -76,6 +76,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Customer\Model\Customer')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CustomerBundle\Form\Type\CustomerType')->end()
                                 ->scalarNode('repository')->end()
                             ->end()
                         ->end()

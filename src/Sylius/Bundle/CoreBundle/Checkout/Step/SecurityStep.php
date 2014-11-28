@@ -47,7 +47,7 @@ class SecurityStep extends CheckoutStep
 
         $this->overrideSecurityTargetPath();
 
-        return $this->renderStep($context, $this->getRegistrationForm(), $this->getGuestForm($order));
+        return $this->renderStep($context, $this->getRegistrationForm(), $this->getGuestForm());
     }
 
     /**

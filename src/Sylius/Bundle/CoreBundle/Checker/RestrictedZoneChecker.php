@@ -36,6 +36,10 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
      */
     public function isRestricted($subject, AddressInterface $address = null)
     {
+        if (null === $address) {
+            return false;
+        }
+
         if (!$subject instanceof ProductInterface) {
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\ProductInterface');
         }
@@ -52,7 +56,7 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
             $user = $user->getUser();
         }
 
-        if (null === $address && null === $address = $user->getShippingAddress()) {
+        if (null === $address = $user->getShippingAddress()) {
             return false;
         }
 
