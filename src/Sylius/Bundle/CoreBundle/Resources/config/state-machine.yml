@@ -103,10 +103,13 @@ winzou_state_machine:
                     on:   'release'
                     do:   [@sm.callback.cascade_transition, 'apply']
                     args: ['object.getPayments()', 'event', '"void"', '"sylius_payment"']
-
-                sylius_count_sold_variants:
-                    on:   'create'
-                    do:   [@sylius.callback.complete_order, 'countSoldVariants']
+                sylius_increment_sold_variants:
+                    on:   'confirm'
+                    do:   [@sylius.callback.complete_order, 'increaseSoldVariants']
+                    args: ['object']
+                sylius_decrement_sold_variants:
+                    on:   'cancel'
+                    do:   [@sylius.callback.complete_order, 'decreaseSoldVariants']
                     args: ['object']
                 sylius_increment_promotion:
                     on:   'create'

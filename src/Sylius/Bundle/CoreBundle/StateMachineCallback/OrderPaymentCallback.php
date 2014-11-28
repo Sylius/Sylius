@@ -60,7 +60,8 @@ class OrderPaymentCallback
             $order->setPaymentState($payment->getState());
         }
 
-        if ($total === $order->getTotal()) {
+        // be flexible over many payment methods
+        if ($total >= $order->getTotal()) {
             $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM, true);
         }
     }
