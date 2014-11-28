@@ -43,4 +43,54 @@ class Customer extends BaseCustomer implements CustomerInterface
     {
         return null !== $this->user;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFirstName($firstName)
+    {
+        if (null === $this->user) {
+            parent::setFirstName($firstName);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLastName($lastName)
+    {
+        if (null === $this->user) {
+            parent::setLastName($lastName);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        if (null === $this->user) {
+            parent::setEmail($email);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGender($gender)
+    {
+        if (null === $this->user) {
+            parent::setGender($gender);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        if (null === $this->user) {
+            parent::setCurrency($currency);
+        }
+    }
 }

@@ -22,11 +22,11 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/addressing": "0.12.*@dev",
-        "symfony/security": "~2.4"
+        "sylius/addressing": "0.14.*@dev",
+        "symfony/security":  "~2.4"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -39,8 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.12-dev"
+            "dev-master": "0.14-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

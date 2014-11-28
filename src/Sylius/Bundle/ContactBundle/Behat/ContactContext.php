@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ContactBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
+use Sylius\Component\Contact\Model\RequestInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 class ContactContext extends DefaultContext
 {
@@ -31,14 +33,13 @@ class ContactContext extends DefaultContext
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $newContactRequest = $repository->createNew();
-            $newContactRequest->setFirstName($data['firstName']);
-            $newContactRequest->setLastName($data['lastName']);
-            $newContactRequest->setEmail($data['email']);
-            $newContactRequest->setMessage($data['message']);
-            $newContactRequest->setTopic($data['topic']);
+            /* @var $contactRequest RequestInterface */
+            $contactRequest = $repository->createNew();
+            $contactRequest->setCustomer($this->createCustomer($data));
+            $contactRequest->setMessage($data['message']);
+            $contactRequest->setTopic($data['topic']);
 
-            $manager->persist($newContactRequest);
+            $manager->persist($contactRequest);
         }
 
         $manager->flush();
@@ -68,4 +69,19 @@ class ContactContext extends DefaultContext
         $manager->flush();
     }
 
+    public function createCustomer(array $data)
+    {
+        if (null === $customer = $this->getRepository('customer')->findOneBy(array('email' => $data['email']))) {
+            /* @var $customer CustomerInterface */
+            $customer = $this->getRepository('customer')->createNew();
+            $customer->setFirstname(isset($data['firstName']) ? $data['firstName'] : $this->faker->firstName);
+            $customer->setLastname(isset($data['lastName']) ? $data['lastName'] : $this->faker->lastName);
+            $customer->setEmail($data['email']);
+
+            $this->getEntityManager()->persist($customer);
+            $this->getEntityManager()->flush();
+        }
+
+        return $customer;
+    }
 }

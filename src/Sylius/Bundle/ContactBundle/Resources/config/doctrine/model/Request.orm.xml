@@ -22,13 +22,17 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="firstName" column="first_name" type="string" />
-        <field name="lastName" column="last_name" type="string" />
-        <field name="email" column="email" type="string" />
         <field name="message" column="message" type="text" />
 
         <many-to-one field="topic" target-entity="Sylius\Component\Contact\Model\TopicInterface">
             <join-column name="topic_id" referenced-column-name="id" />
+        </many-to-one>
+
+        <many-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
         <field name="createdAt" column="created_at" type="datetime">

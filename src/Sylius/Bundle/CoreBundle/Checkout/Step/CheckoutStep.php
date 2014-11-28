@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -27,6 +28,19 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
  */
 abstract class CheckoutStep extends ControllerStep
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        $user = parent::getUser();
+        if ($user instanceof CustomerInterface) {
+            $user = $user->getUser();
+        }
+
+        return $user;
+    }
+
     /**
      * Get cart provider.
      *
@@ -74,8 +88,13 @@ abstract class CheckoutStep extends ControllerStep
      */
     protected function isUserLoggedIn()
     {
+        $securityContext = $this->get('security.context');
         try {
-            return $this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+            if ($securityContext->isGranted('IS_CUSTOMER')) {
+                return false;
+            }
+
+            return $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED');
         } catch (AuthenticationCredentialsNotFoundException $e) {
             return false;
         }

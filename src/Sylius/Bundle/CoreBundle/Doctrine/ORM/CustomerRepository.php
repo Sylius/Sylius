@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -22,21 +23,23 @@ class CustomerRepository extends EntityRepository
      *
      * @param array $criteria
      * @param array $sorting
-     * @param bool  $deleted
+     * @param bool  $registered
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator($criteria = array(), $sorting = array(), $registered = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder();
-
-        if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+        if ($registered) {
+            $qb = parent::getCollectionQueryBuilder();
+            $qb->addSelect('user');
+            $qb->innerJoin('o.user', 'user');
+        } else {
+            $qb = $this->getCollectionQueryBuilder();
         }
 
         if (isset($criteria['query'])) {
-            $queryBuilder
-                ->where('o.email LIKE :query')
+            $qb
+                ->andWhere('o.email LIKE :query')
                 ->orWhere('o.firstName LIKE :query')
                 ->orWhere('o.lastName LIKE :query')
                 ->setParameter('query', '%'.$criteria['query'].'%')
@@ -47,12 +50,12 @@ class CustomerRepository extends EntityRepository
             if (!is_array($sorting)) {
                 $sorting = array();
             }
-            $sorting['updatedAt'] = 'desc';
+            $sorting['id'] = 'asc';
         }
 
-        $this->applySorting($queryBuilder, $sorting);
+        $this->applySorting($qb, $sorting);
 
-        return $this->getPaginator($queryBuilder);
+        return $this->getPaginator($qb);
     }
 
     /**
@@ -64,13 +67,13 @@ class CustomerRepository extends EntityRepository
      */
     public function findForDetailsPage($id)
     {
-        $queryBuilder = $this->getQueryBuilder();
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+        $qb = $this->getQueryBuilder();
+        $qb
+            ->andWhere($qb->expr()->eq('o.id', ':id'))
             ->setParameter('id', $id)
         ;
 
-        return $queryBuilder
+        return $qb
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -84,9 +87,9 @@ class CustomerRepository extends EntityRepository
      */
     public function countBetweenDates(\DateTime $from, \DateTime $to)
     {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to);
+        $qb = $this->getCollectionQueryBuilderBetweenDates($from, $to);
 
-        return $queryBuilder
+        return $qb
             ->select('count(o.id)')
             ->getQuery()
             ->getSingleScalarResult()
@@ -95,13 +98,33 @@ class CustomerRepository extends EntityRepository
 
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $qb = $this->getCollectionQueryBuilder();
 
-        return $queryBuilder
-            ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
-            ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
+        return $qb
+            ->andWhere($qb->expr()->gte('o.createdAt', ':from'))
+            ->andWhere($qb->expr()->lte('o.createdAt', ':to'))
             ->setParameter('from', $from)
             ->setParameter('to', $to)
         ;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    protected function getCollectionQueryBuilder()
+    {
+        return $this->getQueryBuilder();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    protected function getQueryBuilder()
+    {
+        $qb = parent::getQueryBuilder();
+        $qb->addSelect('user');
+        $qb->leftJoin('o.user', 'user');
+
+        return $qb;
     }
 }

@@ -9,7 +9,8 @@ sylius_backend_customer_index:
         _sylius:
             template: SyliusWebBundle:Backend/Customer:index.html.twig
             method: createFilterPaginator
-            arguments: [$criteria, $sorting, $deleted]
+            arguments: [$criteria, $sorting, $registered]
+            paginate: 20
             sortable: true
 
 sylius_backend_customer_create:

@@ -22,12 +22,12 @@
     "require": {
         "php":                     ">=5.3.3",
 
-        "sylius/customer":         "0.12.*@dev",
-        "sylius/resource-bundle":  "0.12.*@dev",
+        "sylius/customer":         "0.14.*@dev",
+        "sylius/resource-bundle":  "0.14.*@dev",
         "symfony/security-bundle": "~2.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.12-dev"
+            "dev-master": "0.14-dev"
         }
     }
 }

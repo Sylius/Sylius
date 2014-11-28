@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter id="sylius.form.type.customer.class">Sylius\Bundle\CustomerBundle\Form\Type\CustomerType</parameter>
+        <parameter key="sylius.form.type.customer.class">Sylius\Bundle\CustomerBundle\Form\Type\CustomerType</parameter>
     </parameters>
 
     <services>
@@ -29,8 +29,15 @@
             <argument type="service" id="sylius.customer.user_provider"/>
         </service>
 
-        <service id="sylius.customer_listener" class="Sylius\Component\Customer\EventListener\CustomerListener">
+        <service id="sylius.customer_manager" class="Sylius\Component\Customer\Manager\CustomerManager">
+            <argument type="service" id="sylius.repository.customer"/>
+        </service>
+
+        <service id="sylius.listener.customer_response" class="Sylius\Component\Customer\EventListener\CustomerListener">
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
+        </service>
+        <service id="sylius.listener.customer_inject" class="Sylius\Component\Customer\EventListener\CustomerInjectListener" abstract="true">
+            <argument type="service" id="security.context" />
         </service>
 
         <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">

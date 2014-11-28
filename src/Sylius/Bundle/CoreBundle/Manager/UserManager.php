@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Security;
+namespace Sylius\Bundle\CoreBundle\Manager;
 
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
@@ -31,6 +31,7 @@ class UserManager extends BaseUserManager
 
         return $user;
     }
+
     /**
      * {@inheritdoc}
      */

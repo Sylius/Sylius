@@ -231,8 +231,6 @@ class CoreContext extends DefaultContext
 
             /* @var $customer CustomerInterface */
             $customer = $this->getRepository('customer')->createNew();
-            $customer->setFirstname($this->faker->firstName);
-            $customer->setLastname($this->faker->lastName);
             $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
             $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
             $customer->setEmail($email);

@@ -20,6 +20,7 @@
         <service id="sylius.form.type.contact_request" class="%sylius.form.type.contact_request.class%">
             <argument>%sylius.model.contact_request.class%</argument>
             <argument>%sylius.validation_group.contact_request%</argument>
+            <argument type="service" id="security.context" />
             <tag name="form.type" alias="sylius_contact_request" />
         </service>
         <service id="sylius.form.type.contact_topic" class="%sylius.form.type.contact_topic.class%">
@@ -30,6 +31,13 @@
         <service id="sylius.form.type.contact_topic_choice" class="%sylius.form.type.contact_topic_choice.class%">
             <argument>%sylius.model.contact_topic.class%</argument>
             <tag name="form.type" alias="sylius_contact_topic_choice" />
+        </service>
+
+        <service id="sylius.listener.contact_customer_inject" parent="sylius.listener.customer_inject">
+            <call method="setInterfaceName">
+                <argument type="string">%sylius.model.contact_request.class%</argument>
+            </call>
+            <tag name="kernel.event_listener" event="sylius.contact_request.pre_create" method="setCustomer" />
         </service>
     </services>
 

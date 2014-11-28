@@ -64,24 +64,20 @@ class SecurityStep extends CheckoutStep
 
         if ($this->isGuestOrderAllowed() && $guestForm->handleRequest($request)->isValid()) {
             $customer = $guestForm->getData();
-            $found    = $this->get('sylius.repository.customer')->findOneBy(array('email' => $customer->getEmail()));
-            if ($found) {
-                $order->setCustomer($found);
-            } else {
-                $this->getManager()->persist($customer);
-                $order->setCustomer($customer);
-            }
+            $customer = $this->get('sylius.customer_manager')->createCustomer($customer->getEmail());
+            $order->setCustomer($customer);
 
             $this->getManager()->persist($order);
             $this->getManager()->flush();
 
-            $request->attributes->set('customer', $order->getCustomer()->getUsername());
+            $request->attributes->set('customer', $customer->getEmail());
 
             return $this->complete();
         } elseif ($registrationForm->handleRequest($request)->isValid()) {
             $user = $registrationForm->getData();
+            $user->setCustomer($this->get('sylius.customer_manager')->createCustomer($user->getCustomer()->getEmail()));
 
-            $request->attributes->set('customer', $order->getCustomer()->getUsername());
+            $request->attributes->set('customer', $user->getEmail());
 
             $this->dispatchEvent(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($registrationForm, $request));
 

@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Contact\Model;
 
+use Sylius\Component\Customer\Model\CustomerInterface;
+
 /**
  * Default contact request representation.
  *
@@ -19,24 +21,14 @@ namespace Sylius\Component\Contact\Model;
 class Request implements RequestInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * @var string
+     * @var CustomerInterface
      */
-    protected $firstName;
-
-    /**
-     * @var string
-     */
-    protected $lastName;
-
-    /**
-     * @var string
-     */
-    protected $email;
+    protected $customer;
 
     /**
      * @var string
@@ -66,6 +58,9 @@ class Request implements RequestInterface
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
@@ -74,11 +69,17 @@ class Request implements RequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function setCustomer(CustomerInterface $customer = null)
     {
-        $this->firstName = $firstName;
+        $this->customer = $customer;
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 
     /**
@@ -86,17 +87,7 @@ class Request implements RequestInterface
      */
     public function getFirstName()
     {
-        return $this->firstName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
+        return $this->customer->getFirstName();
     }
 
     /**
@@ -104,17 +95,7 @@ class Request implements RequestInterface
      */
     public function getLastName()
     {
-        return $this->lastName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
+        return $this->customer->getLastName();
     }
 
     /**
@@ -122,7 +103,7 @@ class Request implements RequestInterface
      */
     public function getEmail()
     {
-        return $this->email;
+        return $this->customer->getEmail();
     }
 
     /**

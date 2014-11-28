@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Sylius\Component\Customer\Model\AddressInterface;
@@ -68,6 +69,11 @@ class User extends BaseUser implements UserInterface
      */
     protected $oauthAccounts;
 
+    /**
+     * @var Collection|RoleInterface[]
+     */
+    protected $authorizationRoles;
+
     public function __construct()
     {
         $this->orders             = new ArrayCollection();
@@ -90,7 +96,7 @@ class User extends BaseUser implements UserInterface
      */
     public function setCustomer(BaseCustomerInterface $customer = null)
     {
-        if (null !== $customer) {
+        if ($customer instanceof CustomerInterface) {
             $customer->setUser($this);
         }
 
@@ -277,11 +283,7 @@ class User extends BaseUser implements UserInterface
             return $provider === $oauth->getProvider();
         });
 
-        if ($filtered->isEmpty()) {
-            return null;
-        }
-
-        return $filtered->current();
+        return !$filtered->isEmpty() ? $filtered->current() : null;
     }
 
     /**
@@ -340,8 +342,8 @@ class User extends BaseUser implements UserInterface
     {
         $roles = parent::getRoles();
 
-        foreach ($this->getAuthorizationRoles() as $role) {
-            $roles = array_merge($roles, $role->getSecurityRoles());
+        foreach ($this->authorizationRoles as $role) {
+            $roles += $role->getSecurityRoles();
         }
 
         return $roles;

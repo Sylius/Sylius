@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}" data-user="{{ user.email }}" {% if user.deleted %} class="danger"{% endif %}>
+        <tr id="{{ user.id }}" data-user="{{ user.email }}" class="{% if user.deleted %}danger{% elseif user.email is sameas(app.user.email) %} success{% endif %}">
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>

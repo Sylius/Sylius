@@ -12,30 +12,51 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RegistrationFormType extends BaseType
 {
+    /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
+
+    public function __construct($class, SecurityContextInterface $securityContext)
+    {
+        parent::__construct($class);
+
+        $this->securityContext = $securityContext;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('firstName', 'text', array(
-                'label'         => 'sylius.form.user.first_name',
-                'property_path' => 'customer.firstName',
-            ))
-            ->add('lastName', 'text', array(
-                'label'         => 'sylius.form.user.last_name',
-                'property_path' => 'customer.lastName',
-            ))
-        ;
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $customer = $this->securityContext->getToken()->getUser();
+            if ($customer instanceof CustomerAwareInterface) {
+                $customer = $customer->getCustomer();
+            }
+        } else {
+            $customer = null;
+        }
+
+        $data = $builder->getData();
+        if ($data instanceof CustomerAwareInterface) {
+            $data->setCustomer($customer);
+        }
 
         parent::buildForm($builder, $options);
 
-        // remove the username field
-        $builder->remove('username');
+        // remove the `username` & `email` fields
+        $builder
+            ->remove('username')
+            ->remove('email')
+            ->add('customer', 'sylius_customer')
+        ;
     }
 
     /**

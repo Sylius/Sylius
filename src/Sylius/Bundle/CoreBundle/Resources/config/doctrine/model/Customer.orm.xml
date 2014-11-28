@@ -17,7 +17,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\Customer" table="sylius_customer">
-        <one-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" mapped-by="customer" fetch="EAGER">
+        <one-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" mapped-by="customer">
             <cascade>
                 <cascade-all/>
             </cascade>

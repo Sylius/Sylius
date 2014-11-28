@@ -44,19 +44,7 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\ProductInterface');
         }
 
-        if ($this->securityContext->isGranted('IS_CUSTOMER') || $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $user = $this->securityContext->getToken()->getUser();
-        } else {
-            return false;
-        }
-
-        if (!$user instanceof UserAwareInterface && !$user instanceof UserInterface) {
-            return false;
-        } elseif ($user instanceof UserAwareInterface) {
-            $user = $user->getUser();
-        }
-
-        if (null === $address = $user->getShippingAddress()) {
+        if (null === $address = $this->getUserAddresss()) {
             return false;
         }
 
@@ -65,5 +53,29 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
         }
 
         return in_array($zone, $this->zoneMatcher->matchAll($address));
+    }
+
+    /**
+     * @return null|AddressInterface
+     */
+    private function getUserAddresss()
+    {
+        if ($this->securityContext->isGranted('IS_CUSTOMER') || $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $user = $this->securityContext->getToken()->getUser();
+        } else {
+            return null;
+        }
+
+        if (!$user instanceof UserAwareInterface && !$user instanceof UserInterface) {
+            return null;
+        } elseif ($user instanceof UserAwareInterface) {
+            $user = $user->getUser();
+        }
+
+        if (null === $address = $user->getShippingAddress()) {
+            return null;
+        }
+
+        return $address;
     }
 }

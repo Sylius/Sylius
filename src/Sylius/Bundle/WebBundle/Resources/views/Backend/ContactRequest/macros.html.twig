@@ -7,9 +7,9 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('firstName', 'sylius.contact_request.firstName'|trans) }}</th>
-            <th>{{ sylius_resource_sort('lastName', 'sylius.contact_request.lastName'|trans) }}</th>
-            <th>{{ sylius_resource_sort('email', 'sylius.contact_request.email'|trans) }}</th>
+            <th>{{ 'sylius.contact_request.firstName'|trans }}</th>
+            <th>{{ 'sylius.contact_request.lastName'|trans }}</th>
+            <th>{{ 'sylius.contact_request.email'|trans }}</th>
             <th>{{ sylius_resource_sort('topic', 'sylius.contact_request.topic'|trans) }}</th>
             <th></th>
         </tr>
@@ -19,7 +19,7 @@
         <tr id="{{ contact_request.id }}">
             <td>{{ contact_request.firstName }}</td>
             <td>{{ contact_request.lastName }}</td>
-            <td>{{ contact_request.email }}</td>
+            <td><a href="{{ path('sylius_backend_customer_show', {'id': contact_request.customer.id}) }}">{{ contact_request.email }}</a></td>
             <td>{{ contact_request.topic }}</td>
             <td>
                 <div class="pull-right">

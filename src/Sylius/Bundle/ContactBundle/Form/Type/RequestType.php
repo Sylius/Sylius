@@ -11,8 +11,12 @@
 
 namespace Sylius\Bundle\ContactBundle\Form\Type;
 
+use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Sylius contact request form type.
@@ -22,28 +26,53 @@ use Symfony\Component\Form\FormBuilderInterface;
 class RequestType extends AbstractResourceType
 {
     /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
+
+    public function __construct($dataClass, array $validationGroups = array(), SecurityContextInterface $securityContext)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->securityContext = $securityContext;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $customer = $this->securityContext->getToken()->getUser();
+            if ($customer instanceof CustomerAwareInterface) {
+                $customer = $customer->getCustomer();
+            }
+        } else {
+            $customer = null;
+        }
+
+        $data = $builder->getData();
+        $data->setCustomer($customer);
+
         $builder
-            ->add('firstName', 'text', array(
-                'label' => 'sylius.form.contact_request.first_name'
-            ))
-            ->add('lastName', 'text', array(
-                'label' => 'sylius.form.contact_request.last_name'
-            ))
-            ->add('email', 'email', array(
-                'label' => 'sylius.form.contact_request.email'
-            ))
+            ->add('customer', 'sylius_customer')
             ->add('message', 'textarea', array(
-                'label' => 'sylius.form.contact_request.message'
+                'label' => 'sylius.form.contact_request.message',
             ))
             ->add('topic', 'sylius_contact_topic_choice', array(
                 'label'    => 'sylius.form.contact_request.topic',
                 'required' => false,
             ))
         ;
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'cascade_validation' => true,
+        ));
     }
 
     /**

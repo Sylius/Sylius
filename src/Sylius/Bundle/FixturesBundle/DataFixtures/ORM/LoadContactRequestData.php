@@ -30,12 +30,9 @@ class LoadContactRequestData extends DataFixture
 
         for ($i = 0; $i < 20; $i++) {
             $contactRequest = $contactRequestRepository->createNew();
-
-            $contactRequest->setFirstName($this->faker->firstName());
-            $contactRequest->setLastName($this->faker->lastName());
-            $contactRequest->setEmail($this->faker->email());
+            $contactRequest->setCustomer($this->getReference('Sylius.Customer-'.rand(1, 15)));
             $contactRequest->setMessage($this->faker->paragraph());
-            $contactRequest->setTopic($this->getReference('Sylius.ContactTopic.' . rand(0, 4)));
+            $contactRequest->setTopic($this->getReference('Sylius.ContactTopic.'.rand(0, 4)));
 
             $manager->persist($contactRequest);
         }

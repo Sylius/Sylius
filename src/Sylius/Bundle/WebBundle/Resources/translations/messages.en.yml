@@ -325,6 +325,7 @@ sylius:
     confirmation:
         message: Do you want to delete this item?
         title: Confirmation
+    contact: Contact
     country:
         add_province: Add province
         create: Create country
@@ -631,6 +632,7 @@ sylius:
         no_results: There are no redirect routes to display.
         title: Title
         update_header: Editing redirect route
+    send: Send
     shipment:
         ship: Ship
         created_at: Created at

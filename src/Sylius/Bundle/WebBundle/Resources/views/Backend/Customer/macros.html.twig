@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for customer in customers %}
-        <tr id="{{ customer.id }}">
+        <tr id="{{ customer.id }}"{% if customer.email is sameas(app.user.email) %} class="success"{% endif %}>
             <td>{{ customer.id }}</td>
             <td>{{ customer.firstName }}</td>
             <td>{{ customer.lastName }}</td>

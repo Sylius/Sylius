@@ -24,8 +24,7 @@ class CustomerType extends AbstractResourceType
     {
         $builder
             ->add('email', 'text', array(
-                'label'    => 'sylius.form.customer.email',
-                'disabled' => true,
+                'label' => 'sylius.form.customer.email',
             ))
             ->add('firstName', 'text', array(
                 'label' => 'sylius.form.customer.first_name',
@@ -39,7 +38,8 @@ class CustomerType extends AbstractResourceType
                     CustomerInterface::GENDER_FEMALE => 'sylius.form.customer.gender.female',
                     CustomerInterface::GENDER_MALE   => 'sylius.form.customer.gender.male',
                 ),
-                'empty_value' => 'sylius.form.customer.gender.not_selected'
+                'empty_value' => 'sylius.form.customer.gender.not_selected',
+                'required'    => false,
             ))
         ;
     }
