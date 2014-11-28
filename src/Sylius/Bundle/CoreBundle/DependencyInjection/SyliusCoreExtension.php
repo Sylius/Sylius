@@ -52,6 +52,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     protected $configFiles = array(
         'services',
         'form',
+        'payum',
         'templating',
         'twig',
     );
