@@ -36,4 +36,4 @@ class Query
     {
         return $this->appliedFilters;
     }
-} 
+}

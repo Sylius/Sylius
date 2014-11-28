@@ -48,9 +48,7 @@ class PropertyAccessor extends BasePropertyAccessor
     {
         try {
             foreach ($this->customAccessors as $accessor) {
-                if ($accessor->isReadable($objectOrArray, $propertyPath)) {
-                    return $accessor->getValue($objectOrArray, $propertyPath);
-                }
+                return $accessor->getValue($objectOrArray, $propertyPath);
             }
 
             return parent::getValue($objectOrArray, $propertyPath);
