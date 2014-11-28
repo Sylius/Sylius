@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  * Sylius base application kernel.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 abstract class Kernel extends BaseKernel
 {
@@ -65,6 +66,12 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
+            // TODO remove this restriction by having one translation driver
+            // with a locator to all model folders
+            // IMPORTANT, This has to be declared the las of the sylius bundles as
+            // it parses tagged services generated in compiler pass on each of them.
+            new \Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
+
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
@@ -100,6 +107,9 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
+//            new \Prezent\Doctrine\TranslatableBundle\PrezentDoctrineTranslatableBundle(),
+            new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {

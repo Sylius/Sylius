@@ -18,9 +18,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\Product" table="sylius_product">
-        <field name="shortDescription" column="short_description" type="string" nullable="true">
-            <gedmo:versioned />
-        </field>
+
         <field name="variantSelectionMethod" column="variant_selection_method" type="string" nullable="false" />
 
         <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">

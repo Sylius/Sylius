@@ -23,6 +23,7 @@
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
+        <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType</parameter>
     </parameters>
 
     <services>
@@ -36,7 +37,11 @@
             <argument>%sylius.validation_group.product_prototype%</argument>
             <tag name="form.type" alias="sylius_product_prototype" />
         </service>
-
+        <service id="sylius.form.type.product_translation" class="%sylius.form.type.product_translation.class%">
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_product_translation" />
+        </service>
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="sylius.repository.product" />

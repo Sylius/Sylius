@@ -44,6 +44,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_shipping',
         'sylius_taxation',
         'sylius_taxonomy',
+        'sylius_translation',
         'sylius_attribute',
         'sylius_variation',
         'sylius_sequence',

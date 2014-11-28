@@ -42,6 +42,13 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     protected $faker;
 
     /**
+     * Default locale.
+     *
+     * @var string
+     */
+    protected $defaultLocale;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -55,6 +62,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+        $this->defaultLocale = $container->getParameter('sylius.locale');
     }
 
     public function __call($method, $arguments)

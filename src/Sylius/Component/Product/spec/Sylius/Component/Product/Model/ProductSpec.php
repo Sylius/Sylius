@@ -19,6 +19,7 @@ use Sylius\Component\Product\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductSpec extends ObjectBehavior
 {
@@ -37,38 +38,6 @@ class ProductSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
-    {
-        $this->getName()->shouldReturn(null);
-    }
-
-    function its_name_is_mutable()
-    {
-        $this->setName('Super product');
-        $this->getName()->shouldReturn('Super product');
-    }
-
-    function it_has_no_slug_by_default()
-    {
-        $this->getSlug()->shouldReturn(null);
-    }
-
-    function its_slug_is_mutable()
-    {
-        $this->setSlug('super-product');
-        $this->getSlug()->shouldReturn('super-product');
-    }
-
-    function it_has_no_description_by_default()
-    {
-        $this->getDescription()->shouldReturn(null);
-    }
-
-    function its_description_is_mutable()
-    {
-        $this->setDescription('This product is super cool because...');
-        $this->getDescription()->shouldReturn('This product is super cool because...');
-    }
 
     function it_initializes_availability_date_by_default()
     {
@@ -99,28 +68,6 @@ class ProductSpec extends ObjectBehavior
 
         $this->setAvailableOn($availableOn);
         $this->shouldNotBeAvailable();
-    }
-
-    function it_has_no_meta_keywords_by_default()
-    {
-        $this->getMetaKeywords()->shouldReturn(null);
-    }
-
-    function its_meta_keywords_is_mutable()
-    {
-        $this->setMetaKeywords('foo, bar, baz');
-        $this->getMetaKeywords()->shouldReturn('foo, bar, baz');
-    }
-
-    function it_has_no_meta_description_by_default()
-    {
-        $this->getMetaDescription()->shouldReturn(null);
-    }
-
-    function its_meta_description_is_mutable()
-    {
-        $this->setMetaDescription('Super product');
-        $this->getMetaDescription()->shouldReturn('Super product');
     }
 
     function it_initializes_attribute_collection_by_default()
@@ -295,12 +242,7 @@ class ProductSpec extends ObjectBehavior
     {
         $date = new \DateTime();
 
-        $this->setName('Foo')->shouldReturn($this);
-        $this->setSlug('product-foo')->shouldReturn($this);
-        $this->setDescription('Foo')->shouldReturn($this);
         $this->setAvailableOn($date)->shouldReturn($this);
-        $this->setMetaDescription('SEO bla bla')->shouldReturn($this);
-        $this->setMetaKeywords('foo, bar, baz')->shouldReturn($this);
         $this->setCreatedAt($date)->shouldReturn($this);
         $this->setUpdatedAt($date)->shouldReturn($this);
         $this->setDeletedAt($date)->shouldReturn($this);

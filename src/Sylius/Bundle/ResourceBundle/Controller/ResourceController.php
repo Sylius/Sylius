@@ -28,6 +28,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ResourceController extends FOSRestController
 {
@@ -345,7 +346,7 @@ class ResourceController extends FOSRestController
     public function findOr404(Request $request, array $criteria = array())
     {
         if ($request->get('slug')) {
-            $default = array('slug' => $request->get('slug'));
+            $default = array('translation.slug' => $request->get('slug'));
         } elseif ($request->get('id')) {
             $default = array('id' => $request->get('id'));
         } else {

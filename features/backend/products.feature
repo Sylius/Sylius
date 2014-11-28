@@ -62,12 +62,6 @@ Feature: Products
           And I follow "Create product"
          Then I should be on the product creation page
 
-    Scenario: Submitting form without specifying the name
-        Given I am on the product creation page
-         When I press "Create"
-         Then I should still be on the product creation page
-          And I should see "Please enter product name."
-
     Scenario: Trying to create product without description
         Given I am on the product creation page
          When I fill in "Name" with "Bag"
@@ -134,7 +128,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
-          And go to "attributes" tab
+          And go to "Attributes" tab
           And I click "Add attribute"
           And I select "T-Shirt fabric" from "Attribute"
           And I fill in "Value" with "Cotton"
@@ -150,7 +144,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
-          And go to "attributes" tab
+          And go to "Attributes" tab
           And I click "Add attribute"
           And I select "T-Shirt fare trade" from "Attribute"
           And I check "Value"
@@ -165,7 +159,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
-          And go to "attributes" tab
+          And go to "Attributes" tab
           And I click "Add attribute"
           And I select "Color" from "Attribute"
           And I select "red" from "Value"

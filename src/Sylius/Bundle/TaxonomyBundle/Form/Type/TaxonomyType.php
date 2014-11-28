@@ -27,8 +27,9 @@ class TaxonomyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.taxonomy.name'
+            ->add('translations', 'a2lix_translationsForms', array(
+                'form_type' => new TaxonomyTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'label'    => 'sylius.form.taxonomy.name'
             ))
         ;
     }

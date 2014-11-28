@@ -12,14 +12,14 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Shipping\Model\ShippingMethod" table="sylius_shipping_method">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" column="name" type="string" />
         <field name="configuration" column="configuration" type="array" />
 
         <many-to-one field="category" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
@@ -42,6 +42,9 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <!--TODO Core model is mapped, do a resolver-->
+        <prezent:translatable field="translations" target-entity="Sylius\Component\Shipping\Model\ShippingMethodTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
     </mapped-superclass>
 
 </doctrine-mapping>

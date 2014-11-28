@@ -16,12 +16,14 @@ use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\DoctrineOrmTranslationMappingsPass;
 
 /**
  * Abstract resource bundle.
  *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 abstract class AbstractResourceBundle extends Bundle implements ResourceBundleInterface
 {
@@ -61,12 +63,22 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                             $manager,
                             sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                         ));
+
+                        // Create the xml driver services for translations
+                        $container->addCompilerPass(DoctrineOrmTranslationMappingsPass::createXmlTranslationMappingDriver(
+                            array($this->getConfigFilesPath() => $this->getModelNamespace()),
+                            $manager,
+                            sprintf('%s.driver_translation.%s', $this->getBundlePrefix(), $driver)
+                        ));
+
                     } elseif (self::MAPPING_YAML === $this->mappingFormat) {
                         $container->addCompilerPass($mappingsPassClassName::createYamlMappingDriver(
                             array($this->getConfigFilesPath() => $this->getModelNamespace()),
                             $manager,
                             sprintf('%s.driver.%s', $this->getBundlePrefix(), $driver)
                         ));
+
+                        //TODO create translation YML mapping driver!
                     } else {
                         throw new InvalidConfigurationException("The 'mappingFormat' value is invalid, must be 'xml' or 'yml'.");
                     }
