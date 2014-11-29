@@ -111,6 +111,8 @@ class VariantGenerator implements VariantGeneratorInterface
      */
     protected function getPermutations($array, $recursing = false)
     {
+        // $setBuilder = new CartesianSetBuilder(); return $setBuilder->build($array, $recursing);
+
         $countArrays = count($array);
 
         if (1 === $countArrays) {
