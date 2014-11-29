@@ -9,6 +9,7 @@ sylius_api_order_index:
         _sylius:
             method: createFilterPaginator
             arguments: [$criteria, $sorting]
+            paginate: $limit
         criteria: {}
         sorting: { updatedAt: desc }
 

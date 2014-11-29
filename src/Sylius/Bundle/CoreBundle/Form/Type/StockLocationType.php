@@ -29,7 +29,9 @@ class StockLocationType extends BaseStockLocationType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('address', 'sylius_address')
+            ->add('address', 'sylius_address', array(
+                'required' => false,
+            ))
         ;
     }
 }

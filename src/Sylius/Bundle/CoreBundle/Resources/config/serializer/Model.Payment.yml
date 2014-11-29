@@ -1,6 +1,9 @@
-Sylius\Component\Core\Model\Shipment:
+Sylius\Component\Core\Model\Payment:
     exclusion_policy: ALL
-    xml_root_name: shipment
+    xml_root_name: payment
+    properties:
+        order:
+            expose: false
     relations:
         - rel: order
           exclusion:

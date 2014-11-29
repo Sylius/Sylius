@@ -9,7 +9,7 @@ sylius_api_shipment_index:
         _sylius:
             sortable: true
             sorting:
-                name: desc
+                createdAt: desc
 
 sylius_api_shipment_create:
     path: /

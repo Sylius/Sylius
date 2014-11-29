@@ -23,6 +23,7 @@
                 <td>{{ stock_location.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">
+                    {{ buttons.show(path('sylius_backend_stock_item_index', {'locationId': stock_location.id}), 'Inventory') }}
                     {{ buttons.show(path('sylius_backend_stock_movement_index', {'locationId': stock_location.id}), 'Stock movements') }}
                     {{ buttons.edit(path('sylius_backend_stock_location_update', {'id': stock_location.id})) }}
                     {{ buttons.delete(path('sylius_backend_stock_location_delete', {'id': stock_location.id})) }}

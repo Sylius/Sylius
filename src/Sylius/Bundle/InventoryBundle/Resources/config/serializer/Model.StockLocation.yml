@@ -1,22 +1,20 @@
-Sylius\Component\Payment\Model\Payment:
+Sylius\Component\Inventory\Model\StockLocation:
     exclusion_policy: ALL
-    xml_root_name: payment
+    xml_root_name: stock-location
     properties:
         id:
             expose: true
             type: integer
             xml_attribute: true
-        amount:
-            expose: true
-            type: integer
-        currency:
+        name:
             expose: true
             type: string
-        state:
+        code:
             expose: true
             type: string
-        method:
+        enabled:
             expose: true
+            type: boolean
         createdAt:
             expose: true
             type: DateTime
@@ -26,11 +24,6 @@ Sylius\Component\Payment\Model\Payment:
     relations:
         - rel: self
           href:
-                route: sylius_api_payment_show
+                route: sylius_api_stock_location_show
                 parameters:
                     id: expr(object.getId())
-        - rel: payment-method
-          href:
-                route: sylius_api_payment_method_show
-                parameters:
-                    id: expr(object.getMethod().getId())

@@ -200,6 +200,11 @@ class ProductController extends ResourceController
             }
 
             $stockItem = $this->getStockItemRepository()->findByStockableAndLocation($variant, $data['location']);
+
+            if (null === $stockItem) {
+                $stockItem = $this->getStockItemFactory()->create($variant, $data['location']);
+            }
+
             $operator = $this->getInventoryOperator();
 
             if ($quantity > 0) {
@@ -228,6 +233,11 @@ class ProductController extends ResourceController
     private function getStockItemRepository()
     {
         return $this->get('sylius.repository.stock_item');
+    }
+
+    private function getStockItemFactory()
+    {
+        return $this->get('sylius.factory.stock_item');
     }
 
     private function getInventoryOperator()

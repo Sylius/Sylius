@@ -393,7 +393,7 @@ class ResourceController extends FOSRestController
      */
     protected function getPagerfantaFactory()
     {
-        return new PagerfantaFactory('page', 'paginate');
+        return new PagerfantaFactory('page', 'limit');
     }
 
     protected function handleView(View $view)
