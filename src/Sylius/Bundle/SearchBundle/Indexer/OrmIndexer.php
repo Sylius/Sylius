@@ -120,7 +120,8 @@ class OrmIndexer implements IndexerInterface
      */
     private function createIndex($entity, array $fields)
     {
-        foreach (array_keys($fields) as &$value) {
+        $fieldNames = array_keys($fields);
+        foreach ($fieldNames as &$value) {
             $value = 'u.'.$value;
         }
 
