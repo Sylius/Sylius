@@ -11,28 +11,31 @@ Configuration reference
 .. code-block:: yaml
 
     sylius_order:
-        driver: ~ # The driver used for persistence layer.
+        # The driver used for persistence layer.
+        driver: ~
         classes:
             sellable:
-                model: ~ # The class name of the entity you want to put inside orders.
+                # The class name of the entity you want to put inside orders.
+                model: ~
             order:
-                model: ~ # The order model class.
+                model: Sylius\Component\Order\Model\Order
                 controller: Sylius\Bundle\OrderBundle\Controller\OrderController
-                repository: ~ # You can override the repository class here.
-                form: Sylius\Bundle\OrderBundle\Form\Type\OrderType # The form type name to use.
+                repository: ~
+                form: Sylius\Bundle\OrderBundle\Form\Type\OrderType
             order_item:
-                model: ~ # The order item model class.
+                model: Sylius\Component\Order\Model\OrderItem
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType # The form type class name to use.
+                form: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
             adjustment:
-                model: ~ # The adjustment model class.
+                model: Sylius\Component\Order\Model\Adjustment
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType
         validation_groups:
             order: [sylius] # Order validation groups.
-            order_item: [sylius] # Order item validation groups.
+            order_item: [sylius]
+            adjustment: [sylius]
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

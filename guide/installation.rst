@@ -4,35 +4,38 @@
 Installation
 ============
 
-There are several ways to install Sylius main app for the standard usage.
+There are several ways to install Sylius.
 
-Using Git
----------
+Either you're installing it to contribute, in which case you may prefer Sylius/Sylius,
+or you're bootstrapping a new e-commerce project, and you'd prefer using Sylius/Sylius-Standard.
 
-...
+.. warning::
+
+    Why two versions ? The reason is simple: Sylius/Sylius is the central repository, where all code and commits are contributed to.
+    All the other repositories are splitted from this main repository.
+
+    Sylius-Standard is just a distribution including these splitted repositories.
+
 
 Using Composer
 --------------
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-
-If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
-
-.. code-block:: bash
-
-    $ composer create-project -s dev sylius/sylius-standard
-
-Otherwise you have to download .phar file.
+Otherwise, check `how to install Composer <http://getcomposer.org/doc/00-intro.md#globally>`_.
 
 .. code-block:: bash
 
-    $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar create-project -s dev sylius/sylius-standard
+    $ composer create-project -s dev sylius/sylius # or sylius/sylius-standard
+    $ cd sylius # or sylius-standard
+    $ php app/console sylius:install
 
-When all the dependencies are installed, you'll be asked to fill the ``parameters.yml`` file via interactive script.
-Please follow the guide and when everything is in place, finally run the following commands.
+
+Using Git
+---------
 
 .. code-block:: bash
 
-    $ cd sylius-standard
-    $ app/console sylius:install
+    $ git clone git@github.com:Sylius/Sylius.git # or Sylius-Standard
+    $ cd Sylius # or Sylius-Standard
+    $ composer install
+    $ php app/console sylius:install

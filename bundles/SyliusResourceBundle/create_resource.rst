@@ -8,7 +8,7 @@ To display a form, handle submit or create a new resource via API, you should us
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -21,6 +21,25 @@ Then it will try to create an ``app_user`` form, and set the newly created user 
     Currently, this bundle does not generate a form for you, the right form type has to be created and registered in the container manually.
 
 As a response, it will render the ``App:User:create.html.twig`` template with form view as the ``form`` variable.
+
+Declaring your form as a service
+--------------------------------
+
+As said previously, you need to declare your form as a service. Its name must be contructed with the following pattern ``application_resource`` (Example: ``sylius_product``).
+(see the **Configuration** chapter to see how configure your resources and your application name)
+
+.. code-block:: xml
+
+    <parameters>
+        <!-- If you use the basic configuration this paramter is not available in the container. You need to add it manually. -->
+        <parameter key="app.form.type.user.class">App\Byndle\Form\UserType</parameter>
+    </parameters>
+
+    <services>
+        <service id="app.form.type.user" class="%app.form.type.user.class%">
+            <tag name="form.type" alias="app_user" />
+        </service>
+    </services>
 
 Submitting the form
 -------------------
@@ -46,7 +65,7 @@ Just like for the **show** and **index** actions, you can customize the template
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -64,13 +83,27 @@ Below you can see the usage for specifying a custom form.
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
             _sylius:
                 template: App:Backend/User:create.html.twig
                 form: app_user_custom
+
+or use use directly a class.
+
+.. code-block:: yaml
+
+    # routing.yml
+    app_user_create:
+        path: /users/new
+        methods: [GET, POST]
+        defaults:
+            _controller: app.controller.user:createAction
+            _sylius:
+                template: App:Backend/User:create.html.twig
+                form: App\Byndle\Form\UserType
 
 Using custom factory method
 ---------------------------
@@ -83,7 +116,7 @@ To use different method of your repository, you can simply configure the ``facto
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -97,7 +130,7 @@ Additionally, if you want to provide your custom method with arguments from the 
     # routing.yml
 
     app_user_create:
-        pattern: /users/{groupId}/new
+        path: /users/{groupId}/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -119,7 +152,7 @@ For example, to redirect user to list after successfully creating a new resource
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -133,7 +166,7 @@ You can also perform more complex redirects, with parameters. For example...
     # routing.yml
 
     app_user_create:
-        pattern: /competition/{competitionId}/users/new
+        path: /competition/{competitionId}/users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction
@@ -149,7 +182,7 @@ In addition to the request parameters, you can access some of the newly created 
     # routing.yml
 
     app_user_create:
-        pattern: /users/new
+        path: /users/new
         methods: [GET, POST]
         defaults:
             _controller: app.controller.user:createAction

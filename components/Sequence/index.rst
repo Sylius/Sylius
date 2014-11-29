@@ -7,3 +7,4 @@ Component for generating number/hash sequences in PHP.
    :numbered:
 
    installation
+   summary

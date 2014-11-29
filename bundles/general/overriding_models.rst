@@ -6,8 +6,8 @@ Overriding Models
 Extending base Models
 ---------------------
 
-All Sylius models live in ``Sylius\Bundle\XyzBundle\Model`` namespace together with the interfaces.
-As an example, for **SyliusTaxationBundle** it's *TaxCategory* and *TaxRate*.
+All Sylius models live in ``Sylius\Component\Xyz\Model`` namespace together with the interfaces.
+As an example, for **Sylius Taxation Component** it's *TaxCategory* and *TaxRate*.
 
 Let's assume you want to add "zone" field to the Sylius tax rates.
 
@@ -17,8 +17,8 @@ Firstly, you need to create your own ``TaxRate`` class, which will extend the ba
 
     namespace Acme\Bundle\ShopBundle\Entity;
 
-    use Sylius\Bundle\AddressingBundle\Model\ZoneInterface;
-    use Sylius\Bundle\TaxationBundle\Model\TaxRate as BaseTaxRate;
+    use Sylius\Component\Addressing\Model\ZoneInterface;
+    use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
     class TaxRate extends BaseTaxRate
     {
@@ -49,7 +49,7 @@ Secondly, define the entity mapping inside ``Resources/config/doctrine/TaxRate.o
                                           http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
         <entity name="Acme\ShopBundle\Entity\TaxRate" table="sylius_tax_rate">
-            <many-to-one field="zone" target-entity="Sylius\Bundle\AddressingBundle\Model\ZoneInterface">
+            <many-to-one field="zone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
                 <join-column name="zone_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
         </entity>
@@ -74,6 +74,6 @@ What has happened?
 * ``sylius.repository.tax_rate`` represents Doctrine repository for your new class.
 * ``sylius.manager.tax_rate`` represents Doctrine object manager for your new class.
 * ``sylius.controller.tax_rate`` represents the controller for your new class.
-* All Doctrine relations to ``Sylius\\Bundle\\TaxationBundle\\Model\\TaxRateInterface`` are using your new class as *target-entity*, you do not need to update any mappings.
+* All Doctrine relations to ``Sylius\\Component\\Taxation\\Model\\TaxRateInterface`` are using your new class as *target-entity*, you do not need to update any mappings.
 * ``TaxRateType`` form type is using your model as ``data_class``.
-* ``Sylius\\Bundle\\TaxationBundle\\Model\\TaxRate`` is automatically turned into Doctrine Mapped Superclass.
+* ``Sylius\\Component\\Taxation\\Model\\TaxRate`` is automatically turned into Doctrine Mapped Superclass.

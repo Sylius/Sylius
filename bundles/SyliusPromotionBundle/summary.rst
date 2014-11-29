@@ -1,28 +1,29 @@
-Configuration reference
-=======================
+Summary
+=======
 
 .. code-block:: yaml
 
     sylius_promotions:
-        driver: ~ # The driver used for persistence layer.
+        # The driver used for persistence layer.
+        driver: ~
         classes:
             promotion:
-                model: Sylius\Bundle\PromotionsBundle\Model\Promotion
+                model: Sylius\Component\Promotion\Model\Promotion
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\PromotionsBundle\Form\Type\PromotionType
             promotion_rule:
-                model: Sylius\Bundle\PromotionsBundle\Model\Rule
+                model: Sylius\Component\Promotion\Model\Rule
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\PromotionsBundle\Form\Type\RuleType
             promotion_action:
-                model: Sylius\Bundle\PromotionsBundle\Model\Action
+                model: Sylius\Component\Promotion\Model\Action
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
                 form: Sylius\Bundle\PromotionsBundle\Form\Type\ActionType
             promotion_coupon:
-                model: Sylius\Bundle\PromotionsBundle\Model\Coupon
+                model: Sylius\Component\Promotion\Model\Coupon
                 controller: Sylius\Bundle\PromotionsBundle\Controller\CouponController
                 repository: ~
                 form: Sylius\Bundle\PromotionsBundle\Form\Type\CouponType
@@ -45,3 +46,18 @@ Configuration reference
             promotion_action_add_product_configuration: [sylius]
             promotion_coupon_generate_instruction: [sylius]
             promotion_action_shipping_discount_configuration: [sylius]
+
+
+`phpspec2 <http://phpspec.net>`_ examples
+-----------------------------------------
+
+.. code-block:: bash
+
+    $ composer install --dev --prefer-dist
+    $ bin/phpspec run -fpretty --verbose
+
+Bug tracking
+------------
+
+This bundle uses `GitHub issues <https://github.com/Sylius/Sylius/issues>`_.
+If you have found bug, please create an issue.

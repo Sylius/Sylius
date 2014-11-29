@@ -8,3 +8,4 @@ Basic taxonomies library for any PHP application.
 
    installation
    models
+   summary

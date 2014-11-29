@@ -13,3 +13,6 @@
 * :doc:`/bundles/SyliusSettingsBundle/index`
 * :doc:`/bundles/SyliusFlowBundle/index`
 * :doc:`/bundles/SyliusVariationBundle/index`
+* :doc:`/bundles/SyliusContactBundle/index`
+* :doc:`/bundles/SyliusVariationBundle/index`
+

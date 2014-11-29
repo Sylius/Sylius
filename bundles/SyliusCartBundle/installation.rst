@@ -262,7 +262,7 @@ This can be done in various ways, but to keep the example simple - we'll use a q
             }
 
             // Assign the product to the item and define the unit price.
-            $item->setProduct($product);
+            $item->setVariant($product);
             $item->setUnitPrice($product->getPrice());
 
             // Everything went fine, return the item.

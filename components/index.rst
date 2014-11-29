@@ -8,6 +8,7 @@ PHP Ecommerce Components
     Attribute/index
     Cart/index
     Currency/index
+    Locale/index
     Inventory/index
     Order/index
     Payment/index

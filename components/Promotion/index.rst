@@ -7,3 +7,4 @@ Super-flexible promotions system with support of complex rules and actions. Coup
    :numbered:
 
    installation
+   summary
