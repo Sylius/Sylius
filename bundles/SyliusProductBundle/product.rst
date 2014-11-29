@@ -1,33 +1,6 @@
 The Product
 ===========
 
-Product is the main model in SyliusProductBundle. This simple class represents every unique product in the catalog.
-The default interface contains the following attributes with appropriate setters and getters.
-
-+-----------------+----------------------------------------------------+
-| Attribute       | Description                                        |
-+=================+====================================================+
-| id              | Unique id of the product                           |
-+-----------------+----------------------------------------------------+
-| name            | Name of the product                                |
-+-----------------+----------------------------------------------------+
-| slug            | SEO slug, by default created from the name         |
-+-----------------+----------------------------------------------------+
-| description     | Description of your great product                  |
-+-----------------+----------------------------------------------------+
-| availableOn     | Date when product becomes available in catalog     |
-+-----------------+----------------------------------------------------+
-| metaDescription | Description for search engines                     |
-+-----------------+----------------------------------------------------+
-| metaKeywords    | Comma separated list of keywords for product (SEO) |
-+-----------------+----------------------------------------------------+
-| createdAt       | Date when product was created                      |
-+-----------------+----------------------------------------------------+
-| updatedAt       | Date of last product update                        |
-+-----------------+----------------------------------------------------+
-| deletedAt       | Date of deletion from catalog                      |
-+-----------------+----------------------------------------------------+
-
 Retrieving products
 -------------------
 

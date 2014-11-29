@@ -262,7 +262,7 @@ This can be done in various ways, but to keep the example simple - we'll use a q
             }
 
             // Assign the product to the item and define the unit price.
-            $item->setProduct($product);
+            $item->setVariant($product);
             $item->setUnitPrice($product->getPrice());
 
             // Everything went fine, return the item.
@@ -327,7 +327,7 @@ Put this minimal configuration inside your ``app/config/config.yml``.
     sylius_order:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
         classes:
-            order
+            order:
                 model: App\AppBundle\Entity\Cart # If you have created a custom Cart entity.
             order_item:
                 model: App\AppBundle\Entity\CartItem # If you have created a custom CartItem entity.
@@ -367,8 +367,8 @@ Templates
 We think that providing a sensible default template is really difficult, especially when a cart summary is not the simplest page.
 This is the reason why we do not currently include any, but if you have an idea for a good starter template, let us know!
 
-The bundle requires only the ``show.html`` template for cart summary page.
-The easiest way to override the view is by placing it here ``app/Resources/SyliusCartBundle/views/Cart/show.html.twig``.
+The bundle requires only the ``summary.html.twig`` template for cart summary page.
+The easiest way to override the view is by placing it here ``app/Resources/SyliusCartBundle/views/Cart/summary.html.twig``.
 
 .. note::
 

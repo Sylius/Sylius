@@ -27,4 +27,4 @@ Flexible shipping cost calculation system allows you to create your own calculat
    shipping_requirements
    default_checkers
    custom_checkers
-   Configuration reference <configuration>
+   summary

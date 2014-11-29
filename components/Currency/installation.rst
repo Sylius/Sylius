@@ -2,7 +2,7 @@ Installation
 ============
 
 We assume you're familiar with `Composer <http://packagist.org>`_, a dependency manager for PHP.
-Use following command to add the bundle to your `composer.json` and download package.
+Use following command to add the component to your `composer.json` and download package.
 
 If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md#globally>`_.
 

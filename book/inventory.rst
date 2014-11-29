@@ -34,7 +34,7 @@ Every item sold in the store is represented by *InventoryUnit*, which has many d
 
 * checkout - When item is in the cart.
 * onhold - When checkout is completed, but we are waiting for the payment.
-* sold - When item has been sold and is no longer in the werehouse.
+* sold - When item has been sold and is no longer in the warehouse.
 * backordered - Item has been sold, but is not in stock and waiting for supply.
 * returned - Item has been sold, but returned and is in stock.
 

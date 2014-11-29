@@ -5,9 +5,12 @@ PHP library which provides abstraction of payments management. It ships with def
 
 .. note::
 
-    This bundle does not provide any payment gateway. Integrating it with `Payum <http://payum.forma-dev.com/>`_.
+    This component does not provide any payment gateway. Integrating it with `Payum <http://payum.forma-dev.com/>`_.
 
 .. toctree::
    :numbered:
 
    installation
+   model
+   summary
+

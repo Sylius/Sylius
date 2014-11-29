@@ -52,7 +52,7 @@ That's it! Now ``sylius.controller.product:recommendAction`` is available. You c
     # app/config/routing.yml
 
     acme_shop_product_recommend:
-        pattern: /products/{id}/recommend
+        path: /products/{id}/recommend
         defaults:
             _controller: sylius.controller.product:recommendAction
 

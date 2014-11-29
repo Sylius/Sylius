@@ -18,4 +18,4 @@ You'll get familiar with it in later parts of this documentation.
    installation
    zones
    forms
-   Configuration reference <configuration>
+   Summary

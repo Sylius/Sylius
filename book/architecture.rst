@@ -7,9 +7,9 @@ Architecture Overview
 Before we dive separately into every Sylius concept, you need to have an overview of how our main application is structured.
 You already know that Sylius is built from components and Symfony2 bundles, which are integration layers with the framework.
 
-All bundles share the conventions for naming things and the same way of data persistence. Sylius, by default, uses Doctrine ORM for managing all entites.
+All bundles share the conventions for naming things and the same way of data persistence. Sylius, by default, uses Doctrine ORM for managing all entities.
 
-For deeper understanding of how Doctrine works, please refer to the [excellent documentation on their official webiste].
+For deeper understanding of how Doctrine works, please refer to the [excellent documentation on their official website].
 
 Resource Layer
 --------------
@@ -145,7 +145,7 @@ Displaying a resource with custom template and repository methods:
     # routing.yml
 
     app_product_show:
-        pattern: /products/{slug}
+        path: /products/{slug}
         methods: [GET]
         defaults:
             _controller: sylius.controller.product:showAction
@@ -161,7 +161,7 @@ Creating a product using custom form and redirection method:
     # routing.yml
 
     app_product_create:
-        pattern: /my-stores/{store}/products/new
+        path: /my-stores/{store}/products/new
         methods: [GET, POST]
         defaults:
             _controller: sylius.controller.product:createAction

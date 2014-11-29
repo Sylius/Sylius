@@ -7,3 +7,4 @@ Calculating prices is a common task for most PHP E-Commerce applications. This l
    :numbered:
 
    installation
+   summary

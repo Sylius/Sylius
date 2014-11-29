@@ -7,3 +7,6 @@ Managing different currencies, exchange rates and converting cash amounts for PH
    :numbered:
 
    installation
+   models
+   provider
+   summary

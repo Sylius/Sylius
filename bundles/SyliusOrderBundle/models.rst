@@ -7,7 +7,7 @@ Order basics
 ------------
 
 Each order has 2 main identifiers, an *ID* and a human-friendly *number*.
-You can access those by calling ``->getId()`` and ``-getNumber()`` respectively.
+You can access those by calling ``->getId()`` and ``->getNumber()`` respectively.
 The number is mutable, so you can change it by calling ``->setNumber('E001')`` on the order instance.
 
 .. code-block:: php

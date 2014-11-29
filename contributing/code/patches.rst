@@ -334,7 +334,7 @@ messages of all the commits. When you are finished, execute the push command.
 
 .. _ProGit:                                http://git-scm.com/book
 .. _GitHub:                                https://github.com/signup/free
-.. _`Github's Documentation`:              https://help.github.com/articles/ignoring-files
+.. _`GitHub's Documentation`:              https://help.github.com/articles/ignoring-files
 .. _`Sylius repository`:                   https://github.com/Sylius/Sylius
 .. _travis-ci.org:                         https://travis-ci.org/
 .. _`travis-ci.org status icon`:           http://about.travis-ci.org/docs/user/status-images/

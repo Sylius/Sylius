@@ -77,4 +77,4 @@ browser.
     ``http://localhost:8000``.
 
 .. _Composer: http://packagist.org
-.. _`Composer isntalled globally`: http://getcomposer.org/doc/00-intro.md#globally
+.. _`Composer installed globally`: http://getcomposer.org/doc/00-intro.md#globally

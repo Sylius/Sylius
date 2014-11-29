@@ -7,3 +7,4 @@ Inventory management for PHP applications.
    :numbered:
 
    installation
+   summary

@@ -18,4 +18,4 @@ product variations with a very flexible architecture.
    forms
    prototypes
    product_builder
-   configuration
+   summary

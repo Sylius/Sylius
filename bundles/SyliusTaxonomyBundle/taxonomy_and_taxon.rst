@@ -1,77 +1,6 @@
 Taxonomy and Taxons
 ===================
 
-Taxonomy is a list constructed from individual Taxons. Every taxonomy has one special taxon, which serves as a root of the tree.
-All taxons can have many child taxons, you can define as many of them as you need.
-
-A good examples of taxonomies are "Categories" and "Brands". Below you can see an example tree.
-
-.. code-block:: text
-
-    | Categories
-    |--  T-Shirts
-    |    |-- Men
-    |    `-- Women
-    |--  Stickers
-    |--  Mugs
-    `--  Books
-
-    | Brands
-    |-- SuperTees
-    |-- Stickypicky
-    |-- Mugland
-    `-- Bookmania
-
-Here is the full list of attributes related to Taxonomy and Taxon models.
-
-+-----------------+--------------------------------+
-| Taxonomy                                         |
-+-----------------+--------------------------------+
-| Attribute       | Description                    |
-+=================+================================+
-| id              | Unique id of the taxonomy      |
-+-----------------+--------------------------------+
-| name            | Name of the taxonomy           |
-+-----------------+--------------------------------+
-| root            | First, "root" Taxon            |
-+-----------------+--------------------------------+
-| createdAt       | Date when taxonomy was created |
-+-----------------+--------------------------------+
-| updatedAt       | Date of last update            |
-+-----------------+--------------------------------+
-
-+-----------------+--------------------------------+
-| Taxon                                            |
-+-----------------+--------------------------------+
-| Attribute       | Description                    |
-+=================+================================+
-| id              | Unique id of the taxon         |
-+-----------------+--------------------------------+
-| name            | Name of the taxon              |
-+-----------------+--------------------------------+
-| slug            | Urlized name                   |
-+-----------------+--------------------------------+
-| permalink       | Full permalink for given taxon |
-+-----------------+--------------------------------+
-| description     | Description of taxon           |
-+-----------------+--------------------------------+
-| taxonomy        | Taxonomy                       |
-+-----------------+--------------------------------+
-| parent          | Parent taxon                   |
-+-----------------+--------------------------------+
-| children        | Sub taxons                     |
-+-----------------+--------------------------------+
-| left            | Location within taxonomy       |
-+-----------------+--------------------------------+
-| right           | Location within taxonomy       |
-+-----------------+--------------------------------+
-| level           | How deep it is in the tree     |
-+-----------------+--------------------------------+
-| createdAt       | Date when taxon was created    |
-+-----------------+--------------------------------+
-| updatedAt       | Date of last update            |
-+-----------------+--------------------------------+
-
 Retrieving taxonomies and taxons
 --------------------------------
 
@@ -101,7 +30,7 @@ Retrieving taxonomies is simpleas calling proper methods on the repository.
     {
         $repository = $this->container->get('sylius.repository.taxonomy');
 
-        $taxonomy = $repository->find(2); // Get taxonomy with id 4, returns null if not found.
+        $taxonomy = $repository->find(2); // Get taxonomy with id 2, returns null if not found.
         $taxonomy = $repository->findOneBy(array('name' => 'Specials')); // Get one taxonomy by defined criteria.
 
         $taxonomies = $repository->findAll(); // Load all the taxonomies!

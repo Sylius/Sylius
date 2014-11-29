@@ -9,13 +9,15 @@ In the default scenario, it will return an instance of paginator, with a list of
     # routing.yml
 
     app_user_index:
-        pattern: /users
+        path: /users
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
 
 When you go to ``/users``, ResourceController will use the repository (``app.repository.user``) to create a paginator.
 The default template will be rendered - ``App:User:index.html.twig`` with the paginator as the ``users`` variable.
+A paginator can be a simple array if you disable the pagination otherwise it is a instance of ``Pagerfanta\Pagerfanta``
+which is the `library <https://github.com/whiteoctober/Pagerfanta>`_ used to manage the pagination.
 
 Overriding the template and criteria
 ------------------------------------
@@ -27,7 +29,7 @@ Just like for the **showAction**, you can override the default template and crit
     # routing.yml
 
     app_user_index_inactive:
-        pattern: /users/inactive
+        path: /users/inactive
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -48,7 +50,7 @@ Except filtering, you can also sort users.
     # routing.yml
 
     app_user_index_top:
-        pattern: /users/top
+        path: /users/top
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -58,6 +60,16 @@ Except filtering, you can also sort users.
                 template: App:User:top.html.twig
 
 Under that route, you can paginate over the users by their score.
+
+Using a custom repository method
+--------------------------------
+
+You can define your own repository method too, you can use the same way explained in <show_resource>.
+
+.. note::
+
+    If you want to paginate your resources you need to use ``EntityReposiory::getPaginator($queryBuilder)``.
+    It will transform your doctrine query builder into ``Pagerfanta\Pagerfanta`` object.
 
 Changing the "max per page" option of paginator
 -----------------------------------------------
@@ -69,7 +81,7 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
     # routing.yml
 
     app_user_index_top:
-        pattern: /users/top
+        path: /users/top
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -91,7 +103,7 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
     # routing.yml
 
     app_user_index_top3:
-        pattern: /users/top
+        path: /users/top
         methods: [GET]
         defaults:
             _controller: app.controller.user:indexAction
@@ -104,49 +116,144 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
 
 That action will return the top 3 users by score, as the ``users`` variable.
 
-Twig Extensions
----------------
+Updating the position of your resource
+--------------------------------------
 
-sylius_resource_sort
---------------------
+You need to define two routes, they will use to update the position of the resource.
 
-**Parameters :**
-    - **property (string) :** [Mandatory] Name of the property (defined in your resource)
-    - **label (string) :** Label of the column on your grid (default : property name)
-    - **order (string) :** Default order, it can be asc or desc (default : asc)
-    - **options (array) :** Additional options, the extension can use a custom template or generate a custom route
-        + **template (string) :** Path to the template
-        + **route (string) :** Key of the new route
-        + **route_params (array) :** Additional route parameters
+.. code-block:: yaml
 
-This extension renders the following template : SyliusResourceBundle:Twig:paginate.html.twig
+    # routing.yml
 
-**Example :**
+    my_route_move_up:
+        pattern: /{id}/move-up
+        methods: [PUT]
+        defaults:
+            _controller: sylius.controller.resource:moveUpAction
+            _sylius:
+                redirect: referer
+                sortable_position: priority # the default value is position
+
+    my_route_move_down:
+        pattern: /{id}/move-down
+        methods: [PUT]
+        defaults:
+            _controller: sylius.controller.resource:moveDownAction
+            _sylius:
+                redirect: referer
+                sortable_position: priority # the default value is position
+
+You need to update your doctrine mapping :
+
+.. code-block:: xml
+
+    <!-- resource.orm.xml -->
+
+    <field name="priority" type="integer">
+        <gedmo:sortable-position/>
+    </field>
+
+In your template, you can use the macro `move` to print the `move up` and `move down` buttons:
 
 .. code-block:: html
 
-    <div>
-        {{ sylius_resource_sort('productId', 'product.id'|trans) }}
-    </div>
+    {# index.html.twig #}
 
-sylius_resource_paginate
-------------------------
+    {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 
-**Parameters :**
-    - **paginator (object) :** [Mandatory] An instance of PagerFanta
-    - **limits (array) :** [Mandatory] An array of paginate value
-    - **options (array) :** Additional options, the extension can use a custom template or generate a custom route
-        + **template (string) :** Path to the template
-        + **route (string) :** Key of the new route
-        + **route_params (array) :** Additional route parameters
+    {{ buttons.move(path('my_route_move_up', {'id': resource.id}), 'up', loop.first and not resources.hasPreviousPage, loop.last and not resources.hasNextPage) }}
+    {{ buttons.move(path('my_route_move_down', {'id': resource.id}), 'down', loop.first and not resources.hasPreviousPage, loop.last and not resources.hasNextPage) }}
+
+Listing tools
+-------------
+
+Sorting your resources (sylius_resource_sort)
++++++++++++++++++++++++++++++++++++++++++++++
+
+This TWIG extension renders the title of your columns (in your table), it created the link used to sort your resources.
+
+Parameters
+##########
+
++-----------+-----------+---------+----------------------------------------------------------+
+| Parameter | Mandatory | Type    | Description                                              |
++===========+===========+=========+==========================================================+
+| property  | YES       | string  | Name of the property (attribute defined in your classes) |
++-----------+-----------+---------+----------------------------------------------------------+
+| label     | NO        | string  | Default order, it can be asc or desc (default : asc)     |
++-----------+-----------+---------+----------------------------------------------------------+
+| order     | NO        | string  | Unique id of the address                                 |
++-----------+-----------+---------+----------------------------------------------------------+
+| options   | NO        | array   | Additional options :                                     |
+|           |           |         | **template (string) :** Path to the template             |
+|           |           |         | **route (string) :** Key of the new route                |
+|           |           |         | **route_params (array) :** Additional route parameters   |
++-----------+-----------+---------+----------------------------------------------------------+
 
 This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig
 
-**Example :**
+Example
+#######
 
 .. code-block:: html
 
-    <div>
-        {{ sylius_resource_paginate(paginator, [10, 20, 30]) }}
-    </div>
-    
+    <table>
+        <tr>
+            <td>
+                {{ sylius_resource_sort('productId', 'product.id'|trans) }}
+            </td>
+            <td>
+                {{ sylius_resource_sort('productName', 'product.name'|trans, 'desc', {'route': 'my_custom_route'}) }}
+            </td>
+        </tr>
+    <table>
+
+Number of item by page (sylius_resource_paginate)
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This TWIG extension renders a HTML select which allows the user to choose how many items he wants to display in the page.
+
+Parameters
+##########
+
++-----------+-----------+---------+----------------------------------------------------------+
+| Parameter | Mandatory | Type    | Description                                              |
++===========+===========+=========+==========================================================+
+| paginator | YES       | string  | An instance of PagerFanta                                |
++-----------+-----------+---------+----------------------------------------------------------+
+| limits    | YES       | string  | An array of paginate value                               |
++-----------+-----------+---------+----------------------------------------------------------+
+| options   | NO        | array   | Additional options :                                     |
+|           |           |         | **template (string) :** Path to the template             |
+|           |           |         | **route (string) :** Key of the new route                |
+|           |           |         | **route_params (array) :** Additional route parameters   |
++-----------+-----------+---------+----------------------------------------------------------+
+
+This extension renders the following template : SyliusResourceBundle:Twig:paginate.html.twig
+
+Example
+#######
+
+.. code-block:: html
+
+    {{ sylius_resource_paginate(paginator, [10, 30, 50]) }}
+
+    <table>
+        <!-- ... -->
+    </table>
+
+    {{ sylius_resource_paginate(paginator, [10, 30, 50]) }}
+
+
+Rendering pagination
+++++++++++++++++++++
+
+For now, you need to create your own macro, it could look like :
+
+.. code-block:: html
+
+    {% macro pagination(paginator, options) %}
+        {% if paginator.haveToPaginate()|default(false) %}
+            {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
+        {% endif %}
+    {% endmacro %}

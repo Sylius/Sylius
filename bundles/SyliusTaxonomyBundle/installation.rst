@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/taxonomies-bundle"
+    $ composer require "sylius/taxonomy-bundle"
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/taxonomies-bundle"
+    $ php composer.phar require "sylius/taxonomy-bundle"
 
 .. note::
 
@@ -41,7 +41,7 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sylius\Bundle\TaxonomiesBundle\SyliusTaxonomiesBundle(),
+            new Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
@@ -63,7 +63,7 @@ Put this configuration inside your ``app/config/config.yml``.
     sylius_taxonomies:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
-And configure doctrine extensions which are used in the taxonomies bundle:
+And configure doctrine extensions which are used in the taxonomy bundle:
 
 .. code-block:: yaml
 
@@ -80,9 +80,9 @@ Add the following lines to your ``app/config/routing.yml``.
 
 .. code-block:: yaml
 
-    sylius_taxonomies:
-        resource: @SyliusTaxonomiesBundle/Resources/config/routing.yml
-        prefix: /taxonomies
+    sylius_taxonomy:
+        resource: @SyliusTaxonomyBundle/Resources/config/routing.yml
+        prefix: /taxonomy
 
 Updating database schema
 ------------------------

@@ -7,3 +7,5 @@ Basic taxonomies library for any PHP application.
    :numbered:
 
    installation
+   models
+   summary

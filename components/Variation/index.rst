@@ -7,3 +7,6 @@ Library for managing object variants and options. This functionality can be atta
    :numbered:
 
    installation
+   models
+   generator
+   summary
