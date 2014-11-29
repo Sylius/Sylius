@@ -12,3 +12,4 @@
 * :doc:`/bundles/SyliusOmnipayBundle/index`
 * :doc:`/bundles/SyliusSettingsBundle/index`
 * :doc:`/bundles/SyliusFlowBundle/index`
+* :doc:`/bundles/SyliusVariationBundle/index`

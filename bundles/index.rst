@@ -18,5 +18,6 @@ Symfony2 Ecommerce Bundles
     SyliusTaxonomyBundle/index
     SyliusSettingsBundle/index
     SyliusFlowBundle/index
+    SyliusVariationBundle/index
 
 .. include:: /bundles/map.rst.inc
