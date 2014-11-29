@@ -23,12 +23,24 @@ class CompleteOrderCallback extends BaseCompleteOrderCallback
     /**
      * @param OrderInterface $order
      */
-    public function countSoldVariants(OrderInterface $order)
+    public function increaseSoldVariants(OrderInterface $order)
     {
         /** @var $item OrderItemInterface */
         foreach ($order->getItems() as $item) {
             $variant = $item->getVariant();
             $variant->setSold($variant->getSold() + $item->getQuantity());
+        }
+    }
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function decreaseSoldVariants(OrderInterface $order)
+    {
+        /** @var $item OrderItemInterface */
+        foreach ($order->getItems() as $item) {
+            $variant = $item->getVariant();
+            $variant->setSold($variant->getSold() - $item->getQuantity());
         }
     }
 }

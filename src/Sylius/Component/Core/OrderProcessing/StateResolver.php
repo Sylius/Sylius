@@ -40,14 +40,13 @@ class StateResolver implements StateResolverInterface
                 }
             }
 
-            if ($completedPaymentTotal === $order->getTotal()) {
+            if ($completedPaymentTotal >= $order->getTotal()) {
                 // Payment is completed if we have received full amount.
                 $paymentState = PaymentInterface::STATE_COMPLETED;
             } else {
                 // Payment is processing if one of the payment is.
                 if ($payments->exists(function ($key, $payment) {
                     return in_array($payment->getState(), array(
-                        PaymentInterface::STATE_COMPLETED,
                         PaymentInterface::STATE_PROCESSING,
                         PaymentInterface::STATE_PENDING,
                     ));
