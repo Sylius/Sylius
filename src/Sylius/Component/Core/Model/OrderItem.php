@@ -25,6 +25,16 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 class OrderItem extends CartItem implements OrderItemInterface
 {
     /**
+     * @var string
+     */
+    protected $sku;
+
+    /**
+     * @var string
+     */
+    protected $description;
+
+    /**
      * Product variant.
      *
      * @var ProductVariantInterface
@@ -175,5 +185,41 @@ class OrderItem extends CartItem implements OrderItemInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return $this->discription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDescription($description)
+    {
+        $this->discription = $description;
+
+        return $this;
     }
 }
