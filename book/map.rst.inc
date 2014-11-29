@@ -2,6 +2,7 @@
 * :doc:`/book/installation`
 * :doc:`/book/architecture`
 * :doc:`/book/state_machine`
+* :doc:`/book/channels`
 * :doc:`/book/products`
 * :doc:`/book/addresses`
 * :doc:`/book/inventory`

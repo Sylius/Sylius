@@ -7,6 +7,8 @@ The Book
     introduction
     installation
     architecture
+    state_machine
+    channels
     products
     addresses
     inventory
