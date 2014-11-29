@@ -31,13 +31,16 @@
         "sylius/sequence":          "0.12.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.0"
+        "phpspec/phpspec": "~2.0"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
         "psr-4": { "Sylius\\Bundle\\SequenceBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\Sylius\\Bundle\\SequenceBundle\\": "spec/" }
     },
     "extra": {
         "branch-alias": {
