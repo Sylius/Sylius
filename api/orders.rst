@@ -456,3 +456,51 @@ Response
 .. code-block:: text
 
     STATUS: 204 NO CONTENT
+
+Add an item to order
+--------------------
+
+To add an item to order, you simply need to do a POST request:
+
+.. code-block:: text
+
+    POST /api/orders/305/items
+
+Parameters
+~~~~~~~~~~
+
+variant
+    The id of product variant
+unitPrice
+    Unit price of the item
+quantity
+    Desired quantity
+
+Response
+~~~~~~~~
+
+Response will contain a representation of the newly created item.
+
+.. code-block:: text
+
+    STATUS: 201 CREATED
+
+.. code-block:: json
+
+    {"to": "do"}
+
+Removing an item from order
+---------------------------
+
+To remove an item from order, you can simply call a DELETE on its url.
+
+.. code-block:: text
+
+    DELETE /api/orders/49/items/245
+
+Response
+~~~~~~~~
+
+.. code-block:: text
+
+    STATUS: 204 NO CONTENT
