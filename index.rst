@@ -25,6 +25,18 @@ The Developer's guide to leveraging the flexibility of Sylius.
 
 .. include:: /book/map.rst.inc
 
+The API Guide
+-------------
+
+This chapter covers the REST API of Sylius platform.
+
+.. toctree::
+   :hidden:
+
+   api/index
+
+.. include:: /api/map.rst.inc
+
 The User Guide
 --------------
 
