@@ -23,8 +23,6 @@ limit
 Response
 ~~~~~~~~
 
-The response will contain the newly created order information.
-
 .. code-block:: text
 
     STATUS: 200 OK
@@ -382,6 +380,8 @@ currency
 Response
 ~~~~~~~~
 
+The response will contain the newly created order information.
+
 .. code-block:: text
 
     STATUS: 201 CREATED
@@ -440,19 +440,3 @@ Response
         "currency":"USD",
         "checkout_state":"cart"
     }
-
-Deleting a single order
------------------------
-
-You can delete (soft) an order from the system by making the following DELETE call:
-
-.. code-block:: text
-
-    DELETE /api/orders/24
-
-Response
-~~~~~~~~
-
-.. code-block:: text
-
-    STATUS: 204 NO CONTENT
