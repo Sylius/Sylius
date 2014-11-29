@@ -1,5 +1,5 @@
-The Guide
-=========
+The User Guide
+==============
 
 .. toctree::
     :hidden:

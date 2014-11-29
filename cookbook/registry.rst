@@ -41,9 +41,9 @@ We will to show you how to set up the sylius registry. In this example, we will 
             if (!$container->hasDefinition('app.price.calculator.registry')) {
                 return;
             }
-    
+
             $registryDefinition = $container->getDefinition('app.price.calculator.registry');
-    
+
             // You can register your services like this
             $registryDefinition->addMethodCall(
                 'register',

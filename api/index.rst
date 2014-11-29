@@ -4,6 +4,7 @@ The API Guide
 .. toctree::
     :hidden:
 
+    introduction
     channels
     orders
     checkouts
@@ -11,5 +12,6 @@ The API Guide
     users
     shipments
     payments
+    stock_locations
 
 .. include:: /api/map.rst.inc

@@ -61,6 +61,30 @@ Specific solutions for specific needs.
 
 .. include:: /cookbook/map.rst.inc
 
+Integrations
+------------
+
+Learn about how Sylius integrates with third-party applications.
+
+.. toctree::
+   :hidden:
+
+   integrations/index
+
+.. include:: /integrations/map.rst.inc
+
+Migration Guide
+---------------
+
+Migrating to Sylius from other e-commerce platforms.
+
+.. toctree::
+   :hidden:
+
+   migration/index
+
+.. include:: /migration/map.rst.inc
+
 Bundles
 -------
 
