@@ -14,24 +14,17 @@ namespace Sylius\Bundle\SearchBundle\QueryLogger;
 use Elastica\Document;
 
 /**
- * @author agounaris <agounaris@gmail.com>
+ * @author Argyrios Gounaris <agounaris@gmail.com>
  */
 class ElasticsearchQueryLogger implements QueryLoggerInterface
 {
-    /**
-     * @var
-     */
-    protected $type;
+    private $type;
 
     /**
-     * @var
+     * @var bool
      */
     private $isEnabled;
 
-    /**
-     * @param $type
-     * @param $isEnabled
-     */
     public function __construct($type, $isEnabled)
     {
         $this->type = $type;
@@ -39,8 +32,7 @@ class ElasticsearchQueryLogger implements QueryLoggerInterface
     }
 
     /**
-     * @param $searchTerm
-     * @param $ipAddress
+     * {@inheritdoc}
      */
     public function logStringQuery($searchTerm, $ipAddress)
     {
@@ -53,7 +45,7 @@ class ElasticsearchQueryLogger implements QueryLoggerInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function isEnabled()
     {

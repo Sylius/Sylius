@@ -101,7 +101,7 @@ class OrmListener implements EventSubscriber
     }
 
     /**
-     * @param LifecycleEventArgs $args
+     * @param PostFlushEventArgs $args
      */
     public function index(PostFlushEventArgs $args)
     {

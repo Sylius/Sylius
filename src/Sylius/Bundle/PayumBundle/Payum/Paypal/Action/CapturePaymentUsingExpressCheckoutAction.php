@@ -15,6 +15,7 @@ use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAction
@@ -33,7 +34,7 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function composeDetails(PaymentInterface $payment, TokenInterface $token)
     {
@@ -86,13 +87,11 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
         $payment->setDetails($details);
     }
 
-    private function calculateNonNeutralTaxTotal($order)
+    private function calculateNonNeutralTaxTotal(OrderInterface $order)
     {
         $nonNeutralTaxTotal = 0;
-        $taxAdjustments = $order->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
-
-        foreach ($taxAdjustments as $taxAdjustment) {
-            if(!$taxAdjustment->isNeutral()){
+        foreach ($order->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+            if (!$taxAdjustment->isNeutral()) {
                 $nonNeutralTaxTotal = $taxAdjustment->getAmount();
             }
         }

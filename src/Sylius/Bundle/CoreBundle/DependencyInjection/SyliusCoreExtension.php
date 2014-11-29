@@ -30,23 +30,24 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     private $bundles = array(
         'sylius_addressing',
-        'sylius_inventory',
-        'sylius_currency',
+        'sylius_api',
+        'sylius_attribute',
         'sylius_contact',
+        'sylius_currency',
+        'sylius_inventory',
         'sylius_locale',
+        'sylius_order',
         'sylius_payment',
         'sylius_payum',
         'sylius_product',
         'sylius_promotion',
-        'sylius_api',
-        'sylius_order',
+        'sylius_search',
+        'sylius_sequence',
         'sylius_settings',
         'sylius_shipping',
         'sylius_taxation',
         'sylius_taxonomy',
-        'sylius_attribute',
         'sylius_variation',
-        'sylius_sequence',
     );
 
     protected $configFiles = array(
@@ -59,7 +60,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     private $emails = array(
         'order_comment',
         'order_confirmation',
-        'customer_welcome'
+        'customer_welcome',
     );
 
     /**

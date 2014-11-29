@@ -22,7 +22,6 @@ use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
  */
 interface FinderInterface
 {
-
     /**
      * @param TaxonQuery $query
      *

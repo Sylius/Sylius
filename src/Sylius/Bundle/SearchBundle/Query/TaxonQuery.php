@@ -48,4 +48,4 @@ class TaxonQuery extends Query
     {
         return $this->taxon;
     }
-} 
+}

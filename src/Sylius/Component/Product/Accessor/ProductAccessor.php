@@ -28,45 +28,30 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
  */
 class ProductAccessor extends PropertyAccessor
 {
-
     /**
-     * @param $object
-     * @return bool
+     * {@inheritdoc}
      */
-    public function canAccessObject($object)
-    {
-
-        if ($object instanceof ProductInterface) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $objectOrArray
-     * @param $propertyPath
-     * @return array|mixed
-     */
-    public function accessObject($objectOrArray, $propertyPath)
+    public function getValue($objectOrArray, $propertyPath)
     {
         try {
             return parent::getValue($objectOrArray, $propertyPath);
-        }catch (Exception\NoSuchPropertyException $e){
+        } catch (Exception\NoSuchPropertyException $e) {
             $tags = array();
+            if (!$objectOrArray instanceof ProductInterface) {
+                return $tags;
+            }
 
+            $propertyPath = strtolower((string) $propertyPath);
             foreach ($objectOrArray->getAvailableVariants() as $variant) {
                 foreach ($variant->getOptions() as $option) {
-
-                    if (strtolower($option->getPresentation()) == strtolower($propertyPath)) {
+                    if ($propertyPath === strtolower($option->getPresentation())) {
                         $tags[] = $option->getValue();
                     }
                 }
             }
 
             foreach ($objectOrArray->getAttributes() as $attribute) {
-
-                if (strtolower(str_replace(' ', '_', $attribute->getPresentation())) == strtolower($propertyPath)) {
+                if ($propertyPath === strtolower(str_replace(' ', '_', $attribute->getPresentation()))) {
                     $tags[] = $attribute->getValue();
                 }
             }
@@ -74,4 +59,4 @@ class ProductAccessor extends PropertyAccessor
             return array_values(array_unique($tags));
         }
     }
-} 
+}
