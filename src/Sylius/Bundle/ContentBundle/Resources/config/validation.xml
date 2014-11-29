@@ -52,12 +52,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="content">
-            <constraint name="NotBlank">
-                <option name="message">sylius.route.content.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
     </class>
 
     <class name="Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock">
@@ -111,7 +105,12 @@
         </property>
         <property name="body">
             <constraint name="NotBlank">
-                <option name="message">sylius.static_content.body.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="routes">
+            <constraint name="Count">
+                <option name="min">1</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

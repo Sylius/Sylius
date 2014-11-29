@@ -28,10 +28,7 @@ class StaticContentType extends AbstractResourceType
     {
         $builder
             ->add('publishable', null, array(
-                    'label' => 'sylius.form.static_content.publishable'
-                ))
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.static_content.id'
+                'label' => 'sylius.form.static_content.publishable'
             ))
             ->add('parent', null, array(
                 'label' => 'sylius.form.static_content.parent'
@@ -45,12 +42,8 @@ class StaticContentType extends AbstractResourceType
             ->add('title', 'text', array(
                 'label' => 'sylius.form.static_content.title'
             ))
-            ->add('routes', 'collection', array(
-                'type'         => 'sylius_route',
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label'        => 'sylius.form.static_content.routes'
+            ->add('routes', 'sylius_route_choice', array(
+                'label' => 'sylius.form.static_content.routes'
              ))
             ->add('menuNodes', 'collection', array(
                 'type'         => 'sylius_menu_node',
@@ -71,8 +64,7 @@ class StaticContentType extends AbstractResourceType
                 'required' => false,
                 'label'    => 'sylius.form.static_content.publish_end_date',
             ))
-            ;
-
+        ;
     }
 
     /**
