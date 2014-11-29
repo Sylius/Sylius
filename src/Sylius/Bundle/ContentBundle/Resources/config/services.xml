@@ -7,6 +7,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.content_choice.class">Sylius\Bundle\ContentBundle\Form\Type\ContentChoiceType</parameter>
+        <parameter key="sylius.form.type.route_choice.class">Sylius\Bundle\ContentBundle\Form\Type\RouteChoiceType</parameter>
     </parameters>
 
     <services>
@@ -78,6 +79,10 @@
         <service id="sylius.form.type.content_choice" class="%sylius.form.type.content_choice.class%">
             <argument>%sylius.model.static_content.class%</argument>
             <tag name="form.type" alias="sylius_content_choice" />
+        </service>
+        <service id="sylius.form.type.route_choice" class="%sylius.form.type.route_choice.class%">
+            <argument>%sylius.model.route.class%</argument>
+            <tag name="form.type" alias="sylius_route_choice" />
         </service>
     </services>
 </container>
