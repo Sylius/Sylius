@@ -263,7 +263,11 @@
                 <tr>
                     <td>{{ unit.stockable.sku }}</td>
                     <td>{{ unit.inventoryName }}</td>
+                    {% if unit.stockItem is not empty %}
                     <td><strong>{{ unit.stockItem.location.code }}</strong></td>
+                    {% else %}
+                    <td>-</td>
+                    {% endif %}
                     <td>{{ unit.inventoryState|humanize }}</td>
                     <td>{{ unit.shippingState|humanize }}</td>
                     <td>
