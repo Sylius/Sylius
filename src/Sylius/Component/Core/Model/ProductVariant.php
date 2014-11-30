@@ -245,7 +245,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function getInventoryName()
     {
-        return $this->getProduct()->getName();
+        return $this->__toString();
     }
 
     /**

@@ -250,26 +250,22 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>{{ 'sylius.inventory_unit.sku'|trans }}</th>
                     <th>{{ 'sylius.inventory_unit.name'|trans }}</th>
+                    <th>{{ 'sylius.shipment.stock_location'|trans }}</th>
                     <th>{{ 'sylius.inventory_unit.inventory_state'|trans }}</th>
                     <th>{{ 'sylius.inventory_unit.shipping_state'|trans }}</th>
-                    <th>{{ 'sylius.inventory_unit.created_at'|trans }}</th>
-                    <th>{{ 'sylius.inventory_unit.updated_at'|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for unit in order.inventoryUnits %}
                 <tr>
-                    <td>{{ loop.index }}</td>
                     <td>{{ unit.stockable.sku }}</td>
                     <td>{{ unit.inventoryName }}</td>
+                    <td><strong>{{ unit.stockItem.location.code }}</strong></td>
                     <td>{{ unit.inventoryState|humanize }}</td>
                     <td>{{ unit.shippingState|humanize }}</td>
-                    <td>{{ unit.createdAt|date }}</td>
-                    <td>{{ unit.updatedAt|date }}</td>
                     <td>
                         {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
                             <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">

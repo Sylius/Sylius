@@ -57,6 +57,9 @@ class CheckoutController extends FOSRestController
             case OrderCheckoutTransitions::SYLIUS_FINALIZE:
                 return $this->finalizeAction($request, $order);
             break;
+            case OrderCheckoutTransitions::SYLIUS_PURCHASE:
+                return $this->purchaseAction($request, $order);
+            break;
         }
 
         throw new \Exception('Could not process checkout API request.');
@@ -189,6 +192,48 @@ class CheckoutController extends FOSRestController
 
         return $this->handleView($this->view($order));
     }
+
+    public function purchaseAction(Request $request, OrderInterface $order)
+    {
+        $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
+        $this->getHttpRequestVerifier()->invalidate($token);
+
+        $status = new GetStatus($token);
+        $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
+
+        /** @var $payment PaymentInterface */
+        $payment = $status->getModel();
+
+        if (!$payment instanceof PaymentInterface) {
+            throw new UnexpectedTypeException($payment, 'Sylius\Component\Core\Model\PaymentInterface');
+        }
+
+        $order = $payment->getOrder();
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);
+
+        $nextState = $status->getValue();
+
+        $stateMachine = $this->get('sm.factory')->get($payment, PaymentTransitions::GRAPH);
+
+        if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
+            $stateMachine->apply($transition);
+        }
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_PRE_COMPLETE, $order);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        $event = new PurchaseCompleteEvent($payment);
+        $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
+
+        if ($event->hasResponse()) {
+            return $event->getResponse();
+        }
+
+        return $this->complete();
+    }
+
 
     private function getOrderRepository()
     {

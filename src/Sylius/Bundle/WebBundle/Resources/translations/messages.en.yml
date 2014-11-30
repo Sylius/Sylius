@@ -485,6 +485,7 @@ sylius:
             backorder: Backorder
             fulfill: Fulfill
             return: Return
+            sell: Sell
         shipping_address: Shipping address
         shipping_charges: Shipping charges
         shipping_total: Shipping total
