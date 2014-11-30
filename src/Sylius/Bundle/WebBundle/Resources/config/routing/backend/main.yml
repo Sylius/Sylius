@@ -96,6 +96,10 @@ sylius_backend_stock_item:
     resource: @SyliusWebBundle/Resources/config/routing/backend/stock_item.yml
     prefix: /stock-locations/{locationId}/stock-items
 
+sylius_backend_inventory_unit:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/inventory_unit.yml
+    prefix: /inventory-units
+
 sylius_backend_payment_method:
     resource: @SyliusWebBundle/Resources/config/routing/backend/payment_method.yml
     prefix: /payment-methods

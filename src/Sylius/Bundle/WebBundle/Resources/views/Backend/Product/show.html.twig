@@ -18,6 +18,7 @@
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
     {% if not product.deleted %}
+    {{ buttons.show(path('sylius_backend_product_stock', {'id': product.id}), 'Stock'|trans) }}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
     <a href="{{ path(product) }}" class="btn btn-info">

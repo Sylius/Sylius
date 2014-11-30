@@ -11,14 +11,15 @@
 
 namespace Sylius\Component\Inventory\Provider;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Inventory\Model\InventorySubjectInterface;
+use Sylius\Component\Inventory\Repository\StockLocationRepositoryInterface;
 
 /**
  * Default provider returns all enabled stock locations.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class InventoryProvider implements InventoryProviderInterface
+class StockLocationProvider implements StockLocationProviderInterface
 {
     /**
      * Repository for stock location.

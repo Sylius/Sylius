@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Inventory\Packaging;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockLocationInterface;
@@ -47,6 +48,14 @@ class Package implements PackageInterface
     public function getStockLocation()
     {
         return $this->stockLocation;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        return $this->inventoryUnits->isEmpty();
     }
 
     /**

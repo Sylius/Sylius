@@ -11,8 +11,7 @@
 
 namespace Sylius\Component\Inventory\Packaging;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 
 /**
  * Packer is responsible for packaging inventory for every stockable and stock location.
@@ -22,12 +21,12 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 interface PackerInterface
 {
     /**
-     * Obtain a collection of packages with inventory units for particular location.
+     * Obtain a collection of packages with given set of inventory units for particular location.
      *
      * @param StockLocationInterface   $stockLocation
-     * @param InventoryUnitInterface[] $inventoryUnits
+     * @param Items                    $items
      *
      * @return PackageInterface[]
      */
-    public function pack(StockLocationInterface $stockLocation, Collection $inventoryUnits);
+    public function pack(StockLocationInterface $stockLocation, Items $items);
 }

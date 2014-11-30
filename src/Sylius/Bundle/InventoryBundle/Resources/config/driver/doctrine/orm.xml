@@ -20,6 +20,7 @@
         <parameter key="sylius.form.type.stock_location_choice.class">Sylius\Bundle\InventoryBundle\Form\Type\StockLocationEntityType</parameter>
         <parameter key="sylius.repository.stock_item.class">Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockItemRepository</parameter>
         <parameter key="sylius.repository.stock_movement.class">Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockMovementRepository</parameter>
+        <parameter key="sylius.repository.stock_location.class">Sylius\Bundle\InventoryBundle\Doctrine\ORM\StockLocationRepository</parameter>
     </parameters>
 
 </container>

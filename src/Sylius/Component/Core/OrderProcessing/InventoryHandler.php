@@ -104,6 +104,7 @@ class InventoryHandler implements InventoryHandlerInterface
      */
     public function releaseInventory(OrderInterface $order)
     {
+        return;
         foreach ($order->getItems() as $item) {
             $quantity = $this->applyTransition($item->getInventoryUnits(), InventoryUnitTransitions::SYLIUS_RELEASE);
 

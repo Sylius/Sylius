@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Inventory\Packaging;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Packaging\Splitter\SplitterInterface;
 use Sylius\Component\Inventory\Repository\StockItemRepositoryInterface;
@@ -61,26 +61,12 @@ class Packer implements PackerInterface
     /**
      * {@inheritdoc}
      */
-    public function pack(StockLocationInterface $stockLocation, Collection $inventoryUnits)
+    public function pack(StockLocationInterface $stockLocation, Items $items)
     {
-        $items = array();
         $package = $this->packageFactory->create($stockLocation);
 
-        foreach ($inventoryUnits as $unit) {
-            if (!$inventoryUnit instanceof InventoryUnitInterface) {
-                throw new \InvalidArgumentException(sprintf('Expected instance of "Sylius\Component\Inventory\Model\InventoryUnitInterface", "%s" given.', is_object($splitter) ? get_class($splitter) : gettype($splitter)));
-            }
-
-            $stockable = $unit->getStockable();
-            $id = spl_object_hash($stockable);
-
-            $items[$id]['stockable'] = $stockable;
-            $items[$id]['units'][] = $unit;
-        }
-
-        foreach ($items as $item) {
-            $stockable = $item['stockable'];
-            $stockItem = $stockItemRepository->findOneByLocationAndStockable($stockLocation, $stockable);
+        foreach ($items->getStockables() as $stockable) {
+            $stockItem = $this->stockItemRepository->findByStockableAndLocation($stockable, $stockLocation);
 
             if (null === $stockItem) {
                 continue;
@@ -88,9 +74,20 @@ class Packer implements PackerInterface
 
             $available = $stockItem->getOnHand() - $stockItem->getOnHold();
 
-            foreach ($item['units'] as $inventoryUnit) {
-                $package->addInventoryUnit($inventoryUnit);
+            if (0 === $available && !$stockItem->isAvailableOnDemand()) {
+                continue;
             }
+
+            for ($i = 0; $i < $items->getRemaining($stockable) & $i < $available; $i++) {
+                $unit = $items->getInventoryUnitForPacking($stockable);
+                $unit->setStockItem($stockItem);
+
+                $package->addInventoryUnit($unit);
+            }
+        }
+
+        if ($package->isEmpty()) {
+            return array();
         }
 
         $packages = array($package);

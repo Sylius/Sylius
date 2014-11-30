@@ -1,8 +1,20 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
+#
+sylius_api_checkout_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            method: createCheckoutsPaginator
+            arguments: [$criteria, $sorting]
+            paginate: $limit
+        criteria: {}
+        sorting: { updatedAt: desc }
 
 sylius_api_checkout_proceed:
     path: /{orderId}
-    methods: [GET, POST]
+    methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.checkout:proceedAction

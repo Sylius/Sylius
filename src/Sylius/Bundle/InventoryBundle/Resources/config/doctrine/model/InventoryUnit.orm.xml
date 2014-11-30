@@ -28,6 +28,10 @@
             <join-column name="stockable_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
+        <many-to-one field="stockItem" target-entity="Sylius\Component\Inventory\Model\StockItemInterface">
+            <join-column name="stock_item_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
