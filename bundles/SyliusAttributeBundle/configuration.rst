@@ -22,5 +22,5 @@ Configuration reference
           validation_groups:
               # `subject_name` should be same name as the name key defined for the classes section above.
               subject_name:
-                  property:         [ sylius ]
-                  product_property: [ sylius ]
+                  attribute:       [ sylius ]
+                  attribute_value: [ sylius ]
