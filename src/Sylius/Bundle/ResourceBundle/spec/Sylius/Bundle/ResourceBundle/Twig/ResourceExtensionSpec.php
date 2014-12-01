@@ -89,6 +89,35 @@ class ResourceExtensionSpec extends ObjectBehavior
         $this->renderSortingLink($twig, 'propertyName', 'fieldName');
     }
 
+    function it_should_default_to_the_property_as_the_label(
+        Request $request,
+        GetResponseEvent $event,
+        RouterInterface $router,
+        \Twig_Environment $twig,
+        $parameters
+    ) {
+        $parameters->get('parameter_name')->willReturn(array());
+        $parameters->get('sortable')->willReturn(true);
+        $parameters->get('sorting', array('id' => 'asc'))->willReturn(array());
+
+        $event = $this->getGetResponseEvent($request, $event);
+
+        $router->generate(
+            'route_name',
+            array('sorting' => array('propertyName' => 'asc'))
+        )->willReturn('?sorting[propertyName]=asc');
+
+        $twig->render('SyliusResourceBundle:Twig:sorting.html.twig', array(
+            'url' => '?sorting[propertyName]=asc',
+            'label' => 'propertyName',
+            'icon' => false,
+            'currentOrder' => null,
+        ))->shouldBeCalled();
+
+        $this->fetchRequest($event);
+        $this->renderSortingLink($twig, 'propertyName');
+    }
+
     function it_should_render_a_sorting_desc_link(
         Request $request,
         GetResponseEvent $event,
@@ -183,7 +212,7 @@ class ResourceExtensionSpec extends ObjectBehavior
         ));
     }
 
-    function it_should_not_render_sorting_link(
+    function it_should_not_render_sorting_link_when_not_sortable(
         Request $request, 
         GetResponseEvent $event, 
         \Twig_Environment $twig,
@@ -200,6 +229,25 @@ class ResourceExtensionSpec extends ObjectBehavior
 
         $this->fetchRequest($event);
         $this->renderSortingLink($twig, 'propertyName', 'fieldName')->shouldReturn('fieldName');
+    }
+
+    function it_should_default_to_the_property_as_the_label_when_not_sortable(
+        Request $request,
+        GetResponseEvent $event,
+        \Twig_Environment $twig,
+        $parameters
+    ) {
+        $parameters->get('sortable')->willReturn(false);
+
+        $event = $this->getGetResponseEvent(
+            $request,
+            $event,
+            'route_name',
+            array('_sylius' => array('sortable' => false))
+        );
+
+        $this->fetchRequest($event);
+        $this->renderSortingLink($twig, 'propertyName')->shouldReturn('propertyName');
     }
 
     function it_should_render_a_paginate_select(
