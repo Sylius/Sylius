@@ -8,20 +8,22 @@ Configuration reference
           classes:
               # `variation_name` can be any name, for example `product`, `ad`, or `blog_post`
               variation_name:
+                  variable: ~ # Required: The variable model class implementing `VariableInterface`
+                              # of which variants can be created from
                   variant:
                       model:      ~ # Required: The variant model class implementing `VariantInterface`
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                       repository: ~ # Required: The repository class for the variant
+                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                       form:       Sylius\Bundle\VariationBundle\Form\Type\VariantType
                   option:
                       model:      ~ # Required: The option model class implementing `OptionInterface`
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                       repository: ~ # Required: The repository class for the option
+                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                       form:       Sylius\Bundle\VariationBundle\Form\Type\OptionType
                   option_value:
-                      model:      ~ # The option value model class implementing `VariantInterface`
+                      model:      ~ # Required: The option value model class implementing `OptionValueInterface`
+                      repository: ~ # Required: The repository class for the option value
                       controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                      repository: ~ # Required: The repository class for the variant
                       form:       Sylius\Bundle\VariationBundle\Form\Type\OptionValueType
           validation_groups:
               # `variation_name` should be same name as the name key defined for the classes section above.
