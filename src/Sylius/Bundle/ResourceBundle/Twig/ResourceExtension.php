@@ -110,6 +110,10 @@ class ResourceExtension extends \Twig_Extension
      */
     public function renderSortingLink(\Twig_Environment $twig, $property, $label = null, $order = 'asc', array $options = array())
     {
+        if (null === $label) {
+            $label = $property;
+        }
+        
         if (false === $this->parameters->get('sortable')) {
             return $label;
         }
@@ -137,7 +141,7 @@ class ResourceExtension extends \Twig_Extension
 
         return $twig->render($options['template'], array(
             'url'          => $url,
-            'label'        => null === $label ? $property : $label,
+            'label'        => $label,
             'icon'         => $property == key($sorting),
             'currentOrder' => $currentOrder,
         ));
