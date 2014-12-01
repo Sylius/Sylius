@@ -235,12 +235,12 @@ class CheckoutController extends FOSRestController
     }
 
 
-    private function getOrderRepository()
+    protected function getOrderRepository()
     {
         return $this->get('sylius.repository.order');
     }
 
-    private function findOrderOr404($id)
+    protected function findOrderOr404($id)
     {
         if (!$order = $this->getOrderRepository()->find($id)) {
             throw new NotFoundHttpException('Order does not exist.');
@@ -249,12 +249,12 @@ class CheckoutController extends FOSRestController
         return $order;
     }
 
-    private function createCheckoutAddressingForm(OrderInterface $order)
+    protected function createCheckoutAddressingForm(OrderInterface $order)
     {
         return $this->createApiForm('sylius_checkout_addressing', $order);
     }
 
-    private function createCheckoutShippingForm(OrderInterface $order)
+    protected function createCheckoutShippingForm(OrderInterface $order)
     {
         $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
 
@@ -268,12 +268,12 @@ class CheckoutController extends FOSRestController
         ));
     }
 
-    private function createCheckoutPaymentForm(OrderInterface $order)
+    protected function createCheckoutPaymentForm(OrderInterface $order)
     {
         return $this->createApiForm('sylius_checkout_payment', $order);
     }
 
-    private function createApiForm($type, $value = null, array $options = array())
+    protected function createApiForm($type, $value = null, array $options = array())
     {
         return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, array('csrf_protection' => false)));
     }
