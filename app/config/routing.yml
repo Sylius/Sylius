@@ -8,10 +8,6 @@ sylius_api:
     resource: "@SyliusApiBundle/Resources/config/routing/main.yml"
     prefix: /api
 
-app_web:
-    resource: "@AppWebBundle/Resources/config/_routing.yml"
-    prefix:   /
-
 create:
     resource: "@CmfCreateBundle/Resources/config/routing/rest.xml"
 
