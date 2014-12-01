@@ -25,6 +25,7 @@ class ProductType extends BaseProductType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
         $builder
             ->add('taxons', 'entity', array(
                 'multiple' => true,
@@ -38,6 +39,14 @@ class ProductType extends BaseProductType
             ))
             ->add('sku', 'text', array(
                 'property_path' => 'masterVariant.sku'
+            ))
+            ->add('images', 'collection', array(
+                'type'          => 'sylius_image',
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'by_reference'  => false,
+                'label'         => 'sylius.form.variant.images',
+                'property_path' => 'masterVariant.images'
             ))
             ->remove('masterVariant')
             ->remove('variantSelectionMethod')
