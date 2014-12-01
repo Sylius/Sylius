@@ -14,4 +14,4 @@
 * :doc:`/bundles/SyliusFlowBundle/index`
 * :doc:`/bundles/SyliusContactBundle/index`
 * :doc:`/bundles/SyliusVariationBundle/index`
-
+* :doc:`/bundles/SyliusAttributeBundle/index`
