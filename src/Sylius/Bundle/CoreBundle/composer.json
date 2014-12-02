@@ -24,7 +24,7 @@
 
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "hwi/oauth-bundle":               "~0.3",
-        "jms/serializer-bundle":          "0.12.*",
+        "jms/serializer-bundle":          "~0.13",
         "knplabs/gaufrette":              "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
