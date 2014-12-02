@@ -23,8 +23,9 @@ framework:
 twig:
     form:
         resources:
-            - 'SyliusWebBundle::forms.html.twig'
-            - 'CmfMediaBundle:Form:fields.html.twig'
+            - SyliusWebBundle::forms.html.twig
+            - SyliusResourceBundle::forms.html.twig
+            - CmfMediaBundle:Form:fields.html.twig
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     paths:
@@ -34,7 +35,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle', 'CmfCreateBundle']
+    bundles:        ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle']
     filters:
         cssrewrite: ~
 
