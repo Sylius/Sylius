@@ -1,0 +1,8 @@
+Sylius\Component\Core\Model\Channel:
+    exclusion_policy: ALL
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_channel_show
+                parameters:
+                    id: expr(object.getId())

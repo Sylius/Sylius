@@ -1,6 +1,6 @@
-Sylius\Component\Product\Model\Product:
+Sylius\Component\Attribute\Model\Attribute:
     exclusion_policy: ALL
-    xml_root_name: product
+    xml_root_name: attribute
     properties:
         id:
             expose: true
@@ -9,15 +9,9 @@ Sylius\Component\Product\Model\Product:
         name:
             expose: true
             type: string
-        description:
+        presentation:
             expose: true
             type: string
-        options:
-            expose: true
-            max_depth: 1
-        attributes:
-            expose: true
-            max_depth: 1
         createdAt:
             expose: true
             type: DateTime

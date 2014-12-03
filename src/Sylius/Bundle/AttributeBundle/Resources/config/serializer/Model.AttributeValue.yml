@@ -1,26 +1,22 @@
-Sylius\Component\Product\Model\Product:
+Sylius\Component\Attribute\Model\AttributeValue:
     exclusion_policy: ALL
-    xml_root_name: product
+    xml_root_name: attribute-value
     properties:
         id:
             expose: true
             type: integer
             xml_attribute: true
-        name:
+        value:
             expose: true
             type: string
-        description:
-            expose: true
-            type: string
-        options:
-            expose: true
-            max_depth: 1
-        attributes:
-            expose: true
-            max_depth: 1
         createdAt:
             expose: true
             type: DateTime
         updatedAt:
             expose: true
             type: DateTime
+    virtual_properties:
+        getName:
+            serialized_name: name
+        getPresentation:
+            serialized_name: presentation

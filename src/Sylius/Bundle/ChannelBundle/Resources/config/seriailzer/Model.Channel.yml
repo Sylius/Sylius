@@ -1,26 +1,38 @@
-Sylius\Component\Product\Model\Product:
+Sylius\Component\Channel\Model\Channel:
     exclusion_policy: ALL
-    xml_root_name: product
+    xml_root_name: channel
     properties:
         id:
             expose: true
             type: integer
             xml_attribute: true
+        code:
+            expose: true
+            type: string
+        color:
+            expose: true
+            type: string
         name:
             expose: true
             type: string
         description:
             expose: true
             type: string
-        options:
+        url:
             expose: true
-            max_depth: 1
-        attributes:
+            type: string
+        enabled:
             expose: true
-            max_depth: 1
+            type: boolean
         createdAt:
             expose: true
             type: DateTime
         updatedAt:
             expose: true
             type: DateTime
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_channel_show
+                parameters:
+                    id: expr(object.getId())
