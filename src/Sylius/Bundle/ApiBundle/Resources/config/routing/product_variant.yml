@@ -39,14 +39,3 @@ sylius_api_product_variant_delete:
                 id:      $id
                 product: $productId
                 master:  false
-
-sylius_api_product_variant_delete:
-    path: /{id}
-    methods: [DELETE]
-    defaults:
-        _controller: sylius.controller.product_variant:deleteAction
-        _sylius:
-            criteria:
-                id:      $id
-                product: $productId
-                master:  false
