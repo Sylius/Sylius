@@ -44,7 +44,8 @@ package { [
     'vim',
     'curl',
     'git-core',
-    'mc'
+    'mc',
+    'openjdk-7-jre-headless'
   ]:
   ensure  => 'installed',
 }
@@ -142,4 +143,13 @@ database{ "${db_name}_test":
   ensure  => present,
   charset => 'utf8',
   require => Class['mysql::server'],
+}
+
+class { 'elasticsearch':
+  ensure => 'present',
+  package_url => 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb'
+} ->
+service { "elasticsearch-service":
+  name => 'elasticsearch',
+  ensure => running
 }
