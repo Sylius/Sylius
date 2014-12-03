@@ -38,6 +38,11 @@ sylius:
                 amount: Amount
                 division: Division
 
+            volume_rate_configuration:
+                label: Volume based rate
+                amount: Amount
+                division: Division
+
         shipping_category:
             description: Description
             name: Name

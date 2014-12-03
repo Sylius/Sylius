@@ -124,6 +124,14 @@ class ProductVariantSpec extends ObjectBehavior
         $this->getShippingWeight()->shouldReturn(140);
     }
 
+    function it_returns_correct_shipping_volume()
+    {
+        $this->setWidth(10);
+        $this->setHeight(20);
+        $this->setDepth(10);
+        $this->getShippingVolume()->shouldReturn(2000);
+    }
+
     function it_returns_correct_shipping_width()
     {
         $this->setWidth(100);

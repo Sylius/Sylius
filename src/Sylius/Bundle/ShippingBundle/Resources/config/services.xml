@@ -44,6 +44,9 @@
         <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Component\Shipping\Calculator\WeightRateCalculator</parameter>
         <parameter key="sylius.form.type.shipping_calculator.weight_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
 
+        <parameter key="sylius.shipping_calculator.volume_rate.class">Sylius\Component\Shipping\Calculator\VolumeRateCalculator</parameter>
+        <parameter key="sylius.form.type.shipping_calculator.volume_rate_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType</parameter>
+
         <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>
 
         <parameter key="sylius.processor.shipment_processor.class">Sylius\Component\Shipping\Processor\ShipmentProcessor</parameter>
@@ -135,6 +138,14 @@
         <service id="sylius.form.type.shipping_calculator.weight_rate_configuration" class="%sylius.form.type.shipping_calculator.weight_rate_configuration.class%">
             <argument>%sylius.validation_group.shipping_calculator_weight_rate_configuration%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_weight_rate_configuration" />
+        </service>
+
+        <service id="sylius.shipping_calculator.volume_rate" class="%sylius.shipping_calculator.volume_rate.class%">
+            <tag name="sylius.shipping_calculator" calculator="volume_rate" label="sylius.form.shipping_calculator.volume_rate_configuration.label" />
+        </service>
+        <service id="sylius.form.type.shipping_calculator.volume_rate_configuration" class="%sylius.form.type.shipping_calculator.volume_rate_configuration.class%">
+            <argument>%sylius.validation_group.shipping_calculator_volume_rate_configuration%</argument>
+            <tag name="form.type" alias="sylius_shipping_calculator_volume_rate_configuration" />
         </service>
 
         <service id="sylius.form.type.shipment_tracking" class="%sylius.form.type.shipment_tracking.class%">
