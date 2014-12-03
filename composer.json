@@ -37,8 +37,9 @@
         "knplabs/knp-snappy-bundle":            "*@dev",
         "liip/imagine-bundle":                  "~1.0",
         "mathiasverraes/money":                 "*@dev",
-        "payum/payum":                          "~0.12.0",
-        "payum/payum-bundle":                   "~0.12.0",
+        "payum/payum":                          "dev-payment-builder as 0.13.0",
+        "payum/payum-bundle":                   "dev-payment-builder as 0.13.0",
+        "payum/omnipay-bridge":                 "0.13.*@dev",
         "omnipay/stripe":                       "~2.0",
         "sensio/distribution-bundle":           "2.3.*",
         "stof/doctrine-extensions-bundle":      "1.1.*",
@@ -128,6 +129,16 @@
         "sylius/variation-bundle": "self.version",
         "sylius/web-bundle": "self.version"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:formapro-forks/Payum.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:formapro-forks/PayumBundle.git"
+        }
+    ],
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
