@@ -26,6 +26,7 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\AddressingBundle\Behat\FormContext
                 - Sylius\Bundle\CoreBundle\Behat\CoreContext
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext

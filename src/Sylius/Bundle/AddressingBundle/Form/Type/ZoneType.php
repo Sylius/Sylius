@@ -54,7 +54,8 @@ class ZoneType extends AbstractResourceType
             ))
             ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members',
+                'label'            => false,
+                'button_add_label' => 'sylius.zone.add_member',
             ))
         ;
 

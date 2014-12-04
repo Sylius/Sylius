@@ -69,11 +69,13 @@ Feature: Countries and provinces
          When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
           And I click "Add province"
-          And I fill in province name with "Łódź"
+          And I click "Add province"
+          And I fill in the 1st province with "Lubusz"
+          And I fill in the 2nd province with "Łódź"
           And I press "Create"
-         Then I should be on the page of country "Poland"
-          And I should see "Country has been successfully created."
+         Then I should see "Country has been successfully created."
           And "Łódź" should appear on the page
+          And "Lubusz" should appear on the page
 
     Scenario: Created countries appear in the list
         Given I created country "Poland"
@@ -99,6 +101,17 @@ Feature: Countries and provinces
           And I press "Save changes"
          Then I should be on the page of country "Russia"
           And "Russia" should appear on the page
+
+    @javascript
+    Scenario: Updating the country and removing province
+      Given I am editing country "Ukraine"
+       When I fill in "Name" with "Russia"
+        And I fill in "ISO name" with "RU"
+        And I remove all the provinces
+        And I press "Save changes"
+       Then I should see "Country has been successfully updated."
+        And "Russia" should appear on the page
+        But I should not see "Provinces"
 
     @javascript
     Scenario: Deleting country via the list

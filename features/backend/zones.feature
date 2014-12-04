@@ -45,17 +45,32 @@ Feature: Zones
           And I should see "Please add at least 1 zone member."
 
     @javascript
+    Scenario: Updating the collection form type prototype
+        Given I am on the zone creation page
+          And I click "Add member"
+          And "Country" should appear on the page
+          And I select "Province" from "Type"
+          And I click "Add member"
+          And "Province" should appear on the page
+          And I select "Zone" from "Type"
+          And I click "Add member"
+          And "Zone" should appear on the page
+
+    @javascript
     Scenario: Creating new zone built from countries
         Given I am on the zone creation page
           And I fill in "Name" with "EU"
           And I select "Country" from "Type"
-          And I click "Add member"
-          And I select "Estonia" from "Country"
           And I select "shipping" from "Scope"
+          And I click "Add member"
+          And I click "Add member"
+          And I select "Estonia" from the 1st country
+          And I select "France" from the 2nd country
          When I press "Create"
          Then I should be on the page of zone "EU"
           And I should see "Zone has been successfully created."
           And "Estonia" should appear on the page
+          And "France" should appear on the page
           And "shipping" should appear on the page
 
     Scenario: Created zones appear in the list
@@ -74,7 +89,17 @@ Feature: Zones
          When I click "edit" near "USA GMT-8"
          Then I should be editing zone "USA GMT-8"
 
-    Scenario: Updating the zone
+  @javascript
+  Scenario: Updating the zone
+        Given I am editing zone "USA GMT-8"
+         When I fill in "Name" with "USA GMT-9"
+          And I remove the first country
+          And I press "Save changes"
+         Then I should be on the page of zone "USA GMT-9"
+          And I should see "Zone has been successfully updated."
+          And "Washington" should not appear on the page
+
+  Scenario: Updating the zone
         Given I am editing zone "USA GMT-8"
          When I fill in "Name" with "USA GMT-9"
           And I press "Save changes"

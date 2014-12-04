@@ -24,13 +24,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author Tim Nagel <t.nagel@infinite.net.au>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 class ZoneMemberCollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $prototypes = $this->buildPrototypes($builder, $options);
 
@@ -50,54 +51,10 @@ class ZoneMemberCollectionType extends AbstractType
     }
 
     /**
-     * Builds prototypes for each of the form types used for the collection.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     *
-     * @return array
-     */
-    protected function buildPrototypes(FormBuilderInterface $builder, array $options)
-    {
-        $prototypes = array();
-        $types = array(
-            'sylius_zone_member_country',
-            'sylius_zone_member_province',
-            'sylius_zone_member_zone',
-        );
-        foreach ($types as $type) {
-            $prototype = $this->buildPrototype($builder, $options['prototype_name'], $type, $options['options'])->getForm();
-            $prototypes[$type] = $prototype;
-        }
-
-        return $prototypes;
-    }
-
-    /**
-     * Builds an individual prototype.
-     *
-     * @param FormBuilderInterface     $builder
-     * @param string                   $name
-     * @param string|FormTypeInterface $type
-     * @param array                    $options
-     *
-     * @return FormBuilderInterface
-     */
-    protected function buildPrototype(FormBuilderInterface $builder, $name, $type, array $options)
-    {
-        return $builder->create($name, $type, array_replace(array(
-            'label' => $name . 'label__',
-        ), $options));
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['allow_add']    = $options['allow_add'];
-        $view->vars['allow_delete'] = $options['allow_delete'];
-
         if ($form->getConfig()->hasAttribute('prototypes')) {
             $view->vars['prototypes'] = array_map(function (FormInterface $prototype) use ($view) {
                 return $prototype->createView($view);
@@ -111,13 +68,9 @@ class ZoneMemberCollectionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'allow_add'      => true,
-            'allow_delete'   => true,
-            'by_reference'   => false,
-            'prototype'      => true,
-            'prototype_name' => '__name__',
-            'type_name'      => '_type',
-            'options'        => array(),
+            'allow_add'    => true,
+            'allow_delete' => true,
+            'by_reference' => false,
         ));
     }
 
@@ -127,5 +80,37 @@ class ZoneMemberCollectionType extends AbstractType
     public function getName()
     {
         return 'sylius_zone_member_collection';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'collection';
+    }
+
+    /**
+     * Builds prototypes for each of the form types used for the collection.
+     *
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     *
+     * @return array
+     */
+    protected function buildPrototypes(FormBuilderInterface $builder, array $options)
+    {
+        $types = array(
+            'sylius_zone_member_country',
+            'sylius_zone_member_province',
+            'sylius_zone_member_zone',
+        );
+
+        $prototypes = array();
+        foreach ($types as $type) {
+            $prototypes[$type] = $builder->create($options['prototype_name'], $type, $options['options'])->getForm();
+        }
+
+        return $prototypes;
     }
 }

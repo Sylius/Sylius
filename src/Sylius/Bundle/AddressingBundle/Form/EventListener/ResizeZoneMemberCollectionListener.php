@@ -49,8 +49,13 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      */
     protected $classMap = array();
 
-    public function __construct(FormFactoryInterface $factory, array $prototypes, array $options = array(), $allowAdd = false, $allowDelete = false)
-    {
+    public function __construct(
+        FormFactoryInterface $factory,
+        array $prototypes,
+        array $options = array(),
+        $allowAdd = false,
+        $allowDelete = false
+    ) {
         $this->factory = $factory;
 
         foreach ($prototypes as $prototype) {
@@ -100,7 +105,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      *
      * @throws UnexpectedTypeException
      */
-    public function preBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
         if (null === $data || '' === $data) {
@@ -145,6 +150,7 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
      * @param array $data
      *
      * @return string|FormTypeInterface
+     *
      * @throws \InvalidArgumentException when _type is not present or is invalid
      */
     protected function getTypeForData(array $data)
@@ -169,6 +175,9 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
         ), $this->options)));
     }
 
+    /**
+     * @param FormInterface $form
+     */
     private function removeFormFields(FormInterface $form)
     {
         if ($this->allowDelete) {
@@ -180,6 +189,10 @@ class ResizeZoneMemberCollectionListener extends ResizeFormListener
         }
     }
 
+    /**
+     * @param FormInterface $form
+     * @param array         $data
+     */
     private function createFormFields(FormInterface $form, $data)
     {
         if ($this->allowAdd) {

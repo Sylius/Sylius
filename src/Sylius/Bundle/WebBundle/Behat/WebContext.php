@@ -836,4 +836,12 @@ class WebContext extends DefaultContext
     {
         $this->assertSession()->statusCodeEquals($code);
     }
+
+    /**
+     * @Given /^I wait (\d+) (seconds|second)$/
+     */
+    public function iWait($time)
+    {
+        $this->getSession()->wait($time*1000);
+    }
 }
