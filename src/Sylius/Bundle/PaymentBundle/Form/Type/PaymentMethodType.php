@@ -11,8 +11,13 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
+use Payum\Paypal\ExpressCheckout\Nvp\PaymentBuilder;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Payment method form type.
@@ -42,6 +47,44 @@ class PaymentMethodType extends AbstractResourceType
                 'label'    => 'sylius.form.payment_method.enabled'
             ))
         ;
+
+        $formFactory = $builder->getFormFactory();
+
+        $credentialsMustBeSent = false;
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use (&$credentialsMustBeSent, $formFactory) {
+            $data = $event->getData();
+            $form = $event->getForm();
+
+            if (false == isset($data['gateway'])) {
+                return;
+            }
+
+
+
+            $credentialsMustBeSent = true;
+            $paypalPaymentBuilder = new PaymentBuilder();
+
+            $credentialsBuilder = $formFactory->createBuilder('form');
+            foreach ($paypalPaymentBuilder->get('payum.options') as $name => $value) {
+                $credentialsBuilder->add($name, is_bool($value) ? 'checkbox' : 'text', array(
+                    'constraints' => array_filter(array(
+                        $paypalPaymentBuilder->get('payum.required_options', $name) ? new NotBlank : null
+                    )),
+                    'data' => $value,
+                    'required' => (bool)$paypalPaymentBuilder->get('payum.required_options', $name),
+                ));
+            }
+
+            $form->add('credentials', $credentialsBuilder->getForm());
+        });
+
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($builder, &$credentialsMustBeSent) {
+            $form = $event->getForm();
+
+            if ($form->has('credentials') && $credentialsMustBeSent) {
+                $form->get('credentials')->addError(new FormError('Credentials must be set'));
+            }
+        });
     }
 
     /**

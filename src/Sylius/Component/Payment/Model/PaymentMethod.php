@@ -61,6 +61,11 @@ class PaymentMethod implements PaymentMethodInterface
     protected $environment;
 
     /**
+     * @var array
+     */
+    protected $credentials;
+
+    /**
      * Creation date.
      *
      * @var \DateTime
@@ -80,6 +85,7 @@ class PaymentMethod implements PaymentMethodInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->credentials = array();
     }
 
     /**
@@ -186,6 +192,22 @@ class PaymentMethod implements PaymentMethodInterface
         $this->environment = $environment;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
+    }
+
+    /**
+     * @param array $credentials
+     */
+    public function setCredentials(array $credentials)
+    {
+        $this->credentials = $credentials;
     }
 
     /**
