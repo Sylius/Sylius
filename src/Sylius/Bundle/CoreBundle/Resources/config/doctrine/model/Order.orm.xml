@@ -23,7 +23,7 @@
 
         <many-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
-                <cascade-all/>
+                <cascade-persist/>
             </cascade>
             <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
             <gedmo:versioned />
