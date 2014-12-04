@@ -1,5 +1,19 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
+{% macro coupon_item(couponForm) %}
+    <div class="sylius-cart-coupons-coupon row">
+        <div class="col-md-10">
+            {{ form_widget(couponForm) }}
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-danger" data-collection-button="delete" data-collection="sylius-cart-coupons"
+               data-collection-item="coupon" href="#"><i
+                        class="glyphicon glyphicon-trash"></i> {{ 'sylius.cart.summary.remove_coupon'|trans }}
+            </a>
+        </div>
+    </div>
+{% endmacro %}
+
 {% import 'SyliusWebBundle:Frontend/Macros:alerts.html.twig' as alerts %}
 
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
@@ -78,12 +92,21 @@
     </tfoot>
 </table>
 
-<div id="sylius-cart-coupons" class="well well-sm" data-prototype="{{ form_row(form.promotionCoupons.vars.prototype)|e }}">
-    <div id="sylius-cart-coupons-collection">
-        {% for couponField in form.promotionCoupons %}
-        {{ form_row(couponField, {'label_attr': {'class': 'col-lg-12'}}) }}
+<div class="col-md-12 well well-sm">
+    {{ form_label(form.promotionCoupons, '', { 'label_attr': {'class': 'col-md-12'} }) }}
+    <div id="sylius-cart-coupons" class="collection-container"
+         data-prototype="{{ _self.coupon_item(form.promotionCoupons.vars.prototype)|e }}">
+        {% for promotionCoupon in form.promotionCoupons %}
+            {{ _self.coupon_item(promotionCoupon) }}
         {% endfor %}
     </div>
+
+    <br>
+    <a href="#" class="btn btn-success btn-block" data-collection-button="add"
+       data-prototype="sylius-cart-coupons"
+       data-collection="sylius-cart-coupons">
+        {{ 'sylius.cart.summary.add_coupon'|trans }}
+    </a>
 </div>
 
 {{ form_rest(form) }}

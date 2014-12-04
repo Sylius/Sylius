@@ -207,3 +207,7 @@ a.create-ui-toggle {
     box-shadow: 0px 0px;
     background: none;
 }
+
+.sylius-cart-coupons-coupon {
+    margin-bottom: 10px;
+}
