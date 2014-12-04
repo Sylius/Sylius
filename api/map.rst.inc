@@ -6,4 +6,5 @@
 * :doc:`/api/users`
 * :doc:`/api/shipments`
 * :doc:`/api/payments`
+* :doc:`/api/promotions`
 * :doc:`/api/stock_locations`

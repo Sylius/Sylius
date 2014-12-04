@@ -12,6 +12,7 @@ The API Guide
     users
     shipments
     payments
+    promotions
     stock_locations
 
 .. include:: /api/map.rst.inc
