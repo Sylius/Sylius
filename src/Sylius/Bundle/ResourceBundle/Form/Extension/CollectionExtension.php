@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Extension;
 
-use NIM\FormBundle\Form\FormToolsTrait;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;

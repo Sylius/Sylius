@@ -31,7 +31,6 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
     public function transform($value)
     {
         $taxons = array();
-
         foreach ($this->objects as $taxonomy) {
             $taxons[$taxonomy->getId()] = array();
         }
@@ -53,8 +52,6 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
         foreach ($this->objects as $taxonomy) {
             /* @var $taxon TaxonInterface */
             foreach ($taxonomy->getTaxons() as $taxon) {
-
-                //Add taxon children as well
                 $this->addChildren($taxonomy, $value, $taxon->getChildren(), $taxons);
 
                 if ($value->contains($this->saveObjects ? $taxon : $taxon->getId())) {
@@ -67,22 +64,22 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
     }
 
     /**
-     * Add taxon childs to the taxons array recursively
+     * Add taxon childs to the taxons array recursively.
      *
      * @param TaxonomyInterface $taxonomy
-     * @param Collection   $value
-     * @param \Traversable $children
-     * @param array        $taxons
+     * @param Collection        $value
+     * @param \Traversable      $children
+     * @param array             $taxons
      */
     private function addChildren(TaxonomyInterface $taxonomy, Collection $value, \Traversable $children, array &$taxons)
     {
-        //Add taxon children as well
         /* @var $children TaxonInterface[] */
-        foreach($children as $child) {
+        foreach ($children as $child) {
             if ($value->contains($this->saveObjects ? $child : $child->getId())) {
                 $taxons[$taxonomy->getId()][] = $child;
             }
-            if($child->getChildren()->count() > 0) {
+
+            if (!$child->getChildren()->isEmpty()) {
                 $this->addChildren($taxonomy, $value, $child->getChildren(), $taxons);
             }
         }
