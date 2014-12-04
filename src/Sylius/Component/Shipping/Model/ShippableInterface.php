@@ -26,6 +26,13 @@ interface ShippableInterface
     public function getShippingWeight();
 
     /**
+     * Get the volume of an item.
+     *
+     * @return integer
+     */
+    public function getShippingVolume();
+
+    /**
      * Get the width of an item.
      *
      * @return integer

@@ -253,15 +253,32 @@ class Shipment implements ShipmentInterface, TimestampableInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingWeight()
     {
         $weight = 0;
 
         foreach ($this->items as $item) {
-            $weight += $item->getShippable()->getShippingWeigth();
+            $weight += $item->getShippable()->getShippingWeight();
         }
 
         return $weight;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingVolume()
+    {
+        $volume = 0;
+
+        foreach ($this->items as $item) {
+            $volume += $item->getShippable()->getShippingVolume();
+        }
+
+        return $volume;
     }
 
     public function getShippingItemCount()
