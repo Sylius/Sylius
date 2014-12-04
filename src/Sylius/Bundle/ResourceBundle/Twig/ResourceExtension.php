@@ -113,7 +113,7 @@ class ResourceExtension extends \Twig_Extension
         if (null === $label) {
             $label = $property;
         }
-        
+
         if (false === $this->parameters->get('sortable')) {
             return $label;
         }

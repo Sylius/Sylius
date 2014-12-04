@@ -16,11 +16,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
 
 /**
- * Elasticsearch indexer
+ * ElasticSearch indexer
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class ElasticSearchIndexer implements IndexerInterface
+class ElasticsearchIndexer implements IndexerInterface
 {
     /**
      * @var KernelInterface

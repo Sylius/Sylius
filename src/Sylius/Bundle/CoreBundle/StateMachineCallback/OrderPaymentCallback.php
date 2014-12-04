@@ -46,8 +46,7 @@ class OrderPaymentCallback
 
         $total = 0;
         if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-            $payments = $order->getPayments()->filter(function ($payment) {
-                /** @var $payment PaymentInterface */
+            $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
                 return PaymentInterface::STATE_COMPLETED === $payment->getState();
             });
 

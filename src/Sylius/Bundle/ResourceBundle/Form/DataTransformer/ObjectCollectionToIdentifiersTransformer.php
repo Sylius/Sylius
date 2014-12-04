@@ -32,7 +32,7 @@ class ObjectCollectionToIdentifiersTransformer extends ObjectToIdentifierTransfo
         $identifiers = array();
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        foreach($value as $object) {
+        foreach ($value as $object) {
             $identifiers[] = $accessor->getValue($object, $this->identifier);
         }
 
