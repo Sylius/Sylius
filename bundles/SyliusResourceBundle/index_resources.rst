@@ -171,6 +171,29 @@ Sorting your resources (sylius_resource_sort)
 +++++++++++++++++++++++++++++++++++++++++++++
 
 This TWIG extension renders the title of your columns (in your table), it created the link used to sort your resources.
+You will need to enable it per route
+
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_index:
+        path: /users
+        methods: [GET]
+        defaults:
+            _controller: app.controller.user:indexAction
+            sortable: true
+
+or globally
+
+.. code-block:: yaml
+
+    # config.yml
+
+    sylius_resource:
+        settings:
+            sortable: true
+
 
 Parameters
 ##########
@@ -190,8 +213,29 @@ Parameters
 |           |           |         | **route_params (array) :** Additional route parameters   |
 +-----------+-----------+---------+----------------------------------------------------------+
 
-This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig
+This extension renders the following template : SyliusResourceBundle:Twig:sorting.html.twig.
+You will need to enable it per route
 
+.. code-block:: yaml
+
+    # routing.yml
+
+    app_user_index:
+        path: /users
+        methods: [GET]
+        defaults:
+            _controller: app.controller.user:indexAction
+            paginate: $paginate
+
+or globally
+
+.. code-block:: yaml
+
+    # config.yml
+
+    sylius_resource:
+        settings:
+            paginate: $paginate
 Example
 #######
 
