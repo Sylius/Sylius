@@ -16,4 +16,5 @@
 * :doc:`/book/currencies`
 * :doc:`/book/locales`
 * :doc:`/book/content`
+* :doc:`/book/emails`
 * :doc:`/book/settings`

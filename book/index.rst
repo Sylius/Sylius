@@ -22,6 +22,7 @@ The Book
     currencies
     locales
     content
+    emails
     settings
 
 .. include:: /book/map.rst.inc
