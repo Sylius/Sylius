@@ -6,10 +6,22 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>{{ 'sylius.checkout.thank_you.header'|trans|raw }}</h1>
+    {% if order.state == 'confirmed' %}
+        <h1>{{ 'sylius.checkout.thank_you.header'|trans|raw }}</h1>
+    {% else %}
+        <h1>{{ 'sylius.checkout.thank_you.header'|trans|raw }}</h1>
+    {% endif %}
 </div>
 
-    gotovo
-
+<div class="row">
+    <div class="col-md-12">
+        <h4>Thank you for your order</h4>
+        <p><strong>Your order number is:</strong> {{ order.number }}</p>
+        <p><strong>Order state: </strong>{{ order.state }}</p>
+        <p><strong>Payment state: </strong>{{ order.paymentState }}</p>
+        <p><strong>Shipping state: </strong>{{ order.shippingState }}</p>
+        <p>Thank you for purchasing. Go back to <a href="{{ path('sylius_homepage') }}">homepage</a></p>
+    </div>
+</div>
 
 {% endblock %}

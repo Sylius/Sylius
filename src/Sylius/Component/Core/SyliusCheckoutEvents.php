@@ -41,4 +41,8 @@ class SyliusCheckoutEvents
     const FINALIZE_INITIALIZE   = 'sylius.checkout.finalize.initialize';
     const FINALIZE_PRE_COMPLETE = 'sylius.checkout.finalize.pre_complete';
     const FINALIZE_COMPLETE     = 'sylius.checkout.finalize.complete';
+
+    const THANK_YOU_INITIALIZE   = 'sylius.checkout.thank_you.initialize';
+    const THANK_YOU_PRE_COMPLETE = 'sylius.checkout.thank_you.pre_complete';
+    const THANK_YOU_COMPLETE     = 'sylius.checkout.thank_you.complete';
 }

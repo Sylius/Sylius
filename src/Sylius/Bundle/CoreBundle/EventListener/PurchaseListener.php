@@ -11,45 +11,32 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseListener
 {
-    protected $cartProvider;
-    protected $router;
+    /**
+     * @var SessionInterface
+     */
     protected $session;
-    protected $translator;
-    protected $redirectTo;
 
-    public function __construct(CartProviderInterface $cartProvider, UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator, $redirectTo)
-    {
-        $this->cartProvider = $cartProvider;
-        $this->router = $router;
+    /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    public function __construct(
+        SessionInterface $session,
+        TranslatorInterface $translator
+    ) {
         $this->session = $session;
         $this->translator = $translator;
-        $this->redirectTo = $redirectTo;
     }
 
-    public function abandonCart(PurchaseCompleteEvent $event)
-    {
-        if (in_array($event->getSubject()->getState(), array(PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED))) {
-            $this->cartProvider->abandonCart();
-
-            return;
-        }
-
-        $event->setResponse(new RedirectResponse(
-            $this->router->generate($this->redirectTo)
-        ));
-    }
-
-    public function addFlash(PurchaseCompleteEvent $event)
+    public function addFlash(GenericEvent $event)
     {
         switch ($event->getSubject()->getState()) {
             case PaymentInterface::STATE_COMPLETED:

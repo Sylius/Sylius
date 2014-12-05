@@ -81,12 +81,7 @@ class PurchaseStep extends CheckoutStep
 
         $this->getDoctrine()->getManager()->flush();
 
-        $event = new PurchaseCompleteEvent($payment);
-        $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
-
-        if ($event->hasResponse()) {
-            return $event->getResponse();
-        }
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $order);
 
         return $this->complete();
     }

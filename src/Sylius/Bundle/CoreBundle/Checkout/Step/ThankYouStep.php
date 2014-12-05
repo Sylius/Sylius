@@ -11,11 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Sylius\Bundle\CoreBundle\Event\OrderCompleteEvent;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
-use Sylius\Component\Core\SyliusOrderEvents;
-use Sylius\Component\Order\OrderTransitions;
 
 /**
  * Thank you checkout step.
@@ -30,51 +29,29 @@ class ThankYouStep extends CheckoutStep
     public function displayAction(ProcessContextInterface $context)
     {
         $order = $this->getCurrentCart();
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::THANK_YOU_INITIALIZE, $order);
 
-        return $this->renderStep($context, $order);
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::THANK_YOU_PRE_COMPLETE, $order);
+
+        $context->close();
+
+        $event = new OrderCompleteEvent($order);
+        $this->dispatchEvent(SyliusCheckoutEvents::PURCHASE_COMPLETE, $event);
+
+        if ($event->hasResponse()) {
+            return $event->getResponse();
+        }
+
+        return $this->renderStep($order);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function forwardAction(ProcessContextInterface $context)
+    protected function renderStep(OrderInterface $order)
     {
-        $order = $this->getCurrentCart();
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
-
-        $order->setUser($this->getUser());
-
-        $this->completeOrder($order);
-
-        return $this->complete();
-    }
-
-    protected function renderStep(ProcessContextInterface $context, OrderInterface $order)
-    {
-        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
-            'context' => $context,
-            'order'   => $order
-        ));
-    }
-
-    /**
-     * Mark the order as completed.
-     *
-     * @param OrderInterface $order
-     */
-    protected function completeOrder(OrderInterface $order)
-    {
-        $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
-
-        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
-
-        $manager = $this->get('sylius.manager.order');
-        $manager->persist($order);
-        $manager->flush();
-
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
-        $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
+        return $this->render(
+            $this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())),
+            array(
+                'order' => $order
+            )
+        );
     }
 }
