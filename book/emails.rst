@@ -15,6 +15,11 @@ Every time new customer registers via registration form or checkout, this e-mail
 
     SyliusWebBundle:Frontend/Email:customerWelcome.html.twig
 
+You also have the following parameters available:
+
+user
+    Instance of the user entity
+
 Order Confirmation
 ------------------
 
@@ -24,6 +29,19 @@ This e-mail is sent when order is paid. Template name is:
 
     SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig
 
+You also have the following parameters available:
+
+order
+    Instance of the user order
+order.user
+    Customer
+order.shippingAddress
+    Shipping address
+order.billingAddress
+    Billing address
+order.items
+    Collection of order items
+
 Order Comment
 -------------
 
@@ -32,6 +50,21 @@ In the backend, you can comment orders and optionally notify the customer, this 
 .. code-block:: text
 
     SyliusWebBundle:Frontend/Email:orderComment.html.twig
+
+You also have the following parameters available:
+
+comment:
+    Comment instance
+order
+    Instance of the user order
+order.user
+    Customer
+order.shippingAddress
+    Shipping address
+order.billingAddress
+    Billing address
+order.items
+    Collection of order items
 
 Final Thoughts
 --------------
