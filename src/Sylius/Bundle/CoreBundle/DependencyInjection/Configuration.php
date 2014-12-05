@@ -195,6 +195,7 @@ class Configuration implements ConfigurationInterface
                                 ->append($this->addCheckoutStepNode('shipping', 'SyliusWebBundle:Frontend/Checkout/Step:shipping.html.twig'))
                                 ->append($this->addCheckoutStepNode('payment', 'SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig'))
                                 ->append($this->addCheckoutStepNode('finalize', 'SyliusWebBundle:Frontend/Checkout/Step:finalize.html.twig'))
+                                ->append($this->addCheckoutStepNode('thank_you', 'SyliusWebBundle:Frontend/Checkout/Step:thankYou.html.twig'))
                             ->end()
                         ->end()
                     ->end()
