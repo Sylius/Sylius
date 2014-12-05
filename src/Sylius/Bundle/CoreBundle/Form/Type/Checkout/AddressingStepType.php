@@ -65,8 +65,9 @@ class AddressingStepType extends AbstractResourceType
             ->add('shippingAddress', 'sylius_address', array('shippable' => true))
             ->add('billingAddress', 'sylius_address')
             ->add('differentBillingAddress', 'checkbox', array(
-                'mapped' => false,
-                'label'  => 'sylius.form.checkout.addressing.different_billing_address'
+                'mapped'   => false,
+                'required' => false,
+                'label'    => 'sylius.form.checkout.addressing.different_billing_address'
             ))
         ;
     }
