@@ -2,7 +2,7 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% from 'SyliusResourceBundle:Macros:labels.html.twig' import state_label %}
 
 {% if locales|length > 0 %}
     <table class="table">
@@ -19,7 +19,7 @@
             <tr id="{{ locale.id }}">
                 <td>{{ locale.code }}</td>
                 <td>
-                    {{ misc.state_label(locale.enabled) }}
+                    {{ state_label(locale.enabled) }}
                 </td>
                 <td>{{ locale.updatedAt|date }}</td>
                 <td>

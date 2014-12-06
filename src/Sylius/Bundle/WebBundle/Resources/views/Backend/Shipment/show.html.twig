@@ -5,7 +5,7 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% from 'SyliusResourceBundle:Macros:labels.html.twig' import state_label %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.shipment.state'|trans }}</strong></td>
-                    <td>{{ misc.shipment_state(shipment.state) }}</td>
+                    <td>{{ state_label(shipment.state, 'shipment') }}</td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.shipment.method'|trans }}</strong></td>

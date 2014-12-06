@@ -1,7 +1,5 @@
 {% form_theme form 'SyliusWebBundle::forms.html.twig' %}
 
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
-
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 {% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}

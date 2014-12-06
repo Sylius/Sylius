@@ -2,7 +2,7 @@
 
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+{% from 'SyliusResourceBundle:Macros:labels.html.twig' import state_label %}
 
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
@@ -226,7 +226,7 @@
                     <td>{{ loop.index }}</td>
                     <td><p>{{ comment.comment|default('sylius.order.comment.no_comment'|trans) }}</p></td>
                     <td>{{ comment.author }}</td>
-                    <td>{{ misc.state_label(comment.state, 'order') }}</td>
+                    <td>{{ state_label(comment.state, 'order') }}</td>
                     <td>
                         <span class="label label-{{ comment.notifyCustomer ? 'primary' : 'info' }}">
                             {{ (comment.notifyCustomer ? 'sylius.order.comment.customer.notified' : 'sylius.order.comment.customer.not_notified')|trans }}
