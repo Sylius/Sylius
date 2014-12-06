@@ -80,12 +80,10 @@
 
 <div id="sylius-cart-coupons" class="well well-sm" data-prototype="{{ form_row(form.promotionCoupons.vars.prototype)|e }}">
     <div id="sylius-cart-coupons-collection">
-        {{ form_row(form.promotionCoupons, {'label_attr': {'class': 'col-lg-12'}}) }}
+        {% for couponField in form.promotionCoupons %}
+        {{ form_row(couponField, {'label_attr': {'class': 'col-lg-12'}}) }}
+        {% endfor %}
     </div>
-    <br>
-    <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius-cart-coupons" data-collection="sylius-cart-coupons-collection">
-        {{ 'sylius.cart.summary.add_coupon'|trans }}
-    </a>
 </div>
 
 {{ form_rest(form) }}

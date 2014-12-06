@@ -52,7 +52,7 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $this->orderRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED) === $configuration['nth'];
+        return $this->orderRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED) === ($configuration['nth'] - 1);
     }
 
     /**

@@ -208,11 +208,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByUserAndPaymentState(UserInterface $user, $state)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('o');
+
         $queryBuilder
             ->select('count(o.id)')
             ->andWhere('o.user = :user')
             ->andWhere('o.paymentState = :state')
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->setParameter('user', $user)
             ->setParameter('state', $state)
         ;

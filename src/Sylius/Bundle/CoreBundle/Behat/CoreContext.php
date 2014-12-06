@@ -106,6 +106,8 @@ class CoreContext extends DefaultContext
             $this->createPayment($order, $paymentMethod);
 
             $order->setCurrency('EUR');
+            $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
+
             $order->complete();
 
             $shipmentProcessor->updateShipmentStates($order->getShipments(), ShipmentTransitions::SYLIUS_PREPARE);
@@ -142,11 +144,14 @@ class CoreContext extends DefaultContext
             $order->addItem($item);
         }
 
+
         $order->calculateTotal();
         $order->complete();
 
         $this->getService('sylius.order_processing.payment_processor')->createPayment($order);
         $this->getService('event_dispatcher')->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
+
+        $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
 
         $manager->persist($order);
         $manager->flush();

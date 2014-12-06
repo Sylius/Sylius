@@ -37,7 +37,7 @@ Feature: Checkout promotions with multiple rules and actions
           And I added product "Sarge" to cart, with quantity "5"
          When I add product "Lenny" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: (€27.75)" should appear on the page
+          And "Promotion total: -€27.75" should appear on the page
           And "Grand total: €127.25" should appear on the page
 
     Scenario: Promotion is not applied when one of the cart does not
