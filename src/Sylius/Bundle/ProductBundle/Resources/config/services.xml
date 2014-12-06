@@ -23,6 +23,11 @@
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
+        <parameter key="sylius.doctrine.association_inheritance_subscriber.class">Sylius\Bundle\ProductBundle\Doctrine\EventListener\AssociationInheritanceMetadataSubscriber</parameter>
+        <parameter key="sylius.form.type.product_association.class">Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationType</parameter>
+        <parameter key="sylius.form.type.association_type_choice.class">Sylius\Bundle\ProductBundle\Form\Type\AssociationTypeEntityType</parameter>
+        <parameter key="sylius.form.type.product_choice.class">Sylius\Bundle\ProductBundle\Form\Type\ProductEntityType</parameter>
+        <parameter key="sylius.model.product_association.class">Sylius\Component\Product\Model\ProductAssociation</parameter>
     </parameters>
 
     <services>
@@ -31,12 +36,29 @@
             <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product" />
         </service>
+        <service id="sylius.form.type.association_type" class="%sylius.form.type.association_type.class%">
+            <argument>%sylius.model.association_type.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_association_type" />
+        </service>
+        <service id="sylius.form.type.association_type_choice" class="%sylius.form.type.association_type_choice.class%">
+            <argument>%sylius.model.association_type.class%</argument>
+            <tag name="form.type" alias="sylius_association_type_choice" />
+        </service>
+        <service id="sylius.form.type.product_choice" class="%sylius.form.type.product_choice.class%">
+            <argument>%sylius.model.product.class%</argument>
+            <tag name="form.type" alias="sylius_product_choice" />
+        </service>
+        <service id="sylius.form.type.product_association" class="%sylius.form.type.product_association.class%">
+            <argument>%sylius.model.product_association.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_product_association" />
+        </service>
         <service id="sylius.form.type.product_prototype" class="%sylius.form.type.product_prototype.class%">
             <argument>%sylius.model.product_prototype.class%</argument>
             <argument>%sylius.validation_group.product_prototype%</argument>
             <tag name="form.type" alias="sylius_product_prototype" />
         </service>
-
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="sylius.repository.product" />
@@ -45,17 +67,19 @@
         </service>
         <service id="sylius.builder.product_prototype" class="%sylius.builder.product_prototype.class%">
             <argument type="service" id="sylius.repository.product_attribute_value" />
-          </service>
-
+        </service>
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher"/>
         </service>
-
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
+        </service>
+        <service id="sylius.doctrine.association_inheritance_subscriber" class="%sylius.doctrine.association_inheritance_subscriber.class%">
+            <argument>%sylius.association.discriminator_map%</argument>
+            <tag name="doctrine.event_subscriber" connection="default" />
         </service>
     </services>
 

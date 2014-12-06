@@ -16,3 +16,6 @@ sylius:
     prototype:
       name: Nom
       properties: Propriétés
+  form:
+    association_type:
+      name: Nom

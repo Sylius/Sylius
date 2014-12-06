@@ -38,6 +38,7 @@ sylius:
                 zones: Zones
             sidebar:
                 assortment: Assortment
+                association_type: Association Types
                 blocks: Blocks
                 configuration: Configuration
                 content: Content
