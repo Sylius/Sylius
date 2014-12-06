@@ -11,16 +11,37 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Shipping country rule configuration form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingCountryConfigurationType extends AbstractResourceType
+class ShippingCountryConfigurationType extends AbstractType
 {
+    /**
+     * @var array
+     */
+    protected $validationGroups;
+
+    /**
+     * @var string
+     */
+    protected $dataClass;
+
+    /**
+     * @param string $dataClass        Class of Country model
+     * @param array  $validationGroups Array of validation groups
+     */
+    public function __construct($dataClass, array $validationGroups)
+    {
+        $this->validationGroups = $validationGroups;
+        $this->dataClass        = $dataClass;
+    }
+
     /**
      * {@inheritdoc}
      */

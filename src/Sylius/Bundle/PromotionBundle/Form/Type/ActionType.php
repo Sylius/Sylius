@@ -13,8 +13,10 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Promotion action form type.
@@ -41,11 +43,32 @@ class ActionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildActionFormListener($this->actionRegistry, $builder->getFormFactory()))
             ->add('type', 'sylius_promotion_action_choice', array(
-                'label' => 'sylius.form.action.type'
+                'label' => 'sylius.form.action.type',
+                'attr' => array(
+                    'data-form-collection' => 'update'
+                ),
             ))
+            ->addEventSubscriber(
+                new BuildActionFormListener($this->actionRegistry, $builder->getFormFactory(), $options['action_type'])
+            )
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setOptional(array(
+            'action_type',
+        ));
+
+        $resolver ->setDefaults(array(
+            'action_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
+        ));
     }
 
     /**

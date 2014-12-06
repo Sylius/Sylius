@@ -13,8 +13,10 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Promotion rule form type.
@@ -41,11 +43,32 @@ class RuleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildRuleFormListener($this->checkerRegistry, $builder->getFormFactory()))
             ->add('type', 'sylius_promotion_rule_choice', array(
-                'label' => 'sylius.form.rule.type'
+                'label' => 'sylius.form.rule.type',
+                'attr' => array(
+                    'data-form-collection' => 'update'
+                ),
             ))
+            ->addEventSubscriber(
+                new BuildRuleFormListener($this->checkerRegistry, $builder->getFormFactory(), $options['rule_type'])
+            )
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setOptional(array(
+            'rule_type',
+        ));
+
+        $resolver->setDefaults(array(
+            'rule_type' => RuleInterface::TYPE_ITEM_TOTAL,
+        ));
     }
 
     /**

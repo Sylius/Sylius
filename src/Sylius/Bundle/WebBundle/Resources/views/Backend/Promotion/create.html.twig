@@ -2,15 +2,15 @@
 
 {% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
 
-{% block javascripts %}
-{{ parent() }}
-{% javascripts output='assets/compiled/backend_promotion.js'
-    'https://raw.github.com/brandonaaron/livequery/1.1.1/jquery.livequery.js'
-    'bundles/syliuspromotion/js/sylius-promotion.js'
-%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock %}
+{#{% block javascripts %}#}
+{#{{ parent() }}#}
+{#{% javascripts output='assets/compiled/backend_promotion.js'#}
+    {#'https://raw.github.com/brandonaaron/livequery/1.1.1/jquery.livequery.js'#}
+    {#'bundles/syliuspromotion/js/sylius-promotion.js'#}
+{#%}#}
+    {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+{#{% endjavascripts %}#}
+{#{% endblock %}#}
 
 {% block topbar %}
 <ol class="breadcrumb">
