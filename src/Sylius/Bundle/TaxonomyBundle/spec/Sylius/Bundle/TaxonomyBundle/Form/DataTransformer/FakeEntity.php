@@ -29,4 +29,9 @@ class FakeEntity
     {
         return array();
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

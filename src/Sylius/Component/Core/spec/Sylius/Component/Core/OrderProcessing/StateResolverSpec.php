@@ -122,24 +122,6 @@ class StateResolverSpec extends ObjectBehavior
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_processing_if_partially_paid(OrderInterface $order)
-    {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_COMPLETED);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection(array($payment1, $payment2));
-
-        $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn($payments);
-
-        $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_PROCESSING)->shouldBeCalled();
-        $this->resolvePaymentState($order);
-    }
-
     function it_marks_order_as_processing_if_one_of_the_payment_is_processing(OrderInterface $order)
     {
         $payment1 = new Payment();

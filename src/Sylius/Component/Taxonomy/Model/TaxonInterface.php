@@ -22,6 +22,13 @@ use Sylius\Component\Resource\Model\SoftDeletableInterface;
 interface TaxonInterface extends SoftDeletableInterface
 {
     /**
+     * Get the id of taxonomy.
+     *
+     * @return integer
+     */
+    public function getId();
+
+    /**
      * Get the taxonomy.
      *
      * @return TaxonomyInterface

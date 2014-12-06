@@ -71,8 +71,12 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
      * @param \Traversable      $children
      * @param array             $taxons
      */
-    private function addChildren(TaxonomyInterface $taxonomy, Collection $value, \Traversable $children, array &$taxons)
+    private function addChildren(TaxonomyInterface $taxonomy, Collection $value, $children, array &$taxons)
     {
+        if (!is_array($children) && !$children instanceof \Traversable) {
+            throw new \InvalidArgumentException('Expecting array or Traversable!');
+        }
+
         /* @var $children TaxonInterface[] */
         foreach ($children as $child) {
             if ($value->contains($this->saveObjects ? $child : $child->getId())) {
