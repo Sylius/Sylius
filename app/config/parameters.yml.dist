@@ -27,16 +27,14 @@ parameters:
     paypal.express_checkout.password: EDITME
     paypal.express_checkout.signature: EDITME
     paypal.express_checkout.sandbox: true
-
+    
+    stripe.publishable_key: EDITME
     stripe.secret_key: EDITME
     stripe.test_mode: true
 
     be2bill.identifier: EDITME
     be2bill.password: EDITME
     be2bill.sandbox: true
-
-    stripe.publishable_key: EDITME
-    stripe.secret_key: EDITME
 
     sylius.oauth.amazon.clientid:       <amazon_client_id>
     sylius.oauth.amazon.clientsecret:   <amazon_client_secret>
