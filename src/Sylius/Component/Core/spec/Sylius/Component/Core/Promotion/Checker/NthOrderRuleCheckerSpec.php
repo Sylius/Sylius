@@ -76,7 +76,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
     ) {
         $subject->getUser()->willReturn($user);
 
-        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(10);
+        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(9);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(true);
     }
