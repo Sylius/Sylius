@@ -5,9 +5,9 @@ php:
     - 5.4
     - 5.5
 
-branches:
-    only:
-        - master
+env:
+    - TEST_SUITE=1
+    - TEST_SUITE=2
 
 services: mongodb
 
@@ -44,32 +44,7 @@ before_script:
     - sleep 5
 
 script:
-    - bin/phpspec run -f dot
-
-    - bin/phpunit -c app/phpunit.xml.dist
-
-    - bin/behat --stop-on-failure --suite=account
-    - bin/behat --stop-on-failure --suite=addressing
-    - bin/behat --stop-on-failure --suite=cart
-    - bin/behat --stop-on-failure --suite=checkout
-    - bin/behat --stop-on-failure --suite=currencies
-    - bin/behat --stop-on-failure --suite=dashboard
-    - bin/behat --stop-on-failure --suite=homepage
-    - bin/behat --stop-on-failure --suite=inventory
-    - bin/behat --stop-on-failure --suite=localization
-    - bin/behat --stop-on-failure --suite=oauth
-    - bin/behat --stop-on-failure --suite=orders
-    - bin/behat --stop-on-failure --suite=payments
-    - bin/behat --stop-on-failure --suite=pricing
-    - bin/behat --stop-on-failure --suite=products
-    - bin/behat --stop-on-failure --suite=promotions
-    - bin/behat --stop-on-failure --suite=settings
-    - bin/behat --stop-on-failure --suite=shipping
-    - bin/behat --stop-on-failure --suite=taxation
-    - bin/behat --stop-on-failure --suite=taxonomies
-    - bin/behat --stop-on-failure --suite=users
-
-#    - bin/behat --stop-on-failure --suite=javascript
+    - travis/run-suite-$TEST_SUITE
 
 notifications:
     email: "travis-ci@sylius.org"
