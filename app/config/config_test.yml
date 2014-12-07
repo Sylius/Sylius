@@ -27,12 +27,6 @@ sylius_money:
     currency: EUR
     locale:   en_US
 
-sylius_payment:
-    gateways:
-        cc:     Credit Card
-        test:   Test
-        stripe: Stripe
-
 doctrine_cache:
     providers:
         sylius_settings:

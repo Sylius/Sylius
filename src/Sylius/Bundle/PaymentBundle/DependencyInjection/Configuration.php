@@ -37,10 +37,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->arrayNode('gateways')
-                    ->useAttributeAsKey('name')
-                    ->prototype('scalar')
-                ->end()
             ->end()
         ;
 
