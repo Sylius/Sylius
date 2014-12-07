@@ -1,0 +1,16 @@
+#!/bin/bash
+
+bin/phpspec run -f dot
+
+#bin/phpunit -c app/phpunit.xml.dist
+
+bin/behat --stop-on-failure --suite=account
+bin/behat --stop-on-failure --suite=addressing
+bin/behat --stop-on-failure --suite=cart
+bin/behat --stop-on-failure --suite=checkout
+bin/behat --stop-on-failure --suite=currencies
+bin/behat --stop-on-failure --suite=dashboard
+bin/behat --stop-on-failure --suite=homepage
+bin/behat --stop-on-failure --suite=inventory
+bin/behat --stop-on-failure --suite=localization
+bin/behat --stop-on-failure --suite=oauth
