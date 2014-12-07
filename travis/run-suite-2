@@ -1,0 +1,14 @@
+#!/bin/bash
+
+bin/behat --stop-on-failure --suite=orders
+bin/behat --stop-on-failure --suite=payments
+bin/behat --stop-on-failure --suite=pricing
+bin/behat --stop-on-failure --suite=products
+bin/behat --stop-on-failure --suite=promotions
+bin/behat --stop-on-failure --suite=settings
+bin/behat --stop-on-failure --suite=shipping
+bin/behat --stop-on-failure --suite=taxation
+bin/behat --stop-on-failure --suite=taxonomies
+bin/behat --stop-on-failure --suite=users
+
+#bin/behat --stop-on-failure --suite=javascript
