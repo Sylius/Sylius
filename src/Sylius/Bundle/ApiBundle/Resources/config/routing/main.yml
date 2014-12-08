@@ -93,6 +93,10 @@ sylius_api_user:
     resource: @SyliusApiBundle/Resources/config/routing/user.yml
     prefix: /users
 
+sylius_api_password_resetting_request:
+    resource: @SyliusApiBundle/Resources/config/routing/password_resetting_request.yml
+    prefix: /password-resetting-requests
+
 sylius_api_taxon_index:
     path: /taxons
     methods: [GET]

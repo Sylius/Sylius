@@ -23,6 +23,11 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  */
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    protected $configFiles = array(
+        'services',
+        'controller'
+    );
+
     /**
      * {@inheritdoc}
      */
