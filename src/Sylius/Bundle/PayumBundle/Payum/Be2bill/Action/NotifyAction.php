@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Be2Bill\Api;
 use Payum\Core\Bridge\Symfony\Reply\HttpResponse;
 use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
@@ -82,7 +83,8 @@ class NotifyAction extends AbstractPaymentStateAwareAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        $details = $request->getNotification();
+        $this->payment->execute($httpRequest = new GetHttpRequest());
+        $details = $httpRequest->query;
 
         if (!$this->api->verifyHash($details)) {
             throw new BadRequestHttpException('Hash cannot be verified.');
