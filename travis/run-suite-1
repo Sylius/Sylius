@@ -1,16 +1,20 @@
 #!/bin/bash
 
-bin/phpspec run -f dot
+EXIT_STATUS=0
 
-#bin/phpunit -c app/phpunit.xml.dist
+bin/phpspec run -f dot || EXIT_STATUS=$?
 
-bin/behat --stop-on-failure --suite=account
-bin/behat --stop-on-failure --suite=addressing
-bin/behat --stop-on-failure --suite=cart
-bin/behat --stop-on-failure --suite=checkout
-bin/behat --stop-on-failure --suite=currencies
-bin/behat --stop-on-failure --suite=dashboard
-bin/behat --stop-on-failure --suite=homepage
-bin/behat --stop-on-failure --suite=inventory
-bin/behat --stop-on-failure --suite=localization
-bin/behat --stop-on-failure --suite=oauth
+#bin/phpunit -c app/phpunit.xml.dist || EXIT_STATUS=$?
+
+bin/behat --suite=account -fprogress || EXIT_STATUS=$?
+bin/behat --suite=addressing -fprogress || EXIT_STATUS=$?
+bin/behat --suite=cart -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout -fprogress || EXIT_STATUS=$?
+bin/behat --suite=currencies -fprogress || EXIT_STATUS=$?
+bin/behat --suite=dashboard -fprogress || EXIT_STATUS=$?
+bin/behat --suite=homepage -fprogress || EXIT_STATUS=$?
+bin/behat --suite=inventory -fprogress || EXIT_STATUS=$?
+bin/behat --suite=localization -fprogress || EXIT_STATUS=$?
+bin/behat --suite=oauth -fprogress || EXIT_STATUS=$?
+
+exit $EXIT_STATUS
