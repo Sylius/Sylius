@@ -23,6 +23,11 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  */
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    protected $configFiles = array(
+        'services',
+        'controller'
+    );
+
     /**
      * {@inheritdoc}
      */
