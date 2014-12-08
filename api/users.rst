@@ -204,3 +204,48 @@ Response
 .. code-block:: text
 
     STATUS: 204 NO CONTENT
+
+Request password resetting
+--------------------------
+
+You can create a new password resetting request by calling the following API endpoint:
+
+.. code-block:: text
+
+    POST /api/password-resetting-requests
+
+Parameters
+~~~~~~~~~~
+
+username
+    Username or e-mail
+
+Response
+~~~~~~~~
+
+The successful response will contain the user object with a confirmation token and date of password request.
+
+.. code-block:: text
+
+    STATUS: 200 OK
+
+.. code-block:: json
+
+    {
+        "confirmation_token": "dzOeNrmdnn20IVHBW2Uaq-yAYsO2sY2hCXhfKdYl_xM",
+        "credentials_expired": false,
+        "email": "sylius@example.com",
+        "email_canonical": "sylius@example.com",
+        "enabled": true,
+        "expired": false,
+        "groups": [],
+        "id": 1,
+        "last_login": "2014-12-08T13:08:02+0000",
+        "locked": false,
+        "password_requested_at": "2014-12-08T14:19:26+0000",
+        "roles": [
+            "ROLE_SYLIUS_ADMIN"
+        ],
+        "username": "sylius@example.com",
+        "username_canonical": "sylius@example.com"
+    }
