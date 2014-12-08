@@ -8,13 +8,10 @@ sylius_account_order_index:
         _controller: sylius.controller.frontend.account.order:indexAction
 
 sylius_account_order_invoice:
-    path: /invoice/{number}.{_format}
+    path: /invoice/{number}.pdf
     methods:  [GET]
     defaults:
         _controller: sylius.controller.frontend.account.order:renderInvoiceAction
-        _format: pdf
-    requirements:
-        _format: html|pdf
 
 sylius_account_order_show:
     path: /{number}

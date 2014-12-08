@@ -93,10 +93,6 @@ class OrderController extends FOSRestController
             'order' => $order
         ));
 
-        if ('html' === $request->attributes->get('_format')) {
-            return new Response($html);
-        }
-
         $generator = $this
             ->get('knp_snappy.pdf')
             ->getInternalGenerator();
