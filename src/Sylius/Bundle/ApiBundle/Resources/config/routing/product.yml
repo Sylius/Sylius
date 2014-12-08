@@ -24,7 +24,7 @@ sylius_api_product_create:
 
 sylius_api_product_update:
     path: /{id}
-    methods: [PUT, PATCH]
+    methods: [POST, PUT, PATCH]
     defaults:
         _controller: sylius.controller.product:updateAction
         _sylius:
