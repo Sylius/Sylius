@@ -46,7 +46,7 @@
         {% if cart.adjustmentsTotal(promotionAdjustment) %}
         <tr>
             <td colspan="6" style="text-align: right;">
-                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: {{ cart.adjustmentsTotal(promotionAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.order.promotion_total'|trans }}</strong>: -{{ (-1 * cart.adjustmentsTotal(promotionAdjustment))|sylius_price }}
             </td>
         </tr>
         {% endif %}

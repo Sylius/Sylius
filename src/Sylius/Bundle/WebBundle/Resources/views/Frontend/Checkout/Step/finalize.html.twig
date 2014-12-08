@@ -98,7 +98,7 @@
                 </td>
                 <td colspan="2">
                     <span class="pull-right">
-                    <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>: {{ order.adjustmentsTotal(promotionAdjustment)|sylius_price }}
+                    <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>: -{{ (-1 * order.adjustmentsTotal(promotionAdjustment))|sylius_price }}
                     </span>
                 </td>
             </tr>
