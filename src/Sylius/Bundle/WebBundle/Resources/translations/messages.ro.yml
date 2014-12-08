@@ -2,6 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
   add_to_cart: Adaugă în coș
   address:
     city: Oraș

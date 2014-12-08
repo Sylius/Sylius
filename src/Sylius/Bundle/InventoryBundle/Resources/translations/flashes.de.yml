@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Inventureinheit auf Lieferrückstand.
-    sold: Inventureinheit durchgeführt.
-    returned: Inventureinheit zurückgeschickt.
+    backorder: Bestandseinheit zurück bestellt.
+    sell: Bestandseinheit erfüllt.
+    return: Bestandseinheit zurück.
+    transition_fail: Die Aktion konnte mit dem aktuellen Status nicht ausgeführt werden

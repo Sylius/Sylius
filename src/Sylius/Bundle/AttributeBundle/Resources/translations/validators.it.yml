@@ -1,3 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: "Inserisci il nome dell'attributo."
+      min_length: "Il nome dell'attributo deve essere lungo almeno 1 carattere. | Il nome dell'attributo deve essere lungo almeno {{ limit }} caratteri. "

@@ -1,8 +1,3 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius:
-  inventory_unit:
-    backordered: "Unitat d'inventari en espera."
-    sold: "Unitat d'inventari en completada."
-    returned: "Unitat d'inventari en retornada."

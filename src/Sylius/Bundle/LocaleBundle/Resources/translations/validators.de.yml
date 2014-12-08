@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: Bitte Gebietsscode auswählen.
+      unique: Gebeitscode muss eindeutig sein.

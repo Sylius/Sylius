@@ -3,11 +3,8 @@
 
 sylius:
   form:
-    product:
-      options: Optionen
     variant:
       presentation: Präsentation
-      available_on: Verfügbar ab
     option:
       name: Interner Name
       presentation: Präsentation
@@ -15,5 +12,3 @@ sylius:
     option_value:
       add_value: Wert hinzufügen
       value: Wert
-    prototype:
-      options: Optionen

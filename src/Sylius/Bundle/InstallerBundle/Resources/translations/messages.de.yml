@@ -56,8 +56,8 @@ sylius:
       configure:
         header: 'Einstellungen <small>Sylius installer</small>'
       setup:
-        header: 'Administration Einstellungen <small>Sylius installer</small>'
+        header: 'Administration Einstellungen <small>Syliusinstaller</small>'
       welcome:
-        content: '<p>Willkommen beim Sylius installer.</p>'
-        header: 'Willkommen <small>Sylius installer</small>'
+        content: '<p>Willkommen beim Syliusinstaller.</p>'
+        header: 'Willkommen <small>Syliusinstaller</small>'
 €: €

@@ -15,8 +15,6 @@ sylius:
       luhn: O número de cartão de crédito que você inseriu é inválido.
     security_code:
       not_blank: Por favor introduza o código de segurança.
-      max_length: 'Código CVV do cartão de crédito deve ter entre {{min}} e {{max}} caracteres.'
-      min_length: 'Código CVV do cartão de crédito deve ter entre {{min}} e {{max}} caracteres.'
     expiry_year:
       not_blank: Por favor selecione o ano de validade.
   payment_method:

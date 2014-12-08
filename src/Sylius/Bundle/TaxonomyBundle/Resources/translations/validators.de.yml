@@ -5,7 +5,7 @@ sylius:
   taxon:
     name:
       max_length: Taxon darf nicht länger als 255 Zeichen sein.
-      not_blank: Bitte Taxon benennen.
+      not_blank: Bitte Taxonname eingeben.
   taxonomy:
     name:
       max_length: Name darf nicht länger als 255 Zeichen sein.

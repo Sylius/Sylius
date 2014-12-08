@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -20,7 +19,7 @@ sylius:
       coupon: Gutschein
     checkout:
       addressing:
-        different_billing_address: Andere Rechnungsadresse benutzen?
+        different_billing_address: Eine andere Rechnungsadresse benutzen?
       payment_method: Zahlungsmethode
       shipping_method: Versandarten
     group:
@@ -32,11 +31,12 @@ sylius:
       code: Code
       enabled: Aktiviert
     order_filter:
-      created_at_from: Von
-      created_at_to: Bis
+      created_at_from: Danach erstellt
+      created_at_to: Vorher erstellt
       number: Nummer
       total_from: Von
       total_to: Bis
+      payment_state: Zahlungsstatus
     page:
       body: Inhalt
       id: ID
@@ -54,8 +54,8 @@ sylius:
       general:
         currency: Standardwährung
         locale: Sprache
-        meta_description: Meta Beschreibung
-        meta_keywords: Meta Keywords
+        meta_description: Metabeschreibung
+        meta_keywords: Metastichwörter
         title: Seitentitel
       taxation:
         default_tax_zone: Standard Steuerzone
@@ -72,7 +72,7 @@ sylius:
       file: Foto auswählen
     user:
       billing_address: Rechnungsadresse
-      different_billing_address: Andere Rechnungsadresse benutzen?
+      different_billing_address: Eine andere Rechnungsadresse benutzen?
       enabled: Aktiviert
       first_name: Vorname
       groups: Gruppen

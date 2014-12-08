@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Parametername darf nicht länger als 255 Zeichen sein .|Parametername darf nicht länger als 255 Zeichen sein.
+      min_length: Parameter Namensraum muss mindestens 2 Zeichen lang sein.|Parameter Namensraum muss mindestens 2 Zeichen lang sein.
+      not_blank: Bitte einen Namensraum für diesen Parameter auswählen.
+    name:
+      max_length: Parameter Name darf nicht länger als 255 Zeichen lang sein.|Parameter Name darf nicht länger als 255 Zeichen lang sein.
+      min_length: Parameter Name muss mindestens 2 Zeichen lang sein.|Parameter Name muss mindestens 2 Zeichen lang sein.
+      not_blank: Bitte einen Namen für den Parameter eingeben.

@@ -11,13 +11,6 @@ sylius:
       max: '姓は{{ limit }}文字以内で入力してください。'
       min: '姓は{{ limit }}文字以上入力してください。'
       not_blank: 姓を入力してください。
-  variant:
-    onHand:
-      min: '在庫は{{ limit }}以上で入力してください。'
-      not_blank: 在庫を入力してください。
-    price:
-      min: '価格は{{ limit }}以上で入力してください。'
-      not_blank: 価格を入力してください。
 sylius_shipping:
   method:
     zone:

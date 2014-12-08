@@ -43,7 +43,7 @@ sylius:
       usage_limit: Nutzungslimit
     promotion:
       actions: Aktionen
-      coupon_based: Gutschein basiert auf
+      coupon_based: Gutschein basierend
       description: Beschreibung
       ends_at: Endet am
       name: Name

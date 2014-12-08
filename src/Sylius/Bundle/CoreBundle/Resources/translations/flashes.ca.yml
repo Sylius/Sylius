@@ -8,7 +8,6 @@ sylius:
     restricted_zone: Aquest producte no està disponible al seu país.
     success: Gràcies per la seva comanda!
     canceled: "El teu pagament s'ha cancel·lat."
-    pending: El seu pagament resta pendent.
     failed: El pagament ha estat rebutjat.
     unknown: Error desconegut de pagament.
     out_of_stock: 'Hi ha només %quantity% %name% en stock.'

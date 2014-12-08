@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Naziv imenskog prostora parametra ne smije biti duži od 255 znakova.|Naziv imenskog prostora parametra ne smije biti duži od 255 znakova.
+      min_length: Naziv imenskog prostora parametra mora biti duži od 2 znaka|Naziv imenskog prostora parametra mora biti duži od 2 znaka.
+      not_blank: Molim odaberite imenski prostor za ovaj parametar.
+    name:
+      max_length: Naziv parametra ne smije biti duži od 255 znakova|Naziv parametra ne smije biti duži od 255 znakova.
+      min_length: Naziv parametra mora biti najmanje 2 znaka dug|Naziv parametra mora biti najmanje 2 znaka dug.
+      not_blank: Molim unesite naziv ovog parametra.

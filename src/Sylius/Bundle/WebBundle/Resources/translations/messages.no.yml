@@ -3,9 +3,16 @@
 
 sylius:
   account:
+    home:
+      email: ""
+      id: ""
     order:
+      number: ""
+      payment_mode: ""
       shipment:
         pending: Venter
+      shipment_mode: ""
+      state: ""
   add_to_cart: Legg i handlekurv
   address:
     city: By

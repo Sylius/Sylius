@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -31,11 +30,10 @@ sylius:
       code: Kod
       enabled: Etkin
     order_filter:
-      created_at_from: Kaynak
-      created_at_to: Hedef
       number: Sayı
       total_from: Kaynak
       total_to: Hedef
+      payment_state: Ödeme durumu
     page:
       id: ID
       title: Başlık
