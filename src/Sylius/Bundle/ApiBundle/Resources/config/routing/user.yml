@@ -31,6 +31,18 @@ sylius_api_user_delete:
     defaults:
         _controller: sylius.controller.user:deleteAction
 
+sylius_api_user_order_index:
+    path: /{id}/orders/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            paginate: $limit
+            filterable: true
+            criteria: { user: $id }
+            sortable: true
+            sorting: { updatedAt: desc }
+
 sylius_api_user_show:
     path: /{id}
     methods: [GET]
