@@ -28,8 +28,9 @@
         </field>
         <field name="permalink" column="permalink" type="string" unique="true">
             <gedmo:slug fields="name" unique="true" >
-            	<gedmo:handler class="Gedmo\Sluggable\Handler\TreeSlugHandler">
-                    <gedmo:handler-option name="parentRelationField" value="parent"/>
+                <gedmo:handler class="Gedmo\Sluggable\Handler\RelativeSlugHandler">
+                    <gedmo:handler-option name="relationField" value="parent"/>
+                    <gedmo:handler-option name="relationSlugField" value="slug"/>
                     <gedmo:handler-option name="separator" value="/"/>
                 </gedmo:handler>
             </gedmo:slug>
