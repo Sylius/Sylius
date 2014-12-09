@@ -17,7 +17,13 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_payment_index'), 'sylius.payment.manage'|trans) }}
-        {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
+
+        {% if is_granted('ROLE_SYLIUS_SUPER_ADMIN') -%}
+            {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
+        {%- endif %}
+
+        {{ misc.payment_form(payment) }}
+
         {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id}), null, false, false) }}
     </div>
     <h1><span class="glyphicon glyphicon-calendar"></span> {{ payment.method.name }} - {{ payment.amount|sylius_money }}</h1>
