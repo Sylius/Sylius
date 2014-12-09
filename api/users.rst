@@ -249,3 +249,20 @@ The successful response will contain the user object with a confirmation token a
         "username": "sylius@example.com",
         "username_canonical": "sylius@example.com"
     }
+
+Index of all user orders
+------------------------
+
+To browse all orders for specific user, you can do the following call:
+
+.. code-block:: text
+
+    GET /api/users/14/orders/
+
+Parameters
+~~~~~~~~~~
+
+page
+    Number of the page, by default = 1
+limit
+    Number of items to display per page
