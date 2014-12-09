@@ -102,10 +102,6 @@ abstract class Kernel extends BaseKernel
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
         );
 
-        if ($this->isDebug()) {
-            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-        }
-
         return $bundles;
     }
 
