@@ -10,7 +10,7 @@ You can retrieve the full list payment by making the following request:
 
 .. code-block:: text
 
-    GET /api/payments
+    GET /api/payments/
 
 Parameters
 ~~~~~~~~~~

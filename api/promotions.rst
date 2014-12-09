@@ -233,7 +233,7 @@ To create a new coupon for given promotion, you can execute the following reques
 
 .. code-block:: text
 
-    POST /api/promotion/1/coupons
+    POST /api/promotion/1/coupons/
 
 Parameters
 ~~~~~~~~~~

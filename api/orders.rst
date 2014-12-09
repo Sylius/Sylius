@@ -10,7 +10,7 @@ You can retrieve the full list order by making the following request:
 
 .. code-block:: text
 
-    GET /api/orders
+    GET /api/orders/
 
 Parameters
 ~~~~~~~~~~
@@ -169,7 +169,7 @@ You can view a single order by executing the following request:
 
 .. code-block:: text
 
-    GET /api/orders/24
+    GET /api/orders/24/
 
 Response
 ~~~~~~~~
@@ -367,7 +367,7 @@ To create a new order (cart), you need to execute the following request:
 
 .. code-block:: text
 
-    POST /api/orders
+    POST /api/orders/
 
 Parameters
 ~~~~~~~~~~
@@ -464,7 +464,7 @@ To add an item to order, you simply need to do a POST request:
 
 .. code-block:: text
 
-    POST /api/orders/305/items
+    POST /api/orders/305/items/
 
 Parameters
 ~~~~~~~~~~

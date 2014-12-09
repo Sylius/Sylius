@@ -10,7 +10,7 @@ To browse all users available in the store you should call the following GET req
 
 .. code-block:: text
 
-    GET /api/users
+    GET /api/users/
 
 Parameters
 ~~~~~~~~~~
@@ -114,7 +114,7 @@ To create a new user, you can execute the following request:
 
 .. code-block:: text
 
-    POST /api/users
+    POST /api/users/
 
 Parameters
 ~~~~~~~~~~
@@ -212,7 +212,7 @@ You can create a new password resetting request by calling the following API end
 
 .. code-block:: text
 
-    POST /api/password-resetting-requests
+    POST /api/password-resetting-requests/
 
 Parameters
 ~~~~~~~~~~

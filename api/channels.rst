@@ -10,7 +10,7 @@ To browse all channels available in the Sylius e-commerce platform you can call 
 
 .. code-block:: text
 
-    GET /api/channels
+    GET /api/channels/
 
 Parameters
 ~~~~~~~~~~
@@ -118,7 +118,7 @@ To create a new channel, you can execute the following request:
 
 .. code-block:: text
 
-    POST /api/channels
+    POST /api/channels/
 
 Parameters
 ~~~~~~~~~~

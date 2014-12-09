@@ -10,7 +10,7 @@ To browse all stock locations configured, use the following request:
 
 .. code-block:: text
 
-    GET /api/stock-locations
+    GET /api/stock-locations/
 
 Parameters
 ~~~~~~~~~~
@@ -136,7 +136,7 @@ To create a new stock location, you must execute the following request:
 
 .. code-block:: text
 
-    POST /api/stock-locations
+    POST /api/stock-locations/
 
 Parameters
 ~~~~~~~~~~

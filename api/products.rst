@@ -10,7 +10,7 @@ To browse all products available in the store you should call the following GET 
 
 .. code-block:: text
 
-    GET /api/products
+    GET /api/products/
 
 Parameters
 ~~~~~~~~~~
@@ -120,7 +120,7 @@ To create a new product, you can execute the following request:
 
 .. code-block:: text
 
-    POST /api/products
+    POST /api/products/
 
 Parameters
 ~~~~~~~~~~

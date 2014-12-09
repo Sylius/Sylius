@@ -10,7 +10,7 @@ You can retrieve the full list shipment by making the following request:
 
 .. code-block:: text
 
-    GET /api/shipments
+    GET /api/shipments/
 
 Parameters
 ~~~~~~~~~~
