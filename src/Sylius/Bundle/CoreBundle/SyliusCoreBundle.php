@@ -65,7 +65,7 @@ class SyliusCoreBundle extends AbstractResourceBundle
             'Sylius\Component\Core\Model\GroupInterface'               => 'sylius.model.group.class',
             'Sylius\Component\Core\Model\ProductVariantImageInterface' => 'sylius.model.product_variant_image.class',
             'Sylius\Component\Core\Model\WishlistInterface'            => 'sylius.model.wishlist.class',
-            'Sylius\Component\Core\Model\WishlistItemInterface'        => 'sylius.model.wishlist_item.class',
+            'Sylius\Component\Wishlist\Model\WishlistItemInterface'    => 'sylius.model.wishlist_item.class',
         );
     }
 

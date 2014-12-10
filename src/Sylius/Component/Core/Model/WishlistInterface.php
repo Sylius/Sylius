@@ -11,44 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\SlugAwareInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Wishlist\Model\WishlistInterface as BaseWishlistInterface;
 
-interface WishlistInterface extends UserAwareInterface, SlugAwareInterface, TimestampableInterface
+interface WishlistInterface extends BaseWishlistInterface, UserAwareInterface
 {
-    /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @param string $name
-     */
-    public function setName($name);
-
-    /**
-     * @return bool
-     */
-    public function isPublic();
-
-    /**
-     * @param bool $public
-     */
-    public function setPublic($public);
-
-    /**
-     * @return Collection|WishlistItemInterface[]
-     */
-    public function getItems();
-
-    /**
-     * @param WishlistItemInterface $item
-     */
-    public function addItem(WishlistItemInterface $item);
-
-    /**
-     * @param WishlistItemInterface $item
-     */
-    public function removeItem(WishlistItemInterface $item);
 }

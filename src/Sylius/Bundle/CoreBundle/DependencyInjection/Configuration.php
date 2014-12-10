@@ -145,7 +145,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('wishlist_item')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\WishlistItem')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Wishlist\Model\WishlistItem')->end()
                             ->end()
                         ->end()
                     ->end()

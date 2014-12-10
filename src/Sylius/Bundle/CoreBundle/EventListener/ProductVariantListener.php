@@ -14,8 +14,8 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Persistence\Event\PreUpdateEventArgs;
 use Sylius\Bundle\CoreBundle\Mailer\ProductChangeMailerInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\WishlistItemInterface;
 use Sylius\Component\Core\Repository\WishlistRepositoryInterface;
+use Sylius\Component\Wishlist\Model\WishlistItemInterface;
 
 /**
  * Sends email notification when product changes.

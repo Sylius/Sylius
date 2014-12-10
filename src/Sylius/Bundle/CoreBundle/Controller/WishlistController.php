@@ -53,7 +53,9 @@ class WishlistController extends ResourceController
         }
 
         $item = $this->getWishlistItemRepository()->createNew();
-        $item->setProduct($product);
+
+        $originator = $this->get('sylius.originator');
+        $originator->setOrigin($item, $product);
 
         $wishlist->{$action.'Item'}($item);
 

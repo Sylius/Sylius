@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\Wishlist\Model;
 
-interface WishlistItemInterface
+use Sylius\Component\Originator\Model\OriginAwareInterface;
+
+interface WishlistItemInterface extends OriginAwareInterface
 {
     const NOTIFY_ON_PRICE_CHANGE = 1;
     const NOTIFY_ON_STOCK_CHANGE = 2;
@@ -25,16 +27,6 @@ interface WishlistItemInterface
      * @param WishlistInterface $wishlist
      */
     public function setWishlist(WishlistInterface $wishlist);
-
-    /**
-     * @return ProductVariantInterface
-     */
-    public function getVariant();
-
-    /**
-     * @param ProductVariantInterface $variant
-     */
-    public function setVariant(ProductVariantInterface $variant);
 
     /**
      * @return int

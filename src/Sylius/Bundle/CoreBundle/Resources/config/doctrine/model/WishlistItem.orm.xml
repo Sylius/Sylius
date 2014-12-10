@@ -23,7 +23,8 @@
 
         <field name="notifyOn" column="notify_on" type="integer" />
 
-        <one-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface"/>
+        <field name="originId" column="origin_id" type="integer" nullable="true" />
+        <field name="originType" column="origin_type" type="string" nullable="true" />
 
         <many-to-one field="wishlist" target-entity="Sylius\Component\Core\Model\WishlistInterface" inversed-by="items">
             <join-column name="wishlist_id" referenced-column-name="id" />

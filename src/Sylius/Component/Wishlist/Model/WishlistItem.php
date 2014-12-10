@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\Wishlist\Model;
 
 class WishlistItem implements WishlistItemInterface
 {
@@ -28,11 +28,18 @@ class WishlistItem implements WishlistItemInterface
     protected $wishlist;
 
     /**
-     * Product variant.
+     * Origin ID.
      *
-     * @var ProductVariantInterface
+     * @var int
      */
-    protected $variant;
+    protected $originId;
+
+    /**
+     * Origin type.
+     *
+     * @var string
+     */
+    protected $originType;
 
     /**
      * Bitmask for notifications.
@@ -68,17 +75,33 @@ class WishlistItem implements WishlistItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getVariant()
+    public function getOriginId()
     {
-        return $this->variant;
+        return $this->originId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setVariant(ProductVariantInterface $variant)
+    public function setOriginId($originId)
     {
-        $this->variant = $variant;
+        $this->originId = $originId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginType()
+    {
+        return $this->originType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginType($originType)
+    {
+        $this->originType = $originType;
     }
 
     /**
