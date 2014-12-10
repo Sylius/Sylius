@@ -153,4 +153,25 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
      * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
+
+    /**
+     * Get wishlists.
+     *
+     * @return Collection|WishlistInterface[]
+     */
+    public function getWishlists();
+
+    /**
+     * Add wishlist.
+     *
+     * @param $wishlist WishlistInterface
+     */
+    public function addWishlist(WishlistInterface $wishlist);
+
+    /**
+     * Remove wishlist.
+     *
+     * @param $wishlist WishlistInterface
+     */
+    public function removeWishlist(WishlistInterface $wishlist);
 }

@@ -57,9 +57,10 @@ class Configuration implements ConfigurationInterface
             ->end()
         ->end();
 
+        $this->addEmailConfiguration($emailNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
         $this->addEmailConfiguration($emailNode, 'order_confirmation', 'SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig');
         $this->addEmailConfiguration($emailNode, 'order_comment', 'SyliusWebBundle:Frontend/Email:orderComment.html.twig');
-        $this->addEmailConfiguration($emailNode, 'customer_welcome', 'SyliusWebBundle:Frontend/Email:customerWelcome.html.twig');
+        $this->addEmailConfiguration($emailNode, 'product_change', 'SyliusWebBundle:Frontend/Email:productChange.html.twig');
 
         return $emailNode;
     }
@@ -132,6 +133,19 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\ProductVariantImage')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('wishlist')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\Wishlist')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\WishlistController')->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('wishlist_item')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Wishlist\Model\WishlistItem')->end()
                             ->end()
                         ->end()
                     ->end()

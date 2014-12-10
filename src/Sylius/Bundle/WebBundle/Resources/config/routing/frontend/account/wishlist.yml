@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_account_wishlist_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.wishlist:indexAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:wishlists.html.twig
+            method: findBy
+            arguments: {user: 'expr:service("security.context").getToken().getUser()'}
+
+sylius_account_wishlist_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.wishlist:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:wishlist.html.twig
+            method: findOneBy
+            arguments: {id: $id, user: 'expr:service("security.context").getToken().getUser()'}
+
+sylius_account_wishlist_show_by_slug:
+    path: /{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.wishlist:showAction
+        _sylius:
+            template: SyliusWebBundle:Frontend/Account:wishlist.html.twig
+            method: findOneBy
+            arguments: {public: true, slug: $slug}
+
+sylius_account_wishlist_publish:
+    path: /{id}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.wishlist:setAsPublicAction

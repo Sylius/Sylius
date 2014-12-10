@@ -126,7 +126,8 @@
         "sylius/taxonomy-bundle": "self.version",
         "sylius/variation": "self.version",
         "sylius/variation-bundle": "self.version",
-        "sylius/web-bundle": "self.version"
+        "sylius/web-bundle": "self.version",
+        "sylius/wishlist": "self.version"
     },
     "scripts": {
         "post-install-cmd": [

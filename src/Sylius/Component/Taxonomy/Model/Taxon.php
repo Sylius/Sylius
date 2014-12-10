@@ -248,7 +248,7 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug = null)
     {
         $this->slug = $slug;
 
