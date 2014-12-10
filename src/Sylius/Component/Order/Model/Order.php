@@ -606,28 +606,6 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalItems()
-    {
-        return $this->countItems();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotalQuantity()
-    {
-        $quantity = 0;
-
-        foreach ($this->items as $item) {
-            $quantity += $item->getQuantity();
-        }
-
-        return $quantity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isEmpty()
     {
         return $this->items->isEmpty();

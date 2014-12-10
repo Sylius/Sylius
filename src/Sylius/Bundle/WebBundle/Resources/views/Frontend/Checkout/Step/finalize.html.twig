@@ -37,7 +37,7 @@
             {% include 'SyliusWebBundle:Frontend/Checkout/Step/Finalize:_item.html.twig' %}
         {% else %}
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 <hr />
                 <div class="alert alert-info">{{ 'sylius.checkout.finalize.order.no_items'|trans }}</div>
             </td>
@@ -46,7 +46,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="6">
+            <td colspan="7">
                 <span class="pull-right">
                 <strong>{{ 'sylius.checkout.finalize.order.items_total'|trans }}</strong>: {{ order.itemsTotal|sylius_price }}
                 </span>
@@ -56,7 +56,7 @@
             <td colspan="4">
             <p><strong>{{ 'sylius.checkout.finalize.order.taxes'|trans }}</strong></p>
             <ul>
-            {% for taxAdjustment in order.adjustments(taxAdjustment) %}
+            {% for taxAdjustment in sylius_order_adjustments(order, taxAdjustment) %}
                 <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price }} </li>
             {% else %}
                 <li><span class="label label-info">{{ 'sylius.checkout.finalize.order.no_taxes'|trans }}</span></li>
@@ -65,7 +65,7 @@
             </td>
             <td colspan="2">
                 <span class="pull-right">
-                <strong>{{ 'sylius.checkout.finalize.order.tax_total'|trans }}</strong>: {{ order.adjustmentsTotal(taxAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.checkout.finalize.order.tax_total'|trans }}</strong>: {{ sylius_order_adjustments_total(order, taxAdjustment)|sylius_price }}
                 </span>
             </td>
         </tr>
@@ -80,7 +80,7 @@
             {% endfor %}
             </ul>
             </td>
-            <td colspan="2">
+            <td colspan="3">
                 <span class="pull-right">
                 <strong>{{ 'sylius.checkout.finalize.order.shipping_total'|trans }}</strong>: {{ order.adjustmentsTotal(shippingAdjustment)|sylius_price }}
                 </span>
@@ -96,7 +96,7 @@
                 {% endfor %}
                 </ul>
                 </td>
-                <td colspan="2">
+                <td colspan="3">
                     <span class="pull-right">
                     <strong>{{ 'sylius.checkout.finalize.order.promotion_total'|trans }}</strong>: -{{ (-1 * order.adjustmentsTotal(promotionAdjustment))|sylius_price }}
                     </span>
@@ -104,7 +104,7 @@
             </tr>
         {% endif %}
         <tr style="background-color: #f1f1f1;">
-            <td colspan="6">
+            <td colspan="7">
                 <span class="pull-right">
                 <strong>{{ 'sylius.checkout.finalize.order.total'|trans }}</strong>: {{ order.total|sylius_price }}
                 </span>
