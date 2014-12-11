@@ -47,6 +47,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('start_number')
                     ->defaultValue(1)
                 ->end()
+                ->scalarNode('number_length')
+                    ->defaultValue(9)
+                ->end()
             ->end()
         ;
 

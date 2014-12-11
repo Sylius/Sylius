@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\SequenceBundle\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
-use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -55,6 +54,11 @@ class NumberListener
      */
     protected $listenerEnabled = false;
 
+    /**
+     * @param ServiceRegistryInterface $registry
+     * @param EventManager $eventManager
+     * @param EventDispatcherInterface $eventDispatcher
+     */
     public function __construct(
         ServiceRegistryInterface $registry,
         EventManager $eventManager,
