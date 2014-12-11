@@ -45,7 +45,7 @@ class UserLoyaltyConfigurationType extends AbstractType
                 )
             ))
             ->add('unit', 'choice', array(
-                'label'       => 'sylius.form.rule.user_loyalty_configuration.unit',
+                'label'       => 'sylius.form.rule.user_loyalty_configuration.unit.header',
                 'choices'     => array(
                     'days'   => 'sylius.form.rule.user_loyalty_configuration.unit.days',
                     'weeks'  => 'sylius.form.rule.user_loyalty_configuration.unit.weeks',

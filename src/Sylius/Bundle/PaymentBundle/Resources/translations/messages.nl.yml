@@ -14,7 +14,7 @@ sylius:
       amount: Betaal hoeveelheid
       method: Betaalmethode
       state:
-        0: Betaal status
+        header: Betaal status
         checkout: Afrekenen
         completed: Voltooid
         failed: Mislukt

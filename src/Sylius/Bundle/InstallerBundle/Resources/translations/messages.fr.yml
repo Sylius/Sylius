@@ -8,9 +8,9 @@ sylius:
   form:
     configuration:
       database:
-        0: Connexion à la base de données
+        header: Connexion à la base de données
         driver:
-          0: Pilote
+          header: Pilote
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,15 +22,15 @@ sylius:
         port: Port
         user: Utilisateur
       locale:
-        0: Paramètres régionaux
+        header: Paramètres régionaux
         currency: Devise
         locale: Paramètre régional
       mailer:
-        0: "Paramètres pour l'envoi d'e-mail"
+        header: "Paramètres pour l'envoi d'e-mail"
         host: Serveur
         password: Mot de passe
         transport:
-          0: Transport
+          header: Transport
           gmail: Gmail
           mail: Mail
           sendmail: Sendmail

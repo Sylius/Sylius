@@ -1,8 +1,8 @@
 sylius:
     extensions:
-        0: extensions
+        header: extensions
         accelerator:
-            0: Accelerator
+            header: Accelerator
             help: Install and enable a PHP accelerator like APC (highly recommended).
         apc: APC
         ctype: Ctype
@@ -22,23 +22,23 @@ sylius:
         simplexml_import_dom: SimpleXML
         token_get_all: Tokenizer
     filesystem:
-        0: file system
+        header: file system
         cache:
-            0: cache
+            header: cache
             help: To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
         exists: exists
         logs:
-            0: logs
+            header: logs
             help: To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%
         not_exists: not exists
         not_writable: not writable
         parameters:
-            0: parameters.yml
+            header: parameters.yml
             help: To set permissions run: sudo chmod a+w %path%
         vendors: vendors
         writable: writable
     settings:
-        0: PHP version and settings
+        header: PHP version and settings
         any: any
         detect_unicode: detect_unicode
         magic_quotes_gpc: magic_quotes_gpc
@@ -51,7 +51,7 @@ sylius:
         short_open_tag: short_open_tag
         timezone: timezone
         timezone_deprecated:
-            0: Deprecated timezone
+            header: Deprecated timezone
             help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
         version: PHP version
         version_recommanded: Recommended PHP version

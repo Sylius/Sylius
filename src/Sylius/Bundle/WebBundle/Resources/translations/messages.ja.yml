@@ -60,7 +60,7 @@ sylius:
       products: sylius.backend.quick_links.products
       users: sylius.backend.quick_links.users
     statistics:
-      0: sylius.backend.statistics
+      header: sylius.backend.statistics
       orders_this_month: sylius.backend.statistics.orders_this_month
       registrations_this_month: sylius.backend.statistics.registrations_this_month
       sales_this_month: sylius.backend.statistics.sales_this_month

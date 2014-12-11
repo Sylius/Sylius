@@ -8,7 +8,7 @@ sylius:
   form:
     configuration:
       database:
-        0: Підключення бази даних
+        header: Підключення бази даних
         driver:
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
@@ -20,7 +20,7 @@ sylius:
         port: Порт
         user: Користувач
       locale:
-        0: Налаштування локалі
+        header: Налаштування локалі
         currency: Валюта
       mailer:
         host: Хост

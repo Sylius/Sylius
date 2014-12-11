@@ -30,7 +30,7 @@ sylius:
           weeks: Tjedni
           months: Mjeseci
           years: Godine
-          0: Jedinica
+          header: Jedinica
         after: Korisnik koji se registrirao unutar definiranog perioda
       shipping_country_configuration:
         country: Država

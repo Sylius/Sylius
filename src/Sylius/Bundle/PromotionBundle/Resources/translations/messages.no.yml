@@ -30,7 +30,7 @@ sylius:
           weeks: Uker
           months: Måneder
           years: År
-          0: Enhet
+          header: Enhet
         after: Brukere opprettet etter denne perioden
       shipping_country_configuration:
         country: Land

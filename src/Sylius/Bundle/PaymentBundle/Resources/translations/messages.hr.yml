@@ -14,7 +14,7 @@ sylius:
       amount: Iznos
       method: Način plaćanja
       state:
-        0: Stanje uplate
+        header: Stanje uplate
         checkout: Blagajna
         completed: Završeno
         failed: Neuspješno

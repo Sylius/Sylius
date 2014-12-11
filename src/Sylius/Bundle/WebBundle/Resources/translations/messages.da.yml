@@ -74,7 +74,7 @@ sylius:
       products: Dine produkter
       users: Brugere
     statistics:
-      0: Statistik for denne måned
+      header: Statistik for denne måned
       orders_this_month: Totale ordrer
       registrations_this_month: Totale registreringer
       sales_this_month: Salg
@@ -281,7 +281,7 @@ sylius:
     update_header: Rediger gruppe
   hide_deleted: Skjul slettede
   history:
-    0: Historie
+    header: Historie
     action: Handling
     author: Forfatter
     data: Data
@@ -422,7 +422,7 @@ sylius:
     method: Metode
     no_results: Der er ingen betalingesmetoder konfigureret.
     state:
-      0: Status
+      header: Status
       checkout: Til kassen
       completed: Gennemført
       failed: Mislykkedes

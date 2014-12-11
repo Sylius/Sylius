@@ -562,7 +562,7 @@ sylius:
         method: Method
         no_results: There are no payments configured.
         state:
-            0: State
+            header: State
             cancelled: Cancelled
             checkout: Checkout
             completed: Completed

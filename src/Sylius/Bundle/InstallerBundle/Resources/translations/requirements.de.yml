@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    0: Erweiterungen
+    header: Erweiterungen
     accelerator:
-      0: Accelerator
+      header: Accelerator
       help: Installiere und aktiviere einen PHP Accelerator wie zum Beispiel APC (Dringend empfohlen).
     apc: APC
     ctype: Ctype
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    0: Dateisystem
+    header: Dateisystem
     cache:
-      0: Cache
+      header: Cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existiert
     logs:
-      0: Logs
+      header: Logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: Existiert nicht
     not_writable: Schreibgeschützt
     parameters:
-      0: parameters.yml
+      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: vendors
     writable: Beschreibbar
   settings:
-    0: PHP Version und Einstellungen
+    header: PHP Version und Einstellungen
     any: Jeder
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +57,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: timezone
     timezone_deprecated:
-      0: Veraltete Zeitzone
+      header: Veraltete Zeitzone
       help: 'Zeituone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
     version: PHP Version
     version_recommanded: Empfohlene PHP Version

@@ -8,9 +8,9 @@ sylius:
   form:
     configuration:
       database:
-        0: Připojení databáze
+        header: Připojení databáze
         driver:
-          0: Ovladač
+          header: Ovladač
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,15 +22,15 @@ sylius:
         port: Port
         user: Uživatel
       locale:
-        0: Místní nastavení
+        header: Místní nastavení
         currency: Měna
         locale: Jazyk
       mailer:
-        0: Nastavení mailera
+        header: Nastavení mailera
         host: Hostitel
         password: Heslo
         transport:
-          0: Doprava
+          header: Doprava
           gmail: Gmail
           mail: Mail
           sendmail: Sendmail

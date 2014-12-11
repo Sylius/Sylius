@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    0: Rozšíření
+    header: Rozšíření
     accelerator:
-      0: Akcelerátor
+      header: Akcelerátor
       help: Nainstalujte a povolte PHP akcelerátor jako APC (výrazně doporučeno).
     apc: APC
     ctype: Ctype
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    0: Souborový systém
+    header: Souborový systém
     cache:
-      0: cache
+      header: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existuje
     logs:
-      0: logs
+      header: logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: neexistuje
     not_writable: nelze zapisovat
     parameters:
-      0: parameters.yml
+      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: vendors
     writable: zapisovatelný
   settings:
-    0: PHP verze a nastavení
+    header: PHP verze a nastavení
     any: jakýkoliv
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -56,7 +56,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: Časové pásmo
     timezone_deprecated:
-      0: Zastaralé časové pásmo
+      header: Zastaralé časové pásmo
       help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
     version: Verze PHP
     version_recommanded: Doporučená verze PHP

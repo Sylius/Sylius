@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    0: extensies
+    header: extensies
     accelerator:
-      0: Accelerator
+      header: Accelerator
       help: Installeer en schakel een PHP versneller in zoals APC (sterk aanbevolen).
     apc: APC
     ctype: Ctype
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    0: bestandssysteem
+    header: bestandssysteem
     cache:
-      0: cache
+      header: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: bestaat
     logs:
-      0: logs
+      header: logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: niet bestaand
     not_writable: niet schrijfbaar
     parameters:
-      0: parameters.yml
+      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: vendors
     writable: schrijfbaar
   settings:
-    0: PHP versie en instellingen
+    header: PHP versie en instellingen
     any: elke
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +57,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: tijdzone
     timezone_deprecated:
-      0: Afgekeurde timezone
+      header: Afgekeurde timezone
       help: 'Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
     version: PHP versie
     version_recommanded: Aanbevolen PHP versie

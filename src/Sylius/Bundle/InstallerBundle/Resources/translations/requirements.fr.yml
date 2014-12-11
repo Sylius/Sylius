@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    0: extensions
+    header: extensions
     accelerator:
-      0: Accélérateur
+      header: Accélérateur
       help: Installer et activer un accélérateur PHP comme APC (fortement recommandé).
     apc: APC
     ctype: CType
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Analyseur de code PHP
   filesystem:
-    0: système de fichiers
+    header: système de fichiers
     cache:
-      0: cache
+      header: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existe
     logs:
-      0: Logs
+      header: Logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: "N'existe pas"
     not_writable: pas accessible en écriture
     parameters:
-      0: parameters.yml
+      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: vendors
     writable: accessible en écriture
   settings:
-    0: Version de PHP et paramètres
+    header: Version de PHP et paramètres
     any: "N'importe quel"
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +57,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: fuseau horaire
     timezone_deprecated:
-      0: Fuseau horaire obsolète
+      header: Fuseau horaire obsolète
       help: 'Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).'
     version: Version de PHP
     version_recommanded: Version de PHP recommandée
