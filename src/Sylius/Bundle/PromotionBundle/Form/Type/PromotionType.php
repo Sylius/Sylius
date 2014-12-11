@@ -13,10 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use JMS\TranslationBundle\Annotation\Ignore;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 
 /**
  * Promotion form type.
@@ -32,34 +29,36 @@ class PromotionType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.promotion.name'
+                'label' => 'sylius.form.promotion.name',
             ))
             ->add('description', 'text', array(
-                'label' => 'sylius.form.promotion.description'
+                'label' => 'sylius.form.promotion.description',
             ))
             ->add('exclusive', 'checkbox', array(
-                'label' => 'sylius.form.promotion.exclusive'
+                'label' => 'sylius.form.promotion.exclusive',
             ))
             ->add('usageLimit', 'integer', array(
-                'label' => 'sylius.form.promotion.usage_limit'
+                'label' => 'sylius.form.promotion.usage_limit',
             ))
             ->add('startsAt', 'date', array(
                 'label' => 'sylius.form.promotion.starts_at',
-                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-')
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
             ))
             ->add('endsAt', 'date', array(
                 'label' => 'sylius.form.promotion.ends_at',
-                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-')
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
             ))
             ->add('couponBased', 'checkbox', array(
                 'label' => 'sylius.form.promotion.coupon_based',
-                'required' => false
+                'required' => false,
             ))
             ->add('rules', 'sylius_promotion_rule_collection', array(
-                'label' => 'sylius.form.promotion.rules'
+                'label' => 'sylius.form.promotion.rules',
+                'button_add_label' => 'sylius.promotion.add_rule',
             ))
             ->add('actions', 'sylius_promotion_action_collection', array(
-                'label' => 'sylius.form.promotion.actions'
+                'label' => 'sylius.form.promotion.actions',
+                'button_add_label' => 'sylius.promotion.add_action',
             ))
         ;
     }

@@ -24,6 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 class RuleCollectionTypeSpec extends ObjectBehavior
 {
@@ -32,53 +33,48 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         $this->beConstructedWith($registry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializabled()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\RuleCollectionType');
     }
 
-    function it_should_be_a_form_type()
+    function it_is_configuration_collection_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType');
     }
 
-    function it_should_build_prototype(
+    function it_builds_prototypes(
         FormBuilderInterface $builder,
         FormBuilderInterface $prototype,
         FormInterface $form,
         $registry
     ) {
-        $registry->all()->willReturn(array(
-            RuleInterface::TYPE_ITEM_TOTAL => $prototype
-        ));
+        $registry->all()->willReturn(array('configuration_kind' => ''));
 
-        $builder->create(Argument::cetera())->willReturn($prototype);
+        $builder->create('name', 'sylius_promotion_rule', array('configuration_type' => 'configuration_kind'))
+            ->willReturn($prototype);
+
         $prototype->getForm()->willReturn($form);
 
-        $builder->setAttribute('prototypes', array(
-            RuleInterface::TYPE_ITEM_TOTAL => $form
-        ))->shouldBeCalled();
+        $builder->setAttribute('prototypes', array('configuration_kind' => $form))->shouldBeCalled();
 
         $this->buildForm($builder, array(
+            'registry' => $registry,
             'prototype_name' => 'name',
-            'type' => 'sylius_rule_collection',
+            'type' => 'sylius_promotion_rule',
             'options' => array(),
         ));
     }
 
-    function it_should_build_view(
+    function it_builds_view(
         FormConfigInterface $config,
         FormView $view,
         FormInterface $form,
         FormInterface $prototype
     ) {
-        $config->getAttribute('prototypes')
-            ->shouldBeCalled()
-            ->willReturn(array(
-                RuleInterface::TYPE_ITEM_TOTAL => $prototype
-            ));
-
         $form->getConfig()->willReturn($config);
+        $config->getAttribute('prototypes')->willReturn(array('configuration_kind' => $prototype));
+
         $prototype->createView($view)->shouldBeCalled();
 
         $this->buildView($view, $form, array());
@@ -87,21 +83,13 @@ class RuleCollectionTypeSpec extends ObjectBehavior
     function it_should_have_default_option(OptionsResolverInterface $resolver)
     {
         $resolver
-            ->setOptional(array(
-                'rule_type'
-            ))->shouldBeCalled();
-
-        $resolver
             ->setDefaults(array(
+                'type' => 'sylius_promotion_rule',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'button_add_label' => 'sylius.promotion.add_rule',
-                'rule_type' => RuleInterface::TYPE_ITEM_TOTAL,
-            ))
-            ->shouldBeCalled();
+            ))->shouldBeCalled()
         ;
-
         $this->setDefaultOptions($resolver);
     }
 

@@ -13,31 +13,7 @@
     <div class="col-md-4">
         {{ form_row(form.rules) }}
         {{ form_row(form.actions) }}
-        {#<div id="sylius_promotion_rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">#}
-            {#{% for ruleForm in form.rules %}#}
-                {#<div>#}
-                    {#{{ form_row(ruleForm.type) }}#}
-                    {#{{ form_row(ruleForm.configuration, {'label': false}) }}#}
-                {#</div>#}
-            {#{% endfor %}#}
-        {#</div>#}
-        {#<a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_rules" data-collection="sylius_promotion_rules">{{ 'sylius.promotion.add_rule'|trans }}</a>#}
-        {#<hr>#}
-        {#<div id="sylius_promotion_actions" data-prototype="{{ form_widget(form.actions.vars.prototype)|e }}">#}
-            {#{% for actionForm in form.actions %}#}
-                {#<div>#}
-                    {#{{ form_row(actionForm.type) }}#}
-                    {#{{ form_row(actionForm.configuration, {'label': false}) }}#}
-                {#</div>#}
-            {#{% endfor %}#}
-        {#</div>#}
-        {#<a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius_promotion_actions" data-collection="sylius_promotion_actions">{{ 'sylius.promotion.add_action'|trans }}</a>#}
     </div>
 </div>
 
 <hr>
-
-{#{% for type, prototype in form.vars.prototypes %}#}
-    {#<div id="{{ type }}" data-prototype="{{ form_widget(prototype)|e }}">#}
-    {#</div>#}
-{#{% endfor %}#}

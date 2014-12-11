@@ -32,54 +32,49 @@ class ActionCollectionTypeSpec extends ObjectBehavior
         $this->beConstructedWith($registry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializabled()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionsBundle\Form\Type\ActionCollectionType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType');
     }
-    function it_should_be_a_form_type()
+
+    function it_is_configuration_collection_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType');
     }
-    function it_should_build_prototype(
+
+    function it_builds_prototypes(
         FormBuilderInterface $builder,
         FormBuilderInterface $prototype,
         FormInterface $form,
         $registry
     ) {
-        $registry->all()->willReturn(array(
-            ActionInterface::TYPE_FIXED_DISCOUNT => $prototype
-        ));
+        $registry->all()->willReturn(array('configuration_kind' => ''));
 
-        $builder->create(Argument::cetera())->willReturn($prototype);
+        $builder->create('name', 'sylius_promotion_action', array('configuration_type' => 'configuration_kind'))
+            ->willReturn($prototype);
+
         $prototype->getForm()->willReturn($form);
 
-        $builder->setAttribute('prototypes', array(
-            ActionInterface::TYPE_FIXED_DISCOUNT => $form
-        ))->shouldBeCalled();
+        $builder->setAttribute('prototypes', array('configuration_kind' => $form))->shouldBeCalled();
 
         $this->buildForm($builder, array(
             'registry' => $registry,
             'prototype_name' => 'name',
-            'type' => 'sylius_action_collection',
+            'type' => 'sylius_promotion_action',
             'options' => array(),
         ));
     }
 
-    function it_should_build_view(
+    function it_builds_view(
         FormConfigInterface $config,
         FormView $view,
         FormInterface $form,
         FormInterface $prototype
     ) {
-        $config->getAttribute('prototypes')
-            ->shouldBeCalled()
-            ->willReturn(array(
-                ActionInterface::TYPE_FIXED_DISCOUNT => $prototype
-            ));
-
         $form->getConfig()->willReturn($config);
-        $prototype->createView($view)->shouldBeCalled();
+        $config->getAttribute('prototypes')->willReturn(array('configuration_kind' => $prototype));
 
+        $prototype->createView($view)->shouldBeCalled();
 
         $this->buildView($view, $form, array());
     }
@@ -87,28 +82,22 @@ class ActionCollectionTypeSpec extends ObjectBehavior
     function it_should_have_default_option(OptionsResolverInterface $resolver)
     {
         $resolver
-            ->setOptional(array(
-                'action_type'
-            ))->shouldBeCalled();
-        $resolver
             ->setDefaults(array(
                 'type' => 'sylius_promotion_action',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'button_add_label' => 'sylius.promotion.add_action',
-                'action_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
             ))->shouldBeCalled()
         ;
         $this->setDefaultOptions($resolver);
     }
 
-    function it_should_have_parent()
+    function it_has_collection_as_parent()
     {
         $this->getParent()->shouldReturn('collection');
     }
 
-    function it_should_have_name()
+    function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_promotion_action_collection');
     }

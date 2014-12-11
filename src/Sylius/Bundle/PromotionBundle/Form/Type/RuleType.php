@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormListener;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Model\RuleInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -22,35 +21,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Promotion rule form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class RuleType extends AbstractResourceType
+class RuleType extends AbstractConfigurationType
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
-    protected $checkerRegistry;
-
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $checkerRegistry)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->checkerRegistry = $checkerRegistry;
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
             ->add('type', 'sylius_promotion_rule_choice', array(
                 'label' => 'sylius.form.rule.type',
                 'attr' => array(
-                    'data-form-collection' => 'update'
+                    'data-form-collection' => 'update',
                 ),
             ))
             ->addEventSubscriber(
-                new BuildRuleFormListener($this->checkerRegistry, $builder->getFormFactory(), $options['rule_type'])
+                new BuildRuleFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
             )
         ;
     }
@@ -62,12 +50,8 @@ class RuleType extends AbstractResourceType
     {
         parent::setDefaultOptions($resolver);
 
-        $resolver->setOptional(array(
-            'rule_type',
-        ));
-
         $resolver->setDefaults(array(
-            'rule_type' => RuleInterface::TYPE_ITEM_TOTAL,
+            'configuration_type' => RuleInterface::TYPE_ITEM_TOTAL,
         ));
     }
 
