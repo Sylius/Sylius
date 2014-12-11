@@ -22,8 +22,8 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "sylius/locale":            "0.12.*@dev",
-        "sylius/resource-bundle":   "0.12.*@dev",
+        "sylius/locale":            "0.13.*@dev",
+        "sylius/resource-bundle":   "0.13.*@dev",
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {
@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.12-dev"
+            "dev-master": "0.13-dev"
         }
     }
 }

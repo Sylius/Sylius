@@ -24,7 +24,7 @@
 
         "symfony/framework-bundle": "~2.3",
         "symfony/intl":             "~2.3",
-        "sylius/resource-bundle":   "0.12.*@dev",
+        "sylius/resource-bundle":   "0.13.*@dev",
         "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.12-dev"
+            "dev-master": "0.13-dev"
         }
     },
     "minimum-stability": "dev"

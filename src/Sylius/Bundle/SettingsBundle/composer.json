@@ -24,7 +24,7 @@
 
         "symfony/framework-bundle":        "~2.3",
         "doctrine/doctrine-cache-bundle":  "~1.0",
-        "sylius/resource-bundle":          "0.12.*@dev"
+        "sylius/resource-bundle":          "0.13.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",
@@ -42,7 +42,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.12-dev"
+            "dev-master": "0.13-dev"
         }
     },
     "minimum-stability": "dev"

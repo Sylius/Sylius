@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "0.12.*@dev"
+        "sylius/resource": "0.13.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -38,7 +38,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.12-dev"
+            "dev-master": "0.13-dev"
         }
     }
 }
