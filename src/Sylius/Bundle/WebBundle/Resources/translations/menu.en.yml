@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     backend:
         menu:
@@ -37,6 +40,7 @@ sylius:
                 users: Users
                 zones: Zones
             sidebar:
+                api_clients: API clients
                 assortment: Assortment
                 blocks: Blocks
                 configuration: Configuration

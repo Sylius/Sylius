@@ -80,7 +80,7 @@ sylius:
       products: Pregledaj proizvode
       users: Pregledaj korisnika
     statistics:
-      0: Statistika
+      header: Statistika
       orders_this_month: Narudžbe u trenutnom mjesecu
       registrations_this_month: Registracije u trenutnom mjesecu
       sales_this_month: Prodaja u trenutnom mjesecu

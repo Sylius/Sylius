@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     shipping_category:
         name:
@@ -15,3 +18,4 @@ sylius:
             max_length: 'Shipping method name must not be longer than {{ limit }} characters.'
             min_length: 'Shipping method name must be at least {{ limit }} characters long.'
             not_blank: 'Please enter shipping method name.'
+

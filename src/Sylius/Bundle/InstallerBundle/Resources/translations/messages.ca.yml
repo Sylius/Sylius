@@ -8,7 +8,9 @@ sylius:
   form:
     configuration:
       database:
+        header: Connexió a la base de dades
         driver:
+          header: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -20,12 +22,15 @@ sylius:
         port: Port
         user: Usuari
       locale:
+        header: Paràmetres locals
         currency: Moneda
         locale: Locale
       mailer:
+        header: Configuració de Mailer
         host: Host
         password: Contrasenya
         transport:
+          header: Transport
           gmail: Gmail
           mail: Correu
           sendmail: Sendmail
@@ -56,3 +61,4 @@ sylius:
         content: '<p>Benvingut al instal·lador de Sylius.</p>'
         header: 'Benvingut al <small> Instal·lador Sylius instal·lador</small>'
 €: €
+
