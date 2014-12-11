@@ -21,7 +21,7 @@ interface SequenceProviderInterface
     /**
      * Get the sequence for the specified type
      *
-     * @param string $type
+     * @param  string            $type
      * @return SequenceInterface
      */
     public function getSequence($type);

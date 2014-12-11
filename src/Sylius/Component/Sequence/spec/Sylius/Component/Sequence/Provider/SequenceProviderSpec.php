@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Component\Sequence\Provider;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -8,6 +17,9 @@ use Prophecy\Argument;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Sequence\Model\SequenceInterface;
 
+/**
+ * @author Daniel Richter <nexyz9@gmail.com>
+ */
 class SequenceProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository, ObjectManager $manager)

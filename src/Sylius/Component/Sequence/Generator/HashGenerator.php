@@ -46,7 +46,7 @@ class HashGenerator implements GeneratorInterface
         }
 
         do {
-            $number = $this->generateSegment(3) . '-' . $this->generateSegment(7) . '-' . $this->generateSegment(7);
+            $number = $this->generateSegment(3).'-'.$this->generateSegment(7).'-'.$this->generateSegment(7);
         } while ($this->subjectRepository->isNumberUsed($number));
 
         $subject->setNumber($number);

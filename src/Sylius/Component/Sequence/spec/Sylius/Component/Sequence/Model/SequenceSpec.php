@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
  */
 class SequenceSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->beConstructedWith('order');
     }

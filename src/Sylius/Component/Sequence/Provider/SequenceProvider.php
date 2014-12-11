@@ -38,7 +38,7 @@ class SequenceProvider implements SequenceProviderInterface
      * Constructor.
      *
      * @param RepositoryInterface $sequenceRepository
-     * @param ObjectManager $sequenceManager
+     * @param ObjectManager       $sequenceManager
      */
     public function __construct(
         RepositoryInterface $sequenceRepository,

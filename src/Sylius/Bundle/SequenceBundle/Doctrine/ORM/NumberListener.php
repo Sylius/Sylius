@@ -56,7 +56,7 @@ class NumberListener
 
     /**
      * @param ServiceRegistryInterface $registry
-     * @param EventManager $eventManager
+     * @param EventManager             $eventManager
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(

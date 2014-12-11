@@ -46,8 +46,8 @@ class SequentialGenerator implements GeneratorInterface
      * Constructor.
      *
      * @param SequenceProviderInterface $sequenceProvider
-     * @param integer $numberLength
-     * @param integer $startNumber
+     * @param integer                   $numberLength
+     * @param integer                   $startNumber
      */
     public function __construct(SequenceProviderInterface $sequenceProvider, $numberLength = 9, $startNumber = 1)
     {
@@ -73,7 +73,7 @@ class SequentialGenerator implements GeneratorInterface
     }
 
     /**
-     * @param integer $number
+     * @param  integer $number
      * @return string
      */
     protected function formatNumber($number)
