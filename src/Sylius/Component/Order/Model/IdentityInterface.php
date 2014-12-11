@@ -42,7 +42,7 @@ interface IdentityInterface
     /**
      * Set identity value
      *
-     * @return string
+     * @return OrderInterface
      */
     public function setValue($value);
 

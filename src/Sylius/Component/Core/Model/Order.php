@@ -533,5 +533,4 @@ class Order extends Cart implements OrderInterface
     {
         return $this->promotions;
     }
-
 }

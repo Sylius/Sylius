@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Order\Model;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\IdentityInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
@@ -93,12 +94,36 @@ class OrderSpec extends ObjectBehavior
         $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
     }
 
+    function it_creates_identities_collection_by_default()
+    {
+        $this->getIdentities()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
+    }
+
+    function it_adds_identities_properly(IdentityInterface $identity)
+    {
+        $this->hasIdentity($identity)->shouldReturn(false);
+
+        $this->addIdentity($identity);
+        $this->hasIdentity($identity)->shouldReturn(true);
+    }
+
     function it_adds_items_properly(OrderItemInterface $item)
     {
         $this->hasItem($item)->shouldReturn(false);
 
         $this->addItem($item);
         $this->hasItem($item)->shouldReturn(true);
+    }
+
+    function it_removes_identities_properly(IdentityInterface $identity)
+    {
+        $this->hasIdentity($identity)->shouldReturn(false);
+
+        $this->addIdentity($identity);
+        $this->hasIdentity($identity)->shouldReturn(true);
+
+        $this->removeIdentity($identity);
+        $this->hasIdentity($identity)->shouldReturn(false);
     }
 
     function it_removes_items_properly(OrderItemInterface $item)

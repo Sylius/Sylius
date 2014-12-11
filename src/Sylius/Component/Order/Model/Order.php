@@ -663,4 +663,17 @@ class Order implements OrderInterface
     {
         return $this->identities;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeIdentity(IdentityInterface $identity)
+    {
+        if ($this->hasIdentity($identity)) {
+            $identity->setOrder(null);
+            $this->identities->removeElement($identity);
+        }
+
+        return $this;
+    }
 }

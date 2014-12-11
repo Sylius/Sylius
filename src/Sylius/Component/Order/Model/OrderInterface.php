@@ -198,6 +198,13 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     public function addIdentity(IdentityInterface $identity);
 
     /**
+     * Remove identity from order.
+     *
+     * @param IdentityInterface $item
+     */
+    public function removeIdentity(IdentityInterface $identity);
+
+    /**
      * Is the identity already contained in this order?
      *
      * @param IdentityInterface $identity

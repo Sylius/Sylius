@@ -50,7 +50,7 @@
 
         <one-to-many field="identities" target-entity="Sylius\Component\Order\Model\IdentityInterface" mapped-by="order" orphan-removal="true">
             <cascade>
-                <cascade-all/>
+                <cascade-persist/>
             </cascade>
         </one-to-many>
 
