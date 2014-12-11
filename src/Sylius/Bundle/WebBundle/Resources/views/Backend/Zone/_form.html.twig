@@ -1,39 +1,17 @@
-{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
-
 {{ form_errors(form) }}
+
 <fieldset>
     <div class="row">
         <div class="col-md-6">
             {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-            {{ form_row(form.type) }}
+            {{ form_row(form.type, {'attr': {'data-form-prototype': 'update', 'data-form-prototype-prefix': 'sylius_zone_member_'}}) }}
 
             {% if form.scope is defined %}
             {{ form_row(form.scope) }}
             {% endif %}
         </div>
         <div class="col-md-6">
-            <div class="control-group">
-                {% for type in ['country', 'province', 'zone'] %}
-                    <div id="sylius-zone-members-{{ type }}" data-prototype="{{ form_widget(form.members.vars.prototypes['sylius_zone_member_' ~ type], {'attr': {'class': 'select2 input-large'}})|e }}">
-                        {% if form.type.vars.value == type %}
-                            {% for member in form.members %}
-                                {% if member.offsetExists(form.type.vars.value) %}
-                                    <div class="sylius-zone-members-{{ form.type.vars.value }} row" style="margin-bottom: 10px;">
-                                        <div class="col-md-11">
-                                            {{ form_widget(member[form.type.vars.value], {'attr': {'class': 'select2 float-right input-large'}}) }}
-                                        </div>
-                                        <div class="col-md-1">
-                                            <a href="#" class="btn btn-danger float-left" data-collection-button="delete" data-collection="sylius-zone-members" data-collection-item="{{ form.type.vars.value }}"><i class="glyphicon glyphicon-trash icon-white"></i></a>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                {% endfor %}
-                {% set prototypeId = 'sylius-zone-members-' ~ form.type.vars.value|default(constant('Sylius\\Component\\Addressing\\Model\\ZoneInterface::TYPE_COUNTRY')) %}
-                <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="{{ prototypeId }}" data-collection="{{ prototypeId }}">{{ 'sylius.zone.add_member'|trans }}</a>
-            </div>
+            {{ form_row(form.members) }}
         </div>
     </div>
 </fieldset>

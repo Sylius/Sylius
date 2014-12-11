@@ -12,6 +12,9 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -36,19 +39,11 @@ class ZoneMemberCollectionTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver
-            ->setDefaults(
-                array(
-                    'allow_add'      => true,
-                    'allow_delete'   => true,
-                    'by_reference'   => false,
-                    'prototype'      => true,
-                    'prototype_name' => '__name__',
-                    'type_name'      => '_type',
-                    'options'        => array(),
-                )
-            )
-            ->shouldBeCalled();
+        $resolver->setDefaults(array(
+            'allow_add'    => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+        ))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
     }
