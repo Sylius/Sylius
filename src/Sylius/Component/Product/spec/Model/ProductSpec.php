@@ -304,29 +304,8 @@ class ProductSpec extends ObjectBehavior
         $this->setDeletedAt($date)->shouldReturn($this);
     }
 
-    function it_allows_to_add_assoication(Association $association1, Association $association2)
+    function it_should_initialize_associations_collection_by_default()
     {
-        $this
-            ->addAssociation($association1)
-            ->addAssociation($association2)
-        ;
-
-        $this->getAssociations()->shouldReturn(array(
-            $association1,
-            $association2
-        ));
-    }
-
-    function it_allows_to_remove_assoication(Association $association1, Association $association2)
-    {
-        $this
-            ->addAssociation($association1)
-            ->addAssociation($association2)
-            ->removeAssociation($association2)
-        ;
-
-        $this->getAssociations()->shouldReturn(array(
-            $association1
-        ));
+        $this->getAssociations()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 }

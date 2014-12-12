@@ -41,7 +41,7 @@ class ProductAssociationContext extends DefaultContext
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
-       ;
+        ;
         $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $typeName));
         if (!$associationType) {
             throw new \InvalidArgumentException(sprintf('Association Type %s does not exists and it should', $typeName));
@@ -79,7 +79,7 @@ class ProductAssociationContext extends DefaultContext
      */
     public function iWantToAssignNewAssociationForProduct($productName)
     {
-        $this->currentProduct = $this->getRepository('Product')->findOneBy(['name' => $productName]);
+        $this->currentProduct = $this->getRepository('Product')->findOneBy(array('name' => $productName));
     }
 
     /**
@@ -91,8 +91,8 @@ class ProductAssociationContext extends DefaultContext
             throw new \RuntimeException('Current product have to be set first. Please run \'I want to assign new association for "<product name>" product\' first');
         }
 
-        $associatedProduct = $this->getRepository('Product')->findOneBy(['name' => $associatedProductName]);
-        $associationType = $this->getRepository('AssociationType')->findOneBy(['name' => $associationTypeName]);
+        $associatedProduct = $this->getRepository('Product')->findOneBy(array('name' => $associatedProductName));
+        $associationType = $this->getRepository('AssociationType')->findOneBy(array('name' => $associationTypeName));
 
         $this->currentProduct->addAssociation(new ProductAssociation($associatedProduct, $associationType));
 

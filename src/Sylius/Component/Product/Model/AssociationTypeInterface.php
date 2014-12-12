@@ -11,8 +11,17 @@
 
 namespace Sylius\Component\Product\Model;
 
-interface AssociationTypeInterface
+use Sylius\Component\Resource\Model\TimestampableInterface;
+
+interface AssociationTypeInterface extends TimestampableInterface
 {
+    /**
+     * @param string $name
+     */
     public function setName($name);
+
+    /**
+     * @return string
+     */
     public function getName();
-} 
+}

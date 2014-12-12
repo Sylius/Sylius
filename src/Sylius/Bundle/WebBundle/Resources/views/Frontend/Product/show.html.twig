@@ -119,6 +119,13 @@
             {% endif %}
         {% endif %}
     </div>
+    {% if product.associations|length > 0 %}
+    <div class="col-md-10 col-md-offset-1">
+        {% for association in product.associations %}
+            {% include 'SyliusWebBundle:Frontend/Product:_single.html.twig' with {'product': association.associatedObject} %}
+        {% endfor %}
+    </div>
+    {% endif %}
 </form>
 </div>
 {% endblock %}

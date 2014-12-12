@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ProductBundle\Doctrine\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata as ODMClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadata as ORMClassMetadata;
 
 /**
  * Doctrine subscriber which able to add own association object
@@ -43,12 +45,9 @@ class AssociationInheritanceMetadataSubscriber implements EventSubscriber
 
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        /**
-         * @var \Doctrine\ORM\Mapping\ClassMetadata|\Doctrine\ODM\MongoDB\Mapping\ClassMetadata $metadata
-         */
+        /** @var $metadata ORMClassMetadata|ODMClassMetadata */
         $metadata = $eventArgs->getClassMetadata();
-
-        if ($metadata->getName() !== self::ASSOCIATION_CLASS_NAME) {
+        if (self::ASSOCIATION_CLASS_NAME !== $metadata->getName()) {
             return;
         }
 

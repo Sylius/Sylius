@@ -25,26 +25,28 @@ class ProductAssociation extends Association
 
     /**
      * @param ProductInterface $product
-     * @param AssociationType $type
+     * @param AssociationType  $type
      */
     public function __construct(ProductInterface $product, AssociationType $type)
     {
         parent::__construct($type);
+
         $this->product = $product;
     }
 
     /**
      * @return ProductInterface
      */
-    final public function getAssociatedObject()
+    public function getAssociatedObject()
     {
         return $this->product;
     }
 
-    final public function setAssociatedObject(ProductInterface $product)
+    /**
+     * @param ProductInterface $product
+     */
+    public function setAssociatedObject(ProductInterface $product)
     {
         $this->product = $product;
-
-        return $this;
     }
 }

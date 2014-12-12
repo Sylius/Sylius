@@ -24,9 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AssociationTypeController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
-     * @return RedirectResponse|Response
+     * {@inheritdoc}
      */
     public function createAction(Request $request)
     {

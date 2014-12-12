@@ -118,7 +118,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @return null|ArchetypeInterface
+     * {@inheritdoc}
      */
     public function getArchetype()
     {
@@ -126,7 +126,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|ArchetypeInterface $archetype
+     * {@inheritdoc}
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -499,6 +499,38 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addAssociation(Association $association)
+    {
+        if (!$this->associations->contains($association)) {
+            $this->associations[] = $association;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociation(Association $association)
+    {
+        if ($this->associations->contains($association)) {
+            $this->associations->removeElement($association);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociations()
+    {
+        return $this->associations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -564,38 +596,6 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected function getTranslationClass()
     {
         return get_class().'Translation';
-    }
-
-    /**
-     * @param Association $association
-     *
-     * @return self
-     */
-    public function addAssociation(Association $association)
-    {
-        $this->associations[] = $association;
-
-        return $this;
-    }
-
-    /**
-     * @param Association $association
-     *
-     * @return self
-     */
-    public function removeAssociation(Association $association)
-    {
-        $this->associations->removeElement($association);
-
-        return $this;
-    }
-
-    /**
-     * @return Association[]
-     */
-    public function getAssociations()
-    {
-        return $this->associations->toArray();
     }
 
     public function __toString()

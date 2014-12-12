@@ -19,27 +19,37 @@ namespace Sylius\Component\Product\Model;
 class AssociationType implements AssociationTypeInterface
 {
     /**
-     * @var mixed
+     * Association type id.
+     *
+     * @var int
      */
     protected $id;
 
     /**
+     * Association type name.
+     *
      * @var string
      */
     protected $name;
 
     /**
+     * Creation time.
+     *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
+     * Last update time.
+     *
      * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var null|\DateTime
+     * Deletion time.
+     *
+     * @var \DateTime
      */
     protected $deletedAt;
 
@@ -48,31 +58,79 @@ class AssociationType implements AssociationTypeInterface
      */
     public function __construct($name)
     {
-        $this->setName($name);
+        $this->name = $name;
         $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
     }
 
     /**
-     * @return string
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
-        if (null === $name || !trim(str_replace(array("\n", "\t"), '', $name))) {
-            throw new \InvalidArgumentException('Association type name cannot be empty.');
-        }
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getId()
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
     {
-        return $this->id;
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
     }
 }

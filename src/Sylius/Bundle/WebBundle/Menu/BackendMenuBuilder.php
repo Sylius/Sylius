@@ -155,7 +155,7 @@ class BackendMenuBuilder extends MenuBuilder
             $menu->removeChild('assortment');
         }
 
-        $child->addChild('association types', array(
+        $child->addChild('association_types', array(
             'route' => 'sylius_backend_association_type_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.association_type', $section)));

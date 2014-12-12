@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ProductBundle\Doctrine\EventListener;
 
 use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata as BaseClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -24,6 +25,7 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
             'group'   => 'Cocoders\GroupProductAssociation\Model\GroupAssociation'
         ));
     }
+
     function it_is_doctrine_event_subcriber()
     {
         $this->shouldHaveType('Doctrine\Common\EventSubscriber');
@@ -39,8 +41,7 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
     function it_set_discriminator_map_to_parent_association_mapping(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Sylius\Component\Product\Model\Association');
 
@@ -58,8 +59,7 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
     function it_does_not_set_discriminator_map_to_other_objects(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Sylius\Component\Product\Model\Product');
 
@@ -72,7 +72,7 @@ class AssociationInheritanceMetadataSubscriberSpec extends ObjectBehavior
 /**
  * Mock object - setDiscriminatorMap method is in ODM and ORM ClassMetadata but there is not such method in Common one.
  */
-abstract class ClassMetadata implements \Doctrine\Common\Persistence\Mapping\ClassMetadata
+abstract class ClassMetadata implements BaseClassMetadata
 {
     abstract public function setDiscriminatorMap(array $map);
 }
