@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Abstract resource bundle.
@@ -80,7 +81,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      *
      * @return string
      */
-    abstract protected function getBundlePrefix();
+    protected function getBundlePrefix()
+    {
+        $className = get_class($this);
+        $classBaseName = substr(strrchr($className, '\\'), 1, -6);
+
+        return Container::underscore($classBaseName);
+    }
 
     /**
      * Target entities resolver configuration (Interface - Model)
