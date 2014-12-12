@@ -34,14 +34,6 @@ class SyliusApiBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_api';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelInterfaces()
     {
         return array(

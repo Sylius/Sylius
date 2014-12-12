@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * Product management bundle with highly flexible architecture.
  * Implements basic product model with properties support.
  *
- * Use *SyliusVariableProductBundle* to get variants, options and
+ * Use *SyliusVariationBundle* to get variants, options and
  * customizations support.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -33,7 +33,7 @@ class SyliusProductBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -45,14 +45,6 @@ class SyliusProductBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new ValidatorPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_product';
     }
 
     /**

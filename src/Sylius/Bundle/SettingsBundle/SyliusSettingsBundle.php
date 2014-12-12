@@ -29,7 +29,7 @@ class SyliusSettingsBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -41,14 +41,6 @@ class SyliusSettingsBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterSchemasPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_settings';
     }
 
     /**
