@@ -27,15 +27,7 @@ class SyliusContentBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
+            SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_content';
     }
 }

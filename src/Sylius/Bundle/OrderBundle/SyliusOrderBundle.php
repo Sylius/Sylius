@@ -34,14 +34,6 @@ class SyliusOrderBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_order';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelInterfaces()
     {
         return array(

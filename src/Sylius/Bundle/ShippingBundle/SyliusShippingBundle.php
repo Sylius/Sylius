@@ -33,7 +33,7 @@ class SyliusShippingBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -46,14 +46,6 @@ class SyliusShippingBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterCalculatorsPass());
         $container->addCompilerPass(new RegisterRuleCheckersPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_shipping';
     }
 
     /**

@@ -28,16 +28,8 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     {
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM
+            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_inventory';
     }
 
     /**

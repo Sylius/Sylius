@@ -29,7 +29,7 @@ class SyliusTaxationBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -41,14 +41,6 @@ class SyliusTaxationBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterCalculatorsPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_taxation';
     }
 
     /**

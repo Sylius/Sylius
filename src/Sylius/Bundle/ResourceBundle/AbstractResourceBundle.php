@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Sylius\Component\Resource\Exception\Driver\UnknownDriverException;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -30,6 +31,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
 
     /**
      * Configure format of mapping files.
+     *
      * @var string
      */
     protected $mappingFormat = self::MAPPING_XML;
@@ -76,14 +78,17 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return the prefix of the bundle
+     * Return the prefix of the bundle.
      *
      * @return string
      */
-    abstract protected function getBundlePrefix();
+    protected function getBundlePrefix()
+    {
+        return Container::underscore(substr(strrchr(get_class($this), '\\'), 1, -6));
+    }
 
     /**
-     * Target entities resolver configuration (Interface - Model)
+     * Target entities resolver configuration (Interface - Model).
      *
      * @return array
      */
@@ -93,7 +98,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return the directory where are stored the doctrine mapping
+     * Return the directory where are stored the doctrine mapping.
      *
      * @return string
      */
@@ -103,7 +108,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return the entity namespace
+     * Return the entity namespace.
      *
      * @return string
      */
@@ -113,7 +118,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return informations used to initialize mapping driver
+     * Return information's used to initialize mapping driver.
      *
      * @param string $driverType
      *
@@ -145,7 +150,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     }
 
     /**
-     * Return the absolute path where are stored the doctrine mapping
+     * Return the absolute path where are stored the doctrine mapping.
      *
      * @return string
      */

@@ -34,14 +34,6 @@ class SyliusSearchBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_search';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelInterfaces()
     {
         return array(
