@@ -85,7 +85,7 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     private function setAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
-            if (isset($this->savedAssociations[$metadata->name])) {
+            if (isset($this->savedAssociations[$parent])) {
                 foreach ($this->savedAssociations[$parent] as $key => $mapping) {
                     $metadata->associationMappings[$key] = $mapping;
                 }
