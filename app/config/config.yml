@@ -23,7 +23,7 @@ framework:
 twig:
     form:
         resources:
-            - SyliusWebBundle::forms.html.twig
+            - SyliusWebBundle:Common:forms.html.twig
             - SyliusResourceBundle::forms.html.twig
             - CmfMediaBundle:Form:fields.html.twig
     debug:            %kernel.debug%

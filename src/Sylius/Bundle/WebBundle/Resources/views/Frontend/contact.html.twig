@@ -1,16 +1,12 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
-{% form_theme form 'SyliusWebBundle::forms.html.twig' %}
-
 {% block content %}
-
 <div class="page-header">
     <h1>Contact</h1>
 </div>
 
 
 <form action="{{ path('sylius_contact') }}" method="post" class="form-horizontal" novalidate>
-
     {{ form_errors(form) }}
 
     {{ form_row(form.topic) }}
