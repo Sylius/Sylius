@@ -25,6 +25,8 @@
         <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
         <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
+        <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
+        <parameter key="sylius.form.extension.date.class">Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
 
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
@@ -70,11 +72,12 @@
         </service>
 
         <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
-            <argument /> <!-- Argument set by compiler pass -->
+            <argument type="service" id="doctrine" />
             <tag name="form.type" alias="entity_hidden" />
         </service>
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
-        <service id="sylius.form.extension.collection" class="%sylius.form.extension.collection.class%">
+        <service id="sylius.form.extension.collection"
+                 class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />
         </service>
     </services>
