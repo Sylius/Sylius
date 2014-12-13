@@ -14,6 +14,7 @@ namespace Sylius\Component\Variation\Generator;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 
 /**
  * Abstract variant generator service implementation.
@@ -39,13 +40,20 @@ class VariantGenerator implements VariantGeneratorInterface
     protected $variantRepository;
 
     /**
+     * @var SetBuilderInterface
+     */
+    private $setBuilder;
+
+    /**
      * Constructor.
      *
      * @param RepositoryInterface $variantRepository
+     * @param SetBuilderInterface $setBuilder
      */
-    public function __construct(RepositoryInterface $variantRepository)
+    public function __construct(RepositoryInterface $variantRepository, SetBuilderInterface $setBuilder)
     {
         $this->variantRepository = $variantRepository;
+        $this->setBuilder = $setBuilder;
     }
 
     /**
@@ -67,7 +75,7 @@ class VariantGenerator implements VariantGeneratorInterface
             }
         }
 
-        $permutations = $this->getPermutations($optionSet);
+        $permutations = $this->setBuilder->build($optionSet);
 
         foreach ($permutations as $permutation) {
             $variant = $this->variantRepository->createNew();
@@ -96,50 +104,5 @@ class VariantGenerator implements VariantGeneratorInterface
      */
     protected function process(VariableInterface $variable, VariantInterface $variant)
     {
-    }
-
-    /**
-     * Get all permutations of option set.
-     * Cartesian product.
-     *
-     * @param array   $array
-     * @param Boolean $recursing
-     *
-     * @return array
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function getPermutations($array, $recursing = false)
-    {
-        $countArrays = count($array);
-
-        if (1 === $countArrays) {
-            return reset($array);
-        } elseif (0 === $countArrays) {
-            throw new \InvalidArgumentException('At least one array is required.');
-        }
-
-        $keys = array_keys($array);
-
-        $a = array_shift($array);
-        $k = array_shift($keys);
-
-        $b = $this->getPermutations($array, true);
-
-        $result = array();
-
-        foreach ($a as $valueA) {
-            if ($valueA) {
-                foreach ($b as $valueB) {
-                    if ($recursing) {
-                        $result[] = array_merge(array($valueA), (array) $valueB);
-                    } else {
-                        $result[] = array($k => $valueA) + array_combine($keys, (array) $valueB);
-                    }
-                }
-            }
-        }
-
-        return $result;
     }
 }

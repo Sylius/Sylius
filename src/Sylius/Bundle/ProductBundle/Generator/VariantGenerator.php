@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Generator;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 use Sylius\Component\Variation\Generator\VariantGenerator as BaseVariantGenerator;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
@@ -44,12 +45,13 @@ class VariantGenerator extends BaseVariantGenerator
      * Constructor.
      *
      * @param RepositoryInterface      $variantRepository
+     * @param SetBuilderInterface      $setBuilder
      * @param ValidatorInterface       $validator
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(RepositoryInterface $variantRepository, ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher)
+    public function __construct(RepositoryInterface $variantRepository, SetBuilderInterface $setBuilder, ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher)
     {
-        parent::__construct($variantRepository);
+        parent::__construct($variantRepository, $setBuilder);
 
         $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
