@@ -1,3 +1,28 @@
+{% block email_widget %}
+    <div class="input-group">
+        <span class="input-group-addon">@</span>
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block money_widget %}
+    {% spaceless %}
+        <div class="input-group">
+            <span class="input-group-addon">{{ money_pattern|replace({'{{ widget }}': ''}) }}</span>
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endspaceless %}
+{% endblock money_widget %}
+
+{% block percent_widget %}
+    {% spaceless %}
+        <div class="input-group">
+            <span class="input-group-addon">%</span>
+            {{ block('form_widget_simple') }}
+        </div>
+    {% endspaceless %}
+{% endblock percent_widget %}
+
 {% block collection_widget -%}
     {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
