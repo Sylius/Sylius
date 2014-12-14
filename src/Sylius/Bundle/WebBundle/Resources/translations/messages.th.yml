@@ -134,7 +134,7 @@ sylius:
       index: คูปอง
     property:
       index: คุณสมบัติ
-    prototype:
+    archetype:
       index: แบบตัวอย่าง
     sales: ขาย
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: ชนิด
     update_header: แก้ไขคุณสมบัติ
     updated_at: ปรับปรุงล่าสุด
-  prototype:
+  archetype:
     build: สร้างต้นแบบ
     build_header: สร้างสินค้าจากต้นแบบ
     create: สร้างต้นแบบ

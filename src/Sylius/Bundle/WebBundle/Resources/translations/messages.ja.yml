@@ -96,8 +96,8 @@ sylius:
       index: sylius.breadcrumb.promotion_coupon.index
     property:
       index: sylius.breadcrumb.property.index
-    prototype:
-      index: sylius.breadcrumb.prototype.index
+    archetype:
+      index: sylius.breadcrumb.archetype.index
     sales: sylius.breadcrumb.sales
     shipment:
       index: sylius.breadcrumb.shipment.index
@@ -423,7 +423,7 @@ sylius:
     type: タイプ
     update_header: 商品プロパティの編集
     updated_at: 最終更新日時
-  prototype:
+  archetype:
     build: プロトタイプから商品を登録する
     build_header: プロトタイプから商品を登録
     create: 商品プロトタイプを登録する

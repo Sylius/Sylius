@@ -13,5 +13,5 @@ sylius:
       presentation: Nazwa publiczna
     option_value:
       value: Wartość
-    prototype:
+    archetype:
       options: Warianty

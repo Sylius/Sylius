@@ -62,6 +62,9 @@ class LoadMetadataSubscriber implements EventSubscriber
         $this->mapManyToOne($metadata);
     }
 
+    /**
+     * @param ClassMetadata $metadata
+     */
     private function mapOneToMany(ClassMetadata $metadata)
     {
         foreach ($this->variables as $class) {
@@ -69,15 +72,20 @@ class LoadMetadataSubscriber implements EventSubscriber
                 continue;
             }
 
-            $metadata->mapOneToMany(array(
-                'fieldName'    => 'values',
+            $mapping = array(
+                'fieldName' => 'values',
                 'targetEntity' => $class['option_value']['model'],
-                'mappedBy'     => 'option',
-                'cascade'      => array('all')
-            ));
+                'mappedBy' => 'option',
+                'cascade' => array('all')
+            );
+
+            $metadata->mapOneToMany($mapping);
         }
     }
 
+    /**
+     * @param ClassMetadata $metadata
+     */
     private function mapManyToOne(ClassMetadata $metadata)
     {
         foreach ($this->variables as $class) {
@@ -85,20 +93,25 @@ class LoadMetadataSubscriber implements EventSubscriber
                 continue;
             }
 
-            $metadata->mapManyToOne(array(
-                'fieldName'    => 'option',
+            $mapping = array(
+                'fieldName' => 'option',
                 'targetEntity' => $class['option']['model'],
-                'inversedBy'   => 'values',
-                'joinColumns'  => array(array(
-                    'name'                 => 'option_id',
+                'inversedBy' => 'values',
+                'joinColumns' => array(array(
+                    'name' => 'option_id',
                     'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE'
                 ))
-            ));
+            );
+
+            $metadata->mapManyToOne($mapping);
         }
     }
 
+    /**
+     * @param ClassMetadata $metadata
+     */
     private function mapManyToMany(ClassMetadata $metadata)
     {
         foreach ($this->variables as $variable => $class) {

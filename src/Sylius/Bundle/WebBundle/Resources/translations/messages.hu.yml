@@ -134,7 +134,7 @@ sylius:
       index: Kuponok
     property:
       index: Tulajdonságok
-    prototype:
+    archetype:
       index: Prototípusok
     sales: Értékesítés
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: típus
     update_header: Tulajdonság szerkesztése
     updated_at: Utolsó frissítés
-  prototype:
+  archetype:
     build: Prototípus felépítése
     build_header: Termék felépítése prototípusból
     create: Prototípus létrehozása

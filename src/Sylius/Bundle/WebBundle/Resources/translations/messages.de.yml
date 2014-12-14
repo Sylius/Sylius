@@ -134,8 +134,8 @@ sylius:
       index: Gutscheine
     property:
       index: Eigenschaften
-    prototype:
-      index: Prototypen
+    archetype:
+      index: archetypen
     sales: Verkäufe
     shipment:
       index: Lieferungen
@@ -554,12 +554,12 @@ sylius:
     type: Eigenschaftstyp
     update_header: Eigenschaft editieren
     updated_at: Erstellt
-  prototype:
+  archetype:
     build: Entwerfen
-    build_header: Prototypen entwerfen
+    build_header: archetypen entwerfen
     create: Erstellen
     create_header: Prototyp erstellen
-    index_header: Prototypen
+    index_header: archetypen
     name: Name
     no_results: Keine Ergebnisse
     options: Optionen

@@ -46,7 +46,7 @@ sylius:
       not_blank: Bitte wählen Sie eine Einstellung.
     value:
       not_blank: Bitte geben Sie einen Wert für diese Einstellung an.
-  prototype:
+  archetype:
     name:
       not_blank: Bitte geben Sie einen Namen für dieses Muster an.
       min_length: 'Der Name des Musters muss mindestens 1 Zeichen lang sein.|Der Name des Musters muss mindestens {{ limit }} Zeichen lang sein.'

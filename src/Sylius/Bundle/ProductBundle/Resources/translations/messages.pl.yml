@@ -13,6 +13,6 @@ sylius:
     property:
       name: Nazwa w systemie
       presentation: Nazwa publiczna
-    prototype:
+    archetype:
       name: Nazwa
       properties: Właściwości

@@ -11,10 +11,9 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
+use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
 
 /**
  * Basic product interface.
@@ -22,8 +21,7 @@ use Sylius\Component\Variation\Model\VariableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductInterface extends
-    AttributeSubjectInterface,
-    VariableInterface,
+    ArchetypeSubjectInterface,
     SoftDeletableInterface,
     TimestampableInterface
 {

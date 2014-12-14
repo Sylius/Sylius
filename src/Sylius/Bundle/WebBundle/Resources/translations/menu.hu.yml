@@ -23,7 +23,7 @@ sylius:
         products: Termékek
         promotions: Promóciók
         properties: Tulajdonságok beállítása
-        prototypes: Termék prototípusok
+        archetypes: Termék prototípusok
         sales: Rendelések
         shipments: Szállítások
         shipping_categories: Szállítási kategóriák
@@ -58,7 +58,7 @@ sylius:
         products: Termékek
         promotions: Promóciók
         properties: Tulajdonságok beállítása
-        prototypes: Termék prototípusok
+        archetypes: Termék prototípusok
         sales: Rendelések
         shipments: Szállítások
         shipping_categories: Szállítási kategóriák

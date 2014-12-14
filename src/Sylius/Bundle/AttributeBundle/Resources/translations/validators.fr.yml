@@ -46,7 +46,7 @@ sylius:
       not_blank: Veuillez choisir une propriété.
     value:
       not_blank: Veuillez saisir la propriété du produit.
-  prototype:
+  archetype:
     name:
       not_blank: Veuillez saisir le nom du prototype.
       min_length: 'Le nom du prototype de la propriété ne doit pas dépasser 1 caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'

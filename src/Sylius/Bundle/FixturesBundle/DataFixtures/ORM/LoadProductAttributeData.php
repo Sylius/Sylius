@@ -77,6 +77,7 @@ class LoadProductAttributeData extends DataFixture
     {
         /* @var $attribute AttributeInterface */
         $attribute = $this->getProductAttributeRepository()->createNew();
+
         $attribute->setName($name);
         $attribute->setPresentation($presentation);
 

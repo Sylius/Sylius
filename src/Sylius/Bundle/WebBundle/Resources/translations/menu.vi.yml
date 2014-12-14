@@ -21,7 +21,7 @@ sylius:
         payments: Thanh toán
         products: Sản phẩm
         promotions: Chương trình khuyến mãi
-        prototypes: Sản phẩm mẫu
+        archetypes: Sản phẩm mẫu
         sales: Đơn đặt hàng
         shipments: Vận chuyển
         shipping_categories: Thể loại
@@ -43,7 +43,7 @@ sylius:
         payments: Thanh toán
         products: Sản phẩm
         promotions: Chương trình khuyến mãi
-        prototypes: Sản phẩm mẫu
+        archetypes: Sản phẩm mẫu
         sales: Đơn đặt hàng
         shipments: Vận chuyển
         shipping_categories: Thể loại

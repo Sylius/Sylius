@@ -1,5 +1,6 @@
 suites:
     Addressing       : { namespace: Sylius, spec_path: src/Sylius/Component/Addressing }
+    Archetype        : { namespace: Sylius, spec_path: src/Sylius/Component/Archetype }
     Attribute        : { namespace: Sylius, spec_path: src/Sylius/Component/Attribute }
     Cart             : { namespace: Sylius, spec_path: src/Sylius/Component/Cart }
     Core             : { namespace: Sylius, spec_path: src/Sylius/Component/Core }
@@ -26,6 +27,7 @@ suites:
     Variation        : { namespace: Sylius, spec_path: src/Sylius/Component/Variation }
 
     AddressingBundle : { namespace: Sylius, spec_path: src/Sylius/Bundle/AddressingBundle }
+    ArchetypeBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/ArchetypeBundle }
     AttributeBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/AttributeBundle }
     CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
     CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }

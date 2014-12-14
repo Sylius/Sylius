@@ -307,7 +307,7 @@ sylius:
         type: тип
         update_header: Ажурирање атрибута
         updated_at: ажурирано
-    prototype:
+    archetype:
         build: Креирај прототип
         build_header: Креирајте производ од прототипа
         create: Креирај прототип

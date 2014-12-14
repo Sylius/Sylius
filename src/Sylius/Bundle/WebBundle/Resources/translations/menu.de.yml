@@ -23,7 +23,7 @@ sylius:
         products: Produkte
         promotions: Aktionen
         properties: Eigenschaften
-        prototypes: Prototypen
+        archetypes: archetypen
         sales: Aufträge
         shipments: Lieferungen
         shipping_categories: Versandgruppen
@@ -58,7 +58,7 @@ sylius:
         products: Produkte
         promotions: Aktionen
         properties: Eigenschaten
-        prototypes: Prototypen
+        archetypes: archetypen
         sales: Aufträge
         shipments: Lieferungen
         shipping_categories: Versandgruppen

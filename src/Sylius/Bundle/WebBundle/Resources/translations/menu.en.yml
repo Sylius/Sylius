@@ -24,7 +24,7 @@ sylius:
                 products: Products
                 promotions: Promotions
                 attributes: Configure attributes
-                prototypes: Product prototypes
+                archetypes: Product archetypes
                 sales: Orders
                 shipments: Shipments
                 shipping_categories: Shipping categories
@@ -62,7 +62,7 @@ sylius:
                 products: Products
                 promotions: Promotions
                 attributes: Configure attributes
-                prototypes: Product prototypes
+                archetypes: Product archetypes
                 sales: Orders
                 shipments: Shipments
                 shipping_categories: Shipping categories

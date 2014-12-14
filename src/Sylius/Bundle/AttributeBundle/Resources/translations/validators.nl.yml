@@ -46,7 +46,7 @@ sylius:
       not_blank: Selecteer een eigenschap.
     value:
       not_blank: Voer een eigenschap waarde in.
-  prototype:
+  archetype:
     name:
       not_blank: Voer een prototype naam in.
       min_length: 'Prototype naam moet minstens 1 teken lang zijn.|Prototype naam moet minstens {{ limit }} tekens lang zijn.'

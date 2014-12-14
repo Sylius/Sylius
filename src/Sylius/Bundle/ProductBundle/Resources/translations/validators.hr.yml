@@ -46,7 +46,7 @@ sylius:
       not_blank: Odaberite opciju artikla.
     value:
       not_blank: Unesite vrijednost opcije artikla.
-  prototype:
+  archetype:
     name:
       not_blank: Unesite naziv prototipa.
       min_length: 'Naziv prototipa mora imati najmanje jedan znak.|Naziv prototipa mora imati najmanje {{ limit }} znakova.'

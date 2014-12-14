@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.builder.product.class">Sylius\Component\Product\Builder\ProductBuilder</parameter>
-        <parameter key="sylius.builder.product_prototype.class">Sylius\Component\Product\Builder\PrototypeBuilder</parameter>
+        <parameter key="sylius.builder.product_archetype.class">Sylius\Component\Product\Builder\ArchetypeBuilder</parameter>
 
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
@@ -31,10 +31,10 @@
             <argument>%sylius.validation_group.product%</argument>
             <tag name="form.type" alias="sylius_product" />
         </service>
-        <service id="sylius.form.type.product_prototype" class="%sylius.form.type.product_prototype.class%">
-            <argument>%sylius.model.product_prototype.class%</argument>
-            <argument>%sylius.validation_group.product_prototype%</argument>
-            <tag name="form.type" alias="sylius_product_prototype" />
+        <service id="sylius.form.type.product_archetype" class="%sylius.form.type.product_archetype.class%">
+            <argument>%sylius.model.product_archetype.class%</argument>
+            <argument>%sylius.validation_group.product_archetype%</argument>
+            <tag name="form.type" alias="sylius_product_archetype" />
         </service>
 
         <service id="sylius.builder.product" class="%sylius.builder.product.class%">
@@ -43,9 +43,9 @@
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.product_attribute_value" />
         </service>
-        <service id="sylius.builder.product_prototype" class="%sylius.builder.product_prototype.class%">
+        <service id="sylius.builder.product_archetype" class="%sylius.builder.product_archetype.class%">
             <argument type="service" id="sylius.repository.product_attribute_value" />
-          </service>
+        </service>
 
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.repository.product_variant" />
@@ -57,6 +57,7 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
         </service>
+
     </services>
 
 </container>

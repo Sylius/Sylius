@@ -308,7 +308,7 @@ sylius:
         type: tip
         update_header: Ažuriranje atributa
         updated_at: ažurirano
-    prototype:
+    archetype:
         build: Kreiraj prototip
         build_header: Kreirajte proizvod od prototipa
         create: Kreiraj prototip

@@ -35,6 +35,6 @@ sylius:
       not_blank: Si prega di selezionare una proprietà.
     value:
       not_blank: Inserisci il valore di proprietà del prodotto.
-  prototype:
+  archetype:
     name:
       not_blank: Si prega di inserire il nome del prototipo.

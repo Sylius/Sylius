@@ -75,6 +75,18 @@ sylius_product:
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
 
+sylius_archetype:
+    classes:
+        product:
+            subject: Sylius\Component\Core\Model\Product
+            attribute: Sylius\Component\Product\Model\Attribute
+            option: Sylius\Component\Product\Model\Option
+            archetype:
+                model: Sylius\Component\Product\Model\Archetype
+                controller: Sylius\Bundle\ProductBundle\Controller\ArchetypeController
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
+                form: Sylius\Bundle\ProductBundle\Form\Type\ArchetypeType
+
 sylius_attribute: ~
 
 sylius_variation:

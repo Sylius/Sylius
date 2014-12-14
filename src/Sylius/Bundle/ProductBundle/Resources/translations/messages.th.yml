@@ -13,6 +13,6 @@ sylius:
     property:
       name: ชื่อภายใน
       presentation: สื่อถึง
-    prototype:
+    archetype:
       name: ชื่อ
       properties: คุณสมบัติ

@@ -13,6 +13,6 @@ sylius:
     property:
       name: Interne naam
       presentation: Weergave
-    prototype:
+    archetype:
       name: Naam
       properties: Eigenschappen

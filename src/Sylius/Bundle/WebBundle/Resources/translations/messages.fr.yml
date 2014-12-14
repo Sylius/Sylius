@@ -134,8 +134,8 @@ sylius:
       index: Coupons de réduction
     property:
       index: Propriétés
-    prototype:
-      index: Prototypes
+    archetype:
+      index: archetypes
     sales: Ventes
     shipment:
       index: Expéditions
@@ -554,17 +554,17 @@ sylius:
     type: type
     update_header: "Edition d'une propriété"
     updated_at: dernière modification
-  prototype:
-    build: Conception de prototype
-    build_header: "Conception d'un produit d'après un prototype"
-    create: Créer un prototype
-    create_header: Nouveau prototype
-    index_header: Prototypes de produits
+  archetype:
+    build: Conception de archetype
+    build_header: "Conception d'un produit d'après un archetype"
+    create: Créer un archetype
+    create_header: Nouveau archetype
+    index_header: archetypes de produits
     name: nom
-    no_results: Aucun prototype défini
+    no_results: Aucun archetype défini
     options: options
     properties: propriétés
-    update_header: Modification du prototype
+    update_header: Modification du archetype
     updated_at: dernière modification
   province:
     provinces: Province

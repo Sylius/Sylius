@@ -5,5 +5,5 @@ sylius:
   label:
     product:
       name: Ime
-    prototype:
+    archetype:
       name: Ime

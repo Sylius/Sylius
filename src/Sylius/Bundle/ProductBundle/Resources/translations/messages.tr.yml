@@ -7,6 +7,6 @@ sylius:
       name: Ad
       description: Açıklama
       properties: Özellikler
-    prototype:
+    archetype:
       name: Ad
       properties: Özellikler

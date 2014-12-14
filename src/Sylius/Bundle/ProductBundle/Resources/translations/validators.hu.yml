@@ -46,7 +46,7 @@ sylius:
       not_blank: Kérjük, válassza ki a tulajdonságot.
     value:
       not_blank: Kérjük, írja be a termék tulajdonság értékét.
-  prototype:
+  archetype:
     name:
       not_blank: Kérjük, írja be a prototípus nevét.
       min_length: 'A prototípus neve legalább 1 karakter hosszú kell legyen. |A prototípus neve legalább {{ limit }} karakter hosszú kell legyen.'
