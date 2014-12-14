@@ -83,8 +83,8 @@ First, you need to register event listeners, the following example show you how 
 
     # services.xml
 
-    <service id="my_listener" class="MyBundle\MyEventListener%">
-        <tag name="kernel.event_listener" event="app.user.pre_update" method="onOrderPreUpdate"/>
+    <service id="my_listener" class="MyBundle\MyEventListener">
+        <tag name="kernel.event_listener" event="sylius.order.pre_create" method="onOrderPreCreate"/>
     </service>
 
 
