@@ -76,7 +76,84 @@ The response will contain the updated order information.
 
 .. code-block:: json
 
-    {"to": "do"}
+    {
+        "adjustments": ,
+        "adjustments_total": -250,
+        "shipping_address": {
+            "_links": {
+                "country": {
+                    "href": "/app_dev.php/api/countries/9"
+                }
+            },
+            "city": "New York",
+            "created_at": "2014-12-15T13:37:28+0000",
+            "first_name": "John",
+            "id": 105,
+            "last_name": "Doe",
+            "postcode": "12435",
+            "street": "Test",
+            "updated_at": "2014-12-15T13:37:29+0000"
+        },
+        "billing_address": {
+            "_links": {
+                "country": {
+                    "href": "/app_dev.php/api/countries/9"
+                }
+            },
+            "city": "New York",
+            "created_at": "2014-12-15T13:37:28+0000",
+            "first_name": "John",
+            "id": 106,
+            "last_name": "Doe",
+            "postcode": "12435",
+            "street": "Test",
+            "updated_at": "2014-12-15T13:37:29+0000"
+        },
+        "channel": {
+            "_links": {
+                "self": {
+                    "href": "/app_dev.php/api/channels/3"
+                }
+            },
+            "code": "WEB-US",
+            "color": "Pink",
+            "created_at": "2014-12-03T09:54:28+0000",
+            "enabled": true,
+            "id": 3,
+            "name": "United States Webstore",
+            "type": "web",
+            "updated_at": "2014-12-03T09:58:29+0000"
+        },
+        "checkout_state": "addressing",
+        "comments": [],
+        "confirmed": true,
+        "created_at": "2014-12-15T13:15:22+0000",
+        "currency": "USD",
+        "email": "xschaefer@example.com",
+        "expires_at": "2014-12-15T16:15:22+0000",
+        "id": 52,
+        "items": [],
+        "items_total": 1500000,
+        "payments": [],
+        "shipments": [],
+        "state": "cart",
+        "total": 1499750,
+        "updated_at": "2014-12-15T13:37:29+0000",
+        "user": {
+            "credentials_expired": false,
+            "email": "xschaefer@example.com",
+            "email_canonical": "xschaefer@example.com",
+            "enabled": true,
+            "expired": false,
+            "groups": [],
+            "id": 5,
+            "locked": false,
+            "roles": [],
+            "username": "xschaefer@example.com",
+            "username_canonical": "xschaefer@example.com"
+        }
+    }
+
 
 Shipping step
 -------------
