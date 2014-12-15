@@ -237,7 +237,76 @@ Response will contain an updated order information.
 
 .. code-block:: json
 
-    {"to": "do"}
+    {
+        "adjustments": {
+        },
+        "adjustments_total": 4750,
+        "billing_address": {
+        },
+        "channel": {
+        },
+        "checkout_state": "shipping",
+        "comments": [],
+        "confirmed": true,
+        "created_at": "2014-12-15T13:15:22+0000",
+        "currency": "USD",
+        "email": "xschaefer@example.com",
+        "expires_at": "2014-12-15T16:15:22+0000",
+        "id": 52,
+        "items": [
+        ],
+        "items_total": 1500000,
+        "payments": [],
+        "shipments": [
+            {
+                "_links": {
+                    "method": {
+                        "href": "/app_dev.php/api/shipping-methods/4"
+                    },
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    },
+                    "self": {
+                        "href": "/app_dev.php/api/shipments/51"
+                    }
+                },
+                "created_at": "2014-12-15T14:30:40+0000",
+                "id": 51,
+                "method": {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/shipping-methods/4"
+                        },
+                        "zone": {
+                            "href": "/app_dev.php/api/zones/4"
+                        }
+                    },
+                    "calculator": "flexible_rate",
+                    "category_requirement": 1,
+                    "configuration": {
+                        "additional_item_cost": 500,
+                        "additional_item_limit": 10,
+                        "first_item_cost": 4000
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "enabled": true,
+                    "id": 4,
+                    "name": "FedEx World Shipping",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                },
+                "state": "checkout",
+                "updated_at": "2014-12-15T14:30:41+0000"
+            }
+        ],
+        "shipping_address": {
+        },
+        "state": "cart",
+        "total": 1504750,
+        "updated_at": "2014-12-15T14:30:41+0000",
+        "user": {
+        }
+    }
+
 
 Payment step
 ------------
@@ -256,7 +325,77 @@ To obtain a list of available payment methods for this order, simply call a GET 
 
 .. code-block:: json
 
-    {"to": "do"}
+    {
+        "methods": {
+            "1": {
+                "_links": {
+                    "self": {
+                        "href": "/app_dev.php/api/payment-methods/1"
+                    }
+                },
+                "created_at": "2014-12-03T09:54:28+0000",
+                "id": 1,
+                "name": "Dummy",
+                "updated_at": "2014-12-03T09:54:28+0000"
+            },
+            "2": {
+                "_links": {
+                    "self": {
+                        "href": "/app_dev.php/api/payment-methods/2"
+                    }
+                },
+                "created_at": "2014-12-03T09:54:28+0000",
+                "id": 2,
+                "name": "Paypal Express Checkout",
+                "updated_at": "2014-12-03T09:54:28+0000"
+            },
+            "3": {
+                "_links": {
+                    "self": {
+                        "href": "/app_dev.php/api/payment-methods/3"
+                    }
+                },
+                "created_at": "2014-12-03T09:54:28+0000",
+                "id": 3,
+                "name": "Stripe",
+                "updated_at": "2014-12-03T09:54:28+0000"
+            },
+            "4": {
+                "_links": {
+                    "self": {
+                        "href": "/app_dev.php/api/payment-methods/4"
+                    }
+                },
+                "created_at": "2014-12-03T09:54:28+0000",
+                "id": 4,
+                "name": "Be2bill",
+                "updated_at": "2014-12-03T09:54:28+0000"
+            },
+            "5": {
+                "_links": {
+                    "self": {
+                        "href": "/app_dev.php/api/payment-methods/5"
+                    }
+                },
+                "created_at": "2014-12-03T09:54:28+0000",
+                "id": 5,
+                "name": "Stripe Checkout",
+                "updated_at": "2014-12-03T09:54:28+0000"
+            }
+        },
+        "payment": {
+            "_links": {
+                "order": {
+                    "href": "/app_dev.php/api/orders/52"
+                }
+            },
+            "amount": 1504750,
+            "created_at": "2014-12-15T14:57:28+0000",
+            "currency": "USD",
+            "state": "new"
+        }
+    }
+
 
 With that information, another PUT request with the id of payment method is enough to proceed:
 
@@ -281,7 +420,67 @@ Response will contain the updated order information.
 
 .. code-block:: json
 
-    {"to": "do"}
+    {
+        "adjustments": [
+        ],
+        "adjustments_total": 4750,
+        "billing_address": {
+        },
+        "channel": {
+        },
+        "checkout_state": "payment",
+        "comments": [],
+        "confirmed": true,
+        "created_at": "2014-12-15T13:15:22+0000",
+        "currency": "USD",
+        "email": "xschaefer@example.com",
+        "expires_at": "2014-12-15T16:15:22+0000",
+        "id": 52,
+        "items": [
+        ],
+        "items_total": 1500000,
+        "payments": [
+            {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    },
+                    "payment-method": {
+                        "href": "/app_dev.php/api/payment-methods/1"
+                    },
+                    "self": {
+                        "href": "/app_dev.php/api/payments/51"
+                    }
+                },
+                "amount": 1504750,
+                "created_at": "2014-12-15T15:02:54+0000",
+                "currency": "USD",
+                "id": 51,
+                "method": {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/payment-methods/1"
+                        }
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "id": 1,
+                    "name": "Dummy",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                },
+                "state": "new",
+                "updated_at": "2014-12-15T15:02:55+0000"
+            }
+        ],
+        "shipments": [
+        ],
+        "shipping_address": {
+        },
+        "state": "cart",
+        "total": 1504750,
+        "updated_at": "2014-12-15T15:02:55+0000",
+        "user": {
+        }
+    }
 
 Finalize step
 -------------
@@ -298,7 +497,276 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
 
 .. code-block:: json
 
-    {"to": "do"}
+    {
+        "adjustments": [
+            {
+                "amount": 0,
+                "created_at": "2014-12-15T13:37:29+0000",
+                "description": "No tax (0%)",
+                "id": 205,
+                "label": "tax",
+                "locked": false,
+                "neutral": false,
+                "updated_at": "2014-12-15T13:37:29+0000"
+            },
+            {
+                "amount": 5000,
+                "created_at": "2014-12-15T14:30:41+0000",
+                "description": "FedEx World Shipping",
+                "id": 207,
+                "label": "shipping",
+                "locked": false,
+                "neutral": false,
+                "updated_at": "2014-12-15T14:30:41+0000"
+            },
+            {
+                "amount": -250,
+                "created_at": "2014-12-15T14:30:41+0000",
+                "description": "Christmas Sale for orders over 100 EUR.",
+                "id": 208,
+                "label": "promotion",
+                "locked": false,
+                "neutral": false,
+                "updated_at": "2014-12-15T14:30:41+0000"
+            }
+        ],
+        "adjustments_total": 4750,
+        "billing_address": {
+            "_links": {
+                "country": {
+                    "href": "/app_dev.php/api/countries/9"
+                }
+            },
+            "city": "New York",
+            "created_at": "2014-12-15T13:37:28+0000",
+            "first_name": "John",
+            "id": 106,
+            "last_name": "Doe",
+            "postcode": "12435",
+            "street": "Test",
+            "updated_at": "2014-12-15T13:37:29+0000"
+        },
+        "channel": {
+            "_links": {
+                "self": {
+                    "href": "/app_dev.php/api/channels/3"
+                }
+            },
+            "code": "WEB-US",
+            "color": "Pink",
+            "created_at": "2014-12-03T09:54:28+0000",
+            "enabled": true,
+            "id": 3,
+            "name": "United States Webstore",
+            "type": "web",
+            "updated_at": "2014-12-03T09:58:29+0000"
+        },
+        "checkout_state": "payment",
+        "comments": [],
+        "confirmed": true,
+        "created_at": "2014-12-15T13:15:22+0000",
+        "currency": "USD",
+        "email": "xschaefer@example.com",
+        "expires_at": "2014-12-15T16:15:22+0000",
+        "id": 52,
+        "items": [
+            {
+                "_links": {
+                    "product": {
+                        "href": "/app_dev.php/api/products/101"
+                    },
+                    "variant": {
+                        "href": "/app_dev.php/api/products/101/variants/779"
+                    }
+                },
+                "adjustments": [],
+                "adjustments_total": 0,
+                "id": 277,
+                "immutable": false,
+                "inventory_units": [
+                    {
+                        "_links": {
+                            "order": {
+                                "href": "/app_dev.php/api/orders/52"
+                            }
+                        },
+                        "created_at": "2014-12-15T13:18:48+0000",
+                        "id": 828,
+                        "inventory_state": "checkout",
+                        "updated_at": "2014-12-15T14:30:41+0000"
+                    },
+                    {
+                        "_links": {
+                            "order": {
+                                "href": "/app_dev.php/api/orders/52"
+                            }
+                        },
+                        "created_at": "2014-12-15T13:18:48+0000",
+                        "id": 829,
+                        "inventory_state": "checkout",
+                        "updated_at": "2014-12-15T14:30:41+0000"
+                    },
+                    {
+                        "_links": {
+                            "order": {
+                                "href": "/app_dev.php/api/orders/52"
+                            }
+                        },
+                        "created_at": "2014-12-15T13:18:48+0000",
+                        "id": 830,
+                        "inventory_state": "checkout",
+                        "updated_at": "2014-12-15T14:30:41+0000"
+                    }
+                ],
+                "quantity": 3,
+                "total": 1500000,
+                "unit_price": 500000,
+                "variant": {
+                    "available_on": "2014-04-01T06:43:02+0000",
+                    "created_at": "2014-12-03T09:54:35+0000",
+                    "id": 779,
+                    "master": true,
+                    "object": {
+                        "attributes": [
+                            {
+                                "id": 238,
+                                "name": "Book author",
+                                "presentation": "Author",
+                                "value": "Marlen Yost"
+                            },
+                            {
+                                "id": 239,
+                                "name": "Book ISBN",
+                                "presentation": "ISBN",
+                                "value": "326ccbc7-92d1-3aec-b3af-df8afdc5651d"
+                            },
+                            {
+                                "id": 240,
+                                "name": "Book pages",
+                                "presentation": "Number of pages",
+                                "value": "149"
+                            }
+                        ],
+                        "created_at": "2014-12-03T09:54:35+0000",
+                        "description": "Et eveniet voluptas ut magni vero temporibus nihil. Omnis possimus accusantium quia corporis culpa. Et recusandae asperiores qui architecto culpa autem sint accusantium. Officiis iusto accusantium perferendis aliquid ducimus.",
+                        "id": 101,
+                        "name": "Book \"Quidem\" by \"Marlen Yost\"",
+                        "options": [],
+                        "short_description": "Distinctio quos est eaque fugit totam repellendus.",
+                        "updated_at": "2014-12-03T09:54:35+0000"
+                    },
+                    "options": [],
+                    "sku": "326ccbc7-92d1-3aec-b3af-df8afdc5651d",
+                    "updated_at": "2014-12-03T09:54:35+0000"
+                }
+            }
+        ],
+        "items_total": 1500000,
+        "payments": [
+            {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    },
+                    "payment-method": {
+                        "href": "/app_dev.php/api/payment-methods/1"
+                    },
+                    "self": {
+                        "href": "/app_dev.php/api/payments/51"
+                    }
+                },
+                "amount": 1504750,
+                "created_at": "2014-12-15T15:02:54+0000",
+                "currency": "USD",
+                "id": 51,
+                "method": {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/payment-methods/1"
+                        }
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "id": 1,
+                    "name": "Dummy",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                },
+                "state": "new",
+                "updated_at": "2014-12-15T15:02:55+0000"
+            }
+        ],
+        "shipments": [
+            {
+                "_links": {
+                    "method": {
+                        "href": "/app_dev.php/api/shipping-methods/4"
+                    },
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    },
+                    "self": {
+                        "href": "/app_dev.php/api/shipments/51"
+                    }
+                },
+                "created_at": "2014-12-15T14:30:40+0000",
+                "id": 51,
+                "method": {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/shipping-methods/4"
+                        },
+                        "zone": {
+                            "href": "/app_dev.php/api/zones/4"
+                        }
+                    },
+                    "calculator": "flexible_rate",
+                    "category_requirement": 1,
+                    "configuration": {
+                        "additional_item_cost": 500,
+                        "additional_item_limit": 10,
+                        "first_item_cost": 4000
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "enabled": true,
+                    "id": 4,
+                    "name": "FedEx World Shipping",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                },
+                "state": "checkout",
+                "updated_at": "2014-12-15T14:30:41+0000"
+            }
+        ],
+        "shipping_address": {
+            "_links": {
+                "country": {
+                    "href": "/app_dev.php/api/countries/9"
+                }
+            },
+            "city": "New York",
+            "created_at": "2014-12-15T13:37:28+0000",
+            "first_name": "John",
+            "id": 105,
+            "last_name": "Doe",
+            "postcode": "12435",
+            "street": "Test",
+            "updated_at": "2014-12-15T13:37:29+0000"
+        },
+        "state": "cart",
+        "total": 1504750,
+        "updated_at": "2014-12-15T15:02:55+0000",
+        "user": {
+            "credentials_expired": false,
+            "email": "xschaefer@example.com",
+            "email_canonical": "xschaefer@example.com",
+            "enabled": true,
+            "expired": false,
+            "groups": [],
+            "id": 5,
+            "locked": false,
+            "roles": [],
+            "username": "xschaefer@example.com",
+            "username_canonical": "xschaefer@example.com"
+        }
+    }
 
 This is how your final order looks, if you are happy with that response, simply call another PUT to confirm the checkout, which will became a real order and appear in the backend.
 
