@@ -124,12 +124,6 @@ sylius_payment:
         payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
-    gateways:
-        dummy: Test
-        stripe: Stripe
-        be2bill: Be2Bill
-        stripe_checkout: Stripe Checkout
-        paypal_express_checkout: Paypal Express Checkout
 
 sylius_payum: ~
 

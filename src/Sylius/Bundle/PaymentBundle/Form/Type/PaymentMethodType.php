@@ -11,8 +11,14 @@
 
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
+use Payum\Paypal\ExpressCheckout\Nvp\PaymentBuilder;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Payment\Model\PaymentMethod;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Payment method form type.
@@ -41,7 +47,44 @@ class PaymentMethodType extends AbstractResourceType
                 'required' => false,
                 'label'    => 'sylius.form.payment_method.enabled'
             ))
+            ->add('credentials', 'form');
         ;
+
+        $that = $this;
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) use ($that) {
+            /** @var  array $data */
+            $data = $event->getData();
+
+            if (false == empty($data['gateway'])) {
+                $that->buildCredentials($event->getForm());
+            }
+        });
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($that) {
+            /** @var  PaymentMethod $paymentMethod */
+            $paymentMethod = $event->getData();
+
+            if ($paymentMethod->getGateway()) {
+                $that->buildCredentials($event->getForm(), $paymentMethod->getCredentials());
+            }
+        });
+    }
+
+    public function buildCredentials(Form $form)
+    {
+        $paypalPaymentBuilder = new PaymentBuilder();
+
+        foreach ($paypalPaymentBuilder->get('payum.options') as $name => $value) {
+            $isRequired = (bool) $paypalPaymentBuilder->get('payum.required_options', $name);
+            $form->get('credentials')->add($name, is_bool($value) ? 'checkbox' : 'text', array(
+                'constraints' => array_filter(array(
+                    $isRequired ? new NotBlank : null
+                )),
+                'empty_data' => $value,
+                'required' => $isRequired,
+            ));
+        }
     }
 
     /**

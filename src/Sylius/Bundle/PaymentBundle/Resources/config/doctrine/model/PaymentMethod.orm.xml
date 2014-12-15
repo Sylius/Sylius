@@ -25,6 +25,8 @@
         <field name="environment" column="environment" type="string" nullable="true" />
         <field name="enabled" column="is_enabled" type="boolean" />
 
+        <field name="credentials" column="credentials" type="json_array" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

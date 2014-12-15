@@ -32,7 +32,5 @@ class SyliusPaymentExtension extends AbstractResourceExtension
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
         );
-
-        $container->setParameter('sylius.payment_gateways', $config['gateways']);
     }
 }

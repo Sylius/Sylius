@@ -77,6 +77,16 @@ interface PaymentMethodInterface extends TimestampableInterface
     public function setGateway($gateway);
 
     /**
+     * @return array
+     */
+    public function getCredentials();
+
+    /**
+     * @param array $credentials
+     */
+    public function setCredentials(array $credentials);
+
+    /**
      * Get the required app environment.
      *
      * @return string
