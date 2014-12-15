@@ -142,23 +142,6 @@ class StockItem implements StockItemInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHold()
-    {
-        return $this->onHold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHold($onHold)
-    {
-        $this->onHold = $onHold;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -173,7 +156,11 @@ class StockItem implements StockItemInterface
      */
     public function setOnHand($onHand)
     {
-        $this->onHand = $onHand ? 0 : $onHand;
+        $this->onHand = $onHand;
+
+        if (0 > $this->onHand) {
+            $this->onHand = 0;
+        }
 
         return $this;
     }

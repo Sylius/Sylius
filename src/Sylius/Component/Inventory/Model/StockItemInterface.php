@@ -77,20 +77,6 @@ interface StockItemInterface extends InStockInterface
     public function removeMovement(StockMovementInterface $movement);
 
     /**
-     * Get stock on hold.
-     *
-     * @return integer
-     */
-    public function getOnHold();
-
-    /**
-     * Set stock on hold.
-     *
-     * @param integer
-     */
-    public function setOnHold($onHold);
-
-    /**
      * Get stock on hand.
      *
      * @return integer

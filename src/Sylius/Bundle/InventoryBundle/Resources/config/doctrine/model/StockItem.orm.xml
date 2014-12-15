@@ -21,7 +21,6 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO"/>
         </id>
-        <field name="onHold" column="on_hold" type="integer"/>
         <field name="onHand" column="on_hand" type="integer"/>
 
         <many-to-one target-entity="Sylius\Component\Inventory\Model\StockLocationInterface" field="location">

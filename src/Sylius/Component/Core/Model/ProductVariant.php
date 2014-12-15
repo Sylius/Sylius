@@ -98,6 +98,13 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $depth;
 
     /**
+     * On hold.
+     *
+     * @var int
+     */
+    protected $onHold;
+
+    /**
      * Stock Items
      *
      * @var StockItemInterface[]|Collection
@@ -495,4 +502,23 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
 
         return $item;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOnHold()
+    {
+        return $this->onHold;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOnHold($onHold)
+    {
+        $this->onHold = $onHold;
+
+        return $this;
+    }
+
 }
