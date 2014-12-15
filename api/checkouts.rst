@@ -171,7 +171,43 @@ You can get these informations by first calling a GET request on the checkout un
 
 .. code-block:: json
 
-    {"to": "do"}
+    [
+        {
+            "methods": [
+                {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/shipping-methods/4"
+                        },
+                        "zone": {
+                            "href": "/app_dev.php/api/zones/4"
+                        }
+                    },
+                    "calculator": "flexible_rate",
+                    "category_requirement": 1,
+                    "configuration": {
+                        "additional_item_cost": 500,
+                        "additional_item_limit": 10,
+                        "first_item_cost": 4000
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "enabled": true,
+                    "id": 4,
+                    "name": "FedEx World Shipping",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                }
+            ],
+            "shipment": {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    }
+                },
+                "created_at": "2014-12-15T14:11:32+0000",
+                "state": "checkout"
+            }
+        }
+    ]
 
 Response contains the proposed shipments and for each, it also has a list of shipping methods available.
 
