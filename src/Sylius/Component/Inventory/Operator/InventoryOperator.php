@@ -12,11 +12,13 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\SyliusStockableEvents;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -82,33 +84,33 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function hold(StockItemInterface $stockItem, $quantity)
+    public function hold(ProductVariantInterface $variant, $quantity)
     {
         if ($quantity < 0) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_HOLD, new GenericEvent($stockItem));
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_HOLD, new GenericEvent($variant));
 
-        $stockItem->setOnHold($stockItem->getOnHold() + $quantity);
+        $variant->setOnHold($variant->getOnHold() + $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_HOLD, new GenericEvent($stockItem));
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_HOLD, new GenericEvent($variant));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function release(StockItemInterface $stockItem, $quantity)
+    public function release(ProductVariantInterface $variant, $quantity)
     {
         if ($quantity < 0) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_RELEASE, new GenericEvent($stockItem));
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_RELEASE, new GenericEvent($variant));
 
-        $stockItem->setOnHold($stockItem->getOnHold() - $quantity);
+        $variant->setOnHold($variant->getOnHold() - $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_RELEASE, new GenericEvent($stockItem));
+        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_RELEASE, new GenericEvent($variant));
     }
 
     /**
@@ -140,7 +142,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $this->backordersHandler->processBackorders($inventoryUnits);
 
-        $onHand = $stockable->getOnHand();
+        $onHand = $stockable->getTotalOnHand();
 
         foreach ($inventoryUnits as $inventoryUnit) {
             if (InventoryUnitInterface::STATE_SOLD === $inventoryUnit->getInventoryState()) {
@@ -148,7 +150,7 @@ class InventoryOperator implements InventoryOperatorInterface
             }
         }
 
-        $stockable->setOnHand($onHand);
+//        $stockable->setOnHand($onHand);
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_DECREASE, new GenericEvent($stockable));
     }

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 
@@ -35,18 +36,18 @@ interface InventoryOperatorInterface
     /**
      * Hold stock for given stockable by quantity.
      *
-     * @param StockItemInterface $stockItem
-     * @param integer            $quantity
+     * @param ProductVariantInterface $variant
+     * @param integer                 $quantity
      */
-    public function hold(StockItemInterface $stockItem, $quantity);
+    public function hold(ProductVariantInterface $variant, $quantity);
 
     /**
      * Release stock for given stockable by quantity.
      *
-     * @param StockItemInterface $stockItem
-     * @param integer            $quantity
+     * @param ProductVariantInterface $stockItem
+     * @param integer                 $quantity
      */
-    public function release(StockItemInterface $stockItem, $quantity);
+    public function release(ProductVariantInterface $variant, $quantity);
 
     /**
      * Decrease stock by count of given inventory units.

@@ -46,6 +46,7 @@ class BackordersHandler implements BackordersHandlerInterface
      */
     public function processBackorders($inventoryUnits)
     {
+        /* @var StockableInterface $stockable */
         if ($inventoryUnits instanceof Collection) {
             if ($inventoryUnits->isEmpty()) {
                 return;
@@ -64,7 +65,7 @@ class BackordersHandler implements BackordersHandlerInterface
 
         $this->validateInventoryUnits($inventoryUnits);
 
-        $this->processInventoryUnits($inventoryUnits, $stockable, $stockable->getOnHand());
+        $this->processInventoryUnits($inventoryUnits, $stockable, $stockable->getTotalOnHand());
     }
 
     /**

@@ -521,4 +521,16 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalOnHand()
+    {
+        $total = 0;
+        foreach($this->items as $item) {
+            $total += $item->getOnHand();
+        }
+
+        return $total;
+    }
 }

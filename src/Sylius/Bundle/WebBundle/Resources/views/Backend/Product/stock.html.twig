@@ -44,7 +44,6 @@
                 <th>{{ sylius_resource_sort('sku', 'sylius.stockable.sku'|trans) }}</th>
                 <th>{{ sylius_resource_sort('stock_location', 'sylius.stock_location.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th> {# TODO fix sorting #}
-                <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
             </tr>
             </thead>
             <tbody>
@@ -60,8 +59,6 @@
                 {% for item in variant.stockItems %}
                 <td>{{ item.stockLocation.name }}</td>
                 <td><span class="label label-{{ item.inStock ? 'success' : 'danger' }}">{{ item.onHand }}</span>
-                </td>
-                <td><span class="label label-{{ item.onHold ? 'warning' : 'success' }}">{{ item.onHold }}</span>
                 </td>
             </tr>
             <tr>
@@ -81,7 +78,6 @@
                 <th>{{ sylius_resource_sort('name', 'sylius.stockable.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('stock_location', 'sylius.stock_location.name'|trans) }}</th>
                 <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th> {# TODO fix sorting #}
-                <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
             </tr>
             </thead>
             <tbody>
@@ -97,8 +93,6 @@
                 {% for item in product.masterVariant.stockItems %}
                 <td>{{ item.stockLocation.name }}</td>
                 <td><span class="label label-{{ item.inStock ? 'success' : 'danger' }}">{{ item.onHand }}</span>
-                </td>
-                <td><span class="label label-{{ item.onHold ? 'warning' : 'success' }}">{{ item.onHold }}</span>
                 </td>
             </tr>
             <tr>

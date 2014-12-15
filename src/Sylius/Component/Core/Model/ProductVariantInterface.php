@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Inventory\Model\InStockInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Model\StockItemInterface;
 use Sylius\Component\Inventory\Model\StockLocationInterface;
@@ -162,4 +163,11 @@ interface ProductVariantInterface extends BaseVariantInterface, ShippableInterfa
      * @return StockItemInterface
      */
     public function getStockItemForLocation(StockLocationInterface $location);
+
+    public function getPrice();
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPrice($price);
 }

@@ -7,15 +7,15 @@
 <table class="table" id="stockables">
     <thead>
     <tr>
-        <th colspan="2">{{ 'sylius.product.header'|trans }}</th>
-        <th colspan="4">{{ 'sylius.stock_location.header'|trans }}</th>
+        <th colspan="3">{{ 'sylius.product.header'|trans }}</th>
+        <th colspan="3">{{ 'sylius.stock_location.header'|trans }}</th>
     </tr>
     <tr>
         <th>{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
         <th>{{ sylius_resource_sort('sku', 'sylius.stockable.sku'|trans) }}</th>
+        <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
         <th>{{ sylius_resource_sort('stock_location', 'sylius.stock_location.name'|trans) }}</th>
         <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th> {# TODO fix sorting #}
-        <th>{{ sylius_resource_sort('onHold', 'sylius.stockable.on_hold'|trans) }}</th>
     </tr>
     </thead>
     <tbody>
@@ -39,13 +39,14 @@
                     <strong> {{ variant.optionsString }}</strong>
                 </a>
             </td>
+            <td rowspan="{{ variant.stockItems|length + 1 }}">
+                <span class="label label-{{ variant.onHold ? 'warning' : 'success' }}">{{ variant.onHold }}</span>
+            </td>
             </tr>
             <tr>
             {% for item in variant.stockItems %}
                 <td>{{ item.stockLocation.name }}</td>
                 <td><span class="label label-{{ item.inStock ? 'success' : 'danger' }}">{{ item.onHand }}</span>
-                </td>
-                <td><span class="label label-{{ item.onHold ? 'warning' : 'success' }}">{{ item.onHold }}</span>
                 </td>
                 </tr><tr>
             {% endfor %}

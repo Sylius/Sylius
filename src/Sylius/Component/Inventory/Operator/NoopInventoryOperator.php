@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Inventory\Operator;
 
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
@@ -39,7 +40,7 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function hold(StockableInterface $stockItem, $quantity)
+    public function hold(ProductVariantInterface $variant, $quantity)
     {
         // nothing happens
     }
@@ -47,7 +48,7 @@ class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function release(StockableInterface $stockItem, $quantity)
+    public function release(ProductVariantInterface $variant, $quantity)
     {
         // nothing happens
     }

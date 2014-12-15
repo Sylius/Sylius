@@ -19,7 +19,6 @@ namespace Sylius\Component\Inventory\Model;
 interface StockableInterface extends InStockInterface
 {
 
-
     /**
      * Is stockable available on demand?
      *
@@ -40,4 +39,11 @@ interface StockableInterface extends InStockInterface
      * @param integer
      */
     public function setOnHold($onHold);
+
+    /**
+     * Get the total items on hand
+     *
+     * @return int
+     */
+    public function getTotalOnHand();
 }
