@@ -487,7 +487,96 @@ Response will contain a representation of the newly created item.
 
 .. code-block:: json
 
-    {"to": "do"}
+    {
+        "_links": {
+            "product": {
+                "href": "/app_dev.php/api/products/101"
+            },
+            "variant": {
+                "href": "/app_dev.php/api/products/101/variants/779"
+            }
+        },
+        "adjustments": [],
+        "adjustments_total": 0,
+        "id": 277,
+        "immutable": false,
+        "inventory_units": [
+            {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    }
+                },
+                "created_at": "2014-12-15T13:18:48+0000",
+                "id": 828,
+                "inventory_state": "checkout",
+                "updated_at": "2014-12-15T13:18:48+0000"
+            },
+            {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    }
+                },
+                "created_at": "2014-12-15T13:18:48+0000",
+                "id": 829,
+                "inventory_state": "checkout",
+                "updated_at": "2014-12-15T13:18:48+0000"
+            },
+            {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    }
+                },
+                "created_at": "2014-12-15T13:18:48+0000",
+                "id": 830,
+                "inventory_state": "checkout",
+                "updated_at": "2014-12-15T13:18:48+0000"
+            }
+        ],
+        "quantity": 3,
+        "total": 0,
+        "unit_price": 500000,
+        "variant": {
+            "available_on": "2014-04-01T06:43:02+0000",
+            "created_at": "2014-12-03T09:54:35+0000",
+            "id": 779,
+            "master": true,
+            "object": {
+                "attributes": [
+                    {
+                        "id": 238,
+                        "name": "Book author",
+                        "presentation": "Author",
+                        "value": "Marlen Yost"
+                    },
+                    {
+                        "id": 239,
+                        "name": "Book ISBN",
+                        "presentation": "ISBN",
+                        "value": "326ccbc7-92d1-3aec-b3af-df8afdc5651d"
+                    },
+                    {
+                        "id": 240,
+                        "name": "Book pages",
+                        "presentation": "Number of pages",
+                        "value": "149"
+                    }
+                ],
+                "created_at": "2014-12-03T09:54:35+0000",
+                "description": "Et eveniet voluptas ut magni vero temporibus nihil. Omnis possimus accusantium quia corporis culpa. Et recusandae asperiores qui architecto culpa autem sint accusantium. Officiis iusto accusantium perferendis aliquid ducimus.",
+                "id": 101,
+                "name": "Book \"Quidem\" by \"Marlen Yost\"",
+                "options": [],
+                "short_description": "Distinctio quos est eaque fugit totam repellendus.",
+                "updated_at": "2014-12-03T09:54:35+0000"
+            },
+            "options": [],
+            "sku": "326ccbc7-92d1-3aec-b3af-df8afdc5651d",
+            "updated_at": "2014-12-03T09:54:35+0000"
+        }
+    }
 
 Removing an item from order
 ---------------------------
