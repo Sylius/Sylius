@@ -32,4 +32,5 @@ Please note that this bundle **is not an admin generator**. It won't create form
    Doctrine tools <doctrine>
    Extra tools <extra_tools>
    Defining custom action <custom_actions>
+   Collection form type <form_collection>
    summary
