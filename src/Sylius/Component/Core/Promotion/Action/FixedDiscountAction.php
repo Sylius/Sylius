@@ -11,11 +11,8 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * Fixed discount action.
@@ -30,12 +27,7 @@ class FixedDiscountAction extends DiscountAction
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
-            throw new UnexpectedTypeException(
-                $subject,
-                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
-            );
-        }
+        $subject = $this->supports($subject);
 
         $adjustment = $this->createAdjustment($promotion);
         $adjustment->setAmount(-$configuration['amount']);

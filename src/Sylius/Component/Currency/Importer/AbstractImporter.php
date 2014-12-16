@@ -11,26 +11,19 @@
 
 namespace Sylius\Component\Currency\Importer;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 abstract class AbstractImporter implements ImporterInterface
 {
     /**
-     * @var ObjectManager
+     * @var DomainManagerInterface
      */
     protected $manager;
 
-    /**
-     * @var RepositoryInterface
-     */
-    protected $repository;
-
-    public function __construct(ObjectManager $manager, RepositoryInterface $repository, array $options = array())
+    public function __construct(DomainManagerInterface $manager, array $options = array())
     {
-        $this->manager    = $manager;
-        $this->repository = $repository;
+        $this->manager = $manager;
 
         $this->configure($options);
     }
@@ -49,18 +42,18 @@ abstract class AbstractImporter implements ImporterInterface
                 if ($code === $currency->getCode()) {
                     $currency->setExchangeRate($rate);
 
-                    $this->manager->persist($currency);
+                    $this->manager->update($currency);
 
                     return;
                 }
             }
         } else {
             /** @var $currency CurrencyInterface */
-            $currency = $this->repository->createNew();
+            $currency = $this->manager->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate($rate);
 
-            $this->manager->persist($currency);
+            $this->manager->create($currency);
         }
     }
 }

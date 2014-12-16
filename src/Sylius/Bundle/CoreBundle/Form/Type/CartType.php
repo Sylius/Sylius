@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -24,20 +24,20 @@ use Symfony\Component\Form\FormEvents;
  */
 class CartType extends BaseCartType
 {
-    protected $couponRepository;
+    protected $couponManager;
 
     /**
      * Constructor.
      *
-     * @param string              $dataClass        FQCN of cart model
-     * @param array               $validationGroups
-     * @param RepositoryInterface $couponRepository
+     * @param string                 $dataClass        FQCN of cart model
+     * @param string[]               $validationGroups
+     * @param DomainManagerInterface $couponManager
      */
-    public function __construct($dataClass, array $validationGroups, RepositoryInterface $couponRepository)
+    public function __construct($dataClass, array $validationGroups, DomainManagerInterface $couponManager)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->couponRepository = $couponRepository;
+        $this->couponManager = $couponManager;
     }
 
     /**
@@ -47,7 +47,7 @@ class CartType extends BaseCartType
     {
         parent::buildForm($builder, $options);
 
-        $couponRepository = $this->couponRepository;
+        $couponManager = $this->couponManager;
 
         $builder
             ->add('promotionCoupons', 'collection', array(
@@ -57,7 +57,7 @@ class CartType extends BaseCartType
                 'by_reference' => false,
                 'label'        => 'sylius.form.cart.coupon',
             ))
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($couponRepository) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($couponManager) {
                 $data = $event->getData();
 
                 if (!$data->getPromotionCoupons()->isEmpty()) {
@@ -65,7 +65,7 @@ class CartType extends BaseCartType
                 }
 
                 $data->addPromotionCoupon(
-                    $couponRepository->createNew()
+                    $couponManager->createNew()
                 );
             })
         ;

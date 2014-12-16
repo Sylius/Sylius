@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Base resource controller for Sylius.
@@ -42,7 +44,7 @@ class ResourceController extends FOSRestController
     protected $flashHelper;
 
     /**
-     * @var DomainManager
+     * @var DomainManagerInterface
      */
     protected $domainManager;
 
@@ -87,12 +89,7 @@ class ResourceController extends FOSRestController
                 );
             }
 
-            $this->domainManager = new DomainManager(
-                $container->get($this->config->getServiceName('manager')),
-                $container->get('event_dispatcher'),
-                $this->config,
-                !$this->config->isApiRequest() ? $this->flashHelper : null
-            );
+            $this->domainManager = $container->get($this->config->getServiceName('manager'));
         }
     }
 
@@ -172,7 +169,7 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($form->handleRequest($request)->isValid()) {
-            $resource = $this->domainManager->create($resource);
+            $resource = $this->manageResource($resource, 'create');
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource, 201));
@@ -212,7 +209,7 @@ class ResourceController extends FOSRestController
         $form     = $this->getForm($resource);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
+            $this->manageResource($resource, 'update');
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($resource, 204));
@@ -244,7 +241,7 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->domainManager->delete($this->findOr404($request));
+        $this->manageResource($this->findOr404($request), 'delete');
 
         if ($this->config->isApiRequest()) {
             return $this->handleView($this->view());
@@ -311,7 +308,7 @@ class ResourceController extends FOSRestController
      */
     public function createNew()
     {
-        return $this->resourceResolver->createResource($this->getRepository(), 'createNew');
+        return $this->resourceResolver->createResource($this->getManager(), 'createNew');
     }
 
     /**
@@ -380,6 +377,14 @@ class ResourceController extends FOSRestController
     }
 
     /**
+     * @return DomainManagerInterface
+     */
+    public function getManager()
+    {
+        return $this->domainManager;
+    }
+
+    /**
      * @param Request $request
      * @param integer $movement
      *
@@ -388,8 +393,18 @@ class ResourceController extends FOSRestController
     protected function move(Request $request, $movement)
     {
         $resource = $this->findOr404($request);
+        $position = $this->config->getSortablePosition();
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue(
+            $resource,
+            $position,
+            $accessor->getValue($resource, $position) + $movement
+        );
 
-        $this->domainManager->move($resource, $movement);
+        $this->domainManager->update($resource, 'move');
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', 'move');
+        }
 
         return $this->redirectHandler->redirectToIndex();
     }
@@ -412,5 +427,19 @@ class ResourceController extends FOSRestController
         }
 
         return $handler->handle($view);
+    }
+
+    private function manageResource($resource, $action)
+    {
+        if (!in_array($action, array('create', 'update', 'delete'))) {
+            throw new \InvalidArgumentException(sprintf('Unknown resource management action called "%s".', $action));
+        }
+
+        $resource = $this->domainManager->{$action}($resource);
+        if (null !== $this->flashHelper) {
+            $this->flashHelper->setFlash('success', $action);
+        }
+
+        return $resource;
     }
 }

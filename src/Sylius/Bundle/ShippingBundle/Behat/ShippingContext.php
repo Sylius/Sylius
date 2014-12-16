@@ -38,8 +38,8 @@ class ShippingContext extends DefaultContext
      */
     public function thereIsShippingCategory($name, $flush = true)
     {
-        /* @var $category ShippingCategoryInterface */
-        $category = $this->getRepository('shipping_category')->createNew();
+        /** @var $category ShippingCategoryInterface */
+        $category = $this->getManager('shipping_category')->createNew();
         $category->setName($name);
 
         $manager = $this->getEntityManager();
@@ -58,20 +58,20 @@ class ShippingContext extends DefaultContext
     {
         $shippingMethod = $this->findOneByName('shipping_method', $name);
 
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('shipping_method_rule');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('shipping_method_rule');
 
         foreach ($table->getHash() as $data) {
-            /* @var $rule RuleInterface */
-            $rule = $repository->createNew();
+            /** @var $rule RuleInterface */
+            $rule = $manager->createNew();
             $rule->setType(strtolower(str_replace(' ', '_', $data['type'])));
             $rule->setConfiguration($this->getConfiguration($data['configuration']));
 
             $shippingMethod->addRule($rule);
 
-            $manager->persist($rule);
+            $em->persist($rule);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 }

@@ -17,6 +17,7 @@ use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -27,11 +28,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class AddProductAction implements PromotionActionInterface
 {
     /**
-     * OrderItem repository.
+     * Order item manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManagerInterface
      */
-    protected $itemRepository;
+    protected $itemManager;
 
     /**
      * Variant repository.
@@ -43,12 +44,12 @@ class AddProductAction implements PromotionActionInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $itemRepository
-     * @param RepositoryInterface $variantRepository
+     * @param DomainManagerInterface $manager
+     * @param RepositoryInterface    $variantRepository
      */
-    public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    public function __construct(DomainManagerInterface $manager, RepositoryInterface $variantRepository)
     {
-        $this->itemRepository    = $itemRepository;
+        $this->itemManager       = $manager;
         $this->variantRepository = $variantRepository;
     }
 
@@ -120,7 +121,7 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        return $this->itemRepository->createNew()
+        return $this->itemManager->createNew()
             ->setVariant($variant)
             ->setQuantity((int) $configuration['quantity'])
             ->setUnitPrice((int) $configuration['price'])

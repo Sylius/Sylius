@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -23,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class AddProductActionSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    function let(DomainManagerInterface $manager, RepositoryInterface $variantRepository)
     {
-        $this->beConstructedWith($itemRepository, $variantRepository);
+        $this->beConstructedWith($manager, $variantRepository);
     }
 
     function it_is_initializable()
@@ -39,7 +40,7 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_adds_product_as_promotion(
-        $itemRepository,
+        $manager,
         $variantRepository,
         OrderInterface $order,
         OrderItemInterface $item,
@@ -50,7 +51,7 @@ class AddProductActionSpec extends ObjectBehavior
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
-        $itemRepository->createNew()->willReturn($item);
+        $manager->createNew()->willReturn($item);
         $item->setUnitPrice($configuration['price'])->willReturn($item);
         $item->setVariant($variant)->willReturn($item);
         $item->setQuantity($configuration['quantity'])->willReturn($item);
@@ -64,8 +65,8 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_does_not_add_product_if_exists(
+        $manager,
         $variantRepository,
-        $itemRepository,
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
@@ -75,7 +76,7 @@ class AddProductActionSpec extends ObjectBehavior
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
-        $itemRepository->createNew()->willReturn($item);
+        $manager->createNew()->willReturn($item);
         $item->setUnitPrice($configuration['price'])->willReturn($item);
         $item->setVariant($variant)->willReturn($item);
         $item->setQuantity($configuration['quantity'])->willReturn($item);
@@ -89,8 +90,8 @@ class AddProductActionSpec extends ObjectBehavior
     }
 
     function it_reverts_product(
+        $manager,
         $variantRepository,
-        $itemRepository,
         OrderInterface $order,
         OrderItemInterface $item,
         ProductVariantInterface $variant,
@@ -100,7 +101,7 @@ class AddProductActionSpec extends ObjectBehavior
 
         $variantRepository->find($configuration['variant'])->willReturn($variant);
 
-        $itemRepository->createNew()->willReturn($item);
+        $manager->createNew()->willReturn($item);
         $item->setUnitPrice($configuration['price'])->willReturn($item);
         $item->setVariant($variant)->willReturn($item);
         $item->setQuantity($configuration['quantity'])->willReturn($item);

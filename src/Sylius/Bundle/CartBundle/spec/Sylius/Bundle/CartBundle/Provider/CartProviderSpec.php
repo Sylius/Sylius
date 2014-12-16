@@ -17,6 +17,7 @@ use Prophecy\Argument;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -27,7 +28,7 @@ class CartProviderSpec extends ObjectBehavior
 {
     function let(
         CartContextInterface $context,
-        ObjectManager $manager,
+        DomainManagerInterface $manager,
         RepositoryInterface $repository,
         EventDispatcherInterface $eventDispatcher
     ) {
@@ -59,12 +60,15 @@ class CartProviderSpec extends ObjectBehavior
 
     function it_creates_new_cart_if_there_is_no_identifier_in_storage(
         $context,
-        $repository,
+        $manager,
         $eventDispatcher,
         CartInterface $cart
     ) {
         $context->getCurrentCartIdentifier()->willReturn(null);
-        $repository->createNew()->willReturn($cart);
+
+        $manager->createNew()->willReturn($cart);
+        $manager->create($cart)->shouldBeCalled();
+
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);
@@ -73,12 +77,16 @@ class CartProviderSpec extends ObjectBehavior
     function it_creates_new_cart_if_identifier_is_wrong(
         $context,
         $repository,
+        $manager,
         $eventDispatcher,
         CartInterface $cart
     ) {
         $context->getCurrentCartIdentifier()->willReturn(7);
-        $repository->find(7)->shouldBeCalled()->willReturn(null);
-        $repository->createNew()->willReturn($cart);
+        $repository->find(7)->willReturn(null);
+
+        $manager->createNew()->willReturn($cart);
+        $manager->create($cart)->shouldBeCalled();
+
         $eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, Argument::any())->shouldBeCalled();
 
         $this->getCart()->shouldReturn($cart);

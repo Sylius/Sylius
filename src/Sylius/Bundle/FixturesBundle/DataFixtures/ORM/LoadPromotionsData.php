@@ -87,7 +87,7 @@ class LoadPromotionsData extends DataFixture
     protected function createRule($type, array $configuration)
     {
         /** @var $rule PromotionRuleInterface */
-        $rule = $this->getPromotionRuleRepository()->createNew();
+        $rule = $this->getManager('promotion_rule')->createNew();
         $rule->setType($type);
         $rule->setConfiguration($configuration);
 
@@ -105,7 +105,7 @@ class LoadPromotionsData extends DataFixture
     protected function createAction($type, array $configuration)
     {
         /** @var $action ActionInterface */
-        $action = $this->getPromotionActionRepository()->createNew();
+        $action = $this->getManager('promotion_action')->createNew();
         $action->setType($type);
         $action->setConfiguration($configuration);
 
@@ -125,13 +125,14 @@ class LoadPromotionsData extends DataFixture
     protected function createPromotion($name, $description, array $rules, array $actions)
     {
         /** @var $promotion PromotionInterface */
-        $promotion = $this->getPromotionRepository()->createNew();
+        $promotion = $this->getManager('promotion')->createNew();
         $promotion->setName($name);
         $promotion->setDescription($description);
 
         foreach ($rules as $rule) {
             $promotion->addRule($rule);
         }
+
         foreach ($actions as $action) {
             $promotion->addAction($action);
         }

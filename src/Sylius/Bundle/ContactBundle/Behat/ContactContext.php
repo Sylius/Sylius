@@ -30,8 +30,9 @@ class ContactContext extends DefaultContext
 
         $manager->flush();
 
+        $contactManager = $this->getManager('contact_request');
         foreach ($table->getHash() as $data) {
-            $newContactRequest = $repository->createNew();
+            $newContactRequest = $contactManager->createNew();
             $newContactRequest->setFirstName($data['firstName']);
             $newContactRequest->setLastName($data['lastName']);
             $newContactRequest->setEmail($data['email']);
@@ -58,8 +59,9 @@ class ContactContext extends DefaultContext
 
         $manager->flush();
 
+        $contactManager = $this->getManager('contact_request');
         foreach ($table->getHash() as $data) {
-            $newContactTopic = $repository->createNew();
+            $newContactTopic = $contactManager->createNew();
             $newContactTopic->setTitle($data['title']);
 
             $manager->persist($newContactTopic);
@@ -67,5 +69,4 @@ class ContactContext extends DefaultContext
 
         $manager->flush();
     }
-
 }

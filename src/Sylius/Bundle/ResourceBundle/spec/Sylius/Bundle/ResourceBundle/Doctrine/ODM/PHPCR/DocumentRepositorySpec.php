@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR;
 
 use Doctrine\ODM\PHPCR\DocumentManager;
@@ -14,7 +23,7 @@ class DocumentRepositorySpec extends ObjectBehavior
     function let(DocumentManager $dm, ClassMetadata $class, UnitOfWork $uow)
     {
         $this->beConstructedWith($dm, $class);
-        $dm->getUnitOfWork()->shouldBeCalled()->willReturn($uow);
+        $dm->getUnitOfWork()->willReturn($uow);
 
         $class->name = 'Sylius\Component\Core\Model\Product';
     }
@@ -22,11 +31,6 @@ class DocumentRepositorySpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository');
-    }
-
-    function it_creates_instance()
-    {
-        $this->createNew()->shouldHaveType('Sylius\Component\Core\Model\Product');
     }
 
     function it_has_a_paginator(QueryBuilder $queryBuilder)

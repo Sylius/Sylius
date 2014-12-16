@@ -39,7 +39,7 @@ class ItemResolver implements ItemResolverInterface
     protected $cartProvider;
 
     /**
-     * Prica calculator.
+     * Price calculator.
      *
      * @var DelegatingCalculatorInterface
      */

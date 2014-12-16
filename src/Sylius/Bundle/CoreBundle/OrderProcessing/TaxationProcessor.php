@@ -16,7 +16,7 @@ use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
@@ -28,11 +28,11 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 class TaxationProcessor implements TaxationProcessorInterface
 {
     /**
-     * Adjustment repository.
+     * Adjustment manager.
      *
-     * @var RepositoryInterface
+     * @var DomainManagerInterface
      */
-    protected $adjustmentRepository;
+    protected $adjustmentManager;
 
     /**
      * Tax calculator.
@@ -65,21 +65,21 @@ class TaxationProcessor implements TaxationProcessorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface      $adjustmentRepository
+     * @param DomainManagerInterface   $adjustmentManager
      * @param CalculatorInterface      $calculator
      * @param TaxRateResolverInterface $taxRateResolver
      * @param ZoneMatcherInterface     $zoneMatcher
      * @param Settings                 $taxationSettings
      */
     public function __construct(
-        RepositoryInterface $adjustmentRepository,
+        DomainManagerInterface $adjustmentManager,
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
         ZoneMatcherInterface $zoneMatcher,
         Settings $taxationSettings
     )
     {
-        $this->adjustmentRepository = $adjustmentRepository;
+        $this->adjustmentManager = $adjustmentManager;
         $this->calculator = $calculator;
         $this->taxRateResolver = $taxRateResolver;
         $this->zoneMatcher = $zoneMatcher;
@@ -135,8 +135,7 @@ class TaxationProcessor implements TaxationProcessorInterface
             $item->calculateTotal();
 
             $amount = $this->calculator->calculate($item->getTotal(), $rate);
-            $taxAmount = $rate->getAmountAsPercentage();
-            $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
+            $description = sprintf('%s (%s%%)', $rate->getName(), (float) $rate->getAmountAsPercentage());
 
             $taxes[$description] = array(
                 'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
@@ -150,7 +149,8 @@ class TaxationProcessor implements TaxationProcessorInterface
     private function addAdjustments(array $taxes, OrderInterface $order)
     {
         foreach ($taxes as $description => $tax) {
-            $adjustment = $this->adjustmentRepository->createNew();
+            /** @var $adjustment AdjustmentInterface */
+            $adjustment = $this->adjustmentManager->createNew();
             $adjustment->setLabel(AdjustmentInterface::TAX_ADJUSTMENT);
             $adjustment->setAmount($tax['amount']);
             $adjustment->setDescription($description);

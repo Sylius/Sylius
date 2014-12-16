@@ -112,12 +112,6 @@ class ConfigurationSpec extends ObjectBehavior
         $this->getServiceName('controller')->shouldReturn('sylius.controller.product');
     }
 
-    function it_generates_event_names()
-    {
-        $this->getEventName('create')->shouldReturn('sylius.product.create');
-        $this->getEventName('created')->shouldReturn('sylius.product.created');
-    }
-
     function it_generates_template_names()
     {
         $this->getTemplateName('index.html')->shouldReturn('SyliusWebBundle:Product:index.html.twig');

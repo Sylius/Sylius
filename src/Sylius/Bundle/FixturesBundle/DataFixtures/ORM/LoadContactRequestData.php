@@ -26,11 +26,10 @@ class LoadContactRequestData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $contactRequestRepository = $this->getContactRequestRepository();
+        $contactRequestManager = $this->getManager('contact_request');
 
         for ($i = 0; $i < 20; $i++) {
-            $contactRequest = $contactRequestRepository->createNew();
-
+            $contactRequest = $contactRequestManager->createNew();
             $contactRequest->setFirstName($this->faker->firstName());
             $contactRequest->setLastName($this->faker->lastName());
             $contactRequest->setEmail($this->faker->email());

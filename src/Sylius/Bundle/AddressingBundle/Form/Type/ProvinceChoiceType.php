@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
@@ -27,16 +27,16 @@ class ProvinceChoiceType extends AbstractType
     /**
      * Province repository.
      *
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param EntityRepository $repository
+     * @param RepositoryInterface $repository
      */
-    public function __construct(EntityRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

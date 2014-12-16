@@ -13,6 +13,7 @@ namespace Sylius\Bundle\OrderBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -24,6 +25,10 @@ class CommentController extends ResourceController
 {
     /**
      * Create new comment associated to order.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function createAction(Request $request)
     {

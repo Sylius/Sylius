@@ -20,6 +20,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -128,6 +129,18 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     protected function getRepository($resource)
     {
         return $this->getService('sylius.repository.'.$resource);
+    }
+
+    /**
+     * Get manager by resource name.
+     *
+     * @param string $resource
+     *
+     * @return DomainManagerInterface
+     */
+    protected function getManager($resource)
+    {
+        return $this->getService('sylius.manager.'.$resource);
     }
 
     /**

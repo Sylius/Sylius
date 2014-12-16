@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CartBundle\Purger;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CartBundle\Repository\CartRepositoryInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Purger\PurgerInterface;
+use Sylius\Component\Cart\Repository\CartRepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * Default cart purger.
@@ -26,7 +26,7 @@ class ExpiredCartsPurger implements PurgerInterface
     /**
      * Cart manager.
      *
-     * @var ObjectManager
+     * @var DomainManagerInterface
      */
     protected $manager;
 
@@ -37,7 +37,7 @@ class ExpiredCartsPurger implements PurgerInterface
      */
     protected $repository;
 
-    public function __construct(ObjectManager $manager, CartRepositoryInterface $repository)
+    public function __construct(DomainManagerInterface $manager, CartRepositoryInterface $repository)
     {
         $this->manager = $manager;
         $this->repository = $repository;
@@ -53,8 +53,6 @@ class ExpiredCartsPurger implements PurgerInterface
         foreach ($cartsToPurge as $cart) {
             $this->purgeCart($cart);
         }
-
-        $this->manager->flush();
     }
 
     /**
@@ -64,6 +62,6 @@ class ExpiredCartsPurger implements PurgerInterface
      */
     protected function purgeCart(CartInterface $cart)
     {
-        $this->manager->remove($cart);
+        $this->manager->delete($cart);
     }
 }

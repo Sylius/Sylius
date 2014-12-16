@@ -70,8 +70,8 @@ class LoadTaxationData extends DataFixture
      */
     protected function createTaxCategory($name, $description)
     {
-        /* @var $category TaxCategoryInterface */
-        $category = $this->getTaxCategoryRepository()->createNew();
+        /** @var $category TaxCategoryInterface */
+        $category = $this->getManager('tax_category')->createNew();
         $category->setName($name);
         $category->setDescription($description);
 
@@ -93,8 +93,8 @@ class LoadTaxationData extends DataFixture
      */
     protected function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
     {
-        /* @var $rate TaxRateInterface */
-        $rate = $this->getTaxRateRepository()->createNew();
+        /** @var $rate TaxRateInterface */
+        $rate = $this->getManager('tax_rate')->createNew();
         $rate->setName($name);
         $rate->setZone($this->getZoneByName($zoneName));
         $rate->setAmount($amount);

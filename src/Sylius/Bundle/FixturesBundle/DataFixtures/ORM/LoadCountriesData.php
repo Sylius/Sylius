@@ -82,11 +82,11 @@ class LoadCountriesData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $countryRepository = $this->getCountryRepository();
+        $countryManager = $this->getManager('country');
         $countries = Intl::getRegionBundle()->getCountryNames($this->container->getParameter('sylius.locale'));
 
         foreach ($countries as $isoName => $name) {
-            $country = $countryRepository->createNew();
+            $country = $countryManager->createNew();
             $country->setName($name);
             $country->setIsoName($isoName);
 
@@ -117,10 +117,10 @@ class LoadCountriesData extends DataFixture
      */
     protected function addUsStates(CountryInterface $country)
     {
-        $provinceRepository = $this->getProvinceRepository();
+        $manager = $this->getManager('province');
 
         foreach ($this->states as $isoName => $name) {
-            $province = $provinceRepository->createNew()
+            $province = $manager->createNew()
                 ->setName($name)
                 ->setIsoName($isoName)
             ;

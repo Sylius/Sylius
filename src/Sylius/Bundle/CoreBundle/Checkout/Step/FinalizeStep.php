@@ -71,8 +71,7 @@ class FinalizeStep extends CheckoutStep
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
 
         $manager = $this->get('sylius.manager.order');
-        $manager->persist($order);
-        $manager->flush();
+        $manager->create($order);
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_COMPLETE, $order);
         $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);

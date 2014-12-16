@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -35,7 +34,7 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     /**
      * @var string
      */
-    protected $managerName;
+    protected $objectManagerName;
 
     /**
      * @var string
@@ -47,12 +46,17 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
      */
     protected $templates;
 
-    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $managerName, $templates = null)
+    /**
+     * @var string
+     */
+    protected $managerClass = 'Sylius\\Bundle\\ResourceBundle\\Doctrine\\DomainManager';
+
+    public function __construct(ContainerBuilder $container, $prefix, $resourceName, $objectManagerName, $templates = null)
     {
         $this->container = $container;
         $this->prefix = $prefix;
         $this->resourceName = $resourceName;
-        $this->managerName = $managerName;
+        $this->objectManagerName = $objectManagerName;
         $this->templates = $templates;
     }
 
@@ -66,11 +70,14 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         }
 
         $this->container->setDefinition(
+            $this->getContainerKey('manager'),
+            $this->getManagerDefinition($classes)
+        );
+
+        $this->container->setDefinition(
             $this->getContainerKey('repository'),
             $this->getRepositoryDefinition($classes)
         );
-
-        $this->setManagerAlias();
     }
 
     /**
@@ -88,9 +95,18 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     abstract protected function getClassMetadataClassname();
 
     /**
-     * Get the respository service
+     * Get the manager service
      *
-     * @param array $classes
+     * @param string[] $classes
+     *
+     * @return Definition
+     */
+    abstract protected function getManagerDefinition(array $classes);
+
+    /**
+     * Get the repository service
+     *
+     * @param string[] $classes
      *
      * @return Definition
      */
@@ -146,14 +162,6 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
         return $definition;
     }
 
-    protected function setManagerAlias()
-    {
-        $this->container->setAlias(
-            $this->getContainerKey('manager'),
-            new Alias($this->getManagerServiceKey())
-        );
-    }
-
     /**
      * @param string     $key
      * @param Definition $definition
@@ -164,8 +172,8 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     }
 
     /**
-     * @param string $key
-     * @param string $suffix
+     * @param string      $key
+     * @param null|string $suffix
      *
      * @return string
      */

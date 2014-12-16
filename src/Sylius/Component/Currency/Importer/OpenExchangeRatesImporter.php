@@ -39,8 +39,6 @@ class OpenExchangeRatesImporter extends AbstractImporter
             foreach ($data as $code => $rate) {
                 $this->updateOrCreate($managedCurrencies, $code, (float) $rate);
             }
-
-            $this->manager->flush();
         }
     }
 }

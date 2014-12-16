@@ -24,11 +24,11 @@ class ProductContext extends DefaultContext
      */
     public function thereAreProducts(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product');
+        $em      = $this->getEntityManager();
+        $manager = $this->getManager('product');
 
         foreach ($table->getHash() as $data) {
-            $product = $repository->createNew();
+            $product = $manager->createNew();
             $product->setName(trim($data['name']));
             $product->setDescription('...');
             $product->getMasterVariant()->setPrice($data['price'] * 100);
@@ -74,10 +74,10 @@ class ProductContext extends DefaultContext
                 $product->setDeletedAt(new \DateTime());
             }
 
-            $manager->persist($product);
+            $em->persist($product);
         }
 
-        $manager->flush();
+        $em->flush();
     }
 
     /**
@@ -85,10 +85,7 @@ class ProductContext extends DefaultContext
      */
     public function thereIsPrototypeWithFollowingConfiguration($name, TableNode $table)
     {
-        $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product_prototype');
-
-        $prototype = $repository->createNew();
+        $prototype = $this->getManager('product_prototype')->createNew();
         $prototype->setName($name);
 
         $data = $table->getRowsHash();
@@ -101,8 +98,9 @@ class ProductContext extends DefaultContext
             $prototype->addAttribute($this->findOneByName('product_attribute', trim($attributeName)));
         }
 
-        $manager->persist($prototype);
-        $manager->flush();
+        $em = $this->getEntityManager();
+        $em->persist($prototype);
+        $em->flush();
     }
 
     /**
@@ -123,24 +121,24 @@ class ProductContext extends DefaultContext
      */
     public function thereIsOption($name, $values, $presentation = null, $flush = true)
     {
-        $optionValueRepository = $this->getRepository('product_option_value');
+        $manager = $this->getManager('product_option_value');
 
-        $option = $this->getRepository('product_option')->createNew();
+        $option = $this->getManager('product_option')->createNew();
         $option->setName($name);
         $option->setPresentation($presentation ?: $name);
 
         foreach (explode(',', $values) as $value) {
-            $optionValue = $optionValueRepository->createNew();
+            $optionValue = $manager->createNew();
             $optionValue->setValue(trim($value));
 
             $option->addValue($optionValue);
         }
 
-        $manager = $this->getEntityManager();
-        $manager->persist($option);
+        $em = $this->getEntityManager();
+        $em->persist($option);
 
         if ($flush) {
-            $manager->flush();
+            $em->flush();
         }
 
         return $option;
@@ -178,7 +176,7 @@ class ProductContext extends DefaultContext
             'type' => 'text'
         ), $additionalData);
 
-        $attribute = $this->getRepository('product_attribute')->createNew();
+        $attribute = $this->getManager('product_attribute')->createNew();
         $attribute->setName($name);
 
         foreach ($additionalData as $key => $value) {

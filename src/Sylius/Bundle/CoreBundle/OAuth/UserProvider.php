@@ -17,6 +17,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\Core\Model\UserOAuthInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -29,6 +30,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserProvider extends FOSUBUserProvider
 {
     /**
+     * @var DomainManagerInterface
+     */
+    protected $oauthManager;
+
+    /**
      * @var RepositoryInterface
      */
     protected $oauthRepository;
@@ -36,13 +42,15 @@ class UserProvider extends FOSUBUserProvider
     /**
      * Constructor.
      *
-     * @param UserManagerInterface $userManager     FOSUB user provider.
-     * @param RepositoryInterface  $oauthRepository
+     * @param UserManagerInterface   $userManager     FOSUB user provider.
+     * @param RepositoryInterface    $oauthRepository
+     * @param DomainManagerInterface $oauthManager
      */
-    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository)
+    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository, DomainManagerInterface $oauthManager)
     {
         $this->userManager     = $userManager;
         $this->oauthRepository = $oauthRepository;
+        $this->oauthManager    = $oauthManager;
     }
 
     /**
@@ -116,12 +124,13 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
     {
-        $oauth = $this->oauthRepository->createNew();
+        /** @var $oauth UserOAuthInterface */
+        $oauth = $this->oauthManager->createNew();
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
 
-        /* @var $user SyliusUserInterface */
+        /** @var $user SyliusUserInterface */
         $user->addOAuthAccount($oauth);
 
         $this->userManager->updateUser($user);

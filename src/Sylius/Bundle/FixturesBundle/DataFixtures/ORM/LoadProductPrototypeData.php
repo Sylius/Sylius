@@ -61,8 +61,8 @@ class LoadProductPrototypeData extends DataFixture
      */
     protected function createPrototype($name, array $options, array $properties)
     {
-        /* @var $prototype PrototypeInterface */
-        $prototype = $this->getProductPrototypeRepository()->createNew();
+        /** @var $prototype PrototypeInterface */
+        $prototype = $this->getManager('product_prototype')->createNew();
         $prototype->setName($name);
 
         foreach ($options as $option) {

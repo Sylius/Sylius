@@ -70,7 +70,7 @@ class LoadShippingData extends DataFixture
     protected function createShippingCategory($name, $description)
     {
         /* @var $category ShippingCategoryInterface */
-        $category = $this->getShippingCategoryRepository()->createNew();
+        $category = $this->getManager('shipping_category')->createNew();
         $category->setName($name);
         $category->setDescription($description);
 
@@ -92,8 +92,8 @@ class LoadShippingData extends DataFixture
      */
     protected function createShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
     {
-        /* @var $method ShippingMethodInterface */
-        $method = $this->getShippingMethodRepository()->createNew();
+        /** @var $method ShippingMethodInterface */
+        $method = $this->getManager('shipping_method')->createNew();
         $method->setName($name);
         $method->setZone($this->getZoneByName($zoneName));
         $method->setCalculator($calculator);

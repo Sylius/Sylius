@@ -57,13 +57,13 @@ class LoadTaxonomiesData extends DataFixture
      */
     protected function createTaxonomy($name, array $taxons)
     {
-        /* @var $taxonomy TaxonomyInterface */
-        $taxonomy = $this->getTaxonomyRepository()->createNew();
+        /** @var $taxonomy TaxonomyInterface */
+        $taxonomy = $this->getManager('taxonomy')->createNew();
         $taxonomy->setName($name);
 
         foreach ($taxons as $taxonName) {
-            /* @var $taxon TaxonInterface */
-            $taxon = $this->getTaxonRepository()->createNew();
+            /** @var $taxon TaxonInterface */
+            $taxon = $this->getManager('taxon')->createNew();
             $taxon->setName($taxonName);
 
             $taxonomy->addTaxon($taxon);

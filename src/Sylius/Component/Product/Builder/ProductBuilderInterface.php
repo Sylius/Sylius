@@ -43,11 +43,9 @@ interface ProductBuilderInterface
     public function addAttribute($name, $value, $presentation = null);
 
     /**
-     * Save the product
-     *
-     * @param Boolean $flush
+     * Save the product.
      *
      * @return ProductInterface
      */
-    public function save($flush = true);
+    public function save();
 }

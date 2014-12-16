@@ -16,16 +16,16 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Manager\DomainManagerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShipmentFactorySpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $shipmentRepository)
+    function let(DomainManagerInterface $manager)
     {
-        $this->beConstructedWith($shipmentRepository);
+        $this->beConstructedWith($manager);
     }
 
     function it_is_initializable()
@@ -39,14 +39,13 @@ class ShipmentFactorySpec extends ObjectBehavior
     }
 
     function it_creates_a_single_shipment_and_assigns_all_inventory_units_to_it(
-        $shipmentRepository,
+        $manager,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ArrayCollection $shipments,
         InventoryUnitInterface $inventoryUnit
     ) {
-
-        $shipmentRepository
+        $manager
             ->createNew()
             ->willReturn($shipment)
         ;
@@ -54,13 +53,11 @@ class ShipmentFactorySpec extends ObjectBehavior
         $order
             ->getShipments()
             ->willReturn($shipments)
-            ->shouldBeCalled()
         ;
 
         $shipments
-            ->first()
-            ->willReturn(null)
-            ->shouldBeCalled()
+            ->isEmpty()
+            ->willReturn(true)
         ;
 
         $order
@@ -89,9 +86,13 @@ class ShipmentFactorySpec extends ObjectBehavior
         InventoryUnitInterface $inventoryUnitWithoutShipment
     ) {
         $shipments
+            ->isEmpty()
+            ->willReturn(false)
+        ;
+
+        $shipments
             ->first()
             ->willReturn($shipment)
-            ->shouldBeCalled()
         ;
 
         $inventoryUnit
@@ -110,7 +111,6 @@ class ShipmentFactorySpec extends ObjectBehavior
         $order
             ->getShipments()
             ->willReturn($shipments)
-            ->shouldBeCalled()
         ;
 
         $shipment
