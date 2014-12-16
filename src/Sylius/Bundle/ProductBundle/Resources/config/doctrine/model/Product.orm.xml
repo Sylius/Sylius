@@ -53,6 +53,9 @@
         </one-to-many>
 
         <many-to-many field="options" target-entity="Sylius\Component\Product\Model\OptionInterface">
+            <cascade>
+                <cascade-persist />
+            </cascade>
             <join-table name="sylius_product_options">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />
