@@ -11,6 +11,9 @@
 
 namespace Sylius\Component\Inventory\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * Location for Stockable
  *
@@ -38,6 +41,21 @@ class StockLocation implements StockLocationInterface
      * @var StockableInterface
      */
     protected $stockable;
+
+    /**
+     * StockItems
+     *
+     * @var Collection
+     */
+    protected $items;
+
+    /**
+     *  Construct
+     */
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     /**
      * Get the id for the stock location
@@ -81,6 +99,34 @@ class StockLocation implements StockLocationInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addItem(StockItemInterface $item)
+    {
+        $this->items->add($item);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeItem(StockItemInterface $item)
+    {
+        $this->items->removeElement($item);
 
         return $this;
     }

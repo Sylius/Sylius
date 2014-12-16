@@ -10,6 +10,8 @@
  */
 namespace Sylius\Component\Inventory\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 
 /**
  * Location for Stockable
@@ -47,4 +49,23 @@ interface StockLocationInterface
      * @return $this
      */
     public function setName($name);
+
+    /**
+     * @return StockItemInterface[]|Collection
+     */
+    public function getItems();
+
+    /**
+     * @param StockItemInterface $item
+     *
+     * @return StockLocationInterface
+     */
+    public function addItem(StockItemInterface $item);
+
+    /**
+     * @param StockItemInterface $item
+     *
+     * @return StockLocationInterface
+     */
+    public function removeItem(StockItemInterface $item);
 }
