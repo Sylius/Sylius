@@ -30,11 +30,9 @@ class ActionChoiceType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver
-            ->setDefaults(array(
-                'choices' => $this->actions
-            ))
-        ;
+        $resolver->setDefaults(array(
+            'choices' => $this->actions
+        ));
     }
 
     public function getParent()

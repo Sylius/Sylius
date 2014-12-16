@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 class ActionTypeSpec extends ObjectBehavior
 {
@@ -28,70 +30,50 @@ class ActionTypeSpec extends ObjectBehavior
         $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
     }
 
-    function it_should_be_initializable()
+    function it_is_initializabled()
     {
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionType');
     }
 
-    function it_should_be_a_form_type()
+    function it_is_configuration_form_type()
     {
-        $this->shouldHaveType('Symfony\Component\Form\AbstractType');
+        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType');
     }
 
-    function it_should_build_form_with_action_choice_field(
+    function it_builds_form(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
         $builder
-            ->getFormFactory()
-            ->willReturn($factory)
-        ;
-
-        $builder
-            ->addEventSubscriber(Argument::any())
+            ->add('type', 'sylius_promotion_action_choice', Argument::type('array'))
             ->willReturn($builder)
         ;
 
-        $builder
-            ->add('type', 'sylius_promotion_action_choice', Argument::any())
-            ->willReturn($builder)
-        ;
+        $builder->getFormFactory()->willReturn($factory);
+        $builder->addEventSubscriber(
+            Argument::type('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber')
+        )->shouldBeCalled();
 
-        $this->buildForm($builder, array());
-    }
-
-    function it_should_add_build_promotion_action_event_subscriber(
-        FormBuilder $builder,
-        FormFactoryInterface $factory
-    ) {
-        $builder
-            ->getFormFactory()
-            ->willReturn($factory)
-        ;
-
-        $builder
-            ->add(Argument::any(), Argument::any(), Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->addEventSubscriber(Argument::type('Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormListener'))
-            ->willReturn($builder)
-        ;
-
-        $this->buildForm($builder, array());
+        $this->buildForm($builder, array(
+            'configuration_type' => 'configuration_form_type'
+        ));
     }
 
     function it_should_define_assigned_data_class(OptionsResolverInterface $resolver)
     {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => 'Action',
-                'validation_groups' => array('sylius'),
-            ))
-            ->shouldBeCalled()
-        ;
+        $resolver->setDefaults(array(
+            'data_class' => 'Action',
+            'validation_groups' => array('sylius'),
+        ))->shouldBeCalled();
+
+        $resolver->setOptional(array('configuration_type'))->shouldBeCalled();
+        $resolver->setDefaults(array('configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT))->shouldBeCalled();
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_has_a_name()
+    {
+        $this->getName()->shouldReturn('sylius_promotion_action');
     }
 }

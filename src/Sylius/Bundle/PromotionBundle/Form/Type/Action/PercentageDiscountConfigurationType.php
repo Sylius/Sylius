@@ -42,7 +42,7 @@ class PercentageDiscountConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
-                )
+                ),
             ))
         ;
     }

@@ -5,7 +5,7 @@ div.collection-item .collection-box {
 .form-inline div.collection-item .collection-box,
 div.collection-item .collection-box.unique-field,
 .form-horizontal div.collection-item .collection-box {
-    padding: 0 25px 0 12px;
+    padding: 0 12px 0 12px;
 }
 
 .collection-item .collection-box .form-group {
