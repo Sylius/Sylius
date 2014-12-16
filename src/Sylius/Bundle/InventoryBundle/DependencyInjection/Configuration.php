@@ -123,6 +123,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\StockItem')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->end()
+                                ->scalarNode('form')->defaultValue('Sylius\Bundle\InventoryBundle\Form\Type\StockItemType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('stock_location')

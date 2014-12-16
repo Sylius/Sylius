@@ -24,6 +24,7 @@
 
         <field name="onHand" column="on_hand" nullable="false" />
         <field name="onHold" column="on_hold" nullable="false" />
+        <field name="availableOnDemand" column="available_on_demand" type="boolean" />
 
         <many-to-one field="stockable" target-entity="Sylius\Component\Inventory\Model\StockableInterface">
             <join-column name="stockable_id" referenced-column-name="id" nullable="false" />

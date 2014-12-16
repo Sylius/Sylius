@@ -66,7 +66,9 @@ class Coordinator implements CoordinatorInterface
         $packages = array();
 
         foreach ($locations as $location) {
-            $packages = array_merge($packages, $this->packer->pack($location, $items));
+            foreach ($this->packer->pack($location, $items) as $package) {
+                $packages[] = $package;
+            }
         }
 
         return $packages;

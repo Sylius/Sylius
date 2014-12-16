@@ -78,8 +78,15 @@ class Packer implements PackerInterface
                 continue;
             }
 
-            for ($i = 0; $i < $items->getRemaining($stockable) & $i < $available; $i++) {
+            $remaining = $items->getRemaining($stockable);
+
+            for ($i = 0; $i < $remaining; $i++) {
                 $unit = $items->getInventoryUnitForPacking($stockable);
+
+                if (null === $unit) {
+                    break;
+                }
+
                 $unit->setStockItem($stockItem);
 
                 $package->addInventoryUnit($unit);

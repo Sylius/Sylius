@@ -109,6 +109,7 @@ class CheckoutController extends FOSRestController
             foreach ($order->getShipments() as $key => $shipment) {
                 $shipments[] = array(
                     'shipment' => $shipment,
+                    'items'    => $shipment->getItems(),
                     'methods'  => $form['shipments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
                 );
             }

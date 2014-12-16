@@ -72,7 +72,7 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
             return false;
         }
 
-        if ($this->backorders || $stockable->isAvailableOnDemand()) {
+        if ($this->backorders || $this->isBackorderable($stockable)) {
             return true;
         }
 
@@ -80,5 +80,23 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
         $onHold = $this->quantifier->getTotalOnHold($onHold);
 
         return 0 < ($onHand - $onHold);
+    }
+
+    /**
+     * Check if the item is backorderable in any of locations.
+     *
+     * @param StockableInterface $stockable
+     *
+     * @return Boolean
+     */
+    private function isBackorderable(StockableInterface $stockable)
+    {
+        foreach ($stockable->getStockItems() as $stockItem) {
+            if ($stockItem->isBackorderable()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

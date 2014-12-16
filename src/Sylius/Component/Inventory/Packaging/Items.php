@@ -75,16 +75,12 @@ class Items
     public function getInventoryUnitForPacking(StockableInterface $stockable)
     {
         if (0 === $this->getRemaining($stockable)) {
-            throw new \LogicException('No more remaining units.');
+            return null;
         }
 
         $id = spl_object_hash($stockable);
-        $units = &$this->items[$id]['units'];
+        $this->remaining[$id]--;
 
-        foreach ($units as $key => $unit)  {
-            unset($units[$key]);
-
-            return $unit;
-        }
+        return array_pop($this->items[$id]['units']);
     }
 }
