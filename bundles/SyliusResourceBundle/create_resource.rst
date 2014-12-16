@@ -32,7 +32,7 @@ As said previously, you need to declare your form as a service. Its name must be
 
     <parameters>
         <!-- If you use the basic configuration this paramter is not available in the container. You need to add it manually. -->
-        <parameter key="app.form.type.user.class">App\Byndle\Form\UserType</parameter>
+        <parameter key="app.form.type.user.class">App\Bundle\Form\UserType</parameter>
     </parameters>
 
     <services>
