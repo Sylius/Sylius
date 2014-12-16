@@ -23,17 +23,10 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
  * Sylius core product entity.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Product extends BaseProduct implements ProductInterface
 {
-    /**
-     * Short product description.
-     * For lists displaying.
-     *
-     * @var string
-     */
-    protected $shortDescription;
-
     /**
      * Variant selection method.
      *
@@ -217,24 +210,6 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getShortDescription()
-    {
-        return $this->shortDescription;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShortDescription($shortDescription)
-    {
-        $this->shortDescription = $shortDescription;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxCategory()
     {
         return $this->taxCategory;
@@ -311,5 +286,22 @@ class Product extends BaseProduct implements ProductInterface
             self::VARIANT_SELECTION_CHOICE => 'Variant choice',
             self::VARIANT_SELECTION_MATCH  => 'Options matching',
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShortDescription()
+    {
+        return $this->translate()->getShortDescription();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->translate()->setShortDescription($shortDescription);
+        return $this;
     }
 }

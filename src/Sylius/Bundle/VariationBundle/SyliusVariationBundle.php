@@ -11,15 +11,16 @@
 
 namespace Sylius\Bundle\VariationBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * Bundle for managing object options and variants.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusVariationBundle extends AbstractResourceBundle
+class SyliusVariationBundle extends AbstractTranslationBundle
 {
     /**
      * {@inheritdoc}

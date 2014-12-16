@@ -13,13 +13,15 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * Default country model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Country implements CountryInterface
+class Country extends AbstractTranslatable implements CountryInterface
 {
     /**
      * Country id.
@@ -27,13 +29,6 @@ class Country implements CountryInterface
      * @var mixed
      */
     protected $id;
-
-    /**
-     * Country name.
-     *
-     * @var string
-     */
-    protected $name;
 
     /**
      * Country name in ISO format.
@@ -49,12 +44,13 @@ class Country implements CountryInterface
 
     public function __construct()
     {
+        parent::__construct();
         $this->provinces = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
@@ -70,7 +66,7 @@ class Country implements CountryInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -78,7 +74,7 @@ class Country implements CountryInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
 
         return $this;
     }

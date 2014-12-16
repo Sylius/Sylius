@@ -15,7 +15,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\Common\Util\ClassUtils;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\DoctrineProvider;
-use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route;
@@ -47,6 +46,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     public function __construct(ManagerRegistry $managerRegistry, array $routeConfigs)
     {
         $this->routeConfigs = $routeConfigs;
+        $this->classRepositories = array();
         parent::__construct($managerRegistry);
     }
 
@@ -122,19 +122,19 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             if ('' === $this->routeConfigs[$className]['prefix']
                 || 0 === strpos($path, $this->routeConfigs[$className]['prefix'])
             ) {
-                $name = substr($path, strlen($this->routeConfigs[$className]['prefix']));
-                $name = trim($name, '/');
-                $entity = $repository->findOneBy(array($this->routeConfigs[$className]['field'] => $name));
+                $value = substr($path, strlen($this->routeConfigs[$className]['prefix']));
+                $value = trim($value, '/');
+                $entity = $repository->findOneBy(array($this->routeConfigs[$className]['field'] => $value));
                 if (!$entity) {
                     continue;
                 }
 
-                $route = $this->createRouteFromEntity($entity);
-                if (preg_match('/.+\.([a-z]+)$/i', $name, $matches)) {
+                $route = $this->createRouteFromEntity($entity, $value);
+                if (preg_match('/.+\.([a-z]+)$/i', $value, $matches)) {
                     $route->setDefault('_format', $matches[1]);
                 }
 
-                $collection->add($name, $route);
+                $collection->add($value, $route);
             }
         }
 
@@ -168,11 +168,20 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
      *
      * @return Route
      */
-    private function createRouteFromEntity($entity)
+    private function createRouteFromEntity($entity, $value = null)
     {
         $className = ClassUtils::getClass($entity);
         $fieldName = $this->routeConfigs[$className]['field'];
-        $value = $this->getFieldValue($entity, $fieldName);
+
+        // Used for matching by translated field
+        // eg:
+        // If the url slug doesn't match the current's locale slug
+        // the method getSlug would return the slug in current locale
+        // it won't match the url and will fail
+        // TODO refactor class if locale is included in url
+        if (null === $value) {
+            $value = $this->getFieldValue($entity, $fieldName);
+        }
         $defaults = array('_sylius_entity' => $entity, $fieldName => $value);
 
         return new Route($this->routeConfigs[$className]['prefix'].'/'.$value, $defaults);

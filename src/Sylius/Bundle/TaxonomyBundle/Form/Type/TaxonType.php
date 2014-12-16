@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Taxon form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonType extends AbstractResourceType
 {
@@ -28,16 +29,9 @@ class TaxonType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.taxon.name'
-            ))
-            ->add('permalink', 'text', array(
-                'required' => false,
-                'label' => 'sylius.form.taxon.permalink'
-            ))
-            ->add('description', 'text', array(
-                'required' => false,
-                'label' => 'sylius.form.taxon.description'
+            ->add('translations', 'a2lix_translationsForms', array(
+                'form_type' => new TaxonTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'label'    => 'sylius.form.taxon.name'
             ))
             ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
         ;

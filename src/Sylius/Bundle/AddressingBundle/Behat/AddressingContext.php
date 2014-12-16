@@ -135,4 +135,22 @@ class AddressingContext extends DefaultContext
 
         return $province;
     }
+
+    /**
+     * @Given the following country translations exist
+     */
+    public function theFollowingCountryTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $countryTranslation = $this->findOneByName('country_translation', $data['country']);
+            $country = $countryTranslation->getTranslatable();
+            $country
+                ->setCurrentLocale($data['locale'])
+                ->setName($data['name']);
+        }
+
+        $manager->flush();
+    }
 }

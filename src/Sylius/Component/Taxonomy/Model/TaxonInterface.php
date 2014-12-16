@@ -12,14 +12,16 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Prezent\Doctrine\Translatable\TranslatableInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * Interface for taxons.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonInterface extends SoftDeletableInterface
+interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterface, TranslatableInterface
 {
     /**
      * Get the id of taxonomy.

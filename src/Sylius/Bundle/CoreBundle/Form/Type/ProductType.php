@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Product form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductType extends BaseProductType
 {
@@ -30,9 +31,10 @@ class ProductType extends BaseProductType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('shortDescription', 'textarea', array(
-                'required' => false,
-                'label'    => 'sylius.form.product.short_description'
+            ->add('translations', 'a2lix_translationsForms', array(
+                // TODO Form as a service?
+                'form_type' => new ProductTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'label'    => 'sylius.form.product.translations'
             ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(
                 'required'    => false,

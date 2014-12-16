@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class CountryTypeSpec extends ObjectBehavior
 {
@@ -44,7 +45,7 @@ class CountryTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('name', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder);
 

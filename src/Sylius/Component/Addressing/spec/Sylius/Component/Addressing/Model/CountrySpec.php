@@ -17,9 +17,15 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class CountrySpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Addressing\Model\Country');
@@ -44,6 +50,12 @@ class CountrySpec extends ObjectBehavior
     {
         $this->setName('United States');
         $this->getName()->shouldReturn('United States');
+    }
+
+    function it_returns_name_when_converted_to_string()
+    {
+        $this->setName('Spain');
+        $this->__toString()->shouldReturn('Spain');
     }
 
     function it_has_no_iso_name_by_default()

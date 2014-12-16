@@ -60,6 +60,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->end()
                                     ->scalarNode('interface')->end()
+                                    ->scalarNode('translatable_fields')->end()
                                 ->end()
                             ->end()
                         ->end()

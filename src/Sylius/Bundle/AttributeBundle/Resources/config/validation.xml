@@ -30,6 +30,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Attribute\Model\AttributeTranslation">
         <property name="presentation">
             <constraint name="NotBlank">
                 <option name="message">sylius.attribute.presentation.not_blank</option>

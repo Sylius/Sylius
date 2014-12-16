@@ -9,8 +9,9 @@ sylius_backend_shipping_method_index:
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:index.html.twig
             sortable: true
-            sorting:
-                name: desc
+#            TODO allow sort by translated field
+#            sorting:
+#                name: desc
 
 sylius_backend_shipping_method_create:
     path: /new

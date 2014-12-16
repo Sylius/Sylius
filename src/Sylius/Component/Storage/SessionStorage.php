@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class SessionStorage implements StorageInterface
 {
@@ -34,10 +35,6 @@ class SessionStorage implements StorageInterface
      */
     public function hasData($key)
     {
-        if (!$this->session->isStarted()) {
-            return false;
-        }
-
         return $this->session->has($key);
     }
 
@@ -46,10 +43,6 @@ class SessionStorage implements StorageInterface
      */
     public function getData($key, $default = null)
     {
-        if (!$this->session->isStarted()) {
-            return $default;
-        }
-
         return $this->session->get($key, $default);
     }
 
