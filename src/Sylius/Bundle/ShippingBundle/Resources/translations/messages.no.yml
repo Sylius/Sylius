@@ -3,19 +3,40 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Antall
+        equal: Er lik
+      type: Type
     shipment:
+      state: Tilstand
       states:
-        checkout: Gå til kassen
+        checkout: Sjekk ut
+        dispatched: Sendt
         pending: Venter
+        ready: Klar
+        shipped: Sendt
+        returned: Returnert
+      tracking_code: Sporingskode
     shipping_calculator:
       flat_rate_configuration:
         amount: Beløp
+      flexible_rate_configuration:
+        additional_item_cost: Ytterligere varekostnader
+        additional_item_limit: Begrens ytterligere varer
+        first_item_cost: Kostnad ved første vare
       per_item_rate_configuration:
         amount: Beløp
       weight_rate_configuration:
         amount: Beløp
+        division: Avdeling
     shipping_category:
       description: Beskrivelse
       name: Navn
     shipping_method:
+      calculator: Kalkulator
+      category: Kategori
+      category_requirement: Kategorikrav
+      configuration: Konfigurasjon
+      enabled: Aktivert
       name: Navn

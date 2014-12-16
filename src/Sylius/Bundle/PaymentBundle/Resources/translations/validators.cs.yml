@@ -15,8 +15,6 @@ sylius:
       luhn: Číslo kreditní karty, které jste zadali je neplatné.
     security_code:
       not_blank: Zadejte prosím bezpečnostní kód.
-      max_length: 'CW kreditní karty musí obsahovat mezi {{ min }} až {{ max }} znaky.'
-      min_length: 'CW kreditní karty musí obsahovat mezi {{ min }} až {{ max }} znaky.'
     expiry_year:
       not_blank: Vyberte prosím rok vypršení platnosti.
   payment_method:

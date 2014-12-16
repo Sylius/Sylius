@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: Velg koden for nasjonale innstillinger.
+      unique: Koden for nasjonale innstillinger må være unik.

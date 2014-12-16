@@ -1,3 +1,41 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    block:
+      id: ID
+      title: Tiêu đề
+    cart:
+      coupon: Phiếu giảm giá
+    group:
+      name: Tên
+      roles: Vai trò
+    image:
+      file: Hình ảnh
+    locale:
+      code: Mã
+    page:
+      id: ID
+      title: Tiêu đề
+    product_filter:
+      name: Tên
+      sku: MÃ SẢN PHẨM
+    settings:
+      general:
+        locale: Ngôn ngữ
+    taxon:
+      file: Chọn ảnh
+    taxonomy:
+      file: Chọn ảnh
+    user:
+      groups: Nhóm
+      password: Mật khẩu
+    user_filter:
+      query: Tìm kiếm
+    variant:
+      height: Chiều cao
+      images: Hình ảnh
+      price: Giá
+      sku: MÃ SẢN PHẨM
+      width: Chiều rộng

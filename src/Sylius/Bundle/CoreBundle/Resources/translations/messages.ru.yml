@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -21,8 +20,8 @@ sylius:
     checkout:
       addressing:
         different_billing_address: Использовать другой адрес для составления счета?
-      payment_method: Метод оплаты
-      shipping_method: Метод доставки
+      payment_method: Способ оплаты
+      shipping_method: Способ доставки
     group:
       name: Название
       roles: Роли
@@ -32,11 +31,12 @@ sylius:
       code: Код
       enabled: Активен
     order_filter:
-      created_at_from: Откуда
-      created_at_to: Куда
+      created_at_from: Создан после
+      created_at_to: Создан до
       number: Номер
-      total_from: Откуда
-      total_to: Куда
+      total_from: От
+      total_to: До
+      payment_state: Статус платежа
     page:
       body: Содержание
       id: ID
@@ -60,8 +60,8 @@ sylius:
       taxation:
         default_tax_zone: Налоговая зона по умолчанию
     shipment_filter:
-      created_at_from: Откуда
-      created_at_to: Куда
+      created_at_from: От
+      created_at_to: До
       number: Номер заказа
       shipping_address: Имя получателя
     shipping_method:

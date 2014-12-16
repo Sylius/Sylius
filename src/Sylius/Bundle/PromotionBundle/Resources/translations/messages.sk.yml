@@ -6,17 +6,45 @@ sylius:
     action:
       fixed_discount_configuration:
         amount: Suma
+      percentage_discount_configuration:
+        percentage: Percentuálne
+      shipping_discount_configuration:
+        percentage: Percentuálne
       type: Typ
     rule:
+      taxonomy_configuration:
+        exclude: Vylúčiť
+      item_count_configuration:
+        count: Počet
+        equal: Rovný
       item_total_configuration:
         amount: Suma
+        equal: Rovný
+      nth_order_configuration:
+        nth: N-ty
       user_loyality_configuration:
         time: Čas
+        unit:
+          days: Dní
+          weeks: Týždňov
+          months: Mesiacov
+          years: Rokov
+          0: Jednotka
+      shipping_country_configuration:
+        country: Krajina
       type: Typ
     coupon:
       code: Kód
+      usage_limit: Limit použitia
     coupon_generate_instruction:
       amount: Suma
+      usage_limit: Limit použitia
     promotion:
+      actions: Akcie
+      coupon_based: Založená na kupónoch
       description: Popis
+      ends_at: Končí
       name: Názov
+      rules: Pravidlá
+      starts_at: Začína
+      usage_limit: Limit použitia

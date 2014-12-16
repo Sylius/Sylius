@@ -1,3 +1,53 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    sku:
+      not_blank: Lütfen ürün stok birimini girin.
+      unique: Ürün stok birimi benzersiz olmalıdır.
+    name:
+      not_blank: Lütfen ürün adı girin.
+      min_length: 'Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Ürün adı 1 karakterden uzun olmamalıdır.|Ürün adı {{ limit }} karakterden uzun olmamalıdır.'
+    description:
+      not_blank: Lütfen ürün açıklaması girin.
+      min_length: 'Ürün açıklaması en az 1 karakter uzunluğunda olmalıdır.|Ürün açıklaması en az {{ limit }} karakter uzunluğunda olmalıdır.'
+  variant:
+    sku:
+      not_blank: Lütfen stok birimi varyantını girin.
+      unique: Stok birimi varyantı benzersiz olmalıdır.
+    combination: Bu seçenekli varyant zaten bulunmaktadır.
+  option:
+    name:
+      not_blank: Seçenek adı giriniz.
+      min_length: 'Seçenek adı en az 1 karakter uzunluğunda olmalıdır.|Seçenek adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Seçenek adı 1 karakterden uzun olmamalıdır.|Seçenek adı {{ limit }} karakterden uzun olmamalıdır.'
+    presentation:
+      not_blank: Lütfen seçenek sunumunu girin.
+      min_length: 'Seçenek sunumu en az 1 karakter uzunluğunda olmalıdır.|Seçenek sunumu en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Seçenek sunumu 1 karakterden uzun olmamalıdır.|Seçenek sunumu {{ limit }} karakterden uzun olmamalıdır.'
+    values:
+      min_count: 'Lütfen en az {{ limit }} seçenek ekleyin.|Lütfen en az {{ limit }} seçenek ekleyin.'
+  option_value:
+    value:
+      not_blank: Lütfen seçenek değeri girin.
+  property:
+    name:
+      not_blank: Lütfen özellik adı girin.
+      min_length: 'Özellik adı en az 1 karakter uzunluğunda olmalıdır.|Özellik adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Özellik adı 1 karakterden uzun olmamalıdır.|Özellik adı {{ limit }} karakterden uzun olmamalıdır.'
+    presentation:
+      not_blank: Lütfen özellik sunumu girin.
+      min_length: 'Özellik sunumu en az 1 karakter uzunluğunda olmalıdır.|Özellik sunumu en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Özellik sunumu 1 karakterden uzun olmamalıdır.|Özellik sunumu {{ limit }} karakterden uzun olmamalıdır.'
+  product_property:
+    property:
+      not_blank: Lütfen özelliğini seçin.
+    value:
+      not_blank: Lütfen ürün özellik değerini girin.
+  prototype:
+    name:
+      not_blank: Lütfen örnek ürün adını giriniz.
+      min_length: 'Örnek içerik adı en az 1 karakter uzunluğunda olmalıdır.|Örnek içerik adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Örnek içerik adı 1 karakterden uzun olmamalıdır.|Örnek içerik adı {{ limit }} karakterden uzun olmamalıdır.'

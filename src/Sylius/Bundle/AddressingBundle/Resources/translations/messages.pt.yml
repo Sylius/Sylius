@@ -28,6 +28,7 @@ sylius:
         country: País
         province: Estado
         zone: Região
+      scope: Escopo
     zone_member_country:
       country: País
     zone_member_province:

@@ -4,25 +4,27 @@
 sylius:
   form:
     credit_card:
-      cardholder_name: sylius.form.credit_card.cardholder_name
-      expiry_month: sylius.form.credit_card.expiry_month
-      expiry_year: sylius.form.credit_card.expiry_year
-      number: sylius.form.credit_card.number
-      security_code: sylius.form.credit_card.security_code
-      type: sylius.form.credit_card.type
+      cardholder_name: Nazwisko posiadacza karty
+      expiry_month: Miesiąc wygaśnięcia
+      expiry_year: Rok wygaśnięcia
+      number: Numer karty
+      security_code: Kod zabezpieczający (CVV)
+      type: Rodzaj karty
     payment:
-      amount: sylius.form.payment.amount
-      method: sylius.form.payment.method
+      amount: Kwota płatności
+      method: Metoda płatności
       state:
-        header: Status płatności
+        0: Status płatności
         checkout: Koszyk
         completed: Zakończone
-        failed: Niepowodzenie
+        failed: Nieudane
         new: Nowy
         pending: Oczekujący
-        processing: W trakcie przetwarzania
+        processing: Przetwarzany
         unknown: Nieznany
         void: Void
+        cancelled: Anulowane
+        refunded: Zwrócone
     payment_method:
       description: Opis
       enabled: Aktywna?

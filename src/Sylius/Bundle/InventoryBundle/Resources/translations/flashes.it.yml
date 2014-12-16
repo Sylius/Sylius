@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Unità di magazzino in arretrato.
-    sold: Unità di magazzino soddisfatte.
-    returned: Unità di magazzino restituite.
+    backorder: Inventario preordini.
+    sell: Inventario vendite.
+    return: Inventario resi.
+    transition_fail: "L'azione non poteva essere eseguita dati lo stato attuale dell'unità"

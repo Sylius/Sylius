@@ -15,8 +15,8 @@ sylius:
       luhn: El número de tarjeta de crédito introducido es incorrecto.
     security_code:
       not_blank: Por favor, introduzca el código de seguridad.
-      max_length: 'El código CVV de la tarjeta de crédito debe tener entre {{ min }} y {{ max }} caracteres.'
-      min_length: 'El código CVV de la tarjeta de crédito debe tener entre {{ min }} y {{ max }} caracteres.'
+      max_length: 'Los códigos CVV de las tarjetas de crédito deben ser como máximo {{ limit }} dígitos de largo.'
+      min_length: 'El código CVV de la tarjeta de crédito debe ser como máximo {{ limit }} dígitos de largo.'
     expiry_year:
       not_blank: Por favor seleccione el año de vencimiento.
   payment_method:

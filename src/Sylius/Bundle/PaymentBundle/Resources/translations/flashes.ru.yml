@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: Платёж проведён успешно.
+    cancel: Платёж отменён.
+    transition_fail: Действие не может быть выполнено на данном этапе оплаты

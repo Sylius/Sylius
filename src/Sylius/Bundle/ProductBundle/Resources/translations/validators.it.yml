@@ -14,12 +14,19 @@ sylius:
       not_blank: Inserisci la descrizione del prodotto.
       min_length: 'La descrizione del prodotto deve essere lunga almeno 1 carattere. |La descrizione del prodotto deve essere lungo almeno {{ limit }} caratteri.'
   variant:
+    sku:
+      not_blank: Inserire la variante SKU.
+      unique: La variante SKU deve essere univoca.
     combination: La variante con questa opzione impostata esiste già.
   option:
     name:
       not_blank: "Inserisci il nome dell'opzione."
       min_length: "Il nome dell'opzione deve essere lungo almeno 1 carattere. |Il nome dell'opzione deve essere lungo almeno {{ limit }} caratteri."
       max_length: "Il nome dell'opzione non deve essere più lungo di 1 carattere. |Il nome dell'opzione non deve essere più lungo di {{ limit }} caratteri."
+    presentation:
+      not_blank: Inserire opzione presentazione.
+      min_length: "L'opzione di presentazione deve essere lunga almeno 1 carattere. | L'opzione di presentazione deve essere lunga almeno {{ limit }} caratteri."
+      max_length: "L'opzione di presentazione non deve essere più lunga di 1 carattere. | L'opzione di presentazione non deve essere più lunga di {{ limit }} caratteri."
     values:
       min_count: "Aggiungere almeno {{ limit }} valore d'opzione. |Aggiungere almeno {{ limit }} valori di opzione."
   option_value:
@@ -30,6 +37,10 @@ sylius:
       not_blank: Inserisci il nome della proprietà.
       min_length: 'Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.'
       max_length: 'Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.'
+    presentation:
+      not_blank: Inserire la proprietà di presentazione.
+      min_length: 'La proprietà di presentazione deve essere lunga almeno 1 carattere. | La proprietà di presentazione deve essere lunga almeno {{ limit }} caratteri.'
+      max_length: 'La proprietà di presentazione non deve essere più lunga di 1 carattere. | La proprietà di presentazione non deve essere più lunga di {{ limit }} caratteri.'
   product_property:
     property:
       not_blank: Si prega di selezionare una proprietà.
@@ -38,3 +49,5 @@ sylius:
   prototype:
     name:
       not_blank: Si prega di inserire il nome del prototipo.
+      min_length: 'Il nome del prototipo deve essere lungo almeno 1 carattere. | Il nome del prototipo deve essere lungo almeno {{ limit }} caratteri.'
+      max_length: 'Il nome del prototipo non deve essere più lungo di 1 carattere. | Il nome del prototipo non deve essere più lungo di {{ limit }} caratteri.'

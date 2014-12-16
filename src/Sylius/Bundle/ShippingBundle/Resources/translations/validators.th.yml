@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'ชื่อประเภทต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
+      min_length: 'ชื่อประเภทต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร'
+      not_blank: กรุณาระบุชื่อประเภทการส่งสินค้า
+  shipping_method:
+    calculator:
+      max_length: สูงสุด
+      min_length: ต่ำสุด
+      not_blank: กรุณาระบุวิธีคำนวนราคาการจัดส่งสินค้า
+    name:
+      max_length: 'ชื่อวิธีการจัดส่งสินค้าต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร'
+      min_length: 'ชื่อวิธีการจัดส่งสินค้าต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร'
+      not_blank: กรุณาระบุชื่อวิธีการจัดส่งสินค้า

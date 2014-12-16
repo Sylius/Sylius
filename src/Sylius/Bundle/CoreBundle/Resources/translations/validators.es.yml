@@ -20,13 +20,13 @@ sylius:
       max: 'Los apellidos no deben tener más de {{ limit }} caracteres.'
       min: 'Los apellidos deben tener al menos {{ limit }} caracteres.'
       not_blank: Por favor introduzca sus apellidos.
-  variant:
+  product_variant:
     onHand:
       min: 'Las existencias deben ser mayores que {{ limit }}.'
       not_blank: Por favor introduzca las existencias.
     price:
-      min: El precio no puede ser negativo.
-      not_blank: Por favor introduzca el precio.
+      min: El precio no debe ser negativo.
+      not_blank: Por favor, introduzca el precio.
 sylius_shipping:
   method:
     zone:

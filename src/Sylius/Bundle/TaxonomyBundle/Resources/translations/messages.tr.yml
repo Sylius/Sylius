@@ -7,5 +7,14 @@ sylius:
     taxon:
       description: Açıklama
       name: Ad
+      parent: Üst
+      permalink: Kalıcı Bağlantı
     taxonomy:
       name: Ad
+  taxon:
+    create_taxon: Kategori Oluştur
+    delete_taxonomy: Kategori Sil
+    manage_taxonomies: Kategorileri Yönet
+    no_taxonomies: Gösterilecek kategori yoktur.
+    no_taxons: Gösterilecek kategori yoktur.
+    update_taxonomy: Kategoriyi Güncelle

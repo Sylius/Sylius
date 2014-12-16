@@ -13,6 +13,7 @@ sylius:
         exchange_rates: Tassi di cambio
         general_settings: Impostazioni generali
         homepage: Il tuo negozio
+        locales: Localizzazioni
         new_order: Aggiungi nuovo ordine
         new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni prodotto
@@ -46,6 +47,7 @@ sylius:
         general_settings: Impostazioni generali
         groups: Gruppi
         homepage: Torna al frontend
+        locales: Localizzazioni
         new_order: Aggiungi nuovo ordine
         new_promotion: Aggiungi nuova promozione
         options: Gestisci opzioni

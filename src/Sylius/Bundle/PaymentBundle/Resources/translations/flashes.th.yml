@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: ชำระเงินเสร็จสมบูรณ์
+    cancel: การชำระเงินถูกยกเลิก
+    transition_fail: ไม่สามารถดำเนินการได้ สำหรับสถานะปัจจุบันของการชำระเงิน

@@ -14,7 +14,7 @@ sylius:
       amount: Importe del pago
       method: Modo de pago
       state:
-        header: Estado del pago
+        0: Estado del pago
         checkout: Completar pedido
         completed: Completado
         failed: Fallido
@@ -23,6 +23,8 @@ sylius:
         processing: Procesando
         unknown: Desconocido
         void: Vacío
+        cancelled: Cancelado/a
+        refunded: Reembolsado
     payment_method:
       description: Descripción
       enabled: Activado?

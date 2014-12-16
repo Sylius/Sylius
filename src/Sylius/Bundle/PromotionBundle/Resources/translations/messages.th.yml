@@ -3,7 +3,50 @@
 
 sylius:
   form:
+    action:
+      fixed_discount_configuration:
+        amount: ยอดรวม
+      percentage_discount_configuration:
+        percentage: เปอร์เซ็นต์
+      shipping_discount_configuration:
+        percentage: เปอร์เซ็นต์
+      type: ชนิด
+    rule:
+      taxonomy_configuration:
+        taxons: หมวดหมู่
+        exclude: ไม่รวม
+      item_count_configuration:
+        count: จำนวน
+        equal: เท่ากับ
+      item_total_configuration:
+        amount: ยอดรวม
+        equal: เท่ากับ
+      nth_order_configuration:
+        nth: Nth
+      user_loyality_configuration:
+        time: เวลา
+        unit:
+          days: วัน
+          weeks: สัปดาห์
+          months: เดือน
+          years: ปี
+          0: หน่วย
+        after: ผู้ใช้ที่สร้างขึ้นหลังจากรอบเวลานี้
+      shipping_country_configuration:
+        country: ประเทศ
+      type: ชนิด
     coupon:
       code: รหัส
+      usage_limit: ขีดจำกัดการใช้งาน
+    coupon_generate_instruction:
+      amount: ยอดรวม
+      usage_limit: ขีดจำกัดการใช้งาน
     promotion:
+      actions: ดำเนินการ
+      coupon_based: ขึ้นกับคูปอง
+      description: คำอธิบาย
+      ends_at: สิ้นสุด
       name: ชื่อ
+      rules: กติกา
+      starts_at: เริ่มต้น
+      usage_limit: ขีดจำกัดการใช้งาน

@@ -20,13 +20,13 @@ sylius:
       max: 'Le nom ne peut pas faire plus de {{ limit }} caractères.'
       min: 'Le nom doit contenir au moins {{ limit }} caractères.'
       not_blank: Veuillez saisir votre nom.
-  variant:
+  product_variant:
     onHand:
-      min: 'Le stock doit être plus grand que {{ limit }}.'
-      not_blank: Veuillez saisir le stock.
+      min: 'Le stock disponible doit être plus grand que {{ limit }}.'
+      not_blank: Veuillez saisir le stock disponible.
     price:
-      min: Le prix ne peux pas être négatif.
-      not_blank: Veuillez saisir le prix.
+      min: Le tarif ne peut pas être négatif.
+      not_blank: Veuillez entrer un prix.
 sylius_shipping:
   method:
     zone:

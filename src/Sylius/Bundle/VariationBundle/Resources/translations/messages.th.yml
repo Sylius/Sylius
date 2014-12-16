@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: ผู้ใช้มองเห็น
+    option:
+      name: ชื่อภายใน
+      presentation: ผู้ใช้มองเห็น
+      values: ค่าที่เป็นไปได้
+    option_value:
+      add_value: เพิ่มค่า
+      value: ค่า

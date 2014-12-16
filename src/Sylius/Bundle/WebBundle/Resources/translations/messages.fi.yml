@@ -2,5 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
   "no": false
   "yes": true

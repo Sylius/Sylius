@@ -15,8 +15,8 @@ sylius:
       luhn: Uw kaartnummer in ongeldig.
     security_code:
       not_blank: Vul de beveiligingscode in.
-      max_length: 'De creditcard CVV code moet tussen {{ min }} en {{ max }} tekens lang zijn.'
-      min_length: 'De creditcard CVV code moet tussen {{ min }} en {{ max }} tekens lang zijn.'
+      max_length: 'De credit card CVV-code moet minstens {{ limit }} cijfers lang.'
+      min_length: 'De credit card CVV-code moet ten hoogste dan {{ limit }} cijfers lang zijn.'
     expiry_year:
       not_blank: Selecteer het vervaljaar.
   payment_method:

@@ -2,27 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  product:
-    sku:
-      not_blank: Proszę podać SKU produktu.
-      unique: Wartość SKU musi być unikatowa.
+  attribute:
     name:
-      not_blank: Proszę podać nazwę produktu.
-      min_length: 'Nazwa produktu musi składać się z co najmniej 1 znaku. |Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.'
-      max_length: 'Nazwa produktu nie może być dłuższa niż 1 znak. |Nazwa produktu nie może przekraczać {{ limit }} znaków.'
-    description:
-      not_blank: Proszę wprowadzić opis produktu.
-      min_length: 'Opis produktu musi składać się z  co najmniej 1 znaku. |Opis produktu musi składać się z  co najmniej {{ limit }} znaków.'
-  variant:
-    sku:
-      not_blank: Proszę podać SKU wariantu.
-      unique: Wartość SKU wariantu musi być unikatowa.
-  option:
-    name:
-      not_blank: Proszę wprowadzić nazwę opcji.
-      min_length: 'Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
-      max_length: 'Nazwa opcji nie może być dłuższa niż jeden znak. |Nazwa opcji nie może przekraczać {{ limit }} znaków.'
+      not_blank: Proszę podać nazwę atrybutu.
+      min_length: 'Nazwa atrybutu musi mieć co najmniej 1 znak.|Nazwa atrybutu musi mieć co najmniej {{ limit }} znaków.'
+      max_length: 'Nazwa atrybutu nie może mieć więcej niż 1 znak.|Nazwa atrybutu nie może mieć więcej niż {{ limit }} znaków.'
     presentation:
-      not_blank: Proszę wprowadzić nazwę publiczną.
-      min_length: 'Nazwa publiczna powinna zawierać co najmniej jeden znak. |Nazwa publiczna nie może przekraczać {{ limit }} znaków.'
-      max_length: 'Nazwa publiczna nie może być dłuższy niż jeden znak. |Nazwa publiczna nie może być dłuższa niż {{ limit }} znaków.'
+      not_blank: Należy wprowadzić opis atrybutu.
+      min_length: 'Opis atrybutu musi zawierać co najmniej 1 znak.|Opis atrybutu musi zawierać co najmniej {{ limit }} znaków.'
+      max_length: 'Opis atrybutu nie może składać się z więcej niż 1 znaku.|Opis atrybutu nie może składać się z więcej niż {{ limit }} znaków.'
+  attribute_value:
+    attribute:
+      not_blank: Proszę wybrać atrybut.
+    value:
+      not_blank: Proszę podać wartość atrybutu.

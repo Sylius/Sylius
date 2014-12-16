@@ -10,4 +10,5 @@ sylius:
       category: Kategória
       name: Názov
       amount: Suma
+      included_in_price: V cene?
       calculator: Kalkulačka

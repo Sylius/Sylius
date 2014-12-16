@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Lagerenhet lagt til restordre.
-    sold: Lagerenheten oppfylt.
-    returned: Lagerenhet returnert.
+    backorder: Lagerenhet lagt til restordre.
+    sell: Lagerenheten oppfylt.
+    return: Lagerenhet returnert.
+    transition_fail: Handlingen kunne ikke utføres gitt gjeldende status for enheten

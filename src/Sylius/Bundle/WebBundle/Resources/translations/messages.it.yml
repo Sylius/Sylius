@@ -1,6 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: Oggetto
 sylius:
   account:
     address:
@@ -77,7 +80,7 @@ sylius:
       products: I tuoi prodotti
       users: Utenti
     statistics:
-      header: Le statistiche di questo mese
+      0: Le statistiche di questo mese
       orders_this_month: Ordini totali
       registrations_this_month: Registrazioni totali
       sales_this_month: Vendite
@@ -110,6 +113,8 @@ sylius:
       index: Gruppi
     inventory:
       index: Magazzino
+    locale:
+      index: Localizzazioni
     new: Nuovo
     option:
       index: Opzioni
@@ -283,7 +288,7 @@ sylius:
     update_header: Modifica il gruppo
   hide_deleted: Nascondi eliminati
   history:
-    header: Storico
+    0: Storico
     action: Azione
     author: Autore
     data: Data
@@ -303,7 +308,12 @@ sylius:
     updated_at: Modificato
   locale:
     code: Codice
+    create: Crea localizzazione
+    create_header: Aggiungi una nuova localizzazione
     enabled: Abilitato
+    index_header: Indice di tutte le localizzazioni configurate
+    no_results: Non ci sono localizzazioni configurate.
+    update_header: Modifica localizzazione
     updated_at: Ultimo aggiornamento
   login: Login
   login_header: Amministrazione
@@ -317,6 +327,7 @@ sylius:
   na: N/A
   newest: Nuovi prodotti
   "no": false
+  no_results: Nessun risultato
   option:
     create: Crea opzioni
     create_header: Nuova opzione prodotto
@@ -355,7 +366,10 @@ sylius:
     shipment_states:
       pending: In attesa
     shipments: Spedizioni
+    release_inventory: Inventario delle uscite
     inventory_unit:
+      backorder: Preordine
+      fulfill: Completato
       return: Ritorno
     shipping_address: Indirizzo spedizione
     shipping_charges: Spese di spedizione
@@ -419,7 +433,7 @@ sylius:
     method: Metodo
     no_results: Non ci sono pagamenti configurati.
     state:
-      header: Stato
+      0: Stato
       checkout: "Procedi all'acquisto"
       completed: Completato
       failed: Fallimento
