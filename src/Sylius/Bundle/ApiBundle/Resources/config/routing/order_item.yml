@@ -24,7 +24,7 @@ sylius_api_order_item_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.order:deleteAction
+        _controller: sylius.controller.order_item:deleteAction
         _sylius:
             filterable: true
             criteria:
