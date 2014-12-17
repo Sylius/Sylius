@@ -68,4 +68,11 @@ interface StockLocationInterface
      * @return StockLocationInterface
      */
     public function removeItem(StockItemInterface $item);
+
+    /**
+     * @param StockableInterface $stockable
+     *
+     * @return StockItemInterface
+     */
+    public function getStockItem(StockableInterface $stockable);
 }

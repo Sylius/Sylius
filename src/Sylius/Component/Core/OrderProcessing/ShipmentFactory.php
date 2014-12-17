@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Inventory\Operator\Coordinator;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -28,14 +29,17 @@ class ShipmentFactory implements ShipmentFactoryInterface
      */
     protected $shipmentRepository;
 
+    protected $coordinator;
+
     /**
      * Constructor.
      *
      * @param RepositoryInterface $shipmentRepository
      */
-    public function __construct(RepositoryInterface $shipmentRepository)
+    public function __construct(RepositoryInterface $shipmentRepository, Coordinator $coordinator)
     {
         $this->shipmentRepository = $shipmentRepository;
+        $this->coordinator = $coordinator;
     }
 
     /**
@@ -43,17 +47,11 @@ class ShipmentFactory implements ShipmentFactoryInterface
      */
     public function createShipment(OrderInterface $order)
     {
-        $shipment = $order->getShipments()->first();
 
-        if (!$shipment) {
-            $shipment = $this->shipmentRepository->createNew();
+        $shipments = $this->coordinator->getShipments($order);
+
+        foreach($shipments as $shipment) {
             $order->addShipment($shipment);
-        }
-
-        foreach ($order->getInventoryUnits() as $inventoryUnit) {
-            if (null === $inventoryUnit->getShipment()) {
-                $shipment->addItem($inventoryUnit);
-            }
         }
     }
 }

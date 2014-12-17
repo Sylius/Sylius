@@ -130,4 +130,16 @@ class StockLocation implements StockLocationInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStockItem(StockableInterface $stockable)
+    {
+        return $this->items->filter(
+            function ($entry) use ($stockable) {
+                return ($entry->getStockable() === $stockable);
+            }
+        )->first();
+    }
 }

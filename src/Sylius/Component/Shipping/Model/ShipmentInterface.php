@@ -12,6 +12,7 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 
 /**
  * Shipment interface.
@@ -108,4 +109,16 @@ interface ShipmentInterface extends ShippingSubjectInterface
      * @return Boolean
      */
     public function isTracked();
+
+    /**
+     * @param StockLocationInterface $location
+     *
+     * @return $this
+     */
+    public function setLocation(StockLocationInterface $location);
+
+    /**
+     * @return StockLocationInterface
+     */
+    public function getLocation();
 }

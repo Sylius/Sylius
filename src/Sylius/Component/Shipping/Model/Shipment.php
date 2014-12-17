@@ -13,6 +13,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Inventory\Model\StockLocationInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -70,6 +71,8 @@ class Shipment implements ShipmentInterface, TimestampableInterface
      * @var \DateTime
      */
     protected $updatedAt;
+
+    protected $location;
 
     /**
      * Constructor.
@@ -272,5 +275,23 @@ class Shipment implements ShipmentInterface, TimestampableInterface
     public function getShippingItemTotal()
     {
         return 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocation(StockLocationInterface $location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }
