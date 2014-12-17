@@ -128,7 +128,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             return $collection;
         }
 
-        foreach ($this->getRepositories()->classRepositories as $className => $repository) {
+        foreach ($this->getRepositories() as $className => $repository) {
             if ('' === $this->routeConfigs[$className]['prefix']
                 || 0 === strpos($path, $this->routeConfigs[$className]['prefix'])
             ) {
