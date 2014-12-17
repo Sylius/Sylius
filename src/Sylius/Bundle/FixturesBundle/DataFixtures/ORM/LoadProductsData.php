@@ -383,7 +383,7 @@ class LoadProductsData extends DataFixture
             $product->setDescription($this->fakers[$locale]->paragraph);
             $product->setShortDescription($this->fakers[$locale]->sentence);
             $product->setMetaKeywords(str_replace(' ', ', ', $this->fakers[$locale]->sentence));
-            $product->setMetaDescription($this->fakers[$locale]->paragraph);
+            $product->setMetaDescription($this->fakers[$locale]->sentence);
         }
 
         $product->setCurrentLocale($this->defaultLocale);

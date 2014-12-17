@@ -37,11 +37,6 @@ class LocaleProviderSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Locale\Provider\LocaleProviderInterface');
     }
 
-    function it_implements_A2lix_locale_provider_interface()
-    {
-        $this->shouldImplement('A2lix\TranslationFormBundle\Locale\LocaleProviderInterface');
-    }
-
     function it_validates_a_null_default_locale_is_given(RepositoryInterface $repository)
     {
         $this->shouldThrow('Exception')->during('__construct', [$repository, null]);
@@ -59,25 +54,9 @@ class LocaleProviderSpec extends ObjectBehavior
 
     function it_returns_all_enabled_locales(LocaleInterface $locale, RepositoryInterface $repository)
     {
-        $locale->getCode()->willReturn('en');
         $repository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($locale));
 
         $this->getAvailableLocales()->shouldReturn(array($locale));
-    }
-
-    function it_launches_exception_if_default_locale_is_not_enabled(
-        LocaleInterface $locale,
-        RepositoryInterface $repository)
-    {
-        $locale->getCode()->willReturn('de');
-        $repository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($locale));
-        $this->shouldThrow('Exception')->during('getAvailableLocales');
-    }
-
-    function it_launches_exception_if_no_locale_is_enabled(RepositoryInterface $repository)
-    {
-        $repository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array());
-        $this->shouldThrow('Exception')->during('getAvailableLocales');
     }
 
     function it_returns_correct_locales(
@@ -93,21 +72,6 @@ class LocaleProviderSpec extends ObjectBehavior
         $locale2->getCode()->willReturn('de');
 
         $this->getLocales()->shouldReturn(array('en', 'de'));
-    }
-
-    function it_launches_exception_if_default_locale_is_not_enabled2(
-        LocaleInterface $locale,
-        RepositoryInterface $repository)
-    {
-        $locale->getCode()->willReturn('de');
-        $repository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array($locale));
-        $this->shouldThrow('Exception')->during('getLocales');
-    }
-
-    function it_launches_exception_if_no_locale_is_enabled2(RepositoryInterface $repository)
-    {
-        $repository->findBy(array('enabled' => true))->shouldBeCalled()->willReturn(array());
-        $this->shouldThrow('Exception')->during('getLocales');
     }
 
     function it_returns_correct_default_locale()

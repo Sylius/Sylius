@@ -58,11 +58,6 @@ class LocaleProvider implements LocaleProviderInterface
      */
     public function getAvailableLocales()
     {
-        $locale = $this->localeRepository->findOneBy(array('enabled' => true, 'code' => $this->defaultLocale));
-        if (!$locale) {
-            throw new \Exception('Default locale is not available!');
-        }
-
         return $this->localeRepository->findBy(array('enabled' => true));
     }
 

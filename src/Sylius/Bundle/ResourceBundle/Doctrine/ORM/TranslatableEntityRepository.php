@@ -23,7 +23,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 class TranslatableEntityRepository extends EntityRepository implements TranslatableEntityRepositoryInterface
 {
     protected $localeContext;
-
     protected $translatableFields = array();
 
     /**

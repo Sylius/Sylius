@@ -124,12 +124,6 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
             ;
 
             $queryBuilder
-                ->addSelect('o, translation')
-                ->shouldBeCalled()
-                ->willReturn($queryBuilder)
-            ;
-
-            $queryBuilder
                 ->leftJoin('o.translations', 'translation')
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
