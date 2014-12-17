@@ -39,12 +39,12 @@ class LocaleProviderSpec extends ObjectBehavior
 
     function it_validates_a_null_default_locale_is_given(RepositoryInterface $repository)
     {
-        $this->shouldThrow('Exception')->during('__construct', [$repository, null]);
+        $this->shouldThrow('Exception')->during('__construct', array($repository, null));
     }
 
     function it_validates_an_empty_default_locale_is_given(RepositoryInterface $repository)
     {
-        $this->shouldThrow('Exception')->during('__construct', [$repository, '']);
+        $this->shouldThrow('Exception')->during('__construct', array($repository, ''));
     }
 
     function it_has_required_locales()

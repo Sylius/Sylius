@@ -63,8 +63,9 @@ class ProductRepository extends BaseProductRepository
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder()
-            ->select('product, variant')
+            ->select('product, variant, translation')
             ->leftJoin('product.variants', 'variant')
+            ->leftJoin('product.translations', 'translation')
         ;
 
         if (!empty($criteria['name'])) {
