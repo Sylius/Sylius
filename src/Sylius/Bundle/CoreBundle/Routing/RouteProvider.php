@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\Common\Util\ClassUtils;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\DoctrineProvider;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route;
@@ -22,9 +23,15 @@ use Symfony\Component\Routing\RouteCollection;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RouteProvider extends DoctrineProvider implements RouteProviderInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
     /**
      * Route configuration for the object classes to search in
      *
@@ -40,13 +47,16 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     protected $classRepositories = array();
 
     /**
-     * @param ManagerRegistry $managerRegistry
-     * @param array           $routeConfigs
+     * @param ContainerInterface $container
+     * @param ManagerRegistry    $managerRegistry
+     * @param array              $routeConfigs
      */
-    public function __construct(ManagerRegistry $managerRegistry, array $routeConfigs)
+    public function __construct(ContainerInterface $container, ManagerRegistry $managerRegistry, array $routeConfigs)
     {
+        $this->container = $container;
         $this->routeConfigs = $routeConfigs;
         $this->classRepositories = array();
+
         parent::__construct($managerRegistry);
     }
 
@@ -62,7 +72,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             }
         }
 
-        foreach ($this->classRepositories as $className => $repository) {
+        foreach ($this->getRepositories() as $className => $repository) {
             $entity = $repository->findOneBy(array($this->routeConfigs[$className]['field'] => $name));
             if ($entity) {
                 return $this->createRouteFromEntity($entity);
@@ -83,7 +93,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             }
 
             $collection = new RouteCollection();
-            foreach ($this->classRepositories as $className => $repository) {
+            foreach ($this->getRepositories() as $className => $repository) {
                 $entities = $repository->findBy(array(), null, $this->routeCollectionLimit ?: null);
                 foreach ($entities as $entity) {
                     $name = $this->getFieldValue($entity, $this->routeConfigs[$className]['field']);
@@ -118,13 +128,14 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
             return $collection;
         }
 
-        foreach ($this->classRepositories as $className => $repository) {
+        foreach ($this->getRepositories()->classRepositories as $className => $repository) {
             if ('' === $this->routeConfigs[$className]['prefix']
                 || 0 === strpos($path, $this->routeConfigs[$className]['prefix'])
             ) {
                 $value = substr($path, strlen($this->routeConfigs[$className]['prefix']));
                 $value = trim($value, '/');
                 $entity = $repository->findOneBy(array($this->routeConfigs[$className]['field'] => $value));
+
                 if (!$entity) {
                     continue;
                 }
@@ -145,11 +156,31 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
      * This method is called from a compiler pass
      *
      * @param string           $class
-     * @param ObjectRepository $repository
+     * @param string           $id
      */
-    public function addRepository($class, ObjectRepository $repository)
+    public function addRepository($class, $id)
     {
-        $this->classRepositories[$class] = $repository;
+        if (!is_string($id)) {
+            throw new \InvalidArgumentException('Expected service id!');
+        }
+
+        $this->classRepositories[$class] = $id;
+    }
+
+    /**
+     * Get repository services.
+     *
+     * @return array
+     */
+    private function getRepositories()
+    {
+        $repositories = array();
+
+        foreach ($this->classRepositories as $class => $id) {
+            $repositories[$class] = $this->container->get($id);
+        }
+
+        return $repositories;
     }
 
     /**

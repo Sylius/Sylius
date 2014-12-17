@@ -6,6 +6,9 @@ Feature: Products
 
     Background:
         Given there is default currency configured
+        And there are following locales configured:
+            | code | enabled |
+            | en   | yes     |
           And I am logged in as administrator
           And there are following options:
             | name          | presentation | values           |

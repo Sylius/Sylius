@@ -21,8 +21,8 @@ interface RouteProviderInterface extends BaseRouteProviderInterface
     /**
      * This method is called from a compiler pass
      *
-     * @param string           $class
-     * @param ObjectRepository $repository
+     * @param string $class
+     * @param string $id
      */
-    public function addRepository($class, ObjectRepository $repository);
-} 
+    public function addRepository($class, $id);
+}
