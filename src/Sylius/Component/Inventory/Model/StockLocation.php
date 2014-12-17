@@ -54,6 +54,8 @@ class StockLocation implements StockLocationInterface
      */
     public function __construct()
     {
+        die("cunstruct yo!");
+
         $this->items = new ArrayCollection();
     }
 

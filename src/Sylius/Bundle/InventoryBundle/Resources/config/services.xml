@@ -36,6 +36,16 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
+        <service id="sylius.inventory_coordinator" class="Sylius\Component\Inventory\Operator\Coordinator">
+            <argument type="service" id="sylius.repository.stock_location" />
+            <argument type="service" id="sylius.inventory_packer" />
+            <argument type="service" id="sylius.repository.shipment" />
+        </service>
+
+        <service id="sylius.inventory_packer" class="Sylius\Component\Inventory\Model\Packer">
+            <argument type="service" id="sylius.repository.shipment" />
+        </service>
+
         <service id="sylius.inventory_operator.noop" class="%sylius.inventory_operator.noop.class%" />
 
         <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">

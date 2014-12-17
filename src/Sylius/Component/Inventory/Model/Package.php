@@ -55,7 +55,7 @@ class Package
 
     public function isEmpty()
     {
-        return $this->content <= 0;
+        return $this->content->count() <= 0;
     }
 
     public function addInventoryUnit(InventoryUnitInterface $unit)
@@ -73,6 +73,6 @@ class Package
     }
 
     public function getContent() {
-        retunr $this->content;
+        return $this->content;
     }
 }

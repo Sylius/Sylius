@@ -51,11 +51,11 @@ class Coordinator
      * @param array $stockLocations
      */
     public function __construct(
-        array $stockLocations,
+        RepositoryInterface $stockLocationRepo,
         Packer $packer,
         RepositoryInterface $shipmentRepository
     ) {
-        $this->stockLocations = $stockLocations;
+        $this->stockLocations = $stockLocationRepo->findAll();
         $this->packer = $packer;
         $this->shipmentRepository = $shipmentRepository;
         $this->packages = new ArrayCollection();
@@ -65,6 +65,7 @@ class Coordinator
     {
         $shipments = array();
         $this->order = $order;
+        $this->inventoryUnits = $order->getInventoryUnits();
         foreach ($this->getPackages() as $package) {
             $shipments[] = $this->createShipment($package);
         }
