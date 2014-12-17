@@ -71,7 +71,7 @@ Feature: Promotions
           And I select "Item total" from "Type"
           And I fill in "Amount" with "5000"
           And I press "Create"
-         Then I should be on the page of promotion "Behat Training"
+         Then I should see "Behat Training"
           And I should see "Promotion has been successfully created."
 
     @javascript
@@ -83,7 +83,7 @@ Feature: Promotions
           And I select "Item count" from "Type"
           And I fill in "Count" with "10"
           And I press "Create"
-         Then I should be on the page of promotion "Behat Training"
+         Then I should see "Behat Training"
           And I should see "Promotion has been successfully created."
 
     @javascript
@@ -95,7 +95,7 @@ Feature: Promotions
           And I select "Fixed discount" from "Type"
           And I fill in "Amount" with "100"
           And I press "Create"
-         Then I should be on the page of promotion "Behat Training"
+         Then I should see "Behat Training"
           And I should see "Promotion has been successfully created."
 
     @javascript
@@ -107,7 +107,7 @@ Feature: Promotions
           And I select "Percentage discount" from "Type"
           And I fill in "Percentage" with "10"
           And I press "Create"
-         Then I should be on the page of promotion "Sylius Training"
+         Then I should see "Sylius Training"
           And I should see "Promotion has been successfully created."
 
     Scenario: Adding coupon manually
@@ -202,7 +202,7 @@ Feature: Promotions
           And I fill in "Percentage" with "50"
           And I fill in "Usage limit" with "5"
           And I press "Create"
-         Then I should be on the page of promotion "First 5 pay half!"
+         Then I should see "First 5 pay half!"
           And I should see "Promotion has been successfully created."
 
     Scenario: Created promotions appear in the list
@@ -265,8 +265,7 @@ Feature: Promotions
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Item total"
           And I click "delete" from the confirmation modal
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion rule has been successfully deleted."
+         Then I should see "Promotion rule has been successfully deleted."
           And I should not see "Order total"
 
     @javascript
@@ -274,6 +273,5 @@ Feature: Promotions
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Fixed discount"
           And I click "delete" from the confirmation modal
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion action has been successfully deleted."
+         Then I should see "Promotion action has been successfully deleted."
           And I should not see "Fixed discount"

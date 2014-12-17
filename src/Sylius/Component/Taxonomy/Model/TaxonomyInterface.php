@@ -12,13 +12,15 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Prezent\Doctrine\Translatable\TranslatableInterface;
 
 /**
  * Taxonomy model interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonomyInterface
+interface TaxonomyInterface extends TaxonomyTranslationInterface, TranslatableInterface
 {
     /**
      * Get taxonomy id.

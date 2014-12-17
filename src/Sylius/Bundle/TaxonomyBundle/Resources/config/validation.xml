@@ -17,6 +17,12 @@
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Taxonomy\Model\Taxonomy">
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Taxonomy\Model\TaxonomyTranslation">
         <getter property="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.taxonomy.name.not_blank</option>
@@ -31,6 +37,12 @@
     </class>
 
     <class name="Sylius\Component\Taxonomy\Model\Taxon">
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Taxonomy\Model\TaxonTranslation">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.taxon.name.not_blank</option>

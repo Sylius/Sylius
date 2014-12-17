@@ -19,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonTypeSpec extends ObjectBehavior
 {
@@ -37,7 +38,7 @@ class TaxonTypeSpec extends ObjectBehavior
         $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
     }
 
-    function it_builds_form_with_name_and_permalink_and_description_fields(
+    function it_builds_form_with_proper_fields(
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
@@ -51,17 +52,7 @@ class TaxonTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('name', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('permalink', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('description', 'text', Argument::any())
+            ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->willReturn($builder)
         ;
 

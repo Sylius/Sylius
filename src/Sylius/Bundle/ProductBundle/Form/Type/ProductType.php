@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Product form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductType extends AbstractResourceType
 {
@@ -27,12 +28,6 @@ class ProductType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.product.name'
-            ))
-            ->add('description', 'textarea', array(
-                'label' => 'sylius.form.product.description'
-            ))
             ->add('masterVariant', 'sylius_product_variant', array(
                 'master' => true,
             ))
@@ -47,14 +42,6 @@ class ProductType extends AbstractResourceType
                 'required' => false,
                 'multiple' => true,
                 'label'    => 'sylius.form.product.options'
-            ))
-            ->add('metaKeywords', 'text', array(
-                'required' => false,
-                'label'    => 'sylius.form.product.meta_keywords'
-            ))
-            ->add('metaDescription', 'text', array(
-                'required' => false,
-                'label'    => 'sylius.form.product.meta_description'
             ))
         ;
     }

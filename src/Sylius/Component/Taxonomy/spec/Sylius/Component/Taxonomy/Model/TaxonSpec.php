@@ -17,9 +17,15 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Taxonomy\Model\Taxon');
@@ -101,6 +107,12 @@ class TaxonSpec extends ObjectBehavior
     {
         $this->setName('Brand');
         $this->getName()->shouldReturn('Brand');
+    }
+
+    function it_returns_name_when_converted_to_string()
+    {
+        $this->setName('T-Shirt material');
+        $this->__toString()->shouldReturn('T-Shirt material');
     }
 
     function it_has_no_description_by_default()

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
@@ -19,8 +19,9 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
  * Base taxon repository.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
+class TaxonRepository extends TranslatableEntityRepository implements TaxonRepositoryInterface
 {
     public function getTaxonsAsList(TaxonomyInterface $taxonomy)
     {

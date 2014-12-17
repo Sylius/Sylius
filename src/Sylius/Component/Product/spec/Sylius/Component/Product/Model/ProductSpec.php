@@ -19,9 +19,15 @@ use Sylius\Component\Product\Model\VariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Product\Model\Product');
@@ -99,28 +105,6 @@ class ProductSpec extends ObjectBehavior
 
         $this->setAvailableOn($availableOn);
         $this->shouldNotBeAvailable();
-    }
-
-    function it_has_no_meta_keywords_by_default()
-    {
-        $this->getMetaKeywords()->shouldReturn(null);
-    }
-
-    function its_meta_keywords_is_mutable()
-    {
-        $this->setMetaKeywords('foo, bar, baz');
-        $this->getMetaKeywords()->shouldReturn('foo, bar, baz');
-    }
-
-    function it_has_no_meta_description_by_default()
-    {
-        $this->getMetaDescription()->shouldReturn(null);
-    }
-
-    function its_meta_description_is_mutable()
-    {
-        $this->setMetaDescription('Super product');
-        $this->getMetaDescription()->shouldReturn('Super product');
     }
 
     function it_initializes_attribute_collection_by_default()

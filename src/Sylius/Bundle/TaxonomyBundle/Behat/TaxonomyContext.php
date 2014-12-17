@@ -83,4 +83,40 @@ class TaxonomyContext extends DefaultContext
         $manager->persist($taxonomy);
         $manager->flush();
     }
+
+    /**
+     * @Given the following taxonomy translations exist
+     */
+    public function theFollowingTaxonomyTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $taxonomyTranslation = $this->findOneByName('taxonomy_translation', $data['taxonomy']);
+            $taxonomy = $taxonomyTranslation->getTranslatable();
+            $taxonomy
+                ->setCurrentLocale($data['locale'])
+                ->setName($data['name']);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given the following taxon translations exist
+     */
+    public function theFollowingTaxonTranslationsExist(TableNode $table)
+    {
+        $manager = $this->getEntityManager();
+
+        foreach ($table->getHash() as $data) {
+            $taxonTranslation = $this->findOneByName('taxon_translation', $data['taxon']);
+            $taxon = $taxonTranslation->getTranslatable();
+            $taxon
+                ->setCurrentLocale($data['locale'])
+                ->setName($data['name']);
+        }
+
+        $manager->flush();
+    }
 }

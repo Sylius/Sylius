@@ -10,13 +10,15 @@
  */
 
 namespace Sylius\Component\Taxonomy\Model;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * Model for taxonomies.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Taxonomy implements TaxonomyInterface
+class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
 {
     /**
      * Taxonomy id.
@@ -24,13 +26,6 @@ class Taxonomy implements TaxonomyInterface
      * @var mixed
      */
     protected $id;
-
-    /**
-     * Taxonomy name.
-     *
-     * @var string
-     */
-    protected $name;
 
     /**
      * Root taxon.
@@ -44,7 +39,7 @@ class Taxonomy implements TaxonomyInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->translate()->__toString();
     }
 
     /**
@@ -60,7 +55,7 @@ class Taxonomy implements TaxonomyInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
     }
 
     /**
@@ -68,7 +63,8 @@ class Taxonomy implements TaxonomyInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
+        $this->root->setCurrentLocale($this->getCurrentLocale());
         $this->root->setName($name);
 
         return $this;

@@ -11,20 +11,22 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\Country" table="sylius_country">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" column="name" type="string" />
         <field name="isoName" column="iso_name" type="string" />
         <one-to-many field="provinces" target-entity="Sylius\Component\Addressing\Model\ProvinceInterface" mapped-by="country">
             <cascade>
                 <cascade-all/>
             </cascade>
         </one-to-many>
+
+        <prezent:translatable field="translations" target-entity="Sylius\Component\Addressing\Model\CountryTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
     </mapped-superclass>
 
 </doctrine-mapping>

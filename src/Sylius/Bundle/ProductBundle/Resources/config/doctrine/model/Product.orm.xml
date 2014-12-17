@@ -12,29 +12,15 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Product\Model\Product" table="sylius_product">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" column="name" type="string">
-            <gedmo:versioned />
-        </field>
-        <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
-        </field>
-        <field name="description" column="description" type="text">
-            <gedmo:versioned />
-        </field>
         <field name="availableOn" column="available_on" type="datetime">
-            <gedmo:versioned />
-        </field>
-        <field name="metaKeywords" column="meta_keywords" type="string" nullable="true">
-            <gedmo:versioned />
-        </field>
-        <field name="metaDescription" column="meta_description" type="string" nullable="true">
             <gedmo:versioned />
         </field>
 
@@ -53,6 +39,9 @@
         </one-to-many>
 
         <many-to-many field="options" target-entity="Sylius\Component\Product\Model\OptionInterface">
+            <cascade>
+                <cascade-persist />
+            </cascade>
             <join-table name="sylius_product_options">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />
@@ -66,6 +55,7 @@
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
+
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
@@ -73,6 +63,8 @@
 
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:loggable />
+
+        <prezent:translatable field="translations" target-entity="Sylius\Component\Core\Model\ProductTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
     </mapped-superclass>
 
 </doctrine-mapping>

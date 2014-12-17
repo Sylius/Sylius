@@ -34,6 +34,7 @@ class SessionStorageSpec extends ObjectBehavior
     function it_gets_default_data_if_session_was_not_started($session)
     {
         $session->isStarted()->willReturn(false);
+        $session->get("key", "default")->willReturn("default");
 
         $this->getData('key', 'default')->shouldReturn('default');
     }

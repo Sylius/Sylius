@@ -11,41 +11,48 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormListener;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
+use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Promotion rule form type.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class RuleType extends AbstractResourceType
+class RuleType extends AbstractConfigurationType
 {
     /**
-     * @var ServiceRegistryInterface
+     * {@inheritdoc}
      */
-    protected $checkerRegistry;
-
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $checkerRegistry)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->checkerRegistry = $checkerRegistry;
+        $builder
+            ->add('type', 'sylius_promotion_rule_choice', array(
+                'label' => 'sylius.form.rule.type',
+                'attr' => array(
+                    'data-form-collection' => 'update',
+                ),
+            ))
+            ->addEventSubscriber(
+                new BuildRuleFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
+            )
+        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $builder
-            ->addEventSubscriber(new BuildRuleFormListener($this->checkerRegistry, $builder->getFormFactory()))
-            ->add('type', 'sylius_promotion_rule_choice', array(
-                'label' => 'sylius.form.rule.type'
-            ))
-        ;
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'configuration_type' => RuleInterface::TYPE_ITEM_TOTAL,
+        ));
     }
 
     /**

@@ -83,7 +83,7 @@ class SearchContext extends DefaultContext
         $queryBuilder = $em->createQueryBuilder();
         $queryBuilder
             ->select('u')
-            ->from('Sylius\Bundle\SearchBundle\Entity\SearchIndex', 'u')
+            ->from('Sylius\Bundle\SearchBundle\Model\SearchIndex', 'u')
             ->where('u.value LIKE :id')
             ->setParameter('id', '%'.$id.'%')
         ;

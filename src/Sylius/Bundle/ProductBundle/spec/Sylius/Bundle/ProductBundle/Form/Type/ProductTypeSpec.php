@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductTypeSpec extends ObjectBehavior
 {
@@ -40,36 +41,19 @@ class ProductTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('masterVariant', 'sylius_product_variant', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('name', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('description', 'textarea', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('attributes', 'collection', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('options', 'sylius_product_option_choice', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('metaKeywords', 'text', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('metaDescription', 'text', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

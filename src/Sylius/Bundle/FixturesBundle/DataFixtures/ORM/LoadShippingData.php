@@ -22,6 +22,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
  * Creates sample shipping categories and methods.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class LoadShippingData extends DataFixture
 {
@@ -37,16 +38,16 @@ class LoadShippingData extends DataFixture
         $manager->persist($heavy);
 
         $config = array('first_item_cost' => 1000, 'additional_item_cost' => 500, 'additional_item_limit' => 0);
-        $manager->persist($this->createShippingMethod('FedEx', 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $config = array('amount' => 2500);
-        $manager->persist($this->createShippingMethod('UPS Ground', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es' => 'UPS terrestre'), 'EU', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('amount' => 2350);
-        $manager->persist($this->createShippingMethod('DHL', 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'EU', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
-        $manager->persist($this->createShippingMethod('FedEx World Shipping', 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es' => 'FedEx internacional'), 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
     }
@@ -82,7 +83,7 @@ class LoadShippingData extends DataFixture
     /**
      * Create shipping method.
      *
-     * @param string                    $name
+     * @param array                     $translatedNames
      * @param string                    $zoneName
      * @param string                    $calculator
      * @param array                     $configuration
@@ -90,17 +91,24 @@ class LoadShippingData extends DataFixture
      *
      * @return ShippingMethodInterface
      */
-    protected function createShippingMethod($name, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
+    protected function createShippingMethod(array $translatedNames, $zoneName, $calculator = DefaultCalculators::PER_ITEM_RATE, array $configuration = array(), ShippingCategoryInterface $category = null)
     {
         /* @var $method ShippingMethodInterface */
         $method = $this->getShippingMethodRepository()->createNew();
-        $method->setName($name);
+
+        foreach ($translatedNames as $locale => $name) {
+            $method->setCurrentLocale($locale);
+            $method->setName($name);
+
+            if ($this->defaultLocale == $locale) {
+                $this->setReference('Sylius.ShippingMethod.'.$name, $method);
+            }
+        }
+
         $method->setZone($this->getZoneByName($zoneName));
         $method->setCalculator($calculator);
         $method->setConfiguration($configuration);
         $method->setCategory($category);
-
-        $this->setReference('Sylius.ShippingMethod.'.$name, $method);
 
         return $method;
     }

@@ -19,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 class PromotionTypeSpec extends ObjectBehavior
 {
@@ -39,60 +40,52 @@ class PromotionTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_build_form_with_proper_fields(
-        FormBuilder $builder,
-        $checkerRegistry,
-        $actionRegistry
-    ) {
+    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    {
         $builder
-            ->add('name', 'text', Argument::any())
+            ->add('name', 'text', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'text', Argument::any())
+            ->add('description', 'text', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('exclusive', 'checkbox', Argument::any())
+            ->add('exclusive', 'checkbox', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('usageLimit', 'integer', Argument::any())
+            ->add('usageLimit', 'integer', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('startsAt', 'date', Argument::any())
+            ->add('startsAt', 'date', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('endsAt', 'date', Argument::any())
+            ->add('endsAt', 'date', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('couponBased', 'checkbox', Argument::any())
+            ->add('couponBased', 'checkbox', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('rules', 'collection', Argument::any())
+            ->add('rules', 'sylius_promotion_rule_collection', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('actions', 'collection', Argument::any())
+            ->add('actions', 'sylius_promotion_action_collection', Argument::type('array'))
             ->willReturn($builder)
         ;
-
-        $checkerRegistry->all()->willReturn(array());
-        $actionRegistry->all()->willReturn(array());
-
-        $builder->setAttribute('prototypes', Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }
@@ -108,5 +101,10 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $this->setDefaultOptions($resolver);
+    }
+
+    function it_has_a_name()
+    {
+        $this->getName()->shouldReturn('sylius_promotion');
     }
 }

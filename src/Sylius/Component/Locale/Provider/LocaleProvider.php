@@ -12,11 +12,13 @@
 namespace Sylius\Component\Locale\Provider;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * Default provider returns all enabled locales.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class LocaleProvider implements LocaleProviderInterface
 {
@@ -28,11 +30,27 @@ class LocaleProvider implements LocaleProviderInterface
     protected $localeRepository;
 
     /**
-     * @param RepositoryInterface $localeRepository
+     * Default locale
+     *
+     * @var string
      */
-    public function __construct(RepositoryInterface $localeRepository)
+    protected $defaultLocale;
+
+    /**
+     * @param RepositoryInterface $localeRepository
+     * @param string              $defaultLocale
+     *
+     * @throws \Exception
+     */
+    public function __construct(RepositoryInterface $localeRepository, $defaultLocale)
     {
+        if (empty($defaultLocale)) {
+            throw new \Exception('Default locale is required!');
+        }
+
         $this->localeRepository = $localeRepository;
+
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**
@@ -41,5 +59,31 @@ class LocaleProvider implements LocaleProviderInterface
     public function getAvailableLocales()
     {
         return $this->localeRepository->findBy(array('enabled' => true));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocales()
+    {
+        return array_map(function (LocaleInterface $locale) {
+            return $locale->getCode();
+        }, $this->getAvailableLocales());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultLocale()
+    {
+        return $this->defaultLocale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequiredLocales()
+    {
+        return array($this->defaultLocale);
     }
 }

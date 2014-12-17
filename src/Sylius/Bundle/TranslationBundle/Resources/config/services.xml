@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.translatable.listener.class">Prezent\Doctrine\Translatable\EventListener\TranslatableListener</parameter>
+        <parameter key="sylius.translatable.listener.locale.class">Sylius\Bundle\TranslationBundle\EventListener\LocaleListener</parameter>
+        <parameter key="sylius.translatable.metadata_factory.class">Metadata\MetadataFactory</parameter>
+        <parameter key="sylius.translatable.driver_chain.class">Metadata\Driver\DriverChain</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.translatable.metadata_factory" class="%sylius.translatable.metadata_factory.class%">
+            <argument type="service" id="sylius.translatable.driver_chain"/>
+        </service>
+
+        <service id="sylius.translatable.driver_chain" class="%sylius.translatable.driver_chain.class%"/>
+
+        <service id="sylius.translatable.listener" class="%sylius.translatable.listener.class%">
+            <argument type="service" id="sylius.translatable.metadata_factory" />
+            <call method="setCurrentLocale">
+                <argument>%sylius.locale%</argument>
+            </call>
+            <call method="setFallbackLocale">
+                <argument>%sylius.locale%</argument>
+            </call>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="sylius.translatable.listener.locale" class="%sylius.translatable.listener.locale.class%">
+            <argument type="service" id="sylius.translatable.listener" />
+            <tag name="kernel.event_subscriber" priority="98"/>
+        </service>
+    </services>
+</container>

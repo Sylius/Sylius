@@ -13,13 +13,14 @@ namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
  * Product option default implementation.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Option implements OptionInterface
+class Option extends AbstractTranslatable implements OptionInterface
 {
     /**
      * Property id.
@@ -70,6 +71,7 @@ class Option implements OptionInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->values = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -113,7 +115,7 @@ class Option implements OptionInterface
      */
     public function getPresentation()
     {
-        return $this->presentation;
+        return $this->translate()->getPresentation();
     }
 
     /**
@@ -121,7 +123,7 @@ class Option implements OptionInterface
      */
     public function setPresentation($presentation)
     {
-        $this->presentation = $presentation;
+        $this->translate()->setPresentation($presentation);
 
         return $this;
     }

@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
  * Product repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ProductRepository extends BaseProductRepository
 {
@@ -68,7 +69,7 @@ class ProductRepository extends BaseProductRepository
 
         if (!empty($criteria['name'])) {
             $queryBuilder
-                ->andWhere('product.name LIKE :name')
+                ->andWhere('translation.name LIKE :name')
                 ->setParameter('name', '%'.$criteria['name'].'%')
             ;
         }

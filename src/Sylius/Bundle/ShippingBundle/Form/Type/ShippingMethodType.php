@@ -24,6 +24,7 @@ use Symfony\Component\Form\FormView;
  * Shipping method form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ShippingMethodType extends AbstractResourceType
 {
@@ -64,8 +65,10 @@ class ShippingMethodType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormListener($this->calculatorRegistry, $builder->getFormFactory()))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.shipping_method.name'
+            ->add('translations', 'a2lix_translationsForms', array(
+                // TODO Form as a service?
+                'form_type' => new ShippingMethodTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'label'    => 'sylius.form.shipping_method.name'
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,

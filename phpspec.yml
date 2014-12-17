@@ -24,6 +24,7 @@ suites:
     Storage          : { namespace: Sylius, spec_path: src/Sylius/Component/Storage }
     Taxation         : { namespace: Sylius, spec_path: src/Sylius/Component/Taxation }
     Taxonomy         : { namespace: Sylius, spec_path: src/Sylius/Component/Taxonomy }
+    Translation      : { namespace: Sylius, spec_path: src/Sylius/Component/Translation }
     Variation        : { namespace: Sylius, spec_path: src/Sylius/Component/Variation }
 
     AddressingBundle : { namespace: Sylius, spec_path: src/Sylius/Bundle/AddressingBundle }
