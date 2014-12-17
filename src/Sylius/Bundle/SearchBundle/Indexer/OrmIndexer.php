@@ -258,8 +258,9 @@ class OrmIndexer implements IndexerInterface
     public function isObjectIndexable($object)
     {
         $class = get_class($object);
+
         foreach ($this->config['orm_indexes'] as $index) {
-            if ($index['class'] === $class && 'orm' === $this->config['driver']) {
+            if ($index['class'] === $class && 'doctrine/orm' === $this->config['driver']) {
                 return true;
             }
         }

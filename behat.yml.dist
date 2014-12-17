@@ -297,6 +297,7 @@ default:
                 - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
             filters:
                 tags: "@search"
 

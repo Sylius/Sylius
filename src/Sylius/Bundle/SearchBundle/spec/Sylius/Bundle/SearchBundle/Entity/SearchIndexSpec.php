@@ -20,7 +20,7 @@ class SearchIndexSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Entity\SearchIndex');
+        $this->shouldHaveType('Sylius\Bundle\SearchBundle\Model\SearchIndex');
     }
 
     function its_item_id_is_mutable()
@@ -53,4 +53,4 @@ class SearchIndexSpec extends ObjectBehavior
         $this->getCreatedAt()->shouldReturn('2014-08-08 15:53:07');
     }
 
-} 
+}
