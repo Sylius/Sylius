@@ -48,6 +48,11 @@ class CouponTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->add('expiresAt', 'date', Argument::any())
+            ->willReturn($builder)
+        ;
+
         $this->buildForm($builder, array());
     }
 
