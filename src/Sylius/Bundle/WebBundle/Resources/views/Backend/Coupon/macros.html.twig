@@ -12,6 +12,7 @@
             <th>{{ 'sylius.promotion.usage_limit' | trans }}</th>
             <th>{{ 'sylius.promotion_coupon.per_user_usage_limit' | trans }}</th>
             <th>{{ 'sylius.promotion.used' | trans }}</th>
+            <th>{{ 'sylius.promotion_coupon.expires_at' | trans }}</th>
             <th>
                 <div class="pull-right">
                 {{ 'sylius.promotion_coupon.total_results'|trans({'%total%': promotion_coupons.nbResults}) }}
@@ -40,6 +41,7 @@
                     {{ promotion_coupon.used }}
                 </span>
             </td>
+            <td>{{ promotion_coupon.expiresAt|date }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_promotion_coupon_update', {'promotionId': promotion.id, 'id': promotion_coupon.id})) }}
