@@ -27,7 +27,7 @@ Feature: Products filter
 
     Scenario: Filtering products by SKU
         Given I am on the product index page
-        When I fill in "SKU" with "123"
+        When I fill in "SKU" with "555"
         And I press "Filter"
         Then I should be on the product index page
         And I should see 1 product in the list
