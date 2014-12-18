@@ -42,8 +42,14 @@ class DefaultFormFactory
 
         $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, array('csrf_protection' => false));
 
-        foreach ($this->getFieldsFromMetadata($metadata) as $field) {
-            $builder->add($field);
+        foreach ($this->getFieldsFromMetadata($metadata) as $field => $type) {
+            $options = array();
+
+            if (in_array($type, array('date', 'datetime'))) {
+                $options = array('widget' => 'single_text');
+            }
+
+            $builder->add($field, null, $options);
         }
 
         return $builder->getForm();
@@ -71,6 +77,12 @@ class DefaultFormFactory
             }
         }
 
-        return $fields;
+        $fieldsMapping = array();
+
+        foreach ($fields as $field) {
+            $fieldsMapping[$field] = $metadata->getTypeOfField($field);
+        }
+
+        return $fieldsMapping;
     }
 }
