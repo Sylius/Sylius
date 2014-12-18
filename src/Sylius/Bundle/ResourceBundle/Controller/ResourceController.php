@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
+use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -171,7 +172,7 @@ class ResourceController extends FOSRestController
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
             if ($this->config->isApiRequest()) {
@@ -186,7 +187,7 @@ class ResourceController extends FOSRestController
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+            return $this->handleView($this->view($form, 400));
         }
 
         $view = $this
@@ -321,17 +322,23 @@ class ResourceController extends FOSRestController
      */
     public function getForm($resource = null)
     {
+        $type = $this->config->getFormType();
+
+        if (!$this->get('form.registry')->hasType($type)) {
+            $defaultFormFactory = new DefaultFormFactory($this->container->get('form.factory'));
+
+            return $defaultFormFactory->create($resource, $this->container->get($this->config->getServiceName('manager')));
+        }
+
         if ($this->config->isApiRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $this->config->getFormType(), $resource);
+            return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
         }
 
-        $form =  $this->config->getFormType();
-
-        if (strpos($form, '\\') !== false) {
-            $form = new $form;
+        if (strpos($type, '\\') !== false) {
+            $type = new $type;
         }
 
-        return $this->createForm($form, $resource);
+        return $this->createForm($type, $resource);
     }
 
     /**
