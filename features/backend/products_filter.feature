@@ -6,8 +6,8 @@ Feature: Products filter
 
     Background:
         Given there is default currency configured
-          And I am logged in as administrator
-          And the following products exist:
+        And I am logged in as administrator
+        And the following products exist:
             | name          | price | sku |
             | Super T-Shirt | 19.99 | 123 |
             | Black T-Shirt | 19.99 | 321 |
@@ -18,30 +18,18 @@ Feature: Products filter
 
     Scenario: Filtering products by name
         Given I am on the product index page
-         When I fill in "Name" with "T-Shirt"
-          And I press "Filter"
-         Then I should be on the product index page
-          And I should see 2 products in the list
-
-    Scenario: Not matching products are not in the list
-        Given I am on the product index page
-         When I fill in "Name" with "T-Shirt"
-          And I press "Filter"
-         Then I should be on the product index page
-          And I should not see "Orange"
-          But I should see "Black T-Shirt"
+        When I fill in "Name" with "T-Shirt"
+        And I press "Filter"
+        Then I should be on the product index page
+        And I should see 2 products in the list
+        And I should not see "Orange"
+        But I should see "Black T-Shirt"
 
     Scenario: Filtering products by SKU
         Given I am on the product index page
-         When I fill in "SKU" with "123"
-          And I press "Filter"
-         Then I should be on the product index page
-          And I should see 1 product in the list
-
-    Scenario: Products with not matching SKU are filtered
-        Given I am on the product index page
-         When I fill in "SKU" with "555"
-          And I press "Filter"
-         Then I should be on the product index page
-          And I should see "Sticker"
-          But I should not see "T-Shirt"
+        When I fill in "SKU" with "123"
+        And I press "Filter"
+        Then I should be on the product index page
+        And I should see 1 product in the list
+        And I should see "Sticker"
+        But I should not see "T-Shirt"
