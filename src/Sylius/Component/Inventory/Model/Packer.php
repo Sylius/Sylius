@@ -4,10 +4,12 @@ namespace Sylius\Component\Inventory\Model;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository;
+use Doctrine\Common\Collections\Collection; //TODO Add doctrine in composer.json
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository; //TODO move repo to component
+use Sylius\Component\Core\Model\InventoryUnitInterface as CoreInventoryUnitInterface; //TODO don't depend on core, move shipmentSate from Core/InventoryUnitIterface to Inventory/InventoryUnitInterface
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface; //TODO Add shipment in composer.json or move this to shipment comp.
 
 class Packer
 {
@@ -43,9 +45,14 @@ class Packer
         }
 
         /* @var $stockable    StockableInterface */
-        /* @var $variantUnits InventoryUnitInterface[]|Collection */
+        /* @var $variantUnits CoreInventoryUnitInterface[]|Collection */
         foreach ($grouped as $stockable => $variantUnits) {
-            $units = clone $grouped->getInfo();
+            //$units = clone $grouped->getInfo(); //TODO clone content in collection as well!!!!!!
+            $units = new ArrayCollection();
+            foreach($grouped->getInfo() as $unit)
+            {
+                $units->add(clone $unit);
+            }
 
             $stockable = $grouped->current();
             $quantity = $units->count();
@@ -56,24 +63,29 @@ class Packer
 
                 $backordered = 0;
                 if ($stockItem->getOnHand() >= $quantity) {
-                    $onHand = $units->count();
+                    $onHand = $quantity;
                 } else {
                     $onHand = $stockItem->getOnHand();
                     $backordered = $quantity - $onHand;
                 }
 
-                /* @var $shippingUnit InventoryUnitInterface */
+
+                //Set $onHand amount of InventoryUnits to ShippingState OnHold
+                /* @var $shippingUnit CoreInventoryUnitInterface */
                 foreach ($units->slice(0, $onHand) as $shippingUnit) {
+                    $shippingUnit->setShippingState(ShipmentInterface::STATE_ONHOLD);
                     $package->addInventoryUnit($shippingUnit);
                 }
 
-                foreach ($units->slice(0, $backordered) as $shippingUnit) {
-                    $shippingUnit->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
+                //Set $backordered amuont of InventoryUnits to ShippingState Backordered
+                foreach ($units->slice($onHand, $backordered) as $shippingUnit) {
+                    $shippingUnit->setShippingState(ShipmentInterface::STATE_BACKORDERED);
                     $package->addInventoryUnit($shippingUnit);
                 }
             } else {
-                /* @var $shippingUnit InventoryUnitInterface */
+                /* @var $shippingUnit CoreInventoryUnitInterface */
                 foreach ($units->slice(0, $quantity) as $shippingUnit) {
+                    $shippingUnit->setShippingState(ShipmentInterface::STATE_ONHOLD);
                     $package->addInventoryUnit($shippingUnit);
                 }
             }

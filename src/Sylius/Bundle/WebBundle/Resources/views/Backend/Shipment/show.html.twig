@@ -87,6 +87,10 @@
                     <td><strong>{{ 'sylius.order.created_at'|trans }}</strong></td>
                     <td>{{ order.createdAt|date }}</td>
                 </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.shipment.location'|trans }}</strong></td>
+                    <td>{{  shipment.location.name }}</td>
+                </tr>
             </tbody>
         </table>
     </div>

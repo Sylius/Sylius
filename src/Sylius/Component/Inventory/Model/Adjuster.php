@@ -30,7 +30,7 @@ class Adjuster
     }
 
     public function setState($state) {
-        $this->status = $state;
+        $this->state = $state;
     }
 
     public function getState()

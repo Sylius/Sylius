@@ -9,11 +9,12 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('order', 'sylius.shipment.order'|trans) }}</th>
-            <th>{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
+            <th class="hidden-xs hidden-sm">{{ sylius_resource_sort('method', 'sylius.shipment.method'|trans) }}</th>
             <th>{{ sylius_resource_sort('state', 'sylius.shipment.state'|trans) }}</th>
+            <th>{{ sylius_resource_sort('location', 'sylius.shipment.location'|trans) }}</th>
             <th>{{ 'sylius.shipping_address'|trans }}</th>
             <th class="text-center">{{ 'sylius.total_quantity'|trans }}</th>
-            <th>{{ sylius_resource_sort('createdAt', 'sylius.created_at'|trans) }}</th>
+            <th class="hidden-xs hidden-sm hidden-md">{{ sylius_resource_sort('createdAt', 'sylius.created_at'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -28,11 +29,12 @@
                    #{{ order.number }}
                 </a>
             </td>
-            <td>{{ shipment.method.name }}</td>
+            <td class="hidden-xs hidden-sm">{{ shipment.method.name }}</td>
             <td>{{ misc.shipment_state(shipment.state) }}</td>
+            <td>{{ shipment.location.name }}</td>
             <td>{{ address.firstname }} {{ address.lastname }} ({{ address.city }}, {{ address.country }})</td>
             <td class="text-center">{{ shipment.items|length }}</td>
-            <td>{{ shipment.createdAt|date }}</td>
+            <td class="hidden-xs hidden-sm hidden-md">{{ shipment.createdAt|date }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_shipment_show', {'id': shipment.id})) }}

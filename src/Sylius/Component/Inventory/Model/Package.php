@@ -5,6 +5,7 @@ namespace Sylius\Component\Inventory\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\InventoryUnitInterface as CoreInventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 class Package
@@ -32,25 +33,17 @@ class Package
         $this->content = new ArrayCollection();
     }
 
-    public function quantity($state = null)
+    public function hasItem(CoreInventoryUnitInterface $inventoryUnit, $state = null)
     {
-        $matched = ($state == null)
-            ? $this->content
-            : $this->content->filter(
-                function ($e) use ($state) {
-                    return $e->getInventoryState();
-                }
-            );
-        //TODO finish
-    }
 
-    public function findItem(InventoryUnitInterface $inventoryUnit, $state = null)
-    {
-        return $this->content->filter(
-            function ($item) use ($inventoryUnit, $state) {
-                return $item === $inventoryUnit && (!$state || $item->getInventoryState() === $state);
-            }
-        )->first();
+        return $this->content->exists(function ($k, $item) use ($inventoryUnit, $state) {
+                /* @var $item CoreInventoryUnitInterface */
+                /* @var $inventoryUnit CoreInventoryUnitInterface */
+                $sameObj = $item == $inventoryUnit;
+                $sameState = !$state || $item->getShippingState() === $state;
+
+                return $item == $inventoryUnit;
+            });
     }
 
     public function isEmpty()
@@ -58,21 +51,40 @@ class Package
         return $this->content->count() <= 0;
     }
 
-    public function addInventoryUnit(InventoryUnitInterface $unit)
+    public function addInventoryUnit(CoreInventoryUnitInterface $unit)
     {
         $this->content->add($unit);
     }
 
-    public function removeInventoryUnit(InventoryUnitInterface $unit)
+    public function removeInventoryUnit(CoreInventoryUnitInterface $unit)
     {
-        $this->content->removeElement($unit);
+        $key = array_search($unit, $this->content->toArray());
+        $this->content->remove($key);
     }
 
-    public function getLocation() {
+    public function getLocation()
+    {
         return $this->location;
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
+    }
+
+    public function getOnHoldQuantity() {
+        return $this->getQuantity(InventoryUnitInterface::STATE_ONHOLD);
+    }
+
+    public function getQuantity($state = null)
+    {
+        $matched = ($state == null)
+            ? $this->content
+            : $this->content->filter(
+                function ($e) use ($state) {
+                    return $e->getShippingState() === $state;
+                }
+            );
+        return $matched->count();
     }
 }

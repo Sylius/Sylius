@@ -3,18 +3,22 @@
 namespace Sylius\Component\Inventory\Model;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\InventoryUnitInterface as CoreInventoryUnitInterface;
 
 class Prioritizer
 {
 
     /**
-     * @var InventoryUnitInterface[]|Collection
+     * @var CoreInventoryUnitInterface[]|Collection
      */
     protected $inventoryUnits;
 
     /**
-     * @var Package[]|Collection
+     * @var Package[]|ArrayCollection
      */
     protected $packages;
 
@@ -23,7 +27,7 @@ class Prioritizer
 
     }
 
-    public function prioritizePackages(Collection $inventoryUnits, Collection $packages)
+    public function prioritizePackages(Collection $inventoryUnits, ArrayCollection $packages) //Todo create interface combining Doctrine\Selectable and Doctrine\Collection
     {
         $this->inventoryUnits = $inventoryUnits;
         $this->packages = $packages;
@@ -37,11 +41,13 @@ class Prioritizer
     protected function adjustPackages()
     {
         foreach ($this->inventoryUnits as $unit) {
-            $adjuster = new Adjuster($unit, InventoryUnitInterface::STATE_ONHOLD);
+            $adjuster = new Adjuster($unit, ShipmentInterface::STATE_ONHOLD);
+            $unit->setShippingState(ShipmentInterface::STATE_ONHOLD);
 
             $this->visitPackages($adjuster);
 
-            $adjuster->setState(InventoryUnitInterface::STATE_BACKORDERED);
+            $adjuster->setState(ShipmentInterface::STATE_BACKORDERED);
+            $unit->setShippingState(ShipmentInterface::STATE_BACKORDERED);
 
             $this->visitPackages($adjuster);
         }
@@ -49,7 +55,11 @@ class Prioritizer
 
     protected function sortPackages()
     {
-
+        //Sort packages by amount of items they can deliver.
+        //Items with most OnHold status get priority.
+        $criteria = Criteria::create();
+        $criteria->orderBy(array('onHoldQuantity' => 'DESC'));
+        $this->packages = $this->packages->matching($criteria);
     }
 
     protected function prunePackages()
@@ -63,8 +73,8 @@ class Prioritizer
 
     private function visitPackages(Adjuster $adjuster) {
         foreach($this->packages as $package) {
-            $item = $package->findItem($adjuster->getInventoryUnit(), $adjuster->getState());
-            if($item) {
+            $hasItem = $package->hasItem($adjuster->getInventoryUnit(), $adjuster->getState());
+            if($hasItem) {
                 $adjuster->adjust($package);
             }
         }

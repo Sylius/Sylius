@@ -53,5 +53,6 @@ class ShipmentFactory implements ShipmentFactoryInterface
         foreach($shipments as $shipment) {
             $order->addShipment($shipment);
         }
+
     }
 }

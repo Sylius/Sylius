@@ -99,7 +99,7 @@ class Coordinator
 
     private function prioritizePackages()
     {
-        $prioritizer = new Prioritizer();
+         $prioritizer = new Prioritizer();
         $this->packages = $prioritizer->prioritizePackages($this->inventoryUnits, $this->packages);
     }
 
