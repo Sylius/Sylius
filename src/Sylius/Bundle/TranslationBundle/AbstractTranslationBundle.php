@@ -13,14 +13,13 @@ namespace Sylius\Bundle\TranslationBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\DoctrineOrmTranslationMappingsPass;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractTranslationBundle extends AbstractResourceBundle{
-
+abstract class AbstractTranslationBundle extends AbstractResourceBundle
+{
     /**
      * {@inheritdoc}
      */
@@ -28,17 +27,12 @@ abstract class AbstractTranslationBundle extends AbstractResourceBundle{
     {
         parent::build($container);
 
-//        if (null !== $this->getModelNamespace()) {
-            //TODO create translation YML mapping driver!
-//            if (self::MAPPING_XML === $this->mappingFormat) {
-                // Create the xml driver services for translations
-                $container->addCompilerPass(DoctrineOrmTranslationMappingsPass::createXmlTranslationMappingDriver(
-                    array($this->getConfigFilesPath() => $this->getModelNamespace())
-                ));
-
-//            } else {
-//                throw new InvalidConfigurationException("The translations 'mappingFormat' value is invalid, must be 'xml' .");
-//            }
-//        }
+        if (null !== $this->getModelNamespace()) {
+            // Create the driver mappings for translations
+            $container->addCompilerPass(DoctrineOrmTranslationMappingsPass::createTranslationMappingDriver(
+                array($this->getConfigFilesPath() => $this->getModelNamespace()),
+                $this->mappingFormat
+            ));
+        }
     }
 } 
