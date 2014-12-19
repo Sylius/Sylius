@@ -48,6 +48,9 @@ class DefaultFormFactory
             if (in_array($type, array('date', 'datetime'))) {
                 $options = array('widget' => 'single_text');
             }
+            if ('relation' === $type) {
+                $options = array('property' => 'id');
+            }
 
             $builder->add($field, null, $options);
         }
@@ -71,16 +74,16 @@ class DefaultFormFactory
             $fields = array_diff($fields, $metadata->identifier);
         }
 
-        foreach ($metadata->associationMappings as $fieldName => $relation) {
-            if ($relation['type'] !== ClassMetadataInfo::ONE_TO_MANY) {
-                $fields[] = $fieldName;
-            }
-        }
-
         $fieldsMapping = array();
 
         foreach ($fields as $field) {
             $fieldsMapping[$field] = $metadata->getTypeOfField($field);
+        }
+
+        foreach ($metadata->associationMappings as $fieldName => $relation) {
+            if ($relation['type'] !== ClassMetadataInfo::ONE_TO_MANY) {
+                $fieldsMapping[$fieldName] = 'relation';
+            }
         }
 
         return $fieldsMapping;
