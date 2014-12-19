@@ -22,9 +22,11 @@
     "require": {
         "php":                            ">=5.3.3",
 
+        "a2lix/translation-form-bundle":  "2.*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "hwi/oauth-bundle":               "~0.3",
         "jms/serializer-bundle":          "~0.13",
+        "jms/translation-bundle":         "1.1.*",
         "knplabs/gaufrette":              "0.2.*@dev",
         "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
         "mathiasverraes/money":           "*@dev",
@@ -53,7 +55,8 @@
         "sylius/taxonomy-bundle":         "0.13.*@dev",
         "sylius/attribute-bundle":        "0.13.*@dev",
         "sylius/variation-bundle":        "0.13.*@dev",
-        "symfony/framework-bundle":       "~2.3"
+        "symfony/framework-bundle":       "~2.3",
+        "winzou/state-machine-bundle":    "~0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.2",
@@ -77,6 +80,5 @@
         "branch-alias": {
             "dev-master": "0.13-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

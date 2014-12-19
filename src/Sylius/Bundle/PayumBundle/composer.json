@@ -26,14 +26,14 @@
     "require": {
         "php":                    ">=5.3.3",
 
-        "sylius/core":            "0.13.*@dev",
-        "sylius/currency":        "0.13.*@dev",
-        "sylius/order-bundle":    "0.13.*@dev",
-        "sylius/payment-bundle":  "0.13.*@dev",
-        "sylius/resource-bundle": "0.13.*@dev",
-        "payum/core":             "~0.12.0",
-        "payum/payum-bundle":     "~0.12.0",
-        "winzou/state-machine":   "~0.1"
+        "sylius/core":                          "0.13.*@dev",
+        "sylius/currency":                      "0.13.*@dev",
+        "sylius/order-bundle":                  "0.13.*@dev",
+        "sylius/payment-bundle":                "0.13.*@dev",
+        "sylius/resource-bundle":               "0.13.*@dev",
+        "payum/payum":                          "~0.12.0",
+        "payum/payum-bundle":                   "~0.12.0",
+        "winzou/state-machine":                 "~0.1"
     },
     "config": {
         "bin-dir": "bin"
@@ -48,6 +48,5 @@
         "branch-alias": {
             "dev-master": "0.13-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
