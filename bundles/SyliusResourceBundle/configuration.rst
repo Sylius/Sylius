@@ -86,52 +86,54 @@ You need to expose a semantic configuration for your bundle. The following examp
             $rootNode = $treeBuilder->root('bundle_name');
 
             $rootNode
-                // Driver used by the resource bundle
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->children()
+                    // Driver used by the resource bundle
+                    ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
 
-                // Object manager used by the resource bundle, if not specified "default" will used
-                ->scalarNode('manager')->defaultValue('default')->end()
+                    // Object manager used by the resource bundle, if not specified "default" will used
+                    ->scalarNode('manager')->defaultValue('default')->end()
 
-                // Validation groups used by the form component
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('MyEntity')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('your_group'))
-                        ->end()
-                    ->end()
-                ->end()
-
-                // Configure the template namespace used by each resource
-                ->arrayNode('templates')
-                ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('my_entity')->defaultValue('MyCoreBundle:Entity')->end()
-                        ->scalarNode('my_other_entity')->defaultValue('MyOtherCoreBundle:Entity')->end()
-                    ->end()
-                ->end()
-
-
-                // The resources
-                ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('my_entity')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyEntity')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                    // Validation groups used by the form component
+                    ->arrayNode('validation_groups')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->arrayNode('MyEntity')
+                                ->prototype('scalar')->end()
+                                ->defaultValue(array('your_group'))
                             ->end()
                         ->end()
-                        ->arrayNode('my_other_entity')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyOtherEntity')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                    ->end()
+
+                    // Configure the template namespace used by each resource
+                    ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('my_entity')->defaultValue('MyCoreBundle:Entity')->end()
+                            ->scalarNode('my_other_entity')->defaultValue('MyOtherCoreBundle:Entity')->end()
+                        ->end()
+                    ->end()
+
+
+                    // The resources
+                    ->arrayNode('classes')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->arrayNode('my_entity')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyEntity')->end()
+                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                    ->scalarNode('repository')->end()
+                                    ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('my_other_entity')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyOtherEntity')->end()
+                                    ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                    ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()
