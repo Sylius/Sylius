@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: Ödeme tamamlandı.
+    cancel: Ödeme iptal edildi.
+    transition_fail: Stoğun şuan ki durumu nedeniyle işleminiz gerçekleştirilemiyor

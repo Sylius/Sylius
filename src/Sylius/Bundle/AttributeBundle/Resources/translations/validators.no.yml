@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: Skriv inn navnet på attributtet.
+      min_length: 'Attributtnavn må være minst ett tegn. |Attributtnavn må være minst {{ limit }} tegn.'
+      max_length: 'Attributtnavn må ikke være lengre enn ett tegn. |Attributtnavnet kan ikke være lengre enn {{ limit }} tegn.'
+    presentation:
+      not_blank: Angi attributtpresentasjon.
+      min_length: 'Attributtet presentasjon må være minst ett tegn. |Attributtet presentasjon må være minst {{ limit }} tegn.'
+      max_length: 'Attributtet presentasjon må ikke være lengre enn ett tegn. |Attributtet presentasjon må ikke være lengre enn {{ limit }} tegn.'
+  attribute_value:
+    attribute:
+      not_blank: Velg attributt.
+    value:
+      not_blank: Angi attributtverdi.

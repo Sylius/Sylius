@@ -20,12 +20,12 @@ sylius:
       max: 'Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
       min: 'Nazwisko nie może mieć mniej niż {{ limit }} znaków.'
       not_blank: Proszę wpisać swoje nazwisko.
-  variant:
+  product_variant:
     onHand:
-      min: 'Stan magazynowy musi wynosić więcej niż {{ limit }}.'
-      not_blank: Proszę wprowadzić stan magazynowy.
+      min: 'Dostępna ilość musi być większa niż {{ limit }}.'
+      not_blank: Należy wprowadzić dostępną ilość.
     price:
-      min: 'Cena musi być większa niż {{ limit }}.'
+      min: Cena nie może być ujemna.
       not_blank: Proszę podać cenę.
 sylius_shipping:
   method:

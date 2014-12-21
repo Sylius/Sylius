@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Stad mag nie langer wees as 255 karakters nie|Stad mag nie langer wees as 255 karakters nie.
+      min_length: Stad moet minstens 2 karakters lank wees|Stad moet minstens 2 karakters lank wees.
+      not_blank: Voer asb. stad in.
+    country:
+      not_blank: Voer asb. land.
+    first_name:
+      max_length: Naam mag nie langer wees as 255 karakters nie|Naam mag nie langer wees as 255 karakters nie.
+      min_length: Naam moet minstens 2 karakters lank wees|Naam moet minstens 2 karakters lank wees.
+      not_blank: Voer asb. naam in.
+    last_name:
+      max_length: Van mag nie langer wees as 255 karakters nie|Van mag nie langer wees as 255 karakters nie.
+      min_length: Van moet minstens 2 karakters lank wees|Van moet minstens 2 karakters lank wees.
+      not_blank: Voer asb. van in.
+    postcode:
+      max_length: Poskode mag nie langer wees as 255 karakters nie|Poscode mag nie langer wees as 255 karakters nie.
+      min_length: Poscode moet minstens 2 karakters lank wees|Poscode moet minstens 2 karakters lank wees.
+      not_blank: Voer asb. poskode in.
+    province:
+      valid: Voer asb. die goeie provinsie in.
+    street:
+      max_length: Straat mag nie langer wees as 255 karakters nie|Straat mag nie langer wees as 255 karakters nie.
+      min_length: Straat moet minstens 2 karakters lank wees|Straat moet minstens 2 karakters lank wees.
+      not_blank: Voer asb. straat in.
+    not_shippable: "Hierdie adres is nie 'n geldige bestemming nie."
+  country:
+    iso_name:
+      not_blank: Voer asb. ISO land kode in.
+    name:
+      max_length: Land mag nie langer wees as 255 karakters nie|Land mag nie langer wees as 255 karakters nie.
+      not_blank: Voer asb. land naam in.
+  province:
+    name:
+      max_length: Provinsie naam mag nie langer wees as 255 karakters nie|Provinsie naam mag nie langer wees as 255 karakters nie.
+      min_length: Provinsie naam moet minstens 2 karakters lank wees|Provinsie naam moet minstens 2 karakters lank wees.
+      not_blank: Voer asb. provinsie naam in.
+  zone:
+    members:
+      min_count: 'Voeg asb. minstens {{ limit }} area lede toe.'
+    name:
+      max_length: Area naam mag nie langer wees as 255 karakters nie|Area naam mag nie langer wees as 255 karakters nie.
+      not_blank: Voer asb. area naam in.

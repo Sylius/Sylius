@@ -1,3 +1,20 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  option:
+    name:
+      not_blank: Seçenek adı giriniz.
+      min_length: 'Seçenek adı en az 1 karakter uzunluğunda olmalıdır.|Seçenek adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Seçenek adı 1 karakterden uzun olmamalıdır.|Seçenek adı {{ limit }} karakterden uzun olmamalıdır.'
+    presentation:
+      not_blank: Lütfen seçenek sunumunu girin.
+      min_length: 'Seçenek sunumu en az 1 karakter uzunluğunda olmalıdır.|Seçenek sunumu en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Seçenek sunumu 1 karakterden uzun olmamalıdır.|Seçenek sunumu {{ limit }} karakterden uzun olmamalıdır.'
+    values:
+      min_count: 'Lütfen en az {{ limit }} seçenek ekleyin.|Lütfen en az {{ limit }} seçenek ekleyin.'
+  option_value:
+    value:
+      not_blank: Lütfen seçenek değeri girin.
+  variant:
+    combination: Bu seçenekli varyant zaten bulunmaktadır.

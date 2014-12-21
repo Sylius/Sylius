@@ -6,3 +6,6 @@ sylius:
     name:
       max_length: 'Názov kategórie nesmie byť dlhší ako {{ limit }} znakov.'
       min_length: 'Názov kategórie musí mať minimálne {{ limit }} znakov.'
+  shipping_method:
+    name:
+      not_blank: Zadajte spôsob doručenia.

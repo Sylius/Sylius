@@ -16,7 +16,3 @@ sylius:
       max: 'Příjmení nesmí být delší než {{ limit }} znaků.'
       min: 'Příjmení musí být alespoň {{ limit }} znaků dlouhé.'
       not_blank: Zadejte své příjmení.
-  variant:
-    price:
-      min: Cena nesmí být záporná.
-      not_blank: Zadejte cenu.

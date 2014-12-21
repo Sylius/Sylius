@@ -1,3 +1,95 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Çeşitlilik
+        configuration: Ayarlar
+        countries: Ülkeler
+        customer: Müşteriler
+        dashboard: Kontrol Paneli
+        exchange_rates: Döviz kurları
+        general_settings: Genel ayarlar
+        homepage: Mağazanız
+        locales: Diller
+        new_order: Sipariş ekle
+        new_promotion: Yeni promosyon ekle
+        options: Ürün seçeneklerini yönet
+        orders: Şuanki siparişler
+        payment_methods: Ödeme tipleri
+        payments: Ödemeler
+        products: Ürünler
+        promotions: Promosyonlar
+        properties: Ayarları yapılandırma
+        prototypes: Ürün prototipleri
+        sales: Siparişler
+        shipments: Kargo İşlemleri
+        shipping_categories: Kargo kategorileri
+        shipping_methods: Gönderim metodları
+        stockables: Stok düzeyleri
+        tax_categories: Vergi kategorileri
+        tax_rates: Vergi oranları
+        taxation_settings: Vergilendirme ayarları
+        taxonomies: Sınıflandırma
+        users: Kullanıcılar
+        zones: Bölgeler
+      sidebar:
+        assortment: Çeşitlilik
+        blocks: Bloklar
+        configuration: Ayarlar
+        content: İçerik
+        countries: Ülkeler
+        customer: Müşteriler
+        dashboard: Kontrol Paneli
+        exchange_rates: Döviz kurları
+        general_settings: Genel ayarlar
+        groups: Gruplar
+        homepage: Siteye dön
+        locales: Diller
+        new_order: Sipariş ekle
+        new_promotion: Yeni promosyon ekle
+        options: Seçeneklerini yönet
+        orders: Şuanki siparişler
+        pages: Sayfalar
+        payment_methods: Ödeme tipleri
+        payments: Ödemeler
+        products: Ürünler
+        promotions: Promosyonlar
+        properties: Ayarları yapılandırma
+        prototypes: Ürün prototipleri
+        sales: Siparişler
+        shipments: Kargo İşlemleri
+        shipping_categories: Kargo kategorileri
+        shipping_methods: Gönderim metodları
+        stockables: Stok düzeyleri
+        tax_categories: Vergi kategorileri
+        tax_rates: Vergi oranları
+        taxation_settings: Vergilendirme ayarları
+        taxonomies: Sınıflandırma
+        users: Kullanıcılar
+        zones: Bölgeler
+  frontend:
+    menu:
+      account:
+        addresses: Adres Defterim
+        homepage: Ana Sayfa
+        orders: Siparişlerim / Faturalarım
+        password: Şifrem
+        profile: Kişisel bilgilerim
+        shop: Mağazaya geri dön
+      currency: 'Fiyatları %currency% biriminde göster'
+      main:
+        account: Hesabım
+        administration: Yönetim
+        cart: 'Sepeti göster (%items%) %total%'
+        login: Giriş
+        logout: Çıkış yap
+        register: Üye ol
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

@@ -8,7 +8,6 @@ sylius:
     restricted_zone: Produk ini tidak tersedia di negara Anda.
     success: Terima kasih atas pesanan Anda!
     canceled: Pembayaran Anda dibatalkan.
-    pending: Pembayaran Anda ini saat ini ditunda.
     failed: Pembayaran Anda ditolak.
     unknown: Kesalahan pembayaran tidak diketahui.
     out_of_stock: 'Ada hanya % jumlah % % name % dalam saham.'

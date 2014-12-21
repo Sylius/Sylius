@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: Uplata je dovršena.
+    cancel: Uplata je odbijena.
+    transition_fail: Akcija se ne može izvršiti s obzirom na trenutno stanje uplate.

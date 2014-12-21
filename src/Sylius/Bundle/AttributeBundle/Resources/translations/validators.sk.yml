@@ -2,9 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  product:
-    sku:
-      unique: Kód produktu musí byť unikátny.
-  variant:
-    sku:
-      unique: Kód variácie musí byť unikátny.
+  attribute:
+    name:
+      not_blank: Zadajte názov atribútu.
+      min_length: 'Názov atribútu musí obsahovať minimálne 1 znak.|Názov atribútu musí obsahovať minimálne {{ limit }} znakov.'
+      max_length: 'Názov atribútu nesmie byť dlhší ako 1 znak.|Názov atribútu nesmie byť dlhší ako {{ limit }} znakov.'
+  attribute_value:
+    attribute:
+      not_blank: Vyberte atribút.
+    value:
+      not_blank: Zadajte hodnotu atribútu.

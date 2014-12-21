@@ -10,4 +10,5 @@ sylius:
       category: Категорія
       name: Назва
       amount: Кількість
+      included_in_price: Входить у вартість товару?
       calculator: Калькулятор

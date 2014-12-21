@@ -5,7 +5,7 @@ sylius:
   address:
     city:
       max_length: "Il nome della città non deve essere piu' lungo di 255 caratteri|Il nome della città non deve essere piu' lungo di 255 caratteri|Il nome della città non deve essere piu' lungo di 255 caratteri."
-      min_length: La città deve essere lunga almeno due caratteri|La città deve essere lunga almeno due caratteri.
+      min_length: Il nome della città deve essere lunga almeno due caratteri|Il nome della città deve essere lunga almeno due caratteri.
       not_blank: Inserisci la città.
     country:
       not_blank: Inserisci la nazione.

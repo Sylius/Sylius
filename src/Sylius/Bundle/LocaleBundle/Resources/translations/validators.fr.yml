@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: Veuillez choisir le code régional.
+      unique: Le code régional doit être unique.

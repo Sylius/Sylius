@@ -13,6 +13,7 @@ sylius:
       type: Tipo
     rule:
       taxonomy_configuration:
+        taxons: Taxons
         exclude: Escludi
       item_count_configuration:
         count: Conta
@@ -29,7 +30,7 @@ sylius:
           weeks: Settimane
           months: Mesi
           years: Anni
-          header: Unità
+          0: Unità
         after: Utente creato dopo questo periodo
       shipping_country_configuration:
         country: Paese
@@ -42,6 +43,7 @@ sylius:
       usage_limit: Limite di utilizzo
     promotion:
       actions: Azioni
+      coupon_based: Basata su coupon
       description: Descrizione
       ends_at: Termina il
       name: Nome

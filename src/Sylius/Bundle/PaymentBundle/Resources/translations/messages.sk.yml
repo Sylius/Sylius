@@ -14,8 +14,10 @@ sylius:
       amount: Suma platby
       method: Spôsob platby
       state:
+        0: Stav platby
         completed: Dokončené
         failed: Neúspešné
+        cancelled: Zrušené
     payment_method:
       description: Popis
       enabled: Povolené?

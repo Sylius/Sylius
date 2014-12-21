@@ -1,3 +1,36 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Назва групи не повинна бути більше ніж {{ limit }} символів.'
+      min: 'Назва групи повинна бути не менше ніж {{ limit }} символів.'
+      not_blank: "Будь ласка, введіть ім'я групи."
+  locale:
+    code:
+      not_blank: Будь ласка, введіть код локалі.
+      unique: Ця локаль вже існує.
+  user:
+    first_name:
+      max: "Ім'я не повинно бути більше ніж {{ limit }} символів."
+      min: "Ім'я повинне бути не менше ніж {{ limit }} символів."
+      not_blank: "Будь ласка, введіть ваше ім'я."
+    last_name:
+      max: 'Прізвище не повинно бути більше ніж {{ limit }} символів.'
+      min: 'Прізвище повинно бути не менше ніж {{ limit }} символів.'
+      not_blank: "Будь ласка, введіть ваше прізвище та ім'я."
+  product_variant:
+    onHand:
+      min: 'На руках має бути більше, ніж {{ limit }}.'
+    price:
+      min: Ціна не має бути негативною.
+      not_blank: Будь ласка, введіть ціну.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Будь ласка, введіть зону доставки.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Будь ласка, введіть зону оподаткування.

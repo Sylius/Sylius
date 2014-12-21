@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      not_blank: Należy wybrać obszar nazw dla tego parametru.
+    name:
+      max_length: Nazwa parametru może składać się z maksymalnie 255 znaków.|Nazwa parametru może składać się z maksymalnie 255 znaków.
+      min_length: Nazwa parametru musi składać się z przynajmniej 2 znaków.|Nazwa parametru musi składać się z przynajmniej 2 znaków.
+      not_blank: Należy wprowadzić nazwę parametru.

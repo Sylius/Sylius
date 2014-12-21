@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    header: utvidelser
+    0: utvidelser
     accelerator:
-      header: Akselerator
+      0: Akselerator
       help: Installere og aktivere en PHP-akselerator som APC (anbefales).
     apc: APC
     ctype: Ctype
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    header: filsystem
+    0: filsystem
     cache:
-      header: mellomlagring
+      0: mellomlagring
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: finnes
     logs:
-      header: logger
+      0: logger
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: finnes ikke
     not_writable: ikke skrivbar
     parameters:
-      header: parameters.yml
+      0: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: leverandører
     writable: skrivbar
   settings:
-    header: PHP versjon og innstillinger
+    0: PHP versjon og innstillinger
     any: noen
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +57,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: tidssone
     timezone_deprecated:
-      header: Utgått tidssone
+      0: Utgått tidssone
       help: 'Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).'
     version: PHP-versjon
     version_recommanded: Anbefalt PHP-versjon

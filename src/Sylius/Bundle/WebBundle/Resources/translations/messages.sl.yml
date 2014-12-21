@@ -12,4 +12,8 @@ sylius:
       shipment_mode: ""
       state: ""
   "no": false
+  shipping_method:
+    zone: Cona
+  tax_rate:
+    zone: Cona
   "yes": true

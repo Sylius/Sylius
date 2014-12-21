@@ -1,3 +1,52 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Кількість
+      percentage_discount_configuration:
+        percentage: Відсоток
+      shipping_discount_configuration:
+        percentage: Percentage
+      type: Тип
+    rule:
+      taxonomy_configuration:
+        taxons: Таксони
+        exclude: Виключити
+      item_count_configuration:
+        count: Кількість
+        equal: Дорівнює
+      item_total_configuration:
+        amount: Кількість
+        equal: Дорівнює
+      nth_order_configuration:
+        nth: N-ний
+      user_loyality_configuration:
+        time: Час
+        unit:
+          days: Дні
+          weeks: Тижнів
+          months: Місяці
+          years: Роки
+          0: Елемент
+        after: Користувач створений після цього періоду
+      shipping_country_configuration:
+        country: Країна
+      type: Тип
+    coupon:
+      code: Код
+      usage_limit: Обмеження використання
+    coupon_generate_instruction:
+      amount: Кількість
+      usage_limit: Обмеження використання
+    promotion:
+      actions: Дії
+      coupon_based: На основі купону
+      description: Опис
+      ends_at: Закінчується
+      name: Ім’я
+      rules: Правила
+      starts_at: Початок
+      usage_limit: Обмеження використання

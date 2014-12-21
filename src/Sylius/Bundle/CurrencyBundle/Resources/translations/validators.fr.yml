@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  currency:
+    code:
+      not_blank: Veuillez choisir le code de la devise.
+      unique: Le code de la devise doit être unique.
+    exchange_rate:
+      not_blank: Veuillez entrer le taux de change.

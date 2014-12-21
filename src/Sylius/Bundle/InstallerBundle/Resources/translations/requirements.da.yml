@@ -3,7 +3,7 @@
 
 sylius:
   extensions:
-    header: udvidelser
+    0: udvidelser
     accelerator:
       help: Installer og aktiver en PHP accelerator ligesom APC (stærkt anbefalet).
     apc: APC
@@ -23,7 +23,7 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    header: filsystem
+    0: filsystem
     cache:
       - cache
     exists: eksisterer

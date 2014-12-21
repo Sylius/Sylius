@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Korgen har uppdaterats.
+    cart_clear_completed: Korgen har tömts.
+    item_add_completed: Artikeln har lagts i korgen.
+    item_remove_completed: Artikeln har tagits bort från korgen.
+    item_add_error: Ett fel uppstod när artikeln skulle läggas i korgen.
+    item_remove_error: Ett fel uppstod när artikeln skulle tas bort från korgen.

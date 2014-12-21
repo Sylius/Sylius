@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  currency:
+    code:
+      not_blank: Пожалуйста выберите код валюты.
+      unique: Код валюты должен быть уникальным.
+    exchange_rate:
+      not_blank: Пожалуйста введите обменный курс.

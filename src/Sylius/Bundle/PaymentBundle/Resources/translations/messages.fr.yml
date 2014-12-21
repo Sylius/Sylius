@@ -14,7 +14,7 @@ sylius:
       amount: Montant du paiement
       method: Moyen de paiement
       state:
-        header: Etat du paiement
+        0: Etat du paiement
         checkout: Paiement
         completed: Complété
         failed: Échoué
@@ -23,6 +23,8 @@ sylius:
         processing: En cours
         unknown: Inconnu
         void: Nul
+        cancelled: Annulé
+        refunded: Remboursé
     payment_method:
       description: Description
       enabled: Activé ?

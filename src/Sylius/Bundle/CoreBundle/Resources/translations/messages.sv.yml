@@ -1,3 +1,70 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Välj ett leveranssätt.
+  form:
+    action:
+      add_product_configuration:
+        price: Enhetspris
+        quantity: Antal
+        variant: Variant
+    cart:
+      coupon: Rabattkupong
+    checkout:
+      addressing:
+        different_billing_address: Använda annan adress för fakturering?
+      payment_method: Betalsätt
+      shipping_method: Fraktsätt
+    group:
+      name: Namn
+      roles: Roller
+    image:
+      file: Bild
+    locale:
+      code: Kod
+      enabled: Aktiverad
+    order_filter:
+      created_at_from: Skapad efter
+      created_at_to: Skapad före
+      number: Nummer
+      total_from: Från
+      total_to: Till
+      payment_state: Betalningsstatus
+    product:
+      shipping_category: Kategori
+      short_description: Kort beskrivning
+      tax_category: Momskategori
+    product_filter:
+      name: Namn
+      sku: SKU
+    settings:
+      general:
+        currency: Standardvaluta
+        locale: Språk
+        meta_description: Metabeskrivning
+        meta_keywords: Metasökord
+        title: Sidans titel
+      taxation:
+        default_tax_zone: Standardmomszon
+    shipment_filter:
+      created_at_from: Från
+      created_at_to: Till
+      number: Beställningsnummer
+      shipping_address: Skickas till
+    shipping_method:
+      zone: Zon
+    taxon:
+      file: Välj bild
+    taxonomy:
+      file: Välj bild
+    user:
+      billing_address: Faktureringsadress
+      different_billing_address: Använda annan adress för fakturering?
+      enabled: Aktiverad
+      first_name: Förnamn
+      groups: Grupper
+    variant:
+      sku: SKU

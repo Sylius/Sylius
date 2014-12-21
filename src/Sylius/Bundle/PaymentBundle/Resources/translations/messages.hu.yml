@@ -14,7 +14,7 @@ sylius:
       amount: Fizetendő összeg
       method: Fizetési mód
       state:
-        header: Fizetés állapota
+        0: Fizetés állapota
         checkout: Fizetés
         completed: Befejezve
         failed: Sikertelen

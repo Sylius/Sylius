@@ -1,3 +1,12 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  taxon:
+    name:
+      max_length: ชื่อการจัดหมวดหมู่ต้องมีความยาวไม่เกิน 255 ตัวอักษร
+      not_blank: กรุณาใส่ชื่อ
+  taxonomy:
+    name:
+      max_length: ชื่อต้องไม่เกิน 255 อักขระ
+      not_blank: กรุณาระบุชื่อการจัดหมวดหมู่

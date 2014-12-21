@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    header: extensões
+    0: extensões
     accelerator:
-      header: Acelerador
+      0: Acelerador
       help: Instalar e ativar um acelerador PHP como APC (altamente recomendado).
     apc: APC
     ctype: CType
@@ -25,26 +25,26 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    header: sistema de arquivos
+    0: sistema de arquivos
     cache:
-      header: cache
+      0: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: existe
     logs:
-      header: logs
+      0: logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: Não existe
     not_writable: não gravável
     parameters:
-      header: parameters.yml
+      0: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: fornecedores
     writable: gravável
   settings:
-    header: Configurações e versão do PHP
+    0: Configurações e versão do PHP
     any: qualquer
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +57,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: fuso horário
     timezone_deprecated:
-      header: Fuso horário desatualizado.
+      0: Fuso horário desatualizado.
       help: 'Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).'
     version: Versão do PHP
     version_recommanded: Versão recomendada do PHP

@@ -23,12 +23,25 @@ sylius:
       list: Všechny adresy
       update: Upravit adresu
     home:
+      email: ""
+      id: ""
       since: Zákazníkem jste od
     order:
       details: Podrobnosti vaší objednávky
       download_invoice: Stáhnout fakturu
+      empty: Nemáte žádné objednávky.
       invoice: Faktura
+      number: ""
+      payment_mode: ""
+      shipment:
+        pending: Čeká na vyřízení
+        ready: 'Připraveno %at%'
+        returned: 'Vráceno %at%'
+        shipped: 'Odesláno %at%'
+      shipment_mode: ""
+      state: ""
       total: Celkem
+      tracking_number: Číslo zásilky
     title: Můj účet
   add_to_cart: Přidat do košíku
   address:
@@ -52,9 +65,12 @@ sylius:
       chart_order_count: Počet objednávek
       orders: Objednávky za poslední týden
       revenue: Příjmy za poslední týden
+      subheader: Přehled obchodu
     logout: Odhlásit
     quick_links:
       add_product: Nový produkt
+      orders: Poslední objednávky
+      products: Produkty
       users: Uživatelé
     statistics:
       orders_this_month: Celkem objednávek
@@ -64,13 +80,22 @@ sylius:
     body: Tělo
     id: ID
     title: Název
+    updated_at: Poslední aktualizace
   breadcrumb:
+    assortment: Sortiment
     country:
       index: Země
     customers: Zákazníci
     edit: Úpravy
+    exchange_rate:
+      index: Směnné kurzy
+    general_settings: Obecné nastavení
     group:
       index: Skupiny
+    inventory:
+      index: Sklad
+    locale:
+      index: Lokalizace
     new: Nový
     option:
       index: Možnosti
@@ -80,8 +105,14 @@ sylius:
       index: Platby
     product:
       index: Produkty
+    promotion:
+      index: Akce
+    promotion_coupon:
+      index: Kupóny
     property:
       index: Vlastnosti
+    prototype:
+      index: Vzory
     sales: Prodeje
     shipment:
       index: Zásilky
@@ -94,6 +125,7 @@ sylius:
   cart:
     empty: Váš košík je prázdný
     summary:
+      add_coupon: Ok
       checkout: Objednat
       clear: Vyprázdnit košík
       grand_total: Celkem
@@ -108,13 +140,16 @@ sylius:
     finalize:
       address:
         city: Město
+        country: Země
         firstname: Křestní Jméno
         lastname: Příjmení
         postcode: PSČ
         province: Provincie
         street: Ulice
+      header: Shrnutí objednávky
       order:
         billing_address: Fakturační adresa
+        items_total: Celkem položek
         no_items: Tato objednávka neobsahuje žádné položky
         shipping_address: Doručovací adresa
         total: Celkem
@@ -125,15 +160,29 @@ sylius:
         name: Jméno
     payment:
       header: Způsob platby
+    security:
+      login: Přihlásit
+      register: Registrace
   confirmation:
     message: Chcete tuto položku odstranit?
+    title: Potvrzení
   country:
     id: ID
     index_header: Země
+    iso_name: ISO kód
     name: Jméno
+  created_at: Vytvořeno
   exchange_rate:
+    currency: měna
     id: ID
+    index_header: Směnné kurzy
+    no_results: Neexistují žádné směnné kurzy k zobrazení.
+  filter: Filtr
   form:
+    choose_file: Vyberte soubor
+    frontend:
+      password:
+        confirmation: Potvrzení
     login:
       email: Email
       password: Heslo
@@ -143,7 +192,9 @@ sylius:
       lastName: Příjmení
   gallery:
     next: Další
+    previous: Předchozí
   group:
+    create: Vytvořit skupinu
     id: ID
     index_header: Skupiny
     name: Jméno
@@ -151,9 +202,12 @@ sylius:
   inventory_unit:
     name: Jméno
     sku: SKU
+    updated_at: Poslední aktualizace
   locale:
     code: Kód
     enabled: Povoleno
+    updated_at: Poslední aktualizace
+  login: Přihlásit
   login_header: Administrace
   "no": false
   option:
@@ -162,6 +216,7 @@ sylius:
     billing_address: Fakturační adresa
     id: ID
     index_header: Aktuální objednávky
+    items_total: Celkem položek
     no_items: Tato objednávka neobsahuje žádné položky
     number: Číslo
     payment_state: Stav platby
@@ -170,11 +225,13 @@ sylius:
     total: Celkem
     user: Uživatel
   shipment:
+    created_at: Vytvořeno
     id: ID
     index_header: Zásilky
     name: Jméno
     sku: SKU
     update: Úpravy
+    updated_at: Poslední aktualizace
   order_item:
     quantity: Množství
     sellable: Produkt
@@ -185,8 +242,10 @@ sylius:
     id: ID
     index_header: Stránky
     title: Název
+    update_header: Poslední aktualizace
   password: Heslo
   payment:
+    created_at: Vytvořeno
     id: ID
     index_header: Platby
     state:
@@ -194,10 +253,12 @@ sylius:
       failed: Neúspěšné
       new: Nový
       unknown: Neznámý
+    updated_at: Poslední aktualizace
   payment_method:
     id: ID
     index_header: Způsoby plateb
     name: Jméno
+    updated_at: Poslední aktualizace
   product:
     available_on: Dostupný od
     available_on_demand: K dispozici na požádání
@@ -220,31 +281,45 @@ sylius:
       product: Produkt
       properties: Vlastnosti
     tax_category: Typ daně
+    updated_at: Poslední aktualizace
     variant_selection_method: Metoda výběru varianty
   promotion:
+    created_at: Vytvořeno
     description: Popis
     id: ID
     name: Jméno
+    updated_at: Poslední aktualizace
+  promotion_coupon:
+    index_header: Kupóny
+  prototype:
+    index_header: Produktové vzory
   search: Hledat
   settings:
     general_header: Obecná nastavení
+    taxation_header: Daně
   shipping_address: Doručovací adresa
   shipping_category:
     id: ID
+    index_header: Druhy zásilek
     name: Jméno
+    updated_at: Poslední aktualizace
   shipping_method:
     id: ID
     index_header: Způsoby dopravy
     name: Jméno
+    updated_at: Poslední aktualizace
     zone: Oblast
   tax_category:
     description: Popis
     id: ID
+    index_header: Typy zdanění
     name: Jméno
+    updated_at: Poslední aktualizace
   tax_rate:
     included_in_price: Zahrnuto v ceně?
     index_header: Daňové sazby
     name: Jméno
+    updated_at: Poslední aktualizace
     zone: Oblast
   taxon:
     name: Jméno
@@ -260,6 +335,7 @@ sylius:
     username: Uživatelské jméno
   variant:
     available_on_demand: K dispozici na požádání
+    last_update: Poslední aktualizace
     options: Možnosti
     price: Cena
     sku: SKU

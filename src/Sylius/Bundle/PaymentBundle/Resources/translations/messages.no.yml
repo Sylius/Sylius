@@ -14,7 +14,7 @@ sylius:
       amount: Beløp
       method: Betalingsmetode
       state:
-        header: Betalingsstatus
+        0: Betalingsstatus
         checkout: Gå til kassen
         completed: Fullført
         failed: Mislyktes
@@ -23,6 +23,8 @@ sylius:
         processing: Behandler
         unknown: Ukjent
         void: Ugyldig
+        cancelled: Avbrutt
+        refunded: Refundert
     payment_method:
       description: Beskrivelse
       enabled: Aktivert?

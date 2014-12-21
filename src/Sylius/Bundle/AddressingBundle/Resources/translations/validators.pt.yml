@@ -15,7 +15,7 @@ sylius:
       not_blank: Por favor, digite o nome.
     last_name:
       max_length: O nome não pode ter mais que 255 caracteres|O nome não pode ter mais que 255 caracteres.
-      min_length: O sobrenome não pode ter mais que 255 caracteres|O sobrenome não pode ter mais que 255 caracteres.
+      min_length: O sobrenome deve ter no mínimo 2 caracteres|O sobrenome deve ter no mínimo 2 caracteres.
       not_blank: Por favor, digite seu sobrenome.
     postcode:
       max_length: O CEP não pode ter mais que 255 caracteres|O CEP não pode ter mais que 255 caracteres.
@@ -41,7 +41,7 @@ sylius:
       not_blank: Por favor, digite o nome do estado.
   zone:
     members:
-      min_count: 'Por favor, selecione pelo menos uma zona de {{limit}}.'
+      min_count: 'Por favor, adicione pelo menos {{ limit }} membro da região.'
     name:
       max_length: O campo zona não pode ter mais que 255 caracteres|O campo zona não pode ter mais que 255 caracteres.
       not_blank: Por favor, digite o nome da zona.

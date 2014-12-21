@@ -1,3 +1,92 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Будь ласка, виберіть метод доставки.
+  form:
+    action:
+      add_product_configuration:
+        price: Ціна одиниці
+        quantity: Кількість
+        variant: Варіант
+    block:
+      body: Тіло
+      id: ID
+      title: Назва
+    cart:
+      coupon: Купон
+    checkout:
+      addressing:
+        different_billing_address: Використовувати іншу платіжну адресу?
+      payment_method: Спосіб оплати
+      shipping_method: Метод доставки
+    group:
+      name: Ім’я
+      roles: Ролі
+    image:
+      file: Зображення
+    locale:
+      code: Код
+      enabled: Увімкнено
+    order_filter:
+      created_at_from: Створені після
+      created_at_to: Створений перед
+      number: Номер
+      total_from: Від
+      total_to: До
+      payment_state: Статус платежу
+    page:
+      body: Тіло
+      id: ID
+      title: Назва
+    product:
+      restricted_zone: Заборонена зона
+      shipping_category: Категорія доставки
+      short_description: Короткий опис
+      tax_category: Категорія податку
+      variant_selection_method: Метод вибору варіанту
+    product_filter:
+      name: Ім’я
+      sku: Артикул
+    settings:
+      general:
+        currency: Валюта за замовчуванням
+        locale: Мова
+        meta_description: Мета-опис
+        meta_keywords: Мета ключові слова
+        title: Заголовок сторінки
+      taxation:
+        default_tax_zone: Податкова зона за замовчуванням
+    shipment_filter:
+      created_at_from: Від
+      created_at_to: До
+      number: Номер замовлення
+      shipping_address: "Ім'я одержувача"
+    shipping_method:
+      zone: Зона
+    taxon:
+      file: Обрати зображення
+    taxonomy:
+      file: Обрати зображення
+    user:
+      billing_address: Платіжна адреса
+      different_billing_address: Використовувати іншу платіжну адресу?
+      enabled: Ввімкнено
+      first_name: Iм’я
+      groups: Групи
+      last_name: Прізвище
+      password: Пароль
+      shipping_address: Адреса доставки
+    user_filter:
+      query: Пошук
+    variant:
+      available_on_demand: На вимогу
+      depth: Глибина
+      height: Висота
+      images: Зображення
+      price: Ціна
+      sku: Артикул
+      weight: Вага
+      width: Ширина

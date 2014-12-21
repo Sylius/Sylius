@@ -3,9 +3,16 @@
 
 sylius:
   account:
+    home:
+      email: ""
+      id: ""
     order:
+      number: ""
+      payment_mode: ""
       shipment:
         pending: Σε εκκρεμότητα
+      shipment_mode: ""
+      state: ""
   add_to_cart: Προσθήκη στο καλάθι
   address:
     city: Πόλη
@@ -225,7 +232,7 @@ sylius:
     index_header: Πληρωμές
     method: τρόπος
     state:
-      header: Νομός
+      0: Νομός
       checkout: Ολοκλήρωση αγορών
       pending: Σε εκκρεμότητα
       processing: Σε εξέλιξη

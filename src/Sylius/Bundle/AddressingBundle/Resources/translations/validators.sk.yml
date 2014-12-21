@@ -18,14 +18,21 @@ sylius:
       min_length: Priezvisko musí mať minimálne 2 znaky|Priezvisko musí mať minimálne 2 znaky.
       not_blank: Prosím zadajte vaše priezvisko.
     postcode:
+      max_length: PSČ nemôže byť dlhšie ako 255 znakov.
+      min_length: PSČ musí obsahovať minimálne 2 znaky.
       not_blank: Prosím zadajte vaše PSČ.
     street:
+      max_length: Ulica nesmie byť dlhšia ako 255 znakov.
+      min_length: Ulica musí obsahovať minimálne 2 znaky|Ulica musí obsahovať minimálne 2 znaky.
       not_blank: Prosím zadajte ulicu.
+    not_shippable: Táto adresa nie je platná pre doručenie.
   country:
     iso_name:
       not_blank: Prosím zadajte ISO kód krajiny.
     name:
+      max_length: Názov krajiny nesmie byť dlhší ako 255 znakov.
       not_blank: Prosím zadajte názov krajiny.
   zone:
     name:
+      max_length: Názov zóny nesmie byť dlhší ako 255 znakov.
       not_blank: Prosím zadajte názov zóny.

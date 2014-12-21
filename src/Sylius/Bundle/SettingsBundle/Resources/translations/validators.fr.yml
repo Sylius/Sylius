@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Le paramètre namespace ne doit pas contenir plus de 255 characters|Le paramètre Espace de noms ne doit pas être plus de 255 caractères.
+      min_length: Le paramètre namespace doit contenir au moins 2 caractères long|Le paramètre Espace de noms doit comporter au moins 2 caractères.
+      not_blank: Veuillez choisir un espace de nom pour ce paramètre.
+    name:
+      max_length: Le nom du paramètre ne peux pas contenir plus de 255 caractères|Le nom du paramètre ne peux pas contenir plus de 255 caractères.
+      min_length: Le nom du paramètre doit contenir au moins 2 caractères|Le nom du paramètre doit contenir au moins 2 caractères.
+      not_blank: Veuillez entrer un nom pour ce paramètre.

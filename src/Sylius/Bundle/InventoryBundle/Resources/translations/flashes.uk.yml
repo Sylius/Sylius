@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backorder: Висвободжений елемент інвентаризації.
+    sell: Заповнений елемент інвентаризації.
+    return: Повернутий елемент інвентаризації.
+    transition_fail: Дія не може бути виконана виходячи з нинішнього стану елементу

@@ -8,9 +8,9 @@ sylius:
   form:
     configuration:
       database:
-        header: Databasetilkobling
+        0: Databasetilkobling
         driver:
-          header: Driver
+          0: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,15 +22,15 @@ sylius:
         port: Port
         user: Bruker
       locale:
-        header: Språkinnstillinger
+        0: Språkinnstillinger
         currency: Valuta
         locale: Språk
       mailer:
-        header: E-postinnstillinger
+        0: E-postinnstillinger
         host: Tjener
         password: Passord
         transport:
-          header: Transport
+          0: Transport
           gmail: Gmail
           mail: E-post
           sendmail: Sendmail

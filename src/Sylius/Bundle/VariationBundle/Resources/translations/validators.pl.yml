@@ -4,10 +4,17 @@
 sylius:
   option:
     name:
-      not_blank: Wprowadź nazwę opcji.
-      min_length: 'Nazwa opcji musi być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
+      not_blank: Proszę wprowadzić nazwę opcji.
+      min_length: 'Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
       max_length: 'Nazwa opcji nie może być dłuższa niż jeden znak. |Nazwa opcji nie może przekraczać {{ limit }} znaków.'
     presentation:
       not_blank: Proszę wprowadzić nazwę publiczną.
       min_length: 'Nazwa publiczna powinna zawierać co najmniej jeden znak. |Nazwa publiczna nie może przekraczać {{ limit }} znaków.'
       max_length: 'Nazwa publiczna nie może być dłuższy niż jeden znak. |Nazwa publiczna nie może być dłuższa niż {{ limit }} znaków.'
+    values:
+      min_count: '{1} Dodaj co najmniej 1 opcję.|]1,4]Dodaj co najmniej {{ limit }} opcje.|]4,Inf]Dodaj co najmniej {{ limit }} opcji.'
+  option_value:
+    value:
+      not_blank: Podaj wartość opcji.
+  variant:
+    combination: Warian z tą opcją już istnieje.

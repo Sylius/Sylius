@@ -3,9 +3,9 @@
 
 sylius:
   extensions:
-    header: επεκτάσεις
+    0: επεκτάσεις
     accelerator:
-      header: Επιταχυντής
+      0: Επιταχυντής
       help: Εγκαταστήστε και ενεργοποιήστε έναν επιταχυντή PHP όπως η APC (συνιστάται ιδιαίτερα).
     apc: APC
     ctype: Ctype
@@ -19,7 +19,7 @@ sylius:
     session_start: Συνεδρία
     simplexml_import_dom: SimpleXML
   filesystem:
-    header: σύστημα αρχείων
+    0: σύστημα αρχείων
     exists: υπάρχει
     logs:
       - αρχεία καταγραφής
@@ -29,7 +29,7 @@ sylius:
       - parameters.yml
     writable: εγγράψιμο
   settings:
-    header: Έκδοση PHP και ρυθμίσεις
+    0: Έκδοση PHP και ρυθμίσεις
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
     non_deprecated: μη παρωχημένο
@@ -41,7 +41,7 @@ sylius:
     short_open_tag: short_open_tag
     timezone: ζώνη ώρας
     timezone_deprecated:
-      header: Μη χρησιμοποιούμενη ζώνη ώρας
+      0: Μη χρησιμοποιούμενη ζώνη ώρας
       help: 'Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).'
     version: Έκδοση PHP
     version_recommanded: Προτεινόμενη έκδοση PHP

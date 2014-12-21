@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: 城市
+      company: 公司
+      country: 國家
+      first_name: 名
+      last_name: 姓
+      postcode: 郵編
+      street: 街道
+      province: 省
+    country:
+      iso_name: ISO 名稱
+      name: 名稱
+      provinces: 省份
+      select: 請選擇
+    province:
+      name: 名稱
+      select: 請選擇
+    zone:
+      members: 會員
+      name: 名稱
+      type: 類型
+      types:
+        country: 國家
+        province: 省
+        zone: 區域
+      scope: 範圍
+    zone_member_country:
+      country: 國家
+    zone_member_province:
+      province: 省
+    zone_member_zone:
+      zone: 區域

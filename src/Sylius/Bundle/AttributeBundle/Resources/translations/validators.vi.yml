@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: Vui lòng nhập tên thuộc tính.
+      min_length: 'Tên thuộc tính phải có ít nhất 1 ký tự.|Tên thuộc tính phải có ít nhất {{ limit }} ký tự.'
+      max_length: 'Tên thuộc tính không dài hơn 1 ký tự.|Tên thuộc tính không dài hơn {{ limit }} ký tự.'
+    presentation:
+      not_blank: Vui lòng nhập thuộc tính trình bày.
+      min_length: 'Thuộc tính trình bày phải có ít nhất 1 ký tự.|Thuộc tính trình bày phải có ít nhất {{ limit }} ký tự.'
+      max_length: 'Thuộc tính trình bày không dài hơn 1 ký tự.|Thuộc tính trình bày không dài hơn {{ limit }} ký tự.'
+  attribute_value:
+    attribute:
+      not_blank: Vui lòng chọn thuộc tính.
+    value:
+      not_blank: Vui lòng nhập giá trị thuộc tính.

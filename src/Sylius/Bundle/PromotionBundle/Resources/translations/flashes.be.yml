@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Прамацыйныя купоны паспяхова згенерыраваны.
+    eligible: Ваш прамацыйны купон дададзены ў кошык.
+    invalid: Ваш прамацыйны купон не дзейнічае.
+    not_eligible: У вашым кошыку не магчыма скарыстаць гэты прамацыйны купон.

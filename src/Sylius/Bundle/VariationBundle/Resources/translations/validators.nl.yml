@@ -17,4 +17,4 @@ sylius:
     value:
       not_blank: Voer een optie waarde in.
   variant:
-    combination: Er bestaat al een variant met deze optie.
+    combination: Er bestaat al een variant met deze set opties.

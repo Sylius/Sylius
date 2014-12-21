@@ -20,13 +20,13 @@ sylius:
       max: 'Prezime ne smije biti duže od {{ limit }} znakova.'
       min: 'Prezime ne smije biti duže od {{ limit }} znakova.'
       not_blank: Molimo unesite Vaše prezime.
-  variant:
+  product_variant:
     onHand:
-      min: 'Stanje skladišta mora biti veće od {{ limit }}.'
-      not_blank: Unesite stanje skladišta.
+      min: 'Stanje na skladištu mora biti veće od {{ limit }}.'
+      not_blank: Molim označite ako je moguća isporuka osobno.
     price:
       min: Cijena ne smije biti negativna.
-      not_blank: Molimo unesite cijenu.
+      not_blank: Molim unesite cijenu.
 sylius_shipping:
   method:
     zone:

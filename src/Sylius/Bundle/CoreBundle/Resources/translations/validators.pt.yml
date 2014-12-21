@@ -20,9 +20,9 @@ sylius:
       max: 'O sobrenome deve ter pelo menos {{ limit }} caracteres.'
       min: 'O sobrenome deve ter pelo menos {{ limit }} caracteres.'
       not_blank: Por favor, digite seu sobrenome.
-  variant:
+  product_variant:
     onHand:
-      min: 'O campo em mãos deve ser maior que {{limit}}'
+      min: 'O campo em mãos deve ser maior que {{limit}}.'
       not_blank: Por favor digite o campo em mãos.
     price:
       min: Preço não pode ser negativo.

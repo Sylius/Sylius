@@ -3,8 +3,47 @@
 
 sylius:
   form:
+    action:
+      fixed_discount_configuration:
+        amount: Miktar
+      percentage_discount_configuration:
+        percentage: Yüzde
+      shipping_discount_configuration:
+        percentage: Yüzde
+      type: Türü
+    rule:
+      taxonomy_configuration:
+        taxons: Kategoriler
+        exclude: Hariç
+      item_count_configuration:
+        count: Sayısı
+        equal: Eşit
+      item_total_configuration:
+        amount: Miktar
+        equal: Eşit
+      user_loyality_configuration:
+        time: Zaman
+        unit:
+          days: Günler
+          weeks: Haftalar
+          months: Aylar
+          years: Yıllar
+          0: Birim
+      shipping_country_configuration:
+        country: Ülke
+      type: Tür
     coupon:
       code: Kod
+      usage_limit: Kullanım sınırı
+    coupon_generate_instruction:
+      amount: Miktar
+      usage_limit: Kullanım sınırı
     promotion:
+      actions: Eylemler
+      coupon_based: Kupona dayalı
       description: Açıklama
+      ends_at: Sona erer
       name: Ad
+      rules: Kurallar
+      starts_at: "' Dan başlar"
+      usage_limit: Kullanım sınırı
