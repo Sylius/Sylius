@@ -15,8 +15,6 @@ sylius:
       luhn: Kreditkortets indtastede nummer er ugyldigt.
     security_code:
       not_blank: Angiv venligst sikkerhedskoden.
-      max_length: 'Kreditkortets CVV kode skal være mellem {{ min }} og {{ max }} tegn langt.'
-      min_length: 'Kreditkortets CVV kode skal være mellem {{ min }} og {{ max }} tegn langt.'
     expiry_year:
       not_blank: Angiv udløbsåret.
   payment_method:

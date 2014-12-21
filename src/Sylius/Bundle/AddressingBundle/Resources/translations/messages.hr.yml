@@ -28,6 +28,7 @@ sylius:
         country: Država
         province: Županija
         zone: Regija
+      scope: Djelokrug
     zone_member_country:
       country: Država
     zone_member_province:

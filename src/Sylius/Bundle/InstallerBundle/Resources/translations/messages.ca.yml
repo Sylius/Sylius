@@ -8,9 +8,7 @@ sylius:
   form:
     configuration:
       database:
-        0: Connexió a la base de dades
         driver:
-          0: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,15 +20,12 @@ sylius:
         port: Port
         user: Usuari
       locale:
-        0: Paràmetres locals
         currency: Moneda
         locale: Locale
       mailer:
-        0: Configuració de Mailer
         host: Host
         password: Contrasenya
         transport:
-          0: Transport
           gmail: Gmail
           mail: Correu
           sendmail: Sendmail

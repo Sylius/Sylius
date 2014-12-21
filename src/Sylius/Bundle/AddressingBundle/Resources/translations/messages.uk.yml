@@ -5,18 +5,33 @@ sylius:
   form:
     address:
       city: Місто
+      company: Компанія
       country: Країна
       first_name: Iм’я
       last_name: Прізвище
       postcode: Iндекс
       street: Вулиця
+      province: Область
     country:
       iso_name: ISO код
       name: Країна
+      provinces: Області
+      select: Виберіть
+    province:
+      name: Ім’я
+      select: Виберіть
     zone:
+      members: Члени
       name: Назва
       type: Тип
+      types:
+        country: Країна
+        province: Область
+        zone: Зона
+      scope: Сфера
     zone_member_country:
       country: Країна
     zone_member_province:
       province: Область
+    zone_member_zone:
+      zone: Зона

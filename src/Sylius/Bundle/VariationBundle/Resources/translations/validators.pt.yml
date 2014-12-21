@@ -1,3 +1,20 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  option:
+    name:
+      not_blank: Por favor, digite o nome de opção.
+      min_length: 'Nome da opção deve ter pelo menos 1 caracter. |Nome da opção deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Nome da opção não deve ser superior a 1 caractere. |Nome da opção não deve ter mais de {{limit}} caracteres.'
+    presentation:
+      not_blank: Por favor insira a apresentação da opção.
+      min_length: 'Apresentação de opção deve ter pelo menos 1 caracter. |Apresentação de opção deve ter pelo menos {{limit}} caracteres.'
+      max_length: 'Apresentação de opção não deve ser superior a 1 caractere. |Apresentação de opção não deve ter mais de {{limit}} caracteres.'
+    values:
+      min_count: 'Por favor, adicione pelo menos {{limite}} valores de opção. |Por favor, adicione pelo menos valores de opção de {{limit}}.'
+  option_value:
+    value:
+      not_blank: Por favor, insira o valor de opção.
+  variant:
+    combination: Variante com esta opção definida já existe.

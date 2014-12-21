@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Unité de stock en réapprovisionnement.
-    sold: Unité de stock vendue.
-    returned: Unité de stock retournée.
+    backorder: Unité de stock en réapprovisionnement.
+    sell: Unité de stock vendue.
+    return: Unité de stock retournée.
+    transition_fail: Cette action ne peut être exécutée dans cette phase du stock

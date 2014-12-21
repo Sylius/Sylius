@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    currency:
+      code: Kode
+      exchange_rate: Valutakurs
+      enabled: Aktivert

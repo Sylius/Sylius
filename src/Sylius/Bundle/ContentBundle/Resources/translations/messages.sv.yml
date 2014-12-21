@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    menu:
+      name: Namn
+    menu_block:
+      name: Namn
+    redirect_route:
+      name: Namn
+    route:
+      name: Namn
+    string_block:
+      name: Namn

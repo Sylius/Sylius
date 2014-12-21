@@ -3,8 +3,53 @@
 
 sylius:
   extensions:
+    accelerator:
+      help: ติดตั้ง และเปิดใช้งาน PHP Accelerator เช่น APC (แนะนำ)
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'ติดตั้ง และเปิดใช้งาน extension %extension%'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
     "off": false
     "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: exists
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: not exists
+    not_writable: not writable
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: writable
   settings:
+    any: any
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: non deprecated
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: timezone
+    timezone_deprecated:
+      help: 'Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).'
+    version: PHP เวอร์ชัน
+    version_recommanded: PHP เวอร์ชันที่แนะนำ

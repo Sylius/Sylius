@@ -25,8 +25,10 @@ sylius:
       name: Názov
       type: Typ
       types:
+        country: Krajina
         province: Provincia
         zone: Zóna
+      scope: Rozsah pôsobnosti
     zone_member_country:
       country: Krajina
     zone_member_province:

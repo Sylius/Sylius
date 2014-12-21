@@ -1,21 +1,57 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: email.order_confirmation.subject
 sylius:
   account:
+    address:
+      action:
+        billing: Fatura adresini varsayılan olarak ayarla
+        create: Yeni bir adres oluşturun
+        delete: Sil
+        edit: Düzenle
+        shipping: Teslim adresini varsayılan olarak ayarla
+      create: Yeni bir adres oluşturun
+      default:
+        billing: Varsayılan fatura adresi
+        no_billing: Hiçbir varsayılan fatura adresi ayarlanmadı
+        no_shipping: Hiçbir varsayılan teslim adresi ayarlanmadı
+        shipping: Varsayılan teslim adresi
+      empty: Henüz hiçbir adresi oluşturmadınız.
+      list: Tüm adresleriniz
+      update: Adresi düzenle
     home:
       email: ""
       id: ""
+      outline: Kişisel alanınızda görüntülemek, izlemek ve tüm verilerinizi yönetmek için kullanılabilen tüm özelliklerin keyfini çıkarın.
+      since: den beri müşterisiniz
+      welcome: Alanınıza hoş geldiniz
     order:
+      created_at: tarihinde sipariş verildi
+      details: Sipariş ayrıntıları
+      download_invoice: Fatura indir
+      empty: Henüz hiçbir sipariş vermediniz.
+      invoice: Fatura
+      list: Tüm siparişleriniz
       number: ""
       payment_mode: ""
+      placed_at: '%at% tarihinde sipariş verildi'
       shipment:
         pending: Beklemede
+        ready: '%at% tarihinden beri hazır'
+        returned: '%at% tarihinde iade edildi'
+        shipped: '%at% tarihinde kargolandı'
       shipment_mode: ""
       state: ""
+      total: Toplam
+      tracking_number: Kargo takip numarası
+    title: Hesabım
   add_to_cart: Sepete ekle
   address:
     city: Şehir
+    company: Şirket
     country: Ülke
     firstname: Ad
     lastname: Soyad
@@ -30,17 +66,101 @@ sylius:
   backend:
     alert:
       info: Bilgilendirme
+    dashboard:
+      chart_order_count: Toplam sipariş
+      chart_order_total: Sipariş değeri
+      header: Yönetim kontrol paneli
+      orders: Geçen hafta siparişleri
+      revenue: Geçen hafta gelir
+      subheader: Mağaza genel bakış
+    logout: Çıkış yap
+    quick_links:
+      add_product: Yeni ürün
+      orders: Son siparişler
+      products: Ürünleriniz
+      users: Kullanıcılar
+    statistics:
+      0: Bu ayki istatistikler
+      orders_this_month: Toplam siparişler
+      registrations_this_month: Toplam kayıtlar
+      sales_this_month: Satışlar
+  backend_welcome: 'Merhaba <b>%name%</b>!'
   block:
+    body: İçerik
+    create: Bloğu Oluştur
+    create_header: Yeni içerik bloğu oluşturma
     id: ID
+    index_header: İçerik blokları
+    no_results: Görüntülenecek hiçbir blok yoktur.
     title: Başlık
+    update_header: İçerik bloğu düzenleme
+    updated_at: Son gücelleme
   breadcrumb:
+    assortment: Çeşitlilik
+    block:
+      index: İçerik Blokları
+    build: Oluştur
+    configuration: Ayarlar
+    country:
+      index: Ülkeler
+    customers: Müşteriler
+    edit: Düzenle
+    exchange_rate:
+      index: Döviz Kurları
+    general_settings: Genel Ayarlar
+    generate: Oluştur
+    group:
+      index: Gruplar
+    inventory:
+      index: Stok
+    locale:
+      index: Diller
     new: Yeni
+    option:
+      index: Ayarlar
+    order:
+      index: Siparişler
+    page:
+      index: Statik Sayfalar
+    payment:
+      index: Ödemeler
+    payment_method:
+      index: Ödeme Yöntemleri
+    product:
+      index: Ürünler
+    promotion:
+      index: Promosyonlar
+    promotion_coupon:
+      index: Kuponlar
     property:
       index: Özellikler
+    prototype:
+      index: Prototipler
+    sales: Satışlar
+    shipment:
+      index: Kargo İşlemleri
+    shipping_category:
+      index: Kargo Kategorileri
+    shipping_method:
+      index: Kargolama Yöntemleri
+    tax_category:
+      index: Vergi Kategorileri
+    tax_rate:
+      index: Vergi Oranları
+    taxation_settings: Vergilendirme Ayarları
+    taxonomy:
+      index: Kategoriler
+    update: Düzenle
+    user:
+      index: Kullanıcılar
+    zone:
+      index: Bölgeler
+  browse_products: Ürünlere göz atın
   cancel: İptal
   cart:
     empty: Sepetiniz boş
     summary:
+      add_coupon: Tamam
       checkout: 'Ödeme  yap'
       clear: Sepeti boşalt
       grand_total: Toplam
@@ -69,11 +189,21 @@ sylius:
         billing_address: Fatura adresi
         items_total: Toplam tutar
         no_items: Bu siparişde ürün bulunmuyor
+        no_promotion: Uygulanan hiçbir promosyon yoktur
+        no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
+        no_taxes: Vergi uygulanmadı
+        promotion_discount: Promosyon indirimleri
+        promotion_total: Promosyon toplamı
+        shipping_address: Teslimat adresi
+        shipping_charges: Kargo ücretleri
+        shipping_total: Toplam kargo ücreti
         tax_total: Toplam KDV
         taxes: Vergiler
         total: Toplam tutar
       order_item:
         quantity: Miktar
+        total: Toplam
+        unit_price: Birim Fiyatı
       place_order: Siparişi ver
       product:
         name: Ürün adı
@@ -81,49 +211,203 @@ sylius:
     payment:
       header: Ödeme tipi
     security:
+      existing_customer: Varolan Müşteri
+      header: 'Mağazaya giriş yapın <small>veya kayıt olun</small>'
       login: Giriş
       new_customer: Yeni müşteri
+      register: Üye ol
+    shipping:
+      error: Üzgünüz, seçtiğiniz ülke için ürün nakliyesi mümkün değildir.
+      header: Gönderim metodu
+  confirmation:
+    message: Bu içeriği silmek istiyor musunuz?
+    title: Doğrulama
   country:
+    add_province: Bölge ekleme
+    create: Ülke ekle
+    create_header: Yeni ülke
     id: ID
+    index_header: Ülkeler
+    iso_name: ISO adı
+    manage: Ülkeleri yönetme
     name: Ad
+    no_results: Yapılandırılmış hiçbir ülke bulunmamaktadır.
+    show_header: Ülke bilgileri
+    update_header: Ülke düzenleme
+  create: Oluştur
+  created_at: Oluşturulma tarihi
+  delete: sil
+  deleted: Silindi
+  edit: düzenle
+  email: E-Posta
   exchange_rate:
+    create: Döviz Kuru oluşturun
+    create_header: Yeni Döviz Kuru
+    currency: para birimi
     id: ID
+    index_header: Döviz kurları
+    no_results: Görüntülenecek hiçbir döviz kuru yoktur.
+    rate: oran
+    update_header: Döviz Kuru düzenleme
+    updated_at: son gücelleme
+  filter: Filtrele
+  form:
+    cart:
+      coupon: Eğer bir promosyon kuponu varsa buraya girin
+    choose_file: Dosya seç
+    frontend:
+      password:
+        confirmation: Doğrulama
+        current: Geçerli parola
+        new: Yeni parola
+        title: Parolanızı değiştirin
+      profile:
+        title: Kişisel bilgilerinizi düzenleyin
+    login:
+      email: E-posta
+      password: Şifre
+    option_value:
+      add_value: Değer ekle
+    profile:
+      email: E-posta
+      firstName: Ad
+      lastName: Soyad
+  gallery:
+    next: Sonraki
+    previous: Önceki
+    slideshow: Slayt gösterisi
+  generate: Oluştur
   group:
+    create: Grup oluştur
+    create_header: Yeni kullanıcı grubu ekleme
     id: ID
+    index_header: Gruplar
     name: Ad
+    no_results: Görüntülenecek bir grup yoktur.
     roles: Roller
+    update_header: Grubu düzenle
+  hide_deleted: Silineni gizle
+  history:
+    0: Geçmiş
+    action: Eylem
+    author: Hazırlayan
+    data: Veri Merkezi
+    logged_at: Oturum açıldı
+    version: Versiyon
+  homepage:
+    splash:
+      headline: "Sylius'a hoş geldiniz"
   inventory_unit:
     name: Ad
+    sku: Stok Kodu
+    updated_at: Son gücelleme
   locale:
     code: Kod
+    create: Dil oluştur
+    create_header: Yeni dil ekleme
     enabled: Etkin
+    index_header: Tüm yapılandırılmış diller
+    no_results: Yapılandırılmış hiçbir dil yoktur.
+    update_header: Dil düzenle
+    updated_at: Son gücelleme
+  login: Giriş
+  login_header: Yönetim
+  logo: Sylius
+  manage: Yönet
+  meta:
+    backend_title: Sylius kontrol paneli.
   "no": false
+  option:
+    manage: Seçeneklerini yönet
+    updated_at: son gücelleme
   order:
     billing_address: Fatura adresi
+    create: Sipariş oluştur
+    create_header: Yeni sipariş
+    created_at: Oluşturma zamanı
+    general_info: Genel bilgi
     id: ID
+    index_header: Şuanki siparişler
+    inventory_tracking: Stok takibi
     items_total: Toplam tutar
+    manage: Siparişleri yönet
     no_items: Bu siparişde ürün bulunmuyor
+    no_results: Yeni bir spiariş yoktur
+    no_shipments: Bu sipariş için hiçbir kargo yoktur
+    no_shipping_charges: Uygulanan hiçbir nakliye masraflı yoktur
+    no_taxes: Vergi uygulanmadı
     number: Sayı
+    payment: Ödeme
     payment_state: Ödeme durumu
+    payment_states:
+      balance_due: Bakiye durumu
+    promotion_total: Promosyon toplamı
+    recent_header: Son siparişler
+    shipment_state: Teslimat durumu
     shipment_states:
       pending: Beklemede
+    shipments: Kargo İşlemleri
+    release_inventory: Stoğa girdi
+    inventory_unit:
+      backorder: Stokta yok
+      fulfill: Stokta
+      return: İade
+    shipping_address: Teslimat adresi
+    shipping_charges: Kargo ücretleri
+    shipping_total: Toplam kargo ücreti
+    show_header: Sipariş
     state:
+      cart_locked: Sepet kilitlendi
       checkout: 'Ödeme  yap'
+      order_confimed: Sipariş onaylandı
+      ordered: Sipariş edildi
     tax_total: Toplam KDV
     taxes: Vergiler
+    total: Toplam
+    update_header: Sipariş düzenleme
+    user: Kullanıcı
   shipment:
+    ship: Kargo
+    created_at: Oluşturulma tarihi
     id: ID
+    index_header: Kargo İşlemleri
+    inventory_state: Stok durumu
+    manage: Kargoları yönetme
+    method: Yöntem
+    modified: Değiştirildi
     name: Ad
+    no_items: Görüntülenecek öğe yok.
+    order: Sipariş
+    sku: Stok Kodu
+    state: Durum
+    tracking_code: İzleme Kodu
+    update: Düzenle
+    updated_at: Son gücelleme
   order_item:
+    product: Öğe
     quantity: Adet
     sellable: Ürün
+    total: Toplam
     unit_price: Birim fiyatı
+  out_of_stock: Stokta yok
   page:
+    body: İçerik
+    create: Yeni sayfa oluştur
+    create_header: Yeni statik içerik oluşturma
     id: ID
+    index_header: Sayfalar
+    no_results: Görüntülenecek statik sayfa yoktur.
     title: Başlık
+    update_header: Son gücelleme
+  password: Şifre
   payment:
+    amount: Miktar
+    created_at: Oluşturulma tarihi
     id: ID
+    index_header: Ödemeler
+    method: Yöntem
     state:
+      0: Durum
       checkout: 'Ödeme  yap'
       completed: Tamamlandı
       failed: Başarısız oldu
@@ -132,32 +416,93 @@ sylius:
       processing: İşlem Yapılıyor
       unknown: Bilinmiyor
       void: Boş
+    updated_at: Son gücelleme
   payment_method:
     id: ID
+    index_header: Ödeme tipleri
     name: Ad
+    updated_at: Son gücelleme
   product:
+    available_on: Satışta
+    available_on_demand: İsteğe bağlı olarak mevcuttur
+    categorization: Sınıflandırma
+    create_header: Yeni ürün
     description: Açıklama
     name: Ad
+    options: Ayarlar
     properties: Özellikler
+    restricted_zone: Kısıtlı bölge
+    shipping_category: Teslimat kategorisi
+    sku: Stok Kodu
+    stock: Mevcut stok
     tabs:
+      categorization: Sınıflandırma
+      images: Resimleri
+      options: Ayarlar
       product: Ürün
       properties: Özellikler
+    tax_category: Vergi kategorisi
+    updated_at: Son gücelleme
+    variant_selection_method: Varyant seçme yöntemi
   promotion:
+    actions: Eylemler
+    created_at: Oluşturulma tarihi
     description: Açıklama
+    ends_at: Sona erer
     id: ID
     name: Ad
+    rules: Kurallar
+    starts_at: "' Dan başlar"
+    updated_at: Son gücelleme
+    usage_limit: Kullanım sınırı
+  promotion_action:
+    configuration: Ayarlar
+    type: Türü
+  promotion_coupon:
+    index_header: Kuponlar
+  promotion_rule:
+    configuration: Ayarlar
+    type: Türü
+  property:
+    updated_at: son gücelleme
+  prototype:
+    index_header: Ürün prototipleri
+    updated_at: son gücelleme
+  search: Arama
+  settings:
+    general_header: Genel ayarlar
+    taxation_header: Vergilendirme ayarları
+  shipping_address: Teslimat adresi
   shipping_category:
     id: ID
+    index_header: Kargo kategorileri
     name: Ad
+    updated_at: Son gücelleme
   shipping_method:
+    calculator: Hesaplayıcı
+    category: Kategori
     id: ID
+    index_header: Gönderim metodları
     name: Ad
+    updated_at: Son gücelleme
+    zone: Bölge
+  stockable:
+    updated_at: son gücelleme
   tax_category:
     description: Açıklama
     id: ID
+    index_header: Vergi kategorileri
     name: Ad
+    updated_at: Son gücelleme
   tax_rate:
+    amount: Miktar
+    calculator: Hesaplayıcı
+    category: Kategori
+    included_in_price: Fiyata dahil edilsin mi?
+    index_header: Vergi oranları
     name: Ad
+    updated_at: Son gücelleme
+    zone: Bölge
   taxon:
     name: Ad
   taxonomy:
@@ -165,7 +510,21 @@ sylius:
   unknown: Bilinmiyor
   user:
     billing_address: Fatura adresi
+    email: E-Posta
+    first_name: Ad
     id: ID
+    last_name: Soyad
+    shipping_address: Teslimat adresi
+    username: Kullanıcı adı
+  variant:
+    available_on_demand: İsteğe bağlı olarak mevcuttur
+    last_update: Son gücelleme
+    options: Ayarlar
+    price: Fiyatı
+    sku: Stok Kodu
+    stock: Mevcut stok
   "yes": true
   zone:
+    index_header: Bölgeler
     name: Ad
+    type: Türü

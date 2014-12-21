@@ -1,3 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Naziv grada ne sme biti veći od 255 karaktera|Naziv grada ne sme biti veći od 255 karaktera.

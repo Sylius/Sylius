@@ -1,59 +1,699 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: Тема листа
 sylius:
+  account:
+    address:
+      action:
+        billing: Встановити як платіжну адресу за замовчуванням
+        create: Створити нову адресу
+        delete: Видалити
+        edit: Редагувати
+        shipping: Встановити як адресу доставки за замовчуванням
+      create: Створити нову адресу
+      default:
+        billing: Платіжна адреса за замовчуванням
+        no_billing: Немає платіжної адреси за замовчуванням
+        no_shipping: Немає адреси доставки за замовчуванням
+        shipping: Адреса доставки за замовчуванням
+      empty: Ви поки не створили жодної адреси.
+      list: Усі ваші адреси
+      update: Редагувати мою адресу
+    home:
+      email: ""
+      id: ""
+      outline: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними.
+      since: Ви є клієнтом з
+      welcome: Ласкаво просимо до вашого простору
+    order:
+      created_at: Розміщено
+      details: Деталі вашого замовлення
+      download_invoice: Завантажити рахунок
+      empty: Ви поки не розмістили жодного замовлення.
+      invoice: Рахунок
+      list: Всі ваші замовлення
+      number: ""
+      payment_mode: ""
+      placed_at: 'Розміщене %at%'
+      shipment:
+        pending: В очікуванні
+        ready: 'Готове з %at%'
+        returned: 'Повернене %at%'
+        shipped: 'Відправлене %at%'
+      shipment_mode: ""
+      state: ""
+      total: Усього
+      tracking_number: Трекінг-номер
+    title: Мій обліковий запис
+  add_to_cart: У кошик
+  address:
+    city: Місто
+    company: Компанія
+    country: Країна
+    firstname: Iм’я
+    lastname: Прізвище
+    postcode: Iндекс
+    province: Область
+    street: Вулиця
+  alert:
+    error: Помилка
+    info: Інформація
+    success: Успішно
+    warning: Попередження
   backend:
+    alert:
+      info: Інформація
+    dashboard:
+      chart_order_count: Кількість замовлень
+      chart_order_total: Вартість замовлення
+      header: Панель адміністрування
+      orders: Замовлення минулого тижня
+      revenue: Доходи за минулий тиждень
+      subheader: Огляд вашого магазину
     logout: Вихід
     quick_links:
+      add_product: Новий товар
+      orders: Останні замовлення
+      products: Ваші продукти
       users: Користувачі
+    statistics:
+      0: Статистика цього місяця
+      orders_this_month: Всього замовлень
+      registrations_this_month: Всього реєстрацій
+      sales_this_month: Продажі
+  backend_welcome: 'Привіт, <b>%name%</b>!'
+  block:
+    body: Тіло
+    create: Створити блок
+    create_header: Створення нового блоку вмісту
+    id: ID
+    index_header: Блоки вмісту
+    no_results: Немає блоків для відображення.
+    title: Назва
+    update_header: Редагування блоку вмісту
+    updated_at: Останнє оновлення
   breadcrumb:
+    assortment: Асортимент
+    block:
+      index: Блоки вмісту
+    build: Побудувати
+    configuration: Конфігурація
+    country:
+      index: Країни
+    customers: Клієнти
+    edit: Редагувати
+    exchange_rate:
+      index: Курси валют
+    general_settings: Загальні налаштування
+    generate: Генерувати
+    group:
+      index: Групи
+    inventory:
+      index: Інвентаризація
+    locale:
+      index: Локалі
+    new: Новий
     option:
-      index: Параметри
+      index: Опції
     order:
       index: Замовлення
+    page:
+      index: Статичні сторінки
+    payment:
+      index: Платежі
+    payment_method:
+      index: Способи оплати
     product:
       index: Продукти
+    promotion:
+      index: Промо-акції
+    promotion_coupon:
+      index: Купони
+    property:
+      index: Властивості
+    prototype:
+      index: Прототипи
+    sales: Продажі
+    shipment:
+      index: Відправки
+    shipping_category:
+      index: Категорії доставки
+    shipping_method:
+      index: Методи доставки
+    tax_category:
+      index: Категорії оподаткування
+    tax_rate:
+      index: Податкові ставки
+    taxation_settings: Налаштування оподаткування
+    taxonomy:
+      index: Категоризація
+    update: Редагувати
     user:
       index: Користувачі
     zone:
       index: Пояси
+  browse_products: Перегляд товарів
+  cancel: Відмінити
   cart:
+    empty: Ваш кошик пустий
     summary:
+      add_coupon: Так
       checkout: Оформити замовлення
+      clear: Очистити кошик
+      grand_total: Загальний підсумок
+      product: Товар
+      quantity: К-сть
+      save: Зберегти
+      total: Усього
+      unit_price: Ціна
+    summary_header: Вміст кошика
+    total_items: '1 елемент|%count% елементів'
   checkout:
+    addressing:
+      header: Крок адресації
     back: Назад
+    finalize:
+      address:
+        city: Місто
+        country: Країна
+        firstname: Iм’я
+        lastname: Прізвище
+        postcode: Iндекс
+        province: Область
+        street: Вулиця
+      header: Підсумок замовлення
+      order:
+        billing_address: Платіжна адреса
+        items_total: Загальна кількість елементів
+        no_items: Це замолвення не містить жодних елементів
+        no_promotion: Промо-код не застосовано
+        no_shipping_charges: Націнки за доставку не застосовано
+        no_taxes: Податки не застосовані
+        promotion_discount: Промо-знижки
+        promotion_total: Загальна сума промо-знижки
+        shipping_address: Адреса доставки
+        shipping_charges: Націнки за доставку
+        shipping_total: Всього за доставку
+        tax_total: Всього податок
+        taxes: Податки
+        total: Усього
+      order_item:
+        quantity: К-сть
+        total: Усього
+        unit_price: Ціна одиниці
+      place_order: Розмістити замовлення
+      product:
+        name: Ім’я
+    forward: Продовжити
+    payment:
+      header: Спосіб оплати
     security:
+      existing_customer: Існуючий клієнт
+      header: 'Ввійдіть до магазину <small>або створіть новий обліковий запис</small>'
       login: Логін
+      new_customer: Новий клієнт
       register: Зареєструватися
+    shipping:
+      error: Дуже шкода, але наш магазин не може забезпечити доставку продукту до країни, яку ви обрали.
+      header: Метод доставки
+  confirmation:
+    message: Ви хочете видалити цей елемент?
+    title: Підтвердження
+  country:
+    add_province: Додати провінцію
+    create: Створити країну
+    create_header: Нова країна
+    id: ID
+    index_header: Країни
+    iso_name: ISO код
+    manage: Управління країнами
+    name: Ім’я
+    no_results: Немає налаштованих країн.
+    show_header: Подробиці про країну
+    update_header: Редагування країни
+  create: Створити
+  created_at: Створено
+  delete: видалити
+  deleted: Видалено
+  edit: редагувати
+  email: Електронна пошта
+  exchange_rate:
+    create: Створити обмінний курс
+    create_header: Новий курс
+    currency: валюта
+    id: ID
+    index_header: Курси валют
+    no_results: Немає курсів для відображення.
+    rate: курс
+    update_header: Редагування обмінного курсу
+    updated_at: останнє оновлення
+  filter: Фільтр
   form:
+    cart:
+      coupon: Якщо у вас є купон акції, введіть його тут
+    choose_file: Обрати файл
+    frontend:
+      password:
+        confirmation: Підтвердження
+        current: Поточний пароль
+        new: Новий пароль
+        title: Змінити пароль
+      profile:
+        title: Редагувати особисті відомості
     login:
       email: Email
+      password: Пароль
     option_value:
       add_value: Додати значення
     profile:
       email: Email
+      firstName: Iм’я
+      lastName: Прізвище
   gallery:
     next: Наступний
+    previous: Попередній
+    slideshow: Слайд-шоу
+  generate: Генерувати
+  group:
+    create: Створити групу
+    create_header: Додавання нових груп користувачів
+    id: ID
+    index_header: Групи
+    name: Ім’я
+    no_results: Немає груп для відображення.
+    roles: Ролі
+    update_header: Редагувати групу
+  hide_deleted: Приховати видалений
+  history:
+    0: Історія
+    action: Дія
+    author: Автор
+    data: Дані
+    logged_at: Заходив
+    version: Версія
+  homepage:
+    splash:
+      headline: Ласкаво просимо до Sylius
+      subheadline: Сучасна система електронної комерції для Symfony2
+  inventory_unit:
+    created_at: Створено
+    inventory_state: Статус інвентаризації
+    name: Ім’я
+    no_results: Немає одиниць інвентаризації для відображення.
+    shipping_state: Статус доставки
+    sku: Артикул
+    updated_at: Останнє оновлення
+  locale:
+    code: Код
+    create: Створити мову
+    create_header: Додавання нової мови
+    enabled: Увімкнено
+    index_header: Список усіх сконфігурованих мов
+    no_results: Немає сконфігурованих мов.
+    update_header: Редагувати мову
+    updated_at: Останнє оновлення
   login: Логін
+  login_header: Адміністрування
+  logo: Sylius
+  manage: Управління
+  meta:
+    backend_title: Панель адміністрування Sylius.
+    frontend_description: 'Sylius - це сучасне рішення електронної комерції для PHP, на основі фреймворку Symfony.'
+    frontend_keywords: sylius, ecommerce, symfony2, магазин, кошик, інтернет-магазин
+    frontend_title: Sylius, сучасна система електронної комерції для Symfony2
+  na: N/A
+  newest: Найновіші продукти
   "no": false
+  no_results: Немає результатів
+  option:
+    create: Створити опцію
+    create_header: Нова опція товару
+    index_header: Опції продукту
+    manage: Керування опціями
+    name: ім’я
+    no_results: Немає сконфігурованих опцій.
+    presentation: презентація
+    update_header: Опції редагування
+    updated_at: останнє оновлення
+    values: значення
   order:
+    billing_address: Платіжна адреса
+    create: Створити замовлення
+    create_header: Нове замовлення
+    created_at: Час створення
+    general_info: Основна інформація
+    id: ID
+    index_header: Поточні замовлення
+    inventory_tracking: Відстеження інвентаризації
+    items_total: Загальна кількість елементів
+    manage: Керувати замовленнями
+    no_items: Це замолвення не містить жодних елементів
+    no_results: У вас немає нових замовлень
+    no_shipments: Немає відправлень для цього замовлення
+    no_shipping_charges: Націнки за доставку не застосовано
+    no_taxes: Податки не застосовані
+    number: Номер
+    payment: Оплата
+    payment_state: Статус платежу
+    promotion_total: Загальна сума промо-знижки
+    recent_header: Останні замовлення
+    shipment_state: Статус доставки
+    shipment_states:
+      pending: В очікуванні
+    shipments: Відправки
+    inventory_unit:
+      backorder: Звільняється
+      fulfill: Виконано
+      return: Повернення
+    shipping_address: Адреса доставки
+    shipping_charges: Націнки за доставку
+    shipping_total: Всього за доставку
+    show_header: Замовлення
     state:
+      cart_locked: Кошик заблоковано
       checkout: Оформити замовлення
+      order_confimed: Замовлення підтверджено
+      ordered: Замовлено
+    tax_total: Всього податок
+    taxes: Податки
+    total: Усього
+    update_header: Редагування замовлення
     user: Користувач
+  shipment:
+    ship: Доставити
+    created_at: Створено
+    id: ID
+    index_header: Відправки
+    inventory_state: Статус інвентаризації
+    manage: Керування відправками
+    method: Метод
+    modified: Змінено
+    name: Ім’я
+    no_items: Немає елементів для відображення.
+    no_results: Немає відправок до показу.
+    order: Замовлення
+    show_header: Деталі відправки
+    sku: Артикул
+    state: Штат
+    tracking_code: Трекінг-код
+    update: Редагувати
+    update_header: Редагування відправки
+    updated_at: Останнє оновлення
+  order_item:
+    product: Елемент
+    quantity: К-сть
+    sellable: Товар
+    total: Усього
+    unit_price: Ціна одиниці
+  out_of_stock: Немає в наявності
   page:
+    body: Тіло
+    create: Створити нову сторінку
+    create_header: Створення нового статичного вмісту
+    id: ID
     index_header: Сторінки
+    no_results: Немає статичних сторінок для відображення.
+    title: Назва
+    update_header: Останнє оновлення
+  password: Пароль
   payment:
+    amount: Сума
+    create: Створити оплату
+    create_header: Нова оплата
+    created_at: Створено
+    id: ID
+    index_header: Платежі
+    manage: Керувати платежами
+    method: Метод
+    no_results: Не сконфігуровано жодної оплати.
     state:
+      0: Статус
       checkout: Оформити замовлення
+      completed: Завершено
       failed: Помилка
+      new: Новий
+      pending: В очікуванні
+      processing: В процесі
+      unknown: Не вказаний
+      void: Порожньо
+    update_header: Редагування оплати
+    updated_at: Останнє оновлення
+  payment_method:
+    create: Створити метод оплати
+    create_header: Новий метод оплати
+    enabled: Включений?
+    gateway: шлюз
+    id: ID
+    index_header: Варіанти оплати
+    name: Ім’я
+    no_results: Не налаштовано способів оплати.
+    update_header: Редагування способу оплати
+    updated_at: Останнє оновлення
   product:
-    options: Параметри
+    add_property: Додати властивість
+    available_on: Доступно
+    available_on_demand: На вимогу
+    categorization: Категоризація
+    contain_variants: Містять варіанти
+    create: Створити продукт
+    create_header: Новий товар
+    description: Опис
+    generate_variants: Генерувати варіанти
+    manage: Керування продуктами
+    name: Ім’я
+    no_description: '<i>Немає опису...</i>'
+    no_images: Немає зображень для цього продукту
+    no_options: Немає опцій для цього продукту
+    no_properties: У цього продукту не визначені властивості
+    no_results: Немає товарів для відображення.
+    no_shipping_category: Без категорії доставки
+    no_short_description: '<i>Без короткого опису</i>'
+    no_sku: Без SKU
+    no_tax_category: Без категорії оподаткування
+    no_taxons: Немає таксонів для цього продукту
+    options: Опції
+    price: Роздрібна ціна
+    properties: Властивості
+    restricted_zone: Заборонена зона
+    shipping_category: Категорія доставки
+    show: Детальніше
+    show_in_store: показати в магазині
+    sku: Артикул
     tabs:
-      options: Параметри
+      categorization: Категоризація
+      images: Зображення
+      options: Опції
+      product: Товар
+      properties: Властивості
+    tax_category: Категорія податку
+    unavailable: Недоступно
+    update_header: Редагування продукту
+    updated_at: Останнє оновлення
+    variant_selection_method: Метод вибору варіанту
+  product_not_available_in_zone: Не доступно у вашій країні
+  promotion:
+    actions: Дії
+    add_action: Додати дію
+    add_rule: Додати правило
+    coupon_based: На основі купону?
+    create: Створити акцію
+    create_header: Нова акція
+    created_at: Створено
+    description: Опис
+    ends_at: Закінчується
+    general_info: Основна інформація
+    id: ID
+    index_header: Діючі акції
+    manage: Керувати акціями
+    name: Ім’я
+    no_results: Немає налаштованих акцій.
+    rules: Правила
+    show_header: Подробиці акції
+    starts_at: Початок
+    update_header: Редагування акції
+    updated_at: Останнє оновлення
+    usage_limit: Обмеження використання
+    used: Використано
+  promotion_action:
+    configuration: Конфігурація
+    type: Тип
+  promotion_coupon:
+    create: Додати купон
+    create_header: Створити новий купон
+    generate: Генерувати купони
+    generate_header: Створення купонів
+    index: Список купонів
+    index_header: Купони
+    no_results: Немає купонів для відображення.
+    total_results:
+      Total: '%total%'
+    update_header: Редагування купону
+  promotion_rule:
+    configuration: Конфігурація
+    type: Тип
+  property:
+    add_choice: Додати вибір
+    create: Створити властивість
+    create_header: Нова властивість продукту
+    index_header: Властивості продукції
+    manage: Керування властивостями
+    name: ім’я
+    no_results: Немає сконфігурованих властивостей.
+    presentation: презентація
+    type: тип
+    update_header: Редагування властивостей
+    updated_at: останнє оновлення
+  prototype:
+    build: Створення прототипу
+    build_header: Створити товар з прототипу
+    create: Створити прототип
+    create_header: Новий прототип
+    index_header: Прототипи продукту
+    name: ім’я
+    no_results: Немає сконфігурованих прототипів.
+    options: опції
+    properties: властивості
+    update_header: Редагування прототипу
+    updated_at: останнє оновлення
+  province:
+    provinces: Провінції
+  remember_me: "Запам'ятати?"
+  save_changes: Зберегти зміни
+  search: Пошук
+  settings:
+    general_header: Загальні налаштування
+    taxation_header: Налаштування оподаткування
+  shipment_category:
+    manage: Управління категоріями доставки
+  shipping_address: Адреса доставки
+  shipping_category:
+    create: Створити категорію доставки
+    create_header: Нова категорія доставки
+    id: ID
+    index_header: Категорії доставки
+    manage: Управління категоріями доставки
+    name: Ім’я
+    no_results: Немає сконфігурованих категорій доставки.
+    update_header: Редагування категорії доставки
+    updated_at: Останнє оновлення
+  shipping_method:
+    calculator: Калькулятор
+    category: Категорія
+    create: Створити спосіб доставки
+    create_header: Новий спосіб доставки
+    enabled: Включений?
+    id: ID
+    index_header: Методи доставки
+    manage: Керувати методами доставки
+    name: Ім’я
+    no_results: Немає налаштованих методів доставки.
+    show_header: Деталі способу доставки
+    update_header: Редагування методу доставки
+    updated_at: Останнє оновлення
+    zone: Зона
+  shop_by: Купуйте по
+  show: подробиці
+  show_all: Показати все
+  show_deleted: Показати видалені
+  stockable:
+    index_header: 'Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>'
+    name: ім’я
+    no_results: Немає елементів інвентаризації для відображення.
+    on_hand: рівень запасів
+    on_hold: на утриманні
+    sku: обліковий номер
+    updated_at: останнє оновлення
+  tax_category:
+    create: Створення категорії оподаткування
+    create_header: Нова категорія оподаткування
+    description: Опис
+    id: ID
+    index_header: Категорії оподаткування
+    manage: Управління категоріями оподаткування
+    name: Ім’я
+    no_description: Немає опису
+    no_results: Немає сконфігурованих категорій оподаткування.
+    update_header: Редагування категорій оподаткування
+    updated_at: Останнє оновлення
+  tax_rate:
+    amount: Кількість
+    calculator: Калькулятор
+    category: Категорія
+    create: Створити ставку податку
+    create_header: Нова ставка податку
+    included_in_price: Входить у вартість товару?
+    index_header: Податкові ставки
+    manage: Керувати податковими ставками
+    name: Ім’я
+    no_results: Немає налаштованих податкових ставок.
+    show_header: Подробиці про податкову ставку
+    update_header: Оновлення ставки податку
+    updated_at: Останнє оновлення
+    zone: Зона
+  taxon:
+    create: Створити таксон
+    create_header: Новий таксон
+    image: Вибрати зображення
+    name: Ім’я
+    no_image: Немає зображення для цього таксону
+    no_results: Немає таконів для відображення.
+    product_index_header: 'Продукт категоризовано як "%name%"'
+    update_header: Редагування таксону
+  taxonomy:
+    create: Створити класифікатор
+    create_header: Новий класифікатор
+    image: Вибрати зображення
+    index_header: 'Категоризація <small>тут ви бачите визначені класифікатори</small>'
+    manage: Керувати класифікаторами
+    name: Ім’я
+    no_image: Немає зображення для цього класифікатору
+  unknown: Не вказаний
   user:
+    billing_address: Платіжна адреса
+    email: Електронна пошта
+    first_name: Iм’я
+    id: ID
+    last_login: Останній вхід
+    last_name: Прізвище
+    impersonate: Увійти в систему як цей користувач
+    manage: керування користувачами
+    no_results: Немає користувачів для відображення.
+    order:
+      no_results: Немає замовлень для цього користувача.
+    orders: Замовлення користувача
+    recent_header: Недавні користувачі
+    registration_date: Дата реєстрації
+    shipping_address: Адреса доставки
+    show_header: Інформація про користувача
+    update_header: Редагування користувача
     username: "Ім'я користувача"
   variant:
-    options: Параметри
+    add_image: Додати зображення
+    availability: Доступність
+    available_on_demand: На вимогу
+    create: Створити варіант
+    create_header: Новий варіант продукту
+    delete_image: Видалити зображення
+    last_update: Останнє оновлення
+    no_results: Немає варіантів для відображення.
+    options: Опції
+    price: Ціна
+    sku: Артикул
+    update_header: Редагування варіанту
   "yes": true
   zone:
+    add_member: Додати члена групи
+    create: Створити зону
+    create_header: Нова зона
     index_header: Пояси
+    manage: Керувати зонами
+    name: Ім’я
+    no_results: Немає налаштованих зон.
+    show_header: Подробиці про зону
+    type: Тип
+    update_header: Редагування зони
+  zone_member:
+    members: Члени

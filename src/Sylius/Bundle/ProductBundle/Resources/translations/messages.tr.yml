@@ -7,6 +7,12 @@ sylius:
       name: Ad
       description: Açıklama
       properties: Özellikler
+      available_on: Satışta
+      meta_keywords: Meta anahtar kelimeleri
+      meta_description: Meta açıklama
+    property:
+      name: Dahili isim
+      presentation: Sunum
     prototype:
       name: Ad
       properties: Özellikler

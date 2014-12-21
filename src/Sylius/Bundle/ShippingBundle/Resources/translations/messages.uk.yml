@@ -3,6 +3,39 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: Кількість
+        equal: Дорівнює
+      type: Тип
     shipment:
+      state: Статус
       states:
         checkout: Оформити замовлення
+        dispatched: Відправлено
+        pending: В очікуванні
+        ready: Готовий
+        shipped: Відправлено
+        returned: Повернуто
+      tracking_code: Трекінг-код
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Кількість
+      flexible_rate_configuration:
+        additional_item_cost: Додаткова націнка
+        additional_item_limit: Ліміт додаткових елементів
+        first_item_cost: Вартість першого елементу
+      per_item_rate_configuration:
+        amount: Кількість
+      weight_rate_configuration:
+        amount: Кількість
+        division: Ділення
+    shipping_category:
+      description: Опис
+      name: Ім’я
+    shipping_method:
+      calculator: Калькулятор
+      category: Категорія
+      configuration: Конфігурація
+      enabled: Ввімкнено?
+      name: Ім’я

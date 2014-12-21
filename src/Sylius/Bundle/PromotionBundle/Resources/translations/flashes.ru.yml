@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  promotion_coupon:
+    generate: Промокупоны были успешно созданы.
+    eligible: Ваш промокупон был добавлен в корзину.
+    invalid: Ваш промокупон не действителен.
+    not_eligible: Ваша корзина не соответствует этому промокупону.

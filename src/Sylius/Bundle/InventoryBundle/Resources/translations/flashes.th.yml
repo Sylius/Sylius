@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backorder: สินค้าอยู่ในสถานะ Backorder
+    sell: สินค้าอยู่ในสถานะครบถ้วน
+    return: สินค้าอยู่ในสถานะถูกส่งกลับ
+    transition_fail: ไม่สามารถดำเนินการได้ สำหรับสถานะปัจจุบันของสินค้า

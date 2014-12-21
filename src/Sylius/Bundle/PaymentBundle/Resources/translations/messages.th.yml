@@ -3,5 +3,30 @@
 
 sylius:
   form:
+    credit_card:
+      cardholder_name: ชื่อบนบัตร
+      expiry_month: เดือนหมดอายุ
+      expiry_year: ปีหมดอายุ
+      number: หมายเลขบัตร
+      security_code: รหัสความปลอดภัย (CVV)
+      type: ประเภทบัตร
+    payment:
+      amount: ยอดการชำระเงิน
+      method: วิธีการชำระเงิน
+      state:
+        0: สถานะการชำระเงิน
+        checkout: ชำระเงิน
+        completed: เสร็จสมบูรณ์
+        failed: ล้มเหลว
+        new: รายการใหม่
+        pending: อยู่ระหว่างดำเนินการ
+        processing: กำลังดำเนินการ
+        unknown: ไม่ทราบสถานะ
+        void: โมฆะ
+        cancelled: ถูกยกเลิก
+        refunded: คืนเงินแล้ว
     payment_method:
+      description: คำอธิบาย
+      enabled: เปิดใช้งานแล้ว?
+      gateway: ช่องทางการชำระเงิน
       name: ชื่อ

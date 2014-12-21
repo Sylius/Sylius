@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  label:
+    product:
+      name: Namn
+      meta_keywords: Metasökord
+      meta_description: Metabeskrivning
+    prototype:
+      name: Namn

@@ -8,9 +8,7 @@ sylius:
   form:
     configuration:
       database:
-        header: Connessione al database
         driver:
-          header: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,15 +20,12 @@ sylius:
         port: Porta
         user: Utente
       locale:
-        0: Impostazioni locali
         currency: Valuta
         locale: Locale
       mailer:
-        header: Impostazioni mailer
         host: Host
         password: Password
         transport:
-          header: Transport
           gmail: Gmail
           mail: Mail
           sendmail: Sendmail

@@ -20,13 +20,13 @@ sylius:
       max: 'Achternaam mag niet langer zijn dan {{ limit }} tekens.'
       min: 'Achternaam moet minstens {{ limit }} tekens lang zijn.'
       not_blank: Vul uw voornaam in.
-  variant:
+  product_variant:
     onHand:
       min: 'Voorraad moet groter zijn dan {{ limit }}.'
-      not_blank: Voer een voorraad in.
+      not_blank: Voer de hoeveelheid voorraad in.
     price:
       min: Prijs mag niet negatief zijn.
-      not_blank: Voer een prijs in.
+      not_blank: Voer de prijs in.
 sylius_shipping:
   method:
     zone:

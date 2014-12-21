@@ -3,7 +3,35 @@
 
 sylius:
   form:
+    shipment:
+      state: สถานะ
+      states:
+        checkout: ชำระเงิน
+        dispatched: จัดส่งแล้ว
+        pending: อยู่ระหว่างดำเนินการ
+        ready: พร้อมส่ง
+        shipped: ส่งของแล้ว
+        returned: ถูกส่งคืน
+      tracking_code: รหัสการติดตาม
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: ยอดเงิน
+      flexible_rate_configuration:
+        additional_item_cost: ต้นทุนอื่นๆ
+        additional_item_limit: จำกัดรายการเพิ่มเติม
+        first_item_cost: ต้นทุนสำหรับสินค้าชิ้นแรก
+      per_item_rate_configuration:
+        amount: ยอดเงิน
+      weight_rate_configuration:
+        amount: ยอดเงิน
+        division: สัดส่วน
     shipping_category:
+      description: คำอธิบาย
       name: ชื่อ
     shipping_method:
+      calculator: การคำนวณราคา
+      category: หมวดหมู่
+      category_requirement: ความต้องการสำหรับหมวดหมู่
+      configuration: ตั้งค่าคอนฟิก
+      enabled: เปิดใช้งาน?
       name: ชื่อ

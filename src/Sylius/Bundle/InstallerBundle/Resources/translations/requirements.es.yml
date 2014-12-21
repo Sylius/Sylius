@@ -25,20 +25,20 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    header: sistema de ficheros
+    header: Sistema de archivos
     cache:
-      header: cache
+      header: caché
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existe
     logs:
-      header: logs
+      header: registros
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: No existe
     not_writable: Sin permisos de escritura
     parameters:
-      header: parameters.yml
+      header: parametros.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: Vendors

@@ -1,0 +1,79 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+auto: auto
+route: Ruta
+sylius:
+  form:
+    action_block:
+      action_name: Nombre de la acción
+      id: Id
+    imagine_block:
+      parent: Padre
+      internal_name: Nombre interno
+      slideshow_small: Presentación de diapositivas grande (Ancho Completo)
+      slideshow_medium: Presentación de diapositivas medio (Contenido)
+      slideshow_large: Presentación de diapositivas grande (Lateral)
+    menu:
+      childrens: Hijos
+      display: Visualización
+      display_children: Mostrar hijos
+      label: Etiqueta
+      name: Nombre
+      parent: Padre
+      route: Ruta
+      uri: URI
+    menu_block:
+      body: Cuerpo
+      id: Id
+      name: Nombre
+    menu_node_block:
+      content: Contenido
+      display: Visualización
+      display_children: Mostrar hijos
+      internal_name: Nombre interno
+      label: Etiqueta
+      link_type: Tipo de Enlace
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
+      publishable: Publicable
+      route: Ruta
+      uri: URI
+    redirect_route:
+      id: Id
+      name: Nombre
+      route_name: Nombre_ruta
+      uri: URI
+    reference_block:
+      body: Cuerpo
+      id: Id
+      title: Título
+    route:
+      content: Contenido
+      name: Nombre
+      parent: Padre
+    simple_block:
+      body: Cuerpo
+      internal_name: Nombre interno
+      parent: Padre
+      title: Título
+    slideshow_block:
+      childrens: Hijos
+      internal_name: Nombre interno
+      parent: Padre
+      title: Título
+    static_content:
+      body: Cuerpo
+      id: Id
+      internal_name: Nombre interno
+      menu_nodes: Nodos de menú
+      parent: Padre
+      publish_end_date: Publicar la fecha de finalización
+      publish_start_date: Publicar la fecha de inicio
+      publishable: Publicable
+      routes: Rutas
+      title: Título
+    string_block:
+      body: Cuerpo
+      id: ID
+      name: Nombre

@@ -1,8 +1,58 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
 sylius:
+  flashes:
+    installed: Sylius başarıyla yüklendi.
   form:
     configuration:
       database:
+        driver:
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Sunucu
         name: Ad
+        password: Şifre
+        port: Port
+        user: Kullanıcı
+      locale:
+        currency: Kur
+        locale: Bölgesel ayar
+      mailer:
+        host: Sunucu
+        password: Şifre
+        transport:
+          gmail: Gmail
+          mail: Posta
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Kullanıcı
+    setup:
+      email: E-posta
+      load_fixtures: Bilgileri yükleyin
+      plain_password: Şifre
+      username: Kullanıcı adı
+  process:
+    step:
+      check:
+        button:
+          back: Geri
+          install: Yükle
+          next: Sonraki
+        header: 'Sistem gereksinimleri kontrol ediliyor <small>Sylius yükleyici</small>'
+        table:
+          current: şu anki
+          required: Gerekli
+          status: durum
+      configure:
+        header: 'Yapılandırma <small>Sylius yükleyici</small>'
+      setup:
+        header: 'Yönetim Kurulumu <small>Sylius yükleyici</small>'
+      welcome:
+        content: "<p>Sylius Yükleyicisi'ne hoş geldiniz.</p>"
+        header: '<small>Sylius yükleyici</small> Hoşgeldiniz'
+€: €

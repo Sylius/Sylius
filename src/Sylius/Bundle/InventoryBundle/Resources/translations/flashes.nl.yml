@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Inventaris eenheid is ge-backordered.
-    sold: Inventaris eenheid vervuld.
-    returned: Inventaris eenheid geretourneerd.
+    backorder: Inventaris eenheid is ge-backordered.
+    sell: Inventaris eenheid vervuld.
+    return: Inventaris eenheid geretourneerd.
+    transition_fail: De actie kon niet worden uitgevoerd gezien de huidige staat van de eenheid

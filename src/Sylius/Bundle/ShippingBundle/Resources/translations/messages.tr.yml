@@ -3,12 +3,40 @@
 
 sylius:
   form:
+    rule:
+      item_count_configuration:
+        count: sylius.form.rule.item_count_configuration.count
+        equal: sylius.form.rule.item_count_configuration.equal
+      type: sylius.form.rule.type
     shipment:
+      state: Durum
       states:
         checkout: 'Ödeme  yap'
+        dispatched: Yollandı
         pending: Beklemede
+        ready: Hazır
+        shipped: Kargolandı
+        returned: İade Edildi
+      tracking_code: İzleme Kodu
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Miktar
+      flexible_rate_configuration:
+        additional_item_cost: Ek içerik maliyeti
+        additional_item_limit: Ek içerik limiti
+        first_item_cost: İlk içerik maliyeti
+      per_item_rate_configuration:
+        amount: Miktar
+      weight_rate_configuration:
+        amount: Miktar
+        division: Bölüm
     shipping_category:
       description: Açıklama
       name: Ad
     shipping_method:
+      calculator: Hesaplayıcı
+      category: Kategori
+      category_requirement: Kategori gereksinimi
+      configuration: Ayarlar
+      enabled: sylius.form.shipping_method.enabled
       name: Ad

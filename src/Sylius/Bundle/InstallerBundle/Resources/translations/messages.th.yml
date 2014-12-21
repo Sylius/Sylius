@@ -1,13 +1,58 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+$: '$'
 sylius:
+  flashes:
+    installed: Sylius ได้ถูกติดตั้งเรียบร้อยแล้ว
   form:
     configuration:
       database:
-        name: ชื่อ
-        password: รหัสผ่าน
+        driver:
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Host
+        name: Name
+        password: Password
+        port: Port
+        user: User
+      locale:
+        currency: สกุลเงิน
+        locale: ภาษา
       mailer:
-        password: รหัสผ่าน
+        host: Host
+        password: Password
+        transport:
+          gmail: Gmail
+          mail: Mail
+          sendmail: Sendmail
+          smtp: SMTP
+        user: User
     setup:
-      plain_password: รหัสผ่าน
+      email: Email
+      load_fixtures: โหลดข้อมูลตัวอย่าง
+      plain_password: Password
+      username: Username
+  process:
+    step:
+      check:
+        button:
+          back: ย้อนกลับ
+          install: ติดตั้ง
+          next: ถัดไป
+        header: 'ตรวจสอบความต้องการของระบบสำหรับการ <small>ติดตั้ง Sylius</small>'
+        table:
+          current: ค่าปัจจุบัน
+          required: จำเป็น
+          status: สถานะ
+      configure:
+        header: 'การตั้งค่าคอนฟิกสำหรับ <small>ติดตั้ง Sylius</small>'
+      setup:
+        header: 'ตั้งค่าผู้ดูแลระบบสำหรับ <small>การติดตั้ง Sylius</small>'
+      welcome:
+        content: '<p>ยินดีต้อนรับสู่การติดตั้ง Sylius. </p>'
+        header: 'ยินดีต้อนรับสู่ <small>การติดตั้ง Sylius</small>'
+€: €

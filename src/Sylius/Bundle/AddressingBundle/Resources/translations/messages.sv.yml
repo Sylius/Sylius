@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: Ort
+      company: Företag
+      country: Land
+      first_name: Förnamn
+      last_name: Efternamn
+      postcode: Postnummer
+      street: Gatuadress
+      province: Län
+    country:
+      iso_name: ISOnamn
+      name: Namn
+      provinces: Län
+      select: Välj
+    province:
+      name: Namn
+      select: Välj
+    zone:
+      members: Medlemmar
+      name: Namn
+      type: Typ
+      types:
+        country: Land
+        province: Län
+        zone: Zon
+      scope: Omfattning
+    zone_member_country:
+      country: Land
+    zone_member_province:
+      province: Län
+    zone_member_zone:
+      zone: Zon

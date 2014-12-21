@@ -1,3 +1,47 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Stadens namn får inte vara längre än 255 tecken|Stadens namn får inte vara längre än 255 tecken.
+      min_length: Stadens namn måste vara minst 2 tecken lång|Stadens namn måste vara minst 2 tecken.
+      not_blank: Ange stad.
+    country:
+      not_blank: Välj ett land.
+    first_name:
+      max_length: Förnamn får inte vara längre än 255 tecken|Förnamn får inte vara längre än 255 tecken.
+      min_length: Förnamn måste vara minst 2 tecken|Förnamn måste vara minst 2 tecken.
+      not_blank: Ange förnamn.
+    last_name:
+      max_length: Efternamn får inte vara längre än 255 tecken|Efternamn får inte vara längre än 255 tecken.
+      min_length: Efternamn måste vara minst 2 tecken|Efternamn måste vara minst 2 tecken.
+      not_blank: Ange efternamn.
+    postcode:
+      max_length: Postnummer får inte vara längre än 255 tecken|Postnummer får inte vara längre än 255 tecken.
+      min_length: Postnummer måste vara minst 2 tecken|Postnummer måste vara minst 2 tecken.
+      not_blank: Ange postnummer.
+    province:
+      valid: Välj län.
+    street:
+      max_length: Gatuadressen får inte vara längre än 255 tecken|Gatuadressen får inte vara längre än 255 tecken.
+      min_length: Gatuadressen måste vara minst 2 tecken lång|Gatuadressen måste vara minst 2 tecken lång.
+      not_blank: Ange gatuadress.
+    not_shippable: Denna adress är inte en giltig fraktadress.
+  country:
+    iso_name:
+      not_blank: Ange landets ISOkod.
+    name:
+      max_length: Landets namn får inte vara längre än 255 tecken|Landets namn får inte vara längre än 255 tecken.
+      not_blank: Ange land.
+  province:
+    name:
+      max_length: Länets namn får inte vara längre än 255 tecken|Länets namn får inte vara längre än 255 tecken.
+      min_length: Länets namn måste vara minst 2 tecken|Länets namn måste vara minst 2 tecken.
+      not_blank: Ange län.
+  zone:
+    members:
+      min_count: 'Lägg till minst {{ limit }} zonmedlem.'
+    name:
+      max_length: Zonnamn får inte vara längre än 255 tecken|Zonnamn får inte vara längre än 255 tecken.
+      not_blank: Ange zon.

@@ -1,0 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    menu:
+      name: Nama
+    menu_block:
+      body: Body
+      name: Nama
+    redirect_route:
+      name: Nama
+    reference_block:
+      body: Body
+      title: Judul
+    route:
+      name: Nama
+    simple_block:
+      body: Body
+      title: Judul
+    slideshow_block:
+      title: Judul
+    static_content:
+      body: Body
+      title: Judul
+    string_block:
+      body: Body
+      id: ID
+      name: Nama

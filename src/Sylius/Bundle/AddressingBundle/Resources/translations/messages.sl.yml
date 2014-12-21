@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: Mesto
+      company: Podjetje
+      country: Država
+      first_name: Ime
+      last_name: Priimek
+      postcode: Poštna številka
+      street: Ulica
+      province: Provinca
+    country:
+      iso_name: ISO ime
+      name: Ime
+      provinces: Province
+      select: Izberi
+    province:
+      name: Ime
+      select: Izberite
+    zone:
+      members: Člani
+      name: Ime
+      type: Vrsta
+      types:
+        country: Država
+        province: Provinca
+        zone: Cona
+      scope: Področje
+    zone_member_country:
+      country: Država
+    zone_member_province:
+      province: Provinca
+    zone_member_zone:
+      zone: Cona

@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -32,11 +31,10 @@ sylius:
       code: Kód
       enabled: Engedélyezve
     order_filter:
-      created_at_from: -tól
-      created_at_to: -ig
       number: Szám
       total_from: -tól
       total_to: -ig
+      payment_state: Fizetés állapota
     page:
       body: Törzs
       id: Azonosító

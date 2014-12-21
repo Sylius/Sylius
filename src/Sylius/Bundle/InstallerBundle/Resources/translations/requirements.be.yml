@@ -1,0 +1,55 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    accelerator:
+      help: Усталюйце і ўключыце PHP паскаральнік, напрыклад APC (вельмі пажадана).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Усталюйце і ўключыце пашырэнне %extension%.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: існуе
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: не існуе
+    not_writable: адсутнасць мажлівасці запісу
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: пастаўшчыкі
+    writable: мае мажлівасць запісу
+  settings:
+    any: любы
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: не састарэлае
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: гадзінны пояс
+    timezone_deprecated:
+      help: 'Гадзінны пояс %timezone% састарэў. Папраўце Ваш файл php.ini (спіс састарэлых гадзінных паясоў можна знайсці на http://php.net/manual/en/timezones.others.p).'
+    version: Версія PHP
+    version_recommanded: Рэкамендуемая версія PHP

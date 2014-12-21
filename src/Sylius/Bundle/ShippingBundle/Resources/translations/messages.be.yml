@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Колькасць
+        equal: роўна
+      type: тып
+    shipment:
+      state: Статус
+      states:
+        checkout: Афармленне заказа
+        dispatched: Адпраўлена
+        pending: У апрацоўцы
+        ready: Гатова
+        shipped: Дастаўлена
+        returned: Вернута
+      tracking_code: Трэкінг-код
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Сума
+      flexible_rate_configuration:
+        additional_item_cost: Дадаковы кошт адзінкаі
+        additional_item_limit: Ліміт дадаковых адзінак
+        first_item_cost: Кошт першай адзінкі
+      per_item_rate_configuration:
+        amount: Сума
+      weight_rate_configuration:
+        amount: Сума
+        division: Падзел
+    shipping_category:
+      description: Апісанне
+      name: Назва
+    shipping_method:
+      calculator: Калькулятар
+      category: Катэгорыя
+      category_requirement: Умовы катэгорыі
+      configuration: Канфігурацыя
+      enabled: Уключана
+      name: Назва

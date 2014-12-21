@@ -3,7 +3,7 @@
 
 sylius:
   extensions:
-    header: utvidelser
+    header: Utvidelser
     accelerator:
       header: Akselerator
       help: Installere og aktivere en PHP-akselerator som APC (anbefales).
@@ -27,7 +27,7 @@ sylius:
   filesystem:
     header: filsystem
     cache:
-      header: mellomlagring
+      header: mellomlagring/cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: finnes
@@ -44,7 +44,7 @@ sylius:
     vendors: leverandører
     writable: skrivbar
   settings:
-    header: PHP versjon og innstillinger
+    header: PHP-versjon og -innstillinger
     any: noen
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc

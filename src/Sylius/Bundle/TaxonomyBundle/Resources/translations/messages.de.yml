@@ -1,20 +1,3 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
-sylius:
-  form:
-    taxon:
-      description: Beschreibung
-      name: Name
-      parent: Übergeordnet
-      permalink: Permalink
-    taxonomy:
-      name: Name
-  taxon:
-    create_taxon: Klassifizierung hinzufügen
-    delete_taxonomy: Klassifizierung löschen
-    manage_taxonomies: Klassifizierungen verwalten
-    no_taxonomies: Keine Klassifizierungen zum anzeigen.
-    no_taxons: Keine Gruppen zum anzeigen.
-    update_taxonomy: Klassifizierung bearbeiten

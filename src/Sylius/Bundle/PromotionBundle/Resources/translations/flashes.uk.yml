@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  promotion_coupon:
+    generate: Промо-купони успішно згенеровано.
+    eligible: Промо-купон був доданий в кошик.
+    invalid: Промо-купон не є припустимим.
+    not_eligible: Ваш кошик не може використати цей промо-купон.

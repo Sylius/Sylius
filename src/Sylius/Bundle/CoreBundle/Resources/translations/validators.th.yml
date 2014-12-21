@@ -20,9 +20,9 @@ sylius:
       max: 'นามสกุลต้องมีความยาวมากกว่า {{ limit }} ตัวอักษร.'
       min: 'นามสกุลต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร.'
       not_blank: กรุณาระบุนามสกุลของคุณ
-  variant:
+  product_variant:
     onHand:
-      min: 'On hand ต้องมากกว่า {{ limit }}'
+      min: 'On hand ต้องมากกว่า {{ limit }}.'
       not_blank: กรุณาระบุ on hand
     price:
       min: ราคาต้องไม่เป็นค่าลบ

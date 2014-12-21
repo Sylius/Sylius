@@ -14,7 +14,7 @@ sylius:
       amount: Iznos
       method: Način plaćanja
       state:
-        header: Stanje uplate
+        0: Stanje uplate
         checkout: Blagajna
         completed: Završeno
         failed: Neuspješno
@@ -23,6 +23,8 @@ sylius:
         processing: U obradi
         unknown: Nepoznato
         void: Nevažeće
+        cancelled: Otkazano
+        refunded: Refundirano
     payment_method:
       description: Opis
       enabled: Omogući?

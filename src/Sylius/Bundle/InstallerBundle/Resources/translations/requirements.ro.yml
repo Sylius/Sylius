@@ -3,7 +3,6 @@
 
 sylius:
   extensions:
-    header: extensii
     apc: APC
     gd: GD
     json_encode: JSON

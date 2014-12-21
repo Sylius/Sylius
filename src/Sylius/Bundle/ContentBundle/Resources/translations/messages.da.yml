@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Overordnede
+      internal_name: System navn
+    menu:
+      name: Navn
+      parent: Overordnede
+    menu_block:
+      body: Krop
+      name: Navn
+    menu_node_block:
+      content: Indhold
+      internal_name: System navn
+    redirect_route:
+      name: Navn
+    reference_block:
+      body: Krop
+      title: Titel
+    route:
+      content: Indhold
+      name: Navn
+      parent: Overordnede
+    simple_block:
+      body: Krop
+      internal_name: System navn
+      parent: Overordnede
+      title: Titel
+    slideshow_block:
+      internal_name: System navn
+      parent: Overordnede
+      title: Titel
+    static_content:
+      body: Krop
+      internal_name: System navn
+      parent: Overordnede
+      title: Titel
+    string_block:
+      body: Krop
+      id: ID
+      name: Navn

@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: De parameter namespace mag niet meer dan 255 karakters|De parameter namespace mag niet langer zijn dan 255 tekens.
+      min_length: De parameter namespace moet ten minste 2 tekens lang zijn.|De parameter namespace moet ten minste 2 tekens lang zijn.
+      not_blank: Selecteer een namespace voor deze parameter.
+    name:
+      max_length: Parameternaam mag niet meer dan 255 characters|Parameternaam mag niet langer zijn dan 255 tekens.
+      min_length: Parameternaam moet tenminste 2 tekens lang zijn|Parameternaam moet tenminste 2 tekens lang zijn.
+      not_blank: Voer een naam in voor deze parameter.

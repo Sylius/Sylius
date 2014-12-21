@@ -2,6 +2,15 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
   address:
     city: Thành phố
     company: Công ty
@@ -27,6 +36,7 @@ sylius:
     quick_links:
       users: Người dùng
   block:
+    id: ID
     title: Tiêu đề
     update_header: Chỉnh sửa khối nội dung
     updated_at: Cập nhật lần cuối
@@ -130,10 +140,20 @@ sylius:
     frontend:
       password:
         confirmation: Xác nhận
+    login:
+      password: Mật khẩu
   generate: Tạo
+  group:
+    id: ID
+    index_header: Nhóm
+    name: Tên
+    roles: Vai trò
   inventory_unit:
+    name: Tên
+    sku: MÃ SẢN PHẨM
     updated_at: Cập nhật lần cuối
   locale:
+    code: Mã
     enabled: Đã được kích hoạt
     updated_at: Cập nhật lần cuối
   logo: Sylius
@@ -150,28 +170,46 @@ sylius:
     update_header: Chỉnh sửa tùy chọn
     updated_at: Cập nhật lần cuối
   order:
+    id: ID
     index_header: Đơn đặt hàng hiện tại
     shipments: Vận chuyển
     taxes: Thuế
   shipment:
     created_at: Được tạo vào lúc
+    id: ID
     index_header: Vận chuyển
+    name: Tên
+    sku: MÃ SẢN PHẨM
     updated_at: Cập nhật lần cuối
   order_item:
     quantity: Số lượng
   page:
+    id: ID
+    title: Tiêu đề
     update_header: Cập nhật lần cuối
+  password: Mật khẩu
   payment:
     created_at: Được tạo vào lúc
+    id: ID
     index_header: Thanh toán
     updated_at: Cập nhật lần cuối
   payment_method:
+    id: ID
     index_header: Phương thức thanh toán
+    name: Tên
     updated_at: Cập nhật lần cuối
   product:
+    name: Tên
+    options: Tùy chọn
+    sku: MÃ SẢN PHẨM
+    tabs:
+      images: Hình ảnh
+      options: Tùy chọn
     updated_at: Cập nhật lần cuối
   promotion:
     created_at: Được tạo vào lúc
+    id: ID
+    name: Tên
     updated_at: Cập nhật lần cuối
   property:
     name: Tên
@@ -179,22 +217,41 @@ sylius:
   prototype:
     index_header: Sản phẩm mẫu
     name: Tên
+  search: Tìm kiếm
   settings:
     general_header: Cài đặt chung
   shipping_category:
+    id: ID
     index_header: Thể loại
+    name: Tên
     updated_at: Cập nhật lần cuối
   shipping_method:
+    id: ID
     index_header: Phương thức vận chuyển
+    name: Tên
     updated_at: Cập nhật lần cuối
   stockable:
     name: Tên
   tax_category:
+    id: ID
+    name: Tên
     updated_at: Cập nhật lần cuối
   tax_rate:
+    included_in_price: Bao gồm trong giá?
+    name: Tên
     updated_at: Cập nhật lần cuối
+  taxon:
+    name: Tên
+  taxonomy:
+    name: Tên
   user:
     email: Email
+    id: ID
   variant:
     last_update: Cập nhật lần cuối
+    options: Tùy chọn
+    price: Giá
+    sku: MÃ SẢN PHẨM
   "yes": true
+  zone:
+    name: Tên

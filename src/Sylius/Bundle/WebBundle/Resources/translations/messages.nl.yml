@@ -80,7 +80,7 @@ sylius:
       products: Uw producten
       users: Gebruikers
     statistics:
-      header: Statistieken van deze maand
+      0: Statistieken van deze maand
       orders_this_month: Aantal bestellingen
       registrations_this_month: Aantal registraties
       sales_this_month: Omzet
@@ -288,7 +288,7 @@ sylius:
     update_header: Bewerk groep
   hide_deleted: Verberg verwijderd
   history:
-    header: Geschiedenis
+    0: Geschiedenis
     action: Actie
     author: Auteur
     data: Gegevens
@@ -433,7 +433,7 @@ sylius:
     method: Betaalmethode
     no_results: Er zijn geen betaalmethoden geconfigureerd.
     state:
-      header: Status
+      0: Status
       checkout: Afrekenen
       completed: Voltooid
       failed: Mislukt

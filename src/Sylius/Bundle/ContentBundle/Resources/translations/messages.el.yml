@@ -1,0 +1,27 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    menu:
+      name: Ονομασία
+    menu_block:
+      name: Ονομασία
+    menu_node_block:
+      content: Περιεχόμενο
+    redirect_route:
+      name: Ονομασία
+    reference_block:
+      title: Τίτλος
+    route:
+      content: Περιεχόμενο
+      name: Ονομασία
+    simple_block:
+      title: Τίτλος
+    slideshow_block:
+      title: Τίτλος
+    static_content:
+      title: Τίτλος
+    string_block:
+      id: ID
+      name: Ονομασία

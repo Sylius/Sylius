@@ -1,8 +1,3 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius:
-  inventory_unit:
-    backordered: Inventureinheit auf Lieferrückstand.
-    sold: Inventureinheit durchgeführt.
-    returned: Inventureinheit zurückgeschickt.

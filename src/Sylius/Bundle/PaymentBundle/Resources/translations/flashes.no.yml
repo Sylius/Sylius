@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: Betalingen er fullført.
+    cancel: Betalingen er avbrutt.
+    transition_fail: Handlingen kunne ikke utføres gitt gjeldende status for betaling

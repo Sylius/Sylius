@@ -1,3 +1,20 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  option:
+    name:
+      not_blank: Unesite naziv svojstva.
+      min_length: 'Naziv svojstva mora imati najmanje jedan znak.|Naziv svojstva proizvoda mora imati najmanje {{ limit }} znakova.'
+      max_length: 'Naziv svojstva ne smije biti duži od jednog znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.'
+    presentation:
+      not_blank: Unesite naziv svojstva.
+      min_length: 'Opis svojstva mora imati najmanje jedan znak.|Opis svojstva mora imati najmanje {{ limit }} znakova.'
+      max_length: 'Opis svojstva ne smije biti duži od jednog znaka.|Opis svojstva artikla ne smije biti duži od {{ limit }} znakova.'
+    values:
+      min_count: 'Unesite barem {{ limit }} opciju artikla.|nesite barem {{ limit }} opciju artikla.'
+  option_value:
+    value:
+      not_blank: Unesite vrijednost svojstva.
+  variant:
+    combination: Verzija sa ovim opcijama već postoji.

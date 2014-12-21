@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Unidad de inventario pendiente.
-    sold: Unidad de inventario cumplida.
-    returned: Unidad de inventario devuelta.
+    backorder: Unidad de inventario en espera.
+    sell: Unidad de inventario cumplida.
+    return: Unidad de inventario devuelta.
+    transition_fail: La acción no pudo llevarse a cabo debido al estado actual de la unidad

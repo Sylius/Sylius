@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -32,11 +31,12 @@ sylius:
       code: Code
       enabled: Activé
     order_filter:
-      created_at_from: De
-      created_at_to: À
+      created_at_from: Créé après le
+      created_at_to: Créé avant le
       number: Numéro
       total_from: De
       total_to: À
+      payment_state: Etat du paiement
     page:
       body: Corps
       id: ID

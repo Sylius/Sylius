@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Pai
+      internal_name: Nome interno
+    menu:
+      name: Nome
+      parent: Pai
+    menu_block:
+      body: Texto
+      name: Nome
+    menu_node_block:
+      content: Conteúdo
+      internal_name: Nome interno
+    redirect_route:
+      name: Nome
+    reference_block:
+      body: Texto
+      title: Título
+    route:
+      content: Conteúdo
+      name: Nome
+      parent: Pai
+    simple_block:
+      body: Texto
+      internal_name: Nome interno
+      parent: Pai
+      title: Título
+    slideshow_block:
+      internal_name: Nome interno
+      parent: Pai
+      title: Título
+    static_content:
+      body: Texto
+      internal_name: Nome interno
+      parent: Pai
+      title: Título
+    string_block:
+      body: Texto
+      id: ID
+      name: Nome

@@ -3,8 +3,53 @@
 
 sylius:
   extensions:
+    accelerator:
+      help: APC veya başka bir PHP hızlandırıcısını yükleyin ve aktif edin. (Önemle tavsiye edilir).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: '%extension% uzantısını yükelyin ve aktif edin.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
     "off": false
     "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP XML
+    session_start: Oturum
+    simplexml_import_dom: SimpleXML
+    token_get_all: Simgeleştirici
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: mevcut
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: mevcut değil
+    not_writable: yazılabilir değil
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: yazılabilir
   settings:
+    any: herhangi bir
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: kaldırılmamış
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: zaman dilimi
+    timezone_deprecated:
+      help: '%timezone% zaman dilimi kaldırılmıştır. php.ini dosyanızda gerekli düzenlemeyi yapın. (Kaldırılan tüm zaman dilimleri http://php.net/manual/en/timezones.others.php).'
+    version: PHP versiyon
+    version_recommanded: Önerilen PHP sürümü

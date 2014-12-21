@@ -3,6 +3,7 @@
 
 sylius:
   inventory_unit:
-    backordered: Asortyment zamówiony u dostawcy.
-    sold: Asortyment realizowany.
-    returned: Asortyment zwrócony.
+    backorder: Towar zamówiony u dostawcy.
+    sell: Towar potwierdzony.
+    return: Towar zwrócony.
+    transition_fail: Działanie nie może być wykonywane z obecnym statusem towaru

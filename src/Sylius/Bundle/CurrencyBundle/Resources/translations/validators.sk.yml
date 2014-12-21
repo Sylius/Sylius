@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  currency:
+    code:
+      not_blank: Vyberte kód meny.
+      unique: Kód meny musí byť jedinečný.
+    exchange_rate:
+      not_blank: Zadajte výmenný kurz.

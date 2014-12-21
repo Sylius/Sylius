@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
-    product:
-      description: Descrizione
+  form:
+    attribute:
+      name: Nome interno
+      presentation: Presentazione

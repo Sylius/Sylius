@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  payment:
+    complete: Аплата завершана.
+    cancel: Аплата адменена.
+    transition_fail: Дзеянне нельга ажыццявіць на гэтым этапе аплаты

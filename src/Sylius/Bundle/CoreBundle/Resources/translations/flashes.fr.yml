@@ -8,7 +8,8 @@ sylius:
     restricted_zone: "Ce produit n'est pas disponible dans votre pays."
     success: Merci pour votre commande !
     canceled: Votre paiement a été annulé.
-    pending: Votre paiement est actuellement en attente.
+    processing: Votre paiement est en cours de traitement.
+    new: Votre paiement est nouveau.
     failed: Votre paiement a été refusé.
     unknown: Erreur de paiement inconnue.
     out_of_stock: 'Il ne reste que %quantity% %name% en stock.'

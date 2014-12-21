@@ -20,13 +20,13 @@ sylius:
       max: 'Il cognome non deve essere più lungo di {{ limit }} caratteri.'
       min: 'Il cognome deve essere lungo almeno {{ limit }} caratteri.'
       not_blank: Per favore inserisci il tuo cognome.
-  variant:
+  product_variant:
     onHand:
       min: 'La scorta di magazzino deve essere maggiore di {{ limit }}.'
       not_blank: Per favore inserisci la scorta di magazzino.
     price:
-      min: Il prezzo non può avere un valore negativo.
-      not_blank: Per favore inserisci il prezzo.
+      min: Il prezzo non può avere valore negativo.
+      not_blank: Inserisci il prezzo.
 sylius_shipping:
   method:
     zone:

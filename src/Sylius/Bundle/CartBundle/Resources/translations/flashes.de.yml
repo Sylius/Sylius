@@ -1,11 +1,3 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius:
-  cart:
-    cart_save_completed: Der Warenkorb wurde erfolgreich gespeichert.
-    cart_clear_completed: Der Warenkorb wurde erfolgreich geleert.
-    item_add_completed: Artikel wurde dem Warenkorb hinzugefügt.
-    item_remove_completed: Artikel wurde aus dem Warenkorb entfernt.
-    item_add_error: Während des Hinzufügens des Artikels ist ein Fehler aufgetreten.
-    item_remove_error: Während des Entfernens des Artikels ist ein Fehler aufgetreten.

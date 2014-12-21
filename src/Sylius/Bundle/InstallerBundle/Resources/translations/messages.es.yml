@@ -8,9 +8,9 @@ sylius:
   form:
     configuration:
       database:
-        header: Conexión con la base de datos.
+        header: Conexión con la base de datos
         driver:
-          header: Driver
+          header: Controlador
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -26,7 +26,7 @@ sylius:
         currency: Moneda
         locale: Idioma
       mailer:
-        header: Configuración de Mailer
+        header: Configuración de correo
         host: Servidor
         password: Contraseña
         transport:

@@ -24,6 +24,7 @@ sylius:
         amount: Сумма
       weight_rate_configuration:
         amount: Количество
+        division: Деление
     shipping_category:
       description: Описание
       name: Название
@@ -32,4 +33,5 @@ sylius:
       category: Категория
       category_requirement: Условия категории
       configuration: Конфигурация
+      enabled: Активен
       name: Название
