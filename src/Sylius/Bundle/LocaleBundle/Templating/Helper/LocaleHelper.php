@@ -40,6 +40,26 @@ class LocaleHelper extends Helper
     }
 
     /**
+     * Get currently used calendar system.
+     *
+     * @return string
+     */
+    public function getCalendar()
+    {
+        return $this->localeContext->getCalendar();
+    }
+
+    /**
+     * Get currently used language direction.
+     *
+     * @return string
+     */
+    public function getDirection()
+    {
+        return $this->localeContext->getDirection();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getName()

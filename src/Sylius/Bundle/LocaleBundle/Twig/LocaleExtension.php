@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\LocaleBundle\Twig;
 
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Sylius locale Twig helper.
@@ -24,32 +25,6 @@ class LocaleExtension extends \Twig_Extension
      * @var LocaleHelper
      */
     protected $helper;
-
-    /**
-     * Meta data for special languages,
-     * by default we assume that all languages are LTR except mentioned otherwise.
-     *
-     * @var array
-     */
-    protected static $localeMetaData = array(
-        // TODO Complete the list if keeping the meta-data like this is a good practice at all!
-        'fa' => array(
-            'rtl' => true,
-            'calendar' => 'persian'
-        ),
-        'fa_IR' => array(
-            'rtl' => true,
-            'calendar' => 'persian'
-        ),
-        'fa_AF' => array(
-            'rtl' => true,
-            'calendar' => 'persian'
-        ),
-        'ar' => array(
-            'rtl' => true,
-            'calendar' => 'islamic'
-        )
-    );
 
     /**
      * @param LocaleHelper $helper
@@ -65,10 +40,6 @@ class LocaleExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFunction('sylius_locale', array($this, 'getLocale')),
-            new \Twig_SimpleFunction('sylius_language', array($this, 'getLanguage')),
-            new \Twig_SimpleFunction('sylius_rtl', array($this, 'isRtl')),
-
             // Override twig's default date() filter for calendar-aware date conversion
             new \Twig_SimpleFilter('date', array($this, 'dateFilter'),
                 array('needs_environment' => true)),
@@ -81,20 +52,12 @@ class LocaleExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
+            new \Twig_SimpleFunction('sylius_locale', array($this, 'getLocale')),
             new \Twig_SimpleFunction('sylius_language', array($this, 'getLanguage')),
-            new \Twig_SimpleFunction('sylius_rtl', array($this, 'isRtl')),
+            new \Twig_SimpleFunction('sylius_direction', array($this, 'getDirection')),
             new \Twig_SimpleFunction('sylius_calendar', array($this, 'getCalendar')),
+            new \Twig_SimpleFunction('sylius_rtl', array($this, 'isRtl')),
         );
-    }
-
-    /**
-     * Get currently selected locale code.
-     *
-     * @return string
-     */
-    public function getLocale()
-    {
-        return $this->helper->getLocale();
     }
 
     /**
@@ -106,7 +69,7 @@ class LocaleExtension extends \Twig_Extension
     public function getLanguage($code = null)
     {
         if ($code === null) {
-            $code = $this->getLocale();
+            $code = $this->helper->getLocale();
         }
 
         return Intl::getLocaleBundle()->getLocaleName($code);
@@ -117,20 +80,31 @@ class LocaleExtension extends \Twig_Extension
      */
     public function getCalendar()
     {
-        $code = $this->getLocale();
-        return @self::$localeMetaData[$code]['calendar'] ?: 'gregorian';
+        return $this->helper->getCalendar();
     }
 
     /**
      * @inheritdoc
      */
-    public function isRtl($code = null) {
+    public function getLocale()
+    {
+        return $this->helper->getLocale();
+    }
 
-        if ($code == null) {
-            $code = $this->getLocale();
-        }
+    /**
+     * @inheritdoc
+     */
+    public function getDirection()
+    {
+        return $this->helper->getDirection();
+    }
 
-        return @self::$localeMetaData[$code]['rtl'] ?: false;
+    /**
+     * @inheritdoc
+     */
+    public function isRtl()
+    {
+        return $this->helper->getDirection() === 'rtl';
     }
 
     /**
@@ -159,8 +133,8 @@ class LocaleExtension extends \Twig_Extension
             $defaultTimezone = $timezone;
         }
 
-        $locale = $this->getLocale();
-        $calendar = $this->getCalendar();
+        $locale = $this->helper->getLocale();
+        $calendar = $this->helper->getCalendar();
 
         if ($date instanceof \DateTime || $date instanceof \DateTimeInterface) {
             $date = clone $date;
