@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\LocaleBundle;
 
+use Sylius\Bundle\LocaleBundle\DependencyInjection\Compiler\OverrideDateTypeCompilerPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Locale bundle.
@@ -21,6 +23,15 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
  */
 class SyliusLocaleBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new OverrideDateTypeCompilerPass());
+    }
+
     /**
      * {@inheritdoc}
      */
