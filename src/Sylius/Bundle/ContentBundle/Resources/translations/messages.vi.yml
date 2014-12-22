@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    menu:
+      name: Tên
+    menu_block:
+      name: Tên
+    redirect_route:
+      name: Tên
+    reference_block:
+      title: Tiêu đề
+    route:
+      name: Tên
+    simple_block:
+      title: Tiêu đề
+    slideshow_block:
+      title: Tiêu đề
+    static_content:
+      title: Tiêu đề
+    string_block:
+      id: ID
+      name: Tên

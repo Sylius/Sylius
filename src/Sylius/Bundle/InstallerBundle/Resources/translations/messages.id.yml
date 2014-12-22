@@ -8,9 +8,7 @@ sylius:
   form:
     configuration:
       database:
-        header: Koneksi database
         driver:
-          header: Driver
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,11 +20,9 @@ sylius:
         port: Port
         user: Pengguna
       locale:
-        header: Pengaturan Locale
         currency: Mata Uang
         locale: Locale
       mailer:
-        header: Pengaturan mailer
         host: Host
         password: Kata sandi
         user: Pengguna

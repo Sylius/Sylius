@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Namespace พารามิเตอร์ต้องไม่ยาวเกิน 255 อักขระ
+      min_length: Namespace พารามิเตอร์ต้องมีความยาวอย่างน้อย 2 อักขระ
+      not_blank: กรุณาเลือก namespace สำหรับพารามิเตอร์นี้
+    name:
+      max_length: Namespace พารามิเตอร์ต้องไม่ยาวเกิน 255 อักขระ.
+      min_length: Namespace พารามิเตอร์ต้องมีความยาวอย่างน้อย 2 อักขระ.
+      not_blank: กรุณาใส่ชื่อสำหรับพารามิเตอร์นี้

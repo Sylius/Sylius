@@ -1,0 +1,93 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Калі ласка, выберыце метад дастаўкі.
+  form:
+    action:
+      add_product_configuration:
+        price: Кошт адзінкі
+        quantity: Колькасць
+        variant: Варыянт
+    block:
+      body: Цела
+      id: ID
+      title: Назва
+    cart:
+      coupon: Купон
+    checkout:
+      addressing:
+        different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
+      payment_method: Метад аплаты
+      shipping_method: Метад дастаўкі
+    group:
+      name: Імя
+      roles: Ролі
+    image:
+      file: малюнак
+    locale:
+      code: Код
+      enabled: Уключана
+    order_filter:
+      created_at_from: Створана пасля
+      created_at_to: Створана перад
+      number: Нумар
+      total_from: З
+      total_to: Да
+      payment_state: Статус аплаты
+    page:
+      body: Цела
+      id: ID
+      title: Назва
+    product:
+      restricted_zone: Забароненая зона
+      shipping_category: Катэгорыя дастаўкі
+      short_description: Кароткае апісанне
+      tax_category: Катэгорыя падатку
+      variant_selection_method: Метад выбару варыянта
+    product_filter:
+      name: Імя
+      sku: SKU
+    settings:
+      general:
+        currency: Галоўная валюта
+        locale: Мова
+        meta_description: Meta description
+        meta_keywords: Meta keywords
+        title: Загаловак старонкі
+      taxation:
+        default_tax_zone: Галоўная падатковая зона
+    shipment_filter:
+      created_at_from: З
+      created_at_to: Да
+      number: Нумар замовы
+      shipping_address: Даставіць на імя
+    shipping_method:
+      zone: Зона
+    taxon:
+      file: Выберыце малюнак
+    taxonomy:
+      file: Выберыце малюнак
+    user:
+      billing_address: Адрас для аплаты
+      different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
+      enabled: Уключана
+      first_name: Імя
+      groups: Групы
+      last_name: Прозвішча
+      password: Пароль
+      shipping_address: Адрас дастаўкі
+    user_filter:
+      query: Пошук
+    variant:
+      available_on_demand: Па запросу
+      depth: Глыбіня
+      height: Вышыня
+      images: Малюнкі
+      on_hand: Наяўнасць на складзе
+      price: Кошт
+      sku: SKU
+      weight: Вага
+      width: Шырыня

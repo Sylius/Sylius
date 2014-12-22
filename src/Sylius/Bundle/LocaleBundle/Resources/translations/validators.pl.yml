@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  locale:
+    code:
+      not_blank: Należy wprowadzić kod lokalizacji.
+      unique: Kod lokalizacji musi być unikalny.

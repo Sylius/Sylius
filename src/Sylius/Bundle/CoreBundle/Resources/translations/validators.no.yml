@@ -20,10 +20,10 @@ sylius:
       max: 'Etternavnet kan ikke være lenger enn {{ limit }} tegn.'
       min: 'Etternavnet må være minst {{ limit }} tegn.'
       not_blank: Vennligst skriv inn ditt etternavn.
-  variant:
+  product_variant:
     onHand:
-      min: 'På hånden må være mer enn {{ limit }}.'
-      not_blank: Vennlist skriv inn din hånd.
+      min: 'Du må inneha mer enn {{ limit }}.'
+      not_blank: Vennlist angi din beholdning.
     price:
       min: Prisen kan ikke være mindre enn null.
       not_blank: Vennligst skriv inn prisen.

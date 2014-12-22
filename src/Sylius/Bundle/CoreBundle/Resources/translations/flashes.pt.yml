@@ -3,12 +3,13 @@
 
 sylius:
   cart:
-    restricted_zone_removal: 'Produto %product% removido do carrinho, uma vez que o carrinho não está disponível em seu país.'
+    restricted_zone_removal: 'Produto %product% removido do carrinho, pois não está disponível no seu país.'
   checkout:
     restricted_zone: O produto não está disponível em seu país.
     success: Obrigado pelo seu pedido!
     canceled: Seu pagamento foi cancelado.
-    pending: O seu pagamento está pendente.
-    failed: Seu pagamento foi negado.
-    unknown: Erro não conhecido no processo de pagamento.
-    out_of_stock: 'Existe(m) %quantity% %name% no estoque.'
+    processing: Seu pagamento está sendo processado.
+    new: Seu pagamento é novo.
+    failed: Seu pagamento foi recusado.
+    unknown: Erro desconhecido de pagamento.
+    out_of_stock: 'Há apenas %quantity% %name% no estoque.'

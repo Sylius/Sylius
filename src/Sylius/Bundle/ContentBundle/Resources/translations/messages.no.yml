@@ -1,0 +1,79 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+auto: automatisk
+route: rute
+sylius:
+  form:
+    action_block:
+      action_name: Navn på handlingen
+      id: Id
+    imagine_block:
+      parent: Forelder
+      internal_name: Internt navn
+      slideshow_small: Slideshow stor (full bredde)
+      slideshow_medium: Slideshow Medium (innhold)
+      slideshow_large: Slideshow liten (side)
+    menu:
+      childrens: Barn
+      display: Vis
+      display_children: Vis barn
+      label: Etikett
+      name: Navn
+      parent: Forelder
+      route: Rute
+      uri: URI
+    menu_block:
+      body: Kropp
+      id: Id
+      name: Navn
+    menu_node_block:
+      content: Innhold
+      display: Vis
+      display_children: Vis barn
+      internal_name: Internt navn
+      label: Etikett
+      link_type: Lenketype
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
+      publishable: Publiserbart
+      route: Rute
+      uri: URI
+    redirect_route:
+      id: Id
+      name: Navn
+      route_name: Navn på rute
+      uri: URI
+    reference_block:
+      body: Kropp
+      id: Id
+      title: Tittel
+    route:
+      content: Innhold
+      name: Navn
+      parent: Forelder
+    simple_block:
+      body: Kropp
+      internal_name: Internt navn
+      parent: Forelder
+      title: Tittel
+    slideshow_block:
+      childrens: Barn
+      internal_name: Internt navn
+      parent: Forelder
+      title: Tittel
+    static_content:
+      body: Kropp
+      id: Id
+      internal_name: Internt navn
+      menu_nodes: Menynoder
+      parent: Forelder
+      publish_end_date: Sluttdato for publisering
+      publish_start_date: Startdato for publisering
+      publishable: Publiserbart
+      routes: Ruter
+      title: Tittel
+    string_block:
+      body: Kropp
+      id: ID
+      name: Navn

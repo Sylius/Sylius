@@ -7,4 +7,8 @@ sylius:
       name: Ad
       description: Açıklama
     tax_rate:
+      category: Kategori
       name: Ad
+      amount: Miktar
+      included_in_price: Fiyata dahil edilsin mi?
+      calculator: Hesaplayıcı

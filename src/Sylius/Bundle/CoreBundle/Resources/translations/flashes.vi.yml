@@ -8,7 +8,8 @@ sylius:
     restricted_zone: Sản phẩm này không nằm trong danh sách bán ở quốc gia của bạn.
     success: Xin cảm ơn vì đã đặt hàng với chúng tôi!
     canceled: Thanh toán của bạn đã bị huỷ bỏ.
-    pending: Thanh toán của bạn đang được xem xét.
+    processing: Thanh toán của bạn hiện đang xử lý.
+    new: Thanh toán của bạn là mới.
     failed: Thanh toán của bạn đã bị khước từ.
     unknown: Xuất hiện lỗi không rõ trong quá trình thanh toán.
     out_of_stock: 'Chỉ còn %quantity% %name% sẵn có để mua.'

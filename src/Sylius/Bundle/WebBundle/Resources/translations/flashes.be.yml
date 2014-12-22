@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Адрас паспяхова усталяваны як галоўны адрас для аплаты.
+        shipping:
+          success: Адрас паспяхова ўсталяваны як галоўны адрас для дастаўкі.

@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Rodzic
+      internal_name: Nazwa w systemie
+    menu:
+      name: Nazwa
+      parent: Rodzic
+    menu_block:
+      body: Zawartość
+      name: Nazwa
+    menu_node_block:
+      content: Zawartość
+      internal_name: Nazwa w systemie
+    redirect_route:
+      name: Nazwa
+    reference_block:
+      body: Zawartość
+      title: Tytuł
+    route:
+      content: Zawartość
+      name: Nazwa
+      parent: Rodzic
+    simple_block:
+      body: Zawartość
+      internal_name: Nazwa w systemie
+      parent: Rodzic
+      title: Tytuł
+    slideshow_block:
+      internal_name: Nazwa w systemie
+      parent: Rodzic
+      title: Tytuł
+    static_content:
+      body: Zawartość
+      internal_name: Nazwa w systemie
+      parent: Rodzic
+      title: Tytuł
+    string_block:
+      body: Zawartość
+      id: ID
+      name: Nazwa

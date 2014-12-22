@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  currency:
+    code:
+      not_blank: Lütfen para birimi kodunu seçiniz.
+      unique: Param birimi kodu tekil olmalıdır.
+    exchange_rate:
+      not_blank: Lütfen döviz kurunu giriniz.

@@ -7,5 +7,8 @@ sylius:
       name: Navn
       description: Beskrivelse
     tax_rate:
+      category: Kategori
       name: Navn
       amount: Beløp
+      included_in_price: Inkludert i prisen?
+      calculator: Kalkulator

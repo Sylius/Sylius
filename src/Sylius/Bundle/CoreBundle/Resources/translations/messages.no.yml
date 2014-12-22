@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -23,6 +22,8 @@ sylius:
         different_billing_address: Bruk annen adresse for fakturering?
       payment_method: Betalingsmetode
       shipping_method: Fraktalternativ
+    coupon:
+      per_user_usage_limit: Bruksgrense for hver bruker
     group:
       name: Navn
       roles: Roller
@@ -32,11 +33,12 @@ sylius:
       code: Kode
       enabled: Aktivert
     order_filter:
-      created_at_from: Fra
-      created_at_to: Til
+      created_at_from: Opprettet etter
+      created_at_to: Opprettet før
       number: Nummer
       total_from: Fra
       total_to: Til
+      payment_state: Betalingsstatus
     page:
       body: Kropp
       id: ID

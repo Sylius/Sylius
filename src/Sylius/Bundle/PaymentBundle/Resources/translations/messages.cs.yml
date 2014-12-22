@@ -14,7 +14,7 @@ sylius:
       amount: Platební částka
       method: Způsob platby
       state:
-        header: Stav platby
+        0: Stav platby
         completed: Dokončeno
         failed: Neúspěšné
         new: Nový

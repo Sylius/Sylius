@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -13,6 +12,7 @@ sylius:
         quantity: Adet
         variant: Çeşit
     block:
+      body: İçerik
       id: ID
       title: Başlık
     cart:
@@ -31,19 +31,41 @@ sylius:
       code: Kod
       enabled: Etkin
     order_filter:
-      created_at_from: Kaynak
-      created_at_to: Hedef
+      created_at_from: Tarihinden sonra oluşturulan
+      created_at_to: Tarihinden önce oluşturulan
       number: Sayı
       total_from: Kaynak
       total_to: Hedef
+      payment_state: Ödeme durumu
     page:
+      body: İçerik
       id: ID
       title: Başlık
+    product:
+      restricted_zone: Kısıtlı bölge
+      shipping_category: Teslimat kategorisi
+      short_description: Kısa açıklama
+      tax_category: Vergi kategorisi
+      variant_selection_method: Varyant seçme yöntemi
     product_filter:
       name: Ad
+      sku: Stok Kodu
+    settings:
+      general:
+        currency: Varsayılan para birimi
+        locale: Dil
+        meta_description: Meta açıklama
+        meta_keywords: Meta anahtar kelimeleri
+        title: Sayfa başlığı
+      taxation:
+        default_tax_zone: Varsayılan vergi bölgesi
     shipment_filter:
       created_at_from: Kaynak
       created_at_to: Hedef
+      number: Sipariş numarası
+      shipping_address: Gönderi adı
+    shipping_method:
+      zone: Bölge
     taxon:
       file: Resim seç
     taxonomy:
@@ -52,3 +74,20 @@ sylius:
       billing_address: Fatura adresi
       different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
       enabled: Etkin
+      first_name: Ad
+      groups: Gruplar
+      last_name: Soyad
+      password: Şifre
+      shipping_address: Teslimat adresi
+    user_filter:
+      query: Arama
+    variant:
+      available_on_demand: İsteğe bağlı olarak mevcuttur
+      depth: Derinliği
+      height: Yüksekliği
+      images: Resimleri
+      on_hand: Mevcut stok
+      price: Fiyatı
+      sku: Stok Kodu
+      weight: Ağırlığı
+      width: Genişliği

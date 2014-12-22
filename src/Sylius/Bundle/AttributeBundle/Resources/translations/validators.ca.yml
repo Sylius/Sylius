@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: "Introduïu el nom d'atribut."
+      min_length: "Nom d'atribut ha de ser com a mínim 1 caràcter llarg. |Nom d'atribut ha de ser com a mínim {{ limit }} caràcters de longitud."
+      max_length: "Nom d'atribut no ha de ser superior a 1 caràcter. |Nom d'atribut no ha de ser més de caràcters {{ limit }}."
+    presentation:
+      not_blank: "Introduïu la presentació d'atribut."
+      min_length: "Presentació de l'atribut ha de ser almenys un caràcter llarg. |Presentació de l'atribut ha de ser com a mínim {{ limit }} caràcters de longitud."
+      max_length: "Presentació de l'atribut no ha de ser més llarga d'un caràcter. |Presentació de l'atribut no ha de ser més de {{ limit }} caràcters."
+  attribute_value:
+    attribute:
+      not_blank: Si us plau seleccioni atribut.
+    value:
+      not_blank: "Introduïu el valor d'atribut."

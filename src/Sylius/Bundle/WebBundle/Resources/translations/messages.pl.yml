@@ -23,6 +23,8 @@ sylius:
       list: Wszystkie Twoje adresy
       update: Edytuj adres
     home:
+      email: ""
+      id: ""
       outline: sylius.account.home.outline
       since: Jesteś naszym klientem od
       welcome: Witaj w swoim panelu
@@ -33,12 +35,16 @@ sylius:
       empty: Nie dokonałeś jeszcze żadnego zamówienia.
       invoice: Faktura
       list: Wszystkie Twoje zamówienia
+      number: ""
+      payment_mode: ""
       placed_at: 'Umieszczone w %at%'
       shipment:
         pending: Oczekujące
         ready: 'Gotowy od %at%'
         returned: 'Zwrócone %at%'
         shipped: 'Wysłane %at%'
+      shipment_mode: ""
+      state: ""
       total: Ogółem
       tracking_number: Numer śledzenia
     title: Moje konto
@@ -74,7 +80,7 @@ sylius:
       products: Twoje produkty
       users: Użytkownicy
     statistics:
-      header: Miesięczne statystyki
+      0: Miesięczne statystyki
       orders_this_month: Zamówienia
       registrations_this_month: Rejestracje
       sales_this_month: Sprzedaż
@@ -282,7 +288,7 @@ sylius:
     update_header: Edytuj grupę
   hide_deleted: Ukryj usunięte
   history:
-    header: Historia
+    0: Historia
     action: Akcja
     author: Autor
     data: Dane
@@ -427,13 +433,13 @@ sylius:
     method: Metoda
     no_results: Brak skonfigurowanych płatności.
     state:
-      header: Status
+      0: Status
       checkout: Koszyk
       completed: Zakończone
-      failed: Niepowodzenie
+      failed: Nieudane
       new: Nowy
       pending: Oczekujący
-      processing: W trakcie przetwarzania
+      processing: Przetwarzany
       unknown: Nieznany
       void: Void
     update_header: Edycja płatności

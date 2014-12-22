@@ -7,8 +7,8 @@ sylius:
       city: المدينة
       company: الشركة
       country: البلد
-      first_name: الاسم الأول
-      last_name: إسم العائلة
+      first_name: الاسم
+      last_name: اللقب
       postcode: الرقم البريدي
       street: الشارع
       province: مقاطعة

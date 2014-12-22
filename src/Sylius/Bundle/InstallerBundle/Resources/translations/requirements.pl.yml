@@ -3,9 +3,7 @@
 
 sylius:
   extensions:
-    header: rozszerzenia
     accelerator:
-      header: Akcelerator
       help: Zainstaluj i włącz PHP akcelerator taki jak APC (wysoce zalecane).
     apc: APC
     ctype: Ctype
@@ -25,26 +23,21 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    header: system plików
     cache:
-      header: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: istnieje
     logs:
-      header: logi
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: nie istnieje
     not_writable: niezapisywalny
     parameters:
-      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: dostawcy
     writable: zapisywalny
   settings:
-    header: Wersja PHP i ustawienia
     any: którekolwiek
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +50,6 @@ sylius:
     short_open_tag: short_open_tag
     timezone: strefa czasowa
     timezone_deprecated:
-      header: Przestarzała strefa czasowa
       help: 'Strefa czasowa %timezone% jest przestarzała. Popraw wpis w pliku php.ini (lista przestarzałych stref czasowych: http://php.net/manual/en/timezones.others.php).'
     version: Wersja PHP
     version_recommanded: Rekomendowana wersja PHP

@@ -28,6 +28,7 @@ sylius:
         country: ประเทศ
         province: จังหวัด
         zone: โซน
+      scope: Scope
     zone_member_country:
       country: ประเทศ
     zone_member_province:

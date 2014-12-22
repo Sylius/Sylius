@@ -1,3 +1,17 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  address:
+    city:
+      max_length: Mesto mora biti daljše od 255 znakov|Mesto mora biti daljše od 255 znakov.
+      min_length: Mesto mora biti dolgo vsaj 2 znaka|Mesto mora biti dolgo vsaj 2 znaka.
+      not_blank: Vnesite mesto.
+    country:
+      not_blank: Izberite državo.
+    first_name:
+      max_length: Ime ne sme biti daljše od 255 znakov|Ime ne sme biti daljše od 255 znakov.
+      min_length: Ime mora biti dolgo vsaj 2 znaka|Ime mora biti dolgo vsaj dva znaka.
+      not_blank: Prosim, vnesite ime.
+    last_name:
+      max_length: Priimek ne sme biti daljši od 255 znakov|Priimek ne sme biti daljši od 255 znakov.

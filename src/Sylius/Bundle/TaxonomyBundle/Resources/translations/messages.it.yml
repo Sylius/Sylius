@@ -7,10 +7,14 @@ sylius:
     taxon:
       description: Descrizione
       name: Nome
+      parent: Genitore
       permalink: Permalink
     taxonomy:
       name: Nome
   taxon:
+    create_taxon: Crea una Categoria Tassonomica
     delete_taxonomy: Eliminare la tassonomia
     manage_taxonomies: Gestire le tassonomie
     no_taxonomies: Nessuna tassonomia da mostrare.
+    no_taxons: Non ci sono categorie tassonomiche da mostrare.
+    update_taxonomy: Aggiornamento tassonomia

@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Kategorinavnet kan ikke være lengre enn {{ limit }} tegn.'
+      min_length: 'Kategorinavnet må være minst {{ limit }} tegn.'
+      not_blank: Angi fraktkategorinavn.
+  shipping_method:
+    calculator:
+      max_length: Maksimal lengde
+      min_length: Minimum lengde
+      not_blank: Kan ikke være tomt
+    name:
+      max_length: 'Fraktmetodenavn kan ikke være lengre enn {{ limit }} tegn.'
+      min_length: 'Fraktmetodenavn må være minst {{ limit }} tegn.'
+      not_blank: Vennligst skriv inn fraktmetodenavn.

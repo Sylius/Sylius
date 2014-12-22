@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backorder: Инвентарная позиция предзаказана
+    sell: Инвентарная позиция реализована.
+    return: Инвентарная позиция возвращена.
+    transition_fail: Это действие не может быть выполнено с текущим состоянием позиции

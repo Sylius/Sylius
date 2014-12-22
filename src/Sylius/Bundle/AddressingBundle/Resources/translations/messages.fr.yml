@@ -28,6 +28,7 @@ sylius:
         country: Pays
         province: Etat
         zone: Zone
+      scope: "Champ d'application"
     zone_member_country:
       country: Pays
     zone_member_province:

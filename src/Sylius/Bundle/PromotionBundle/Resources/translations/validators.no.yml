@@ -1,3 +1,26 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  promotion:
+    description:
+      max_length: 'Kampanjebeskrivelse kan ikke være lengre enn ett tegn. |Kampanjebeskrivelse kan ikke være lengre enn {{ limit }} tegn.'
+      min_length: 'Produktbeskrivelse må være minst ett tegn. |Produktbeskrivelse må være minst {{ limit }} tegn.'
+      not_blank: Angi kampanjebeskrivelse.
+    name:
+      max_length: 'Kampanjenavn kan ikke være lengre enn ett tegn. |Kampanjenavn kan ikke være lengre enn {{ limit }} tegn.'
+      min_length: 'Navnet på prototypen må være minst ett tegn. |Navnet på prototypen må være minst {{ limit }} tegn.'
+      not_blank: Angi kampanjenavn.
+  promotion_coupon:
+    code:
+      max_length: 'Kupongkoden kan ikke være lengre enn ett tegn. |Kupongkoden kan ikke være lengre enn {{ limit }} tegn.'
+      min_length: 'Kupongkoden må være minst ett tegn. |Kupongkoden må være minst {{ limit }} tegn.'
+      not_blank: Angi kupongkode.
+    usage_limit:
+      min: 'Kupongens bruksgrense må være minst {{ limit }}.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'Mengden av kuponger å generere må være minst {{ limit }}.'
+      not_blank: Angi mengden kuponger å generere.
+    usage_limit:
+      min: 'Bruksgrensen av genererte kuponger må være minst {{ limit }}.'

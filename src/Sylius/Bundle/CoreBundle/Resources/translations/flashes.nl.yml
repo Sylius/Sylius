@@ -8,7 +8,8 @@ sylius:
     restricted_zone: Dit product is niet beschikbaar in uw land.
     success: Bedankt voor uw bestelling!
     canceled: Uw betaling is geannuleerd.
-    pending: Uw betaling is momenteel in behandeling.
+    processing: Uw betaling wordt momenteel verwerkt.
+    new: Uw betaling is nieuw.
     failed: Uw betaling is afgewezen.
     unknown: Onbekende betalingsfout.
     out_of_stock: 'Er zijn slechts %quantity% van %name% op voorraad.'

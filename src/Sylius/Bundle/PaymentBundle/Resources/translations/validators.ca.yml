@@ -15,8 +15,6 @@ sylius:
       luhn: El número de targeta de crèdit que heu introduït no és vàlid.
     security_code:
       not_blank: Si us plau, introdueixi el codi de seguretat.
-      max_length: 'Codi CVV de la targeta de crèdit ha de ser entre {{ min }} i {{ max }} caràcters molt de temps.'
-      min_length: 'Codi CVV de la targeta de crèdit ha de ser entre {{ min }} i {{ max }} caràcters.'
     expiry_year:
       not_blank: "Si us plau, seleccioneu l'any de venciment."
   payment_method:

@@ -2,17 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  label:
-    product:
-      name: Nom
-      description: Description
-      properties: Propriétés
-      available_on: Disponible sur
-      meta_keywords: Mots clés
-      meta_description: Méta description
-    property:
+  form:
+    attribute:
       name: Nom interne
       presentation: Présentation
-    prototype:
-      name: Nom
-      properties: Propriétés

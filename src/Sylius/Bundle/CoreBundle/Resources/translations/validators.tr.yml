@@ -1,3 +1,34 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  group:
+    name:
+      max: 'Grup ismi {{ limit }} karakterden uzun olamaz.'
+      min: 'Grup ismi en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      not_blank: Lütfen grup adı giriniz.
+  locale:
+    code:
+      not_blank: Lütfen bölge kodunu giriniz.
+      unique: Bu bölge kodu zaten var.
+  user:
+    first_name:
+      max: 'İsim {{ limit }} karakterden uzun olamaz.'
+      min: 'İsim en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      not_blank: Lütfen adınızı giriniz.
+    last_name:
+      max: 'Soyadı {{ limit }} karakterden daha uzun olamaz.'
+      min: 'Soyadı en az {{ limit }} karakter olmalıdır.'
+      not_blank: Lütfen soyadınızı giriniz.
+  product_variant:
+    price:
+      min: Fiyat negatif olamaz.
+      not_blank: Lütfen fiyatı giriniz.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Lütfen teslimat yöntemi bölgesini giriniz.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Lütfen vergi oranı bölgesini giriniz.

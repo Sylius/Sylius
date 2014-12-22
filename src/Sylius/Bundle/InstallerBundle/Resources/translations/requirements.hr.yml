@@ -3,9 +3,7 @@
 
 sylius:
   extensions:
-    header: Ekstenzije
     accelerator:
-      header: Ubrzivač
       help: Instaliraj i omogući PHP ubrzivač poput APC-a (izrazito preporučeno).
     apc: APC
     ctype: Ctype
@@ -25,26 +23,21 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Tokenizer
   filesystem:
-    header: File system
     cache:
-      header: Cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Postoji
     logs:
-      header: Log
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: Ne postoji
     not_writable: Nije moguće pisati
     parameters:
-      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: vendors
     writable: moguće pisati
   settings:
-    header: PHP verzija i postavke
     any: Bilo koje
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +50,6 @@ sylius:
     short_open_tag: short_open_tag
     timezone: Vremenska zona
     timezone_deprecated:
-      header: Zastarjela vremenska zona
       help: 'Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).'
     version: Verzija PHP-a
     version_recommanded: Preporučena PHP verzija

@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Rodič
+    menu:
+      name: Jméno
+      parent: Rodič
+    menu_block:
+      body: Tělo
+      name: Jméno
+    menu_node_block:
+      content: Obsah
+    redirect_route:
+      name: Jméno
+    reference_block:
+      body: Tělo
+      title: Název
+    route:
+      content: Obsah
+      name: Jméno
+      parent: Rodič
+    simple_block:
+      body: Tělo
+      parent: Rodič
+      title: Název
+    slideshow_block:
+      parent: Rodič
+      title: Název
+    static_content:
+      body: Tělo
+      parent: Rodič
+      title: Název
+    string_block:
+      body: Tělo
+      id: ID
+      name: Jméno

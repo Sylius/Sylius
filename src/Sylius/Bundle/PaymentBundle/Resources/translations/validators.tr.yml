@@ -1,3 +1,28 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  credit_card:
+    cardholder_name:
+      min_length: 'Kart sahibinin adı, en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      not_blank: Kart sahibinin adını giriniz.
+    expiry_month:
+      max_range: 'Kredi kartı son kullanma tarihi ayı {{ min }} ve {{ max }} arasında olmalıdır.'
+      min_range: 'Kredi kartı son kullanma tarihi ayı {{ min }} ve {{ max }} arasında olmalıdır.'
+      not_blank: Lütfen son kullanım tarihinde ayı seçin.
+    number:
+      not_blank: Lütfen kart numarasını girin.
+      luhn: Girdiğiniz kredi kartı numarası geçersizdir.
+    security_code:
+      not_blank: Güvenlik kodunu giriniz.
+      max_length: 'Kredi kartı CVV kodu en az {{ limit }} rakam uzunluğunda olmalıdır.'
+      min_length: 'Kredi kartı CVV kodu {{ limit }} rakamdan uzun olmalıdır.'
+    expiry_year:
+      not_blank: Lütfen son kullanım tarihi yılını seçin.
+  payment_method:
+    gateway:
+      not_blank: Lütfen ödeme yöntemini seçin.
+    name:
+      max_length: 'Ödeme yöntemi adı maksimum {{ limit }} karakter uzunluğunda veya daha az olmalıdır.'
+      min_length: 'Ödeme yöntemi adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      not_blank: Lütfen ödeme yöntemi adı girin.

@@ -20,13 +20,6 @@ sylius:
       max: 'Efternavnet må ikke være længere end {{ limit }} tegn.'
       min: 'Efternavnet skal være mindst {{ limit }} tegn langt.'
       not_blank: Indtast dit efternavn.
-  variant:
-    onHand:
-      min: 'Lagerantal skal være større end {{ limit }}.'
-      not_blank: Angiv venligst lagerantal.
-    price:
-      min: Prisen må ikke være negativ.
-      not_blank: Angiv prisen.
 sylius_shipping:
   method:
     zone:

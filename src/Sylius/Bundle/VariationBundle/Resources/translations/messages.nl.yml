@@ -3,11 +3,8 @@
 
 sylius:
   form:
-    product:
-      options: Opties
     variant:
       presentation: Weergave
-      available_on: Beschikbaar op
     option:
       name: Interne naam
       presentation: Weergave
@@ -15,5 +12,3 @@ sylius:
     option_value:
       add_value: Voeg waarde toe
       value: Waarde
-    prototype:
-      options: Opties

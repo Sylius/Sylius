@@ -9,6 +9,7 @@ sylius:
       country: País
       first_name: Nom
       last_name: Cognoms
+      phone_number: Telèfon
       postcode: Codi postal
       street: Carrer
       province: Província
@@ -28,6 +29,8 @@ sylius:
         country: País
         province: Província
         zone: Zona
+      scope: "Àmbit d'aplicació"
+      select_scope: "Seleccioneu l'àmbit"
     zone_member_country:
       country: País
     zone_member_province:

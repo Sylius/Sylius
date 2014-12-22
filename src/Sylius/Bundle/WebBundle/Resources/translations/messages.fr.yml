@@ -80,7 +80,7 @@ sylius:
       products: Vos produits
       users: Utilisateurs
     statistics:
-      header: Statistiques du mois
+      0: Statistiques du mois
       orders_this_month: Nombre total de commandes
       registrations_this_month: "Nombre total d'inscriptions"
       sales_this_month: Ventes
@@ -288,7 +288,7 @@ sylius:
     update_header: Modifier le groupe
   hide_deleted: Cacher les supprimés
   history:
-    header: Historique
+    0: Historique
     action: Action
     author: Auteur
     data: Données
@@ -433,7 +433,7 @@ sylius:
     method: Moyen de paiement
     no_results: Aucun paiement
     state:
-      header: État
+      0: État
       checkout: Paiement
       completed: Complété
       failed: Échoué

@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Назоў катэгорыі мусіць быць не даўжэйшым за {{ limit }} сымбаляў'
+      min_length: 'Назоў катэгорыі мусіць быць як меней {{ limit }} сымбаляў'
+      not_blank: Калі ласка, увядзіце назоў катэгорыі транспартыроўкі.
+  shipping_method:
+    calculator:
+      max_length: Калі ласка, увядзіце назву катэгорыі транспартыроўкі.
+      min_length: sylius.shipping_method.calculator.мінімальная_даўжыня
+      not_blank: sylius.shipping_method.calculator.без_пропускаў
+    name:
+      max_length: 'Назоў метаду траспартыроўкі мусіць быць не даўжэй за {{ limit }} сымбаляў.'
+      min_length: 'Назоў метаду траспартыроўкі мусіць быць як мінімум {{ limit }} сымбаляў.'
+      not_blank: Калі ласка, увядзіце назоў метаду транспартыроўкі.

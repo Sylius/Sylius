@@ -7,9 +7,7 @@ sylius:
   form:
     configuration:
       database:
-        0: اتصال قاعدة البيانات
         driver:
-          0: برنامج التشغيل
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle

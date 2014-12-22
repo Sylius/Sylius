@@ -1,3 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  product:
+    name:
+      not_blank: Zadejte název produktu.
+      min_length: 'Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.'
+    description:
+      not_blank: Vyplňte popis produktu.

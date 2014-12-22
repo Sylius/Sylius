@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: "Батьківський об'єкт"
+      internal_name: "Внутрішнє ім'я"
+    menu:
+      name: Ім’я
+      parent: "Батьківський об'єкт"
+    menu_block:
+      body: Тіло
+      name: Ім’я
+    menu_node_block:
+      content: Зміст
+      internal_name: "Внутрішнє ім'я"
+    redirect_route:
+      name: Ім’я
+    reference_block:
+      body: Тіло
+      title: Назва
+    route:
+      content: Зміст
+      name: Ім’я
+      parent: "Батьківський об'єкт"
+    simple_block:
+      body: Тіло
+      internal_name: "Внутрішнє ім'я"
+      parent: "Батьківський об'єкт"
+      title: Назва
+    slideshow_block:
+      internal_name: "Внутрішнє ім'я"
+      parent: "Батьківський об'єкт"
+      title: Назва
+    static_content:
+      body: Тіло
+      internal_name: "Внутрішнє ім'я"
+      parent: "Батьківський об'єкт"
+      title: Назва
+    string_block:
+      body: Тіло
+      id: ID
+      name: Ім’я

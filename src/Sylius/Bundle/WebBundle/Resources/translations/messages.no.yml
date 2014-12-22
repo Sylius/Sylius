@@ -1,14 +1,57 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+email:
+  order_confirmation:
+    subject: Ordrebekreftelse
 sylius:
   account:
+    address:
+      action:
+        billing: Standard faktureringsadresse
+        create: Lag en ny adresse
+        delete: Slett
+        edit: Rediger
+        shipping: Sett til standard leveringsadresse
+      create: Lag en ny adresse
+      default:
+        billing: Standard faktureringsadresse
+        no_billing: Ingen standard faktureringsadresse
+        no_shipping: Ingen standard leveringsadresse
+        shipping: Standard leveringsadresse
+      empty: Du har ikke opprettet adresse.
+      list: Alle adressene
+      update: Rediger min adresse
+    home:
+      email: ""
+      id: ""
+      outline: Nyt alle funksjonene som finnes på din personlige side til å vise, spore og administrere alle dine data.
+      since: Du har vært kunde siden
+      welcome: Velkommen til ditt område
     order:
+      created_at: Plassert på
+      details: Nærmere opplysninger om bestillingen
+      download_invoice: Last ned fakturaen
+      empty: Du har ikke bestilt noe enda.
+      invoice: Faktura
+      list: Alle bestillinger
+      number: ""
+      payment_mode: ""
+      placed_at: 'Plassert på %at%'
       shipment:
         pending: Venter
+        ready: 'Klar siden %at%'
+        returned: 'Returnert %at%'
+        shipped: 'Sendt %at%'
+      shipment_mode: ""
+      state: ""
+      total: Totalt
+      tracking_number: Sporingsnummer
+    title: Min konto
   add_to_cart: Legg i handlekurv
   address:
     city: By
+    company: Firma
     country: Land
     firstname: Fornavn
     lastname: Etternavn
@@ -23,26 +66,108 @@ sylius:
   backend:
     alert:
       info: Informasjon
+    dashboard:
+      chart_order_count: Antall ordrer
+      chart_order_total: Ordeverdi
+      header: Administrasjon dashboard
+      orders: Forrige ukes ordrer
+      revenue: Forrige ukes inntekter
+      subheader: Oversikt over butikken
+    logout: Logg ut
+    quick_links:
+      add_product: Nytt produkt
+      orders: Siste ordre
+      products: Produkter
+      users: Brukere
+    statistics:
+      0: Denne månedens statistikk
+      orders_this_month: Totale bestillinger
+      registrations_this_month: Totalt antall registreringer
+      sales_this_month: Salg
+  backend_welcome: 'Hei <b>%name%</b>!'
   block:
-    body: Kropp
+    body: Brødtekst
+    create: Opprett blokk
+    create_header: Oppretter ny innholdsblokk
     id: ID
+    index_header: Innholdsblokker
+    no_results: Det er ingen innholdsblokker å vise.
     title: Tittel
+    update_header: Redigerer innholdsblokk
+    updated_at: Sist oppdatert
   breadcrumb:
+    assortment: Utvalg
+    block:
+      index: Innholdsblokker
+    build: Bygg
+    configuration: Konfigurasjon
+    country:
+      index: Land
+    customers: Kunder
+    edit: Rediger
+    exchange_rate:
+      index: Valutakurser
+    general_settings: Generelle instillinger
+    generate: Opprett
     group:
       index: Grupper
+    inventory:
+      index: Lager
+    locale:
+      index: Nasjonale innstillinger
     new: Ny
+    option:
+      index: Instillinger
+    order:
+      index: Bestillinger
+    page:
+      index: Statiske sider
+    payment:
+      index: Betalinger
+    payment_method:
+      index: Betalingsmetoder
+    product:
+      index: Produkter
+    promotion:
+      index: Kampanjer
+    promotion_coupon:
+      index: Kuponger
     property:
       index: Egenskaper
+    prototype:
+      index: Prototyper
+    sales: Salg
+    shipment:
+      index: Forsendelser
+    shipping_category:
+      index: Fraktkategorier
+    shipping_method:
+      index: Fraktalternativ
+    tax_category:
+      index: Merverdikategorier
+    tax_rate:
+      index: Skattesatser
+    taxation_settings: Beskatningsinnstillinger
+    taxonomy:
+      index: Kategorisering
+    update: Rediger
+    user:
+      index: Brukere
+    zone:
+      index: Soner
+  browse_products: Bla gjennom produkter
   cancel: Avbryt
   cart:
     empty: Handlevognen er tom
     summary:
+      add_coupon: Ok
       checkout: Betaling
       clear: Tøm handlevogn
       grand_total: Total
       product: Produkt
       quantity: Antall
       save: Lagre
+      total: Totalt
       unit_price: Enhetspris
     summary_header: Oppsummering
     total_items: '1 vare|%count% varer'
@@ -68,72 +193,247 @@ sylius:
         no_shipping_charges: Ingen fraktkostnader lagt til
         no_taxes: Ingen mva lagt til
         promotion_discount: Kampanjerabatt
+        promotion_total: Total kampanje
         shipping_address: Leveringsadresse
+        shipping_charges: Fraktkostnader
+        shipping_total: Frakt totalt
+        tax_total: Sum avgifter
+        taxes: Avgifter
+        total: Totalt
       order_item:
         quantity: Antall
+        total: Totalt
+        unit_price: Enhetspris
+      place_order: Legg inn bestilling
       product:
         name: Navn
+    forward: Gå videre
     payment:
       header: Betalingsmetode
+    security:
+      existing_customer: Eksisterende kunde
+      header: 'Logg på butikken <small>eller opprett ny konto</small>'
+      login: Logg inn
+      new_customer: Ny kunde
+      register: Registrer
+    shipping:
+      error: Beklager, men vår butikk kan dessverre ikke besørge frakt til landet som du har valgt.
+      header: Fraktalternativ
+  confirmation:
+    message: Vil du slette dette elementet?
+    title: Bekreft
   country:
+    add_province: Legg til fylke
+    create: Opprett land
+    create_header: Nytt land
     id: ID
+    index_header: Land
+    iso_name: ISO navn
+    manage: Administrer land
     name: Navn
+    no_results: Det er ingen land konfigurert.
+    show_header: Detaljer for land
+    update_header: Rediger land
+  create: Opprett
+  created_at: Opprettet på
+  delete: slett
+  deleted: Slettet
+  edit: Rediger
+  email: E-post
   exchange_rate:
+    create: Opprett valutakurs
+    create_header: Ny valutakurs
+    currency: valuta
     id: ID
+    index_header: Valutakurser
+    no_results: Det er ingen valutakurser å vise.
+    rate: rate
+    update_header: Redigerer valutakurs
+    updated_at: Sist oppdatert
+  filter: Filtrer
   form:
+    cart:
+      coupon: Hvis du har en rabattkupong, skriver du det inn her
+    choose_file: Velg fil
+    frontend:
+      password:
+        confirmation: Bekreft
+        current: Gjeldende passord
+        new: Nytt Passord
+        title: Endre passord
+      profile:
+        title: Endre din personlige informasjon
     login:
       email: E-post
       password: Passord
+    option_value:
+      add_value: Legg til verdi
     profile:
       email: E-post
       firstName: Fornavn
       lastName: Etternavn
   gallery:
     next: Neste
+    previous: Forrige
+    slideshow: Lysbildevisning
+  generate: Opprett
   group:
+    create: Opprett gruppe
+    create_header: Legge til nye brukergrupper
     id: ID
     index_header: Grupper
     name: Navn
+    no_results: Det ikke er noen grupper å vise.
     roles: Roller
+    update_header: Rediger gruppe
+  hide_deleted: Skjul slettet
+  history:
+    0: Historikk
+    action: Handling
+    author: Forfatter
+    data: Data
+    logged_at: Logget på
+    version: Versjon
+  homepage:
+    splash:
+      headline: Velkommen til Sylius
+      subheadline: Moderne netthandel for Symfony2
   inventory_unit:
+    created_at: Opprettet
+    inventory_state: Lagertilstand
     name: Navn
+    no_results: Det er ingen lagerenheter vise.
+    shipping_state: Fraktstatus
     sku: Strekkode
+    updated_at: Sist oppdatert
   locale:
     code: Kode
+    create: Definer språk/land
+    create_header: Legge til nytt språk/land
     enabled: Aktivert
+    index_header: Liste av alle konfigurerte nasjonale innstillinger
+    no_results: Det er ingen språk/land konfigurert.
+    update_header: Redigere språk/land
+    updated_at: Sist oppdatert
+  login: Logg inn
+  login_header: Administrasjon
+  logo: Sylius
+  manage: Administrer
+  meta:
+    backend_title: Sylius dashboard.
+    frontend_description: Sylius er en moderne ecommerce løsning for PHP, basert på Symfony2 rammeverk.
+    frontend_keywords: sylius, e-handel, symfony2, butikk, cart, nettbutikk
+    frontend_title: Sylius, moderne netthandel for Symfony2
+  na: Ikke tilgjengelig
+  newest: Nyeste produkter
   "no": false
+  no_results: Ingen treff
+  option:
+    create: Opprett alternativ
+    create_header: Nytt produktalternativ
+    index_header: Produktalternativer
+    manage: Endre innstillinger
+    name: navn
+    no_results: Det er ingen alternativer konfigurert.
+    presentation: Presentasjon
+    update_header: Redigere alternativet
+    updated_at: Sist oppdatert
+    values: verdier
   order:
     billing_address: Fakturaadresse
+    create: Opprette ordre
+    create_header: Ny ordre
+    created_at: Opprettingstidspunkt
+    general_info: Generell info
     id: ID
+    index_header: Gjeldende ordrer
+    inventory_tracking: Sporing av Inventar
     items_total: Antall varer
+    manage: Behandle ordrer
     no_items: Denne ordren inneholder ingen varer
+    no_results: Du har ingen nye ordrer
+    no_shipments: Det er ingen forsendelser for denne bestillingen
     no_shipping_charges: Ingen fraktkostnader lagt til
     no_taxes: Ingen mva lagt til
     number: Nummer
+    payment: Betaling
     payment_state: Betalingsstatus
+    payment_states:
+      balance_due: Forfalt saldo
+    promotion_total: Total kampanje
+    recent_header: Siste ordrer
+    shipment_state: Forsendelsestatus
     shipment_states:
       pending: Venter
+    shipments: Forsendelser
+    release_inventory: Utgivelselager
+    inventory_unit:
+      backorder: Restordre
+      fulfill: Oppfylle
+      return: Retur
     shipping_address: Leveringsadresse
+    shipping_charges: Fraktkostnader
+    shipping_total: Frakt totalt
+    show_header: Ordre
     state:
+      cart_locked: Handlevogn låst
       checkout: Gå til kassen
+      order_confimed: Ordre bekreftet
+      ordered: Bestilt
+    tax_total: Sum avgifter
+    taxes: Avgifter
+    total: Totalt
+    update_header: Redigere rekkefølge
     user: Bruker
   shipment:
+    ship: Frakt
+    created_at: Opprettet på
     id: ID
+    index_header: Forsendelser
+    inventory_state: Lagertilstand
+    manage: Behandle forsendelser
+    method: Metode
+    modified: Endret
     name: Navn
+    no_items: Det finnes ingen elementer å vise.
+    no_results: Det er ingen forsendelser å vise.
+    order: Ordre
+    show_header: Forsendelsedetaljer
     sku: Strekkode
+    state: Tilstand
+    tracking_code: Sporingskode
+    update: Rediger
+    update_header: Rediger forsendelse
+    updated_at: Sist oppdatert
   order_item:
+    product: Produkt
     quantity: Antall
     sellable: Produkt
+    total: Totalt
     unit_price: Enhetspris
+  out_of_stock: Ikke på lager
   page:
     body: Kropp
+    create: Opprett ny side
+    create_header: Lage nytt statisk innhold
     id: ID
+    index_header: Sider
+    no_results: Det finnes ingen statiske sider til å vise.
     title: Tittel
+    update_header: Sist oppdatert
   password: Passord
   payment:
     amount: Beløp
+    create: Opprette betaling
+    create_header: Ny betaling
+    created_at: Opprettet på
     id: ID
+    index_header: Betalinger
+    manage: Behandle betalinger
+    method: Metode
+    no_results: Det er ingen betalinger konfigurert.
     state:
+      0: Tilstand
       checkout: Gå til kassen
       completed: Fullført
       failed: Mislyktes
@@ -142,73 +442,279 @@ sylius:
       processing: Behandler
       unknown: Ukjent
       void: Ugyldig
+    update_header: Rediger betaling
+    updated_at: Sist oppdatert
   payment_method:
+    create: Opprett betalingsmåte
+    create_header: Ny betalingsmåte
+    enabled: Er aktivert?
+    gateway: gateway
     id: ID
+    index_header: Betalingsmetoder
     name: Navn
+    no_results: Ingen betalingsmetoder er konfigurert.
+    update_header: Rediger betalingsmåte
+    updated_at: Sist oppdatert
   product:
+    add_property: Legg til egenskap
     available_on: Tilgjengelig
     available_on_demand: Tilgjengelig på forespørsel
+    categorization: Kategorisering
+    contain_variants: Inneholder varianter
+    create: Lag produkt
+    create_header: Nytt produkt
     description: Beskrivelse
+    generate_variants: Generer varianter
+    index_by_taxon_header: 'Produkter <small>kategorisert under "%taxon%" gruppe</small>'
+    index_header: 'Produkter <small>indeks over alle produkter i butikken</small>'
+    manage: Administrere produkter
     name: Navn
+    no_description: '<i>Ingen beskrivelse...</i>'
+    no_images: Det er ingen bilder for dette produktet
+    no_options: Det er ingen alternativer for dette produktet
+    no_properties: Dette produktet har ingen egenskaper definert
+    no_results: Det er ingen produkter å vise.
+    no_shipping_category: Ingen fraktkategori
+    no_short_description: '<i>Ingen kort beskrivelse</i>'
+    no_sku: Ingen vareenhet
+    no_tax_category: Ingen skattekategori
+    no_taxons: Det er ingen grupper for dette produktet
+    options: Instillinger
+    price: Utsalgspris
     properties: Egenskaper
     restricted_zone: Begrenset sone
     shipping_category: Fraktkategori
+    show: Vis mer
+    show_header: 'Produktdetaljer <small>Ser på produkt "<strong>%product%</strong>"</small>'
+    show_in_store: Vis i butikk
     sku: Strekkode
     stock: På lager
     tabs:
+      categorization: Kategorisering
       images: Bilder
+      options: Instillinger
       product: Produkt
       properties: Egenskaper
     tax_category: Skattekategori
+    unavailable: Ikke tilgjengelig
+    update_header: Endrer produkt
+    updated_at: Sist oppdatert
     variant_selection_method: Metode for valg av variant
+    view_details: 'Se på %product% -detaljer.'
+  product_not_available_in_zone: Ikke tilgjengelig i ditt land
   promotion:
     actions: Handlinger
+    add_action: Legg til handling
+    add_rule: Legg til regel
+    coupon_based: Kupongbasert?
+    create: Opprett kampanje
+    create_header: Ny kampanje
+    created_at: Opprettet på
     description: Beskrivelse
     ends_at: Slutter på
+    general_info: Generell info
     id: ID
+    index_header: Nåværende kampanjer
+    manage: Behandle kampanjer
     name: Navn
+    no_results: Ingen kampanjer er konfigurert.
     rules: Regler
+    show_header: Kampanjedetaljer
     starts_at: Starter på
+    update_header: Endrer kampanje
+    updated_at: Sist oppdatert
     usage_limit: Bruksgrense
+    used: Brukt
   promotion_action:
+    configuration: Konfigurasjon
     type: Type
+  promotion_coupon:
+    create: Legg til rabattkupong
+    create_header: Lag ny rabattkupong
+    generate: Generer kuponger
+    generate_header: Genererer kuponger
+    index: List ut kuponger
+    index_header: Kuponger
+    no_results: Ingen kuponger å vise.
+    total_results:
+      Total: '%total%'
+    update_header: Endrer kupong
   promotion_rule:
+    configuration: Konfigurasjon
     type: Type
+  property:
+    add_choice: Legg til valg
+    create: Opprett egenskap
+    create_header: Ny produktegenskap
+    index_header: Produktegenskaper
+    manage: Behandle egenskaper
+    name: navn
+    no_results: Ingen egenskaper er konfigurert.
+    presentation: Presentasjon
+    type: Type
+    update_header: Endrer egenskap
+    updated_at: Sist oppdatert
+  prototype:
+    build: Bygg prototype
+    build_header: Bygger produkt fra prototype
+    create: Opprett prototype
+    create_header: Ny prototype
+    index_header: Produktprototyper
+    name: navn
+    no_results: Ingen prototyper definert.
+    options: Opsjoner
+    properties: Egenskaper
+    update_header: Endrer prototype
+    updated_at: Sist oppdatert
+  province:
+    provinces: Fylker
+  remember_me: Husk meg?
+  save_changes: Lagre endringer
   search: Søk
+  settings:
+    general_header: Generelle instillinger
+    taxation_header: Beskatningsinnstillinger
+  shipment_category:
+    manage: Behandle fraktkategorier
   shipping_address: Leveringsadresse
   shipping_category:
+    create: Opprett fraktkategori
+    create_header: Ny fraktkategori
     id: ID
+    index_header: Fraktkategorier
+    manage: Behandle fraktkategorier
     name: Navn
+    no_results: Ingen fraktkategorier er konfigurert.
+    update_header: Endrer fraktkategori
+    updated_at: Sist oppdatert
   shipping_method:
+    calculator: Kalkulator
+    category: Kategori
+    create: Opprett fraktmetode
+    create_header: Ny fraktmetode
+    enabled: Er aktivert?
     id: ID
+    index_header: Leveringsmetoder
+    manage: Behandle fraktmetoder
     name: Navn
+    no_results: Ingen fraktmetoder er konfigurerte.
+    show_header: Fraktmetodedetaljer
+    update_header: Endrer fraktmetode
+    updated_at: Sist oppdatert
     zone: Sone
+  shop_by: Butikk av
+  show: Detaljer
+  show_all: Vis alle
+  show_deleted: Vis slettede
+  stockable:
+    index_header: 'Lagerbeholdning <small>Her kan du se gjeldende lagernivå</small>'
+    name: navn
+    no_results: Der er ingen lagervarer å vise.
+    on_hand: Lagerantall
+    on_hold: På vent
+    sku: SKU
+    updated_at: Sist oppdatert
   tax_category:
+    create: Oprett momskategori
+    create_header: Ny momskategori
     description: Beskrivelse
     id: ID
+    index_header: Beskatningskategorier
+    manage: Administrer momskategorier
     name: Navn
+    no_description: Ingen beskrivelse
+    no_results: Ingen skattekategorier konfigurert.
+    update_header: Endrer skattekategori
+    updated_at: Sist oppdatert
   tax_rate:
     amount: Beløp
+    calculator: Kalkulator
+    category: Kategori
+    create: Opprett skatterate
+    create_header: Ny skatterate
+    included_in_price: Inkludert i prisen?
+    index_header: Skattesatser
+    manage: Behandle skatterater
     name: Navn
+    no_results: Ingen skatterater er konfigurert.
+    show_header: Skatteratedetaljer
+    update_header: Oppdaterer skatterate
+    updated_at: Sist oppdatert
     zone: Sone
   taxon:
+    create: Opprett taksonomi
+    create_header: Ny taksonomi
+    image: Velg bilde
     name: Navn
+    no_image: Ingen bilde for denne taksonomi
+    no_results: Ingen taksonomier å vise.
+    product_index_header: 'Produkter kategorisert som "%name%"'
+    update_header: Endrer taksonomi
   taxonomy:
+    create: Opprett taksonomi
+    create_header: Ny taksonomi
+    image: Velg bilde
+    index_header: 'Kategorisering <small>Her ser du de definerte taksonomier</small>'
+    manage: Administrer taksonomier
     name: Navn
+    no_image: Ingen bilde for denne taksonomi
+    no_results: Ingen taksonomier definert.
+    show_header: 'Taksonomi <small><strong>%name%</strong></small>'
+    update_header: Endrer taksonomi
+  total_quantity: Totalt antall
   unknown: Ukjent
   user:
     billing_address: Fakturaadresse
+    create: Opprett bruker
+    create_header: Ny bruker
+    email: E-post
+    enabled: Bekreftet?
+    filter:
+      all: Vis alle brukere
+      unconfirmed: Ubekreftede brukerkontoer
     first_name: Fornavn
+    general_info: 'Bruker "%username%" generell info'
     id: ID
+    index_header: 'Brukere <small>Liste over alle brukere registrert i butikken</small>'
+    last_login: Siste pålogging
     last_name: Etternavn
+    impersonate: Logg inn som denne brukeren
+    manage: Administrere brukere
+    no_results: Ingen brukere å vise.
+    order:
+      no_results: Ingen ordrer for denne brukeren å vise.
+    orders: Brukerbestillinger
+    recent_header: Nylige brukere
+    registration_date: Registreringdato
     shipping_address: Leveringsadresse
+    show_header: Brukerdetaljer
+    update_header: Endrer bruker
     username: Brukernavn
   variant:
+    add_image: Legg til bilde
+    availability: Tilgjengelighet
     available_on_demand: Tilgjengelig på forespørsel
+    create: Lag variant
+    create_header: Ny produktvariant
+    delete_image: Slett bilde
+    last_update: Sist oppdatert
+    no_results: Ingen varianter å vise.
+    options: Instillinger
     price: Pris
     sku: Strekkode
     stock: På lager
+    update_header: Endrer variant
   "yes": true
   zone:
+    add_member: Legg til medlem
+    create: Opprett sone
+    create_header: Ny sone
+    index_header: Soner
+    manage: Behandle soner
     name: Navn
+    no_results: Ingen soner er definert.
+    show_header: Sonedetaljer
     type: Type
+    update_header: Endrer sone
+  zone_member:
+    members: Medlemmer

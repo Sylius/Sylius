@@ -6,39 +6,39 @@ sylius:
     city:
       max_length: Der Name der Stadt darf nicht länger als 255 Zeichen sein|Der Name der Stadt darf nicht länger als 255 Zeichen sein.
       min_length: Der Name der Stadt muss mindestens 2 Zeichen lang sein|Der Name der Stadt muss mindestens 2 Zeichen lang sein.
-      not_blank: Bitte geben Sie Ihre Stadt an.
+      not_blank: Bitte geben Sie eine Stadt an.
     country:
-      not_blank: Bitte wählen Sie Ihr Land aus.
+      not_blank: Bitte wählen Sie ein Land aus.
     first_name:
       max_length: Der Vorname darf nicht länger als 255 Zeichen sein|Der Vorname darf nicht länger als 255 Zeichen sein.
       min_length: Der Vorname muss mindestens 2 Zeichen lang sein|Der Vorname muss mindestens 2 Zeichen lang sein.
-      not_blank: Bitte geben Sie Ihren Vornamen an.
+      not_blank: Bitte geben Sie einen Vornamen an.
     last_name:
       max_length: Der Nachname darf nicht länger als 255 Zeichen sein|Der Nachname darf nicht länger als 255 Zeichen sein.
       min_length: Der Nachname muss mindestens 2 Zeichen lang sein|Der Nachname muss mindestens 2 Zeichen lang sein.
-      not_blank: Bitte geben Sie Ihren Nachnamen an.
+      not_blank: Bitte geben Sie einen Nachnamen an.
     postcode:
       max_length: Die Postleitzahl darf nicht länger als 255 Zeichen sein|Die Postleitzahl darf nicht länger als 255 Zeichen sein.
       min_length: Die Postleitzahl muss mindestens 2 Zeichen lang sein|Die Postleitzahl muss mindestens 2 Zeichen lang sein.
-      not_blank: Bitte geben Sie Ihre Postleitzahl an.
+      not_blank: Bitte geben Sie eine Postleitzahl an.
     province:
-      valid: Bitte wählen Sie ein korrektes Bundesland aus.
+      valid: Bitte wählen Sie ein korrekten Kanton aus.
     street:
-      max_length: Die Straße darf nicht länger als 255 Zeichen sein|Die Straße darf nicht länger als 255 Zeichen sein.
-      min_length: Die Straße muss mindestens 2 Zeichen lang sein|Die Straße muss mindestens 2 Zeichen lang sein.
-      not_blank: Bitte geben Sie Ihre Straße an.
+      max_length: Die Strasse darf nicht länger als 255 Zeichen sein|Die Strasse darf nicht länger als 255 Zeichen sein.
+      min_length: Die Strasse muss mindestens 2 Zeichen lang sein|Die Strasse muss mindestens 2 Zeichen lang sein.
+      not_blank: Bitte geben Sie eine Strasse an.
     not_shippable: Diese Adresse ist keine gültige Versandadresse.
   country:
     iso_name:
       not_blank: Bitte geben Sie den ISO Code des Landes an.
     name:
       max_length: Der Name des Landes darf nicht länger als 255 Zeichen sein|Der Name des Landes darf nicht länger als 255 Zeichen sein.
-      not_blank: Bitte geben Sie Ihr Land an.
+      not_blank: Bitte geben Sie ein Land an.
   province:
     name:
-      max_length: Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein|Der Name des Bundeslandes darf nicht länger als 255 Zeichen sein.
-      min_length: Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 2 Zeichen lang sein.
-      not_blank: Bitte geben Sie Ihr Bundesland an.
+      max_length: Der Name des Kantons darf nicht länger als 255 Zeichen sein|Der Name des Kantons darf nicht länger als 255 Zeichen sein.
+      min_length: Der Name des Kantons muss mindestens 2 Zeichen lang sein|Der Name des Kantons muss mindestens 2 Zeichen lang sein.
+      not_blank: Bitte geben Sie einen Kanton an.
   zone:
     members:
       min_count: 'Bitte geben Sie mindestens {{ limit }} Versandgebiete an.'

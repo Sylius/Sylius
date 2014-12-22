@@ -9,7 +9,7 @@ sylius:
     address:
       action:
         billing: Сделать адресом для выставления счёта по-умолчанию
-        create: Создать новый адрес
+        create: Добавить адрес
         delete: sylius.account.address.action.delete
         edit: Редактировать
         shipping: Сделать адресом доставки по-умолчанию
@@ -80,7 +80,7 @@ sylius:
       products: Товары
       users: Пользователи
     statistics:
-      header: Статистика
+      0: Статистика
       orders_this_month: Заказов в этом месяце
       registrations_this_month: Регистраций в этом месяце
       sales_this_month: Продаж в этом месяце
@@ -288,7 +288,7 @@ sylius:
     update_header: Редактировать группу
   hide_deleted: Скрыть удаленные
   history:
-    header: Журнал
+    0: Журнал
     action: Действие
     author: Автор
     data: Данные
@@ -352,11 +352,14 @@ sylius:
     manage: Управление заказами
     no_items: Заказ не содержит товаров
     no_results: У вас нет новых заказов
+    no_shipments: Для данного заказа нет отправлений
     no_shipping_charges: Нет затрат на доставку
     no_taxes: Налогами не облагается
     number: Номер
     payment: Оплата
     payment_state: Статус платежа
+    payment_states:
+      balance_due: Сумма к оплате
     promotion_total: Сумма скидки
     recent_header: Недавние заказы
     shipment_state: Статус доставки
@@ -380,6 +383,7 @@ sylius:
     update_header: Редактирование заказа
     user: Пользователь
   shipment:
+    ship: Доставка
     created_at: created at
     id: ID
     index_header: Доставка
@@ -389,11 +393,12 @@ sylius:
     modified: modified
     name: Название
     no_items: Нет элементов для отображения.
+    no_results: Нет отправлений для отображения.
     order: заказ
     show_header: Детали посылки
-    sku: Идентификатор товарной позиции
+    sku: Артикул
     state: Cтатус
-    tracking_code: Код отслеживания
+    tracking_code: Код для отслеживания
     update: Редактировать
     update_header: Редактирование отгрузки
     updated_at: последнее изменение
@@ -425,7 +430,7 @@ sylius:
     method: Метод
     no_results: Способы оплаты не настроены.
     state:
-      header: Cтатус
+      0: Cтатус
       checkout: Сверка
       completed: Завершен
       failed: Провален
@@ -444,6 +449,8 @@ sylius:
     id: ID
     index_header: Методы оплаты
     name: Название
+    no_results: Способы оплаты не настроены.
+    update_header: Изменение способа метода оплаты
     updated_at: Последнее обновление
   product:
     add_property: Добавить свойство
@@ -454,6 +461,7 @@ sylius:
     create_header: Новый товар
     description: Описание
     generate_variants: Генерировать варианты
+    index_by_taxon_header: 'Товары <small>категории "%taxon%"</small>'
     index_header: 'Товары <small>Список всех товаров в вашем магазине</small>'
     manage: Редактировать товары
     name: Название

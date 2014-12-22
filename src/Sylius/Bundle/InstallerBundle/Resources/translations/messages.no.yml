@@ -22,7 +22,7 @@ sylius:
         port: Port
         user: Bruker
       locale:
-        header: Språkinnstillinger
+        header: Nasjonale innstillinger
         currency: Valuta
         locale: Språk
       mailer:

@@ -8,7 +8,8 @@ sylius:
     restricted_zone: Dette produktet er ikke tilgjengelig i ditt land.
     success: Takk for din ordre!
     canceled: Betalingen ble avbrutt.
-    pending: Betalingen står på vent.
+    processing: Betalingen behandles for øyeblikket.
+    new: Din betaling er ny.
     failed: Betaling ble avslått.
     unknown: Ukjent betalingsproblem oppsto.
     out_of_stock: 'Det er kun %quantity% %name% tilgjengelig på lager.'

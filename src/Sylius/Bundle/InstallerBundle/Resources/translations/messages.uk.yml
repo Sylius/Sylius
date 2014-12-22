@@ -8,7 +8,6 @@ sylius:
   form:
     configuration:
       database:
-        header: Підключення бази даних
         driver:
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
@@ -16,12 +15,13 @@ sylius:
           postgresql: PostgreSQL
           sqlite: SQLite
         host: Хост
+        name: Ім’я
         password: Пароль
         port: Порт
         user: Користувач
       locale:
-        header: Налаштування локалі
         currency: Валюта
+        locale: Локаль
       mailer:
         host: Хост
         password: Пароль
@@ -33,6 +33,7 @@ sylius:
         user: Користувач
     setup:
       email: Email
+      load_fixtures: Завантажити фікстури
       plain_password: Пароль
       username: "Ім'я користувача"
   process:
@@ -43,6 +44,8 @@ sylius:
           install: Встановити
           next: Наступний
         table:
+          current: поточний
+          required: необхідний
           status: статус
       configure:
         header: 'Конфігурації <small>інсталятора Sylius</small>'

@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: Sunum
+    option:
+      name: Dahili isim
+      presentation: Sunum
+      values: Olası değerler
+    option_value:
+      add_value: Değer ekle
+      value: Değer

@@ -3,8 +3,53 @@
 
 sylius:
   extensions:
+    accelerator:
+      help: Встановити й увімкнути PHP-прискорювач типу APC (рекомендується).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Установити й увімкнути розширення %extension%.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl (інтернаціоналізація)
+    json_encode: JSON
+    mbstring: Multibyte String
     "off": false
     "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Сесія
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: Існує
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: Не існує
+    not_writable: відсутня можливість запису
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: Вендори
+    writable: має можливість запису
   settings:
+    any: будь-які
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: не є застарілим
     "off": false
     "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: часовий пояс
+    timezone_deprecated:
+      help: 'Часовий пояс %timezone% тепер вважається застарілим. Виправте ваш файл PHP.ini (список із застарілими часовими поясами можна знайти на http://php.net/manual/en/timezones.others.php).'
+    version: PHP версія
+    version_recommanded: Рекомендований PHP версія

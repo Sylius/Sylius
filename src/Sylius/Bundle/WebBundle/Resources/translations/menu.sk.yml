@@ -9,16 +9,30 @@ sylius:
         configuration: Konfigurácia
         countries: Krajiny
         customer: Zákazníci
+        dashboard: Nástenka
         exchange_rates: Výmenné kurzy
         general_settings: Základné nastavenia
         homepage: Zobraziť obchod
+        locales: Jazyky
         new_order: Pridať novú objednávku
+        new_promotion: Pridať novú akciu
         options: Spravovať možnosti produktov
         orders: Aktuálne objednávky
+        payment_methods: Spôsoby platby
         payments: Platby
         products: Produkty
+        promotions: Akcie
+        properties: Konfigurácia vlastností
+        prototypes: Prototypy produktov
         sales: Objednávky
         shipments: Zásielky
+        shipping_categories: Kategórie doručenia
+        shipping_methods: Spôsoby doručenia
+        stockables: Úrovne zásob
+        tax_categories: Kategórie zdaňovania
+        tax_rates: Daňové sadzby
+        taxation_settings: Nastavenie zdaňovania
+        taxonomies: Kategorizácia
         users: Používatelia
         zones: Zóny
       sidebar:
@@ -28,21 +42,37 @@ sylius:
         content: Obsah
         countries: Krajiny
         customer: Zákazníci
+        dashboard: Nástenka
         exchange_rates: Výmenné kurzy
         general_settings: Základné nastavenia
         groups: Skupiny
+        locales: Jazyky
         new_order: Pridať novú objednávku
+        new_promotion: Pridať novú akciu
+        options: Spravovať možnosti
         orders: Aktuálne objednávky
         pages: Stránky
+        payment_methods: Spôsoby platby
         payments: Platby
         products: Produkty
+        promotions: Akcie
+        properties: Konfigurácia vlastností
+        prototypes: Prototypy produktov
         sales: Objednávky
         shipments: Zásielky
+        shipping_categories: Kategórie doručenia
+        shipping_methods: Spôsoby doručenia
+        stockables: Úrovne zásob
+        tax_categories: Kategórie zdaňovania
+        tax_rates: Daňové sadzby
+        taxation_settings: Nastavenie zdaňovania
+        taxonomies: Kategorizácia
         users: Používatelia
         zones: Zóny
   frontend:
     menu:
       account:
+        addresses: Môj adresár
         homepage: Domov
         orders: Moje objednávky / moje faktúry
         password: Moje heslo
