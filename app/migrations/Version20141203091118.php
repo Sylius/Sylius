@@ -17,8 +17,10 @@ class Version20141203091118 extends AbstractMigration implements ContainerAwareI
 
     public function setContainer(ContainerInterface $container = null)
     {
-        $this->container     = $container;
-        $this->defaultLocale = $container->getParameter('sylius.locale');
+        if (null !== $container) {
+            $this->container     = $container;
+            $this->defaultLocale = $container->getParameter('sylius.locale');
+        }
     }
 
     public function up(Schema $schema)
@@ -26,21 +28,21 @@ class Version20141203091118 extends AbstractMigration implements ContainerAwareI
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->connection->executeQuery('CREATE TABLE sylius_product_attribute_translation (id INT AUTO_INCREMENT NOT NULL, translatable_id INT NOT NULL, presentation VARCHAR(255) NOT NULL, locale VARCHAR(255) NOT NULL, INDEX IDX_93850EBA2C2AC5D3 (translatable_id), UNIQUE INDEX sylius_product_attribute_translation_uniq_trans (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $product_attributes = $this->connection->fetchAll('SELECT * FROM sylius_product_attribute');
-        foreach ($product_attributes as $product_attribute) {
+        $productAttributes = $this->connection->fetchAll('SELECT * FROM sylius_product_attribute');
+        foreach ($productAttributes as $productAttribute) {
             $this->connection->insert('sylius_product_attribute_translation', array(
-                'presentation'    => $product_attribute['presentation'],
-                'translatable_id' => $product_attribute['id'],
+                'presentation'    => $productAttribute['presentation'],
+                'translatable_id' => $productAttribute['id'],
                 'locale'          => $this->defaultLocale
             ));
         }
 
         $this->connection->executeQuery('CREATE TABLE sylius_product_option_translation (id INT AUTO_INCREMENT NOT NULL, translatable_id INT NOT NULL, presentation VARCHAR(255) NOT NULL, locale VARCHAR(255) NOT NULL, INDEX IDX_CBA491AD2C2AC5D3 (translatable_id), UNIQUE INDEX sylius_product_option_translation_uniq_trans (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $product_options = $this->connection->fetchAll('SELECT * FROM sylius_product_option');
-        foreach ($product_options as $product_option) {
+        $productOptions = $this->connection->fetchAll('SELECT * FROM sylius_product_option');
+        foreach ($productOptions as $productOption) {
             $this->connection->insert('sylius_product_option_translation', array(
-                'presentation'    => $product_option['presentation'],
-                'translatable_id' => $product_option['id'],
+                'presentation'    => $productOption['presentation'],
+                'translatable_id' => $productOption['id'],
                 'locale'          => $this->defaultLocale
             ));
         }
@@ -56,36 +58,36 @@ class Version20141203091118 extends AbstractMigration implements ContainerAwareI
         }
 
         $this->connection->executeQuery('CREATE TABLE sylius_product_translation (id INT AUTO_INCREMENT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, meta_keywords VARCHAR(255) DEFAULT NULL, meta_description VARCHAR(255) DEFAULT NULL, locale VARCHAR(255) NOT NULL, short_description VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_105A908989D9B62 (slug), INDEX IDX_105A9082C2AC5D3 (translatable_id), UNIQUE INDEX sylius_product_translation_uniq_trans (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $sylius_products = $this->connection->fetchAll('SELECT * FROM sylius_product');
-        foreach ($sylius_products as $sylius_product) {
+        $syliusProducts = $this->connection->fetchAll('SELECT * FROM sylius_product');
+        foreach ($syliusProducts as $syliusProduct) {
             $this->connection->insert('sylius_product_translation', array(
-                'name'              => $sylius_product['name'],
-                'slug'              => $sylius_product['slug'],
-                'description'       => $sylius_product['description'],
-                'meta_keywords'     => $sylius_product['meta_keywords'],
-                'meta_description'  => $sylius_product['meta_description'],
-                'short_description' => $sylius_product['short_description'],
-                'translatable_id'   => $sylius_product['id'],
+                'name'              => $syliusProduct['name'],
+                'slug'              => $syliusProduct['slug'],
+                'description'       => $syliusProduct['description'],
+                'meta_keywords'     => $syliusProduct['meta_keywords'],
+                'meta_description'  => $syliusProduct['meta_description'],
+                'short_description' => $syliusProduct['short_description'],
+                'translatable_id'   => $syliusProduct['id'],
                 'locale'            => $this->defaultLocale
             ));
         }
 
         $this->connection->executeQuery('CREATE TABLE sylius_shipping_method_translation (id INT AUTO_INCREMENT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) NOT NULL, locale VARCHAR(255) NOT NULL, INDEX IDX_2B37DB3D2C2AC5D3 (translatable_id), UNIQUE INDEX sylius_shipping_method_translation_uniq_trans (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $shipping_methods = $this->connection->fetchAll('SELECT * FROM sylius_shipping_method');
-        foreach ($shipping_methods as $shipping_method) {
+        $shippingMethods = $this->connection->fetchAll('SELECT * FROM sylius_shipping_method');
+        foreach ($shippingMethods as $shippingMethod) {
             $this->connection->insert('sylius_shipping_method_translation', array(
-                'name'            => $shipping_method['name'],
-                'translatable_id' => $shipping_method['id'],
+                'name'            => $shippingMethod['name'],
+                'translatable_id' => $shippingMethod['id'],
                 'locale'          => $this->defaultLocale
             ));
         }
 
         $this->connection->executeQuery('CREATE TABLE sylius_taxonomy_translation (id INT AUTO_INCREMENT NOT NULL, translatable_id INT NOT NULL, name VARCHAR(255) NOT NULL, locale VARCHAR(255) NOT NULL, INDEX IDX_9F3F90D92C2AC5D3 (translatable_id), UNIQUE INDEX sylius_taxonomy_translation_uniq_trans (translatable_id, locale), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
-        $sylius_taxonomys = $this->connection->fetchAll('SELECT * FROM sylius_taxonomy');
-        foreach ($sylius_taxonomys as $sylius_taxonomy) {
+        $syliusTaxonomies = $this->connection->fetchAll('SELECT * FROM sylius_taxonomy');
+        foreach ($syliusTaxonomies as $syliusTaxonomy) {
             $this->connection->insert('sylius_taxonomy_translation', array(
-                'name'            => $sylius_taxonomy['name'],
-                'translatable_id' => $sylius_taxonomy['id'],
+                'name'            => $syliusTaxonomy['name'],
+                'translatable_id' => $syliusTaxonomy['id'],
                 'locale'          => $this->defaultLocale
             ));
         }
@@ -128,83 +130,83 @@ class Version20141203091118 extends AbstractMigration implements ContainerAwareI
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->connection->executeQuery('ALTER TABLE sylius_country ADD name VARCHAR(255) NOT NULL');
-        $country_translations = $this->connection->fetchAll('SELECT * FROM sylius_country_translation WHERE locale="' . $this->defaultLocale . '"');;
-        foreach ($country_translations as $country_translation) {
+        $countryTranslations = $this->connection->fetchAll('SELECT * FROM sylius_country_translation WHERE locale="' . $this->defaultLocale . '"');;
+        foreach ($countryTranslations as $countryTranslation) {
             $this->connection->update(
                 'sylius_country',
-                array('name' => $country_translation['name']),
-                array('id' => $country_translation['translatable_id'])
+                array('name' => $countryTranslation['name']),
+                array('id' => $countryTranslation['translatable_id'])
             );
         }
 
         $this->connection->executeQuery('ALTER TABLE sylius_product ADD name VARCHAR(255) NOT NULL, ADD slug VARCHAR(255) NOT NULL, ADD description LONGTEXT NOT NULL, ADD meta_keywords VARCHAR(255) DEFAULT NULL, ADD meta_description VARCHAR(255) DEFAULT NULL, ADD short_description VARCHAR(255) DEFAULT NULL');
-        $product_translations = $this->connection->fetchAll('SELECT * FROM sylius_product_translation WHERE locale="' . $this->defaultLocale . '"');
-        foreach ($product_translations as $product_translation) {
+        $productTranslations = $this->connection->fetchAll('SELECT * FROM sylius_product_translation WHERE locale="' . $this->defaultLocale . '"');
+        foreach ($productTranslations as $productTranslation) {
             $this->connection->update(
                 'sylius_product',
                 array(
-                    'name'              => $product_translation['name'],
-                    'slug'              => $product_translation['slug'],
-                    'description'       => $product_translation['description'],
-                    'meta_keywords'     => $product_translation['meta_keywords'],
-                    'meta_description'  => $product_translation['meta_description'],
-                    'short_description' => $product_translation['short_description'],
+                    'name'              => $productTranslation['name'],
+                    'slug'              => $productTranslation['slug'],
+                    'description'       => $productTranslation['description'],
+                    'meta_keywords'     => $productTranslation['meta_keywords'],
+                    'meta_description'  => $productTranslation['meta_description'],
+                    'short_description' => $productTranslation['short_description'],
                 ),
-                array('id' => $product_translation['translatable_id'])
+                array('id' => $productTranslation['translatable_id'])
             );
         }
         $this->connection->executeQuery('CREATE UNIQUE INDEX UNIQ_677B9B74989D9B62 ON sylius_product (slug)');
 
         $this->connection->executeQuery('ALTER TABLE sylius_product_attribute ADD presentation VARCHAR(255) NOT NULL');
-        $product_attributes_translations = $this->connection->fetchAll('SELECT * FROM sylius_product_attribute_translation WHERE locale="' . $this->defaultLocale . '"');;
-        foreach ($product_attributes_translations as $product_attributes_translation) {
+        $productAttributesTranslations = $this->connection->fetchAll('SELECT * FROM sylius_product_attribute_translation WHERE locale="' . $this->defaultLocale . '"');;
+        foreach ($productAttributesTranslations as $productAttributesTranslation) {
             $this->connection->update(
                 'sylius_product_attribute',
-                array('presentation' => $product_attributes_translation['presentation']),
-                array('id' => $product_attributes_translation['translatable_id'])
+                array('presentation' => $productAttributesTranslation['presentation']),
+                array('id' => $productAttributesTranslation['translatable_id'])
             );
         }
 
         $this->connection->executeQuery('ALTER TABLE sylius_product_option ADD presentation VARCHAR(255) NOT NULL');
-        $product_option_translations = $this->connection->fetchAll('SELECT * FROM sylius_product_option_translation WHERE locale="' . $this->defaultLocale . '"');;
-        foreach ($product_option_translations as $product_option_translation) {
+        $productOptionTranslations = $this->connection->fetchAll('SELECT * FROM sylius_product_option_translation WHERE locale="' . $this->defaultLocale . '"');;
+        foreach ($productOptionTranslations as $productOptionTranslation) {
             $this->connection->update(
                 'sylius_product_option',
-                array('presentation' => $product_option_translation['presentation']),
-                array('id' => $product_option_translation['translatable_id'])
+                array('presentation' => $productOptionTranslation['presentation']),
+                array('id' => $productOptionTranslation['translatable_id'])
             );
         }
 
         $this->connection->executeQuery('ALTER TABLE sylius_shipping_method ADD name VARCHAR(255) NOT NULL');
-        $shipping_methods_translations = $this->connection->fetchAll('SELECT * FROM sylius_shipping_method_translation WHERE locale="' . $this->defaultLocale . '"');;
-        foreach ($shipping_methods_translations as $shipping_methods_translation) {
+        $shippingMethodsTranslations = $this->connection->fetchAll('SELECT * FROM sylius_shipping_method_translation WHERE locale="' . $this->defaultLocale . '"');;
+        foreach ($shippingMethodsTranslations as $shippingMethodsTranslation) {
             $this->connection->update(
                 'sylius_shipping_method',
-                array('name' => $shipping_methods_translation['name']),
-                array('id' => $shipping_methods_translation['translatable_id'])
+                array('name' => $shippingMethodsTranslation['name']),
+                array('id' => $shippingMethodsTranslation['translatable_id'])
             );
         }
 
         $this->connection->executeQuery('ALTER TABLE sylius_taxonomy ADD name VARCHAR(255) NOT NULL');
-        $taxonomy_translations = $this->connection->fetchAll('SELECT * FROM sylius_taxonomy_translation WHERE locale="' . $this->defaultLocale . '"');;
-        foreach ($taxonomy_translations as $taxonomy_translation) {
+        $taxonomyTranslations = $this->connection->fetchAll('SELECT * FROM sylius_taxonomy_translation WHERE locale="' . $this->defaultLocale . '"');;
+        foreach ($taxonomyTranslations as $taxonomyTranslation) {
             $this->connection->update(
                 'sylius_taxonomy',
-                array('name' => $taxonomy_translation['name']),
-                array('id' => $taxonomy_translation['translatable_id'])
+                array('name' => $taxonomyTranslation['name']),
+                array('id' => $taxonomyTranslation['translatable_id'])
             );
         }
 
         $this->connection->executeQuery('ALTER TABLE sylius_taxon ADD name VARCHAR(255) NOT NULL, ADD slug VARCHAR(255) NOT NULL, ADD permalink VARCHAR(255) NOT NULL, ADD description LONGTEXT DEFAULT NULL');
-        $taxon_translations = $this->connection->fetchAll('SELECT * FROM sylius_taxon_translation WHERE locale="' . $this->defaultLocale . '"');;
-        foreach ($taxon_translations as $taxon_translation) {
+        $taxonTranslations = $this->connection->fetchAll('SELECT * FROM sylius_taxon_translation WHERE locale="' . $this->defaultLocale . '"');;
+        foreach ($taxonTranslations as $taxonTranslation) {
             $this->connection->update(
                 'sylius_taxon',
-                array('name'        => $taxon_translation['name'],
-                      'slug'        => $taxon_translation['slug'],
-                      'permalink'   => $taxon_translation['permalink'],
-                      'description' => $taxon_translation['description']),
-                array('id' => $taxon_translation['translatable_id'])
+                array('name'        => $taxonTranslation['name'],
+                    'slug'        => $taxonTranslation['slug'],
+                    'permalink'   => $taxonTranslation['permalink'],
+                    'description' => $taxonTranslation['description']),
+                array('id' => $taxonTranslation['translatable_id'])
             );
         }
         $this->connection->executeQuery('CREATE UNIQUE INDEX UNIQ_CFD811CA989D9B62 ON sylius_taxon (slug)');

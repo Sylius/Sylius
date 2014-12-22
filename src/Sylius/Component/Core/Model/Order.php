@@ -71,7 +71,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotion coupons.
      *
-     * @var BaseCouponInterface[]
+     * @var Collection|BaseCouponInterface[]
      */
     protected $promotionCoupons;
 
@@ -455,7 +455,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Gets the last updated shipment of the order
      *
-     * @return null|ShipmentInterface
+     * @return false|ShipmentInterface
      */
     public function getLastShipment()
     {

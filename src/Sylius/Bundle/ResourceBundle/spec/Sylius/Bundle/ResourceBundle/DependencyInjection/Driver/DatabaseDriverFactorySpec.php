@@ -27,25 +27,19 @@ class DatabaseDriverFactorySpec extends ObjectBehavior
 
     function it_should_create_a_orm_driver_by_default(ContainerBuilder $container)
     {
-        $this::get(SyliusResourceBundle::DRIVER_DOCTRINE_ORM, $container, 'prefix', 'resource', 'default')
-            ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineORMDriver');
-    }
-
-    function it_should_create_a_orm_driver(ContainerBuilder $container)
-    {
-        $this::get(SyliusResourceBundle::DRIVER_DOCTRINE_ORM, $container, 'prefix', 'resource', 'default')
+        $this::get($container, 'prefix', 'resource', 'default')
             ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineORMDriver');
     }
 
     function it_should_create_a_odm_driver(ContainerBuilder $container)
     {
-        $this::get(SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM, $container, 'prefix', 'resource', 'default')
+        $this::get($container, 'prefix', 'resource', 'default', SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM)
             ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineODMDriver');
     }
 
     function it_should_create_a_phpcr_driver(ContainerBuilder $container)
     {
-        $this::get(SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM, $container, 'prefix', 'resource', 'default')
+        $this::get($container, 'prefix', 'resource', 'default', SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM)
             ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrinePHPCRDriver');
     }
 }

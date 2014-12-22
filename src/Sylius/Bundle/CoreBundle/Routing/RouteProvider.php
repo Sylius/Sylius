@@ -184,7 +184,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * @param string $entity
+     * @param object $entity
      * @param string $fieldName
      *
      * @return string
