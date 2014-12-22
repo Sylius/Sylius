@@ -66,8 +66,7 @@ class DoctrineORMDriverSpec extends ObjectBehavior
     function it_should_create_definition_and_get_repository_in_container(ContainerBuilder $container)
     {
         $container->hasParameter("prefix.repository.resource.class")
-            ->willReturn(true)
-            ->shouldBeCalled();
+            ->willReturn(true);
 
         $container->getParameter("prefix.repository.resource.class")
             ->shouldBeCalled();

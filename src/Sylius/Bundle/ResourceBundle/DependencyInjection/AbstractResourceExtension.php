@@ -19,6 +19,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -35,6 +36,7 @@ abstract class AbstractResourceExtension extends Extension
     const CONFIGURE_DATABASE   = 2;
     const CONFIGURE_PARAMETERS = 4;
     const CONFIGURE_VALIDATORS = 8;
+    const CONFIGURE_FORMS      = 16;
 
     const CONFIG_XML  = 'xml';
     const CONFIG_YAML = 'yml';
@@ -74,7 +76,7 @@ abstract class AbstractResourceExtension extends Extension
         $configure = self::CONFIGURE_LOADER
     ) {
         $processor = new Processor();
-        $config    = $processor->processConfiguration($configuration, $config);
+        $config = $processor->processConfiguration($configuration, $config);
 
         $config = $this->process($config, $container);
 
@@ -102,6 +104,10 @@ abstract class AbstractResourceExtension extends Extension
             $this->mapValidationGroupParameters($config['validation_groups'], $container);
         }
 
+        if ($configure & self::CONFIGURE_FORMS) {
+            $this->registerFormTypes($config, $container);
+        }
+
         if ($container->hasParameter('sylius.config.classes')) {
             $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
         }
@@ -123,12 +129,43 @@ abstract class AbstractResourceExtension extends Extension
             foreach ($serviceClasses as $service => $class) {
                 $container->setParameter(
                     sprintf(
-                        '%s.%s.%s.class',
+                        '%s.%s.%s%s.class',
                         $this->applicationName,
-                        $service === 'form' ? 'form.type' : $service,
-                        $model
+                        in_array($service, array('form', 'choice_form')) ? 'form.type' : $service,
+                        $model,
+                        $service === 'choice_form' ? '_choice' : ''
                     ),
                     $class
+                );
+            }
+        }
+    }
+
+    /**
+     * Register resource form types
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function registerFormTypes(array $config, ContainerBuilder $container)
+    {
+        foreach ($config['classes'] as $model => $serviceClasses) {
+            // registering resource choice form types
+            if (!empty($serviceClasses['choice_form'])) {
+                $name = sprintf('%s_%s_choice', $this->applicationName, $model);
+                $definition = new Definition($serviceClasses['choice_form']);
+                $definition
+                    ->setArguments(array(
+                        $serviceClasses['model'],
+                        $config['driver'],
+                        $name
+                    ))
+                    ->addTag('form.type', array('alias' => $name))
+                ;
+
+                $container->setDefinition(
+                    sprintf('%s.form.type.%s_choice', $this->applicationName, $model),
+                    $definition
                 );
             }
         }
