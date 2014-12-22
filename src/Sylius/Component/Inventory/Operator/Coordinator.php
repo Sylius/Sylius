@@ -110,6 +110,15 @@ class Coordinator
 
     private function createShipment(Package $package)
     {
+
+        //TODO sync inventoryUnits
+        //FOr now just remove the inventoryUnits from the orderItems.
+        //Will be added again after shipments are added.
+        foreach($this->order->getInventoryUnits() as $unit) {
+            $orderItem = $unit->getOrderItem();
+            $orderItem->removeInventoryUnit($unit);
+        }
+
         /* @var $shipment ShipmentInterface */
         $shipment = $this->shipmentRepository->createNew();
         $shipment->setLocation($package->getLocation());
