@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\LocaleBundle;
 
+use Sylius\Bundle\LocaleBundle\DependencyInjection\Compiler\OverrideDateTypeCompilerPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Locale bundle.
