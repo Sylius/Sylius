@@ -26,15 +26,6 @@ class SyliusLocaleBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $container->addCompilerPass(new OverrideDateTypeCompilerPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getSupportedDrivers()
     {
         return array(

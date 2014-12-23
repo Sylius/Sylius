@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\LocaleBundle\Form\Type;
+namespace Sylius\Bundle\LocaleBundle\Form\Extension;
 
 use Sylius\Bundle\LocaleBundle\Form\DataTransformer\ArrayGregorianToCalendarSystemTransformer;
 use Sylius\Bundle\LocaleBundle\Form\DataTransformer\StringGregorianToCalendarSystemTransformer;
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
-use Symfony\Component\Form\Extension\Core\Type\DateType as BaseDateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\AbstractTypeExtension;
 
 /**
- * Class DateType
+ * Class DateTypeExtension
  *
- * Calendar-aware date form type
+ * Extension for DateType to add calendar-aware date capabilities
  */
-class DateType extends BaseDateType {
+class DateTypeExtension extends AbstractTypeExtension {
 
     /**
      * @var LocaleHelper
@@ -118,7 +118,7 @@ class DateType extends BaseDateType {
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
         return 'date';
     }
