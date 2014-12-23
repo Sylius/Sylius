@@ -77,6 +77,12 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     protected function isUsedCode($code)
     {
-        return null !== $this->repository->findOneBy(array('code' => $code));
+        $this->manager->getFilters()->disable('softdeleteable');
+
+        $isUsed = null !== $this->repository->findOneBy(array('code' => $code));
+
+        $this->manager->getFilters()->enable('softdeleteable');
+
+        return $isUsed;
     }
 }
