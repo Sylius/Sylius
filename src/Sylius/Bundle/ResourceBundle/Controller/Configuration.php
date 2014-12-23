@@ -257,7 +257,7 @@ class Configuration
      */
     public function isDeleted()
     {
-        return (bool) $this->parameters->get('deletion', false);
+        return (bool) $this->parameters->get('deleted', false);
     }
 
     public function isLimited()
