@@ -27,11 +27,4 @@ interface CouponGeneratorInterface
      * @param Instruction        $instruction
      */
     public function generate(PromotionInterface $promotion, Instruction $instruction);
-
-    /**
-     * Generate unique code.
-     *
-     * @return string
-     */
-    public function generateUniqueCode();
 }

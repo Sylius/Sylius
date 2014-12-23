@@ -34,15 +34,15 @@ class CouponSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function its_code_should_be_mutable()
+    function its_number_should_be_mutable()
     {
-        $this->setCode('xxx');
-        $this->getCode()->shouldReturn('xxx');
+        $this->setNumber('xxx');
+        $this->getNumber()->shouldReturn('xxx');
     }
 
-    function it_should_not_have_code_by_default()
+    function it_should_not_have_number_by_default()
     {
-        $this->getCode()->shouldReturn(null);
+        $this->getNumber()->shouldReturn(null);
     }
 
     function it_should_have_no_usage_limit_by_default()

@@ -44,6 +44,8 @@
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType</parameter>
         <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType</parameter>
         <parameter key="sylius.form.transformer.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer</parameter>
+
+        <parameter key="sylius.generator.promotion_coupon.class">Sylius\Component\Promotion\Generator\CouponGenerator</parameter>
     </parameters>
 
     <services>
@@ -144,8 +146,8 @@
             <argument>%sylius.validation_group.promotion_coupon_generate_instruction%</argument>
             <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
         </service>
+
         <service id="sylius.generator.promotion_coupon" class="%sylius.generator.promotion_coupon.class%">
-            <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />
         </service>
     </services>

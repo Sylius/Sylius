@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Sequence\Number;
+namespace Sylius\Component\Sequence\Generator;
 
 use Sylius\Component\Sequence\Model\SequenceInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
- * Default order number generator.
+ * Base number generator.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -23,6 +23,16 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  */
 abstract class AbstractGenerator implements GeneratorInterface
 {
+    /**
+     * @var string
+     */
+    protected $formatCase = GeneratorInterface::CASE_MIXED;
+
+    /**
+     * @var string
+     */
+    protected $sequenceFormat = GeneratorInterface::FORMAT_MIXED;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +45,22 @@ abstract class AbstractGenerator implements GeneratorInterface
         $subject->setNumber($this->generateNumber($sequence->getIndex(), $subject));
 
         $sequence->incrementIndex();
+    }
+
+    /**
+     * @param string $format
+     */
+    public function setFormatCase($format)
+    {
+        $this->formatCase = $format;
+    }
+
+    /**
+     * @param mixed $format
+     */
+    public function setSequenceFormat($format)
+    {
+        $this->sequenceFormat = $format;
     }
 
     /**

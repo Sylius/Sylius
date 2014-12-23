@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\EventListener;
+namespace Sylius\Bundle\SequenceBundle\EventListener;
 
-use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener as DoctrineNumberListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -20,38 +20,38 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class OrderNumberListener
+class NumberListener
 {
     /**
-     * Order number listener
+     * Doctrine number listener.
      *
-     * @var NumberListener
+     * @var DoctrineNumberListener
      */
     protected $listener;
 
     /**
      * Constructor.
      *
-     * @param NumberListener $listener
+     * @param DoctrineNumberListener $listener
      */
-    public function __construct(NumberListener $listener)
+    public function __construct(DoctrineNumberListener $listener)
     {
         $this->listener = $listener;
     }
 
     /**
-     * Use generator to add a proper number to order.
+     * Use generator to add a proper number to subject entity.
      *
      * @param GenericEvent $event
      */
-    public function generateOrderNumber(GenericEvent $event)
+    public function generateNumber(GenericEvent $event)
     {
-        $order = $event->getSubject();
+        $subject = $event->getSubject();
 
-        if (null !== $order->getNumber()) {
+        if (null !== $subject->getNumber()) {
             return;
         }
 
-        $this->listener->enableEntity($order);
+        $this->listener->enableEntity($subject);
     }
 }

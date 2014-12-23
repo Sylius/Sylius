@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Sequence\Number;
+namespace spec\Sylius\Component\Sequence\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -23,7 +23,7 @@ class SequentialGeneratorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Sequence\Number\SequentialGenerator');
+        $this->shouldHaveType('Sylius\Component\Sequence\Generator\SequentialGenerator');
     }
 
     function it_generates_000001_number_for_first_subject(

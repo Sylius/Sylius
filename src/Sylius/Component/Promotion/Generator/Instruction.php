@@ -18,19 +18,29 @@ namespace Sylius\Component\Promotion\Generator;
  */
 class Instruction
 {
-    protected $amount;
+    /**
+     * @var int
+     */
+    protected $amount = 5;
+
+    /**
+     * @var int
+     */
     protected $usageLimit;
 
-    public function __construct()
-    {
-        $this->amount = 5;
-    }
-
+    /**
+     * @return int
+     */
     public function getAmount()
     {
         return $this->amount;
     }
 
+    /**
+     * @param int $amount
+     *
+     * @return self
+     */
     public function setAmount($amount)
     {
         $this->amount = $amount;
@@ -38,11 +48,19 @@ class Instruction
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getUsageLimit()
     {
         return $this->usageLimit;
     }
 
+    /**
+     * @param int $usageLimit
+     *
+     * @return self
+     */
     public function setUsageLimit($usageLimit)
     {
         $this->usageLimit = $usageLimit;

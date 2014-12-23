@@ -18,7 +18,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" type="string" />
+        <field name="number" column="number" type="string" />
         <field name="usageLimit" column="usage_limit" type="integer" nullable="true" />
         <field name="used" type="integer" />
 

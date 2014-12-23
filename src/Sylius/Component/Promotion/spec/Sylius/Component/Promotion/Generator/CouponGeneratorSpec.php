@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository, ObjectManager $manager)
+    function let(ObjectManager $manager)
     {
-        $this->beConstructedWith($repository, $manager);
+        $this->beConstructedWith($manager);
     }
 
     function it_should_be_initializable()
@@ -40,7 +40,7 @@ class CouponGeneratorSpec extends ObjectBehavior
     }
 
     function it_should_generate_coupons_according_to_instruction(
-        $repository,
+        RepositoryInterface $repository,
         $manager,
         PromotionInterface $promotion,
         CouponInterface $coupon,
@@ -53,9 +53,9 @@ class CouponGeneratorSpec extends ObjectBehavior
         $repository->findOneBy(Argument::any())->willReturn(null);
 
         $coupon->setPromotion($promotion)->shouldBeCalled();
-        $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
 
+        $manager->getRepository(Argument::any())->willReturn($repository);
         $manager->persist($coupon)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 

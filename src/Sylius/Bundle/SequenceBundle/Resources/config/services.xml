@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
@@ -8,10 +19,11 @@
     <parameters>
         <parameter key="sylius.registry.number_generator.class">Sylius\Component\Sequence\Registry\GeneratorRegistry</parameter>
 
-        <parameter key="sylius.sequence.number_generator.interface">Sylius\Component\Sequence\Number\GeneratorInterface</parameter>
+        <parameter key="sylius.sequence.number_generator.interface">Sylius\Component\Sequence\Generator\GeneratorInterface</parameter>
 
-        <parameter key="sylius.sequence.sequential_number_generator.class">Sylius\Component\Sequence\Number\SequentialGenerator</parameter>
-        <parameter key="sylius.sequence.hash_number_generator.class">Sylius\Component\Sequence\Number\HashGenerator</parameter>
+        <parameter key="sylius.sequence.number_generator.amazon_hash.class">Sylius\Component\Sequence\Generator\AmazonHashGenerator</parameter>
+        <parameter key="sylius.sequence.number_generator.hash.class">Sylius\Component\Sequence\Generator\HashGenerator</parameter>
+        <parameter key="sylius.sequence.number_generator.sequential.class">Sylius\Component\Sequence\Generator\SequentialGenerator</parameter>
     </parameters>
 
     <services>
@@ -19,6 +31,6 @@
             <argument>%sylius.sequence.number_generator.interface%</argument>
         </service>
 
-        <service id="sylius.sequence.sequential_number_generator" class="%sylius.sequence.sequential_number_generator.class%" />
+        <service id="sylius.sequence.number_generator.sequential" class="%sylius.sequence.number_generator.sequential.class%" />
     </services>
 </container>

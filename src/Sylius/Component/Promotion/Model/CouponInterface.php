@@ -11,27 +11,15 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
+
 /**
  * Coupon model interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface CouponInterface
+interface CouponInterface extends SequenceSubjectInterface
 {
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode();
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     */
-    public function setCode($code);
-
     /**
      * Get usage limit
      *

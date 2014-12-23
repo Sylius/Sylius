@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Sequence\Number;
+namespace Sylius\Component\Sequence\Generator;
 
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
- * Default order number generator.
+ * Sequential number generator.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -53,8 +53,6 @@ class SequentialGenerator extends AbstractGenerator implements GeneratorInterfac
      */
     protected function generateNumber($index, SequenceSubjectInterface $subject)
     {
-        $number = $this->startNumber + $index;
-
-        return str_pad($number, $this->numberLength, 0, STR_PAD_LEFT);
+        return str_pad($this->startNumber + $index, $this->numberLength, 0, STR_PAD_LEFT);
     }
 }
