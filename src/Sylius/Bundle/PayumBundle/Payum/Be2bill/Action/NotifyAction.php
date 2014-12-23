@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Payum\Core\Bridge\Symfony\Reply\HttpResponse;
-use Payum\Core\Request\Notify;
 use Payum\Be2Bill\Api;
+use Payum\Core\Bridge\Symfony\Reply\HttpResponse;
 use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\Notify;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\GetStatus;

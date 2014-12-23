@@ -57,6 +57,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
             new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
+            new \Sylius\Bundle\SearchBundle\SyliusSearchBundle(),
 
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
@@ -88,6 +89,7 @@ abstract class Kernel extends BaseKernel
             new \FOS\RestBundle\FOSRestBundle(),
 
             new \FOS\UserBundle\FOSUserBundle(),
+            new \FOS\ElasticaBundle\FOSElasticaBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),

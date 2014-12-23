@@ -1,0 +1,12 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+{% from 'SyliusWebBundle:Frontend/Macros:searchResult.html.twig' import multi_model_grid %}
+{% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
+
+{% block content %}
+    {% if results %}
+        {{ pagination(results) }}
+        {{ multi_model_grid(results) }}
+        {{ pagination(results) }}
+    {% endif %}
+{% endblock %}
+

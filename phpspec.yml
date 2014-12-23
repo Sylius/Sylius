@@ -43,6 +43,7 @@ suites:
     ProductBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/PromotionBundle }
     ResourceBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/ResourceBundle }
+    SearchBundle     : { namespace: Sylius, spec_path: src/Sylius/Bundle/SearchBundle }
     SequenceBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/SettingsBundle }
     ShippingBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/ShippingBundle }

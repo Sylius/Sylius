@@ -58,7 +58,8 @@
         "white-october/pagerfanta-bundle":      "~1.0",
         "winzou/state-machine-bundle":          "~0.2",
         "willdurand/hateoas-bundle":            "1.0.*@dev",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "friendsofsymfony/elastica-bundle": "~3.0.2"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
@@ -111,6 +112,8 @@
         "sylius/registry": "self.version",
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
+        "sylius/search": "self.version",
+        "sylius/search-bundle": "self.version",
         "sylius/sequence": "self.version",
         "sylius/sequence-bundle": "self.version",
         "sylius/settings-bundle": "self.version",

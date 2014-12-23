@@ -43,6 +43,11 @@ class ProductContext extends DefaultContext
             if (isset($data['sku'])) {
                 $product->setSku($data['sku']);
             }
+
+            if (isset($data['description'])) {
+                $product->setDescription($data['description']);
+            }
+
             if (isset($data['quantity'])) {
                 $product->getMasterVariant()->setOnHand($data['quantity']);
             }

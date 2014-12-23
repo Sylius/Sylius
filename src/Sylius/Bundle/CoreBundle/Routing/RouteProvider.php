@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Routing;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\Common\Util\ClassUtils;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\DoctrineProvider;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
@@ -19,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

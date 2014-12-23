@@ -20,7 +20,14 @@
         {{ form_row(form.price) }}
         {{ form_row(form.pricingCalculator) }}
         {% if form.pricingConfiguration is defined %}
-        {{ form_row(form.pricingConfiguration) }}
+            {% if form.pricingCalculator.vars.value == 'volume_based' %}
+                <div>
+                    {{ form_label(form.pricingConfiguration) }}
+                    {% include "SyliusWebBundle::Backend/ProductVariant/Form/_volume_based_config.html.twig" %}
+                </div>
+            {% else %}
+                {{ form_row(form.pricingConfiguration) }}
+            {% endif %}
         {% endif %}
         <hr />
         {{ form_row(form.availableOnDemand) }}
