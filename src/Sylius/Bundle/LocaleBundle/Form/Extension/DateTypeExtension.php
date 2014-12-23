@@ -44,8 +44,6 @@ class DateTypeExtension extends AbstractTypeExtension {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         if ($this->localeHelper->getCalendar() === 'gregorian') {
             // We only need to alter default behaviour when
             // we're having a traditional calendar system.
@@ -76,18 +74,20 @@ class DateTypeExtension extends AbstractTypeExtension {
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         if ('single_text' === $options['widget']) {
             // Native browsers do not support different calendar systems
+            // so we have to use "text" type instead of "date" for the input.
             if ($this->localeHelper->getCalendar() !== 'gregorian') {
                 // We only need to alter default behaviour when
                 // we're having a traditional calendar system.
-                $options['html5'] = false;
+                $view->vars['type'] = 'text';
             }
         }
-
-        parent::finishView($view, $form, $options);
     }
 
     private function translateChoices(FormBuilderInterface $builder, $fieldName, $pattern)
