@@ -30,8 +30,12 @@ class ElasticsearchFinder extends AbstractFinder
      */
     private $resultSetSize = 100;
 
-    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, $targetIndex, QueryLoggerInterface $queryLogger)
-    {
+    public function __construct(
+        SearchIndexRepository $searchRepository,
+        $config, $productRepository,
+        $targetIndex,
+        QueryLoggerInterface $queryLogger
+    ) {
         $this->searchRepository = $searchRepository;
         $this->config = $config;
         $this->productRepository = $productRepository;
@@ -86,7 +90,13 @@ class ElasticsearchFinder extends AbstractFinder
             $this->initializeFacetGroup($this->facetGroup);
         }
 
-        $elasticaQuery = $this->compileElasticaTaxonQuery($query->getAppliedFilters(), $this->config, $query->getTaxon()->getName(), $this->targetTypes);
+        $elasticaQuery = $this->compileElasticaTaxonQuery(
+            $query->getAppliedFilters(),
+            $this->config,
+            $query->getTaxon()->getName(),
+            $this->targetTypes
+        );
+
         $elasticaQuery->setSize($this->resultSetSize);
 
         $objects = $this->targetIndex->search($elasticaQuery);

@@ -31,7 +31,7 @@ class AddressController extends FOSRestController
     /**
      * Get collection of user's addresses.
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $view = $this
             ->view()

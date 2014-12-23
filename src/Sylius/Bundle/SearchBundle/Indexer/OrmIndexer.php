@@ -83,7 +83,7 @@ class OrmIndexer implements IndexerInterface
     /**
      * {@inheritdoc}
      */
-    public function populate(EntityManager $em = null)
+    public function populate(EntityManager $em)
     {
         $this->setEntityManager($em);
 

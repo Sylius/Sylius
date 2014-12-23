@@ -21,11 +21,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class DatabaseDriverFactory
 {
     public static function get(
-        $type = SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ContainerBuilder $container,
         $prefix,
         $resourceName,
         $managerName,
+        $type = SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         $templates = null
     ) {
         switch ($type) {

@@ -62,11 +62,11 @@ class SyliusResourceExtension extends Extension
             list($prefix, $resourceName) = explode('.', $name);
 
             DatabaseDriverFactory::get(
-                $config['driver'],
                 $container,
                 $prefix,
                 $resourceName,
                 isset($config['object_manager']) ? $config['object_manager'] : 'default',
+                $config['driver'],
                 array_key_exists('templates', $config) ? $config['templates'] : null
             )->load($config['classes']);
         }

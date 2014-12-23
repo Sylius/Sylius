@@ -24,9 +24,9 @@ use Doctrine\ORM\Query\SqlWalker;
 class MatchAgainstFunction extends FunctionNode
 {
     /**
-     * @var null
+     * @var array
      */
-    protected $pathExp = null;
+    protected $pathExp = array();
 
     /**
      * @var null

@@ -23,14 +23,14 @@ class InstallCommand extends ContainerAwareCommand
         $output->writeln('');
 
         $this
-            ->checkStep($input, $output)
+            ->checkStep($output)
             ->setupStep($input, $output)
         ;
 
         $output->writeln('<info>Sylius has been successfully installed.</info>');
     }
 
-    protected function checkStep(InputInterface $input, OutputInterface $output)
+    protected function checkStep(OutputInterface $output)
     {
         $output->writeln('<info>Checking system requirements.</info>');
 

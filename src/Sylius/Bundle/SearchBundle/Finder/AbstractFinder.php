@@ -117,7 +117,7 @@ abstract class AbstractFinder implements FinderInterface
     }
 
     /**
-     * @param string $targetIndex
+     * @param object $targetIndex
      *
      * @return $this
      */

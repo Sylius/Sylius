@@ -175,11 +175,11 @@ abstract class AbstractResourceExtension extends Extension
         foreach ($config['classes'] as $model => $classes) {
             if (array_key_exists('model', $classes)) {
                 DatabaseDriverFactory::get(
-                    $driver,
                     $container,
                     $this->applicationName,
                     $model,
                     $manager,
+                    $driver,
                     isset($config['templates'][$model]) ? $config['templates'][$model] : null
                 )->load($classes);
             }

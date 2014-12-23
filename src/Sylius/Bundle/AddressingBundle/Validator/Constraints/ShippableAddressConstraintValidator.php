@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 
 /**
  * Validator which validates if an address is shippable
@@ -36,6 +37,7 @@ class ShippableAddressConstraintValidator extends ConstraintValidator
         $propertyPath = $this->context->getPropertyPath();
 
         foreach (iterator_to_array($this->context->getViolations()) as $violation) {
+            /** @var ConstraintViolationInterface $violation */
             if (0 === strpos($violation->getPropertyPath(), $propertyPath)) {
                 return;
             }
@@ -49,11 +51,9 @@ class ShippableAddressConstraintValidator extends ConstraintValidator
     /**
      * Override this method to implement your logic
      *
-     * @param AddressInterface $address
-     *
      * @return boolean
      */
-    protected function isShippable(AddressInterface $address)
+    protected function isShippable()
     {
         return true;
     }

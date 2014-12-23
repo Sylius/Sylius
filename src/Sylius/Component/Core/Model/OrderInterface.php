@@ -190,7 +190,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      *
      * @param $state
      *
-     * @return PaymentInterface
+     * @return PaymentInterface|false
      */
     public function getLastPayment($state = PaymentInterface::STATE_NEW);
 

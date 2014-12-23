@@ -34,7 +34,7 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Currency repository.
      *
-     * @var RepositoryInterface
+     * @var CurrencyProviderInterface
      */
     protected $currencyProvider;
 
@@ -93,11 +93,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Builds frontend main menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createMainMenu(Request $request)
+    public function createMainMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -211,11 +209,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Builds frontend taxonomies menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createTaxonomiesMenu(Request $request)
+    public function createTaxonomiesMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -261,11 +257,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Builds frontend social menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createSocialMenu(Request $request)
+    public function createSocialMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -295,11 +289,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Creates user account menu
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createAccountMenu(Request $request)
+    public function createAccountMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(

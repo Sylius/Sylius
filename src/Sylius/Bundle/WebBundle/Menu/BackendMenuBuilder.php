@@ -25,11 +25,9 @@ class BackendMenuBuilder extends MenuBuilder
     /**
      * Builds backend main menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createMainMenu(Request $request)
+    public function createMainMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -69,11 +67,9 @@ class BackendMenuBuilder extends MenuBuilder
     /**
      * Builds backend sidebar menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createSidebarMenu(Request $request)
+    public function createSidebarMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
