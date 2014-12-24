@@ -23,23 +23,41 @@
             <index columns="sold" />
         </indexes>
 
-        <field name="sku" column="sku" type="string" nullable="true" />
+        <field name="sku" column="sku" type="string" nullable="true"/>
 
-        <field name="onHold" column="on_hold" type="integer" />
-        <field name="onHand" column="on_hand" type="integer" />
-        <field name="sold" column="sold" type="integer" />
-        <field name="availableOnDemand" column="available_on_demand" type="boolean" />
-
+        <field name="onHold" column="on_hold" type="integer">
+            <gedmo:versioned/>
+        </field>
+        <field name="onHand" column="on_hand" type="integer">
+            <gedmo:versioned/>
+        </field>
+        <field name="sold" column="sold" type="integer">
+            <gedmo:versioned/>
+        </field>
+        <field name="availableOnDemand" column="available_on_demand" type="boolean">
+            <gedmo:versioned/>
+        </field>
         <field name="price" column="price" type="integer">
             <gedmo:versioned />
         </field>
-        <field name="pricingCalculator" column="pricing_calculator" type="string" />
-        <field name="pricingConfiguration" column="pricing_configuration" type="array" />
-
-        <field name="width" column="width" type="float" nullable="true" />
-        <field name="height" column="height" type="float" nullable="true" />
-        <field name="depth" column="depth" type="float" nullable="true" />
-        <field name="weight" column="weight" type="float" nullable="true" />
+        <field name="pricingCalculator" column="pricing_calculator" type="string">
+            <gedmo:versioned/>
+        </field>
+        <field name="pricingConfiguration" column="pricing_configuration" type="array">
+            <gedmo:versioned/>
+        </field>
+        <field name="width" column="width" type="float" nullable="true">
+            <gedmo:versioned/>
+        </field>
+        <field name="height" column="height" type="float" nullable="true">
+            <gedmo:versioned/>
+        </field>
+        <field name="depth" column="depth" type="float" nullable="true">
+            <gedmo:versioned/>
+        </field>
+        <field name="weight" column="weight" type="float" nullable="true">
+            <gedmo:versioned/>
+        </field>
 
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductVariantImageInterface" mapped-by="variant">
             <cascade>
