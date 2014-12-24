@@ -54,6 +54,10 @@ class LocaleContext implements LocaleContextInterface
      */
     public function getLocale()
     {
+        if (!$this->storage->hasData(self::STORAGE_KEY)) {
+            return $this->getDefaultLocale();
+        }
+
         return $this->storage->getData(self::STORAGE_KEY, $this->defaultLocale);
     }
 

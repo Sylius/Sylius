@@ -37,8 +37,17 @@ class LocaleContextSpec extends ObjectBehavior
         $this->getDefaultLocale()->shouldReturn('pl_PL');
     }
 
-    function it_gets_locale_from_session($storage)
+    function it_gets_default_locale_if_storage_have_no_data($storage)
     {
+        $storage->hasData(Argument::any())->willReturn(false);
+
+        $this->getLocale()->shouldReturn('pl_PL');
+    }
+
+    function it_gets_default_locale_if_storage_have_data($storage)
+    {
+        $storage->hasData(Argument::any())->willReturn(true);
+
         $storage->getData(Argument::any(), 'pl_PL')->willReturn('en_US');
 
         $this->getLocale()->shouldReturn('en_US');

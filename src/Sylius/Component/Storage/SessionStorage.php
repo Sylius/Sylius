@@ -35,6 +35,10 @@ class SessionStorage implements StorageInterface
      */
     public function hasData($key)
     {
+        if (!$this->session->isStarted()) {
+            return false;
+        }
+
         return $this->session->has($key);
     }
 
