@@ -124,7 +124,7 @@ You can launch Selenium by issuing the following command:
 
 .. code-block:: bash
 
-  $ java -jar selenium-server-standalone-2.33.0.jar
+  $ java -jar selenium-server-standalone-2.38.0.jar
   
 Configure behat for Selenium:
 
