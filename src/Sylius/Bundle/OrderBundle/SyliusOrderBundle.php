@@ -41,6 +41,8 @@ class SyliusOrderBundle extends AbstractResourceBundle
             'Sylius\Component\Order\Model\CommentInterface'    => 'sylius.model.comment.class',
             'Sylius\Component\Order\Model\OrderInterface'      => 'sylius.model.order.class',
             'Sylius\Component\Order\Model\OrderItemInterface'  => 'sylius.model.order_item.class',
+            'Sylius\Component\Order\Model\IdentityInterface'   => 'sylius.model.order_identity.class',
+
         );
     }
 

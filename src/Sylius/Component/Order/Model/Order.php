@@ -632,4 +632,48 @@ class Order implements OrderInterface
     {
         return $this->items->isEmpty();
     }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addIdentity(IdentityInterface $identity)
+    {
+        if (!$this->hasIdentity($identity)) {
+            $this->identities->add($identity);
+
+            $identity->setOrder($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasIdentity(IdentityInterface $identity)
+    {
+        return $this->identities->contains($identity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentities()
+    {
+        return $this->identities;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeIdentity(IdentityInterface $identity)
+    {
+        if ($this->hasIdentity($identity)) {
+            $identity->setOrder(null);
+            $this->identities->removeElement($identity);
+        }
+
+        return $this;
+    }
 }

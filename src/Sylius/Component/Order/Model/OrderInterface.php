@@ -188,4 +188,33 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
      * @param string $state
      */
     public function setState($state);
+
+    /**
+     * Add an identity to this order.  Eg. external identity to refer to an ebay order id
+     *
+     * @param IdentityInterface $identity
+     * @return mixed
+     */
+    public function addIdentity(IdentityInterface $identity);
+
+    /**
+     * Remove identity from order.
+     *
+     * @param IdentityInterface $item
+     */
+    public function removeIdentity(IdentityInterface $identity);
+
+    /**
+     * Is the identity already contained in this order?
+     *
+     * @param IdentityInterface $identity
+     */
+    public function hasIdentity(IdentityInterface $identity);
+
+    /**
+     * Get all identities for this order.
+     *
+     * @return Collection|IdentityInterface[]
+     */
+    public function getIdentities();
 }

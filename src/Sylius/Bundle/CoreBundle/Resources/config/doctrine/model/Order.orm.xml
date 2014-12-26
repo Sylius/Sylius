@@ -29,6 +29,7 @@
             <gedmo:versioned />
         </many-to-one>
 
+
         <many-to-many field="promotionCoupons" target-entity="Sylius\Component\Promotion\Model\CouponInterface">
             <join-table name="sylius_promotion_coupon_order">
                 <join-columns>
