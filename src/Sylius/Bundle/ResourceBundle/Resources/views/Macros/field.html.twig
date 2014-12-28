@@ -1,0 +1,96 @@
+{#
+    Display the value of a form_row :
+    - label : Label of the field (it can be translation key)
+    - value : Value of the field
+    - labelWidth : With of the label (default : 2)
+#}
+{% macro field_row(label, value, labelWidth) %}
+    {% set labelWidth = labelWidth|default(2) %}
+    {% set inputWidth = 12 - labelWidth %}
+
+    <div class="form-group">
+        <label class="col-lg-{{ labelWidth }} control-label">{{ label|trans }}</label>
+        <div class="col-lg-{{ inputWidth }}">
+            <div class="form-control-static">{{ value|raw }}</div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{#
+    Display the translation of a contact :
+    - entityName : Name of your entity (example : mission)
+    - fieldName : Name of your field (example : type)
+    - value : Value (example : option1)
+
+    Caution  : your translation file need to have the same organisation for each entity :
+    mission:
+        field:
+            type
+                option:
+                    option1 : Option number 1
+                    option2 : Option number 2
+#}
+{% macro translatableContant(entityName, fieldName, value) %}
+    {{ (entityName ~ '.field.' ~ fieldName ~ '.option.' ~ value)|trans }}
+{% endmacro %}
+
+
+{#
+    Display a boolean (with a pretty icon) and wrap it in a link:
+    - bool : Value of the boolean
+    - successUrl : Href of the link if bool == true
+    - errorUrl : Href of the link if bool == false
+#}
+{% macro boolean(bool, successUrl, errorUrl) %}
+    {% set successUrl = successUrl|default('#') %}
+    {% set errorUrl = errorUrl|default('#') %}
+
+    {% if bool %}
+        <a href="{{ successUrl }}" class="btn btn-success">
+            <i class="icon-ok"></i>
+        </a>
+    {% else %}
+        <a href="{{ errorUrl }}" class="btn btn-danger">
+            <i class="icon-minus-sign"></i>
+        </a>
+    {% endif %}
+{% endmacro %}
+
+
+{#
+    Display a date
+    - date : Value of the date
+    - default : Default if the date is null
+    - formatter : IntlFormatter constant : short, medium, long, full (default : long)
+#}
+{% macro date(date, default, formatter) %}
+    {% set default = default|default('-') %}
+    {% set formatter = formatter|default('long') %}
+
+    {% if date %}
+        {{ _self.date_time(date, default, formatter, 'none') }}
+    {% else %}
+        {{ default }}
+    {% endif %}
+{% endmacro %}
+
+
+{#
+    Display a dateTime
+    - date : Value of the date
+    - default : Default if the date is null
+    - dateFormatter : IntlFormatter constant : short, medium, long, full (default : long)
+    - hourFormatter : IntlFormatter constant : short, medium, long, full (default : long)
+#}
+{% macro date_time(date, default, dateFormatter, hourFormatter) %}
+    {% set default = default|default('-') %}
+    {% set dateFormatter = dateFormatter|default('medium') %}
+    {% set hourFormatter = hourFormatter|default('medium') %}
+
+    {% if date %}
+        {{ date|localizeddate(dateFormatter, hourFormatter) }}
+    {% else %}
+        {{ default }}
+    {% endif %}
+{% endmacro %}
