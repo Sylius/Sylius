@@ -11,12 +11,15 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
+
 /**
  * Coupon model interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface CouponInterface
+interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
 {
     /**
      * Get code
