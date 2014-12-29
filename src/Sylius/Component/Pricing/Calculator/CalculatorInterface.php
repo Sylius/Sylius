@@ -17,6 +17,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  * Price calculator interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Liverbool <liverbool@gmail.com>
  */
 interface CalculatorInterface
 {
@@ -37,4 +38,13 @@ interface CalculatorInterface
      * @return string
      */
     public function getType();
+
+    /**
+     * Check valid configuration
+     *
+     * @param array $configuration
+     *
+     * @return bool
+     */
+    public function isValid(array $configuration);
 }

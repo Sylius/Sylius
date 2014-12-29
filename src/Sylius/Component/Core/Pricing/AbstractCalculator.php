@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Liverbool <liverbool@gmail.com>
  */
 abstract class AbstractCalculator
 {
@@ -56,5 +57,23 @@ abstract class AbstractCalculator
         }
 
         return $price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isValid(array $configuration)
+    {
+        if (empty($configuration)) {
+            return true;
+        }
+
+        foreach(array_keys($configuration) as $key) {
+            if (!is_numeric($key)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
