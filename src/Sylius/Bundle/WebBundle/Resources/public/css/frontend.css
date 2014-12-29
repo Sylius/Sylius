@@ -157,6 +157,10 @@ a.oauth-login:hover {
 .create-ui-toolbar-wrapper {
     background-color: #333 !important;
 }
+.create-ui-toolbar-wrapper.editing {
+	background: rgba(0, 0, 0, 0.7) !important;
+}
+
 a.create-ui-toggle {
     background-image: url('/bundles/syliusweb/img/logo.png') !important;
     background-size: 36px 41px !important;
