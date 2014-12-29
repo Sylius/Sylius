@@ -11,7 +11,8 @@
 
 namespace spec\Sylius\Component\Promotion\Generator;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Promotion\Generator\Instruction;
@@ -24,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class CouponGeneratorSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository, ObjectManager $manager)
+    function let(RepositoryInterface $repository, EntityManagerInterface $manager)
     {
         $this->beConstructedWith($repository, $manager);
     }
@@ -42,6 +43,7 @@ class CouponGeneratorSpec extends ObjectBehavior
     function it_should_generate_coupons_according_to_instruction(
         $repository,
         $manager,
+        FilterCollection $filters,
         PromotionInterface $promotion,
         CouponInterface $coupon,
         Instruction $instruction
@@ -55,6 +57,10 @@ class CouponGeneratorSpec extends ObjectBehavior
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
+
+        $manager->getFilters()->shouldBeCalled()->willReturn($filters);
+        $filters->disable('softdeleteable')->shouldBeCalled();
+        $filters->enable('softdeleteable')->shouldBeCalled();
 
         $manager->persist($coupon)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();

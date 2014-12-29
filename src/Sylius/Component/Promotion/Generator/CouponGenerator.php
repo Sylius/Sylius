@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -28,11 +28,11 @@ class CouponGenerator implements CouponGeneratorInterface
     protected $repository;
 
     /**
-     * @var ObjectManager
+     * @var EntityManagerInterface
      */
     protected $manager;
 
-    public function __construct(RepositoryInterface $repository, ObjectManager $manager)
+    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager)
     {
         $this->repository = $repository;
         $this->manager = $manager;
