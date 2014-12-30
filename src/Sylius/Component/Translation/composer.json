@@ -1,38 +1,42 @@
 {
-    "name": "sylius/order",
+    "name": "sylius/translation",
     "type": "library",
-    "description": "Orders management library for PHP.",
-    "keywords": ["order", "sales", "shop", "webshop", "ecommerce"],
+    "description": "Translation helper.",
+    "keywords": ["translation"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
-            "name":     "Paweł Jędrzejewski",
+            "name": "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Sylius project",
+            "name": "Sylius project",
             "homepage": "http://sylius.org"
         },
         {
-            "name":     "Community contributions",
+            "name": "Community contributions",
             "homepage": "http://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/originator": "0.13.*@dev",
-        "sylius/sequence":   "0.13.*@dev"
+        "doctrine/collections"          : "~1.2",
+        "doctrine/orm"                 : "~2.4",
+        "prezent/doctrine-translatable": "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Order\\": "" }
+        "psr-4": { "Sylius\\Component\\Translation\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Order\\spec\\": "spec/" }
+        "psr-4": { "Sylius\\Component\\Translation\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {

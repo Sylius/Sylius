@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
+        "jms/translation-bundle":          "1.1.*",
         "stof/doctrine-extensions-bundle": "1.1.*",
         "sylius/promotion":                "0.13.*@dev",
         "sylius/registry":                 "0.13.*@dev",
@@ -48,6 +49,5 @@
         "branch-alias": {
             "dev-master": "0.13-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
