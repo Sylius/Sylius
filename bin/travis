@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Install Apache2
+apt-get install -qq apache2 libapache2-mod-php5 > /dev/null
+sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+/etc/init.d/apache2 restart
+
+# Start "virtual screen"
+sh -e /etc/init.d/xvfb start
+export DISPLAY=:99
