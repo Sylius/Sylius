@@ -19,7 +19,6 @@
     <parameters>
         <parameter key="sylius.payum.paypal.action.capture_payment_using_express_checkout.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\CapturePaymentUsingExpressCheckoutAction</parameter>
 
-        <parameter key="sylius.payum.stripe.action.capture_payment_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Stripe\Action\CapturePaymentUsingCreditCardAction</parameter>
         <parameter key="sylius.payum.paypal.action.notify_order.class">Sylius\Bundle\PayumBundle\Payum\Paypal\Action\NotifyOrderAction</parameter>
 
         <parameter key="sylius.payum.be2bill.action.capture_payment_using_credit_card.class">Sylius\Bundle\PayumBundle\Payum\Be2bill\Action\CapturePaymentUsingCreditCardAction</parameter>
@@ -49,18 +48,8 @@
             <tag name="payum.action" factory="paypal_express_checkout_nvp" />
         </service>
 
-        <!-- Stripe -->
-        <service id="sylius.payum.stripe.action.capture_payment_using_credit_card" class="%sylius.payum.stripe.action.capture_payment_using_credit_card.class%" public="false">
-            <argument type="service" id="sylius.currency_converter" />
-            <tag name="payum.action" factory="omnipay" />
-        </service>
-
         <!-- be2bill -->
         <service id="sylius.payum.be2bill.action.capture_payment_using_credit_card" class="%sylius.payum.be2bill.action.capture_payment_using_credit_card.class%" public="false">
-            <call method="setRequest">
-                <argument type="service" id="request" on-invalid="null" strict="false" />
-            </call>
-
             <tag name="payum.action" factory="be2bill" />
         </service>
         <service id="sylius.payum.be2bill.action.capture_payment_using_be2bill_form" class="%sylius.payum.be2bill.action.capture_payment_using_be2bill_form.class%" public="false">
