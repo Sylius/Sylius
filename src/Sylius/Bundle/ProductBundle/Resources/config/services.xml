@@ -17,6 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.listener.archetype_update.class">Sylius\Bundle\ProductBundle\EventListener\ArchetypeUpdateListener</parameter>
         <parameter key="sylius.builder.product.class">Sylius\Component\Product\Builder\ProductBuilder</parameter>
 
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
@@ -59,6 +60,12 @@
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
         </service>
 
+        <service id="sylius.listener.archetype_update" class="%sylius.listener.archetype_update.class%">
+            <argument type="service" id="sylius.builder.product_archetype" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.manager.product" />
+            <tag name="kernel.event_listener" event="sylius.product_archetype.pre_update" method="onArchetypeUpdate" />
+        </service>
     </services>
 
 </container>
