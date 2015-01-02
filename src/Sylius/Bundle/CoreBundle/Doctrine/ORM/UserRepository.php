@@ -89,8 +89,6 @@ class UserRepository extends EntityRepository
             ->getOneOrNullResult()
         ;
 
-        $this->_em->getFilters()->enable('softdeleteable');
-
         return $result;
     }
 
