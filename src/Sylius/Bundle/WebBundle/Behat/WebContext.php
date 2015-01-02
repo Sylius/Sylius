@@ -17,13 +17,14 @@ use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Web context.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class WebContext extends DefaultContext
+class WebContext extends DefaultContext implements SnippetAcceptingContext
 {
     /**
      * @Given /^go to "([^""]*)" tab$/
@@ -266,7 +267,10 @@ class WebContext extends DefaultContext
     {
         $type = str_replace(' ', '_', $type);
 
+        $entityManager = $this->getEntityManager();
+        $entityManager->getFilters()->disable('softdeleteable');
         $resource = $this->findOneBy($type, array($property => $value));
+        $entityManager->getFilters()->enable('softdeleteable');
 
         $this->getSession()->visit($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
     }
@@ -299,7 +303,11 @@ class WebContext extends DefaultContext
     public function iShouldBeOnTheResourcePage($type, $property, $value)
     {
         $type = str_replace(' ', '_', $type);
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->getFilters()->disable('softdeleteable');
         $resource = $this->findOneBy($type, array($property => $value));
+        $entityManager->getFilters()->enable('softdeleteable');
 
         $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
         $this->assertStatusCodeEquals(200);
@@ -843,5 +851,24 @@ class WebContext extends DefaultContext
     public function iWait($time)
     {
         $this->getSession()->wait($time*1000);
+    }
+
+    /**
+     * @Given I deleted :type with :property :value
+     */
+    public function iDeletedResource($type, $property, $value)
+    {
+        $user = $this->findOneBy($type, array($property => $value));
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+    }
+
+    /**
+     * @Given I view deleted elements
+     */
+    public function iViewDeletedElements()
+    {
+        $this->clickLink('Show deleted');
     }
 }
