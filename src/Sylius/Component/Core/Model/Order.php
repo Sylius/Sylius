@@ -99,13 +99,6 @@ class Order extends Cart implements OrderInterface
     protected $promotions;
 
     /**
-     * Identities
-     *
-     * @var Collection|IdentityInterface[]
-     */
-    protected $identities;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -116,7 +109,6 @@ class Order extends Cart implements OrderInterface
         $this->shipments = new ArrayCollection();
         $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
-        $this->identities = new ArrayCollection();
     }
 
     /**

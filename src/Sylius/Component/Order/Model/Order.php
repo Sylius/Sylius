@@ -71,6 +71,13 @@ class Order implements OrderInterface
     protected $comments;
 
     /**
+     * Order identities.
+     *
+     * @var Collection|IdentityInterface[]
+     */
+    protected $identities;
+
+    /**
      * Adjustments total.
      *
      * @var int
@@ -142,6 +149,7 @@ class Order implements OrderInterface
         $this->items = new ArrayCollection();
         $this->adjustments = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->identities = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
