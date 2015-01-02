@@ -7,7 +7,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', '#id') }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.archetype.code'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.archetype.name'|trans) }}</th>
             <th>{{ 'sylius.archetype.parent'|trans }}</th>
             <th>{{ 'sylius.archetype.options'|trans }}</th>
@@ -20,7 +20,7 @@
 
     {% for archetype in product_archetypes %}
         <tr id="{{ archetype.id }}">
-            <td>{{ archetype.id }}</td>
+            <td><strong>{{ archetype.code }}</strong</td>
             <td>{{ archetype.name }}</td>
             <td>{{ archetype.parent ? archetype.parent.name }}</td>
             <td>
@@ -40,7 +40,7 @@
             <td>{{ archetype.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_product_archetype_build', {'id': archetype.id}), 'sylius.archetype.build'|trans) }}
+                {{ buttons.create(path('sylius_backend_product_create', {'archetype': archetype.code}), 'sylius.product.create'|trans) }}
                 {{ buttons.edit(path('sylius_backend_product_archetype_update', {'id': archetype.id})) }}
                 {{ buttons.delete(path('sylius_backend_product_archetype_delete', {'id': archetype.id})) }}
                 </div>

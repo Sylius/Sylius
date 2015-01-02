@@ -27,16 +27,16 @@ class LoadProductArchetypeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $archetype = $this->createArchetype('T-Shirt', array('T-Shirt size', 'T-Shirt color'), array('T-Shirt brand', 'T-Shirt collection', 'T-Shirt material'));
+        $archetype = $this->createArchetype('t_shirt', 'T-Shirt', array('T-Shirt size', 'T-Shirt color'), array('T-Shirt brand', 'T-Shirt collection', 'T-Shirt material'));
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('Sticker', array('Sticker size'), array('Sticker resolution', 'Sticker paper'));
+        $archetype = $this->createArchetype('sticker', 'Sticker', array('Sticker size'), array('Sticker resolution', 'Sticker paper'));
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('Mug', array('Mug type'), array('Mug material'));
+        $archetype = $this->createArchetype('sticker', 'Mug', array('Mug type'), array('Mug material'));
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('Book', array(), array('Book author', 'Book ISBN', 'Book pages'));
+        $archetype = $this->createArchetype('book', 'Book', array(), array('Book author', 'Book ISBN', 'Book pages'));
         $manager->persist($archetype);
 
         $manager->flush();
@@ -53,17 +53,20 @@ class LoadProductArchetypeData extends DataFixture
     /**
      * Create archetype.
      *
+     * @param string $code
      * @param string $name
      * @param array  $options
      * @param array  $properties
      *
      * @return ArchetypeInterface
      */
-    protected function createArchetype($name, array $options, array $properties)
+    protected function createArchetype($code, $name, array $options, array $properties)
     {
-        /* @var $archetype ArchetypeInterface */
         $archetype = $this->getProductArchetypeRepository()->createNew();
-        $archetype->setName($name);
+        $archetype
+            ->setCode($code)
+            ->setName($name)
+        ;
 
         foreach ($options as $option) {
             $archetype->addOption($this->getReference('Sylius.Option.'.$option));

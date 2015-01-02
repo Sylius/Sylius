@@ -37,12 +37,3 @@ sylius_backend_product_archetype_delete:
         _controller: sylius.controller.product_archetype:deleteAction
         _sylius:
             redirect: sylius_backend_product_archetype_index
-
-sylius_backend_product_archetype_build:
-    path: /{id}/build
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product_archetype:buildAction
-        _sylius:
-            template: SyliusWebBundle:Backend/ProductArchetype:build.html.twig
-            redirect: sylius_backend_product_show

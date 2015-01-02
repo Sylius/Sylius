@@ -88,9 +88,6 @@ sylius_archetype:
             option: Sylius\Component\Product\Model\Option
             archetype:
                 model: Sylius\Component\Product\Model\Archetype
-                controller: Sylius\Bundle\ProductBundle\Controller\ArchetypeController
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
-                form: Sylius\Bundle\ProductBundle\Form\Type\ArchetypeType
 
 sylius_attribute: ~
 

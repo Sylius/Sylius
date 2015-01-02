@@ -113,12 +113,11 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
             'fieldName'    => 'parent',
             'type'         => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => 'Some\App\Product\Entity\Archetype',
-            'inversedBy'   => 'children',
             'joinColumn'   => array(
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
-                'onDelete'             => 'CASCADE'
+                'onDelete'             => 'SET NULL'
             ),
         );
 

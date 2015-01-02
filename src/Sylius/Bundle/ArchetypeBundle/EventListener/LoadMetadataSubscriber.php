@@ -85,14 +85,12 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                    // 'onDelete'             => 'CASCADE', ?
                 )),
                 'inverseJoinColumns'   => array(array(
                     'name'                 => 'attribute_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                    // 'onDelete'             => 'CASCADE', ?
                 ))
             ),
         );
@@ -118,14 +116,12 @@ class LoadMetadataSubscriber implements EventSubscriber
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                    // 'onDelete'             => 'CASCADE', ?
                 )),
                 'inverseJoinColumns'   => array(array(
                     'name'                 => 'option_id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                     'unique'               => false,
-                    // 'onDelete'             => 'CASCADE', ?
                 ))
             ),
         );
@@ -143,12 +139,11 @@ class LoadMetadataSubscriber implements EventSubscriber
             'fieldName'    => 'parent',
             'type'         => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => $class['archetype']['model'],
-            'inversedBy'   => 'children',
             'joinColumn'   => array(
                 'name'                 => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable'             => true,
-                'onDelete'             => 'CASCADE'
+                'onDelete'             => 'SET NULL'
             ),
         );
 
