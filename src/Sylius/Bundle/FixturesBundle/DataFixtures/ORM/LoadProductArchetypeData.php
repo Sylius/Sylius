@@ -33,7 +33,7 @@ class LoadProductArchetypeData extends DataFixture
         $archetype = $this->createArchetype('sticker', 'Sticker', array('Sticker size'), array('Sticker resolution', 'Sticker paper'));
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('sticker', 'Mug', array('Mug type'), array('Mug material'));
+        $archetype = $this->createArchetype('mug', 'Mug', array('Mug type'), array('Mug material'));
         $manager->persist($archetype);
 
         $archetype = $this->createArchetype('book', 'Book', array(), array('Book author', 'Book ISBN', 'Book pages'));

@@ -22,4 +22,13 @@ use Sylius\Component\Variation\Model\VariableInterface;
  */
 interface ArchetypeSubjectInterface extends AttributeSubjectInterface, VariableInterface
 {
+    /**
+     * @return null|ArchetypeInterface
+     */
+    public function getArchetype();
+
+    /**
+     * @param ArchetypeInterface $archetype
+     */
+    public function setArchetype(ArchetypeInterface $archetype = null);
 }

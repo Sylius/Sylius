@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Archetype extension.
@@ -100,6 +101,13 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         ;
 
         $container->setDefinition('sylius.form.type.'.$archetypeAlias.'_choice', $archetypeChoiceFormType);
+
+        $builder = new Definition('Sylius\Component\Archetype\Builder\ArchetypeBuilder');
+        $builder
+            ->setArguments(array(new Reference(sprintf('sylius.repository.%s_attribute_value', $subject))))
+        ;
+
+        $container->setDefinition('sylius.builder.'.$archetypeAlias, $builder);
     }
 
     /**

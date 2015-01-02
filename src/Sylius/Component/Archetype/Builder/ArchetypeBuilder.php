@@ -44,8 +44,12 @@ class ArchetypeBuilder implements ArchetypeBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function build(ArchetypeInterface $archetype, ArchetypeSubjectInterface $subject)
+    public function build(ArchetypeSubjectInterface $subject)
     {
+        if (null === $archetype = $subject->getArchetype()) {
+            return;
+        }
+
         $this->createAndAssignAttributes($archetype, $subject);
         $this->createAndAssignOptions($archetype, $subject);
     }
@@ -57,11 +61,13 @@ class ArchetypeBuilder implements ArchetypeBuilderInterface
     private function createAndAssignAttributes(ArchetypeInterface $archetype, AttributeSubjectInterface $subject)
     {
         foreach ($archetype->getAttributes() as $attribute) {
-            /** @var AttributeValueInterface $attributeValue */
-            $attributeValue = $this->attributeValueRepository->createNew();
-            $attributeValue->setAttribute($attribute);
+            if (null === $subject->getAttributeByName($attribute->getName())) {
+                /** @var AttributeValueInterface $attributeValue */
+                $attributeValue = $this->attributeValueRepository->createNew();
+                $attributeValue->setAttribute($attribute);
 
-            $subject->addAttribute($attributeValue);
+                $subject->addAttribute($attributeValue);
+            }
         }
     }
 

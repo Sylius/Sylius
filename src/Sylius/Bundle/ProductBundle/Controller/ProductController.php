@@ -44,9 +44,11 @@ class ProductController extends ResourceController
             throw new NotFoundHttpException(sprintf('Requested archetype does not exist!'));
         }
 
+        $product->setArchetype($archetype);
+
         $this
             ->getBuilder()
-            ->build($archetype, $product)
+            ->build($product)
         ;
 
         return $product;
