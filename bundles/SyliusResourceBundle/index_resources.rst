@@ -55,6 +55,7 @@ Except filtering, you can also sort users.
         defaults:
             _controller: app.controller.user:indexAction
             _sylius:
+                sortable: true
                 sorting:
                     score: desc
                 template: App:User:top.html.twig
@@ -87,6 +88,7 @@ You can also control the "max per page" for paginator, using ``paginate`` parame
             _controller: app.controller.user:indexAction
             _sylius:
                 paginate: 5
+                sortable: true
                 sorting:
                     score: desc
                 template: App:User:top.html.twig
@@ -110,6 +112,7 @@ Pagination is handy, but you do not always want to do it, you can disable pagina
             _sylius:
                 paginate: false
                 limit: 3
+                sortable: true
                 sorting:
                     score: desc
                 template: App:User:top3.html.twig

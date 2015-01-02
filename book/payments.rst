@@ -53,7 +53,7 @@ We are using [StateMachine] library to manage all payment states, here is the fu
 * void
 * refunded
 
-Of course, your can define your own states and transitions to create a workflow, that perfectly matches your business. Full configuration can be seen `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PaymentBundle/Resources/config/state-machine.yml>`_.
+Of course, you can define your own states and transitions to create a workflow, that perfectly matches your business. Full configuration can be seen `here <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/PaymentBundle/Resources/config/state-machine.yml>`_.
 
 Changes to payment happen mostly through applying appropriate transitions.
 
