@@ -49,6 +49,6 @@ class TaxRateResolver implements TaxRateResolverInterface
 
         $criteria = array_merge(array('category' => $category), $criteria);
 
-        return $this->taxRateRepository->findOneBy($criteria);
+        return $this->taxRateRepository->findBy($criteria);
     }
 }

@@ -98,50 +98,56 @@ class TaxationProcessor implements TaxationProcessorInterface
             return;
         }
 
-        $zone = null;
+        $zones = array();
 
         if (null !== $order->getShippingAddress()) {
             // Match the tax zone.
-            $zone = $this->zoneMatcher->match($order->getShippingAddress());
+            $zones = $this->zoneMatcher->matchAll($order->getShippingAddress());
         }
 
-        if ($this->settings->has('default_tax_zone')) {
+        if (empty($zones) && $this->settings->has('default_tax_zone')) {
             // If address does not match any zone, use the default one.
-            $zone = $zone ?: $this->settings->get('default_tax_zone');
+            $zones = array($this->settings->get('default_tax_zone'));
         }
 
-        if (null === $zone) {
+        if (empty($zones)) {
             return;
         }
 
-        $taxes = $this->processTaxes($order, $zone);
+        $taxes = $this->processTaxes($order, $zones);
 
         $this->addAdjustments($taxes, $order);
 
         $order->calculateTotal();
     }
 
-    private function processTaxes(OrderInterface $order, $zone)
+    private function processTaxes(OrderInterface $order, $zones)
     {
         $taxes = array();
+        $zonesById = array_map(function(ZoneInterface $zone) {
+            return $zone->getId();
+        }, $zones);
+
         foreach ($order->getItems() as $item) {
-            $rate = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zone));
+            $rates = $this->taxRateResolver->resolve($item->getProduct(), array('zone' => $zonesById));
 
             // Skip this item is there is not matching tax rate.
-            if (null === $rate) {
+            if (empty($rates)) {
                 continue;
             }
 
             $item->calculateTotal();
 
-            $amount = $this->calculator->calculate($item->getTotal(), $rate);
-            $taxAmount = $rate->getAmountAsPercentage();
-            $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
+            foreach($rates as $rate) {
+                $amount = $this->calculator->calculate($item->getTotal(), $rate);
+                $taxAmount = $rate->getAmountAsPercentage();
+                $description = sprintf('%s (%s%%)', $rate->getName(), (float) $taxAmount);
 
-            $taxes[$description] = array(
-                'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
-                'included' => $rate->isIncludedInPrice()
-            );
+                $taxes[$description] = array(
+                    'amount'   => (isset($taxes[$description]['amount']) ? $taxes[$description]['amount'] : 0) + $amount,
+                    'included' => $rate->isIncludedInPrice()
+                );
+            }
         }
 
         return $taxes;
