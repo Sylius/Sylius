@@ -9,7 +9,7 @@ You already know that Sylius is built from components and Symfony2 bundles, whic
 
 All bundles share the conventions for naming things and the same way of data persistence. Sylius, by default, uses Doctrine ORM for managing all entities.
 
-For deeper understanding of how Doctrine works, please refer to the [excellent documentation on their official website].
+For deeper understanding of how Doctrine works, please refer to the ['excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>'_].
 
 Resource Layer
 --------------
@@ -85,7 +85,7 @@ Every Sylius repository supports paginating resources. To create a `Pagerfanta i
         $products->setMaxPerPage(3);
         $products->setCurrentPage($request->query->get('page', 1));
 
-        // Now you can returns products to template and iterate over it to get products from current page.
+        // Now you can return products to template and iterate over it to get products from current page.
     }
 
 Paginator can be created for a specific criteria and with desired sorting.
@@ -136,7 +136,7 @@ As you can see, these actions match the common operations in any REST API and ye
 That means, all Sylius controllers can serve HTML, JSON or XML, depending on what do you request.
 
 Additionally, all these actions are very flexible and allow you to use different templates, forms, repository methods per route.
-The bundle is very powerful and allows you to register you own resources as well. To give you some idea of what is possible, here are some examples!
+The bundle is very powerful and allows you to register your own resources as well. To give you some idea of what is possible, here are some examples!
 
 Displaying a resource with custom template and repository methods:
 
