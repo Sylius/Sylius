@@ -13,7 +13,7 @@
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {% if user.id is not sameas(app.user.id) %}
+        {% if user.id is not sameas(app.user.id) and not user.deleted %}
         {{ buttons.generic(path('sylius_account_homepage', {'_switch_user': user.username}), 'sylius.user.impersonate'|trans) }}
         {% endif %}
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
