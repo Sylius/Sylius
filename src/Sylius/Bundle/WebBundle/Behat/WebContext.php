@@ -585,7 +585,7 @@ class WebContext extends DefaultContext
                 $text = 'Witaj w Sylius';
             break;
             case 'German':
-                $text = 'Willkommen bei Sylius';
+                $text = 'Englisch';
             break;
         }
 
