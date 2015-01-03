@@ -116,10 +116,14 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('id', $id)
         ;
 
-        return $queryBuilder
+        $result = $queryBuilder
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $result;
     }
 
     /**
