@@ -11,12 +11,14 @@ bin/behat --suite=addressing -fprogress || EXIT_STATUS=$?
 bin/behat --suite=cart -fprogress || EXIT_STATUS=$?
 bin/behat --suite=checkout features/frontend/checkout_addressing.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=checkout features/frontend/checkout_addressing_i18n.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=checkout features/frontend/checkout_.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=checkout features/frontend/checkout_.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=checkout features/frontend/checkout_.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=checkout features/frontend/checkout_.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=checkout features/frontend/checkout_.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=checkout features/frontend/checkout_.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_finalize.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_inventory.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_payment.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_security.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_shipping.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_shipping_i18n.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_start.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=checkout features/frontend/checkout_taxation.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=currencies -fprogress || EXIT_STATUS=$?
 bin/behat --suite=dashboard -fprogress || EXIT_STATUS=$?
 bin/behat --suite=homepage -fprogress || EXIT_STATUS=$?
