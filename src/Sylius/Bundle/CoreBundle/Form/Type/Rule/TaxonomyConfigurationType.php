@@ -22,8 +22,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonomyConfigurationType extends AbstractType
 {
+    /**
+     * Array of validation groups
+     *
+     * @var array
+     */
     protected $validationGroups;
 
+    /**
+     * @param array $validationGroups Array of validation groups
+     */
     public function __construct(array $validationGroups)
     {
         $this->validationGroups = $validationGroups;
@@ -38,7 +46,7 @@ class TaxonomyConfigurationType extends AbstractType
             ->add('taxons', 'sylius_taxon_selection', array(
                 'label'             => 'sylius.form.rule.taxonomy_configuration.taxons',
                 'model_transformer' => array(
-                    'save_objects' => false,
+                    'save_objects'  => false,
                 ),
             ))
             ->add('exclude', 'checkbox', array(

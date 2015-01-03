@@ -73,11 +73,15 @@
 
 {% macro configuration(configuration) %}
 
+{% if configuration|length > 0 %}
 <ul class="list-unstyled">
 {% for key, value in configuration %}
     {% set value = value is sameas(false) ? '0' : value|join(', ') %}
     <li><strong>{{ key|humanize }}</strong>: {{ value }}</li>
 {% endfor %}
 </ul>
+{% else %}
+<em>{{ 'sylius.promotion.empty_configuration'|trans }}</em>
+{% endif %}
 
 {% endmacro %}
