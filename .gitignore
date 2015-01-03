@@ -20,3 +20,5 @@ bin/*
 !bin/install
 !bin/sylius-cs-fixer
 vendor
+
+.idea
