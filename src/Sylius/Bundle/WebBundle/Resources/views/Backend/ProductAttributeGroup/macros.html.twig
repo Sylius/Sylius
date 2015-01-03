@@ -1,0 +1,36 @@
+{% macro list(product_attribute_groups) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if product_attribute_groups|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('code', 'sylius.product_attribute_group.code'|trans) }}</th>
+                <th>{{ sylius_resource_sort('name', 'sylius.product_attribute_group.name'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.product_attribute_group.updated_at'|trans) }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in product_attribute_groups %}
+            <tr id="{{ group.id }}">
+                <td><strong>{{ group.code }}</strong></td>
+                <td>{{ group.name }}</td>
+                <td>{{ group.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_product_attribute_group_update', {'id': group.id})) }}
+                    {{ buttons.delete(path('sylius_backend_product_attribute_group_delete', {'id': group.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.product_attribute_group.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

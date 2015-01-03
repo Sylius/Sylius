@@ -40,6 +40,10 @@ sylius_backend_product_attribute:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product_attribute.yml
     prefix: /product-attributes
 
+sylius_backend_product_attribute_group:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_attribute_group.yml
+    prefix: /product-attribute-groups
+
 sylius_backend_product_archetype:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product_archetype.yml
     prefix: /product-archetypes

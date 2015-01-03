@@ -13,3 +13,12 @@ sylius:
             not_blank: Please select attribute.
         value:
             not_blank: Please enter attribute value.
+    attribute_group:
+        code:
+            not_blank: Please enter attribute group code.
+            min_length: Attribute group code must be at least 1 character long.|Attribute group code must be at least {{ limit }} characters long.
+            max_length: Attribute group code must not be longer than 1 character.|Attribute group code must not be longer than {{ limit }} characters.
+        name:
+            not_blank: Please enter attribute group name.
+            min_length: Attribute group name must be at least 1 character long.|Attribute group name must be at least {{ limit }} characters long.
+            max_length: Attribute group name must not be longer than 1 character.|Attribute group name must not be longer than {{ limit }} characters.

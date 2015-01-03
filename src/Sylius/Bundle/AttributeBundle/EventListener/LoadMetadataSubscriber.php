@@ -56,36 +56,60 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['attribute_value']['model'] !== $metadata->getName()) {
-                continue;
+            if ($class['attribute_value']['model'] === $metadata->getName()) {
+                $subjectMapping = array(
+                    'fieldName'     => 'subject',
+                    'targetEntity'  => $class['subject'],
+                    'inversedBy'    => 'attributes',
+                    'joinColumns'   => array(array(
+                        'name'                 => $subject.'_id',
+                        'referencedColumnName' => 'id',
+                        'nullable'             => false,
+                        'onDelete'             => 'CASCADE'
+                    ))
+                );
+
+                $this->mapManyToOne($metadata, $subjectMapping);
+
+                $attributeMapping = array(
+                    'fieldName'     => 'attribute',
+                    'targetEntity'  => $class['attribute']['model'],
+                    'joinColumns'   => array(array(
+                        'name'                 => 'attribute_id',
+                        'referencedColumnName' => 'id',
+                        'nullable'             => false,
+                        'onDelete'             => 'CASCADE'
+                    ))
+                );
+
+                $this->mapManyToOne($metadata, $attributeMapping);
             }
 
-            $subjectMapping = array(
-                'fieldName'     => 'subject',
-                'targetEntity'  => $class['subject'],
-                'inversedBy'    => 'attributes',
-                'joinColumns'   => array(array(
-                    'name'                 => $subject.'_id',
-                    'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
-            );
+            if ($class['attribute']['model'] === $metadata->getName()) {
+                $groupMapping = array(
+                    'fieldName'     => 'group',
+                    'targetEntity'  => $class['attribute_group']['model'],
+                    'inversedBy'    => 'attributes',
+                    'joinColumns'   => array(array(
+                        'name'                 => 'group_id',
+                        'referencedColumnName' => 'id',
+                        'nullable'             => true,
+                        'onDelete'             => 'CASCADE'
+                    ))
+                );
 
-            $this->mapManyToOne($metadata, $subjectMapping);
+                $this->mapManyToOne($metadata, $groupMapping);
+            }
 
-            $attributeMapping = array(
-                'fieldName'     => 'attribute',
-                'targetEntity'  => $class['attribute']['model'],
-                'joinColumns'   => array(array(
-                    'name'                 => 'attribute_id',
-                    'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
-            );
+            if ($class['attribute_group']['model'] === $metadata->getName()) {
+                $attributesMapping = array(
+                    'fieldName'     => 'attributes',
+                    'targetEntity'  => $class['attribute']['model'],
+                    'mappedBy'      => 'group',
+                );
 
-            $this->mapManyToOne($metadata, $attributeMapping);
+                $metadata->mapOneToMany($attributesMapping);
+            }
         }
     }
 

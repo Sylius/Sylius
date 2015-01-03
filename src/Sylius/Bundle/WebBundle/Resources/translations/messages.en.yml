@@ -171,6 +171,8 @@ sylius:
             index: Coupons
         attribute:
             index: Attributes
+        attribute_group:
+            index: Attribute Groups
         archetype:
             index: archetypes
         redirect_route:
@@ -694,6 +696,17 @@ sylius:
         presentation: presentation
         type: type
         update_header: Editing attribute
+        updated_at: last update
+        group: Group
+    product_attribute_group:
+        create: Create product attribute group
+        create_header: New product attribute group
+        index_header: Product attribute groups
+        manage: Manage groups
+        name: name
+        code: code
+        no_results: There are no attribute groups configured.
+        update_header: Editing attribute group
         updated_at: last update
     archetype:
         build: Build archetype

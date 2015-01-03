@@ -70,6 +70,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                     'attribute_value' => array(
                         'model' => 'Sylius\Component\Product\Model\AttributeValue'
                     ),
+                    'attribute_group' => array(
+                        'model' => 'Sylius\Component\Product\Model\AttributeGroup'
+                    ),
                 )
             ))
         );
