@@ -21,6 +21,8 @@
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
         <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
+
+        <parameter key="sylius.twig.extension.order.class">Sylius\Bundle\OrderBundle\Twig\OrderExtension</parameter>
     </parameters>
 
     <services>
@@ -62,6 +64,10 @@
 
         <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
+        </service>
+
+        <service id="sylius.twig.extension.order" class="%sylius.twig.extension.order.class%" public="false">
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>

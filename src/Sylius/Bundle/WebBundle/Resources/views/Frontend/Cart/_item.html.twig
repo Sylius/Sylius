@@ -13,6 +13,13 @@
     <td class="col-md-1">
         {{ item.unitPrice|sylius_price }}
     </td>
+    <td class="col-md-1">
+        {% for adjustment in item.adjustments(taxAdjustment) %}
+            <abbr title="{{ adjustment.description }}">{{ adjustment.amount|sylius_price }}</abbr>{% if not loop.last %},{% endif %}
+        {% else %}
+            n/a
+        {% endfor %}
+    </td>
     <td class="col-md-1" style="text-align: right">
         {{ item.total|sylius_price }}
     </td>

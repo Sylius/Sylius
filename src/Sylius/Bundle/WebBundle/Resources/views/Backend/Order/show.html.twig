@@ -130,10 +130,10 @@
         <tr class="taxes">
             <td colspan="2">
                 <h5>{{ 'sylius.order.taxes'|trans }}</h5>
-                {% if not order.adjustments(taxAdjustment).isEmpty() %}
+                {% if sylius_order_adjustments(order, taxAdjustment)|length > 0 %}
                     <ul class="list-unstyled">
-                        {% for taxAdjustment in order.adjustments(taxAdjustment) %}
-                            <li>{{ taxAdjustment.description }} {{ taxAdjustment.amount|sylius_price(order.currency) }} </li>
+                        {% for adjustment in sylius_order_adjustments(order, taxAdjustment) %}
+                            <li>{{ adjustment.description }} {{ adjustment.amount|sylius_price(order.currency) }}</li>
                         {% endfor %}
                     </ul>
                 {% else %}
@@ -142,7 +142,7 @@
             </td>
             <td class="text-right" colspan="3">
                 <strong>{{ 'sylius.order.tax_total'|trans }}</strong>:
-                <span class="amount">{{ order.adjustmentsTotal(taxAdjustment)|sylius_price(order.currency) }}</span>
+                <span class="amount">{{ sylius_order_adjustments_total(order, taxAdjustment)|sylius_price(order.currency) }}</span>
             </td>
         </tr>
         <tr class="shipping-charges">

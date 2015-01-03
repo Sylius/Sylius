@@ -70,6 +70,32 @@
             </td>
         </tr>
     {% endfor %}
+    {% for item in order.items %}
+        {% for adjustment in item.adjustments %}
+            <tr>
+                <td>
+                    {{ adjustment.label }}
+                </td>
+                <td>
+                    {{ adjustment.description }}
+                </td>
+                <td>
+                    {{ adjustment.amount|sylius_price(order.currency) }}
+                </td>
+                <td>
+                    {{ misc.state_label(adjustment.locked) }}
+                </td>
+                <td>
+                    <div class="pull-right">
+                        {% if editable %}
+                            {{ buttons.patch(path('sylius_backend_order_adjustment_lock', {'id': item.id, 'adjustment': adjustment.id, 'lock': (not adjustment.locked)}), (adjustment.locked ? 'sylius.order.adjustments.unlock' : 'sylius.order.adjustments.lock')|trans, adjustment.locked ? 'ok' : 'lock', 'primary') }}
+                            {{ buttons.delete(path('sylius_backend_order_adjustment_delete', {'id': adjustment.id, 'orderId': order.id})) }}
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
     </tbody>
 </table>
 
