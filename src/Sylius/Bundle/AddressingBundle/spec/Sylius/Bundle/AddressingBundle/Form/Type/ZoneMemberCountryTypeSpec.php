@@ -50,12 +50,10 @@ class ZoneMemberCountryTypeSpec extends ObjectBehavior
     {
         $builder
             ->add('country', 'sylius_country_choice', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder);
 
         $builder
             ->add('_type', 'hidden', Argument::any())
-            ->shouldBeCalled()
             ->willReturn($builder);
 
         $this->buildForm($builder, array());

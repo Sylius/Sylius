@@ -19,8 +19,10 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -31,15 +33,22 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 abstract class AbstractResourceExtension extends Extension
 {
-    const CONFIGURE_LOADER     = 1;
-    const CONFIGURE_DATABASE   = 2;
+    const CONFIGURE_LOADER = 1;
+
+    const CONFIGURE_DATABASE = 2;
+
     const CONFIGURE_PARAMETERS = 4;
+
     const CONFIGURE_VALIDATORS = 8;
 
-    const CONFIG_XML  = 'xml';
+    const CONFIGURE_FORMS = 16;
+
+    const CONFIG_XML = 'xml';
+
     const CONFIG_YAML = 'yml';
 
     protected $applicationName = 'sylius';
+
     protected $configDirectory = '/../Resources/config';
 
     /**
@@ -47,9 +56,12 @@ abstract class AbstractResourceExtension extends Extension
      * @var string
      */
     protected $configFormat = self::CONFIG_XML;
-    protected $configFiles = array(
+
+    protected $configFiles  = array(
         'services',
     );
+
+    const DEFAULT_KEY = 'default';
 
     /**
      * {@inheritdoc}
@@ -74,7 +86,7 @@ abstract class AbstractResourceExtension extends Extension
         $configure = self::CONFIGURE_LOADER
     ) {
         $processor = new Processor();
-        $config    = $processor->processConfiguration($configuration, $config);
+        $config = $processor->processConfiguration($configuration, $config);
 
         $config = $this->process($config, $container);
 
@@ -102,6 +114,10 @@ abstract class AbstractResourceExtension extends Extension
             $this->mapValidationGroupParameters($config['validation_groups'], $container);
         }
 
+        if ($configure & self::CONFIGURE_FORMS) {
+            $this->registerFormTypes($config, $container);
+        }
+
         if ($container->hasParameter('sylius.config.classes')) {
             $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
         }
@@ -121,14 +137,68 @@ abstract class AbstractResourceExtension extends Extension
     {
         foreach ($classes as $model => $serviceClasses) {
             foreach ($serviceClasses as $service => $class) {
-                $container->setParameter(
-                    sprintf(
-                        '%s.%s.%s.class',
-                        $this->applicationName,
-                        $service === 'form' ? 'form.type' : $service,
-                        $model
-                    ),
-                    $class
+                if ('form' === $service) {
+                    if (!is_array($class)){
+                        $class = array(self::DEFAULT_KEY => $class);
+                    }
+                    foreach ($class as $suffix => $subClass) {
+                        $container->setParameter(
+                            sprintf(
+                                '%s.form.type.%s%s.class',
+                                $this->applicationName,
+                                $model,
+                                $suffix === self::DEFAULT_KEY ? '' : sprintf('_%s', $suffix)
+                            ),
+                            $subClass
+                        );
+                    }
+                } else {
+                    $container->setParameter(
+                        sprintf(
+                            '%s.%s.%s.class',
+                            $this->applicationName,
+                            $service,
+                            $model
+                        ),
+                        $class
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * Register resource form types
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function registerFormTypes(array $config, ContainerBuilder $container)
+    {
+        foreach ($config['classes'] as $model => $serviceClasses) {
+            if (!isset($serviceClasses['form']) || !is_array($serviceClasses['form'])) {
+                continue;
+            }
+            foreach ($serviceClasses['form'] as $name => $class) {
+                $suffix = ($name === self::DEFAULT_KEY ? '' : sprintf('_%s', $name));
+                $alias = sprintf('%s_%s%s', $this->applicationName, $model, $suffix);
+                $definition = new Definition($class);
+                if ('choice' === $name) {
+                    $definition->setArguments(array(
+                        $serviceClasses['model'],
+                        $config['driver'],
+                        $alias
+                    ));
+                } else {
+                    $definition->setArguments(array(
+                        $serviceClasses['model'],
+                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix))
+                    ));
+                }
+                $definition->addTag('form.type',array('alias' => $alias));
+                $container->setDefinition(
+                    sprintf('%s.form.type.%s%s', $this->applicationName, $model, $suffix),
+                    $definition
                 );
             }
         }
@@ -210,7 +280,7 @@ abstract class AbstractResourceExtension extends Extension
         $reflector = new \ReflectionClass($this);
         $fileName = $reflector->getFileName();
 
-        if (!is_dir($directory = dirname($fileName) . $this->configDirectory)) {
+        if (!is_dir($directory = dirname($fileName).$this->configDirectory)) {
             throw new \RuntimeException(sprintf('The configuration directory "%s" does not exists.', $directory));
         }
 
