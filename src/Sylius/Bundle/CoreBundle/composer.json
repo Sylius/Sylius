@@ -60,7 +60,7 @@
     },
     "require-dev": {
         "fzaninotto/faker": "~1.2",
-        "phpspec/phpspec":  "~2.0",
+        "phpspec/phpspec":  "~2.1",
         "symfony/form":     "~2.3"
     },
     "suggest": {

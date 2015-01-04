@@ -28,7 +28,7 @@
         "mathiasverraes/money":     "*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0",
+        "phpspec/phpspec": "~2.1",
         "twig/twig":       "~1.0",
         "symfony/form":    "~2.3"
     },

@@ -27,7 +27,7 @@
         "winzou/state-machine":     "~0.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"

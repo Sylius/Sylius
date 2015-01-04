@@ -35,7 +35,7 @@
         "willdurand/hateoas-bundle":       "@stable"
     },
     "require-dev": {
-        "phpspec/phpspec":      "~2.0",
+        "phpspec/phpspec":      "~2.1",
         "twig/twig":            "~1.11",
         "doctrine/orm":         "~2.3",
         "doctrine/mongodb-odm": "1.0.*@dev",

@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Bundle\ProductBundle
+        psr4_prefix: Sylius\Bundle\ProductBundle
+        src_path: .

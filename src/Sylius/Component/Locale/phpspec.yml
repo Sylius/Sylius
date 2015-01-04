@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Component\Locale
+        psr4_prefix: Sylius\Component\Locale
+        src_path: .

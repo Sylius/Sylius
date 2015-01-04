@@ -202,7 +202,7 @@ class Version20141203091118 extends AbstractMigration implements ContainerAwareI
         foreach ($taxonTranslations as $taxonTranslation) {
             $this->connection->update(
                 'sylius_taxon',
-                array('name'        => $taxonTranslation['name'],
+                array('name'      => $taxonTranslation['name'],
                     'slug'        => $taxonTranslation['slug'],
                     'permalink'   => $taxonTranslation['permalink'],
                     'description' => $taxonTranslation['description']),
