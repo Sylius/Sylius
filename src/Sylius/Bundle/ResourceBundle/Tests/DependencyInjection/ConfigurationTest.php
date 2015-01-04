@@ -77,6 +77,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         ),
                         'repository' => '',
                         'interface'  => '',
+                        'translatable_fields' => array(),
                     ),
                     'validation_group' => array(),
                 ),

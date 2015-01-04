@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection;
 
-use ReflectionMethod;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceConfiguration;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\NodeInterface;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
@@ -59,19 +59,19 @@ class AbstractResourceConfigurationTest extends \PHPUnit_Framework_TestCase
             ),
             'classes'           => array(
                 'product'           => array(
-                    'model'      => 'Sylius\Product',
-                    'controller' => '%sylius.default.controller.class%',
-                    'repository' => '',
-                    'interface'  => '',
-                    'form'       => array(
+                    'model'               => 'Sylius\Product',
+                    'controller'          => '%sylius.default.controller.class%',
+                    'repository'          => '',
+                    'interface'           => '',
+                    'form'                => array(
                         AbstractResourceConfiguration::DEFAULT_KEY => 'Sylius\ProductType',
                         'choice'                                   => '%sylius.form.type.resource_choice.class%',
                     ),
+                    'translatable_fields' => array(),
                 ),
                 'product_prototype' => array(
                     'model'      => 'Sylius\Prototype',
                     'controller' => 'Sylius\Bundle\ProductBundle\Controller\PrototypeController',
-
                     'repository' => '',
                     'interface'  => '',
                     'form'       => array(
@@ -251,7 +251,7 @@ class AbstractResourceConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @param NodeDefinition $definition
      *
-     * @return \Symfony\Component\Config\Definition\Builder\NodeInterface|\Symfony\Component\Config\Definition\NodeInterface
+     * @return NodeInterface
      */
     protected function buildNode(NodeDefinition $definition)
     {
@@ -270,7 +270,7 @@ class AbstractResourceConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     protected function invokeProtectedMethod($method, array $args = array())
     {
-        $reflectionMethod = new ReflectionMethod(
+        $reflectionMethod = new \ReflectionMethod(
             'Sylius\Bundle\ResourceBundle\Tests\DependencyInjection\ConcreteResourceConfiguration',
             $method
         );

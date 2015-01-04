@@ -87,6 +87,7 @@ abstract class AbstractResourceConfiguration implements ConfigurationInterface
                     )
                 ->end()
                 ->scalarNode('repository')
+                    ->cannotBeEmpty()
                     ->defaultValue(isset($defaults['repository']) ? $defaults['repository'] : null)
                 ->end()
                 ->scalarNode('interface')

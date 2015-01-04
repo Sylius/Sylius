@@ -43,7 +43,7 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
             $repositoryClass = $this->container->getParameter($repositoryKey);
         }
 
-        if (!empty($classes['repository'])) {
+        if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];
         }
 

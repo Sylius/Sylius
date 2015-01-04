@@ -35,9 +35,9 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
-        $repositoryClass = new Parameter('sylius.mongodb-odm.repository.class');
+        $repositoryClass = new Parameter('sylius.mongodb_odm.repository.class');
 
-        if (!empty($classes['repository'])) {
+        if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];
         }
 
