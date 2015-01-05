@@ -12,14 +12,14 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
+use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
  * Interface for taxon translations.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonTranslationInterface
+interface TaxonTranslationInterface extends SlugAwareInterface
 {
     /**
      * Get taxon name.
@@ -34,20 +34,6 @@ interface TaxonTranslationInterface
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug();
-
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug);
 
     /**
      * Get permalink.

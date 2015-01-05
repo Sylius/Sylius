@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Product\Model;
 
+use Sylius\Component\Resource\Model\SlugAwareInterface;
+
 /**
  * Base product translation interface.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ProductTranslationInterface
+interface ProductTranslationInterface extends SlugAwareInterface
 {
     /**
      * Get product name.
@@ -31,20 +33,6 @@ interface ProductTranslationInterface
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * Get permalink/slug.
-     *
-     * @return string
-     */
-    public function getSlug();
-
-    /**
-     * Set the permalink.
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug);
 
     /**
      * Get product name.

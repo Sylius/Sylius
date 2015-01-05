@@ -100,7 +100,7 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug = null)
     {
         $this->slug = $slug;
 

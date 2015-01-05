@@ -26,7 +26,7 @@ interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterfa
     /**
      * Get the id of taxonomy.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
@@ -47,7 +47,7 @@ interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterfa
     /**
      * Is root taxon?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isRoot();
 
@@ -77,7 +77,7 @@ interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterfa
      *
      * @param TaxonInterface $taxon
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasChild(TaxonInterface $taxon);
 
@@ -108,20 +108,6 @@ interface TaxonInterface extends SoftDeletableInterface, TaxonTranslationInterfa
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug();
-
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug);
 
     /**
      * Get permalink.
