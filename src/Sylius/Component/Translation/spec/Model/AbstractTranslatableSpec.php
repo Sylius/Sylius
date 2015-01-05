@@ -1,19 +1,20 @@
 <?php
 
-namespace spec\Sylius\Component\Translation\Fixture;
+namespace spec\Sylius\Component\Translation\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Translation\Fixture\AcmeTranslation;
+use Prezent\Doctrine\Translatable\TranslationInterface;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Translation\Model\AbstractTranslation;
 
-class AcmeSpec extends ObjectBehavior
+class AbstractTranslatableSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function let()
     {
-        $this->shouldHaveType('Sylius\Component\Translation\Fixture\Acme');
+        $this->beAnInstanceOf('spec\Sylius\Component\Translation\Model\ConcreteTranslatable');
     }
 
-    function it_implements_Sylius_taxonomy_interface()
+    function it_is_translatable()
     {
         $this->shouldImplement('Prezent\Doctrine\Translatable\TranslatableInterface');
     }
@@ -23,33 +24,30 @@ class AcmeSpec extends ObjectBehavior
         $this->getTranslations()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_translation(AcmeTranslation $translation)
+    function it_adds_translation(TranslationInterface $translation)
     {
         $translation->getLocale()->willReturn('en');
         $translation->setTranslatable($this)->shouldBeCalled();
 
-        $this->addTranslation($translation);
+        $this->addTranslation($translation)->shouldReturn($this);
         $this->hasTranslation($translation)->shouldReturn(true);
     }
 
-    function it_removes_translation(AcmeTranslation $translation)
+    function it_removes_translation(TranslationInterface $translation)
     {
-        $translation->getLocale()->willReturn('en');
-        $translation->setTranslatable($this)->shouldBeCalled();
-        $translation->setTranslatable(null)->shouldBeCalled();
-
         $this->addTranslation($translation);
-        $this->removeTranslation($translation);
+        $this->removeTranslation($translation)->shouldReturn($this);
+
         $this->hasTranslation($translation)->shouldReturn(false);
     }
 
     function its_current_locale_is_mutable()
     {
-        $this->setCurrentLocale('en');
+        $this->setCurrentLocale('en')->shouldReturn($this);
         $this->getCurrentLocale()->shouldReturn('en');
     }
 
-    function its_current_translation_is_mutable(AcmeTranslation $translation)
+    function its_current_translation_is_mutable(TranslationInterface $translation)
     {
         $this->setCurrentTranslation($translation);
         $this->getCurrentTranslation()->shouldReturn($translation);
@@ -66,7 +64,7 @@ class AcmeSpec extends ObjectBehavior
         $this->shouldThrow('\RuntimeException')->duringTranslate();
     }
 
-    function it_translates_properly(AcmeTranslation $translation)
+    function it_translates_properly(TranslationInterface $translation)
     {
         $translation->getLocale()->willReturn('en');
         $translation->setTranslatable($this)->shouldBeCalled();
@@ -80,13 +78,10 @@ class AcmeSpec extends ObjectBehavior
     function it_creates_new_empty_translation_properly()
     {
         $this->setCurrentLocale('en');
-
-        $translation = $this->translate();
-        $translation->shouldImplement('Prezent\Doctrine\Translatable\TranslationInterface');
-        $translation->acmeProperty->shouldBeNull();
+        $this->translate()->shouldHaveType('spec\Sylius\Component\Translation\Model\ConcreteTranslatableTranslation');
     }
 
-    function it_clones_new_translation_properly(AcmeTranslation $translation)
+    function it_clones_new_translation_properly(TranslationInterface $translation)
     {
         $translation->getLocale()->willReturn('en');
         $translation->setTranslatable($this)->shouldBeCalled();
@@ -94,15 +89,17 @@ class AcmeSpec extends ObjectBehavior
 
         $this->addTranslation($translation);
         $this->setCurrentLocale('en');
+
         $translation = $this->translate();
         $translation->shouldImplement('Prezent\Doctrine\Translatable\TranslationInterface');
         $translation->acmeProperty->shouldBe('acmeProp');
     }
+}
 
-    function it_has_fluent_interface(AcmeTranslation $translation)
-    {
-        $this->setCurrentLocale('en')->shouldReturn($this);
-        $this->setCurrentTranslation($translation)->shouldReturn($this);
-        $this->setFallbackLocale('en')->shouldReturn($this);
-    }
+class ConcreteTranslatable extends AbstractTranslatable
+{
+}
+
+class ConcreteTranslatableTranslation extends AbstractTranslation
+{
 }
