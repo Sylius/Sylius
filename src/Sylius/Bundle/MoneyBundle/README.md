@@ -70,7 +70,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusMoneyBundle/blob/master/Moneys/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusMoneyBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

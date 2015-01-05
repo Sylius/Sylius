@@ -66,7 +66,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusCurrencyBundle/blob/master/Currencys/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusCurrencyBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

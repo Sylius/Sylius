@@ -38,7 +38,7 @@ If you find a bug, please refer to the [Reporting a Bug](http://docs.sylius.org/
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/Addressing/blob/master/LICENSE).
+License can be found [here](https://github.com/Sylius/Locale/blob/master/LICENSE).
 
 Authors
 -------
