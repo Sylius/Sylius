@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceConfiguration;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * This class contains the configuration information for the bundle.
@@ -24,7 +24,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends AbstractResourceConfiguration
 {
     /**
      * {@inheritdoc}
@@ -34,218 +34,83 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_addressing');
 
-        $rootNode
-            ->addDefaultsIfNotSet()
-            ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-            ->end()
+        $this
+            ->addDefaults($rootNode, null, null, array(
+                'address'              => array('sylius'),
+                'country'              => array('sylius'),
+                'province'             => array('sylius'),
+                'zone'                 => array('sylius'),
+                'zone_member'          => array('sylius'),
+                'zone_member_country'  => array('sylius'),
+                'zone_member_province' => array('sylius'),
+                'zone_member_zone'     => array('sylius'),
+            ))
+            ->addScopesSection($rootNode)
         ;
-
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
-        $this->addScopesSection($rootNode);
+        $rootNode
+            ->append($this->createResourcesSection(array(
+                'address'              => array(
+                    'model' => 'Sylius\Component\Addressing\Model\Address',
+                    'form'  => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\AddressType',
+                        'choice'          => null,
+                    ),
+                ),
+                'country'              => array(
+                    'model'               => 'Sylius\Component\Addressing\Model\Country',
+                    'repository'          => 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository',
+                    'form'                => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\CountryType'
+                    ),
+                    'translatable_fields' => array('name'),
+                ),
+                'country_translation'  => array(
+                    'model' => 'Sylius\Component\Addressing\Model\CountryTranslation',
+                ),
+                'province'             => array(
+                    'model'      => 'Sylius\Component\Addressing\Model\Province',
+                    'controller' => 'Sylius\Bundle\AddressingBundle\Controller\ProvinceController',
+                    'form'       => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType',
+                        'choice'          => 'Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType',
+                    ),
+                ),
+                'zone'                 => array(
+                    'model' => 'Sylius\Component\Addressing\Model\Zone',
+                    'form'  => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\ZoneType',
+                    ),
+                ),
+                'zone_member'          => array(
+                    'model' => 'Sylius\Component\Addressing\Model\ZoneMember',
+                    'form'  => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType',
+                        'choice'          => null,
+                    ),
+                ),
+                'zone_member_country'  => array(
+                    'model' => 'Sylius\Component\Addressing\Model\ZoneMemberCountry',
+                    'form'  => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType',
+                        'choice'          => null,
+                    ),
+                ),
+                'zone_member_province' => array(
+                    'model' => 'Sylius\Component\Addressing\Model\ZoneMemberProvince',
+                    'form'  => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType',
+                    ),
+                ),
+                'zone_member_zone'     => array(
+                    'model' => 'Sylius\Component\Addressing\Model\ZoneMemberZone',
+                    'form'  => array(
+                        self::DEFAULT_KEY => 'Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType',
+                    ),
+                ),
+            )))
+        ;
 
         return $treeBuilder;
-    }
-
-    /**
-     * Adds `validation_groups` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('address')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('country')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('province')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('zone')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('zone_member')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('zone_member_country')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('zone_member_province')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('zone_member_zone')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('address')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\Address')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\AddressType')->end()
-                                        ->scalarNode('choice')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('country')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\Country')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\CountryType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('translatable_fields')
-                                    ->prototype('scalar')->end()
-                                    ->defaultValue(array('name'))
-                                ->end()
-                                ->scalarNode('choice_form')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('country_translation')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\CountryTranslation')->end()
-                                ->scalarNode('repository')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('province')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\Province')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\AddressingBundle\Controller\ProvinceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType')->end()
-                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('zone')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\Zone')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ZoneType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('zone_member')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\ZoneMember')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType')->end()
-                                        ->scalarNode('choice')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('zone_member_country')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\ZoneMemberCountry')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType')->end()
-                                        ->scalarNode('choice')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('zone_member_province')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\ZoneMemberProvince')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType')->end()
-                                        ->scalarNode('choice')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('zone_member_zone')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\ZoneMemberZone')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->arrayNode('form')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType')->end()
-                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 
     private function addScopesSection(ArrayNodeDefinition $node)

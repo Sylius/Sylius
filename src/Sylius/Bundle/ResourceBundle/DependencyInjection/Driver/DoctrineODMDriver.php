@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -34,7 +35,7 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
+        $repositoryClass = new Parameter('sylius.mongodb_odm.repository.class');
 
         if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];

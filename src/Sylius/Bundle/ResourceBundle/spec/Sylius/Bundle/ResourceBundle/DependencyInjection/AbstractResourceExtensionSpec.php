@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceConfiguration;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -119,7 +120,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                     'classes' => array(
                         'resource'=>array(
                             'form' => array(
-                                AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType'
+                                AbstractResourceConfiguration::DEFAULT_KEY => 'Sylius\FormType'
                             )
                         )
                     ),
@@ -158,7 +159,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                     'classes' => array(
                         'resource' => array(
                             'form' => array(
-                                AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType',
+                                AbstractResourceConfiguration::DEFAULT_KEY => 'Sylius\FormType',
                                 'other'                                => 'Sylius\OtherFormType',
                             )
                         )

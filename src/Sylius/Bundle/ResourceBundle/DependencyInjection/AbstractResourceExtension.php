@@ -61,8 +61,6 @@ abstract class AbstractResourceExtension extends Extension
         'services',
     );
 
-    const DEFAULT_KEY = 'default';
-
     /**
      * {@inheritdoc}
      */
@@ -139,7 +137,7 @@ abstract class AbstractResourceExtension extends Extension
             foreach ($serviceClasses as $service => $class) {
                 if ('form' === $service) {
                     if (!is_array($class)){
-                        $class = array(self::DEFAULT_KEY => $class);
+                        $class = array(AbstractResourceConfiguration::DEFAULT_KEY => $class);
                     }
                     foreach ($class as $suffix => $subClass) {
                         $container->setParameter(
@@ -147,7 +145,7 @@ abstract class AbstractResourceExtension extends Extension
                                 '%s.form.type.%s%s.class',
                                 $this->applicationName,
                                 $model,
-                                $suffix === self::DEFAULT_KEY ? '' : sprintf('_%s', $suffix)
+                                $suffix === AbstractResourceConfiguration::DEFAULT_KEY ? '' : sprintf('_%s', $suffix)
                             ),
                             $subClass
                         );
@@ -180,7 +178,7 @@ abstract class AbstractResourceExtension extends Extension
                 continue;
             }
             foreach ($serviceClasses['form'] as $name => $class) {
-                $suffix = ($name === self::DEFAULT_KEY ? '' : sprintf('_%s', $name));
+                $suffix = ($name === AbstractResourceConfiguration::DEFAULT_KEY ? '' : sprintf('_%s', $name));
                 $alias = sprintf('%s_%s%s', $this->applicationName, $model, $suffix);
                 $definition = new Definition($class);
                 if ('choice' === $name) {

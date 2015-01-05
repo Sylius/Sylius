@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -36,7 +37,7 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
     protected function getRepositoryDefinition(array $classes)
     {
         $repositoryKey = $this->getContainerKey('repository', '.class');
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+        $repositoryClass = new Parameter('sylius.orm.repository.class');
 
         if ($this->container->hasParameter($repositoryKey)) {
             $repositoryClass = $this->container->getParameter($repositoryKey);
