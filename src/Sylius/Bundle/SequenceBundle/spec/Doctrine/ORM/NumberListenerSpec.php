@@ -80,7 +80,7 @@ class NumberListenerSpec extends ObjectBehavior
             Argument::type('Symfony\Component\EventDispatcher\GenericEvent')
         )->shouldBeCalled();
 
-        $generator->generate($entity, '')->shouldBeCalled();
+        $generator->generate($entity, $sequence)->shouldBeCalled();
 
         $eventDispatcher->dispatch(
             sprintf(SyliusSequenceEvents::POST_GENERATE, 'sequence_type'),
