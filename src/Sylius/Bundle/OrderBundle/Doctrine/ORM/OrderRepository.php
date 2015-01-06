@@ -30,13 +30,17 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
 
         $this->_em->getFilters()->disable('softdeleteable');
 
-        return $queryBuilder
+        $result = $queryBuilder
             ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->setMaxResults($amount)
             ->orderBy('o.completedAt', 'desc')
             ->getQuery()
             ->getResult()
         ;
+
+        $this->_em->getFilters()->enable('softdeleteable');
+
+        return $result;
     }
 
     /**
