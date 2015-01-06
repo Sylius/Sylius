@@ -1,0 +1,23 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_support_inquiry_index') }}">{{ 'sylius.breadcrumb.support_inquiry.index'|trans }}</a></li>
+    <li>{{ support_inquiry.id }}</li>
+    <li>{{ 'sylius.breadcrumb.support_inquiry.show'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fa fa-life-ring"></i> {{ 'sylius.support_inquiry.show_header'|trans|raw }}</h1>
+</div>
+
+{{ support_inquiry.firstName }} <br/>
+{{ support_inquiry.lastName }} <br/>
+{{ support_inquiry.email }} <br/>
+{{ support_inquiry.topic }} <br/>
+{{ support_inquiry.message }}
+
+{% endblock %}

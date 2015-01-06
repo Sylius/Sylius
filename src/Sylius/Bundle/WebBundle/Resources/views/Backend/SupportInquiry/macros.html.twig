@@ -1,0 +1,39 @@
+{% macro list(support_inquiries) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if support_inquiries|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('firstName', 'sylius.support_inquiry.firstName'|trans) }}</th>
+            <th>{{ sylius_resource_sort('lastName', 'sylius.support_inquiry.lastName'|trans) }}</th>
+            <th>{{ sylius_resource_sort('email', 'sylius.support_inquiry.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('topic', 'sylius.support_inquiry.topic'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for support_inquiry in support_inquiries %}
+        <tr id="{{ support_inquiry.id }}">
+            <td>{{ support_inquiry.firstName }}</td>
+            <td>{{ support_inquiry.lastName }}</td>
+            <td>{{ support_inquiry.email }}</td>
+            <td>{{ support_inquiry.topic }}</td>
+            <td>
+                <div class="pull-right">
+                {{ buttons.show(path('sylius_backend_support_inquiry_show', {'id': support_inquiry.id})) }}
+                {{ buttons.edit(path('sylius_backend_support_inquiry_update', {'id': support_inquiry.id})) }}
+                {{ buttons.delete(path('sylius_backend_support_inquiry_delete', {'id': support_inquiry.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.support_inquiry.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

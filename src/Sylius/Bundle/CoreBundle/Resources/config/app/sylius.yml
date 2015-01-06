@@ -28,7 +28,7 @@ sylius_locale: ~
 
 sylius_currency: ~
 
-sylius_contact: ~
+sylius_support: ~
 
 sylius_api:
     classes:
@@ -673,3 +673,4 @@ sylius_rbac:
     roles_hierarchy:
         administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
+

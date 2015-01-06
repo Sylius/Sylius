@@ -128,13 +128,13 @@ sylius_backend_api_client:
     resource: @SyliusWebBundle/Resources/config/routing/backend/api_client.yml
     prefix: /api-clients
 
-sylius_backend_contact_topic:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/contact_topic.yml
-    prefix: /contact-topics
+sylius_backend_support_inquiry:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/support_inquiry.yml
+    prefix: /support/inquiry
 
-sylius_backend_contact_request:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/contact_request.yml
-    prefix: /contact-requests
+sylius_backend_support_topic:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/support_topic.yml
+    prefix: /support/topics
 
 sylius_backend_role:
     resource: @SyliusWebBundle/Resources/config/routing/backend/role.yml
