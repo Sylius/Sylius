@@ -17,7 +17,6 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Doctrine\ORM\Query;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -27,13 +26,13 @@ class TranslatableListener implements EventSubscriber
 {
     /**
      * String Locale to use for translations
-     * @var
+     * @var string
      */
     private $currentLocale = 'en';
 
     /**
      * String Locale to use when the current locale is not available
-     * @var
+     * @var string
      */
     private $fallbackLocale = 'en';
 
@@ -46,9 +45,8 @@ class TranslatableListener implements EventSubscriber
     /**
      * Constructor
      *
-     * @param array $metadata
+     * @param array  $metadata
      * @param string $fallbackLocale
-     *
      */
     public function __construct(array $metadata, $fallbackLocale)
     {
@@ -59,12 +57,13 @@ class TranslatableListener implements EventSubscriber
     /**
      * Set the current locale
      *
-     * @param string $currentLocale
+     * @param  string $currentLocale
      * @return self
      */
     public function setCurrentLocale($currentLocale)
     {
         $this->currentLocale = $currentLocale;
+
         return $this;
     }
 
@@ -93,7 +92,6 @@ class TranslatableListener implements EventSubscriber
      * Add mapping to translatable entities
      *
      * @param LoadClassMetadataEventArgs $eventArgs
-     * @return void
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
@@ -117,7 +115,6 @@ class TranslatableListener implements EventSubscriber
      * Add mapping data to a translatable entity
      *
      * @param ClassMetadata $mapping
-     * @return void
      */
     private function mapTranslatable(ClassMetadata $mapping)
     {
@@ -146,7 +143,6 @@ class TranslatableListener implements EventSubscriber
      * Add mapping data to a translation entity
      *
      * @param ClassMetadata $mapping
-     * @return void
      */
     private function mapTranslation(ClassMetadata $mapping)
     {
@@ -189,7 +185,7 @@ class TranslatableListener implements EventSubscriber
 
         if (!$this->hasUniqueConstraint($mapping, $columns)) {
             $constraints = isset($mapping->table['uniqueConstraints']) ? $mapping->table['uniqueConstraints'] : array();
-            $constraints[$mapping->getTableName() . '_uniq_trans'] = array(
+            $constraints[$mapping->getTableName().'_uniq_trans'] = array(
                 'columns' => $columns,
             );
 
@@ -203,7 +199,8 @@ class TranslatableListener implements EventSubscriber
      * Check if an unique constraint has been defined
      *
      * @param ClassMetadata $mapping
-     * @param array $columns
+     * @param array         $columns
+     *
      * @return bool
      */
     private function hasUniqueConstraint(ClassMetadata $mapping, array $columns)
@@ -225,7 +222,6 @@ class TranslatableListener implements EventSubscriber
      * Load translations
      *
      * @param LifecycleEventArgs $args
-     * @return void
      */
     public function postLoad(LifecycleEventArgs $args)
     {
@@ -241,12 +237,12 @@ class TranslatableListener implements EventSubscriber
         $metadata = $this->metadata[$name];
 
         if (isset($metadata['fallbackLocale'])) {
-            $setter = 'set'. ucfirst($metadata['fallbackLocale']);
+            $setter = 'set'.ucfirst($metadata['fallbackLocale']);
             $entity->$setter($this->fallbackLocale);
         }
 
         if (isset($metadata['currentLocale'])) {
-            $setter = 'set'. ucfirst($metadata['currentLocale']);
+            $setter = 'set'.ucfirst($metadata['currentLocale']);
             $entity->$setter($this->currentLocale);
         }
     }

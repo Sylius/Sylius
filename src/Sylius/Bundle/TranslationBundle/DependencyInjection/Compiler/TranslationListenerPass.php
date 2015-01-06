@@ -33,8 +33,10 @@ class TranslationListenerPass implements CompilerPassInterface
             'sylius.translatable.listener'
         );
 
-//        TODO make sure this subscriber has higher priority than LoadORMMetadataSubscriber
-//        It is absolutely necessary to have the translation metadata loaded before sylius resolves entity metadata
+        /**
+         * TODO make sure this subscriber has higher priority than LoadORMMetadataSubscriber
+         * It is absolutely necessary to have the translation metadata loaded before sylius resolves entity metadata
+         */
         $translatableListener->addTag('doctrine.event_subscriber', array('priority' => 99));
     }
 }

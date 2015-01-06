@@ -18,6 +18,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SyliusTranslationBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
@@ -31,7 +34,7 @@ class SyliusTranslationBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 

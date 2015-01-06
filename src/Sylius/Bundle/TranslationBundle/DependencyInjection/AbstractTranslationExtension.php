@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -48,7 +49,7 @@ abstract class AbstractTranslationExtension extends Extension implements Prepend
     /**
      * In case any extra processing is needed.
      *
-     * @param array $class
+     * @param array            $class
      * @param ContainerBuilder $container
      *
      * @throws \Exception
@@ -68,12 +69,17 @@ abstract class AbstractTranslationExtension extends Extension implements Prepend
         }
 
         if (isset($class['translatable'])) {
-
-            $translationsMapping = $this->mapTranslatable($translationsMapping, $class['model'], $class['translatable'], $defaultValues);
-
+            $translationsMapping = $this->mapTranslatable(
+                $translationsMapping, $class['model'],
+                $class['translatable'],
+                $defaultValues
+            );
         } elseif (isset($class['translation'])) {
-
-            $translationsMapping = $this->mapTranslation($translationsMapping, $class['model'], $class['translation']);
+            $translationsMapping = $this->mapTranslation(
+                $translationsMapping,
+                $class['model'],
+                $class['translation']
+            );
         }
 
         $container->setParameter('sylius.translation.mapping', $translationsMapping);
@@ -82,20 +88,20 @@ abstract class AbstractTranslationExtension extends Extension implements Prepend
     /**
      * Set translatable entity mapping metadata
      *
-     * @param array $translationsMapping
+     * @param array  $translationsMapping
      * @param string $translatableClass
-     * @param array $translatableConfig
-     * @param array $defaultValues
+     * @param array  $translatableConfig
+     * @param array  $defaultValues
      *
      * @internal param string $translatable
-     * @internal param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @internal param ContainerBuilder $container
      *
      * @return array
      */
     protected function mapTranslatable(array $translationsMapping, $translatableClass, array $translatableConfig, array $defaultValues)
     {
         // Map translatable target entity
-        $translationClass = isset($translatableConfig['targetEntity']) ? $translatableConfig['targetEntity'] : $translatableClass . 'Translation';
+        $translationClass = isset($translatableConfig['targetEntity']) ? $translatableConfig['targetEntity'] : $translatableClass.'Translation';
         $translatableConfig['targetEntity'] = $translationClass;
 
         $translationMetadata = array_merge($defaultValues['translatable'], $translatableConfig);
