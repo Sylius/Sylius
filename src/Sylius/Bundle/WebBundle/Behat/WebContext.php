@@ -502,6 +502,14 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
         $this->assertSession()->elementExists('css', $element, $tr);
     }
+    
+    /**
+     * @Then I should not see :button button
+     */
+    public function iShouldNotSeeButton($button)
+    {
+        $tr = $this->assertSession()->elementNotExists('css', '.delete-action-form input[value="'.strtoupper($button).'"]');
+    }
 
     /**
      * @When /^I click "([^"]*)" near "([^"]*)"$/

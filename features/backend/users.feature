@@ -58,6 +58,12 @@ Feature: Users management
          Then I should be on the page of user with username "john"
           And I should see 1 orders in the list
 
+    Scenario: Accessing currently logged user details page
+        Given I am on the user index page
+         When I click "details" near "sylius@example.com"
+         Then I should be on the page of user with username "sylius@example.com"
+          And I should not see "delete" button
+
     Scenario: Accessing the user creation form
         Given I am on the user index page
           And I follow "create user"
