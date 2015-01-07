@@ -508,7 +508,16 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldNotSeeButton($button)
     {
-        $tr = $this->assertSession()->elementNotExists('css', '.delete-action-form input[value="'.strtoupper($button).'"]');
+        $this->assertSession()->elementNotExists('css', '.delete-action-form input[value="'.strtoupper($button).'"]');
+    }
+
+    /**
+     * @Then I should not see :button button near :user in :table table
+     */
+    public function iShouldNotSeeButtonInColumnInTable($button, $user, $table)
+    {   
+        $this->assertSession()->elementExists('css', "#".$table." tr[data-user='$user']");
+        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-user='$user'] form input[value=".strtoupper($button)."]");
     }
 
     /**
