@@ -28,7 +28,7 @@
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_product_create') }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
+<form action="{{ path('sylius_backend_product_create', {'archetype': app.request.get('archetype')}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {% include 'SyliusWebBundle:Backend/Product:_form.html.twig' %}
     {{ create() }}
 </form>

@@ -23,7 +23,7 @@ class ArchetypeTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Archetype', array('sylius'));
+        $this->beConstructedWith('Archetype', array('sylius'), 'book');
     }
 
     function it_is_initializable()
@@ -39,22 +39,27 @@ class ArchetypeTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
+            ->add('code', 'text', Argument::any())
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('name', 'text', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('parent', 'sylius_archetype_choice', Argument::any())
+            ->add('parent', 'sylius_book_archetype_choice', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('attributes', 'sylius_archetype_attribute_choice', Argument::any())
+            ->add('attributes', 'sylius_book_attribute_choice', Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('options', 'sylius_archetype_option_choice', Argument::any())
+            ->add('options', 'sylius_book_option_choice', Argument::any())
             ->willReturn($builder)
         ;
 
@@ -74,6 +79,6 @@ class ArchetypeTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_archetype');
+        $this->getName()->shouldReturn('sylius_book_archetype');
     }
 }

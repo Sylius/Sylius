@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\VariantInterface;
@@ -41,6 +42,17 @@ class ProductSpec extends ObjectBehavior
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
+    }
+
+    function it_does_not_belong_to_any_archetype_by_default()
+    {
+        $this->getArchetype()->shouldReturn(null);
+    }
+
+    function it_can_belong_to_a_product_archetype(ArchetypeInterface $archetype)
+    {
+        $this->setArchetype($archetype);
+        $this->getArchetype()->shouldReturn($archetype);
     }
 
     function it_has_no_name_by_default()

@@ -23,8 +23,7 @@ interface ArchetypeBuilderInterface
     /**
      * Build the archetype of product.
      *
-     * @param ArchetypeInterface        $archetype
      * @param ArchetypeSubjectInterface $subject
      */
-    public function build(ArchetypeInterface $archetype, ArchetypeSubjectInterface $subject);
+    public function build(ArchetypeSubjectInterface $subject);
 }

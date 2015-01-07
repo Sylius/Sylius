@@ -594,6 +594,7 @@ sylius:
         contain_variants: Contain Variants
         create: Create product
         create_header: New product
+        archetype: Archetype
         description: Description
         generate_variants: Generate variants
         index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
@@ -700,6 +701,7 @@ sylius:
         create: Create archetype
         create_header: New archetype
         index_header: Product archetypes
+        code: code
         name: name
         no_results: There are no archetypes defined.
         options: options

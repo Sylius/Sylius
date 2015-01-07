@@ -36,6 +36,11 @@ class Archetype implements ArchetypeInterface
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -76,12 +81,35 @@ class Archetype implements ArchetypeInterface
         $this->createdAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**
