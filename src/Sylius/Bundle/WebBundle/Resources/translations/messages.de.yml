@@ -1,55 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-  order_confirmation:
-    subject: Ihre Bestellbestätigung
 sylius:
   account:
-    address:
-      action:
-        billing: Als Standardrechnungsadresse setzen
-        create: Neue Adresse hinzufügen
-        delete: Löschen
-        edit: Bearbeiten
-        shipping: Als Standard-Lieferadresse setzen
-      create: Neue Adresse hinzufügen
-      default:
-        billing: Standard-Rechnungsadresse
-        no_billing: Keine Standard-Rechnungsadresse
-        no_shipping: Keine Standard-Lieferadresse
-        shipping: Standard-Lieferadresse
-      empty: Noch keine Adressen hinzugefügt
-      list: Alle Adressen
-      update: Adresse bearbeiten
     home:
       email: ""
       id: ""
-      outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen.
-      since: Kunde seit
-      welcome: Willkommen in deinen persönlichen Bereich
     order:
-      created_at: Bestellt am
-      details: Bestelldetails
-      download_invoice: Rechnung herunterladen
-      empty: Noch keine Bestellungen vorhanden.
-      invoice: Rechnung
-      list: Alle Bestellungen
       number: ""
       payment_mode: ""
-      placed_at: 'Bestellt am %at%'
-      shipment:
-        pending: Ausstehend
-        ready: 'Bereit seit %at%'
-        returned: 'Retour am %at%'
-        shipped: 'Geliefert am %at%'
       shipment_mode: ""
       state: ""
-      total: Total
-      tracking_number: Sendungsnummer
-    title: Mein Account
-  add_to_cart: In den Warenkorb
   address:
+<<<<<<< HEAD
     city: Stadt
     company: Firma
     country: Land
@@ -171,162 +134,15 @@ sylius:
       unit_price: Preis
     summary_header: Warenkorb-Übersicht
     total_items: '1 Artikel|%count% Artikel'
+=======
+    street: Strasse / Nr.
+>>>>>>> master
   checkout:
-    addressing:
-      header: Lieferadresse
-    back: Zurück
     finalize:
       address:
-        city: Stadt
-        country: Land
-        firstname: Vorname
-        lastname: Nachname
-        postcode: Postleitzahl
-        province: Region
-        street: Straße
-      header: Bestellungsübersicht
-      order:
-        billing_address: Rechnungsadresse
-        items_total: Gesamt
-        no_items: Diese Bestellung hat keine Artikel
-        no_promotion: Keine Reklame
-        no_shipping_charges: Keine Versandkosten
-        no_taxes: Keine Steuern
-        promotion_discount: Rabatt
-        promotion_total: Vergünstigung
-        shipping_address: Lieferadresse
-        shipping_charges: Lieferungsgebühren
-        shipping_total: Lieferungssumme
-        tax_total: Steuersumme
-        taxes: Steuern
-        total: Gesamt
-      order_item:
-        quantity: Menge
-        total: Gesamt
-        unit_price: Stückpreis
-      place_order: Bestellung aufgeben
-      product:
-        name: Name
-    forward: Weiter
-    payment:
-      header: Zahlungsweise
-    security:
-      existing_customer: Existierender Benutzer
-      header: Sicherheit
-      login: Login
-      new_customer: Neuer Benutzer
-      register: Kostenfrei regisrieren
-    shipping:
-      error: Leider ist die Lieferung in das von Ihnen gewählte Land nicht möglich.
-      header: Lieferverfahren
-  confirmation:
-    message: Möchten Sie diesen Eintrag löschen?
-    title: Bestätigung
-  country:
-    add_province: Bundesland hinzufügen
-    create: Erstellen
-    create_header: Land erstellen
-    id: ID
-    index_header: Länder
-    iso_name: ISO Name
-    manage: Editieren
-    name: Land
-    no_results: Keine Ergebnisse
-    show_header: Land details
-    update_header: Land editieren
-  create: Erstellen
-  created_at: Erstellt am
-  delete: Löschen
-  deleted: Gelöscht
-  edit: Bearbeiten
-  email: E-Mail
-  exchange_rate:
-    create: Wechselkurs hinzufügen
-    create_header: Neuer Wechselkurs
-    currency: Währung
-    id: ID
-    index_header: Wechselkurse
-    no_results: Keine Wechselkurse zum Anzeigen vorhanden.
-    rate: Kurs
-    update_header: Wechselkurs bearbeiten
-    updated_at: Letztes Update
-  filter: Filtern
-  form:
-    cart:
-      coupon: Falls vorhanden, geben Sie Ihren Gutscheincode hier ein
-    choose_file: Datei wählen
-    frontend:
-      password:
-        confirmation: Bestätigung
-        current: Aktuelles Passwort
-        new: Neues Passwort
-        title: Passwort ändern
-      profile:
-        title: Persönliche Informationen bearbeiten
-    login:
-      email: E-Mail
-      password: Passwort
-    option_value:
-      add_value: Wert hinzufügen
-    profile:
-      email: E-Mail
-      firstName: Vorname
-      lastName: Nachname
-  gallery:
-    next: Nächstes Bild
-    previous: Vorheriges Bild
-    slideshow: Slideshow
-  generate: Generieren
-  group:
-    create: Gruppe anlegen
-    create_header: Neue Gruppen erstellen
-    id: ID
-    index_header: Gruppen
-    name: Name
-    no_results: Keine Gruppen vorhanden.
-    roles: Rollen
-    update_header: Gruppe bearbeiten
-  hide_deleted: Gelöschte Elemente ausblenden
-  history:
-    header: Verlauf
-    action: Aktion
-    author: Autor
-    data: Daten
-    logged_at: Aufgezeichnet am
-    version: Version
-  homepage:
-    splash:
-      headline: Willkommen bei Sylius
-      subheadline: Modernes eCommerce für Symfony2
-  inventory_unit:
-    created_at: Erstellt
-    inventory_state: Bestand Status
-    name: Name
-    no_results: Keine Ergebnisse
-    shipping_state: Versandstatus
-    sku: Artikelposition
-    updated_at: Geändert
-  locale:
-    code: Code
-    create: Gebietsschema anlegen
-    create_header: Neue Gebietsschemata anlegen
-    enabled: Aktiviert
-    index_header: Übersicht der konfigurierten Gebietsschemen
-    no_results: Keine konfigurierten Gebietsschemen.
-    update_header: Gebietsschema bearbeiten
-    updated_at: Letzte Aktualisierung
-  login: Anmelden
-  login_header: Login
-  logo: Sylius
-  manage: Verwaltung
-  meta:
-    backend_title: Sylius Dashboard
-    frontend_description: Beschreibung
-    frontend_keywords: Keywords
-    frontend_title: Titel
-  na: Nicht verfügbar
-  newest: Neueste Produkte
+        street: Strasse / Nr.
   "no": false
+<<<<<<< HEAD
   no_results: Keine Ergebnisse
   option:
     create: Erstellen
@@ -704,17 +520,6 @@ sylius:
     sku: Bestandseinheit
     stock: Aktueller Lagerbestand
     update_header: Variante editieren
+=======
+>>>>>>> master
   "yes": true
-  zone:
-    add_member: Mitglied hinzufügen
-    create: Hinzufügen
-    create_header: Gebiet erstellen
-    index_header: Gebiete
-    manage: Verwalten
-    name: Name
-    no_results: Keine Ergebnisse
-    show_header: Gebiete
-    type: Typ
-    update_header: Zone editieren
-  zone_member:
-    members: Mitglieder

@@ -29,31 +29,31 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | es    | yes     |
         And the following product translations exist:
             | product       | name           | locale |
-            | Super T-Shirt | Camiseta Super | es   |
+            | Super T-Shirt | Camiseta Super | es     |
         And the following taxonomy translations exist
             | taxonomy | name      | locale |
-            | Category | Categoria | es   |
+            | Category | Categoria | es     |
         And the following taxon translations exist
             | taxon    | name      | locale |
-            | Clothing | Ropa      | es   |
-            | T-Shirts | Camisetas | es   |
+            | Clothing | Ropa      | es     |
+            | T-Shirts | Camisetas | es     |
         And the following attribute translations exist
-            | attribute | presentation | locale |
-            | T-Shirt fabric    | Material     | es   |
+            | attribute      | presentation | locale |
+            | T-Shirt fabric | Material     | es     |
         And the following option translations exist
-            | option | presentation | locale |
-            | T-Shirt size   | Talla        | es   |
+            | option       | presentation | locale |
+            | T-Shirt size | Talla        | es     |
 
     Scenario: Seeing translated product, taxonomy and taxon name
         Given I am on the store homepage
-         When I change the locale to "Spanish"
-         Then I should see "Camiseta Super"
-          And I should see "Categoria"
-          And I should see "Camisetas"
+        When I change the locale to "Spanish"
+        Then I should see "Camiseta Super"
+        And I should see "Categoria"
+        And I should see "Camisetas"
 
     Scenario: Seeing translated product options and attributes
         Given I am on the store homepage
-         When I change the locale to "Spanish"
-          And I follow "Camiseta Super"
-         Then I should see "Material"
-         Then I should see "Talla"
+        When I change the locale to "Spanish"
+        And I follow "Camiseta Super"
+        Then I should see "Material"
+        And I should see "Talla"

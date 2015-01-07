@@ -12,13 +12,14 @@ env:
 services: mongodb
 
 before_install:
-    - sudo apt-get update > /dev/null
+    - sudo apt-get update
     - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
 
 install:
-    - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl wkhtmltopdf > /dev/null
-    - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
-    - sudo /etc/init.d/apache2 restart
+    - sudo apt-get install -y --force-yes php5-curl php5-intl wkhtmltopdf
+#   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl wkhtmltopdf
+#   - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
+#   - sudo /etc/init.d/apache2 restart
 
 before_script:
     - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
@@ -26,27 +27,23 @@ before_script:
     - echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-    - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
+#   - export MINK_EXTENSION_PARAMS='base_url=http://localhost:8000/app_test.php'
     - composer self-update
     - composer install --prefer-source --no-interaction
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
     - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction
 
-    - app/console doctrine:database:create --env=test > /dev/null
-    - app/console doctrine:schema:create --env=test > /dev/null
-    - app/console doctrine:phpcr:repository:init --env=test > /dev/null
-    - app/console cache:warmup --env=test > /dev/null
+    - app/console doctrine:database:create --env=test
+    - app/console doctrine:schema:create --env=test
+    - app/console doctrine:phpcr:repository:init --env=test
+    - app/console cache:warmup --env=test
 
-    - sh -e /etc/init.d/xvfb start
-    - export DISPLAY=:99
-#    - curl http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar > selenium.jar
-#    - java -jar selenium.jar > /dev/null &
-    - sleep 5
+#   - sh -e /etc/init.d/xvfb start
+#   - export DISPLAY=:99
+#   - curl http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar > selenium.jar
+#   - java -jar selenium.jar
+#   - sleep 5
 
 script:
     - travis/run-suite-$TEST_SUITE
-
-notifications:
-    email: "travis-ci@sylius.org"
-    irc:   "irc.freenode.org#sylius-dev"

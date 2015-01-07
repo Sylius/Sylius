@@ -19,10 +19,17 @@ sylius:
       empty: Još uvek niste kreirali adresu.
       list: Sve vaše adrese
       update: Izmeni moju adresu
+    home:
+      email: ""
+      id: ""
     order:
       invoice: Faktura
+      number: ""
+      payment_mode: ""
       shipment:
         pending: Na čekanju
+      shipment_mode: ""
+      state: ""
       total: Ukupno
     title: Moj nalog
   add_to_cart: Dodaj u korpu

@@ -7,5 +7,14 @@ sylius:
     taxon:
       description: Beskrivelse
       name: Navn
+      parent: Forelder
+      permalink: Permanent lenke
     taxonomy:
       name: Navn
+  taxon:
+    create_taxon: Opprette taksonomi
+    delete_taxonomy: Slette taksonomi
+    manage_taxonomies: Administrere taksonomier
+    no_taxonomies: Ingen taksonomier å vise.
+    no_taxons: Ingen taksonomier å vise.
+    update_taxonomy: Oppdater taksonomi

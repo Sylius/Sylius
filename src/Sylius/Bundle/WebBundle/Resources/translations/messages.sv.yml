@@ -11,5 +11,71 @@ sylius:
       payment_mode: ""
       shipment_mode: ""
       state: ""
+  address:
+    firstname: Förnamn
+  breadcrumb:
+    group:
+      index: Grupper
+  checkout:
+    finalize:
+      address:
+        firstname: Förnamn
+      order:
+        billing_address: Faktureringsadress
+      product:
+        name: Namn
+  country:
+    name: Namn
+  form:
+    profile:
+      firstName: Förnamn
+  group:
+    index_header: Grupper
+    name: Namn
+    roles: Roller
+  inventory_unit:
+    name: Namn
+    sku: SKU
+  locale:
+    code: Kod
+    enabled: Aktiverad
   "no": false
+  order:
+    billing_address: Faktureringsadress
+    number: Nummer
+  shipment:
+    name: Namn
+    sku: SKU
+  order_item:
+    unit_price: Enhetspris
+  payment_method:
+    name: Namn
+  product:
+    name: Namn
+    shipping_category: Kategori
+    sku: SKU
+    tax_category: Momskategori
+  promotion:
+    name: Namn
+  shipping_category:
+    name: Namn
+  shipping_method:
+    name: Namn
+    zone: Zon
+  tax_category:
+    name: Namn
+  tax_rate:
+    name: Namn
+    zone: Zon
+  taxon:
+    name: Namn
+  taxonomy:
+    name: Namn
+  user:
+    billing_address: Faktureringsadress
+    first_name: Förnamn
+  variant:
+    sku: SKU
   "yes": true
+  zone:
+    name: Namn

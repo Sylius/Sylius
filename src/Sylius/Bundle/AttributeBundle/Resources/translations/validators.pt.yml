@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: Por favor, digite o nome do atributo.
+      min_length: 'Nome de atributo deve ser pelo menos 1 caractere de comprimento. |Nome de atributo deve ser pelo menos {{limit}} caracteres de comprimento.'
+      max_length: 'Nome do atributo não deve ser maior que 1 caractere. |Nome do atributo não deve ser maior que {{limit}} caracteres.'
+    presentation:
+      not_blank: Por favor insira a apresentação de atributo.
+      min_length: 'Apresentação de atributo deve ser pelo menos 1 caractere de comprimento. |Apresentação de atributo deve ser pelo menos {{ limit }} caractere de comprimento.'
+      max_length: 'Apresentação de atributo não deve ser maior que 1 caractere. |Apresentação de atributo não deve ser maior que {{ limit }} caracteres.'
+  attribute_value:
+    attribute:
+      not_blank: Por favor, selecione o atributo.
+    value:
+      not_blank: Por favor, insira o valor do atributo.

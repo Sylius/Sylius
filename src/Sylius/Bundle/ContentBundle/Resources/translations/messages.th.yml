@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: หมวดแม่
+      internal_name: ชื่อภายใน
+    menu:
+      name: ชื่อ
+      parent: หมวดแม่
+    menu_block:
+      body: Body
+      name: ชื่อ
+    menu_node_block:
+      content: เนื้อหา
+      internal_name: ชื่อภายใน
+    redirect_route:
+      name: ชื่อ
+    reference_block:
+      body: Body
+      title: หัวข้อ
+    route:
+      content: เนื้อหา
+      name: ชื่อ
+      parent: หมวดแม่
+    simple_block:
+      body: Body
+      internal_name: ชื่อภายใน
+      parent: หมวดแม่
+      title: หัวข้อ
+    slideshow_block:
+      internal_name: ชื่อภายใน
+      parent: หมวดแม่
+      title: หัวข้อ
+    static_content:
+      body: Body
+      internal_name: ชื่อภายใน
+      parent: หมวดแม่
+      title: หัวข้อ
+    string_block:
+      body: Body
+      id: ID
+      name: ชื่อ

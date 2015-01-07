@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Сума
+      percentage_discount_configuration:
+        percentage: Адсотак
+      shipping_discount_configuration:
+        percentage: Адсотак
+      type: Тып
+    rule:
+      taxonomy_configuration:
+        taxons: Катэгорыі
+        exclude: Выключыць
+      item_count_configuration:
+        count: Колькасць
+        equal: Роўна
+      item_total_configuration:
+        amount: Сума
+        equal: Роўна
+      nth_order_configuration:
+        nth: N-нны
+      user_loyality_configuration:
+        time: Час
+        unit:
+          days: Дні
+          weeks: Тыдні
+          months: Месяцы
+          years: Годы
+          0: Адзінка
+        after: Карыстальнік створаны пасля гэтага перыяду
+      shipping_country_configuration:
+        country: Краіна
+      type: Тып
+    coupon:
+      code: Код
+      usage_limit: Ліміт карыстання
+    coupon_generate_instruction:
+      amount: Колькасць
+      usage_limit: Ліміт карыстання
+    promotion:
+      actions: Дзеянні
+      coupon_based: Заснавана на купонах
+      description: Апісанне
+      ends_at: Канец
+      name: Назва
+      rules: Правілы
+      starts_at: Пачатак
+      usage_limit: Ліміт карыстання

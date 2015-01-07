@@ -82,13 +82,13 @@ sylius:
       products: Seus produtos
       users: Usuários
     statistics:
-      header: Estatísticas do mês
+      0: Estatísticas do mês
       orders_this_month: Total de pedidos
       registrations_this_month: Total de registos
       sales_this_month: Vendas
   backend_welcome: 'Oi <b>% nome %</b>!'
   block:
-    body: Conteúdo
+    body: Texto
     create: Criar bloco
     create_header: Criar novo bloco de conteúdo
     id: ID
@@ -290,7 +290,7 @@ sylius:
     update_header: Editar grupo
   hide_deleted: Ocultar excluídos
   history:
-    header: Histórico
+    0: Histórico
     action: Ação
     author: Autor
     data: Dados
@@ -415,7 +415,7 @@ sylius:
     unit_price: Preço unitário
   out_of_stock: Fora de estoque
   page:
-    body: Conteúdo
+    body: Texto
     create: Cria nova página
     create_header: Criando novo conteúdo estático
     id: ID
@@ -435,7 +435,7 @@ sylius:
     method: Método
     no_results: Não há pagamentos configurados
     state:
-      header: Estado
+      0: Estado
       checkout: Finalizar compra
       completed: Concluído
       failed: Falhou

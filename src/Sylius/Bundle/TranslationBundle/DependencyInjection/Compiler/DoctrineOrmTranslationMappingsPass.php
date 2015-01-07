@@ -15,6 +15,8 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
 
 /**
  * This compiler pass is used by AbstractResourceBundle to created the xml drivers needed for
@@ -61,20 +63,31 @@ class DoctrineOrmTranslationMappingsPass implements CompilerPassInterface
     }
 
     /**
-     * Creates the service definition for the translatable XML driver
+     * Creates the service definition for the translatable driver
      *
-     * @param array $namespaces
+     * @param array  $namespaces
+     * @param string $driver
      *
+     * @throws InvalidConfigurationException
      * @return DoctrineOrmTranslationMappingsPass
      */
-    public static function createXmlTranslationMappingDriver(array $namespaces)
+    public static function createTranslationMappingDriver(array $namespaces, $driver)
     {
-        $arguments = array($namespaces, '.orm.xml');
+        if (AbstractTranslationBundle::MAPPING_XML == $driver) {
+            $arguments = array($namespaces, '.orm.xml');
+            //TODO inject class?
+            $class = 'Prezent\Doctrine\Translatable\Mapping\Driver\XmlDriver';
+        } elseif (AbstractTranslationBundle::MAPPING_YAML == $driver) {
+            $arguments = array($namespaces, '.orm.yml');
+            //TODO inject class?
+            $class = 'Prezent\Doctrine\Translatable\Mapping\Driver\YamlDriver';
+        } else {
+            throw new InvalidConfigurationException("The 'mappingFormat' value is invalid, must be 'xml' or 'yml'.");
+        }
 
         $locator = new Definition('Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator', $arguments);
 
-        //TODO inject xml driver?
-        $driverDefinition = new Definition('Prezent\Doctrine\Translatable\Mapping\Driver\XmlDriver', array($locator));
+        $driverDefinition = new Definition($class, array($locator));
         $driverDefinition->setPublic(false);
 
         return new DoctrineOrmTranslationMappingsPass($driverDefinition);

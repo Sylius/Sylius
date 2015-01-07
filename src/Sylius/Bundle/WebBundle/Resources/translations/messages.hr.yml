@@ -288,7 +288,7 @@ sylius:
     update_header: Uredi grupu
   hide_deleted: Sakrij izbrisano
   history:
-    header: Povijest
+    0: Povijest
     action: Akcija
     author: Autor
     data: Podaci
@@ -433,7 +433,7 @@ sylius:
     method: Tip
     no_results: Nema postavljenih tipova plaćanja.
     state:
-      header: Stanje
+      0: Stanje
       checkout: Blagajna
       completed: Završeno
       failed: Neuspješno

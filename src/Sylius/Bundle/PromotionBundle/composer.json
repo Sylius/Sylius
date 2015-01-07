@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
+        "jms/translation-bundle":          "1.1.*",
         "stof/doctrine-extensions-bundle": "1.1.*",
         "sylius/promotion":                "0.13.*@dev",
         "sylius/registry":                 "0.13.*@dev",
@@ -30,7 +31,7 @@
         "symfony/framework-bundle":        "~2.3"
     },
     "require-dev": {
-        "phpspec/phpspec":   "~2.0",
+        "phpspec/phpspec":   "~2.1",
         "doctrine/orm":      "~2.2",
         "symfony/form":      "~2.3",
         "symfony/validator": "~2.3"
@@ -48,6 +49,5 @@
         "branch-alias": {
             "dev-master": "0.13-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

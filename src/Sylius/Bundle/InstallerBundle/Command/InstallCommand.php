@@ -23,14 +23,14 @@ class InstallCommand extends ContainerAwareCommand
         $output->writeln('');
 
         $this
-            ->checkStep($input, $output)
+            ->checkStep($output)
             ->setupStep($input, $output)
         ;
 
         $output->writeln('<info>Sylius has been successfully installed.</info>');
     }
 
-    protected function checkStep(InputInterface $input, OutputInterface $output)
+    protected function checkStep(OutputInterface $output)
     {
         $output->writeln('<info>Checking system requirements.</info>');
 
@@ -88,7 +88,9 @@ class InstallCommand extends ContainerAwareCommand
         $this
             ->runCommand('doctrine:database:create', $input, $output)
             ->runCommand('doctrine:schema:create', $input, $output)
+            ->runCommand('cache:clear', $input, $output)
             ->runCommand('doctrine:phpcr:repository:init', $input, $output)
+            ->runCommand('sylius:search:index', $input, $output)
             ->runCommand('assets:install', $input, $output)
             ->runCommand('assetic:dump', $input, $output)
         ;

@@ -3,15 +3,14 @@
 
 sylius:
   form:
-    product:
-      options: Warianty
     variant:
       presentation: Nazwa publiczna
-      available_on: Dostępny od
     option:
-      name: Nazwa wariantu
+      name: Nazwa w systemie
       presentation: Nazwa publiczna
+      values: Możliwe wartości
     option_value:
+      add_value: Dodaj wartość
       value: Wartość
     archetype:
       options: Warianty

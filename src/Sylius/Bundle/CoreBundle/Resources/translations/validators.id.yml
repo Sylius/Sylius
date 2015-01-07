@@ -20,13 +20,6 @@ sylius:
       max: 'Nama belakang tidak boleh lebih dari {{ limit }} karakter.'
       min: 'Nama belakang setidaknya harus sepanjang {{ limit }} karakter.'
       not_blank: Masukkan nama belakang.
-  variant:
-    onHand:
-      min: 'Yang dimiliki harus lebih besar dari {{ limit }}.'
-      not_blank: Masukkan yang dimiliki.
-    price:
-      min: Harga tidak boleh negatif.
-      not_blank: Masukkan harga.
 sylius_shipping:
   method:
     zone:

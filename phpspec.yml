@@ -1,55 +1,53 @@
 suites:
-    Addressing       : { namespace: Sylius, spec_path: src/Sylius/Component/Addressing }
-    Archetype        : { namespace: Sylius, spec_path: src/Sylius/Component/Archetype }
-    Attribute        : { namespace: Sylius, spec_path: src/Sylius/Component/Attribute }
-    Cart             : { namespace: Sylius, spec_path: src/Sylius/Component/Cart }
-    Core             : { namespace: Sylius, spec_path: src/Sylius/Component/Core }
-    Contact          : { namespace: Sylius, spec_path: src/Sylius/Component/Contact }
-    Currency         : { namespace: Sylius, spec_path: src/Sylius/Component/Currency }
-    Installer        : { namespace: Sylius, spec_path: src/Sylius/Component/Installer }
-    Inventory        : { namespace: Sylius, spec_path: src/Sylius/Component/Inventory }
-    Locale           : { namespace: Sylius, spec_path: src/Sylius/Component/Locale }
-    Order            : { namespace: Sylius, spec_path: src/Sylius/Component/Order }
-    Originator       : { namespace: Sylius, spec_path: src/Sylius/Component/Originator }
-    Payment          : { namespace: Sylius, spec_path: src/Sylius/Component/Payment }
-    Payum            : { namespace: Sylius, spec_path: src/Sylius/Component/Payum }
-    Pricing          : { namespace: Sylius, spec_path: src/Sylius/Component/Pricing }
-    Product          : { namespace: Sylius, spec_path: src/Sylius/Component/Product }
-    Promotion        : { namespace: Sylius, spec_path: src/Sylius/Component/Promotion }
-    Registry         : { namespace: Sylius, spec_path: src/Sylius/Component/Registry }
-    Resource         : { namespace: Sylius, spec_path: src/Sylius/Component/Resource }
-    Sequence         : { namespace: Sylius, spec_path: src/Sylius/Component/Sequence }
-    Settings         : { namespace: Sylius, spec_path: src/Sylius/Component/Settings }
-    Shipping         : { namespace: Sylius, spec_path: src/Sylius/Component/Shipping }
-    Storage          : { namespace: Sylius, spec_path: src/Sylius/Component/Storage }
-    Taxation         : { namespace: Sylius, spec_path: src/Sylius/Component/Taxation }
-    Taxonomy         : { namespace: Sylius, spec_path: src/Sylius/Component/Taxonomy }
-    Translation      : { namespace: Sylius, spec_path: src/Sylius/Component/Translation }
-    Variation        : { namespace: Sylius, spec_path: src/Sylius/Component/Variation }
+    Addressing       : { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing }
+    Attribute        : { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute }
+    Cart             : { namespace: Sylius\Component\Cart, psr4_prefix: Sylius\Component\Cart, spec_path: src/Sylius/Component/Cart }
+    Core             : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius\Component\Core }
+    Contact          : { namespace: Sylius\Component\Contact, psr4_prefix: Sylius\Component\Contact, spec_path: src/Sylius/Component/Contact }
+    Currency         : { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency }
+    Installer        : { namespace: Sylius\Component\Installer, psr4_prefix: Sylius\Component\Installer, spec_path: src/Sylius/Component/Installer }
+    Inventory        : { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory }
+    Locale           : { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale }
+    Order            : { namespace: Sylius\Component\Order, psr4_prefix: Sylius\Component\Order, spec_path: src/Sylius/Component/Order }
+    Originator       : { namespace: Sylius\Component\Originator, psr4_prefix: Sylius\Component\Originator, spec_path: src/Sylius/Component/Originator }
+    Payment          : { namespace: Sylius\Component\Payment, psr4_prefix: Sylius\Component\Payment , spec_path: src/Sylius/Component/Payment }
+    Payum            : { namespace: Sylius\Component\Payum, psr4_prefix: Sylius\Component\Payum, spec_path: src/Sylius/Component/Payum }
+    Pricing          : { namespace: Sylius\Component\Pricing, psr4_prefix: Sylius\Component\Pricing , spec_path: src/Sylius/Component/Pricing }
+    Product          : { namespace: Sylius\Component\Product, psr4_prefix: Sylius\Component\Product , spec_path: src/Sylius/Component/Product }
+    Promotion        : { namespace: Sylius\Component\Promotion, psr4_prefix: Sylius\Component\Promotion, spec_path: src/Sylius/Component/Promotion }
+    Registry         : { namespace: Sylius\Component\Registry, psr4_prefix: Sylius\Component\Registry, spec_path: src/Sylius/Component/Registry }
+    Resource         : { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource }
+    Sequence         : { namespace: Sylius\Component\Sequence, psr4_prefix: Sylius\Component\Sequence, spec_path: src/Sylius/Component/Sequence }
+    Settings         : { namespace: Sylius\Component\Settings, psr4_prefix: Sylius\Component\Settings, spec_path: src/Sylius/Component/Settings }
+    Shipping         : { namespace: Sylius\Component\Shipping, psr4_prefix: Sylius\Component\Shipping, spec_path: src/Sylius/Component/Shipping }
+    Storage          : { namespace: Sylius\Component\Storage, psr4_prefix: Sylius\Component\Storage , spec_path: src/Sylius/Component/Storage }
+    Taxation         : { namespace: Sylius\Component\Taxation, psr4_prefix: Sylius\Component\Taxation, spec_path: src/Sylius/Component/Taxation }
+    Taxonomy         : { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy }
+    Translation      : { namespace: Sylius\Component\Translation, psr4_prefix: Sylius\Component\Translation, spec_path: src/Sylius/Component/Translation }
+    Variation        : { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation }
 
-    AddressingBundle : { namespace: Sylius, spec_path: src/Sylius/Bundle/AddressingBundle }
-    ArchetypeBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/ArchetypeBundle }
-    AttributeBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/AttributeBundle }
-    CartBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CartBundle }
-    CoreBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/CoreBundle }
-    CurrencyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/CurrencyBundle }
-    ContactBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ContactBundle }
-    FlowBundle       : { namespace: Sylius, spec_path: src/Sylius/Bundle/FlowBundle }
-    InstallerBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InstallerBundle }
-    InventoryBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/InventoryBundle }
-    LocaleBundle     : { namespace: Sylius, spec_path: src/Sylius/Bundle/LocaleBundle }
-    MoneyBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/MoneyBundle }
-    OrderBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/OrderBundle }
-    PaymentBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PaymentBundle }
-    PayumBundle      : { namespace: Sylius, spec_path: src/Sylius/Bundle/PayumBundle }
-    PricingBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/PricingBundle }
-    ProductBundle    : { namespace: Sylius, spec_path: src/Sylius/Bundle/ProductBundle }
-    PromotionBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/PromotionBundle }
-    ResourceBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/ResourceBundle }
-    SearchBundle     : { namespace: Sylius, spec_path: src/Sylius/Bundle/SearchBundle }
-    SequenceBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/SequenceBundle }
-    SettingsBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/SettingsBundle }
-    ShippingBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/ShippingBundle }
-    TaxationBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/TaxationBundle }
-    TaxonomyBundle   : { namespace: Sylius, spec_path: src/Sylius/Bundle/TaxonomyBundle }
-    VariationBundle  : { namespace: Sylius, spec_path: src/Sylius/Bundle/VariationBundle }
+    AddressingBundle : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle }
+    AttributeBundle  : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle }
+    CartBundle       : { namespace: Sylius\Bundle\CartBundle, psr4_prefix: Sylius\Bundle\CartBundle, spec_path: src/Sylius/Bundle/CartBundle }
+    CoreBundle       : { namespace: Sylius\Bundle\CoreBundle, psr4_prefix: Sylius\Bundle\CoreBundle, spec_path: src/Sylius/Bundle/CoreBundle }
+    CurrencyBundle   : { namespace: Sylius\Bundle\CurrencyBundle, psr4_prefix: Sylius\Bundle\CurrencyBundle , spec_path: src/Sylius/Bundle/CurrencyBundle }
+    ContactBundle    : { namespace: Sylius\Bundle\ContactBundle, psr4_prefix: Sylius\Bundle\ContactBundle, spec_path: src/Sylius/Bundle/ContactBundle }
+    FlowBundle       : { namespace: Sylius\Bundle\FlowBundle, psr4_prefix: Sylius\Bundle\FlowBundle, spec_path: src/Sylius/Bundle/FlowBundle }
+    InstallerBundle  : { namespace: Sylius\Bundle\InstallerBundle, psr4_prefix: Sylius\Bundle\InstallerBundle, spec_path: src/Sylius/Bundle/InstallerBundle }
+    InventoryBundle  : { namespace: Sylius\Bundle\InventoryBundle, psr4_prefix: Sylius\Bundle\InventoryBundle, spec_path: src/Sylius/Bundle/InventoryBundle }
+    LocaleBundle     : { namespace: Sylius\Bundle\LocaleBundle, psr4_prefix: Sylius\Bundle\LocaleBundle, spec_path: src/Sylius/Bundle/LocaleBundle }
+    MoneyBundle      : { namespace: Sylius\Bundle\MoneyBundle, psr4_prefix: Sylius\Bundle\MoneyBundle, spec_path: src/Sylius/Bundle/MoneyBundle }
+    OrderBundle      : { namespace: Sylius\Bundle\OrderBundle, psr4_prefix: Sylius\Bundle\OrderBundle, spec_path: src/Sylius/Bundle/OrderBundle }
+    PaymentBundle    : { namespace: Sylius\Bundle\PaymentBundle, psr4_prefix: Sylius\Bundle\PaymentBundle, spec_path: src/Sylius/Bundle/PaymentBundle }
+    PayumBundle      : { namespace: Sylius\Bundle\PayumBundle, psr4_prefix: Sylius\Bundle\PayumBundle, spec_path: src/Sylius/Bundle/PayumBundle }
+    PricingBundle    : { namespace: Sylius\Bundle\PricingBundle, psr4_prefix: Sylius\Bundle\PricingBundle, spec_path: src/Sylius/Bundle/PricingBundle }
+    ProductBundle    : { namespace: Sylius\Bundle\ProductBundle, psr4_prefix: Sylius\Bundle\ProductBundle, spec_path: src/Sylius/Bundle/ProductBundle }
+    PromotionBundle  : { namespace: Sylius\Bundle\PromotionBundle, psr4_prefix: Sylius\Bundle\PromotionBundle, spec_path: src/Sylius/Bundle/PromotionBundle }
+    ResourceBundle   : { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle , spec_path: src/Sylius/Bundle/ResourceBundle }
+    SearchBundle     : { namespace: Sylius\Bundle\SearchBundle, psr4_prefix: Sylius\Bundle\SearchBundle, spec_path: src/Sylius/Bundle/SearchBundle }
+    SequenceBundle   : { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle , spec_path: src/Sylius/Bundle/SequenceBundle }
+    SettingsBundle   : { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle , spec_path: src/Sylius/Bundle/SettingsBundle }
+    ShippingBundle   : { namespace: Sylius\Bundle\ShippingBundle, psr4_prefix: Sylius\Bundle\ShippingBundle , spec_path: src/Sylius/Bundle/ShippingBundle }
+    TaxationBundle   : { namespace: Sylius\Bundle\TaxationBundle, psr4_prefix: Sylius\Bundle\TaxationBundle , spec_path: src/Sylius/Bundle/TaxationBundle }
+    TaxonomyBundle   : { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle , spec_path: src/Sylius/Bundle/TaxonomyBundle }
+    VariationBundle  : { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle }

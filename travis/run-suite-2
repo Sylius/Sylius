@@ -5,7 +5,15 @@ EXIT_STATUS=0
 bin/behat --suite=orders -fprogress || EXIT_STATUS=$?
 bin/behat --suite=payments -fprogress || EXIT_STATUS=$?
 bin/behat --suite=pricing -fprogress || EXIT_STATUS=$?
-bin/behat --suite=products -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/products.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/product_attributes.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/product_options.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/product_prototypes.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/product_taxonomies.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/product_variants.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/products.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/products_filter.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/frontend/ -fprogress || EXIT_STATUS=$?
 bin/behat --suite=promotions -fprogress || EXIT_STATUS=$?
 bin/behat --suite=settings -fprogress || EXIT_STATUS=$?
 bin/behat --suite=shipping -fprogress || EXIT_STATUS=$?

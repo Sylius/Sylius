@@ -1,3 +1,26 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  promotion:
+    description:
+      max_length: 'รายละเอียดโปรโมชั่นต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
+      min_length: 'รายละเอียดโปรโมชั่นต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร'
+      not_blank: กรุณาระบุรายละเอียดโปรโมชั่น
+    name:
+      max_length: 'ชื่อโปรโมชั่นต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร.'
+      min_length: 'ชื่อโปรโมชั่นต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร.'
+      not_blank: กรุณาระบุชื่อโปรโมชั่น
+  promotion_coupon:
+    code:
+      max_length: 'รหัสคูปองต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
+      min_length: 'รหัสคูปองต้องมความยาวอย่างน้อย {{ limit }} ตัวอักษร'
+      not_blank: กรุณาระบุรหัสคูปอง
+    usage_limit:
+      min: 'ขีดจำกัดการใช้คูปองต้องระบุอย่างน้อย {{ limit }}'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'จำนวนการสร้างคูปองต้องระบุอย่างน้อย {{ limit }}'
+      not_blank: กรุณาระบุยอดรวมในการสร้างคูปอง
+    usage_limit:
+      min: 'จำนวนการสร้างคูปองต้องระบุอย่างน้อย {{ limit }}'

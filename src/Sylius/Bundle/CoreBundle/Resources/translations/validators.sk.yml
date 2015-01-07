@@ -2,6 +2,33 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  variant:
+  group:
+    name:
+      max: 'Názov skupiny nesmie byť dlhší ako {{ limit }} znakov.'
+      min: 'Názov skupiny musí obsahovať minimálne {{ limit }} znakov.'
+      not_blank: Zadajte názov skupiny.
+  locale:
+    code:
+      not_blank: Zadajte kód jazyka.
+      unique: Tento jazyk už existuje.
+  user:
+    first_name:
+      max: 'Meno nesmie byť dlhšie ako {{ limit }} znakov.'
+      min: 'Meno musí obsahovať minimálne {{ limit }} znakov.'
+      not_blank: Zadajte svoje krstné meno.
+    last_name:
+      max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
+      min: 'Priezvisko musí obsahovať minimálne {{ limit }} znakov.'
+      not_blank: Zadajte svoje priezvisko.
+  product_variant:
     price:
-      not_blank: Prosím, zadajte cenu.
+      min: Cena nemôže obsahovať záporné hodnoty.
+      not_blank: Zadajte cenu.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Zadajte spôsob doručenia.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Zadajte zónu zdaňovania.

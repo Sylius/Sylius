@@ -29,14 +29,14 @@ class AbstractTranslation implements TranslationInterface
     /**
      * Translatable object
      *
-     * @var TranslatableInterface
+     * @var BaseTranslatableInterface
      */
     protected $translatable;
 
     /**
      * Get the translatable object
      *
-     * @return TranslatableInterface
+     * @return BaseTranslatableInterface
      */
     public function getTranslatable()
     {
@@ -46,8 +46,9 @@ class AbstractTranslation implements TranslationInterface
     /**
      * Set the translatable object
      *
-     * @param TranslatableInterface $translatable
-     * @return self
+     * @param BaseTranslatableInterface $translatable
+     *
+     * @return $this
      */
     public function setTranslatable(BaseTranslatableInterface $translatable = null)
     {
@@ -62,7 +63,7 @@ class AbstractTranslation implements TranslationInterface
             $old->removeTranslation($this);
         }
 
-        if (null !== $translatable ) {
+        if (null !== $translatable) {
             $translatable->addTranslation($this);
         }
 
@@ -83,11 +84,13 @@ class AbstractTranslation implements TranslationInterface
      * Set the locale
      *
      * @param string $locale
-     * @return self
+     *
+     * @return $this
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 }

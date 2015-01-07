@@ -2,34 +2,18 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  product:
-    sku:
-      not_blank: "Veuillez saisir l'UGS (SKU) du produit."
-      unique: "L'UGS du produit doit être unique."
+  attribute:
     name:
-      not_blank: Veuillez saisir le nom du produit.
-      min_length: 'Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
-      max_length: 'Le nom du produit ne doit pas dépasser 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
-    description:
-      not_blank: Veuillez saisir la description du produit.
-      min_length: 'La description du produit doit contenir au moins 1 caractère.|La description du produit ne doit pas dépasser {{ limit }} caractères.'
-  variant:
-    sku:
-      not_blank: "Veuillez saisir l'UGS (SKU) de la variante."
-      unique: "L'UGS de la variante doit être unique."
-    combination: La variante avec cette option existe déjà.
-  option:
-    name:
-      not_blank: "Veuillez saisir le nom de l'option."
-      min_length: "Le nom de l'option doit contenir au moins 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
-      max_length: "Le nom de l'option ne doit pas dépasser 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
+      not_blank: "Veuillez entre un nom d'attribut."
+      min_length: "Le nom d'attribut doit contenir au moins 1 caractère.|Le nom d'attribut doit contenir au moins {{ limit }} caractères."
+      max_length: "Le nom d'attribut ne peut pas contenir plus de 1 caractère.|Le nom d'attribut ne peut pas contenir plus de {{ limit }} caractères."
     presentation:
-      not_blank: "Veuillez saisir la présentation de l'option."
-      min_length: "La présentation de l'option doit contenir au moins 1 caractère.|La présentation de l'option ne doit pas dépasser les {{ limit }} caractères."
-      max_length: "La présentation de l'option ne doit pas dépasser 1 caractère.|La présentation de l'option ne doit pas dépasser les {{ limit }} caractères."
-    values:
-      min_count: "Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option."
-  option_value:
+      not_blank: "Veuillez entrer une description de l'attribut."
+      min_length: "La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères."
+      max_length: "La description de l'attribut ne doit pas contenir plus de 1 caractère.|La description de l'attribut ne doit pas contenir plus de {{ limit }} caractères."
+  attribute_value:
+    attribute:
+      not_blank: Veuillez sélectionner un attribut.
     value:
       not_blank: "Veuillez saisir la valeur de l'option."
   property:
@@ -51,3 +35,4 @@ sylius:
       not_blank: Veuillez saisir le nom du prototype.
       min_length: 'Le nom du prototype de la propriété ne doit pas dépasser 1 caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'
       max_length: 'Le nom du prototype ne doit pas dépasser 1 caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'
+      not_blank: "Veuillez entrer une valeur d'attribut."

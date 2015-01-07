@@ -26,7 +26,7 @@
         "sylius/sequence":   "0.13.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Order\\": "" }
@@ -38,6 +38,5 @@
         "branch-alias": {
             "dev-master": "0.13-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

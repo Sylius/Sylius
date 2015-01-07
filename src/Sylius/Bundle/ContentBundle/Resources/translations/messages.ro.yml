@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Părinte
+      internal_name: Denumire internă
+    menu:
+      parent: Părinte
+    menu_node_block:
+      internal_name: Denumire internă
+    route:
+      parent: Părinte
+    simple_block:
+      internal_name: Denumire internă
+      parent: Părinte
+    slideshow_block:
+      internal_name: Denumire internă
+      parent: Părinte
+    static_content:
+      internal_name: Denumire internă
+      parent: Părinte

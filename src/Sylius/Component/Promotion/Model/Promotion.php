@@ -127,6 +127,13 @@ class Promotion implements PromotionInterface
     protected $createdAt;
 
     /**
+     * Deletion time.
+     *
+     * @var \DateTime
+     */
+    protected $deletedAt;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -493,6 +500,32 @@ class Promotion implements PromotionInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDeleted()
+    {
+        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDeletedAt(\DateTime $deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

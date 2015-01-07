@@ -33,6 +33,10 @@ class CouponType extends AbstractResourceType
             ->add('usageLimit', 'integer', array(
                 'label' => 'sylius.form.coupon.usage_limit'
             ))
+            ->add('expiresAt', 'date', array(
+                'label' => 'sylius.form.coupon.expires_at',
+                'empty_value' => /** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+            ))
         ;
     }
 

@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -32,11 +31,10 @@ sylius:
       code: Kode
       enabled: Aktiveret
     order_filter:
-      created_at_from: Fra
-      created_at_to: Til
       number: Antallet
       total_from: Fra
       total_to: Til
+      payment_state: Betalingsstatus
     page:
       body: Krop
       id: ID

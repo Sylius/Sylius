@@ -53,7 +53,7 @@ class Zone implements ZoneInterface
     /**
      * Zone members.
      *
-     * @var ArrayCollection
+     * @var Collection
      */
     protected $members;
 

@@ -12,3 +12,7 @@ sylius:
     archetype:
       name: Názov
       properties: Vlastnosti
+  form:
+    attribute:
+      name: Interný názov
+      presentation: Prezentácia

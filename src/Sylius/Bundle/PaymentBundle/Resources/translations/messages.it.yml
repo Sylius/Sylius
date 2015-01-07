@@ -14,7 +14,7 @@ sylius:
       amount: Ammontare del pagamento
       method: Metodo di pagamento
       state:
-        header: Stato del pagamento
+        0: Stato del pagamento
         checkout: Checkout
         completed: Completato
         failed: Fallimento
@@ -23,6 +23,8 @@ sylius:
         processing: In elaborazione
         unknown: Sconosciuto
         void: Nullo
+        cancelled: Annullato
+        refunded: Rimborsato
     payment_method:
       description: Descrizione
       enabled: Abilitato?

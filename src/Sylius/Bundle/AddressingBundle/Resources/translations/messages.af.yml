@@ -1,3 +1,37 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: Stad
+      company: Maatskappy
+      country: Land
+      first_name: Naam
+      last_name: Van
+      postcode: Poskode
+      street: Straat
+      province: Provinsie
+    country:
+      iso_name: ISO Land kode
+      name: Naam
+      provinces: Provinsies
+      select: Kies
+    province:
+      name: Naam
+      select: Kies
+    zone:
+      members: Lede
+      name: Naam
+      type: Tipe
+      types:
+        country: Land
+        province: Provinsie
+        zone: Area
+      scope: Gebied
+    zone_member_country:
+      country: Land
+    zone_member_province:
+      province: Provinsie
+    zone_member_zone:
+      zone: Area

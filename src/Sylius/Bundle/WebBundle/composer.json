@@ -22,6 +22,7 @@
     "require": {
         "php":                       ">=5.3.3",
 
+        "jms/translation-bundle":    "1.1.*",
         "symfony/framework-bundle":  "~2.3",
         "knplabs/knp-menu-bundle":   "1.1.*",
         "liip/imagine-bundle":       "~1.0",
@@ -38,6 +39,5 @@
         "branch-alias": {
             "dev-master": "0.13-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

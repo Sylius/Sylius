@@ -6,18 +6,18 @@ Feature: Browsing products by taxonomies
 
     Background:
         Given there is default currency configured
-          And I am logged in as administrator
-          And there are following taxonomies defined:
+        And I am logged in as administrator
+        And there are following taxonomies defined:
             | name     |
             | Category |
             | Special  |
-          And taxonomy "Category" has following taxons:
+        And taxonomy "Category" has following taxons:
             | Clothing > T-Shirts |
             | Clothing > Shorts   |
-          And taxonomy "Special" has following taxons:
+        And taxonomy "Special" has following taxons:
             | Featured |
             | New      |
-          And the following products exist:
+        And the following products exist:
             | name          | price | taxons   |
             | Super T-Shirt | 19.99 | T-Shirts |
             | Black T-Shirt | 19.99 | T-Shirts |
@@ -26,12 +26,12 @@ Feature: Browsing products by taxonomies
 
     Scenario: Seeing index of all products for given taxonomy
         Given I am on the taxonomy index page
-          And I follow "Category"
-         When I click "Browse products" near "T-Shirts"
-         Then I should see 2 products in the list
+        And I follow "Category"
+        When I click "Browse products" near "T-Shirts"
+        Then I should see 2 products in the list
 
     Scenario: Category does not contain any products
         Given I am on the taxonomy index page
-          And I follow "Special"
-         When I click "Browse products" near "Featured"
-         Then I should see "There are no products to display."
+        And I follow "Special"
+        When I click "Browse products" near "Featured"
+        Then I should see "There are no products to display."

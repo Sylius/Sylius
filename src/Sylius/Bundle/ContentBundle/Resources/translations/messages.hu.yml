@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Szülő
+      internal_name: Belső név
+    menu:
+      name: Név
+      parent: Szülő
+    menu_block:
+      body: Törzs
+      name: Név
+    menu_node_block:
+      content: Tartalom
+      internal_name: Belső név
+    redirect_route:
+      name: Név
+    reference_block:
+      body: Törzs
+      title: Cím
+    route:
+      content: Tartalom
+      name: Név
+      parent: Szülő
+    simple_block:
+      body: Törzs
+      internal_name: Belső név
+      parent: Szülő
+      title: Cím
+    slideshow_block:
+      internal_name: Belső név
+      parent: Szülő
+      title: Cím
+    static_content:
+      body: Törzs
+      internal_name: Belső név
+      parent: Szülő
+      title: Cím
+    string_block:
+      body: Törzs
+      id: Azonosító
+      name: Név

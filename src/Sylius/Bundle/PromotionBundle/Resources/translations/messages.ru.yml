@@ -30,7 +30,7 @@ sylius:
           weeks: Недель
           months: Месяцев
           years: Лет
-          header: Единица
+          0: Единица
         after: Пользователь был создан после этого периода
       shipping_country_configuration:
         country: Страна

@@ -3,11 +3,8 @@
 
 sylius:
   form:
-    product:
-      options: Opties
     variant:
       presentation: Weergave
-      available_on: Beschikbaar op
     option:
       name: Interne naam
       presentation: Weergave

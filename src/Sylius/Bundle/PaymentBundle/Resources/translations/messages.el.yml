@@ -11,7 +11,7 @@ sylius:
       amount: Ποσό πληρωμής
       method: Τρόπος πληρωμής
       state:
-        header: Κατάσταση πληρωμής
+        0: Κατάσταση πληρωμής
         checkout: Ολοκλήρωση αγορών
         pending: Σε εκκρεμότητα
         processing: Σε εξέλιξη

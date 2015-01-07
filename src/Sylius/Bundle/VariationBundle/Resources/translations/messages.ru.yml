@@ -3,14 +3,11 @@
 
 sylius:
   form:
-    product:
-      options: Опции
     variant:
-      presentation: Представление
-      available_on: Доступен с
+      presentation: Публичное название
     option:
-      name: Внутренее имя
-      presentation: Представление
+      name: Внутреннее название
+      presentation: Публичное название
       values: Возможные значения
     option_value:
       add_value: Добавить значение

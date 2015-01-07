@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Core\Model\IdentityInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
@@ -190,7 +191,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      *
      * @param $state
      *
-     * @return PaymentInterface
+     * @return PaymentInterface|false
      */
     public function getLastPayment($state = PaymentInterface::STATE_NEW);
 
@@ -200,4 +201,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @return bool
      */
     public function isInvoiceAvailable();
+
+
+
 }

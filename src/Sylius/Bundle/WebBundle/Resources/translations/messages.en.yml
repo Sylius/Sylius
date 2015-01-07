@@ -680,6 +680,7 @@ sylius:
         no_results: There are no coupon to display.
         total_results: Total: %total%
         update_header: Editing coupon
+        expires_at: Expires at
     promotion_rule:
         configuration: Configuration
         type: Type

@@ -38,6 +38,7 @@ sylius:
         coupon:
             code: Code
             usage_limit: Usage limit
+            expires_at: Expires at
         coupon_generate_instruction:
             amount: Amount
             usage_limit: Usage limit

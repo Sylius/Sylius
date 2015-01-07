@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Nadređena kategorija
+      internal_name: Interni naziv
+    menu:
+      name: Naziv grupe
+      parent: Nadređena kategorija
+    menu_block:
+      body: Poruka
+      name: Naziv grupe
+    menu_node_block:
+      content: Sadržaj
+      internal_name: Interni naziv
+    redirect_route:
+      name: Naziv grupe
+    reference_block:
+      body: Poruka
+      title: Naslov
+    route:
+      content: Sadržaj
+      name: Naziv grupe
+      parent: Nadređena kategorija
+    simple_block:
+      body: Poruka
+      internal_name: Interni naziv
+      parent: Nadređena kategorija
+      title: Naslov
+    slideshow_block:
+      internal_name: Interni naziv
+      parent: Nadređena kategorija
+      title: Naslov
+    static_content:
+      body: Poruka
+      internal_name: Interni naziv
+      parent: Nadređena kategorija
+      title: Naslov
+    string_block:
+      body: Poruka
+      id: ID
+      name: Naziv grupe

@@ -1,3 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    address:
+      city: Bandar
+      company: Syarikat
+      country: Negara
+      postcode: Poskod
+    country:
+      name: Nama
+    province:
+      name: Nama
+    zone:
+      types:
+        country: Negara
+    zone_member_country:
+      country: Negara

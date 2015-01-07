@@ -30,7 +30,7 @@ sylius:
           weeks: Hét
           months: Hónap
           years: Év
-          header: Egység
+          0: Egység
         after: A felhasználó ezután lett létrehozva
       shipping_country_configuration:
         country: Ország

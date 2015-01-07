@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: El parámetro de espacio no debe tener más de 255 caracteres de largo|El parámetro de espacio no debe tener más de 255 caracteres de largo.
+      min_length: El parámetro de espacio debe ser al menos 2 caracteres de largo|El parámetro de espacio debe ser al menos 2 caracteres de largo.
+      not_blank: Por favor, seleccione un espacio de nombre para este parámtero.
+    name:
+      max_length: El parámetro de espacio no debe tener más de 255 caracteres de largo|El parámetro de espacio no debe tener más de 255 caracteres de largo.
+      min_length: El nombre del parámetro debe ser al menos 2 caracteres de largo|El nombre del parámetro debe ser al menos 2 caracteres de largo.
+      not_blank: Por favor, introduzca un nombre para este parámetro.

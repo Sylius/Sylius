@@ -3,9 +3,7 @@
 
 sylius:
   extensions:
-    header: extensions
     accelerator:
-      header: Accélérateur
       help: Installer et activer un accélérateur PHP comme APC (fortement recommandé).
     apc: APC
     ctype: CType
@@ -25,26 +23,21 @@ sylius:
     simplexml_import_dom: SimpleXML
     token_get_all: Analyseur de code PHP
   filesystem:
-    header: système de fichiers
     cache:
-      header: cache
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     exists: Existe
     logs:
-      header: Logs
       help:
         To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
     not_exists: "N'existe pas"
     not_writable: pas accessible en écriture
     parameters:
-      header: parameters.yml
       help:
         To set permissions run: 'sudo chmod a+w %path%'
     vendors: vendors
     writable: accessible en écriture
   settings:
-    header: Version de PHP et paramètres
     any: "N'importe quel"
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -57,7 +50,6 @@ sylius:
     short_open_tag: short_open_tag
     timezone: fuseau horaire
     timezone_deprecated:
-      header: Fuseau horaire obsolète
       help: 'Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).'
     version: Version de PHP
     version_recommanded: Version de PHP recommandée

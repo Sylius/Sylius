@@ -14,7 +14,7 @@ sylius:
       amount: Betaal hoeveelheid
       method: Betaalmethode
       state:
-        header: Betaal status
+        0: Betaal status
         checkout: Afrekenen
         completed: Voltooid
         failed: Mislukt
@@ -23,6 +23,8 @@ sylius:
         processing: Verwerken
         unknown: Onbekend
         void: Leeg
+        cancelled: Geannuleerd
+        refunded: Terugbetaald
     payment_method:
       description: Omschrijving
       enabled: Actief?

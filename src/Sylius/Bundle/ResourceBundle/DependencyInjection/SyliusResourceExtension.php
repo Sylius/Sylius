@@ -36,6 +36,7 @@ class SyliusResourceExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load('storage.xml');
+        $loader->load('routing.xml');
         $loader->load('twig.xml');
 
         $classes = isset($config['resources']) ? $config['resources'] : array();
@@ -61,11 +62,11 @@ class SyliusResourceExtension extends Extension
             list($prefix, $resourceName) = explode('.', $name);
 
             DatabaseDriverFactory::get(
-                $config['driver'],
                 $container,
                 $prefix,
                 $resourceName,
                 isset($config['object_manager']) ? $config['object_manager'] : 'default',
+                $config['driver'],
                 array_key_exists('templates', $config) ? $config['templates'] : null
             )->load($config['classes']);
         }

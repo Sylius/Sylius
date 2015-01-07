@@ -20,13 +20,6 @@ sylius:
       max: 'El  no ser ha de ser més llarg de {{ limit }} caràcters.'
       min: 'El Cognom ha de ser almenysde {{ limit }}  caràcters.'
       not_blank: Si us plau, introdueix el teu cognom.
-  variant:
-    onHand:
-      min: 'La disponibilitat ha de ser mes gran de {{ limit }}.'
-      not_blank: Si us plau introdueix la disponibilitat.
-    price:
-      min: El Preu no ha de ser negatiu.
-      not_blank: Si us plau introdueix el preu.
 sylius_shipping:
   method:
     zone:

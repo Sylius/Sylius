@@ -3,11 +3,8 @@
 
 sylius:
   form:
-    product:
-      options: Options
     variant:
       presentation: Présentation
-      available_on: Disponible sur
     option:
       name: Nom interne
       presentation: Présentation

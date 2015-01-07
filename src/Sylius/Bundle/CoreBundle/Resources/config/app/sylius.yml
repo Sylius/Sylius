@@ -78,7 +78,8 @@ sylius_product:
             model: Sylius\Component\Core\Model\Product
             controller: Sylius\Bundle\CoreBundle\Controller\ProductController
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
 
 sylius_archetype:
     classes:

@@ -1,3 +1,11 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  cart:
+    cart_save_completed: Die mandjie is suksesvol bygewerk.
+    cart_clear_completed: Die mandjie is suksesvol leeg gemaak.
+    item_add_completed: Item is toegevoeg aan die mandjie.
+    item_remove_completed: Item is verwijder uit die mandjie.
+    item_add_error: "'n Probleem het opgetree tydens die toevoeg van die item aan die mandjie."
+    item_remove_error: "'n Probleem het opgetree tydens die verwyder van die item uit die mandjie."

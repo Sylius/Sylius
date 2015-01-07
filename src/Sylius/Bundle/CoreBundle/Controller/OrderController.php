@@ -30,7 +30,7 @@ class OrderController extends ResourceController
      */
     public function indexByUserAction(Request $request, $id)
     {
-        $user = $this->get('sylius.repository.user')->find($id);
+        $user = $this->get('sylius.repository.user')->findForDetailsPage($id);
 
         if (!$user) {
             throw new NotFoundHttpException('Requested user does not exist.');
@@ -43,6 +43,13 @@ class OrderController extends ResourceController
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
         $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
+
+        // Fetch and cache deleted orders
+        $entityManager = $this->get('doctrine.orm.entity_manager');
+        $entityManager->getFilters()->disable('softdeleteable');
+        $paginator->getCurrentPageResults();
+        $paginator->getNbResults();
+        $entityManager->getFilters()->enable('softdeleteable');
 
         return $this->render('SyliusWebBundle:Backend/Order:indexByUser.html.twig', array(
             'user'   => $user,

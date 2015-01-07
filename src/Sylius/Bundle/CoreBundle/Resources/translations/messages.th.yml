@@ -1,7 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
----: ---
 sylius:
   checkout:
     shipping_method:
@@ -32,11 +31,12 @@ sylius:
       code: รหัส
       enabled: เปิดใช้งานแล้ว
     order_filter:
-      created_at_from: จาก
-      created_at_to: ถึง
+      created_at_from: สร้างหลังจาก
+      created_at_to: สร้างก่อน
       number: หมายเลข
       total_from: จาก
       total_to: ถึง
+      payment_state: สถานะการชำระเงิน
     page:
       body: Body
       id: ID

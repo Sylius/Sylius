@@ -5,48 +5,84 @@ sylius:
   backend:
     menu:
       main:
+        assortment: Sortiment
         configuration: Nastavení
         countries: Země
         customer: Zákazníci
+        dashboard: Nástěnka
+        exchange_rates: Směnné kurzy
         general_settings: Obecná nastavení
         homepage: Váš obchod
+        locales: Lokalizace
         new_order: Přidat novou objednávku
+        new_promotion: Přidat akci
         options: Spravovat nastavení produktů
         orders: Aktuální objednávky
         payment_methods: Způsoby plateb
         payments: Platby
         products: Produkty
+        promotions: Akce
+        properties: Nastavení parametrů
+        prototypes: Produktové vzory
         sales: Objednávky
         shipments: Zásilky
+        shipping_categories: Druhy zásilek
         shipping_methods: Způsoby dopravy
+        stockables: Sklady
+        tax_categories: Typy zdanění
         tax_rates: Daňové sazby
+        taxation_settings: Daně
         taxonomies: Kategorizace
         users: Uživatelé
         zones: Oblasti
       sidebar:
+        assortment: Sortiment
+        blocks: Bloky
         configuration: Nastavení
         content: Obsah
         countries: Země
         customer: Zákazníci
         dashboard: Nástěnka
+        exchange_rates: Směnné kurzy
         general_settings: Obecná nastavení
         groups: Skupiny
         homepage: Zpět na frontend
+        locales: Lokalizace
         new_order: Přidat novou objednávku
+        new_promotion: Přidat akci
         options: Spravovat nastavení
         orders: Aktuální objednávky
         pages: Stránky
         payment_methods: Způsoby plateb
         payments: Platby
         products: Produkty
+        promotions: Akce
+        properties: Nastavení parametrů
+        prototypes: Produktové vzory
         sales: Objednávky
         shipments: Zásilky
+        shipping_categories: Druhy zásilek
         shipping_methods: Způsoby dopravy
+        stockables: Sklady
+        tax_categories: Typy zdanění
         tax_rates: Daňové sazby
+        taxation_settings: Daně
         taxonomies: Kategorizace
         users: Uživatelé
         zones: Oblasti
   frontend:
     menu:
+      account:
+        addresses: Adresář
+        orders: Objednávky / faktury
+        password: Heslo
+        profile: Osobní údaje
+        shop: Zpět do obchodu
+      currency: 'Zobrazit ceny v %currency%'
       main:
+        account: Účet
         administration: Administrace
+        cart: 'Košík %items%/%total%'
+        login: Přihlásit
+        logout: Odhlásit
+        register: Registrace

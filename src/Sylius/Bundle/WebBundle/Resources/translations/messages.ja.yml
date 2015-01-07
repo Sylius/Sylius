@@ -16,6 +16,8 @@ sylius:
       list: sylius.account.address.list
       update: sylius.account.address.update
     home:
+      email: ""
+      id: ""
       outline: お客様情報の確認と変更を行うことができます。
       since: ご登録日時
       welcome: お客様専用ページへようこそ
@@ -25,7 +27,11 @@ sylius:
       empty: sylius.account.order.empty
       invoice: sylius.account.order.invoice
       list: sylius.account.order.list
+      number: ""
+      payment_mode: ""
       placed_at: sylius.account.order.placed_at
+      shipment_mode: ""
+      state: ""
       tracking_number: sylius.account.order.tracking_number
     title: マイアカウント
   add_to_cart: カートに入れる
@@ -60,7 +66,7 @@ sylius:
       products: sylius.backend.quick_links.products
       users: sylius.backend.quick_links.users
     statistics:
-      header: sylius.backend.statistics
+      0: sylius.backend.statistics
       orders_this_month: sylius.backend.statistics.orders_this_month
       registrations_this_month: sylius.backend.statistics.registrations_this_month
       sales_this_month: sylius.backend.statistics.sales_this_month

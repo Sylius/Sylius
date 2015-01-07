@@ -80,7 +80,7 @@ sylius:
       products: Productos
       users: Usuarios
     statistics:
-      header: Estadísticas del mes
+      0: Estadísticas del mes
       orders_this_month: Pedidos
       registrations_this_month: Usuarios
       sales_this_month: Ventas
@@ -288,7 +288,7 @@ sylius:
     update_header: Editar grupo
   hide_deleted: Ocultar eliminados
   history:
-    header: Historial
+    0: Historial
     action: Acción
     author: Autor
     data: Fecha
@@ -433,7 +433,7 @@ sylius:
     method: Metodo
     no_results: Sin resultados
     state:
-      header: Estado
+      0: Estado
       checkout: Completar pedido
       completed: Completado
       failed: Fallido

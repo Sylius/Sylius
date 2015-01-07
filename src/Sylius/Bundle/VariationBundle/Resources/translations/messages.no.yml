@@ -1,3 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: Presentasjon
+    option:
+      name: Internt navn
+      presentation: Presentasjon
+      values: Mulige verdier
+    option_value:
+      add_value: Legg til verdi
+      value: Verdi

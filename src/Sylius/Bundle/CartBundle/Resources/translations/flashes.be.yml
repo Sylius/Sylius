@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Кошык быў абноўлены.
+    cart_clear_completed: Кошык ачышчаны.
+    item_add_completed: Пакупка дададзена у кошык.
+    item_remove_completed: Тавар выдалены з кошыка.
+    item_add_error: Памылка здарылася падчас дадання тавару да кошыка.
+    item_remove_error: Памылка здарылася падчас выдаленна тавару з кошыка.

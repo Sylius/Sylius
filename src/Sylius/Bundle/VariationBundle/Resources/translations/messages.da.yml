@@ -1,3 +1,12 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  form:
+    variant:
+      presentation: Præsentation
+    option:
+      name: System navn
+      presentation: Præsentation
+    option_value:
+      add_value: Tilføj værdi

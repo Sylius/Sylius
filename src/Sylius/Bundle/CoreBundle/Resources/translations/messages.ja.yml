@@ -14,8 +14,6 @@ sylius:
     image:
       file: 画像
     order_filter:
-      created_at_from: 注文日時(始)
-      created_at_to: 注文日時(至)
       number: 注文番号
       total_from: 合計金額(下限)
       total_to: 合計金額(上限)
@@ -35,8 +33,8 @@ sylius:
       taxation:
         default_tax_zone: デフォルトの課税地域
     shipment_filter:
-      created_at_from: 注文日時(始)
-      created_at_to: 注文日時(至)
+      created_at_from: 合計金額(下限)
+      created_at_to: 合計金額(上限)
     shipping_method:
       zone: 対象の地域
     taxon:

@@ -30,7 +30,7 @@ sylius:
           weeks: Tygodnie
           months: Miesiące
           years: Lata
-          header: Jednostki
+          0: Jednostki
         after: Użytkownik zarejestrowany przez okres
       shipping_country_configuration:
         country: Kraj

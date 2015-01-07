@@ -14,7 +14,7 @@ sylius:
       amount: Сумма платежа
       method: Метод платежа
       state:
-        header: Статус платежа
+        0: Статус платежа
         checkout: Сверка
         completed: Завершен
         failed: Провален
@@ -23,6 +23,8 @@ sylius:
         processing: Обрабатывается
         unknown: Неизвестен
         void: Пустой
+        cancelled: Отменён
+        refunded: Возвращено
     payment_method:
       description: Описание
       enabled: Включен?

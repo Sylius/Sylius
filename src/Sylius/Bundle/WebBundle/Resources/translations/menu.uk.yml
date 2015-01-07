@@ -5,19 +5,68 @@ sylius:
   backend:
     menu:
       main:
+        assortment: Асортимент
         configuration: Конфігурація
-        products: Продукти
-        sales: Замовлення
-        users: Користувачі
-        zones: Пояси
-      sidebar:
-        new_order: Додати новий порядок
-        orders: Поточний замовлень
-        pages: Сторінки
+        countries: Країни
+        customer: Клієнти
+        dashboard: Панель керування
+        exchange_rates: Курси валют
+        general_settings: Загальні налаштування
+        homepage: Ваш магазин
+        locales: Локалі
+        new_order: Додати нове замовлення
+        new_promotion: Додати нові акції
+        options: Керувати опціями продукту
+        orders: Поточні замовлення
+        payment_methods: Варіанти оплати
         payments: Платежі
         products: Продукти
         promotions: Промо-акції
+        properties: Налаштування властивостей
+        prototypes: Прототипи продукту
         sales: Замовлення
+        shipments: Відправки
+        shipping_categories: Категорії доставки
+        shipping_methods: Методи доставки
+        stockables: Рівні запасів
+        tax_categories: Категорії оподаткування
+        tax_rates: Податкові ставки
+        taxation_settings: Налаштування оподаткування
+        taxonomies: Категоризація
+        users: Користувачі
+        zones: Пояси
+      sidebar:
+        assortment: Асортимент
+        blocks: Блоки
+        configuration: Конфігурація
+        content: Зміст
+        countries: Країни
+        customer: Клієнти
+        dashboard: Панель керування
+        exchange_rates: Курси валют
+        general_settings: Загальні налаштування
+        groups: Групи
+        homepage: Назад до інтерфейсу
+        locales: Локалі
+        new_order: Додати новий порядок
+        new_promotion: Додати нові акції
+        options: Керування опціями
+        orders: Поточний замовлень
+        pages: Сторінки
+        payment_methods: Варіанти оплати
+        payments: Платежі
+        products: Продукти
+        promotions: Промо-акції
+        properties: Налаштування властивостей
+        prototypes: Прототипи продукту
+        sales: Замовлення
+        shipments: Відправки
+        shipping_categories: Категорії доставки
+        shipping_methods: Методи доставки
+        stockables: Рівні запасів
+        tax_categories: Категорії оподаткування
+        tax_rates: Податкові ставки
+        taxation_settings: Налаштування оподаткування
         taxonomies: Категоризація
         users: Користувачі
         zones: Пояси
@@ -32,6 +81,9 @@ sylius:
         shop: Назад до магазину
       currency: 'Показати ціни в валюту %currency%'
       main:
+        account: Мій обліковий запис
+        administration: Адміністрування
+        cart: 'Див. кошик (%items%) %total%'
         login: Логін
         logout: Вихід
         register: Зареєструватися

@@ -26,7 +26,7 @@
         "sylius/archetype": "0.13.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":         "~2.0",
+        "phpspec/phpspec":         "~2.1",
 
         "symfony/property-access": "~2.3"
     },

@@ -8,5 +8,9 @@ sylius:
       description: Açıklama
       properties: Özellikler
     archetype:
-      name: Ad
-      properties: Özellikler
+      available_on: Satışta
+      meta_keywords: Meta anahtar kelimeleri
+      meta_description: Meta açıklama
+    property:
+      name: Dahili isim
+      presentation: Sunum

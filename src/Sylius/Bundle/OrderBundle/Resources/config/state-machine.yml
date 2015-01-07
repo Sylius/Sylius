@@ -5,15 +5,22 @@ winzou_state_machine:
         graph:         sylius_order
         state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
         states:
-            cart:      ~
-            pending:   ~
-            released:  ~
-            confirmed: ~
-            shipped:   ~
-            abandoned: ~
-            cancelled: ~
-            returned:  ~
+            cart:        ~
+            cart_locked: ~
+            pending:     ~
+            released:    ~
+            confirmed:   ~
+            shipped:     ~
+            abandoned:   ~
+            cancelled:   ~
+            returned:    ~
         transitions:
+            lock_cart:
+                from: [cart]
+                to:   cart_locked
+            unlock_cart:
+                from: [cart_locked]
+                to:   cart
             create:
                 from: [cart]
                 to:   pending

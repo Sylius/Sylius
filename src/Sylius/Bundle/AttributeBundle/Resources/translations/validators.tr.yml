@@ -1,3 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  attribute:
+    name:
+      not_blank: Lütfen özellik ismini giriniz.
+      min_length: 'Özellik ismi en az 1 karakter uzunluğunda olmalıdır.|Özellik ismi en az  {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Özellik ismi 1 karakterden uzun olmamalıdır.|Özellik ismi {{ limit }} karakterden uzun olmamalıdır.'
+    presentation:
+      not_blank: Lütfen özellik tanıtımını giriniz.
+      min_length: 'Özellik tanıtımı en az 1 karakter uzunluğunda olmalıdır.|Özellik tanıtım en az {{ limit }} karakter uzunluğunda olmalıdır.'
+      max_length: 'Özellik tanıtımı 1 karakterden uzun olmamalıdır.|Özellik tanıtımı {{ limit }} karakterden uzun olmamalıdır.'
+  attribute_value:
+    attribute:
+      not_blank: Lütfen özellik seçiniz.
+    value:
+      not_blank: Lütfen özellik değerini giriniz.

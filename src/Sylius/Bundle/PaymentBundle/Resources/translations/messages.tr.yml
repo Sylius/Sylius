@@ -4,9 +4,9 @@
 sylius:
   form:
     credit_card:
-      cardholder_name: Kart sahibinin adı
-      expiry_month: Son Kullanma Tarihi(Ay)
-      expiry_year: Son Kullanma Tarihi(Yıl)
+      cardholder_name: Kart Sahibinin Adı
+      expiry_month: Son Kullanma Ayı
+      expiry_year: Son Kullanma Yılı
       number: Kart Numarası
       security_code: Güvenlik (CVV) kodu
       type: Kart türü
@@ -23,6 +23,8 @@ sylius:
         processing: İşlem Yapılıyor
         unknown: Bilinmiyor
         void: Boş
+        cancelled: İptal Edildi
+        refunded: İade Edildi
     payment_method:
       description: Açıklama
       enabled: Etkin?

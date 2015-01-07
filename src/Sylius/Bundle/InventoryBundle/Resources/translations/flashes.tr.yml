@@ -1,3 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius:
+  inventory_unit:
+    backorder: Stokda ürün kalmamıştır.
+    sell: Stokda ürün vardır.
+    return: Stok iade edilmiştir.
+    transition_fail: Stoğun şuan ki durumu nedeniyle işleminiz gerçekleştirilemiyor

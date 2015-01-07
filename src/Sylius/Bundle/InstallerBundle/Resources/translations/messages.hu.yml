@@ -8,9 +8,7 @@ sylius:
   form:
     configuration:
       database:
-        header: Adatbázis-kapcsolat
         driver:
-          header: Meghajtó
           microsoft_sql_server: Microsoft SQL Server
           mysql: MySQL
           oracle: Oracle
@@ -22,15 +20,12 @@ sylius:
         port: Port
         user: Felhasználó
       locale:
-        header: Területi beállítások
         currency: Pénznem
         locale: Terület
       mailer:
-        header: A levelező rendszer beállításai
         host: Hoszt
         password: Jelszó
         transport:
-          header: Transzport
           gmail: Gmail
           mail: Levél
           sendmail: Sendmail

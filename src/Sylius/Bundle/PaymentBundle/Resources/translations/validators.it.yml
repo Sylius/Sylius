@@ -15,8 +15,8 @@ sylius:
       luhn: Il numero di carta di credito che hai inserito non è valido.
     security_code:
       not_blank: Inserisci il codice di sicurezza.
-      max_length: 'Il codice CVV della carta di credito deve essere compreso tra {{ min }} e {{ max }} caratteri.'
-      min_length: 'Il codice CVV della carta di credito deve essere compreso tra {{ min }} e {{ max }} caratteri.'
+      max_length: 'Il codice CVV della carta di credito deve essere lungo almeno {{ limit }} cifre.'
+      min_length: 'Il codice CVV della carta di credito deve essere lungo al massimo {{ limit }} cifre.'
     expiry_year:
       not_blank: "Si prega di selezionare l'anno di scadenza."
   payment_method:

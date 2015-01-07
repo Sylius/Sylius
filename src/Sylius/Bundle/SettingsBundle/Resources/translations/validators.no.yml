@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  parameter:
+    namespace:
+      max_length: Datafeltet må ikke være lengre enn 255 tegn.|Datafeltet må ikke være lengre enn 255 tegn.
+      min_length: Datafeltet må inneholde minst 2 tegn.|Datafeltet må inneholde minst 2 tegn.
+      not_blank: Vennligst velg et navn for denne parameteren.
+    name:
+      max_length: Datafeltet må ikke være lengre enn 255 tegn.|Datafeltet må ikke være lengre enn 255 tegn.
+      min_length: Datafeltet må inneholde minst 2 tegn.|Datafeltet må inneholde minst 2 tegn.
+      not_blank: Skriv inn et navn for denne parameteren.
