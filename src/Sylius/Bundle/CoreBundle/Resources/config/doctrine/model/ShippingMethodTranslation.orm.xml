@@ -18,7 +18,7 @@
                   xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ShippingMethodTranslation" table="sylius_shipping_method_translation">
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Core\Model\ShippingMethod" locale="locale"/>
+        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

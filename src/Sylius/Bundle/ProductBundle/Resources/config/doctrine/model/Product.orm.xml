@@ -64,7 +64,7 @@
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:loggable />
 
-        <prezent:translatable field="translations" target-entity="Sylius\Component\Core\Model\ProductTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
+        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>

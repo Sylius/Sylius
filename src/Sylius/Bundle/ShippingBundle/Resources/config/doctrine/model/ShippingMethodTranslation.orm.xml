@@ -21,9 +21,7 @@
 
         <field name="name" column="name" type="string" />
 
-        <!--TODO Core model is mapped, do a resolver-->
-        <!--<prezent:translatable field="translatable" target-entity="Sylius\Component\Shipping\Model\ShippingMethod" locale="locale"/>-->
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Core\Model\ShippingMethod" locale="locale"/>
+        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -15,7 +15,7 @@
                   xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Product\Model\Attribute" table="sylius_product_attribute">
-        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale"/>
+        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>

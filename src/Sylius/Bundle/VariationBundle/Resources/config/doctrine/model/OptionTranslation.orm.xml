@@ -15,8 +15,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:prezent="prezent"
->
+                  xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Variation\Model\OptionTranslation" table="sylius_option_translation">
         <id name="id" column="id" type="integer">
@@ -25,7 +24,7 @@
 
         <field name="presentation" column="presentation" type="string" />
 
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Product\Model\Option" locale="locale"/>
+        <prezent:translatable/>
     </mapped-superclass>
 
 </doctrine-mapping>

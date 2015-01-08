@@ -30,8 +30,8 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale"/>
 
+        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>

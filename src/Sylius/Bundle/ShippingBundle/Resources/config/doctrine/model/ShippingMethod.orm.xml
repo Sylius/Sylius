@@ -43,8 +43,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <!--TODO Core model is mapped, do a resolver-->
-        <prezent:translatable field="translations" target-entity="Sylius\Component\Shipping\Model\ShippingMethodTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
+        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>
