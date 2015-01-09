@@ -21,8 +21,7 @@
 
         <field name="name" column="name" type="string" />
 
-        <!--TODO this should be overriden but superclass mapping, it should point to \Component\Core\Product and be overriden in parent!-->
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Addressing\Model\Country" locale="locale"/>
+        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

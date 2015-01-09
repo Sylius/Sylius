@@ -22,8 +22,7 @@
             <join-column name="zone_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
-        <!--TODO Core model is mapped, do a resolver-->
-        <prezent:translatable field="translations" target-entity="Sylius\Component\Core\Model\ShippingMethodTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
+        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>

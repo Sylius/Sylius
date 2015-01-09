@@ -26,7 +26,7 @@
             </cascade>
         </one-to-many>
 
-        <prezent:translatable field="translations" target-entity="Sylius\Component\Addressing\Model\CountryTranslation" current-locale="currentLocale" fallback-locale="fallbackLocale"/>
+        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>
