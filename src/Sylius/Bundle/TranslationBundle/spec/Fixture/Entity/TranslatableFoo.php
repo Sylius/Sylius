@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Fixture\Entity;
+namespace spec\Sylius\Bundle\TranslationBundle\Fixture\Entity;
 
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 

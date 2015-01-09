@@ -61,7 +61,7 @@ sylius_taxonomy:
     classes:
         taxonomy:
             model: Sylius\Component\Core\Model\Taxonomy
-            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+            repository: Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
             translatable:
                 targetEntity: Sylius\Component\Taxonomy\Model\TaxonomyTranslation
@@ -96,7 +96,7 @@ sylius_archetype:
             option: Sylius\Component\Product\Model\Option
             archetype:
                 model: Sylius\Component\Product\Model\Archetype
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+                repository: Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository
                 translatable:
                     targetEntity: Sylius\Component\Product\Model\ArchetypeTranslation
             archetype_translation:
@@ -127,7 +127,7 @@ sylius_shipping:
             model: Sylius\Component\Core\Model\InventoryUnit
         shipping_method:
             model: Sylius\Component\Core\Model\ShippingMethod
-            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+            repository: Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
             translatable:
                 targetEntity: Sylius\Component\Shipping\Model\ShippingMethodTranslation

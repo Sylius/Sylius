@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository;
 
 /**
  * Default product repository.

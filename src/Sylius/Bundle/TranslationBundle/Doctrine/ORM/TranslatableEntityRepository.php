@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
+namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Translation\Doctrine\TranslatableEntityRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
@@ -22,6 +23,9 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
  */
 class TranslatableEntityRepository extends EntityRepository implements TranslatableEntityRepositoryInterface
 {
+    /**
+     * @var LocaleContextInterface
+     */
     protected $localeContext;
     protected $translatableFields = array();
 
@@ -69,7 +73,6 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
      * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
@@ -79,12 +82,10 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
         }
 
         foreach ($criteria as $property => $value) {
-
             if (in_array($property, $this->translatableFields)) {
                 $property = 'translation.' . $property;
                 if (null === $value) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->isNull($property));
+                    $queryBuilder->andWhere($queryBuilder->expr()->isNull($property));
                 } elseif (is_array($value)) {
                     $queryBuilder->andWhere($queryBuilder->expr()->in($property, $value));
                 } elseif ('' !== $value) {
@@ -95,8 +96,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
                 }
             } else {
                 if (null === $value) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
+                    $queryBuilder->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
                 } elseif (is_array($value)) {
                     $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
                 } elseif ('' !== $value) {
