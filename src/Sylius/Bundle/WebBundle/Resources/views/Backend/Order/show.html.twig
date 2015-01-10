@@ -96,6 +96,7 @@
                         {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
                     </h4>
                 </a>
+                <strong>({{ variant.sku }})</strong>
                 {% if product.hasOptions %}
                 <ul class="list-unstyled">
                     <li class="sku"><strong>{{ 'sylius.product.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
