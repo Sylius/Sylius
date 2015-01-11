@@ -87,6 +87,8 @@ sylius:
         login: Connexion
         logout: Déconnexion
         register: Créer un compte
+      sidebar:
+        links: Liens
       social:
         facebook: Facebook
         github: GitHub
