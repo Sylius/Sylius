@@ -12,13 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Model\UserManagerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
