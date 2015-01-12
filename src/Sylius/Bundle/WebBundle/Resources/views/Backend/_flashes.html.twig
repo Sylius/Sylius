@@ -2,6 +2,7 @@
 {% for type in ['success', 'error', 'info', 'warning'] %}
     {% for message in app.session.flashbag.get(type) %}
         {% set type = type == 'warning' ? 'block' : type %}
+        {% set type = type == 'error' ? 'danger' : type %}
         <div class="alert alert-{{ type }}">
             <button type="button" data-dismiss="alert" class="close" aria-hidden="true">&times;</button>
             {{ message }}
