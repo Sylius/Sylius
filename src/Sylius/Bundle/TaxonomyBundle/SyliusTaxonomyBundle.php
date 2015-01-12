@@ -36,6 +36,24 @@ class SyliusTaxonomyBundle extends AbstractTranslationBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'          => array(
+                'ROLE_SYLIUS_TAXONOMY_ADMIN',
+            ),
+            'ROLE_SYLIUS_TAXONOMY_ADMIN' => array(
+                'ROLE_SYLIUS_TAXONOMY_LIST',
+                'ROLE_SYLIUS_TAXONOMY_SHOW',
+                'ROLE_SYLIUS_TAXONOMY_CREATE',
+                'ROLE_SYLIUS_TAXONOMY_UPDATE',
+                'ROLE_SYLIUS_TAXONOMY_DELETE',
+            ),
+        );
+    }
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

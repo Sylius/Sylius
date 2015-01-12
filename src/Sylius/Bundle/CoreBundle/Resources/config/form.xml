@@ -86,6 +86,7 @@
         </service>
         <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
             <argument>%sylius.model.user.class%</argument>
+            <argument>%security.role_hierarchy.roles%</argument>
             <tag name="form.type" alias="sylius_user" />
         </service>
         <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
@@ -93,6 +94,7 @@
             <argument type="collection">
                 <argument>sylius</argument>
             </argument>
+            <argument>%security.role_hierarchy.roles%</argument>
             <tag name="form.type" alias="sylius_group" />
         </service>
         <service id="sylius.form.type.advanced_order" class="%sylius.form.type.advanced_order.class%">

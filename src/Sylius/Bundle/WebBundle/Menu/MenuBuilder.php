@@ -100,4 +100,21 @@ abstract class MenuBuilder
     {
         return $this->translator->trans(/** @Ignore */ $label, $parameters, 'menu');
     }
+
+    /**
+     * Checks that user has role or not.
+     *
+     * @param string      $role
+     * @param null|object $object
+     *
+     * @return bool
+     */
+    protected function isGranted($role, $object = null)
+    {
+        if (!$this->securityContext->getToken()) {
+            return false;
+        }
+
+        return $this->securityContext->isGranted($role, $object);
+    }
 }

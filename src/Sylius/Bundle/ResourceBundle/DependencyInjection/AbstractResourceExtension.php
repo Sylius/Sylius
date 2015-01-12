@@ -122,6 +122,13 @@ abstract class AbstractResourceExtension extends Extension
             $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
         }
 
+        if (method_exists($this->getBundleName(), 'getSecurityRoles')) {
+            $roles = call_user_func(array($this->getBundleName(), 'getSecurityRoles'));
+            if (!empty($roles)) {
+                $container->setParameter(sprintf('sylius.security.roles.%s', str_replace('sylius_', '', $this->getAlias())), $roles);
+            }
+        }
+
         $container->setParameter('sylius.config.classes', $classes);
 
         return array($config, $loader);
@@ -228,7 +235,7 @@ abstract class AbstractResourceExtension extends Extension
      */
     protected function loadDatabaseDriver(array $config, LoaderInterface $loader, ContainerBuilder $container)
     {
-        $bundle = str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
+        $bundle = $this->getBundleName();
         $driver = $config['driver'];
         $manager = isset($config['object_manager']) ? $config['object_manager'] : 'default';
 
@@ -257,6 +264,8 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
+     * Loads configuration files.
+     *
      * @param array           $config
      * @param LoaderInterface $loader
      */
@@ -270,7 +279,7 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
-     * Get the configuration directory
+     * Get the configuration directory.
      *
      * @return string
      * @throws \RuntimeException
@@ -299,5 +308,15 @@ abstract class AbstractResourceExtension extends Extension
     {
         // Override if needed.
         return $config;
+    }
+
+    /**
+     * Returns the name of used bundle.
+     *
+     * @return string
+     */
+    protected function getBundleName()
+    {
+        return str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
     }
 }

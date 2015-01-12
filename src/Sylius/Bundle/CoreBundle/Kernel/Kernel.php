@@ -64,7 +64,6 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),
@@ -102,8 +101,9 @@ abstract class Kernel extends BaseKernel
             new \HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-
             new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
+
+            new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
         );
 
         if (in_array($this->environment, array('dev', 'test'))) {

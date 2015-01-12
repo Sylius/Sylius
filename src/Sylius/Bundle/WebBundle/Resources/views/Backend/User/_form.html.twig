@@ -1,15 +1,63 @@
 {% form_theme form 'SyliusWebBundle::forms.html.twig' %}
 
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.user.details'|trans }}</a></li>
+    <li><a href="#groups" data-toggle="tab">{{ 'sylius.user.groups'|trans }}</a></li>
+    <li><a href="#roles" data-toggle="tab">{{ 'sylius.user.roles'|trans }}</a></li>
+</ul>
+
+<br>
+
 <div class="row">
     <div class="col-md-12">
-        <fieldset>
-            {{ form_row(form.email) }}
-            {{ form_row(form.firstName) }}
-            {{ form_row(form.lastName) }}
-            {{ form_row(form.plainPassword) }}
-            {{ form_row(form.enabled) }}
-            {{ form_row(form.groups) }}
-        </fieldset>
+        <div class="tab-content">
+            <div class="tab-pane active" id="main">
+                <fieldset>
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.plainPassword) }}
+                    {{ form_row(form.enabled) }}
+                </fieldset>
+            </div>
+
+            <div class="tab-pane" id="groups">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{ 'sylius.user.group_name'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for group in form.groups %}
+                        <tr>
+                            <td>{{ form_label(group) }}</td>
+                            <td>{{ form_widget(group) }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane" id="roles">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{ 'sylius.user.role_name'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for role in form.roles %}
+                        <tr>
+                            <td>{{ form_label(role) }}</td>
+                            <td>{{ form_widget(role) }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
 {{ form_rest(form) }}

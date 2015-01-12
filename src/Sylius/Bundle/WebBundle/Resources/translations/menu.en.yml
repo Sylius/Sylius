@@ -37,6 +37,7 @@ sylius:
                 users: Users
                 zones: Zones
             sidebar:
+                api_clients: API Clients
                 assortment: Assortment
                 blocks: Blocks
                 configuration: Configuration

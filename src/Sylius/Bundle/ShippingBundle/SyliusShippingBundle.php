@@ -41,6 +41,41 @@ class SyliusShippingBundle extends AbstractTranslationBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'          => array(
+                'ROLE_SYLIUS_SHIPPING_ADMIN',
+                'ROLE_SYLIUS_SHIPPING_CATEGORY_LIST',
+                'ROLE_SYLIUS_SHIPPING_METHOD_LIST',
+            ),
+            'ROLE_SYLIUS_SHIPPING_ADMIN' => array(
+                'ROLE_SYLIUS_SHIPPING_LIST',
+                'ROLE_SYLIUS_SHIPPING_SHOW',
+                'ROLE_SYLIUS_SHIPPING_CREATE',
+                'ROLE_SYLIUS_SHIPPING_UPDATE',
+                'ROLE_SYLIUS_SHIPPING_DELETE',
+            ),
+            'ROLE_SYLIUS_SHIPPING_CATEGORY_LIST' => array(
+                'ROLE_SYLIUS_SHIPPING_CATEGORY_LIST',
+                'ROLE_SYLIUS_SHIPPING_CATEGORY_SHOW',
+                'ROLE_SYLIUS_SHIPPING_CATEGORY_CREATE',
+                'ROLE_SYLIUS_SHIPPING_CATEGORY_UPDATE',
+                'ROLE_SYLIUS_SHIPPING_CATEGORY_DELETE',
+            ),
+            'ROLE_SYLIUS_SHIPPING_METHOD_LIST' => array(
+                'ROLE_SYLIUS_SHIPPING_METHOD_LIST',
+                'ROLE_SYLIUS_SHIPPING_METHOD_SHOW',
+                'ROLE_SYLIUS_SHIPPING_METHOD_CREATE',
+                'ROLE_SYLIUS_SHIPPING_METHOD_UPDATE',
+                'ROLE_SYLIUS_SHIPPING_METHOD_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

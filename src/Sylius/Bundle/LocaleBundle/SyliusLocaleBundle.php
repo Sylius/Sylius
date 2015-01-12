@@ -35,6 +35,25 @@ class SyliusLocaleBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'        => array(
+                'ROLE_SYLIUS_LOCALE_ADMIN',
+            ),
+            'ROLE_SYLIUS_LOCALE_ADMIN' => array(
+                'ROLE_SYLIUS_LOCALE_LIST',
+                'ROLE_SYLIUS_LOCALE_SHOW',
+                'ROLE_SYLIUS_LOCALE_CREATE',
+                'ROLE_SYLIUS_LOCALE_UPDATE',
+                'ROLE_SYLIUS_LOCALE_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

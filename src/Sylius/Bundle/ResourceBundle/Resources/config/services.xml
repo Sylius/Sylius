@@ -38,6 +38,10 @@
     </parameters>
 
     <services>
+        <service id="security.role_hierarchy" class="Sylius\Bundle\ResourceBundle\Security\RoleHierarchy" public="false">
+            <argument>%security.role_hierarchy.roles%</argument>
+        </service>
+
         <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
             <argument type="service" id="sylius.controller.parameters_parser" />
             <argument>%sylius.resource.settings%</argument>
@@ -72,6 +76,7 @@
             <argument type="service" id="doctrine" />
             <tag name="form.type" alias="entity_hidden" />
         </service>
+
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
         <service id="sylius.form.extension.collection"
                  class="%sylius.form.extension.collection.class%">

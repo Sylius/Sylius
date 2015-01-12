@@ -34,6 +34,33 @@ class SyliusContactBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN' => array(
+                'ROLE_SYLIUS_CONTACT_REQUEST_ADMIN',
+                'ROLE_SYLIUS_CONTACT_TOPIC_ADMIN',
+            ),
+            'ROLE_SYLIUS_CONTACT_REQUEST_ADMIN' => array(
+                'ROLE_SYLIUS_CONTACT_REQUEST_LIST',
+                'ROLE_SYLIUS_CONTACT_REQUEST_SHOW',
+                'ROLE_SYLIUS_CONTACT_REQUEST_CREATE',
+                'ROLE_SYLIUS_CONTACT_REQUEST_UPDATE',
+                'ROLE_SYLIUS_CONTACT_REQUEST_DELETE',
+            ),
+            'ROLE_SYLIUS_CONTACT_TOPIC_ADMIN' => array(
+                'ROLE_SYLIUS_CONTACT_TOPIC_LIST',
+                'ROLE_SYLIUS_CONTACT_TOPIC_SHOW',
+                'ROLE_SYLIUS_CONTACT_TOPIC_CREATE',
+                'ROLE_SYLIUS_CONTACT_TOPIC_UPDATE',
+                'ROLE_SYLIUS_CONTACT_TOPIC_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -21,16 +22,49 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser implements UserInterface
 {
+    /**
+     * @var string
+     */
     protected $firstName;
+    /**
+     * @var string
+     */
     protected $lastName;
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
+    /**
+     * @var \DateTime
+     */
     protected $deletedAt;
+    /**
+     * @var string
+     */
     protected $currency;
+    /**
+     * @var Collection|OrderInterface[]
+     */
     protected $orders;
+    /**
+     * @var AddressInterface
+     */
     protected $billingAddress;
+    /**
+     * @var AddressInterface
+     */
     protected $shippingAddress;
+    /**
+     * @var Collection|AddressInterface[]
+     */
     protected $addresses;
+    /**
+     * @var Collection|UserOAuthInterface[]
+     */
     protected $oauthAccounts;
 
     public function __construct()

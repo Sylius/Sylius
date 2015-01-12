@@ -35,6 +35,41 @@ class SyliusAddressingBundle extends AbstractTranslationBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'         => array(
+                'ROLE_SYLIUS_ADDRESS_ADMIN',
+                'ROLE_SYLIUS_COUNTRY_ADMIN',
+                'ROLE_SYLIUS_ZONE_ADMIN',
+            ),
+            'ROLE_SYLIUS_ADDRESS_ADMIN' => array(
+                'ROLE_SYLIUS_ADDRESS_LIST',
+                'ROLE_SYLIUS_ADDRESS_SHOW',
+                'ROLE_SYLIUS_ADDRESS_CREATE',
+                'ROLE_SYLIUS_ADDRESS_UPDATE',
+                'ROLE_SYLIUS_ADDRESS_DELETE',
+            ),
+            'ROLE_SYLIUS_COUNTRY_ADMIN' => array(
+                'ROLE_SYLIUS_COUNTRY_LIST',
+                'ROLE_SYLIUS_COUNTRY_SHOW',
+                'ROLE_SYLIUS_COUNTRY_CREATE',
+                'ROLE_SYLIUS_COUNTRY_UPDATE',
+                'ROLE_SYLIUS_COUNTRY_DELETE',
+            ),
+            'ROLE_SYLIUS_ZONE_ADMIN'    => array(
+                'ROLE_SYLIUS_ZONE_LIST',
+                'ROLE_SYLIUS_ZONE_SHOW',
+                'ROLE_SYLIUS_ZONE_CREATE',
+                'ROLE_SYLIUS_ZONE_UPDATE',
+                'ROLE_SYLIUS_ZONE_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

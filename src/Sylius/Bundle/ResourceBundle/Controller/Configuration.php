@@ -141,6 +141,11 @@ class Configuration
         return null !== $this->request && 'html' !== $this->request->getRequestFormat();
     }
 
+    public function isBackendRequest()
+    {
+        return null !== $this->request && false !== stripos($this->request->getPathInfo(), 'administration');
+    }
+
     public function getServiceName($service)
     {
         return sprintf('%s.%s.%s', $this->bundlePrefix, $service, $this->resourceName);
@@ -347,5 +352,10 @@ class Configuration
     public function getSerializationVersion()
     {
         return $this->parameters->get('serialization_version');
+    }
+
+    public function getRequiredRole($default)
+    {
+        return $this->parameters->get('required_role', $default);
     }
 }

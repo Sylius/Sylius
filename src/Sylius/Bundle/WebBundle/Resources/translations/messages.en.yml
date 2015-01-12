@@ -836,6 +836,11 @@ sylius:
         show_header: User details
         update_header: Editing user
         username: Username
+        groups: Groups
+        group_name: Group name
+        roles: Roles
+        role_name: Role name
+        details: Details
     variant:
         add_image: Add image
         availability: Availability

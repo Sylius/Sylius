@@ -34,6 +34,25 @@ class SyliusOrderBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
+    public static function getSecurityRoles()
+    {
+        return array(
+            'ROLE_SYLIUS_ADMIN'       => array(
+                'ROLE_SYLIUS_ORDER_ADMIN'
+            ),
+            'ROLE_SYLIUS_ORDER_ADMIN' => array(
+                'ROLE_SYLIUS_ORDER_LIST',
+                'ROLE_SYLIUS_ORDER_SHOW',
+                'ROLE_SYLIUS_ORDER_CREATE',
+                'ROLE_SYLIUS_ORDER_UPDATE',
+                'ROLE_SYLIUS_ORDER_DELETE',
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getModelInterfaces()
     {
         return array(

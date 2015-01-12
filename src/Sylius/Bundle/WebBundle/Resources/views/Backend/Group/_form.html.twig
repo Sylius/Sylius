@@ -3,4 +3,26 @@
 {{ form_errors(form) }}
 {{ form_row(form.name) }}
 
+<hr>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-10">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th colspan="2">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for role in form.roles %}
+                <tr>
+                    <td>{{ form_label(role) }}</td>
+                    <td>{{ form_widget(role) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {{ form_rest(form) }}
