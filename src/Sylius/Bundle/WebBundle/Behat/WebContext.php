@@ -888,4 +888,23 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     {
         $this->clickLink('Show deleted');
     }
+    
+    /**
+     * @Then I should see table of :id sorted by lastName
+     */
+    public function iShouldSeeTableSortedByLastName($id)
+    {
+        $allNames = $this->getSession()->getPage()->findAll('css', '#'.$id.' > tbody > tr > td > p');
+        $allSurnames = array();
+        
+        foreach ($allNames as $name){
+            $spacePosition = strpos($name->getText(), ' ');
+            $surname = substr($name->getText(), $spacePosition + 1);
+            $allSurnames[] .= $surname;
+        }
+        
+        sort($allSurnames);
+        
+        $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
+    }
 }

@@ -120,7 +120,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
-        $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->innerJoin('o.user', 'user')
+        ;
 
         if ($deleted) {
             $this->_em->getFilters()->disable('softdeleteable');
