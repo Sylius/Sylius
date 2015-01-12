@@ -479,7 +479,7 @@ class Order extends Cart implements OrderInterface
      */
     public function isInvoiceAvailable()
     {
-        if (null !== $lastShipment = $this->getLastShipment()) {
+        if (false !== $lastShipment = $this->getLastShipment()) {
             return in_array($lastShipment->getState(), array(ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED));
         }
 
