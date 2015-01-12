@@ -68,10 +68,6 @@ Feature: Users management
         Given I am on the user index page
          Then I should not see "delete" button near "sylius@example.com" in "users" table
 
-    # Scenario: Prevent self-deletion possibility for current logged user on dashboard page
-    #     Given I am on the dashboard page
-    #      Then I should not see "delete" button near "sylius@example.com" in "users" table
-
     Scenario: Accessing the user creation form
         Given I am on the user index page
           And I follow "create user"
