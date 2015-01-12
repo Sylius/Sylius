@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\GroupInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -42,14 +42,14 @@ class UserDeleteListener
     {
         $user = $event->getSubject();
 
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof GroupInterface) {
             throw new UnexpectedTypeException(
                 $user,
-                'FOS\UserBundle\Model\UserInterface'
+                'FOS\UserBundle\Model\GroupInterface'
             );
         }
 
-        if ($this->securityContext->getToken()->getUsername() === $user->getUsernameCanonical()) {
+        if ($this->securityContext->getToken()->getUser()->getId() === $user->getId()) {
             $event->stopPropagation();
             $this->session->getBag('flashes')->add("error", "Cannot remove currently logged user.");
         }
