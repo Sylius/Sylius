@@ -351,6 +351,16 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function getAllVariants()
+    {
+        return $this->variants->filter(function (BaseVariantInterface $variant) {
+            return !$variant->isMaster();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAvailableVariants()
     {
         return $this->variants->filter(function (BaseVariantInterface $variant) {

@@ -181,6 +181,18 @@ class ProductSpec extends ObjectBehavior
         $this->getVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
+    function it_should_print_variants_after_deleting(VariantInterface $variant)
+    {
+        $variant->isMaster()->willReturn(false);
+        $variant->isDeleted()->willReturn(true);
+
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($variant);
+        $this->hasVariants()->shouldReturn(false);
+        $this->getAllVariants()->shouldHaveCount(1);
+    }
+
     function it_should_initialize_option_collection_by_default()
     {
         $this->getOptions()->shouldHaveType('Doctrine\Common\Collections\Collection');

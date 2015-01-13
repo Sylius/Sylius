@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
@@ -870,5 +871,14 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     public function iViewDeletedElements()
     {
         $this->clickLink('Show deleted');
+    }
+
+    /**
+     * @When I delete product
+     */
+    public function iDeleteProduct()
+    {
+        $this->clickLink('.delete');
+        // $this->clickLink('delete');
     }
 }

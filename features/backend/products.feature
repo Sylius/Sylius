@@ -212,3 +212,8 @@ Feature: Products
         Given I am on the product index page
         When I click "details" near "Mug"
         Then I should be on the page of product "Mug"
+
+    Scenario: Presenting variants after deleting product
+        Given I deleted product with name "Super T-Shirt"
+         Then I am on the page of product "Super T-Shirt"
+          And I should see 9 variants in the list
