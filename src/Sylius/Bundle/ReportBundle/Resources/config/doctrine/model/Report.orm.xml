@@ -21,13 +21,6 @@
 
         <field name="name" column="name" type="string" nullable="false" />
         <field name="description" column="description" type="string" nullable="true" />
-<!-- 
-        <field name="createdAt" column="created_at" type="datetime">
-            <gedmo:timestampable on="create"/>
-        </field>
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
-        </field> -->
     </mapped-superclass>
 
 </doctrine-mapping>

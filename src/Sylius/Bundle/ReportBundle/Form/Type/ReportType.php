@@ -25,7 +25,16 @@ class ReportType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       
+        $builder
+            ->add('name', 'text', array(
+                'label' => 'sylius.form.report.name',
+                'required' => true
+            ))
+            ->add('description', 'textarea', array(
+                'label'    => 'sylius.form.report.description',
+                'required' => false,
+            ))
+        ;
     }
 
     /**

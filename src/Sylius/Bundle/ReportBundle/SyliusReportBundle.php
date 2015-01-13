@@ -41,9 +41,6 @@ class SyliusReportBundle extends AbstractTranslationBundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
-        // $container->addCompilerPass(new RegisterCalculatorsPass());
-        // $container->addCompilerPass(new RegisterRuleCheckersPass());
     }
 
     /**
@@ -52,7 +49,7 @@ class SyliusReportBundle extends AbstractTranslationBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Report\Model\ReportInterface'         => 'sylius.model.report.class'
+            'Sylius\Component\Report\Model\ReportInterface' => 'sylius.model.report.class'
         );
     }
 

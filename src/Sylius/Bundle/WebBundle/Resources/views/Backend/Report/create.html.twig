@@ -4,12 +4,6 @@
 
 {% block javascripts %}
 {{ parent() }}
-{% javascripts output='assets/compiled/backend_report.js'
-    'bundles/syliusreport/js/prototype-handler.js'
-    'bundles/syliusreport/js/sylius-report.js'
-%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
 {% endblock %}
 
 {% block topbar %}

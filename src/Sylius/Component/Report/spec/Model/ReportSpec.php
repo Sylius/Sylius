@@ -24,13 +24,24 @@ class ReportSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Report\Model\Report');
     }
 
-    function it_can_set_name()
+    function it_implements_report_interface()
+    {
+        $this->shouldImplement('Sylius\Component\Report\Model\ReportInterface');
+    }
+
+    function it_has_id()
+    {
+        $this->setId(1);
+        $this->getId()->shouldReturn(1);
+    }
+
+    function it_has_name()
     {
         $this->setName('testName');
         $this->getName()->shouldReturn('testName');
     }
 
-    function it_can_set_description()
+    function it_has_description()
     {
         $this->setDescription('Test description for Report spec');
         $this->getDescription()->shouldReturn('Test description for Report spec');

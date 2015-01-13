@@ -1,17 +1,6 @@
 sylius:
-    shipping_category:
+    report:
         name:
-            max_length: 'Category name must not be longer than {{ limit }} characters.'
-            min_length: 'Category name must be at least {{ limit }} characters long.'
-            not_blank: 'Please enter shipping category name.'
-
-    shipping_method:
-        calculator:
-            max_length: sylius.shipping_method.calculator.max_length   # FIXME
-            min_length: sylius.shipping_method.calculator.min_length   # FIXME
-            not_blank: sylius.shipping_method.calculator.not_blank   # FIXME
-
-        name:
-            max_length: 'Shipping method name must not be longer than {{ limit }} characters.'
-            min_length: 'Shipping method name must be at least {{ limit }} characters long.'
-            not_blank: 'Please enter shipping method name.'
+            not_blank: Report name cannot be blank
+            min_length: Report name must have at least 2 characters
+            max_length: Report name must have maximum 255 characters
