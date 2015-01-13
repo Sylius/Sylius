@@ -22,4 +22,11 @@ interface SortableInterface
      * @return integer
      */
     public function getPosition();
+
+    /**
+     * Set position of the item.
+     *
+     * @param integer $position
+     */
+    public function setPosition($position);
 }
