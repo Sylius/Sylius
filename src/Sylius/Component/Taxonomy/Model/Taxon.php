@@ -75,7 +75,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     /**
      * Required by DoctrineExtensions.
      *
-     * @var mixed
+     * @var integer
      */
     protected $position;
 
