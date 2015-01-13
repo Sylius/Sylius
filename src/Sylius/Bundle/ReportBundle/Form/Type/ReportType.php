@@ -17,6 +17,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Report form type.
+ * 
+ * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ * @author Mateusz Zalewski <zaleslaw@gmail.com>
  */
 class ReportType extends AbstractResourceType
 {
