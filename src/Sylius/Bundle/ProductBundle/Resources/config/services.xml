@@ -20,6 +20,7 @@
         <parameter key="sylius.builder.product.class">Sylius\Component\Product\Builder\ProductBuilder</parameter>
         <parameter key="sylius.builder.product_prototype.class">Sylius\Component\Product\Builder\PrototypeBuilder</parameter>
 
+        <parameter key="sylius.set_builder.cartesian.class">Sylius\Component\Variation\SetBuilder\CartesianSetBuilder</parameter>
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
@@ -45,10 +46,12 @@
         </service>
         <service id="sylius.builder.product_prototype" class="%sylius.builder.product_prototype.class%">
             <argument type="service" id="sylius.repository.product_attribute_value" />
-          </service>
+        </service>
 
+        <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.set_builder.cartesian" />
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher"/>
         </service>
