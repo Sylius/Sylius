@@ -34,6 +34,16 @@ class Report implements ReportInterface
     private $description;
 
     /**
+     * @var DataFetcher
+     */
+    private $dataFetcher;
+
+    /**
+     * @var Array
+     */
+    private $dataFetcherConfiguration;
+
+    /**
      * Gets the value of id.
      *
      * @return integer
@@ -101,6 +111,54 @@ class Report implements ReportInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of dataFetcher.
+     *
+     * @return DataFetcher
+     */
+    public function getDataFetcher()
+    {
+        return $this->dataFetcher;
+    }
+
+    /**
+     * Sets the value of dataFetcher.
+     *
+     * @param DataFetcher $dataFetcher the data fetcher
+     *
+     * @return self
+     */
+    public function setDataFetcher(DataFetcher $dataFetcher)
+    {
+        $this->dataFetcher = $dataFetcher;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of dataFetcherConfiguration.
+     *
+     * @return Array
+     */
+    public function getDataFetcherConfiguration()
+    {
+        return $this->dataFetcherConfiguration;
+    }
+
+    /**
+     * Sets the value of dataFetcherConfiguration.
+     *
+     * @param Array $dataFetcherConfiguration the data fetcher configuration
+     *
+     * @return self
+     */
+    public function setDataFetcherConfiguration(Array $dataFetcherConfiguration)
+    {
+        $this->dataFetcherConfiguration = $dataFetcherConfiguration;
 
         return $this;
     }
