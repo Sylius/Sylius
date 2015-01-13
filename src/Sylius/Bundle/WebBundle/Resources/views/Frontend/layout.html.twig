@@ -89,14 +89,17 @@
                 {{ sonata_block_render({'name': '/cms/blocks/banner'}) }}
                 {% block slideshow_sidebar %}{% endblock %}
 
-                    <h2>Links</h2>
-                    <ul>
-                    {% for child in cmf_children(cmf_find('/cms/pages')) %}
-                        <li>
-                            <a href="{{ path(child) }}">{{ child.title|striptags }}</a>
-                        </li>
-                    {% endfor %}
-                    </ul>
+                {% set links = cmf_children(cmf_find('/cms/pages')) %}
+                {% if links is not empty %}
+                <h2>{{ 'sylius.frontend.menu.sidebar.links'|trans }}</h2>
+                <ul>
+                  {% for link in links %}
+                    <li>
+                      <a href="{{ path(link) }}">{{ link.title|striptags }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
                 {% endblock %}
             </div>
             <div class="col-md-9">

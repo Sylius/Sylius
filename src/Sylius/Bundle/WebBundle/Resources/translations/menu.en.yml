@@ -96,6 +96,8 @@ sylius:
                 login: Login
                 logout: Logout
                 register: Register
+            sidebar:
+                links: Links
             social:
                 facebook: Facebook
                 github: GitHub
