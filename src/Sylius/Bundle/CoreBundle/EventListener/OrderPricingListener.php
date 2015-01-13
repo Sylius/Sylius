@@ -58,6 +58,10 @@ class OrderPricingListener
             $context['groups'] = $user->getGroups()->toArray();
         }
 
+        if (null !== $order->getChannel()) {
+            $context['channel'] = $order->getChannel();
+        }
+
         foreach ($order->getItems() as $item) {
             if ($item->isImmutable()) {
                 continue;
