@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: 'El nombre de la categoría no debe tener más de {{ limit }} caracteres.'
+      min_length: 'El nombre de la categoría debe tener al menos {{ limit }} caracteres.'
+      not_blank: Por favor introduce el nombre de la categoría de envío.
+  shipping_method:
+    calculator:
+      max_length: El nombre de la calculadora no debe tener más de 255 caracteres.
+      min_length: El nombre de la calculadora debe tener al menos 2 caracteres.
+      not_blank: Por favor elige una calculadora.
+    name:
+      max_length: 'El nombre del método de envío no debe tener más de {{ limit }} caracteres.'
+      min_length: 'El nombre del método de envío debe tener al menos {{ limit }} caracteres.'
+      not_blank: Por favor introduce el nombre del método de envío.

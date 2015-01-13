@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  shipping_category:
+    name:
+      max_length: 'Categorie naam mag niet langer zijn dan {{ limit }} tekens.'
+      min_length: 'Categorie naam moet minstens {{ limit }} tekens lang zijn.'
+      not_blank: Voer een naam in voor de verzendingscategorie.
+  shipping_method:
+    calculator:
+      max_length: Maximale lengte
+      min_length: Minimum lengte
+      not_blank: Veld mag niet leeg zijn
+    name:
+      max_length: 'Naam van verzendingsmethode mag niet langer zijn dan {{ limit }} tekens.'
+      min_length: 'Naam van verzendingsmethode moet minstens {{ limit }} tekens lang zijn.'
+      not_blank: Voer een naam in voor de verzendingsmethode.

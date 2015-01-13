@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Aantal
+        equal: Gelijk aan
+      type: Type
+    shipment:
+      state: Status
+      states:
+        checkout: Afrekenen
+        dispatched: Verzonden
+        pending: Wachtende
+        ready: Klaar
+        shipped: Verzonden
+        returned: Geretourneerd
+      tracking_code: Tracking Code
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Hoeveelheid
+      flexible_rate_configuration:
+        additional_item_cost: Extra item kosten
+        additional_item_limit: Limiet extra items
+        first_item_cost: Eerste item kosten
+      per_item_rate_configuration:
+        amount: Hoeveelheid
+      weight_rate_configuration:
+        amount: Hoeveelheid
+        division: Divisie
+    shipping_category:
+      description: Omschrijving
+      name: Naam
+    shipping_method:
+      calculator: Calculator
+      category: Categorie
+      category_requirement: Categorie vereisten
+      configuration: Configuratie
+      enabled: Actief
+      name: Naam

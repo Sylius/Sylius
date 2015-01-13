@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Bundle\ReportBundle
+        psr4_prefix: Sylius\Bundle\ReportBundle
+        src_path: .

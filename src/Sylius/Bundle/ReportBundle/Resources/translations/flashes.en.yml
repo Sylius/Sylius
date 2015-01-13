@@ -1,0 +1,4 @@
+sylius:
+    shipment:
+        ship:
+            success: Shipping is completed.
