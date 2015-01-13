@@ -66,7 +66,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusLocaleBundle/blob/master/Locales/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusLocaleBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

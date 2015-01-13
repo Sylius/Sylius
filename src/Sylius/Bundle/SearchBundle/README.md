@@ -56,7 +56,9 @@ engine: orm
 
 Possible values: orm, elasticsearch
 
-If orm is selected the search uses mysql as engine, if elasticsearch is selected if uses the elasticsearch search engine, which must be configured through the fos_elastica bundle. For documentation on fos_elastica please check the [fos_elastica github page](https://github.com/FriendsOfSymfony/FOSElasticaBundle)
+If orm is selected the search uses mysql as engine, if elasticsearch is selected if uses the elasticsearch search engine,
+which must be configured through the fos_elastica bundle. For documentation on fos_elastica please check
+the [fos_elastica github page](https://github.com/FriendsOfSymfony/FOSElasticaBundle).
 
 ### Query logger
 
@@ -181,7 +183,7 @@ filters:
 
 ### Indexing data
 
-After configuring the indexer properly you execute the following command to populate the appropriate engine
+After configuring the indexer properly you execute the following command to populate the appropriate engine:
 
 ```bash
 app/console sylius:search:index
@@ -211,7 +213,7 @@ $ /bin/behat --suite=search
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusProductBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusSearchBundle/index.html).
 
 Contributing
 ------------
@@ -257,7 +259,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusProductBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusSearchBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

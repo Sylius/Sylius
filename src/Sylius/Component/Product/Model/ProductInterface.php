@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
+use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Variation\Model\VariableInterface;
 interface ProductInterface extends
     AttributeSubjectInterface,
     VariableInterface,
+    SlugAwareInterface,
     SoftDeletableInterface,
     TimestampableInterface,
     ProductTranslationInterface

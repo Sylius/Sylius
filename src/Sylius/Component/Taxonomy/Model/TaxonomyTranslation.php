@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Taxonomy\Model;
+
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 /**

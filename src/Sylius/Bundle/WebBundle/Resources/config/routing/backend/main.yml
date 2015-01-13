@@ -142,4 +142,3 @@ sylius_backend_security:
 sylius_backend_content:
     resource: @SyliusWebBundle/Resources/config/routing/backend/content/main.yml
     prefix: /content
-    

@@ -1,11 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
     form:
         rule:
             item_count_configuration:
-                count: sylius.form.rule.item_count_configuration.count   # FIXME
-                equal: sylius.form.rule.item_count_configuration.equal   # FIXME
+                count: Count
+                equal: Equal to
 
-            type: sylius.form.rule.type   # FIXME
+            type: Rule type
 
         shipment:
             state: State
@@ -25,9 +28,9 @@ sylius:
 
             flexible_rate_configuration:
                 label: Flexible rate
-                additional_item_cost: 'Additional item cost'
-                additional_item_limit: 'Limit additional items'
-                first_item_cost: 'First item cost'
+                additional_item_cost: Additional item cost
+                additional_item_limit: Limit additional items
+                first_item_cost: First item cost
 
             per_item_rate_configuration:
                 label: Flat rate per item
@@ -50,7 +53,8 @@ sylius:
         shipping_method:
             calculator: Calculator
             category: Category
-            category_requirement: 'Category requirement'
+            category_requirement: Category requirement
             configuration: Configuration
-            enabled: sylius.form.shipping_method.enabled   # FIXME
+            enabled: Enabled
             name: Name
+

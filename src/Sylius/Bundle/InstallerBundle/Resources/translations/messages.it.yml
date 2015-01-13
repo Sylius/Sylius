@@ -20,6 +20,7 @@ sylius:
         port: Porta
         user: Utente
       locale:
+        header: Impostazioni locali
         currency: Valuta
         locale: Locale
       mailer:
@@ -56,3 +57,4 @@ sylius:
         content: '<p>Benvenuti su Sylius installer.</p>'
         header: 'Benvenuti su <small>Sylius installer</small>'
 €: €
+
