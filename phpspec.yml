@@ -16,6 +16,7 @@ suites:
     Product          : { namespace: Sylius\Component\Product, psr4_prefix: Sylius\Component\Product , spec_path: src/Sylius/Component/Product }
     Promotion        : { namespace: Sylius\Component\Promotion, psr4_prefix: Sylius\Component\Promotion, spec_path: src/Sylius/Component/Promotion }
     Registry         : { namespace: Sylius\Component\Registry, psr4_prefix: Sylius\Component\Registry, spec_path: src/Sylius/Component/Registry }
+    Report           : { namespace: Sylius\Component\Report, psr4_prefix: Sylius\Component\Report , spec_path: src/Sylius/Component/Report }
     Resource         : { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource }
     Sequence         : { namespace: Sylius\Component\Sequence, psr4_prefix: Sylius\Component\Sequence, spec_path: src/Sylius/Component/Sequence }
     Settings         : { namespace: Sylius\Component\Settings, psr4_prefix: Sylius\Component\Settings, spec_path: src/Sylius/Component/Settings }
