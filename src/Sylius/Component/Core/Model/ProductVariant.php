@@ -181,7 +181,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setPrice($price)
     {
-        $this->price = (int) $price;
+        $this->price = intval(round($price));
 
         return $this;
     }
