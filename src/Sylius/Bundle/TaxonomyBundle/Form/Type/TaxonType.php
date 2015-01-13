@@ -33,6 +33,9 @@ class TaxonType extends AbstractResourceType
                 'form_type' => new TaxonTranslationType($this->dataClass.'Translation', $this->validationGroups),
                 'label'    => 'sylius.form.taxon.name'
             ))
+            ->add('position', 'integer', array(
+                'label'    => 'sylius.form.taxon.position'
+            ))
             ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
         ;
     }

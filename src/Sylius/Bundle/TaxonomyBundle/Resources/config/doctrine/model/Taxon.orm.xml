@@ -30,6 +30,7 @@
         <many-to-one field="parent" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="children">
             <join-column name="parent_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
             <gedmo:tree-parent />
+			<gedmo:sortable-group />
         </many-to-one>
 
         <one-to-many field="children" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" mapped-by="parent">
@@ -37,7 +38,7 @@
                 <cascade-all />
             </cascade>
             <order-by>
-                <order-by-field name="left" direction="ASC" />
+                <order-by-field name="position" direction="ASC" />
             </order-by>
         </one-to-many>
 
@@ -53,6 +54,10 @@
         </field>
         <field name="level" column="tree_level" type="integer">
             <gedmo:tree-level />
+        </field>
+		
+        <field name="position" column="position" type="integer">
+            <gedmo:sortable-position />
         </field>
 
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />

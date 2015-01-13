@@ -71,6 +71,13 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
      * @var mixed
      */
     protected $level;
+	
+    /**
+     * Required by DoctrineExtensions.
+     *
+     * @var mixed
+     */
+    protected $position;
 
     /**
      * Deletion time.
@@ -329,6 +336,24 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
+
+        return $this;
+    }
+	
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
 
         return $this;
     }
