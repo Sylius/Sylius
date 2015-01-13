@@ -49,4 +49,12 @@ interface ProductInterface extends
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);
+
+    /**
+     * Return all variants including deleted.
+     *
+     * @return Collection|BaseVariantInterface[]
+     */
+    public function getAllVariants();
+
 }
