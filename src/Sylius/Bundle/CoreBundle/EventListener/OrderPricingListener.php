@@ -48,6 +48,7 @@ class OrderPricingListener
     public function recalculatePrices(GenericEvent $event)
     {
         $order = $event->getSubject();
+
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException($order, 'Sylius\Component\Order\Model\OrderInterface');
         }
@@ -59,7 +60,7 @@ class OrderPricingListener
         }
 
         if (null !== $order->getChannel()) {
-            $context['channel'] = $order->getChannel();
+            $context['channel'] = array($order->getChannel());
         }
 
         foreach ($order->getItems() as $item) {
