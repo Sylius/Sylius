@@ -41,14 +41,14 @@ security:
                 check_path: /login_check
                 failure_path: /login
                 default_target_path: /
-                use_forward:  false
+                use_forward: false
                 use_referer: true
             remember_me:
                 key: %sylius.secret%
-                name: APP_REMEMBER_ME
-                lifetime: 31536000
+                name: %sylius.remember_cookie%
+                lifetime: %sylius.remember_lifetime%
                 always_remember_me: true
-                remember_me_parameter: _remember_me
+                remember_me_parameter: %sylius.remember_parameter%
             oauth:
                 resource_owners:
                     amazon:   "/login/check-amazon"

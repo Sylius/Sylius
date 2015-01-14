@@ -14,6 +14,9 @@ parameters:
     sylius.mailer.password:           ~
 
     sylius.secret:                    EDITME
+    sylius.remember_cookie:           APP_REMEMBER_ME
+    sylius.remember_lifetime:         31536000
+    sylius.remember_parameter:        _remember_me
 
     sylius.locale:                    en_US
     sylius.currency:                  USD
