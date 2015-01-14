@@ -4,5 +4,18 @@ namespace Sylius\Component\Report\DataFetcher;
 
 interface DataFetcherInterface
 {
-    fetch($config);
+    /**
+     * Fetching data from data base
+     * 
+     * @param array config
+     * 
+     * @return array of data
+     */
+    public fetch($config);
+
+    /**
+     * 
+     * @return Type of data
+     */
+    public getType();
 }

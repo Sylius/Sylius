@@ -37,6 +37,9 @@ class ReportType extends AbstractResourceType
                 'label'    => 'sylius.form.report.description',
                 'required' => false,
             ))
+            ->add('dataFetcher', 'sylius_data_fetcher_choice', array(
+                'label'    => 'sylius.form.report.data_fetcher',
+            ))
         ;
     }
 

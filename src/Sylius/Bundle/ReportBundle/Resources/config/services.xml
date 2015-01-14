@@ -16,6 +16,23 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+         <parameter key="sylius.registry.report.data_fetcher.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+         <parameter key="sylius.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
+         <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcherChoiceType</parameter>
+    </parameters>
 
+    <services>
+        <service id="sylius.registry.report.data_fetcher" class="%sylius.registry.report.data_fetcher.class%">
+            <argument>Sylius\Component\Report\DataFetcher\DataFetcherInterface</argument>
+        </service>
+         <service id="sylius.data_fetcher" class="%sylius.data_fetcher.class%">
+            <argument type="service" id="sylius.registry.report.data_fetcher" />
+        </service>
+        <service id="sylius.form.type.data_fetcher_choice" class="%sylius.form.type.data_fetcher_choice.class%">
+            <argument>%sylius.data_fetchers%</argument>
+            <tag name="form.type" alias="sylius_data_fetcher_choice" />
+        </service>
+    </services>
 
 </container>

@@ -1,0 +1,50 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Bundle\ReportBundle\DependencyInjection\Compiler;
+
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
+
+/**
+ * Registers all shipping dataFetchers in dataFetcher registry service.
+ *
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
+class RegisterDataFetcherPass implements CompilerPassInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function process(ContainerBuilder $container)
+    {
+        if (!$container->hasDefinition('sylius.registry.report.data_fetcher')) {
+            return;
+        }
+
+        $registry = $container->getDefinition('sylius.registry.report.data_fetcher');
+        $dataFetchers = array();
+
+        foreach ($container->findTaggedServiceIds('sylius.report.data_fetcher') as $id => $attributes) {
+            if (!isset($attributes[0]['dataFetcher']) || !isset($attributes[0]['label'])) {
+                throw new \InvalidArgumentException('Tagged report data fetchers needs to have `dataFetcher` and `label` attributes.');
+            }
+
+            $name = $attributes[0]['dataFetcher'];
+            $dataFetchers[$name] = $attributes[0]['label'];
+
+            $registry->addMethodCall('register', array($name, new Reference($id)));
+        }
+
+        $container->setParameter('sylius.data_fetchers', $dataFetchers);
+    }
+}

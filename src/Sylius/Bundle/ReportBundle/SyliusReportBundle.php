@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ReportBundle;
 use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterDataFetcherPass;
 
 /**
  * Report component for Symfony2 applications.
@@ -41,6 +42,7 @@ class SyliusReportBundle extends AbstractTranslationBundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
+        $container->addCompilerPass(new RegisterDataFetcherPass());
     }
 
     /**
