@@ -36,6 +36,14 @@ interface ProductVariantInterface extends
     public function getImages();
 
     /**
+     * Get variant main image if any.
+     * Fall-back on product master variant
+     *
+     * @return ImageInterface
+     */
+    public function getImage();
+
+    /**
      * Checks if product has image.
      *
      * @param ProductVariantImageInterface $image
