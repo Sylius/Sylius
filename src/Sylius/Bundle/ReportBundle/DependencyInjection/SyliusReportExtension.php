@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReportBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Report extension.
@@ -32,5 +33,10 @@ class SyliusReportExtension extends AbstractResourceExtension
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
+
+        $container
+            ->getDefinition('sylius.form.type.report')
+            ->addArgument(new Reference('sylius.registry.report.renderer'))
+        ;
     }
 }

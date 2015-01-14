@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class RegisterRenderers implements CompilerPassInterface
+class RegisterRenderersPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -25,16 +25,20 @@ class RegisterRenderers implements CompilerPassInterface
         if (!$container->hasDefinition('sylius.registry.report.renderer')) {
             return;
         }
+
         $registry = $container->getDefinition('sylius.registry.report.renderer');
-        $calculators = array();
+        $renderers = array();
+
         foreach ($container->findTaggedServiceIds('sylius.report.renderer') as $id => $attributes) {
             if (!isset($attributes[0]['renderer']) || !isset($attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged renderers needs to have `renderer` and `label` attributes.');
             }
+            
             $name = $attributes[0]['renderer'];
-            $calculators[$name] = $attributes[0]['label'];
-            $registry->addMethodCall('render', array($name, new Reference($id)));
+            $renderers[$name] = $attributes[0]['label'];
+            $registry->addMethodCall('register', array($name, new Reference($id)));
         }
-        $container->setParameter('sylius.report.renderer', $calculators);
+
+        $container->setParameter('sylius.report.renderers', $renderers);
     }
 }

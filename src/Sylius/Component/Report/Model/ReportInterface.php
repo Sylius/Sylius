@@ -10,4 +10,8 @@ interface ReportInterface
     public function setName($name);
     public function getDescription();
     public function setDescription($description);
+    public function getRenderer();
+    public function setRenderer($renderer);
+    public function getRendererConfiguration();
+    public function setRendererConfiguration($rendererConfiguration);
 }

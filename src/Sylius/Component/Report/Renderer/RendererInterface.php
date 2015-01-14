@@ -13,5 +13,6 @@ namespace Sylius\Component\Report\Renderer;
 
 interface RendererInterface
 {
-    public function render($data, $configuration)
+    public function render($data, $configuration);
+    public function getType();
 }

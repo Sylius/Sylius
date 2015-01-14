@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ReportController extends ResourceController
 {
-    public function reportAction(Request $request)
+    public function renderAction(Request $request)
     {
         
     }

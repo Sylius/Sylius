@@ -66,6 +66,7 @@ sylius:
                 payments: Payments
                 products: Products
                 promotions: Promotions
+                report: Reports
                 attributes: Configure attributes
                 archetypes: Product archetypes
                 sales: Orders
