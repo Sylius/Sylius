@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\ReportBundle\Form\Type;
 
+use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener;
@@ -34,11 +36,25 @@ class ReportType extends AbstractResourceType
      */
     protected $rendererRegistry;
 
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $rendererRegistry)
+    /**
+     * Calculator registry.
+     *
+     * @var ServiceRegistryInterface
+     */
+    protected $dataFetcherRegistry;
+
+    /**
+     * Constructor.
+     *
+     * @param ServiceRegistryInterface $rendererRegistry
+     * @param ServiceRegistryInterface $dataFetcherRegistry
+     */
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
         
         $this->rendererRegistry = $rendererRegistry;
+        $this->dataFetcherRegistry = $dataFetcherRegistry;
     }
 
     /**
@@ -47,6 +63,7 @@ class ReportType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new BuildReportDataFetcherFormListener($this->dataFetcherRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.report.name',
                 'required' => true
@@ -66,6 +83,7 @@ class ReportType extends AbstractResourceType
 
         $prototypes = array();
         $prototypes['renderers'] = array();
+        $prototypes['dataFetchers'] = array();
 
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
             $formType = sprintf('sylius_renderer_%s', $renderer->getType());
@@ -76,6 +94,20 @@ class ReportType extends AbstractResourceType
 
             try {
                 $prototypes['renderers'][$type] = $builder->create('rendererConfiguration', $formType)->getForm();
+            } catch (\InvalidArgumentException $e) {
+                continue;
+            }
+        }
+     
+        foreach ($this->dataFetcherRegistry->all() as $type => $dataFetcher) {
+            $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
+            
+            if (!$formType) {
+                continue;
+            }
+
+            try {
+                $prototypes['dataFetchers'][$type] = $builder->create('dataFetcherConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }

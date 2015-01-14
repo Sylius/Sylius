@@ -37,6 +37,7 @@ class SyliusReportExtension extends AbstractResourceExtension
         $container
             ->getDefinition('sylius.form.type.report')
             ->addArgument(new Reference('sylius.registry.report.renderer'))
+            ->addArgument(new Reference('sylius.registry.report.data_fetcher'))
         ;
     }
 }

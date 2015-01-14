@@ -11,11 +11,11 @@ interface DataFetcherInterface
      * 
      * @return array of data
      */
-    public fetch($config);
+    public function fetch($config);
 
     /**
      * 
      * @return Type of data
      */
-    public getType();
+    public function getType();
 }

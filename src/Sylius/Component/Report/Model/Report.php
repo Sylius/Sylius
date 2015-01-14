@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Report\Model;
 
+use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
+
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <zaleslaw@gmail.com>
@@ -34,14 +36,14 @@ class Report implements ReportInterface
     private $description;
 
     /**
-     * @var DataFetcher
+     * @var String
      */
-    private $dataFetcher;
+    private $dataFetcher = 'user_registration';
 
     /**
      * @var Array
      */
-    private $dataFetcherConfiguration;
+    private $dataFetcherConfiguration = array();
 
     /**
      * Renderer name.
