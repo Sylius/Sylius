@@ -25,6 +25,7 @@
 
          <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>  
          <parameter key="sylius.form.type.renderer_choice.class">Sylius\Bundle\ReportBundle\Form\Type\RendererChoiceType</parameter>
+        <parameter key="sylius.form.type.renderer.table.class">Sylius\Bundle\ReportBundle\Renderer\TableRenderer</parameter>
     </parameters>
 
     <services>
@@ -53,6 +54,9 @@
         <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
             <argument type="service" id="sylius.repository.user" />
             <tag name="sylius.report.data_fetcher" fetcher="user_registration" label="User registration" />
+        </service>
+        <service id="sylius.form.type.renderer.table" class="%sylius.form.type.renderer.table.class%">
+            <tag name="sylius.report.renderer" renderer="table" label="Table renderer" />
         </service>
     </services>
 
