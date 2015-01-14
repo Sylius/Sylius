@@ -11,6 +11,7 @@
             <th>{{ sylius_resource_sort('id', 'sylius.report.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.report.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('description', 'sylius.report.description'|trans) }}</th>
+            <th>{{ sylius_resource_sort('renderer', 'sylius.report.renderer'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -20,6 +21,7 @@
             <td>{{ report.id }}</td>
             <td>{{ report.name }}</td>
             <td>{{ report.description }}</td>
+            <td>{{ report.renderer }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_report_show', {'id': report.id})) }}

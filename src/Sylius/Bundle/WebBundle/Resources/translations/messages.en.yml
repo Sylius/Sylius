@@ -746,6 +746,7 @@ sylius:
         description: Description
         manage: Manage
         update_header: Edit report
+        renderer: Renderer type
     save_changes: Save changes
     search: Search
     settings:

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReportBundle\Renderer;
+namespace Sylius\Component\Report\Renderer;
 
 use Symfony\Component\Templating\EngineInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
