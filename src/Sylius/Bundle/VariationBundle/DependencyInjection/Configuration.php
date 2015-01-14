@@ -16,11 +16,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Configuration implements ConfigurationInterface
@@ -56,21 +51,19 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('validation_groups')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
-                        ->children()
-                            ->arrayNode('variant')
-                                ->prototype('scalar')->end()
-                                ->defaultValue(array('sylius'))
-                            ->end()
-                            ->arrayNode('option')
-                                ->prototype('scalar')->end()
-                                ->defaultValue(array('sylius'))
-                            ->end()
-                            ->arrayNode('option_value')
-                                ->prototype('scalar')->end()
-                                ->defaultValue(array('sylius'))
-                            ->end()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('variant')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('option')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('option_value')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
                         ->end()
                 ->end()
             ->end()
