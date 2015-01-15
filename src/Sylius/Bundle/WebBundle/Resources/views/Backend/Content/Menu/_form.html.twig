@@ -12,12 +12,7 @@
             {{ forms.readonly(form.parent,form.parent.vars.value,'/cms/menus') }}
         </div>
         <div class="col-md-6">
-            <div id="sylius-menu-childrens" class="collection-container" data-prototype="{{ _self.prototype(form.children.vars.prototype)|e }}">
-                {% for children in form.children %}
-                    {{ _self.prototype(children) }}
-                {% endfor %}
-            </div>
-            <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="sylius-menu-childrens" data-collection="sylius-menu-childrens">{{ "sylius.form.menu.add_menu_node"|trans }}</a>
+            {{ form_row(form.children) }}
         </div>
     </div>
 </fieldset>

@@ -37,14 +37,14 @@ class SlideshowBlockType extends AbstractResourceType
                 'label' => 'sylius.form.slideshow_block.title'
             ))
             ->add('children', 'collection', array(
-                'type'         => 'sylius_imagine_block',
-                'allow_add'    => true,
+                'type' => 'sylius_imagine_block',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.slideshow_block.childrens'
-             ))
+                'label' => false,
+                'button_add_label' => 'sylius.form.slideshow.add_slide',
+            ))
         ;
-
     }
 
     /**
