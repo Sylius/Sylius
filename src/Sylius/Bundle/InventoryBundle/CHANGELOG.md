@@ -1,9 +1,30 @@
 CHANGELOG
 =========
 
+### v0.10.0
+
+* Twig extension was renamed from `SyliusInventoryExtension` into `InventoryExtension`,
+  also the service name was changed from `sylius.inventory_twig` to `sylius.twig.extension.inventory`.
+
+### v0.9.0
+
+* Release before components.
+* Introduced ``InStock`` validation constraint.
+
+### v0.8.0
+
+* Convert translations to YAML.
+* Add inventory level events.
+* Handling of the stock exception.
+
+### v0.7.0
+
+* Add "on-hold" inventory concept.
+* Add dummy inventory operator.
+
 ### v0.6.0
 
-* Release before components introduction.
+* Release before components introduction. (delayed)
 
 ### v0.5.0
 

@@ -1,8 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: sylius.yml }
-    - { resource: payum.yml }
+    - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -21,14 +23,19 @@ framework:
 twig:
     form:
         resources:
-            - 'SyliusWebBundle::forms.html.twig'
+            - SyliusWebBundle:Common:forms.html.twig
+            - SyliusResourceBundle::forms.html.twig
+            - CmfMediaBundle:Form:fields.html.twig
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    paths:
+        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Core/Resources/views: PayumCore
+        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Stripe/Resources/views: PayumStripe
 
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle']
+    bundles:        ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle']
     filters:
         cssrewrite: ~
 
@@ -46,107 +53,34 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                mappings:
+                    gedmo_loggable:
+                        type: annotation
+                        prefix: Gedmo\Loggable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                        is_bundle: false
                 filters:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                         enabled: true
+                dql:
+                    string_functions:
+                        MATCH: Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction
 
-stof_doctrine_extensions:
-    default_locale: %sylius.locale%
-    orm:
-        default:
-            tree: true
-            sluggable: true
-            timestampable: true
-            softdeleteable: true
-
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: Sylius\Bundle\CoreBundle\Model\User
-    group:
-        group_class: Sylius\Bundle\CoreBundle\Model\Group
-    profile:
-        form:
-            type: sylius_user_profile
-    registration:
-        form:
-            type: sylius_user_registration
-
-hwi_oauth:
-    firewall_name: main
-    resource_owners:
-        amazon:
-            type:          amazon
-            client_id:     %sylius.oauth.amazon.clientid% 
-            client_secret: %sylius.oauth.amazon.clientsecret%
-        facebook:
-            type:          facebook
-            client_id:     %sylius.oauth.facebook.clientid%
-            client_secret: %sylius.oauth.facebook.clientsecret%
-        google:
-            type:          google
-            client_id:     %sylius.oauth.google.clientid%
-            client_secret: %sylius.oauth.google.clientsecret%
-            scope:         "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+doctrine_phpcr:
+    session:
+        backend: %phpcr_backend%
+        workspace: %phpcr_workspace%
+        username: %phpcr_user%
+        password: %phpcr_pass%
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
 
 swiftmailer:
     transport: %sylius.mailer.transport%
     host:      %sylius.mailer.host%
+    port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
-
-liip_doctrine_cache:
-    namespaces:
-        sylius_settings:
-            type: %sylius.cache%
-
-knp_gaufrette:
-    adapters:
-        sylius_image:
-            local:
-                directory:  %kernel.root_dir%/../web/media/image
-                create:     true
-    filesystems:
-        sylius_image:
-            adapter: sylius_image
-
-liip_imagine:
-    data_root: %kernel.root_dir%/../web/media/image
-    filter_sets:
-        sylius_16x16:
-            filters:
-                thumbnail: { size: [16, 16], mode: outbound }
-        sylius_50x40:
-            filters:
-                thumbnail: { size: [50, 40], mode: outbound }
-        sylius_90x60:
-            filters:
-                thumbnail: { size: [90, 60], mode: outbound }
-        sylius_200x200:
-            filters:
-                thumbnail: { size: [200, 200], mode: outbound }
-
-        sylius_262x255:
-            filters:
-                thumbnail: { size: [265, 255], mode: outbound }
-        sylius_310x300:
-            filters:
-                thumbnail: { size: [310, 300], mode: outbound }
-        sylius_610x600:
-            filters:
-                thumbnail: { size: [610, 600], mode: outbound }
-        sylius_gallery:
-            filters:
-                thumbnail: { size: [640, 480], mode: outbound }
-
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     /usr/bin/wkhtmltopdf
-        options:    []
-    image:
-        enabled:    true
-        binary:     /usr/bin/wkhtmltoimage
-        options:    []

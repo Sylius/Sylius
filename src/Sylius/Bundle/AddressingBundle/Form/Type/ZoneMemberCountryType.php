@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Country zone member form type.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberCountryType extends ZoneMemberType
 {
@@ -27,7 +27,8 @@ class ZoneMemberCountryType extends ZoneMemberType
     {
         $builder
             ->add('country', 'sylius_country_choice', array(
-                'label' => 'sylius.form.zone_member_country.country'
+                'label'    => 'sylius.form.zone_member_country.country',
+                'property' => 'name',
             ))
         ;
 

@@ -21,8 +21,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -39,10 +39,22 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->booleanNode('backorders')->defaultTrue()->end()
+                ->booleanNode('track_inventory')->defaultTrue()->end()
                 ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()
-                ->scalarNode('operator')->defaultValue('sylius.inventory_operator.default')->cannotBeEmpty()->end()
+                ->scalarNode('operator')->cannotBeEmpty()->end()
                 ->arrayNode('events')->prototype('scalar')->end()
-            ->end();
+            ->end()
+        ->end()
+        ->validate()
+            ->ifTrue(function ($array) {
+                return !isset($array['operator']);
+            })
+            ->then(function ($array) {
+                $array['operator'] = 'sylius.inventory_operator.'.($array['track_inventory'] ? 'default' : 'noop');
+
+                return $array;
+            })
+        ->end();
 
         $this->addClassesSection($rootNode);
 
@@ -62,17 +74,20 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('unit')
+                        ->arrayNode('inventory_unit')
+                            ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\InventoryBundle\Model\InventoryUnit')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Inventory\Model\InventoryUnit')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController')->end()
                                 ->scalarNode('repository')->end()
                             ->end()
                         ->end()
                         ->arrayNode('stockable')
                             ->isRequired()
+                            ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                             ->end()
                         ->end()
                     ->end()

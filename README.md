@@ -1,5 +1,10 @@
-Sylius [![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch=master)](http://travis-ci.org/Sylius/Sylius) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Sylius/Sylius/badges/quality-score.png?s=f6d89b8aad6e15cab61134e7c0544ee1313f7f31)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
-======
+![Sylius](https://dl.dropboxusercontent.com/u/46579820/sylius-logo.jpg)
+
+[![Gitter chat](https://badges.gitter.im/Sylius/Sylius.png)](https://gitter.im/Sylius/Sylius)
+[![License](https://poser.pugx.org/sylius/sylius/license.svg)](https://packagist.org/packages/sylius/sylius)
+[![Build status...](https://secure.travis-ci.org/Sylius/Sylius.png?branch=master)](http://travis-ci.org/Sylius/Sylius)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Sylius/Sylius/badges/quality-score.png?s=f6d89b8aad6e15cab61134e7c0544ee1313f7f31)](https://scrutinizer-ci.com/g/Sylius/Sylius/)
+[![HHVM Status](http://hhvm.h4cc.de/badge/sylius/sylius.svg)](http://hhvm.h4cc.de/package/sylius/sylius)
 
 Sylius is an open source e-commerce solution for **PHP**, based on the [**Symfony2**](http://symfony.com) framework.
 
@@ -17,55 +22,66 @@ Documentation is available at [docs.sylius.org](http://docs.sylius.org).
 Quick Installation
 ------------------
 
-``` bash
+```bash
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar create-project sylius/sylius -s dev
 $ cd sylius
 $ php app/console sylius:install
 ```
 
+The install script will give you the option to run fixtures that make testing and development phases much easier.
+
 [Behat](http://behat.org) scenarios
 -----------------------------------
 
 You need to copy Behat default configuration file and enter your specific ``base_url``
-option there.
+option there:
 
 ```bash
 $ cp behat.yml.dist behat.yml
 $ vi behat.yml
 ```
 
-Then download [Selenium Server](http://seleniumhq.org/download/), and run it.
+Then download [Selenium Server](http://seleniumhq.org/download/), and run it:
 
 ```bash
-$ java -jar selenium-server-standalone-2.11.0.jar
+$ java -jar selenium-server-standalone-2.41.0.jar
 ```
 
-You can run Behat using the following command.
+Then setup your test database:
 
-``` bash
+```bash
+$ php app/console doctrine:database:create --env=test
+$ php app/console doctrine:schema:create --env=test
+```
+
+You can run Behat using the following command:
+
+```bash
 $ bin/behat
 ```
 
 Troubleshooting
 ---------------
 
-If something goes wrong, errors & exceptions are logged at the application level.
+If something goes wrong, errors & exceptions are logged at the application level:
 
-````
-tail -f app/logs/prod.log
-tail -f app/logs/dev.log
-````
+```bash
+$ tail -f app/logs/prod.log
+$ tail -f app/logs/dev.log
+```
+
+If you are using the supplied Vagrant development environment, please see the related [Troubleshooting guide](vagrant/README.md#Troubleshooting) for more information.
 
 Contributing
 ------------
 
 All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
-Sylius on twitter
+Sylius on Twitter
 -----------------
 
-If you want to keep up with the updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
+If you want to keep up with the updates, [follow the official Sylius account on Twitter](http://twitter.com/Sylius).
 
 Bug tracking
 ------------

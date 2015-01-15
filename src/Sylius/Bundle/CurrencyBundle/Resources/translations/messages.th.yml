@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    currency:
+      code: รหัส
+      exchange_rate: อัตราแลกเปลี่ยน
+      enabled: เปิดใช้งานแล้ว

@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Promotie coupons zijn succesvol gegenereerd.
+    eligible: Uw coupon is toegevoegd aan het winkelwagentje.
+    invalid: Uw coupon is ongeldig.
+    not_eligible: Uw winkelwagentje komt niet in aanmerking voor deze coupon.

@@ -1,0 +1,54 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    accelerator:
+      help: Nainstalujte a povolte PHP akcelerátor jako APC (výrazně doporučeno).
+    apc: APC
+    ctype: Ctype
+    gd: GD
+    help: 'Nainstalujte a povolte %extension% rozšíření.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Session
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: Existuje
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: neexistuje
+    not_writable: nelze zapisovat
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: zapisovatelný
+  settings:
+    any: jakýkoliv
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: Časové pásmo
+    timezone_deprecated:
+      help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
+    version: Verze PHP
+    version_recommanded: Doporučená verze PHP

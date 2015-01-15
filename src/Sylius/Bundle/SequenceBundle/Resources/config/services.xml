@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.registry.number_generator.class">Sylius\Component\Sequence\Registry\GeneratorRegistry</parameter>
+
+        <parameter key="sylius.sequence.number_generator.interface">Sylius\Component\Sequence\Number\GeneratorInterface</parameter>
+
+        <parameter key="sylius.sequence.sequential_number_generator.class">Sylius\Component\Sequence\Number\SequentialGenerator</parameter>
+        <parameter key="sylius.sequence.hash_number_generator.class">Sylius\Component\Sequence\Number\HashGenerator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.registry.number_generator" class="%sylius.registry.number_generator.class%">
+            <argument>%sylius.sequence.number_generator.interface%</argument>
+        </service>
+
+        <service id="sylius.sequence.sequential_number_generator" class="%sylius.sequence.sequential_number_generator.class%" />
+    </services>
+</container>

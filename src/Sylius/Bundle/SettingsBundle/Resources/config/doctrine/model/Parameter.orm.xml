@@ -20,7 +20,7 @@
 
         <field name="namespace" column="namespace" type="string" />
         <field name="name" column="name" type="string" />
-        <field name="value" column="value" type="string" nullable="true" />
+        <field name="value" column="value" type="object" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

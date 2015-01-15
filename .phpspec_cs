@@ -1,0 +1,18 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+$finder = Symfony\Component\Finder\Finder::create()
+    ->files()
+    ->name('*Spec.php')
+    ->in(__DIR__.'/src')
+;
+
+return Symfony\CS\Config\Config::create()->finder($finder);

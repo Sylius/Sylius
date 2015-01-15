@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\MoneyBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -21,7 +20,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -35,42 +34,11 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('locale')->defaultValue('en')->cannotBeEmpty()->end()
                 ->scalarNode('currency')->defaultValue('EUR')->cannotBeEmpty()->end()
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-
         return $treeBuilder;
-    }
-
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('exchange_rate')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\MoneyBundle\Model\ExchangeRate')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('currency')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\MoneyBundle\Controller\CurrencyController')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 }

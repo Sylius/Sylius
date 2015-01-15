@@ -1,8 +1,10 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block content %}
 <div class="page-header">
-    <h1>Registration <small>Create an account in store</small></h1>
+    {{ 'registration.register_header'|trans|raw }}
 </div>
 
 <form action="{{ path('fos_user_registration_register') }}" method="post" class="form-horizontal" novalidate>
@@ -15,7 +17,7 @@
         <div class="pull-right">
             {{ render(url('hwi_oauth_connect')) }}
         </div>
-        <button type="submit" class="btn btn-success btn-lg"><i class="icon-user"></i> Register</button>
+        <button type="submit" class="btn btn-success btn-lg"><i class="icon-user"></i> {{ 'registration.submit'|trans }}</button>
     </div>
 </form>
 {% endblock %}

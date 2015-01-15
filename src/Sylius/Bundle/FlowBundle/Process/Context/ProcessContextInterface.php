@@ -11,17 +11,16 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Context;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Interface for process context.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProcessContextInterface
 {
@@ -64,19 +63,21 @@ interface ProcessContextInterface
     /**
      * Is current step the first step?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isFirstStep();
 
     /**
      * Is current step the last step?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isLastStep();
 
     /**
      * Override the default next step.
+     *
+     * @param string $stepAlias
      */
     public function setNextStepByName($stepAlias);
 
@@ -88,7 +89,7 @@ interface ProcessContextInterface
     /**
      * Is current flow valid?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isValid();
 
@@ -123,14 +124,14 @@ interface ProcessContextInterface
     /**
      * Get progress in percents.
      *
-     * @return integer
+     * @return int
      */
     public function getProgress();
 
     /**
      * The array contains the history of all the step names.
      *
-     * @return array()
+     * @return array
      */
     public function getStepHistory();
 

@@ -11,24 +11,17 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Checkout shipping step form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingStepType extends AbstractType
+class ShippingStepType extends AbstractResourceType
 {
-    protected $dataClass;
-
-    public function __construct($dataClass)
-    {
-        $this->dataClass = $dataClass;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -47,10 +40,9 @@ class ShippingStepType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver
-            ->setDefaults(array(
-                'data_class' => $this->dataClass
-            ))
             ->setOptional(array(
                 'criteria'
             ))

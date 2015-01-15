@@ -2,11 +2,17 @@
 # (c) Paweł Jędrzejewski
 
 sylius_account_homepage:
-    pattern: /
+    path: /
     defaults: { _controller: FOSUserBundle:Profile:show }
 
 sylius_account_order:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/order.yml
+    prefix: /orders
 
 sylius_account_address:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/address.yml
+    prefix: /addresses
+
+sylius_switch_user_return:
+    path: /switch/{username}/exit
+    defaults: { _controller: sylius.controller.backend.security:exitUserSwitchAction }

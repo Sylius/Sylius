@@ -5,12 +5,13 @@ Feature: Promotions
     I want to be able to manage promotions
 
     Background:
-        Given I am logged in as administrator
+        Given there is default currency configured
+          And I am logged in as administrator
           And the following promotions exist:
             | name           | description                            | usage limit | used | starts     | ends       |
-            | New Year       | New Year Sale for more than 3 items    |             |      | 2013-12-31 | 2014-01-03 |
-            | Christmas      | Christmas Sale for orders over 100 EUR |             |      | 2013-12-10 | 2013-12-25 |
-            | Press Campaign | Coupon based promotion                 |             |      |            |            |
+            | New Year       | New Year Sale for more than 3 items    | 0           | 0    | 2013-12-31 | 2014-01-03 |
+            | Christmas      | Christmas Sale for orders over 100 EUR | 0           | 0    | 2013-12-10 | 2013-12-25 |
+            | Press Campaign | Coupon based promotion                 | 0           | 0    |            |            |
             | Free orders    | First 3 orders have 100% discount!     | 3           | 0    |            |            |
           And promotion "New Year" has following rules defined:
             | type       | configuration |
@@ -70,7 +71,7 @@ Feature: Promotions
           And I select "Item total" from "Type"
           And I fill in "Amount" with "5000"
           And I press "Create"
-         Then I should be on the page of promotion "Behat Training"
+         Then I should see "Behat Training"
           And I should see "Promotion has been successfully created."
 
     @javascript
@@ -82,7 +83,7 @@ Feature: Promotions
           And I select "Item count" from "Type"
           And I fill in "Count" with "10"
           And I press "Create"
-         Then I should be on the page of promotion "Behat Training"
+         Then I should see "Behat Training"
           And I should see "Promotion has been successfully created."
 
     @javascript
@@ -94,7 +95,7 @@ Feature: Promotions
           And I select "Fixed discount" from "Type"
           And I fill in "Amount" with "100"
           And I press "Create"
-         Then I should be on the page of promotion "Behat Training"
+         Then I should see "Behat Training"
           And I should see "Promotion has been successfully created."
 
     @javascript
@@ -106,7 +107,7 @@ Feature: Promotions
           And I select "Percentage discount" from "Type"
           And I fill in "Percentage" with "10"
           And I press "Create"
-         Then I should be on the page of promotion "Sylius Training"
+         Then I should see "Sylius Training"
           And I should see "Promotion has been successfully created."
 
     Scenario: Adding coupon manually
@@ -201,7 +202,7 @@ Feature: Promotions
           And I fill in "Percentage" with "50"
           And I fill in "Usage limit" with "5"
           And I press "Create"
-         Then I should be on the page of promotion "First 5 pay half!"
+         Then I should see "First 5 pay half!"
           And I should see "Promotion has been successfully created."
 
     Scenario: Created promotions appear in the list
@@ -229,86 +230,48 @@ Feature: Promotions
           And I press "Save changes"
          Then I should be on the page of promotion "New Year Sale"
 
-    Scenario: Deleting promotion
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
+    Scenario: Setting promotion priorities
+        Given I am on the promotion index page
+         When I press "move down"
          Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
+          And I should see "Promotion has been successfully moved."
 
     @javascript
-    Scenario: Deleting promotion with js modal
+    Scenario: Deleting promotion with
         Given I am on the page of promotion "New Year"
          When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should see "Promotion has been successfully deleted."
 
+    @javascript
     Scenario: Deleted promotion disappears from the list
         Given I am on the page of promotion "New Year"
          When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the promotion index page
-          And I should not see promotion with name "New Year" in that list
-
-    @javascript
-    Scenario: Deleted promotion disappears from the list with js modal
-        Given I am on the page of promotion "New Year"
-         When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should not see promotion with name "New Year" in that list
 
-    Scenario: Deleting promotion via list
-        Given I am on the promotion index page
-         When I click "delete" near "Press Campaign"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the promotion index page
-          And I should see "Promotion has been successfully deleted."
-
     @javascript
-    Scenario: Deleting promotion via list with js modal
+    Scenario: Deleting promotion via list with
         Given I am on the promotion index page
          When I click "delete" near "Press Campaign"
           And I click "delete" from the confirmation modal
          Then I should be on the promotion index page
           And I should see "Promotion has been successfully deleted."
 
+    @javascript
     Scenario: Deleting promotion rule
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Item total"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion rule has been successfully deleted."
+          And I click "delete" from the confirmation modal
+         Then I should see "Promotion rule has been successfully deleted."
           And I should not see "Order total"
 
     @javascript
-    Scenario: Deleting promotion rule with js modal
-        Given I am on the page of promotion "Christmas"
-         When I press "delete" near "Item total"
-          And I click "delete" from the confirmation modal
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion rule has been successfully deleted."
-          And I should not see "Order total"
-
     Scenario: Deleting promotion action
         Given I am on the page of promotion "Christmas"
          When I press "delete" near "Fixed discount"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion action has been successfully deleted."
-          And I should not see "Fixed discount"
-
-    @javascript
-    Scenario: Deleting promotion action with js modal
-        Given I am on the page of promotion "Christmas"
-         When I press "delete" near "Fixed discount"
           And I click "delete" from the confirmation modal
-         Then I should be on the page of promotion "Christmas"
-          And I should see "Promotion action has been successfully deleted."
+         Then I should see "Promotion action has been successfully deleted."
           And I should not see "Fixed discount"

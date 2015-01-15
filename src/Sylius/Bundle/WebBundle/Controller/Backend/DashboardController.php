@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Backend;
 
-use Sylius\Bundle\OrderBundle\Model\OrderStates;
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Backend dashboard controller.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DashboardController extends Controller
 {
@@ -35,7 +35,7 @@ class DashboardController extends Controller
             'users'               => $userRepository->findBy(array(), array('id' => 'desc'), 5),
             'registrations_count' => $userRepository->countBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
             'sales'               => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
-            'sales_confirmed'     => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime(), OrderStates::ORDER_CONFIRMED),
+            'sales_confirmed'     => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime(), OrderInterface::STATE_CONFIRMED),
         ));
     }
 }

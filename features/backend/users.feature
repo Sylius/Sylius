@@ -5,7 +5,8 @@ Feature: Users management
     I want to be able to list registered users
 
     Background:
-        Given I am logged in as administrator
+        Given there is default currency configured
+          And I am logged in as administrator
           And there are products:
             | name | price |
             | Mug  | 5.99  |
@@ -22,11 +23,15 @@ Feature: Users management
             | name   | type    | members |
             | Poland | country | Poland  |
           And the following orders were placed:
-            | user | address                                        |
-            | john | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+            | user         | address                                        |
+            | john         | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+            | rick@foo.com | Rick Foo, Wawel 5 , 31-001, Kraków, Poland     |
         And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |
+        And order #000000002 has following items:
+            | product | quantity |
+            | Mug     | 3        |
 
     Scenario: Seeing index of all users
         Given I am on the dashboard page
@@ -53,6 +58,16 @@ Feature: Users management
          Then I should be on the page of user with username "john"
           And I should see 1 orders in the list
 
+    Scenario: Prevent self-deletion possibility for current logged user on details page
+        Given I am on the user index page
+         When I click "details" near "sylius@example.com"
+         Then I should be on the page of user with username "sylius@example.com"
+          And I should not see "delete" button
+
+    Scenario: Prevent self-deletion possibility for current logged user on user index page
+        Given I am on the user index page
+         Then I should not see "delete" button near "sylius@example.com" in "users" table
+
     Scenario: Accessing the user creation form
         Given I am on the user index page
           And I follow "create user"
@@ -71,7 +86,6 @@ Feature: Users management
             | Last name  | Stamenković        |
             | Password   | Password           |
             | Email      | umpirsky@gmail.com |
-          And I fill in the users shipping address to Germany
           And I press "Create"
          Then I should be on the page of user with username "umpirsky@gmail.com"
           And I should see "User has been successfully created."
@@ -94,6 +108,14 @@ Feature: Users management
           And "User has been successfully updated." should appear on the page
           And "umpirsky@gmail.com" should appear on the page
 
+    Scenario: Accessing the user details page from users list for deleted user
+        Given I deleted user with username "rick@foo.com"
+          And I am on the user index page
+          And I view deleted elements
+         When I click "details" near "rick@foo.com"
+         Then I should be on the page of user with username "rick@foo.com"
+          And I should see 1 orders in the list
+
     Scenario: Deleting user
         Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
@@ -103,40 +125,23 @@ Feature: Users management
           And I should see "User has been successfully deleted."
 
     @javascript
-    Scenario: Deleting user with js modal
+    Scenario: Deleting user
         Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the user index page
           And I should see "User has been successfully deleted."
 
-    Scenario: Deleted user disappears from the list
-        Given I am on the page of user with username "rick@foo.com"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the user index page
-          And I should not see user with username "rick@foo.com" in that list
-
     @javascript
-    Scenario: Deleted user disappears from the list with js modal
+    Scenario: Deleted user disappears from the list
         Given I am on the page of user with username "rick@foo.com"
          When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the user index page
           And I should not see user with username "rick@foo.com" in that list
 
-    Scenario: Deleting user from the list
-        Given I am on the user index page
-         When I click "delete" near "rick@foo.com"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the user index page
-          And "User has been successfully deleted." should appear on the page
-          But I should not see user with username "rick@foo.com" in that list
-
     @javascript
-    Scenario: Deleting user from the list with js modal
+    Scenario: Deleting user from the list
         Given I am on the user index page
          When I click "delete" near "rick@foo.com"
           And I click "delete" from the confirmation modal

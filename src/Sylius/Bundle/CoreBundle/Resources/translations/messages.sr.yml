@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    block:
+      id: ID
+    group:
+      name: Ime
+    page:
+      id: ID
+    product_filter:
+      name: Ime

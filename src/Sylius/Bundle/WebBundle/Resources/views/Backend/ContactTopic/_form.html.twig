@@ -1,0 +1,7 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+{{ form_errors(form) }}
+
+{{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
+
+{{ form_rest(form) }}

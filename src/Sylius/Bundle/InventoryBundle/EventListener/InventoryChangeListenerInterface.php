@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * Inventory change listeners must implement this interface because {@link SyliusInventoryExtension}
  * tags events with {@link InventoryChangeListenerInterface::onInventoryChange()} method.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface InventoryChangeListenerInterface
 {

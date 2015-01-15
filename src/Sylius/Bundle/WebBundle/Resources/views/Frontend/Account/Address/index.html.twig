@@ -22,7 +22,7 @@
                 {% for address in addresses %}
                     <tr id="{{ address.id }}">
                         <td>
-                            {{ include('SyliusWebBundle:Frontend/Account/Address:_address.html.twig') }}
+                            {{ include('SyliusWebBundle:Frontend/Address:_show.html.twig') }}
                         </td>
                         <td>
                             {% if address == app.user.billingAddress %}
@@ -33,16 +33,15 @@
                             {% endif %}
 
                             {% if address != app.user.billingAddress %}
-                                {{ buttons.btn(
+                                {{ buttons.patch(
                                     path('sylius_account_address_set_default_billing', {'id': address.id}),
-                                    'sylius.account.address.action.billing', '', 'star-empty') }}
-                                <br>
+                                    'sylius.account.address.action.billing', 'star-empty') }}
                                 <br>
                             {% endif %}
                             {% if address != app.user.shippingAddress %}
-                                {{ buttons.btn(
+                                {{ buttons.patch(
                                     path('sylius_account_address_set_default_shipping', {'id': address.id}),
-                                    'sylius.account.address.action.shipping', '', 'star') }}
+                                    'sylius.account.address.action.shipping', 'star') }}
                             {% endif %}
                         </td>
                         <td>

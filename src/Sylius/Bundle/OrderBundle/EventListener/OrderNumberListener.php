@@ -11,31 +11,32 @@
 
 namespace Sylius\Bundle\OrderBundle\EventListener;
 
-use Sylius\Bundle\OrderBundle\Generator\OrderNumberGeneratorInterface;
+use Sylius\Bundle\SequenceBundle\Doctrine\ORM\NumberListener;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Sets appropriate order number before saving.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderNumberListener
 {
     /**
-     * Order number generator.
+     * Order number listener
      *
-     * @var OrderNumberGeneratorInterface
+     * @var NumberListener
      */
-    protected $generator;
+    protected $listener;
 
     /**
      * Constructor.
      *
-     * @param OrderNumberGeneratorInterface $generator
+     * @param NumberListener $listener
      */
-    public function __construct(OrderNumberGeneratorInterface $generator)
+    public function __construct(NumberListener $listener)
     {
-        $this->generator = $generator;
+        $this->listener = $listener;
     }
 
     /**
@@ -45,6 +46,12 @@ class OrderNumberListener
      */
     public function generateOrderNumber(GenericEvent $event)
     {
-        $this->generator->generate($event->getSubject());
+        $order = $event->getSubject();
+
+        if (null !== $order->getNumber()) {
+            return;
+        }
+
+        $this->listener->enableEntity($order);
     }
 }

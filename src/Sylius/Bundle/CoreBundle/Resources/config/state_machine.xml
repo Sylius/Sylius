@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Callbacks -->
+        <parameter key="sylius.callback.shipment_states.class">Sylius\Bundle\CoreBundle\StateMachineCallback\ShipmentStatesCallback</parameter>
+        <parameter key="sylius.callback.order_payment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback</parameter>
+        <parameter key="sylius.callback.coupon_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback</parameter>
+        <parameter key="sylius.callback.promotion_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\PromotionUsageCallback</parameter>
+        <parameter key="sylius.callback.order_shipment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderShipmentCallback</parameter>
+    </parameters>
+
+    <services>
+        <!-- Callbacks -->
+        <service id="sylius.callback.shipment_states" class="%sylius.callback.shipment_states.class%">
+            <argument type="service" id="sylius.processor.shipment_processor" />
+        </service>
+
+        <service id="sylius.callback.order_payment" class="%sylius.callback.order_payment.class%">
+            <argument type="service" id="sm.factory" />
+        </service>
+
+        <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />
+        <service id="sylius.callback.promotion_usage" class="%sylius.callback.promotion_usage.class%" />
+
+        <service id="sylius.callback.order_shipment" class="%sylius.callback.order_shipment.class%">
+            <argument type="service" id="sm.factory" />
+        </service>
+    </services>
+
+</container>

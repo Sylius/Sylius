@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.content_choice.class">Sylius\Bundle\ContentBundle\Form\Type\ContentChoiceType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.simple_block" class="%sylius.form.type.simple_block.class%">
+            <argument>%sylius.model.simple_block.class%</argument>
+            <argument>%sylius.validation_group.simple_block%</argument>
+            <tag name="form.type" alias="sylius_simple_block" />
+        </service>
+        <service id="sylius.form.type.string_block" class="%sylius.form.type.string_block.class%">
+            <argument>%sylius.model.string_block.class%</argument>
+            <argument>%sylius.validation_group.string_block%</argument>
+            <tag name="form.type" alias="sylius_string_block" />
+        </service>
+        <service id="sylius.form.type.reference_block" class="%sylius.form.type.reference_block.class%">
+            <argument>%sylius.model.reference_block.class%</argument>
+            <argument>%sylius.validation_group.reference_block%</argument>
+            <tag name="form.type" alias="sylius_reference_block" />
+        </service>
+        <service id="sylius.form.type.action_block" class="%sylius.form.type.action_block.class%">
+            <argument>%sylius.model.action_block.class%</argument>
+            <argument>%sylius.validation_group.action_block%</argument>
+            <tag name="form.type" alias="sylius_action_block" />
+        </service>
+        <service id="sylius.form.type.menu_block" class="%sylius.form.type.menu_block.class%">
+            <argument>%sylius.model.menu_block.class%</argument>
+            <argument>%sylius.validation_group.menu_block%</argument>
+            <tag name="form.type" alias="sylius_menu_block" />
+        </service>
+        <service id="sylius.form.type.imagine_block" class="%sylius.form.type.imagine_block.class%">
+            <argument>%sylius.model.imagine_block.class%</argument>
+            <argument>%sylius.validation_group.imagine_block%</argument>
+            <tag name="form.type" alias="sylius_imagine_block" />
+        </service>
+        <service id="sylius.form.type.slideshow_block" class="%sylius.form.type.slideshow_block.class%">
+            <argument>%sylius.model.slideshow_block.class%</argument>
+            <argument>%sylius.validation_group.slideshow_block%</argument>
+            <tag name="form.type" alias="sylius_slideshow_block" />
+        </service>
+
+        <service id="sylius.form.type.route" class="%sylius.form.type.route.class%">
+            <argument>%sylius.model.route.class%</argument>
+            <argument>%sylius.validation_group.route%</argument>
+            <tag name="form.type" alias="sylius_route" />
+        </service>
+        <service id="sylius.form.type.redirect_route" class="%sylius.form.type.redirect_route.class%">
+            <argument>%sylius.model.redirect_route.class%</argument>
+            <argument>%sylius.validation_group.redirect_route%</argument>
+            <tag name="form.type" alias="sylius_redirect_route" />
+        </service>
+
+        <service id="sylius.form.type.menu" class="%sylius.form.type.menu.class%">
+            <argument>%sylius.model.menu.class%</argument>
+            <argument>%sylius.validation_group.menu%</argument>
+            <argument type="string" id="menu_basepath">%cmf_menu.persistence.phpcr.menu_basepath%</argument>
+            <tag name="form.type" alias="sylius_menu" />
+        </service>
+        <service id="sylius.form.type.menu_node" class="%sylius.form.type.menu_node.class%">
+            <argument>%sylius.model.menu_node.class%</argument>
+            <argument>%sylius.validation_group.menu_node%</argument>
+            <tag name="form.type" alias="sylius_menu_node" />
+        </service>
+
+        <service id="sylius.form.type.static_content" class="%sylius.form.type.static_content.class%">
+            <argument>%sylius.model.static_content.class%</argument>
+            <argument>%sylius.validation_group.static_content%</argument>
+            <tag name="form.type" alias="sylius_static_content" />
+        </service>
+
+        <service id="sylius.form.type.content_choice" class="%sylius.form.type.content_choice.class%">
+            <argument>%sylius.model.static_content.class%</argument>
+            <tag name="form.type" alias="sylius_content_choice" />
+        </service>
+    </services>
+</container>

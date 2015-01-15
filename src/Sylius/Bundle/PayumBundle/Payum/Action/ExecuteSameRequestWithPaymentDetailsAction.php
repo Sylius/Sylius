@@ -11,20 +11,21 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Action;
 
-use Payum\Action\PaymentAwareAction;
-use Payum\Bridge\Spl\ArrayObject;
-use Payum\Exception\RequestNotSupportedException;
-use Payum\Request\ModelRequestInterface;
-use Sylius\Bundle\PaymentsBundle\Model\PaymentInterface;
+use Payum\Core\Action\PaymentAwareAction;
+use Payum\Core\Bridge\Spl\ArrayObject;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\Generic;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 class ExecuteSameRequestWithPaymentDetailsAction extends PaymentAwareAction
 {
     /**
      * {@inheritDoc}
+     *
+     * @param $request Generic
      */
     public function execute($request)
     {
-        /** @var $request ModelRequestInterface */
         if (!$this->supports($request)) {
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
@@ -52,9 +53,8 @@ class ExecuteSameRequestWithPaymentDetailsAction extends PaymentAwareAction
     public function supports($request)
     {
         return
-            $request instanceof ModelRequestInterface &&
-            $request->getModel() instanceof PaymentInterface &&
-            $request->getModel()->getDetails()
+            $request instanceof Generic &&
+            $request->getModel() instanceof PaymentInterface
         ;
     }
 }

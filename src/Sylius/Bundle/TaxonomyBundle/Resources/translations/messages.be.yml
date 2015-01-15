@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Апісанне
+      name: Назва
+      parent: "Бацькоўскі аб'ект"
+      permalink: Пастаянная спасылка
+    taxonomy:
+      name: Назва
+  taxon:
+    create_taxon: Стварыць катэгорыю
+    delete_taxonomy: Выдаліць катэгорыю
+    manage_taxonomies: Кіраванне катэгорыямі
+    no_taxonomies: Няма катэгорый.
+    no_taxons: Няма катэгорый.
+    update_taxonomy: Абнавіць катэгорыю

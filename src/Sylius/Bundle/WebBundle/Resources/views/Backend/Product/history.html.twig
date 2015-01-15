@@ -1,0 +1,74 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">{{ product.name }}</a></li>
+    <li>{{ 'sylius.history.header'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+    {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if not product.deleted %}
+    {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
+    {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
+    <a href="{{ path(product) }}" class="btn btn-info">
+       <i class="glyphicon glyphicon-shopping-cart"></i>
+        {{ 'sylius.product.show_in_store'|trans }}
+    </a>
+    {% endif %}
+    </div>
+    <h1><i class="glyphicon glyphicon-calendar"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#main" data-toggle="tab">{{ 'sylius.product.tabs.product'|trans }}</a></li>
+    {% if not product.hasVariants %}
+        <li><a href="#options" data-toggle="tab">{{ 'sylius.product.tabs.options'|trans }}</a></li>
+    {% endif %}
+    <li><a href="#attributes" data-toggle="tab">{{ 'sylius.product.tabs.attributes'|trans }}</a></li>
+</ul>
+<br>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="main">
+        {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': logs.product} %}
+
+        <hr>
+
+        <h4>{{ 'sylius.product.variants'|trans }}</h4>
+        {% for variant in logs.variants %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': variant} %}
+        {% else %}
+            {{ alerts.info('sylius.history.no_results'|trans) }}
+        {% endfor %}
+    </div>
+
+    <div class="tab-pane" id="attributes">
+        {% for attribute in logs.attributes %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': attribute} %}
+        {% else %}
+            {{ alerts.info('sylius.history.no_results'|trans) }}
+        {% endfor %}
+    </div>
+
+    {% if not product.hasVariants %}
+    <div class="tab-pane" id="options">
+        {% for option in logs.options %}
+            {% include "SyliusWebBundle:Backend:_history_table.html.twig" with {'revert_route': 'sylius_backend_product_revert', 'logs': option} %}
+        {% else %}
+            {{ alerts.info('sylius.history.no_results'|trans) }}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

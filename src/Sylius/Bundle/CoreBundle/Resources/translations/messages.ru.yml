@@ -1,0 +1,93 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Пожалуйста, выберите метод доставки.
+  form:
+    action:
+      add_product_configuration:
+        price: Цена
+        quantity: Количество
+        variant: Вариант
+    block:
+      body: Содержание
+      id: ID
+      title: Название
+    cart:
+      coupon: Купон
+    checkout:
+      addressing:
+        different_billing_address: Использовать другой адрес для составления счета?
+      payment_method: Способ оплаты
+      shipping_method: Способ доставки
+    group:
+      name: Название
+      roles: Роли
+    image:
+      file: Изображение
+    locale:
+      code: Код
+      enabled: Активен
+    order_filter:
+      created_at_from: Создан после
+      created_at_to: Создан до
+      number: Номер
+      total_from: От
+      total_to: До
+      payment_state: Статус платежа
+    page:
+      body: Содержание
+      id: ID
+      title: Название
+    product:
+      restricted_zone: Зона ограничений
+      shipping_category: Категория доставки
+      short_description: Короткое описание
+      tax_category: Налоговая категория
+      variant_selection_method: Метод выбора вариантов
+    product_filter:
+      name: Название
+      sku: Идентификатор товарной позиции
+    settings:
+      general:
+        currency: Валюта по умолчанию
+        locale: Язык
+        meta_description: Описание метаданных
+        meta_keywords: Ключевые слова метаданных
+        title: Заголовок страницы
+      taxation:
+        default_tax_zone: Налоговая зона по умолчанию
+    shipment_filter:
+      created_at_from: От
+      created_at_to: До
+      number: Номер заказа
+      shipping_address: Имя получателя
+    shipping_method:
+      zone: Зона
+    taxon:
+      file: Выберите изображение
+    taxonomy:
+      file: Выберите изображение
+    user:
+      billing_address: Адрес для выставления счета
+      different_billing_address: Использовать другой адрес для выставления счета?
+      enabled: Активен
+      first_name: Имя
+      groups: Группы
+      last_name: Фамилия
+      password: Пароль
+      shipping_address: Адрес доставки
+    user_filter:
+      query: Поиск
+    variant:
+      available_on_demand: Доступно по запросу
+      depth: Глубина
+      height: Высота
+      images: Изображения
+      on_hand: Количество на складе
+      price: Цена
+      sku: Идентификатор товарной позиции
+      weight: Вес
+      width: Ширина

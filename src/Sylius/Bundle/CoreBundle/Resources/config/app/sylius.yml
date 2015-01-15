@@ -1,0 +1,239 @@
+sylius_core:
+    driver: doctrine/orm
+    emails:
+        enabled: false
+    routing:
+        %sylius.model.product.class%:
+            field: slug
+            prefix: /p
+            defaults:
+                controller: sylius.controller.product:showAction
+                repository: sylius.repository.product
+                sylius:
+                    template: SyliusWebBundle:Frontend/Product:show.html.twig
+                    criteria: {slug: $slug}
+        %sylius.model.taxon.class%:
+            field: permalink
+            prefix: /t
+            defaults:
+                controller: sylius.controller.product:indexByTaxonAction
+                repository: sylius.repository.taxon
+                sylius:
+                    template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
+
+sylius_installer:
+    classes:
+        user:
+            model: Sylius\Component\Core\Model\User
+
+sylius_money:
+    currency: %sylius.currency%
+    locale: %sylius.locale%
+
+sylius_locale: ~
+
+sylius_currency: ~
+
+sylius_contact: ~
+
+sylius_api:
+    classes:
+        api_user:
+            model: %sylius.model.user.class%
+
+sylius_cart:
+    resolver: sylius.cart_item_resolver.default
+    classes:
+        item:
+            form: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
+        cart:
+            form: Sylius\Bundle\CoreBundle\Form\Type\CartType
+
+sylius_settings: ~
+
+sylius_content:
+    driver: doctrine/phpcr-odm
+    classes:
+        static_content:
+            repository: Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository
+
+sylius_taxonomy:
+    classes:
+        taxonomy:
+            model: Sylius\Component\Core\Model\Taxonomy
+            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+            form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
+        taxonomy_translation:
+            model: Sylius\Component\Core\Model\TaxonomyTranslation
+        taxon:
+            model: Sylius\Component\Core\Model\Taxon
+            form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
+        taxon_translation:
+            model: Sylius\Component\Core\Model\TaxonTranslation
+
+sylius_product:
+    driver: doctrine/orm
+    classes:
+        product:
+            model: Sylius\Component\Core\Model\Product
+            controller: Sylius\Bundle\CoreBundle\Controller\ProductController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+
+sylius_attribute: ~
+
+sylius_variation:
+    classes:
+        product:
+            variant:
+                model: Sylius\Component\Core\Model\ProductVariant
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
+                form: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
+
+sylius_taxation:
+    classes:
+        tax_rate:
+            model: Sylius\Component\Core\Model\TaxRate
+            form: Sylius\Bundle\CoreBundle\Form\Type\TaxRateType
+
+sylius_shipping:
+    classes:
+        shipment:
+            model: Sylius\Component\Core\Model\Shipment
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
+        shipment_item:
+            model: Sylius\Component\Core\Model\InventoryUnit
+        shipping_method:
+            model: Sylius\Component\Core\Model\ShippingMethod
+            repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+            form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+        shipping_method_translation:
+            model: Sylius\Component\Core\Model\ShippingMethodTranslation
+
+sylius_promotion:
+    classes:
+        promotion_subject:
+            model: %sylius.model.order.class%
+        promotion_coupon:
+            model: Sylius\Component\Core\Model\Coupon
+            form: Sylius\Bundle\CoreBundle\Form\Type\CouponType
+
+sylius_inventory:
+    backorders: %sylius.inventory.backorders_enabled%
+    track_inventory: %sylius.inventory.tracking_enabled%
+    classes:
+        inventory_unit:
+            model: Sylius\Component\Core\Model\InventoryUnit
+        stockable:
+            model: %sylius.model.product_variant.class%
+
+sylius_payment:
+    classes:
+        payment:
+            model: Sylius\Component\Core\Model\Payment
+            controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
+    gateways:
+        dummy: Test
+        stripe: Stripe
+        be2bill: Be2Bill
+        stripe_checkout: Stripe Checkout
+        paypal_express_checkout: Paypal Express Checkout
+
+sylius_payum: ~
+
+sylius_addressing:
+    scopes:
+        shipping: shipping
+        content: content
+        price: price
+    classes:
+        address:
+            model: Sylius\Component\Core\Model\Address
+
+sylius_order:
+    guest_order: %sylius.order.allow_guest_order%
+    classes:
+        order:
+            model: Sylius\Component\Core\Model\Order
+            controller: Sylius\Bundle\CoreBundle\Controller\OrderController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
+            form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
+        order_item:
+            model: Sylius\Component\Core\Model\OrderItem
+            form: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+
+sylius_sequence:
+    generators:
+        %sylius.model.order.class%: sylius.sequence.sequential_number_generator
+
+sylius_resource:
+    resources:
+        sylius.user:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Component\Core\Model\User
+                controller: Sylius\Bundle\CoreBundle\Controller\UserController
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
+        sylius.user_oauth:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Component\Core\Model\UserOAuth
+        sylius.group:
+            driver: doctrine/orm
+            classes:
+                model: Sylius\Component\Core\Model\Group
+
+sylius_pricing:
+    forms:
+        - sylius_product_variant
+
+sylius_search:
+    search_form_template: 'SyliusSearchBundle::search_form.html.twig'
+    engine: orm
+    classes:
+       search:
+          model: Sylius\Bundle\SearchBundle\Model\SearchIndex
+       log:
+          model: Sylius\Bundle\SearchBundle\Model\SearchLog
+    orm_indexes:
+        product:
+            class: %sylius.model.product.class%
+            mappings:
+                id: ~
+                name: ~
+                description: ~
+
+    custom_accessors:
+        - Sylius\Component\Product\Accessor\ProductAccessor
+    filters:
+        pre_search_filter:
+            enabled: true
+            taxonomy: category
+        facet_groups:
+            search_set:
+                values: [taxons, price, made_of, color]
+            categories_set:
+                values: [price, made_of, color]
+            all_set:
+                values: [taxons, price, made_of]
+        facets:
+            taxons:
+                display_name: 'Basic categories'
+                type: terms
+                value: ~
+            price:
+                display_name: 'Available prices'
+                type: range
+                values:
+                    - { from: 0, to: 2000}
+                    - { from: 2001, to: 5000}
+                    - { from: 5001, to: 10000}
+            made_of:
+                display_name: 'Material'
+                type: terms
+                value: ~
+            color:
+                display_name: 'Available colors'
+                type: terms
+                value: ~

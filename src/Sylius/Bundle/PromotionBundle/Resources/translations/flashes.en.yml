@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion_coupon:
+        generate: Promotion coupons have been successfully generated.
+        eligible: Your promotion coupon has been added to the cart.
+        invalid: Your promotion coupon is not valid.
+        not_eligible: Your cart is not eligible to this promotion coupon.

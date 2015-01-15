@@ -12,18 +12,22 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Doctrine ORM driver entity repository.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EntityRepository extends BaseEntityRepository implements RepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         $className = $this->getClassName();
@@ -31,6 +35,11 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         return new $className;
     }
 
+    /**
+     * @param mixed $id
+     *
+     * @return null|object
+     */
     public function find($id)
     {
         return $this
@@ -41,6 +50,9 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         ;
     }
 
+    /**
+     * @return array
+     */
     public function findAll()
     {
         return $this
@@ -50,6 +62,11 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         ;
     }
 
+    /**
+     * @param array $criteria
+     *
+     * @return null|object
+     */
     public function findOneBy(array $criteria)
     {
         $queryBuilder = $this->getQueryBuilder();
@@ -62,6 +79,14 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         ;
     }
 
+    /**
+     * @param array   $criteria
+     * @param array   $orderBy
+     * @param integer $limit
+     * @param integer $offset
+     *
+     * @return array
+     */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -83,6 +108,9 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function createPaginator(array $criteria = null, array $orderBy = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
@@ -93,21 +121,47 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         return $this->getPaginator($queryBuilder);
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return Pagerfanta
+     */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
     }
 
+    /**
+     * @param array $objects
+     *
+     * @return Pagerfanta
+     */
+    public function getArrayPaginator($objects)
+    {
+        return new Pagerfanta(new ArrayAdapter($objects));
+    }
+
+    /**
+     * @return QueryBuilder
+     */
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
     }
 
+    /**
+     * @return QueryBuilder
+     */
     protected function getCollectionQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $criteria
+     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (null === $criteria) {
@@ -115,18 +169,24 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         }
 
         foreach ($criteria as $property => $value) {
-            if (!empty($value)) {
-                if (!is_array($value)) {
-                    $queryBuilder
-                        ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
-                        ->setParameter($property, $value);
-                } else {
-                    $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
-                }
+            if (null === $value) {
+                $queryBuilder
+                    ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
+            } elseif (is_array($value)) {
+                $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
+            } elseif ('' !== $value) {
+                $queryBuilder
+                    ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
+                    ->setParameter($property, $value);
             }
         }
     }
 
+    /**
+     * @param QueryBuilder $queryBuilder
+     *
+     * @param array $sorting
+     */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
         if (null === $sorting) {
@@ -135,11 +195,16 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
         foreach ($sorting as $property => $order) {
             if (!empty($order)) {
-                $queryBuilder->orderBy($this->getPropertyName($property), $order);
+                $queryBuilder->addOrderBy($this->getPropertyName($property), $order);
             }
         }
     }
 
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
     protected function getPropertyName($name)
     {
         if (false === strpos($name, '.')) {

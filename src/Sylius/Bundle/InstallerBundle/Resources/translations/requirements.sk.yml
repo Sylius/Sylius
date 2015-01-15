@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    apc: APC
+    gd: GD
+    iconv: Iconv
+    json_encode: JSON
+    "off": false
+    "on": true
+    pcre: PCRE
+    php_xml: PHP-XML
+  filesystem:
+    exists: existuje
+    not_exists: neexistuje
+    writable: zapisovateľné
+  settings:
+    "off": false
+    "on": true
+    timezone: časové pásmo
+    version: Verzia PHP
+    version_recommanded: Odporúčaná verzia PHP

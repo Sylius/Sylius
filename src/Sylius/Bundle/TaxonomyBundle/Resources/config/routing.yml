@@ -1,0 +1,7 @@
+sylius_taxonomy:
+    resource: @SyliusTaxonomyBundle/Resources/config/routing/taxonomy.yml
+    prefix: /taxonomy
+
+sylius_taxon:
+    resource: @SyliusTaxonomyBundle/Resources/config/routing/taxon.yml
+    prefix: /taxonomy/{taxonomyId}/taxon

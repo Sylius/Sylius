@@ -15,11 +15,16 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_order_create'), 'sylius.order.create'|trans) }}
+        {% if app.request.query.get('deleted') %}
+            <a href="{{ path('sylius_backend_order_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
+        {% else %}
+            <a href="{{ path('sylius_backend_order_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
+        {% endif %}
     </div>
-    <h1><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.order.index_header'|trans|raw }}</h1>
+    <h1><span class="glyphicon glyphicon-shopping-cart"></span> {{ 'sylius.order.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_order_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_order_filter', 'template': 'SyliusWebBundle:Backend/Order:filterForm.html.twig'})) %}
 
 {{ pagination(orders) }}
 {{ list(orders) }}

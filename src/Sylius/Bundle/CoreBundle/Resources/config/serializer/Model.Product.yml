@@ -1,0 +1,7 @@
+Sylius\Component\Core\Model\Product:
+    exclusion_policy: ALL
+    xml_root_name: product
+    properties:
+        shortDescription:
+            expose: true
+            type: string

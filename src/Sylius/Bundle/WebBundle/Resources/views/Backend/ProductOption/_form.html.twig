@@ -1,0 +1,17 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+{{ form_errors(form) }}
+
+<div class="row">
+    <div class="col-md-8 row-split">
+        {{ form_row(form.name) }}
+        {{ form_row(form.translations) }}
+    </div>
+
+    <div class="col-md-4">
+        {{ form_row(form.values)  }}
+    </div>
+</div>
+<hr>
+
+{{ form_widget(form._token) }}

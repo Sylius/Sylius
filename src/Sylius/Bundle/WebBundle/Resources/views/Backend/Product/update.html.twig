@@ -5,8 +5,8 @@
 {% block javascripts %}
 {{ parent() }}
 {% javascripts output='assets/compiled/backend_product.js'
-    '@SyliusShippingBundle/Resources/assets/js/prototype-handler.js'
-    '@SyliusWebBundle/Resources/assets/js/dynamic-property-types.js'
+    'bundles/syliusshipping/js/prototype-handler.js'
+    'bundles/syliusweb/js/dynamic-property-types.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}

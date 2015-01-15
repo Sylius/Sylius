@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  group:
+    name:
+      max: 'Nazwa grupy nie może być dłuższa niż {{ limit }} znaków.'
+      min: 'Nazwa grupy nie może być krótsza niż {{ limit }} znaków.'
+      not_blank: Wprowadź nazwę grupy.
+  locale:
+    code:
+      not_blank: Proszę podać kod ISO języka.
+      unique: Ten język jest już skonfigurowany.
+  user:
+    first_name:
+      max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'
+      min: 'Imię nie może mieć mniej niż {{ limit }} znaków.'
+      not_blank: Proszę podać swoje imię.
+    last_name:
+      max: 'Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
+      min: 'Nazwisko nie może mieć mniej niż {{ limit }} znaków.'
+      not_blank: Proszę wpisać swoje nazwisko.
+  product_variant:
+    onHand:
+      min: 'Dostępna ilość musi być większa niż {{ limit }}.'
+      not_blank: Należy wprowadzić dostępną ilość.
+    price:
+      min: Cena nie może być ujemna.
+      not_blank: Proszę podać cenę.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: sylius_shipping.method.zone.not_blank
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Proszę wybrać strefę opodatkowania.

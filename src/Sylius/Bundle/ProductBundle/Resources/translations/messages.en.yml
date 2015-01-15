@@ -1,0 +1,15 @@
+sylius:
+  form:
+    product:
+        name: Name
+        description: Description
+        attributes: Attributes
+        options: Options
+        meta_keywords: Meta keywords
+        meta_description: Meta description
+    product_variant:
+        available_on: Available on
+    product_prototype:
+        name: Name
+        attributes: Attributes
+        options: Options

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Builder;
 
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilder;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
  * ProcessBuilder test.
@@ -24,7 +25,22 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->builder = new TestProcessBuilder($this->getMock('Symfony\Component\DependencyInjection\ContainerInterface'));
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $validator = $this->getMock('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface');
+        $validator
+            ->expects($this->any())
+            ->method('getMessage')
+            ->will($this->returnValue('An error occurred.'))
+        ;
+
+        $container
+            ->expects($this->any())
+            ->method('get')
+            ->with('sylius.process.validator')
+            ->will($this->returnValue(new ProcessValidator('An error occurred.')))
+        ;
+
+        $this->builder = new TestProcessBuilder($container);
     }
 
     /**
@@ -174,6 +190,26 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \RuntimeException
      */
+    public function shouldNotInjectDisplayRouteParamsWithoutProcess()
+    {
+        $this->builder->setDisplayRouteParams(array('foo' => 'bar'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldInjectDisplayRouteParamsToProcess()
+    {
+        $this->builder->build($this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
+        $this->builder->setDisplayRouteParams(array('foo' => 'bar'));
+
+        $this->assertEquals(array('foo' => 'bar'), $this->builder->getProcess()->getDisplayRouteParams());
+    }
+
+    /**
+     * @test
+     * @expectedException \RuntimeException
+     */
     public function shouldNotInjectForwardRouteWithoutProcess()
     {
         $this->builder->setForwardRoute('forward_route');
@@ -194,6 +230,26 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
      * @test
      * @expectedException \RuntimeException
      */
+    public function shouldNotInjectForwardRouteParamsWithoutProcess()
+    {
+        $this->builder->setForwardRouteParams(array('foo' => 'bar'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldInjectForwardRouteParamsToProcess()
+    {
+        $this->builder->build($this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
+        $this->builder->setForwardRouteParams(array('foo' => 'bar'));
+
+        $this->assertEquals(array('foo' => 'bar'), $this->builder->getProcess()->getForwardRouteParams());
+    }
+
+    /**
+     * @test
+     * @expectedException \RuntimeException
+     */
     public function shouldNotInjectRedirectWithoutProcess()
     {
         $this->builder->setRedirect('redirect');
@@ -208,6 +264,26 @@ class ProcessBuilderTest extends \PHPUnit_Framework_TestCase
         $this->builder->setRedirect('redirect');
 
         $this->assertEquals('redirect', $this->builder->getProcess()->getRedirect());
+    }
+
+    /**
+     * @test
+     * @expectedException \RuntimeException
+     */
+    public function shouldNotInjectRedirectParamsWithoutProcess()
+    {
+        $this->builder->setRedirectParams(array('foo' => 'bar'));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldInjectRedirectParamsToProcess()
+    {
+        $this->builder->build($this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
+        $this->builder->setRedirectParams(array('foo' => 'bar'));
+
+        $this->assertEquals(array('foo' => 'bar'), $this->builder->getProcess()->getRedirectParams());
     }
 
     /**

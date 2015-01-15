@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    backend:
+        menu:
+            main:
+                assortment: Asortiman
+                configuration: Konfiguracija
+                countries: Zemlje
+                dashboard: Komandna Tabla
+                general_settings: Generalna Podešavanja
+                homepage: Prodavnica
+                new_order: Dodaj novu narudžbinu
+                new_promotion: Dodaj novu promociju
+                options: Upravljanje opcijama proizvoda
+                orders: Trenutne narudžbine
+                payment_methods: Opcije plaćanja
+                payments: Plaćanja
+                products: Poroizvodi
+                promotions: Promocije
+                properties: Konfiguracija atributa
+                prototypes: Prototipovi proizvoda
+                sales: Narudžbine
+                shipments: Pošiljke
+                shipping_categories: Kategorije slanja
+                shipping_methods: Načini dostave
+                stockables: Stanje zaliha
+                tax_categories: Kategorije poreza
+                tax_rates: Poreske stope
+                taxation_settings: Podešavanje poreza
+                taxonomies: Kategorizacija
+                zones: Zone
+            sidebar:
+                assortment: Asortiman
+                configuration: Konfiguracija
+                countries: Zemlje
+                customer: Korisnici
+                dashboard: Kontrolna tabla
+                general_settings: Globalna podešavanja
+                homepage: Nazad na prodavnicu
+                new_order: Dodaj narudžbinu
+                new_promotion: Dodaj promociju
+                options: Upravljaj opcijama
+                orders: Trenutne narudžbine
+                payment_methods: Metodi plaćanja
+                payments: Plaćanja
+                products: Proizvodi
+                promotions: Promocije
+                properties: Konfiguracija atributa
+                prototypes: Prototipovi
+                sales: Narudžbine
+                shipments: Pošiljke
+                shipping_categories: Kategorije slanja
+                shipping_methods: Načini dostave
+                stockables: Stanje zaliha
+                tax_categories: Kategorije poreza
+                tax_rates: Poreske stope
+                taxation_settings: Podešavanja poreza
+                taxonomies: Kategorizacija
+                users: Korisnici
+                zones: Zone
+    frontend:
+        menu:
+            main:
+                administration: Administracija
+                cart: Pogledaj korpu (%items%) %total%
+                login: Prijavi se
+                logout: Odjavi se
+                register: Registracija
+            social:
+                facebook: Facebook
+                github: GitHub
+                google: Google+
+                linkedin: LinkedIn
+                twitter: Twitter
+    resource:
+        delete: %resource% je uspešno izbrisan.

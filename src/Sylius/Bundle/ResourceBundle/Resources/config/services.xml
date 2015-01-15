@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory</parameter>
+        <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
+        <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>
+        <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
+
+        <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
+        <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
+        <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
+        <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
+
+        <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
+        <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>
+        <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
+        <parameter key="sylius.event_subscriber.kernel_request.class">Sylius\Bundle\ResourceBundle\EventListener\KernelRequestSubscriber</parameter>
+
+        <!-- Sylius State Machine -->
+        <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
+
+        <parameter key="symfony.expression.language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
+            <argument type="service" id="sylius.controller.parameters_parser" />
+            <argument>%sylius.resource.settings%</argument>
+        </service>
+        <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
+            <argument type="service" id="sylius.expresssion_language" />
+        </service>
+        <service id="sylius.controller.parameters" class="%sylius.controller.parameters.class%" />
+
+        <service id="sylius.expresssion_language" class="%sylius.expression_language.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.event_subscriber.load_orm_metadata" class="%sylius.event_subscriber.load_orm_metadata.class%">
+            <argument>%sylius.config.classes%</argument>
+            <tag name="doctrine.event_subscriber" />
+        </service>
+        <service id="sylius.event_subscriber.load_odm_metadata" class="%sylius.event_subscriber.load_odm_metadata.class%">
+            <argument>%sylius.config.classes%</argument>
+            <tag name="doctrine_mongodb.odm.event_subscriber" />
+        </service>
+        <service id="sylius.event_subscriber.kernel_controller" class="%sylius.event_subscriber.kernel_controller.class%">
+            <argument type="service" id="sylius.controller.parameters_parser" />
+            <argument type="service" id="sylius.controller.parameters" />
+            <argument>%sylius.resource.settings%</argument>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
+            <argument /> <!-- Argument set by compiler pass -->
+            <tag name="form.type" alias="entity_hidden" />
+        </service>
+        <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
+        <service id="sylius.form.extension.collection" class="%sylius.form.extension.collection.class%">
+            <tag name="form.type_extension" alias="collection" />
+        </service>
+    </services>
+</container>

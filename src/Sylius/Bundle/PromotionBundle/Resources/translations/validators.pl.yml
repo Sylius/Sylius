@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion:
+    description:
+      max_length: 'Opis promocji nie może być dłuższy niż 1 znak.|Opis promocji nie może być dłuższy niż {{ limit }} znaki.|Opis promocji nie może być dłuższy niż {{ limit}} znaków.'
+      min_length: 'Opis promocji musi być dłuższy niż 1 znak.|Opis promocji musi być dłuższy niż {{ limit }} znaki.|Opis promocji musi być dłuższy niż {{ limit }} znaków.'
+      not_blank: Proszę podać opis promocji.
+    name:
+      max_length: 'Nazwa promocji nie może być dłuższa niż 1 znak.|Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
+      min_length: 'Nazwa promocji musi być dłuższa niż 1 znak.|Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
+      not_blank: Proszę podać nazwę promocji.
+  promotion_coupon:
+    code:
+      max_length: 'Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
+      min_length: 'Kod kuponu promocyjnego musi być dłuższy niż 1 znak.|Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaki.|Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaków.'
+      not_blank: Proszę podać kod kuponu.
+    usage_limit:
+      min: 'Ograniczenie użycia musi wynosić co najmniej {{ limit }}.'
+  promotion_coupon_generate_instruction:
+    amount:
+      min: 'Liczba kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.'
+      not_blank: Proszę podać liczbę kuponów do wygenerowania.
+    usage_limit:
+      min: 'Ograniczenie użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.'

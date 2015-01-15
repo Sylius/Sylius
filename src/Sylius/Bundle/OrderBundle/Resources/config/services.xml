@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.generator.order_number.class">Sylius\Bundle\OrderBundle\Generator\OrderNumberGenerator</parameter>
-        <parameter key="sylius.listener.order_number.class">Sylius\Bundle\OrderBundle\EventListener\OrderNumberListener</parameter>
+        <parameter key="sylius.listener.order_update.class">Sylius\Bundle\OrderBundle\EventListener\OrderUpdateListener</parameter>
+        <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
+
+        <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.controller.order" class="%sylius.controller.order.class%">
+        <service id="sylius.controller.comment" class="%sylius.controller.comment.class%">
             <argument>sylius</argument>
-            <argument>order</argument>
-            <argument>SyliusOrderBundle:Order</argument>
+            <argument>comment</argument>
+            <argument>SyliusOrderBundle:Comment</argument>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="sylius.controller.order_item" class="%sylius.controller.order_item.class%">
-            <argument>sylius</argument>
-            <argument>order_item</argument>
-            <argument>SyliusOrderBundle:Item</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+        <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
+            <argument>%sylius.model.adjustment.class%</argument>
+            <argument>%sylius.validation_group.adjustment%</argument>
+            <tag name="form.type" alias="sylius_adjustment" />
         </service>
-
-        <service id="sylius.controller.adjustment" class="%sylius.controller.adjustment.class%">
-            <argument>sylius</argument>
-            <argument>adjustment</argument>
-            <argument>SyliusOrderBundle:Adjustment</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
+        <service id="sylius.form.type.comment" class="%sylius.form.type.comment.class%">
+            <argument>%sylius.model.comment.class%</argument>
+            <argument>%sylius.validation_group.comment%</argument>
+            <tag name="form.type" alias="sylius_comment" />
         </service>
-
         <service id="sylius.form.type.order" class="%sylius.form.type.order.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_group.order%</argument>
@@ -48,19 +53,15 @@
             <argument>%sylius.validation_group.order_item%</argument>
             <tag name="form.type" alias="sylius_order_item" />
         </service>
-        <service id="sylius.form.type.adjustment" class="%sylius.form.type.adjustment.class%">
-            <argument>%sylius.model.adjustment.class%</argument>
-            <argument>%sylius.validation_group.adjustment%</argument>
-            <tag name="form.type" alias="sylius_adjustment" />
+
+        <service id="sylius.originator" class="%sylius.originator.class%">
+            <argument type="service" id="doctrine" />
         </service>
 
-        <service id="sylius.generator.order_number" class="%sylius.generator.order_number.class%">
-            <argument type="service" id="sylius.repository.order" />
-        </service>
+        <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
 
-        <service id="sylius.listener.order_number" class="%sylius.listener.order_number.class%">
-            <argument type="service" id="sylius.generator.order_number" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="generateOrderNumber" priority="10" />
+        <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
+            <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
         </service>
     </services>
 </container>

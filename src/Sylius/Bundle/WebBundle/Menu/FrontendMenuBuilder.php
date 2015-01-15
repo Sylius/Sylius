@@ -13,28 +13,30 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CartBundle\Provider\CartProviderInterface;
-use Sylius\Bundle\MoneyBundle\Twig\SyliusMoneyExtension;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Sylius\Bundle\TaxonomiesBundle\Model\TaxonInterface;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Intl\Intl;
 
 /**
  * Frontend menu builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class FrontendMenuBuilder extends MenuBuilder
 {
     /**
      * Currency repository.
      *
-     * @var RepositoryInterface
+     * @var CurrencyProviderInterface
      */
-    protected $exchangeRateRepository;
+    protected $currencyProvider;
 
     /**
      * Taxonomy repository.
@@ -51,49 +53,49 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $cartProvider;
 
     /**
-     * Money extension.
+     * Currency converter helper.
      *
-     * @var SyliusMoneyExtension
+     * @var CurrencyHelper
      */
-    protected $moneyExtension;
+    protected $currencyHelper;
 
     /**
      * Constructor.
      *
-     * @param FactoryInterface         $factory
-     * @param SecurityContextInterface $securityContext
-     * @param TranslatorInterface      $translator
-     * @param RepositoryInterface      $exchangeRateRepository
-     * @param RepositoryInterface      $taxonomyRepository
-     * @param CartProviderInterface    $cartProvider
-     * @param SyliusMoneyExtension     $moneyExtension
+     * @param FactoryInterface          $factory
+     * @param SecurityContextInterface  $securityContext
+     * @param TranslatorInterface       $translator
+     * @param EventDispatcherInterface  $eventDispatcher
+     * @param CurrencyProviderInterface $currencyProvider
+     * @param RepositoryInterface       $taxonomyRepository
+     * @param CartProviderInterface     $cartProvider
+     * @param CurrencyHelper            $currencyHelper
      */
     public function __construct(
-        FactoryInterface         $factory,
-        SecurityContextInterface $securityContext,
-        TranslatorInterface      $translator,
-        RepositoryInterface      $exchangeRateRepository,
-        RepositoryInterface      $taxonomyRepository,
-        CartProviderInterface    $cartProvider,
-        SyliusMoneyExtension     $moneyExtension
+        FactoryInterface          $factory,
+        SecurityContextInterface  $securityContext,
+        TranslatorInterface       $translator,
+        EventDispatcherInterface  $eventDispatcher,
+        CurrencyProviderInterface $currencyProvider,
+        RepositoryInterface       $taxonomyRepository,
+        CartProviderInterface     $cartProvider,
+        CurrencyHelper            $currencyHelper
     )
     {
-        parent::__construct($factory, $securityContext, $translator);
+        parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
 
-        $this->exchangeRateRepository = $exchangeRateRepository;
+        $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
-        $this->moneyExtension = $moneyExtension;
+        $this->currencyHelper = $currencyHelper;
     }
 
     /**
      * Builds frontend main menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createMainMenu(Request $request)
+    public function createMainMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -101,21 +103,26 @@ class FrontendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $cart = $this->cartProvider->getCart();
+        if ($this->cartProvider->hasCart()) {
+            $cart = $this->cartProvider->getCart();
+            $cartTotals = array('items' => $cart->countItems(), 'total' => $cart->getTotal());
+        } else {
+            $cartTotals = array('items' => 0, 'total' => 0);
+        }
 
         $menu->addChild('cart', array(
             'route' => 'sylius_cart_summary',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.cart', array(
-                '%items%' => $cart->getTotalItems(),
-                '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
+                '%items%' => $cartTotals['items'],
+                '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
             ))),
             'labelAttributes' => array('icon' => 'icon-shopping-cart icon-large')
         ))->setLabel($this->translate('sylius.frontend.menu.main.cart', array(
-            '%items%' => $cart->getTotalItems(),
-            '%total%' => $this->moneyExtension->formatPrice($cart->getTotal())
+            '%items%' => $cartTotals['items'],
+            '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
         )));
 
-        if ($this->securityContext->isGranted('ROLE_USER')) {
+        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_USER')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
             if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
@@ -150,12 +157,24 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN')) {
-            $menu->addChild('administration', array(
+        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
+            $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
                 'labelAttributes' => array('icon' => 'icon-briefcase icon-large', 'iconOnly' => false)
-            ))->setLabel($this->translate('sylius.frontend.menu.main.administration'));
+            );
+
+            if ($this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
+                $routeParams = array_merge($routeParams, array(
+                    'route' => 'sylius_switch_user_return',
+                    'routeParameters' => array(
+                        'username' => $this->securityContext->getToken()->getUsername(),
+                        '_switch_user' => '_exit'
+                    )
+                ));
+            }
+
+            $menu->addChild('administration', $routeParams)->setLabel($this->translate('sylius.frontend.menu.main.administration'));
         }
 
         return $menu;
@@ -174,12 +193,14 @@ class FrontendMenuBuilder extends MenuBuilder
             )
         ));
 
-        foreach ($this->exchangeRateRepository->findAll() as $exchangeRate) {
-            $menu->addChild($exchangeRate->getCurrency(), array(
+        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
+            $code = $currency->getCode();
+
+            $menu->addChild($code, array(
                 'route' => 'sylius_currency_change',
-                'routeParameters' => array('currency' => $exchangeRate->getCurrency()),
-                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $exchangeRate->getCurrency()))),
-            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($exchangeRate->getCurrency()));
+                'routeParameters' => array('currency' => $code),
+                'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.currency', array('%currency%' => $code))),
+            ))->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($code));
         }
 
         return $menu;
@@ -188,11 +209,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Builds frontend taxonomies menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createTaxonomiesMenu(Request $request)
+    public function createTaxonomiesMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -224,8 +243,7 @@ class FrontendMenuBuilder extends MenuBuilder
     {
         foreach ($taxon->getChildren() as $child) {
             $childMenu = $menu->addChild($child->getName(), array(
-                'route'           => 'sylius_product_index_by_taxon',
-                'routeParameters' => array('permalink' => $child->getPermalink()),
+                'route'           => $child,
                 'labelAttributes' => array('icon' => 'icon-angle-right')
             ));
             if ($child->getPath()) {
@@ -239,11 +257,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Builds frontend social menu.
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createSocialMenu(Request $request)
+    public function createSocialMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -273,11 +289,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Creates user account menu
      *
-     * @param Request $request
-     *
      * @return ItemInterface
      */
-    public function createAccountMenu(Request $request)
+    public function createAccountMenu()
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(

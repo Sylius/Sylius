@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
+  address:
+    street: Strasse / Nr.
+  checkout:
+    finalize:
+      address:
+        street: Strasse / Nr.
+  "no": false
+  "yes": true

@@ -16,13 +16,13 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\OrderBundle\Model\Order">
+    <class name="Sylius\Component\Order\Model\Order">
         <property name="items">
             <constraint name="Valid" />
         </property>
     </class>
 
-    <class name="Sylius\Bundle\OrderBundle\Model\OrderItem">
+    <class name="Sylius\Component\Order\Model\OrderItem">
         <property name="quantity">
             <constraint name="NotBlank">
                 <option name="message">sylius.order_item.quantity.not_blank</option>
@@ -41,7 +41,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\OrderBundle\Model\Adjustment">
+    <class name="Sylius\Component\Order\Model\Adjustment">
         <property name="label">
             <constraint name="NotBlank">
                 <option name="message">sylius.adjustment.label.not_blank</option>

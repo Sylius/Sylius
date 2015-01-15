@@ -1,12 +1,14 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block content %}
 <div class="page-header">
-    <h1>Welcome <small>Your registration was successful</small></h1>
+    {{ 'registration.confirmed_header'|trans|raw }}
 </div>
 
 <hr />
 <div class="alert alert-success">
-    Thank you for sign up! You are now logged in the store
+    {{ 'registration.confirmed'|trans({'%username%': user.firstName}) }}
 </div>
 {% endblock %}

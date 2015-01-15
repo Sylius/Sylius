@@ -11,17 +11,17 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use FOS\RestBundle\View\View;
+use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 
 /**
  * This service coordinates the whole flow of process.
  * Executes steps and start flows.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CoordinatorInterface
 {
@@ -42,7 +42,7 @@ interface CoordinatorInterface
      * @param string       $stepName
      * @param ParameterBag $queryParameters
      *
-     * @return Response
+     * @return Response|View
      */
     public function display($scenarioAlias, $stepName, ParameterBag $queryParameters = null);
 
@@ -53,7 +53,7 @@ interface CoordinatorInterface
      * @param string $scenarioAlias
      * @param string $stepName
      *
-     * @return Response
+     * @return Response|View
      */
     public function forward($scenarioAlias, $stepName);
 

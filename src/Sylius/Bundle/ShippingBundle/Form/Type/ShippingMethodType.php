@@ -11,37 +11,23 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
-use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethod;
-use Sylius\Bundle\ShippingBundle\Checker\Registry\RuleCheckerRegistryInterface;
-use Symfony\Component\Form\AbstractType;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethod;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Shipping method form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethodType extends AbstractType
+class ShippingMethodType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
     /**
      * Calculator registry.
      *
@@ -66,8 +52,8 @@ class ShippingMethodType extends AbstractType
      */
     public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
         $this->calculatorRegistry = $calculatorRegistry;
         $this->checkerRegistry = $checkerRegistry;
     }
@@ -79,8 +65,10 @@ class ShippingMethodType extends AbstractType
     {
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormListener($this->calculatorRegistry, $builder->getFormFactory()))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.shipping_method.name'
+            ->add('translations', 'a2lix_translationsForms', array(
+                // TODO Form as a service?
+                'form_type' => new ShippingMethodTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'label'    => 'sylius.form.shipping_method.name'
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
@@ -128,19 +116,6 @@ class ShippingMethodType extends AbstractType
                 $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
     }
 
     /**

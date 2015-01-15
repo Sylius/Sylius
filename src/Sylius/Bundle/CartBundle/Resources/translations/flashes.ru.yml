@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  cart:
+    cart_save_completed: Корзина успешно обновлена.
+    cart_clear_completed: Корзина успешно очищена.
+    item_add_completed: Позиция добавлена в корзину.
+    item_remove_completed: Позиция удалена из корзины.
+    item_add_error: При добавлении позиции в корзину возникла ошибка.
+    item_remove_error: При удалении из корзины возникла ошибка.

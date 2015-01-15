@@ -1,10 +1,12 @@
-{{ form_errors(form)  }}
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+{{ form_errors(form) }}
 {% include 'SyliusWebBundle:Backend/Product/Form:_tabs.html.twig' %}
 <br>
 <div class="tab-content">
     {% include 'SyliusWebBundle:Backend/Product/Form:_main.html.twig' %}
     {% include 'SyliusWebBundle:Backend/Product/Form:_options.html.twig' %}
-    {% include 'SyliusWebBundle:Backend/Product/Form:_properties.html.twig' %}
+    {% include 'SyliusWebBundle:Backend/Product/Form:_attributes.html.twig' %}
     {% include 'SyliusWebBundle:Backend/Product/Form:_categorization.html.twig' %}
     {% include 'SyliusWebBundle:Backend/Product/Form:_images.html.twig' %}
 </div>

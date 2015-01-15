@@ -2,15 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius_homepage:
-    pattern: /
+    path: /
     defaults: { _controller: sylius.controller.frontend.homepage:mainAction }
 
 sylius_currency:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/currency.yml
     prefix: /currency
 
-sylius_product:
-    resource: @SyliusWebBundle/Resources/config/routing/frontend/product.yml
+sylius_locale:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/locale.yml
+    prefix: /locale
+
+sylius_static_content:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/static_content.yml
+    prefix: /content
 
 sylius_checkout:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/checkout.yml
@@ -25,15 +30,23 @@ sylius_cart:
     prefix: /cart
 
 sylius_cart_summary:
-    pattern: /cart
+    path: /cart
     defaults:
         _controller: sylius.controller.cart:summaryAction
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
 
 sylius_cart_save:
-    pattern: /cart/save
+    path: /cart/save
     defaults:
         _controller: sylius.controller.cart:saveAction
         _sylius:
             template: SyliusWebBundle:Frontend/Cart:summary.html.twig
+
+sylius_contact:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/contact.yml
+    prefix: /contact
+
+sylius_search:
+    resource: @SyliusWebBundle/Resources/config/routing/frontend/search.yml
+    prefix: /search

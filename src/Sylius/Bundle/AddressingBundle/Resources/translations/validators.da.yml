@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      max_length: By må ikke være længere end 255 tegn|By må ikke være længere end 255 tegn.
+      min_length: By skal være mindst 2 tegn|By skal være mindst 2 tegn.
+      not_blank: Venligst indtast by.
+    country:
+      not_blank: Vælg venligst et land.
+    first_name:
+      max_length: Fornavn må ikke være længere end 255 tegn|Fornavn må ikke være længere end 255 tegn.
+      min_length: Fornavn skal være mindst 2 tegn|Fornavn skal være mindst 2 tegn.
+      not_blank: Venligst indtast fornavn.
+    last_name:
+      max_length: Efternavn må ikke være længere end 255 tegn|Efternavn må ikke være længere end 255 tegn.
+      min_length: Efternavn skal være mindst 2 tegn|Efternavn skal være mindst 2 tegn.
+      not_blank: Venligst indtast efternavn.
+    postcode:
+      max_length: Postnummer må ikke være længere end 255 tegn|Postnummer må ikke være længere end 255 tegn.
+      min_length: Postnummer skal være mindst 2 tegn|Postnummer skal være mindst 2 tegn.
+      not_blank: Venligst indtast postnummer.
+    province:
+      valid: Vælg venligst provins.
+    street:
+      max_length: Gade må ikke være længere end 255 tegn|Gade må ikke være længere end 255 tegn.
+      min_length: Gade skal være mindst 2 tegn|Gade skal være mindst 2 tegn.
+      not_blank: Venligst indtast gade.
+    not_shippable: Denne adresse er ikke en gyldig leveringsadresse.
+  country:
+    iso_name:
+      not_blank: Venligst indtast ISO-landekoden.
+    name:
+      max_length: Landenavn må ikke være længere end 255 tegn|Landenavn må ikke være længere end 255 tegn.
+      not_blank: Venligst indtast landenavn.
+  province:
+    name:
+      max_length: Provins navn må ikke være længere end 255 tegn|Provins navn må ikke være længere end 255 tegn.
+      min_length: Provins navn skal være mindst 2 tegn|Provins navn skal være mindst 2 tegn.
+      not_blank: Venligst indtast provins navn.
+  zone:
+    members:
+      min_count: 'Tilføj venligst mindst {{ limit }} zone medlem.'
+    name:
+      max_length: Zone navn må ikke være længere end 255 tegn|Zone navn må ikke være længere end 255 tegn.
+      not_blank: Venligst indtast zone navn.

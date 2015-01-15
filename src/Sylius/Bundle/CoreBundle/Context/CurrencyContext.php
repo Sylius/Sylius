@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Sylius\Bundle\MoneyBundle\Context\CurrencyContext as BaseCurrencyContext;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Component\Storage\StorageInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CurrencyContext extends BaseCurrencyContext
 {
@@ -24,8 +24,8 @@ class CurrencyContext extends BaseCurrencyContext
     protected $userManager;
 
     public function __construct(
+        StorageInterface $storage,
         SecurityContextInterface $securityContext,
-        SessionInterface $session,
         SettingsManagerInterface $settingsManager,
         ObjectManager $userManager
     ) {
@@ -33,7 +33,7 @@ class CurrencyContext extends BaseCurrencyContext
         $this->settingsManager = $settingsManager;
         $this->userManager = $userManager;
 
-        parent::__construct($session, $this->getDefaultCurrency());
+        parent::__construct($storage, $this->getDefaultCurrency());
     }
 
     public function getDefaultCurrency()
@@ -64,8 +64,8 @@ class CurrencyContext extends BaseCurrencyContext
 
     protected function getUser()
     {
-        if ((null !== $token = $this->securityContext->getToken()) && is_object($user = $token->getUser())) {
-            return $user;
+        if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->securityContext->getToken()->getUser();
         }
     }
 }

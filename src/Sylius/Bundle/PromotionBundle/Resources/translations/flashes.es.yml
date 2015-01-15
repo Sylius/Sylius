@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Los cupones de promoción han sido generados correctamente.
+    eligible: El cupón de promoción ha sido añadido al carrito.
+    invalid: El cupón de promoción no es válido.
+    not_eligible: La promoción no es válida para su carrito.

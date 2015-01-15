@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Zone member zone form type.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ZoneMemberZoneType extends ZoneMemberType
 {

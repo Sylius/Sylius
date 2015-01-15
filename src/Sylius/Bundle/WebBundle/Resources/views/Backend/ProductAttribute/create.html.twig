@@ -1,0 +1,33 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% from 'SyliusResourceBundle:Macros:actions.html.twig' import create %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts output='assets/compiled/backend_product_attribute.js'
+    'bundles/syliusweb/js/sylius-attribute-choices.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_attribute_index') }}">{{ 'sylius.breadcrumb.attribute.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.new'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-plus-sign"></i> {{ 'sylius.product_attribute.create_header'|trans|raw }}</h1>
+</div>
+
+{{ form_errors(form) }}
+
+<form action="{{ path('sylius_backend_product_attribute_create') }}" method="post" class="form-horizontal" novalidate>
+    {% include 'SyliusWebBundle:Backend/ProductAttribute:_form.html.twig' %}
+    {{ create() }}
+</form>
+{% endblock %}

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\SettingsBundle\Model;
 /**
  * Settings parameter model.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Parameter implements ParameterInterface
 {
@@ -42,12 +42,14 @@ class Parameter implements ParameterInterface
     /**
      * Parameter value.
      *
-     * @var string
+     * @var mixed
      */
     protected $value;
 
     /**
-     * {@inheritdoc}
+     * Get parameter id.
+     *
+     * @return int
      */
     public function getId()
     {
@@ -95,7 +97,7 @@ class Parameter implements ParameterInterface
      */
     public function getValue()
     {
-        return null === $this->value ? null : unserialize($this->value);
+        return $this->value;
     }
 
     /**
@@ -103,7 +105,7 @@ class Parameter implements ParameterInterface
      */
     public function setValue($value)
     {
-        $this->value = serialize($value);
+        $this->value = $value;
 
         return $this;
     }

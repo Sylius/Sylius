@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    settings:
-        update: 設定を保存しました。
+  settings:
+    update: 設定を保存しました。

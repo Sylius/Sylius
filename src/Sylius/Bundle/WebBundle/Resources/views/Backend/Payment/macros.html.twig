@@ -11,7 +11,7 @@
             <th>{{ sylius_resource_sort('id', 'sylius.payment.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('method', 'sylius.payment.method'|trans) }}</th>
             <th>{{ sylius_resource_sort('amount', 'sylius.payment.amount'|trans) }}</th>
-            <th>{{ sylius_resource_sort('state', 'sylius.payment.state'|trans) }}</th>
+            <th>{{ sylius_resource_sort('state', 'sylius.payment.state.header'|trans) }}</th>
             <th>{{ sylius_resource_sort('createdAt', 'sylius.payment.created_at'|trans) }}</th>
             <th>{{ sylius_resource_sort('updatedAt', 'sylius.payment.updated_at'|trans) }}</th>
             <th></th>
@@ -30,8 +30,12 @@
             <td>{{ payment.updatedAt|date }}</td>
             <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
-                {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id})) }}
+                    {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}
+                    {{ buttons.delete(path('sylius_backend_payment_delete', {'id': payment.id})) }}
+                    <a href="{{ path('sylius_backend_payment_history', {'id': payment.id}) }}" class="btn btn-info">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                         {{ 'sylius.history'|trans }}
+                    </a>
                 </div>
             </td>
         </tr>

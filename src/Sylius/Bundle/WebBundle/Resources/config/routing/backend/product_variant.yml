@@ -1,0 +1,43 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_product_variant_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_variant:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductVariant:create.html.twig
+            redirect:
+                route: sylius_backend_product_show
+                parameters: {'id': $productId}
+
+sylius_backend_product_variant_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_variant:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductVariant:update.html.twig
+            redirect:
+                route: sylius_backend_product_show
+                parameters: {'id': $productId}
+
+sylius_backend_product_variant_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_variant:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect:
+                route: sylius_backend_product_show
+                parameters: {'id': $productId}
+
+sylius_backend_product_variant_generate:
+    path: /generate
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product_variant:generateAction
+        _sylius:
+            redirect: referer

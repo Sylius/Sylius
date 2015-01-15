@@ -1,23 +1,38 @@
-<script>
-var gallery = document.getElementById('gallery');
-if (gallery) {
-    gallery.onclick = function (event) {
-        event = event || window.event;
-        var target = event.target || event.srcElement,
-                link = target.src ? target.parentNode : target,
-                options = {index: link, event: event},
-                links = this.getElementsByTagName('a');
-        blueimp.Gallery(links, options);
-    };
-}
-</script>
 
-<div id="blueimp-gallery" class="blueimp-gallery">
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
-</div>
+{% block block %}
+
+    {% if block is defined and block.children %}
+        <div class="carousel">
+            <div id="gallery-{{ block.name }}" style="display:none">
+                {% for item in block.children %}
+                    {{ sonata_block_render(item) }}
+                {% endfor %}
+            </div>
+            <div id="blueimp-gallery-{{ block.name }}" class="blueimp-gallery blueimp-gallery-carousel">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", init, false);
+
+            function init() {
+                blueimp.Gallery(
+                    document.getElementById('gallery-{{ block.name }}').getElementsByTagName('a'),
+                    {
+                        container: '#blueimp-gallery-{{ block.name }}',
+                        carousel: true,
+                        stretchImages: "contain"
+                    }
+                );
+            };
+        </script>
+    {% endif %}
+
+{% endblock %}
+

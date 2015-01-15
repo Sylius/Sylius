@@ -11,74 +11,37 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Country form type.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class CountryType extends AbstractType
+class CountryType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var string
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.country.name'
+            ->add('translations', 'a2lix_translationsForms', array(
+                // TODO Form as a service?
+                'form_type' => new CountryTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'label'    => 'sylius.form.country.name'
             ))
             ->add('isoName', 'text', array(
                 'label' => 'sylius.form.country.iso_name'
             ))
             ->add('provinces', 'collection', array(
-                'type'         => 'sylius_province',
-                'allow_add'    => true,
+                'type' => 'sylius_province',
+                'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label'        => 'sylius.form.country.provinces'
-            ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
+                'button_add_label' => 'sylius.country.add_province'
             ))
         ;
     }

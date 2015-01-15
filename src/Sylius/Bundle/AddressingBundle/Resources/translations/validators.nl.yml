@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      max_length: Plaats mag niet langer dan 255 tekens zijn|Plaats mag niet langer dan 255 tekens zijn.
+      min_length: Stad moet minstens 2 tekens lang zijn|Stad moet minstens 2 tekens lang zijn.
+      not_blank: Voer een stad in.
+    country:
+      not_blank: Selecteer een land.
+    first_name:
+      max_length: Voornaam mag niet langer dan 255 tekens zijn|Voornaam mag niet langer dan 255 tekens zijn.
+      min_length: Voornaam moet minstens 2 tekens lang zijn|Voornaam moet minstens 2 tekens lang zijn.
+      not_blank: Voer een voornaam in.
+    last_name:
+      max_length: Achternaam mag niet langer dan 255 tekens zijn|Achternaam mag niet langer dan 255 tekens zijn.
+      min_length: Achternaam moet minstens 2 tekens lang zijn|Achternaam moet minstens 2 tekens lang zijn.
+      not_blank: Voer een achternaam in.
+    postcode:
+      max_length: Postcode mag niet langer dan 255 tekens zijn|Postcode mag niet langer dan 255 tekens zijn.
+      min_length: Postcode moet minstens 2 tekens lang zijn|Postcode moet minstens 2 tekens lang zijn.
+      not_blank: Voer een postcode in.
+    province:
+      valid: Selecteer een provincie.
+    street:
+      max_length: Straat mag niet langer dan 255 tekens zijn|Straat mag niet langer dan 255 tekens zijn.
+      min_length: Straat moet minstens 2 tekens lang zijn|Straat moet minstens 2 tekens lang zijn.
+      not_blank: Voer een straat in.
+    not_shippable: Dit adres is geen geldige bestemming.
+  country:
+    iso_name:
+      not_blank: Voer een ISO landcode in.
+    name:
+      max_length: Landnaam mag niet langer dan 255 tekens zijn|Landnaam mag niet langer dan 255 tekens zijn.
+      not_blank: Voer een landnaam in.
+  province:
+    name:
+      max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
+      min_length: Provincie naam moet minstens 2 tekens lang zijn|Provincie naam moet minstens 2 tekens lang zijn.
+      not_blank: Voer een provincie naam in.
+  zone:
+    members:
+      min_count: 'Voeg minstens {{ limit }} zone leden toe.'
+    name:
+      max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
+      not_blank: Voer een zone naam in.

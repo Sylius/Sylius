@@ -1,0 +1,21 @@
+sylius:
+    product:
+        sku:
+            not_blank: Please enter product SKU.
+            unique: Product SKU must be unique.
+        name:
+            not_blank: Please enter product name.
+            min_length: Product name must be at least 1 character long.|Product name must be at least {{ limit }} characters long.
+            max_length: Product name must not be longer than 1 character.|Product name must not be longer than {{ limit }} characters.
+        description:
+            not_blank: Please enter product description.
+            min_length: Product description must be at least 1 character long.|Product description must be at least {{ limit }} characters long.
+    variant:
+        sku:
+            not_blank: Please enter variant SKU.
+            unique: Variant SKU must be unique.
+    prototype:
+        name:
+            not_blank: Please enter prototype name.
+            min_length: Prototype name must be at least 1 character long.|Prototype name must be at least {{ limit }} characters long.
+            max_length: Prototype name must not be longer than 1 character.|Prototype name must not be longer than {{ limit }} characters.

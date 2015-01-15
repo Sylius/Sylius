@@ -1,0 +1,23 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/ContactRequest:macros.html.twig' import list %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.contact_request.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_contact_request_create'), 'sylius.contact_request.create'|trans) }}
+    </div>
+    <h1><i class="fa fa-comments"></i> {{ 'sylius.contact_request.index_header'|trans|raw }}</h1>
+</div>
+
+{{ list(contact_requests) }}
+
+{% endblock %}

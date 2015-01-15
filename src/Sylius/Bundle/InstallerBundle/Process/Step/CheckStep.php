@@ -16,6 +16,9 @@ use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 
 class CheckStep extends ControllerStep
 {
+    /**
+     * {@inheritdoc}
+     */
     public function displayAction(ProcessContextInterface $context)
     {
         return $this->render(
@@ -24,6 +27,9 @@ class CheckStep extends ControllerStep
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function forwardAction(ProcessContextInterface $context)
     {
         return $this->complete();

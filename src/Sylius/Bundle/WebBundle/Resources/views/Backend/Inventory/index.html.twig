@@ -20,6 +20,8 @@
     <h1><i class="glyphicon glyphicon-tasks"></i> {{ 'sylius.stockable.index_header'|trans|raw }}</h1>
 </div>
 
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
+
 {{ pagination(products) }}
 {{ list(products) }}
 {{ pagination(products) }}

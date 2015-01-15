@@ -19,7 +19,7 @@ use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 /**
  * Process test.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
 class ProcessTest extends \PHPUnit_Framework_TestCase
@@ -293,17 +293,23 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $process = new Process();
         $process->setScenarioAlias('alias');
         $process->setDisplayRoute('displayRoute');
+        $process->setDisplayRouteParams(array('foo' => 'bar'));
         $process->setForwardRoute('forwardRoute');
+        $process->setForwardRouteParams(array('foo' => 'bar'));
         $process->setRedirect('http://somepage');
-        $process->setValidator(new ProcessValidator(function () {
+        $process->setRedirectParams(array('foo' => 'bar'));
+        $process->setValidator(new ProcessValidator('An error occurred.', null, function () {
             return false;
         }));
 
         $validator = $process->getValidator();
         $this->assertSame('alias', $process->getScenarioAlias());
         $this->assertSame('displayRoute', $process->getDisplayRoute());
+        $this->assertSame(array('foo' => 'bar'), $process->getDisplayRouteParams());
         $this->assertSame('forwardRoute', $process->getForwardRoute());
+        $this->assertSame(array('foo' => 'bar'), $process->getForwardRouteParams());
         $this->assertSame('http://somepage', $process->getRedirect());
+        $this->assertSame(array('foo' => 'bar'), $process->getRedirectParams());
         $this->assertSame(false, $validator->isValid());
     }
 

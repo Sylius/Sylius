@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.templating.helper.locale.class">Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.templating.helper.locale" class="%sylius.templating.helper.locale.class%">
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="templating.helper" alias="sylius_locale" />
+        </service>
+    </services>
+
+</container>

@@ -1,0 +1,137 @@
+winzou_state_machine:
+    sylius_order_shipping:
+        class:         %sylius.model.order.class%
+        property_path: shippingState
+        graph:         sylius_order_shipping
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            checkout:          ~
+            onhold:            ~
+            ready:             ~
+            backordered:       ~
+            partially_shipped: ~
+            shipped:           ~
+            cancelled:         ~
+            returned:          ~
+        transitions:
+            hold:
+                from: [checkout]
+                to:   onhold
+            create:
+                from: [checkout, onhold]
+                to:   ready
+            ship:
+                from: [ready, partially_shipped]
+                to:   shipped
+            ship_partially:
+                from: [ready, partially_shipped]
+                to:   partially_shipped
+            return:
+                from: [partially_shipped, shipped]
+                to:   returned
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to:   cancelled
+
+    sylius_order_payment:
+        class:         %sylius.model.order.class%
+        property_path: paymentState
+        graph:         sylius_order_payment
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new:        ~
+            pending:    ~
+            processing: ~
+            completed:  ~
+            void:       ~
+            failed:     ~
+            cancelled:  ~
+            refunded:   ~
+        transitions:
+            create:
+                from: [new]
+                to:   pending
+            process:
+                from: [new, pending]
+                to:   processing
+            complete:
+                from: [pending, processing]
+                to:   completed
+            fail:
+                from: [pending, processing]
+                to:   failed
+            cancel:
+                from: [new, pending, processing]
+                to:   cancelled
+            refund:
+                from: [completed]
+                to:   refunded
+
+    sylius_payment:
+        callbacks:
+            after:
+                sylius_update_order:
+                    on:   'complete'
+                    do:   [@sylius.callback.order_payment, 'updateOrderOnPayment']
+                    args: ['object']
+
+    sylius_order:
+        callbacks:
+            after:
+                sylius_update_inventory:
+                    on:   'confirm'
+                    do:   [@sylius.order_processing.inventory_handler, 'updateInventory']
+                    args: ['object']
+                sylius_update_shipment:
+                    on:   'confirm'
+                    do:   [@sylius.callback.shipment_states, 'updateOrderShipmentStates']
+                    args: ['object']
+                sylius_increment_coupon:
+                    on:   'confirm'
+                    do:   [@sylius.callback.coupon_usage, 'incrementCouponUsage']
+                    args: ['object']
+
+                sylius_release_inventory:
+                    on:   'release'
+                    do:   [@sylius.order_processing.inventory_handler, 'releaseInventory']
+                    args: ['object']
+                sylius_release_shipment:
+                    on:   'release'
+                    do:   [@sm.callback.cascade_transition, 'apply']
+                    args: ['object.getShipments()', 'event', '"release"', '"sylius_shipment"']
+                sylius_void_payment:
+                    on:   'release'
+                    do:   [@sm.callback.cascade_transition, 'apply']
+                    args: ['object.getPayments()', 'event', '"void"', '"sylius_payment"']
+                sylius_increment_sold_variants:
+                    on:   'confirm'
+                    do:   [@sylius.callback.complete_order, 'increaseSoldVariants']
+                    args: ['object']
+                sylius_decrement_sold_variants:
+                    on:   'cancel'
+                    do:   [@sylius.callback.complete_order, 'decreaseSoldVariants']
+                    args: ['object']
+                sylius_increment_promotion:
+                    on:   'create'
+                    do:   [@sylius.callback.promotion_usage, 'incrementPromotionUsage']
+                    args: ['object']
+                sylius_decrement_promotion:
+                    on:   ['release', 'abandon']
+                    do:   [@sylius.callback.promotion_usage, 'decrementPromotionUsage']
+                    args: ['object']
+
+    sylius_inventory_unit:
+        callbacks:
+            after:
+                sylius_sync_shipping:
+                    excluded_to: [sold]
+                    do:   [@sm.callback.cascade_transition, 'apply']
+                    args: ['object', 'event', 'null', '"sylius_shipment_item"']
+
+    sylius_shipment:
+        callbacks:
+            after:
+                sylius_sync_order_ship:
+                    to:   'shipped'
+                    do:   [@sylius.callback.order_shipment, 'updateOrderShippingState']
+                    args: ['object.getOrder()']

@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: Nazwa taksonomii nie może być dłuższa niż 255 znaków.
+      not_blank: Proszę podać nazwę taksonomii.
+  taxonomy:
+    name:
+      max_length: Nazwa taksonomii nie może być dłuższa niż 255 znaków.
+      not_blank: Proszę podać nazwę taksonomii.

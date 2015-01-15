@@ -13,9 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * If user is not logged in, displays login & registration form.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SecurityStep extends CheckoutStep
 {
@@ -35,12 +37,17 @@ class SecurityStep extends CheckoutStep
     {
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {
+            $this->saveUser($this->getUser());
+
             return $this->complete();
         }
 
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
+
         $this->overrideSecurityTargetPath();
 
-        return $this->renderStep($context, $this->getRegistrationForm());
+        return $this->renderStep($context, $this->getRegistrationForm(), $this->getGuestForm($order));
     }
 
     /**
@@ -48,31 +55,30 @@ class SecurityStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $request = $this->getRequest();
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
-        $userManager = $this->get('fos_user.user_manager');
-        $dispatcher = $this->get('event_dispatcher');
+        $request          = $this->getRequest();
+        $guestForm        = $this->getGuestForm($order);
+        $registrationForm = $this->getRegistrationForm();
 
-        $user = $userManager->createUser();
-        $user->setEnabled(true);
+        if ($this->isGuestOrderAllowed() && $guestForm->handleRequest($request)->isValid()) {
+            $this->getManager()->persist($order);
+            $this->getManager()->flush();
 
-        $form = $this->getRegistrationForm();
-        $form->setData($user);
+            return $this->complete();
+        } elseif ($registrationForm->handleRequest($request)->isValid()) {
+            $user = $registrationForm->getData();
 
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
+            $this->dispatchEvent(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($registrationForm, $request));
+            $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-            $userManager->updateUser($user);
-
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
+            $this->saveUser($user);
 
             return $this->complete();
         }
 
-        return $this->renderStep($context, $form);
+        return $this->renderStep($context, $registrationForm, $guestForm);
     }
 
     /**
@@ -80,12 +86,16 @@ class SecurityStep extends CheckoutStep
      *
      * @param ProcessContextInterface $context
      * @param FormInterface           $registrationForm
+     * @param null|FormInterface      $guestForm
+     *
+     * @return Response
      */
-    protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm)
+    protected function renderStep(ProcessContextInterface $context, FormInterface $registrationForm, FormInterface $guestForm = null)
     {
-        return $this->render('SyliusWebBundle:Frontend/Checkout/Step:security.html.twig', array(
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'context'           => $context,
             'registration_form' => $registrationForm->createView(),
+            'guest_form'        => null !== $guestForm ? $guestForm->createView() : null,
         ));
     }
 
@@ -96,7 +106,37 @@ class SecurityStep extends CheckoutStep
      */
     protected function getRegistrationForm()
     {
-        return $this->get('fos_user.registration.form.factory')->createForm();
+        $user = $this->get('fos_user.user_manager')->createUser();
+        $user->setEnabled(true);
+
+        $form = $this->get('fos_user.registration.form.factory')->createForm();
+        $form->setData($user);
+
+        return $form;
+    }
+
+    /**
+     * Get guest form.
+     *
+     * @param OrderInterface $order
+     *
+     * @return null|FormInterface
+     */
+    protected function getGuestForm(OrderInterface $order)
+    {
+        if (!$this->isGuestOrderAllowed()) {
+            return null;
+        }
+
+        return $this->createForm('sylius_checkout_guest', $order);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isGuestOrderAllowed()
+    {
+        return $this->container->getParameter('sylius.order.allow_guest_order');
     }
 
     /**
@@ -104,9 +144,23 @@ class SecurityStep extends CheckoutStep
      */
     protected function overrideSecurityTargetPath()
     {
-        $url = $this->generateUrl('sylius_checkout_security', array(), true);
         $providerKey = $this->container->getParameter('fos_user.firewall_name');
 
-        $this->get('session')->set('_security.'.$providerKey.'.target_path', $url);
+        $this->get('session')->set('_security.'.$providerKey.'.target_path', $this->generateUrl('sylius_checkout_security', array(), true));
+    }
+
+    /**
+     * Dispatch security events, update user and flush
+     *
+     * @param UserInterface $user
+     */
+    protected function saveUser(UserInterface $user)
+    {
+        $order = $this->getCurrentCart();
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_PRE_COMPLETE, $order);
+
+        $this->get('fos_user.user_manager')->updateUser($user, true);
+
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_COMPLETE, $order);
     }
 }

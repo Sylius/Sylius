@@ -2,21 +2,21 @@
 # (c) Paweł Jędrzejewski
 
 sylius_zone_list:
-    pattern: /
+    path: /
     defaults:
         _controller: sylius.controller.zone:indexAction
 
 sylius_zone_create:
-    pattern: /create
+    path: /create
     defaults:
         _controller: sylius.controller.zone:createAction
 
 sylius_zone_update:
-    pattern: /{id}/update
+    path: /{id}/update
     defaults:
         _controller: sylius.controller.zone:updateAction
 
 sylius_zone_delete:
-    pattern: /{id}/delete
+    path: /{id}/delete
     defaults:
         _controller: sylius.controller.zone:deleteAction

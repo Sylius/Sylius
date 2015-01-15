@@ -1,0 +1,65 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+<div class="row">
+    <div class="col-md-8 row-split">
+        {{ form_errors(form) }}
+        {% if form.options is defined and form.options|length > 0 %}
+            {% for optionForm in form.options %}
+                {{ form_row(optionForm) }}
+            {% endfor %}
+        {% endif %}
+        {{ form_row(form.presentation) }}
+        {{ form_row(form.sku) }}
+        <div class="form-group">
+            {{ form_label(form.availableOn) }}
+            <div class="col-lg-10">
+                {{ form_row(form.availableOn.date, {'label': false}) }}
+                {{ form_row(form.availableOn.time, {'label': false}) }}
+            </div>
+        </div>
+        {{ form_row(form.price) }}
+        {{ form_row(form.pricingCalculator) }}
+        {% if form.pricingConfiguration is defined %}
+            {% if form.pricingCalculator.vars.value == 'volume_based' %}
+                <div>
+                    {{ form_label(form.pricingConfiguration) }}
+                    {% include "SyliusWebBundle::Backend/ProductVariant/Form/_volume_based_config.html.twig" %}
+                </div>
+            {% else %}
+                {{ form_row(form.pricingConfiguration) }}
+            {% endif %}
+        {% endif %}
+        <hr />
+        {{ form_row(form.availableOnDemand) }}
+        {{ form_row(form.onHand) }}
+    </div>
+
+    <div class="col-md-4">
+        {{ form_row(form.width) }}
+        {{ form_row(form.height) }}
+        {{ form_row(form.depth) }}
+        {{ form_row(form.weight) }}
+        <div id="sylius-assortment-variant-images" class="col-md-12" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
+            {% for imageForm in form.images %}
+            <div class="sylius-assortment-variant-images-image">
+                <div class="control-group">
+                    <div class="controls">
+                        <a href="{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}" target="_blank"><img class="img-polaroid" src="{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}" alt="" /></a>
+                        &nbsp;
+                        {{ form_widget(imageForm.file) }}
+                        &nbsp;
+                        <a href="#" class="btn btn-danger" data-collection-button="delete" data-collection="sylius-assortment-variant-images" data-collection-item="image"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ 'sylius.variant.delete_image'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+        <div class="col-md-12">
+            <a href="#" class="btn btn-success btn-block" data-collection-button="add" data-prototype="sylius-assortment-variant-images" data-collection="sylius-assortment-variant-images">{{ 'sylius.variant.add_image'|trans }}</a>
+        </div>
+    </div>
+    {{ form_widget(form._token) }}
+</div>

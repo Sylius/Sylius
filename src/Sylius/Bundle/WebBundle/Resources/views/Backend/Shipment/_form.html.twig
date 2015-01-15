@@ -1,0 +1,8 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+<fieldset>
+    {{ form_row(form.state) }}
+    {{ form_row(form.tracking) }}
+</fieldset>
+
+{{ form_rest(form) }}

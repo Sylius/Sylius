@@ -1,0 +1,6 @@
+sylius:
+    inventory_unit:
+        backorder: Inventory unit backordered.
+        sell: Inventory unit fulfilled.
+        return: Inventory unit returned.
+        transition_fail: The action couldn't be performed given the current state of unit

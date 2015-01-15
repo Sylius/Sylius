@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Web and command line installer for Sylius.",
     "keywords": ["shop", "ecommerce", "installer", "install"],
-    "homepage": "http://sylius.com",
+    "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
@@ -20,27 +20,29 @@
         }
     ],
     "require": {
-        "php":                      ">=5.3.3",
+        "php": ">=5.3.3",
 
-        "symfony/framework-bundle": "~2.2",
-        "sylius/resource-bundle":   "1.0.*@dev",
-        "sylius/flow-bundle":       "1.0.*@dev"
+        "symfony/framework-bundle": "~2.3",
+        "sylius/resource-bundle":   "0.13.*@dev",
+        "sylius/flow-bundle":       "0.13.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":          "2.0.*@dev",
-        "symfony/form":             "~2.2",
-        "symfony/validator":        "~2.2"
+        "phpspec/phpspec":   "~2.1",
+        "symfony/form":      "~2.2",
+        "symfony/validator": "~2.2"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\InstallerBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\InstallerBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/InstallerBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\InstallerBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.13-dev"
         }
     }
 }

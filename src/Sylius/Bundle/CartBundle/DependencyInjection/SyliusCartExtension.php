@@ -11,21 +11,23 @@
 
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Carts extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class SyliusCartExtension extends SyliusResourceExtension implements PrependExtensionInterface
+class SyliusCartExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
         'services',
+        'templating',
         'twig',
     );
 
@@ -34,13 +36,13 @@ class SyliusCartExtension extends SyliusResourceExtension implements PrependExte
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config';
-
         list($config) = $this->configure($config, new Configuration(), $container);
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
-        $container->setAlias('sylius.cart_storage', $config['storage']);
+
+        $definition = $container->findDefinition('sylius.context.cart');
+        $definition->replaceArgument(0, new Reference($config['storage']));
 
         $classes = $config['classes'];
 
@@ -66,10 +68,10 @@ class SyliusCartExtension extends SyliusResourceExtension implements PrependExte
         $container->prependExtensionConfig('sylius_order', array(
             'classes' => array(
                 'order_item' => array(
-                    'model' => 'Sylius\Bundle\CartBundle\Model\CartItem'
+                    'model' => 'Sylius\Component\Cart\Model\CartItem'
                 ),
                 'order' => array(
-                    'model' => 'Sylius\Bundle\CartBundle\Model\Cart'
+                    'model' => 'Sylius\Component\Cart\Model\Cart'
                 )
             ))
         );

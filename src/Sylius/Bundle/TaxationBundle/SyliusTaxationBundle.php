@@ -11,29 +11,25 @@
 
 namespace Sylius\Bundle\TaxationBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Taxation system for ecommerce Symfony2 applications.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusTaxationBundle extends Bundle
+class SyliusTaxationBundle extends AbstractResourceBundle
 {
     /**
-     * Return array of currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
@@ -42,18 +38,27 @@ class SyliusTaxationBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $interfaces = array(
-            'Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
-            'Sylius\Bundle\TaxationBundle\Model\TaxRateInterface'     => 'sylius.model.tax_rate.class',
-        );
+        parent::build($container);
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_taxation', $interfaces));
         $container->addCompilerPass(new RegisterCalculatorsPass());
+    }
 
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\TaxationBundle\Model',
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return array(
+            'Sylius\Component\Taxation\Model\TaxCategoryInterface' => 'sylius.model.tax_category.class',
+            'Sylius\Component\Taxation\Model\TaxRateInterface'     => 'sylius.model.tax_rate.class',
         );
+    }
 
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_taxation.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Taxation\Model';
     }
 }

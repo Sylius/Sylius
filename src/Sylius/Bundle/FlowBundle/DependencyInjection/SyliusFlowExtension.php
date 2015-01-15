@@ -18,9 +18,9 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Sylius flows extension.
+ * Flows extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusFlowExtension extends Extension
 {
@@ -40,6 +40,7 @@ class SyliusFlowExtension extends Extension
 
         $configurations = array(
             'builders',
+            'validators',
             'contexts',
             'controllers',
             'coordinators',

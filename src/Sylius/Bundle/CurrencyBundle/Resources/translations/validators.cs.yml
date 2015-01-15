@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  currency:
+    exchange_rate:
+      not_blank: Zadejte měnu.

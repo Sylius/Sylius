@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Bundle\AddressingBundle\Model\CountryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -66,19 +67,30 @@ class ProvinceController extends ResourceController
      */
     public function createNew()
     {
-        if (null === $countryId = $this->getRequest()->get('countryId')) {
+        $request = $this->getRequest();
+        if (null === $countryId = $request->get('countryId')) {
             throw new NotFoundHttpException('No country given');
         }
 
         $country = $this
             ->getCountryController()
-            ->findOr404(array('id' => $countryId))
+            ->findOr404($request, array('id' => $countryId))
         ;
 
         $province = parent::createNew();
         $province->setCountry($country);
 
         return $province;
+    }
+
+    /**
+     * Get country controller.
+     *
+     * @return ResourceController
+     */
+    protected function getCountryController()
+    {
+        return $this->get('sylius.controller.country');
     }
 
     /**
@@ -95,6 +107,8 @@ class ProvinceController extends ResourceController
      * Create province choice form for given country.
      *
      * @param CountryInterface $country
+     *
+     * @return FormInterface
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {

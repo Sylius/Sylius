@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\InstallerBundle\Requirement;
 
-use IteratorAggregate;
 use ArrayIterator;
+use IteratorAggregate;
 
 class RequirementCollection implements IteratorAggregate
 {

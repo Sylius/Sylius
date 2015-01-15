@@ -16,46 +16,75 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Order">
+    <class name="Sylius\Component\Core\Model\Order">
         <property name="shippingAddress">
             <constraint name="Valid" />
         </property>
         <property name="billingAddress">
             <constraint name="Valid" />
         </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>Guest</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">254</option>
+                <option name="groups">
+                    <value>Guest</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="groups">
+                    <value>Guest</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Variant">
+    <class name="Sylius\Component\Core\Model\ProductTranslation">
+        <property name="shortDescription">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product_translation.short_description.max</option>
+                <option name="groups">sylius</option>                
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Core\Model\ProductVariant">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">sku</option>
-            <option name="message">sylius.variant.sku.unique</option>
+            <option name="message">sylius.product_variant.sku.unique</option>
             <option name="groups">sylius</option>
         </constraint>
         <property name="price">
             <constraint name="NotBlank">
-                <option name="message">sylius.variant.price.not_blank</option>
+                <option name="message">sylius.product_variant.price.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0.00</option>
-                <option name="minMessage">sylius.variant.price.min</option>
+                <option name="minMessage">sylius.product_variant.price.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="onHand">
             <constraint name="NotBlank">
-                <option name="message">sylius.variant.onHand.not_blank</option>
+                <option name="message">sylius.product_variant.onHand.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">0</option>
-                <option name="minMessage">sylius.variant.onHand.min</option>
+                <option name="minMessage">sylius.product_variant.onHand.min</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\ShippingMethod">
+    <class name="Sylius\Component\Core\Model\ShippingMethod">
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_shipping.method.zone.not_blank</option>
@@ -64,7 +93,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\TaxRate">
+    <class name="Sylius\Component\Core\Model\TaxRate">
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius_taxation.rate.zone.not_blank</option>
@@ -73,7 +102,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\User">
+    <class name="Sylius\Component\Core\Model\User">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.first_name.not_blank</option>
@@ -121,7 +150,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CoreBundle\Model\Group">
+    <class name="Sylius\Component\Core\Model\Group">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.group.name.not_blank</option>
@@ -139,6 +168,14 @@
                 </option>
             </constraint>
         </property>
+    </class>
+
+
+    <class name="Sylius\Component\Cart\Model\CartItem">
+        <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
+            <option name="stockablePath">variant</option>
+            <option name="groups">sylius</option>
+        </constraint>
     </class>
 
 </constraint-mapping>

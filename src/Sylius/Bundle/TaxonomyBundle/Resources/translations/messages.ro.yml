@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+---: ---
+sylius:
+  form:
+    taxon:
+      description: Descriere
+      name: Nume
+      parent: Părinte
+      permalink: Permalink
+    taxonomy:
+      name: Nume

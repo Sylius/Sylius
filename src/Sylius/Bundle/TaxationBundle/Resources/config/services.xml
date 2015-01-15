@@ -19,30 +19,13 @@
     <parameters>
         <parameter key="sylius.form.type.tax_calculator_choice.class">Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType</parameter>
 
-        <parameter key="sylius.tax_calculator.class">Sylius\Bundle\TaxationBundle\Calculator\DelegatingCalculator</parameter>
-        <parameter key="sylius.tax_calculator.default.class">Sylius\Bundle\TaxationBundle\Calculator\DefaultCalculator</parameter>
+        <parameter key="sylius.tax_calculator.class">Sylius\Component\Taxation\Calculator\DelegatingCalculator</parameter>
+        <parameter key="sylius.tax_calculator.default.class">Sylius\Component\Taxation\Calculator\DefaultCalculator</parameter>
 
-        <parameter key="sylius.tax_rate_resolver.class">Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolver</parameter>
+        <parameter key="sylius.tax_rate_resolver.class">Sylius\Component\Taxation\Resolver\TaxRateResolver</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.controller.tax_category" class="%sylius.controller.tax_category.class%">
-            <argument>sylius</argument>
-            <argument>tax_category</argument>
-            <argument>SyliusTaxationBundle:TaxCategory</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-        <service id="sylius.controller.tax_rate" class="%sylius.controller.tax_rate.class%">
-            <argument>sylius</argument>
-            <argument>tax_rate</argument>
-            <argument>SyliusTaxationBundle:TaxRate</argument>
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
-
         <service id="sylius.form.type.tax_category" class="%sylius.form.type.tax_category.class%">
             <argument>%sylius.model.tax_category.class%</argument>
             <argument>%sylius.validation_group.tax_category%</argument>

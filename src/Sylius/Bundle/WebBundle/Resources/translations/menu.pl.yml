@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Asortyment
+        configuration: Konfiguracja
+        countries: Kraje
+        customer: Klienci
+        dashboard: Panel
+        exchange_rates: Kursy walut
+        general_settings: Ogólne ustawienia
+        homepage: Wróć do sklepu
+        locales: Ustawienia regionalne
+        new_order: Dodaj nowe zamówienie
+        new_promotion: Dodaj nową promocje
+        options: Warianty
+        orders: Aktualne zamówienia
+        payment_methods: Metody płatności
+        payments: Płatności
+        products: Produkty
+        promotions: Promocje
+        properties: Właściwości
+        prototypes: Prototypy
+        sales: Zamówienia
+        shipments: Przesyłki
+        shipping_categories: Kategorie wysyłki
+        shipping_methods: Metody wysyłki
+        stockables: Magazyn
+        tax_categories: Kategorie podatkowe
+        tax_rates: Stawki podatkowe
+        taxation_settings: Podatek
+        taxonomies: Taksonomia
+        users: Użytkownicy
+        zones: Strefy
+      sidebar:
+        assortment: Asortyment
+        blocks: Bloki
+        configuration: Konfiguracja
+        content: Zawartość
+        countries: Kraje
+        customer: Klienci
+        dashboard: Panel
+        exchange_rates: Kursy walut
+        general_settings: Ogólne ustawienia
+        groups: Grupy
+        homepage: Wróć do sklepu
+        locales: Ustawienia regionalne
+        new_order: Dodaj nowe zamówienie
+        new_promotion: Dodaj nową promocje
+        options: Warianty
+        orders: Aktualne zamówienia
+        pages: Strony
+        payment_methods: Metody płatności
+        payments: Płatności
+        products: Produkty
+        promotions: Promocje
+        properties: Właściwości
+        prototypes: Prototypy
+        sales: Zamówienia
+        shipments: Przesyłki
+        shipping_categories: Kategorie wysyłki
+        shipping_methods: Metody wysyłki
+        stockables: Magazyn
+        tax_categories: Kategorie podatkowe
+        tax_rates: Stawki podatkowe
+        taxation_settings: Podatek
+        taxonomies: Taksonomia
+        users: Użytkownicy
+        zones: Strefy
+  frontend:
+    menu:
+      account:
+        addresses: Moja książka adresowa
+        homepage: Panel
+        orders: Moje zamówienia / moje faktury
+        password: Moje hasło
+        profile: Moje dane
+        shop: Wróć do sklepu
+      currency: 'Pokaż ceny w walucie %currency%'
+      main:
+        account: Moje konto
+        administration: Administracja
+        cart: 'Zobacz koszyk (%items%) %total%'
+        login: Zaloguj
+        logout: Wyloguj
+        register: Zarejestruj
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

@@ -1,0 +1,90 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  checkout:
+    shipping_method:
+      not_blank: Prosím zadajte spôsob dopravy.
+  form:
+    action:
+      add_product_configuration:
+        price: Jednotková cena
+        quantity: Množstvo
+        variant: Variácia
+    block:
+      body: Obsah
+      id: ID
+      title: Názov
+    cart:
+      coupon: Kupón
+    checkout:
+      addressing:
+        different_billing_address: Použiť inú fakturačnú adresu?
+      payment_method: Spôsob platby
+      shipping_method: Spôsob prepravy
+    group:
+      name: Názov
+    image:
+      file: Obrázok
+    locale:
+      code: Kód
+      enabled: Povolené
+    order_filter:
+      created_at_from: Vytvorené po
+      created_at_to: Vytvorené pred
+      number: Číslo
+      total_from: Od
+      total_to: Do
+      payment_state: Stav platby
+    page:
+      body: Obsah
+      id: ID
+      title: Názov
+    product:
+      shipping_category: Prepravná kategória
+      short_description: Krátky popis
+      tax_category: Daňová kategória
+      variant_selection_method: Metóda výberu variantu
+    product_filter:
+      name: Názov
+      sku: Kód
+    settings:
+      general:
+        currency: Predvolená mena
+        locale: Jazyk
+        meta_description: Meta popis
+        meta_keywords: Meta kľúčové slová
+        title: Názov stránky
+      taxation:
+        default_tax_zone: Predvolené daňové pásmo
+    shipment_filter:
+      created_at_from: Od
+      created_at_to: Do
+      number: Číslo objednávky
+    shipping_method:
+      zone: Zóna
+    taxon:
+      file: Vybrať obrázok
+    taxonomy:
+      file: Vybrať obrázok
+    user:
+      billing_address: Fakturačná adresa
+      different_billing_address: Použiť inú fakturačnú adresu?
+      enabled: Povolený
+      first_name: Meno
+      groups: Skupiny
+      last_name: Priezvisko
+      password: Heslo
+      shipping_address: Doručovacia adresa
+    user_filter:
+      query: Vyhľadať
+    variant:
+      available_on_demand: Na objednávku
+      depth: Hĺbka
+      height: Výška
+      images: Obrázky
+      on_hand: Aktuálne skladom
+      price: Cena
+      sku: Kód
+      weight: Hmotnosť
+      width: Šírka

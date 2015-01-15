@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backorder: Inventario preordini.
+    sell: Inventario vendite.
+    return: Inventario resi.
+    transition_fail: "L'azione non poteva essere eseguita dati lo stato attuale dell'unità"

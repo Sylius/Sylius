@@ -1,0 +1,46 @@
+{
+    "name": "sylius/translation",
+    "type": "library",
+    "description": "Translation helper.",
+    "keywords": ["translation"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "doctrine/collections"          : "~1.2",
+        "doctrine/orm"                 : "~2.4",
+        "prezent/doctrine-translatable": "1.0.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Translation\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Translation\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.13-dev"
+        }
+    }
+}

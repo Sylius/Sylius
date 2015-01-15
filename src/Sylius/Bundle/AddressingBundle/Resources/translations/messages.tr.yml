@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Şehir
+      company: Şirket
+      country: Ülke
+      first_name: Ad
+      last_name: Soyad
+      postcode: Posta kodu
+      street: Adres
+      province: İl
+    country:
+      iso_name: Ülke kodu
+      name: Ülke adı
+      provinces: İller
+      select: Ülke seçin
+    province:
+      name: Ad
+      select: Ülke seçin
+    zone:
+      members: Üyeler
+      name: Bölge adı
+      type: Türü
+      types:
+        country: Ülke
+        province: İl
+        zone: Bölge
+      scope: Kapsam
+    zone_member_country:
+      country: Ülke
+    zone_member_province:
+      province: İl
+    zone_member_zone:
+      zone: Bölge

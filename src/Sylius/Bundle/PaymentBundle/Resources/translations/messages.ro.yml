@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    credit_card:
+      expiry_month: Luna expirării
+      expiry_year: Anul expirării
+      number: Numărul cardului
+      security_code: Codul de securitate (CVV)
+      type: Tipul cardului
+    payment_method:
+      description: Descriere

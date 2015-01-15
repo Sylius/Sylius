@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  promotion_coupon:
+    generate: Kupony promocyjne zostały pomyślnie wygenerowane.
+    eligible: Kupon promocyjny został wykorzystany w Twoim koszyku.
+    invalid: Ten kupon promocyjny jest nieprawidłowy.
+    not_eligible: W Twoim koszyku nie można skorzystać z tego kuponu promocyjnego.

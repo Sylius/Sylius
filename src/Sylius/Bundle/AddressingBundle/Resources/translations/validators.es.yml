@@ -1,0 +1,47 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  address:
+    city:
+      max_length: El nombre de la ciudad no debe tener más de 255 caracteres|El nombre de la ciudad no debe tener más de 255 caracteres.
+      min_length: La ciudad de contener al menos 2 caracteres|La ciudad de contener al menos 2 caracteres.
+      not_blank: Introduzca la ciudad.
+    country:
+      not_blank: Seleccione un país.
+    first_name:
+      max_length: El nombre debe contener menos de 255 caracteres|El nombre debe contener menos de 255 caracteres.
+      min_length: El nombre debe tener al menos 2 caracteres|El nombre debe tener al menos 2 caracteres.
+      not_blank: Introduzca nombre.
+    last_name:
+      max_length: Los apellidos deben tener menos de 255 caracteres|Los apellidos deben tener menos de 255 caracteres.
+      min_length: Los apellidos deben tener al menos 2 caracteres|Los apellido deben tener al menos 2 caracteres.
+      not_blank: Introduzca nombre.
+    postcode:
+      max_length: El código postal no debe tener más de 255 caracteres|El código postal no debe tener más de 255 caracteres.
+      min_length: El código postal debe tener al menos 2 caracteres.
+      not_blank: Por favor, introduzca el código postal.
+    province:
+      valid: Por favor seleccione la provincia adecuada.
+    street:
+      max_length: La calle no puede tener más de 255 caracteres
+      min_length: La calle debe tener al menos 2 caracteres.
+      not_blank: Por favor introduzca la calle.
+    not_shippable: Esta dirección no es un destino de envío válido.
+  country:
+    iso_name:
+      not_blank: Por favor introduzca el código ISO del país.
+    name:
+      max_length: El nombre del país no debe tener más de 255 caracteres.
+      not_blank: Por favor introduzca el nombre del país.
+  province:
+    name:
+      max_length: El nombre de la provincia no debe tener más de 255 caracteres.
+      min_length: El nombre de la provincia debe tener al menos 2 caracteres.
+      not_blank: Por favor introduzca el nombre de la provincia.
+  zone:
+    members:
+      min_count: 'Por favor introduzca al menos {{ limit }} miembros de zona.'
+    name:
+      max_length: El nombre de la zona no debe tener más de 255 caracteres.
+      not_blank: Por favor introduzca el nombre de la zona.

@@ -11,43 +11,16 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Product prototype form type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PrototypeType extends AbstractType
+class PrototypeType extends AbstractResourceType
 {
-    /**
-     * Data class.
-     *
-     * @var string
-     */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var array
-     */
-    protected $validationGroups;
-
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -55,25 +28,17 @@ class PrototypeType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.label.prototype.name'
+                'label' => 'sylius.form.product_prototype.name'
             ))
-            ->add('properties', 'sylius_property_choice', array(
+            ->add('attributes', 'sylius_product_attribute_choice', array(
                 'required' => false,
                 'multiple' => true,
-                'label'    => 'sylius.label.prototype.properties'
+                'label'    => 'sylius.form.product_prototype.attributes'
             ))
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups
+            ->add('options', 'sylius_product_option_choice', array(
+                'required' => false,
+                'multiple' => true,
+                'label'    => 'sylius.form.product_prototype.options'
             ))
         ;
     }
@@ -83,6 +48,6 @@ class PrototypeType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_prototype';
+        return 'sylius_product_prototype';
     }
 }

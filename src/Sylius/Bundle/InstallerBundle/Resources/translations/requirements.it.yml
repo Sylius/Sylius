@@ -1,0 +1,55 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    accelerator:
+      help: Installa e attiva un acceleratore PHP come APC (altamente consigliato).
+    apc: APC
+    ctype: CType
+    gd: GD
+    help: "Installa e attiva l'estensione %extension%."
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Stringa multibyte
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Sessione
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: esiste
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: non esiste
+    not_writable: non scrivibile
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: fornitori
+    writable: scrivibile
+  settings:
+    any: qualsiasi
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: non deprecato
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: timezone
+    timezone_deprecated:
+      help: 'Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).'
+    version: Versione PHP
+    version_recommanded: Versione PHP raccomandata

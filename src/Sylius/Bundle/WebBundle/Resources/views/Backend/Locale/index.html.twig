@@ -1,0 +1,26 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Locale:macros.html.twig' import list %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.locale.index'|trans }}</a></li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_locale_create'), 'sylius.locale.create'|trans) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.locale.index_header'|trans|raw }}</h1>
+</div>
+
+{{ pagination(locales) }}
+{{ list(locales) }}
+{{ pagination(locales) }}
+
+{% endblock %}

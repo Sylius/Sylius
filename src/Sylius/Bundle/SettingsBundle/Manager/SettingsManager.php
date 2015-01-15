@@ -13,15 +13,18 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
+use Symfony\Component\Validator\ValidatorInterface;
 
 /**
  * Settings manager.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsManager implements SettingsManagerInterface
 {
@@ -54,19 +57,35 @@ class SettingsManager implements SettingsManagerInterface
     protected $cache;
 
     /**
+     * Runtime cache for resolved parameters
+     *
+     * @var Settings[]
+     */
+    protected $resolvedSettings = array();
+
+    /**
+     * Validator instance
+     *
+     * @var ValidatorInterface
+     */
+    protected $validator;
+
+    /**
      * Constructor.
      *
      * @param SchemaRegistryInterface $schemaRegistry
      * @param ObjectManager           $parameterManager
      * @param RepositoryInterface     $parameterRepository
      * @param Cache                   $cache
+     * @param ValidatorInterface      $validator
      */
-    public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache)
+    public function __construct(SchemaRegistryInterface $schemaRegistry, ObjectManager $parameterManager, RepositoryInterface $parameterRepository, Cache $cache, ValidatorInterface $validator)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->parameterManager = $parameterManager;
         $this->parameterRepository = $parameterRepository;
         $this->cache = $cache;
+        $this->validator = $validator;
     }
 
     /**
@@ -74,6 +93,10 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function loadSettings($namespace)
     {
+        if (isset($this->resolvedSettings[$namespace])) {
+            return $this->resolvedSettings[$namespace];
+        }
+
         if ($this->cache->contains($namespace)) {
             $parameters = $this->cache->fetch($namespace);
         } else {
@@ -93,11 +116,12 @@ class SettingsManager implements SettingsManagerInterface
 
         $parameters = $settingsBuilder->resolve($parameters);
 
-        return new Settings($parameters);
+        return $this->resolvedSettings[$namespace] = new Settings($parameters);
     }
 
     /**
      * {@inheritdoc}
+     * @throws ValidatorException
      */
     public function saveSettings($namespace, Settings $settings)
     {
@@ -112,6 +136,10 @@ class SettingsManager implements SettingsManagerInterface
             if (array_key_exists($parameter, $parameters)) {
                 $parameters[$parameter] = $transformer->transform($parameters[$parameter]);
             }
+        }
+
+        if (isset($this->resolvedSettings[$namespace])) {
+            $this->resolvedSettings[$namespace]->setParameters($parameters);
         }
 
         $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
@@ -132,6 +160,12 @@ class SettingsManager implements SettingsManagerInterface
                     ->setName($name)
                     ->setValue($value)
                 ;
+
+                /* @var $errors ConstraintViolationListInterface */
+                $errors = $this->validator->validate($parameter);
+                if (0 < $errors->count()) {
+                    throw new ValidatorException($errors->get(0)->getMessage());
+                }
 
                 $this->parameterManager->persist($parameter);
             }

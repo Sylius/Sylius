@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
-use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
  * This listener adds configuration form to a method, if
  * selected calculator requires one.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildShippingMethodFormListener implements EventSubscriberInterface
 {

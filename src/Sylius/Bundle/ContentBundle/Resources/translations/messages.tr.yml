@@ -1,0 +1,44 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    imagine_block:
+      parent: Üst
+      internal_name: Dahili isim
+    menu:
+      name: Ad
+      parent: Üst
+    menu_block:
+      body: İçerik
+      name: Ad
+    menu_node_block:
+      content: İçerik
+      internal_name: Dahili isim
+    redirect_route:
+      name: Ad
+    reference_block:
+      body: İçerik
+      title: Başlık
+    route:
+      content: İçerik
+      name: Ad
+      parent: Üst
+    simple_block:
+      body: İçerik
+      internal_name: Dahili isim
+      parent: Üst
+      title: Başlık
+    slideshow_block:
+      internal_name: Dahili isim
+      parent: Üst
+      title: Başlık
+    static_content:
+      body: İçerik
+      internal_name: Dahili isim
+      parent: Üst
+      title: Başlık
+    string_block:
+      body: İçerik
+      id: ID
+      name: Ad

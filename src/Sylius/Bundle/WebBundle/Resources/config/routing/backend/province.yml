@@ -2,11 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius_backend_province_delete:
-    pattern: /{id}
+    path: /{id}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.province:deleteAction
         _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect:
                 route: sylius_backend_country_show
                 parameters: {'id': $countryId}

@@ -29,6 +29,7 @@ Feature: Checkout promotions with multiple rules and actions
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
+        And there is default currency configured
 
     Scenario: Several discounts are applied when a promotion has several
               actions and the cart fulfills all the rules
@@ -36,7 +37,7 @@ Feature: Checkout promotions with multiple rules and actions
           And I added product "Sarge" to cart, with quantity "5"
          When I add product "Lenny" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: (€27.75)" should appear on the page
+          And "Promotion total: -€27.75" should appear on the page
           And "Grand total: €127.25" should appear on the page
 
     Scenario: Promotion is not applied when one of the cart does not

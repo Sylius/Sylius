@@ -16,13 +16,13 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\CartBundle\Model\Cart">
+    <class name="Sylius\Component\Cart\Model\Cart">
         <property name="items">
             <constraint name="Valid" />
         </property>
     </class>
 
-    <class name="Sylius\Bundle\CartBundle\Model\CartItem">
+    <class name="Sylius\Component\Cart\Model\CartItem">
         <property name="quantity">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>

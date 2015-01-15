@@ -1,0 +1,55 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+$: '$'
+sylius:
+  flashes:
+    installed: Sylius успішно встановлений.
+  form:
+    configuration:
+      database:
+        driver:
+          microsoft_sql_server: Microsoft SQL Server
+          mysql: MySQL
+          oracle: Oracle
+          postgresql: PostgreSQL
+          sqlite: SQLite
+        host: Хост
+        name: Ім’я
+        password: Пароль
+        port: Порт
+        user: Користувач
+      locale:
+        currency: Валюта
+        locale: Локаль
+      mailer:
+        host: Хост
+        password: Пароль
+        transport:
+          gmail: Gmail
+          mail: Пошти
+          sendmail: Sendmail
+          smtp: SMTP
+        user: Користувач
+    setup:
+      email: Email
+      load_fixtures: Завантажити фікстури
+      plain_password: Пароль
+      username: "Ім'я користувача"
+  process:
+    step:
+      check:
+        button:
+          back: Назад
+          install: Встановити
+          next: Наступний
+        table:
+          current: поточний
+          required: необхідний
+          status: статус
+      configure:
+        header: 'Конфігурації <small>інсталятора Sylius</small>'
+      welcome:
+        content: '<p>Ласкаво просимо інсталятор Sylius.</p>'
+        header: 'Вітаємо <small>Sylius установки</small>'
+€: €

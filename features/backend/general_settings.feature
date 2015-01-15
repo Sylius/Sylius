@@ -5,7 +5,13 @@ Feature: General settings
     I want to be able to edit general configuration
 
     Background:
-        Given I am logged in as administrator
+        Given there are following currencies configured:
+            | code | exchange rate | enabled |
+            | USD  | 0.76496       | yes     |
+            | GBP  | 1.16998       | no      |
+            | EUR  | 1.00000       | yes     |
+            | AUD  | 0.73986       | yes     |
+          And I am logged in as administrator
 
     Scenario: Accessing the settings form
         Given I am on the dashboard page
@@ -64,9 +70,9 @@ Feature: General settings
           And the "Default currency" field should contain "USD"
           And I should see "Settings have been successfully updated."
 
-    Scenario: Changing language
-        Given I am on the general settings page
-         When I select "Polish" from "Language"
-          And I press "Save changes"
-         Then I should still be on the general settings page
-          And I should see "Ustawienia ogólne"
+#   Scenario: Changing language
+#       Given I am on the general settings page
+#        When I select "Polish" from "Language"
+#         And I press "Save changes"
+#        Then I should still be on the general settings page
+#         And I should see "Ustawienia ogólne"

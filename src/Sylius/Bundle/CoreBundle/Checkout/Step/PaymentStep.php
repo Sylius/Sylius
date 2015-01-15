@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Bundle\CoreBundle\Checkout\SyliusCheckoutEvents;
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
  * The payment step of checkout.
  * User selects the payment method.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentStep extends CheckoutStep
 {
@@ -49,7 +49,7 @@ class PaymentStep extends CheckoutStep
 
         $form = $this->createCheckoutPaymentForm($order);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
             $this->getManager()->persist($order);
@@ -65,7 +65,7 @@ class PaymentStep extends CheckoutStep
 
     protected function renderStep(ProcessContextInterface $context, OrderInterface $order, FormInterface $form)
     {
-      return $this->render('SyliusWebBundle:Frontend/Checkout/Step:payment.html.twig', array(
+        return $this->render($this->container->getParameter(sprintf('sylius.checkout.step.%s.template', $this->getName())), array(
             'order'   => $order,
             'form'    => $form->createView(),
             'context' => $context

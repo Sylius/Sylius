@@ -17,11 +17,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 /**
  * Settings controller.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsController extends Controller
 {
@@ -45,11 +46,16 @@ class SettingsController extends Controller
 
         $form->setData($settings);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $manager->saveSettings($namespace, $form->getData());
-
-            $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
-            $request->getSession()->getFlashBag()->add('success', $message);
+        if ($form->handleRequest($request)->isValid()) {
+            $messageType = 'success';
+            try {
+                $manager->saveSettings($namespace, $form->getData());
+                $message = $this->getTranslator()->trans('sylius.settings.update', array(), 'flashes');
+            } catch (ValidatorException $exception) {
+                $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'validators');
+                $messageType = 'error';
+            }
+            $request->getSession()->getBag('flashes')->add($messageType, $message);
 
             if ($request->headers->has('referer')) {
                 return $this->redirect($request->headers->get('referer'));

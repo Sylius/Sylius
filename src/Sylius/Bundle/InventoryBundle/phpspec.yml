@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Bundle\InventoryBundle
+        psr4_prefix: Sylius\Bundle\InventoryBundle
+        src_path: .

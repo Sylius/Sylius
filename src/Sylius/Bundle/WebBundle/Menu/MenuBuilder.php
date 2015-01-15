@@ -11,16 +11,17 @@
 
 namespace Sylius\Bundle\WebBundle\Menu;
 
-use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use JMS\TranslationBundle\Annotation\Ignore;
+use Knp\Menu\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Abstract menu builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class MenuBuilder
 {
@@ -53,17 +54,28 @@ abstract class MenuBuilder
     protected $request;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
      * @param SecurityContextInterface $securityContext
      * @param TranslatorInterface      $translator
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(FactoryInterface $factory, SecurityContextInterface $securityContext, TranslatorInterface $translator)
-    {
+    public function __construct(
+        FactoryInterface $factory,
+        SecurityContextInterface $securityContext,
+        TranslatorInterface $translator,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->factory = $factory;
         $this->securityContext = $securityContext;
         $this->translator = $translator;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

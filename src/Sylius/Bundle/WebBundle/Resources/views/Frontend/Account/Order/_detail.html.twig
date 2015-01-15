@@ -1,3 +1,7 @@
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+
 <div class="row well well-sm" id="information">
     <div class="col-md-6">
         <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
@@ -9,6 +13,17 @@
         {{ 'sylius.account.order.number'|trans }} <strong>{{ order.number }}</strong><br>
         {{ 'sylius.account.order.state'|trans }}
         {% include "SyliusWebBundle:Frontend/Account:Order/_state.html.twig" %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>{{ 'sylius.checkout.finalize.order.shipping_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.shippingAddress } %}
+    </div>
+    <div class="col-md-6">
+        <h4>{{ 'sylius.checkout.finalize.order.billing_address'|trans }}</h4>
+        {% include 'SyliusWebBundle:Common/Address:_show.html.twig' with { 'address': order.billingAddress } %}
     </div>
 </div>
 
@@ -50,7 +65,7 @@
                         {{ 'sylius.order.tax_total'|trans }}
                     </span>
                 </td>
-                <td>{{ order.taxTotal|sylius_money }}</td>
+                <td>{{ order.adjustmentsTotal(taxAdjustment)|sylius_money }}</td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -58,7 +73,7 @@
                         {{ 'sylius.order.shipping_total'|trans }}
                     </span>
                 </td>
-                <td>{{ order.shippingTotal|sylius_money }}</td>
+                <td>{{ order.adjustmentsTotal(shippingAdjustment)|sylius_money }}</td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -66,7 +81,7 @@
                         {{ 'sylius.order.promotion_total'|trans }}
                     </span>
                 </td>
-                <td>{{ order.promotionTotal|sylius_money }}</td>
+                <td>{{ order.adjustmentsTotal(promotionAdjustment)|sylius_money }}</td>
             </tr>
             <tr>
                 <th colspan="3">

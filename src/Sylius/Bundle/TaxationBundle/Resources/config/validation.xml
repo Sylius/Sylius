@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Bundle\TaxationBundle\Model\TaxCategory">
+    <class name="Sylius\Component\Taxation\Model\TaxCategory">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.tax_category.name.not_blank</option>
@@ -32,7 +32,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Bundle\TaxationBundle\Model\TaxRate">
+    <class name="Sylius\Component\Taxation\Model\TaxRate">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.tax_rate.name.not_blank</option>

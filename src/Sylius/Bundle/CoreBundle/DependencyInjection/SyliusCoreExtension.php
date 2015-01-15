@@ -11,34 +11,57 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\SyliusResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Core extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusCoreExtension extends SyliusResourceExtension implements PrependExtensionInterface
+class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * @var array
      */
     private $bundles = array(
         'sylius_addressing',
+        'sylius_api',
+        'sylius_attribute',
+        'sylius_contact',
+        'sylius_currency',
         'sylius_inventory',
-        'sylius_money',
-        'sylius_payments',
+        'sylius_locale',
+        'sylius_order',
+        'sylius_payment',
         'sylius_payum',
         'sylius_product',
-        'sylius_promotions',
-        'sylius_order',
+        'sylius_promotion',
+        'sylius_search',
+        'sylius_sequence',
         'sylius_settings',
         'sylius_shipping',
         'sylius_taxation',
-        'sylius_taxonomies',
+        'sylius_taxonomy',
+        'sylius_translation',
+        'sylius_variation',
+    );
+
+    protected $configFiles = array(
+        'services',
+        'form',
+        'templating',
+        'twig',
+    );
+
+    private $emails = array(
+        'order_comment',
+        'order_confirmation',
+        'customer_welcome',
     );
 
     /**
@@ -46,15 +69,21 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configDir = __DIR__.'/../Resources/config';
+        list($config, $loader) = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
 
-        list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS);
+        $loader->load(sprintf('mailer/mailer.%s', $this->configFormat));
+        $loader->load(sprintf('state_machine.%s', $this->configFormat));
 
-        $loader->load('mailer.xml');
+        $this->loadEmailsConfiguration($config['emails'], $container, $loader);
+        $this->loadCheckoutConfiguration($config['checkout'], $container);
 
-        if (!empty($config['order_confirmation'])) {
-            $this->loadOrderConfirmation($config['order_confirmation'], $container, $loader, $config['from_email']);
-        }
+        $definition = $container->findDefinition('sylius.context.currency');
+        $definition->replaceArgument(0, new Reference($config['currency_storage']));
     }
 
     /**
@@ -69,23 +98,54 @@ class SyliusCoreExtension extends SyliusResourceExtension implements PrependExte
                 $container->prependExtensionConfig($name, array('driver' => $config['driver']));
             }
         }
+
+        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = array();
+        foreach ($config['routing'] as $className => $routeConfig) {
+            $routeClasses[$className] = array(
+                'field'  => $routeConfig['field'],
+                'prefix' => $routeConfig['prefix'],
+            );
+            $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
+            $repositoryByClasses[$className] = $routeConfig['defaults']['repository'];
+            $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
+        }
+
+        $container->setParameter('sylius.route_classes', $routeClasses);
+        $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
+        $container->setParameter('sylius.repository_by_classes', $repositoryByClasses);
+        $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
+        $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
+        $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
     }
 
-    protected function loadOrderConfirmation(array $config, ContainerBuilder $container, XmlFileLoader $loader, array $fromEmail)
+    /**
+     * @param array            $config    The email section of the config for this bundle
+     * @param ContainerBuilder $container
+     * @param LoaderInterface  $loader
+     */
+    protected function loadEmailsConfiguration(array $config, ContainerBuilder $container, LoaderInterface $loader)
     {
-        $loader->load('order_confirmation_mailer.xml');
+        foreach ($this->emails as $emailType) {
+            $loader->load(sprintf('mailer/%s_mailer.%s', $emailType, $this->configFormat));
 
-        if ($config['enabled']) {
-            $loader->load('order_confirmation_listener.xml');
+            $fromEmail = isset($config[$emailType]['from_email']) ? $config[$emailType]['from_email'] : $config['from_email'];
+            $container->setParameter(sprintf('sylius.email.%s.from_email', $emailType), array($fromEmail['address'] => $fromEmail['sender_name']));
+            $container->setParameter(sprintf('sylius.email.%s.template', $emailType), $config[$emailType]['template']);
+
+            if ($config['enabled'] && $config[$emailType]['enabled']) {
+                $loader->load(sprintf('mailer/%s_listener.%s', $emailType, $this->configFormat));
+            }
         }
+    }
 
-        if (isset($config['from_email'])) {
-            // overwrite the global one
-            $fromEmail = $config['from_email'];
-            unset($config['from_email']);
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function loadCheckoutConfiguration(array $config, ContainerBuilder $container)
+    {
+        foreach ($config['steps'] as $name => $step) {
+            $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
         }
-
-        $container->setParameter('sylius.email.order_confirmation.from_email', array($fromEmail['address'] => $fromEmail['sender_name']));
-        $container->setParameter('sylius.email.order_confirmation.template', $config['template']);
     }
 }

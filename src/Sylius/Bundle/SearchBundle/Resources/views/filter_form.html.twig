@@ -1,0 +1,57 @@
+{#This form has no form type. I could use a form type but there is no data binding with a model#}
+{#and also I don't currently need any validation.#}
+
+{#For a future release I could move it to a form type if there is a good reason for it.#}
+
+{% if facets is defined and facets is not null %}
+    <form id="filter-form" action="{{ app.request.requestUri }}" method="{{ requestMethod }}">
+        {% for name, facet in facets %}
+            {% if facet is not empty %}
+            {{ facetTags[name]['display_name'] }}
+            <ul class="list-unstyled">
+                {% for element in facet %}
+                    {% if 'from' in element|keys %}
+                        <li>
+                            <label class="checkbox-inline">
+                            <input
+                                    {% if filters is iterable %}
+                                        {% for elem in filters %}
+                                            {% if [element['from'],element['to']]|join('|') in elem  %}
+                                                {{ 'checked' }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    id="{{ name ~ '-' ~ loop.index0 }}"
+                                    type="checkbox"
+                                    name="filters[][{{ name }}]"
+                                    value="{{ element['min'] is defined? element['min']:element['from'] }}|{{ element['max'] is defined? element['max']:element['to'] }}" />
+                            {{ element['min'] is defined? element['min']|sylius_price:element['from']|sylius_price }}
+                            to
+                            {{ element['max'] is defined? element['max']|sylius_price:element['to']|sylius_price }} ({{ element['doc_count'] }})
+                            </label>
+                        </li>
+                    {% else %}
+                        <li>
+                            <label class="checkbox-inline">
+                            <input
+                                    {% if filters is iterable %}
+                                        {% for elem in filters %}
+                                            {% if element['key'] in elem  %}
+                                                {{ 'checked' }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    type="checkbox" name="filters[][{{ name }}]" value="{{ element['key'] }}"> {{ (':' in element['key'])? element['key']|split(':')[1]:element['key'] }} ({{ element['doc_count'] }})
+                            </label>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+                {% endif %}
+        {% endfor %}
+        <input type="hidden" name="q" value="{{ searchTerm }}"/>
+        <input type="hidden" name="search_param" value="{{ searchParam }}"/>
+        <input type="submit" value="Filter" class="btn btn-info"/>
+    </form>
+    <br>
+{% endif %}

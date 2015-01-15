@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
-use Sylius\Bundle\ShippingBundle\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Bundle\ShippingBundle\Resolver\MethodsResolverInterface;
+use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -20,13 +21,12 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\ShippingBundle\Model\ShippingMethodInterface;
 
 /**
  * A select form which allows the user to select
  * a method that supports given shippables aware.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingMethodChoiceType extends AbstractType
 {
@@ -76,7 +76,7 @@ class ShippingMethodChoiceType extends AbstractType
                 'subject',
             ))
             ->setAllowedTypes(array(
-                'subject'  => array('Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface'),
+                'subject'  => array('Sylius\Component\Shipping\Model\ShippingSubjectInterface'),
                 'criteria' => array('array')
             ))
         ;

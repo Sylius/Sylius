@@ -17,10 +17,10 @@
       xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                           http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Bundle\InventoryBundle\Model\InventoryUnit">
+    <mapped-superclass name="Sylius\Component\Inventory\Model\InventoryUnit">
         <field name="inventoryState" fieldName="inventoryState" type="string" />
 
-        <reference-one fieldName="stockable" target-document="Sylius\Bundle\InventoryBundle\Model\StockableInterface" />
+        <reference-one fieldName="stockable" target-document="Sylius\Component\Inventory\Model\StockableInterface" />
 
         <field fieldName="createdAt" name="createdAt" type="date">
             <gedmo:timestampable on="create"/>

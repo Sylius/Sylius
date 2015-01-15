@@ -1,0 +1,36 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    address:
+      city: Település
+      company: Cég
+      country: Ország
+      first_name: Keresztnév
+      last_name: Vezetéknév
+      postcode: Irányítószám
+      street: Utca
+      province: Tartomány/állam
+    country:
+      iso_name: ISO-név
+      name: Név
+      provinces: Tartományok
+      select: Válassza ki
+    province:
+      name: Név
+      select: Válasszon
+    zone:
+      members: Tagok
+      name: Név
+      type: Típus
+      types:
+        country: Ország
+        province: Tartomány/állam
+        zone: Zóna
+    zone_member_country:
+      country: Ország
+    zone_member_province:
+      province: Tartomány/állam
+    zone_member_zone:
+      zone: Zóna

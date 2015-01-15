@@ -12,9 +12,8 @@
 namespace Sylius\Bundle\ProductBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Product\Builder\PrototypeBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Tests\Controller;
-use Sylius\Bundle\ProductBundle\Builder\PrototypeBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -36,7 +35,7 @@ class PrototypeController extends ResourceController
      */
     public function buildAction(Request $request, $id)
     {
-        $prototype = $this->findOr404(array('id' => $id));
+        $prototype = $this->findOr404($request, array('id' => $id));
         $productController = $this->getProductController();
 
         $product = $productController->createNew();
@@ -48,21 +47,20 @@ class PrototypeController extends ResourceController
 
         $form = $productController->getForm($product);
 
-        if ($request->isMethod('POST') && $form->bind($request)->isValid()) {
-            $manager = $productController->getManager();
-
+        if ($form->handleRequest($request)->isValid()) {
+            $manager = $this->get('doctrine')->getManager();
             $manager->persist($product);
             $manager->flush();
 
-            $productController->setFlash('success', '%resource% has been successfully created.');
+            $this->flashHelper->setFlash('success', 'Product has been successfully created.');
 
-            return $productController->redirectTo($product);
+            return $this->redirectHandler->redirectTo($product);
         }
 
-        return $productController->renderResponse('build.html', array(
-            'prototype' => $prototype,
-            'product'   => $product,
-            'form'      => $form->createView()
+        return $productController->render($this->config->getTemplate('build.html'), array(
+            'product_prototype' => $prototype,
+            'product'           => $product,
+            'form'              => $form->createView()
         ));
     }
 
@@ -83,6 +81,6 @@ class PrototypeController extends ResourceController
      */
     protected function getBuilder()
     {
-        return $this->get('sylius.builder.prototype');
+        return $this->get('sylius.builder.product_prototype');
     }
 }

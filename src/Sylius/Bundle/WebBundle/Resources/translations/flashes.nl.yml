@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: Het adres is ingesteld als uw standaard factuuradres.
+        shipping:
+          success: Het adres is ingesteld als uw standaard bezorgadres.

@@ -11,18 +11,21 @@
         <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
         <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
 
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
         {# stylesheets... #}
         {% block stylesheets %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" type="text/css" />
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" type="text/css" />
             {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
-                '@SyliusWebBundle/Resources/assets/css/frontend.css'
-                '@SyliusWebBundle/Resources/assets/css/blueimp-gallery.css'
+                'bundles/syliusweb/css/frontend.css'
+                'bundles/syliusweb/css/blueimp-gallery.css'
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
+            {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+                {% include "CmfCreateBundle::includecssfiles.html.twig" %}
+            {% endif %}
         {% endblock %}
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -31,10 +34,25 @@
         <![endif]-->
     </head>
     <body>
-        <div class="container">
+        {# javascripts... #}
+        {% block javascripts %}
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+            {% javascripts output='assets/compiled/frontend.js'
+                'bundles/syliusweb/js/jquery.blueimp-gallery.min.js'
+                'bundles/syliusweb/js/confirm-modal.js'
+                'bundles/syliusweb/js/frontend.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    <div class="container">
         {% block header %}
             <div class="masthead pull-right">
                 {{ knp_menu_render('sylius.frontend.main', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
+            </div>
+            <div class="locale-menu masthead pull-right">
+                {{ knp_menu_render('sylius.frontend.locale', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>
             <div class="currency-menu masthead pull-right">
                 {{ knp_menu_render('sylius.frontend.currency', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
@@ -43,9 +61,9 @@
         {% endblock %}
 
         {% block flashes %}
-            {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'fos_user_success'] %}
-                {% for flash in flashes %}
-                    <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name }}">
+            {% for type in ['success', 'error', 'fos_user_success', 'notice'] %}
+                {% for flash in app.session.flashbag.get(type) %}
+                    <div class="alert alert-{{ type == 'fos_user_success' ? 'success' : type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
                         <a class="close" data-dismiss="alert" href="#">×</a>
                         {{ flash|trans }}
                     </div>
@@ -55,18 +73,48 @@
 
         {% block main %}
         <hr>
+        {% block slideshow_full %}{% endblock %}
         <div class="row">
             <div class="col-md-3" id="sidebar">
                 {% block sidebar %}
+                <div class="pull-left" style="margin-bottom: 10px;">
+                    {% render controller('sylius.controller.search:formAction', {'request':app.request}) %}
+                </div>
                 <h4>{{ 'sylius.shop_by'|trans }}</h4><br>
+                {% include 'SyliusSearchBundle::filter_form.html.twig' %}<br>
+
                 {{ knp_menu_render('sylius.frontend.taxonomies', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
+                {{ sonata_block_render({'name': '/cms/blocks/contact'}) }}
+                {{ sonata_block_render({'name': '/cms/blocks/banner'}) }}
+                {% block slideshow_sidebar %}{% endblock %}
+
+                {% set links = cmf_children(cmf_find('/cms/pages')) %}
+                {% if links is not empty %}
+                <h2>{{ 'sylius.frontend.menu.sidebar.links'|trans }}</h2>
+                <ul>
+                  {% for link in links %}
+                    <li>
+                      <a href="{{ path(link) }}">{{ link.title|striptags }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
                 {% endblock %}
             </div>
             <div class="col-md-9">
+                {{ sonata_block_render({'name': '/cms/blocks/slideshow-test'}) }}
                 {% block content %}
                 {% endblock %}
             </div>
+        </div>
+        <hr>
+        <div class="row">
+            {% for i in 1..3 %}
+                <div class="col-md-4">
+                    {{ sonata_block_render({'name': '/cms/blocks/block-' ~ i}) }}
+                </div>
+            {% endfor %}
         </div>
         <hr>
         {% endblock %}
@@ -89,17 +137,11 @@
         {% endblock %}
         </div>
 
-        {# javascripts... #}
-        {% block javascripts %}
-            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
-        {% javascripts output='assets/compiled/frontend.js'
-            '@SyliusWebBundle/Resources/assets/js/jquery.blueimp-gallery.min.js'
-            '@SyliusWebBundle/Resources/assets/js/confirm-modal.js'
-            '@SyliusWebBundle/Resources/assets/js/frontend.js'
-        %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-        {% endblock %}
+        {% if is_granted('ROLE_SYLIUS_ADMIN') %}
+            {% render(controller(
+                "cmf_create.jsloader.controller:includeJSFilesAction",
+                {'_locale': app.request.locale, 'editor': 'hallo'}
+            )) %}
+        {% endif %}
     </body>
 </html>

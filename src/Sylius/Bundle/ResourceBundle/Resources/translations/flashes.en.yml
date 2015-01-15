@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        create: %resource% has been successfully created.
+        update: %resource% has been successfully updated.
+        delete: %resource% has been successfully deleted.
+        move: %resource% has been successfully moved.
+        generate: %resource%s have been successfully generated.
+        revert: %resource% has been successfully reverted.

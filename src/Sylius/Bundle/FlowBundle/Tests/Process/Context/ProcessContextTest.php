@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Context;
 
-use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContext;
+use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 
 /**
@@ -218,12 +218,12 @@ class ProcessContextTest extends \PHPUnit_Framework_TestCase
         $process = $this->getProcess($steps);
         $process->expects($this->once())
             ->method('getValidator')
-            ->will($this->returnValue(new ProcessValidator(function () { return false; })));
+            ->will($this->returnValue(new ProcessValidator('An error occurred.', null, function () { return false; })));
 
         $context = new ProcessContext($this->getMock('Sylius\Bundle\FlowBundle\Storage\StorageInterface'));
         $context->initialize($process, $steps[0]);
 
-        $this->assertTrue($context->isValid() !== true);
+        $this->assertFalse($context->isValid());
     }
 
     /**

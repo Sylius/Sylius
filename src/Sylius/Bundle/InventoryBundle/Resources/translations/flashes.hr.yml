@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backorder: Jedinica zalihe je naručena.
+    sell: Jedinica zalihe ispunjena.
+    return: Jedinica zalihe je vraćena.
+    transition_fail: Akcija nije mogla biti dovršena s obzirom na trenutno stanje odabrane jedinice

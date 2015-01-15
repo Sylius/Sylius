@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  inventory_unit:
+    backorder: Адзінка інвентара вызвалена.
+    sell: Адзінка інвентара запоўнена.
+    return: Адзінка інвентара вернута.
+    transition_fail: Гэта дзеянне нельга ажыццявіць з бягучым станам адзінкі

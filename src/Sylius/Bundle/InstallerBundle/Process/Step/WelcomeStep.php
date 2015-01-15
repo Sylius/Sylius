@@ -16,11 +16,17 @@ use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 
 class WelcomeStep extends ControllerStep
 {
+    /**
+     * {@inheritdoc}
+     */
     public function displayAction(ProcessContextInterface $context)
     {
         return $this->render('SyliusInstallerBundle:Process/Step:welcome.html.twig');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function forwardAction(ProcessContextInterface $context)
     {
         return $this->complete();

@@ -29,6 +29,13 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->arrayNode('template')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('layout')->defaultValue('SyliusPayumBundle::layout.html.twig')->end()
+                        ->scalarNode('obtain_credit_card')->defaultValue('SyliusPayumBundle:Action:obtainCreditCard.html.twig')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
@@ -52,7 +59,8 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('payment_security_token')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\\Bundle\\PayumBundle\\Model\\PaymentSecurityToken')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                             ->end()
                         ->end()
                     ->end()

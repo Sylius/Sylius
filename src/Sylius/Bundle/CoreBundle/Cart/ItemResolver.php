@@ -11,105 +11,113 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
-use Sylius\Bundle\CartBundle\Model\CartItemInterface;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolverInterface;
-use Sylius\Bundle\CartBundle\Resolver\ItemResolvingException;
-use Sylius\Bundle\CoreBundle\Model\OrderItem;
-use Sylius\Bundle\CoreBundle\Model\Product;
-use Sylius\Bundle\InventoryBundle\Checker\AvailabilityCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Model\RepositoryInterface;
-use Sylius\Bundle\VariableProductBundle\Model\VariantInterface;
-use Symfony\Component\Form\FormFactory;
+use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Resolver\ItemResolverInterface;
+use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Sylius\Bundle\CoreBundle\Checker\RestrictedZoneCheckerInterface;
 
 /**
  * Item resolver for cart bundle.
  * Returns proper item objects for cart add and remove actions.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemResolver implements ItemResolverInterface
 {
     /**
-     * Product manager.
+     * Cart provider.
+     *
+     * @var CartProviderInterface
+     */
+    protected $cartProvider;
+
+    /**
+     * Prica calculator.
+     *
+     * @var DelegatingCalculatorInterface
+     */
+    protected $priceCalculator;
+
+    /**
+     * Product repository.
      *
      * @var RepositoryInterface
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * Form factory.
      *
-     * @var FormFactory
+     * @var FormFactoryInterface
      */
-    private $formFactory;
+    protected $formFactory;
 
     /**
      * Stock availability checker.
      *
      * @var AvailabilityCheckerInterface
      */
-    private $availabilityChecker;
+    protected $availabilityChecker;
 
     /**
      * Restricted zone checker.
      *
      * @var RestrictedZoneCheckerInterface
      */
-    private $restrictedZoneChecker;
+    protected $restrictedZoneChecker;
 
     /**
      * Constructor.
      *
+     * @param CartProviderInterface          $cartProvider
      * @param RepositoryInterface            $productRepository
-     * @param FormFactory                    $formFactory
+     * @param FormFactoryInterface           $formFactory
      * @param AvailabilityCheckerInterface   $availabilityChecker
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
+     * @param DelegatingCalculatorInterface  $priceCalculator
      */
     public function __construct(
+        CartProviderInterface          $cartProvider,
         RepositoryInterface            $productRepository,
-        FormFactory                    $formFactory,
+        FormFactoryInterface           $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
-        RestrictedZoneCheckerInterface $restrictedZoneChecker
+        RestrictedZoneCheckerInterface $restrictedZoneChecker,
+        DelegatingCalculatorInterface  $priceCalculator
     )
     {
+        $this->cartProvider = $cartProvider;
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
         $this->availabilityChecker = $availabilityChecker;
         $this->restrictedZoneChecker = $restrictedZoneChecker;
+        $this->priceCalculator = $priceCalculator;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * Here we create the item that is going to be added to cart, basing on the current request.
      */
-    public function resolve(CartItemInterface $item, Request $request)
+    public function resolve(CartItemInterface $item, $data)
     {
-        if (!$request->isMethod('POST')) {
-            throw new ItemResolvingException('Wrong request method');
-        }
+        $id = $this->resolveItemIdentifier($data);
 
-        /*
-         * We're getting here product id via query but you can easily override route
-         * pattern and use attributes, which are available through request object.
-         */
-        if (!$id = $request->get('id')) {
-            throw new ItemResolvingException('Error while trying to add item to cart');
-        }
-
-        /* @var $product Product */
         if (!$product = $this->productRepository->find($id)) {
-            throw new ItemResolvingException('Requested product was not found');
+            throw new ItemResolvingException('Requested product was not found.');
+        }
+
+        if ($this->restrictedZoneChecker->isRestricted($product)) {
+            throw new ItemResolvingException('Selected item is not available in your country.');
         }
 
         // We use forms to easily set the quantity and pick variant but you can do here whatever is required to create the item.
-        $form = $this->formFactory->create('sylius_cart_item', null, array('product' => $product));
-
-        $form->bind($request);
-        /* @var $item OrderItem */
-        $item = $form->getData();
+        $form = $this->formFactory->create('sylius_cart_item', $item, array('product' => $product));
+        $form->submit($data);
 
         // If our product has no variants, we simply set the master variant of it.
         if (!$product->hasVariants()) {
@@ -123,28 +131,58 @@ class ItemResolver implements ItemResolverInterface
             throw new ItemResolvingException('Submitted form is invalid.');
         }
 
-        if (!$this->isStockAvailable($variant)) {
+        $cart = $this->cartProvider->getCart();
+        $quantity = $item->getQuantity();
+
+        $context = array('quantity' => $quantity);
+
+        if (null !== $user = $cart->getUser()) {
+            $context['groups'] = $user->getGroups()->toArray();
+        }
+
+        $item->setUnitPrice($this->priceCalculator->calculate($variant, $context));
+
+        foreach ($cart->getItems() as $cartItem) {
+            if ($cartItem->equals($item)) {
+                $quantity += $cartItem->getQuantity();
+                break;
+            }
+        }
+
+        if (!$this->availabilityChecker->isStockSufficient($variant, $quantity)) {
             throw new ItemResolvingException('Selected item is out of stock.');
         }
-
-        if ($this->restrictedZoneChecker->isRestricted($product)) {
-            throw new ItemResolvingException('Selected item is not available in your country.');
-        }
-
-        $item->setUnitPrice($variant->getPrice());
 
         return $item;
     }
 
     /**
-     * Check if variant is available in stock.
+     * Here we resolve the item identifier that is going to be added into the cart.
      *
-     * @param VariantInterface $variant
+     * @param mixed $request
      *
-     * @return Boolean
+     * @return string|integer
+     *
+     * @throws ItemResolvingException
      */
-    protected function isStockAvailable(VariantInterface $variant)
+    public function resolveItemIdentifier($request)
     {
-        return $this->availabilityChecker->isStockAvailable($variant);
+        if (!$request instanceof Request) {
+            throw new ItemResolvingException('Invalid request data.');
+        }
+
+        if (!$request->isMethod('POST') && !$request->isMethod('PUT')) {
+            throw new ItemResolvingException('Invalid request method.');
+        }
+
+        /*
+         * We're getting here product id via query but you can easily override route
+         * pattern and use attributes, which are available through request object.
+         */
+        if (!$id = $request->get('id')) {
+            throw new ItemResolvingException('Error while trying to add item to cart.');
+        }
+
+        return $id;
     }
 }

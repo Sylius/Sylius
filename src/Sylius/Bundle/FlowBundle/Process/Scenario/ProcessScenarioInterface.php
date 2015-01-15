@@ -19,7 +19,7 @@ use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
  * This interface should be implemented by all scenario you define.
  * For example, that can be a checkout or installation process scenario.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProcessScenarioInterface
 {

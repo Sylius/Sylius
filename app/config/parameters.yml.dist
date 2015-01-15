@@ -3,11 +3,13 @@ parameters:
     sylius.database.host:             127.0.0.1
     sylius.database.port:             ~
     sylius.database.name:             sylius
+    sylius.database.path:             ~
     sylius.database.user:             root
     sylius.database.password:         ~
 
     sylius.mailer.transport:          smtp
     sylius.mailer.host:               127.0.0.1
+    sylius.mailer.port:               ~
     sylius.mailer.user:               ~
     sylius.mailer.password:           ~
 
@@ -16,13 +18,17 @@ parameters:
 
     sylius.currency:                  EUR
 
-    sylius.cache:             file_system
+    sylius.currency_importer.open_exchange_rates: EDITME
+
+    sylius.cache:
+        type: file_system
 
     paypal.express_checkout.username: EDITME
     paypal.express_checkout.password: EDITME
     paypal.express_checkout.signature: EDITME
     paypal.express_checkout.sandbox: true
-
+    
+    stripe.publishable_key: EDITME
     stripe.secret_key: EDITME
     stripe.test_mode: true
 
@@ -36,3 +42,25 @@ parameters:
     sylius.oauth.facebook.clientsecret: <facebook_client_secret>
     sylius.oauth.google.clientid:       <google_client_id>
     sylius.oauth.google.clientsecret:   <google_client_secret>
+
+    sylius.inventory.backorders_enabled: true
+    sylius.inventory.tracking_enabled: true
+    sylius.inventory.holding.duration: 15 minutes
+
+    sylius.promotion.item_based: false
+
+    sylius.order.allow_guest_order: false
+
+    sylius.order.pending.duration: 3 hours
+
+    sylius.uploader.filesystem: sylius_image
+
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr_workspace: default
+    phpcr_user: admin
+    phpcr_pass: admin

@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\FlowBundle\Tests\Process\Coordinator;
 
-use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
-use Symfony\Component\HttpFoundation\Response;
-
 use Sylius\Bundle\FlowBundle\Process\Coordinator\Coordinator;
 use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
+use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Coordinator test.
@@ -86,6 +85,10 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
             ->method('getDisplayRoute')
             ->will($this->returnValue('my_route'));
 
+        $process->expects($this->any())
+            ->method('getDisplayRouteParams')
+            ->will($this->returnValue(array()));
+
         $processBuilder = $this->getProcessBuilder($process);
 
         $processContext = $this->getProcessContext();
@@ -106,7 +109,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException
      * @expectedExceptionMessage Process scenario with alias "scenarioOne" is not registered
      */
     public function shouldNotStartWhenScenarioIsNotRegistered()
@@ -127,7 +130,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext = $this->getProcessContext();
         $processContext->expects($this->any())
             ->method('isValid')
-            ->will($this->returnValue(new ProcessValidator(function () { return false; })));
+            ->will($this->returnValue(false));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -159,7 +162,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext = $this->getProcessContext();
         $processContext->expects($this->any())
             ->method('isValid')
-            ->will($this->returnValue(new ProcessValidator(function () { return false; })));
+            ->will($this->returnValue(false));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -168,7 +171,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException
      * @expectedExceptionMessage Process scenario with alias "scenarioOne" is not registered
      */
     public function shouldNotShowDisplayActionWhenScenarioIsNotRegistered()
@@ -178,7 +181,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException
      * @expectedExceptionMessage Process scenario with alias "scenarioOne" is not registered
      */
     public function shouldNotShowForwardActionWhenScenarioIsNotRegistered()
@@ -199,7 +202,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $processContext = $this->getProcessContext();
         $processContext->expects($this->any())
             ->method('isValid')
-            ->will($this->returnValue(new ProcessValidator(function () { return false; })));
+            ->will($this->returnValue(false));
 
         $this->coordinator = $this->createCoordinator($router, $processBuilder, $processContext);
         $this->coordinator->registerScenario('scenarioOne', $this->getMock('Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface'));
@@ -274,7 +277,7 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException Sylius\Bundle\FlowBundle\Process\Coordinator\InvalidArgumentException
      * @expectedExceptionMessage Process scenario with alias "scenarioOne" is already registered
      */
     public function shouldNotRegisterScenarioAgain()
@@ -432,7 +435,12 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
 
     private function getProcessContext()
     {
-        return $this->getMock('Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface');
+        $processContext = $this->getMock('Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface');
+        $processContext->expects($this->any())
+            ->method('getProcess')
+            ->will($this->returnValue($this->getProcess()));
+
+        return $processContext;
     }
 
     private function getProcess()
@@ -462,6 +470,12 @@ class CoordinatorTest extends \PHPUnit_Framework_TestCase
         $process->expects($this->any())
             ->method('getRedirect')
             ->will($this->returnValue('http://localhost/processRedirect'));
+        $process->expects($this->any())
+            ->method('getValidator')
+            ->will($this->returnValue(new ProcessValidator('An error occurred.', null, function () { return false; })));
+        $process->expects($this->any())
+            ->method('getRedirectParams')
+            ->will($this->returnValue(array()));
 
         return $process;
     }

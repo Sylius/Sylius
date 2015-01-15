@@ -11,8 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
@@ -20,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 /**
  * Base class for checkout steps.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class CheckoutStep extends ControllerStep
 {
@@ -37,7 +40,7 @@ abstract class CheckoutStep extends ControllerStep
     /**
      * Get current cart instance.
      *
-     * @return CartInterface
+     * @return OrderInterface
      */
     protected function getCurrentCart()
     {

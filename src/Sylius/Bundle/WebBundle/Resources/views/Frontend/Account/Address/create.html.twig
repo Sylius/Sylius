@@ -4,7 +4,7 @@
 {% block javascripts %}
     {{ parent() }}
     {% javascripts output='assets/compiled/backend_province.js'
-    '@SyliusWebBundle/Resources/assets/js/province-choices.js' %}
+    'bundles/syliusweb/js/province-choices.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
@@ -14,7 +14,7 @@
 
     <div class="row">
         <form action="{{ path('sylius_account_address_create') }}" method="post" class="form-horizontal" novalidate>
-            {% include 'SyliusWebBundle:Frontend/Form:_address.html.twig' %}
+            {% include 'SyliusWebBundle:Frontend/Address:_form.html.twig' %}
             {{ create() }}
         </form>
     </div>

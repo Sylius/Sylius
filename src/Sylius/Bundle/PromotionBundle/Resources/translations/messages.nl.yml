@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    action:
+      fixed_discount_configuration:
+        amount: Hoeveelheid
+      percentage_discount_configuration:
+        percentage: Percentage
+      shipping_discount_configuration:
+        percentage: Percentage
+      type: Type
+    rule:
+      taxonomy_configuration:
+        taxons: Taxons
+        exclude: Uitsluiten
+      item_count_configuration:
+        count: Aantal
+        equal: Gelijk
+      item_total_configuration:
+        amount: Hoeveelheid
+        equal: Gelijk
+      nth_order_configuration:
+        nth: Nde
+      user_loyality_configuration:
+        time: Tijd
+        unit:
+          days: Dagen
+          weeks: Weken
+          months: Maanden
+          years: Jaren
+          0: Eenheid
+        after: Gebruiker aangemaakt na deze periode
+      shipping_country_configuration:
+        country: Land
+      type: Type
+    coupon:
+      code: Code
+      usage_limit: Gebruikslimiet
+    coupon_generate_instruction:
+      amount: Hoeveelheid
+      usage_limit: Gebruikslimiet
+    promotion:
+      actions: Acties
+      coupon_based: Coupon gebaseerd
+      description: Omschrijving
+      ends_at: Eindigt op
+      name: Naam
+      rules: Regels
+      starts_at: Start op
+      usage_limit: Gebruikslimiet

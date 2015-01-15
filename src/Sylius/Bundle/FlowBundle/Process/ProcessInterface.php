@@ -17,7 +17,7 @@ use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 /**
  * Interface for setup object.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProcessInterface
 {
@@ -39,21 +39,21 @@ interface ProcessInterface
      * Get a collection of steps.
      * Keys will be step names.
      *
-     * @return array
+     * @return StepInterface[]
      */
     public function getSteps();
 
     /**
      * Set steps.
      *
-     * @param array $steps
+     * @param StepInterface[] $steps
      */
     public function setSteps(array $steps);
 
     /**
      * Get steps in correct order.
      *
-     * @return array
+     * @return StepInterface[]
      */
     public function getOrderedSteps();
 
@@ -91,28 +91,28 @@ interface ProcessInterface
      *
      * @param string $name
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasStep($name);
 
     /**
      * Count all steps.
      *
-     * @return integer
+     * @return int
      */
     public function countSteps();
 
     /**
      * Get validator.
      *
-     * @return \Closure
+     * @return ProcessValidatorInterface
      */
     public function getValidator();
 
     /**
      * Set validator.
      *
-     * @param \Closure $validator
+     * @param ProcessValidatorInterface $validator
      */
     public function setValidator(ProcessValidatorInterface $validator);
 
@@ -131,6 +131,20 @@ interface ProcessInterface
     public function setRedirect($redirect);
 
     /**
+     * Get redirection route params after complete.
+     *
+     * @return array
+     */
+    public function getRedirectParams();
+
+    /**
+     * Set redirection route params after complete.
+     *
+     * @param array $params
+     */
+    public function setRedirectParams(array $params);
+
+    /**
      * Get display route.
      *
      * @return string
@@ -143,6 +157,20 @@ interface ProcessInterface
      * @param string $route
      */
     public function setDisplayRoute($route);
+
+    /**
+     * Get additional display route parameters.
+     *
+     * @return array
+     */
+    public function getDisplayRouteParams();
+
+    /**
+     * Set additional display route params.
+     *
+     * @param array $params
+     */
+    public function setDisplayRouteParams(array $params);
 
     /**
      * Get forward route.
@@ -159,16 +187,30 @@ interface ProcessInterface
     public function setForwardRoute($route);
 
     /**
-     * Get step by index/order
+     * Get additional forward route parameters.
      *
-     * @param string $index
+     * @return array
+     */
+    public function getForwardRouteParams();
+
+    /**
+     * Set additional forward route params.
+     *
+     * @param array $params
+     */
+    public function setForwardRouteParams(array $params);
+
+    /**
+     * Get step by index/order.
+     *
+     * @param int $index
      *
      * @return StepInterface
      */
     public function getStepByIndex($index);
 
     /**
-     * Get step by name
+     * Get step by name.
      *
      * @param string $index
      *

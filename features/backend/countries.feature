@@ -5,7 +5,11 @@ Feature: Countries and provinces
     I want to be able to manage countries and their provinces
 
     Background:
-        Given I am logged in as administrator
+        Given there is default currency configured
+        And there are following locales configured:
+            | code | enabled |
+            | en   | yes     |
+          And I am logged in as administrator
           And there are following countries:
             | name    | provinces                       |
             | France  | Lyon, Toulouse, Rennes, Nancy   |
@@ -68,11 +72,13 @@ Feature: Countries and provinces
          When I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
           And I click "Add province"
-          And I fill in province name with "Łódź"
+          And I click "Add province"
+          And I fill in the 1st province with "Lubusz"
+          And I fill in the 2nd province with "Łódź"
           And I press "Create"
-         Then I should be on the page of country "Poland"
-          And I should see "Country has been successfully created."
+         Then I should see "Country has been successfully created."
           And "Łódź" should appear on the page
+          And "Lubusz" should appear on the page
 
     Scenario: Created countries appear in the list
         Given I created country "Poland"
@@ -99,17 +105,19 @@ Feature: Countries and provinces
          Then I should be on the page of country "Russia"
           And "Russia" should appear on the page
 
-    Scenario: Deleting country via the list button
-        Given I am on the country index page
-         When I press "delete" near "China"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the country index page
-          And I should see "Country has been successfully deleted."
-          But I should not see country with name "China" in the list
+    @javascript
+    Scenario: Updating the country and removing province
+      Given I am editing country "Ukraine"
+       When I fill in "Name" with "Russia"
+        And I fill in "ISO name" with "RU"
+        And I remove all the provinces
+        And I press "Save changes"
+       Then I should see "Country has been successfully updated."
+        And "Russia" should appear on the page
+        But I should not see "Provinces"
 
     @javascript
-    Scenario: Deleting country via the list button with js modal
+    Scenario: Deleting country via the list
         Given I am on the country index page
          When I press "delete" near "China"
           And I click "delete" from the confirmation modal
@@ -117,37 +125,13 @@ Feature: Countries and provinces
           And I should see "Country has been successfully deleted."
           But I should not see country with name "China" in the list
 
+    @javascript
     Scenario: Deleting country
         Given I am on the page of country "China"
          When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the country index page
-          And I should see "Country has been successfully deleted."
-
-    @javascript
-    Scenario: Deleting country with js modal
-        Given I am on the page of country "China"
-         When I press "delete"
           And I click "delete" from the confirmation modal
          Then I should be on the country index page
           And I should see "Country has been successfully deleted."
-
-    Scenario: Deleted country disappears from the list
-        Given I am on the page of country "France"
-         When I press "delete"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should be on the country index page
-          And I should not see country with name "France" in that list
-
-    @javascript
-    Scenario: Deleted country disappears from the list with js modal
-        Given I am on the page of country "France"
-         When I press "delete"
-          And I click "delete" from the confirmation modal
-         Then I should be on the country index page
-          And I should not see country with name "France" in that list
 
     Scenario: Accessing country details via the list
         Given I am on the country index page
@@ -160,16 +144,8 @@ Feature: Countries and provinces
          Then I should be on the page of country "France"
           And I should see 4 provinces in the list
 
-    Scenario: Deleting province
-        Given I am on the page of country "France"
-         When I press "delete" near "Toulouse"
-         Then I should see "Do you want to delete this item"
-         When I press "delete"
-         Then I should still be on the page of country "France"
-          And "Toulouse" should not appear on the page
-
     @javascript
-    Scenario: Deleting province with js modal
+    Scenario: Deleting province
         Given I am on the page of country "France"
          When I press "delete" near "Toulouse"
           And I click "delete" from the confirmation modal

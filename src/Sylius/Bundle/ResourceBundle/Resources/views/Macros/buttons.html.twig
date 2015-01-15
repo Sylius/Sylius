@@ -4,6 +4,12 @@
 </a>
 {% endmacro %}
 
+{% macro generic(url, message, icon) %}
+<a href="{{ url }}" class="btn btn-default">
+    {% if icon is not empty %}<i class="glyphicon glyphicon-{{ icon }}"></i>{% endif %}<span>{{ message }}</span>
+</a>
+{% endmacro %}
+
 {% macro create(url, message) %}
 <a href="{{ url }}" class="btn btn-primary">
     <i class="glyphicon glyphicon-plus-sign"></i><span>{{ message is empty ? 'sylius.create'|trans : message }}</span>
@@ -35,4 +41,22 @@
 <a href="{{ url }}" class="btn btn-success">
     <i class="glyphicon glyphicon-folder-open"></i><span>{{ message is empty ? 'sylius.manage'|trans : message }}</span>
 </a>
+{% endmacro %}
+
+{% macro move(url, direction, first=false, last=false, message='') %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    <button title="{{ message is empty ? ('sylius.move_'~direction)|trans : message }}" class="btn btn-default {% if ('up' == direction and first) or ('down' == direction and last) %}disabled{% endif %}" type="submit">
+        <i class="glyphicon glyphicon-arrow-{{ direction }}"></i>
+    </button>
+</form>
+{% endmacro %}
+
+{% macro patch(url, message, icon, button) %}
+<form action="{{ url }}" method="post" class="delete-action-form" novalidate>
+    <input type="hidden" name="_method" value="PATCH">
+    <button class="btn btn-{{ button|default('success') }}" type="submit">
+        <i class="glyphicon glyphicon-{{ icon|default('transfer') }}"></i> <span>{{ message }}</span>
+    </button>
+</form>
 {% endmacro %}

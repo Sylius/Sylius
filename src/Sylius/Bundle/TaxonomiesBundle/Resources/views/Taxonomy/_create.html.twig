@@ -1,9 +1,0 @@
-{% import 'SyliusResourceBundle:Macros:actions.html.twig' as actions %}
-
-<h1>New taxonomy <small>Use this form to create new taxonomy</small></h1>
-<hr />
-
-<form action="{{ path('sylius_taxonomy_create') }}" method="post" class="form-horizontal">
-    {% include 'SyliusTaxonomiesBundle:Taxonomy:_form.html.twig' %}
-    {{ actions.create(path('sylius_taxonomy_index')) }}
-</form>

@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Settings builder.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SettingsBuilder extends OptionsResolver implements SettingsBuilderInterface
 {
@@ -26,17 +26,7 @@ class SettingsBuilder extends OptionsResolver implements SettingsBuilderInterfac
      *
      * @var ParameterTransformerInterface[]
      */
-    protected $transformers;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->transformers = array();
-    }
+    protected $transformers = array();
 
     /**
      * {@inheritdoc}

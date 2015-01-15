@@ -1,0 +1,19 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+    {{ parent() }}
+
+    {% block payum_body "" %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% block payum_stylesheets "" %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% block payum_javascripts "" %}
+{% endblock %}

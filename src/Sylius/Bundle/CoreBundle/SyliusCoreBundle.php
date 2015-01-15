@@ -11,40 +11,59 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
+use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sylius core bundle.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusCoreBundle extends Bundle
+class SyliusCoreBundle extends AbstractTranslationBundle
 {
+    /**
+     * {@inheritdoc}
+     */
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
-        $interfaces = array(
-            'Sylius\Bundle\CoreBundle\Model\UserInterface'         => 'sylius.model.user.class',
-            'Sylius\Bundle\CoreBundle\Model\GroupInterface'        => 'sylius.model.group.class',
-            'Sylius\Bundle\CoreBundle\Model\VariantImageInterface' => 'sylius.model.variant_image.class',
+        parent::build($container);
+
+        $container->addCompilerPass(new DoctrineSluggablePass());
+        $container->addCompilerPass(new RoutingRepositoryPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return array(
+            'Sylius\Component\Core\Model\UserInterface'                => 'sylius.model.user.class',
+            'Sylius\Component\Core\Model\UserOAuthInterface'           => 'sylius.model.user_oauth.class',
+            'Sylius\Component\Core\Model\GroupInterface'               => 'sylius.model.group.class',
+            'Sylius\Component\Core\Model\ProductVariantImageInterface' => 'sylius.model.product_variant_image.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_core', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Sylius\Bundle\CoreBundle\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_core.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Core\Model';
     }
 }

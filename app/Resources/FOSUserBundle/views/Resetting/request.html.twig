@@ -1,0 +1,10 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div class="page-header">
+        {{ 'resetting.request.header'|trans|raw }}
+    </div>
+    {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+{% endblock content %}

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_tax_category_index:
-    pattern: /
+    path: /
     defaults:
         _controller: sylius.controller.tax_category:indexAction
         _sylius:
@@ -13,28 +13,28 @@ sylius_tax_category_index:
         _method: GET
 
 sylius_tax_category_create:
-    pattern: /create
+    path: /create
     defaults:
         _controller: sylius.controller.tax_category:createAction
     requirements:
         _method: GET|POST
 
 sylius_tax_category_update:
-    pattern: /{id}/update
+    path: /{id}/update
     defaults:
         _controller: sylius.controller.tax_category:updateAction
     requirements:
         _method: GET|POST|PUT
 
 sylius_tax_category_delete:
-    pattern: /{id}
+    path: /{id}
     defaults:
         _controller: sylius.controller.tax_category:deleteAction
     requirements:
         _method: DELETE
 
 sylius_tax_category_show:
-    pattern: /{id}
+    path: /{id}
     defaults:
         _controller: sylius.controller.tax_category:showAction
     requirements:

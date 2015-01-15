@@ -17,18 +17,26 @@ Feature: Checkout shipping
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
             | USA          | country | USA                     |
+          And there are following countries:
+            | name           |
+            | USA            |
+            | United Kingdom |
+            | Poland         |
+            | Germany        |
           And the following shipping methods exist:
-            | zone         | name          | calculator | configuration |
-            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  |
-            | USA          | FedEx         | Flat rate  | Amount: 6500  |
-            | USA          | FedEx Premium | Flat rate  | Amount: 10000 |
+            | zone         | name          | calculator | configuration | enabled |
+            | UK + Germany | DHL Express   | Flat rate  | Amount: 5000  | yes     |
+            | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
+            | USA          | FedEx Premium | Flat rate  | Amount: 10000 | yes     |
+            | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | no      |
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
+          And there is default currency configured
           And I am logged in user
           And I added product "PHP Top" to cart
 
-    Scenario: Only available methods are displayed to user for zone
+    Scenario: Only enabled and available methods are displayed to user for zone
               depending on the shipping address zone
         Given I go to the checkout start page
           And I fill in the shipping address to United Kingdom
@@ -36,6 +44,7 @@ Feature: Checkout shipping
          Then I should be on the checkout shipping step
           And I should see "DHL Express"
           But I should not see "FedEx"
+          And I should not see "UPS Ground"
 
     Scenario: Shipping price is displayed when selecting the shipping method
         Given I go to the checkout start page
@@ -80,3 +89,10 @@ Feature: Checkout shipping
          Then I should be on the checkout finalize step
           And "Shipping total: €65.00" should appear on the page
           And "Total: €70.99" should appear on the page
+
+    Scenario: Selecting shipping address that not match any shop shipping zones
+        Given I go to the checkout start page
+          And I fill in the shipping address to Poland
+         When I press "Continue"
+         Then I should be on the checkout addressing step
+          And "We're sorry" should appear on the page

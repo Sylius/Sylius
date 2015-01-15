@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    exchange_rate:
+      currency: Moneda
+      rate: Curs de schimb

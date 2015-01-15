@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  taxon:
+    name:
+      max_length: Название таксона не должно быть длиннее 255 символов.
+      not_blank: Укажите название таксона.
+  taxonomy:
+    name:
+      max_length: Название таксономии не должно быть длиннее 255 символов.
+      not_blank: Укажите название таксономии.

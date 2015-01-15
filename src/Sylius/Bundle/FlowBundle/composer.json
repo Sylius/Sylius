@@ -25,15 +25,18 @@
         "symfony/framework-bundle": "~2.1"
     },
     "require-dev": {
-        "symfony/yaml": "~2.1"
+        "symfony/yaml":    "~2.1",
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\FlowBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\FlowBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/FlowBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\FlowBundle\\Tests\\": "Tests/" }
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.13-dev"
         }
     }
 }

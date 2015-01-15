@@ -11,47 +11,24 @@
 
 namespace Sylius\Bundle\CoreBundle\Mailer;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * OrderConfirmationMailer implementation
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class OrderConfirmationMailer implements OrderConfirmationMailerInterface
+class OrderConfirmationMailer extends AbstractMailer implements OrderConfirmationMailerInterface
 {
-    /**
-     * @var TwigMailerInterface
-     */
-    protected $mailer;
-
-    /**
-     * @var array
-     */
-    protected $parameters;
-
-    public function __construct(TwigMailerInterface $mailer, array $parameters)
-    {
-        $this->mailer = $mailer;
-        $this->parameters = $parameters;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function sendOrderConfirmation(OrderInterface $order)
     {
-        if (!$user = $order->getUser()) {
-            throw new \InvalidArgumentException('Order has to belong to a User');
+        if (!$email = $order->getEmail()) {
+            throw new \InvalidArgumentException('Order must contain customer email');
         }
 
-        $this->mailer->sendEmail(
-            $this->parameters['template'],
-            $context = array(
-                'order' => $order
-            ),
-            $this->parameters['from_email'],
-            $user->getEmail()
-        );
+        $this->sendEmail(array('order' => $order), $email);
     }
 }

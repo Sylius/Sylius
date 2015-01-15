@@ -11,14 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Model\OrderInterface;
-use Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\TaxationProcessorInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Order taxation listener.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderTaxationListener
 {
@@ -43,17 +44,22 @@ class OrderTaxationListener
      * Get the order from event and run the taxation processor on it.
      *
      * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
      */
-    public function onCartChange(GenericEvent $event)
+    public function applyTaxes(GenericEvent $event)
     {
         $order = $event->getSubject();
 
         if (!$order instanceof OrderInterface) {
-            throw new \InvalidArgumentException(
-                'Order taxation listener requires event subject to be instance of "Sylius\Bundle\CoreBundle\Model\OrderInterface"'
+            throw new UnexpectedTypeException(
+                $order,
+                'Sylius\Component\Core\Model\OrderInterface'
             );
         }
 
         $this->taxationProcessor->applyTaxes($order);
+
+        $order->calculateTotal();
     }
 }

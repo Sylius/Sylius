@@ -1,0 +1,13 @@
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusTaxonomyBundle:Taxon:macros.html.twig' import list %}
+
+<h1>{{ taxonomy.name }} <small>Taxonomy details</small></h1>
+<hr />
+<div class="well well-sm">
+    {{ buttons.create(path('sylius_taxon_create', {'taxonomyId': taxonomy.id}), 'sylius.taxon.create_taxon'|trans) }}
+    {{ buttons.manage(path('sylius_taxonomy_index'), 'sylius.taxon.manage_taxonomies'|trans) }}
+    {{ buttons.edit(path('sylius_taxonomy_update', {'id': taxonomy.id}), 'sylius.taxon.update_taxonomy'|trans) }}
+    {{ buttons.delete(path('sylius_taxonomy_delete', {'id': taxonomy.id}), 'sylius.taxon.delete_taxonomy'|trans) }}
+</div>
+<hr>
+{{ list(taxonomy, taxonomy.taxons) }}

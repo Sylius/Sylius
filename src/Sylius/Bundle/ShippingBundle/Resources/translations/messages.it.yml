@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    rule:
+      item_count_configuration:
+        count: Quantità
+        equal: Uguale
+      type: Tipo
+    shipment:
+      state: Stato
+      states:
+        checkout: Checkout
+        dispatched: Evaso
+        pending: In attesa
+        ready: Pronto
+        shipped: Spedito
+        returned: Restituito
+      tracking_code: Codice di monitoraggio della spedizione
+    shipping_calculator:
+      flat_rate_configuration:
+        amount: Importo
+      flexible_rate_configuration:
+        additional_item_cost: Costo addizionale articolo
+        additional_item_limit: Limite di articoli aggiuntivi
+        first_item_cost: Costo primo articolo
+      per_item_rate_configuration:
+        amount: Importo
+      weight_rate_configuration:
+        amount: Importo
+        division: Divisione
+    shipping_category:
+      description: Descrizione
+      name: Nome
+    shipping_method:
+      calculator: Calcolatore
+      category: Categoria
+      category_requirement: Requisito della categoria
+      configuration: Configurazione
+      enabled: Abilitato
+      name: Nome

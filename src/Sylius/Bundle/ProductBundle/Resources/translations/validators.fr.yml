@@ -1,0 +1,53 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  product:
+    sku:
+      not_blank: "Veuillez saisir l'UGS (SKU) du produit."
+      unique: "L'UGS du produit doit être unique."
+    name:
+      not_blank: Veuillez saisir le nom du produit.
+      min_length: 'Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
+      max_length: 'Le nom du produit ne doit pas dépasser 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
+    description:
+      not_blank: Veuillez saisir la description du produit.
+      min_length: 'La description du produit doit contenir au moins 1 caractère.|La description du produit ne doit pas dépasser {{ limit }} caractères.'
+  variant:
+    sku:
+      not_blank: "Veuillez saisir l'UGS (SKU) de la variante."
+      unique: "L'UGS de la variante doit être unique."
+    combination: La variante avec cette option existe déjà.
+  option:
+    name:
+      not_blank: "Veuillez saisir le nom de l'option."
+      min_length: "Le nom de l'option doit contenir au moins 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
+      max_length: "Le nom de l'option ne doit pas dépasser 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
+    presentation:
+      not_blank: "Veuillez saisir la présentation de l'option."
+      min_length: "La présentation de l'option doit contenir au moins 1 caractère.|La présentation de l'option ne doit pas dépasser les {{ limit }} caractères."
+      max_length: "La présentation de l'option ne doit pas dépasser 1 caractère.|La présentation de l'option ne doit pas dépasser les {{ limit }} caractères."
+    values:
+      min_count: "Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option."
+  option_value:
+    value:
+      not_blank: "Veuillez saisir la valeur de l'option."
+  property:
+    name:
+      not_blank: Veuillez saisir une propriété.
+      min_length: 'La propriété ne doit pas dépasser 1 caractère.|La propriété ne doit pas dépasser les {{ limit }} caractères.'
+      max_length: 'La propriété ne doit pas dépasser 1 caractère.|La propriété ne doit pas dépasser les {{ limit }} caractères.'
+    presentation:
+      not_blank: Veuillez saisir la présentation de la propriété.
+      min_length: 'La présentation de la propriété ne doit pas dépasser 1 caractère.|La présentation de la propriété ne doit pas dépasser les {{ limit }} caractères.'
+      max_length: 'La présentation de la propriété ne doit pas dépasser 1 caractère.|La présentation de la propriété ne doit pas dépasser les {{ limit }} caractères.'
+  product_property:
+    property:
+      not_blank: Veuillez choisir une propriété.
+    value:
+      not_blank: Veuillez saisir la propriété du produit.
+  prototype:
+    name:
+      not_blank: Veuillez saisir le nom du prototype.
+      min_length: 'Le nom du prototype de la propriété ne doit pas dépasser 1 caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'
+      max_length: 'Le nom du prototype ne doit pas dépasser 1 caractère.|Le nom du prototype ne doit pas dépasser les {{ limit }} caractères.'

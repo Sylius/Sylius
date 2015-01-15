@@ -1,0 +1,12 @@
+sylius:
+    cart:
+        restricted_zone_removal: Product %product% removed from cart since it is not available in your country.
+    checkout:
+        restricted_zone: This product is not available in your country.
+        success: Thank you for your order!
+        canceled: Your payment was canceled.
+        processing: Your payment is currently processing.
+        new: Your payment is new.
+        failed: Your payment was declined.
+        unknown: Unknown payment error.
+        out_of_stock: There is only %quantity% %name% in the stock.

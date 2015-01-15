@@ -6,9 +6,9 @@ Feature: Checkout usage limited promotions
 
     Background:
         Given the following promotions exist:
-          | name                             | description                                            | usage limit | used |
-          | 50% off over 200 EUR             | First 3 orders over 200 EUR have 50% discount!         | 3           | 0    |
-          | Free order with at least 3 items | First order with at least 3 items has 100% discount!   | 1           | 1    |
+          | name                             | description                                          | usage limit | used |
+          | 50% off over 200 EUR             | First 3 orders over 200 EUR have 50% discount!       | 3           | 0    |
+          | Free order with at least 3 items | First order with at least 3 items has 100% discount! | 1           | 1    |
         And promotion "50% off over 200 EUR" has following rules defined:
           | type       | configuration |
           | Item total | Amount: 200   |
@@ -34,14 +34,15 @@ Feature: Checkout usage limited promotions
           | Sarge   | 25    | Debian T-Shirts |
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
+        And there is default currency configured
 
     Scenario: Promotion with usage limit is applied when the
               number of usage is not reached
         Given I am on the store homepage
          When I add product "Buzz" to cart, with quantity "2"
          Then I should be on the cart summary page
-          And "Promotion total: (€500.00)" should appear on the page
-          And "Grand total: €500.00" should appear on the page
+          And "Promotion total: -€500.00" should appear on the page
+          And "Grand total: €0.00" should appear on the page
 
     Scenario: Promotion with usage limit is not applied when the
               number of usage is reached

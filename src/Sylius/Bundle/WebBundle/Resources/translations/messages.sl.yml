@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    home:
+      email: ""
+      id: ""
+    order:
+      number: ""
+      payment_mode: ""
+      shipment_mode: ""
+      state: ""
+  "no": false
+  shipping_method:
+    zone: Cona
+  tax_rate:
+    zone: Cona
+  "yes": true

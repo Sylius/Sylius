@@ -22,13 +22,14 @@
     "require": {
         "php":                             ">=5.3.3",
 
-        "symfony/framework-bundle":        "2.3.*",
-        "sylius/resource-bundle":          "1.0.*@dev",
-        "sylius/money-bundle":             "1.0.*@dev",
-        "stof/doctrine-extensions-bundle": "1.1.*"
+        "symfony/framework-bundle":        "~2.3",
+        "stof/doctrine-extensions-bundle": "1.1.*",
+        "sylius/resource-bundle":          "0.13.*@dev",
+        "sylius/money-bundle":             "0.13.*@dev",
+        "sylius/shipping":                 "0.13.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec":   "2.0.*@dev",
+        "phpspec/phpspec":   "~2.1",
         "symfony/form":      "~2.3",
         "symfony/validator": "~2.3"
     },
@@ -36,12 +37,14 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\ShippingBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\ShippingBundle\\": "" }
     },
-    "target-dir": "Sylius/Bundle/ShippingBundle",
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ShippingBundle\\spec\\": "spec/" }
+    },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.13-dev"
         }
     }
 }

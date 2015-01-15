@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  account:
+    address:
+      flash:
+        billing:
+          success: "L'adresse a été correctement définie comme votre adresse de facturation par défaut."
+        shipping:
+          success: "L'adresse a été correctement définie comme votre adresse de livraison par défaut."

@@ -15,13 +15,18 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_product_create'), 'sylius.product.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_option_index'), 'sylius.option.manage'|trans) }}
-        {{ buttons.manage(path('sylius_backend_property_index'), 'sylius.property.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
+        {% if app.request.query.get('deleted') %}
+            <a href="{{ path('sylius_backend_product_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
+        {% else %}
+            <a href="{{ path('sylius_backend_product_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
+        {% endif %}
     </div>
     <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
 </div>
 
-{% render(url('sylius_backend_product_filter_form', {'criteria': app.request.query.get('criteria')})) %}
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_product_filter', 'template': 'SyliusWebBundle:Backend/Product:filterForm.html.twig'})) %}
 
 {{ pagination(products) }}
 {{ list(products) }}

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\FlowBundle\Process\Coordinator;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
@@ -22,12 +23,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use FOS\RestBundle\View\View;
 
 /**
  * Default coordinator implementation.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Coordinator implements CoordinatorInterface
 {
@@ -57,7 +57,7 @@ class Coordinator implements CoordinatorInterface
      *
      * @var array
      */
-    protected $scenarios;
+    protected $scenarios = array();
 
     /**
      * Constructor.
@@ -71,8 +71,6 @@ class Coordinator implements CoordinatorInterface
         $this->router = $router;
         $this->builder = $builder;
         $this->context = $context;
-
-        $this->scenarios = array();
     }
 
     /**
@@ -86,8 +84,8 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->close();
 
-        if (($validator = $this->context->isValid()) !== true) {
-            return $validator->getResponse($step);
+        if (!$this->context->isValid()) {
+            return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
         return $this->redirectToStepDisplayAction($process, $step, $queryParameters);
@@ -125,8 +123,8 @@ class Coordinator implements CoordinatorInterface
             return $this->redirectToStepDisplayAction($process, $step);
         }
 
-        if (($validator = $this->context->isValid()) !== true) {
-            return $validator->getResponse($step);
+        if (!$this->context->isValid()) {
+            return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
         $result = $step->displayAction($this->context);
@@ -145,8 +143,8 @@ class Coordinator implements CoordinatorInterface
         $this->context->initialize($process, $step);
         $this->context->rewindHistory();
 
-        if (($validator = $this->context->isValid()) !== true) {
-            return $validator->getResponse($step);
+        if (!$this->context->isValid()) {
+            return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
         $result = $step->forwardAction($this->context);
@@ -172,7 +170,7 @@ class Coordinator implements CoordinatorInterface
             if ($this->context->isLastStep()) {
                 $this->context->close();
 
-                $url = $this->router->generate($process->getRedirect());
+                $url = $this->router->generate($process->getRedirect(), $process->getRedirectParams());
 
                 return new RedirectResponse($url);
             }
@@ -222,17 +220,17 @@ class Coordinator implements CoordinatorInterface
         $this->context->addStepToHistory($step->getName());
 
         if (null !== $route = $process->getDisplayRoute()) {
-            $url = $this->router->generate($route, array(
-                'stepName' => $step->getName()
-            ));
+            $url = $this->router->generate($route, array_merge($process->getDisplayRouteParams(), array(
+                'stepName' => $step->getName(),
+            )));
 
             return new RedirectResponse($url);
         }
 
         // Default parameters for display route
         $routeParameters = array(
-                'scenarioAlias' => $process->getScenarioAlias(),
-                'stepName'      => $step->getName(),
+            'scenarioAlias' => $process->getScenarioAlias(),
+            'stepName'      => $step->getName(),
         );
 
         if (null !== $queryParameters) {

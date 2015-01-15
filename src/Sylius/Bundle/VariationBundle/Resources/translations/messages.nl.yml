@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    variant:
+      presentation: Weergave
+    option:
+      name: Interne naam
+      presentation: Weergave
+      values: Mogelijke waarden
+    option_value:
+      add_value: Voeg waarde toe
+      value: Waarde

@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  backend:
+    menu:
+      main:
+        assortment: Assortiment
+        configuration: Configuratie
+        countries: Landen
+        customer: Klanten
+        dashboard: Dashboard
+        exchange_rates: Wisselkoersen
+        general_settings: Algemene instellingen
+        homepage: Uw winkel
+        locales: "Talen/Regio's"
+        new_order: Bestelling toevoegen
+        new_promotion: Kortingsactie toevoegen
+        options: Productopties
+        orders: Huidige bestellingen
+        payment_methods: Betaalmethoden
+        payments: Betalingen
+        products: Producten
+        promotions: Promoties
+        properties: Producteigenschappen
+        prototypes: Product prototypes
+        sales: Bestellingen
+        shipments: Verzendingen
+        shipping_categories: Verzend categorieën
+        shipping_methods: Verzendmethoden
+        stockables: Voorraad
+        tax_categories: BTW-groepen
+        tax_rates: BTW-tarieven
+        taxation_settings: Belasting instellingen
+        taxonomies: Categorisering
+        users: Gebruikers
+        zones: Zones
+      sidebar:
+        assortment: Assortiment
+        blocks: Blokken
+        configuration: Configuratie
+        content: Inhoud
+        countries: Landen
+        customer: Klanten
+        dashboard: Dashboard
+        exchange_rates: Wisselkoersen
+        general_settings: Algemene instellingen
+        groups: Groepen
+        homepage: Terug naar de voorkant
+        locales: "Talen/Regio's"
+        new_order: Bestelling toevoegen
+        new_promotion: Kortingsactie toevoegen
+        options: Productopties
+        orders: Huidige bestellingen
+        pages: "Pagina's"
+        payment_methods: Betaalmethoden
+        payments: Betalingen
+        products: Producten
+        promotions: Promoties
+        properties: Producteigenschappen
+        prototypes: Product prototypes
+        sales: Bestellingen
+        shipments: Verzendingen
+        shipping_categories: Verzend categorieën
+        shipping_methods: Verzendmethoden
+        stockables: Voorraad
+        tax_categories: Belasting categorieën
+        tax_rates: Belastingtarieven
+        taxation_settings: Belasting instellingen
+        taxonomies: Categorisering
+        users: Gebruikers
+        zones: Zones
+  frontend:
+    menu:
+      account:
+        addresses: Adressen
+        homepage: Home
+        orders: Bestellingen
+        password: Wachtwoord wijzigen
+        profile: Persoonlijke gegevens
+        shop: Terug naar de winkel
+      currency: 'Toon prijzen in %currency%'
+      main:
+        account: Mijn account
+        administration: Beheer
+        cart: 'Winkelwagen (%items%) %total%'
+        login: Inloggen
+        logout: Uitloggen
+        register: Registreren
+      social:
+        facebook: Facebook
+        github: GitHub
+        google: Google+
+        linkedin: LinkedIn
+        twitter: Twitter

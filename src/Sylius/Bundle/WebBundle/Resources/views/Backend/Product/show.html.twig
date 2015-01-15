@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
-{% from 'SyliusWebBundle:Backend/Variant:macros.html.twig' import list as list_variants %}
+{% from 'SyliusWebBundle:Backend/ProductVariant:macros.html.twig' import list as list_variants %}
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
@@ -17,14 +17,23 @@
 <div class="page-header">
     <div class="actions-menu">
     {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+    {% if not product.deleted %}
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, false) }}
-    <a href="{{ path('sylius_product_show', {'slug': product.slug}) }}" class="btn btn-info">
+    <a href="{{ path(product) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-shopping-cart"></i>
         {{ 'sylius.product.show_in_store'|trans }}
     </a>
+    {% endif %}
+    <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
+       <i class="glyphicon glyphicon-calendar"></i>
+        {{ 'sylius.history.header'|trans }}
+    </a>
     </div>
-    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}</h1>
+    <h1>
+        <i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}
+        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+    </h1>
 </div>
 
 <div class="row">
@@ -128,6 +137,27 @@
                     <td>{{ 'sylius.product.price'|trans }}</td>
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
                 </tr>
+                {% if product.masterVariant.pricingCalculator == 'volume_based' %}
+                <tr>
+                    <td>{{ 'sylius.product.volume_price'|trans }}</td>
+                    <td>
+                        <table class="table table-bordered table-striped table-condensed">
+                            <tr>
+                                <th>{{ 'sylius.product.volume_based.price'|trans }}</th>
+                                <th>{{ 'sylius.product.volume_based.qty_min'|trans }}</th>
+                                <th>{{ 'sylius.product.volume_based.qty_max'|trans }}</th>
+                            </tr>
+                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not sameas(null) and pricing.price is not sameas(null)) %}
+                                <tr>
+                                    <td>{{ pricing.price|sylius_price }}</td>
+                                    <td>{{ pricing.min }}</td>
+                                    <td>{{ pricing.max|default('~') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
@@ -136,8 +166,8 @@
         {% if product.images|length > 0 %}
             <div id="gallery">
                 {% for image in product.images %}
-                <a href="{{ image.path|imagine_filter('sylius_gallery') }}" title="{{ product.name }}" class="thumbnail">
-                    <img src="{{ image.path|imagine_filter('sylius_90x60') }}" alt="{{ product.name }}" />
+                <a href="{{ image.path|imagine_filter('sylius_large') }}" title="{{ product.name }}" class="thumbnail">
+                    <img src="{{ image.path|imagine_filter('sylius_small') }}" alt="{{ product.name }}" />
                 </a>
                 {% endfor %}
             </div>
@@ -149,20 +179,20 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'sylius.product.properties'|trans }}</th>
+                    <th colspan="2">{{ 'sylius.product.attributes'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for property in product.properties %}
+                {% for attribute in product.attributes %}
                 <tr>
-                    <td><strong>{{ property.name }}</strong></td>
-                    <td>{{ property.value }}</td>
+                    <td><strong>{{ attribute.name }}</strong></td>
+                    <td>{{ attribute.value }}</td>
                 </tr>
                 {% else %}
                 <tr>
                     <td colspan="2">
                         <span class="label label-info">
-                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_properties'|trans }}
+                            <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.product.no_attributes'|trans }}
                         </span>
                     </td>
                 </tr>
@@ -172,16 +202,20 @@
     </div>
 </div>
 
-{% if product.hasOptions %}
 <hr>
+
+{% if not product.deleted %}
 <div class="well well-sm">
-    {{ buttons.create(path('sylius_backend_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
-    {{ buttons.manage(path('sylius_backend_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+    {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
+    {% if product.hasOptions %}
+        {{ buttons.patch(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+    {% endif %}
     <div class="pull-right">
         <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>
 </div>
+{% endif %}
 
 {{ list_variants(product.variants) }}
-{% endif %}
+
 {% endblock %}

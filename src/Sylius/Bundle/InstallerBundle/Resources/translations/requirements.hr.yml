@@ -1,0 +1,55 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  extensions:
+    accelerator:
+      help: Instaliraj i omogući PHP ubrzivač poput APC-a (izrazito preporučeno).
+    apc: APC
+    ctype: Ctype
+    gd: sylius.extensions.gd
+    help: 'Instaliraj i omoguči %extension% ekstenziju.'
+    iconv: Iconv
+    icu: ICU
+    intl: Intl
+    json_encode: JSON
+    mbstring: Multibyte String
+    "off": false
+    "on": true
+    pcre: PCRE
+    pdo: PDO
+    php_xml: PHP-XML
+    session_start: Sesija
+    simplexml_import_dom: SimpleXML
+    token_get_all: Tokenizer
+  filesystem:
+    cache:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    exists: Postoji
+    logs:
+      help:
+        To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+    not_exists: Ne postoji
+    not_writable: Nije moguće pisati
+    parameters:
+      help:
+        To set permissions run: 'sudo chmod a+w %path%'
+    vendors: vendors
+    writable: moguće pisati
+  settings:
+    any: Bilo koje
+    detect_unicode: detect_unicode
+    magic_quotes_gpc: magic_quotes_gpc
+    non_deprecated: non deprecated
+    "off": false
+    "on": true
+    register_globals: register_globals
+    session:
+      auto_start: session.auto_start
+    short_open_tag: short_open_tag
+    timezone: Vremenska zona
+    timezone_deprecated:
+      help: 'Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).'
+    version: Verzija PHP-a
+    version_recommanded: Preporučena PHP verzija

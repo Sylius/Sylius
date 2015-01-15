@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  group:
+    name:
+      max: 'Naziv grupe ne smije biti duži od {{ limit }} znakova.'
+      min: 'Naziv grupe mora imati najmanje {{ limit }} znakova.'
+      not_blank: Unesite naziv grupe.
+  locale:
+    code:
+      not_blank: Unesite lokalni kod.
+      unique: Ovaj lokalni kod već postoji.
+  user:
+    first_name:
+      max: 'Ime ne smije biti duže od {{ limit }} znakova.'
+      min: 'Ime mora imati najmanje {{ limit }} znaka.'
+      not_blank: Molimo unesite Vaše ime.
+    last_name:
+      max: 'Prezime ne smije biti duže od {{ limit }} znakova.'
+      min: 'Prezime ne smije biti duže od {{ limit }} znakova.'
+      not_blank: Molimo unesite Vaše prezime.
+  product_variant:
+    onHand:
+      min: 'Stanje na skladištu mora biti veće od {{ limit }}.'
+      not_blank: Molim označite ako je moguća isporuka osobno.
+    price:
+      min: Cijena ne smije biti negativna.
+      not_blank: Molim unesite cijenu.
+sylius_shipping:
+  method:
+    zone:
+      not_blank: Niste odabrali način dostave.
+sylius_taxation:
+  rate:
+    zone:
+      not_blank: Odaberite porez.

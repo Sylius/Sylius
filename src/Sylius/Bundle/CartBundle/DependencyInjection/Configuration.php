@@ -21,8 +21,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -39,21 +39,22 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('provider')->defaultValue('sylius.cart_provider.default')->end()
                 ->scalarNode('resolver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('storage')->defaultValue('sylius.cart_storage.session')->end()
+                ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 
         $this->addClassesSection($rootNode);
+        $this->addValidationGroupsSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `classes` section.
+     * Adds `validation_groups` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addValidationGroupsSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
@@ -70,6 +71,19 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `classes` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addClassesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
                 ->arrayNode('classes')
                     ->isRequired()
                     ->addDefaultsIfNotSet()
@@ -77,14 +91,14 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('cart')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartController')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('item')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\\Bundle\\CartBundle\\Controller\\CartItemController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartItemController')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartItemType')->end()
                             ->end()
                         ->end()

@@ -1,9 +1,27 @@
 CHANGELOG
 =========
 
+### v0.10.0
+
+* Twig extension was renamed from `SyliusCartExtension` into `CartExtension`,
+  also the service name was changed from `sylius.cart_twig` to `sylius.twig.extension.cart`.
+
+### v0.9.0
+
+* Release before components.
+* Fixed double cart refresh.
+
+### v0.8.0
+
+* Convert translation files to YAML.
+
+### v0.7.0
+
+* Introduce cart provider events.
+
 ### v0.6.0
 
-* Release before components introduction.
+* Release before components introduction. (delayed)
 
 ### v0.5.0
 

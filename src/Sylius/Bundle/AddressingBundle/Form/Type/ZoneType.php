@@ -11,42 +11,36 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\AddressingBundle\Model\Zone;
 
 /**
  * Zone form type.
  *
- * @author Саша Стаменковић <umpirsky@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ZoneType extends AbstractType
+class ZoneType extends AbstractResourceType
 {
     /**
-     * Data class.
+     * Scopes.
      *
-     * @var string
+     * @var array
      */
-    protected $dataClass;
-
-    /**
-     * Validation groups.
-     *
-     * @var string
-     */
-    protected $validationGroups;
+    protected $scopeChoices;
 
     /**
      * Constructor.
      *
-     * @param string $dataClass
-     * @param array  $validationGroups
+     * @param string   $dataClass
+     * @param string[] $validationGroups
+     * @param string[] $scopeChoices
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
     {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->scopeChoices = $scopeChoices;
     }
 
     /**
@@ -56,29 +50,25 @@ class ZoneType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.zone.name'
+                'label' => 'sylius.form.zone.name',
             ))
-            ->add('type', 'choice', array(
-                'label'   => 'sylius.form.zone.type',
-                'choices' => Zone::getTypeChoices(),
-            ))
+            ->add('type', 'sylius_zone_type_choice')
             ->add('members', 'sylius_zone_member_collection', array(
-                'label' => 'sylius.form.zone.members'
+                'label'            => false,
+                'button_add_label' => 'sylius.zone.add_member',
             ))
         ;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver
-            ->setDefaults(array(
-                'data_class'        => $this->dataClass,
-                'validation_groups' => $this->validationGroups,
-            ))
-        ;
+        if (!empty($this->scopeChoices)) {
+            $builder
+                ->add('scope', 'choice', array(
+                    'label'       => 'sylius.form.zone.scope',
+                    'empty_value' => 'sylius.form.zone.select_scope',
+                    'required'    => false,
+                    'choices'     => $this->scopeChoices,
+                ))
+            ;
+        }
     }
 
     /**

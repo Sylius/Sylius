@@ -11,50 +11,46 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
+use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Sylius addressing and zones management bundle.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusAddressingBundle extends Bundle
+class SyliusAddressingBundle extends AbstractTranslationBundle
 {
     /**
-     * Return array of currently supported drivers.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    protected function getModelInterfaces()
     {
-        $interfaces = array(
-            'Sylius\Bundle\AddressingBundle\Model\AddressInterface'    => 'sylius.model.address.class',
-            'Sylius\Bundle\AddressingBundle\Model\CountryInterface'    => 'sylius.model.country.class',
-            'Sylius\Bundle\AddressingBundle\Model\ProvinceInterface'   => 'sylius.model.province.class',
-            'Sylius\Bundle\AddressingBundle\Model\ZoneInterface'       => 'sylius.model.zone.class',
-            'Sylius\Bundle\AddressingBundle\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
+        return array(
+            'Sylius\Component\Addressing\Model\AddressInterface'    => 'sylius.model.address.class',
+            'Sylius\Component\Addressing\Model\CountryInterface'    => 'sylius.model.country.class',
+            'Sylius\Component\Addressing\Model\ProvinceInterface'   => 'sylius.model.province.class',
+            'Sylius\Component\Addressing\Model\ZoneInterface'       => 'sylius.model.zone.class',
+            'Sylius\Component\Addressing\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
         );
+    }
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('sylius_addressing', $interfaces));
-
-        $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine/model') => 'Sylius\Bundle\AddressingBundle\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager'), 'sylius_addressing.driver.doctrine/orm'));
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Addressing\Model';
     }
 }

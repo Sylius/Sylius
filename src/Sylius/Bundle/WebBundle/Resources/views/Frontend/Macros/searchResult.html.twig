@@ -1,0 +1,23 @@
+{% macro multi_model_grid(results, size = 3) %}
+
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+<div class="row">
+    {% for result in results %}
+
+        <div class="col-md-{{ 12 / size }}">
+            {% include getSearchResultSnippet(result) %}
+        </div>
+        {% if 0 == loop.index % size %}
+            </div>
+            <div class="row">
+        {% endif %}
+
+    {% else %}
+        <div class="col-md-12">
+            {{ alerts.info('sylius.product.no_results'|trans) }}
+        </div>
+    {% endfor %}
+</div>
+
+{% endmacro %}
