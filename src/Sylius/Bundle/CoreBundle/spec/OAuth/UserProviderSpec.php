@@ -16,8 +16,8 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Core\Model\UserOAuthInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\UserOAuthInterface;
 
 class UserProviderSpec extends ObjectBehavior
 {

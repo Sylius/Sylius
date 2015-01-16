@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\User\Model;
 
 /**
  * User OAuth account interface.
