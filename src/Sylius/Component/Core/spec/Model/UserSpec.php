@@ -25,9 +25,9 @@ class UserSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Model\User');
     }
 
-    function it_implements_Fos_user_interface()
+    function it_implements_user_component_interface()
     {
-        $this->shouldImplement('FOS\UserBundle\Model\UserInterface');
+        $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
     }
 
     function it_has_no_shipping_address_by_default()
