@@ -69,10 +69,10 @@ doctrine:
 
 doctrine_phpcr:
     session:
-        backend: %phpcr_backend%
-        workspace: %phpcr_workspace%
-        username: %phpcr_user%
-        password: %phpcr_pass%
+        backend: %sylius.phpcr.backend%
+        workspace: %sylius.phpcr.workspace%
+        username: %sylius.phpcr.user%
+        password: %sylius.phpcr.pass%
     odm:
         auto_mapping: true
         auto_generate_proxy_classes: %kernel.debug%

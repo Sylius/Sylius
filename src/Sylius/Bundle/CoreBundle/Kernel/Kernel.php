@@ -29,6 +29,11 @@ abstract class Kernel extends BaseKernel
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION   = 'DEV';
 
+    const ENV_DEV = 'dev';
+    const ENV_PROD = 'prod';
+    const ENV_TEST = 'test';
+    const ENV_STAGING = 'staging';
+
     /**
      * {@inheritdoc}
      */

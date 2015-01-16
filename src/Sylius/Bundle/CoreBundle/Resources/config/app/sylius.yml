@@ -21,11 +21,6 @@ sylius_core:
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
 
-sylius_installer:
-    classes:
-        user:
-            model: Sylius\Component\Core\Model\User
-
 sylius_money:
     currency: %sylius.currency%
     locale: %sylius.locale%
