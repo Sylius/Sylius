@@ -106,10 +106,6 @@ abstract class Kernel extends BaseKernel
             new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
         );
 
-        if (in_array($this->environment, array('dev', 'test'))) {
-            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-        }
-
         return $bundles;
     }
 
