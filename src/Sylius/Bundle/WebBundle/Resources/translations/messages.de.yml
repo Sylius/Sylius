@@ -12,7 +12,6 @@ sylius:
       shipment_mode: ""
       state: ""
   address:
-<<<<<<< HEAD
     city: Stadt
     company: Firma
     country: Land
@@ -134,15 +133,11 @@ sylius:
       unit_price: Preis
     summary_header: Warenkorb-Übersicht
     total_items: '1 Artikel|%count% Artikel'
-=======
-    street: Strasse / Nr.
->>>>>>> master
   checkout:
     finalize:
       address:
         street: Strasse / Nr.
   "no": false
-<<<<<<< HEAD
   no_results: Keine Ergebnisse
   option:
     create: Erstellen
@@ -520,6 +515,4 @@ sylius:
     sku: Bestandseinheit
     stock: Aktueller Lagerbestand
     update_header: Variante editieren
-=======
->>>>>>> master
   "yes": true
