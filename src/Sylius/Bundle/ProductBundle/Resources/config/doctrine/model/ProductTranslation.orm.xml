@@ -38,11 +38,7 @@
 
          <gedmo:loggable />
 
-        <!--TODO map locale field automatically?-->
-        <!--<field name="locale" column="locale" type="string" length="2"/>-->
-
-        <!--TODO this should be overriden but superclass mapping, it should point to \Component\Core\Product and be overriden in parent!-->
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Core\Model\Product" locale="locale"/>
+        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

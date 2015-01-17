@@ -13,7 +13,6 @@ namespace Sylius\Bundle\TranslationBundle\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Prezent\Doctrine\Translatable\EventListener\TranslatableListener;
 
 /**
  * Inject current locale in the TranslatableListener

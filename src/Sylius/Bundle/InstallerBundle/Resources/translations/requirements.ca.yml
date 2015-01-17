@@ -3,7 +3,9 @@
 
 sylius:
   extensions:
+    header: extensions
     accelerator:
+      header: Accelerador
       help: Instal·lar i permetre un accelerador PHP com APC (altament recomanat).
     apc: APC
     ctype: Ctype
@@ -38,6 +40,7 @@ sylius:
     vendors: vendors
     writable: que es pugui escriure
   settings:
+    header: Versió de PHP i configuració
     any: qualsevol
     detect_unicode: detect_unicode
     magic_quotes_gpc: magic_quotes_gpc
@@ -50,6 +53,8 @@ sylius:
     short_open_tag: short_open_tag
     timezone: fus horari
     timezone_deprecated:
+      header: Fus horari no aprovat
       help: 'El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).'
     version: Versió PHP
     version_recommanded: Versió de PHP recomanada
+

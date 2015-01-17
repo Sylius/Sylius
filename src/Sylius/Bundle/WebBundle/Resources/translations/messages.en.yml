@@ -1,9 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 email:
     order_confirmation:
         subject: Your order was confirmed
     order_comment:
         subject: Your order was commented by shop stuff
         header: Order Comment
+
 sylius:
     account:
         address:

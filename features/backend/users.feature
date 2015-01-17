@@ -58,6 +58,16 @@ Feature: Users management
          Then I should be on the page of user with username "john"
           And I should see 1 orders in the list
 
+    Scenario: Prevent self-deletion possibility for current logged user on details page
+        Given I am on the user index page
+         When I click "details" near "sylius@example.com"
+         Then I should be on the page of user with username "sylius@example.com"
+          And I should not see "delete" button
+
+    Scenario: Prevent self-deletion possibility for current logged user on user index page
+        Given I am on the user index page
+         Then I should not see "delete" button near "sylius@example.com" in "users" table
+
     Scenario: Accessing the user creation form
         Given I am on the user index page
           And I follow "create user"

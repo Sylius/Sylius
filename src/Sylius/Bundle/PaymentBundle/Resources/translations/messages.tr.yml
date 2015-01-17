@@ -14,7 +14,7 @@ sylius:
       amount: Ödeme tutarı
       method: Ödeme tipi
       state:
-        0: Ödeme durumu
+        header: Ödeme durumu
         checkout: 'Ödeme  yap'
         completed: Tamamlandı
         failed: Başarısız oldu

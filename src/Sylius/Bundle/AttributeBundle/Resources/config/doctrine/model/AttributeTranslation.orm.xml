@@ -20,8 +20,8 @@
         </id>
 
         <field name="presentation" column="presentation" type="string" />
-        <!--TODO this should be overriden but superclass mapping!-->
-        <prezent:translatable field="translatable" target-entity="Sylius\Component\Product\Model\Attribute" locale="locale"/>
+
+        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -223,7 +223,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug = null)
     {
         $this->translate()->setSlug($slug);
 

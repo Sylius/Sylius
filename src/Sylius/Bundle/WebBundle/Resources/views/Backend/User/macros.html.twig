@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
+        <tr id="{{ user.id }}" data-user="{{ user.email }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>{{ user.id }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
@@ -33,7 +33,9 @@
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
                     {% if not user.deleted %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, user.id is sameas(app.user.id)) }}
+                    {% if user.id is not sameas(app.user.id) %}
+                        {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, null) }}
+                    {% endif %}
                     {% endif %}
                 </div>
             </td>
@@ -64,7 +66,7 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}" {% if user.deleted %} class="danger"{% endif %}>
+        <tr id="{{ user.id }}" data-user="{{ user.email }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>
                 {{ user.fullname }}<br>
                 <a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">
@@ -79,7 +81,9 @@
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
                     {% if not user.deleted %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-                    {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                    {% if user.id is not sameas(app.user.id) %}
+                        {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id})) }}
+                    {% endif %}
                     {% endif %}
                 </div>
             </td>

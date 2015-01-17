@@ -41,7 +41,7 @@ interface TaxonsAwareInterface
      *
      * @param TaxonInterface $taxon
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasTaxon(TaxonInterface $taxon);
 

@@ -20,6 +20,7 @@
         <parameter key="sylius.listener.archetype_update.class">Sylius\Bundle\ProductBundle\EventListener\ArchetypeUpdateListener</parameter>
         <parameter key="sylius.builder.product.class">Sylius\Component\Product\Builder\ProductBuilder</parameter>
 
+        <parameter key="sylius.set_builder.cartesian.class">Sylius\Component\Variation\SetBuilder\CartesianSetBuilder</parameter>
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
@@ -49,8 +50,10 @@
             <argument type="service" id="sylius.repository.product_attribute_value" />
         </service>
 
+        <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
         <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
             <argument type="service" id="sylius.repository.product_variant" />
+            <argument type="service" id="sylius.set_builder.cartesian" />
             <argument type="service" id="validator" />
             <argument type="service" id="event_dispatcher"/>
         </service>

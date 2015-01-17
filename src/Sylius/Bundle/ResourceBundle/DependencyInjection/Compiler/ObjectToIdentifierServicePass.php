@@ -33,6 +33,9 @@ class ObjectToIdentifierServicePass implements CompilerPassInterface
             $definition->addTag('form.type', array('alias' => 'sylius_entity_to_identifier'));
 
             $container->setDefinition('sylius_entity_to_identifier', $definition);
+
+            $definition = $container->findDefinition('sylius.form.type.entity_hidden');
+            $definition->replaceArgument(0, new Reference('doctrine'));
         }
 
         if ($container->hasDefinition('doctrine_mongodb')) {
@@ -45,6 +48,11 @@ class ObjectToIdentifierServicePass implements CompilerPassInterface
 
             if (!$container->hasDefinition('sylius_entity_to_identifier')) {
                 $container->setAlias('sylius_entity_to_identifier', 'sylius_document_to_identifier');
+            }
+
+            if (!$container->hasDefinition('doctrine')) {
+                $definition = $container->findDefinition('sylius.form.type.entity_hidden');
+                $definition->replaceArgument(0, new Reference('doctrine_mongodb'));
             }
         }
 

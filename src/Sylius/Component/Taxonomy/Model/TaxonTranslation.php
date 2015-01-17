@@ -100,7 +100,7 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug = null)
     {
         $this->slug = $slug;
 

@@ -14,7 +14,7 @@ sylius:
       amount: Import a pagar
       method: Mètode de pagament
       state:
-        0: Estat de pagament
+        header: Estat de pagament
         checkout: Realitza la compra
         completed: Completat
         failed: "S'ha produït un error"

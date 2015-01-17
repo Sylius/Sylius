@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Taxonomy translation model interface.
  *
