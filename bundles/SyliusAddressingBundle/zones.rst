@@ -9,4 +9,4 @@ This bundle exposes the **ZoneMatcher** as ``sylius.zone_matcher`` service.
 
     $zoneMatcher = $this->get('sylius.zone_matcher');
 
-    $zone = $zoneMatcher->match($user->getBillingAddress);
+    $zone = $zoneMatcher->match($user->getBillingAddress());
