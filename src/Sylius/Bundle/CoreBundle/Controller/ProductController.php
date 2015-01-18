@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ProductBundle\Controller\ProductController as BaseProductController;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductController extends ResourceController
+class ProductController extends BaseProductController
 {
     /**
      * List products categorized under given taxon.

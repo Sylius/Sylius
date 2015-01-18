@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_product_archetype_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_archetype:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductArchetype:index.html.twig
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_backend_product_archetype_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_archetype:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductArchetype:create.html.twig
+            redirect: sylius_backend_product_archetype_index
+
+sylius_backend_product_archetype_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_archetype:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ProductArchetype:update.html.twig
+            redirect: sylius_backend_product_archetype_index
+
+sylius_backend_product_archetype_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_archetype:deleteAction
+        _sylius:
+            redirect: sylius_backend_product_archetype_index

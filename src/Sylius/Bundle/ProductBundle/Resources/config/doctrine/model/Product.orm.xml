@@ -24,6 +24,10 @@
             <gedmo:versioned />
         </field>
 
+        <many-to-one field="archetype" target-entity="Sylius\Component\Product\Model\ArchetypeInterface">
+            <join-column name="archetype_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\AttributeValueInterface" mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />

@@ -13,6 +13,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
@@ -32,6 +33,11 @@ class Product extends AbstractTranslatable implements ProductInterface
      * @var mixed
      */
     protected $id;
+
+    /**
+     * @var null|ArchetypeInterface
+     */
+    protected $archetype;
 
     /**
      * Available on.
@@ -101,6 +107,24 @@ class Product extends AbstractTranslatable implements ProductInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return null|ArchetypeInterface
+     */
+    public function getArchetype()
+    {
+        return $this->archetype;
+    }
+
+    /**
+     * @param null|ArchetypeInterface $archetype
+     */
+    public function setArchetype(BaseArchetypeInterface $archetype = null)
+    {
+        $this->archetype = $archetype;
+
+        return $this;
     }
 
     /**

@@ -6,3 +6,5 @@ sylius:
     attribute:
       name: Interner Name
       presentation: Präsentation
+    archetype:
+      properties: Eigenschaften

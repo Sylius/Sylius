@@ -17,9 +17,9 @@ sylius_api_product_attribute:
     resource: @SyliusApiBundle/Resources/config/routing/product_attribute.yml
     prefix: /product-attributes
 
-sylius_api_product_prototype:
-    resource: @SyliusApiBundle/Resources/config/routing/product_prototype.yml
-    prefix: /product-prototypes
+sylius_api_product_archetype:
+    resource: @SyliusApiBundle/Resources/config/routing/product_archetype.yml
+    prefix: /product-archetypes
 
 sylius_api_taxonomy:
     resource: @SyliusApiBundle/Resources/config/routing/taxonomy.yml

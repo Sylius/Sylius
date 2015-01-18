@@ -12,3 +12,5 @@ sylius:
     option_value:
       add_value: Añadir valor
       value: Valor
+    archetype:
+      options: Opciones

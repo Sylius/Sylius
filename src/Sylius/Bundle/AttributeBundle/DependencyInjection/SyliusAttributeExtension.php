@@ -40,8 +40,8 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     public function process(array $config, ContainerBuilder $container)
     {
-        $convertedConfig = array();
         $subjects = array();
+        $convertedConfig = array();
 
         foreach ($config['classes'] as $subject => $parameters) {
             $subjects[$subject] = $parameters;

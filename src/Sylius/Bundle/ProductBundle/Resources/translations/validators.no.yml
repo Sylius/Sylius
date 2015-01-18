@@ -46,8 +46,8 @@ sylius:
       not_blank: Velg egenskap.
     value:
       not_blank: Angi egenskapsverdien for produktet.
-  prototype:
+  archetype:
     name:
-      not_blank: Skriv inn prototype navn.
-      min_length: 'Navnet på prototypen må være minst ett tegn. |Navnet på prototypen må være minst {{ limit }} tegn.'
-      max_length: 'Navnet på prototypen må ikke være lengre enn ett tegn. |Navnet på prototypen må ikke være lengre enn {{ limit }} tegn.'
+      not_blank: Skriv inn archetype navn.
+      min_length: 'Navnet på archetypen må være minst ett tegn. |Navnet på archetypen må være minst {{ limit }} tegn.'
+      max_length: 'Navnet på archetypen må ikke være lengre enn ett tegn. |Navnet på archetypen må ikke være lengre enn {{ limit }} tegn.'

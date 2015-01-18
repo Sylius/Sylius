@@ -23,7 +23,7 @@ sylius:
         products: Товары
         promotions: Рекламные акции
         properties: Настройка свойств
-        prototypes: Прототипы товаров
+        archetypes: Прототипы товаров
         sales: Заказы
         shipments: Посылки
         shipping_categories: Категории доставки
@@ -58,7 +58,7 @@ sylius:
         products: Товары
         promotions: Рекламные акции
         properties: Настройка свойств
-        prototypes: Прототипы товаров
+        archetypes: Прототипы товаров
         sales: Заказы
         shipments: Посылки
         shipping_categories: Категории доставки

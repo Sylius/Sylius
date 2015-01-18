@@ -14,8 +14,8 @@ sylius:
         sku:
             not_blank: Please enter variant SKU.
             unique: Variant SKU must be unique.
-    prototype:
+    archetype:
         name:
-            not_blank: Please enter prototype name.
-            min_length: Prototype name must be at least 1 character long.|Prototype name must be at least {{ limit }} characters long.
-            max_length: Prototype name must not be longer than 1 character.|Prototype name must not be longer than {{ limit }} characters.
+            not_blank: Please enter archetype name.
+            min_length: Archetype name must be at least 1 character long.|Archetype name must be at least {{ limit }} characters long.
+            max_length: Archetype name must not be longer than 1 character.|Archetype name must not be longer than {{ limit }} characters.

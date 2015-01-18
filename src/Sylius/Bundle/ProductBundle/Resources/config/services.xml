@@ -17,8 +17,8 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.listener.archetype_update.class">Sylius\Bundle\ProductBundle\EventListener\ArchetypeUpdateListener</parameter>
         <parameter key="sylius.builder.product.class">Sylius\Component\Product\Builder\ProductBuilder</parameter>
-        <parameter key="sylius.builder.product_prototype.class">Sylius\Component\Product\Builder\PrototypeBuilder</parameter>
 
         <parameter key="sylius.set_builder.cartesian.class">Sylius\Component\Variation\SetBuilder\CartesianSetBuilder</parameter>
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
@@ -28,10 +28,15 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.type.product_prototype" class="%sylius.form.type.product_prototype.class%">
-            <argument>%sylius.model.product_prototype.class%</argument>
-            <argument>%sylius.validation_group.product_prototype%</argument>
-            <tag name="form.type" alias="sylius_product_prototype" />
+        <service id="sylius.form.type.product" class="%sylius.form.type.product.class%">
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.validation_group.product%</argument>
+            <tag name="form.type" alias="sylius_product" />
+        </service>
+        <service id="sylius.form.type.product_archetype" class="%sylius.form.type.product_archetype.class%">
+            <argument>%sylius.model.product_archetype.class%</argument>
+            <argument>%sylius.validation_group.product_archetype%</argument>
+            <tag name="form.type" alias="sylius_product_archetype" />
         </service>
         <service id="sylius.form.type.product_translation" class="%sylius.form.type.product_translation.class%">
             <argument>%sylius.model.product.class%</argument>
@@ -42,9 +47,6 @@
             <argument type="service" id="sylius.manager.product" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.product_attribute" />
-            <argument type="service" id="sylius.repository.product_attribute_value" />
-        </service>
-        <service id="sylius.builder.product_prototype" class="%sylius.builder.product_prototype.class%">
             <argument type="service" id="sylius.repository.product_attribute_value" />
         </service>
 
@@ -59,6 +61,13 @@
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
+        </service>
+
+        <service id="sylius.listener.archetype_update" class="%sylius.listener.archetype_update.class%">
+            <argument type="service" id="sylius.builder.product_archetype" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.manager.product" />
+            <tag name="kernel.event_listener" event="sylius.product_archetype.pre_update" method="onArchetypeUpdate" />
         </service>
     </services>
 

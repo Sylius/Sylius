@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\AttributeBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
  * Doctrine listener used to manipulate mappings.
@@ -70,7 +72,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 ))
             );
 
-            $metadata->mapManyToOne($subjectMapping);
+            $this->mapManyToOne($metadata, $subjectMapping);
 
             $attributeMapping = array(
                 'fieldName'     => 'attribute',
@@ -83,7 +85,16 @@ class LoadMetadataSubscriber implements EventSubscriber
                 ))
             );
 
-            $metadata->mapManyToOne($attributeMapping);
+            $this->mapManyToOne($metadata, $attributeMapping);
         }
+    }
+
+    /**
+     * @param ClassMetadataInfo|ClassMetadata $metadata
+     * @param array                           $subjectMapping
+     */
+    private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping)
+    {
+        $metadata->mapManyToOne($subjectMapping);
     }
 }

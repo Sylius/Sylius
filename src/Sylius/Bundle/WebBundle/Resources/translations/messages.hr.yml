@@ -134,7 +134,7 @@ sylius:
       index: Kuponi
     property:
       index: Svojstva
-    prototype:
+    archetype:
       index: Prototipovi proizvoda
     sales: Prodaja
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: Tip
     update_header: Ažuriranje atributa
     updated_at: Ažurirano
-  prototype:
+  archetype:
     build: Kreiraj prototip
     build_header: Kreirajte artikal na bazi prototipa
     create: Kreiraj prototip

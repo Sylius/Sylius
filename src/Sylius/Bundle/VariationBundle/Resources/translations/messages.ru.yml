@@ -12,3 +12,5 @@ sylius:
     option_value:
       add_value: Добавить значение
       value: Значение
+    archetype:
+      options: Опции

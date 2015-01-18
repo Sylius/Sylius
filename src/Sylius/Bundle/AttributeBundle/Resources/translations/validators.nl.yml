@@ -15,4 +15,24 @@ sylius:
     attribute:
       not_blank: Kies een attribuut.
     value:
+      not_blank: Voer een optie waarde in.
+  property:
+    name:
+      not_blank: Voer een eigenschap naam in.
+      min_length: 'Eigenschap naam moet minstens 1 teken lang zijn.|Eigenschap naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Eigenschap naam mag niet langer zijn dan 1 teken.|Eigenschap naam mag niet langer zijn dan {{ limit }} tekens.'
+    presentation:
+      not_blank: Voer een eigenschap weergave in.
+      min_length: 'Eigenschap weergave moet minstens 1 teken lang zijn.|Eigenschap weergave moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Eigenschap weergave mag niet langer zijn dan 1 teken.|Eigenschap weergave mag niet langer zijn dan {{ limit }} tekens.'
+  product_property:
+    property:
+      not_blank: Selecteer een eigenschap.
+    value:
+      not_blank: Voer een eigenschap waarde in.
+  archetype:
+    name:
+      not_blank: Voer een prototype naam in.
+      min_length: 'Prototype naam moet minstens 1 teken lang zijn.|Prototype naam moet minstens {{ limit }} tekens lang zijn.'
+      max_length: 'Prototype naam mag niet langer zijn dan 1 teken.|Prototype naam mag niet langer zijn dan {{ limit }} tekens.'
       not_blank: Vul de waarde van het attribuut in.

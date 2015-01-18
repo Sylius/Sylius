@@ -175,8 +175,8 @@ sylius:
             index: Coupons
         attribute:
             index: Attributes
-        prototype:
-            index: Prototypes
+        archetype:
+            index: archetypes
         redirect_route:
             index: Redirect routes
         route:
@@ -598,6 +598,7 @@ sylius:
         contain_variants: Contain Variants
         create: Create product
         create_header: New product
+        archetype: Archetype
         description: Description
         generate_variants: Generate variants
         index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
@@ -699,17 +700,19 @@ sylius:
         type: type
         update_header: Editing attribute
         updated_at: last update
-    prototype:
-        build: Build prototype
-        build_header: Building product from prototype
-        create: Create prototype
-        create_header: New prototype
-        index_header: Product prototypes
+    archetype:
+        build: Build archetype
+        build_header: Building product from archetype
+        create: Create archetype
+        create_header: New archetype
+        index_header: Product archetypes
+        code: code
         name: name
-        no_results: There are no prototypes defined.
+        no_results: There are no archetypes defined.
         options: options
-        attributes:
-        update_header: Editing prototype
+        attributes: attributes
+        parent: parent
+        update_header: Editing archetype
         updated_at: last update
     province:
         provinces: Provinces

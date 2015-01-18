@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ff14277d9429e8b9f86c352896cf20d8",
+    "hash": "f898fd1660f82bde959f52b15fd4125a",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -213,6 +213,17 @@
                 "MIT"
             ],
             "authors": [
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com",
+                    "homepage": "http://www.instaclick.com"
+                },
                 {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
@@ -1381,12 +1392,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "6ec796c5a119b39b191e1c974031ea38ba8fbc6d"
+                "reference": "2e0302ebb1f361047f8124172f0aa34e0733b06f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/6ec796c5a119b39b191e1c974031ea38ba8fbc6d",
-                "reference": "6ec796c5a119b39b191e1c974031ea38ba8fbc6d",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/2e0302ebb1f361047f8124172f0aa34e0733b06f",
+                "reference": "2e0302ebb1f361047f8124172f0aa34e0733b06f",
                 "shasum": ""
             },
             "require": {
@@ -1450,7 +1461,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2014-12-11 08:38:29"
+            "time": "2014-11-21 13:02:29"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -2713,7 +2724,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2764,7 +2775,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2846,20 +2857,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
-                "reference": "7cd7db8cb140ef3e0107d027876a2a999fd91e01"
+                "reference": "4e5a2cf512782bc665f26d0368735871e7476255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/7cd7db8cb140ef3e0107d027876a2a999fd91e01",
-                "reference": "7cd7db8cb140ef3e0107d027876a2a999fd91e01",
+                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/4e5a2cf512782bc665f26d0368735871e7476255",
+                "reference": "4e5a2cf512782bc665f26d0368735871e7476255",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-snappy": "*",
                 "php": ">=5.3.2",
                 "symfony/finder": ">=2.0.0",
-                "symfony/framework-bundle": ">=2.0.0",
-                "symfony/validator": ">=2.0.0"
+                "symfony/framework-bundle": ">=2.0.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2895,7 +2905,7 @@
                 "pdf",
                 "snappy"
             ],
-            "time": "2014-12-03 13:03:00"
+            "time": "2014-10-26 21:46:18"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -7023,12 +7033,12 @@
             "version": "v1.16.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
+                "url": "https://github.com/fabpot/Twig.git",
                 "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "shasum": ""
             },
@@ -9210,6 +9220,7 @@
         "willdurand/hateoas-bundle": 0
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.3"
     },

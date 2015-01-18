@@ -1,0 +1,8 @@
+sylius:
+  form:
+    archetype:
+      code: Code
+      name: Name
+      parent: Parent
+      attributes: Attributes
+      options: Options

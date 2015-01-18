@@ -6,3 +6,6 @@ sylius:
     attribute:
       name: Nazwa w systemie
       presentation: Nazwa publiczna
+    archetype:
+      name: Nazwa
+      properties: Właściwości

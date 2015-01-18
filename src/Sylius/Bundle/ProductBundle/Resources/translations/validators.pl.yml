@@ -46,7 +46,7 @@ sylius:
       not_blank: Wybierz właściwość.
     value:
       not_blank: Podaj właściwość produktu.
-  prototype:
+  archetype:
     name:
       not_blank: Podaj nazwę prototypu.
       min_length: 'Nazwa prototypu musi mieć co najmniej 1 znak.|Nazwa prototypu musi mieć co najmniej {{ limit }} znaków.'

@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
+            <th class="info">{{ sylius_resource_sort('archetype', 'sylius.product.archetype'|trans) }}</th>
             <th class="info">{{ sylius_resource_sort('name', 'sylius.product.name'|trans) }}</th>
             <th class="stock">{{ 'sylius.product.stock'|trans }}</th>
             <th class="retail-price">{{ 'sylius.product.price'|trans }}</th>
@@ -20,6 +21,13 @@
         <tr id="{{ product.id }}">
             <td class="id">
                 {{ product.id }}
+            </td>
+            <td>
+                {% if product.archetype is not null %}
+                    {{ product.archetype }}
+                {% else %}
+                    -
+                {% endif %}
             </td>
             <td class="info">
                 <div class="media">

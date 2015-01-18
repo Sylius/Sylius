@@ -134,7 +134,7 @@ sylius:
       index: Kupony
     property:
       index: Właściwości
-    prototype:
+    archetype:
       index: Prototypy
     sales: Sprzedaż
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: typ
     update_header: Edycja właściwości
     updated_at: ostatnia aktualizacja
-  prototype:
+  archetype:
     build: Budowa prototypu
     build_header: Tworzenie produkto na podstwie prototypu
     create: Dodaj prototyp

@@ -23,7 +23,7 @@ sylius:
         products: Produkty
         promotions: Promocje
         properties: Właściwości
-        prototypes: Prototypy
+        archetypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki
         shipping_categories: Kategorie wysyłki
@@ -58,7 +58,7 @@ sylius:
         products: Produkty
         promotions: Promocje
         properties: Właściwości
-        prototypes: Prototypy
+        archetypes: Prototypy
         sales: Zamówienia
         shipments: Przesyłki
         shipping_categories: Kategorie wysyłki
