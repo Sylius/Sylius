@@ -633,6 +633,7 @@ sylius:
             options: Options
             product: Product
             attributes: Attributes
+            stock: Inventory
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product

@@ -72,7 +72,7 @@ class InventoryExtension extends \Twig_Extension
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        return $this->helper->isStockSufficient($stockable, $quantity);
+        return $this->helper->isStockAvailable($stockable, $quantity);
     }
 
     /**

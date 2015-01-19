@@ -18,6 +18,10 @@ namespace Sylius\Component\Core;
  */
 class SyliusCheckoutEvents
 {
+    const INVENTORY_INITIALIZE   = 'sylius.checkout.inventory.initialize';
+    const INVENTORY_PRE_COMPLETE = 'sylius.checkout.inventory.pre_complete';
+    const INVENTORY_COMPLETE     = 'sylius.checkout.inventory.complete';
+
     const SECURITY_INITIALIZE   = 'sylius.checkout.security.initialize';
     const SECURITY_PRE_COMPLETE = 'sylius.checkout.security.pre_complete';
     const SECURITY_COMPLETE     = 'sylius.checkout.security.complete';

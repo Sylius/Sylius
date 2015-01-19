@@ -9,27 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Inventory\Checker;
+namespace Sylius\Component\Inventory\Manager;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Stock availability checker interface.
+ * Inventory Manager interface.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Myke Hines <myke@webhines.com>
  */
-interface AvailabilityCheckerInterface
+interface InventoryManagerInterface
 {
-    /**
-     * Checks whether stockable object is available in stock.
-     * This method should not care about what quantity is required.
-     *
-     * @param StockableInterface $stockable
-     *
-     * @return Boolean
-     */
-    public function isStockAvailable(StockableInterface $stockable);
-
     /**
      * Checks whether stockable object is available in stock.
      * Takes required quantity into account.
@@ -39,5 +29,17 @@ interface AvailabilityCheckerInterface
      *
      * @return Boolean
      */
-    public function isStockSufficient(StockableInterface $stockable, $quantity);
+    public function isStockAvailable(StockableInterface $stockable, $quantity);
+
+    /**
+     * Checks to see if stock in convertable (into a quote or order)
+     * Includes checks for min/max quantity, etc..
+     *
+     * @param StockableInterface $stockable
+     * @param integer            $quantity
+     *
+     * @return Boolean
+     */
+    public function isStockConvertable(StockableInterface $stockable, $quantity);
+
 }

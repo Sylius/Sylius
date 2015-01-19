@@ -23,6 +23,7 @@
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
 
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
+        <parameter key="sylius.checkout_step.inventory.class">Sylius\Bundle\CoreBundle\Checkout\Step\InventoryStep</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
         <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
@@ -37,6 +38,7 @@
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
 
+        <parameter key="sylius.listener.cart_inventory.class">Sylius\Bundle\CoreBundle\EventListener\CartInventoryListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
@@ -101,7 +103,7 @@
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.manager.inventory" />
             <argument type="service" id="sylius.checker.restricted_zone" />
             <argument type="service" id="sylius.price_calculator" />
         </service>
@@ -118,6 +120,12 @@
             <tag name="sylius.process.scenario" alias="sylius_checkout" />
         </service>
 
+        <service id="sylius.checkout_step.inventory" class="%sylius.checkout_step.inventory.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_inventory" />
+        </service>
         <service id="sylius.checkout_step.security" class="%sylius.checkout_step.security.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
@@ -201,6 +209,12 @@
         </service>
 
         <!-- listeners -->
+        <service id="sylius.listener.cart_inventory" class="%sylius.listener.cart_inventory.class%">
+            <argument type="service" id="session" />
+            <argument type="service" id="sylius.manager.inventory.default" />            
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="processInventoryRestrictions" />
+        </service>        
         <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
             <argument type="service" id="fos_user.user_manager" />
             <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />

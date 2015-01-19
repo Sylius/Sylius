@@ -18,25 +18,27 @@
 >
 
     <parameters>
-        <parameter key="sylius.availability_checker.default.class">Sylius\Component\Inventory\Checker\AvailabilityChecker</parameter>
+        <parameter key="sylius.manager.inventory.default.class">Sylius\Component\Inventory\Manager\InventoryManager</parameter>
         <parameter key="sylius.inventory_operator.noop.class">Sylius\Component\Inventory\Operator\NoopInventoryOperator</parameter>
         <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
         <parameter key="sylius.backorders_handler.class">Sylius\Component\Inventory\Operator\BackordersHandler</parameter>
         <parameter key="sylius.inventory_unit_factory.class">Sylius\Component\Inventory\Factory\InventoryUnitFactory</parameter>
         <parameter key="sylius.listener.inventory.class">Sylius\Bundle\InventoryBundle\EventListener\InventoryChangeListener</parameter>
         <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
+        <parameter key="sylius.validator.max_qty_greater_then_or_equal_min_qty.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\MaxQuantityGreaterThenOrEqualMinQuantityValidator</parameter>
+        <parameter key="sylius.validator.non_empty_if_manage_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\NonEmptyIfManageStockValidator</parameter>
     </parameters>
 
     <services>
         <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
             <argument type="service" id="sylius.backorders_handler" />
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.manager.inventory" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.inventory_operator.noop" class="%sylius.inventory_operator.noop.class%" />
 
-        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%">
+        <service id="sylius.manager.inventory.default" class="%sylius.manager.inventory.default.class%">
             <argument>%sylius.backorders%</argument>
         </service>
 
@@ -53,9 +55,23 @@
         </service>
 
         <service id="sylius.validator.in_stock" class="%sylius.validator.in_stock.class%">
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.manager.inventory" />
             <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
+
+        <service id="sylius.validator.max_qty_greater_then_or_equal_min_qty" class="%sylius.validator.max_qty_greater_then_or_equal_min_qty.class%">
+            <tag name="validator.constraint_validator" alias="sylius_stock_maxQuantity" />
+        </service>
+
+       <service id="sylius.validator.non_empty_if_manage_stock" class="%sylius.validator.non_empty_if_manage_stock.class%">
+            <tag name="validator.constraint_validator" alias="sylius_stock_non_empty_if_manage_stock" />
+        </service>
+
+        <service id="sylius.form.type.stock" class="%sylius.form.type.stock.class%">
+            <argument>%sylius.model.stock.class%</argument>
+            <tag name="form.type" alias="sylius_inventory_stock" />
+        </service>
+
     </services>
 
 </container>

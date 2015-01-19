@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Sylius\Component\Inventory\Model\Stock" table="sylius_inventory_stock">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+      
+        <field name="manageStock" column="manage_stock" type="boolean" nullable="false" />
+        <field name="onHand" column="on_hand" type="float" nullable="true" />
+        <field name="onHold" column="on_hold" type="integer" nullable="true" />
+
+        <field name="allowBackorders" column="allow_backorders" type="boolean" nullable="true" />
+        <field name="minQuantityInCart" column="min_qty_cart" type="integer" nullable="true" />
+        <field name="maxQuantityInCart" column="max_qty_cart" type="integer" nullable="true" />
+        <field name="minStockLevel" column="min_stock_level" type="integer" nullable="true" />
+
+    </mapped-superclass>
+
+</doctrine-mapping>

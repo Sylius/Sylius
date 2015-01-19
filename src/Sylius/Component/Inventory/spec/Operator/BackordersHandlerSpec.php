@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -40,6 +41,7 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_backorders_units_if_quantity_is_greater_than_on_hand(
         StockableInterface $stockable,
+        StockInterface $stock,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         InventoryUnitInterface $inventoryUnit3
@@ -48,7 +50,8 @@ class BackordersHandlerSpec extends ObjectBehavior
         $inventoryUnit2->getStockable()->shouldBeCalled()->willReturn($stockable);
         $inventoryUnit3->getStockable()->shouldBeCalled()->willReturn($stockable);
 
-        $stockable->getOnHand()->willReturn(2);
+        $stock->getOnHand()->willReturn(2);
+        $stockable->getStock()->willReturn($stock);
 
         $inventoryUnit1->setInventoryState(Argument::any())->shouldNotBeCalled();
         $inventoryUnit2->setInventoryState(Argument::any())->shouldNotBeCalled();
@@ -60,13 +63,16 @@ class BackordersHandlerSpec extends ObjectBehavior
     function it_complains_if_inventory_units_contain_different_stockables(
         StockableInterface $stockable1,
         StockableInterface $stockable2,
+        StockInterface $stock,        
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2
     ) {
         $inventoryUnit1->getStockable()->shouldBeCalled()->willReturn($stockable1);
         $inventoryUnit2->getStockable()->shouldBeCalled()->willReturn($stockable2);
 
-        $stockable1->getOnHand()->shouldBeCalled()->willReturn(50);
+        $stock->isManageStock()->willReturn(true);
+        $stock->getOnHand()->shouldBeCalled()->willReturn(50);
+        $stockable1->getStock()->willReturn($stock);
 
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -76,12 +82,15 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_partially_fills_backordered_units_if_not_enough_in_stock(
         StockableInterface $stockable,
+        StockInterface $stock,                
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         ObjectRepository $repository
     ) {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(1);
-        $stockable->setOnHand(0)->shouldBeCalled();
+        $stock->isManageStock()->willReturn(true);        
+        $stock->getOnHand()->shouldBeCalled()->willReturn(1);
+        $stock->setOnHand(0)->shouldBeCalled();
+        $stockable->getStock()->willReturn($stock);
 
         $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
         $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldNotBeCalled();
@@ -104,13 +113,16 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_fills_all_backordered_units_if_enough_in_stock(
         StockableInterface $stockable,
+        StockInterface $stock,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         InventoryUnitInterface $inventoryUnit3,
         ObjectRepository $repository
     ) {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(3);
-        $stockable->setOnHand(0)->shouldBeCalled();
+        $stock->isManageStock()->willReturn(true);        
+        $stock->getOnHand()->shouldBeCalled()->willReturn(3);
+        $stock->setOnHand(0)->shouldBeCalled();
+        $stockable->getStock()->willReturn($stock);
 
         $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
         $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
@@ -134,12 +146,15 @@ class BackordersHandlerSpec extends ObjectBehavior
 
     function it_partially_fills_backordered_units_and_updates_stock_accordingly(
         StockableInterface $stockable,
+        StockInterface $stock,
         InventoryUnitInterface $inventoryUnit1,
         InventoryUnitInterface $inventoryUnit2,
         ObjectRepository $repository
     ) {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(5);
-        $stockable->setOnHand(3)->shouldBeCalled();
+        $stock->isManageStock()->willReturn(true);        
+        $stock->getOnHand()->shouldBeCalled()->willReturn(5);
+        $stock->setOnHand(3)->shouldBeCalled();
+        $stockable->getStock()->willReturn($stock);
 
         $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();
         $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_SOLD)->shouldBeCalled();

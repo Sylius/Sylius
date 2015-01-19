@@ -16,7 +16,7 @@ use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Manager\InventoryManagerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -62,9 +62,9 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Stock availability checker.
      *
-     * @var AvailabilityCheckerInterface
+     * @var InventoryManagerInterface
      */
-    protected $availabilityChecker;
+    protected $inventoryManager;
 
     /**
      * Restricted zone checker.
@@ -79,7 +79,7 @@ class ItemResolver implements ItemResolverInterface
      * @param CartProviderInterface          $cartProvider
      * @param RepositoryInterface            $productRepository
      * @param FormFactoryInterface           $formFactory
-     * @param AvailabilityCheckerInterface   $availabilityChecker
+     * @param InventoryManagerInterface   $inventoryManager
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      * @param DelegatingCalculatorInterface  $priceCalculator
      */
@@ -87,7 +87,7 @@ class ItemResolver implements ItemResolverInterface
         CartProviderInterface          $cartProvider,
         RepositoryInterface            $productRepository,
         FormFactoryInterface           $formFactory,
-        AvailabilityCheckerInterface   $availabilityChecker,
+        InventoryManagerInterface   $inventoryManager,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
         DelegatingCalculatorInterface  $priceCalculator
     )
@@ -95,7 +95,7 @@ class ItemResolver implements ItemResolverInterface
         $this->cartProvider = $cartProvider;
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
-        $this->availabilityChecker = $availabilityChecker;
+        $this->inventoryManager = $inventoryManager;
         $this->restrictedZoneChecker = $restrictedZoneChecker;
         $this->priceCalculator = $priceCalculator;
     }
@@ -149,7 +149,7 @@ class ItemResolver implements ItemResolverInterface
             }
         }
 
-        if (!$this->availabilityChecker->isStockSufficient($variant, $quantity)) {
+        if (!$this->inventoryManager->isStockAvailable($variant, $quantity)) {
             throw new ItemResolvingException('Selected item is out of stock.');
         }
 

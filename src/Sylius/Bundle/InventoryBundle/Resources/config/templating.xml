@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.templating.helper.inventory" class="%sylius.templating.helper.inventory.class%">
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.manager.inventory" />
             <tag name="templating.helper" alias="sylius_inventory" />
         </service>
     </services>

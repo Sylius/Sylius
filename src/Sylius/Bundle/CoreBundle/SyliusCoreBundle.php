@@ -56,6 +56,7 @@ class SyliusCoreBundle extends AbstractTranslationBundle
             'Sylius\Component\Core\Model\UserOAuthInterface'           => 'sylius.model.user_oauth.class',
             'Sylius\Component\Core\Model\GroupInterface'               => 'sylius.model.group.class',
             'Sylius\Component\Core\Model\ProductVariantImageInterface' => 'sylius.model.product_variant_image.class',
+            'Sylius\Component\Core\Model\ProductVariantStockInterface' => 'sylius.model.product_variant_stock.class',
         );
     }
 

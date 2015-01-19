@@ -31,14 +31,14 @@ Feature: Inventory tracking
 
     Scenario: Updating product stock level
         Given I am editing product "Sticker"
-         When I fill in "Current stock" with "10"
+         When I fill in "Units Available" with "10"
           And I press "Save changes"
          Then I should be on the page of product "Sticker"
           And I should see "Product has been successfully updated."
 
     Scenario: Making product not available on demand
         Given I am editing product "Sticker"
-         When I uncheck "Available on demand"
+         When I uncheck "Allow Backorders"
           And I press "Save changes"
          Then I should be on the page of product "Sticker"
           And I should see "Product has been successfully updated."
@@ -47,16 +47,16 @@ Feature: Inventory tracking
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
          When I click "edit" near "T-Shirt size: L"
-          And I fill in "Current stock" with "10"
+          And I fill in "Units Available" with "10"
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Variant has been successfully updated."
 
-    Scenario: Making variant not available on demand
+    Scenario: Making variant not available for backorders
         Given product "Black T-Shirt" is available in all variations
           And I am on the page of product "Black T-Shirt"
          When I click "edit" near "T-Shirt size: L"
-          And I uncheck "Available on demand"
+          And I uncheck "Allow Backorders"
           And I press "Save changes"
          Then I should be on the page of product "Black T-Shirt"
           And I should see "Variant has been successfully updated."

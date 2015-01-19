@@ -136,6 +136,8 @@ sylius_inventory:
             model: Sylius\Component\Core\Model\InventoryUnit
         stockable:
             model: %sylius.model.product_variant.class%
+        stock:
+            model: Sylius\Component\Core\Model\ProductVariantStock
 
 sylius_payment:
     classes:

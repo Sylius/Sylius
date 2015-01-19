@@ -24,12 +24,7 @@
         </indexes>
 
         <field name="sku" column="sku" type="string" nullable="true" />
-
-        <field name="onHold" column="on_hold" type="integer" />
-        <field name="onHand" column="on_hand" type="integer" />
         <field name="sold" column="sold" type="integer" />
-        <field name="availableOnDemand" column="available_on_demand" type="boolean" />
-
         <field name="price" column="price" type="integer">
             <gedmo:versioned />
         </field>
@@ -46,6 +41,13 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
+        <one-to-one field="stock" target-entity="Sylius\Component\Core\Model\ProductVariantStock">
+            <join-column name="stock_id" referenced-column-name="id" />
+            <cascade>
+                <cascade-all />
+            </cascade>
+            
+        </one-to-one>
 
         <gedmo:loggable />
     </mapped-superclass>

@@ -65,6 +65,13 @@ sylius:
             shipping_address: Ship to name
         shipping_method:
             zone: Zone
+        stock:
+            manage_stock: Manage Stock
+            onHand: Units Available
+            allowBackorders: Allow Backorders
+            minQuantityInCart: Minimum Units in cart
+            maxQuantityInCart: Maximum Units in cart
+            minStockLevel: Minimum Stock Level
         taxon:
             file: Select image
         taxonomy:

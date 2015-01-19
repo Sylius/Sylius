@@ -41,6 +41,7 @@ class CheckoutProcessScenarioSpec extends ObjectBehavior
 
     function it_builds_checkout_process_with_proper_steps(ProcessBuilderInterface $builder)
     {
+        $builder->add('inventory', 'sylius_checkout_inventory')->willReturn($builder)->shouldBeCalled();
         $builder->add('security', 'sylius_checkout_security')->willReturn($builder)->shouldBeCalled();
         $builder->add('addressing', 'sylius_checkout_addressing')->willReturn($builder)->shouldBeCalled();
         $builder->add('shipping', 'sylius_checkout_shipping')->willReturn($builder)->shouldBeCalled();

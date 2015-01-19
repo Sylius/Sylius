@@ -42,13 +42,15 @@ class SyliusInventoryExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
-        $container->setAlias('sylius.availability_checker', $config['checker']);
+        $container->setAlias('sylius.manager.inventory', $config['manager']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
 
         $classes = $config['classes'];
 
         $container->setParameter('sylius.controller.inventory_unit.class', $classes['inventory_unit']['controller']);
         $container->setParameter('sylius.model.inventory_unit.class', $classes['inventory_unit']['model']);
+        $container->setParameter('sylius.model.stock.class', $classes['stock']['model']);
+        $container->setParameter('sylius.form.type.stock.class', $classes['stock']['form']);
 
         if (array_key_exists('repository', $classes['inventory_unit'])) {
             $container->setParameter(

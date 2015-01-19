@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Sylius\Component\Core\Model\ProductVariantStock;
 
 /**
  * Sylius core product variant entity.
@@ -53,18 +54,11 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $pricingConfiguration = array();
 
     /**
-     * On hold.
+     * Stock
      *
-     * @var int
+     * @var Stock
      */
-    protected $onHold = 0;
-
-    /**
-     * On hand stock.
-     *
-     * @var int
-     */
-    protected $onHand = 0;
+    protected $stock;
 
     /**
      * Sold amount.
@@ -122,6 +116,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         parent::__construct();
 
+        $this->stock = new ProductVariantStock();
         $this->images = new ArrayCollection();
     }
 
@@ -210,54 +205,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setPricingConfiguration(array $configuration)
     {
         $this->pricingConfiguration = $configuration;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isInStock()
-    {
-        return 0 < $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHold()
-    {
-        return $this->onHold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHold($onHold)
-    {
-        $this->onHold = $onHold;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOnHand()
-    {
-        return $this->onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOnHand($onHand)
-    {
-        $this->onHand = $onHand;
-
-        if (0 > $this->onHand) {
-            $this->onHand = 0;
-        }
 
         return $this;
     }
@@ -477,4 +424,22 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->depth * $this->height * $this->width;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }    
 }

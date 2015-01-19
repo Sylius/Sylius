@@ -1,0 +1,17 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+<div class="tab-pane" id="stock">
+{% if form.masterVariant.stock is defined %}
+	<hr/>
+    <div class="row">
+        <div class="col-md-6">
+    		{{ form_row(form.masterVariant.stock.manage_stock) }}
+    	</div>
+    </div>
+    <div class="row stockValues">
+        <div class="col-lg-10 col-lg-offset-2">
+    		{{ form_row(form.masterVariant.stock) }}
+    	</div>
+    </div>    
+{% endif %}
+</div>
