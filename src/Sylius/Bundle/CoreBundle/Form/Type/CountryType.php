@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -27,16 +27,16 @@ use Symfony\Component\Intl\Intl;
 class CountryType extends AbstractResourceType
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     private $countryRepository;
 
     /**
      * {@inheritdoc}
      *
-     * @param RepositoryInterface $countryRepository
+     * @param ResourceRepositoryInterface $countryRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $countryRepository)
+    public function __construct($dataClass, array $validationGroups = array(), ResourceRepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
 

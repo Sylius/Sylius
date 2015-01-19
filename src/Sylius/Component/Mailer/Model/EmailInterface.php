@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Mailer\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface EmailInterface extends TimestampableInterface
+interface EmailInterface extends ResourceInterface, TimestampableInterface
 {
     /**
      * @return string

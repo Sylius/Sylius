@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
@@ -26,15 +27,14 @@ require_once __DIR__.'/../../../../ResourceBundle/spec/Fixture/Entity/Translatab
  * Doctrine ORM driver translatable entity repository spec.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TranslatableResourceRepositorySpec extends ObjectBehavior
 {
-    public function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
+    function let(EntityRepository $entityRepository, EntityManager $entityManager, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
-        $class->name = 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\TranslatableFoo';
-
-        $entityManager
-            ->createQueryBuilder()
+        $entityRepository
+            ->createQueryBuilder('o')
             ->willReturn($queryBuilder)
         ;
 
@@ -63,7 +63,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
             ->willReturn($query)
         ;
 
-        $this->beConstructedWith($entityManager, $class);
+        $this->beConstructedWith($entityRepository, $entityManager);
     }
 
     public function it_is_initializable()
@@ -76,18 +76,7 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
     }
 
-    public function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
-    {
-        $localeProvider->getCurrentLocale()->willReturn('en_US');
-        $localeProvider->getFallbackLocale()->willReturn('en_US');
-
-        $this->setLocaleProvider($localeProvider);
-
-        $this->createNew()->getCurrentLocale()->shouldReturn('en_US');
-        $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
-    }
-
-    public function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
+    function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
     {
         $translatableFields = array('foo');
 
@@ -262,19 +251,6 @@ class TranslatableResourceRepositorySpec extends ObjectBehavior
         }
 
         $this->findBy($criteria)->shouldReturn(null);
-    }
-
-    public function it_returns_null_if_there_are_no_resources()
-    {
-        $this->findAll()->shouldReturn(null);
-    }
-
-    public function it_creates_Pagerfanta_paginator()
-    {
-        $this
-            ->createPaginator()
-            ->shouldHaveType('Pagerfanta\Pagerfanta')
-        ;
     }
 
     public function it_has_fluent_interface(LocaleProviderInterface $localeProvider)

@@ -14,16 +14,19 @@ namespace spec\Sylius\Component\Inventory\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin \Sylius\Component\Inventory\Factory\InventoryUnitFactory
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnitFactorySpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(ResourceFactoryInterface $factory)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($factory);
     }
 
     function it_is_initializable()
@@ -31,7 +34,7 @@ class InventoryUnitFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Inventory\Factory\InventoryUnitFactory');
     }
 
-    function it_implements_Sylius_inventory_unit_factory_interface()
+    function it_implements_inventory_unit_factory_interface()
     {
         $this->shouldImplement('Sylius\Component\Inventory\Factory\InventoryUnitFactoryInterface');
     }
@@ -40,28 +43,19 @@ class InventoryUnitFactorySpec extends ObjectBehavior
     {
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringCreate($stockable, -2)
+            ->duringCreateForStockable($stockable, -2)
         ;
     }
 
-    function it_creates_inventory_units(
-        StockableInterface $stockable,
-        InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2,
-        InventoryUnitInterface $inventoryUnit3,
-        $repository
-    ) {
-        $repository->createNew()->shouldBeCalled()->willReturn($inventoryUnit1, $inventoryUnit2, $inventoryUnit3);
+    function it_creates_units_for_given_stockable(ResourceFactoryInterface $factory, StockableInterface $stockable, InventoryUnitInterface $unit1, InventoryUnitInterface $unit2)
+    {
+        $factory->createNew()->shouldBeCalled()->willReturn($unit1, $unit2);
 
-        $inventoryUnit1->setStockable($stockable)->shouldBeCalled();
-        $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
+        $unit1->setStockable($stockable)->shouldBeCalled();
+        $unit1->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
+        $unit2->setStockable($stockable)->shouldBeCalled();
+        $unit2->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
 
-        $inventoryUnit2->setStockable($stockable)->shouldBeCalled();
-        $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
-
-        $inventoryUnit3->setStockable($stockable)->shouldBeCalled();
-        $inventoryUnit3->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED)->shouldBeCalled();
-
-        $this->create($stockable, 3, InventoryUnitInterface::STATE_BACKORDERED);
+        $this->createForStockable($stockable, 2, InventoryUnitInterface::STATE_BACKORDERED)->shouldHaveType('Doctrine\Common\Collections\ArrayCollection');
     }
 }

@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
         $this->addFormSection($rootNode);
         $this->addIndexesSection($rootNode);
         $this->addAccessorsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -197,29 +197,59 @@ class Configuration implements ConfigurationInterface
     /**
      * @param ArrayNodeDefinition $node
      */
-    private function addClassesSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('search')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('driver')->defaultValue('doctrine/orm')->end()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchIndex')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
-                                ->scalarNode('repository')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchIndex')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchIndexInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('log')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('driver')->defaultValue('doctrine/orm')->end()
-                                ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchLog')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
-                                ->scalarNode('repository')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchLog')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Bundle\SearchBundle\Model\SearchLogInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\SearchBundle\Controller\SearchController')->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

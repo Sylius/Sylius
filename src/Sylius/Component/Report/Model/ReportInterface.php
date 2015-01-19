@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Report\Model;
 
-interface ReportInterface
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+interface ReportInterface extends ResourceInterface
 {
     /**
      * @return mixed

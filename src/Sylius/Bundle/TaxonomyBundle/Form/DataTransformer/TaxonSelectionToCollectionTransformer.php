@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceSelectionToIdentifierCollectionTransformer;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Patrick Berenschot <p.berenschot@taka-a-byte.eu>
  */
-class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierCollectionTransformer
+class TaxonSelectionToCollectionTransformer extends ResourceSelectionToIdentifierCollectionTransformer
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,8 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
     public function transform($value)
     {
         $taxons = array();
-        foreach ($this->objects as $taxonomy) {
+
+        foreach ($this->resources as $taxonomy) {
             $taxons[$taxonomy->getId()] = array();
         }
 
@@ -43,18 +44,18 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
             throw new UnexpectedTypeException($value, 'Doctrine\Common\Collections\Collection');
         }
 
-        return $this->processObjects($value, $taxons);
+        return $this->processResources($value, $taxons);
     }
 
-    private function processObjects(Collection $value, array $taxons)
+    private function processResources(Collection $value, array $taxons)
     {
         /* @var $taxonomy TaxonomyInterface */
-        foreach ($this->objects as $taxonomy) {
+        foreach ($this->resources as $taxonomy) {
             /* @var $taxon TaxonInterface */
             foreach ($taxonomy->getTaxons() as $taxon) {
                 $this->addChildren($taxonomy, $value, $taxon->getChildren(), $taxons);
 
-                if ($value->contains($this->saveObjects ? $taxon : $taxon->getId())) {
+                if ($value->contains($this->useIdentifiers ? $taxon : $taxon->getId())) {
                     $taxons[$taxonomy->getId()][] = $taxon;
                 }
             }
@@ -79,7 +80,7 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
 
         /* @var $children TaxonInterface[] */
         foreach ($children as $child) {
-            if ($value->contains($this->saveObjects ? $child : $child->getId())) {
+            if ($value->contains($this->useIdentifiers ? $child : $child->getId())) {
                 $taxons[$taxonomy->getId()][] = $child;
             }
 

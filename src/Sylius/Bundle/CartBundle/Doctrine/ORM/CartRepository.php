@@ -28,11 +28,13 @@ class CartRepository extends OrderRepository implements CartRepositoryInterface
      */
     public function findExpiredCarts()
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.expiresAt', ':now'))
-            ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.state', ':state'))
+            ->addSelect('item')
+            ->leftJoin('o.items', 'item')
+            ->andWhere($queryBuilder->expr()->lt('o.expiresAt', ':now'))
+            ->andWhere($queryBuilder->expr()->eq('o.state', ':state'))
             ->setParameter('now', new \DateTime())
             ->setParameter('state', OrderInterface::STATE_CART)
         ;

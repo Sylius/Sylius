@@ -14,6 +14,7 @@
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -23,9 +24,10 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, CredentialsHolderInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
+interface UserInterface extends ResourceInterface, AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
+
     /**
      * @return int
      */

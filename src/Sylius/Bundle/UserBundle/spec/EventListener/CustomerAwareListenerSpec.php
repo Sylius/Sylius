@@ -14,10 +14,10 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -34,9 +34,9 @@ class CustomerAwareListenerSpec extends ObjectBehavior
         $this->beConstructedWith($customerContext);
     }
 
-    function it_throws_exception_when_object_is_not_customer(GenericEvent $event, \stdClass $object)
+    function it_throws_exception_when_object_is_not_customer(ResourceEvent $event, \stdClass $object)
     {
-        $event->getSubject()->willReturn($object);
+        $event->getResource()->willReturn($object);
 
         $this
             ->shouldThrow('InvalidArgumentException')
@@ -46,10 +46,10 @@ class CustomerAwareListenerSpec extends ObjectBehavior
 
     function it_does_nothing_when_context_doesnt_have_customer(
         $customerContext,
-        GenericEvent $event,
+        ResourceEvent $event,
         CustomerAwareInterface $resource
     ) {
-        $event->getSubject()->willReturn($resource);
+        $event->getResource()->willReturn($resource);
         $customerContext->getCustomer()->willReturn(null);
 
         $resource->setCustomer(Argument::any())->shouldNotBeCalled();
@@ -59,11 +59,11 @@ class CustomerAwareListenerSpec extends ObjectBehavior
 
     function it_sets_customer_on_a_resource(
         $customerContext,
-        GenericEvent $event,
+        ResourceEvent $event,
         CustomerAwareInterface $resource,
         CustomerInterface $customer
     ) {
-        $event->getSubject()->willReturn($resource);
+        $event->getResource()->willReturn($resource);
         $customerContext->getCustomer()->willReturn($customer);
 
         $resource->setCustomer($customer)->shouldBeCalled();

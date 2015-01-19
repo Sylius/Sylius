@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
-use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerRepository extends EntityRepository
+class CustomerRepository extends ResourceRepository
 {
     /**
      * Get the customer's data for the details page.
@@ -29,9 +28,10 @@ class CustomerRepository extends EntityRepository
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->objectManager->getFilters()->disable('softdeleteable');
 
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
         $queryBuilder
             ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
             ->setParameter('id', $id)
@@ -41,7 +41,8 @@ class CustomerRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
-        $this->_em->getFilters()->enable('softdeleteable');
+
+        $this->objectManager->getFilters()->enable('softdeleteable');
 
         return $result;
     }
@@ -55,11 +56,11 @@ class CustomerRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o')
             ->leftJoin($this->getPropertyName('user'), 'user');
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->objectManager->getFilters()->disable('softdeleteable');
         }
 
         if (isset($criteria['query'])) {

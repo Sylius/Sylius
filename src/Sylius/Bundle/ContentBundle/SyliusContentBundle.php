@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\ContentBundle;
 
+use Sylius\Bundle\ContentBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Sylius content bundle.
@@ -21,6 +23,14 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
  */
 class SyliusContentBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new ServicesPass());
+    }
+
     /**
      * {@inheritdoc}
      */

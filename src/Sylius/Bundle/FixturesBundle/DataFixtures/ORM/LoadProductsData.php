@@ -45,6 +45,7 @@ class LoadProductsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $manager = $this->getProductManager();
         // T-Shirts...
         for ($i = 1; $i <= 120; $i++) {
             switch (rand(0, 3)) {
@@ -311,7 +312,7 @@ class LoadProductsData extends DataFixture
     private function addAttribute(ProductInterface $product, $name, $value)
     {
         /* @var $attribute AttributeValueInterface */
-        $attribute = $this->getProductAttributeValueRepository()->createNew();
+        $attribute = $this->getProductAttributeValueFactory()->createNew();
         $attribute->setAttribute($this->getReference('Sylius.Attribute.'.$name));
         $attribute->setProduct($product);
         $attribute->setValue($value);
@@ -327,6 +328,7 @@ class LoadProductsData extends DataFixture
      */
     protected function setTaxons(ProductInterface $product, array $taxonNames)
     {
+        return;
         $taxons = new ArrayCollection();
 
         foreach ($taxonNames as $taxonName) {
@@ -390,7 +392,7 @@ class LoadProductsData extends DataFixture
      */
     protected function createProduct()
     {
-        return $this->getProductRepository()->createNew();
+        return $this->getProductFactory()->createNew();
     }
 
     /**

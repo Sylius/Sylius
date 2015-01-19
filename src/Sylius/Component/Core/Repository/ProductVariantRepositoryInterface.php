@@ -11,14 +11,14 @@
 
 namespace Sylius\Component\Core\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * This interface should be implemented by repository of product variants.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ProductVariantRepositoryInterface extends RepositoryInterface
+interface ProductVariantRepositoryInterface extends ResourceRepositoryInterface
 {
     /**
      * Get query builder for the form choice field.

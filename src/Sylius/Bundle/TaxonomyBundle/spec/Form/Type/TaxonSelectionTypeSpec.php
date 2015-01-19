@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\Taxonomy;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaxonSelectionTypeSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
+    function let(ResourceRepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
     {
         $this->beConstructedWith($taxonomyRepository, $taxonRepository);
     }

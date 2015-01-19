@@ -14,7 +14,9 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Payment processor.
@@ -25,28 +27,25 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PaymentProcessor implements PaymentProcessorInterface
 {
     /**
-     * Payment repository.
-     *
-     * @var RepositoryInterface
-     */
-    protected $paymentRepository;
-
-    /**
-     * Payment Manager
-     *
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $paymentManager;
 
     /**
+     * @var ResourceFactoryInterface
+     */
+    protected $paymentFactory;
+
+    /**
      * Constructor.
      *
-     * @param RepositoryInterface $paymentRepository
+     * @param ResourceManagerInterface $paymentManager
+     * @param ResourceFactoryInterface $paymentFactory
      */
-    public function __construct(RepositoryInterface $paymentRepository, ObjectManager $paymentManager)
+    public function __construct(ResourceManagerInterface $paymentManager, ResourceFactoryInterface $paymentFactory)
     {
-        $this->paymentRepository = $paymentRepository;
         $this->paymentManager = $paymentManager;
+        $this->paymentFactory = $paymentFactory;
     }
 
     /**
@@ -57,7 +56,7 @@ class PaymentProcessor implements PaymentProcessorInterface
         $this->updateExistingPaymentsStates($order);
 
         /** @var $payment PaymentInterface */
-        $payment = $this->paymentRepository->createNew();
+        $payment = $this->paymentFactory->createNew();
         $payment->setCurrency($order->getCurrency());
         $payment->setAmount($order->getTotal());
 

@@ -41,57 +41,45 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addValidationGroupsSection($rootNode);
-        $this->addClassesSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
+     * Adds `resources` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('locale')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('locale')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Locale\Model\Locale')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\LocaleBundle\Controller\LocaleController')->end()
-                                ->scalarNode('repository')->end()
-                                    ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
-                                        ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleType')->end()
-                                        ->scalarNode('choice')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType')->end()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Locale\Model\Locale')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Locale\Model\LocaleInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\LocaleBundle\Controller\LocaleController')->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->cannotBeEmpty()->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                                ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleType')->end()
+                                                ->scalarNode('choice')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType')->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
                                     ->end()
                                 ->end()
                             ->end()

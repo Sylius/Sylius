@@ -54,9 +54,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         $this->mapManyToMany($metadata);
-
         $this->mapOneToMany($metadata);
-
         $this->mapManyToOne($metadata);
     }
 
@@ -66,13 +64,13 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function mapOneToMany(ClassMetadata $metadata)
     {
         foreach ($this->variables as $class) {
-            if ($class['option']['model'] !== $metadata->getName()) {
+            if ($class['option']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
             $mapping = array(
                 'fieldName' => 'values',
-                'targetEntity' => $class['option_value']['model'],
+                'targetEntity' => $class['option_value']['classes']['model'],
                 'mappedBy' => 'option',
                 'cascade' => array('all'),
             );
@@ -87,13 +85,13 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function mapManyToOne(ClassMetadata $metadata)
     {
         foreach ($this->variables as $class) {
-            if ($class['option_value']['model'] !== $metadata->getName()) {
+            if ($class['option_value']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
             $mapping = array(
                 'fieldName' => 'option',
-                'targetEntity' => $class['option']['model'],
+                'targetEntity' => $class['option']['classes']['model'],
                 'inversedBy' => 'values',
                 'joinColumns' => array(array(
                     'name' => 'option_id',
@@ -113,7 +111,7 @@ class LoadMetadataSubscriber implements EventSubscriber
     private function mapManyToMany(ClassMetadata $metadata)
     {
         foreach ($this->variables as $variable => $class) {
-            if ($class['variant']['model'] !== $metadata->getName()) {
+            if ($class['variant']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
@@ -132,7 +130,7 @@ class LoadMetadataSubscriber implements EventSubscriber
             $metadata->mapManyToMany(array(
                 'fieldName'    => 'options',
                 'type'         => ClassMetadataInfo::MANY_TO_MANY,
-                'targetEntity' => $class['option_value']['model'],
+                'targetEntity' => $class['option_value']['classes']['model'],
                 'joinTable'    => array(
                     'name'               => sprintf('sylius_%s_variant_option_value', $variable),
                     'joinColumns'        => array(array(

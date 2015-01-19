@@ -20,11 +20,6 @@ use Symfony\Component\Form\FormBuilder;
  */
 class ItemCountConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Rule\ItemCountConfigurationType');
@@ -35,7 +30,7 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
+    function it_builds_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
     {
         $builder
             ->add('count', 'integer', Argument::any())
@@ -43,7 +38,7 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
         ;
 
         $builder
-          ->add('equal', 'checkbox', Argument::any())
+            ->add('equal', 'checkbox', Argument::any())
             ->willReturn($builder)
         ;
 

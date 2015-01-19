@@ -11,19 +11,16 @@
 
 namespace spec\Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR;
 
+use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ODM\PHPCR\DocumentManager;
-use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
-use Doctrine\ODM\PHPCR\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 class StaticContentRepositorySpec extends ObjectBehavior
 {
-    function let(DocumentManager $dm, ClassMetadata $class, UnitOfWork $unitOfWork)
+    function let(DocumentRepository $objectRepository, DocumentManager $objectManager)
     {
-        $dm->getUnitOfWork()->shouldBeCalled()->willreturn($unitOfWork);
-
-        $this->beConstructedWith($dm, $class);
+        $this->beConstructedWith($objectRepository, $objectManager);
     }
 
     function it_is_initializable()
@@ -31,14 +28,14 @@ class StaticContentRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository');
     }
 
-    function it_is_a_document_repository()
+    function it_is_a_repository()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository');
+        $this->shouldHaveType('Sylius\Component\Resource\Repository\ResourceRepositoryInterface');
     }
 
-    function it_find_by_id($dm)
+    function it_find_by_id(DocumentRepository $objectRepository)
     {
-        $dm->find(Argument::any(), '/cms/pages/id')->shouldBeCalled();
+        $objectRepository->find('/cms/pages/id')->shouldBeCalled();
 
         $this->findStaticContent('id');
     }

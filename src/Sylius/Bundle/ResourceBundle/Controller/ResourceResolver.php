@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Resource resolver.
@@ -21,28 +22,38 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ResourceResolver
 {
     /**
-     * @var Configuration
+     * @var ResourceRepositoryInterface
      */
-    private $config;
+    private $repository;
 
-    public function __construct(Configuration $config)
+    /**
+     * @var ResourceFactoryInterface
+     */
+    private $factory;
+
+    /**
+     * @param ResourceRepositoryInterface $repository
+     * @param ResourceFactoryInterface $factory
+     */
+    public function __construct(ResourceRepositoryInterface $repository, ResourceFactoryInterface $factory)
     {
-        $this->config = $config;
+        $this->repository = $repository;
+        $this->factory = $factory;
     }
 
     /**
      * Get resources via repository based on the configuration.
      *
-     * @param RepositoryInterface $repository
-     * @param string              $defaultMethod
-     * @param array               $defaultArguments
+     * @param RequestConfiguration $configuration
+     * @param string               $defaultMethod
+     * @param array                $defaultArguments
      *
      * @return mixed
      */
-    public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
+    public function getResource(RequestConfiguration $configuration, $defaultMethod, array $defaultArguments = array())
     {
-        $callable = array($repository, $this->config->getRepositoryMethod($defaultMethod));
-        $arguments = $this->config->getRepositoryArguments($defaultArguments);
+        $callable = array($this->repository, $configuration->getRepositoryMethod($defaultMethod));
+        $arguments = $configuration->getRepositoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
     }
@@ -50,16 +61,16 @@ class ResourceResolver
     /**
      * Create resource.
      *
-     * @param RepositoryInterface $repository
-     * @param string              $defaultMethod
-     * @param array               $defaultArguments
+     * @param RequestConfiguration $configuration
+     * @param string               $defaultMethod
+     * @param array                $defaultArguments
      *
      * @return mixed
      */
-    public function createResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
+    public function createResource(RequestConfiguration $configuration, $defaultMethod = 'createNew', array $defaultArguments = array())
     {
-        $callable = array($repository, $this->config->getFactoryMethod($defaultMethod));
-        $arguments = $this->config->getFactoryArguments($defaultArguments);
+        $callable = array($this->factory, $configuration->getFactoryMethod($defaultMethod));
+        $arguments = $configuration->getFactoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
     }

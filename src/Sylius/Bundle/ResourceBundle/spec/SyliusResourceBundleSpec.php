@@ -14,8 +14,6 @@ namespace spec\Sylius\Bundle\ResourceBundle;
 use PhpSpec\ObjectBehavior;
 
 /**
- * Sylius resource bundle spec.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusResourceBundleSpec extends ObjectBehavior

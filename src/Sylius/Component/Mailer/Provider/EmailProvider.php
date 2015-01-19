@@ -12,7 +12,8 @@
 namespace Sylius\Component\Mailer\Provider;
 
 use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Default email provider implementation.
@@ -27,9 +28,14 @@ class EmailProvider implements EmailProviderInterface
     /**
      * Repository for email model.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $emailRepository;
+
+    /**
+     * @var ResourceFactoryInterface
+     */
+    protected $emailFactory;
 
     /**
      * Configuration.
@@ -39,12 +45,14 @@ class EmailProvider implements EmailProviderInterface
     protected $configuration;
 
     /**
-     * @param RepositoryInterface $emailRepository
-     * @param array               $configuration
+     * @param ResourceRepositoryInterface $emailRepository
+     * @param ResourceFactoryInterface    $emailFactory
+     * @param array                       $configuration
      */
-    public function __construct(RepositoryInterface $emailRepository, array $configuration)
+    public function __construct(ResourceRepositoryInterface $emailRepository, ResourceFactoryInterface $emailFactory, array $configuration)
     {
         $this->emailRepository = $emailRepository;
+        $this->emailFactory = $emailFactory;
         $this->configuration = $configuration;
     }
 
@@ -73,7 +81,7 @@ class EmailProvider implements EmailProviderInterface
             throw new \InvalidArgumentException(sprintf('Email with code "%s" does not exist!', $code));
         }
 
-        $email = $this->emailRepository->createNew();
+        $email = $this->emailFactory->createNew();
         $configuration = $this->configuration[$code];
 
         $email->setCode($code);

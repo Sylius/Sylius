@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
@@ -21,42 +23,41 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class DoctrineORMDriver extends AbstractDatabaseDriver
+class DoctrineORMDriver extends AbstractDriver
 {
     /**
      * {@inheritdoc}
      */
-    public function getSupportedDriver()
+    protected function getRepositoryDefinition(ResourceMetadataInterface $metadata, ContainerBuilder $container)
     {
-        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRepositoryDefinition(array $classes)
-    {
-        $reflection = new \ReflectionClass($classes['model']);
+        $reflection = new \ReflectionClass($metadata->getClass('model'));
         $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
         $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
 
-        $repositoryKey = $this->getContainerKey('repository', '.class');
-        $repositoryClass = $translatable
-            ? 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository'
-            : new Parameter('sylius.orm.repository.class');
+        $repositoryClassParameter = $metadata->getServiceId('repository').'.class';
 
-        if ($this->container->hasParameter($repositoryKey)) {
-            $repositoryClass = $this->container->getParameter($repositoryKey);
+        $repositoryClass = $translatable ?
+            new Parameter('sylius.doctrine.orm.translatable_repository.class') :
+            new Parameter('sylius.doctrine.orm.repository.class')
+        ;
+
+        if ($container->hasParameter($repositoryClassParameter)) {
+            $repositoryClass = $container->getParameter($repositoryClassParameter);
         }
 
-        if (isset($classes['repository'])) {
-            $repositoryClass = $classes['repository'];
+        if ($metadata->hasClass('repository')) {
+            $repositoryClass = $metadata->getClass('repository');
         }
+
+        $repositoryDefinition = new Definition('Doctrine\ORM\EntityRepository');
+        $repositoryDefinition->setFactoryService($this->getObjectManagerId($metadata));
+        $repositoryDefinition->setFactoryMethod('getRepository');
+        $repositoryDefinition->setArguments(array($metadata->getClass('model')));
 
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
-            new Reference($this->getContainerKey('manager')),
-            $this->getClassMetadataDefinition($classes['model']),
+            $repositoryDefinition,
+            new Reference($this->getObjectManagerId($metadata)),
         ));
 
         return $definition;
@@ -65,16 +66,17 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
     /**
      * {@inheritdoc}
      */
-    protected function getManagerServiceKey()
+    protected function getObjectManagerId(ResourceMetadataInterface $metadata)
     {
-        return sprintf('doctrine.orm.%s_entity_manager', $this->managerName);
+        return sprintf('doctrine.orm.%s_entity_manager', $metadata->getParameter('manager', 'default'));
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getClassMetadataClassname()
+    public function getName()
     {
-        return 'Doctrine\\ORM\\Mapping\\ClassMetadata';
+        return SyliusResourceBundle::DRIVER_DOCTRINE_ORM;
     }
+
 }

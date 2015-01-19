@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Cart\Model\CartInterface;
@@ -19,13 +18,14 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 
 /*
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CartBlamerListenerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $cartManager, CartProviderInterface $cartProvider)
+    function let(ResourceManagerInterface $cartManager, CartProviderInterface $cartProvider)
     {
         $this->beConstructedWith($cartManager, $cartProvider);
     }
@@ -41,7 +41,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         $cartProvider->getCart()->willReturn($cart);
 
         $cartManager->persist($cart)->shouldNotBeCalled();
-        $cartManager->flush($cart)->shouldNotBeCalled();
+        $cartManager->flush()->shouldNotBeCalled();
 
         $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->during('blame', array($userEvent));
     }
@@ -55,7 +55,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
         $cart->setCustomer($customer)->shouldBeCalled();
         $cartManager->persist($cart)->shouldBeCalled();
-        $cartManager->flush($cart)->shouldBeCalled();
+        $cartManager->flush()->shouldBeCalled();
 
         $this->blame($userEvent);
     }

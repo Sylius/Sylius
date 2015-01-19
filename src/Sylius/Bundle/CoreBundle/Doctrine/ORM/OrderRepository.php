@@ -62,9 +62,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->objectManager->getFilters()->disable('softdeleteable');
 
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
         $queryBuilder
             ->leftJoin('o.adjustments', 'adjustment')
             ->leftJoin('o.customer', 'customer')
@@ -119,15 +120,11 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder();
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
-            ->leftJoin('o.customer', 'customer')
-            ->addSelect('customer')
-        ;
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->objectManager->getFilters()->disable('softdeleteable');
         }
 
         if (!empty($criteria['number'])) {
@@ -190,9 +187,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByCustomerAndCoupon(CustomerInterface $customer, CouponInterface $coupon)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->objectManager->getFilters()->disable('softdeleteable');
 
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
         $queryBuilder
             ->select('count(o.id)')
             ->innerJoin('o.promotionCoupons', 'coupons')
@@ -208,7 +205,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->getSingleScalarResult()
         ;
 
-        $this->_em->getFilters()->enable('softdeleteable');
+        $this->objectManager->getFilters()->enable('softdeleteable');
 
         return $count;
     }
@@ -224,11 +221,12 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function createCheckoutsPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
         $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.completedAt'));
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
+            $this->objectManager->getFilters()->disable('softdeleteable');
         }
 
         if (!empty($criteria['createdAtFrom'])) {
@@ -267,7 +265,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByCustomerAndPaymentState(CustomerInterface $customer, $state)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
             ->select('count(o.id)')
@@ -286,7 +284,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
+        $queryBuilder = $this->getQueryBuilderBetweenDates($from, $to, $state);
 
         return $queryBuilder
             ->getQuery()
@@ -296,7 +294,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
     public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
+        $queryBuilder = $this->getQueryBuilderBetweenDates($from, $to, $state);
 
         return $queryBuilder
             ->select('count(o.id)')
@@ -307,7 +305,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
     public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
+        $queryBuilder = $this->getQueryBuilderBetweenDates($from, $to, $state);
 
         return $queryBuilder
             ->select('sum(o.total)')
@@ -388,7 +386,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
     public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.expiresAt', ':expiresAt'))
@@ -400,9 +398,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         return $queryBuilder->getQuery()->getResult();
     }
 
-    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
+    protected function getQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('c');
+
         if (null !== $state) {
             $queryBuilder
                 ->andWhere('o.state = :state')
@@ -420,7 +419,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
     protected function getCollectionQueryBuilderByCustomer(CustomerInterface $customer, array $sorting = array())
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
             ->innerJoin('o.customer', 'customer')
@@ -431,12 +430,5 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $this->applySorting($queryBuilder, $sorting);
 
         return $queryBuilder;
-    }
-
-    protected function getCollectionQueryBuilder()
-    {
-        $queryBuilder = parent::getCollectionQueryBuilder();
-
-        return $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
     }
 }

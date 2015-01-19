@@ -17,15 +17,19 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.orm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.mongodb_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
-        <parameter key="sylius.phpcr_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository</parameter>
+        <parameter key="sylius.doctrine.orm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository</parameter>
+        <parameter key="sylius.doctrine.orm.translatable_repository.class">Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository</parameter>
+        <parameter key="sylius.doctrine.mongodb_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\ResourceRepository</parameter>
+        <parameter key="sylius.doctrine.mongodb_odm.translatable_repository.class">Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository</parameter>
+        <parameter key="sylius.doctrine.phpcr_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\ResourceRepository</parameter>
 
         <parameter key="sylius.controller.class">Sylius\Bundle\ResourceBundle\Controller\ResourceController</parameter>
-        <parameter key="sylius.controller.configuration.class">Sylius\Bundle\ResourceBundle\Controller\Configuration</parameter>
-        <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\ConfigurationFactory</parameter>
+        <parameter key="sylius.controller.configuration.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration</parameter>
+        <parameter key="sylius.controller.redirect_handler.class">Sylius\Bundle\ResourceBundle\Controller\RedirectHandler</parameter>
+        <parameter key="sylius.controller.configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory</parameter>
         <parameter key="sylius.controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
         <parameter key="sylius.controller.parameters.class">Sylius\Bundle\ResourceBundle\Controller\Parameters</parameter>
+        <parameter key="sylius.controller.form_factory.class">Sylius\Bundle\ResourceBundle\Form\Factory\ResourceFormFactory</parameter>
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
         <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
@@ -34,30 +38,37 @@
         <parameter key="sylius.form.extension.date.class">Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
 
-        <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
-        <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>
-        <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
-        <parameter key="sylius.event_subscriber.kernel_request.class">Sylius\Bundle\ResourceBundle\EventListener\KernelRequestSubscriber</parameter>
+        <parameter key="sylius.doctrine.orm.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\LoadMetadataSubscriber</parameter>
+        <parameter key="sylius.doctrine.mongodb_odm.event_subscriber.load_metadata.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\LoadMetadataSubscriber</parameter>
 
         <parameter key="sylius.validator.enabled.class">Sylius\Bundle\ResourceBundle\Validator\EnabledValidator</parameter>
         <parameter key="sylius.validator.disabled.class">Sylius\Bundle\ResourceBundle\Validator\DisabledValidator</parameter>
 
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
+        <parameter key="sylius.controller.resource.class">Sylius\Bundle\ResourceBundle\Controller\ResourceController</parameter>
 
         <parameter key="symfony.expression.language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
+
+        <parameter key="sylius.registry.resource.class">Sylius\Component\Resource\Metadata\ResourceRegistry</parameter>
+        <parameter key="sylius.event_listener.flashes.class">Sylius\Bundle\ResourceBundle\EventListener\FlashesListener</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.controller.redirect_handler" class="%sylius.controller.redirect_handler.class%">
+            <argument type="service" id="router" />
+        </service>
         <service id="sylius.controller.configuration_factory" class="%sylius.controller.configuration_factory.class%">
             <argument type="service" id="sylius.controller.parameters_parser" />
             <argument>%sylius.controller.configuration.class%</argument>
-            <argument>%sylius.resource.settings%</argument>
         </service>
         <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
             <argument type="service" id="sylius.expression_language" />
         </service>
         <service id="sylius.controller.parameters" class="%sylius.controller.parameters.class%" />
+        <service id="sylius.controller.form_factory" class="%sylius.controller.form_factory.class%">
+            <argument type="service" id="form.factory" />
+        </service>
 
         <service id="sylius.expression_language" class="%sylius.expression_language.class%">
             <call method="setContainer">
@@ -65,19 +76,13 @@
             </call>
         </service>
 
-        <service id="sylius.event_subscriber.load_orm_metadata" class="%sylius.event_subscriber.load_orm_metadata.class%">
-            <argument>%sylius.config.classes%</argument>
+        <service id="sylius.doctrine.orm.event_subscriber.load_metadata" class="%sylius.doctrine.orm.event_subscriber.load_metadata.class%">
+            <argument type="service" id="sylius.registry.resource" />
             <tag name="doctrine.event_subscriber" />
         </service>
-        <service id="sylius.event_subscriber.load_odm_metadata" class="%sylius.event_subscriber.load_odm_metadata.class%">
-            <argument>%sylius.config.classes%</argument>
+        <service id="sylius.doctrine.mongodb_odm.event_subscriber.load_metadata" class="%sylius.doctrine.mongodb_odm.event_subscriber.load_metadata.class%">
+            <argument type="service" id="sylius.registry.resource" />
             <tag name="doctrine_mongodb.odm.event_subscriber" />
-        </service>
-        <service id="sylius.event_subscriber.kernel_controller" class="%sylius.event_subscriber.kernel_controller.class%">
-            <argument type="service" id="sylius.controller.parameters_parser" />
-            <argument type="service" id="sylius.controller.parameters" />
-            <argument>%sylius.resource.settings%</argument>
-            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
@@ -95,6 +100,15 @@
         </service>
         <service id="sylius.validator.disabled" class="%sylius.validator.disabled.class%">
             <tag name="validator.constraint_validator" alias="sylius_resource_disabled_validator" />
+        </service>
+
+        <service id="sylius.registry.resource" class="%sylius.registry.resource.class%" />
+
+        <service id="sylius.event_listener.flashes" class="%sylius.event_listener.flashes.class%">
+            <argument type="service" id="session" />
+            <tag name="kernel.event_listener" event="sylius.resource.post_create" method="addSuccessFlash" />
+            <tag name="kernel.event_listener" event="sylius.resource.post_update" method="addSuccessFlash" />
+            <tag name="kernel.event_listener" event="sylius.resource.post_delete" method="addSuccessFlash" />
         </service>
     </services>
 </container>

@@ -12,14 +12,14 @@
 namespace Sylius\Component\Rbac\Repository;
 
 use Sylius\Component\Rbac\Model\PermissionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Permission repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PermissionRepositoryInterface extends RepositoryInterface
+interface PermissionRepositoryInterface extends ResourceRepositoryInterface
 {
     /**
      * Get child permissions.

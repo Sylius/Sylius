@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
+use Sylius\Bundle\AddressingBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Sylius addressing and zones management bundle.
@@ -25,24 +27,20 @@ class SyliusAddressingBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function build(ContainerBuilder $container)
     {
-        return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        );
+        parent::build($container);
+
+        $container->addCompilerPass(new ServicesPass());
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getModelInterfaces()
+    public static function getSupportedDrivers()
     {
         return array(
-            'Sylius\Component\Addressing\Model\AddressInterface'    => 'sylius.model.address.class',
-            'Sylius\Component\Addressing\Model\CountryInterface'    => 'sylius.model.country.class',
-            'Sylius\Component\Addressing\Model\ProvinceInterface'   => 'sylius.model.province.class',
-            'Sylius\Component\Addressing\Model\ZoneInterface'       => 'sylius.model.zone.class',
-            'Sylius\Component\Addressing\Model\ZoneMemberInterface' => 'sylius.model.zone_member.class',
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         );
     }
 

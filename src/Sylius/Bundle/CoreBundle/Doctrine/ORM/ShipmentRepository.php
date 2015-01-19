@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 
-class ShipmentRepository extends EntityRepository
+class ShipmentRepository extends ResourceRepository
 {
     /**
      * Create filter paginator.
@@ -25,12 +25,12 @@ class ShipmentRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = array(), $sorting = array())
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->objectManager->getFilters()->disable('softdeleteable');
 
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
-            ->leftJoin($this->getAlias().'.order', 'shipmentOrder')
+            ->leftJoin('o.order', 'shipmentOrder')
             ->leftJoin('shipmentOrder.shippingAddress', 'address')
             ->addSelect('shipmentOrder')
             ->addSelect('address')
@@ -62,7 +62,7 @@ class ShipmentRepository extends EntityRepository
         }
         if (!empty($criteria['createdAtTo'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->lte($this->getAlias().'.createdAt', ':createdAtTo'))
+                ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
                 ->setParameter('createdAtTo', date('Y-m-d 23:59:59', strtotime($criteria['createdAtTo'])))
             ;
         }
@@ -77,10 +77,5 @@ class ShipmentRepository extends EntityRepository
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
-    }
-
-    protected function getAlias()
-    {
-        return 's';
     }
 }

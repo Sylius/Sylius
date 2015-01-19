@@ -57,7 +57,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['attribute_value']['model'] !== $metadata->getName()) {
+            if ($class['attribute_value']['classes']['model'] !== $metadata->getName()) {
                 continue;
             }
 
@@ -77,7 +77,7 @@ class LoadMetadataSubscriber implements EventSubscriber
 
             $this->mapManyToOne($metadata, $subjectMapping);
 
-            $attributeModel = $class['attribute']['model'];
+            $attributeModel = $class['attribute']['classes']['model'];
             $attributeMetadata = $metadataFactory->getMetadataFor($attributeModel);
             $attributeMapping = array(
                 'fieldName'     => 'attribute',

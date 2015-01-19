@@ -26,30 +26,31 @@ class LoadTaxationData extends DataFixture
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $productOptionManager)
     {
+        $taxCategoryManager = $this->getTaxCategoryManager();
+        $taxRateManager = $this->getTaxRateManager();
+
         $taxableGoods = $this->createTaxCategory('Taxable goods', 'Default taxation category');
 
-        $manager->persist($taxableGoods);
-        $manager->flush();
+        $taxCategoryManager->persist($taxableGoods);
 
         $taxRate = $this->createTaxRate('EU VAT', 'EU', 0.23);
         $taxRate->setCategory($taxableGoods);
 
-        $manager->persist($taxRate);
-        $manager->flush();
+        $taxRateManager->persist($taxRate);
 
         $taxableGoods->addRate($this->createTaxRate('US Sales Tax', 'USA', 0.08));
         $taxRate->setCategory($taxableGoods);
 
-        $manager->persist($taxRate);
-        $manager->flush();
+        $taxRateManager->persist($taxRate);
 
         $taxableGoods->addRate($this->createTaxRate('No tax', 'Rest of World', 0.00));
         $taxRate->setCategory($taxableGoods);
 
-        $manager->persist($taxRate);
-        $manager->flush();
+        $taxRateManager->persist($taxRate);
+
+        $taxRateManager->flush();
     }
 
     /**
@@ -71,7 +72,7 @@ class LoadTaxationData extends DataFixture
     protected function createTaxCategory($name, $description)
     {
         /* @var $category TaxCategoryInterface */
-        $category = $this->getTaxCategoryRepository()->createNew();
+        $category = $this->getTaxCategoryFactory()->createNew();
         $category->setName($name);
         $category->setDescription($description);
 
@@ -94,7 +95,7 @@ class LoadTaxationData extends DataFixture
     protected function createTaxRate($name, $zoneName, $amount, $includedInPrice = false, $calculator = 'default')
     {
         /* @var $rate TaxRateInterface */
-        $rate = $this->getTaxRateRepository()->createNew();
+        $rate = $this->getTaxRateFactory()->createNew();
         $rate->setName($name);
         $rate->setZone($this->getZoneByName($zoneName));
         $rate->setAmount($amount);

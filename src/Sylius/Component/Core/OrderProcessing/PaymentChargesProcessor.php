@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Calculator\DelegatingFeeCalculatorInterface;
 use Sylius\Component\Payment\Model\PaymentSubjectInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class PaymentChargesProcessor implements PaymentChargesProcessorInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $adjustmentRepository;
+    protected $adjustmentFactory;
 
     /**
      * @var DelegatingFeeCalculatorInterface
@@ -36,12 +36,12 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $adjustmentRepository
+     * @param ResourceFactoryInterface $adjustmentFactory
      * @param DelegatingFeeCalculatorInterface $feeCalculator
      */
-    public function __construct(RepositoryInterface $adjustmentRepository, DelegatingFeeCalculatorInterface $feeCalculator)
+    public function __construct(ResourceFactoryInterface $adjustmentFactory, DelegatingFeeCalculatorInterface $feeCalculator)
     {
-        $this->adjustmentRepository = $adjustmentRepository;
+        $this->adjustmentFactory = $adjustmentFactory;
         $this->feeCalculator = $feeCalculator;
     }
 
@@ -77,8 +77,8 @@ class PaymentChargesProcessor implements PaymentChargesProcessorInterface
      */
     private function prepareAdjustmentForOrder(PaymentSubjectInterface $payment)
     {
-        $adjustment = $this->adjustmentRepository->createNew();
-        $adjustment->setType(AdjustmentInterface::PAYMENT_ADJUSTMENT);
+        $adjustment = $this->adjustmentFactory->createNew();
+        $adjustment->setLabel(AdjustmentInterface::PAYMENT_ADJUSTMENT);
         $adjustment->setAmount($this->feeCalculator->calculate($payment));
         $adjustment->setDescription($payment->getMethod()->getName());
 

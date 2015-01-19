@@ -25,17 +25,12 @@ class PaymentMethodRepository extends TranslatableResourceRepository implements 
      */
     public function getQueryBuidlerForChoiceType(array $options)
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         if (!$options['disabled']) {
-            $queryBuilder->where('method.enabled = true');
+            $queryBuilder->where('o.enabled = true');
         }
 
         return $queryBuilder;
-    }
-
-    protected function getAlias()
-    {
-        return 'method';
     }
 }

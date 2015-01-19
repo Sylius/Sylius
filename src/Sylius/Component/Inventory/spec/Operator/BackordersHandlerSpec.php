@@ -16,14 +16,14 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BackordersHandlerSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(ResourceRepositoryInterface $repository)
     {
         $this->beConstructedWith($repository);
     }

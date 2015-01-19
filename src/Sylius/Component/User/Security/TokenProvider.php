@@ -12,8 +12,8 @@
 namespace Sylius\Component\User\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -21,7 +21,7 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 class TokenProvider implements TokenProviderInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     private $repository;
 
@@ -41,11 +41,11 @@ class TokenProvider implements TokenProviderInterface
     private $tokenLength;
 
     /**
-     * @param RepositoryInterface    $repository
-     * @param EntityManagerInterface $manager
-     * @param GeneratorInterface     $generator
+     * @param ResourceRepositoryInterface $repository
+     * @param EntityManagerInterface      $manager
+     * @param GeneratorInterface          $generator
      */
-    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
+    public function __construct(ResourceRepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
     {
         $this->repository = $repository;
         $this->manager = $manager;

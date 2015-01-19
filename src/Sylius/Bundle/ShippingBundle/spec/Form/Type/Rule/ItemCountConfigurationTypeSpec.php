@@ -21,11 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ItemCountConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Rule\ItemCountConfigurationType');
@@ -44,16 +39,7 @@ class ItemCountConfigurationTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    function it_has_options(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'validation_groups' => array('sylius')
-        ))->shouldBeCalled();
-
-        $this->configureOptions($resolver);
-    }
-
-    function it_has_a_name()
+    function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_shipping_rule_item_count_configuration');
     }

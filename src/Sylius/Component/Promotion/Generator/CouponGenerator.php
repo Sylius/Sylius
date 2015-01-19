@@ -11,9 +11,10 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Default coupon generator.
@@ -23,21 +24,28 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class CouponGenerator implements CouponGeneratorInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
+     */
+    protected $factory;
+
+    /**
+     * @var ResourceRepositoryInterface
      */
     protected $repository;
 
     /**
-     * @var EntityManagerInterface
+     * @var ResourceManagerInterface
      */
     protected $manager;
 
     /**
-     * @param RepositoryInterface    $repository
-     * @param EntityManagerInterface $manager
+     * @param ResourceFactoryInterface $factory
+     * @param ResourceRepositoryInterface $repository
+     * @param ResourceManagerInterface $manager
      */
-    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager)
+    public function __construct(ResourceFactoryInterface $factory, ResourceRepositoryInterface $repository, ResourceManagerInterface $manager)
     {
+        $this->factory = $factory;
         $this->repository = $repository;
         $this->manager = $manager;
     }
@@ -48,8 +56,9 @@ class CouponGenerator implements CouponGeneratorInterface
     public function generate(PromotionInterface $promotion, Instruction $instruction)
     {
         $generatedCoupons = array();
+
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; $i++) {
-            $coupon = $this->repository->createNew();
+            $coupon = $this->factory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($this->generateUniqueCode());
             $coupon->setUsageLimit($instruction->getUsageLimit());
@@ -58,6 +67,7 @@ class CouponGenerator implements CouponGeneratorInterface
             $generatedCoupons[] = $coupon;
 
             $this->manager->persist($coupon);
+            $this->manager->flush();
         }
 
         $this->manager->flush();
@@ -87,11 +97,11 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     protected function isUsedCode($code)
     {
-        $this->manager->getFilters()->disable('softdeleteable');
+        $this->repository->disableFilter('softdeleteable');
 
         $isUsed = null !== $this->repository->findOneBy(array('code' => $code));
 
-        $this->manager->getFilters()->enable('softdeleteable');
+        $this->repository->enableFilter('softdeleteable');
 
         return $isUsed;
     }

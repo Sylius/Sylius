@@ -27,21 +27,22 @@ class LoadContactTopicData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $contactTopicRepository = $this->getContactTopicRepository();
+        $contactTopicFactory = $this->getContactTopicFactory();
+        $contactTopicManager = $this->getContactTopicManager();
 
         for ($i = 0; $i < 5; $i++) {
-            $contactTopic = $contactTopicRepository->createNew();
+            $contactTopic = $contactTopicFactory->createNew();
             $contactTopic->setCurrentLocale($this->defaultLocale);
             $contactTopic->setFallbackLocale($this->defaultLocale);
 
             $contactTopic->setTitle($this->faker->sentence());
 
-            $manager->persist($contactTopic);
+            $contactTopicManager->persist($contactTopic);
 
             $this->setReference('Sylius.ContactTopic.'.$i, $contactTopic);
         }
 
-        $manager->flush();
+        $contactTopicManager->flush();
     }
 
     /**

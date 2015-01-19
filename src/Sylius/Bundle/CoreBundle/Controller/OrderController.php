@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -42,19 +43,24 @@ class OrderController extends ResourceController
         ;
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
-        $paginator->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        $paginator->setMaxPerPage($this->configuration->getPaginationMaxPerPage());
 
-        // Fetch and cache deleted orders
         $entityManager = $this->get('doctrine.orm.entity_manager');
         $entityManager->getFilters()->disable('softdeleteable');
         $paginator->getCurrentPageResults();
         $paginator->getNbResults();
+
         $entityManager->getFilters()->enable('softdeleteable');
 
-        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
-            'customer' => $customer,
-            'orders'   => $paginator
-        ));
+        $view = View::create()
+            ->setTemplate($this->configuration->getTemplate('index.html'))
+            ->setData(array(
+                'customer' => $customer,
+                'orders'   => $paginator,
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**
@@ -101,7 +107,7 @@ class OrderController extends ResourceController
 
         $view = $this
             ->view()
-            ->setTemplate($this->config->getTemplate('history.html'))
+            ->setTemplate($this->configuration->getTemplate('history.html'))
             ->setData(array(
                 'order' => $order,
                 'logs'  => array(

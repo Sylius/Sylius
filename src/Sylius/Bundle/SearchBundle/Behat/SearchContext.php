@@ -56,6 +56,7 @@ class SearchContext extends DefaultContext
     public function iCreateAndIndex($id)
     {
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         $queryBuilder = $em->createQueryBuilder();
         $queryBuilder
             ->select('u')

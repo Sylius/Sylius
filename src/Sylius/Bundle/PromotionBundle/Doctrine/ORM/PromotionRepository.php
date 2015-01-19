@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -20,16 +20,16 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
+class PromotionRepository extends ResourceRepository implements PromotionRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function findActive()
     {
-        $qb = $this
-            ->getCollectionQueryBuilder()
-            ->orderBy($this->getPropertyName('priority'), 'DESC')
+        $qb = $this->objectRepository
+            ->createQueryBuilder('o')
+            ->orderBy('o.priority', 'DESC')
         ;
 
         $this->filterByActive($qb);

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -25,16 +25,16 @@ use Symfony\Component\Intl\Intl;
 class LocaleType extends AbstractResourceType
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     private $localeRepository;
 
     /**
      * {@inheritdoc}
      *
-     * @param RepositoryInterface $localeRepository
+     * @param ResourceRepositoryInterface $localeRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $localeRepository)
+    public function __construct($dataClass, array $validationGroups = array(), ResourceRepositoryInterface $localeRepository)
     {
         parent::__construct($dataClass, $validationGroups);
 

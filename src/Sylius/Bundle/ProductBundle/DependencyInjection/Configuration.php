@@ -42,83 +42,83 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
+     * Adds `resources` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('product')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                         ->arrayNode('product_translation')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('product')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\Product')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ProductBundle\Controller\ProductController')->end()
-                                ->scalarNode('repository')->defaultValue('Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository')->end()
-                                ->arrayNode('form')
+                                ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductType')->end()
-                                        ->scalarNode('choice')->end()
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\Product')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Product\Model\ProductInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ProductBundle\Controller\ProductController')->end()
+                                        ->scalarNode('repository')->end()
+                                        ->scalarNode('factory')->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductType')->end()
+                                                ->scalarNode('choice')->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('translation')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\ProductTranslation')->end()
-                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                        ->scalarNode('repository')->end()
-                                        ->arrayNode('form')
+                                        ->arrayNode('classes')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType')->end()
-                                            ->end()
-                                        ->end()
-                                        ->arrayNode('mapping')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->arrayNode('fields')
-                                                    ->prototype('scalar')->end()
-                                                    ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
+                                                ->scalarNode('model')->defaultValue('Sylius\Component\Product\Model\ProductTranslation')->end()
+                                                ->scalarNode('interface')->defaultValue('Sylius\Component\Product\Model\ProductTranslationInterface')->end()
+                                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                                ->scalarNode('repository')->end()
+                                                ->scalarNode('factory')->end()
+                                                ->arrayNode('form')
+                                                    ->addDefaultsIfNotSet()
+                                                    ->children()
+                                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType')->end()
+                                                    ->end()
                                                 ->end()
                                             ->end()
+                                        ->end()
+                                        ->arrayNode('validation_groups')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->arrayNode('default')
+                                                    ->prototype('scalar')->end()
+                                                    ->defaultValue(array('sylius'))
+                                                ->end()
+                                            ->end()
+                                        ->end()
+                                        ->arrayNode('fields')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('name', 'slug', 'description', 'meta_keywords', 'meta_description', 'short_description'))
                                         ->end()
                                     ->end()
                                 ->end()

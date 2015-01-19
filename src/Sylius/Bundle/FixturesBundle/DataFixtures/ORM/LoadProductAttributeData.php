@@ -28,7 +28,9 @@ class LoadProductAttributeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $attribute = $this->createAttribute('T-Shirt brand', array($this->defaultLocale => 'Brand', 'es_ES' => 'Marca'));
+        $manager = $this->getProductAttributeManager();
+
+        $attribute = $this->createAttribute('T-Shirt brand', array($this->defaultLocale => 'Brand', 'es' => 'Marca'));
         $manager->persist($attribute);
 
         $attribute = $this->createAttribute('T-Shirt collection', array($this->defaultLocale => 'Collection', 'es_ES' => 'Coleccion'));
@@ -63,7 +65,7 @@ class LoadProductAttributeData extends DataFixture
      */
     public function getOrder()
     {
-        return 20;
+        return 10;
     }
 
     /**
@@ -77,13 +79,12 @@ class LoadProductAttributeData extends DataFixture
     protected function createAttribute($name, array $presentationTranslations)
     {
         /* @var $attribute AttributeInterface */
-        $attribute = $this->getProductAttributeRepository()->createNew();
+        $attribute = $this->getProductAttributeFactory()->createNew();
 
         $attribute->setName($name);
 
         foreach ($presentationTranslations as $locale => $presentation) {
             $attribute->setCurrentLocale($locale);
-            $attribute->setFallbackLocale($locale);
             $attribute->setPresentation($presentation);
         }
 

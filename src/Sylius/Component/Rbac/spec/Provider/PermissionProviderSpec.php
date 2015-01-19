@@ -14,14 +14,14 @@ namespace spec\Sylius\Component\Rbac\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Exception\PermissionNotFoundException;
 use Sylius\Component\Rbac\Model\PermissionInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PermissionProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $permissionRepository)
+    function let(ResourceRepositoryInterface $permissionRepository)
     {
         $this->beConstructedWith($permissionRepository);
     }

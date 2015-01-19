@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 
@@ -42,7 +42,7 @@ class CurrencyContext extends BaseCurrencyContext
         StorageInterface $storage,
         CustomerContextInterface $customerContext,
         SettingsManagerInterface $settingsManager,
-        ObjectManager $customerManager,
+        ResourceManagerInterface $customerManager,
         ChannelContextInterface $channelContext
     ) {
         $this->customerContext = $customerContext;

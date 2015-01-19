@@ -12,12 +12,13 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonomyInterface extends TranslatableInterface, TaxonomyTranslationInterface, TaxonsAwareInterface
+interface TaxonomyInterface extends ResourceInterface, TranslatableInterface, TaxonomyTranslationInterface, TaxonsAwareInterface
 {
     /**
      * @return mixed

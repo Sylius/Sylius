@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ResourceManagerInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -182,7 +182,7 @@ class AddressController extends FOSRestController
     }
 
     /**
-     * @return ObjectManager
+     * @return ResourceManagerInterface
      */
     private function getCustomerManager()
     {

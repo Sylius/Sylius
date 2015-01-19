@@ -18,12 +18,12 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 
 class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
 {
-    function let(TaxonomyInterface $entityOne, TaxonomyInterface $entityTwo)
+    function let(TaxonomyInterface $taxon1, TaxonomyInterface $taxon2)
     {
-        $entityOne->getId()->willReturn(1);
-        $entityTwo->getId()->willReturn(2);
+        $taxon1->getId()->willReturn(1);
+        $taxon2->getId()->willReturn(2);
 
-        $this->beConstructedWith(array($entityOne, $entityTwo));
+        $this->beConstructedWith(array($taxon1, $taxon2));
     }
 
     function it_is_initializable()
@@ -42,25 +42,25 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
     }
 
     function it_does_transform_collection_with_objects_value(
-        $entityOne,
-        $entityTwo,
-        TaxonInterface $entityThree,
-        TaxonInterface $entityFour,
+        $taxon1,
+        $taxon2,
+        TaxonInterface $taxon3,
+        TaxonInterface $taxon4,
         Collection $collection
     ) {
-        $entityThree->getId()->willReturn(3);
-        $entityFour->getId()->willReturn(4);
+        $taxon3->getId()->willReturn(3);
+        $taxon4->getId()->willReturn(4);
 
-        $entityOne->getTaxons()->willReturn(array($entityThree));
-        $entityTwo->getTaxons()->willReturn(array($entityFour));
+        $taxon1->getTaxons()->willReturn(array($taxon3));
+        $taxon2->getTaxons()->willReturn(array($taxon4));
 
-        $entityThree->getChildren()->willReturn(array());
-        $entityFour->getChildren()->willReturn(array());
+        $taxon3->getChildren()->willReturn(array());
+        $taxon4->getChildren()->willReturn(array());
 
-        $collection->contains($entityThree)->willReturn(true);
-        $collection->contains($entityFour)->willReturn(true);
+        $collection->contains($taxon3)->willReturn(true);
+        $collection->contains($taxon4)->willReturn(true);
 
-        $this->transform($collection)->shouldReturn(array(1 => array($entityThree), 2 => array($entityFour)));
+        $this->transform($collection)->shouldReturn(array(1 => array($taxon3), 2 => array($taxon4)));
     }
 
     function it_does_reverse_transform_empty_value()
@@ -74,18 +74,18 @@ class TaxonSelectionToCollectionTransformerSpec extends ObjectBehavior
             ->duringReverseTransform('string');
     }
 
-    function it_does_reverse_transform_array_value(TaxonInterface $entity)
+    function it_does_reverse_transform_array_value(TaxonInterface $taxon)
     {
-        $entity->getId()->willReturn(1);
+        $taxon->getId()->willReturn(1);
 
-        $this->reverseTransform(array($entity))->shouldHaveCount(1);
+        $this->reverseTransform(array($taxon))->shouldHaveCount(1);
     }
 
-    function it_does_reverse_transform_array_of_arrays_value(TaxonInterface $entityThree, TaxonInterface $entityFour)
+    function it_does_reverse_transform_array_of_arrays_value(TaxonInterface $taxon3, TaxonInterface $taxon4)
     {
-        $entityThree->getId()->willReturn(3);
-        $entityFour->getId()->willReturn(4);
+        $taxon3->getId()->willReturn(3);
+        $taxon4->getId()->willReturn(4);
 
-        $this->reverseTransform(array(array($entityThree, $entityFour)))->shouldHaveCount(2);
+        $this->reverseTransform(array(array($taxon3, $taxon4)))->shouldHaveCount(2);
     }
 }

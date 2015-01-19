@@ -21,11 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class VolumeRateConfigurationTypeSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array('sylius'));
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType');
@@ -47,14 +42,13 @@ class VolumeRateConfigurationTypeSpec extends ObjectBehavior
     function it_has_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'validation_groups' => array('sylius'),
             'data_class' => null,
         ))->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }
 
-    function it_has_a_name()
+    function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_shipping_calculator_volume_rate_configuration');
     }

@@ -39,10 +39,6 @@
             </order-by>
         </one-to-many>
 
-        <order-by>
-            <order-by-field name="left" direction="ASC" />
-        </order-by>
-
         <field name="left" column="tree_left" type="integer">
             <gedmo:tree-left />
         </field>
@@ -61,6 +57,10 @@
         </field>
 
         <gedmo:tree type="nested" />
+
+        <order-by>
+            <order-by-field name="left" direction="ASC" />
+        </order-by>
     </mapped-superclass>
 
 </doctrine-mapping>

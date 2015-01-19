@@ -32,10 +32,11 @@ class LoadCurrencyData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $currencyRepository = $this->getCurrencyRepository();
+        $currencyFactory = $this->getCurrencyFactory();
+        $currencyManager = $this->getCurrencyManager();
 
         foreach ($this->currencies as $code => $rate) {
-            $currency = $currencyRepository->createNew();
+            $currency = $currencyFactory->createNew();
 
             $currency->setCode($code);
             $currency->setExchangeRate($rate);
@@ -43,10 +44,10 @@ class LoadCurrencyData extends DataFixture
 
             $this->setReference('Sylius.Currency.'.$code, $currency);
 
-            $manager->persist($currency);
+            $currencyManager->persist($currency);
         }
 
-        $manager->flush();
+        $currencyManager->flush();
     }
 
     /**

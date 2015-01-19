@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Resolver;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 class MethodsResolver implements MethodsResolverInterface
 {
     /**
-     * @var ObjectRepository
+     * @var ResourceRepositoryInterface
      */
     protected $repository;
 
@@ -32,10 +32,10 @@ class MethodsResolver implements MethodsResolverInterface
     protected $eligibilityChecker;
 
     /**
-     * @param ObjectRepository                          $repository
+     * @param ResourceRepositoryInterface               $repository
      * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
-    public function __construct(ObjectRepository $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
+    public function __construct(ResourceRepositoryInterface $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
     {
         $this->repository = $repository;
         $this->eligibilityChecker = $eligibilityChecker;

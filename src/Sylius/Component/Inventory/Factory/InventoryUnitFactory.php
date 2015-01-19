@@ -14,7 +14,7 @@ namespace Sylius\Component\Inventory\Factory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
 
 /**
  * Default inventory operator.
@@ -24,26 +24,22 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class InventoryUnitFactory implements InventoryUnitFactoryInterface
 {
     /**
-     * Inventory unit repository.
-     *
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $repository;
+    private $inventoryUnitFactory;
 
     /**
-     * Constructor.
-     *
-     * @param RepositoryInterface $repository
+     * @param ResourceFactoryInterface $inventoryUnitFactory
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(ResourceFactoryInterface $inventoryUnitFactory)
     {
-        $this->repository = $repository;
+        $this->inventoryUnitFactory = $inventoryUnitFactory;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD)
+    public function createForStockable(StockableInterface $stockable, $quantity, $state = InventoryUnitInterface::STATE_SOLD)
     {
         if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 1.');
@@ -52,7 +48,7 @@ class InventoryUnitFactory implements InventoryUnitFactoryInterface
         $units = new ArrayCollection();
 
         for ($i = 0; $i < $quantity; $i++) {
-            $inventoryUnit = $this->repository->createNew();
+            $inventoryUnit = $this->inventoryUnitFactory->createNew();
             $inventoryUnit->setStockable($stockable);
             $inventoryUnit->setInventoryState($state);
 

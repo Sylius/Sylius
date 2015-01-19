@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -22,14 +22,14 @@ use Symfony\Component\Security\Http\SecurityEvents;
 class UserLastLoginSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $userManager;
 
     /**
-     * @param ObjectManager $userManager
+     * @param ResourceManagerInterface $userManager
      */
-    public function __construct(ObjectManager $userManager)
+    public function __construct(ResourceManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }

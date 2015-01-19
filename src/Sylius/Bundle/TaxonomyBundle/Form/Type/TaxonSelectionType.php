@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use JMS\TranslationBundle\Annotation\Ignore;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonomyInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -33,7 +34,7 @@ class TaxonSelectionType extends AbstractType
     /**
      * Taxonomies repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $taxonomyRepository;
 
@@ -47,10 +48,10 @@ class TaxonSelectionType extends AbstractType
     /**
      * Constructor.
      *
-     * @param RepositoryInterface      $taxonomyRepository
+     * @param ResourceRepositoryInterface      $taxonomyRepository
      * @param TaxonRepositoryInterface $taxonRepository
      */
-    public function __construct(RepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
+    public function __construct(ResourceRepositoryInterface $taxonomyRepository, TaxonRepositoryInterface $taxonRepository)
     {
         $this->taxonomyRepository = $taxonomyRepository;
         $this->taxonRepository = $taxonRepository;

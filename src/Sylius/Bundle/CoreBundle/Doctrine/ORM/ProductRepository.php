@@ -36,7 +36,8 @@ class ProductRepository extends BaseProductRepository
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array())
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
         $queryBuilder
             ->innerJoin('product.taxons', 'taxon')
             ->andWhere($queryBuilder->expr()->orX(
@@ -62,11 +63,11 @@ class ProductRepository extends BaseProductRepository
      */
     public function createByTaxonAndChannelPaginator(TaxonInterface $taxon, ChannelInterface $channel)
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
-            ->innerJoin('product.taxons', 'taxon')
-            ->innerJoin('product.channels', 'channel')
+            ->innerJoin('o.taxons', 'taxon')
+            ->innerJoin('o.channels', 'channel')
             ->andWhere('taxon = :taxon')
             ->andWhere('channel = :channel')
             ->setParameter('channel', $channel)
@@ -87,9 +88,11 @@ class ProductRepository extends BaseProductRepository
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o')
             ->addSelect('variant')
-            ->leftJoin('product.variants', 'variant')
+            ->addSelect('translation')
+            ->leftJoin('o.variants', 'variant')
+            ->leftJoin('o.translations', 'translation')
         ;
 
         if (!empty($criteria['name'])) {
@@ -109,14 +112,15 @@ class ProductRepository extends BaseProductRepository
             if (!is_array($sorting)) {
                 $sorting = array();
             }
+
             $sorting['updatedAt'] = 'desc';
         }
 
         $this->applySorting($queryBuilder, $sorting);
 
         if ($deleted) {
-            $this->_em->getFilters()->disable('softdeleteable');
-            $queryBuilder->andWhere('product.deletedAt IS NOT NULL');
+            $this->objectManager->getFilters()->disable('softdeleteable');
+            $queryBuilder->andWhere('o.deletedAt IS NOT NULL');
         }
 
         return $this->getPaginator($queryBuilder);
@@ -131,9 +135,10 @@ class ProductRepository extends BaseProductRepository
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->objectManager->getFilters()->disable('softdeleteable');
 
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
         $queryBuilder
             ->leftJoin('variant.images', 'image')
             ->addSelect('image')

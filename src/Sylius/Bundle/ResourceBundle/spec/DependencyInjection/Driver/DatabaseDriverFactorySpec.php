@@ -13,9 +13,11 @@ namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
 
 /**
+ * @mixin \Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory
+ *
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
 class DatabaseDriverFactorySpec extends ObjectBehavior
@@ -25,21 +27,24 @@ class DatabaseDriverFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory');
     }
 
-    function it_should_create_a_orm_driver_by_default(ContainerBuilder $container)
+    function it_creates_a_orm_driver_by_default(ResourceMetadataInterface $metadata)
     {
-        $this::get($container, 'prefix', 'resource', 'default')
-            ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineORMDriver');
+        $metadata->getDriver()->shouldBeCalled()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
+
+        $this::getForResource($metadata)->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineORMDriver');
     }
 
-    function it_should_create_a_odm_driver(ContainerBuilder $container)
+    function it_creates_a_odm_driver(ResourceMetadataInterface $metadata)
     {
-        $this::get($container, 'prefix', 'resource', 'default', SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM)
-            ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineODMDriver');
+        $metadata->getDriver()->shouldBeCalled()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM);
+
+        $this::getForResource($metadata)->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrineODMDriver');
     }
 
-    function it_should_create_a_phpcr_driver(ContainerBuilder $container)
+    function it_creates_a_phpcr_driver(ResourceMetadataInterface $metadata)
     {
-        $this::get($container, 'prefix', 'resource', 'default', SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM)
-            ->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrinePHPCRDriver');
+        $metadata->getDriver()->shouldBeCalled()->willReturn(SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM);
+
+        $this::getForResource($metadata)->shouldhaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DoctrinePHPCRDriver');
     }
 }

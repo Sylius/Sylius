@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
@@ -19,16 +19,16 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderRepository extends EntityRepository implements OrderRepositoryInterface
+class OrderRepository extends ResourceRepository implements OrderRepositoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function findRecentOrders($amount = 10)
     {
-        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
-        $this->_em->getFilters()->disable('softdeleteable');
+        $this->objectManager->getFilters()->disable('softdeleteable');
 
         return $queryBuilder
             ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
@@ -44,23 +44,12 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function isNumberUsed($number)
     {
-        return (bool) $this->createQueryBuilder('o')
+        return (bool) $this->objectRepository->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->where('o.number = :number')
             ->setParameter('number', $number)
             ->getQuery()
             ->getSingleScalarResult() > 0
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getQueryBuilder()
-    {
-        return parent::getQueryBuilder()
-            ->leftJoin('o.items', 'item')
-            ->addSelect('item')
         ;
     }
 }

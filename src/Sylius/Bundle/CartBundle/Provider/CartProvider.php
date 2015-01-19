@@ -11,13 +11,14 @@
 
 namespace Sylius\Bundle\CartBundle\Provider;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Event\CartEvents;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Cart\SyliusCartEvents;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -35,16 +36,21 @@ class CartProvider implements CartProviderInterface
     protected $context;
 
     /**
+     * @var ResourceFactoryInterface
+     */
+    protected $factory;
+
+    /**
      * Cart manager.
      *
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $manager;
 
     /**
      * Cart repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $repository;
 
@@ -66,13 +72,15 @@ class CartProvider implements CartProviderInterface
      * Constructor.
      *
      * @param CartContextInterface     $context
-     * @param ObjectManager            $manager
-     * @param RepositoryInterface      $repository
+     * @param ResourceFactoryInterface $factory,
+     * @param ResourceManagerInterface            $manager
+     * @param ResourceRepositoryInterface      $repository
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(CartContextInterface $context, ObjectManager $manager, RepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
+    public function __construct(CartContextInterface $context, ResourceFactoryInterface $factory, ResourceManagerInterface $manager, ResourceRepositoryInterface $repository, EventDispatcherInterface $eventDispatcher)
     {
         $this->context = $context;
+        $this->factory = $factory;
         $this->manager = $manager;
         $this->repository = $repository;
         $this->eventDispatcher = $eventDispatcher;
@@ -99,8 +107,9 @@ class CartProvider implements CartProviderInterface
             return $this->cart;
         }
 
-        $this->cart = $this->repository->createNew();
-        $this->eventDispatcher->dispatch(SyliusCartEvents::CART_INITIALIZE, new CartEvent($this->cart));
+        $this->cart = $this->factory->createNew();
+
+        $this->eventDispatcher->dispatch(CartEvents::INITIALIZE, new CartEvent($this->cart));
 
         return $this->cart;
     }
@@ -120,7 +129,7 @@ class CartProvider implements CartProviderInterface
     public function abandonCart()
     {
         if (null !== $this->cart) {
-            $this->eventDispatcher->dispatch(SyliusCartEvents::CART_ABANDON, new CartEvent($this->cart));
+            $this->eventDispatcher->dispatch(CartEvents::ABANDON, new CartEvent($this->cart));
         }
 
         $this->cart = null;

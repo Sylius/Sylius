@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SearchBundle\Controller;
 
+use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,9 +90,7 @@ class SearchController extends ResourceController
 
         if ($this->container->getParameter('sylius_search.pre_search_filter.enabled')) {
             $taxonomy = $this->get('sylius.repository.taxonomy')
-                ->findOneBy(array(
-                    'name' => strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon'))
-                ))
+                ->findOneByName(strtoupper($this->container->getParameter('sylius_search.pre_search_filter.taxon')))
             ;
 
             $filters = array();
@@ -104,8 +103,7 @@ class SearchController extends ResourceController
 
         $this->get('sylius_search.request_handler')->setRequest($request);
 
-        $view = $this
-            ->view()
+        $view = View::create()
             ->setTemplate($this->container->getParameter('sylius_search.search.template'))
             ->setData(array(
                 'filters' => $filters,

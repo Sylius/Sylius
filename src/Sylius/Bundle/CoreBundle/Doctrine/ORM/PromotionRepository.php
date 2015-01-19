@@ -26,8 +26,9 @@ class PromotionRepository extends BasePromotionRepository
      */
     public function findActiveByChannel(ChannelInterface $channel)
     {
-        $queryBuilder = $this
-            ->getCollectionQueryBuilder()
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
+        $queryBuilder
             ->orderBy($this->getPropertyName('priority'), 'DESC')
         ;
 

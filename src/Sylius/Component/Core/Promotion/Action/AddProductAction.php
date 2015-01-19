@@ -17,7 +17,8 @@ use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * Free product action.
@@ -27,28 +28,28 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class AddProductAction implements PromotionActionInterface
 {
     /**
-     * OrderItem repository.
+     * OrderItem factory.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
-    protected $itemRepository;
+    protected $itemFactory;
 
     /**
      * Variant repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $variantRepository;
 
     /**
      * Constructor.
      *
-     * @param RepositoryInterface $itemRepository
-     * @param RepositoryInterface $variantRepository
+     * @param ResourceFactoryInterface $itemFactory
+     * @param ResourceRepositoryInterface $variantRepository
      */
-    public function __construct(RepositoryInterface $itemRepository, RepositoryInterface $variantRepository)
+    public function __construct(ResourceFactoryInterface $itemFactory, ResourceRepositoryInterface $variantRepository)
     {
-        $this->itemRepository    = $itemRepository;
+        $this->itemFactory    = $itemFactory;
         $this->variantRepository = $variantRepository;
     }
 
@@ -120,11 +121,9 @@ class AddProductAction implements PromotionActionInterface
     {
         $variant = $this->variantRepository->find($configuration['variant']);
 
-        $promotionItem = $this->itemRepository->createNew();
+        $promotionItem = $this->itemFactory->createNew()
         $promotionItem->setVariant($variant);
         $promotionItem->setQuantity((int) $configuration['quantity']);
         $promotionItem->setUnitPrice((int) $configuration['price']);
-
-        return $promotionItem;
     }
 }

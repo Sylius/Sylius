@@ -11,13 +11,14 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
+interface AttributeInterface extends ResourceInterface, TimestampableInterface, AttributeTranslationInterface
 {
     /**
      * @return mixed

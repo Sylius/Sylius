@@ -15,8 +15,6 @@ use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 
 /**
- * Cart item event.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class CartItemEvent extends CartEvent

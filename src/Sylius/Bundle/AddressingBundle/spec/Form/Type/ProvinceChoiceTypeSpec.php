@@ -12,14 +12,14 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class ProvinceChoiceTypeSpec extends ObjectBehavior
 {
-    function let(EntityRepository $entityRepository)
+    function let(ResourceRepositoryInterface $entityRepository)
     {
         $this->beConstructedWith($entityRepository);
     }

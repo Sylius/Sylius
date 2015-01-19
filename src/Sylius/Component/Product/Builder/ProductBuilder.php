@@ -11,9 +11,10 @@
 
 namespace Sylius\Component\Product\Builder;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -26,35 +27,45 @@ class ProductBuilder implements ProductBuilderInterface
     protected $product;
 
     /**
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $productManager;
 
     /**
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $productRepository;
+    protected $productFactory;
 
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $attributeRepository;
 
     /**
-     * @var RepositoryInterface
+     * @var ResourceFactoryInterface
      */
-    protected $attributeValueRepository;
+    protected $attributeFactory;
+
+    /**
+     * Product attribute factory.
+     *
+     * @var ResourceRepositoryInterface
+     */
+    protected $attributeValueFactory;
 
     public function __construct(
-        ObjectManager       $productManager,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $attributeRepository,
-        RepositoryInterface $attributeValueRepository
-    ) {
-        $this->productManager = $productManager;
-        $this->productRepository = $productRepository;
-        $this->attributeRepository = $attributeRepository;
-        $this->attributeValueRepository = $attributeValueRepository;
+        ResourceManagerInterface    $productManager,
+        ResourceFactoryInterface    $productFactory,
+        ResourceRepositoryInterface $attributeRepository,
+        ResourceFactoryInterface    $attributeFactory,
+        ResourceFactoryInterface    $attributeValueFactory
+    )
+    {
+        $this->productManager        = $productManager;
+        $this->productFactory        = $productFactory;
+        $this->attributeRepository   = $attributeRepository;
+        $this->attributeFactory      = $attributeFactory;
+        $this->attributeValueFactory = $attributeValueFactory;
     }
 
     /**
@@ -76,7 +87,7 @@ class ProductBuilder implements ProductBuilderInterface
      */
     public function create($name)
     {
-        $this->product = $this->productRepository->createNew();
+        $this->product = $this->productFactory->createNew();
         $this->product->setName($name);
 
         return $this;
@@ -90,16 +101,13 @@ class ProductBuilder implements ProductBuilderInterface
         $attribute = $this->attributeRepository->findOneBy(array('name' => $name));
 
         if (null === $attribute) {
-            $attribute = $this->attributeRepository->createNew();
+            $attribute = $this->attributeFactory->createNew();
 
             $attribute->setName($name);
             $attribute->setPresentation($presentation ?: $name);
-
-            $this->productManager->persist($attribute);
-            $this->productManager->flush($attribute);
         }
 
-        $attributeValue = $this->attributeValueRepository->createNew();
+        $attributeValue = $this->attributeValueFactory->createNew();
 
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);
@@ -112,13 +120,10 @@ class ProductBuilder implements ProductBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function save($flush = true)
+    public function save()
     {
         $this->productManager->persist($this->product);
-
-        if ($flush) {
-            $this->productManager->flush();
-        }
+        $this->productManager->flush();
 
         return $this->product;
     }

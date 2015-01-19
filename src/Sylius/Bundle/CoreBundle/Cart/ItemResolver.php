@@ -19,7 +19,7 @@ use Sylius\Component\Cart\Resolver\ItemResolvingException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -49,7 +49,7 @@ class ItemResolver implements ItemResolverInterface
     /**
      * Product repository.
      *
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $productRepository;
 
@@ -83,7 +83,7 @@ class ItemResolver implements ItemResolverInterface
      * Constructor.
      *
      * @param CartProviderInterface          $cartProvider
-     * @param RepositoryInterface            $productRepository
+     * @param ResourceRepositoryInterface            $productRepository
      * @param FormFactoryInterface           $formFactory
      * @param AvailabilityCheckerInterface   $availabilityChecker
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
@@ -92,7 +92,7 @@ class ItemResolver implements ItemResolverInterface
      */
     public function __construct(
         CartProviderInterface          $cartProvider,
-        RepositoryInterface            $productRepository,
+        ResourceRepositoryInterface            $productRepository,
         FormFactoryInterface           $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,

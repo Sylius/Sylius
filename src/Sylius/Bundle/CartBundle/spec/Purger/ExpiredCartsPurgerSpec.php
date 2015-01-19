@@ -2,15 +2,15 @@
 
 namespace spec\Sylius\Bundle\CartBundle\Purger;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 
 class ExpiredCartsPurgerSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, CartRepositoryInterface $repository)
+    function let(ResourceManagerInterface $manager, CartRepositoryInterface $repository)
     {
         $this->beConstructedWith($manager, $repository);
     }

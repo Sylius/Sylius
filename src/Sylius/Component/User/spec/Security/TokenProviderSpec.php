@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 
@@ -24,7 +24,7 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
  */
 class TokenProviderSpec extends ObjectBehavior
 {
-    public function let(RepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator)
+    public function let(ResourceRepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator)
     {
         $this->beConstructedWith($repository, $manager, $generator, 12);
     }

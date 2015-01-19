@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Taxation\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  */
 class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxRateRepository)
+    function let(ResourceRepositoryInterface $taxRateRepository)
     {
         $this->beConstructedWith($taxRateRepository);
     }

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceRepository;
 use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
@@ -21,7 +22,7 @@ use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterf
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslatableResourceRepository extends EntityRepository implements TranslatableResourceRepositoryInterface
+class TranslatableResourceRepository extends ResourceRepository implements TranslatableResourceRepositoryInterface
 {
     /**
      * @var LocaleProviderInterface
@@ -36,48 +37,67 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     /**
      * {@inheritdoc}
      */
-    protected function getQueryBuilder()
+    public function findOneBy(array $criteria)
     {
-        $queryBuilder = parent::getQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
             ->addSelect('translation')
-            ->leftJoin($this->getAlias().'.translations', 'translation')
+            ->leftJoin('o.translations', 'translation')
         ;
 
-        return $queryBuilder;
+        $this->applyCriteria($queryBuilder, $criteria);
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getCollectionQueryBuilder()
+    public function findBy(array $criteria, array $sorting = array(), $limit = null, $offset = null)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder();
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
 
         $queryBuilder
             ->addSelect('translation')
-            ->leftJoin($this->getAlias().'.translations', 'translation')
+            ->leftJoin('o.translations', 'translation')
         ;
 
-        return $queryBuilder;
-    }
+        $this->applyCriteria($queryBuilder, $criteria);
+        $this->applySorting($queryBuilder, $sorting);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $resource = parent::createNew();
-
-        if (!$resource instanceof TranslatableInterface) {
-            throw new \InvalidArgumentException('Resource must implement TranslatableInterface.');
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+        if (null !== $offset) {
+            $queryBuilder->setFirstResult($offset);
         }
 
-        $resource->setCurrentLocale($this->localeProvider->getCurrentLocale());
-        $resource->setFallbackLocale($this->localeProvider->getFallbackLocale());
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
-        return $resource;
+    /**
+     * {@inheritdoc}
+     */
+    public function createPaginator(array $criteria = array(), array $sorting = array())
+    {
+        $queryBuilder = $this->objectRepository->createQueryBuilder('o');
+
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+        ;
+
+        $this->applyCriteria($queryBuilder, $criteria);
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
     }
 
     /**

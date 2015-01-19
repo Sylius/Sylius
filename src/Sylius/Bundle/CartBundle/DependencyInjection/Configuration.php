@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -37,69 +38,87 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('provider')->defaultValue('sylius.cart_provider.default')->end()
                 ->scalarNode('resolver')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 
-        $this->addClassesSection($rootNode);
-        $this->addValidationGroupsSection($rootNode);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
     /**
-     * Adds `validation_groups` section.
+     * Adds `resources` section.
      *
      * @param ArrayNodeDefinition $node
      */
-    private function addValidationGroupsSection(ArrayNodeDefinition $node)
+    private function addResourcesSection(ArrayNodeDefinition $node)
     {
         $node
             ->children()
-                ->arrayNode('validation_groups')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('cart')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                        ->arrayNode('item')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('sylius'))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * Adds `classes` section.
-     *
-     * @param ArrayNodeDefinition $node
-     */
-    private function addClassesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('classes')
+                ->arrayNode('resources')
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('cart')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartType')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Cart\Model\Cart')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Cart\Model\CartInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartController')->end()
+                                        ->scalarNode('repository')->end()
+                                        ->scalarNode('factory')->end()
+                                        ->arrayNode('form')
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartType')->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('item')
+                        ->arrayNode('cart_item')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartItemController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartItemType')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue('Sylius\Component\Cart\Model\CartItem')->end()
+                                        ->scalarNode('interface')->defaultValue('Sylius\Component\Cart\Model\CartItemInterface')->end()
+                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\CartBundle\Controller\CartItemController')->end()
+                                        ->scalarNode('repository')->end()
+                                        ->scalarNode('factory')->end()
+                                        ->arrayNode('form')
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\CartBundle\Form\Type\CartItemType')->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(array('sylius'))
+                                        ->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

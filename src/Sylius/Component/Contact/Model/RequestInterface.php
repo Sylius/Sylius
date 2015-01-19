@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Contact\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface RequestInterface extends TimestampableInterface
+interface RequestInterface extends ResourceInterface, TimestampableInterface
 {
     /**
      * @return string

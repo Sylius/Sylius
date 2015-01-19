@@ -11,11 +11,12 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Cart\Event\CartEvent;
+use Sylius\Component\Cart\Event\CartEvents;
 use Sylius\Component\Cart\Event\CartItemEvent;
+use Sylius\Component\Cart\Event\CartItemEvents;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Resource\Manager\ResourceManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\ValidatorInterface;
 
@@ -29,7 +30,7 @@ class CartSubscriber implements EventSubscriberInterface
     /**
      * Cart manager.
      *
-     * @var ObjectManager
+     * @var ResourceManagerInterface
      */
     protected $cartManager;
 
@@ -50,15 +51,12 @@ class CartSubscriber implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param ObjectManager         $cartManager
-     * @param ValidatorInterface    $validator
-     * @param CartProviderInterface $cartProvider
+     * @param ResourceManagerInterface $cartManager
+     * @param ValidatorInterface       $validator
+     * @param CartProviderInterface    $cartProvider
      */
-    public function __construct(
-        ObjectManager $cartManager,
-        ValidatorInterface $validator,
-        CartProviderInterface $cartProvider
-    ) {
+    public function __construct(ResourceManagerInterface $cartManager, ValidatorInterface $validator, CartProviderInterface $cartProvider)
+    {
         $this->cartManager  = $cartManager;
         $this->validator    = $validator;
         $this->cartProvider = $cartProvider;
@@ -70,10 +68,10 @@ class CartSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            SyliusCartEvents::ITEM_ADD_INITIALIZE    => 'addItem',
-            SyliusCartEvents::ITEM_REMOVE_INITIALIZE => 'removeItem',
-            SyliusCartEvents::CART_CLEAR_INITIALIZE  => 'clearCart',
-            SyliusCartEvents::CART_SAVE_INITIALIZE   => 'saveCart',
+            CartItemEvents::PRE_ADD    => 'addItem',
+            CartItemEvents::PRE_REMOVE => 'removeItem',
+            CartEvents::PRE_CLEAR      => 'clearCart',
+            CartEvents::PRE_SAVE       => 'saveCart',
         );
     }
 
@@ -102,6 +100,7 @@ class CartSubscriber implements EventSubscriberInterface
     {
         $this->cartManager->remove($event->getCart());
         $this->cartManager->flush();
+
         $this->cartProvider->abandonCart();
     }
 

@@ -14,14 +14,15 @@ namespace spec\Sylius\Component\Mailer\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Factory\ResourceFactoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EmailProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository)
+    function let(ResourceRepositoryInterface $repository, ResourceFactoryInterface $factory)
     {
         $emails = array(
             'user_confirmation' => array(
@@ -43,7 +44,7 @@ class EmailProviderSpec extends ObjectBehavior
                 )
             )
         );
-        $this->beConstructedWith($repository, $emails);
+        $this->beConstructedWith($repository, $factory, $emails);
     }
 
     function it_is_initializable()
@@ -63,10 +64,10 @@ class EmailProviderSpec extends ObjectBehavior
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
 
-    function it_looks_for_email_in_configuration($repository, EmailInterface $email)
+    function it_looks_for_email_in_configuration($repository, $factory, EmailInterface $email)
     {
         $repository->findOneBy(array('code' => 'user_confirmation'))->shouldBeCalled()->willReturn(null);
-        $repository->createNew()->shouldBeCalled()->willReturn($email);
+        $factory->createNew()->shouldBeCalled()->willReturn($email);
 
         $email->setCode('user_confirmation')->shouldBeCalled();
         $email->setSubject('Hello test!')->shouldBeCalled();

@@ -23,11 +23,13 @@ class TaxationContext extends DefaultContext
      */
     public function thereAreTaxCategories(TableNode $table)
     {
+        $manager = $this->getManager('tax_category');
+
         foreach ($table->getHash() as $data) {
             $this->thereIsTaxCategory($data['name'], false);
         }
 
-        $this->getEntityManager()->flush();
+        $manager->flush();
     }
 
     /**
@@ -36,11 +38,12 @@ class TaxationContext extends DefaultContext
      */
     public function thereIsTaxCategory($name, $flush = true)
     {
-        $category = $this->getRepository('tax_category')->createNew();
+        $category = $this->getFactory('tax_category')->createNew();
         $category->setName($name);
 
-        $manager = $this->getEntityManager();
+        $manager = $this->getManager('tax_category');
         $manager->persist($category);
+
         if ($flush) {
             $manager->flush();
         }

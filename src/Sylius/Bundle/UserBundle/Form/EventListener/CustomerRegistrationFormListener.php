@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\EventListener;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -24,14 +24,14 @@ use Symfony\Component\Form\FormEvents;
 class CustomerRegistrationFormListener implements EventSubscriberInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ResourceRepositoryInterface
      */
     protected $customerRepository;
 
     /**
-     * @param RepositoryInterface $customerRepository
+     * @param ResourceRepositoryInterface $customerRepository
      */
-    public function __construct(RepositoryInterface $customerRepository)
+    public function __construct(ResourceRepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;
     }

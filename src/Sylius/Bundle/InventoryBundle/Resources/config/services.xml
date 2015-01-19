@@ -45,7 +45,7 @@
         </service>
 
         <service id="sylius.inventory_unit_factory" class="%sylius.inventory_unit_factory.class%">
-            <argument type="service" id="sylius.repository.inventory_unit" />
+            <argument type="service" id="sylius.factory.inventory_unit" />
         </service>
 
         <service id="sylius.listener.inventory" class="%sylius.listener.inventory.class%">

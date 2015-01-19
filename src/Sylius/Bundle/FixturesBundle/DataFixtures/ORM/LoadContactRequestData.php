@@ -26,10 +26,11 @@ class LoadContactRequestData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $contactRequestRepository = $this->getContactRequestRepository();
+        $contactRequestFactory = $this->getContactRequestFactory();
+        $contactRequestManager = $this->getContactRequestManager();
 
         for ($i = 0; $i < 20; $i++) {
-            $contactRequest = $contactRequestRepository->createNew();
+            $contactRequest = $contactRequestFactory->createNew();
 
             $contactRequest->setFirstName($this->faker->firstName());
             $contactRequest->setLastName($this->faker->lastName());
@@ -37,10 +38,10 @@ class LoadContactRequestData extends DataFixture
             $contactRequest->setMessage($this->faker->paragraph());
             $contactRequest->setTopic($this->getReference('Sylius.ContactTopic.'.rand(0, 4)));
 
-            $manager->persist($contactRequest);
+            $contactRequestManager->persist($contactRequest);
         }
 
-        $manager->flush();
+        $contactRequestManager->flush();
     }
 
     /**

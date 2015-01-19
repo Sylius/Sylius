@@ -12,8 +12,11 @@
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Product catalog extension.
@@ -27,12 +30,18 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS | self::CONFIGURE_TRANSLATIONS
+        $config = $this->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+
+        $configFiles = array(
+            'services.xml',
         );
+
+        foreach ($configFiles as $configFile) {
+            $loader->load($configFile);
+        }
     }
 
     /**
@@ -57,21 +66,29 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         }
 
         $container->prependExtensionConfig('sylius_attribute', array(
-                'classes' => array(
-                    'product' => array(
-                        'subject'         => $config['classes']['product']['model'],
-                        'attribute'       => array(
+            'resources' => array(
+                'product' => array(
+                    'subject'         => $config['resources']['product']['classes']['model'],
+                    'attribute'       => array(
+                        'classes' => array(
                             'model'       => 'Sylius\Component\Product\Model\Attribute',
+                            'interface'   => 'Sylius\Component\Product\Model\AttributeInterface',
                             'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
-                            'translation' => array(
+                        ),
+                        'translation' => array(
+                            'classes' => array(
                                 'model' => 'Sylius\Component\Product\Model\AttributeTranslation'
-                            ),
-                        ),
-                        'attribute_value' => array(
-                            'model' => 'Sylius\Component\Product\Model\AttributeValue'
-                        ),
-                    )
-                ))
+                            )
+                        )
+                    ),
+                    'attribute_value' => array(
+                        'classes' => array(
+                            'model'     => 'Sylius\Component\Product\Model\AttributeValue',
+                            'interface' => 'Sylius\Component\Product\Model\AttributeValueInterface'
+                        )
+                    ),
+                ),
+            ))
         );
     }
 
@@ -86,28 +103,39 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         }
 
         $container->prependExtensionConfig('sylius_variation', array(
-                'classes' => array(
-                    'product' => array(
-                        'variable' => $config['classes']['product']['model'],
-                        'variant' => array(
-                            'model' => 'Sylius\Component\Product\Model\Variant',
+            'resources' => array(
+                'product' => array(
+                    'variable' => $config['resources']['product']['classes']['model'],
+                    'variant'  => array(
+                        'classes' => array(
+                            'model'      => 'Sylius\Component\Product\Model\Variant',
+                            'interface'  => 'Sylius\Component\Product\Model\VariantInterface',
                             'controller' => 'Sylius\Bundle\ProductBundle\Controller\VariantController',
                             'form' => array(
                                 'default' => 'Sylius\Bundle\ProductBundle\Form\Type\VariantType'
-                            ),
-                        ),
-                        'option'       => array(
+                            )
+                        )
+                    ),
+                    'option'       => array(
+                        'classes' => array(
                             'model'       => 'Sylius\Component\Product\Model\Option',
+                            'interface'   => 'Sylius\Component\Product\Model\OptionInterface',
                             'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
-                            'translation' => array(
+                        ),
+                        'translation' => array(
+                            'classes' => array(
                                 'model' => 'Sylius\Component\Product\Model\OptionTranslation'
-                            ),
-                        ),
-                        'option_value' => array(
-                            'model' => 'Sylius\Component\Product\Model\OptionValue'
-                        ),
-                    )
-                ))
-        );
+                            )
+                        )
+                    ),
+                    'option_value' => array(
+                        'classes' => array(
+                            'model'     => 'Sylius\Component\Product\Model\OptionValue',
+                            'interface' => 'Sylius\Component\Product\Model\OptionValueInterface'
+                        )
+                    ),
+                )
+            )
+        ));
     }
 }

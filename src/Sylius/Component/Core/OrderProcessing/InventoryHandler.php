@@ -136,7 +136,7 @@ class InventoryHandler implements InventoryHandlerInterface
 
     protected function createInventoryUnits(OrderItemInterface $item, $quantity, $state = InventoryUnitInterface::STATE_CHECKOUT)
     {
-        $units = $this->inventoryUnitFactory->create($item->getVariant(), $quantity, $state);
+        $units = $this->inventoryUnitFactory->createForStockable($item->getVariant(), $quantity, $state);
 
         foreach ($units as $unit) {
             $item->addInventoryUnit($unit);

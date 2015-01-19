@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\ShipmentFactoryInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentsFactoryInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
@@ -29,7 +29,7 @@ class OrderShippingListener
     /**
      * Order shipments factory.
      *
-     * @var ShipmentFactoryInterface
+     * @var OrderShipmentsFactoryInterface
      */
     protected $shipmentFactory;
 
@@ -50,11 +50,11 @@ class OrderShippingListener
     /**
      * Constructor.
      *
-     * @param ShipmentFactoryInterface          $shipmentFactory
+     * @param OrderShipmentsFactoryInterface          $shipmentFactory
      * @param ShipmentProcessorInterface        $shippingProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
-    public function __construct(ShipmentFactoryInterface $shipmentFactory, ShipmentProcessorInterface $shippingProcessor, ShippingChargesProcessorInterface $shippingChargesProcessor)
+    public function __construct(OrderShipmentsFactoryInterface $shipmentFactory, ShipmentProcessorInterface $shippingProcessor, ShippingChargesProcessorInterface $shippingChargesProcessor)
     {
         $this->shipmentFactory = $shipmentFactory;
         $this->shippingProcessor = $shippingProcessor;

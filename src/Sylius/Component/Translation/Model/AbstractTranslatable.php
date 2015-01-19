@@ -122,6 +122,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     public function translate($locale = null)
     {
         $locale = $locale ?: $this->currentLocale;
+
         if (null === $locale) {
             throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
@@ -130,11 +131,13 @@ abstract class AbstractTranslatable implements TranslatableInterface
             return $this->currentTranslation;
         }
 
-        if (!$translation = $this->translations->get($locale)) {
+        if (null === $translation = $this->translations->get($locale)) {
             if (null === $this->fallbackLocale) {
                 throw new \RuntimeException('No fallback locale has been set.');
             }
+        }
 
+        if (!$translation = $this->getTranslations()->get($locale)) {
             if (!$fallbackTranslation = $this->translations->get($this->getFallbackLocale())) {
                 $className = $this->getTranslationClass();
 

@@ -11,13 +11,13 @@
 
 namespace Sylius\Component\User\Repository;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\ResourceRepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserRepositoryInterface extends RepositoryInterface
+interface UserRepositoryInterface extends ResourceRepositoryInterface
 {
     /**
      * @param string $email

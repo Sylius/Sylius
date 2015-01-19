@@ -11,16 +11,19 @@
 
 namespace Sylius\Component\Resource\Exception\Driver;
 
+use Sylius\Component\Resource\Metadata\ResourceMetadataInterface;
+
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
 class UnknownDriverException extends \Exception
 {
-    public function __construct($driver)
+    public function __construct(ResourceMetadataInterface $metadata)
     {
         parent::__construct(sprintf(
-            'Unknown driver "%s"',
-            $driver
+            'Unknown driver "%s" for resource "%s".',
+            $metadata->getDriver(),
+            $metadata->getAlias()
         ));
     }
 }
