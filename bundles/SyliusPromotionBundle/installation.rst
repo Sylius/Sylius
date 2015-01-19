@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/promotions-bundle"
+    $ composer require "sylius/promotion-bundle"
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/promotions-bundle"
+    $ php composer.phar require "sylius/promotion-bundle"
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -38,7 +38,7 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sylius\Bundle\PromotionsBundle\SyliusPromotionsBundle(),
+            new Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
@@ -57,7 +57,7 @@ Put this configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
-    sylius_promotions:
+    sylius_promotion:
         driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
 
 And configure doctrine extensions which are used by the bundle.
@@ -77,7 +77,7 @@ Add the following to your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_promotion:
-        resource: @SyliusPromotionsBundle/Resources/config/routing.yml
+        resource: @SyliusPromotionBundle/Resources/config/routing.yml
 
 Updating database schema
 ------------------------

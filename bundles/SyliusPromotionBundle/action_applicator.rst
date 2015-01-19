@@ -1,7 +1,7 @@
 How actions are applied ?
 =========================
 
-Everything related to this subject is located in ``Sylius\Bundle\PromotionsBundle\Action``.
+Everything related to this subject is located in ``Sylius\Bundle\PromotionBundle\Action``.
 
 Actions
 -------
@@ -10,7 +10,7 @@ Actions can be created by implementing ``PromotionActionInterface``. This interf
 
 Actions have to be defined as services and have to use the tag named ``sylius.promotion_action`` with the attributes ``type`` and ``label``.
 
-As ``SyliusPromotionsBundle`` is totally independent, it does not provide some actions out of the box. Great examples of actions are provided by ``Sylius/Standard-Edition``.
+As ``SyliusPromotionBundle`` is totally independent, it does not provide some actions out of the box. Great examples of actions are provided by ``Sylius/Standard-Edition``.
 
 .. note::
 
@@ -21,7 +21,7 @@ As ``SyliusPromotionsBundle`` is totally independent, it does not provide some a
     ``Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction`` from ``Sylius/Standard-Edition`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
 
 
-All actions that you have defined as services will be automatically registered thanks to ``Sylius\Bundle\PromotionsBundle\Action\Registry\PromotionActionRegistry``.
+All actions that you have defined as services will be automatically registered thanks to ``Sylius\Bundle\PromotionBundle\Action\Registry\PromotionActionRegistry``.
 
 
 Applying actions to promotions

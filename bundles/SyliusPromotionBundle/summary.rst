@@ -3,7 +3,7 @@ Summary
 
 .. code-block:: yaml
 
-    sylius_promotions:
+    sylius_promotion:
         # The driver used for persistence layer.
         driver: ~
         classes:
@@ -11,20 +11,20 @@ Summary
                 model: Sylius\Component\Promotion\Model\Promotion
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\PromotionsBundle\Form\Type\PromotionType
+                form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionType
             promotion_rule:
                 model: Sylius\Component\Promotion\Model\Rule
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\PromotionsBundle\Form\Type\RuleType
+                form: Sylius\Bundle\PromotionBundle\Form\Type\RuleType
             promotion_action:
                 model: Sylius\Component\Promotion\Model\Action
                 controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                 repository: ~
-                form: Sylius\Bundle\PromotionsBundle\Form\Type\ActionType
+                form: Sylius\Bundle\PromotionBundle\Form\Type\ActionType
             promotion_coupon:
                 model: Sylius\Component\Promotion\Model\Coupon
-                controller: Sylius\Bundle\PromotionsBundle\Controller\CouponController
+                controller: Sylius\Bundle\PromotionBundle\Controller\CouponController
                 repository: ~
                 form: Sylius\Bundle\PromotionsBundle\Form\Type\CouponType
             promotion_subject:
