@@ -6,6 +6,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th width="30"></th>
             <th>{{ 'sylius.taxon.name'|trans }}</th>
             <th></th>
         </tr>
@@ -26,6 +27,10 @@
 
 {% for taxon in taxons %}
 <tr id="{{ taxon.id }}">
+    <td class="text-center">
+        <a href="{{ path('sylius_backend_taxon_move_up', {'taxonomyId': taxonomy.id, 'id': taxon.id}) }}" class="btn btn-link btn-xs{% if loop.first %} disabled{% endif %}"><i class="glyphicon glyphicon-chevron-up"></i></a>
+        <a href="{{ path('sylius_backend_taxon_move_down', {'taxonomyId': taxonomy.id, 'id': taxon.id}) }}" class="btn btn-link btn-xs{% if loop.last %} disabled{% endif %}"><i class="glyphicon glyphicon-chevron-down"></i></a>
+    </td>
     <td>
         <span style="border-left: {{ (taxon.level - 1) * 20}}px solid #f1f1f1; padding-left: 10px;">
             {% if taxon.path|length > 0 %}

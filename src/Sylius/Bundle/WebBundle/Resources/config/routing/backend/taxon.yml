@@ -23,6 +23,18 @@ sylius_backend_taxon_update:
                 route: sylius_backend_taxonomy_show
                 parameters: {'id': $taxonomyId}
 
+sylius_backend_taxon_move_up:
+    path: /{id}/move-up
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:moveTaxonUpAction
+
+sylius_backend_taxon_move_down:
+    path: /{id}/move-down
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxonomy:moveTaxonDownAction
+
 sylius_backend_taxon_product_index:
     path: /{id}/products
     methods: [GET]
