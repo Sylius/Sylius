@@ -8,7 +8,7 @@ bin/behat --suite=pricing -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/products.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/product_attributes.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/product_options.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=products features/backend/product_prototypes.feature -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/backend/product_archetypes.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/product_taxonomies.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/product_variants.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/products.feature -fprogress || EXIT_STATUS=$?
