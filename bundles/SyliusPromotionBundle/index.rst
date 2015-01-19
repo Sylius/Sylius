@@ -1,4 +1,4 @@
-SyliusPromotionsBundle
+SyliusPromotionBundle
 ======================
 
 Promotions system for Symfony2 applications.
