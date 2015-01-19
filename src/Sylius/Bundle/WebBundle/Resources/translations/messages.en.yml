@@ -182,6 +182,7 @@ sylius:
         route:
             index: Routes
         sales: Sales
+        seo_settings: SEO Settings
         shipment:
             index: Shipments
         shipping_category:
@@ -721,6 +722,7 @@ sylius:
     search: Search
     settings:
         general_header: General settings
+        seo_header: SEO settings
         taxation_header: Taxation settings
     shipment_category:
         manage: Manage shipping categories

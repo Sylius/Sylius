@@ -49,6 +49,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addSalesMenu($menu, $childOptions, 'main');
         $this->addCustomersMenu($menu, $childOptions, 'main');
         $this->addContentMenu($menu, $childOptions, 'main');
+        $this->addTaxesMenu($menu, $childOptions, 'main');
         $this->addConfigurationMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
@@ -88,6 +89,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addSalesMenu($menu, $childOptions, 'sidebar');
         $this->addCustomersMenu($menu, $childOptions, 'sidebar');
         $this->addContentMenu($menu, $childOptions, 'sidebar');
+        $this->addTaxesMenu($menu, $childOptions, 'main');
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_SIDEBAR, new MenuBuilderEvent($this->factory, $menu));
@@ -243,6 +245,36 @@ class BackendMenuBuilder extends MenuBuilder
     }
 
     /**
+     * Add taxes menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addTaxesMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('taxes', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxes', $section)))
+        ;
+
+        $child->addChild('taxation_settings', array(
+            'route' => 'sylius_backend_taxation_settings',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxation_settings', $section)));
+
+        $child->addChild('tax_categories', array(
+            'route' => 'sylius_backend_tax_category_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.tax_categories', $section)));
+
+        $child->addChild('tax_rates', array(
+            'route' => 'sylius_backend_tax_rate_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.tax_rates', $section)));
+    }
+
+    /**
      * Add configuration menu.
      *
      * @param ItemInterface $menu
@@ -261,6 +293,11 @@ class BackendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-info-sign'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.general_settings', $section)));
 
+        $child->addChild('seo_settings', array(
+            'route' => 'sylius_backend_seo_settings',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-link'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.seo_settings', $section)));
+
         $child->addChild('locales', array(
             'route' => 'sylius_backend_locale_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-flag'),
@@ -275,21 +312,6 @@ class BackendMenuBuilder extends MenuBuilder
             'route' => 'sylius_backend_currency_index',
             'labelAttributes' => array('icon' => 'glyphicon glyphicon-usd'),
         ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.currencies', $section)));
-
-        $child->addChild('taxation_settings', array(
-            'route' => 'sylius_backend_taxation_settings',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxation_settings', $section)));
-
-        $child->addChild('tax_categories', array(
-            'route' => 'sylius_backend_tax_category_index',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.tax_categories', $section)));
-
-        $child->addChild('tax_rates', array(
-            'route' => 'sylius_backend_tax_rate_index',
-            'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
-        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.tax_rates', $section)));
 
         $child->addChild('shipping_categories', array(
             'route' => 'sylius_backend_shipping_category_index',

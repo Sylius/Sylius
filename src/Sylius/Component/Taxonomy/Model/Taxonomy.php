@@ -141,6 +141,60 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     /**
      * {@inheritdoc}
      */
+    public function getMetaTitle()
+    {
+        return $this->translate()->getMetaTitle();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaTitle($title)
+    {
+        $this->translate()->setMetaTitle($title);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetaKeywords()
+    {
+        return $this->translate()->getMetaKeywords();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->translate()->setMetaKeywords($metaKeywords);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetaDescription()
+    {
+        return $this->translate()->getMetaDescription();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->translate()->setMetaDescription($metaDescription);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getTranslationEntityClass()
     {
         return get_class().'Translation';

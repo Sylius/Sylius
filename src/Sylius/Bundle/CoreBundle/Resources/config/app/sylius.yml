@@ -20,6 +20,19 @@ sylius_core:
                 repository: sylius.repository.taxon
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
+    seo:
+        product:
+            class: Sylius\Component\Core\Model\Product
+            formulas:
+                title: '{{ resource.name }} - {{ resource.taxon.name }} | Sylius - Modern ecommerce for Symfony2'
+                keywords: '{{ resource.name }},{{ resource.meta_keywords }}'
+                desc: '{{ resource.name }} - {{ resource.taxon.name }}. {{ resource.meta_description|default(resource.description) }}'
+        taxon:
+            class: Sylius\Component\Core\Model\Taxon
+            formulas:
+                title: '{{ resource.name }} | Sylius - Modern ecommerce for Symfony2'
+                keywords: '{{ resource.name }},{{ resource.meta_keywords }}'
+                desc: '{{ resource.name }}. {{ resource.meta_description }}'
 
 sylius_installer:
     classes:

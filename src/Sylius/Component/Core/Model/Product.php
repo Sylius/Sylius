@@ -302,6 +302,7 @@ class Product extends BaseProduct implements ProductInterface
     public function setShortDescription($shortDescription)
     {
         $this->translate()->setShortDescription($shortDescription);
+
         return $this;
     }
 

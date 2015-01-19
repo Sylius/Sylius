@@ -45,18 +45,12 @@ class GeneralSettingsSchema implements SchemaInterface
     {
         $builder
             ->setDefaults(array_merge(array(
-                'title'            => 'Sylius - Modern ecommerce for Symfony2',
-                'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
-                'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
-                'locale'           => 'en',
-                'currency'         => 'USD',
+                'locale'   => 'en',
+                'currency' => 'USD',
             ), $this->defaults))
             ->setAllowedTypes(array(
-                'title'            => array('string'),
-                'meta_keywords'    => array('string'),
-                'meta_description' => array('string'),
-                'locale'           => array('string'),
-                'currency'         => array('string'),
+                'locale'   => array('string'),
+                'currency' => array('string'),
             ))
         ;
     }
@@ -67,24 +61,6 @@ class GeneralSettingsSchema implements SchemaInterface
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add('title', 'text', array(
-                'label'       => 'sylius.form.settings.general.title',
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
-            ->add('meta_keywords', 'text', array(
-                'label'       => 'sylius.form.settings.general.meta_keywords',
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
-            ->add('meta_description', 'textarea', array(
-                'label'       => 'sylius.form.settings.general.meta_description',
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
             ->add('locale', 'locale', array(
                 'label'       => 'sylius.form.settings.general.locale',
                 'constraints' => array(

@@ -16,6 +16,7 @@ use Sylius\Bundle\ProductBundle\Controller\ProductController as BaseProductContr
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,8 @@ class ProductController extends BaseProductController
 
         $config = $this->container->getParameter("sylius_search.config");
 
+        $this->get('event_dispatcher')->dispatch('sylius.taxon.pre_show', new ResourceEvent($taxon));
+
         $paginator = $finder->getPaginator();
 
         return $this->renderResults(
@@ -109,6 +112,8 @@ class ProductController extends BaseProductController
             ->getRepository()
             ->createByTaxonPaginator($taxon)
         ;
+
+        $this->get('event_dispatcher')->dispatch('sylius.taxon.pre_show', new ResourceEvent($taxon));
 
         return $this->renderResults($taxon, $paginator, 'productIndex.html', $request->get('page', 1));
     }

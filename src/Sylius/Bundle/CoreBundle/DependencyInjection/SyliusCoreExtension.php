@@ -83,6 +83,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $this->loadEmailsConfiguration($config['emails'], $container, $loader);
         $this->loadCheckoutConfiguration($config['checkout'], $container);
 
+        $container->setParameter('sylius.seo.formulas', $config['seo']);
+
         $definition = $container->findDefinition('sylius.context.currency');
         $definition->replaceArgument(0, new Reference($config['currency_storage']));
     }

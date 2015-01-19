@@ -18,11 +18,26 @@
 
     <parameters>
         <parameter key="sylius.twig.extension.restricted_zone.class">Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension</parameter>
+        <parameter key="sylius.twig.extension.seo.class">Sylius\Bundle\CoreBundle\Twig\SeoExtension</parameter>
     </parameters>
 
     <services>
         <service id="sylius.twig.extension.restricted_zone" class="%sylius.twig.extension.restricted_zone.class%" public="false">
             <argument type="service" id="sylius.templating.helper.restricted_zone" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="sylius.twig.extension.seo" class="%sylius.twig.extension.seo.class%" public="false">
+            <argument type="service" id="sylius.storage.doctrine" />
+            <argument type="service">
+                <service
+                        factory-service="sylius.settings.manager"
+                        factory-method="loadSettings"
+                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                        >
+                    <argument>seo</argument>
+                </service>
+            </argument>
             <tag name="twig.extension" />
         </service>
     </services>

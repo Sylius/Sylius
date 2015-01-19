@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Product\Model;
 
+use Sylius\Component\Resource\Model\SeoMetaInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ProductTranslationInterface extends SlugAwareInterface
+interface ProductTranslationInterface extends SlugAwareInterface, SeoMetaInterface
 {
     /**
      * Get product name.
@@ -47,32 +48,4 @@ interface ProductTranslationInterface extends SlugAwareInterface
      * @param string $description
      */
     public function setDescription($description);
-
-    /**
-     * Get meta keywords.
-     *
-     * @return string
-     */
-    public function getMetaKeywords();
-
-    /**
-     * Set meta keywords for the product.
-     *
-     * @param string $metaKeywords
-     */
-    public function setMetaKeywords($metaKeywords);
-
-    /**
-     * Get meta description.
-     *
-     * @return string
-     */
-    public function getMetaDescription();
-
-    /**
-     * Set meta description for the product.
-     *
-     * @param string $metaDescription
-     */
-    public function setMetaDescription($metaDescription);
 }

@@ -16,6 +16,7 @@ use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -104,11 +105,15 @@ class ResourceController extends FOSRestController
      */
     public function showAction(Request $request)
     {
+        $resource = $this->findOr404($request);
+
+        $this->get('event_dispatcher')->dispatch($this->config->getEventName('pre_show'), new ResourceEvent($resource));
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
             ->setTemplateVar($this->config->getResourceName())
-            ->setData($this->findOr404($request))
+            ->setData($resource)
         ;
 
         return $this->handleView($view);
