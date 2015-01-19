@@ -192,6 +192,7 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Sylius\Component\Core\Model\Group
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\GroupRepository
 
 sylius_pricing:
     forms:

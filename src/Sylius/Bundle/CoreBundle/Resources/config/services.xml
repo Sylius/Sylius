@@ -60,6 +60,7 @@
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.contains_product.class">Sylius\Component\Core\Promotion\Checker\ContainsProductRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.user_group.class">Sylius\Component\Core\Promotion\Checker\UserGroupRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
@@ -175,10 +176,10 @@
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service">
                 <service
-                    factory-service="sylius.settings.manager"
-                    factory-method="loadSettings"
-                    class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                >
+                        factory-service="sylius.settings.manager"
+                        factory-method="loadSettings"
+                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                        >
                     <argument>taxation</argument>
                 </service>
             </argument>
@@ -343,6 +344,9 @@
         </service>
         <service id="sylius.promotion_rule_checker.contains_product" class="%sylius.promotion_rule_checker.contains_product.class%">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains Product" />
+        </service>
+        <service id="sylius.promotion_rule_checker.user_group" class="%sylius.promotion_rule_checker.user_group.class%">
+            <tag name="sylius.promotion_rule_checker" type="user_group" label="User Group" />
         </service>
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
