@@ -5,8 +5,23 @@
         <div class="col-md-6">
             {{ form_row(form.name) }}
             {{ form_row(form.description) }}
+        </div>
+        <div class="col-md-6">
             {{ form_row(form.dataFetcher) }}
             {{ form_row(form.renderer) }}
+
+            {% for name, dataFetcherConfigurationPrototype in form.vars.prototypes %}
+                <div id="{{ form.dataFetcher.vars.id }}_{{ name }}" data-container=".configuration" data-prototype="{{ form_widget(dataFetcherConfigurationPrototype)|e }}">
+                </div>
+            {% endfor %}
+            <div class="configuration">
+            {% if form.configuration is defined %}
+                <hr>
+                {% for field in form.configuration %}
+                    {{ form_row(field) }}
+                {% endfor %}
+            {% endif %}
+            </div>
         </div>
     </div>
 </fieldset>

@@ -30,7 +30,6 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
         $queryBuilder = $this->userRepository->getEntityMenager->createQueryBuilder('user_registration');
         $queryBuilder
             ->select('*')
-            ->from('sylius_user', 'su')
             ->where('dayofyear(created_at) > :start AND dayofyear(created_at) < :end')
             ->setParameters(array("start" => '10', "end" => '17'));
         ;
