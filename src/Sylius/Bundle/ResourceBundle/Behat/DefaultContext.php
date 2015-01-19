@@ -83,7 +83,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
         if ($isMysql) {
             $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
-        } 
+        }
         $entityManager->clear();
     }
 
