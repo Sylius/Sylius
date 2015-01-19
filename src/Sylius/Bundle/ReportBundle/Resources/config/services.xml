@@ -67,6 +67,7 @@
         </service>
 
         <service id="sylius.form.type.renderer.chart" class="%sylius.form.type.renderer.chart.class%">
+            <argument type="service" id="templating" />
             <tag name="sylius.report.renderer" renderer="chart" label="Chart renderer" />
         </service>
         <service id="sylius.form.type.report.renderer.chart_configuration" class="%sylius.form.type.report.renderer.chart_configuration.class%">

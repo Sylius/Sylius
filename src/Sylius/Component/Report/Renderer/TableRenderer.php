@@ -13,6 +13,7 @@ namespace Sylius\Component\Report\Renderer;
 
 use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -29,13 +30,18 @@ class TableRenderer implements RendererInterface
     public function render($data, $configuration)
     {
         $data = array(
-            array('month' => 'January','newUsers' => 20),
-            array('month' => 'February','newUsers' => 10),
-            array('month' => 'March','newUsers' => 25),
-            array('month' => 'April','newUsers' =>15)
+            'values' => array(
+                array('month' => 'January','newUsers' => 20),
+                array('month' => 'February','newUsers' => 10),
+                array('month' => 'March','newUsers' => 25),
+                array('month' => 'April','newUsers' =>15)
+            ),
+            'labels' => array('Month', 'Users number')
         );
 
         $configuration = array('template' => 0);
+
+        return $this->templating->renderResponse(sprintf("SyliusReportBundle:Table:tableTemplate%s.html.twig", $configuration['template']), $data);
     }
 
     public function getType()

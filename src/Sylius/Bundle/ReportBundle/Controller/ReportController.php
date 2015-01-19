@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ReportBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sylius\Component\Report\Renderer\TableRenderer;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -22,6 +23,7 @@ class ReportController extends ResourceController
 {
     public function renderAction(Request $request)
     {
-        return new Response();
+        $renderer = $this->get("sylius.form.type.renderer.chart");
+        return $renderer->render(array(), array());
     }
 }
