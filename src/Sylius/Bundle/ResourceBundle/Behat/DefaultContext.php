@@ -18,6 +18,7 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -73,7 +74,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $entityManager = $this->getService('doctrine.orm.entity_manager');
         $entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
 
-        $isMysql = $entityManager->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOMySql\Driver;
+        $isMysql = $entityManager->getConnection()->getDriver() instanceof PDOMySqlDriver;
         if ($isMysql) {
             $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
         }
