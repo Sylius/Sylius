@@ -11,24 +11,31 @@
 
 namespace Sylius\Component\Report\Renderer;
 
-use Symfony\Component\Templating\EngineInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class TableRenderer implements RendererInterface
 {
-    private $engineInterface;
+    private $templating;
 
-    public function __construct()
-    {
-        // $this->engineInterface = new EngineInterface();
-    }
+    public function __construct(EngineInterface $templating)
+    {  
+        $this->templating = $templating;
+    }   
 
     public function render($data, $configuration)
     {
-        // $this->engineInterface->render('table-layout.twig', $data);
+        $data = array(
+            array('month' => 'January','newUsers' => 20),
+            array('month' => 'February','newUsers' => 10),
+            array('month' => 'March','newUsers' => 25),
+            array('month' => 'April','newUsers' =>15)
+        );
+
+        $configuration = array('template' => 0);
     }
 
     public function getType()

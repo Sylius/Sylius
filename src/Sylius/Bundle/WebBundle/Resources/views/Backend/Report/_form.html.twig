@@ -21,6 +21,13 @@
                     {{ form_row(field) }}
                 {% endfor %}
             {% endif %}
+            </div> 
+
+            {% for name, rendererConfigurationPrototype in form.vars.prototypes %}
+                <div id="{{ form.renderer.vars.id }}_{{ name }}" data-container=".configuration" data-prototype="{{ form_widget(rendererConfigurationPrototype)|e }}"></div>
+            {% endfor %}
+            <div class="configuration">
+
             </div>
         </div>
     </div>

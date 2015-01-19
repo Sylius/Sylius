@@ -13,4 +13,8 @@ sylius:
             name: Name
             description: Description
             data_fetcher: Data Fetcher
-            renderer: Renderer
+            renderer:
+                label:  Renderer
+                template: Template
+            chart:
+                type: Type

@@ -54,7 +54,7 @@ class Report implements ReportInterface
     private $renderer = 'table';
 
     /**
-     * Renderers configuration.
+     * Renderer configuration.
      *
      * @var array
      */

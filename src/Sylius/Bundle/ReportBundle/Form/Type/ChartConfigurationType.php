@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TableConfigurationType extends AbstractType
+class ChartConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,6 +27,13 @@ class TableConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('type', 'choice', array(
+                'label' => 'sylius.form.report.chart.type',
+                'choices' => array(
+                    0 => 'Bar chart',
+                    1 => 'Line chart'
+                ),
+            ))
             ->add('template', 'choice', array(
                 'label' => 'sylius.form.report.renderer.template',
                 'choices' => array(
@@ -42,6 +49,6 @@ class TableConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_report_renderer_table_configuration';
+        return 'sylius_report_renderer_chart_configuration';
     }
 }

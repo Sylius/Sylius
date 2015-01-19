@@ -26,6 +26,9 @@
          <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>  
          <parameter key="sylius.form.type.renderer_choice.class">Sylius\Bundle\ReportBundle\Form\Type\RendererChoiceType</parameter>
          <parameter key="sylius.form.type.renderer.table.class">Sylius\Bundle\ReportBundle\Renderer\TableRenderer</parameter>
+         <parameter key="sylius.form.type.report.renderer.table_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\TableConfigurationType</parameter>
+         <parameter key="sylius.form.type.renderer.chart.class">Sylius\Component\Report\Renderer\ChartRenderer</parameter>
+         <parameter key="sylius.form.type.report.renderer.chart_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\ChartConfigurationType</parameter>
     </parameters>
 
     <services>
@@ -56,7 +59,18 @@
             <tag name="sylius.report.data_fetcher" fetcher="user_registration" label="User registration" />
         </service>
         <service id="sylius.form.type.renderer.table" class="%sylius.form.type.renderer.table.class%">
+            <argument type="service" id="templating" />
             <tag name="sylius.report.renderer" renderer="table" label="Table renderer" />
+        </service>
+        <service id="sylius.form.type.report.renderer.table_configuration" class="%sylius.form.type.report.renderer.table_configuration.class%">
+            <tag name="form.type" alias="sylius_report_renderer_table_configuration" />
+        </service>
+
+        <service id="sylius.form.type.renderer.chart" class="%sylius.form.type.renderer.chart.class%">
+            <tag name="sylius.report.renderer" renderer="chart" label="Chart renderer" />
+        </service>
+        <service id="sylius.form.type.report.renderer.chart_configuration" class="%sylius.form.type.report.renderer.chart_configuration.class%">
+            <tag name="form.type" alias="sylius_report_renderer_chart_configuration" />
         </service>
     </services>
 
