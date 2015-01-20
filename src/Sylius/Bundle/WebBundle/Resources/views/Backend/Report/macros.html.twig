@@ -26,7 +26,7 @@
             <td>{{ report.dataFetcher }}</td>
             <td>
                 <div class="pull-right">
-                    {{ buttons.show(path('sylius_backend_report_show', {'id': report.id})) }}
+                    {{ buttons.show(path('sylius_backend_report_show_report', {'id': report.id})) }}
                     {{ buttons.edit(path('sylius_backend_report_update', {'id': report.id})) }}
                     {{ buttons.delete(path('sylius_backend_report_delete', {'id': report.id})) }}
                 </div>
