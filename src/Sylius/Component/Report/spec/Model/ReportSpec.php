@@ -46,4 +46,28 @@ class ReportSpec extends ObjectBehavior
         $this->setDescription('Test description for Report spec');
         $this->getDescription()->shouldReturn('Test description for Report spec');
     }
+
+    function it_has_data_fetcher()
+    {
+        $this->setDataFetcher('testFetcher');
+        $this->getDataFetcher()->shouldReturn('testFetcher');
+    }
+
+    function it_has_data_fetcher_configuration()
+    {
+        $this->setDataFetcherConfiguration(array());
+        $this->getDataFetcherConfiguration()->shouldReturn(array());
+    }
+
+    function it_has_renderer()
+    {
+        $this->setRenderer('testRenderer');
+        $this->getRenderer()->shouldReturn('testRenderer');
+    }
+
+    function it_has_renderer_configuration()
+    {
+        $this->setRendererConfiguration(array());
+        $this->getRendererConfiguration()->shouldReturn(array());
+    }
 }
