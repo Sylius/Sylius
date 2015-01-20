@@ -29,10 +29,12 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
+        $labels = $data["data"]["column_name"];
+        unset($data["data"]["column_name"]);
         $data = array(
             'report' => $data["report"],
             'values' => $data["data"],
-            'labels' => array('month', 'user_total'),
+            'labels' => $labels,
             'fields' => array_keys($data["data"])
         );
 

@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
-* @author Mateusz Zalewski <zaleslaw@gmail.com>
+* @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
 */
 class BuildReportRendererFormListener implements EventSubscriberInterface
 {

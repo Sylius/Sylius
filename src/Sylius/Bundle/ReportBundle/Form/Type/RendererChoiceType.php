@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Renderer choice type.
  *
- * @author Mateusz Zalewski <zaleslaw@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class RendererChoiceType extends AbstractType
 {

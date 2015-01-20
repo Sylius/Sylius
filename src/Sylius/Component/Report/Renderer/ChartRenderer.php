@@ -29,6 +29,7 @@ class ChartRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
+        unset($data["data"]["column_name"]);
         $data = array(
             'report' => $data["report"],
             'values' => $data["data"],
