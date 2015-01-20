@@ -122,10 +122,11 @@ class UserRepository extends EntityRepository
     {
 
         $sql = '
-            SELECT month(user.created_at) as "month", count(user.id) as "user_total"
-            FROM sylius_user user
-            GROUP BY month(user.created_at)
-            ';
+        SELECT monthname(user.created_at) as "month", count(user.id) as "user_total"
+        FROM sylius_user user
+        GROUP BY monthname(user.created_at)
+        ORDER BY month(user.created_at)
+        ';
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->execute();
