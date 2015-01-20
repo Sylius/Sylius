@@ -24,6 +24,9 @@
 
         <field name="dataFetcher" column="data_fetcher" type="string" nullable="false" />
         <field name="dataFetcherConfiguration" column="data_fetcher_configuration" type="array" />
+
+        <field name="renderer" column="renderer" type="string" nullable="false" />
+        <field name="rendererConfiguration" column="renderer_configuration" type="array" />
     </mapped-superclass>
 
 </doctrine-mapping>
