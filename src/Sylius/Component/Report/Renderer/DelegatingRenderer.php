@@ -15,7 +15,7 @@ use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @author Mateusz Zalewski <zaleslaw@.gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class DelegatingRenderer implements DelegatingRendererInterface
 {   
@@ -39,7 +39,7 @@ class DelegatingRenderer implements DelegatingRendererInterface
     public function render(ReportInterface $subject, array $context = array())
     {
         if (null === $type = $subject->getRenderer()) {
-            throw new \InvalidArgumentException('Cannot render for ReportInterface instance without renderer defined.');
+            throw new \InvalidArgumentException('Cannot render data for ReportInterface instance without renderer defined.');
         }
 
         $renderer = $this->registry->get($type);

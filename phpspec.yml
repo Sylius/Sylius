@@ -46,6 +46,7 @@ suites:
     ProductBundle    : { namespace: Sylius\Bundle\ProductBundle, psr4_prefix: Sylius\Bundle\ProductBundle, spec_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle  : { namespace: Sylius\Bundle\PromotionBundle, psr4_prefix: Sylius\Bundle\PromotionBundle, spec_path: src/Sylius/Bundle/PromotionBundle }
     ResourceBundle   : { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle , spec_path: src/Sylius/Bundle/ResourceBundle }
+    ReportBundle     : { namespace: Sylius\Bundle\ReportBundle, psr4_prefix: Sylius\Bundle\ReportBundle , spec_path: src/Sylius/Bundle/ReportBundle }
     SearchBundle     : { namespace: Sylius\Bundle\SearchBundle, psr4_prefix: Sylius\Bundle\SearchBundle, spec_path: src/Sylius/Bundle/SearchBundle }
     SequenceBundle   : { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle , spec_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle   : { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle , spec_path: src/Sylius/Bundle/SettingsBundle }
