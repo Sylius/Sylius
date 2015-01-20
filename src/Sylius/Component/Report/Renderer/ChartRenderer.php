@@ -35,9 +35,6 @@ class ChartRenderer implements RendererInterface
             'labels' => array_keys($data["data"])
         );
 
-        var_dump($data);
-        exit;
-
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
     }
 

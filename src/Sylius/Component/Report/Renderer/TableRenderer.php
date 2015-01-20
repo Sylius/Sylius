@@ -32,8 +32,8 @@ class TableRenderer implements RendererInterface
         $data = array(
             'report' => $data["report"],
             'values' => $data["data"],
-            'labels' => array_keys($data["data"][0]),
-            'fields' => array_keys($data["data"][0])
+            'labels' => array('month', 'user_total'),
+            'fields' => array_keys($data["data"])
         );
 
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
