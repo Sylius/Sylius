@@ -8,6 +8,8 @@ sylius:
                 price: Unit price
                 quantity: Quantity
                 variant: Variant
+            user_group:
+                User group
         block:
             body: Body
             id: ID

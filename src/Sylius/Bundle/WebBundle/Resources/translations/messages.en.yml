@@ -843,6 +843,8 @@ sylius:
         show_header: User details
         update_header: Editing user
         username: Username
+        groups: Groups
+        no_groups: There are no groups for this user to display.
     variant:
         add_image: Add image
         availability: Availability
