@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Report\Renderer;
+namespace Sylius\Bundle\ReportBundle\Renderer;
 
-use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TableRenderer implements RendererInterface
+class ChartRenderer implements RendererInterface
 {
     private $templating;
 
@@ -29,13 +29,11 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        $labels = $data["data"]["column_name"];
         unset($data["data"]["column_name"]);
         $data = array(
             'report' => $data["report"],
             'values' => $data["data"],
-            'labels' => $labels,
-            'fields' => array_keys($data["data"])
+            'labels' => array_keys($data["data"])
         );
 
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
@@ -43,6 +41,6 @@ class TableRenderer implements RendererInterface
 
     public function getType()
     {
-        return 'table';
+        return 'chart';
     }
 }
