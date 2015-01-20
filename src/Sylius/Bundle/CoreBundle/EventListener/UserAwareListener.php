@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserAwareInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-class OrderUserListener
+class UserAwareListener
 {
     protected $securityContext;
 
@@ -26,26 +26,23 @@ class OrderUserListener
         $this->securityContext = $securityContext;
     }
 
-    public function setOrderUser(GenericEvent $event)
+    public function setUser(GenericEvent $event)
     {
         if ($event instanceof CartEvent) {
-            $order = $event->getCart();
+            $resource = $event->getCart();
         } else {
-            $order = $event->getSubject();
+            $resource = $event->getSubject();
         }
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                'Sylius\Component\Core\Model\OrderInterface'
-            );
+        if (!$resource instanceof UserAwareInterface) {
+            throw new UnexpectedTypeException($resource, 'Sylius\Component\Core\Model\UserAwareInterface');
         }
 
         if (null === $user = $this->getUser()) {
             return;
         }
 
-        $order->setUser($user);
+        $resource->setUser($user);
     }
 
     protected function getUser()

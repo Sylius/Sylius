@@ -13,17 +13,17 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserAwareInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-class OrderUserListenerSpec extends ObjectBehavior
+class UserAwareListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderUserListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\UserAwareListener');
     }
 
     function let(SecurityContextInterface $securityContext)
@@ -37,35 +37,40 @@ class OrderUserListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringSetOrderUser($event)
+            ->duringSetUser($event)
         ;
     }
 
-    function it_does_nothing_when_context_doesnt_have_user(GenericEvent $event, OrderInterface $order)
-    {
-        $event->getSubject()->willReturn($order);
+    function it_does_nothing_when_context_doesnt_have_user(
+        SecurityContextInterface $securityContext,
+        GenericEvent $event,
+        UserAwareInterface $resource
+    ) {
+        $event->getSubject()->willReturn($resource);
 
-        $order->setUser(Argument::any())->shouldNotBeCalled();
+        $securityContext->getToken()->willReturn(null);
 
-        $this->setOrderUser($event);
+        $resource->setUser(Argument::any())->shouldNotBeCalled();
+
+        $this->setUser($event);
     }
 
     function it_sets_user_on_order(
         SecurityContextInterface $securityContext,
         GenericEvent $event,
-        OrderInterface $order,
+        UserAwareInterface $resource,
         TokenInterface $token,
         UserInterface $user
     ) {
-        $event->getSubject()->willReturn($order);
+        $event->getSubject()->willReturn($resource);
 
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $securityContext->getToken()->willReturn($token);
 
         $token->getUser()->willReturn($user);
 
-        $order->setUser($user)->shouldBeCalled();
+        $resource->setUser($user)->shouldBeCalled();
 
-        $this->setOrderUser($event);
+        $this->setUser($event);
     }
 }
