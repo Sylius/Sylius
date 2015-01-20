@@ -34,9 +34,18 @@ class TableRenderer implements RendererInterface
                 array('month' => 'January','newUsers' => 20),
                 array('month' => 'February','newUsers' => 10),
                 array('month' => 'March','newUsers' => 25),
-                array('month' => 'April','newUsers' =>15)
+                array('month' => 'April','newUsers' => 15),
+                array('month' => 'May', 'newUsers' => 5),
+                array('month' => 'June', 'newUsers' => 45),
+                array('month' => 'July', 'newUsers' => 70),
+                array('month' => 'August', 'newUsers' => 17),
+                array('month' => 'September', 'newUsers' => 40),
+                array('month' => 'October', 'newUsers' => 12),
+                array('month' => 'November', 'newUsers' => 47),
+                array('month' => 'December', 'newUsers' => 64)
             ),
-            'labels' => array('Month', 'Users number')
+            'labels' => array('Month', 'New users number'),
+            'fields' => array('month', 'newUsers')
         );
 
         $configuration = array('template' => 0);

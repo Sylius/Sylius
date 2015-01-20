@@ -23,7 +23,8 @@ class ReportController extends ResourceController
 {
     public function renderAction(Request $request)
     {
-        $renderer = $this->get("sylius.form.type.renderer.chart");
-        return $renderer->render(array(), array());
+        $rendererType = "chart";
+        $renderer = $this->get(sprintf("sylius.form.type.renderer.%s", $rendererType));
+        return $renderer->render(array(), array('template' => 0, 'type' => 'line'));
     }
 }

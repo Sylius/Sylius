@@ -31,15 +31,21 @@ class ChartRenderer implements RendererInterface
     {
         $data = array(
             'values' => array(
-                array('month' => 'January','newUsers' => 20),
-                array('month' => 'February','newUsers' => 10),
-                array('month' => 'March','newUsers' => 25),
-                array('month' => 'April','newUsers' =>15)
+                array('xAxis' => 'January','yAxis' => 20),
+                array('xAxis' => 'February','yAxis' => 10),
+                array('xAxis' => 'March','yAxis' => 25),
+                array('xAxis' => 'April','yAxis' => 15),
+                array('xAxis' => 'May', 'yAxis' => 5),
+                array('xAxis' => 'June', 'yAxis' => 45),
+                array('xAxis' => 'July', 'yAxis' => 70),
+                array('xAxis' => 'August', 'yAxis' => 17),
+                array('xAxis' => 'September', 'yAxis' => 40),
+                array('xAxis' => 'October', 'yAxis' => 12),
+                array('xAxis' => 'November', 'yAxis' => 47),
+                array('xAxis' => 'December', 'yAxis' => 64)
             ),
             'labels' => array('Month', 'Users number')
         );
-
-        $configuration = array('template' => 0, 'type' => 'bar');
 
         return $this->templating->renderResponse(sprintf("SyliusReportBundle:Chart:%schartTemplate%s.html.twig", $configuration['type'], $configuration['template']), $data);
     }
