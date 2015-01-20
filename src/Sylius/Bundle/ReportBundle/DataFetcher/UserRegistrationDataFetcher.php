@@ -26,7 +26,7 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch($config){
+    public function fetch(array $configuration){
         return $this->userRepository->findByMonth();
     }
 
