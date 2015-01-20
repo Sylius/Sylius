@@ -28,6 +28,7 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
      */
     public function fetch(array $configuration){
         $fetched = array();
+        $fetched['column_name'] = array('month','user_total');
         $data = $this->userRepository->findByMonth();
         foreach ($data as $row) {
             $fetched[$row['month']] = $row['user_total'];

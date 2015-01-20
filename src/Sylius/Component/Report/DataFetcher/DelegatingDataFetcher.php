@@ -43,7 +43,7 @@ class DelegatingDataFetcher implements DelegatingDataFetcherInterface
     public function fetch(ReportInterface $subject, array $context = array())
     {
         if (null === $type = $subject->getDataFetcher()) {
-        throw new \InvalidArgumentException('Cannot fetch data for ReportInterface instance without DataFetcher defined.');
+            throw new \InvalidArgumentException('Cannot fetch data for ReportInterface instance without DataFetcher defined.');
         }
         $dataFetcher = $this->registry->get($type);
         return $dataFetcher->fetch($subject, $subject->getConfiguration(), $context);
