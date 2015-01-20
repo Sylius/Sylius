@@ -1,0 +1,7 @@
+smile:
+    store:
+        code:
+            not_blank: Please enter store code.
+            unique: The store code has to be unique.
+        url:
+            not_blank: Please enter store name.
