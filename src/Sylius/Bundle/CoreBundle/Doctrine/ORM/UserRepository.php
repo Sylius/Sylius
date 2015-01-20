@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * User repository.
@@ -115,6 +116,20 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    public function findByMonth($value='')
+    {
+
+        $sql = '
+            SELECT month(user.created_at) as "month", count(user.id) as "user_total"
+            FROM sylius_user user
+            GROUP BY month(user.created_at)
+            ';
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
