@@ -747,6 +747,7 @@ sylius:
         manage: Manage
         update_header: Edit report
         renderer: Renderer type
+        data_fetcher: Data fetcher type
     save_changes: Save changes
     search: Search
     settings:

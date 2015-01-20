@@ -49,6 +49,6 @@ class ChartConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_report_renderer_chart_configuration';
+        return 'sylius_renderer_chart';
     }
 }

@@ -42,6 +42,6 @@ class TableConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_report_renderer_table_configuration';
+        return 'sylius_renderer_table';
     }
 }

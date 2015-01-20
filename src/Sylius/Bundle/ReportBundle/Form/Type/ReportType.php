@@ -12,11 +12,10 @@
 namespace Sylius\Bundle\ReportBundle\Form\Type;
 
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormListener;
+use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\Model\ReportInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -64,6 +63,7 @@ class ReportType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new BuildReportDataFetcherFormListener($this->dataFetcherRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber(new BuildReportRendererFormListener($this->rendererRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.report.name',
                 'required' => true
@@ -86,16 +86,16 @@ class ReportType extends AbstractResourceType
         $prototypes['dataFetchers'] = array();
 
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
-            $formType = sprintf('sylius_report_renderer_%s_configuration', $renderer->getType());
+            $formType = sprintf('sylius_renderer_%s', $renderer->getType());
 
             if (!$formType) {
                 continue;
             }
             
             try {
-                $prototypes['renderer'][$type] = $builder->create('rendererConfiguration', $formType)->getForm();
+                $prototypes['renderers'][$type] = $builder->create('rendererConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
-                return;
+                continue;
             }
         }
      
@@ -125,7 +125,7 @@ class ReportType extends AbstractResourceType
 
         foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
             foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
+                $view->vars['prototypes'][$group][$group.'_'.$type] = $prototype->createView($view);
             }
         }
     }

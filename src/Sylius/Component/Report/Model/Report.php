@@ -42,6 +42,11 @@ class Report implements ReportInterface
     private $dataFetcher = 'user_registration';
 
     /**
+     * @var String
+     */
+    private $renderer = 'chart';
+
+    /**
      * @var Array
      */
     private $dataFetcherConfiguration = array();

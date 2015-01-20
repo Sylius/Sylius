@@ -90,7 +90,7 @@ class BuildReportRendererFormListener implements EventSubscriberInterface
         try {
             $configurationField = $this->factory->createNamed('rendererConfiguration', $formType, $data, array('auto_initialize' => false));
         } catch (\InvalidArgumentException $e) {
-            return;
+            var_dump($e);
         }
 
         $form->add($configurationField);
