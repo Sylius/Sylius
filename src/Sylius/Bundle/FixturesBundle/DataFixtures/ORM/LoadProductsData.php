@@ -118,7 +118,7 @@ class LoadProductsData extends DataFixture
 
         $this->generateVariants($product);
 
-        $this->setReference('Sylius.Product-'.$i, $product);
+        $this->setReference('Sylius.Product.'.$i, $product);
 
         return $product;
     }
