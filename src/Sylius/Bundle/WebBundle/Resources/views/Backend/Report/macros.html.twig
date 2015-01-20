@@ -22,7 +22,7 @@
             <td>{{ report.id }}</td>
             <td>{{ report.name }}</td>
             <td>{{ report.description|truncate(50, true) }}</td>
-            <td>{{ report.renderer }}{% if report.rendererConfiguration.type %} - {{ report.rendererConfiguration.type }}{% endif %}</td>
+            <td>{{ report.renderer }}{% if report.rendererConfiguration.type is defined %} - {{ report.rendererConfiguration.type }}{% endif %}</td>
             <td>{{ report.dataFetcher }}</td>
             <td>
                 <div class="pull-right">

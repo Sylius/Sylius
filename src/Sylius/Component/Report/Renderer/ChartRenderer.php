@@ -31,22 +31,12 @@ class ChartRenderer implements RendererInterface
     {
         $data = array(
             'report' => $data["report"],
-            'values' => array(
-                array('xAxis' => 'January','yAxis' => 20),
-                array('xAxis' => 'February','yAxis' => 10),
-                array('xAxis' => 'March','yAxis' => 25),
-                array('xAxis' => 'April','yAxis' => 15),
-                array('xAxis' => 'May', 'yAxis' => 5),
-                array('xAxis' => 'June', 'yAxis' => 45),
-                array('xAxis' => 'July', 'yAxis' => 70),
-                array('xAxis' => 'August', 'yAxis' => 17),
-                array('xAxis' => 'September', 'yAxis' => 40),
-                array('xAxis' => 'October', 'yAxis' => 12),
-                array('xAxis' => 'November', 'yAxis' => 47),
-                array('xAxis' => 'December', 'yAxis' => 64)
-            ),
-            'labels' => array('Month', 'Users number')
+            'values' => $data["data"],
+            'labels' => array_keys($data["data"])
         );
+
+        var_dump($data);
+        exit;
 
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
     }
