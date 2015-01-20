@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-  account:
-    address:
-      flash:
-        billing:
-          success: "L'adresse a été correctement définie comme votre adresse de facturation par défaut."
-        shipping:
-          success: "L'adresse a été correctement définie comme votre adresse de livraison par défaut."
+    account:
+        address:
+            create: Votre adresse a correctement été ajouté.
+            update: Votre adresse a correctement été modifié.
+            delete: Votre adresse a correctement été supprimé.
+            set_as_billing: Votre adresse de facturation a été changé.
+            set_as_shipping: Votre adresse de livraison a été changé.
