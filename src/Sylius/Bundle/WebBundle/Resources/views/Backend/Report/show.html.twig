@@ -33,7 +33,7 @@
         <tr>
             <td>{{ report.id }}</td>
             <td>{{ report.name }}</td>
-            <td>{{ report.description }}</td>
+            <td style="overflow: hidden;">{{ report.description|truncate(30, true) }}</td>
         </tr>
     </tbody>
 </table>

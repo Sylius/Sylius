@@ -29,6 +29,8 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
+        $report = $data["report"];
+        
         $data = array(
             'values' => array(
                 array('month' => 'January','newUsers' => 20),

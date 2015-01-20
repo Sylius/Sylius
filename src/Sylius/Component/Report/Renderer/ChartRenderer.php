@@ -29,7 +29,11 @@ class ChartRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
+        var_dump($data);
+        exit;
+
         $data = array(
+            'report' => $data["report"],
             'values' => array(
                 array('xAxis' => 'January','yAxis' => 20),
                 array('xAxis' => 'February','yAxis' => 10),
