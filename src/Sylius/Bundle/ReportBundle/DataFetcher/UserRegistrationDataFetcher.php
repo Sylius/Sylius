@@ -36,4 +36,9 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
     public function getType(){
         return 'user_registration';
     }
+
+    public static function getPeriodChoices()
+    {
+        return array('day', 'week', 'month', 'year');
+    }
 }

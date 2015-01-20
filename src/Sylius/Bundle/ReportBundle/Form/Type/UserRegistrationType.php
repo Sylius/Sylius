@@ -12,6 +12,7 @@ namespace Sylius\Bundle\ReportBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
 
 /**
  * User based raport configuration form type.
@@ -28,13 +29,14 @@ class UserRegistrationType extends AbstractType
     {
         $builder
             ->add('start', 'date', array(
-                'label' => 'sylius.form.report.user_registration.start',
-                // 'attr' => array('class'=>'datepicker')
+                'label' => 'sylius.form.report.user_registration.start'
             ))
             ->add('end', 'date', array(
                 'label' => 'sylius.form.report.user_registration.end'
             ))
-            ->add('period', 'number', array(
+            ->add('period', 'choice', array(
+                'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
+                'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period'
             ))
             ;
