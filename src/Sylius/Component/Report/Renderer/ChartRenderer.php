@@ -29,9 +29,6 @@ class ChartRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        var_dump($data);
-        exit;
-
         $data = array(
             'report' => $data["report"],
             'values' => array(
@@ -51,7 +48,7 @@ class ChartRenderer implements RendererInterface
             'labels' => array('Month', 'Users number')
         );
 
-        return $this->templating->renderResponse(sprintf("SyliusReportBundle:Chart:%schartTemplate%s.html.twig", $configuration['type'], $configuration['template']), $data);
+        return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
     }
 
     public function getType()

@@ -1,0 +1,72 @@
+{% extends 'SyliusReportBundle:Chart:layout.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts output='assets/compiled/backend_report.js'
+    'bundles/syliusreport/js/chart.js'
+%}
+    <script>
+        var chartType = "{{ chartType }}";
+
+        var labels = document.getElementById("data").getAttribute("data-labels").split(" ");
+        var values = document.getElementById("data").getAttribute("data-values").split(" ");
+
+        var data;
+        if (chartType == "line") {
+            data = {
+                labels : labels,
+                datasets : [
+                    {
+                        fillColor : "rgba(220,220,220,0.5)",
+                        fillColor : "rgba(151,187,205,0.2)",
+                        strokeColor : "rgba(151,187,205,1)",
+                        pointColor : "rgba(151,187,205,1)",
+                        pointStrokeColor : "#fff",
+                        pointHighlightFill : "#fff",
+                        pointHighlightStroke : "rgba(151,187,205,1)",
+                        data : values
+                    }
+                ]
+            }
+        } else if (chartType == "bar") {
+            data = {
+                labels : labels,
+                datasets : [
+                    {
+                        fillColor : "rgba(220,220,220,0.5)",
+                        strokeColor : "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(220,220,220,0.75)",
+                        highlightStroke: "rgba(220,220,220,1)",
+                        data : values
+                    }
+                ]
+            }
+        };
+
+        window.onload = function(){
+            var ctx = document.getElementById("canvas").getContext("2d");
+            if (chartType == "line") {
+                window.myLine = new Chart(ctx).Line(data, {
+                    responsive: true,
+                    maintainAspectRatio: false
+                });
+            } else if (chartType == "bar") {
+                window.myBar = new Chart(ctx).Bar(data, {
+                    responsive: true,
+                    maintainAspectRatio: false
+                });
+            }
+        }
+    </script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    <div class="col-xs-12">
+        <div class="row">
+            <canvas id="canvas" height="450"></canvas>
+            <div id="data" class="hidden" data-labels="{% for item in values %}{{ item.xAxis }}{% if loop.index != loop.length %} {% endif %}{% endfor %}" data-values="{% for item in values %}{{ item.yAxis }}{% if loop.index != loop.length %} {% endif %}{% endfor %}"></div>
+        </div>
+    </div>
+{% endblock %}

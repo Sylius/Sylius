@@ -1,0 +1,17 @@
+{% extends 'SyliusReportBundle:Table:layout.html.twig' %}
+
+{% from 'SyliusReportBundle:Table:macros.html.twig' import list %}
+
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {{ parent() }}
+    {{ list(labels, fields, values) }}
+    }
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

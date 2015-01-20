@@ -2,19 +2,10 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 
-{% block javascripts %}
-{{ parent() }}
-{% javascripts output='assets/compiled/backend_report.js'
-    'bundles/syliusreport/js/chart.js'
-%}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{% endblock %}
-
 {% set report = data.report %}
 {% set labels = data.labels %}
 {% set values = data.values %}
-{% set chartType = configuration.type %}
+{% set fields = data.fields %}
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>

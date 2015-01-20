@@ -30,8 +30,7 @@ class TableConfigurationType extends AbstractType
             ->add('template', 'choice', array(
                 'label' => 'sylius.form.report.renderer.template',
                 'choices' => array(
-                    0 => 'Template 0',
-                    1 => 'Template 1'
+                    'SyliusReportBundle:Table:default.html.twig' => 'Default',
                 ),
             ))
         ;

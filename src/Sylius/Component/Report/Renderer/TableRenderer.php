@@ -29,9 +29,8 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        $report = $data["report"];
-        
         $data = array(
+            'report' => $data["report"],
             'values' => array(
                 array('month' => 'January','newUsers' => 20),
                 array('month' => 'February','newUsers' => 10),
@@ -50,9 +49,7 @@ class TableRenderer implements RendererInterface
             'fields' => array('month', 'newUsers')
         );
 
-        $configuration = array('template' => 0);
-
-        return $this->templating->renderResponse(sprintf("SyliusReportBundle:Table:tableTemplate%s.html.twig", $configuration['template']), $data);
+        return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
     }
 
     public function getType()
