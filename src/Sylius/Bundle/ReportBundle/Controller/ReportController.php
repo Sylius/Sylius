@@ -21,10 +21,27 @@ use Sylius\Component\Report\Renderer\TableRenderer;
  */
 class ReportController extends ResourceController
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function renderAction(Request $request)
     {
-        $rendererType = "chart";
-        $renderer = $this->get(sprintf("sylius.form.type.renderer.%s", $rendererType));
-        return $renderer->render(array(), array('template' => 0, 'type' => 'line'));
+        $report = $this->findOr404($request);
+
+        $dataFetcher = $this->getDataFetcherRegistry()->get($report->getDataFetcher());
+        $data = $dataFetcher->fetch($report->getDataFetcherConfiguration());
+        var_dump($data);
+    }
+
+    private function getDataFetcherRegistry()
+    {
+        return $this->get('sylius.registry.report.data_fetcher');
+    }
+
+    private function getRendererRegistry()
+    {
+        return $this->get('sylius.registry.report.renderer');
     }
 }

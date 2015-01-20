@@ -92,8 +92,6 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
         try {
             $configurationField = $this->factory->createNamed('dataFetcherConfiguration', $formType, $config, array('auto_initialize' => false));
         } catch (\InvalidArgumentException $e) {
-            // var_dump($e);
-            // exit;
            return;
         }
 

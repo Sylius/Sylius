@@ -18,3 +18,7 @@ sylius:
                 template: Template
             chart:
                 type: Type
+            user_registration:
+                start: Start date
+                end: End date
+                period: Time period

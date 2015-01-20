@@ -27,20 +27,16 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
      * {@inheritdoc}
      */
     public function fetch($config){
-        $queryBuilder = $this->userRepository->getEntityMenager->createQueryBuilder('user_registration');
+        $queryBuilder = $this->userRepository->createQueryBuilder('ur');
         $queryBuilder
-            ->select('*')
-            ->where('dayofyear(created_at) > :start AND dayofyear(created_at) < :end')
-            ->setParameters(array("start" => '10', "end" => '17'));
+            ->where("ur.createdAt > '2015-01-10 00:00:00'")
+            ->andWhere("ur.createdAt < '2015-01-17 00:00:00'")
         ;
 
         $result = $queryBuilder
             ->getQuery()
             ->getArrayResult()
         ;
-
-        var_dump($result);
-        exit;
 
         return $result;
     }

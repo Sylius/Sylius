@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PricingBundle\Form\Type;
+namespace Sylius\Bundle\ReportBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,10 +27,11 @@ class UserRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start', 'number', array(
-                'label' => 'sylius.form.report.user_registration.start'
+            ->add('start', 'date', array(
+                'label' => 'sylius.form.report.user_registration.start',
+                // 'attr' => array('class'=>'datepicker')
             ))
-            ->add('end', 'number', array(
+            ->add('end', 'date', array(
                 'label' => 'sylius.form.report.user_registration.end'
             ))
             ->add('period', 'number', array(

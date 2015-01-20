@@ -20,7 +20,8 @@
          <parameter key="sylius.registry.report.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
          <parameter key="sylius.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
-         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
+         <parameter key="sylius.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
+         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\Form\Type\UserRegistrationType</parameter>
          <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcherChoiceType</parameter>
 
          <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>  
@@ -55,9 +56,13 @@
         </service>
 
         <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
+            <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
+        </service>
+        <service id="sylius.data_fetcher.user_registration" class="%sylius.data_fetcher.user_registration.class%">
             <argument type="service" id="sylius.repository.user" />
             <tag name="sylius.report.data_fetcher" fetcher="user_registration" label="User registration" />
         </service>
+        
         <service id="sylius.form.type.renderer.table" class="%sylius.form.type.renderer.table.class%">
             <argument type="service" id="templating" />
             <tag name="sylius.report.renderer" renderer="table" label="Table renderer" />
