@@ -11,7 +11,7 @@ interface DataFetcherInterface
      * 
      * @return array of data
      */
-    public function fetch(arra $configuration);
+    public function fetch(array $configuration);
 
     /**
      * 
