@@ -118,8 +118,14 @@ class UserRepository extends EntityRepository
         ;
     }
 
-    public function getDailyStatistic(array $configuration=array())
+    public function getRegistrationStatistic(array $configuration=array())
     {
+        $groupBy = '';
+        foreach ($configuration['groupBy'] as $groupByArray ) {
+            $groupBy = $groupByArray.'(user.created_at)'.' '.$groupBy;
+        }
+        $groupBy = substr($groupBy, 0, -1);
+        $groupBy = str_replace(' ', ', ', $groupBy);
         $sql = '
         SELECT 
             date(user.created_at) as date, 
@@ -127,46 +133,8 @@ class UserRepository extends EntityRepository
         FROM sylius_user user
         WHERE 
             user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
-        GROUP BY date(user.created_at)
-        ORDER BY date(user.created_at)';
-
-        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function getMonthlyStatistic(array $configuration=array())
-    {
-        $sql = '
-        SELECT 
-            CONCAT_WS(
-                " ",
-                monthname(user.created_at),
-                year(user.created_at)
-                ) as date, 
-            count(user.id) as "user_total"
-        FROM sylius_user user
-        WHERE 
-            user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
-        GROUP BY year(user.created_at), monthname(user.created_at)
-        ORDER BY year(user.created_at), month(user.created_at)';
-
-        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function getYearlyStatistic(array $configuration=array())
-    {
-        $sql = '
-        SELECT 
-            year(user.created_at) as date, 
-            count(user.id) as "user_total"
-        FROM sylius_user user
-        WHERE 
-            year(user.created_at) BETWEEN year("'.$configuration['start']->format('Y-m-d H:i:s').'") AND ("'.$configuration['end']->format('Y-m-d H:i:s').'")
-        GROUP BY year(user.created_at)
-        ORDER BY year(user.created_at);';
+        GROUP BY '.$groupBy.'
+        ORDER BY '.$groupBy;
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->execute();
