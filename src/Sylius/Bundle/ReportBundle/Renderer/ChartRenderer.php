@@ -29,11 +29,10 @@ class ChartRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        unset($data["data"]["column_name"]);
         $data = array(
             'report' => $data["report"],
-            'values' => $data["data"],
-            'labels' => array_keys($data["data"])
+            'values' => $data["data"]->getData(),
+            'labels' => array_keys($data["data"]->getData())
         );
 
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));

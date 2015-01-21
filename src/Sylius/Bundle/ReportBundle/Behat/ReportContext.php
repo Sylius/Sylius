@@ -16,5 +16,11 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
 class ReportContext extends DefaultContext
 {
-    
+    /**
+     * @Given there are following reports configured:
+     */
+    public function thereAreFollowingReportsConfigured(TableNode $table)
+    {
+        throw new PendingException();
+    }
 }

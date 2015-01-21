@@ -102,8 +102,8 @@
 
         function initCharts(chartType){
 
-            var labels = document.getElementById("data").getAttribute("data-labels").split(" ");
-            var values = document.getElementById("data").getAttribute("data-values").split(" ");
+            var labels = document.getElementById("data").getAttribute("data-labels").split(";");
+            var values = document.getElementById("data").getAttribute("data-values").split(";");
             var ctx = document.getElementById("canvas").getContext("2d");
 
             switch(chartType) {
@@ -129,7 +129,7 @@
     <div class="col-xs-12">
         <div class="row">
             <canvas id="canvas" height="450"></canvas>
-            <div id="data" class="hidden" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %} {% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %} {% endif %}{% endfor %}"></div>
+            <div id="data" class="hidden" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %};{% endif %}{% endfor %}"></div>
         </div>
     </div>
 {% endblock %}

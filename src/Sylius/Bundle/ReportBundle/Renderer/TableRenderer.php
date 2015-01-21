@@ -29,13 +29,14 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        $labels = $data["data"]["column_name"];
-        unset($data["data"]["column_name"]);
+        var_dump($data);
+        exit;
+        
         $data = array(
             'report' => $data["report"],
-            'values' => $data["data"],
-            'labels' => $labels,
-            'fields' => array_keys($data["data"])
+            'values' => $data["data"]->getData(),
+            'labels' => $data["data"]->getLabels(),
+            'fields' => array_keys($data["data"]->getData())
         );
         
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
