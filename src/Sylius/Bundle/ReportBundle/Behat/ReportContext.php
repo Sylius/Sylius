@@ -14,13 +14,57 @@ namespace Sylius\Bundle\ReportBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 
+/**
+ * ReportContext for ReportBundle scenarios
+ *
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
 class ReportContext extends DefaultContext
 {
     /**
      * @Given there are following reports configured:
+     * @And there are following reports configured:
      */
-    public function thereAreFollowingReportsConfigured(TableNode $table)
+    public function thereAreReports(TableNode $table)
     {
-        throw new PendingException();
+        $manager = $this->getEntityManager();
+        $repository = $this->getRepository('report');
+
+        foreach ($repository->findAll() as $report) {
+            $manager->remove($report);
+        }
+
+        $manager->flush();
+
+        foreach ($table->getHash() as $data) {
+            $this->thereIsReport($data['name'], $data['description'], $data['renderer type'], $data["renderer configuration"], $data["data fetcher type"], $data["data fetcher configuration"], false);
+        }
+
+        $manager->flush();
+    }
+
+    /**
+     * @Given /^I created report "([^""]*)"$/
+     */
+    public function thereIsReport($name, $description, $rendererType, $rendererConfiguration, $dataFetcherType, $dataFetcherConfiguration, $flush = true)
+    {
+        $repository = $this->getRepository('report');
+
+        $report = $repository->createNew();
+        $report->setName($name);
+        $report->setDescription($description);
+        $report->setRenderer($rendererType);
+        $report->setRendererConfiguration($this->getConfiguration($rendererConfiguration));
+        $report->setDataFetcher($dataFetcherType);
+        $report->setDataFetcherConfiguration($this->getConfiguration($dataFetcherConfiguration));
+
+        $menager = $this->getEntityManager();
+        $menager->persist($report);
+
+        if ($flush) {
+            $menager->flush();
+        }
+
+        return $report;
     }
 }

@@ -44,7 +44,7 @@ class Report implements ReportInterface
     /**
      * @var String
      */
-    private $renderer = 'chart';
+    private $renderer = 'table';
 
     /**
      * @var Array

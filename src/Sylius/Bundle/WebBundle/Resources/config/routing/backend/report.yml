@@ -20,7 +20,7 @@ sylius_backend_report_create:
         _controller: sylius.controller.report:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Report:create.html.twig
-            redirect: sylius_backend_report_show_report
+            redirect: sylius_backend_report_show
 
 sylius_backend_report_update:
     path: /{id}/edit
@@ -29,7 +29,7 @@ sylius_backend_report_update:
         _controller: sylius.controller.report:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Report:update.html.twig
-            redirect: sylius_backend_report_show_report
+            redirect: sylius_backend_report_show
 
 sylius_backend_report_delete:
     path: /{id}
@@ -40,7 +40,7 @@ sylius_backend_report_delete:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_report_index
 
-sylius_backend_report_show_report:
+sylius_backend_report_show:
     path: /{id}
     methods: [GET]
     defaults:

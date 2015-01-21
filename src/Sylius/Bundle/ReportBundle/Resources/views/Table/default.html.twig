@@ -8,7 +8,9 @@
 
 {% block content %}
     {{ parent() }}
-    {{ list(labels, fields, values) }}
+    {% if labels is defined %}
+        {{ list(labels, fields, values) }}
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}

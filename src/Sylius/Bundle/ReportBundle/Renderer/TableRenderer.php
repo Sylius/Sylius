@@ -29,15 +29,17 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
+        if (null !== $data["data"]->getData()) {
+            $data = array(
+                'report' => $data["report"],
+                'values' => $data["data"]->getData(),
+                'labels' => $data["data"]->getLabels(),
+                'fields' => array_keys($data["data"]->getData())
+            );
         
-        $data = array(
-            'report' => $data["report"],
-            'values' => $data["data"]->getData(),
-            'labels' => $data["data"]->getLabels(),
-            'fields' => array_keys($data["data"]->getData())
-        );
-        
-        return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
+            return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
+        }
+        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $data['report']));;
     }
 
     public function getType()

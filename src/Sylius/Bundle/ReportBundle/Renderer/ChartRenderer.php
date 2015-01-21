@@ -29,13 +29,16 @@ class ChartRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        $data = array(
-            'report' => $data["report"],
-            'values' => $data["data"]->getData(),
-            'labels' => array_keys($data["data"]->getData())
-        );
+        if (null !== $data["data"]->getData()) {
+            $data = array(
+                'report' => $data["report"],
+                'values' => $data["data"]->getData(),
+                'labels' => array_keys($data["data"]->getData())
+            );
 
-        return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
+            return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
+        }
+        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $data['report']));;
     }
 
     public function getType()

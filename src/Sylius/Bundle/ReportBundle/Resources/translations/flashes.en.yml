@@ -1,4 +1,3 @@
 sylius:
-    shipment:
-        ship:
-            success: Report is completed.
+    report:
+        noData: There is no data to display.
