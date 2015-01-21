@@ -53,6 +53,18 @@ class UserRegistrationDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration);
     }
 
+    function it_fetches_data_by_year($userRepository, Data $data)
+    {
+        $rawData = array(array('date' => '2014', 'user_total' => '2'));
+        $configuration = array(
+            'start' => new \DateTime('2010-01-01 00:00:00.000000'),
+            'end' => new \DateTime('2012-01-01 00:00:00.000000'),
+            'period' => 'year' );
+        $userRepository->getYearlyStatistic($configuration)->shouldBeCalled();
+        $userRepository->getYearlyStatistic($configuration)->willReturn($rawData);
+        $this->fetch($configuration);
+    }
+
     function it_does_not_allowed_wrond_data_period($userRepository, Data $data)
     {
         $configuration = array(

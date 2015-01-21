@@ -118,6 +118,46 @@ class UserRepository extends EntityRepository
         ;
     }
 
+    public function getDailyStatistic(array $configuration=array())
+    {
+        $sql = '
+        SELECT 
+            date(user.created_at) as date, 
+            count(user.id) as "user_total"
+        FROM sylius_user user
+        WHERE 
+            user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
+        GROUP BY date(user.created_at)
+        ORDER BY date(user.created_at)';
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getWeeklyStatistic(array $configuration=array())
+    {
+        $sql = '
+        SELECT 
+            CONCAT_WS(
+                " ",
+                "week",
+                weekofyear(user.created_at),
+                "of year",
+                year(user.created_at)
+                ) as date, 
+            count(user.id) as "user_total"
+        FROM sylius_user user
+        WHERE 
+            user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
+        GROUP BY year(user.created_at), weekofyear(user.created_at)
+        ORDER BY year(user.created_at), weekofyear(user.created_at)';
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getMonthlyStatistic(array $configuration=array())
     {
         $sql = '
@@ -133,6 +173,23 @@ class UserRepository extends EntityRepository
             user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
         GROUP BY year(user.created_at), monthname(user.created_at)
         ORDER BY year(user.created_at), month(user.created_at)';
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getYearlyStatistic(array $configuration=array())
+    {
+        $sql = '
+        SELECT 
+            year(user.created_at) as date, 
+            count(user.id) as "user_total"
+        FROM sylius_user user
+        WHERE 
+            year(user.created_at) BETWEEN year("'.$configuration['start']->format('Y-m-d H:i:s').'") AND ("'.$configuration['end']->format('Y-m-d H:i:s').'")
+        GROUP BY year(user.created_at)
+        ORDER BY year(user.created_at);';
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->execute();
