@@ -213,6 +213,14 @@ default:
             filters:
                 tags: "@promotions && ~@javascript"
 
+        reports:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\ReportBundle\Behat\ReportContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+            filters:
+                tags: "@reports && ~@javascript"
+
         settings:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
