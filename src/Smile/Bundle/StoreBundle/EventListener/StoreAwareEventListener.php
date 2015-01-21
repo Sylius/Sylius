@@ -7,7 +7,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Sylius\Component\Scope\ScopeAwareInterface;
-use Smile\Component\Store\Context\StoreContextInterface;
+use Sylius\Component\Store\Context\StoreContextInterface;
 
 class StoreAwareEventListener implements EventSubscriber
 {

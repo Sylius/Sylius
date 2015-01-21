@@ -92,4 +92,4 @@ sylius_variation:
     classes:
         product:
             variant:
-                model: Smile\Component\Store\Model\ProductVariant
+                model: Sylius\Component\Store\Model\ProductVariant

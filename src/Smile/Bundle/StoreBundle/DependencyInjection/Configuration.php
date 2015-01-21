@@ -62,7 +62,7 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('store')
             ->addDefaultsIfNotSet()
             ->children()
-            ->scalarNode('model')->defaultValue('Smile\Component\Store\Model\Store')->end()
+            ->scalarNode('model')->defaultValue('Sylius\Component\Store\Model\Store')->end()
             ->end()
             ->end()
             ->end()

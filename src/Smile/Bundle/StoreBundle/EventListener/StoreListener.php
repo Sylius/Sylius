@@ -3,7 +3,7 @@
 namespace Smile\Bundle\StoreBundle\EventListener;
 
 
-use Smile\Component\Store\Context\StoreContextInterface;
+use Sylius\Component\Store\Context\StoreContextInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

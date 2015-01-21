@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Smile\Component\Store\Model\Store" table="smile_store">
+    <mapped-superclass name="Sylius\Component\Store\Model\Store" table="smile_store">
         <indexes>
             <index columns="code"/>
         </indexes>
@@ -17,7 +17,7 @@
         <field name="code" type="string" unique="true"/>
         <field name="url" type="string" unique="true"/>
 
-        <many-to-one field="parent" target-entity="Smile\Component\Store\Model\StoreInterface"/>
+        <many-to-one field="parent" target-entity="Sylius\Component\Store\Model\Store"/>
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -23,7 +23,7 @@ class StoreListCommand extends ContainerAwareCommand
         /** @var \Symfony\Component\Console\Helper\TableHelper $table */
         $table = $this->getHelperSet()->get('table');
         $table->setHeaders(array('Code', 'URL', 'Parent'));
-        /** @var \Smile\Component\Store\Model\StoreInterface $store */
+        /** @var \Sylius\Component\Store\Model\StoreInterface $store */
         foreach ($repo->findAll() as $store) {
             $parent = $store->getParent() ? $store->getParent()->getCode() : '';
             $table->addRow(array($store->getCode(), $store->getUrl(), $parent));

@@ -3,8 +3,8 @@
 namespace Smile\Bundle\StoreBundle\Context;
 
 
-use Smile\Component\Store\Context\StoreContextInterface;
-use Smile\Component\Store\Model\StoreInterface;
+use Sylius\Component\Store\Context\StoreContextInterface;
+use Sylius\Component\Store\Model\StoreInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -19,7 +19,7 @@ class StoreContext implements StoreContextInterface
 
     /**
      * Default store
-     * @var \Smile\Component\Store\Model\StoreInterface
+     * @var StoreInterface
      */
     protected $defaultStore;
 

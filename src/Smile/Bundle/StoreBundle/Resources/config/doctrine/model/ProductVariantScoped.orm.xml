@@ -6,7 +6,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Smile\Component\Store\Model\ProductVariantScoped" table="smile_product_variant_scoped">
+    <entity name="Sylius\Component\Store\Model\ProductVariantScoped" table="smile_product_variant_scoped">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO"/>
         </id>

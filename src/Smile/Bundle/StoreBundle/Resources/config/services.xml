@@ -6,7 +6,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="smile.model.store.class">Smile\Component\Store\Model\Store</parameter>
+        <parameter key="smile.model.store.class">Sylius\Component\Store\Model\Store</parameter>
         <parameter key="smile.scope_aware.metadata_factory.class">Metadata\MetadataFactory</parameter>
         <parameter key="smile.scope_aware.listener.class">Sylius\Component\Scope\EventListener\ScopeAwareEventListener</parameter>
         <parameter key="smile.store.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreListener</parameter>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Smile\Component\Store\Model;
+namespace Sylius\Component\Store\Model;
 
 use Sylius\Component\Scope\Entity\ScopeAwareTrait;
 use Sylius\Component\Scope\ScopeAwareInterface;

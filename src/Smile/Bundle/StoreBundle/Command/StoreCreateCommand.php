@@ -25,7 +25,7 @@ class StoreCreateCommand extends ContainerAwareCommand
         $repo = $this->getContainer()->get('sylius.repository.store');
         $em = $this->getContainer()->get('sylius.manager.store');
 
-        /** @var \Smile\Component\Store\Model\StoreInterface $store */
+        /** @var \Sylius\Component\Store\Model\StoreInterface $store */
         $store = $repo->createNew();
         $store->setCode($input->getArgument('code'));
         $store->setUrl($input->getArgument('url'));
