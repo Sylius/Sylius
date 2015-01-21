@@ -18,11 +18,11 @@ use Prophecy\Argument;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChartConfigurationTypeSpec extends ObjectBehavior
+class TableConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\ChartConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\TableConfigurationType');
     }
 
     function it_should_be_abstract_type_object()
@@ -32,12 +32,11 @@ class ChartConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_renderer_chart');
+        $this->getName()->shouldReturn('sylius_renderer_table');
     }
 
-    function it_builds_form_with_type_choice_and_template_choice(FormBuilder $builder)
+    function it_builds_form_with_template_choice(FormBuilder $builder)
     {   
-        $builder->add('type', 'choice', Argument::any())->willReturn($builder);
         $builder->add('template', 'choice', Argument::any())->willReturn($builder);
 
         $this->buildForm($builder, array());

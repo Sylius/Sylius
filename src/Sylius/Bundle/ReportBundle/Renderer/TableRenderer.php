@@ -37,7 +37,7 @@ class TableRenderer implements RendererInterface
             'labels' => $labels,
             'fields' => array_keys($data["data"])
         );
-
+        
         return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
     }
 
