@@ -1,19 +1,31 @@
 <?php
 
-namespace Smile\Bundle\StoreBundle\Context;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Store\Context;
 
 
-use Sylius\Component\Store\Context\StoreContextInterface;
 use Sylius\Component\Store\Model\StoreInterface;
 use Sylius\Component\Storage\StorageInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * Context holding store information
+ *
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 class StoreContext implements StoreContextInterface
 {
     const STORAGE_KEY = '_smile.store';
 
     /**
-     * @var SessionInterface
+     * @var StorageInterface
      */
     protected $storage;
 

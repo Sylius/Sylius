@@ -11,7 +11,7 @@
         <parameter key="smile.scope_aware.listener.class">Sylius\Component\Scope\EventListener\ScopeAwareEventListener</parameter>
         <parameter key="smile.store.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreListener</parameter>
         <parameter key="smile.store_aware.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreAwareEventListener</parameter>
-        <parameter key="smile.context.store.class">Smile\Bundle\StoreBundle\Context\StoreContext</parameter>
+        <parameter key="smile.context.store.class">Sylius\Component\Store\Context\StoreContext</parameter>
     </parameters>
 
     <services>
