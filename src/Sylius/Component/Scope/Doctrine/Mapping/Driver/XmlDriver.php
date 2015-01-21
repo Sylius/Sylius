@@ -1,12 +1,24 @@
 <?php
 
-namespace Smile\Component\Scope\Doctrine\Mapping\Driver;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Doctrine\Mapping\Driver;
 
 
 use Metadata\PropertyMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
 
+/**
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 class XmlDriver extends FileDriver
 {
     /**

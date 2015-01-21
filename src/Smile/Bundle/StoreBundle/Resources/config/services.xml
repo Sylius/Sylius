@@ -8,7 +8,7 @@
     <parameters>
         <parameter key="smile.model.store.class">Smile\Component\Store\Model\Store</parameter>
         <parameter key="smile.scope_aware.metadata_factory.class">Metadata\MetadataFactory</parameter>
-        <parameter key="smile.scope_aware.listener.class">Smile\Component\Scope\EventListener\ScopeAwareEventListener</parameter>
+        <parameter key="smile.scope_aware.listener.class">Sylius\Component\Scope\EventListener\ScopeAwareEventListener</parameter>
         <parameter key="smile.store.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreListener</parameter>
         <parameter key="smile.store_aware.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreAwareEventListener</parameter>
         <parameter key="smile.context.store.class">Smile\Bundle\StoreBundle\Context\StoreContext</parameter>

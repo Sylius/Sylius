@@ -1,11 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Smile\Component\Scope\Entity;
+namespace Sylius\Component\Scope\Entity;
 
 
-use Smile\Component\Scope\ScopeInterface;
+use Sylius\Component\Scope\ScopeInterface;
 
+/**
+ * Add scope behaviour to an entity
+ * @author Mathhieu Blottière <matthieu.blottiere@smile.fr>
+ */
 trait ScopeTrait
 {
     /**

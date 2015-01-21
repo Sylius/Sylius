@@ -1,13 +1,25 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Smile\Component\Scope\Entity;
+namespace Sylius\Component\Scope\Entity;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Smile\Component\Scope\ScopedValueInterface;
-use Smile\Component\Scope\ScopeInterface;
+use Sylius\Component\Scope\ScopedValueInterface;
+use Sylius\Component\Scope\ScopeInterface;
 
+/**
+ * Add ScopeAware behaviour to an entity
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 trait ScopeAwareTrait
 {
     /**

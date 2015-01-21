@@ -3,8 +3,8 @@
 namespace Smile\Component\Store\Model;
 
 
-use Smile\Component\Scope\Entity\ScopedValueTrait;
-use Smile\Component\Scope\ScopedValueInterface;
+use Sylius\Component\Scope\Entity\ScopedValueTrait;
+use Sylius\Component\Scope\ScopedValueInterface;
 
 class ProductVariantScoped implements ScopedValueInterface
 {

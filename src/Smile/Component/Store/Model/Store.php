@@ -3,7 +3,7 @@
 namespace Smile\Component\Store\Model;
 
 
-use Smile\Component\Scope\Entity\ScopeTrait;
+use Sylius\Component\Scope\Entity\ScopeTrait;
 
 class Store implements StoreInterface
 {

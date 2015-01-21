@@ -1,13 +1,25 @@
 <?php
 
-namespace Smile\Component\Scope\Doctrine\Mapping\Driver;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Doctrine\Mapping\Driver;
 
 
-use Smile\Component\Scope\Doctrine\Mapping\PropertyMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\PropertyMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 class YamlDriver extends FileDriver
 {
 
@@ -55,7 +67,7 @@ class YamlDriver extends FileDriver
 
         $classMetadata = new ScopedValueMetadata($className);
 
-        $scopeAware = $config[$className]['smile']['scope-aware'] ?: array();
+        $scopeAware = $config[$className]['scoped']['scope-aware'] ?: array();
 
         $propertyMetadata = new PropertyMetadata(
             $className,

@@ -55,7 +55,7 @@ class SmileStoreBundle extends AbstractResourceBundle
             'Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator',
             array($namespaces, '.orm.xml')
         );
-        $driverDefinition = new Definition('Smile\Component\Scope\Doctrine\Mapping\Driver\XmlDriver', array($locator));
+        $driverDefinition = new Definition('Sylius\Component\Scope\Doctrine\Mapping\Driver\XmlDriver', array($locator));
         $driverDefinition->setPublic(false);
         $compilerPass = new DoctrineORMScopedMappingsPass($driverDefinition);
 

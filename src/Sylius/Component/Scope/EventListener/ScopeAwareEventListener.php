@@ -1,6 +1,15 @@
 <?php
 
-namespace Smile\Component\Scope\EventListener;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\EventListener;
 
 
 use Doctrine\Common\EventSubscriber;
@@ -10,6 +19,10 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Metadata\MetadataFactory;
 
+/**
+ * Handle mapping between ScopeAware and ScopedValues entities
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 class ScopeAwareEventListener implements EventSubscriber
 {
     /**
@@ -48,11 +61,11 @@ class ScopeAwareEventListener implements EventSubscriber
             return;
         }
 
-        if ($reflectionClass->implementsInterface('Smile\Component\Scope\ScopeAwareInterface')) {
+        if ($reflectionClass->implementsInterface('Sylius\Component\Scope\ScopeAwareInterface')) {
             $this->mapScopeAware($classMetadata);
         }
 
-        if ($reflectionClass->implementsInterface('Smile\Component\Scope\ScopedValueInterface')) {
+        if ($reflectionClass->implementsInterface('Sylius\Component\Scope\ScopedValueInterface')) {
             $this->mapScopedValue($classMetadata);
         }
     }

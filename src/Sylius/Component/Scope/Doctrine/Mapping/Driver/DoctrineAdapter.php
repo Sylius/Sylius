@@ -1,6 +1,15 @@
 <?php
 
-namespace Smile\Component\Scope\Doctrine\Mapping\Driver;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Doctrine\Mapping\Driver;
 
 
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -13,6 +22,9 @@ use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Metadata\Driver\DriverChain;
 use Metadata\Driver\DriverInterface;
 
+/**
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 class DoctrineAdapter
 {
     /**
@@ -66,7 +78,7 @@ class DoctrineAdapter
         if ($omDriver instanceof DoctrineFileDriver) {
             $reflClass = new \ReflectionClass($omDriver);
             $driverName = $omDriver instanceof SimplifiedYamlDriver ? 'YamlDriver' : $reflClass->getShortName();
-            $class = 'Smile\\Component\\Scope\\Doctrine\\Mapping\\Driver\\' . $driverName;
+            $class = 'Sylius\\Component\\Scope\\Doctrine\\Mapping\\Driver\\' . $driverName;
 
             if (class_exists($class)) {
                 return new $class($omDriver->getLocator());

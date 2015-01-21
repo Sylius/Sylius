@@ -2,8 +2,8 @@
 
 namespace Smile\Component\Store\Model;
 
-use Smile\Component\Scope\Entity\ScopeAwareTrait;
-use Smile\Component\Scope\ScopeAwareInterface;
+use Sylius\Component\Scope\Entity\ScopeAwareTrait;
+use Sylius\Component\Scope\ScopeAwareInterface;
 use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 
 class ProductVariant extends BaseProductVariant implements ScopeAwareInterface

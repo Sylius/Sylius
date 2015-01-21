@@ -1,6 +1,15 @@
 <?php
 
-namespace Smile\Component\Scope\Doctrine\Mapping;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Doctrine\Mapping;
 
 
 use Metadata\MergeableClassMetadata;
@@ -8,8 +17,7 @@ use Metadata\MergeableInterface;
 
 /**
  * Class metadata for store aware entities
- *
- * @see MergeableClassMetadata
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
  */
 class ScopeAwareMetadata extends MergeableClassMetadata
 {

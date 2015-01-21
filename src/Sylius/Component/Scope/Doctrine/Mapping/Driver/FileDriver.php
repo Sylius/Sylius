@@ -1,14 +1,26 @@
 <?php
 
-namespace Smile\Component\Scope\Doctrine\Mapping\Driver;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Doctrine\Mapping\Driver;
 
 
 use Doctrine\Common\Persistence\Mapping\Driver\FileLocator;
 use Metadata\Driver\DriverInterface;
-use Smile\Component\Scope\Doctrine\Mapping\MappingException;
-use Smile\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\MappingException;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
 
+/**
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 abstract class FileDriver implements DriverInterface
 {
     public function __construct(FileLocator $locator)
@@ -23,11 +35,11 @@ abstract class FileDriver implements DriverInterface
      */
     public function loadMetadataForClass(\ReflectionClass $class)
     {
-        if ($class->implementsInterface('Smile\Component\Scope\ScopeAwareInterface')) {
+        if ($class->implementsInterface('Sylius\Component\Scope\ScopeAwareInterface')) {
             return $this->loadScopeAwareMetadata($class->name, $this->readMapping($class->name));
         }
 
-        if ($class->implementsInterface('Smile\Component\Scope\ScopedValueInterface')) {
+        if ($class->implementsInterface('Sylius\Component\Scope\ScopedValueInterface')) {
             return $this->loadScopedValueMetadata($class->name, $this->readMapping($class->name));
         }
     }
@@ -62,7 +74,7 @@ abstract class FileDriver implements DriverInterface
      *
      * @param string $className
      * @param mixed  $config
-     * @return ScopedValueMetadata|null
+     * @return \Sylius\Component\Scope\Doctrine\Mapping\ScopedValueMetadata|null
      */
     abstract protected function loadScopedValueMetadata($className, $config);
 

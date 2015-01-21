@@ -1,13 +1,26 @@
 <?php
 
-namespace Smile\Component\Scope\Doctrine\Mapping\Driver;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Doctrine\Mapping\Driver;
 
 use Doctrine\Common\Annotations\Reader;
 use Metadata\Driver\DriverInterface;
-use Smile\Component\Scope\Doctrine\Mapping\PropertyMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
-use Smile\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\PropertyMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopeAwareMetadata;
+use Sylius\Component\Scope\Doctrine\Mapping\ScopedValueMetadata;
 
+/**
+ * Annotation driver for scope aware / scoped values entities
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 class AnnotationDriver implements DriverInterface
 {
     /**
@@ -30,11 +43,11 @@ class AnnotationDriver implements DriverInterface
      */
     public function loadMetadataForClass(\ReflectionClass $class)
     {
-        if ($class->implementsInterface('Smile\Component\Scope\ScopeAwareInterface')) {
+        if ($class->implementsInterface('Sylius\Component\Scope\ScopeAwareInterface')) {
             return $this->loadScopeAwareMetadata($class);
         }
 
-        if ($class->implementsInterface('Smile\Component\Scope\ScopedValueInterface')) {
+        if ($class->implementsInterface('Sylius\Component\Scope\ScopedValueInterface')) {
             return $this->loadScopedValueMetadata($class);
         }
     }
@@ -58,7 +71,7 @@ class AnnotationDriver implements DriverInterface
 
             if ($annotation = $this->reader->getPropertyAnnotation(
                 $property,
-                'Smile\Component\Scope\Doctrine\Annotation\ScopedValue'
+                'Sylius\Component\Scope\Doctrine\Annotation\ScopedValue'
             )
             ) {
                 $classMetadata->targetEntity = $annotation->targetEntity;
@@ -89,7 +102,7 @@ class AnnotationDriver implements DriverInterface
 
             if ($annotation = $this->reader->getPropertyAnnotation(
                 $property,
-                'Smile\Component\Scope\Doctrine\Annotation\ScopeAware'
+                'Sylius\Component\Scope\Doctrine\Annotation\ScopeAware'
             )
             ) {
                 $classMetadata->targetEntity = $annotation->targetEntity;
@@ -97,7 +110,7 @@ class AnnotationDriver implements DriverInterface
                 $classMetadata->addPropertyMetadata($propertyMetadata);
             }
 
-            if ($this->reader->getPropertyAnnotation($property, 'Smile\Component\Scope\Doctrine\Annotation\Scope')) {
+            if ($this->reader->getPropertyAnnotation($property, 'Sylius\Component\Scope\Doctrine\Annotation\Scope')) {
                 $classMetadata->scope = $propertyMetadata;
                 $classMetadata->addPropertyMetadata($propertyMetadata);
             }

@@ -1,12 +1,25 @@
 <?php
 
-namespace Smile\Component\Scope\Entity;
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Scope\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use Smile\Component\Scope\Doctrine\Annotation as Smile;
-use Smile\Component\Scope\ScopeAwareInterface;
+use Sylius\Component\Scope\Doctrine\Annotation as Scoped;
+use Sylius\Component\Scope\ScopeAwareInterface;
 
+/**
+ * Add ScopedValue behaviour to an entity
+ * @author Matthieu Blottière <matthieu.blottiere@smile.fr>
+ */
 trait ScopedValueTrait
 {
     /**
@@ -21,7 +34,7 @@ trait ScopedValueTrait
 
     /**
      * @ORM\Column(name="scope", type="string")
-     * @Smile\Scope
+     * @Scoped\Scope
      * @var string
      */
     protected $scope;

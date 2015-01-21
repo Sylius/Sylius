@@ -3,7 +3,7 @@
 namespace Smile\Component\Store\Model;
 
 
-use Smile\Component\Scope\ScopeInterface;
+use Sylius\Component\Scope\ScopeInterface;
 
 interface StoreInterface extends ScopeInterface
 {

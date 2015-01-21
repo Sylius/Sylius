@@ -6,7 +6,7 @@ namespace Smile\Bundle\StoreBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Smile\Component\Scope\ScopeAwareInterface;
+use Sylius\Component\Scope\ScopeAwareInterface;
 use Smile\Component\Store\Context\StoreContextInterface;
 
 class StoreAwareEventListener implements EventSubscriber
