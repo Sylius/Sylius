@@ -29,7 +29,7 @@
             <gedmo:versioned />
         </field>
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
-        <field name="total" column="total" type="integer" />
+        <field name="total" column="total" type="bigint" />
         <field name="immutable" column="is_immutable" type="boolean" />
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">
