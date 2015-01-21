@@ -6,13 +6,7 @@
     'bundles/syliusreport/js/chart.js'
 %}
     <script>
-        var chartType = "{{ chartType }}";
-
-        var labels = document.getElementById("data").getAttribute("data-labels").split(" ");
-        var values = document.getElementById("data").getAttribute("data-values").split(" ");
-
-        var data;
-        if (chartType == "line") {
+        function generateLineChart(labels, values, ctx) {
             data = {
                 labels : labels,
                 datasets : [
@@ -28,7 +22,12 @@
                     }
                 ]
             }
-        } else if (chartType == "bar") {
+            window.myLine = new Chart(ctx).Line(data, {
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }
+        function generateBarChart(labels, values, ctx) {
             data = {
                 labels : labels,
                 datasets : [
@@ -41,21 +40,85 @@
                     }
                 ]
             }
-        };
+            window.myBar = new Chart(ctx).Bar(data, {
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }
+        function generateRadarChart(labels, values, ctx) {
+            data = {
+                labels: labels,
+                datasets: [
+                    {
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: values
+                    }
+                ]
+            }
+            $("#canvas").width(600).height("auto");
+            window.myBar = new Chart(ctx).Radar(data, {
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }
+        function generatePolarChart(labels, values, ctx) {
+            window.myBar = new Chart(ctx).PolarArea(generateRadialData(labels, values), {
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }
+        function generatePieChart(labels, values, ctx) {
+            window.myBar = new Chart(ctx).Pie(generateRadialData(labels, values), {
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }
+        function generateDoughnutChart(labels, values, ctx) {
+            window.myBar = new Chart(ctx).Doughnut(generateRadialData(labels, values), {
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }
+        function generateRadialData(labels, values) {
+            var colors = ["#1abb9c", "#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#FFFFFF", "#000000"];
+            var highlights = ["#37a37e", "#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774", "#EEEEEE", "#111111"]; 
+            var data = [];
+            $.each(values, function(i){
+                var fragment = {
+                    value: parseInt(this),
+                    color: colors[i],
+                    highlight: highlights[i],
+                    label: labels[i]
+                };
+                data.push(fragment);
+            });
+            return data;
+        }
+
+        function initCharts(chartType){
+
+            var labels = document.getElementById("data").getAttribute("data-labels").split(" ");
+            var values = document.getElementById("data").getAttribute("data-values").split(" ");
+            var ctx = document.getElementById("canvas").getContext("2d");
+
+            switch(chartType) {
+                case "line": generateLineChart(labels, values, ctx); break;
+                case "bar": generateBarChart(labels, values, ctx); break;
+                case "radar": generateRadarChart(labels, values, ctx); break;
+                case "polar": generatePolarChart(labels, values, ctx); break;
+                case "pie": generatePieChart(labels, values, ctx); break;
+                case "doughnut": generateDoughnutChart(labels, values, ctx); break;
+            }
+        }
 
         window.onload = function(){
-            var ctx = document.getElementById("canvas").getContext("2d");
-            if (chartType == "line") {
-                window.myLine = new Chart(ctx).Line(data, {
-                    responsive: true,
-                    maintainAspectRatio: false
-                });
-            } else if (chartType == "bar") {
-                window.myBar = new Chart(ctx).Bar(data, {
-                    responsive: true,
-                    maintainAspectRatio: false
-                });
-            }
+            var chartType = "{{ chartType }}";
+            initCharts(chartType);
         }
     </script>
 {% endjavascripts %}

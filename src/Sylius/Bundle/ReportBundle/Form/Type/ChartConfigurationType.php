@@ -31,7 +31,11 @@ class ChartConfigurationType extends AbstractType
                 'label' => 'sylius.form.report.chart.type',
                 'choices' => array(
                     'bar' => 'Bar chart',
-                    'line' => 'Line chart'
+                    'line' => 'Line chart',
+                    'radar' => 'Radar chart',
+                    'polar' => 'Polar chart',
+                    'pie' => 'Pie chart',
+                    'doughnut' => 'Doughnut chart'
                 ),
             ))
             ->add('template', 'choice', array(
