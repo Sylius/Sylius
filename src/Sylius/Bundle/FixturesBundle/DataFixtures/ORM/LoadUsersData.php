@@ -39,7 +39,7 @@ class LoadUsersData extends DataFixture
 
         $this->setReference('Sylius.User-Administrator', $user);
 
-        for ($i = 1; $i <= 15; $i++) {
+        for ($i = 1; $i <= 200; $i++) {
             $username = $this->faker->username;
 
             $user = $this->createUser(
@@ -47,6 +47,8 @@ class LoadUsersData extends DataFixture
                 $username,
                 $this->faker->boolean()
             );
+
+            $user->setCreatedAt($this->faker->dateTimeThisMonth);
 
             $manager->persist($user);
 

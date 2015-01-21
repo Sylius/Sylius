@@ -29,8 +29,6 @@ class TableRenderer implements RendererInterface
 
     public function render($data, $configuration)
     {
-        var_dump($data);
-        exit;
         
         $data = array(
             'report' => $data["report"],

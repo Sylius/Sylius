@@ -135,29 +135,6 @@ class UserRepository extends EntityRepository
         return $stmt->fetchAll();
     }
 
-    public function getWeeklyStatistic(array $configuration=array())
-    {
-        $sql = '
-        SELECT 
-            CONCAT_WS(
-                " ",
-                "week",
-                weekofyear(user.created_at),
-                "of year",
-                year(user.created_at)
-                ) as date, 
-            count(user.id) as "user_total"
-        FROM sylius_user user
-        WHERE 
-            user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
-        GROUP BY year(user.created_at), weekofyear(user.created_at)
-        ORDER BY year(user.created_at), weekofyear(user.created_at)';
-
-        $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
     public function getMonthlyStatistic(array $configuration=array())
     {
         $sql = '

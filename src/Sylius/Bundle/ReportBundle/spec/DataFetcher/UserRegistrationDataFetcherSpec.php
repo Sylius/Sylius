@@ -54,19 +54,6 @@ class UserRegistrationDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration);
     }
 
-    function it_fetches_data_by_week($userRepository, Data $data)
-    {
-        $rawData = array(array('date' => 'January 2014', 'user_total' => '2'));
-        $configuration = array(
-            'start' => new \DateTime('2010-01-01 00:00:00.000000'),
-            'end' => new \DateTime('2012-01-01 00:00:00.000000'),
-            'period' => 'week',
-            'empty_records' => false );
-        $userRepository->getWeeklyStatistic($configuration)->shouldBeCalled();
-        $userRepository->getWeeklyStatistic($configuration)->willReturn($rawData);
-        $this->fetch($configuration);
-    }
-
     function it_fetches_data_by_month($userRepository, Data $data)
     {
         $rawData = array(array('date' => 'January 2014', 'user_total' => '2'));
