@@ -14,4 +14,8 @@ interface ReportInterface
     public function setRenderer($renderer);
     public function getRendererConfiguration();
     public function setRendererConfiguration($rendererConfiguration);
+    public function getDataFetcher();
+    public function setDataFetcher($dataFetcher);
+    public function getDataFetcherConfiguration();
+    public function setDataFetcherConfiguration(array $dataFetcherConfiguration);
 }

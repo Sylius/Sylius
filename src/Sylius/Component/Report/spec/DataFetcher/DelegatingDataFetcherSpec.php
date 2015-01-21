@@ -13,11 +13,19 @@ namespace spec\Sylius\Component\Report\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Report\Model\ReportInterface;
+
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  */
-class ReportSpec extends ObjectBehavior
+class DelegatingDataFetcherSpec extends ObjectBehavior
 {
+    function let(ServiceRegistryInterface $serviceRegistryInterface)
+    {
+        $this->beConstructedWith($serviceRegistryInterface);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Report\DataFetcher\DelegatingDataFetcher');

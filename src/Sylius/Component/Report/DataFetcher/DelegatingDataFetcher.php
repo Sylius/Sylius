@@ -10,8 +10,8 @@
 
 namespace Sylius\Component\Report\DataFetcher;
 
-use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Report\Model\ReportInterface;
 
 /**
 * Data fetcher choice type
