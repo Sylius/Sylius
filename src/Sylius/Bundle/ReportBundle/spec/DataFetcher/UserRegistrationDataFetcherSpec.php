@@ -41,13 +41,40 @@ class UserRegistrationDataFetcherSpec extends ObjectBehavior
         $this->getType()->shouldReturn('user_registration');
     }
 
+    function it_fetches_data_by_day($userRepository, Data $data)
+    {
+        $rawData = array(array('date' => 'January 2014', 'user_total' => '2'));
+        $configuration = array(
+            'start' => new \DateTime('2010-01-01 00:00:00.000000'),
+            'end' => new \DateTime('2012-01-01 00:00:00.000000'),
+            'period' => 'day',
+            'empty_records' => false );
+        $userRepository->getDailyStatistic($configuration)->shouldBeCalled();
+        $userRepository->getDailyStatistic($configuration)->willReturn($rawData);
+        $this->fetch($configuration);
+    }
+
+    function it_fetches_data_by_week($userRepository, Data $data)
+    {
+        $rawData = array(array('date' => 'January 2014', 'user_total' => '2'));
+        $configuration = array(
+            'start' => new \DateTime('2010-01-01 00:00:00.000000'),
+            'end' => new \DateTime('2012-01-01 00:00:00.000000'),
+            'period' => 'week',
+            'empty_records' => false );
+        $userRepository->getWeeklyStatistic($configuration)->shouldBeCalled();
+        $userRepository->getWeeklyStatistic($configuration)->willReturn($rawData);
+        $this->fetch($configuration);
+    }
+
     function it_fetches_data_by_month($userRepository, Data $data)
     {
         $rawData = array(array('date' => 'January 2014', 'user_total' => '2'));
         $configuration = array(
             'start' => new \DateTime('2010-01-01 00:00:00.000000'),
             'end' => new \DateTime('2012-01-01 00:00:00.000000'),
-            'period' => 'month' );
+            'period' => 'month',
+            'empty_records' => false );
         $userRepository->getMonthlyStatistic($configuration)->shouldBeCalled();
         $userRepository->getMonthlyStatistic($configuration)->willReturn($rawData);
         $this->fetch($configuration);
@@ -59,7 +86,8 @@ class UserRegistrationDataFetcherSpec extends ObjectBehavior
         $configuration = array(
             'start' => new \DateTime('2010-01-01 00:00:00.000000'),
             'end' => new \DateTime('2012-01-01 00:00:00.000000'),
-            'period' => 'year' );
+            'period' => 'year',
+            'empty_records' => false );
         $userRepository->getYearlyStatistic($configuration)->shouldBeCalled();
         $userRepository->getYearlyStatistic($configuration)->willReturn($rawData);
         $this->fetch($configuration);
@@ -70,7 +98,8 @@ class UserRegistrationDataFetcherSpec extends ObjectBehavior
         $configuration = array(
             'start' => new \DateTime('2010-01-01 00:00:00.000000'),
             'end' => new \DateTime('2012-01-01 00:00:00.000000'),
-            'period' => 3 );
+            'period' => 3,
+            'empty_records' => false );
         $this
             ->shouldThrow(new \InvalidArgumentException('Wrong data fetcher period'))
             ->duringFetch($configuration)

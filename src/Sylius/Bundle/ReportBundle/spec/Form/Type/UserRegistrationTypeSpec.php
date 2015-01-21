@@ -50,6 +50,10 @@ class UserRegistrationTypeSpec extends ObjectBehavior
             ->add('period', 'choice', Argument::type('array'))
             ->willReturn($builder)
         ;
+        $builder
+            ->add('empty_records', 'checkbox', Argument::type('array'))
+            ->willReturn($builder)
+        ;
         
         $this->buildForm($builder, array());
     }

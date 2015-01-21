@@ -33,6 +33,7 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
      */
     public function fetch(array $configuration){
         $data = new Data();
+
         switch ($configuration['period']) {
             case self::PERIOD_DAY:
                 $rawData = $this->userRepository->getDailyStatistic($configuration);
@@ -50,16 +51,27 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
                 throw new \InvalidArgumentException('Wrong data fetcher period');
                 break;
         }
+
         if (empty($rawData)) {
             return $data;
         }
+
         $labels = array_keys($rawData[0]);
         $data->setLabels($labels);
+
         $fetched = array();
+
+        if ($configuration['empty_records']) {
+            $fetched = $this->fillEmptyRecodrs($fetched,$configuration);
+        }
+
         foreach ($rawData as $row) {
             $fetched[$row[$labels[0]]] = $row[$labels[1]];
         }
+        
         $data->setData($fetched);
+        var_dump($data);
+        exit;
         return $data;
     }
 
@@ -77,5 +89,17 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
             self::PERIOD_WEEK   => 'Weekly',
             self::PERIOD_MONTH  => 'Monthly',
             self::PERIOD_YEAR   => 'Yearly');
+    }
+
+    private function fillEmptyRecodrs(array $fetched, array $configuration)
+    {
+        $date = $configuration['start'];
+        $diff1Day = new \DateInterval('P1D');
+        $numberOfDays = $configuration['start']->diff($configuration['end']);
+        for ($i=0; $i < $numberOfDays->format('%a'); $i++) {
+            $fetched[$date->format('Y-m-d')] = 0;
+            $date = $date->add($diff1Day);
+        }
+        return $fetched;
     }
 }
