@@ -118,15 +118,21 @@ class UserRepository extends EntityRepository
         ;
     }
 
-    public function findByMonth($value='')
+    public function getMonthlyStatistic(array $configuration=array())
     {
-
         $sql = '
-        SELECT monthname(user.created_at) as "month", count(user.id) as "user_total"
+        SELECT 
+            CONCAT_WS(
+                " ",
+                monthname(user.created_at),
+                year(user.created_at)
+                ) as date, 
+            count(user.id) as "user_total"
         FROM sylius_user user
-        GROUP BY monthname(user.created_at)
-        ORDER BY month(user.created_at)
-        ';
+        WHERE 
+            user.created_at BETWEEN "'.$configuration['start']->format('Y-m-d H:i:s').'" AND "'.$configuration['end']->format('Y-m-d H:i:s').'"
+        GROUP BY year(user.created_at), monthname(user.created_at)
+        ORDER BY year(user.created_at), month(user.created_at)';
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->execute();
