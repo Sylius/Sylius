@@ -90,8 +90,8 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
             return true;
         }
 
-        if (null === $user) {
-            return true;
+        if (null === $user && $coupon->getPerUserUsageLimit()) {
+            return false;
         }
 
         return $this->isCouponEligible($coupon, $promotion, $user);
