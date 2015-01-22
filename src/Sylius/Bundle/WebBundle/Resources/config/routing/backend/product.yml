@@ -56,6 +56,14 @@ sylius_backend_product_delete:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_index
 
+sylius_backend_product_delete_restore:
+    path: /{id}/restore
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.product:restoreAction
+        _sylius:
+            redirect: sylius_backend_product_show
+
 sylius_backend_product_history:
     path: /{id}/history
     methods: [GET]

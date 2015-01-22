@@ -9,3 +9,4 @@ sylius:
         move: %resource% has been successfully moved.
         generate: %resource%s have been successfully generated.
         revert: %resource% has been successfully reverted.
+        restore_deleted: %resource% has been successfully restored.
