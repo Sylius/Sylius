@@ -285,6 +285,26 @@ class ResourceController extends FOSRestController
 
     /**
      * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function restoreAction(Request $request)
+    {
+        $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
+        $resource = $this->findOr404($request);
+        $resource->setDeletedAt(null);
+
+        $this->domainManager->update($resource, 'restore_deleted');
+
+        if ($this->config->isApiRequest()) {
+            return $this->handleView($this->view());
+        }
+
+        return $this->redirectHandler->redirectTo($resource);
+    }
+
+    /**
+     * @param Request $request
      * @param int     $version
      *
      * @return RedirectResponse
