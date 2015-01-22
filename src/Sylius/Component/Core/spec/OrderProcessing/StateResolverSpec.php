@@ -157,4 +157,46 @@ class StateResolverSpec extends ObjectBehavior
         $order->setPaymentState(PaymentInterface::STATE_NEW)->shouldBeCalled();
         $this->resolvePaymentState($order);
     }
+
+    function it_marks_order_as_partially_refunded_if_payment_is_partially_refunded(OrderInterface $order)
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(5000);
+        $payment1->setState(PaymentInterface::STATE_COMPLETED);
+        $payment2 = new Payment();
+        $payment2->setAmount(4000);
+        $payment2->setState(PaymentInterface::STATE_PARTIALLY_REFUNDED);
+        $payments = new ArrayCollection(array($payment1, $payment2));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+        $order->getTotal()->willReturn(5000);
+
+        $order->setPaymentState(PaymentInterface::STATE_REFUNDED)->shouldBeCalled();
+        $this->resolvePaymentState($order);
+
+    }
+
+    function it_marks_order_as_refunded_if_payment_is_fully_refunded(OrderInterface $order)
+    {
+        $payment1 = new Payment();
+        $payment1->setAmount(5000);
+        $payment1->setState(PaymentInterface::STATE_NEW);
+        $payment2 = new Payment();
+        $payment2->setAmount(4000);
+        $payment2->setState(PaymentInterface::STATE_PARTIALLY_REFUNDED);
+        $payment3 = new Payment();
+        $payment3->setAmount(1000);
+        $payment3->setState(PaymentInterface::STATE_PARTIALLY_REFUNDED);
+        $payments = new ArrayCollection(array($payment1, $payment2, $payment3));
+
+        $order->hasPayments()->willReturn(true);
+        $order->getPayments()->willReturn($payments);
+        $order->getTotal()->willReturn(5000);
+
+        $order->setPaymentState(PaymentInterface::STATE_REFUNDED)->shouldBeCalled();
+        $this->resolvePaymentState($order);
+
+    }
+
 }
