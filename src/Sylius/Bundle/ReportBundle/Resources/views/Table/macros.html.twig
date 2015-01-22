@@ -5,7 +5,7 @@
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if values|length > 0 %}
-    <table class="table table-bordered table-condensed">
+    <table id="results" class="table table-bordered table-condensed">
         <thead>
             <tr>
                 <th>{{ sylius_resource_sort('id', '#') }}</th>

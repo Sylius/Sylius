@@ -37,7 +37,7 @@ class ReportContext extends DefaultContext
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $this->thereIsReport($data['name'], $data['description'], $data['renderer type'], $data["renderer configuration"], $data["data fetcher type"], $data["data fetcher configuration"], false);
+            $this->thereIsReport($data['name'], $data['description'], $data['renderer'], $data["renderer configuration"], $data["data fetcher"], $data["data fetcher configuration"], false);
         }
 
         $manager->flush();
@@ -53,10 +53,16 @@ class ReportContext extends DefaultContext
         $report = $repository->createNew();
         $report->setName($name);
         $report->setDescription($description);
+        
         $report->setRenderer($rendererType);
         $report->setRendererConfiguration($this->getConfiguration($rendererConfiguration));
+
+        $dataFetcherConfiguration = $this->getConfiguration($dataFetcherConfiguration);
+        $dataFetcherConfiguration["start"] = new \DateTime($dataFetcherConfiguration["start"]);
+        $dataFetcherConfiguration["end"] = new \DateTime($dataFetcherConfiguration["end"]);
+
         $report->setDataFetcher($dataFetcherType);
-        $report->setDataFetcherConfiguration($this->getConfiguration($dataFetcherConfiguration));
+        $report->setDataFetcherConfiguration($dataFetcherConfiguration);
 
         $menager = $this->getEntityManager();
         $menager->persist($report);

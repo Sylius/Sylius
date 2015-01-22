@@ -28,7 +28,7 @@ class TableRenderer implements RendererInterface
     }   
 
     public function render($data, $configuration)
-    {
+    {   
         if (null !== $data["data"]->getData()) {
             $data = array(
                 'report' => $data["report"],

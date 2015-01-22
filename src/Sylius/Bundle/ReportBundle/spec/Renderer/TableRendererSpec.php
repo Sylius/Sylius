@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sylius\Component\Report\Model\Report;
 use Symfony\Component\HttpFoundation\Response;
+use Sylius\Component\Report\DataFetcher\Data;
 use Prophecy\Argument;
 
 /**
@@ -37,28 +38,19 @@ class TableRendererSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
     }
 
-    function it_renders_data_with_given_configuration(Report $report, Response $response, $templating)
+    function it_renders_data_with_given_configuration(Report $report, Response $response, Data $reportData, $templating)
     {
+        $reportData->getLabels()->willReturn(array('month', 'user_total'));
+        $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
         $data = array(
             'report' => $report,
-            'data' => array(
-                'column_name' => array('column1', 'column2'),
-                'Month1' => '50',
-                'Month2' => '20'
-            )
-        );
-        $tableData = array(
-            'report' => $report,
-            'data' => array(
-                'Month1' => '50',
-                'Month2' => '20'
-            )
+            'data' => $reportData
         );
         $renderData = array(
-            'report' => $tableData["report"],
-            'values' => $tableData["data"],
-            'labels' => $data["data"]["column_name"],
-            'fields' => array_keys($tableData["data"])
+            'report' => $report,
+            'values' => array('month1' => '50', 'month2' => '40'),
+            'labels' => array('month', 'user_total'),
+            'fields' => array('month1', 'month2')
         );
         $configuration = array('template' => 'SyliusReportBundle:Table:default.html.twig');
 

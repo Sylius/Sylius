@@ -1,6 +1,7 @@
 sylius:
     report:
         index_header: Reports
+        nodata: There is no data to display.
     form:
         rule:
             item_count_configuration:
@@ -23,4 +24,3 @@ sylius:
                 end: End date
                 period: Time period
                 empty_records: Print empty records?
-                nodata: There is no data to display.
