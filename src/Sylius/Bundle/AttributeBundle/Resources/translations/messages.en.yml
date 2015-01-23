@@ -3,3 +3,7 @@ sylius:
     attribute:
       name: Internal name
       presentation: Presentation
+      group: Group
+    attribute_group:
+      code: Code
+      name: Name

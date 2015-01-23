@@ -36,6 +36,16 @@ interface AttributeInterface extends TimestampableInterface, AttributeTranslatio
     public function setName($name);
 
     /**
+     * @return AttributeGroupInterface
+     */
+    public function getGroup();
+
+    /**
+     * @param null|AttributeGroupInterface $group
+     */
+    public function setGroup(AttributeGroupInterface $group = null);
+
+    /**
      * The type of the attribute.
      *
      * @return string

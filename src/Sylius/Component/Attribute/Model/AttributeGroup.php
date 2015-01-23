@@ -11,34 +11,28 @@
 
 namespace Sylius\Component\Attribute\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Model for object attributes.
+ * Attribute group model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Attribute extends AbstractTranslatable implements AttributeInterface
+class AttributeGroup implements AttributeGroupInterface
 {
     /**
-     * Attribute id.
+     * Attribute group id.
      *
      * @var mixed
      */
     protected $id;
 
     /**
-     * @var null|AttributeGroupInterface
-     */
-    protected $group;
-
-    /**
-     * Type.
+     * Unique code.
      *
      * @var string
      */
-    protected $type = AttributeTypes::TEXT;
+    protected $code;
 
     /**
      * Internal name.
@@ -48,11 +42,9 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     protected $name;
 
     /**
-     * Attribute configuration.
-     *
-     * @var array
+     * @var Collection|AttributeInterface[]
      */
-    protected $configuration = array();
+    protected $attributes;
 
     /**
      * Creation time.
@@ -70,9 +62,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
 
     public function __construct()
     {
-        parent::__construct();
-
-        $this->createdAt = new \DateTime();
+        $this->attributes = new ArrayCollection();
     }
 
     /**
@@ -92,22 +82,21 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     }
 
     /**
-     * @return null|AttributeGroupInterface
+     * {@inheritdoc}
      */
-    public function getGroup()
+    public function getCode()
     {
-        return $this->group;
+        return $this->code;
     }
 
     /**
-     * @param null|AttributeGroupInterface $group
+     * {@inheritdoc}
      */
-    public function setGroup(AttributeGroupInterface $group = null)
+    public function setCode($code)
     {
-        $this->group = $group;
-
-        return $this;
+        $this->code = $code;
     }
+
 
     /**
      * {@inheritdoc}
@@ -130,55 +119,9 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    public function getPresentation()
+    public function getAttributes()
     {
-        return $this->translate()->getPresentation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPresentation($presentation)
-    {
-        $this->translate()->setPresentation($presentation);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration()
-    {
-        return $this->configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(array $configuration)
-    {
-        $this->configuration = $configuration;
-
-        return $this;
+        return $this->attributes;
     }
 
     /**

@@ -22,7 +22,7 @@
         <tr id="{{ archetype.id }}">
             <td><strong>{{ archetype.code }}</strong</td>
             <td>{{ archetype.name }}</td>
-            <td>{{ archetype.parent ? archetype.parent.name }}</td>
+            <td>{{ archetype.parent ? archetype.parent.name : '-' }}</td>
             <td>
                 <ul>
                     {% for option in archetype.options %}

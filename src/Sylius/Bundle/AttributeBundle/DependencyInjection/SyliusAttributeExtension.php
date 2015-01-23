@@ -59,6 +59,9 @@ class SyliusAttributeExtension extends AbstractResourceExtension
             if (!isset($config['validation_groups'][$subject]['attribute_value'])) {
                 $config['validation_groups'][$subject]['attribute_value'] = array('sylius');
             }
+            if (!isset($config['validation_groups'][$subject]['attribute_group'])) {
+                $config['validation_groups'][$subject]['attribute_group'] = array('sylius');
+            }
         }
 
         $container->setParameter('sylius.attribute.subjects', $subjects);
@@ -89,9 +92,11 @@ class SyliusAttributeExtension extends AbstractResourceExtension
     {
         $attributeAlias = $subject.'_attribute';
         $attributeValueAlias = $subject.'_attribute_value';
+        $attributeGroupAlias = $subject.'_attribute_group';
 
         $attributeClasses = $config[$attributeAlias];
         $attributeValueClasses = $config[$attributeValueAlias];
+        $attributeGroupClasses = $config[$attributeGroupAlias];
 
         $attributeFormType = new Definition($attributeClasses['form']);
         $attributeFormType
@@ -124,5 +129,25 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         ;
 
         $container->setDefinition('sylius.form.type.'.$attributeValueAlias, $attributeValueFormType);
+
+        $attributeGroupFormType = new Definition($attributeGroupClasses['form']);
+        $attributeGroupFormType
+            ->setArguments(array($attributeGroupClasses['model'], '%sylius.validation_group.'.$attributeGroupAlias.'%', $subject))
+            ->addTag('form.type', array('alias' => 'sylius_'.$attributeGroupAlias))
+        ;
+
+        $container->setDefinition('sylius.form.type.'.$attributeGroupAlias, $attributeGroupFormType);
+
+        $choiceTypeClasses = array(
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\AttributeBundle\Form\Type\AttributeGroupEntityChoiceType'
+        );
+
+        $attributeGroupChoiceFormType = new Definition($choiceTypeClasses[$driver]);
+        $attributeGroupChoiceFormType
+            ->setArguments(array($subject, $attributeGroupClasses['model']))
+            ->addTag('form.type', array('alias' => 'sylius_'.$attributeGroupAlias.'_choice'))
+        ;
+
+        $container->setDefinition('sylius.form.type.'.$attributeGroupAlias.'_choice', $attributeGroupChoiceFormType);
     }
 }
