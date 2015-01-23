@@ -23,7 +23,7 @@
         "php":                             ">=5.3.3",
 
         "symfony/framework-bundle":        "~2.3",
-        "stof/doctrine-extensions-bundle": "1.1.*",
+        "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/resource-bundle":          "0.13.*@dev",
         "sylius/payment":                  "0.13.*@dev"
     },

@@ -50,7 +50,7 @@
         "payum/payum-bundle":                   "~0.12",
         "prezent/doctrine-translatable":        "1.0.*@dev",
         "sensio/distribution-bundle":           "2.3.*",
-        "stof/doctrine-extensions-bundle":      "1.1.*",
+        "stof/doctrine-extensions-bundle":      "~1.1",
         "swiftmailer/swiftmailer":              "~5.0",
         "symfony-cmf/block-bundle":             "1.2.*",
         "symfony-cmf/content-bundle":           "1.2.*",
