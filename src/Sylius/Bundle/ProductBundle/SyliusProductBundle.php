@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle;
 
 use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ValidatorPass;
-use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -26,7 +26,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusProductBundle extends AbstractTranslationBundle
+class SyliusProductBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

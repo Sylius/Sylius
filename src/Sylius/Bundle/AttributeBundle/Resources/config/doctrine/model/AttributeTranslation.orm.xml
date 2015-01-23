@@ -11,8 +11,7 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:prezent="prezent">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
     <mapped-superclass name="Sylius\Component\Attribute\Model\AttributeTranslation" table="sylius_attribute_translation">
         <id name="id" column="id" type="integer">
@@ -20,8 +19,6 @@
         </id>
 
         <field name="presentation" column="presentation" type="string" />
-
-        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

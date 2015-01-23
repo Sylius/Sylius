@@ -17,7 +17,15 @@ use Sylius\Component\Variation\Model\Option as BaseOption;
  * Product option model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Option extends BaseOption implements OptionInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
+    }
 }

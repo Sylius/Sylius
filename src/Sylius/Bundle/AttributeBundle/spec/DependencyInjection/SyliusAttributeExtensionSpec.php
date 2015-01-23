@@ -15,14 +15,35 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Prophecy\Argument;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class SyliusAttributeExtensionSpec extends ObjectBehavior
 {
     function it_processes_the_configuration_and_registers_services_per_subject(ContainerBuilder $container)
     {
+        $container->hasParameter('sylius.translation.mapping')->willReturn(false);
+        $container->hasParameter('sylius.translation.default.mapping')->willReturn(true);
+        $container->getParameter('sylius.translation.default.mapping')->willReturn(
+            array(
+                array('default_mapping' => array(
+                    'translatable' => array(
+                        'field'          => 'translations',
+                        'currentLocale'  => 'currentLocale',
+                        'fallbackLocale' => 'fallbackLocale'
+                    ),
+                    'translation'  => array(
+                        'field'  => 'translatable',
+                        'locale' => 'locale'
+                    )
+                ))
+            ));
+
+        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
+
         $attributeFormType = new Definition('Some\App\Product\Form\AttributeType');
         $attributeFormType
             ->setArguments(array('Some\App\Product\Entity\Attribute',
@@ -36,6 +57,20 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
         ;
 
         $container->setDefinition('sylius.form.type.product_attribute', $attributeFormType)->shouldBeCalled();
+
+        $attributeTranslationFormType = new Definition('Some\App\Product\Form\AttributeTranslationType');
+        $attributeTranslationFormType
+            ->setArguments(array('Some\App\Product\Entity\AttributeTranslation',
+                '%sylius.validation_group.product_attribute_translation%',
+                'product'
+            ))
+        ;
+
+        $attributeTranslationFormType
+            ->addTag('form.type', array('alias' => 'sylius_product_attribute_translation'))
+        ;
+
+        $container->setDefinition('sylius.form.type.product_attribute_translation', $attributeTranslationFormType)->shouldBeCalled();
 
         $choiceTypeClasses = array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\AttributeBundle\Form\Type\AttributeEntityChoiceType'
@@ -74,6 +109,10 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                     'model' => 'Some\App\Product\Entity\Attribute',
                     'form'  => 'Some\App\Product\Form\AttributeType',
                 ),
+                'attribute_translation' => array(
+                    'model' => 'Some\App\Product\Entity\AttributeTranslation',
+                    'form'  => 'Some\App\Product\Form\AttributeTranslationType',
+                ),
                 'attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
                     'form'  => 'Some\App\Product\Form\AttributeValueType',
@@ -91,6 +130,10 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\Attribute',
                         'form' => 'Some\App\Product\Form\AttributeType',
                     ),
+                    'attribute_translation' => array(
+                        'model' => 'Some\App\Product\Entity\AttributeTranslation',
+                        'form' => 'Some\App\Product\Form\AttributeTranslationType',
+                    ),
                     'attribute_value' => array(
                         'model' => 'Some\App\Product\Entity\AttributeValue',
                         'form' => 'Some\App\Product\Form\AttributeValueType',
@@ -105,6 +148,10 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                     'model' => 'Some\App\Product\Entity\Attribute',
                     'form'  => 'Some\App\Product\Form\AttributeType',
                 ),
+                'product_attribute_translation' => array(
+                    'model' => 'Some\App\Product\Entity\AttributeTranslation',
+                    'form' => 'Some\App\Product\Form\AttributeTranslationType',
+                ),
                 'product_attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
                     'form'  => 'Some\App\Product\Form\AttributeValueType',
@@ -112,6 +159,7 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
             ),
             'validation_groups' => array(
                 'product_attribute' => array('sylius'),
+                'product_attribute_translation' => array('sylius'),
                 'product_attribute_value' => array('sylius'),
             ),
         );

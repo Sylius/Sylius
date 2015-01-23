@@ -4,7 +4,7 @@ namespace spec\Sylius\Component\Translation\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Prezent\Doctrine\Translatable\TranslatableInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
 class AbstractTranslationSpec extends ObjectBehavior
@@ -16,7 +16,7 @@ class AbstractTranslationSpec extends ObjectBehavior
 
     function it_is_a_translation()
     {
-        $this->shouldImplement('Prezent\Doctrine\Translatable\TranslationInterface');
+        $this->shouldImplement('Sylius\Component\Translation\Model\TranslationInterface');
     }
 
     function its_translatable_is_mutabale(TranslatableInterface $translatable)

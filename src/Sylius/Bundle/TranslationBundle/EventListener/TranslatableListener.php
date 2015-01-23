@@ -11,21 +11,90 @@
 
 namespace Sylius\Bundle\TranslationBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Query;
-use Prezent\Doctrine\Translatable\Mapping\TranslatableMetadata;
-use Prezent\Doctrine\Translatable\Mapping\TranslationMetadata;
-use Prezent\Doctrine\Translatable\TranslatableInterface;
-use Prezent\Doctrine\Translatable\TranslationInterface;
-use Prezent\Doctrine\Translatable\EventListener\TranslatableListener as BaseTranslatableListener;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Prezent Internet B.V. <info@prezent.nl>
  */
-class TranslatableListener extends BaseTranslatableListener
+class TranslatableListener implements EventSubscriber
 {
+    /**
+     * String Locale to use for translations
+     * @var
+     */
+    private $currentLocale = 'en';
+
+    /**
+     * String Locale to use when the current locale is not available
+     * @var
+     */
+    private $fallbackLocale = 'en';
+
+    /**
+     * Array containing translation entities metadata
+     * @var array
+     */
+    private $metadata;
+
+    /**
+     * Constructor
+     *
+     * @param array $metadata
+     * @param string $fallbackLocale
+     *
+     */
+    public function __construct(array $metadata, $fallbackLocale)
+    {
+        $this->metadata = $metadata;
+        $this->fallbackLocale = $fallbackLocale;
+    }
+
+    /**
+     * Set the current locale
+     *
+     * @param string $currentLocale
+     * @return self
+     */
+    public function setCurrentLocale($currentLocale)
+    {
+        $this->currentLocale = $currentLocale;
+        return $this;
+    }
+
+    /**
+     * Get the fallback locale
+     *
+     * @return string
+     */
+    public function getFallbackLocale()
+    {
+        return $this->fallbackLocale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubscribedEvents()
+    {
+        return array(
+            Events::loadClassMetadata,
+            Events::postLoad,
+        );
+    }
+
+    /**
+     * Add mapping to translatable entities
+     *
+     * @param LoadClassMetadataEventArgs $eventArgs
+     * @return void
+     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
@@ -35,11 +104,11 @@ class TranslatableListener extends BaseTranslatableListener
             return;
         }
 
-        if ($reflClass->implementsInterface('Prezent\Doctrine\Translatable\TranslatableInterface')) {
+        if ($reflClass->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
             $this->mapTranslatable($classMetadata);
         }
 
-        if ($reflClass->implementsInterface('Prezent\Doctrine\Translatable\TranslationInterface')) {
+        if ($reflClass->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
             $this->mapTranslation($classMetadata);
         }
     }
@@ -48,27 +117,26 @@ class TranslatableListener extends BaseTranslatableListener
      * Add mapping data to a translatable entity
      *
      * @param ClassMetadata $mapping
-     *
      * @return void
      */
     private function mapTranslatable(ClassMetadata $mapping)
     {
-        $metadata = $this->getTranslatableMetadata($mapping->name);
-
-        // LoadORMMetadataSubscriber moves associations from child entities to parent entities
-        // they have to be removed before the remapping is done
-        if ($mapping->hasAssociation($metadata->translations->name)) {
-            unset($mapping->associationMappings[$metadata->translations->name]);
+        // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
+        // is probably defined in A, so in that case, we just return;
+        if (!isset($this->metadata[$mapping->name])) {
+            return;
         }
 
-        $targetMetadata = $this->getTranslatableMetadata($metadata->targetEntity);
+        $translatableMetadata = $this->metadata[$mapping->name];
+
+        $translationMetadata = $this->metadata[$translatableMetadata['targetEntity']];
 
         $mapping->mapOneToMany(array(
-            'fieldName'     => $metadata->translations->name,
-            'targetEntity'  => $metadata->targetEntity,
-            'mappedBy'      => $targetMetadata->translatable->name,
+            'fieldName'     => $translatableMetadata['field'],
+            'targetEntity'  => $translatableMetadata['targetEntity'],
+            'mappedBy'      => $translationMetadata['field'],
             'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy'       => $targetMetadata->locale->name,
+            'indexBy'       => $translationMetadata['locale'],
             'cascade'       => array('persist', 'merge', 'remove'),
             'orphanRemoval' => true,
         ));
@@ -78,26 +146,25 @@ class TranslatableListener extends BaseTranslatableListener
      * Add mapping data to a translation entity
      *
      * @param ClassMetadata $mapping
-     *
      * @return void
      */
     private function mapTranslation(ClassMetadata $mapping)
     {
-        $metadata = $this->getTranslatableMetadata($mapping->name);
-
-        // LoadORMMetadataSubscriber moves associations from child entities to parent entities
-        // this association has to be removed before it's remapped
-        if ($mapping->hasAssociation($metadata->translatable->name)) {
-            unset($mapping->associationMappings[$metadata->translatable->name]);
+        // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
+        // is probably defined in A, so in that case, we just return;
+        if (!isset($this->metadata[$mapping->name])) {
+            return;
         }
 
+        $translationMetadata = $this->metadata[$mapping->name];
+
         // Map translatable relation
-        $targetMetadata = $this->getTranslatableMetadata($metadata->targetEntity);
+        $translatableMetadata = $this->metadata[$translationMetadata['targetEntity']];
 
         $mapping->mapManyToOne(array(
-            'fieldName'    => $metadata->translatable->name,
-            'targetEntity' => $metadata->targetEntity,
-            'inversedBy'   => $targetMetadata->translations->name,
+            'fieldName'    => $translationMetadata['field'],
+            'targetEntity' => $translationMetadata['targetEntity'],
+            'inversedBy'   => $translatableMetadata['field'],
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',
                 'referencedColumnName' => 'id',
@@ -107,21 +174,21 @@ class TranslatableListener extends BaseTranslatableListener
         ));
 
         // Map locale field
-        if (!$mapping->hasField($metadata->locale->name)) {
+        if (!$mapping->hasField($translationMetadata['locale'])) {
             $mapping->mapField(array(
-                'fieldName' => $metadata->locale->name,
+                'fieldName' => $translationMetadata['locale'],
                 'type' => 'string',
             ));
         }
 
         // Map unique index
         $columns = array(
-            $mapping->getSingleAssociationJoinColumnName($metadata->translatable->name),
-            $metadata->locale->name,
+            $mapping->getSingleAssociationJoinColumnName($translationMetadata['field']),
+                $translationMetadata['locale'],
         );
 
         if (!$this->hasUniqueConstraint($mapping, $columns)) {
-            $constraints                                           = isset($mapping->table['uniqueConstraints']) ? $mapping->table['uniqueConstraints'] : array();
+            $constraints = isset($mapping->table['uniqueConstraints']) ? $mapping->table['uniqueConstraints'] : array();
             $constraints[$mapping->getTableName() . '_uniq_trans'] = array(
                 'columns' => $columns,
             );
@@ -136,8 +203,7 @@ class TranslatableListener extends BaseTranslatableListener
      * Check if an unique constraint has been defined
      *
      * @param ClassMetadata $mapping
-     * @param array         $columns
-     *
+     * @param array $columns
      * @return bool
      */
     private function hasUniqueConstraint(ClassMetadata $mapping, array $columns)
@@ -153,5 +219,35 @@ class TranslatableListener extends BaseTranslatableListener
         }
 
         return false;
+    }
+
+    /**
+     * Load translations
+     *
+     * @param LifecycleEventArgs $args
+     * @return void
+     */
+    public function postLoad(LifecycleEventArgs $args)
+    {
+        $entity = $args->getEntity();
+
+        // Sometimes $entity is a doctrine proxy class, we therefore need to retrieve it's real class
+        $name = $args->getEntityManager()->getClassMetadata(get_class($entity))->getName();
+
+        if (!isset($this->metadata[$name])) {
+            return;
+        }
+
+        $metadata = $this->metadata[$name];
+
+        if (isset($metadata['fallbackLocale'])) {
+            $setter = 'set'. ucfirst($metadata['fallbackLocale']);
+            $entity->$setter($this->fallbackLocale);
+        }
+
+        if (isset($metadata['currentLocale'])) {
+            $setter = 'set'. ucfirst($metadata['currentLocale']);
+            $entity->$setter($this->currentLocale);
+        }
     }
 }

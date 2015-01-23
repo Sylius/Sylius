@@ -137,4 +137,12 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
+    }
 }

@@ -11,11 +11,8 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:prezent="prezent">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Product\Model\AttributeTranslation" table="sylius_product_attribute_translation">
-        <prezent:translatable />
-    </mapped-superclass>
-    
+    <mapped-superclass name="Sylius\Component\Product\Model\AttributeTranslation" table="sylius_product_attribute_translation" />
+
 </doctrine-mapping>

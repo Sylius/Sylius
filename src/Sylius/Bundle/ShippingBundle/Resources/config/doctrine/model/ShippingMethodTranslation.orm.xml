@@ -11,8 +11,7 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:prezent="prezent">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
     <mapped-superclass name="Sylius\Component\Shipping\Model\ShippingMethodTranslation" table="sylius_shipping_method_translation">
         <id name="id" column="id" type="integer">
@@ -20,8 +19,6 @@
         </id>
 
         <field name="name" column="name" type="string" />
-
-        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

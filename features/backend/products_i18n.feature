@@ -12,7 +12,7 @@ Feature: Products
             | en    | yes     |
             | es    | yes     |
 
-    Scenario: Creating a product requires deafult translation fields
+    Scenario: Creating a product requires default translation fields
         Given I am on the product creation page
         And I fill in the following:
             | Price                                      | 29.99                    |

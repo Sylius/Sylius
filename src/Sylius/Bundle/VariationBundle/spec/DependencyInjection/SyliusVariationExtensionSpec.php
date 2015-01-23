@@ -15,14 +15,35 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Prophecy\Argument;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class SyliusVariationExtensionSpec extends ObjectBehavior
 {
     function it_processes_the_configuration_and_registers_services_per_variable(ContainerBuilder $container)
     {
+        $container->hasParameter('sylius.translation.mapping')->willReturn(false);
+        $container->hasParameter('sylius.translation.default.mapping')->willReturn(true);
+        $container->getParameter('sylius.translation.default.mapping')->willReturn(
+            array(
+                array('default_mapping' => array(
+                    'translatable' => array(
+                        'field'          => 'translations',
+                        'currentLocale'  => 'currentLocale',
+                        'fallbackLocale' => 'fallbackLocale'
+                    ),
+                    'translation'  => array(
+                        'field'  => 'translatable',
+                        'locale' => 'locale'
+                    )
+                ))
+            ));
+
+        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
+
         $variantFormType = new Definition('Some\App\Product\Form\ProductVariantType');
         $variantFormType
             ->setArguments(array('Some\App\Product\Entity\ProductVariant', '%sylius.validation_group.product_variant%', 'product'))
@@ -57,6 +78,17 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
         ;
 
         $container->setDefinition('sylius.form.type.product_option', $optionFormType)->shouldBeCalled();
+
+        $optionTranslationFormType = new Definition('Some\App\Product\Form\OptionTranslationType');
+        $optionTranslationFormType
+            ->setArguments(array('Some\App\Product\Entity\OptionTranslation',
+                '%sylius.validation_group.product_option_translation%',
+                'product'
+            ))
+            ->addTag('form.type', array('alias' => 'sylius_product_option_translation'))
+        ;
+
+        $container->setDefinition('sylius.form.type.product_option_translation', $optionTranslationFormType)->shouldBeCalled();
 
         $optionChoiceFormType = new Definition('Sylius\Bundle\VariationBundle\Form\Type\OptionEntityChoiceType');
         $optionChoiceFormType
@@ -102,6 +134,10 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                     'model' => 'Some\App\Product\Entity\Option',
                     'form' => 'Some\App\Product\Form\OptionType',
                 ),
+                'option_translation' => array(
+                    'model' => 'Some\App\Product\Entity\OptionTranslation',
+                    'form' => 'Some\App\Product\Form\OptionTranslationType',
+                ),
                 'option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
                     'form' => 'Some\App\Product\Form\OptionValueType',
@@ -123,6 +159,10 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                         'model' => 'Some\App\Product\Entity\Option',
                         'form' => 'Some\App\Product\Form\OptionType',
                     ),
+                    'option_translation' => array(
+                        'model' => 'Some\App\Product\Entity\OptionTranslation',
+                        'form' => 'Some\App\Product\Form\OptionTranslationType',
+                    ),
                     'option_value' => array(
                         'model' => 'Some\App\Product\Entity\OptionValue',
                         'form' => 'Some\App\Product\Form\OptionValueType',
@@ -141,6 +181,10 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                     'model' => 'Some\App\Product\Entity\Option',
                     'form'  => 'Some\App\Product\Form\OptionType',
                 ),
+                'product_option_translation' => array(
+                    'model' => 'Some\App\Product\Entity\OptionTranslation',
+                    'form'  => 'Some\App\Product\Form\OptionTranslationType',
+                ),
                 'product_option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
                     'form'  => 'Some\App\Product\Form\OptionValueType',
@@ -153,6 +197,7 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
             'validation_groups' => array(
                 'product_variant' => array('sylius'),
                 'product_option' => array('sylius'),
+                'product_option_translation' => array('sylius'),
                 'product_option_value' => array('sylius'),
             ),
         );

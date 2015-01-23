@@ -17,7 +17,15 @@ use Sylius\Component\Attribute\Model\Attribute as BaseAttribute;
  * Product attribute model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Attribute extends BaseAttribute implements AttributeInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
+    }
 }

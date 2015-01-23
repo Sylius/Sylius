@@ -22,6 +22,27 @@ use Symfony\Component\Form\FormBuilderInterface;
 class OptionTranslationType extends AbstractResourceType
 {
     /**
+     * Variable object name.
+     *
+     * @var string
+     */
+    protected $variableName;
+
+    /**
+     * Constructor.
+     *
+     * @param string $dataClass
+     * @param array  $validationGroups
+     * @param string $variableName
+     */
+    public function __construct($dataClass, array $validationGroups, $variableName)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->variableName = $variableName;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -38,6 +59,6 @@ class OptionTranslationType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_option_translation');
+        return sprintf('sylius_%s_option_translation', $this->variableName);
     }
 }

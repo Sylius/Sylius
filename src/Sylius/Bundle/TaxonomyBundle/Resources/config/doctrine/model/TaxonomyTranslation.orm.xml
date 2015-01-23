@@ -14,17 +14,14 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:prezent="prezent">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Taxonomy\Model\TaxonomyTranslation">
+    <mapped-superclass name="Sylius\Component\Taxonomy\Model\TaxonomyTranslation" table="sylius_taxonomy_translation">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
         <field name="name" column="name" type="string" />
-
-        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -192,4 +192,12 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
+    }
 }

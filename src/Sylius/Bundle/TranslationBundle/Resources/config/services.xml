@@ -19,25 +19,12 @@
     <parameters>
         <parameter key="sylius.translatable.listener.class">Sylius\Bundle\TranslationBundle\EventListener\TranslatableListener</parameter>
         <parameter key="sylius.translatable.listener.locale.class">Sylius\Bundle\TranslationBundle\EventListener\LocaleListener</parameter>
-        <parameter key="sylius.translatable.metadata_factory.class">Metadata\MetadataFactory</parameter>
-        <parameter key="sylius.translatable.driver_chain.class">Metadata\Driver\DriverChain</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.translatable.metadata_factory" class="%sylius.translatable.metadata_factory.class%">
-            <argument type="service" id="sylius.translatable.driver_chain"/>
-        </service>
-
-        <service id="sylius.translatable.driver_chain" class="%sylius.translatable.driver_chain.class%"/>
-
         <service id="sylius.translatable.listener" class="%sylius.translatable.listener.class%">
-            <argument type="service" id="sylius.translatable.metadata_factory" />
-            <call method="setCurrentLocale">
-                <argument>%sylius.locale%</argument>
-            </call>
-            <call method="setFallbackLocale">
-                <argument>%sylius.locale%</argument>
-            </call>
+            <argument>%sylius.translation.mapping%</argument>
+            <argument>%sylius.locale%</argument>
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
 

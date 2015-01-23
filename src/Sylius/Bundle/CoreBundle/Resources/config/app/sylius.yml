@@ -63,13 +63,15 @@ sylius_taxonomy:
             model: Sylius\Component\Core\Model\Taxonomy
             repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
-        taxonomy_translation:
-            model: Sylius\Component\Core\Model\TaxonomyTranslation
+            translatable:
+                targetEntity: Sylius\Component\Taxonomy\Model\TaxonomyTranslation
+        taxonomy_translation: ~
         taxon:
             model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
-        taxon_translation:
-            model: Sylius\Component\Core\Model\TaxonTranslation
+            translatable:
+                targetEntity: Sylius\Component\Taxonomy\Model\TaxonTranslation
+        taxon_translation: ~
 
 sylius_product:
     driver: doctrine/orm
@@ -117,8 +119,9 @@ sylius_shipping:
             model: Sylius\Component\Core\Model\ShippingMethod
             repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
-        shipping_method_translation:
-            model: Sylius\Component\Core\Model\ShippingMethodTranslation
+            translatable:
+                targetEntity: Sylius\Component\Shipping\Model\ShippingMethodTranslation
+        shipping_method_translation: ~
 
 sylius_promotion:
     classes:
@@ -229,3 +232,13 @@ sylius_search:
                 display_name: 'Available colors'
                 type: terms
                 value: ~
+
+sylius_translation:
+    default_mapping:
+        translatable:
+            field: translations
+            currentLocale: currentLocale
+            fallbackLocale: fallbackLocale
+        translation:
+            field: translatable
+            locale: locale

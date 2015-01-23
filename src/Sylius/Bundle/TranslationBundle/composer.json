@@ -25,7 +25,6 @@
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/translation":              "0.13.*@dev",
-        "prezent/doctrine-translatable":   "1.0.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.0",

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\TranslationBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\TranslationMetadataFactoryPass;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\TranslationListenerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SyliusTranslationBundle extends AbstractResourceBundle
@@ -22,7 +22,7 @@ class SyliusTranslationBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new TranslationMetadataFactoryPass());
+        $container->addCompilerPass(new TranslationListenerPass());
     }
 
     /**
@@ -33,14 +33,6 @@ class SyliusTranslationBundle extends AbstractResourceBundle
         return array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_translation';
     }
 
     /**
