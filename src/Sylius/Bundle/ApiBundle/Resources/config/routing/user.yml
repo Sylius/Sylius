@@ -12,6 +12,19 @@ sylius_api_user_index:
             sorting:
                 id: desc
 
+sylius_api_user_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.user:createAction
+
+sylius_api_user_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.user:updateAction
+
+
 sylius_api_user_delete:
     path: /{id}
     methods: [DELETE]
