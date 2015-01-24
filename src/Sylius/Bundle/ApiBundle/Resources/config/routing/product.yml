@@ -10,6 +10,7 @@ sylius_api_product_index:
             template: SyliusWebBundle:Backend/Product:index.html.twig
             method: createFilterPaginator
             arguments: [$criteria, $sorting]
+            paginate: $limit
         criteria: {}
         sorting: { createdAt: desc }
 

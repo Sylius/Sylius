@@ -362,8 +362,8 @@ class ResourceController extends FOSRestController
         if (!$resource = $this->resourceResolver->getResource(
             $this->getRepository(),
             'findOneBy',
-            array($this->config->getCriteria($criteria)
-        ))) {
+            array($this->config->getCriteria($criteria)))
+        ) {
             throw new NotFoundHttpException(
                 sprintf(
                     'Requested %s does not exist with these criteria: %s.',
@@ -404,7 +404,7 @@ class ResourceController extends FOSRestController
      */
     protected function getPagerfantaFactory()
     {
-        return new PagerfantaFactory('page', 'paginate');
+        return new PagerfantaFactory('page', 'limit');
     }
 
     protected function handleView(View $view)

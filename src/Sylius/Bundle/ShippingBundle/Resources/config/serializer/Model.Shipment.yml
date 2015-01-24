@@ -9,9 +9,8 @@ Sylius\Component\Shipping\Model\Shipment:
         state:
             expose: true
             type: string
-        state:
+        method:
             expose: true
-            type: string
         createdAt:
             expose: true
             type: DateTime
