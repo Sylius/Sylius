@@ -76,7 +76,7 @@ class CheckoutController extends FOSRestController
 
         $form = $this->createCheckoutAddressingForm($order);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
@@ -101,7 +101,7 @@ class CheckoutController extends FOSRestController
 
         if ($request->isMethod('GET')) {
             $shipments = array();
-            $form->handleRequest($request);
+            $form->submit($request);
 
             foreach ($order->getShipments() as $key => $shipment) {
                 $shipments[] = array(
@@ -113,7 +113,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($shipments));
         }
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
@@ -137,7 +137,7 @@ class CheckoutController extends FOSRestController
         $form = $this->createCheckoutPaymentForm($order);
 
         if ($request->isMethod('GET')) {
-            $form->handleRequest($request);
+            $form->submit($request);
 
             $paymentInfo = array(
                 'payment' => $order->getLastPayment(),
@@ -147,7 +147,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($paymentInfo));
         }
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->submit($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_PRE_COMPLETE, $order);
 
             $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
