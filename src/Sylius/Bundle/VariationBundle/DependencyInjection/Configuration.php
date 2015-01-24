@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->defaultNull()->end()
+                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
             ->end()
         ;
 
