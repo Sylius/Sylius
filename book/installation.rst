@@ -40,7 +40,7 @@ place, run the following commands:
 
 This package contains our main Sylius development repository, with all the components and bundles in the ``src/`` folder.
 
-For the contributing process questions, please refer to the ['Contributing Guide <http://docs.sylius.org/en/latest/contributing/index.html>'_].
+For the contributing process questions, please refer to the `Contributing Guide <http://docs.sylius.org/en/latest/contributing/index.html>`_.
 
 Bootstrap A New Sylius Project
 ------------------------------

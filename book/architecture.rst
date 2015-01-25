@@ -9,7 +9,7 @@ You already know that Sylius is built from components and Symfony2 bundles, whic
 
 All bundles share the conventions for naming things and the same way of data persistence. Sylius, by default, uses Doctrine ORM for managing all entities.
 
-For deeper understanding of how Doctrine works, please refer to the ['excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>'_].
+For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>`_.
 
 Resource Layer
 --------------
