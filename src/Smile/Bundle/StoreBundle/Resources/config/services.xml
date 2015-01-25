@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="smile.model.store.class">Sylius\Component\Store\Model\Store</parameter>
+        <parameter key="smile.scope_aware.metadata_factory.class">Metadata\MetadataFactory</parameter>
+        <parameter key="smile.scope_aware.listener.class">Sylius\Component\Scope\EventListener\ScopeAwareEventListener</parameter>
+        <parameter key="smile.store.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreListener</parameter>
+        <parameter key="smile.store_aware.listener.class">Smile\Bundle\StoreBundle\EventListener\StoreAwareEventListener</parameter>
+        <parameter key="smile.context.store.class">Sylius\Component\Store\Context\StoreContext</parameter>
+    </parameters>
+
+    <services>
+        <service id="smile.context.store" class="%smile.context.store.class%">
+            <argument type="service" id="sylius.storage.session"/>
+        </service>
+
+        <service id="smile.scope_aware.metadata_factory" class="%smile.scope_aware.metadata_factory.class%">
+            <argument type="service" id="smile.store_aware.driver_chain"/>
+        </service>
+
+        <service id="smile.scope_aware.listener" class="%smile.scope_aware.listener.class%">
+            <argument type="service" id="smile.scope_aware.metadata_factory"/>
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+
+        <service id="smile.store_aware.listener" class="%smile.store_aware.listener.class%">
+            <argument type="service" id="smile.context.store"/>
+            <tag name="doctrine.event_subscriber" connection="default"/>
+        </service>
+
+        <service id="smile.store.listener.store" class="%smile.store.listener.class%">
+            <argument type="service" id="smile.context.store"/>
+            <argument type="service" id="sylius.repository.store"/>
+            <!-- High priority to make storeContext available before further doctrine operation -->
+            <tag name="kernel.event_subscriber" priority="99"/>
+        </service>
+    </services>
+
+</container>

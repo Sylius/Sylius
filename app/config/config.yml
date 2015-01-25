@@ -84,3 +84,12 @@ swiftmailer:
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
     spool:     { type: memory }
+
+smile_store:
+    driver: doctrine/orm
+
+sylius_variation:
+    classes:
+        product:
+            variant:
+                model: Sylius\Component\Store\Model\ProductVariant

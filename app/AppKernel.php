@@ -24,8 +24,8 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            // Put here your own bundles!
-        );
+            new Smile\Bundle\StoreBundle\SmileStoreBundle(),
+    );
 
         if (in_array($this->environment, array('dev', 'test'))) {
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
