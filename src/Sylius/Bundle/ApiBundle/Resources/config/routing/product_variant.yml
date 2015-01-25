@@ -8,8 +8,9 @@ sylius_api_product_variant_index:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
             paginate: false
+            filterable: true
             criteria:
-                product: $productId
+                object: $productId
                 master: false
 
 sylius_api_product_variant_create:
