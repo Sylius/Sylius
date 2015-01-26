@@ -59,7 +59,7 @@ class DomainManager
     /**
      * @param object $resource
      *
-     * @return object|null
+     * @return object|ResourceEvent|null
      */
     public function create($resource)
     {
@@ -74,7 +74,7 @@ class DomainManager
                 );
             }
 
-            return null;
+            return $event;
         }
 
         $this->manager->persist($resource);
@@ -93,7 +93,7 @@ class DomainManager
      * @param object $resource
      * @param string $flash
      *
-     * @return object|null
+     * @return object|ResourceEvent|null
      */
     public function update($resource, $flash = 'update')
     {
@@ -108,7 +108,7 @@ class DomainManager
                 );
             }
 
-            return null;
+            return $event;
         }
 
         $this->manager->persist($resource);
@@ -127,7 +127,7 @@ class DomainManager
      * @param object $resource
      * @param int    $movement
      *
-     * @return null|object
+     * @return object|ResourceEvent|null
      */
     public function move($resource, $movement)
     {
@@ -147,7 +147,7 @@ class DomainManager
     /**
      * @param object $resource
      *
-     * @return object|null
+     * @return object|ResourceEvent|null
      */
     public function delete($resource)
     {
@@ -162,7 +162,7 @@ class DomainManager
                 );
             }
 
-            return null;
+            return $event;
         }
 
         $this->manager->remove($resource);

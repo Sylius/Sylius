@@ -16,12 +16,14 @@ use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -176,10 +178,14 @@ class ResourceController extends FOSRestController
             $resource = $this->domainManager->create($resource);
 
             if ($this->config->isApiRequest()) {
+                if ($resource instanceof ResourceEvent) {
+                    throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+                }
+
                 return $this->handleView($this->view($resource, 201));
             }
 
-            if (null === $resource) {
+            if ($resource instanceof ResourceEvent) {
                 return $this->redirectHandler->redirectToIndex();
             }
 
@@ -216,7 +222,15 @@ class ResourceController extends FOSRestController
             $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
+                if ($resource instanceof ResourceEvent) {
+                    throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+                }
+
                 return $this->handleView($this->view($resource, 204));
+            }
+
+            if ($resource instanceof ResourceEvent) {
+                return $this->redirectHandler->redirectToIndex();
             }
 
             return $this->redirectHandler->redirectTo($resource);
@@ -245,9 +259,13 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->domainManager->delete($this->findOr404($request));
+        $resource = $this->domainManager->delete($this->findOr404($request));
 
         if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
             return $this->handleView($this->view());
         }
 
