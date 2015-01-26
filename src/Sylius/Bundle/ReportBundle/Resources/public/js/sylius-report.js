@@ -11,10 +11,12 @@
 
     $(document).ready(function() {
         $('#sylius_report_renderer').handlePrototypes({
-            'prototypePrefix': 'sylius_report_renderer_renderers'
+            'prototypePrefix': 'sylius_report_renderer_renderers',
+            'prototypeElementPrefix': '',
         });
         $('#sylius_report_dataFetcher').handlePrototypes({
-            'prototypePrefix': 'sylius_report_dataFetcher_dataFetchers'
+            'prototypePrefix': 'sylius_report_dataFetcher_dataFetchers',
+            'prototypeElementPrefix': '',
         });
     });
 })( jQuery );
