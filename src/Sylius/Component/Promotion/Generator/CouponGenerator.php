@@ -32,10 +32,21 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     protected $manager;
 
-    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager)
+    /**
+     * @var int
+     */
+    protected $couponLength;
+
+    /**
+     * @param RepositoryInterface $repository
+     * @param EntityManagerInterface $manager
+     * @param int $couponLength
+     */
+    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager, $couponLength = 6)
     {
         $this->repository = $repository;
         $this->manager = $manager;
+        $this->couponLength = $couponLength;
     }
 
     /**
@@ -64,7 +75,7 @@ class CouponGenerator implements CouponGeneratorInterface
 
         do {
             $hash = sha1(microtime(true));
-            $code = strtoupper(substr($hash, mt_rand(0, 33), 6));
+            $code = strtoupper(substr($hash, mt_rand(0, strlen($hash) - $this->couponLength), $this->couponLength));
         } while ($this->isUsedCode($code));
 
         return $code;

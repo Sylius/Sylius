@@ -34,6 +34,7 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->integerNode('coupon_code_length')->defaultValue(6)->cannotBeEmpty()->end()
             ->end()
         ;
 

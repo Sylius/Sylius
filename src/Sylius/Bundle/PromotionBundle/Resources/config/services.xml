@@ -147,6 +147,7 @@
         <service id="sylius.generator.promotion_coupon" class="%sylius.generator.promotion_coupon.class%">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />
+            <argument>%sylius.coupon_code_length%</argument>
         </service>
     </services>
 
