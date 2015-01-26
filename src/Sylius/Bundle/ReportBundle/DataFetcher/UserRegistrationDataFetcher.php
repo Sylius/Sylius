@@ -33,6 +33,10 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
     public function fetch(array $configuration){
         $data = new Data();
 
+        //There is added 23 hours 59 minutes 59 seconds to the end date to provide records for whole end date
+        $configuration['end'] = $configuration['end']->add(new \DateInterval('PT23H59M59S'));
+        //This should be removed after implementation hourly periods
+
         switch ($configuration['period']) {
             case self::PERIOD_DAY:
                 $configuration['interval'] = 'P1D';
@@ -77,7 +81,6 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
         }
 
         $data->setData($fetched);
-
         return $data;
     }
 
@@ -99,11 +102,11 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
     private function fillEmptyRecodrs(array $fetched, array $configuration)
     {
         $date = $configuration['start'];
-        $diff1Day = new \DateInterval($configuration['interval']);
+        $dateInterval = new \DateInterval($configuration['interval']);
         $numberOfPeriods = $configuration['start']->diff($configuration['end']);
-        for ($i=0; $i < $numberOfPeriods->format($configuration['periodFormat']); $i++) {
+        for ($i=0; $i <= $numberOfPeriods->format($configuration['periodFormat']); $i++) {
             $fetched[$date->format($configuration['presentationFormat'])] = 0;
-            $date = $date->add($diff1Day);
+            $date = $date->add($dateInterval);
         }
         return $fetched;
     }
