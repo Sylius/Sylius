@@ -25,6 +25,12 @@ security:
                 target: /administration/login
             anonymous: true
 
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  true
+
         main:
             switch_user: { role: ROLE_SYLIUS_ADMIN }
             context:     user
@@ -59,12 +65,6 @@ security:
             pattern:  ^/oauth/v2/token
             security: false
 
-        api:
-            pattern:    ^/api
-            fos_oauth:  true
-            stateless:  true
-            anonymous:  true
-
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -80,5 +80,7 @@ security:
         - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
 
         - { path: "/account.*", role: ROLE_USER }
+
+        - { path: ^/api, role: ROLE_API }
 
         - { path: "/_partial.*", ip: 127.0.0.1 }
