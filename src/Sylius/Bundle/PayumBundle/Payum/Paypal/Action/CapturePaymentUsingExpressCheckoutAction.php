@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Paypal\Action;
 
-use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -20,19 +19,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 
 class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAction
 {
-    /**
-     * @var GenericTokenFactoryInterface
-     */
-    protected $tokenFactory;
-
-    /**
-     * @param GenericTokenFactoryInterface $tokenFactory
-     */
-    public function __construct(GenericTokenFactoryInterface $tokenFactory)
-    {
-        $this->tokenFactory = $tokenFactory;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -45,10 +31,6 @@ class CapturePaymentUsingExpressCheckoutAction extends AbstractCapturePaymentAct
         $order = $payment->getOrder();
 
         $details = array();
-        $details['PAYMENTREQUEST_0_NOTIFYURL'] = $this->tokenFactory->createNotifyToken(
-            $token->getPaymentName(),
-            $payment
-        )->getTargetUrl();
         $details['PAYMENTREQUEST_0_INVNUM'] = $order->getNumber().'-'.$payment->getId();
         $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
         $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);

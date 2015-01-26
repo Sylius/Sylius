@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Payum\Core\Exception\LogicException;
+use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractCapturePaymentAction;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -59,9 +60,7 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
             return;
         }
 
-        if (!$this->httpRequest) {
-            throw new LogicException('The action can be run only when http request is set.');
-        }
+        $this->payment->execute($httpRequest = new GetHttpRequest());
 
         $order = $payment->getOrder();
 
@@ -69,8 +68,8 @@ class CapturePaymentUsingBe2billFormAction extends AbstractCapturePaymentAction
         $details['AMOUNT'] = $order->getTotal();
         $details['CLIENTEMAIL'] = $order->getEmail();
         $details['HIDECLIENTEMAIL'] = 'yes';
-        $details['CLIENTUSERAGENT'] = $this->httpRequest->headers->get('User-Agent', 'Unknown');
-        $details['CLIENTIP'] = $this->httpRequest->getClientIp();
+        $details['CLIENTUSERAGENT'] = $httpRequest->userAgent ?: 'Unknown';
+        $details['CLIENTIP'] = $httpRequest->clientIp;
         $details['CLIENTIDENT'] = $order->getUser() ? $order->getUser()->getId() : $order->getEmail();
         $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
         $details['ORDERID'] = $payment->getId();

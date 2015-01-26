@@ -56,7 +56,6 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
             new \Sylius\Bundle\PaymentBundle\SyliusPaymentBundle(),
             new \Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
-            new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(),
             new \Sylius\Bundle\ReportBundle\SyliusReportBundle(),
             new \Sylius\Bundle\PromotionBundle\SyliusPromotionBundle(),
             new \Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
@@ -117,6 +116,7 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
+            new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
         );
 
         return $bundles;

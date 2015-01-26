@@ -49,10 +49,8 @@ class GenericCapturePaymentAction extends PaymentAwareAction
             $this->payment->execute($request);
 
             $payment->setDetails($payumOrder->getDetails());
-            $request->setModel($payment);
         } catch (\Exception $e) {
             $payment->setDetails($payumOrder->getDetails());
-            $request->setModel($payment);
 
             throw $e;
         }

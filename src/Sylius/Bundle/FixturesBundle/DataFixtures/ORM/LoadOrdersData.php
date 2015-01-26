@@ -123,7 +123,7 @@ class LoadOrdersData extends DataFixture
         /* @var $payment PaymentInterface */
         $payment = $this->getPaymentRepository()->createNew();
         $payment->setOrder($order);
-        $payment->setMethod($this->getReference('Sylius.PaymentMethod.Stripe'));
+        $payment->setMethod($this->getReference('Sylius.PaymentMethod.StripeCheckout'));
         $payment->setAmount($order->getTotal());
         $payment->setCurrency($order->getCurrency());
         $payment->setState(null === $state ? $this->getPaymentState() : $state);

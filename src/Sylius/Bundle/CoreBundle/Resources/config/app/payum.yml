@@ -7,7 +7,11 @@ payum:
         token_storage:
             Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken: { doctrine: orm }
 
-    contexts:
+    dynamic_payments:
+        config_storage:
+            Sylius\Bundle\PayumBundle\Model\PaymentConfig: { doctrine: orm }
+
+    payments:
         paypal_express_checkout:
             paypal_express_checkout_nvp:
                 username:  %paypal.express_checkout.username%
@@ -15,21 +19,14 @@ payum:
                 signature: %paypal.express_checkout.signature%
                 sandbox:   %paypal.express_checkout.sandbox%
 
-        stripe:
-            omnipay:
-                type: Stripe
-                options:
-                    apiKey:   %stripe.secret_key%
-                    testMode: %stripe.test_mode%
-
-        be2bill:
-            be2bill:
+        be2bill_direct:
+            be2bill_direct:
                 identifier: %be2bill.identifier%
                 password:   %be2bill.password%
                 sandbox:    %be2bill.sandbox%
 
-        be2bill_onsite:
-            be2bill_onsite:
+        be2bill_offsite:
+            be2bill_offsite:
                 identifier: %be2bill.identifier%
                 password:   %be2bill.password%
                 sandbox:    %be2bill.sandbox%
