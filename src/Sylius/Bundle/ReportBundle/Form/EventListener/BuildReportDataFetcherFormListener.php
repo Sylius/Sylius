@@ -10,8 +10,8 @@
 
 namespace Sylius\Bundle\ReportBundle\Form\EventListener;
 
-use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -60,7 +60,7 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
         }
 
         if (!$report instanceof ReportInterface) {
-            throw new UnexpectedTypeException($report, 'Sylius\Component\Pricing\Model\ReportInterface');
+            throw new UnexpectedTypeException($report, 'Sylius\Component\Report\Model\ReportInterface');
         }
 
         $this->addConfigurationFields($event->getForm(), $report->getDataFetcher(), $report->getDataFetcherConfiguration());
