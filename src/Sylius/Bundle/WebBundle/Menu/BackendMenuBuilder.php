@@ -77,6 +77,8 @@ class BackendMenuBuilder extends MenuBuilder
             )
         ));
 
+        $menu->setCurrentUri($this->request->getRequestUri());
+
         $childOptions = array(
             'childrenAttributes' => array('class' => 'nav'),
             'labelAttributes'    => array('class' => 'nav-header')
