@@ -40,13 +40,15 @@ class PromotionType extends AbstractResourceType
             ->add('usageLimit', 'integer', array(
                 'label' => 'sylius.form.promotion.usage_limit',
             ))
-            ->add('startsAt', 'date', array(
+            ->add('startsAt', 'datetime', array(
                 'label' => 'sylius.form.promotion.starts_at',
                 'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
-            ->add('endsAt', 'date', array(
+            ->add('endsAt', 'datetime', array(
                 'label' => 'sylius.form.promotion.ends_at',
                 'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
             ->add('couponBased', 'checkbox', array(
                 'label' => 'sylius.form.promotion.coupon_based',
