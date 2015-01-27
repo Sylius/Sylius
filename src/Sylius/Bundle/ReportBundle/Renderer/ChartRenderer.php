@@ -20,6 +20,7 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ChartRenderer implements RendererInterface
 {

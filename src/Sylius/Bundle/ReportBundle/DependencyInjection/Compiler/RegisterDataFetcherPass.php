@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * Registers all shipping dataFetchers in dataFetcher registry service.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class RegisterDataFetcherPass implements CompilerPassInterface
 {

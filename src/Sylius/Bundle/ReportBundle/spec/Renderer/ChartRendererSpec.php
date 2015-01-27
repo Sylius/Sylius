@@ -21,6 +21,7 @@ use Prophecy\Argument;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ChartRendererSpec extends ObjectBehavior
 {

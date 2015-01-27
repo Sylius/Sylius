@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ReportController extends ResourceController
 {

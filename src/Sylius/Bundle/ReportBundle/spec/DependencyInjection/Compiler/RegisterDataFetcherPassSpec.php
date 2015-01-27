@@ -39,7 +39,7 @@ class RegisterDataFetcherPassSpec extends ObjectBehavior
         $container->findTaggedServiceIds('sylius.report.data_fetcher')->willReturn($dataFetcherServices);
 
         $dataFetcherDefinition->addMethodCall('register', array('test', new Reference('sylius.form.type.data_fetcher.test')))->shouldBeCalled();
-        $container->setParameter('sylius.data_fetchers', array('test' => 'Test data fetcher'))->shouldBeCalled();
+        $container->setParameter('sylius.report.data_fetchers', array('test' => 'Test data fetcher'))->shouldBeCalled();
 
         $this->process($container);
     }
