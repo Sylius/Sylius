@@ -9,15 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Report\DataFetcher;
+namespace spec\Sylius\Component\Report\Renderer;
 
 use PhpSpec\ObjectBehavior;
 
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\Model\ReportInterface;
+use Sylius\Component\Report\Renderer\RendererInterface;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lchrusciel@gmail.com>
  */
 class DelegatingRendererSpec extends ObjectBehavior
 {
+    function let(ServiceRegistryInterface $serviceRegistryInterface)
+    {
+        $this->beConstructedWith($serviceRegistryInterface);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Report\Renderer\DelegatingRenderer');
@@ -28,13 +39,28 @@ class DelegatingRendererSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\Renderer\DelegatingRendererInterface');
     }
 
-    function it_should_throw_exception_if_report_has_no_renderer_defined(ReportInterface $subject)
+    function it_delegates_renderer_to_report(
+        $serviceRegistryInterface,
+        ReportInterface $subject,
+        RendererInterface $renderer,
+        Data $data)
     {
-        $subject->getDataFetcher()->willReturn(null);
+        $subject->getRenderer()->willReturn('default_renderer');
+        $subject->getRendererConfiguration()->willReturn(array());
+
+        $serviceRegistryInterface->get('default_renderer')->willReturn($renderer);
+        $renderer->render($subject, $data)->shouldBeCalled();
+
+        $this->render($subject, $data);
+    }
+
+    function it_should_throw_exception_if_report_has_no_renderer_defined(ReportInterface $subject, Data $data)
+    {
+        $subject->getRenderer()->willReturn(null);
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Cannot render data for ReportInterface instance without renderer defined.'))
-            ->duringRender($subject)
+            ->duringRender($subject, $data)
         ;
     }
 }

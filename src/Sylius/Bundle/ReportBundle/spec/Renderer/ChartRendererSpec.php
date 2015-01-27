@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ReportBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sylius\Component\Report\Model\Report;
+use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
@@ -39,22 +39,24 @@ class ChartRendererSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
     }
 
-    function it_renders_data_with_given_configuration(Report $report, Response $response, Data $reportData, $templating)
+    function it_renders_data_with_given_configuration(ReportInterface $report, Response $response, Data $reportData, $templating)
     {
         $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
-        $data = array(
-            'report' => $report,
-            'data' => $reportData
-        );
+
         $renderData = array(
             'report' => $report,
             'values' => array('month1' => '50', 'month2' => '40'),
             'labels' => array('month1', 'month2')
         );
-        $configuration = array('template' => 'SyliusReportBundle:Chart:default.html.twig');
 
-        $templating->renderResponse($configuration["template"], array('data' => $renderData, 'configuration' => $configuration))->willReturn($response);
-        $this->render($data, $configuration)->shouldReturn($response);
+        $report->getRendererConfiguration()->willReturn(array('template' => 'SyliusReportBundle:Chart:default.html.twig'));
+
+        $templating->renderResponse('SyliusReportBundle:Chart:default.html.twig', array(
+            'data' => $renderData,
+            'configuration' => array('template' => 'SyliusReportBundle:Chart:default.html.twig')
+        ))->willReturn($response);
+
+        $this->render($report,$reportData)->shouldReturn($response);
     }
 
     function it_has_type()

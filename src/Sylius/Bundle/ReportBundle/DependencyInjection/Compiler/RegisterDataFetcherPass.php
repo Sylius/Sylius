@@ -45,6 +45,6 @@ class RegisterDataFetcherPass implements CompilerPassInterface
             $registry->addMethodCall('register', array($name, new Reference($id)));
         }
 
-        $container->setParameter('sylius.data_fetchers', $dataFetchers);
+        $container->setParameter('sylius.report.data_fetchers', $dataFetchers);
     }
 }

@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\Model\ReportInterface;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 
 /**
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
@@ -34,6 +35,20 @@ class DelegatingDataFetcherSpec extends ObjectBehavior
     function it_implements_delegating_data_fetcher_interface()
     {
         $this->shouldImplement('Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface');
+    }
+
+    function it_delegates_data_fetcher_to_report(
+        $serviceRegistryInterface,
+        ReportInterface $subject,
+        DataFetcherInterface $dataFetcher)
+    {
+        $subject->getDataFetcher()->willReturn('default_data_fetcher');
+        $subject->getDataFetcherConfiguration()->willReturn(array());
+
+        $serviceRegistryInterface->get('default_data_fetcher')->willReturn($dataFetcher);
+        $dataFetcher->fetch(array())->shouldBeCalled()->willReturn(array(array('date' => '2014-12-31', 'user_total' => '20')));
+
+        $this->fetch($subject)->shouldReturn(array(array('date' => '2014-12-31', 'user_total' => '20')));
     }
 
     function it_should_complain_if_report_has_no_data_fetcher_defined(ReportInterface $subject)

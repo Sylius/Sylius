@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ReportBundle\Renderer;
 
+use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,19 +30,18 @@ class TableRenderer implements RendererInterface
         $this->templating = $templating;
     }   
 
-    public function render($data, $configuration)
+    public function render(ReportInterface $report, Data $data)
     {   
-        if (null !== $data["data"]->getData()) {
+        if (null !== $data->getData()) {
             $data = array(
-                'report' => $data["report"],
-                'values' => $data["data"]->getData(),
-                'labels' => $data["data"]->getLabels(),
-                'fields' => array_keys($data["data"]->getData())
-            );
-        
-            return $this->templating->renderResponse($configuration["template"], array('data' => $data, 'configuration' => $configuration));
+                'report' => $report,
+                'values' => $data->getData(),
+                'labels' => $data->getLabels(),
+                'fields' => array_keys($data->getData())
+            );   
+            return $this->templating->renderResponse($report->getRendererConfiguration()["template"], array('data' => $data, 'configuration' => $report->getRendererConfiguration()));
         }
-        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $data['report']));;
+        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $report));;
     }
 
     public function getType()

@@ -43,20 +43,22 @@ class TableRendererSpec extends ObjectBehavior
     {
         $reportData->getLabels()->willReturn(array('month', 'user_total'));
         $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
-        $data = array(
-            'report' => $report,
-            'data' => $reportData
-        );
+
         $renderData = array(
             'report' => $report,
             'values' => array('month1' => '50', 'month2' => '40'),
             'labels' => array('month', 'user_total'),
             'fields' => array('month1', 'month2')
         );
-        $configuration = array('template' => 'SyliusReportBundle:Table:default.html.twig');
 
-        $templating->renderResponse($configuration["template"], array('data' => $renderData, 'configuration' => $configuration))->willReturn($response);
-        $this->render($data, $configuration)->shouldReturn($response);
+        $report->getRendererConfiguration()->willReturn(array('template' => 'SyliusReportBundle:Table:default.html.twig'));
+
+        $templating->renderResponse('SyliusReportBundle:Table:default.html.twig', array(
+            'data' => $renderData,
+            'configuration' => array('template' => 'SyliusReportBundle:Table:default.html.twig')
+        ))->willReturn($response);
+
+        $this->render($report, $reportData)->shouldReturn($response);
     }
 
     function it_has_type()

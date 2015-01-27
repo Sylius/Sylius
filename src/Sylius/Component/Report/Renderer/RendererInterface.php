@@ -11,8 +11,11 @@
 
 namespace Sylius\Component\Report\Renderer;
 
+use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\Model\ReportInterface;
+
 interface RendererInterface
 {
-    public function render($data, $configuration);
+    public function render(ReportInterface $report, Data $data);
     public function getType();
 }
