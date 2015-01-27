@@ -14,6 +14,7 @@ Symfony2 Ecommerce Bundles
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
     SyliusPromotionBundle/index
+    SyliusReportBundle/index
     SyliusOmnipayBundle/index
     SyliusTaxonomyBundle/index
     SyliusSettingsBundle/index
