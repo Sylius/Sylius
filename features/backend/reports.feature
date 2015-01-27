@@ -12,9 +12,9 @@ Feature: Reports
         And there is default currency configured
         And there are following users:
             | email          | enabled  | created_at          |
-            | beth@foo.com   | yes      | 2010-01-01 12:00:00 |
-            | martha@foo.com | yes      | 2010-01-01 13:00:00 |
-            | rick@foo.com   | yes      | 2010-01-02 12:00:00 |
+            | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
+            | martha@foo.com | yes      | 2010-01-02 13:00:00 |
+            | rick@foo.com   | yes      | 2010-01-03 12:00:00 |
         And I am logged in as administrator
 
     Scenario: Seeing created reports it the list
