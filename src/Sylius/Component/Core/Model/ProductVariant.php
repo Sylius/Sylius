@@ -345,6 +345,18 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function getImage()
+    {
+        if ($this->images->isEmpty()) {
+            return $this->getProduct()->getImage();
+        }
+
+        return $this->images->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addImage(ProductVariantImageInterface $image)
     {
         if (!$this->hasImage($image)) {
