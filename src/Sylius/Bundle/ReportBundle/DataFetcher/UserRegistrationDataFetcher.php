@@ -5,6 +5,7 @@ namespace Sylius\Bundle\ReportBundle\DataFetcher;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
 * User registration data fetcher
@@ -88,7 +89,7 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
      * {@inheritdoc}
      */
     public function getType(){
-        return 'user_registration';
+        return DefaultDataFetchers::USER_REGISTRATION;
     }
 
     public static function getPeriodChoices()

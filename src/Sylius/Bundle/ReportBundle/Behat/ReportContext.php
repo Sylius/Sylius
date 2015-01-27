@@ -30,10 +30,6 @@ class ReportContext extends DefaultContext
         $manager = $this->getEntityManager();
         $repository = $this->getRepository('report');
 
-        foreach ($repository->findAll() as $report) {
-            $manager->remove($report);
-        }
-
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
