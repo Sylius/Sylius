@@ -83,6 +83,9 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
+            <call method="setRequest">
+                <argument type="service" id="request" on-invalid="null" strict="false" />
+            </call>
         </service>
         <service id="sylius.menu_builder.locale" class="%sylius.menu_builder.locale.class%">
             <argument type="service" id="knp_menu.factory" />
