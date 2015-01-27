@@ -77,6 +77,13 @@ class Order extends Cart implements OrderInterface
     protected $promotionCoupons;
 
     /**
+     * Order checkout state.
+     *
+     * @var string
+     */
+    protected $checkoutState = OrderInterface::CHECKOUT_STATE_CART;
+
+    /**
      * Order payment state.
      *
      * @var string
@@ -164,6 +171,24 @@ class Order extends Cart implements OrderInterface
     public function setBillingAddress(AddressInterface $address)
     {
         $this->billingAddress = $address;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCheckoutState()
+    {
+        return $this->checkoutState;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCheckoutState($checkoutState)
+    {
+        $this->checkoutState = $checkoutState;
 
         return $this;
     }

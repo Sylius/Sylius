@@ -1,0 +1,22 @@
+Sylius\Component\Attribute\Model\AttributeValue:
+    exclusion_policy: ALL
+    xml_root_name: attribute-value
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        value:
+            expose: true
+            type: string
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    virtual_properties:
+        getName:
+            serialized_name: name
+        getPresentation:
+            serialized_name: presentation

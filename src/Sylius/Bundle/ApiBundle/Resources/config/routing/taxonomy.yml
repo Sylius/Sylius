@@ -17,7 +17,7 @@ sylius_api_taxonomy_create:
 
 sylius_api_taxonomy_update:
     path: /{id}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.taxonomy:updateAction
 

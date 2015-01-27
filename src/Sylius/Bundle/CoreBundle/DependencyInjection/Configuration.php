@@ -108,7 +108,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\User')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\CoreBundle\Controller\UserController')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\CoreBundle\Form\Type\UserType')->end()
                             ->end()
                         ->end()

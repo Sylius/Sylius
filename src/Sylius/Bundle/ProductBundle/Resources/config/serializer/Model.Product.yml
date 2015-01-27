@@ -9,6 +9,15 @@ Sylius\Component\Product\Model\Product:
         name:
             expose: true
             type: string
+        description:
+            expose: true
+            type: string
+        options:
+            expose: true
+            max_depth: 1
+        attributes:
+            expose: true
+            max_depth: 1
         createdAt:
             expose: true
             type: DateTime

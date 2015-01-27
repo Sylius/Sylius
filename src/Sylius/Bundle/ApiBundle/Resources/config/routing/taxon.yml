@@ -1,17 +1,32 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-#
+
+sylius_api_taxon_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:getAction
+        _sylius:
+            filterable: true
+            criteria:
+                taxonomy: $taxonomyId
+                id: $id
+
 sylius_api_taxon_create:
     path: /
     methods: [POST]
     defaults:
         _controller: sylius.controller.taxon:createAction
+        _sylius:
+            form: sylius_api_taxon
 
 sylius_api_taxon_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            form: sylius_api_taxon
 
 sylius_api_taxon_delete:
     path: /{id}

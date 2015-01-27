@@ -3,6 +3,8 @@ Sylius\Component\Core\Model\Shipment:
     xml_root_name: shipment
     relations:
         - rel: order
+          exclusion:
+                exclude_if: expr(!object.getOrder())
           href:
                 route: sylius_api_order_show
                 parameters:

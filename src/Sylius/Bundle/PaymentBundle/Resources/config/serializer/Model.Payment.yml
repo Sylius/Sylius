@@ -15,6 +15,8 @@ Sylius\Component\Payment\Model\Payment:
         state:
             expose: true
             type: string
+        method:
+            expose: true
         createdAt:
             expose: true
             type: DateTime
@@ -23,11 +25,15 @@ Sylius\Component\Payment\Model\Payment:
             type: DateTime
     relations:
         - rel: self
+          exclusion:
+                exclude_if: expr(!object.getId())
           href:
                 route: sylius_api_payment_show
                 parameters:
                     id: expr(object.getId())
         - rel: payment-method
+          exclusion:
+                exclude_if: expr(!object.getMethod())
           href:
                 route: sylius_api_payment_method_show
                 parameters:

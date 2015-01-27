@@ -33,9 +33,21 @@ sylius_api_order:
     resource: @SyliusApiBundle/Resources/config/routing/order.yml
     prefix: /orders
 
+sylius_api_order_item:
+    resource: @SyliusApiBundle/Resources/config/routing/order_item.yml
+    prefix: /orders/{orderId}/items
+
+sylius_api_checkout:
+    resource: @SyliusApiBundle/Resources/config/routing/checkout.yml
+    prefix: /checkouts
+
 sylius_api_promotion:
     resource: @SyliusApiBundle/Resources/config/routing/promotion.yml
     prefix: /promotions
+
+sylius_api_promotion_coupon:
+    resource: @SyliusApiBundle/Resources/config/routing/promotion_coupon.yml
+    prefix: /promotions/{promotionId}/coupons
 
 sylius_api_tax_category:
     resource: @SyliusApiBundle/Resources/config/routing/tax_category.yml
@@ -80,3 +92,15 @@ sylius_api_zone:
 sylius_api_user:
     resource: @SyliusApiBundle/Resources/config/routing/user.yml
     prefix: /users
+
+sylius_api_password_resetting_request:
+    resource: @SyliusApiBundle/Resources/config/routing/password_resetting_request.yml
+    prefix: /password-resetting-requests
+
+sylius_api_taxon_index:
+    path: /taxons
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            sortable: true

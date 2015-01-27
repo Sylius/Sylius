@@ -17,11 +17,18 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.repository.group.class">Sylius\Bundle\CoreBundle\Doctrine\ORM\GroupRepository</parameter>
+        <parameter key="sylius.repository.user.class">Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository</parameter>
         <parameter key="sylius.model.variant_image.class">Sylius\Component\Core\Model\VariantImage</parameter>
+        <parameter key="sylius.form.type.user_choice.class">Sylius\Bundle\CoreBundle\Form\Type\UserEntityType</parameter>
         <parameter key="sylius.form.type.group_choice.class">Sylius\Bundle\CoreBundle\Form\Type\GroupEntityType</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.form.type.user_choice" class="%sylius.form.type.user_choice.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_user_choice" />
+        </service>
         <service id="sylius.form.type.group_choice" class="%sylius.form.type.group_choice.class%">
             <argument>%sylius.model.group.class%</argument>
             <tag name="form.type" alias="sylius_group_choice" />

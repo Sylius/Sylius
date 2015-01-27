@@ -90,7 +90,7 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
-            - { path: '^/', stop: true }
+            - { path: '^/' }
 
 hwi_oauth:
     firewall_name: main
@@ -119,21 +119,48 @@ jms_serializer:
             sylius-addressing:
                 namespace_prefix: "Sylius\\Component\\Addressing"
                 path: "@SyliusAddressingBundle/Resources/config/serializer"
+            sylius-attribute:
+                namespace_prefix: "Sylius\\Component\\Attribute"
+                path: "@SyliusAttributeBundle/Resources/config/serializer"
+            sylius-contact:
+                namespace_prefix: "Sylius\\Component\\Contact"
+                path: "@SyliusContactBundle/Resources/config/serializer"
             sylius-core:
                 namespace_prefix: "Sylius\\Component\\Core"
                 path: "@SyliusCoreBundle/Resources/config/serializer"
+            sylius-currency:
+                namespace_prefix: "Sylius\\Component\\Currency"
+                path: "@SyliusCurrencyBundle/Resources/config/serializer"
             sylius-inventory:
                 namespace_prefix: "Sylius\\Component\\Inventory"
                 path: "@SyliusInventoryBundle/Resources/config/serializer"
+            sylius-locale:
+                namespace_prefix: "Sylius\\Component\\Locale"
+                path: "@SyliusLocaleBundle/Resources/config/serializer"
+            sylius-order:
+                namespace_prefix: "Sylius\\Component\\Order"
+                path: "@SyliusOrderBundle/Resources/config/serializer"
+            sylius-payment:
+                namespace_prefix: "Sylius\\Component\\Payment"
+                path: "@SyliusPaymentBundle/Resources/config/serializer"
             sylius-product:
                 namespace_prefix: "Sylius\\Component\\Product"
                 path: "@SyliusProductBundle/Resources/config/serializer"
+            sylius-promotion:
+                namespace_prefix: "Sylius\\Component\\Promotion"
+                path: "@SyliusPromotionBundle/Resources/config/serializer"
             sylius-shipping:
                 namespace_prefix: "Sylius\\Component\\Shipping"
                 path: "@SyliusShippingBundle/Resources/config/serializer"
             sylius-taxation:
                 namespace_prefix: "Sylius\\Component\\Taxation"
                 path: "@SyliusTaxationBundle/Resources/config/serializer"
+            sylius-taxonomy:
+                namespace_prefix: "Sylius\\Component\\Taxonomy"
+                path: "@SyliusTaxonomyBundle/Resources/config/serializer"
+            sylius-variation:
+                namespace_prefix: "Sylius\\Component\\Variation"
+                path: "@SyliusVariationBundle/Resources/config/serializer"
 
 a2lix_translation_form:
     locale_provider: sylius.locale_provider

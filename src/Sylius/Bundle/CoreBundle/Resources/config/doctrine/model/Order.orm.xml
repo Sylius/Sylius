@@ -10,6 +10,8 @@
         <field name="currency" length="3">
             <gedmo:versioned />
         </field>
+
+        <field type="string" name="checkoutState" column="checkout_state" />
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
 

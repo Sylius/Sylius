@@ -112,7 +112,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Order\Model\OrderItem')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\OrderBundle\Controller\OrderItemController')->end()
                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\OrderBundle\Form\Type\OrderItemType')->end()
                             ->end()

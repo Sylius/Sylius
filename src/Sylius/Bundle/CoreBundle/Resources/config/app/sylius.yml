@@ -176,24 +176,6 @@ sylius_sequence:
     generators:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
 
-sylius_resource:
-    resources:
-        sylius.user:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\User
-                controller: Sylius\Bundle\CoreBundle\Controller\UserController
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
-        sylius.user_oauth:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\UserOAuth
-        sylius.group:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\Group
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\GroupRepository
-
 sylius_pricing:
     forms:
         - sylius_product_variant
