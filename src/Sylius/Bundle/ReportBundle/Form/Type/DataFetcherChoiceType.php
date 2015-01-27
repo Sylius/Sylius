@@ -35,7 +35,7 @@ class DataFetcherChoiceType extends AbstractType
     {
         $this->dataFetchers = $dataFetchers;
     }
-    
+
     /**
     * {@inheritdoc}
     */
@@ -43,11 +43,11 @@ class DataFetcherChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-            'choices' => $this->dataFetchers
+            'choices' => $this->dataFetchers,
             ))
         ;
     }
-    
+
     /**
     * {@inheritdoc}
     */

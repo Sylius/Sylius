@@ -33,7 +33,7 @@ class RegisterRenderersPass implements CompilerPassInterface
             if (!isset($attributes[0]['renderer']) || !isset($attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged renderers needs to have `renderer` and `label` attributes.');
             }
-            
+
             $name = $attributes[0]['renderer'];
             $renderers[$name] = $attributes[0]['label'];
             $registry->addMethodCall('register', array($name, new Reference($id)));

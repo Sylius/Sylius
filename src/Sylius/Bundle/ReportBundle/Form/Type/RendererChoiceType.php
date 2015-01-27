@@ -45,7 +45,7 @@ class RendererChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->renderers
+                'choices' => $this->renderers,
             ))
         ;
     }

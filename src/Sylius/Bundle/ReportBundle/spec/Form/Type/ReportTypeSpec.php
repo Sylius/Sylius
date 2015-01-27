@@ -27,30 +27,29 @@ use Sylius\Component\Report\Renderer\RendererInterface;
  */
 class ReportTypeSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
+    public function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
         $this->beConstructedWith('Sylius\Component\Report\Model\Report', array('sylius'), $rendererRegistry, $dataFetcherRegistry);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\ReportType');
     }
 
-    function it_should_be_abstract_resource_type_object()
+    public function it_should_be_abstract_resource_type_object()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');   
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
     }
 
-    function it_build_form_with_proper_fields(
+    public function it_build_form_with_proper_fields(
         FormBuilderInterface $builder,
         FormFactoryInterface $factory,
         $dataFetcherRegistry,
         $rendererRegistry,
         RendererInterface $renderer,
         DataFetcherInterface $dataFetcher
-    )
-    {
+    ) {
         $builder->getFormFactory()->willReturn($factory);
 
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
@@ -73,28 +72,27 @@ class ReportTypeSpec extends ObjectBehavior
 
         $prototypes = array(
             'renderers' => array(
-                'test_renderer' => Argument::type('Symfony\Component\Form\Form')
+                'test_renderer' => Argument::type('Symfony\Component\Form\Form'),
                 ),
             'dataFetchers' => array(
-                'test_data_fetcher' => Argument::type('Symfony\Component\Form\Form')
-                )
+                'test_data_fetcher' => Argument::type('Symfony\Component\Form\Form'),
+                ),
             );
         $builder->setAttribute('prototypes', $prototypes)->shouldBeCalled();
 
         $this->buildForm($builder, array());
     }
 
-    function it_builds_view(
+    public function it_builds_view(
         FormConfigInterface $config,
         FormView $view,
         FormInterface $form,
         FormInterface $formTable,
         FormInterface $formUserRegistration
-    )
-    {
+    ) {
         $prototypes = array(
             'dataFetchers' => array('user_registration' => $formUserRegistration),
-            'renderers' => array('table' => $formTable)
+            'renderers' => array('table' => $formTable),
         );
         $config->getAttribute('prototypes')->willReturn($prototypes);
         $form->getConfig()->willReturn($config);
@@ -105,7 +103,7 @@ class ReportTypeSpec extends ObjectBehavior
         $this->buildView($view, $form, array());
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_report');
     }

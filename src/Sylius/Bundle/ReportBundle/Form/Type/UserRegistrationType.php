@@ -21,7 +21,6 @@ use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
  */
 class UserRegistrationType extends AbstractType
 {
-
     /**
     * {@inheritdoc}
     */
@@ -29,18 +28,18 @@ class UserRegistrationType extends AbstractType
     {
         $builder
             ->add('start', 'date', array(
-                'label' => 'sylius.form.report.user_registration.start'
+                'label' => 'sylius.form.report.user_registration.start',
             ))
             ->add('end', 'date', array(
-                'label' => 'sylius.form.report.user_registration.end'
+                'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
                 'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
                 'multiple' => false,
-                'label' => 'sylius.form.report.user_registration.period'
+                'label' => 'sylius.form.report.user_registration.period',
             ))
             ->add('empty_records', 'checkbox', array(
-                'label' => 'sylius.form.report.user_registration.empty_records'
+                'label' => 'sylius.form.report.user_registration.empty_records',
             ))
             ;
     }

@@ -17,7 +17,6 @@ use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
-use Prophecy\Argument;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -25,42 +24,42 @@ use Prophecy\Argument;
  */
 class ChartRendererSpec extends ObjectBehavior
 {
-    function let(EngineInterface $templating)
+    public function let(EngineInterface $templating)
     {
         $this->beConstructedWith($templating);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Renderer\ChartRenderer');
     }
 
-    function it_should_implement_renderer_interface()
+    public function it_should_implement_renderer_interface()
     {
         $this->shouldImplement('Sylius\Component\Report\Renderer\RendererInterface');
     }
 
-    function it_renders_data_with_given_configuration(ReportInterface $report, Response $response, Data $reportData, $templating)
+    public function it_renders_data_with_given_configuration(ReportInterface $report, Response $response, Data $reportData, $templating)
     {
         $reportData->getData()->willReturn(array('month1' => '50', 'month2' => '40'));
 
         $renderData = array(
             'report' => $report,
             'values' => array('month1' => '50', 'month2' => '40'),
-            'labels' => array('month1', 'month2')
+            'labels' => array('month1', 'month2'),
         );
 
         $report->getRendererConfiguration()->willReturn(array('template' => 'SyliusReportBundle:Chart:default.html.twig'));
 
         $templating->renderResponse('SyliusReportBundle:Chart:default.html.twig', array(
             'data' => $renderData,
-            'configuration' => array('template' => 'SyliusReportBundle:Chart:default.html.twig')
+            'configuration' => array('template' => 'SyliusReportBundle:Chart:default.html.twig'),
         ))->willReturn($response);
 
-        $this->render($report,$reportData)->shouldReturn($response);
+        $this->render($report, $reportData)->shouldReturn($response);
     }
 
-    function it_has_type()
+    public function it_has_type()
     {
         $this->getType()->shouldReturn(DefaultRenderers::CHART);
     }

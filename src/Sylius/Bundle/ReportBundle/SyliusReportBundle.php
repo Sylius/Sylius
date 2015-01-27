@@ -53,7 +53,7 @@ class SyliusReportBundle extends AbstractTranslationBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Report\Model\ReportInterface' => 'sylius.model.report.class'
+            'Sylius\Component\Report\Model\ReportInterface' => 'sylius.model.report.class',
         );
     }
 

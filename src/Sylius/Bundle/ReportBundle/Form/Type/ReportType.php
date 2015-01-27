@@ -15,14 +15,13 @@ use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportDataFetcherFormList
 use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 /**
  * Report form type.
- * 
+ *
  * @author Łukasz Chruściel <lchrusciel@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -51,7 +50,7 @@ class ReportType extends AbstractResourceType
     public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
-        
+
         $this->rendererRegistry = $rendererRegistry;
         $this->dataFetcherRegistry = $dataFetcherRegistry;
     }
@@ -66,7 +65,7 @@ class ReportType extends AbstractResourceType
             ->addEventSubscriber(new BuildReportRendererFormListener($this->rendererRegistry, $builder->getFormFactory()))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.report.name',
-                'required' => true
+                'required' => true,
             ))
             ->add('description', 'textarea', array(
                 'label'    => 'sylius.form.report.description',
@@ -91,17 +90,17 @@ class ReportType extends AbstractResourceType
             if (!$formType) {
                 continue;
             }
-            
+
             try {
                 $prototypes['renderers'][$type] = $builder->create('rendererConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }
         }
-     
+
         foreach ($this->dataFetcherRegistry->all() as $type => $dataFetcher) {
             $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
-            
+
             if (!$formType) {
                 continue;
             }

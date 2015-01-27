@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ReportBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
 use Symfony\Component\Form\FormBuilder;
 
 /**
@@ -21,22 +20,22 @@ use Symfony\Component\Form\FormBuilder;
  */
 class UserRegistrationTypeSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\UserRegistrationType');
     }
 
-    function it_extends_abstract_type()
+    public function it_extends_abstract_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_data_fetcher_user_registration');
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder)
+    public function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->add('start', 'date', Argument::type('array'))
@@ -54,7 +53,7 @@ class UserRegistrationTypeSpec extends ObjectBehavior
             ->add('empty_records', 'checkbox', Argument::type('array'))
             ->willReturn($builder)
         ;
-        
+
         $this->buildForm($builder, array());
     }
 }

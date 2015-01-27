@@ -10,10 +10,10 @@
  */
 
 namespace spec\Sylius\Bundle\ReportBundle\DependencyInjection\Compiler;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -21,20 +21,20 @@ use PhpSpec\ObjectBehavior;
  */
 class RegisterDataFetcherPassSpec extends ObjectBehavior
 {
-    function it_should_implement_compiler_pass_interface()
+    public function it_should_implement_compiler_pass_interface()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_processes_with_given_container(ContainerBuilder $container, Definition $dataFetcherDefinition)
+    public function it_processes_with_given_container(ContainerBuilder $container, Definition $dataFetcherDefinition)
     {
         $container->hasDefinition('sylius.registry.report.data_fetcher')->willReturn(true);
         $container->getDefinition('sylius.registry.report.data_fetcher')->willReturn($dataFetcherDefinition);
 
         $dataFetcherServices = array(
             'sylius.form.type.data_fetcher.test' => array(
-                array('fetcher' => 'test', 'label' => 'Test data fetcher')
-            )
+                array('fetcher' => 'test', 'label' => 'Test data fetcher'),
+            ),
         );
         $container->findTaggedServiceIds('sylius.report.data_fetcher')->willReturn($dataFetcherServices);
 
@@ -44,21 +44,21 @@ class RegisterDataFetcherPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
+    public function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
     {
         $container->hasDefinition('sylius.registry.report.data_fetcher')->willReturn(false);
         $container->getDefinition('sylius.registry.report.data_fetcher')->shouldNotBeCalled();
     }
 
-    function it_throws_exception_if_any_data_fetcher_has_improper_attributes(ContainerBuilder $container, Definition $dataFetcherDefinition)
+    public function it_throws_exception_if_any_data_fetcher_has_improper_attributes(ContainerBuilder $container, Definition $dataFetcherDefinition)
     {
         $container->hasDefinition('sylius.registry.report.data_fetcher')->willReturn(true);
         $container->getDefinition('sylius.registry.report.data_fetcher')->willReturn($dataFetcherDefinition);
 
         $dataFetcherServices = array(
             'sylius.form.type.data_fetcher.test' => array(
-                array('data_fetcher' => 'test')
-            )
+                array('data_fetcher' => 'test'),
+            ),
         );
         $container->findTaggedServiceIds('sylius.report.data_fetcher')->willReturn($dataFetcherServices);
         $this->shouldThrow(new \InvalidArgumentException('Tagged report data fetchers needs to have `fetcher` and `label` attributes.'));

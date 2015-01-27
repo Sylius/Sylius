@@ -47,7 +47,7 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT => 'preBind'
+            FormEvents::PRE_SUBMIT => 'preBind',
         );
     }
 
@@ -76,7 +76,7 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
 
         $this->addConfigurationFields($event->getForm(), $data['dataFetcher']);
     }
-    
+
     /**
     * Add configuration fields to the form.
     *
@@ -88,11 +88,11 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
     {
         $dataFetcher = $this->dataFecherRegistry->get($dataFetcherType);
         $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
-     
+
         try {
             $configurationField = $this->factory->createNamed('dataFetcherConfiguration', $formType, $config, array('auto_initialize' => false));
         } catch (\InvalidArgumentException $e) {
-           return;
+            return;
         }
 
         $form->add($configurationField);

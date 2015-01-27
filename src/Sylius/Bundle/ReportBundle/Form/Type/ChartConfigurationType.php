@@ -35,7 +35,7 @@ class ChartConfigurationType extends AbstractType
                     'radar' => 'Radar chart',
                     'polar' => 'Polar chart',
                     'pie' => 'Pie chart',
-                    'doughnut' => 'Doughnut chart'
+                    'doughnut' => 'Doughnut chart',
                 ),
             ))
             ->add('template', 'choice', array(

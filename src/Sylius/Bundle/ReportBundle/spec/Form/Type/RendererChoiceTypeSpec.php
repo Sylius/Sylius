@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ReportBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -20,31 +19,31 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RendererChoiceTypeSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $choices = array(
             'table' => 'Table renderer',
-            'chart' => 'Chart renderer'
+            'chart' => 'Chart renderer',
         );
 
         $this->beConstructedWith($choices);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\RendererChoiceType');
     }
 
-    function it_should_be_abstract_type_object()
+    public function it_should_be_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    function it_sets_default_options(OptionsResolverInterface $resolver)
+    public function it_sets_default_options(OptionsResolverInterface $resolver)
     {
         $choices = array(
             'table' => 'Table renderer',
-            'chart' => 'Chart renderer'
+            'chart' => 'Chart renderer',
         );
 
         $resolver->setDefaults(array('choices' => $choices))->shouldBeCalled();
@@ -52,12 +51,12 @@ class RendererChoiceTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    function it_has_parent()
+    public function it_has_parent()
     {
         $this->getParent()->shouldReturn('choice');
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_renderer_choice');
     }

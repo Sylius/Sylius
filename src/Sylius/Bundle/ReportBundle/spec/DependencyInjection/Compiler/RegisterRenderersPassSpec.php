@@ -10,10 +10,10 @@
  */
 
 namespace spec\Sylius\Bundle\ReportBundle\DependencyInjection\Compiler;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -21,20 +21,20 @@ use PhpSpec\ObjectBehavior;
  */
 class RegisterRenderersPassSpec extends ObjectBehavior
 {
-    function it_should_implement_compiler_pass_interface()
+    public function it_should_implement_compiler_pass_interface()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    function it_processes_with_given_container(ContainerBuilder $container, Definition $rendererDefinition)
+    public function it_processes_with_given_container(ContainerBuilder $container, Definition $rendererDefinition)
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(true);
         $container->getDefinition('sylius.registry.report.renderer')->willReturn($rendererDefinition);
 
         $rendererServices = array(
             'sylius.form.type.renderer.test' => array(
-                array('renderer' => 'test', 'label' => 'Test renderer')
-            )
+                array('renderer' => 'test', 'label' => 'Test renderer'),
+            ),
         );
         $container->findTaggedServiceIds('sylius.report.renderer')->willReturn($rendererServices);
 
@@ -44,21 +44,21 @@ class RegisterRenderersPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
+    public function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(false);
         $container->getDefinition('sylius.registry.report.renderer')->shouldNotBeCalled();
     }
 
-    function it_throws_exception_if_any_renderer_has_improper_attributes(ContainerBuilder $container, Definition $rendererDefinition)
+    public function it_throws_exception_if_any_renderer_has_improper_attributes(ContainerBuilder $container, Definition $rendererDefinition)
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(true);
         $container->getDefinition('sylius.registry.report.renderer')->willReturn($rendererDefinition);
 
         $rendererServices = array(
             'sylius.form.type.renderer.test' => array(
-                array('renderer' => 'test')
-            )
+                array('renderer' => 'test'),
+            ),
         );
         $container->findTaggedServiceIds('sylius.report.renderer')->willReturn($rendererServices);
         $this->shouldThrow(new \InvalidArgumentException('Tagged renderers needs to have `renderer` and `label` attributes.'));

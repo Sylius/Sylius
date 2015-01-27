@@ -15,7 +15,6 @@ use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
 
 /**
@@ -27,9 +26,9 @@ class ChartRenderer implements RendererInterface
     private $templating;
 
     public function __construct(EngineInterface $templating)
-    {  
+    {
         $this->templating = $templating;
-    }   
+    }
 
     public function render(ReportInterface $report, Data $data)
     {
@@ -37,12 +36,13 @@ class ChartRenderer implements RendererInterface
             $rendererData = array(
                 'report' => $report,
                 'values' => $data->getData(),
-                'labels' => array_keys($data->getData())
+                'labels' => array_keys($data->getData()),
             );
 
             return $this->templating->renderResponse($report->getRendererConfiguration()["template"], array('data' => $rendererData, 'configuration' => $report->getRendererConfiguration()));
         }
-        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $report));;
+
+        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $report));
     }
 
     public function getType()

@@ -9,7 +9,7 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
 * User registration data fetcher
-* 
+*
 * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
 */
 class UserRegistrationDataFetcher implements DataFetcherInterface
@@ -31,7 +31,8 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
     /**
      * {@inheritdoc}
      */
-    public function fetch(array $configuration){
+    public function fetch(array $configuration)
+    {
         $data = new Data();
 
         //There is added 23 hours 59 minutes 59 seconds to the end date to provide records for whole end date
@@ -43,7 +44,7 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
                 $this->setExtraConfiguration($configuration, 'P1D', '%a', 'Y-m-d', array('date'));
                 break;
             case self::PERIOD_MONTH:
-                $this->setExtraConfiguration($configuration, 'P1M', '%m', 'F Y', array('month','year'));
+                $this->setExtraConfiguration($configuration, 'P1M', '%m', 'F Y', array('month', 'year'));
                 break;
             case self::PERIOD_YEAR:
                 $this->setExtraConfiguration($configuration, 'P1Y', '%y', 'Y', array('year'));
@@ -65,21 +66,23 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
         $fetched = array();
 
         if ($configuration['empty_records']) {
-            $fetched = $this->fillEmptyRecodrs($fetched,$configuration);
+            $fetched = $this->fillEmptyRecodrs($fetched, $configuration);
         }
         foreach ($rawData as $row) {
             $date = new \DateTime($row[$labels[0]]);
-            $fetched[$date->format($configuration['presentationFormat'])] = $row[$labels[1]]; 
+            $fetched[$date->format($configuration['presentationFormat'])] = $row[$labels[1]];
         }
 
         $data->setData($fetched);
+
         return $data;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getType(){
+    public function getType()
+    {
         return DefaultDataFetchers::USER_REGISTRATION;
     }
 
@@ -88,7 +91,7 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
         return array(
             self::PERIOD_DAY    => 'Daily',
             self::PERIOD_MONTH  => 'Monthly',
-            self::PERIOD_YEAR   => 'Yearly');
+            self::PERIOD_YEAR   => 'Yearly', );
     }
 
     private function setExtraConfiguration(array &$configuration, $interval, $periodFormat, $presentationFormat, $groupBy)
@@ -104,10 +107,11 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
         $date = $configuration['start'];
         $dateInterval = new \DateInterval($configuration['interval']);
         $numberOfPeriods = $configuration['start']->diff($configuration['end']);
-        for ($i=0; $i <= $numberOfPeriods->format($configuration['periodFormat']); $i++) {
+        for ($i = 0; $i <= $numberOfPeriods->format($configuration['periodFormat']); $i++) {
             $fetched[$date->format($configuration['presentationFormat'])] = 0;
             $date = $date->add($dateInterval);
         }
+
         return $fetched;
     }
 }
