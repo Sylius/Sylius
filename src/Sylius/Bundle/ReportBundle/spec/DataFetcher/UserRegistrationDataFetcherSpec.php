@@ -16,6 +16,7 @@ use Prophecy\Argument;
 
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -39,7 +40,7 @@ class UserRegistrationDataFetcherSpec extends ObjectBehavior
 
     function it_has_type()
     {
-        $this->getType()->shouldReturn('user_registration');
+        $this->getType()->shouldReturn(DefaultDataFetchers::USER_REGISTRATION);
     }
 
     function it_fetches_data_by_day($userRepository)

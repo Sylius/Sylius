@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sylius\Component\Report\Model\Report;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\Renderer\DefaultRenderers;
 use Prophecy\Argument;
 
 /**
@@ -58,6 +59,6 @@ class ChartRendererSpec extends ObjectBehavior
 
     function it_has_type()
     {
-        $this->getType()->shouldReturn('chart');
+        $this->getType()->shouldReturn(DefaultRenderers::CHART);
     }
 }
