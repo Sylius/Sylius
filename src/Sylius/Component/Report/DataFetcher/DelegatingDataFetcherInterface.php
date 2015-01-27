@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
 namespace Sylius\Component\Report\DataFetcher;
 
 use Sylius\Component\Report\Model\ReportInterface;
@@ -19,5 +29,5 @@ interface DelegatingDataFetcherInterface
     *
     * @return array
     */
-    public function fetch(ReportInterface $subject, array $context = array());
+    public function fetch(ReportInterface $subject);
 }

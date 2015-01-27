@@ -40,22 +40,13 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
 
         switch ($configuration['period']) {
             case self::PERIOD_DAY:
-                $configuration['interval'] = 'P1D';
-                $configuration['periodFormat'] = '%a';
-                $configuration['presentationFormat'] = 'Y-m-d';
-                $configuration['groupBy'] = array('date');
+                $this->setExtraConfiguration($configuration, 'P1D', '%a', 'Y-m-d', array('date'));
                 break;
             case self::PERIOD_MONTH:
-                $configuration['interval'] = 'P1M';
-                $configuration['periodFormat'] = '%m';
-                $configuration['presentationFormat'] = 'F Y';
-                $configuration['groupBy'] = array('month','year');
+                $this->setExtraConfiguration($configuration, 'P1M', '%m', 'F Y', array('month','year'));
                 break;
             case self::PERIOD_YEAR:
-                $configuration['interval'] = 'P1Y';
-                $configuration['periodFormat'] = '%y';
-                $configuration['presentationFormat'] = 'Y';
-                $configuration['groupBy'] = array('year');
+                $this->setExtraConfiguration($configuration, 'P1Y', '%y', 'Y', array('year'));
                 break;
             default:
                 throw new \InvalidArgumentException('Wrong data fetcher period');
@@ -98,6 +89,14 @@ class UserRegistrationDataFetcher implements DataFetcherInterface
             self::PERIOD_DAY    => 'Daily',
             self::PERIOD_MONTH  => 'Monthly',
             self::PERIOD_YEAR   => 'Yearly');
+    }
+
+    private function setExtraConfiguration(array &$configuration, $interval, $periodFormat, $presentationFormat, $groupBy)
+    {
+        $configuration['interval'] = $interval;
+        $configuration['periodFormat'] = $periodFormat;
+        $configuration['presentationFormat'] = $presentationFormat;
+        $configuration['groupBy'] = $groupBy;
     }
 
     private function fillEmptyRecodrs(array $fetched, array $configuration)
