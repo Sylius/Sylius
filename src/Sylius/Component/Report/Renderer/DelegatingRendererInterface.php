@@ -17,7 +17,7 @@ use Sylius\Component\Report\DataFetcher\Data;
 /**
  * @author Mateusz Zalewski <zaleslaw@.gmail.com>
  */
-interface DelegatingRendererInterface 
+interface DelegatingRendererInterface
 {
     /**
      *

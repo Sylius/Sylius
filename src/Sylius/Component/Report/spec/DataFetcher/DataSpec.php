@@ -18,18 +18,18 @@ use PhpSpec\ObjectBehavior;
  */
 class DataSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Report\DataFetcher\Data');
     }
 
-    function it_has_label_ifnromation()
+    public function it_has_label_ifnromation()
     {
         $this->setLabels(array());
         $this->getLabels()->shouldReturn(array());
     }
 
-    function it_has_data()
+    public function it_has_data()
     {
         $this->setData(array());
         $this->getData()->shouldReturn(array());

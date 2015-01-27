@@ -19,7 +19,7 @@ use Sylius\Component\Report\DataFetcher\Data;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class DelegatingRenderer implements DelegatingRendererInterface
-{   
+{
     /**
      * Renderer registry.
      *
@@ -35,7 +35,7 @@ class DelegatingRenderer implements DelegatingRendererInterface
     public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
-    } 
+    }
 
     public function render(ReportInterface $subject, Data $data)
     {

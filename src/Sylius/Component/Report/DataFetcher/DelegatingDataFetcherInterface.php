@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sylius\Component\Report\DataFetcher;
 
 use Sylius\Component\Report\Model\ReportInterface;
@@ -20,7 +19,7 @@ use Sylius\Component\Report\Model\ReportInterface;
 * @author Łukasz Chruściel <lchrusciel@gmail.com>
 */
 interface DelegatingDataFetcherInterface
-{       
+{
     /**
     * Fetch data for given config.
     *

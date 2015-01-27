@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Report\Model;
 
-use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
-use Sylius\Component\Report\Renderer\TableRenderer;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
 
@@ -41,24 +39,14 @@ class Report implements ReportInterface
     /**
      * @var String
      */
-    private $dataFetcher = 'user_registration';
-
-    /**
-     * @var String
-     */
     private $renderer = DefaultRenderers::TABLE;
 
     /**
-     * @var Array
-     */
-    private $dataFetcherConfiguration = array();
-
-    /**
-     * Renderer name.
+     * Renderer configuration.
      *
-     * @var string
+     * @var array
      */
-    private $renderer = 'table';
+    private $rendererConfiguration = array();
 
     /**
      * Data fetcher name.
@@ -68,11 +56,9 @@ class Report implements ReportInterface
     private $dataFetcher = DefaultDataFetchers::USER_REGISTRATION;
 
     /**
-     * Renderer configuration.
-     *
-     * @var array
+     * @var Array
      */
-    private $rendererConfiguration = array();
+    private $dataFetcherConfiguration = array();
 
     /**
      * Gets the value of id.

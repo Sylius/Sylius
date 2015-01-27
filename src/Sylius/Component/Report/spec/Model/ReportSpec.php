@@ -19,53 +19,53 @@ use PhpSpec\ObjectBehavior;
  */
 class ReportSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Report\Model\Report');
     }
 
-    function it_implements_report_interface()
+    public function it_implements_report_interface()
     {
         $this->shouldImplement('Sylius\Component\Report\Model\ReportInterface');
     }
 
-    function it_has_id()
+    public function it_has_id()
     {
         $this->setId(1);
         $this->getId()->shouldReturn(1);
     }
 
-    function it_has_name()
+    public function it_has_name()
     {
         $this->setName('testName');
         $this->getName()->shouldReturn('testName');
     }
 
-    function it_has_description()
+    public function it_has_description()
     {
         $this->setDescription('Test description for Report spec');
         $this->getDescription()->shouldReturn('Test description for Report spec');
     }
 
-    function it_has_data_fetcher()
+    public function it_has_data_fetcher()
     {
         $this->setDataFetcher('testFetcher');
         $this->getDataFetcher()->shouldReturn('testFetcher');
     }
 
-    function it_has_data_fetcher_configuration()
+    public function it_has_data_fetcher_configuration()
     {
         $this->setDataFetcherConfiguration(array());
         $this->getDataFetcherConfiguration()->shouldReturn(array());
     }
 
-    function it_has_renderer()
+    public function it_has_renderer()
     {
         $this->setRenderer('testRenderer');
         $this->getRenderer()->shouldReturn('testRenderer');
     }
 
-    function it_has_renderer_configuration()
+    public function it_has_renderer_configuration()
     {
         $this->setRendererConfiguration(array());
         $this->getRendererConfiguration()->shouldReturn(array());

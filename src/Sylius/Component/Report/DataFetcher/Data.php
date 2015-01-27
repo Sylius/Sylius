@@ -17,14 +17,14 @@ class Data
 {
     /**
      * array of labels
-     * 
+     *
      * @var array
      */
     private $labels;
 
     /**
      * array of data
-     * 
+     *
      * @var array
      */
     private $data;

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Report\Renderer;
 
 use PhpSpec\ObjectBehavior;
-
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
@@ -24,22 +23,22 @@ use Sylius\Component\Report\Renderer\RendererInterface;
  */
 class DelegatingRendererSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $serviceRegistryInterface)
+    public function let(ServiceRegistryInterface $serviceRegistryInterface)
     {
         $this->beConstructedWith($serviceRegistryInterface);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Report\Renderer\DelegatingRenderer');
     }
 
-    function it_implements_delegating_renderer_interface()
+    public function it_implements_delegating_renderer_interface()
     {
         $this->shouldImplement('Sylius\Component\Report\Renderer\DelegatingRendererInterface');
     }
 
-    function it_delegates_renderer_to_report(
+    public function it_delegates_renderer_to_report(
         $serviceRegistryInterface,
         ReportInterface $subject,
         RendererInterface $renderer,
@@ -54,7 +53,7 @@ class DelegatingRendererSpec extends ObjectBehavior
         $this->render($subject, $data);
     }
 
-    function it_should_throw_exception_if_report_has_no_renderer_defined(ReportInterface $subject, Data $data)
+    public function it_should_throw_exception_if_report_has_no_renderer_defined(ReportInterface $subject, Data $data)
     {
         $subject->getRenderer()->willReturn(null);
 
