@@ -1,0 +1,131 @@
+Forms
+=====
+
+The bundle ships with a useful form types for report model, but also for default renderers and data fetchers.
+
+Report form
+------------
+
+The report form type is named ``sylius_report`` and you can create it whenever you need, using the form factory.
+
+.. code-block:: php
+
+    <?php
+
+    // src/Acme/ShopBundle/Controller/ProductController.php
+
+    namespace Acme\ShopBundle\Controller;
+
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\HttpFoundation\Request;
+
+    class DemoController extends Controller
+    {
+        public function fooAction(Request $request)
+        {
+            $form = $this->get('form.factory')->create('sylius_report');
+        }
+    }
+
+The default report form consists of following fields.
+
++-----------------+----------+
+| Field           | Type     |
++=================+==========+
+| name            | text     |
++-----------------+----------+
+| description     | textarea |
++-----------------+----------+
+| renderer        | choice   |
++-----------------+----------+
+| dataFetcher     | choice   |
++-----------------+----------+
+
+You can render each of these using the usual Symfony way ``{{ form_row(form.description) }}``.
+
+**SyliusReportBundle provides some default data fetchers and renderers. Each of them have custom configuration and adds diffrent part to report form.**
+
+Data fetchers
+##############
+
+User registrations
+""""""""""""""""""""
+
++---------------------------+-------------+
+| Field                     | Type        |
++===========================+=============+
+| Start date                | datetime    |
++---------------------------+-------------+
+| End date                  | datetime    |
++---------------------------+-------------+
+| Time period               | choice      |
++---------------------------+-------------+
+| Print empty records?      | checkbox    |
++---------------------------+-------------+
+
+Sales total
+""""""""""""""""""""
+
++---------------------------+-------------+
+| Field                     | Type        |
++===========================+=============+
+| Start date                | datetime    |
++---------------------------+-------------+
+| End date                  | datetime    |
++---------------------------+-------------+
+| Time period               | choice      |
++---------------------------+-------------+
+| Print empty records?      | checkbox    |
++---------------------------+-------------+
+
+Already available time periods:
+    * Daily
+    * Monthly
+    * Yearly
+
+.. note::
+
+   "Print empty records?" is inconspicuous, but really important part of data fetcher form - it can make your report beautiful and clear, or ruin your day with tones of unusable data. Be aware of it! 
+
+
+Renderers
+############
+
+
+Table Renderer
+""""""""""""""""
+
++-----------------+----------+
+| Field           | Type     |
++=================+==========+
+| template        | choice   |
++-----------------+----------+
+
+Already available templates:
+    * Default - one simple table
+
+Chart Renderer
+""""""""""""""""
+
++-----------------+----------+
+| Field           | Type     |
++=================+==========+
+| type            | choice   |
++-----------------+----------+
+| template        | choice   |
++-----------------+----------+
+
+Already available types:
+    * Bar chart
+    * Line chart
+    * Radar chart
+    * Polar chart
+    * Pie chart
+    * Doughnut chart
+
+.. note::
+
+    All chart are rendered at html5 canvas element, with some defaults style and colors, via Chart.js plugin
+
+Already available templates:
+    * Default - one, full-width chart
