@@ -18,6 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
  * Shipping method available for selected zone.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
@@ -44,5 +45,13 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
         $this->zone = $zone;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return parent::getTranslationEntityClass();
     }
 }

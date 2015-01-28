@@ -55,11 +55,7 @@ class AttributeType extends AbstractResourceType
                 'label' => 'sylius.form.attribute.name'
             ))
             ->add('translations', 'a2lix_translationsForms', array(
-                // TODO Form as a service?
-                'form_type' => new AttributeTranslationType(
-                        $this->dataClass.'Translation',
-                        $this->validationGroups,
-                        $this->subjectName),
+                'form_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
                 'label' => 'sylius.form.attribute.presentation'
             ))
             ->add('type', 'choice', array(

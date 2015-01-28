@@ -12,8 +12,7 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-                  xmlns:prezent="prezent">
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Product\Model\Product" table="sylius_product">
         <id name="id" column="id" type="integer">
@@ -67,8 +66,6 @@
 
         <gedmo:soft-deleteable field-name="deletedAt" />
         <gedmo:loggable />
-
-        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>

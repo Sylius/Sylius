@@ -13,19 +13,18 @@ namespace Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslationMetadataFactoryPass implements CompilerPassInterface
+class TranslationListenerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.translatable.driver_chain')) {
+        if (!$container->hasDefinition('sylius.translatable.listener')) {
             return;
         }
 

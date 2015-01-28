@@ -15,8 +15,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:prezent="prezent">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductTranslation" table="sylius_product_translation">
         <field name="shortDescription" column="short_description" type="string" nullable="true">
@@ -24,7 +23,6 @@
         </field>
 
         <gedmo:loggable />
-        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

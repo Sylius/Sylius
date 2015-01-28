@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\AttributeBundle;
 
-use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusAttributeBundle extends AbstractTranslationBundle
+class SyliusAttributeBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

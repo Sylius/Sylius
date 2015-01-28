@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExtension;
 
 /**
  * Base extension.
@@ -31,7 +31,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-abstract class AbstractResourceExtension extends Extension
+abstract class AbstractResourceExtension extends AbstractTranslationExtension
 {
     const CONFIGURE_LOADER = 1;
 
@@ -298,6 +298,6 @@ abstract class AbstractResourceExtension extends Extension
     protected function process(array $config, ContainerBuilder $container)
     {
         // Override if needed.
-        return $config;
+        return parent::process($config, $container);
     }
 }

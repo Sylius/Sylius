@@ -12,7 +12,7 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Prezent\Doctrine\Translatable\TranslatableInterface;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**

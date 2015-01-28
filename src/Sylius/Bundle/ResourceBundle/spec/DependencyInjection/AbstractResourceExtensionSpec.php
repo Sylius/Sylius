@@ -22,6 +22,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Aleksey Bannov <a.s.bannov@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AbstractResourceExtensionSpec extends ObjectBehavior
 {
@@ -42,9 +43,9 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
-                        'resource'=>array(
+                        'resource' => array(
                             'form' => array(
                                 'choice' => 'Sylius\ChoiceFormType'
                             )
@@ -69,23 +70,20 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                 SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                 'sylius_resource_choice'
             ))
-            ->addTag('form.type', array('alias' => 'sylius_resource_choice'))
-        ;
+            ->addTag('form.type', array('alias' => 'sylius_resource_choice'));
         $container
             ->setDefinition(
                 'sylius.form.type.resource_choice',
                 Argument::exact($definition)
             )
-            ->shouldBeCalled()
-        ;
-
+            ->shouldBeCalled();
 
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
-                        'resource'=>array(
+                        'resource' => array(
                             'form' => array(
                                 'choice' => 'Sylius\ChoiceFormType'
                             )
@@ -108,16 +106,14 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
                 'sylius.form.type.resource',
                 Argument::type('Symfony\Component\DependencyInjection\Definition')
             )
-            ->shouldBeCalled()
-        ;
-
+            ->shouldBeCalled();
 
         $this->configure(
             array(
                 'sylius' => array(
-                    'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
+                    'driver'  => SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
                     'classes' => array(
-                        'resource'=>array(
+                        'resource' => array(
                             'form' => array(
                                 AbstractResourceExtension::DEFAULT_KEY => 'Sylius\FormType'
                             )
@@ -128,8 +124,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
             new Configuration(),
             $container,
             AbstractResourceExtension::CONFIGURE_FORMS
-        )
-        ;
+        );
     }
 
     function it_should_create_multiple_form_definition(ContainerBuilder $container)
@@ -140,16 +135,13 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
             'sylius.form.type.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )
-                  ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $container->setDefinition(
             'sylius.form.type.resource_other',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )
-                  ->shouldBeCalled()
-        ;
-
+            ->shouldBeCalled();
 
         $this->configure(
             array(
@@ -168,15 +160,31 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
             new Configuration(),
             $container,
             AbstractResourceExtension::CONFIGURE_FORMS
-        )
-        ;
+        );
     }
-
 
     protected function mockDefaultBehavior($container)
     {
         $container->hasParameter('sylius.config.classes')->willReturn(false);
+        $container->hasParameter('sylius.translation.mapping')->willReturn(false);
+        $container->hasParameter('sylius.translation.default.mapping')->willReturn(true);
+        $container->getParameter('sylius.translation.default.mapping')->willReturn(
+            array(
+                array('default_mapping' => array(
+                    'translatable' => array(
+                        'field'          => 'translations',
+                        'currentLocale'  => 'currentLocale',
+                        'fallbackLocale' => 'fallbackLocale'
+                    ),
+                    'translation'  => array(
+                        'field'  => 'translatable',
+                        'locale' => 'locale'
+                    )
+                ))
+            ));
+
         $container->setParameter('sylius.config.classes', Argument::any())->shouldBeCalled();
+        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
     }
 }
 
@@ -195,30 +203,30 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sylius');
+        $rootNode    = $treeBuilder->root('sylius');
 
         $rootNode
             ->addDefaultsIfNotSet()
-                ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+            ->children()
+            ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
             ->end()
             ->children()
-                ->arrayNode('classes')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('resource')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Model')->end()
-                                ->arrayNode('form')
-                                    ->prototype('scalar')->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
+            ->arrayNode('classes')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->arrayNode('resource')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('model')->defaultValue('Sylius\Model')->end()
+            ->arrayNode('form')
+            ->prototype('scalar')->end()
             ->end()
-        ;
+            ->end()
+            ->end()
+            ->end()
+            ->end()
+            ->end();
+
         return $treeBuilder;
     }
 }

@@ -12,8 +12,7 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-                  xmlns:prezent="prezent">
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Attribute\Model\Attribute" table="sylius_attribute">
         <id name="id" column="id" type="integer">
@@ -30,8 +29,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-
-        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
     </mapped-superclass>
 
 </doctrine-mapping>

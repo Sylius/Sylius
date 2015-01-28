@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Translation\Model;
 
-use Prezent\Doctrine\Translatable\TranslatableInterface as BaseTranslatableInterface;
-use Prezent\Doctrine\Translatable\TranslationInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -29,14 +27,12 @@ class AbstractTranslation implements TranslationInterface
     /**
      * Translatable object
      *
-     * @var BaseTranslatableInterface
+     * @var TranslatableInterface
      */
     protected $translatable;
 
     /**
-     * Get the translatable object
-     *
-     * @return BaseTranslatableInterface
+     * {@inheritdoc}
      */
     public function getTranslatable()
     {
@@ -44,13 +40,9 @@ class AbstractTranslation implements TranslationInterface
     }
 
     /**
-     * Set the translatable object
-     *
-     * @param BaseTranslatableInterface $translatable
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setTranslatable(BaseTranslatableInterface $translatable = null)
+    public function setTranslatable(TranslatableInterface $translatable = null)
     {
         if ($translatable === $this->translatable) {
             return $this;
@@ -71,9 +63,7 @@ class AbstractTranslation implements TranslationInterface
     }
 
     /**
-     * Get the locale
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getLocale()
     {
@@ -81,11 +71,7 @@ class AbstractTranslation implements TranslationInterface
     }
 
     /**
-     * Set the locale
-     *
-     * @param string $locale
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setLocale($locale)
     {

@@ -66,8 +66,7 @@ class ShippingMethodType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormListener($this->calculatorRegistry, $builder->getFormFactory()))
             ->add('translations', 'a2lix_translationsForms', array(
-                // TODO Form as a service?
-                'form_type' => new ShippingMethodTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'form_type' => 'sylius_shipping_method_translation',
                 'label'    => 'sylius.form.shipping_method.name'
             ))
             ->add('enabled', 'checkbox', array(

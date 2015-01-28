@@ -32,8 +32,7 @@ class ProductType extends BaseProductType
 
         $builder
             ->add('translations', 'a2lix_translationsForms', array(
-                // TODO Form as a service?
-                'form_type' => new ProductTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'form_type' => 'sylius_product_translation',
                 'label'    => 'sylius.form.product.translations'
             ))
             ->add('taxCategory', 'sylius_tax_category_choice', array(

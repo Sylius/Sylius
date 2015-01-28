@@ -11,13 +11,11 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:prezent="prezent">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Translation\Model\AbstractTranslation" >
+    <mapped-superclass name="Sylius\Component\Translation\Model\AbstractTranslation">
         <!--TODO map locale field automatically?-->
         <field name="locale" column="locale" type="string" length="2"/>
-        <prezent:translatable field="translatable" locale="locale"/>
     </mapped-superclass>
 
 </doctrine-mapping>
