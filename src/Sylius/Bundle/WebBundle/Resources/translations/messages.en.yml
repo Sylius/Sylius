@@ -741,6 +741,7 @@ sylius:
         create_header: Create new report
         no_results: There are no reports created.
         show_header: Report details
+        details: details
         id: id
         name: Name
         description: Description

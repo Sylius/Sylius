@@ -1,10 +1,9 @@
-{% extends 'SyliusReportBundle:Chart:layout.html.twig' %}
-
+{% set report = data.report %}
+{% set labels = data.labels %}
+{% set values = data.values %}
+{% set chartType = configuration.type %}
+    
 {% block javascripts %}
-{{ parent() }}
-{% javascripts output='assets/compiled/backend_report.js'
-    'bundles/syliusreport/js/chart.js'
-%}
     <script>
         function generateLineChart(labels, values, ctx) {
             data = {
@@ -121,11 +120,9 @@
             initCharts(chartType);
         }
     </script>
-{% endjavascripts %}
 {% endblock %}
 
 {% block content %}
-    {{ parent() }}
     <div class="col-xs-12">
         <div class="row">
             <canvas id="canvas" height="450"></canvas>

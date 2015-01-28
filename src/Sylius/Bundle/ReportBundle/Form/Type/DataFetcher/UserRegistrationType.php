@@ -40,7 +40,8 @@ class UserRegistrationType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.period',
             ))
             ->add('empty_records', 'checkbox', array(
-                'label' => 'sylius.form.report.user_registration.empty_records',
+                'label'    => 'sylius.form.report.user_registration.empty_records',
+                'required' => false
             ))
         ;
     }

@@ -23,10 +23,10 @@ interface DelegatingDataFetcherInterface
     /**
     * Fetch data for given config.
     *
-    * @param ReportInterface $subject
-    * @param array $context
+    * @param ReportInterface $report
+    * @param array $configuration
     *
     * @return array
     */
-    public function fetch(ReportInterface $subject);
+    public function fetch(ReportInterface $report, array $configuration = array());
 }

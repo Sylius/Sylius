@@ -2,10 +2,6 @@
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 
-{% set report = data.report %}
-{% set labels = data.labels %}
-{% set values = data.values %}
-{% set fields = data.fields %}
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
@@ -21,30 +17,7 @@
             {{ buttons.edit(path('sylius_backend_report_update', {'id': report.id})) }}
             {{ buttons.delete(path('sylius_backend_report_delete', {'id': report.id}), null, false, false) }}
         </div>
-        <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.report.show_header'|trans|raw }}</h1>
-    </div>  
-    <div class="col-md-12">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th colspan="2">{{ report.name }} general info</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td><strong>{{ 'sylius.report.id'|trans }}</strong></td>
-            <td>{{ report.id }}</td>
-        </tr>
-        <tr>
-            <td><strong>{{ 'sylius.report.name'|trans }}</strong></td>
-            <td>{{ report.name }}</td>
-        </tr>
-        <tr>
-            <td><strong>{{ 'sylius.report.description'|trans }}</strong></td>
-            <td>{{ report.description }}</td>
-        </tr>
-        </tbody>
-    </table>
+        <h1><i class="glyphicon glyphicon-cog"></i> {{ report.name }} {{ 'sylius.report.details'|trans|raw }}</h1>
     </div>
 {% endblock %}
 

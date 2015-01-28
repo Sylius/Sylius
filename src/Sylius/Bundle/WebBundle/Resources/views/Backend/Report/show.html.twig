@@ -11,30 +11,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <div class="actions-menu">
-        {{ buttons.manage(path('sylius_backend_report_index'), 'sylius.report.manage'|trans) }}
-        {{ buttons.edit(path('sylius_backend_report_update', {'id': report.id})) }}
-        {{ buttons.delete(path('sylius_backend_report_delete', {'id': report.id}), null, false, false) }}
+    <div class="page-header">
+        <div class="actions-menu">
+            {{ buttons.manage(path('sylius_backend_report_index'), 'sylius.report.manage'|trans) }}
+            {{ buttons.edit(path('sylius_backend_report_update', {'id': report.id})) }}
+            {{ buttons.delete(path('sylius_backend_report_delete', {'id': report.id}), null, false, false) }}
+        </div>
+        <h1><i class="glyphicon glyphicon-cog"></i> {{ report.name }}</h1>
     </div>
-    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.report.show_header'|trans|raw }}</h1>
-</div>
 
+    <form action="{{ path('sylius_backend_report_show', {'id': report.id}) }}" method="get" class="form-horizontal">
+    {% for field in form %}
+        {{ form_row(field) }}
+    {% endfor %}
+    <button type="submit" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-search"></i> {{ 'sylius.filter'|trans }}</button>
+    <br>
+    </form>
 
-<table class="table table-bordered table-condensed">
-    <thead>
-        <tr>
-            <th>{{ 'sylius.report.id'|trans }}</th>
-            <th>{{ 'sylius.report.name'|trans }}</th>
-            <th>{{ 'sylius.report.description'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ report.id }}</td>
-            <td>{{ report.name }}</td>
-            <td style="overflow: hidden;">{{ report.description|truncate(30, true) }}</td>
-        </tr>
-    </tbody>
-</table>
+    {{ render(controller('sylius.controller.report:embeddAction', {'report': report, 'configuration' : configuration})) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
 {% endblock %}

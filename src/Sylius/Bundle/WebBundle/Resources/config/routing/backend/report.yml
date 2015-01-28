@@ -37,7 +37,6 @@ sylius_backend_report_delete:
     defaults:
         _controller: sylius.controller.report:deleteAction
         _sylius:
-            template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_report_index
 
 sylius_backend_report_show:
@@ -45,3 +44,5 @@ sylius_backend_report_show:
     methods: [GET]
     defaults:
         _controller: sylius.controller.report:renderAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Report:show.html.twig
