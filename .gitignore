@@ -1,1 +1,4 @@
 build
+_exts/sensio/__init__.pyc
+_exts/sensio/sphinx/__init__.pyc
+_exts/sensio/sphinx/configurationblock.pyc
