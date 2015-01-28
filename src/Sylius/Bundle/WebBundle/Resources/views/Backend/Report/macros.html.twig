@@ -10,6 +10,7 @@
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.report.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.report.name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.report.code'|trans) }}</th>
             <th>{{ sylius_resource_sort('description', 'sylius.report.description'|trans) }}</th>
             <th>{{ sylius_resource_sort('renderer', 'sylius.report.renderer'|trans) }}</th>
             <th>{{ sylius_resource_sort('data_fetcher', 'sylius.report.data_fetcher'|trans) }}</th>
@@ -21,6 +22,7 @@
         <tr id="{{ report.id }}">
             <td>{{ report.id }}</td>
             <td>{{ report.name }}</td>
+            <td>{{ report.code }}</td>
             <td>{{ report.description|truncate(50, true) }}</td>
             <td>{{ report.renderer }}{% if report.rendererConfiguration.type is defined %} - {{ report.rendererConfiguration.type }}{% endif %}</td>
             <td>{{ report.dataFetcher }}</td>

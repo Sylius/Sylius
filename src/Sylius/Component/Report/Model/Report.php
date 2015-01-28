@@ -39,6 +39,13 @@ class Report implements ReportInterface
     /**
      * @var String
      */
+    private $code;
+
+    /**
+     * Renderer name.
+     *
+     * @var string
+     */
     private $renderer = DefaultRenderers::TABLE;
 
     /**
@@ -133,7 +140,31 @@ class Report implements ReportInterface
     }
 
     /**
-     * Gets the value of dataFetcher.
+     * Gets the value of code.
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Sets the value of code.
+     *
+     * @param string $code the code
+     *
+     * @return self
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets the dataFetcher name.
      *
      * @return DataFetcher
      */

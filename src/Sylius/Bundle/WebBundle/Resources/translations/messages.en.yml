@@ -744,6 +744,7 @@ sylius:
         details: details
         id: id
         name: Name
+        code: Code
         description: Description
         manage: Manage
         update_header: Edit report

@@ -36,5 +36,16 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="errorPath">code</option>
+            <option name="message">sylius.report.code.in_use</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.report.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

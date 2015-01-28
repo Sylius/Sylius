@@ -20,7 +20,11 @@
         </id>
 
         <field name="name" column="name" type="string" nullable="false" />
-        <field name="description" column="description" type="string" nullable="true" />
+        <field name="description" column="description" type="text" />
+        <field name="code" column="code" type="string" nullable="false" />
+
+        <field name="renderer" column="renderer" type="string" nullable="false" />
+        <field name="rendererConfiguration" column="renderer_configuration" type="array" />
 
         <field name="dataFetcher" column="data_fetcher" type="string" nullable="false" />
         <field name="dataFetcherConfiguration" column="data_fetcher_configuration" type="array" />

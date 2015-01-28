@@ -67,6 +67,10 @@ class ReportType extends AbstractResourceType
                 'label' => 'sylius.form.report.name',
                 'required' => true,
             ))
+            ->add('code', 'text', array(
+                'label'    => 'sylius.form.report.code',
+                'required' => true,
+            ))
             ->add('description', 'textarea', array(
                 'label'    => 'sylius.form.report.description',
                 'required' => false,

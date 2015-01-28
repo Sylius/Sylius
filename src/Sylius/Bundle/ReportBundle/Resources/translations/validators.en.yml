@@ -6,3 +6,6 @@ sylius:
             max_length: Report name must have maximum 255 characters
         description:
             not_blank: Report description cannot be blank
+        code:
+            not_blank: Report code cannot be blank
+            in_use: This code is already in use.
