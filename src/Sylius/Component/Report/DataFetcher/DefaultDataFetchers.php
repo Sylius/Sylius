@@ -27,4 +27,9 @@ final class DefaultDataFetchers
      * Sales total data fetcher
      */
     const SALES_TOTAL = 'sales_total';
+
+    /**
+     * Number of orders data fetcher
+     */
+    const NUMBER_OF_ORDERS = 'number_of_orders';
 }
