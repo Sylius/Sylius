@@ -56,7 +56,7 @@ class ReportContext extends DefaultContext
         $dataFetcherConfiguration = $this->getConfiguration($dataFetcherConfiguration);
         $dataFetcherConfiguration["start"] = new \DateTime($dataFetcherConfiguration["start"]);
         $dataFetcherConfiguration["end"] = new \DateTime($dataFetcherConfiguration["end"]);
-        $dataFetcherConfiguration["empty_records"] = ($dataFetcherConfiguration["empty_records"] == "false") ? false : true;
+        $dataFetcherConfiguration["empty_records"] = isset($dataFetcherConfiguration["empty_records"]) ? false : true;
 
         $report->setDataFetcher($dataFetcherType);
         $report->setDataFetcherConfiguration($dataFetcherConfiguration);

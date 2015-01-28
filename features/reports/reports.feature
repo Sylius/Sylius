@@ -6,12 +6,12 @@ Feature: Reports
 
     Background:
         Given there are following reports configured:
-            | name           | description | renderer | renderer configuration                                       | data fetcher      | data fetcher configuration                                       |
-            | TableReport    | Lorem ipsum | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01,empty_records:false   |
-            | BarChartReport | Lorem ipsum | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01,empty_records:false |
+            | name           | description | renderer | renderer configuration                                       | data fetcher      | data fetcher configuration                   |
+            | TableReport    | Lorem ipsum | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
+            | BarChartReport | Lorem ipsum | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
         And there is default currency configured
         And there are following users:
-            | email          | enabled  | created_at          |
+            | email          | enabled  | created at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
             | martha@foo.com | yes      | 2010-01-02 13:00:00 |
             | rick@foo.com   | yes      | 2010-01-03 12:00:00 |

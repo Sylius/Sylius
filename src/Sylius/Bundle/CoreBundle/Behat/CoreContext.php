@@ -171,7 +171,7 @@ class CoreContext extends DefaultContext
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
                 false,
-                isset($data['created_at']) ? new \DateTime($data["created_at"]) : null
+                isset($data['created at']) ? new \DateTime($data["created at"]) : null
             );
         }
 
