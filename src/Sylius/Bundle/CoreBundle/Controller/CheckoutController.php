@@ -22,6 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class CheckoutController extends FOSRestController
 {
@@ -47,16 +48,15 @@ class CheckoutController extends FOSRestController
         switch ($transition) {
             case OrderCheckoutTransitions::SYLIUS_ADDRESSING:
                 return $this->addressingAction($request, $order);
-            break;
+
             case OrderCheckoutTransitions::SYLIUS_SHIPPING:
                 return $this->shippingAction($request, $order);
-            break;
+
             case OrderCheckoutTransitions::SYLIUS_PAYMENT:
                 return $this->paymentAction($request, $order);
-            break;
+
             case OrderCheckoutTransitions::SYLIUS_FINALIZE:
                 return $this->finalizeAction($request, $order);
-            break;
         }
 
         throw new \Exception('Could not process checkout API request.');
@@ -141,7 +141,7 @@ class CheckoutController extends FOSRestController
 
             $paymentInfo = array(
                 'payment' => $order->getLastPayment(),
-                'methods'  => $form['paymentMethod']->getConfig()->getOption('choice_list')->getChoices(),
+                'methods' => $form['paymentMethod']->getConfig()->getOption('choice_list')->getChoices(),
             );
 
             return $this->handleView($this->view($paymentInfo));
@@ -188,49 +188,6 @@ class CheckoutController extends FOSRestController
         $this->dispatchCheckoutEvent(SyliusOrderEvents::POST_CREATE, $order);
 
         return $this->handleView($this->view($order));
-    }
-
-    private function getOrderRepository()
-    {
-        return $this->get('sylius.repository.order');
-    }
-
-    private function findOrderOr404($id)
-    {
-        if (!$order = $this->getOrderRepository()->find($id)) {
-            throw new NotFoundHttpException('Order does not exist.');
-        }
-
-        return $order;
-    }
-
-    private function createCheckoutAddressingForm(OrderInterface $order)
-    {
-        return $this->createApiForm('sylius_checkout_addressing', $order);
-    }
-
-    private function createCheckoutShippingForm(OrderInterface $order)
-    {
-        $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
-
-        return $this->createApiForm('sylius_checkout_shipping', $order, array(
-            'criteria' => array(
-                'zone' => !empty($zones) ? array_map(function ($zone) {
-                    return $zone->getId();
-                }, $zones) : null,
-                'enabled' => true,
-            )
-        ));
-    }
-
-    private function createCheckoutPaymentForm(OrderInterface $order)
-    {
-        return $this->createApiForm('sylius_checkout_payment', $order);
-    }
-
-    private function createApiForm($type, $value = null, array $options = array())
-    {
-        return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, array('csrf_protection' => false)));
     }
 
     /**
@@ -287,5 +244,48 @@ class CheckoutController extends FOSRestController
     protected function dispatchCheckoutEvent($name, OrderInterface $order)
     {
         $this->dispatchEvent($name, new GenericEvent($order));
+    }
+
+    private function getOrderRepository()
+    {
+        return $this->get('sylius.repository.order');
+    }
+
+    private function findOrderOr404($id)
+    {
+        if (!$order = $this->getOrderRepository()->find($id)) {
+            throw new NotFoundHttpException('Order does not exist.');
+        }
+
+        return $order;
+    }
+
+    private function createCheckoutAddressingForm(OrderInterface $order)
+    {
+        return $this->createApiForm('sylius_checkout_addressing', $order);
+    }
+
+    private function createCheckoutShippingForm(OrderInterface $order)
+    {
+        $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
+
+        return $this->createApiForm('sylius_checkout_shipping', $order, array(
+            'criteria' => array(
+                'zone' => !empty($zones) ? array_map(function ($zone) {
+                    return $zone->getId();
+                }, $zones) : null,
+                'enabled' => true,
+            )
+        ));
+    }
+
+    private function createCheckoutPaymentForm(OrderInterface $order)
+    {
+        return $this->createApiForm('sylius_checkout_payment', $order);
+    }
+
+    private function createApiForm($type, $value = null, array $options = array())
+    {
+        return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, array('csrf_protection' => false)));
     }
 }
