@@ -29,6 +29,7 @@
         <parameter key="sylius.report.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
         <parameter key="sylius.report.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\DataFetcher\SalesTotalDataFetcher</parameter>
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\Form\Type\UserRegistrationType</parameter>
+        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcherChoiceType</parameter>
     </parameters>
 
@@ -84,7 +85,7 @@
             <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
         </service>
 
-        <service id="sylius.form.type.data_fetcher.sales_total" class="%sylius.form.type.data_fetcher.user_registration.class%">
+        <service id="sylius.form.type.data_fetcher.sales_total" class="%sylius.form.type.data_fetcher.sales_total.class%">
             <tag name="form.type" alias="sylius_data_fetcher_sales_total" />
         </service>
 

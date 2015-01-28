@@ -20,7 +20,7 @@ use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserRegistrationType extends AbstractType
+class SalesTotalType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -50,6 +50,6 @@ class UserRegistrationType extends AbstractType
     */
     public function getName()
     {
-        return 'sylius_data_fetcher_user_registration';
+        return 'sylius_data_fetcher_sales_total';
     }
 }
