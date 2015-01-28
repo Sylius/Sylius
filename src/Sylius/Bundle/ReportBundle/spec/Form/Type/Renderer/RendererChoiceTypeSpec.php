@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReportBundle\Form\Type;
+namespace spec\Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -31,7 +31,7 @@ class RendererChoiceTypeSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\RendererChoiceType');
+        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\Renderer\RendererChoiceType');
     }
 
     public function it_should_be_abstract_type_object()

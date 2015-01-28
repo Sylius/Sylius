@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReportBundle\Form\Type;
+namespace Sylius\Bundle\ReportBundle\Form\Type\Renderer;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\ReportBundle\Renderer\ChartRenderer;
 
 /**
  * Renderer configuration form type
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChartConfigurationType extends AbstractType
+class TableConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,14 +27,10 @@ class ChartConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', array(
-                'label' => 'sylius.form.report.chart.type',
-                'choices' => ChartRenderer::getChartTypes(),
-            ))
             ->add('template', 'choice', array(
                 'label' => 'sylius.form.report.renderer.template',
                 'choices' => array(
-                    'SyliusReportBundle:Chart:default.html.twig' => 'Default',
+                    'SyliusReportBundle:Table:default.html.twig' => 'Default',
                 ),
             ))
         ;
@@ -46,6 +41,6 @@ class ChartConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_renderer_chart';
+        return 'sylius_renderer_table';
     }
 }

@@ -18,19 +18,19 @@
     <parameters>
         <parameter key="sylius.registry.report.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
-        <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>
-        <parameter key="sylius.form.type.renderer_choice.class">Sylius\Bundle\ReportBundle\Form\Type\RendererChoiceType</parameter>
-        <parameter key="sylius.form.type.renderer.table.class">Sylius\Bundle\ReportBundle\Renderer\TableRenderer</parameter>
-        <parameter key="sylius.form.type.report.renderer.table_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\TableConfigurationType</parameter>
         <parameter key="sylius.form.type.renderer.chart.class">Sylius\Bundle\ReportBundle\Renderer\ChartRenderer</parameter>
-        <parameter key="sylius.form.type.report.renderer.chart_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\ChartConfigurationType</parameter>
+        <parameter key="sylius.form.type.renderer.table.class">Sylius\Bundle\ReportBundle\Renderer\TableRenderer</parameter>
+        <parameter key="sylius.form.type.renderer_choice.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\RendererChoiceType</parameter>
+        <parameter key="sylius.form.type.report.renderer.chart_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\ChartConfigurationType</parameter>
+        <parameter key="sylius.form.type.report.renderer.table_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\TableConfigurationType</parameter>
+        <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>
 
+        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
+        <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
+        <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType</parameter>
         <parameter key="sylius.report.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
-        <parameter key="sylius.report.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
         <parameter key="sylius.report.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\DataFetcher\SalesTotalDataFetcher</parameter>
-        <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\Form\Type\UserRegistrationType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\SalesTotalType</parameter>
-        <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcherChoiceType</parameter>
+        <parameter key="sylius.report.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
     </parameters>
 
     <services>
