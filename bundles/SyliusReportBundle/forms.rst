@@ -63,6 +63,16 @@ User registrations
 | Print empty records?      | checkbox    |
 +---------------------------+-------------+
 
+Already available time periods:
+    * Daily
+    * Monthly
+    * Yearly
+
+.. note::
+
+   "Print empty records?" is inconspicuous, but really important part of data fetcher form - it can make your report beautiful and clear, or ruin your day with tones of unusable data. Be aware of it! 
+
+
 Sales total
 """"""""""""""""""""
 
@@ -82,11 +92,6 @@ Already available time periods:
     * Daily
     * Monthly
     * Yearly
-
-.. note::
-
-   "Print empty records?" is inconspicuous, but really important part of data fetcher form - it can make your report beautiful and clear, or ruin your day with tones of unusable data. Be aware of it! 
-
 
 Renderers
 ############

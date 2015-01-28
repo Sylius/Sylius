@@ -6,7 +6,7 @@ SyliusReportBundle has some default renderers implemented, however, obviously th
 Create custom renderer class
 -------------------------------
 
-First step, is creation of our new renderer class. It should be placed in ``Sylius\Bundle\ReportBundle\Renderer`` namespace and must implement ``Sylius\Component\Report\Renderer\RendererInterface``. Because of implementation, renderer class must provide two methods:
+First step is creation of our new renderer class. It should be placed in ``Sylius\Bundle\ReportBundle\Renderer`` namespace and must implement ``Sylius\Component\Report\Renderer\RendererInterface``. Because of implementation, renderer class must provide two methods:
     - ``render(ReportInterface $report, Data $data)``, which generates response based on given report and data fetcher data
     - ``getType``, which returns unique name of renderer
 
