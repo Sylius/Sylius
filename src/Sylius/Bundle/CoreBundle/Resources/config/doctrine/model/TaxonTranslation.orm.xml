@@ -18,6 +18,10 @@
                   xmlns:prezent="prezent">
 
     <mapped-superclass name="Sylius\Component\Core\Model\TaxonTranslation" table="sylius_taxon_translation">
+        <unique-constraints>
+            <unique-constraint columns="locale,slug" name="slug_uidx" />
+            <unique-constraint columns="locale,permalink" name="permalink_uidx" />
+        </unique-constraints>
         <prezent:translatable />
     </mapped-superclass>
 
