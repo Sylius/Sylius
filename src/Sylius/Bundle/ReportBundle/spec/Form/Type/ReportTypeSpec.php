@@ -53,6 +53,7 @@ class ReportTypeSpec extends ObjectBehavior
         $builder->getFormFactory()->willReturn($factory);
 
         $builder->add('name', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('code', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('description', 'textarea', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('renderer', 'sylius_renderer_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('dataFetcher', 'sylius_data_fetcher_choice', Argument::any())->shouldBeCalled()->willReturn($builder);

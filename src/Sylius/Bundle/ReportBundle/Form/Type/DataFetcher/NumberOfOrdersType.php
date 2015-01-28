@@ -41,6 +41,7 @@ class NumberOfOrdersType extends AbstractType
             ))
             ->add('empty_records', 'checkbox', array(
                 'label' => 'sylius.form.report.user_registration.empty_records',
+                'required' => false,
             ))
         ;
     }

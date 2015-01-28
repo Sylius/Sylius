@@ -33,7 +33,7 @@ class ReportContext extends DefaultContext
         $manager->flush();
 
         foreach ($table->getHash() as $data) {
-            $this->thereIsReport($data['name'], $data['description'], $data['renderer'], $data["renderer configuration"], $data["data fetcher"], $data["data fetcher configuration"], false);
+            $this->thereIsReport($data['name'], $data['description'], $data["code"], $data['renderer'], $data["renderer configuration"], $data["data fetcher"], $data["data fetcher configuration"], false);
         }
 
         $manager->flush();
@@ -42,13 +42,14 @@ class ReportContext extends DefaultContext
     /**
      * @Given /^I created report "([^""]*)"$/
      */
-    public function thereIsReport($name, $description, $rendererType, $rendererConfiguration, $dataFetcherType, $dataFetcherConfiguration, $flush = true)
+    public function thereIsReport($name, $description, $code, $rendererType, $rendererConfiguration, $dataFetcherType, $dataFetcherConfiguration, $flush = true)
     {
         $repository = $this->getRepository('report');
 
         $report = $repository->createNew();
         $report->setName($name);
         $report->setDescription($description);
+        $report->setCode($code);
         
         $report->setRenderer($rendererType);
         $report->setRendererConfiguration($this->getConfiguration($rendererConfiguration));

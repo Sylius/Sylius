@@ -6,9 +6,9 @@ Feature: Reports
 
     Background:
         Given there are following reports configured:
-            | name           | description | renderer | renderer configuration                                       | data fetcher      | data fetcher configuration                   |
-            | TableReport    | Lorem ipsum | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
-            | BarChartReport | Lorem ipsum | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
+            | name           | description | code             | renderer | renderer configuration                                       | data fetcher      | data fetcher configuration                   |
+            | TableReport    | Lorem ipsum | table_report     | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
+            | BarChartReport | Lorem ipsum | bar_chart_report | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
         And there is default currency configured
         And there are following users:
             | email          | enabled  | created at          |
@@ -27,6 +27,7 @@ Feature: Reports
          When I fill in the following:
             | Name        | Report1           | 
             | Description | Lorem ipsum dolor |
+            | Code        | report1           |
           And I press "Create"
          Then I should be on the page of report "Report1"
           And I should see "Report has been successfully created."
@@ -37,6 +38,7 @@ Feature: Reports
          When I fill in the following:
             | Name         | Report2           |
             | Description  | Lorem ipsum dolor |
+            | Code         | report2           |
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I press "Create" 
          Then I should be on the page of report "Report2"
@@ -48,12 +50,23 @@ Feature: Reports
          When I fill in the following:
             | Name         | Report3           |
             | Description  | Lorem ipsum dolor |
+            | Code         | report3           |
           And I select "3" from "sylius_report_dataFetcherConfiguration_end_day"
           And I select "month" from "Time period"
           And I press "Create" 
          Then I should be on the page of report "Report3"
           And I should see "Report has been successfully created."
           And I should see 1 results in the list
+
+    Scenario: Prevent adding new report with the same code that has been used before
+        Given I am on the report creation page
+         When I fill in the following:
+            | Name        | Report1           | 
+            | Description | Lorem ipsum dolor |
+            | Code        | table_report      |
+          And I press "Create"
+         Then I should still be on the report creation page
+          And I should see "This code is already in use."
 
     Scenario: Accessing report details page from list
         Given I am on the report index page
@@ -82,7 +95,7 @@ Feature: Reports
           And I fill in "Description" with "Lorem ipsum dolor"
           And I press "Save changes"
          Then I should see "Report has been successfully updated."
-          And "TableReportEdited" should appear on the page
+          And "reportEdited" should appear on the page
           And "Lorem ipsum dolor" should appear on the page
 
     Scenario: Deleting report from index page
