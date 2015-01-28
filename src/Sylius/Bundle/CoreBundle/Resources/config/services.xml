@@ -430,6 +430,7 @@
 
         <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
             <argument type="service" id="sylius.context.channel" />
+            <argument>%sylius.locale%</argument>
         </service>
 
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
