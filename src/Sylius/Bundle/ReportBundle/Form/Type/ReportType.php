@@ -35,7 +35,7 @@ class ReportType extends AbstractResourceType
     protected $rendererRegistry;
 
     /**
-     * Calculator registry.
+     * DataFetcher registry.
      *
      * @var ServiceRegistryInterface
      */

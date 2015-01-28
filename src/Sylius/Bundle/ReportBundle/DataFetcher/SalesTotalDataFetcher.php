@@ -6,10 +6,10 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
-* User registration data fetcher
-*
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * Sales total data fetcher
+ *
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class SalesTotalDataFetcher extends TimePeriod
 {
     /**

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -22,8 +23,8 @@ use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
 class UserRegistrationType extends AbstractType
 {
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -41,7 +42,7 @@ class UserRegistrationType extends AbstractType
             ->add('empty_records', 'checkbox', array(
                 'label' => 'sylius.form.report.user_registration.empty_records',
             ))
-            ;
+        ;
     }
 
     /**

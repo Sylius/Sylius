@@ -4,3 +4,5 @@ sylius:
             not_blank: Report name cannot be blank
             min_length: Report name must have at least 2 characters
             max_length: Report name must have maximum 255 characters
+        description:
+            not_blank: Report description cannot be blank

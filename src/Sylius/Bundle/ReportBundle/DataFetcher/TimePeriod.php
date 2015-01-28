@@ -15,10 +15,10 @@ use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\Data;
 
 /**
-* Abstract class to provide time periods logic
-*
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * Abstract class to provide time periods logic
+ *
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 abstract class TimePeriod implements DataFetcherInterface
 {
     const PERIOD_DAY    = 'day';
@@ -30,7 +30,8 @@ abstract class TimePeriod implements DataFetcherInterface
         return array(
             self::PERIOD_DAY    => 'Daily',
             self::PERIOD_MONTH  => 'Monthly',
-            self::PERIOD_YEAR   => 'Yearly', );
+            self::PERIOD_YEAR   => 'Yearly',
+        );
     }
 
     /**
@@ -88,7 +89,6 @@ abstract class TimePeriod implements DataFetcherInterface
      * 
      * @param Array configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by)
      */
-
     protected abstract function getData(array $configuration = array());
 
     private function setExtraConfiguration(array &$configuration, $interval, $periodFormat, $presentationFormat, $groupBy)

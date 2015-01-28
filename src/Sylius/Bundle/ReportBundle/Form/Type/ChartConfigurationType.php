@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReportBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Sylius\Bundle\ReportBundle\Renderer\ChartRenderer;
 
 /**
  * Renderer configuration form type
@@ -29,14 +30,7 @@ class ChartConfigurationType extends AbstractType
         $builder
             ->add('type', 'choice', array(
                 'label' => 'sylius.form.report.chart.type',
-                'choices' => array(
-                    'bar' => 'Bar chart',
-                    'line' => 'Line chart',
-                    'radar' => 'Radar chart',
-                    'polar' => 'Polar chart',
-                    'pie' => 'Pie chart',
-                    'doughnut' => 'Doughnut chart',
-                ),
+                'choices' => ChartRenderer::getChartTypes(),
             ))
             ->add('template', 'choice', array(
                 'label' => 'sylius.form.report.renderer.template',

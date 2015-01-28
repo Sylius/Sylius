@@ -23,6 +23,12 @@ use Sylius\Component\Report\Renderer\DefaultRenderers;
  */
 class ChartRenderer implements RendererInterface
 {
+    const BAR_CHART   = 'bar';
+    const LINE_CHART  = 'line';
+    const RADAR_CHART = 'radar';
+    const POLAR_CHART = 'polar';
+    const PIE_CHART   = 'doughnut';
+    
     private $templating;
 
     public function __construct(EngineInterface $templating)
@@ -48,5 +54,16 @@ class ChartRenderer implements RendererInterface
     public function getType()
     {
         return DefaultRenderers::CHART;
+    }
+
+    public static function getChartTypes()
+    {
+        return array(
+            self::BAR_CHART   => 'Bar chart',
+            self::LINE_CHART  => 'Line chart',
+            self::RADAR_CHART => 'Radar chart',
+            self::POLAR_CHART => 'Polar chart',
+            self::PIE_CHART   => 'Doughnut chart',
+        );
     }
 }
