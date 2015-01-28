@@ -81,8 +81,8 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
      * Add configuration fields to the form.
      *
      * @param FormInterface $form
-     * @param string $dataFetcherType
-     * @param array $config
+     * @param string        $dataFetcherType
+     * @param array         $config
      */
     protected function addConfigurationFields(FormInterface $form, $dataFetcherType, array $config = array())
     {

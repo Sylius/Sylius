@@ -86,10 +86,10 @@ abstract class TimePeriod implements DataFetcherInterface
 
     /**
      * Method responsible for providing raw data to fetch.
-     * 
+     *
      * @param Array configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by)
      */
-    protected abstract function getData(array $configuration = array());
+    abstract protected function getData(array $configuration = array());
 
     private function setExtraConfiguration(array &$configuration, $interval, $periodFormat, $presentationFormat, $groupBy)
     {
@@ -111,5 +111,4 @@ abstract class TimePeriod implements DataFetcherInterface
 
         return $fetched;
     }
-    
 }

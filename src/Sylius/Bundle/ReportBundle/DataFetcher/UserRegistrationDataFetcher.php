@@ -12,7 +12,6 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
  */
 class UserRegistrationDataFetcher extends TimePeriod
 {
-
     /**
      * @var UserRepository
      */
