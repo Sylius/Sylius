@@ -6,7 +6,7 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * Sales total data fetcher
+ * Number of orders data fetcher
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
