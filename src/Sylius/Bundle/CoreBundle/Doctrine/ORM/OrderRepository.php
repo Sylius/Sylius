@@ -315,7 +315,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
         
         $queryBuilder
-            ->select('DATE(o.completed_at) as date','TRUNCATE(SUM(o.total)/ 100,2)')
+            ->select('DATE(o.completed_at) as date','TRUNCATE(SUM(o.total)/ 100,2) as "total sum"')
             ->from('sylius_order', 'o')
             ->where($queryBuilder->expr()->gte('o.completed_at', ':from'))
             ->andWhere($queryBuilder->expr()->lte('o.completed_at', ':to'))
