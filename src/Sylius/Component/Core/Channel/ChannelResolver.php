@@ -39,6 +39,6 @@ class ChannelResolver implements ChannelResolverInterface
      */
     public function resolve(Request $request)
     {
-        return $this->channelRepository->findMatchingHostname($request->getHostName());
+        return $this->channelRepository->findMatchingHostname($request->getHost());
     }
 }

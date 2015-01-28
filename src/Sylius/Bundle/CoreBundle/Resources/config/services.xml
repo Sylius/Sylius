@@ -71,6 +71,9 @@
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
+        <parameter key="sylius.currency_provider.class">Sylius\Component\Core\Currency\ChannelAwareCurrencyProvider</parameter>
+        <parameter key="sylius.context.channel.class">Sylius\Bundle\CoreBundle\Context\ChannelContext</parameter>
+        <parameter key="sylius.locale_provider.class">Sylius\Component\Core\Locale\ChannelAwareLocaleProvider</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
@@ -409,6 +412,23 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service id="sylius.context.channel" class="%sylius.context.channel.class%">
+            <argument type="service" id="sylius.channel_resolver" />
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="sylius.channel_resolver" class="Sylius\Component\Core\Channel\ChannelResolver">
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+
+        <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
             <argument type="service" id="sylius.context.channel" />
         </service>
 

@@ -16,7 +16,7 @@ namespace Sylius\Component\Channel\Repository;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface HashSubjectRepositoryInterface
+interface ChannelRepositoryInterface
 {
     /**
      * Find channel best matching given hostname.

@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\ChannelBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
  * Default channel repository.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelRepository extends EntityRepository
+class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
 {
     public function findMatchingHostname($hostname)
     {
@@ -28,5 +29,7 @@ class ChannelRepository extends EntityRepository
             ->andWhere('channel.url LIKE :hostname')
             ->setParameter('hostname', '%'.$hostname.'%')
         ;
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 }
