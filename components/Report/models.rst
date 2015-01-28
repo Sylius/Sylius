@@ -12,6 +12,8 @@ The default interface contains the following attributes with appropriate setters
 +===========================+====================================================+
 | id                        | Unique id of the report                            |
 +---------------------------+----------------------------------------------------+
+| code                      | Unique code of the report                          |
++---------------------------+----------------------------------------------------+
 | name                      | Name of the report                                 |
 +---------------------------+----------------------------------------------------+
 | description               | Description of your gorgeous report                |

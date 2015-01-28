@@ -34,6 +34,8 @@ The default report form consists of following fields.
 +=================+==========+
 | name            | text     |
 +-----------------+----------+
+| code            | text     |
++-----------------+----------+
 | description     | textarea |
 +-----------------+----------+
 | renderer        | choice   |
