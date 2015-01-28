@@ -2,7 +2,7 @@
 
 namespace Sylius\Bundle\ReportBundle\DataFetcher;
 
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
@@ -10,17 +10,16 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 *
 * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
 */
-class UserRegistrationDataFetcher extends TimePeriod
+class SalesTotalDataFetcher extends TimePeriod
 {
-
     /**
-     * @var UserRepository
+     * @var OrderRepository
      */
-    private $userRepository;
+    private $orderRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(OrderRepository $orderRepository)
     {
-        $this->userRepository = $userRepository;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -28,7 +27,7 @@ class UserRegistrationDataFetcher extends TimePeriod
      */
     protected function getData(array $configuration = array())
     {
-        return $this->userRepository->getRegistrationStatistic($configuration);
+        return $this->orderRepository->revenueBetweenDatesGroupByDate($configuration);
     }
 
     /**
@@ -36,6 +35,6 @@ class UserRegistrationDataFetcher extends TimePeriod
      */
     public function getType()
     {
-        return DefaultDataFetchers::USER_REGISTRATION;
+        return DefaultDataFetchers::SALES_TOTAL;
     }
 }

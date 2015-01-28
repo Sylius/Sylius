@@ -303,6 +303,33 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    public function revenueBetweenDatesGroupByDate(array $configuration=array())
+    {
+        $groupBy = '';
+        foreach ($configuration['groupBy'] as $groupByArray ) {
+            $groupBy = $groupByArray.'(date)'.' '.$groupBy;
+        }
+        $groupBy = substr($groupBy, 0, -1);
+        $groupBy = str_replace(' ', ', ', $groupBy);
+        
+        $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
+        
+        $queryBuilder
+            ->select('DATE(o.completed_at) as date','TRUNCATE(SUM(o.total)/ 100,2)')
+            ->from('sylius_order', 'o')
+            ->where($queryBuilder->expr()->gte('o.completed_at', ':from'))
+            ->andWhere($queryBuilder->expr()->lte('o.completed_at', ':to'))
+            ->setParameter('from', $configuration['start']->format('Y-m-d H:i:s'))
+            ->setParameter('to', $configuration['end']->format('Y-m-d H:i:s'))
+            ->groupBy($groupBy)
+            ->orderBy($groupBy)
+        ;
+        
+        return $queryBuilder
+            ->execute()
+            ->fetchAll();
+    }
+
     public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
     {
         $queryBuilder = $this->getQueryBuilder();

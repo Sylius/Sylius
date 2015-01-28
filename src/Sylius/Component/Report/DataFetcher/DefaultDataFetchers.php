@@ -22,4 +22,9 @@ final class DefaultDataFetchers
      * User registrations data fetcher
      */
     const USER_REGISTRATION = 'user_registration';
+
+    /**
+     * Sales total data fetcher
+     */
+    const SALES_TOTAL = 'sales_total';
 }
