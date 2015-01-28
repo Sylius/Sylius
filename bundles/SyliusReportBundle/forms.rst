@@ -48,8 +48,13 @@ You can render each of these using the usual Symfony way ``{{ form_row(form.desc
 Data fetchers
 ##############
 
-User registrations
-""""""""""""""""""""
+Basic data fetcher extend same time provider. This implementation results in same configuration fields for three different data fetchers.
+
+
+Already available data fetchers:
+    * User registrations
+    * Sales total
+    * Numbers of orders
 
 +---------------------------+-------------+
 | Field                     | Type        |
@@ -73,25 +78,17 @@ Already available time periods:
    "Print empty records?" is inconspicuous, but really important part of data fetcher form - it can make your report beautiful and clear, or ruin your day with tones of unusable data. Be aware of it! 
 
 
+User registrations
+""""""""""""""""""""
+Provides statistic about user registration in time period
+
 Sales total
 """"""""""""""""""""
+Provides statistic about total completed sales over time
 
-+---------------------------+-------------+
-| Field                     | Type        |
-+===========================+=============+
-| Start date                | datetime    |
-+---------------------------+-------------+
-| End date                  | datetime    |
-+---------------------------+-------------+
-| Time period               | choice      |
-+---------------------------+-------------+
-| Print empty records?      | checkbox    |
-+---------------------------+-------------+
-
-Already available time periods:
-    * Daily
-    * Monthly
-    * Yearly
+Number of orders
+""""""""""""""""""""
+Provides statistic about number of completed orders over time
 
 Renderers
 ############
