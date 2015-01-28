@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Currency;
+namespace Sylius\Component\Core\Locale;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Core\Channel\ChannelContextInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
- * Currency provider, which returns currencies enabled for this channel.
+ * Locale provider, which returns locales enabled for this channel.
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kristian Løvstrøm <kristian@loevstroem.dk>
  */
-class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
+class ChannelAwareLocaleProvider implements LocaleProviderInterface
 {
     /**
      * Channel context.
@@ -40,12 +40,12 @@ class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableCurrencies()
+    public function getAvailableLocales()
     {
         $currentChannel =  $this->channelContext->getChannel();
 
-        return $currentChannel->getCurrencies()->filter(function (CurrencyInterface $currency) {
-            return $currency->isEnabled();
+        return $currentChannel->getLocales()->filter(function (LocaleInterface $locale) {
+            return $locale->isEnabled();
         });
     }
 }

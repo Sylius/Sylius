@@ -26,6 +26,7 @@
         <field name="name" type="string" />
         <field name="type" type="string" />
         <field name="color" type="string" />
+        <field name="url"   type="string" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
