@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use FOS\UserBundle\Model\GroupInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -27,7 +28,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class UserDeleteListenerSpec extends ObjectBehavior
 {
-    function let(SecurityContext $securityContext, UrlGeneratorInterface $router, GroupInterface $groupInterface1, GroupInterface $groupInterface2, SessionInterface $session, FlashBagInterface $flashBag, ResourceEvent $event)
+    function let(SecurityContext $securityContext, UrlGeneratorInterface $router, UserInterface $userInterface, SessionInterface $session, FlashBagInterface $flashBag, ResourceEvent $event)
     {
         $this->beConstructedWith($securityContext, $router, $session, 'sylius_backend_user_index');
         $session->getBag('flashes')->willReturn($flashBag);
@@ -38,35 +39,26 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\UserDeleteListener');
     }
 
-    function it_delete_user($event, $groupInterface1, $groupInterface2, $flashBag, $securityContext, TokenInterface $tokenInterface)
+    function it_delete_user($event, $userInterface, $flashBag, $securityContext, TokenInterface $tokenInterface)
     {
-        $event->getSubject()->willReturn($groupInterface1);
-        $groupInterface1->getId()->willReturn(1);
+        $event->getSubject()->willReturn($userInterface);
+        $userInterface->getUsernameCanonical()->willReturn("sylius@example.com");
         $securityContext->getToken()->willReturn($tokenInterface);
-        $tokenInterface->getUser()->willReturn($groupInterface2);
-        $groupInterface2->getId()->willReturn(2);
+        $tokenInterface->getUsername()->willReturn("sylius2@example.com");
 
         $event->stopPropagation()->shouldNotBeCalled();
         $flashBag->add('error', 'Cannot remove currently logged user.')->shouldNotBeCalled();
         $this->deleteUser($event);
     }
 
-    function it_does_not_allow_delete_currently_logged_user($event, $groupInterface1, $groupInterface2, $securityContext, $flashBag, TokenInterface $tokenInterface)
+    function it_does_not_allow_delete_currently_logged_user($event, $userInterface, $securityContext, $flashBag, TokenInterface $tokenInterface)
     {
-        $event->getSubject()->willReturn($groupInterface1);
-        $groupInterface1->getId()->willReturn(1);
+        $userInterface->getUsernameCanonical()->willReturn("sylius@example.com");
+        $event->getSubject()->willReturn($userInterface);
+        $tokenInterface->getUsername()->willReturn("sylius@example.com");
         $securityContext->getToken()->willReturn($tokenInterface);
-        $tokenInterface->getUser()->willReturn($groupInterface2);
-        $groupInterface2->getId()->willReturn(1);
-
         $event->stopPropagation()->shouldBeCalled();
         $flashBag->add('error', 'Cannot remove currently logged user.')->shouldBeCalled();
         $this->deleteUser($event);
-    }
-
-    function it_throws_exception_if_event_subject_does_not_implement_group_interface($event, TokenInterface $tokenInterface)
-    {
-        $event->getSubject()->willReturn($tokenInterface);
-        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->duringDeleteUser($event);
     }
 }
