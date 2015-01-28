@@ -20,7 +20,7 @@ interface DataFetcherInterface
      *
      * @param array config
      *
-     * @return array of data
+     * @return Data $data
      */
     public function fetch(array $configuration);
 
