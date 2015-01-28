@@ -41,7 +41,7 @@ First step is creation of our new renderer class. It should be placed in ``Syliu
 Create renderer configuration type
 -------------------------------------
 
-Each renderer has its own, specific cofiguration form, which is added to main report form. It has to be specified in ``Sylius\Bundle\ReportBundle\Form\Type`` namespace and extends ``Symfony\Component\Form\AbstractType``. To be able to configure our renderer in form, this class should override ``buildForm(FormBuilderInterface $builder, array $options)`` method. It should also have ``getName`` method, that returns renderer string identifier.
+Each renderer has its own, specific cofiguration form, which is added to main report form. It has to be specified in ``Sylius\Bundle\ReportBundle\Form\Type\Renderer`` namespace and extends ``Symfony\Component\Form\AbstractType``. To be able to configure our renderer in form, this class should override ``buildForm(FormBuilderInterface $builder, array $options)`` method. It should also have ``getName`` method, that returns renderer string identifier.
 
 .. code-block:: php
 

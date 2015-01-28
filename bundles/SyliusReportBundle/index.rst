@@ -10,5 +10,6 @@ Using this bundle, you can generate various and complex reports for your webshop
 
    installation
    forms
+   custom-data-fetcher
    custom-renderer
    summary
