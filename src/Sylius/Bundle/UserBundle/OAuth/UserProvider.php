@@ -52,7 +52,7 @@ class UserProvider extends FOSUBUserProvider
     {
         $oauth = $this->oauthRepository->findOneBy(array(
             'provider'   => $response->getResourceOwner()->getName(),
-            'identifier' => $response->getUsername()
+            'identifier' => $response->getUsername(),
         ));
 
         if ($oauth instanceof UserOAuthInterface) {

@@ -19,4 +19,4 @@ use A2lix\TranslationFormBundle\Locale\LocaleProviderInterface as FormLocaleProv
  */
 interface UserProviderInterface extends BaseLocaleProviderInterface, FormLocaleProviderInterface
 {
-} 
+}

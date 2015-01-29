@@ -4,7 +4,7 @@ sylius:
             max: Group name must not be longer than {{ limit }} characters.
             min: Group name must be at least {{ limit }} characters long.
             not_blank: Please enter group name.
-            
+
     user:
         first_name:
             max: First name must not be longer than {{ limit }} characters.

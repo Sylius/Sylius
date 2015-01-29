@@ -8,6 +8,7 @@
  * file that was distributed with this source code.
  */
 namespace Sylius\Bundle\UserBundle\Form\Type;
+
 /**
  * User choice type for "doctrine/orm" driver.
  *

@@ -46,7 +46,7 @@ abstract class GroupChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'class'    => $this->className,
-                'property' => 'name'
+                'property' => 'name',
             ))
         ;
     }

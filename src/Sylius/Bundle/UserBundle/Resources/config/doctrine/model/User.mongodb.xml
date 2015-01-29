@@ -19,7 +19,7 @@
 
     <mapped-superclass name="Sylius\Component\User\Model\User" collection="sylius_user">
         <field name="id" id="true" strategy="AUTO" />
-        
+
         <field fieldName="enabled" name="enabled" type="boolean" />
 
         <field fieldName="createdAt" name="createdAt" type="date">

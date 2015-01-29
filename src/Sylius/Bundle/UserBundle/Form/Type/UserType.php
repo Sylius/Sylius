@@ -36,10 +36,10 @@ class UserType extends ProfileFormType
     {
         $builder
             ->add('firstName', 'text', array(
-                'label' => 'sylius.form.user.first_name'
+                'label' => 'sylius.form.user.first_name',
             ))
             ->add('lastName', 'text', array(
-                'label' => 'sylius.form.user.last_name'
+                'label' => 'sylius.form.user.last_name',
             ))
         ;
 
@@ -47,15 +47,15 @@ class UserType extends ProfileFormType
 
         $builder
             ->add('plainPassword', 'password', array(
-                'label' => 'sylius.form.user.password'
+                'label' => 'sylius.form.user.password',
             ))
             ->add('enabled', 'checkbox', array(
-                'label' => 'sylius.form.user.enabled'
+                'label' => 'sylius.form.user.enabled',
             ))
             ->add('groups', 'sylius_group_choice', array(
                 'label'    => 'sylius.form.user.groups',
                 'multiple' => true,
-                'required' => false
+                'required' => false,
             ))
             ->remove('username')
         ;
