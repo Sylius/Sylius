@@ -34,14 +34,6 @@ class SyliusChannelBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_channel';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getModelInterfaces()
     {
         return array(

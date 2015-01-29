@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Locale\Model;
 
-use Symfony\Component\Locale\Locale as Language;
+use \Locale as Language;
 
 /**
  * Locale model.

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Locale;
+namespace Sylius\Bundle\CoreBundle\Locale;
 
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
