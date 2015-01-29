@@ -103,12 +103,12 @@ Feature: Reports
          When I press "delete" near "TableReport"
          Then I should be on the report index page
           And I should see "Report has been successfully deleted."
-          And I should not see product with name "TableReport" in that list
+          And I should not see report with name "TableReport" in that list
 
     Scenario: Deleting report from details page
         Given I am on the page of report "TableReport"
          When I press "delete"
          Then I should be on the report index page
           And I should see "Report has been successfully deleted."
-          And I should not see product with name "TableReport" in that list
+          And I should not see report with name "TableReport" in that list
           

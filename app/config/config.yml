@@ -35,7 +35,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle', 'SyliusReportBundle']
+    bundles:        ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle']
     filters:
         cssrewrite: ~
 

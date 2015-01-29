@@ -11,10 +11,12 @@
             "homepage": "http://pjedrzejewski.com"
         },
         {
-            "name":     "Łukasz Chrusciel"
+            "name":     "Łukasz Chrusciel",
+            "email":    "lukasz.chrusciel@lakion.com"
         },
         {
-            "name":     "Mateusz Zalewski"
+            "name":     "Mateusz Zalewski",
+            "email":    "mateusz.zalewski@lakion.com"
         },
         {
             "name":     "Sylius project",

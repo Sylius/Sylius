@@ -30,18 +30,13 @@ class ReportContext extends DefaultContext
         $manager = $this->getEntityManager();
         $repository = $this->getRepository('report');
 
-        $manager->flush();
-
         foreach ($table->getHash() as $data) {
             $this->thereIsReport($data['name'], $data['description'], $data["code"], $data['renderer'], $data["renderer configuration"], $data["data fetcher"], $data["data fetcher configuration"], false);
         }
 
         $manager->flush();
     }
-
-    /**
-     * @Given /^I created report "([^""]*)"$/
-     */
+    
     public function thereIsReport($name, $description, $code, $rendererType, $rendererConfiguration, $dataFetcherType, $dataFetcherConfiguration, $flush = true)
     {
         $repository = $this->getRepository('report');

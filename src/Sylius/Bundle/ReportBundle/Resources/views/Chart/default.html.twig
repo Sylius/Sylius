@@ -103,16 +103,19 @@
 
             var labels = document.getElementById("data").getAttribute("data-labels").split(";");
             var values = document.getElementById("data").getAttribute("data-values").split(";");
-            var ctx = document.getElementById("canvas").getContext("2d");
 
-            switch(chartType) {
-                case "line": generateLineChart(labels, values, ctx); break;
-                case "bar": generateBarChart(labels, values, ctx); break;
-                case "radar": generateRadarChart(labels, values, ctx); break;
-                case "polar": generatePolarChart(labels, values, ctx); break;
-                case "pie": generatePieChart(labels, values, ctx); break;
-                case "doughnut": generateDoughnutChart(labels, values, ctx); break;
-            }
+            $.each($("canvas"), function() {
+                var ctx = this.getContext("2d");
+                console.log(ctx);
+                switch(chartType) {
+                    case "line": generateLineChart(labels, values, ctx); break;
+                    case "bar": generateBarChart(labels, values, ctx); break;
+                    case "radar": generateRadarChart(labels, values, ctx); break;
+                    case "polar": generatePolarChart(labels, values, ctx); break;
+                    case "pie": generatePieChart(labels, values, ctx); break;
+                    case "doughnut": generateDoughnutChart(labels, values, ctx); break;
+                }
+            });
         }
 
         window.onload = function(){
@@ -125,6 +128,8 @@
 {% block content %}
     <div class="col-xs-12">
         <div class="row">
+            <canvas id="canvas" height="450"></canvas>
+            <div id="data" class="hidden" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %};{% endif %}{% endfor %}"></div>
             <canvas id="canvas" height="450"></canvas>
             <div id="data" class="hidden" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %};{% endif %}{% endfor %}"></div>
         </div>

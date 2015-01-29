@@ -750,6 +750,8 @@ sylius:
         update_header: Edit report
         renderer: Renderer type
         data_fetcher: Data fetcher type
+        index_header: Reports
+        no_data: There is no data to display.
     save_changes: Save changes
     search: Search
     settings:

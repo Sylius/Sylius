@@ -49,7 +49,7 @@ class ReportController extends ResourceController
     public function embeddAction(Request $request, $report, array $configuration = array())
     {
         if (!$report instanceof ReportInterface) {
-            $report = $this->get('sylius.repository.report')->findOneByName($report);
+            $report = $this->get('sylius.repository.report')->findOneBy(array('code' => $report));
         }
 
         if (null === $report) {

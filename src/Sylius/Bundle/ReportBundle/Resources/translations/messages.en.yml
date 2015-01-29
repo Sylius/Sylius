@@ -1,7 +1,4 @@
 sylius:
-    report:
-        index_header: Reports
-        nodata: There is no data to display.
     form:
         rule:
             item_count_configuration:

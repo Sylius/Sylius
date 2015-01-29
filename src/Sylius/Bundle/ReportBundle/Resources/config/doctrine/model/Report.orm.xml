@@ -21,7 +21,7 @@
 
         <field name="name" column="name" type="string" nullable="false" />
         <field name="description" column="description" type="text" />
-        <field name="code" column="code" type="string" nullable="false" />
+        <field name="code" column="code" type="string" nullable="false" unique="true" />
 
         <field name="renderer" column="renderer" type="string" nullable="false" />
         <field name="rendererConfiguration" column="renderer_configuration" type="array" />
