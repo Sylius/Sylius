@@ -62,7 +62,7 @@ class ChannelAwareLocaleProvider implements LocaleProviderInterface
     {
         return array_map(function (LocaleInterface $locale) {
             return $locale->getCode();
-        }, $this->getAvailableLocales());
+        }, $this->getAvailableLocales()->toArray());
     }
 
     /**
