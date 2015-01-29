@@ -35,7 +35,7 @@ class LoadImagesData extends DataFixture
         $uploader = $this->get('sylius.image_uploader');
 
         foreach ($finder->files()->in(__DIR__.$this->path) as $img) {
-            $image = new ProductVariantImage();
+            $image = $this->getProductVariantImageRepository()->createNew();
             $image->setFile(new UploadedFile($img->getRealPath(), $img->getFilename()));
             $uploader->upload($image);
 
