@@ -27,7 +27,7 @@ class UserSpec extends ObjectBehavior
 
     function it_implements_user_component_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
+        $this->shouldImplement('Sylius\Component\Core\Model\UserInterface');
     }
 
     function it_has_no_shipping_address_by_default()

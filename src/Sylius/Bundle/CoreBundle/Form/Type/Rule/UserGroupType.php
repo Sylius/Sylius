@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\GroupRepository;
+use Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 

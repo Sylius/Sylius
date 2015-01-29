@@ -180,7 +180,7 @@ sylius_order:
 sylius_sequence:
     generators:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
-
+                
 sylius_pricing:
     forms:
         - sylius_product_variant
@@ -699,3 +699,8 @@ sylius_rbac:
         administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
 
+sylius_user:
+    classes:
+        user:
+            model: Sylius\Component\Core\Model\User
+            controller: Sylius\Bundle\CoreBundle\Controller\UserController

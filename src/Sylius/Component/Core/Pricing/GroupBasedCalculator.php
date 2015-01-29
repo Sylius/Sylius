@@ -21,7 +21,7 @@ use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 class GroupBasedCalculator extends AbstractCalculator implements CalculatorInterface
 {
     protected $parameterName = 'groups';
-    protected $className     = 'Sylius\Component\Core\Model\GroupInterface';
+    protected $className     = 'Sylius\Component\User\Model\GroupInterface';
 
     /**
      * {@inheritdoc}

@@ -13,14 +13,14 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Rbac\Model\RoleInterface;
-use Sylius\Component\User\Model\User as UserComponent;
+use Sylius\Component\User\Model\User as BaseUser;
 
 /**
  * User model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class User extends UserComponent implements UserInterface
+class User extends BaseUser implements UserInterface
 {
     protected $currency;
     protected $orders;

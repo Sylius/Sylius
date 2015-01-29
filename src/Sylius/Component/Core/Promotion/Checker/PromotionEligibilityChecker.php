@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Promotion\Checker;
 
 use Sylius\Component\Core\Model\CouponInterface;
-use Sylius\Component\Core\Model\UserAwareInterface;
+use Sylius\Component\User\Model\UserAwareInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker as BasePromotionEligibilityChecker;

@@ -48,9 +48,6 @@
         <parameter key="sylius.listener.order_pricing.class">Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
-        <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\CoreBundle\EventListener\UserAwareListener</parameter>
-        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
-        <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\CoreBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
@@ -81,7 +78,7 @@
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
-        <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
+        <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\UserBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
@@ -224,23 +221,6 @@
         </service>
 
         <!-- listeners -->
-        <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
-            <argument type="service" id="fos_user.user_manager" />
-            <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
-            <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
-        </service>
-        <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
-            <argument type="service" id="security.context" />
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument>sylius_backend_user_index</argument>
-            <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
-        </service>
-        <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
-            <argument type="service" id="security.context" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setUser" priority="100" />
-            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setUser" />
-        </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
@@ -306,6 +286,11 @@
         <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
             <argument type="service" id="sylius.context.currency" />
             <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderCurrency" />
+        </service>
+        <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
+            <argument type="service" id="security.context" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setUser" priority="100" />
+            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setUser" />
         </service>
         <service id="sylius.listener.restricted_zone" class="%sylius.listener.restricted_zone.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
