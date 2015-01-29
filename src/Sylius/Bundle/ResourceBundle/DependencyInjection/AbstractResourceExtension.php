@@ -30,6 +30,7 @@ use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExten
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 abstract class AbstractResourceExtension extends AbstractTranslationExtension
 {
@@ -105,6 +106,8 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
         }
 
         $classes = isset($config['classes']) ? $config['classes'] : array();
+
+        $this->mapTranslations($classes, $container);
 
         if ($configure & self::CONFIGURE_PARAMETERS) {
             $this->mapClassParameters($classes, $container);
@@ -298,6 +301,19 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
     protected function process(array $config, ContainerBuilder $container)
     {
         // Override if needed.
-        return parent::process($config, $container);
+        return $config;
+    }
+
+    /**
+     * @param array $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapTranslations(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $class) {
+            if (array_key_exists('translation', $class) || array_key_exists('translatable', $class)) {
+                $this->processTranslations($class, $container);
+            }
+        }
     }
 }

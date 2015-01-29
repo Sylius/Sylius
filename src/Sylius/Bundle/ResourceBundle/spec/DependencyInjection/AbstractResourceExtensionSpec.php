@@ -22,7 +22,6 @@ use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author Aleksey Bannov <a.s.bannov@gmail.com>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class AbstractResourceExtensionSpec extends ObjectBehavior
 {
@@ -166,25 +165,7 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
     protected function mockDefaultBehavior($container)
     {
         $container->hasParameter('sylius.config.classes')->willReturn(false);
-        $container->hasParameter('sylius.translation.mapping')->willReturn(false);
-        $container->hasParameter('sylius.translation.default.mapping')->willReturn(true);
-        $container->getParameter('sylius.translation.default.mapping')->willReturn(
-            array(
-                array('default_mapping' => array(
-                    'translatable' => array(
-                        'field'          => 'translations',
-                        'currentLocale'  => 'currentLocale',
-                        'fallbackLocale' => 'fallbackLocale'
-                    ),
-                    'translation'  => array(
-                        'field'  => 'translatable',
-                        'locale' => 'locale'
-                    )
-                ))
-            ));
-
         $container->setParameter('sylius.config.classes', Argument::any())->shouldBeCalled();
-        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
     }
 }
 

@@ -42,8 +42,6 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 ))
             ));
 
-        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
-
         $attributeFormType = new Definition('Some\App\Product\Form\AttributeType');
         $attributeFormType
             ->setArguments(array('Some\App\Product\Entity\Attribute',

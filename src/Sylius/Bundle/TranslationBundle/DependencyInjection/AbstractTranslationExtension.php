@@ -48,16 +48,13 @@ abstract class AbstractTranslationExtension extends Extension implements Prepend
     /**
      * In case any extra processing is needed.
      *
-     * @param array $config
+     * @param array $class
      * @param ContainerBuilder $container
      *
      * @throws \Exception
-     * @return array
      */
-    protected function process(array $config, ContainerBuilder $container)
+    protected function processTranslations(array $class, ContainerBuilder $container)
     {
-        $classes = isset($config['classes']) ? $config['classes'] : array();
-
         if (!($container->hasParameter('sylius.translation.mapping')
             && $translationsMapping = $container->getParameter('sylius.translation.mapping'))
         ) {
@@ -70,22 +67,16 @@ abstract class AbstractTranslationExtension extends Extension implements Prepend
             throw new \Exception('Missing parameter sylius.translation.default.mapping. Default translation mapping must be defined!');
         }
 
-        foreach ($classes as $name => $value) {
-            if (isset($value['translatable'])) {
+        if (isset($class['translatable'])) {
 
-                $translationsMapping = $this->mapTranslatable($translationsMapping, $value['model'], $value['translatable'], $defaultValues);
-                unset($value[$name]['translatable']);
+            $translationsMapping = $this->mapTranslatable($translationsMapping, $class['model'], $class['translatable'], $defaultValues);
 
-            } elseif (isset($value['translation'])) {
+        } elseif (isset($class['translation'])) {
 
-                $translationsMapping = $this->mapTranslation($translationsMapping, $value['model'], $value['translation']);
-                unset($value[$name]['translation']);
-            }
+            $translationsMapping = $this->mapTranslation($translationsMapping, $class['model'], $class['translation']);
         }
 
         $container->setParameter('sylius.translation.mapping', $translationsMapping);
-
-        return $config;
     }
 
     /**

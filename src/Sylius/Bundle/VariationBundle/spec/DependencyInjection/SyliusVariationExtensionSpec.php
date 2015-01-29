@@ -42,7 +42,7 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 ))
             ));
 
-        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
+//        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
 
         $variantFormType = new Definition('Some\App\Product\Form\ProductVariantType');
         $variantFormType
