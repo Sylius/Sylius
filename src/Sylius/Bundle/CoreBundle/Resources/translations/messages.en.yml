@@ -44,6 +44,7 @@ sylius:
             total_from: From
             total_to: To
             payment_state: Payment state
+            channel: All channels
         page:
             body: Body
             id: ID
@@ -74,11 +75,13 @@ sylius:
             created_at_to: To
             number: Order number
             shipping_address: Ship to name
+            channel: All channels
         payment_filter:
             created_at_from: From
             created_at_to: To
             number: Order number
             billing_address: Bill to name
+            channel: All channels
         shipping_method:
             zone: Zone
         taxon:

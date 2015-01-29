@@ -22,8 +22,8 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/channel":           "0.10.*@dev",
-        "sylius/resource-bundle":   "0.10.*@dev",
+        "sylius/channel":           "0.13.*@dev",
+        "sylius/resource-bundle":   "0.13.*@dev",
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {
@@ -35,12 +35,15 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Sylius\\Bundle\\ChannelBundle\\": "" }
+        "psr-4": { "Sylius\\Bundle\\ChannelBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/" }
     },
     "target-dir": "Sylius/Bundle/ChannelBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.11-dev"
+            "dev-master": "0.13-dev"
         }
     }
 }

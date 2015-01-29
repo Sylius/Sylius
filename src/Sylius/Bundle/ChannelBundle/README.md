@@ -19,7 +19,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusInventoryBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusChannelBundle/index.html).
 
 Code examples
 -------------
@@ -70,7 +70,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusChannelBundle/blob/master/Channels/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusChannelBundle/blob/master/Resource/meta/LICENSE).
 
 Authors
 -------

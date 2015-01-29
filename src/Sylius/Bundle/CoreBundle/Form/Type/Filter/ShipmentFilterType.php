@@ -57,7 +57,7 @@ class ShipmentFilterType extends AbstractType
             ))
             ->add('channel', 'sylius_channel_choice', array(
                 'required'    => false,
-                'empty_value' => 'All channels'
+                'empty_value' => 'sylius.form.shipment_filter.channel'
             ))
         ;
     }

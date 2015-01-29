@@ -21,8 +21,11 @@ use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
  */
 class CurrencyHelperSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, MoneyHelper $moneyHelper)
-    {
+    function let(
+        CurrencyContextInterface $currencyContext,
+        CurrencyConverterInterface $converter,
+        MoneyHelper $moneyHelper
+    ) {
         $this->beConstructedWith($currencyContext, $converter, $moneyHelper);
     }
 
