@@ -64,8 +64,8 @@ class DomainManager
      */
     public function create($resource)
     {
-        $eventName = $this->config->getEvent();
-        $event = $this->dispatchEvent(sprintf('pre_%s', $eventName ?: 'create'), new ResourceEvent($resource));
+        $eventName = $this->config->getEvent('create');
+        $event = $this->dispatchEvent(sprintf('pre_%s', $eventName), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             if (null !== $this->flashHelper) {
@@ -86,7 +86,7 @@ class DomainManager
             $this->flashHelper->setFlash('success', 'create');
         }
 
-        $this->dispatchEvent(sprintf('post_%s', $eventName ?: 'create'), new ResourceEvent($resource));
+        $this->dispatchEvent(sprintf('post_%s', $eventName), new ResourceEvent($resource));
 
         return $resource;
     }
@@ -99,8 +99,8 @@ class DomainManager
      */
     public function update($resource, $flash = 'update')
     {
-        $eventName = $this->config->getEvent();
-        $event = $this->dispatchEvent(sprintf('pre_%s', $eventName ?: 'update'), new ResourceEvent($resource));
+        $eventName = $this->config->getEvent('update');
+        $event = $this->dispatchEvent(sprintf('pre_%s', $eventName), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             if (null !== $this->flashHelper) {
@@ -121,7 +121,7 @@ class DomainManager
             $this->flashHelper->setFlash('success', $flash);
         }
 
-        $this->dispatchEvent(sprintf('post_%s', $eventName ?: 'update'), new ResourceEvent($resource));
+        $this->dispatchEvent(sprintf('post_%s', $eventName), new ResourceEvent($resource));
 
         return $resource;
     }
@@ -154,8 +154,8 @@ class DomainManager
      */
     public function delete($resource)
     {
-        $eventName = $this->config->getEvent();
-        $event = $this->dispatchEvent(sprintf('pre_%s', $eventName ?: 'delete'), new ResourceEvent($resource));
+        $eventName = $this->config->getEvent('delete');
+        $event = $this->dispatchEvent(sprintf('pre_%s', $eventName), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             if (null !== $this->flashHelper) {
@@ -176,7 +176,7 @@ class DomainManager
             $this->flashHelper->setFlash('success', 'delete');
         }
 
-        $this->dispatchEvent(sprintf('post_%s', $eventName ?: 'delete'), new ResourceEvent($resource));
+        $this->dispatchEvent(sprintf('post_%s', $eventName), new ResourceEvent($resource));
 
         return $resource;
     }

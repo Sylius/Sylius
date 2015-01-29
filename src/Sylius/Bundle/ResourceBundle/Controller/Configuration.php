@@ -350,8 +350,8 @@ class Configuration
         return $this->parameters->get('serialization_version');
     }
 
-    public function getEvent()
+    public function getEvent($default = null)
     {
-        return $this->parameters->get('event');
+        return $this->parameters->get('event', $default);
     }
 }
