@@ -43,6 +43,7 @@
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
+        <parameter key="sylius.listener.order_channel.class">Sylius\Bundle\CoreBundle\EventListener\OrderChannelListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_pricing.class">Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
@@ -56,6 +57,7 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
+        <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
@@ -285,6 +287,10 @@
             <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
         </service>
+        <service id="sylius.listener.order_channel" class="%sylius.listener.order_channel.class%">
+            <argument type="service" id="sylius.context.channel" />
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="processOrderChannel" />
+        </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="session" />
@@ -347,6 +353,13 @@
                     <argument>%sylius.uploader.filesystem%</argument>
                 </service>
             </argument>
+        </service>
+
+        <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="sylius.promotion_applicator" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
