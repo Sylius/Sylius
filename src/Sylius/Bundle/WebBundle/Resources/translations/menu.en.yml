@@ -39,6 +39,7 @@ sylius:
                 taxonomies: Categorization
                 users: Users
                 zones: Zones
+                emails: Emails
             sidebar:
                 api_clients: API clients
                 assortment: Assortment
@@ -79,6 +80,7 @@ sylius:
                 taxonomies: Categorization
                 users: Users
                 zones: Zones
+                emails: Emails
     frontend:
         menu:
             account:

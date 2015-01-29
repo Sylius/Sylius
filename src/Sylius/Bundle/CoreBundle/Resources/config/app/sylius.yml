@@ -1,7 +1,5 @@
 sylius_core:
     driver: doctrine/orm
-    emails:
-        enabled: false
     routing:
         %sylius.model.product.class%:
             field: slug
@@ -247,3 +245,19 @@ sylius_translation:
         translation:
             field: translatable
             locale: locale
+
+sylius_mailer:
+    adapter: twig_swiftmailer
+    sender:
+        name: Example.com
+        address: no-reply@example.com
+    emails:
+        order_confirmation:
+            subject: Thank you for your order!
+            template: SyliusWebBundle:Email:orderConfirmation.html.twig
+        order_comment:
+            subject: Your order has been updated
+            template: SyliusWebBundle:Email:orderComment.html.twig
+        user_confirmation:
+            subject: Welcome to our store!
+            template: SyliusWebBundle:Email:userConfirmation.html.twig

@@ -2,6 +2,7 @@
 
 EXIT_STATUS=0
 
+bin/behat --suite=emails -fprogress || EXIT_STATUS=$?
 bin/behat --suite=orders -fprogress || EXIT_STATUS=$?
 bin/behat --suite=payments -fprogress || EXIT_STATUS=$?
 bin/behat --suite=pricing -fprogress || EXIT_STATUS=$?

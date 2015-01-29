@@ -195,6 +195,8 @@ sylius:
         taxation_settings: Taxation Settings
         taxonomy:
             index: Taxonomies
+        email:
+            index: Emails
         update: Edit
         user:
             index: Users
@@ -283,6 +285,17 @@ sylius:
         no_results: There are no countries configured.
         show_header: Country details
         update_header: Editing country
+    email:
+        create: Add new Email
+        create_header: Adding new Email
+        index_header: Email Templates
+        manage: Manage Emails
+        no_results: There are no emails configured.
+        update_header: Editing Email
+        code: Code
+        enabled: Enabled?
+        subject: Subject
+        updated_at: Last update
     create: Create
     created_at: Created at
     delete: delete
@@ -290,7 +303,6 @@ sylius:
     edit: edit
     move_up: move up
     move_down: move down
-    email: E-Mail
     currency:
         create: Create currency
         create_header: New currency

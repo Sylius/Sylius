@@ -1,0 +1,14 @@
+{% block subject %}
+    {% autoescape false %}
+    {{ 'email.order_comment.subject'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'email.order_comment.header'|trans }}</h1>
+    {% if comment %}
+        <h3>{{ comment.comment }}</h3>
+    {% endif %}
+
+    {% include "SyliusWebBundle:Frontend/Account:Order/_detail.html.twig" %}
+{% endblock %}
