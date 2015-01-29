@@ -124,6 +124,7 @@
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.checker.restricted_zone" />
             <argument type="service" id="sylius.price_calculator" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <!-- checker -->
