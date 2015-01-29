@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class Configuration
 {
@@ -347,5 +348,10 @@ class Configuration
     public function getSerializationVersion()
     {
         return $this->parameters->get('serialization_version');
+    }
+
+    public function getEvent()
+    {
+        return $this->parameters->get('event');
     }
 }

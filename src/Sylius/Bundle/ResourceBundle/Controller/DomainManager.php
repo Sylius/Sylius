@@ -63,7 +63,8 @@ class DomainManager
      */
     public function create($resource)
     {
-        $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
+        $_event = $this->config->getEvent();
+        $event = $this->dispatchEvent(sprintf('pre_%s', $_event ?: 'create'), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             if (null !== $this->flashHelper) {
@@ -84,7 +85,7 @@ class DomainManager
             $this->flashHelper->setFlash('success', 'create');
         }
 
-        $this->dispatchEvent('post_create', new ResourceEvent($resource));
+        $this->dispatchEvent(sprintf('post_%s', $_event ?: 'create'), new ResourceEvent($resource));
 
         return $resource;
     }
@@ -97,7 +98,8 @@ class DomainManager
      */
     public function update($resource, $flash = 'update')
     {
-        $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource));
+        $_event = $this->config->getEvent();
+        $event = $this->dispatchEvent(sprintf('pre_%s', $_event ?: 'update'), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             if (null !== $this->flashHelper) {
@@ -118,7 +120,7 @@ class DomainManager
             $this->flashHelper->setFlash('success', $flash);
         }
 
-        $this->dispatchEvent('post_update', new ResourceEvent($resource));
+        $this->dispatchEvent(sprintf('post_%s', $_event ?: 'update'), new ResourceEvent($resource));
 
         return $resource;
     }
@@ -151,7 +153,8 @@ class DomainManager
      */
     public function delete($resource)
     {
-        $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource));
+        $_event = $this->config->getEvent();
+        $event = $this->dispatchEvent(sprintf('pre_%s', $_event ?: 'delete'), new ResourceEvent($resource));
 
         if ($event->isStopped()) {
             if (null !== $this->flashHelper) {
@@ -172,7 +175,7 @@ class DomainManager
             $this->flashHelper->setFlash('success', 'delete');
         }
 
-        $this->dispatchEvent('post_delete', new ResourceEvent($resource));
+        $this->dispatchEvent(sprintf('post_%s', $_event ?: 'delete'), new ResourceEvent($resource));
 
         return $resource;
     }
