@@ -136,6 +136,7 @@ sylius_promotion:
     classes:
         promotion:
             model: Sylius\Component\Core\Model\Promotion
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
         promotion_subject:
             model: %sylius.model.order.class%

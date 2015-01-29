@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -23,6 +24,20 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ShippingStepType extends AbstractResourceType
 {
     /**
+     * @var ChannelContextInterface
+     */
+    protected $channelContext;
+
+    /**
+     * @param ChannelContextInterface $channelContext
+     */
+    public function __construct($dataClass, ChannelContextInterface $channelContext)
+    {
+        parent::__construct($dataClass);
+        $this->channelContext = $channelContext;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -30,7 +45,7 @@ class ShippingStepType extends AbstractResourceType
         $builder
             ->add('shipments', 'collection', array(
                 'type'    => 'sylius_checkout_shipment',
-                'options' => array('criteria' => $options['criteria'])
+                'options' => array('criteria' => $options['criteria'], 'channel' => $this->channelContext->getChannel())
             ))
         ;
     }

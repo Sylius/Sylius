@@ -27,6 +27,9 @@
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
 
+        <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
+        <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodEntityType</parameter>
+
         <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
@@ -55,6 +58,7 @@
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.cart.class%</argument>
+            <argument type="service" id="sylius.context.channel"/>
             <tag name="form.type" alias="sylius_checkout_shipping" />
         </service>
         <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">
@@ -64,6 +68,7 @@
         </service>
         <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
             <argument>%sylius.model.cart.class%</argument>
+            <argument type="service" id="sylius.context.channel" />
             <tag name="form.type" alias="sylius_checkout_payment" />
         </service>
         <service id="sylius.checkout_form.guest" class="%sylius.checkout_form.guest.class%">
