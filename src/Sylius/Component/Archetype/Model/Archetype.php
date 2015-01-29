@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 
@@ -23,8 +24,9 @@ use Sylius\Component\Variation\Model\OptionInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Adam Elsodaney <adam.elso@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class Archetype implements ArchetypeInterface
+class Archetype extends AbstractTranslatable implements ArchetypeInterface
 {
     /**
      * Id.
@@ -37,11 +39,6 @@ class Archetype implements ArchetypeInterface
      * @var string
      */
     protected $code;
-
-    /**
-     * @var string
-     */
-    protected $name;
 
     /**
      * @var Collection|AttributeInterface[]
@@ -79,11 +76,13 @@ class Archetype implements ArchetypeInterface
         $this->attributes = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
+
+        parent::__construct();
     }
 
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -108,24 +107,6 @@ class Archetype implements ArchetypeInterface
     public function setCode($code)
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -290,5 +271,31 @@ class Archetype implements ArchetypeInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->translate()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->translate()->setName($name);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
     }
 }

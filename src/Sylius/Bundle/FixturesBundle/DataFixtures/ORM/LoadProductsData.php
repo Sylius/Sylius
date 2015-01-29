@@ -99,7 +99,7 @@ class LoadProductsData extends DataFixture
         $this->addMasterVariant($product);
 
         $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
-        $product->setArchetype($this->getReference('Sylius.Archetype.T-Shirt'));
+        $product->setArchetype($this->getReference('Sylius.Archetype.t_shirt'));
 
         // T-Shirt brand.
         $randomBrand = $this->faker->randomElement(array('Nike', 'Adidas', 'Puma', 'Potato'));
@@ -148,7 +148,7 @@ class LoadProductsData extends DataFixture
         $this->addMasterVariant($product);
 
         $this->setTaxons($product, array('Stickers', 'Stickypicky'));
-        $product->setArchetype($this->getReference('Sylius.Archetype.Sticker'));
+        $product->setArchetype($this->getReference('Sylius.Archetype.sticker'));
 
         // Sticker resolution.
         $randomResolution = $this->faker->randomElement(array('Waka waka', 'FULL HD', '300DPI', '200DPI'));
@@ -189,7 +189,7 @@ class LoadProductsData extends DataFixture
         $this->addMasterVariant($product);
 
         $this->setTaxons($product, array('Mugs', 'Mugland'));
-        $product->setArchetype($this->getReference('Sylius.Archetype.Mug'));
+        $product->setArchetype($this->getReference('Sylius.Archetype.mug'));
 
         $randomMugMaterial = $this->faker->randomElement(array('Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand'));
         $this->addAttribute($product, 'Mug material', $randomMugMaterial);
@@ -228,7 +228,7 @@ class LoadProductsData extends DataFixture
         $this->addMasterVariant($product, $isbn);
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
-        $product->setArchetype($this->getReference('Sylius.Archetype.Book'));
+        $product->setArchetype($this->getReference('Sylius.Archetype.book'));
 
         $this->addAttribute($product, 'Book author', $author);
         $this->addAttribute($product, 'Book ISBN', $isbn);

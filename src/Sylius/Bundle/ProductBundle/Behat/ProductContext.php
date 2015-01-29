@@ -124,6 +124,18 @@ class ProductContext extends DefaultContext
     }
 
     /**
+     * @Then :locale translation for product archetype :archetypeName should exist
+     */
+    public function translationForProductArchetypeShouldExist($locale, $archetypeName)
+    {
+        $archetype = $this->findOneByName('product_archetype_translation', $archetypeName);
+
+        if (!$archetype->getLocale() === $locale) {
+            throw new \Exception('There is no translation for product archetype'. $archetypeName . ' in '.$locale . 'locale');
+        }
+    }
+
+    /**
      * @Given /^there are following options:$/
      * @Given /^the following options exist:$/
      */

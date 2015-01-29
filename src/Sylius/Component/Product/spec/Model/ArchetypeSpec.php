@@ -36,17 +36,6 @@ class ArchetypeSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
-    {
-        $this->getName()->shouldReturn(null);
-    }
-
-    function its_name_is_mutable()
-    {
-        $this->setName('T-Shirt size');
-        $this->getName()->shouldReturn('T-Shirt size');
-    }
-
     function it_initializes_attribute_collection_by_default()
     {
         $this->getAttributes()->shouldHaveType('Doctrine\Common\Collections\Collection');
@@ -115,7 +104,6 @@ class ArchetypeSpec extends ObjectBehavior
     {
         $date = new \DateTime();
 
-        $this->setName('T-Shirt')->shouldReturn($this);
         $this->setAttributes($attributes)->shouldReturn($this);
         $this->addAttribute($attribute)->shouldReturn($this);
         $this->removeAttribute($attribute)->shouldReturn($this);

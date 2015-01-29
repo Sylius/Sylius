@@ -65,7 +65,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         $config['classes'] = $convertedConfig;
         $config['validation_groups'] = $this->buildValidationConfig($config);
 
-        return $config;
+        return parent::process($config, $container);
     }
 
     /**
