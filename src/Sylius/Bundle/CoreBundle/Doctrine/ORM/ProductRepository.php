@@ -43,12 +43,7 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('taxon', $taxon)
         ;
 
-        foreach ($criteria as $attributeName => $value) {
-            $queryBuilder
-                ->andWhere('product.'.$attributeName.' IN (:'.$attributeName.')')
-                ->setParameter($attributeName, $value)
-            ;
-        }
+        $this->applyCriteria($queryBuilder, $criteria);
 
         return $this->getPaginator($queryBuilder);
     }

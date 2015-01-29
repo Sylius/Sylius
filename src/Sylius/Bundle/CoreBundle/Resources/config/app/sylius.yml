@@ -120,6 +120,9 @@ sylius_shipping:
 
 sylius_promotion:
     classes:
+        promotion:
+            model: Sylius\Component\Core\Model\Promotion
+            form: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
         promotion_subject:
             model: %sylius.model.order.class%
         promotion_coupon:

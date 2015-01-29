@@ -21,6 +21,8 @@ sylius:
                 different_billing_address: Use different address for billing?
             payment_method: Payment Method
             shipping_method: Shipping Method
+        promotion:
+            channels: Channel
         coupon:
             per_user_usage_limit: Per-User Usage Limity
         group:

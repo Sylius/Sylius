@@ -640,6 +640,7 @@ sylius:
         manage: Manage channels
         create_header: Add channel
         name: Name
+        url: Url
         no_results: There are no channels configured.
         update: Edit
         update_header: Editing channel

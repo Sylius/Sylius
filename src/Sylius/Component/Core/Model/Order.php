@@ -17,7 +17,7 @@ use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 
@@ -116,7 +116,7 @@ class Order extends Cart implements OrderInterface
     /**
      * Promotions applied
      *
-     * @var Collection|PromotionInterface[]
+     * @var Collection|BasePromotionInterface[]
      */
     protected $promotions;
 
@@ -566,7 +566,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(PromotionInterface $promotion)
+    public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);
     }
@@ -574,7 +574,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(PromotionInterface $promotion)
+    public function addPromotion(BasePromotionInterface $promotion)
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -586,7 +586,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(PromotionInterface $promotion)
+    public function removePromotion(BasePromotionInterface $promotion)
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);
