@@ -23,9 +23,6 @@ sylius:
             shipping_method: Shipping Method
         coupon:
             per_user_usage_limit: Per-User Usage Limity
-        group:
-            name: Name
-            roles: Roles
         image:
             file: Image
         locale:
@@ -71,17 +68,6 @@ sylius:
             file: Select image
         taxonomy:
             file: Select image
-        user:
-            billing_address: Billing address
-            different_billing_address: Use different address for billing?
-            enabled: Enabled
-            first_name: First name
-            groups: Groups
-            last_name: Last name
-            password: Password
-            shipping_address: Shipping address
-        user_filter:
-            query: Search
         variant:
             available_on_demand: Available on demand
             depth: Depth

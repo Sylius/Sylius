@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\Cart;
-use Sylius\Component\User\Model\UserInterface as UserComponentInterface;
+use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -30,7 +30,7 @@ class Order extends Cart implements OrderInterface
     /**
      * User.
      *
-     * @var UserComponentInterface
+     * @var BaseUserInterface
      */
     protected $user;
 
@@ -129,7 +129,7 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserComponentInterface $user = null)
+    public function setUser(BaseUserInterface $user)
     {
         $this->user = $user;
         if (null !== $this->user) {

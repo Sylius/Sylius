@@ -12,14 +12,14 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\User\Model\UserInterface as UserComponentInterface;
+use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
  * User interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends UserComponentInterface
+interface UserInterface extends BaseUserInterface
 {
     /**
      * Get currency.
