@@ -17,7 +17,15 @@ use Sylius\Component\Archetype\Model\Archetype as BaseArchetype;
  * Default archetype implementation.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Archetype extends BaseArchetype implements ArchetypeInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
+    }
 }

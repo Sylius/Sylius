@@ -24,23 +24,8 @@ use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-interface ArchetypeInterface extends TimestampableInterface
+interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslationInterface
 {
-    /**
-     * Get name, in most cases it will be displayed by user only in backend.
-     * Can be something like 't-shirt' or 'tv'.
-     *
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * Set name.
-     *
-     * @param string $name
-     */
-    public function setName($name);
-
     /**
      * Returns all prototype attributes.
      *

@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Component\Archetype\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -21,6 +20,7 @@ use Sylius\Component\Variation\Model\OptionInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ArchetypeSpec extends ObjectBehavior
 {
@@ -53,6 +53,11 @@ class ArchetypeSpec extends ObjectBehavior
     function it_initializes_attribute_collection_by_default()
     {
         $this->getAttributes()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    function it_initializes_translations_collection_by_default()
+    {
+        $this->getTranslations()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
     function its_attribute_collection_is_mutable(Collection $attributes)

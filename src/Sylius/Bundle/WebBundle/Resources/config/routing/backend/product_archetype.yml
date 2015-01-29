@@ -10,7 +10,7 @@ sylius_backend_product_archetype_index:
             template: SyliusWebBundle:Backend/ProductArchetype:index.html.twig
             sortable: true
             sorting:
-                name: desc
+                code: desc
 
 sylius_backend_product_archetype_create:
     path: /new

@@ -91,6 +91,11 @@ sylius_archetype:
             option: Sylius\Component\Product\Model\Option
             archetype:
                 model: Sylius\Component\Product\Model\Archetype
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+                translatable:
+                    targetEntity: Sylius\Component\Product\Model\ArchetypeTranslation
+            archetype_translation:
+                model: Sylius\Component\Product\Model\ArchetypeTranslation
 
 sylius_attribute: ~
 

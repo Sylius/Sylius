@@ -48,8 +48,10 @@ class ArchetypeType extends AbstractResourceType
             ->add('code', 'text', array(
                 'label' => 'sylius.form.archetype.code'
             ))
-            ->add('name', 'text', array(
-                'label' => 'sylius.form.archetype.name'
+            ->add('translations', 'a2lix_translationsForms', array(
+                // TODO Form as a service?
+                'form_type' => new ArchetypeTranslationType($this->dataClass.'Translation', $this->validationGroups, $this->subject),
+                'label'    => 'sylius.form.taxonomy.name'
             ))
             ->add('parent', sprintf('sylius_%s_archetype_choice', $this->subject), array(
                 'required' => false,
