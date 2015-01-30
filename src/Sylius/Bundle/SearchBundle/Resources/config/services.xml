@@ -57,6 +57,7 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius_search.query.logger" on-invalid="ignore" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="sylius_search.elasticsearch.finder" class="%sylius_search.elasticsearch.finder.class%">
@@ -65,6 +66,7 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="fos_elastica.index.sylius" on-invalid="ignore" />
             <argument type="service" id="sylius_search.query.logger" on-invalid="ignore" />
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="sylius.search.transformers.model.product" class="%fos_elastica.model_to_elastica_transformer.class%">
