@@ -2,7 +2,7 @@
 {% set labels = data.labels %}
 {% set values = data.values %}
 {% set chartType = configuration.type %}
-    
+
 {% block javascripts %}
     <script>
         function generateLineChart(labels, values, ctx) {
@@ -10,13 +10,12 @@
                 labels : labels,
                 datasets : [
                     {
-                        fillColor : "rgba(220,220,220,0.5)",
-                        fillColor : "rgba(151,187,205,0.2)",
-                        strokeColor : "rgba(151,187,205,1)",
-                        pointColor : "rgba(151,187,205,1)",
+                        fillColor : "rgba(26,187,156,0.5)",
+                        strokeColor : "rgba(55,163,126,1)",
+                        pointColor : "rgba(55,163,126,1)",
                         pointStrokeColor : "#fff",
                         pointHighlightFill : "#fff",
-                        pointHighlightStroke : "rgba(151,187,205,1)",
+                        pointHighlightStroke : "rgba(55,163,126,1)",
                         data : values
                     }
                 ]
@@ -49,7 +48,7 @@
                 labels: labels,
                 datasets: [
                     {
-                        fillColor: "#1abb9c",
+                        fillColor: "rgba(26,187,156,0.5)",
                         strokeColor: "#37a37e",
                         pointColor: "rgba(220,220,220,1)",
                         pointStrokeColor: "#fff",
@@ -99,39 +98,35 @@
             return data;
         }
 
-        function initCharts(chartType){
+        function initChart(self){
+            var chartType = self.attr("data-type");
+            var reportCode = self.attr("id");
+            var labels = self.attr("data-labels").split(";");
+            var values = self.attr("data-values").split(";");
 
-            var labels = document.getElementById("data").getAttribute("data-labels").split(";");
-            var values = document.getElementById("data").getAttribute("data-values").split(";");
+            var ctx = document.getElementById(reportCode).getContext("2d");
+            switch(chartType) {
+                case "line": generateLineChart(labels, values, ctx); break;
+                case "bar": generateBarChart(labels, values, ctx); break;
+                case "radar": generateRadarChart(labels, values, ctx); break;
+                case "polar": generatePolarChart(labels, values, ctx); break;
+                case "pie": generatePieChart(labels, values, ctx); break;
+                case "doughnut": generateDoughnutChart(labels, values, ctx); break;
+            }
+        }
 
-            $.each($("canvas"), function() {
-                var ctx = this.getContext("2d");
-                console.log(ctx);
-                switch(chartType) {
-                    case "line": generateLineChart(labels, values, ctx); break;
-                    case "bar": generateBarChart(labels, values, ctx); break;
-                    case "radar": generateRadarChart(labels, values, ctx); break;
-                    case "polar": generatePolarChart(labels, values, ctx); break;
-                    case "pie": generatePieChart(labels, values, ctx); break;
-                    case "doughnut": generateDoughnutChart(labels, values, ctx); break;
-                }
+        window.addEventListener("load",function(){
+            $.each($("canvas"), function(){
+                initChart($(this));
             });
-        }
-
-        window.onload = function(){
-            var chartType = "{{ chartType }}";
-            initCharts(chartType);
-        }
+        });
     </script>
 {% endblock %}
 
 {% block content %}
     <div class="col-xs-12">
         <div class="row">
-            <canvas id="canvas" height="450"></canvas>
-            <div id="data" class="hidden" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %};{% endif %}{% endfor %}"></div>
-            <canvas id="canvas" height="450"></canvas>
-            <div id="data" class="hidden" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %};{% endif %}{% endfor %}"></div>
+            <canvas id="{{ report.code }}" data-type="{{ configuration.type }}" data-labels="{% for key,item in values %}{{ key }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" data-values="{% for key,item in values %}{{ item }}{% if loop.index != loop.length %};{% endif %}{% endfor %}" height="400"></canvas>
         </div>
     </div>
 {% endblock %}
