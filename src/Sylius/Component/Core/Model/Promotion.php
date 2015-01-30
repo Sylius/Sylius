@@ -23,7 +23,6 @@ use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
  */
 class Promotion extends BasePromotion implements PromotionInterface
 {
-
     /**
      * Channels in which this product is available.
      *

@@ -161,7 +161,6 @@ class Channel implements ChannelInterface
         return $this;
     }
 
-
     /**
      * {@inheritdoc}
      */

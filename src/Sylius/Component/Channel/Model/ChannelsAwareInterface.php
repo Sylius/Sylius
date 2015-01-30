@@ -47,4 +47,3 @@ interface ChannelsAwareInterface
      */
     public function removeChannel(ChannelInterface $channel);
 }
-

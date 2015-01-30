@@ -23,5 +23,4 @@ interface PromotionInterface extends
     BasePromotionInterface,
     ChannelsAwareInterface
 {
-
 }
