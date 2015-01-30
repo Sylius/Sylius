@@ -40,7 +40,6 @@
     "autoload-dev": {
         "psr-4": { "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/" }
     },
-    "target-dir": "Sylius/Bundle/ChannelBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "0.13-dev"

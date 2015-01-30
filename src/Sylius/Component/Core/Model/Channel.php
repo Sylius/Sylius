@@ -28,27 +28,27 @@ use Sylius\Component\Taxonomy\Model\TaxonomyInterface as BaseTaxonomyInterface;
 class Channel extends BaseChannel implements ChannelInterface
 {
     /**
-     * @var CurrencyInterface[]
+     * @var CurrencyInterface[]|Collection
      */
     protected $currencies;
 
     /**
-     * @var LocaleInterface[]
+     * @var LocaleInterface[]|Collection
      */
     protected $locales;
 
     /**
-     * @var PaymentMethodInterface[]
+     * @var PaymentMethodInterface[]|Collection
      */
     protected $paymentMethods;
 
     /**
-     * @var BaseShippingMethodInterface[]
+     * @var BaseShippingMethodInterface[]|Collection
      */
     protected $shippingMethods;
 
     /**
-     * @var BaseTaxonomyInterface[]
+     * @var BaseTaxonomyInterface[]|Collection
      */
     protected $taxonomies;
 

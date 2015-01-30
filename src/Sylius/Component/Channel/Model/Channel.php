@@ -46,7 +46,7 @@ class Channel implements ChannelInterface
     /**
      * @var string
      */
-    protected $type = ChannelType::WEB;
+    protected $type = ChannelInterface::WEB;
 
     /**
      * @var string

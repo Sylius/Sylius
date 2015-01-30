@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -53,7 +54,7 @@ class Attribute extends AbstractTranslatable implements AttributeInterface
     /**
      * All values associated with this attribute.
      *
-     * @var AttributeValueInterface[]
+     * @var AttributeValueInterface[]|Collection
      */
     protected $values;
 

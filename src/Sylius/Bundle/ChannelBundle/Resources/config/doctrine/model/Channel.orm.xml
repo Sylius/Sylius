@@ -26,7 +26,7 @@
         <field name="name" type="string" />
         <field name="type" type="string" />
         <field name="color" type="string" nullable="true"/>
-        <field name="description" type="text" />
+        <field name="description" type="text" nullable="true" />
         <field name="enabled" type="boolean" />
         <field name="url"   type="string" nullable="true" />
 
