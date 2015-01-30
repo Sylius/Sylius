@@ -66,7 +66,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * Channels in which this product is available.
      *
-     * @var ChannelInterface[]
+     * @var ChannelInterface[]|Collection
      */
     protected $channels;
 

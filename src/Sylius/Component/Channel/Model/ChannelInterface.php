@@ -20,6 +20,9 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ChannelInterface extends TimestampableInterface
 {
+    const WEB = 'web';
+    const MOBILE = 'mobile';
+
     /**
      * @return string
      */
