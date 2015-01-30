@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Model;
+namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
 
