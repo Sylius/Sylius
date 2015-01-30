@@ -10,8 +10,8 @@
         <div class="form-group">
         {{ form_errors(form.channels) }}
         {{ form_label(form.channels) }}
-        {% for c in form.channels %}
-            {{ form_row(c) }}
+        {% for channelForm in form.channels %}
+            {{ form_row(channelForm) }}
         {% endfor %}
         </div>
 

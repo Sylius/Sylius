@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
 use Sylius\Component\Locale\Model\LocalesAwareInterface;

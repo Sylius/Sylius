@@ -20,7 +20,6 @@ use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-
 /**
  * Order entity.
  *
