@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
- * Locale bundle.
+ * User bundle.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */

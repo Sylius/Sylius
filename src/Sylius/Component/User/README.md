@@ -1,4 +1,4 @@
-User Component [![Build status...](https://secure.travis-ci.org/Sylius/Locale.png?branch=master)](http://travis-ci.org/Sylius/Locale)
+User Component [![Build status...](https://secure.travis-ci.org/Sylius/User.png?branch=master)](http://travis-ci.org/Sylius/User)
 ================
 
 Managing users in PHP applications.
@@ -38,10 +38,10 @@ If you find a bug, please refer to the [Reporting a Bug](http://docs.sylius.org/
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/Locale/blob/master/LICENSE).
+License can be found [here](https://github.com/Sylius/User/blob/master/LICENSE).
 
 Authors
 -------
 
 The component was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/Locale/contributors).
+See the list of [contributors](https://github.com/Sylius/User/contributors).

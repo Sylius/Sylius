@@ -17,8 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.repository.group.class">Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository</parameter>
-        <parameter key="sylius.repository.user.class">Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository</parameter>
         <parameter key="sylius.model.variant_image.class">Sylius\Component\Core\Model\VariantImage</parameter>
     </parameters>
 

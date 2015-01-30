@@ -21,7 +21,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This information is solely responsible for how the different configuration
  * sections are normalized, and merged.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -84,7 +84,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('user')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\User')->end()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\User')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('form')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserType')->end()
                             ->end()

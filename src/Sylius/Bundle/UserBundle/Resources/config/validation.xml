@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Core\Model\User">
+    <class name="Sylius\Component\User\Model\User">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.first_name.not_blank</option>
@@ -59,6 +59,26 @@
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>ProfileAdd</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Component\User\Model\Group">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">sylius.group.name.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.group.name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.group.name.max</option>
+                <option name="groups">
+                    <value>sylius</value>
                 </option>
             </constraint>
         </property>
