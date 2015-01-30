@@ -17,6 +17,7 @@ use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 /**
  * OrmFinder
@@ -25,13 +26,14 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
  */
 class OrmFinder extends AbstractFinder
 {
-    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger)
+    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger, ChannelContextInterface $channelContext)
     {
         $this->searchRepository  = $searchRepository;
         $this->config            = $config;
         $this->productRepository = $productRepository;
         $this->em                = $em;
         $this->queryLogger       = $queryLogger;
+        $this->channelContext    = $channelContext;
     }
 
     /**
@@ -69,8 +71,10 @@ class OrmFinder extends AbstractFinder
             $this->initializeFacetGroup($this->facetGroup);
         }
 
+        $channel = $this->channelContext->getChannel();
+
         // First get ALL products from the taxon to get their ids
-        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array());
+        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('channel' => $channel));
 
         $ids = array();
         $pages = $paginator->getNbPages();
@@ -108,7 +112,7 @@ class OrmFinder extends AbstractFinder
             $this->facets = $this->calculateNewFacets($facetsArray, $facetFilteredIds);
         }
 
-        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets));
+        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channel' => $channel));
         $this->filters = $query->getAppliedFilters();
 
         return $this;
