@@ -24,7 +24,7 @@
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
-        <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType</parameter>
+        <parameter key="sylius.form.type.product_translation.class">Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType</parameter>
     </parameters>
 
     <services>
