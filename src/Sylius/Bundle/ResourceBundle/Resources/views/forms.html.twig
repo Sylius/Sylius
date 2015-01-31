@@ -5,9 +5,9 @@
     {% spaceless %}
         <div data-form-type="collection"
              {{ block('widget_container_attributes') }}
-             {% if prototype is not empty %}
+             {% if prototype is defined and allow_add and prototype is not empty %}
              data-prototype='{{ _self.collectionItem(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-             {% endif %}>
+             {%- endif -%}>
 
             {{ error(form.vars.errors) }}
 
