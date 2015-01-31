@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
+interface AttributeInterface extends GetIdInterface, TimestampableInterface, AttributeTranslationInterface
 {
     /**
      * Get internal name.

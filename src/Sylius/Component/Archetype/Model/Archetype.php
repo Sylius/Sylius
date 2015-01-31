@@ -94,7 +94,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -102,7 +102,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     }
 
     /**
-     * @param string $code
+     * {@inheritdoc}
      */
     public function setCode($code)
     {

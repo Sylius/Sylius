@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php":                               ">=5.3.3",
+        "php":                               ">=5.3.9",
 
         "jackalope/jackalope-doctrine-dbal": "1.1.*",
         "sylius/resource-bundle":            "0.13.*@dev",

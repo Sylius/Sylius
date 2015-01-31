@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface AddressInterface extends TimestampableInterface
+interface AddressInterface extends GetIdInterface, TimestampableInterface
 {
     /**
      * Get first name.

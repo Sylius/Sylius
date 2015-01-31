@@ -12,6 +12,7 @@
 namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
@@ -21,7 +22,7 @@ use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends AdjustableInterface, CommentAwareInterface, TimestampableInterface, SoftDeletableInterface, SequenceSubjectInterface
+interface OrderInterface extends AdjustableInterface, CommentAwareInterface, GetIdInterface, SoftDeletableInterface, SequenceSubjectInterface, TimestampableInterface
 {
     const STATE_CART        = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
@@ -49,7 +50,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Has the order been completed by user and can be handled.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCompleted();
 
@@ -89,7 +90,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Returns number of order items.
      *
-     * @return integer
+     * @return int
      */
     public function countItems();
 
@@ -112,14 +113,14 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
      *
      * @param OrderItemInterface $item
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasItem(OrderItemInterface $item);
 
     /**
      * Get items total.
      *
-     * @return integer
+     * @return int
      */
     public function getItemsTotal();
 
@@ -132,14 +133,14 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Get order total.
      *
-     * @return integer
+     * @return int
      */
     public function getTotal();
 
     /**
      * Set total.
      *
-     * @param integer $total
+     * @param int $total
      */
     public function setTotal($total);
 
@@ -159,14 +160,14 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Returns total quantity of items in cart.
      *
-     * @return integer
+     * @return int
      */
     public function getTotalQuantity();
 
     /**
      * Checks whether the cart is empty or not.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEmpty();
 
@@ -193,14 +194,13 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
      * Add an identity to this order.  Eg. external identity to refer to an ebay order id
      *
      * @param IdentityInterface $identity
-     * @return mixed
      */
     public function addIdentity(IdentityInterface $identity);
 
     /**
      * Remove identity from order.
      *
-     * @param IdentityInterface $item
+     * @param IdentityInterface $identity
      */
     public function removeIdentity(IdentityInterface $identity);
 
@@ -208,6 +208,8 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
      * Is the identity already contained in this order?
      *
      * @param IdentityInterface $identity
+     *
+     * @return bool
      */
     public function hasIdentity(IdentityInterface $identity);
 

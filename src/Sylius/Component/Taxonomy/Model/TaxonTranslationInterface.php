@@ -12,6 +12,7 @@
 namespace Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonTranslationInterface extends SlugAwareInterface
+interface TaxonTranslationInterface extends GetIdInterface, SlugAwareInterface
 {
     /**
      * Get taxon name.

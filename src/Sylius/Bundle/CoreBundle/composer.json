@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php":                            ">=5.3.3",
+        "php":                            ">=5.3.9",
 
         "a2lix/translation-form-bundle":  "2.*@dev",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",

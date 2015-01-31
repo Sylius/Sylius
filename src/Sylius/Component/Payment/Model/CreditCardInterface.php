@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CreditCardInterface extends PaymentSourceInterface, TimestampableInterface
+interface CreditCardInterface extends GetIdInterface, PaymentSourceInterface, TimestampableInterface
 {
     /**
      * Supported CC brands.
@@ -117,28 +118,28 @@ interface CreditCardInterface extends PaymentSourceInterface, TimestampableInter
     /**
      * Get expiry month.
      *
-     * @return integer
+     * @return int
      */
     public function getExpiryMonth();
 
     /**
      * Set expiry month.
      *
-     * @param integer
+     * @param int
      */
     public function setExpiryMonth($expiryMonth);
 
     /**
      * Get expiry year.
      *
-     * @return integer
+     * @return int
      */
     public function getExpiryYear();
 
     /**
      * Set expiry year.
      *
-     * @param integer $expiryYear
+     * @param int $expiryYear
      */
     public function setExpiryYear($expiryYear);
 }

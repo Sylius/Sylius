@@ -11,18 +11,15 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Province interface.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-interface ProvinceInterface
+interface ProvinceInterface extends GetIdInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return string
      */

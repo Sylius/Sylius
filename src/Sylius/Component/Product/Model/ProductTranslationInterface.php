@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Product\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ProductTranslationInterface extends SlugAwareInterface
+interface ProductTranslationInterface extends GetIdInterface, SlugAwareInterface
 {
     /**
      * Get product name.

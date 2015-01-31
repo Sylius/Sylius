@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Locale\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface LocaleInterface extends TimestampableInterface
+interface LocaleInterface extends GetIdInterface, TimestampableInterface
 {
     /**
      * Get locale code.
@@ -37,14 +38,14 @@ interface LocaleInterface extends TimestampableInterface
     /**
      * Is activated?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
      * Set activation status.
      *
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 }

@@ -12,13 +12,14 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\GetIdInterface;
 
 /**
  * Shipment interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShipmentInterface extends ShippingSubjectInterface
+interface ShipmentInterface extends GetIdInterface, ShippingSubjectInterface
 {
     // Shipment default states.
     const STATE_CHECKOUT    = 'checkout';
@@ -84,7 +85,7 @@ interface ShipmentInterface extends ShippingSubjectInterface
      *
      * @param ShipmentItemInterface $item
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasItem(ShipmentItemInterface $item);
 
@@ -105,7 +106,7 @@ interface ShipmentInterface extends ShippingSubjectInterface
     /**
      * Check if this shipment has any tracking.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isTracked();
 }

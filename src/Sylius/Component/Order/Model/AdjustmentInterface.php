@@ -12,6 +12,7 @@
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Originator\Model\OriginAwareInterface;
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AdjustmentInterface extends TimestampableInterface, OriginAwareInterface
+interface AdjustmentInterface extends GetIdInterface, TimestampableInterface, OriginAwareInterface
 {
     /**
      * Get adjustment subject.

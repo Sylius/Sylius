@@ -12,14 +12,14 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\GetIdInterface;
 
 /**
  * Shipping method translation interface.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ShippingMethodTranslationInterface
+interface ShippingMethodTranslationInterface extends GetIdInterface
 {
     /**
      * Get shipping method name.

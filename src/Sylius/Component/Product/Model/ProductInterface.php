@@ -12,7 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
-use Sylius\Component\Resource\Model\SlugAwareInterface;
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -24,10 +24,10 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface ProductInterface extends
     ArchetypeSubjectInterface,
-    SlugAwareInterface,
+    GetIdInterface,
+    ProductTranslationInterface,
     SoftDeletableInterface,
-    TimestampableInterface,
-    ProductTranslationInterface
+    TimestampableInterface
 {
     /**
      * Check whether the product is available.

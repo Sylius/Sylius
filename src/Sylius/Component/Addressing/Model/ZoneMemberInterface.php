@@ -11,18 +11,15 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Zone member interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ZoneMemberInterface
+interface ZoneMemberInterface extends GetIdInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return ZoneInterface
      */

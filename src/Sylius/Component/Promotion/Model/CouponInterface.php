@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -19,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
+interface CouponInterface extends GetIdInterface, SoftDeletableInterface, TimestampableInterface
 {
     /**
      * Get code
@@ -38,28 +39,28 @@ interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
     /**
      * Get usage limit
      *
-     * @return integer
+     * @return int
      */
     public function getUsageLimit();
 
     /**
      * Set usage limit
      *
-     * @param integer $usageLimit
+     * @param int $usageLimit
      */
     public function setUsageLimit($usageLimit);
 
     /**
      * Get number of times this coupon has been used
      *
-     * @return integer
+     * @return int
      */
     public function getUsed();
 
     /**
      * Set number of times this coupon has been used
      *
-     * @param integer $used
+     * @param int $used
      */
     public function setUsed($used);
 
@@ -99,7 +100,7 @@ interface CouponInterface extends SoftDeletableInterface, TimestampableInterface
     /**
      * Is this coupon valid?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isValid();
 }

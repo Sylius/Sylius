@@ -11,12 +11,13 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface ImageInterface extends TimestampableInterface
+interface ImageInterface extends GetIdInterface, TimestampableInterface
 {
     /**
-     * @return Boolean
+     * @return bool
      */
     public function hasFile();
 

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentInterface extends TimestampableInterface
+interface PaymentInterface extends GetIdInterface, TimestampableInterface
 {
     // Payment states.
     const STATE_NEW        = 'new';
@@ -99,14 +100,14 @@ interface PaymentInterface extends TimestampableInterface
     /**
      * Get amount.
      *
-     * @return integer
+     * @return int
      */
     public function getAmount();
 
     /**
      * Set amount.
      *
-     * @param integer $amount
+     * @param int $amount
      *
      * @return PaymentInterface
      */

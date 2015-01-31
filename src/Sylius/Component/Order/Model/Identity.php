@@ -35,14 +35,21 @@ class Identity implements IdentityInterface
     /**
      * Identity name, for instance "ebay id"
      *
+     * @var string
      */
     protected $name;
 
     /**
      * Identity value, for instance "2342343242"
      *
+     * @var string
      */
     protected $value;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * {@inheritdoc}

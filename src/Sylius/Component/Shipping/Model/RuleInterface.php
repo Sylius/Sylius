@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Shipping method rule model interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface RuleInterface
+interface RuleInterface extends GetIdInterface
 {
     const TYPE_ITEM_TOTAL = 'item_total';
     const TYPE_ITEM_COUNT = 'item_count';
