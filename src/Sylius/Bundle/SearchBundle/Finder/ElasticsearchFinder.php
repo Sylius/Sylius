@@ -184,7 +184,7 @@ class ElasticsearchFinder extends AbstractFinder
                 $typeFilter = new \Elastica\Filter\Type($type);
                 $boolFilter->addMust($typeFilter);
             }
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         $query = new \Elastica\Query\Filtered();
@@ -220,7 +220,7 @@ class ElasticsearchFinder extends AbstractFinder
                 $typeFilter = new \Elastica\Filter\Type($type);
                 $boolFilter->addMust($typeFilter);
             }
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         // this is currently the only pre search filter and it's a taxon
