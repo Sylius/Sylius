@@ -82,6 +82,11 @@ sylius_product:
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+            translatable:
+                targetEntity: Sylius\Component\Core\Model\ProductTranslation
+        product_translation:
+            model: Sylius\Component\Core\Model\ProductTranslation
+
 
 sylius_archetype:
     classes:
