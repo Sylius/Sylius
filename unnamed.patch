@@ -1,0 +1,1262 @@
+Index: composer.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- composer.json	(revision 60684b6710543f8cc2a4ed094cf06455432f2e3a)
++++ composer.json	(revision 83b0f88d5f83ee64572c568aa584b7450a4dd442)
+@@ -48,7 +48,6 @@
+         "omnipay/omnipay":                      "~2.3",
+         "payum/payum":                          "~0.12",
+         "payum/payum-bundle":                   "~0.12",
+-        "payum/omnipay-bridge":                 "~0.12",
+         "prezent/doctrine-translatable":        "1.0.*@dev",
+         "sensio/distribution-bundle":           "2.3.*",
+         "stof/doctrine-extensions-bundle":      "1.1.*",
+Index: composer.lock
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- composer.lock	(revision 60684b6710543f8cc2a4ed094cf06455432f2e3a)
++++ composer.lock	(revision 83b0f88d5f83ee64572c568aa584b7450a4dd442)
+@@ -4,7 +4,7 @@
+         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+         "This file is @generated automatically"
+     ],
+-    "hash": "687ec5e0321cfad07031d4e5c17eb3c2",
++    "hash": "d76c2104e8dcfa9ce4330f428b303c80",
+     "packages": [
+         {
+             "name": "a2lix/translation-form-bundle",
+@@ -297,7 +297,7 @@
+                 {
+                     "name": "Johannes Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -373,7 +373,7 @@
+                 {
+                     "name": "Johannes Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -804,27 +804,22 @@
+         },
+         {
+             "name": "doctrine/lexer",
+-            "version": "v1.0.1",
++            "version": "v1.0",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/doctrine/lexer.git",
+-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
++                "reference": "2f708a85bb3aab5d99dab8be435abd73e0b18acb"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
+-                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
++                "url": "https://api.github.com/repos/doctrine/lexer/zipball/2f708a85bb3aab5d99dab8be435abd73e0b18acb",
++                "reference": "2f708a85bb3aab5d99dab8be435abd73e0b18acb",
+                 "shasum": ""
+             },
+             "require": {
+                 "php": ">=5.3.2"
+             },
+             "type": "library",
+-            "extra": {
+-                "branch-alias": {
+-                    "dev-master": "1.0.x-dev"
+-                }
+-            },
+             "autoload": {
+                 "psr-0": {
+                     "Doctrine\\Common\\Lexer\\": "lib/"
+@@ -836,16 +831,19 @@
+             ],
+             "authors": [
+                 {
++                    "name": "Guilherme Blanco",
++                    "email": "guilhermeblanco@gmail.com",
++                    "homepage": "http://www.instaclick.com"
++                },
++                {
+                     "name": "Roman Borschel",
+                     "email": "roman@code-factory.org"
+                 },
+                 {
+-                    "name": "Guilherme Blanco",
+-                    "email": "guilhermeblanco@gmail.com"
+-                },
+-                {
+                     "name": "Johannes Schmitt",
+-                    "email": "schmittjoh@gmail.com"
++                    "email": "schmittjoh@gmail.com",
++                    "homepage": "http://jmsyst.com",
++                    "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+             "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
+@@ -854,7 +852,7 @@
+                 "lexer",
+                 "parser"
+             ],
+-            "time": "2014-09-09 13:34:57"
++            "time": "2013-01-12 18:59:04"
+         },
+         {
+             "name": "doctrine/migrations",
+@@ -862,12 +860,12 @@
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/doctrine/migrations.git",
+-                "reference": "96f838b4fa93693d19196c8e24ed5f1c3972ba87"
++                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/96f838b4fa93693d19196c8e24ed5f1c3972ba87",
+-                "reference": "96f838b4fa93693d19196c8e24ed5f1c3972ba87",
++                "url": "https://api.github.com/repos/doctrine/migrations/zipball/f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
++                "reference": "f4fe9d9cc21a711d89d91d29c4a4e7945289cdd0",
+                 "shasum": ""
+             },
+             "require": {
+@@ -912,7 +910,7 @@
+                 "database",
+                 "migrations"
+             ],
+-            "time": "2014-12-19 17:14:47"
++            "time": "2014-10-30 14:49:25"
+         },
+         {
+             "name": "doctrine/orm",
+@@ -1166,16 +1164,16 @@
+         },
+         {
+             "name": "friendsofsymfony/elastica-bundle",
+-            "version": "v3.0.6",
++            "version": "3.0.5",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
+-                "reference": "9f5ce217dcf5e628274a7767e20a413e5e0b1197"
++                "reference": "b3f87e414f5a5b04a351e741d437a40c988bdbdb"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/9f5ce217dcf5e628274a7767e20a413e5e0b1197",
+-                "reference": "9f5ce217dcf5e628274a7767e20a413e5e0b1197",
++                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/b3f87e414f5a5b04a351e741d437a40c988bdbdb",
++                "reference": "b3f87e414f5a5b04a351e741d437a40c988bdbdb",
+                 "shasum": ""
+             },
+             "require": {
+@@ -1251,7 +1249,7 @@
+                 "propel",
+                 "search"
+             ],
+-            "time": "2015-01-04 11:08:20"
++            "time": "2014-09-21 11:08:41"
+         },
+         {
+             "name": "friendsofsymfony/oauth-server-bundle",
+@@ -1383,12 +1381,12 @@
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
+-                "reference": "6c8b756d5b1cc1194d0989ba67adebe347ed9443"
++                "reference": "6ec796c5a119b39b191e1c974031ea38ba8fbc6d"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/6c8b756d5b1cc1194d0989ba67adebe347ed9443",
+-                "reference": "6c8b756d5b1cc1194d0989ba67adebe347ed9443",
++                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/6ec796c5a119b39b191e1c974031ea38ba8fbc6d",
++                "reference": "6ec796c5a119b39b191e1c974031ea38ba8fbc6d",
+                 "shasum": ""
+             },
+             "require": {
+@@ -1452,7 +1450,7 @@
+             "keywords": [
+                 "rest"
+             ],
+-            "time": "2015-01-05 14:29:22"
++            "time": "2014-12-11 08:38:29"
+         },
+         {
+             "name": "friendsofsymfony/user-bundle",
+@@ -1460,12 +1458,12 @@
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
+-                "reference": "4ceecb62f8bfbee56a5ec83f5ab6124710cf89d1"
++                "reference": "3565dfb22df2b0791137d5244d34d528d887f73e"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/4ceecb62f8bfbee56a5ec83f5ab6124710cf89d1",
+-                "reference": "4ceecb62f8bfbee56a5ec83f5ab6124710cf89d1",
++                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3565dfb22df2b0791137d5244d34d528d887f73e",
++                "reference": "3565dfb22df2b0791137d5244d34d528d887f73e",
+                 "shasum": ""
+             },
+             "require": {
+@@ -1476,11 +1474,11 @@
+                 "symfony/twig-bundle": "~2.3"
+             },
+             "require-dev": {
+-                "doctrine/doctrine-bundle": "~1.3",
+-                "swiftmailer/swiftmailer": "~4.3|~5",
++                "doctrine/doctrine-bundle": "*",
++                "swiftmailer/swiftmailer": ">=4.3, <6.0",
+                 "symfony/validator": "~2.3",
+                 "symfony/yaml": "~2.3",
+-                "willdurand/propel-typehintable-behavior": "~1.0"
++                "willdurand/propel-typehintable-behavior": "dev-master"
+             },
+             "suggest": {
+                 "willdurand/propel-typehintable-behavior": "Needed when using the propel implementation"
+@@ -1519,19 +1517,19 @@
+             "keywords": [
+                 "User management"
+             ],
+-            "time": "2014-12-29 10:27:58"
++            "time": "2014-11-19 10:34:13"
+         },
+         {
+             "name": "gedmo/doctrine-extensions",
+             "version": "v2.3.9",
+             "source": {
+                 "type": "git",
+-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
++                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
+                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
++                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                 "shasum": ""
+             },
+@@ -2224,9 +2222,9 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "Johannes Schmitt",
++                    "name": "Johannes M. Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -2327,9 +2325,9 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "Johannes Schmitt",
++                    "name": "Johannes M. Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -2397,9 +2395,9 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "Johannes Schmitt",
++                    "name": "Johannes M. Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -2468,9 +2466,9 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "Johannes Schmitt",
++                    "name": "Johannes M. Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -2848,12 +2846,12 @@
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
+-                "reference": "20bcf406bfb7deb9a0b57b23ea8573be7e27fd77"
++                "reference": "7cd7db8cb140ef3e0107d027876a2a999fd91e01"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/20bcf406bfb7deb9a0b57b23ea8573be7e27fd77",
+-                "reference": "20bcf406bfb7deb9a0b57b23ea8573be7e27fd77",
++                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/7cd7db8cb140ef3e0107d027876a2a999fd91e01",
++                "reference": "7cd7db8cb140ef3e0107d027876a2a999fd91e01",
+                 "shasum": ""
+             },
+             "require": {
+@@ -2897,7 +2895,7 @@
+                 "pdf",
+                 "snappy"
+             ],
+-            "time": "2014-12-17 09:36:58"
++            "time": "2014-12-03 13:03:00"
+         },
+         {
+             "name": "kriswallsmith/assetic",
+@@ -3022,71 +3020,18 @@
+             "time": "2014-09-15 12:42:36"
+         },
+         {
+-            "name": "league/url",
+-            "version": "3.2.1",
+-            "source": {
+-                "type": "git",
+-                "url": "https://github.com/thephpleague/url.git",
+-                "reference": "74ae626949e967fd20511d074835ae6ff67d97ae"
+-            },
+-            "dist": {
+-                "type": "zip",
+-                "url": "https://api.github.com/repos/thephpleague/url/zipball/74ae626949e967fd20511d074835ae6ff67d97ae",
+-                "reference": "74ae626949e967fd20511d074835ae6ff67d97ae",
+-                "shasum": ""
+-            },
+-            "require": {
+-                "ext-mbstring": "*",
+-                "php": ">=5.3.0",
+-                "true/punycode": "~1.0"
+-            },
+-            "require-dev": {
+-                "phpunit/phpunit": "~4.0"
+-            },
+-            "type": "library",
+-            "extra": {
+-                "branch-alias": {
+-                    "dev-master": "3.3-dev"
+-                }
+-            },
+-            "autoload": {
+-                "psr-4": {
+-                    "League\\Url\\": "src"
+-                }
+-            },
+-            "notification-url": "https://packagist.org/downloads/",
+-            "license": [
+-                "MIT"
+-            ],
+-            "authors": [
+-                {
+-                    "name": "Ignace Nyamagana Butera",
+-                    "email": "nyamsprod@gmail.com",
+-                    "homepage": "https://github.com/nyamsprod/",
+-                    "role": "Developer"
+-                }
+-            ],
+-            "description": "League/url is a lightweight PHP Url manipulating library",
+-            "keywords": [
+-                "parse_url",
+-                "php",
+-                "url"
+-            ],
+-            "time": "2014-11-27 10:14:00"
+-        },
+-        {
+             "name": "liip/imagine-bundle",
+-            "version": "1.2.2",
++            "version": "1.2.1",
+             "target-dir": "Liip/ImagineBundle",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/liip/LiipImagineBundle.git",
+-                "reference": "7e71457fc3d48b0f54daf69afea92d07b9a3bac0"
++                "reference": "5838f67a4fd31a459bb23066f3b6264f78dd083a"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/7e71457fc3d48b0f54daf69afea92d07b9a3bac0",
+-                "reference": "7e71457fc3d48b0f54daf69afea92d07b9a3bac0",
++                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/5838f67a4fd31a459bb23066f3b6264f78dd083a",
++                "reference": "5838f67a4fd31a459bb23066f3b6264f78dd083a",
+                 "shasum": ""
+             },
+             "require": {
+@@ -3146,7 +3091,7 @@
+                 "image",
+                 "imagine"
+             ],
+-            "time": "2015-01-08 16:27:08"
++            "time": "2014-12-10 13:01:07"
+         },
+         {
+             "name": "mathiasverraes/money",
+@@ -3252,16 +3197,16 @@
+         },
+         {
+             "name": "monolog/monolog",
+-            "version": "1.12.0",
++            "version": "1.11.0",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/Seldaek/monolog.git",
+-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f"
++                "reference": "ec3961874c43840e96da3a8a1ed20d8c73d7e5aa"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
+-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
++                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/ec3961874c43840e96da3a8a1ed20d8c73d7e5aa",
++                "reference": "ec3961874c43840e96da3a8a1ed20d8c73d7e5aa",
+                 "shasum": ""
+             },
+             "require": {
+@@ -3275,7 +3220,7 @@
+                 "aws/aws-sdk-php": "~2.4, >2.4.8",
+                 "doctrine/couchdb": "~1.0@dev",
+                 "graylog2/gelf-php": "~1.0",
+-                "phpunit/phpunit": "~4.0",
++                "phpunit/phpunit": "~3.7.0",
+                 "raven/raven": "~0.5",
+                 "ruflin/elastica": "0.90.*",
+                 "videlalvaro/php-amqplib": "~2.4"
+@@ -3294,7 +3239,7 @@
+             "type": "library",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "1.12.x-dev"
++                    "dev-master": "1.11.x-dev"
+                 }
+             },
+             "autoload": {
+@@ -3320,7 +3265,7 @@
+                 "logging",
+                 "psr-3"
+             ],
+-            "time": "2014-12-29 21:29:35"
++            "time": "2014-09-30 13:30:58"
+         },
+         {
+             "name": "nikic/php-parser",
+@@ -4632,16 +4577,16 @@
+         },
+         {
+             "name": "omnipay/paypal",
+-            "version": "2.4.0",
++            "version": "v2.3.1",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/thephpleague/omnipay-paypal.git",
+-                "reference": "e97a944770fd88d023e495af58555650d9cc7e0c"
++                "reference": "c323164929de91d877661a519d0991515ef5e762"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/thephpleague/omnipay-paypal/zipball/e97a944770fd88d023e495af58555650d9cc7e0c",
+-                "reference": "e97a944770fd88d023e495af58555650d9cc7e0c",
++                "url": "https://api.github.com/repos/thephpleague/omnipay-paypal/zipball/c323164929de91d877661a519d0991515ef5e762",
++                "reference": "c323164929de91d877661a519d0991515ef5e762",
+                 "shasum": ""
+             },
+             "require": {
+@@ -4653,7 +4598,7 @@
+             "type": "library",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "2.3.x-dev"
++                    "dev-master": "2.0.x-dev"
+                 }
+             },
+             "autoload": {
+@@ -4686,7 +4631,7 @@
+                 "paypal",
+                 "purchase"
+             ],
+-            "time": "2015-01-07 19:36:51"
++            "time": "2014-09-17 00:39:56"
+         },
+         {
+             "name": "omnipay/pin",
+@@ -5192,77 +5137,17 @@
+             "time": "2013-03-06 13:21:44"
+         },
+         {
+-            "name": "payum/omnipay-bridge",
+-            "version": "0.13.0",
+-            "source": {
+-                "type": "git",
+-                "url": "https://github.com/Payum/OmnipayBridge.git",
+-                "reference": "4a73e5035e71a5583a3b2e3885337fa7980da267"
+-            },
+-            "dist": {
+-                "type": "zip",
+-                "url": "https://api.github.com/repos/Payum/OmnipayBridge/zipball/4a73e5035e71a5583a3b2e3885337fa7980da267",
+-                "reference": "4a73e5035e71a5583a3b2e3885337fa7980da267",
+-                "shasum": ""
+-            },
+-            "require": {
+-                "omnipay/common": "~2.0",
+-                "payum/core": "0.13.*",
+-                "php": ">=5.3.2"
+-            },
+-            "require-dev": {
+-                "omnipay/dummy": "~2.0",
+-                "phpunit/phpunit": "~4.0"
+-            },
+-            "type": "library",
+-            "extra": {
+-                "branch-alias": {
+-                    "dev-master": "0.13-dev"
+-                }
+-            },
+-            "autoload": {
+-                "psr-4": {
+-                    "Payum\\OmnipayBridge\\": "src"
+-                }
+-            },
+-            "notification-url": "https://packagist.org/downloads/",
+-            "license": [
+-                "MIT"
+-            ],
+-            "authors": [
+-                {
+-                    "name": "Community contributions",
+-                    "homepage": "https://github.com/Payum/OmnipayBridge/contributors"
+-                },
+-                {
+-                    "name": "Kotlyar Maksim",
+-                    "email": "kotlyar.maksim@gmail.com"
+-                },
+-                {
+-                    "name": "Payum project",
+-                    "homepage": "http://payum.org/"
+-                }
+-            ],
+-            "description": "This bridge allows you to use omnipay gateways but in payum like way.",
+-            "homepage": "https://github.com/Payum/OmnipayBridge",
+-            "keywords": [
+-                "omnipay",
+-                "payment"
+-            ],
+-            "time": "2014-12-28 09:36:34"
+-        },
+-        {
+             "name": "payum/payum",
+-            "version": "0.13.0",
++            "version": "0.12.8",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/Payum/Payum.git",
+-                "reference": "0a017b2f7808bc2ab125263fd2b6100992e0f52d"
++                "reference": "1b541fedc097a9cf6663eb96f0bf673418cb6346"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/Payum/Payum/zipball/0a017b2f7808bc2ab125263fd2b6100992e0f52d",
+-                "reference": "0a017b2f7808bc2ab125263fd2b6100992e0f52d",
++                "url": "https://api.github.com/repos/Payum/Payum/zipball/1b541fedc097a9cf6663eb96f0bf673418cb6346",
++                "reference": "1b541fedc097a9cf6663eb96f0bf673418cb6346",
+                 "shasum": ""
+             },
+             "require": {
+@@ -5270,8 +5155,8 @@
+                 "ext-soap": "*",
+                 "fp/klarna-invoice": "0.1.*",
+                 "klarna/checkout": "~1",
+-                "kriswallsmith/buzz": "~0.13",
+-                "league/url": "~3.0",
++                "kriswallsmith/buzz": "*",
++                "omnipay/common": "~2.0",
+                 "paypal/rest-api-sdk-php": "0.5.*",
+                 "php": ">=5.3.2",
+                 "stripe/stripe-php": "~1.0",
+@@ -5284,6 +5169,7 @@
+                 "payum/klarna-checkout": "self.version",
+                 "payum/klarna-invoice": "self.version",
+                 "payum/offline": "self.version",
++                "payum/omnipay-bridge": "self.version",
+                 "payum/payex": "self.version",
+                 "payum/paypal-express-checkout-nvp": "self.version",
+                 "payum/paypal-ipn": "self.version",
+@@ -5297,6 +5183,7 @@
+                 "doctrine/orm": "2.3.*",
+                 "ext-curl": "*",
+                 "ext-pdo_sqlite": "*",
++                "omnipay/dummy": "~2.0",
+                 "phpunit/phpunit": "~4.0",
+                 "psr/log": "~1.0",
+                 "symfony/form": "~2.3",
+@@ -5318,7 +5205,7 @@
+             "type": "library",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "0.13-dev"
++                    "dev-master": "0.12-dev"
+                 }
+             },
+             "autoload": {
+@@ -5344,7 +5231,7 @@
+                     "homepage": "http://payum.org/"
+                 }
+             ],
+-            "description": "Domain friendly payment framework. Paypal, payex, authorize.net, be2bill, recurring payments, instant notifications and many more",
++            "description": "Domain friendly payment framework. Paypal, payex, authorize.net, be2bill, omnipay, recurring payments, instant notifications and many more",
+             "homepage": "http://payum.org",
+             "keywords": [
+                 "authorize.net",
+@@ -5352,6 +5239,7 @@
+                 "instant payment notification",
+                 "ipn",
+                 "jms payment",
++                "omnipay",
+                 "payex",
+                 "payment",
+                 "paypal",
+@@ -5364,24 +5252,25 @@
+                 "stripe checkout",
+                 "stripe.js"
+             ],
+-            "time": "2014-12-26 20:42:25"
++            "time": "2014-12-13 12:53:00"
+         },
+         {
+             "name": "payum/payum-bundle",
+-            "version": "0.13.0",
++            "version": "0.12.4",
++            "target-dir": "Payum/Bundle/PayumBundle",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/Payum/PayumBundle.git",
+-                "reference": "853453533a146a5bfb2a8093c517f0a91f57e571"
++                "reference": "3f5d400b9770e3115ef543b0753d05a8c5a3c48b"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/853453533a146a5bfb2a8093c517f0a91f57e571",
+-                "reference": "853453533a146a5bfb2a8093c517f0a91f57e571",
++                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/3f5d400b9770e3115ef543b0753d05a8c5a3c48b",
++                "reference": "3f5d400b9770e3115ef543b0753d05a8c5a3c48b",
+                 "shasum": ""
+             },
+             "require": {
+-                "payum/core": "0.13.*",
++                "payum/core": "0.12.*,>=0.12.8",
+                 "php": ">=5.3.2",
+                 "symfony/form": "~2.3",
+                 "symfony/framework-bundle": "~2.3",
+@@ -5393,9 +5282,7 @@
+                 "omnipay/dummy": "~2.0",
+                 "omnipay/paypal": "~2.0",
+                 "omnipay/stripe": "~2.0",
+-                "payum/jms-payment-bridge": "0.13.*dev",
+-                "payum/omnipay-bridge": "0.13.*dev",
+-                "payum/payum": "0.13.*",
++                "payum/payum": "0.12.*,>=0.12.8",
+                 "phpunit/phpunit": "~4.0",
+                 "symfony/browser-kit": "~2.3",
+                 "symfony/class-loader": "~2.3",
+@@ -5404,12 +5291,12 @@
+             "type": "symfony-bundle",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "0.13-dev"
++                    "dev-master": "0.12-dev"
+                 }
+             },
+             "autoload": {
+-                "psr-4": {
+-                    "Payum\\Bundle\\PayumBundle\\": ""
++                "psr-0": {
++                    "Payum\\Bundle\\PayumBundle": ""
+                 }
+             },
+             "notification-url": "https://packagist.org/downloads/",
+@@ -5450,7 +5337,7 @@
+                 "stripe.js",
+                 "symfony"
+             ],
+-            "time": "2014-12-28 09:29:11"
++            "time": "2014-12-13 13:55:55"
+         },
+         {
+             "name": "phpcollection/phpcollection",
+@@ -5486,9 +5373,9 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "Johannes Schmitt",
++                    "name": "Johannes M. Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -5653,9 +5540,9 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "Johannes Schmitt",
++                    "name": "Johannes M. Schmitt",
+                     "email": "schmittjoh@gmail.com",
+-                    "homepage": "https://github.com/schmittjoh",
++                    "homepage": "http://jmsyst.com",
+                     "role": "Developer of wrapped JMSSerializerBundle"
+                 }
+             ],
+@@ -5856,17 +5743,17 @@
+         },
+         {
+             "name": "sensio/distribution-bundle",
+-            "version": "v2.3.8",
++            "version": "v2.3.6",
+             "target-dir": "Sensio/Bundle/DistributionBundle",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
+-                "reference": "9a72f821957141ee3d9703da3fa8266d59ef4b1c"
++                "reference": "ddcfeaeb504ece5de546dbefd5c527eed7453048"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/9a72f821957141ee3d9703da3fa8266d59ef4b1c",
+-                "reference": "9a72f821957141ee3d9703da3fa8266d59ef4b1c",
++                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ddcfeaeb504ece5de546dbefd5c527eed7453048",
++                "reference": "ddcfeaeb504ece5de546dbefd5c527eed7453048",
+                 "shasum": ""
+             },
+             "require": {
+@@ -5898,7 +5785,7 @@
+                 "configuration",
+                 "distribution"
+             ],
+-            "time": "2015-01-07 07:11:03"
++            "time": "2014-12-03 13:50:45"
+         },
+         {
+             "name": "sonata-project/block-bundle",
+@@ -6151,16 +6038,16 @@
+         },
+         {
+             "name": "stripe/stripe-php",
+-            "version": "v1.17.5",
++            "version": "v1.17.4",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/stripe/stripe-php.git",
+-                "reference": "e93d4f101fe0c01fb61fe820043ead545045ed3c"
++                "reference": "a2a21885c0d602895c9578b6d2b0a1ff63dc376e"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/e93d4f101fe0c01fb61fe820043ead545045ed3c",
+-                "reference": "e93d4f101fe0c01fb61fe820043ead545045ed3c",
++                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/a2a21885c0d602895c9578b6d2b0a1ff63dc376e",
++                "reference": "a2a21885c0d602895c9578b6d2b0a1ff63dc376e",
+                 "shasum": ""
+             },
+             "require": {
+@@ -6195,7 +6082,7 @@
+                 "payment processing",
+                 "stripe"
+             ],
+-            "time": "2014-12-23 23:59:35"
++            "time": "2014-12-15 20:22:31"
+         },
+         {
+             "name": "swiftmailer/swiftmailer",
+@@ -6810,17 +6697,64 @@
+             "time": "2014-10-15 12:03:38"
+         },
+         {
++            "name": "symfony/expression-language",
++            "version": "v2.6.1",
++            "target-dir": "Symfony/Component/ExpressionLanguage",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/symfony/expression-language.git",
++                "reference": "1ed31333a56c494ba8426e82432c4bac9270c4d0"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/symfony/expression-language/zipball/1ed31333a56c494ba8426e82432c4bac9270c4d0",
++                "reference": "1ed31333a56c494ba8426e82432c4bac9270c4d0",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=5.3.3"
++            },
++            "type": "library",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "2.6-dev"
++                }
++            },
++            "autoload": {
++                "psr-0": {
++                    "Symfony\\Component\\ExpressionLanguage\\": ""
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Symfony Community",
++                    "homepage": "http://symfony.com/contributors"
++                },
++                {
++                    "name": "Fabien Potencier",
++                    "email": "fabien@symfony.com"
++                }
++            ],
++            "description": "Symfony ExpressionLanguage Component",
++            "homepage": "http://symfony.com",
++            "time": "2014-11-28 10:00:40"
++        },
++        {
+             "name": "symfony/monolog-bundle",
+-            "version": "v2.7.1",
++            "version": "v2.6.1",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/symfony/MonologBundle.git",
+-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
++                "reference": "227bbeefe30f2d95e3fe5fbd1ccda414287a957a"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
+-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
++                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
++                "reference": "227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
+                 "shasum": ""
+             },
+             "require": {
+@@ -6838,7 +6772,7 @@
+             "type": "symfony-bundle",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "2.7.x-dev"
++                    "dev-master": "2.6.x-dev"
+                 }
+             },
+             "autoload": {
+@@ -6866,7 +6800,7 @@
+                 "log",
+                 "logging"
+             ],
+-            "time": "2015-01-04 20:21:17"
++            "time": "2014-07-21 00:36:06"
+         },
+         {
+             "name": "symfony/swiftmailer-bundle",
+@@ -6927,23 +6861,23 @@
+         },
+         {
+             "name": "symfony/symfony",
+-            "version": "v2.6.3",
++            "version": "v2.3.23",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/symfony/symfony.git",
+-                "reference": "c34ef418015793a4653f2670afb69dd167ebf578"
++                "reference": "daf150374dfb61cf68650f893fd3d726edc21318"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/symfony/symfony/zipball/c34ef418015793a4653f2670afb69dd167ebf578",
+-                "reference": "c34ef418015793a4653f2670afb69dd167ebf578",
++                "url": "https://api.github.com/repos/symfony/symfony/zipball/daf150374dfb61cf68650f893fd3d726edc21318",
++                "reference": "daf150374dfb61cf68650f893fd3d726edc21318",
+                 "shasum": ""
+             },
+             "require": {
+-                "doctrine/common": "~2.3",
++                "doctrine/common": "~2.2",
+                 "php": ">=5.3.3",
+                 "psr/log": "~1.0",
+-                "twig/twig": "~1.12,>=1.12.3"
++                "twig/twig": "~1.12"
+             },
+             "replace": {
+                 "symfony/browser-kit": "self.version",
+@@ -6952,12 +6886,10 @@
+                 "symfony/console": "self.version",
+                 "symfony/css-selector": "self.version",
+                 "symfony/debug": "self.version",
+-                "symfony/debug-bundle": "self.version",
+                 "symfony/dependency-injection": "self.version",
+                 "symfony/doctrine-bridge": "self.version",
+                 "symfony/dom-crawler": "self.version",
+                 "symfony/event-dispatcher": "self.version",
+-                "symfony/expression-language": "self.version",
+                 "symfony/filesystem": "self.version",
+                 "symfony/finder": "self.version",
+                 "symfony/form": "self.version",
+@@ -6974,11 +6906,7 @@
+                 "symfony/proxy-manager-bridge": "self.version",
+                 "symfony/routing": "self.version",
+                 "symfony/security": "self.version",
+-                "symfony/security-acl": "self.version",
+                 "symfony/security-bundle": "self.version",
+-                "symfony/security-core": "self.version",
+-                "symfony/security-csrf": "self.version",
+-                "symfony/security-http": "self.version",
+                 "symfony/serializer": "self.version",
+                 "symfony/stopwatch": "self.version",
+                 "symfony/swiftmailer-bridge": "self.version",
+@@ -6987,25 +6915,22 @@
+                 "symfony/twig-bridge": "self.version",
+                 "symfony/twig-bundle": "self.version",
+                 "symfony/validator": "self.version",
+-                "symfony/var-dumper": "self.version",
+                 "symfony/web-profiler-bundle": "self.version",
+                 "symfony/yaml": "self.version"
+             },
+             "require-dev": {
+                 "doctrine/data-fixtures": "1.0.*",
+                 "doctrine/dbal": "~2.2",
+-                "doctrine/doctrine-bundle": "~1.2",
+                 "doctrine/orm": "~2.2,>=2.2.3",
+-                "egulias/email-validator": "~1.2",
+                 "ircmaxell/password-compat": "~1.0",
+-                "monolog/monolog": "~1.11",
+-                "ocramius/proxy-manager": "~0.4|~1.0",
++                "monolog/monolog": "~1.3",
++                "ocramius/proxy-manager": ">=0.3.1,<0.4-dev",
+                 "propel/propel1": "~1.6"
+             },
+             "type": "library",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "2.6-dev"
++                    "dev-master": "2.3-dev"
+                 }
+             },
+             "autoload": {
+@@ -7039,56 +6964,9 @@
+             "keywords": [
+                 "framework"
+             ],
+-            "time": "2015-01-07 14:47:29"
++            "time": "2014-12-03 12:04:45"
+         },
+         {
+-            "name": "true/punycode",
+-            "version": "1.0.1",
+-            "source": {
+-                "type": "git",
+-                "url": "https://github.com/true/php-punycode.git",
+-                "reference": "59dca474914324763397be2ea3d6ad3bc48f4688"
+-            },
+-            "dist": {
+-                "type": "zip",
+-                "url": "https://api.github.com/repos/true/php-punycode/zipball/59dca474914324763397be2ea3d6ad3bc48f4688",
+-                "reference": "59dca474914324763397be2ea3d6ad3bc48f4688",
+-                "shasum": ""
+-            },
+-            "require": {
+-                "ext-mbstring": "*",
+-                "php": ">=5.3.0"
+-            },
+-            "require-dev": {
+-                "phpunit/phpunit": "4.x",
+-                "satooshi/php-coveralls": "dev-master",
+-                "squizlabs/php_codesniffer": "2.0.x-dev"
+-            },
+-            "type": "library",
+-            "autoload": {
+-                "psr-4": {
+-                    "True\\": "src/"
+-                }
+-            },
+-            "notification-url": "https://packagist.org/downloads/",
+-            "license": [
+-                "MIT"
+-            ],
+-            "authors": [
+-                {
+-                    "name": "Renan Gonçalves",
+-                    "email": "renan.saddam@gmail.com"
+-                }
+-            ],
+-            "description": "A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)",
+-            "homepage": "https://github.com/true/php-punycode",
+-            "keywords": [
+-                "idna",
+-                "punycode"
+-            ],
+-            "time": "2014-08-26 14:21:01"
+-        },
+-        {
+             "name": "twig/extensions",
+             "version": "v1.2.0",
+             "source": {
+@@ -7142,16 +7020,16 @@
+         },
+         {
+             "name": "twig/twig",
+-            "version": "v1.16.3",
++            "version": "v1.16.2",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/twigphp/Twig.git",
+-                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af"
++                "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
+-                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
++                "url": "https://api.github.com/repos/twigphp/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
++                "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc",
+                 "shasum": ""
+             },
+             "require": {
+@@ -7186,7 +7064,7 @@
+                 },
+                 {
+                     "name": "Twig Team",
+-                    "homepage": "http://twig.sensiolabs.org/contributors",
++                    "homepage": "https://github.com/fabpot/Twig/graphs/contributors",
+                     "role": "Contributors"
+                 }
+             ],
+@@ -7195,7 +7073,7 @@
+             "keywords": [
+                 "templating"
+             ],
+-            "time": "2014-12-25 19:58:19"
++            "time": "2014-10-17 12:53:44"
+         },
+         {
+             "name": "white-october/pagerfanta-bundle",
+@@ -7400,7 +7278,7 @@
+             ],
+             "authors": [
+                 {
+-                    "name": "William Durand",
++                    "name": "William DURAND",
+                     "email": "william.durand1@gmail.com",
+                     "homepage": "http://www.willdurand.fr"
+                 }
+@@ -8084,21 +7962,20 @@
+         },
+         {
+             "name": "coduo/php-to-string",
+-            "version": "1.0.1",
++            "version": "1.0.0",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/coduo/php-to-string.git",
+-                "reference": "a92b47db643541baa7ea9c61ea427a6896676685"
++                "reference": "42092807d4efab4c0c6c7782ab085978de4f4ce9"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/a92b47db643541baa7ea9c61ea427a6896676685",
+-                "reference": "a92b47db643541baa7ea9c61ea427a6896676685",
++                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/42092807d4efab4c0c6c7782ab085978de4f4ce9",
++                "reference": "42092807d4efab4c0c6c7782ab085978de4f4ce9",
+                 "shasum": ""
+             },
+             "require": {
+-                "php": ">=5.3.0",
+-                "symfony/intl": "~2.5"
++                "php": ">=5.3.0"
+             },
+             "require-dev": {
+                 "coduo/phpspec-data-provider-extension": "dev-master",
+@@ -8107,7 +7984,7 @@
+             "type": "library",
+             "extra": {
+                 "branch-alias": {
+-                    "dev-master": "1.1-dev"
++                    "dev-master": "1.0-dev"
+                 }
+             },
+             "autoload": {
+@@ -8135,7 +8012,7 @@
+                 "to",
+                 "to string"
+             ],
+-            "time": "2014-10-18 10:00:46"
++            "time": "2014-05-08 08:59:42"
+         },
+         {
+             "name": "doctrine/data-fixtures",
+@@ -8232,9 +8109,7 @@
+             "authors": [
+                 {
+                     "name": "Fabien Potencier",
+-                    "email": "fabien@symfony.com",
+-                    "homepage": "http://fabien.potencier.org",
+-                    "role": "Lead Developer"
++                    "email": "fabien@symfony.com"
+                 },
+                 {
+                     "name": "Symfony Community",
+@@ -8484,8 +8359,7 @@
+             "authors": [
+                 {
+                     "name": "Chris Boulton",
+-                    "homepage": "http://github.com/chrisboulton",
+-                    "role": "Original developer"
++                    "homepage": "http://github.com/chrisboulton"
+                 }
+             ],
+             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+@@ -8493,16 +8367,16 @@
+         },
+         {
+             "name": "phpspec/phpspec",
+-            "version": "2.1.1",
++            "version": "2.1.0",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/phpspec/phpspec.git",
+-                "reference": "66a1df93099282b1514e9e001fcf6e9393f7783d"
++                "reference": "3d2ac6c2da3d7c1c42b966a39b0754bd055b4c60"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/66a1df93099282b1514e9e001fcf6e9393f7783d",
+-                "reference": "66a1df93099282b1514e9e001fcf6e9393f7783d",
++                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/3d2ac6c2da3d7c1c42b966a39b0754bd055b4c60",
++                "reference": "3d2ac6c2da3d7c1c42b966a39b0754bd055b4c60",
+                 "shasum": ""
+             },
+             "require": {
+@@ -8518,7 +8392,7 @@
+                 "symfony/yaml": "~2.1"
+             },
+             "require-dev": {
+-                "behat/behat": "~3.0,>=3.0.11",
++                "behat/behat": "~3.0",
+                 "bossa/phpspec2-expect": "~1.0",
+                 "symfony/filesystem": "~2.1"
+             },
+@@ -8565,7 +8439,7 @@
+                 "testing",
+                 "tests"
+             ],
+-            "time": "2015-01-09 13:21:45"
++            "time": "2014-12-14 09:37:32"
+         },
+         {
+             "name": "phpspec/prophecy",
+@@ -8628,16 +8502,16 @@
+         },
+         {
+             "name": "phpunit/php-code-coverage",
+-            "version": "2.0.14",
++            "version": "2.0.13",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+-                "reference": "ca158276c1200cc27f5409a5e338486bc0b4fc94"
++                "reference": "0e7d2eec5554f869fa7a4ec2d21e4b37af943ea5"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ca158276c1200cc27f5409a5e338486bc0b4fc94",
+-                "reference": "ca158276c1200cc27f5409a5e338486bc0b4fc94",
++                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0e7d2eec5554f869fa7a4ec2d21e4b37af943ea5",
++                "reference": "0e7d2eec5554f869fa7a4ec2d21e4b37af943ea5",
+                 "shasum": ""
+             },
+             "require": {
+@@ -8689,7 +8563,7 @@
+                 "testing",
+                 "xunit"
+             ],
+-            "time": "2014-12-26 13:28:33"
++            "time": "2014-12-03 06:41:44"
+         },
+         {
+             "name": "phpunit/php-file-iterator",
+@@ -8875,16 +8749,16 @@
+         },
+         {
+             "name": "phpunit/phpunit",
+-            "version": "4.4.1",
++            "version": "4.4.0",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/sebastianbergmann/phpunit.git",
+-                "reference": "6a5e49a86ce5e33b8d0657abe145057fc513543a"
++                "reference": "bbe7bcb83b6ec1a9eaabbe1b70d4795027c53ee0"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6a5e49a86ce5e33b8d0657abe145057fc513543a",
+-                "reference": "6a5e49a86ce5e33b8d0657abe145057fc513543a",
++                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bbe7bcb83b6ec1a9eaabbe1b70d4795027c53ee0",
++                "reference": "bbe7bcb83b6ec1a9eaabbe1b70d4795027c53ee0",
+                 "shasum": ""
+             },
+             "require": {
+@@ -8942,7 +8816,7 @@
+                 "testing",
+                 "xunit"
+             ],
+-            "time": "2014-12-28 07:57:05"
++            "time": "2014-12-05 06:49:03"
+         },
+         {
+             "name": "phpunit/phpunit-mock-objects",
+@@ -9283,16 +9157,16 @@
+         },
+         {
+             "name": "sebastian/version",
+-            "version": "1.0.4",
++            "version": "1.0.3",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/sebastianbergmann/version.git",
+-                "reference": "a77d9123f8e809db3fbdea15038c27a95da4058b"
++                "reference": "b6e1f0cf6b9e1ec409a0d3e2f2a5fb0998e36b43"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/a77d9123f8e809db3fbdea15038c27a95da4058b",
+-                "reference": "a77d9123f8e809db3fbdea15038c27a95da4058b",
++                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/b6e1f0cf6b9e1ec409a0d3e2f2a5fb0998e36b43",
++                "reference": "b6e1f0cf6b9e1ec409a0d3e2f2a5fb0998e36b43",
+                 "shasum": ""
+             },
+             "type": "library",
+@@ -9314,7 +9188,7 @@
+             ],
+             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+             "homepage": "https://github.com/sebastianbergmann/version",
+-            "time": "2014-12-15 14:25:24"
++            "time": "2014-03-07 15:35:33"
+         }
+     ],
+     "aliases": [],
+@@ -9333,7 +9207,6 @@
+         "willdurand/hateoas-bundle": 0
+     },
+     "prefer-stable": false,
+-    "prefer-lowest": false,
+     "platform": {
+         "php": ">=5.3.3"
+     },

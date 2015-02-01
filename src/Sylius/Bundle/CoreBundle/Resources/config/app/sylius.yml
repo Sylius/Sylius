@@ -152,6 +152,7 @@ sylius_payment:
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
     gateways:
         dummy: Test
+        offile: Offline
         stripe: Stripe
         be2bill: Be2Bill
         stripe_checkout: Stripe Checkout
