@@ -28,6 +28,8 @@
         <parameter key="sylius.payum.dummy.action.capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\CapturePaymentAction</parameter>
         <parameter key="sylius.payum.dummy.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Dummy\Action\PaymentStatusAction</parameter>
 
+        <parameter key="sylius.payum.offline.action.capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Offline\Action\CapturePaymentAction</parameter>
+
         <parameter key="sylius.payum.action.generic_capture_payment.class">Sylius\Bundle\PayumBundle\Payum\Action\GenericCapturePaymentAction</parameter>
         <parameter key="sylius.payum.action.payment_status.class">Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction</parameter>
         <parameter key="sylius.payum.action.execute_same_request_with_payment_details.class">Sylius\Bundle\PayumBundle\Payum\Action\ExecuteSameRequestWithPaymentDetailsAction</parameter>
@@ -79,5 +81,10 @@
         <!-- Dummy -->
         <service id="sylius.payum.dummy.action.capture_payment" class="%sylius.payum.dummy.action.capture_payment.class%" />
         <service id="sylius.payum.dummy.action.payment_status" class="%sylius.payum.dummy.action.payment_status.class%" />
+
+        <!-- Offline -->
+        <service id="sylius.payum.offline.action.capture_payment" class="%sylius.payum.offline.action.capture_payment.class%" public="false">
+            <tag name="payum.action" factory="offline" />
+        </service>
     </services>
 </container>
