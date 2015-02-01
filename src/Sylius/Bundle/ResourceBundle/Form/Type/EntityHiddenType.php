@@ -29,6 +29,9 @@ class EntityHiddenType extends AbstractType
      */
     protected $manager;
 
+    /**
+     * @param ManagerRegistry $manager
+     */
     public function __construct(ManagerRegistry $manager)
     {
         $this->manager = $manager;
@@ -64,6 +67,7 @@ class EntityHiddenType extends AbstractType
     {
         $resolver->setDefaults(array(
             'identifier' => 'id',
+            'property_path' => 'id',
         ));
     }
 
