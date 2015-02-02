@@ -173,7 +173,10 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setPrice($price)
     {
-        $this->price = (int)$price;
+        if (!is_int($price)) {
+            throw new \InvalidArgumentException('Price must be an integer.');
+        }
+        $this->price = $price;
 
         return $this;
     }
