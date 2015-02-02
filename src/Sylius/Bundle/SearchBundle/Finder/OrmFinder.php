@@ -128,10 +128,14 @@ class OrmFinder extends AbstractFinder
         }
 
         $finalResults = $facets = array();
-
+        $modelIdsForChannel = $this->searchRepository->getProductIdsFromChannel($this->channelContext->getChannel());
         // get ids and tags from full text search
         foreach ($this->query($query->getSearchTerm(), $this->em) as $modelClass => $modelIdsToTags) {
             $modelIds = array_keys($modelIdsToTags);
+
+            if(isset($modelIdsForChannel[$modelClass])) {
+                $modelIds = array_intersect($modelIds, $modelIdsForChannel[$modelClass]);
+            }
 
             //filter the ids if searchParam is not all
             // TODO: Will refactor pre-search filtering into a service based on the finder configuration

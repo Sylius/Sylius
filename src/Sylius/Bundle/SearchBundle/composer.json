@@ -24,6 +24,7 @@
 
         "sylius/product-bundle":            "0.15.*@dev",
         "sylius/resource-bundle":           "0.15.*@dev",
+        "sylius/channel":                   "0.15.*@dev",
         "symfony/framework-bundle":         "~2.3",
         "symfony/property-access":          "~2.3",
 

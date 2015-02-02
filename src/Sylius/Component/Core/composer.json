@@ -27,6 +27,7 @@
         "sylius/archetype":   "0.15.*@dev",
         "sylius/attribute":   "0.15.*@dev",
         "sylius/cart":        "0.15.*@dev",
+        "sylius/channel":     "0.15.*@dev",
         "sylius/contact":     "0.15.*@dev",
         "sylius/currency":    "0.15.*@dev",
         "sylius/inventory":   "0.15.*@dev",

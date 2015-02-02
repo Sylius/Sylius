@@ -214,10 +214,6 @@ sylius_search:
             all_set:
                 values: [taxons, price, made_of]
         facets:
-            channels:
-                display_name: 'Channel for internal use'
-                type: terms
-                value: ~
             taxons:
                 display_name: 'Basic categories'
                 type: terms
