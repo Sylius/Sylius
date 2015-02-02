@@ -12,9 +12,9 @@ The report form type is named ``sylius_report`` and you can create it whenever y
 
     <?php
 
-    // src/Acme/ShopBundle/Controller/ProductController.php
+    // src/Acme/DemoBundle/Controller/DemoController.php
 
-    namespace Acme\ShopBundle\Controller;
+    namespace Acme\DemoBundle\Controller;
 
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     use Symfony\Component\HttpFoundation\Request;
