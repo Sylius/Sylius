@@ -228,8 +228,6 @@ class CoreContext extends DefaultContext
 
             /* @var $user UserInterface */
             $user = $this->getRepository('user')->createNew();
-            $user->setFirstname($this->faker->firstName);
-            $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
             $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
             $user->setEmail($email);
