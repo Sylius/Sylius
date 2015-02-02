@@ -31,9 +31,6 @@
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType</parameter>
         <parameter key="sylius.report.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
-        <parameter key="sylius.report.data_fetcher.number_of_orders.class">Sylius\Bundle\ReportBundle\DataFetcher\NumberOfOrdersDataFetcher</parameter>
-        <parameter key="sylius.report.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\DataFetcher\SalesTotalDataFetcher</parameter>
-        <parameter key="sylius.report.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
     </parameters>
 
     <services>
@@ -94,21 +91,6 @@
 
         <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
             <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
-        </service>
-
-        <service id="sylius.report.data_fetcher.user_registration" class="%sylius.report.data_fetcher.user_registration.class%">
-            <argument type="service" id="sylius.repository.user" />
-            <tag name="sylius.report.data_fetcher" fetcher="user_registration" label="User registration" />
-        </service>
-
-        <service id="sylius.report.data_fetcher.sales_total" class="%sylius.report.data_fetcher.sales_total.class%">
-            <argument type="service" id="sylius.repository.order" />
-            <tag name="sylius.report.data_fetcher" fetcher="sales_total" label="Sales Total" />
-        </service>
-
-        <service id="sylius.report.data_fetcher.number_of_orders" class="%sylius.report.data_fetcher.number_of_orders.class%">
-            <argument type="service" id="sylius.repository.order" />
-            <tag name="sylius.report.data_fetcher" fetcher="number_of_orders" label="Number of orders" />
         </service>
     </services>
 

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
+use Sylius\Bundle\CoreBundle\DataFetcher\SalesTotalDataFetcher;
 
 /**
  * User based raport configuration form type.
@@ -35,7 +35,7 @@ class SalesTotalType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
+                'choices'  => SalesTotalDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))

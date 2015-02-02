@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReportBundle\DataFetcher;
+namespace spec\Sylius\Bundle\CoreBundle\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
+class UserRegistrationDataFetcherSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\DataFetcher\NumberOfOrdersDataFetcher');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\DataFetcher\UserRegistrationDataFetcher');
     }
 
     public function it_extends_time_period()
@@ -37,19 +37,19 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\DataFetcher\DataFetcherInterface');
     }
 
-    public function let(OrderRepository $orderRepository)
+    public function let(UserRepository $userRepository)
     {
-        $this->beConstructedWith($orderRepository);
+        $this->beConstructedWith($userRepository);
     }
 
     public function it_has_type()
     {
-        $this->getType()->shouldReturn(DefaultDataFetchers::NUMBER_OF_ORDERS);
+        $this->getType()->shouldReturn(DefaultDataFetchers::USER_REGISTRATION);
     }
 
-    public function it_fetches_data_by_day($orderRepository)
+    public function it_fetches_data_by_day($userRepository)
     {
-        $rawData = array(array('date' => '2014-12-31', 'number_of_orders' => '20'),array('date' => '2015-01-01', 'number_of_orders' => '2'));
+        $rawData = array(array('date' => '2014-12-31', 'user_total' => '20'),array('date' => '2015-01-01', 'user_total' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-12-31 00:00:00.000000'),
@@ -57,7 +57,7 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
             'period' => 'day',
             'empty_records' => false, );
 
-        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $userRepository->getRegistrationStatistic(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -66,9 +66,9 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration)->shouldBeLike($data);
     }
 
-    public function it_fetches_data_by_month($orderRepository)
+    public function it_fetches_data_by_month($userRepository)
     {
-        $rawData = array(array('date' => '2014-12-30', 'number_of_orders' => '20'),array('date' => '2015-01-01', 'number_of_orders' => '2'));
+        $rawData = array(array('date' => '2014-12-30', 'user_total' => '20'),array('date' => '2015-01-01', 'user_total' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-12-01 00:00:00.000000'),
@@ -76,7 +76,7 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
             'period' => 'month',
             'empty_records' => false, );
 
-        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $userRepository->getRegistrationStatistic(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -85,9 +85,9 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration)->shouldBeLike($data);
     }
 
-    public function it_fetches_data_by_year($orderRepository)
+    public function it_fetches_data_by_year($userRepository)
     {
-        $rawData = array(array('date' => '2014-01-01', 'number_of_orders' => '20'),array('date' => '2015-01-30', 'number_of_orders' => '2'));
+        $rawData = array(array('date' => '2014-01-01', 'user_total' => '20'),array('date' => '2015-01-30', 'user_total' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-12-31 00:00:00.000000'),
@@ -95,7 +95,7 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
             'period' => 'year',
             'empty_records' => false, );
 
-        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $userRepository->getRegistrationStatistic(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -104,9 +104,9 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration)->shouldBeLike($data);
     }
 
-    public function it_fills_gaps($orderRepository)
+    public function it_fills_gaps($userRepository)
     {
-        $rawData = array(array('date' => '2014-12-30', 'number_of_orders' => '20'),array('date' => '2015-01-01', 'number_of_orders' => '2'));
+        $rawData = array(array('date' => '2014-12-30', 'user_total' => '20'),array('date' => '2015-01-01', 'user_total' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-11-01 00:00:00.000000'),
@@ -114,7 +114,7 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
             'period' => 'month',
             'empty_records' => true, );
 
-        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $userRepository->getRegistrationStatistic(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -123,7 +123,7 @@ class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
         $this->fetch($configuration)->shouldBeLike($data);
     }
 
-    public function it_does_not_allowed_wrond_data_period($orderRepository, Data $data)
+    public function it_does_not_allowed_wrond_data_period($userRepository, Data $data)
     {
         $configuration = array(
             'start' => new \DateTime('2010-01-01 00:00:00.000000'),

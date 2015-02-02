@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReportBundle\DataFetcher;
+namespace spec\Sylius\Bundle\CoreBundle\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -20,11 +20,11 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SalesTotalDataFetcherSpec extends ObjectBehavior
+class NumberOfOrdersDataFetcherSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\DataFetcher\SalesTotalDataFetcher');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\DataFetcher\NumberOfOrdersDataFetcher');
     }
 
     public function it_extends_time_period()
@@ -44,12 +44,12 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
 
     public function it_has_type()
     {
-        $this->getType()->shouldReturn(DefaultDataFetchers::SALES_TOTAL);
+        $this->getType()->shouldReturn(DefaultDataFetchers::NUMBER_OF_ORDERS);
     }
 
     public function it_fetches_data_by_day($orderRepository)
     {
-        $rawData = array(array('date' => '2014-12-31', 'total_sale' => '20'),array('date' => '2015-01-01', 'total_sale' => '2'));
+        $rawData = array(array('date' => '2014-12-31', 'number_of_orders' => '20'),array('date' => '2015-01-01', 'number_of_orders' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-12-31 00:00:00.000000'),
@@ -57,7 +57,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'day',
             'empty_records' => false, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -68,7 +68,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
 
     public function it_fetches_data_by_month($orderRepository)
     {
-        $rawData = array(array('date' => '2014-12-30', 'total_sale' => '20'),array('date' => '2015-01-01', 'total_sale' => '2'));
+        $rawData = array(array('date' => '2014-12-30', 'number_of_orders' => '20'),array('date' => '2015-01-01', 'number_of_orders' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-12-01 00:00:00.000000'),
@@ -76,7 +76,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'month',
             'empty_records' => false, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -87,7 +87,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
 
     public function it_fetches_data_by_year($orderRepository)
     {
-        $rawData = array(array('date' => '2014-01-01', 'total_sale' => '20'),array('date' => '2015-01-30', 'total_sale' => '2'));
+        $rawData = array(array('date' => '2014-01-01', 'number_of_orders' => '20'),array('date' => '2015-01-30', 'number_of_orders' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-12-31 00:00:00.000000'),
@@ -95,7 +95,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'year',
             'empty_records' => false, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));
@@ -106,7 +106,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
 
     public function it_fills_gaps($orderRepository)
     {
-        $rawData = array(array('date' => '2014-12-30', 'total_sale' => '20'),array('date' => '2015-01-01', 'total_sale' => '2'));
+        $rawData = array(array('date' => '2014-12-30', 'number_of_orders' => '20'),array('date' => '2015-01-01', 'number_of_orders' => '2'));
 
         $configuration = array(
             'start' => new \DateTime('2014-11-01 00:00:00.000000'),
@@ -114,7 +114,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
             'period' => 'month',
             'empty_records' => true, );
 
-        $orderRepository->revenueBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
+        $orderRepository->ordersBetweenDatesGroupByDate(Argument::type('array'))->willReturn($rawData);
 
         $data = new Data();
         $data->setLabels(array_keys($rawData[0]));

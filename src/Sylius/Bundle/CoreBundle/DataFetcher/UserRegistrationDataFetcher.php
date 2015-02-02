@@ -1,8 +1,9 @@
 <?php
 
-namespace Sylius\Bundle\ReportBundle\DataFetcher;
+namespace Sylius\Bundle\CoreBundle\DataFetcher;
 
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
+use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**

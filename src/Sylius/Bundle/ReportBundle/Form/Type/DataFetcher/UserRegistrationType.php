@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\ReportBundle\DataFetcher\UserRegistrationDataFetcher;
+use Sylius\Bundle\CoreBundle\DataFetcher\UserRegistrationDataFetcher;
 
 /**
  * User based raport configuration form type.
