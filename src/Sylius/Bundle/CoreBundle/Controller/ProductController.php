@@ -53,8 +53,6 @@ class ProductController extends BaseProductController
                 throw new NotFoundHttpException('Requested taxon does not exist.');
             }
         }
-        $channel = $this->get('sylius.context.channel')->getChannel();
-
 
         /**
          * when using elastic search if you want to setup multiple indexes and control
