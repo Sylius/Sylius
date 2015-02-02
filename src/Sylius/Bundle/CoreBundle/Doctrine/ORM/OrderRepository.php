@@ -330,8 +330,8 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     {
         $groupBy = '';
 
-        foreach ($configuration['groupBy'] as $groupByArray) {
-            $groupBy = $groupByArray.'(date)'.' '.$groupBy;
+        foreach ($configuration['groupBy'] as $groupByElement) {
+            $groupBy = $groupByElement.'(date)'.' '.$groupBy;
         }
 
         $groupBy = substr($groupBy, 0, -1);
