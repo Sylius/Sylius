@@ -68,6 +68,16 @@ Feature: Reports
          Then I should still be on the report creation page
           And I should see "This code is already in use."
 
+    Scenario: Prevent adding new report with multiple-word code
+        Given I am on the report creation page
+         When I fill in the following:
+            | Name        | Report1           | 
+            | Description | Lorem ipsum dolor |
+            | Code        | table report     |
+          And I press "Create"
+         Then I should still be on the report creation page
+          And I should see "Report code should be a single word."
+
     Scenario: Accessing report details page from list
         Given I am on the report index page
          When I press "details" near "TableReport"
