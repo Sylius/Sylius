@@ -46,6 +46,11 @@
                 <option name="message">sylius.report.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="pattern">(^\S*$)</option>
+                <option name="groups">sylius</option>
+                <option name="message">sylius.report.code.single_word</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>
