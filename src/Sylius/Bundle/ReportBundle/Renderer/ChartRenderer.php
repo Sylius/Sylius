@@ -29,7 +29,7 @@ class ChartRenderer implements RendererInterface
     const POLAR_CHART      = 'polar';
     const PIE_CHART        = 'pie';
     const DOUGHNUT_CHART   = 'doughnut';
-    
+
     private $templating;
 
     public function __construct(EngineInterface $templating)

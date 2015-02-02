@@ -43,7 +43,7 @@ class ProductRepository extends BaseProductRepository
 
         foreach ($criteria as $attributeName => $value) {
             $queryBuilder
-                ->andWhere('product.' . $attributeName . ' IN (:' . $attributeName . ')')
+                ->andWhere('product.'.$attributeName.' IN (:'.$attributeName.')')
                 ->setParameter($attributeName, $value)
             ;
         }
