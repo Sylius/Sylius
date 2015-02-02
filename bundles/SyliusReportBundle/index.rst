@@ -1,9 +1,9 @@
 SyliusReportBundle
 ===================
 
-SyliusReportBundle is the flexible reports management system for Symfony2 e-commerce applications.
+SyliusReportBundle is a flexible reports management system for Symfony2 applications.
 
-Using this bundle, you can generate various and complex reports for your webshop, starting from defaults - user registrations report, and total sales report. Implemented renderers allows you to display data in many different ways - from simple but clear table, to impressive and colorful charts.
+Using this bundle, you can generate various and complex reports for your system, starting from user registrations report or total sales report. Implemented renderers allows you to display data in many different ways - from simple but clear table, to impressive and colorful charts.
 
 .. toctree::
    :numbered:

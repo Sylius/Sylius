@@ -5,7 +5,7 @@ The Report
 -----------
 
 Report is the main model in SyliusReportComponent. This simple class represents every unique report in the system.
-The default interface contains the following attributes with appropriate setters and getters.
+The default model contains the following attributes with appropriate setters and getters.
 
 +---------------------------+----------------------------------------------------+
 | Attribute                 | Description                                        |
@@ -35,15 +35,15 @@ The default interface contains the following attributes with appropriate setters
 The Data
 -----------
 
-Data is supporting model in SyliusReportBundle. That contains data provided by data fetcher and labels used to clarify report display.
+Data model represents report data in a uniform form.
 
-+--------------+------------------------------------+
-| Attribute    | Description                        |
-+==============+====================================+
-| labels       | Labels that describe fetched data  |
-+--------------+------------------------------------+
-| data         | Data fetcher from database         |
-+--------------+------------------------------------+
++--------------+-------------------------------------+
+| Attribute    | Description                         |
++==============+=====================================+
+| labels       | Array of labels that describe data  |
++--------------+-------------------------------------+
+| data         | Array of values with data           |
++--------------+-------------------------------------+
 
 
 DataFetcherInterface
@@ -51,13 +51,13 @@ DataFetcherInterface
 
 To characterize data fetcher object, its class needs to implement the ``DataFetcherInterface``.
 
-+-------------------------------+---------------------------------------+
-| Method                        | Description                           |
-+===============================+=======================================+
-| fetch(array $configuration)   | Fetch data from database              |
-+-------------------------------+---------------------------------------+
-| getType()                     | Return type of data fetcher object    |
-+-------------------------------+---------------------------------------+
++-------------------------------+---------------------------------------------+
+| Method                        | Description                                 |
++===============================+=============================================+
+| fetch(array $configuration)   | Returns data, based on given configuration  |
++-------------------------------+---------------------------------------------+
+| getType()                     | Returns type of data fetcher object         |
++-------------------------------+---------------------------------------------+
 
 RendererInterface
 ----------------------
@@ -67,7 +67,7 @@ To characterize renderer object, its class needs to implement the ``RendererInte
 +-----------------------------------------------+----------------------------------------------------------+
 | Method                                        | Description                                              |
 +===============================================+==========================================================+
-| render(ReportInterface $report, Data $data)   | Render given data and report with propor configuration   |
+| render(ReportInterface $report, Data $data)   | Renders given data and report with proper configuration  |
 +-----------------------------------------------+----------------------------------------------------------+
 | getType()                                     | Returns type of renderer object                          |
 +-----------------------------------------------+----------------------------------------------------------+
