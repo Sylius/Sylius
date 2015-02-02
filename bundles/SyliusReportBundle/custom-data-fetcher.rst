@@ -6,26 +6,27 @@ SyliusReportBundle has some default data fetchers implemented, however, obviousl
 Create custom data fetcher class
 --------------------------------
 
-First step is creation of our new data fetcher class. It should be placed in ``Sylius\Bundle\ReportBundle\DataFetcher`` namespace and to provide proper logic it has to implement ``Sylius\Component\Report\DataFetcher\DataFetcherInterface``. Because of implementation, data fetcher class must provide two methods:
+First step is creation of our new data fetcher class. It should provide proper logic and has to implement ``Sylius\Component\Report\DataFetcher\DataFetcherInterface``. Because of implementation, data fetcher class must provide two methods:
     - ``fetch(array $configuration)``, which fetches data
     - ``getType``, which returns unique name of data fetcher
 
 .. note::
 
-   It is highly recommended to place all data fetchers types as constants in ``Sylius\Component\Report\Renderer\DefaultDataFetchers``
+   It is highly recommended to place all data fetchers types as constants. Default data fetchers have their types included in ``Sylius\Component\Report\Renderer\DefaultDataFetchers``
 
 .. caution::
 
-    Data fetcher has to return Data class(``Sylius\Component\Report\DataFetcher\Data``), that is part of Report component
+    Data fetcher has to return Data class(``Sylius\Component\Report\DataFetcher\Data``), which is part of Report component
 
 .. code-block:: php
 
     <?php
 
-    namespace Sylius\Bundle\ReportBundle\DataFetcher;
+    namespace Acme\DemoBundle\DataFetchers\CustomDataFetcher;
 
     use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
     use Sylius\Component\Report\DataFetcher\Data;
+    use Acme\Component\DataFetcher\DefaultRenderers;
 
     class CustomDataFetcher implements DataFetcherInterface
     {
@@ -55,13 +56,13 @@ First step is creation of our new data fetcher class. It should be placed in ``S
 Create data fetcher configuration type
 --------------------------------------
 
-Each data fetcher has its own, specific cofiguration form, which is added to main report form. It has to be specified in ``Sylius\Bundle\ReportBundle\Form\Type\DataFetcher`` namespace and extends ``Symfony\Component\Form\AbstractType``. To be able to configure our data fetcher in form, this class should override ``buildForm(FormBuilderInterface $builder, array $options)`` method. It should also have ``getName`` method, that returns data fetcher string identifier.
+Each data fetcher has its own, specific cofiguration form, which is added to main report form. It has to extend ``Symfony\Component\Form\AbstractType``. To be able to configure our data fetcher in form, this class should override ``buildForm(FormBuilderInterface $builder, array $options)`` method. It should also have ``getName`` method, that returns data fetcher string identifier.
 
 .. code-block:: php
 
     <?php
 
-    namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+    namespace Acme\DemoBundle\Form\Type\DataFetcher;
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
@@ -85,7 +86,7 @@ Each data fetcher has its own, specific cofiguration form, which is added to mai
          */
         public function getName()
         {
-            return 'sylius_data_fetcher_custom';
+            return 'acme_data_fetcher_custom';
         }
     }
 
@@ -93,25 +94,24 @@ Each data fetcher has its own, specific cofiguration form, which is added to mai
 Register custom data fetcher class as service
 ---------------------------------------------
 
-To be able to use our new data fetcher, it must be registered in ReportBundle services.xml file. We should take care of two classes we just created, means ``CustomDataFetcher`` and ``CustomConfigurationType``. They have to be tagged with proper tags, to be visible for CompilerPass.
+To be able to use our new data fetcher, it must be registered as service in our services' file. We should take care of two classes we just created, means ``CustomDataFetcher`` and ``CustomConfigurationType``. They have to be tagged with proper tags, to be visible for CompilerPass.
 
 .. code-block:: xml
 
     <parameters>
         //other parameters
-        <parameter key="sylius.form.type.data_fetcher.custom.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\CustomType</parameter>
-        <parameter key="sylius.report.data_fetcher.custom.class">Sylius\Bundle\ReportBundle\DataFetcher\CustomDataFetcher</parameter>
+        <parameter key="acme.report.data_fetcher.custom.class">Acme\DemoBundle\DataFetchers\CustomDataFetcherCustomDataFetcher</parameter>
+        <parameter key="acme.form.type.data_fetcher.custom.class">Acme\DemoBundle\Form\Type\DataFetcher\CustomConfigurationType</parameter>
     </parameters>
 
     <services>
         //other services
-        <service id="sylius.form.type.data_fetcher.custom" class="%sylius.form.type.data_fetcher.custom.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_custom" />
-        </service>
-
-        <service id="sylius.report.data_fetcher.custom" class="%sylius.report.data_fetcher.custom.class%">
-            <argument type="service" id="sylius.repository.order" />
+        <service id="acme.report.data_fetcher.custom" class="%acme.report.data_fetcher.custom.class%">
+            <argument type="service" id="acme.repository.order" />
             <tag name="sylius.report.data_fetcher" fetcher="custom" label="Custom data fetcher" />
+        </service>
+        <service id="acme.form.type.data_fetcher.custom" class="%acme.form.type.data_fetcher.custom.class%">
+            <tag name="form.type" alias="acme_data_fetcher_custom" />
         </service>
     </services>
 

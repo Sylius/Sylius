@@ -52,6 +52,9 @@ Data fetchers
 
 Basic data fetcher extend same time provider. This implementation results in same configuration fields for three different data fetchers.
 
+.. caution::
+
+    Default data fetchers are part of SyliusCoreBundle, cause they are strictly connected with Sylius database.
 
 Already available data fetchers:
     * User registrations
