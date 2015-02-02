@@ -76,7 +76,6 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                                 ->booleanNode('enabled')
                                     ->isRequired()
-                                    ->cannotBeEmpty()
                                 ->end()
                             ->end()
                         ->end()
