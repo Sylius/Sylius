@@ -237,7 +237,7 @@ class ElasticsearchFinder extends AbstractFinder
             $channelFilter = new \Elastica\Filter\Terms();
             $channelFilter->setTerms('channels', array((string)$channel));
             $boolFilter->addMust($channelFilter);
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         // this is currently the only pre search filter and it's a taxon
@@ -249,7 +249,7 @@ class ElasticsearchFinder extends AbstractFinder
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
             $taxonFromRequestFilter->setTerms('taxons', array($preSearchTaxonFilter));
             $boolFilter->addMust($taxonFromRequestFilter);
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         $elasticaQuery->setQuery($query);
