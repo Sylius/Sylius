@@ -53,7 +53,7 @@ class ReportController extends ResourceController
         }
 
         if (null === $report) {
-            throw new NotFoundHttpException('Requested report does not exist.');
+            return $this->render('SyliusReportBundle::noDataTemplate.html.twig');
         }
 
         $configuration = $request->query->get('configuration', $configuration);
