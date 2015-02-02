@@ -183,6 +183,7 @@ class Report implements ReportInterface
     public function setDataFetcher($dataFetcher)
     {
         $this->dataFetcher = $dataFetcher;
+    }
 
     /**
      * Gets the Renderer name.
@@ -228,6 +229,7 @@ class Report implements ReportInterface
     public function setDataFetcherConfiguration(array $dataFetcherConfiguration)
     {
         $this->dataFetcherConfiguration = $dataFetcherConfiguration;
+    }
 
     /**
      * Gets the Renderers configuration.

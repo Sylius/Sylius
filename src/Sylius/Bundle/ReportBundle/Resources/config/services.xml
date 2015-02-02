@@ -15,6 +15,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
     <parameters>
         <parameter key="sylius.registry.report.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
@@ -28,7 +29,6 @@
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\SalesTotalType</parameter>
         <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType</parameter>
         <parameter key="sylius.report.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
     </parameters>
@@ -41,19 +41,12 @@
         <service id="sylius.report.renderer" class="%sylius.report.renderer.class%">
             <argument type="service" id="sylius.registry.report.renderer" />
         </service>
+
         <service id="sylius.form.type.renderer_choice" class="%sylius.form.type.renderer_choice.class%">
             <argument>%sylius.report.renderers%</argument>
             <tag name="form.type" alias="sylius_renderer_choice" />
         </service>
 
-        <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
-        </service>
-        <service id="sylius.data_fetcher.user_registration" class="%sylius.data_fetcher.user_registration.class%">
-            <argument type="service" id="sylius.repository.user" />
-            <tag name="sylius.report.data_fetcher" fetcher="user_registration" label="User registration" />
-        </service>
-        
         <service id="sylius.form.type.renderer.table" class="%sylius.form.type.renderer.table.class%">
             <argument type="service" id="templating" />
             <tag name="sylius.report.renderer" renderer="table" label="Table renderer" />
