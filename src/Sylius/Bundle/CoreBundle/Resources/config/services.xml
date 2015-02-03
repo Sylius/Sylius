@@ -54,6 +54,7 @@
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
+        <parameter key="sylius.listener.sitemap.class">Sylius\Bundle\CoreBundle\EventListener\SitemapListener</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
@@ -328,6 +329,13 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
+        <service id="sylius.listener.sitemap" class="%sylius.listener.sitemap.class%">
+            <tag name="presta.sitemap.listener" />
+            <argument type="service" id="router" />
+            <argument type="service" id="cmf_routing.dynamic_router" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.taxon" />
+        </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
@@ -337,6 +345,7 @@
             </argument>
         </service>
 
+        <!-- promotions -->
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
