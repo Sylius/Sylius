@@ -33,6 +33,8 @@ Feature: Checkout limited time promotions
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
         And there is default currency configured
+        And there is default channel configured
+        And all products assigned to "DEFAULT-WEB" channel
 
     Scenario: Promotion is applied when the order date corresponds
               with promotion dates

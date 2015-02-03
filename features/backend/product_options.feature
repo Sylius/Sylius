@@ -6,6 +6,7 @@ Feature: Product options
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following locales configured:
             | code  | enabled |
             | en_US | yes     |

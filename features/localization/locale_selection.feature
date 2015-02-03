@@ -12,6 +12,9 @@ Feature: Locale selection
             | fr_FR | no      |
             | pl_PL | yes     |
         And there is default currency configured
+        And there are following channels configured:
+            | code        | name            | currencies    | locales     | url          |
+            | DEFAULT-WEB | Defautl Channel | EUR           | de, en, pl    | localhost    |
 
     Scenario: Only enabled locales are visible to the user
         Given I am on the store homepage

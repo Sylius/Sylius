@@ -27,6 +27,8 @@ Feature: Checkout shipping in preferred language
             | USA          | FedEx         | Flat rate  | Amount: 6500  | yes     |
             | UK + Germany | UPS Ground    | Flat rate  | Amount: 20000 | yes     |
           And there is default currency configured
+          And there is default channel configured
+          And all products assigned to "DEFAULT-WEB" channel
           And there are following locales configured:
             | code  | enabled |
             | en_US | yes     |

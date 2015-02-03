@@ -24,6 +24,9 @@ Feature: Checkout product promotion
           | type        | configuration                     |
           | Add product | variant:Ubu,quantity:1,price:10 |
         And there is default currency configured
+        And there is default channel configured
+        And all products assigned to "DEFAULT-WEB" channel
+        And all promotions assigned to "DEFAULT-WEB" channel
 
     Scenario: Free product is not applied when the cart
               has not the required amount

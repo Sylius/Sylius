@@ -29,6 +29,8 @@ Feature: Checkout taxation
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
           And there is default currency configured
+          And there is default channel configured
+          And all products assigned to "DEFAULT-WEB" channel
           And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page

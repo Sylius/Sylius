@@ -5,7 +5,9 @@ Feature: Channel management
     I want to configure channels
 
     Background:
-        Given I am logged in as administrator
+        Given there is default currency configured
+          And there is default channel configured
+          And I am logged in as administrator
           And the following zones are defined:
             | name | type    | members                         |
             | USA  | country | USA                             |
@@ -45,7 +47,7 @@ Feature: Channel management
         Given I am on the dashboard page
          When I follow "Channels"
          Then I should be on the channel index page
-          And I should see 2 channels in the list
+          And I should see 3 channels in the list
 
     Scenario: Channel codes are visible in the grid
         Given I am on the dashboard page
@@ -56,21 +58,22 @@ Feature: Channel management
     Scenario: Seeing empty index of channels
         Given there are no channels
          When I am on the channel index page
-         Then I should see "There are no channels to display."
+         Then I should see "There are no channels configured."
 
     Scenario: Accessing the channel creation form
         Given I am on the dashboard page
          When I follow "Channels"
-          And I follow "Create channel"
+          And I follow "Add channel"
          Then I should be on the channel creation page
 
     Scenario: Creating new channel
         Given I am on the channel creation page
           And I fill in "Code" with "MOBILE-US"
-          And I select "en_US" from "Locales"
+          And I fill in "Name" with "Mobile US"
+          And I select "English (United States)" from "Locales"
           And I select "USD" from "Currencies"
-          And I select "Stripe" from "Payment methods"
-          And I select "FedEx" from "Shipping methods"
+          And I select "PayPal" from "Payment Methods"
+          And I select "FedEx" from "Shipping Methods"
          When I press "Create"
          Then I should be on the channel index page
           And I should see "Channel has been successfully created."

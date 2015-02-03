@@ -74,7 +74,7 @@ class OrmFinder extends AbstractFinder
         $channel = $this->channelContext->getChannel();
 
         // First get ALL products from the taxon to get their ids
-        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('channel' => $channel));
+        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('channels' => $channel));
 
         $ids = array();
         $pages = $paginator->getNbPages();
@@ -112,7 +112,7 @@ class OrmFinder extends AbstractFinder
             $this->facets = $this->calculateNewFacets($facetsArray, $facetFilteredIds);
         }
 
-        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channel' => $channel));
+        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channels' => $channel));
         $this->filters = $query->getAppliedFilters();
 
         return $this;

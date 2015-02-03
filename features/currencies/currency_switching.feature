@@ -19,6 +19,10 @@ Feature: Currency selection
           | USD  | 0.76496       | yes     |
           | GBP  | 1.13986       | yes     |
           | PLN  | 1.01447       | no      |
+      And there are following channels configured:
+        | code        | name            | currencies    | locales  | url          |
+        | DEFAULT-WEB | Defautl Channel | EUR, GBP, USD | en_US    | localhost    |
+      And all products assigned to "DEFAULT-WEB" channel
 
 
     Scenario: Only enabled currencies are visible to the user

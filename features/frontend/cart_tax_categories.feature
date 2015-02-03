@@ -27,6 +27,9 @@ Feature: Tax categories
             | PHP Top      | 50    | PHP T-Shirts | Clothing     |
             | Golden Apple | 120   | Food         | Food         |
         And there is default currency configured
+        And there is default channel configured
+        And all products assigned to "DEFAULT-WEB" channel
+        And all promotions assigned to "DEFAULT-WEB" channel
 
     Scenario: Correct taxes are applied for one item
         Given the default tax zone is "UK"

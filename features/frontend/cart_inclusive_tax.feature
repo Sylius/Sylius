@@ -11,6 +11,7 @@ Feature: Tax included in price
           And taxonomy "Category" has following taxons:
             | Clothing > PHP T-Shirts |
           And there is default currency configured
+          And there is default channel configured
           And the following zones are defined:
             | name  | type    | members        |
             | Germany | country | Germany        |
@@ -23,6 +24,7 @@ Feature: Tax included in price
           And the following products exist:
             | name    | price | taxons       | tax category  |
             | PHP Top | 85    | PHP T-Shirts | Taxable Goods |
+          And all products assigned to "DEFAULT-WEB" channel
           And the default tax zone is "Germany"
 
     Scenario: Correct amounts are displayed for inclusive taxes
