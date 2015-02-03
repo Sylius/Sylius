@@ -11,9 +11,9 @@ env:
     
 matrix:
     include:
-        - php: 5.3.3
+        - php: 5.3
           env: TEST_SUITE=1 COMPOSER_FLAGS="--prefer-lowest"
-        - php: 5.3.3
+        - php: 5.3
           env: TEST_SUITE=2 COMPOSER_FLAGS="--prefer-lowest"
 
 services: mongodb
