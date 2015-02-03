@@ -57,7 +57,6 @@ abstract class TimePeriod implements DataFetcherInterface
                 break;
             default:
                 throw new \InvalidArgumentException('Wrong data fetcher period');
-                break;
         }
 
         $rawData = $this->getData($configuration);

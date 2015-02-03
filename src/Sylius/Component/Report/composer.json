@@ -1,8 +1,8 @@
 {
-    "name": "sylius/product",
+    "name": "sylius/report",
     "type": "library",
-    "description": "Product catalog system with support for product options and variants.",
-    "keywords": ["shop", "ecommerce", "products", "product", "assortment", "options", "variants"],
+    "description": "Report system, based on data fetchers and renderers.",
+    "keywords": ["shop", "ecommerce", "report", "data fetcher", "renderer"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -32,10 +32,10 @@
         "phpspec/phpspec":         "~2.1",
     },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Product\\": "" }
+        "psr-4": { "Sylius\\Component\\Report\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Product\\spec\\": "spec/" }
+        "psr-4": { "Sylius\\Component\\Report\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {

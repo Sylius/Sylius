@@ -84,9 +84,10 @@ class ReportType extends AbstractResourceType
             ->addEventSubscriber(new BuildReportRendererFormListener($this->rendererRegistry, $builder->getFormFactory()))
         ;
 
-        $prototypes = array();
-        $prototypes['renderers'] = array();
-        $prototypes['dataFetchers'] = array();
+        $prototypes = array(
+            'renderers' => array(),
+            'dataFetchers' => array(),
+        );
 
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
             $formType = sprintf('sylius_renderer_%s', $renderer->getType());
