@@ -50,6 +50,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addMarketingMenu($menu, $childOptions, 'main');
         $this->addSupportMenu($menu, $childOptions, 'main');
         $this->addContentMenu($menu, $childOptions, 'main');
+        $this->addImportExportMenu($menu, $childOptions, 'main');
         $this->addConfigurationMenu($menu, $childOptions, 'main');
 
         $menu->addChild('homepage', array(
@@ -91,6 +92,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addCustomerMenu($menu, $childOptions, 'sidebar');
         $this->addSupportMenu($menu, $childOptions, 'sidebar');
         $this->addContentMenu($menu, $childOptions, 'sidebar');
+        $this->addImportExportMenu($menu, $childOptions, 'sidebar');
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_SIDEBAR, new MenuBuilderEvent($this->factory, $menu));
@@ -362,6 +364,31 @@ class BackendMenuBuilder extends MenuBuilder
         if (!$child->hasChildren()) {
             $menu->removeChild('sales');
         }
+    }
+    
+    /**
+     * Add import/export menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addImportExportMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('import_export', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.import_export', $section)))
+        ;
+
+
+        $child->addChild('export', array(
+            'route' => 'sylius_backend_export_profile_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-shopping-cart'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.export', $section)));
+        $child->addChild('import', array(
+            'route' => 'sylius_backend_import_profile_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-shopping-cart'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.import', $section)));
     }
 
     /**

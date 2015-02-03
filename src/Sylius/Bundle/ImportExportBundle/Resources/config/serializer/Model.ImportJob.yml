@@ -1,0 +1,39 @@
+Sylius\Component\ImportExport\Model\ImportJob:
+    exclusion_policy: ALL
+    xml_root_name: import_job
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        status:
+            expose: true
+            type: string
+        startTime:
+            expose: true
+            type: DateTime
+        endTime:
+            expose: true
+            type: DateTime
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+        importProfile:
+            expose: true
+            type: ProfileInterface
+    relations:
+        - rel: self
+          href:
+            route: sylius_import_job_show
+            parameters:
+                id: expr(object.getId())
+        - rel: import_profile
+          exclusion:
+                exclude_if: expr(!object.getExportProfile())
+          href:
+                route: sylius_import_profile_show
+                parameters:
+                    id: expr(object.getExportProfile().getId())

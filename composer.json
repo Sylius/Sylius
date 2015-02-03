@@ -73,8 +73,11 @@
         "twig/extensions":                      "~1.0",
         "twig/twig":                            "~1.11",
         "white-october/pagerfanta-bundle":      "~1.0",
-        "willdurand/hateoas-bundle":            "~0.4",
-        "winzou/state-machine-bundle":          "~0.2"
+        "willdurand/hateoas-bundle":            "@stable",
+        "winzou/state-machine":                 "~0.1",
+        "winzou/state-machine-bundle":          "~0.2",
+        "payum/omnipay-bridge":                 "~0.12",
+        "jwage/easy-csv":                       "0.0.2"
     },
     "require-dev": {
         "behat/behat":                          "~3.0",

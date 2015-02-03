@@ -21,6 +21,10 @@ monolog:
         firephp:
             type:  firephp
             level: info
+        exporter:
+            type:     stream
+            path:     %kernel.logs_dir%/exporter.log
+            channels: [exporter]
 
 assetic:
     use_controller: true

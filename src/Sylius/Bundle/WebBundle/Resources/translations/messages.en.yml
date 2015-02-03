@@ -192,12 +192,18 @@ sylius:
         content: Content
         currency:
             index: Currencies
+        export_profile:
+            index: Export Profile
         general_settings: General Settings
         generate: Generate
         group:
             index: Groups
+        import_profile:
+            index: Import Profile
         inventory:
             index: Inventory
+        export_job:
+            index: Jobs
         locale:
             index: Locales
         marketing: Marketing
@@ -397,6 +403,36 @@ sylius:
         exchange_rate: Exchange rate
         update_header: Editing currency
         updated_at: Last update
+    export_profile:
+        create: Create profile
+        create_header: New export profile
+        manage: Manage
+        jobs: Jobs
+        code: Code
+        id: ID
+        name: Name
+        description: Description
+        reader: Reader
+        reader_configuration: Reader configuration
+        writer: Writer
+        writer_configuration: Writer configuration
+        index_header: Export Profiles
+        no_results: There are no profiles to display.
+        update_header: Editing profile
+        updated_at: Last update
+        general_info: General info
+        show: Show export profile
+    export_job:
+        index_header: Jobs
+        manage: Manage
+        header: Job
+        export_profile: Export profile
+        id: ID
+        status: status
+        start_time: Start time
+        end_time: End time
+        created_at: Created at
+        updated_at: Updated at
     filter: Filter
     form:
         cart:
@@ -453,6 +489,24 @@ sylius:
         splash:
             headline: Welcome to Sylius
             subheadline: Modern ecommerce for Symfony2
+    import_profile:
+        code: Code
+        create: Create profile
+        create_header: New import profile
+        description: Description
+        enabled: Enabled
+        general_info: General info
+        id: ID
+        index_header: Import Profiles
+        manage: Manage
+        name: Name
+        no_results: There are no profiles to display.
+        reader: Reader
+        reader_configuration: Reader configuration
+        update_header: Editing profile
+        updated_at: Last update
+        writer: Writer
+        writer_configuration: Writer configuration
     inventory_unit:
         created_at: Created
         inventory_state: Inventory state

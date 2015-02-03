@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        exporter:
+            file: File path
+            update: Update existing records?
+            csv:
+                delimiter: Delimiter
+                enclosure: Enclosure
+                add_header: Add header?
+        reader:
+            name: Reader
+            batch_size: Rows number
+            file: File path
+            csv:
+                delimiter: Delimiter
+                enclosure: Enclosure
+                header: Was header set?
+        import_profile:
+            name: Name
+            description: Description
+            code: Code
+        import.export:
+            export: export

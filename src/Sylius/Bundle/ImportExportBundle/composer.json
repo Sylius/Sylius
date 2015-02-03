@@ -1,0 +1,63 @@
+{
+    "name": "sylius/import-export-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible import/export system for Symfony2 ecommerce applications.",
+    "keywords": ["import", "export", "xls", "csv", "shop", "webshop", "ecommerce", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Łukasz Chruściel",
+            "email":    "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name":     "Bartosz Siejka",
+            "homepage": "http://bsiejka.com",
+            "email":    "bartosz.siejka@lakion.com"
+        },
+        {
+            "name":     "Mateusz Zalewski",
+            "email":    "mateusz.zalewski@lakion.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                             ">=5.3.3",
+
+        "symfony/framework-bundle":        "~2.3",
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/resource-bundle":          "0.13.*@dev",
+        "sylius/money-bundle":             "0.13.*@dev",
+        "sylius/import-export":            "0.13.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "~2.1",
+        "symfony/form":      "~2.3",
+        "symfony/validator": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ImportExportBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ImportExportBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.13-dev"
+        }
+    }
+}

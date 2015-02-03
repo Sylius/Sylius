@@ -86,6 +86,9 @@
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
         <parameter key="sylius.a2lix_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\A2lixTranslationLocaleProvider</parameter>
 
+        <parameter key="sylius.export.user_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
+        <parameter key="sylius.export.product_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductReader</parameter>
+
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
         <!-- Data fetchers -->
@@ -532,6 +535,17 @@
 
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
             <argument type="service" id="sylius.context.locale" />
+        </service>
+                
+        <!-- Export reader -->
+        <service id="sylius.export.user_reader" class="%sylius.export.user_reader.class%">
+            <argument type="service" id="sylius.repository.user" />
+        </service>
+        <service id="sylius.import.user_writer" class="%sylius.import.user_writer.class%">
+            <argument type="service" id="sylius.repository.user" />
+        </service>
+        <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
+            <argument type="service" id="sylius.repository.product" />
         </service>
     </services>
 

@@ -1,0 +1,45 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_export_profile_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.export_profile:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ExportProfile:index.html.twig
+
+sylius_backend_export_profile_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.export_profile:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ExportProfile:create.html.twig
+            redirect: sylius_backend_export_profile_show
+
+sylius_backend_export_profile_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.export_profile:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ExportProfile:update.html.twig
+            redirect: sylius_backend_export_profile_show
+
+sylius_backend_export_profile_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.export_profile:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_export_profile_index
+
+sylius_backend_export_profile_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.export_profile:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/ExportProfile:show.html.twig

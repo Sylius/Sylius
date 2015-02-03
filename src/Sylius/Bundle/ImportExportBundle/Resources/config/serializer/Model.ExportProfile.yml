@@ -1,0 +1,36 @@
+Sylius\Component\ImportExport\Model\ExportProfile:
+    exclusion_policy: ALL
+    xml_root_name: export_profile
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        description:
+            expose: true
+            type: string
+        code:
+            expose: true
+            type: string
+            unique: true
+        writer:
+            expose: true
+            type: string
+        writerConfiguration:
+            expose: true
+            type: array
+        reader:
+            expose: true
+            type: string
+        readerConfiguration:
+            expose: true
+            type: array
+    relations:
+        - rel: self
+          href:
+                route: sylius_export_profile_show
+                parameters:
+                    id: expr(object.getId())

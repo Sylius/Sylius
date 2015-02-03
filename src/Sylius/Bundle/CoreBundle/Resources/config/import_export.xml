@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd"> 
+    <parameters>    
+        <parameter key="sylius.export.user_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
+        <parameter key="sylius.export.product_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductReader</parameter>
+
+        <parameter key="sylius.import.product_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductWriter</parameter>
+    </parameters>
+
+    <services>
+        <!-- Export reader -->
+        <service id="sylius.export.user_reader" class="%sylius.export.user_reader.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <tag name="sylius.export.reader" reader="user_reader" label="User reader" />
+        </service>
+        <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="sylius.export.reader" reader="product_reader" label="Product reader" />
+        </service>
+
+        <!-- Import writer -->
+        <service id="sylius.import.product_writer" class="%sylius.import.product_writer.class%">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="sylius.import.writer" writer="product_writer" label="Product writer" />
+        </service>
+    </services>
+</container>
