@@ -51,12 +51,6 @@ class ChannelTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('type', 'choice', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('description', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)

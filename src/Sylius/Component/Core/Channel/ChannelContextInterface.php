@@ -22,7 +22,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface as BaseChannelConte
 interface ChannelContextInterface extends BaseChannelContextInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @return ChannelInterface
      */

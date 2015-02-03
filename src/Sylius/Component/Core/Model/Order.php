@@ -81,7 +81,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var float
      */
-    protected $exchangeRate = 1;
+    protected $exchangeRate = 1.0;
 
     /**
      * Promotion coupons.
@@ -492,7 +492,7 @@ class Order extends Cart implements OrderInterface
      */
     public function setExchangeRate($exchangeRate)
     {
-        $this->exchangeRate = $exchangeRate;
+        $this->exchangeRate = (float) $exchangeRate;
 
         return $this;
     }

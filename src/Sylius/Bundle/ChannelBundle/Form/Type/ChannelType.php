@@ -34,13 +34,6 @@ class ChannelType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.channel.name'
             ))
-            ->add('type', 'choice', array(
-                'choices' => array(
-                    ChannelInterface::MOBILE => 'Mobile',
-                    ChannelInterface::WEB => 'Web'
-                ),
-                'label' => 'sylius.form.channel.type'
-            ))
             ->add('description', 'text', array(
                 'label'    => 'sylius.form.channel.description',
                 'required' => false,

@@ -46,11 +46,6 @@ class Channel implements ChannelInterface
     /**
      * @var string
      */
-    protected $type = ChannelInterface::WEB;
-
-    /**
-     * @var string
-     */
     protected $color;
 
     /**
@@ -157,24 +152,6 @@ class Channel implements ChannelInterface
     public function setUrl($url)
     {
         $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
 
         return $this;
     }

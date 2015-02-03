@@ -53,17 +53,6 @@ class ChannelSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Mobile Store');
     }
 
-    function it_has_default_type()
-    {
-        $this->getType()->shouldReturn(ChannelInterface::WEB);
-    }
-
-    function its_type_is_mutable()
-    {
-        $this->setType(ChannelInterface::MOBILE);
-        $this->getType()->shouldReturn(ChannelInterface::MOBILE);
-    }
-
     function it_has_no_color_by_default()
     {
         $this->getColor()->shouldReturn(null);
