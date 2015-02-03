@@ -32,6 +32,9 @@ Feature: Volume based pricing
             | 20-29 | 60.00 |
             | 30+   | 55.99 |
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Volume-based pricing has priority over price attribute
         Given I am on the store homepage

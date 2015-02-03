@@ -23,6 +23,9 @@ Feature: Search products
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | doctrine t-shirt        |
         And all products assigned to "DEFAULT-WEB" channel
         And I populate the index
+        And channel "DEFAULT-WEB" has following configuration:
+          | taxonomy |
+          | Category |
 
 
     Scenario: Search homepage is accessible

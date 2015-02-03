@@ -32,6 +32,7 @@ Feature: Checkout promotions with multiple rules and actions
         And there is default currency configured
         And there is default channel configured
         And all products assigned to "DEFAULT-WEB" channel
+        And all promotions assigned to "DEFAULT-WEB" channel
 
     Scenario: Several discounts are applied when a promotion has several
               actions and the cart fulfills all the rules

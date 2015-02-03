@@ -27,6 +27,9 @@ Feature: Standard pricing
             | PHP Top     | 49.99 | PHP T-Shirts | Taxable Goods |
             | Symfony Tee | 69.00 | PHP T-Shirts | Taxable Goods |
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Flat price is calculated for products
         Given I am on the store homepage

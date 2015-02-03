@@ -25,6 +25,9 @@ Feature: Checkout finalization
           And there is default currency configured
           And there is default channel configured
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy | payment | shipping    |
+            | Category | Dummy   | DHL Express |
 
     Scenario: Placing the order
         Given I am logged in user

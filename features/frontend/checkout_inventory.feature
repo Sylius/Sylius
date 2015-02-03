@@ -26,6 +26,9 @@ Feature: Checkout inventory
           And there is default currency configured
           And there is default channel configured
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy | payment       | shipping    |
+            | Category | Credit Card   | DHL Express |
           And I am logged in as administrator
 
     Scenario: Inventory is updated after buying products

@@ -29,6 +29,9 @@ Feature: Checkout security
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy | payment | shipping    |
+            | Category | Dummy   | DHL Express |
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 

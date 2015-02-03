@@ -161,13 +161,13 @@ class ProductRepository extends BaseProductRepository
 
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
-        if (isset($criteria['channel'])) {
+        if (isset($criteria['channels'])) {
             $queryBuilder
                 ->innerJoin('product.channels', 'channel')
                 ->andWhere('channel = :channel')
-                ->setParameter('channel', $criteria['channel'])
+                ->setParameter('channel', $criteria['channels'])
             ;
-            unset($criteria['channel']);
+            unset($criteria['channels']);
         }
 
         parent::applyCriteria($queryBuilder, $criteria);
