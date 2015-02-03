@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ReportBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\Report\Model\ReportInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

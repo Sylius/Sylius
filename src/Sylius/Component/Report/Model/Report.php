@@ -27,17 +27,17 @@ class Report implements ReportInterface
     private $id;
 
     /**
-     * @var String
+     * @var string
      */
     private $name;
 
     /**
-     * @var String
+     * @var string
      */
     private $description;
 
     /**
-     * @var String
+     * @var string
      */
     private $code;
 
@@ -63,7 +63,7 @@ class Report implements ReportInterface
     private $dataFetcher = DefaultDataFetchers::USER_REGISTRATION;
 
     /**
-     * @var Array
+     * @var array
      */
     private $dataFetcherConfiguration = array();
 
@@ -75,20 +75,6 @@ class Report implements ReportInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Sets the value of id.
-     *
-     * @param integer $id the id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -166,7 +152,7 @@ class Report implements ReportInterface
     /**
      * Gets the dataFetcher name.
      *
-     * @return DataFetcher
+     * @return string
      */
     public function getDataFetcher()
     {
@@ -176,7 +162,7 @@ class Report implements ReportInterface
     /**
      * Sets the value of dataFetcher.
      *
-     * @param DataFetcher $dataFetcher the data fetcher
+     * @param string $dataFetcher the data fetcher
      *
      * @return self
      */
@@ -212,7 +198,7 @@ class Report implements ReportInterface
     /**
      * Gets the value of dataFetcherConfiguration.
      *
-     * @return Array
+     * @return array
      */
     public function getDataFetcherConfiguration()
     {
@@ -222,7 +208,7 @@ class Report implements ReportInterface
     /**
      * Sets the value of dataFetcherConfiguration.
      *
-     * @param Array $dataFetcherConfiguration the data fetcher configuration
+     * @param array $dataFetcherConfiguration the data fetcher configuration
      *
      * @return self
      */
