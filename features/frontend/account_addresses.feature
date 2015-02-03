@@ -6,6 +6,7 @@ Feature: User account addresses page
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And I am logged in user
           And the following countries exist:
             | name    |

@@ -22,10 +22,12 @@ Feature: Cart
             | Git T-Shirt   | 29.99 | T-Shirt size                | PHP T-Shirts | match              |
             | PHP Top       | 5.99  |                             | PHP T-Shirts |                    |
             | iShirt        | 18.99 |                             | T-Shirts     |                    |
+          And all products assigned to "DEFAULT-WEB" channel
           And product "Super T-Shirt" is available in all variations
           And product "Git T-Shirt" is available in all variations
           And product "Black T-Shirt" is available in all variations
           And there is default currency configured
+          And there is default channel configured
 
     Scenario: Seeing empty cart
         Given I am on the store homepage

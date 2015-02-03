@@ -6,6 +6,7 @@ Feature: Checkout security
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -27,6 +28,7 @@ Feature: Checkout security
           And the following payment methods exist:
             | name  | gateway | enabled |
             | Dummy | dummy   | yes     |
+          And all products assigned to "DEFAULT-WEB" channel
           And I added product "PHP Top" to cart
           And I go to the checkout start page
 

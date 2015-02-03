@@ -27,10 +27,11 @@ class LoadChannelsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createChannel('WEB-UK', 'UK Webstore', array('en_GB'), array('GBP'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
-        $manager->persist($this->createChannel('WEB-DE', 'Germany Webstore', array('de_DE'), array('EUR'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
-        $manager->persist($this->createChannel('WEB-US', 'United States Webstore', array('en_US'), array('USD'), array('FedEx', 'FedEx World Shipping'), array('Dummy', 'Stripe')));
-        $manager->persist($this->createChannel('MOBILE', 'Mobile Store', array('en_GB', 'de_DE'), array('GBP', 'USD', 'EUR'), array('DHL', 'UPS Ground', 'FedEx'), array('Dummy', 'Stripe')));
+        $url = $this->container->getParameter('router.request_context.host');
+        $manager->persist($this->createChannel('WEB-UK', 'UK Webstore', $url, array('en_GB'), array('GBP'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('WEB-DE', 'Germany Webstore', null, array('de_DE'), array('EUR'), array('DHL', 'UPS Ground'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('WEB-US', 'United States Webstore', null, array('en_US'), array('USD'), array('FedEx', 'FedEx World Shipping'), array('Dummy', 'Stripe')));
+        $manager->persist($this->createChannel('MOBILE', 'Mobile Store', null, array('en_GB', 'de_DE'), array('GBP', 'USD', 'EUR'), array('DHL', 'UPS Ground', 'FedEx'), array('Dummy', 'Stripe')));
 
         $manager->flush();
     }
@@ -52,9 +53,11 @@ class LoadChannelsData extends DataFixture
      *
      * @return ChannelInterface
      */
-    protected function createChannel($code, $name, array $locales = array(), array $currencies = array(), array $shippingMethods = array(), array $paymentMethods = array())
+    protected function createChannel($code, $name, $url, array $locales = array(), array $currencies = array(), array $shippingMethods = array(), array $paymentMethods = array())
     {
+        /** @var ChannelInterface $channel */
         $channel = $this->getChannelRepository()->createNew();
+        $channel->setUrl($url);
         $channel->setCode($code);
         $channel->setName($name);
         $channel->setColor($this->faker->randomElement(array('Red', 'Green', 'Blue', 'Orange', 'Pink')));

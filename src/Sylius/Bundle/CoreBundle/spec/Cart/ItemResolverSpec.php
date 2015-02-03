@@ -88,7 +88,7 @@ class ItemResolverSpec extends ObjectBehavior
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(5);
 
-        $productRepository->findOneBy(['id' => 5, 'channel' => null])->willReturn(null);
+        $productRepository->findOneBy(array('id' => 5, 'channel' => null))->willReturn(null);
 
         $this
             ->shouldThrow('Sylius\Component\Cart\Resolver\ItemResolvingException')

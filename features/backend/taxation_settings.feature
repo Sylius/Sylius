@@ -6,6 +6,7 @@ Feature: Taxation settings
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                       |

@@ -6,6 +6,7 @@ Feature: Group based pricing
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -37,6 +38,7 @@ Feature: Group based pricing
             | group               | price |
             | Wholesale Customers | 39.49 |
             | Retail Customers    | 45.99 |
+          And all products assigned to "DEFAULT-WEB" channel
 
     Scenario: Default price is used when user is not logged in
         Given I am on the store homepage

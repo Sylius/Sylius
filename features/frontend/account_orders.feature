@@ -6,6 +6,7 @@ Feature: User account orders page
 
   Background:
     Given there is default currency configured
+      And there is default channel configured
       And I am logged in user
       And I am on my account homepage
       And the following zones are defined:
@@ -27,6 +28,7 @@ Feature: User account orders page
         | Mug           | 5.99  | 456 |
         | Sticker       | 10.00 | 213 |
         | Book          | 22.50 | 948 |
+      And all products assigned to "DEFAULT-WEB" channel
       And the following orders exist:
         | user                    | shipment                 | address                                                           |
         | sylius@example.com      | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
