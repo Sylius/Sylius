@@ -19,6 +19,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Gedmo\Tool\Wrapper\EntityWrapper;
 use Gedmo\Tree\Strategy\ORM\Nested;
+use Gedmo\Tree\TreeListener;
 
 /**
  * Base taxon repository.
@@ -31,7 +32,7 @@ class TaxonRepository extends TranslatableEntityRepository implements TaxonRepos
     /**
      * Tree listener on event manager
      *
-     * @var AbstractTreeListener $treeListener
+     * @var TreeListener $treeListener
      */
     protected $treeListener;
 
@@ -41,7 +42,7 @@ class TaxonRepository extends TranslatableEntityRepository implements TaxonRepos
 
         foreach ($em->getEventManager()->getListeners() as $listeners) {
             foreach ($listeners as $listener) {
-                if ($listener instanceof \Gedmo\Tree\TreeListener) {
+                if ($listener instanceof TreeListener) {
                     $this->treeListener = $listener;
                     break;
                 }
