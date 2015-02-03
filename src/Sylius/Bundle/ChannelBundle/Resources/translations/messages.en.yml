@@ -6,5 +6,4 @@ sylius:
             description: Description
             url: URL
             enabled: Enabled
-            type: Type
             color: Color
