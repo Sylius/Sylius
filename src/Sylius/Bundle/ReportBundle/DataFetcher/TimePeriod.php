@@ -102,9 +102,11 @@ abstract class TimePeriod implements DataFetcherInterface
     {
         $date = $configuration['start'];
         $dateInterval = new \DateInterval($configuration['interval']);
-        $numberOfPeriods = $configuration['start']->diff($configuration['end']);
 
-        for ($i = 0; $i <= $numberOfPeriods->format($configuration['periodFormat']); $i++) {
+        $numberOfPeriods = $configuration['start']->diff($configuration['end']);
+        $formatednumberOfPeriods = $numberOfPeriods->format($configuration['periodFormat']);
+
+        for ($i = 0; $i <= $formatednumberOfPeriods; $i++) {
             $fetched[$date->format($configuration['presentationFormat'])] = 0;
             $date = $date->add($dateInterval);
         }

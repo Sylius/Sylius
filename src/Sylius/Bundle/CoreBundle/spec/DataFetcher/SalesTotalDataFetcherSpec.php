@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
@@ -37,7 +37,7 @@ class SalesTotalDataFetcherSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Report\DataFetcher\DataFetcherInterface');
     }
 
-    public function let(OrderRepository $orderRepository)
+    public function let(OrderRepositoryInterface $orderRepository)
     {
         $this->beConstructedWith($orderRepository);
     }

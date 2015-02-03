@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\DataFetcher;
 
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Bundle\ReportBundle\DataFetcher\TimePeriod;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
@@ -23,11 +23,11 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 class SalesTotalDataFetcher extends TimePeriod
 {
     /**
-     * @var OrderRepository
+     * @var OrderRepositoryInterface
      */
     private $orderRepository;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepositoryInterface $orderRepository)
     {
         $this->orderRepository = $orderRepository;
     }

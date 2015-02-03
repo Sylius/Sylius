@@ -303,6 +303,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+
+    /**
+     * {@inheritdoc} 
+     */
     public function revenueBetweenDatesGroupByDate(array $configuration = array())
     {
         $groupBy = '';
@@ -326,6 +330,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->fetchAll();
     }
 
+    /**
+     * {@inheritdoc} 
+     */
     public function ordersBetweenDatesGroupByDate(array $configuration = array())
     {
         $groupBy = '';
