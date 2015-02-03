@@ -117,7 +117,7 @@ class ItemResolver implements ItemResolverInterface
         $id = $this->resolveItemIdentifier($data);
 
         $channel = $this->channelContext->getChannel();
-        if (!$product = $this->productRepository->findOneBy(array('id' => $id, 'channel' => $channel))) {
+        if (!$product = $this->productRepository->findOneBy(array('id' => $id, 'channels' => $channel))) {
             throw new ItemResolvingException('Requested product was not found.');
         }
 

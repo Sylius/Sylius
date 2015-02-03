@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\SearchBundle\Finder;
 
 use Doctrine\ORM\EntityManager;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
@@ -112,7 +114,11 @@ class OrmFinder extends AbstractFinder
             $this->facets = $this->calculateNewFacets($facetsArray, $facetFilteredIds);
         }
 
-        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channels' => $channel));
+        if (count($idsFromAllFacets)) {
+            $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channels' => $channel));
+        } else {
+            $this->paginator = new Pagerfanta(new ArrayAdapter(array()));
+        }
         $this->filters = $query->getAppliedFilters();
 
         return $this;

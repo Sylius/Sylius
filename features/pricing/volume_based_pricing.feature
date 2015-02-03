@@ -32,6 +32,9 @@ Feature: Volume based pricing
             | 20-29 | 60.00 |
             | 30+   | 55.99 |
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Price is calculated based on the quantity
         Given I am on the store homepage

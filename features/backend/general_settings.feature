@@ -12,6 +12,9 @@ Feature: General settings
             | EUR  | 1.00000       | yes     |
             | AUD  | 0.73986       | yes     |
           And there is default channel configured
+          And channel "DEFAULT-WEB" has following configuration:
+            | currencies    |
+            | USD, EUR, AUD |
           And I am logged in as administrator
 
     Scenario: Accessing the settings form

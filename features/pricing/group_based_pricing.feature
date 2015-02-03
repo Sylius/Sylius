@@ -39,6 +39,9 @@ Feature: Group based pricing
             | Wholesale Customers | 39.49 |
             | Retail Customers    | 45.99 |
           And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Default price is used when user is not logged in
         Given I am on the store homepage

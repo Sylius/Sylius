@@ -30,6 +30,9 @@ Feature: Tax categories
         And there is default channel configured
         And all products assigned to "DEFAULT-WEB" channel
         And all promotions assigned to "DEFAULT-WEB" channel
+        And channel "DEFAULT-WEB" has following configuration:
+          | taxonomy |
+          | Category |
 
     Scenario: Correct taxes are applied for one item
         Given the default tax zone is "UK"

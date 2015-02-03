@@ -22,6 +22,9 @@ Feature: Products
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts |
         And all products assigned to "DEFAULT-WEB" channel
+        And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage
