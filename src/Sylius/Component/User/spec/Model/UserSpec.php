@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\User;
 
 /**
  *
@@ -58,12 +57,12 @@ class UserSpec extends ObjectBehavior
         $deletedAt = new \DateTime('yesterday');
         $this->setDeletedAt($deletedAt);
         
-        $this->isDeleted()->shouldReturn(true);
+        $this->shouldBeDeleted();
     }
     
     function it_should_return_false_if_user_is_not_deleted()
     {        
-        $this->isDeleted()->shouldReturn(false);
+        $this->shouldNotBeDeleted();
     }
     
     function it_should_return_false_if_user_deleted_time_is_future_date()
@@ -71,6 +70,6 @@ class UserSpec extends ObjectBehavior
         $deletedAt = new \DateTime('tomorrow');
         $this->setDeletedAt($deletedAt);
         
-        $this->isDeleted()->shouldReturn(false);
+        $this->shouldNotBeDeleted();
     }
 }
