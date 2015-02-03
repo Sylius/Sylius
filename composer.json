@@ -74,7 +74,8 @@
         "white-october/pagerfanta-bundle":      "~1.0",
         "willdurand/hateoas-bundle":            "@stable",
         "winzou/state-machine":                 "~0.1",
-        "winzou/state-machine-bundle":          "~0.2"
+        "winzou/state-machine-bundle":          "~0.2",
+        "payum/omnipay-bridge": "0.13.*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
