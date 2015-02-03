@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.mailer.order_comment.class">Sylius\Bundle\CoreBundle\Mailer\OrderCommentMailer</parameter>
+        <parameter key="sylius.listener.order_comment_email.class">Sylius\Bundle\CoreBundle\EventListener\OrderCommentEmailListener</parameter>
     </parameters>
 
     <services>
@@ -27,6 +28,10 @@
                 <argument key="template">%sylius.email.order_comment.template%</argument>
                 <argument key="from_email">%sylius.email.order_comment.from_email%</argument>
             </argument>
+        </service>
+        <service id="sylius.listener.order_comment_email" class="%sylius.listener.order_comment_email.class%">
+            <argument type="service" id="sylius.mailer.order_comment" />
+            <tag name="kernel.event_listener" event="sylius.comment.post_create" method="processOrderComment" />
         </service>
     </services>
 
