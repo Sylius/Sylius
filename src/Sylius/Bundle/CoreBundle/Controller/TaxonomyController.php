@@ -39,7 +39,7 @@ class TaxonomyController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        //$taxonRepository->moveUp($taxon, -1);
+        $taxonRepository->moveUp($taxon);
         
         return $this->redirectHandler->redirectToReferer();
     }
@@ -62,7 +62,7 @@ class TaxonomyController extends ResourceController
             throw new NotFoundHttpException('Requested taxon does not exist.');
         }
 
-        //$taxonRepository->moveDown($taxon, 1);
+        $taxonRepository->moveDown($taxon);
         
         return $this->redirectHandler->redirectToReferer();
     }
