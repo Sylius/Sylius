@@ -22,20 +22,25 @@
             <generator strategy="AUTO" />
         </id>
         <field name="name" column="name" type="string" />
-        <field name="slug" column="slug" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" />
+        <field name="slug" column="slug" type="string" unique="false">
+            <gedmo:slug fields="name" unique="false" />
         </field>
-        <field name="permalink" column="permalink" type="string" unique="true">
-            <gedmo:slug fields="name" unique="true" >
-                <!--TODO custom handler for translations-->
-                <!--<gedmo:handler class="Gedmo\Sluggable\Handler\RelativeSlugHandler">-->
-                <!--<gedmo:handler-option name="relationField" value="parent"/>-->
-                <!--<gedmo:handler-option name="relationSlugField" value="slug"/>-->
-                <!--<gedmo:handler-option name="separator" value="/"/>-->
-                <!--</gedmo:handler>-->
+        <field name="permalink" column="permalink" type="string" unique="false">
+            <gedmo:slug fields="name" unique="false" >
+                <gedmo:handler class="Sylius\Bundle\TranslationBundle\GedmoHandler\TranslationSlugHandler">
+                <gedmo:handler-option name="relationField" value="translatable"/>
+                <gedmo:handler-option name="relationParentRelationField" value="parent"/>
+                <gedmo:handler-option name="parentFieldMethod" value="getPermalink"/>
+                <gedmo:handler-option name="locale" value="locale"/>
+                <gedmo:handler-option name="translate" value="translate"/>
+                <gedmo:handler-option name="separator" value="/"/>
+                </gedmo:handler>
             </gedmo:slug>
         </field>
         <field name="description" column="description" type="text" nullable="true" />
+        <unique-constraints>
+            <unique-constraint columns="locale,permalink" name="permalink_uidx" />
+        </unique-constraints>
     </mapped-superclass>
 
 </doctrine-mapping>
