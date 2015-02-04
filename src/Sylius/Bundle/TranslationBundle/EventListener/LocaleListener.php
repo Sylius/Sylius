@@ -40,7 +40,6 @@ class LocaleListener implements EventSubscriberInterface
      * Set request locale
      *
      * @param GetResponseEvent $event
-     * @return void
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
@@ -51,7 +50,7 @@ class LocaleListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             // IMPORTANT keep priority 34
