@@ -169,6 +169,8 @@ class Report implements ReportInterface
     public function setDataFetcher($dataFetcher)
     {
         $this->dataFetcher = $dataFetcher;
+
+        return $this;
     }
 
     /**

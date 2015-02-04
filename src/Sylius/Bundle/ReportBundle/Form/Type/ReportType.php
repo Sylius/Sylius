@@ -81,7 +81,6 @@ class ReportType extends AbstractResourceType
             ->add('renderer', 'sylius_renderer_choice', array(
                 'label' => 'sylius.form.report.renderer.label'
             ))
-            ->addEventSubscriber(new BuildReportRendererFormListener($this->rendererRegistry, $builder->getFormFactory()))
         ;
 
         $prototypes = array(
