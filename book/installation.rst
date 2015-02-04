@@ -38,6 +38,8 @@ place, run the following commands:
     $ cd sylius
     $ php app/console sylius:install
 
+The ``sylius:install`` command actually runs several other commands, which will ask you some questions and check if everything is setup to run Sylius properly.
+
 This package contains our main Sylius development repository, with all the components and bundles in the ``src/`` folder.
 
 For the contributing process questions, please refer to the `Contributing Guide <http://docs.sylius.org/en/latest/contributing/index.html>`_.

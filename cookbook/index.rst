@@ -4,6 +4,7 @@ Cookbook
 .. toctree::
     :hidden:
 
+    installation-commands
     extending-menu
     registry
 
