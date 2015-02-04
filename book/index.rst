@@ -5,6 +5,7 @@ The Book
     :hidden:
 
     introduction
+    environments
     installation
     architecture
     state_machine
