@@ -47,7 +47,7 @@ abstract class AbstractCalculator
 
             $id = $object->getId();
             if (array_key_exists($id, $configuration) && (null === $price || $configuration[$id] < $price)) {
-                $price = $configuration[$id];
+                $price = (int) round($configuration[$id]);
             }
         }
 

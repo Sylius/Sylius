@@ -38,7 +38,7 @@ class PercentageDiscountAction extends DiscountAction
         }
 
         $adjustment = $this->createAdjustment($promotion);
-        $adjustmentAmount = intval(round($subject->getPromotionSubjectTotal() * $configuration['percentage']));
+        $adjustmentAmount = (int) round($subject->getPromotionSubjectTotal() * $configuration['percentage']);
         $adjustment->setAmount(- $adjustmentAmount);
 
         $subject->addAdjustment($adjustment);

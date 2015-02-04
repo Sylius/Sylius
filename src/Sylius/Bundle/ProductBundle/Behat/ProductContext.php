@@ -33,7 +33,7 @@ class ProductContext extends DefaultContext
             $product->setCurrentLocale($this->getContainer()->getParameter('sylius.locale'));
             $product->setName(trim($data['name']));
             $product->setDescription('...');
-            $product->getMasterVariant()->setPrice(intval(round($data['price'] * 100)));
+            $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {

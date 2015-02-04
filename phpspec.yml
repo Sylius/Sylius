@@ -2,7 +2,7 @@ suites:
     Addressing       : { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing }
     Attribute        : { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute }
     Cart             : { namespace: Sylius\Component\Cart, psr4_prefix: Sylius\Component\Cart, spec_path: src/Sylius/Component/Cart }
-    Core             : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius\Component\Core }
+    Core             : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius/Component/Core }
     Contact          : { namespace: Sylius\Component\Contact, psr4_prefix: Sylius\Component\Contact, spec_path: src/Sylius/Component/Contact }
     Currency         : { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency }
     Installer        : { namespace: Sylius\Component\Installer, psr4_prefix: Sylius\Component\Installer, spec_path: src/Sylius/Component/Installer }
