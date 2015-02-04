@@ -11,13 +11,9 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
-use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Sylius\Bundle\CoreBundle\Kernel\Kernel;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Intl\Intl;
 
 class InstallCommand extends AbstractInstallCommand
 {
@@ -60,6 +56,14 @@ EOT
         $this->commandExecutor->runCommand('sylius:install:assets', array(), $output);
         $output->writeln('');
 
+        $map = array(
+            Kernel::ENV_DEV => '/app_dev.php',
+            Kernel::ENV_TEST => '/app_test.php',
+            Kernel::ENV_STAGING => '/app_staging.php',
+            Kernel::ENV_PROD => '/'
+        );
+
         $output->writeln('<info>Sylius has been successfully installed.</info>');
+        $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $map[$this->getEnvironment()]));
     }
 }

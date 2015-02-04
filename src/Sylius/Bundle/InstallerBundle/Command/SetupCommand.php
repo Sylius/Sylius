@@ -14,6 +14,11 @@ namespace Sylius\Bundle\InstallerBundle\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Validator\Constraints\Country;
+use Symfony\Component\Validator\Constraints\Currency;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Locale;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class SetupCommand extends AbstractInstallCommand
 {
@@ -37,8 +42,6 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('You can now load sample data or configure the store yourself.');
-
         $this->setupLocales($input, $output);
         $this->setupCurrencies($input, $output);
         $this->setupCountries($input, $output);
@@ -51,32 +54,56 @@ EOT
     {
         $output->writeln('Create your administrator account.');
 
-        $user = $this->get('sylius.repository.user')->createNew();
+        $userManager = $this->get('sylius.manager.user');
+        $userRepository = $this->get('sylius.repository.user');
 
-        $user->setFirstname($this->askRequired($output, '<question>Your firstname:</question> '));
-        $user->setLastname($this->askRequired($output, '<question>Your lastname:</question> '));
-        $user->setEmail($this->askRequired($output, '<question>Your e-mail:</question> '));
-        $user->setPlainPassword($this->askRequired($output, '<question>Your password:</question> '));
+        $user = $userRepository->createNew();
+
+        $user->setFirstname($this->ask($output, 'Your firstname:', array(new NotBlank())));
+        $user->setLastname($this->ask($output, 'Lastname:', array(new NotBlank())));
+
+        do {
+            $email = $this->ask($output, 'E-Mail:', array(new NotBlank(), new Email()));
+            $exists = null !== $userRepository->findOneByEmail($email);
+
+            if ($exists) {
+                $output->writeln('<error>E-Mail is already in use!</error>');
+            }
+        } while ($exists);
+
+        $user->setEmail($email);
+        $user->setPlainPassword($this->ask($output, 'Choose password:', array(new NotBlank())));
         $user->setEnabled(true);
         $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
-
-        $userManager = $this->get('sylius.manager.user');
 
         $userManager->persist($user);
         $userManager->flush();
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function setupLocales(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
-
         $localeRepository = $this->get('sylius.repository.locale');
         $localeManager = $this->get('sylius.manager.locale');
 
-        $output->writeln('Please enter list of locale codes, separated by commas or just hit ENTER to use "en_US". For example "en_US, de_DE".');
-        $codes = $dialog->ask($output, '<question>In which language your customers can browse the store?</question> ', 'en_US');
+        do {
+            $output->writeln('Please enter list of locale codes, separated by commas or just hit ENTER to use "en_US". For example "en_US, de_DE".');
+            $codes = $this->ask($output, '<question>In which language your customers can browse the store?</question> ', array(), 'en_US');
 
-        $locales = explode(',', $codes);
+            $locales = explode(',', $codes);
+            $valid = true;
+
+            foreach ($locales as $code) {
+                if (0 !== count($errors = $this->validate(trim($code), array(new Locale())))) {
+                    $valid = false;
+                }
+
+                $this->writeErrors($output, $errors);
+            }
+        } while (!$valid);
 
         foreach ($locales as $key => $code) {
             $code = trim($code);
@@ -95,6 +122,10 @@ EOT
         return $this;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function setupCurrencies(InputInterface $input, OutputInterface $output)
     {
         $dialog = $this->getHelperSet()->get('dialog');
@@ -102,10 +133,21 @@ EOT
         $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
 
-        $output->writeln('Please enter list of currency codes, separated by commas or just hit ENTER to use "USD". For example "USD, EUR, GBP".');
-        $codes = $dialog->ask($output, '<question>In which currency your customers can buy goods?</question> ', 'USD');
+        do {
+            $output->writeln('Please enter list of currency codes, separated by commas or just hit ENTER to use "USD". For example "USD, EUR, GBP".');
+            $codes = $this->ask($output, '<question>In which currency your customers can buy goods?</question> ', array(), 'USD');
 
-        $currencies = explode(',', $codes);
+            $currencies = explode(',', $codes);
+            $valid = true;
+
+            foreach ($currencies as $code) {
+                if (0 !== count($errors = $this->validate(trim($code), array(new Currency())))) {
+                    $valid = false;
+                }
+
+                $this->writeErrors($output, $errors);
+            }
+        } while (!$valid);
 
         foreach ($currencies as $key => $code) {
             $code = trim($code);
@@ -120,25 +162,36 @@ EOT
             $currencyManager->persist($currency);
         }
 
-        $output->writeln('Remember to update (manually or automatically) the exchange rates in the administration panel!');
-
         $currencyManager->flush();
         $output->writeln('');
 
         return $this;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function setupCountries(InputInterface $input, OutputInterface $output)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
-
         $countryRepository = $this->get('sylius.repository.country');
         $countryManager = $this->get('sylius.manager.country');
 
-        $output->writeln('Please enter list of country codes, separated by commas or just hit ENTER to use "US". For example "US, PL, DE".');
-        $codes = $dialog->ask($output, '<question>To which countries you are going to sell your goods?</question> ', 'US');
+        do {
+            $output->writeln('Please enter list of country codes, separated by commas or just hit ENTER to use "US". For example "US, PL, DE".');
+            $codes = $this->ask($output, '<question>To which countries you are going to sell your goods?</question> ', array(), 'US');
 
-        $countries = explode(',', $codes);
+            $countries = explode(',', $codes);
+            $valid = true;
+
+            foreach ($countries as $code) {
+                if (0 !== count($errors = $this->validate(trim($code), array(new Country())))) {
+                    $valid = false;
+                }
+
+                $this->writeErrors($output, $errors);
+            }
+        } while (!$valid);
 
         foreach ($countries as $key => $code) {
             $code = trim($code);

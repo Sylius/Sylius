@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
@@ -74,8 +75,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $table
             ->setHeaders($headers)
             ->setRows($rows)
-            ->render($output)
-        ;
+            ->render($output);
     }
 
     /**
@@ -134,18 +134,42 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /**
      * @param string $question
      */
-    protected function askRequired(OutputInterface $output, $question)
+    protected function ask(OutputInterface $output, $question, array $constraints = array(), $default = null)
     {
         $dialog = $this->getHelperSet()->get('dialog');
 
         do {
-            $value = $dialog->ask($output, sprintf('<question>%s</question> ', $question));
+            $value = $dialog->ask($output, sprintf('<question>%s</question> ', $question), $default);
+            $valid = 0 === count($this->validate($value, $constraints));
 
-            if (empty($value)) {
-                $output->writeln('<error>Please enter correct value.</error>');
+            if (!$valid) {
+                foreach ($errors as $error) {
+                    $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+                }
             }
-        } while (empty($value));
+        } while (!$valid);
 
         return $value;
+    }
+
+    /**
+     * @param mixed $value
+     * @param array $constraints
+     *
+     * @return boolean
+     */
+    protected function validate($value, array $constraints = array())
+    {
+        return $this->get('validator')->validateValue($value, $constraints);
+    }
+
+    /**
+     * @param ConstraintViolationList $errors
+     */
+    protected function writeErrors(OutputInterface $output, ConstraintViolationList $errors)
+    {
+        foreach ($errors as $error) {
+            $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+        }
     }
 }

@@ -75,6 +75,7 @@ EOT
             $commands[] = 'doctrine:schema:create';
         }
 
+        $commands[] = 'cache:clear';
         $commands[] = 'doctrine:phpcr:repository:init';
 
         $this->runCommands($commands, $input, $output);
