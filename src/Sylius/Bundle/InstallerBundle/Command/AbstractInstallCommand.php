@@ -140,7 +140,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
         do {
             $value = $dialog->ask($output, sprintf('<question>%s</question> ', $question), $default);
-            $valid = 0 === count($this->validate($value, $constraints));
+            $valid = 0 === count($errors = $this->validate($value, $constraints));
 
             if (!$valid) {
                 foreach ($errors as $error) {
