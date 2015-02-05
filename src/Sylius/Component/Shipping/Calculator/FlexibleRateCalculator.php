@@ -38,10 +38,10 @@ class FlexibleRateCalculator extends Calculator
         $additionalItems = $totalItems - 1;
 
         if (0 !== $additionalItemLimit) {
-            $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
+            $additionalItems = ($additionalItemLimit >= $additionalItems) ? $additionalItems : $additionalItemLimit;
         }
 
-        return $firstItemCost + $additionalItems * $additionalItemCost;
+        return ($firstItemCost + ($additionalItems * $additionalItemCost));
     }
 
     /**

@@ -51,14 +51,14 @@ class FlexibleRateConfigurationType extends AbstractType
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_item_cost',
                 'constraints' => array(
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
+                    new Type(array('type' => 'integer')),
                 )
             ))
             ->add('additional_item_cost', 'sylius_money', array(
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_item_cost',
                 'constraints' => array(
                     new NotBlank(),
-                    new Type(array('type' => 'numeric')),
+                    new Type(array('type' => 'integer')),
                 )
             ))
             ->add('additional_item_limit', 'integer', array(

@@ -33,7 +33,7 @@ class SyliusMoneyTransformerSpec extends ObjectBehavior
         $this->reverseTransform('')->shouldReturn(null);
     }
 
-    function it_converts_string_to_an_int()
+    function it_converts_string_to_an_integer()
     {
         $this->beConstructedWith(null, null, null, 100);
         $this->reverseTransform('4.10')->shouldReturn(410);

@@ -55,4 +55,11 @@ class PerItemRateCalculatorSpec extends ObjectBehavior
 
         $this->calculate($subject, array('amount' => 200))->shouldReturn(2200);
     }
+
+    function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
+    {
+        $subject->getShippingItemCount()->willReturn(6);
+
+        $this->calculate($subject, array('amount' => 200))->shouldBeInteger();
+    }
 }

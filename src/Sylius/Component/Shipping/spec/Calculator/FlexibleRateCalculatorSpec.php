@@ -102,4 +102,30 @@ class FlexibleRateCalculatorSpec extends ObjectBehavior
 
         $this->calculate($shipment, $configuration)->shouldReturn(2400);
     }
+
+    function it_should_calculate_the_first_and_every_additional_item_cost_when_the_limit_is_equal_to_additional_items_number(ShipmentInterface $shipment)
+    {
+        $configuration = array(
+            'first_item_cost'       => 1000,
+            'additional_item_cost'  => 200,
+            'additional_item_limit' => 3
+        );
+
+        $shipment->getShippingItemCount()->willReturn(4);
+
+        $this->calculate($shipment, $configuration)->shouldReturn(1600);
+    }
+
+    function its_calculated_value_should_be_an_integer(ShipmentInterface $shipment)
+    {
+        $configuration = array(
+            'first_item_cost'       => 1090,
+            'additional_item_cost'  => 200,
+            'additional_item_limit' => 3
+        );
+
+        $shipment->getShippingItemCount()->willReturn(6);
+
+        $this->calculate($shipment, $configuration)->shouldBeInteger();
+    }
 }
