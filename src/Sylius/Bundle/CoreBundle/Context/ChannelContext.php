@@ -14,7 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Context;
 use Sylius\Component\Channel\Context\ChannelContext as BaseChannelContext;
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Core\Channel\ChannelResolverInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Event\KernelEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
 /**
@@ -30,29 +31,20 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
     protected $channelResolver;
 
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
      * @param ChannelResolverInterface $channelResolver
-     * @param ContainerInterface       $container
      */
-    public function __construct(ChannelResolverInterface $channelResolver, ContainerInterface $container)
+    public function __construct(ChannelResolverInterface $channelResolver)
     {
         $this->channelResolver = $channelResolver;
-        $this->container = $container;
     }
 
     /**
      * @inheritdoc
      */
-    public function getChannel()
+    public function onKernelRequest(KernelEvent $event)
     {
-        if (!$this->channel && $this->container->isScopeActive('request')) {
-            $this->channel = $this->channelResolver->resolve($this->container->get('request'));
+        if ($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) {
+            $this->channel = $this->channelResolver->resolve($event->getRequest());
         }
-
-        return parent::getChannel();
     }
 }
