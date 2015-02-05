@@ -13,7 +13,7 @@ bin/behat --suite=products features/backend/product_taxonomies.feature -fprogres
 bin/behat --suite=products features/backend/product_variants.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/products.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=products features/backend/products_filter.feature -fprogress || EXIT_STATUS=$?
-bin/behat --suite=products features/frontend/ -fprogress || EXIT_STATUS=$?
+bin/behat --suite=products features/frontend/products.feature -fprogress || EXIT_STATUS=$?
 bin/behat --suite=promotions -fprogress || EXIT_STATUS=$?
 bin/behat --suite=settings -fprogress || EXIT_STATUS=$?
 bin/behat --suite=shipping -fprogress || EXIT_STATUS=$?
