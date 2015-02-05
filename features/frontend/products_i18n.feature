@@ -25,8 +25,8 @@ Feature: Browse products, categories, attributes and options in preferred langua
         And product "Super T-Shirt" is available in all variations
         And there are following locales configured:
             | code  | enabled |
-            | en    | yes     |
-            | es    | yes     |
+            | en_US | yes     |
+            | es_ES | yes     |
         And the following product translations exist:
             | product       | name           | locale |
             | Super T-Shirt | Camiseta Super | es     |

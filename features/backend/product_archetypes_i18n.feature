@@ -7,9 +7,9 @@ Feature: Product archetype translations
     Background:
         Given there is default currency configured
         And there are following locales configured:
-            | code | enabled |
-            | en   | yes     |
-            | es   | yes     |
+            | code  | enabled |
+            | en_US | yes     |
+            | es_ES | yes     |
         And I am logged in as administrator
 
     Scenario: Creating a product archetype requires default translation fields
