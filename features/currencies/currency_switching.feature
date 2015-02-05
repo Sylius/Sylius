@@ -21,7 +21,7 @@ Feature: Currency selection
           | PLN  | 1.01447       | no      |
       And there are following channels configured:
         | code        | name            | currencies    | locales  | url          |
-        | DEFAULT-WEB | Defautl Channel | EUR, GBP, USD | en_US    | localhost    |
+        | DEFAULT-WEB | Default Channel | EUR, GBP, USD | en_US    | localhost    |
       And all products assigned to "DEFAULT-WEB" channel
 
 
