@@ -13,15 +13,27 @@ parameters:
     sylius.mailer.user:               ~
     sylius.mailer.password:           ~
 
-    sylius.locale:                    en
     sylius.secret:                    abc
 
-    sylius.currency:                  EUR
-
-    sylius.currency_importer.open_exchange_rates: EDITME
+    sylius.locale:                    en_US
+    sylius.currency:                  USD
 
     sylius.cache:
         type: file_system
+
+    sylius.phpcr.backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    sylius.phpcr.workspace: default
+    sylius.phpcr.user: admin
+    sylius.phpcr.pass: admin
+
+    sylius.uploader.filesystem: sylius_image
+
+    sylius.currency_importer.open_exchange_rates: EDITME
 
     paypal.express_checkout.username: EDITME
     paypal.express_checkout.password: EDITME
@@ -50,17 +62,4 @@ parameters:
     sylius.promotion.item_based: false
 
     sylius.order.allow_guest_order: false
-
     sylius.order.pending.duration: 3 hours
-
-    sylius.uploader.filesystem: sylius_image
-
-    phpcr_backend:
-        type: doctrinedbal
-        connection: default
-        caches:
-            meta: doctrine_cache.providers.phpcr_meta
-            nodes: doctrine_cache.providers.phpcr_nodes
-    phpcr_workspace: default
-    phpcr_user: admin
-    phpcr_pass: admin

@@ -8,8 +8,8 @@ Feature: Shipping methods
         Given there is default currency configured
           And I am logged in as administrator
           And there are following locales configured:
-            | code | enabled |
-            | en   | yes     |
+            | code  | enabled |
+            | en_US | yes     |
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |

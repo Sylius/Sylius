@@ -30,8 +30,8 @@ Feature: Checkout addressing in preferred language
           And there is default currency configured
         And there are following locales configured:
             | code  | enabled |
-            | en | yes     |
-            | de | yes      |
+            | en_US | yes     |
+            | de_DE | yes     |
         And the following country translations exist
             | country | name | locale |
             | Germany    | Deutschland     | de   |

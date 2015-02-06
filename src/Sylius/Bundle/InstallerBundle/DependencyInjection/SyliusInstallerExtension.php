@@ -11,27 +11,25 @@
 
 namespace Sylius\Bundle\InstallerBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Installer extension.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusInstallerExtension extends AbstractResourceExtension
+class SyliusInstallerExtension extends Extension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure($config, new Configuration(), $container);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($config['classes'] as $model => $classes) {
-            foreach ($classes as $service => $class) {
-                $container->setParameter(sprintf('sylius.%s.%s.class', $service, $model), $class);
-            }
-        }
+        $loader->load('services.xml');
     }
 }

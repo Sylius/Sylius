@@ -85,6 +85,17 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
 
         $definition = $container->findDefinition('sylius.context.currency');
         $definition->replaceArgument(0, new Reference($config['currency_storage']));
+
+        $this->addClassesToCompile(array(
+            'Symfony\Component\Config\Resource\FileResource',
+            'Symfony\Component\HttpKernel\Config\FileLocator',
+            'Symfony\Component\Config\Resource\DirectoryResource',
+            'Symfony\Bundle\AsseticBundle\Config\AsseticResource',
+            'Symfony\Bundle\AsseticBundle\Factory\Resource\FileResource',
+            'Symfony\Bundle\FrameworkBundle\Templating\TemplateReference',
+            'Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator',
+            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader'
+        ));
     }
 
     /**
