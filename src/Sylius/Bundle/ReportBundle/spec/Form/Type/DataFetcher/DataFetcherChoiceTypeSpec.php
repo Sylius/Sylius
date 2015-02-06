@@ -19,35 +19,35 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class DataFetcherChoiceTypeSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
-    {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType');
-    }
-
-    public function let()
+    function let()
     {
         $dataFetchers = array(
             'user_registration' => 'User Registration',
         );
         $this->beConstructedWith($dataFetchers);
     }
+    
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType');
+    }
 
-    public function it_extends_abstract_type()
+    function it_extends_abstract_type()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_has_name()
+    function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_data_fetcher_choice');
     }
 
-    public function it_has_parent()
+    function it_has_parent()
     {
         $this->getParent()->shouldReturn('choice');
     }
 
-    public function it_defines_data_fetcher_choices(OptionsResolverInterface $resolver)
+    function it_defines_data_fetcher_choices(OptionsResolverInterface $resolver)
     {
         $dataFetchers = array(
             'user_registration' => 'User Registration',

@@ -20,22 +20,22 @@ use Prophecy\Argument;
  */
 class TableConfigurationTypeSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\Renderer\TableConfigurationType');
     }
 
-    public function it_should_be_abstract_type_object()
+    function it_should_be_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_has_name()
+    function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_renderer_table');
     }
 
-    public function it_builds_form_with_template_choice(FormBuilder $builder)
+    function it_builds_form_with_template_choice(FormBuilder $builder)
     {
         $builder->add('template', 'choice', Argument::any())->willReturn($builder);
 

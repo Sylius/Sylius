@@ -27,22 +27,22 @@ use Sylius\Component\Report\Renderer\RendererInterface;
  */
 class ReportTypeSpec extends ObjectBehavior
 {
-    public function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
+    function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
         $this->beConstructedWith('Sylius\Component\Report\Model\Report', array('sylius'), $rendererRegistry, $dataFetcherRegistry);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\ReportType');
     }
 
-    public function it_should_be_abstract_resource_type_object()
+    function it_should_be_abstract_resource_type_object()
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
     }
 
-    public function it_build_form_with_proper_fields(
+    function it_build_form_with_proper_fields(
         FormBuilderInterface $builder,
         FormFactoryInterface $factory,
         $dataFetcherRegistry,
@@ -84,7 +84,7 @@ class ReportTypeSpec extends ObjectBehavior
         $this->buildForm($builder, array());
     }
 
-    public function it_builds_view(
+    function it_builds_view(
         FormConfigInterface $config,
         FormView $view,
         FormInterface $form,
@@ -104,7 +104,7 @@ class ReportTypeSpec extends ObjectBehavior
         $this->buildView($view, $form, array());
     }
 
-    public function it_has_name()
+    function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_report');
     }

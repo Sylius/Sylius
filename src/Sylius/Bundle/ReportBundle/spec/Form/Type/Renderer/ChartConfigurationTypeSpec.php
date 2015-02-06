@@ -20,22 +20,22 @@ use Prophecy\Argument;
  */
 class ChartConfigurationTypeSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\Renderer\ChartConfigurationType');
     }
 
-    public function it_should_be_abstract_type_object()
+    function it_should_be_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_has_name()
+    function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_renderer_chart');
     }
 
-    public function it_builds_form_with_type_choice_and_template_choice(FormBuilder $builder)
+    function it_builds_form_with_type_choice_and_template_choice(FormBuilder $builder)
     {
         $builder->add('type', 'choice', Argument::any())->willReturn($builder);
         $builder->add('template', 'choice', Argument::any())->willReturn($builder);

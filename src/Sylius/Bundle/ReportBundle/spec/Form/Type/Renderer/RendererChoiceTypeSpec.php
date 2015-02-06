@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RendererChoiceTypeSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $choices = array(
             'table' => 'Table renderer',
@@ -29,17 +29,17 @@ class RendererChoiceTypeSpec extends ObjectBehavior
         $this->beConstructedWith($choices);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\Renderer\RendererChoiceType');
     }
 
-    public function it_should_be_abstract_type_object()
+    function it_should_be_abstract_type_object()
     {
         $this->shouldHaveType('Symfony\Component\Form\AbstractType');
     }
 
-    public function it_sets_default_options(OptionsResolverInterface $resolver)
+    function it_sets_default_options(OptionsResolverInterface $resolver)
     {
         $choices = array(
             'table' => 'Table renderer',
@@ -51,12 +51,12 @@ class RendererChoiceTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
-    public function it_has_parent()
+    function it_has_parent()
     {
         $this->getParent()->shouldReturn('choice');
     }
 
-    public function it_has_name()
+    function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_renderer_choice');
     }

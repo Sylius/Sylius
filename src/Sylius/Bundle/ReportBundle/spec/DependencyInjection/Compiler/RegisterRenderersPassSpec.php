@@ -21,12 +21,12 @@ use PhpSpec\ObjectBehavior;
  */
 class RegisterRenderersPassSpec extends ObjectBehavior
 {
-    public function it_should_implement_compiler_pass_interface()
+    function it_should_implement_compiler_pass_interface()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
     }
 
-    public function it_processes_with_given_container(ContainerBuilder $container, Definition $rendererDefinition)
+    function it_processes_with_given_container(ContainerBuilder $container, Definition $rendererDefinition)
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(true);
         $container->getDefinition('sylius.registry.report.renderer')->willReturn($rendererDefinition);
@@ -44,13 +44,13 @@ class RegisterRenderersPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    public function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
+    function it_does_not_process_if_container_has_not_proper_definition(ContainerBuilder $container)
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(false);
         $container->getDefinition('sylius.registry.report.renderer')->shouldNotBeCalled();
     }
 
-    public function it_throws_exception_if_any_renderer_has_improper_attributes(ContainerBuilder $container, Definition $rendererDefinition)
+    function it_throws_exception_if_any_renderer_has_improper_attributes(ContainerBuilder $container, Definition $rendererDefinition)
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(true);
         $container->getDefinition('sylius.registry.report.renderer')->willReturn($rendererDefinition);
