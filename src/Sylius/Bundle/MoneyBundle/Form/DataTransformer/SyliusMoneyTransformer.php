@@ -27,6 +27,6 @@ class SyliusMoneyTransformer extends MoneyToLocalizedStringTransformer
     {
         $value = parent::reverseTransform($value);
 
-        return (null === $value) ? $value : (int) round($value);
+        return null === $value ? $value : (int) round($value);
     }
 }

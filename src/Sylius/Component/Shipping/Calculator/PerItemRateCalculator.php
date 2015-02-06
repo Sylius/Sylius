@@ -26,7 +26,7 @@ class PerItemRateCalculator extends Calculator
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return ($configuration['amount'] * $subject->getShippingItemCount());
+        return $configuration['amount'] * $subject->getShippingItemCount();
     }
 
     /**
