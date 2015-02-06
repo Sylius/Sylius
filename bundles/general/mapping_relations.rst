@@ -3,6 +3,13 @@ Mapping Relations
 
 All Sylius bundles use the `Doctrine RTEL functionality <http://symfony.com/doc/current/cookbook/doctrine/resolve_target_entity.html>`_, which allows to map the relations using interfaces, not implementations.
 
+Configuration
+-------------
+
+In your ``AppKernel`` class, please register Sylius bundles before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
+
+If you do not register bundles in this order, Doctrine will throw ``Doctrine\Common\Persistence\Mapping\MappingException`` exceptions about missing classes.
+
 Using interfaces
 ----------------
 
