@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php":                    ">=5.3.3",
+        "php":                    ">=5.3.9",
 
         "sylius/core":                          "0.13.*@dev",
         "sylius/currency":                      "0.13.*@dev",

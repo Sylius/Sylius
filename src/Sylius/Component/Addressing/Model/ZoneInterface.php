@@ -12,6 +12,7 @@
 namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\GetIdInterface;
 
 /**
  * Zone interface.
@@ -19,16 +20,11 @@ use Doctrine\Common\Collections\Collection;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ZoneInterface
+interface ZoneInterface extends GetIdInterface
 {
     const TYPE_COUNTRY = 'country';
     const TYPE_PROVINCE = 'province';
     const TYPE_ZONE = 'zone';
-
-    /**
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * @return string
@@ -79,7 +75,7 @@ interface ZoneInterface
     public function setMembers(Collection $members);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function hasMembers();
 
@@ -100,7 +96,7 @@ interface ZoneInterface
     /**
      * @param ZoneMemberInterface $member
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasMember(ZoneMemberInterface $member);
 }

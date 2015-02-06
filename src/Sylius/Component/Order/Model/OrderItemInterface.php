@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Interface for order line item model.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface
+interface OrderItemInterface extends AdjustableInterface, GetIdInterface, OrderAwareInterface
 {
     /**
      * Get item quantity.

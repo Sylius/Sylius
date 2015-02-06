@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -10,10 +11,12 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface AttributeTranslationInterface
+interface AttributeTranslationInterface extends GetIdInterface
 {
     /**
      * The name displayed to user.
@@ -28,5 +31,4 @@ interface AttributeTranslationInterface
      * @param string $presentation
      */
     public function setPresentation($presentation);
-
-} 
+}

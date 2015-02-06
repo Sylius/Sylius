@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,19 +19,19 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentMethodInterface extends TimestampableInterface
+interface PaymentMethodInterface extends GetIdInterface, TimestampableInterface
 {
     /**
      * Check whether the payments method is currently enabled.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
      * Enable or disable the payments method.
      *
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 

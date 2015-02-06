@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Addressing\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Country translation interface.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface CountryTranslationInterface
+interface CountryTranslationInterface extends GetIdInterface
 {
     /**
      * Get country name.

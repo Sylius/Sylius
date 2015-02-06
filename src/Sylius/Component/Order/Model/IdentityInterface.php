@@ -11,24 +11,26 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Sylius order Identity model.
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-interface IdentityInterface
+interface IdentityInterface extends GetIdInterface, OrderAwareInterface
 {
     /**
      * Get identity name
      *
-     * @return string $name
+     * @return string
      */
     public function getName();
 
     /**
      * Get identity value
      *
-     * @param string $value
+     * @return string
      */
     public function getValue();
 
@@ -42,22 +44,7 @@ interface IdentityInterface
     /**
      * Set identity value
      *
-     * @return OrderInterface
+     * @param string $value
      */
     public function setValue($value);
-
-    /**
-     * Return order.
-     *
-     * @return OrderInterface
-     */
-    public function getOrder();
-
-    /**
-     * Set order.
-     *
-     * @param OrderInterface $order
-     */
-    public function setOrder(OrderInterface $order = null);
-
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\SoftDeletableInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -20,19 +21,19 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface VariantInterface extends SoftDeletableInterface, TimestampableInterface
+interface VariantInterface extends GetIdInterface, SoftDeletableInterface, TimestampableInterface
 {
     /**
      * Checks whether variant is master.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isMaster();
 
     /**
      * Defines whether variant is master.
      *
-     * @param Boolean $master
+     * @param bool $master
      */
     public function setMaster($master);
 
@@ -100,7 +101,7 @@ interface VariantInterface extends SoftDeletableInterface, TimestampableInterfac
      *
      * @param OptionValueInterface $option
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasOption(OptionValueInterface $option);
 

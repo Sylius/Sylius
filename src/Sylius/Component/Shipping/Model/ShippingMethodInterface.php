@@ -12,6 +12,7 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -20,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ShippingMethodInterface extends TimestampableInterface, ShippingMethodTranslationInterface
+interface ShippingMethodInterface extends GetIdInterface, TimestampableInterface, ShippingMethodTranslationInterface
 {
     // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
@@ -49,14 +50,14 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
      * 2) At least one of shippables matches the category.
      * 3) All shippables have to match the method category.
      *
-     * @return integer
+     * @return int
      */
     public function getCategoryRequirement();
 
     /**
      * Set the requirement.
      *
-     * @param integer $categoryRequirement
+     * @param int $categoryRequirement
      */
     public function setCategoryRequirement($categoryRequirement);
 
@@ -70,14 +71,14 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
     /**
      * Check whether the shipping method is currently enabled.
      *
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
      * Enable or disable the shipping method.
      *
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
@@ -121,7 +122,7 @@ interface ShippingMethodInterface extends TimestampableInterface, ShippingMethod
      *
      * @param RuleInterface $rule
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasRule(RuleInterface $rule);
 

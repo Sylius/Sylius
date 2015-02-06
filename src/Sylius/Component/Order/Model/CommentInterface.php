@@ -11,24 +11,11 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface CommentInterface extends TimestampableInterface
+interface CommentInterface extends GetIdInterface, OrderAwareInterface, TimestampableInterface
 {
-    /**
-     * Return order.
-     *
-     * @return OrderInterface
-     */
-    public function getOrder();
-
-    /**
-     * Set order.
-     *
-     * @param OrderInterface $order
-     */
-    public function setOrder(OrderInterface $order = null);
-
     /**
      * Return state.
      *

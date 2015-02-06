@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxCategoryInterface extends TimestampableInterface
+interface TaxCategoryInterface extends GetIdInterface, TimestampableInterface
 {
     /**
      * Get category name.

@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.9",
 
         "sylius/originator": "0.13.*@dev",
         "sylius/sequence":   "0.13.*@dev"

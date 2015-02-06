@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Variation\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Option value interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionValueInterface
+interface OptionValueInterface extends GetIdInterface
 {
     /**
      * Get option.

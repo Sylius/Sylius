@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Currency\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CurrencyInterface extends TimestampableInterface
+interface CurrencyInterface extends GetIdInterface, TimestampableInterface
 {
     /**
      * @return string
@@ -48,12 +49,12 @@ interface CurrencyInterface extends TimestampableInterface
     public function setExchangeRate($rate);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
-     * @param Boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 }

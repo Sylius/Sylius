@@ -11,12 +11,14 @@
 
 namespace Sylius\Component\Contact\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Interface for the model representing a contact topic.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface TopicInterface
+interface TopicInterface extends GetIdInterface
 {
     /**
      * @return string

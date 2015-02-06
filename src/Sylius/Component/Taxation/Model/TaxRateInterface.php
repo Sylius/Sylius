@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxation\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxRateInterface extends TimestampableInterface
+interface TaxRateInterface extends GetIdInterface, TimestampableInterface
 {
     /**
      * Get category.
@@ -72,14 +73,14 @@ interface TaxRateInterface extends TimestampableInterface
     /**
      * Is included in price?
      *
-     * @return Boolean
+     * @return bool
      */
     public function isIncludedInPrice();
 
     /**
      * Set as included in price or not.
      *
-     * @param Boolean $includedInPrice
+     * @param bool $includedInPrice
      */
     public function setIncludedInPrice($includedInPrice);
 

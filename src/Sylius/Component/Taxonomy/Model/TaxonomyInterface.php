@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
 use Sylius\Component\Translation\Model\TranslatableInterface;
 
 /**
@@ -19,15 +20,8 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TaxonomyInterface extends TranslatableInterface, TaxonomyTranslationInterface, TaxonsAwareInterface
+interface TaxonomyInterface extends GetIdInterface, TranslatableInterface, TaxonomyTranslationInterface, TaxonsAwareInterface
 {
-    /**
-     * Get taxonomy id.
-     *
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * Get root taxon.
      *

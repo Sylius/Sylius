@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Archetype\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ArchetypeTranslationInterface
+interface ArchetypeTranslationInterface extends GetIdInterface
 {
     /**
      * Get name, in most cases it will be displayed by user only in backend.

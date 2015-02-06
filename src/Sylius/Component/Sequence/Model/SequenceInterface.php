@@ -11,22 +11,27 @@
 
 namespace Sylius\Component\Sequence\Model;
 
-interface SequenceInterface
+use Sylius\Component\Resource\Model\GetIdInterface;
+
+interface SequenceInterface extends GetIdInterface
 {
     /**
-     * Return sequence type
+     * Return sequence type.
+     *
      * @return string
      */
     public function getType();
 
     /**
-     * Get the sequence index
-     * @return integer
+     * Get the sequence index.
+     *
+     * @return int
      */
     public function getIndex();
 
     /**
-     * Increment sequence type
+     * Increment sequence type.
+     *
      * @return self
      */
     public function incrementIndex();

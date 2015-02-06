@@ -30,9 +30,7 @@ class UserOAuth implements UserOAuthInterface
     protected $user;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {

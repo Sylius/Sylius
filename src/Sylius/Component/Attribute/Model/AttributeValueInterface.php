@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Attribute\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * Attribute value model.
  *
@@ -18,7 +20,7 @@ namespace Sylius\Component\Attribute\Model;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface AttributeValueInterface
+interface AttributeValueInterface extends GetIdInterface
 {
     /**
      * Get subject.

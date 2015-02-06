@@ -11,13 +11,15 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Resource\Model\GetIdInterface;
+
 /**
  * User OAuth account interface.
  *
  * @author Sergio Marchesini
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface UserOAuthInterface extends UserAwareInterface
+interface UserOAuthInterface extends GetIdInterface, UserAwareInterface
 {
     /**
      * Get OAuth provider name.
