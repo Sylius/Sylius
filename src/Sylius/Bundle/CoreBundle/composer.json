@@ -22,14 +22,13 @@
     "require": {
         "php":                            ">=5.3.3",
 
-        "a2lix/translation-form-bundle":  "2.*@dev",
+        "a2lix/translation-form-bundle":  "~2.0",
         "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "hwi/oauth-bundle":               "~0.3",
         "jms/serializer-bundle":          "~0.13",
         "jms/translation-bundle":         "1.1.*",
-        "knplabs/gaufrette":              "0.2.*@dev",
-        "knplabs/knp-gaufrette-bundle":   "0.2.*@dev",
-        "mathiasverraes/money":           "*@dev",
+        "knplabs/knp-gaufrette-bundle":   "~0.1",
+        "mathiasverraes/money":           "~1.2",
         "swiftmailer/swiftmailer":        "~5.0",
         "sylius/core":                    "0.13.*@dev",
         "sylius/addressing-bundle":       "0.13.*@dev",
