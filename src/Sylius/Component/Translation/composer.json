@@ -22,11 +22,13 @@
     "require": {
         "php": ">=5.3.3",
 
-        "doctrine/collections"          : "~1.2",
-        "doctrine/orm"                 : "~2.4"
+        "doctrine/collections":          "~1.2",
+        "doctrine/orm":                  "~2.4",
+        "sylius/locale":                 "0.13.*@dev",
+        "sylius/resource":               "0.13.*@dev"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.1"
     },
     "config": {
         "bin-dir": "bin"

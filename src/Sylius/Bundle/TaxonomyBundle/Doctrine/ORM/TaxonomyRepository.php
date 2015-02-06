@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository;
 
 /**
  * Base taxonomy repository.

@@ -63,7 +63,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         'subject'         => $config['classes']['product']['model'],
                         'attribute'       => array(
                             'model'       => 'Sylius\Component\Product\Model\Attribute',
-                            'repository'  => 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository',
+                            'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository',
                             'translatable' => array(
                                 'targetEntity' => 'Sylius\Component\Product\Model\AttributeTranslation'
                             ),
@@ -100,7 +100,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         ),
                         'option'       => array(
                             'model'       => 'Sylius\Component\Product\Model\Option',
-                            'repository'  => 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository',
+                            'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableEntityRepository',
                             'translatable' => array(
                                 'targetEntity' => 'Sylius\Component\Product\Model\OptionTranslation'
                             ),

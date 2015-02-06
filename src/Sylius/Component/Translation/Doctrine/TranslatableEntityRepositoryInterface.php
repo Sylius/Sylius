@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine;
+namespace Sylius\Component\Translation\Doctrine;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -20,7 +20,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 interface TranslatableEntityRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Sets the locale context
+     * Sets the locale context.
      *
      * @param LocaleContextInterface $localeContext
      *
@@ -29,12 +29,11 @@ interface TranslatableEntityRepositoryInterface extends RepositoryInterface
     public function setLocaleContext(LocaleContextInterface $localeContext);
 
     /**
-     * Sets the translatable fields
+     * Sets the translatable fields.
      *
      * @param array $translatableFields
      *
      * @return TranslatableEntityRepositoryInterface
      */
     public function setTranslatableFields(array $translatableFields);
-
 }
