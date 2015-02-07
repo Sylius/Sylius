@@ -183,7 +183,7 @@ sylius_order:
 sylius_sequence:
     generators:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
-
+                
 sylius_pricing:
     forms:
         - sylius_product_variant
@@ -247,3 +247,9 @@ sylius_translation:
         translation:
             field: translatable
             locale: locale
+            
+sylius_user:
+    classes:
+        user:
+            model: Sylius\Component\Core\Model\User
+            controller: Sylius\Bundle\CoreBundle\Controller\UserController

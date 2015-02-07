@@ -12,44 +12,15 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
  * User interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, TimestampableInterface
+interface UserInterface extends BaseUserInterface
 {
-    /**
-     * Get first name.
-     *
-     * @return string
-     */
-    public function getFirstName();
-
-    /**
-     * Set first name
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
-
-    /**
-     * Get last name.
-     *
-     * @return string
-     */
-    public function getLastName();
-
-    /**
-     * Set last name.
-     *
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
-
     /**
      * Get currency.
      *
@@ -128,29 +99,4 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
      * @return bool
      */
     public function hasAddress(AddressInterface $address);
-
-    /**
-     * Get connected OAuth accounts.
-     *
-     * @return Collection|UserOAuthInterface[]
-     */
-    public function getOAuthAccounts();
-
-    /**
-     * Get connected OAuth account.
-     *
-     * @param string $provider
-     *
-     * @return null|UserOAuthInterface
-     */
-    public function getOAuthAccount($provider);
-
-    /**
-     * Connect OAuth account.
-     *
-     * @param UserOAuthInterface $oauth
-     *
-     * @return self
-     */
-    public function addOAuthAccount(UserOAuthInterface $oauth);
 }

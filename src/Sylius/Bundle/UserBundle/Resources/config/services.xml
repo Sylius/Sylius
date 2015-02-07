@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.user_provider.class">Sylius\Bundle\UserBundle\Provider\UserProvider</parameter>
+        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\UserBundle\EventListener\UserUpdateListener</parameter>
+        <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
+        <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\UserBundle\EventListener\UserAwareListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
+            <argument type="service" id="security.context" />
+        </service>
+        <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
+            <argument type="service" id="fos_user.user_manager" />
+            <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
+            <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
+        </service>
+        <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="router" />
+            <argument type="service" id="session" />
+            <argument>sylius_backend_user_index</argument>
+            <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
+        </service>
+        <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
+            <argument>%sylius.model.user.class%</argument>
+            <tag name="form.type" alias="sylius_user" />
+        </service>
+        <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
+            <argument>%sylius.model.group.class%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
+            <tag name="form.type" alias="sylius_group" />
+        </service>
+    </services>
+
+</container>

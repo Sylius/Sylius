@@ -1,0 +1,16 @@
+sylius:
+    form:
+        group:
+            name: Name
+            roles: Roles
+        user:
+            billing_address: Billing address
+            different_billing_address: Use different address for billing?
+            enabled: Enabled
+            first_name: First name
+            groups: Groups
+            last_name: Last name
+            password: Password
+            shipping_address: Shipping address
+        user_filter:
+            query: Search

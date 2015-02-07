@@ -34,7 +34,7 @@ class OrderController extends FOSRestController
     public function indexAction()
     {
         $orders = $this->getOrderRepository()->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'));
-
+        
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Order/index.html.twig')

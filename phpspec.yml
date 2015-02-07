@@ -24,6 +24,7 @@ suites:
     Taxation         : { namespace: Sylius\Component\Taxation, psr4_prefix: Sylius\Component\Taxation, spec_path: src/Sylius/Component/Taxation }
     Taxonomy         : { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy }
     Translation      : { namespace: Sylius\Component\Translation, psr4_prefix: Sylius\Component\Translation, spec_path: src/Sylius/Component/Translation }
+    User             : { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User }
     Variation        : { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation }
 
     AddressingBundle : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle }
@@ -50,4 +51,5 @@ suites:
     ShippingBundle   : { namespace: Sylius\Bundle\ShippingBundle, psr4_prefix: Sylius\Bundle\ShippingBundle , spec_path: src/Sylius/Bundle/ShippingBundle }
     TaxationBundle   : { namespace: Sylius\Bundle\TaxationBundle, psr4_prefix: Sylius\Bundle\TaxationBundle , spec_path: src/Sylius/Bundle/TaxationBundle }
     TaxonomyBundle   : { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle , spec_path: src/Sylius/Bundle/TaxonomyBundle }
+    UserBundle       : { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle , spec_path: src/Sylius/Bundle/UserBundle }
     VariationBundle  : { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle }
