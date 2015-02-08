@@ -13,7 +13,7 @@ parameters:
     sylius.mailer.user:               ~
     sylius.mailer.password:           ~
 
-    sylius.secret:                    abc
+    sylius.secret:                    EDITME
 
     sylius.locale:                    en_US
     sylius.currency:                  USD
@@ -28,8 +28,8 @@ parameters:
             meta: doctrine_cache.providers.phpcr_meta
             nodes: doctrine_cache.providers.phpcr_nodes
     sylius.phpcr.workspace: default
-    sylius.phpcr.user: admin
-    sylius.phpcr.pass: admin
+    sylius.phpcr.user: EDITME
+    sylius.phpcr.pass: EDITME
 
     sylius.uploader.filesystem: sylius_image
 
@@ -48,12 +48,12 @@ parameters:
     be2bill.password: EDITME
     be2bill.sandbox: true
 
-    sylius.oauth.amazon.clientid:       <amazon_client_id>
-    sylius.oauth.amazon.clientsecret:   <amazon_client_secret>
-    sylius.oauth.facebook.clientid:     <facebook_client_id>
-    sylius.oauth.facebook.clientsecret: <facebook_client_secret>
-    sylius.oauth.google.clientid:       <google_client_id>
-    sylius.oauth.google.clientsecret:   <google_client_secret>
+    sylius.oauth.amazon.clientid:       EDITME
+    sylius.oauth.amazon.clientsecret:   EDITME
+    sylius.oauth.facebook.clientid:     EDITME
+    sylius.oauth.facebook.clientsecret: EDITME
+    sylius.oauth.google.clientid:       EDITME
+    sylius.oauth.google.clientsecret:   EDITME
 
     sylius.inventory.backorders_enabled: true
     sylius.inventory.tracking_enabled: true

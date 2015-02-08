@@ -77,6 +77,7 @@ EOT
 
         $commands[] = 'cache:clear';
         $commands[] = 'doctrine:phpcr:repository:init';
+        $commands[] = 'sylius:search:index';
 
         $this->runCommands($commands, $input, $output);
 
@@ -88,8 +89,17 @@ EOT
      */
     private function isDatabasePresent()
     {
-        $schemaManager = $this->getSchemaManager();
         $databaseName = $this->getDatabaseName();
+
+        try {
+            $schemaManager = $this->getSchemaManager();
+        } catch (\Exception $exception) {
+            if (false !== strpos($exception->getMessage(), sprintf("SQLSTATE[HY000] [1049] Unknown database '%s'", $databaseName))) {
+                return false;
+            }
+
+            throw $exception;
+        }
 
         return in_array($databaseName, $schemaManager->listDatabases());
     }
