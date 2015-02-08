@@ -45,7 +45,7 @@
         "sylius/taxation":    "0.13.*@dev",
         "sylius/taxonomy":    "0.13.*@dev",
         "sylius/translation": "0.13.*@dev",
-        "sylius/variations":  "0.13.*@dev"
+        "sylius/variation":   "0.13.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":              "~2.1",
