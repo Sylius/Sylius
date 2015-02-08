@@ -77,9 +77,29 @@ class OrderItemSpec extends ObjectBehavior
         $this->getUnitPrice()->shouldReturn(0);
     }
 
+    function its_unit_price_should_accept_only_integer()
+    {
+        $this->setUnitPrice(4498)->getUnitPrice()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice('4498');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(round(44.98 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(new \stdClass());
+    }
+
     function it_has_total_equal_to_0_by_default()
     {
         $this->getTotal()->shouldReturn(0);
+    }
+
+    function its_total_should_accept_only_integer()
+    {
+        $this->setTotal(4498)->getTotal()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
     }
 
     function it_throws_exception_when_quantity_is_less_than_1()

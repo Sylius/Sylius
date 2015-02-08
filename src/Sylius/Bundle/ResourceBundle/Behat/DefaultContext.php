@@ -177,6 +177,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
                     break;
 
+                case 'amount':
+                    $configuration[$key] = (int) $value;
+                    break;
+
                 default:
                     $configuration[$key] = trim($value);
                     break;

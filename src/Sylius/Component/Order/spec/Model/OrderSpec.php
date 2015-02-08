@@ -150,6 +150,16 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(0);
     }
 
+    function its_items_total_should_accept_only_integer()
+    {
+        $this->setItemsTotal(4498)->getItemsTotal()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(44.98 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal('4498');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(round(44.98 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetItemsTotal(new \stdClass());
+    }
+
     function it_calculates_correct_items_total(
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -252,6 +262,16 @@ class OrderSpec extends ObjectBehavior
     function it_has_total_equal_to_0_by_default()
     {
         $this->getTotal()->shouldReturn(0);
+    }
+
+    function its_total_should_accept_only_integer()
+    {
+        $this->setTotal(4498)->getTotal()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(44.98 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal('4498');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(round(44.98 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetTotal(new \stdClass());
     }
 
     function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)

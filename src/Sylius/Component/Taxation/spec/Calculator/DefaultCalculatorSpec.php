@@ -16,6 +16,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class DefaultCalculatorSpec extends ObjectBehavior
 {
@@ -47,5 +48,8 @@ class DefaultCalculatorSpec extends ObjectBehavior
         $rate->getAmount()->willReturn(0.23);
 
         $this->calculate(10000, $rate)->shouldReturn(1870);
+
+        $rate->getAmount()->willReturn(0.2);
+        $this->calculate(315, $rate)->shouldReturn(53);
     }
 }
