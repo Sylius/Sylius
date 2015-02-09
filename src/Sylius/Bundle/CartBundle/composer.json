@@ -23,10 +23,10 @@
         "php": ">=5.3.3",
 
         "symfony/framework-bundle": "~2.3",
-        "sylius/order-bundle":      "0.13.*@dev",
-        "sylius/money-bundle":      "0.13.*@dev",
-        "sylius/resource-bundle":   "0.13.*@dev",
-        "sylius/cart":              "0.13.*@dev"
+        "sylius/order-bundle":      "0.14.*@dev",
+        "sylius/money-bundle":      "0.14.*@dev",
+        "sylius/resource-bundle":   "0.14.*@dev",
+        "sylius/cart":              "0.14.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",
@@ -45,7 +45,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.14-dev"
         }
     }
 }

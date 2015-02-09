@@ -24,7 +24,7 @@ Quick Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project sylius/sylius -s dev
+$ php composer.phar create-project sylius/sylius:v0.13.0
 $ cd sylius
 $ php app/console sylius:install
 ```

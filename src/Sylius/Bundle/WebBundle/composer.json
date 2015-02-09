@@ -27,7 +27,7 @@
         "knplabs/knp-menu-bundle":   "1.1.*",
         "liip/imagine-bundle":       "~1.0",
         "knplabs/knp-snappy-bundle": "*@dev",
-        "sylius/core-bundle":        "0.13.*@dev"
+        "sylius/core-bundle":        "0.14.*@dev"
     },
     "config": {
         "bin-dir": "bin"
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.14-dev"
         }
     }
 }

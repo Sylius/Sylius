@@ -23,29 +23,29 @@
         "php": ">=5.3.3",
 
         "knplabs/gaufrette":  "0.2.*@dev",
-        "sylius/addressing":  "0.13.*@dev",
-        "sylius/archetype":   "0.13.*@dev",
-        "sylius/attribute":   "0.13.*@dev",
-        "sylius/cart":        "0.13.*@dev",
-        "sylius/contact":     "0.13.*@dev",
-        "sylius/currency":    "0.13.*@dev",
-        "sylius/inventory":   "0.13.*@dev",
-        "sylius/locale":      "0.13.*@dev",
-        "sylius/order":       "0.13.*@dev",
-        "sylius/originator":  "0.13.*@dev",
-        "sylius/payment":     "0.13.*@dev",
-        "sylius/pricing":     "0.13.*@dev",
-        "sylius/product":     "0.13.*@dev",
-        "sylius/promotion":   "0.13.*@dev",
-        "sylius/registry":    "0.13.*@dev",
-        "sylius/resource":    "0.13.*@dev",
-        "sylius/sequence":    "0.13.*@dev",
-        "sylius/shipping":    "0.13.*@dev",
-        "sylius/storage":     "0.13.*@dev",
-        "sylius/taxation":    "0.13.*@dev",
-        "sylius/taxonomy":    "0.13.*@dev",
-        "sylius/translation": "0.13.*@dev",
-        "sylius/variation":   "0.13.*@dev"
+        "sylius/addressing":  "0.14.*@dev",
+        "sylius/archetype":   "0.14.*@dev",
+        "sylius/attribute":   "0.14.*@dev",
+        "sylius/cart":        "0.14.*@dev",
+        "sylius/contact":     "0.14.*@dev",
+        "sylius/currency":    "0.14.*@dev",
+        "sylius/inventory":   "0.14.*@dev",
+        "sylius/locale":      "0.14.*@dev",
+        "sylius/order":       "0.14.*@dev",
+        "sylius/originator":  "0.14.*@dev",
+        "sylius/payment":     "0.14.*@dev",
+        "sylius/pricing":     "0.14.*@dev",
+        "sylius/product":     "0.14.*@dev",
+        "sylius/promotion":   "0.14.*@dev",
+        "sylius/registry":    "0.14.*@dev",
+        "sylius/resource":    "0.14.*@dev",
+        "sylius/sequence":    "0.14.*@dev",
+        "sylius/shipping":    "0.14.*@dev",
+        "sylius/storage":     "0.14.*@dev",
+        "sylius/taxation":    "0.14.*@dev",
+        "sylius/taxonomy":    "0.14.*@dev",
+        "sylius/translation": "0.14.*@dev",
+        "sylius/variation":   "0.14.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":              "~2.1",
@@ -62,7 +62,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.14-dev"
         }
     }
 }
