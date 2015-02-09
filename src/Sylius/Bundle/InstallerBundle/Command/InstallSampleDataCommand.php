@@ -39,9 +39,9 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf('<error>Warning! This will erase your current database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
+        $output->writeln(sprintf('<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
 
-        if (!$this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load sample data? Y/N</question> ', false)) {
+        if (!$this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load sample data? (y/N)</question> ', false)) {
             return;
         }
 

@@ -56,7 +56,7 @@ EOT
 
         if ($dialog->askConfirmation(
             $output,
-            '<question>It appears that your database already exists. Would you like to reset it? (Y/N)</question> ',
+            '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
             false
         )) {
             $commands['doctrine:database:drop'] = array('--force' => true);
@@ -65,7 +65,7 @@ EOT
         } elseif ($this->isSchemaPresent()) {
             if ($dialog->askConfirmation(
                 $output,
-                '<question>Seems like your database contains schema. Do you want to reset it? (Y/N)</question> ',
+                '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ',
                 false
             )) {
                 $commands['doctrine:schema:drop'] = array('--force' => true);

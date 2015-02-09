@@ -46,8 +46,6 @@ EOT
         $this->setupCurrencies($input, $output);
         $this->setupCountries($input, $output);
         $this->setupAdministratorUser($input, $output);
-
-        return $this;
     }
 
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output)
@@ -108,11 +106,15 @@ EOT
         foreach ($locales as $key => $code) {
             $code = trim($code);
 
+            $name = \Locale::getDisplayName($code);
+            $output->writeln(sprintf('Adding <info>%s</info>.', $name));
+
+            if (null !== $localeRepository->findOneByCode($code)) {
+                continue;
+            }
+
             $locale = $localeRepository->createNew();
             $locale->setCode($code);
-
-            $displayName = \Locale::getDisplayName($code);
-            $output->writeln(sprintf('Adding <info>%s</info>.', $displayName));
 
             $localeManager->persist($locale);
         }
@@ -150,12 +152,16 @@ EOT
         foreach ($currencies as $key => $code) {
             $code = trim($code);
 
+            $name = Intl::getCurrencyBundle()->getCurrencyName($code);
+            $output->writeln(sprintf('Adding <info>%s</info>.', $name));
+
+            if (null !== $currencyRepository->findOneByCode($code)) {
+                continue;
+            }
+
             $currency = $currencyRepository->createNew();
             $currency->setCode($code);
             $currency->setExchangeRate(1);
-
-            $displayName = Intl::getCurrencyBundle()->getCurrencyName($code);
-            $output->writeln(sprintf('Adding <info>%s</info>.', $displayName));
 
             $currencyManager->persist($currency);
         }
@@ -195,11 +201,15 @@ EOT
             $code = trim($code);
             $name = Intl::getRegionBundle()->getCountryName($code);
 
+            $output->writeln(sprintf('Adding <info>%s</info>.', $name));
+
+            if (null !== $countryRepository->findOneByIsoName($code)) {
+                continue;
+            }
+
             $country = $countryRepository->createNew();
             $country->setName($name);
             $country->setIsoName($code);
-
-            $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
             $countryManager->persist($country);
         }
