@@ -40,7 +40,8 @@ class TableRenderer implements RendererInterface
                 'fields' => array_keys($data->getData()),
             );
 
-            return $this->templating->renderResponse($report->getRendererConfiguration()["template"], array('data' => $data, 'configuration' => $report->getRendererConfiguration()));
+            $rendererConfiguration = $report->getRendererConfiguration();
+            return $this->templating->renderResponse($rendererConfiguration["template"], array('data' => $data, 'configuration' => $rendererConfiguration));
         }
 
         return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array('report' => $report));
