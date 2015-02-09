@@ -247,8 +247,6 @@ sylius_translation:
             locale: locale
 
 sylius_mailer:
-    driver: doctrine/orm
-    adapter: twig_swiftmailer
     templates:
         sylius.email.order_confirmation.name: SyliusWebBundle:Email:orderConfirmation.html.twig
         sylius.email.order_comment.name: SyliusWebBundle:Email:orderComment.html.twig
