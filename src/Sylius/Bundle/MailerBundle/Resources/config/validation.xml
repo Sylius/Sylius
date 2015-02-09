@@ -34,12 +34,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="content">
-            <constraint name="NotBlank">
-                <option name="message">sylius.email.content.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
     </class>
 
 </constraint-mapping>

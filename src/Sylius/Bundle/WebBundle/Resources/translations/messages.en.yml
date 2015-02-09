@@ -1,14 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-    order_confirmation:
-        subject: Your order was confirmed
-    order_comment:
-        subject: Your order was commented by shop stuff
-        header: Order Comment
-
 sylius:
+    email:
+        order_confirmation:
+            name: Order confirmation
+            subject: Thank you for your order!
+
+        order_comment:
+            name: Order comment
+            subject: New comment posted on order #{{ order.number }}
+
+        user_confirmation:
+            name: User confirmation
+            subject: Welcome to our store!
     account:
         address:
             action:

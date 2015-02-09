@@ -30,7 +30,7 @@
         <field name="senderName" column="sender_name" type="string" length="255" nullable="true" />
         <field name="senderAddress" column="sender_address" type="string" length="255" nullable="true" />
 
-        <field name="content" column="content" type="text" />
+        <field name="content" column="content" type="text" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

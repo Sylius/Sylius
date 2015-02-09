@@ -247,17 +247,22 @@ sylius_translation:
             locale: locale
 
 sylius_mailer:
+    driver: doctrine/orm
     adapter: twig_swiftmailer
+    templates:
+        sylius.email.order_confirmation.name: SyliusWebBundle:Email:orderConfirmation.html.twig
+        sylius.email.order_comment.name: SyliusWebBundle:Email:orderComment.html.twig
+        sylius.email.user_confirmation.name: SyliusWebBundle:Email:userConfirmation.html.twig
     sender:
         name: Example.com
         address: no-reply@example.com
     emails:
         order_confirmation:
-            subject: Thank you for your order!
+            subject: sylius.email.order_confirmation.subject
             template: SyliusWebBundle:Email:orderConfirmation.html.twig
         order_comment:
-            subject: Your order has been updated
+            subject: sylius.email.order_comment.subject
             template: SyliusWebBundle:Email:orderComment.html.twig
         user_confirmation:
-            subject: Welcome to our store!
+            subject: sylius.email.user_confirmation.subject
             template: SyliusWebBundle:Email:userConfirmation.html.twig

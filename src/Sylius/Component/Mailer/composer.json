@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource": "0.13.*@dev"
+        "sylius/resource": "0.14.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1"
@@ -31,14 +31,14 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Component\\Locale\\": "" }
+        "psr-4": { "Sylius\\Component\\Mailer\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Locale\\spec\\": "spec/" }
+        "psr-4": { "Sylius\\Component\\Mailer\\spec\\": "spec/" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.14-dev"
         }
     }
 }

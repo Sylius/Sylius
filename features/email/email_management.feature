@@ -33,8 +33,9 @@ Feature: Managing emails
     Scenario: Creating new email
         Given I am on the email creation page
         When I fill in "Code" with "promotion_coupon"
+        And I fill in "Subject" with "You get a coupon!"
         And I press "Create"
-        Then I should be on the email index page
+        Then I should be editing email with code "promotion_coupon"
         And I should see "Email has been successfully created."
 
     Scenario: Email codes have to be unique

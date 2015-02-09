@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Mailer\Sender;
+
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 

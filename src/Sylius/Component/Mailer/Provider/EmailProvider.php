@@ -40,7 +40,7 @@ class EmailProvider implements EmailProviderInterface
      * @param RepositoryInterface $emailRepository
      * @param array               $configuration
      */
-    public function __construct(RepositoryInterface $emailRepository, $configuration)
+    public function __construct(RepositoryInterface $emailRepository, array $configuration)
     {
         $this->emailRepository = $emailRepository;
         $this->configuration = $configuration;

@@ -18,34 +18,30 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Mailer extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusMailerExtension extends AbstractResourceExtension
 {
-    protected $configFiles = array(
-        'services',
-    );
-
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        list($config) = $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
 
-        $container->setAlias('sylius.email_sender.adapter', sprintf('sylius.email_sender.adapter.%s', $config[1]['adapter']));
+        $container->setAlias('sylius.email_sender.adapter', sprintf('sylius.email_sender.adapter.%s', $config['adapter']));
 
-        $container->setParameter('sylius.mailer.sender_name', $config[1]['sender']['name']);
-        $container->setParameter('sylius.mailer.sender_address', $config[1]['sender']['address']);
+        $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
+        $container->setParameter('sylius.mailer.sender_address', $config['sender']['address']);
 
-        $templates = isset($config[1]['templates']) ? $config[1]['templates'] : array('SyliusMailerBundle::default.html.twig');
+        $templates = isset($config[1]['templates']) ? $config['templates'] : array('SyliusMailerBundle::default.html.twig');
 
-        $container->setParameter('sylius.mailer.emails', $config[1]['emails']);
+        $container->setParameter('sylius.mailer.emails', $config['emails']);
         $container->setParameter('sylius.mailer.templates', $templates);
     }
 }

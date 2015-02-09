@@ -5,5 +5,3 @@ sylius:
             unique: Email code must be unique.
         subject:
             not_blank: Please enter email subject.
-        content:
-            not_blank: Please enter email content.
