@@ -1,7 +1,5 @@
 sylius_core:
     driver: doctrine/orm
-    emails:
-        enabled: false
     routing:
         %sylius.model.product.class%:
             field: slug
@@ -247,3 +245,22 @@ sylius_translation:
         translation:
             field: translatable
             locale: locale
+
+sylius_mailer:
+    templates:
+        sylius.email.order_confirmation.name: SyliusWebBundle:Email:orderConfirmation.html.twig
+        sylius.email.order_comment.name: SyliusWebBundle:Email:orderComment.html.twig
+        sylius.email.user_confirmation.name: SyliusWebBundle:Email:userConfirmation.html.twig
+    sender:
+        name: Example.com
+        address: no-reply@example.com
+    emails:
+        order_confirmation:
+            subject: sylius.email.order_confirmation.subject
+            template: SyliusWebBundle:Email:orderConfirmation.html.twig
+        order_comment:
+            subject: sylius.email.order_comment.subject
+            template: SyliusWebBundle:Email:orderComment.html.twig
+        user_confirmation:
+            subject: sylius.email.user_confirmation.subject
+            template: SyliusWebBundle:Email:userConfirmation.html.twig

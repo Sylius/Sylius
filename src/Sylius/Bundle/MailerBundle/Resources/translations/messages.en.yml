@@ -1,0 +1,11 @@
+sylius:
+    form:
+        email:
+            code: Code
+            enabled: Enabled
+            subject: Subject
+            sender_name: Sender Name
+            sender_address: Sender Address
+            content: Content
+            template: Template
+            no_template: Use custom template

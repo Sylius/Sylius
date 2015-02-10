@@ -341,6 +341,18 @@ default:
             filters:
                 tags: "@search_orm_only"
 
+        emails:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\HookContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MailerBundle\Behat\MailerContext
+            filters:
+                tags: "@emails && ~@javascript"
+
     extensions:
         Behat\MinkExtension:
             sessions:
