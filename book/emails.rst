@@ -5,29 +5,31 @@ E-Mails
 =======
 
 Sylius is sending various e-mails and this chapter is a reference about all of them. Continue reading to learn what e-mails are sent, when and how to customize the templates.
+To understand how e-mail sending works internally, please refer to :doc:`SyliusMailerBundle documentation </bundles/SyliusMailerMailer/index>`.
 
-Customer Welcome E-Mail
------------------------
+User Confirmation E-Mail
+------------------------
 
-Every time new customer registers via registration form or checkout, this e-mail is sent to him.
+Every time new customer registers via registration form or checkout, ``user_confirmation`` e-mail is sent to him.
+The default template is
 
-.. code-block:: text
+.. code-block:: test
 
-    SyliusWebBundle:Frontend/Email:customerWelcome.html.twig
+    SyliusWebBundle:Email:userConfirmation.html.twig
 
 You also have the following parameters available:
 
 user
-    Instance of the user entity
+    Instance of the user model
 
 Order Confirmation
 ------------------
 
-This e-mail is sent when order is paid. Template name is:
+This e-mail is sent when order is paid. Unique code is ``order_confirmation``. Template name is:
 
 .. code-block:: text
 
-    SyliusWebBundle:Frontend/Email:orderConfirmation.html.twig
+    SyliusWebBundle:Email:orderConfirmation.html.twig
 
 You also have the following parameters available:
 
@@ -45,11 +47,11 @@ order.items
 Order Comment
 -------------
 
-In the backend, you can comment orders and optionally notify the customer, this template is used:
+In the backend, you can comment orders and optionally notify the customer via e-mail with code ``order_comment``, this template is used:
 
 .. code-block:: text
 
-    SyliusWebBundle:Frontend/Email:orderComment.html.twig
+    SyliusWebBundle:Email:orderComment.html.twig
 
 You also have the following parameters available:
 
