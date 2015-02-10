@@ -69,7 +69,7 @@ The service responsible for sending an e-mail has id ``sylius.email_sender``. Al
         {
             // Your code.
 
-            $this->get('sylius.email_sender')->send('movie_added_notification', array('movie' => $movie, 'user' => $this->getUser()));
+            $this->get('sylius.email_sender')->send('movie_added_notification', array('team@website.com'), array('movie' => $movie, 'user' => $this->getUser()));
         }
     }
 
@@ -98,7 +98,7 @@ Listener example:
             $movie = $event->getMovie();
             $user = $event->getUser();
 
-            $this->sender->send('movie_added_notification', array('movie' => $movie, 'user' => $user));
+            $this->sender->send('movie_added_notification', array('team@website.com'), array('movie' => $movie, 'user' => $user));
         }
     }
 
