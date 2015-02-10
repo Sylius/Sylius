@@ -1,7 +1,7 @@
 Your First Email
 ================
 
-Let's say you want to send a notification to the website team when someone submits a new position to your move catalog website!
+Let's say you want to send a notification to the website team when someone submits a new position to your movie catalog website!
 
 You can do it in few simple steps:
 

@@ -8,7 +8,7 @@ Configuration reference
           adapter: twig_swiftmailer # Adapter for sending e-mails.
           classes:
               email:
-                  model:      Sylius\Component\Mailer\Model\Email # The archetype model class implementing `ArchetypeInterface`.
+                  model:      Sylius\Component\Mailer\Model\Email # The email model class implementing `EmailInterface`.
                   repository: ~ # Is set automatically if empty.
                   controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                   form:       Sylius\Bundle\MailerBundle\Form\Type\EmailType
