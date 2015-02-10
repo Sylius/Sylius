@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('adapter')->defaultValue('twig_swiftmailer')->end()
+                ->scalarNode('adapter')->defaultValue('sylius.email_sender.adapter.twig_swiftmailer')->end()
             ->end()
         ;
 

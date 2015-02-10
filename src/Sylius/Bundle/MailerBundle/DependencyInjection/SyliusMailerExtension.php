@@ -34,12 +34,12 @@ class SyliusMailerExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
 
-        $container->setAlias('sylius.email_sender.adapter', sprintf('sylius.email_sender.adapter.%s', $config['adapter']));
+        $container->setAlias('sylius.email_sender.adapter', $config['adapter']);
 
         $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
         $container->setParameter('sylius.mailer.sender_address', $config['sender']['address']);
 
-        $templates = isset($config[1]['templates']) ? $config['templates'] : array('SyliusMailerBundle::default.html.twig');
+        $templates = isset($config['templates']) ? $config['templates'] : array('Default' => 'SyliusMailerBundle::default.html.twig');
 
         $container->setParameter('sylius.mailer.emails', $config['emails']);
         $container->setParameter('sylius.mailer.templates', $templates);

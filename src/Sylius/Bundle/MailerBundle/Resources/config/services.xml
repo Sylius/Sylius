@@ -18,8 +18,10 @@
 
     <parameters>
         <parameter key="sylius.form.type.email_template_choice.class">Sylius\Bundle\MailerBundle\Form\Type\EmailTemplateChoiceType</parameter>
+
         <parameter key="sylius.email_sender.class">Sylius\Component\Mailer\Sender\Sender</parameter>
         <parameter key="sylius.email_provider.class">Sylius\Component\Mailer\Provider\EmailProvider</parameter>
+
         <parameter key="sylius.mailer.default_settings_provider.class">Sylius\Component\Mailer\Provider\DefaultSettingsProvider</parameter>
 
         <parameter key="sylius.email_sender.adapter.twig_swiftmailer.class">Sylius\Bundle\MailerBundle\Sender\Adapter\TwigSwiftmailerAdapter</parameter>
