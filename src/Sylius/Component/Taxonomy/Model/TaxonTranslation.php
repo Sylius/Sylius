@@ -56,6 +56,27 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     protected $description;
 
     /**
+     * Meta title.
+     *
+     * @var string
+     */
+    protected $metaTitle;
+
+    /**
+     * Meta keywords.
+     *
+     * @var string
+     */
+    protected $metaKeywords;
+
+    /**
+     * Meta description.
+     *
+     * @var string
+     */
+    protected $metaDescription;
+
+    /**
      * {@inheritdoc}
      */
     public function __toString()
@@ -139,6 +160,60 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetaTitle()
+    {
+        return $this->metaTitle;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaTitle($title)
+    {
+        $this->metaTitle = $title;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetaKeywords()
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->metaKeywords = $metaKeywords;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetaDescription()
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->metaDescription = $metaDescription;
 
         return $this;
     }

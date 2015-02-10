@@ -35,6 +35,7 @@ class Configuration implements ConfigurationInterface
         $this->addEmailsSection($rootNode);
         $this->addRoutingSection($rootNode);
         $this->addCheckoutSection($rootNode);
+        $this->addSeoSection($rootNode);
 
         return $treeBuilder;
     }
@@ -204,10 +205,39 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Adds `seo` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addSeoSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('seo')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('class')->isRequired()->cannotBeEmpty()->end()
+                            ->arrayNode('formulas')
+                                ->children()
+                                    ->scalarNode('title')->end()
+                                    ->scalarNode('keywords')->end()
+                                    ->scalarNode('desc')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
      * Helper method to append checkout step nodes.
      *
      * @param $name
      * @param $defaultTemplate
+     *
      * @return NodeDefinition
      */
     private function addCheckoutStepNode($name, $defaultTemplate)

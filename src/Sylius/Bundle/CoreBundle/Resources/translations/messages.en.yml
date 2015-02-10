@@ -55,9 +55,10 @@ sylius:
             general:
                 currency: Default currency
                 locale: Language
-                meta_description: Meta description
-                meta_keywords: Meta keywords
-                title: Page title
+            seo:
+                global_meta_description_formula: Global meta description formula
+                global_meta_keywords_formula: Global meta keywords formula
+                global_title_formula: Global page title formula
             taxation:
                 default_tax_zone: Default tax zone
         shipment_filter:

@@ -29,6 +29,7 @@ sylius:
                 attributes: Configure attributes
                 archetypes: Product archetypes
                 sales: Orders
+                seo_settings: SEO Settings
                 shipments: Shipments
                 shipping_categories: Shipping categories
                 shipping_methods: Shipping methods
@@ -68,6 +69,7 @@ sylius:
                 attributes: Configure attributes
                 archetypes: Product archetypes
                 sales: Orders
+                seo_settings: SEO Settings
                 shipments: Shipments
                 shipping_categories: Shipping categories
                 shipping_methods: Shipping methods

@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.seo.class">Sylius\Bundle\CoreBundle\Settings\SeoSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
 
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
@@ -54,6 +55,7 @@
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
+        <parameter key="sylius.listener.seo.class">Sylius\Bundle\CoreBundle\EventListener\SeoListener</parameter>
 
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
@@ -91,6 +93,9 @@
                 <argument key="locale">%sylius.locale%</argument>
             </argument>
             <tag name="sylius.settings_schema" namespace="general" />
+        </service>
+        <service id="sylius.settings_schema.seo" class="%sylius.settings_schema.seo.class%">
+            <tag name="sylius.settings_schema" namespace="seo" />
         </service>
         <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
             <argument type="service" id="sylius.repository.zone" />
@@ -319,6 +324,23 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_create" method="uploadTaxonomyImage" />
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
+        </service>
+        <service id="sylius.listener.seo" class="%sylius.listener.seo.class%">
+            <argument type="service" id="sylius.storage.doctrine" />
+            <argument type="service">
+                <service
+                        factory-service="sylius.settings.manager"
+                        factory-method="loadSettings"
+                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
+                        >
+                    <argument>seo</argument>
+                </service>
+            </argument>
+            <argument>%sylius.seo.formulas%</argument>
+        </service>
+
+        <service id="sylius.storage.doctrine" class="Sylius\Component\Storage\DoctrineCacheStorage">
+            <argument type="service" id="sylius.settings.cache" />
         </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">

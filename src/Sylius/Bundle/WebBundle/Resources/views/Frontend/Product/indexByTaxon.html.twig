@@ -4,6 +4,15 @@
 {% from 'SyliusWebBundle:Frontend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Frontend/Product:macros.html.twig' import list %}
 
+{% block title %}
+    {{ sylius_seo_meta_title(taxon)|default('sylius.meta.frontend_title'|trans) }}
+{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ sylius_seo_meta_description(taxon)|default('sylius.meta.frontend_description'|trans) }}">
+    <meta name="keywords" content="{{ sylius_seo_meta_keywords(taxon)|default('sylius.meta.frontend_keywords'|trans) }}">
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <h1>{{ 'sylius.product.index_by_taxon_header'|trans({'%taxon%': taxon.name})|raw }}</h1>

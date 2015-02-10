@@ -2,6 +2,15 @@
 
 {% set form = sylius_cart_form({'product': product}) %}
 
+{% block title %}
+    {{ sylius_seo_meta_title(product)|default('sylius.meta.frontend_title'|trans) }}
+{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ sylius_seo_meta_description(product)|default('sylius.meta.frontend_description'|trans) }}">
+    <meta name="keywords" content="{{ sylius_seo_meta_keywords(product)|default('sylius.meta.frontend_keywords'|trans) }}">
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-3">

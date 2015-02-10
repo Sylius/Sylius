@@ -50,6 +50,13 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     protected $description;
 
     /**
+     * Meta title.
+     *
+     * @var string
+     */
+    protected $metaTitle;
+
+    /**
      * Meta keywords.
      *
      * @var string
@@ -121,6 +128,24 @@ class ProductTranslation extends AbstractTranslation implements ProductTranslati
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMetaTitle()
+    {
+        return $this->metaTitle;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMetaTitle($title)
+    {
+        $this->metaTitle = $title;
 
         return $this;
     }
