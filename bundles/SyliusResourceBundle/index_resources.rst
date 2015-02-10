@@ -69,7 +69,7 @@ You can define your own repository method too, you can use the same way explaine
 
 .. note::
 
-    If you want to paginate your resources you need to use ``EntityReposiory::getPaginator($queryBuilder)``.
+    If you want to paginate your resources you need to use ``EntityRepository::getPaginator($queryBuilder)``.
     It will transform your doctrine query builder into ``Pagerfanta\Pagerfanta`` object.
 
 Changing the "max per page" option of paginator
