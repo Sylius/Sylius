@@ -36,7 +36,7 @@ Example
 
 .. tip::
 
-    If you use Guzzle check out OAuth2 plugins (Guzzle5_ or Guzzle3_) and use Client Credentials / Password Credentials Method.
+    If you use Guzzle check out OAuth2 plugins (Guzzle5_ or Guzzle3_) and use Password Credentials.
 
 .. _Guzzle5: https://github.com/NMRKT/guzzle5-oauth2-subscriber
 .. _Guzzle3: https://github.com/commerceguys/guzzle-oauth2-plugin
