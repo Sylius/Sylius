@@ -118,7 +118,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
                 $parameters = array();
             }
 
-            $this->commandExecutor->runCommand($command, $parameters);
+            $this->commandExecutor->runCommand($command, $parameters, $output);
 
             // PDO does not always close the connection after Doctrine commands.
             // See https://github.com/symfony/symfony/issues/11750.
