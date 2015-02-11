@@ -178,7 +178,7 @@ class OrderSpec extends ObjectBehavior
 
     function it_has_default_exchange_rate_equal_to_1()
     {
-        $this->getExchangeRate()->shouldReturn(1);
+        $this->getExchangeRate()->shouldReturn(1.0);
     }
 
     function its_exchange_rate_is_mutable()

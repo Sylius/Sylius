@@ -6,6 +6,7 @@ Feature: Managing emails
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following emails configured:
             | code                  | subject                      | enabled |
             | user_confirmation     | Welcome!                     | yes     |
