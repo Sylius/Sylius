@@ -59,7 +59,7 @@ Every **Adjustment** instance has the ``neutral`` property, which indicates if i
     $tax = new Adjustment();
     $tax
         ->setAmount(1150)
-        ->setLabel
+        ->setLabel()
         ->setNeutral(true)
     ;
 
@@ -100,12 +100,12 @@ Let's add a 5$ discount to the previous example.
     $tax = new Adjustment();
     $tax
         ->setAmount(1150)
-        ->setLabel
+        ->setLabel()
         ->setNeutral(true)
     ;
 
     $discount = new Adjustment();
-    $discount->setAmount(500);
+    $discount->setAmount(-500);
 
     echo $order
         ->addItem($tshirt)
