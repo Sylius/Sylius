@@ -424,6 +424,7 @@ sylius:
         show: Show export profile
     export_job:
         index_header: Jobs
+        general_info: General info
         manage: Manage
         header: Job
         export_profile: Export profile

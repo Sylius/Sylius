@@ -21,7 +21,7 @@ Sylius\Component\ImportExport\Model\ImportJob:
         updatedAt:
             expose: true
             type: DateTime
-        importProfile:
+        profile:
             expose: true
             type: ProfileInterface
     relations:
@@ -32,8 +32,8 @@ Sylius\Component\ImportExport\Model\ImportJob:
                 id: expr(object.getId())
         - rel: import_profile
           exclusion:
-                exclude_if: expr(!object.getExportProfile())
+                exclude_if: expr(!object.getProfile())
           href:
                 route: sylius_import_profile_show
                 parameters:
-                    id: expr(object.getExportProfile().getId())
+                    id: expr(object.getProfile().getId())

@@ -29,7 +29,7 @@
         <field name="reader" column="reader" type="string" nullable="false" />
         <field name="readerConfiguration" column="reader_configuration" type="array" />
 
-        <one-to-many field="jobs" target-entity="Sylius\Component\ImportExport\Model\ExportJobInterface" mapped-by="exportProfile" orphan-removal="true">
+        <one-to-many field="jobs" target-entity="Sylius\Component\ImportExport\Model\ExportJobInterface" mapped-by="profile" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

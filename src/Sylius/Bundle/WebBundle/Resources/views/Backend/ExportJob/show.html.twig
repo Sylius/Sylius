@@ -5,7 +5,7 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_export_job_index', { profileId: export_job.exportProfile.id  }) }}">{{ 'sylius.export_job.index_header'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_export_job_index', { profileId: export_job.profile.id  }) }}">{{ 'sylius.export_job.index_header'|trans }}</a></li>
     <li>{{ export_job.id }}</a></li>
 </ol>
 {% endblock %}
@@ -13,8 +13,8 @@
 {% block content %}
     <div class="page-header">
         <div class="actions-menu">
-            {{ buttons.manage(path('sylius_backend_export_job_index', { profileId: export_job.exportProfile.id } ), 'sylius.export_job.manage'|trans) }}
-            {{ buttons.edit(path('sylius_backend_export_profile_show', { id: export_job.exportProfile.id } ), 'sylius.export_profile.show'|trans) }}
+            {{ buttons.manage(path('sylius_backend_export_job_index', { profileId: export_job.profile.id } ), 'sylius.export_job.manage'|trans) }}
+            {{ buttons.edit(path('sylius_backend_export_profile_show', { id: export_job.profile.id } ), 'sylius.export_profile.show'|trans) }}
         </div>
         <h1><i class="glyphicon glyphicon-cog"></i>{{ 'sylius.export_job.header'|trans }} {{ export_job.id }}</h1>
     </div>
@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <td>{{ 'sylius.export_job.export_profile'|trans }}</td>
-                        <td>{{ export_job.exportProfile.id }}</td>
+                        <td>{{ export_job.profile.id }}</td>
                     </tr>
                     <tr>
                         <td>{{ 'sylius.export_job.status'|trans }}</td>

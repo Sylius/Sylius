@@ -36,6 +36,9 @@
         <!-- Import writer -->
         <service id="sylius.import.product_writer" class="%sylius.import.product_writer.class%">
             <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.product_archetype" />
+            <argument type="service" id="sylius.repository.tax_category" />
+            <argument type="service" id="sylius.repository.shipping_category" />
             <tag name="sylius.import.writer" writer="product_writer" label="Product writer" />
         </service>
     </services>

@@ -17,26 +17,4 @@ namespace Sylius\Component\ImportExport\Model;
  */
 class ExportJob extends Job implements ExportJobInterface
 {
-    /**
-     * @var ProfileInterface
-     */
-    private $exportProfile;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExportProfile()
-    {
-        return $this->exportProfile;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExportProfile(ExportProfile $exportProfile)
-    {
-        $this->exportProfile = $exportProfile;
-
-        return $this;
-    }
 }

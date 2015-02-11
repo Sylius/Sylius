@@ -71,7 +71,7 @@ class ExportJobSpec extends ObjectBehavior
 
     public function it_has_export_profile(ExportProfile $exportProfile)
     {
-        $this->setExportProfile($exportProfile);
-        $this->getExportProfile()->shouldReturn($exportProfile);
+        $this->setProfile($exportProfile);
+        $this->getProfile()->shouldReturn($exportProfile);
     }
 }

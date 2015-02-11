@@ -31,7 +31,7 @@ class ImportExportContext extends DefaultContext
         $repository = $this->getRepository('export_profile');
 
         foreach ($table->getHash() as $data) {
-            $this->thereIsExportProfile($data['name'], $data['description'], $data["code"], $data['reader'], $data['reader configuration'], $data['writer'], $data['writer configuration'], false);
+            $this->thereIsExportProfile($data['name'], $data['description'], $data["code"], $data['reader'], $data['reader_configuration'], $data['writer'], $data['writer_configuration'], false);
         }
 
         $manager->flush();
@@ -49,7 +49,6 @@ class ImportExportContext extends DefaultContext
         $exportProfile->setReaderConfiguration($this->getConfiguration($readerConfiguration));
 
         $writerConfiguration = $this->getConfiguration($writerConfiguration);
-        $writerConfiguration["add_headers"] = isset($writerConfiguration["add_headers"]) ? false : true;
 
         $exportProfile->setWriter($writer);
         $exportProfile->setWriterConfiguration($writerConfiguration);
@@ -73,7 +72,7 @@ class ImportExportContext extends DefaultContext
         $manager = $this->getEntityManager();
 
         foreach ($table->getHash() as $data) {
-            $this->thereIsExportJob($data['status'], $data['startTime'], $data["endTime"], $data['createdAt'], $data['updatedAt'], $data["exportProfileCode"], false);
+            $this->thereIsExportJob($data['status'], $data['start_time'], $data["end_time"], $data['created_at'], $data['updated_at'], $data["export_profile"], false);
         }
 
         $manager->flush();
@@ -113,4 +112,20 @@ class ImportExportContext extends DefaultContext
         $this->getSession()->visit($this->generatePageUrl('sylius_backend_export_job_index', array('profileId' => $exportProfile->getId())));
     }
 
+    /**
+     * @When I press :button near :number export job
+     * @When I click :button near :number export job
+     */
+    public function iPressNearExportJob($button, $number)
+    {
+        $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:nth-child(%s)', $number));
+
+        $locator = sprintf('button:contains("%s")', $button);
+
+        if ($tr->has('css', $locator)) {
+            $tr->find('css', $locator)->press();
+        } else {
+            $tr->clickLink($button);
+        }
+    }
 }

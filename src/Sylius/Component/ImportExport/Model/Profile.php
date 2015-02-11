@@ -60,7 +60,7 @@ abstract class Profile implements ProfileInterface
     protected $readerConfiguration;
 
     /**
-     * Jobs of export Profile.
+     * Jobs of profile.
      *
      * @var Collection|JobInterface[]
      */
@@ -259,18 +259,45 @@ abstract class Profile implements ProfileInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function addJob(JobInterface $job);
-
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function removeJob(JobInterface $job);
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasJob(JobInterface $job)
     {
         return $this->jobs->contains($job);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addJob(JobInterface $job)
+    {
+
+        if ($this->hasJob($job)) {
+            return $this;
+        }
+
+        foreach ($this->jobs as $existingJob) {
+            if ($job->equals($existingJob)) {
+                $existingJob->merge($job, false);
+
+                return $this;
+            }
+        }
+
+        $job->setProfile($this);
+        $this->jobs->add($job);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeJob(JobInterface $job)
+    {
+        if ($this->hasJob($job)) {
+            $job->setProfile(null);
+            $this->jobs->removeElement($job);
+        }
+
+        return $this;
     }
 }

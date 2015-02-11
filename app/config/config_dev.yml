@@ -23,8 +23,10 @@ monolog:
             level: info
         exporter:
             type:     stream
-            path:     %kernel.logs_dir%/exporter.log
             channels: [exporter]
+        importer:
+            type:     stream
+            channels: [importer]
 
 assetic:
     use_controller: true

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\ImportExport\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -22,41 +23,6 @@ class ImportProfile extends Profile implements ExportProfileInterface
         $this->readerConfiguration = array();
         $this->writer = 'product_writer';
         $this->writerConfiguration = array();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addJob(JobInterface $job)
-    {
-        if ($this->hasJob($job)) {
-            return $this;
-        }
-
-        foreach ($this->jobs as $existingJob) {
-            if ($job->equals($existingJob)) {
-                $existingJob->merge($job, false);
-
-                return $this;
-            }
-        }
-
-        $job->setImportProfile($this);
-        $this->jobs->add($job);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeJob(JobInterface $job)
-    {
-        if ($this->hasJob($job)) {
-            $job->setImportProfile(null);
-            $this->jobs->removeElement($job);
-        }
-
-        return $this;
+        $this->jobs = new ArrayCollection();
     }
 }

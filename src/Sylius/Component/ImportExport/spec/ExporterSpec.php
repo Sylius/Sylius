@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\ImportExport;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\ImportExport\Model\ExportProfile;
+use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 use Sylius\Component\ImportExport\Writer\WriterInterface;
 use Sylius\Component\ImportExport\Reader\ReaderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -41,7 +41,7 @@ class ExporterSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\ImportExport\ExporterInterface');
     }
 
-    function it_exports_data_with_given_exporter($exportJobRepository, ExportJobInterface $exportJob, $readerRegistry, $writerRegistry, ExportProfile $exportProfile, ReaderInterface $reader, WriterInterface $writer, $logger)
+    function it_exports_data_with_given_exporter($exportJobRepository, ExportJobInterface $exportJob, $readerRegistry, $writerRegistry, ExportProfileInterface $exportProfile, ReaderInterface $reader, WriterInterface $writer, $logger)
     {
         $exportJobRepository->createNew()->willReturn($exportJob);
         $exportProfile->getId()->willReturn(1);
@@ -49,12 +49,12 @@ class ExporterSpec extends ObjectBehavior
         $startTime = new \DateTime();
         $exportJob->setStartTime($startTime)->shouldBeCalled()->willReturn($exportJob);
         $exportJob->setStatus('running')->shouldBeCalled()->willReturn($exportJob);
-        $exportJob->setExportProfile($exportProfile)->shouldBeCalled()->willReturn($exportJob);
+        $exportJob->setProfile($exportProfile)->shouldBeCalled()->willReturn($exportJob);
 
         $exportJob->getId()->willReturn(1);
         $exportJob->getStartTime()->willReturn($startTime);
 
-        $logger->info(sprintf("ExportProfile: 1; StartTime: %s", $startTime->format('Y-m-d H:i:s')))->shouldBeCalled();
+        $logger->info(sprintf("Profile: 1; StartTime: %s", $startTime->format('Y-m-d H:i:s')))->shouldBeCalled();
         $exportProfile->addJob($exportJob)->shouldBeCalled();
 
         $exportProfile->getReader()->willReturn('doctrine');
@@ -76,7 +76,7 @@ class ExporterSpec extends ObjectBehavior
         $exportJob->setEndTime($endTime)->shouldBeCalled()->willReturn($exportJob);
         $exportJob->setStatus('completed')->shouldBeCalled()->willReturn($exportJob);
         $exportJob->getEndTime()->shouldBeCalled()->willReturn($endTime);
-        $logger->info(sprintf("Exportjob: 1; EndTime: %s", $endTime->format('Y-m-d H:i:s')))->shouldBeCalled();
+        $logger->info(sprintf("Job: 1; EndTime: %s", $endTime->format('Y-m-d H:i:s')))->shouldBeCalled();
 
         $this->export($exportProfile);
     }

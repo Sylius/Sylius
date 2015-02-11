@@ -16,20 +16,4 @@ namespace Sylius\Component\ImportExport\Model;
  */
 interface ImportJobInterface extends JobInterface
 {
-    
-    /**
-     * Gets the value of importProfile.
-     *
-     * @return importProfile
-     */
-    public function getImportProfile();
-
-    /**
-     * Sets the value of importProfile.
-     *
-     * @param ImportProfile $importProfile the import profile
-     *
-     * @return self
-     */
-    public function setImportProfile(ImportProfile $importProfile);
 }

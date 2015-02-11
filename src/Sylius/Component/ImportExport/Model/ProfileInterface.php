@@ -32,4 +32,6 @@ interface ProfileInterface
     public function setReader($reader);
     public function getReaderConfiguration();
     public function setReaderConfiguration(array $readerConfiguration);
+    public function addJob(JobInterface $job);
+    public function removeJob(JobInterface $job);
 }

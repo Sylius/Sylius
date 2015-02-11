@@ -84,3 +84,15 @@ swiftmailer:
     port:      %sylius.mailer.port%
     username:  %sylius.mailer.user%
     password:  %sylius.mailer.password%
+    spool:     { type: memory }
+
+knp_gaufrette:
+    adapters:
+        exported_files:
+            local:
+                directory:  %kernel.root_dir%/../web/media/exported_files
+                create:    true
+    filesystems:
+        export:
+            adapter: exported_files
+            alias: export

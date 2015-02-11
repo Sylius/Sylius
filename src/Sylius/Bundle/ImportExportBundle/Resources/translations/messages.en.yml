@@ -9,7 +9,6 @@ sylius:
             csv:
                 delimiter: Delimiter
                 enclosure: Enclosure
-                add_header: Add header?
         reader:
             name: Reader
             batch_size: Rows number
@@ -17,10 +16,6 @@ sylius:
             csv:
                 delimiter: Delimiter
                 enclosure: Enclosure
-                header: Was header set?
-        import_profile:
-            name: Name
-            description: Description
-            code: Code
+                batch_size: Rows number
         import.export:
             export: export

@@ -9,7 +9,7 @@ sylius_backend_export_job_index:
         _sylius:
             template: SyliusWebBundle:Backend/ExportJob:index.html.twig
             criteria:
-                exportProfile: $profileId
+                profile: $profileId
 
 sylius_backend_export_job_show:
     path: /{id}
@@ -20,4 +20,4 @@ sylius_backend_export_job_show:
             template: SyliusWebBundle:Backend/ExportJob:show.html.twig
             criteria:
                 id: $id
-                exportProfile: $profileId
+                profile: $profileId

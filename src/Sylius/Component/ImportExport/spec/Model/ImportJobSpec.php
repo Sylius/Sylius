@@ -71,7 +71,7 @@ class ImportJobSpec extends ObjectBehavior
 
     public function it_has_import_profile(ImportProfile $importProfile)
     {
-        $this->setImportProfile($importProfile);
-        $this->getImportProfile()->shouldReturn($importProfile);
+        $this->setProfile($importProfile);
+        $this->getProfile()->shouldReturn($importProfile);
     }
 }
