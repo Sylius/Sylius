@@ -11,25 +11,26 @@
 
 namespace Sylius\Bundle\WebBundle\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Sylius frontend DIC extension
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusWebExtension extends Extension
+class SyliusWebExtension extends AbstractResourceExtension
 {
+    protected $configFiles = array(
+        'services',
+        'twig',
+    );
+
     /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
-        $loader->load('twig.xml');
+        $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_PARAMETERS);
     }
 }

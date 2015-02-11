@@ -17,14 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.controller.frontend.homepage.class">Sylius\Bundle\WebBundle\Controller\Frontend\HomepageController</parameter>
-        <parameter key="sylius.controller.frontend.account.address.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController</parameter>
-        <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
-
-        <parameter key="sylius.controller.backend.dashboard.class">Sylius\Bundle\WebBundle\Controller\Backend\DashboardController</parameter>
-        <parameter key="sylius.controller.backend.security.class">Sylius\Bundle\WebBundle\Controller\Backend\SecurityController</parameter>
-        <parameter key="sylius.controller.backend.form.class">Sylius\Bundle\WebBundle\Controller\Backend\FormController</parameter>
-
         <parameter key="sylius.menu_builder.frontend.class">Sylius\Bundle\WebBundle\Menu\FrontendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.locale.class">Sylius\Bundle\WebBundle\Menu\LocaleMenuBuilder</parameter>
@@ -34,32 +26,32 @@
     </parameters>
 
     <services>
-        <service id="sylius.controller.frontend.homepage" class="%sylius.controller.frontend.homepage.class%">
+        <service id="sylius.controller.frontend.homepage" class="%sylius.controller.frontend_homepage.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius.controller.frontend.account.address" class="%sylius.controller.frontend.account.address.class%">
+        <service id="sylius.controller.frontend.account.address" class="%sylius.controller.frontend_account_address.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius.controller.frontend.account.order" class="%sylius.controller.frontend.account.order.class%">
+        <service id="sylius.controller.frontend.account.order" class="%sylius.controller.frontend_account_order.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius.controller.backend.dashboard" class="%sylius.controller.backend.dashboard.class%">
+        <service id="sylius.controller.backend.dashboard" class="%sylius.controller.backend_dashboard.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius.controller.backend.security" class="%sylius.controller.backend.security.class%">
+        <service id="sylius.controller.backend.security" class="%sylius.controller.backend_security.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        <service id="sylius.controller.backend.form" class="%sylius.controller.backend.form.class%">
+        <service id="sylius.controller.backend.form" class="%sylius.controller.backend_form.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
