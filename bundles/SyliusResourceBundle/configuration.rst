@@ -18,7 +18,7 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
         resources:
             my_app.entity_key:
                 driver: doctrine/orm
-                manager: default
+                object_manager: default
                 templates: App:User
                 classes:
                     model: MyApp\Entity\EntityName
@@ -46,7 +46,7 @@ At this step:
     //...
 
     $ php app/console container:debug --parameters | grep entity_key
-    sylius.config.classes        {"my_app.entity_key": {"driver":"...", "manager": "...", "classes":{"model":"...", "controller":"...", "repository":"...", "interface":"..."}}}
+    sylius.config.classes        {"my_app.entity_key": {"driver":"...", "object_manager": "...", "classes":{"model":"...", "controller":"...", "repository":"...", "interface":"..."}}}
     //...
 
 Advanced configuration
@@ -91,7 +91,7 @@ You need to expose a semantic configuration for your bundle. The following examp
                     ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
 
                     // Object manager used by the resource bundle, if not specified "default" will used
-                    ->scalarNode('manager')->defaultValue('default')->end()
+                    ->scalarNode('object_manager')->defaultValue('default')->end()
 
                     // Validation groups used by the form component
                     ->arrayNode('validation_groups')
@@ -212,7 +212,7 @@ You can overwrite the configuration of your bundle like that :
 
     bundle_name:
         driver: doctrine/orm
-        manager: my_custom_manager
+        object_manager: my_custom_manager
         validation_groups:
             product: [myCustomGroup]
         classes:
@@ -238,7 +238,7 @@ For now, with the advanced configuration you can not use several drivers but the
         resources:
             my_app.other_entity_key:
                 driver: doctrine/odm
-                manager: my_custom_manager
+                object_manager: my_custom_manager
                 classes:
                     model: %my_app.model.my_entity.class%
 
@@ -246,8 +246,8 @@ And your manager will be overwrite:
 
 .. code-block:: bash
 
-    $ php app/console container:debug | grep my_app.manager.other_entity_key
-    my_app.manager.other_entity_key       n/a       alias for doctrine.odm.my_custom_manager_document_manager
+    $ php app/console container:debug | grep my_app.object_manager.other_entity_key
+    my_app.object_manager.other_entity_key       n/a       alias for doctrine.odm.my_custom_manager_document_manager
 
 And... we're done!
 
