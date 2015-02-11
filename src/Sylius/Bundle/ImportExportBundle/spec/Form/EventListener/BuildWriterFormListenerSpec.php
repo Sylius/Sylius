@@ -37,8 +37,8 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
     }
 
     function let(
-        ServiceRegistryInterface $writerRegistry, 
-        FormFactoryInterface $factory, 
+        ServiceRegistryInterface $writerRegistry,
+        FormFactoryInterface $factory,
         WriterInterface $writer)
     {
         $writerRegistry->get('test_writer')->willReturn($writer);
@@ -74,20 +74,19 @@ class BuildWriterFormListenerSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-    $data = array('writer' => 'test_writer');
+        $data = array('writer' => 'test_writer');
 
-    $event->getData()->willReturn($data);
-    $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($data);
+        $event->getForm()->willReturn($form);
 
-    $factory->createNamed(
+        $factory->createNamed(
         'writerConfiguration',
         'sylius_test_type_writer',
         Argument::cetera()
         )->willReturn($field);
 
-    $form->add($field)->shouldBeCalled();
-    $this->preBind($event);
-
+        $form->add($field)->shouldBeCalled();
+        $this->preBind($event);
     }
 
     function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_export_profiler(FormEvent $event)

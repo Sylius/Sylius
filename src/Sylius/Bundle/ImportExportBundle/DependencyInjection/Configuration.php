@@ -135,7 +135,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\ImportExport\Model\ExportJob')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ImportExportBundle\Controller\ExportJobController')->end()
                                 ->scalarNode('repository')->end()
                             ->end()
                         ->end()

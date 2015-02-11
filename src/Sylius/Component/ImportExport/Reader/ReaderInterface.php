@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\ImportExport\Reader;
 
+use Monolog\Logger;
+
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -28,7 +30,7 @@ interface ReaderInterface
      *
      * @param array $configuration
      */
-    public function setConfiguration(array $configuration);
+    public function setConfiguration(array $configuration, Logger $logger);
 
     /**
      * @return string

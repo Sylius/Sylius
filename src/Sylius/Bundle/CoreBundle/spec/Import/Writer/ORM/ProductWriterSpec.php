@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -29,7 +28,7 @@ class ProductWriterSpec extends ObjectBehavior
         RepositoryInterface $productRepository,
         RepositoryInterface $archetypeRepository,
         RepositoryInterface $taxCategoryRepository,
-        RepositoryInterface $shippingCategoryRepository, 
+        RepositoryInterface $shippingCategoryRepository,
         EntityManager $em)
     {
         $this->beConstructedWith(
@@ -67,17 +66,17 @@ class ProductWriterSpec extends ObjectBehavior
     {
         $data = array(
             'id' => 1,
-            'name' => 'testProduct', 
-            'price' => 2, 
-            'description' => 'Long lorem ipsum', 
-            'short_description' => 'lorem', 
-            'archetype' => 'testArchetype', 
-            'tax_category' => 'testTaxCategory', 
-            'shipping_category' => 'testShippingCategory', 
-            'is_available_on' => '2015-02-10 10:02:09', 
-            'meta_keywords' => 'Sint, fuga, quo, magni, hic.', 
-            'meta_description' => 'Autem quos tempora culpa facere nulla.', 
-            'createdAt' => '2015-02-10 10:02:09');
+            'name' => 'testProduct',
+            'price' => 2,
+            'description' => 'Long lorem ipsum',
+            'short_description' => 'lorem',
+            'archetype' => 'testArchetype',
+            'tax_category' => 'testTaxCategory',
+            'shipping_category' => 'testShippingCategory',
+            'is_available_on' => '2015-02-10 10:02:09',
+            'meta_keywords' => 'Sint, fuga, quo, magni, hic.',
+            'meta_description' => 'Autem quos tempora culpa facere nulla.',
+            'createdAt' => '2015-02-10 10:02:09', );
 
         $productRepository->find('1')->willReturn(null);
         $productRepository->createNew()->willReturn($product);
@@ -97,7 +96,7 @@ class ProductWriterSpec extends ObjectBehavior
         $product->setMetaKeyWords('Sint, fuga, quo, magni, hic.');
         $product->setMetaDescription('Autem quos tempora culpa facere nulla.');
         $product->setCreatedAt(new \DateTime('2015-02-10 10:02:09'));
-        
+
         $this->process($data)->shouldReturn($product);
     }
 
@@ -113,17 +112,17 @@ class ProductWriterSpec extends ObjectBehavior
     {
         $data = array(
             'id' => 1,
-            'name' => 'testProduct', 
-            'price' => 2, 
-            'description' => 'Long lorem ipsum', 
-            'short_description' => 'lorem', 
-            'archetype' => 'testArchetype', 
-            'tax_category' => 'testTaxCategory', 
-            'shipping_category' => 'testShippingCategory', 
-            'is_available_on' => '2015-02-10 10:02:09', 
-            'meta_keywords' => 'Sint, fuga, quo, magni, hic.', 
-            'meta_description' => 'Autem quos tempora culpa facere nulla.', 
-            'createdAt' => '2015-02-10 10:02:09');
+            'name' => 'testProduct',
+            'price' => 2,
+            'description' => 'Long lorem ipsum',
+            'short_description' => 'lorem',
+            'archetype' => 'testArchetype',
+            'tax_category' => 'testTaxCategory',
+            'shipping_category' => 'testShippingCategory',
+            'is_available_on' => '2015-02-10 10:02:09',
+            'meta_keywords' => 'Sint, fuga, quo, magni, hic.',
+            'meta_description' => 'Autem quos tempora culpa facere nulla.',
+            'createdAt' => '2015-02-10 10:02:09', );
 
         $productRepository->find('1')->willReturn($product);
         $productRepository->createNew()->shouldNotBeCalled();
@@ -143,7 +142,7 @@ class ProductWriterSpec extends ObjectBehavior
         $product->setMetaKeyWords('Sint, fuga, quo, magni, hic.');
         $product->setMetaDescription('Autem quos tempora culpa facere nulla.');
         $product->setCreatedAt(new \DateTime('2015-02-10 10:02:09'));
-        
+
         $this->process($data)->shouldReturn($product);
     }
 

@@ -12,13 +12,12 @@
 namespace spec\Sylius\Component\ImportExport\Reader;
 
 use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\EntityManager;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CsvReaderSpec extends ObjectBehavior
-{  
+{
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\ImportExport\Reader\CsvReader');

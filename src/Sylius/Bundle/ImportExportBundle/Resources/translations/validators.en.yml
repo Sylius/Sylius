@@ -10,3 +10,11 @@ sylius:
         code:
             in_use: This code is already in use.
             not_blank: Export profile code should not be blank.
+    import_profile:
+        name:
+            not_blank: Import profile name should not be blank.
+        description:
+            not_blank: Import profile description should not be blank.
+        code:
+            in_use: This code is already in use.
+            not_blank: Import profile code should not be blank.

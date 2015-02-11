@@ -9,12 +9,10 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.import_job.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('importProfile', 'sylius.import_job.import_profile_id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('importProfile', 'sylius.import_job.import_profile'|trans) }}</th>
             <th>{{ sylius_resource_sort('status', 'sylius.import_job.status'|trans) }}</th>
-            <th>{{ sylius_resource_sort('startTime', 'sylius.import_job.startTime'|trans) }}</th>
-            <th>{{ sylius_resource_sort('endTime', 'sylius.import_job.endTime'|trans) }}</th>
-            <th>{{ sylius_resource_sort('createdAt', 'sylius.import_job.createdAt'|trans) }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.import_job.updatedAt'|trans) }}</th>
+            <th>{{ sylius_resource_sort('startTime', 'sylius.import_job.start_time'|trans) }}</th>
+            <th>{{ sylius_resource_sort('endTime', 'sylius.import_job.end_time'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -22,15 +20,13 @@
     {% for import_job in import_jobs %}
         <tr id="{{ import_job.id }}">
             <td>{{ import_job.id }}</td>
-            <td>{{ import_job.import_profile_id }}</td>
+            <td>{{ import_job.profile.id }}</td>
             <td>{{ import_job.status }}</td>
             <td>{{ import_job.startTime|date }}</td>
             <td>{{ import_job.endTime|date }}</td>
-            <td>{{ import_job.createdAt|date }}</td>
-            <td>{{ import_job.updatedAt|date }}</td>
-            <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_import_job_show', {'id': import_job.id})) }}
-            </div>
+            <td class="pull-right">
+                {{ buttons.show(path('sylius_backend_import_job_show', {'id': import_job.id, 'profileId': import_job.profile.id })) }}
+            </td>
         </tr>
     {% endfor %}
     </tbody>

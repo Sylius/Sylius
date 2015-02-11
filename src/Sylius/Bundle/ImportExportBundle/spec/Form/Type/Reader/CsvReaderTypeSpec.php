@@ -20,7 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CsvReaderTypeSpec extends ObjectBehavior
 {
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\Reader\CsvReaderType');

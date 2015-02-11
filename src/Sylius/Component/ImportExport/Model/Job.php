@@ -201,7 +201,7 @@ abstract class Job implements JobInterface
      */
     public function getProfile()
     {
-        return $this->profile;;
+        return $this->profile;
     }
 
     /**

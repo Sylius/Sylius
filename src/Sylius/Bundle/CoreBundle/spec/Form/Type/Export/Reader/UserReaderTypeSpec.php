@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type\Export\Reader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -18,12 +18,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductReaderTypeSpec extends ObjectBehavior
+class UserReaderTypeSpec extends ObjectBehavior
 {
-
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ProductReaderType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Export\Reader\UserReaderType');
     }
 
     function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
@@ -36,6 +35,6 @@ class ProductReaderTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_product_reader');
+        $this->getName()->shouldReturn('sylius_user_reader');
     }
 }

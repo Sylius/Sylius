@@ -19,7 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-
 /**
  * Export profile form type.
  *
@@ -77,10 +76,10 @@ class ExportProfileType extends AbstractResourceType
                 'required' => false,
             ))
             ->add('reader', 'sylius_export_reader_choice', array(
-                'label'    => 'sylius.form.reader.name'
+                'label'    => 'sylius.form.reader.name',
             ))
             ->add('writer', 'sylius_export_writer_choice', array(
-                'label' => 'sylius.form.writer.name'
+                'label' => 'sylius.form.writer.name',
             ))
         ;
 

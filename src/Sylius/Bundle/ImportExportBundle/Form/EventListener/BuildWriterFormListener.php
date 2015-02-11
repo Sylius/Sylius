@@ -49,7 +49,7 @@ class BuildWriterFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind',
         );
     }
 
@@ -85,12 +85,12 @@ class BuildWriterFormListener implements EventSubscriberInterface
         $formType = sprintf('sylius_%s_writer', $exporter->getType());
         try {
             $configurationField = $this->factory->createNamed(
-                'writerConfiguration', 
-                $formType, 
-                $configuration, 
+                'writerConfiguration',
+                $formType,
+                $configuration,
                 array('auto_initialize' => false)
             );
-        } catch (\InvalidArgumentException $e){
+        } catch (\InvalidArgumentException $e) {
             return;
         }
         $form->add($configurationField);

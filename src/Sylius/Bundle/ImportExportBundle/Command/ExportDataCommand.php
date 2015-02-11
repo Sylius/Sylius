@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-use Sylius\Component\ImportExport\Writer\CsvWriter;
 
 /**
 * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

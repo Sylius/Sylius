@@ -6,12 +6,12 @@ Feature: Export profiles
 
     Background:
         Given there are following export profiles configured:
-            | name                 | description | code           | reader         | reader configuration      | writer       | writer configuration                                |
+            | name                 | description | code           | reader         | reader_configuration      | writer       | writer_configuration                                |
             | ProductExportProfile | Lorem ipsum | product_export | product_reader | Rows number:10            | csv_writer   | Delimiter:;,Enclosure:",File path:\tmp\output.csv   |
             | UsersExportProfile   | Lorem ipsum | user_export    | user_reader    | Rows number:10            | excel_writer | File path:\tmp\output.csv                           |
         And there is default currency configured
         And there are following users:
-            | email          | enabled  | created at          |
+            | email          | enabled  | created_at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |
             | martha@foo.com | yes      | 2010-01-02 13:00:00 |
             | rick@foo.com   | yes      | 2010-01-03 12:00:00 |

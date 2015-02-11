@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Export\Reader;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Reader choice choice type.
+ * Writer choice choice type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CsvReaderType extends AbstractType
+class UserReaderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,17 +27,9 @@ class CsvReaderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('delimiter', 'text', array(
-                'label'    => 'sylius.form.reader.csv.delimiter',
-                'data'     => ';',
-            ))
-            ->add('enclosure', 'text', array(
-                'label'    => 'sylius.form.reader.csv.enclosure',
-                'data'     => '"',
-            ))
-            ->add('file', 'text', array(
-                'label'    => 'sylius.form.reader.file',
-                'required' => true,
+            ->add('batch_size', 'number', array(
+                'label'      => 'sylius.form.reader.batch_size',
+                'empty_data' => '100',
             ))
         ;
     }
@@ -47,6 +39,6 @@ class CsvReaderType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_csv_reader';
+        return 'sylius_user_reader';
     }
 }

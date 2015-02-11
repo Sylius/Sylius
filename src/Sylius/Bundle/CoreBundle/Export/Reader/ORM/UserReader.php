@@ -21,18 +21,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class UserReader extends AbstractDoctrineReader
 {
     private $userRepository;
-    
+
     public function __construct(RepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
-    
+
     public function process($user)
     {
         $shippingAddress = $user->getShippingAddress();
         $billingAddress = $user->getBillingAddress();
         $createdAt = (string) $user->getCreatedAt()->format('Y-m-d H:m:s');
-        
+
         return array(
             'id'                            => $user->getId(),
             'first_name'                    => $user->getFirstName(),
@@ -55,15 +55,23 @@ class UserReader extends AbstractDoctrineReader
             'billing_address_phone_number'  => $billingAddress ? $billingAddress->getPhoneNumber() : null,
             'enabled'                       => $user->isEnabled(),
             'currency'                      => $user->getCurrency(),
-            'created_at'                    => $createdAt
+            'created_at'                    => $createdAt,
         );
     }
-    
+
     public function getQuery()
     {
         $query = $this->userRepository->createQueryBuilder('u')
             ->getQuery();
-        
+
         return $query;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return 'user';
     }
 }

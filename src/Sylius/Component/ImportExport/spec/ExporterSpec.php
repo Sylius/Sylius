@@ -41,7 +41,15 @@ class ExporterSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\ImportExport\ExporterInterface');
     }
 
-    function it_exports_data_with_given_exporter($exportJobRepository, ExportJobInterface $exportJob, $readerRegistry, $writerRegistry, ExportProfileInterface $exportProfile, ReaderInterface $reader, WriterInterface $writer, $logger)
+    function it_exports_data_with_given_exporter(
+        $exportJobRepository,
+        ExportJobInterface $exportJob,
+        $readerRegistry,
+        $writerRegistry,
+        ExportProfileInterface $exportProfile,
+        ReaderInterface $reader,
+        WriterInterface $writer,
+        $logger)
     {
         $exportJobRepository->createNew()->willReturn($exportJob);
         $exportProfile->getId()->willReturn(1);
@@ -63,13 +71,14 @@ class ExporterSpec extends ObjectBehavior
         $exportProfile->getWriterConfiguration()->willReturn(array());
 
         $readerRegistry->get('doctrine')->willReturn($reader);
-        $reader->setConfiguration(array())->shouldBeCalled();
+        $reader->setConfiguration(array(), $logger)->shouldBeCalled();
         $reader->read()->willReturn(array(array('readData')));
 
         $writerRegistry->get('csv')->willReturn($writer);
-        $writer->setConfiguration(array())->shouldBeCalled();
+        $writer->setConfiguration(array(), $logger)->shouldBeCalled();
 
         $writer->write(array('readData'))->shouldBeCalled();
+        $writer->finalize($exportJob)->shouldBeCalled();
 
         $endTime = new \DateTime();
         $exportJob->setUpdatedAt($endTime)->shouldBeCalled()->willReturn($exportJob);

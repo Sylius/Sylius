@@ -28,9 +28,9 @@ class ExportReaderChoiceType extends AbstractType
      */
     protected $readers;
 
-    /** 
+    /**
      * Constructor
-     * 
+     *
      * @param array $readers
      */
     public function __construct(array $readers)
@@ -42,7 +42,7 @@ class ExportReaderChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->readers
+                'choices' => $this->readers,
             ))
         ;
     }

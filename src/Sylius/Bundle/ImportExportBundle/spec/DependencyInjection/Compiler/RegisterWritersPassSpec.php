@@ -21,7 +21,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class RegisterWritersPassSpec extends ObjectBehavior
 {
-
     public function it_should_implement_compiler_pass_interface()
     {
         $this->shouldImplement('Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface');
@@ -32,7 +31,7 @@ class RegisterWritersPassSpec extends ObjectBehavior
     {
         $container->hasDefinition('sylius.registry.export.writer')->willReturn(true);
         $container->getDefinition('sylius.registry.export.writer')->willReturn($exportWriterDefinition);
-        
+
         $container->hasDefinition('sylius.registry.import.writer')->willReturn(true);
         $container->getDefinition('sylius.registry.import.writer')->willReturn($importWriterDefinition);
 

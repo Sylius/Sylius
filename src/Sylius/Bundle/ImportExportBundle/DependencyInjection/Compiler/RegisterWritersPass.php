@@ -34,7 +34,7 @@ class RegisterWritersPass implements CompilerPassInterface
 
         $exporterRegistry = $container->getDefinition('sylius.registry.export.writer');
         $importerRegistry = $container->getDefinition('sylius.registry.import.writer');
-     
+
         $exportWriter = array();
         $importWriter = array();
 

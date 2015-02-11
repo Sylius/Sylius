@@ -20,19 +20,19 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ProductWriter extends AbstractDoctrineWriter
 {
-    /** 
+    /**
      * @var RepositoryInterface
      */
     private $productRepository;
-    /** 
+    /**
      * @var RepositoryInterface
      */
     private $archetypeRepository;
-    /** 
+    /**
      * @var RepositoryInterface
      */
     private $taxCategoryRepository;
-    /** 
+    /**
      * @var RepositoryInterface
      */
     private $shippingCategoryRepository;
@@ -41,17 +41,21 @@ class ProductWriter extends AbstractDoctrineWriter
         RepositoryInterface $productRepository,
         RepositoryInterface $archetypeRepository,
         RepositoryInterface $taxCategoryRepository,
-        RepositoryInterface $shippingCategoryRepository)
+        RepositoryInterface $shippingCategoryRepository,
+        EntityManager $em)
     {
         $this->productRepository = $productRepository;
         $this->archetypeRepository = $archetypeRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
         $this->shippingCategoryRepository = $shippingCategoryRepository;
     }
-    
-    public function process($data) 
+
+    public function process($data)
     {
-        $product = $this->productRepository->createNew();
+
+        if (isset($data['id'])) {
+            $product = $this->productRepository->find($data['id']);
+        }
 
         $archetype = $this->archetypeRepository->findOneByCode($data['archetype']);
         $taxCategory = $this->taxCategoryRepository->findOneByName($data['tax_category']);

@@ -37,8 +37,8 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
     }
 
     function let(
-        ServiceRegistryInterface $readerRegistry, 
-        FormFactoryInterface $factory, 
+        ServiceRegistryInterface $readerRegistry,
+        FormFactoryInterface $factory,
         ReaderInterface $reader)
     {
         $readerRegistry->get('test_reader')->willReturn($reader);
@@ -74,20 +74,19 @@ class BuildReaderFormListenerSpec extends ObjectBehavior
         Form $form,
         Form $field)
     {
-    $data = array('reader' => 'test_reader');
+        $data = array('reader' => 'test_reader');
 
-    $event->getData()->willReturn($data);
-    $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($data);
+        $event->getForm()->willReturn($form);
 
-    $factory->createNamed(
+        $factory->createNamed(
         'readerConfiguration',
         'sylius_test_type_reader',
         Argument::cetera()
         )->willReturn($field);
 
-    $form->add($field)->shouldBeCalled();
-    $this->preBind($event);
-
+        $form->add($field)->shouldBeCalled();
+        $this->preBind($event);
     }
 
     function it_does_not_allow_to_confidure_fields_in_pre_set_data_for_other_class_then_export_profiler(FormEvent $event)

@@ -18,6 +18,5 @@ class ImportProfileController extends ResourceController
 {
     public function importAction(Request $request)
     {
-        
     }
 }

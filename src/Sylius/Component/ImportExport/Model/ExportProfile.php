@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ExportProfile extends Profile implements ExportProfileInterface
 {
-    function __construct() 
+    function __construct()
     {
         $this->reader = 'user_reader';
         $this->readerConfiguration = array();

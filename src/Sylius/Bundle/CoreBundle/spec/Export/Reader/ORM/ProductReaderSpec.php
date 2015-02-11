@@ -12,10 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\Product;
 
 /**

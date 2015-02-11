@@ -43,3 +43,9 @@ sylius_backend_export_profile_show:
         _controller: sylius.controller.export_profile:showAction
         _sylius:
             template: SyliusWebBundle:Backend/ExportProfile:show.html.twig
+
+sylius_backend_export_profile_export:
+    path: /export/{code}
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.export_profile:exportAction

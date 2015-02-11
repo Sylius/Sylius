@@ -28,6 +28,7 @@
             <td>{{ export_profile.writer }}</td>
             <td>
                 <div class="pull-right">
+                {{ buttons.generic(path('sylius_backend_export_job_index', { 'profileId': export_profile.id }), 'sylius.export_profile.jobs'|trans, 'align-justify') }}
                 {{ buttons.show(path('sylius_backend_export_profile_show', {'id': export_profile.id})) }}
                 {{ buttons.edit(path('sylius_backend_export_profile_update', {'id': export_profile.id})) }}
                 {{ buttons.delete(path('sylius_backend_export_profile_delete', {'id': export_profile.id})) }}

@@ -1,37 +1,67 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
-{% if import_job|length > 0 %}
-<table class="table">
-    <thead>
-        <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.import_job.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('importProfile', 'sylius.import_job.import_profile_id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('status', 'sylius.import_job.status'|trans) }}</th>
-            <th>{{ sylius_resource_sort('startTime', 'sylius.import_job.startTime'|trans) }}</th>
-            <th>{{ sylius_resource_sort('endTime', 'sylius.import_job.endTime'|trans) }}</th>
-            <th>{{ sylius_resource_sort('createdAt', 'sylius.import_job.createdAt'|trans) }}</th>
-            <th>{{ sylius_resource_sort('updatedAt', 'sylius.import_job.updatedAt'|trans) }}</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr id="{{ import_job.id }}">
-            <td>{{ import_job.id }}</td>
-            <td>{{ import_job.import_profile_id }}</td>
-            <td>{{ import_job.status }}</td>
-            <td>{{ import_job.startTime|date }}</td>
-            <td>{{ import_job.endTime|date }}</td>
-            <td>{{ import_job.createdAt|date }}</td>
-            <td>{{ import_job.updatedAt|date }}</td>
-            <div class="pull-right">
-                {{ buttons.show(path('sylius_backend_import_job_show', {'id': import_job.id})) }}
-            </div>
-        </tr>
-    </tbody>
-</table>
-{% else %}
-{{ alerts.info('sylius.import_profile.no_results'|trans) }}
-{% endif %}
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_import_job_index', { profileId: import_job.profile.id  }) }}">{{ 'sylius.import_job.index_header'|trans }}</a></li>
+    <li>{{ import_job.id }}</a></li>
+</ol>
+{% endblock %}
 
+{% block content %}
+    <div class="page-header">
+        <div class="actions-menu">
+            {{ buttons.manage(path('sylius_backend_import_job_index', { profileId: import_job.profile.id } ), 'sylius.import_job.manage'|trans) }}
+            {{ buttons.edit(path('sylius_backend_import_profile_show', { id: import_job.profile.id } ), 'sylius.import_profile.show'|trans) }}
+        </div>
+        <h1><i class="glyphicon glyphicon-cog"></i>{{ 'sylius.import_job.header'|trans }} {{ import_job.id }}</h1>
+    </div>
+
+    {% if import_job|length > 0 %}
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2">{{ 'sylius.import_job.general_info'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ 'sylius.import_job.id'|trans }}</td>
+                        <td>{{ import_job.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.import_profile'|trans }}</td>
+                        <td>{{ import_job.profile.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.status'|trans }}</td>
+                        <td>{{ import_job.status }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.start_time'|trans }}</td>
+                        <td>{{ import_job.startTime|date }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.end_time'|trans }}</td>
+                        <td>{{ import_job.endTime|date }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.created_at'|trans }}</td>
+                        <td>{{ import_job.createdAt|date }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.updated_at'|trans }}</td>
+                        <td>{{ import_job.updatedAt|date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    {{ alerts.info('sylius.import_profile.no_results'|trans) }}
+    {% endif %}
+{% endblock %}

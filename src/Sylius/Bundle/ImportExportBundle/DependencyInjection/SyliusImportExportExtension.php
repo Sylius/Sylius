@@ -34,13 +34,13 @@ class SyliusImportExportExtension extends AbstractResourceExtension
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
-        
+
         $container
             ->getDefinition('sylius.form.type.export_profile')
             ->addArgument(new Reference('sylius.registry.export.reader'))
             ->addArgument(new Reference('sylius.registry.export.writer'))
         ;
-        
+
         $container
             ->getDefinition('sylius.form.type.import_profile')
             ->addArgument(new Reference('sylius.registry.import.reader'))

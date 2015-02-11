@@ -57,7 +57,7 @@ class JobRunner
      * Logger for importer
      *
      * @var Logger
-     */    
+     */
     protected $logger;
 
     /**
@@ -70,7 +70,7 @@ class JobRunner
      * @var Logger $logger
      */
     public function __construct(
-        ServiceRegistryInterface $readerRegistry, 
+        ServiceRegistryInterface $readerRegistry,
         ServiceRegistryInterface $writerRegistry,
         RepositoryInterface $jobRepository,
         EntityManager $entityManager,
@@ -86,7 +86,7 @@ class JobRunner
     /**
      * Create import job
      *
-     * @param ProfileInterface $profile
+     * @param  ProfileInterface $profile
      * @return JobInterface
      */
     protected function startJob(ProfileInterface $profile)
@@ -97,7 +97,7 @@ class JobRunner
         $job->setStatus(Job::RUNNING);
         $job->setProfile($profile);
 
-        $this->logger->pushHandler(new StreamHandler(sprintf('app/logs/export_job_%d_%s.log', $profile->getId(), $job->getStartTime()->format('Y_m_d_H_i_s'))));
+        $this->logger->pushHandler(new StreamHandler(sprintf('%s/logs/export_job_%d_%s.log', '/Users/mzalewski/Sites/Sylius/app', $profile->getId(), $job->getStartTime()->format('Y_m_d_H_i_s'))));
         $this->logger->addInfo(sprintf("Profile: %d; StartTime: %s", $profile->getId(), $job->getStartTime()->format('Y-m-d H:i:s')));
 
         $profile->addJob($job);
@@ -110,15 +110,15 @@ class JobRunner
     }
 
     /**
-     * End import job 
+     * End import job
      *
      * @param JobInterface $job
      */
-    protected function endJob(JobInterface $job) 
+    protected function endJob(JobInterface $job)
     {
         $job->setUpdatedAt(new \DateTime());
         $job->setEndTime(new \DateTime());
-        $job->setStatus(Job::COMPLETED);
+        $job->setStatus($status);
         $this->logger->addInfo(sprintf("Job: %d; EndTime: %s", $job->getId(), $job->getEndTime()->format('Y-m-d H:i:s')));
 
         $this->entityManager->persist($job);

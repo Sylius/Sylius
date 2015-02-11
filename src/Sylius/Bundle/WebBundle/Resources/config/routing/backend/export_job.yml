@@ -21,3 +21,14 @@ sylius_backend_export_job_show:
             criteria:
                 id: $id
                 profile: $profileId
+
+sylius_backend_export_job_download:
+    path: /{id}/file/{fileName}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.export_job:downloadAction
+        _sylius:
+            criteria:
+                id: $id
+                profile: $profileId
+                fileName: $fileName

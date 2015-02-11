@@ -21,7 +21,7 @@ abstract class Profile implements ProfileInterface
 {
     /**
      * @var integer
-     */    
+     */
     protected $id;
 
     /**
@@ -48,7 +48,7 @@ abstract class Profile implements ProfileInterface
      * @var array
      */
     protected $writerConfiguration;
-    
+
     /**
      * @var string
      */
@@ -269,7 +269,6 @@ abstract class Profile implements ProfileInterface
      */
     public function addJob(JobInterface $job)
     {
-
         if ($this->hasJob($job)) {
             return $this;
         }

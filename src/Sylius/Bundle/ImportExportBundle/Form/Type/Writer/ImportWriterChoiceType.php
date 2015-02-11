@@ -29,9 +29,9 @@ class ImportWriterChoiceType extends AbstractType
      */
     protected $writers;
 
-    /** 
+    /**
      * Constructor
-     * 
+     *
      * @param array $writers
      */
     public function __construct(array $writers)
@@ -43,7 +43,7 @@ class ImportWriterChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'choices' => $this->writers
+                'choices' => $this->writers,
             ))
         ;
     }

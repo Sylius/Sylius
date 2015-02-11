@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ImportExportBundle\Form\Type\Writer;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Export\Reader;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Xls writer type
+ * Writer choice choice type.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProductWriterType extends AbstractType
+class ProductReaderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,9 +27,9 @@ class ProductWriterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('update', 'checkbox', array(
-                'label'    => 'sylius.form.writer.update',
-                'required' => false,
+            ->add('batch_size', 'number', array(
+                'label'      => 'sylius.form.reader.batch_size',
+                'empty_data'     => '100',
             ))
         ;
     }
@@ -39,6 +39,6 @@ class ProductWriterType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_product_writer';
+        return 'sylius_product_reader';
     }
 }

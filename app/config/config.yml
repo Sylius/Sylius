@@ -90,7 +90,7 @@ knp_gaufrette:
     adapters:
         exported_files:
             local:
-                directory:  %kernel.root_dir%/../web/media/exported_files
+                directory:  %sylius.filesystem.export%
                 create:    true
     filesystems:
         export:

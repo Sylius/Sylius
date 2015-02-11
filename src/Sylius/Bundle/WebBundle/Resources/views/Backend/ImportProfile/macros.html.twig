@@ -28,6 +28,7 @@
             <td>{{ import_profile.writer }}</td>
             <td>
                 <div class="pull-right">
+                {{ buttons.generic(path('sylius_backend_import_job_index', { 'profileId': import_profile.id }), 'sylius.import_profile.jobs'|trans, 'align-justify') }}
                 {{ buttons.show(path('sylius_backend_import_profile_show', {'id': import_profile.id})) }}
                 {{ buttons.edit(path('sylius_backend_import_profile_update', {'id': import_profile.id})) }}
                 {{ buttons.delete(path('sylius_backend_import_profile_delete', {'id': import_profile.id})) }}

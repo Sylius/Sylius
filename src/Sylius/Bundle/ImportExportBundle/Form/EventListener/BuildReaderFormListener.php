@@ -48,7 +48,7 @@ class BuildReaderFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind',
         );
     }
 
@@ -84,12 +84,12 @@ class BuildReaderFormListener implements EventSubscriberInterface
         $formType = sprintf('sylius_%s_reader', $exporter->getType());
         try {
             $configurationField = $this->factory->createNamed(
-                'readerConfiguration', 
-                $formType, 
-                $configuration, 
+                'readerConfiguration',
+                $formType,
+                $configuration,
                 array('auto_initialize' => false)
             );
-        } catch (\InvalidArgumentException $e){
+        } catch (\InvalidArgumentException $e) {
             return;
         }
         $form->add($configurationField);

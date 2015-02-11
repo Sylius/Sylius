@@ -1,6 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as frontendButtons %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -57,6 +58,18 @@
                         <td>{{ 'sylius.export_job.updated_at'|trans }}</td>
                         <td>{{ export_job.updatedAt|date }}</td>
                     </tr>
+                    {% if export_job.filePath is defined and export_job.filePath != '' %}
+                    <tr>
+                        <td>{{ 'sylius.export_job.file'|trans }}</td>
+                        <td>{{ frontendButtons.btn(
+                                path('sylius_backend_export_job_download', {'id' : export_job.id, 'profileId' : export_job.profile.id ,'fileName': export_job.filePath}),
+                                'Download',
+                                'export-job-file',
+                                'file'
+                            ) }}
+                        </td>
+                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>

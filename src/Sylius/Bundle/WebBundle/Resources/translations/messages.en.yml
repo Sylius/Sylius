@@ -194,16 +194,18 @@ sylius:
             index: Currencies
         export_profile:
             index: Export Profile
+        export_job:
+            index: Jobs
         general_settings: General Settings
         generate: Generate
         group:
             index: Groups
         import_profile:
             index: Import Profile
+        import_job:
+            index: Jobs
         inventory:
             index: Inventory
-        export_job:
-            index: Jobs
         locale:
             index: Locales
         marketing: Marketing
@@ -422,6 +424,7 @@ sylius:
         updated_at: Last update
         general_info: General info
         show: Show export profile
+        export: Export
     export_job:
         index_header: Jobs
         general_info: General info
@@ -434,6 +437,7 @@ sylius:
         end_time: End time
         created_at: Created at
         updated_at: Updated at
+        no_results: There are no jobs to display.
     filter: Filter
     form:
         cart:
@@ -490,6 +494,18 @@ sylius:
         splash:
             headline: Welcome to Sylius
             subheadline: Modern ecommerce for Symfony2
+    import_job:
+        created_at: Created at
+        end_time: End time
+        header: Job
+        id: ID
+        import_profile: Import profile
+        index_header: Jobs
+        manage: Manage
+        no_results: There are no jobs to display.
+        start_time: Start time
+        status: status
+        updated_at: Updated at
     import_profile:
         code: Code
         create: Create profile
@@ -499,6 +515,7 @@ sylius:
         general_info: General info
         id: ID
         index_header: Import Profiles
+        jobs: Jobs
         manage: Manage
         name: Name
         no_results: There are no profiles to display.
