@@ -72,7 +72,7 @@ EOT
         $user->setEmail($email);
         $user->setPlainPassword($this->ask($output, 'Choose password:', array(new NotBlank())));
         $user->setEnabled(true);
-        $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
+        $user->setRoles(array('ROLE_SYLIUS_ADMIN', 'ROLE_API'));
 
         $userManager->persist($user);
         $userManager->flush();

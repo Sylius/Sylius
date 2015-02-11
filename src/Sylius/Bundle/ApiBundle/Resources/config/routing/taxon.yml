@@ -5,7 +5,7 @@ sylius_api_taxon_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:getAction
+        _controller: sylius.controller.taxon:showAction
         _sylius:
             filterable: true
             criteria:
