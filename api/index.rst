@@ -5,6 +5,7 @@ The API Guide
     :hidden:
 
     introduction
+    authorization
     channels
     orders
     checkouts
