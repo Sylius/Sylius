@@ -94,7 +94,7 @@ EOT
         try {
             $schemaManager = $this->getSchemaManager();
         } catch (\Exception $exception) {
-            if (false !== strpos($exception->getMessage(), sprintf("SQLSTATE[HY000] [1049] Unknown database '%s'", $databaseName))) {
+            if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
                 return false;
             }
 
