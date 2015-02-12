@@ -50,6 +50,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_taxation',
         'sylius_taxonomy',
         'sylius_variation',
+        'sylius_translation',
     );
 
     protected $configFiles = array(

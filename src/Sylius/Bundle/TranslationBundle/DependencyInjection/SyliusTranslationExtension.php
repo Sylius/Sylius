@@ -24,11 +24,13 @@ class SyliusTranslationExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        list($config) = $this->configure(
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER
+            self::CONFIGURE_LOADER  | self::CONFIGURE_PARAMETERS
         );
+
+        $container->setParameter(sprintf('%s.driver', $this->getAlias()), $config['driver']);
     }
 }

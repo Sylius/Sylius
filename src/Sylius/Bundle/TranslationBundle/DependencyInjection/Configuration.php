@@ -26,7 +26,13 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('sylius_translation');
+        $rootNode = $treeBuilder->root('sylius_translation');
+
+        $rootNode
+            ->children()
+                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+            ->end()
+        ;
 
         $this->addMappingDefaults($rootNode);
 
