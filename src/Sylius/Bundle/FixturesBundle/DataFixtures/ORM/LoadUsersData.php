@@ -31,7 +31,7 @@ class LoadUsersData extends DataFixture
             'sylius@example.com',
             'sylius',
             true,
-            array('ROLE_SYLIUS_ADMIN', 'ROLE_API')
+            array('ROLE_SYLIUS_ADMIN')
         );
 
         $manager->persist($user);
