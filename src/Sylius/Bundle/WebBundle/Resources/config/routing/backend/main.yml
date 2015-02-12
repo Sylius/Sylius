@@ -136,6 +136,10 @@ sylius_backend_contact_request:
     resource: @SyliusWebBundle/Resources/config/routing/backend/contact_request.yml
     prefix: /contact-requests
 
+sylius_backend_channel:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/channel.yml
+    prefix: /channels
+
 sylius_backend_settings:
     resource: @SyliusWebBundle/Resources/config/routing/backend/settings.yml
     prefix: /settings

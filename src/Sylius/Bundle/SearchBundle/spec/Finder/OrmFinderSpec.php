@@ -21,6 +21,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 
 /**
@@ -33,7 +34,8 @@ class OrmFinderSpec extends ObjectBehavior
         $config,
         $productRepository,
         EntityManager $entityManager,
-        QueryLoggerInterface $queryLogger
+        QueryLoggerInterface $queryLogger,
+        ChannelContextInterface $channelContext
     )
     {
         $this->beConstructedWith(
@@ -41,7 +43,8 @@ class OrmFinderSpec extends ObjectBehavior
             (array)$config,
             $productRepository,
             $entityManager,
-            $queryLogger
+            $queryLogger,
+            $channelContext
         );
     }
 

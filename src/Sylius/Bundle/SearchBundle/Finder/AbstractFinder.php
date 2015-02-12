@@ -15,6 +15,7 @@ use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 abstract class AbstractFinder implements FinderInterface
 {
@@ -67,6 +68,11 @@ abstract class AbstractFinder implements FinderInterface
      * @var string[]
      */
     protected $targetTypes = array();
+
+    /**
+     * @var ChannelContextInterface
+     */
+    protected $channelContext;
 
     /**
      * @return Pagerfanta

@@ -56,36 +56,50 @@ class LoadMetadataSubscriber implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['attribute_value']['model'] !== $metadata->getName()) {
-                continue;
+            if ($class['attribute_value']['model'] === $metadata->getName()) {
+
+                $subjectMapping = array(
+                    'fieldName' => 'subject',
+                    'targetEntity' => $class['subject'],
+                    'inversedBy' => 'attributes',
+                    'joinColumns' => array(array(
+                        'name' => $subject . '_id',
+                        'referencedColumnName' => 'id',
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE'
+                    ))
+                );
+
+                $this->mapManyToOne($metadata, $subjectMapping);
+
+                $attributeMapping = array(
+                    'fieldName' => 'attribute',
+                    'targetEntity' => $class['attribute']['model'],
+                    'inversedBy' => 'values',
+                    'joinColumns' => array(array(
+                        'name' => 'attribute_id',
+                        'referencedColumnName' => 'id',
+                        'nullable' => false,
+                        'onDelete' => 'CASCADE'
+                    ))
+                );
+
+                $this->mapManyToOne($metadata, $attributeMapping);
             }
 
-            $subjectMapping = array(
-                'fieldName'     => 'subject',
-                'targetEntity'  => $class['subject'],
-                'inversedBy'    => 'attributes',
-                'joinColumns'   => array(array(
-                    'name'                 => $subject.'_id',
-                    'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
-            );
+            if ($class['attribute']['model'] === $metadata->getName()) {
+                $valuesMapping = array(
+                    'fieldName' => 'values',
+                    'targetEntity' => $class['attribute_value']['model'],
+                    'mappedBy' => 'attribute',
+                    'cascade' => array(
+                        'remove'
+                    )
+                );
 
-            $this->mapManyToOne($metadata, $subjectMapping);
 
-            $attributeMapping = array(
-                'fieldName'     => 'attribute',
-                'targetEntity'  => $class['attribute']['model'],
-                'joinColumns'   => array(array(
-                    'name'                 => 'attribute_id',
-                    'referencedColumnName' => 'id',
-                    'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
-                ))
-            );
-
-            $this->mapManyToOne($metadata, $attributeMapping);
+                $metadata->mapOneToMany($valuesMapping);
+            }
         }
     }
 

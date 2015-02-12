@@ -55,6 +55,10 @@ class OrderFilterType extends AbstractType
                     'placeholder' => 'sylius.form.order_filter.created_at_to'
                 )
             ))
+            ->add('channel', 'sylius_channel_choice', array(
+                'required'    => false,
+                'empty_value' => 'sylius.form.order_filter.channel'
+            ))
             ->add('paymentState', 'choice', array(
                 'required'    => false,
                 'label'       => 'sylius.form.order_filter.payment_state',

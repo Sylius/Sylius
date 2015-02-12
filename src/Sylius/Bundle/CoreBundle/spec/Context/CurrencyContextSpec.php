@@ -13,8 +13,12 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Storage\StorageInterface;
@@ -28,12 +32,13 @@ class CurrencyContextSpec extends ObjectBehavior
         SecurityContextInterface $securityContext,
         SettingsManagerInterface $settingsManager,
         ObjectManager $userManager,
-        Settings $settings
+        Settings $settings,
+        ChannelContextInterface $channelContext
     ) {
         $settingsManager->loadSettings('general')->willReturn($settings);
         $settings->get('currency')->willReturn('EUR');
 
-        $this->beConstructedWith($storage, $securityContext, $settingsManager, $userManager);
+        $this->beConstructedWith($storage, $securityContext, $settingsManager, $userManager, $channelContext);
     }
 
     function it_is_initializable()
@@ -54,13 +59,18 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_gets_currency_from_session_if_there_is_no_user(
         TokenInterface $token,
         $securityContext,
-        $storage
+        $storage,
+        ChannelInterface $channel,
+        $channelContext
     ) {
         $securityContext->getToken()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $token->getUser()->willReturn(null);
 
-        $storage->getData(CurrencyContextInterface::STORAGE_KEY, 'EUR')->willReturn('RSD');
+        $channel->getCode()->willReturn("WEB");
+        $channelContext->getChannel()->willReturn($channel);
+
+        $storage->getData(sprintf(CurrencyContext::STORAGE_KEY, "WEB"), 'EUR')->willReturn('RSD');
 
         $this->getCurrency()->shouldReturn('RSD');
     }
@@ -82,13 +92,18 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_sets_currency_to_session_if_there_is_no_user(
         TokenInterface $token,
         $securityContext,
-        $storage
+        $storage,
+        ChannelInterface $channel,
+        $channelContext
     ) {
         $securityContext->getToken()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $token->getUser()->willReturn(null);
 
-        $storage->setData(CurrencyContextInterface::STORAGE_KEY, 'PLN')->shouldBeCalled();
+        $channel->getCode()->willReturn("WEB");
+        $channelContext->getChannel()->willReturn($channel);
+
+        $storage->setData(sprintf(CurrencyContext::STORAGE_KEY, "WEB"), 'PLN')->shouldBeCalled();
 
         $this->setCurrency('PLN');
     }
@@ -96,11 +111,16 @@ class CurrencyContextSpec extends ObjectBehavior
     function it_sets_currency_to_user_if_authenticated(
         UserInterface $user,
         TokenInterface $token,
-        $securityContext
+        $securityContext,
+        ChannelInterface $channel,
+        $channelContext
     ) {
         $securityContext->getToken()->willReturn($token);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $token->getUser()->willReturn($user);
+
+        $channel->getCode()->willReturn("WEB");
+        $channelContext->getChannel()->willReturn($channel);
 
         $user->setCurrency('PLN')->shouldBeCalled();
 

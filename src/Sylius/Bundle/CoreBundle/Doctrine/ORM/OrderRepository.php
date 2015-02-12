@@ -165,6 +165,12 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
                 ->setParameter('paymentState', $criteria['paymentState'])
             ;
         }
+        if (!empty($criteria['channel'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.channel', ':channel'))
+                ->setParameter('channel', $criteria['channel'])
+            ;
+        }
 
         if (empty($sorting)) {
             if (!is_array($sorting)) {
@@ -234,6 +240,12 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             $queryBuilder
                 ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
+            ;
+        }
+        if (!empty($criteria['channel'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->eq('o.channel', ':channel'))
+                ->setParameter('channel', $criteria['channel'])
             ;
         }
 

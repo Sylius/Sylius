@@ -20,6 +20,8 @@ Feature: Checkout starting
             | PHP Top       | 5.99  |               | PHP T-Shirts |                    |
           And product "Super T-Shirt" is available in all variations
           And there is default currency configured
+          And there is default channel configured
+          And all products assigned to "DEFAULT-WEB" channel
 
     Scenario: There is no checkout for empty cart
         Given I am on the store homepage

@@ -8,6 +8,7 @@ Feature: Managing locales
         Given  there are following currencies configured:
             | code | exchange rate | enabled |
             | EUR  | 1.00000       | yes     |
+        And there is default channel configured
         And there are following locales configured:
             | code  | activated |
             | de_DE | yes       |

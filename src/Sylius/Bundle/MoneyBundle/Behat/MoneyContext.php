@@ -29,6 +29,7 @@ class MoneyContext extends DefaultContext
         }
 
         $manager->flush();
+        $manager->clear();
 
         foreach ($table->getHash() as $data) {
             $this->thereIsCurrency($data['code'], $data['exchange rate'], 'yes' === $data['enabled'], false);

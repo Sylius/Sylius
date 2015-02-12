@@ -12,6 +12,7 @@
         <tr>
             <th></th>
             <th>{{ sylius_resource_sort('createdAt', 'sylius.order.created_at'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('channel', 'sylius.order.channel'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('number', 'sylius.order.number'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('paymentState', 'sylius.order.payment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th>{{ sylius_resource_sort('shippingState', 'sylius.order.shipment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
@@ -25,6 +26,9 @@
         <tr id="{{ order.id }}" {% if order.deleted %} class="danger"{% endif %}>
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
             <td>{{ order.createdAt|date }}</td>
+            <td>
+                <span {%- if order.channel.color -%} style="color: {{ order.channel.color }};"{%- endif -%}>{{ order.channel.code }}</span>
+            </td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">
                     <strong>#{{ order.number }}</strong>

@@ -15,6 +15,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -60,6 +61,11 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $currencyHelper;
 
     /**
+     * @var ChannelContextInterface
+     */
+    protected $channelContext;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface          $factory
@@ -79,7 +85,8 @@ class FrontendMenuBuilder extends MenuBuilder
         CurrencyProviderInterface $currencyProvider,
         RepositoryInterface       $taxonomyRepository,
         CartProviderInterface     $cartProvider,
-        CurrencyHelper            $currencyHelper
+        CurrencyHelper            $currencyHelper,
+        ChannelContextInterface   $channelContext
     )
     {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
@@ -88,6 +95,7 @@ class FrontendMenuBuilder extends MenuBuilder
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->currencyHelper = $currencyHelper;
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -224,7 +232,7 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes'    => array('class' => 'nav-header'),
         );
 
-        $taxonomies = $this->taxonomyRepository->findAll();
+        $taxonomies = $this->channelContext->getChannel()->getTaxonomies();
 
         foreach ($taxonomies as $taxonomy) {
             $child = $menu->addChild($taxonomy->getName(), $childOptions);

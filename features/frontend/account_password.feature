@@ -6,6 +6,7 @@ Feature: User account password change
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And I am logged in user
           And I am on my account homepage
 

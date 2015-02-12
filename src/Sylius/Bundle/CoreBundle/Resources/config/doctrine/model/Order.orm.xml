@@ -15,6 +15,10 @@
         <field type="string" name="paymentState" column="payment_state" />
         <field type="string" name="shippingState" column="shipping_state" />
 
+        <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <many-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
             <cascade>
                 <cascade-persist/>

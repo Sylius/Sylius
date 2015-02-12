@@ -202,6 +202,8 @@ sylius:
             index: Taxonomies
         email:
             index: Emails
+        channel:
+            index: Channels
         update: Edit
         user:
             index: Users
@@ -448,6 +450,7 @@ sylius:
         inventory_tracking: Inventory tracking
         items_total: Items total
         items: Items
+        channel: Channel
         manage: Manage orders
         no_items: This order does not contain any items
         no_results: You have no new orders
@@ -555,6 +558,21 @@ sylius:
         update: Edit
         update_header: Editing shipment
         updated_at: Last update
+    channel:
+        create: Add channel
+        created_at: Created at
+        code: Code
+        enabled: Enabled
+        id: ID
+        index_header: Channels
+        manage: Manage channels
+        create_header: Add channel
+        name: Name
+        url: Url
+        no_results: There are no channels configured.
+        update: Edit
+        update_header: Editing channel
+        updated_at: Last update
     order_item:
         product: Item
         quantity: Qty
@@ -573,6 +591,7 @@ sylius:
         update_header: Last update
     password: Password
     payment:
+        order: Order
         amount: Amount
         create: Create payment
         create_header: New payment
@@ -650,6 +669,8 @@ sylius:
             options: Options
             product: Product
             attributes: Attributes
+            channels: Channels
+            pricing: Pricing
         tax_category: Tax category
         unavailable: Unavailable
         update_header: Editing product
@@ -742,6 +763,7 @@ sylius:
     shipment_category:
         manage: Manage shipping categories
     shipping_address: Shipping address
+    billing_address: Bill to
     shipping_category:
         create: Create shipping category
         create_header: New shipping category

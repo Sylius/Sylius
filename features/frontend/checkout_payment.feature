@@ -6,6 +6,7 @@ Feature: Checkout Payment
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -25,6 +26,10 @@ Feature: Checkout Payment
             | Credit Card | stripe     | yes     |
             | PayPal      | paypal     | yes     |
             | PayPal PRO  | paypal_pro | no      |
+          And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy | payment                           | shipping    |
+            | Category | PayPal, PayPal PRO, Credit Card   | DHL Express |
           And I am logged in user
           And I added product "PHP Top" to cart
           And I go to the checkout start page

@@ -9,6 +9,7 @@ Feature: Sign in to the store
             | email       | password | enabled |
             | bar@foo.com | foo      | yes     |
         And there is default currency configured
+        And there is default channel configured
 
     Scenario: Log in with username and password
         Given I am on the store homepage

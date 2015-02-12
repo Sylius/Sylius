@@ -9,6 +9,7 @@ Feature: User registration
             | email       | password |
             | bar@bar.com | foo      |
         And there is default currency configured
+        And there is default channel configured
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage

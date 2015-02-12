@@ -42,6 +42,12 @@ class ShipmentRepository extends EntityRepository
                 ->setParameter('number', $criteria['number'])
             ;
         }
+        if (!empty($criteria['channel'])) {
+            $queryBuilder
+                ->andWhere('shipmentOrder.channel = :channel')
+                ->setParameter('channel', $criteria['channel'])
+            ;
+        }
         if (!empty($criteria['shippingAddress'])) {
             $queryBuilder
                 ->andWhere('address.lastName LIKE :shippingAddress')

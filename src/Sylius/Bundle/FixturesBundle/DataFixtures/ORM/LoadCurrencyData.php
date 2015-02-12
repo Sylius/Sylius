@@ -41,6 +41,8 @@ class LoadCurrencyData extends DataFixture
             $currency->setExchangeRate($rate);
             $currency->setEnabled(true);
 
+            $this->setReference('Sylius.Currency.'.$code, $currency);
+
             $manager->persist($currency);
         }
 

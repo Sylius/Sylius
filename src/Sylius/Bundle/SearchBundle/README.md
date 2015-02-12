@@ -121,6 +121,9 @@ fos_elastica:
                          color: ~
                          price:
                             type: integer
+                         channels:
+                            type: string
+                            index: not_analyzed
                          taxons:
                             type: string
                             index: not_analyzed

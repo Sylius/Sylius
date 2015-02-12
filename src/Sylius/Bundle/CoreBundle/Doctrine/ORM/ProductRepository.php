@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
@@ -41,12 +43,31 @@ class ProductRepository extends BaseProductRepository
             ->setParameter('taxon', $taxon)
         ;
 
-        foreach ($criteria as $attributeName => $value) {
-            $queryBuilder
-                ->andWhere('product.' . $attributeName . ' IN (:' . $attributeName . ')')
-                ->setParameter($attributeName, $value)
-            ;
-        }
+        $this->applyCriteria($queryBuilder, $criteria);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
+     * Create paginator for products categorized
+     * under given taxon.
+     *
+     * @param TaxonInterface $taxon
+     *
+     * @return PagerfantaInterface
+     */
+    public function createByTaxonAndChannelPaginator(TaxonInterface $taxon, ChannelInterface $channel)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('product.taxons', 'taxon')
+            ->innerJoin('product.channels', 'channel')
+            ->andWhere('taxon = :taxon')
+            ->andWhere('channel = :channel')
+            ->setParameter('channel', $channel)
+            ->setParameter('taxon', $taxon)
+        ;
 
         return $this->getPaginator($queryBuilder);
     }
@@ -136,5 +157,19 @@ class ProductRepository extends BaseProductRepository
     public function findLatest($limit = 10)
     {
         return $this->findBy(array(), array('createdAt' => 'desc'), $limit);
+    }
+
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    {
+        if (isset($criteria['channels'])) {
+            $queryBuilder
+                ->innerJoin('product.channels', 'channel')
+                ->andWhere('channel = :channel')
+                ->setParameter('channel', $criteria['channels'])
+            ;
+            unset($criteria['channels']);
+        }
+
+        parent::applyCriteria($queryBuilder, $criteria);
     }
 }

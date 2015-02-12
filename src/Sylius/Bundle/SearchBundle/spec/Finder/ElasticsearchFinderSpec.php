@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 
 /**
@@ -27,7 +28,8 @@ class ElasticsearchFinderSpec extends ObjectBehavior
         $config,
         $productRepository,
         $container,
-        QueryLoggerInterface $queryLogger
+        QueryLoggerInterface $queryLogger,
+        ChannelContextInterface $channelContext
     )
     {
         $this->beConstructedWith(
@@ -35,7 +37,8 @@ class ElasticsearchFinderSpec extends ObjectBehavior
             $config,
             $productRepository,
             $container,
-            $queryLogger
+            $queryLogger,
+            $channelContext
         );
     }
 

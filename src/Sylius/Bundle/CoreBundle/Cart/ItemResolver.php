@@ -16,6 +16,7 @@ use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
 use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -74,6 +75,11 @@ class ItemResolver implements ItemResolverInterface
     protected $restrictedZoneChecker;
 
     /**
+     * @var ChannelContextInterface
+     */
+    protected $channelContext;
+
+    /**
      * Constructor.
      *
      * @param CartProviderInterface          $cartProvider
@@ -82,6 +88,7 @@ class ItemResolver implements ItemResolverInterface
      * @param AvailabilityCheckerInterface   $availabilityChecker
      * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      * @param DelegatingCalculatorInterface  $priceCalculator
+     * @param ChannelContextInterface        $channelContext
      */
     public function __construct(
         CartProviderInterface          $cartProvider,
@@ -89,7 +96,8 @@ class ItemResolver implements ItemResolverInterface
         FormFactoryInterface           $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
-        DelegatingCalculatorInterface  $priceCalculator
+        DelegatingCalculatorInterface  $priceCalculator,
+        ChannelContextInterface        $channelContext
     )
     {
         $this->cartProvider = $cartProvider;
@@ -98,6 +106,7 @@ class ItemResolver implements ItemResolverInterface
         $this->availabilityChecker = $availabilityChecker;
         $this->restrictedZoneChecker = $restrictedZoneChecker;
         $this->priceCalculator = $priceCalculator;
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -107,7 +116,8 @@ class ItemResolver implements ItemResolverInterface
     {
         $id = $this->resolveItemIdentifier($data);
 
-        if (!$product = $this->productRepository->find($id)) {
+        $channel = $this->channelContext->getChannel();
+        if (!$product = $this->productRepository->findOneBy(array('id' => $id, 'channels' => $channel))) {
             throw new ItemResolvingException('Requested product was not found.');
         }
 

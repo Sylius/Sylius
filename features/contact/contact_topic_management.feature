@@ -6,6 +6,7 @@ Feature: Contact topics management
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following contact topics:
             | title               |
             | Order return        |
