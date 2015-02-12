@@ -10,6 +10,7 @@
 * :doc:`/bundles/SyliusOrderBundle/index`
 * :doc:`/bundles/SyliusProductBundle/index`
 * :doc:`/bundles/SyliusPromotionBundle/index`
+* :doc:`/bundles/SyliusReportBundle/index`
 * :doc:`/bundles/SyliusResourceBundle/index`
 * :doc:`/bundles/SyliusSettingsBundle/index`
 * :doc:`/bundles/SyliusShippingBundle/index`
