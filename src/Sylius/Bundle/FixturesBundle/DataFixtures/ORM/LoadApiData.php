@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use OAuth2\OAuth2;
 use Sylius\Bundle\ApiBundle\Model\Client;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
@@ -29,6 +30,17 @@ class LoadApiData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        // create user with API role
+        $user = $this->createUser(
+            'api@example.com',
+            'api',
+            true,
+            array('ROLE_API')
+        );
+
+        $manager->persist($user);
+        $manager->flush();
+
         $clientManager = $this->getClientManager();
 
         /** @var Client $client */
@@ -45,6 +57,31 @@ class LoadApiData extends DataFixture
             )
         );
         $clientManager->updateClient($client);
+    }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @param bool   $enabled
+     * @param array  $roles
+     * @param string $currency
+     *
+     * @return UserInterface
+     */
+    protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
+    {
+        /* @var $user UserInterface */
+        $user = $this->getUserRepository()->createNew();
+        $user->setFirstname($this->faker->firstName);
+        $user->setLastname($this->faker->lastName);
+        $user->setUsername($email);
+        $user->setEmail($email);
+        $user->setPlainPassword($password);
+        $user->setRoles($roles);
+        $user->setCurrency($currency);
+        $user->setEnabled($enabled);
+
+        return $user;
     }
 
     /**
