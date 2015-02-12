@@ -58,11 +58,17 @@ abstract class Job implements JobInterface
     protected $filePath;
 
     /**
+     * @var array
+     */
+    protected $metadata;
+
+    /**
      * Job status
      */
-    const RUNNING   = 'running';
     const COMPLETED = 'completed';
+    const ERROR     = 'completed with error';
     const FAILED    = 'failed';
+    const RUNNING   = 'running';
 
     /**
      * Gets the value of id.
@@ -248,5 +254,29 @@ abstract class Job implements JobInterface
     public function equals(JobInterface $job)
     {
         return $this === $job;
+    }
+
+    /**
+     * Gets the value of metadata.
+     *
+     * @return array
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * Sets the value of metadata.
+     *
+     * @param array $metadata the metadata
+     *
+     * @return self
+     */
+    public function setMetadata(array $metadata)
+    {
+        $this->metadata = $metadata;
+
+        return $this;
     }
 }

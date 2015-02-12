@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
-use Sylius\Component\ImportExport\Reader\ReaderInterface;
 use Monolog\Logger;
+use Sylius\Component\ImportExport\Model\JobInterface;
+use Sylius\Component\ImportExport\Reader\ReaderInterface;
 
 /**
  * Export reader.
@@ -25,6 +26,11 @@ abstract class AbstractDoctrineReader
     private $running = false;
     private $configuration;
     private $logger;
+    
+    /**
+     * @var int
+     */
+    private $resultCode = 0;
 
     /**
      * Batch size
@@ -35,12 +41,12 @@ abstract class AbstractDoctrineReader
 
     public function read()
     {
-
-        if (!$this->running) {
+        if (!$this->running)
+        {
             $this->running = true;
-            $this->results = $this->getQuery()->execute();
-            $this->results = new \ArrayIterator($this->results);
-            $batchSize = $this->configuration['batch_size'];
+            $this->results = new \ArrayIterator($this->getQuery()->execute());
+            $this->batchSize = $this->configuration['batch_size'];
+            $this->metadatas['row'] = 0;
         }
 
         $results = array();
@@ -50,6 +56,7 @@ abstract class AbstractDoctrineReader
                 $this->results->next();
             }
 
+            
             $result = $this->process($result);
             $results[] = $result;
         }
@@ -66,4 +73,20 @@ abstract class AbstractDoctrineReader
     }
 
     public abstract function process($result);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function finalize(JobInterface $job)
+    {
+        $job->addMetadata('result_code',$this->resultCode);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResultCode()
+    {
+        return $this->resultCode;
+    }
 }

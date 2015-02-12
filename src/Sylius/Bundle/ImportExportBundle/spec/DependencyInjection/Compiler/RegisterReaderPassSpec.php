@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class RegisterReaderPassSpec extends ObjectBehavior
+class RegisterReadersPassSpec extends ObjectBehavior
 {
     public function it_should_implement_compiler_pass_interface()
     {

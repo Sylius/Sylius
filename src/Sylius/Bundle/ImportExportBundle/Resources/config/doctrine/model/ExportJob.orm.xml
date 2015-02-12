@@ -35,6 +35,7 @@
         </many-to-one>
 
         <field name="filePath" column="file_path" type="string" nullable="true" />
+        <field name="metadata" column="metadata" type="array" nullable="true" />
     </mapped-superclass>
     
 </doctrine-mapping>

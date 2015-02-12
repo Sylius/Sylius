@@ -24,9 +24,9 @@ Sylius\Component\ImportExport\Model\ImportJob:
         profile:
             expose: true
             type: ProfileInterface
-        filePath:
+        metadata:
             expose: true
-            type: string
+            type: array
     relations:
         - rel: self
           href:

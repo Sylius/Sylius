@@ -78,6 +78,29 @@ class ImportExportContext extends DefaultContext
 
         $manager->flush();
     }
+    
+    public function thereIsExportJob($status, $startTime, $endTime, $createdAt, $updatedAt, $exportProfileCode, $flush = true)
+    {
+        $repository = $this->getRepository('export_job');
+        $exportJob = $repository->createNew();
+        $exportJob->setStatus($status);
+        $exportJob->setStartTime(new \DateTime($startTime));
+        $exportJob->setEndTime(new \DateTime($endTime));
+        $exportJob->setCreatedAt(new \DateTime($createdAt));
+        $exportJob->setUpdatedAt(new \DateTime($updatedAt));
+        
+        $exportProfile = $this->getRepository('export_profile')->findOneByCode($exportProfileCode);
+        $exportJob->setProfile($exportProfile);
+
+        $manager = $this->getEntityManager();
+        $manager->persist($exportJob);
+
+        if ($flush) {
+            $manager->flush();
+        }
+        
+        return $exportJob;
+    }
 
     private function thereIsImportProfile($name, $description, $code, $reader, $readerConfiguration, $writer, $writerConfiguration, $flush = true)
     {

@@ -30,6 +30,23 @@ interface WriterInterface
     public function setConfiguration(array $configuration, Logger $logger);
 
     /**
+     * Finalize job, add meta data
+     * 
+     * @param JobInterface $job
+     */
+    public function finalize(JobInterface $job);
+
+    /**
+     * Return code of error if any
+     * = 0 - no error
+     * > 0 - exception
+     * < 0 - fatal error
+     * 
+     * @return int
+     */
+    public function getResultCode();
+
+    /**
     *
     * @return Type of data
     */

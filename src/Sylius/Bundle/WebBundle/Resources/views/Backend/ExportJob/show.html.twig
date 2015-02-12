@@ -6,6 +6,8 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_export_profile_index') }}">{{ 'sylius.breadcrumb.export_profile.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_export_profile_show', { id: export_job.profile.id } ) }}">{{ export_job.profile.id }}</a></li>
     <li><a href="{{ path('sylius_backend_export_job_index', { profileId: export_job.profile.id  }) }}">{{ 'sylius.export_job.index_header'|trans }}</a></li>
     <li>{{ export_job.id }}</a></li>
 </ol>
@@ -67,6 +69,14 @@
                                 'export-job-file',
                                 'file'
                             ) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.export_job.metadata'|trans }}</td>
+                        <td>
+                            {% for key,item in export_job.metadata  %}
+                                {{ key }} => {{ item }}<br />
+                            {% endfor %}
                         </td>
                     </tr>
                     {% endif %}

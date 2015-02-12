@@ -5,6 +5,8 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_import_profile_index') }}">{{ 'sylius.breadcrumb.import_profile.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_import_profile_show', { id: import_job.profile.id } ) }}">{{ import_job.profile.id }}</a></li>
     <li><a href="{{ path('sylius_backend_import_job_index', { profileId: import_job.profile.id  }) }}">{{ 'sylius.import_job.index_header'|trans }}</a></li>
     <li>{{ import_job.id }}</a></li>
 </ol>
@@ -56,6 +58,14 @@
                     <tr>
                         <td>{{ 'sylius.import_job.updated_at'|trans }}</td>
                         <td>{{ import_job.updatedAt|date }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'sylius.import_job.metadata'|trans }}</td>
+                        <td>
+                            {% for key,item in import_job.metadata  %}
+                                {{ key }} => {{ item }} <br />
+                            {% endfor %}
+                        </td>
                     </tr>
                 </tbody>
             </table>

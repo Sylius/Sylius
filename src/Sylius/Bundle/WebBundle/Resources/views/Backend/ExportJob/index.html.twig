@@ -7,6 +7,8 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_export_profile_index') }}">{{ 'sylius.breadcrumb.export_profile.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_export_profile_show', { id: app.request.get('profileId') } ) }}">{{ app.request.get('profileId') }}</a></li>
     <li>{{ 'sylius.breadcrumb.export_job.index'|trans }}</li>
 </ol>
 {% endblock %}

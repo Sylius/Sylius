@@ -11,11 +11,12 @@
 
 namespace Sylius\Component\ImportExport;
 
-use Sylius\Component\ImportExport\Model\ExportProfileInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Monolog\Logger;
+use Sylius\Component\ImportExport\Model\ExportProfileInterface;
+use Sylius\Component\ImportExport\Model\Job;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -47,15 +48,47 @@ class Exporter extends JobRunner implements ExporterInterface
         $reader = $this->readerRegistry->get($exportProfile->getReader());
         $reader->setConfiguration($exportProfile->getReaderConfiguration(), $this->logger);
 
+        $writerConfiguration = $exportProfile->getWriterConfiguration();
         $writer = $this->writerRegistry->get($exportProfile->getWriter());
+
         $writer->setConfiguration($exportProfile->getWriterConfiguration(), $this->logger);
 
         while (null !== ($readLine = $reader->read())) {
             $writer->write($readLine);
         }
-        $writer->finalize($exportJob);
 
-        $this->endJob($exportJob, Job::COMPLETED);
+        $writer->finalize($exportJob);
+        $reader->finalize($exportJob);
+
+        $jobStatus = Job::COMPLETED;
+
+        if ($reader->getResultCode() !== 0 || $writer->getResultCode() !== 0) {
+            $jobStatus = ($reader->getResultCode() < 0 || $writer->getResultCode() < 0) ? Job::FAILED : Job::ERROR;
+        }
+
+        $this->endJob($exportJob, $jobStatus);
+    }
+
+    private function validate($exportJob, $exportProfile)
+    {
+        if (null === $exportProfile->getReader()) {
+            $this->generateErrorAction($exportJob, $exportProfile->getId(), 'read');
+        }
+        if (null === $exportProfile->getWriter()) {
+            $this->generateErrorAction($exportJob, $exportProfile->getId(), 'write');
+        }
+    }
+
+    private function generateErrorAction($exportJob, $exportProfileId, $type)
+    {
+        $this->endJob($exportJob, Job::FAILED);
+        $this->logger->addError(sprintf('ExportProfile: %d. %s', $exportProfileId, $this->generateErrorMessage($type)));
+        throw new \InvalidArgumentException($this->generateErrorMessage($type));
+    }
+
+    private function generateErrorMessage($type)
+    {
+        return sprintf('Cannot %s data with ExportProfile instance without %s defined.', $type, ($type == 'read') ? 'reader' : 'writer');
     }
 
     private function validate($exportJob, $exportProfile)

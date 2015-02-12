@@ -10,6 +10,10 @@ sylius_backend_import_job_index:
             template: SyliusWebBundle:Backend/ImportJob:index.html.twig
             criteria:
                 profile: $profileId
+            paginate: 25
+            sortable: true
+            sorting:
+                id: desc
 
 sylius_backend_import_job_show:
     path: /{id}
