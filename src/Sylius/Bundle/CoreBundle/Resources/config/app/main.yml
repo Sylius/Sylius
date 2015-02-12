@@ -81,7 +81,6 @@ fos_user:
             type: sylius_user_registration
 
 fos_rest:
-    disable_csrf_role: ROLE_API
     view:
         formats:
             json: true
