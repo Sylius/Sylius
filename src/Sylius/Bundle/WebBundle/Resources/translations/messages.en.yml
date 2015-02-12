@@ -184,6 +184,8 @@ sylius:
             index: archetypes
         redirect_route:
             index: Redirect routes
+        report:
+            index: Reports
         route:
             index: Routes
         sales: Sales
@@ -734,6 +736,23 @@ sylius:
     province:
         provinces: Provinces
     remember_me: Remember me?
+    report:
+        create: Create report
+        create_header: Create new report
+        no_results: There are no reports created.
+        show_header: Report details
+        details: details
+        id: id
+        name: Name
+        code: Code
+        description: Description
+        manage: Manage
+        update_header: Edit report
+        renderer: Renderer type
+        data_fetcher: Data fetcher type
+        index_header: Reports
+        no_data: There is no data to display.
+        no_report: There is no report to display.
     save_changes: Save changes
     search: Search
     settings:

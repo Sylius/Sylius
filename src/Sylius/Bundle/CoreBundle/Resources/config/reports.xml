@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+    <parameters>
+        <parameter key="sylius.report.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\DataFetcher\NumberOfOrdersDataFetcher</parameter>
+        <parameter key="sylius.report.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\DataFetcher\SalesTotalDataFetcher</parameter>
+        <parameter key="sylius.report.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\DataFetcher\UserRegistrationDataFetcher</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.report.data_fetcher.user_registration" class="%sylius.report.data_fetcher.user_registration.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <tag name="sylius.report.data_fetcher" fetcher="user_registration" label="User registration" />
+        </service>
+
+        <service id="sylius.report.data_fetcher.sales_total" class="%sylius.report.data_fetcher.sales_total.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.report.data_fetcher" fetcher="sales_total" label="Sales Total" />
+        </service>
+
+        <service id="sylius.report.data_fetcher.number_of_orders" class="%sylius.report.data_fetcher.number_of_orders.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.report.data_fetcher" fetcher="number_of_orders" label="Number of orders" />
+        </service>
+    </services>
+
+</container>

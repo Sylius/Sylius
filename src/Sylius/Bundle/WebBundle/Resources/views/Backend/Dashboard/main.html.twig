@@ -22,27 +22,7 @@
         <br>
     </div>
     <div class="col-md-6">
-        <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <th colspan="2">{{ 'sylius.backend.statistics.header'|trans }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ 'sylius.backend.statistics.sales_this_month'|trans }}</td>
-                    <td>{{ sales|sylius_price }} ({{ sales_confirmed|sylius_price }})</td>
-                </tr>
-                <tr>
-                    <td>{{ 'sylius.backend.statistics.orders_this_month'|trans }}</td>
-                    <td>{{ orders_count }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'sylius.backend.statistics.registrations_this_month'|trans }}</td>
-                    <td>{{ registrations_count }}</td>
-                </tr>
-            </tbody>
-        </table>
+        {{ render(controller('sylius.controller.report:embeddAction', {'report': 'ReportCode'})) }}
     </div>
 </div>
 

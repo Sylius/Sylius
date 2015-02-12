@@ -41,6 +41,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_payum',
         'sylius_product',
         'sylius_promotion',
+        'sylius_report',
         'sylius_search',
         'sylius_sequence',
         'sylius_settings',
@@ -58,7 +59,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'api_form',
         'templating',
         'twig',
-        'mailer',
+        'reports'
     );
 
     /**

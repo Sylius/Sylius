@@ -16,6 +16,7 @@ suites:
     Product          : { namespace: Sylius\Component\Product, psr4_prefix: Sylius\Component\Product , spec_path: src/Sylius/Component/Product }
     Promotion        : { namespace: Sylius\Component\Promotion, psr4_prefix: Sylius\Component\Promotion, spec_path: src/Sylius/Component/Promotion }
     Registry         : { namespace: Sylius\Component\Registry, psr4_prefix: Sylius\Component\Registry, spec_path: src/Sylius/Component/Registry }
+    Report           : { namespace: Sylius\Component\Report, psr4_prefix: Sylius\Component\Report , spec_path: src/Sylius/Component/Report }
     Resource         : { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource }
     Sequence         : { namespace: Sylius\Component\Sequence, psr4_prefix: Sylius\Component\Sequence, spec_path: src/Sylius/Component/Sequence }
     Settings         : { namespace: Sylius\Component\Settings, psr4_prefix: Sylius\Component\Settings, spec_path: src/Sylius/Component/Settings }
@@ -45,6 +46,7 @@ suites:
     ProductBundle    : { namespace: Sylius\Bundle\ProductBundle, psr4_prefix: Sylius\Bundle\ProductBundle, spec_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle  : { namespace: Sylius\Bundle\PromotionBundle, psr4_prefix: Sylius\Bundle\PromotionBundle, spec_path: src/Sylius/Bundle/PromotionBundle }
     ResourceBundle   : { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle , spec_path: src/Sylius/Bundle/ResourceBundle }
+    ReportBundle     : { namespace: Sylius\Bundle\ReportBundle, psr4_prefix: Sylius\Bundle\ReportBundle , spec_path: src/Sylius/Bundle/ReportBundle }
     SearchBundle     : { namespace: Sylius\Bundle\SearchBundle, psr4_prefix: Sylius\Bundle\SearchBundle, spec_path: src/Sylius/Bundle/SearchBundle }
     SequenceBundle   : { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle , spec_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle   : { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle , spec_path: src/Sylius/Bundle/SettingsBundle }

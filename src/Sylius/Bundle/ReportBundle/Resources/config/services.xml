@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+    <parameters>
+        <parameter key="sylius.registry.report.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+
+        <parameter key="sylius.form.type.renderer.chart.class">Sylius\Bundle\ReportBundle\Renderer\ChartRenderer</parameter>
+        <parameter key="sylius.form.type.renderer.table.class">Sylius\Bundle\ReportBundle\Renderer\TableRenderer</parameter>
+        <parameter key="sylius.form.type.renderer_choice.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\RendererChoiceType</parameter>
+        <parameter key="sylius.form.type.report.renderer.chart_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\ChartConfigurationType</parameter>
+        <parameter key="sylius.form.type.report.renderer.table_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\TableConfigurationType</parameter>
+        <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.registry.report.renderer" class="%sylius.registry.report.class%">
+            <argument>Sylius\Component\Report\Renderer\RendererInterface</argument>
+        </service>
+
+        <service id="sylius.report.renderer" class="%sylius.report.renderer.class%">
+            <argument type="service" id="sylius.registry.report.renderer" />
+        </service>
+
+        <service id="sylius.form.type.renderer_choice" class="%sylius.form.type.renderer_choice.class%">
+            <argument>%sylius.report.renderers%</argument>
+            <tag name="form.type" alias="sylius_renderer_choice" />
+        </service>
+
+        <service id="sylius.form.type.renderer.table" class="%sylius.form.type.renderer.table.class%">
+            <argument type="service" id="templating" />
+            <tag name="sylius.report.renderer" renderer="table" label="Table renderer" />
+        </service>
+        <service id="sylius.form.type.report.renderer.table_configuration" class="%sylius.form.type.report.renderer.table_configuration.class%">
+            <tag name="form.type" alias="sylius_renderer_table" />
+        </service>
+
+        <service id="sylius.form.type.renderer.chart" class="%sylius.form.type.renderer.chart.class%">
+            <argument type="service" id="templating" />
+            <tag name="sylius.report.renderer" renderer="chart" label="Chart renderer" />
+        </service>
+        <service id="sylius.form.type.report.renderer.chart_configuration" class="%sylius.form.type.report.renderer.chart_configuration.class%">
+            <tag name="form.type" alias="sylius_renderer_chart" />
+        </service>
+    </services>
+
+</container>

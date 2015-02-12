@@ -71,6 +71,7 @@ class LoadOrdersData extends DataFixture
                 $this->createPayment($order);
             }
 
+            $order->setCompletedAt($this->faker->dateTimeThisDecade);
             $this->setReference('Sylius.Order-'.$i, $order);
 
             $manager->persist($order);
