@@ -28,10 +28,10 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.3"
     },
     "require-dev": {
-        "phpspec/phpspec":         "~2.1",
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
         "psr-4": { "Sylius\\Component\\Report\\": "" }
