@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+namespace Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\CoreBundle\DataFetcher\SalesTotalDataFetcher;
+use Sylius\Bundle\CoreBundle\DataFetcher\NumberOfOrdersDataFetcher;
 
 /**
  * User based raport configuration form type.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SalesTotalType extends AbstractType
+class NumberOfOrdersType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -35,7 +35,7 @@ class SalesTotalType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => SalesTotalDataFetcher::getPeriodChoices(),
+                'choices'  => NumberOfOrdersDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
@@ -51,6 +51,6 @@ class SalesTotalType extends AbstractType
     */
     public function getName()
     {
-        return 'sylius_data_fetcher_sales_total';
+        return 'sylius_data_fetcher_number_of_orders';
     }
 }

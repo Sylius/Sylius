@@ -6,7 +6,7 @@ Feature: Reports
 
     Background:
         Given there are following reports configured:
-            | name           | description | code             | renderer | renderer configuration                                       | data fetcher      | data fetcher configuration                   |
+            | name           | description | code             | renderer | renderer_configuration                                       | data_fetcher      | data_fetcher_configuration                   |
             | TableReport    | Lorem ipsum | table_report     | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
             | BarChartReport | Lorem ipsum | bar_chart_report | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
         And there is default currency configured

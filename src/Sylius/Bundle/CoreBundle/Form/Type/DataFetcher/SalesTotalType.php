@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+namespace Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\CoreBundle\DataFetcher\UserRegistrationDataFetcher;
+use Sylius\Bundle\CoreBundle\DataFetcher\SalesTotalDataFetcher;
 
 /**
  * User based raport configuration form type.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserRegistrationType extends AbstractType
+class SalesTotalType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -35,22 +35,22 @@ class UserRegistrationType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
+                'choices'  => SalesTotalDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
             ->add('empty_records', 'checkbox', array(
-                'label'    => 'sylius.form.report.user_registration.empty_records',
+                'label' => 'sylius.form.report.user_registration.empty_records',
                 'required' => false,
             ))
         ;
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function getName()
     {
-        return 'sylius_data_fetcher_user_registration';
+        return 'sylius_data_fetcher_sales_total';
     }
 }

@@ -31,7 +31,7 @@ class ReportContext extends DefaultContext
         $repository = $this->getRepository('report');
 
         foreach ($table->getHash() as $data) {
-            $this->thereIsReport($data['name'], $data['description'], $data["code"], $data['renderer'], $data["renderer configuration"], $data["data fetcher"], $data["data fetcher configuration"], false);
+            $this->thereIsReport($data['name'], $data['description'], $data["code"], $data['renderer'], $data["renderer_configuration"], $data["data_fetcher"], $data["data_fetcher_configuration"], false);
         }
 
         $manager->flush();

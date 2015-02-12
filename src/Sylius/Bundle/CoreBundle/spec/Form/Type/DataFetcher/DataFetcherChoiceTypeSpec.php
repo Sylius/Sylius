@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -29,7 +29,7 @@ class DataFetcherChoiceTypeSpec extends ObjectBehavior
     
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\DataFetcherChoiceType');
     }
 
     function it_extends_abstract_type()

@@ -181,11 +181,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     $configuration[$key] = (int) $value;
                     break;
 
-                case 'template':
-                    list($key, $value) = explode(':', $parameter, 2);
-                    $key = strtolower(trim(str_replace(' ', '_', $key)));
-                    break;
-
                 default:
                     $configuration[$key] = trim($value);
                     break;

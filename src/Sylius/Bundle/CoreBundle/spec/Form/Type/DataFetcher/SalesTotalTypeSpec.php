@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -18,11 +18,11 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class NumberOfOrdersTypeSpec extends ObjectBehavior
+class SalesTotalTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\NumberOfOrdersType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType');
     }
 
     function it_extends_abstract_type()
@@ -32,7 +32,7 @@ class NumberOfOrdersTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_data_fetcher_number_of_orders');
+        $this->getName()->shouldReturn('sylius_data_fetcher_sales_total');
     }
 
     function it_builds_form_with_proper_fields(FormBuilder $builder)

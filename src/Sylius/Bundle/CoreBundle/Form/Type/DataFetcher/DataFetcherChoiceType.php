@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+namespace Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

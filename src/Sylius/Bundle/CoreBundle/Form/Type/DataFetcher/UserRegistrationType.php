@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReportBundle\Form\Type\DataFetcher;
+namespace Sylius\Bundle\CoreBundle\Form\Type\DataFetcher;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\CoreBundle\DataFetcher\NumberOfOrdersDataFetcher;
+use Sylius\Bundle\CoreBundle\DataFetcher\UserRegistrationDataFetcher;
 
 /**
  * User based raport configuration form type.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class NumberOfOrdersType extends AbstractType
+class UserRegistrationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -35,22 +35,22 @@ class NumberOfOrdersType extends AbstractType
                 'label' => 'sylius.form.report.user_registration.end',
             ))
             ->add('period', 'choice', array(
-                'choices'  => NumberOfOrdersDataFetcher::getPeriodChoices(),
+                'choices'  => UserRegistrationDataFetcher::getPeriodChoices(),
                 'multiple' => false,
                 'label' => 'sylius.form.report.user_registration.period',
             ))
             ->add('empty_records', 'checkbox', array(
-                'label' => 'sylius.form.report.user_registration.empty_records',
+                'label'    => 'sylius.form.report.user_registration.empty_records',
                 'required' => false,
             ))
         ;
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_data_fetcher_number_of_orders';
+        return 'sylius_data_fetcher_user_registration';
     }
 }

@@ -25,12 +25,6 @@
         <parameter key="sylius.form.type.report.renderer.chart_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\ChartConfigurationType</parameter>
         <parameter key="sylius.form.type.report.renderer.table_configuration.class">Sylius\Bundle\ReportBundle\Form\Type\Renderer\TableConfigurationType</parameter>
         <parameter key="sylius.report.renderer.class">Sylius\Component\Report\Renderer\DelegatingRenderer</parameter>
-
-        <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
-        <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\ReportBundle\Form\Type\DataFetcher\DataFetcherChoiceType</parameter>
-        <parameter key="sylius.report.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
     </parameters>
 
     <services>
@@ -61,29 +55,6 @@
         </service>
         <service id="sylius.form.type.report.renderer.chart_configuration" class="%sylius.form.type.report.renderer.chart_configuration.class%">
             <tag name="form.type" alias="sylius_renderer_chart" />
-        </service>
-
-        <service id="sylius.registry.report.data_fetcher" class="%sylius.registry.report.class%">
-            <argument>Sylius\Component\Report\DataFetcher\DataFetcherInterface</argument>
-        </service>
-        <service id="sylius.report.data_fetcher" class="%sylius.report.data_fetcher.class%">
-            <argument type="service" id="sylius.registry.report.data_fetcher" />
-        </service>
-        <service id="sylius.form.type.data_fetcher_choice" class="%sylius.form.type.data_fetcher_choice.class%">
-            <argument>%sylius.report.data_fetchers%</argument>
-            <tag name="form.type" alias="sylius_data_fetcher_choice" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.sales_total" class="%sylius.form.type.data_fetcher.sales_total.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_sales_total" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
         </service>
     </services>
 
