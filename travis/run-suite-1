@@ -23,5 +23,6 @@ bin/behat --suite=homepage -fprogress || EXIT_STATUS=$?
 bin/behat --suite=inventory -fprogress || EXIT_STATUS=$?
 bin/behat --suite=localization -fprogress || EXIT_STATUS=$?
 bin/behat --suite=oauth -fprogress || EXIT_STATUS=$?
+bin/behat --suite=reports -fprogress || EXIT_STATUS=$?
 
 exit $EXIT_STATUS
