@@ -7,6 +7,7 @@ sylius_api_promotion_index:
     defaults:
         _controller: sylius.controller.promotion:indexAction
         _sylius:
+            paginate: $limit
             sortable: true
 
 sylius_api_promotion_create:

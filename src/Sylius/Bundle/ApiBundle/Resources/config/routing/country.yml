@@ -6,6 +6,9 @@ sylius_api_country_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.country:indexAction
+        _sylius:
+            paginate: $limit
+            sortable: true
 
 sylius_api_country_create:
     path: /

@@ -7,6 +7,7 @@ sylius_api_product_archetype_index:
     defaults:
         _controller: sylius.controller.product_archetype:indexAction
         _sylius:
+            paginate: $limit
             sortable: true
             sorting:
                 name: desc
