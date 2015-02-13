@@ -20,12 +20,11 @@ use Monolog\Logger;
  * Export reader.
  *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 abstract class AbstractDoctrineWriter implements WriterInterface
 {
-    private $results;
-    private $running = false;
-    private $configuration;
+    protected $configuration;
     private $em;
 
     /**
@@ -38,18 +37,29 @@ abstract class AbstractDoctrineWriter implements WriterInterface
     /**
      * @var int
      */
-    private $resultCode = 0;
+    protected $resultCode;
 
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
+        $this->metadatas['row'] = 0;
+        $this->resultCode = 0;
     }
 
     public function write(array $items)
     {
         foreach ($items as $item) {
-            $item = $this->process($item);
-            $this->em->persist($item);
+            try {
+                $item = $this->process($item);
+            } catch (Exception $e) {
+                $this->logger->addError('Error occured during processing item. Error message: '.$e->getMessage());
+                $this->resultCode = 1;
+                $item = null;
+            }
+            if (!is_null($item)) {
+                $this->em->persist($item);
+                $this->metadatas['row']++;
+            }
         }
 
         $this->em->flush();
@@ -58,7 +68,9 @@ abstract class AbstractDoctrineWriter implements WriterInterface
     public function setConfiguration(array $configuration, Logger $logger)
     {
         $this->configuration = $configuration;
-    }  
+
+        $this->logger = $logger;
+    }
 
     public abstract function process($result);
 

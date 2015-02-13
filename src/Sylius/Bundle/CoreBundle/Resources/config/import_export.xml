@@ -19,14 +19,27 @@
         <!-- Readers -->
         <parameter key="sylius.export.user_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\UserReader</parameter>
         <parameter key="sylius.export.product_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductReader</parameter>
+
+        <parameter key="sylius.export.product_archetype_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductArchetypeReader</parameter>
+        <parameter key="sylius.export.product_attribute_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductAttributeReader</parameter>
+        <parameter key="sylius.export.product_option_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\ProductOptionReader</parameter>
+        <parameter key="sylius.export.taxonomy_reader.class">Sylius\Bundle\CoreBundle\Export\Reader\ORM\TaxonomyReader</parameter>
+
+        <parameter key="sylius.form.type.reader.taxonomy_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\TaxonomyReaderType</parameter>
+        <parameter key="sylius.form.type.reader.user_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\UserReaderType</parameter>
+        <parameter key="sylius.form.type.reader.product_option_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ProductOptionType</parameter>
+        <parameter key="sylius.form.type.reader.product_archetype_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ProductArchetypeReaderType</parameter>
+        <parameter key="sylius.form.type.reader.product_attribute_type.class">Sylius\Bundle\ImportExportBundle\Form\Type\Reader\ProductAttributeType</parameter>
         <parameter key="sylius.form.type.reader.product_type.class">Sylius\Bundle\CoreBundle\Form\Type\Export\Reader\ProductReaderType</parameter>
-        <parameter key="sylius.form.type.reader.user_type.class">Sylius\Bundle\CoreBundle\Form\Type\Export\Reader\UserReaderType</parameter>
 
         <!-- Writers -->
         <parameter key="sylius.import.user_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\UserWriter</parameter>
         <parameter key="sylius.import.product_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductWriter</parameter>
-
-        <parameter key="sylius.form.type.writer.product_type.class">Sylius\Bundle\CoreBundle\Form\Type\Import\Writer\ProductWriterType</parameter>
+        <parameter key="sylius.import.user_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\UserWriter</parameter>
+        <parameter key="sylius.import.product_archetype_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductArchetypeWriter</parameter>
+        <parameter key="sylius.import.product_attribute_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductAttributeWriter</parameter>
+        <parameter key="sylius.import.product_option_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\ProductOptionWriter</parameter>
+        <parameter key="sylius.import.taxonomy_writer.class">Sylius\Bundle\CoreBundle\Import\Writer\ORM\TaxonomyWriter</parameter>
     </parameters>
 
     <services>
@@ -39,12 +52,44 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="sylius.export.reader" reader="product_reader" label="Product reader" />
         </service>
+        <service id="sylius.export.product_archetype_reader" class="%sylius.export.product_archetype_reader.class%">
+            <argument type="service" id="sylius.repository.product_archetype" />
+            <tag name="sylius.export.reader" reader="product_archetype_reader" label="Product archetype reader" />
+        </service>
+        <service id="sylius.export.product_attribute_reader" class="%sylius.export.product_attribute_reader.class%">
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <tag name="sylius.export.reader" reader="product_attribute_reader" label="Product attribute reader" />
+        </service>
+        <service id="sylius.export.product_option_reader" class="%sylius.export.product_option_reader.class%">
+            <argument type="service" id="sylius.repository.product_option" />
+            <tag name="sylius.export.reader" reader="product_option_reader" label="Product option reader" />
+        </service>
+        <service id="sylius.export.taxonomy_reader" class="%sylius.export.taxonomy_reader.class%">
+            <argument type="service" id="sylius.repository.taxonomy" />
+            <tag name="sylius.export.reader" reader="taxonomy_reader" label="Taxonomy reader" />
+        </service>
 
         <service id="sylius.form.type.reader.product_type" class="%sylius.form.type.reader.product_type.class%">
             <tag name="form.type" alias="sylius_product_reader" />
         </service>
         <service id="sylius.form.type.reader.user_type" class="%sylius.form.type.reader.user_type.class%">
             <tag name="form.type" alias="sylius_user_reader" />
+        </service>
+        
+        <service id="sylius.form.type.reader.taxonomy_type" class="%sylius.form.type.reader.taxonomy_type.class%">
+            <tag name="form.type" alias="sylius_taxonomy_reader" />
+        </service>
+        <service id="sylius.form.type.reader.user_type" class="%sylius.form.type.reader.user_type.class%">
+            <tag name="form.type" alias="sylius_user_reader" />
+        </service>
+        <service id="sylius.form.type.reader.product_option_type" class="%sylius.form.type.reader.product_option_type.class%">
+            <tag name="form.type" alias="sylius_product_option_reader" />
+        </service>
+        <service id="sylius.form.type.reader.product_attribute_type" class="%sylius.form.type.reader.product_attribute_type.class%">
+            <tag name="form.type" alias="sylius_product_attribute_reader" />
+        </service>
+        <service id="sylius.form.type.reader.product_archetype_type" class="%sylius.form.type.reader.product_archetype_type.class%">
+            <tag name="form.type" alias="sylius_product_archetype_reader" />
         </service>
 
         <!-- Import writer -->
@@ -56,6 +101,29 @@
             <tag name="sylius.import.writer" writer="product_writer" label="Product writer" />
         </service>
 
+        <service id="sylius.import.product_archetype_writer" class="%sylius.import.product_archetype_writer.class%">
+            <argument type="service" id="sylius.repository.product_archetype" />
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="sylius.repository.product_option" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.import.writer" writer="product_archetype_writer" label="Product archetype writer" />
+        </service>
+        <service id="sylius.import.product_attribute_writer" class="%sylius.import.product_attribute_writer.class%">
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.import.writer" writer="product_attribute_writer" label="Product attribute writer" />
+        </service>
+        <service id="sylius.import.product_option_writer" class="%sylius.import.product_option_writer.class%">
+            <argument type="service" id="sylius.repository.product_option" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.import.writer" writer="product_option_writer" label="Product option writer" />
+        </service>
+        <service id="sylius.import.taxonomy_writer" class="%sylius.import.taxonomy_writer.class%">
+            <argument type="service" id="sylius.repository.taxonomy" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.import.writer" writer="taxonomy_writer" label="Taxonomy writer" />
+        </service>
         <service id="sylius.import.user_writer" class="%sylius.import.user_writer.class%">
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="doctrine.orm.entity_manager" />

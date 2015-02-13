@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Export\Reader;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Writer choice choice type.
@@ -29,11 +28,8 @@ class UserReaderType extends AbstractType
     {
         $builder
             ->add('batch_size', 'number', array(
-                'label'      => 'sylius.form.reader.batch_size',
-                'required' => true,
-                'constraints' => array(
-                    new NotBlank(array('groups' => array('sylius'))),
-                ),
+                'label'    => 'sylius.form.reader.batch_size',
+                'empty_data'     => '100',
             ))
         ;
     }

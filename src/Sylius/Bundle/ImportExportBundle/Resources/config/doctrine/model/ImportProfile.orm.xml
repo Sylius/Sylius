@@ -20,7 +20,7 @@
         </id>
 
         <field name="name" column="name" type="string" nullable="false" />
-        <field name="description" column="description" type="text" />
+        <field name="description" column="description" type="text" nullable="true" />
         <field name="code" column="code" type="string" nullable="false" unique="true" />
 
         <field name="writer" column="writer" type="string" nullable="false" />

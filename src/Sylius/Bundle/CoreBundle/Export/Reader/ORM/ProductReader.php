@@ -51,10 +51,11 @@ class ProductReader extends AbstractDoctrineReader
         $createdAt = (string) $product->getCreatedAt()->format('Y-m-d H:m:s');
 
         return array(
-            'id'                => $product->getId(),
-            'name'              => $product->getName(),
-            'price'             => $product->getPrice(),
-            'description'       => $product->getDescription(),
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+            'price' => $product->getPrice(),
+            'sku' => $product->getSku(),
+            'description' => $product->getDescription(),
             'short_description' => $product->getShortDescription(),
             'archetype'         => $archetype ? $archetype->getCode() : null,
             'tax_category'      => $taxCategory ? $taxCategory->getName() : null,

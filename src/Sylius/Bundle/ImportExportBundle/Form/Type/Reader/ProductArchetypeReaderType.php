@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Export\Reader;
+namespace Sylius\Bundle\ImportExportBundle\Form\Type\Reader;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Writer choice choice type.
  *
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class UserReaderType extends AbstractType
+class ProductArchetypeReaderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,11 +28,8 @@ class UserReaderType extends AbstractType
     {
         $builder
             ->add('batch_size', 'number', array(
-                'label'      => 'sylius.form.reader.batch_size',
-                'required' => true,
-                'constraints' => array(
-                    new NotBlank(array('groups' => array('sylius'))),
-                ),
+                'label'    => 'sylius.form.reader.batch_size',
+                'empty_data'     => '100',
             ))
         ;
     }
@@ -43,6 +39,6 @@ class UserReaderType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_user_reader';
+        return 'sylius_product_archetype_reader';
     }
 }

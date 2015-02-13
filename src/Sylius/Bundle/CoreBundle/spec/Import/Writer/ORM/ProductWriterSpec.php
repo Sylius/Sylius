@@ -12,12 +12,14 @@
 namespace spec\Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
 use Doctrine\ORM\EntityManager;
+use Monolog\Logger;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -25,18 +27,23 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 class ProductWriterSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $productRepository,
+        ProductRepository $productRepository,
         RepositoryInterface $archetypeRepository,
         RepositoryInterface $taxCategoryRepository,
         RepositoryInterface $shippingCategoryRepository,
-        EntityManager $em)
+        EntityManager $em,
+        Logger $logger)
     {
+        $configuration = array('update' => 1);
+
         $this->beConstructedWith(
             $productRepository,
             $archetypeRepository,
             $taxCategoryRepository,
             $shippingCategoryRepository,
             $em);
+
+        $this->setConfiguration($configuration, $logger);
     }
 
     function it_is_initializable()
@@ -69,6 +76,7 @@ class ProductWriterSpec extends ObjectBehavior
             'name' => 'testProduct',
             'price' => 2,
             'description' => 'Long lorem ipsum',
+            'sku' => 007,
             'short_description' => 'lorem',
             'archetype' => 'testArchetype',
             'tax_category' => 'testTaxCategory',
@@ -78,7 +86,7 @@ class ProductWriterSpec extends ObjectBehavior
             'meta_description' => 'Autem quos tempora culpa facere nulla.',
             'createdAt' => '2015-02-10 10:02:09', );
 
-        $productRepository->find('1')->willReturn(null);
+        $productRepository->findOneBySku('007')->willReturn(null);
         $productRepository->createNew()->willReturn($product);
 
         $archetypeRepository->findOneBy(array('code' => 'testArchetype'))->willReturn($archetype);
@@ -114,6 +122,7 @@ class ProductWriterSpec extends ObjectBehavior
             'id' => 1,
             'name' => 'testProduct',
             'price' => 2,
+            'sku' => 007,
             'description' => 'Long lorem ipsum',
             'short_description' => 'lorem',
             'archetype' => 'testArchetype',
@@ -124,7 +133,7 @@ class ProductWriterSpec extends ObjectBehavior
             'meta_description' => 'Autem quos tempora culpa facere nulla.',
             'createdAt' => '2015-02-10 10:02:09', );
 
-        $productRepository->find('1')->willReturn($product);
+        $productRepository->findOneBySku('007')->willReturn($product);
         $productRepository->createNew()->shouldNotBeCalled();
 
         $archetypeRepository->findOneBy(array('code' => 'testArchetype'))->willReturn($archetype);
@@ -145,6 +154,61 @@ class ProductWriterSpec extends ObjectBehavior
 
         $this->process($data)->shouldReturn($product);
     }
+
+    function it_requires_product_sku($logger)
+    {
+        $data = array(
+            'id' => 1,
+            'name' => 'testProduct',
+            'price' => 2,
+            'description' => 'Long lorem ipsum',
+            'short_description' => 'lorem',
+            'archetype' => 'testArchetype',
+            'tax_category' => 'testTaxCategory',
+            'shipping_category' => 'testShippingCategory',
+            'is_available_on' => '2015-02-10 10:02:09',
+            'meta_keywords' => 'Sint, fuga, quo, magni, hic.',
+            'meta_description' => 'Autem quos tempora culpa facere nulla.',
+            'createdAt' => '2015-02-10 10:02:09', );
+
+        $logger->addError('Cannot import product without sku defined')->shouldBeCalled();
+        $this->process($data)->shouldReturn(null);
+        $this->getResultCode()->shouldReturn(1);
+    }
+
+    function it_does_not_allow_to_update_product_without_flag_set($logger, $productRepository, Product $product)
+    {
+        $configuration = array('update' => 0);
+        $data = array('sku' => 007);
+
+        $this->setConfiguration($configuration, $logger);
+
+        $productRepository->findOneBySku('007')->willReturn($product);
+
+        $logger->addInfo('Permision denied. Product sku was found, but update flag was not set')->shouldBeCalled();
+
+        $this->process($data)->shouldReturn(null);
+        $this->getResultCode()->shouldReturn(0);
+    }
+
+    function it_loggs_info_if_exception_occured_during_product_creation($logger, $productRepository)
+    {
+        $configuration = array('update' => 0);
+        $data = array('sku' => 007);
+
+        $this->setConfiguration($configuration, $logger);
+
+        $productRepository->findOneBySku('007')->willReturn(null);
+
+        $logger->addInfo('Permision denied. Product sku was found, but update flag was not set')->shouldNotBeCalled();
+        $logger->addInfo('Product cannot be created. Error message:testException')->shouldBeCalled();
+
+        $productRepository->createNew()->willThrow(new \Exception('testException'));
+
+        $this->process($data)->shouldReturn(null);
+        $this->getResultCode()->shouldReturn(1);
+    }
+
 
     function it_has_type()
     {

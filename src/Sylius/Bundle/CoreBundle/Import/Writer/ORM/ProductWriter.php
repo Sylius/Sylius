@@ -52,14 +52,29 @@ class ProductWriter extends AbstractDoctrineWriter
 
     public function process($data)
     {
-
-        if (isset($data['id'])) {
-            $product = $this->productRepository->find($data['id']);
+        if(!isset($data['sku'])){
+            $this->logger->addError('Cannot import product without sku defined');
+            $this->resultCode = 1;
+            return null;
         }
 
-        $archetype = $this->archetypeRepository->findOneByCode($data['archetype']);
-        $taxCategory = $this->taxCategoryRepository->findOneByName($data['tax_category']);
-        $shippingCategory = $this->shippingCategoryRepository->findOneByName($data['shipping_category']);
+        $product = $this->productRepository->findOneBySku($data['sku']);
+
+        if (null !== $product && !$this->configuration['update']) {
+            $this->logger->addInfo('Permision denied. Product sku was found, but update flag was not set');
+            return null;
+        }
+
+        if (null === $product) {
+            try {
+                $product = $this->productRepository->createNew();
+                $product->setSku($data['sku']);
+            } catch (\Exception $e) {
+                $this->logger->addInfo('Product cannot be created. Error message:'.$e->getMessage());
+                $this->resultCode = 1;
+                return null;
+            }
+        }
 
         $product->setName($data['name']);
         $product->setPrice($data['price']);

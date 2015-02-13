@@ -24,20 +24,20 @@ abstract class AbstractDoctrineReader
 {
     private $results;
     private $running = false;
-    private $configuration;
-    private $logger;
+    protected $configuration;
+    protected $logger;
     
     /**
      * @var int
      */
-    private $resultCode = 0;
+    protected $resultCode = 0;
 
     /**
      * Batch size
      *
      * @var integer
      */
-    private $batchSize;
+    protected $batchSize;
 
     public function read()
     {
