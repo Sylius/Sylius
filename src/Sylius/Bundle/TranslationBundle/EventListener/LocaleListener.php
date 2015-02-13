@@ -22,16 +22,18 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class LocaleListener implements EventSubscriberInterface
 {
     /**
-     * @var TranslatableListener
+     * The translatable listener instance.
+     *
+     * @var TranslatableListenerInterface
      */
     private $translatableListener;
 
     /**
      * Constructor
      *
-     * @param TranslatableListener $translatableListener
+     * @param TranslatableListenerInterface $translatableListener
      */
-    public function __construct(TranslatableListener $translatableListener)
+    public function __construct(TranslatableListenerInterface $translatableListener)
     {
         $this->translatableListener = $translatableListener;
     }

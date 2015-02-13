@@ -22,7 +22,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Prezent Internet B.V. <info@prezent.nl>
  */
-class TranslatableListener implements EventSubscriber
+class TranslatableListener implements EventSubscriber, TranslatableListenerInterface
 {
     /**
      * String Locale to use for translations
