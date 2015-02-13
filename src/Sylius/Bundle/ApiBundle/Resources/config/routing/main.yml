@@ -96,11 +96,3 @@ sylius_api_user:
 sylius_api_password_resetting_request:
     resource: @SyliusApiBundle/Resources/config/routing/password_resetting_request.yml
     prefix: /password-resetting-requests
-
-sylius_api_taxon_index:
-    path: /taxons
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.taxon:indexAction
-        _sylius:
-            sortable: true

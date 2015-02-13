@@ -9,8 +9,10 @@ sylius_api_order_item_index:
         _sylius:
             method: findByOrder
             arguments: [$orderId]
-            paginate: false
-        sorting: { updatedAt: desc }
+            paginate: $limit
+            sortable: true
+            sorting:
+                updatedAt: desc
 
 sylius_api_order_item_create:
     path: /

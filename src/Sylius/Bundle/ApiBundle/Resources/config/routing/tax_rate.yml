@@ -7,6 +7,7 @@ sylius_api_tax_rate_index:
     defaults:
         _controller: sylius.controller.tax_rate:indexAction
         _sylius:
+            paginate: $limit
             sortable: true
             sorting:
                 name: desc

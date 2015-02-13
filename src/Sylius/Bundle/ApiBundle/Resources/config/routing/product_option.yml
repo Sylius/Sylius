@@ -6,6 +6,9 @@ sylius_api_product_option_index:
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_option:indexAction
+        _sylius:
+            paginate: $limit
+            sortable: true
 
 sylius_api_product_option_create:
     path: /

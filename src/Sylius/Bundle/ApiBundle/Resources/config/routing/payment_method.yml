@@ -7,6 +7,7 @@ sylius_api_payment_method_index:
     defaults:
         _controller: sylius.controller.payment_method:indexAction
         _sylius:
+            paginate: $limit
             sortable: true
             sorting:
                 name: desc

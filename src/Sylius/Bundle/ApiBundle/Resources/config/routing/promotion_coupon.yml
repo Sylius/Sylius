@@ -7,9 +7,11 @@ sylius_api_promotion_coupon_index:
     defaults:
         _controller: sylius.controller.promotion_coupon:indexAction
         _sylius:
-            sortable: true
-            criteria: { promotion: $promotionId }
+            paginate:   $limit
+            sortable:   true
             filterable: true
+            criteria:
+                promotion: $promotionId
 
 sylius_api_promotion_coupon_create:
     path: /
