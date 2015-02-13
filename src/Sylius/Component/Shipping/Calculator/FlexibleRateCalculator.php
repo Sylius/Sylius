@@ -41,7 +41,7 @@ class FlexibleRateCalculator extends Calculator
             $additionalItems = $additionalItemLimit >= $additionalItems ? $additionalItems : $additionalItemLimit;
         }
 
-        return $firstItemCost + ($additionalItems * $additionalItemCost);
+        return (int)($firstItemCost + ($additionalItems * $additionalItemCost));
     }
 
     /**
