@@ -7,8 +7,9 @@ sylius_api_shipment_index:
     defaults:
         _controller: sylius.controller.shipment:indexAction
         _sylius:
-            paginate: $limit
-            sortable: true
+            paginate:   $limit
+            filterable: true
+            sortable:   true
             sorting:
                 createdAt: desc
 
