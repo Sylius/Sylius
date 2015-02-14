@@ -26,6 +26,8 @@
         <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
+        <parameter key="sylius.form.factory.class">Sylius\Bundle\ResourceBundle\Form\Factory\FormFactory</parameter>
+        <parameter key="sylius.form.field_guesser.class">Sylius\Bundle\ResourceBundle\Form\Guesser\FieldGuesser</parameter>
 
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>
@@ -76,6 +78,15 @@
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
         <service id="sylius.form.extension.collection" class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />
+        </service>
+        <service id="sylius.form.factory" class="%sylius.form.factory.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="form.registry" />
+            <argument type="service" id="sylius.form.field_guesser" />
+        </service>
+
+        <service id="sylius.form.field_guesser" class="%sylius.form.field_guesser.class%">
+            <argument type="service" id="doctrine" />
         </service>
     </services>
 </container>

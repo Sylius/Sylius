@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Form;
+namespace Sylius\Bundle\ResourceBundle\Form\Guesser;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * Generates a form class based on a Doctrine entity.
@@ -22,39 +21,50 @@ use Symfony\Component\Form\FormFactoryInterface;
  * @author Hugo Hamon <hugo.hamon@sensio.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DefaultFormFactory
+class FieldGuesser
 {
-    private $formFactory;
+    /**
+     * @var ManagerRegistry
+     */
+    private $managerRegistry;
 
-    public function __construct(FormFactoryInterface $formFactory)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->formFactory = $formFactory;
+        $this->managerRegistry = $managerRegistry;
     }
 
-    public function create($resource, EntityManager $entityManager)
+    public function guess($resource)
     {
-        $metadata = $entityManager->getClassMetadata(get_class($resource));
+        $resourceClassname = get_class($resource);
+        $objectManager = $this->managerRegistry->getManagerForClass($resourceClassname);
+        $metadata = $objectManager->getClassMetadata(get_class($resource));
 
         if (count($metadata->identifier) > 1) {
             throw new \RuntimeException('The default form factory does not support entity classes with multiple primary keys.');
         }
 
-        $builder = $this->formFactory->createNamedBuilder('', 'form', $resource, array('csrf_protection' => false));
-
-        foreach ($this->getFieldsFromMetadata($metadata) as $field => $type) {
+        $fields = array();
+        foreach ($this->getFieldsFromMetadata($metadata) as $fieldType => $type) {
             $options = array();
+
+            // TODO : Check if the property exists (must be rewrite)
+            if (!method_exists($resource, 'get'.$fieldType)) {
+                continue;
+            }
 
             if (in_array($type, array('date', 'datetime'))) {
                 $options = array('widget' => 'single_text');
             }
+
+            // Todo : for api only, for the web the model must implement the __toString
             if ('relation' === $type) {
                 $options = array('property' => 'id');
             }
 
-            $builder->add($field, null, $options);
+            $fields[$fieldType] = $options;
         }
 
-        return $builder->getForm();
+        return $fields;
     }
 
     /**
