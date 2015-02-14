@@ -12,17 +12,17 @@
 namespace Sylius\Bundle\TranslationBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Events;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ODM\MongoDB\Events;
+use Doctrine\ODM\MongoDB\Event\LifecycleEventArgs;
+use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Prezent Internet B.V. <info@prezent.nl>
  */
-class TranslatableListener implements EventSubscriber, TranslatableListenerInterface
+class ODMTranslatableListener implements EventSubscriber, TranslatableListenerInterface
 {
     /**
      * String Locale to use for translations
@@ -128,14 +128,10 @@ class TranslatableListener implements EventSubscriber, TranslatableListenerInter
 
         $translationMetadata = $this->metadata[$translatableMetadata['targetEntity']];
 
-        $mapping->mapOneToMany(array(
-            'fieldName'     => $translatableMetadata['field'],
-            'targetEntity'  => $translatableMetadata['targetEntity'],
-            'mappedBy'      => $translationMetadata['field'],
-            'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy'       => $translationMetadata['locale'],
-            'cascade'       => array('persist', 'merge', 'remove'),
-            'orphanRemoval' => true,
+        $mapping->mapManyEmbedded(array(
+            'fieldName'      => $translatableMetadata['field'],
+            'targetDocument' => $translatableMetadata['targetEntity'],
+            'strategy'       => 'set'
         ));
     }
 
@@ -157,17 +153,9 @@ class TranslatableListener implements EventSubscriber, TranslatableListenerInter
         // Map translatable relation
         $translatableMetadata = $this->metadata[$translationMetadata['targetEntity']];
 
-        $mapping->mapManyToOne(array(
-            'fieldName'    => $translationMetadata['field'],
-            'targetEntity' => $translationMetadata['targetEntity'],
-            'inversedBy'   => $translatableMetadata['field'],
-            'joinColumns'  => array(array(
-                'name'                 => 'translatable_id',
-                'referencedColumnName' => 'id',
-                'onDelete'             => 'CASCADE',
-                'nullable'             => false,
-            )),
-        ));
+        $mapping->isEmbeddedDocument = true;
+        $mapping->isMappedSuperclass = false;
+        $mapping->setIdentifier(null);
 
         // Map locale field
         if (!$mapping->hasField($translationMetadata['locale'])) {
@@ -178,39 +166,34 @@ class TranslatableListener implements EventSubscriber, TranslatableListenerInter
         }
 
         // Map unique index
-        $columns = array(
-            $mapping->getSingleAssociationJoinColumnName($translationMetadata['field']),
-                $translationMetadata['locale'],
+        $keys = array(
+            $translationMetadata['field'] => 1,
+            $translationMetadata['locale'] => 1
         );
 
-        if (!$this->hasUniqueConstraint($mapping, $columns)) {
-            $constraints = isset($mapping->table['uniqueConstraints']) ? $mapping->table['uniqueConstraints'] : array();
-            $constraints[$mapping->getTableName().'_uniq_trans'] = array(
-                'columns' => $columns,
-            );
-
-            $mapping->setPrimaryTable(array(
-                'uniqueConstraints' => $constraints,
+        if (!$this->hasUniqueIndex($mapping, $keys)) {
+            $mapping->addIndex($keys, array(
+                'unique' => true
             ));
         }
     }
 
     /**
-     * Check if an unique constraint has been defined
+     * Check if an unique index has been defined
      *
      * @param ClassMetadata $mapping
-     * @param array         $columns
+     * @param array         $keys
      *
      * @return bool
      */
-    private function hasUniqueConstraint(ClassMetadata $mapping, array $columns)
+    private function hasUniqueIndex(ClassMetadata $mapping, array $keys)
     {
-        if (!isset($mapping->table['uniqueConstraints'])) {
+        if (!count($mapping->getIndexes())) {
             return false;
         }
 
-        foreach ($mapping->table['uniqueConstraints'] as $constraint) {
-            if (!array_diff($constraint['columns'], $columns)) {
+        foreach ($mapping->getIndexes() as $index) {
+            if (!array_diff($index['keys'], $keys)) {
                 return true;
             }
         }
@@ -225,10 +208,10 @@ class TranslatableListener implements EventSubscriber, TranslatableListenerInter
      */
     public function postLoad(LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
+        $document = $args->getDocument();
 
-        // Sometimes $entity is a doctrine proxy class, we therefore need to retrieve it's real class
-        $name = $args->getEntityManager()->getClassMetadata(get_class($entity))->getName();
+        // Sometimes $document is a doctrine proxy class, we therefore need to retrieve it's real class
+        $name = $args->getDocumentManager()->getClassMetadata(get_class($document))->getName();
 
         if (!isset($this->metadata[$name])) {
             return;
@@ -238,12 +221,12 @@ class TranslatableListener implements EventSubscriber, TranslatableListenerInter
 
         if (isset($metadata['fallbackLocale'])) {
             $setter = 'set'.ucfirst($metadata['fallbackLocale']);
-            $entity->$setter($this->fallbackLocale);
+            $document->$setter($this->fallbackLocale);
         }
 
         if (isset($metadata['currentLocale'])) {
             $setter = 'set'.ucfirst($metadata['currentLocale']);
-            $entity->$setter($this->currentLocale);
+            $document->$setter($this->currentLocale);
         }
     }
 }

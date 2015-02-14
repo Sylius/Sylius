@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.translatable.listener.class">Sylius\Bundle\TranslationBundle\EventListener\TranslatableListener</parameter>
+        <parameter key="sylius.odm_translatable.listener.class">Sylius\Bundle\TranslationBundle\EventListener\ODMTranslatableListener</parameter>
         <parameter key="sylius.translatable.listener.locale.class">Sylius\Bundle\TranslationBundle\EventListener\LocaleListener</parameter>
     </parameters>
 
@@ -25,7 +26,13 @@
         <service id="sylius.translatable.listener" class="%sylius.translatable.listener.class%">
             <argument>%sylius.translation.mapping%</argument>
             <argument>%sylius.locale%</argument>
-            <tag name="doctrine.event_subscriber" connection="default" />
+            <tag name="doctrine.event_subscriber" connection="default" priority="99" />
+        </service>
+
+        <service id="sylius.odm_translatable.listener" class="%sylius.odm_translatable.listener.class%">
+            <argument>%sylius.translation.mapping%</argument>
+            <argument>%sylius.locale%</argument>
+            <tag name="doctrine_mongodb.odm.event_subscriber" connection="default" priority="99" />
         </service>
 
         <service id="sylius.translatable.listener.locale" class="%sylius.translatable.listener.locale.class%">
