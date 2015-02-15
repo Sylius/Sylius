@@ -133,8 +133,8 @@ sylius:
       index: Kuponer
     property:
       index: Egenskaber
-    prototype:
-      index: Prototyper
+    archetype:
+      index: archetyper
     sales: Salg
     shipment:
       index: Forsendelser
@@ -542,12 +542,12 @@ sylius:
     type: type
     update_header: Redigering af egenskab
     updated_at: sidste opdatering
-  prototype:
-    build: Skab prototype
-    build_header: Skaber produkt efter prototype
-    create: Opret prototype
-    create_header: Ny prototype
-    index_header: Produkt prototyper
+  archetype:
+    build: Skab archetype
+    build_header: Skaber produkt efter archetype
+    create: Opret archetype
+    create_header: Ny archetype
+    index_header: Produkt archetyper
     name: navn
     updated_at: sidste opdatering
   remember_me: Husk mig?

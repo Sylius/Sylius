@@ -23,15 +23,16 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExtension;
 
 /**
  * Base extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractResourceExtension extends Extension
+abstract class AbstractResourceExtension extends AbstractTranslationExtension
 {
     const CONFIGURE_LOADER = 1;
 
@@ -105,6 +106,8 @@ abstract class AbstractResourceExtension extends Extension
         }
 
         $classes = isset($config['classes']) ? $config['classes'] : array();
+
+        $this->mapTranslations($classes, $container);
 
         if ($configure & self::CONFIGURE_PARAMETERS) {
             $this->mapClassParameters($classes, $container);
@@ -299,5 +302,18 @@ abstract class AbstractResourceExtension extends Extension
     {
         // Override if needed.
         return $config;
+    }
+
+    /**
+     * @param array $classes
+     * @param ContainerBuilder $container
+     */
+    protected function mapTranslations(array $classes, ContainerBuilder $container)
+    {
+        foreach ($classes as $class) {
+            if (array_key_exists('translation', $class) || array_key_exists('translatable', $class)) {
+                $this->processTranslations($class, $container);
+            }
+        }
     }
 }

@@ -214,7 +214,7 @@ sylius:
   property:
     name: Tên
     presentation: trình bày
-  prototype:
+  archetype:
     index_header: Sản phẩm mẫu
     name: Tên
   search: Tìm kiếm

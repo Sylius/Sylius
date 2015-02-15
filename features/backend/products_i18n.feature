@@ -9,10 +9,10 @@ Feature: Products
         And I am logged in as administrator
         And there are following locales configured:
             | code  | enabled |
-            | en    | yes     |
-            | es    | yes     |
+            | en_US | yes     |
+            | es_ES | yes     |
 
-    Scenario: Creating a product requires deafult translation fields
+    Scenario: Creating a product requires default translation fields
         Given I am on the product creation page
         And I fill in the following:
             | Price                                      | 29.99                    |

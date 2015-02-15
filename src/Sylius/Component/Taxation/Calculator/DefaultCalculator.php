@@ -17,6 +17,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  * Default tax calculator.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class DefaultCalculator implements CalculatorInterface
 {
@@ -26,9 +27,9 @@ class DefaultCalculator implements CalculatorInterface
     public function calculate($base, TaxRateInterface $rate)
     {
         if ($rate->isIncludedInPrice()) {
-            return intval($base - round($base / (1 + $rate->getAmount())));
+            return (int) round($base - ($base / (1 + $rate->getAmount())));
         }
 
-        return intval(round($base * $rate->getAmount()));
+        return (int) round($base * $rate->getAmount());
     }
 }

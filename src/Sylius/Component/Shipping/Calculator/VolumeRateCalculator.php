@@ -26,7 +26,7 @@ class VolumeRateCalculator extends Calculator
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return $configuration['amount'] * ($subject->getShippingVolume() / $configuration['division']);
+        return (int) round($configuration['amount'] * ($subject->getShippingVolume() / $configuration['division']));
     }
 
     /**

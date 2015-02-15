@@ -170,7 +170,8 @@ class CoreContext extends DefaultContext
                 isset($data['enabled']) ? $data['enabled'] : true,
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
-                false
+                false,
+                isset($data['created at']) ? new \DateTime($data["created at"]) : null
             );
         }
 
@@ -220,7 +221,7 @@ class CoreContext extends DefaultContext
         $manager->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, $createdAt = null)
     {
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
@@ -228,12 +229,11 @@ class CoreContext extends DefaultContext
 
             /* @var $user UserInterface */
             $user = $this->getRepository('user')->createNew();
-            $user->setFirstname($this->faker->firstName);
-            $user->setLastname($this->faker->lastName);
             $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
             $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);
+            $user->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
             $user->setPlainPassword($password);
 
             if (null !== $address) {

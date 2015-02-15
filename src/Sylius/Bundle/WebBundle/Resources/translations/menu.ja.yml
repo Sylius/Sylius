@@ -21,7 +21,7 @@ sylius:
         products: 商品管理
         promotions: プロモーション管理
         properties: 商品プロパティ管理
-        prototypes: 商品プロトタイプ管理
+        archetypes: 商品プロトタイプ管理
         sales: 注文管理
         shipments: 出荷管理
         shipping_categories: 配送カテゴリ管理
@@ -50,7 +50,7 @@ sylius:
         products: 商品管理
         promotions: プロモーション管理
         properties: 商品プロパティ管理
-        prototypes: 商品プロトタイプ管理
+        archetypes: 商品プロトタイプ管理
         sales: 注文管理
         shipments: 出荷管理
         shipping_categories: 配送カテゴリ管理

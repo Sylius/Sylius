@@ -1,7 +1,5 @@
 sylius_core:
     driver: doctrine/orm
-    emails:
-        enabled: false
     routing:
         %sylius.model.product.class%:
             field: slug
@@ -20,11 +18,6 @@ sylius_core:
                 repository: sylius.repository.taxon
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig
-
-sylius_installer:
-    classes:
-        user:
-            model: Sylius\Component\Core\Model\User
 
 sylius_money:
     currency: %sylius.currency%
@@ -63,13 +56,15 @@ sylius_taxonomy:
             model: Sylius\Component\Core\Model\Taxonomy
             repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonomyType
-        taxonomy_translation:
-            model: Sylius\Component\Core\Model\TaxonomyTranslation
+            translatable:
+                targetEntity: Sylius\Component\Taxonomy\Model\TaxonomyTranslation
+        taxonomy_translation: ~
         taxon:
             model: Sylius\Component\Core\Model\Taxon
             form: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
-        taxon_translation:
-            model: Sylius\Component\Core\Model\TaxonTranslation
+            translatable:
+                targetEntity: Sylius\Component\Taxonomy\Model\TaxonTranslation
+        taxon_translation: ~
 
 sylius_product:
     driver: doctrine/orm
@@ -80,6 +75,25 @@ sylius_product:
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+            translatable:
+                targetEntity: Sylius\Component\Core\Model\ProductTranslation
+        product_translation:
+            model: Sylius\Component\Core\Model\ProductTranslation
+
+
+sylius_archetype:
+    classes:
+        product:
+            subject: Sylius\Component\Core\Model\Product
+            attribute: Sylius\Component\Product\Model\Attribute
+            option: Sylius\Component\Product\Model\Option
+            archetype:
+                model: Sylius\Component\Product\Model\Archetype
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
+                translatable:
+                    targetEntity: Sylius\Component\Product\Model\ArchetypeTranslation
+            archetype_translation:
+                model: Sylius\Component\Product\Model\ArchetypeTranslation
 
 sylius_attribute: ~
 
@@ -108,8 +122,9 @@ sylius_shipping:
             model: Sylius\Component\Core\Model\ShippingMethod
             repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
-        shipping_method_translation:
-            model: Sylius\Component\Core\Model\ShippingMethodTranslation
+            translatable:
+                targetEntity: Sylius\Component\Shipping\Model\ShippingMethodTranslation
+        shipping_method_translation: ~
 
 sylius_promotion:
     classes:
@@ -167,23 +182,6 @@ sylius_sequence:
     generators:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
 
-sylius_resource:
-    resources:
-        sylius.user:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\User
-                controller: Sylius\Bundle\CoreBundle\Controller\UserController
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
-        sylius.user_oauth:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\UserOAuth
-        sylius.group:
-            driver: doctrine/orm
-            classes:
-                model: Sylius\Component\Core\Model\Group
-
 sylius_pricing:
     forms:
         - sylius_product_variant
@@ -237,3 +235,32 @@ sylius_search:
                 display_name: 'Available colors'
                 type: terms
                 value: ~
+
+sylius_translation:
+    default_mapping:
+        translatable:
+            field: translations
+            currentLocale: currentLocale
+            fallbackLocale: fallbackLocale
+        translation:
+            field: translatable
+            locale: locale
+
+sylius_mailer:
+    templates:
+        sylius.email.order_confirmation.name: SyliusWebBundle:Email:orderConfirmation.html.twig
+        sylius.email.order_comment.name: SyliusWebBundle:Email:orderComment.html.twig
+        sylius.email.user_confirmation.name: SyliusWebBundle:Email:userConfirmation.html.twig
+    sender:
+        name: Example.com
+        address: no-reply@example.com
+    emails:
+        order_confirmation:
+            subject: sylius.email.order_confirmation.subject
+            template: SyliusWebBundle:Email:orderConfirmation.html.twig
+        order_comment:
+            subject: sylius.email.order_comment.subject
+            template: SyliusWebBundle:Email:orderComment.html.twig
+        user_confirmation:
+            subject: sylius.email.user_confirmation.subject
+            template: SyliusWebBundle:Email:userConfirmation.html.twig

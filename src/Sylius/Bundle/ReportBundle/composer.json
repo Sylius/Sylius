@@ -1,0 +1,58 @@
+{
+    "name": "sylius/report-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible report system for Symfony2 ecommerce applications.",
+    "keywords": ["report", "shop", "webshop", "ecommerce", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Łukasz Chrusciel",
+            "email":    "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name":     "Mateusz Zalewski",
+            "email":    "mateusz.zalewski@lakion.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                             ">=5.3.3",
+
+        "symfony/framework-bundle":        "~2.3",
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/resource-bundle":          "0.14.*@dev",
+        "sylius/money-bundle":             "0.14.*@dev",
+        "sylius/report":                   "0.14.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec":   "~2.1",
+        "symfony/form":      "~2.3",
+        "symfony/validator": "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ReportBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ReportBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
+        }
+    }
+}

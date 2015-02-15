@@ -7,15 +7,15 @@ Feature: taxonomies
     Background:
         Given there is default currency configured
         And there are following locales configured:
-            | code | enabled |
-            | en   | yes     |
+            | code  | enabled |
+            | en_US | yes     |
           And I am logged in as administrator
           And there are following taxonomies defined:
             | name     |
             | Category |
             | Brand    |
           And taxonomy "Category" has following taxons:
-            | Electronics > PC         |
+            | Electronics > Featured   |
             | Electronics > Mac > iMac |
             | Electronics > Mac > MBP  |
             | Clothing > Gloves        |
@@ -103,15 +103,23 @@ Feature: taxonomies
           And I press "Create"
          Then I should be on the page of taxonomy "Category"
           And I should see "Taxon has been successfully created."
+#    TODO
+#    Scenario: Creating new taxon with existing name under given taxonomy
+#        Given I am on the page of taxonomy "Category"
+#          And I follow "Create taxon"
+#         When I fill in "Name" with "Electronics"
+#          And I press "Create"
+#          And I should see "Name already in use in the parent taxon."
 
-    Scenario: Creating new taxon with existing name under given taxonomy
+    Scenario: Creating new taxon with existing name under different taxon
         Given I am on the page of taxonomy "Category"
-          And I follow "Create taxon"
-         When I fill in "Name" with "Electronics"
-          And I press "Create"
-         Then I should be on the page of taxonomy "Category"
-          And I should see "Taxon has been successfully created."
-          And I should see 9 taxons in the list
+        And   I follow "Create taxon"
+        When  I fill in "Name" with "Electronics"
+        And   I select "Clothing" from "Parent"
+        And   I press "Create"
+        Then  I should be on the page of taxonomy "Category"
+        And   I should see "Taxon has been successfully created."
+        And   I should see 9 taxons in the list
 
     Scenario: Creating new taxon with parent
         Given I am on the page of taxonomy "Category"

@@ -47,17 +47,25 @@ class ResourceEvent extends GenericEvent
     protected $messageParameters = array();
 
     /**
+     * ErrorCode
+     *
+     * @var integer
+     */
+    protected $errorCode = 500;
+
+    /**
      * Stop event propagation
      *
      * @param string $message
      * @param string $type
      * @param array  $parameters
      */
-    public function stop($message, $type = self::TYPE_ERROR, $parameters = array())
+    public function stop($message, $type = self::TYPE_ERROR, $parameters = array(), $errorCode = 500)
     {
         $this->messageType = $type;
         $this->message = $message;
         $this->messageParameters = $parameters;
+        $this->errorCode = $errorCode;
 
         $this->stopPropagation();
     }
@@ -140,6 +148,30 @@ class ResourceEvent extends GenericEvent
     public function setMessageParameters(array $messageParameters)
     {
         $this->messageParameters = $messageParameters;
+
+        return $this;
+    }
+
+    /**
+     * Get errorCode property
+     *
+     * @return int
+     */
+    public function getErrorCode()
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * Sets errorCode property
+     *
+     * @param int $errorCode
+     *
+     * @return $this
+     */
+    public function setErrorCode($errorCode)
+    {
+        $this->errorCode = $errorCode;
 
         return $this;
     }

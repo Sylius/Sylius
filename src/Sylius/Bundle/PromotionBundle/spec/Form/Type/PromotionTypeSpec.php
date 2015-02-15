@@ -63,12 +63,12 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('startsAt', 'date', Argument::type('array'))
+            ->add('startsAt', 'datetime', Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('endsAt', 'date', Argument::type('array'))
+            ->add('endsAt', 'datetime', Argument::type('array'))
             ->willReturn($builder)
         ;
 

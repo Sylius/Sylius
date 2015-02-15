@@ -14,11 +14,8 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:prezent="prezent">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\Taxonomy" table="sylius_taxonomy">
-        <prezent:translatable current-locale="currentLocale" fallback-locale="fallbackLocale" />
-    </mapped-superclass>
+    <mapped-superclass name="Sylius\Component\Core\Model\Taxonomy" table="sylius_taxonomy" />
 
 </doctrine-mapping>

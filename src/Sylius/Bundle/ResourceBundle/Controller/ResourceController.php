@@ -16,12 +16,14 @@ use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -176,10 +178,14 @@ class ResourceController extends FOSRestController
             $resource = $this->domainManager->create($resource);
 
             if ($this->config->isApiRequest()) {
+                if ($resource instanceof ResourceEvent) {
+                    throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+                }
+
                 return $this->handleView($this->view($resource, 201));
             }
 
-            if (null === $resource) {
+            if ($resource instanceof ResourceEvent) {
                 return $this->redirectHandler->redirectToIndex();
             }
 
@@ -216,14 +222,22 @@ class ResourceController extends FOSRestController
             $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
+                if ($resource instanceof ResourceEvent) {
+                    throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+                }
+
                 return $this->handleView($this->view($resource, 204));
+            }
+
+            if ($resource instanceof ResourceEvent) {
+                return $this->redirectHandler->redirectToIndex();
             }
 
             return $this->redirectHandler->redirectTo($resource);
         }
 
         if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form));
+            return $this->handleView($this->view($form, 400));
         }
 
         $view = $this
@@ -245,9 +259,13 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->domainManager->delete($this->findOr404($request));
+        $resource = $this->domainManager->delete($this->findOr404($request));
 
         if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
             return $this->handleView($this->view());
         }
 
@@ -327,6 +345,7 @@ class ResourceController extends FOSRestController
         if (strpos($type, '\\') !== false) { // full class name specified
             $type = new $type();
         } elseif (!$this->get('form.registry')->hasType($type)) { // form alias is not registered
+
             $defaultFormFactory = new DefaultFormFactory($this->container->get('form.factory'));
 
             return $defaultFormFactory->create($resource, $this->container->get($this->config->getServiceName('manager')));
@@ -362,8 +381,8 @@ class ResourceController extends FOSRestController
         if (!$resource = $this->resourceResolver->getResource(
             $this->getRepository(),
             'findOneBy',
-            array($this->config->getCriteria($criteria)
-        ))) {
+            array($this->config->getCriteria($criteria)))
+        ) {
             throw new NotFoundHttpException(
                 sprintf(
                     'Requested %s does not exist with these criteria: %s.',
@@ -404,7 +423,7 @@ class ResourceController extends FOSRestController
      */
     protected function getPagerfantaFactory()
     {
-        return new PagerfantaFactory('page', 'paginate');
+        return new PagerfantaFactory();
     }
 
     protected function handleView(View $view)

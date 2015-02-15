@@ -49,4 +49,24 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return int
      */
     public function countByUserAndPaymentState(UserInterface $user, $state);
+
+    /**
+     * Gets revenue group by date
+     * between particular dates
+     *
+     * @param array $configuration
+     *
+     * @return array
+     */
+    public function revenueBetweenDatesGroupByDate(array $configuration = array());
+
+    /**
+     * Gets number of orders group by date
+     * between particular dates
+     * 
+     * @param array $configuration
+     *
+     * @return array
+     */
+    public function ordersBetweenDatesGroupByDate(array $configuration = array());
 }

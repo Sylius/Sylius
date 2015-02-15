@@ -78,6 +78,7 @@ class LoadProductAttributeData extends DataFixture
     {
         /* @var $attribute AttributeInterface */
         $attribute = $this->getProductAttributeRepository()->createNew();
+
         $attribute->setName($name);
 
         foreach ($presentationTranslations as $locale => $presentation) {

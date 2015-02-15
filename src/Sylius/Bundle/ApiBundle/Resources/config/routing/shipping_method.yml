@@ -7,6 +7,7 @@ sylius_api_shipping_method_index:
     defaults:
         _controller: sylius.controller.shipping_method:indexAction
         _sylius:
+            paginate: $limit
             sortable: true
             sorting:
                 name: desc

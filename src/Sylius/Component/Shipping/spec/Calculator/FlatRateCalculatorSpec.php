@@ -52,4 +52,9 @@ class FlatRateCalculatorSpec extends ObjectBehavior
     {
         $this->calculate($shipment, array('amount' => 1500))->shouldReturn(1500);
     }
+
+    function its_calculated_value_should_be_an_integer(ShipmentInterface $shipment)
+    {
+        $this->calculate($shipment, array('amount' => 410))->shouldBeInteger();
+    }
 }

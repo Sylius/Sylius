@@ -7,8 +7,8 @@ Feature: Products
     Background:
         Given there is default currency configured
         And there are following locales configured:
-            | code | enabled |
-            | en   | yes     |
+            | code  | enabled |
+            | en_US | yes     |
         And I am logged in as administrator
         And there are following options:
             | name          | presentation | values           |
@@ -82,6 +82,17 @@ Feature: Products
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
         And I should see "Product has been successfully created."
+
+    Scenario: Prices are saved correctly
+        Given I am on the product creation page
+        When I fill in the following:
+            | Name        | Book about Everything   |
+            | Description | Interesting description |
+            | Price       | 4.10                    |
+        And I press "Create"
+        Then I should be on the page of product "Book about Everything"
+        And I should see "Product has been successfully created."
+        And I should see "4.10"
 
     Scenario: Creating product with options
         Given I am on the product creation page

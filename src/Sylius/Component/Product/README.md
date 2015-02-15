@@ -4,7 +4,7 @@ Product Component [![Build status...](https://secure.travis-ci.org/Sylius/Produc
 Sylius product catalog comes with support of different product attributes,
 options and variants.
 
-It also supports product prototypes system, for creating similar products
+It also supports a product archetyping system, for creating similar products
 efficiently.
 
 Sylius

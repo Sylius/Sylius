@@ -134,7 +134,7 @@ sylius:
       index: sylius.breadcrumb.promotion_coupon.index
     property:
       index: Список свойств товаров
-    prototype:
+    archetype:
       index: Список прототипов
     sales: Продажи
     shipment:
@@ -550,7 +550,7 @@ sylius:
     type: тип
     update_header: Редактирование свойства
     updated_at: последнее изменение
-  prototype:
+  archetype:
     build: Построить прототип
     build_header: Построение товара по прототипу
     create: Создание прототипа

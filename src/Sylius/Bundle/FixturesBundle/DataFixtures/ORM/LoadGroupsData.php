@@ -32,6 +32,7 @@ class LoadGroupsData extends DataFixture
         $manager->persist($this->createGroup('Retail Customers'));
         $manager->persist($this->createGroup('Sales'));
         $manager->persist($this->createGroup('Suppliers'));
+        $manager->persist($this->createGroup('API', array('ROLE_API')));
 
         $manager->flush();
     }

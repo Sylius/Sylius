@@ -23,6 +23,11 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
  */
 class SyliusApiExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    protected $configFiles = array(
+        'services',
+        'controller'
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -57,7 +62,7 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             'auth_code_class'     => $config['classes']['api_auth_code']['model'],
 
             'service'             => array(
-                'user_provider' => 'fos_user.user_provider'
+                'user_provider' => 'fos_user.user_provider.username'
             ),
         ));
     }

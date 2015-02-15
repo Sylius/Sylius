@@ -74,6 +74,22 @@
                     <td>{{ user.lastLogin|date }}</td>
                 </tr>
             {% endif %}
+            <tr>
+                <td><strong>{{ 'sylius.user.groups'|trans }}</strong></td>
+                <td>
+                    {% if user.groups|length > 0 %}
+                        <ul>
+                            {% for group in user.groups %}
+                                <li>{{ group.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="label label-info">
+                                <i class="glyphicon glyphicon-list-alt icon-white"></i> {{ 'sylius.user.no_groups'|trans }}
+                            </span>
+                    {% endif %}
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.listener.mailer.class">Sylius\Bundle\CoreBundle\EventListener\MailerListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.listener.mailer" class="%sylius.listener.mailer.class%">
+            <argument type="service" id="sylius.email_sender" />
+            <tag name="kernel.event_listener" event="sylius.checkout.finalize.complete" method="sendOrderConfirmationEmail" />
+            <tag name="kernel.event_listener" event="fos_user.registration.completed" method="sendUserConfirmationEmail" />
+            <tag name="kernel.event_listener" event="fos_user.registration.confirmed" method="sendUserConfirmationEmail" />
+            <tag name="kernel.event_listener" event="sylius.comment.post_create" method="sendOrderCommentEmail" />
+        </service>
+    </services>
+
+</container>

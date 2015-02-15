@@ -18,6 +18,7 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class AdjustmentSpec extends ObjectBehavior
 {
@@ -98,6 +99,16 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(399);
     }
 
+    function its_amount_should_accept_only_integer()
+    {
+        $this->setAmount(4498)->getAmount()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(44.98 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount('4498');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(round(44.98 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
+    }
+
     function it_is_not_neutral_by_default()
     {
         $this->shouldNotBeNeutral();
@@ -112,19 +123,19 @@ class AdjustmentSpec extends ObjectBehavior
 
     function it_is_a_charge_if_amount_is_lesser_than_0()
     {
-        $this->setAmount(-4.99);
+        $this->setAmount(-499);
         $this->shouldBeCharge();
 
-        $this->setAmount(6.99);
+        $this->setAmount(699);
         $this->shouldNotBeCharge();
     }
 
     function it_is_a_credit_if_amount_is_greater_than_0()
     {
-        $this->setAmount(29.99);
+        $this->setAmount(2999);
         $this->shouldBeCredit();
 
-        $this->setAmount(-2.99);
+        $this->setAmount(-299);
         $this->shouldNotBeCredit();
     }
 
@@ -143,7 +154,7 @@ class AdjustmentSpec extends ObjectBehavior
         $this->setAdjustable($adjustable)->shouldReturn($this);
         $this->setLabel('Shipping fee')->shouldReturn($this);
         $this->setDescription('Tax (23%)')->shouldReturn($this);
-        $this->setAmount(2.99)->shouldReturn($this);
+        $this->setAmount(299)->shouldReturn($this);
         $this->setNeutral(true)->shouldReturn($this);
     }
 }

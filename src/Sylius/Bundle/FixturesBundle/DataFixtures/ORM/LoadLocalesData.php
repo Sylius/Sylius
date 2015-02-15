@@ -22,10 +22,11 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 class LoadLocalesData extends DataFixture
 {
     private $locales = array(
-        'en' => true,
-        'es' => true,
-        'de' => true,
-        'it' => false,
+        'en_US' => true,
+        'es_ES' => true,
+        'de_DE' => true,
+        'it_IT' => false,
+        'pl_PL' => true,
     );
 
     /**

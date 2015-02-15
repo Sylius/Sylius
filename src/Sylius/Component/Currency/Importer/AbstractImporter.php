@@ -44,7 +44,7 @@ abstract class AbstractImporter implements ImporterInterface
      */
     protected function updateOrCreate(array $managedCurrencies, $code, $rate)
     {
-        if (!empty($managedCurrencies) && !in_array($code, $managedCurrencies)) {
+        if (!empty($managedCurrencies) && in_array($code, $managedCurrencies)) {
             foreach ($managedCurrencies as $currency) {
                 if ($code === $currency->getCode()) {
                     $currency->setExchangeRate($rate);

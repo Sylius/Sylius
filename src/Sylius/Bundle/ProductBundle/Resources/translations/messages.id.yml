@@ -7,5 +7,5 @@ sylius:
       name: Nama
       meta_keywords: Meta Kata Kunci
       meta_description: Meta Deskripsi
-    prototype:
+    archetype:
       name: Nama

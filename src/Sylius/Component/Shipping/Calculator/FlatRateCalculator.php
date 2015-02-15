@@ -28,7 +28,7 @@ class FlatRateCalculator extends Calculator
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return $configuration['amount'];
+        return (int)$configuration['amount'];
     }
 
     /**

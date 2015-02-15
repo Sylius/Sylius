@@ -1,0 +1,7 @@
+sylius:
+    email:
+        code:
+            not_blank: Please enter email code.
+            unique: Email code must be unique.
+        subject:
+            not_blank: Please enter email subject.

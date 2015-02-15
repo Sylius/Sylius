@@ -7,7 +7,9 @@ sylius_api_payment_index:
     defaults:
         _controller: sylius.controller.payment:indexAction
         _sylius:
-            sortable: true
+            paginate:   $limit
+            filterable: true
+            sortable:   true
 
 #sylius_api_payment_create:
 #    path: /

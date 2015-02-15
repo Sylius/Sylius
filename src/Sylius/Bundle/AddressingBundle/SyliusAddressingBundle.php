@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle;
 
-use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
@@ -20,7 +20,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusAddressingBundle extends AbstractTranslationBundle
+class SyliusAddressingBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

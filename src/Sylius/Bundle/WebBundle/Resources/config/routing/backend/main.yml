@@ -40,9 +40,9 @@ sylius_backend_product_attribute:
     resource: @SyliusWebBundle/Resources/config/routing/backend/product_attribute.yml
     prefix: /product-attributes
 
-sylius_backend_product_prototype:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/product_prototype.yml
-    prefix: /product-prototypes
+sylius_backend_product_archetype:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/product_archetype.yml
+    prefix: /product-archetypes
 
 sylius_backend_taxonomy:
     resource: @SyliusWebBundle/Resources/config/routing/backend/taxonomy.yml
@@ -87,6 +87,10 @@ sylius_backend_shipping_method:
 sylius_backend_shipment:
     resource: @SyliusWebBundle/Resources/config/routing/backend/shipment.yml
     prefix: /shipments
+
+sylius_backend_email:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/email.yml
+    prefix: /emails
 
 sylius_backend_payment_method:
     resource: @SyliusWebBundle/Resources/config/routing/backend/payment_method.yml
@@ -142,3 +146,7 @@ sylius_backend_security:
 sylius_backend_content:
     resource: @SyliusWebBundle/Resources/config/routing/backend/content/main.yml
     prefix: /content
+
+sylius_backend_report:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/report.yml
+    prefix: /reports

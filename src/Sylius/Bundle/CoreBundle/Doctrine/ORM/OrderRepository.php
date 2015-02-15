@@ -120,7 +120,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
-        $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->innerJoin('o.user', 'user')
+        ;
 
         if ($deleted) {
             $this->_em->getFilters()->disable('softdeleteable');
@@ -204,6 +207,49 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
+     * Create checkouts paginator.
+     *
+     * @param array   $criteria
+     * @param array   $sorting
+     * @param Boolean $deleted
+     *
+     * @return PagerfantaInterface
+     */
+    public function createCheckoutsPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    {
+        $queryBuilder = parent::getCollectionQueryBuilder();
+        $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.completedAt'));
+
+        if ($deleted) {
+            $this->_em->getFilters()->disable('softdeleteable');
+        }
+
+        if (!empty($criteria['createdAtFrom'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':createdAtFrom'))
+                ->setParameter('createdAtFrom', $criteria['createdAtFrom'])
+            ;
+        }
+        if (!empty($criteria['createdAtTo'])) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
+                ->setParameter('createdAtTo', $criteria['createdAtTo'])
+            ;
+        }
+
+        if (empty($sorting)) {
+            if (!is_array($sorting)) {
+                $sorting = array();
+            }
+            $sorting['updatedAt'] = 'desc';
+        }
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $this->getPaginator($queryBuilder);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function countByUserAndPaymentState(UserInterface $user, $state)
@@ -254,6 +300,76 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->select('sum(o.total)')
             ->getQuery()
             ->getSingleScalarResult()
+        ;
+    }
+
+
+    /**
+     * {@inheritdoc} 
+     */
+    public function revenueBetweenDatesGroupByDate(array $configuration = array())
+    {
+        $groupBy = '';
+        foreach ($configuration['groupBy'] as $groupByArray) {
+            $groupBy = $groupByArray.'(date)'.' '.$groupBy;
+        }
+        $groupBy = substr($groupBy, 0, -1);
+        $groupBy = str_replace(' ', ', ', $groupBy);
+
+        $queryBuilder = $this->getQueryBuilderBetweenDatesGroupByDate(
+            $configuration['start'],
+            $configuration['end'],
+            $groupBy);
+
+        $queryBuilder
+            ->select('DATE(o.completed_at) as date', 'TRUNCATE(SUM(o.total)/ 100,2) as "total sum"')
+        ;
+
+        return $queryBuilder
+            ->execute()
+            ->fetchAll();
+    }
+
+    /**
+     * {@inheritdoc} 
+     */
+    public function ordersBetweenDatesGroupByDate(array $configuration = array())
+    {
+        $groupBy = '';
+
+        foreach ($configuration['groupBy'] as $groupByElement) {
+            $groupBy = $groupByElement.'(date)'.' '.$groupBy;
+        }
+
+        $groupBy = substr($groupBy, 0, -1);
+        $groupBy = str_replace(' ', ', ', $groupBy);
+
+        $queryBuilder = $this->getQueryBuilderBetweenDatesGroupByDate(
+            $configuration['start'],
+            $configuration['end'],
+            $groupBy);
+
+        $queryBuilder
+            ->select('DATE(o.completed_at) as date', 'COUNT(o.id) as "Number of orders"')
+        ;
+
+        return $queryBuilder
+            ->execute()
+            ->fetchAll();
+    }
+
+    protected function getQueryBuilderBetweenDatesGroupByDate(\DateTime $from, \DateTime $to, $groupBy = 'Date(date)')
+    {
+        $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
+
+        return $queryBuilder
+            ->from('sylius_order', 'o')
+            ->where($queryBuilder->expr()->gte('o.completed_at', ':from'))
+            ->andWhere($queryBuilder->expr()->lte('o.completed_at', ':to'))
+            ->setParameter('from', $from->format('Y-m-d H:i:s'))
+            ->setParameter('to', $to->format('Y-m-d H:i:s'))
+            ->groupBy($groupBy)
+            ->orderBy($groupBy)
         ;
     }
 

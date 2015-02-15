@@ -134,7 +134,7 @@ sylius:
       index: sylius.breadcrumb.promotion_coupon.index
     property:
       index: Propiedades de producto
-    prototype:
+    archetype:
       index: Prototipos de producto
     sales: Ventas
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: Tipo
     update_header: actualizar encabezado
     updated_at: Última actualización
-  prototype:
+  archetype:
     build: Construir
     build_header: Construir encabezado
     create: Crear prototipo

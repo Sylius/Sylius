@@ -1,0 +1,2 @@
+Sylius\Component\Core\Model\Taxonomy:
+    exclusion_policy: ALL

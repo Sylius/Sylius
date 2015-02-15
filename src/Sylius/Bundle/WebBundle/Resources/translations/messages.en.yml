@@ -1,14 +1,19 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-email:
-    order_confirmation:
-        subject: Your order was confirmed
-    order_comment:
-        subject: Your order was commented by shop stuff
-        header: Order Comment
-
 sylius:
+    email:
+        order_confirmation:
+            name: Order confirmation
+            subject: Thank you for your order!
+
+        order_comment:
+            name: Order comment
+            subject: New comment posted on order #{{ order.number }}
+
+        user_confirmation:
+            name: User confirmation
+            subject: Welcome to our store!
     account:
         address:
             action:
@@ -175,10 +180,12 @@ sylius:
             index: Coupons
         attribute:
             index: Attributes
-        prototype:
-            index: Prototypes
+        archetype:
+            index: archetypes
         redirect_route:
             index: Redirect routes
+        report:
+            index: Reports
         route:
             index: Routes
         sales: Sales
@@ -195,6 +202,8 @@ sylius:
         taxation_settings: Taxation Settings
         taxonomy:
             index: Taxonomies
+        email:
+            index: Emails
         update: Edit
         user:
             index: Users
@@ -283,6 +292,17 @@ sylius:
         no_results: There are no countries configured.
         show_header: Country details
         update_header: Editing country
+    email:
+        create: Add new Email
+        create_header: Adding new Email
+        index_header: Email Templates
+        manage: Manage Emails
+        no_results: There are no emails configured.
+        update_header: Editing Email
+        code: Code
+        enabled: Enabled?
+        subject: Subject
+        updated_at: Last update
     create: Create
     created_at: Created at
     delete: delete
@@ -290,7 +310,6 @@ sylius:
     edit: edit
     move_up: move up
     move_down: move down
-    email: E-Mail
     currency:
         create: Create currency
         create_header: New currency
@@ -598,6 +617,7 @@ sylius:
         contain_variants: Contain Variants
         create: Create product
         create_header: New product
+        archetype: Archetype
         description: Description
         generate_variants: Generate variants
         index_by_taxon_header: Products <small>Categorized under "%taxon%" taxon</small>
@@ -699,21 +719,40 @@ sylius:
         type: type
         update_header: Editing attribute
         updated_at: last update
-    prototype:
-        build: Build prototype
-        build_header: Building product from prototype
-        create: Create prototype
-        create_header: New prototype
-        index_header: Product prototypes
+    archetype:
+        build: Build archetype
+        build_header: Building product from archetype
+        create: Create archetype
+        create_header: New archetype
+        index_header: Product archetypes
+        code: code
         name: name
-        no_results: There are no prototypes defined.
+        no_results: There are no archetypes defined.
         options: options
-        attributes:
-        update_header: Editing prototype
+        attributes: attributes
+        parent: parent
+        update_header: Editing archetype
         updated_at: last update
     province:
         provinces: Provinces
     remember_me: Remember me?
+    report:
+        create: Create report
+        create_header: Create new report
+        no_results: There are no reports created.
+        show_header: Report details
+        details: details
+        id: id
+        name: Name
+        code: Code
+        description: Description
+        manage: Manage
+        update_header: Edit report
+        renderer: Renderer type
+        data_fetcher: Data fetcher type
+        index_header: Reports
+        no_data: There is no data to display.
+        no_report: There is no report to display.
     save_changes: Save changes
     search: Search
     settings:
@@ -840,6 +879,8 @@ sylius:
         show_header: User details
         update_header: Editing user
         username: Username
+        groups: Groups
+        no_groups: There are no groups for this user to display.
     variant:
         add_image: Add image
         availability: Availability

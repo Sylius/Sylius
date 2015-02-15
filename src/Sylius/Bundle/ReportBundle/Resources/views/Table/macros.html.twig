@@ -1,0 +1,31 @@
+{% macro list(labels, fields, values) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if values|length > 0 %}
+    <table id="results" class="table table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>{{ sylius_resource_sort('id', '#') }}</th>
+                {% for label in labels %}
+                    <th>{{ sylius_resource_sort('label', label) }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,value in values %}
+                <tr id="{{ loop.index }}">
+                    <td>{{ loop.index }}</td>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.report.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

@@ -81,17 +81,13 @@ class VariantToCombinationTransformer implements DataTransformerInterface
     private function matches($value)
     {
         foreach ($this->variable->getVariants() as $variant) {
-            $matches = true;
-
             foreach ($value as $option) {
-                if (!$variant->hasOption($option)) {
-                    $matches = false;
+                if (null === $option || !$variant->hasOption($option)) {
+                    continue 2;
                 }
             }
 
-            if ($matches) {
-                return $variant;
-            }
+            return $variant;
         }
 
         return null;

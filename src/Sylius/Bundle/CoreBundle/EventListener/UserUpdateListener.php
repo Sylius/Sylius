@@ -41,6 +41,7 @@ class UserUpdateListener
             );
         }
 
+        $this->userManager->updateUser($user);
         $this->userManager->reloadUser($user);
     }
 }

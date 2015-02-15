@@ -1,0 +1,39 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_email_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.email:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Email:index.html.twig
+            sortable: true
+            sorting:
+                code: desc
+
+sylius_backend_email_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.email:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Email:create.html.twig
+            redirect: sylius_backend_email_update
+
+sylius_backend_email_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.email:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Email:update.html.twig
+            redirect: sylius_backend_email_index
+
+sylius_backend_email_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.email:deleteAction
+        _sylius:
+            redirect: sylius_backend_email_index

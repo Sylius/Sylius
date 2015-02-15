@@ -53,8 +53,7 @@ class OptionType extends AbstractResourceType
                 'label' => 'sylius.form.option.name'
             ))
             ->add('translations', 'a2lix_translationsForms', array(
-                // TODO Form as a service?
-                'form_type' => new OptionTranslationType($this->dataClass.'Translation', $this->validationGroups),
+                'form_type' => sprintf('sylius_%s_option_translation', $this->variableName),
                 'label'    => 'sylius.form.option.presentation'
             ))
             ->add('values', 'collection', array(

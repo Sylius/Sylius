@@ -98,4 +98,13 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
 
         $this->reverseTransform(array($optionValue))->shouldReturn(null);
     }
+
+    function it_should_not_reverse_transform_variable_with_variants_if_options_are_missing(
+        VariableInterface $variable,
+        VariantInterface $variant
+    ) {
+        $variable->getVariants()->willReturn(array($variant));
+
+        $this->reverseTransform(array(null))->shouldReturn(null);
+    }
 }

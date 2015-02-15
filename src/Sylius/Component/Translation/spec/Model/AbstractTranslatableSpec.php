@@ -3,7 +3,7 @@
 namespace spec\Sylius\Component\Translation\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prezent\Doctrine\Translatable\TranslationInterface;
+use Sylius\Component\Translation\Model\TranslationInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Translation\Model\AbstractTranslation;
 
@@ -16,7 +16,7 @@ class AbstractTranslatableSpec extends ObjectBehavior
 
     function it_is_translatable()
     {
-        $this->shouldImplement('Prezent\Doctrine\Translatable\TranslatableInterface');
+        $this->shouldImplement('Sylius\Component\Translation\Model\TranslatableInterface');
     }
 
     function it_initializes_translattion_collection_by_default()
@@ -91,13 +91,16 @@ class AbstractTranslatableSpec extends ObjectBehavior
         $this->setCurrentLocale('en');
 
         $translation = $this->translate();
-        $translation->shouldImplement('Prezent\Doctrine\Translatable\TranslationInterface');
+        $translation->shouldImplement('Sylius\Component\Translation\Model\TranslationInterface');
         $translation->acmeProperty->shouldBe('acmeProp');
     }
 }
 
 class ConcreteTranslatable extends AbstractTranslatable
 {
+    protected function getTranslationEntityClass(){
+        return  'spec\Sylius\Component\Translation\Model\ConcreteTranslatableTranslation';
+    }
 }
 
 class ConcreteTranslatableTranslation extends AbstractTranslation

@@ -9,9 +9,8 @@ Sylius\Component\Shipping\Model\Shipment:
         state:
             expose: true
             type: string
-        state:
+        method:
             expose: true
-            type: string
         createdAt:
             expose: true
             type: DateTime
@@ -20,11 +19,15 @@ Sylius\Component\Shipping\Model\Shipment:
             type: DateTime
     relations:
         - rel: self
+          exclusion:
+                exclude_if: expr(!object.getId())
           href:
                 route: sylius_api_shipment_show
                 parameters:
                     id: expr(object.getId())
         - rel: method
+          exclusion:
+                exclude_if: expr(!object.getMethod())
           href:
                 route: sylius_api_shipping_method_show
                 parameters:

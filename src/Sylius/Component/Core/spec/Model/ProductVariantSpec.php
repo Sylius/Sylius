@@ -51,6 +51,16 @@ class ProductVariantSpec extends ObjectBehavior
         $this->setPrice(499)->getPrice()->shouldReturn(499);
     }
 
+    function its_price_should_accept_only_integer()
+    {
+        $this->setPrice(410)->getPrice()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(array(410));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(new \stdClass());
+    }
+
     function it_should_inherit_price_from_master_variant(ProductVariantInterface $masterVariant)
     {
         $masterVariant->isMaster()->willReturn(true);

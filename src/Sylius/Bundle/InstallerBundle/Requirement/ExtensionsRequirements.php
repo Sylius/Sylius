@@ -107,6 +107,14 @@ class ExtensionsRequirements extends RequirementCollection
                 $translator->trans('sylius.extensions.help', array('%extension%' => 'iconv'), 'requirements')
             ))
             ->add(new Requirement(
+                $translator->trans('sylius.extensions.exif', array(), 'requirements'),
+                $status = function_exists('exif_read_data'),
+                $on,
+                $status ? $on : $off,
+                true,
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'exit'), 'requirements')
+            ))
+            ->add(new Requirement(
                 $translator->trans('sylius.extensions.intl', array(), 'requirements'),
                 $status = class_exists('Locale'),
                 $on,

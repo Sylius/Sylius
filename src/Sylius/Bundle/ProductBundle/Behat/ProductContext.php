@@ -33,7 +33,7 @@ class ProductContext extends DefaultContext
             $product->setCurrentLocale($this->getContainer()->getParameter('sylius.locale'));
             $product->setName(trim($data['name']));
             $product->setDescription('...');
-            $product->getMasterVariant()->setPrice($data['price'] * 100);
+            $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {
@@ -96,28 +96,43 @@ class ProductContext extends DefaultContext
     }
 
     /**
-     * @Given /^there is prototype "([^""]*)" with following configuration:$/
+     * @Given /^there is archetype "([^""]*)" with following configuration:$/
      */
-    public function thereIsPrototypeWithFollowingConfiguration($name, TableNode $table)
+    public function thereIsArchetypeWithFollowingConfiguration($name, TableNode $table)
     {
         $manager = $this->getEntityManager();
-        $repository = $this->getRepository('product_prototype');
+        $repository = $this->getRepository('product_archetype');
 
-        $prototype = $repository->createNew();
-        $prototype->setName($name);
+        $archetype = $repository->createNew();
+        $archetype
+            ->setName($name)
+            ->setCode($name)
+        ;
 
         $data = $table->getRowsHash();
 
         foreach (explode(',', $data['options']) as $optionName) {
-            $prototype->addOption($this->findOneByName('product_option', trim($optionName)));
+            $archetype->addOption($this->findOneByName('product_option', trim($optionName)));
         }
 
         foreach (explode(',', $data['attributes']) as $attributeName) {
-            $prototype->addAttribute($this->findOneByName('product_attribute', trim($attributeName)));
+            $archetype->addAttribute($this->findOneByName('product_attribute', trim($attributeName)));
         }
 
-        $manager->persist($prototype);
+        $manager->persist($archetype);
         $manager->flush();
+    }
+
+    /**
+     * @Then :locale translation for product archetype :archetypeName should exist
+     */
+    public function translationForProductArchetypeShouldExist($locale, $archetypeName)
+    {
+        $archetype = $this->findOneByName('product_archetype_translation', $archetypeName);
+
+        if (!$archetype->getLocale() === $locale) {
+            throw new \Exception('There is no translation for product archetype'. $archetypeName . ' in '.$locale . 'locale');
+        }
     }
 
     /**

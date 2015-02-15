@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Translation\Model;
 
-use Prezent\Doctrine\Translatable\TranslatableInterface;
-use Prezent\Doctrine\Translatable\TranslationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -57,9 +55,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Get the translations
-     *
-     * @return TranslationInterface[]
+     * {@inheritdoc}
      */
     public function getTranslations()
     {
@@ -67,11 +63,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Add a translation
-     *
-     * @param TranslationInterface $translation
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function addTranslation(TranslationInterface $translation)
     {
@@ -84,11 +76,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Remove a translation
-     *
-     * @param TranslationInterface $translation
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function removeTranslation(TranslationInterface $translation)
     {
@@ -210,12 +198,9 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Description of method
+     * Return translation entity class
      *
      * @return string
      */
-    protected function getTranslationEntityClass()
-    {
-        return get_class($this).'Translation';
-    }
+    abstract protected function getTranslationEntityClass();
 }

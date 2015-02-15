@@ -1,0 +1,36 @@
+Sylius\Component\Report\Model\Report:
+    exclusion_policy: ALL
+    xml_root_name: report
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        description:
+            expose: true
+            type: string
+        code:
+            expose: true
+            type: string
+            unique: true
+        renderer:
+            expose: true
+            type: string
+        rendererConfiguration:
+            expose: true
+            type: array
+        dataFetcher:
+            expose: true
+            type: string
+        dataFetcherConfiguration:
+            expose: true
+            type: array
+    relations:
+        - rel: self
+          href:
+                route: sylius_report_show
+                parameters:
+                    id: expr(object.getId())

@@ -117,6 +117,33 @@ class UserRepository extends EntityRepository
         ;
     }
 
+    public function getRegistrationStatistic(array $configuration = array())
+    {
+        $groupBy = '';
+        foreach ($configuration['groupBy'] as $groupByArray) {
+            $groupBy = $groupByArray.'(date)'.' '.$groupBy;
+        }
+        $groupBy = substr($groupBy, 0, -1);
+        $groupBy = str_replace(' ', ', ', $groupBy);
+
+        $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
+
+        $queryBuilder
+            ->select('DATE(u.created_at) as date', ' count(u.id) as user_total')
+            ->from('sylius_user', 'u')
+            ->where($queryBuilder->expr()->gte('u.created_at', ':from'))
+            ->andWhere($queryBuilder->expr()->lte('u.created_at', ':to'))
+            ->setParameter('from', $configuration['start']->format('Y-m-d H:i:s'))
+            ->setParameter('to', $configuration['end']->format('Y-m-d H:i:s'))
+            ->groupBy($groupBy)
+            ->orderBy($groupBy)
+        ;
+
+        return $queryBuilder
+            ->execute()
+            ->fetchAll();
+    }
+
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();

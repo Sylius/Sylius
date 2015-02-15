@@ -13,6 +13,6 @@ sylius:
     property:
       name: Внутреннее название
       presentation: Публичное название
-    prototype:
+    archetype:
       name: Название
       properties: Свойства

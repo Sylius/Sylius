@@ -84,7 +84,12 @@ class LoadCountriesData extends DataFixture
     {
         $countryRepository = $this->getCountryRepository();
         $countries = Intl::getRegionBundle()->getCountryNames($this->defaultLocale);
-        $localisedCountries = array('es' => Intl::getRegionBundle()->getCountryNames('es'));
+
+        if (Intl::isExtensionLoaded()) {
+            $localisedCountries = array('es' => Intl::getRegionBundle()->getCountryNames('es'));
+        } else {
+            $localisedCountries = array();
+        }
 
         foreach ($countries as $isoName => $name) {
             $country = $countryRepository->createNew();

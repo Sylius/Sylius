@@ -18,7 +18,6 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -64,28 +63,6 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function purgeDatabase(BeforeScenarioScope $scope)
-    {
-        $entityManager = $this->getService('doctrine.orm.entity_manager');
-        $entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
-
-        $isMysql = $entityManager->getConnection()->getDriver() instanceof PDOMySqlDriver;
-        if ($isMysql) {
-            $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 0;");
-        }
-
-        $purger = new ORMPurger($entityManager);
-        $purger->purge();
-
-        if ($isMysql) {
-            $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
-        }
-        $entityManager->clear();
     }
 
     /**
@@ -184,7 +161,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
         $list = explode(',', $configurationString);
 
         foreach ($list as $parameter) {
-            list($key, $value) = explode(':', $parameter);
+            list($key, $value) = explode(':', $parameter, 2);
             $key = strtolower(trim(str_replace(' ', '_', $key)));
 
             switch ($key) {
@@ -198,6 +175,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
 
                 case 'variant':
                     $configuration[$key] = $this->getRepository('product')->findOneBy(array('name' => trim($value)))->getMasterVariant()->getId();
+                    break;
+
+                case 'amount':
+                    $configuration[$key] = (int) $value;
                     break;
 
                 default:

@@ -19,6 +19,7 @@ use Sylius\Component\Translation\Model\AbstractTranslatable;
  * Product option default implementation.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Option extends AbstractTranslatable implements OptionInterface
 {
@@ -214,5 +215,13 @@ class Option extends AbstractTranslatable implements OptionInterface
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTranslationEntityClass()
+    {
+        return get_class().'Translation';
     }
 }

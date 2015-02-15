@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_product_archetype_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_archetype:indexAction
+        _sylius:
+            paginate: $limit
+            sortable: true
+            sorting:
+                name: desc
+
+sylius_api_product_archetype_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.product_archetype:createAction
+
+sylius_api_product_archetype_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.product_archetype:updateAction
+
+sylius_api_product_archetype_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_archetype:deleteAction
+
+sylius_api_product_archetype_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_archetype:showAction

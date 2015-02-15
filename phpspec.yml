@@ -2,7 +2,7 @@ suites:
     Addressing       : { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing }
     Attribute        : { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute }
     Cart             : { namespace: Sylius\Component\Cart, psr4_prefix: Sylius\Component\Cart, spec_path: src/Sylius/Component/Cart }
-    Core             : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius\Component\Core }
+    Core             : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius/Component/Core }
     Contact          : { namespace: Sylius\Component\Contact, psr4_prefix: Sylius\Component\Contact, spec_path: src/Sylius/Component/Contact }
     Currency         : { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency }
     Installer        : { namespace: Sylius\Component\Installer, psr4_prefix: Sylius\Component\Installer, spec_path: src/Sylius/Component/Installer }
@@ -16,6 +16,7 @@ suites:
     Product          : { namespace: Sylius\Component\Product, psr4_prefix: Sylius\Component\Product , spec_path: src/Sylius/Component/Product }
     Promotion        : { namespace: Sylius\Component\Promotion, psr4_prefix: Sylius\Component\Promotion, spec_path: src/Sylius/Component/Promotion }
     Registry         : { namespace: Sylius\Component\Registry, psr4_prefix: Sylius\Component\Registry, spec_path: src/Sylius/Component/Registry }
+    Report           : { namespace: Sylius\Component\Report, psr4_prefix: Sylius\Component\Report , spec_path: src/Sylius/Component/Report }
     Resource         : { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource }
     Sequence         : { namespace: Sylius\Component\Sequence, psr4_prefix: Sylius\Component\Sequence, spec_path: src/Sylius/Component/Sequence }
     Settings         : { namespace: Sylius\Component\Settings, psr4_prefix: Sylius\Component\Settings, spec_path: src/Sylius/Component/Settings }
@@ -25,6 +26,7 @@ suites:
     Taxonomy         : { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy }
     Translation      : { namespace: Sylius\Component\Translation, psr4_prefix: Sylius\Component\Translation, spec_path: src/Sylius/Component/Translation }
     Variation        : { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation }
+    Mailer           : { namespace: Sylius\Component\Mailer, psr4_prefix: Sylius\Component\Mailer, spec_path: src/Sylius/Component/Mailer }
 
     AddressingBundle : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle }
     AttributeBundle  : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle }
@@ -44,6 +46,7 @@ suites:
     ProductBundle    : { namespace: Sylius\Bundle\ProductBundle, psr4_prefix: Sylius\Bundle\ProductBundle, spec_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle  : { namespace: Sylius\Bundle\PromotionBundle, psr4_prefix: Sylius\Bundle\PromotionBundle, spec_path: src/Sylius/Bundle/PromotionBundle }
     ResourceBundle   : { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle , spec_path: src/Sylius/Bundle/ResourceBundle }
+    ReportBundle     : { namespace: Sylius\Bundle\ReportBundle, psr4_prefix: Sylius\Bundle\ReportBundle , spec_path: src/Sylius/Bundle/ReportBundle }
     SearchBundle     : { namespace: Sylius\Bundle\SearchBundle, psr4_prefix: Sylius\Bundle\SearchBundle, spec_path: src/Sylius/Bundle/SearchBundle }
     SequenceBundle   : { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle , spec_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle   : { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle , spec_path: src/Sylius/Bundle/SettingsBundle }
@@ -51,3 +54,4 @@ suites:
     TaxationBundle   : { namespace: Sylius\Bundle\TaxationBundle, psr4_prefix: Sylius\Bundle\TaxationBundle , spec_path: src/Sylius/Bundle/TaxationBundle }
     TaxonomyBundle   : { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle , spec_path: src/Sylius/Bundle/TaxonomyBundle }
     VariationBundle  : { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle }
+    MailerBundle     : { namespace: Sylius\Bundle\MailerBundle, psr4_prefix: Sylius\Bundle\MailerBundle, spec_path: src/Sylius/Bundle/MailerBundle }

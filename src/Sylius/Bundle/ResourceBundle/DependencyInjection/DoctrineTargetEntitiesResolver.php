@@ -65,7 +65,7 @@ class DoctrineTargetEntitiesResolver
         }
 
         throw new \InvalidArgumentException(
-            sprintf('The interface %s does not exists.', $key)
+            sprintf('The interface %s does not exist.', $key)
         );
     }
 
@@ -87,7 +87,7 @@ class DoctrineTargetEntitiesResolver
         }
 
         throw new \InvalidArgumentException(
-            sprintf('The class %s does not exists.', $key)
+            sprintf('The class %s does not exist.', $key)
         );
     }
 }

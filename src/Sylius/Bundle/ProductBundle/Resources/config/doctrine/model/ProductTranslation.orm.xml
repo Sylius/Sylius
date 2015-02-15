@@ -12,8 +12,7 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-                  xmlns:prezent="prezent">
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Product\Model\ProductTranslation" table="sylius_product_translation">
         <id name="id" column="id" type="integer">
@@ -37,8 +36,6 @@
         </field>
 
          <gedmo:loggable />
-
-        <prezent:translatable />
     </mapped-superclass>
 
 </doctrine-mapping>

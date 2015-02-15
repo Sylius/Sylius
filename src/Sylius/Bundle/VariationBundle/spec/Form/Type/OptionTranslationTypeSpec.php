@@ -60,6 +60,6 @@ class OptionTranslationTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_option_translation');
+        $this->getName()->shouldReturn('sylius_server_option_translation');
     }
 }

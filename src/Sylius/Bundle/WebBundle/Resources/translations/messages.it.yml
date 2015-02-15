@@ -134,7 +134,7 @@ sylius:
       index: Codici promozionali
     property:
       index: Proprietà
-    prototype:
+    archetype:
       index: Prototipi
     sales: Vendite
     shipment:
@@ -554,7 +554,7 @@ sylius:
     type: tipo
     update_header: Modificando proprietà
     updated_at: ultima modifica
-  prototype:
+  archetype:
     build: Costruisci prototipo
     build_header: Costruisci un prodotto da un prototipi
     create: Crea prototipo

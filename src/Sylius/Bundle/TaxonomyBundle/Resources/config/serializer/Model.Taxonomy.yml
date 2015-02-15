@@ -1,0 +1,19 @@
+Sylius\Component\Taxonomy\Model\Taxonomy:
+    exclusion_policy: ALL
+    xml_root_name: taxonomy
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        name:
+            expose: true
+            type: string
+        root:
+            expose: true
+    relations:
+        - rel: self
+          href:
+                route: sylius_api_taxonomy_show
+                parameters:
+                    id: expr(object.getId())

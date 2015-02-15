@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class Configuration
 {
@@ -282,11 +283,13 @@ class Configuration
 
     public function getCriteria(array $criteria = array())
     {
+        $defaultCriteria = array_merge($this->parameters->get('criteria', array()), $criteria);
+
         if ($this->isFilterable()) {
-            return $this->request->get('criteria', $this->parameters->get('criteria', $criteria));
+            return $this->getRequestParameter('criteria', $defaultCriteria);
         }
 
-        return $criteria;
+        return $defaultCriteria;
     }
 
     public function isSortable()
@@ -296,11 +299,21 @@ class Configuration
 
     public function getSorting(array $sorting = array())
     {
+        $defaultSorting = array_merge($this->parameters->get('sorting', array()), $sorting);
+
         if ($this->isSortable()) {
-            return $this->request->get('sorting', $this->parameters->get('sorting', $sorting));
+            return $this->getRequestParameter('sorting', $defaultSorting);
         }
 
-        return $sorting;
+        return $defaultSorting;
+    }
+
+    public function getRequestParameter($parameter, $defaults = array())
+    {
+        return array_replace_recursive(
+            $defaults,
+            $this->request->get($parameter, array())
+        );
     }
 
     public function getMethod($default)
@@ -347,5 +360,10 @@ class Configuration
     public function getSerializationVersion()
     {
         return $this->parameters->get('serialization_version');
+    }
+
+    public function getEvent($default = null)
+    {
+        return $this->parameters->get('event', $default);
     }
 }

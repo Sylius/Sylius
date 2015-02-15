@@ -134,8 +134,8 @@ sylius:
       index: Coupons
     property:
       index: Eigenschappen
-    prototype:
-      index: Prototypes
+    archetype:
+      index: archetypes
     sales: Omzet
     shipment:
       index: Verzendingen
@@ -554,17 +554,17 @@ sylius:
     type: type
     update_header: Eigenschap bewerken
     updated_at: laatst bijgewerkt
-  prototype:
-    build: Prototype bouwen
-    build_header: Maak een product op basis van een prototype
-    create: Nieuw prototype
-    create_header: Nieuw prototype toevoegen
-    index_header: Product prototypes
+  archetype:
+    build: archetype bouwen
+    build_header: Maak een product op basis van een archetype
+    create: Nieuw archetype
+    create_header: Nieuw archetype toevoegen
+    index_header: Product archetypes
     name: Naam
-    no_results: Er zijn geen prototypes gedefinieerd.
+    no_results: Er zijn geen archetypes gedefinieerd.
     options: opties
     properties: eigenschappen
-    update_header: Prototype bewerken
+    update_header: archetype bewerken
     updated_at: laatst bijgewerkt
   province:
     provinces: Provincies

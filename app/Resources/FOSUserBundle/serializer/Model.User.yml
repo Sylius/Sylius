@@ -9,3 +9,9 @@ FOS\UserBundle\Model\User:
         username:
             expose: true
             type: string
+        firstName:
+            expose: true
+            type: string
+        lastName:
+            expose: true
+            type: string

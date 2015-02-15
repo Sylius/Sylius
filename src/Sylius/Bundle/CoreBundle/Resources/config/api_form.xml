@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.api.order.class">Sylius\Bundle\CoreBundle\Form\Type\Api\OrderType</parameter>
+        <parameter key="sylius.form.type.api.order_item.class">Sylius\Bundle\CoreBundle\Form\Type\Api\OrderItemType</parameter>
+        <parameter key="sylius.form.type.api.taxon.class">Sylius\Bundle\CoreBundle\Form\Type\Api\TaxonType</parameter>
+        <parameter key="sylius.form.type.api.product.class">Sylius\Bundle\CoreBundle\Form\Type\Api\ProductType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.api.order" class="%sylius.form.type.api.order.class%">
+            <argument>%sylius.model.order.class%</argument>
+            <tag name="form.type" alias="sylius_api_order" />
+        </service>
+        <service id="sylius.form.type.api.order_item" class="%sylius.form.type.api.order_item.class%">
+            <argument>%sylius.model.order_item.class%</argument>
+            <tag name="form.type" alias="sylius_api_order_item" />
+        </service>
+        <service id="sylius.form.type.api.taxon" class="%sylius.form.type.api.taxon.class%">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="form.type" alias="sylius_api_taxon" />
+        </service>
+        <service id="sylius.form.type.api.product" class="%sylius.form.type.api.product.class%">
+            <argument>%sylius.model.product.class%</argument>
+            <tag name="form.type" alias="sylius_api_product" />
+        </service>
+    </services>
+
+</container>

@@ -70,6 +70,11 @@
             <argument type="service" id="sylius.shipping_rule_checker_registry" />
             <tag name="form.type" alias="sylius_shipping_method" />
         </service>
+        <service id="sylius.form.type.shipping_method_translation" class="%sylius.form.type.shipping_method_translation.class%">
+            <argument>%sylius.model.shipping_method_translation.class%</argument>
+            <argument>%sylius.validation_group.shipping_method%</argument>
+            <tag name="form.type" alias="sylius_shipping_method_translation" />
+        </service>
         <service id="sylius.form.type.shipping_category_choice" class="%sylius.form.type.shipping_category_choice.class%">
             <argument>%sylius.model.shipping_category.class%</argument>
             <tag name="form.type" alias="sylius_shipping_category_choice" />

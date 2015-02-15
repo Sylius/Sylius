@@ -16,14 +16,15 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExtension;
 
 /**
  * Resource system extension.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusResourceExtension extends Extension
+class SyliusResourceExtension extends AbstractTranslationExtension
 {
     /**
      * {@inheritdoc}
@@ -44,6 +45,8 @@ class SyliusResourceExtension extends Extension
         $container->setParameter('sylius.resource.settings', $config['settings']);
 
         $this->createResourceServices($classes, $container);
+        
+        $this->mapTranslations($classes, $container);
 
         if ($container->hasParameter('sylius.config.classes')) {
             $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
@@ -69,6 +72,19 @@ class SyliusResourceExtension extends Extension
                 $config['driver'],
                 array_key_exists('templates', $config) ? $config['templates'] : null
             )->load($config['classes']);
+        }
+    }
+
+    /**
+     * @param array $configs
+     * @param ContainerBuilder $container
+     */
+    private function mapTranslations(array $configs, ContainerBuilder $container)
+    {
+        foreach ($configs as $config) {
+            if (array_key_exists('translation', $config['classes']) || array_key_exists('translatable', $config['classes'])) {
+                $this->processTranslations($config['classes'], $container);
+            }
         }
     }
 }

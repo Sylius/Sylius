@@ -6,3 +6,6 @@ sylius:
     attribute:
       name: Interne naam
       presentation: Weergave
+    archetype:
+      name: Naam
+      properties: Eigenschappen

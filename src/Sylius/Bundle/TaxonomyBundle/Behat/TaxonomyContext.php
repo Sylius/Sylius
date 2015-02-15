@@ -107,8 +107,6 @@ class TaxonomyContext extends DefaultContext
      */
     public function theFollowingTaxonTranslationsExist(TableNode $table)
     {
-        $manager = $this->getEntityManager();
-
         foreach ($table->getHash() as $data) {
             $taxonTranslation = $this->findOneByName('taxon_translation', $data['taxon']);
             $taxon = $taxonTranslation->getTranslatable();
@@ -117,6 +115,28 @@ class TaxonomyContext extends DefaultContext
                 ->setName($data['name']);
         }
 
-        $manager->flush();
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Then Taxon translation :taxonName should have permalink :expectedPermalink
+     */
+    public function taxonForLocaleShouldHavePermalink($taxonName, $expectedPermalink)
+    {
+        $taxonTranslation = $this->findOneByName('taxon_translation', $taxonName);
+        $permalink = $taxonTranslation->getPermalink();
+
+        \PHPUnit_Framework_Assert::assertEquals($expectedPermalink, $permalink);
+    }
+
+    /**
+     * @When I change then name of taxon translation :taxonName to :newName
+     */
+    public function iChangeThenNameOfTaxonTranslationTo($taxonName, $newName)
+    {
+        $taxonTranslation = $this->findOneByName('taxon_translation', $taxonName);
+        $taxonTranslation->setName($newName);
+
+        $this->getEntityManager()->flush();
     }
 }

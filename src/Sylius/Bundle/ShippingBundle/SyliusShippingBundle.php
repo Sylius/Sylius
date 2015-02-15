@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle;
 
-use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
@@ -26,7 +26,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusShippingBundle extends AbstractTranslationBundle
+class SyliusShippingBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

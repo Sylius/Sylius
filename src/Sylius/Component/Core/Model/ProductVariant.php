@@ -173,7 +173,10 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function setPrice($price)
     {
-        $this->price = (int)$price;
+        if (!is_int($price)) {
+            throw new \InvalidArgumentException('Price must be an integer.');
+        }
+        $this->price = $price;
 
         return $this;
     }
@@ -340,6 +343,18 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage()
+    {
+        if ($this->images->isEmpty()) {
+            return $this->getProduct()->getImage();
+        }
+
+        return $this->images->first();
     }
 
     /**

@@ -27,7 +27,7 @@ sylius:
                 products: Products
                 promotions: Promotions
                 attributes: Configure attributes
-                prototypes: Product prototypes
+                archetypes: Product archetypes
                 sales: Orders
                 shipments: Shipments
                 shipping_categories: Shipping categories
@@ -39,6 +39,7 @@ sylius:
                 taxonomies: Categorization
                 users: Users
                 zones: Zones
+                emails: Emails
             sidebar:
                 api_clients: API clients
                 assortment: Assortment
@@ -65,8 +66,9 @@ sylius:
                 payments: Payments
                 products: Products
                 promotions: Promotions
+                report: Reports
                 attributes: Configure attributes
-                prototypes: Product prototypes
+                archetypes: Product archetypes
                 sales: Orders
                 shipments: Shipments
                 shipping_categories: Shipping categories
@@ -79,6 +81,7 @@ sylius:
                 taxonomies: Categorization
                 users: Users
                 zones: Zones
+                emails: Emails
     frontend:
         menu:
             account:

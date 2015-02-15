@@ -1,0 +1,10 @@
+{% from 'SyliusReportBundle:Table:macros.html.twig' import list %}
+
+{% set report = data.report %}
+{% set labels = data.labels %}
+{% set values = data.values %}
+{% set fields = data.fields %}
+
+{% if labels is defined %}
+    {{ list(labels, fields, values) }}
+{% endif %}

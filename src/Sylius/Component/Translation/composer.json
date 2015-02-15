@@ -22,9 +22,8 @@
     "require": {
         "php": ">=5.3.3",
 
-        "doctrine/collections"          : "~1.2",
-        "doctrine/orm"                 : "~2.4",
-        "prezent/doctrine-translatable": "1.0.*@dev"
+        "doctrine/collections" : "~1.2",
+        "doctrine/orm"         : "~2.4"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -40,7 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.14-dev"
         }
     }
 }

@@ -13,16 +13,19 @@ namespace Sylius\Bundle\TranslationBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\TranslationMetadataFactoryPass;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\TranslationListenerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SyliusTranslationBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
 
-        $container->addCompilerPass(new TranslationMetadataFactoryPass());
+        $container->addCompilerPass(new TranslationListenerPass());
     }
 
     /**
@@ -31,16 +34,9 @@ class SyliusTranslationBundle extends AbstractResourceBundle
     public static function getSupportedDrivers()
     {
         return array(
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getBundlePrefix()
-    {
-        return 'sylius_translation';
     }
 
     /**

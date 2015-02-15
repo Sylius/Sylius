@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle;
 
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
-use Sylius\Bundle\TranslationBundle\AbstractTranslationBundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusCoreBundle extends AbstractTranslationBundle
+class SyliusCoreBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

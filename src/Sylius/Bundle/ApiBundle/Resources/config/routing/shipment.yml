@@ -7,9 +7,11 @@ sylius_api_shipment_index:
     defaults:
         _controller: sylius.controller.shipment:indexAction
         _sylius:
-            sortable: true
+            paginate:   $limit
+            filterable: true
+            sortable:   true
             sorting:
-                name: desc
+                createdAt: desc
 
 sylius_api_shipment_create:
     path: /

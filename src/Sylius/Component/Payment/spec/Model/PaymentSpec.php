@@ -87,6 +87,16 @@ class PaymentSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(4999);
     }
 
+    function its_amount_should_accept_only_integer()
+    {
+        $this->setAmount(4498)->getAmount()->shouldBeInteger();
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(44.98 * 100);
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount('4498');
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(round(44.98 * 100));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(array(4498));
+        $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
+    }
+
     function it_has_new_state_by_default()
     {
         $this->getState()->shouldReturn(PaymentInterface::STATE_NEW);

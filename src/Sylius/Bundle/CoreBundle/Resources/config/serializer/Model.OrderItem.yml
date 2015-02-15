@@ -4,3 +4,21 @@ Sylius\Component\Core\Model\OrderItem:
     properties:
         inventoryUnits:
             expose: true
+        variant:
+            expose: true
+    relations:
+        - rel: product
+          exclusion:
+                exclude_if: expr(!object.getVariant())
+          href:
+                route: sylius_api_product_show
+                parameters:
+                    id: expr(object.getVariant().getProduct().getId())
+        - rel: variant
+          exclusion:
+                exclude_if: expr(!object.getVariant())
+          href:
+                route: sylius_api_product_variant_show
+                parameters:
+                    id: expr(object.getVariant().getId())
+                    productId: expr(object.getVariant().getProduct().getId())
