@@ -356,6 +356,7 @@ sylius:
         previous: Previous
         slideshow: Slideshow
     generate: Generate
+    go_to_dashboard: Go to dashboard
     group:
         create: Create group
         create_header: Adding new user groups
