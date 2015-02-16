@@ -228,13 +228,12 @@ class TranslatableListener implements EventSubscriber, TranslatableListenerInter
         $entity = $args->getEntity();
 
         // Sometimes $entity is a doctrine proxy class, we therefore need to retrieve it's real class
-        $name = $args->getEntityManager()->getClassMetadata(get_class($entity))->getName();
-
-        if (!isset($this->metadata[$name])) {
+        $classMetadata = $args->getEntityManager()->getClassMetadata(get_class($entity));
+        if (!isset($this->metadata[$classMetadata->getName()]) && !isset($this->metadata[$classMetadata->rootEntityName])) {
             return;
         }
 
-        $metadata = $this->metadata[$name];
+        $metadata = isset($this->metadata[$classMetadata->name]) ? $this->metadata[$classMetadata->getName()] : $this->metadata[$classMetadata->rootEntityName];
 
         if (isset($metadata['fallbackLocale'])) {
             $setter = 'set'.ucfirst($metadata['fallbackLocale']);
