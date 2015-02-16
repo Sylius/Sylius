@@ -116,7 +116,7 @@ class ExtensionsRequirements extends RequirementCollection
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.extensions.intl', array(), 'requirements'),
-                $status = class_exists('Locale'),
+                $status = extension_loaded('intl'),
                 $on,
                 $status ? $on : $off,
                 false,
@@ -124,7 +124,7 @@ class ExtensionsRequirements extends RequirementCollection
             ))
         ;
 
-        if (class_exists('Locale')) {
+        if (extension_loaded('intl')) {
             if (defined('INTL_ICU_VERSION')) {
                 $version = INTL_ICU_VERSION;
             } else {
