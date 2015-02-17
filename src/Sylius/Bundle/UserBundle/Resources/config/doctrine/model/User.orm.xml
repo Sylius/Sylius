@@ -22,6 +22,38 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="username" column="username" type="string" nullable="false" />
+        <field name="usernameCanonical" column="username_canonical" type="string" nullable="false" />
+        <field name="email" column="email" type="string" nullable="false" />
+        <field name="emailCanonical" column="email_canonical" type="string" nullable="false" />
+        <field name="enabled" column="enabled" type="boolean" nullable="false" />
+        <field name="salt" column="salt" type="string" nullable="false" />
+        <field name="password" column="password" type="string" nullable="false" />
+        <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
+        <field name="confirmationToken" column="confirmation_token" type="string" nullable="true" />
+        <field name="passwordRequestedAt" column="password_requested_at" type="datetime" nullable="true" />
+
+        <many-to-many field="groups" target-entity="Sylius\Component\User\Model\GroupInterface">
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <join-table name="sylius_user_group">
+                <join-columns>
+                    <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="group_id" referenced-column-name="id" on-delete="CASCADE"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <field name="locked" column="locked" type="boolean" nullable="false" />
+        <field name="expired" column="expired" type="boolean" nullable="false" />
+        <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
+        <field name="roles" column="roles" type="array" nullable="false" />
+        <field name="credentialsExpired" column="credentials_expired" type="boolean" nullable="false" />
+        <field name="credentialsExpireAt" column="credentials_expire_at" type="datetime" nullable="true" />
+
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
@@ -37,20 +69,6 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-
-        <many-to-many field="groups" target-entity="Sylius\Component\User\Model\GroupInterface">
-            <cascade>
-                <cascade-all />
-            </cascade>
-            <join-table name="sylius_user_group">
-                <join-columns>
-                    <join-column name="user_id" referenced-column-name="id" on-delete="CASCADE"/>
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="group_id" referenced-column-name="id" on-delete="CASCADE"/>
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
 
         <gedmo:soft-deleteable field-name="deletedAt" />
     </mapped-superclass>

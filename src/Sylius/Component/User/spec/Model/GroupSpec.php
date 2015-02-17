@@ -30,6 +30,6 @@ class GroupSpec extends ObjectBehavior
 
     function it_extends_FOS_group_model()
     {
-        $this->shouldHaveType('FOS\UserBundle\Model\Group');
+        $this->shouldHaveType('Sylius\Component\User\Model\Group');
     }
 }

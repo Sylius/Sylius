@@ -25,9 +25,14 @@ class UserSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\User\Model\User');
     }
     
-    function it_implements_Fos_user_interface()
+    function it_implements_user_interface()
     {
-        $this->shouldImplement('FOS\UserBundle\Model\UserInterface');
+        $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
+    }
+    
+    function it_implements_groupable_interface()
+    {
+        $this->shouldImplement('Sylius\Component\User\Model\GroupableInterface');
     }
     
     function it_sets_user_first_name()

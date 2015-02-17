@@ -17,7 +17,10 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.user_provider.class">Sylius\Bundle\UserBundle\Provider\UserProvider</parameter>
+        <parameter key="sylius.provider.name_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameProvider</parameter>
+        <parameter key="sylius.provider.name_or_email_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider</parameter>
+        <parameter key="sylius.provider.email_provider.class">Sylius\Bundle\UserBundle\Provider\EmailProvider</parameter>
+
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\UserBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\UserBundle\EventListener\UserAwareListener</parameter>
@@ -49,6 +52,16 @@
                 <argument>sylius</argument>
             </argument>
             <tag name="form.type" alias="sylius_group" />
+        </service>
+
+        <service id="sylius.provider.email_provider" class="%sylius.provider.email_provider.class%">
+            <argument type="service" id="sylius.repository.user" />
+        </service>
+        <service id="sylius.provider.name_or_email_provider" class="%sylius.provider.name_or_email_provider.class%">
+            <argument type="service" id="sylius.repository.user" />
+        </service>
+        <service id="sylius.provider.name_provider" class="%sylius.provider.name_provider.class%">
+            <argument type="service" id="sylius.repository.user" />
         </service>
     </services>
 

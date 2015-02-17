@@ -11,11 +11,56 @@
 
 namespace Sylius\Bundle\UserBundle\Provider;
 
-use Sylius\Component\Locale\Provider\LocaleProvider as BaseLocaleProvider;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserProvider extends BaseLocaleProvider implements LocaleProviderInterface
+abstract class UserProvider implements UserProviderInterface
 {
+    /**
+     * @var RepositoryInterface
+     */
+    protected $userRepository;
+
+    public function __construct(RepositoryInterface $userRepository) {
+        $this->userRepository = $userRepository;    
+    }
+
+    public function loadUserByUsername($usernameOrEmail)
+    {
+
+        $user = $this->findUser($usernameOrEmail);
+
+        if (!$user) {
+            throw new UsernameNotFoundException(
+                sprintf('Username "%s" does not exist.', $usernameOrEmail)
+            );
+        }
+
+        return $user;
+    }
+
+    public function refreshUser(UserInterface $user)
+    {
+        if (!$user instanceof SyliusUserInterface) {
+            throw new UnsupportedUserException(
+                sprintf('Instances of "%s" are not supported.', get_class($user))
+            );
+        }
+
+        return $this->userRepository->find($user->getId());
+    }
+
+    protected abstract function findUser($usernameOrEmail);
+
+    public function supportsClass($class)
+    {
+        return $class === 'Sylius\Component\User\Model\UserInterface';
+    }
 }
