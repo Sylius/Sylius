@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    email:
+    emails:
         order_confirmation:
             name: Order confirmation
             subject: Thank you for your order!
@@ -314,7 +314,6 @@ sylius:
     edit: edit
     move_up: move up
     move_down: move down
-    email: E-Mail
     permission:
         create: Add new permission
         create_header: New permission

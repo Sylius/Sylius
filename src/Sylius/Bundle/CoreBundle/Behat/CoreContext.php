@@ -41,14 +41,6 @@ class CoreContext extends DefaultContext
     protected $orders = array();
 
     /**
-     * @Given /^I am logged in as administrator$/
-     */
-    public function iAmLoggedInAsAdministrator()
-    {
-        $this->iAmLoggedInAsRole('ROLE_ADMINISTRATION_ACCESS', 'sylius@example.com', array('administrator'));
-    }
-
-    /**
      * @Given I am logged in as :role
      */
     public function iAmLoggedInAsAuthorizationRole($role)

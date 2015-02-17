@@ -260,13 +260,13 @@ sylius_mailer:
         address: no-reply@example.com
     emails:
         order_confirmation:
-            subject: sylius.email.order_confirmation.subject
+            subject: sylius.emails.order_confirmation.subject
             template: SyliusWebBundle:Email:orderConfirmation.html.twig
         order_comment:
-            subject: sylius.email.order_comment.subject
+            subject: sylius.emails.order_comment.subject
             template: SyliusWebBundle:Email:orderComment.html.twig
         user_confirmation:
-            subject: sylius.email.user_confirmation.subject
+            subject: sylius.emails.user_confirmation.subject
             template: SyliusWebBundle:Email:userConfirmation.html.twig
 
 sylius_rbac:
@@ -537,6 +537,34 @@ sylius_rbac:
         sylius.slideshow.update: Edit slideshow
         sylius.slideshow.delete: Delete slideshow
 
+        sylius.manage.email: Manage emails
+        sylius.email.show: Show email
+        sylius.email.index: List emails
+        sylius.email.create: Create email
+        sylius.email.update: Edit email
+        sylius.email.delete: Delete email
+
+        sylius.manage.report: Manage reports
+        sylius.report.show: Show report
+        sylius.report.index: List reports
+        sylius.report.create: Create report
+        sylius.report.update: Edit report
+        sylius.report.delete: Delete report
+
+        sylius.manage.contact_request: Manage contact_requests
+        sylius.contact_request.show: Show contact request
+        sylius.contact_request.index: List contact requests
+        sylius.contact_request.create: Create contact request
+        sylius.contact_request.update: Edit contact request
+        sylius.contact_request.delete: Delete contact request
+
+        sylius.manage.contact_topic: Manage contact topics
+        sylius.contact_topic.show: Show contact topic
+        sylius.contact_topic.index: List contact topics
+        sylius.contact_topic.create: Create contact topic
+        sylius.contact_topic.update: Edit contact topic
+        sylius.contact_topic.delete: Delete contact topic
+
         sylius.catalog: Manage products catalog
         sylius.sales: Manage sales
         sylius.shipping: Manage shipping
@@ -545,6 +573,7 @@ sylius_rbac:
         sylius.security: Manage site security
         sylius.accounts: Manage user accounts
         sylius.taxes: Manage taxes
+        sylius.support: Manage customer support
     permissions_hierarchy:
         sylius.manage.user: [sylius.user.show, sylius.user.index, sylius.user.create, sylius.user.update, sylius.user.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
@@ -581,15 +610,20 @@ sylius_rbac:
         sylius.manage.imagine_block: [sylius.imagine_block.show, sylius.imagine_block.index, sylius.imagine_block.create, sylius.imagine_block.update, sylius.imagine_block.delete]
         sylius.manage.slideshow_block: [sylius.slideshow_block.show, sylius.slideshow_block.index, sylius.slideshow_block.create, sylius.slideshow_block.update, sylius.slideshow_block.delete]
         sylius.manage.slideshow: [sylius.slideshow.show, sylius.slideshow.index, sylius.slideshow.create, sylius.slideshow.update, sylius.slideshow.delete]
+        sylius.manage.email: [sylius.email.show, sylius.email.index, sylius.email.create, sylius.email.update, sylius.email.delete]
+        sylius.manage.report: [sylius.report.show, sylius.report.index, sylius.report.create, sylius.report.update, sylius.report.delete]
+        sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
+        sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
 
-        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant]
-        sylius.sales: [sylius.manage.order, sylius.manage.payment]
-        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon]
+        sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
+        sylius.sales: [sylius.manage.order, sylius.manage.payment, sylius.manage.report]
+        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.user, sylius.manage.group, sylius.accounts]
         sylius.accounts: [sylius.manage.user, sylius.manage.group]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
+        sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
     security_roles:
         ROLE_ADMINISTRATION_ACCESS: Can access administration
         ROLE_API_ACCESS: Can access REST API
@@ -649,6 +683,11 @@ sylius_rbac:
             description: Developers Access
             permissions: [sylius.user.index, sylius.user.show, sylius.manage.api_client]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
+        support:
+            name: Support
+            description: Support Team
+            permissions: [sylius.support, sylius.user.show, sylius.user.index]
+            security_roles: [ROLE_ADMINISTRATION_ACCESS]
     roles_hierarchy:
-        administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it]
+        administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
