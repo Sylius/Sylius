@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * Shipping method translation model.

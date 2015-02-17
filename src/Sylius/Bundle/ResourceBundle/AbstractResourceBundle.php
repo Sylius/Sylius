@@ -58,7 +58,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
                 $mappingsPassClassName = $this->getMappingDriverInfo($driver);
 
                 if (class_exists($mappingsPassClassName)) {
-                    switch ($this->mappingFormat){
+                    switch ($this->mappingFormat) {
                         case self::MAPPING_XML:
                             $container->addCompilerPass($mappingsPassClassName::createXmlMappingDriver(
                                 array($this->getConfigFilesPath() => $this->getModelNamespace()),
@@ -126,7 +126,7 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     protected function getModelNamespace()
     {
-        return null;
+        return;
     }
 
     /**

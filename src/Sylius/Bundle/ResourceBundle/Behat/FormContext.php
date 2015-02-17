@@ -186,7 +186,7 @@ abstract class FormContext extends RawMinkContext
     {
         if (null !== $container) {
             $field = $container->find('named', array(
-                'field', $this->getSession()->getSelectorsHandler()->xpathLiteral($locator)
+                'field', $this->getSession()->getSelectorsHandler()->xpathLiteral($locator),
             ));
         } else {
             $field = $this->getSession()->getPage()->findField($locator);

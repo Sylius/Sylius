@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Taxonomy\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * Model for taxonomy translations.

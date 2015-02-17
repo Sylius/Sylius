@@ -9,7 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Translation\Model;
+namespace Sylius\Component\Resource\Model;
+
 
 
 /**

@@ -61,10 +61,10 @@ class ObjectToIdentifierType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'identifier' => 'id'
+                'identifier' => 'id',
             ))
             ->setAllowedTypes(array(
-                'identifier' => array('string')
+                'identifier' => array('string'),
             ))
         ;
     }

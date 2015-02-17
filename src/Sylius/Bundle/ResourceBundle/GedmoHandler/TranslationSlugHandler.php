@@ -8,8 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
-
+namespace Sylius\Bundle\ResourceBundle\GedmoHandler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -115,16 +114,15 @@ class TranslationSlugHandler implements SlugHandlerInterface
 
         $wrapped = AbstractWrapper::wrap($relation, $this->om);
         if ($parent = $wrapped->getPropertyValue($options['relationParentRelationField'])) {
-
-            $translation = call_user_func_array(array($parent,$options['translate']), array($locale));
+            $translation = call_user_func_array(array($parent, $options['translate']), array($locale));
 
             $this->parentSlug = $translation->$options['parentFieldMethod']();
 
             // if needed, remove suffix from parentSlug, so we can use it to prepend it to our slug
-            if(isset($options['suffix'])) {
+            if (isset($options['suffix'])) {
                 $suffix = $options['suffix'];
 
-                if(substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
+                if (substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
                     $this->parentSlug = substr_replace($this->parentSlug, '', -1 * strlen($suffix));
                 }
             }
@@ -183,9 +181,9 @@ class TranslationSlugHandler implements SlugHandlerInterface
      * Transliterates the slug and prefixes the slug
      * by collection of parent slugs
      *
-     * @param string $text
-     * @param string $separator
-     * @param object $object
+     * @param  string $text
+     * @param  string $separator
+     * @param  object $object
      * @return string
      */
     public function transliterate($text, $separator, $object)
@@ -193,11 +191,10 @@ class TranslationSlugHandler implements SlugHandlerInterface
         $slug = $text;
 
         if (strlen($this->parentSlug)) {
-            $slug = $this->parentSlug . $this->usedPathSeparator . $slug . $this->suffix;
-        }
-        else {
+            $slug = $this->parentSlug.$this->usedPathSeparator.$slug.$this->suffix;
+        } else {
             // if no parentSlug, apply our prefix
-            $slug = $this->prefix . $slug;
+            $slug = $this->prefix.$slug;
         }
 
         return $slug;

@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ResourceBundle\Form;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * Generates a form class based on a Doctrine entity.
@@ -62,9 +61,9 @@ class DefaultFormFactory
      * Returns an array of fields. Fields can be both column fields and
      * association fields.
      *
-     * @param  ClassMetadataInfo $metadata
+     * @param ClassMetadataInfo $metadata
      *
-     * @return array             $fields
+     * @return array $fields
      */
     private function getFieldsFromMetadata(ClassMetadataInfo $metadata)
     {

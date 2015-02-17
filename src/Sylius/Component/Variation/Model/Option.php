@@ -13,7 +13,7 @@ namespace Sylius\Component\Variation\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Sylius\Component\Resource\Model\AbstractTranslatable;
 
 /**
  * Product option default implementation.

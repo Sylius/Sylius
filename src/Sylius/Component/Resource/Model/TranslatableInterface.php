@@ -9,7 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Translation\Model;
+namespace Sylius\Component\Resource\Model;
+
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -26,7 +27,7 @@ interface TranslatableInterface
     /**
      * Add a new translation
      *
-     * @param TranslationInterface $translation
+     * @param  TranslationInterface $translation
      * @return self
      */
     public function addTranslation(TranslationInterface $translation);
@@ -34,7 +35,7 @@ interface TranslatableInterface
     /**
      * Remove a translation
      *
-     * @param TranslationInterface $translation
+     * @param  TranslationInterface $translation
      * @return $this
      */
     public function removeTranslation(TranslationInterface $translation);

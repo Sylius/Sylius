@@ -32,7 +32,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     {
         $className = $this->getClassName();
 
-        return new $className;
+        return new $className();
     }
 
     /**
@@ -176,7 +176,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
                 $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
             } elseif ('' !== $value) {
                 $queryBuilder
-                    ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
+                    ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':'.$property))
                     ->setParameter($property, $value);
             }
         }
