@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Mailer\Sender\Adapter;
+namespace Sylius\Component\Mailer\Renderer\Adapter;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 abstract class AbstractAdapter implements AdapterInterface
