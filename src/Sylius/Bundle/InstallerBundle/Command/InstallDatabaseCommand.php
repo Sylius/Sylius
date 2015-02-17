@@ -78,6 +78,7 @@ EOT
         $commands[] = 'cache:clear';
         $commands[] = 'doctrine:phpcr:repository:init';
         $commands[] = 'sylius:search:index';
+        $commands[] = 'sylius:rbac:initialize';
 
         $this->runCommands($commands, $input, $output);
 

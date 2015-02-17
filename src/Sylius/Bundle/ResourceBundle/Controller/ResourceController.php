@@ -23,6 +23,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -106,6 +107,8 @@ class ResourceController extends FOSRestController
      */
     public function showAction(Request $request)
     {
+        $this->isGrantedOr403('show');
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
@@ -123,6 +126,8 @@ class ResourceController extends FOSRestController
      */
     public function indexAction(Request $request)
     {
+        $this->isGrantedOr403('index');
+
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -171,6 +176,8 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
+        $this->isGrantedOr403('create');
+
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
@@ -215,6 +222,8 @@ class ResourceController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
+        $this->isGrantedOr403('update');
+
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
@@ -259,6 +268,8 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
+        $this->isGrantedOr403('delete');
+
         $resource = $this->domainManager->delete($this->findOr404($request));
 
         if ($this->config->isApiRequest()) {
@@ -436,5 +447,18 @@ class ResourceController extends FOSRestController
         }
 
         return $handler->handle($view);
+    }
+
+    protected function isGrantedOr403($permission)
+    {
+        if (!$this->container->has('sylius.authorization_checker')) {
+            return true;
+        }
+
+        $permission = $this->config->getPermission($permission);
+
+        if ($permission && !$this->get('sylius.authorization_checker')->isGranted(sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission))) {
+            throw new AccessDeniedHttpException();
+        }
     }
 }

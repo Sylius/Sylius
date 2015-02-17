@@ -77,6 +77,7 @@ sylius:
             enabled: Enabled
             first_name: First name
             groups: Groups
+            roles: Roles
             last_name: Last name
             password: Password
             shipping_address: Shipping address

@@ -207,6 +207,10 @@ sylius:
         update: Edit
         user:
             index: Users
+        permission:
+            index: Permissions
+        role:
+            index: Roles
         zone:
             index: Zones
     browse_products: Browse products
@@ -310,6 +314,28 @@ sylius:
     edit: edit
     move_up: move up
     move_down: move down
+    email: E-Mail
+    permission:
+        create: Add new permission
+        create_header: New permission
+        code: Code
+        id: ID
+        description: Description
+        index_header: Permissions
+        no_results: There are no permissions defined.
+        update_header: Editing permission
+        updated_at: Last update
+    role:
+        create: Add new role
+        create_header: New role
+        code: Code
+        id: ID
+        name: Name
+        description: Description
+        index_header: Roles
+        no_results: There are no roles defined.
+        update_header: Editing role
+        updated_at: Last update
     currency:
         create: Create currency
         create_header: New currency

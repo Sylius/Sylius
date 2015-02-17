@@ -502,7 +502,23 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         $tr = $this->assertSession()->elementExists('css', sprintf('table tbody tr:contains("%s")', $value));
         $this->assertSession()->elementExists('css', $element, $tr);
     }
-    
+
+    /**
+     * @Then I should not see :position in the menu
+     */
+    public function iShouldNotSeeInTheMenu($position)
+    {
+        $this->assertSession()->elementNotContains('css', sprintf('.sidebar-nav'), $position);
+    }
+
+    /**
+     * @Then I should see :position in the menu
+     */
+    public function iShouldSeeInTheMenu($position)
+    {
+        $this->assertSession()->elementContains('css', sprintf('.sidebar-nav'), $position);
+    }
+
     /**
      * @Then I should not see :button button
      */
@@ -906,5 +922,13 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         sort($allSurnames);
         
         $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
+    }
+
+    /**
+     * @Then I should have my access denied
+     */
+    public function iShouldHaveMyAccessDenied()
+    {
+        $this->assertStatusCodeEquals(403);
     }
 }

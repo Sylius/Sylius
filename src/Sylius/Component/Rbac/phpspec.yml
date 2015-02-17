@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Component\Rbac
+        psr4_prefix: Sylius\Component\Rbac
+        src_path: .

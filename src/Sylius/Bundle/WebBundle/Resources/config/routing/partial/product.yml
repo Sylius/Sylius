@@ -10,3 +10,4 @@ sylius_partial_product_latest:
             method: findLatest
             arguments: [$limit]
             template: $template
+            permission: false

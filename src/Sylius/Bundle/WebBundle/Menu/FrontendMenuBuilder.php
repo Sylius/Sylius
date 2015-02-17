@@ -16,6 +16,7 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -66,6 +67,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param SecurityContextInterface  $securityContext
      * @param TranslatorInterface       $translator
      * @param EventDispatcherInterface  $eventDispatcher
+     * @param AuthorizationCheckerInterface $authorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
      * @param RepositoryInterface       $taxonomyRepository
      * @param CartProviderInterface     $cartProvider
@@ -76,13 +78,14 @@ class FrontendMenuBuilder extends MenuBuilder
         SecurityContextInterface  $securityContext,
         TranslatorInterface       $translator,
         EventDispatcherInterface  $eventDispatcher,
+        AuthorizationCheckerInterface $authorizationChecker,
         CurrencyProviderInterface $currencyProvider,
         RepositoryInterface       $taxonomyRepository,
         CartProviderInterface     $cartProvider,
         CurrencyHelper            $currencyHelper
     )
     {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
+        parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
 
         $this->currencyProvider = $currencyProvider;
         $this->taxonomyRepository = $taxonomyRepository;
@@ -157,7 +160,7 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_SYLIUS_ADMIN') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
+        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),

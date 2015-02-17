@@ -1,0 +1,12 @@
+sylius:
+  form:
+    role:
+      code: Code
+      name: Name
+      description: Description
+      permissions: Permissions
+      parent: Parent
+    permission:
+      code: Code
+      description: Description
+      parent: Parent

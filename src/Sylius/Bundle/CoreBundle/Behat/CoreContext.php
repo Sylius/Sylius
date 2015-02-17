@@ -45,7 +45,15 @@ class CoreContext extends DefaultContext
      */
     public function iAmLoggedInAsAdministrator()
     {
-        $this->iAmLoggedInAsRole('ROLE_SYLIUS_ADMIN');
+        $this->iAmLoggedInAsRole('ROLE_ADMINISTRATION_ACCESS', 'sylius@example.com', array('administrator'));
+    }
+
+    /**
+     * @Given I am logged in as :role
+     */
+    public function iAmLoggedInAsAuthorizationRole($role)
+    {
+        $this->iAmLoggedInAsRole('ROLE_ADMINISTRATION_ACCESS', 'sylius@example.com', array($role));
     }
 
     /**
@@ -171,6 +179,7 @@ class CoreContext extends DefaultContext
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
                 false,
+                array(),
                 isset($data['created at']) ? new \DateTime($data["created at"]) : null
             );
         }
@@ -221,7 +230,7 @@ class CoreContext extends DefaultContext
         $manager->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, $createdAt = null)
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
     {
         if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
@@ -250,6 +259,10 @@ class CoreContext extends DefaultContext
                 if ($group = $this->findOneByName('group', $groupName)) {
                     $user->addGroup($group);
                 }
+            }
+
+            foreach ($authorizationRoles as $role) {
+                $user->addAuthorizationRole($this->findOneByName('role', $role));
             }
 
             if ($flush) {
@@ -524,10 +537,11 @@ class CoreContext extends DefaultContext
      *
      * @param string $role
      * @param string $email
+     * @param array  $authorizationRoles
      */
-    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com')
+    private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = array())
     {
-        $this->thereIsUser($email, 'sylius', $role);
+        $this->thereIsUser($email, 'sylius', null, 'yes', null, array(), true, $authorizationRoles);
         $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
 
         $this->fillField('Email', $email);

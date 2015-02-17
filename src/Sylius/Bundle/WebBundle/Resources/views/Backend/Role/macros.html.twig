@@ -1,0 +1,43 @@
+{% macro list(roles) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if roles|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'sylius.role.name'|trans }}</th>
+                <th></th>
+                <th>{{ 'sylius.role.updated_at'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for role in roles %}
+            <tr id="{{ role.id }}">
+                <td>
+                    <span style="border-left: {{ (role.level) * 40}}px solid #f1f1f1; padding-left: 10px;">
+                    <strong>{{ role.name }}</strong> <i>({{ role.code }})</i>
+                    </span>
+                </td>
+                <td>
+                    {{ role.description }}
+                </td>
+                <td>{{ role.updatedAt|date }}</td>
+                <td>
+                    <div class="pull-right">
+                    {{ buttons.edit(path('sylius_backend_role_update', {'id': role.id})) }}
+                    {{ buttons.delete(path('sylius_backend_role_delete', {'id': role.id})) }}
+                   </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+{{ alerts.info('sylius.role.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

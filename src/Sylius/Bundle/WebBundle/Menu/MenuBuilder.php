@@ -13,6 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use JMS\TranslationBundle\Annotation\Ignore;
 use Knp\Menu\FactoryInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -59,23 +60,31 @@ abstract class MenuBuilder
     protected $eventDispatcher;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    protected $authorizationChecker;
+
+    /**
      * Constructor.
      *
      * @param FactoryInterface         $factory
      * @param SecurityContextInterface $securityContext
      * @param TranslatorInterface      $translator
      * @param EventDispatcherInterface $eventDispatcher
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FactoryInterface $factory,
         SecurityContextInterface $securityContext,
         TranslatorInterface $translator,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->factory = $factory;
         $this->securityContext = $securityContext;
         $this->translator = $translator;
         $this->eventDispatcher = $eventDispatcher;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**

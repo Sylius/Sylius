@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.role_choice.class">Sylius\Bundle\RbacBundle\Form\Type\RoleEntityType</parameter>
+        <parameter key="sylius.form.type.permission_choice.class">Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType</parameter>
+
+        <parameter key="sylius.repository.role.class">Sylius\Bundle\RbacBundle\Doctrine\ORM\RoleRepository</parameter>
+        <parameter key="sylius.repository.permission.class">Sylius\Bundle\RbacBundle\Doctrine\ORM\PermissionRepository</parameter>
+
+        <parameter key="sylius.listener.rbac_cache.class">Sylius\Bundle\RbacBundle\EventListener\CacheListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.listener.rbac_cache" class="%sylius.listener.rbac_cache.class%">
+            <tag name="doctrine.event_listener" event="postPersist" />
+            <tag name="doctrine.event_listener" event="postRemove" />
+            <argument type="service" id="doctrine_cache.providers.sylius_rbac" />
+        </service>
+    </services>
+
+</container>
