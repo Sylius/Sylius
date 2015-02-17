@@ -26,4 +26,3 @@ class PgSqlDriver extends Driver
         return self::$connection;
     }
 }
-
