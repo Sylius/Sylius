@@ -79,6 +79,8 @@ sylius_product:
                 targetEntity: Sylius\Component\Core\Model\ProductTranslation
         product_translation:
             model: Sylius\Component\Core\Model\ProductTranslation
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
 
 
 sylius_archetype:
