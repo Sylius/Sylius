@@ -19,30 +19,22 @@ use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\GetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class NotifyOrderAction extends AbstractPaymentStateAwareAction
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
     /**
      * @var ObjectManager
      */
     protected $objectManager;
 
     /**
-     * @param EventDispatcherInterface $eventDispatcher
      * @param ObjectManager            $objectManager
      * @param FactoryInterface         $factory
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, ObjectManager $objectManager, FactoryInterface $factory)
+    public function __construct(ObjectManager $objectManager, FactoryInterface $factory)
     {
         parent::__construct($factory);
 
-        $this->eventDispatcher = $eventDispatcher;
         $this->objectManager   = $objectManager;
     }
 
