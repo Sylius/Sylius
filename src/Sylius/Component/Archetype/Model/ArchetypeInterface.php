@@ -114,4 +114,18 @@ interface ArchetypeInterface extends TimestampableInterface, ArchetypeTranslatio
      * @return null|ArchetypeInterface
      */
     public function getParent();
+    
+    /**
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode();
+
+    /**
+     * Sets code.
+     *
+     * @param string $code
+     */
+    public function setCode($code);
 }
