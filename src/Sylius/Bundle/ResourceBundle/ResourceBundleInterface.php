@@ -11,10 +11,17 @@
 
 namespace Sylius\Bundle\ResourceBundle;
 
+/**
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
+ */
 interface ResourceBundleInterface
 {
+    const MAPPING_XML = 'xml';
+    const MAPPING_YAML = 'yml';
+    const MAPPING_ANNOTATION = 'annotation';
+
     /**
-     * Return array with currently supported drivers.
+     * Return an array which contains the supported drivers.
      *
      * @return array
      */
