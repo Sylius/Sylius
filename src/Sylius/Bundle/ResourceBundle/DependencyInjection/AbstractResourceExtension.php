@@ -182,10 +182,22 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
             if (!isset($serviceClasses['form']) || !is_array($serviceClasses['form'])) {
                 continue;
             }
+
             foreach ($serviceClasses['form'] as $name => $class) {
                 $suffix = ($name === self::DEFAULT_KEY ? '' : sprintf('_%s', $name));
+                $definitionId = sprintf('%s.form.type.%s%s', $this->applicationName, $model, $suffix);
+
+                // check definition already exists.
+                if ($container->hasDefinition($definitionId)) {
+                    continue;
+                }
+
                 $alias = sprintf('%s_%s%s', $this->applicationName, $model, $suffix);
+                // make sure to valid form's name.
+                $alias = preg_replace('/[^a-z0-9_]/i', '_', $alias);
+
                 $definition = new Definition($class);
+
                 if ('choice' === $name) {
                     $definition->setArguments(array(
                         $serviceClasses['model'],
@@ -199,11 +211,9 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
                         $alias
                     ));
                 }
+
                 $definition->addTag('form.type',array('alias' => $alias));
-                $container->setDefinition(
-                    sprintf('%s.form.type.%s%s', $this->applicationName, $model, $suffix),
-                    $definition
-                );
+                $container->setDefinition($definitionId, $definition);
             }
         }
     }
