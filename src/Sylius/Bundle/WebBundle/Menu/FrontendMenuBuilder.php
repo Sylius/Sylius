@@ -196,7 +196,7 @@ class FrontendMenuBuilder extends MenuBuilder
         ));
 
         if (count($currencies) == 1) {
-            $menu->isDisplayed(false);
+            $menu->setDisplay(false);
             return $menu;
         }
 

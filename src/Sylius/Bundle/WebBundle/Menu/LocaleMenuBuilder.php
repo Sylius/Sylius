@@ -68,7 +68,7 @@ class LocaleMenuBuilder extends MenuBuilder
             )
         ));
         if (count($locales) == 1) {
-            $menu->isDisplayed(false);
+            $menu->setDisplay(false);
             return $menu;
         }
         foreach ($locales as $locale) {
