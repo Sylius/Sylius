@@ -21,7 +21,6 @@ use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Payum\Action\AbstractPaymentStateAwareAction;
 use Sylius\Bundle\PayumBundle\Payum\Request\GetStatus;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -41,11 +40,6 @@ class NotifyAction extends AbstractPaymentStateAwareAction
     protected $paymentRepository;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var ObjectManager
      */
     protected $objectManager;
@@ -58,7 +52,6 @@ class NotifyAction extends AbstractPaymentStateAwareAction
     public function __construct(
         Api $api,
         RepositoryInterface $paymentRepository,
-        EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
         FactoryInterface $factory,
         $identifier
@@ -67,7 +60,6 @@ class NotifyAction extends AbstractPaymentStateAwareAction
 
         $this->api               = $api;
         $this->paymentRepository = $paymentRepository;
-        $this->eventDispatcher   = $eventDispatcher;
         $this->objectManager     = $objectManager;
         $this->identifier        = $identifier;
     }
