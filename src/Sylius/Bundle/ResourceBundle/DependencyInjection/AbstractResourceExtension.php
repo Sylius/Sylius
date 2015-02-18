@@ -195,7 +195,8 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
                 } else {
                     $definition->setArguments(array(
                         $serviceClasses['model'],
-                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix))
+                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix)),
+                        $alias
                     ));
                 }
                 $definition->addTag('form.type',array('alias' => $alias));
