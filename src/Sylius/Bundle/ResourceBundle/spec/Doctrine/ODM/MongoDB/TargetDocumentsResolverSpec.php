@@ -9,39 +9,37 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection;
+namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * Doctrine target entities resolver spec.
- * It adds proper method calls to doctrine listener.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
+class TargetDocumentsResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\TargetDocumentsResolver');
     }
 
     function it_should_get_interfaces_from_the_container(ContainerBuilder $container, Definition $resolverDefinition)
     {
-        $resolverDefinition->hasTag('doctrine.event_listener')
+        $resolverDefinition->hasTag('doctrine_mongodb.odm.event_listener')
             ->shouldBeCalled()
             ->willReturn(false);
 
-        $resolverDefinition->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'))
+        $resolverDefinition->addTag('doctrine_mongodb.odm.event_listener', array('event' => 'loadClassMetadata'))
             ->shouldBeCalled();
 
-        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')
+        $container->hasDefinition('doctrine_mongodb.odm.listeners.resolve_target_document')
             ->shouldBeCalled()
             ->willReturn(true);
 
-        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')
+        $container->findDefinition('doctrine_mongodb.odm.listeners.resolve_target_document')
             ->shouldBeCalled()
             ->willReturn($resolverDefinition);
 
@@ -62,7 +60,7 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
             ->willReturn('spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo');
 
         $resolverDefinition->addMethodCall(
-            'addResolveTargetEntity',
+            'addResolveTargetDocument',
             array(
                 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\FooInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
             ))->shouldBeCalled();
@@ -74,18 +72,18 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
 
     function it_should_get_interfaces(ContainerBuilder $container, Definition $resolverDefinition)
     {
-        $resolverDefinition->hasTag('doctrine.event_listener')
+        $resolverDefinition->hasTag('doctrine_mongodb.odm.event_listener')
             ->shouldBeCalled()
             ->willReturn(false);
 
-        $resolverDefinition->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'))
+        $resolverDefinition->addTag('doctrine_mongodb.odm.event_listener', array('event' => 'loadClassMetadata'))
             ->shouldBeCalled();
 
-        $container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')
+        $container->hasDefinition('doctrine_mongodb.odm.listeners.resolve_target_document')
             ->shouldBeCalled()
             ->willReturn(true);
 
-        $container->findDefinition('doctrine.orm.listeners.resolve_target_entity')
+        $container->findDefinition('doctrine_mongodb.odm.listeners.resolve_target_document')
             ->shouldBeCalled()
             ->willReturn($resolverDefinition);
 
@@ -98,7 +96,7 @@ class DoctrineTargetEntitiesResolverSpec extends ObjectBehavior
             ->willReturn(false);
 
         $resolverDefinition->addMethodCall(
-            'addResolveTargetEntity',
+            'addResolveTargetDocument',
             array(
                 'Sylius\Component\Resource\Repository\RepositoryInterface', 'spec\Sylius\Bundle\ResourceBundle\Fixture\Entity\Foo', array()
             ))->shouldBeCalled();
