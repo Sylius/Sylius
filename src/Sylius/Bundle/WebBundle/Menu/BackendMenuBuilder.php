@@ -125,6 +125,10 @@ class BackendMenuBuilder extends MenuBuilder
                 'route' => 'sylius_backend_product_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.products', $section)));
+            $child->addChild('inventory', array(
+                'route' => 'sylius_backend_inventory_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-tasks'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.stockables', $section)));
         }
 
         if ($this->authorizationChecker->isGranted('sylius.product_option.index')) {

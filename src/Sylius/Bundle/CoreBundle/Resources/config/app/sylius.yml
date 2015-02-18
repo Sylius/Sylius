@@ -632,7 +632,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone]
+            permissions: [sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         catalog_manager:
             name: Catalog Manager
