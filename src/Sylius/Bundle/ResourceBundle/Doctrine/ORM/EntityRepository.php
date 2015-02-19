@@ -32,7 +32,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     {
         $className = $this->getClassName();
 
-        return new $className;
+        return new $className();
     }
 
     /**

@@ -43,6 +43,9 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
         $this->factory = $factory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -90,7 +93,12 @@ class BuildReportDataFetcherFormListener implements EventSubscriberInterface
         $formType = sprintf('sylius_data_fetcher_%s', $dataFetcher->getType());
 
         try {
-            $configurationField = $this->factory->createNamed('dataFetcherConfiguration', $formType, $config, array('auto_initialize' => false));
+            $configurationField = $this->factory->createNamed(
+                'dataFetcherConfiguration',
+                $formType,
+                $config,
+                array('auto_initialize' => false)
+            );
         } catch (\InvalidArgumentException $e) {
             return;
         }

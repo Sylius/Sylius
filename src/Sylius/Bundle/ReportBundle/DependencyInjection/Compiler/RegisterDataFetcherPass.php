@@ -37,7 +37,9 @@ class RegisterDataFetcherPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('sylius.report.data_fetcher') as $id => $attributes) {
             if (!isset($attributes[0]['fetcher']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged report data fetchers needs to have `fetcher` and `label` attributes.');
+                throw new \InvalidArgumentException(
+                    'Tagged report data fetchers needs to have `fetcher` and `label` attributes.'
+                );
             }
 
             $name = $attributes[0]['fetcher'];

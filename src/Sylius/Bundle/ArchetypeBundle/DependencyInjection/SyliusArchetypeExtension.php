@@ -112,6 +112,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
 
     /**
      * @param array $config
+     *
      * @return array
      */
     private function buildValidationConfig(array $config)

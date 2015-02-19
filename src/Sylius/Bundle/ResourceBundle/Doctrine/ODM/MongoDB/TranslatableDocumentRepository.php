@@ -32,7 +32,7 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
     {
         $className = $this->getClassName();
 
-        $object = new $className;
+        $object = new $className();
         $object->setCurrentLocale($this->getCurrentLocale());
 
         return $object;
@@ -61,7 +61,7 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
     /**
      * @param QueryBuilder $queryBuilder
      *
-     * @param array        $criteria
+     * @param array $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
@@ -71,7 +71,7 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $this->translatableFields)) {
-                $property = 'translations.' . $this->getCurrentLocale() . '.' . $property;
+                $property = 'translations.'.$this->getCurrentLocale().'.'.$property;
             }
 
             if (is_array($value)) {

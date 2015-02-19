@@ -37,7 +37,7 @@ class DoctrineTargetEntitiesResolver
                 ->addMethodCall('addResolveTargetEntity', array(
                     $this->getInterface($container, $interface),
                     $this->getClass($container, $model),
-                    array()
+                    array(),
                 ))
             ;
         }

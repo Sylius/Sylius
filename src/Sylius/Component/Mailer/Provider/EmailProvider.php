@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Mailer\Provider;
 
+use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -48,6 +49,10 @@ class EmailProvider implements EmailProviderInterface
 
     /**
      * @param string $code
+     *
+     * @return object|EmailInterface
+     *
+     * @throw \InvalidArgumentException
      */
     public function getEmail($code)
     {

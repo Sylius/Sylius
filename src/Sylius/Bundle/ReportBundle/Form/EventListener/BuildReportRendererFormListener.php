@@ -91,7 +91,12 @@ class BuildReportRendererFormListener implements EventSubscriberInterface
         $formType = sprintf('sylius_renderer_%s', $renderer->getType());
 
         try {
-            $configurationField = $this->factory->createNamed('rendererConfiguration', $formType, $data, array('auto_initialize' => false));
+            $configurationField = $this->factory->createNamed(
+                'rendererConfiguration',
+                $formType,
+                $data,
+                array('auto_initialize' => false)
+            );
         } catch (\InvalidArgumentException $e) {
             return;
         }
