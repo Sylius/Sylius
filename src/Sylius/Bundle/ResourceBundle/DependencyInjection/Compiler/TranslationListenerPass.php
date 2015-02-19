@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,7 +26,7 @@ class TranslationListenerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $driver = $container->getParameter('sylius_translation.driver');
+        $driver = $container->getParameter('sylius_resource.driver');
 
         if ($driver == SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM) {
             $definition = $container->findDefinition('sylius.translatable.listener.locale');

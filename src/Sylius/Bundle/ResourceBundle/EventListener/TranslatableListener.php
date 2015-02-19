@@ -9,20 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\TranslationBundle\EventListener;
+namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ODM\MongoDB\Events;
-use Doctrine\ODM\MongoDB\Event\LifecycleEventArgs;
-use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Prezent Internet B.V. <info@prezent.nl>
  */
-class ODMTranslatableListener implements EventSubscriber, TranslatableListenerInterface
+class TranslatableListener implements EventSubscriber, TranslatableListenerInterface
 {
     /**
      * String Locale to use for translations
@@ -102,11 +102,11 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
             return;
         }
 
-        if ($reflClass->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
+        if ($reflClass->implementsInterface('Sylius\Component\Resource\Model\TranslatableInterface')) {
             $this->mapTranslatable($classMetadata);
         }
 
-        if ($reflClass->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
+        if ($reflClass->implementsInterface('Sylius\Component\Resource\Model\TranslationInterface')) {
             $this->mapTranslation($classMetadata);
         }
     }
@@ -128,10 +128,14 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
 
         $translationMetadata = $this->metadata[$translatableMetadata['targetEntity']];
 
-        $mapping->mapManyEmbedded(array(
-            'fieldName'      => $translatableMetadata['field'],
-            'targetDocument' => $translatableMetadata['targetEntity'],
-            'strategy'       => 'set'
+        $mapping->mapOneToMany(array(
+            'fieldName'     => $translatableMetadata['field'],
+            'targetEntity'  => $translatableMetadata['targetEntity'],
+            'mappedBy'      => $translationMetadata['field'],
+            'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
+            'indexBy'       => $translationMetadata['locale'],
+            'cascade'       => array('persist', 'merge', 'remove'),
+            'orphanRemoval' => true,
         ));
     }
 
@@ -153,9 +157,17 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
         // Map translatable relation
         $translatableMetadata = $this->metadata[$translationMetadata['targetEntity']];
 
-        $mapping->isEmbeddedDocument = true;
-        $mapping->isMappedSuperclass = false;
-        $mapping->setIdentifier(null);
+        $mapping->mapManyToOne(array(
+            'fieldName'    => $translationMetadata['field'],
+            'targetEntity' => $translationMetadata['targetEntity'],
+            'inversedBy'   => $translatableMetadata['field'],
+            'joinColumns'  => array(array(
+                'name'                 => 'translatable_id',
+                'referencedColumnName' => 'id',
+                'onDelete'             => 'CASCADE',
+                'nullable'             => false,
+            )),
+        ));
 
         // Map locale field
         if (!$mapping->hasField($translationMetadata['locale'])) {
@@ -166,34 +178,39 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
         }
 
         // Map unique index
-        $keys = array(
-            $translationMetadata['field'] => 1,
-            $translationMetadata['locale'] => 1
+        $columns = array(
+            $mapping->getSingleAssociationJoinColumnName($translationMetadata['field']),
+                $translationMetadata['locale'],
         );
 
-        if (!$this->hasUniqueIndex($mapping, $keys)) {
-            $mapping->addIndex($keys, array(
-                'unique' => true
+        if (!$this->hasUniqueConstraint($mapping, $columns)) {
+            $constraints = isset($mapping->table['uniqueConstraints']) ? $mapping->table['uniqueConstraints'] : array();
+            $constraints[$mapping->getTableName().'_uniq_trans'] = array(
+                'columns' => $columns,
+            );
+
+            $mapping->setPrimaryTable(array(
+                'uniqueConstraints' => $constraints,
             ));
         }
     }
 
     /**
-     * Check if an unique index has been defined
+     * Check if an unique constraint has been defined
      *
      * @param ClassMetadata $mapping
-     * @param array         $keys
+     * @param array         $columns
      *
      * @return bool
      */
-    private function hasUniqueIndex(ClassMetadata $mapping, array $keys)
+    private function hasUniqueConstraint(ClassMetadata $mapping, array $columns)
     {
-        if (!count($mapping->getIndexes())) {
+        if (!isset($mapping->table['uniqueConstraints'])) {
             return false;
         }
 
-        foreach ($mapping->getIndexes() as $index) {
-            if (!array_diff($index['keys'], $keys)) {
+        foreach ($mapping->table['uniqueConstraints'] as $constraint) {
+            if (!array_diff($constraint['columns'], $columns)) {
                 return true;
             }
         }
@@ -208,25 +225,24 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
      */
     public function postLoad(LifecycleEventArgs $args)
     {
-        $document = $args->getDocument();
+        $entity = $args->getEntity();
 
-        // Sometimes $document is a doctrine proxy class, we therefore need to retrieve it's real class
-        $name = $args->getDocumentManager()->getClassMetadata(get_class($document))->getName();
-
-        if (!isset($this->metadata[$name])) {
+        // Sometimes $entity is a doctrine proxy class, we therefore need to retrieve it's real class
+        $classMetadata = $args->getEntityManager()->getClassMetadata(get_class($entity));
+        if (!isset($this->metadata[$classMetadata->getName()]) && !isset($this->metadata[$classMetadata->rootEntityName])) {
             return;
         }
 
-        $metadata = $this->metadata[$name];
+        $metadata = isset($this->metadata[$classMetadata->name]) ? $this->metadata[$classMetadata->getName()] : $this->metadata[$classMetadata->rootEntityName];
 
         if (isset($metadata['fallbackLocale'])) {
             $setter = 'set'.ucfirst($metadata['fallbackLocale']);
-            $document->$setter($this->fallbackLocale);
+            $entity->$setter($this->fallbackLocale);
         }
 
         if (isset($metadata['currentLocale'])) {
             $setter = 'set'.ucfirst($metadata['currentLocale']);
-            $document->$setter($this->currentLocale);
+            $entity->$setter($this->currentLocale);
         }
     }
 }

@@ -36,5 +36,4 @@ interface TranslatableEntityRepositoryInterface extends RepositoryInterface
      * @return TranslatableEntityRepositoryInterface
      */
     public function setTranslatableFields(array $translatableFields);
-
 }

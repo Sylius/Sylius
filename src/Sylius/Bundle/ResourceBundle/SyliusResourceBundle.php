@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ObjectToIdentifierServicePass;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\TranslationListenerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -20,7 +21,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class SyliusResourceBundle extends Bundle
+class SyliusResourceBundle extends AbstractResourceBundle
 {
     // Bundle driver list.
     const DRIVER_DOCTRINE_ORM         = 'doctrine/orm';
@@ -32,6 +33,28 @@ class SyliusResourceBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
+        parent::build($container);
+
+        $container->addCompilerPass(new TranslationListenerPass());
         $container->addCompilerPass(new ObjectToIdentifierServicePass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSupportedDrivers()
+    {
+        return array(
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Sylius\Component\Translation\Model';
     }
 }

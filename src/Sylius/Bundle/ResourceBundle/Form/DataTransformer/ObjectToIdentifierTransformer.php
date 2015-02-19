@@ -56,7 +56,7 @@ class ObjectToIdentifierTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if (!$value) {
-            return null;
+            return;
         }
 
         if (null === $entity = $this->repository->findOneBy(array($this->identifier => $value))) {

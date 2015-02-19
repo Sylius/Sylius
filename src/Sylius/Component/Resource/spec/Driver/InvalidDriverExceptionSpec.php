@@ -18,17 +18,17 @@ use PhpSpec\ObjectBehavior;
  */
 class InvalidDriverExceptionSpec extends ObjectBehavior
 {
-    function let()
+    public function let()
     {
         $this->beConstructedWith('driver', 'className');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Resource\Exception\Driver\InvalidDriverException');
     }
 
-    function it_should_extends_exception()
+    public function it_should_extends_exception()
     {
         $this->shouldHaveType('\Exception');
     }

@@ -36,6 +36,10 @@
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
 
         <parameter key="symfony.expression.language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
+
+        <parameter key="sylius.translatable.listener.class">Sylius\Bundle\ResourceBundle\EventListener\TranslatableListener</parameter>
+        <parameter key="sylius.odm_translatable.listener.class">Sylius\Bundle\ResourceBundle\EventListener\ODMTranslatableListener</parameter>
+        <parameter key="sylius.translatable.listener.locale.class">Sylius\Bundle\ResourceBundle\EventListener\LocaleListener</parameter>
     </parameters>
 
     <services>
@@ -76,6 +80,23 @@
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
         <service id="sylius.form.extension.collection" class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />
+        </service>
+
+        <service id="sylius.translatable.listener" class="%sylius.translatable.listener.class%">
+            <argument>%sylius.translation.mapping%</argument>
+            <argument>%sylius.locale%</argument>
+            <tag name="doctrine.event_subscriber" connection="default" priority="99" />
+        </service>
+
+        <service id="sylius.odm_translatable.listener" class="%sylius.odm_translatable.listener.class%">
+            <argument>%sylius.translation.mapping%</argument>
+            <argument>%sylius.locale%</argument>
+            <tag name="doctrine_mongodb.odm.event_subscriber" connection="default" priority="99" />
+        </service>
+
+        <service id="sylius.translatable.listener.locale" class="%sylius.translatable.listener.locale.class%">
+            <argument type="service" id="sylius.translatable.listener" />
+            <tag name="kernel.event_subscriber" priority="98"/>
         </service>
     </services>
 </container>

@@ -201,7 +201,7 @@ class ResourceController extends FOSRestController
             ->setTemplate($this->config->getTemplate('create.html'))
             ->setData(array(
                 $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView()
+                'form'                           => $form->createView(),
             ))
         ;
 
@@ -245,7 +245,7 @@ class ResourceController extends FOSRestController
             ->setTemplate($this->config->getTemplate('update.html'))
             ->setData(array(
                 $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView()
+                'form'                           => $form->createView(),
             ))
         ;
 

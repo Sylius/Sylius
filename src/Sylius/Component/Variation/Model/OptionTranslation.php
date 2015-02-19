@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Variation\Model;
 
-use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * Product option trnaslation default implementation.

@@ -83,7 +83,7 @@ class RedirectHandler
      */
     public function redirect($url, $status = 302)
     {
-        return new RedirectResponse($url . $this->config->getRedirectHash(), $status);
+        return new RedirectResponse($url.$this->config->getRedirectHash(), $status);
     }
 
     /**

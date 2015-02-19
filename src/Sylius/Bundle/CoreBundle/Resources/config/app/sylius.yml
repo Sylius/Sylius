@@ -238,7 +238,7 @@ sylius_search:
                 type: terms
                 value: ~
 
-sylius_translation:
+sylius_resource:
     default_mapping:
         translatable:
             field: translations

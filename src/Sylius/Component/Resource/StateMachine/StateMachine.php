@@ -32,7 +32,7 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -47,6 +47,6 @@ class StateMachine extends BaseStateMachine implements StateMachineInterface
             }
         }
 
-        return null;
+        return;
     }
 }

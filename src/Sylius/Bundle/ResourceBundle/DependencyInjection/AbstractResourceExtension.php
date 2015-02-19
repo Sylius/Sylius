@@ -20,10 +20,12 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
-use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExtension;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Base extension.
@@ -32,7 +34,7 @@ use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExten
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractResourceExtension extends AbstractTranslationExtension
+abstract class AbstractResourceExtension extends Extension implements PrependExtensionInterface
 {
     const CONFIGURE_LOADER = 1;
 
@@ -141,7 +143,7 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
         foreach ($classes as $model => $serviceClasses) {
             foreach ($serviceClasses as $service => $class) {
                 if ('form' === $service) {
-                    if (!is_array($class)){
+                    if (!is_array($class)) {
                         $class = array(self::DEFAULT_KEY => $class);
                     }
                     foreach ($class as $suffix => $subClass) {
@@ -190,15 +192,15 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
                     $definition->setArguments(array(
                         $serviceClasses['model'],
                         $config['driver'],
-                        $alias
+                        $alias,
                     ));
                 } else {
                     $definition->setArguments(array(
                         $serviceClasses['model'],
-                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix))
+                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix)),
                     ));
                 }
-                $definition->addTag('form.type',array('alias' => $alias));
+                $definition->addTag('form.type', array('alias' => $alias));
                 $container->setDefinition(
                     sprintf('%s.form.type.%s%s', $this->applicationName, $model, $suffix),
                     $definition
@@ -305,7 +307,7 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
     }
 
     /**
-     * @param array $classes
+     * @param array            $classes
      * @param ContainerBuilder $container
      */
     protected function mapTranslations(array $classes, ContainerBuilder $container)
@@ -315,5 +317,118 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
                 $this->processTranslations($class, $container);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('sylius_resource')) {
+            throw new ServiceNotFoundException('SyliusResourceBundle must be registered in kernel.');
+        }
+
+        // If the default mapping parameter has already been defined we don't need to do anything
+        if ($container->hasParameter('sylius.translation.default.mapping')) {
+            return;
+        }
+
+        // Parse sylius_translation to get the default mapping values and assign them to
+        // 'sylius.translation.default.mapping' parameter to be used un process) method.
+        $configs = $container->getExtensionConfig('sylius_resource');
+        $config  = $this->processConfiguration(new Configuration(), $configs);
+
+        $container->setParameter('sylius.translation.default.mapping', $config['default_mapping']);
+    }
+
+    /**
+     * In case any extra processing is needed.
+     *
+     * @param array            $class
+     * @param ContainerBuilder $container
+     *
+     * @throws \Exception
+     */
+    protected function processTranslations(array $class, ContainerBuilder $container)
+    {
+        if (!($container->hasParameter('sylius.translation.mapping')
+            && $translationsMapping = $container->getParameter('sylius.translation.mapping'))
+        ) {
+            $translationsMapping = array();
+        }
+
+        if (!($container->hasParameter('sylius.translation.default.mapping')
+            && $defaultValues = $container->getParameter('sylius.translation.default.mapping'))
+        ) {
+            throw new \Exception('Missing parameter sylius.translation.default.mapping. Default translation mapping must be defined!');
+        }
+
+        if (isset($class['translatable'])) {
+            $translationsMapping = $this->mapTranslatable(
+                $translationsMapping,
+                $class['model'],
+                $class['translatable'],
+                $defaultValues
+            );
+        } elseif (isset($class['translation'])) {
+            $translationsMapping = $this->mapTranslation(
+                $translationsMapping,
+                $class['model'],
+                $class['translation']
+            );
+        }
+
+        $container->setParameter('sylius.translation.mapping', $translationsMapping);
+    }
+
+    /**
+     * Set translatable entity mapping metadata
+     *
+     * @param array  $translationsMapping
+     * @param string $translatableClass
+     * @param array  $translatableConfig
+     * @param array  $defaultValues
+     *
+     * @return array
+     */
+    protected function mapTranslatable(array $translationsMapping, $translatableClass, array $translatableConfig, array $defaultValues)
+    {
+        // Map translatable target entity
+        $translationClass = isset($translatableConfig['targetEntity']) ? $translatableConfig['targetEntity'] : $translatableClass.'Translation';
+        $translatableConfig['targetEntity'] = $translationClass;
+
+        $translationMetadata = array_merge($defaultValues['translatable'], $translatableConfig);
+
+        $translationsMapping[$translatableClass] = $translationMetadata;
+
+        // Mapping for translation entity with default values
+        $translationMetadata  = array_merge($defaultValues['translation'], array('targetEntity' => $translatableClass));
+        $translationsMapping[$translationClass] = $translationMetadata;
+
+        return $translationsMapping;
+    }
+
+    /**
+     * Set translation entity mapping metadata
+     *
+     * @param array  $translationMapping
+     * @param string $translation
+     * @param array  $translationConfig
+     *
+     * @return array
+     */
+    protected function mapTranslation(array $translationMapping, $translation, array $translationConfig)
+    {
+        // At this point we already have the default values mapped, so we only need to override them
+        // if specific values have been set in entity_translation configuration key
+        if (isset($translationConfig['translatable'])) {
+            $translationMapping[$translation]['field'] = $translationConfig['translatable'];
+        }
+
+        if (isset($translationConfig['locale'])) {
+            $translationMapping[$translation]['locale'] = $translationConfig['locale'];
+        }
+
+        return $translationMapping;
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Translation\Model;
+namespace Sylius\Component\Resource\Model;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -26,7 +26,7 @@ interface TranslationInterface
     /**
      * Set the translatable object
      *
-     * @param TranslatableInterface $translatable
+     * @param  TranslatableInterface $translatable
      * @return self
      */
     public function setTranslatable(TranslatableInterface $translatable = null);
@@ -41,7 +41,7 @@ interface TranslationInterface
     /**
      * Set the locale
      *
-     * @param string $locale
+     * @param  string $locale
      * @return $this
      */
     public function setLocale($locale);

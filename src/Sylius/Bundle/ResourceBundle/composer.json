@@ -28,7 +28,6 @@
         "symfony/form":                    "~2.3",
         "sylius/resource":                 "0.14.*@dev",
         "sylius/storage":                  "0.14.*@dev",
-        "sylius/translation-bundle":       "0.14.*@dev",
         "friendsofsymfony/rest-bundle":    "1.5.*@dev",
         "jms/serializer-bundle":           "~0.13",
         "white-october/pagerfanta-bundle": "~1.0",
@@ -36,11 +35,14 @@
         "willdurand/hateoas-bundle":       "@stable"
     },
     "require-dev": {
-        "phpspec/phpspec":      "~2.1",
-        "twig/twig":            "~1.11",
-        "doctrine/orm":         "~2.3",
-        "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/phpcr-bundle": "~1.1"
+        "phpspec/phpspec":                 "~2.1",
+        "twig/twig":                       "~1.11",
+        "doctrine/orm":                    "~2.3",
+        "doctrine/mongodb-odm":            "1.0.*@dev",
+        "doctrine/phpcr-bundle":           "~1.1",
+        "symfony/form":                    "~2.3",
+        "symfony/validator":               "~2.3",
+        "stof/doctrine-extensions-bundle": "~1.1"
     },
     "suggest": {
         "doctrine/orm":         "~2.3",
