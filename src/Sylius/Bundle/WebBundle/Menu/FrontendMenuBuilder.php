@@ -180,21 +180,21 @@ class FrontendMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Builds frontend currency menu if we have more than 1 currency to display.
+     * Builds frontend currency menu.
      *
      * @return ItemInterface
      */
     public function createCurrencyMenu()
     {
-        $currencies = $this->currencyProvider->getAvailableCurrencies();
-
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
                 'class' => 'nav nav-pills',
             ),
         ));
 
-        if (count($currencies) == 1) {
+        $currencies = $this->currencyProvider->getAvailableCurrencies();
+        
+        if (1 === count($currencies)) {
             $menu->setDisplay(false);
 
             return $menu;
@@ -202,6 +202,7 @@ class FrontendMenuBuilder extends MenuBuilder
 
         foreach ($currencies as $currency) {
             $code = $currency->getCode();
+
             $menu->addChild($code, array(
                 'route' => 'sylius_currency_change',
                 'routeParameters' => array('currency' => $code),
