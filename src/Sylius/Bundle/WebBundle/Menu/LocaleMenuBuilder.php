@@ -55,29 +55,27 @@ class LocaleMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Builds frontend locale menu if more than one language is defined.
+     * Builds frontend locale menu.
      *
      * @return ItemInterface
      */
     public function createMenu()
     {
-        $locales = $this->localeProvider->getAvailableLocales();
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
                 'class' => 'nav nav-pills'
             )
         ));
-        if (count($locales) == 1) {
-            $menu->setDisplay(false);
-            return $menu;
-        }
-        foreach ($locales as $locale) {
+
+        foreach ($this->localeProvider->getAvailableLocales() as $locale) {
             $code = $locale->getCode();
+
             $menu->addChild($code, array(
                 'route' => 'sylius_locale_change',
                 'routeParameters' => array('locale' => $code),
             ))->setLabel(Intl::getLocaleBundle()->getLocaleName($code));
         }
+
         return $menu;
     }
 }
