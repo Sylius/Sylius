@@ -217,6 +217,8 @@ class Report implements ReportInterface
     public function setDataFetcherConfiguration(array $dataFetcherConfiguration)
     {
         $this->dataFetcherConfiguration = $dataFetcherConfiguration;
+
+        return $this;
     }
 
     /**

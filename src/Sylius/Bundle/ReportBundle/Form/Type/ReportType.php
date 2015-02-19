@@ -47,8 +47,12 @@ class ReportType extends AbstractResourceType
      * @param ServiceRegistryInterface $rendererRegistry
      * @param ServiceRegistryInterface $dataFetcherRegistry
      */
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        ServiceRegistryInterface $rendererRegistry,
+        ServiceRegistryInterface $dataFetcherRegistry
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->rendererRegistry = $rendererRegistry;

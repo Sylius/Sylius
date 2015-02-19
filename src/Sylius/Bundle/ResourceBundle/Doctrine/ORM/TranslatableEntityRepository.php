@@ -31,7 +31,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
     protected function getQueryBuilder()
     {
         return parent::getQueryBuilder()
-            ->leftJoin($this->getAlias() . '.translations', 'translation');
+            ->leftJoin($this->getAlias().'.translations', 'translation');
     }
 
     /**
@@ -41,7 +41,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
     {
         $className = $this->getClassName();
 
-        $object = new $className;
+        $object = new $className();
         $object->setCurrentLocale($this->getCurrentLocale());
 
         return $object;
@@ -70,7 +70,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
     /**
      * @param QueryBuilder $queryBuilder
      *
-     * @param array        $criteria
+     * @param array $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
@@ -79,9 +79,8 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
         }
 
         foreach ($criteria as $property => $value) {
-
             if (in_array($property, $this->translatableFields)) {
-                $property = 'translation.' . $property;
+                $property = 'translation.'.$property;
                 if (null === $value) {
                     $queryBuilder
                         ->andWhere($queryBuilder->expr()->isNull($property));
@@ -90,7 +89,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
                 } elseif ('' !== $value) {
                     $parameter = str_replace('.', '_', $property);
                     $queryBuilder
-                        ->andWhere($queryBuilder->expr()->eq($property, ':' . $parameter))
+                        ->andWhere($queryBuilder->expr()->eq($property, ':'.$parameter))
                         ->setParameter($parameter, $value);
                 }
             } else {
@@ -101,7 +100,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
                     $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
                 } elseif ('' !== $value) {
                     $queryBuilder
-                        ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
+                        ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':'.$property))
                         ->setParameter($property, $value);
                 }
             }

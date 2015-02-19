@@ -49,7 +49,7 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
         $definition = new Definition($repositoryClass);
         $definition->setArguments(array(
             new Reference($this->getContainerKey('manager')),
-            $this->getClassMetadataDefinition($classes['model'])
+            $this->getClassMetadataDefinition($classes['model']),
         ));
 
         if (isset($classes['translatable']['translatable_fields'])) {

@@ -31,7 +31,7 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     {
         $className = $this->getClassName();
 
-        return new $className;
+        return new $className();
     }
 
     /**
