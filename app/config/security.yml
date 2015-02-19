@@ -5,7 +5,7 @@ security:
     providers:
         # fos_userbundle:
         #     id: fos_user.user_provider.username_email
-        sylius_userbundle:
+        sylius_user_provider:
             id: sylius.provider.name_or_email_provider
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
@@ -15,7 +15,7 @@ security:
             context:     user
             pattern:     /administration/.*
             form_login:
-                provider:     sylius_userbundle
+                provider:     sylius_user_provider
                 login_path:   /administration/login
                 check_path:   /administration/login-check
                 failure_path: /administration/login
@@ -38,7 +38,7 @@ security:
             context:     user
             pattern:     /.*
             form_login:
-                provider: sylius_userbundle
+                provider: sylius_user_provider
                 login_path: /login
                 check_path: /login_check
                 failure_path: /login

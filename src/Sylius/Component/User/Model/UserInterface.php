@@ -7,8 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
- * This model was inspired by FOS User-Bundle 
+ *
+ * This model was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Model;
@@ -80,10 +80,10 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
-    
+
     /**
      * Check whether user is deleted.
-     * 
+     *
      * @return bool
      */
     public function isDeleted();

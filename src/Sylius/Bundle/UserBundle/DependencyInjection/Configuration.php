@@ -22,6 +22,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * sections are normalized, and merged.
  *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -37,7 +38,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('currency_storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 
@@ -46,7 +46,7 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
-    
+
     /**
      * Adds `validation_groups` section.
      *
@@ -60,6 +60,18 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('user')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('user_registration')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('user_profile')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array('sylius'))
+                        ->end()
+                        ->arrayNode('user_change_password')
                             ->prototype('scalar')->end()
                             ->defaultValue(array('sylius'))
                         ->end()
@@ -86,7 +98,15 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\User')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\UserBundle\Controller\UserController')->end()
-                                ->scalarNode('form')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserType')->end()
+                                ->arrayNode('form')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('default')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserType')->end()
+                                        ->scalarNode('registration')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType')->end()
+                                        ->scalarNode('profile')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserProfileType')->end()
+                                        ->scalarNode('change_password')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType')->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                         ->arrayNode('user_oauth')

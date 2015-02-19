@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Model\UserManagerInterface;
+use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -23,11 +23,11 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class UserUpdateListener
 {
-    protected $userManager;
+    protected $userReloader;
 
-    public function __construct(UserManagerInterface $userManager)
+    public function __construct(UserReloaderInterface $userReloader)
     {
-        $this->userManager = $userManager;
+        $this->userReloader = $userReloader;
     }
 
     public function processUser(GenericEvent $event)
@@ -37,11 +37,10 @@ class UserUpdateListener
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(
                 $user,
-                'FOS\UserBundle\Model\UserInterface'
+                'Sylius\Component\User\Model\UserInterface'
             );
         }
 
-        $this->userManager->updateUser($user);
-        $this->userManager->reloadUser($user);
+        $this->userReloader->reloadUser($user);
     }
 }

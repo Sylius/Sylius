@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\UserBundle\OAuth;
 
-use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
@@ -110,12 +109,12 @@ class UserProvider extends FOSUBUserProvider
     /**
      * Attach OAuth sign-in provider account to existing user
      *
-     * @param FOSUserInterface      $user
+     * @param SyliusUserInterface      $user
      * @param UserResponseInterface $response
      *
-     * @return FOSUserInterface
+     * @return SyliusUserInterface
      */
-    protected function updateUserByOAuthUserResponse(FOSUserInterface $user, UserResponseInterface $response)
+    protected function updateUserByOAuthUserResponse(SyliusUserInterface $user, UserResponseInterface $response)
     {
         $oauth = $this->oauthRepository->createNew();
         $oauth->setIdentifier($response->getUsername());

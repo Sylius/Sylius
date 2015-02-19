@@ -6,11 +6,14 @@ sylius:
         user:
             billing_address: Billing address
             different_billing_address: Use different address for billing?
+            email: Email
             enabled: Enabled
             first_name: First name
             groups: Groups
             last_name: Last name
-            password: Password
+            password: 
+                label: Password
+                confirmation: Verification
             shipping_address: Shipping address
         user_filter:
             query: Search

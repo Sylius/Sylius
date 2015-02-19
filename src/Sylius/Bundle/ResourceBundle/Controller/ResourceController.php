@@ -401,7 +401,7 @@ class ResourceController extends FOSRestController
         if ($this->config->isApiRequest()) {
             return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
         }
-
+     
         return $this->createForm($type, $resource);
     }
 

@@ -7,8 +7,8 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
- * This component was inspired by FOS User-Bundle 
+ *
+ * This component was inspired by FOS User-Bundle
  */
 
 namespace Sylius\Component\User\Canonicalizer;
@@ -20,6 +20,6 @@ class Canonicalizer implements CanonicalizerInterface
 {
     public function canonicalize($string)
     {
-       return null === $string ? null : mb_convert_case($string, MB_CASE_LOWER, mb_detect_encoding($string));
+        return null === $string ? null : mb_convert_case($string, MB_CASE_LOWER, mb_detect_encoding($string));
     }
 }

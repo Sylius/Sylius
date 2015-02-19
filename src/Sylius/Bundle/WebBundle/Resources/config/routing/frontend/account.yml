@@ -3,19 +3,28 @@
 
 sylius_account_homepage:
     path: /
-    defaults: { _controller: sylius.controller.frontend.account.profile:indexAction }
-
-sylius_account_change_password:
-    path: /change-password
-    methods: [GET, POST]
+    methods: [GET]
     defaults:
-        _controller: sylius.controller.frontend.account.profile:changePasswordAction
+        _controller: sylius.controller.frontend.account:indexAction
 
-sylius_account_profile_edit:
+sylius_user_profile_update:
     path: /profile/edit
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.frontend.account.profile:editAction
+        _controller: sylius.controller.user:updateProfileAction
+        _sylius:
+            form: sylius_user_profile
+            template: SyliusWebBundle:Frontend/Account:profileUpdate.html.twig
+
+sylius_user_password_change:
+    path: /change-password
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.user:changePasswordAction
+        _sylius:
+            form: sylius_user_change_password
+            event: change_password
+            template: SyliusWebBundle:Frontend/Account:passwordUpdate.html.twig
 
 sylius_account_order:
     resource: @SyliusWebBundle/Resources/config/routing/frontend/account/order.yml

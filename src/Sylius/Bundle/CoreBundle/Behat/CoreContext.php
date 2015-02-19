@@ -236,7 +236,9 @@ class CoreContext extends DefaultContext
             $user->setEnabled('yes' === $enabled);
             $user->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
             $user->setPlainPassword($password);
-
+            $user->setUsernameCanonical($email);
+            $user->setEmailCanonical($email);
+            $this->getService('sylius.user.password_updater')->updatePassword($user);
             if (null !== $address) {
                 $user->setShippingAddress($this->createAddress($address));
             }
@@ -546,10 +548,10 @@ class CoreContext extends DefaultContext
     private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = array())
     {
         $this->thereIsUser($email, 'sylius', null, 'yes', null, array(), true, $authorizationRoles);
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_login'));
 
         $this->fillField('Email', $email);
         $this->fillField('Password', 'sylius');
-        $this->pressButton('login');
+        $this->pressButton('Login');
     }
 }

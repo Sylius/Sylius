@@ -850,6 +850,12 @@ sylius:
         no_report: There is no report to display.
     save_changes: Save changes
     search: Search
+    security:
+        login:
+            header: Login <small>Sylius store</small>
+            info: Please login using <b>"sylius@example.com"</b> email and <b>"sylius"</b> as password. <small>Mr. Sylius Demo Guide</small>
+            no_account: No account yet?
+            button: Login
     settings:
         general_header: General settings
         security_header: Security settings
@@ -972,6 +978,9 @@ sylius:
         orders: User orders
         recent_header: Recent users
         registration_date: Registration date
+        register:
+            button: Register
+            header: Registration <small>Create an account in store</small>
         shipping_address: Shipping address
         show_header: User details
         update_header: Editing user

@@ -12,8 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use FOS\UserBundle\Model\UserManagerInterface;
-use FOS\UserBundle\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -25,6 +24,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  * User delete listener spec.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserDeleteListenerSpec extends ObjectBehavior
 {

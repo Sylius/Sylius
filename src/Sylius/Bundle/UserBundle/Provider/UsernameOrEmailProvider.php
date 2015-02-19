@@ -19,8 +19,9 @@ class UsernameOrEmailProvider extends UserProvider
     protected function findUser($usernameOrEmail)
     {
         if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {
-           return $this->userRepository->findOneBy(array('emailCanonical' => $usernameOrEmail));
+            return $this->userRepository->findOneBy(array('emailCanonical' => $usernameOrEmail));
         }
+
         return $this->userRepository->findOneBy(array('usernameCanonical' => $usernameOrEmail));
     }
 }

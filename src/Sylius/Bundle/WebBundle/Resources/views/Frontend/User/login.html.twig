@@ -1,0 +1,43 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ 'sylius.security.login.header'|trans|raw }}</h1>
+</div>
+
+{% if error %}
+    <div class="alert alert-danger">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+<blockquote>
+  <p>{{ 'sylius.security.login.info'|trans|raw }}</p>
+</blockquote>
+
+<form action="{{ path('sylius_user_login_check') }}" method="post" class="form-horizontal" >
+    <fieldset>
+        {{ form_errors(form) }}
+
+        {{ form_row(form._username) }}
+        {{ form_row(form._password) }}
+        {# {{ form_row(form.rememberMe) }} #}
+
+
+        {{ form_rest(form) }}
+    <div class="pull-right">
+        <p>
+            {# <a href="{{ path('fos_user_resetting_request') }}" class="btn btn-info btn-sm">{{ 'security.login.forgot_password'|trans }}</a> #}
+            <a href="{{ path('sylius_user_registration') }}" class="btn btn-primary btn-sm"><i class="icon-user"></i>{{ 'sylius.security.login.no_account'|trans }}</a>
+        </p>
+    </div>
+    </fieldset>
+    
+    <div class="form-actions clearfix">
+        <button class="btn btn-primary" type="submit">
+            <i class="icon-lock"></i>
+            {{ 'sylius.security.login.button'|trans|raw }}
+        </button>
+    </div>
+</form>
+{% endblock %}

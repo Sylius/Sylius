@@ -11,22 +11,32 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
-use FOS\UserBundle\Form\Type\ProfileFormType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\UserBundle\Form\EventListener\CanonicalizerFormListener;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends ProfileFormType
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
+class UserType extends AbstractResourceType
 {
-    /** @var string */
-    private $dataClass;
+    /**
+     * DataFetcher registry.
+     *
+     * @var CanonicalizerInterface
+     */
+    protected $canonicalizer;
 
     /**
-     * {@inheritdoc}
-     */
-    public function __construct($dataClass)
+    * Constructor.
+    *
+    * @param CanonicalizerInterface $canonicalizer
+    */
+    public function __construct($dataClass, array $validationGroups, CanonicalizerInterface $canonicalizer)
     {
-        $this->dataClass = $dataClass;
+        parent::__construct($dataClass, $validationGroups);
+        $this->canonicalizer = $canonicalizer;
     }
 
     /**
@@ -35,19 +45,18 @@ class UserType extends ProfileFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->addEventSubscriber(new CanonicalizerFormListener($this->canonicalizer))
             ->add('firstName', 'text', array(
                 'label' => 'sylius.form.user.first_name',
             ))
             ->add('lastName', 'text', array(
                 'label' => 'sylius.form.user.last_name',
             ))
-        ;
-
-        $this->buildUserForm($builder, $options);
-
-        $builder
+            ->add('email', 'text', array(
+                'label' => 'sylius.form.user.email',
+            ))
             ->add('plainPassword', 'password', array(
-                'label' => 'sylius.form.user.password',
+                'label' => 'sylius.form.user.password.label',
             ))
             ->add('enabled', 'checkbox', array(
                 'label' => 'sylius.form.user.enabled',
@@ -65,27 +74,6 @@ class UserType extends ProfileFormType
             ))
             ->remove('username')
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class'         => $this->dataClass,
-            'validation_groups'  => function (FormInterface $form) {
-                $data = $form->getData();
-                $groups = array('Profile', 'sylius');
-                if ($data && !$data->getId()) {
-                    $groups[] = 'ProfileAdd';
-                }
-
-                return $groups;
-            },
-            'cascade_validation' => true,
-            'intention'          => 'profile',
-        ));
     }
 
     /**

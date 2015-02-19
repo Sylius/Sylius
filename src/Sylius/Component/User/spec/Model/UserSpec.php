@@ -24,57 +24,57 @@ class UserSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\User\Model\User');
     }
-    
+
     function it_implements_user_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
     }
-    
+
     function it_implements_groupable_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Model\GroupableInterface');
     }
-    
+
     function it_sets_user_first_name()
     {
         $this->setFirstName('Edward');
-        
+
         $this->getFirstName()->shouldReturn('Edward');
     }
-    
+
     function it_sets_user_last_name()
     {
         $this->setLastName('Thatch');
-        
+
         $this->getLastName()->shouldReturn('Thatch');
     }
-    
+
     function it_can_get_full_name()
     {
         $this->setFirstName('Edward');
         $this->setLastName('Kenway');
-        
+
         $this->getFullName()->shouldReturn('Edward Kenway');
     }
-    
+
     function it_should_return_true_if_user_is_deleted()
     {
         $deletedAt = new \DateTime('yesterday');
         $this->setDeletedAt($deletedAt);
-        
+
         $this->shouldBeDeleted();
     }
-    
+
     function it_should_return_false_if_user_is_not_deleted()
-    {        
+    {
         $this->shouldNotBeDeleted();
     }
-    
+
     function it_should_return_false_if_user_deleted_time_is_future_date()
     {
         $deletedAt = new \DateTime('tomorrow');
         $this->setDeletedAt($deletedAt);
-        
+
         $this->shouldNotBeDeleted();
     }
 }

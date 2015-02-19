@@ -17,21 +17,72 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.user.canonicalizer.class">Sylius\Component\User\Canonicalizer\Canonicalizer</parameter>
+        <parameter key="sylius.user.password_updater.class">Sylius\Component\User\Security\PasswordUpdater</parameter>
+        <parameter key="sylius.user.user_reloader.class">Sylius\Bundle\UserBundle\Reloader\UserReloader</parameter>
+        <parameter key="sylius.security.authentication_utils.class">Sylius\Component\User\Security\Authentication\AuthenticationUtils</parameter>
+        <parameter key="sylius.security.user_login.class">Sylius\Bundle\UserBundle\Security\UserLogin</parameter>
+
         <parameter key="sylius.provider.name_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameProvider</parameter>
         <parameter key="sylius.provider.name_or_email_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider</parameter>
         <parameter key="sylius.provider.email_provider.class">Sylius\Bundle\UserBundle\Provider\EmailProvider</parameter>
 
+        <parameter key="sylius.form.type.user_login.class">Sylius\Bundle\UserBundle\Form\Type\UserLoginType</parameter>
+
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\UserBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\UserBundle\EventListener\UserAwareListener</parameter>
+        <parameter key="sylius.listener.user_register.class">Sylius\Bundle\UserBundle\EventListener\UserRegisterListener</parameter>
+        <parameter key="sylius.listener.user_create.class">Sylius\Bundle\UserBundle\EventListener\UserCreateListener</parameter>
+        <parameter key="sylius.listener.user_change_password.class">Sylius\Bundle\UserBundle\EventListener\UserChangePasswordListener</parameter>
+        
+        <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
     </parameters>
 
     <services>
+        <!-- Controllers -->
+        <service id="sylius.controller.security" class="%sylius.controller.security.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        
+        <!-- Utils -->
+        <service id="sylius.user.canonicalizer" class="%sylius.user.canonicalizer.class%" />
+        <service id="sylius.user.password_updater" class="%sylius.user.password_updater.class%">
+            <argument type="service" id="security.encoder_factory" />
+        </service>
+        <service id="security.authentication_utils" class="%sylius.security.authentication_utils.class%">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="sylius.security.user_login" class="%sylius.security.user_login.class%">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="sylius.user.user_reloader" class="%sylius.user.user_reloader.class%">
+            <argument type="service" id="sylius.manager.user" />
+        </service>
+
+        <!-- Listeners -->
         <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
             <argument type="service" id="security.context" />
         </service>
+        <service id="sylius.listener.user_register" class="%sylius.listener.user_register.class%">
+            <argument type="service" id="sylius.user.password_updater" />
+            <argument type="service" id="sylius.security.user_login" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_register" method="preRegistration" />
+            <tag name="kernel.event_listener" event="sylius.user.post_register" method="postRegistration" />
+        </service>
+        <service id="sylius.listener.user_create" class="%sylius.listener.user_create.class%">
+            <argument type="service" id="sylius.user.password_updater" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_create" method="preCreate" />
+        </service>
+        <service id="sylius.listener.user_change_password" class="%sylius.listener.user_change_password.class%">
+            <argument type="service" id="sylius.user.password_updater" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_change_password" method="preChangePassword" />
+            <tag name="kernel.event_listener" event="sylius.user.post_change_password" method="postChangePassword" />
+        </service>
         <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
-            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="sylius.user.user_reloader" />
             <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
             <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
         </service>
@@ -42,26 +93,24 @@
             <argument>sylius_backend_user_index</argument>
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
         </service>
-        <service id="sylius.form.type.user" class="%sylius.form.type.user.class%">
-            <argument>%sylius.model.user.class%</argument>
-            <tag name="form.type" alias="sylius_user" />
-        </service>
-        <service id="sylius.form.type.group" class="%sylius.form.type.group.class%">
-            <argument>%sylius.model.group.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-            </argument>
-            <tag name="form.type" alias="sylius_group" />
-        </service>
 
+        <!-- User Providers -->
         <service id="sylius.provider.email_provider" class="%sylius.provider.email_provider.class%">
             <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.user.canonicalizer" />
         </service>
         <service id="sylius.provider.name_or_email_provider" class="%sylius.provider.name_or_email_provider.class%">
             <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.user.canonicalizer" />
         </service>
         <service id="sylius.provider.name_provider" class="%sylius.provider.name_provider.class%">
             <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.user.canonicalizer" />
+        </service>
+
+        <!-- Forms -->
+        <service id="sylius.form.type.user_login" class="%sylius.form.type.user_login.class%">
+            <tag name="form.type" alias="sylius_user_login" />
         </service>
     </services>
 

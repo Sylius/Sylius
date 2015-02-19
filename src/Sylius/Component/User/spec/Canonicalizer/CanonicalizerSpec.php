@@ -21,7 +21,7 @@ class CanonicalizerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\User\Canonicalizer\Canonicalizer');
     }
-    
+
     function it_implements_canonicalizer_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Canonicalizer\CanonicalizerInterface');

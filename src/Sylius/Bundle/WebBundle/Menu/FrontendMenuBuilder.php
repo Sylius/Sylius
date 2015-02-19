@@ -149,18 +149,18 @@ class FrontendMenuBuilder extends MenuBuilder
             }
 
             $menu->addChild('logout', array(
-                'route' => 'fos_user_security_logout',
+                'route' => 'sylius_user_logout',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.logout')),
                 'labelAttributes' => array('icon' => 'icon-off icon-large', 'iconOnly' => false)
             ))->setLabel($this->translate('sylius.frontend.menu.main.logout'));
         } else {
             $menu->addChild('login', array(
-                'route' => 'fos_user_security_login',
+                'route' => 'sylius_user_login',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.login')),
                 'labelAttributes' => array('icon' => 'icon-lock icon-large', 'iconOnly' => false)
             ))->setLabel($this->translate('sylius.frontend.menu.main.login'));
             $menu->addChild('register', array(
-                'route' => 'fos_user_registration_register',
+                'route' => 'sylius_user_registration',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.register')),
                 'labelAttributes' => array('icon' => 'icon-user icon-large', 'iconOnly' => false)
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
@@ -312,7 +312,7 @@ class FrontendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
 
         $child->addChild('profile', array(
-            'route' => 'sylius_account_profile_edit',
+            'route' => 'sylius_user_profile_update',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.profile')),
             'labelAttributes' => array('icon' => 'icon-info-sign', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.profile'));

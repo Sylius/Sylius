@@ -28,6 +28,8 @@ Feature: User registration
         Given I am on the store homepage
           And I follow "Register"
          When I fill in the following:
+            | First name   | John        |
+            | Last name    | Doe         |
             | Email        | foo@bar.com |
             | Password     | bar         |
             | Verification | foo         |
@@ -39,6 +41,8 @@ Feature: User registration
         Given I am on the store homepage
           And I follow "Register"
          When I fill in the following:
+            | First name   | John        |
+            | Last name    | Doe         |
             | Email        | bar@bar.com |
             | Password     | bar         |
             | Verification | bar         |

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use FOS\UserBundle\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  * User delete listener.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserDeleteListener
 {
@@ -45,7 +46,7 @@ class UserDeleteListener
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(
                 $user,
-                'FOS\UserBundle\Model\UserInterface'
+                'Sylius\Component\User\Model\UserInterface'
             );
         }
 
