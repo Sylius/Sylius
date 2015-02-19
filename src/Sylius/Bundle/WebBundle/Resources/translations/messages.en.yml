@@ -37,6 +37,7 @@ sylius:
             outline: Enjoy all the features that are available on your personal space to view, track and manage all your data.
             since: You are customer since
             welcome: Welcome to your space
+            last5orders: Your last 5 orders
         order:
             created_at: Placed at
             details: Details of your order
