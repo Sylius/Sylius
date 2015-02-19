@@ -181,7 +181,7 @@ class FrontendMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Builds frontend currency menu if we have more then 1 currency to display.
+     * Builds frontend currency menu if we have more than 1 currency to display.
      *
      * @return ItemInterface
      */

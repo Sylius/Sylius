@@ -55,7 +55,7 @@ class LocaleMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Builds frontend locale menu if more then one language is defined.
+     * Builds frontend locale menu if more than one language is defined.
      *
      * @return ItemInterface
      */
