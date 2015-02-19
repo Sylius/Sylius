@@ -25,6 +25,13 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface OptionInterface extends TimestampableInterface, OptionTranslationInterface
 {
     /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId();
+    
+    /**
      * Get internal name.
      *
      * It is used only in backend so you can easily
