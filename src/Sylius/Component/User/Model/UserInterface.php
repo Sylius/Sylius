@@ -74,4 +74,11 @@ interface UserInterface extends BaseUserInterface, TimestampableInterface
      * @return self
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);
+    
+    /**
+     * Check whether user is deleted.
+     * 
+     * @return bool
+     */
+    public function isDeleted();
 }

@@ -14,13 +14,3 @@ sylius:
             max: Last name must not be longer than {{ limit }} characters.
             min: Last name must be at least {{ limit }} characters long.
             not_blank: Please enter your last name.
-    product_variant:
-        onHand:
-            min: On hand must be greater than {{ limit }}.
-            not_blank: Please enter on hand.
-        price:
-            min: Price must not be negative.
-            not_blank: Please enter the price.
-    product_translation:
-        short_description:
-            max: Short description must not be longer then {{ limit }} characters.

@@ -144,12 +144,4 @@ class User extends BaseUser implements UserInterface
     {
         return $this->addresses;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDeleted()
-    {
-        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
-    }
 }

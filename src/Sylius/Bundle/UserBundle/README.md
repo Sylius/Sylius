@@ -1,4 +1,4 @@
-SyliusUserBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusLocaleBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusLocaleBundle)
+SyliusUserBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusUserBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusUserBundle)
 ==================
 
 [**Symfony2**](http://symfony.com) integration of Sylius User processing
@@ -20,7 +20,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusLocaleBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusUserBundle/index.html).
 
 Contributing
 ------------
@@ -46,7 +46,7 @@ If you want to keep up with updates, [follow the official Sylius account on twit
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/SyliusLocaleBundle/issues).
+This bundle uses [GitHub issues](https://github.com/Sylius/SyliusUserBundle/issues).
 If you have found bug, please create an issue.
 
 Versioning
@@ -66,10 +66,10 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusLocaleBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusUserBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------
 
 The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/SyliusLocaleBundle/contributors).
+See the list of [contributors](https://github.com/Sylius/SyliusUserBundle/contributors).

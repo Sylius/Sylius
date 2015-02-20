@@ -1,8 +1,8 @@
 {
     "name": "sylius/user",
     "type": "library",
-    "description": "Locale handling for PHP applications.",
-    "keywords": ["language", "localization", "locale", "i18n", "internationalization"],
+    "description": "User handling for PHP applications.",
+    "keywords": ["user", "registration", "login", "groups"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [

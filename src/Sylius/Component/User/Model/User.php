@@ -30,10 +30,10 @@ class User extends BaseUser implements UserInterface
     
     public function __construct()
     {
+        parent::__construct();
+        
         $this->createdAt     = new \DateTime();
         $this->oauthAccounts = new ArrayCollection();
-
-        parent::__construct();
     }
 
     public function getFullName()
@@ -192,5 +192,13 @@ class User extends BaseUser implements UserInterface
         parent::setUsernameCanonical($emailCanonical);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDeleted()
+    {
+        return ((null !== $this->deletedAt) && (new \DateTime() >= $this->deletedAt));
     }
 }

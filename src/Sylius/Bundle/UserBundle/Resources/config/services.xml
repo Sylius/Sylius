@@ -18,7 +18,6 @@
 
     <parameters>
         <parameter key="sylius.user_provider.class">Sylius\Bundle\UserBundle\Provider\UserProvider</parameter>
-        <parameter key="sylius.event_listener.user.class">Sylius\Bundle\UserBundle\EventListener\UserListener</parameter>
         <parameter key="sylius.listener.user_update.class">Sylius\Bundle\UserBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\UserBundle\EventListener\UserAwareListener</parameter>

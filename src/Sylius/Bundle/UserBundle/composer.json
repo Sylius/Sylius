@@ -2,13 +2,17 @@
     "name": "sylius/user-bundle",
     "type": "symfony-bundle",
     "description": "Users management for Symfony2 projects.",
-    "keywords": ["language", "localization", "user", "i18n", "internationalization"],
+    "keywords": ["user", "registration", "login", "groups"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
             "name":     "Paweł Jędrzejewski",
             "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Bartosz Siejka",
+            "homepage": "http://bsiejka.com"
         },
         {
             "name":     "Sylius project",
