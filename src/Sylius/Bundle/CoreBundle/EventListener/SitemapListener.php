@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * Sitemap listener.
  *
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Bartosz Siejka <siejka.bartosz@gmail.com>
  */
 class SitemapListener implements SitemapListenerInterface
 {
@@ -39,6 +39,9 @@ class SitemapListener implements SitemapListenerInterface
         $this->taxonRepository = $taxonRepository;
     }
 
+    /**
+     *{@inheritdoc}
+     */
     public function populateSitemap(SitemapPopulateEvent $event)
     {
         $this->event = $event;
@@ -50,6 +53,11 @@ class SitemapListener implements SitemapListenerInterface
         $this->staticSitemap();
     }
     
+    /**
+     * Create part of sitemap with urls to static pages.
+     * 
+     * @return void
+     */
     protected function staticSitemap()
     {
          if (null === $this->section || 'default' === $this->section) {
@@ -62,6 +70,11 @@ class SitemapListener implements SitemapListenerInterface
         }
     }
 
+    /**
+     * Create part of sitemap with urls to taxonomies.
+     * 
+     * @return void
+     */
     protected function taxonSitemap()
     {
         if (null === $this->section || 'default' === $this->section) {
@@ -74,13 +87,15 @@ class SitemapListener implements SitemapListenerInterface
         }
     }
     
+    /**
+     * Create part of sitemap with urls to products.
+     * 
+     * @return void
+     */
     protected function productSitemap() 
     {
         if (null === $this->section || 'default' === $this->section) {
-            $homepage = $this->router->generate('sylius_homepage', array(), true);
             $products = $this->productRepository->findAll();
-
-            $this->createSiteMapEntry($homepage, null, UrlConcrete::CHANGEFREQ_YEARLY, 1);
 
             foreach ($products as $product) {
                 $url = $this->router->generate($product, array(), true);
@@ -89,6 +104,13 @@ class SitemapListener implements SitemapListenerInterface
         }
     }
 
+    /**
+     * @param type $url
+     * @param type $modifiedDate
+     * @param type $changeFrequency
+     * @param type $priority
+     * @return void
+     */
     protected function createSiteMapEntry($url, $modifiedDate, $changeFrequency, $priority)
     {
         $this->event->getGenerator()->addUrl(
@@ -102,6 +124,9 @@ class SitemapListener implements SitemapListenerInterface
         );
     }
     
+    /**
+     * Create part of sitemap with url to homepage
+     */
     private function homepageSitemap() {
         if (null === $this->section || 'default' === $this->section) {
             $homepage = $this->router->generate('sylius_homepage', array(), true);
