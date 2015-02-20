@@ -15,7 +15,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Presta\SitemapBundle\Service\SitemapListenerInterface;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
-use \Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Sitemap listener.
@@ -25,6 +25,7 @@ use \Sylius\Component\Resource\Repository\RepositoryInterface;
 class SitemapListener implements SitemapListenerInterface
 {
     private $event;
+    private $section;
     private $router;
     private $dynamicRouter;
     private $productRepository;
@@ -41,25 +42,18 @@ class SitemapListener implements SitemapListenerInterface
     public function populateSitemap(SitemapPopulateEvent $event)
     {
         $this->event = $event;
-        $section = $event->getSection();
-
-        if (is_null($section) || $section == 'default') {
-            $homepage = $this->router->generate('sylius_homepage', array(), true);
-            $products = $this->productRepository->findAll();
-            $taxons = $this->taxonRepository->findAll();
+        $this->section = $event->getSection();
+        
+        $this->homepageSitemap();
+        $this->productSitemap();
+        $this->taxonSitemap();
+        $this->staticSitemap();
+    }
+    
+    protected function staticSitemap()
+    {
+         if (null === $this->section || 'default' === $this->section) {
             $statics = $this->dynamicRouter->getRouteCollection()->all();
-
-            $this->createSiteMapEntry($homepage, null, UrlConcrete::CHANGEFREQ_YEARLY, 1);
-
-            foreach ($products as $product) {
-                $url = $this->router->generate($product, array(), true);
-                $this->createSiteMapEntry($url, $product->getUpdatedAt(), UrlConcrete::CHANGEFREQ_MONTHLY, 0.7);
-            }
-
-            foreach ($taxons as $taxon) {
-                $url = $this->router->generate($taxon, array(), true);
-                $this->createSiteMapEntry($url, $taxon->getUpdatedAt(), UrlConcrete::CHANGEFREQ_MONTHLY, 0.5);
-            }
 
             foreach ($statics as $static) {
                 $url = $this->router->generate($static, array(), true);
@@ -68,7 +62,34 @@ class SitemapListener implements SitemapListenerInterface
         }
     }
 
-    private function createSiteMapEntry($url, $modifiedDate, $changeFrequency, $priority)
+    protected function taxonSitemap()
+    {
+        if (null === $this->section || 'default' === $this->section) {
+            $taxons = $this->taxonRepository->findAll();
+
+            foreach ($taxons as $taxon) {
+                $url = $this->router->generate($taxon, array(), true);
+                $this->createSiteMapEntry($url, $taxon->getUpdatedAt(), UrlConcrete::CHANGEFREQ_MONTHLY, 0.5);
+            }
+        }
+    }
+    
+    protected function productSitemap() 
+    {
+        if (null === $this->section || 'default' === $this->section) {
+            $homepage = $this->router->generate('sylius_homepage', array(), true);
+            $products = $this->productRepository->findAll();
+
+            $this->createSiteMapEntry($homepage, null, UrlConcrete::CHANGEFREQ_YEARLY, 1);
+
+            foreach ($products as $product) {
+                $url = $this->router->generate($product, array(), true);
+                $this->createSiteMapEntry($url, $product->getUpdatedAt(), UrlConcrete::CHANGEFREQ_MONTHLY, 0.7);
+            }
+        }
+    }
+
+    protected function createSiteMapEntry($url, $modifiedDate, $changeFrequency, $priority)
     {
         $this->event->getGenerator()->addUrl(
             new UrlConcrete(
@@ -79,5 +100,13 @@ class SitemapListener implements SitemapListenerInterface
             ),
             'default'
         );
+    }
+    
+    private function homepageSitemap() {
+        if (null === $this->section || 'default' === $this->section) {
+            $homepage = $this->router->generate('sylius_homepage', array(), true);
+
+            $this->createSiteMapEntry($homepage, null, UrlConcrete::CHANGEFREQ_YEARLY, 1);
+        }
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49d581aba60183d1a58faef6781d8dcc",
+    "hash": "26dd34582d8a68597aec3f7dcfc9be97",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -5666,59 +5666,6 @@
             "time": "2014-02-26 11:19:31"
         },
         {
-            "name": "prezent/doctrine-translatable",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Prezent/doctrine-translatable.git",
-                "reference": "41448a535d7e4f30cbb1b5464c5a86472be71583"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Prezent/doctrine-translatable/zipball/41448a535d7e4f30cbb1b5464c5a86472be71583",
-                "reference": "41448a535d7e4f30cbb1b5464c5a86472be71583",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": ">=2.3,<2.6-dev",
-                "jms/metadata": "~1.1",
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "doctrine/orm": ">=2.3,<2.6-dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Prezent\\Doctrine\\Translatable": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Prezent Internet B.V.",
-                    "email": "github@prezent.nl"
-                }
-            ],
-            "description": "Translatable behaviour extension for Doctrine2",
-            "homepage": "http://www.prezent.nl",
-            "keywords": [
-                "doctrine2",
-                "extensions",
-                "i18n",
-                "translatable"
-            ],
-            "time": "2014-12-16 16:30:25"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -9277,7 +9224,6 @@
         "knplabs/knp-gaufrette-bundle": 20,
         "knplabs/knp-snappy-bundle": 20,
         "mathiasverraes/money": 20,
-        "prezent/doctrine-translatable": 20,
         "willdurand/hateoas-bundle": 0
     },
     "prefer-stable": false,
