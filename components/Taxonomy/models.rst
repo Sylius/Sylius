@@ -44,13 +44,13 @@ This model implements ``TaxonomyInterface``, it implements these extra methods:
 +------------------------------------+-------------------------------------+----------------------------+
 | Method                             | Description                         | Returned value             |
 +====================================+=====================================+============================+
-| getTaxons()                        | Adds option value                   | TaxonInterface[]           |
+| getTaxons()                        | Get all taxons                      | TaxonInterface[]           |
 +------------------------------------+-------------------------------------+----------------------------+
 | hasTaxon(TaxonInterface $taxon)    | Check if the taxonomy has taxon     | boolean                    |
 +------------------------------------+-------------------------------------+----------------------------+
 | addTaxon(TaxonInterface $taxon)    | Add a taxon                         | Void                       |
 +------------------------------------+-------------------------------------+----------------------------+
-| removeTaxon(TaxonInterface $taxon) | Remove a taxon a taxon              | Void                       |
+| removeTaxon(TaxonInterface $taxon) | Remove a taxon                      | Void                       |
 +------------------------------------+-------------------------------------+----------------------------+
 
 
@@ -107,13 +107,13 @@ This interface should be implemented by models that support taxons.
 +------------------------------------+---------------------------------+--------------------+
 | Method                             | Description                     | Returned value     |
 +====================================+=================================+====================+
-| getTaxons($taxonomy = null)        | Get all taxons                  | VariantInterface   |
+| getTaxons($taxonomy = null)        | Get all taxons                  | TaxonInterface[]   |
 +------------------------------------+---------------------------------+--------------------+
 | setTaxons(Collection $collection)  | Set the taxons                  | Void               |
 +------------------------------------+---------------------------------+--------------------+
 | hasTaxon(TaxonInterface $taxon)    | Checks whether object has taxon | Boolean            |
 +------------------------------------+---------------------------------+--------------------+
-| addTaxon(TaxonInterface $taxon)    | Add a taxon                     | VariantInterface[] |
+| addTaxon(TaxonInterface $taxon)    | Add a taxon                     | TaxonomyInterface  |
 +------------------------------------+---------------------------------+--------------------+
-| removeTaxon(TaxonInterface $taxon) | Remove a taxon                  | Void               |
+| removeTaxon(TaxonInterface $taxon) | Remove a taxon                  | TaxonomyInterface  |
 +------------------------------------+---------------------------------+--------------------+

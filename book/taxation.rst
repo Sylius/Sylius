@@ -18,7 +18,7 @@ Tax Zones
 ---------
 
 Additionally to tax categories, you can have different tax zones, in order to apply correct taxes for customers coming from any country in the world.
-To understand how zones work, please refer to the [Zones] chapter of this book.
+To understand how zones work, please refer to the `Zones <http://docs.sylius.org/en/latest/book/addresses.html#zones>`_ chapter of this book.
 
 Tax Rates
 ---------

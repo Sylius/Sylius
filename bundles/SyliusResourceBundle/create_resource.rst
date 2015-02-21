@@ -91,7 +91,7 @@ Below you can see the usage for specifying a custom form.
                 template: App:Backend/User:create.html.twig
                 form: app_user_custom
 
-or use use directly a class.
+or use directly a class.
 
 .. code-block:: yaml
 

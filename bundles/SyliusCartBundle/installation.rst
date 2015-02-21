@@ -179,7 +179,6 @@ Its only requirement is to implement ``Sylius\Component\Cart\Resolver\ItemResolv
 
     use Sylius\Component\Cart\Model\CartItemInterface;
     use Sylius\Component\Cart\Resolver\ItemResolverInterface;
-    use Symfony\Component\HttpFoundation\Request;
 
     class ItemResolver implements ItemResolverInterface
     {
@@ -203,7 +202,6 @@ inject the entity manager into our resolver service.
 
     use Sylius\Component\Cart\Model\CartItemInterface;
     use Sylius\Component\Cart\Resolver\ItemResolverInterface;
-    use Symfony\Component\HttpFoundation\Request;
     use Doctrine\ORM\EntityManager;
 
     class ItemResolver implements ItemResolverInterface
@@ -240,7 +238,6 @@ This can be done in various ways, but to keep the example simple - we'll use a q
     use Sylius\Component\Cart\Model\CartItemInterface;
     use Sylius\Component\Cart\Resolver\ItemResolverInterface;
     use Sylius\Component\Cart\Resolver\ItemResolvingException;
-    use Symfony\Component\HttpFoundation\Request;
     use Doctrine\ORM\EntityManager;
 
     class ItemResolver implements ItemResolverInterface
