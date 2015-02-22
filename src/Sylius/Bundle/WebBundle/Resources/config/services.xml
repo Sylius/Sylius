@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.controller.frontend.homepage.class">Sylius\Bundle\WebBundle\Controller\Frontend\HomepageController</parameter>
+        <parameter key="sylius.controller.frontend.account.profile.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\ProfileController</parameter>
         <parameter key="sylius.controller.frontend.account.address.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController</parameter>
         <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
 
@@ -35,6 +36,11 @@
 
     <services>
         <service id="sylius.controller.frontend.homepage" class="%sylius.controller.frontend.homepage.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.frontend.account.profile" class="%sylius.controller.frontend.account.profile.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
