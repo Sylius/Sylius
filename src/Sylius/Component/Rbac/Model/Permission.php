@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Rbac\Model;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -108,6 +109,8 @@ class Permission implements PermissionInterface
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -124,6 +127,8 @@ class Permission implements PermissionInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -140,6 +145,8 @@ class Permission implements PermissionInterface
     public function setParent(PermissionInterface $permission = null)
     {
         $this->parent = $permission;
+
+        return $this;
     }
 
     /**
@@ -167,6 +174,8 @@ class Permission implements PermissionInterface
             $permission->setParent($this);
             $this->children->add($permission);
         }
+
+        return $this;
     }
 
     /**
@@ -178,6 +187,8 @@ class Permission implements PermissionInterface
             $permission->setParent(null);
             $this->children->removeElement($permission);
         }
+
+        return $this;
     }
 
     /**

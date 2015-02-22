@@ -14,8 +14,6 @@ namespace Sylius\Component\Rbac\Authorization;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
-
-
 /**
  * Permission map interface.
  *

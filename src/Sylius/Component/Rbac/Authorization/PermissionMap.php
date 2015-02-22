@@ -33,6 +33,11 @@ class PermissionMap implements PermissionMapInterface
      */
     protected $permissionsResolver;
 
+    /**
+     * Cache.
+     *
+     * @var array
+     */
     private $permissions = array();
 
     /**
@@ -70,6 +75,11 @@ class PermissionMap implements PermissionMapInterface
         return $this->permissionsResolver->getPermissions($role);
     }
 
+    /**
+     * @param string $code
+     *
+     * @return null|PermissionInterface
+     */
     private function getPermission($code)
     {
         if (isset($this->permissions[$code])) {

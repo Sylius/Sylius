@@ -66,7 +66,7 @@ class CachedPermissionMap implements PermissionMapInterface
 
         $this->cache->save($this->getCacheKey($role), $permissionsCache, $this->ttl);
 
-        return $this->hasPermission($role, $permissionCode);
+        return in_array($permissionCode, $permissionsCache);
     }
 
     /**

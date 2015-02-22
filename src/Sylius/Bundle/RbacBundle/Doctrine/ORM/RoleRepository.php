@@ -36,5 +36,4 @@ class RoleRepository extends EntityRepository implements RoleRepositoryInterface
             ->execute()
         ;
     }
-
 }

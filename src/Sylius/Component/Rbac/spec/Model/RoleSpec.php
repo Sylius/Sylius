@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Rbac\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Rbac\Model\PermissionInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
