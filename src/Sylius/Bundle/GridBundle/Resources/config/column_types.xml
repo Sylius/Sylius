@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+
+    <parameters>
+        <parameter key="sylius.grid_column_type.string.class">Sylius\Component\Grid\ColumnType\StringColumnType</parameter>
+        <parameter key="sylius.grid_column_type.boolean.class">Sylius\Component\Grid\ColumnType\BooleanColumnType</parameter>
+        <parameter key="sylius.grid_column_type.datetime.class">Sylius\Component\Grid\ColumnType\DateTimeColumnType</parameter>
+        <parameter key="sylius.grid_column_type.twig.class">Sylius\Component\Grid\ColumnType\TwigColumnType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.grid_column_type.string" class="%sylius.grid_column_type.string.class%">
+            <tag name="sylius.grid_column_type" type="string" />
+        </service>
+        <service id="sylius.grid_column_type.datetime" class="%sylius.grid_column_type.datetime.class%">
+            <tag name="sylius.grid_column_type" type="datetime" />
+        </service>
+        <service id="sylius.grid_column_type.twig" class="%sylius.grid_column_type.twig.class%">
+            <argument type="service" id="twig" />
+            <tag name="sylius.grid_column_type" type="twig" />
+        </service>
+        <service id="sylius.grid_column_type.boolean" class="%sylius.grid_column_type.boolean.class%">
+            <argument type="service" id="twig" />
+            <argument>SyliusGridBundle:Column:_boolean.html.twig</argument>
+            <tag name="sylius.grid_column_type" type="boolean" />
+        </service>
+    </services>
+
+</container>

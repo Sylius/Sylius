@@ -5,12 +5,9 @@ sylius_backend_tax_category_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.tax_category:indexAction
+        _controller: sylius.controller.tax_category:gridAction
         _sylius:
             template: SyliusWebBundle:Backend/TaxCategory:index.html.twig
-            sortable: true
-            sorting:
-                name: desc
 
 sylius_backend_tax_category_create:
     path: /new

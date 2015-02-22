@@ -1,8 +1,6 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
-{% from 'SyliusWebBundle:Backend/TaxCategory:macros.html.twig' import list %}
 
 {% block topbar %}
 <ol class="breadcrumb">
@@ -20,8 +18,5 @@
     <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.tax_category.index_header'|trans|raw }}</h1>
 </div>
 
-{{ pagination(tax_categories) }}
-{{ list(tax_categories) }}
-{{ pagination(tax_categories) }}
-
+{{ sylius_grid_render(grid) }}
 {% endblock %}

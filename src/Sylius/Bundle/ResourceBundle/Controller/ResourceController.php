@@ -16,6 +16,7 @@ use FOS\RestBundle\View\View;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
+use Sylius\Component\Grid\Parameters as GridParameters;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -172,6 +173,33 @@ class ResourceController extends FOSRestController
     /**
      * @param Request $request
      *
+     * @return Response
+     */
+    public function gridAction(Request $request)
+    {
+        $gridProvider = $this->get('sylius.grid_provider');
+        $gridViewBuilder = $this->get('sylius.grid_view_builder');
+
+        if (null === $grid = $gridProvider->getGrid($this->config->getGrid())) {
+            throw new \InvalidArgumentException(sprintf('Grid "%s" does not exist.'));
+        }
+
+        $parameters = new GridParameters($request->query->all());
+        $gridView = $gridViewBuilder->build($grid, $parameters);
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('index.html'))
+            ->setTemplateVar('grid')
+            ->setData($gridView)
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -207,8 +235,9 @@ class ResourceController extends FOSRestController
             ->view()
             ->setTemplate($this->config->getTemplate('create.html'))
             ->setData(array(
-                $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView(),
+                'resource'      => $resource,
+                'form'          => $form->createView(),
+                'configuration' => $this->config
             ))
         ;
 
@@ -253,8 +282,9 @@ class ResourceController extends FOSRestController
             ->view()
             ->setTemplate($this->config->getTemplate('update.html'))
             ->setData(array(
-                $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView(),
+                'resource'      => $resource,
+                'form'          => $form->createView(),
+                'configuration' => $this->config
             ))
         ;
 

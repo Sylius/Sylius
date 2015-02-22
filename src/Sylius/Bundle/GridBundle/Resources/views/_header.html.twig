@@ -1,0 +1,7 @@
+{% set route = app.request.get('_route') %}
+{% set routeParameters = app.request.get('_route_params') %}
+{% set routeParameters = routeParameters|merge({'sorting': sorting}) %}
+
+<a href="{{ path(route, routeParameters) }}">
+    {{ column.label|default(column.field)|trans|upper }} {% if direction is defined %} ({{ direction }}){% endif %}
+</a>

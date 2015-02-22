@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+
+    <parameters>
+        <parameter key="sylius.grid_data_factory.class">Sylius\Component\Grid\Data\DataFactory</parameter>
+        <parameter key="sylius.grid_data_source_provider.class">Sylius\Bundle\GridBundle\DataSource\Doctrine\DataSourceProvider</parameter>
+        <parameter key="sylius.grid_provider.class">Sylius\Component\Grid\Provider\ArrayGridProvider</parameter>
+        <parameter key="sylius.grid_view_builder.class">Sylius\Component\Grid\View\GridViewBuilder</parameter>
+        <parameter key="sylius.grid_filters_applicator.class">Sylius\Component\Grid\Filter\FiltersApplicator</parameter>
+        <parameter key="sylius.grid_column_renderer.class">Sylius\Component\Grid\Renderer\ColumnRenderer</parameter>
+        <parameter key="sylius.grid_sorter.class">Sylius\Component\Grid\Sorter\Sorter</parameter>
+
+        <parameter key="sylius.registry.grid_filter.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+        <parameter key="sylius.registry.grid_column_type.class">Sylius\Component\Registry\ServiceRegistry</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.grid_provider" class="%sylius.grid_provider.class%">
+            <argument>%sylius.grids%</argument>
+        </service>
+        <service id="sylius.grid_view_builder" class="%sylius.grid_view_builder.class%">
+            <argument type="service" id="sylius.grid_data_factory" />
+        </service>
+        <service id="sylius.grid_data_factory" class="%sylius.grid_data_factory.class%">
+            <argument type="service" id="sylius.grid_data_source_provider" />
+            <argument type="service" id="sylius.grid_filters_applicator" />
+            <argument type="service" id="sylius.grid_sorter" />
+        </service>
+        <service id="sylius.grid_data_source_provider" class="%sylius.grid_data_source_provider.class%">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="sylius.registry.grid_filter" class="%sylius.registry.grid_filter.class%">
+            <argument>Sylius\Component\Grid\Filter\FilterInterface</argument>
+        </service>
+        <service id="sylius.registry.grid_column_type" class="%sylius.registry.grid_column_type.class%">
+            <argument>Sylius\Component\Grid\ColumnType\ColumnTypeInterface</argument>
+        </service>
+        <service id="sylius.grid_sorter" class="%sylius.grid_sorter.class%" />
+        <service id="sylius.grid_filters_applicator" class="%sylius.grid_filters_applicator.class%">
+            <argument type="service" id="sylius.registry.grid_filter" />
+        </service>
+        <service id="sylius.grid_column_renderer" class="%sylius.grid_column_renderer.class%">
+            <argument type="service" id="sylius.registry.grid_column_type" />
+        </service>
+    </services>
+
+</container>

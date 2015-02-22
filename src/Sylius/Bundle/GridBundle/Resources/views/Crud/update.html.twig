@@ -1,0 +1,9 @@
+{% extends 'SyliusGridBundle:Crud:layout.html.twig' %}
+
+{% block body %}
+    <form method="POST" action="{{ path(configuration.bundlePrefix ~'_'~ configuration.resourceName ~'_update', {'id': resource.id}) }}" novalidate>
+        <input type="hidden" name="_method" value="PUT">
+        {{ form_widget(form) }}
+        <input type="submit" />
+    </form>
+{% endblock %}

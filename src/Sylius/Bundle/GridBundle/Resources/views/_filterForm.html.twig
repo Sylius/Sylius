@@ -1,0 +1,8 @@
+{% set route = app.request.get('_route') %}
+{% set routeParameters = app.request.get('_route_params') %}
+
+<form method="GET" action="{{ path(route, routeParameters) }}">
+    {{ form_widget(form) }}
+    <input type="submit" class="btn btn-primary" />
+    <hr>
+</form>

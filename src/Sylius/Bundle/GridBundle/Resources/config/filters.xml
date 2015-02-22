@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+
+    <parameters>
+        <parameter key="sylius.grid_filter.string.class">Sylius\Component\Grid\Filter\StringFilter</parameter>
+        <parameter key="sylius.form.type.filter.string.class">Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.number.class">Sylius\Component\Grid\Filter\NumberFilter</parameter>
+        <parameter key="sylius.form.type.filter.number.class">Sylius\Bundle\GridBundle\Form\Type\Filter\NumberFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.country.class">Sylius\Component\Grid\Filter\CountryFilter</parameter>
+        <parameter key="sylius.form.type.filter.country.class">Sylius\Bundle\GridBundle\Form\Type\Filter\CountryFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.currency.class">Sylius\Component\Grid\Filter\CurrencyFilter</parameter>
+        <parameter key="sylius.form.type.filter.currency.class">Sylius\Bundle\GridBundle\Form\Type\Filter\CurrencyFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.timezone.class">Sylius\Component\Grid\Filter\TimezoneFilter</parameter>
+        <parameter key="sylius.form.type.filter.timezone.class">Sylius\Bundle\GridBundle\Form\Type\Filter\TimezoneFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.boolean.class">Sylius\Component\Grid\Filter\BooleanFilter</parameter>
+        <parameter key="sylius.form.type.filter.boolean.class">Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.choice.class">Sylius\Component\Grid\Filter\ChoiceFilter</parameter>
+        <parameter key="sylius.form.type.filter.choice.class">Sylius\Bundle\GridBundle\Form\Type\Filter\ChoiceFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.entity.class">Sylius\Component\Grid\Filter\EntityFilter</parameter>
+        <parameter key="sylius.form.type.filter.entity.class">Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.date.class">Sylius\Component\Grid\Filter\DateFilter</parameter>
+        <parameter key="sylius.form.type.filter.date.class">Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.percent.class">Sylius\Component\Grid\Filter\PercentFilter</parameter>
+        <parameter key="sylius.form.type.filter.percent.class">Sylius\Bundle\GridBundle\Form\Type\Filter\PercentFilterType</parameter>
+
+        <parameter key="sylius.grid_filter.datetime.class">Sylius\Component\Grid\Filter\DateTimeFilter</parameter>
+        <parameter key="sylius.form.type.filter.datetime.class">Sylius\Bundle\GridBundle\Form\Type\Filter\DateTimeFilterType</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.grid_filter.string" class="%sylius.grid_filter.string.class%">
+            <tag name="sylius.grid_filter" type="string" />
+        </service>
+        <service id="sylius.form.type.filter.string" class="%sylius.form.type.filter.string.class%">
+            <tag name="form.type" alias="sylius_filter_string" />
+        </service>
+
+        <service id="sylius.grid_filter.number" class="%sylius.grid_filter.number.class%">
+            <tag name="sylius.grid_filter" type="number" />
+        </service>
+        <service id="sylius.form.type.filter.number" class="%sylius.form.type.filter.number.class%">
+            <tag name="form.type" alias="sylius_filter_number" />
+        </service>
+
+        <service id="sylius.grid_filter.country" class="%sylius.grid_filter.country.class%">
+            <tag name="sylius.grid_filter" type="country" />
+        </service>
+        <service id="sylius.form.type.filter.country" class="%sylius.form.type.filter.country.class%">
+            <tag name="form.type" alias="sylius_filter_country" />
+        </service>
+
+        <service id="sylius.grid_filter.currency" class="%sylius.grid_filter.currency.class%">
+            <tag name="sylius.grid_filter" type="currency" />
+        </service>
+        <service id="sylius.form.type.filter.currency" class="%sylius.form.type.filter.currency.class%">
+            <tag name="form.type" alias="sylius_filter_currency" />
+        </service>
+
+        <service id="sylius.grid_filter.timezone" class="%sylius.grid_filter.timezone.class%">
+            <tag name="sylius.grid_filter" type="timezone" />
+        </service>
+        <service id="sylius.form.type.filter.timezone" class="%sylius.form.type.filter.timezone.class%">
+            <tag name="form.type" alias="sylius_filter_timezone" />
+        </service>
+
+        <service id="sylius.grid_filter.boolean" class="%sylius.grid_filter.boolean.class%">
+            <tag name="sylius.grid_filter" type="boolean" />
+        </service>
+        <service id="sylius.form.type.filter.boolean" class="%sylius.form.type.filter.boolean.class%">
+            <tag name="form.type" alias="sylius_filter_boolean" />
+        </service>
+
+        <service id="sylius.grid_filter.choice" class="%sylius.grid_filter.choice.class%">
+            <tag name="sylius.grid_filter" type="choice" />
+        </service>
+        <service id="sylius.form.type.filter.choice" class="%sylius.form.type.filter.choice.class%">
+            <tag name="form.type" alias="sylius_filter_choice" />
+        </service>
+
+        <service id="sylius.grid_filter.entity" class="%sylius.grid_filter.entity.class%">
+            <tag name="sylius.grid_filter" type="entity" />
+        </service>
+        <service id="sylius.form.type.filter.entity" class="%sylius.form.type.filter.entity.class%">
+            <tag name="form.type" alias="sylius_filter_entity" />
+        </service>
+
+        <service id="sylius.grid_filter.date" class="%sylius.grid_filter.date.class%">
+            <tag name="sylius.grid_filter" type="date" />
+        </service>
+        <service id="sylius.form.type.filter.date" class="%sylius.form.type.filter.date.class%">
+            <tag name="form.type" alias="sylius_filter_date" />
+        </service>
+
+        <service id="sylius.grid_filter.datetime" class="%sylius.grid_filter.datetime.class%">
+            <tag name="sylius.grid_filter" type="datetime" />
+        </service>
+        <service id="sylius.form.type.filter.datetime" class="%sylius.form.type.filter.datetime.class%">
+            <tag name="form.type" alias="sylius_filter_datetime" />
+        </service>
+
+        <service id="sylius.grid_filter.percent" class="%sylius.grid_filter.percent.class%">
+            <tag name="sylius.grid_filter" type="percent" />
+        </service>
+        <service id="sylius.form.type.filter.percent" class="%sylius.form.type.filter.percent.class%">
+            <tag name="form.type" alias="sylius_filter_percent" />
+        </service>
+    </services>
+
+</container>

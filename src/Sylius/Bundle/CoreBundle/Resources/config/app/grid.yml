@@ -1,0 +1,20 @@
+sylius_grid:
+    grids:
+        sylius_tax_category:
+            resource: sylius.tax_category
+            columns:
+                name:
+                    type: string
+                description:
+                    type: string
+                updatedAt:
+                    type: datetime
+            filters:
+                name:
+                    type: string
+                description:
+                    type: string
+                #createdAt:
+                #    type: datetime
+                #updatedAt:
+                #    type: datetime

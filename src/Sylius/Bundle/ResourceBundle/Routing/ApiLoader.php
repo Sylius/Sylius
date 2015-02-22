@@ -19,55 +19,55 @@ use Symfony\Component\Routing\RouteCollection;
 
 class ApiLoader implements LoaderInterface
 {
-    public function load($resource, $type = null)
+    public function load($resourceName, $type = null)
     {
         $routes = new RouteCollection();
-        list($prefix, $resource) = explode('.', $resource);
+        list($prefix, $resourceName) = explode('.', $resourceName);
 
-        $pluralResource = Inflector::pluralize($resource);
+        $pluralResource = str_replace('_', '-', Inflector::pluralize($resourceName));
         $rootPath = '/'.$pluralResource.'/';
         $requirements = array();
 
         // GET collection request.
-        $routeName = sprintf('%s_api_%s_index', $prefix, $resource);
+        $routeName = sprintf('%s_api_%s_index', $prefix, $resourceName);
         $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:indexAction', $prefix, $resource),
+            '_controller' => sprintf('%s.controller.%s:indexAction', $prefix, $resourceName),
         );
 
         $route = new Route($rootPath, $defaults, $requirements, array(), '', array(), array('GET'));
         $routes->add($routeName, $route);
 
         // GET request.
-        $routeName = sprintf('%s_api_%s_show', $prefix, $resource);
+        $routeName = sprintf('%s_api_%s_show', $prefix, $resourceName);
         $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:showAction', $prefix, $resource),
+            '_controller' => sprintf('%s.controller.%s:showAction', $prefix, $resourceName),
         );
 
         $route = new Route($rootPath.'{id}', $defaults, $requirements, array(), '', array(), array('GET'));
         $routes->add($routeName, $route);
 
         // POST request.
-        $routeName = sprintf('%s_api_%s_create', $prefix, $resource);
+        $routeName = sprintf('%s_api_%s_create', $prefix, $resourceName);
         $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:createAction', $prefix, $resource),
+            '_controller' => sprintf('%s.controller.%s:createAction', $prefix, $resourceName),
         );
 
         $route = new Route($rootPath, $defaults, $requirements, array(), '', array(), array('POST'));
         $routes->add($routeName, $route);
 
         // PUT request.
-        $routeName = sprintf('%s_api_%s_update', $prefix, $resource);
+        $routeName = sprintf('%s_api_%s_update', $prefix, $resourceName);
         $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:updateAction', $prefix, $resource),
+            '_controller' => sprintf('%s.controller.%s:updateAction', $prefix, $resourceName),
         );
 
         $route = new Route($rootPath.'{id}', $defaults, $requirements, array(), '', array(), array('PUT', 'PATCH'));
         $routes->add($routeName, $route);
 
         // DELETE request.
-        $routeName = sprintf('%s_api_%s_delete', $prefix, $resource);
+        $routeName = sprintf('%s_api_%s_delete', $prefix, $resourceName);
         $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:deleteAction', $prefix, $resource),
+            '_controller' => sprintf('%s.controller.%s:deleteAction', $prefix, $resourceName),
         );
 
         $route = new Route($rootPath.'{id}', $defaults, $requirements, array(), '', array(), array('DELETE'));
@@ -83,11 +83,11 @@ class ApiLoader implements LoaderInterface
 
     public function getResolver()
     {
-        // Intentionally left blank
+        // Intentionally left blank.
     }
 
     public function setResolver(LoaderResolverInterface $resolver)
     {
-        // Intentionally left blank
+        // Intentionally left blank.
     }
 }

@@ -1,0 +1,6 @@
+<form action="{{ path(action.route, {'id': resource.id}) }}" method="post" novalidate>
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">
+        {{ action.label }}
+    </button>
+</form>

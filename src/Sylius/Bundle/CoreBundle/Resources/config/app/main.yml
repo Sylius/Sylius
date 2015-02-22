@@ -2,6 +2,7 @@ imports:
     - { resource: @SyliusCoreBundle/Resources/config/app/sylius.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/payum.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/cmf.yml }
+    - { resource: @SyliusCoreBundle/Resources/config/app/grid.yml }
     - { resource: @SyliusPaymentBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusShippingBundle/Resources/config/state-machine.yml }
     - { resource: @SyliusOrderBundle/Resources/config/state-machine.yml }

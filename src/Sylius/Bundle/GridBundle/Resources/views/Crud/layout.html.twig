@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Sylius default GRID layout{% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </body>
+</html>
