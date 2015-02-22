@@ -176,8 +176,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
                 $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
             } elseif ('' !== $value) {
                 $queryBuilder
-                    ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
-                    ->setParameter($property, $value);
+                    ->andWhere($queryBuilder->expr()->eq(
+                        $this->getPropertyName($property),
+                        ':' . $key = str_replace('.', '_', $property))
+                    )
+                    ->setParameter($key, $value)
+                ;
             }
         }
     }
