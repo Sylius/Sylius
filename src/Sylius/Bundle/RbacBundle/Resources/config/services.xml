@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.authorization_identity_provider.security.class">Sylius\Bundle\RbacBundle\Provider\SecurityIdentityProvider</parameter>
-        <parameter key="sylius.authorization_checker.class">Sylius\Component\Rbac\Authorization\AuthorizationChecker</parameter>
+        <parameter key="sylius.authorization_checker.default.class">Sylius\Component\Rbac\Authorization\AuthorizationChecker</parameter>
         <parameter key="sylius.permission_provider.class">Sylius\Component\Rbac\Provider\PermissionProvider</parameter>
         <parameter key="sylius.roles_resolver.class">Sylius\Component\Rbac\Resolver\NestedSetRolesResolver</parameter>
         <parameter key="sylius.permissions_resolver.class">Sylius\Component\Rbac\Resolver\NestedSetPermissionsResolver</parameter>
@@ -31,7 +31,7 @@
         <service id="sylius.authorization_identity_provider.security" class="%sylius.authorization_identity_provider.security.class%">
             <argument type="service" id="security.context" />
         </service>
-        <service id="sylius.authorization_checker" class="%sylius.authorization_checker.class%">
+        <service id="sylius.authorization_checker.default" class="%sylius.authorization_checker.default.class%">
             <argument type="service" id="sylius.authorization_identity_provider" />
             <argument type="service" id="sylius.permission_map" />
             <argument type="service" id="sylius.roles_resolver" />

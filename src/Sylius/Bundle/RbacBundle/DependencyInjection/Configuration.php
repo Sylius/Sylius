@@ -36,6 +36,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('authorization_checker')->defaultValue('sylius.authorization_checker.default')->end()
                 ->scalarNode('identity_provider')->defaultValue('sylius.authorization_identity_provider.security')->end()
                 ->scalarNode('permission_map')->defaultValue('sylius.permission_map.cached')->end()
                 ->arrayNode('security_roles')

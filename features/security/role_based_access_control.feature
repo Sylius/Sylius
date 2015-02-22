@@ -6,6 +6,7 @@ Feature: Hierarchical Role based access control (HRBAC)
 
   Background:
     Given there is default currency configured
+    And authorization checks are enabled
     And there are following locales configured:
       | code  | enabled |
       | en_US | yes     |
