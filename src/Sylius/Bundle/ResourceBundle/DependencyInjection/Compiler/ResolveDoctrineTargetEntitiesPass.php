@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\TargetDocumentsResolver;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TargetEntitiesResolver;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -45,9 +46,15 @@ class ResolveDoctrineTargetEntitiesPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (SyliusResourceBundle::DRIVER_DOCTRINE_ORM === $this->getDriver($container)) {
-            $resolver = new DoctrineTargetEntitiesResolver();
-            $resolver->resolve($container, $this->interfaces);
+        switch ($this->getDriver($container)) {
+            case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
+                $resolver = new TargetEntitiesResolver();
+                $resolver->resolve($container, $this->interfaces);
+                break;
+            case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
+                $resolver = new TargetDocumentsResolver();
+                $resolver->resolve($container, $this->interfaces);
+                break;
         }
     }
 

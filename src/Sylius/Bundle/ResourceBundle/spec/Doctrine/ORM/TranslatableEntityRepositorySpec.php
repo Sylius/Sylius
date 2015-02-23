@@ -61,7 +61,7 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
 
     function it_implements_Sylius_translatable_repository_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface');
+        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepositoryInterface');
     }
 
     function it_sets_current_locale_on_created_object(LocaleContextInterface $localeContext)

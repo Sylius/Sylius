@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -36,5 +36,4 @@ interface TranslatableEntityRepositoryInterface extends RepositoryInterface
      * @return TranslatableEntityRepositoryInterface
      */
     public function setTranslatableFields(array $translatableFields);
-
 }

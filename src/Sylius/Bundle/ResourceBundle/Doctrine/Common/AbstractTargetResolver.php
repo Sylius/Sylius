@@ -9,32 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\Common;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Resolves given target entities with container parameters.
- * Usable only with *doctrine/orm* driver.
- *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class DoctrineTargetEntitiesResolver
+abstract class AbstractTargetResolver implements TargeResolverInterface
 {
     /**
      * {@inheritdoc}
      */
     public function resolve(ContainerBuilder $container, array $interfaces)
     {
-        if (!$container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')) {
+        $getTargetResolverService = $this->getTargetResolverService();
+        if (!$container->hasDefinition($getTargetResolverService)) {
             throw new \RuntimeException('Cannot find Doctrine RTEL');
         }
 
-        $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
+        $resolveTargetEntityListener = $container->findDefinition($getTargetResolverService);
 
         foreach ($interfaces as $interface => $model) {
             $resolveTargetEntityListener
-                ->addMethodCall('addResolveTargetEntity', array(
+                ->addMethodCall($this->getMethodName(), array(
                     $this->getInterface($container, $interface),
                     $this->getClass($container, $model),
                     array()
@@ -42,19 +40,42 @@ class DoctrineTargetEntitiesResolver
             ;
         }
 
-        if (!$resolveTargetEntityListener->hasTag('doctrine.event_listener')) {
-            $resolveTargetEntityListener->addTag('doctrine.event_listener', array('event' => 'loadClassMetadata'));
+        $tagName = $this->getTagName();
+        if (!$resolveTargetEntityListener->hasTag($tagName)) {
+            $resolveTargetEntityListener->addTag($tagName, array('event' => 'loadClassMetadata'));
         }
     }
+
+    /**
+     * Return the tag name
+     *
+     * @return string
+     */
+    abstract protected function getTagName();
+
+    /**
+     * Return the name of the method which is called on the listener
+     *
+     * @return string
+     */
+    abstract protected function getMethodName();
+
+    /**
+     * Return the doctrine resolve target listener
+     *
+     * @return string
+     */
+    abstract protected function getTargetResolverService();
 
     /**
      * @param ContainerBuilder $container
      * @param string           $key
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
-    private function getInterface(ContainerBuilder $container, $key)
+    protected function getInterface(ContainerBuilder $container, $key)
     {
         if ($container->hasParameter($key)) {
             return $container->getParameter($key);
@@ -74,9 +95,10 @@ class DoctrineTargetEntitiesResolver
      * @param string           $key
      *
      * @return string
+     *
      * @throws \InvalidArgumentException
      */
-    private function getClass(ContainerBuilder $container, $key)
+    protected function getClass(ContainerBuilder $container, $key)
     {
         if ($container->hasParameter($key)) {
             return $container->getParameter($key);

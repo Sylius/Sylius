@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
