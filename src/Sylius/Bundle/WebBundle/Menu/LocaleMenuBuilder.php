@@ -63,11 +63,17 @@ class LocaleMenuBuilder extends MenuBuilder
     {
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
-                'class' => 'nav nav-pills'
-            )
+                'class' => 'nav nav-pills',
+            ),
         ));
 
-        foreach ($this->localeProvider->getAvailableLocales() as $locale) {
+        if (1 === count($currencies)) {
+            $menu->setDisplay(false);
+
+            return $menu;
+        }
+        
+        foreach ($locales as $locale) {
             $code = $locale->getCode();
 
             $menu->addChild($code, array(
