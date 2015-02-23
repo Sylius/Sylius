@@ -12,6 +12,7 @@
 * :doc:`/components/Pricing/index`
 * :doc:`/components/Product/index`
 * :doc:`/components/Promotion/index`
+* :doc:`/components/Rbac/index`
 * :doc:`/components/Registry/index`
 * :doc:`/components/Report/index`
 * :doc:`/components/Resource/index`

@@ -6,20 +6,21 @@ Symfony2 Ecommerce Bundles
 
     general/index
     SyliusResourceBundle/index
-    SyliusProductBundle/index
-    SyliusCartBundle/index
-    SyliusOrderBundle/index
     SyliusAddressingBundle/index
+    SyliusAttributeBundle/index
+    SyliusCartBundle/index
+    SyliusFlowBundle/index
     SyliusInventoryBundle/index
+    SyliusOmnipayBundle/index
+    SyliusOrderBundle/index
+    SyliusProductBundle/index
+    SyliusPromotionBundle/index
+    SyliusRbacBundle/index
+    SyliusReportBundle/index
+    SyliusSettingsBundle/index
     SyliusShippingBundle/index
     SyliusTaxationBundle/index
-    SyliusPromotionBundle/index
-    SyliusReportBundle/index
-    SyliusOmnipayBundle/index
     SyliusTaxonomyBundle/index
-    SyliusSettingsBundle/index
-    SyliusFlowBundle/index
     SyliusVariationBundle/index
-    SyliusAttributeBundle/index
 
 .. include:: /bundles/map.rst.inc

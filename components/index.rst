@@ -16,6 +16,7 @@ PHP Ecommerce Components
     Pricing/index
     Product/index
     Promotion/index
+    Rbac/index
     Registry/index
     Report/index
     Resource/index
