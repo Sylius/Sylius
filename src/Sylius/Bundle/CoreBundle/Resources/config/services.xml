@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
 
         <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
 
@@ -89,6 +90,8 @@
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
         <parameter key="sylius.form.type.data_fetcher_choice.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\DataFetcherChoiceType</parameter>
         <parameter key="sylius.report.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
+
+        <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
     </parameters>
 
     <services>
@@ -103,6 +106,9 @@
         <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
             <argument type="service" id="sylius.repository.zone" />
             <tag name="sylius.settings_schema" namespace="taxation" />
+        </service>
+        <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
+            <tag name="sylius.settings_schema" namespace="security" />
         </service>
 
         <!-- cart -->
@@ -475,6 +481,11 @@
 
         <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
             <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
+        </service>
+
+        <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
+            <argument type="service" id="sylius.authorization_checker.default" />
+            <argument type="service" id="sylius.settings.manager" />
         </service>
     </services>
 
