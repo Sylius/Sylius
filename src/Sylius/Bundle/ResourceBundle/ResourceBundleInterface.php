@@ -17,7 +17,7 @@ namespace Sylius\Bundle\ResourceBundle;
 interface ResourceBundleInterface
 {
     const MAPPING_XML = 'xml';
-    const MAPPING_YAML = 'yml';
+    const MAPPING_YAML = 'yaml';
     const MAPPING_ANNOTATION = 'annotation';
 
     /**
