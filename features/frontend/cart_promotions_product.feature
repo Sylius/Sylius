@@ -7,13 +7,13 @@ Feature: Checkout product promotion
     Background:
         Given the following products exist:
           | name   | price |
+          | Ubu    | 200   |
           | Lenny  | 15    |
           | Buzz   | 500   |
           | Potato | 200   |
           | Etch   | 20    |
           | Woody  | 125   |
           | Sarge  | 25    |
-          | Ubu    | 200   |
         And the following promotions exist:
           | name                | description                      |
           | Free product        | Almost free product over 100 eur |
