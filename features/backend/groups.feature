@@ -46,7 +46,6 @@ Feature: User groups management
         Given I am on the group creation page
          When I fill in the following:
             | Name  | Dealers                   |
-            | Roles | ROLE_DEALER, ROLE_MANAGER |
           And I press "Create"
          Then I should be on the group index page
           And I should see group with name "Dealers" in the list

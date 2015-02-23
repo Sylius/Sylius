@@ -1,0 +1,13 @@
+sylius:
+  role:
+    code:
+      unique: Code must be unique.
+      not_blank: Please enter code.
+    name:
+      not_blank: Please enter role name.
+  permission:
+    code:
+      unique: Code must be unique.
+      not_blank: Please enter code.
+    description:
+      not_blank: Please describe the permission.

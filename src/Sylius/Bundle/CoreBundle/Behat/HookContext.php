@@ -16,6 +16,7 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Process\Process;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -50,6 +51,15 @@ class HookContext implements Context, KernelAwareContext
 
         $entityManager->getConnection()->executeUpdate("SET foreign_key_checks = 1;");
         $entityManager->clear();
+
+        /*
+        $process = new Process(sprintf('%s/console sylius:rbac:initialize --env=test', $this->getContainer()->getParameter('kernel.root_dir')));
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException('Could not initialize permissions.');
+        }
+        */
     }
 
     /**

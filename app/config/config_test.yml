@@ -33,6 +33,9 @@ sylius_payment:
         test:   Test
         stripe: Stripe
 
+sylius_rbac:
+    authorization_checker: sylius.authorization_checker.toggleable
+
 doctrine_cache:
     providers:
         sylius_settings:

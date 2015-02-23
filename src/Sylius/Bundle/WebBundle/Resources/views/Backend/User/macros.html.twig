@@ -32,7 +32,11 @@
                 <div class="pull-right">
                     {{ buttons.show(path('sylius_backend_user_show', {'id': user.id})) }}
                     {% if not user.deleted %}
+                    {% if sylius_is_granted('sylius.user.update') %}
                     {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
+                    {% else  %}
+                        Not allowed to edit!
+                    {% endif %}
                     {% if user.id is not sameas(app.user.id) %}
                         {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, null) }}
                     {% endif %}

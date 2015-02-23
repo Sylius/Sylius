@@ -14,6 +14,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\LocaleBundle\Provider\LocaleProviderInterface;
+use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -47,9 +48,10 @@ class LocaleMenuBuilder extends MenuBuilder
         SecurityContextInterface  $securityContext,
         TranslatorInterface       $translator,
         EventDispatcherInterface  $eventDispatcher,
-        LocaleProviderInterface   $localeProvider
+        LocaleProviderInterface   $localeProvider,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
-        parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
+        parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
 
         $this->localeProvider = $localeProvider;
     }

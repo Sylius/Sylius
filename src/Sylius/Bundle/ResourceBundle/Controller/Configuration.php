@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Resource controller configuration.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
@@ -365,5 +365,10 @@ class Configuration
     public function getEvent($default = null)
     {
         return $this->parameters->get('event', $default);
+    }
+
+    public function getPermission($default = null)
+    {
+        return $this->parameters->get('permission', $default);
     }
 }

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
+use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
  * User model.
@@ -28,6 +29,7 @@ class User extends BaseUser implements UserInterface
     protected $deletedAt;
     protected $currency;
     protected $orders;
+    protected $authorizationRoles;
     protected $billingAddress;
     protected $shippingAddress;
     protected $addresses;
@@ -39,6 +41,7 @@ class User extends BaseUser implements UserInterface
         $this->orders        = new ArrayCollection();
         $this->addresses     = new ArrayCollection();
         $this->oauthAccounts = new ArrayCollection();
+        $this->authorizationRoles = new ArrayCollection();
 
         parent::__construct();
     }
@@ -317,5 +320,55 @@ class User extends BaseUser implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthorizationRoles()
+    {
+        return $this->authorizationRoles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAuthorizationRole(RoleInterface $role)
+    {
+        if (!$this->hasAuthorizationRole($role)) {
+            $this->authorizationRoles->add($role);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAuthorizationRole(RoleInterface $role)
+    {
+        if ($this->hasAuthorizationRole($role)) {
+            $this->authorizationRoles->removeElement($role);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAuthorizationRole(RoleInterface $role)
+    {
+        return $this->authorizationRoles->contains($role);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        $roles = parent::getRoles();
+
+        foreach ($this->getAuthorizationRoles() as $role) {
+            $roles = array_merge($roles, $role->getSecurityRoles());
+        }
+
+        return $roles;
     }
 }

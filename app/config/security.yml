@@ -77,7 +77,7 @@ security:
 
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
+        - { path: "/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
 
         - { path: "/account.*", role: ROLE_USER }
 

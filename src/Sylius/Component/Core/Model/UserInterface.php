@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
+use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -20,7 +21,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, TimestampableInterface
+interface UserInterface extends BaseUserInterface, IdentityInterface, TimestampableInterface
 {
     /**
      * Get first name.

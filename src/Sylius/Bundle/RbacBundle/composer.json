@@ -1,0 +1,49 @@
+{
+    "name": "sylius/rbac-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 Role-Based-Access-Control",
+    "keywords": ["security", "rbac", "roles", "permissions"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                             ">=5.3.3",
+
+        "sylius/rbac":                     "0.15.*@dev",
+        "sylius/resource-bundle":          "0.15.*@dev",
+        "symfony/framework-bundle":        "~2.3",
+        "doctrine/doctrine-cache-bundle":  "~1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1",
+        "symfony/form":    "~2.3",
+        "twig/twig":       "~1.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\RbacBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\RbacBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}

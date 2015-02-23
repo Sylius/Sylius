@@ -72,7 +72,7 @@ EOT
         $user->setEmail($email);
         $user->setPlainPassword($this->ask($output, 'Choose password:', array(new NotBlank())));
         $user->setEnabled(true);
-        $user->setRoles(array('ROLE_SYLIUS_ADMIN'));
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
         $userManager->persist($user);
         $userManager->flush();

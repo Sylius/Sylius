@@ -40,6 +40,9 @@ sylius:
                 users: Users
                 zones: Zones
                 emails: Emails
+                roles: Roles
+                permissions: Permissions
+                report: Reports
             sidebar:
                 api_clients: API clients
                 assortment: Assortment
@@ -82,6 +85,12 @@ sylius:
                 users: Users
                 zones: Zones
                 emails: Emails
+                roles: Roles
+                permissions: Permissions
+                marketing: Marketing
+                support: Support
+                contact_requests: Requests
+                contact_topics: Configure Topics
     frontend:
         menu:
             account:

@@ -368,6 +368,22 @@ default:
                 - Sylius\Bundle\MailerBundle\Behat\MailerContext
             filters:
                 tags: "@emails && ~@javascript"
+        security:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Sylius\Bundle\CoreBundle\Behat\HookContext
+                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
+                - Sylius\Bundle\CoreBundle\Behat\CoreContext
+                - Sylius\Bundle\ProductBundle\Behat\ProductContext
+                - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
+                - Sylius\Bundle\ResourceBundle\Behat\BaseContext
+                - Sylius\Bundle\TaxationBundle\Behat\TaxationContext
+                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\RbacBundle\Behat\RbacContext
+            filters:
+                tags: "@security && ~@javascript"
 
     extensions:
         Behat\MinkExtension:
