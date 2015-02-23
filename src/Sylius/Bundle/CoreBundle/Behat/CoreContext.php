@@ -254,7 +254,19 @@ class CoreContext extends DefaultContext
             }
 
             foreach ($authorizationRoles as $role) {
-                $user->addAuthorizationRole($this->findOneByName('role', $role));
+                try {
+                    $authorizationRole = $this->findOneByName('role', $role);
+                } catch (\InvalidArgumentException $exception) {
+                    $authorizationRole = $this->getService('sylius.repository.role')->createNew();
+
+                    $authorizationRole->setCode($role);
+                    $authorizationRole->setName(ucfirst($role));
+                    $authorizationRole->setSecurityRoles(array('ROLE_ADMINISTRATION_ACCESS'));
+
+                    $this->getEntityManager()->persist($authorizationRole);
+                }
+
+                $user->addAuthorizationRole($authorizationRole);
             }
 
             if ($flush) {
