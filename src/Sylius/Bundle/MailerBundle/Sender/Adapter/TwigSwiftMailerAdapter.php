@@ -40,15 +40,14 @@ class TwigSwiftMailerAdapter extends AbstractAdapter implements AdapterInterface
 
     /**
      * @param DefaultSettingsProviderInterface $defaultSettingsProvider
-     * @param Swift_Mailer $mailer
-     * @param Twig_Environment $twig
+     * @param Swift_Mailer                     $mailer
+     * @param Twig_Environment                 $twig
      */
     public function __construct(
         DefaultSettingsProviderInterface $defaultSettingsProvider,
         Swift_Mailer $mailer,
         Twig_Environment $twig
-    )
-    {
+    ) {
         parent::__construct($defaultSettingsProvider);
 
         $this->mailer = $mailer;
