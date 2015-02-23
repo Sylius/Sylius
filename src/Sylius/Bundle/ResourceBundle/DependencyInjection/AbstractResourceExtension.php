@@ -20,6 +20,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
@@ -32,7 +33,7 @@ use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExten
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractResourceExtension extends AbstractTranslationExtension
+abstract class AbstractResourceExtension extends AbstractTranslationExtension implements PrependExtensionInterface
 {
     const CONFIGURE_LOADER = 1;
 
@@ -128,6 +129,35 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
         $container->setParameter('sylius.config.classes', $classes);
 
         return array($config, $loader);
+    }
+
+    public function prepend(ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if (!$container->hasParameter($this->getAlias().'interface')) {
+            return;
+        }
+        $interfaces = $container->getParameter($this->getAlias().'interface');
+
+//        $container->getParameter(sprintf('%s.driver', $this->bundlePrefix));
+
+        foreach ($interfaces as $interface => $class) {
+            $interfaces[$interface] = '%'.$class.'%';
+        }
+
+//        if (isset($bundles['DoctrineBundle'])) {
+            $container->prependExtensionConfig('doctrine', array(
+                'orm' => array(
+                    'resolve_target_entities' => $interfaces
+                )
+            ));
+//        }
+
+//        if (isset($bundles['DoctrineMongoDBBundle'])) {
+//            $container->prependExtensionConfig('doctrine_mongodb', array(
+//                'resolve_target_documents' => $interfaces
+//            ));
+//        }
     }
 
     /**

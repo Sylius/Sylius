@@ -40,12 +40,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     {
         $interfaces = $this->getModelInterfaces();
         if (!empty($interfaces)) {
-            $container->addCompilerPass(
-                new ResolveDoctrineTargetEntitiesPass(
-                    $this->getBundlePrefix(),
-                    $interfaces
-                )
-            );
+            $container->setParameter($this->getBundlePrefix().'interface', $interfaces);
+//            $container->addCompilerPass(
+//                new ResolveDoctrineTargetEntitiesPass(
+//                    $this->getBundlePrefix(),
+//                    $interfaces
+//                )
+//            );
         }
 
         if (null !== $this->getModelNamespace()) {
