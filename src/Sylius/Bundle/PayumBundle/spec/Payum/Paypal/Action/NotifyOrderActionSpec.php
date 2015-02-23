@@ -25,17 +25,15 @@ use Sylius\Component\Payment\Model\Payment;
 use Sylius\Component\Payment\Model\PaymentInterface as PaymentModelInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class NotifyOrderActionSpec extends ObjectBehavior
 {
     function let(
-        EventDispatcherInterface $eventDispatcher,
         ObjectManager $objectManager,
         FactoryInterface $factory,
         PaymentInterface $payment
     ) {
-        $this->beConstructedWith($eventDispatcher, $objectManager, $factory);
+        $this->beConstructedWith($objectManager, $factory);
         $this->setPayment($payment);
     }
 

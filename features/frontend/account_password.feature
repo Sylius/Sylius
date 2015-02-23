@@ -37,6 +37,6 @@ Feature: User account password change
           And I fill in "New password" with "newpassword"
           And I fill in "Confirmation" with "newpassword"
           And I press "Save changes"
-         Then I should be on my account profile page
+         Then I should be on my account homepage page
           And I should see "The password has been changed"
 

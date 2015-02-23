@@ -141,7 +141,7 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
         foreach ($classes as $model => $serviceClasses) {
             foreach ($serviceClasses as $service => $class) {
                 if ('form' === $service) {
-                    if (!is_array($class)){
+                    if (!is_array($class)) {
                         $class = array(self::DEFAULT_KEY => $class);
                     }
                     foreach ($class as $suffix => $subClass) {
@@ -190,15 +190,15 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
                     $definition->setArguments(array(
                         $serviceClasses['model'],
                         $config['driver'],
-                        $alias
+                        $alias,
                     ));
                 } else {
                     $definition->setArguments(array(
                         $serviceClasses['model'],
-                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix))
+                        new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix)),
                     ));
                 }
-                $definition->addTag('form.type',array('alias' => $alias));
+                $definition->addTag('form.type', array('alias' => $alias));
                 $container->setDefinition(
                     sprintf('%s.form.type.%s%s', $this->applicationName, $model, $suffix),
                     $definition
@@ -305,7 +305,7 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension
     }
 
     /**
-     * @param array $classes
+     * @param array            $classes
      * @param ContainerBuilder $container
      */
     protected function mapTranslations(array $classes, ContainerBuilder $container)

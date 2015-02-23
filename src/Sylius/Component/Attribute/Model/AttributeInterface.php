@@ -22,6 +22,13 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface AttributeInterface extends TimestampableInterface, AttributeTranslationInterface
 {
     /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId();
+    
+    /**
      * Get internal name.
      *
      * @return string

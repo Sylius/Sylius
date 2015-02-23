@@ -48,4 +48,18 @@ interface TaxonTranslationInterface extends SlugAwareInterface
      * @param string $permalink
      */
     public function setPermalink($permalink);
+    
+    /**
+     * Get description.
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * Set description.
+     *
+     * @param string $description
+     */
+    public function setDescription($description);
 }

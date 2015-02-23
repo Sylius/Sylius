@@ -204,7 +204,7 @@ class Configuration
             return null;
         }
 
-        return '#' . $redirect['hash'];
+        return '#'.$redirect['hash'];
     }
 
     /**

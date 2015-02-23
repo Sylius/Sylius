@@ -112,7 +112,7 @@ class ExtensionsRequirements extends RequirementCollection
                 $on,
                 $status ? $on : $off,
                 true,
-                $translator->trans('sylius.extensions.help', array('%extension%' => 'exit'), 'requirements')
+                $translator->trans('sylius.extensions.help', array('%extension%' => 'exif'), 'requirements')
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.extensions.intl', array(), 'requirements'),

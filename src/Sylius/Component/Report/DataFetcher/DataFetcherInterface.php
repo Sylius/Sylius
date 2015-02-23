@@ -19,14 +19,13 @@ interface DataFetcherInterface
     /**
      * Fetching data from data base
      *
-     * @param array config
+     * @param array $configuration
      *
      * @return Data $data
      */
     public function fetch(array $configuration);
 
     /**
-     *
      * @return Type of data
      */
     public function getType();

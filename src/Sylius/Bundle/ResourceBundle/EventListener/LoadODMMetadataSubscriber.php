@@ -44,7 +44,7 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'loadClassMetadata'
+            'loadClassMetadata',
         );
     }
 

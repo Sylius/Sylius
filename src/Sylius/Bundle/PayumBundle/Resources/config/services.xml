@@ -42,7 +42,6 @@
             <tag name="payum.action" factory="paypal_express_checkout_nvp" />
         </service>
         <service id="sylius.payum.paypal.action.notify_order" class="%sylius.payum.paypal.action.notify_order.class%" public="false">
-            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="sm.factory" />
 
@@ -73,7 +72,6 @@
         <service id="sylius.payum.be2bill.action.notify" class="%sylius.payum.be2bill.action.notify.class%" public="false">
             <argument type="service" id="payum.context.be2bill.api" />
             <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.manager.payment" />
             <argument type="service" id="sm.factory" />
             <argument>id</argument>

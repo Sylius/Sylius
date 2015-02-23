@@ -38,7 +38,6 @@ final class DefaultSettingsProvider implements DefaultSettingsProviderInterface
         $this->senderAddress = $senderAddress;
     }
 
-
     /**
      * {@inheritdoc}
      */

@@ -45,7 +45,7 @@ class SyliusResourceExtension extends AbstractTranslationExtension
         $container->setParameter('sylius.resource.settings', $config['settings']);
 
         $this->createResourceServices($classes, $container);
-        
+
         $this->mapTranslations($classes, $container);
 
         if ($container->hasParameter('sylius.config.classes')) {
@@ -76,7 +76,7 @@ class SyliusResourceExtension extends AbstractTranslationExtension
     }
 
     /**
-     * @param array $configs
+     * @param array            $configs
      * @param ContainerBuilder $container
      */
     private function mapTranslations(array $configs, ContainerBuilder $container)

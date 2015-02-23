@@ -180,21 +180,19 @@ class FrontendMenuBuilder extends MenuBuilder
     }
 
     /**
-     * Builds frontend currency menu if we have more then 1 currency to display.
+     * Builds frontend currency menu.
      *
      * @return ItemInterface
      */
     public function createCurrencyMenu()
     {
-        $currencies = $this->currencyProvider->getAvailableCurrencies();
-
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
                 'class' => 'nav nav-pills',
             ),
         ));
 
-        if (count($currencies) == 1) {
+        if (1 === count($currencies)) {
             $menu->setDisplay(false);
 
             return $menu;
@@ -202,6 +200,7 @@ class FrontendMenuBuilder extends MenuBuilder
 
         foreach ($currencies as $currency) {
             $code = $currency->getCode();
+
             $menu->addChild($code, array(
                 'route' => 'sylius_currency_change',
                 'routeParameters' => array('currency' => $code),
@@ -319,13 +318,13 @@ class FrontendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
 
         $child->addChild('profile', array(
-            'route' => 'fos_user_profile_edit',
+            'route' => 'sylius_account_profile_edit',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.profile')),
             'labelAttributes' => array('icon' => 'icon-info-sign', 'iconOnly' => false),
         ))->setLabel($this->translate('sylius.frontend.menu.account.profile'));
 
         $child->addChild('password', array(
-            'route' => 'fos_user_change_password',
+            'route' => 'sylius_account_change_password',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.password')),
             'labelAttributes' => array('icon' => 'icon-lock', 'iconOnly' => false),
         ))->setLabel($this->translate('sylius.frontend.menu.account.password'));
