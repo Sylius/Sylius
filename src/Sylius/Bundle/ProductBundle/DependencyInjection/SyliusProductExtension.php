@@ -41,6 +41,8 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
      */
     public function prepend(ContainerBuilder $container)
     {
+        parent::prepend($container);
+
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         $this->prependAttribute($container, $config);

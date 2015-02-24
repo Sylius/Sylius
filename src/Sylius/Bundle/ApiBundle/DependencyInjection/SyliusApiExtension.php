@@ -48,6 +48,8 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
      */
     public function prepend(ContainerBuilder $container)
     {
+        parent::prepend($container);
+
         if (!$container->hasExtension('fos_oauth_server')) {
             throw new ServiceNotFoundException('FOSOAuthServerBundle must be registered in kernel.');
         }

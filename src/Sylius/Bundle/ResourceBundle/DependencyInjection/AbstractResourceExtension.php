@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\DoctrineMongoDBExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\DoctrineOrmExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\ExtensionInterface;
 use Sylius\Component\Resource\Exception\Driver\InvalidDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -131,33 +134,34 @@ abstract class AbstractResourceExtension extends AbstractTranslationExtension im
         return array($config, $loader);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepend(ContainerBuilder $container)
     {
-        $bundles = $container->getParameter('kernel.bundles');
-        if (!$container->hasParameter($this->getAlias().'interface')) {
-            return;
+        parent::prepend($container);
+
+        $context['bundlePrefix'] = $this->getAlias();
+
+        foreach ($this->registerPrependExtension() as $extension) {
+            if ($extension->isSupported($container, $context)){
+                $extension->configure($container, $context);
+            }
         }
-        $interfaces = $container->getParameter($this->getAlias().'interface');
+    }
 
-//        $container->getParameter(sprintf('%s.driver', $this->bundlePrefix));
-
-        foreach ($interfaces as $interface => $class) {
-            $interfaces[$interface] = '%'.$class.'%';
-        }
-
-//        if (isset($bundles['DoctrineBundle'])) {
-            $container->prependExtensionConfig('doctrine', array(
-                'orm' => array(
-                    'resolve_target_entities' => $interfaces
-                )
-            ));
-//        }
-
-//        if (isset($bundles['DoctrineMongoDBBundle'])) {
-//            $container->prependExtensionConfig('doctrine_mongodb', array(
-//                'resolve_target_documents' => $interfaces
-//            ));
-//        }
+    /**
+     * Register the extension used to preprend extension configuration
+     *
+     * @return ExtensionInterface[]
+     */
+    protected function registerPrependExtension()
+    {
+        // TODO : You should manage priority
+        return array(
+            new DoctrineOrmExtension(),
+            new DoctrineMongoDBExtension(),
+        );
     }
 
     /**

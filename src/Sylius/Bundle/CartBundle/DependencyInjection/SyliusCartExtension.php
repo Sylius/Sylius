@@ -75,5 +75,7 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
                 )
             ))
         );
+
+        parent::prepend($container);
     }
 }

@@ -99,6 +99,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     public function prepend(ContainerBuilder $container)
     {
+        parent::prepend($container);
+
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         foreach ($container->getExtensions() as $name => $extension) {

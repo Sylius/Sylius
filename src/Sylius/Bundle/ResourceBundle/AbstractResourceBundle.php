@@ -38,15 +38,16 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
      */
     public function build(ContainerBuilder $container)
     {
+        // TODO : We keep the BC but is the right way? We can move getModelInterfaces into AbstractResourceExtension
         $interfaces = $this->getModelInterfaces();
         if (!empty($interfaces)) {
-            $container->setParameter($this->getBundlePrefix().'interface', $interfaces);
-//            $container->addCompilerPass(
-//                new ResolveDoctrineTargetEntitiesPass(
-//                    $this->getBundlePrefix(),
-//                    $interfaces
-//                )
-//            );
+            $containerKey = $this->getBundlePrefix().'_interface';
+            if ($container->hasParameter($containerKey)) {
+                $containerInterface = $container->getParameter($containerKey);
+                $interfaces = array_merge($containerInterface, $interfaces);
+            }
+
+            $container->setParameter($this->getBundlePrefix().'_interface', $interfaces);
         }
 
         if (null !== $this->getModelNamespace()) {
