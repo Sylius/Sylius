@@ -187,13 +187,20 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createCurrencyMenu()
     {
+        $currencies = $this->currencyProvider->getAvailableCurrencies();
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
                 'class' => 'nav nav-pills'
             )
         ));
 
-        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
+        if (1 === count($currencies)) {
+            $menu->setDisplay(false);
+
+            return $menu;
+        }
+
+        foreach ($currencies as $currency) {
             $code = $currency->getCode();
 
             $menu->addChild($code, array(
