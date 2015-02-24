@@ -18,13 +18,20 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
 
 /**
- * Nested Set roles resolver for optimalization.
+ * Nested Set roles resolver for optimization.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class NestedSetRolesResolver implements RolesResolverInterface
 {
+    /**
+     * @var RoleRepositoryInterface
+     */
     private $roleRepository;
+
+    /**
+     * @var array<RoleInterface[]>
+     */
     private $cache = array();
 
     public function __construct(RoleRepositoryInterface $roleRepository)
@@ -43,26 +50,35 @@ class NestedSetRolesResolver implements RolesResolverInterface
             return $this->cache[$identityHash];
         }
 
+        return $this->cache[$identityHash] = $this->getIdentityRoles($identity);
+    }
+
+    /**
+     * @param IdentityInterface $identity
+     *
+     * @return Collection|RoleInterface[]
+     */
+    private function getIdentityRoles(IdentityInterface $identity)
+    {
         $roles = new ArrayCollection();
 
         foreach ($identity->getAuthorizationRoles() as $role) {
-            $childRoles = $this->getChildRoles($role);
             $roles->add($role);
 
-            foreach ($childRoles as $childRole) {
+            foreach ($this->getChildRoles($role) as $childRole) {
                 if (!$roles->contains($childRole)) {
                     $roles->add($childRole);
                 }
             }
         }
 
-        return $this->cache[$identityHash] = $roles;
+        return $roles;
     }
 
     /**
      * @param RoleInterface $role
      *
-     * @return Collection
+     * @return RoleInterface[]
      */
     private function getChildRoles(RoleInterface $role)
     {

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -28,5 +29,4 @@ interface AttributeTranslationInterface
      * @param string $presentation
      */
     public function setPresentation($presentation);
-
-} 
+}

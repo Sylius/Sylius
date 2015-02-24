@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>

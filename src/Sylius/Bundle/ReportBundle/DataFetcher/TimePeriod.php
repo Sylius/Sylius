@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ReportBundle\DataFetcher;
 
-use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\DataFetcher\Data;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 
 /**
  * Abstract class to provide time periods logic
@@ -71,7 +71,7 @@ abstract class TimePeriod implements DataFetcherInterface
         $fetched = array();
 
         if ($configuration['empty_records']) {
-            $fetched = $this->fillEmptyRecodrs($fetched, $configuration);
+            $fetched = $this->fillEmptyRecords($fetched, $configuration);
         }
         foreach ($rawData as $row) {
             $date = new \DateTime($row[$labels[0]]);
@@ -86,7 +86,7 @@ abstract class TimePeriod implements DataFetcherInterface
     /**
      * Method responsible for providing raw data to fetch.
      *
-     * @param Array configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by)
+     * @param array $configuration (start date, end date, time period, empty records flag, interval, period format, presentation format, group by)
      */
     abstract protected function getData(array $configuration = array());
 
@@ -98,7 +98,7 @@ abstract class TimePeriod implements DataFetcherInterface
         $configuration['groupBy'] = $groupBy;
     }
 
-    private function fillEmptyRecodrs(array $fetched, array $configuration)
+    private function fillEmptyRecords(array $fetched, array $configuration)
     {
         $date = $configuration['start'];
         $dateInterval = new \DateInterval($configuration['interval']);

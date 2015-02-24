@@ -23,7 +23,7 @@ class ShipmentRepository extends EntityRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array())
+    public function createFilterPaginator(array $criteria = array(), array $sorting = array())
     {
         $this->_em->getFilters()->disable('softdeleteable');
 

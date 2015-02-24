@@ -31,7 +31,7 @@ class UserRepository extends EntityRepository
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
+    public function createFilterPaginator(array $criteria = array(), array $sorting = array(), $deleted = false)
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
 
@@ -70,7 +70,7 @@ class UserRepository extends EntityRepository
     /**
      * Get the user data for the details page.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return null|UserInterface
      */
@@ -121,10 +121,9 @@ class UserRepository extends EntityRepository
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {
-            $groupBy = $groupByArray.'(date)'.' '.$groupBy;
+            $groupBy = $groupByArray.'(date) '.$groupBy;
         }
-        $groupBy = substr($groupBy, 0, -1);
-        $groupBy = str_replace(' ', ', ', $groupBy);
+        $groupBy = str_replace(' ', ', ', substr($groupBy, 0, -1));
 
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
 

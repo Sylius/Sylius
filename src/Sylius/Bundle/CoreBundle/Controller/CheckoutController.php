@@ -11,9 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
@@ -22,6 +26,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 
 class CheckoutController extends FOSRestController
@@ -32,13 +37,12 @@ class CheckoutController extends FOSRestController
         $state = $order->getCheckoutState();
 
         if (OrderInterface::CHECKOUT_STATE_COMPLETED === $state) {
-            throw new \Exception('Order is already completed.');
+            throw new AccessDeniedException('Order is already completed.');
         }
 
         $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
-
         if (null === $transition = $stateMachine->getTransitionFromState($state)) {
-            throw new \Exception('Invalid checkout flow configuration.');
+            throw new AccessDeniedException('Invalid checkout flow configuration.');
         }
 
         if ($request->isMethod('GET') && $order->isCompleted()) {
@@ -59,15 +63,11 @@ class CheckoutController extends FOSRestController
                 return $this->finalizeAction($request, $order);
         }
 
-        throw new \Exception('Could not process checkout API request.');
+        throw new AccessDeniedException('Could not process checkout API request.');
     }
 
     public function addressingAction(Request $request, OrderInterface $order)
     {
-        if ($order->isEmpty()) {
-            //return new Response('Order cannot be empty!', 400);
-        }
-
         if ($request->isMethod('GET')) {
             return new Response('Method not allowed!', 405);
         }
@@ -213,7 +213,7 @@ class CheckoutController extends FOSRestController
     /**
      * Is user logged in?
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isUserLoggedIn()
     {
@@ -246,11 +246,19 @@ class CheckoutController extends FOSRestController
         $this->dispatchEvent($name, new GenericEvent($order));
     }
 
+    /**
+     * @return OrderRepositoryInterface
+     */
     private function getOrderRepository()
     {
         return $this->get('sylius.repository.order');
     }
 
+    /**
+     * @param int $id
+     *
+     * @return OrderInterface
+     */
     private function findOrderOr404($id)
     {
         if (!$order = $this->getOrderRepository()->find($id)) {
@@ -271,7 +279,7 @@ class CheckoutController extends FOSRestController
 
         return $this->createApiForm('sylius_checkout_shipping', $order, array(
             'criteria' => array(
-                'zone' => !empty($zones) ? array_map(function ($zone) {
+                'zone' => !$zones->isEmpty() ? array_map(function (ZoneInterface $zone) {
                     return $zone->getId();
                 }, $zones) : null,
                 'enabled' => true,

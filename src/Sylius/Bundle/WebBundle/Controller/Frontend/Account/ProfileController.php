@@ -1,33 +1,32 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: joeri.timmermans
- * Date: 19/02/15
- * Time: 10:37
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends FOSRestController
 {
-    /**
-     * Show the user
-     */
     public function indexAction()
     {
         $user = $this->getUser();
-        $orderRepository = $this->get('sylius.repository.order');
-        $orders = $orderRepository->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'), 5);
+        $orders = $this->get('sylius.repository.order')->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'), 5);
 
         $view = $this
             ->view()
@@ -41,9 +40,6 @@ class ProfileController extends FOSRestController
         return $this->handleView($view);
     }
 
-    /**
-     * Edit the user
-     */
     public function editAction(Request $request)
     {
         $user = $this->getUser();
@@ -79,8 +75,7 @@ class ProfileController extends FOSRestController
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('sylius_account_homepage');
-                $response = new RedirectResponse($url);
+                $response = new RedirectResponse($this->generateUrl('sylius_account_homepage'));
             }
 
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
@@ -93,9 +88,6 @@ class ProfileController extends FOSRestController
         ));
     }
 
-    /**
-     * Change user password
-     */
     public function changePasswordAction(Request $request)
     {
         $user = $this->getUser();
@@ -131,8 +123,7 @@ class ProfileController extends FOSRestController
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_profile_show');
-                $response = new RedirectResponse($url);
+                $response = new RedirectResponse($this->generateUrl('fos_user_profile_show'));
             }
 
             $dispatcher->dispatch(FOSUserEvents::CHANGE_PASSWORD_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
@@ -144,5 +135,4 @@ class ProfileController extends FOSRestController
             'form' => $form->createView()
         ));
     }
-
 }

@@ -44,7 +44,7 @@ class OrderPromotionListener
     protected $translator;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     protected $itemBased;
 
@@ -54,15 +54,14 @@ class OrderPromotionListener
      * @param PromotionProcessorInterface $promotionProcessor
      * @param SessionInterface            $session
      * @param TranslatorInterface         $translator
-     * @param Boolean                     $itemBased
+     * @param bool                        $itemBased
      */
     public function __construct(
         PromotionProcessorInterface $promotionProcessor,
         SessionInterface $session,
         TranslatorInterface $translator,
         $itemBased
-    )
-    {
+    ) {
         $this->promotionProcessor = $promotionProcessor;
         $this->session = $session;
         $this->translator = $translator;

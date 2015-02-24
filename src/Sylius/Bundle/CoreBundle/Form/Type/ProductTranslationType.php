@@ -28,7 +28,7 @@ class ProductTranslationType extends BaseProductTranslationType
         $builder
             ->add('shortDescription', 'textarea', array(
                 'required' => false,
-                'label'    => 'sylius.form.product.short_description'
+                'label'    => 'sylius.form.product.short_description',
             ))
         ;
     }

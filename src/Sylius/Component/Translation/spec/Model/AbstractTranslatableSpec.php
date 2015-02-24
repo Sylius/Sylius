@@ -3,9 +3,9 @@
 namespace spec\Sylius\Component\Translation\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Translation\Model\TranslationInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 use Sylius\Component\Translation\Model\AbstractTranslation;
+use Sylius\Component\Translation\Model\TranslationInterface;
 
 class AbstractTranslatableSpec extends ObjectBehavior
 {

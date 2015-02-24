@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Translation\Model;
 
-
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */

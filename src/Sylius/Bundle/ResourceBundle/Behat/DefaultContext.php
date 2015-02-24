@@ -50,6 +50,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected $kernel;
 
+    /**
+     * @var ObjectManager
+     */
+    protected $entityManager;
+
     public function __construct()
     {
         $this->faker = FakerFactory::create();
@@ -121,7 +126,11 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
      */
     protected function getEntityManager()
     {
-        return $this->getService('doctrine')->getManager();
+        if (null === $this->entityManager) {
+            $this->entityManager = $this->getService('doctrine')->getManager();
+        }
+
+        return $this->entityManager;
     }
 
     /**

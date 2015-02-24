@@ -21,7 +21,6 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

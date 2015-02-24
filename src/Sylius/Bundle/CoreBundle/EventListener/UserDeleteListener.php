@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use FOS\UserBundle\Model\UserInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Event\ResourceEvent;
-use Symfony\Component\Security\Core\SecurityContext;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * User delete listener.

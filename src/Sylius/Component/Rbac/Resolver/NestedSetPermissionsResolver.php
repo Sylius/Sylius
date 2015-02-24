@@ -24,7 +24,15 @@ use Sylius\Component\Rbac\Repository\PermissionRepositoryInterface;
  */
 class NestedSetPermissionsResolver implements PermissionsResolverInterface
 {
+    /**
+     * @var PermissionRepositoryInterface
+     */
     private $permissionRepository;
+
+    /**
+     * @var PermissionInterface[]
+     */
+    private $cache = array();
 
     public function __construct(PermissionRepositoryInterface $permissionRepository)
     {
@@ -35,6 +43,22 @@ class NestedSetPermissionsResolver implements PermissionsResolverInterface
      * {@inheritdoc}
      */
     public function getPermissions(RoleInterface $role)
+    {
+        $roleHash = spl_object_hash($role);
+
+        if (isset($this->cache[$roleHash])) {
+            return $this->cache[$roleHash];
+        }
+
+        return $this->cache[$roleHash] = $this->getRolePermissions($role);
+    }
+
+    /**
+     * @param RoleInterface $role
+     *
+     * @return Collection|PermissionInterface[]
+     */
+    private function getRolePermissions(RoleInterface $role)
     {
         $permissions = new ArrayCollection();
 
@@ -54,7 +78,7 @@ class NestedSetPermissionsResolver implements PermissionsResolverInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return Collection
+     * @return PermissionInterface[]
      */
     private function getChildPermissions(PermissionInterface $permission)
     {

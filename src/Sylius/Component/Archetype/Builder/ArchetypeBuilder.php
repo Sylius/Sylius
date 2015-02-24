@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Archetype\Builder;
 
-use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
+use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

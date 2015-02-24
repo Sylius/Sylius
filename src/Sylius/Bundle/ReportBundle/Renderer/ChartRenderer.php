@@ -13,9 +13,9 @@ namespace Sylius\Bundle\ReportBundle\Renderer;
 
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\Model\ReportInterface;
+use Sylius\Component\Report\Renderer\DefaultRenderers;
 use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sylius\Component\Report\Renderer\DefaultRenderers;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -48,13 +48,13 @@ class ChartRenderer implements RendererInterface
 
             $rendererConfiguration = $report->getRendererConfiguration();
 
-            return $this->templating->renderResponse($rendererConfiguration["template"], array(
+            return $this->templating->renderResponse($rendererConfiguration['template'], array(
                 'data' => $rendererData,
                 'configuration' => $rendererConfiguration
             ));
         }
 
-        return $this->templating->renderResponse("SyliusReportBundle::noDataTemplate.html.twig", array(
+        return $this->templating->renderResponse('SyliusReportBundle::noDataTemplate.html.twig', array(
             'report' => $report
         ));
     }

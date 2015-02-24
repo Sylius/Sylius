@@ -11,8 +11,9 @@
 
 namespace Sylius\Component\Rbac\Resolver;
 
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Rbac\Model\PermissionInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
  * Service implementing this service is responsible for getting all applicable permissions from Role.
@@ -24,9 +25,9 @@ interface PermissionsResolverInterface
     /**
      * Get all applicable permissions from role.
      *
-     * @param RoleInterface
+     * @param $role RoleInterface
      *
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getPermissions(RoleInterface $role);
 }

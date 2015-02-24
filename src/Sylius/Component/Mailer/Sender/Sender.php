@@ -14,7 +14,6 @@ namespace Sylius\Component\Mailer\Sender;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
-use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 
 /**
  * Basic sender, which uses adapters system.

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -30,7 +31,7 @@ class ProductRepository extends BaseProductRepository
      * @param TaxonInterface $taxon
      * @param array          $criteria
      *
-     * @return \Pagerfanta\Pagerfanta
+     * @return PagerfantaInterface
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = array())
     {

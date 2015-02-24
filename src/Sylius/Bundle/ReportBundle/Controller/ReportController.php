@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\ReportBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sylius\Component\Report\Model\ReportInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -31,10 +31,9 @@ class ReportController extends ResourceController
     {
         $report = $this->findOr404($request);
 
-        $formType = sprintf('sylius_data_fetcher_%s', $report->getDataFetcher());
         $configurationForm = $this->get('form.factory')->createNamed(
             'configuration',
-            $formType,
+            sprintf('sylius_data_fetcher_%s', $report->getDataFetcher()),
             $report->getDataFetcherConfiguration()
         );
 

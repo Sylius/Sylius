@@ -12,7 +12,6 @@
 namespace Sylius\Component\Archetype\Builder;
 
 use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
-use Sylius\Component\Archetype\Model\ArchetypeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

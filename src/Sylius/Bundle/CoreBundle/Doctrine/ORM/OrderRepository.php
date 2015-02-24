@@ -41,7 +41,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      * @param UserInterface $user
      * @param array         $sorting
      *
-     * @return array
+     * @return OrderInterface[]
      */
     public function findByUser(UserInterface $user, array $sorting = array())
     {
@@ -111,9 +111,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * Create filter paginator.
      *
-     * @param array   $criteria
-     * @param array   $sorting
-     * @param Boolean $deleted
+     * @param array $criteria
+     * @param array $sorting
+     * @param bool  $deleted
      *
      * @return PagerfantaInterface
      */
@@ -210,9 +210,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * Create checkouts paginator.
      *
-     * @param array   $criteria
-     * @param array   $sorting
-     * @param Boolean $deleted
+     * @param array $criteria
+     * @param array $sorting
+     * @param bool  $deleted
      *
      * @return PagerfantaInterface
      */
@@ -272,6 +272,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
@@ -282,6 +285,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
@@ -293,6 +299,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null)
     {
         $queryBuilder = $this->getCollectionQueryBuilderBetweenDates($from, $to, $state);
@@ -304,7 +313,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
     }
 
-
     /**
      * {@inheritdoc} 
      */
@@ -312,10 +320,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     {
         $groupBy = '';
         foreach ($configuration['groupBy'] as $groupByArray) {
-            $groupBy = $groupByArray.'(date)'.' '.$groupBy;
+            $groupBy = $groupByArray.'(date) '.$groupBy;
         }
-        $groupBy = substr($groupBy, 0, -1);
-        $groupBy = str_replace(' ', ', ', $groupBy);
+
+        $groupBy = str_replace(' ', ', ', substr($groupBy, 0, -1));
 
         $queryBuilder = $this->getQueryBuilderBetweenDatesGroupByDate(
             $configuration['start'],
@@ -339,11 +347,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $groupBy = '';
 
         foreach ($configuration['groupBy'] as $groupByElement) {
-            $groupBy = $groupByElement.'(date)'.' '.$groupBy;
+            $groupBy = $groupByElement.'(date) '.$groupBy;
         }
 
-        $groupBy = substr($groupBy, 0, -1);
-        $groupBy = str_replace(' ', ', ', $groupBy);
+        $groupBy = str_replace(' ', ', ', substr($groupBy, 0, -1));
 
         $queryBuilder = $this->getQueryBuilderBetweenDatesGroupByDate(
             $configuration['start'],
@@ -359,6 +366,23 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->fetchAll();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
+            ->andWhere($this->getAlias().'.state = :state')
+            ->setParameter('expiresAt', $expiresAt)
+            ->setParameter('state', $state)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     protected function getQueryBuilderBetweenDatesGroupByDate(\DateTime $from, \DateTime $to, $groupBy = 'Date(date)')
     {
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
@@ -372,20 +396,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->groupBy($groupBy)
             ->orderBy($groupBy)
         ;
-    }
-
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
-    {
-        $queryBuilder = $this->getQueryBuilder();
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->lt($this->getAlias().'.updatedAt', ':expiresAt'))
-            ->andWhere($this->getAlias().'.state = :state')
-            ->setParameter('expiresAt', $expiresAt)
-            ->setParameter('state', $state)
-        ;
-
-        return $queryBuilder->getQuery()->getResult();
     }
 
     protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to, $state = null)
