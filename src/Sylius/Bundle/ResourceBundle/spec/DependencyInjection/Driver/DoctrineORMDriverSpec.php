@@ -57,9 +57,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
         $this->load(array(
-            'model' => 'Sylius\Model',
+            'model'      => 'Sylius\Model',
             'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Repository',
+            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
         ));
     }
 
@@ -71,7 +71,7 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $container->getParameter("prefix.repository.resource.class")
             ->shouldBeCalled();
 
-        $container->setDefinition(
+        $container->setDefinitin(
             'prefix.controller.resource',
             Argument::type('Symfony\Component\DependencyInjection\Definition')
         )->shouldBeCalled();
@@ -91,7 +91,7 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $this->load(array(
             'model' => 'Sylius\Model',
             'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Repository',
+            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
         ));
     }
 }

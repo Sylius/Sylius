@@ -99,6 +99,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     public function __construct()
     {
         parent::__construct();
+
         $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -330,7 +331,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

@@ -1,5 +1,7 @@
 Translation Component [![Build status...](https://secure.travis-ci.org/Sylius/Translation.png?branch=master)](http://travis-ci.org/Sylius/Translation)
-===================
+=====================
+
+Generic PHP component for handling translatable models.
 
 Sylius
 ------

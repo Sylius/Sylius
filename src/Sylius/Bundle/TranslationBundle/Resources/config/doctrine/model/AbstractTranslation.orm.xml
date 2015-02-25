@@ -13,9 +13,6 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Translation\Model\AbstractTranslation">
-        <!--TODO map locale field automatically?-->
-        <field name="locale" column="locale" type="string" length="2"/>
-    </mapped-superclass>
+    <mapped-superclass name="Sylius\Component\Translation\Model\AbstractTranslation" />
 
 </doctrine-mapping>

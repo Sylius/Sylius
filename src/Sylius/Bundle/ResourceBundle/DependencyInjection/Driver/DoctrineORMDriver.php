@@ -52,12 +52,6 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
             $this->getClassMetadataDefinition($classes['model']),
         ));
 
-        if (isset($classes['translatable']['translatable_fields'])) {
-            // TODO add only to if instance of translatable repository?
-            $definition->addMethodCall('setTranslatableFields', array($classes['translatable']['translatable_fields']));
-            $definition->addMethodCall('setLocaleContext', array(new Reference('sylius.context.locale')));
-        }
-
         return $definition;
     }
 

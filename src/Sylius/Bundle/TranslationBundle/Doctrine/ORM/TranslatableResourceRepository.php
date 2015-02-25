@@ -9,20 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
+namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Translation\Provider\CurrentLocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslatableEntityRepository extends EntityRepository implements TranslatableEntityRepositoryInterface
+class TranslatableResourceRepository extends EntityRepository implements TranslatableResourceRepositoryInterface
 {
-    protected $localeContext;
+    /**
+     * @var CurrentLocaleProviderInterface
+     */
+    protected $localeProvider;
+
+    /**
+     * @var array
+     */
     protected $translatableFields = array();
 
     /**
@@ -58,20 +66,18 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
      */
     public function createNew()
     {
-        $className = $this->getClassName();
+        $resource = parent::createNew();
+        $resource->setCurrentLocale($this->getCurrentLocale());
 
-        $object = new $className();
-        $object->setCurrentLocale($this->getCurrentLocale());
-
-        return $object;
+        return $resource;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLocaleContext(LocaleContextInterface $localeContext)
+    public function setLocaleProvider(CurrentLocaleProviderInterface $provider)
     {
-        $this->localeContext = $localeContext;
+        $this->localeProvider = $provider;
 
         return $this;
     }
@@ -131,6 +137,6 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
      */
     protected function getCurrentLocale()
     {
-        return $this->localeContext->getLocale();
+        return $this->localeProvider->getLocale();
     }
 }

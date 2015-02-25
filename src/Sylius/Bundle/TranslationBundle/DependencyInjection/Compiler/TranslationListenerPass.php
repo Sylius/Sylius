@@ -27,10 +27,23 @@ class TranslationListenerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $driver = $container->getParameter('sylius_translation.driver');
+        $definition = $container->findDefinition('sylius.translatable.listener.locale');
+        $reference = null;
 
-        if ($driver == SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM) {
-            $definition = $container->findDefinition('sylius.translatable.listener.locale');
-            $definition->replaceArgument(0, new Reference('sylius.odm_translatable.listener'));
+        switch ($driver) {
+            case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
+                $reference = 'sylius.orm_translatable_listener';
+            break;
+
+            case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
+                $reference = 'sylius.mongodb_odm_translatable_listener';
+            break;
         }
+
+        if (null === $reference) {
+            throw new \InvalidArgumentException(sprintf('Translations do not support "%s" driver.', $driver));
+        }
+
+        $definition->replaceArgument(0, new Reference($reference));
     }
 }

@@ -45,6 +45,7 @@ class Country extends AbstractTranslatable implements CountryInterface
     public function __construct()
     {
         parent::__construct();
+
         $this->provinces = new ArrayCollection();
     }
 
@@ -160,7 +161,7 @@ class Country extends AbstractTranslatable implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

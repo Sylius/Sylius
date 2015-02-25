@@ -9,31 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine;
+namespace Sylius\Component\Translation\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Translation\Provider\CurrentLocaleProviderInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface TranslatableEntityRepositoryInterface extends RepositoryInterface
+interface TranslatableResourceRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Sets the locale context
+     * @param CurrentLocaleProviderInterface $localeProvider
      *
-     * @param LocaleContextInterface $localeContext
-     *
-     * @return TranslatableEntityRepositoryInterface
+     * @return self
      */
-    public function setLocaleContext(LocaleContextInterface $localeContext);
+    public function setLocaleProvider(CurrentLocaleProviderInterface $localeProvider);
 
     /**
-     * Sets the translatable fields
-     *
      * @param array $translatableFields
      *
-     * @return TranslatableEntityRepositoryInterface
+     * @return self
      */
     public function setTranslatableFields(array $translatableFields);
 }

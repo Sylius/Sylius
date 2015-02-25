@@ -362,7 +362,7 @@ class Taxon extends AbstractTranslatable implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

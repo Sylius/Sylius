@@ -173,17 +173,16 @@ abstract class AbstractTranslatable implements TranslatableInterface
         }
 
         if (!$locale) {
-            throw new \RuntimeException('No locale has been set and currentLocale is empty');
+            throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
 
         if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
             return $this->currentTranslation;
         }
 
-        // TODO Throw exception? Get default translation?
         if (!$translation = $this->translations->get($locale)) {
             if (!$fallbackTranslation = $this->translations->get($this->getFallbackLocale())) {
-                $className = $this->getTranslationEntityClass();
+                $className = $this->getTranslationClass();
                 $translation = new $className();
                 $translation->setLocale($locale);
                 $this->addTranslation($translation);
@@ -198,9 +197,9 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Return translation entity class
+     * Return translation model class.
      *
      * @return string
      */
-    abstract protected function getTranslationEntityClass();
+    abstract protected function getTranslationClass();
 }

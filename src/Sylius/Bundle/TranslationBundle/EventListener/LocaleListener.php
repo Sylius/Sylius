@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -15,7 +16,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Inject current locale in the TranslatableListener
+ * Inject current locale in the TranslatableListener.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -29,8 +30,6 @@ class LocaleListener implements EventSubscriberInterface
     private $translatableListener;
 
     /**
-     * Constructor
-     *
      * @param TranslatableListenerInterface $translatableListener
      */
     public function __construct(TranslatableListenerInterface $translatableListener)
@@ -39,14 +38,13 @@ class LocaleListener implements EventSubscriberInterface
     }
 
     /**
-     * Set request locale
+     * Set request locale.
      *
      * @param GetResponseEvent $event
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $locale = $event->getRequest()->getLocale();
-        $this->translatableListener->setCurrentLocale($locale);
+        $this->translatableListener->setCurrentLocale($event->getRequest()->getLocale());
     }
 
     /**
@@ -55,7 +53,7 @@ class LocaleListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            // IMPORTANT keep priority 34
+            // IMPORTANT to keep priority 34.
             KernelEvents::REQUEST => array(array('onKernelRequest', 34)),
         );
     }

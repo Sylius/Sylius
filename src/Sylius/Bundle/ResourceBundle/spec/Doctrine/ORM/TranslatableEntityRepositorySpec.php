@@ -27,7 +27,7 @@ require_once __DIR__.'/../../Fixture/Entity/TranslatableFoo.php';
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslatableEntityRepositorySpec extends ObjectBehavior
+class TranslatableResourceRepositorySpec extends ObjectBehavior
 {
     function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
@@ -68,12 +68,12 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository');
+        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
     }
 
     function it_implements_Sylius_translatable_repository_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface');
+        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\TranslatableResourceRepositoryInterface');
     }
 
     function it_sets_current_locale_on_created_object(LocaleContextInterface $localeContext)

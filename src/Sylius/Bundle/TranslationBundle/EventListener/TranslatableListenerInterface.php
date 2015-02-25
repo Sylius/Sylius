@@ -19,10 +19,11 @@ namespace Sylius\Bundle\TranslationBundle\EventListener;
 interface TranslatableListenerInterface
 {
     /**
-     * Set the current locale
+     * Set the current locale.
      *
-     * @param  string $currentLocale
+     * @param  string $locale
+     *
      * @return self
      */
-    public function setCurrentLocale($currentLocale);
+    public function setCurrentLocale($locale);
 }
