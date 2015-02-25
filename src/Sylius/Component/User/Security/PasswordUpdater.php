@@ -24,7 +24,7 @@ class PasswordUpdater implements PasswordUpdaterInterface
      */
     private $encoderFactory;
 
-    function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(EncoderFactoryInterface $encoderFactory)
     {
         $this->encoderFactory = $encoderFactory;
     }

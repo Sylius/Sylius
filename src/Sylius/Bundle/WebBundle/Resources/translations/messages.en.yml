@@ -855,6 +855,7 @@ sylius:
             header: Login <small>Sylius store</small>
             info: Please login using <b>"sylius@example.com"</b> email and <b>"sylius"</b> as password. <small>Mr. Sylius Demo Guide</small>
             no_account: No account yet?
+            forgot_password: Forgot password?
             button: Login
     settings:
         general_header: General settings

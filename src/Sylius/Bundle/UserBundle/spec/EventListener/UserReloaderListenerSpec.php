@@ -12,16 +12,18 @@
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 
 /**
  * User register listener spec.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserUpdateListenerSpec extends ObjectBehavior
+class UserReloaderListenerSpec extends ObjectBehavior
 {
     function let(UserReloaderInterface $userReloader)
     {
@@ -30,15 +32,23 @@ class UserUpdateListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserUpdateListener');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserReloaderListener');
     }
 
-    function it_updates_user_password($userReloader, GenericEvent $event, UserInterface $user)
+    function it_reloads_user($userReloader, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 
         $userReloader->reloadUser($user)->shouldBeCalled();
 
-        $this->processUser($event);
+        $this->reloadUser($event);
+    }
+
+    function it_throw_exception_for_other_implementations_then_user_interface($userReloader, GenericEvent $event, UserInterface $user)
+    {
+        $user = '';
+        $event->getSubject()->willReturn($user);
+        $this->shouldThrow(new UnexpectedTypeException($user, 'Sylius\Component\User\Model\UserInterface'))
+            ->duringReloadUser($event);
     }
 }

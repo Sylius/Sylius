@@ -11,30 +11,30 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Bundle\UserBundle\Mailer\Emails;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * User register listener.
+ * Mailer listener for User actions
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserChangePasswordListener
+class MailerListener
 {
     /**
-     * @var PasswordUpdaterInterface
+     * @var SenderInterface
      */
-    protected $passwordUpdater;
+    protected $emailSender;
 
-    public function __construct(PasswordUpdaterInterface $passwordUpdater)
+    public function __construct(SenderInterface $emailSender)
     {
-        $this->passwordUpdater = $passwordUpdater;
+        $this->emailSender = $emailSender;
     }
 
-    public function preChangePassword(GenericEvent $event)
+    public function sendPasswordResetEmail(GenericEvent $event)
     {
         $user = $event->getSubject();
 
@@ -45,10 +45,11 @@ class UserChangePasswordListener
             );
         }
 
-        $this->passwordUpdater->updatePassword($user);
-    }
-
-    public function postChangePassword(GenericEvent $event)
-    {
+        $this->emailSender->send(Emails::PASSWORD_RESET,
+            array($user->getEmail()),
+                array(
+                    'user' => $user,
+                )
+            );
     }
 }

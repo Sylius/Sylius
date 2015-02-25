@@ -45,6 +45,7 @@ class UserChangePasswordType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Sylius\Bundle\UserBundle\Form\Model\ChangePassword',
+            'validation_groups' => array('sylius'),
         ));
     }
 

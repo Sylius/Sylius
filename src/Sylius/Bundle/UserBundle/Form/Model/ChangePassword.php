@@ -11,9 +11,6 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Model;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\Form\FormBuilderInterface;
-
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

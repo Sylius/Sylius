@@ -11,36 +11,37 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
 /**
- * User register listener.
+ * User update listener.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserRegisterListener
+class PasswordUpdaterListener
 {
-    /**
-     * @var UserLoginInterface
-     */
-    protected $userLogin;
-
     /**
      * @var PasswordUpdaterInterface
      */
     protected $passwordUpdater;
 
-    public function __construct(PasswordUpdaterInterface $passwordUpdater, UserLoginInterface $userLogin)
+    function __construct(PasswordUpdaterInterface $passwordUpdater)
     {
         $this->passwordUpdater = $passwordUpdater;
-        $this->userLogin = $userLogin;
     }
 
-    public function preRegistration(GenericEvent $event)
+    public function updatePassword(UserInterface $user)
+    {
+        if (null !== $user->getPlainPassword()) {
+            $this->passwordUpdater->updatePassword($user);
+        }
+    }
+
+    public function genericEventUpdater(GenericEvent $event)
     {
         $user = $event->getSubject();
 
@@ -51,20 +52,28 @@ class UserRegisterListener
             );
         }
 
-        $this->passwordUpdater->updatePassword($user);
+        $this->updatePassword($user);
     }
 
-    public function postRegistration(GenericEvent $event)
+    public function prePersist(LifecycleEventArgs $event)
     {
-        $user = $event->getSubject();
+        $item = $event->getEntity();
 
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException(
-                $user,
-                'Sylius\Component\User\Model\UserInterface'
-            );
+        if (!$item instanceof UserInterface) {
+            return;
         }
 
-        $this->userLogin->login($user);
+        $this->updatePassword($item);
+    }
+
+    public function preUpdate(LifecycleEventArgs $event)
+    {
+        $item = $event->getEntity();
+
+        if (!$item instanceof UserInterface) {
+            return;
+        }
+
+        $this->updatePassword($item);
     }
 }

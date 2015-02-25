@@ -111,7 +111,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_change_password'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_change_password'));
     }
 
     /**
@@ -119,7 +119,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
     }
 
     /**
@@ -127,7 +127,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
     }
 
     /**
@@ -135,7 +135,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_profile_edit'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_profile_update'));
     }
 
     /**
@@ -143,7 +143,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_edit'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
     }
 
     /**
@@ -151,7 +151,15 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_edit'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
+    }
+
+    /**
+     * @Given /^I should be on my account profile page$/
+     */
+    public function iShouldBeOnMyProfilePage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
     }
 
     /**
@@ -227,7 +235,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnLoginPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_user_login'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_user_security_login'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -737,7 +745,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iLogInWith($email, $password)
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_login'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
 
         $this->fillField('Email', $email);
         $this->fillField('Password', $password);

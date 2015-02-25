@@ -19,22 +19,31 @@
     <parameters>
         <parameter key="sylius.user.canonicalizer.class">Sylius\Component\User\Canonicalizer\Canonicalizer</parameter>
         <parameter key="sylius.user.password_updater.class">Sylius\Component\User\Security\PasswordUpdater</parameter>
+        <parameter key="sylius.user.code_provider.class">Sylius\Component\User\Security\TokenProvider</parameter>
         <parameter key="sylius.user.user_reloader.class">Sylius\Bundle\UserBundle\Reloader\UserReloader</parameter>
+
         <parameter key="sylius.security.authentication_utils.class">Sylius\Component\User\Security\Authentication\AuthenticationUtils</parameter>
         <parameter key="sylius.security.user_login.class">Sylius\Bundle\UserBundle\Security\UserLogin</parameter>
+
+        <parameter key="sylius.user.token_generator.class">Sylius\Component\User\Security\Generator\TokenGenerator</parameter>
+        <parameter key="sylius.user.pin_generator.class">Sylius\Component\User\Security\Generator\PinGenerator</parameter>
 
         <parameter key="sylius.provider.name_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameProvider</parameter>
         <parameter key="sylius.provider.name_or_email_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider</parameter>
         <parameter key="sylius.provider.email_provider.class">Sylius\Bundle\UserBundle\Provider\EmailProvider</parameter>
 
         <parameter key="sylius.form.type.user_login.class">Sylius\Bundle\UserBundle\Form\Type\UserLoginType</parameter>
+        <parameter key="sylius.form.type.user_request_password_reset.class">Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType</parameter>
+        <parameter key="sylius.form.type.user_reset_password.class">Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType</parameter>
+        <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
 
-        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\UserBundle\EventListener\UserUpdateListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\UserBundle\EventListener\UserAwareListener</parameter>
-        <parameter key="sylius.listener.user_register.class">Sylius\Bundle\UserBundle\EventListener\UserRegisterListener</parameter>
-        <parameter key="sylius.listener.user_create.class">Sylius\Bundle\UserBundle\EventListener\UserCreateListener</parameter>
-        <parameter key="sylius.listener.user_change_password.class">Sylius\Bundle\UserBundle\EventListener\UserChangePasswordListener</parameter>
+        <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener</parameter>
+        <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener</parameter>
+        <parameter key="sylius.listener.user_login.class">Sylius\Bundle\UserBundle\EventListener\UserLoginListener</parameter>
+        <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
+        <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
         
         <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
     </parameters>
@@ -49,9 +58,25 @@
         
         <!-- Utils -->
         <service id="sylius.user.canonicalizer" class="%sylius.user.canonicalizer.class%" />
+        <service id="sylius.user.pin_generator" class="%sylius.user.pin_generator.class%" />
+        <service id="sylius.user.token_generator" class="%sylius.user.token_generator.class%" />
         <service id="sylius.user.password_updater" class="%sylius.user.password_updater.class%">
             <argument type="service" id="security.encoder_factory" />
         </service>
+
+        <service id="sylius.user.token_provider" class="%sylius.user.code_provider.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.user.token_generator" />
+            <argument>%sylius.user.resetting.token_length%</argument>
+        </service>
+        <service id="sylius.user.pin_provider" class="%sylius.user.code_provider.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.user.pin_generator" />
+            <argument>%sylius.user.resetting.pin_length%</argument>
+        </service>
+        
         <service id="security.authentication_utils" class="%sylius.security.authentication_utils.class%">
             <argument type="service" id="service_container" />
         </service>
@@ -63,28 +88,33 @@
         </service>
 
         <!-- Listeners -->
+        <service id="sylius.listener.user_login" class="%sylius.listener.user_login.class%">
+            <argument type="service" id="sylius.security.user_login" />
+            <tag name="kernel.event_listener" event="sylius.user.post_register" method="login" />
+        </service>
+        <service id="sylius.listener.user_reloader" class="%sylius.listener.user_reloader.class%">
+            <argument type="service" id="sylius.user.user_reloader" />
+            <tag name="kernel.event_listener" event="sylius.user.post_create" method="reloadUser" />
+            <tag name="kernel.event_listener" event="sylius.user.post_update" method="reloadUser" />
+        </service>
+        <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
+            <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
+        </service>
+        <service id="sylius.listener.password_updater" class="%sylius.listener.password_updater.class%">
+            <argument type="service" id="sylius.user.password_updater" />
+            <tag name="kernel.event_listener" event="sylius.user.password_reset.success" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.user.password_change.success" method="genericEventUpdater" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
+        </service>
+        <service id="sylius.listener.user_mailer_listener" class="%sylius.listener.user_mailer_listener.class%">
+            <argument type="service" id="sylius.email_sender" />
+            <tag name="kernel.event_listener" event="sylius.user.password_reset.request" method="sendPasswordResetEmail" />
+        </service>
         <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
             <argument type="service" id="security.context" />
-        </service>
-        <service id="sylius.listener.user_register" class="%sylius.listener.user_register.class%">
-            <argument type="service" id="sylius.user.password_updater" />
-            <argument type="service" id="sylius.security.user_login" />
-            <tag name="kernel.event_listener" event="sylius.user.pre_register" method="preRegistration" />
-            <tag name="kernel.event_listener" event="sylius.user.post_register" method="postRegistration" />
-        </service>
-        <service id="sylius.listener.user_create" class="%sylius.listener.user_create.class%">
-            <argument type="service" id="sylius.user.password_updater" />
-            <tag name="kernel.event_listener" event="sylius.user.pre_create" method="preCreate" />
-        </service>
-        <service id="sylius.listener.user_change_password" class="%sylius.listener.user_change_password.class%">
-            <argument type="service" id="sylius.user.password_updater" />
-            <tag name="kernel.event_listener" event="sylius.user.pre_change_password" method="preChangePassword" />
-            <tag name="kernel.event_listener" event="sylius.user.post_change_password" method="postChangePassword" />
-        </service>
-        <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
-            <argument type="service" id="sylius.user.user_reloader" />
-            <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
-            <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
         </service>
         <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
             <argument type="service" id="security.context" />
@@ -110,7 +140,16 @@
 
         <!-- Forms -->
         <service id="sylius.form.type.user_login" class="%sylius.form.type.user_login.class%">
-            <tag name="form.type" alias="sylius_user_login" />
+            <tag name="form.type" alias="sylius_user_security_login" />
+        </service>
+        <service id="sylius.form.type.user_request_password_reset" class="%sylius.form.type.user_request_password_reset.class%">
+            <tag name="form.type" alias="sylius_user_request_password_reset" />
+        </service>
+        <service id="sylius.form.type.user_reset_password" class="%sylius.form.type.user_reset_password.class%">
+            <tag name="form.type" alias="sylius_user_reset_password" />
+        </service>
+        <service id="sylius.form.type.user_change_password" class="%sylius.form.type.user_change_password.class%">
+            <tag name="form.type" alias="sylius_user_change_password" />
         </service>
     </services>
 

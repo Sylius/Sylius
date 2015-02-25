@@ -39,6 +39,6 @@ class UserLoginType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_user_login';
+        return 'sylius_user_security_login';
     }
 }

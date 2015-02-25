@@ -15,8 +15,9 @@ sylius_user_profile_update:
         _sylius:
             form: sylius_user_profile
             template: SyliusWebBundle:Frontend/Account:profileUpdate.html.twig
+            redirect: sylius_account_homepage
 
-sylius_user_password_change:
+sylius_user_change_password:
     path: /change-password
     methods: [GET, POST]
     defaults:

@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Rbac\Model\IdentityInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
@@ -21,7 +20,7 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, IdentityInterface, TimestampableInterface
+interface UserInterface extends BaseUserInterface, IdentityInterface
 {
     /**
      * Get currency.

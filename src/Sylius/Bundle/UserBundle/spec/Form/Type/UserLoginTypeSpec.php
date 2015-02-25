@@ -32,7 +32,7 @@ class UserLoginTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_user_login');
+        $this->getName()->shouldReturn('sylius_user_security_login');
     }
 
     function it_builds_form(FormBuilderInterface $builder)

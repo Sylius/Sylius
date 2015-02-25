@@ -11,26 +11,34 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * User update listener.
+ * User register listener.
  *
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserUpdateListener
+class UserLoginListener
 {
-    protected $userReloader;
+    /**
+     * @var UserLoginInterface
+     */
+    protected $userLogin;
 
-    public function __construct(UserReloaderInterface $userReloader)
+    /**
+     * @var PasswordUpdaterInterface
+     */
+    protected $passwordUpdater;
+
+    public function __construct(UserLoginInterface $userLogin)
     {
-        $this->userReloader = $userReloader;
+        $this->userLogin = $userLogin;
     }
 
-    public function processUser(GenericEvent $event)
+    public function login(GenericEvent $event)
     {
         $user = $event->getSubject();
 
@@ -41,6 +49,6 @@ class UserUpdateListener
             );
         }
 
-        $this->userReloader->reloadUser($user);
+        $this->userLogin->login($user);
     }
 }

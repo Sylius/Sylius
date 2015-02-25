@@ -109,7 +109,7 @@ class UserProvider extends FOSUBUserProvider
     /**
      * Attach OAuth sign-in provider account to existing user
      *
-     * @param SyliusUserInterface      $user
+     * @param SyliusUserInterface   $user
      * @param UserResponseInterface $response
      *
      * @return SyliusUserInterface

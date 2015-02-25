@@ -26,8 +26,9 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "sylius/user":            "0.13.*@dev",
+        "sylius/user":              "0.13.*@dev",
         "sylius/resource-bundle":   "0.13.*@dev",
+        "sylius/mailer-bundle":     "0.14.*@dev",
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {

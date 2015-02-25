@@ -66,12 +66,6 @@ class UserType extends AbstractResourceType
                 'multiple' => true,
                 'required' => false,
             ))
-            ->add('authorizationRoles', 'sylius_role_choice', array(
-                'label'    => 'sylius.form.user.roles',
-                'multiple' => true,
-                'expanded' => true,
-                'required' => false
-            ))
             ->remove('username')
         ;
     }

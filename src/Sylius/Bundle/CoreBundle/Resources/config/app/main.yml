@@ -69,14 +69,14 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: %sylius.model.user.class%
-#     group:
-#         group_class: %sylius.model.group.class%
-#     profile:
-#         form:
-#             type: sylius_user_profile
-#     registration:
-#         form:
-#             type: sylius_user_registration
+    group:
+        group_class: %sylius.model.group.class%
+    profile:
+        form:
+            type: sylius_user_profile
+    registration:
+        form:
+            type: sylius_user_registration
 
 fos_rest:
     view:
@@ -110,9 +110,9 @@ hwi_oauth:
 jms_serializer:
     metadata:
         directories:
-            FOSUB:
-                namespace_prefix: "FOS\\UserBundle"
-                path: "%kernel.root_dir%/Resources/FOSUserBundle/serializer"
+            sylius-user:
+                namespace_prefix: "Sylius\\Bundle\\UserBundle"
+                path: "@SyliusUserBundle/Resources/config/serializer"
             sylius-addressing:
                 namespace_prefix: "Sylius\\Component\\Addressing"
                 path: "@SyliusAddressingBundle/Resources/config/serializer"

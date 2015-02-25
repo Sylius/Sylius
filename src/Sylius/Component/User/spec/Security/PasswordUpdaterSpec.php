@@ -22,22 +22,22 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 */
 class PasswordUpdaterSpec extends ObjectBehavior
 {
-    function let(EncoderFactoryInterface $encoderFactory)
+    public function let(EncoderFactoryInterface $encoderFactory)
     {
         $this->beConstructedWith($encoderFactory);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\User\Security\PasswordUpdater');
     }
 
-    function it_implements_password_updater_interface()
+    public function it_implements_password_updater_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Security\PasswordUpdaterInterface');
     }
 
-    function it_updates_user_profile_with_encoded_password($encoderFactory, PasswordEncoderInterface $encoder, UserInterface $user)
+    public function it_updates_user_profile_with_encoded_password($encoderFactory, PasswordEncoderInterface $encoder, UserInterface $user)
     {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');
@@ -51,7 +51,7 @@ class PasswordUpdaterSpec extends ObjectBehavior
         $this->updatePassword($user);
     }
 
-    function it_does_nothing_if_plain_password_is_empty($encoderFactory, PasswordEncoderInterface $encoder, UserInterface $user)
+    public function it_does_nothing_if_plain_password_is_empty($encoderFactory, PasswordEncoderInterface $encoder, UserInterface $user)
     {
         $user->getPlainPassword()->willReturn('');
         $user->getSalt()->willReturn('typicalSalt');

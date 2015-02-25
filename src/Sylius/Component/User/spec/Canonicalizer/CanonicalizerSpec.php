@@ -17,17 +17,17 @@ use PhpSpec\ObjectBehavior;
  */
 class CanonicalizerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\User\Canonicalizer\Canonicalizer');
     }
 
-    function it_implements_canonicalizer_interface()
+    public function it_implements_canonicalizer_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Canonicalizer\CanonicalizerInterface');
     }
 
-    function it_converts_strings_to_lower_case()
+    public function it_converts_strings_to_lower_case()
     {
         $testString = 'tEsTsTrInG';
         $this->canonicalize($testString)->shouldReturn('teststring');

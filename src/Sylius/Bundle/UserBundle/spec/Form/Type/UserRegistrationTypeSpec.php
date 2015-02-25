@@ -31,6 +31,11 @@ class UserRegistrationTypeSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType');
     }
 
+    function it_extends_abstract_resource_type()
+    {
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+    }
+
     function it_has_name()
     {
         $this->getName()->shouldReturn('sylius_user_registration');
