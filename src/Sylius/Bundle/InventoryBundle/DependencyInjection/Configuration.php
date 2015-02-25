@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -37,7 +38,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('backorders')->defaultTrue()->end()
                 ->booleanNode('track_inventory')->defaultTrue()->end()
                 ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()

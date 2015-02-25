@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\DependencyInjection;
 
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -35,7 +36,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('authorization_checker')->defaultValue('sylius.authorization_checker.default')->end()
                 ->scalarNode('identity_provider')->defaultValue('sylius.authorization_identity_provider.security')->end()
                 ->scalarNode('permission_map')->defaultValue('sylius.permission_map.cached')->end()

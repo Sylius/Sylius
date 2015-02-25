@@ -1,5 +1,4 @@
 sylius_core:
-    driver: doctrine/orm
     routing:
         %sylius.model.product.class%:
             field: slug
@@ -69,7 +68,6 @@ sylius_taxonomy:
         taxon_translation: ~
 
 sylius_product:
-    driver: doctrine/orm
     classes:
         product:
             model: Sylius\Component\Core\Model\Product
