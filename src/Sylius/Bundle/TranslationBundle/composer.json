@@ -24,6 +24,7 @@
 
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/resource-bundle":          "0.14.*@dev",
         "sylius/translation":              "0.14.*@dev"
     },
     "require-dev": {
