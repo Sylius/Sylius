@@ -79,16 +79,16 @@ class SyliusResourceExtension extends Extension
                 array_key_exists('templates', $config) ? $config['templates'] : null
             )->load($config['classes']);
 
-            if ($translationsEnabled && array_key_exists('model', $config) && array_key_exists('translation', $config)) {
-                $mapper->mapTranslations($config, $container);
+            if ($translationsEnabled && array_key_exists('model', $config['classes']) && array_key_exists('translation', $config['classes'])) {
+                $mapper->mapTranslations($config['classes'], $container);
 
                 DatabaseDriverFactory::get(
                     $container,
                     $prefix,
-                    sprintf('%s_translation', $name),
+                    sprintf('%s_translation', $resourceName),
                     $manager,
                     $config['driver']
-                )->load($config['translation']);
+                )->load($config['classes']['translation']);
             }
         }
     }

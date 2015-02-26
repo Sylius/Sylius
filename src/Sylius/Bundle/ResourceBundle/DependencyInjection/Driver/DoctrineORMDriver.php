@@ -35,8 +35,12 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
+        $reflection = new \ReflectionClass($classes['model']);
+        $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
+        $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
+
         $repositoryKey = $this->getContainerKey('repository', '.class');
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+        $repositoryClass = $translatable ?'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository' : 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
 
         if ($this->container->hasParameter($repositoryKey)) {
             $repositoryClass = $this->container->getParameter($repositoryKey);
