@@ -14,19 +14,19 @@ namespace Sylius\Component\Translation\Provider;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrentLocaleProvider implements CurrentLocaleProviderInterface
+class LocaleProvider implements LocaleProviderInterface
 {
     /**
      * @var string
      */
-    private $currentLocale;
+    private $locale;
 
     /**
      * @param string $currentLocale
      */
-    function __construct($currentLocale)
+    function __construct($locale)
     {
-        $this->currentLocale = $currentLocale;
+        $this->locale = $locale;
     }
 
     /**
@@ -34,6 +34,6 @@ class CurrentLocaleProvider implements CurrentLocaleProviderInterface
      */
     public function getLocale()
     {
-        return $this->currentLocale;
+        return $this->locale;
     }
 }

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Translation\Provider\CurrentLocaleProviderInterface;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**
@@ -24,7 +24,7 @@ use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterf
 class TranslatableResourceRepository extends EntityRepository implements TranslatableResourceRepositoryInterface
 {
     /**
-     * @var CurrentLocaleProviderInterface
+     * @var LocaleProviderInterface
      */
     protected $localeProvider;
 
@@ -75,7 +75,7 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     /**
      * {@inheritdoc}
      */
-    public function setLocaleProvider(CurrentLocaleProviderInterface $provider)
+    public function setLocaleProvider(LocaleProviderInterface $provider)
     {
         $this->localeProvider = $provider;
 
