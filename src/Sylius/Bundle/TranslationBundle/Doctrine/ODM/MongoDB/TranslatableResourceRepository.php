@@ -12,17 +12,25 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\TranslatableResourceRepositoryInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class TranslatableDocumentRepository extends DocumentRepository implements TranslatableResourceRepositoryInterface
+class TranslatableResourceRepository extends DocumentRepository implements TranslatableResourceRepositoryInterface
 {
-    protected $localeContext;
+    /**
+     * @var LocaleProviderInterface
+     */
+    protected $localeProvider;
+
+    /**
+     * @var array
+     */
     protected $translatableFields = array();
 
     /**
@@ -41,9 +49,9 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
     /**
      * {@inheritdoc}
      */
-    public function setLocaleContext(LocaleContextInterface $localeContext)
+    public function setLocaleProvider(LocaleProviderInterface $localeProvider)
     {
-        $this->localeContext = $localeContext;
+        $this->localeProvider = $localeProvider;
 
         return $this;
     }
@@ -91,6 +99,6 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
      */
     protected function getCurrentLocale()
     {
-        return $this->localeContext->getLocale();
+        return $this->localeProvider->getLocale();
     }
 }
