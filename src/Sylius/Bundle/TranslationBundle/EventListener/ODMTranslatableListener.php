@@ -25,56 +25,44 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
 class ODMTranslatableListener implements EventSubscriber, TranslatableListenerInterface
 {
     /**
-     * String Locale to use for translations
+     * Locale to use for translations.
+     *
      * @var string
      */
-    private $currentLocale = 'en';
+    private $currentLocale;
 
     /**
-     * String Locale to use when the current locale is not available
+     * Locale to use when the current locale is not available.
+     *
      * @var string
      */
-    private $fallbackLocale = 'en';
+    private $fallbackLocale;
 
     /**
-     * Array containing translation entities metadata
+     * Mapping.
+     *
      * @var array
      */
-    private $metadata;
+    private $mappings;
 
     /**
-     * Constructor
-     *
-     * @param array  $metadata
+     * @param string $mappings
      * @param string $fallbackLocale
      */
-    public function __construct(array $metadata, $fallbackLocale)
+    public function __construct(array $mappings, $fallbackLocale)
     {
-        $this->metadata = $metadata;
+        $this->mappings = $mappings;
         $this->fallbackLocale = $fallbackLocale;
     }
 
     /**
-     * Set the current locale
-     *
-     * @param  string $currentLocale
-     * @return self
+     * {@inheritdoc}
      */
     public function setCurrentLocale($currentLocale)
     {
         $this->currentLocale = $currentLocale;
 
         return $this;
-    }
-
-    /**
-     * Get the fallback locale
-     *
-     * @return string
-     */
-    public function getFallbackLocale()
-    {
-        return $this->fallbackLocale;
     }
 
     /**
@@ -96,17 +84,17 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflClass     = $classMetadata->reflClass;
+        $reflection    = $classMetadata->reflClass;
 
-        if (!$reflClass || $reflClass->isAbstract()) {
+        if (!$reflection || $reflection->isAbstract()) {
             return;
         }
 
-        if ($reflClass->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
+        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslatableInterface')) {
             $this->mapTranslatable($classMetadata);
         }
 
-        if ($reflClass->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
+        if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
             $this->mapTranslation($classMetadata);
         }
     }
@@ -116,21 +104,22 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
      *
      * @param ClassMetadata $mapping
      */
-    private function mapTranslatable(ClassMetadata $mapping)
+    private function mapTranslatable(ClassMetadata $metadata)
     {
         // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
-        // is probably defined in A, so in that case, we just return;
-        if (!isset($this->metadata[$mapping->name])) {
+        // is probably defined in A, so in that case, we just return.
+        // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
+        // is probably defined in A, so in that case, we just return.
+        if (!isset($this->mappings[$metadata->name])) {
             return;
         }
 
-        $translatableMetadata = $this->metadata[$mapping->name];
+        $config = $this->mappings[$metadata->name];
+        $mapping = $config['translation']['mapping'];
 
-        $translationMetadata = $this->metadata[$translatableMetadata['targetEntity']];
-
-        $mapping->mapManyEmbedded(array(
-            'fieldName'      => $translatableMetadata['field'],
-            'targetDocument' => $translatableMetadata['targetEntity'],
+        $metadata->mapManyEmbedded(array(
+            'fieldName'      => $mapping['translatable']['translations'],
+            'targetDocument' => $config['translation']['model'],
             'strategy'       => 'set'
         ));
     }
@@ -140,17 +129,40 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
      *
      * @param ClassMetadata $mapping
      */
-    private function mapTranslation(ClassMetadata $mapping)
+    private function mapTranslation(ClassMetadata $metadata)
     {
         // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return;
-        if (!isset($this->metadata[$mapping->name])) {
+        if (!isset($this->mappings[$metadata->name])) {
             return;
         }
 
-        $mapping->isEmbeddedDocument = true;
-        $mapping->isMappedSuperclass = false;
-        $mapping->setIdentifier(null);
+        $config = $this->mappings[$metadata->name];
+        $mapping = $config['translation']['mapping'];
+
+        $metadata->isEmbeddedDocument = true;
+        $metadata->isMappedSuperclass = false;
+        $metadata->setIdentifier(null);
+
+        // Map locale field.
+        if (!$metadata->hasField($mapping['translation']['locale'])) {
+            $metadata->mapField(array(
+                'fieldName' => $mapping['translation']['locale'],
+                'type'      => 'string',
+            ));
+        }
+
+        // Map unique index.
+        $keys = array(
+            $mapping['translation']['translatable'] => 1,
+            $mapping['translation']['locale'] => 1
+        );
+
+        if (!$this->hasUniqueIndex($metadata, $keys)) {
+            $metadata->addIndex($keys, array(
+                'unique' => true
+            ));
+        }
     }
 
     /**
@@ -165,19 +177,18 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
         // Sometimes $document is a doctrine proxy class, we therefore need to retrieve it's real class
         $name = $args->getDocumentManager()->getClassMetadata(get_class($document))->getName();
 
-        if (!isset($this->metadata[$name])) {
+        if (!isset($this->mappings[$name])) {
             return;
         }
 
-        $metadata = $this->metadata[$name];
+        $metadata = $this->mappings[$name];
 
-        if (isset($metadata['fallbackLocale'])) {
-            $setter = 'set'.ucfirst($metadata['fallbackLocale']);
+        if (isset($metadata['fallback_locale'])) {
+            $setter = 'set'.ucfirst($metadata['fallback_locale']);
             $document->$setter($this->fallbackLocale);
         }
-
-        if (isset($metadata['currentLocale'])) {
-            $setter = 'set'.ucfirst($metadata['currentLocale']);
+        if (isset($metadata['current_locale'])) {
+            $setter = 'set'.ucfirst($metadata['current_locale']);
             $document->$setter($this->currentLocale);
         }
     }
