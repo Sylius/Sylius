@@ -43,8 +43,6 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
             )
         );
 
-        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
-
         $variantFormType = new Definition('Some\App\Product\Form\ProductVariantType');
         $variantFormType
             ->setArguments(array('Some\App\Product\Entity\ProductVariant', '%sylius.validation_group.product_variant%', 'product'))
@@ -136,7 +134,9 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                     'form' => 'Some\App\Product\Form\OptionType',
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\OptionTranslation',
-                        'form'  => 'Some\App\Product\Form\OptionTranslationType',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\OptionTranslationType',
+                        )
                     )
                 ),
                 'option_value' => array(
@@ -162,7 +162,9 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                         'form'  => 'Some\App\Product\Form\OptionType',
                         'translation' => array(
                             'model' => 'Some\App\Product\Entity\OptionTranslation',
-                            'form'  => 'Some\App\Product\Form\OptionTranslationType',
+                            'form'  => array(
+                                'default' => 'Some\App\Product\Form\OptionTranslationType',
+                            )
                         ),
                     ),
                     'option_value' => array(
@@ -183,10 +185,12 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 'product_option' => array(
                     'model' => 'Some\App\Product\Entity\Option',
                     'form'  => 'Some\App\Product\Form\OptionType',
-                ),
-                'product_option_translation' => array(
-                    'model' => 'Some\App\Product\Entity\OptionTranslation',
-                    'form'  => 'Some\App\Product\Form\OptionTranslationType',
+                    'translation' => array(
+                        'model' => 'Some\App\Product\Entity\OptionTranslation',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\OptionTranslationType',
+                        )
+                    ),
                 ),
                 'product_option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
