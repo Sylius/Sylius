@@ -250,9 +250,9 @@ Creating a zone requires adding appropriate members:
     $polandMember->setCountry($poland)
 
     $eu
-        ->addMember($germany)
-        ->addMember($france)
-        ->addMember($poland)
+        ->addMember($germanyMember)
+        ->addMember($franceMember)
+        ->addMember($polandMember)
     ;
 
 .. tip::
