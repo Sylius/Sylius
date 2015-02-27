@@ -30,28 +30,29 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
      */
     private $bundles = array(
         'sylius_addressing',
+        'sylius_affiliate',
         'sylius_api',
         'sylius_attribute',
         'sylius_contact',
         'sylius_currency',
         'sylius_inventory',
         'sylius_locale',
+        'sylius_mailer',
         'sylius_order',
         'sylius_payment',
         'sylius_payum',
         'sylius_product',
         'sylius_promotion',
+        'sylius_rbac',
         'sylius_report',
         'sylius_search',
         'sylius_sequence',
         'sylius_settings',
         'sylius_shipping',
-        'sylius_mailer',
         'sylius_taxation',
         'sylius_taxonomy',
-        'sylius_variation',
         'sylius_translation',
-        'sylius_rbac',
+        'sylius_variation',
     );
 
     protected $configFiles = array(
@@ -62,7 +63,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'templating',
         'twig',
         'reports',
-        'mailer'
+        'mailer',
     );
 
     /**
@@ -92,7 +93,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'Symfony\Bundle\AsseticBundle\Factory\Resource\FileResource',
             'Symfony\Bundle\FrameworkBundle\Templating\TemplateReference',
             'Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator',
-            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader'
+            'Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader',
         ));
     }
 

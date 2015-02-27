@@ -1,0 +1,44 @@
+{
+    "name": "sylius/affiliate",
+    "type": "library",
+    "description": "Affiliate for Symfony2 applications.",
+    "keywords": ["shop", "ecommerce", "affiliate"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource": "0.15.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Affiliate\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Affiliate\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
+        }
+    }
+}

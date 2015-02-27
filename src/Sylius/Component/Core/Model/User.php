@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
+use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -33,6 +34,7 @@ class User extends BaseUser implements UserInterface
     protected $billingAddress;
     protected $shippingAddress;
     protected $addresses;
+    protected $affiliate;
     protected $oauthAccounts;
 
     public function __construct()
@@ -370,5 +372,23 @@ class User extends BaseUser implements UserInterface
         }
 
         return $roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAffiliate()
+    {
+        return $this->affiliate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAffiliate(AffiliateInterface $affiliate = null)
+    {
+        $this->affiliate = $affiliate;
+
+        return $this;
     }
 }
