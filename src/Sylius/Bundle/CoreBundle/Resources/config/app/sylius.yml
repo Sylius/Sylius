@@ -223,6 +223,7 @@ sylius_search:
                 value: ~
 
 sylius_translation:
+    locale_provider: sylius.translation.locale_provider.contextual
     mapping:
         translatable:
             translations: translations

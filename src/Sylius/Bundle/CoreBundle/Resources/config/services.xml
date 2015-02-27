@@ -92,6 +92,7 @@
         <parameter key="sylius.report.data_fetcher.class">Sylius\Component\Report\DataFetcher\DelegatingDataFetcher</parameter>
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
+        <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Locale\TranslationLocaleProvider</parameter>
     </parameters>
 
     <services>
@@ -486,6 +487,10 @@
         <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
             <argument type="service" id="sylius.authorization_checker.default" />
             <argument type="service" id="sylius.settings.manager" />
+        </service>
+
+        <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
+            <argument type="service" id="sylius.context.locale" />
         </service>
     </services>
 
