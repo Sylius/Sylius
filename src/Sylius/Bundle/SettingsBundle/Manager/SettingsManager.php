@@ -108,12 +108,7 @@ class SettingsManager implements SettingsManagerInterface
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
 
-        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
-            if (array_key_exists($parameter, $parameters)) {
-                $parameters[$parameter] = $transformer->reverseTransform($parameters[$parameter]);
-            }
-        }
-
+        $parameters = $this->transformParameters($settingsBuilder, $parameters);
         $parameters = $settingsBuilder->resolve($parameters);
 
         return $this->resolvedSettings[$namespace] = new Settings($parameters);
@@ -139,7 +134,8 @@ class SettingsManager implements SettingsManagerInterface
         }
 
         if (isset($this->resolvedSettings[$namespace])) {
-            $this->resolvedSettings[$namespace]->setParameters($parameters);
+            $transformedParameters = $this->transformParameters($settingsBuilder, $parameters);
+            $this->resolvedSettings[$namespace]->setParameters($transformedParameters);
         }
 
         $persistedParameters = $this->parameterRepository->findBy(array('namespace' => $namespace));
@@ -192,5 +188,18 @@ class SettingsManager implements SettingsManagerInterface
         }
 
         return $parameters;
+    }
+
+    private function transformParameters(SettingsBuilder $settingsBuilder, array $parameters)
+    {
+        $transformedParameters = $parameters;
+
+        foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
+            if (array_key_exists($parameter, $parameters)) {
+                $transformedParameters[$parameter] = $transformer->reverseTransform($parameters[$parameter]);
+            }
+        }
+
+        return $transformedParameters;
     }
 }
