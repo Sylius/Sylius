@@ -27,6 +27,19 @@ class ImagineBlockType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
+            ->add('publishable', null, array(
+                    'label' => 'sylius.form.imagine_block.publishable'
+                ))
+            ->add('publishStartDate', 'datetime', array(
+                    'label' => 'sylius.form.imagine_block.publish_start_date',
+                    'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                    'time_widget' => 'text',
+            ))
+            ->add('publishEndDate', 'datetime', array(
+                    'label' => 'sylius.form.imagine_block.publish_end_date',
+                    'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                    'time_widget' => 'text',
+            ))
             ->add('parentDocument', null, array(
                 'label' => 'sylius.form.imagine_block.parent'
             ))
@@ -34,9 +47,11 @@ class ImagineBlockType extends AbstractResourceType
                 'label' => 'sylius.form.imagine_block.internal_name'
             ))
             ->add('label', 'text', array(
+                'label' => 'sylius.form.imagine_block.label',
                 'required' => false
             ))
             ->add('linkUrl', 'text', array(
+                'label' => 'sylius.form.imagine_block.link_url',
                 'required' => false
             ))
             ->add('filter', 'choice', array(
@@ -45,12 +60,15 @@ class ImagineBlockType extends AbstractResourceType
                         'slideshow_medium' => 'sylius.form.imagine_block.slideshow_medium',
                         'slideshow_large'  => 'sylius.form.imagine_block.slideshow_large',
                 ),
-                'required' => false
+                'label' => 'sylius.form.imagine_block.filter',
+                'required' => false,
             ))
             ->add('image', 'cmf_media_image', array(
+                'label' => 'sylius.form.imagine_block.image',
+                'attr' => array('class' => 'imagine-image-thumbnail'),
                 'required' => false
             ))
-        ;
+            ;
 
     }
 
