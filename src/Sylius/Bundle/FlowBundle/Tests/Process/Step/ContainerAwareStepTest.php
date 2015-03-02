@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FlowBundle\Tests\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ContainerAwareStep;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * ContainerAwareStepTest test.
@@ -45,7 +46,7 @@ class TestContainerAwareStep extends ContainerAwareStep
         return $this->container;
     }
 
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         // pufff.
     }

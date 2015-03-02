@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FlowBundle\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Step class which extends the base Symfony2 controller.
@@ -47,7 +48,7 @@ abstract class ControllerStep extends Controller implements StepInterface
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
         return $this->complete();
     }

@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Security step.
@@ -33,7 +34,7 @@ class SecurityStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         // If user is already logged in, transparently jump to next step.
         if ($this->isUserLoggedIn()) {
@@ -53,12 +54,11 @@ class SecurityStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
-        $request          = $this->getRequest();
         $guestForm        = $this->getGuestForm($order);
         $registrationForm = $this->getRegistrationForm();
 

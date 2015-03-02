@@ -18,13 +18,14 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
+use Symfony\Component\HttpFoundation\Request;
 
 class SetupStep extends ControllerStep
 {
     /**
      * {@inheritdoc}
      */
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         return $this->render(
             'SyliusInstallerBundle:Process/Step:setup.html.twig',
@@ -35,9 +36,8 @@ class SetupStep extends ControllerStep
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
-        $request = $this->getRequest();
         $form = $this->createForm('sylius_setup');
         $em = $this->getDoctrine()->getManager();
 

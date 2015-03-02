@@ -14,6 +14,7 @@ namespace Sylius\Bundle\FlowBundle\Process\Step;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 interface StepInterface
 {
@@ -35,19 +36,21 @@ interface StepInterface
      * Display action.
      *
      * @param ProcessContextInterface $context
+     * @param Request $request
      *
      * @return ActionResult|Response|View
      */
-    public function displayAction(ProcessContextInterface $context);
+    public function displayAction(ProcessContextInterface $context, Request $request);
 
     /**
      * Forward action.
      *
      * @param ProcessContextInterface $context
+     * @param Request $request
      *
      * @return null|ActionResult|Response|View
      */
-    public function forwardAction(ProcessContextInterface $context);
+    public function forwardAction(ProcessContextInterface $context, Request $request);
 
     /**
      * Is step active in process?
