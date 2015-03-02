@@ -6,13 +6,23 @@ sylius:
         action_block:
             action_name: Action name
             id: Id
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
 
         imagine_block:
-            parent: Parent
+            filter: Filter
+            image: Image
             internal_name: Internal name
-            slideshow_small: 'Slideshow Large (full width)'
+            label: Label
+            link_url: Link URL
+            parent: Parent
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
+            slideshow_small: 'Slideshow Small (side)'
             slideshow_medium: 'Slideshow Medium (content)'
-            slideshow_large: 'Slideshow Small (side)'
+            slideshow_large: 'Slideshow Large (full width)'
 
         menu:
             childrens: Childrens
@@ -21,6 +31,9 @@ sylius:
             label: Label
             name: Name
             parent: Parent
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
             route: Route
             uri: URI
 
@@ -28,6 +41,9 @@ sylius:
             body: Body
             id: Id
             name: Name
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
 
         menu_node_block:
             content: Content
@@ -51,6 +67,9 @@ sylius:
         reference_block:
             body: Body
             id: Id
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
             title: Title
 
         route:
@@ -62,12 +81,19 @@ sylius:
             body: Body
             internal_name: Internal name
             parent: Parent
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
             title: Title
 
         slideshow_block:
+            add_slide: Add slide
             childrens: Childrens
             internal_name: Internal name
             parent: Parent
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
             title: Title
 
         static_content:
@@ -86,3 +112,7 @@ sylius:
             body: Body
             id: ID
             name: Name
+            publish_end_date: Publish end date
+            publish_start_date: Publish start date
+            publishable: Publishable
+            

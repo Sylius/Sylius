@@ -7,16 +7,17 @@
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.content'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.block.index'|trans }}</a></li>
+    <li><a href="{{ path('sylius_backend_block_overview') }}">{{ 'sylius.breadcrumb.block.index'|trans }}</a></li>
+    <li>{{ 'sylius.breadcrumb.block.string.index'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_string_block_create'), 'sylius.block.create'|trans) }}
+        {{ buttons.create(path('sylius_backend_string_block_create'), 'sylius.block.string.create'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.block.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.block.string.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(string_blocks) }}

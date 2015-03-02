@@ -10,6 +10,10 @@
             <tr>
                 <th>{{ 'sylius.block.imagine.id'|trans }}</th>
                 <th>{{ sylius_resource_sort('label', 'sylius.block.imagine.label'|trans) }}</th>
+                <th>{{ sylius_resource_sort('publishable', 'sylius.block.imagine.publishable'|trans) }}</th>
+                <th>{{ sylius_resource_sort('publishStartDate', 'sylius.block.imagine.start_date'|trans) }}</th>
+                <th>{{ sylius_resource_sort('publishEndDate', 'sylius.block.imagine.end_date'|trans) }}</th>
+                <th>{{ sylius_resource_sort('updatedAt', 'sylius.block.string.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -18,6 +22,14 @@
             <tr id="{{ block.id }}">
                 <td><i>{{ block.id }}</i></td>
                 <td>{{ block.label|raw }}</td>
+                <td>
+                    <span class="label label-{{ block.publishable ? 'success' : 'default'}}">
+                        {{ block.publishable ? 'sylius.yes'|trans : 'sylius.no'|trans }}
+                    </span>
+                </td>
+                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
+                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
+                <td>{{ block.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_imagine_block_update', {'id': block.id})) }}
