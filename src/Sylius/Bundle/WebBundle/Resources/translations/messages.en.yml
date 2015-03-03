@@ -110,7 +110,7 @@ sylius:
             index: Imagine Blocks
             index_header: Imagine blocks
             label: Label
-            publishable: Publishable
+            publishable: Published
             start_date: Start Date
             title: Title
             update_header: Editing imagine block
@@ -124,7 +124,7 @@ sylius:
             index: Simple blocks
             index_header: Simple blocks
             label: Label
-            publishable: Publishable
+            publishable: Published
             start_date: Start Date
             title: Title
             update_header: Editing simple block
@@ -137,7 +137,7 @@ sylius:
             id: Id
             index: Slideshow Blocks
             index_header: Slideshow blocks
-            publishable: Publishable
+            publishable: Published
             start_date: Start Date
             title: Title
             update_header: Editing slideshow block
@@ -151,7 +151,7 @@ sylius:
             index: String blocks
             index_header: String blocks
             label: Label
-            publishable: Publishable
+            publishable: Published
             start_date: Start Date
             title: Title
             update_header: Editing string block
@@ -464,9 +464,12 @@ sylius:
     menu:
         create: Create menu
         create_header: Creating menu
+        end_date: End date
         id: ID
         index_header: Menus
         no_results: There are no menus to display.
+        publishable: Published
+        start_date: Start date
         title: Title
         update_header: Editing menu
     menu_node:
@@ -632,7 +635,7 @@ sylius:
         id: ID
         index_header: Pages
         no_results: There are no static pages to display.
-        publishable: Publishable
+        publishable: Published
         start_date: Start Date
         end_date: End date
         title: Title

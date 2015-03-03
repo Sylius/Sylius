@@ -8,7 +8,7 @@ sylius:
             id: Id
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
 
         imagine_block:
             filter: Filter
@@ -19,7 +19,7 @@ sylius:
             parent: Parent
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             slideshow_small: 'Slideshow Small (side)'
             slideshow_medium: 'Slideshow Medium (content)'
             slideshow_large: 'Slideshow Large (full width)'
@@ -33,7 +33,7 @@ sylius:
             parent: Parent
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             route: Route
             uri: URI
 
@@ -43,7 +43,7 @@ sylius:
             name: Name
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
 
         menu_node_block:
             content: Content
@@ -54,7 +54,7 @@ sylius:
             link_type: Link type
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             route: Route
             uri: URI
 
@@ -69,7 +69,7 @@ sylius:
             id: Id
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             title: Title
 
         route:
@@ -83,7 +83,7 @@ sylius:
             parent: Parent
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             title: Title
 
         slideshow_block:
@@ -93,7 +93,7 @@ sylius:
             parent: Parent
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             title: Title
 
         static_content:
@@ -104,7 +104,7 @@ sylius:
             parent: Parent
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             routes: Routes
             title: Title
 
@@ -114,5 +114,5 @@ sylius:
             name: Name
             publish_end_date: Publish end date
             publish_start_date: Publish start date
-            publishable: Publishable
+            publishable: Published
             
