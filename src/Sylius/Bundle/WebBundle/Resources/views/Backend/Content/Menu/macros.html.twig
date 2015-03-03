@@ -13,7 +13,6 @@
                 <th>{{ sylius_resource_sort('publishable', 'sylius.menu.publishable'|trans) }}</th>
                 <th>{{ sylius_resource_sort('publishStartDate', 'sylius.menu.start_date'|trans) }}</th>
                 <th>{{ sylius_resource_sort('publishEndDate', 'sylius.menu.end_date'|trans) }}</th>
-                <th>{{ sylius_resource_sort('updatedAt', 'sylius.menu.updated_at'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 </td>
                 <td>{{ menu.publishStartDate is empty ? '-' : menu.publishStartDate|date }}</td>
                 <td>{{ menu.publishStartDate is empty ? '-' : menu.publishStartDate|date }}</td>
-                <td>{{ menu.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_menu_update', {'id': menu.id})) }}
