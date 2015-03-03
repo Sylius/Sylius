@@ -42,10 +42,22 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
             ->select(Argument::any())
             ->willReturn($queryBuilder)
         ;
+
         $queryBuilder
             ->from(Argument::any(), Argument::any())
             ->willReturn($queryBuilder)
         ;
+
+        $queryBuilder
+            ->addSelect(Argument::any())
+            ->willReturn($queryBuilder)
+        ;
+
+        $queryBuilder
+            ->leftJoin(Argument::any(), Argument::any())
+            ->willReturn($queryBuilder)
+        ;
+
         $queryBuilder
             ->getQuery()
             ->willReturn($query)
@@ -124,6 +136,12 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
             ;
 
             $queryBuilder
+                ->addSelect('translation')
+                ->shouldBeCalled()
+                ->willReturn($queryBuilder)
+            ;
+
+            $queryBuilder
                 ->leftJoin('o.translations', 'translation')
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
@@ -182,6 +200,18 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
+
+            $queryBuilder
+                ->addSelect('translation')
+                ->shouldBeCalled()
+                ->willReturn($queryBuilder)
+            ;
+
+            $queryBuilder
+                ->leftJoin('o.translations', 'translation')
+                ->shouldBeCalled()
+                ->willReturn($queryBuilder)
+            ;
         }
 
         $this->findBy($criteria)->shouldReturn(null);
@@ -212,6 +242,18 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
 
             $queryBuilder
                 ->andWhere('o.'.$property.' IN (:'.$property.')')
+                ->shouldBeCalled()
+                ->willReturn($queryBuilder)
+            ;
+
+            $queryBuilder
+                ->addSelect('translation')
+                ->shouldBeCalled()
+                ->willReturn($queryBuilder)
+            ;
+
+            $queryBuilder
+                ->leftJoin('o.translations', 'translation')
                 ->shouldBeCalled()
                 ->willReturn($queryBuilder)
             ;
