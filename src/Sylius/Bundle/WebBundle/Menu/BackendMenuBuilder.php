@@ -180,7 +180,7 @@ class BackendMenuBuilder extends MenuBuilder
         if ($this->authorizationChecker->isGranted('sylius.static_content.index')) {
             $child->addChild('Pages', array(
                 'route' => 'sylius_backend_static_content_index',
-                'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-file'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.pages', $section)));
         }
         if ($this->authorizationChecker->isGranted('sylius.menu.index')) {
@@ -198,7 +198,7 @@ class BackendMenuBuilder extends MenuBuilder
         if ($this->authorizationChecker->isGranted('sylius.route.index')) {
             $child->addChild('Routes', array(
                 'route' => 'sylius_backend_route_index',
-                'labelAttributes' => array('icon' => 'glyphicon glyphicon-th-list'),
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-random'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.routes', $section)));
         }
 

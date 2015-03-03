@@ -28,7 +28,7 @@ class StaticContentType extends AbstractResourceType
     {
         $builder
             ->add('publishable', null, array(
-                    'label' => 'sylius.form.static_content.publishable'
+                'label' => 'sylius.form.static_content.publishable'
                 ))
             ->add('id', 'text', array(
                 'label' => 'sylius.form.static_content.id'
@@ -63,15 +63,17 @@ class StaticContentType extends AbstractResourceType
                 'required' => false,
                 'label'    => 'sylius.form.static_content.body',
             ))
-            ->add('publishStartDate', null, array(
-                'required' => false,
-                'label'    => 'sylius.form.static_content.publish_start_date',
+            ->add('publishStartDate', 'datetime', array(
+                'label' => 'sylius.form.static_content.publish_start_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
-            ->add('publishEndDate', null, array(
-                'required' => false,
-                'label'    => 'sylius.form.static_content.publish_end_date',
+            ->add('publishEndDate', 'datetime', array(
+                'label' => 'sylius.form.static_content.publish_end_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
-            ;
+        ;
 
     }
 

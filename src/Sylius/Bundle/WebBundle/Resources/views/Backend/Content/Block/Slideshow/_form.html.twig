@@ -5,6 +5,9 @@
 <fieldset>
     <div class="row">
         <div class="col-md-6 row-split">
+            {{ form_row(form.publishable) }}
+            {{ form_row(form.publishStartDate) }}
+            {{ form_row(form.publishEndDate) }}
             {{ forms.readonly(form.parentDocument,form.parentDocument.vars.value,'/cms/blocks') }}
             {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
             {{ form_row(form.title, {'attr': {'class': 'input-lg'}}) }}
@@ -15,14 +18,3 @@
     </div>
 </fieldset>
 {{ form_widget(form._token) }}
-
-{% macro prototype(item) %}
-    <div>
-        {{ form_row(item.name)  }}
-        {{ form_row(item.label)  }}
-        {{ form_row(item.linkUrl)  }}
-        {{ form_row(item.filter)  }}
-        {{ form_row(item.image)  }}
-    </div>
-    <hr />
-{% endmacro %}

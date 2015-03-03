@@ -5,6 +5,9 @@
 <fieldset>
     <div class="row">
         <div class="col-md-6 row-split">
+            {{ form_row(form.publishable) }}
+            {{ form_row(form.publishStartDate) }}
+            {{ form_row(form.publishEndDate) }}
             {{ form_row(form.display) }}
             {{ form_row(form.displayChildren) }}
             {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}

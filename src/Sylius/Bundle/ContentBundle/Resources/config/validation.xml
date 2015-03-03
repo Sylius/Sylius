@@ -28,6 +28,18 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="publishStartDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.menu.start_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishEndDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.menu.end_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode">
@@ -40,6 +52,18 @@
         <property name="label">
             <constraint name="NotBlank">
                 <option name="message">sylius.menu_node.label.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishStartDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.menu_node.start_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishEndDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.menu_node.end_date.invalid_date</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
@@ -73,6 +97,18 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="publishStartDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.slideshow_block.start_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishEndDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.slideshow_block.end_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock">
@@ -94,6 +130,18 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="publishStartDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.simple_block.start_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishEndDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.simple_block.end_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent">
@@ -112,6 +160,18 @@
         <property name="body">
             <constraint name="NotBlank">
                 <option name="message">sylius.static_content.body.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishStartDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.static_content.start_date.invalid_date</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="publishEndDate">
+            <constraint name="DateTime">
+                <option name="message">sylius.static_content.end_date.invalid_date</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
