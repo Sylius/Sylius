@@ -11,9 +11,9 @@ sylius:
     imagine_block:
       parent: Forelder
       internal_name: Internt navn
-      slideshow_small: Slideshow stor (full bredde)
+      slideshow_small: Slideshow liten (side)
       slideshow_medium: Slideshow Medium (innhold)
-      slideshow_large: Slideshow liten (side)
+      slideshow_large: Slideshow stor (full bredde)
     menu:
       childrens: Barn
       display: Vis
