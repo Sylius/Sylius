@@ -619,3 +619,12 @@ input[type="file"] {
 #sylius-menu-childrens img {
 	margin-top: 20px;
 }
+
+/** Content. **/
+.content-block-overview {
+	
+}
+
+.content-block-overview i {
+    font-size: 24px;
+}

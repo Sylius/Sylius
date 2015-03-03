@@ -204,7 +204,7 @@ sylius:
             index: Orders
             adjustments: Adjustments
         page:
-            index: Static Pages
+            index: Pages
         payment:
             index: Payments
         payment_method:
@@ -600,7 +600,6 @@ sylius:
         no_results: There are no redirect routes to display.
         title: Title
         update_header: Editing redirect route
-        updated_at: Updated at
     shipment:
         ship: Ship
         created_at: Created at
@@ -631,15 +630,15 @@ sylius:
     page:
         body: Body
         create: Create new page
-        create_header: Creating new static content
+        create_header: Creating new page
         id: ID
         index_header: Pages
-        no_results: There are no static pages to display.
+        no_results: There are no pages to display.
         publishable: Published
         start_date: Start Date
         end_date: End date
         title: Title
-        update_header: Last update
+        update_header: Editing page
     password: Password
     payment:
         amount: Amount

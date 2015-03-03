@@ -29,6 +29,7 @@
                 </td>
                 <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
                 <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
+                <td>{{ block.updatedAt|date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_slideshow_block_update', {'id': block.id})) }}
