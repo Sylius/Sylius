@@ -52,10 +52,8 @@
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        <div class="form-group">
         {{ form_widget(form.date) }}
         {{ form_widget(form.time) }}
-        </div>
     {% endif %}
 {% endspaceless %}
 {% endblock datetime_widget %}
