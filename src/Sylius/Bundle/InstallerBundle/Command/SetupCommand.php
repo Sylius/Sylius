@@ -13,6 +13,7 @@ namespace Sylius\Bundle\InstallerBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Intl\Exception\MethodNotImplementedException;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraints\Country;
 use Symfony\Component\Validator\Constraints\Currency;
@@ -48,6 +49,10 @@ EOT
         $this->setupAdministratorUser($input, $output);
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Create your administrator account.');
@@ -79,7 +84,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function setupLocales(InputInterface $input, OutputInterface $output)
@@ -106,7 +111,12 @@ EOT
         foreach ($locales as $key => $code) {
             $code = trim($code);
 
-            $name = \Locale::getDisplayName($code);
+            try {
+                $name = \Locale::getDisplayName($code);
+            } catch (MethodNotImplementedException $e) {
+                $name = $code;
+            }
+
             $output->writeln(sprintf('Adding <info>%s</info>.', $name));
 
             if (null !== $localeRepository->findOneByCode($code)) {
@@ -125,7 +135,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function setupCurrencies(InputInterface $input, OutputInterface $output)
@@ -173,7 +183,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     protected function setupCountries(InputInterface $input, OutputInterface $output)
