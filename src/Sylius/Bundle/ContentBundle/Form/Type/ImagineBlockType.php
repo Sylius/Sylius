@@ -65,7 +65,7 @@ class ImagineBlockType extends AbstractResourceType
             ))
             ->add('image', 'cmf_media_image', array(
                 'label' => 'sylius.form.imagine_block.image',
-                'attr' => array('class' => 'imagine-image-thumbnail'),
+                'attr' => array('class' => 'imagine-thumbnail'),
                 'required' => false
             ))
             ;

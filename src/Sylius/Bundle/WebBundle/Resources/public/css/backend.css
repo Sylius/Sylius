@@ -406,6 +406,10 @@ input[type="file"] {
     width: 90px;
 }
 
+.imagine-thumbnail {
+	margin-top: 25px;
+}
+
 .sylius-assortment-variant-images-image {
     margin: 5px 0;
     padding-bottom: 5px;
