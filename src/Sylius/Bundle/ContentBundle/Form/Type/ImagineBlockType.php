@@ -68,7 +68,7 @@ class ImagineBlockType extends AbstractResourceType
                 'attr' => array('class' => 'imagine-thumbnail'),
                 'required' => false
             ))
-            ;
+        ;
 
     }
 

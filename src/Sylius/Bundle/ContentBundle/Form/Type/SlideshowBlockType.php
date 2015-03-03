@@ -57,7 +57,7 @@ class SlideshowBlockType extends AbstractResourceType
                     'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
                     'time_widget' => 'text',
             ))
-            ;
+        ;
     }
 
     /**
