@@ -52,17 +52,17 @@ class MenuNodeType extends AbstractResourceType
                 'label'    => 'sylius.form.menu_node_block.link_type',
             ))
             ->add('publishable', null, array(
-                    'label' => 'sylius.form.menu_node_block.publishable'
+                'label' => 'sylius.form.menu_node_block.publishable'
                 ))
             ->add('publishStartDate', 'datetime', array(
-                    'label' => 'sylius.form.menu_node_block.publish_start_date',
-                    'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
-                    'time_widget' => 'text',
+                'label' => 'sylius.form.menu_node_block.publish_start_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
             ->add('publishEndDate', 'datetime', array(
-                    'label' => 'sylius.form.menu_node_block.publish_end_date',
-                    'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
-                    'time_widget' => 'text',
+                'label' => 'sylius.form.menu_node_block.publish_end_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
             ->add('route', null, array(
                 'label' => 'sylius.form.menu_node_block.route'

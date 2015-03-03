@@ -41,17 +41,17 @@ class SimpleBlockType extends AbstractResourceType
                 'label'    => 'sylius.form.simple_block.body',
             ))
             ->add('publishable', null, array(
-                    'label' => 'sylius.form.simple_block.publishable'
+                'label' => 'sylius.form.simple_block.publishable'
                 ))
             ->add('publishStartDate', 'datetime', array(
-                    'label' => 'sylius.form.simple_block.publish_start_date',
-                    'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
-                    'time_widget' => 'text',
+                'label' => 'sylius.form.simple_block.publish_start_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
             ->add('publishEndDate', 'datetime', array(
-                    'label' => 'sylius.form.simple_block.publish_end_date',
-                    'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
-                    'time_widget' => 'text',
+                'label' => 'sylius.form.simple_block.publish_end_date',
+                'empty_value' =>/** @Ignore */ array('year' => '-', 'month' => '-', 'day' => '-'),
+                'time_widget' => 'text',
             ))
         ;
 
