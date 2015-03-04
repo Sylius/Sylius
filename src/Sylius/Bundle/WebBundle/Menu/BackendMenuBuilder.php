@@ -306,13 +306,13 @@ class BackendMenuBuilder extends MenuBuilder
         if ($this->authorizationChecker->isGranted('sylius.role.index')) {
             $child->addChild('roles', array(
                 'route' => 'sylius_backend_role_index',
-                'labelAttributes' => array('icon' => 'glyphicon glyphicon-user'),
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-sort-by-attributes'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.roles', $section)));
         }
         if ($this->authorizationChecker->isGranted('sylius.permission.index')) {
             $child->addChild('permissions', array(
                 'route' => 'sylius_backend_permission_index',
-                'labelAttributes' => array('icon' => 'glyphicon glyphicon-cog'),
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-lock'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.permissions', $section)));
         }
 
