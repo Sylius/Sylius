@@ -21,9 +21,19 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class LocaleController extends ResourceController
 {
-    public function changeAction(Request $request, $locale)
+    public function changeAction(Request $request)
     {
+        $locale = $request->get('locale');
         $this->getLocaleContext()->setLocale($locale);
+
+        if ($this->config->isApiRequest()) {
+            $view = $this
+                ->view()
+                ->setData(array('locale' => $locale))
+            ;
+
+            return $this->handleView($view);
+        }
 
         return $this->redirect($request->headers->get('referer'));
     }
