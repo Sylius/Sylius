@@ -14,6 +14,9 @@ namespace Sylius\Component\Affiliate\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+/**
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
 class Affiliate implements AffiliateInterface
 {
     /**
@@ -24,16 +27,40 @@ class Affiliate implements AffiliateInterface
     protected $id;
 
     /**
-     * Referral code.
+     * Affiliate provision amount.
      *
-     * @var string
+     * @var int
      */
-    protected $referralCode;
+    protected $provisionAmount = 1;
+
+    /**
+     * Affiliate provision type.
+     *
+     * @var int
+     */
+    protected $provisionType = AffiliateInterface::PROVISION_FIXED;
+
+    /**
+     * Affiliation status.
+     *
+     * @var int
+     */
+    protected $status = AffiliateInterface::AFFILIATE_ENABLED;
+
+    /**
+     * @var ReferrerInterface[]
+     */
+    protected $referrer;
 
     /**
      * @var Collection|ReferralInterface[]
      */
     protected $referrals;
+
+    /**
+     * @var Collection|ReferralInterface[]
+     */
+    protected $transactions;
 
     /**
      * Creation time.
@@ -51,8 +78,9 @@ class Affiliate implements AffiliateInterface
 
     public function __construct()
     {
-        $this->referrals = new ArrayCollection();
-        $this->createdAt = new \DateTime();
+        $this->referrals    = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
+        $this->createdAt    = new \DateTime();
     }
 
     /**
@@ -66,9 +94,97 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function getReferralCode()
+    public function hasReferral(ReferralInterface $referral)
     {
-        return $this->referralCode;
+        return $this->referrals->contains($referral);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDisabled()
+    {
+        return AffiliateInterface::AFFILIATE_DISABLED === $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return AffiliateInterface::AFFILIATE_ENABLED === $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPaused()
+    {
+        return AffiliateInterface::AFFILIATE_PAUSED === $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProvisionAmount()
+    {
+        return $this->provisionAmount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProvisionAmount($amount)
+    {
+        $this->provisionAmount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProvisionType()
+    {
+        return $this->provisionType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProvisionType($type)
+    {
+        $this->provisionType = $type;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferrer(ReferrerInterface $referrer)
+    {
+        $this->referrer = $referrer;
+
+        return $this;
     }
 
     /**
@@ -82,20 +198,11 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function setReferralCode($referralCode)
-    {
-        $this->referralCode = $referralCode;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addReferral(ReferralInterface $referral)
     {
         if (!$this->hasReferral($referral)) {
             $this->referrals->add($referral);
+            $referral->setReferrer($this);
         }
 
         return $this;
@@ -108,6 +215,7 @@ class Affiliate implements AffiliateInterface
     {
         if ($this->hasReferral($referral)) {
             $this->referrals->removeElement($referral);
+            $referral->setReferrer(null);
         }
 
         return $this;
@@ -116,9 +224,37 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function hasReferral(ReferralInterface $referral)
+    public function getTransactions()
     {
-        return $this->referrals->contains($referral);
+        return $this->transactions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addTransaction(TransactionInterface $transaction)
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions->add($transaction);
+
+            $transaction->setAffiliate($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeTransaction(TransactionInterface $transaction)
+    {
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
+
+            $transaction->setAffiliate(null);
+        }
+
+        return $this;
     }
 
     /**

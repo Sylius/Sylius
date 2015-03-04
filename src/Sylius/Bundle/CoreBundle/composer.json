@@ -31,6 +31,7 @@
         "mathiasverraes/money":           "~1.2",
         "swiftmailer/swiftmailer":        "~5.0",
         "sylius/core":                    "0.14.*@dev",
+        "sylius/affiliate-bundle":        "0.14.*@dev",
         "sylius/addressing-bundle":       "0.14.*@dev",
         "sylius/api-bundle":              "0.14.*@dev",
         "sylius/cart-bundle":             "0.14.*@dev",

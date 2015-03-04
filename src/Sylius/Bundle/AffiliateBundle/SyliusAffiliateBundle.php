@@ -35,7 +35,9 @@ class SyliusAffiliateBundle extends AbstractResourceBundle
     protected function getModelInterfaces()
     {
         return array(
-            'Sylius\Component\Affiliate\Model\AffiliateInterface' => 'sylius.model.affiliate.class',
+            'Sylius\Component\Affiliate\Model\AffiliateInterface'   => 'sylius.model.affiliate.class',
+            'Sylius\Component\Affiliate\Model\InvitationInterface'  => 'sylius.model.invitation.class',
+            'Sylius\Component\Affiliate\Model\TransactionInterface' => 'sylius.model.transaction.class',
         );
     }
 

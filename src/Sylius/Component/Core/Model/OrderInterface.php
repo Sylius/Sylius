@@ -12,8 +12,8 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Affiliate\Model\ReferrerAwareInterface;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Core\Model\IdentityInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
@@ -24,7 +24,13 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
+interface OrderInterface extends
+    CartInterface,
+    PaymentsSubjectInterface,
+    PromotionCountableSubjectInterface,
+    PromotionCouponsAwareSubjectInterface,
+    ReferrerAwareInterface,
+    UserAwareInterface
 {
     const CHECKOUT_STATE_CART       = 'cart';
     const CHECKOUT_STATE_ADDRESSING = 'addressing';
@@ -71,7 +77,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     /**
      * Set the checkout state.
      *
-     * @param string $
+     * @param string $checkoutState
      */
     public function setCheckoutState($checkoutState);
 
@@ -212,7 +218,7 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      *
      * @param $state
      *
-     * @return PaymentInterface|false
+     * @return PaymentInterface|bool
      */
     public function getLastPayment($state = PaymentInterface::STATE_NEW);
 
@@ -222,7 +228,4 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @return bool
      */
     public function isInvoiceAvailable();
-
-
-
 }

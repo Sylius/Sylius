@@ -14,6 +14,7 @@ namespace Sylius\Component\Affiliate\Model;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface ReferralInterface extends ReferrerAwareInterface
+interface ReferrerInterface
 {
+
 }

@@ -11,34 +11,27 @@
 
 namespace Sylius\Component\Affiliate\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-use Doctrine\Common\Collections\Collection;
-
-interface AffiliateInterface extends TimestampableInterface
+/**
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
+interface AffiliateInterface extends ReferralInterface, TimestampableInterface
 {
+    const AFFILIATE_ENABLED  = 1;
+    const AFFILIATE_PAUSED   = 0;
+    const AFFILIATE_DISABLED = -1;
+
+    const PROVISION_PERCENT  = 1;
+    const PROVISION_FIXED    = 2;
+
     /**
      * Get ID.
      *
      * @return int
      */
     public function getId();
-
-    /**
-     * Get referral code.
-     *
-     * @return string
-     */
-    public function getReferralCode();
-
-    /**
-     * Set referral code.
-     *
-     * @param string $referralCode
-     *
-     * @return self
-     */
-    public function setReferralCode($referralCode);
 
     /**
      * Get referrals.
@@ -73,4 +66,77 @@ interface AffiliateInterface extends TimestampableInterface
      * @return bool
      */
     public function hasReferral(ReferralInterface $referral);
+
+    /**
+     * Check that affiliation is disabled.
+     *
+     * @return bool
+     */
+    public function isDisabled();
+
+    /**
+     * Check that affiliation is enabled.
+     *
+     * @return bool
+     */
+    public function isEnabled();
+
+    /**
+     * Check that affiliation is paused.
+     *
+     * @return bool
+     */
+    public function isPaused();
+
+    /**
+     * Set affiliation status.
+     *
+     * @param int $status
+     *
+     * @return self
+     */
+    public function setStatus($status);
+
+    /**
+     * @return float
+     */
+    public function getProvisionAmount();
+
+    /**
+     * @param float $amount
+     *
+     * @return self
+     */
+    public function setProvisionAmount($amount);
+
+    /**
+     * @return int
+     */
+    public function getProvisionType();
+
+    /**
+     * @param int $type
+     *
+     * @return self
+     */
+    public function setProvisionType($type);
+
+    /**
+     * @return Collection|TransactionInterface[]
+     */
+    public function getTransactions();
+
+    /**
+     * @param TransactionInterface $transaction
+     *
+     * @return self
+     */
+    public function addTransaction(TransactionInterface $transaction);
+
+    /**
+     * @param TransactionInterface $transaction
+     *
+     * @return self
+     */
+    public function removeTransaction(TransactionInterface $transaction);
 }

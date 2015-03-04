@@ -303,6 +303,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'labelAttributes' => array('icon' => 'icon-home', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
 
+        $child->addChild('affiliate', array(
+            'route' => 'sylius_account_affiliate_index',
+            'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.affiliate')),
+            'labelAttributes' => array('icon' => 'icon-briefcase', 'iconOnly' => false)
+        ))->setLabel($this->translate('sylius.frontend.menu.account.affiliate'));
+
         $child->addChild('profile', array(
             'route' => 'sylius_account_profile_edit',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.profile')),

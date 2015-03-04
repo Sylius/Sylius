@@ -1,0 +1,22 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+
+<h4>{{ 'sylius.account.affiliate.index'|trans }}</h4>
+<br>
+
+{% if app.user.affiliate is not empty %}
+    {% if app.user.affiliate.disabled %}
+        {{ 'sylius.account.affiliate.status.disabled'|trans }}
+    {% elseif app.user.affiliate.paused %}
+        {{ 'sylius.account.affiliate.status.paused'|trans }}
+    {% else %}
+        <a href="{{ url('sylius_account_affiliate_history') }}">{{ 'sylius.account.affiliate.history.title'|trans }}</a>
+        <br>
+        <a href="{{ url('sylius_account_affiliate_referrals') }}">{{ 'sylius.account.affiliate.referrals.title'|trans }}</a>
+    {% endif %}
+{% else %}
+    {{ 'sylius.account.affiliate.status.create'|trans }}
+{% endif %}
+
+{% endblock %}

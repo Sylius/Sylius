@@ -30,7 +30,10 @@ sylius_currency: ~
 
 sylius_contact: ~
 
-sylius_affiliate: ~
+sylius_affiliate:
+    classes:
+        affiliate:
+            referral: Sylius\Component\Core\Model\User
 
 sylius_api:
     classes:

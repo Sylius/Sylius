@@ -33,12 +33,20 @@ class SyliusAffiliateExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
         );
 
+        $container
+            ->findDefinition('sylius.event_subscriber.affiliate.load_metadata')
+            ->replaceArgument(0, $config['classes']['affiliate']['model'])
+            ->replaceArgument(1, $config['classes']['affiliate']['referral'])
+        ;
+
+        unset($config['classes']['affiliate']['referral']);
+
         if ($config['referral_listener']['enabled']) {
             $container
                 ->findDefinition('sylius.listener.referral')
-                ->replaceArgument(1, $config['referral_listener']['query_parameter'])
-                ->replaceArgument(2, $config['referral_listener']['cookie_name'])
-                ->replaceArgument(3, $config['referral_listener']['cookie_lifetime'])
+                ->replaceArgument(2, $config['referral_listener']['query_parameter'])
+                ->replaceArgument(3, $config['referral_listener']['cookie_name'])
+                ->replaceArgument(4, $config['referral_listener']['cookie_lifetime'])
             ;
         } else {
             $container->removeDefinition('sylius.listener.referral');

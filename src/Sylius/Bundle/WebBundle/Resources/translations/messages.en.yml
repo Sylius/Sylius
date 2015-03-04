@@ -31,6 +31,26 @@ sylius:
             empty: You have no addresses defined.
             list: All your addresses
             update: Edit my address
+        affiliate:
+            status:
+                create: Start earning money right now & create your affiliate account!
+                disabled: Your affiliate acccount was disabled by administration.
+                paused: Your affiliate account was paused by administration.
+            index: Your affiliation details
+            history:
+                title: History of your earnings & payments
+                created_at: Logged at
+                type: Type of transaction
+                payment: Payment
+                earning: Earning
+                amount: Amount
+                empty: You have no logged transaction yet.
+            referrals:
+                title: List of your referrals
+                name: Nasme
+                created_at: Registered at
+                earning: Earning
+                empty: You have no referrals yet.
         home:
             email: Email :
             id: Customer ID :
@@ -157,6 +177,7 @@ sylius:
             update_header: Editing string block
             updated_at: Last update
     breadcrumb:
+        affiliate_settings: Affiliate Settings
         assortment: Assortment
         block:
             imagine:
@@ -825,6 +846,7 @@ sylius:
     save_changes: Save changes
     search: Search
     settings:
+        affiliate_header: Affiliate settings
         general_header: General settings
         security_header: Security settings
         taxation_header: Taxation settings

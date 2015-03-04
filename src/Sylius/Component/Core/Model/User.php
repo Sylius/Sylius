@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\ReferrerInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -36,6 +37,7 @@ class User extends BaseUser implements UserInterface
     protected $addresses;
     protected $affiliate;
     protected $oauthAccounts;
+    protected $referrer;
 
     public function __construct()
     {
@@ -367,8 +369,8 @@ class User extends BaseUser implements UserInterface
     {
         $roles = parent::getRoles();
 
-        foreach ($this->getAuthorizationRoles() as $role) {
-            $roles = array_merge($roles, $role->getSecurityRoles());
+        foreach ($this->authorizationRoles as $role) {
+            $roles += $role->getSecurityRoles();
         }
 
         return $roles;
@@ -388,6 +390,24 @@ class User extends BaseUser implements UserInterface
     public function setAffiliate(AffiliateInterface $affiliate = null)
     {
         $this->affiliate = $affiliate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferrer(ReferrerInterface $referrer)
+    {
+        $this->referrer = $referrer;
 
         return $this;
     }

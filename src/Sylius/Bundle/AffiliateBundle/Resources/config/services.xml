@@ -18,15 +18,23 @@
 
     <parameters>
         <parameter key="sylius.listener.referral.class">Sylius\Bundle\AffiliateBundle\EventListener\ReferralListener</parameter>
+        <parameter key="sylius.event_subscriber.affiliate.load_metadata.class">Sylius\Bundle\AffiliateBundle\EventListener\LoadMetadataSubscriber</parameter>
     </parameters>
 
     <services>
         <service id="sylius.listener.referral" class="%sylius.listener.referral.class%">
+            <argument type="service" id="security.context" />
             <argument type="service" id="sylius.repository.affiliate" />
             <argument /> <!-- Query parameter name -->
             <argument /> <!-- Cookie name -->
             <argument /> <!-- Cookie lifetime -->
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse" />
+        </service>
+
+        <service id="sylius.event_subscriber.affiliate.load_metadata" class="%sylius.event_subscriber.affiliate.load_metadata.class%">
+            <argument /> <!-- Affiliate model -->
+            <argument /> <!-- Referral model -->
+            <tag name="doctrine.event_subscriber" />
         </service>
     </services>
 

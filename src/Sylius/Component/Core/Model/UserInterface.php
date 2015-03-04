@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, IdentityInterface, ReferralInterface, AffiliateAwareInterface, TimestampableInterface
+interface UserInterface extends AffiliateAwareInterface, BaseUserInterface, IdentityInterface, ReferralInterface, TimestampableInterface
 {
     /**
      * Get first name.

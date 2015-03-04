@@ -13,12 +13,12 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Affiliate\Model\ReferrerInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-
 
 /**
  * Order entity.
@@ -33,6 +33,13 @@ class Order extends Cart implements OrderInterface
      * @var UserInterface
      */
     protected $user;
+
+    /**
+     * Referrer.
+     *
+     * @var ReferrerInterface
+     */
+    protected $referrer;
 
     /**
      * Order shipping address.
@@ -134,6 +141,7 @@ class Order extends Cart implements OrderInterface
         $this->user = $user;
         if (null !== $this->user) {
             $this->email = $this->user->getEmail();
+            $this->referrer = $this->user->getReferrer();
         }
 
         return $this;
@@ -549,5 +557,23 @@ class Order extends Cart implements OrderInterface
     public function getPromotions()
     {
         return $this->promotions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferrer(ReferrerInterface $referrer)
+    {
+        $this->referrer = $referrer;
+
+        return $this;
     }
 }

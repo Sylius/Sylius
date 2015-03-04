@@ -11,21 +11,24 @@
 
 namespace Sylius\Component\Affiliate\Model;
 
-interface AffiliateAwareInterface
+/**
+ * @author Joseph Bielawski <stloyd@gmail.com>
+ */
+interface ReferrerAwareInterface
 {
     /**
-     * Get affiliate.
+     * Get referrer.
      *
-     * @return AffiliateInterface
+     * @return null|ReferrerInterface
      */
-    public function getAffiliate();
+    public function getReferrer();
 
     /**
-     * Set affiliate.
+     * Set referrer.
      *
-     * @param AffiliateInterface $affiliate
+     * @param ReferrerInterface $referrer
      *
      * @return self
      */
-    public function setAffiliate(AffiliateInterface $affiliate = null);
+    public function setReferrer(ReferrerInterface $referrer);
 }

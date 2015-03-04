@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_account_affiliate_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.affiliate:indexAction
+
+sylius_account_affiliate_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.frontend.account.affiliate:createAction
+
+sylius_account_affiliate_history:
+    path: /history
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.affiliate:historyAction
+
+sylius_account_affiliate_referrals:
+    path: /referrals
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.frontend.account.affiliate:referralsAction

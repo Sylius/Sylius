@@ -1,0 +1,9 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+
+<h4>{{ 'sylius.account.affiliate.history.title'|trans }}</h4>
+
+{% include "SyliusWebBundle:Frontend/Account:Affiliate/_list.html.twig" %}
+
+{% endblock %}

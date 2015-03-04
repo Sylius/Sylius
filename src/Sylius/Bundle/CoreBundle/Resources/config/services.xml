@@ -17,6 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.settings_schema.affiliate.class">Sylius\Bundle\CoreBundle\Settings\AffiliateSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
@@ -97,6 +98,9 @@
 
     <services>
         <!-- settings schemas -->
+        <service id="sylius.settings_schema.affiliate" class="%sylius.settings_schema.affiliate.class%">
+            <tag name="sylius.settings_schema" namespace="affiliate" />
+        </service>
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">
                 <argument key="currency">%sylius.money.currency%</argument>
