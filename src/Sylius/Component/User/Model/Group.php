@@ -21,19 +21,63 @@ namespace Sylius\Component\User\Model;
  */
 class Group implements GroupInterface
 {
+    /**
+     * @var int
+     */
     protected $id;
+    /**
+     * @var string
+     */
     protected $name;
-    protected $roles;
+    /**
+     * @var array
+     */
+    protected $roles = array();
 
-    public function __construct()
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
     {
-        $this->roles = array();
+        return $this->id;
     }
 
     /**
-     * @param string $role
-     *
-     * @return Group
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRole($role)
+    {
+        return in_array(strtoupper($role), $this->roles, true);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function addRole($role)
     {
@@ -44,35 +88,8 @@ class Group implements GroupInterface
         return $this;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
     /**
-     * @param string $role
-     *
-     * @return boolean
-     */
-    public function hasRole($role)
-    {
-        return in_array(strtoupper($role), $this->roles, true);
-    }
-
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
-     * @param string $role
-     *
-     * @return Group
+     * {@inheritdoc}
      */
     public function removeRole($role)
     {
@@ -85,21 +102,7 @@ class Group implements GroupInterface
     }
 
     /**
-     * @param string $name
-     *
-     * @return Group
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @param array $roles
-     *
-     * @return Group
+     * {@inheritdoc}
      */
     public function setRoles(array $roles)
     {

@@ -12,18 +12,18 @@ namespace Sylius\Bundle\UserBundle\Form\EventListener;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CanonicalizerFormListener implements EventSubscriberInterface
 {
-    public function __construct(CanonicalizerInterface $canonicalizer
-        ) {
+    public function __construct(CanonicalizerInterface $canonicalizer)
+    {
         $this->canonicalizer = $canonicalizer;
     }
 

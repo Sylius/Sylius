@@ -23,20 +23,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class UserDeleteListener
 {
     protected $securityContext;
     protected $session;
-    protected $router;
-    protected $redirectTo;
 
-    public function __construct(SecurityContext $securityContext, UrlGeneratorInterface $router, SessionInterface $session, $redirectTo)
+    public function __construct(SecurityContext $securityContext, SessionInterface $session)
     {
         $this->securityContext = $securityContext;
         $this->session = $session;
-        $this->router = $router;
-        $this->redirectTo = $redirectTo;
     }
 
     public function deleteUser(ResourceEvent $event)
@@ -50,9 +47,9 @@ class UserDeleteListener
             );
         }
 
-        if ($this->securityContext->getToken()->getUsername() === $user->getUsernameCanonical()) {
+        if (($token = $this->securityContext->getToken()) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
             $event->stopPropagation();
-            $this->session->getBag('flashes')->add("error", "Cannot remove currently logged user.");
+            $this->session->getBag('flashes')->add('error', 'Cannot remove currently logged user.');
         }
     }
 }

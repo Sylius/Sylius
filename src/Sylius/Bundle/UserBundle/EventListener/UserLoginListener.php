@@ -28,11 +28,6 @@ class UserLoginListener
      */
     protected $userLogin;
 
-    /**
-     * @var PasswordUpdaterInterface
-     */
-    protected $passwordUpdater;
-
     public function __construct(UserLoginInterface $userLogin)
     {
         $this->userLogin = $userLogin;

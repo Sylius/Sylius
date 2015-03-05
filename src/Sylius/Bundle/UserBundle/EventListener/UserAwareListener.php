@@ -50,5 +50,7 @@ class UserAwareListener
         if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->securityContext->getToken()->getUser();
         }
+
+        return null;
     }
 }

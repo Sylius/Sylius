@@ -27,7 +27,7 @@ class CanonicalizerListener
      */
     protected $canonicalizer;
 
-    function __construct(CanonicalizerInterface $canonicalizer)
+    public function __construct(CanonicalizerInterface $canonicalizer)
     {
         $this->canonicalizer = $canonicalizer;
     }

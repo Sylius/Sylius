@@ -22,13 +22,6 @@ namespace Sylius\Component\User\Model;
 interface GroupInterface
 {
     /**
-     * @param string $role
-     *
-     * @return self
-     */
-    public function addRole($role);
-
-    /**
      * @return integer
      */
     public function getId();
@@ -39,11 +32,11 @@ interface GroupInterface
     public function getName();
 
     /**
-     * @param string $role
+     * @param string $name
      *
-     * @return boolean
+     * @return self
      */
-    public function hasRole($role);
+    public function setName($name);
 
     /**
      * @return array
@@ -55,14 +48,21 @@ interface GroupInterface
      *
      * @return self
      */
-    public function removeRole($role);
+    public function addRole($role);
 
     /**
-     * @param string $name
+     * @param string $role
      *
      * @return self
      */
-    public function setName($name);
+    public function removeRole($role);
+
+    /**
+     * @param string $role
+     *
+     * @return boolean
+     */
+    public function hasRole($role);
 
     /**
      * @param array $roles

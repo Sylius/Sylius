@@ -21,6 +21,7 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
  * User update listener.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class PasswordUpdaterListener
 {
@@ -29,18 +30,41 @@ class PasswordUpdaterListener
      */
     protected $passwordUpdater;
 
-    function __construct(PasswordUpdaterInterface $passwordUpdater)
+    /**
+     * @param PasswordUpdaterInterface $passwordUpdater
+     */
+    public function __construct(PasswordUpdaterInterface $passwordUpdater)
     {
         $this->passwordUpdater = $passwordUpdater;
     }
 
-    public function updatePassword(UserInterface $user)
+    /**
+     * @param UserInterface $user
+     */
+    public function updateUserPassword(UserInterface $user)
     {
         if (null !== $user->getPlainPassword()) {
             $this->passwordUpdater->updatePassword($user);
         }
     }
 
+    /**
+     * @param LifecycleEventArgs $event
+     */
+    protected function updatePassword(LifecycleEventArgs $event)
+    {
+        $item = $event->getEntity();
+
+        if (!$item instanceof UserInterface) {
+            return;
+        }
+
+        $this->updateUserPassword($item);
+    }
+
+    /**
+     * @param GenericEvent $event
+     */
     public function genericEventUpdater(GenericEvent $event)
     {
         $user = $event->getSubject();
@@ -52,28 +76,22 @@ class PasswordUpdaterListener
             );
         }
 
-        $this->updatePassword($user);
+        $this->updateUserPassword($user);
     }
 
+    /**
+     * @param LifecycleEventArgs $event
+     */
     public function prePersist(LifecycleEventArgs $event)
     {
-        $item = $event->getEntity();
-
-        if (!$item instanceof UserInterface) {
-            return;
-        }
-
-        $this->updatePassword($item);
+        $this->updatePassword($event);
     }
 
+    /**
+     * @param LifecycleEventArgs $event
+     */
     public function preUpdate(LifecycleEventArgs $event)
     {
-        $item = $event->getEntity();
-
-        if (!$item instanceof UserInterface) {
-            return;
-        }
-
-        $this->updatePassword($item);
+        $this->updatePassword($event);
     }
 }
