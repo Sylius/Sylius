@@ -28,6 +28,9 @@ class ProductTranslationType extends AbstractResourceType
             ->add('name', 'text', array(
                 'label' => 'sylius.form.product.name'
             ))
+            ->add('shortDescription', 'textarea', array(
+                'label' => 'sylius.form.product.short_description'
+            ))
             ->add('description', 'textarea', array(
                 'label' => 'sylius.form.product.description'
             ))
