@@ -11,19 +11,20 @@
 
 namespace spec\Sylius\Bundle\UserBundle\OAuth;
 
-use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class UserProviderSpec extends ObjectBehavior
 {
-    function let(UserManagerInterface $userManager, EntityRepository $oauthRepository)
+    function let(RepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager)
     {
-        $this->beConstructedWith($userManager, $oauthRepository);
+        $this->beConstructedWith($userRepository, $oauthRepository, $userManager);
     }
 
     function it_is_initializable()
@@ -35,6 +36,12 @@ class UserProviderSpec extends ObjectBehavior
     {
         $this->shouldImplement('HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface');
     }
+
+    function it_implements_account_connector_interface()
+    {
+        $this->shouldImplement('HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface');
+    }
+
 
     function it_should_connect_oauth_account_with_given_user(
         $userManager,
@@ -59,7 +66,8 @@ class UserProviderSpec extends ObjectBehavior
 
         $user->addOAuthAccount($oauth)->shouldBeCalled();
 
-        $userManager->updateUser($user)->shouldBeCalled();
+        $userManager->persist($user)->shouldBeCalled();
+        $userManager->flush($user)->shouldBeCalled();
 
         $this->connect($user, $response);
     }
@@ -84,6 +92,7 @@ class UserProviderSpec extends ObjectBehavior
 
     function it_should_update_user_when_he_was_found_by_email(
         $userManager,
+        $userRepository,
         $oauthRepository,
         UserInterface $user,
         UserResponseInterface $response,
@@ -100,7 +109,7 @@ class UserProviderSpec extends ObjectBehavior
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
         $oauthRepository->createNew()->willReturn($oauth);
 
-        $userManager->findUserByEmail('username@email')->willReturn($user);
+        $userRepository->findOneBy(array('email' => 'username@email'))->willReturn($user);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
@@ -108,13 +117,15 @@ class UserProviderSpec extends ObjectBehavior
 
         $user->addOAuthAccount($oauth)->shouldBeCalled();
 
-        $userManager->updateUser($user)->shouldBeCalled();
+        $userManager->persist($user)->shouldBeCalled();
+        $userManager->flush($user)->shouldBeCalled();
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }
 
     function it_should_create_new_user_when_none_was_found(
         $userManager,
+        $userRepository,
         $oauthRepository,
         UserInterface $user,
         UserResponseInterface $response,
@@ -132,7 +143,7 @@ class UserProviderSpec extends ObjectBehavior
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
         $oauthRepository->createNew()->willReturn($oauth);
 
-        $userManager->createUser()->willReturn($user);
+        $userRepository->createNew()->willReturn($user);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
@@ -144,7 +155,8 @@ class UserProviderSpec extends ObjectBehavior
         $user->setEnabled(true)->shouldBeCalled();
         $user->addOAuthAccount($oauth)->shouldBeCalled();
 
-        $userManager->updateUser($user)->shouldBeCalled();
+        $userManager->persist($user)->shouldBeCalled();
+        $userManager->flush($user)->shouldBeCalled();
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
     }

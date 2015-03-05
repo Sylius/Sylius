@@ -30,6 +30,7 @@
 
         <parameter key="sylius.provider.name_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameProvider</parameter>
         <parameter key="sylius.provider.name_or_email_provider.class">Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider</parameter>
+        <parameter key="sylius.provider.oauth.user_provider.class">Sylius\Bundle\UserBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.provider.email_provider.class">Sylius\Bundle\UserBundle\Provider\EmailProvider</parameter>
 
         <parameter key="sylius.form.type.user_login.class">Sylius\Bundle\UserBundle\Form\Type\UserLoginType</parameter>
@@ -111,7 +112,8 @@
         </service>
         <service id="sylius.listener.user_mailer_listener" class="%sylius.listener.user_mailer_listener.class%">
             <argument type="service" id="sylius.email_sender" />
-            <tag name="kernel.event_listener" event="sylius.user.password_reset.request" method="sendPasswordResetEmail" />
+            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
+            <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
         </service>
         <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
             <argument type="service" id="security.context" />
@@ -135,6 +137,12 @@
         </service>
         <service id="sylius.provider.name_provider" class="%sylius.provider.name_provider.class%">
             <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.user.canonicalizer" />
+        </service>
+        <service id="sylius.oauth.user_provider" class="%sylius.provider.oauth.user_provider.class%">
+            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.repository.user_oauth" />
+            <argument type="service" id="sylius.manager.user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
 

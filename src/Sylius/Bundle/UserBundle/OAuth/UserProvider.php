@@ -11,21 +11,25 @@
 
 namespace Sylius\Bundle\UserBundle\OAuth;
 
-use FOS\UserBundle\Model\UserManagerInterface;
+use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
-use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Model\UserOAuthInterface;
+use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
  *
  * @author Fabian Kiss <fabian.kiss@ymc.ch>
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserProvider extends FOSUBUserProvider
+class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
     /**
      * @var RepositoryInterface
@@ -33,16 +37,29 @@ class UserProvider extends FOSUBUserProvider
     protected $oauthRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    protected $userRepository;
+
+    /**
+     * @var ObjectManager
+     */
+    protected $userManager;
+
+    /**
      * Constructor.
      *
-     * @param UserManagerInterface $userManager     FOSUB user provider.
-     * @param RepositoryInterface  $oauthRepository
+     * @param RepositoryInterface    $userRepository
+     * @param RepositoryInterface    $oauthRepository
+     * @param ObjectManager          $userManager
+     * @param CanonicalizerInterface $canonicalizer
      */
-    public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository)
+    public function __construct(RepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
     {
-        parent::__construct($userManager, array());
-
+        parent::__construct($userRepository, $canonicalizer);
+        $this->userRepository   = $userRepository;
         $this->oauthRepository = $oauthRepository;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -60,7 +77,7 @@ class UserProvider extends FOSUBUserProvider
         }
 
         if (null !== $response->getEmail()) {
-            $user = $this->userManager->findUserByEmail($response->getEmail());
+            $user = $this->userRepository->findOneBy(array('email' => $response->getEmail()));
             if (null !== $user) {
                 return $this->updateUserByOAuthUserResponse($user, $response);
             }
@@ -87,7 +104,7 @@ class UserProvider extends FOSUBUserProvider
      */
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = $this->userManager->createUser();
+        $user = $this->userRepository->createNew();
 
         // set default values taken from OAuth sign-in provider account
         if (null !== $email = $response->getEmail()) {
@@ -109,12 +126,12 @@ class UserProvider extends FOSUBUserProvider
     /**
      * Attach OAuth sign-in provider account to existing user
      *
-     * @param SyliusUserInterface   $user
+     * @param UserInterface   $user
      * @param UserResponseInterface $response
      *
-     * @return SyliusUserInterface
+     * @return UserInterface
      */
-    protected function updateUserByOAuthUserResponse(SyliusUserInterface $user, UserResponseInterface $response)
+    protected function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
     {
         $oauth = $this->oauthRepository->createNew();
         $oauth->setIdentifier($response->getUsername());
@@ -124,7 +141,8 @@ class UserProvider extends FOSUBUserProvider
         /* @var $user SyliusUserInterface */
         $user->addOAuthAccount($oauth);
 
-        $this->userManager->updateUser($user);
+        $this->userManager->persist($user);
+        $this->userManager->flush($user);
 
         return $user;
     }

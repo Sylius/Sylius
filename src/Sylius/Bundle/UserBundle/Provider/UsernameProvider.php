@@ -16,8 +16,8 @@ namespace Sylius\Bundle\UserBundle\Provider;
  */
 class UsernameProvider extends UserProvider
 {
-    protected function findUser($usernameOrEmail)
+    protected function findUser($username)
     {
-        return $this->userRepository->findOneBy(array('usernameCanonical' => $usernameOrEmail));
+        return $this->userRepository->findOneBy(array('usernameCanonical' => $username));
     }
 }

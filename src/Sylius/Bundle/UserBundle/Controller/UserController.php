@@ -114,13 +114,13 @@ class UserController extends ResourceController
     public function requestPasswordResetTokenAction(Request $request)
     {
         $generator = $this->get('sylius.user.token_provider');
-        return $this->prepereResetPasswordRequest($request, $generator);
+        return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
     public function requestPasswordResetPinAction(Request $request)
     {
         $generator = $this->get('sylius.user.pin_provider');
-        return $this->prepereResetPasswordRequest($request, $generator);
+        return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
 
@@ -171,13 +171,13 @@ class UserController extends ResourceController
 
             $this->domainManager->update($user);
 
-            $url = $this->generateUrl('sylius_user_security_login');
 
             $this->addFlash('success', 'sylius.account.password.change_success');
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($user, 204));
             }
+            $url = $this->generateUrl('sylius_user_security_login');
 
             return new RedirectResponse($url);
         }
@@ -195,7 +195,7 @@ class UserController extends ResourceController
         );
     }
 
-    protected function prepereResetPasswordRequest(Request $request, TokenProviderInterface $generator)
+    protected function prepereResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
     {
         $passwordReset = new PasswordReset();
         $form = $this->createResourceForm(new UserRequestPasswordResetType(), $passwordReset);
@@ -214,7 +214,7 @@ class UserController extends ResourceController
                 $this->domainManager->update($user);
 
                 $event = new GenericEvent($user);
-                $dispatcher->dispatch(UserEvents::REQUEST_PASSWORD_RESET, $event);
+                $dispatcher->dispatch($senderEvent, $event);
 
                 if ($this->config->isApiRequest()) {
                     return $this->handleView($this->view($user, 204));

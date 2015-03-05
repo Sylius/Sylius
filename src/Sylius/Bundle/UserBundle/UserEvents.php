@@ -17,12 +17,19 @@ namespace Sylius\Bundle\UserBundle;
 final class UserEvents
 {
     /**
-     * The REQUEST_PASSWORD_RESET event occurs when the resetting process is initialized.
+     * The REQUEST_RESET_PASSWORD_TOKEN event occurs when the resetting process is initialized and user requested for confirmation token.
      *
      * This event allows you to send mail with verification token.
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
-    const REQUEST_PASSWORD_RESET = 'sylius.user.password_reset.request';
+    const REQUEST_RESET_PASSWORD_TOKEN = 'sylius.user.password_reset.request.token';
+    /**
+     * The REQUEST_RESET_PASSWORD_PIN event occurs when the resetting process is initialized and user requested for confirmation pin.
+     *
+     * This event allows you to send mail with verification pin.
+     * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
+     */
+    const REQUEST_RESET_PASSWORD_PIN = 'sylius.user.password_reset.request.pin';
 
     /**
      * The RESETTING_RESET_SUCCESS event occurs when the resetting form is submitted successfully.

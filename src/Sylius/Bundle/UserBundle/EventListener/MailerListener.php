@@ -34,7 +34,7 @@ class MailerListener
         $this->emailSender = $emailSender;
     }
 
-    public function sendPasswordResetEmail(GenericEvent $event)
+    public function sendResetPasswordTokenEmail(GenericEvent $event)
     {
         $user = $event->getSubject();
 
@@ -45,7 +45,26 @@ class MailerListener
             );
         }
 
-        $this->emailSender->send(Emails::PASSWORD_RESET,
+        $this->emailSender->send(Emails::RESET_PASSWORD_TOKEN,
+            array($user->getEmail()),
+                array(
+                    'user' => $user,
+                )
+            );
+    }
+
+    public function sendResetPasswordPinEmail(GenericEvent $event)
+    {
+        $user = $event->getSubject();
+
+        if (!$user instanceof UserInterface) {
+            throw new UnexpectedTypeException(
+                $user,
+                'Sylius\Component\User\Model\UserInterface'
+            );
+        }
+
+        $this->emailSender->send(Emails::RESET_PASSWORD_PIN,
             array($user->getEmail()),
                 array(
                     'user' => $user,

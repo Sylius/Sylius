@@ -17,7 +17,6 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -65,7 +64,7 @@ abstract class UserProvider implements UserProviderInterface
         return $this->userRepository->find($user->getId());
     }
 
-    protected abstract function findUser($usernameOrEmail);
+    protected abstract function findUser($uniqueIdentifier);
 
     public function supportsClass($class)
     {

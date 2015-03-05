@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Mailer;
+namespace Sylius\Bundle\UserBundle\Provider;
+
+use Symfony\Component\Security\Core\User\UserProviderInterface as BaseUserProviderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class Emails
+interface UserProviderInterface extends BaseUserProviderInterface
 {
-    const RESET_PASSWORD_TOKEN  = 'reset_password_token';
-    const RESET_PASSWORD_PIN  = 'reset_password_pin';
 }
