@@ -2,6 +2,19 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    imagine_block:
+        name:
+            not_blank: Please enter imagine block name.
+        label:
+            not_blank: Please enter imagine block label.
+        filter:
+            not_blank: Please enter imagine block filter.
+        image:
+            not_blank: Please choose imagine block image.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
     menu:
         name:
             not_blank: Please enter menu name.
@@ -43,6 +56,15 @@ sylius:
             not_blank: Please enter simple block name.
         title:
             not_blank: Please enter simple block title.
+        body:
+            not_blank: Please enter simple block body.
+        start_date:
+            invalid_date: Publish start date is invalid.
+        end_date:
+            invalid_date: Publish end date is invalid.
+    string_block:
+        name:
+            not_blank: Please enter simple block name.
         body:
             not_blank: Please enter simple block body.
         start_date:

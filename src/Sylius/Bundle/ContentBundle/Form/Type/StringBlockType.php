@@ -30,9 +30,6 @@ class StringBlockType extends AbstractResourceType
             ->add('parentDocument', null, array(
                 'label' => 'sylius.form.simple_block.parent'
             ))
-            ->add('id', 'text', array(
-                'label' => 'sylius.form.string_block.id'
-            ))
             ->add('name', 'text', array(
                 'label' => 'sylius.form.string_block.name'
             ))
