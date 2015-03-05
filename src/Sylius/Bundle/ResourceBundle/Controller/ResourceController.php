@@ -451,14 +451,22 @@ class ResourceController extends FOSRestController
 
     protected function isGrantedOr403($permission)
     {
-        if (!$this->container->has('sylius.authorization_checker')) {
-            return true;
-        }
-
         $permission = $this->config->getPermission($permission);
-
-        if ($permission && !$this->get('sylius.authorization_checker')->isGranted(sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission))) {
-            throw new AccessDeniedHttpException();
+        if ($permission) {
+            // Check access in Symfony security, if fail use Sylius one
+            if (!$this->get('security.context')->isGranted($permission)) {
+                if ($this->container->has('sylius.authorization_checker')) {
+                    if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission))) {
+                        throw new AccessDeniedHttpException();
+                    }
+                    
+                    return true;
+                }
+                
+                throw new AccessDeniedHttpException();
+            }
         }
+
+        return true;
     }
 }
