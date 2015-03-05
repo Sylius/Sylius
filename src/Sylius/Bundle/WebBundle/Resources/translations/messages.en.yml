@@ -193,6 +193,7 @@ sylius:
             index: Inventory
         locale:
             index: Locales
+        marketing: Marketing
         menu:
             index: Menus
         menu_node:
@@ -232,6 +233,7 @@ sylius:
             index: Shipping Categories
         shipping_method:
             index: Shipping Methods
+        support: Support
         tax_category:
             index: Tax Categories
         tax_rate:

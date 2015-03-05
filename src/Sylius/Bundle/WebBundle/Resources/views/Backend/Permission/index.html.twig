@@ -6,7 +6,7 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.permission.index'|trans }}</a></li>
 </ol>
 {% endblock %}
@@ -16,7 +16,7 @@
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_permission_create'), 'sylius.permission.create'|trans) }}
     </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.permission.index_header'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-lock"></i> {{ 'sylius.permission.index_header'|trans|raw }}</h1>
 </div>
 
 {{ pagination(permissions) }}
