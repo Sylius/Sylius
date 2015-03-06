@@ -30,8 +30,27 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
      */
     protected function getQueryBuilder()
     {
-        return parent::getQueryBuilder()
-            ->leftJoin($this->getAlias().'.translations', 'translation');
+        $queryBuilder = parent::getQueryBuilder();
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin($this->getAlias() . '.translations', 'translation')
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getCollectionQueryBuilder()
+    {
+        $queryBuilder = parent::getCollectionQueryBuilder();
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin($this->getAlias() . '.translations', 'translation')
+        ;
+
+        return $queryBuilder;
     }
 
     /**
