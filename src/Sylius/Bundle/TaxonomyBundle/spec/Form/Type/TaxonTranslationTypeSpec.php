@@ -54,7 +54,7 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('description', 'text', Argument::any())
+            ->add('description', 'textarea', Argument::any())
             ->willReturn($builder)
         ;
 
