@@ -15,13 +15,14 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UsernameProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
         $this->beConstructedWith($userRepository, $canonicalizer);
     }

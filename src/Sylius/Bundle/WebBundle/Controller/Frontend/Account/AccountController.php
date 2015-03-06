@@ -14,7 +14,6 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sylius\Component\User\Model\UserInterface;
 
 /**

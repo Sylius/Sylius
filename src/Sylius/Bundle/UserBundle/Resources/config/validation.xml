@@ -16,17 +16,11 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\User\Model\User">
-        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
-            <option name="fields">emailCanonical</option>
-            <option name="message">sylius.user.email.already_used</option>
-            <option name="groups">sylius</option>
-        </constraint>
-
+    <class name="Sylius\Component\User\Model\Customer">
         <property name="firstName">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.first_name.not_blank</option>
-                <option name="groups">sylius</option>   
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
@@ -68,10 +62,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+    </class>
 
+    <class name="Sylius\Component\User\Model\User">
         <property name="plainPassword">
             <constraint name="NotBlank">
-                <option name="groups">ProfileAdd</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

@@ -28,8 +28,10 @@ class GroupSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Model\GroupInterface');
     }
 
-    public function it_extends_FOS_group_model()
+    public function it_sets_name()
     {
-        $this->shouldHaveType('Sylius\Component\User\Model\Group');
+        $this->setName('testGroup');
+
+        $this->getName()->shouldReturn('testGroup');
     }
 }

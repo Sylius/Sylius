@@ -13,6 +13,7 @@ namespace Sylius\Component\User\Security\Generator;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class TokenGenerator implements GeneratorInterface
 {
@@ -21,12 +22,17 @@ class TokenGenerator implements GeneratorInterface
      */
     public function generate($length)
     {
-        if (!is_numeric($length)) {
-            throw new InvalidArgumentException('The value of token length has to be an integer. The value that you provide is'.$length);
+        if (!is_int($length)) {
+            throw new \InvalidArgumentException('The value of token length has to be an integer.');
+        }
+        if ((0 >= $length) || (40 < $length)) {
+            throw new \InvalidArgumentException('The value of token length has to be in range between 1 to 40.');
         }
 
         $hash = sha1(microtime(true));
-        return substr($hash, mt_rand(0, 33), $length);
+        // 40 is a length of sha1
+        $startPosition = min(40 - $length, mt_rand(0, 33));
+        return substr($hash, $startPosition, $length);
     }
 
 }

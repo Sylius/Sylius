@@ -35,28 +35,6 @@ class UserSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Model\GroupableInterface');
     }
 
-    public function it_sets_user_first_name()
-    {
-        $this->setFirstName('Edward');
-
-        $this->getFirstName()->shouldReturn('Edward');
-    }
-
-    public function it_sets_user_last_name()
-    {
-        $this->setLastName('Thatch');
-
-        $this->getLastName()->shouldReturn('Thatch');
-    }
-
-    public function it_can_get_full_name()
-    {
-        $this->setFirstName('Edward');
-        $this->setLastName('Kenway');
-
-        $this->getFullName()->shouldReturn('Edward Kenway');
-    }
-
     public function it_should_return_true_if_user_is_deleted()
     {
         $deletedAt = new \DateTime('yesterday');

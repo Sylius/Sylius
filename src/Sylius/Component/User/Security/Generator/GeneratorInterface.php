@@ -19,7 +19,8 @@ interface GeneratorInterface
     /**
      * Generates some random string
      * 
-     * @param $length determines length of generated token 
+     * @param int $length determines length of a generated string
+     * @return string
      */
     public function generate($length);
 }

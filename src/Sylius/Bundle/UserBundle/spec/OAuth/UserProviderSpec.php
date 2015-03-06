@@ -14,17 +14,20 @@ namespace spec\Sylius\Bundle\UserBundle\OAuth;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 class UserProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager)
+    function let(UserRepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith($userRepository, $oauthRepository, $userManager);
+        $this->beConstructedWith($userRepository, $oauthRepository, $userManager, $canonicalizer);
     }
 
     function it_is_initializable()

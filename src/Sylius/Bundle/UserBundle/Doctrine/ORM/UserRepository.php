@@ -14,13 +14,15 @@ namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * User repository.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserRepository extends EntityRepository
+class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     /**
      * Create filter paginator.
@@ -153,6 +155,22 @@ class UserRepository extends EntityRepository
             ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
             ->setParameter('from', $from)
             ->setParameter('to', $to)
+        ;
+    }
+
+    public function findOneByEmail($email)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->leftJoin($this->getAlias().'.customer', 'customer')
+            ->andWhere($queryBuilder->expr()->eq('customer.emailCanonical', ':email'))
+            ->setParameter('email', $email)
+        ;
+
+        return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

@@ -34,14 +34,25 @@ class MailerListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\MailerListener');
     }
 
-    function it_send_password_reset_mail($sender, GenericEvent $event, UserInterface $user)
+    function it_send_password_reset_token_mail($sender, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 
         $user->getEmail()->willReturn('test@example.com');
 
-        $sender->send('password_reset', array('test@example.com'), Argument::any())->shouldBeCalled();
+        $sender->send('reset_password_token', array('test@example.com'), Argument::any())->shouldBeCalled();
 
-        $this->sendPasswordResetEmail($event);
+        $this->sendResetPasswordTokenEmail($event);
+    }
+
+    function it_send_password_reset_pin_mail($sender, GenericEvent $event, UserInterface $user)
+    {
+        $event->getSubject()->willReturn($user);
+
+        $user->getEmail()->willReturn('test@example.com');
+
+        $sender->send('reset_password_pin', array('test@example.com'), Argument::any())->shouldBeCalled();
+
+        $this->sendResetPasswordPinEmail($event);
     }
 }

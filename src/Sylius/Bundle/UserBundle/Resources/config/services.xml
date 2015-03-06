@@ -120,9 +120,7 @@
         </service>
         <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
             <argument type="service" id="security.context" />
-            <argument type="service" id="router" />
             <argument type="service" id="session" />
-            <argument>sylius_backend_user_index</argument>
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
         </service>
 

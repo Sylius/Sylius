@@ -23,18 +23,23 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface CustomerInterface extends TimestampableInterface, SoftDeletableInterface
+interface CustomerInterface extends UserAwareInterface, TimestampableInterface, SoftDeletableInterface
 {
+    const UNKNOWN_GENDER = 0;
+    const MALE_GENDER = 1;
+    const FEMALE_GENDER = 2;
+
     /**
-     * Gets email.
-     *
+     * @return int
+     */
+    public function getId();
+
+    /**
      * @return string
      */
     public function getEmail();
 
     /**
-     * Sets the email.
-     *
      * @param string $email
      * @return self
      */
@@ -48,8 +53,6 @@ interface CustomerInterface extends TimestampableInterface, SoftDeletableInterfa
     public function getEmailCanonical();
 
     /**
-     * Sets the canonical email.
-     *
      * @param string $emailCanonical
      * @return self
      */
@@ -63,32 +66,56 @@ interface CustomerInterface extends TimestampableInterface, SoftDeletableInterfa
     public function getFullName();
 
     /**
-     * Gets first name.
-     *
      * @return string
      */
     public function getFirstName();
 
     /**
-     * Sets first name
-     *
      * @param string $firstName
      * @return self
      */
     public function setFirstName($firstName);
 
     /**
-     * Gets last name.
-     *
      * @return string
      */
     public function getLastName();
 
     /**
-     * Sets last name.
-     *
      * @param string $lastName
      * @return self
      */
     public function setLastName($lastName);
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthday();
+
+    /**
+     * @param \DateTime $birthday
+     * @return self
+     */
+    public function setBirthday(\DateTime $birthday);
+
+    /**
+     * @return int
+     */
+    public function getGender();
+
+    /**
+     * @param int $gender
+     * @return self
+     */
+    public function setGender($gender);
+
+    /**
+     * @return bool
+     */
+    public function isMale();
+
+    /**
+     * @return bool
+     */
+    public function isFemale();
 }

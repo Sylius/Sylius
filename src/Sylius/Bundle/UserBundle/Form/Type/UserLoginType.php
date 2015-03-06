@@ -26,7 +26,7 @@ class UserLoginType extends AbstractType
     {
         $builder
             ->add('_username', 'text', array(
-                'label' => 'sylius.form.user.username',
+                'label' => 'sylius.form.user.email',
             ))
             ->add('_password', 'password', array(
                 'label' => 'sylius.form.user.password.label',

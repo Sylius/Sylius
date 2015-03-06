@@ -16,6 +16,7 @@ use Prophecy\Argument;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class TokenGeneratorSpec extends ObjectBehavior
 {
@@ -29,8 +30,44 @@ class TokenGeneratorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Security\Generator\GeneratorInterface');
     }
 
-    public function it_generates_random_token()
+    public function it_throws_exception_when_not_int_given()
     {
+        $this->shouldThrow('InvalidArgumentException')->during('generate', ['string']);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [new \stdClass()]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [1.2]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [array()]);
+    }
+
+    public function it_throws_exception_when_incorrect_length_provided()
+    {
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [-1]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [0]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [41]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [123]);
+    }
+
+    public function it_generates_random_string()
+    {
+        $this->generate(1)->shouldBeString();
+        $this->generate(7)->shouldBeString();
         $this->generate(16)->shouldBeString();
+        $this->generate(40)->shouldBeString();
+    }
+
+    public function it_generates_random_string_with_given_length()
+    {
+        $this->generate(1)->shouldHaveLength(1);
+        $this->generate(7)->shouldHaveLength(7);
+        $this->generate(16)->shouldHaveLength(16);
+        $this->generate(40)->shouldHaveLength(40);
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'haveLength' => function ($subject, $key) {
+                return $key === strlen($subject);
+            },
+        ];
     }
 }

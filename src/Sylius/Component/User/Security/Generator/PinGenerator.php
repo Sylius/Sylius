@@ -13,29 +13,31 @@ namespace Sylius\Component\User\Security\Generator;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * 
- * This class provides numbered pin
+ * This class provides numeric pin
  */
 class PinGenerator implements GeneratorInterface
 {
     /**
-     * {@inheritDoc}
-     * @param $length has to be lowwer then 10 becouse of integer range
+     * Generates random string of numbers with given length
+     *
+     * @param int $length has to be lower then 10 because of integer range
+     * @return string
      */
     public function generate($length)
     {
-        if ($length >= 10) {
-            throw new InvalidArgumentException('The value of pin length can not be greater or equals to 10 because of an integer range. The value that you provide is'.$length);
+        if (!is_int($length)) {
+            throw new \InvalidArgumentException('The value of pin length has to be an integer.');
         }
-
-        if (!is_numeric($length)) {
-            throw new InvalidArgumentException('The value of pin length has to be an integer. The value that you provide is'.$length);
+        if ((0 >= $length) || (10 <= $length)) {
+            throw new \InvalidArgumentException('The value of pin length has to be in range between 1 to 9.');
         }
 
         $min = pow(10, $length - 1);
         $max = pow(10, $length) - 1;
-        
-        return mt_rand($min, $max);
+
+        return (string) mt_rand($min, $max);
     }
 
 }

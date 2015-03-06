@@ -27,15 +27,28 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class UserDeleteListener
 {
+    /**
+     * @var SecurityContext
+     */
     protected $securityContext;
+    /**
+     * @var SessionInterface
+     */
     protected $session;
 
+    /**
+     * @param SecurityContext $securityContext
+     * @param SessionInterface $session
+     */
     public function __construct(SecurityContext $securityContext, SessionInterface $session)
     {
         $this->securityContext = $securityContext;
         $this->session = $session;
     }
 
+    /**
+     * @param ResourceEvent $event
+     */
     public function deleteUser(ResourceEvent $event)
     {
         $user = $event->getSubject();

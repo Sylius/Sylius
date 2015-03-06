@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
-use Sylius\Component\User\Model\UserAwareInterface;
+use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
@@ -30,7 +30,7 @@ interface OrderInterface extends
     PaymentsSubjectInterface,
     PromotionCountableSubjectInterface,
     PromotionCouponsAwareSubjectInterface,
-    UserAwareInterface,
+    CustomerAwareInterface,
     ChannelAwareInterface
 {
     const CHECKOUT_STATE_CART       = 'cart';
@@ -39,6 +39,13 @@ interface OrderInterface extends
     const CHECKOUT_STATE_PAYMENT    = 'payment';
     const CHECKOUT_STATE_FINALIZE   = 'finalize';
     const CHECKOUT_STATE_COMPLETED  = 'completed';
+
+    /**
+     * Get user.
+     *
+     * @return null|UserInterface
+     */
+    public function getUser();
 
     /**
      * Get shipping address.

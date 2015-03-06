@@ -14,6 +14,8 @@
 namespace Sylius\Component\User\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\SoftDeletableInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -23,21 +25,41 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface UserInterface extends AdvancedUserInterface, \Serializable, CustomerInterface
+interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
 {
     const ROLE_DEFAULT = 'ROLE_USER';
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
 
     /**
-     * Returns the user unique id.
-     *
      * @return int
      */
     public function getId();
 
     /**
-     * Sets the username.
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * @param string $email
+     * @return self
+     */
+    public function setEmail($email);
+
+    /**
+     * Gets the canonical email in search and sort queries.
      *
+     * @return string
+     */
+    public function getEmailCanonical();
+
+    /**
+     * @param string $emailCanonical
+     * @return self
+     */
+    public function setEmailCanonical($emailCanonical);
+
+    /**
      * @param string $username
      *
      * @return self
@@ -52,8 +74,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, CustomerIn
     public function getUsernameCanonical();
 
     /**
-     * Sets the canonical username.
-     *
      * @param string $usernameCanonical
      *
      * @return self
@@ -61,15 +81,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, CustomerIn
     public function setUsernameCanonical($usernameCanonical);
 
     /**
-     * Gets the plain password.
-     *
      * @return string
      */
     public function getPlainPassword();
 
     /**
-     * Sets the plain password.
-     *
      * @param string $password
      *
      * @return self
@@ -120,15 +136,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, CustomerIn
     public function setSuperAdmin($boolean);
 
     /**
-     * Gets the confirmation token.
-     *
      * @return string
      */
     public function getConfirmationToken();
 
     /**
-     * Sets the confirmation token
-     *
      * @param string $confirmationToken
      *
      * @return self
@@ -195,8 +207,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, CustomerIn
     public function setRoles(array $roles);
 
     /**
-     * Adds a role to the user.
-     *
      * @param string $role
      *
      * @return self
@@ -204,8 +214,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, CustomerIn
     public function addRole($role);
 
     /**
-     * Removes a role to the user.
-     *
      * @param string $role
      *
      * @return self

@@ -18,6 +18,6 @@ class EmailProvider extends UserProvider
 {
     protected function findUser($email)
     {
-        return $this->userRepository->findOneBy(array('emailCanonical' => $email));
+        return $this->userRepository->findOneByEmail($email);
     }
 }

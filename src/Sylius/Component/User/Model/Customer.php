@@ -26,6 +26,11 @@ class Customer implements CustomerInterface
     protected $id;
 
     /**
+     * @var UserInterface
+     */
+    protected $user;
+
+    /**
      * @var string
      */
     protected $email;
@@ -44,6 +49,16 @@ class Customer implements CustomerInterface
      * @var string
      */
     protected $lastName;
+
+    /**
+     * @var \DateTime
+     */
+    protected $birthday;
+
+    /**
+     * @var int
+     */
+    protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
     /**
      * @var \DateTime
@@ -76,6 +91,24 @@ class Customer implements CustomerInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUser(UserInterface $user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -156,6 +189,58 @@ class Customer implements CustomerInterface
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBirthday(\DateTime $birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isMale()
+    {
+        return CustomerInterface::MALE_GENDER === $this->gender;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isFemale()
+    {
+        return CustomerInterface::FEMALE_GENDER === $this->gender;
     }
 
     /**

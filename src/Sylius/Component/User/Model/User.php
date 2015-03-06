@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\Collection;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class User implements UserInterface, GroupableInterface
+class User implements UserInterface, GroupableInterface, CustomerAwareInterface
 {
     /**
      * @var int
@@ -148,6 +148,22 @@ class User implements UserInterface, GroupableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCustomer(CustomerInterface $customer)
+    {
+        $this->customer = $customer;
     }
 
     /**
@@ -315,7 +331,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function isCredentialsNonExpired()
     {
-        return (null !== $this->credentialsExpireAt) && ((new \DateTime()) >= $this->credentialsExpireAt);
+        return (null === $this->credentialsExpireAt) || ((new \DateTime()) < $this->credentialsExpireAt);
     }
 
     /**
@@ -341,7 +357,7 @@ class User implements UserInterface, GroupableInterface
      */
     public function isAccountNonExpired()
     {
-        return (null !== $this->expiresAt) && ((new \DateTime()) >= $this->expiresAt);
+        return (null === $this->expiresAt) || ((new \DateTime()) < $this->expiresAt);
     }
 
     /**
@@ -475,7 +491,6 @@ class User implements UserInterface, GroupableInterface
     public function setEmail($email)
     {
         $this->customer->setEmail($email);
-        $this->username = $email;
 
         return $this;
     }
@@ -618,50 +633,6 @@ class User implements UserInterface, GroupableInterface
         if ($this->getGroups()->contains($group)) {
             $this->getGroups()->removeElement($group);
         }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFullName()
-    {
-        return $this->customer->getFullName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstName()
-    {
-        return $this->customer->getFirstName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFirstName($firstName)
-    {
-        $this->customer->setFirstName($firstName);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastName()
-    {
-        return $this->customer->getLastName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastName($lastName)
-    {
-        $this->customer->setLastName($lastName);
 
         return $this;
     }

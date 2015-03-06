@@ -16,88 +16,8 @@ use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
- * User interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface UserInterface extends BaseUserInterface, IdentityInterface
 {
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string $currency
-     */
-    public function setCurrency($currency);
-
-    /**
-     * Get orders.
-     *
-     * @return Collection|OrderInterface[]
-     */
-    public function getOrders();
-
-    /**
-     * Get billing address.
-     *
-     * @return AddressInterface
-     */
-    public function getBillingAddress();
-
-    /**
-     * Set billing address.
-     *
-     * @param AddressInterface $billingAddress
-     */
-    public function setBillingAddress(AddressInterface $billingAddress = null);
-
-    /**
-     * Get shipping address.
-     *
-     * @return AddressInterface
-     */
-    public function getShippingAddress();
-
-    /**
-     * Set shipping address.
-     *
-     * @param AddressInterface $shippingAddress
-     */
-    public function setShippingAddress(AddressInterface $shippingAddress = null);
-
-    /**
-     * Get addresses.
-     *
-     * @return Collection|AddressInterface[]
-     */
-    public function getAddresses();
-
-    /**
-     * Add address.
-     *
-     * @param AddressInterface $address
-     */
-    public function addAddress(AddressInterface $address);
-
-    /**
-     * Remove address.
-     *
-     * @param AddressInterface $address
-     */
-    public function removeAddress(AddressInterface $address);
-
-    /**
-     * Has address?
-     *
-     * @param AddressInterface $address
-     *
-     * @return bool
-     */
-    public function hasAddress(AddressInterface $address);
 }

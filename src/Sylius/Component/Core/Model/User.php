@@ -16,136 +16,20 @@ use Sylius\Component\User\Model\User as BaseUser;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
- * User model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class User extends BaseUser implements UserInterface
 {
-    protected $currency;
-    protected $orders;
+    /**
+     * @var ArrayCollection
+     */
     protected $authorizationRoles;
-    protected $billingAddress;
-    protected $shippingAddress;
-    protected $addresses;
 
     public function __construct()
     {
         parent::__construct();
-        $this->orders        = new ArrayCollection();
-        $this->addresses     = new ArrayCollection();
         $this->authorizationRoles = new ArrayCollection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrders()
-    {
-        return $this->orders;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setBillingAddress(AddressInterface $billingAddress = null)
-    {
-        $this->billingAddress = $billingAddress;
-
-        if (null !== $billingAddress && !$this->hasAddress($billingAddress)) {
-            $this->addAddress($billingAddress);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress()
-    {
-        return $this->billingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingAddress(AddressInterface $shippingAddress = null)
-    {
-        $this->shippingAddress = $shippingAddress;
-
-        if (null !== $shippingAddress && !$this->hasAddress($shippingAddress)) {
-            $this->addAddress($shippingAddress);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAddress()
-    {
-        return $this->shippingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAddress(AddressInterface $address)
-    {
-        if (!$this->hasAddress($address)) {
-            $this->addresses[] = $address;
-            $address->setUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAddress(AddressInterface $address)
-    {
-        $this->addresses->removeElement($address);
-        $address->setUser(null);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAddress(AddressInterface $address)
-    {
-        return $this->addresses->contains($address);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
     }
 
     /**

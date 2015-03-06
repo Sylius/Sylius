@@ -201,7 +201,7 @@ class UserController extends ResourceController
         $form = $this->createResourceForm(new UserRequestPasswordResetType(), $passwordReset);
 
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $user = $this->getRepository()->findOneBy(array('email' => $passwordReset->getEmail()));
+            $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
 
             if (null !== $user) {
                 $this->addFlash('success', 'sylius.account.password.reset.success');

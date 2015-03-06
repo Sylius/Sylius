@@ -15,13 +15,14 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class EmailProviderSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
         $this->beConstructedWith($userRepository, $canonicalizer);
     }
@@ -50,7 +51,7 @@ class EmailProviderSpec extends ObjectBehavior
     {
         $canonicalizer->canonicalize('test@user.com')->willReturn('test@user.com');
 
-        $userRepository->findOneBy(array('emailCanonical' => 'test@user.com'))->willReturn($user);
+        $userRepository->findOneByEmail('test@user.com')->willReturn($user);
 
         $this->loadUserByUsername('test@user.com')->shouldReturn($user);
     }

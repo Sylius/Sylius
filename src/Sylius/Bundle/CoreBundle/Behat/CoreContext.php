@@ -224,7 +224,7 @@ class CoreContext extends DefaultContext
 
     public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
     {
-        if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
+        if (null === $user = $this->getRepository('user')->findOneByEmail($email)) {
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
 

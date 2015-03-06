@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UserBundle\Provider;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,7 +34,7 @@ abstract class UserProvider implements UserProviderInterface
      */
     protected $canonicalizer;
 
-    public function __construct(RepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    public function __construct(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
         $this->userRepository = $userRepository;
         $this->canonicalizer = $canonicalizer;

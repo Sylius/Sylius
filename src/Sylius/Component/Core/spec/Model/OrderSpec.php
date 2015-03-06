@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,15 +42,15 @@ class OrderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
-    function it_should_not_have_user_defined_by_default()
+    function it_should_not_have_customer_defined_by_default()
     {
-        $this->getUser()->shouldReturn(null);
+        $this->getCustomer()->shouldReturn(null);
     }
 
-    function it_should_allow_defining_user(UserInterface $user)
+    function it_should_allow_defining_customer(CustomerInterface $customer)
     {
-        $this->setUser($user);
-        $this->getUser()->shouldReturn($user);
+        $this->setCustomer($customer);
+        $this->getCustomer()->shouldReturn($customer);
     }
 
     function it_should_not_have_shipping_address_by_default()
@@ -230,10 +231,10 @@ class OrderSpec extends ObjectBehavior
         $this->shouldNotBeBackorder();
     }
 
-    function it_should_allow_defining_email_from_user(UserInterface $user)
+    function it_should_allow_defining_email_from_customer(CustomerInterface $customer)
     {
-        $user->getEmail()->willReturn('example@example.com');
-        $this->setUser($user);
+        $customer->getEmail()->willReturn('example@example.com');
+        $this->setCustomer($customer);
         $this->getEmail()->shouldReturn('example@example.com');
     }
 

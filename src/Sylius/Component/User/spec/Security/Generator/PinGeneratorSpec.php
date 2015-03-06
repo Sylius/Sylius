@@ -16,6 +16,7 @@ use Prophecy\Argument;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class PinGeneratorSpec extends ObjectBehavior
 {
@@ -29,8 +30,44 @@ class PinGeneratorSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Security\Generator\GeneratorInterface');
     }
 
+    public function it_throws_exception_when_not_int_given()
+    {
+        $this->shouldThrow('InvalidArgumentException')->during('generate', ['string']);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [new \stdClass()]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [1.2]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [array()]);
+    }
+
+    public function it_throws_exception_when_incorrect_length_provided()
+    {
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [-1]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [0]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [10]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', [11]);
+    }
+
     public function it_generates_random_token()
     {
-        $this->generate(4)->shouldBeInteger();
+        $this->generate(1)->shouldBeNumeric();
+        $this->generate(4)->shouldBeNumeric();
+        $this->generate(6)->shouldBeNumeric();
+        $this->generate(9)->shouldBeNumeric();
+    }
+
+    public function it_generates_string_with_given_length()
+    {
+        $this->generate(1)->shouldHaveLength(1);
+        $this->generate(4)->shouldHaveLength(4);
+        $this->generate(6)->shouldHaveLength(6);
+        $this->generate(9)->shouldHaveLength(9);
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'haveLength' => function ($subject, $key) {
+                return $key === strlen($subject);
+            },
+        ];
     }
 }

@@ -3,8 +3,6 @@
 
 security:
     providers:
-        # fos_userbundle:
-        #     id: fos_user.user_provider.username_email
         sylius_user_provider:
             id: sylius.provider.name_or_email_provider
     encoders:
