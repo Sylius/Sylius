@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * <code>
  * <?php
- * $this->get('sylius.product_builder')
+ * $this->get('sylius.builder.product')
  *     ->create('Github mug')
  *     ->setDescription("Coffee. Tea. Coke. Water. Let's face it — humans need to drink liquids")
  *     ->setPrice(1200)
