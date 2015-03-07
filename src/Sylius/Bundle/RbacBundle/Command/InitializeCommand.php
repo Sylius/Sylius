@@ -54,29 +54,30 @@ EOT
         $permissionRepository = $this->getContainer()->get('sylius.repository.permission');
 
         // Create root permission.
-        $root = $permissionRepository->createNew();
-        $root->setCode('root');
-        $root->setDescription('Root');
+        if (null === $root = $permissionRepository->findOneBy(array('code' => 'root'))) {
+            $root = $permissionRepository->createNew();
+            $root->setCode('root');
+            $root->setDescription('Root');
 
-        $permissionManager->persist($root);
-        $permissionManager->flush();
+            $permissionManager->persist($root);
+            $permissionManager->flush();
+        }
 
         $permissionsByCode = array('root' => $root);
 
         foreach ($permissions as $code => $description) {
-            if (null === $permissionRepository->findOneBy(array('code' => $code))) {
+            if (null === $permission = $permissionRepository->findOneBy(array('code' => $code))) {
                 $permission = $permissionRepository->createNew();
-
                 $permission->setCode($code);
                 $permission->setDescription($description);
                 $permission->setParent($root);
-
-                $permissionsByCode[$code] = $permission;
 
                 $permissionManager->persist($permission);
 
                 $output->writeln(sprintf('Adding permission "<comment>%s</comment>". (<info>%s</info>)', $description, $code));
             }
+
+            $permissionsByCode[$code] = $permission;
         }
 
         $permissionsHierarchy = $this->getContainer()->getParameter('sylius.rbac.default_permissions_hierarchy');
@@ -95,21 +96,22 @@ EOT
         $roleRepository = $this->getContainer()->get('sylius.repository.role');
 
         // Create root role.
-        $root = $roleRepository->createNew();
-        $root->setCode('root');
-        $root->setName('Root');
+        if (null === $root = $roleRepository->findOneBy(array('code' => 'root'))) {
+            $root = $roleRepository->createNew();
+            $root->setCode('root');
+            $root->setName('Root');
 
-        $root->addPermission($permissionsByCode['root']);
+            $root->addPermission($permissionsByCode['root']);
 
-        $roleManager->persist($root);
-        $roleManager->flush();
+            $roleManager->persist($root);
+            $roleManager->flush();
+        }
 
         $rolesByCode = array('root' => $root);
 
         foreach ($roles as $code => $data) {
-            if (null === $roleRepository->findOneBy(array('code' => $code))) {
+            if (null === $role = $roleRepository->findOneBy(array('code' => $code))) {
                 $role = $roleRepository->createNew();
-
                 $role->setCode($code);
                 $role->setName($data['name']);
                 $role->setDescription($data['description']);
@@ -121,12 +123,12 @@ EOT
 
                 $role->setSecurityRoles($data['security_roles']);
 
-                $rolesByCode[$code] = $role;
-
                 $roleManager->persist($role);
 
                 $output->writeln(sprintf('Adding role "<comment>%s</comment>". (<info>%s</info>)', $data['name'], $code));
             }
+
+            $rolesByCode[$code] = $role;
         }
 
         $rolesHierarchy = $this->getContainer()->getParameter('sylius.rbac.default_roles_hierarchy');
