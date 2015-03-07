@@ -1,16 +1,16 @@
 Configuring your resources
 ==========================
 
-Now you need to configure your resources! It means that you will tell to this bundle what model, controller, repository, etc.
-is used for each configured resource. It exists two ways for doing that, we will call them **Basic configuration** and
-*Advanced configuration*. The first one is pretty easy because your just need to write configuration (in your config.yml, for example).
-The second one allows you to embed configuration into your bundles but you will need to write some lines of code.
-We will explain the both ways in the next chapters.
+Now you need to configure your resources! It means that you will tell to this bundle which model, controller, repository, etc.
+will be used for each configured resources. It exists two ways for doing that, we will call them **Basic configuration** and
+*Advanced configuration*. You need to use the first one if you want to build a simple application. It is pretty easy because your just
+need to write configuration (in your config.yml, for example). The second one allows you to embed configuration into your bundles
+but you will need to write some extra lines of code. We will explain the both ways in the next chapters.
 
 Basic configuration
 -------------------
 
-In your ``app/config.yml`` (or in an imported configuration file), you need to define what resources you want to use :
+In your ``app/config.yml`` (or in an imported configuration file), you need to define which resources you want to use :
 
 .. code-block:: yaml
 
@@ -35,19 +35,18 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
 
-At this step:
+At this step, we can see what happen in the container:
 
 .. code-block:: bash
-
+    // For each resource, we declare a controller, a manager and a repository as a service
     $ php app/console container:debug | grep entity_key
-    my_app.repository.entity_key   container MyApp\Entity\EntityName
+    my_app.manager.entity_key      alias for "doctrine.orm.default_entity_manager"
     my_app.controller.entity_key   container Sylius\Bundle\ResourceBundle\Controller\ResourceController
     my_app.repository.entity_key   container Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository
-    //...
 
+    // The configuration is saved in the container too
     $ php app/console container:debug --parameters | grep entity_key
     sylius.config.classes        {"my_app.entity_key": {"driver":"...", "object_manager": "...", "classes":{"model":"...", "controller":"...", "repository":"...", "interface":"..."}}}
-    //...
 
 Advanced configuration
 ----------------------
@@ -72,7 +71,8 @@ First you must list the supported doctrine driver by your bundle, the available 
 
 .. note::
 
-    Since the ``0.11`` your bundle class must implement ``ResourceBundleInterface``.
+    Since the ``0.11`` your bundle class must implement ``ResourceBundleInterface``. You can extends the ``AbstractResourceBundle``
+    which already implements this interface, it will bring you extra functionalities too.
 
 You need to expose a semantic configuration for your bundle. The following example show you a basic ``Configuration`` that the resource bundle needs to work.
 
@@ -133,6 +133,14 @@ You need to expose a semantic configuration for your bundle. The following examp
                                     ->scalarNode('model')->defaultValue('MyApp\MyCustomBundle\Model\MyOtherEntity')->end()
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('form')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                                    // you can use an array, useful when you want to register the choice form type.
+                                    ->arrayNode('form')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('default')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyformType')->end()
+                                            ->scalarNode('choice')->defaultValue('MyApp\MyCustomBundle\Form\Type\MyChoiceformType')->end()
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                         ->end()
@@ -164,13 +172,16 @@ The resource bundle provide you ``AbstractResourceExtension``, your bundle exten
             'forms',
         );
 
+        // You can define the file formats of the files loaded
+        protected $configFormat = self::CONFIG_XML;
+
         public function load(array $config, ContainerBuilder $container)
         {
             $this->configure(
                 $config,
                 new Configuration(),
                 $container,
-                self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+                self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
             );
         }
     }
@@ -183,6 +194,7 @@ The last parameter of the ``AbstractResourceExtension::configure()`` allows you 
  * CONFIGURE_VALIDATORS : set to the container the configured validation groups using the pattern ``my_app.validation_group.modelName``
    For example ``sylius.validation_group.product``
  * CONFIGURE_DATABASE : Load the database driver, available drivers are ``doctrine/orm``, ``doctrine/mongodb-odm`` and ``doctrine/phpcr-odm``
+ * CONFIGURE_FORMS : Register the form as a service (you must register the form as array)
 
 At this step:
 
@@ -204,6 +216,7 @@ At this step:
     my_app.validation_group.my_entity       ["my_app"]
     my_app_my_entity.driver                 doctrine/orm
     my_app_my_entity.driver.doctrine/orm    true
+    my_app_my_entity.object_manager         default
     //...
 
 You can overwrite the configuration of your bundle like that :
@@ -214,7 +227,9 @@ You can overwrite the configuration of your bundle like that :
         driver: doctrine/orm
         object_manager: my_custom_manager
         validation_groups:
-            product: [myCustomGroup]
+            my_entity: [myCustomGroup]
+        templates:
+            my_entity: AppBundle:Backend/MyEntity
         classes:
             my_entity:
                 model: MyApp\MyOtherCustomBundle\Model
