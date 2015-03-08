@@ -64,7 +64,7 @@ This model implements ``OptionInterface``, you need to implement these extra met
 +----------------------------------------------+---------------------------------------------------------------------+----------------------------+
 | removeValue(OptionValueInterface $option)    | Removes option value                                                | Void                       |
 +----------------------------------------------+---------------------------------------------------------------------+----------------------------+
-| removeValue(OptionValueInterface $option)    | Checks whether option has given value                               | Boolean                    |
+| hasValue(OptionValueInterface $option)       | Checks whether option has given value                               | Boolean                    |
 +----------------------------------------------+---------------------------------------------------------------------+----------------------------+
 
 OptionValue

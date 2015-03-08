@@ -65,7 +65,8 @@ Under that route, you can paginate over the users by their score.
 Using a custom repository method
 --------------------------------
 
-You can define your own repository method too, you can use the same way explained in <show_resource>.
+You can define your own repository method too, you can use the same way explained
+in `show_resource  <http://docs.sylius.org/en/latest/bundles/SyliusResourceBundle/show_resource.html#using-custom-repository-methods>`_.
 
 .. note::
 

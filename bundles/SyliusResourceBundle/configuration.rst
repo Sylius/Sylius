@@ -3,7 +3,7 @@ Configuring your resources
 
 Now you need to configure your resources! It means that you will tell to this bundle which model, controller, repository, etc.
 will be used for each configured resources. It exists two ways for doing that, we will call them **Basic configuration** and
-*Advanced configuration*. You need to use the first one if you want to build a simple application. It is pretty easy because your just
+*Advanced configuration*. You need to use the first one if you want to build a simple application. It is pretty easy because you just
 need to write configuration (in your config.yml, for example). The second one allows you to embed configuration into your bundles
 but you will need to write some extra lines of code. We will explain the both ways in the next chapters.
 
@@ -30,7 +30,7 @@ In your ``app/config.yml`` (or in an imported configuration file), you need to d
                 manager: other_manager
                 templates: App:User
                 classes:
-                    model: MyApp\Entity\OtherEntityKey
+                    model: MyApp\Entity\OtherEntitName
                     interface: MyApp\Document\OtherEntityKeyInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: Sylius\Bundle\ResourceBundle\Doctrine\ODM\DocumentRepository
