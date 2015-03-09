@@ -60,6 +60,9 @@ EOT
         $userManager = $this->get('sylius.manager.user');
         $userRepository = $this->get('sylius.repository.user');
 
+        $rbacInitializer = $this->get('sylius.rbac.initializer');
+        $rbacInitializer->initialize();
+
         $user = $userRepository->createNew();
 
         $user->setFirstname($this->ask($output, 'Your firstname:', array(new NotBlank())));
@@ -130,8 +133,6 @@ EOT
         }
 
         $localeManager->flush();
-
-        return $this;
     }
 
     /**
@@ -177,9 +178,6 @@ EOT
         }
 
         $currencyManager->flush();
-        $output->writeln('');
-
-        return $this;
     }
 
     /**
@@ -225,7 +223,5 @@ EOT
         }
 
         $countryManager->flush();
-
-        return $this;
     }
 }

@@ -27,12 +27,16 @@ class LoadUsersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
+        $rbacInitializer = $this->get('sylius.rbac.initializer');
+        $rbacInitializer->initialize();
+
         $user = $this->createUser(
             'sylius@example.com',
             'sylius',
             true,
             array('ROLE_SYLIUS_ADMIN')
         );
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
         $manager->persist($user);
         $manager->flush();
