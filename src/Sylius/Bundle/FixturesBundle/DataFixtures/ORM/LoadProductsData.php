@@ -310,7 +310,7 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Add product to given taxons.
+     * Adds taxons to given product.
      *
      * @param ProductInterface $product
      * @param array            $taxonNames
