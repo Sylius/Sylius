@@ -25,6 +25,7 @@
         <parameter key="sylius.permission_map.default.class">Sylius\Component\Rbac\Authorization\PermissionMap</parameter>
         <parameter key="sylius.permission_map.cached.class">Sylius\Component\Rbac\Authorization\CachedPermissionMap</parameter>
         <parameter key="sylius.form.type.security_role_choice.class">Sylius\Bundle\RbacBundle\Form\Type\SecurityRoleChoiceType</parameter>
+        <parameter key="sylius.rbac.initializer.class">Sylius\Component\Rbac\Doctrine\RbacInitializer</parameter>
     </parameters>
 
     <services>
@@ -58,6 +59,17 @@
         <service id="sylius.form.type.security_role_choice" class="%sylius.form.type.security_role_choice.class%">
             <argument>%sylius.rbac.security_roles%</argument>
             <tag name="form.type" alias="sylius_security_role_choice" />
+        </service>
+
+        <service id="sylius.rbac.initializer" class="%sylius.rbac.initializer.class%">
+            <argument>%sylius.rbac.default_permissions%</argument>
+            <argument>%sylius.rbac.default_permissions_hierarchy%</argument>
+            <argument type="service" id="sylius.manager.permission" />
+            <argument type="service" id="sylius.repository.permission" />
+            <argument>%sylius.rbac.default_roles%</argument>
+            <argument>%sylius.rbac.default_roles_hierarchy%</argument>
+            <argument type="service" id="sylius.manager.role" />
+            <argument type="service" id="sylius.repository.role" />
         </service>
     </services>
 
