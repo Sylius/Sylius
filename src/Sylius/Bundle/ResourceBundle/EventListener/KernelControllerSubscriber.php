@@ -48,7 +48,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     private $apiGroupsHeader  = 'Accept';
 
     private $apiVersionRegexp = '/(v|version)=(?P<version>[0-9\.]+)/i';
-    private $apiGroupsRegexp  = '/(g|groups)=(?P<groups>[a-z,]+)/i';
+    private $apiGroupsRegexp  = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     public function __construct(ParametersParser $parametersParser, Parameters $parameters, array $settings, $forceApiVersion = false)
     {
@@ -127,7 +127,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
 
         if ($request->headers->has($this->apiGroupsHeader)) {
             if (preg_match($this->apiGroupsRegexp, $request->headers->get($this->apiGroupsHeader), $matches)) {
-                $data['serialization_groups'] = explode(',', $matches['groups']);
+                $data['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
             }
         }
 
