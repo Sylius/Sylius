@@ -22,6 +22,8 @@ use Sylius\Component\Core\Model\UserInterface;
  */
 class LoadUsersData extends DataFixture
 {
+    private $usernames = array();
+
     /**
      * {@inheritdoc}
      */
@@ -45,6 +47,12 @@ class LoadUsersData extends DataFixture
 
         for ($i = 1; $i <= 200; $i++) {
             $username = $this->faker->username;
+
+            while (isset($this->usernames[$username])) {
+                $username = $this->faker->username;
+
+                $this->usernames[$username] = true;
+            }
 
             $user = $this->createUser(
                 $username.'@example.com',
