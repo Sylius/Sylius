@@ -59,12 +59,7 @@ class PurchaseStep extends CheckoutStep
         $this->getPayum()->getPayment($token->getPaymentName())->execute($status);
 
         /** @var $payment PaymentInterface */
-        $payment = $status->getModel();
-
-        if (!$payment instanceof PaymentInterface) {
-            throw new UnexpectedTypeException($payment, 'Sylius\Component\Core\Model\PaymentInterface');
-        }
-
+        $payment = $status->getFirstModel();
         $order = $payment->getOrder();
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PURCHASE_INITIALIZE, $order);

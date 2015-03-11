@@ -41,10 +41,8 @@ abstract class AbstractCapturePaymentAction extends PaymentAwareAction
             $this->payment->execute($request);
 
             $payment->setDetails($details);
-            $request->setModel($payment);
         } catch (\Exception $e) {
             $payment->setDetails($details);
-            $request->setModel($payment);
 
             throw $e;
         }

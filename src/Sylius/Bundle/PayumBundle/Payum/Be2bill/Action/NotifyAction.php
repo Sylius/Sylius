@@ -13,8 +13,10 @@ namespace Sylius\Bundle\PayumBundle\Payum\Be2bill\Action;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Be2Bill\Api;
+use Payum\Core\ApiAwareInterface;
 use Payum\Core\Bridge\Symfony\Reply\HttpResponse;
 use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Exception\UnsupportedApiException;
 use Payum\Core\Request\GetHttpRequest;
 use Payum\Core\Request\Notify;
 use SM\Factory\FactoryInterface;
@@ -27,13 +29,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class NotifyAction extends AbstractPaymentStateAwareAction
+class NotifyAction extends AbstractPaymentStateAwareAction implements ApiAwareInterface
 {
-    /**
-     * @var Api
-     */
-    protected $api;
-
     /**
      * @var RepositoryInterface
      */
@@ -49,8 +46,12 @@ class NotifyAction extends AbstractPaymentStateAwareAction
      */
     protected $identifier;
 
+    /**
+     * @var Api
+     */
+    protected $api;
+
     public function __construct(
-        Api $api,
         RepositoryInterface $paymentRepository,
         ObjectManager $objectManager,
         FactoryInterface $factory,
@@ -58,10 +59,21 @@ class NotifyAction extends AbstractPaymentStateAwareAction
     ) {
         parent::__construct($factory);
 
-        $this->api               = $api;
         $this->paymentRepository = $paymentRepository;
         $this->objectManager     = $objectManager;
         $this->identifier        = $identifier;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setApi($api)
+    {
+        if (!$api instanceof Api) {
+            throw new UnsupportedApiException('Not supported.');
+        }
+
+        $this->api = $api;
     }
 
     /**

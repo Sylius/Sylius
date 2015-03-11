@@ -20,8 +20,8 @@ class PaymentSecurityTokenSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\PayumBundle\Model\PaymentSecurityToken');
     }
 
-    function it_extends_payum_token()
+    function it_implements_payum_token_interface()
     {
-        $this->shouldHaveType('Payum\Core\Model\Token');
+        $this->shouldHaveType('Payum\Core\Security\TokenInterface');
     }
 }
