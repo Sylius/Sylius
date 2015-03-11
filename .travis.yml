@@ -8,6 +8,13 @@ php:
 env:
     - TEST_SUITE=1
     - TEST_SUITE=2
+    
+matrix:
+    include:
+        - php: 5.3
+          env: TEST_SUITE=1 COMPOSER_FLAGS="--prefer-lowest"
+        - php: 5.3
+          env: TEST_SUITE=2 COMPOSER_FLAGS="--prefer-lowest"
 
 services: mongodb
 
@@ -32,7 +39,7 @@ before_script:
     - composer install --prefer-source --no-interaction
     - composer require doctrine/mongodb-odm="1.0.*@dev" --no-update
     - composer require jmikola/geojson="~1.0" --no-update
-    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction
+    - composer update doctrine/mongodb-odm jmikola/geojson --prefer-source --no-interaction $COMPOSER_FLAGS
 
     - app/console doctrine:database:create --env=test
     - app/console doctrine:schema:create --env=test

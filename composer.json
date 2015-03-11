@@ -19,8 +19,7 @@
         }
     ],
     "require": {
-        "php":                                  ">=5.3.3",
-
+        "php":                                  ">=5.3.9",
         "a2lix/translation-form-bundle":        "~2.0",
         "doctrine/collections":                 "~1.2",
         "doctrine/common":                      "~2.3",
