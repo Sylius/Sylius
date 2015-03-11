@@ -463,6 +463,8 @@ class Order implements OrderInterface
                 $this->adjustmentsTotal += $adjustment->getAmount();
             }
         }
+
+        return $this;
     }
 
     /**
