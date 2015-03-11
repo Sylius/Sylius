@@ -41,7 +41,8 @@ class UserProvider extends FOSUBUserProvider
      */
     public function __construct(UserManagerInterface $userManager, RepositoryInterface $oauthRepository)
     {
-        $this->userManager     = $userManager;
+        parent::__construct($userManager, array());
+
         $this->oauthRepository = $oauthRepository;
     }
 
