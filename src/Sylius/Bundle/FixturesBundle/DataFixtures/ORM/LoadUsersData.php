@@ -50,8 +50,6 @@ class LoadUsersData extends DataFixture
 
             while (isset($this->usernames[$username])) {
                 $username = $this->faker->username;
-
-                $this->usernames[$username] = true;
             }
 
             $user = $this->createUser(
@@ -63,6 +61,7 @@ class LoadUsersData extends DataFixture
             $user->setCreatedAt($this->faker->dateTimeThisMonth);
 
             $manager->persist($user);
+            $this->usernames[$username] = true;
 
             $this->setReference('Sylius.User-'.$i, $user);
         }
