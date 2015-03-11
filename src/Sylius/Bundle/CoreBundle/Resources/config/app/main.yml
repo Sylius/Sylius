@@ -14,6 +14,8 @@ twig:
 doctrine_cache:
     providers:
         sylius_settings: %sylius.cache%
+        presta_sitemap:
+            type: "apc"
 
 knp_gaufrette:
     adapters:
@@ -165,3 +167,6 @@ a2lix_translation_form:
     locale_provider: sylius.locale_provider
     manager_registry: doctrine
     templating: "A2lixTranslationFormBundle::default.html.twig"
+    
+presta_sitemap:
+    timetolive: 18000

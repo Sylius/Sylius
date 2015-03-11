@@ -29,6 +29,7 @@ cmf_routing:
             sylius.dynamic_router: 50
             cmf_routing.dynamic_router: 20
     dynamic:
+        route_collection_limit: false
         generic_controller: cmf_content.controller:indexAction
         persistence:
             phpcr:
