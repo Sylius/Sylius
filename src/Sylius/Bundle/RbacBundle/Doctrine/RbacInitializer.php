@@ -55,7 +55,7 @@ class RbacInitializer
         $this->roleRepository = $roleRepository;
     }
 
-    protected function initialize(OutputInterface $output = null)
+    public function initialize(OutputInterface $output = null)
     {
         $this->initializePermissions($output);
         $this->initializeRoles($output);
