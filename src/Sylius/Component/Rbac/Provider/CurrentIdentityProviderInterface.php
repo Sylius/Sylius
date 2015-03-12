@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Rbac\Provider;
 
+use Sylius\Component\Rbac\Model\IdentityInterface;
+
 /**
  * Service implementing this interface should return an instance of currently used identity.
  *
@@ -21,7 +23,7 @@ interface CurrentIdentityProviderInterface
     /**
      * Get the identity.
      *
-     * @return IdentityInterface
+     * @return null|IdentityInterface
      */
     public function getIdentity();
 }

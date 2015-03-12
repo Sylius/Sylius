@@ -62,7 +62,7 @@ class NestedSetRolesResolver implements RolesResolverInterface
     /**
      * @param RoleInterface $role
      *
-     * @return Collection
+     * @return Collection|RoleInterface[]
      */
     private function getChildRoles(RoleInterface $role)
     {

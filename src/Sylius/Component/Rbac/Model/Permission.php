@@ -41,7 +41,7 @@ class Permission implements PermissionInterface
     protected $parent;
 
     /**
-     * @var Collection
+     * @var Collection|PermissionInterface[]
      */
     protected $children;
 

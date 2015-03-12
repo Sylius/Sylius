@@ -12,6 +12,7 @@
 namespace Sylius\Component\Rbac\Authorization;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Rbac\Model\PermissionInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -25,14 +26,14 @@ interface PermissionMapInterface
      * @param RoleInterface $role
      * @param string        $permissionCode
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPermission(RoleInterface $role, $permissionCode);
 
     /**
      * @param RoleInterface $role
      *
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getPermissions(RoleInterface $role);
 }

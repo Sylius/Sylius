@@ -10,10 +10,13 @@
  */
 
 namespace Sylius\Component\Rbac\Resolver;
+
 use Sylius\Component\Rbac\Model\IdentityInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
- * Service implementing this service is responsible for getting all applicable roles from the identity.
+ * Service implementing this service is responsible for getting
+ * all applicable roles from the identity.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -22,9 +25,9 @@ interface RolesResolverInterface
     /**
      * Get all applicable roles from a given Identity.
      *
-     * @param IdentityInterface
+     * @param $identity IdentityInterface
      *
-     * @return array
+     * @return RoleInterface[]
      */
     public function getRoles(IdentityInterface $identity);
 }

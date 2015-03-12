@@ -316,7 +316,7 @@ class Configuration
         return $defaultSorting;
     }
 
-    public function getRequestParameter($parameter, $defaults = array())
+    public function getRequestParameter($parameter, array $defaults = array())
     {
         return array_replace_recursive(
             $defaults,
@@ -354,9 +354,7 @@ class Configuration
 
     public function getFlashMessage($message = null)
     {
-        $message = sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message);
-
-        return $this->parameters->get('flash', $message);
+        return $this->parameters->get('flash', sprintf('%s.%s.%s', $this->bundlePrefix, $this->resourceName, $message));
     }
 
     public function getSortablePosition()

@@ -54,7 +54,7 @@ class NestedSetPermissionsResolver implements PermissionsResolverInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     private function getChildPermissions(PermissionInterface $permission)
     {

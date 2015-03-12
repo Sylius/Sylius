@@ -107,8 +107,6 @@ class ResourceController extends FOSRestController
      */
     public function showAction(Request $request)
     {
-        $this->isGrantedOr403('show');
-
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('show.html'))
@@ -126,8 +124,6 @@ class ResourceController extends FOSRestController
      */
     public function indexAction(Request $request)
     {
-        $this->isGrantedOr403('index');
-
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -176,8 +172,6 @@ class ResourceController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $this->isGrantedOr403('create');
-
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
@@ -222,12 +216,10 @@ class ResourceController extends FOSRestController
      */
     public function updateAction(Request $request)
     {
-        $this->isGrantedOr403('update');
-
         $resource = $this->findOr404($request);
         $form     = $this->getForm($resource);
 
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH'), true) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
             if ($this->config->isApiRequest()) {
@@ -268,8 +260,6 @@ class ResourceController extends FOSRestController
      */
     public function deleteAction(Request $request)
     {
-        $this->isGrantedOr403('delete');
-
         $resource = $this->domainManager->delete($this->findOr404($request));
 
         if ($this->config->isApiRequest()) {
@@ -364,10 +354,7 @@ class ResourceController extends FOSRestController
     public function updateStateAction(Request $request, $transition, $graph = null)
     {
         $resource = $this->findOr404($request);
-
-        if (null === $graph) {
-            $graph = $this->stateMachineGraph;
-        }
+        $graph = $graph ?: $this->stateMachineGraph;
 
         $stateMachine = $this->get('sm.factory')->get($resource, $graph);
         if (!$stateMachine->can($transition)) {
@@ -461,6 +448,7 @@ class ResourceController extends FOSRestController
                 )
             );
         }
+
         return $resource;
     }
 
@@ -474,7 +462,7 @@ class ResourceController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param integer $movement
+     * @param int     $movement
      *
      * @return RedirectResponse
      */
@@ -541,22 +529,5 @@ class ResourceController extends FOSRestController
         $view->getSerializationContext()->enableMaxDepthChecks();
 
         return $handler->handle($view);
-    }
-
-    protected function isGrantedOr403($permission)
-    {
-        if (!$this->container->has('sylius.authorization_checker')) {
-            return true;
-        }
-
-        $permission = $this->config->getPermission($permission);
-
-        if ($permission) {
-            $grant = sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission);
-
-            if (!$this->get('sylius.authorization_checker')->isGranted($grant)) {
-                throw new AccessDeniedException(sprintf('Access denied to "%s" for "%s".', $grant, $this->getUser() ? $this->getUser()->getUsername() : 'anon.'));
-            }
-        }
     }
 }

@@ -22,7 +22,7 @@ use Doctrine\Common\Collections\Collection;
 class Role implements RoleInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -47,7 +47,7 @@ class Role implements RoleInterface
     protected $parent;
 
     /**
-     * @var Collection
+     * @var Collection|RoleInterface[]
      */
     protected $children;
 
@@ -73,7 +73,7 @@ class Role implements RoleInterface
     protected $level;
 
     /**
-     * @var Collection
+     * @var Collection|PermissionInterface[]
      */
     protected $permissions;
 
@@ -330,7 +330,6 @@ class Role implements RoleInterface
     {
         $this->securityRoles = $securityRoles;
     }
-
 
     /**
      * {@inheritdoc}

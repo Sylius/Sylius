@@ -41,14 +41,13 @@ class PermissionMap implements PermissionMapInterface
     private $permissions = array();
 
     /**
-     * @param PermissionProviderInterface $permissionProvider
+     * @param PermissionProviderInterface  $permissionProvider
      * @param PermissionsResolverInterface $permissionsResolver
      */
     public function __construct(
         PermissionProviderInterface $permissionProvider,
         PermissionsResolverInterface $permissionsResolver
-    )
-    {
+    ) {
         $this->permissionProvider = $permissionProvider;
         $this->permissionsResolver = $permissionsResolver;
     }

@@ -24,9 +24,9 @@ interface PermissionRepositoryInterface extends RepositoryInterface
     /**
      * Get child permissions.
      *
-     * @param PermissionInterface
+     * @param $permission PermissionInterface
      *
-     * @return array
+     * @return PermissionInterface[]
      */
     public function getChildPermissions(PermissionInterface $permission);
 }
