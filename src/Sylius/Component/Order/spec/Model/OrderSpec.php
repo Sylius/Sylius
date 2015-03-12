@@ -229,6 +229,13 @@ class OrderSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment)->shouldReturn($this);
     }
 
+    function it_has_fluent_interface_for_totals_calculation()
+    {
+        $this->calculateItemsTotal()->shouldReturn($this);
+        $this->calculateAdjustmentsTotal()->shouldReturn($this);
+        $this->calculateTotal()->shouldReturn($this);
+    }
+
     function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
