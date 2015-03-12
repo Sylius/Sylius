@@ -23,17 +23,12 @@
             <index columns="sold" />
         </indexes>
 
-        <field name="sku" column="sku" type="string" nullable="true"/>
-
-        <field name="onHold" column="on_hold" type="integer">
+        <field name="sku" column="sku" type="string" nullable="true">
             <gedmo:versioned/>
         </field>
-        <field name="onHand" column="on_hand" type="integer">
-            <gedmo:versioned/>
-        </field>
-        <field name="sold" column="sold" type="integer">
-            <gedmo:versioned/>
-        </field>
+        <field name="onHold" column="on_hold" type="integer" />
+        <field name="onHand" column="on_hand" type="integer" />
+        <field name="sold" column="sold" type="integer" />
         <field name="availableOnDemand" column="available_on_demand" type="boolean">
             <gedmo:versioned/>
         </field>
