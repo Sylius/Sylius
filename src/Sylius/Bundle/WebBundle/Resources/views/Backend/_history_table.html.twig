@@ -5,6 +5,8 @@
     {{ value|sylius_price() }}
 {% elseif value is empty %}
     <em>{{ 'sylius.history.empty'|trans }}</em>
+{% elseif value is iterable %}
+    {{ value|json_encode }}
 {% else %}
     {{ value }}
 {% endif %}
