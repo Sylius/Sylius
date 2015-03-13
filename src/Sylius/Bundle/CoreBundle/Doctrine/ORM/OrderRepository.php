@@ -122,7 +122,8 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder = parent::getCollectionQueryBuilder();
         $queryBuilder
             ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
-            ->innerJoin('o.user', 'user')
+            ->leftJoin('o.user', 'user')
+            ->addSelect('user')
         ;
 
         if ($deleted) {
