@@ -27,13 +27,13 @@ class MoneyHelper extends BaseMoneyHelper
      *
      * @var CurrencyContextInterface
      */
-    private $currencyContext;
+    protected $currencyContext;
 
-    public function __construct($locale, $defaultCurrency, CurrencyContextInterface $currencyContext)
+    public function __construct($locale, CurrencyContextInterface $currencyContext)
     {
-        parent::__construct($locale, $defaultCurrency);
-
         $this->currencyContext = $currencyContext;
+
+        parent::__construct($locale, $this->getDefaultCurrency());
     }
 
     /**
