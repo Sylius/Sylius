@@ -18,12 +18,19 @@
 
     <parameters>
         <parameter key="sylius.templating.helper.restricted_zone.class">Sylius\Bundle\CoreBundle\Templating\Helper\RestrictedZoneHelper</parameter>
+        <parameter key="sylius.templating.helper.money.class">Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper</parameter>
     </parameters>
 
     <services>
         <service id="sylius.templating.helper.restricted_zone" class="%sylius.templating.helper.restricted_zone.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
             <tag name="templating.helper" alias="sylius_restricted_zone" />
+        </service>
+
+        <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%">
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.context.currency" />
+            <tag name="templating.helper" alias="sylius_money" />
         </service>
     </services>
 

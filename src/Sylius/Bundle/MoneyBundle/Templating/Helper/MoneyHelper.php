@@ -23,14 +23,9 @@ class MoneyHelper extends Helper
     private $currency;
 
     /**
-     * @var \NumberFormatter
+     * @var string
      */
-    private $formatterCurrency;
-
-    /**
-     * @var \NumberFormatter
-     */
-    private $formatterDecimal;
+    private $locale;
 
     /**
      * @param string $locale   The locale used to format money.
@@ -38,9 +33,8 @@ class MoneyHelper extends Helper
      */
     public function __construct($locale, $currency)
     {
-        $this->currency          = $currency;
-        $this->formatterCurrency = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
-        $this->formatterDecimal  = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::DECIMAL);
+        $this->locale   = $locale ?: \Locale::getDefault();
+        $this->currency = $currency;
     }
 
     /**
@@ -49,6 +43,7 @@ class MoneyHelper extends Helper
      * @param int         $amount
      * @param string|null $currency
      * @param bool        $decimal
+     * @param string|null $locale
      *
      * @return string
      *
@@ -56,13 +51,15 @@ class MoneyHelper extends Helper
      */
     public function formatAmount($amount, $currency = null, $decimal = false)
     {
+        $locale   = $this->getDefaultLocale();
+        $currency = $currency ?: $this->getDefaultCurrency();
+
         if ($decimal) {
-            $formatter = $this->formatterDecimal;
+            $formatter = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
         } else {
-            $formatter = $this->formatterCurrency;
+            $formatter = new \NumberFormatter($locale, \NumberFormatter::CURRENCY);
         }
 
-        $currency = $currency ?: $this->getDefaultCurrency();
         $result   = $formatter->formatCurrency($amount / 100, $currency);
         if (false === $result) {
             throw new \InvalidArgumentException(sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currency));
@@ -87,5 +84,15 @@ class MoneyHelper extends Helper
     protected function getDefaultCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * Get the default locale if none is provided as argument.
+     *
+     * @return string The locale code
+     */
+    protected function getDefaultLocale()
+    {
+        return $this->locale;
     }
 }
