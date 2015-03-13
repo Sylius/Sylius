@@ -49,9 +49,9 @@ class MoneyHelper extends Helper
      *
      * @throws \InvalidArgumentException
      */
-    public function formatAmount($amount, $currency = null, $decimal = false)
+    public function formatAmount($amount, $currency = null, $decimal = false, $locale = null)
     {
-        $locale   = $this->getDefaultLocale();
+        $locale   = $locale   ?: $this->getDefaultLocale();
         $currency = $currency ?: $this->getDefaultCurrency();
 
         if ($decimal) {
