@@ -45,7 +45,7 @@ Test
 
 Test environment or ``test`` is used for automated testing. Most of the time you will not access it directly.
 
-To run Sylius console in ``staging`` environment, add the following parameters to every command call:
+To run Sylius console in ``test`` environment, add the following parameters to every command call:
 
 .. code-block:: bash
 
