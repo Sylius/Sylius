@@ -363,7 +363,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
 
         return $queryBuilder
-            ->from('sylius_order', 'o')
+            ->from($this->getClassMetadata($this->_entityName)->getTableName(), 'o')
             ->where($queryBuilder->expr()->gte('o.completed_at', ':from'))
             ->andWhere($queryBuilder->expr()->lte('o.completed_at', ':to'))
             ->setParameter('from', $from->format('Y-m-d H:i:s'))
