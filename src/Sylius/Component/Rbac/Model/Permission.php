@@ -12,6 +12,7 @@
 namespace Sylius\Component\Rbac\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Default permission implementation.

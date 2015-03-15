@@ -41,7 +41,7 @@ class CachedPermissionMap implements PermissionMapInterface
     /**
      * @param PermissionMapInterface $map
      * @param Cache                  $cache
-     * @param int                    $ttl
+     * @param int|null               $ttl
      */
     public function __construct(PermissionMapInterface $map, Cache $cache, $ttl = self::DEFAULT_TTL)
     {
@@ -55,20 +55,26 @@ class CachedPermissionMap implements PermissionMapInterface
      */
     public function hasPermission(RoleInterface $role, $permissionCode)
     {
-        if ($this->cache->contains($this->getCacheKey($role))) {
-            return in_array($permissionCode, $this->cache->fetch($this->getCacheKey($role)));
-        }
-
-        $permissions = $this->map->getPermissions($role);
         $permissionsCache = array();
+        $cacheKey = $this->getCacheKey($role);
+        if ($this->cache->contains($cacheKey)) {
+            $permissionsCache = $this->cache->fetch($cacheKey);
 
-        foreach ($permissions as $permission) {
-            $permissionsCache[] = $permission->getCode();
+            return isset($permissionsCache[$permissionCode]);
         }
 
-        $this->cache->save($this->getCacheKey($role), $permissionsCache, $this->ttl);
+        $found = false;
+        foreach ($this->map->getPermissions($role) as $permission) {
+            if ($permissionCode === $permission->getCode()) {
+                $found = true;
+            }
 
-        return in_array($permissionCode, $permissionsCache);
+            $permissionsCache[$permission->getCode()] = true;
+        }
+
+        $this->cache->save($cacheKey, $permissionsCache, $this->ttl);
+
+        return $found;
     }
 
     /**

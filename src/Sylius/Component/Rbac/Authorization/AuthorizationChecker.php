@@ -58,6 +58,6 @@ class AuthorizationChecker implements AuthorizationCheckerInterface
             throw new \InvalidArgumentException('Current identity must implement "Sylius\Component\Rbac\Model\IdentityInterface".');
         }
 
-        return VoterInterface::ACCESS_GRANTED === $this->voter->vote(new AnonymousToken('sylius', $identity), $identity, array($permissionCode));
+        return VoterInterface::ACCESS_DENIED !== $this->voter->vote(new AnonymousToken('sylius', $identity), $identity, array($permissionCode));
     }
 }

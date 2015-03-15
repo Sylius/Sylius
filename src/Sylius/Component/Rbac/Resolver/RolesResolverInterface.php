@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Rbac\Resolver;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
@@ -27,7 +28,7 @@ interface RolesResolverInterface
      *
      * @param $identity IdentityInterface
      *
-     * @return RoleInterface[]
+     * @return Collection|RoleInterface[]
      */
     public function getRoles(IdentityInterface $identity);
 }

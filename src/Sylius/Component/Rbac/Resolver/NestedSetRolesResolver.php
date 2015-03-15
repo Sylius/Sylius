@@ -38,18 +38,15 @@ class NestedSetRolesResolver implements RolesResolverInterface
     public function getRoles(IdentityInterface $identity)
     {
         $identityHash = spl_object_hash($identity);
-
         if (isset($this->cache[$identityHash])) {
             return $this->cache[$identityHash];
         }
 
         $roles = new ArrayCollection();
-
         foreach ($identity->getAuthorizationRoles() as $role) {
-            $childRoles = $this->getChildRoles($role);
             $roles->add($role);
 
-            foreach ($childRoles as $childRole) {
+            foreach ($this->getChildRoles($role) as $childRole) {
                 if (!$roles->contains($childRole)) {
                     $roles->add($childRole);
                 }
