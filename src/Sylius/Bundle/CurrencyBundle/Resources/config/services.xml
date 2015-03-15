@@ -64,7 +64,7 @@
             <argument type="service" id="sylius.manager.currency" />
             <argument type="service" id="sylius.repository.currency" />
             <argument type="collection">
-                <argument>%sylius.currency_importer.open_exchange_rates%</argument>
+                <argument key="app_id">%sylius.currency_importer.open_exchange_rates%</argument>
             </argument>
         </service>
         <service id="sylius.currency_importer.oer" alias="sylius.currency_importer.open_exchange_rates" />
