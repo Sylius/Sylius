@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Final checkout step.
@@ -27,7 +28,7 @@ class FinalizeStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);
@@ -38,7 +39,7 @@ class FinalizeStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_INITIALIZE, $order);

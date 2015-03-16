@@ -13,13 +13,14 @@ namespace Sylius\Bundle\InstallerBundle\Process\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+use Symfony\Component\HttpFoundation\Request;
 
 class ConfigureStep extends ControllerStep
 {
     /**
      * {@inheritdoc}
      */
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         return $this->render(
             'SyliusInstallerBundle:Process/Step:configure.html.twig',
@@ -30,9 +31,8 @@ class ConfigureStep extends ControllerStep
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
-        $request = $this->getRequest();
         $form = $this->createConfigurationForm();
 
         if ($form->handleRequest($request)->isValid()) {

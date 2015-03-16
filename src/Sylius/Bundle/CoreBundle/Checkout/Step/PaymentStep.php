@@ -15,6 +15,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * The payment step of checkout.
@@ -27,7 +28,7 @@ class PaymentStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
@@ -40,10 +41,8 @@ class PaymentStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
-        $request = $this->getRequest();
-
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
 

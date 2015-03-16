@@ -15,6 +15,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Process;
 use Sylius\Bundle\FlowBundle\Process\Step\Step;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Process test.
@@ -352,7 +353,7 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
 
 class TestStep extends Step
 {
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         // pufff.
     }

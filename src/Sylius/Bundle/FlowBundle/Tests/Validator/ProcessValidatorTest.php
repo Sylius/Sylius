@@ -8,6 +8,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\PhpEngine;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -57,7 +58,7 @@ class ProcessValidatorTest extends \PHPUnit_Framework_TestCase
 
 class TestStep extends ControllerStep
 {
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         // pufff.
     }

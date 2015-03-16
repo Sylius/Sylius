@@ -22,13 +22,14 @@ use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class PurchaseStep extends CheckoutStep
 {
     /**
      * {@inheritdoc}
      */
-    public function displayAction(ProcessContextInterface $context)
+    public function displayAction(ProcessContextInterface $context, Request $request)
     {
         $order = $this->getCurrentCart();
 
@@ -50,9 +51,9 @@ class PurchaseStep extends CheckoutStep
     /**
      * {@inheritdoc}
      */
-    public function forwardAction(ProcessContextInterface $context)
+    public function forwardAction(ProcessContextInterface $context, Request $request)
     {
-        $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
+        $token = $this->getHttpRequestVerifier()->verify($request);
         $this->getHttpRequestVerifier()->invalidate($token);
 
         $status = new GetStatus($token);
