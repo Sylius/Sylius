@@ -43,7 +43,7 @@ class AddressingStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $request = $this->getRequest();
+        $request = $context->getRequest();
 
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);

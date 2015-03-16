@@ -104,16 +104,16 @@ class Coordinator implements CoordinatorInterface
         try {
             $this->context->rewindHistory();
         } catch (NotFoundHttpException $e) {
-            //the step we are supposed to display was not found in the history.
+            // The step we are supposed to display was not found in the history.
             if (null === $this->context->getPreviousStep()) {
-                //there is no previous step go to start
+                // There is no previous step go to start
                 return $this->start($scenarioAlias, $queryParameters);
             }
 
-            //we will go back to previous step...
+            // We will go back to previous step...
             $history = $this->context->getStepHistory();
             if (empty($history)) {
-                //there is no history
+                // There is no history
                 return $this->start($scenarioAlias);
             }
             $step = $process->getStepByName(end($history));
@@ -127,9 +127,7 @@ class Coordinator implements CoordinatorInterface
             return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
-        $result = $step->displayAction($this->context);
-
-        return $this->processStepResult($process, $result);
+        return $this->processStepResult($process, $step->displayAction($this->context));
     }
 
     /**
@@ -147,9 +145,7 @@ class Coordinator implements CoordinatorInterface
             return $this->context->getProcess()->getValidator()->getResponse($step);
         }
 
-        $result = $step->forwardAction($this->context);
-
-        return $this->processStepResult($process, $result);
+        return $this->processStepResult($process, $step->forwardAction($this->context));
     }
 
     public function processStepResult(ProcessInterface $process, $result)
@@ -170,9 +166,7 @@ class Coordinator implements CoordinatorInterface
             if ($this->context->isLastStep()) {
                 $this->context->close();
 
-                $url = $this->router->generate($process->getRedirect(), $process->getRedirectParams());
-
-                return new RedirectResponse($url);
+                return new RedirectResponse($this->router->generate($process->getRedirect(), $process->getRedirectParams()));
             }
 
             // Handle default linear behaviour.
@@ -239,9 +233,7 @@ class Coordinator implements CoordinatorInterface
             $routeParameters = array_merge($queryParameters->all(), $routeParameters);
         }
 
-        $url = $this->router->generate('sylius_flow_display', $routeParameters);
-
-        return new RedirectResponse($url);
+        return new RedirectResponse($this->router->generate('sylius_flow_display', $routeParameters));
     }
 
     /**
@@ -253,9 +245,7 @@ class Coordinator implements CoordinatorInterface
      */
     protected function buildProcess($scenarioAlias)
     {
-        $processScenario = $this->loadScenario($scenarioAlias);
-
-        $process = $this->builder->build($processScenario);
+        $process = $this->builder->build($this->loadScenario($scenarioAlias));
         $process->setScenarioAlias($scenarioAlias);
 
         return $process;

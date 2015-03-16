@@ -42,7 +42,7 @@ class PaymentStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $request = $this->getRequest();
+        $request = $context->getRequest();
 
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);

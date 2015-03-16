@@ -206,8 +206,7 @@ class Process implements ProcessInterface
 
         $index = array_search($this->steps[$name], $this->orderedSteps);
 
-        unset($this->steps[$name]);
-        unset($this->orderedSteps[$index]);
+        unset($this->steps[$name], $this->orderedSteps[$index]);
         $this->orderedSteps = array_values($this->orderedSteps); //keep sequential index intact
     }
 
