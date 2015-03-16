@@ -52,7 +52,7 @@ class PurchaseStep extends CheckoutStep
      */
     public function forwardAction(ProcessContextInterface $context)
     {
-        $token = $this->getHttpRequestVerifier()->verify($this->getRequest());
+        $token = $this->getHttpRequestVerifier()->verify($context->getRequest());
         $this->getHttpRequestVerifier()->invalidate($token);
 
         $status = new GetStatus($token);

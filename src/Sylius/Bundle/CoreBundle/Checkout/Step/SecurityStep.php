@@ -58,7 +58,7 @@ class SecurityStep extends CheckoutStep
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
-        $request          = $this->getRequest();
+        $request          = $context->getRequest();
         $guestForm        = $this->getGuestForm($order);
         $registrationForm = $this->getRegistrationForm();
 
