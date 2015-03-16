@@ -148,57 +148,9 @@ class ODMTranslatableListener implements EventSubscriber, TranslatableListenerIn
             return;
         }
 
-        $translationMetadata = $this->metadata[$mapping->name];
-
-        // Map translatable relation
-        $translatableMetadata = $this->metadata[$translationMetadata['targetEntity']];
-
         $mapping->isEmbeddedDocument = true;
         $mapping->isMappedSuperclass = false;
         $mapping->setIdentifier(null);
-
-        // Map locale field
-        if (!$mapping->hasField($translationMetadata['locale'])) {
-            $mapping->mapField(array(
-                'fieldName' => $translationMetadata['locale'],
-                'type' => 'string',
-            ));
-        }
-
-        // Map unique index
-        $keys = array(
-            $translationMetadata['field'] => 1,
-            $translationMetadata['locale'] => 1
-        );
-
-        if (!$this->hasUniqueIndex($mapping, $keys)) {
-            $mapping->addIndex($keys, array(
-                'unique' => true
-            ));
-        }
-    }
-
-    /**
-     * Check if an unique index has been defined
-     *
-     * @param ClassMetadata $mapping
-     * @param array         $keys
-     *
-     * @return bool
-     */
-    private function hasUniqueIndex(ClassMetadata $mapping, array $keys)
-    {
-        if (!count($mapping->getIndexes())) {
-            return false;
-        }
-
-        foreach ($mapping->getIndexes() as $index) {
-            if (!array_diff($index['keys'], $keys)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
