@@ -78,18 +78,35 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
      */
     private function createSubjectServices(ContainerBuilder $container, $driver, $subject, array $config)
     {
+        // Archetype form
         $archetypeAlias = $subject.'_archetype';
 
         $archetypeClasses = $config[$archetypeAlias];
 
+        $archeTypeFormValidationGroups = '%sylius.validation_group.'.$archetypeAlias.'%';
+
         $archetypeFormType = new Definition($archetypeClasses['form']);
         $archetypeFormType
-            ->setArguments(array($archetypeClasses['model'], '%sylius.validation_group.'.$archetypeAlias.'%', $subject))
+            ->setArguments(array($archetypeClasses['model'], $archeTypeFormValidationGroups, $subject))
             ->addTag('form.type', array('alias' => 'sylius_'.$archetypeAlias))
         ;
 
         $container->setDefinition('sylius.form.type.'.$archetypeAlias, $archetypeFormType);
 
+        // Archetype translation form
+        $archetypeTranslationAlias = $subject.'_archetype_translation';
+
+        $archetypeTranslationClasses = $config[$archetypeTranslationAlias];
+
+        $archetypeTranslationFormType = new Definition($archetypeTranslationClasses['form']);
+        $archetypeTranslationFormType
+            ->setArguments(array($archetypeTranslationClasses['model'], $archeTypeFormValidationGroups, $subject))
+            ->addTag('form.type', array('alias' => 'sylius_'.$archetypeTranslationAlias))
+        ;
+
+        $container->setDefinition('sylius.form.type.'.$archetypeTranslationAlias, $archetypeTranslationFormType);
+
+        // Archetype choice form
         $choiceTypeClasses = array(
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM => 'Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeEntityChoiceType'
         );
