@@ -227,6 +227,7 @@ sylius:
         route:
             index: Routes
         sales: Sales
+        security_settings: Security Settings
         shipment:
             index: Shipments
         shipping_category:
@@ -825,6 +826,7 @@ sylius:
     search: Search
     settings:
         general_header: General settings
+        security_header: Security settings
         taxation_header: Taxation settings
     shipment_category:
         manage: Manage shipping categories

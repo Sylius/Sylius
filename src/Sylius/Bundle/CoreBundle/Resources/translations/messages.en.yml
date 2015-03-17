@@ -60,6 +60,8 @@ sylius:
                 title: Page title
             taxation:
                 default_tax_zone: Default tax zone
+            security:
+                enabled: Enable?
         shipment_filter:
             created_at_from: From
             created_at_to: To

@@ -6,8 +6,14 @@ sylius_backend_general_settings:
     defaults:
         _controller: sylius.controller.settings:updateAction
         namespace: general
-
         template: SyliusWebBundle:Backend/Settings:general.html.twig
+
+sylius_backend_security_settings:
+    path: /security
+    defaults:
+        _controller: sylius.controller.settings:updateAction
+        namespace: security
+        template: SyliusWebBundle:Backend/Settings:security.html.twig
 
 sylius_backend_taxation_settings:
     path: /taxation
