@@ -33,7 +33,7 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_no_shipping_address_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getShippingAddress()->shouldBeCalled()->willReturn(null);
+        $subject->getShippingAddress()->willReturn(null);
 
         $this->isEligible($subject, array())->shouldReturn(false);
     }
@@ -43,9 +43,9 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         AddressInterface $address,
         CountryInterface $country
     ) {
-        $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $country->getId()->shouldBeCalled()->willReturn(2);
+        $subject->getShippingAddress()->willReturn($address);
+        $address->getCountry()->willReturn($country);
+        $country->isEqualTo(1)->willReturn(false);
 
         $this->isEligible($subject, array('country' => 1))->shouldReturn(false);
     }
@@ -55,9 +55,9 @@ class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         AddressInterface $address,
         CountryInterface $country
     ) {
-        $subject->getShippingAddress()->shouldBeCalled()->willReturn($address);
-        $address->getCountry()->shouldBeCalled()->willReturn($country);
-        $country->getId()->shouldBeCalled()->willReturn(1);
+        $subject->getShippingAddress()->willReturn($address);
+        $address->getCountry()->willReturn($country);
+        $country->isEqualTo(1)->willReturn(true);
 
         $this->isEligible($subject, array('country' => 1))->shouldReturn(true);
     }

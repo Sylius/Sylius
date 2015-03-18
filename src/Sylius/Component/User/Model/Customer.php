@@ -265,7 +265,7 @@ class Customer implements CustomerInterface, GroupableInterface
     public function getGroupNames()
     {
         $names = array();
-        foreach ($this->getGroups() as $group) {
+        foreach ($this->groups as $group) {
             $names[] = $group->getName();
         }
 
@@ -277,8 +277,8 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function addGroup(GroupInterface $group)
     {
-        if (!$this->getGroups()->contains($group)) {
-            $this->getGroups()->add($group);
+        if (!$this->groups->contains($group)) {
+            $this->groups->add($group);
         }
     }
 
@@ -287,8 +287,8 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function removeGroup(GroupInterface $group)
     {
-        if ($this->getGroups()->contains($group)) {
-            $this->getGroups()->removeElement($group);
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
         }
     }
 
@@ -345,12 +345,31 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function isDeleted()
     {
-        return (null !== $this->deletedAt) && ((new \DateTime()) >= $this->deletedAt);
+        return null !== $this->deletedAt && new \DateTime() >= $this->deletedAt;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function isEqualTo($data)
+    {
+        if (is_object($data)) {
+            if (!$data instanceof CustomerInterface) {
+                return false;
+            }
+
+            return $data->getId() === $this->id;
+        }
+
+        return $data === $this->id;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return (string) $this->getEmail();
+        return (string) $this->email;
     }
 
     /**

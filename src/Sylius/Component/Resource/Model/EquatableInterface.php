@@ -12,21 +12,14 @@
 namespace Sylius\Component\Resource\Model;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Joseph Bielawski <stloyd@gmail.com>
  */
-interface ToggleableInterface
+interface EquatableInterface
 {
     /**
+     * @param mixed $data
+     *
      * @return bool
      */
-    public function isEnabled();
-
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
-
-    public function enable();
-
-    public function disable();
+    public function isEqualTo($data);
 }

@@ -146,6 +146,22 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
+    public function isEqualTo($data)
+    {
+        if (is_object($data)) {
+            if (!$data instanceof CountryInterface) {
+                return false;
+            }
+
+            return $data->getIsoName() === $this->isoName || $data->getId() === $this->id;
+        }
+
+        return $data === $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isEnabled()
     {
         return $this->enabled;
