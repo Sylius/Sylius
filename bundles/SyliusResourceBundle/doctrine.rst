@@ -1,7 +1,7 @@
 Doctrine tools
 ==============
 
-This bundle allow you easy usage of two extra doctrine tools: `XmlMappingDriver <http://symfony.com/doc/current/cookbook/doctrine/mapping_model_classes.html>`_
+This bundle allow you easy usage of two extra doctrine tools: `MappingDriver <http://symfony.com/doc/current/cookbook/doctrine/mapping_model_classes.html>`_
 and `ResolveDoctrineTargetEntitiesPass <http://symfony.com/doc/current/cookbook/doctrine/resolve_target_entity.html>`_.
 The first one allow you to put your models (entities, document, etc) and their mappings in specific directories. The second
 one define relationships between different entities without making them hard dependencies. We will explain how you can
@@ -11,13 +11,16 @@ enable them in the next chapters.
 
     Caution : these tools are facultatives!
 
-Creating a ``XmlMappingDriver``
+Creating a ``MappingDriver``
 -------------------------------
 
 .. code-block:: php
 
     class MyBundle extends AbstractResourceBundle
     {
+        // You can specify your mapping format (xml, yaml, annotation), by defaut xml is used.
+        protected $mappingFormat = ResourceBundleInterface::MAPPING_XML;
+
         // You need to specify a prefix for your bundle
         protected function getBundlePrefix()
         {
