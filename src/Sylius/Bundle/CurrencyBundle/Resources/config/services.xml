@@ -57,6 +57,9 @@
         <service id="sylius.currency_importer.european_central_bank" class="%sylius.currency_importer.european_central_bank.class%">
             <argument type="service" id="sylius.manager.currency" />
             <argument type="service" id="sylius.repository.currency" />
+            <argument type="collection">
+                <argument key="base_currency">%sylius.currency_importer.ecb.base_currency%</argument>
+            </argument>
         </service>
         <service id="sylius.currency_importer.ecb" alias="sylius.currency_importer.european_central_bank" />
 
