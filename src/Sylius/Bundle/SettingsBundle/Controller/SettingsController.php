@@ -16,6 +16,7 @@ use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 
@@ -96,5 +97,25 @@ class SettingsController extends Controller
     protected function getTranslator()
     {
         return $this->get('translator');
+    }
+
+    /**
+     * Check that user can change given namespace.
+     *
+     * @param string $namespace
+     *
+     * @return bool
+     */
+    protected function isGrantedOr403($namespace)
+    {
+        if (!$this->container->has('sylius.authorization_checker')) {
+            return true;
+        }
+
+        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
+            throw new AccessDeniedException();
+        }
+
+        return false;
     }
 }

@@ -563,6 +563,11 @@ sylius_rbac:
         sylius.contact_topic.update: Edit contact topic
         sylius.contact_topic.delete: Delete contact topic
 
+        sylius.manage.settings: Manage settings
+        sylius.settings.general: Manage general settings
+        sylius.settings.security: Manage security settings
+        sylius.settings.taxation: Manage taxation settings
+
         sylius.catalog: Manage products catalog
         sylius.sales: Manage sales
         sylius.shipping: Manage shipping
@@ -612,6 +617,7 @@ sylius_rbac:
         sylius.manage.report: [sylius.report.show, sylius.report.index, sylius.report.create, sylius.report.update, sylius.report.delete]
         sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
         sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
+        sylius.manage.settings: [sylius.settings.general, sylius.settings.security, sylius.settings.taxation]
 
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
         sylius.sales: [sylius.manage.order, sylius.manage.payment, sylius.manage.report]
@@ -630,7 +636,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method]
+            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         catalog_manager:
             name: Catalog Manager
