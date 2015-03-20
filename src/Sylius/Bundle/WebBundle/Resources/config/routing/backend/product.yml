@@ -9,8 +9,9 @@ sylius_backend_product_index:
         _sylius:
             template: SyliusWebBundle:Backend/Product:index.html.twig
             sortable: true
-            method: createFilterPaginator
-            arguments: [$criteria, $sorting, $deleted]
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting, $deleted]
 
 # @todo refactor this when PRs about API & search get merged
 sylius_backend_product_find:
@@ -62,8 +63,9 @@ sylius_backend_product_history:
         _controller: sylius.controller.product:historyAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:history.html.twig
-            method: findForDetailsPage
-            arguments: [$id]
+            repository:
+                method: findForDetailsPage
+                arguments: [$id]
 
 sylius_backend_product_show:
     path: /{id}
@@ -72,5 +74,6 @@ sylius_backend_product_show:
         _controller: sylius.controller.product:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Product:show.html.twig
-            method: findForDetailsPage
-            arguments: [$id]
+            repository:
+                method: findForDetailsPage
+                arguments: [$id]

@@ -26,8 +26,9 @@ sylius_backend_route_update:
         _controller: sylius.controller.route:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Content/Route:update.html.twig
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_route_index
     requirements:
         id: ".+"
@@ -38,8 +39,9 @@ sylius_backend_route_delete:
     defaults:
         _controller: sylius.controller.route:deleteAction
         _sylius:
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_route_index
     requirements:
         id: ".+"

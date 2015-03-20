@@ -26,8 +26,9 @@ sylius_backend_menu_update:
         _controller: sylius.controller.menu:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Content/Menu:update.html.twig
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_menu_index
     requirements:
         id: ".+"
@@ -38,8 +39,9 @@ sylius_backend_menu_delete:
     defaults:
         _controller: sylius.controller.menu:deleteAction
         _sylius:
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_menu_index
     requirements:
         id: ".+"

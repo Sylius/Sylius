@@ -26,8 +26,9 @@ sylius_backend_action_block_update:
         _controller: sylius.controller.action_block:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Content/Block/Action:update.html.twig
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_action_block_index
     requirements:
         id: ".+"
@@ -39,8 +40,9 @@ sylius_backend_action_block_delete:
         _controller: sylius.controller.action_block:deleteAction
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_action_block_index
     requirements:
         id: ".+"
