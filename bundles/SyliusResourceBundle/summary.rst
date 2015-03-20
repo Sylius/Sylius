@@ -51,7 +51,7 @@ Route configuration reference
                 # Number of item in the list (should be set to false if you want to disable it)
                 limit: 10 # integer or boolean
                 # Number of item by page (should be set to false if you want to disable it)
-                paginate 10 # integer or boolean
+                paginate: 10 # integer or boolean
                 # Enabling the filter
                 filterable: true # boolean
                 # Parameter used for filtering resources when filterable is enabled, using a $ to find the parameter in the request
