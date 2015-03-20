@@ -30,10 +30,8 @@
         "sylius/storage":                  "0.14.*@dev",
         "sylius/translation-bundle":       "0.14.*@dev",
         "friendsofsymfony/rest-bundle":    "1.5.*@dev",
-        "jms/serializer-bundle":           "~0.13",
         "white-october/pagerfanta-bundle": "~1.0",
-        "doctrine/doctrine-bundle":        "~1.3",
-        "willdurand/hateoas-bundle":       "@stable"
+        "doctrine/doctrine-bundle":        "~1.3"
     },
     "require-dev": {
         "phpspec/phpspec":      "~2.1",
@@ -45,7 +43,9 @@
     "suggest": {
         "doctrine/orm":         "~2.3",
         "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/phpcr-bundle": "~1.1"
+        "doctrine/phpcr-bundle": "~1.1",
+        "jms/serializer-bundle": "~0.13",
+        "willdurand/hateoas-bundle": "@stable"
     },
     "config": {
         "bin-dir": "bin"

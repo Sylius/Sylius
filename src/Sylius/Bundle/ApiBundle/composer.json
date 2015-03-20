@@ -23,6 +23,9 @@
         "php":                      ">=5.3.3",
 
         "sylius/resource-bundle":               "0.14.*@dev",
+        "jms/serializer-bundle":                "~0.13",
+        "willdurand/hateoas-bundle":            "@stable",
+
         "symfony/framework-bundle":             "~2.3",
         "friendsofsymfony/oauth-server-bundle": "~1.4"
     },
