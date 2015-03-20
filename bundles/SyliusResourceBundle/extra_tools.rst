@@ -62,8 +62,9 @@ You need use the following syntax *expr:resource.my_expression*.
         defaults:
             _controller: app.controller.user:indexAction
             _sylius:
-                method: findOrderByCustomer
-                arguments: ['expr:service("security.context").getToken().getUser()']
+                repository:
+                    method: findOrderByCustomer
+                    arguments: ['expr:service("security.context").getToken().getUser()']
 
 .. note::
 

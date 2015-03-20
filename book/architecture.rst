@@ -151,8 +151,9 @@ Displaying a resource with custom template and repository methods:
             _controller: sylius.controller.product:showAction
             _sylius:
                 template: AppStoreBundle:Product:show.html.twig # Use a custom template.
-                method: findForStore # Use custom repository method.
-                arguments: [$slug] # Pass the slug from the url to the repository.
+                repository:
+                    method: findForStore # Use custom repository method.
+                    arguments: [$slug] # Pass the slug from the url to the repository.
 
 Creating a product using custom form and redirection method:
 
