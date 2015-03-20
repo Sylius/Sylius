@@ -25,4 +25,7 @@ class Calculators extends BaseCalculators
 
     // Address zone based pricing.
     const ZONE_BASED = 'zone_based';
+
+    // Currency based pricing.
+    const CURRENCY_BASED = 'currency_based';
 }
