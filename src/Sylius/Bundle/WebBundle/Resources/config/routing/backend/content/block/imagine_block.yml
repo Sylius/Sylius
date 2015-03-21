@@ -26,8 +26,9 @@ sylius_backend_imagine_block_update:
         _controller: sylius.controller.imagine_block:updateAction
         _sylius:
             template: SyliusWebBundle:Backend/Content/Block/Imagine:update.html.twig
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_imagine_block_index
     requirements:
         id: ".+"
@@ -39,8 +40,9 @@ sylius_backend_imagine_block_delete:
         _controller: sylius.controller.imagine_block:deleteAction
         _sylius:
             template: SyliusWebBundle:Backend/Content/Misc:delete.html.twig
-            method: find
-            arguments: [$id]
+            repository:
+                method: find
+                arguments: [$id]
             redirect: sylius_backend_imagine_block_index
     requirements:
         id: ".+"

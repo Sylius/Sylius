@@ -8,8 +8,9 @@ sylius_api_product_index:
         _controller: sylius.controller.product:indexAction
         _sylius:
             template:  SyliusWebBundle:Backend/Product:index.html.twig
-            method:    createFilterPaginator
-            arguments: [$criteria, $sorting]
+            repository:
+                method:    createFilterPaginator
+                arguments: [$criteria, $sorting]
             paginate:  $limit
             sortable:  true
             sorting:

@@ -7,7 +7,8 @@ sylius_partial_product_latest:
         _controller: sylius.controller.product:indexAction
         _sylius:
             paginate: false
-            method: findLatest
-            arguments: [$limit]
+            repository:
+                method: findLatest
+                arguments: [$limit]
             template: $template
             permission: false

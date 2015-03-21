@@ -8,8 +8,9 @@ sylius_backend_user_index:
         _controller: sylius.controller.user:indexAction
         _sylius:
             template: SyliusWebBundle:Backend/User:index.html.twig
-            method: createFilterPaginator
-            arguments: [$criteria, $sorting, $deleted]
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting, $deleted]
             sortable: true
 
 sylius_backend_user_create:
@@ -46,5 +47,6 @@ sylius_backend_user_show:
         _controller: sylius.controller.user:showAction
         _sylius:
             template: SyliusWebBundle:Backend/User:show.html.twig
-            method: findForDetailsPage
-            arguments: [$id]
+            repository:
+                method: findForDetailsPage
+                arguments: [$id]

@@ -8,7 +8,8 @@ sylius_static_content_show:
         _controller: sylius.controller.static_content:showAction
         _sylius:
             template: SyliusWebBundle:Frontend/StaticContent:show.html.twig
-            method: findStaticContent
-            arguments: [$id]
+            repository:
+                method: findStaticContent
+                arguments: [$id]
     requirements:
         id: ".+"

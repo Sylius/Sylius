@@ -41,8 +41,8 @@ class ResourceResolver
      */
     public function getResource(RepositoryInterface $repository, $defaultMethod, array $defaultArguments = array())
     {
-        $callable = array($repository, $this->config->getMethod($defaultMethod));
-        $arguments = $this->config->getArguments($defaultArguments);
+        $callable = array($repository, $this->config->getRepositoryMethod($defaultMethod));
+        $arguments = $this->config->getRepositoryArguments($defaultArguments);
 
         return call_user_func_array($callable, $arguments);
     }
