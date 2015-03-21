@@ -41,7 +41,7 @@ class CurrencyBasedCalculator implements CalculatorInterface
             return $subject->getPrice();
         }
 
-        return (int) ($configuration[$currency] * 100); // *100 because we don't use a money form type
+        return (int) $configuration[$currency];
     }
 
     /**

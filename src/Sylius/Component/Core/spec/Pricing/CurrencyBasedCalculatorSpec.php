@@ -37,8 +37,8 @@ class CurrencyBasedCalculatorSpec extends ObjectBehavior
     function it_returns_default_price_if_currency_is_not_in_configuration(PriceableInterface $priceable, $currencyContext)
     {
         $configuration = array(
-            'SGD' => 49.99,
-            'USD' => 45.99
+            'SGD' => 4999,
+            'USD' => 4599
         );
 
         $currencyContext->getCurrency()->willReturn('EUR');
@@ -51,9 +51,9 @@ class CurrencyBasedCalculatorSpec extends ObjectBehavior
     function it_returns_the_price_for_currency_if_configuration_exists(PriceableInterface $priceable, $currencyContext)
     {
         $configuration = array(
-            'EUR' => 55.99,
-            'SGD' => 49.99,
-            'USD' => 45.99
+            'EUR' => 5599,
+            'SGD' => 4999,
+            'USD' => 4599
         );
 
         $currencyContext->getCurrency()->willReturn('SGD');

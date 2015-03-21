@@ -38,9 +38,10 @@ class CurrencyBasedConfigurationType extends AbstractType
     {
         foreach ($this->currencyRepository->findAll() as $currency) {
             $builder
-                ->add($currency->getCode(), 'text', array(
+                ->add($currency->getCode(), 'sylius_money', array(
                     'label'    => $currency->getCode(),
                     'required' => false,
+                    'currency' => $currency->getCode()
                 ))
             ;
         }
