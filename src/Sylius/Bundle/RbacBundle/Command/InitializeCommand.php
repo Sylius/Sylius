@@ -14,12 +14,6 @@ namespace Sylius\Bundle\RbacBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Intl\Intl;
-use Symfony\Component\Validator\Constraints\Country;
-use Symfony\Component\Validator\Constraints\Currency;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Locale;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
