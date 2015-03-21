@@ -60,10 +60,11 @@ Route configuration reference
                 sortable: false # boolean
                 # Parameter used for sorting resources when sortable is enabled, using a $ to find the parameter in the request
                 sorting: $sorting # string or array
-                # The method of the repository used to retrieve resources
-                method: findActiveProduct # string
-                # Arguments gave to the 'method'
-                arguments: [] # array
+                repository:
+                    # The method of the repository used to retrieve resources
+                    method: findActiveProduct # string
+                    # Arguments gave to the 'method'
+                    arguments: [] # array
                 factory:
                     # The method of the repository used to create the new resource
                     method: createNew # string

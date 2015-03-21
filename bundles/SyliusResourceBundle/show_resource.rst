@@ -83,7 +83,8 @@ Creating yet another action to change the method called could be a solution but 
         defaults:
             _controller: app.controller.user:showAction
             _sylius:
-                method: findOneWithFriends
-                arguments: [$username]
+                repository:
+                    method: findOneWithFriends
+                    arguments: [$username]
 
 Internally, it simply uses the ``$repository->findOneWithFriends($username)`` method, where ``username`` is taken from the current request.
