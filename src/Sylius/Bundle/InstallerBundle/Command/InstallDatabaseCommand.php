@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -54,25 +55,31 @@ EOT
         $dialog = $this->getHelper('dialog');
         $commands = array();
 
-        if ($dialog->askConfirmation(
-            $output,
-            '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
-            false
-        )) {
-            $commands['doctrine:database:drop'] = array('--force' => true);
-            $commands[] = 'doctrine:database:create';
-            $commands[] = 'doctrine:schema:create';
-        } elseif ($this->isSchemaPresent()) {
+        if ($input->getOption('no-interaction')) {
+            $commands['doctrine:schema:update'] = array('--force' => true);
+        } else {
             if ($dialog->askConfirmation(
                 $output,
-                '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ',
+                '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
                 false
-            )) {
-                $commands['doctrine:schema:drop'] = array('--force' => true);
+            )
+            ) {
+                $commands['doctrine:database:drop'] = array('--force' => true);
+                $commands[] = 'doctrine:database:create';
+                $commands[] = 'doctrine:schema:create';
+            } elseif ($this->isSchemaPresent()) {
+                if ($dialog->askConfirmation(
+                    $output,
+                    '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ',
+                    false
+                )
+                ) {
+                    $commands['doctrine:schema:drop'] = array('--force' => true);
+                    $commands[] = 'doctrine:schema:create';
+                }
+            } else {
                 $commands[] = 'doctrine:schema:create';
             }
-        } else {
-            $commands[] = 'doctrine:schema:create';
         }
 
         $commands[] = 'cache:clear';
@@ -87,6 +94,8 @@ EOT
 
     /**
      * @return bool
+     *
+     * @throws \Exception
      */
     private function isDatabasePresent()
     {
@@ -130,7 +139,7 @@ EOT
     }
 
     /**
-     * @return SchemaManager
+     * @return AbstractSchemaManager
      */
     private function getSchemaManager()
     {

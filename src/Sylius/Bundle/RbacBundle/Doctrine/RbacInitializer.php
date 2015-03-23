@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\RbacBundle\Doctrine;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -57,8 +58,14 @@ class RbacInitializer
 
     public function initialize(OutputInterface $output = null)
     {
-        $this->initializePermissions($output);
-        $this->initializeRoles($output);
+        try {
+            $this->initializePermissions($output);
+            $this->initializeRoles($output);
+        } catch (NonUniqueResultException $exception) {
+            if ($output) {
+                $output->writeln('RBAC already initialized');
+            }
+        }
     }
 
     protected function initializePermissions(OutputInterface $output = null)
