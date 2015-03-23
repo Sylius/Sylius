@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Manager\InventoryManagerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,7 +30,7 @@ class ItemResolverSpec extends ObjectBehavior
         CartProviderInterface $cartProvider,
         RepositoryInterface $productRepository,
         FormFactoryInterface $formFactory,
-        AvailabilityCheckerInterface $availabilityChecker,
+        InventoryManagerInterface $inventoryManager,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
         DelegatingCalculatorInterface $priceCalculator
     ) {
@@ -38,7 +38,7 @@ class ItemResolverSpec extends ObjectBehavior
             $cartProvider,
             $productRepository,
             $formFactory,
-            $availabilityChecker,
+            $inventoryManager,
             $restrictedZoneChecker,
             $priceCalculator
         );

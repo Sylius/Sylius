@@ -32,14 +32,14 @@
                 </td>
                 <td>
                     {% if not product.hasOptions %}
-                        <span class="label label-{{ product.masterVariant.isInStock ? 'success' : 'danger' }}">{{ product.masterVariant.onHand }}</span>
+                        <span class="label label-{{ sylius_inventory_is_available(product.masterVariant) ? 'success' : 'danger' }}">{{ product.masterVariant.stock.onHand }}</span>
                     {% else %}
                         -
                     {% endif %}
                 </td>
                 <td>
                     {% if not product.hasOptions %}
-                        <span class="label label-{{ product.masterVariant.onHold ? 'warning' : 'success' }}">{{ product.masterVariant.onHold }}</span>
+                        <span class="label label-{{ product.masterVariant.stock.onHold ? 'warning' : 'success' }}">{{ product.masterVariant.stock.onHold }}</span>
                     {% else %}
                         -
                     {% endif %}
@@ -76,8 +76,8 @@
                                         {% endfor %}
                                         </ul>
                                     </td>
-                                    <td><span class="label label-{{ variant.inStock ? 'success' : 'danger' }}">{{ variant.onHand }}</span></td>
-                                    <td><span class="label label-{{ variant.onHold ? 'warning' : 'success' }}">{{ variant.onHold }}</span></td>
+                                    <td><span class="label label-{{ sylius_inventory_is_available(variant) ? 'success' : 'danger' }}">{{ variant.stock.onHand }}</span></td>
+                                    <td><span class="label label-{{ variant.stock.onHold ? 'warning' : 'success' }}">{{ variant.stock.onHold }}</span></td>
                                     <td>
                                         <div class="pull-right">
                                             {{ buttons.edit(path('sylius_backend_product_variant_update', {'productId': product.id, 'id': variant.id})) }}

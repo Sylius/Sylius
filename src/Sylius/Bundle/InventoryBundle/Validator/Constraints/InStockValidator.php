@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Manager\InventoryManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -21,12 +21,12 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class InStockValidator extends ConstraintValidator
 {
-    protected $availabilityChecker;
+    protected $inventoryManager;
     protected $accessor;
 
-    public function __construct(AvailabilityCheckerInterface $availabilityChecker)
+    public function __construct(InventoryManagerInterface $inventoryManager)
     {
-        $this->availabilityChecker = $availabilityChecker;
+        $this->inventoryManager = $inventoryManager;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -42,7 +42,7 @@ class InStockValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
+        if (!$this->inventoryManager->isStockAvailable($stockable, $quantity)) {
             $this->context->addViolation(
                 $constraint->message,
                 array('%stockable%' => $stockable->getInventoryName())

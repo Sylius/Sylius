@@ -12,10 +12,11 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Manager\InventoryManagerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\SyliusStockableEvents;
+use Sylius\Component\Inventory\Manager\InsufficientStockException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -37,9 +38,9 @@ class InventoryOperator implements InventoryOperatorInterface
     /**
      * Availability checker.
      *
-     * @var AvailabilityCheckerInterface
+     * @var InventoryManagerInterface
      */
-    protected $availabilityChecker;
+    protected $inventoryManager;
 
     /**
      * Event dispatcher.
@@ -52,13 +53,13 @@ class InventoryOperator implements InventoryOperatorInterface
      * Constructor.
      *
      * @param BackordersHandlerInterface   $backordersHandler
-     * @param AvailabilityCheckerInterface $availabilityChecker
+     * @param InventoryManagerInterface $inventoryManager
      * @param EventDispatcherInterface     $eventDispatcher
      */
-    public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
+    public function __construct(BackordersHandlerInterface $backordersHandler, InventoryManagerInterface $inventoryManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->backordersHandler = $backordersHandler;
-        $this->availabilityChecker = $availabilityChecker;
+        $this->inventoryManager = $inventoryManager;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -73,7 +74,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_INCREASE, new GenericEvent($stockable));
 
-        $stockable->setOnHand($stockable->getOnHand() + $quantity);
+        $stockable->getStock()->setOnHand($stockable->getStock()->getOnHand() + $quantity);
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_INCREASE, new GenericEvent($stockable));
     }
@@ -89,7 +90,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_HOLD, new GenericEvent($stockable));
 
-        $stockable->setOnHold($stockable->getOnHold() + $quantity);
+        $stockable->getStock()->setOnHold($stockable->getStock()->getOnHold() + $quantity);
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_HOLD, new GenericEvent($stockable));
     }
@@ -105,7 +106,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_RELEASE, new GenericEvent($stockable));
 
-        $stockable->setOnHold($stockable->getOnHold() - $quantity);
+        $stockable->getStock()->setOnHold($stockable->getStock()->getOnHold() - $quantity);
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_RELEASE, new GenericEvent($stockable));
     }
@@ -131,7 +132,7 @@ class InventoryOperator implements InventoryOperatorInterface
             $stockable = $inventoryUnits[0]->getStockable();
         }
 
-        if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
+        if (!$this->inventoryManager->isStockAvailable($stockable, $quantity)) {
             throw new InsufficientStockException($stockable, $quantity);
         }
 
@@ -139,7 +140,7 @@ class InventoryOperator implements InventoryOperatorInterface
 
         $this->backordersHandler->processBackorders($inventoryUnits);
 
-        $onHand = $stockable->getOnHand();
+        $onHand = $stockable->getStock()->getOnHand();
 
         foreach ($inventoryUnits as $inventoryUnit) {
             if (InventoryUnitInterface::STATE_SOLD === $inventoryUnit->getInventoryState()) {
@@ -147,7 +148,7 @@ class InventoryOperator implements InventoryOperatorInterface
             }
         }
 
-        $stockable->setOnHand($onHand);
+        $stockable->getStock()->setOnHand($onHand);
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_DECREASE, new GenericEvent($stockable));
     }

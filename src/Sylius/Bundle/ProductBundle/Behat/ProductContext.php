@@ -64,7 +64,7 @@ class ProductContext extends DefaultContext
             }
 
             if (isset($data['quantity'])) {
-                $product->getMasterVariant()->setOnHand($data['quantity']);
+                $product->getMasterVariant()->getStock()->setOnHand($data['quantity']);
             }
 
             if (isset($data['variants selection']) && !empty($data['variants selection'])) {

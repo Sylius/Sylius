@@ -11,27 +11,27 @@
 
 namespace Sylius\Bundle\InventoryBundle\Templating\Helper;
 
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
+use Sylius\Component\Inventory\Manager\InventoryManagerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 class InventoryHelper extends Helper
 {
     /**
-     * Availability checker.
+     * Availability manager.
      *
-     * @var AvailabilityCheckerInterface
+     * @var InventoryManagerInterface
      */
-    private $checker;
+    private $manager;
 
     /**
      * Constructor.
      *
-     * @param AvailabilityCheckerInterface $checker
+     * @param InventoryManagerInterface $manager
      */
-    public function __construct(AvailabilityCheckerInterface $checker)
+    public function __construct(InventoryManagerInterface $manager)
     {
-        $this->checker = $checker;
+        $this->manager = $manager;
     }
 
     /**
@@ -43,7 +43,7 @@ class InventoryHelper extends Helper
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        return $this->checker->isStockAvailable($stockable);
+        return $this->manager->isStockAvailable($stockable);
     }
 
     /**
@@ -57,7 +57,7 @@ class InventoryHelper extends Helper
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        return $this->checker->isStockSufficient($stockable, $quantity);
+        return $this->manager->isStockSufficient($stockable, $quantity);
     }
 
     /**

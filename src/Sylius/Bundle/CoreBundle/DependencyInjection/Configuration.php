@@ -81,6 +81,13 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                             ->end()
                         ->end()
+                        ->arrayNode('product_variant_stock')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('model')->defaultValue('Sylius\Component\Core\Model\ProductVariantStock')->end()
+                            ->end()
+                        ->end()
+
                     ->end()
                 ->end()
             ->end()

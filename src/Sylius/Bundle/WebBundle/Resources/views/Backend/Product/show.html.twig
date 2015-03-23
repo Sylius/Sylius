@@ -116,9 +116,9 @@
                     <td>{{ product.shippingCategory|default('sylius.product.no_shipping_category'|trans) }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
+                    <td>{{ 'sylius.product.available_stock'|trans }}</td>
                     <td>
-                        {{ misc.state_label(product.masterVariant.availableOnDemand) }}
+                        {{ misc.state_label(sylius_inventory_is_available(product.masterVariant)) }}
                     </td>
                 </tr>
                 {% if product.restrictedZone %}
@@ -131,7 +131,7 @@
                 {% endif %}
                 <tr>
                     <td>{{ 'sylius.product.stock'|trans }}</td>
-                    <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
+                    <td><span class="label label-{{ product.masterVariant.isAvailable ? 'success' : 'important' }}">{{ product.masterVariant.stock.onHand }}</span></td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.product.price'|trans }}</td>

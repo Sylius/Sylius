@@ -71,19 +71,25 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="onHand">
-            <constraint name="NotBlank">
-                <option name="message">sylius.product_variant.onHand.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Range">
-                <option name="min">0</option>
-                <option name="minMessage">sylius.product_variant.onHand.min</option>
-                <option name="groups">sylius</option>
-            </constraint>
+        <property name="stock">
+            <constraint name="Valid" />
         </property>
     </class>
 
+    <class name="Sylius\Component\Core\Model\ProductVariantStock">
+        <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\NonEmptyIfManageStock">
+            <option name="fields">
+                <value>onHand</value>
+                <value>minQuantityInCart</value>
+                <value>maxQuantityInCart</value>
+                <value>minStockLevel</value>
+            </option>
+            <option name="groups">sylius</option>            
+        </constraint>
+        <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\MaxQuantityGreaterThenOrEqualMinQuantity">
+            <option name="groups">sylius</option>            
+        </constraint>
+    </class>
     <class name="Sylius\Component\Core\Model\ShippingMethod">
         <property name="zone">
             <constraint name="NotBlank">

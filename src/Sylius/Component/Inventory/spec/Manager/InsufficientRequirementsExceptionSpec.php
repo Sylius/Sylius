@@ -9,24 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Inventory\Operator;
+namespace spec\Sylius\Component\Inventory\Manager;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Model\StockInterface;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class InsufficientStockExceptionSpec extends ObjectBehavior
+class InsufficientRequirementsExceptionSpec extends ObjectBehavior
 {
-    function let(StockableInterface $stockable)
+    function let(StockableInterface $stockable, StockInterface $stock)
     {
+        $stockable->getInventoryName()->shouldBeCalled()->willReturn('Product Name');
+
+        $stockable->getStock()->willReturn($stock);
         $this->beConstructedWith($stockable, 10);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InsufficientStockException');
+        $this->shouldHaveType('Sylius\Component\Inventory\Manager\InsufficientRequirementsException');
     }
 
     function it_is_an_uderflow_exception()

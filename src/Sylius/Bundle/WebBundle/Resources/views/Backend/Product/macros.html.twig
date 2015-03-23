@@ -59,9 +59,13 @@
                     <em>{{ 'sylius.product.contain_variants'|trans }}</em>
                 </td>
             {% else %}
-                {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
+                {% if product.masterVariant.isAvailable %}
                     <td class="stock in-stock">
-                        {{ product.masterVariant.onHand }}
+                        {% if product.masterVariant.stock.isManageStock %}
+                        {{ product.masterVariant.stock.onHand }}
+                        {% else %}
+                        ~
+                        {% endif %}
                     </td>
                 {% else %}
                     <td class="stock out-of-stock text-muted">

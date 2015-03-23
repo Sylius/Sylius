@@ -17,7 +17,7 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-
+use Sylius\Component\Core\Model\ProductVariantStock;
 /**
  * Default assortment products to play with Sylius.
  *
@@ -255,7 +255,12 @@ class LoadProductsData extends DataFixture
             $variant->setAvailableOn($this->faker->dateTimeThisYear);
             $variant->setPrice($this->faker->randomNumber(4));
             $variant->setSku($this->getUniqueSku());
-            $variant->setOnHand($this->faker->randomNumber(1));
+
+            $stock = $variant->getStock();
+            $stock
+                ->setManageStock(true)
+                ->setOnHand($this->faker->randomNumber(1));
+            $variant->setStock($stock);
 
             $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
 
@@ -276,13 +281,22 @@ class LoadProductsData extends DataFixture
         $variant->setPrice($this->faker->randomNumber(4));
         $variant->setSku(null === $sku ? $this->getUniqueSku() : $sku);
         $variant->setAvailableOn($this->faker->dateTimeThisYear);
-        $variant->setOnHand($this->faker->randomNumber(1));
 
         $productName = explode(' ', $product->getName());
         $image = clone $this->getReference(
             'Sylius.Image.'.strtolower($productName[0])
         );
         $variant->addImage($image);
+
+        $stock = $variant->getStock();
+        $stock
+            ->setManageStock(true)
+            ->setOnHand($this->faker->randomNumber(2))
+            ->setMinQuantityInCart($this->faker->randomNumber(1))
+            ->setMaxQuantityInCart($this->faker->randomNumber(2))
+            ;
+
+        $variant->setStock($stock);
 
         $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
 

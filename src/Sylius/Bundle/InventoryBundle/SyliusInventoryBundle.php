@@ -40,6 +40,7 @@ class SyliusInventoryBundle extends AbstractResourceBundle
         return array(
             'Sylius\Component\Inventory\Model\InventoryUnitInterface' => 'sylius.model.inventory_unit.class',
             'Sylius\Component\Inventory\Model\StockableInterface'     => 'sylius.model.stockable.class',
+            'Sylius\Component\Inventory\Model\StockInterface'         => 'sylius.model.stock.class',
         );
     }
 

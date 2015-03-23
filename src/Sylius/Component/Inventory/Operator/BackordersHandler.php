@@ -64,7 +64,7 @@ class BackordersHandler implements BackordersHandlerInterface
 
         $this->validateInventoryUnits($inventoryUnits);
 
-        $this->processInventoryUnits($inventoryUnits, $stockable, $stockable->getOnHand());
+        $this->processInventoryUnits($inventoryUnits, $stockable, $stockable->getStock()->getOnHand());
     }
 
     /**
@@ -72,7 +72,7 @@ class BackordersHandler implements BackordersHandlerInterface
      */
     public function fillBackorders(StockableInterface $stockable)
     {
-        $onHand = $stockable->getOnHand();
+        $onHand = $stockable->getStock()->getOnHand();
 
         if ($onHand <= 0) {
             return;
@@ -91,7 +91,7 @@ class BackordersHandler implements BackordersHandlerInterface
             }
         }
 
-        $stockable->setOnHand($onHand);
+        $stockable->getStock()->setOnHand($onHand);
     }
 
     /**
