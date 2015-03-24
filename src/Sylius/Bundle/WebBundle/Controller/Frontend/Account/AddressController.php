@@ -37,6 +37,7 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/index.html.twig')
             ->setData(array(
+                'user' => $this->getUser(),
                 'addresses' => $this->getUser()->getAddresses(),
             ))
         ;
