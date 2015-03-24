@@ -16,7 +16,7 @@ use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Listener that looks for predefined referral variable in request & replace it
@@ -32,8 +32,13 @@ class ReferralListener
     private $cookieName;
     private $cookieLifetime;
 
-    public function __construct(SecurityContext $securityContext, RepositoryInterface $affiliateRepository, $queryParameter, $cookieName, $cookieLifetime)
-    {
+    public function __construct(
+        SecurityContextInterface $securityContext,
+        RepositoryInterface $affiliateRepository,
+        $queryParameter,
+        $cookieName,
+        $cookieLifetime
+    ) {
         $this->securityContext = $securityContext;
         $this->affiliateRepository = $affiliateRepository;
         $this->queryParameter = $queryParameter;
@@ -55,8 +60,6 @@ class ReferralListener
                 $event->setResponse($response);
 
                 if ($user = $this->getUser()) {
-                    $user->setReferralCode($referralCode);
-
                     $affiliate->addReferral($user);
                 }
             }

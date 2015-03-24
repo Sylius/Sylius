@@ -11,53 +11,24 @@
 
 namespace Sylius\Component\Promotion\Model;
 
+use Sylius\Component\Resource\Model\ActionInterface as BaseActionInterface;
+
 /**
  * Promotion action model interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ActionInterface
+interface ActionInterface extends BaseActionInterface
 {
-    const TYPE_FIXED_DISCOUNT      = 'fixed_discount';
-    const TYPE_PERCENTAGE_DISCOUNT = 'percentage_discount';
-
     /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType();
-
-    /**
-     * Set type
-     *
-     * @param $type
-     */
-    public function setType($type);
-
-    /**
-     * Get configuration
-     *
-     * @return array
-     */
-    public function getConfiguration();
-
-    /**
-     * Set configuration
-     *
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration);
-
-    /**
-     * Get promotion
+     * Get associated promotion.
      *
      * @return PromotionInterface
      */
     public function getPromotion();
 
     /**
-     * Set promotion
+     * Set associated promotion.
      *
      * @param PromotionInterface $promotion
      */

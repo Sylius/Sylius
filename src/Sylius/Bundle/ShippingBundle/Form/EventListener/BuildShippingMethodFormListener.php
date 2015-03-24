@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -29,9 +29,9 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * It hold registry of all calculators.
      *
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistryInterface
      */
-    private $calculatorRegistry;
+    private $registry;
 
     /**
      * Form factory.
@@ -43,12 +43,12 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param CalculatorRegistryInterface $calculatorRegistry
-     * @param FormFactoryInterface        $factory
+     * @param ServiceRegistryInterface $registry
+     * @param FormFactoryInterface     $factory
      */
-    public function __construct(CalculatorRegistryInterface $calculatorRegistry, FormFactoryInterface $factory)
+    public function __construct(ServiceRegistryInterface $registry, FormFactoryInterface $factory)
     {
-        $this->calculatorRegistry = $calculatorRegistry;
+        $this->registry = $registry;
         $this->factory = $factory;
     }
 
@@ -59,7 +59,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preSubmit'
         );
     }
 
@@ -84,7 +84,7 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
      *
      * @param FormEvent $event
      */
-    public function preBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
 
@@ -104,14 +104,22 @@ class BuildShippingMethodFormListener implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = array())
     {
-        $calculator = $this->calculatorRegistry->getCalculator($calculatorName);
+        if (!$this->registry->has($calculatorName)) {
+            return;
+        }
 
+        $calculator = $this->registry->get($calculatorName);
         if (!$calculator->isConfigurable()) {
             return;
         }
 
-        $configurationField = $this->factory->createNamed('configuration', $calculator->getConfigurationFormType(), $data, array('auto_initialize' => false));
-
-        $form->add($configurationField);
+        $form->add($this->factory->createNamed(
+            'configuration',
+            $calculator->getConfigurationFormType(),
+            $data,
+            array(
+                'auto_initialize' => false,
+            )
+        ));
     }
 }

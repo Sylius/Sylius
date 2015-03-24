@@ -52,6 +52,10 @@
             </cascade>
         </one-to-one>
 
+        <many-to-one field="referrer" target-entity="Sylius\Component\Affiliate\Model\AffiliateInterface">
+            <join-column name="referrer_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
             <cascade>
                 <cascade-all />

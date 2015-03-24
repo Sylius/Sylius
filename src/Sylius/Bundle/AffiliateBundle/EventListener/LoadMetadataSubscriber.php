@@ -70,7 +70,7 @@ class LoadMetadataSubscriber implements EventSubscriber
             'fieldName'    => 'referrals',
             'type'         => ClassMetadataInfo::ONE_TO_MANY,
             'targetEntity' => $this->referral,
-            'cascade'      => array('all'),
+            'cascade'      => array('persist'),
             'mappedBy'     => 'referrer',
             'joinTable'    => array(
                 'name' => 'sylius_referrals',

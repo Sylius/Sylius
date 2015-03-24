@@ -44,6 +44,7 @@ sylius:
                 permissions: Permissions
                 report: Reports
             sidebar:
+                affiliates: Affiliates
                 affiliate_settings: Affiliate settings
                 api_clients: API clients
                 assortment: Assortment

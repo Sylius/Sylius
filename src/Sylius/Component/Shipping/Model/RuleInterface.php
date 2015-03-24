@@ -11,36 +11,16 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\RuleInterface as BaseRuleInterface;
+
 /**
  * Shipping method rule model interface.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface RuleInterface
+interface RuleInterface extends BaseRuleInterface
 {
-    const TYPE_ITEM_TOTAL = 'item_total';
-    const TYPE_ITEM_COUNT = 'item_count';
-    const TYPE_WEIGHT     = 'weight';
-
-    /**
-     * @return string
-     */
-    public function getType();
-
-    /**
-     * @param string $type
-     */
-    public function setType($type);
-
-    /**
-     * @return array
-     */
-    public function getConfiguration();
-
-    /**
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration);
+    const TYPE_WEIGHT = 'weight';
 
     /**
      * @return null|ShippingMethodInterface

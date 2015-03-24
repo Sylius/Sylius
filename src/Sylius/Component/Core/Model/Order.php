@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Affiliate\Model\ReferrerInterface;
+use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
@@ -35,9 +35,9 @@ class Order extends Cart implements OrderInterface
     protected $user;
 
     /**
-     * Referrer.
+     * Referral.
      *
-     * @var ReferrerInterface
+     * @var ReferralInterface
      */
     protected $referrer;
 
@@ -570,9 +570,9 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setReferrer(ReferrerInterface $referrer)
+    public function setReferrer(ReferralInterface $referral = null)
     {
-        $this->referrer = $referrer;
+        $this->referrer = $referral;
 
         return $this;
     }

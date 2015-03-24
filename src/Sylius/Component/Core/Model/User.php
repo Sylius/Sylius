@@ -12,9 +12,10 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\ReferrerInterface;
+use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -31,6 +32,9 @@ class User extends BaseUser implements UserInterface
     protected $deletedAt;
     protected $currency;
     protected $orders;
+    /**
+     * @var Collection|RoleInterface[]
+     */
     protected $authorizationRoles;
     protected $billingAddress;
     protected $shippingAddress;
@@ -370,7 +374,7 @@ class User extends BaseUser implements UserInterface
         $roles = parent::getRoles();
 
         foreach ($this->authorizationRoles as $role) {
-            $roles += $role->getSecurityRoles();
+            $roles = array_merge($roles, $role->getSecurityRoles());
         }
 
         return $roles;
@@ -405,9 +409,9 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setReferrer(ReferrerInterface $referrer)
+    public function setReferrer(ReferralInterface $referral = null)
     {
-        $this->referrer = $referrer;
+        $this->referrer = $referral;
 
         return $this;
     }

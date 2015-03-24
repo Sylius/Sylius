@@ -65,6 +65,13 @@ class Invitation implements InvitationInterface
      */
     protected $updatedAt;
 
+    /**
+     * Expire time.
+     *
+     * @var \DateTime
+     */
+    protected $expireAt;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -190,6 +197,24 @@ class Invitation implements InvitationInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExpireAt()
+    {
+        return $this->expireAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExpireAt(\DateTime $expireAt = null)
+    {
+        $this->expireAt = $expireAt;
 
         return $this;
     }

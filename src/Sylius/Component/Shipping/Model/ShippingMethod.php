@@ -13,6 +13,7 @@ namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\RuleInterface as BaseRuleInterface;
 use Sylius\Component\Translation\Model\AbstractTranslatable;
 
 /**
@@ -249,7 +250,15 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * {@inheritdoc}
      */
-    public function hasRule(RuleInterface $rule)
+    public function hasRules()
+    {
+        return !$this->rules->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRule(BaseRuleInterface $rule)
     {
         return $this->rules->contains($rule);
     }
@@ -257,7 +266,7 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * {@inheritdoc}
      */
-    public function addRule(RuleInterface $rule)
+    public function addRule(BaseRuleInterface $rule)
     {
         if (!$this->hasRule($rule)) {
             $rule->setMethod($this);
@@ -270,10 +279,12 @@ class ShippingMethod extends AbstractTranslatable implements ShippingMethodInter
     /**
      * {@inheritdoc}
      */
-    public function removeRule(RuleInterface $rule)
+    public function removeRule(BaseRuleInterface $rule)
     {
-        $rule->setMethod(null);
-        $this->rules->removeElement($rule);
+        if ($this->hasRule($rule)) {
+            $rule->setMethod(null);
+            $this->rules->removeElement($rule);
+        }
 
         return $this;
     }

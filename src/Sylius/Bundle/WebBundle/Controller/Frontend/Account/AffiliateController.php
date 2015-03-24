@@ -13,7 +13,6 @@ namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
-use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,7 +93,7 @@ class AffiliateController extends FOSRestController
      * @throws NotFoundHttpException
      */
     public function referralsAction()
-    {die(var_dump($this->getUser()->getAffiliate()->getReferrals()->count()));
+    {
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Affiliate/referrals.html.twig')

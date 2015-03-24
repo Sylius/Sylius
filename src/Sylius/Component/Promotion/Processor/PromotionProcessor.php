@@ -12,9 +12,9 @@
 namespace Sylius\Component\Promotion\Processor;
 
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
-use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Resource\Checker\EligibilityCheckerInterface;
 
 /**
  * Process all active promotions.
@@ -30,7 +30,7 @@ class PromotionProcessor implements PromotionProcessorInterface
     protected $applicator;
     protected $promotions;
 
-    public function __construct(PromotionRepositoryInterface $repository, PromotionEligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
+    public function __construct(PromotionRepositoryInterface $repository, EligibilityCheckerInterface $checker, PromotionApplicatorInterface $applicator)
     {
         $this->repository = $repository;
         $this->checker = $checker;
@@ -44,14 +44,15 @@ class PromotionProcessor implements PromotionProcessorInterface
         }
 
         $eligiblePromotions = array();
-
         foreach ($this->getActivePromotions() as $promotion) {
             if (!$this->checker->isEligible($subject, $promotion)) {
                 continue;
             }
 
             if ($promotion->isExclusive()) {
-                return $this->applicator->apply($subject, $promotion);
+                $this->applicator->apply($subject, $promotion);
+
+                return;
             }
 
             $eligiblePromotions[] = $promotion;

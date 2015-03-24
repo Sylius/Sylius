@@ -20,21 +20,21 @@ use Doctrine\Common\Collections\Collection;
 class Affiliate implements AffiliateInterface
 {
     /**
-     * Affiliate id.
+     * AffiliateGoal id.
      *
      * @var int
      */
     protected $id;
 
     /**
-     * Affiliate provision amount.
+     * AffiliateGoal provision amount.
      *
      * @var int
      */
     protected $provisionAmount = 1;
 
     /**
-     * Affiliate provision type.
+     * AffiliateGoal provision type.
      *
      * @var int
      */
@@ -89,14 +89,6 @@ class Affiliate implements AffiliateInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasReferral(ReferralInterface $referral)
-    {
-        return $this->referrals->contains($referral);
     }
 
     /**
@@ -180,9 +172,9 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function setReferrer(ReferrerInterface $referrer)
+    public function setReferrer(ReferralInterface $referral = null)
     {
-        $this->referrer = $referrer;
+        $this->referrer = $referral;
 
         return $this;
     }
@@ -193,6 +185,14 @@ class Affiliate implements AffiliateInterface
     public function getReferrals()
     {
         return $this->referrals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasReferral(ReferralInterface $referral)
+    {
+        return $this->referrals->contains($referral);
     }
 
     /**

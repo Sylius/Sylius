@@ -19,7 +19,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="referralCode" column="referral_code" type="string" />
+        <field name="status" column="status" type="integer" />
 
         <one-to-many field="transactions" target-entity="Sylius\Component\Affiliate\Model\TransactionInterface" mapped-by="affiliate">
             <cascade>

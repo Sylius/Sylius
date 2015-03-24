@@ -17,7 +17,7 @@ use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Affiliate settings schema.
+ * AffiliateGoal settings schema.
  *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */

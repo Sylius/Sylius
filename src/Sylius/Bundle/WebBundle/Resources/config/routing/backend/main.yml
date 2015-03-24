@@ -12,6 +12,14 @@ sylius_backend_dashboard:
     path: /dashboard
     defaults: { _controller: sylius.controller.backend.dashboard:mainAction }
 
+sylius_backend_affiliation:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/affiliate/main.yml
+    prefix: /affiliate
+
+sylius_backend_affiliate:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/affiliate.yml
+    prefix: /affiliate
+
 sylius_backend_user:
     resource: @SyliusWebBundle/Resources/config/routing/backend/user.yml
     prefix: /users

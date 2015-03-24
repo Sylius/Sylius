@@ -32,7 +32,7 @@ class RegisterPromotionActionsPass implements CompilerPassInterface
         $actions = array();
 
         foreach ($container->findTaggedServiceIds('sylius.promotion_action') as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
+            if (!isset($attributes[0]['type'], $attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged promotion action needs to have `type` and `label` attributes.');
             }
 

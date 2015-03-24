@@ -17,18 +17,18 @@ namespace Sylius\Component\Affiliate\Model;
 interface ReferrerAwareInterface
 {
     /**
-     * Get referrer.
+     * Get referral.
      *
-     * @return null|ReferrerInterface
+     * @return null|ReferralInterface
      */
     public function getReferrer();
 
     /**
-     * Set referrer.
+     * Set referral.
      *
-     * @param ReferrerInterface $referrer
+     * @param ReferralInterface $referral
      *
      * @return self
      */
-    public function setReferrer(ReferrerInterface $referrer);
+    public function setReferrer(ReferralInterface $referral = null);
 }

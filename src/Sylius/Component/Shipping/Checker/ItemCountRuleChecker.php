@@ -20,6 +20,9 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  */
 class ItemCountRuleChecker implements RuleCheckerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration)
     {
         $count = $subject->getShippingItemCount();
@@ -31,6 +34,9 @@ class ItemCountRuleChecker implements RuleCheckerInterface
         return $count > $configuration['count'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigurationFormType()
     {
         return 'sylius_shipping_rule_item_count_configuration';

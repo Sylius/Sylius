@@ -34,7 +34,6 @@ class LoadAffiliateData extends DataFixture
 
         /** @var $affiliate AffiliateInterface */
         $affiliate = $this->getAffiliateRepository()->createNew();
-        $affiliate->setReferralCode(sha1($user->getId()));
 
         for ($i = 1; $i <= 50; $i++) {
             $transaction = $this->createTransaction(

@@ -11,84 +11,19 @@
 
 namespace Sylius\Component\Shipping\Model;
 
+use Sylius\Component\Resource\Model\Rule as BaseRule;
+
 /**
  * Shipping method rule model.
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Rule implements RuleInterface
+class Rule extends BaseRule implements RuleInterface
 {
-    /**
-     * Shipping rule identifier.
-     *
-     * @var mixed
-     */
-    protected $id;
-
-    /**
-     * Rule type.
-     *
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * All extra configuration.
-     *
-     * @var array
-     */
-    protected $configuration;
-
     /**
      * @var ShippingMethodInterface
      */
     protected $method;
-
-    public function __construct()
-    {
-        $this->configuration = array();
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration()
-    {
-        return $this->configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(array $configuration)
-    {
-        $this->configuration = $configuration;
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}

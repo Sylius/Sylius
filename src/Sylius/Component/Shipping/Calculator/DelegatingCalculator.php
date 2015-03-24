@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Calculator;
 
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
@@ -25,16 +25,16 @@ class DelegatingCalculator implements DelegatingCalculatorInterface
     /**
      * Calculator registry.
      *
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $registry;
 
     /**
      * Constructor.
      *
-     * @param CalculatorRegistryInterface $registry
+     * @param ServiceRegistryInterface $registry
      */
-    public function __construct(CalculatorRegistryInterface $registry)
+    public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
     }
@@ -48,7 +48,7 @@ class DelegatingCalculator implements DelegatingCalculatorInterface
             throw new UndefinedShippingMethodException('Cannot calculate charge for shipping subject without defined shipping method.');
         }
 
-        $calculator = $this->registry->getCalculator($method->getCalculator());
+        $calculator = $this->registry->get($method->getCalculator());
 
         return $calculator->calculate($subject, $method->getConfiguration());
     }

@@ -326,11 +326,10 @@ class Role implements RoleInterface
     /**
      * {@inheritdoc}
      */
-    public function setSecurityRoles($securityRoles)
+    public function setSecurityRoles(array $securityRoles)
     {
         $this->securityRoles = $securityRoles;
     }
-
 
     /**
      * {@inheritdoc}

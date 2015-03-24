@@ -47,9 +47,9 @@ sylius:
                 empty: You have no logged transaction yet.
             referrals:
                 title: List of your referrals
-                name: Nasme
+                name: Name
                 created_at: Registered at
-                earning: Earning
+                earning: Earnings
                 empty: You have no referrals yet.
         home:
             email: Email :
@@ -176,7 +176,40 @@ sylius:
             title: Title
             update_header: Editing string block
             updated_at: Last update
+    affiliate:
+        goal:
+            id: ID
+            create: Create new affiliate goal
+            create_header: Create new affiliate goal
+            index_header: Affiliate goals
+            update_header: Edit affiliate goal
+            manage: Manage affiliate goals
+            general_info: General info
+            name: Name
+            used: Used
+            starts_at: Starts at
+            ends_at: Ends at
+            no_results: There are no affiliate goals configured.
+            add_action: Add action
+            add_rule: Add rule
+            created_at: Created at
+            description: Description
+            show_header: Affiliate goal details
+            updated_at: Last update
+        actions: Actions
+        action:
+            configuration: Configuration
+            type: Type
+        rules: Rules
+        rule:
+            configuration: Configuration
+            type: Type
     breadcrumb:
+        affiliate:
+            goal:
+                create: Create new affiliate goal
+                index: Affiliate goals
+                update: Editing affiliate goal
         affiliate_settings: Affiliate Settings
         assortment: Assortment
         block:

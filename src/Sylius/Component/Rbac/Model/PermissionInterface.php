@@ -12,6 +12,7 @@
 namespace Sylius\Component\Rbac\Model;
 
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * Interface for the model representing a system Permission.
@@ -51,12 +52,12 @@ interface PermissionInterface extends TimestampableInterface
     public function setParent(PermissionInterface $permission);
 
     /**
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -73,7 +74,7 @@ interface PermissionInterface extends TimestampableInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(PermissionInterface $permission);
 

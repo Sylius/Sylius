@@ -238,6 +238,12 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.emails', $section)));
         }
+        if ($this->authorizationChecker->isGranted('sylius.affiliate_goal.index')) {
+            $child->addChild('affiliate_goals', array(
+                'route' => 'sylius_backend_affiliate_goal_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-piggy-bank'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_goal', $section)));
+        }
 
         if (!$child->hasChildren()) {
             $menu->removeChild('marketing');
@@ -313,6 +319,12 @@ class BackendMenuBuilder extends MenuBuilder
                 'route' => 'sylius_backend_permission_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-lock'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.permissions', $section)));
+        }
+        if ($this->authorizationChecker->isGranted('sylius.affiliate.index')) {
+            $child->addChild('affiliates', array(
+                'route'           => 'sylius_backend_affiliate_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-certificate'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliates', $section)));
         }
 
         if (!$child->hasChildren()) {

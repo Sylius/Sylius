@@ -68,4 +68,16 @@ interface InvitationInterface extends AffiliateAwareInterface, TimestampableInte
      * @return self
      */
     public function setStatus($status);
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpireAt();
+
+    /**
+     * @param \DateTime $expireAt
+     *
+     * @return self
+     */
+    public function setExpireAt(\DateTime $expireAt = null);
 }

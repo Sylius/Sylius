@@ -1,0 +1,48 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_backend_affiliate_goal_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.affiliate_goal:indexAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateGoal:index.html.twig
+            sortable: true
+            sorting:
+                createdAt: desc
+
+sylius_backend_affiliate_goal_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.affiliate_goal:createAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateGoal:create.html.twig
+            redirect: sylius_backend_affiliate_goal_show
+
+sylius_backend_affiliate_goal_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.affiliate_goal:updateAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateGoal:update.html.twig
+            redirect: sylius_backend_affiliate_goal_show
+
+sylius_backend_affiliate_goal_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.affiliate_goal:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect: sylius_backend_affiliate_goal_index
+
+sylius_backend_affiliate_goal_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.affiliate_goal:showAction
+        _sylius:
+            template: SyliusWebBundle:Backend/AffiliateGoal:show.html.twig

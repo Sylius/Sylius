@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        action:
+            fixed_provision_configuration:
+                amount: Amount
+            percentage_provision_configuration:
+                percentage: Percentage
+            type: Type
+        rule:
+            nth_action_configuration:
+                amount: Amount
+                equal: Equal
+            type: Type
+        affiliate_goal:
+            actions: Actions
+            description: Description
+            ends_at: Ends at
+            name: Name
+            rules: Rules
+            starts_at: Starts at
