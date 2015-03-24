@@ -24,6 +24,11 @@ class LocaleController extends ResourceController
     public function changeAction(Request $request)
     {
         $locale = $request->get('locale');
+
+        if (!$this->isLocaleAvailable($locale)) {
+            $locale = $this->getLocaleContext()->getDefaultLocale();
+        }
+
         $this->getLocaleContext()->setLocale($locale);
 
         if ($this->config->isApiRequest()) {
@@ -35,11 +40,21 @@ class LocaleController extends ResourceController
             return $this->handleView($view);
         }
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($request->headers->get('referer') ?: '/');
     }
 
     protected function getLocaleContext()
     {
         return $this->get('sylius.context.locale');
+    }
+
+    protected function getLocaleProvider()
+    {
+        return $this->get('sylius.locale_provider');
+    }
+
+    protected function isLocaleAvailable($locale)
+    {
+        return in_array($locale, $this->getLocaleProvider()->getLocales());
     }
 }
