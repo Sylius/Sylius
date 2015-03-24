@@ -11,23 +11,24 @@
 
 namespace Sylius\Component\Mailer\Sender\Adapter;
 
+use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface AdapterInterface
 {
-    const EVENT_EMAIL_SENT = 'sylius.email_sent';
-
     /**
      * Send an e-mail.
      *
      * @param array  $recipients
      * @param string $senderAddress
      * @param string $senderName
-     * @param RenderedEmail $email
+     * @param RenderedEmail $renderedEmail
+     * @param EmailInterface $email
      */
-    public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $email);
+    public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data);
 }
