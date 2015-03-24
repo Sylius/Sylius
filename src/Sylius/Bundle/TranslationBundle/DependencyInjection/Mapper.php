@@ -44,12 +44,4 @@ class Mapper
 
         $container->setParameter('sylius.translation.mapping', $mapping);
     }
-
-    protected function mapTranslatable()
-    {
-    }
-
-    protected function mapTranslation(array $translationMapping, $translation, array $translationConfig)
-    {
-    }
 }
