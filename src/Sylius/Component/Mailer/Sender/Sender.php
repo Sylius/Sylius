@@ -11,20 +11,28 @@
 
 namespace Sylius\Component\Mailer\Sender;
 
-use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface;
+use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
+use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
+use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 
 /**
  * Basic sender, which uses adapters system.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class Sender implements SenderInterface
 {
     /**
-     * @var AdapterInterface
+     * @var RendererAdapterInterface
      */
-    protected $adapter;
+    protected $rendererAdapter;
+
+    /**
+     * @var SenderAdapterInterface
+     */
+    protected $senderAdapter;
 
     /**
      * @var EmailProviderInterface
@@ -32,13 +40,26 @@ class Sender implements SenderInterface
     protected $provider;
 
     /**
-     * @param AdapterInterface $adapter
-     * @param EmailProviderInterface $provider
+     * @var DefaultSettingsProviderInterface
      */
-    public function __construct(AdapterInterface $adapter, EmailProviderInterface $provider)
-    {
-        $this->adapter = $adapter;
-        $this->provider = $provider;
+    protected $defaultSettingsProvider;
+
+    /**
+     * @param RendererAdapterInterface         $rendererAdapter
+     * @param SenderAdapterInterface           $senderAdapter
+     * @param EmailProviderInterface           $provider
+     * @param DefaultSettingsProviderInterface $defaultSettingsProvider
+     */
+    public function __construct(
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter,
+        EmailProviderInterface $provider,
+        DefaultSettingsProviderInterface $defaultSettingsProvider
+    ) {
+        $this->senderAdapter            = $senderAdapter;
+        $this->rendererAdapter          = $rendererAdapter;
+        $this->provider                 = $provider;
+        $this->defaultSettingsProvider  = $defaultSettingsProvider;
     }
 
     /**
@@ -52,6 +73,11 @@ class Sender implements SenderInterface
             return;
         }
 
-        $this->adapter->send($email, $recipients, $data);
+        $senderAddress = $email->getSenderAddress() ?: $this->defaultSettingsProvider->getSenderAddress();
+        $senderName = $email->getSenderName() ?: $this->defaultSettingsProvider->getSenderName();
+
+        $renderedEmail = $this->rendererAdapter->render($email, $data);
+
+        $this->senderAdapter->send($recipients, $senderAddress, $senderName, $renderedEmail);
     }
 }
