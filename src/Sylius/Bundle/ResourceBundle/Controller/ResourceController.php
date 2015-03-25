@@ -17,6 +17,7 @@ use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Sylius\Bundle\ResourceBundle\Form\DefaultFormFactory;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Component\Resource\Exception\MissingBundleException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -83,7 +84,7 @@ class ResourceController extends FOSRestController
         if (null !== $container) {
             $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
 
-            if (!$this->config->isApiRequest()) {
+            if (!$this->isApiRequest()) {
                 $this->flashHelper = new FlashHelper(
                     $this->config,
                     $container->get('translator'),
@@ -95,7 +96,7 @@ class ResourceController extends FOSRestController
                 $container->get($this->config->getServiceName('manager')),
                 $container->get('event_dispatcher'),
                 $this->config,
-                !$this->config->isApiRequest() ? $this->flashHelper : null
+                !$this->isApiRequest() ? $this->flashHelper : null
             );
         }
     }
@@ -142,7 +143,7 @@ class ResourceController extends FOSRestController
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
 
-            if ($this->config->isApiRequest()) {
+            if ($this->isApiRequest()) {
                 $resources = $this->getPagerfantaFactory()->createRepresentation(
                     $resources,
                     new Route(
@@ -184,7 +185,7 @@ class ResourceController extends FOSRestController
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
-            if ($this->config->isApiRequest()) {
+            if ($this->isApiRequest()) {
                 if ($resource instanceof ResourceEvent) {
                     throw new HttpException($resource->getErrorCode(), $resource->getMessage());
                 }
@@ -199,7 +200,7 @@ class ResourceController extends FOSRestController
             return $this->redirectHandler->redirectTo($resource);
         }
 
-        if ($this->config->isApiRequest()) {
+        if ($this->isApiRequest()) {
             return $this->handleView($this->view($form, 400));
         }
 
@@ -230,7 +231,7 @@ class ResourceController extends FOSRestController
         if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
-            if ($this->config->isApiRequest()) {
+            if ($this->isApiRequest()) {
                 if ($resource instanceof ResourceEvent) {
                     throw new HttpException($resource->getErrorCode(), $resource->getMessage());
                 }
@@ -245,7 +246,7 @@ class ResourceController extends FOSRestController
             return $this->redirectHandler->redirectTo($resource);
         }
 
-        if ($this->config->isApiRequest()) {
+        if ($this->isApiRequest()) {
             return $this->handleView($this->view($form, 400));
         }
 
@@ -272,7 +273,7 @@ class ResourceController extends FOSRestController
 
         $resource = $this->domainManager->delete($this->findOr404($request));
 
-        if ($this->config->isApiRequest()) {
+        if ($this->isApiRequest()) {
             if ($resource instanceof ResourceEvent) {
                 throw new HttpException($resource->getErrorCode(), $resource->getMessage());
             }
@@ -362,7 +363,8 @@ class ResourceController extends FOSRestController
             return $defaultFormFactory->create($resource, $this->container->get($this->config->getServiceName('manager')));
         }
 
-        if ($this->config->isApiRequest()) {
+        if ($this
+            ->isApiRequest()) {
             return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
         }
 
@@ -460,5 +462,25 @@ class ResourceController extends FOSRestController
         if ($permission && !$this->get('sylius.authorization_checker')->isGranted(sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission))) {
             throw new AccessDeniedHttpException();
         }
+    }
+
+    protected function isApiRequest()
+    {
+        if (!$this->config->isApiRequest()) {
+            return false;
+        }
+
+        $bundles = array(
+            'JMSSerializerBundle',
+            'BazingaHateoasBundle'
+        );
+        $enabledBundles = $this->container->getParameter('kernel.bundles');
+        foreach ($bundles as $bundle) {
+            if (!isset($enabledBundles[$bundle])){
+                throw new MissingBundleException($bundle);
+            }
+        }
+
+        return true;
     }
 }
