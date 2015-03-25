@@ -23,13 +23,20 @@ Feature: Volume based pricing
           And the default tax zone is "UK"
           And the following products exist:
             | name        | price | taxons       | tax category  |
-            | Symfony Tee | 69.00 | PHP T-Shirts | Taxable Goods |
+            | Symfony Tee | 70.00 | PHP T-Shirts | Taxable Goods |
           And product "Symfony Tee" has the following volume based pricing:
             | range | price |
-            | 0-9   | 69.00 |
+            | 1-9   | 69.00 |
             | 10-19 | 65.00 |
             | 20-29 | 60.00 |
             | 30+   | 55.99 |
+
+    Scenario: Volume-based pricing has priority over price attribute
+        Given I am on the store homepage
+         When I add product "Symfony Tee" to cart, with quantity "1"
+         Then I should be on the cart summary page
+          And "Tax total: €10.35" should appear on the page
+          And "Grand total: €79.35" should appear on the page
 
     Scenario: Price is calculated based on the quantity
         Given I am on the store homepage
@@ -44,3 +51,10 @@ Feature: Volume based pricing
          Then I should be on the cart summary page
           And "Tax total: €225.00" should appear on the page
           And "Grand total: €1,725.00" should appear on the page
+
+    Scenario: Lowest price is given for highest quantity and above
+        Given I am on the store homepage
+         When I add product "Symfony Tee" to cart, with quantity "100"
+         Then I should be on the cart summary page
+          And "Tax total: €839.85" should appear on the page
+          And "Grand total: €6,438.85" should appear on the page
