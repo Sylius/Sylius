@@ -34,6 +34,9 @@ class CountryTranslation extends AbstractTranslation implements CountryTranslati
      */
     protected $name;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return $this->name;

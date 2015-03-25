@@ -24,49 +24,8 @@ use Sylius\Component\Translation\Model\TranslatableInterface;
  * @author Prezent Internet B.V. <info@prezent.nl>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ORMTranslatableListener implements EventSubscriber, TranslatableListenerInterface
+class ORMTranslatableListener extends AbstractTranslatableListener implements EventSubscriber
 {
-    /**
-     * Locale to use for translations.
-     *
-     * @var string
-     */
-    private $currentLocale;
-
-    /**
-     * Locale to use when the current locale is not available.
-     *
-     * @var string
-     */
-    private $fallbackLocale;
-
-    /**
-     * Mapping.
-     *
-     * @var array
-     */
-    private $mappings;
-
-    /**
-     * @param string $mappings
-     * @param string $fallbackLocale
-     */
-    public function __construct(array $mappings, $fallbackLocale)
-    {
-        $this->mappings = $mappings;
-        $this->fallbackLocale = $fallbackLocale;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentLocale($currentLocale)
-    {
-        $this->currentLocale = $currentLocale;
-
-        return $this;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -111,19 +70,18 @@ class ORMTranslatableListener implements EventSubscriber, TranslatableListenerIn
     {
         // In the case A -> B -> TranslatableInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return.
-        if (!isset($this->mappings[$metadata->name])) {
+        if (!isset($this->configs[$metadata->name])) {
             return;
         }
 
-        $config = $this->mappings[$metadata->name];
-        $mapping = $config['translation']['mapping'];
+        $config = $this->configs[$metadata->name];
 
         $metadata->mapOneToMany(array(
-            'fieldName'     => $mapping['translatable']['translations'],
+            'fieldName'     => 'translations',
             'targetEntity'  => $config['translation']['model'],
-            'mappedBy'      => $mapping['translation']['translatable'],
+            'mappedBy'      => 'translatable',
             'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
-            'indexBy'       => $mapping['translation']['locale'],
+            'indexBy'       => 'locale',
             'cascade'       => array('persist', 'merge', 'remove'),
             'orphanRemoval' => true,
         ));
@@ -138,17 +96,16 @@ class ORMTranslatableListener implements EventSubscriber, TranslatableListenerIn
     {
         // In the case A -> B -> TranslationInterface, B might not have mapping defined as it
         // is probably defined in A, so in that case, we just return.
-        if (!isset($this->mappings[$metadata->name])) {
+        if (!isset($this->configs[$metadata->name])) {
             return;
         }
 
-        $config = $this->mappings[$metadata->name];
-        $mapping = $config['translation']['mapping'];
+        $config = $this->configs[$metadata->name];
 
         $metadata->mapManyToOne(array(
-            'fieldName'    => $mapping['translation']['translatable'],
+            'fieldName'    => 'translatable' ,
             'targetEntity' => $config['model'],
-            'inversedBy'   => $mapping['translatable']['translations'],
+            'inversedBy'   => 'translations' ,
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',
                 'referencedColumnName' => 'id',
@@ -157,9 +114,9 @@ class ORMTranslatableListener implements EventSubscriber, TranslatableListenerIn
             )),
         ));
 
-        if (!$metadata->hasField($mapping['translation']['locale'])) {
+        if (!$metadata->hasField('locale')) {
             $metadata->mapField(array(
-                'fieldName' => $mapping['translation']['locale'],
+                'fieldName' => 'locale',
                 'type'      => 'string',
                 'nullable'  => false,
             ));
@@ -167,8 +124,8 @@ class ORMTranslatableListener implements EventSubscriber, TranslatableListenerIn
 
         // Map unique index.
         $columns = array(
-            $metadata->getSingleAssociationJoinColumnName($mapping['translation']['translatable']),
-            $mapping['translation']['locale'],
+            $metadata->getSingleAssociationJoinColumnName('translatable'),
+            'locale'
         );
 
         if (!$this->hasUniqueConstraint($metadata, $columns)) {
@@ -220,23 +177,7 @@ class ORMTranslatableListener implements EventSubscriber, TranslatableListenerIn
             return;
         }
 
-        // Sometimes $entity is a doctrine proxy class, we therefore need to retrieve it's real class.
-        $classMetadata = $args->getEntityManager()->getClassMetadata(get_class($entity));
-
-        if (!isset($this->mappings[$classMetadata->getName()]) && !isset($this->mappings[$classMetadata->rootEntityName])) {
-            return;
-        }
-
-        $mapping = isset($this->mappings[$classMetadata->name]) ? $this->mappings[$classMetadata->getName()]['translation']['mapping'] : $this->mappings[$classMetadata->rootEntityName]['translation']['mapping'];
-
-        if (isset($mapping['translatable']['fallback_locale'])) {
-            $setter = 'set'.ucfirst($mapping['translatable']['fallback_locale']);
-            $entity->$setter($this->fallbackLocale);
-        }
-
-        if (isset($mapping['translatable']['current_locale'])) {
-            $setter = 'set'.ucfirst($mapping['translatable']['current_locale']);
-            $entity->$setter($this->currentLocale);
-        }
+        $entity->setCurrentLocale($this->localeProvider->getCurrentLocale());
+        $entity->setFallbackLocale($this->localeProvider->getFallbackLocale());
     }
 }

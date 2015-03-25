@@ -26,16 +26,7 @@
             <gedmo:slug fields="name" unique="false" />
         </field>
         <field name="permalink" column="permalink" type="string" unique="false">
-            <gedmo:slug fields="name" unique="false" >
-                <gedmo:handler class="Sylius\Bundle\TranslationBundle\GedmoHandler\TranslationSlugHandler">
-                <gedmo:handler-option name="relationField" value="translatable"/>
-                <gedmo:handler-option name="relationParentRelationField" value="parent"/>
-                <gedmo:handler-option name="parentFieldMethod" value="getPermalink"/>
-                <gedmo:handler-option name="locale" value="locale"/>
-                <gedmo:handler-option name="translate" value="translate"/>
-                <gedmo:handler-option name="separator" value="/"/>
-                </gedmo:handler>
-            </gedmo:slug>
+            <gedmo:slug fields="name" unique="false" />
         </field>
         <field name="description" column="description" type="text" nullable="true" />
         <unique-constraints>

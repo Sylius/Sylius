@@ -22,7 +22,7 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Prezent Internet B.V. <info@prezent.nl>
  */
-class ODMTranslatableListener implements EventSubscriber, TranslatableListenerInterface
+class ODMTranslatableListener implements EventSubscriber
 {
     /**
      * Locale to use for translations.

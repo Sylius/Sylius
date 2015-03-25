@@ -224,14 +224,6 @@ sylius_search:
 
 sylius_translation:
     locale_provider: sylius.translation.locale_provider.contextual
-    mapping:
-        translatable:
-            translations: translations
-            current_locale: currentLocale
-            fallback_locale: fallbackLocale
-        translation:
-            translatable: translatable
-            locale: locale
 
 sylius_mailer:
     templates:

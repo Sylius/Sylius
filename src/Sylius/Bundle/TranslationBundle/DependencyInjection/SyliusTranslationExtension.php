@@ -31,7 +31,6 @@ class SyliusTranslationExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_PARAMETERS | self::CONFIGURE_DATABASE
         );
 
-        $container->setParameter('sylius.translation.default_mapping', $config['mapping']);
         $container->setAlias('sylius.translation.locale_provider', $config['locale_provider']);
     }
 }

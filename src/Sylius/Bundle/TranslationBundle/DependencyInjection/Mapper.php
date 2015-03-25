@@ -26,16 +26,9 @@ class Mapper
      */
     public function mapTranslations(array $config, ContainerBuilder $container)
     {
-        if (!$container->hasParameter('sylius.translation.default_mapping')) {
-            throw new \Exception('Missing parameter sylius.translation.default_mapping. Default translation mapping must be defined!');
-        }
-
-        $defaultMapping = $container->getParameter('sylius.translation.default_mapping');
         $mapping = array();
 
         $mapping[$config['model']] = $config;
-        $mapping[$config['model']]['translation']['mapping'] += $defaultMapping;
-
         $mapping[$config['translation']['model']] = $mapping[$config['model']];
 
         if ($container->hasParameter('sylius.translation.mapping')) {

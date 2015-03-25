@@ -36,37 +36,6 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        $this->addMappingDefaults($rootNode);
-
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addMappingDefaults(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('mapping')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('translatable')
-                            ->children()
-                                ->scalarNode('translations')->defaultValue('translations')->end()
-                                ->scalarNode('current_locale')->defaultValue('currentLocale')->end()
-                                ->scalarNode('fallback_locale')->defaultValue('fallbackLocale')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('translation')
-                            ->children()
-                                ->scalarNode('translatable')->defaultValue('translatable')->end()
-                                ->scalarNode('locale')->defaultValue('locale')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 }

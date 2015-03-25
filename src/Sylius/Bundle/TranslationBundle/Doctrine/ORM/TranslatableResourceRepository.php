@@ -13,6 +13,7 @@ namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Translation\Model\TranslatableInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
@@ -39,6 +40,7 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     protected function getQueryBuilder()
     {
         $queryBuilder = parent::getQueryBuilder();
+
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin($this->getAlias() . '.translations', 'translation')
@@ -53,6 +55,7 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     protected function getCollectionQueryBuilder()
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
+
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin($this->getAlias() . '.translations', 'translation')
@@ -67,7 +70,13 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
     public function createNew()
     {
         $resource = parent::createNew();
-        $resource->setCurrentLocale($this->getCurrentLocale());
+
+        if (!$resource instanceof TranslatableInterface) {
+            throw new \InvalidArgumentException('Resource must implement TranslatableInterface.');
+        }
+
+        $resource->setCurrentLocale($this->localeProvider->getCurrentLocale());
+        $resource->setFallbackLocale($this->localeProvider->getFallbackLocale());
 
         return $resource;
     }
@@ -130,13 +139,5 @@ class TranslatableResourceRepository extends EntityRepository implements Transla
                 }
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrentLocale()
-    {
-        return $this->localeProvider->getLocale();
     }
 }

@@ -32,7 +32,12 @@ class LocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getCurrentLocale()
+    {
+        return $this->locale;
+    }
+
+    public function getFallbackLocale()
     {
         return $this->locale;
     }

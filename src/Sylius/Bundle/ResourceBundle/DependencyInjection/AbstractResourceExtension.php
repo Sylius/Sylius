@@ -183,6 +183,11 @@ abstract class AbstractResourceExtension extends Extension
             if (!isset($serviceClasses['form']) || !is_array($serviceClasses['form'])) {
                 continue;
             }
+
+            if ($this->isTranslationSupported() && isset($serviceClasses['translation'])) {
+                $this->registerFormTypes(array('classes' => array(sprintf('%s_translation', $model) => $serviceClasses['translation'])), $container);
+            }
+
             foreach ($serviceClasses['form'] as $name => $class) {
                 $suffix = ($name === self::DEFAULT_KEY ? '' : sprintf('_%s', $name));
                 $alias = sprintf('%s_%s%s', $this->applicationName, $model, $suffix);

@@ -49,7 +49,23 @@ class RequestLocaleProvider implements LocaleProviderInterface, EventSubscriberI
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getCurrentLocale()
+    {
+        return $this->getRequestLocale();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFallbackLocale()
+    {
+        return $this->getRequestLocale();
+    }
+
+    /**
+     * @return string
+     */
+    private function getRequestLocale()
     {
         if (null === $this->request) {
             throw new \RuntimeException('Request must be defined.');

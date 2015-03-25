@@ -35,7 +35,23 @@ class TranslationLocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocale()
+    public function getCurrentLocale()
+    {
+        return $this->getContextualLocale();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFallbackLocale()
+    {
+        return $this->getContextualLocale();
+    }
+
+    /**
+     * @return string
+     */
+    public function getContextualLocale()
     {
         return $this->localeContext->getLocale();
     }

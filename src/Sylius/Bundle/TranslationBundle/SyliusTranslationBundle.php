@@ -13,21 +13,9 @@ namespace Sylius\Bundle\TranslationBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\TranslationBundle\DependencyInjection\Compiler\TranslationListenerPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SyliusTranslationBundle extends AbstractResourceBundle
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new TranslationListenerPass());
-    }
-
     /**
      * {@inheritdoc}
      */
