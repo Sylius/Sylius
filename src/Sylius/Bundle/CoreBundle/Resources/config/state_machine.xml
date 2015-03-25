@@ -18,7 +18,6 @@
 
     <parameters>
         <!-- Callbacks -->
-        <parameter key="sylius.callback.affiliate_provision.class">Sylius\Bundle\CoreBundle\StateMachineCallback\AffiliateProvision</parameter>
         <parameter key="sylius.callback.shipment_states.class">Sylius\Bundle\CoreBundle\StateMachineCallback\ShipmentStatesCallback</parameter>
         <parameter key="sylius.callback.order_payment.class">Sylius\Bundle\CoreBundle\StateMachineCallback\OrderPaymentCallback</parameter>
         <parameter key="sylius.callback.coupon_usage.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CouponUsageCallback</parameter>
@@ -28,10 +27,6 @@
 
     <services>
         <!-- Callbacks -->
-        <service id="sylius.callback.affiliate_provision" class="%sylius.callback.affiliate_provision.class%">
-            <argument type="service" id="sylius.repository.affiliate" />
-        </service>
-
         <service id="sylius.callback.shipment_states" class="%sylius.callback.shipment_states.class%">
             <argument type="service" id="sylius.processor.shipment_processor" />
         </service>

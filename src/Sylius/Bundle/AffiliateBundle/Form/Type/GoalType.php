@@ -41,11 +41,11 @@ class GoalType extends AbstractResourceType
             ))
             ->add('rules', 'sylius_affiliate_goal_rule_collection', array(
                 'label' => 'sylius.form.affiliate_goal.rules',
-                'button_add_label' => 'sylius.affiliate_goal.add_rule',
+                'button_add_label' => 'sylius.affiliate.goal.add_rule',
             ))
             ->add('actions', 'sylius_affiliate_goal_action_collection', array(
                 'label' => 'sylius.form.affiliate_goal.actions',
-                'button_add_label' => 'sylius.affiliate_goal.add_action',
+                'button_add_label' => 'sylius.affiliate.goal.add_action',
             ))
         ;
     }

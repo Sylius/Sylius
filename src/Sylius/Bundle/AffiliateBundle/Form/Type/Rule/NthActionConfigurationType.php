@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Type;
 
 class NthActionConfigurationType extends AbstractType
@@ -37,13 +38,9 @@ class NthActionConfigurationType extends AbstractType
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'numeric')),
+                    new Range(array('min' => 1)),
                 ),
-            ))
-            ->add('equal', 'checkbox', array(
-                'label' => 'sylius.form.rule.nth_action_configuration.equal',
-                'constraints' => array(
-                    new Type(array('type' => 'bool')),
-                ),
+                'data' => 1,
             ))
         ;
     }

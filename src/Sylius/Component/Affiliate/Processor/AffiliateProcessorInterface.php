@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Affiliate\Action;
+namespace Sylius\Component\Affiliate\Processor;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Affiliate\Model\GoalInterface;
 
-interface AffiliationApplicatorInterface
+interface AffiliateProcessorInterface
 {
     /**
      * @param object             $subject
      * @param AffiliateInterface $affiliate
-     * @param GoalInterface      $goal
+     *
+     * @return mixed
      */
-    public function apply($subject, AffiliateInterface $affiliate, GoalInterface $goal);
+    public function process($subject, AffiliateInterface $affiliate);
 }

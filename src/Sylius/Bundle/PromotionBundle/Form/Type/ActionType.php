@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\EventListener\BuildActionFormSubscriber;
-use Sylius\Bundle\ResourceBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

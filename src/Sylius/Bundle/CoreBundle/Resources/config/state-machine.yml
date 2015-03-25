@@ -119,10 +119,6 @@ winzou_state_machine:
                     on:   'confirm'
                     do:   [@sylius.callback.coupon_usage, 'incrementCouponUsage']
                     args: ['object']
-                sylius_affiliate_provision:
-                    on:   'confirm'
-                    do:   [@sylius.callback.affiliate_provision, 'setAffiliateProvision']
-                    args: ['object']
 
                 sylius_release_inventory:
                     on:   'release'

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\AffiliateBundle\Form\Type;
 
 use Sylius\Bundle\AffiliateBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\EventListener\BuildActionFormSubscriber;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Affiliate\Model\ActionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -45,7 +45,7 @@ class ActionType extends AbstractConfigurationType
         parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(array(
-            'configuration_type' => ActionInterface::TYPE_FIXED_DISCOUNT,
+            'configuration_type' => ActionInterface::TYPE_FIXED_PROVISION,
         ));
     }
 

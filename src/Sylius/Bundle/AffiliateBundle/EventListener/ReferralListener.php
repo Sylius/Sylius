@@ -16,6 +16,7 @@ use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -28,8 +29,20 @@ class ReferralListener
 {
     private $securityContext;
     private $affiliateRepository;
+
+    /**
+     * @var string
+     */
     private $queryParameter;
+
+    /**
+     * @var string
+     */
     private $cookieName;
+
+    /**
+     * @var int
+     */
     private $cookieLifetime;
 
     public function __construct(
@@ -46,35 +59,43 @@ class ReferralListener
         $this->cookieLifetime = $cookieLifetime;
     }
 
+    /**
+     * @param FilterResponseEvent $event
+     */
     public function onKernelResponse(FilterResponseEvent $event)
     {
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+            return;
+        }
+
         $request = $event->getRequest();
 
         if (!$request->cookies->has($this->cookieName) && $request->query->has($this->queryParameter)) {
             $referralCode = $request->query->get($this->queryParameter);
             /** @var $affiliate AffiliateInterface */
-            if (null !== $affiliate = $this->affiliateRepository->findOneBy(array('referralCode' => $referralCode))) {
+            if ($this->addReferral($referralCode)) {
                 $response = $event->getResponse();
                 $response->headers->setCookie(new Cookie($this->cookieName, $referralCode, new \DateTime($this->cookieLifetime)));
 
                 $event->setResponse($response);
-
-                if ($user = $this->getUser()) {
-                    $affiliate->addReferral($user);
-                }
             }
         }
     }
 
     /**
-     * @return ReferralInterface|null
+     * @param string $referralCode
+     *
+     * @return bool
      */
-    private function getUser()
+    private function addReferral($referralCode)
     {
-        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->securityContext->getToken()->getUser();
+        $affiliate = $this->affiliateRepository->findOneBy(array('referralCode' => $referralCode));
+        if ($affiliate && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $affiliate->addReferral($this->securityContext->getToken()->getUser());
+
+            return true;
         }
 
-        return null;
+        return false;
     }
 }

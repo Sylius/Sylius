@@ -23,6 +23,9 @@ class RuleChoiceType extends AbstractType
         $this->rules = $rules;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver
@@ -32,11 +35,17 @@ class RuleChoiceType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'choice';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_affiliate_goal_rule_choice';

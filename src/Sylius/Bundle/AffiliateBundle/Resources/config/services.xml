@@ -26,6 +26,9 @@
         <parameter key="sylius.affiliate_goal_rule_checker.nth_action.class">Sylius\Component\Affiliate\Checker\NthActionChecker</parameter>
         <parameter key="sylius.affiliate_goal_applicator.class">Sylius\Component\Affiliate\Action\AffiliateApplicator</parameter>
 
+        <parameter key="sylius.affiliate_goal_action.fixed_provision.class">Sylius\Component\Affiliate\Action\FixedProvisionAction</parameter>
+        <parameter key="sylius.affiliate_goal_action.percentage_provision.class">Sylius\Component\Affiliate\Action\PercentageProvisionAction</parameter>
+
         <parameter key="sylius.registry.affiliate_goal_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
         <parameter key="sylius.registry.affiliate_goal_action.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
@@ -67,6 +70,14 @@
 
         <service id="sylius.affiliate_goal_applicator" class="%sylius.affiliate_goal_applicator.class%">
             <argument type="service" id="sylius.registry.affiliate_goal_action" />
+        </service>
+        <service id="sylius.affiliate_goal_action.fixed_provision" class="%sylius.affiliate_goal_action.fixed_provision.class%">
+            <argument type="service" id="sylius.repository.transaction" />
+            <tag name="sylius.affiliate_goal_action" type="fixed_provision" label="Fixed provision" />
+        </service>
+        <service id="sylius.affiliate_goal_action.percentage_provision" class="%sylius.affiliate_goal_action.percentage_provision.class%">
+            <argument type="service" id="sylius.repository.transaction" />
+            <tag name="sylius.affiliate_goal_action" type="percentage_provision" label="Percentage provision" />
         </service>
 
         <service id="sylius.registry.affiliate_goal_rule_checker" class="%sylius.registry.affiliate_goal_rule_checker.class%">

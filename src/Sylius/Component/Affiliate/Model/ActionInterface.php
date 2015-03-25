@@ -15,6 +15,9 @@ use Sylius\Component\Resource\Model\ActionInterface as BaseActionInterface;
 
 interface ActionInterface extends BaseActionInterface
 {
+    const TYPE_FIXED_PROVISION      = 'fixed_provision';
+    const TYPE_PERCENTAGE_PROVISION = 'percentage_provision';
+
     /**
      * Get goal.
      *

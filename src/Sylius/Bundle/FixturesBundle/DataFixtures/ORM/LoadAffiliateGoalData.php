@@ -32,8 +32,8 @@ class LoadAffiliateGoalData extends DataFixture
         $goal = $this->createGoal(
             'Newsletter Sign-up',
             'Provision for newsletter sign-up.',
-            array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1, 'equal' => true))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 500)))
+            array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1))),
+            array($this->createAction(ActionInterface::TYPE_FIXED_PROVISION, array('amount' => 500)))
         );
 
         $manager->persist($goal);
@@ -41,8 +41,8 @@ class LoadAffiliateGoalData extends DataFixture
         $goal = $this->createGoal(
             'Registration',
             'Provision for registration.',
-            array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1, 'equal' => true))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 250)))
+            array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1))),
+            array($this->createAction(ActionInterface::TYPE_FIXED_PROVISION, array('amount' => 250)))
         );
 
         $manager->persist($goal);
@@ -50,8 +50,8 @@ class LoadAffiliateGoalData extends DataFixture
         $goal = $this->createGoal(
             '1st order',
             'Provision for 1st order',
-            array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1, 'equal' => true))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_DISCOUNT, array('amount' => 100)))
+            array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1))),
+            array($this->createAction(ActionInterface::TYPE_PERCENTAGE_PROVISION, array('amount' => 5)))
         );
 
         $manager->persist($goal);

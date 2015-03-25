@@ -11,7 +11,7 @@ sylius:
             type: Type
         rule:
             nth_action_configuration:
-                amount: Amount
+                count: Count
                 equal: Equal
             type: Type
         affiliate_goal:

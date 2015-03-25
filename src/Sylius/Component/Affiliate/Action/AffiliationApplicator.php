@@ -11,24 +11,37 @@
 
 namespace Sylius\Component\Affiliate\Action;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
-use Sylius\Component\Promotion\Action\AffiliationApplicatorInterface;
+use Sylius\Component\Affiliate\Model\GoalInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 class AffiliationApplicator implements AffiliationApplicatorInterface
 {
     protected $registry;
+    protected $manager;
 
-    public function __construct(ServiceRegistryInterface $registry)
+    public function __construct(ServiceRegistryInterface $registry, ObjectManager $manager)
     {
         $this->registry = $registry;
+        $this->manager = $manager;
     }
 
-    public function apply($subject, AffiliateInterface $affiliate)
+    /**
+     * {@inheritdoc}
+     */
+    public function apply($subject, AffiliateInterface $affiliate, GoalInterface $goal)
     {
-        /** @var $action AffiliateActionInterface */
-        foreach ($this->registry->all() as $action) {
-            $action->execute($subject, $action->getConfiguration(), $affiliate);
+        foreach ($goal->getActions() as $action) {
+            $this->registry
+                ->get($action->getType())
+                ->execute($subject, $action->getConfiguration(), $affiliate)
+            ;
+
+            $goal->incrementUsed();
         }
+
+        $this->manager->persist($goal);
+        $this->manager->flush();
     }
 }
