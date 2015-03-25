@@ -1,6 +1,6 @@
 {% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
 
-{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Frontend/Macros:buttons.html.twig' as buttons %}
 {% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
 {% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import simple_list %}
 
@@ -12,10 +12,10 @@
     <div class="row">
         <div class="col-md-7">{{ 'sylius.account.home.outline'|trans }} </div>
         <div class="col-md-5">
-            <strong>{{ app.user.lastName|upper }} {{ app.user.firstName }}</strong><br><br>
-            {{ 'sylius.account.home.id'|trans }} {{ app.user.id }} <br>
-            {{ 'sylius.account.home.email'|trans }} {{ app.user.email }}<br>
-            {{ 'sylius.account.home.since'|trans }} {{ app.user.createdAt|date() }}
+            <strong>{{ user.lastName|upper }} {{ user.firstName }}</strong><br><br>
+            {{ 'sylius.account.home.id'|trans }} {{ user.id }} <br>
+            {{ 'sylius.account.home.email'|trans }} {{ user.email }}<br>
+            {{ 'sylius.account.home.since'|trans }} {{ user.createdAt|date() }}
         </div>
     </div>
 
