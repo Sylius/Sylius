@@ -36,6 +36,7 @@ class SecurityController extends Controller
             'SyliusWebBundle:Frontend/User:login.html.twig',
             array(
                 'form'  => $form->createView(),
+                'last_username' => $lastUsername,
                 'error' => $error,
             )
         );

@@ -161,7 +161,7 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer)
+    public function setCustomer(CustomerInterface $customer = null)
     {
         $this->customer = $customer;
     }

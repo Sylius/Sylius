@@ -32,5 +32,5 @@ interface UserAwareInterface
      *
      * @return self
      */
-    public function setUser(UserInterface $user);
+    public function setUser(UserInterface $user = null);
 }

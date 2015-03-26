@@ -15,9 +15,9 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserProfileType extends AbstractResourceType
+class CustomerType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -26,10 +26,13 @@ class UserProfileType extends AbstractResourceType
     {
         $builder
             ->add('firstName', 'text', array(
-                'label' => 'sylius.form.user.first_name',
+                'label' => 'sylius.form.customer.first_name',
             ))
             ->add('lastName', 'text', array(
-                'label' => 'sylius.form.user.last_name',
+                'label' => 'sylius.form.customer.last_name',
+            ))
+            ->add('email', 'email', array(
+                'label' => 'sylius.form.customer.email',
             ))
         ;
     }
@@ -39,6 +42,6 @@ class UserProfileType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_user_profile';
+        return 'sylius_customer';
     }
 }

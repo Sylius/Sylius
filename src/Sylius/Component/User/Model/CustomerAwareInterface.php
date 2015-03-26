@@ -28,5 +28,5 @@ interface CustomerAwareInterface
      *
      * @return self
      */
-    public function setCustomer(CustomerInterface $customer);
+    public function setCustomer(CustomerInterface $customer = null);
 }

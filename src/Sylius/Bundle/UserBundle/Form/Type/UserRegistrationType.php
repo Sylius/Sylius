@@ -46,15 +46,7 @@ class UserRegistrationType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new CanonicalizerFormListener($this->canonicalizer))
-            ->add('firstName', 'text', array(
-                'label' => 'sylius.form.user.first_name',
-            ))
-            ->add('lastName', 'text', array(
-                'label' => 'sylius.form.user.last_name',
-            ))
-            ->add('email', 'text', array(
-                'label' => 'sylius.form.user.email',
-            ))
+            ->add('customer', 'sylius_customer')
             ->add('plainPassword', 'repeated', array(
                 'type'            => 'password',
                 'first_options'   => array('label' => 'sylius.form.user.password.label'),

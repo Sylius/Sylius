@@ -17,34 +17,6 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\User\Model\Customer">
-        <property name="firstName">
-            <constraint name="NotBlank">
-                <option name="message">sylius.user.first_name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.user.first_name.min</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.user.first_name.max</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-
-        <property name="lastName">
-            <constraint name="NotBlank">
-                <option name="message">sylius.user.last_name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.user.last_name.min</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.user.last_name.max</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-
         <property name="email">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.email.not_blank</option>
@@ -65,6 +37,23 @@
     </class>
 
     <class name="Sylius\Component\User\Model\User">
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">sylius.user.email.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.user.email.min</option>
+                <option name="max">254</option>
+                <option name="maxMessage">sylius.user.email.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">sylius.user.email.invalid</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="plainPassword">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>

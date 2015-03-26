@@ -16,18 +16,18 @@ use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserProfileTypeSpec extends ObjectBehavior
+class CustomerTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Sylius\Component\User\Model\User', array('sylius'));
+        $this->beConstructedWith('Sylius\Component\User\Model\Customer', array('sylius'));
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserProfileType');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\CustomerType');
     }
 
     function it_extends_abstract_resource_type()
@@ -37,13 +37,14 @@ class UserProfileTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_user_profile');
+        $this->getName()->shouldReturn('sylius_customer');
     }
 
     function it_builds_form(FormBuilderInterface $builder)
     {
         $builder->add('firstName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('email', 'email', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }
