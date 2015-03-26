@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Core\Event\PurchaseCompleteEvent;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;

@@ -63,5 +63,12 @@
         <service id="sylius.listener.order_update" class="%sylius.listener.order_update.class%">
             <tag name="kernel.event_listener" event="sylius.order.pre_update" method="recalculateOrderTotal" />
         </service>
+
+        <service id="sylius.listener.order_customer_inject" parent="sylius.listener.customer_inject">
+            <call method="setInterfaceName">
+                <argument type="string">%sylius.model.order.class%</argument>
+            </call>
+            <tag name="kernel.event_listener" event="sylius.order.pre_create" method="setCustomer" />
+        </service>
     </services>
 </container>

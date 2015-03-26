@@ -28,10 +28,9 @@ class GroupType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'sylius.form.group.name'
+                'label' => 'sylius.form.group.name',
             ))
         ;
-
     }
 
     /**

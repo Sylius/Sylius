@@ -5,6 +5,7 @@ suites:
     Core             : { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius/Component/Core }
     Contact          : { namespace: Sylius\Component\Contact, psr4_prefix: Sylius\Component\Contact, spec_path: src/Sylius/Component/Contact }
     Currency         : { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency }
+    Customer         : { namespace: Sylius\Component\Customer, psr4_prefix: Sylius\Component\Customer, spec_path: src/Sylius/Component/Customer }
     Installer        : { namespace: Sylius\Component\Installer, psr4_prefix: Sylius\Component\Installer, spec_path: src/Sylius/Component/Installer }
     Inventory        : { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory }
     Locale           : { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale }
@@ -32,9 +33,10 @@ suites:
     AddressingBundle : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle }
     AttributeBundle  : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle }
     CartBundle       : { namespace: Sylius\Bundle\CartBundle, psr4_prefix: Sylius\Bundle\CartBundle, spec_path: src/Sylius/Bundle/CartBundle }
+    ContactBundle    : { namespace: Sylius\Bundle\ContactBundle, psr4_prefix: Sylius\Bundle\ContactBundle, spec_path: src/Sylius/Bundle/ContactBundle }
     CoreBundle       : { namespace: Sylius\Bundle\CoreBundle, psr4_prefix: Sylius\Bundle\CoreBundle, spec_path: src/Sylius/Bundle/CoreBundle }
     CurrencyBundle   : { namespace: Sylius\Bundle\CurrencyBundle, psr4_prefix: Sylius\Bundle\CurrencyBundle , spec_path: src/Sylius/Bundle/CurrencyBundle }
-    ContactBundle    : { namespace: Sylius\Bundle\ContactBundle, psr4_prefix: Sylius\Bundle\ContactBundle, spec_path: src/Sylius/Bundle/ContactBundle }
+    CustomerBundle   : { namespace: Sylius\Bundle\CustomerBundle, psr4_prefix: Sylius\Bundle\CustomerBundle, spec_path: src/Sylius/Bundle/CustomerBundle }
     FlowBundle       : { namespace: Sylius\Bundle\FlowBundle, psr4_prefix: Sylius\Bundle\FlowBundle, spec_path: src/Sylius/Bundle/FlowBundle }
     InstallerBundle  : { namespace: Sylius\Bundle\InstallerBundle, psr4_prefix: Sylius\Bundle\InstallerBundle, spec_path: src/Sylius/Bundle/InstallerBundle }
     InventoryBundle  : { namespace: Sylius\Bundle\InventoryBundle, psr4_prefix: Sylius\Bundle\InventoryBundle, spec_path: src/Sylius/Bundle/InventoryBundle }

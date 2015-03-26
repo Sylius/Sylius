@@ -33,7 +33,7 @@ class OrderController extends FOSRestController
      */
     public function indexAction()
     {
-        $orders = $this->getOrderRepository()->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'));
+        $orders = $this->getOrderRepository()->findBy(array('customer' => $this->getUser()), array('updatedAt' => 'desc'));
 
         $view = $this
             ->view()
@@ -140,7 +140,7 @@ class OrderController extends FOSRestController
             throw $this->createNotFoundException('The order does not exist.');
         }
 
-        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') && $this->getUser()->getId() !== $order->getUser()->getId()) {
+        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') && $this->getUser()->getId() !== $order->getCustomer()->getId()) {
             throw new AccessDeniedException();
         }
 

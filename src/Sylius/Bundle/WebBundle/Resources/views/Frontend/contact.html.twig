@@ -2,21 +2,20 @@
 
 {% block content %}
 <div class="page-header">
-    <h1>Contact</h1>
+    <h1>{{ 'sylius.contact'|trans }}</h1>
 </div>
-
 
 <form action="{{ path('sylius_contact') }}" method="post" class="form-horizontal" novalidate>
     {{ form_errors(form) }}
 
     {{ form_row(form.topic) }}
-    {{ form_row(form.firstName) }}
-    {{ form_row(form.lastName) }}
-    {{ form_row(form.email) }}
+    {{ form_row(form.customer.firstName) }}
+    {{ form_row(form.customer.lastName) }}
+    {{ form_row(form.customer.email) }}
     {{ form_row(form.message) }}
 
-    <input type="submit" value="Send" class="btn btn-primary" />
+    <input type="submit" value="{{ 'sylius.send'|trans }}" class="btn btn-primary" />
 
-    {{ form_rest(form) }}
+    {{ form_row(form._token) }}
 </form>
 {% endblock %}

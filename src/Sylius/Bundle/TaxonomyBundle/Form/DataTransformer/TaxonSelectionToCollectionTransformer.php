@@ -48,9 +48,9 @@ class TaxonSelectionToCollectionTransformer extends ObjectSelectionToIdentifierC
 
     private function processObjects(Collection $value, array $taxons)
     {
-        /* @var $taxonomy TaxonomyInterface */
+        /** @var $taxonomy TaxonomyInterface */
         foreach ($this->objects as $taxonomy) {
-            /* @var $taxon TaxonInterface */
+            /** @var $taxon TaxonInterface */
             foreach ($taxonomy->getTaxons() as $taxon) {
                 $this->addChildren($taxonomy, $value, $taxon->getChildren(), $taxons);
 

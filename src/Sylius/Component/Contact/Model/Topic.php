@@ -19,7 +19,7 @@ namespace Sylius\Component\Contact\Model;
 class Topic implements TopicInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -29,7 +29,7 @@ class Topic implements TopicInterface
     protected $title;
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {

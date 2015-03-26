@@ -37,7 +37,7 @@ class GenericCapturePaymentAction extends PaymentAwareAction
         $payumOrder->setTotalAmount($order->getTotal());
         $payumOrder->setCurrencyCode($order->getCurrency());
         $payumOrder->setClientEmail($order->getEmail());
-        $payumOrder->setClientId($order->getUser() ? $order->getUser()->getId() : $order->getEmail());
+        $payumOrder->setClientId($order->getCustomer()->getEmail());
         $payumOrder->setDescription(sprintf(
             'Order containing %d items for a total of %01.2f',
             $order->getItems()->count(), $order->getTotal() / 100

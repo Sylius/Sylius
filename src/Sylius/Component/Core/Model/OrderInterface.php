@@ -24,7 +24,7 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
+interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface
 {
     const CHECKOUT_STATE_CART       = 'cart';
     const CHECKOUT_STATE_ADDRESSING = 'addressing';
@@ -32,34 +32,6 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     const CHECKOUT_STATE_PAYMENT    = 'payment';
     const CHECKOUT_STATE_FINALIZE   = 'finalize';
     const CHECKOUT_STATE_COMPLETED  = 'completed';
-
-    /**
-     * Get shipping address.
-     *
-     * @return AddressInterface
-     */
-    public function getShippingAddress();
-
-    /**
-     * Set shipping address.
-     *
-     * @param AddressInterface $address
-     */
-    public function setShippingAddress(AddressInterface $address);
-
-    /**
-     * Get billing address.
-     *
-     * @return AddressInterface
-     */
-    public function getBillingAddress();
-
-    /**
-     * Set billing address.
-     *
-     * @param AddressInterface $address
-     */
-    public function setBillingAddress(AddressInterface $address);
 
     /**
      * Get the checkout state.
@@ -141,22 +113,6 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @return bool
      */
     public function hasShipment(ShipmentInterface $shipment);
-
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string
-     *
-     * @return OrderInterface
-     */
-    public function setCurrency($currency);
 
     /**
      * Adds promotion coupon.

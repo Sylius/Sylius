@@ -57,7 +57,7 @@ class ShipmentType extends AbstractType
                     'expanded'    => true,
                     'constraints' => array(
                         $notBlank
-                    )
+                    ),
                 ));
             });
         ;
@@ -70,13 +70,13 @@ class ShipmentType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'data_class' => $this->dataClass
+                'data_class' => $this->dataClass,
             ))
             ->setOptional(array(
-                'criteria'
+                'criteria',
             ))
             ->setAllowedTypes(array(
-                'criteria'   => array('array')
+                'criteria' => array('array'),
             ))
         ;
     }

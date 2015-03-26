@@ -28,27 +28,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 class Order extends Cart implements OrderInterface
 {
     /**
-     * User.
-     *
-     * @var UserInterface
-     */
-    protected $user;
-
-    /**
-     * Order shipping address.
-     *
-     * @var AddressInterface
-     */
-    protected $shippingAddress;
-
-    /**
-     * Order billing address.
-     *
-     * @var AddressInterface
-     */
-    protected $billingAddress;
-
-    /**
      * Payments for this order.
      *
      * @var Collection|BasePaymentInterface[]
@@ -61,13 +40,6 @@ class Order extends Cart implements OrderInterface
      * @var Collection|ShipmentInterface[]
      */
     protected $shipments;
-
-    /**
-     * Currency ISO code.
-     *
-     * @var string
-     */
-    protected $currency;
 
     /**
      * Promotion coupons.
@@ -116,63 +88,6 @@ class Order extends Cart implements OrderInterface
         $this->shipments = new ArrayCollection();
         $this->promotionCoupons = new ArrayCollection();
         $this->promotions = new ArrayCollection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUser(UserInterface $user = null)
-    {
-        $this->user = $user;
-        if (null !== $this->user) {
-            $this->email = $this->user->getEmail();
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAddress()
-    {
-        return $this->shippingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingAddress(AddressInterface $address)
-    {
-        $this->shippingAddress = $address;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress()
-    {
-        return $this->billingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setBillingAddress(AddressInterface $address)
-    {
-        $this->billingAddress = $address;
-
-        return $this;
     }
 
     /**
@@ -426,24 +341,6 @@ class Order extends Cart implements OrderInterface
     public function getPromotionSubjectCount()
     {
         return $this->items->count();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-
-        return $this;
     }
 
     /**

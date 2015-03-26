@@ -50,7 +50,10 @@
             <form action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" method="post" novalidate class="form-horizontal">
                 <fieldset>
                     <legend>{{ 'sylius.checkout.security.new_customer'|trans }}</legend>
-                    {{ form_widget(registration_form) }}
+                    {{ form_row(registration_form.customer.email) }}
+                    {{ form_row(registration_form.customer.firstName) }}
+                    {{ form_row(registration_form.customer.lastName) }}
+                    {{ form_row(registration_form.plainPassword) }}
                 </fieldset>
                 <div class="form-actions">
                     <input type="submit" class="btn btn-success btn-block" value="{{ 'sylius.checkout.security.register'|trans }}" />

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Contact\Model;
 
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface RequestInterface extends TimestampableInterface
+interface RequestInterface extends CustomerAwareInterface, TimestampableInterface
 {
     /**
      * @return string
@@ -26,29 +27,14 @@ interface RequestInterface extends TimestampableInterface
     public function getFirstName();
 
     /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName);
-
-    /**
      * @return string
      */
     public function getLastName();
 
     /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName);
-
-    /**
      * @return string
      */
     public function getEmail();
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email);
 
     /**
      * @return string

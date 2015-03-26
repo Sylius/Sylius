@@ -68,7 +68,10 @@ stof_doctrine_extensions:
 fos_user:
     db_driver: orm
     firewall_name: main
+    use_listener: false
     user_class: %sylius.model.user.class%
+    service:
+        user_manager: sylius.user_manager
     group:
         group_class: Sylius\Component\Core\Model\Group
     profile:

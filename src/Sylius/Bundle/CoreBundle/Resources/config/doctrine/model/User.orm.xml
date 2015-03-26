@@ -22,9 +22,6 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="currency" length="3" nullable="true" />
-        <field name="firstName" column="first_name" type="string" nullable="true" />
-        <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
@@ -40,22 +37,18 @@
             </cascade>
         </one-to-one>
         <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
-            <join-column name="shipping_address_id"  on-delete="SET NULL" />
+            <join-column name="shipping_address_id" on-delete="SET NULL" />
             <cascade>
                 <cascade-persist />
             </cascade>
         </one-to-one>
 
-        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="user">
+        <one-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface" inversed-by="user" fetch="EAGER">
             <cascade>
                 <cascade-all />
             </cascade>
-        </one-to-many>
-        <one-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface" mapped-by="user">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
+        </one-to-one>
+
         <one-to-many field="oauthAccounts" target-entity="Sylius\Component\Core\Model\UserOAuthInterface" mapped-by="user">
             <cascade>
                 <cascade-all />

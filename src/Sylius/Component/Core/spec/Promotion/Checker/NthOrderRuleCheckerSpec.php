@@ -13,9 +13,9 @@ namespace spec\Sylius\Component\Core\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
@@ -40,43 +40,43 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getUser()->willReturn(null);
+        $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         OrderInterface $subject,
-        UserInterface $user,
+        CustomerInterface $customer,
         $ordersRepository
     ) {
-        $subject->getUser()->willReturn($user);
+        $subject->getCustomer()->willReturn($customer);
 
-        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(5);
+        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(5);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
         OrderInterface $subject,
-        UserInterface $user,
+        CustomerInterface $customer,
         $ordersRepository
     ) {
-        $subject->getUser()->willReturn($user);
+        $subject->getCustomer()->willReturn($customer);
 
-        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(12);
+        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(12);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
         OrderInterface $subject,
-        UserInterface $user,
+        CustomerInterface $customer,
         $ordersRepository
     ) {
-        $subject->getUser()->willReturn($user);
+        $subject->getCustomer()->willReturn($customer);
 
-        $ordersRepository->countByUserAndPaymentState($user, PaymentInterface::STATE_COMPLETED)->willReturn(9);
+        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(9);
 
         $this->isEligible($subject, array('nth' => 10))->shouldReturn(true);
     }

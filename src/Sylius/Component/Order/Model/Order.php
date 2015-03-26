@@ -13,6 +13,8 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Customer\Model\AddressInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
  * Model for orders.
@@ -43,6 +45,13 @@ class Order implements OrderInterface
     protected $number;
 
     /**
+     * Currency ISO code.
+     *
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * Items in order.
      *
      * @var Collection|OrderItemInterface[]
@@ -55,6 +64,13 @@ class Order implements OrderInterface
      * @var int
      */
     protected $itemsTotal = 0;
+
+    /**
+     * Customer.
+     *
+     * @var CustomerInterface
+     */
+    protected $customer;
 
     /**
      * Adjustments.
@@ -135,11 +151,18 @@ class Order implements OrderInterface
     protected $state = OrderInterface::STATE_CART;
 
     /**
-     * Customer email.
+     * Order shipping address.
      *
-     * @var string
+     * @var AddressInterface
      */
-    protected $email;
+    protected $shippingAddress;
+
+    /**
+     * Order billing address.
+     *
+     * @var AddressInterface
+     */
+    protected $billingAddress;
 
     /**
      * Constructor.
@@ -164,19 +187,69 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
+    public function getCustomer()
     {
-        return $this->email;
+        return $this->customer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setCustomer(BaseCustomerInterface $customer = null)
     {
-        $this->email = $email;
+        $this->customer = $customer;
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingAddress(AddressInterface $address)
+    {
+        $address->setCustomer(null);
+
+        $this->shippingAddress = $address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBillingAddress(AddressInterface $address)
+    {
+        $address->setCustomer(null);
+
+        $this->billingAddress = $address;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
     /**
@@ -617,14 +690,6 @@ class Order implements OrderInterface
     public function getState()
     {
         return $this->state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotalItems()
-    {
-        return $this->countItems();
     }
 
     /**

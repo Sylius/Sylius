@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -53,9 +54,12 @@ class OrderPricingListener
         }
 
         $context = array();
-        if (null !== $user = $order->getUser()) {
-            $context['user']   = $user;
-            $context['groups'] = $user->getGroups()->toArray();
+        if (null !== $user = $order->getCustomer()) {
+            $user = $user->getUser();
+            if ($user instanceof UserInterface) {
+                $context['user']   = $user;
+                $context['groups'] = $user->getGroups()->toArray();
+            }
         }
 
         foreach ($order->getItems() as $item) {

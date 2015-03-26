@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Pricing\Calculators as PriceCalculators;
+use Sylius\Component\Customer\Model\AddressInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
@@ -93,7 +94,7 @@ class CoreContext extends DefaultContext
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
-            $order->setUser($this->thereIsUser($data['user'], 'sylius'));
+            $order->setCustomer($this->thereIsCustomer($data['user'], 'sylius'));
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
@@ -222,20 +223,37 @@ class CoreContext extends DefaultContext
         $manager->flush();
     }
 
-    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
+    public function thereIsCustomer($email, $address = null)
     {
-        if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
+        if (null === $customer = $this->getRepository('customer')->findOneBy(array('email' => $email))) {
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
 
+            /* @var $customer CustomerInterface */
+            $customer = $this->getRepository('customer')->createNew();
+            $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+            $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $customer->setEmail($email);
+            $customer->addAddress($this->createAddress($address));
+
+            $this->getEntityManager()->persist($customer);
+            $this->getEntityManager()->flush();
+        }
+
+        return $customer;
+    }
+
+    public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
+    {
+        if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
             /* @var $user UserInterface */
             $user = $this->getRepository('user')->createNew();
-            $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
-            $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);
             $user->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
             $user->setPlainPassword($password);
+
+            $user->setCustomer($this->thereIsCustomer($email, $address));
 
             if (null !== $address) {
                 $user->setShippingAddress($this->createAddress($address));

@@ -32,7 +32,7 @@ class UserLoyaltyRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
-        if (null === $user = $subject->getUser()) {
+        if (null === $user = $subject->getCustomer()) {
             return false;
         }
 

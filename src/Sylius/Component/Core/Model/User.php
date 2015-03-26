@@ -11,8 +11,11 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
+use Sylius\Component\Customer\Model\AddressInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -22,25 +25,59 @@ use Sylius\Component\Rbac\Model\RoleInterface;
  */
 class User extends BaseUser implements UserInterface
 {
-    protected $firstName;
-    protected $lastName;
+    /**
+     * Creation time.
+     *
+     * @var \DateTime
+     */
     protected $createdAt;
+
+    /**
+     * Modification time.
+     *
+     * @var \DateTime
+     */
     protected $updatedAt;
+
+    /**
+     * @var \DateTime
+     */
     protected $deletedAt;
-    protected $currency;
-    protected $orders;
-    protected $authorizationRoles;
+
+    /**
+     * @var CustomerInterface
+     */
+    protected $customer;
+
+    /**
+     * @var AddressInterface
+     */
     protected $billingAddress;
+
+    /**
+     * @var AddressInterface
+     */
     protected $shippingAddress;
-    protected $addresses;
+
+    /**
+     * @var Collection|OrderInterface[]
+     */
+    protected $orders;
+
+    /**
+     * @var Collection|UserOAuthInterface[]
+     */
     protected $oauthAccounts;
+
+    /**
+     * @var Collection|RoleInterface[]
+     */
+    protected $authorizationRoles;
 
     public function __construct()
     {
-        $this->createdAt     = new \DateTime();
-        $this->orders        = new ArrayCollection();
-        $this->addresses     = new ArrayCollection();
-        $this->oauthAccounts = new ArrayCollection();
+        $this->orders             = new ArrayCollection();
+        $this->oauthAccounts      = new ArrayCollection();
         $this->authorizationRoles = new ArrayCollection();
 
         parent::__construct();
@@ -49,19 +86,70 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCustomer()
     {
-        return $this->currency;
+        return $this->customer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCustomer(BaseCustomerInterface $customer = null)
     {
-        $this->currency = $currency;
+        if ($customer instanceof CustomerInterface) {
+            $customer->setUser($this);
+        }
+
+        $this->customer = $customer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        parent::setUsername($email);
+
+        $this->customer->setEmail($email);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        parent::setEmailCanonical($emailCanonical);
+        parent::setUsernameCanonical($emailCanonical);
+
+        return $this;
+    }
+
+    public function getFirstName()
+    {
+        return $this->customer->getFirstName();
+    }
+
+    public function getLastName()
+    {
+        return $this->customer->getLastName();
+    }
+
+    public function getFullName()
+    {
+        return $this->customer->getFullName();
+    }
+
+    public function getGender()
+    {
+        return $this->customer->getGender();
+    }
+
+    public function getCurrency()
+    {
+        return $this->customer->getCurrency();
     }
 
     /**
@@ -79,8 +167,8 @@ class User extends BaseUser implements UserInterface
     {
         $this->billingAddress = $billingAddress;
 
-        if (null !== $billingAddress && !$this->hasAddress($billingAddress)) {
-            $this->addAddress($billingAddress);
+        if (null !== $billingAddress && !$this->customer->hasAddress($billingAddress)) {
+            $this->customer->addAddress($billingAddress);
         }
 
         return $this;
@@ -101,8 +189,8 @@ class User extends BaseUser implements UserInterface
     {
         $this->shippingAddress = $shippingAddress;
 
-        if (null !== $shippingAddress && !$this->hasAddress($shippingAddress)) {
-            $this->addAddress($shippingAddress);
+        if (null !== $shippingAddress && !$this->customer->hasAddress($shippingAddress)) {
+            $this->customer->addAddress($shippingAddress);
         }
 
         return $this;
@@ -119,87 +207,6 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function addAddress(AddressInterface $address)
-    {
-        if (!$this->hasAddress($address)) {
-            $this->addresses[] = $address;
-            $address->setUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAddress(AddressInterface $address)
-    {
-        $this->addresses->removeElement($address);
-        $address->setUser(null);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAddress(AddressInterface $address)
-    {
-        return $this->addresses->contains($address);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    public function getFullName()
-    {
-        return $this->firstName.' '.$this->lastName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -211,8 +218,6 @@ class User extends BaseUser implements UserInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -229,8 +234,6 @@ class User extends BaseUser implements UserInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -262,28 +265,6 @@ class User extends BaseUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
-    {
-        parent::setEmail($email);
-        parent::setUsername($email);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmailCanonical($emailCanonical)
-    {
-        parent::setEmailCanonical($emailCanonical);
-        parent::setUsernameCanonical($emailCanonical);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOAuthAccounts()
     {
         return $this->oauthAccounts;
@@ -302,11 +283,7 @@ class User extends BaseUser implements UserInterface
             return $provider === $oauth->getProvider();
         });
 
-        if ($filtered->isEmpty()) {
-            return null;
-        }
-
-        return $filtered->current();
+        return !$filtered->isEmpty() ? $filtered->current() : null;
     }
 
     /**
@@ -365,8 +342,8 @@ class User extends BaseUser implements UserInterface
     {
         $roles = parent::getRoles();
 
-        foreach ($this->getAuthorizationRoles() as $role) {
-            $roles = array_merge($roles, $role->getSecurityRoles());
+        foreach ($this->authorizationRoles as $role) {
+            $roles += $role->getSecurityRoles();
         }
 
         return $roles;

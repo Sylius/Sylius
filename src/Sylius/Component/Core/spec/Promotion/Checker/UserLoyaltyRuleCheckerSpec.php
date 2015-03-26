@@ -32,7 +32,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
 
     function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getUser()->willReturn(null);
+        $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
@@ -41,7 +41,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
-        $subject->getUser()->willReturn($user);
+        $subject->getCustomer()->willReturn($user);
         $user->getCreatedAt()->willReturn(new \DateTime());
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
@@ -51,7 +51,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
-        $subject->getUser()->willReturn($user);
+        $subject->getCustomer()->willReturn($user);
         $user->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
@@ -61,8 +61,8 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
+        $subject->getCustomer()->willReturn($user);
+        $user->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(false);
     }
@@ -71,7 +71,7 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         TimestampableInterface $user
     ) {
-        $subject->getUser()->willReturn($user);
+        $subject->getCustomer()->willReturn($user);
         $user->getCreatedAt()->willReturn(new \DateTime());
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(true);

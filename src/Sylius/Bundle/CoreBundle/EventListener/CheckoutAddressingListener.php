@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -25,7 +26,6 @@ class CheckoutAddressingListener
     public function setUserAddressing(GenericEvent $event)
     {
         $order = $event->getSubject();
-
         if (!$order instanceof OrderInterface) {
             throw new UnexpectedTypeException(
                 $order,
@@ -33,16 +33,17 @@ class CheckoutAddressingListener
             );
         }
 
-        if (null === $user = $order->getUser()) {
-            return;
-        }
+        if (null !== $user = $order->getCustomer()) {
+            $user = $user->getUser();
+            if ($user instanceof UserInterface) {
+                if (null === $user->getShippingAddress()) {
+                    $user->setShippingAddress(clone $order->getShippingAddress());
+                }
 
-        if (null === $user->getShippingAddress()) {
-            $user->setShippingAddress(clone $order->getShippingAddress());
-        }
-
-        if (null === $user->getBillingAddress()) {
-            $user->setBillingAddress(clone $order->getBillingAddress());
+                if (null === $user->getBillingAddress()) {
+                    $user->setBillingAddress(clone $order->getBillingAddress());
+                }
+            }
         }
     }
 }

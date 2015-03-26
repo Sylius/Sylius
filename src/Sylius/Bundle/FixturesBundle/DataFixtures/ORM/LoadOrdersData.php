@@ -62,11 +62,11 @@ class LoadOrdersData extends DataFixture
             $order->complete();
 
             if ($i < 4) {
-                $order->setUser($this->getReference('Sylius.User-Administrator'));
+                $order->setCustomer($this->getReference('Sylius.Customer-Administrator'));
 
                 $this->createPayment($order, PaymentInterface::STATE_COMPLETED);
             } else {
-                $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
+                $order->setCustomer($this->getReference('Sylius.Customer-'.rand(1, 15)));
 
                 $this->createPayment($order);
             }

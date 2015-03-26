@@ -9,9 +9,10 @@
 
 <form action="{{ path('fos_user_registration_register') }}" method="post" class="form-horizontal" novalidate>
     <fieldset class="well">
-        {% for field in form %}
-            {{ form_row(field) }}
-        {% endfor %}
+        {{ form_row(form.customer.email) }}
+        {{ form_row(form.customer.firstName) }}
+        {{ form_row(form.customer.lastName) }}
+        {{ form_row(form.plainPassword) }}
     </fieldset>
     <div class="form-actions clearfix">
         <div class="pull-right">

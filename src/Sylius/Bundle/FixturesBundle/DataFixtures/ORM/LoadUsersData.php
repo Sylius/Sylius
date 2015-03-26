@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Manager\UserManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 
 /**
@@ -32,7 +34,7 @@ class LoadUsersData extends DataFixture
         $rbacInitializer = $this->get('sylius.rbac.initializer');
         $rbacInitializer->initialize();
 
-        $user = $this->createUser(
+        list($user, $customer) = $this->createUser(
             'sylius@example.com',
             'sylius',
             true,
@@ -40,9 +42,9 @@ class LoadUsersData extends DataFixture
         );
         $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
-        $manager->persist($user);
-        $manager->flush();
+        $this->getUserManager()->updateUser($user);
 
+        $this->setReference('Sylius.Customer-Administrator', $customer);
         $this->setReference('Sylius.User-Administrator', $user);
 
         for ($i = 1; $i <= 200; $i++) {
@@ -52,7 +54,7 @@ class LoadUsersData extends DataFixture
                 $username = $this->faker->username;
             }
 
-            $user = $this->createUser(
+            list($user, $customer) = $this->createUser(
                 $username.'@example.com',
                 $username,
                 $this->faker->boolean()
@@ -60,9 +62,10 @@ class LoadUsersData extends DataFixture
 
             $user->setCreatedAt($this->faker->dateTimeThisMonth);
 
-            $manager->persist($user);
+            $this->getUserManager()->updateUser($user, false);
             $this->usernames[$username] = true;
 
+            $this->setReference('Sylius.Customer-'.$i, $customer);
             $this->setReference('Sylius.User-'.$i, $user);
         }
 
@@ -88,17 +91,27 @@ class LoadUsersData extends DataFixture
      */
     protected function createUser($email, $password, $enabled = true, array $roles = array('ROLE_USER'), $currency = 'EUR')
     {
-        /* @var $user UserInterface */
-        $user = $this->getUserRepository()->createNew();
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
-        $user->setUsername($email);
-        $user->setEmail($email);
+        /** @var $customer CustomerInterface */
+        $customer = $this->getCustomerRepository()->createNew();
+        $customer->setFirstname($this->faker->firstName);
+        $customer->setLastname($this->faker->lastName);
+        $customer->setCurrency($currency);
+
+        /** @var $user UserInterface */
+        $user = $this->getUserManager()->createUser($customer);
         $user->setPlainPassword($password);
         $user->setRoles($roles);
-        $user->setCurrency($currency);
         $user->setEnabled($enabled);
+        $user->setEmail($email);
 
-        return $user;
+        return array($user, $customer);
+    }
+
+    /**
+     * @return UserManager
+     */
+    protected function getUserManager()
+    {
+        return $this->get('sylius.user_manager');
     }
 }

@@ -1,0 +1,46 @@
+{
+    "name": "sylius/customer-bundle",
+    "type": "symfony-bundle",
+    "description": "Currencies processing for Symfony2.",
+    "keywords": ["sylius", "customer", "security"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                     ">=5.3.3",
+
+        "sylius/customer":         "0.14.*@dev",
+        "sylius/resource-bundle":  "0.14.*@dev",
+        "symfony/security-bundle": "~2.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\CustomerBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\CustomerBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
+        }
+    }
+}

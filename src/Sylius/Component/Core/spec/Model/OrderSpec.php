@@ -12,14 +12,12 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\InventoryUnitInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,37 +39,9 @@ class OrderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Order\Model\Order');
     }
 
-    function it_should_not_have_user_defined_by_default()
+    function it_should_not_have_customer_defined_by_default()
     {
-        $this->getUser()->shouldReturn(null);
-    }
-
-    function it_should_allow_defining_user(UserInterface $user)
-    {
-        $this->setUser($user);
-        $this->getUser()->shouldReturn($user);
-    }
-
-    function it_should_not_have_shipping_address_by_default()
-    {
-        $this->getShippingAddress()->shouldReturn(null);
-    }
-
-    function it_should_allow_defining_shipping_address(AddressInterface $address)
-    {
-        $this->setShippingAddress($address);
-        $this->getShippingAddress()->shouldReturn($address);
-    }
-
-    function it_should_not_have_billing_address_by_default()
-    {
-        $this->getBillingAddress()->shouldReturn(null);
-    }
-
-    function it_should_allow_defining_billing_address(AddressInterface $address)
-    {
-        $this->setBillingAddress($address);
-        $this->getBillingAddress()->shouldReturn($address);
+        $this->getCustomer()->shouldReturn(null);
     }
 
     function it_should_initialize_inventory_units_collection_by_default()
@@ -165,17 +135,6 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->count()->shouldReturn(0); //tax adjustment has been removed
     }
 
-    function it_should_not_have_currency_defined_by_default()
-    {
-        $this->getCurrency()->shouldReturn(null);
-    }
-
-    function it_should_allow_defining_currency()
-    {
-        $this->setCurrency('PLN');
-        $this->getCurrency()->shouldReturn('PLN');
-    }
-
     function it_has_checkout_shipping_state_by_default()
     {
         $this->getShippingState()->shouldReturn(OrderShippingStates::CHECKOUT);
@@ -217,13 +176,6 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item);
 
         $this->shouldNotBeBackorder();
-    }
-
-    function it_should_allow_defining_email_from_user(UserInterface $user)
-    {
-        $user->getEmail()->willReturn('example@example.com');
-        $this->setUser($user);
-        $this->getEmail()->shouldReturn('example@example.com');
     }
 
     /**

@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Contact\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Contact\Model\TopicInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -34,37 +35,15 @@ class RequestSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_first_name_by_default()
+    function it_has_no_customer_by_default()
     {
-        $this->getFirstName()->shouldReturn(null);
+        $this->getCustomer()->shouldReturn(null);
     }
 
-    function its_first_name_is_mutable()
+    function its_customer_is_mutable(CustomerInterface $customer)
     {
-        $this->setFirstName('Michal');
-        $this->getFirstName()->shouldReturn('Michal');
-    }
-
-    function it_has_no_last_name_by_default()
-    {
-        $this->getLastName()->shouldReturn(null);
-    }
-
-    function its_last_name_is_mutable()
-    {
-        $this->setLastName('lastname');
-        $this->getLastName()->shouldReturn('lastname');
-    }
-
-    function it_has_no_email_by_default()
-    {
-        $this->getEmail()->shouldReturn(null);
-    }
-
-    function its_email_is_mutable()
-    {
-        $this->setEmail('michal@lakion.com');
-        $this->getEmail()->shouldReturn('michal@lakion.com');
+        $this->setCustomer($customer);
+        $this->getCustomer()->shouldReturn($customer);
     }
 
     function it_has_no_message_by_default()

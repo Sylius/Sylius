@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\UserAwareInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -48,7 +48,7 @@ class UserAwareListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($resource);
 
-        $securityContext->getToken()->willReturn(null);
+        $order->setCustomer(Argument::any())->shouldNotBeCalled();
 
         $resource->setUser(Argument::any())->shouldNotBeCalled();
 
@@ -60,16 +60,20 @@ class UserAwareListenerSpec extends ObjectBehavior
         GenericEvent $event,
         UserAwareInterface $resource,
         TokenInterface $token,
-        UserInterface $user
+        UserInterface $user,
+        CustomerInterface $customer
     ) {
         $event->getSubject()->willReturn($resource);
 
+        $securityContext->isGranted('IS_CUSTOMER')->willReturn(false);
         $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $securityContext->getToken()->willReturn($token);
 
         $token->getUser()->willReturn($user);
 
-        $resource->setUser($user)->shouldBeCalled();
+        $user->getCustomer()->willReturn($customer);
+
+        $order->setCustomer($customer)->shouldBeCalled();
 
         $this->setUser($event);
     }

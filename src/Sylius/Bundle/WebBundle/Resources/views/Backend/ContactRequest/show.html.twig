@@ -16,7 +16,7 @@
 
 {{ contact_request.firstName }} <br/>
 {{ contact_request.lastName }} <br/>
-{{ contact_request.email }} <br/>
+<a href="{{ path('sylius_backend_customer_show', {'id': contact_request.customer.id}) }}">{{ contact_request.email }}</a><br/>
 {{ contact_request.topic }} <br/>
 {{ contact_request.message }}
 

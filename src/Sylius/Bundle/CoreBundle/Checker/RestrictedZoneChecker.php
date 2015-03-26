@@ -15,6 +15,8 @@ use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\UserAwareInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -34,15 +36,15 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
      */
     public function isRestricted($subject, AddressInterface $address = null)
     {
+        if (null === $address) {
+            return false;
+        }
+
         if (!$subject instanceof ProductInterface) {
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\ProductInterface');
         }
 
-        if (!$this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return false;
-        }
-
-        if (null === $address && null === $address = $this->securityContext->getToken()->getUser()->getShippingAddress()) {
+        if (null === $address = $this->getUserAddresss()) {
             return false;
         }
 
@@ -51,5 +53,29 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
         }
 
         return in_array($zone, $this->zoneMatcher->matchAll($address));
+    }
+
+    /**
+     * @return null|AddressInterface
+     */
+    private function getUserAddresss()
+    {
+        if ($this->securityContext->isGranted('IS_CUSTOMER') || $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $user = $this->securityContext->getToken()->getUser();
+        } else {
+            return null;
+        }
+
+        if (!$user instanceof UserAwareInterface && !$user instanceof UserInterface) {
+            return null;
+        } elseif ($user instanceof UserAwareInterface) {
+            $user = $user->getUser();
+        }
+
+        if (null === $address = $user->getShippingAddress()) {
+            return null;
+        }
+
+        return $address;
     }
 }

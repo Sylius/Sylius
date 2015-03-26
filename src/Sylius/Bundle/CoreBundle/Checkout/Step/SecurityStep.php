@@ -15,7 +15,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Symfony\Component\Form\FormInterface;
@@ -47,7 +47,7 @@ class SecurityStep extends CheckoutStep
 
         $this->overrideSecurityTargetPath();
 
-        return $this->renderStep($context, $this->getRegistrationForm(), $this->getGuestForm($order));
+        return $this->renderStep($context, $this->getRegistrationForm(), $this->getGuestForm());
     }
 
     /**
@@ -59,21 +59,31 @@ class SecurityStep extends CheckoutStep
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_INITIALIZE, $order);
 
         $request          = $context->getRequest();
-        $guestForm        = $this->getGuestForm($order);
+        $guestForm        = $this->getGuestForm();
         $registrationForm = $this->getRegistrationForm();
 
         if ($this->isGuestOrderAllowed() && $guestForm->handleRequest($request)->isValid()) {
+            $customer = $guestForm->getData();
+            $customer = $this->get('sylius.customer_manager')->createCustomer($customer->getEmail());
+            $order->setCustomer($customer);
+
             $this->getManager()->persist($order);
             $this->getManager()->flush();
+
+            $request->attributes->set('customer', $customer->getEmail());
 
             return $this->complete();
         } elseif ($registrationForm->handleRequest($request)->isValid()) {
             $user = $registrationForm->getData();
+            $user->setCustomer($this->get('sylius.customer_manager')->createCustomer($user->getCustomer()->getEmail()));
+
+            $request->attributes->set('customer', $user->getEmail());
 
             $this->dispatchEvent(FOSUserEvents::REGISTRATION_SUCCESS, new FormEvent($registrationForm, $request));
-            $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
 
             $this->saveUser($user);
+
+            $this->dispatchEvent(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, new Response()));
 
             return $this->complete();
         }
@@ -106,11 +116,8 @@ class SecurityStep extends CheckoutStep
      */
     protected function getRegistrationForm()
     {
-        $user = $this->get('fos_user.user_manager')->createUser();
-        $user->setEnabled(true);
-
         $form = $this->get('fos_user.registration.form.factory')->createForm();
-        $form->setData($user);
+        $form->setData($this->get('sylius.user_manager')->createUser($this->getCustomer()));
 
         return $form;
     }
@@ -118,17 +125,15 @@ class SecurityStep extends CheckoutStep
     /**
      * Get guest form.
      *
-     * @param OrderInterface $order
-     *
      * @return null|FormInterface
      */
-    protected function getGuestForm(OrderInterface $order)
+    protected function getGuestForm()
     {
         if (!$this->isGuestOrderAllowed()) {
             return null;
         }
 
-        return $this->createForm('sylius_checkout_guest', $order);
+        return $this->createForm('sylius_checkout_guest', $this->getCustomer());
     }
 
     /**
@@ -150,7 +155,7 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
-     * Dispatch security events, update user and flush
+     * Dispatch security events, update user and flush.
      *
      * @param UserInterface $user
      */
@@ -162,5 +167,18 @@ class SecurityStep extends CheckoutStep
         $this->get('fos_user.user_manager')->updateUser($user, true);
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_COMPLETE, $order);
+    }
+
+    /**
+     * @return null|CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        $customer = null;
+        if ($this->get('security.context')->isGranted('IS_CUSTOMER')) {
+            $customer = $this->get('security.context')->getToken()->getUser();
+        }
+
+        return $customer;
     }
 }

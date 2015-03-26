@@ -17,6 +17,15 @@
                                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Order\Model\Order">
+        <property name="customer">
+            <constraint name="Valid" />
+        </property>
+        <property name="shippingAddress">
+            <constraint name="Valid" />
+        </property>
+        <property name="billingAddress">
+            <constraint name="Valid" />
+        </property>
         <property name="items">
             <constraint name="Valid" />
         </property>

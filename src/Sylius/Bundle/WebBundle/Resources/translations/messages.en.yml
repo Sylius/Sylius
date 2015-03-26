@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) PaweÅ‚ JÄ™drzejewski
+# (c) Pawe³ Jêdrzejewski
 
 sylius:
     emails:
@@ -88,11 +88,11 @@ sylius:
             add_product: New product
             orders: Latest orders
             products: Your products
-            users: Users
+            customers: Customers
         statistics:
             header: This month's statistics
             orders_this_month: Total orders
-            registrations_this_month: Total registrations
+            registrations_this_month: New customers
             sales_this_month: Sales
     backend_welcome: Hello <b>%name%</b>!
     block:
@@ -185,6 +185,8 @@ sylius:
         content: Content
         currency:
             index: Currencies
+        customer:
+            index: Customers
         general_settings: General Settings
         generate: Generate
         group:
@@ -323,6 +325,7 @@ sylius:
     confirmation:
         message: Do you want to delete this item?
         title: Confirmation
+    contact: Contact
     country:
         add_province: Add province
         create: Create country
@@ -386,6 +389,22 @@ sylius:
         exchange_rate: Exchange rate
         update_header: Editing currency
         updated_at: Last update
+    customer:
+        create: Create Customer
+        currency: Currency
+        email: E-Mail
+        first_name: First name
+        general_info: Customer "%customer%" info
+        id: ID
+        index_header: Customers
+        last_name: Last name
+        manage: Manage Customers
+        no_results: There are no customers to display.
+        registered: Is registered?
+        registration_date: Registration date
+        show_header: Customer details
+        update_header: Edit Customer
+        user_details: Show User details
     filter: Filter
     form:
         cart:
@@ -413,6 +432,16 @@ sylius:
         comment:
             comment: Comment
             notify_customer: Notify Customer?
+        customer:
+            currency: Currency
+            email: E-mail
+            first_name: First name
+            last_name: Last name
+            gender:
+                header: Gender
+                female: Female
+                male: Male
+                not_selected: Not selected
     gallery:
         next: Next
         previous: Previous
@@ -508,7 +537,10 @@ sylius:
         create: Create order
         create_header: New order
         created_at: Creation time
+        currency: Currency
+        customer: Customer
         details: Order details
+        email: E-mail
         general_info: General info
         guest: Guest customer
         id: ID
@@ -556,8 +588,6 @@ sylius:
         taxes: Taxes
         total: Total
         update_header: Editing order
-        user: User
-        currency: Currency
         state: State
         immutable_warning: Already shipped orders are immutable.
         promotion_coupons: Coupons
@@ -602,6 +632,7 @@ sylius:
         no_results: There are no redirect routes to display.
         title: Title
         update_header: Editing redirect route
+    send: Send
     shipment:
         ship: Ship
         created_at: Created at
@@ -919,6 +950,7 @@ sylius:
         billing_address: Billing address
         create: create user
         create_header: New user
+        customer_details: Show Customer details
         email: E-Mail
         enabled: Confirmed?
         filter:

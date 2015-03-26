@@ -30,7 +30,6 @@ class LoadContactTopicData extends DataFixture
 
         for ($i = 0; $i < 5; $i++) {
             $contactTopic = $contactTopicRepository->createNew();
-
             $contactTopic->setTitle($this->faker->sentence());
 
             $manager->persist($contactTopic);

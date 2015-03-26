@@ -291,6 +291,11 @@ class BackendMenuBuilder extends MenuBuilder
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)))
         ;
 
+        $child->addChild('customers', array(
+            'route' => 'sylius_backend_customer_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-user'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)));
+
         if ($this->authorizationChecker->isGranted('sylius.user.index')) {
             $child->addChild('users', array(
                 'route' => 'sylius_backend_user_index',
@@ -363,6 +368,31 @@ class BackendMenuBuilder extends MenuBuilder
         if (!$child->hasChildren()) {
             $menu->removeChild('sales');
         }
+    }
+
+    /**
+     * Add support menu.
+     *
+     * @param ItemInterface $menu
+     * @param array         $childOptions
+     * @param string        $section
+     */
+    protected function addSupportMenu(ItemInterface $menu, array $childOptions, $section)
+    {
+        $child = $menu
+            ->addChild('support', $childOptions)
+            ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.support', $section)))
+        ;
+
+        $child->addChild('requests', array(
+            'route' => 'sylius_backend_contact_request_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.contact_requests', $section)));
+
+        $child->addChild('topics', array(
+            'route' => 'sylius_backend_contact_topic_index',
+            'labelAttributes' => array('icon' => 'glyphicon glyphicon-envelope'),
+        ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.contact_topics', $section)));
     }
 
     /**

@@ -10,6 +10,8 @@ sylius:
                 configuration: Configuration
                 countries: Countries
                 customer: Customers
+                contact_requests: Contact requests
+                contact_topics: Contact topics
                 content: Content
                 dashboard: Dashboard
                 currencies: Currencies
@@ -33,6 +35,7 @@ sylius:
                 shipping_categories: Shipping categories
                 shipping_methods: Shipping methods
                 stockables: Inventory levels
+                support: Support
                 tax_categories: Taxation categories
                 tax_rates: Tax rates
                 taxation_settings: Taxation settings
