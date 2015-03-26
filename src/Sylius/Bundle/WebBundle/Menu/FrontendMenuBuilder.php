@@ -20,7 +20,6 @@ use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -83,8 +82,7 @@ class FrontendMenuBuilder extends MenuBuilder
         RepositoryInterface       $taxonomyRepository,
         CartProviderInterface     $cartProvider,
         CurrencyHelper            $currencyHelper
-    )
-    {
+    ) {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher, $authorizationChecker);
 
         $this->currencyProvider = $currencyProvider;
@@ -125,7 +123,7 @@ class FrontendMenuBuilder extends MenuBuilder
             '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
         )));
 
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('ROLE_USER')) {
+        if ($this->securityContext->isGranted('ROLE_USER')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
             if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
@@ -160,7 +158,7 @@ class FrontendMenuBuilder extends MenuBuilder
             ))->setLabel($this->translate('sylius.frontend.menu.main.register'));
         }
 
-        if ($this->securityContext->getToken() && ($this->securityContext->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN'))) {
+        if ($this->securityContext->isGranted('ROLE_ADMINISTRATION_ACCESS') || $this->securityContext->isGranted('ROLE_PREVIOUS_ADMIN')) {
             $routeParams = array(
                 'route' => 'sylius_backend_dashboard',
                 'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.main.administration')),
@@ -190,13 +188,13 @@ class FrontendMenuBuilder extends MenuBuilder
      */
     public function createCurrencyMenu()
     {
-        $currencies = $this->currencyProvider->getAvailableCurrencies();
         $menu = $this->factory->createItem('root', array(
             'childrenAttributes' => array(
                 'class' => 'nav nav-pills'
             )
         ));
 
+        $currencies = $this->currencyProvider->getAvailableCurrencies();
         if (1 === count($currencies)) {
             $menu->setDisplay(false);
 
@@ -249,21 +247,6 @@ class FrontendMenuBuilder extends MenuBuilder
         return $menu;
     }
 
-    private function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
-    {
-        foreach ($taxon->getChildren() as $child) {
-            $childMenu = $menu->addChild($child->getName(), array(
-                'route'           => $child,
-                'labelAttributes' => array('icon' => 'icon-angle-right')
-            ));
-            if ($child->getPath()) {
-                $childMenu->setLabelAttribute('data-image', $child->getPath());
-            }
-
-            $this->createTaxonomiesMenuNode($childMenu, $child);
-        }
-    }
-
     /**
      * Builds frontend social menu.
      *
@@ -309,12 +292,10 @@ class FrontendMenuBuilder extends MenuBuilder
             )
         ));
 
-        $childOptions = array(
+        $child = $menu->addChild($this->translate('sylius.account.title'), array(
             'childrenAttributes' => array('class' => 'nav nav-list'),
             'labelAttributes'    => array('class' => 'nav-header')
-        );
-
-        $child = $menu->addChild($this->translate('sylius.account.title'), $childOptions);
+        ));
 
         $child->addChild('account', array(
             'route' => 'sylius_account_homepage',
@@ -347,5 +328,20 @@ class FrontendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.frontend.menu.account.addresses'));
 
         return $menu;
+    }
+
+    private function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
+    {
+        foreach ($taxon->getChildren() as $child) {
+            $childMenu = $menu->addChild($child->getName(), array(
+                'route'           => $child,
+                'labelAttributes' => array('icon' => 'icon-angle-right')
+            ));
+            if ($child->getPath()) {
+                $childMenu->setLabelAttribute('data-image', $child->getPath());
+            }
+
+            $this->createTaxonomiesMenuNode($childMenu, $child);
+        }
     }
 }
