@@ -35,6 +35,7 @@
         </service>
 
         <service id="sylius.translation.locale_provider.request" class="%sylius.translation.locale_provider.request.class%">
+            <argument>%sylius.translation.default_locale%</argument>
             <tag name="kernel.event_subscriber" priority="98" />
         </service>
     </services>

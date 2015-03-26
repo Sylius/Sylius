@@ -32,6 +32,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('default_locale')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->end()
             ->end()
         ;

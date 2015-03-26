@@ -223,6 +223,7 @@ sylius_search:
                 value: ~
 
 sylius_translation:
+    default_locale: %sylius.locale%
     locale_provider: sylius.translation.locale_provider.contextual
 
 sylius_mailer:

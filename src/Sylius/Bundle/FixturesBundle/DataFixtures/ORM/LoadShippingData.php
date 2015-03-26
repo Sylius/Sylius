@@ -41,13 +41,13 @@ class LoadShippingData extends DataFixture
         $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx'), 'USA', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $config = array('amount' => 2500);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es' => 'UPS terrestre'), 'EU', DefaultCalculators::FLAT_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'UPS Ground', 'es_ES' => 'UPS terrestre'), 'EU', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('amount' => 2350);
         $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'DHL'), 'EU', DefaultCalculators::FLAT_RATE, $config));
 
         $config = array('first_item_cost' => 4000, 'additional_item_cost' => 500, 'additional_item_limit' => 10);
-        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es' => 'FedEx internacional'), 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
+        $manager->persist($this->createShippingMethod(array($this->defaultLocale => 'FedEx World Shipping', 'es_ES' => 'FedEx internacional'), 'Rest of World', DefaultCalculators::FLEXIBLE_RATE, $config));
 
         $manager->flush();
     }
@@ -98,6 +98,7 @@ class LoadShippingData extends DataFixture
 
         foreach ($translatedNames as $locale => $name) {
             $method->setCurrentLocale($locale);
+            $method->setFallbackLocale($locale);
             $method->setName($name);
 
             if ($this->defaultLocale == $locale) {

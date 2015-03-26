@@ -28,6 +28,19 @@ class RequestLocaleProvider implements LocaleProviderInterface, EventSubscriberI
     private $request;
 
     /**
+     * @var string
+     */
+    private $defaultLocale;
+
+    /**
+     * @param string $defaultLocale
+     */
+    public function __construct($defaultLocale)
+    {
+        $this->defaultLocale = $defaultLocale;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
@@ -51,7 +64,11 @@ class RequestLocaleProvider implements LocaleProviderInterface, EventSubscriberI
      */
     public function getCurrentLocale()
     {
-        return $this->getRequestLocale();
+        if (null === $this->request) {
+            throw new \RuntimeException('Request must be defined.');
+        }
+
+        return $this->request->getLocale();
     }
 
     /**
@@ -59,18 +76,6 @@ class RequestLocaleProvider implements LocaleProviderInterface, EventSubscriberI
      */
     public function getFallbackLocale()
     {
-        return $this->getRequestLocale();
-    }
-
-    /**
-     * @return string
-     */
-    private function getRequestLocale()
-    {
-        if (null === $this->request) {
-            throw new \RuntimeException('Request must be defined.');
-        }
-
-        return $this->request->getLocale();
+        return $this->defaultLocale;
     }
 }

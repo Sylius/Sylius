@@ -69,7 +69,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
             $this->faker = $this->fakers[$this->defaultLocale];
         }
 
-        $this->fakers['es'] = FakerFactory::create('es');
+        $this->fakers['es_ES'] = FakerFactory::create('es_ES');
     }
 
     public function __call($method, $arguments)
