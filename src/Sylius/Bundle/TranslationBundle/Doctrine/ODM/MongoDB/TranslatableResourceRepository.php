@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
+namespace Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
@@ -81,7 +81,7 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $this->translatableFields)) {
-                $property = 'translations.'.$this->getCurrentLocale().'.'.$property;
+                $property = 'translations.'.$this->localeProvider->getCurrentLocale().'.'.$property;
             }
 
             if (is_array($value)) {
