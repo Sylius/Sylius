@@ -1,8 +1,8 @@
 {
     "name": "sylius/translation",
     "type": "library",
-    "description": "Translation helper.",
-    "keywords": ["translation"],
+    "description": "Translation component for translatable resources.",
+    "keywords": ["translation", "translatable", "resource", "sylius", "ecommerce"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
+        "sylius/resource":       "0.14.*@dev",
         "doctrine/collections" : "~1.2"
     },
     "require-dev": {
