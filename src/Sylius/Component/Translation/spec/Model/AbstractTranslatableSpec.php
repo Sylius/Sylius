@@ -43,20 +43,14 @@ class AbstractTranslatableSpec extends ObjectBehavior
 
     function its_current_locale_is_mutable()
     {
-        $this->setCurrentLocale('en')->shouldReturn($this);
-        $this->getCurrentLocale()->shouldReturn('en');
-    }
-
-    function its_current_translation_is_mutable(TranslationInterface $translation)
-    {
-        $this->setCurrentTranslation($translation);
-        $this->getCurrentTranslation()->shouldReturn($translation);
+        $this->setCurrentLocale('en_US')->shouldReturn($this);
+        $this->getCurrentLocale()->shouldReturn('en_US');
     }
 
     function its_fallback_locale_is_mutable()
     {
-        $this->setFallbackLocale('en');
-        $this->getFallbackLocale()->shouldReturn('en');
+        $this->setFallbackLocale('en_US');
+        $this->getFallbackLocale()->shouldReturn('en_US');
     }
 
     function it_throws_exception_if_no_locale_has_been_set()
@@ -66,18 +60,20 @@ class AbstractTranslatableSpec extends ObjectBehavior
 
     function it_translates_properly(TranslationInterface $translation)
     {
-        $translation->getLocale()->willReturn('en');
+        $translation->getLocale()->willReturn('en_US');
         $translation->setTranslatable($this)->shouldBeCalled();
 
         $this->addTranslation($translation);
-        $this->setCurrentLocale('en');
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
 
         $this->translate()->shouldReturn($translation);
     }
 
     function it_creates_new_empty_translation_properly()
     {
-        $this->setCurrentLocale('en');
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
         $this->translate()->shouldHaveType('spec\Sylius\Component\Translation\Model\ConcreteTranslatableTranslation');
     }
 
