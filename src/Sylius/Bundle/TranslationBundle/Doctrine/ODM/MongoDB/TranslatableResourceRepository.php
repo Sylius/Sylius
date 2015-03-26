@@ -41,7 +41,9 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
         $className = $this->getClassName();
 
         $object = new $className();
-        $object->setCurrentLocale($this->getCurrentLocale());
+
+        $object->setCurrentLocale($this->localeProvider->getCurrentLocale());
+        $object->setFallbackLocale($this->localeProvider->getFallbackLocale());
 
         return $object;
     }
@@ -92,13 +94,5 @@ class TranslatableResourceRepository extends DocumentRepository implements Trans
                 ;
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrentLocale()
-    {
-        return $this->localeProvider->getLocale();
     }
 }
