@@ -23,7 +23,7 @@ sylius_backend_affiliate_create:
 
 sylius_backend_affiliate_update:
     path: /{id}/edit
-    methods: [GET, PUT]
+    methods: [GET, PUT, PATCH]
     defaults:
         _controller: sylius.controller.affiliate:updateAction
         _sylius:
@@ -46,3 +46,14 @@ sylius_backend_affiliate_show:
         _controller: sylius.controller.affiliate:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Affiliate:show.html.twig
+
+sylius_backend_affiliate_transaction_delete:
+    path: /transaction/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.transaction:deleteAction
+        _sylius:
+            template: SyliusWebBundle:Backend/Misc:delete.html.twig
+            redirect:
+                route: sylius_backend_affiliate_show
+                parameters: {'id': $affiliateId}

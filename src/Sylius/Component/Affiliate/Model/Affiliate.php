@@ -118,6 +118,14 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setStatus($status)
     {
         $this->status = $status;

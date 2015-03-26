@@ -33,7 +33,7 @@ class LoadAffiliateGoalData extends DataFixture
             'Newsletter Sign-up',
             'Provision for newsletter sign-up.',
             array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_PROVISION, array('amount' => 500)))
+            array($this->createAction(ActionInterface::TYPE_FIXED_PROVISION, array('amount' => 5000)))
         );
 
         $manager->persist($goal);
@@ -42,7 +42,7 @@ class LoadAffiliateGoalData extends DataFixture
             'Registration',
             'Provision for registration.',
             array($this->createRule(RuleInterface::TYPE_NTH, array('count' => 1))),
-            array($this->createAction(ActionInterface::TYPE_FIXED_PROVISION, array('amount' => 250)))
+            array($this->createAction(ActionInterface::TYPE_FIXED_PROVISION, array('amount' => 2500)))
         );
 
         $manager->persist($goal);

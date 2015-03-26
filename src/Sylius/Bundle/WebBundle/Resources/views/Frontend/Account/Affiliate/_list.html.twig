@@ -13,7 +13,7 @@
             <tr class="transaction">
                 <td>{{ transaction.createdAt|date }}</td>
                 <td>{{ (transaction.payment ? 'sylius.account.affiliate.history.payment' : 'sylius.account.affiliate.history.earning')|trans }}</td>
-                <td>{{ transaction.amount|sylius_money }}</td>
+                <td>{{ transaction.amount|sylius_price }}</td>
             </tr>
         {% endfor %}
         </tbody>

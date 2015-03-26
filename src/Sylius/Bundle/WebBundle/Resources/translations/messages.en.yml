@@ -177,6 +177,31 @@ sylius:
             update_header: Editing string block
             updated_at: Last update
     affiliate:
+        id: ID
+        status: Status
+        referrals: Referrals
+        transactions: Transactions
+        updated_at: Last update
+        create: Create new affiliate
+        create_header: Create new affiliate
+        index_header: Affiliate
+        update_header: Edit affiliate
+        manage: Manage affiliate
+        show_header: Affiliate details
+        general_info: General info
+        status: Status
+        states:
+            enabled: Enabled
+            paused: Paused
+            disabled: Disabled
+        transaction:
+            date: Logged at
+            amount: Amount
+            type: Type
+            payout: Payout
+            earning: Earning
+        referral:
+            name: Name
         goal:
             id: ID
             create: Create new affiliate goal
@@ -206,6 +231,9 @@ sylius:
             type: Type
     breadcrumb:
         affiliate:
+            create: Create new affiliate
+            index: Affiliates
+            update: Edit affiliate
             goal:
                 create: Create new affiliate goal
                 index: Affiliate goals

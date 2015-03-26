@@ -14,6 +14,15 @@ sylius:
                 count: Count
                 equal: Equal
             type: Type
+        affiliate:
+            enabled: Enabled
+            paused: Paused
+            disabled: Disabled
+            fixed: Fixed
+            percent: Percent
+            status: Status
+            provision_type: Provision type
+            provision_amount: Provision amount
         affiliate_goal:
             actions: Actions
             description: Description

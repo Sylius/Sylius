@@ -19,6 +19,8 @@
     <parameters>
         <parameter key="sylius.listener.referral.class">Sylius\Bundle\AffiliateBundle\EventListener\ReferralListener</parameter>
         <parameter key="sylius.event_subscriber.affiliate.load_metadata.class">Sylius\Bundle\AffiliateBundle\EventListener\LoadMetadataSubscriber</parameter>
+
+        <parameter key="sylius.form.type.affiliate.class">Sylius\Bundle\AffiliateBundle\Form\Type\AffiliateType</parameter>
         
         <parameter key="sylius.affiliate_goal_processor.class">Sylius\Component\Affiliate\Processor\AffiliateProcessor</parameter>
 
@@ -141,6 +143,12 @@
         <service id="sylius.form.type.affiliate_goal_action.percentage_provision_configuration" class="%sylius.form.type.affiliate_goal_action.percentage_provision_configuration.class%">
             <argument>%sylius.validation_group.affiliate_goal_action_percentage_provision_configuration%</argument>
             <tag name="form.type" alias="sylius_affiliate_goal_action_percentage_provision_configuration" />
+        </service>
+
+        <service id="sylius.form.type.affiliate" class="%sylius.form.type.affiliate.class%">
+            <argument>%sylius.model.affiliate.class%</argument>
+            <argument>%sylius.validation_group.affiliate%</argument>
+            <tag name="form.type" alias="sylius_affiliate" />
         </service>
     </services>
 

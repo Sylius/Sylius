@@ -89,6 +89,13 @@ interface AffiliateInterface extends ReferralInterface, TimestampableInterface
     public function isPaused();
 
     /**
+     * get affiliation status.
+     *
+     * @return int
+     */
+    public function getStatus();
+
+    /**
      * Set affiliation status.
      *
      * @param int $status

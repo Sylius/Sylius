@@ -1,0 +1,54 @@
+{% macro list(affiliates) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+
+{% if affiliates|length > 0 %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.affiliate.id'|trans) }}</th>
+            <th>{{ 'sylius.affiliate.referrals'|trans }}</th>
+            <th>{{ 'sylius.affiliate.transactions'|trans }}</th>
+            <th>{{ sylius_resource_sort('updatedAt', 'sylius.affiliate.updated_at'|trans) }}</th>
+            <th>{{ sylius_resource_sort('status', 'sylius.affiliate.status'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for affiliate in affiliates %}
+        <tr id="{{ affiliate.id }}">
+            <td>#{{ affiliate.id }}</td>
+            <td>
+                <span class="label label-info">{{ affiliate.referrals|length }}</span>
+            </td>
+            <td>
+                <span class="label label-info">{{ affiliate.transactions|length }}</span>
+            </td>
+            <td>{{ affiliate.updatedAt|date }}</td>
+            <td>
+                {% if affiliate.enabled %}
+                    {{ buttons.patch(path('sylius_backend_affiliate_update', {'id': affiliate.id}), 'Pause', 'pause', 'warning') }}
+                {% elseif affiliate.paused %}
+                    {{ buttons.patch(path('sylius_backend_affiliate_update', {'id': affiliate.id}), 'Play', 'play') }}
+                {% endif %}
+                {% if not affiliate.disabled %}
+                    {{ buttons.patch(path('sylius_backend_affiliate_update', {'id': affiliate.id}), 'Stop', 'stop', 'danger') }}
+                {% endif %}
+            </td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.manage(path('sylius_backend_affiliate_show', {'id': affiliate.id})) }}
+                    {{ buttons.edit(path('sylius_backend_affiliate_update', {'id': affiliate.id})) }}
+                    {{ buttons.delete(path('sylius_backend_affiliate_delete', {'id': affiliate.id})) }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.affiliate.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

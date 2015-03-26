@@ -22,7 +22,7 @@ abstract class AbstractResourceType extends AbstractType
     /**
      * @var string
      */
-    protected $dataClass = null;
+    protected $dataClass;
 
     /**
      * @var string[]
