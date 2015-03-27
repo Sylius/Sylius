@@ -40,12 +40,14 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     {
         $interfaces = $this->getModelInterfaces();
         if (!empty($interfaces)) {
-            $container->addCompilerPass(
-                new ResolveDoctrineTargetEntitiesPass(
-                    $this->getBundlePrefix(),
-                    $interfaces
-                )
-            );
+            // TODO : We keep the BC but is the right way? We can move getModelInterfaces into AbstractResourceExtension
+            $containerKey = $this->getBundlePrefix().'_interface';
+            if ($container->hasParameter($containerKey)) {
+                $containerInterface = $container->getParameter($containerKey);
+                $interfaces = array_merge($containerInterface, $interfaces);
+            }
+
+            $container->setParameter($this->getBundlePrefix().'_interface', $interfaces);
         }
 
         if (null !== $this->getModelNamespace()) {
