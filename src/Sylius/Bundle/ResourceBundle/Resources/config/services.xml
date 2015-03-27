@@ -31,6 +31,7 @@
         <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_controller.class">Sylius\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber</parameter>
         <parameter key="sylius.event_subscriber.kernel_request.class">Sylius\Bundle\ResourceBundle\EventListener\KernelRequestSubscriber</parameter>
+        <parameter key="sylius.listener.csrf_listener.class">Sylius\Bundle\ResourceBundle\EventListener\CsrfListener</parameter>
 
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
@@ -67,6 +68,11 @@
             <argument type="service" id="sylius.controller.parameters" />
             <argument>%sylius.resource.settings%</argument>
             <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="sylius.listener.csrf_listener" class="%sylius.listener.csrf_listener.class%">
+            <argument type="service" id="form.csrf_provider" />
+            <argument>%sylius.csrf_intention%</argument>
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
         </service>
 
         <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">

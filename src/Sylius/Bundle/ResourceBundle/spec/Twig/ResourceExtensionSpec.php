@@ -15,6 +15,7 @@ use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
+use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -29,13 +30,15 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ResourceExtensionSpec extends ObjectBehavior
 {
-    function let(RouterInterface $router, Parameters $parameters)
+    function let(RouterInterface $router, Parameters $parameters, CsrfProviderInterface $csrfProvider)
     {
         $this->beConstructedWith(
             $router,
             $parameters,
             'SyliusResourceBundle:Twig:paginate.html.twig',
-            'SyliusResourceBundle:Twig:sorting.html.twig'
+            'SyliusResourceBundle:Twig:sorting.html.twig',
+            $csrfProvider,
+            'abc'
         );
     }
 
@@ -57,7 +60,7 @@ class ResourceExtensionSpec extends ObjectBehavior
     function it_should_define_twig_function()
     {
         $this->getFunctions()->shouldBeArray();
-        $this->getFunctions()->shouldHaveCount(2);
+        $this->getFunctions()->shouldHaveCount(3);
     }
 
     function it_should_render_a_sorting_link(
@@ -348,6 +351,12 @@ class ResourceExtensionSpec extends ObjectBehavior
     function it_should_have_a_name()
     {
         $this->getName()->shouldReturn('sylius_resource');
+    }
+
+    function it_should_generate_a_csrf_token(CsrfProviderInterface $csrfProvider)
+    {
+        $csrfProvider->generateCsrfToken('abc')->willReturn('token');
+        $this->generateCsrfToken()->shouldReturn('token');
     }
 
     private function getGetResponseEvent(

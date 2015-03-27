@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Twig;
 
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
+use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
@@ -55,13 +56,17 @@ class ResourceExtension extends \Twig_Extension
     /**
      * Constructor.
      *
-     * @param RouterInterface $router
-     * @param Parameters      $parameters
-     * @param string          $paginateTemplate
-     * @param string          $sortingTemplate
+     * @param RouterInterface       $router
+     * @param Parameters            $parameters
+     * @param string                $paginateTemplate
+     * @param string                $sortingTemplate
      */
-    public function __construct(RouterInterface $router, Parameters $parameters, $paginateTemplate, $sortingTemplate)
-    {
+    public function __construct(
+        RouterInterface $router,
+        Parameters $parameters,
+        $paginateTemplate,
+        $sortingTemplate
+    ) {
         $this->router = $router;
         $this->paginateTemplate = $paginateTemplate;
         $this->sortingTemplate = $sortingTemplate;
@@ -83,6 +88,10 @@ class ResourceExtension extends \Twig_Extension
                  'sylius_resource_paginate',
                  array($this, 'renderPaginateSelect'),
                  array('needs_environment' => true, 'is_safe' => array('html'))
+             ),
+             new \Twig_SimpleFunction(
+                 'sylius_generate_csrf_token',
+                 array($this, 'generateCsrfToken')
              ),
         );
     }
