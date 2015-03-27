@@ -90,7 +90,7 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale =>sprintf('T-Shirt "%s"', $this->faker->word),
-            'es' => sprintf('Camiseta "%s"', $this->fakers['es']->word),
+            'es_ES' => sprintf('Camiseta "%s"', $this->fakers['es_ES']->word),
         );
         $this->addTranslatedFields($product, $translatedNames);
 
@@ -138,7 +138,7 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale => sprintf('Sticker "%s"', $this->faker->word),
-            'es' => sprintf('Pegatina "%s"', $this->fakers['es']->word),
+            'es_ES' => sprintf('Pegatina "%s"', $this->fakers['es_ES']->word),
         );
         $this->addTranslatedFields($product, $translatedNames);
 
@@ -182,7 +182,7 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale => sprintf('Mug "%s"', $this->faker->word),
-            'es' => sprintf('Taza "%s"', $this->fakers['es']->word),
+            'es_ES' => sprintf('Taza "%s"', $this->fakers['es_ES']->word),
         );
         $this->addTranslatedFields($product, $translatedNames);
 
@@ -221,7 +221,7 @@ class LoadProductsData extends DataFixture
 
         $translatedNames = array(
             $this->defaultLocale => sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author),
-            'es' => sprintf('Libro "%s" de "%s"', ucfirst($this->fakers['es']->word), $author)
+            'es_ES' => sprintf('Libro "%s" de "%s"', ucfirst($this->fakers['es_ES']->word), $author)
         );
         $this->addTranslatedFields($product, $translatedNames);
 
@@ -382,6 +382,7 @@ class LoadProductsData extends DataFixture
     {
         foreach ($translatedNames as $locale => $name) {
             $product->setCurrentLocale($locale);
+            $product->setFallbackLocale($locale);
 
             $product->setName($name);
             $product->setDescription($this->fakers[$locale]->paragraph);

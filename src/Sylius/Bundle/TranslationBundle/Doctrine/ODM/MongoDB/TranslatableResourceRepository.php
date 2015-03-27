@@ -9,20 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
+namespace Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class TranslatableDocumentRepository extends DocumentRepository implements TranslatableEntityRepositoryInterface
+class TranslatableResourceRepository extends DocumentRepository implements TranslatableResourceRepositoryInterface
 {
-    protected $localeContext;
+    /**
+     * @var LocaleProviderInterface
+     */
+    protected $localeProvider;
+
+    /**
+     * @var array
+     */
     protected $translatableFields = array();
 
     /**
@@ -33,7 +41,9 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
         $className = $this->getClassName();
 
         $object = new $className();
-        $object->setCurrentLocale($this->getCurrentLocale());
+
+        $object->setCurrentLocale($this->localeProvider->getCurrentLocale());
+        $object->setFallbackLocale($this->localeProvider->getFallbackLocale());
 
         return $object;
     }
@@ -41,9 +51,9 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
     /**
      * {@inheritdoc}
      */
-    public function setLocaleContext(LocaleContextInterface $localeContext)
+    public function setLocaleProvider(LocaleProviderInterface $localeProvider)
     {
-        $this->localeContext = $localeContext;
+        $this->localeProvider = $localeProvider;
 
         return $this;
     }
@@ -71,7 +81,7 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $this->translatableFields)) {
-                $property = 'translations.'.$this->getCurrentLocale().'.'.$property;
+                $property = 'translations.'.$this->localeProvider->getCurrentLocale().'.'.$property;
             }
 
             if (is_array($value)) {
@@ -84,13 +94,5 @@ class TranslatableDocumentRepository extends DocumentRepository implements Trans
                 ;
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrentLocale()
-    {
-        return $this->localeContext->getLocale();
     }
 }

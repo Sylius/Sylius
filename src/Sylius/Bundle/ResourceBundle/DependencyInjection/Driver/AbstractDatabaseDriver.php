@@ -65,9 +65,19 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
             );
         }
 
+        $repositoryDefinition = $this->getRepositoryDefinition($classes);
+        $reflection = new \ReflectionClass($repositoryDefinition->getClass());
+
+        $translatableRepositoryInterface = 'Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface';
+
+        if (interface_exists($translatableRepositoryInterface) && $reflection->implementsInterface($translatableRepositoryInterface)) {
+            $repositoryDefinition->addMethodCall('setLocaleProvider', array(new Reference('sylius.translation.locale_provider')));
+            $repositoryDefinition->addMethodCall('setTranslatableFields', array($classes['translation']['mapping']['fields']));
+        }
+
         $this->container->setDefinition(
             $this->getContainerKey('repository'),
-            $this->getRepositoryDefinition($classes)
+            $repositoryDefinition
         );
 
         $this->setManagerAlias();

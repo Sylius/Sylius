@@ -9,20 +9,29 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
+namespace Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Translation\Model\TranslatableInterface;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
+use Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface;
 
 /**
  * Doctrine ORM driver translatable entity repository.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslatableEntityRepository extends EntityRepository implements TranslatableEntityRepositoryInterface
+class TranslatableResourceRepository extends EntityRepository implements TranslatableResourceRepositoryInterface
 {
-    protected $localeContext;
+    /**
+     * @var LocaleProviderInterface
+     */
+    protected $localeProvider;
+
+    /**
+     * @var array
+     */
     protected $translatableFields = array();
 
     /**
@@ -31,6 +40,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
     protected function getQueryBuilder()
     {
         $queryBuilder = parent::getQueryBuilder();
+
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin($this->getAlias() . '.translations', 'translation')
@@ -45,6 +55,7 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
     protected function getCollectionQueryBuilder()
     {
         $queryBuilder = parent::getCollectionQueryBuilder();
+
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin($this->getAlias() . '.translations', 'translation')
@@ -58,20 +69,24 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
      */
     public function createNew()
     {
-        $className = $this->getClassName();
+        $resource = parent::createNew();
 
-        $object = new $className();
-        $object->setCurrentLocale($this->getCurrentLocale());
+        if (!$resource instanceof TranslatableInterface) {
+            throw new \InvalidArgumentException('Resource must implement TranslatableInterface.');
+        }
 
-        return $object;
+        $resource->setCurrentLocale($this->localeProvider->getCurrentLocale());
+        $resource->setFallbackLocale($this->localeProvider->getFallbackLocale());
+
+        return $resource;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLocaleContext(LocaleContextInterface $localeContext)
+    public function setLocaleProvider(LocaleProviderInterface $provider)
     {
-        $this->localeContext = $localeContext;
+        $this->localeProvider = $provider;
 
         return $this;
     }
@@ -124,13 +139,5 @@ class TranslatableEntityRepository extends EntityRepository implements Translata
                 }
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrentLocale()
-    {
-        return $this->localeContext->getLocale();
     }
 }

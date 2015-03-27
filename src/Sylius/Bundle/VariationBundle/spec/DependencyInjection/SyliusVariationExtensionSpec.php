@@ -26,23 +26,22 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
     function it_processes_the_configuration_and_registers_services_per_variable(ContainerBuilder $container)
     {
         $container->hasParameter('sylius.translation.mapping')->willReturn(false);
-        $container->hasParameter('sylius.translation.default.mapping')->willReturn(true);
-        $container->getParameter('sylius.translation.default.mapping')->willReturn(
+        $container->hasParameter('sylius.translation.default_mapping')->willReturn(true);
+        $container->getParameter('sylius.translation.default_mapping')->willReturn(
             array(
-                array('default_mapping' => array(
+                array('mapping' => array(
                     'translatable' => array(
-                        'field'          => 'translations',
-                        'currentLocale'  => 'currentLocale',
-                        'fallbackLocale' => 'fallbackLocale'
+                        'translations'    => 'translations',
+                        'current_locale'  => 'currentLocale',
+                        'fallback_locale' => 'fallbackLocale'
                     ),
                     'translation'  => array(
-                        'field'  => 'translatable',
-                        'locale' => 'locale'
+                        'translatable' => 'translatable',
+                        'locale'       => 'locale'
                     )
                 ))
-            ));
-
-//        $container->setParameter('sylius.translation.mapping', Argument::any())->shouldBeCalled();
+            )
+        );
 
         $variantFormType = new Definition('Some\App\Product\Form\ProductVariantType');
         $variantFormType
@@ -133,10 +132,12 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 'option' => array(
                     'model' => 'Some\App\Product\Entity\Option',
                     'form' => 'Some\App\Product\Form\OptionType',
-                ),
-                'option_translation' => array(
-                    'model' => 'Some\App\Product\Entity\OptionTranslation',
-                    'form' => 'Some\App\Product\Form\OptionTranslationType',
+                    'translation' => array(
+                        'model' => 'Some\App\Product\Entity\OptionTranslation',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\OptionTranslationType',
+                        )
+                    )
                 ),
                 'option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
@@ -148,6 +149,7 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 ),
             ),
         );
+
         $container->setParameter('sylius.variation.variables', $variables)->shouldBeCalled();
 
         $userConfig = array(
@@ -155,35 +157,40 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
             'classes' => array(
                 'product' => array(
                     'variable' => 'Some\App\Product\Entity\Product',
-                    'option' => array(
+                    'option'   => array(
                         'model' => 'Some\App\Product\Entity\Option',
-                        'form' => 'Some\App\Product\Form\OptionType',
-                    ),
-                    'option_translation' => array(
-                        'model' => 'Some\App\Product\Entity\OptionTranslation',
-                        'form' => 'Some\App\Product\Form\OptionTranslationType',
+                        'form'  => 'Some\App\Product\Form\OptionType',
+                        'translation' => array(
+                            'model' => 'Some\App\Product\Entity\OptionTranslation',
+                            'form'  => array(
+                                'default' => 'Some\App\Product\Form\OptionTranslationType',
+                            )
+                        ),
                     ),
                     'option_value' => array(
                         'model' => 'Some\App\Product\Entity\OptionValue',
-                        'form' => 'Some\App\Product\Form\OptionValueType',
+                        'form'  => 'Some\App\Product\Form\OptionValueType',
                     ),
                     'variant' => array(
                         'model' => 'Some\App\Product\Entity\ProductVariant',
-                        'form' => 'Some\App\Product\Form\ProductVariantType',
+                        'form'  => 'Some\App\Product\Form\ProductVariantType',
                     ),
                 ),
             ),
         );
+
         $processedConfig = array(
             'driver' => SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             'classes' => array(
                 'product_option' => array(
                     'model' => 'Some\App\Product\Entity\Option',
                     'form'  => 'Some\App\Product\Form\OptionType',
-                ),
-                'product_option_translation' => array(
-                    'model' => 'Some\App\Product\Entity\OptionTranslation',
-                    'form'  => 'Some\App\Product\Form\OptionTranslationType',
+                    'translation' => array(
+                        'model' => 'Some\App\Product\Entity\OptionTranslation',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\OptionTranslationType',
+                        )
+                    ),
                 ),
                 'product_option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
@@ -195,12 +202,13 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 ),
             ),
             'validation_groups' => array(
-                'product_variant' => array('sylius'),
-                'product_option' => array('sylius'),
+                'product_variant'            => array('sylius'),
+                'product_option'             => array('sylius'),
                 'product_option_translation' => array('sylius'),
-                'product_option_value' => array('sylius'),
+                'product_option_value'       => array('sylius'),
             ),
         );
+
         $this->process($userConfig, $container)->shouldReturn($processedConfig);
     }
 }

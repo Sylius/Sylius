@@ -24,7 +24,7 @@ class Archetype extends BaseArchetype implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

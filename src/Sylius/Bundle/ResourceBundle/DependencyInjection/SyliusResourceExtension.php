@@ -12,11 +12,12 @@
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExtension;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Resource system extension.
@@ -24,7 +25,7 @@ use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExten
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusResourceExtension extends AbstractTranslationExtension
+class SyliusResourceExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -46,8 +47,6 @@ class SyliusResourceExtension extends AbstractTranslationExtension
 
         $this->createResourceServices($classes, $container);
 
-        $this->mapTranslations($classes, $container);
-
         if ($container->hasParameter('sylius.config.classes')) {
             $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
         }
@@ -61,29 +60,35 @@ class SyliusResourceExtension extends AbstractTranslationExtension
      */
     private function createResourceServices(array $configs, ContainerBuilder $container)
     {
+        $translationsEnabled = class_exists('Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper');
+
+        if ($translationsEnabled) {
+            $mapper = new Mapper();
+        }
+
         foreach ($configs as $name => $config) {
             list($prefix, $resourceName) = explode('.', $name);
+            $manager = isset($config['object_manager']) ? $config['object_manager'] : 'default';
 
             DatabaseDriverFactory::get(
                 $container,
                 $prefix,
                 $resourceName,
-                isset($config['object_manager']) ? $config['object_manager'] : 'default',
+                $manager,
                 $config['driver'],
                 array_key_exists('templates', $config) ? $config['templates'] : null
             )->load($config['classes']);
-        }
-    }
 
-    /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     */
-    private function mapTranslations(array $configs, ContainerBuilder $container)
-    {
-        foreach ($configs as $config) {
-            if (array_key_exists('translation', $config['classes']) || array_key_exists('translatable', $config['classes'])) {
-                $this->processTranslations($config['classes'], $container);
+            if ($translationsEnabled && array_key_exists('model', $config['classes']) && array_key_exists('translation', $config['classes'])) {
+                $mapper->mapTranslations($config['classes'], $container);
+
+                DatabaseDriverFactory::get(
+                    $container,
+                    $prefix,
+                    sprintf('%s_translation', $resourceName),
+                    $manager,
+                    $config['driver']
+                )->load($config['classes']['translation']);
             }
         }
     }

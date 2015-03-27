@@ -17,32 +17,34 @@ namespace Sylius\Component\Translation\Model;
 interface TranslationInterface
 {
     /**
-     * Get the translatable object
+     * Get the translatable object.
      *
      * @return TranslatableInterface
      */
     public function getTranslatable();
 
     /**
-     * Set the translatable object
+     * Set the translatable object.
      *
-     * @param TranslatableInterface $translatable
+     * @param null|TranslatableInterface $translatable
+     *
      * @return self
      */
     public function setTranslatable(TranslatableInterface $translatable = null);
 
     /**
-     * Get the locale
+     * Get the locale.
      *
      * @return string
      */
     public function getLocale();
 
     /**
-     * Set the locale
+     * Set the locale.
      *
      * @param string $locale
-     * @return $this
+     *
+     * @return self
      */
     public function setLocale($locale);
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
+namespace spec\Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
@@ -18,16 +18,16 @@ use Doctrine\ODM\MongoDB\Query\Query;
 use Doctrine\ODM\MongoDB\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
-require_once __DIR__.'/../../../Fixture/Document/TranslatableFoo.php';
+require_once __DIR__.'/../../../../../ResourceBundle/spec/Fixture/Document/TranslatableFoo.php';
 
 /**
  * Doctrine ODM MongoDB driver translatable document repository spec.
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class TranslatableDocumentRepositorySpec extends ObjectBehavior
+class TranslatableResourceRepositorySpec extends ObjectBehavior
 {
     function let(
         DocumentManager $documentManager,
@@ -53,27 +53,29 @@ class TranslatableDocumentRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ODm\MongoDB\TranslatableDocumentRepository');
+        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository');
     }
 
     function it_implements_Sylius_repository_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface');
+        $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
     }
 
-    function it_sets_current_locale_on_created_object(LocaleContextInterface $localeContext)
+    function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
     {
-        $localeContext->getLocale()->willReturn('en');
+        $localeProvider->getCurrentLocale()->willReturn('en_US');
+        $localeProvider->getFallbackLocale()->willReturn('en_US');
 
-        $this->setLocaleContext($localeContext);
+        $this->setLocaleProvider($localeProvider);
 
-        $this->createNew()->getCurrentLocale()->shouldReturn('en');
+        $this->createNew()->getCurrentLocale()->shouldReturn('en_US');
+        $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
     }
 
-    function it_applies_criteria_when_finding_one($queryBuilder, LocaleContextInterface $localeContext)
+    function it_applies_criteria_when_finding_one($queryBuilder, LocaleProviderInterface $localeProvider)
     {
-        $localeContext->getLocale()->willReturn('en');
-        $this->setLocaleContext($localeContext);
+        $localeProvider->getCurrentLocale()->willReturn('en_US');
+        $this->setLocaleProvider($localeProvider);
 
         $translatableFields = array('foo');
 
@@ -86,7 +88,7 @@ class TranslatableDocumentRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en.' . $property;
+                $property = 'translations.en_US.' . $property;
             }
 
             $queryBuilder
@@ -105,10 +107,10 @@ class TranslatableDocumentRepositorySpec extends ObjectBehavior
         $this->findOneBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by($queryBuilder, LocaleContextInterface $localeContext)
+    function it_applies_criteria_when_finding_by($queryBuilder, LocaleProviderInterface $localeProvider)
     {
-        $localeContext->getLocale()->willReturn('en');
-        $this->setLocaleContext($localeContext);
+        $localeProvider->getCurrentLocale()->willReturn('en_US');
+        $this->setLocaleProvider($localeProvider);
 
         $translatableFields = array('foo');
 
@@ -121,7 +123,7 @@ class TranslatableDocumentRepositorySpec extends ObjectBehavior
 
         foreach ($criteria as $property => $value) {
             if (in_array($property, $translatableFields)) {
-                $property = 'translations.en.' . $property;
+                $property = 'translations.en_US.' . $property;
             }
 
             $queryBuilder
@@ -140,10 +142,10 @@ class TranslatableDocumentRepositorySpec extends ObjectBehavior
         $this->findBy($criteria)->shouldReturn(null);
     }
 
-    function it_applies_criteria_when_finding_by_array($queryBuilder, LocaleContextInterface $localeContext)
+    function it_applies_criteria_when_finding_by_array($queryBuilder, LocaleProviderInterface $localeProvider)
     {
-        $localeContext->getLocale()->willReturn('en');
-        $this->setLocaleContext($localeContext);
+        $localeProvider->getCurrentLocale()->willReturn('en_US');
+        $this->setLocaleProvider($localeProvider);
 
         $translatableFields = array('foo');
 

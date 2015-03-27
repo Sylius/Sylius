@@ -57,9 +57,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
         $this->load(array(
-            'model' => 'Sylius\Model',
+            'model'      => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
             'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Repository',
+            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
         ));
     }
 
@@ -89,9 +89,9 @@ class DoctrineORMDriverSpec extends ObjectBehavior
         $this->beConstructedWith($container, 'prefix', 'resource', 'default');
 
         $this->load(array(
-            'model' => 'Sylius\Model',
+            'model' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
             'controller' => 'Sylius\Controller',
-            'repository' => 'Sylius\Repository',
+            'repository' => 'Sylius\Bundle\ResourceBundle\SyliusResourceBundle',
         ));
     }
 }

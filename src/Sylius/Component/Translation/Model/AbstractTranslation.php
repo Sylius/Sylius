@@ -18,14 +18,14 @@ namespace Sylius\Component\Translation\Model;
 class AbstractTranslation implements TranslationInterface
 {
     /**
-     * Locale
+     * Locale.
      *
      * @var string
      */
     protected $locale;
 
     /**
-     * Translatable object
+     * Translatable object.
      *
      * @var TranslatableInterface
      */
@@ -48,11 +48,11 @@ class AbstractTranslation implements TranslationInterface
             return $this;
         }
 
-        $old = $this->translatable;
+        $previousTranslatable = $this->translatable;
         $this->translatable = $translatable;
 
-        if (null !== $old) {
-            $old->removeTranslation($this);
+        if (null !== $previousTranslatable) {
+            $previousTranslatable->removeTranslation($this);
         }
 
         if (null !== $translatable) {

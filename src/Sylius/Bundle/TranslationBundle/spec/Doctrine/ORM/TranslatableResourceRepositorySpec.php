@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ORM;
+namespace spec\Sylius\Bundle\TranslationBundle\Doctrine\ORM;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query\Expr;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 
-require_once __DIR__.'/../../Fixture/Entity/TranslatableFoo.php';
+require_once __DIR__.'/../../../../ResourceBundle/spec/Fixture/Entity/TranslatableFoo.php';
 
 /**
  * Doctrine ORM driver translatable entity repository spec.
  *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslatableEntityRepositorySpec extends ObjectBehavior
+class TranslatableResourceRepositorySpec extends ObjectBehavior
 {
     function let(EntityManager $entityManager, ClassMetadata $class, QueryBuilder $queryBuilder, AbstractQuery $query)
     {
@@ -68,21 +68,23 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository');
+        $this->shouldHaveType('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository');
     }
 
     function it_implements_Sylius_translatable_repository_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Doctrine\TranslatableEntityRepositoryInterface');
+        $this->shouldImplement('Sylius\Component\Translation\Repository\TranslatableResourceRepositoryInterface');
     }
 
-    function it_sets_current_locale_on_created_object(LocaleContextInterface $localeContext)
+    function it_sets_current_locale_on_created_object(LocaleProviderInterface $localeProvider)
     {
-        $localeContext->getLocale()->willReturn('en');
+        $localeProvider->getCurrentLocale()->willReturn('en_US');
+        $localeProvider->getFallbackLocale()->willReturn('en_US');
 
-        $this->setLocaleContext($localeContext);
+        $this->setLocaleProvider($localeProvider);
 
-        $this->createNew()->getCurrentLocale()->shouldReturn('en');
+        $this->createNew()->getCurrentLocale()->shouldReturn('en_US');
+        $this->createNew()->getFallbackLocale()->shouldReturn('en_US');
     }
 
     function it_applies_criteria_when_finding_one($queryBuilder, Expr $expr)
@@ -275,9 +277,9 @@ class TranslatableEntityRepositorySpec extends ObjectBehavior
         ;
     }
 
-    public function it_has_fluent_interface(LocaleContextInterface $localeContext)
+    public function it_has_fluent_interface(LocaleProviderInterface $localeProvider)
     {
-        $this->setLocaleContext($localeContext)->shouldReturn($this);
-        $this->setTranslatableFields(array('en'))->shouldReturn($this);
+        $this->setLocaleProvider($localeProvider)->shouldReturn($this);
+        $this->setTranslatableFields(array('name'))->shouldReturn($this);
     }
 }

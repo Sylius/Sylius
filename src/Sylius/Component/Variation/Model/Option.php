@@ -220,7 +220,7 @@ class Option extends AbstractTranslatable implements OptionInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

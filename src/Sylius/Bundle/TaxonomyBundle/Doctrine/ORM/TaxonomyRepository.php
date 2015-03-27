@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
+use Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository;
 
 /**
  * Base taxonomy repository.
@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonomyRepository extends TranslatableEntityRepository
+class TaxonomyRepository extends TranslatableResourceRepository
 {
     /**
      * {@inheritdoc}

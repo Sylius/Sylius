@@ -31,7 +31,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $this->configure(
             $config, new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
         );
     }
 
@@ -95,7 +95,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $attributeValueAlias = $subject.'_attribute_value';
 
         $attributeClasses = $config[$attributeAlias];
-        $attributeTranslationClasses = $config[$attributeTranslationAlias];
+        $attributeTranslationClasses = $attributeClasses['translation'];
         $attributeValueClasses = $config[$attributeValueAlias];
 
         $attributeFormType = new Definition($attributeClasses['form']);
@@ -106,7 +106,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $container->setDefinition('sylius.form.type.'.$attributeAlias, $attributeFormType);
 
-        $attributeFormTranslationType = new Definition($attributeTranslationClasses['form']);
+        $attributeFormTranslationType = new Definition($attributeTranslationClasses['form']['default']);
         $attributeFormTranslationType
             ->setArguments(array($attributeTranslationClasses['model'], '%sylius.validation_group.'.$attributeTranslationAlias.'%', $subject))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeTranslationAlias))

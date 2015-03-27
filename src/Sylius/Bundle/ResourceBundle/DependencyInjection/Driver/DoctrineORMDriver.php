@@ -35,8 +35,12 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
+        $reflection = new \ReflectionClass($classes['model']);
+        $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
+        $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
+
         $repositoryKey = $this->getContainerKey('repository', '.class');
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
+        $repositoryClass = $translatable ?'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository' : 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository';
 
         if ($this->container->hasParameter($repositoryKey)) {
             $repositoryClass = $this->container->getParameter($repositoryKey);
@@ -51,12 +55,6 @@ class DoctrineORMDriver extends AbstractDatabaseDriver
             new Reference($this->getContainerKey('manager')),
             $this->getClassMetadataDefinition($classes['model']),
         ));
-
-        if (isset($classes['translatable']['translatable_fields'])) {
-            // TODO add only to if instance of translatable repository?
-            $definition->addMethodCall('setTranslatableFields', array($classes['translatable']['translatable_fields']));
-            $definition->addMethodCall('setLocaleContext', array(new Reference('sylius.context.locale')));
-        }
 
         return $definition;
     }

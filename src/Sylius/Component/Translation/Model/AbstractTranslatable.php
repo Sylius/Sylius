@@ -118,26 +118,6 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * @param TranslationInterface $currentTranslation
-     *
-     * @return $this
-     */
-    public function setCurrentTranslation(TranslationInterface $currentTranslation)
-    {
-        $this->currentTranslation = $currentTranslation;
-
-        return $this;
-    }
-
-    /**
-     * @return TranslationInterface
-     */
-    public function getCurrentTranslation()
-    {
-        return $this->currentTranslation;
-    }
-
-    /**
      * @param string $fallbackLocale
      *
      * @return $this
@@ -172,20 +152,25 @@ abstract class AbstractTranslatable implements TranslatableInterface
             $locale = $this->currentLocale;
         }
 
-        if (!$locale) {
-            throw new \RuntimeException('No locale has been set and currentLocale is empty');
+        if (null === $locale) {
+            throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
 
         if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
             return $this->currentTranslation;
         }
 
-        // TODO Throw exception? Get default translation?
         if (!$translation = $this->translations->get($locale)) {
+            if (null === $this->fallbackLocale) {
+                throw new \RuntimeException('No fallback locale has been set.');
+            }
+
             if (!$fallbackTranslation = $this->translations->get($this->getFallbackLocale())) {
-                $className = $this->getTranslationEntityClass();
+                $className = $this->getTranslationClass();
+
                 $translation = new $className();
                 $translation->setLocale($locale);
+
                 $this->addTranslation($translation);
             } else {
                 $translation = clone $fallbackTranslation;
@@ -198,9 +183,9 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Return translation entity class
+     * Return translation model class.
      *
      * @return string
      */
-    abstract protected function getTranslationEntityClass();
+    abstract protected function getTranslationClass();
 }
