@@ -3,6 +3,7 @@
 
 sylius_zone_member_delete:
     path: /{id}/delete
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.zone_member:deleteAction
         _redirect: sylius_zone_list

@@ -20,7 +20,7 @@ sylius_taxon_update:
 
 sylius_taxon_delete:
     path: /{id}
-    methods: [POST]
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.taxon:deleteAction
         _sylius:

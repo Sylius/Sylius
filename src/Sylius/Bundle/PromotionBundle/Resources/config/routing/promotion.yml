@@ -18,5 +18,6 @@ sylius_promotion_update:
 
 sylius_promotion_delete:
     path: /{id}/delete
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.promotion:deleteAction

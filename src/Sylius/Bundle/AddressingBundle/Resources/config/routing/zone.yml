@@ -18,5 +18,6 @@ sylius_zone_update:
 
 sylius_zone_delete:
     path: /{id}/delete
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.zone:deleteAction

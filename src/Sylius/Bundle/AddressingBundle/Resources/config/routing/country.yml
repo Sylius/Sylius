@@ -21,5 +21,6 @@ sylius_country_update:
 
 sylius_country_delete:
     path: /{id}/delete
+    methods: [DELETE]
     defaults:
         _controller: sylius.controller.country:deleteAction
