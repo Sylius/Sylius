@@ -298,6 +298,14 @@ class ResourceController extends FOSRestController
 
         $this->domainManager->update($resource, 'revert');
 
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
+
         return $this->redirectHandler->redirectTo($resource);
     }
 
@@ -332,6 +340,14 @@ class ResourceController extends FOSRestController
         $stateMachine->apply($transition);
 
         $this->domainManager->update($resource);
+
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
 
         return $this->redirectHandler->redirectToReferer();
     }
@@ -425,6 +441,14 @@ class ResourceController extends FOSRestController
         $resource = $this->findOr404($request);
 
         $this->domainManager->move($resource, $movement);
+
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
 
         return $this->redirectHandler->redirectToIndex();
     }
