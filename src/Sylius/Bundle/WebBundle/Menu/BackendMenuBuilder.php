@@ -244,6 +244,12 @@ class BackendMenuBuilder extends MenuBuilder
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-piggy-bank'),
             ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_goal', $section)));
         }
+        if ($this->authorizationChecker->isGranted('sylius.affiliate_banner.index')) {
+            $child->addChild('affiliate_banners', array(
+                'route' => 'sylius_backend_affiliate_banner_index',
+                'labelAttributes' => array('icon' => 'glyphicon glyphicon-picture'),
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.affiliate_banner', $section)));
+        }
 
         if (!$child->hasChildren()) {
             $menu->removeChild('marketing');

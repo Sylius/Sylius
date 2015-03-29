@@ -368,18 +368,20 @@ class ResourceController extends FOSRestController
     public function getForm($resource = null)
     {
         $type = $this->config->getFormType();
-
-        if (strpos($type, '\\') !== false) { // full class name specified
+        // full class name specified
+        if (false !== strpos($type, '\\')) {
             $type = new $type();
-        } elseif (!$this->get('form.registry')->hasType($type)) { // form alias is not registered
-
-            $defaultFormFactory = new DefaultFormFactory($this->container->get('form.factory'));
-
-            return $defaultFormFactory->create($resource, $this->container->get($this->config->getServiceName('manager')));
         }
 
         if ($this->config->isApiRequest()) {
             return $this->container->get('form.factory')->createNamed('', $type, $resource, array('csrf_protection' => false));
+        }
+
+        // form alias is not registered
+        if (!$this->get('form.registry')->hasType($type)) {
+            $defaultFormFactory = new DefaultFormFactory($this->container->get('form.factory'));
+
+            return $defaultFormFactory->create($resource, $this->container->get($this->config->getServiceName('manager')));
         }
 
         return $this->createForm($type, $resource);

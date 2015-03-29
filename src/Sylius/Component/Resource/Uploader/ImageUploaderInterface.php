@@ -9,12 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Uploader;
+namespace Sylius\Component\Resource\Uploader;
 
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Resource\Model\ImageInterface;
 
 interface ImageUploaderInterface
 {
+    /**
+     * @param ImageInterface $image
+     */
     public function upload(ImageInterface $image);
+
+    /**
+     * @param string $path
+     */
     public function remove($path);
 }

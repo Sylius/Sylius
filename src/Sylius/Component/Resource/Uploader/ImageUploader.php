@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Uploader;
+namespace Sylius\Component\Resource\Uploader;
 
 use Gaufrette\Filesystem;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Resource\Model\ImageInterface;
 
 class ImageUploader implements ImageUploaderInterface
 {
@@ -33,9 +33,9 @@ class ImageUploader implements ImageUploaderInterface
             $this->remove($image->getPath());
         }
 
+        $extension = $image->getFile()->guessExtension();
         do {
-            $hash = md5(uniqid(mt_rand(), true));
-            $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
+            $path = $this->expandPath($this->generateHash().'.'.$extension);
         } while ($this->filesystem->has($path));
 
         $image->setPath($path);
@@ -51,7 +51,12 @@ class ImageUploader implements ImageUploaderInterface
         return $this->filesystem->delete($path);
     }
 
-    private function expandPath($path)
+    protected function generateHash()
+    {
+        return md5(uniqid(mt_rand(), true));
+    }
+
+    protected function expandPath($path)
     {
         return sprintf(
             '%s/%s/%s',

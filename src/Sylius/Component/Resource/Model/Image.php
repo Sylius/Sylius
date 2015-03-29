@@ -9,40 +9,42 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\Resource\Model;
+
+use Symfony\Component\HttpFoundation\File\File;
 
 class Image implements ImageInterface
 {
     /**
-     * Id
+     * Id.
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * File
+     * File.
      *
-     * @var \SplFileInfo
+     * @var File
      */
     protected $file;
 
     /**
-     * Path to file
+     * Path to file.
      *
      * @var string
      */
     protected $path;
 
     /**
-     * Creation date
+     * Creation date.
      *
      * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * Update date
+     * Update date.
      *
      * @var \DateTime
      */
@@ -54,9 +56,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * Get id
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -82,7 +82,7 @@ class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function setFile(File $file)
     {
         $this->file = $file;
 

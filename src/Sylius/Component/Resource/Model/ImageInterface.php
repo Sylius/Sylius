@@ -9,26 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\Resource\Model;
 
-use Sylius\Component\Resource\Model\TimestampableInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 interface ImageInterface extends TimestampableInterface
 {
     /**
-     * @return Boolean
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId();
+
+    /**
+     * @return bool
      */
     public function hasFile();
 
     /**
-     * @return null|\SplFileInfo
+     * @return null|File
      */
     public function getFile();
 
     /**
-     * @param \SplFileInfo $file
+     * @param File $file
+     *
+     * @return self
      */
-    public function setFile(\SplFileInfo $file);
+    public function setFile(File $file);
 
     /**
      * @return string
@@ -37,6 +46,8 @@ interface ImageInterface extends TimestampableInterface
 
     /**
      * @param string $path
+     *
+     * @return self
      */
     public function setPath($path);
 }

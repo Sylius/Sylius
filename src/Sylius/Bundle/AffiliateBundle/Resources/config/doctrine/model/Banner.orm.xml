@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <!--
 
@@ -16,17 +16,14 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Affiliate\Model\Rule" table="sylius_affiliate_rule">
+    <mapped-superclass name="Sylius\Component\Affiliate\Model\Banner" table="sylius_affiliate_banner">
         <id name="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="type" type="string" />
-        <field name="configuration" type="array" />
-
-        <many-to-one field="goal" target-entity="Sylius\Component\Affiliate\Model\GoalInterface" inversed-by="rules">
-            <join-column name="goal_id" referenced-column-name="id" nullable="true" />
-        </many-to-one>
+        <field name="path" type="string" />
+        <field name="name" type="string" />
+        <field name="status" type="boolean" />
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -20,8 +20,8 @@ class FixedProvisionAction extends ProvisionAction
      */
     public function execute($subject, array $configuration, AffiliateInterface $affiliate)
     {
-        $transaction = $this->createTransaction($affiliate);
-        $transaction->setAmount($configuration['amount']);
+        $adjustment = $this->createTransaction($affiliate);
+        $adjustment->setAmount(- $configuration['amount']);
     }
 
     /**
@@ -29,6 +29,6 @@ class FixedProvisionAction extends ProvisionAction
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_affiliate_goal_action_fixed_provision_configuration';
+        return 'sylius_affiliate_action_fixed_provision_configuration';
     }
 }

@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Resource\Model\Image;
+
 class ProductVariantImage extends Image implements ProductVariantImageInterface
 {
     /**

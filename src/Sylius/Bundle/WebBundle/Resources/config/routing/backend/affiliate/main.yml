@@ -1,6 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_backend_affiliate_banners:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/affiliate/banner.yml
+    prefix: /banners
+
 sylius_backend_affiliate_goals:
     resource: @SyliusWebBundle/Resources/config/routing/backend/affiliate/goal.yml
     prefix: /goals

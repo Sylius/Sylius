@@ -202,14 +202,20 @@ sylius:
             earning: Earning
         referral:
             name: Name
+        banner:
+            create: Create new affiliate banner
+            create_header: Create new affiliate banner
+            index_header: Affiliate banners
+            update_header: Edit affiliate banner
+            manage: Manage affiliate banners
+            name: Name
+            no_results: There are no affiliate banners configured.
         goal:
-            id: ID
             create: Create new affiliate goal
             create_header: Create new affiliate goal
             index_header: Affiliate goals
             update_header: Edit affiliate goal
             manage: Manage affiliate goals
-            general_info: General info
             name: Name
             used: Used
             starts_at: Starts at
@@ -220,7 +226,6 @@ sylius:
             created_at: Created at
             description: Description
             show_header: Affiliate goal details
-            updated_at: Last update
         actions: Actions
         action:
             configuration: Configuration
@@ -234,6 +239,10 @@ sylius:
             create: Create new affiliate
             index: Affiliates
             update: Edit affiliate
+            banner:
+                create: Create new affiliate banner
+                index: Affiliate banners
+                update: Editing affiliate banner
             goal:
                 create: Create new affiliate goal
                 index: Affiliate goals

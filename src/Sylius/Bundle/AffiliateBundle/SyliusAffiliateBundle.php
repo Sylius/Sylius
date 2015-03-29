@@ -51,6 +51,7 @@ class SyliusAffiliateBundle extends AbstractResourceBundle
         return array(
             'Sylius\Component\Affiliate\Model\ActionInterface'      => 'sylius.model.affiliate_action.class',
             'Sylius\Component\Affiliate\Model\AffiliateInterface'   => 'sylius.model.affiliate.class',
+            'Sylius\Component\Affiliate\Model\BannerInterface'      => 'sylius.model.affiliate_banner.class',
             'Sylius\Component\Affiliate\Model\GoalInterface'        => 'sylius.model.affiliate_goal.class',
             'Sylius\Component\Affiliate\Model\RuleInterface'        => 'sylius.model.affiliate_rule.class',
             'Sylius\Component\Affiliate\Model\InvitationInterface'  => 'sylius.model.invitation.class',

@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Uploader;
+namespace spec\Sylius\Resource\Resource\Uploader;
 
 use Gaufrette\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Resource\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageUploaderSpec extends ObjectBehavior
@@ -23,8 +23,7 @@ class ImageUploaderSpec extends ObjectBehavior
     {
         $filesystem->has(Argument::any())->willReturn(false);
 
-        $file = new File(__FILE__, 'img.jpg');
-        $image->getFile()->willReturn($file);
+        $image->getFile()->willReturn(new File(__FILE__, 'img.jpg'));
 
         $this->beConstructedWith($filesystem);
     }

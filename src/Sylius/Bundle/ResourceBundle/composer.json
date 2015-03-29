@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.3.9",
 
+        "knplabs/knp-gaufrette-bundle":   "~0.1",
         "symfony/framework-bundle":        "~2.3",
         "symfony/twig-bundle":             "~2.3",
         "symfony/expression-language":     "~2.4",

@@ -23,7 +23,7 @@ class TaxonSpec extends ObjectBehavior
     function it_is_Sylius_Taxon()
     {
         $this->shouldImplement('Sylius\Component\Taxonomy\Model\TaxonInterface');
-        $this->shouldImplement('Sylius\Component\Core\Model\ImageInterface');
+        $this->shouldImplement('Sylius\Component\Resource\Model\ImageInterface');
     }
 
     function it_should_not_path_defined_by_default()

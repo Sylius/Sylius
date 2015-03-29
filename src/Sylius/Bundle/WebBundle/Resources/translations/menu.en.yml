@@ -45,6 +45,7 @@ sylius:
                 report: Reports
             sidebar:
                 affiliates: Affiliates
+                affiliate_banner: Affiliate banners
                 affiliate_goal: Affiliate goals
                 affiliate_settings: Affiliate settings
                 api_clients: API clients

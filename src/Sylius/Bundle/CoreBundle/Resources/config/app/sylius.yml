@@ -267,6 +267,12 @@ sylius_rbac:
         sylius.affiliate.update: Edit affiliate
         sylius.affiliate.delete: Delete affiliate
 
+        sylius.manage.affiliate_banner: Manage affiliate banners
+        sylius.affiliate_banner.index: List affiliate banners
+        sylius.affiliate_banner.create: Create affiliate banner
+        sylius.affiliate_banner.update: Edit affiliate banner
+        sylius.affiliate_banner.delete: Delete affiliate banner
+
         sylius.manage.affiliate_goal: Manage affiliate goals
         sylius.affiliate_goal.show: Show affiliate goal
         sylius.affiliate_goal.index: List affiliate goals
@@ -577,6 +583,7 @@ sylius_rbac:
         sylius.support: Manage customer support
     permissions_hierarchy:
         sylius.manage.affiliate: [sylius.affiliate.show, sylius.affiliate.index, sylius.affiliate.create, sylius.affiliate.update, sylius.affiliate.delete]
+        sylius.manage.affiliate_banner: [sylius.affiliate_banner.index, sylius.affiliate_banner.create, sylius.affiliate_banner.update, sylius.affiliate_banner.delete]
         sylius.manage.affiliate_goal: [sylius.affiliate_goal.show, sylius.affiliate_goal.index, sylius.affiliate_goal.create, sylius.affiliate_goal.update, sylius.affiliate_goal.delete]
         sylius.manage.user: [sylius.user.show, sylius.user.index, sylius.user.create, sylius.user.update, sylius.user.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
@@ -621,7 +628,7 @@ sylius_rbac:
 
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_archetype, sylius.manage.product_variant, sylius.manage.taxonomy, sylius.manage.taxon]
         sylius.sales: [sylius.manage.order, sylius.manage.payment, sylius.manage.report]
-        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.affiliate_goal]
+        sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email, sylius.manage.affiliate_banner, sylius.manage.affiliate_goal]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.user, sylius.manage.group, sylius.accounts]

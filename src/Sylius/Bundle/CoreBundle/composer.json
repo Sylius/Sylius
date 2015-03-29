@@ -27,7 +27,6 @@
         "hwi/oauth-bundle":               "~0.3",
         "jms/serializer-bundle":          "~0.13",
         "jms/translation-bundle":         "1.1.*",
-        "knplabs/knp-gaufrette-bundle":   "~0.1",
         "mathiasverraes/money":           "~1.2",
         "swiftmailer/swiftmailer":        "~5.0",
         "sylius/core":                    "0.14.*@dev",

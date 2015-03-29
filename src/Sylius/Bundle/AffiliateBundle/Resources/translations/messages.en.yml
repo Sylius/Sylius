@@ -29,4 +29,7 @@ sylius:
             ends_at: Ends at
             name: Name
             rules: Rules
-            starts_at: Starts at
+            starts_at: Starts ats
+        banner:
+            name: Name
+            enabled: Enabled

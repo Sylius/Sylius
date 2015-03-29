@@ -24,6 +24,7 @@
 
         <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
         <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
+        <parameter key="sylius.form.type.image.class">Sylius\Bundle\ResourceBundle\Form\Type\ImageType</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
 
@@ -36,6 +37,8 @@
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
 
         <parameter key="symfony.expression.language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
+
+        <parameter key="sylius.image_uploader.class">Sylius\Component\Resource\Uploader\ImageUploader</parameter>
     </parameters>
 
     <services>
@@ -76,6 +79,14 @@
         <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
         <service id="sylius.form.extension.collection" class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />
+        </service>
+
+        <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
+            <argument type="service">
+                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+                    <argument>%sylius.uploader.filesystem%</argument>
+                </service>
+            </argument>
         </service>
     </services>
 </container>
