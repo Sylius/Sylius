@@ -76,6 +76,7 @@
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.currency_based.class">Sylius\Component\Core\Pricing\CurrencyBasedCalculator</parameter>
+        <parameter key="sylius.price_calculator.class">Sylius\Component\Core\Pricing\DelegatingCalculator</parameter>
         <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
@@ -388,6 +389,12 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
             <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="sylius.price_calculator" class="%sylius.price_calculator.class%">
+            <argument type="service" id="sylius.registry.price_calculator" />
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.currency_converter" />
         </service>
 
         <service id="sylius.price_calculator.group_based" class="%sylius.price_calculator.group_based.class%">

@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.twig.extension.restricted_zone.class">Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension</parameter>
+        <parameter key="sylius.twig.extension.pricing.class">Sylius\Bundle\CoreBundle\Twig\PricingExtension</parameter>
     </parameters>
 
     <services>

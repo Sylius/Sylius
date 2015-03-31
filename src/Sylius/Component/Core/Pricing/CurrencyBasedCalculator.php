@@ -18,7 +18,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CurrencyBasedCalculator implements CalculatorInterface
+class CurrencyBasedCalculator implements CurrencyAwareCalculatorInterface
 {
     /**
      * @var CurrencyContextInterface
@@ -50,5 +50,13 @@ class CurrencyBasedCalculator implements CalculatorInterface
     public function getType()
     {
         return Calculators::CURRENCY_BASED;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCurrencySpecific()
+    {
+        return true;
     }
 }
