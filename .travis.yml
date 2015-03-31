@@ -1,5 +1,7 @@
 language: php
 
+sudo: false
+
 php:
     - 5.3
     - 5.4
@@ -16,14 +18,18 @@ matrix:
         - php: 5.3
           env: TEST_SUITE=2 COMPOSER_FLAGS="--prefer-lowest"
 
-services: mongodb
+services:
+    - mongodb
+    
+addons:
+    apt:
+        packages:
+            - apache2
+            - wkhtmltopdf
+            - xvfb
 
-before_install:
-    - sudo apt-get update
-    - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
-
-install:
-    - sudo apt-get install -y --force-yes php5-curl php5-intl wkhtmltopdf
+#install:
+#   - sudo apt-get install -y --force-yes php5-curl php5-intl wkhtmltopdf
 #   - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-intl wkhtmltopdf
 #   - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
 #   - sudo /etc/init.d/apache2 restart
