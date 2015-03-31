@@ -52,15 +52,18 @@ class VolumeBasedCalculator implements CalculatorInterface
         $quantity = array_key_exists('quantity', $context) ? $context['quantity'] : 1;
 
         foreach ($configuration as $range) {
-            if (null === $range['min'] || null === $range['price']) {
-                continue; // silently ignore absurd ranges -- why not throw ?
+            if (null === $range['price']) {
+                throw new \Exception('Volume-based price ranges require a `price`.');
             }
 
-            if ($range['min'] <= $quantity && empty($range['max'])) {
-                return $range['price'];
-            }
-
-            if ($range['min'] <= $quantity && $quantity <= $range['max']) {
+            if (
+                // Given that undefined minimum is assumed to be 1,
+                (empty($range['min']) && $range['max'] <= $quantity) ||
+                // and that undefined maximum is assumed to be infinite,
+                ($range['min'] <= $quantity && empty($range['max'])) ||
+                // are we in this price range ?
+                ($range['min'] <= $quantity && $quantity <= $range['max'])
+            ) {
                 return $range['price'];
             }
         }
