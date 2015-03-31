@@ -101,7 +101,6 @@
             <argument type="collection">
                 <argument>sylius</argument>
             </argument>
-            <argument type="service" id="sylius.currency_provider" />
             <tag name="form.type" alias="sylius_advanced_order" />
         </service>
 

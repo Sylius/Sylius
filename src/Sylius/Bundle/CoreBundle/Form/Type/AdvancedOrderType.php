@@ -18,47 +18,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 class AdvancedOrderType extends OrderType
 {
     /**
-     * @var CurrencyProviderInterface
-     */
-    protected $currencyProvider;
-
-    public function __construct($dataClass, array $validationGroups = array(), CurrencyProviderInterface $currencyProvider)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->currencyProvider = $currencyProvider;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $currencies = array();
-        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
-            $currencies[$currency->getCode()] = $currency->getName();
-        }
-
         $builder
-            ->add('currency', 'choice', array(
-                'choices' => $currencies,
-            ))
+            ->add('currency', 'sylius_currency_choice')
+            ->add('state', 'sylius_order_state_choice')
             ->add('product', 'hidden', array(
                 'mapped'  => false,
-            ))
-            ->add('state', 'choice', array(
-                'choices' => array(
-                    OrderInterface::STATE_CART        => 'sylius.order.state.checkout',
-                    OrderInterface::STATE_CART_LOCKED => 'sylius.order.state.cart_locked',
-                    OrderInterface::STATE_PENDING     => 'sylius.order.state.ordered',
-                    OrderInterface::STATE_CONFIRMED   => 'sylius.order.state.order_confimed',
-                    OrderInterface::STATE_SHIPPED     => 'sylius.order.state.shipped',
-                    OrderInterface::STATE_ABANDONED   => 'sylius.order.state.abandoned',
-                    OrderInterface::STATE_CANCELLED   => 'sylius.order.state.cancelled',
-                    OrderInterface::STATE_RETURNED    => 'sylius.order.state.returned',
-                ),
             ))
         ;
     }
