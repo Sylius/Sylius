@@ -24,3 +24,9 @@ sylius_account_affiliate_referrals:
     methods: [GET]
     defaults:
         _controller: sylius.controller.frontend.account.affiliate:referralsAction
+
+sylius_account_affiliate_invitations:
+    path: /invitations
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.frontend.account.affiliate:invitationsAction

@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\UserInterface as BaseUserInterface;
 use Sylius\Component\Affiliate\Model\AffiliateAwareInterface;
 use Sylius\Component\Affiliate\Model\ReferralInterface;
+use Sylius\Component\Currency\Model\CurrencyAwareInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -23,7 +24,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends AffiliateAwareInterface, BaseUserInterface, IdentityInterface, ReferralInterface, TimestampableInterface
+interface UserInterface extends AffiliateAwareInterface, BaseUserInterface, CurrencyAwareInterface, IdentityInterface, ReferralInterface, TimestampableInterface
 {
     /**
      * Get first name.
@@ -52,20 +53,6 @@ interface UserInterface extends AffiliateAwareInterface, BaseUserInterface, Iden
      * @param string $lastName
      */
     public function setLastName($lastName);
-
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string $currency
-     */
-    public function setCurrency($currency);
 
     /**
      * Get orders.

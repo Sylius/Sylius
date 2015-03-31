@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Affiliate\Model\ReferrerAwareInterface;
 use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Currency\Model\CurrencyAwareInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
@@ -26,6 +27,7 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  */
 interface OrderInterface extends
     CartInterface,
+    CurrencyAwareInterface,
     PaymentsSubjectInterface,
     PromotionCountableSubjectInterface,
     PromotionCouponsAwareSubjectInterface,
@@ -147,22 +149,6 @@ interface OrderInterface extends
      * @return bool
      */
     public function hasShipment(ShipmentInterface $shipment);
-
-    /**
-     * Get currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string
-     *
-     * @return OrderInterface
-     */
-    public function setCurrency($currency);
 
     /**
      * Adds promotion coupon.

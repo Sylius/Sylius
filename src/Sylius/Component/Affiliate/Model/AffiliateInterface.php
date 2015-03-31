@@ -34,6 +34,18 @@ interface AffiliateInterface extends ReferralInterface, TimestampableInterface
     public function getId();
 
     /**
+     * @return string
+     */
+    public function getReferralCode();
+
+    /**
+     * @param string $referralCode
+     *
+     * @return self
+     */
+    public function setReferralCode($referralCode);
+
+    /**
      * Get referrals.
      *
      * @return Collection|ReferralInterface[]
@@ -103,30 +115,6 @@ interface AffiliateInterface extends ReferralInterface, TimestampableInterface
      * @return self
      */
     public function setStatus($status);
-
-    /**
-     * @return float
-     */
-    public function getProvisionAmount();
-
-    /**
-     * @param float $amount
-     *
-     * @return self
-     */
-    public function setProvisionAmount($amount);
-
-    /**
-     * @return int
-     */
-    public function getProvisionType();
-
-    /**
-     * @param int $type
-     *
-     * @return self
-     */
-    public function setProvisionType($type);
 
     /**
      * @return Collection|TransactionInterface[]

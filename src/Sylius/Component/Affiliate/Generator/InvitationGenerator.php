@@ -14,6 +14,7 @@ namespace Sylius\Component\Affiliate\Generator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Affiliate\Model\InvitationInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -33,10 +34,16 @@ class InvitationGenerator implements InvitationGeneratorInterface
      */
     protected $manager;
 
-    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager)
+    /**
+     * @var SenderInterface
+     */
+    protected $emailSender;
+
+    public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager, SenderInterface $emailSender)
     {
         $this->repository = $repository;
         $this->manager = $manager;
+        $this->emailSender = $emailSender;
     }
 
     /**
@@ -50,6 +57,8 @@ class InvitationGenerator implements InvitationGeneratorInterface
             $invitation->setAffiliate($affiliate);
             $invitation->setEmail($email);
             $invitation->setHash($this->generateUniqueHash($email, $instruction->getReferrerCode()));
+
+            $this->emailSender->send('affiliate_invitation', array($email), array('affiliate' => $affiliate, 'invitation' => $invitation));
 
             $this->manager->persist($invitation);
         }

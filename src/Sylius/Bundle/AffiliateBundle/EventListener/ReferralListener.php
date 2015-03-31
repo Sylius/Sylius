@@ -89,7 +89,7 @@ class ReferralListener
      */
     private function addReferral($referralCode)
     {
-        $affiliate = $this->affiliateRepository->findOneBy(array('referralCode' => $referralCode));
+        $affiliate = $this->affiliateRepository->findOneBy(array('referralCode' => $referralCode, 'status' => AffiliateInterface::AFFILIATE_ENABLED));
         if ($affiliate && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $affiliate->addReferral($this->securityContext->getToken()->getUser());
 

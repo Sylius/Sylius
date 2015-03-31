@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface TransactionInterface extends AffiliateAwareInterface, TimestampableInterface
 {
     const TYPE_EARNING = 1;
-    const TYPE_PAYMENT = 2;
+    const TYPE_PAYOUT  = 2;
 
     /**
      * Get ID.
@@ -66,4 +66,20 @@ interface TransactionInterface extends AffiliateAwareInterface, TimestampableInt
      * @return self
      */
     public function setAmount($amount);
+
+    /**
+     * Get currency.
+     *
+     * @return string
+     */
+    public function getCurrency();
+
+    /**
+     * Set currency.
+     *
+     * @param string $currency
+     *
+     * @return self
+     */
+    public function setCurrency($currency);
 }

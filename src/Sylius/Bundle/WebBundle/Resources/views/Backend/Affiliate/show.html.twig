@@ -15,6 +15,9 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_affiliate_index'), 'sylius.affiliate.manage'|trans) }}
+        {% if not affiliate.referrer is empty %}
+            {{ buttons.manage(path('sylius_backend_affiliate_show', {'id': affiliate.referrer.id}), 'sylius.affiliate.referrer'|trans) }}
+        {% endif %}
         {{ buttons.edit(path('sylius_backend_affiliate_update', {'id': affiliate.id})) }}
         {{ buttons.delete(path('sylius_backend_affiliate_delete', {'id': affiliate.id}), null, false, true) }}
     </div>
@@ -31,8 +34,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>{{ 'sylius.affiliate.id'|trans }}</strong></td>
-                    <td>#{{ affiliate.id }}</td>
+                    <td><strong>{{ 'sylius.affiliate.referral_code'|trans }}</strong></td>
+                    <td>
+                        <span class="label label-primary">{{ affiliate.referralCode|upper }}</span>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.affiliate.status'|trans }}</strong></td>

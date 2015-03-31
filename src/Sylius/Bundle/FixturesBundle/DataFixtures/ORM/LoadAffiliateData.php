@@ -16,6 +16,7 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
 use Sylius\Component\Affiliate\Model\TransactionInterface;
 use Sylius\Component\Core\Model\UserInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Affiliate fixtures.
@@ -38,7 +39,7 @@ class LoadAffiliateData extends DataFixture
         for ($i = 1; $i <= 50; $i++) {
             $transaction = $this->createTransaction(
                 $this->faker->dateTimeBetween('1 month ago', 'now'),
-                $i % 15 === 0 ? TransactionInterface::TYPE_PAYMENT : TransactionInterface::TYPE_EARNING,
+                $i % 15 === 0 ? TransactionInterface::TYPE_PAYOUT : TransactionInterface::TYPE_EARNING,
                 $i % 15 === 0 ? -rand(1000, 2000) : rand(100, 500)
             );
 
@@ -52,6 +53,8 @@ class LoadAffiliateData extends DataFixture
         }
 
         $user->setAffiliate($affiliate);
+
+        $this->get('event_dispatcher')->dispatch('sylius.affiliate.pre_create', new GenericEvent($affiliate));
 
         $manager->persist($user);
         $manager->persist($affiliate);
@@ -71,6 +74,7 @@ class LoadAffiliateData extends DataFixture
         $transaction = $this->getTransactionRepository()->createNew();
         $transaction->setType($type);
         $transaction->setAmount($amount);
+        $transaction->setCurrency('EUR');
         $transaction->setCreatedAt($date);
 
         return $transaction;

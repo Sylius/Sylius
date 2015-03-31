@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 abstract class ProvisionAction implements AffiliateActionInterface
 {
+    protected $currency = 'EUR';
     protected $transactionRepository;
 
     public function __construct(RepositoryInterface $transactionRepository)
@@ -34,6 +35,7 @@ abstract class ProvisionAction implements AffiliateActionInterface
         /** @var $transaction TransactionInterface */
         $transaction = $this->transactionRepository->createNew();
         $transaction->setAffiliate($affiliate);
+        $transaction->setCurrency($this->currency);
 
         $affiliate->addTransaction($transaction);
 

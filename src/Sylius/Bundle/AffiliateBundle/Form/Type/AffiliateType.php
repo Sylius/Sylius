@@ -31,15 +31,9 @@ class AffiliateType extends AbstractResourceType
                     AffiliateInterface::AFFILIATE_DISABLED => 'sylius.form.affiliate.disabled',
                 ),
             ))
-            ->add('provisionAmount', 'sylius_money', array(
-                'label' => 'sylius.form.affiliate.provision_amount',
-            ))
-            ->add('provisionType', 'choice', array(
-                'label' => 'sylius.form.affiliate.provision_type',
-                'choices' => array(
-                    AffiliateInterface::PROVISION_FIXED   => 'sylius.form.affiliate.fixed',
-                    AffiliateInterface::PROVISION_PERCENT => 'sylius.form.affiliate.percent',
-                ),
+            ->add('referralCode', 'text', array(
+                'label' => 'sylius.form.affiliate.referral_code',
+                'read_only' => true,
             ))
         ;
     }

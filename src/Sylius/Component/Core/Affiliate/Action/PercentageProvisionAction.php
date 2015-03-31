@@ -33,6 +33,7 @@ class PercentageProvisionAction extends ProvisionAction
 
         $adjustment = $this->createTransaction($affiliate);
         $adjustment->setAmount((int) round($subject->getTotal() * $configuration['percentage']));
+        $adjustment->setCurrency($subject->getCurrency());
     }
 
     /**

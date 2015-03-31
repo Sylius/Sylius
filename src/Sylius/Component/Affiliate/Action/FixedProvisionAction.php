@@ -12,6 +12,7 @@
 namespace Sylius\Component\Affiliate\Action;
 
 use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Currency\Model\CurrencyAwareInterface;
 
 class FixedProvisionAction extends ProvisionAction
 {
@@ -22,6 +23,10 @@ class FixedProvisionAction extends ProvisionAction
     {
         $adjustment = $this->createTransaction($affiliate);
         $adjustment->setAmount(- $configuration['amount']);
+
+        if ($subject instanceof CurrencyAwareInterface) {
+            $adjustment->setCurrency($subject->getCurrency());
+        }
     }
 
     /**

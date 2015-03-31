@@ -18,11 +18,16 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Affiliate\Model\Affiliate" table="sylius_affiliate">
+        <indexes>
+            <index columns="referral_code" />
+        </indexes>
+
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
         <field name="status" column="status" type="integer" />
+        <field name="referralCode" column="referral_code" type="string" unique="true" />
 
         <one-to-many field="transactions" target-entity="Sylius\Component\Affiliate\Model\TransactionInterface" mapped-by="affiliate">
             <cascade>

@@ -17,8 +17,13 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.listener.banner_upload.class">Sylius\Bundle\AffiliateBundle\EventListener\ImageUploadListener</parameter>
         <parameter key="sylius.listener.referral.class">Sylius\Bundle\AffiliateBundle\EventListener\ReferralListener</parameter>
+        <parameter key="sylius.listener.referral_code_generator.class">Sylius\Bundle\AffiliateBundle\EventListener\ReferralCodeGeneratorListener</parameter>
         <parameter key="sylius.event_subscriber.affiliate.load_metadata.class">Sylius\Bundle\AffiliateBundle\EventListener\LoadMetadataSubscriber</parameter>
+
+        <parameter key="sylius.generator.invitation_instructions.class">Sylius\Component\Affiliate\Generator\Instruction</parameter>
+        <parameter key="sylius.generator.invitation_generator.class">Sylius\Component\Affiliate\Generator\InvitationGenerator</parameter>
 
         <parameter key="sylius.affiliate_goal_processor.class">Sylius\Component\Affiliate\Processor\AffiliateProcessor</parameter>
 
@@ -33,6 +38,8 @@
 
         <parameter key="sylius.form.type.affiliate.class">Sylius\Bundle\AffiliateBundle\Form\Type\AffiliateType</parameter>
 
+        <parameter key="sylius.form.type.invitations.class">Sylius\Bundle\AffiliateBundle\Form\Type\InvitationsType</parameter>
+
         <parameter key="sylius.form.type.affiliate_goal.class">Sylius\Bundle\AffiliateBundle\Form\Type\GoalType</parameter>
         <parameter key="sylius.form.type.affiliate_goal_rule.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleType</parameter>
         <parameter key="sylius.form.type.affiliate_goal_rule.collection.class">Sylius\Bundle\AffiliateBundle\Form\Type\RuleCollectionType</parameter>
@@ -46,6 +53,18 @@
     </parameters>
 
     <services>
+        <service id="sylius.listener.banner_upload" class="%sylius.listener.banner_upload.class%">
+            <argument type="service" id="sylius.image_uploader" />
+            <tag name="kernel.event_listener" event="sylius.affiliate_banner.pre_create" method="uploadBannerImage" />
+            <tag name="kernel.event_listener" event="sylius.affiliate_banner.pre_update" method="uploadBannerImage" />
+        </service>
+
+        <service id="sylius.listener.referral_code_generator" class="%sylius.listener.referral_code_generator.class%">
+            <argument type="service" id="sylius.repository.affiliate" />
+            <argument type="service" id="sylius.manager.affiliate" />
+            <tag name="kernel.event_listener" event="sylius.affiliate.pre_create" method="generateReferralCode" />
+        </service>
+
         <service id="sylius.listener.referral" class="%sylius.listener.referral.class%">
             <argument type="service" id="security.context" />
             <argument type="service" id="sylius.repository.affiliate" />
@@ -59,6 +78,12 @@
             <argument /> <!-- AffiliateGoal model -->
             <argument /> <!-- Referral model -->
             <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="sylius.generator.invitation_generator" class="%sylius.generator.invitation_generator.class%">
+            <argument type="service" id="sylius.repository.invitation" />
+            <argument type="service" id="sylius.manager.invitation" />
+            <argument type="service" id="sylius.email_sender" />
         </service>
 
         <service id="sylius.affiliate_goal_eligibility_checker" class="%sylius.affiliate_goal_eligibility_checker.class%">
@@ -149,6 +174,10 @@
         <service id="sylius.form.type.affiliate_banner" class="%sylius.form.type.affiliate_banner.class%">
             <argument>%sylius.model.affiliate_banner.class%</argument>
             <tag name="form.type" alias="sylius_affiliate_banner" />
+        </service>
+
+        <service id="sylius.form.type.affiliate_invitations" class="%sylius.form.type.invitations.class%">
+            <tag name="form.type" alias="sylius_affiliate_invitations" />
         </service>
     </services>
 

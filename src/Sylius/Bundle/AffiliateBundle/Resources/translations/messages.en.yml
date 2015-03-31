@@ -21,8 +21,7 @@ sylius:
             fixed: Fixed
             percent: Percent
             status: Status
-            provision_type: Provision type
-            provision_amount: Provision amount
+            referral_code: Referral code
         affiliate_goal:
             actions: Actions
             description: Description
@@ -33,3 +32,5 @@ sylius:
         banner:
             name: Name
             enabled: Enabled
+        invitations:
+            emails: Emails

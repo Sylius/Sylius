@@ -20,25 +20,11 @@ use Doctrine\Common\Collections\Collection;
 class Affiliate implements AffiliateInterface
 {
     /**
-     * AffiliateGoal id.
+     * Affiliate id.
      *
      * @var int
      */
     protected $id;
-
-    /**
-     * AffiliateGoal provision amount.
-     *
-     * @var int
-     */
-    protected $provisionAmount = 1;
-
-    /**
-     * AffiliateGoal provision type.
-     *
-     * @var int
-     */
-    protected $provisionType = AffiliateInterface::PROVISION_FIXED;
 
     /**
      * Affiliation status.
@@ -51,6 +37,11 @@ class Affiliate implements AffiliateInterface
      * @var ReferrerInterface[]
      */
     protected $referrer;
+
+    /**
+     * @var string
+     */
+    protected $referralCode;
 
     /**
      * @var Collection|ReferralInterface[]
@@ -136,35 +127,17 @@ class Affiliate implements AffiliateInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvisionAmount()
+    public function getReferralCode()
     {
-        return $this->provisionAmount;
+        return $this->referralCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProvisionAmount($amount)
+    public function setReferralCode($referralCode)
     {
-        $this->provisionAmount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProvisionType()
-    {
-        return $this->provisionType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProvisionType($type)
-    {
-        $this->provisionType = $type;
+        $this->referralCode = $referralCode;
 
         return $this;
     }

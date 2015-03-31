@@ -38,11 +38,11 @@ sylius:
                 paused: Your affiliate account was paused by administration.
             index: Your affiliation details
             history:
-                title: History of your earnings & payments
+                title: History of your earnings & payouts
                 created_at: Logged at
                 type: Type of transaction
-                payment: Payment
-                earning: Earning
+                payouts: Payouts
+                earnings: Earnings
                 amount: Amount
                 empty: You have no logged transaction yet.
             referrals:
@@ -179,6 +179,7 @@ sylius:
     affiliate:
         id: ID
         status: Status
+        referral_code: Referral code
         referrals: Referrals
         transactions: Transactions
         updated_at: Last update

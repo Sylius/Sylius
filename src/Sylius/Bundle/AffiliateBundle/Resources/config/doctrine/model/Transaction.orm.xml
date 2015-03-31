@@ -24,6 +24,7 @@
 
         <field name="type" column="type" type="integer" />
         <field name="amount" column="amount" type="integer" />
+        <field name="currency" length="3" />
 
         <many-to-one field="affiliate" target-entity="Sylius\Component\Affiliate\Model\AffiliateInterface" inversed-by="transactions">
             <join-column name="affiliate_id" referenced-column-name="id" nullable="true" />

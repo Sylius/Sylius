@@ -7,7 +7,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.affiliate.id'|trans) }}</th>
+            <th>{{ 'sylius.affiliate.referral_code'|trans }}</th>
             <th>{{ 'sylius.affiliate.referrals'|trans }}</th>
             <th>{{ 'sylius.affiliate.transactions'|trans }}</th>
             <th>{{ sylius_resource_sort('updatedAt', 'sylius.affiliate.updated_at'|trans) }}</th>
@@ -18,7 +18,11 @@
     <tbody>
     {% for affiliate in affiliates %}
         <tr id="{{ affiliate.id }}">
-            <td>#{{ affiliate.id }}</td>
+            <td>
+                <a href="{{ path('sylius_backend_affiliate_show', {'id': affiliate.id}) }}">
+                    <span class="label label-primary">{{ affiliate.referralCode|upper }}</span>
+                </a>
+            </td>
             <td>
                 <span class="label label-info">{{ affiliate.referrals|length }}</span>
             </td>

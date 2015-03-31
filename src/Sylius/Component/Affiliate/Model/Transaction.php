@@ -38,6 +38,13 @@ class Transaction implements TransactionInterface
     protected $amount = 0;
 
     /**
+     * Transaction currency.
+     *
+     * @var string
+     */
+    protected $currency;
+
+    /**
      * @var AffiliateInterface
      */
     protected $affiliate;
@@ -90,6 +97,24 @@ class Transaction implements TransactionInterface
     /**
      * {@inheritdoc}
      */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isEarning()
     {
         return TransactionInterface::TYPE_EARNING === $this->type;
@@ -100,7 +125,7 @@ class Transaction implements TransactionInterface
      */
     public function isPayment()
     {
-        return TransactionInterface::TYPE_PAYMENT === $this->type;
+        return TransactionInterface::TYPE_PAYOUT === $this->type;
     }
 
     /**
