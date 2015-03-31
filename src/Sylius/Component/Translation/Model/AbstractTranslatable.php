@@ -19,14 +19,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 abstract class AbstractTranslatable implements TranslatableInterface
 {
     /**
-     * Translations
+     * Translations.
      *
      * @var TranslationInterface[]
      */
     protected $translations;
 
     /**
-     * Current locale
+     * Current locale.
      *
      * @var string
      */
@@ -35,12 +35,12 @@ abstract class AbstractTranslatable implements TranslatableInterface
     /**
      * Cache current translation. Useful in Doctrine 2.4+
      *
-     * @var string
+     * @var TranslationInterface
      */
     protected $currentTranslation;
 
     /**
-     * Fallback locale
+     * Fallback locale.
      *
      * @var string
      */
@@ -98,9 +98,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * @param string $currentLocale
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setCurrentLocale($currentLocale)
     {
@@ -118,9 +116,7 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * @param string $fallbackLocale
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setFallbackLocale($fallbackLocale)
     {
@@ -138,25 +134,16 @@ abstract class AbstractTranslatable implements TranslatableInterface
     }
 
     /**
-     * Translation helper method
-     *
-     * @param string $locale
-     *
-     * @return TranslationInterface
-     *
-     * @throws \RuntimeException
+     * {@inheritdoc}
      */
     public function translate($locale = null)
     {
-        if (null === $locale) {
-            $locale = $this->currentLocale;
-        }
-
+        $locale = $locale ?: $this->currentLocale;
         if (null === $locale) {
             throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
 
-        if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {
+        if ($this->currentTranslation && $locale === $this->currentTranslation->getLocale()) {
             return $this->currentTranslation;
         }
 

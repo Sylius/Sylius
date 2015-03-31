@@ -46,7 +46,7 @@ class ODMTranslatableListener implements EventSubscriber
     private $mappings;
 
     /**
-     * @param string $mappings
+     * @param array $mappings
      * @param string $fallbackLocale
      */
     public function __construct(array $mappings, $fallbackLocale)
@@ -102,7 +102,7 @@ class ODMTranslatableListener implements EventSubscriber
     /**
      * Add mapping data to a translatable entity
      *
-     * @param ClassMetadata $mapping
+     * @param ClassMetadata $metadata
      */
     private function mapTranslatable(ClassMetadata $metadata)
     {
@@ -127,7 +127,7 @@ class ODMTranslatableListener implements EventSubscriber
     /**
      * Add mapping data to a translation entity
      *
-     * @param ClassMetadata $mapping
+     * @param ClassMetadata $metadata
      */
     private function mapTranslation(ClassMetadata $metadata)
     {

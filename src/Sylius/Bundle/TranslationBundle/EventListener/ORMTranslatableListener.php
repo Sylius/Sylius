@@ -45,7 +45,7 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();
-        $reflection     = $classMetadata->reflClass;
+        $reflection    = $classMetadata->reflClass;
 
         if (!$reflection || $reflection->isAbstract()) {
             return;
@@ -58,7 +58,6 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         if ($reflection->implementsInterface('Sylius\Component\Translation\Model\TranslationInterface')) {
             $this->mapTranslation($classMetadata);
         }
-
     }
 
     /**
@@ -74,11 +73,9 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
             return;
         }
 
-        $config = $this->configs[$metadata->name];
-
         $metadata->mapOneToMany(array(
             'fieldName'     => 'translations',
-            'targetEntity'  => $config['translation']['model'],
+            'targetEntity'  => $this->configs[$metadata->name]['translation']['model'],
             'mappedBy'      => 'translatable',
             'fetch'         => ClassMetadataInfo::FETCH_EXTRA_LAZY,
             'indexBy'       => 'locale',
@@ -100,11 +97,9 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
             return;
         }
 
-        $config = $this->configs[$metadata->name];
-
         $metadata->mapManyToOne(array(
             'fieldName'    => 'translatable' ,
-            'targetEntity' => $config['model'],
+            'targetEntity' => $this->configs[$metadata->name]['model'],
             'inversedBy'   => 'translations' ,
             'joinColumns'  => array(array(
                 'name'                 => 'translatable_id',
@@ -144,18 +139,18 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
     /**
      * Check if an unique constraint has been defined.
      *
-     * @param ClassMetadata $metdata
+     * @param ClassMetadata $metadata
      * @param array         $columns
      *
      * @return bool
      */
-    private function hasUniqueConstraint(ClassMetadata $metdata, array $columns)
+    private function hasUniqueConstraint(ClassMetadata $metadata, array $columns)
     {
-        if (!isset($metdata->table['uniqueConstraints'])) {
+        if (!isset($metadata->table['uniqueConstraints'])) {
             return false;
         }
 
-        foreach ($metdata->table['uniqueConstraints'] as $constraint) {
+        foreach ($metadata->table['uniqueConstraints'] as $constraint) {
             if (!array_diff($constraint['columns'], $columns)) {
                 return true;
             }

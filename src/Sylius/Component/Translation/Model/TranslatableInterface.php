@@ -17,18 +17,31 @@ namespace Sylius\Component\Translation\Model;
 interface TranslatableInterface
 {
     /**
-     * @param null $locale
-     * @return mixed
+     * Translation helper method.
+     *
+     * @param string $locale
+     *
+     * @return TranslationInterface
+     *
+     * @throws \RuntimeException
      */
     public function translate($locale = null);
 
     /**
+     * Set current locale.
+     *
      * @param string $locale
+     *
+     * @return self
      */
     public function setCurrentLocale($locale);
 
     /**
+     * Set fallback locale.
+     *
      * @param string $locale
+     *
+     * @return self
      */
     public function setFallbackLocale($locale);
 

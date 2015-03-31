@@ -45,7 +45,7 @@ class LocaleProvider implements LocaleProviderInterface
     public function __construct(RepositoryInterface $localeRepository, $defaultLocale)
     {
         if (empty($defaultLocale)) {
-            throw new \Exception('Default locale is required!');
+            throw new \InvalidArgumentException('Default locale is required!');
         }
 
         $this->localeRepository = $localeRepository;

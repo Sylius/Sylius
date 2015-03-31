@@ -30,9 +30,9 @@ class LocaleProvider implements LocaleProviderInterface
      * @param string $currentLocale
      * @param string $fallbackLocale
      */
-    function __construct($currentLlocale, $fallbackLocale)
+    public function __construct($currentLocale, $fallbackLocale)
     {
-        $this->currentLocale = $currentLlocale;
+        $this->currentLocale = $currentLocale;
         $this->fallbackLocale = $fallbackLocale;
     }
 
@@ -44,6 +44,9 @@ class LocaleProvider implements LocaleProviderInterface
         return $this->currentLocale;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFallbackLocale()
     {
         return $this->fallbackLocale;
