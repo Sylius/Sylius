@@ -18,6 +18,7 @@ use Sylius\Component\Storage\StorageInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Joseph Bielawski <stloyd@gmail.com>
+ * @author Aram Alipoor <aram.alipoor@gmail.com>
  */
 class LocaleContext implements LocaleContextInterface
 {
@@ -34,6 +35,59 @@ class LocaleContext implements LocaleContextInterface
      * @var StorageInterface
      */
     protected $storage;
+
+    /**
+     * Meta data for special languages,
+     * by default we assume that all languages are LTR except mentioned otherwise.
+     *
+     * TODO This list should be completed
+     *
+     * @var array
+     */
+    protected static $localeMetaData = array(
+        'fa' => array(
+            'direction' => 'rtl',
+            'calendar' => 'persian'
+        ),
+        'fa_IR' => array(
+            'direction' => 'rtl',
+            'calendar' => 'persian'
+        ),
+        'fa_AF' => array(
+            'direction' => 'rtl',
+            'calendar' => 'persian'
+        ),
+        'ar' => array(
+            'direction' => 'rtl',
+            'calendar' => 'islamic'
+        ),
+        'ckb' => array(
+            'direction' => 'rtl',
+            'calendar' => 'persian'
+        ),
+        'he_IL' => array(
+            'direction' => 'rtl',
+            'calendar' => 'hebrew'
+        ),
+        'ug_CN' => array(
+            'direction' => 'rtl',
+        ),
+        'dv' => array(
+            'direction' => 'rtl',
+        ),
+        'ha' => array(
+            'direction' => 'rtl',
+        ),
+        'ps' => array(
+            'direction' => 'rtl',
+        ),
+        'uz_UZ' => array(
+            'direction' => 'rtl',
+        ),
+        'yi' => array(
+            'direction' => 'rtl',
+        )
+    );
 
     public function __construct(StorageInterface $storage, $defaultLocale)
     {
@@ -63,5 +117,25 @@ class LocaleContext implements LocaleContextInterface
     public function setLocale($locale)
     {
         return $this->storage->setData(self::STORAGE_KEY, $locale);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCalendar()
+    {
+        $code = $this->getLocale();
+        return @self::$localeMetaData[$code]['calendar'] ?: 'gregorian';
+    }
+
+    /**
+     * Get the currently active language direction.
+     *
+     * @return string
+     */
+    public function getDirection()
+    {
+        $code = $this->getLocale();
+        return @self::$localeMetaData[$code]['direction'] ?: 'ltr';
     }
 }

@@ -24,7 +24,7 @@
         {% for order in orders %}
         <tr id="{{ order.id }}" {% if order.deleted %} class="danger"{% endif %}>
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
-            <td>{{ order.createdAt|date }}</td>
+            <td>{{ order.createdAt|sylius_localized_date }}</td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">
                     <strong>#{{ order.number }}</strong>

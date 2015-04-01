@@ -71,7 +71,7 @@
             {% if user.lastLogin %}
                 <tr>
                     <td><strong>{{ 'sylius.user.last_login'|trans }}</strong></td>
-                    <td>{{ user.lastLogin|date }}</td>
+                    <td>{{ user.lastLogin|sylius_localized_date }}</td>
                 </tr>
             {% endif %}
             <tr>

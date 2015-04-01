@@ -27,8 +27,8 @@
                         {{ menu.publishable ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                     </span>
                 </td>
-                <td>{{ menu.publishStartDate is empty ? '-' : menu.publishStartDate|date }}</td>
-                <td>{{ menu.publishStartDate is empty ? '-' : menu.publishStartDate|date }}</td>
+                <td>{{ menu.publishStartDate is empty ? '-' : menu.publishStartDate|sylius_localized_date }}</td>
+                <td>{{ menu.publishStartDate is empty ? '-' : menu.publishStartDate|sylius_localized_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_menu_node_update', {'id': menu.id})) }}

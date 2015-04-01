@@ -37,7 +37,7 @@
                     {% endfor %}
                 </ul>
             </td>
-            <td>{{ archetype.updatedAt|date }}</td>
+            <td>{{ archetype.updatedAt|sylius_localized_date }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.create(path('sylius_backend_product_create', {'archetype': archetype.code}), 'sylius.product.create'|trans) }}

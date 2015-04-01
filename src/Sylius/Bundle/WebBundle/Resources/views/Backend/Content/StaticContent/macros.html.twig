@@ -26,8 +26,8 @@
                         {{ page.publishable ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                     </span>
                 </td>
-                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|date }}</td>
-                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|date }}</td>
+                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|sylius_localized_date }}</td>
+                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|sylius_localized_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_static_content_update', {'id': page.id})) }}
