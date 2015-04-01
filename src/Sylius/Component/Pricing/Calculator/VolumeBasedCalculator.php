@@ -58,7 +58,7 @@ class VolumeBasedCalculator implements CalculatorInterface
 
             if (
                 // Given that undefined minimum is assumed to be 1,
-                (empty($range['min']) && $range['max'] <= $quantity) ||
+                (empty($range['min']) && $quantity <= $range['max']) ||
                 // and that undefined maximum is assumed to be infinite,
                 ($range['min'] <= $quantity && empty($range['max'])) ||
                 // are we in this price range ?
