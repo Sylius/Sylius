@@ -56,12 +56,7 @@ class AttributeValueType extends AbstractResourceType
             ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory()))
         ;
 
-        $prototypes = array();
-        foreach ($this->getAttributes($builder) as $attribute) {
-            $prototypes[] = $builder->create('value', $attribute->getType(), $attribute->getConfiguration())->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
+        $this->buildAttributeValuePrototypes($builder);
     }
 
     /**
@@ -85,14 +80,19 @@ class AttributeValueType extends AbstractResourceType
     }
 
     /**
-     * Get attributes
+     * Build attribute values' prototypes
      *
      * @param FormBuilderInterface $builder
-     *
-     * @return AttributeInterface[]
      */
-    private function getAttributes(FormBuilderInterface $builder)
+    protected function buildAttributeValuePrototypes($builder)
     {
-        return $builder->get('attribute')->getOption('choice_list')->getChoices();
+        $attributes = $builder->get('attribute')->getOption('choice_list')->getChoices();
+
+        $prototypes = array();
+        foreach ($attributes as $attribute) {
+            $prototypes[] = $builder->create('value', $attribute->getType(), $attribute->getConfiguration())->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
     }
 }
