@@ -61,15 +61,13 @@ class BuildAttributeFormChoicesListener implements EventSubscriberInterface
     public function buildConfiguration(FormEvent $event)
     {
         $data = $event->getData();
-        $choices = array();
+        $data['configuration'] = array();
 
         if (array_key_exists('type', $data) && AttributeTypes::CHOICE === $data['type'] && !empty($data['choices'])) {
-            $choices = $data['choices'];
+            $data['configuration'] = array(
+                'choices' => $data['choices']
+            );
         }
-
-        $data['configuration'] = array(
-            'choices' => $choices
-        );
 
         if (!$event->getForm()->has('configuration')) {
             $event->getForm()->add(
