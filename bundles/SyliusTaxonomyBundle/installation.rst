@@ -60,7 +60,7 @@ Put this configuration inside your ``app/config/config.yml``.
 
 .. code-block:: yaml
 
-    sylius_taxonomies:
+    sylius_taxonomy:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
 
 And configure doctrine extensions which are used in the taxonomy bundle:
