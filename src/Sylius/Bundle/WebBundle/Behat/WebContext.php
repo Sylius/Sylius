@@ -433,6 +433,16 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     }
 
     /**
+     * @When I fill in the :nth province with :value
+     */
+    public function iFillInTheNthProvinceWith($nth, $value)
+    {
+        $cardinal = ((int) $nth) - 1;
+
+        $this->fillField(sprintf('sylius_country[provinces][%d][name]', $cardinal), $value);
+    }
+
+    /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
      */
     public function iFillInCheckoutAddress($type, $country)
