@@ -54,7 +54,7 @@ class DoctrinePHPCRDriver extends AbstractDatabaseDriver
      */
     protected function getManagerServiceKey()
     {
-        return sprintf('doctrine_phpcr.odm.%_document_manager', $this->managerName);
+        return sprintf('doctrine_phpcr.odm.%s_document_manager', $this->managerName);
     }
 
     /**
