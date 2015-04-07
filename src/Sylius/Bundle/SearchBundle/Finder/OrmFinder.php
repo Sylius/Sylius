@@ -382,7 +382,7 @@ class OrmFinder extends AbstractFinder
      */
     public function query($searchTerm, EntityManager $em)
     {
-        $query = $em->createQuery('select u.itemId, u.tags, u.entity from Sylius\Bundle\SearchBundle\Model\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm) > 0');
+        $query = $em->createQuery('SELECT u.itemId, u.tags, u.entity FROM Sylius\Bundle\SearchBundle\Model\SearchIndex u WHERE MATCH(u.value) AGAINST (:searchTerm BOOLEAN) > 0');
         $query->setParameter('searchTerm', $searchTerm);
 
         $elements = array();
