@@ -65,7 +65,7 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
      */
     protected function getManagerServiceKey()
     {
-        return sprintf('doctrine.odm.mongodb.%_document_manager', $this->managerName);
+        return sprintf('doctrine_mongodb.odm.%s_document_manager', $this->managerName);
     }
 
     /**
