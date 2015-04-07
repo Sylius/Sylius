@@ -24,7 +24,7 @@ class Attribute extends BaseAttribute implements AttributeInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

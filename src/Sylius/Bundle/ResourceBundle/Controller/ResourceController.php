@@ -23,9 +23,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Base resource controller for Sylius.
@@ -298,6 +298,14 @@ class ResourceController extends FOSRestController
 
         $this->domainManager->update($resource, 'revert');
 
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
+
         return $this->redirectHandler->redirectTo($resource);
     }
 
@@ -332,6 +340,14 @@ class ResourceController extends FOSRestController
         $stateMachine->apply($transition);
 
         $this->domainManager->update($resource);
+
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
 
         return $this->redirectHandler->redirectToReferer();
     }
@@ -426,6 +442,14 @@ class ResourceController extends FOSRestController
 
         $this->domainManager->move($resource, $movement);
 
+        if ($this->config->isApiRequest()) {
+            if ($resource instanceof ResourceEvent) {
+                throw new HttpException($resource->getErrorCode(), $resource->getMessage());
+            }
+
+            return $this->handleView($this->view($resource, 204));
+        }
+
         return $this->redirectHandler->redirectToIndex();
     }
 
@@ -458,7 +482,7 @@ class ResourceController extends FOSRestController
         $permission = $this->config->getPermission($permission);
 
         if ($permission && !$this->get('sylius.authorization_checker')->isGranted(sprintf('%s.%s.%s', $this->config->getBundlePrefix(), $this->config->getResourceName(), $permission))) {
-            throw new AccessDeniedHttpException();
+            throw new AccessDeniedException();
         }
     }
 }

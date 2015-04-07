@@ -16,7 +16,31 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 /**
  * Volume based pricing calculator.
  *
+ * It accepts a configuration array containing quantity ranges of the form :
+ *
+ * ``` php
+ * $configuration = array(
+ *     // Between 1 and 9 items, the price for each is 2.00
+ *     array(
+ *         'min' => 1,
+ *         'max' => 9,
+ *         'price' => 200,
+ *     ),
+ *     // For 10 items and more, the price lowers to 1.50
+ *     array(
+ *         'min' => 10,
+ *         'max' => null,
+ *         'price' => 150,
+ *     )
+ * )
+ * ```
+ *
+ * You can provide as many ranges as you want, and if they overlap the first
+ * range found will be picked. Ranges do not have to be provided in sequential
+ * order, and their boundaries are inclusive. The price must be given in cents.
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Antoine Goutenoir <antoine@goutenoir.com>
  */
 class VolumeBasedCalculator implements CalculatorInterface
 {
@@ -28,15 +52,18 @@ class VolumeBasedCalculator implements CalculatorInterface
         $quantity = array_key_exists('quantity', $context) ? $context['quantity'] : 1;
 
         foreach ($configuration as $range) {
-            if (null === $range['min'] || null === $range['price']) {
-                continue;
+            if (null === $range['price']) {
+                throw new \Exception('Volume-based price ranges require a `price`.');
             }
 
-            if (empty($range['max']) && $quantity > $range['min']) {
-                return $range['price'];
-            }
-
-            if ($range['min'] <= $quantity && $quantity <= $range['max']) {
+            if (
+                // Given that undefined minimum is assumed to be 1,
+                (empty($range['min']) && $quantity <= $range['max']) ||
+                // and that undefined maximum is assumed to be infinite,
+                ($range['min'] <= $quantity && empty($range['max'])) ||
+                // are we in this price range ?
+                ($range['min'] <= $quantity && $quantity <= $range['max'])
+            ) {
                 return $range['price'];
             }
         }

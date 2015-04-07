@@ -32,7 +32,7 @@ class LoadProductOptionData extends DataFixture
         // T-Shirt size option.
         $option = $this->createOption(
             'T-Shirt size',
-            array($this->defaultLocale => 'Size', 'es' => 'Talla'),
+            array($this->defaultLocale => 'Size', 'es_ES' => 'Talla'),
             array('S', 'M', 'L', 'XL', 'XXL')
         );
         $manager->persist($option);
@@ -48,14 +48,14 @@ class LoadProductOptionData extends DataFixture
         // Sticker size option.
         $option = $this->createOption(
             'Sticker size',
-            array($this->defaultLocale => 'Size', 'es' => 'Talla'),
+            array($this->defaultLocale => 'Size', 'es_ES' => 'Talla'),
             array('3"', '5"', '7"'));
         $manager->persist($option);
 
         // Mug type option.
         $option = $this->createOption(
             'Mug type',
-            array($this->defaultLocale => 'Type', 'es' => 'Tipo'),
+            array($this->defaultLocale => 'Type', 'es_ES' => 'Tipo'),
             array('Medium mug', 'Double mug', 'MONSTER mug')
         );
         $manager->persist($option);

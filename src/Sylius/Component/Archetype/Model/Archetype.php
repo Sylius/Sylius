@@ -294,7 +294,7 @@ class Archetype extends AbstractTranslatable implements ArchetypeInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

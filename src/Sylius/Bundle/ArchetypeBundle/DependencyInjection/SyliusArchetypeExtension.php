@@ -33,7 +33,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
         );
     }
 
@@ -96,9 +96,9 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
         // Archetype translation form
         $archetypeTranslationAlias = $subject.'_archetype_translation';
 
-        $archetypeTranslationClasses = $config[$archetypeTranslationAlias];
+        $archetypeTranslationClasses = $config[$archetypeAlias]['translation'];
 
-        $archetypeTranslationFormType = new Definition($archetypeTranslationClasses['form']);
+        $archetypeTranslationFormType = new Definition($archetypeTranslationClasses['form']['default']);
         $archetypeTranslationFormType
             ->setArguments(array($archetypeTranslationClasses['model'], $archeTypeFormValidationGroups, $subject))
             ->addTag('form.type', array('alias' => 'sylius_'.$archetypeTranslationAlias))

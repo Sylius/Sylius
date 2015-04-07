@@ -32,7 +32,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_TRANSLATIONS
         );
     }
 
@@ -101,7 +101,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $variantClasses = $config[$variantAlias];
         $optionClasses = $config[$optionAlias];
-        $optionTranslationClasses = $config[$optionTranslationAlias];
+        $optionTranslationClasses = $optionClasses['translation'];
         $optionValueClasses = $config[$optionValueAlias];
 
         $variantFormType = new Definition($variantClasses['form']);
@@ -136,7 +136,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
 
         $container->setDefinition('sylius.form.type.'.$optionAlias, $optionFormType);
 
-        $optionTranslationFormType = new Definition($optionTranslationClasses['form']);
+        $optionTranslationFormType = new Definition($optionTranslationClasses['form']['default']);
         $optionTranslationFormType
             ->setArguments(array($optionTranslationClasses['model'], '%sylius.validation_group.'.$optionTranslationAlias.'%', $variable))
             ->addTag('form.type', array('alias' => 'sylius_'.$optionTranslationAlias))

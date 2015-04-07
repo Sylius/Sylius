@@ -13,12 +13,12 @@ namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Mailer extension.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
 class SyliusMailerExtension extends AbstractResourceExtension
 {
@@ -34,7 +34,8 @@ class SyliusMailerExtension extends AbstractResourceExtension
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
 
-        $container->setAlias('sylius.email_sender.adapter', $config['adapter']);
+        $container->setAlias('sylius.email_sender.adapter', $config['sender_adapter']);
+        $container->setAlias('sylius.email_renderer.adapter', $config['renderer_adapter']);
 
         $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
         $container->setParameter('sylius.mailer.sender_address', $config['sender']['address']);

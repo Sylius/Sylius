@@ -66,7 +66,10 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     public function setName($name)
     {
         $this->translate()->setName($name);
+
         $this->root->setCurrentLocale($this->getCurrentLocale());
+        $this->root->setFallbackLocale($this->getFallbackLocale());
+
         $this->root->setName($name);
 
         return $this;
@@ -141,7 +144,7 @@ class Taxonomy extends AbstractTranslatable implements TaxonomyInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

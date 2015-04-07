@@ -73,6 +73,7 @@ sylius:
                 attributes: Configure attributes
                 archetypes: Product archetypes
                 sales: Orders
+                security_settings: Security settings
                 shipments: Shipments
                 shipping_categories: Shipping categories
                 shipping_methods: Shipping methods

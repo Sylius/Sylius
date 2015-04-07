@@ -106,10 +106,12 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 'attribute' => array(
                     'model' => 'Some\App\Product\Entity\Attribute',
                     'form'  => 'Some\App\Product\Form\AttributeType',
-                ),
-                'attribute_translation' => array(
-                    'model' => 'Some\App\Product\Entity\AttributeTranslation',
-                    'form'  => 'Some\App\Product\Form\AttributeTranslationType',
+                    'translation' => array(
+                        'model' => 'Some\App\Product\Entity\AttributeTranslation',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\AttributeTranslationType',
+                        )
+                    ),
                 ),
                 'attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
@@ -117,6 +119,7 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 ),
             ),
         );
+
         $container->setParameter('sylius.attribute.subjects', $subjects)->shouldBeCalled();
 
         $userConfig = array(
@@ -127,10 +130,12 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                     'attribute' => array(
                         'model' => 'Some\App\Product\Entity\Attribute',
                         'form' => 'Some\App\Product\Form\AttributeType',
-                    ),
-                    'attribute_translation' => array(
-                        'model' => 'Some\App\Product\Entity\AttributeTranslation',
-                        'form' => 'Some\App\Product\Form\AttributeTranslationType',
+                        'translation' => array(
+                            'model' => 'Some\App\Product\Entity\AttributeTranslation',
+                            'form' => array(
+                                'default' => 'Some\App\Product\Form\AttributeTranslationType',
+                            )
+                        ),
                     ),
                     'attribute_value' => array(
                         'model' => 'Some\App\Product\Entity\AttributeValue',
@@ -145,10 +150,12 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 'product_attribute' => array(
                     'model' => 'Some\App\Product\Entity\Attribute',
                     'form'  => 'Some\App\Product\Form\AttributeType',
-                ),
-                'product_attribute_translation' => array(
-                    'model' => 'Some\App\Product\Entity\AttributeTranslation',
-                    'form' => 'Some\App\Product\Form\AttributeTranslationType',
+                    'translation' => array(
+                        'model' => 'Some\App\Product\Entity\AttributeTranslation',
+                        'form' => array(
+                            'default' => 'Some\App\Product\Form\AttributeTranslationType',
+                        )
+                    ),
                 ),
                 'product_attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',

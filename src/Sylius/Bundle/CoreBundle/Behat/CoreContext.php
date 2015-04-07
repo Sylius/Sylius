@@ -292,8 +292,8 @@ class CoreContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             if (false !== strpos($data['range'], '+')) {
-                $min = null;
-                $max = (int) trim(str_replace('+', '', $data['range']));
+                $min = (int) trim(str_replace('+', '', $data['range']));
+                $max = null;
             } else {
                 list($min, $max) = array_map(function ($value) { return (int) trim($value); }, explode('-', $data['range']));
             }
@@ -301,7 +301,7 @@ class CoreContext extends DefaultContext
             $configuration[] = array(
                 'min'   => $min,
                 'max'   => $max,
-                'price' => (int) $data['price'] * 100
+                'price' => (int) ($data['price'] * 100)
             );
         }
 

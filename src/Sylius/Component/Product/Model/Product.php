@@ -553,7 +553,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationEntityClass()
+    protected function getTranslationClass()
     {
         return get_class().'Translation';
     }

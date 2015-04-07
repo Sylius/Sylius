@@ -10,7 +10,6 @@
 
 namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
 
-
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Gedmo\Sluggable\SluggableListener;
@@ -53,7 +52,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
     /**
      * True if node is being inserted
      *
-     * @var boolean
+     * @var bool
      */
     private $isInsert = false;
 
@@ -181,26 +180,24 @@ class TranslationSlugHandler implements SlugHandlerInterface
 
     /**
      * Transliterates the slug and prefixes the slug
-     * by collection of parent slugs
+     * by collection of parent slugs.
      *
      * @param string $text
      * @param string $separator
      * @param object $object
+     *
      * @return string
      */
     public function transliterate($text, $separator, $object)
     {
-        $slug = $text;
-
-        if (strlen($this->parentSlug)) {
-            $slug = $this->parentSlug . $this->usedPathSeparator . $slug . $this->suffix;
-        }
-        else {
+        if ('' !== $this->parentSlug) {
+            $text = $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
+        } else {
             // if no parentSlug, apply our prefix
-            $slug = $this->prefix . $slug;
+            $text = $this->prefix.$text;
         }
 
-        return $slug;
+        return $text;
     }
 
     /**

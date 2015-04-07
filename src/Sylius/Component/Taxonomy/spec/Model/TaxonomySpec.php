@@ -24,7 +24,8 @@ class TaxonomySpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->setCurrentLocale('en');
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
     }
 
     function it_is_initializable()
@@ -44,10 +45,12 @@ class TaxonomySpec extends ObjectBehavior
 
     function it_calls_translation_to_string(TaxonomyTranslation $translation)
     {
-        $translation->getLocale()->willReturn('en');
+        $translation->getLocale()->willReturn('en_US');
         $translation->setTranslatable($this)->shouldBeCalled();
+
         $this->addTranslation($translation);
         $translation->__toString()->shouldBeCalled();
+
         $this->__toString();
     }
 
@@ -71,7 +74,10 @@ class TaxonomySpec extends ObjectBehavior
     {
         $taxon->setName('Brand')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
-        $taxon->setCurrentLocale('en')->shouldBeCalled();
+
+        $taxon->setCurrentLocale('en_US')->shouldBeCalled();
+        $taxon->setFallbackLocale('en_US')->shouldBeCalled();
+
         $this->setRoot($taxon);
 
         $this->setName('Brand');
@@ -82,7 +88,10 @@ class TaxonomySpec extends ObjectBehavior
     {
         $taxon->setName('Category')->shouldBeCalled();
         $taxon->setTaxonomy($this)->shouldBeCalled();
-        $taxon->setCurrentLocale('en')->shouldBeCalled();
+
+        $taxon->setCurrentLocale('en_US')->shouldBeCalled();
+        $taxon->setFallbackLocale('en_US')->shouldBeCalled();
+
         $this->setRoot($taxon);
 
         $this->setName('Category');

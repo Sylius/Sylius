@@ -31,8 +31,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
-            | self::CONFIGURE_FORMS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS | self::CONFIGURE_TRANSLATIONS
         );
     }
 
@@ -63,13 +62,10 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         'subject'         => $config['classes']['product']['model'],
                         'attribute'       => array(
                             'model'       => 'Sylius\Component\Product\Model\Attribute',
-                            'repository'  => 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository',
-                            'translatable' => array(
-                                'targetEntity' => 'Sylius\Component\Product\Model\AttributeTranslation'
+                            'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
+                            'translation' => array(
+                                'model' => 'Sylius\Component\Product\Model\AttributeTranslation'
                             ),
-                        ),
-                        'attribute_translation'       => array(
-                            'model'       => 'Sylius\Component\Product\Model\AttributeTranslation',
                         ),
                         'attribute_value' => array(
                             'model' => 'Sylius\Component\Product\Model\AttributeValue'
@@ -100,13 +96,10 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         ),
                         'option'       => array(
                             'model'       => 'Sylius\Component\Product\Model\Option',
-                            'repository'  => 'Sylius\Bundle\ResourceBundle\Doctrine\ORM\TranslatableEntityRepository',
-                            'translatable' => array(
-                                'targetEntity' => 'Sylius\Component\Product\Model\OptionTranslation'
+                            'repository'  => 'Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository',
+                            'translation' => array(
+                                'model' => 'Sylius\Component\Product\Model\OptionTranslation'
                             ),
-                        ),
-                        'option_translation'       => array(
-                            'model'       => 'Sylius\Component\Product\Model\OptionTranslation',
                         ),
                         'option_value' => array(
                             'model' => 'Sylius\Component\Product\Model\OptionValue'

@@ -64,7 +64,6 @@ class PriceableTypeExtension extends AbstractTypeExtension
         ;
 
         $prototypes = array();
-        $prototypes['calculators'] = array();
 
         foreach ($this->calculatorRegistry->all() as $type => $calculator) {
             $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
@@ -74,7 +73,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
             }
 
             try {
-                $prototypes['calculators'][$type] = $builder->create('pricingConfiguration', $formType)->getForm();
+                $prototypes[$type] = $builder->create('pricingConfiguration', $formType)->getForm();
             } catch (\InvalidArgumentException $e) {
                 continue;
             }
@@ -90,10 +89,8 @@ class PriceableTypeExtension extends AbstractTypeExtension
     {
         $view->vars['prototypes'] = array();
 
-        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
-            foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
-            }
+        foreach ($form->getConfig()->getAttribute('prototypes') as $type => $prototype) {
+            $view->vars['prototypes'][$type] = $prototype->createView($view);
         }
     }
 

@@ -5,7 +5,7 @@
     {% spaceless %}
         <div data-form-type="collection"
              {{ block('widget_container_attributes') }}
-             {% if prototype is defined and allow_add and prototype is not empty %}
+             {% if prototype is defined and allow_add %}
              data-prototype='{{ _self.collectionItem(prototype, allow_delete, button_delete_label, '__name__')|e }}'
              {%- endif -%}>
 
@@ -51,8 +51,11 @@
                         </a>
                     </p>
                 {% endif %}
-
-                {{ form_rest(form) }}
+                {% if not form.children|length %}
+                    {{ form_widget(form) }}
+                {% else %}
+                    {{ form_rest(form) }}
+                {% endif %}
             </div>
         </div>
     {% endspaceless %}

@@ -34,7 +34,11 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
      */
     protected function getRepositoryDefinition(array $classes)
     {
-        $repositoryClass = 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
+        $reflection = new \ReflectionClass($classes['model']);
+        $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
+        $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
+
+        $repositoryClass = $translatable ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository' : 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
 
         if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];
@@ -52,12 +56,6 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
             $unitOfWorkDefinition,
             $this->getClassMetadataDefinition($classes['model']),
         ));
-
-        if (isset($classes['translatable']['translatable_fields'])) {
-            // TODO add only to if instance of translatable repository?
-            $definition->addMethodCall('setTranslatableFields', array($classes['translatable']['translatable_fields']));
-            $definition->addMethodCall('setLocaleContext', array(new Reference('sylius.context.locale')));
-        }
 
         return $definition;
     }

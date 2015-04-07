@@ -69,6 +69,7 @@ class PurchaseListener
                 break;
 
             case PaymentInterface::STATE_VOID:
+            case PaymentInterface::STATE_CANCELLED:
                 $type = 'notice';
                 $message = 'sylius.checkout.canceled';
                 break;

@@ -139,6 +139,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('roles')
+                    ->useAttributeAsKey('id')
                     ->prototype('array')
                         ->children()
                             ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
@@ -179,6 +180,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('permissions')
+                    ->useAttributeAsKey('id')
                     ->prototype('scalar')->end()
                     ->defaultValue(array())
                 ->end()
