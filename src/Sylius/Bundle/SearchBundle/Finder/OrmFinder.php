@@ -268,7 +268,10 @@ class OrmFinder extends AbstractFinder
                             }
                         }
                     }
-                    asort($calculatedFacets[$name]);
+
+                    if (isset($calculatedFacets[$name])) {
+                        asort($calculatedFacets[$name]);
+                    }
                 } elseif (is_string($value)) {
                     if (!isset($calculatedFacets[$name][$value])) {
                         $calculatedFacets[$name][$value] = array('key' => $value, 'doc_count' => 1);
