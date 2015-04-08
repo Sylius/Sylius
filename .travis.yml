@@ -4,19 +4,19 @@ sudo: false
 
 php:
     - 5.3
-    - 5.4
-    - 5.5
+#    - 5.4
+#    - 5.5
 
 env:
     #- TEST_SUITE=1
     - TEST_SUITE=2
 
-matrix:
-    include:
-        - php: 5.3
-          env: TEST_SUITE=1 COMPOSER_FLAGS="--prefer-lowest"
-        - php: 5.3
-          env: TEST_SUITE=2 COMPOSER_FLAGS="--prefer-lowest"
+#matrix:
+#    include:
+#        - php: 5.3
+#          env: TEST_SUITE=1 COMPOSER_FLAGS="--prefer-lowest"
+#        - php: 5.3
+#          env: TEST_SUITE=2 COMPOSER_FLAGS="--prefer-lowest"
 
 services:
     - mongodb
