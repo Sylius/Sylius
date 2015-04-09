@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+  form:
+    support_inquiry:
+      first_name: Nama Depan
+      last_name: Nama belakang
+    support_topic:
+      title: Judul
