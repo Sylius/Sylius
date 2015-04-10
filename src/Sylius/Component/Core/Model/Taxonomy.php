@@ -30,6 +30,6 @@ class Taxonomy extends BaseTaxonomy
      */
     public static function getTranslationClass()
     {
-        return get_parent_class().'Translation';
+        return 'Sylius\Component\Taxonomy\Model\TaxonomyTranslation';
     }
 }

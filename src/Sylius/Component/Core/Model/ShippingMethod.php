@@ -52,6 +52,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
      */
     public static function getTranslationClass()
     {
-        return get_parent_class().'Translation';
+        return 'Sylius\Component\Shipping\Model\ShippingMethodTranslation';
     }
 }
