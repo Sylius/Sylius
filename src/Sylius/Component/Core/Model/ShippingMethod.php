@@ -50,7 +50,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    protected function getTranslationClass()
+    public static function getTranslationClass()
     {
         return parent::getTranslationClass();
     }
