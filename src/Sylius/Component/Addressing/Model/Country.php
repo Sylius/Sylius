@@ -157,12 +157,4 @@ class Country extends AbstractTranslatable implements CountryInterface
     {
         return $this->provinces->contains($province);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }
