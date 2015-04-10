@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
@@ -23,9 +23,9 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class SyliusSettingsExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     protected $configFiles = array(
-        'services',
-        'templating',
-        'twig',
+        'services.xml',
+        'templating.xml',
+        'twig.xml',
     );
 
     /**
@@ -33,7 +33,7 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,

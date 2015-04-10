@@ -27,9 +27,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SyliusPricingExtension extends Extension
 {
     protected $configFiles = array(
-        'services',
-        'templating',
-        'twig',
+        'services.xml',
+        'templating.xml',
+        'twig.xml',
     );
 
     /**

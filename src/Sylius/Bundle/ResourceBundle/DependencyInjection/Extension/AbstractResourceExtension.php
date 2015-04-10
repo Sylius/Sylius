@@ -9,22 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Extension;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Configuration;
 use Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
 use Sylius\Component\Resource\Exception\Driver\InvalidDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Base extension.
@@ -33,7 +28,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-abstract class AbstractResourceExtension extends Extension
+abstract class AbstractResourceExtension extends AbstractExtension
 {
     const CONFIGURE_LOADER       = 1;
     const CONFIGURE_DATABASE     = 2;
@@ -42,24 +37,10 @@ abstract class AbstractResourceExtension extends Extension
     const CONFIGURE_FORMS        = 16;
     const CONFIGURE_TRANSLATIONS = 32;
 
-    const CONFIG_XML  = 'xml';
-    const CONFIG_YAML = 'yml';
+    const DEFAULT_KEY = 'default';
 
     protected $applicationName = 'sylius';
-    protected $configDirectory = '/../Resources/config';
-
-    /**
-     * Configure the file formats of the files loaded using $configFiles variable.
-     *
-     * @var string
-     */
-    protected $configFormat = self::CONFIG_XML;
-
-    protected $configFiles  = array(
-        'services',
-    );
-
-    const DEFAULT_KEY = 'default';
+    protected $configFiles = array('services.xml');
 
     /**
      * {@inheritdoc}
@@ -85,21 +66,12 @@ abstract class AbstractResourceExtension extends Extension
     ) {
         $processor = new Processor();
         $config = $processor->processConfiguration($configuration, $config);
-
         $config = $this->process($config, $container);
 
-        if ($this->configFormat === self::CONFIG_XML) {
-            $loader = new XmlFileLoader($container, new FileLocator($this->getConfigurationDirectory()));
-        } elseif ($this->configFormat === self::CONFIG_YAML) {
-            $loader = new YamlFileLoader($container, new FileLocator($this->getConfigurationDirectory()));
-        } else {
-            throw new InvalidConfigurationException("The 'configFormat' value is invalid, must be 'xml' or 'yml'.");
-        }
-
-        $this->loadConfigurationFile($this->configFiles, $loader);
+        $this->loadServiceDefinitions($container, $this->configFiles);
 
         if ($configure & self::CONFIGURE_DATABASE) {
-            $this->loadDatabaseDriver($config, $loader, $container);
+            $this->loadDatabaseDriver($config, $container);
         }
 
         if ($this->isTranslationSupported() && $configure & self::CONFIGURE_TRANSLATIONS) {
@@ -131,7 +103,7 @@ abstract class AbstractResourceExtension extends Extension
 
         $container->setParameter('sylius.config.classes', $configClasses);
 
-        return array($config, $loader);
+        return $config;
     }
 
     /**
@@ -177,7 +149,7 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
-     * Register resource form types
+     * Register resource form types.
      *
      * @param array            $config
      * @param ContainerBuilder $container
@@ -234,13 +206,12 @@ abstract class AbstractResourceExtension extends Extension
     /**
      * Load bundle driver.
      *
-     * @param array                 $config
-     * @param LoaderInterface       $loader
-     * @param null|ContainerBuilder $container
+     * @param array            $config
+     * @param ContainerBuilder $container
      *
      * @throws InvalidDriverException
      */
-    protected function loadDatabaseDriver(array $config, LoaderInterface $loader, ContainerBuilder $container)
+    protected function loadDatabaseDriver(array $config, ContainerBuilder $container)
     {
         $bundle = str_replace(array('Extension', 'DependencyInjection\\'), array('Bundle', ''), get_class($this));
         $driver = $config['driver'];
@@ -250,7 +221,7 @@ abstract class AbstractResourceExtension extends Extension
             throw new InvalidDriverException($driver, basename($bundle));
         }
 
-        $this->loadConfigurationFile(array(sprintf('driver/%s', $driver)), $loader);
+        $this->loadDriverDefinition($container, $driver);
 
         $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driver);
         $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driver), true);
@@ -275,7 +246,7 @@ abstract class AbstractResourceExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param array            $config
      * @param ContainerBuilder $container
      */
     protected function configureTranslations(array $config, ContainerBuilder $container)
@@ -298,37 +269,6 @@ abstract class AbstractResourceExtension extends Extension
                 )->load($classes['translation']);
             }
         }
-    }
-
-    /**
-     * @param array           $config
-     * @param LoaderInterface $loader
-     */
-    protected function loadConfigurationFile(array $config, LoaderInterface $loader)
-    {
-        foreach ($config as $filename) {
-            if (file_exists($file = sprintf('%s/%s.%s', $this->getConfigurationDirectory(), $filename, $this->configFormat))) {
-                $loader->load($file);
-            }
-        }
-    }
-
-    /**
-     * Get the configuration directory
-     *
-     * @return string
-     * @throws \RuntimeException
-     */
-    protected function getConfigurationDirectory()
-    {
-        $reflector = new \ReflectionClass($this);
-        $fileName = $reflector->getFileName();
-
-        if (!is_dir($directory = dirname($fileName).$this->configDirectory)) {
-            throw new \RuntimeException(sprintf('The configuration directory "%s" does not exists.', $directory));
-        }
-
-        return $directory;
     }
 
     /**

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
@@ -23,6 +23,8 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class SyliusContentExtension extends AbstractResourceExtension
 {
+    protected $configFiles = array();
+
     /**
      * {@inheritdoc}
      */

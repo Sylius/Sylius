@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -23,9 +23,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SyliusInventoryExtension extends AbstractResourceExtension
 {
     protected $configFiles = array(
-        'services',
-        'templating',
-        'twig',
+        'services.xml',
+        'templating.xml',
+        'twig.xml',
     );
 
     /**
@@ -33,7 +33,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
