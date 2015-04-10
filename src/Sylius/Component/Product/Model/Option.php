@@ -21,11 +21,4 @@ use Sylius\Component\Variation\Model\Option as BaseOption;
  */
 class Option extends BaseOption implements OptionInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }

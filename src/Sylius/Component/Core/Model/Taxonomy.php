@@ -24,4 +24,12 @@ class Taxonomy extends BaseTaxonomy
 
         $this->setRoot(new Taxon());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getTranslationClass()
+    {
+        return get_parent_class().'Translation';
+    }
 }

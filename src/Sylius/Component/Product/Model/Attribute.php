@@ -21,11 +21,4 @@ use Sylius\Component\Attribute\Model\Attribute as BaseAttribute;
  */
 class Attribute extends BaseAttribute implements AttributeInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationClass()
-    {
-        return get_class().'Translation';
-    }
 }

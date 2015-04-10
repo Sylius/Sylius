@@ -174,5 +174,8 @@ abstract class AbstractTranslatable implements TranslatableInterface
      *
      * @return string
      */
-    abstract protected function getTranslationClass();
+    public static function getTranslationClass()
+    {
+        return get_called_class().'Translation';
+    }
 }

@@ -94,7 +94,8 @@ class AbstractTranslatableSpec extends ObjectBehavior
 
 class ConcreteTranslatable extends AbstractTranslatable
 {
-    protected function getTranslationClass(){
+    public static function getTranslationClass()
+    {
         return  'spec\Sylius\Component\Translation\Model\ConcreteTranslatableTranslation';
     }
 }
