@@ -52,8 +52,10 @@ class AttributeValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName))
-            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory()))
+            ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), array(
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName)
+            ))
+            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->subjectName))
         ;
 
         $this->buildAttributeValuePrototypes($builder);
@@ -90,7 +92,10 @@ class AttributeValueType extends AbstractResourceType
 
         $prototypes = array();
         foreach ($attributes as $attribute) {
-            $prototypes[] = $builder->create('value', $attribute->getType(), $attribute->getConfiguration())->getForm();
+            $config = array_merge(array(
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->subjectName)
+            ), $attribute->getConfiguration());
+            $prototypes[] = $builder->create('value', $attribute->getType(), $config)->getForm();
         }
 
         $builder->setAttribute('prototypes', $prototypes);
