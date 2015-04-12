@@ -68,11 +68,5 @@ class SyliusInventoryExtension extends AbstractResourceExtension
                 );
             }
         }
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
     }
 }
