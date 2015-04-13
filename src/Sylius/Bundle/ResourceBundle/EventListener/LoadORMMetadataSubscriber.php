@@ -69,16 +69,18 @@ class LoadORMMetadataSubscriber implements EventSubscriber
     {
         foreach ($this->classes as $application => $classes) {
             foreach ($classes as $class) {
-                if ((isset($class['model']) &&
-                        $class['model'] === $metadata->getName())
-                    ||
-                    (isset($class['translation']['model']) &&
-                        $class['translation']['model'] === $metadata->getName())
-                ) {
+                if (isset($class['model']) && $class['model'] === $metadata->getName()) {
                     $metadata->isMappedSuperclass = false;
 
                     if (isset($class['repository'])) {
                         $metadata->setCustomRepositoryClass($class['repository']);
+                    }
+                } else if (isset($class['translation']['model'])
+                    && $class['translation']['model'] === $metadata->getName()) {
+                    $metadata->isMappedSuperclass = false;
+
+                    if (isset($class['translation']['repository'])) {
+                        $metadata->setCustomRepositoryClass($class['translation']['repository']);
                     }
                 }
             }
