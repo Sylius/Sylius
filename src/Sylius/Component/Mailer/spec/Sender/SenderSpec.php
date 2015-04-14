@@ -53,10 +53,12 @@ class SenderSpec extends ObjectBehavior
         $email->getSenderAddress()->shouldBeCalled();
         $email->getSenderName()->shouldBeCalled();
 
-        $rendererAdapter->render($email, array('foo' => 2))->willReturn($renderedEmail);
-        $senderAdapter->send(array('jonh@example.com'), null, null, $renderedEmail)->shouldBeCalled();
+        $data = array('foo' => 2);
 
-        $this->send('bar', array('jonh@example.com'), array('foo' => 2));
+        $rendererAdapter->render($email, array('foo' => 2))->willReturn($renderedEmail);
+        $senderAdapter->send(array('jonh@example.com'), null, null, $renderedEmail, $email, $data)->shouldBeCalled();
+
+        $this->send('bar', array('jonh@example.com'), $data);
     }
 
     function it_does_not_send_disabled_emails(
@@ -69,7 +71,7 @@ class SenderSpec extends ObjectBehavior
         $email->isEnabled()->shouldBeCalled()->willReturn(false);
 
         $rendererAdapter->render($email, array('foo' => 2))->shouldNotBeCalled();
-        $senderAdapter->send(array('jonh@example.com'), "mail@sylius.org", "Sylius Mailer", null)->shouldNotBeCalled();
+        $senderAdapter->send(array('jonh@example.com'), "mail@sylius.org", "Sylius Mailer", null, $email, array())->shouldNotBeCalled();
 
         $this->send('bar', array('jonh@example.com'), array('foo' => 2));
     }
