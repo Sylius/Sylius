@@ -13,7 +13,7 @@ namespace Sylius\Bundle\AddressingBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
-use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
@@ -27,7 +27,7 @@ class AddressingContext extends DefaultContext
     {
         foreach ($table->getHash() as $data) {
             $provinces = array_key_exists('provinces', $data) ? explode(',', $data['provinces']) : array();
-            $this->thereisCountry($data['name'], $provinces, false);
+            $this->thereIsCountry($data['name'], $provinces, false);
         }
 
         $this->getEntityManager()->flush();
@@ -39,7 +39,7 @@ class AddressingContext extends DefaultContext
      */
     public function thereIsCountry($name, $provinces = null, $flush = true)
     {
-        /* @var $country CountryInterface */
+        /* @var $country Country */
         if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
             $country = $this->getRepository('country')->createNew();
             $country->setName(trim($name));
