@@ -4,6 +4,7 @@
 * :doc:`/components/Cart/index`
 * :doc:`/components/Contact/index`
 * :doc:`/components/Currency/index`
+* :doc:`/components/Grid/index`
 * :doc:`/components/Inventory/index`
 * :doc:`/components/Locale/index`
 * :doc:`/components/Mailer/index`
