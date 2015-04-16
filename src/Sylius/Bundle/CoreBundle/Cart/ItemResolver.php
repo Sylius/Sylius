@@ -140,7 +140,7 @@ class ItemResolver implements ItemResolverInterface
             $context['groups'] = $user->getGroups()->toArray();
         }
 
-        $item->setUnitPrice($this->priceCalculator->calculate($variant, $context));
+        $item->setUnitPrice($this->priceCalculator->calculate($variant, array(), $context));
 
         foreach ($cart->getItems() as $cartItem) {
             if ($cartItem->equals($item)) {
