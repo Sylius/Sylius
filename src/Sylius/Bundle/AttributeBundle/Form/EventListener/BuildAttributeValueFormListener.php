@@ -36,13 +36,22 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
     private $factory;
 
     /**
+     * Attributes subject name.
+     *
+     * @var string
+     */
+    protected $subjectName;
+
+    /**
      * Constructor.
      *
      * @param FormFactoryInterface $factory
+     * @param string $subjectName
      */
-    public function __construct(FormFactoryInterface $factory)
+    public function __construct(FormFactoryInterface $factory, $subjectName)
     {
         $this->factory = $factory;
+        $this->subjectName = $subjectName;
     }
 
     /**
@@ -64,7 +73,10 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
         $form = $event->getForm();
 
         if (null === $attributeValue) {
-            $form->add($this->factory->createNamed('value', 'text', null, array('auto_initialize' => false)));
+            $form->add($this->factory->createNamed('value', 'text', null, array(
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->subjectName),
+                'auto_initialize' => false
+            )));
 
             return;
         }

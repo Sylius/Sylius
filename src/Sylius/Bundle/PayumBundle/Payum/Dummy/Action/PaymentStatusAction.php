@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
 
-use Payum\Core\Action\PaymentAwareAction;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetStatusInterface;
+use Sylius\Bundle\PayumBundle\Payum\Action\PaymentStatusAction as BasePaymentStatusAction;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-class PaymentStatusAction extends PaymentAwareAction
+class PaymentStatusAction extends BasePaymentStatusAction
 {
     /**
      * {@inheritDoc}
@@ -46,16 +46,5 @@ class PaymentStatusAction extends PaymentAwareAction
         }
 
         $request->markUnknown();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function supports($request)
-    {
-        return
-            $request instanceof GetStatusInterface &&
-            $request->getModel() instanceof PaymentInterface
-        ;
     }
 }

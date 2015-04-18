@@ -136,6 +136,7 @@ sylius_payment:
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
     gateways:
         dummy: Test
+        offline: Offline
         stripe: Stripe
         be2bill: Be2Bill
         stripe_checkout: Stripe Checkout
@@ -673,3 +674,4 @@ sylius_rbac:
     roles_hierarchy:
         administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
+

@@ -21,6 +21,7 @@ use Sylius\Component\Mailer\Provider\EmailProviderInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class Sender implements SenderInterface
 {
@@ -78,6 +79,6 @@ class Sender implements SenderInterface
 
         $renderedEmail = $this->rendererAdapter->render($email, $data);
 
-        $this->senderAdapter->send($recipients, $senderAddress, $senderName, $renderedEmail);
+        $this->senderAdapter->send($recipients, $senderAddress, $senderName, $renderedEmail, $email, $data);
     }
 }

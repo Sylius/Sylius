@@ -47,11 +47,16 @@ class SyliusResourceExtension extends Extension
 
         $this->createResourceServices($classes, $container);
 
+        $configClasses = array();
+
         if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
+            $configClasses = array_merge_recursive(
+                array('default' => $classes),
+                $container->getParameter('sylius.config.classes')
+            );
         }
 
-        $container->setParameter('sylius.config.classes', $classes);
+        $container->setParameter('sylius.config.classes', $configClasses);
     }
 
     /**

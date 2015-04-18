@@ -25,7 +25,7 @@ class BuildAttributeValueFormListenerSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $formFactory)
     {
-        $this->beConstructedWith($formFactory);
+        $this->beConstructedWith($formFactory, 'server');
     }
 
     function it_subscribes_to_pre_set_data_event()

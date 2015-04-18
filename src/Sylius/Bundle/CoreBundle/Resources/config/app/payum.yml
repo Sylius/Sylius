@@ -41,3 +41,8 @@ payum:
                 actions:
                     - sylius.payum.dummy.action.capture_payment
                     - sylius.payum.dummy.action.payment_status
+
+        offline:
+            offline:
+                actions:
+                    - sylius.payum.offline.action.capture_payment

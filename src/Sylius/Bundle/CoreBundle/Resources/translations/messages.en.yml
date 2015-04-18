@@ -95,3 +95,7 @@ sylius:
             sku: SKU
             weight: Weight
             width: Width
+        attribute:
+            product_attribute_value:
+                attribute: Attribute
+                value: Value

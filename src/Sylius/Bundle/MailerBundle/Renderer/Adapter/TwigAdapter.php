@@ -12,12 +12,14 @@
 namespace Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
 use Sylius\Component\Mailer\Event\EmailEvent;
+use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
+use Sylius\Component\Mailer\SyliusMailerEvents;
 
 /**
- * Default Sylius mailer using Twig and SwiftMailer.
+ * Default Sylius Twig renderer.
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -62,7 +64,7 @@ class TwigAdapter extends AbstractAdapter
         }
 
         /** @var EmailEvent $event */
-        $event = $this->dispatcher->dispatch(self::EVENT_EMAIL_RENDERED, new EmailEvent(new RenderedEmail($subject, $body)));
+        $event = $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_RENDER, new EmailRenderEvent(new RenderedEmail($subject, $body)));
 
         return $event->getRenderedEmail();
     }

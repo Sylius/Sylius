@@ -9,19 +9,19 @@
 * file that was distributed with this source code.
 */
 
-namespace Sylius\Bundle\PayumBundle\Payum\Dummy\Action;
+namespace Sylius\Bundle\PayumBundle\Payum\Offline\Action;
 
 use Payum\Core\Exception\RequestNotSupportedException;
-use Payum\Core\Request\Capture;
+use Payum\Offline\Constants;
 use Sylius\Bundle\PayumBundle\Payum\Action\GenericCapturePaymentAction;
-use Sylius\Component\Payment\Model\PaymentInterface;
 
+/**
+ * @author Antonio Peric <antonio@locastic.com>
+ */
 class CapturePaymentAction extends GenericCapturePaymentAction
 {
     /**
-     * {@inheritDoc}
-     *
-     * @param $request Capture
+     * {@inheritdoc}
      */
     public function execute($request)
     {
@@ -29,12 +29,13 @@ class CapturePaymentAction extends GenericCapturePaymentAction
             throw RequestNotSupportedException::createActionNotSupported($this, $request);
         }
 
-        /** @var $payment PaymentInterface */
         $payment = $request->getModel();
         if ($payment->getDetails()) {
             return;
         }
 
-        $payment->setDetails(array('captured' => true));
+        $payment->setDetails(array(
+            Constants::FIELD_PAID => false,
+        ));
     }
 }

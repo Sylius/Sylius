@@ -71,7 +71,7 @@ class EmailProvider implements EmailProviderInterface
      *
      * @return EmailInterface
      */
-    private function getEmailFromConfiguration($code)
+    protected function getEmailFromConfiguration($code)
     {
         if (!isset($this->configuration[$code])) {
             throw new \InvalidArgumentException(sprintf('Email with code "%s" does not exist!', $code));
