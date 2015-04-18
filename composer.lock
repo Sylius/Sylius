@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e7f5ff221576282ffa0d1d2e48e29f5b",
+    "hash": "2121ae59f675c7b3991faa8ae3e76559",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -338,7 +338,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -414,7 +414,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -1813,12 +1813,12 @@
             "target-dir": "Guzzle/Common",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/common.git",
+                "url": "https://github.com/Guzzle3/common.git",
                 "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/common/zipball/2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
+                "url": "https://api.github.com/repos/Guzzle3/common/zipball/2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
                 "reference": "2e36af7cf2ce3ea1f2d7c2831843b883a8e7b7dc",
                 "shasum": ""
             },
@@ -1849,6 +1849,7 @@
                 "event",
                 "exception"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2014-08-11 04:32:36"
         },
         {
@@ -1914,12 +1915,12 @@
             "target-dir": "Guzzle/Parser",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/parser.git",
+                "url": "https://github.com/Guzzle3/parser.git",
                 "reference": "6874d171318a8e93eb6d224cf85e4678490b625c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/parser/zipball/6874d171318a8e93eb6d224cf85e4678490b625c",
+                "url": "https://api.github.com/repos/Guzzle3/parser/zipball/6874d171318a8e93eb6d224cf85e4678490b625c",
                 "reference": "6874d171318a8e93eb6d224cf85e4678490b625c",
                 "shasum": ""
             },
@@ -1950,6 +1951,7 @@
                 "message",
                 "url"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2014-02-05 18:29:46"
         },
         {
@@ -1958,12 +1960,12 @@
             "target-dir": "Guzzle/Stream",
             "source": {
                 "type": "git",
-                "url": "https://github.com/guzzle/stream.git",
+                "url": "https://github.com/Guzzle3/stream.git",
                 "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/stream/zipball/60c7fed02e98d2c518dae8f97874c8f4622100f0",
+                "url": "https://api.github.com/repos/Guzzle3/stream/zipball/60c7fed02e98d2c518dae8f97874c8f4622100f0",
                 "reference": "60c7fed02e98d2c518dae8f97874c8f4622100f0",
                 "shasum": ""
             },
@@ -2003,6 +2005,7 @@
                 "component",
                 "stream"
             ],
+            "abandoned": "guzzle/guzzle",
             "time": "2014-05-01 21:36:02"
         },
         {
@@ -2533,9 +2536,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2674,9 +2677,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2921,7 +2924,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -5693,9 +5696,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -5860,9 +5863,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -7592,7 +7595,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8174,6 +8177,55 @@
             "time": "2014-09-04 22:10:45"
         },
         {
+            "name": "ciaranmcnulty/behat-stepthroughextension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ciaranmcnulty/behat-stepthroughextension.git",
+                "reference": "a9989be0af0d509a91da194d26ad7039943ee111"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ciaranmcnulty/behat-stepthroughextension/zipball/a9989be0af0d509a91da194d26ad7039943ee111",
+                "reference": "a9989be0af0d509a91da194d26ad7039943ee111",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "~3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "dev-master",
+                "symfony/filesystem": "~2.3",
+                "symfony/process": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ciaran McNulty",
+                    "email": "mail@ciaranmcnulty.com",
+                    "homepage": "http://ciaranmcnulty.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Extension for behat to help debug failing scenarios",
+            "homepage": "http://github.com/ciaranmcnulty/behat-stepthroughextension",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "TDD"
+            ],
+            "time": "2014-09-07 14:32:13"
+        },
+        {
             "name": "coduo/php-matcher",
             "version": "1.1.6",
             "source": {
@@ -8471,7 +8523,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -9364,7 +9417,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.9"
     },
     "platform-dev": []
 }

@@ -396,3 +396,4 @@ default:
             browser_name: firefox
             show_auto:    false
         Behat\Symfony2Extension: ~
+        Cjm\Behat\StepThroughExtension: ~
