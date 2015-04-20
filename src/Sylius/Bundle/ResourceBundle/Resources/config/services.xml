@@ -44,11 +44,11 @@
             <argument>%sylius.resource.settings%</argument>
         </service>
         <service id="sylius.controller.parameters_parser" class="%sylius.controller.parameters_parser.class%">
-            <argument type="service" id="sylius.expresssion_language" />
+            <argument type="service" id="sylius.expression_language" />
         </service>
         <service id="sylius.controller.parameters" class="%sylius.controller.parameters.class%" />
 
-        <service id="sylius.expresssion_language" class="%sylius.expression_language.class%">
+        <service id="sylius.expression_language" class="%sylius.expression_language.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
