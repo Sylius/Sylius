@@ -330,7 +330,7 @@ class FrontendMenuBuilder extends MenuBuilder
         return $menu;
     }
 
-    private function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
+    protected function createTaxonomiesMenuNode(ItemInterface $menu, TaxonInterface $taxon)
     {
         foreach ($taxon->getChildren() as $child) {
             $childMenu = $menu->addChild($child->getName(), array(
