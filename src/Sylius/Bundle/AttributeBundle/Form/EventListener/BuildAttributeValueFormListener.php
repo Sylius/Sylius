@@ -112,13 +112,6 @@ class BuildAttributeValueFormListener implements EventSubscriberInterface
 
                 break;
 
-            case AttributeTypes::CHOICE:
-                if (!is_array($attributeValue->getValue())) {
-                    $attributeValue->setValue(null);
-                }
-
-                break;
-
             case AttributeTypes::MONEY:
             case AttributeTypes::NUMBER:
             case AttributeTypes::PERCENTAGE:
