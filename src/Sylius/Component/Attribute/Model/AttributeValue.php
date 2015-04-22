@@ -107,6 +107,13 @@ class AttributeValue implements AttributeValueInterface
             return (Boolean) $this->value;
         }
 
+        if ($this->attribute && AttributeTypes::CHOICE === $this->attribute->getType()) {
+            $configuration = $this->getConfiguration();
+            if (isset($configuration['choices'][$this->value])) {
+                return $configuration['choices'][$this->value];
+            }
+        }
+
         return $this->value;
     }
 
