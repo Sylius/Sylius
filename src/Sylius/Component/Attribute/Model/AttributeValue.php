@@ -109,7 +109,7 @@ class AttributeValue implements AttributeValueInterface
         
         if ($this->attribute && AttributeTypes::CHOICE === $this->attribute->getType()) {
             $configuration = $this->getConfiguration();
-            if (!empty($configuration) && array_key_exists($this->value, $configuration['choices'])) {
+            if (isset($configuration['choices'][$this->value])) {
                 return $configuration['choices'][$this->value];
             }
         }
