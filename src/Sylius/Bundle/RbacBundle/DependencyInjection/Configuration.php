@@ -157,7 +157,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('roles_hierarchy')
                     ->useAttributeAsKey('id')
                     ->prototype('array')
-                        ->performNoDeepMerging()
                         ->beforeNormalization()->ifString()->then(function ($v) { return array('value' => $v); })->end()
                         ->beforeNormalization()
                             ->ifTrue(function ($v) { return is_array($v) && isset($v['value']); })
