@@ -30,7 +30,7 @@ class CurrencyContextSpec extends ObjectBehavior
         ObjectManager $userManager,
         Settings $settings
     ) {
-        $settingsManager->loadSettings('general')->willReturn($settings);
+        $settingsManager->loadSettings('sylius_general')->willReturn($settings);
         $settings->get('currency')->willReturn('EUR');
 
         $this->beConstructedWith($storage, $securityContext, $settingsManager, $userManager);

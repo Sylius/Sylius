@@ -49,9 +49,9 @@ class LoadZonesData extends DataFixture
         $manager->flush();
 
         $settingsManager = $this->get('sylius.settings.manager');
-        $settings = $settingsManager->loadSettings('taxation');
+        $settings = $settingsManager->loadSettings('sylius_taxation');
         $settings->set('default_tax_zone', $eu);
-        $settingsManager->saveSettings('taxation', $settings);
+        $settingsManager->saveSettings('sylius_taxation', $settings);
     }
 
     /**

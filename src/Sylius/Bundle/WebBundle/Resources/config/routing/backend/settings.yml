@@ -5,19 +5,19 @@ sylius_backend_general_settings:
     path: /general
     defaults:
         _controller: sylius.controller.settings:updateAction
-        namespace: general
+        namespace: sylius_general
         template: SyliusWebBundle:Backend/Settings:general.html.twig
 
 sylius_backend_security_settings:
     path: /security
     defaults:
         _controller: sylius.controller.settings:updateAction
-        namespace: security
+        namespace: sylius_security
         template: SyliusWebBundle:Backend/Settings:security.html.twig
 
 sylius_backend_taxation_settings:
     path: /taxation
     defaults:
         _controller: sylius.controller.settings:updateAction
-        namespace: taxation
+        namespace: sylius_taxation
         template: SyliusWebBundle:Backend/Settings:taxation.html.twig

@@ -38,7 +38,7 @@ class CurrencyContext extends BaseCurrencyContext
 
     public function getDefaultCurrency()
     {
-        return $this->settingsManager->loadSettings('general')->get('currency');
+        return $this->settingsManager->loadSettings('sylius_general')->get('currency');
     }
 
     public function getCurrency()

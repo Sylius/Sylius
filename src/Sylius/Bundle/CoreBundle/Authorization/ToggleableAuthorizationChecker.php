@@ -53,7 +53,7 @@ class ToggleableAuthorizationChecker implements AuthorizationCheckerInterface
     public function isGranted($permissionCode)
     {
         if (null === $this->settings) {
-            $this->settings = $this->settingsManager->loadSettings('security');
+            $this->settings = $this->settingsManager->loadSettings('sylius_security');
         }
 
         if (false === $this->settings->get('enabled')) {
