@@ -38,7 +38,8 @@ sylius:
 
             weight_rate_configuration:
                 label: Weight based rate
-                amount: Amount
+                fixed: Fixed amount
+                variable: Variable amount
                 division: Division
 
             volume_rate_configuration:

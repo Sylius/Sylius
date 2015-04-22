@@ -47,8 +47,15 @@ class WeightRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', array(
-                'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.amount',
+            ->add('fixed', 'sylius_money', array(
+                'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.fixed',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Type(array('type' => 'integer')),
+                )
+            ))
+            ->add('variable', 'sylius_money', array(
+                'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.variable',
                 'constraints' => array(
                     new NotBlank(),
                     new Type(array('type' => 'integer')),
