@@ -15,7 +15,7 @@ Otherwise you have to download .phar file.
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/mailer-bundle:0.14.0
+    $ php composer.phar require sylius/rbac-bundle:0.14.0
 
 Adding required bundles to the kernel
 -------------------------------------
