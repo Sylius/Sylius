@@ -50,6 +50,10 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
         if (isset($parameterClasses['repository'])) {
             $container->setParameter('sylius.repository.parameter.class', $parameterClasses['repository']);
         }
+
+        if (!$container->hasParameter('sylius.cache')) {
+            $container->setParameter('sylius.cache', 'file_system');
+        }
     }
 
     /**
