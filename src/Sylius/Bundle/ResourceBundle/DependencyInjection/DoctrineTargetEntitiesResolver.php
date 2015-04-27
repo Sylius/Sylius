@@ -27,7 +27,7 @@ class DoctrineTargetEntitiesResolver
     public function resolve(ContainerBuilder $container, array $interfaces)
     {
         if (!$container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')) {
-            throw new \RuntimeException('Cannot find Doctrine RTEL');
+            throw new \RuntimeException('Cannot find Doctrine Target Entity Resolver Listener.');
         }
 
         $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
