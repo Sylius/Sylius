@@ -13,12 +13,15 @@
 
 namespace Sylius\Component\User\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Customer model.
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Customer implements CustomerInterface
+class Customer implements CustomerInterface, GroupableInterface
 {
     /**
      * @var int
@@ -61,6 +64,11 @@ class Customer implements CustomerInterface
     protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
     /**
+     * @var Collection
+     */
+    protected $groups;
+
+    /**
      * @var \DateTime
      */
     protected $createdAt;
@@ -80,6 +88,7 @@ class Customer implements CustomerInterface
      */
     public function __construct()
     {
+        $this->groups = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -202,7 +211,7 @@ class Customer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setBirthday(\DateTime $birthday)
+    public function setBirthday(\DateTime $birthday = null)
     {
         $this->birthday = $birthday;
 
@@ -241,6 +250,59 @@ class Customer implements CustomerInterface
     public function isFemale()
     {
         return CustomerInterface::FEMALE_GENDER === $this->gender;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasGroup($name)
+    {
+        return in_array($name, $this->getGroupNames(), true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroupNames()
+    {
+        $names = array();
+        foreach ($this->getGroups() as $group) {
+            $names[] = $group->getName();
+        }
+
+        return $names;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addGroup(GroupInterface $group)
+    {
+        if (!$this->getGroups()->contains($group)) {
+            $this->getGroups()->add($group);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeGroup(GroupInterface $group)
+    {
+        if ($this->getGroups()->contains($group)) {
+            $this->getGroups()->removeElement($group);
+        }
+
+        return $this;
     }
 
     /**

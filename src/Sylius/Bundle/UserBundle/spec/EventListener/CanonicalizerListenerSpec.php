@@ -19,8 +19,6 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * User register listener spec.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CanonicalizerListenerSpec extends ObjectBehavior
@@ -67,9 +65,9 @@ class CanonicalizerListenerSpec extends ObjectBehavior
         $this->preUpdate($event);
     }
 
-    function it_canonicalize_only_user_interface_implementation($canonicalizer, LifecycleEventArgs $event, UserInterface $user)
+    function it_canonicalize_only_user_interface_implementation($canonicalizer, LifecycleEventArgs $event)
     {
-        $user='';
+        $user = '';
         $event->getEntity()->willReturn($user);
 
         $canonicalizer->canonicalize('testUser')->shouldNotBeCalled();

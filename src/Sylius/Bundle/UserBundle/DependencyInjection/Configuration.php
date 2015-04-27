@@ -115,7 +115,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\User\Model\Customer')->end()
-                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('Sylius\Bundle\UserBundle\Controller\CustomerController')->end()
                                 ->scalarNode('repository')->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()

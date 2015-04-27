@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\UserBundle\Controller\UserController as BaseController;
+use Sylius\Bundle\UserBundle\Controller\UserController as BaseUserController;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserController extends BaseController
+class UserController extends BaseUserController
 {
     /**
      * Render user filter form.

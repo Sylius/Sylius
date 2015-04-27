@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints\Type;
  *
  * @author Antonio Perić <antonio@locastic.com>
  */
-class UserGroupType extends AbstractType
+class CustomerGroupType extends AbstractType
 {
     protected $validationGroups;
 
@@ -50,7 +50,7 @@ class UserGroupType extends AbstractType
                 'groups',
                 'sylius_entity_to_identifier',
                 array(
-                    'label' => 'sylius.form.action.user_group',
+                    'label' => 'sylius.form.action.customer_group',
                     'property' => 'name',
                     'class' => $groupRepository->getClassName(),
                     'query_builder' => function () use ($groupRepository) {
@@ -82,6 +82,6 @@ class UserGroupType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_user_group_configuration';
+        return 'sylius_promotion_rule_customer_group_configuration';
     }
 }

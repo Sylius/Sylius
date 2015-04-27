@@ -74,15 +74,16 @@ class LoadApiData extends DataFixture
 
         /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
+        $customer = $user->getCustomer();
+        $customer->setFirstname($this->faker->firstName);
+        $customer->setLastname($this->faker->lastName);
+        $customer->setCurrency($currency);
         $user->setUsername($email);
         $user->setEmail($email);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
         $user->setRoles($roles);
-        $user->setCurrency($currency);
         $user->setEnabled($enabled);
 
         $this->get('sylius.user.password_updater')->updatePassword($user);

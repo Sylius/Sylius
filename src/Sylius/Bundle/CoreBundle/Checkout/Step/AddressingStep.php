@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
@@ -32,7 +33,7 @@ class AddressingStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-
+        //TODO replace getUser with getCustomer
         $form = $this->createCheckoutAddressingForm($order, $this->getUser());
 
         return $this->renderStep($context, $order, $form);
@@ -47,7 +48,7 @@ class AddressingStep extends CheckoutStep
 
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-
+        //TODO replace getUser with getCustomer
         $form = $this->createCheckoutAddressingForm($order, $this->getUser());
 
         if ($form->handleRequest($request)->isValid()) {
@@ -73,8 +74,8 @@ class AddressingStep extends CheckoutStep
         ));
     }
 
-    protected function createCheckoutAddressingForm(OrderInterface $order, UserInterface $user = null)
+    protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)
     {
-        return $this->createForm('sylius_checkout_addressing', $order, array('user' => $user));
+        return $this->createForm('sylius_checkout_addressing', $order, array('customer' => $customer));
     }
 }

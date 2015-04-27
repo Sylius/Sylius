@@ -180,7 +180,7 @@ sylius_order:
 sylius_sequence:
     generators:
         %sylius.model.order.class%: sylius.sequence.sequential_number_generator
-                
+
 sylius_pricing:
     forms:
         - sylius_product_variant
@@ -714,3 +714,5 @@ sylius_user:
         user:
             model: Sylius\Component\Core\Model\User
             controller: Sylius\Bundle\CoreBundle\Controller\UserController
+        customer:
+            model: Sylius\Component\Core\Model\Customer

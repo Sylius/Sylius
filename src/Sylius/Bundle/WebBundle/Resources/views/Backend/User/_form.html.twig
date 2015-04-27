@@ -3,12 +3,11 @@
 <div class="row">
     <div class="col-md-12">
         <fieldset>
-            {{ form_row(form.email) }}
-            {{ form_row(form.firstName) }}
-            {{ form_row(form.lastName) }}
+            {{ form_row(form.customer.email) }}
+            {{ form_row(form.customer.firstName) }}
+            {{ form_row(form.customer.lastName) }}
             {{ form_row(form.plainPassword) }}
             {{ form_row(form.enabled) }}
-            {{ form_row(form.groups) }}
 
             <div class="form-group">
                 {{ form_label(form.authorizationRoles) }}

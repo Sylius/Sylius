@@ -96,7 +96,7 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
      * @param \DateTime $birthday
      * @return self
      */
-    public function setBirthday(\DateTime $birthday);
+    public function setBirthday(\DateTime $birthday = null);
 
     /**
      * @return int

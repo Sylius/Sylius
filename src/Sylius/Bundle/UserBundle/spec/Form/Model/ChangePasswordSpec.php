@@ -14,8 +14,6 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Model;
 use PhpSpec\ObjectBehavior;
 
 /**
- * User register listener spec.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ChangePasswordSpec extends ObjectBehavior

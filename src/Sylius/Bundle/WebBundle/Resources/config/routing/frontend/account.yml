@@ -11,9 +11,8 @@ sylius_user_profile_update:
     path: /profile/edit
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.user:updateProfileAction
+        _controller: sylius.controller.customer:updateProfileAction
         _sylius:
-            form: sylius_user_profile
             template: SyliusWebBundle:Frontend/Account:profileUpdate.html.twig
             redirect: sylius_account_homepage
 

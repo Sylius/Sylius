@@ -56,7 +56,6 @@ class LoadGroupsData extends DataFixture
         /* @var $group GroupInterface */
         $group = $this->getGroupRepository()->createNew();
         $group->setName($name);
-        $group->setRoles($roles);
 
         $this->setReference('Sylius.Group.'.$name, $group);
 

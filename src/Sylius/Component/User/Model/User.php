@@ -23,7 +23,7 @@ use Doctrine\Common\Collections\Collection;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class User implements UserInterface, GroupableInterface, CustomerAwareInterface
+class User implements UserInterface
 {
     /**
      * @var int
@@ -137,7 +137,6 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
     {
         $this->customer = new Customer();
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        $this->groups = new ArrayCollection();
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -381,28 +380,6 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function setSuperAdmin($boolean)
-    {
-        if (true === $boolean) {
-            $this->addRole(static::ROLE_SUPER_ADMIN);
-        } else {
-            $this->removeRole(static::ROLE_SUPER_ADMIN);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSuperAdmin()
-    {
-        return $this->hasRole(static::ROLE_SUPER_ADMIN);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasRole($role)
     {
         return in_array(strtoupper($role), $this->getRoles(), true);
@@ -414,10 +391,6 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
     public function addRole($role)
     {
         $role = strtoupper($role);
-        if ($role === static::ROLE_DEFAULT) {
-            return $this;
-        }
-
         if (!in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
         }
@@ -443,16 +416,7 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
      */
     public function getRoles()
     {
-        $roles = $this->roles;
-
-        foreach ($this->getGroups() as $group) {
-            $roles = array_merge($roles, $group->getRoles());
-        }
-
-        // we need to make sure to have at least one role
-        $roles[] = static::ROLE_DEFAULT;
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     /**
@@ -467,14 +431,6 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
         }
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getGroups()
-    {
-        return $this->groups;
     }
 
     /**
@@ -509,7 +465,6 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
     public function setEmailCanonical($emailCanonical)
     {
         $this->customer->setEmailCanonical($emailCanonical);
-        $this->usernameCanonical = $emailCanonical;
 
         return $this;
     }
@@ -565,7 +520,7 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
     public function getOAuthAccount($provider)
     {
         if ($this->oauthAccounts->isEmpty()) {
-            return;
+            return null;
         }
 
         $filtered = $this->oauthAccounts->filter(function (UserOAuthInterface $oauth) use ($provider) {
@@ -573,7 +528,7 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
         });
 
         if ($filtered->isEmpty()) {
-            return;
+            return null;
         }
 
         return $filtered->current();
@@ -587,51 +542,6 @@ class User implements UserInterface, GroupableInterface, CustomerAwareInterface
         if (!$this->oauthAccounts->contains($oauth)) {
             $this->oauthAccounts->add($oauth);
             $oauth->setUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasGroup($name)
-    {
-        return in_array($name, $this->getGroupNames());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getGroupNames()
-    {
-        $names = array();
-        foreach ($this->getGroups() as $group) {
-            $names[] = $group->getName();
-        }
-
-        return $names;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addGroup(GroupInterface $group)
-    {
-        if (!$this->getGroups()->contains($group)) {
-            $this->getGroups()->add($group);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeGroup(GroupInterface $group)
-    {
-        if ($this->getGroups()->contains($group)) {
-            $this->getGroups()->removeElement($group);
         }
 
         return $this;

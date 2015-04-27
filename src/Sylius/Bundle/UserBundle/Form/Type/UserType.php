@@ -22,15 +22,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 class UserType extends AbstractResourceType
 {
     /**
-     * DataFetcher registry.
-     *
      * @var CanonicalizerInterface
      */
     protected $canonicalizer;
 
     /**
-    * Constructor.
-    *
+    * @param string                 $dataClass
+    * @param string[]               $validationGroups
     * @param CanonicalizerInterface $canonicalizer
     */
     public function __construct($dataClass, array $validationGroups, CanonicalizerInterface $canonicalizer)
@@ -53,12 +51,6 @@ class UserType extends AbstractResourceType
             ->add('enabled', 'checkbox', array(
                 'label' => 'sylius.form.user.enabled',
             ))
-            ->add('groups', 'sylius_group_choice', array(
-                'label'    => 'sylius.form.user.groups',
-                'multiple' => true,
-                'required' => false,
-            ))
-            ->remove('username')
         ;
     }
 

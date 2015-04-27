@@ -120,7 +120,7 @@ class MailerListener
 
         if ($comment->getNotifyCustomer()) {
             $order = $comment->getOrder();
-            $email = null === $order->getUser() ? $order->getEmail() : $order->getUser()->getEmail();
+            $email = $order->getCustomer()->getEmail();
 
             $this->emailSender->send(Emails::ORDER_COMMENT, array($email), array(
                 'order'   => $order,

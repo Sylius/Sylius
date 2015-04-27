@@ -26,7 +26,7 @@ sylius:
                 equal: Equal
             nth_order_configuration:
                 nth: Nth
-            user_loyalty_configuration:
+            customer_loyalty_configuration:
                 time: Time
                 unit:
                     days: Days

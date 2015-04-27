@@ -16,6 +16,7 @@ use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
 use Sylius\Component\Storage\StorageInterface;
+use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -29,26 +30,25 @@ class CurrencyContext extends BaseCurrencyContext
 
     protected $securityContext;
     protected $settingsManager;
-    protected $userManager;
+    protected $customerManager;
     protected $channelContext;
 
     /**
      * @param StorageInterface         $storage
-     * @param SecurityContextInterface $securityContext
      * @param SettingsManagerInterface $settingsManager
-     * @param ObjectManager            $userManager
+     * @param ObjectManager            $customerManager
      * @param ChannelContextInterface  $channelContext
      */
     public function __construct(
         StorageInterface $storage,
-        SecurityContextInterface $securityContext,
+        CustomerContextInterface $customerContext,
         SettingsManagerInterface $settingsManager,
-        ObjectManager $userManager,
+        ObjectManager $customerManager,
         ChannelContextInterface $channelContext
     ) {
-        $this->securityContext = $securityContext;
+        $this->customerContext = $customerContext;
         $this->settingsManager = $settingsManager;
-        $this->userManager = $userManager;
+        $this->customerManager = $customerManager;
         $this->channelContext = $channelContext;
 
         parent::__construct($storage, $this->getDefaultCurrency());
@@ -67,8 +67,8 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function getCurrency()
     {
-        if ((null !== $user = $this->getUser()) && null !== $user->getCurrency()) {
-            return $user->getCurrency();
+        if ((null !== $customer = $this->customerContext->getCustomer()) && null !== $customer->getCurrency()) {
+            return $customer->getCurrency();
         }
 
         $channel = $this->channelContext->getChannel();
@@ -84,32 +84,21 @@ class CurrencyContext extends BaseCurrencyContext
         $channel = $this->channelContext->getChannel();
         $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
 
-        if (null === $user = $this->getUser()) {
-            return;
+        if (null === $customer = $this->customerContext->getCustomer()) {
+            return parent::setCurrency($currency);
         }
 
-        $user->setCurrency($currency);
+        $customer->setCurrency($currency);
 
-        $this->userManager->persist($user);
-        $this->userManager->flush();
-    }
-
-    /**
-     * Get currently logged in user.
-     *
-     * @return null|UserInterface
-     */
-    protected function getUser()
-    {
-        if ($this->securityContext->getToken() && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->securityContext->getToken()->getUser();
-        }
+        $this->customerManager->persist($customer);
+        $this->customerManager->flush();
     }
 
     /**
      * Get storage key for channel with given code.
      *
      * @param string $channelCode
+     * @return string
      */
     private function getStorageKey($channelCode)
     {

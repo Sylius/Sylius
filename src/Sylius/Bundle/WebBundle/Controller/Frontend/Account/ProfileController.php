@@ -25,15 +25,15 @@ class ProfileController extends FOSRestController
      */
     public function indexAction()
     {
-        $user = $this->getUser();
+        $customer = $this->getCustomer();
         $orderRepository = $this->get('sylius.repository.order');
-        $orders = $orderRepository->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'), 5);
+        $orders = $orderRepository->findBy(array('customer' => $customer), array('updatedAt' => 'desc'), 5);
 
         $view = $this
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Profile/index.html.twig')
             ->setData(array(
-                'user' => $user,
+                'customer' => $customer,
                 'orders' => $orders,
             ))
         ;
@@ -145,4 +145,8 @@ class ProfileController extends FOSRestController
         ));
     }
 
+    protected function getCustomer()
+    {
+        return $this->get('sylius.context.customer')->getCustomer();
+    }
 }

@@ -6,6 +6,17 @@ sylius:
             not_blank: Please enter group name.
 
     user:
+        email:
+            already_used: The email is already used
+            max: Email must not be longer than {{ limit }} characters.
+            min: Email must be at least {{ limit }} characters long.
+            not_blank: Please enter your email.
+            invalid: This email is invalid.
+        plainPassword:
+            not_blank: Please enter your password.
+            mismatch: The entered passwords don't match
+
+    customer:
         first_name:
             max: First name must not be longer than {{ limit }} characters.
             min: First name must be at least {{ limit }} characters long.
@@ -20,6 +31,3 @@ sylius:
             min: Email must be at least {{ limit }} characters long.
             not_blank: Please enter your email.
             invalid: This email is invalid.
-        plainPassword:
-            not_blank: Please enter your password.
-            mismatch: The entered passwords don't match

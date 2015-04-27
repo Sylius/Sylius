@@ -29,37 +29,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class UserController extends ResourceController
 {
-    public function updateProfileAction(Request $request)
-    {
-        $resource = $this->getUser();
-        $form     = $this->getForm($resource);
-
-        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            $this->domainManager->update($resource);
-
-            if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($resource, 204));
-            }
-
-            return $this->redirectHandler->redirectTo($resource);
-        }
-
-        if ($this->config->isApiRequest()) {
-            return $this->handleView($this->view($form, 400));
-        }
-
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('updateProfile.html'))
-            ->setData(array(
-                $this->config->getResourceName() => $resource,
-                'form'                           => $form->createView(),
-            ))
-        ;
-
-        return $this->handleView($view);
-    }
-
     public function changePasswordAction(Request $request)
     {
         $user = $this->getUser();

@@ -20,8 +20,6 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * User register listener spec.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class PasswordUpdaterListenerSpec extends ObjectBehavior

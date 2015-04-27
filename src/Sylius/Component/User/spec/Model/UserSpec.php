@@ -30,11 +30,6 @@ class UserSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
     }
 
-    public function it_implements_groupable_interface()
-    {
-        $this->shouldImplement('Sylius\Component\User\Model\GroupableInterface');
-    }
-
     public function it_should_return_true_if_user_is_deleted()
     {
         $deletedAt = new \DateTime('yesterday');

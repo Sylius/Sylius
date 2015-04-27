@@ -18,8 +18,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Form\FormEvent;
 
 /**
- * User register listener spec.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CanonicalizerFormListenerSpec extends ObjectBehavior

@@ -77,7 +77,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         }
 
         if (null !== $response->getEmail()) {
-            $user = $this->userRepository->findOneBy(array('email' => $response->getEmail()));
+            $user = $this->userRepository->findOneByEmail($response->getEmail());
             if (null !== $user) {
                 return $this->updateUserByOAuthUserResponse($user, $response);
             }

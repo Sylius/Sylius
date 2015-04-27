@@ -19,11 +19,11 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}" data-user="{{ user.email }}" {% if user.deleted %} class="danger"{% endif %}>
+        <tr id="{{ user.id }}" data-user="{{ user.customer.email }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>{{ user.id }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
+            <td>{{ user.customer.firstName }}</td>
+            <td>{{ user.customer.lastName }}</td>
+            <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.customer.email }}</a></td>
             <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
             <td>
                 {{ misc.state_label(user.enabled) }}
@@ -70,11 +70,11 @@
     </thead>
     <tbody>
         {% for user in users %}
-        <tr id="{{ user.id }}" data-user="{{ user.email }}" {% if user.deleted %} class="danger"{% endif %}>
+        <tr id="{{ user.id }}" data-user="{{ user.customer.email }}" {% if user.deleted %} class="danger"{% endif %}>
             <td>
-                {{ user.fullname }}<br>
+                {{ user.customer.fullname }}<br>
                 <a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">
-                    {{ user.email }}
+                    {{ user.customer.email }}
                 </a>
                 </td>
             <td>

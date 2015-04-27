@@ -12,8 +12,8 @@
 namespace Sylius\Component\Core\Promotion\Checker;
 
 use Sylius\Component\Core\Model\CouponInterface;
-use Sylius\Component\User\Model\UserAwareInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker as BasePromotionEligibilityChecker;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
@@ -49,22 +49,22 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
      */
     protected function areCouponsEligibleForPromotion(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        if (!$subject instanceof UserAwareInterface) {
+        if (!$subject instanceof CustomerAwareInterface) {
             return false;
         }
 
         $eligible = false;
 
-        // Check to see if there is a per user usage limit on coupon
+        // Check to see if there is a per customer usage limit on coupon
         if ($subject instanceof PromotionCouponAwareSubjectInterface) {
             $coupon = $subject->getPromotionCoupon();
             if (null !== $coupon && $promotion === $coupon->getPromotion()) {
-                $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getUser());
+                $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getCustomer());
             }
         } elseif ($subject instanceof PromotionCouponsAwareSubjectInterface) {
             foreach ($subject->getPromotionCoupons() as $coupon) {
                 if ($promotion === $coupon->getPromotion()) {
-                    $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getUser());
+                    $eligible = $this->isCouponEligibleToLimit($coupon, $promotion, $subject->getCustomer());
 
                     break;
                 }
@@ -80,29 +80,29 @@ class PromotionEligibilityChecker extends BasePromotionEligibilityChecker
         return $eligible;
     }
 
-    private function isCouponEligibleToLimit(CouponInterface $coupon, PromotionInterface $promotion, UserInterface $user = null)
+    private function isCouponEligibleToLimit(CouponInterface $coupon, PromotionInterface $promotion, CustomerInterface $customer = null)
     {
         if (!$coupon instanceof CouponInterface) {
             return true;
         }
 
-        if (!$coupon->getPerUserUsageLimit()) {
+        if (!$coupon->getPerCustomerUsageLimit()) {
             return true;
         }
 
-        if (null === $user && $coupon->getPerUserUsageLimit()) {
+        if (null === $customer && $coupon->getPerCustomerUsageLimit()) {
             return false;
         }
 
-        return $this->isCouponEligible($coupon, $promotion, $user);
+        return $this->isCouponEligible($coupon, $promotion, $customer);
     }
 
-    private function isCouponEligible(CouponInterface $coupon, PromotionInterface $promotion, UserInterface $user)
+    private function isCouponEligible(CouponInterface $coupon, PromotionInterface $promotion, CustomerInterface $customer)
     {
-        $countPlacedOrders = $this->subjectRepository->countByUserAndCoupon($user, $coupon);
+        $countPlacedOrders = $this->subjectRepository->countByCustomerAndCoupon($customer, $coupon);
 
         // <= because we need to include the cart orders as well
-        if ($countPlacedOrders <= $coupon->getPerUserUsageLimit()) {
+        if ($countPlacedOrders <= $coupon->getPerCustomerUsageLimit()) {
             $this->dispatcher->dispatch(SyliusPromotionEvents::COUPON_ELIGIBLE, new GenericEvent($promotion));
 
             return true;

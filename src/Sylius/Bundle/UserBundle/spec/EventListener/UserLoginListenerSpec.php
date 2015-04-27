@@ -19,8 +19,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * User register listener spec.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserLoginListenerSpec extends ObjectBehavior

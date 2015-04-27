@@ -16,16 +16,17 @@ use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Context\CustomerContextInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {
-    private $securityContext;
+    private $customerContext;
     private $zoneMatcher;
 
-    public function __construct(SecurityContextInterface $securityContext, ZoneMatcherInterface $zoneMatcher)
+    public function __construct(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
     {
-        $this->securityContext = $securityContext;
+        $this->customerContext = $customerContext;
         $this->zoneMatcher = $zoneMatcher;
     }
 
@@ -38,11 +39,11 @@ class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
             throw new UnexpectedTypeException($subject, 'Sylius\Component\Core\Model\ProductInterface');
         }
 
-        if (!$this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (null === $customer = $this->customerContext->getCustomer()) {
             return false;
         }
 
-        if (null === $address && null === $address = $this->securityContext->getToken()->getUser()->getShippingAddress()) {
+        if (null === $address && null === $address = $customer->getShippingAddress()) {
             return false;
         }
 

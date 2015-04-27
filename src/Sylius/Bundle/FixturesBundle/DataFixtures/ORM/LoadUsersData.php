@@ -36,7 +36,7 @@ class LoadUsersData extends DataFixture
             'sylius@example.com',
             'sylius',
             true,
-            array('ROLE_SYLIUS_ADMIN')
+            array('ROLE_USER', 'ROLE_SYLIUS_ADMIN', 'ROLE_ADMINISTRATION_ACCESS')
         );
         $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
@@ -64,6 +64,7 @@ class LoadUsersData extends DataFixture
             $this->usernames[$username] = true;
 
             $this->setReference('Sylius.User-'.$i, $user);
+            $this->setReference('Sylius.Customer-'.$i, $user->getCustomer());
         }
 
         $manager->flush();
@@ -92,15 +93,16 @@ class LoadUsersData extends DataFixture
         
         /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
-        $user->setFirstname($this->faker->firstName);
-        $user->setLastname($this->faker->lastName);
+        $customer = $user->getCustomer();
+        $customer->setFirstname($this->faker->firstName);
+        $customer->setLastname($this->faker->lastName);
+        $customer->setCurrency($currency);
         $user->setUsername($email);
         $user->setEmail($email);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
         $user->setRoles($roles);
-        $user->setCurrency($currency);
         $user->setEnabled($enabled);
 
         $this->get('sylius.user.password_updater')->updatePassword($user);

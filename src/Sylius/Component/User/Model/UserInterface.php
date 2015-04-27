@@ -27,9 +27,6 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
 {
-    const ROLE_DEFAULT = 'ROLE_USER';
-    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-
     /**
      * @return int
      */
@@ -58,6 +55,18 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @return self
      */
     public function setEmailCanonical($emailCanonical);
+
+    /**
+     * @return CustomerInterface
+     */
+    public function getCustomer();
+
+    /**
+     * @param CustomerInterface $customer
+     *
+     * @return self
+     */
+    public function setCustomer(CustomerInterface $customer = null);
 
     /**
      * @param string $username
@@ -102,13 +111,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function setPassword($password);
 
     /**
-     * Tells if the the given user has the super admin role.
-     *
-     * @return boolean
-     */
-    public function isSuperAdmin();
-
-    /**
      * Sets the enabled flag of the user.
      *
      * @param boolean $boolean
@@ -125,15 +127,6 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
      * @return self
      */
     public function setLocked($boolean);
-
-    /**
-     * Sets the super admin status
-     *
-     * @param boolean $boolean
-     *
-     * @return self
-     */
-    public function setSuperAdmin($boolean);
 
     /**
      * @return string

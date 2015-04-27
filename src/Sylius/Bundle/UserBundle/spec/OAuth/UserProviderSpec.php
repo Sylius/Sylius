@@ -45,7 +45,6 @@ class UserProviderSpec extends ObjectBehavior
         $this->shouldImplement('HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface');
     }
 
-
     function it_should_connect_oauth_account_with_given_user(
         $userManager,
         $oauthRepository,
@@ -112,7 +111,7 @@ class UserProviderSpec extends ObjectBehavior
         $oauthRepository->findOneBy(array('provider' => 'google', 'identifier' => 'username'))->willReturn(null);
         $oauthRepository->createNew()->willReturn($oauth);
 
-        $userRepository->findOneBy(array('email' => 'username@email'))->willReturn($user);
+        $userRepository->findOneByEmail('username@email')->willReturn($user);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');

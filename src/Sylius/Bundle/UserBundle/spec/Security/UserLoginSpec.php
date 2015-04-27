@@ -15,15 +15,18 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserLoginSpec extends ObjectBehavior
 {
-    function let(Container $container)
+    function let(ContainerInterface $container)
     {
         $this->beConstructedWith($container);
     }
@@ -38,17 +41,17 @@ class UserLoginSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Bundle\UserBundle\Security\UserLoginInterface');
     }
 
-    // function it_logs_user_in($container, UserInterface $user, SecurityContext $context, Session $session)
-    // {
-    //     $user->getRoles()->willReturn(array('ROLE_TEST'));
-    //     $this->serialize(Argument::any())->willBeCalled();
+     function it_logs_user_in($container, UserInterface $user, SecurityContextInterface $context, SessionInterface $session)
+     {
+         $user->getRoles()->willReturn(array('ROLE_TEST'));
+         $user->serialize(Argument::any())->shouldBeCalled();
 
-    //     $container->get('security.context')->willReturn($context);
-    //     $container->get('session')->willReturn($session);
+         $container->get('security.context')->willReturn($context);
+         $container->get('session')->willReturn($session);
 
-    //     $context->setToken(Argument::type('Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken'))->shouldBeCalled();
-    //     $session->set('_security_main', Argument::any())->shouldBeCalled();
+         $context->setToken(Argument::type('Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken'))->shouldBeCalled();
+         $session->set('_security_main', Argument::any())->shouldBeCalled();
 
-    //     $this->login($user);
-    // }
+         $this->login($user);
+     }
 }

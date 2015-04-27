@@ -16,13 +16,13 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Automatic set user's default addressing
+ * Automatic set customer's default addressing
 *
  * @author Liverbool <nukboon@gmail.com>
  */
 class CheckoutAddressingListener
 {
-    public function setUserAddressing(GenericEvent $event)
+    public function setCustomerAddressing(GenericEvent $event)
     {
         $order = $event->getSubject();
 
@@ -33,16 +33,16 @@ class CheckoutAddressingListener
             );
         }
 
-        if (null === $user = $order->getUser()) {
+        if (null === $customer = $order->getCustomer()) {
             return;
         }
 
-        if (null === $user->getShippingAddress()) {
-            $user->setShippingAddress(clone $order->getShippingAddress());
+        if (null === $customer->getShippingAddress()) {
+            $customer->setShippingAddress(clone $order->getShippingAddress());
         }
 
-        if (null === $user->getBillingAddress()) {
-            $user->setBillingAddress(clone $order->getBillingAddress());
+        if (null === $customer->getBillingAddress()) {
+            $customer->setBillingAddress(clone $order->getBillingAddress());
         }
     }
 }

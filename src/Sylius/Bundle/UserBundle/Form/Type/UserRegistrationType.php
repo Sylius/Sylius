@@ -22,15 +22,13 @@ use Sylius\Bundle\UserBundle\Form\EventListener\CanonicalizerFormListener;
 class UserRegistrationType extends AbstractResourceType
 {
     /**
-     * DataFetcher registry.
-     *
      * @var CanonicalizerInterface
      */
     protected $canonicalizer;
 
     /**
-    * Constructor.
-    *
+    * @param string                 $dataClass
+    * @param string[]               $validationGroups
     * @param CanonicalizerInterface $canonicalizer
     */
     public function __construct($dataClass, array $validationGroups, CanonicalizerInterface $canonicalizer)

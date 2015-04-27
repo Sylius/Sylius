@@ -17,8 +17,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * User update listener.
- *
  * @author Łukasz CHruściel <lukasz.chrusciel@lakion.com>
  */
 class UserReloaderListener

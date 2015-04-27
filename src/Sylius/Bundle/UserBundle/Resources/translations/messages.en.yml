@@ -4,16 +4,18 @@ sylius:
             name: Name
             roles: Roles
         user:
-            billing_address: Billing address
-            different_billing_address: Use different address for billing?
             email: Email
             enabled: Enabled
-            first_name: First name
-            groups: Groups
-            last_name: Last name
             password: 
                 label: Password
                 confirmation: Verification
             shipping_address: Shipping address
+        customer:
+            first_name: First name
+            groups: Groups
+            last_name: Last name
+            email: Email
+            billing_address: Billing address
+            different_billing_address: Use different address for billing?
         user_filter:
             query: Search

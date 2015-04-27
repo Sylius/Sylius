@@ -35,6 +35,11 @@ class CustomerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Model\UserAwareInterface');
     }
 
+    public function it_implements_groupable_interface()
+    {
+        $this->shouldImplement('Sylius\Component\User\Model\GroupableInterface');
+    }
+
     public function it_sets_email()
     {
         $this->setEmail('customer@email.com');

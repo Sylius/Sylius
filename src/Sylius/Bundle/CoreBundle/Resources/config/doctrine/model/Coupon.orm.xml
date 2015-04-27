@@ -17,7 +17,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\Coupon" table="sylius_promotion_coupon">
-        <field type="integer" name="perUserUsageLimit" column="per_user_usage_limit" nullable="true" />
+        <field type="integer" name="perCustomerUsageLimit" column="per_customer_usage_limit" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

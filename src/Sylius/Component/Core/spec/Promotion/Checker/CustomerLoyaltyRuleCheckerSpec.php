@@ -18,11 +18,11 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
+class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
 {
     function it_should_be_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\CustomerLoyaltyRuleChecker');
     }
 
     function it_should_be_Sylius_rule_checker()
@@ -30,49 +30,49 @@ class UserLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
     }
 
-    function it_should_recognize_no_user_as_not_eligible(OrderInterface $subject)
+    function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)
     {
-        $subject->getUser()->willReturn(null);
+        $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_user_is_created_after_configured(
+    function it_should_recognize_subject_as_not_eligible_if_customer_is_created_after_configured(
         OrderInterface $subject,
-        TimestampableInterface $user
+        TimestampableInterface $customer
     ) {
-        $subject->getUser()->willReturn($user);
-        $user->getCreatedAt()->willReturn(new \DateTime());
+        $subject->getCustomer()->willReturn($customer);
+        $customer->getCreatedAt()->willReturn(new \DateTime());
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_user_is_created_before_configured(
+    function it_should_recognize_subject_as_eligible_if_customer_is_created_before_configured(
         OrderInterface $subject,
-        TimestampableInterface $user
+        TimestampableInterface $customer
     ) {
-        $subject->getUser()->willReturn($user);
-        $user->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
+        $subject->getCustomer()->willReturn($customer);
+        $customer->getCreatedAt()->willReturn(new \DateTime('40 days ago'));
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days'))->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_user_is_created_after_configured(
+    function it_should_recognize_subject_as_eligible_if_customer_is_created_after_configured(
         OrderInterface $subject,
-        TimestampableInterface $user
+        TimestampableInterface $customer
     ) {
-        $subject->getUser()->shouldBeCalled()->willReturn($user);
-        $user->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
+        $subject->getCustomer()->shouldBeCalled()->willReturn($customer);
+        $customer->getCreatedAt()->shouldBeCalled()->willReturn(new \DateTime('40 days ago'));
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_user_is_created_before_configured(
+    function it_should_recognize_subject_as_not_eligible_if_customer_is_created_before_configured(
         OrderInterface $subject,
-        TimestampableInterface $user
+        TimestampableInterface $customer
     ) {
-        $subject->getUser()->willReturn($user);
-        $user->getCreatedAt()->willReturn(new \DateTime());
+        $subject->getCustomer()->willReturn($customer);
+        $customer->getCreatedAt()->willReturn(new \DateTime());
 
         $this->isEligible($subject, array('time' => 30, 'unit' => 'days', 'after' => true))->shouldReturn(true);
     }

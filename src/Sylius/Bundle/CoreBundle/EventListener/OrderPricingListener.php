@@ -54,9 +54,9 @@ class OrderPricingListener
         }
 
         $context = array();
-        if (null !== $user = $order->getUser()) {
-            $context['user']   = $user;
-            $context['groups'] = $user->getGroups()->toArray();
+        if (null !== $customer = $order->getCustomer()) {
+            $context['customer']   = $customer;
+            $context['groups'] = $customer->getGroups()->toArray();
         }
 
         if (null !== $order->getChannel()) {

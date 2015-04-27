@@ -18,8 +18,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
- * User register listener spec.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class MailerListenerSpec extends ObjectBehavior

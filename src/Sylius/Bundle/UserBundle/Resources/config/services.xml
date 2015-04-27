@@ -17,6 +17,8 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.context.customer.class">Sylius\Bundle\UserBundle\Context\CustomerContext</parameter>
+
         <parameter key="sylius.user.canonicalizer.class">Sylius\Component\User\Canonicalizer\Canonicalizer</parameter>
         <parameter key="sylius.user.password_updater.class">Sylius\Component\User\Security\PasswordUpdater</parameter>
         <parameter key="sylius.user.code_provider.class">Sylius\Component\User\Security\TokenProvider</parameter>
@@ -38,8 +40,8 @@
         <parameter key="sylius.form.type.user_reset_password.class">Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType</parameter>
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
 
+        <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
-        <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\UserBundle\EventListener\UserAwareListener</parameter>
         <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener</parameter>
         <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener</parameter>
         <parameter key="sylius.listener.user_login.class">Sylius\Bundle\UserBundle\EventListener\UserLoginListener</parameter>
@@ -50,6 +52,11 @@
     </parameters>
 
     <services>
+        <!-- Customer context -->
+        <service id="sylius.context.customer" class="%sylius.context.customer.class%">
+            <argument type="service" id="security.context" />
+        </service>
+
         <!-- Controllers -->
         <service id="sylius.controller.security" class="%sylius.controller.security.class%">
             <call method="setContainer">
@@ -89,6 +96,9 @@
         </service>
 
         <!-- Listeners -->
+        <service id="sylius.listener.customer_aware" class="%sylius.listener.customer_aware.class%">
+            <argument type="service" id="sylius.context.customer" />
+        </service>
         <service id="sylius.listener.user_login" class="%sylius.listener.user_login.class%">
             <argument type="service" id="sylius.security.user_login" />
             <tag name="kernel.event_listener" event="sylius.user.post_register" method="login" />
@@ -114,9 +124,6 @@
             <argument type="service" id="sylius.email_sender" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
-        </service>
-        <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
-            <argument type="service" id="security.context" />
         </service>
         <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
             <argument type="service" id="security.context" />
