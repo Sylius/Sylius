@@ -426,7 +426,6 @@ class ElasticsearchFinder extends AbstractFinder
      */
     public function applyFilterToElasticaQuery($appliedFilters, $elasticaQuery)
     {
-        $termFilters  = new \Elastica\Filter\Terms();
         $rangeFilters = new \Elastica\Filter\Range();
         $boolFilter   = new \Elastica\Filter\Bool();
 
@@ -446,6 +445,7 @@ class ElasticsearchFinder extends AbstractFinder
                     $boolFilter->addShould($rangeFilters);
                 }
             } else {
+                $termFilters  = new \Elastica\Filter\Terms();
                 $termFilters->setTerms($name, $value);
                 $boolFilter->addShould($termFilters);
             }
