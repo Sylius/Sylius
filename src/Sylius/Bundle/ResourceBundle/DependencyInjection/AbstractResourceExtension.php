@@ -120,11 +120,11 @@ abstract class AbstractResourceExtension extends Extension
             $this->registerFormTypes($config, $container);
         }
 
-        $configClasses = array();
+        $configClasses = array($this->applicationName => $classes);
 
         if ($container->hasParameter('sylius.config.classes')) {
             $configClasses = array_merge_recursive(
-                array($this->applicationName => $classes),
+                $configClasses,
                 $container->getParameter('sylius.config.classes')
             );
         }
