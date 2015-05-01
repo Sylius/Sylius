@@ -28,7 +28,7 @@ interface IdentityInterface
     /**
      * Get identity value
      *
-     * @param string $value
+     * @return string $value
      */
     public function getValue();
 
@@ -42,6 +42,7 @@ interface IdentityInterface
     /**
      * Set identity value
      *
+     * @param string $value
      * @return OrderInterface
      */
     public function setValue($value);
