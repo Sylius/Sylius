@@ -17,16 +17,12 @@ use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
- * User repository.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class UserRepository extends EntityRepository implements UserRepositoryInterface
 {
     /**
-     * Create filter paginator.
-     *
      * @param array $criteria
      * @param array $sorting
      * @param bool  $deleted
@@ -43,10 +39,11 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
 
         if (isset($criteria['query'])) {
             $queryBuilder
-                ->where('o.username LIKE :query')
-                ->orWhere('o.email LIKE :query')
-                ->orWhere('o.firstName LIKE :query')
-                ->orWhere('o.lastName LIKE :query')
+                ->leftJoin($this->getAlias().'.customer', 'customer')
+                ->where('customer.emailCanonical LIKE :query')
+                ->orWhere('customer.firstName LIKE :query')
+                ->orWhere('customer.lastName LIKE :query')
+                ->orWhere($this->getAlias().'.username LIKE :query')
                 ->setParameter('query', '%'.$criteria['query'].'%')
             ;
         }
@@ -82,7 +79,9 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
 
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->leftJoin($this->getAlias().'.customer', 'customer')
+            ->addSelect('customer')
+            ->where($queryBuilder->expr()->eq($this->getAlias().'.id', ':id'))
             ->setParameter('id', $id)
         ;
 

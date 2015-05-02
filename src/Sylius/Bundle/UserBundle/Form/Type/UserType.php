@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventListener\CanonicalizerFormListener;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -22,19 +22,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 class UserType extends AbstractResourceType
 {
     /**
-     * @var CanonicalizerInterface
-     */
-    protected $canonicalizer;
-
-    /**
     * @param string                 $dataClass
     * @param string[]               $validationGroups
-    * @param CanonicalizerInterface $canonicalizer
     */
-    public function __construct($dataClass, array $validationGroups, CanonicalizerInterface $canonicalizer)
+    public function __construct($dataClass, array $validationGroups)
     {
         parent::__construct($dataClass, $validationGroups);
-        $this->canonicalizer = $canonicalizer;
     }
 
     /**
@@ -43,7 +36,6 @@ class UserType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new CanonicalizerFormListener($this->canonicalizer))
             ->add('customer', 'sylius_customer')
             ->add('plainPassword', 'password', array(
                 'label' => 'sylius.form.user.password.label',
@@ -52,6 +44,25 @@ class UserType extends AbstractResourceType
                 'label' => 'sylius.form.user.enabled',
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->dataClass,
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+                $groups = $this->validationGroups;
+                if ($data && !$data->getId()) {
+                    $groups[] = 'user_create';
+                }
+                return $groups;
+            },
+            'cascade_validation' => true
+        ));
     }
 
     /**

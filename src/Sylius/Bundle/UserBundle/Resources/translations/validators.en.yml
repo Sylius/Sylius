@@ -31,3 +31,4 @@ sylius:
             min: Email must be at least {{ limit }} characters long.
             not_blank: Please enter your email.
             invalid: This email is invalid.
+            unique: This email is already used.

@@ -30,6 +30,7 @@ class UserLogin implements UserLoginInterface
      */
     public function __construct(Container $container)
     {
+        //TODO inject security context instead of whole container
         $this->container = $container;
     }
 
@@ -40,6 +41,7 @@ class UserLogin implements UserLoginInterface
     {
         $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
         $this->container->get('security.context')->setToken($token);
-        $this->container->get('session')->set('_security_main', serialize($token));
+        // TODO Check if not needed for sure
+//        $this->container->get('session')->set('_security_main', serialize($token));
     }
 }

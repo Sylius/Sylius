@@ -4,7 +4,7 @@
 {% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
-{% set router_paramters = customer is not null ? {'id' : customer.user.id} : {} %}
+{% set router_paramters = customer is not null ? {'id' : customer.id} : {} %}
 
 {% if orders|length > 0 %}
 <table id="orders" class="table">
@@ -41,13 +41,10 @@
                 {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
             </td>
             <td>
-                {% if order.customer %}
+                {% if order.customer.user %}
                     <p>{{ order.customer.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.customer.user.id}) }}">{{ order.customer.email }}</a></p>
                 {% else %}
-                    <p>
-                        {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
-                        <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
-                    </p>
+                    <p>{{ order.customer.fullName }} <br><span title="{{ 'sylius.order.guest'|trans }}">{{ order.customer.email }}</span></p>
                 {% endif %}
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
@@ -104,13 +101,13 @@
                 {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
             </td>
             <td style="width: 20%">
-                {% if order.customer %}
+                {% if order.customer.user %}
                     {{ order.customer.fullname }}<br>
                     <a href="{{ path('sylius_backend_user_show', {'id': order.customer.user.id}) }}">
                         {{ order.customer.email }}
                     </a>
                 {% else %}
-                    {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}
+                    {{ order.customer.fullname }}<br>
                     <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
                 {% endif %}
             </td>

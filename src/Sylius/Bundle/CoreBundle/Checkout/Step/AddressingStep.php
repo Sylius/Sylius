@@ -33,8 +33,7 @@ class AddressingStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-        //TODO replace getUser with getCustomer
-        $form = $this->createCheckoutAddressingForm($order, $this->getUser());
+        $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());
 
         return $this->renderStep($context, $order, $form);
     }
@@ -48,8 +47,7 @@ class AddressingStep extends CheckoutStep
 
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-        //TODO replace getUser with getCustomer
-        $form = $this->createCheckoutAddressingForm($order, $this->getUser());
+        $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());
 
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
@@ -77,5 +75,10 @@ class AddressingStep extends CheckoutStep
     protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)
     {
         return $this->createForm('sylius_checkout_addressing', $order, array('customer' => $customer));
+    }
+
+    protected function getCustomer()
+    {
+        return $this->container->get('sylius.context.customer')->getCustomer();
     }
 }

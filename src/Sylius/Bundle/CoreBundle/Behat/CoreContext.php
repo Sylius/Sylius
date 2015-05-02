@@ -249,7 +249,7 @@ class CoreContext extends DefaultContext
 
             foreach ($groups as $groupName) {
                 if ($group = $this->findOneByName('group', $groupName)) {
-                    $user->addGroup($group);
+                    $user->getCustomer()->addGroup($group);
                 }
             }
 

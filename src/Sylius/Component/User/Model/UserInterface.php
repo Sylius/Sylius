@@ -27,6 +27,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 interface UserInterface extends AdvancedUserInterface, \Serializable, TimestampableInterface, SoftDeletableInterface
 {
+    const DEFAULT_ROLE = 'ROLE_USER';
     /**
      * @return int
      */

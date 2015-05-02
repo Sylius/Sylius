@@ -104,14 +104,10 @@ class User implements UserInterface
     protected $credentialsExpireAt;
 
     /**
-     * @var Collection
-     */
-    protected $groups;
-
-    /**
+     * We need at least one role to be able to authenticate
      * @var array
      */
-    protected $roles = array();
+    protected $roles = array(UserInterface::DEFAULT_ROLE);
 
     /**
      * @var Collection
@@ -135,10 +131,16 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->customer = new Customer();
+        $this->initializeCustomer();
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
+    }
+
+    protected function initializeCustomer()
+    {
+        $this->customer = new Customer();
+        $this->customer->setUser($this);
     }
 
     /**

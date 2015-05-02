@@ -43,7 +43,7 @@ class UserRegistrationTypeSpec extends ObjectBehavior
 
     function it_builds_form(FormBuilderInterface $builder)
     {
-        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\UserBundle\Form\EventListener\CanonicalizerFormListener'))->shouldBeCalled()->willReturn($builder);
+        $builder->addEventSubscriber(Argument::type('Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener'))->shouldBeCalled()->willReturn($builder);
         $builder->add('customer', 'sylius_customer')->shouldBeCalled()->willReturn($builder);
         $builder->add('plainPassword', 'repeated', Argument::any())->shouldBeCalled()->willReturn($builder);
 

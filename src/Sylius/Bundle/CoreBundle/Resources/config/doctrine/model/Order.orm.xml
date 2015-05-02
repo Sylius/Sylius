@@ -62,6 +62,9 @@
 
         <many-to-one field="customer" target-entity="Sylius\Component\User\Model\CustomerInterface" inversed-by="orders">
             <join-column name="customer_id" referenced-column-name="id" nullable="true" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
         </many-to-one>
 
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">

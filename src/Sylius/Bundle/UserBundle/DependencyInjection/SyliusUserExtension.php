@@ -42,14 +42,5 @@ class SyliusUserExtension extends AbstractResourceExtension
         $container->setParameter('sylius.user.resetting.token_ttl', $config['resetting']['token']['ttl']);
         $container->setParameter('sylius.user.resetting.token_length', $config['resetting']['token']['length']);
         $container->setParameter('sylius.user.resetting.pin_length', $config['resetting']['pin']['length']);
-
-        $container
-            ->getDefinition('sylius.form.type.user_registration')
-            ->addArgument(new Reference('sylius.user.canonicalizer'))
-        ;
-        $container
-            ->getDefinition('sylius.form.type.user')
-            ->addArgument(new Reference('sylius.user.canonicalizer'))
-        ;
     }
 }

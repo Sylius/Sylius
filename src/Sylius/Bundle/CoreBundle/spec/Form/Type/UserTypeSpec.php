@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\Form\Type;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -17,23 +17,23 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class UserTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith('Sylius\Component\User\Model\User', array('sylius'), $canonicalizer);
+        $this->beConstructedWith('Sylius\Component\Core\Model\User', array('sylius'), $canonicalizer);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\UserType');
     }
 
-    function it_extends_abstract_resource_type()
+    function it_extends_user_type_from_user_bundle()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserType');
     }
 
     function it_has_name()
@@ -46,6 +46,7 @@ class UserTypeSpec extends ObjectBehavior
         $builder->add('customer', 'sylius_customer')->shouldBeCalled()->willReturn($builder);
         $builder->add('plainPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('enabled', 'checkbox', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('authorizationRoles', 'sylius_role_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

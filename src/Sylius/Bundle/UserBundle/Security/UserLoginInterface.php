@@ -20,6 +20,8 @@ interface UserLoginInterface
 {
     /**
      * Log in user.
+     *
+     * @param UserInterface $user
      */
     public function login(UserInterface $user);
 }

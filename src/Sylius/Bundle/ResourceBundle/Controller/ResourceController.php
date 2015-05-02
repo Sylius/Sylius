@@ -438,7 +438,6 @@ class ResourceController extends FOSRestController
                 )
             );
         }
-
         return $resource;
     }
 

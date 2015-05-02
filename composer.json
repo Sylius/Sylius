@@ -33,7 +33,6 @@
         "friendsofsymfony/elastica-bundle":     "^3.0.2",
         "friendsofsymfony/oauth-server-bundle": "~1.4",
         "friendsofsymfony/rest-bundle":         "~1.5",
-        "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "fzaninotto/faker":                     "~1.2",
         "hwi/oauth-bundle":                     "~0.3",
         "incenteev/composer-parameter-handler": "~2.0",

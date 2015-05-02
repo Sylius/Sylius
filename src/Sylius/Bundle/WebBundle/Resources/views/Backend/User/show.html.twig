@@ -6,7 +6,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
     <li><a href="{{ path('sylius_backend_user_index') }}">{{ 'sylius.breadcrumb.user.index'|trans }}</a></li>
-    <li>{{ user.fullName }}</li>
+    <li>{{ user.customer.fullName }}</li>
 </ol>
 {% endblock %}
 
@@ -19,7 +19,7 @@
         {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
         {% if not user.deleted %}
             {{ buttons.edit(path('sylius_backend_user_update', {'id': user.id})) }}
-            {% if user.username is not sameas(app.user.username) %}
+            {% if user.id is not sameas(app.user.id) %}
                 {{ buttons.delete(path('sylius_backend_user_delete', {'id': user.id}), null, false, false) }}
             {% endif %}
         {% endif %}
@@ -40,16 +40,16 @@
                 <td><strong>{{ 'sylius.user.id'|trans }}</strong></td>
                 <td>{{ user.id }}</td>
             </tr>
-            {% if user.firstName %}
+            {% if user.customer.firstName %}
                 <tr>
                     <td><strong>{{ 'sylius.user.first_name'|trans }}</strong></td>
-                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.customer.firstName }}</td>
                 </tr>
             {% endif %}
-            {% if user.lastName %}
+            {% if user.customer.lastName %}
                 <tr>
                     <td><strong>{{ 'sylius.user.last_name'|trans }}</strong></td>
-                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.customer.lastName }}</td>
                 </tr>
             {% endif %}
             <tr>
@@ -58,7 +58,7 @@
             </tr>
             <tr>
                 <td><strong>{{ 'sylius.user.email'|trans }}</strong></td>
-                <td>{{ user.email }}</td>
+                <td>{{ user.customer.email }}</td>
             </tr>
             <tr>
                 <td><strong>{{ 'sylius.user.enabled'|trans }}</strong></td>
@@ -77,9 +77,9 @@
             <tr>
                 <td><strong>{{ 'sylius.user.groups'|trans }}</strong></td>
                 <td>
-                    {% if user.groups|length > 0 %}
+                    {% if user.customer.groups|length > 0 %}
                         <ul>
-                            {% for group in user.groups %}
+                            {% for group in user.customer.groups %}
                                 <li>{{ group.name }}</li>
                             {% endfor %}
                         </ul>
@@ -121,23 +121,23 @@
 </div>
 
 <div class="row">
-    {% if user.shippingAddress %}
+    {% if user.customer.shippingAddress %}
         <div class="col-md-6">
             <h4>{{ 'sylius.user.shipping_address'|trans }}</h4>
-            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.shippingAddress } %}
+            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.customer.shippingAddress } %}
         </div>
     {% endif %}
-    {% if user.billingAddress %}
+    {% if user.customer.billingAddress %}
         <div class="col-md-6">
             <h4>{{ 'sylius.user.billing_address'|trans }}</h4>
-            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.billingAddress } %}
+            {% include 'SyliusWebBundle:Backend/Address:_show.html.twig' with {'address': user.customer.billingAddress } %}
         </div>
     {% endif %}
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        {% render(url('sylius_backend_order_by_user', app.request.query.all|merge({id: user.id}) )) %}
+        {% render(url('sylius_backend_order_by_customer', app.request.query.all|merge({id: user.customer.id}) )) %}
     </div>
 </div>
 

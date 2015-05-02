@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
@@ -36,12 +37,11 @@ class CanonicalizerListener
     {
         $item = $event->getEntity();
 
-        if (!$item instanceof UserInterface) {
-            return;
+        if ($item instanceof CustomerInterface) {
+            $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
+        } elseif ($item instanceof UserInterface) {
+            $item->setUsernameCanonical($this->canonicalizer->canonicalize($item->getUsername()));
         }
-
-        $item->setUsernameCanonical($this->canonicalizer->canonicalize($item->getUsername()));
-        $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
     }
 
     public function prePersist(LifecycleEventArgs $event)

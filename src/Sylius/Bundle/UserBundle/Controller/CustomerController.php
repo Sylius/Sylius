@@ -39,16 +39,13 @@ class CustomerController extends ResourceController
             return $this->handleView($this->view($form, 400));
         }
 
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('updateProfile.html'))
-            ->setData(array(
+        return $this->render(
+            'SyliusWebBundle:Frontend/Account:Profile/edit.html.twig',
+            array(
                 $this->config->getResourceName() => $resource,
                 'form'                           => $form->createView(),
-            ))
-        ;
-
-        return $this->handleView($view);
+            )
+        );
     }
 
     protected function getCustomer()

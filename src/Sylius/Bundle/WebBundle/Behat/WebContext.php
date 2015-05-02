@@ -749,7 +749,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
 
         $this->fillField('Email', $email);
         $this->fillField('Password', $password);
-        $this->pressButton('login');
+        $this->pressButton('Login');
     }
 
     /**

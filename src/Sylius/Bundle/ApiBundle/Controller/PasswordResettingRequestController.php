@@ -23,6 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * API controller for resetting user passwords.
+ * TODO remove it and use UserController requestPasswordResetAction
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
 use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\UserBundle\Form\EventListener\CanonicalizerFormListener;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -22,19 +22,14 @@ use Sylius\Bundle\UserBundle\Form\EventListener\CanonicalizerFormListener;
 class UserRegistrationType extends AbstractResourceType
 {
     /**
-     * @var CanonicalizerInterface
-     */
-    protected $canonicalizer;
-
-    /**
     * @param string                 $dataClass
     * @param string[]               $validationGroups
-    * @param CanonicalizerInterface $canonicalizer
     */
-    public function __construct($dataClass, array $validationGroups, CanonicalizerInterface $canonicalizer)
+    public function __construct($dataClass, array $validationGroups)
     {
+        // Add registration validation group
+        $validationGroups[] = 'registration';
         parent::__construct($dataClass, $validationGroups);
-        $this->canonicalizer = $canonicalizer;
     }
 
     /**
@@ -43,7 +38,7 @@ class UserRegistrationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new CanonicalizerFormListener($this->canonicalizer))
+            ->addEventSubscriber(new UserRegistrationFormListener())
             ->add('customer', 'sylius_customer')
             ->add('plainPassword', 'repeated', array(
                 'type'            => 'password',
@@ -52,6 +47,18 @@ class UserRegistrationType extends AbstractResourceType
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ))
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true
+        ));
     }
 
     /**

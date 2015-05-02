@@ -15,8 +15,8 @@ Feature: Checkout addressing
             | PHP Top       | 5.99  | PHP T-Shirts |
           And there are following users:
             | email             | password | enabled |
-            | john@example.com  | foo      | yes     |
-            | rick@example.com  | bar      | yes     |
+            | john@example.com  | foo1     | yes     |
+            | rick@example.com  | bar1     | yes     |
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |

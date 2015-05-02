@@ -82,7 +82,7 @@ class AddressingStepType extends AbstractResourceType
 
         $resolver
             ->setDefaults(array(
-                'user' => null,
+                'customer' => null,
                 'cascade_validation' => true
             ))
         ;

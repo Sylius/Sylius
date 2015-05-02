@@ -29,8 +29,13 @@ class User extends BaseUser implements UserInterface
     public function __construct()
     {
         parent::__construct();
-        $this->customer = new Customer();
         $this->authorizationRoles = new ArrayCollection();
+    }
+
+    protected function initializeCustomer()
+    {
+        $this->customer = new Customer();
+        $this->customer->setUser($this);
     }
 
     /**
