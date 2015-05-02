@@ -44,29 +44,23 @@ class GeneralSettingsSchema implements SchemaInterface
     public function buildSettings(SettingsBuilderInterface $builder)
     {
         $builder
-            ->setDefaults(
-                array_merge(
-                    array(
-                        'title' => 'Sylius - Modern ecommerce for Symfony2',
-                        'meta_keywords' => 'symfony, sylius, ecommerce, webshop, shopping cart',
-                        'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
-                        'locale' => 'en',
-                        'currency' => 'USD',
-                        'google_analytics_code' => ''
-                    ),
-                    $this->defaults
-                )
-            )
-            ->setAllowedTypes(
-                array(
-                    'title' => array('string'),
-                    'meta_keywords' => array('string'),
-                    'meta_description' => array('string'),
-                    'locale' => array('string'),
-                    'currency' => array('string'),
-                    'google_analytics_code' => array('string'),
-                )
-            );
+            ->setDefaults(array_merge(array(
+                'title'            => 'Sylius - Modern ecommerce for Symfony2',
+                'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
+                'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
+                'locale'           => 'en',
+                'currency'         => 'USD',
+                'tracking_code'    => '',
+            ), $this->defaults))
+            ->setAllowedTypes(array(
+                'title'            => array('string'),
+                'meta_keywords'    => array('string'),
+                'meta_description' => array('string'),
+                'locale'           => array('string'),
+                'currency'         => array('string'),
+                'tracking_code'    => array('string'),
+            ))
+        ;
     }
 
     /**
@@ -75,64 +69,41 @@ class GeneralSettingsSchema implements SchemaInterface
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add(
-                'title',
-                'text',
-                array(
-                    'label' => 'sylius.form.settings.general.title',
-                    'constraints' => array(
-                        new NotBlank()
-                    )
+            ->add('title', 'text', array(
+                'label'       => 'sylius.form.settings.general.title',
+                'constraints' => array(
+                    new NotBlank()
                 )
-            )
-            ->add(
-                'meta_keywords',
-                'text',
-                array(
-                    'label' => 'sylius.form.settings.general.meta_keywords',
-                    'constraints' => array(
-                        new NotBlank()
-                    )
+            ))
+            ->add('meta_keywords', 'text', array(
+                'label'       => 'sylius.form.settings.general.meta_keywords',
+                'constraints' => array(
+                    new NotBlank()
                 )
-            )
-            ->add(
-                'meta_description',
-                'textarea',
-                array(
-                    'label' => 'sylius.form.settings.general.meta_description',
-                    'constraints' => array(
-                        new NotBlank()
-                    )
+            ))
+            ->add('meta_description', 'textarea', array(
+                'label'       => 'sylius.form.settings.general.meta_description',
+                'constraints' => array(
+                    new NotBlank()
                 )
-            )
-            ->add(
-                'locale',
-                'locale',
-                array(
-                    'label' => 'sylius.form.settings.general.locale',
-                    'constraints' => array(
-                        new NotBlank(),
-                        new Locale(),
-                    )
+            ))
+            ->add('locale', 'locale', array(
+                'label'       => 'sylius.form.settings.general.locale',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Locale(),
                 )
-            )
-            ->add(
-                'currency',
-                'sylius_currency_choice',
-                array(
-                    'label' => 'sylius.form.settings.general.currency',
-                    'constraints' => array(
-                        new NotBlank(),
-                        new Currency(),
-                    )
+            ))
+            ->add('currency', 'sylius_currency_choice', array(
+                'label'       => 'sylius.form.settings.general.currency',
+                'constraints' => array(
+                    new NotBlank(),
+                    new Currency(),
                 )
-            )
-            ->add(
-                'google_analytics_code',
-                'text',
-                array(
-                    'label' => 'sylius.form.settings.general.google_analytics_code',
-                )
-            );
+            ))
+            ->add('tracking_code', 'textarea', array(
+                'label'       => 'sylius.form.settings.general.tracking_code',
+            ))
+        ;
     }
 }
