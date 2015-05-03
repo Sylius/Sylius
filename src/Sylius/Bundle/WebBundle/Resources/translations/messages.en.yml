@@ -1040,3 +1040,6 @@ sylius:
         update_header: Editing contact request
         updated_at: Last update
         show_header: Contact request details
+    gender:
+        male: Male
+        female: Female

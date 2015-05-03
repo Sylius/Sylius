@@ -13,6 +13,7 @@ sylius_user_profile_update:
     defaults:
         _controller: sylius.controller.customer:updateProfileAction
         _sylius:
+            form: sylius_customer_profile
             template: SyliusWebBundle:Frontend/Account:profileUpdate.html.twig
             redirect: sylius_account_homepage
 

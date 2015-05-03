@@ -27,8 +27,6 @@ class UserRegistrationType extends AbstractResourceType
     */
     public function __construct($dataClass, array $validationGroups)
     {
-        // Add registration validation group
-        $validationGroups[] = 'registration';
         parent::__construct($dataClass, $validationGroups);
     }
 
@@ -39,7 +37,9 @@ class UserRegistrationType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new UserRegistrationFormListener())
-            ->add('customer', 'sylius_customer')
+            ->add('customer', 'sylius_customer_registration', array(
+                'label' => false,
+            ))
             ->add('plainPassword', 'repeated', array(
                 'type'            => 'password',
                 'first_options'   => array('label' => 'sylius.form.user.password.label'),

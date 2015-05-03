@@ -6,8 +6,10 @@
             {{ form_row(form.customer.email) }}
             {{ form_row(form.customer.firstName) }}
             {{ form_row(form.customer.lastName) }}
+            {{ form_row(form.customer.gender) }}
             {{ form_row(form.plainPassword) }}
             {{ form_row(form.enabled) }}
+            {{ form_row(form.customer.groups) }}
 
             <div class="form-group">
                 {{ form_label(form.authorizationRoles) }}
@@ -29,8 +31,7 @@
                     </ul>
                 </div>
             </div>
+            {{ form_row(form._token) }}
         </fieldset>
     </div>
 </div>
-
-{{ form_rest(form) }}

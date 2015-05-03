@@ -166,6 +166,9 @@
         <service id="sylius.form.type.user_change_password" class="%sylius.form.type.user_change_password.class%">
             <tag name="form.type" alias="sylius_user_change_password" />
         </service>
+        <service id="sylius.form.type.gender" class="Sylius\Bundle\UserBundle\Form\Type\GenderType">
+            <tag name="form.type" alias="sylius_gender" />
+        </service>
     </services>
 
 </container>
