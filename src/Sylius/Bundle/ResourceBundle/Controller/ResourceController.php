@@ -147,7 +147,7 @@ class ResourceController extends FOSRestController
                     $resources,
                     new Route(
                         $request->attributes->get('_route'),
-                        $request->attributes->get('_route_params')
+                        array_merge($request->attributes->get('_route_params'), $request->query->all())
                     )
                 );
             }
