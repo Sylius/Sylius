@@ -13,14 +13,13 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Model\Customer;
 use Sylius\Component\User\Model\CustomerInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class UserLoginListener
 {

@@ -108,7 +108,7 @@
                     </a>
                 {% else %}
                     {{ order.customer.fullname }}<br>
-                    <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
+                    <span title="{{ 'sylius.order.guest'|trans }}">{{ order.customer.email }}</span>
                 {% endif %}
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>

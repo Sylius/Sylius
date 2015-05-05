@@ -62,11 +62,11 @@ Feature: Checkout security
 
     Scenario: Creating account during the whole checkout
          When I fill in the following:
-            | sylius_customer_registration_customer_firstName   | Mike             |
-            | sylius_customer_registration_customer_lastName    | Small            |
-            | sylius_customer_registration_customer_email       | mike@example.com |
-            | sylius_customer_registration_plainPassword_first  | mikepass         |
-            | sylius_customer_registration_plainPassword_second | mikepass         |
+            | sylius_customer_registration_firstName                 | Mike             |
+            | sylius_customer_registration_lastName                  | Small            |
+            | sylius_customer_registration_email                     | mike@example.com |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
           And I fill in the shipping address to United Kingdom
           And I press "Continue"

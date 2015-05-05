@@ -45,6 +45,8 @@ class CustomerTypeSpec extends ObjectBehavior
         $builder->add('firstName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('email', 'email', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('gender', 'sylius_gender', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('groups', 'sylius_group_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, array());
     }

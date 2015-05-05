@@ -15,17 +15,19 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class UserLoginListenerSpec extends ObjectBehavior
 {
-    function let(UserLoginInterface $loginMenager)
+    function let(UserLoginInterface $loginManager)
     {
-        $this->beConstructedWith($loginMenager);
+        $this->beConstructedWith($loginManager);
     }
 
     function it_is_initializable()
@@ -33,20 +35,31 @@ class UserLoginListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserLoginListener');
     }
 
-    function it_logs_user_in($loginMenager, GenericEvent $event, UserInterface $user)
+    function it_logs_user_in($loginManager, GenericEvent $event, CustomerInterface $customer, UserInterface $user)
     {
-        $event->getSubject()->willReturn($user);
+        $event->getSubject()->willReturn($customer);
+        $customer->getUser()->willReturn($user);
 
-        $loginMenager->login($user)->shouldBeCalled();
+        $loginManager->login($user)->shouldBeCalled();
 
         $this->login($event);
     }
 
-    function it_logs_in_user_implementation_only($loginMenager, GenericEvent $event, UserInterface $user)
+    function it_does_not_log_user_in_if_customer_does_not_have_assigned_user($loginManager, GenericEvent $event, CustomerInterface $customer)
     {
-        $user = '';
-        $event->getSubject()->willReturn($user);
-        $this->shouldThrow(new UnexpectedTypeException($user, 'Sylius\Component\User\Model\UserInterface'))
+        $event->getSubject()->willReturn($customer);
+        $customer->getUser()->willReturn(null);
+
+        $loginManager->login(Argument::any())->shouldNotBeCalled();
+
+        $this->login($event);
+    }
+
+    function it_logs_in_user_implementation_only(GenericEvent $event)
+    {
+        $customer = '';
+        $event->getSubject()->willReturn($customer);
+        $this->shouldThrow(new UnexpectedTypeException($customer, 'Sylius\Component\User\Model\CustomerInterface'))
             ->duringLogin($event);
     }
 }

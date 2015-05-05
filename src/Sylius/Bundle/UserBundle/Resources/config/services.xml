@@ -171,6 +171,12 @@
         <service id="sylius.form.type.gender" class="Sylius\Bundle\UserBundle\Form\Type\GenderType">
             <tag name="form.type" alias="sylius_gender" />
         </service>
+
+        <!-- Validators -->
+        <service id="validator.unique.registered_user" class="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="validator.constraint_validator" alias="registered_user_validator" />
+        </service>
     </services>
 
 </container>

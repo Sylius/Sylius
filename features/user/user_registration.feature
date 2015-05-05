@@ -37,6 +37,18 @@ Feature: User registration
          Then I should be on registration page
           And I should see "The entered passwords don't match"
 
+    Scenario: Trying to register without email
+       Given I am on the store homepage
+         And I follow "Register"
+        When I fill in the following:
+            | First name   | John        |
+            | Last name    | Doe         |
+            | Password     | bar1        |
+            | Verification | bar1        |
+         And I press "Register"
+        Then I should be on registration page
+         And I should see "Please enter your email"
+
     Scenario: Trying to register with already existing email
         Given I am on the store homepage
           And I follow "Register"

@@ -37,7 +37,7 @@ class GuestType extends AbstractResourceType
     {
         $builder
             ->add('email', 'email', array(
-                'label' => 'sylius.form.guest.email.label',
+                'label' => 'sylius.form.guest.email',
             ))
             ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
             ->setDataLocked(false)

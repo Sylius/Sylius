@@ -47,6 +47,10 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
             throw new UnexpectedTypeException($data, 'Sylius\Component\User\Model\CustomerInterface');
         }
 
+        // if email is not filled in, go on
+        if (!isset($rawData['email']) || empty($rawData['email'])) {
+            return;
+        }
         $existingCustomer = $this->customerRepository->findOneBy(['email' => $rawData['email']]);
         if (null === $existingCustomer || null !== $existingCustomer->getUser()) {
             return;
