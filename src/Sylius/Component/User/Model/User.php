@@ -131,16 +131,9 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->initializeCustomer();
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->oauthAccounts = new ArrayCollection();
         $this->createdAt = new \DateTime();
-    }
-
-    protected function initializeCustomer()
-    {
-        $this->customer = new Customer();
-        $this->customer->setUser($this);
     }
 
     /**
@@ -164,7 +157,10 @@ class User implements UserInterface
      */
     public function setCustomer(CustomerInterface $customer = null)
     {
-        $this->customer = $customer;
+        if ($this->customer !== $customer) {
+            $this->customer = $customer;
+            $this->assignUser($customer);
+        }
     }
 
     /**
@@ -662,5 +658,15 @@ class User implements UserInterface
             $this->enabled,
             $this->id
             ) = $data;
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     */
+    protected function assignUser(CustomerInterface $customer = null)
+    {
+        if (null !== $customer) {
+            $customer->setUser($this);
+        }
     }
 }

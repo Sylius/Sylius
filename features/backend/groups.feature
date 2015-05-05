@@ -12,11 +12,11 @@ Feature: User groups management
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
           And there are following groups:
-            | name                | roles             |
-            | Wholesale Customers | ROLE_WHOLESALE    |
-            | Retail Customers    | ROLE_RETAIL       |
-            | Administrators      | ROLE_SYLIUS_ADMIN |
-            | Sales               | ROLE_SYLIUS_SALES |
+            | name                |
+            | Wholesale Customers |
+            | Retail Customers    |
+            | Administrators      |
+            | Sales               |
           And there are following users:
             | email              | enabled | groups                | address                                                |
             | marc@example.com   | yes     | Administrators, Sales | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |

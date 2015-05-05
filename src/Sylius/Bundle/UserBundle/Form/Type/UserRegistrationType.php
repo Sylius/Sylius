@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
-use Sylius\Bundle\UserBundle\Form\EventListener\UserRegistrationFormListener;
 use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -36,10 +35,6 @@ class UserRegistrationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new UserRegistrationFormListener())
-            ->add('customer', 'sylius_customer_registration', array(
-                'label' => false,
-            ))
             ->add('plainPassword', 'repeated', array(
                 'type'            => 'password',
                 'first_options'   => array('label' => 'sylius.form.user.password.label'),

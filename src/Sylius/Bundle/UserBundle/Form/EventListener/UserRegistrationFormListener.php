@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\EventListener;
 
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
@@ -28,13 +28,16 @@ class UserRegistrationFormListener implements EventSubscriberInterface
             FormEvents::SUBMIT => 'submit',
         );
     }
+
     public function submit(FormEvent $event)
     {
-        $user = $event->getData();
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException($user, 'Sylius\Component\User\Model\UserInterface');
+        $customer = $event->getData();
+        if (!$customer instanceof CustomerInterface) {
+            throw new UnexpectedTypeException($customer, 'Sylius\Component\User\Model\CustomerInterface');
         }
 
-        $user->setEnabled(true);
+        if (null !== $user = $customer->getUser()) {
+            $user->setEnabled(true);
+        }
     }
 }

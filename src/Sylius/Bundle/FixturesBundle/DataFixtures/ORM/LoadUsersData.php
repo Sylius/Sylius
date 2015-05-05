@@ -67,6 +67,12 @@ class LoadUsersData extends DataFixture
             $this->setReference('Sylius.Customer-'.$i, $user->getCustomer());
         }
 
+        $customer = $this->getCustomerRepository()->createNew();
+        $customer->setFirstname($this->faker->firstName);
+        $customer->setLastname($this->faker->lastName);
+        $customer->setEmail('customer@email.com');
+        $manager->persist($customer);
+
         $manager->flush();
     }
 
@@ -93,10 +99,11 @@ class LoadUsersData extends DataFixture
         
         /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
-        $customer = $user->getCustomer();
+        $customer = $this->getCustomerRepository()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setCurrency($currency);
+        $user->setCustomer($customer);
         $user->setUsername($email);
         $user->setEmail($email);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));

@@ -13,6 +13,8 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\Customer;
+use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
@@ -34,13 +36,17 @@ class UserLoginListener
 
     public function login(GenericEvent $event)
     {
-        $user = $event->getSubject();
+        $customer = $event->getSubject();
 
-        if (!$user instanceof UserInterface) {
+        if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
-                $user,
-                'Sylius\Component\User\Model\UserInterface'
+                $customer,
+                'Sylius\Component\User\Model\CustomerInterface'
             );
+        }
+
+        if (null === $user = $customer->getUser()) {
+            return;
         }
 
         try {

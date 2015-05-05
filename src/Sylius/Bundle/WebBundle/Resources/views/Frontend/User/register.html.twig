@@ -9,11 +9,10 @@
     <fieldset class="well">
         {{ form_errors(form) }}
 
-        {{ form_row(form.customer.firstName) }}
-        {{ form_row(form.customer.lastName) }}
-        {{ form_row(form.customer.email) }}
-        {{ form_row(form.plainPassword) }}
-
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.user.plainPassword) }}
 
         {{ form_rest(form) }}
     </fieldset>

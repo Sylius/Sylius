@@ -15,6 +15,7 @@ use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -225,10 +226,11 @@ class CoreContext extends DefaultContext
 
             /* @var $user UserInterface */
             $user = $this->getRepository('user')->createNew();
-            $customer = $user->getCustomer();
+            $customer = $this->getRepository('customer')->createNew();
             $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
             $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
             $customer->setEmail($email);
+            $user->setCustomer($customer);
             $user->setUsername($email);
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);

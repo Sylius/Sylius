@@ -52,21 +52,21 @@ Feature: Checkout security
 
     Scenario: Creating account during the checkout
          When I fill in the following:
-            | sylius_user_registration_customer_firstName   | Mike             |
-            | sylius_user_registration_customer_lastName    | Small            |
-            | sylius_user_registration_customer_email       | mike@example.com |
-            | sylius_user_registration_plainPassword_first  | mikepass         |
-            | sylius_user_registration_plainPassword_second | mikepass         |
+            | sylius_customer_registration_firstName                 | Mike             |
+            | sylius_customer_registration_lastName                  | Small            |
+            | sylius_customer_registration_email                     | mike@example.com |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
          Then I should be redirected to the checkout addressing step
 
     Scenario: Creating account during the whole checkout
          When I fill in the following:
-            | sylius_user_registration_customer_firstName   | Mike             |
-            | sylius_user_registration_customer_lastName    | Small            |
-            | sylius_user_registration_customer_email       | mike@example.com |
-            | sylius_user_registration_plainPassword_first  | mikepass         |
-            | sylius_user_registration_plainPassword_second | mikepass         |
+            | sylius_customer_registration_customer_firstName   | Mike             |
+            | sylius_customer_registration_customer_lastName    | Small            |
+            | sylius_customer_registration_customer_email       | mike@example.com |
+            | sylius_customer_registration_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_plainPassword_second | mikepass         |
           And I press "Register"
           And I fill in the shipping address to United Kingdom
           And I press "Continue"
@@ -80,9 +80,9 @@ Feature: Checkout security
 
     Scenario: Creating account without first and last name
          When I fill in the following:
-            | sylius_user_registration_customer_email       | mike@example.com |
-            | sylius_user_registration_plainPassword_first  | mikepass         |
-            | sylius_user_registration_plainPassword_second | mikepass         |
+            | sylius_customer_registration_email                     | mike@example.com |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
          Then I should be on the checkout security forward step
           And I should see "Please enter your first name"
@@ -90,10 +90,10 @@ Feature: Checkout security
 
     Scenario: Creating account without email
          When I fill in the following:
-            | sylius_user_registration_customer_firstName   | Mike             |
-            | sylius_user_registration_customer_lastName    | Small            |
-            | sylius_user_registration_plainPassword_first  | mikepass         |
-            | sylius_user_registration_plainPassword_second | mikepass         |
+            | sylius_customer_registration_firstName                 | Mike             |
+            | sylius_customer_registration_lastName                  | Small            |
+            | sylius_customer_registration_user_plainPassword_first  | mikepass         |
+            | sylius_customer_registration_user_plainPassword_second | mikepass         |
           And I press "Register"
          Then I should be on the checkout security forward step
           And I should see "Please enter your email"

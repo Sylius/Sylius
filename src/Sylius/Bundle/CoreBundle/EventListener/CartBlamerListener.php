@@ -22,17 +22,17 @@ class CartBlamerListener
 
     public function blame(UserEvent $userEvent)
     {
-//        $cart = $this->cartProvider->getCart();
-//
-//        if (!$cart instanceof OrderInterface) {
-//            throw new UnexpectedTypeException($cart, 'Sylius\Component\Core\Model\OrderInterface');
-//        }
-//
-//        $customer = $userEvent->getUser()->getCustomer();
-//        $cart->setCustomer($customer);
-//
-//        $this->cartManager->persist($cart);
-//        $this->cartManager->flush($cart);
+        $cart = $this->cartProvider->getCart();
+
+        if (!$cart instanceof OrderInterface) {
+            throw new UnexpectedTypeException($cart, 'Sylius\Component\Core\Model\OrderInterface');
+        }
+
+        $customer = $userEvent->getUser()->getCustomer();
+        $cart->setCustomer($customer);
+
+        $this->cartManager->persist($cart);
+        $this->cartManager->flush($cart);
     }
 
     public function interactiveBlame(InteractiveLoginEvent $interactiveLoginEvent)

@@ -32,12 +32,6 @@ class User extends BaseUser implements UserInterface
         $this->authorizationRoles = new ArrayCollection();
     }
 
-    protected function initializeCustomer()
-    {
-        $this->customer = new Customer();
-        $this->customer->setUser($this);
-    }
-
     /**
      * {@inheritdoc}
      */

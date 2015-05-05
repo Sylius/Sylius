@@ -74,10 +74,11 @@ class LoadApiData extends DataFixture
 
         /* @var $user UserInterface */
         $user = $this->getUserRepository()->createNew();
-        $customer = $user->getCustomer();
+        $customer = $this->getCustomerRepository()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
         $customer->setCurrency($currency);
+        $user->setCustomer($customer);
         $user->setUsername($email);
         $user->setEmail($email);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));

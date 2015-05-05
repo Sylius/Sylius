@@ -182,7 +182,7 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $resource = $this->domainManager->create($resource);
+            $resource = $this->domainManager->create($form->getData());
 
             if ($this->config->isApiRequest()) {
                 if ($resource instanceof ResourceEvent) {

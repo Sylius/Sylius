@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\UserBundle\Form\EventListener\CustomerRegistrationFormListener;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -21,6 +23,13 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class GuestType extends AbstractResourceType
 {
+    private $customerRepository;
+
+    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
+    {
+        parent::__construct($dataClass, $validationGroups);
+        $this->customerRepository = $customerRepository;
+    }
     /**
      * {@inheritdoc}
      */
@@ -30,6 +39,8 @@ class GuestType extends AbstractResourceType
             ->add('email', 'email', array(
                 'label' => 'sylius.form.guest.email.label',
             ))
+            ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
+            ->setDataLocked(false)
         ;
     }
 

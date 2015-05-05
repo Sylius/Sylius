@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -85,20 +86,23 @@ class MailerListener
      */
     public function sendUserConfirmationEmail(GenericEvent $event)
     {
-        $user = $event->getSubject();
+        $customer = $event->getSubject();
 
-        if (!$user instanceof UserInterface) {
+        if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
-                $user,
-                'Sylius\Component\Core\Model\UserInterface'
+                $customer,
+                'Sylius\Component\Core\Model\CustomerInterface'
             );
+        }
+
+        if (null === $user = $customer->getUser()) {
+            return;
         }
 
         if (!$user->isEnabled()) {
             return;
         }
-
-        $this->emailSender->send(Emails::USER_CONFIRMATION, array($user->getEmail()), array('user' => $user));
+        $this->emailSender->send(Emails::USER_CONFIRMATION, array($customer->getEmail()), array('user' => $user));
     }
 
     /**

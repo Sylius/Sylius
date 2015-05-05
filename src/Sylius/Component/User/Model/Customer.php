@@ -115,7 +115,10 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function setUser(UserInterface $user = null)
     {
-        $this->user = $user;
+        if ($this->user !== $user) {
+            $this->user = $user;
+            $this->assignCustomer($user);
+        }
 
         return $this;
     }
@@ -370,5 +373,15 @@ class Customer implements CustomerInterface, GroupableInterface
     public function __toString()
     {
         return (string)$this->getEmail();
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    protected function assignCustomer(UserInterface $user = null)
+    {
+        if (null !== $user) {
+            $user->setCustomer($this);
+        }
     }
 }
