@@ -90,7 +90,9 @@
             <argument type="service" id="service_container" />
         </service>
         <service id="sylius.security.user_login" class="%sylius.security.user_login.class%">
-            <argument type="service" id="service_container" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="security.user_checker" />
+            <argument type="service" id="event_dispatcher" />
         </service>
         <service id="sylius.user.user_reloader" class="%sylius.user.user_reloader.class%">
             <argument type="service" id="sylius.manager.user" />

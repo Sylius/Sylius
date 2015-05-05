@@ -11,37 +11,39 @@
 
 namespace Sylius\Bundle\UserBundle\Security;
 
+use Sylius\Bundle\UserBundle\Event\UserEvent;
+use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 /**
 * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
 */
 class UserLogin implements UserLoginInterface
 {
-    /**
-     * @var Container
-     */
-    private $container;
+    private $securityContext;
+    private $userChecker;
+    private $eventDispatcher;
 
-    /**
-     * @param Container $container
-     */
-    public function __construct(Container $container)
+    public function __construct(SecurityContextInterface $securityContext, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
     {
-        //TODO inject security context instead of whole container
-        $this->container = $container;
+        $this->securityContext = $securityContext;
+        $this->userChecker = $userChecker;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function login(UserInterface $user)
+    public function login(UserInterface $user, $firewallName = 'main')
     {
-        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-        $this->container->get('security.context')->setToken($token);
-        // TODO Check if not needed for sure
-//        $this->container->get('session')->set('_security_main', serialize($token));
+        $this->userChecker->checkPreAuth($user);
+
+        $token = new UsernamePasswordToken($user, null, $firewallName, $user->getRoles());
+        $this->securityContext->setToken($token);
+        $this->eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, new UserEvent($user));
     }
 }

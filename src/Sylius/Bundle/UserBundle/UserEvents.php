@@ -30,7 +30,6 @@ final class UserEvents
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
     const REQUEST_RESET_PASSWORD_PIN = 'sylius.user.password_reset.request.pin';
-
     /**
      * The RESETTING_RESET_SUCCESS event occurs when the resetting form is submitted successfully.
      *
@@ -45,4 +44,11 @@ final class UserEvents
      * The event listener method receives a Symfony\Component\EventDispatcher\GenericEvent instance.
      */
     const PASSWORD_CHANGE_SUCCESS = 'sylius.user.password_change.success';
+    /**
+     * The SECURITY_IMPLICIT_LOGIN event occurs when the user is logged in programmatically.
+     *
+     * This event allows you to access the response which will be sent.
+     * The event listener method receives a Sylius\Bundle\UserBundle\Event\UserEvent instance.
+     */
+    const SECURITY_IMPLICIT_LOGIN = 'sylius.user.security.implicit_login';
 }

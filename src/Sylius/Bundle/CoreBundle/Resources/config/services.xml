@@ -38,6 +38,7 @@
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
 
+        <parameter key="sylius.listener.cart_blamer.class">Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
@@ -220,6 +221,12 @@
         </service>
 
         <!-- listeners -->
+        <service id="sylius.listener.cart_blamer" class="%sylius.listener.cart_blamer.class%">
+            <argument type="service" id="sylius.manager.cart" />
+            <argument type="service" id="sylius.cart_provider" />
+            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="blame" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="interactiveBlame" />
+        </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />

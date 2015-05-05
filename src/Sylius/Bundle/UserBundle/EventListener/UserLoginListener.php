@@ -15,6 +15,7 @@ use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\Exception\AccountStatusException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -42,6 +43,11 @@ class UserLoginListener
             );
         }
 
-        $this->userLogin->login($user);
+        try {
+            $this->userLogin->login($user);
+        } catch (AccountStatusException $exception) {
+            // We simply do not authenticate users which do not pass the user
+            // checker (not enabled, expired, etc.).
+        }
     }
 }
