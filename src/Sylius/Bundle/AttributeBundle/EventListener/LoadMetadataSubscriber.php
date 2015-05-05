@@ -54,19 +54,22 @@ class LoadMetadataSubscriber implements EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
+        $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
             if ($class['attribute_value']['model'] !== $metadata->getName()) {
                 continue;
             }
 
+            $targetEntity = $class['subject'];
+            $targetEntityMetadata = $metadataFactory->getMetadataFor($targetEntity);
             $subjectMapping = array(
                 'fieldName'     => 'subject',
-                'targetEntity'  => $class['subject'],
+                'targetEntity'  => $targetEntity,
                 'inversedBy'    => 'attributes',
                 'joinColumns'   => array(array(
                     'name'                 => $subject.'_id',
-                    'referencedColumnName' => 'id',
+                    'referencedColumnName' => $targetEntityMetadata->fieldMappings['id']['columnName'],
                     'nullable'             => false,
                     'onDelete'             => 'CASCADE'
                 ))
@@ -74,12 +77,14 @@ class LoadMetadataSubscriber implements EventSubscriber
 
             $this->mapManyToOne($metadata, $subjectMapping);
 
+            $attributeModel = $class['attribute']['model'];
+            $attributeMetadata = $metadataFactory->getMetadataFor($attributeModel);
             $attributeMapping = array(
                 'fieldName'     => 'attribute',
-                'targetEntity'  => $class['attribute']['model'],
+                'targetEntity'  => $attributeModel,
                 'joinColumns'   => array(array(
                     'name'                 => 'attribute_id',
-                    'referencedColumnName' => 'id',
+                    'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
                     'nullable'             => false,
                     'onDelete'             => 'CASCADE'
                 ))
