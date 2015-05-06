@@ -24,6 +24,7 @@
     <services>
         <service id="sylius.routing.loader.crud" class="%sylius.routing.loader.crud.class%">
             <tag name="routing.loader" />
+            <argument>%kernel.root_dir%/config/routing/</argument>
         </service>
         <service id="sylius.routing.loader.api" class="%sylius.routing.loader.api.class%">
             <tag name="routing.loader" />

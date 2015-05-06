@@ -157,6 +157,11 @@ class Configuration
         return sprintf('%s:%s.%s', $this->templateNamespace ?: ':', $name, $this->templatingEngine);
     }
 
+    public function getSection()
+    {
+        return $this->parameters->get('section');
+    }
+
     public function getTemplate($name)
     {
         return $this->parameters->get('template', $this->getTemplateName($name));
