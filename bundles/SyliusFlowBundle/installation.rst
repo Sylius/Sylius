@@ -139,7 +139,7 @@ In order for this to work, we need to register `SyliusScenario` and tag it as ``
         <call method="setContainer">
             <argument type="service" id="service_container" />
         </call>
-        <tag name="sylius.process.scenario" alias="sylius_flow" />
+        <tag name="sylius.process.scenario" alias="acme_flow" />
     </service>
 
 The configured alias will be used later in the route parameters to identify the scenario as you can have more then one.
@@ -151,7 +151,7 @@ Import routing configuration:
 
 .. code-block:: yaml
 
-    sylius_flow:
+    acme_flow:
         resource: @SyliusFlowBundle/Resources/config/routing.yml
         prefix: /flow
 
@@ -167,5 +167,5 @@ Step templates are like any other action template, usually due to the nature of 
 .. code-block:: jinja
 
     <h1>Welcome to second step</h1>
-    <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'sylius_flow', 'stepName': 'first'}) }}" class="btn btn-success"><i class="icon-backward icon-white"></i> back</a>
-    <a href="{{ path('sylius_flow_forward', {'scenarioAlias': 'sylius_flow', 'stepName': 'second'}) }}" class="btn btn-success">forward <i class="icon-forward icon-white"></i></a>
+    <a href="{{ path('sylius_flow_display', {'scenarioAlias': 'acme_flow', 'stepName': 'first'}) }}" class="btn btn-success"><i class="icon-backward icon-white"></i> back</a>
+    <a href="{{ path('sylius_flow_forward', {'scenarioAlias': 'acme_flow', 'stepName': 'second'}) }}" class="btn btn-success">forward <i class="icon-forward icon-white"></i></a>
