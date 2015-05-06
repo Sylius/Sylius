@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ContentBundle\Form\Type;
 
+use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -22,10 +23,48 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ImagineBlockType extends AbstractResourceType
 {
     /**
+     * @var string
+     */
+    protected $dataClass = null;
+
+    /**
+     * @var string[]
+     */
+    protected $validationGroups = array();
+
+    /**
+     * @var FilterConfiguration
+     */
+    protected $filterConfiguration;
+
+    /**
+     * ImagineBlockType constructor.
+     *
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param FilterConfiguration $filterConfiguration
+     */
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        FilterConfiguration $filterConfiguration
+    ) {
+        $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
+        $this->filterConfiguration = $filterConfiguration;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
+        $filters = array();
+
+        foreach (array_keys($this->filterConfiguration->all()) as $filter) {
+            $filters[$filter] = sprintf('sylius.form.imagine_block.filter.%s', $filter);
+        }
+
         $builder
             ->add('publishable', null, array(
                 'label' => 'sylius.form.imagine_block.publishable'
@@ -55,11 +94,7 @@ class ImagineBlockType extends AbstractResourceType
                 'required' => false
             ))
             ->add('filter', 'choice', array(
-                'choices' => array(
-                        'slideshow_small'  => 'sylius.form.imagine_block.slideshow_small',
-                        'slideshow_medium' => 'sylius.form.imagine_block.slideshow_medium',
-                        'slideshow_large'  => 'sylius.form.imagine_block.slideshow_large',
-                ),
+                'choices' => $filters,
                 'label' => 'sylius.form.imagine_block.filter',
                 'required' => false,
             ))

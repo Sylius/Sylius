@@ -38,6 +38,7 @@
         <service id="sylius.form.type.imagine_block" class="%sylius.form.type.imagine_block.class%">
             <argument>%sylius.model.imagine_block.class%</argument>
             <argument>%sylius.validation_group.imagine_block%</argument>
+            <argument type="service" id="liip_imagine.filter.configuration"></argument>
             <tag name="form.type" alias="sylius_imagine_block" />
         </service>
         <service id="sylius.form.type.slideshow_block" class="%sylius.form.type.slideshow_block.class%">
