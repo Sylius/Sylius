@@ -54,6 +54,11 @@ class Grid
     /**
      * @var array
      */
+    private $rowActions = array();
+
+    /**
+     * @var array
+     */
     private $sorting = array();
 
     /**
@@ -63,10 +68,11 @@ class Grid
      * @param array $columns
      * @param array $filters
      * @param array $actions
+     * @param array $rowActions
      * @param array $sorting
      * @param array $options
      */
-    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $sorting, array $options)
+    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $rowActions, array $sorting, array $options)
     {
         $this->applicationName = $applicationName;
         $this->resourceName = $resourceName;
@@ -90,9 +96,16 @@ class Grid
             }
         }
 
+        foreach ($rowActions as $action) {
+            if (!$action instanceof Action) {
+                throw new \InvalidArgumentException('Expected Action definition instance.');
+            }
+        }
+
         $this->columns = $columns;
         $this->filters = $filters;
         $this->actions = $actions;
+        $this->rowActions = $rowActions;
         $this->sorting = $sorting;
         $this->options = $options;
     }
@@ -105,6 +118,7 @@ class Grid
         $columns = array();
         $filters = array();
         $actions = array();
+        $rowActions = array();
 
         foreach ($configuration['columns'] as $name => $columnConfiguration) {
             $columns[$name] = Column::createFromArray($name, $columnConfiguration);
@@ -115,13 +129,16 @@ class Grid
         foreach ($configuration['actions'] as $name => $actionConfiguration) {
             $actions[$name] = Action::createFromArray($name, $actionConfiguration);
         }
+        foreach ($configuration['row_actions'] as $name => $actionConfiguration) {
+            $rowActions[$name] = Action::createFromArray($name, $actionConfiguration);
+        }
 
         $sorting = array_key_exists('sorting', $configuration) ? $configuration['sorting'] : array();
         $options = array_key_exists('options', $configuration) ? $configuration['options'] : array();
 
         list($applicationName, $resourceName) = explode('.', $configuration['resource']);
 
-        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $sorting, $options);
+        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $rowActions, $sorting, $options);
     }
 
     /**
@@ -208,6 +225,14 @@ class Grid
     public function getActions()
     {
         return $this->actions;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRowActions()
+    {
+        return $this->rowActions;
     }
 
     /**

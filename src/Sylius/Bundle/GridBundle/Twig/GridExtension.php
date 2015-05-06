@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Twig;
 
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Column;
 use Sylius\Component\Grid\Renderer\ColumnRendererInterface;
@@ -37,13 +38,20 @@ class GridExtension extends \Twig_Extension
     private $columnRenderer;
 
     /**
+     * @var ParametersParser
+     */
+    private $parametersParser;
+
+    /**
      * @param FormFactoryInterface    $formFactory
      * @param ColumnRendererInterface $columnRenderer
+     * @param ParmaetersParser        $parametersParser
      */
-    function __construct(FormFactoryInterface $formFactory, ColumnRendererInterface $columnRenderer)
+    function __construct(FormFactoryInterface $formFactory, ColumnRendererInterface $columnRenderer, ParametersParser $parametersParser)
     {
         $this->formFactory = $formFactory;
         $this->columnRenderer = $columnRenderer;
+        $this->parametersParser = $parametersParser;
     }
 
     /**
@@ -125,13 +133,30 @@ class GridExtension extends \Twig_Extension
 
     /**
      * @param \Twig_Environment $twig
-     * @param $object
      * @param GridView $gridView
      * @param Action $actionDefinition
+     * @param Request $request
+     * @param $object
      */
-    public function renderAction(\Twig_Environment $twig, $object, GridView $gridView, Action $actionDefinition)
+    public function renderAction(\Twig_Environment $twig, GridView $gridView, Action $actionDefinition, Request $request, $object = null)
     {
-        return $twig->render(sprintf('SyliusGridBundle:Action:_%s.html.twig', $actionDefinition->getType()), array('resource' => $object, 'action' => $actionDefinition));
+        $options = $actionDefinition->getOptions();
+
+        $parameters = isset($options['parameters']) ? $options['parameters'] : array();
+        $parameters = $this->parametersParser->parse($parameters, $request);
+
+        if (null !== $object) {
+            $parameters = $this->parametersParser->process($parameters, $object);
+            $parameters = $parameters[0];
+        }
+
+        $context = array('action' => $actionDefinition, 'parameters' => $parameters);
+
+        if (null !== $object) {
+            $parameters['resource'] = $object;
+        }
+
+        return $twig->render(sprintf('SyliusGridBundle:Action:_%s.html.twig', $actionDefinition->getType()), $context);
     }
 
     /**

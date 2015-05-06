@@ -24,6 +24,7 @@
         <service id="sylius.twig.extension.grid" class="%sylius.twig.extension.grid.class%" public="false">
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.grid_column_renderer" />
+            <argument type="service" id="sylius.controller.parameters_parser" />
             <tag name="twig.extension" />
         </service>
     </services>

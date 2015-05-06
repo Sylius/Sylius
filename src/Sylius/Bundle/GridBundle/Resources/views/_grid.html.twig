@@ -27,7 +27,7 @@
                 {% endfor %}
                 {% if definition.actions|length > 0 %}
                     <td>
-                        {% for action in definition.actions %}
+                        {% for action in definition.rowActions %}
                             {{ sylius_grid_render_action(resource, grid, action) }}
                         {% endfor %}
                     </td>
