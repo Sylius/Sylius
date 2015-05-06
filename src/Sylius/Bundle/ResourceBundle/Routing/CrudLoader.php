@@ -47,7 +47,7 @@ class CrudLoader implements LoaderInterface
             $configuration = $this->loadFile($resource);
         }
 
-        $modulePrefix = (isset($configuration['module'])) ? '_'.$configuration['module'] : '';
+        $section = (isset($configuration['section'])) ? $configuration['section'] : '';
         $resource = (isset($configuration['resource'])) ? $configuration['resource'] : $resource;
         $templates = $this->generateRouteTemplates((isset($configuration['templates'])) ? $configuration['templates'] : array());
 
@@ -64,20 +64,24 @@ class CrudLoader implements LoaderInterface
             $gridRouteParameters['grid'] = $configuration['grid'];
         }
 
-        $gridRoute = $this->generateRoute('grid', '', $applicationName, $modulePrefix, $resourceName, $rootPath, $gridRouteParameters, array('GET'));
+        $gridRoute = $this->generateRoute('grid', '', $applicationName, $section, $resourceName, $rootPath, $gridRouteParameters, array('GET'));
         $routes->add($gridRoute['name'], $gridRoute['route']);
         $indexRouteName = $gridRoute['name'];
 
         // POST request.
-        $createRoute = $this->generateRoute('create', 'new', $applicationName, $modulePrefix, $resourceName, $rootPath, array('template' => $templates['create'], 'redirect' => $indexRouteName), array('GET', 'POST'));
+        $createRoute = $this->generateRoute('create', 'new', $applicationName, $section, $resourceName, $rootPath, array('template' => $templates['create'], 'redirect' => $indexRouteName), array('GET', 'POST'));
         $routes->add($createRoute['name'], $createRoute['route']);
 
+        // Mass action.
+        $massRoute = $this->generateRoute('mass', 'mass', $applicationName, $section, $resourceName, $rootPath, array(), array('POST'));
+        $routes->add($massRoute['name'], $massRoute['route']);
+
         // PUT request.
-        $updateRoute = $this->generateRoute('update', '{id}/edit', $applicationName, $modulePrefix, $resourceName, $rootPath, array('template' => $templates['update'], 'redirect' => $indexRouteName), array('GET', 'PUT', 'PATCH'));
+        $updateRoute = $this->generateRoute('update', '{id}/edit', $applicationName, $section, $resourceName, $rootPath, array('template' => $templates['update'], 'redirect' => $indexRouteName), array('GET', 'PUT', 'PATCH'));
         $routes->add($updateRoute['name'], $updateRoute['route']);
 
         // DELETE request.
-        $deleteRoute = $this->generateRoute('delete', '{id}', $applicationName, $modulePrefix, $resourceName, $rootPath, array('redirect' => $indexRouteName), array('DELETE'));
+        $deleteRoute = $this->generateRoute('delete', '{id}', $applicationName, $section, $resourceName, $rootPath, array('redirect' => $indexRouteName), array('DELETE'));
         $routes->add($deleteRoute['name'], $deleteRoute['route']);
 
         return $routes;
@@ -126,7 +130,7 @@ class CrudLoader implements LoaderInterface
      * @param string $routeName
      * @param string $routePathSuffix
      * @param string $applicationName
-     * @param string $modulePrefix
+     * @param string $section
      * @param string $resourceName
      * @param string $rootPath
      * @param array  $routeParameters
@@ -134,12 +138,14 @@ class CrudLoader implements LoaderInterface
      *
      * @return array
      */
-    private function generateRoute($routeName, $routePathSuffix, $applicationName, $modulePrefix, $resourceName, $rootPath, array $routeParameters, array $routeMethods)
+    private function generateRoute($routeName, $routePathSuffix, $applicationName, $section, $resourceName, $rootPath, array $routeParameters, array $routeMethods)
     {
-        $routeFullName = sprintf('%s%s_%s_%s', $applicationName, $modulePrefix, $resourceName, $routeName);
+        $sectionPrefix = empty($section) ? '' : '_'.$section;
+
+        $routeFullName = sprintf('%s%s_%s_%s', $applicationName, $sectionPrefix, $resourceName, $routeName);
         $defaults = array(
             '_controller' => sprintf('%s.controller.%s:%sAction', $applicationName, $resourceName, $routeName),
-            '_sylius' => array_merge($routeParameters, array('section' => $modulePrefix)),
+            '_sylius' => array_merge($routeParameters, array('section' => $section)),
         );
 
         $route = new Route($rootPath.$routePathSuffix, $defaults, array(), array(), '', array(), $routeMethods);

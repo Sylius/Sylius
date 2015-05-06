@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Twig;
 
+use Sylius\Bundle\ResourceBundle\Controller\Configuration;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Column;
@@ -87,9 +88,9 @@ class GridExtension extends \Twig_Extension
      * @param \Twig_Environment $twig
      * @param GridView $gridView
      */
-    public function render(\Twig_Environment $twig, GridView $gridView)
+    public function render(\Twig_Environment $twig, GridView $gridView, Configuration $configuration)
     {
-        return $twig->render('SyliusGridBundle::_grid.html.twig', array('grid' => $gridView));
+        return $twig->render('SyliusGridBundle::_grid.html.twig', array('grid' => $gridView, 'configuration' => $configuration));
     }
 
     /**

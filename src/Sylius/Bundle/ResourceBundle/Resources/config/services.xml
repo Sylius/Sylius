@@ -26,6 +26,7 @@
         <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
         <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
+        <parameter key="sylius.form.type.resource_autocomplete.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteType</parameter>
 
         <parameter key="sylius.event_subscriber.load_orm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber</parameter>
         <parameter key="sylius.event_subscriber.load_odm_metadata.class">Sylius\Bundle\ResourceBundle\EventListener\LoadODMMetadataSubscriber</parameter>

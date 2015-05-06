@@ -185,13 +185,16 @@ class ResourceController extends FOSRestController
         }
 
         $parameters = new GridParameters($request->query->all());
+
         $gridView = $gridViewBuilder->build($grid, $parameters);
 
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('index.html'))
-            ->setTemplateVar('grid')
-            ->setData($gridView)
+            ->setData(array(
+                'grid'          => $gridView,
+                'configuration' => $this->config
+            ))
         ;
 
         return $this->handleView($view);
@@ -339,6 +342,33 @@ class ResourceController extends FOSRestController
     public function moveDownAction(Request $request)
     {
         return $this->move($request, -1);
+    }
+
+    /**
+     * @param Request $request
+     * @param int     $version
+     *
+     * @return RedirectResponse
+     */
+    public function massAction(Request $request)
+    {
+        $actionType = $request->request->get('action');
+
+        if (!$actionType) {
+            throw new \InvalidArgumentException('Missing name of the mass action!');
+        }
+
+        $ids = $request->request->get('ids');
+
+        if (null === $ids) {
+            throw new \InvalidArgumentException('No items selected.');
+        }
+
+        $resources = $this->getRepository()->findBy(array('id' => $ids));
+
+        $this->container->get('sylius.mass_action_dispatcher')->dispatch($actionType, $resources);
+
+        return $this->redirectHandler->redirectToIndex();
     }
 
     public function updateStateAction(Request $request, $transition, $graph = null)

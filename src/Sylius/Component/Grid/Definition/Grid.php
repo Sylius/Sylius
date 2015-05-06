@@ -59,6 +59,11 @@ class Grid
     /**
      * @var array
      */
+    private $massActions = array();
+
+    /**
+     * @var array
+     */
     private $sorting = array();
 
     /**
@@ -69,10 +74,11 @@ class Grid
      * @param array $filters
      * @param array $actions
      * @param array $rowActions
+     * @param array $massActions
      * @param array $sorting
      * @param array $options
      */
-    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $rowActions, array $sorting, array $options)
+    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $rowActions, array $massActions, array $sorting, array $options)
     {
         $this->applicationName = $applicationName;
         $this->resourceName = $resourceName;
@@ -102,10 +108,17 @@ class Grid
             }
         }
 
+        foreach ($massActions as $action) {
+            if (!$action instanceof Action) {
+                throw new \InvalidArgumentException('Expected Action definition instance.');
+            }
+        }
+
         $this->columns = $columns;
         $this->filters = $filters;
         $this->actions = $actions;
         $this->rowActions = $rowActions;
+        $this->massActions = $massActions;
         $this->sorting = $sorting;
         $this->options = $options;
     }
@@ -119,6 +132,7 @@ class Grid
         $filters = array();
         $actions = array();
         $rowActions = array();
+        $massActions = array();
 
         foreach ($configuration['columns'] as $name => $columnConfiguration) {
             $columns[$name] = Column::createFromArray($name, $columnConfiguration);
@@ -133,12 +147,18 @@ class Grid
             $rowActions[$name] = Action::createFromArray($name, $actionConfiguration);
         }
 
+        if (array_key_exists('mass_actions', $configuration)) {
+            foreach ($configuration['mass_actions'] as $name => $actionConfiguration) {
+                $massActions[$name] = Action::createFromArray($name, $actionConfiguration);
+            }
+        }
+
         $sorting = array_key_exists('sorting', $configuration) ? $configuration['sorting'] : array();
         $options = array_key_exists('options', $configuration) ? $configuration['options'] : array();
 
         list($applicationName, $resourceName) = explode('.', $configuration['resource']);
 
-        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $rowActions, $sorting, $options);
+        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $rowActions, $massActions, $sorting, $options);
     }
 
     /**
@@ -233,6 +253,14 @@ class Grid
     public function getRowActions()
     {
         return $this->rowActions;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMassActions()
+    {
+        return $this->massActions;
     }
 
     /**

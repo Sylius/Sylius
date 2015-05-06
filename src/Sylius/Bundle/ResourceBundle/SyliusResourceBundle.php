@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ObjectToIdentifierServicePass;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterMassActionsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -33,5 +34,6 @@ class SyliusResourceBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new ObjectToIdentifierServicePass());
+        $container->addCompilerPass(new RegisterMassActionsPass());
     }
 }

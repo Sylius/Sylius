@@ -77,7 +77,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     {
         $this->queryBuilder->setParameter($field, $value);
 
-        return $this->queryBuilder->expr()->eq(sprintf('o.%s', $field), sprintf(':%s', $field));
+        return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':'.$field);
     }
 
     /**
@@ -87,7 +87,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     {
         $this->queryBuilder->setParameter($field, $value);
 
-        return $this->queryBuilder->expr()->neq(sprintf('o.%s', $field), sprintf(':%s', $field));
+        return $this->queryBuilder->expr()->neq($this->getFieldName($field), ':'.$field);
     }
 
     /**
@@ -95,56 +95,65 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function lessThan($field, $value)
     {
-        $this->queryBuilder->andWhere(sprintf('o.%s < :%s', $field, $field))->setParameter($field, $value);
+        $this->queryBuilder->andWhere($this->getFieldName($field).' < :'.$field)->setParameter($field, $value);
     }
 
     public function lessThanOrEqual($field, $value)
     {
-        $this->queryBuilder->andWhere(sprintf('o.%s =< :%s', $field, $field))->setParameter($field, $value);
+        $this->queryBuilder->andWhere($this->getFieldName($field).' =< :'.$field)->setParameter($field, $value);
     }
 
     public function greaterThan($field, $value)
     {
-        $this->queryBuilder->andWhere(sprintf('o.%s > :%s', $field, $field))->setParameter($field, $value);
+        $this->queryBuilder->andWhere($this->getFieldName($field).' > :'.$field)->setParameter($field, $value);
     }
 
     public function greaterThanOrEqual($field, $value)
     {
-        $this->queryBuilder->andWhere(sprintf('o.%s => :%s', $field, $field))->setParameter($field, $value);
+        $this->queryBuilder->andWhere($this->getFieldName($field).' => :%s'.$field)->setParameter($field, $value);
     }
 
     public function in($field, array $values)
     {
-        return $this->queryBuilder->expr()->in(sprintf('o.%s', $field), $values);
+        return $this->queryBuilder->expr()->in($this->getFieldName($field), $values);
     }
 
     public function notIn($field, array $values)
     {
-        return $this->queryBuilder->expr()->notIn(sprintf('o.%s', $field), $values);
+        return $this->queryBuilder->expr()->notIn($this->getFieldName($field), $values);
     }
 
     public function isNull($field)
     {
-        return $this->queryBuilder->expr()->isNull(sprintf('o.%s', $field));
+        return $this->queryBuilder->expr()->isNull($this->getFieldName($field));
     }
 
     public function isNotNull($field)
     {
-        return $this->queryBuilder->expr()->isNotNull(sprintf('o.%s', $field));
+        return $this->queryBuilder->expr()->isNotNull($this->getFieldName($field));
     }
 
     public function like($field, $pattern)
     {
-        return $this->queryBuilder->expr()->like(sprintf('o.%s', $field), $this->queryBuilder->expr()->literal($pattern));
+        return $this->queryBuilder->expr()->like($this->getFieldName($field), $this->queryBuilder->expr()->literal($pattern));
     }
 
     public function notLike($field, $pattern)
     {
-        return $this->queryBuilder->expr()->notLike(sprintf('o.%s', $field), $this->queryBuilder->expr()->literal($pattern));
+        return $this->queryBuilder->expr()->notLike($this->getFieldName($field), $this->queryBuilder->expr()->literal($pattern));
     }
 
     public function orderBy($field, $direction)
     {
-        return $this->queryBuilder->orderBy(sprintf('o.%s', $field), $direction);
+        return $this->queryBuilder->orderBy($this->getFieldName($field), $direction);
+    }
+
+    private function getFieldName($field)
+    {
+        if (false === strpos($field, '.')) {
+            return $this->queryBuilder->getRootAlias().'.'.$field;
+        }
+
+        return $field;
     }
 }

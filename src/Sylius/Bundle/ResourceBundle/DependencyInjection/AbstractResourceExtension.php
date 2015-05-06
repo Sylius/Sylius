@@ -24,6 +24,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -183,6 +184,14 @@ abstract class AbstractResourceExtension extends Extension
             if (!isset($serviceClasses['form']) || !is_array($serviceClasses['form'])) {
                 continue;
             }
+
+            $autocompleteForm = new Definition('%sylius.form.type.resource_autocomplete%');
+            $autocompleteForm->setArguments(array(
+                sprintf('%s_%s_autocomplete', $this->applicationName, $model),
+                new Reference(sprintf('%s.repository.%s', $this->applicationName, $model)),
+                new Reference('router'),
+                'sylius_resource_autocomplete_suggestions'
+            ));
 
             if ($this->isTranslationSupported() && isset($serviceClasses['translation'])) {
                 $this->registerFormTypes(array('classes' => array(sprintf('%s_translation', $model) => $serviceClasses['translation'])), $container);
