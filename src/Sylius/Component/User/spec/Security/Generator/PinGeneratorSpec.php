@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\User\Security\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

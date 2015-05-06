@@ -28,11 +28,17 @@ class UserLoginListener
      */
     protected $userLogin;
 
+    /**
+     * @param UserLoginInterface $userLogin
+     */
     public function __construct(UserLoginInterface $userLogin)
     {
         $this->userLogin = $userLogin;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function login(GenericEvent $event)
     {
         $customer = $event->getSubject();

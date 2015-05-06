@@ -22,6 +22,9 @@ use Symfony\Component\Form\FormEvents;
  */
 class UserRegistrationFormListener implements EventSubscriberInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -29,6 +32,9 @@ class UserRegistrationFormListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function submit(FormEvent $event)
     {
         $customer = $event->getData();

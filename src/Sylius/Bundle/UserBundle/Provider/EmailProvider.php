@@ -16,6 +16,9 @@ namespace Sylius\Bundle\UserBundle\Provider;
  */
 class EmailProvider extends UserProvider
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function findUser($email)
     {
         return $this->userRepository->findOneByEmail($email);

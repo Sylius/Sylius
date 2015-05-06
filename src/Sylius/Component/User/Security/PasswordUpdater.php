@@ -15,8 +15,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class PasswordUpdater implements PasswordUpdaterInterface
 {
     /**

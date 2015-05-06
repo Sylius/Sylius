@@ -25,7 +25,6 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
 {
     protected $configFiles = array(
         'services',
-        'controller'
     );
 
     /**

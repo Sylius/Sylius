@@ -22,8 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserType extends AbstractResourceType
 {
     /**
-    * @param string                 $dataClass
-    * @param string[]               $validationGroups
+    * @param string   $dataClass
+    * @param string[] $validationGroups
     */
     public function __construct($dataClass, array $validationGroups)
     {
@@ -59,6 +59,7 @@ class UserType extends AbstractResourceType
                 if ($data && !$data->getId()) {
                     $groups[] = 'user_create';
                 }
+
                 return $groups;
             },
             'cascade_validation' => true

@@ -6,9 +6,10 @@ sylius:
         user:
             email: Email
             enabled: Enabled
-            password: 
+            password:
                 label: Password
                 confirmation: Verification
+            remember_me: Remember me
             shipping_address: Shipping address
         customer:
             first_name: First name

@@ -18,17 +18,17 @@ use PhpSpec\ObjectBehavior;
  */
 class GroupSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\User\Model\Group');
     }
 
-    public function it_implements_Sylius_group_interface()
+    function it_implements_Sylius_group_interface()
     {
         $this->shouldImplement('Sylius\Component\User\Model\GroupInterface');
     }
 
-    public function it_sets_name()
+    function it_sets_name()
     {
         $this->setName('testGroup');
 

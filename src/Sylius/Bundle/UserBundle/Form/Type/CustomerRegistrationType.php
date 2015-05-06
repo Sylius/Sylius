@@ -23,8 +23,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CustomerRegistrationType extends AbstractResourceType
 {
+    /**
+     * @var RepositoryInterface
+     */
     private $customerRepository;
 
+    /**
+     * @param string              $dataClass
+     * @param array               $validationGroups
+     * @param RepositoryInterface $customerRepository
+     */
     public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
     {
         parent::__construct($dataClass, $validationGroups);

@@ -18,12 +18,15 @@ namespace Sylius\Bundle\UserBundle\Form\Model;
  */
 class PasswordReset
 {
+    /**
+     * @var string
+     */
     private $email;
 
     /**
      * Gets the value of email.
      *
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
@@ -33,7 +36,7 @@ class PasswordReset
     /**
      * Sets the value of email.
      *
-     * @param mixed $email the email
+     * @param string $email the email
      *
      * @return self
      */

@@ -16,7 +16,13 @@ namespace Sylius\Bundle\UserBundle\Form\Model;
  */
 class ChangePassword
 {
+    /**
+     * @var string
+     */
     private $currentPassword;
+    /**
+     * @var string
+     */
     private $newPassword;
 
     /**

@@ -372,7 +372,7 @@ class Customer implements CustomerInterface, GroupableInterface
 
     public function __toString()
     {
-        return (string)$this->getEmail();
+        return (string) $this->getEmail();
     }
 
     /**

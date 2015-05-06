@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * User delete listener.
@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class UserDeleteListener
 {
     /**
-     * @var SecurityContext
+     * @var SecurityContextInterface
      */
     protected $securityContext;
     /**
@@ -37,10 +37,10 @@ class UserDeleteListener
     protected $session;
 
     /**
-     * @param SecurityContext $securityContext
+     * @param SecurityContext  $securityContext
      * @param SessionInterface $session
      */
-    public function __construct(SecurityContext $securityContext, SessionInterface $session)
+    public function __construct(SecurityContextInterface $securityContext, SessionInterface $session)
     {
         $this->securityContext = $securityContext;
         $this->session = $session;

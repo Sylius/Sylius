@@ -41,9 +41,9 @@ class TokenProvider implements TokenProviderInterface
     private $tokenLength;
 
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryInterface    $repository
      * @param EntityManagerInterface $manager
-     * @param GeneratorInterface $generator
+     * @param GeneratorInterface     $generator
      */
     public function __construct(RepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator, $tokenLength)
     {

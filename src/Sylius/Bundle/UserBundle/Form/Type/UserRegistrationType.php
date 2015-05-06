@@ -21,8 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserRegistrationType extends AbstractResourceType
 {
     /**
-    * @param string                 $dataClass
-    * @param string[]               $validationGroups
+    * @param string   $dataClass
+    * @param string[] $validationGroups
     */
     public function __construct($dataClass, array $validationGroups)
     {

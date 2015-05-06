@@ -19,8 +19,14 @@ use Sylius\Component\User\Model\UserInterface;
  */
 class UserEvent extends Event
 {
+    /**
+     * @var UserInterface
+     */
     private $user;
 
+    /**
+     * @param UserInterface $user
+     */
     public function __construct(UserInterface $user)
     {
         $this->user = $user;

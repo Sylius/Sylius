@@ -16,7 +16,6 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;

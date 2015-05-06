@@ -16,7 +16,7 @@ Feature: Cart
           And the following products exist:
               | name    | price | taxons       |
               | PHP Top | 85    | PHP T-Shirts |
-      And there is default currency configured
+          And there is default currency configured
 
     Scenario: The cart is maintained after user log in
         Given I am on the store homepage

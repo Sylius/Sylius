@@ -26,11 +26,17 @@ class UserReloaderListener
      */
     protected $userReloader;
 
+    /**
+     * @param UserReloaderInterface $userReloader
+     */
     public function __construct(UserReloaderInterface $userReloader)
     {
         $this->userReloader = $userReloader;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function reloadUser(GenericEvent $event)
     {
         $user = $event->getSubject();

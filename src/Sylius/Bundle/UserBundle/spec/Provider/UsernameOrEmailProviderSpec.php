@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\UserBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;

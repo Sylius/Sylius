@@ -21,8 +21,15 @@
 
         {{ form_row(form._username) }}
         {{ form_row(form._password) }}
-        {# {{ form_row(form.rememberMe) }} #}
-
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-9">
+                <div class="checkbox">
+                    <label for="remember_me">
+                        {{ 'sylius.form.user.remember_me'|trans }} &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    </label>
+                </div>
+            </div>
+        </div>
 
         {{ form_rest(form) }}
     <div class="pull-right">
@@ -34,9 +41,12 @@
     </fieldset>
     
     <div class="form-actions clearfix">
-        <button class="btn btn-primary" type="submit">
+        <div class="pull-right">
+            {{ render(url('hwi_oauth_connect')) }}
+        </div>
+        <button class="btn btn-primary btn-lg" type="submit">
             <i class="icon-lock"></i>
-            {{ 'sylius.security.login.button'|trans|raw }}
+            {{ 'sylius.security.login.button'|trans }}
         </button>
     </div>
 </form>

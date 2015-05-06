@@ -18,7 +18,6 @@ use Sylius\Component\User\Context\CustomerContextInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

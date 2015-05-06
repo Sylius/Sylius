@@ -29,11 +29,17 @@ class MailerListener
      */
     protected $emailSender;
 
+    /**
+     * @param SenderInterface $emailSender
+     */
     public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function sendResetPasswordTokenEmail(GenericEvent $event)
     {
         $user = $event->getSubject();
@@ -53,6 +59,9 @@ class MailerListener
             );
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function sendResetPasswordPinEmail(GenericEvent $event)
     {
         $user = $event->getSubject();

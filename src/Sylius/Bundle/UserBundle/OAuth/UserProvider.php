@@ -35,20 +35,16 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @var RepositoryInterface
      */
     protected $oauthRepository;
-
     /**
      * @var RepositoryInterface
      */
     protected $userRepository;
-
     /**
      * @var ObjectManager
      */
     protected $userManager;
 
     /**
-     * Constructor.
-     *
      * @param RepositoryInterface    $userRepository
      * @param RepositoryInterface    $oauthRepository
      * @param ObjectManager          $userManager
@@ -126,7 +122,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * Attach OAuth sign-in provider account to existing user
      *
-     * @param UserInterface   $user
+     * @param UserInterface         $user
      * @param UserResponseInterface $response
      *
      * @return UserInterface

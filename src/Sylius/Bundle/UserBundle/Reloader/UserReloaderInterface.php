@@ -18,5 +18,8 @@ use Sylius\Component\User\Model\UserInterface;
 */
 interface UserReloaderInterface
 {
+    /**
+     * @param UserInterface $user
+     */
     public function reloadUser(UserInterface $user);
 }

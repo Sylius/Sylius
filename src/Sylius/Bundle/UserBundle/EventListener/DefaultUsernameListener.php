@@ -22,6 +22,9 @@ use Sylius\Component\User\Model\UserInterface;
  */
 class DefaultUsernameListener
 {
+    /**
+     * @param LifecycleEventArgs $event
+     */
     public function prePersist(LifecycleEventArgs $event)
     {
         $item = $event->getEntity();
@@ -35,6 +38,9 @@ class DefaultUsernameListener
         }
     }
 
+    /**
+     * @param LifecycleEventArgs $event
+     */
     public function preUpdate(LifecycleEventArgs $event)
     {
         $item = $event->getEntity();

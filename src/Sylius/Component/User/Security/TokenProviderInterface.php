@@ -12,8 +12,8 @@
 namespace Sylius\Component\User\Security;
 
 /**
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 interface TokenProviderInterface
 {
     /**

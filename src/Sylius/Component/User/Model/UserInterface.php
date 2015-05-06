@@ -39,7 +39,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getEmail();
 
     /**
-     * @param string $email
+     * @param  string $email
      * @return self
      */
     public function setEmail($email);
@@ -52,7 +52,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     public function getEmailCanonical();
 
     /**
-     * @param string $emailCanonical
+     * @param  string $emailCanonical
      * @return self
      */
     public function setEmailCanonical($emailCanonical);

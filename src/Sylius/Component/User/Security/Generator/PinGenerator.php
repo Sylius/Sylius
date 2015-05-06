@@ -14,7 +14,7 @@ namespace Sylius\Component\User\Security\Generator;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
- * 
+ *
  * This class provides numeric pin
  */
 class PinGenerator implements GeneratorInterface
@@ -22,7 +22,7 @@ class PinGenerator implements GeneratorInterface
     /**
      * Generates random string of numbers with given length
      *
-     * @param int $length has to be lower then 10 because of integer range
+     * @param  int    $length has to be lower then 10 because of integer range
      * @return string
      */
     public function generate($length)

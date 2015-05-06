@@ -24,7 +24,7 @@ sylius:
         promotion:
             channels: Channel
         coupon:
-            per_user_usage_limit: Per-User Usage Limity
+            per_customer_usage_limit: Per-Customer Usage Limit
         group:
             name: Name
             roles: Roles

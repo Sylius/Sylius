@@ -21,13 +21,28 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 /**
 * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+* @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
 */
 class UserLogin implements UserLoginInterface
 {
+    /**
+     * @var SecurityContextInterface
+     */
     private $securityContext;
+    /**
+     * @var UserCheckerInterface
+     */
     private $userChecker;
+    /**
+     * @var EventDispatcherInterface
+     */
     private $eventDispatcher;
 
+    /**
+     * @param SecurityContextInterface $securityContext
+     * @param UserCheckerInterface     $userChecker
+     * @param EventDispatcherInterface $eventDispatcher
+     */
     public function __construct(SecurityContextInterface $securityContext, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
     {
         $this->securityContext = $securityContext;

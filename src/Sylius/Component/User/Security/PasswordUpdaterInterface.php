@@ -14,8 +14,8 @@ namespace Sylius\Component\User\Security;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 interface PasswordUpdaterInterface
 {
     public function updatePassword(UserInterface $user);

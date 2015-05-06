@@ -12,26 +12,33 @@
 namespace Sylius\Component\User\Model;
 
 /**
- * User OAuth model.
- *
  * @author Sergio Marchesini
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class UserOAuth implements UserOAuthInterface
 {
+    /**
+     * @var int
+     */
     protected $id;
+    /**
+     * @var string
+     */
     protected $provider;
+    /**
+     * @var string
+     */
     protected $identifier;
+    /**
+     * @var string
+     */
     protected $accessToken;
-
     /**
      * @var UserInterface
      */
     protected $user;
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()

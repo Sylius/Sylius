@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
-use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

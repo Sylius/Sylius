@@ -48,7 +48,7 @@
         <parameter key="sylius.listener.user_login.class">Sylius\Bundle\UserBundle\EventListener\UserLoginListener</parameter>
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
-        
+
         <parameter key="sylius.controller.security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
     </parameters>
 
@@ -64,7 +64,7 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-        
+
         <!-- Utils -->
         <service id="sylius.user.canonicalizer" class="%sylius.user.canonicalizer.class%" />
         <service id="sylius.user.pin_generator" class="%sylius.user.pin_generator.class%" />
@@ -85,7 +85,7 @@
             <argument type="service" id="sylius.user.pin_generator" />
             <argument>%sylius.user.resetting.pin_length%</argument>
         </service>
-        
+
         <service id="security.authentication_utils" class="%sylius.security.authentication_utils.class%">
             <argument type="service" id="service_container" />
         </service>

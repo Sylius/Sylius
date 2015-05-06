@@ -83,15 +83,16 @@ class UserController extends ResourceController
     public function requestPasswordResetTokenAction(Request $request)
     {
         $generator = $this->get('sylius.user.token_provider');
+
         return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
     public function requestPasswordResetPinAction(Request $request)
     {
         $generator = $this->get('sylius.user.pin_provider');
+
         return $this->prepereResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
-
 
     public function resetPasswordAction(Request $request)
     {
@@ -118,6 +119,7 @@ class UserController extends ResourceController
 
             if (is_numeric($request->get('token'))) {
                 $url = $this->generateUrl('sylius_user_request_password_reset_pin');
+
                 return new RedirectResponse($url);
             }
 
@@ -139,7 +141,6 @@ class UserController extends ResourceController
             $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, $event);
 
             $this->domainManager->update($user);
-
 
             $this->addFlash('success', 'sylius.account.password.change_success');
 

@@ -18,8 +18,8 @@ interface GeneratorInterface
 {
     /**
      * Generates some random string
-     * 
-     * @param int $length determines length of a generated string
+     *
+     * @param  int    $length determines length of a generated string
      * @return string
      */
     public function generate($length);

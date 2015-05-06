@@ -22,6 +22,7 @@ interface UserLoginInterface
      * Log in user.
      *
      * @param UserInterface $user
+     * @param string        $firewallName
      */
-    public function login(UserInterface $user);
+    public function login(UserInterface $user, $firewallName = 'main');
 }

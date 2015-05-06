@@ -32,6 +32,7 @@ class TokenGenerator implements GeneratorInterface
         $hash = sha1(microtime(true));
         // 40 is a length of sha1
         $startPosition = min(40 - $length, mt_rand(0, 33));
+
         return substr($hash, $startPosition, $length);
     }
 

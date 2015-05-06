@@ -16,6 +16,9 @@ namespace Sylius\Bundle\UserBundle\Provider;
  */
 class UsernameOrEmailProvider extends UserProvider
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function findUser($usernameOrEmail)
     {
         if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {

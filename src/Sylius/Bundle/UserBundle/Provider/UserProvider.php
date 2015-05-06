@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\UserBundle\Provider;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -25,21 +24,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 abstract class UserProvider implements UserProviderInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var UserRepositoryInterface
      */
     protected $userRepository;
-
     /**
      * @var CanonicalizerInterface
      */
     protected $canonicalizer;
 
+    /**
+     * @param UserRepositoryInterface $userRepository
+     * @param CanonicalizerInterface  $canonicalizer
+     */
     public function __construct(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
         $this->userRepository = $userRepository;
         $this->canonicalizer = $canonicalizer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function loadUserByUsername($usernameOrEmail)
     {
         $usernameOrEmail = $this->canonicalizer->canonicalize($usernameOrEmail);
@@ -54,6 +59,9 @@ abstract class UserProvider implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function refreshUser(UserInterface $user)
     {
         if (!$user instanceof SyliusUserInterface) {
@@ -65,8 +73,14 @@ abstract class UserProvider implements UserProviderInterface
         return $this->userRepository->find($user->getId());
     }
 
-    protected abstract function findUser($uniqueIdentifier);
+    /**
+     * {@inheritDoc}
+     */
+    abstract protected function findUser($uniqueIdentifier);
 
+    /**
+     * {@inheritDoc}
+     */
     public function supportsClass($class)
     {
         return $class === 'Sylius\Component\User\Model\UserInterface';

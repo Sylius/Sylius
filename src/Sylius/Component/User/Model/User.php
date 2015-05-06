@@ -342,7 +342,7 @@ class User implements UserInterface
      */
     public function setEnabled($boolean)
     {
-        $this->enabled = (Boolean)$boolean;
+        $this->enabled = (Boolean) $boolean;
 
         return $this;
     }
@@ -612,7 +612,7 @@ class User implements UserInterface
      */
     public function __toString()
     {
-        return (string)$this->getUsername();
+        return (string) $this->getUsername();
     }
 
     /**
