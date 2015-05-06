@@ -10,6 +10,7 @@ Feature: Import profiles
             | ProductImportProfile | Lorem ipsum | product_import | csv_reader    | Delimiter:;,Enclosure:",File path:\tmp\output.csv | product_writer | Rows number:10       |
             | UsersImportProfile   | Lorem ipsum | user_import    | csv_reader    | Delimiter:;,Enclosure:",File path:\tmp\output.csv | user_writer    | Rows number:10       |
         And there is default currency configured
+        And there is default channel configured
         And there are following users:
             | email          | enabled  | created at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |

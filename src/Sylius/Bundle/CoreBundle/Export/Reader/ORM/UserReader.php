@@ -11,60 +11,47 @@
 
 namespace Sylius\Bundle\CoreBundle\Export\Reader\ORM;
 
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityRepository;
+use Psr\Log\LoggerInterface;
+use Sylius\Bundle\CoreBundle\Export\Reader\ORM\Processor\UserProcessorInterface;
+use Sylius\Component\ImportExport\Model\JobInterface;
+use Sylius\Component\ImportExport\Reader\ReaderInterface;
 
 /**
- * Export user reader.
- *
- * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserReader extends AbstractDoctrineReader
+class UserReader implements ReaderInterface
 {
-    private $userRepository;
+    /**
+     * @var ManagerRegistry
+     */
+    private $doctrineRegistry;
 
-    public function __construct(RepositoryInterface $userRepository)
+    /**
+     * @var UserProcessorInterface
+     */
+    private $userProcessor;
+
+    /**
+     * @var array
+     */
+    private $metadata = array();
+
+    /**
+     * @param UserProcessorInterface $userProcessor
+     * @param ManagerRegistry        $doctrineRegistry
+     */
+    public function __construct(
+        UserProcessorInterface $userProcessor,
+        ManagerRegistry $doctrineRegistry
+    )
     {
-        $this->userRepository = $userRepository;
-    }
-
-    public function process($user)
-    {
-        $shippingAddress = $user->getShippingAddress();
-        $billingAddress = $user->getBillingAddress();
-        $createdAt = (string) $user->getCreatedAt()->format('Y-m-d H:m:s');
-
-        return array(
-            'id'                            => $user->getId(),
-            'first_name'                    => $user->getFirstName(),
-            'last_name'                     => $user->getLastName(),
-            'username'                      => $user->getUsername(),
-            'email'                         => $user->getEmail(),
-            'shipping_address_company'      => $shippingAddress ? $shippingAddress->getCompany() : null,
-            'shipping_address_country'      => $shippingAddress ? $shippingAddress->getCountry() : null,
-            'shipping_address_province'     => $shippingAddress ? $shippingAddress->getProvince() : null,
-            'shipping_address_city'         => $shippingAddress ? $shippingAddress->getCity() : null,
-            'shipping_address_street'       => $shippingAddress ? $shippingAddress->getStreet() : null,
-            'shipping_address_postcode'     => $shippingAddress ? $shippingAddress->getPostcode() : null,
-            'shipping_address_phone_number' => $shippingAddress ? $shippingAddress->getPhoneNumber() : null,
-            'billingAddress'                => $billingAddress ? $billingAddress->getCompany() : null,
-            'billing_address_country'       => $billingAddress ? $billingAddress->getCountry() : null,
-            'billing_address_province'      => $billingAddress ? $billingAddress->getProvince() : null,
-            'billing_address_city'          => $billingAddress ? $billingAddress->getCity() : null,
-            'billing_address_street'        => $billingAddress ? $billingAddress->getStreet() : null,
-            'billing_address_postcode'      => $billingAddress ? $billingAddress->getPostcode() : null,
-            'billing_address_phone_number'  => $billingAddress ? $billingAddress->getPhoneNumber() : null,
-            'enabled'                       => $user->isEnabled(),
-            'currency'                      => $user->getCurrency(),
-            'created_at'                    => $createdAt,
-        );
-    }
-
-    public function getQuery()
-    {
-        $query = $this->userRepository->createQueryBuilder('u')
-            ->getQuery();
-
-        return $query;
+        $this->userProcessor = $userProcessor;
+        $this->doctrineRegistry = $doctrineRegistry;
+        $this->metadata['result_code'] = 0;
+        $this->metadata['offset'] = 0;
     }
 
     /**
@@ -72,6 +59,60 @@ class UserReader extends AbstractDoctrineReader
      */
     public function getType()
     {
-        return 'user';
+        return 'user_orm';
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getResultCode()
+    {
+        return $this->metadata['result_code'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function read(array $configuration, LoggerInterface $logger)
+    {
+        $manager = $this->doctrineRegistry->getManager();
+        $repository = $manager->getRepository($configuration['class']);
+
+        if (!$repository instanceof EntityRepository) {
+            throw new \InvalidArgumentException(
+                'Repository gotten from manager has to be instance of Doctrine\ORM\EntityRepository'
+            );
+        }
+
+        $read = $this->readFromRepository($configuration, $repository);
+        $this->metadata['offset'] += $configuration['batch_size'];
+
+        if (empty($read)) return null;
+
+        return $this->userProcessor->convert($read, $configuration['date_format']);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function finalize(JobInterface $job)
+    {
+        $job->addMetadata($this->metadata);
+    }
+
+    /**
+     * @param array            $configuration
+     * @param EntityRepository $repository
+     *
+     * @return array
+     */
+    private function readFromRepository(array $configuration, $repository)
+    {
+        $query = $repository->createQueryBuilder('o')
+            ->setFirstResult($this->metadata['offset'])
+            ->setMaxResults($configuration['batch_size'])
+            ->getQuery();
+
+        return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 }

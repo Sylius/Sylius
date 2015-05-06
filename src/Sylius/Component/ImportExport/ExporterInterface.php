@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\ImportExport;
 
+use Psr\Log\LoggerInterface;
 use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 
 /**
@@ -19,9 +20,10 @@ use Sylius\Component\ImportExport\Model\ExportProfileInterface;
 interface ExporterInterface
 {
     /**
-     * Export data based on given export profile
+     * Export data based on given export profile.
      *
      * @param ExportProfileInterface $exportProfile
+     * @param LoggerInterface        $logger
      */
-    public function export(ExportProfileInterface $exportProfile);
+    public function export(ExportProfileInterface $exportProfile, LoggerInterface $logger);
 }

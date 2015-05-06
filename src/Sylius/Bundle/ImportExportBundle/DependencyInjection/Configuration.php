@@ -38,6 +38,8 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('timezone')->defaultValue('Europe/London')->end()
+                ->scalarNode('log_path')->defaultValue(__DIR__.'/../../../../../app')->end()
             ->end()
         ;
 

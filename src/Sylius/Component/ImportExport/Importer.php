@@ -11,12 +11,8 @@
 
 namespace Sylius\Component\ImportExport;
 
-use Sylius\Component\ImportExport\Model\ImportProfile;
-use Sylius\Component\Registry\ServiceRegistryInterface;
-use Doctrine\ORM\EntityManager;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\ImportExport\Model\Job;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
+use Sylius\Component\ImportExport\Model\ImportProfileInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -26,60 +22,10 @@ class Importer extends JobRunner implements ImporterInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct(
-        ServiceRegistryInterface $readerRegistry,
-        ServiceRegistryInterface $writerRegistry,
-        RepositoryInterface $importJobRepository,
-        EntityManager $entityManager,
-        Logger $logger)
+    public function import(ImportProfileInterface $importProfile, LoggerInterface $logger)
     {
-        parent::__construct($readerRegistry, $writerRegistry, $importJobRepository, $entityManager, $logger);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function import(ImportProfile $importProfile)
-    {
-        $job = $this->startJob($importProfile);
-
-        if (null === $readerType = $importProfile->getReader()) {
-            $this->endJob($job, Job::FAILED);
-            $this->logger->addError(sprintf('ImportProfile: %d. Cannot read data with ImportProfile instance without reader defined.', $importProfile->getId()));
-            throw new \InvalidArgumentException('Cannot read data with ImportProfile instance without reader defined.');
-        }
-        if (null === $writerType = $importProfile->getWriter()) {
-            $this->endJob($job, Job::FAILED);
-            $this->logger->addError(sprintf('ImportProfile: %d. Cannot read data with ImportProfile instance without reader defined.', $importProfile->getId()));
-            throw new \InvalidArgumentException('Cannot write data with ImportProfile instance without writer defined.');
-        }
-
-
-        $reader = $this->readerRegistry->get($readerType);
-
-        $reader->setConfiguration($importProfile->getReaderConfiguration(), $this->logger);
-
-        $writer = $this->writerRegistry->get($writerType);
-        $writer->setConfiguration($importProfile->getWriterConfiguration(), $this->logger);
-
-        try {
-            while (null !== ($readLine = $reader->read())) {
-                $writer->write($readLine);
-            }
-        } catch (\Exception $e) {
-            $this->endJob($job, Job::FAILED);
-            $this->logger->addError(sprintf('ImportProfile: %d. Fatal error occured during reading/writing. Error message: %s', $importProfile->getId(), $e->getMessage()));
-        }
-
-        $writer->finalize($job);
-        $reader->finalize($job);
-
-        $jobStatus = Job::COMPLETED;
-
-        if ($reader->getResultCode() !== 0 || $writer->getResultCode() !== 0) {
-            $jobStatus = ($reader->getResultCode() < 0 || $writer->getResultCode() < 0) ? Job::FAILED : Job::ERROR;
-        }
-
-        $this->endJob($job, $jobStatus);
+        $importJob = $this->start($importProfile, $logger);
+        $jobStatus = $this->run($importProfile, $logger, $importJob);
+        $this->end($importJob, $logger, $jobStatus);
     }
 }

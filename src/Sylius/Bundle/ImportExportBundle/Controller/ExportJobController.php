@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ImportExportBundle\Controller;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sylius\Component\ImportExport\JobInterface;
 
 class ExportJobController extends ResourceController
 {
@@ -38,5 +39,10 @@ class ExportJobController extends ResourceController
                 'Content-Disposition' => 'attachment; filename="' . $fileName . '.' . $fileInfo->getExtension()
             )
         );
+    }
+
+    public function checkJobStatusAction(JobInterface $job)
+    {
+        
     }
 }

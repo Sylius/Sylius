@@ -12,9 +12,10 @@
 namespace Sylius\Component\ImportExport\Writer;
 
 use EasyCSV\Writer;
-use Monolog\Logger;
 use Gaufrette\Filesystem;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\ImportExport\Model\JobInterface;
+use Sylius\Component\ImportExport\Writer\Factory\CsvWriterFactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -27,65 +28,50 @@ class CsvWriter implements WriterInterface
      * @var boolean
      */
     private $running = false;
-
     /**
      * @var Writer
      */
     private $csvWriter;
-
-    /**
-     * @var array
-     */
-    private $configuration;
-
     /**
      * @var boolean
      */
     private $isHeaderSet = false;
-
-    /**
-     * Work logger
-     *
-     * @var Logger
-     */
-    protected $logger;
-
     /**
      * @var Filesystem
      */
     private $filesystem;
-
     /**
      * @var int
      */
     private $resultCode = 0;
-
     /**
      * @var array
      */
-    private $metadatas = array();
+    private $metadata = array();
+    /**
+     * @var CsvWriterFactoryInterface
+     */
+    private $csvWriterFactory;
 
     /**
-     * Constructor
-     *
      * @param Filesystem $filesystem
+     * @param CsvWriterFactoryInterface $csvWriterFactory
      */
-    public function __construct(Filesystem $filesystem)
+    public function __construct(Filesystem $filesystem, CsvWriterFactoryInterface $csvWriterFactory)
     {
         $this->filesystem = $filesystem;
+        $this->csvWriterFactory = $csvWriterFactory;
     }
 
     /**
-     * @param array $items
+     * {@inheritdoc}
      */
-    public function write(array $items)
+    public function write(array $items, array $configuration, LoggerInterface $logger)
     {
         if (!$this->running) {
-            $this->csvWriter = new Writer($this->configuration['file'], 'w');
-            $this->csvWriter->setDelimiter($this->configuration['delimiter']);
-            $this->csvWriter->setEnclosure($this->configuration['enclosure']);
+            $this->csvWriter = $this->csvWriterFactory->create($configuration);
             $this->running = true;
-            $this->metadatas['written_row'] = 0;
+            $this->metadata['row'] = 0;
         }
 
         if (!isset($items[0])) {
@@ -93,27 +79,23 @@ class CsvWriter implements WriterInterface
         }
 
         if (!$this->isHeaderSet) {
-
             $this->csvWriter->writeRow(array_keys($items[0]));
             $this->isHeaderSet = true;
         }
 
         $this->csvWriter->writeFromArray($items);
-        $this->metadatas['row'] = $this->metadatas['row'] + sizeof($items);
+        $this->metadata['row'] += sizeof($items);
     }
 
     /**
-     * @param array $configuration
+     * {@inheritdoc}
      */
-    public function finalize(JobInterface $job)
+    public function finalize(JobInterface $job, array $configuration)
     {
-        $fileName = sprintf('export_%d_%s.csv', $job->getProfile()->getId(), $job->getStartTime()->format('Y_m_d_H_i_s'));
-        $this->filesystem->write($fileName, file_get_contents($this->configuration['file']));
-        $job->setFilePath($fileName);
-        foreach ($this->metadatas as $key => $metadata) {
-            $job->addMetadata($key,$metadata);
-        }
-        $job->addMetadata('result_code',$this->resultCode);
+        $this->metadata['file_path'] = $configuration['file'];
+        $this->metadata['result_code'] = $this->resultCode;
+
+        $job->addMetadata($this->metadata);
     }
 
     /**
@@ -122,14 +104,6 @@ class CsvWriter implements WriterInterface
     public function getResultCode()
     {
         return $this->resultCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setConfiguration(array $configuration, Logger $logger)
-    {
-        $this->configuration = $configuration;
     }
 
     /**

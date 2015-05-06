@@ -60,7 +60,7 @@ abstract class Job implements JobInterface
     /**
      * @var array
      */
-    protected $metadata;
+    protected $metadata = array();
 
     /**
      * Job status
@@ -71,8 +71,6 @@ abstract class Job implements JobInterface
     const RUNNING   = 'running';
 
     /**
-     * Gets the value of id.
-     *
      * @return integer
      */
     public function getId()
@@ -81,8 +79,6 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of status.
-     *
      * @return string
      */
     public function getStatus()
@@ -91,9 +87,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of status.
-     *
-     * @param string $status the status
+     * @param string $status
      *
      * @return self
      */
@@ -105,8 +99,6 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of startTime.
-     *
      * @return \DateTime
      */
     public function getStartTime()
@@ -115,9 +107,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of startTime.
-     *
-     * @param \DateTime $startTime the start time
+     * @param \DateTime $startTime
      *
      * @return self
      */
@@ -129,8 +119,6 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of endTime.
-     *
      * @return \DateTime
      */
     public function getEndTime()
@@ -139,9 +127,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of endTime.
-     *
-     * @param \DateTime $endTime the end time
+     * @param \DateTime $endTime
      *
      * @return self
      */
@@ -153,8 +139,6 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of createdAt.
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -163,9 +147,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of createdAt.
-     *
-     * @param \DateTime $createdAt the created at
+     * @param \DateTime $createdAt
      *
      * @return self
      */
@@ -177,8 +159,6 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of updatedAt.
-     *
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -187,9 +167,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of updatedAt.
-     *
-     * @param \DateTime $updatedAt the updated at
+     * @param \DateTime $updatedAt
      *
      * @return self
      */
@@ -201,8 +179,6 @@ abstract class Job implements JobInterface
     }
     
     /**
-     * Gets job's profile.
-     *
      * @return ProfileInterface
      */
     public function getProfile()
@@ -211,9 +187,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets job's profile.
-     *
-     * @param ProfileInterface $profile the profile
+     * @param ProfileInterface $profile
      *
      * @return self
      */
@@ -225,8 +199,6 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Gets the value of filePath.
-     *
      * @return string
      */
     public function getFilePath()
@@ -235,9 +207,7 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of filePath.
-     *
-     * @param string $filePath the filePath
+     * @param string $filePath
      *
      * @return self
      */
@@ -267,15 +237,25 @@ abstract class Job implements JobInterface
     }
 
     /**
-     * Sets the value of metadata.
-     *
-     * @param array $metadata the metadata
+     * @param array $metadata
      *
      * @return self
      */
     public function setMetadata(array $metadata)
     {
         $this->metadata = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * @param array $metadata
+     *
+     * @return self
+     */
+    public function addMetadata(array $metadata)
+    {
+        $this->metadata = array_merge($this->metadata, $metadata);
 
         return $this;
     }

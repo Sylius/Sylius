@@ -38,12 +38,20 @@ class BuildReaderFormListener implements EventSubscriberInterface
      */
     private $factory;
 
+    /**
+     * Constructor.
+     * @param ServiceRegistryInterface $readerRegistry
+     * @param FormFactoryInterface $factory
+     */
     public function __construct(ServiceRegistryInterface $readerRegistry, FormFactoryInterface $factory)
     {
         $this->readerRegistry = $readerRegistry;
         $this->factory = $factory;
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -52,6 +60,9 @@ class BuildReaderFormListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function preSetData(FormEvent $event)
     {
         $exportProfiler = $event->getData();
@@ -67,6 +78,9 @@ class BuildReaderFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($event->getForm(), $exportProfiler->getReader(), $exportProfiler->getReaderConfiguration());
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function preBind(FormEvent $event)
     {
         $data = $event->getData();
@@ -78,6 +92,11 @@ class BuildReaderFormListener implements EventSubscriberInterface
         $this->addConfigurationFields($event->getForm(), $data['reader']);
     }
 
+    /**
+     * @param FormInterface $form
+     * @param $exporterType
+     * @param array $configuration
+     */
     protected function addConfigurationFields(FormInterface $form, $exporterType, array $configuration = array())
     {
         $exporter = $this->readerRegistry->get($exporterType);

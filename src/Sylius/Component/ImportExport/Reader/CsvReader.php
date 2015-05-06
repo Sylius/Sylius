@@ -12,8 +12,9 @@
 namespace Sylius\Component\ImportExport\Reader;
 
 use EasyCSV\Reader;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\ImportExport\Model\JobInterface;
+use Sylius\Component\ImportExport\Reader\Factory\CsvReaderFactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -26,44 +27,41 @@ class CsvReader implements ReaderInterface
      * @var boolean
      */
     private $running = false;
-
     /**
      * @var Reader
      */
     private $csvReader;
-
-    /**
-     * @var array
-     */
-    private $configuration;
-
-    /**
-     * Work logger
-     *
-     * @var Logger
-     */
-    protected $logger;
-    
     /**
      * @var int
      */
     private $resultCode = 0;
+    /**
+     * @var CsvReaderFactoryInterface
+     */
+    private $csvReaderFactory;
+
+    /**
+     * CsvReader constructor.
+     * @param CsvReaderFactoryInterface $csvReaderFactory
+     */
+    public function __construct(CsvReaderFactoryInterface $csvReaderFactory)
+    {
+        $this->csvReaderFactory = $csvReaderFactory;
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function read()
+    public function read(array $configuration, LoggerInterface $logger)
     {
         if (!$this->running) {
-            $this->csvReader = new Reader($this->configuration['file'], 'r', $this->configuration["headers"]);
-            $this->csvReader->setDelimiter($this->configuration['delimiter']);
-            $this->csvReader->setEnclosure($this->configuration['enclosure']);
+            $this->csvReader = $this->csvReaderFactory->create($configuration);
             $this->running = true;
         }
 
         $data = array();
 
-        for ($i = 0; $i < $this->configuration['batch']; $i++) {
+        for ($i = 0; $i < $configuration['batch']; $i++) {
             $row = $this->csvReader->getRow();
 
             if (false === $row) {
@@ -79,15 +77,9 @@ class CsvReader implements ReaderInterface
     /**
      * {@inheritdoc}
      */
-    public function setConfiguration(array $configuration, Logger $logger)
-    {
-        $this->configuration = $configuration;
-        $this->logger = $logger;
-    }
-
     public function finalize(JobInterface $job)
     {
-        $job->addMetadata('result_code',$this->resultCode);
+        $job->addMetadata(array('result_code' => $this->resultCode));
     }
 
     /**

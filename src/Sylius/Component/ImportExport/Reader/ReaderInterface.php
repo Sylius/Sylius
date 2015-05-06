@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\ImportExport\Reader;
 
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\ImportExport\Model\JobInterface;
 
 /**
@@ -20,28 +20,24 @@ use Sylius\Component\ImportExport\Model\JobInterface;
 interface ReaderInterface
 {
     /**
-     * Reads data based on given configuration
+     * Reads data based on given configuration.
+     * Should log information about reading in logger.
+     *
+     * @param array           $configuration
+     * @param LoggerInterface $logger
      *
      * @return array
      */
-    public function read();
-
+    public function read(array $configuration, LoggerInterface $logger);
     /**
-     * Sets reader configuration
-     *
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration, Logger $logger);
-
-    /**
-     * Finalize job, add meta data
+     * Finalize job, add meta data to it.
      * 
      * @param JobInterface $job
      */
     public function finalize(JobInterface $job);
-
     /**
-     * Return code of error if any
+     * Return code of error if any.
+     *
      * = 0 - no error
      * > 0 - exception
      * < 0 - fatal error
@@ -49,9 +45,8 @@ interface ReaderInterface
      * @return int
      */
     public function getResultCode();
-
     /**
-     * Returns type of reader
+     * Returns type of reader.
      *
      * @return string
      */

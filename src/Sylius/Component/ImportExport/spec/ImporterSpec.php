@@ -12,10 +12,16 @@
 namespace spec\Sylius\Component\ImportExport;
 
 use Doctrine\ORM\EntityManager;
+use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
+use Sylius\Component\ImportExport\Logger\Factory\StreamHandlerFactoryInterface;
+use Sylius\Component\ImportExport\Logger\ImportExportLogger;
 use Sylius\Component\ImportExport\Model\ImportJobInterface;
 use Sylius\Component\ImportExport\Model\ImportProfileInterface;
+use Sylius\Component\ImportExport\Provider\CurrentDateProviderInterface;
 use Sylius\Component\ImportExport\Reader\ReaderInterface;
 use Sylius\Component\ImportExport\Writer\WriterInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -26,9 +32,21 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ImporterSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $readerRegistry, ServiceRegistryInterface $writerRegistry, RepositoryInterface $importJobRepository, EntityManager $entityManager, Logger $logger)
+    function let(
+        CurrentDateProviderInterface $dateProvider,
+        EntityManager $entityManager,
+        RepositoryInterface $importJobRepository,
+        ServiceRegistryInterface $readerRegistry,
+        ServiceRegistryInterface $writerRegistry
+    )
     {
-        $this->beConstructedWith($readerRegistry, $writerRegistry, $importJobRepository, $entityManager, $logger);
+        $this->beConstructedWith(
+            $dateProvider,
+            $entityManager,
+            $importJobRepository,
+            $readerRegistry,
+            $writerRegistry
+        );
     }
 
     function it_is_initializable()
@@ -41,86 +59,151 @@ class ImporterSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\ImportExport\ImporterInterface');
     }
 
-    // function it_imports_data_with_given_importer(
-    //     $importJobRepository,
-    //     $logger,
-    //     $readerRegistry,
-    //     $writerRegistry,
-    //     ImportJobInterface $importJob,
-    //     ImportProfileInterface $importProfile,
-    //     ReaderInterface $reader,
-    //     WriterInterface $writer)
-    // {
-    //     $importJobRepository->createNew()->willReturn($importJob);
-    //     $importProfile->getId()->willReturn(1);
+    function it_imports_data_with_given_importer(
+        $dateProvider,
+        $importJobRepository,
+        $entityManager,
+        $readerRegistry,
+        $writerRegistry,
+        \DateTime $dateTime1,
+        \DateTime $dateTime2,
+        ImportJobInterface $importJob,
+        ImportProfileInterface $importProfile,
+        LoggerInterface $logger,
+        ReaderInterface $reader,
+        WriterInterface $writer
+    )
+    {
+        $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
+        $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
+        $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
 
-    //     $startTime = new \DateTime();
-    //     $importJob->setStartTime($startTime)->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->setStatus('running')->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->setProfile($importProfile)->shouldBeCalled()->willReturn($importJob);
+        $importJobRepository->createNew()->willReturn($importJob);
+        $importJob->getId()->willReturn(2);
+        $importJob->setStartTime($dateTime1)->shouldBeCalled();
+        $importJob->getStartTime()->willReturn($dateTime1);
+        $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
+        $importJob->setProfile($importProfile)->shouldBeCalled();
+        $importJob->setUpdatedAt($dateTime2)->shouldBeCalled();
+        $importJob->setEndTime($dateTime2)->shouldBeCalled();
+        $importJob->getEndTime()->willReturn($dateTime2);
 
-    //     $importJob->getId()->willReturn(1);
-    //     $importJob->getStartTime()->willReturn($startTime);
+        $logger->info("Job: 2; EndTime: 2015-06-29 13:40:00")->shouldBeCalled();
+        $logger->info("Profile: 1; StartTime: 2015-06-29 12:40:00")->shouldBeCalled();
 
-    //     $logger->info(sprintf("Profile: 1; StartTime: %s", $startTime->format('Y-m-d H:i:s')))->shouldBeCalled();
-    //     $importProfile->addJob($importJob)->shouldBeCalled();
+        $entityManager->persist(Argument::type('Sylius\Component\ImportExport\Model\ImportJobInterface'))->shouldBeCalledTimes(2);
+        $entityManager->persist(Argument::type('Sylius\Component\ImportExport\Model\ImportProfileInterface'))->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalledTimes(2);
 
-    //     $importProfile->getReader()->willReturn('doctrine');
-    //     $importProfile->getReaderConfiguration()->willReturn(array());
-    //     $importProfile->getWriter()->willReturn('csv');
-    //     $importProfile->getWriterConfiguration()->willReturn(array());
+        $importProfile->getId()->willReturn(1);
+        $importProfile->getReader()->willReturn('doctrine');
+        $importProfile->getReaderConfiguration()->willReturn(array());
+        $importProfile->getWriter()->willReturn('csv');
+        $importProfile->getWriterConfiguration()->willReturn(array());
+        $importProfile->addJob($importJob)->shouldBeCalled();
 
-    //     $readerRegistry->get('doctrine')->willReturn($reader);
-    //     $reader->setConfiguration(array())->shouldBeCalled();
-    //     $reader->read()->willReturn(array(array('readData')));
+        $readerRegistry->get('doctrine')->willReturn($reader);
+        $reader->read(array(), $logger)->willReturn(array('readData1'), array('readData2'), null);
+        $reader->finalize($importJob)->shouldBeCalled();
+        $reader->getResultCode()->willReturn(0);
 
-    //     $writerRegistry->get('csv')->willReturn($writer);
-    //     $writer->setConfiguration(array())->shouldBeCalled();
+        $writerRegistry->get('csv')->willReturn($writer);
+        $writer->write(array('readData1'), array(), $logger)->shouldBeCalled();
+        $writer->write(array('readData2'), array(), $logger)->shouldBeCalled();
+        $writer->finalize($importJob, array())->shouldBeCalled();
+        $writer->getResultCode()->willReturn(0);
 
-    //     $writer->write(array('readData'))->shouldBeCalled();
+        $this->import($importProfile, $logger);
+    }
 
-    //     $endTime = new \DateTime();
-    //     $importJob->setUpdatedAt($endTime)->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->setEndTime($endTime)->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->setStatus('completed')->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->getEndTime()->shouldBeCalled()->willReturn($endTime);
-    //     $logger->info(sprintf("Job: 1; EndTime: %s", $endTime->format('Y-m-d H:i:s')))->shouldBeCalled();
+     function it_does_not_allow_to_import_data_without_reader_defined(
+         $dateProvider,
+         $importJobRepository,
+         $entityManager,
+         \DateTime $dateTime1,
+         \DateTime $dateTime2,
+         ImportJobInterface $importJob,
+         ImportProfileInterface $importProfile,
+         LoggerInterface $logger
+     )
+     {
+         $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
+         $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
+         $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
 
-    //     $this->import($importProfile);
-    // }
+         $importJobRepository->createNew()->willReturn($importJob);
+         $importJob->getId()->willReturn(2);
+         $importJob->setStartTime($dateTime1)->shouldBeCalled();
+         $importJob->getStartTime()->willReturn($dateTime1);
+         $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
+         $importJob->setProfile($importProfile)->shouldBeCalled();
+         $importJob->setUpdatedAt($dateTime2)->shouldBeCalled();
+         $importJob->setEndTime($dateTime2)->shouldBeCalled();
+         $importJob->getEndTime()->willReturn($dateTime2);
 
-    // function it_does_not_allow_to_import_data_without_reader_defined(
-    //     $importJobRepository,
-    //     $logger,
-    //     ImportJobInterface $importJob,
-    //     ImportProfileInterface $importProfile)
-    // {
-    //     $importJobRepository->createNew()->willReturn($importJob);
-    //     $importProfile->getId()->willReturn(1);
+         $importJobRepository->createNew()->willReturn($importJob);
+         $importProfile->getId()->willReturn(1);
+         $importProfile->addJob($importJob)->shouldBeCalled();
 
-    //     $startTime = new \DateTime();
-    //     $importJob->setStartTime($startTime)->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->setStatus('running')->shouldBeCalled()->willReturn($importJob);
-    //     $importJob->setProfile($importProfile)->shouldBeCalled()->willReturn($importJob);
+         $logger->info("Profile: 1; StartTime: 2015-06-29 12:40:00")->shouldBeCalled();
+         $logger->error('Profile: 1. Cannot read data with Profile instance without reader defined.')->shouldBeCalled();
+         $logger->info("Job: 2; EndTime: 2015-06-29 13:40:00")->shouldBeCalled();
 
-    //     $importJob->getId()->willReturn(1);
-    //     $importJob->getStartTime()->willReturn($startTime);
+         $entityManager->persist(Argument::type('Sylius\Component\ImportExport\Model\ImportJobInterface'))->shouldBeCalledTimes(2);
+         $entityManager->persist(Argument::type('Sylius\Component\ImportExport\Model\ImportProfileInterface'))->shouldBeCalled();
+         $entityManager->flush()->shouldBeCalledTimes(2);
 
-    //     $logger->info(sprintf("Profile: 1; StartTime: %s", $startTime->format('Y-m-d H:i:s')))->shouldBeCalled();
-    //     $importProfile->addJob($importJob)->shouldBeCalled();
+         $importProfile->getId()->willReturn(1);
+         $importProfile->getReader()->willReturn(null);
 
-    //     $logger->error(sprintf('ImportProfile: %d. Cannot read data with ImportProfile instance without reader defined.', $importProfile->getId()))->shouldBeCalled();
+         $this->shouldThrow(new \InvalidArgumentException('Cannot read data with Profile instance without reader defined.'))
+         ->duringImport($importProfile, $logger);
+     }
 
-    //     $importProfile->getReader()->willReturn(null);
-    //     $this->shouldThrow(new \InvalidArgumentException('Cannot read data with ImportProfile instance without reader defined.'))
-    //     ->duringImport($importProfile);
-    // }
+    function it_does_not_allow_to_import_data_without_writer_defined(
+        $dateProvider,
+        $importJobRepository,
+        $entityManager,
+        \DateTime $dateTime1,
+        \DateTime $dateTime2,
+        ImportJobInterface $importJob,
+        ImportProfileInterface $importProfile,
+        LoggerInterface $logger
+    )
+    {
+        $dateProvider->getCurrentDate()->willReturn($dateTime1, $dateTime2);
+        $dateTime1->format('Y-m-d H:i:s')->willReturn('2015-06-29 12:40:00');
+        $dateTime2->format('Y-m-d H:i:s')->willReturn('2015-06-29 13:40:00');
 
-    // function it_does_not_allow_to_import_data_without_writer_defined(ImportProfileInterface $importProfile)
-    // {
-    //     $importProfile->getReader()->willReturn('csv_reader');
-    //     $importProfile->getWriter()->willReturn(null);
-    //     $this->shouldThrow(new \InvalidArgumentException('Cannot write data with ImportProfile instance without writer defined.'))
-    //     ->duringImport($importProfile);
-    // }
+        $importJobRepository->createNew()->willReturn($importJob);
+        $importJob->getId()->willReturn(2);
+        $importJob->setStartTime($dateTime1)->shouldBeCalled();
+        $importJob->getStartTime()->willReturn($dateTime1);
+        $importJob->setStatus(Argument::type('string'))->shouldBeCalledTimes(2);
+        $importJob->setProfile($importProfile)->shouldBeCalled();
+        $importJob->setUpdatedAt($dateTime2)->shouldBeCalled();
+        $importJob->setEndTime($dateTime2)->shouldBeCalled();
+        $importJob->getEndTime()->willReturn($dateTime2);
+
+
+        $importJobRepository->createNew()->willReturn($importJob);
+        $importProfile->getId()->willReturn(1);
+        $importProfile->addJob($importJob)->shouldBeCalled();
+
+        $logger->info("Profile: 1; StartTime: 2015-06-29 12:40:00")->shouldBeCalled();
+        $logger->error('Profile: 1. Cannot write data with Profile instance without writer defined.')->shouldBeCalled();
+        $logger->info("Job: 2; EndTime: 2015-06-29 13:40:00")->shouldBeCalled();
+
+        $entityManager->persist(Argument::type('Sylius\Component\ImportExport\Model\ImportJobInterface'))->shouldBeCalledTimes(2);
+        $entityManager->persist(Argument::type('Sylius\Component\ImportExport\Model\ImportProfileInterface'))->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalledTimes(2);
+
+        $importProfile->getId()->willReturn(1);
+        $importProfile->getReader()->willReturn('doctrine');
+        $importProfile->getReaderConfiguration()->willReturn(array());
+        $importProfile->getWriter()->willReturn(null);
+
+        $this->shouldThrow(new \InvalidArgumentException('Cannot write data with Profile instance without writer defined.'))
+            ->duringImport($importProfile, $logger);
+    }
 }

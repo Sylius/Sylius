@@ -11,25 +11,28 @@
 
 namespace Sylius\Bundle\CoreBundle\Import\Writer\ORM;
 
-use Sylius\Component\ImportExport\Writer\WriterInterface;
-
 use Doctrine\ORM\EntityManager;
 use Monolog\Logger;
+use Sylius\Component\ImportExport\Model\JobInterface;
+use Sylius\Component\ImportExport\Writer\WriterInterface;
 
 /**
- * Export reader.
- *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 abstract class AbstractDoctrineWriter implements WriterInterface
 {
+    /**
+     * @var array
+     */
     protected $configuration;
-    private $em;
 
     /**
-     * Work logger
-     *
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
      * @var Logger
      */
     protected $logger;
@@ -39,14 +42,20 @@ abstract class AbstractDoctrineWriter implements WriterInterface
      */
     protected $resultCode;
 
-    public function __construct(EntityManager $em)
+    /**
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->metadatas['row'] = 0;
         $this->resultCode = 0;
     }
 
-    public function write(array $items)
+    /**
+     * {@inheritdoc}
+     */
+    public function write(array $items, array $configuration, Logger $logger)
     {
         foreach ($items as $item) {
             try {
@@ -57,27 +66,27 @@ abstract class AbstractDoctrineWriter implements WriterInterface
                 $item = null;
             }
             if (!is_null($item)) {
-                $this->em->persist($item);
+                $this->entityManager->persist($item);
                 $this->metadatas['row']++;
             }
         }
 
-        $this->em->flush();
+        $this->entityManager->flush();
     }
 
-    public function setConfiguration(array $configuration, Logger $logger)
-    {
-        $this->configuration = $configuration;
-
-        $this->logger = $logger;
-    }
-
-    public abstract function process($result);
+    /**
+     * Process an array and parse it into an object.
+     *
+     * @param array  $result
+     * @param Logger $logger
+     * @return mixed
+     */
+    protected abstract function process(array $result, Logger $logger);
 
     /**
      * {@inheritdoc}
      */
-    public function finalize(JobInterface $job)
+    public function finalize(JobInterface $job, array $config)
     {
         $job->addMetadata('result_code',$this->resultCode);
     }

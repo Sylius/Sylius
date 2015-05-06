@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\ImportExport\Writer;
 
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\ImportExport\Model\JobInterface;
 
 /**
@@ -20,24 +20,26 @@ use Sylius\Component\ImportExport\Model\JobInterface;
 interface WriterInterface
 {
     /**
-     * @param array $items
+     * Writes $items with given $configuration.
+     *
+     * @param array           $items
+     * @param array           $configuration
+     * @param LoggerInterface $logger
+     *
+     * @return mixed
      */
-    public function write(array $items);
+    public function write(array $items, array $configuration, LoggerInterface $logger);
 
     /**
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration, Logger $logger);
-
-    /**
-     * Finalize job, add meta data
-     * 
+     * Finalize job, add meta data.
+     *
      * @param JobInterface $job
+     * @param array        $configuration
      */
-    public function finalize(JobInterface $job);
+    public function finalize(JobInterface $job, array $configuration);
 
     /**
-     * Return code of error if any
+     * Return code of error if any.
      * = 0 - no error
      * > 0 - exception
      * < 0 - fatal error
@@ -47,7 +49,6 @@ interface WriterInterface
     public function getResultCode();
 
     /**
-    *
     * @return Type of data
     */
     public function getType();

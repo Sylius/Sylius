@@ -14,7 +14,7 @@
     <div class="page-header">
         <div class="actions-menu">
             {{ buttons.generic(path('sylius_backend_export_job_index', { 'profileId': export_profile.id }), 'sylius.export_profile.jobs'|trans, 'align-justify') }}
-            <button id="export" class="btn btn-default">{{ 'sylius.export_profile.export'|trans }}</button>
+            {{ buttons.show(path("sylius_backend_export_profile_export", { "code": export_profile.code }), 'sylius.export_profile.export'|trans) }}
             {{ buttons.manage(path('sylius_backend_export_profile_index'), 'sylius.export_profile.manage'|trans) }}
             {{ buttons.edit(path('sylius_backend_export_profile_update', {'id': export_profile.id})) }}
             {{ buttons.delete(path('sylius_backend_export_profile_delete', {'id': export_profile.id}), null, false, false) }}
@@ -84,15 +84,15 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("button#export").on({'click' : function(){
-                $.ajax({
-                    url: '{{ path("sylius_backend_export_profile_export", { "code": export_profile.code }) }}',
-                    type: 'POST'
-                });
-                window.location.replace("{{ path('sylius_backend_export_job_index', { 'profileId': export_profile.id }) }}");
-            }}); 
-        });
-    </script>
+    // <script type="text/javascript">
+    //     $(document).ready(function(){
+    //         $("#export").on({'click' : function(){
+    //             $.ajax({
+    //                 url: '{{ path("sylius_backend_export_profile_export", { "code": export_profile.code }) }}',
+    //                 type: 'POST'
+    //             });
+    //             console.log("heere");
+    //         }}); 
+    //     });
+    // </script>
 {% endblock %}

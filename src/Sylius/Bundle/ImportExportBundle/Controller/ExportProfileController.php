@@ -19,5 +19,9 @@ class ExportProfileController extends ResourceController
 {
     public function exportAction(Request $request, $code)
     {
+//        $process = new Proces($this->container->getParameter('kernel.root_dir').'/console sylius:export test');
+//        $process->run();
+
+        return $this->redirect($this->generateUrl('sylius_backend_export_job_index', array('profileId' => $this->container->get('sylius.repository.export_profile')->findOneByCode($code)->getId())));
     }
 }

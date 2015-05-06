@@ -65,8 +65,6 @@ parameters:
 
     sylius.order.allow_guest_order: false
     sylius.order.pending.duration: 3 hours
-<<<<<<< HEAD
-=======
 
     sylius.uploader.filesystem: sylius_image
     sylius.filesystem.export: %kernel.root_dir%/../web/media/exported_files
@@ -80,4 +78,3 @@ parameters:
     phpcr_workspace: default
     phpcr_user: admin
     phpcr_pass: admin
->>>>>>> Import/Export jobs.

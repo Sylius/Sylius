@@ -46,6 +46,6 @@ sylius_backend_export_profile_show:
 
 sylius_backend_export_profile_export:
     path: /export/{code}
-    methods: [POST]
+    methods: [GET]
     defaults:
         _controller: sylius.controller.export_profile:exportAction

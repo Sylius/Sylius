@@ -24,7 +24,10 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.4.0",
+
+        "symfony/monolog-bundle": "~2.3",
+        "jwage/easy-csv":         "0.0.2"
     },
     "require-dev": {
         "phpspec/phpspec":         "~2.1"
@@ -37,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.13-dev"
+            "dev-master": "0.16-dev"
         }
     }
 }

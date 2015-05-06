@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -50,9 +49,6 @@ class ExportProfileTypeSpec extends ObjectBehavior
         $readerRegistry,
         $writerRegistry,
         ReaderInterface $reader,
-        WriterInterface $writer,
-        FormInterface $readerForm,
-        FormInterface $writerForm
         WriterInterface $writer
     ) {
         $builder->getFormFactory()->willReturn($factory);

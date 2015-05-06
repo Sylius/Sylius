@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ImportExportBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -28,12 +28,15 @@ class SyliusImportExportExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $this->configure(
+        $config = $this->configure(
             $config,
             new Configuration(),
             $container,
             self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
+
+        $container->setParameter('sylius.importexport.timezone', $config['timezone']);
+        $container->setParameter('sylius.importexport.logPath', $config['log_path']);
 
         $container
             ->getDefinition('sylius.form.type.export_profile')

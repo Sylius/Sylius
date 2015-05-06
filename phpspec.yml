@@ -9,7 +9,7 @@ suites:
     Currency          : { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency, src_path: src/Sylius/Component/Currency }
     Installer         : { namespace: Sylius\Component\Installer, psr4_prefix: Sylius\Component\Installer, spec_path: src/Sylius/Component/Installer, src_path: src/Sylius/Component/Installer }
     Inventory         : { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory, src_path: src/Sylius/Component/Inventory }
-    ImportExport      : { namespace: Sylius\Component\ImportExport, psr4_prefix: Sylius\Component\ImportExport, spec_path: src/Sylius/Component/ImportExport }
+    ImportExport      : { namespace: Sylius\Component\ImportExport, psr4_prefix: Sylius\Component\ImportExport, spec_path: src/Sylius/Component/ImportExport, src_path: src/Sylius/Component/ImportExport }
     Locale            : { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale, src_path: src/Sylius/Component/Locale }
     Order             : { namespace: Sylius\Component\Order, psr4_prefix: Sylius\Component\Order, spec_path: src/Sylius/Component/Order, src_path: src/Sylius/Component/Order }
     Originator        : { namespace: Sylius\Component\Originator, psr4_prefix: Sylius\Component\Originator, spec_path: src/Sylius/Component/Originator, src_path: src/Sylius/Component/Originator }

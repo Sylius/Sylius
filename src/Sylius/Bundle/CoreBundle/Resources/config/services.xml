@@ -536,17 +536,6 @@
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
             <argument type="service" id="sylius.context.locale" />
         </service>
-                
-        <!-- Export reader -->
-        <service id="sylius.export.user_reader" class="%sylius.export.user_reader.class%">
-            <argument type="service" id="sylius.repository.user" />
-        </service>
-        <service id="sylius.import.user_writer" class="%sylius.import.user_writer.class%">
-            <argument type="service" id="sylius.repository.user" />
-        </service>
-        <service id="sylius.export.product_reader" class="%sylius.export.product_reader.class%">
-            <argument type="service" id="sylius.repository.product" />
-        </service>
     </services>
 
 </container>

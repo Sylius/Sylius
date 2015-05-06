@@ -21,6 +21,7 @@ use Symfony\Component\Console\Input\InputArgument;
 */
 class ExportDataCommand extends ContainerAwareCommand
 {
+
     protected function configure()
     {
         $this
@@ -36,11 +37,18 @@ class ExportDataCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $exportProfile = $this->getContainer()->get('sylius.repository.export_profile')->findByCode($input->getArgument('code'));
+        $exportProfile = $this->getContainer()->get('sylius.repository.export_profile')->findOneBy(
+            array(
+                'code' => $input->getArgument('code'),
+            ));
         if ($exportProfile === null) {
             throw new \InvalidArgumentException('There is no export profile with given code.');
         }
 
-        $this->getContainer()->get('sylius.import_export.exporter')->export($exportProfile[0]);
+        $logger = $this->getContainer()->get('logger');
+        $streamHandlerFactory = $this->getContainer()->get('sylius.import.stream_handler.factory');
+        $logger->pushHandler($streamHandlerFactory->create('export_profile_'.$exportProfile->getId()));
+
+        $this->getContainer()->get('sylius.import_export.exporter')->export($exportProfile, $logger);
     }
 }

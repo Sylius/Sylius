@@ -11,13 +11,23 @@
 
 namespace spec\Sylius\Component\ImportExport\Reader;
 
+use EasyCSV\Reader;
 use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
+use Sylius\Component\ImportExport\Model\JobInterface;
+use Sylius\Component\ImportExport\Reader\Factory\CsvReaderFactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CsvReaderSpec extends ObjectBehavior
 {
+    function let(CsvReaderFactoryInterface $csvReaderFactory)
+    {
+        $this->beConstructedWith($csvReaderFactory);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\ImportExport\Reader\CsvReader');
@@ -31,5 +41,50 @@ class CsvReaderSpec extends ObjectBehavior
     function it_has_type()
     {
         $this->getType()->shouldReturn('csv');
+    }
+
+    function it_has_result_code()
+    {
+        $this->getResultCode()->shouldReturn(0);
+    }
+
+    function it_reads_data_for_rows_greater_or_equal_to_batch_size(
+        $csvReaderFactory,
+        LoggerInterface $logger,
+        Reader $reader
+    )
+    {
+        $config = array(
+            'reader' => 'config',
+            'batch' => 2,
+        );
+        $csvReaderFactory->create($config)->willReturn($reader);
+        $reader->getRow()->willReturn('response1','response2','response3',false);
+
+        $this->read($config, $logger)->shouldReturn(array('response1','response2'));
+    }
+
+    function it_reads_data_(
+        $csvReaderFactory,
+        LoggerInterface $logger,
+        Reader $reader
+    )
+    {
+        $config = array(
+            'reader' => 'config',
+            'batch' => 2,
+        );
+
+        $csvReaderFactory->create($config)->willReturn($reader);
+        $reader->getRow()->willReturn('response3',false);
+
+        $this->read($config, $logger)->shouldReturn(array('response3'));
+    }
+
+    function it_finalize_job(JobInterface $job)
+    {
+        $job->addMetadata(array('result_code' => 0));
+
+        $this->finalize($job);
     }
 }

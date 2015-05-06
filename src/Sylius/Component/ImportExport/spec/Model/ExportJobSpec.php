@@ -74,4 +74,23 @@ class ExportJobSpec extends ObjectBehavior
         $this->setProfile($exportProfile);
         $this->getProfile()->shouldReturn($exportProfile);
     }
+
+    function it_has_metadata()
+    {
+        $this->setMetadata(array());
+        $this->getMetadata()->shouldReturn(array());
+    }
+
+    function it_adds_metadata()
+    {
+        $this->setMetadata(array('old'));
+        $this->addMetadata(array('new'));
+        $this->getMetadata()->shouldReturn(array('old', 'new'));
+    }
+
+    function it_has_file_path()
+    {
+        $this->setFilePath('/tmp');
+        $this->getFilePath()->shouldReturn('/tmp');
+    }
 }

@@ -32,4 +32,5 @@ interface JobInterface
     public function setProfile(ProfileInterface $importProfile);
     public function getMetadata();
     public function setMetadata(array $metadata);
+    public function addMetadata(array $metadata);
 }

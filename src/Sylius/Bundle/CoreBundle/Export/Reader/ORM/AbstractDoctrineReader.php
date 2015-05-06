@@ -16,70 +16,76 @@ use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Reader\ReaderInterface;
 
 /**
- * Export reader.
- *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
+ * @author Łukasz Chruściel <luksza.chrusciel@lakion.com>
  */
-abstract class AbstractDoctrineReader 
+abstract class AbstractDoctrineReader implements ReaderInterface
 {
-    private $results;
-    private $running = false;
-    protected $configuration;
-    protected $logger;
-    
     /**
-     * @var int
+     * @var \ArrayIterator
+     */
+    private $results;
+    /**
+     * @var boolean
+     */
+    private $running = false;
+    /**
+     * @var integer
      */
     protected $resultCode = 0;
-
     /**
-     * Batch size
-     *
      * @var integer
      */
     protected $batchSize;
 
-    public function read()
+    /**
+     * {@inheritdoc}
+     */
+    public function read(array $configuration, Logger $logger)
     {
         if (!$this->running)
         {
             $this->running = true;
             $this->results = new \ArrayIterator($this->getQuery()->execute());
-            $this->batchSize = $this->configuration['batch_size'];
-            $this->metadatas['row'] = 0;
+            $this->batchSize = $configuration['batch_size'];
         }
 
         $results = array();
 
-        for ($i = 0; $i<$batchSize; $i++) {
+        for ($i = 0; $i < $this->batchSize; $i++) {
             if ($result = $this->results->current()) {
                 $this->results->next();
             }
 
-            
             $result = $this->process($result);
             $results[] = $result;
         }
 
         return $results;
     }
-    
-    public abstract function process($result);
 
-    public function setConfiguration(array $configuration, Logger $logger)
-    {
-        $this->configuration = $configuration;
-        $this->logger = $logger;
-    }
+    /**
+     * Process given array into a database mapped object.
+     *
+     * @param $result
+     *
+     * @return array
+     */
+    protected abstract function process($result);
 
-    public abstract function process($result);
+    /**
+     * Provides list of all suited objects
+     *
+     * @return mixed
+     */
+    protected abstract function getQuery();
 
     /**
      * {@inheritdoc}
      */
     public function finalize(JobInterface $job)
     {
-        $job->addMetadata('result_code',$this->resultCode);
+        $job->addMetadata(array('result_code' => $this->resultCode));
     }
 
     /**

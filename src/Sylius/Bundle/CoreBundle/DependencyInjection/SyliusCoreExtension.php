@@ -65,6 +65,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'twig.xml',
         'reports.xml',
         'email.xml',
+        'import_export.xml',
     );
 
     /**

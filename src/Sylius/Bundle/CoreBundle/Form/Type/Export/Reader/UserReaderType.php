@@ -16,12 +16,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Writer choice choice type.
- *
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserReaderType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_user_orm_reader';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,14 +41,14 @@ class UserReaderType extends AbstractType
                     new NotBlank(array('groups' => array('sylius'))),
                 ),
             ))
+            ->add('date_format', 'text', array(
+                'label'       => 'sylius.form.reader.date_format',
+                'data'        => 'Y-m-d H:i:s',
+                'required'    => true,
+                'constraints' => array(
+                    new NotBlank(array('groups' => array('sylius'))),
+                ),
+            ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_user_reader';
     }
 }

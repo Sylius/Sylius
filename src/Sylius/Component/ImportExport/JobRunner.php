@@ -11,94 +11,75 @@
 
 namespace Sylius\Component\ImportExport;
 
-use Doctrine\ORM\EntityManager;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use Doctrine\Common\Persistence\ObjectManager;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\ImportExport\Model\Job;
 use Sylius\Component\ImportExport\Model\JobInterface;
 use Sylius\Component\ImportExport\Model\ProfileInterface;
+use Sylius\Component\ImportExport\Provider\CurrentDateProviderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
 * @author Łukasz Chruściel <lukasz.chruscie@lakion.com>
 */
-class JobRunner
+abstract class JobRunner implements JobRunnerInterface
 {
     /**
-     * Reader registry
-     *
      * @var ServiceRegistryInterface
      */
     protected $readerRegistry;
-
     /**
-     * Writer registry
-     *
      * @var ServiceRegistryInterface
      */
     protected $writerRegistry;
-
     /**
-     * import job repository
-     *
      * @var RepositoryInterface
      */
     protected $jobRepository;
-
     /**
-     * Entity manager
-     *
-     * @var EntityManager
+     * @var ObjectManager
      */
     protected $entityManager;
-
     /**
-     * Logger for importer
-     *
-     * @var Logger
+     * @var CurrentDateProviderInterface
      */
-    protected $logger;
+    protected $dateProvider;
 
     /**
-     * Constructor
-     *
-     * @var ServiceRegistryInterface $readerRegistry
-     * @var ServiceRegistryInterface $writerRegistry
-     * @var RepositoryInterface $jobRepository
-     * @var EntityManager $entityManager
-     * @var Logger $logger
+     * @param CurrentDateProviderInterface $dateProvider
+     * @param ObjectManager                $entityManager
+     * @param RepositoryInterface          $jobRepository
+     * @param ServiceRegistryInterface     $readerRegistry
+     * @param ServiceRegistryInterface     $writerRegistry
      */
     public function __construct(
-        ServiceRegistryInterface $readerRegistry,
-        ServiceRegistryInterface $writerRegistry,
+        CurrentDateProviderInterface $dateProvider,
+        ObjectManager $entityManager,
         RepositoryInterface $jobRepository,
-        EntityManager $entityManager,
-        Logger $logger)
+        ServiceRegistryInterface $readerRegistry,
+        ServiceRegistryInterface $writerRegistry
+    )
     {
+        $this->dateProvider = $dateProvider;
         $this->readerRegistry = $readerRegistry;
         $this->writerRegistry = $writerRegistry;
         $this->jobRepository = $jobRepository;
         $this->entityManager = $entityManager;
-        $this->logger = $logger;
     }
 
     /**
-     * Create import job
-     *
-     * @param  ProfileInterface $profile
-     * @return JobInterface
+     * {@inheritdoc}
      */
-    protected function startJob(ProfileInterface $profile)
+    public function start(ProfileInterface $profile, LoggerInterface $logger)
     {
         $job = $this->jobRepository->createNew();
 
-        $job->setStartTime(new \DateTime());
+        $job->setStartTime($this->dateProvider->getCurrentDate());
         $job->setStatus(Job::RUNNING);
         $job->setProfile($profile);
 
-        $this->logger->pushHandler(new StreamHandler(sprintf('%s/logs/export_job_%d_%s.log', '/Users/mzalewski/Sites/Sylius/app', $profile->getId(), $job->getStartTime()->format('Y_m_d_H_i_s'))));
-        $this->logger->addInfo(sprintf("Profile: %d; StartTime: %s", $profile->getId(), $job->getStartTime()->format('Y-m-d H:i:s')));
+        $logger->info(sprintf("Profile: %d; StartTime: %s", $profile->getId(), $job->getStartTime()->format('Y-m-d H:i:s')));
 
         $profile->addJob($job);
 
@@ -110,18 +91,90 @@ class JobRunner
     }
 
     /**
-     * End import job
-     *
-     * @param JobInterface $job
+     * {@inheritdoc}
      */
-    protected function endJob(JobInterface $job)
+    public function end(JobInterface $job, LoggerInterface $logger, $status)
     {
-        $job->setUpdatedAt(new \DateTime());
-        $job->setEndTime(new \DateTime());
+        $job->setUpdatedAt($this->dateProvider->getCurrentDate());
+        $job->setEndTime($this->dateProvider->getCurrentDate());
         $job->setStatus($status);
-        $this->logger->addInfo(sprintf("Job: %d; EndTime: %s", $job->getId(), $job->getEndTime()->format('Y-m-d H:i:s')));
+        $logger->info(sprintf("Job: %d; EndTime: %s", $job->getId(), $job->getEndTime()->format('Y-m-d H:i:s')));
 
         $this->entityManager->persist($job);
         $this->entityManager->flush();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function run(ProfileInterface $profile, LoggerInterface $logger, JobInterface $job)
+    {
+        $this->validate($job, $logger, $profile);
+
+        $reader = $this->readerRegistry->get($profile->getReader());
+        $writer = $this->writerRegistry->get($profile->getWriter());
+
+        while (null !== ($readLine = $reader->read($profile->getReaderConfiguration(), $logger))) {
+            $writer->write($readLine, $profile->getWriterConfiguration(), $logger);
+        }
+
+        $writer->finalize($job, $profile->getWriterConfiguration());
+        $reader->finalize($job);
+
+        $jobStatus = Job::COMPLETED;
+
+        if ($reader->getResultCode() !== 0 || $writer->getResultCode() !== 0) {
+            $jobStatus = ($reader->getResultCode() < 0 || $writer->getResultCode() < 0) ? Job::FAILED : Job::ERROR;
+        }
+
+        return $jobStatus;
+    }
+
+    /**
+     * Checks if given exportJob and exportProfile are valid.
+     *
+     * @param JobInterface     $job
+     * @param LoggerInterface  $logger
+     * @param ProfileInterface $profile
+     */
+    protected function validate(JobInterface $job, LoggerInterface $logger, ProfileInterface $profile)
+    {
+        if (null === $profile->getReader()) {
+            $this->generateErrorAction($job, $logger, $profile->getId(), 'read');
+        }
+        if (null === $profile->getWriter()) {
+            $this->generateErrorAction($job, $logger, $profile->getId(), 'write');
+        }
+    }
+
+    /**
+     * Fails job and logs error.
+     *
+     * @param JobInterface    $job
+     * @param LoggerInterface $logger
+     * @param integer         $profileId
+     * @param string          $type
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function generateErrorAction(JobInterface $job, LoggerInterface $logger, $profileId, $type)
+    {
+        $this->end($job, $logger, Job::FAILED);
+        $logger->error(sprintf('Profile: %d. %s', $profileId, $this->generateErrorMessage($type)));
+        throw new \InvalidArgumentException($this->generateErrorMessage($type));
+    }
+
+    /**
+     * Concat given type with default fail message.
+     *
+     * @param string $type
+     *
+     * @return string
+     */
+    protected function generateErrorMessage($type)
+    {
+        return sprintf('Cannot %s data with Profile instance without %s defined.', $type, ($type == 'read') ? 'reader' : 'writer');
     }
 }
