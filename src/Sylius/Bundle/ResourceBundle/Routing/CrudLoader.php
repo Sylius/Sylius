@@ -16,11 +16,41 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Yaml\Parser as YamlParser;
 
 class CrudLoader implements LoaderInterface
 {
+    /**
+     * @var string
+     */
+    private $routingDir;
+
+    /**
+     * Construtor
+     *
+     * @param string $routingDir
+     */
+    public function __construct($routingDir)
+    {
+        $this->routingDir = $routingDir;
+    }
+
+    /**
+     * @param string $resource
+     * @param string $type
+     *
+     * @return RouteCollection
+     */
     public function load($resource, $type = null)
     {
+        if ('yml' === pathinfo($resource, PATHINFO_EXTENSION)) {
+            $configuration = $this->loadFile($resource);
+        }
+
+        $modulePrefix = (isset($configuration['module'])) ? '_'.$configuration['module'] : '';
+        $resource = (isset($configuration['resource'])) ? $configuration['resource'] : $resource;
+        $templates = $this->generateRouteTemplates((isset($configuration['templates'])) ? $configuration['templates'] : array());
+
         $routes = new RouteCollection();
         list($applicationName, $resourceName) = explode('.', $resource);
 
@@ -29,58 +59,36 @@ class CrudLoader implements LoaderInterface
         $requirements = array();
 
         // GET collection request.
-        $routeName = $indexRouteName = sprintf('%s_%s_grid', $applicationName, $resourceName);
-        $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:gridAction', $applicationName, $resourceName),
-            '_sylius' => array(
-                'template' => 'SyliusGridBundle:Crud:grid.html.twig'
-            )
-        );
+        $gridRouteParameters = array('template' => $templates['grid']);
+        if (isset($configuration['grid'])) {
+            $gridRouteParameters['grid'] = $configuration['grid'];
+        }
 
-        $route = new Route($rootPath, $defaults, $requirements, array(), '', array(), array('GET'));
-        $routes->add($routeName, $route);
+        $gridRoute = $this->generateRoute('grid', '', $applicationName, $modulePrefix, $resourceName, $rootPath, $gridRouteParameters, array('GET'));
+        $routes->add($gridRoute['name'], $gridRoute['route']);
+        $indexRouteName = $gridRoute['name'];
 
         // POST request.
-        $routeName = sprintf('%s_%s_create', $applicationName, $resourceName);
-        $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:createAction', $applicationName, $resourceName),
-            '_sylius' => array(
-                'template' => 'SyliusGridBundle:Crud:create.html.twig',
-                'redirect' => $indexRouteName
-            )
-        );
-
-        $route = new Route($rootPath.'new', $defaults, $requirements, array(), '', array(), array('GET', 'POST'));
-        $routes->add($routeName, $route);
+        $createRoute = $this->generateRoute('create', 'new', $applicationName, $modulePrefix, $resourceName, $rootPath, array('template' => $templates['create'], 'redirect' => $indexRouteName), array('GET', 'POST'));
+        $routes->add($createRoute['name'], $createRoute['route']);
 
         // PUT request.
-        $routeName = sprintf('%s_%s_update', $applicationName, $resourceName);
-        $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:updateAction', $applicationName, $resourceName),
-            '_sylius' => array(
-                'template' => 'SyliusGridBundle:Crud:update.html.twig',
-                'redirect' => $indexRouteName
-            )
-        );
-
-        $route = new Route($rootPath.'{id}/edit', $defaults, $requirements, array(), '', array(), array('GET', 'PUT', 'PATCH'));
-        $routes->add($routeName, $route);
+        $updateRoute = $this->generateRoute('update', '{id}/edit', $applicationName, $modulePrefix, $resourceName, $rootPath, array('template' => $templates['update'], 'redirect' => $indexRouteName), array('GET', 'PUT', 'PATCH'));
+        $routes->add($updateRoute['name'], $updateRoute['route']);
 
         // DELETE request.
-        $routeName = sprintf('%s_%s_delete', $applicationName, $resourceName);
-        $defaults = array(
-            '_controller' => sprintf('%s.controller.%s:deleteAction', $applicationName, $resourceName),
-            '_sylius' => array(
-                'redirect' => $indexRouteName
-            )
-        );
-
-        $route = new Route($rootPath.'{id}', $defaults, $requirements, array(), '', array(), array('DELETE'));
-        $routes->add($routeName, $route);
+        $deleteRoute = $this->generateRoute('delete', '{id}', $applicationName, $modulePrefix, $resourceName, $rootPath, array('redirect' => $indexRouteName), array('DELETE'));
+        $routes->add($deleteRoute['name'], $deleteRoute['route']);
 
         return $routes;
     }
 
+    /**
+     * @param string $resource
+     * @param string $type
+     *
+     * @return boolean
+     */
     public function supports($resource, $type = null)
     {
         return 'sylius.crud' === $type;
@@ -94,5 +102,73 @@ class CrudLoader implements LoaderInterface
     public function setResolver(LoaderResolverInterface $resolver)
     {
         // Intentionally left blank.
+    }
+
+    /**
+     * @param array $customTemplates
+     *
+     * @return array
+     */
+    private function generateRouteTemplates(array $customTemplates)
+    {
+        $templates = array();
+
+        $templates['grid'] = (isset($customTemplates['grid'])) ? $customTemplates['grid'] : 'SyliusGridBundle:Crud:grid.html.twig';
+        $templates['create'] = (isset($customTemplates['create'])) ? $customTemplates['create'] : 'SyliusGridBundle:Crud:create.html.twig';
+        $templates['update'] = (isset($customTemplates['update'])) ? $customTemplates['update'] : 'SyliusGridBundle:Crud:update.html.twig';
+
+        return $templates;
+    }
+
+    /**
+     * Generates route with given parameters, returns array with Route object and route name string
+     *
+     * @param string $routeName
+     * @param string $routePathSuffix
+     * @param string $applicationName
+     * @param string $modulePrefix
+     * @param string $resourceName
+     * @param string $rootPath
+     * @param array  $routeParameters
+     * @param array  $routeMethods
+     *
+     * @return array
+     */
+    private function generateRoute($routeName, $routePathSuffix, $applicationName, $modulePrefix, $resourceName, $rootPath, array $routeParameters, array $routeMethods)
+    {
+        $routeFullName = sprintf('%s%s_%s_%s', $applicationName, $modulePrefix, $resourceName, $routeName);
+        $defaults = array(
+            '_controller' => sprintf('%s.controller.%s:%sAction', $applicationName, $resourceName, $routeName),
+            '_sylius' => array_merge($routeParameters, array('section' => $modulePrefix)),
+        );
+
+        $route = new Route($rootPath.$routePathSuffix, $defaults, array(), array(), '', array(), $routeMethods);
+
+        return array(
+            'name'  => $routeFullName,
+            'route' => $route,
+        );
+    }
+
+    /**
+     * @param string $filePath
+     * 
+     * @return array
+     */
+    private function loadFile($filePath)
+    {
+        $path = $this->routingDir.$filePath;
+
+        if (!stream_is_local($path)) {
+            throw new \InvalidArgumentException(sprintf('This is not a local file "%s".', $path));
+        }
+
+        if (!file_exists($path)) {
+            throw new \InvalidArgumentException(sprintf('File "%s" not found.', $path));
+        }
+
+        $yamlParser = new YamlParser();
+
+        return $yamlParser->parse(file_get_contents($path));
     }
 }

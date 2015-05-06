@@ -29,6 +29,11 @@ class Grid
     /**
      * @var string
      */
+    private $section;
+
+    /**
+     * @var string
+     */
     private $driver;
 
     /**
@@ -59,17 +64,19 @@ class Grid
     /**
      * @param string $applicationName
      * @param string $resourceName
+     * @param string $section
      * @param string $driver
-     * @param array $columns
-     * @param array $filters
-     * @param array $actions
-     * @param array $sorting
-     * @param array $options
+     * @param array  $columns
+     * @param array  $filters
+     * @param array  $actions
+     * @param array  $sorting
+     * @param array  $options
      */
-    public function __construct($applicationName, $resourceName, $driver, array $columns, array $filters, array $actions, array $sorting, array $options)
+    public function __construct($applicationName, $resourceName, $section, $driver, array $columns, array $filters, array $actions, array $sorting, array $options)
     {
         $this->applicationName = $applicationName;
         $this->resourceName = $resourceName;
+        $this->section = $section;
         $this->driver = $driver;
 
         foreach ($columns as $column) {
@@ -121,7 +128,9 @@ class Grid
 
         list($applicationName, $resourceName) = explode('.', $configuration['resource']);
 
-        return new self($applicationName, $resourceName, $configuration['driver'], $columns, $filters, $actions, $sorting, $options);
+        $section = (isset($configuration['options']['module'])) ? '_'.$configuration['options']['module'].'_' : '_';
+
+        return new self($applicationName, $resourceName, $section, $configuration['driver'], $columns, $filters, $actions, $sorting, $options);
     }
 
     /**
@@ -138,6 +147,14 @@ class Grid
     public function getResourceName()
     {
         return $this->resourceName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSection()
+    {
+        return $this->section;
     }
 
     /**

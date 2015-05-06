@@ -31,6 +31,7 @@ class TimezoneFilter implements FilterInterface
         }
 
         $field = isset($options['field']) ? $options['field'] : $name;
+        $expressionBuilder = $dataSource->getExpressionBuilder();
 
         if ($options['multiple']) {
             $dataSource->restrict($expressionBuilder->in($field, $value));
