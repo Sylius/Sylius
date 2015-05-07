@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShipmentController extends ResourceController
@@ -32,6 +33,7 @@ class ShipmentController extends ResourceController
             $this->domainManager->update($shipment);
 
             $this->flashHelper->setFlash('success', 'sylius.shipment.ship.success');
+            $this->container->get('event_dispatcher')->dispatch('sylius.shipment.ship.success', new GenericEvent($shipment));
 
             return $this->redirectHandler->redirectTo($shipment);
         }
