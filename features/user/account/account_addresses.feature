@@ -9,12 +9,12 @@ Feature: User account addresses page
           And there is default channel configured
           And I am logged in user
           And the following countries exist:
-            | name    |
-            | Germany |
-            | Austria |
-            | Poland  |
-            | Finland |
-            | USA     |
+            | name          |
+            | Germany       |
+            | Austria       |
+            | Poland        |
+            | Finland       |
+            | United States |
           And the following addresses exist:
             | user               | address                                               |
             | sylius@example.com | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany |
@@ -34,9 +34,9 @@ Feature: User account addresses page
 
     Scenario: Viewing only my addresses
         Given the following addresses exist:
-            | user                      | address                                                         |
-            | ianmurdock@example.com    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA |
-            | linustorvalds@example.com | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland  |
+            | user                      | address                                                                   |
+            | ianmurdock@example.com    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, United States |
+            | linustorvalds@example.com | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland            |
          Then I should see 3 addresses in the list
 
     Scenario: Accessing the creation address page

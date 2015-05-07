@@ -45,12 +45,7 @@ class CountryTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder);
-
-        $builder
-            ->add('isoName', 'text', Argument::any())
+            ->add('isoName', 'country', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder);
 

@@ -46,23 +46,9 @@ Feature: Countries and provinces
           And I follow "Create country"
          Then I should be on the country creation page
 
-    Scenario: Submitting form without name filled
-        Given I am on the country creation page
-         When I press "Create"
-         Then I should still be on the country creation page
-          And I should see "Please enter country name."
-
-    Scenario: Country ISO code is required
-        Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-         When I press "Create"
-         Then I should still be on the country creation page
-          And I should see "Please enter country ISO code."
-
     Scenario: Creating new country
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-          And I fill in "ISO name" with "PL"
+         When I select "Poland" from "Name"
           And I press "Create"
          Then I should be on the page of country "Poland"
           And I should see "Country has been successfully created."
@@ -70,8 +56,7 @@ Feature: Countries and provinces
     @javascript
     Scenario: Creating new country with provinces
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
-          And I fill in "ISO name" with "PL"
+         When I select "Poland" from "Name"
           And I click "Add province"
           And I click "Add province"
           And I fill in the 1st province with "Lubusz"
@@ -99,8 +84,7 @@ Feature: Countries and provinces
 
     Scenario: Updating the country and province
         Given I am editing country "Ukraine"
-         When I fill in "Name" with "Russia"
-          And I fill in "ISO name" with "RU"
+         When I select "Russia" from "Name"
           And I fill in province name with "Volgograd"
           And I press "Save changes"
          Then I should be on the page of country "Russia"
@@ -109,8 +93,7 @@ Feature: Countries and provinces
     @javascript
     Scenario: Updating the country and removing province
       Given I am editing country "Ukraine"
-       When I fill in "Name" with "Russia"
-        And I fill in "ISO name" with "RU"
+       When I select "Russia" from "Name"
         And I remove all the provinces
         And I press "Save changes"
        Then I should see "Country has been successfully updated."

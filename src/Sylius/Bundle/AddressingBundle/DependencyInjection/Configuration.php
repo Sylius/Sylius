@@ -24,6 +24,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -135,35 +136,12 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\Country')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository')->end()
+                                ->scalarNode('repository')->defaultValue('Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository')->end()
                                 ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\CountryType')->end()
                                         ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('translation')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue('Sylius\Component\Addressing\Model\CountryTranslation')->end()
-                                        ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                        ->scalarNode('repository')->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue('Sylius\Bundle\AddressingBundle\Form\Type\CountryTranslationType')->end()
-                                            ->end()
-                                        ->end()
-                                        ->arrayNode('mapping')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->arrayNode('fields')
-                                                    ->prototype('scalar')->end()
-                                                    ->defaultValue(array('name'))
-                                                ->end()
-                                            ->end()
-                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

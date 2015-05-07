@@ -16,6 +16,7 @@ use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Symfony\Component\Intl\Intl;
 
 class AddressingContext extends DefaultContext
 {
@@ -39,11 +40,12 @@ class AddressingContext extends DefaultContext
      */
     public function thereIsCountry($name, $provinces = null, $flush = true)
     {
+        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+
         /* @var $country CountryInterface */
-        if (null === $country = $this->getRepository('country')->findOneBy(array('name' => $name))) {
+        if (null === $country = $this->getRepository('country')->findOneBy(array('isoName' => $isoName))) {
             $country = $this->getRepository('country')->createNew();
-            $country->setName(trim($name));
-            $country->setIsoName(substr($name, 0, 3));
+            $country->setIsoName(trim($isoName));
 
             if (null !== $provinces) {
                 $provinces = $provinces instanceof TableNode ? $provinces->getHash() : $provinces;
@@ -134,23 +136,5 @@ class AddressingContext extends DefaultContext
         $this->getEntityManager()->persist($province);
 
         return $province;
-    }
-
-    /**
-     * @Given the following country translations exist
-     */
-    public function theFollowingCountryTranslationsExist(TableNode $table)
-    {
-        $manager = $this->getEntityManager();
-
-        foreach ($table->getHash() as $data) {
-            $countryTranslation = $this->findOneByName('country_translation', $data['country']);
-            $country = $countryTranslation->getTranslatable();
-            $country
-                ->setCurrentLocale($data['locale'])
-                ->setName($data['name']);
-        }
-
-        $manager->flush();
     }
 }
