@@ -13,15 +13,16 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Translation\Model\AbstractTranslatable;
+use Symfony\Component\Intl\Intl;
 
 /**
  * Default country model.
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class Country extends AbstractTranslatable implements CountryInterface
+class Country implements CountryInterface
 {
     /**
      * Country id.
@@ -29,14 +30,12 @@ class Country extends AbstractTranslatable implements CountryInterface
      * @var mixed
      */
     protected $id;
-
     /**
      * Country name in ISO format.
      *
      * @var string
      */
     protected $isoName;
-
     /**
      * @var Collection|ProvinceInterface[]
      */
@@ -44,14 +43,12 @@ class Country extends AbstractTranslatable implements CountryInterface
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->provinces = new ArrayCollection();
     }
 
     public function __toString()
     {
-        return $this->translate()->__toString();
+        return $this->getName();
     }
 
     /**
@@ -65,19 +62,9 @@ class Country extends AbstractTranslatable implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName($locale = null)
     {
-        return $this->translate()->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->translate()->setName($name);
-
-        return $this;
+        return Intl::getRegionBundle()->getCountryName($this->isoName, $locale);
     }
 
     /**
