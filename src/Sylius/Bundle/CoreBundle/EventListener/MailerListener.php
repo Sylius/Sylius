@@ -15,6 +15,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Model\UserInterface;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Order\Model\CommentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -54,6 +55,28 @@ class MailerListener
         }
 
         $this->emailSender->send(Emails::ORDER_CONFIRMATION, array($order->getEmail()), array('order' => $order));
+    }
+
+    /**
+     * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
+     */
+    public function sendShipmentConfirmationEmail(GenericEvent $event)
+    {
+        $shipment = $event->getSubject();
+
+        if (!$shipment instanceof ShipmentInterface) {
+            throw new UnexpectedTypeException(
+                $shipment,
+                'Sylius\Component\Shipping\Model\ShipmentInterface'
+            );
+        }
+        $order = $shipment->getOrder();
+        $this->emailSender->send(Emails::SHIPMENT_CONFIRMATION, array($order->getEmail()), array(
+            'shipment' => $shipment,
+            'order' => $order
+        ));
     }
 
     /**
