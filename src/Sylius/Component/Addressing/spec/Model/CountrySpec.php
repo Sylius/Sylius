@@ -18,13 +18,13 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class CountrySpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
-        $this->setCurrentLocale('en_US');
-        $this->setFallbackLocale('en_US');
+        \Locale::setDefault('en');
     }
 
     function it_is_initializable()
@@ -42,21 +42,24 @@ class CountrySpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_name_by_default()
+    function it_has_a_name()
     {
-        $this->getName()->shouldReturn(null);
-    }
+        $this->setIsoName('VE');
+        $this->getName()->shouldBeString();
+        $this->getName('es')->shouldReturn('Venezuela');
 
-    function its_name_is_mutable()
-    {
-        $this->setName('United States');
-        $this->getName()->shouldReturn('United States');
+        $this->setIsoName('US');
+        $this->getName('es')->shouldReturn('Estados Unidos');
+        $this->getName('en')->shouldReturn('United States');
     }
 
     function it_returns_name_when_converted_to_string()
     {
-        $this->setName('Spain');
-        $this->__toString()->shouldReturn('Spain');
+        $this->setIsoName('VE');
+        $this->__toString()->shouldReturn('Venezuela');
+
+        $this->setIsoName('CO');
+        $this->__toString()->shouldReturn('Colombia');
     }
 
     function it_has_no_iso_name_by_default()
@@ -104,7 +107,6 @@ class CountrySpec extends ObjectBehavior
     function it_sets_country_on_added_province(ProvinceInterface $province)
     {
         $province->setCountry($this)->shouldBeCalled();
-
         $this->addProvince($province);
     }
 
@@ -122,7 +124,6 @@ class CountrySpec extends ObjectBehavior
         ProvinceInterface $province,
         Collection $provinces
     ) {
-        $this->setName('Poland')->shouldReturn($this);
         $this->setIsoName('PL')->shouldReturn($this);
 
         $this->setProvinces($provinces)->shouldReturn($this);

@@ -11,7 +11,7 @@ Feature: Tax rates
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |
-            | USA          | country | USA                     |
+            | USA          | country | United States           |
           And there are following tax categories:
             | name        |
             | Clothing    |

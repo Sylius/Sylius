@@ -481,7 +481,9 @@ class CoreContext extends DefaultContext
         $address->setStreet($addressData[1]);
         $address->setPostcode($addressData[2]);
         $address->setCity($addressData[3]);
-        $address->setCountry($this->findOneByName('country', $addressData[4]));
+        $address->setCountry($this->findOneBy('country', array(
+            'isoName' => $this->getCountryCodeByEnglishCountryName($addressData[4])
+        )));
 
         return $address;
     }

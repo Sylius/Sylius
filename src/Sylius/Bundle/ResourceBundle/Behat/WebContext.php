@@ -67,6 +67,12 @@ class WebContext extends DefaultContext
      */
     public function iAmOnTheResourcePageByName($type, $name)
     {
+        if ('country' === $type) {
+            $this->iAmOnTheCountryPageByName($name);
+
+            return;
+        }
+
         $this->iAmOnTheResourcePage($type, 'name', $name);
     }
 
@@ -95,6 +101,12 @@ class WebContext extends DefaultContext
      */
     public function iShouldBeOnTheResourcePageByName($type, $name)
     {
+        if ('country' === $type) {
+            $this->iShouldBeOnTheCountryPageByName($name);
+
+            return;
+        }
+
         $this->iShouldBeOnTheResourcePage($type, 'name', $name);
     }
 
@@ -118,6 +130,12 @@ class WebContext extends DefaultContext
      */
     public function iAmDoingSomethingWithResourceByName($action, $type, $name)
     {
+        if ('country' === $type) {
+            $this->iAmDoingSomethingWithCountryByName($action, $name);
+
+            return;
+        }
+
         $this->iAmDoingSomethingWithResource($action, $type, 'name', $name);
     }
 
@@ -142,6 +160,12 @@ class WebContext extends DefaultContext
      */
     public function iShouldBeDoingSomethingWithResourceByName($action, $type, $name)
     {
+        if ('country' === $type) {
+            $this->iShouldBeDoingSomethingWithCountryByName($action, $name);
+
+            return;
+        }
+
         $this->iShouldBeDoingSomethingWithResource($action, $type, 'name', $name);
     }
 
@@ -421,5 +445,47 @@ class WebContext extends DefaultContext
     protected function assertStatusCodeEquals($code)
     {
         $this->assertSession()->statusCodeEquals($code);
+    }
+
+    /**
+     * @param string $name
+     */
+    private function iAmOnTheCountryPageByName($name)
+    {
+        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+
+        $this->iAmOnTheResourcePage('country', 'isoName', $isoName);
+    }
+
+    /**
+     * @param string $action
+     * @param string $name
+     */
+    private function iShouldBeDoingSomethingWithCountryByName($action, $name)
+    {
+        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+
+        $this->iShouldBeDoingSomethingWithResource($action, 'country', 'isoName', $isoName);
+    }
+
+    /**
+     * @param string $action
+     * @param string $name
+     */
+    private function iAmDoingSomethingWithCountryByName($action, $name)
+    {
+        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+
+        $this->iAmDoingSomethingWithResource($action, 'country', 'isoName', $isoName);
+    }
+
+    /**
+     * @param string $name
+     */
+    private function iShouldBeOnTheCountryPageByName($name)
+    {
+        $isoName = $this->getCountryCodeByEnglishCountryName($name);
+
+        $this->iShouldBeOnTheResourcePage('country', 'isoName', $isoName);
     }
 }
