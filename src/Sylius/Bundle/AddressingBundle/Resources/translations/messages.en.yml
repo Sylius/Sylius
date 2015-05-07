@@ -12,7 +12,6 @@ sylius:
             province: Province
         country:
             iso_name: ISO name
-            name: Name
             provinces: Provinces
             select: Select
         province:
