@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * UserGroup rule configuration form type.
+ * CustomerGroup rule configuration form type.
  *
  * @author Antonio Perić <antonio@locastic.com>
  */
@@ -32,6 +32,10 @@ class CustomerGroupType extends AbstractType
      */
     protected $groupRepository;
 
+    /**
+     * @param array           $validationGroups
+     * @param GroupRepository $groupRepository
+     */
     public function __construct(array $validationGroups, GroupRepository $groupRepository)
     {
         $this->validationGroups = $validationGroups;

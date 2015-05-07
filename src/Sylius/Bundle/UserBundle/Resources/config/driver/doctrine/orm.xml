@@ -20,7 +20,7 @@
         <parameter key="sylius.repository.group.class">Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository</parameter>
         <parameter key="sylius.repository.user.class">Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository</parameter>
         <parameter key="sylius.repository.customer.class">Sylius\Bundle\UserBundle\Doctrine\ORM\CustomerRepository</parameter>
-         <parameter key="sylius.form.type.user_choice.class">Sylius\Bundle\UserBundle\Form\Type\UserEntityType</parameter>
+        <parameter key="sylius.form.type.user_choice.class">Sylius\Bundle\UserBundle\Form\Type\UserEntityType</parameter>
         <parameter key="sylius.form.type.group_choice.class">Sylius\Bundle\UserBundle\Form\Type\GroupEntityType</parameter>
     </parameters>
 

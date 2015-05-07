@@ -6,12 +6,6 @@ sylius:
             not_blank: Please enter group name.
 
     user:
-        email:
-            already_used: The email is already used
-            max: Email must not be longer than {{ limit }} characters.
-            min: Email must be at least {{ limit }} characters long.
-            not_blank: Please enter your email.
-            invalid: This email is invalid.
         plainPassword:
             not_blank: Please enter your password.
             mismatch: The entered passwords don't match
@@ -26,10 +20,10 @@ sylius:
             min: Last name must be at least {{ limit }} characters long.
             not_blank: Please enter your last name.
         email:
-            already_used: The email is already used
+            already_used: This email is already used, please login or use forgotten password.
             max: Email must not be longer than {{ limit }} characters.
             min: Email must be at least {{ limit }} characters long.
             not_blank: Please enter your email.
             invalid: This email is invalid.
             unique: This email is already used.
-            registered: This email is already registered. Please log in.
+            registered: This email is already registered, please login or use forgotten password.

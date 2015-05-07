@@ -23,18 +23,22 @@ class Customer extends BaseCustomer implements CustomerInterface
      * @var string
      */
     protected $currency;
+
     /**
      * @var ArrayCollection
      */
     protected $orders;
+
     /**
      * @var AddressInterface
      */
     protected $billingAddress;
+
     /**
      * @var AddressInterface
      */
     protected $shippingAddress;
+
     /**
      * @var ArrayCollection
      */

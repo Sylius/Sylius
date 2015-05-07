@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Lakion package.
+ * This file is part of the Sylius package.
  *
- * (c) Lakion
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -63,7 +63,7 @@ class CustomerRegistrationFormListener implements EventSubscriberInterface
         if (!isset($rawData['email']) || empty($rawData['email'])) {
             return;
         }
-        $existingCustomer = $this->customerRepository->findOneBy(['email' => $rawData['email']]);
+        $existingCustomer = $this->customerRepository->findOneBy(array('email' => $rawData['email']));
         if (null === $existingCustomer || null !== $existingCustomer->getUser()) {
             return;
         }

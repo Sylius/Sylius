@@ -190,6 +190,7 @@ class SecurityStep extends CheckoutStep
         $this->getManager()->persist($resource);
         $this->getManager()->flush($resource);
     }
+
     /**
      * {@inheritdoc}
      */

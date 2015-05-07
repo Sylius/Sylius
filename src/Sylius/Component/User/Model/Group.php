@@ -25,6 +25,7 @@ class Group implements GroupInterface
      * @var int
      */
     protected $id;
+
     /**
      * @var string
      */

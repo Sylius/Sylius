@@ -29,10 +29,12 @@ class UserLogin implements UserLoginInterface
      * @var SecurityContextInterface
      */
     private $securityContext;
+
     /**
      * @var UserCheckerInterface
      */
     private $userChecker;
+
     /**
      * @var EventDispatcherInterface
      */

@@ -22,6 +22,9 @@ use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+/*
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ */
 class CartBlamerListenerSpec extends ObjectBehavior
 {
     function let(ObjectManager $cartManager, CartProviderInterface $cartProvider)
@@ -34,14 +37,14 @@ class CartBlamerListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener');
     }
 
-    function it_throws_exception_when_cart_does_not_implement_core_order_interface($cartManager, $cartProvider, CartInterface $cart, UserEvent $userEvent, UserInterface $user, CustomerInterface $customer)
+    function it_throws_exception_when_cart_does_not_implement_core_order_interface($cartManager, $cartProvider, CartInterface $cart, UserEvent $userEvent)
     {
         $cartProvider->getCart()->willReturn($cart);
 
         $cartManager->persist($cart)->shouldNotBeCalled();
         $cartManager->flush($cart)->shouldNotBeCalled();
 
-        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->during('blame', [$userEvent]);
+        $this->shouldThrow('Sylius\Component\Resource\Exception\UnexpectedTypeException')->during('blame', array($userEvent));
     }
 
     function it_blames_cart_on_user($cartManager, $cartProvider, OrderInterface $cart, UserEvent $userEvent, UserInterface $user, CustomerInterface $customer)

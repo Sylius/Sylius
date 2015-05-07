@@ -16,10 +16,10 @@ use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\User\Model\GroupInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\GroupableInterface;
 
 /**
- * Checks if user is part of Group.
+ * Checks if customer is part of Group.
  *
  * @author Antonio Perić <antonio@locastic.com>
  */
@@ -34,8 +34,10 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, 'Sylius\Component\Core\Model\OrderInterface');
         }
 
-        /* @var CustomerInterface $customer */
         if (null === $customer = $subject->getCustomer()) {
+            return false;
+        }
+        if (!$customer instanceof GroupableInterface) {
             return false;
         }
 

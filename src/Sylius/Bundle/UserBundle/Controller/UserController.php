@@ -99,7 +99,7 @@ class UserController extends ResourceController
         $user = $this->getRepository()->findOneBy(array('confirmationToken' => $request->get('token')));
 
         if (null === $user) {
-            throw new NotFoundHttpException('This website does not exist');
+            throw new NotFoundHttpException('This token does not exist');
         }
 
         $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));

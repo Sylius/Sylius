@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Order\Model\CommentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -126,7 +125,7 @@ class MailerListener
             $email = $order->getCustomer()->getEmail();
 
             $this->emailSender->send(Emails::ORDER_COMMENT, array($email), array(
-                'order' => $order,
+                'order'   => $order,
                 'comment' => $comment,
             ));
         }

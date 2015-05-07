@@ -21,18 +21,22 @@ class UserOAuth implements UserOAuthInterface
      * @var int
      */
     protected $id;
+
     /**
      * @var string
      */
     protected $provider;
+
     /**
      * @var string
      */
     protected $identifier;
+
     /**
      * @var string
      */
     protected $accessToken;
+
     /**
      * @var UserInterface
      */

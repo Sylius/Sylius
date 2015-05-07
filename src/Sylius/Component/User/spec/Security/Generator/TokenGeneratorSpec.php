@@ -31,18 +31,18 @@ class TokenGeneratorSpec extends ObjectBehavior
 
     public function it_throws_exception_when_not_int_given()
     {
-        $this->shouldThrow('InvalidArgumentException')->during('generate', ['string']);
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [new \stdClass()]);
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [1.2]);
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [array()]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array('string'));
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(new \stdClass()));
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(1.2));
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(array()));
     }
 
     public function it_throws_exception_when_incorrect_length_provided()
     {
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [-1]);
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [0]);
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [41]);
-        $this->shouldThrow('InvalidArgumentException')->during('generate', [123]);
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(-1));
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(0));
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(41));
+        $this->shouldThrow('InvalidArgumentException')->during('generate', array(123));
     }
 
     public function it_generates_random_string()
@@ -63,10 +63,10 @@ class TokenGeneratorSpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return [
+        return array(
             'haveLength' => function ($subject, $key) {
                 return $key === strlen($subject);
             },
-        ];
+        );
     }
 }

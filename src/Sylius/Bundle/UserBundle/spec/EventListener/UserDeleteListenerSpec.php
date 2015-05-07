@@ -12,12 +12,14 @@
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * User delete listener spec.
@@ -28,7 +30,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class UserDeleteListenerSpec extends ObjectBehavior
 {
-    function let(SecurityContext $securityContext, SessionInterface $session, FlashBagInterface $flashBag)
+    function let(SecurityContextInterface $securityContext, SessionInterface $session, FlashBagInterface $flashBag)
     {
         $this->beConstructedWith($securityContext, $session);
         $session->getBag('flashes')->willReturn($flashBag);
@@ -49,7 +51,7 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $tokenInterface->getUser()->willReturn($currentlyLoggedUser);
 
         $event->stopPropagation()->shouldNotBeCalled();
-        $flashBag->add('error', 'Cannot remove currently logged user.')->shouldNotBeCalled();
+        $flashBag->add('error', Argument::any())->shouldNotBeCalled();
         $this->deleteUser($event);
     }
 
@@ -62,7 +64,7 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $tokenInterface->getUser()->willReturn(null);
 
         $event->stopPropagation()->shouldNotBeCalled();
-        $flashBag->add('error', 'Cannot remove currently logged user.')->shouldNotBeCalled();
+        $flashBag->add('error', Argument::any())->shouldNotBeCalled();
         $this->deleteUser($event);
     }
 
@@ -74,20 +76,20 @@ class UserDeleteListenerSpec extends ObjectBehavior
         $securityContext->getToken()->willReturn(null);
 
         $event->stopPropagation()->shouldNotBeCalled();
-        $flashBag->add('error', 'Cannot remove currently logged user.')->shouldNotBeCalled();
+        $flashBag->add('error', Argument::any())->shouldNotBeCalled();
         $this->deleteUser($event);
     }
 
-    function it_does_not_allow_to_delete_currently_logged_user(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedUser, $securityContext, $flashBag, TokenInterface $tokenInterface)
+    function it_does_not_allow_to_delete_currently_logged_user(ResourceEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedInUser, $securityContext, $flashBag, TokenInterface $token)
     {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(1);
-        $securityContext->getToken()->willReturn($tokenInterface);
-        $currentlyLoggedUser->getId()->willReturn(1);
-        $tokenInterface->getUser()->willReturn($currentlyLoggedUser);
+        $securityContext->getToken()->willReturn($token);
+        $currentlyLoggedInUser->getId()->willReturn(1);
+        $token->getUser()->willReturn($currentlyLoggedInUser);
 
         $event->stopPropagation()->shouldBeCalled();
-        $flashBag->add('error', 'Cannot remove currently logged user.')->shouldBeCalled();
+        $flashBag->add('error', 'Cannot remove currently logged in user.')->shouldBeCalled();
         $this->deleteUser($event);
     }
 }

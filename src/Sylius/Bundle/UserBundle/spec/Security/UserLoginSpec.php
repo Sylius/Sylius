@@ -49,7 +49,7 @@ class UserLoginSpec extends ObjectBehavior
         $securityContext->setToken(Argument::type('Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken'))->shouldNotBeCalled();
         $eventDispatcher->dispatch(UserEvents::SECURITY_IMPLICIT_LOGIN, Argument::type('Sylius\Bundle\UserBundle\Event\UserEvent'))->shouldNotBeCalled();
 
-        $this->shouldThrow('Symfony\Component\Security\Core\Exception\DisabledException')->during('login', [$user]);
+        $this->shouldThrow('Symfony\Component\Security\Core\Exception\DisabledException')->during('login', array($user));
     }
 
     function it_logs_user_in($securityContext, $userChecker, $eventDispatcher, UserInterface $user)

@@ -22,9 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserType extends AbstractResourceType
 {
     /**
-    * @param string   $dataClass
-    * @param string[] $validationGroups
-    */
+     * @param string   $dataClass
+     * @param string[] $validationGroups
+     */
     public function __construct($dataClass, array $validationGroups)
     {
         parent::__construct($dataClass, $validationGroups);
@@ -51,11 +51,11 @@ class UserType extends AbstractResourceType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $groups = $this->validationGroups;
         $resolver->setDefaults(array(
             'data_class' => $this->dataClass,
-            'validation_groups' => function (FormInterface $form) {
+            'validation_groups' => function (FormInterface $form) use ($groups) {
                 $data = $form->getData();
-                $groups = $this->validationGroups;
                 if ($data && !$data->getId()) {
                     $groups[] = 'user_create';
                 }

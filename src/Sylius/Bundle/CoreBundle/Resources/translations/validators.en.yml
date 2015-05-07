@@ -3,10 +3,6 @@ sylius:
         code:
             not_blank: Please enter locale code.
             unique: This locale already exists.
-    sylius_shipping:
-    method:
-        zone:
-            not_blank: Please enter shipping method zone.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.
@@ -17,7 +13,12 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
-                
+
+sylius_shipping:
+    method:
+        zone:
+            not_blank: Please enter shipping method zone.
+
 sylius_taxation:
     rate:
         zone:

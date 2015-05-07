@@ -72,11 +72,19 @@ class AddressingStep extends CheckoutStep
         ));
     }
 
+    /**
+     * @param  OrderInterface    $order
+     * @param  CustomerInterface $customer
+     * @return FormInterface
+     */
     protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)
     {
         return $this->createForm('sylius_checkout_addressing', $order, array('customer' => $customer));
     }
 
+    /**
+     * @return null|CustomerInterface
+     */
     protected function getCustomer()
     {
         return $this->container->get('sylius.context.customer')->getCustomer();

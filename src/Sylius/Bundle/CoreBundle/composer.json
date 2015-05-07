@@ -23,7 +23,6 @@
         "php":                            ">=5.3.3",
 
         "a2lix/translation-form-bundle":  "~2.0",
-        "friendsofsymfony/user-bundle":   "2.0.*@dev",
         "hwi/oauth-bundle":               "~0.3",
         "jms/serializer-bundle":          "~0.13",
         "jms/translation-bundle":         "1.1.*",
@@ -55,6 +54,7 @@
         "sylius/shipping-bundle":         "0.15.*@dev",
         "sylius/taxation-bundle":         "0.15.*@dev",
         "sylius/taxonomy-bundle":         "0.15.*@dev",
+        "sylius/user-bundle":             "0.15.*@dev",
         "sylius/variation-bundle":        "0.15.*@dev",
         "symfony/framework-bundle":       "~2.3",
         "symfony-cmf/routing-bundle":     "~1.2",
