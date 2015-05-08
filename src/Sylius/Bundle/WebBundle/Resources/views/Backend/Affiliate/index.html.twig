@@ -1,0 +1,23 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/Affiliate:macros.html.twig' import list %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.affiliate.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="glyphicon glyphicon-piggy-bank"></i> {{ 'sylius.affiliate.index_header'|trans|raw }}</h1>
+</div>
+
+{{ pagination(affiliates) }}
+{{ list(affiliates) }}
+{{ pagination(affiliates) }}
+
+{% endblock %}

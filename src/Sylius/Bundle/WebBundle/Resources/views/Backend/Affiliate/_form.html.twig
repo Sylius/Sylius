@@ -1,0 +1,8 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+{{ form_errors(form) }}
+
+{{ form_row(form.status, {'attr': {'class': 'input-lg'}}) }}
+{{ form_row(form.referralCode, {'attr': {'class': 'input-lg'}}) }}
+
+{{ form_rest(form) }}

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildRuleFormListener;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,13 +23,16 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class RuleType extends AbstractResourceType
 {
-    protected $checkerRegistry;
+    /**
+     * @var ServiceRegistryInterface
+     */
+    protected $registry;
 
-    public function __construct($dataClass, array $validationGroups, RuleCheckerRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $registry)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->checkerRegistry = $checkerRegistry;
+        $this->registry = $registry;
     }
 
     /**
@@ -38,10 +41,10 @@ class RuleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildRuleFormListener($this->checkerRegistry, $builder->getFormFactory()))
             ->add('type', 'sylius_shipping_rule_choice', array(
                 'label' => 'sylius.form.rule.type'
             ))
+            ->addEventSubscriber(new BuildRuleFormListener($this->registry, $builder->getFormFactory()))
         ;
     }
 

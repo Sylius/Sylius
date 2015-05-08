@@ -11,7 +11,7 @@
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
         {% block stylesheets %}
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.css" type="text/css" />
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css" />
             {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
                 'bundles/syliusweb/css/blueimp-gallery.css'
                 'bundles/syliusweb/css/select2.css'
@@ -72,7 +72,7 @@
         {# javascripts... #}
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
             {% javascripts output='assets/compiled/backend.js'
                 'bundles/syliusreport/js/chart.js'
                 'bundles/syliusweb/js/jquery.blueimp-gallery.min.js'

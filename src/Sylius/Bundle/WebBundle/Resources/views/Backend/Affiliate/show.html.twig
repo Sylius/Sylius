@@ -1,0 +1,122 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Affiliate:macros.html.twig' import configuration %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_affiliate_index') }}">{{ 'sylius.breadcrumb.affiliate.index'|trans }}</a></li>
+    <li>#{{ affiliate.id }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_affiliate_index'), 'sylius.affiliate.manage'|trans) }}
+        {% if not affiliate.referrer is empty %}
+            {{ buttons.manage(path('sylius_backend_affiliate_show', {'id': affiliate.referrer.id}), 'sylius.affiliate.referrer'|trans) }}
+        {% endif %}
+        {{ buttons.edit(path('sylius_backend_affiliate_update', {'id': affiliate.id})) }}
+        {{ buttons.delete(path('sylius_backend_affiliate_delete', {'id': affiliate.id}), null, false, true) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.affiliate.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.affiliate.general_info'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.referral_code'|trans }}</strong></td>
+                    <td>
+                        <span class="label label-primary">{{ affiliate.referralCode|upper }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.status'|trans }}</strong></td>
+                    <td>
+                    {% if affiliate.enabled %}
+                        <span class="label label-success">{{ 'sylius.affiliate.states.enabled'|trans }}</span>
+                    {% elseif affiliate.paused %}
+                        <span class="label label-warning">{{ 'sylius.affiliate.states.paused'|trans }}</span>
+                    {% else %}
+                        <span class="label label-danger">{{ 'sylius.affiliate.states.disabled'|trans }}</span>
+                    {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        {% if affiliate.referrals|length > 0 %}
+        <h4>{{ 'sylius.affiliate.referrals'|trans }}</h4>
+        <table id="rules" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.affiliate.referral.name'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for referral in affiliate.referrals %}
+                    <tr id="{{ referral.id }}">
+                        <td>{{ referral.firstName }} {{ referral.lastName }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                {#{ buttons.delete(path('sylius_backend_affiliate_referral_delete', {'id': referral.id, 'affiliateId': affiliate.id})) }#}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="col-md-6">
+        {% if affiliate.transactions|length > 0 %}
+        <h4>{{ 'sylius.affiliate.transactions'|trans }}</h4>
+        <table id="actions" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.affiliate.transaction.date'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.transaction.type'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.transaction.amount'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in affiliate.transactions %}
+                    <tr id="{{ transaction.id }}">
+                        <td>{{ transaction.createdAt|date }}</td>
+                        <td>
+                            {% if transaction.earning %}
+                                <span class="label label-success">{{ 'sylius.affiliate.transaction.earning'|trans }}</span>
+                            {% else %}
+                                <span class="label label-danger">{{ 'sylius.affiliate.transaction.payout'|trans }}</span>
+                            {% endif %}
+                        </td>
+                        <td><span class="label label-{{ transaction.earning ? 'info' : 'danger' }}">{{ transaction.amount|sylius_price }}</span></td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                {{ buttons.delete(path('sylius_backend_affiliate_transaction_delete', {'id': transaction.id, 'affiliateId': affiliate.id})) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -13,6 +13,7 @@ namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\RuleInterface as BaseRuleInterface;
 
 /**
  * Promotion model.
@@ -24,7 +25,7 @@ class Promotion implements PromotionInterface
     /**
      * Id
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -45,28 +46,28 @@ class Promotion implements PromotionInterface
     /**
      * When exclusive, promotion with top priority will be applied
      *
-     * @var integer
+     * @var int
      */
     protected $priority = 0;
 
     /**
      * Cannot be applied together with other promotions
      *
-     * @var boolean
+     * @var bool
      */
     protected $exclusive = false;
 
     /**
      * Usage limit
      *
-     * @var integer
+     * @var int
      */
     protected $usageLimit;
 
     /**
      * Number of times this coupon has been used
      *
-     * @var integer
+     * @var int
      */
     protected $used = 0;
 
@@ -87,7 +88,7 @@ class Promotion implements PromotionInterface
     /**
      * Whether this promotion is triggered by a coupon
      *
-     * @var Boolean
+     * @var bool
      */
     protected $couponBased = false;
 
@@ -145,7 +146,7 @@ class Promotion implements PromotionInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -265,7 +266,7 @@ class Promotion implements PromotionInterface
      */
     public function incrementUsed()
     {
-        $this->used++;
+        ++$this->used;
 
         return $this;
     }
@@ -319,7 +320,7 @@ class Promotion implements PromotionInterface
      */
     public function setCouponBased($couponBased)
     {
-        $this->couponBased = (Boolean) $couponBased;
+        $this->couponBased = (bool) $couponBased;
 
         return $this;
     }
@@ -391,7 +392,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRule(RuleInterface $rule)
+    public function hasRule(BaseRuleInterface $rule)
     {
         return $this->rules->contains($rule);
     }
@@ -399,7 +400,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function addRule(RuleInterface $rule)
+    public function addRule(BaseRuleInterface $rule)
     {
         if (!$this->hasRule($rule)) {
             $rule->setPromotion($this);
@@ -412,10 +413,12 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function removeRule(RuleInterface $rule)
+    public function removeRule(BaseRuleInterface $rule)
     {
-        $rule->setPromotion(null);
-        $this->rules->removeElement($rule);
+        if ($this->hasRule($rule)) {
+            $rule->setPromotion(null);
+            $this->rules->removeElement($rule);
+        }
 
         return $this;
     }

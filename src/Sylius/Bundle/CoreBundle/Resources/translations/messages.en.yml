@@ -52,12 +52,20 @@ sylius:
             name: Name
             sku: SKU
         settings:
+            affiliate:
+                enabled: Enable?
+                provision_amount: Provision amount
+                provision_fixed: Fixed amount
+                provision_percent: Percent
+                provision_type: Provision type
             general:
                 currency: Default currency
                 locale: Language
                 meta_description: Meta description
                 meta_keywords: Meta keywords
                 title: Page title
+            security:
+                enabled: Enable?
             taxation:
                 default_tax_zone: Default tax zone
             security:

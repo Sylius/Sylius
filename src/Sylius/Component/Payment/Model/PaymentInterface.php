@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Payment\Model;
 
+use Sylius\Component\Currency\Model\CurrencyAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface PaymentInterface extends TimestampableInterface
+interface PaymentInterface extends CurrencyAwareInterface, TimestampableInterface
 {
     // Payment states.
     const STATE_NEW        = 'new';
@@ -79,22 +80,6 @@ interface PaymentInterface extends TimestampableInterface
      * @return PaymentInterface
      */
     public function setState($state);
-
-    /**
-     * Get payment currency.
-     *
-     * @return string
-     */
-    public function getCurrency();
-
-    /**
-     * Set currency.
-     *
-     * @param string
-     *
-     * @return PaymentInterface
-     */
-    public function setCurrency($currency);
 
     /**
      * Get amount.

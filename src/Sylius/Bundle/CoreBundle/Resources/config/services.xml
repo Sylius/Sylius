@@ -17,6 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sylius.settings_schema.affiliate.class">Sylius\Bundle\CoreBundle\Settings\AffiliateSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
@@ -56,6 +57,7 @@
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
 
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
@@ -66,10 +68,11 @@
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
         <parameter key="sylius.promotion_action.add_product.class">Sylius\Component\Core\Promotion\Action\AddProductAction</parameter>
-        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Core\Promotion\Checker\PromotionEligibilityChecker</parameter>
+
+        <parameter key="sylius.affiliate_goal_action.percentage_provision.class">Sylius\Component\Core\Affiliate\Action\PercentageProvisionAction</parameter>
+
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
-        <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.checker.restricted_zone.class">Sylius\Bundle\CoreBundle\Checker\RestrictedZoneChecker</parameter>
@@ -97,6 +100,9 @@
 
     <services>
         <!-- settings schemas -->
+        <service id="sylius.settings_schema.affiliate" class="%sylius.settings_schema.affiliate.class%">
+            <tag name="sylius.settings_schema" namespace="affiliate" />
+        </service>
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">
                 <argument key="currency">%sylius.money.currency%</argument>
@@ -336,14 +342,6 @@
             <tag name="kernel.event_listener" event="sylius.taxonomy.pre_update" method="uploadTaxonomyImage" />
         </service>
 
-        <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
-            <argument type="service">
-                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
-                    <argument>%sylius.uploader.filesystem%</argument>
-                </service>
-            </argument>
-        </service>
-
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
@@ -388,6 +386,11 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
             <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="sylius.affiliate_goal_action.percentage_provision" class="%sylius.affiliate_goal_action.percentage_provision.class%">
+            <argument type="service" id="sylius.repository.transaction" />
+            <tag name="sylius.affiliate_goal_action" type="percentage_provision" label="Percentage provision" />
         </service>
 
         <service id="sylius.price_calculator.group_based" class="%sylius.price_calculator.group_based.class%">

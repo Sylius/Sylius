@@ -11,7 +11,8 @@
 
 namespace Sylius\Component\Shipping\Checker;
 
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Resource\Checker\EligibilityChecker;
+use Sylius\Component\Resource\Model\RuleAwareInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
@@ -20,36 +21,23 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
+class ShippingMethodEligibilityChecker extends EligibilityChecker
 {
-    /**
-     * Shipping rules registry.
-     *
-     * @var RuleCheckerRegistryInterface
-     */
-    protected $registry;
-
-    /**
-     * Constructor.
-     *
-     * @param RuleCheckerRegistryInterface $registry
-     */
-    public function __construct(RuleCheckerRegistryInterface $registry)
-    {
-        $this->registry = $registry;
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
+    public function isEligible($subject, RuleAwareInterface $object)
     {
-        if (!$this->isCategoryEligible($subject, $method)) {
+        if (!$this->supports($subject, $object)) {
             return false;
         }
 
-        foreach ($method->getRules() as $rule) {
-            $checker = $this->registry->getChecker($rule->getType());
+        if (!$this->isCategoryEligible($subject, $object)) {
+            return false;
+        }
+
+        foreach ($object->getRules() as $rule) {
+            $checker = $this->registry->get($rule->getType());
 
             if (!$checker->isEligible($subject, $rule->getConfiguration())) {
                 return false;
@@ -65,7 +53,7 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
      * @param ShippingSubjectInterface $subject
      * @param ShippingMethodInterface  $method
      *
-     * @return Boolean
+     * @return bool
      */
     public function isCategoryEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {
@@ -75,9 +63,9 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
 
         $numMatches = $numShippables = 0;
         foreach ($subject->getShippables() as $shippable) {
-            $numShippables++;
+            ++$numShippables;
             if ($category === $shippable->getShippingCategory()) {
-                $numMatches++;
+                ++$numMatches;
             }
         }
 
@@ -91,5 +79,21 @@ class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheck
         }
 
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function supports($subject, $object)
+    {
+        if (!$subject instanceof ShippingSubjectInterface) {
+            return false;
+        }
+
+        if (!$object instanceof ShippingMethodInterface) {
+            return false;
+        }
+
+        return true;
     }
 }

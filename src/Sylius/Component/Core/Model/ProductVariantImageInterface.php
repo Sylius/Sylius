@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Resource\Model\ImageInterface;
+
 interface ProductVariantImageInterface extends ImageInterface
 {
     /**
@@ -23,7 +25,9 @@ interface ProductVariantImageInterface extends ImageInterface
     /**
      * Set the product variant.
      *
-     * @param ProductVariantInterface $variant
+     * @param null|ProductVariantInterface $variant
+     *
+     * @return self
      */
     public function setVariant(ProductVariantInterface $variant = null);
 }

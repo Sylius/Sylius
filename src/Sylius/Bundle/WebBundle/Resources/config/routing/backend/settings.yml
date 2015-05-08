@@ -1,6 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_backend_affiliate_settings:
+    path: /affiliate
+    defaults:
+        _controller: sylius.controller.settings:updateAction
+        namespace: affiliate
+        template: SyliusWebBundle:Backend/Settings:affiliate.html.twig
+
 sylius_backend_general_settings:
     path: /general
     defaults:

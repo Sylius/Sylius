@@ -1,0 +1,26 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/Macros:misc.html.twig' import pagination %}
+{% from 'SyliusWebBundle:Backend/AffiliateGoal:macros.html.twig' import list %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.marketing'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.affiliate.goal.index'|trans }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.create(path('sylius_backend_affiliate_goal_create'), 'sylius.affiliate.goal.create'|trans) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-bullhorn"></i> {{ 'sylius.affiliate.goal.index_header'|trans|raw }}</h1>
+</div>
+
+{{ pagination(affiliate_goals) }}
+{{ list(affiliate_goals) }}
+{{ pagination(affiliate_goals) }}
+
+{% endblock %}

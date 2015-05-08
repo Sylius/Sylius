@@ -23,9 +23,9 @@
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
         <parameter key="sylius.checkout_form.guest.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\GuestType</parameter>
 
-        <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
+        <parameter key="sylius.form.type.product_variant_image.class">Sylius\Bundle\CoreBundle\Form\Type\ProductVariantImageType</parameter>
 
         <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
@@ -78,9 +78,9 @@
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <tag name="form.type" alias="sylius_cart" />
         </service>
-        <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
+        <service id="sylius.form.type.product_variant_image" class="%sylius.form.type.product_variant_image.class%">
             <argument>%sylius.model.product_variant_image.class%</argument>
-            <tag name="form.type" alias="sylius_image" />
+            <tag name="form.type" alias="sylius_product_variant_image" />
         </service>
         <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
             <tag name="form.type" alias="list" />

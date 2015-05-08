@@ -40,12 +40,11 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     {
         $prototypes = array();
 
-        foreach (array_keys($this->registry->all()) as $type) {
-            $prototypeOptions = array_replace(
+        foreach ($this->registry->all() as $type => $value) {
+            $form = $builder->create($options['prototype_name'], $options['type'], array_replace(
                 array('configuration_type' => $type),
                 $options['options']
-            );
-            $form = $builder->create($options['prototype_name'], $options['type'], $prototypeOptions);
+            ));
 
             $prototypes[$type] = $form->getForm();
         }

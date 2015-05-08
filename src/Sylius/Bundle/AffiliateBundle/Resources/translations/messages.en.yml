@@ -1,0 +1,36 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        action:
+            fixed_provision_configuration:
+                amount: Amount
+            percentage_provision_configuration:
+                percentage: Percentage
+            type: Type
+        rule:
+            nth_action_configuration:
+                count: Count
+                equal: Equal
+            type: Type
+        affiliate:
+            enabled: Enabled
+            paused: Paused
+            disabled: Disabled
+            fixed: Fixed
+            percent: Percent
+            status: Status
+            referral_code: Referral code
+        affiliate_goal:
+            actions: Actions
+            description: Description
+            ends_at: Ends at
+            name: Name
+            rules: Rules
+            starts_at: Starts ats
+        banner:
+            name: Name
+            enabled: Enabled
+        invitations:
+            emails: Emails

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\RuleAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -19,7 +20,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionInterface extends TimestampableInterface
+interface PromotionInterface extends RuleAwareInterface, TimestampableInterface
 {
     /**
      * Get name
@@ -52,14 +53,14 @@ interface PromotionInterface extends TimestampableInterface
     /**
      * Get priority
      *
-     * @return integer
+     * @return int
      */
     public function getPriority();
 
     /**
      * Set priority
      *
-     * @param integer $priority
+     * @param int $priority
      *
      * @return PromotionInterface
      */
@@ -68,14 +69,14 @@ interface PromotionInterface extends TimestampableInterface
     /**
      * Is exclusive
      *
-     * @return boolean
+     * @return bool
      */
     public function isExclusive();
 
     /**
      * Set exclusive
      *
-     * @param boolean $exclusive
+     * @param bool $exclusive
      *
      * @return PromotionInterface
      */
@@ -84,28 +85,28 @@ interface PromotionInterface extends TimestampableInterface
     /**
      * Get usage limit
      *
-     * @return integer
+     * @return int
      */
     public function getUsageLimit();
 
     /**
      * Set usage limit
      *
-     * @param integer $usageLimit
+     * @param int $usageLimit
      */
     public function setUsageLimit($usageLimit);
 
     /**
      * Get usage
      *
-     * @return integer
+     * @return int
      */
     public function getUsed();
 
     /**
      * Set usage
      *
-     * @param integer $used
+     * @param int $used
      */
     public function setUsed($used);
 
@@ -143,12 +144,12 @@ interface PromotionInterface extends TimestampableInterface
     public function setEndsAt(\DateTime $endsAt = null);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function isCouponBased();
 
     /**
-     * @param Boolean $couponBased
+     * @param bool $couponBased
      *
      * @return self
      */
@@ -162,12 +163,12 @@ interface PromotionInterface extends TimestampableInterface
     /**
      * @param CouponInterface $coupon
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasCoupon(CouponInterface $coupon);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function hasCoupons();
 
@@ -186,37 +187,6 @@ interface PromotionInterface extends TimestampableInterface
     public function removeCoupon(CouponInterface $coupon);
 
     /**
-     * @return Collection|RuleInterface[]
-     */
-    public function getRules();
-
-    /**
-     * @param RuleInterface $rule
-     *
-     * @return Boolean
-     */
-    public function hasRule(RuleInterface $rule);
-
-    /**
-     * @return Boolean
-     */
-    public function hasRules();
-
-    /**
-     * @param RuleInterface $rule
-     *
-     * @return self
-     */
-    public function addRule(RuleInterface $rule);
-
-    /**
-     * @param RuleInterface $rule
-     *
-     * @return self
-     */
-    public function removeRule(RuleInterface $rule);
-
-    /**
      * @return Collection|ActionInterface[]
      */
     public function getActions();
@@ -224,12 +194,12 @@ interface PromotionInterface extends TimestampableInterface
     /**
      * @param ActionInterface $action
      *
-     * @return Boolean
+     * @return bool
      */
     public function hasAction(ActionInterface $action);
 
     /**
-     * @return Boolean
+     * @return bool
      */
     public function hasActions();
 

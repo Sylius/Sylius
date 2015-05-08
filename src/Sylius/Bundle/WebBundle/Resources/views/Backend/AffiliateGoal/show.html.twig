@@ -1,0 +1,118 @@
+{% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'SyliusWebBundle:Backend/AffiliateGoal:macros.html.twig' import configuration %}
+
+{% block topbar %}
+<ol class="breadcrumb">
+    <li>{{ 'sylius.breadcrumb.marketing'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_affiliate_goal_index') }}">{{ 'sylius.breadcrumb.affiliate.goal.index'|trans }}</a></li>
+    <li>{{ affiliate_goal.name }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="actions-menu">
+        {{ buttons.manage(path('sylius_backend_affiliate_goal_index'), 'sylius.affiliate.goal.manage'|trans) }}
+        {{ buttons.edit(path('sylius_backend_affiliate_goal_update', {'id': affiliate_goal.id})) }}
+        {{ buttons.delete(path('sylius_backend_affiliate_goal_delete', {'id': affiliate_goal.id}), null, false, true) }}
+    </div>
+    <h1><i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.affiliate.goal.show_header'|trans|raw }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ 'sylius.affiliate.general_info'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.id'|trans }}</strong></td>
+                    <td>{{ affiliate_goal.id }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.goal.name'|trans }}</strong></td>
+                    <td>{{ affiliate_goal.name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.goal.starts_at'|trans }}</strong></td>
+                    <td>{{ affiliate_goal.startsAt is empty ? '-' : affiliate_goal.startsAt|date }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.goal.ends_at'|trans }}</strong></td>
+                    <td>{{ affiliate_goal.endsAt is empty ? '-' : affiliate_goal.endsAt|date }}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{ 'sylius.affiliate.goal.used'|trans }}</strong></td>
+                    <td>
+                        <span class="label label-success">
+                            {{ affiliate_goal.used }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        {% if affiliate_goal.hasRules %}
+        <h4>{{ 'sylius.affiliate.rules'|trans }}</h4>
+        <table id="rules" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.affiliate.rule.type'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.rule.configuration'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rule in affiliate_goal.rules %}
+                    <tr id="{{ rule.id }}">
+                        <td><span class="label label-info">{{ rule.type|capitalize|replace('_', ' ') }}</span></td>
+                        <td>{{ configuration(rule.configuration) }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                {{ buttons.delete(path('sylius_backend_affiliate_goal_rule_delete', {'id': rule.id, 'goalId': affiliate_goal.id})) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        {% if affiliate_goal.hasActions %}
+        <h4>{{ 'sylius.affiliate.actions'|trans }}</h4>
+        <table id="actions" class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>{{ 'sylius.affiliate.action.type'|trans }}</th>
+                    <th>{{ 'sylius.affiliate.action.configuration'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for action in affiliate_goal.actions %}
+                    <tr id="{{ action.id }}">
+                        <td><span class="label label-info">{{ action.type|capitalize|replace('_', ' ') }}</span></td>
+                        <td>{{ configuration(action.configuration) }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                {{ buttons.delete(path('sylius_backend_affiliate_goal_action_delete', {'id': action.id, 'goalId': affiliate_goal.id})) }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

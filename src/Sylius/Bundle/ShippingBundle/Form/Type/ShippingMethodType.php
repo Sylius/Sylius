@@ -13,8 +13,9 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormListener;
-use Sylius\Component\Shipping\Calculator\Registry\CalculatorRegistryInterface;
-use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistryInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -31,26 +32,26 @@ class ShippingMethodType extends AbstractResourceType
     /**
      * Calculator registry.
      *
-     * @var CalculatorRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $calculatorRegistry;
 
     /**
      * Rule checker registry.
      *
-     * @var RuleCheckerRegistryInterface
+     * @var ServiceRegistryInterface
      */
     protected $checkerRegistry;
 
     /**
      * Constructor.
      *
-     * @param string                       $dataClass
-     * @param array                        $validationGroups
-     * @param CalculatorRegistryInterface  $calculatorRegistry
-     * @param RuleCheckerRegistryInterface $checkerRegistry
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
+     * @param ServiceRegistryInterface $calculatorRegistry
+     * @param ServiceRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry)
     {
         parent::__construct($dataClass, $validationGroups);
 
@@ -64,7 +65,6 @@ class ShippingMethodType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildShippingMethodFormListener($this->calculatorRegistry, $builder->getFormFactory()))
             ->add('translations', 'a2lix_translationsForms', array(
                 'form_type' => 'sylius_shipping_method_translation',
                 'label'    => 'sylius.form.shipping_method.name'
@@ -86,22 +86,10 @@ class ShippingMethodType extends AbstractResourceType
             ->add('calculator', 'sylius_shipping_calculator_choice', array(
                 'label'    => 'sylius.form.shipping_method.calculator'
             ))
+            ->addEventSubscriber(new BuildShippingMethodFormListener($this->calculatorRegistry, $builder->getFormFactory()))
         ;
 
-        $prototypes = array();
-        $prototypes['rules'] = array();
-        foreach ($this->checkerRegistry->getCheckers() as $type => $checker) {
-            $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
-        }
-        $prototypes['calculators'] = array();
-        foreach ($this->calculatorRegistry->getCalculators() as $name => $calculator) {
-            if (!$calculator->isConfigurable()) {
-                continue;
-            }
-            $prototypes['calculators'][$name] = $builder->create('configuration', $calculator->getConfigurationFormType())->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
+        $this->buildPrototypes($builder);
     }
 
     /**
@@ -123,5 +111,29 @@ class ShippingMethodType extends AbstractResourceType
     public function getName()
     {
         return 'sylius_shipping_method';
+    }
+
+    private function buildPrototypes(FormBuilderInterface $builder)
+    {
+        $prototypes = array(
+            'rules' => array(),
+            'calculators' => array(),
+        );
+
+        /** @var $checker RuleCheckerInterface */
+        foreach ($this->checkerRegistry->all() as $type => $checker) {
+            $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
+        }
+
+        /** @var $calculator CalculatorInterface */
+        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
+            if (!$calculator->isConfigurable()) {
+                continue;
+            }
+
+            $prototypes['calculators'][$name] = $builder->create('configuration', $calculator->getConfigurationFormType())->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
     }
 }

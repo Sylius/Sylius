@@ -12,12 +12,14 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Resource\Model\ImageInterface;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
+use Symfony\Component\HttpFoundation\File\File;
 
 class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
 {
     /**
-     * @var \SplFileInfo
+     * @var File
      */
     protected $file;
 
@@ -68,7 +70,7 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function setFile(File $file)
     {
         $this->file = $file;
 

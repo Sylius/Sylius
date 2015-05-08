@@ -13,10 +13,10 @@ namespace Sylius\Component\Core\Promotion\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
-use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Core\Model\GroupInterface;
 use FOS\UserBundle\Model\User;
+use Sylius\Component\Resource\Exception\UnsupportedTypeException;
 
 /**
  * Checks if user is part of Group.

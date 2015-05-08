@@ -12,7 +12,10 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
+use Sylius\Component\Affiliate\Model\AffiliateInterface;
+use Sylius\Component\Affiliate\Model\ReferralInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 
 /**
@@ -29,11 +32,16 @@ class User extends BaseUser implements UserInterface
     protected $deletedAt;
     protected $currency;
     protected $orders;
+    /**
+     * @var Collection|RoleInterface[]
+     */
     protected $authorizationRoles;
     protected $billingAddress;
     protected $shippingAddress;
     protected $addresses;
+    protected $affiliate;
     protected $oauthAccounts;
+    protected $referrer;
 
     public function __construct()
     {
@@ -365,10 +373,46 @@ class User extends BaseUser implements UserInterface
     {
         $roles = parent::getRoles();
 
-        foreach ($this->getAuthorizationRoles() as $role) {
+        foreach ($this->authorizationRoles as $role) {
             $roles = array_merge($roles, $role->getSecurityRoles());
         }
 
         return $roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAffiliate()
+    {
+        return $this->affiliate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAffiliate(AffiliateInterface $affiliate = null)
+    {
+        $this->affiliate = $affiliate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getReferrer()
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setReferrer(ReferralInterface $referral = null)
+    {
+        $this->referrer = $referral;
+
+        return $this;
     }
 }

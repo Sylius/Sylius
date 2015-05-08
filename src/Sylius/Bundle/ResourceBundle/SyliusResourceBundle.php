@@ -13,14 +13,13 @@ namespace Sylius\Bundle\ResourceBundle;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\ObjectToIdentifierServicePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Resource bundle.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusResourceBundle extends Bundle
+class SyliusResourceBundle extends AbstractResourceBundle
 {
     // Bundle driver list.
     const DRIVER_DOCTRINE_ORM         = 'doctrine/orm';
@@ -30,8 +29,28 @@ class SyliusResourceBundle extends Bundle
     /**
      * {@inheritdoc}
      */
+    public static function getSupportedDrivers()
+    {
+        return array(
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new ObjectToIdentifierServicePass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getModelInterfaces()
+    {
+        return array(
+            'Sylius\Component\Core\Model\ImageInterface' => 'sylius.model.image.class',
+        );
     }
 }

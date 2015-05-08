@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Rbac\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
@@ -51,7 +52,7 @@ interface RoleInterface extends TimestampableInterface
     public function setDescription($description);
 
     /**
-     * @return Collection
+     * @return Collection|PermissionInterface[]
      */
     public function getPermissions();
 
@@ -68,7 +69,7 @@ interface RoleInterface extends TimestampableInterface
     /**
      * @param PermissionInterface $permission
      *
-     * @return boolean
+     * @return bool
      */
     public function hasPermission(PermissionInterface $permission);
 
@@ -83,12 +84,12 @@ interface RoleInterface extends TimestampableInterface
     public function setParent(RoleInterface $role);
 
     /**
-     * @return Collection
+     * @return Collection|RoleInterface[]
      */
     public function getChildren();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasChildren();
 
@@ -105,9 +106,19 @@ interface RoleInterface extends TimestampableInterface
     /**
      * @param RoleInterface $role
      *
-     * @return boolean
+     * @return bool
      */
     public function hasChild(RoleInterface $role);
+
+    /**
+     * @return array
+     */
+    public function getSecurityRoles();
+
+    /**
+     * @param array $securityRoles
+     */
+    public function setSecurityRoles(array $securityRoles);
 
     /**
      * @return int

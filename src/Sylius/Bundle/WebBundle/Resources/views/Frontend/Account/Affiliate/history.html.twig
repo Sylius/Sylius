@@ -1,0 +1,56 @@
+{% extends 'SyliusWebBundle:Frontend/Account:layout.html.twig' %}
+
+{% block content %}
+
+<h4>{{ 'sylius.account.affiliate.history.title'|trans }}</h4>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#earnings" data-toggle="tab">{{ 'sylius.account.affiliate.history.earnings'|trans }}</a></li>
+    <li><a href="#payouts" data-toggle="tab">{{ 'sylius.account.affiliate.history.payouts'|trans }}</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="earnings">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>{{ 'sylius.account.affiliate.history.created_at'|trans }}</td>
+                <td>{{ 'sylius.account.affiliate.history.amount'|trans }}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions.earning %}
+                <tr class="transaction">
+                    <td>{{ transaction.createdAt|date }}</td>
+                    <td>{{ transaction.amount|sylius_price }}</td>
+                </tr>
+            {% else %}
+                <p>{{ 'sylius.account.affiliate.history.empty'|trans }}</p>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane" id="payouts">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>{{ 'sylius.account.affiliate.history.created_at'|trans }}</td>
+                <td>{{ 'sylius.account.affiliate.history.amount'|trans }}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions.payout %}
+                <tr class="transaction">
+                    <td>{{ transaction.createdAt|date }}</td>
+                    <td>{{ transaction.amount|sylius_price }}</td>
+                </tr>
+            {% else %}
+                <p>{{ 'sylius.account.affiliate.history.empty'|trans }}</p>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

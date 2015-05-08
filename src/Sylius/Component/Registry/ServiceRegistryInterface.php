@@ -34,16 +34,18 @@ interface ServiceRegistryInterface
     public function register($type, $service);
 
     /**
-     * Unregister service with given type.
+     * Un-register service with given type.
      *
      * @param string $type
      */
     public function unregister($type);
 
     /**
+     * Check that service with given type is registered.
+     *
      * @param string $type
      *
-     * @return Boolean
+     * @return bool
      */
     public function has($type);
 

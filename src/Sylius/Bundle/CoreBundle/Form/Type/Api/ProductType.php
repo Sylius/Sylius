@@ -41,7 +41,7 @@ class ProductType extends BaseProductType
                 'property_path' => 'masterVariant.sku'
             ))
             ->add('images', 'collection', array(
-                'type'          => 'sylius_image',
+                'type'          => 'sylius_product_variant_image',
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'by_reference'  => false,
