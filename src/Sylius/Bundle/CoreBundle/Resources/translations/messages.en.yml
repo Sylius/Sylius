@@ -58,6 +58,7 @@ sylius:
                 meta_description: Meta description
                 meta_keywords: Meta keywords
                 title: Page title
+                tracking_code: Tracking code (for example: Google Analytics code)
             taxation:
                 default_tax_zone: Default tax zone
             security:

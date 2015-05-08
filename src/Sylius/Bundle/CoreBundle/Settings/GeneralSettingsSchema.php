@@ -50,6 +50,7 @@ class GeneralSettingsSchema implements SchemaInterface
                 'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
                 'locale'           => 'en',
                 'currency'         => 'USD',
+                'tracking_code'    => '',
             ), $this->defaults))
             ->setAllowedTypes(array(
                 'title'            => array('string'),
@@ -57,6 +58,7 @@ class GeneralSettingsSchema implements SchemaInterface
                 'meta_description' => array('string'),
                 'locale'           => array('string'),
                 'currency'         => array('string'),
+                'tracking_code'    => array('null', 'string'),
             ))
         ;
     }
@@ -98,6 +100,9 @@ class GeneralSettingsSchema implements SchemaInterface
                     new NotBlank(),
                     new Currency(),
                 )
+            ))
+            ->add('tracking_code', 'textarea', array(
+                'label'       => 'sylius.form.settings.general.tracking_code',
             ))
         ;
     }
