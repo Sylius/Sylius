@@ -58,7 +58,7 @@ class GeneralSettingsSchema implements SchemaInterface
                 'meta_description' => array('string'),
                 'locale'           => array('string'),
                 'currency'         => array('string'),
-                'tracking_code'    => array('string'),
+                'tracking_code'    => array('null', 'string'),
             ))
         ;
     }
