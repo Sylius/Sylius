@@ -13,4 +13,4 @@
     {% set label = 'info' %}
 {% endif %}
 
-<span class="label label-{{ label }}">{{ ('sylius.shipping.state.' ~ state)|trans|title }}</span>
+<span class="label label-{{ label }}">{{ ('sylius.account.order.shipment.' ~ shipment.state) |trans({'%at%': shipment.updatedAt|date('d.m.Y h:i')}) }}</span>
