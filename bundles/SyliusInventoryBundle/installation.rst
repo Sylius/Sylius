@@ -248,7 +248,3 @@ Templates
 ---------
 
 The bundle provides some default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.
-
-.. note::
-
-    You can check `our Sandbox app <https://github.com/Sylius/Sylius-Sandbox>`_ to see how to integrate it in your application.
