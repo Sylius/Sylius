@@ -13,6 +13,7 @@ namespace Sylius\Bundle\RbacBundle\Provider;
 
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -39,6 +40,10 @@ class SecurityIdentityProvider implements CurrentIdentityProviderInterface
     public function getIdentity()
     {
         if (null === $token = $this->securityContext->getToken()) {
+            return null;
+        }
+
+        if ($token instanceof AnonymousToken) {
             return null;
         }
 
