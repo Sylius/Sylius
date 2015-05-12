@@ -104,7 +104,12 @@ EOT
         try {
             $schemaManager = $this->getSchemaManager();
         } catch (\Exception $exception) {
-            if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
+            $message = $exception->getMessage();
+
+            $mysqlDatabaseError = false !== strpos($message, sprintf("Unknown database '%s'", $databaseName));
+            $postgresDatabaseError = false !== strpos($message, sprintf('database "%s" does not exist', $databaseName));
+
+            if ($mysqlDatabaseError || $postgresDatabaseError) {
                 return false;
             }
 
