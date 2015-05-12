@@ -39,6 +39,7 @@ Don't worry, everything was automatically installed via Composer.
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\Bundle\GridBundle\SyliusGridBundle(),
         );
     }
 
