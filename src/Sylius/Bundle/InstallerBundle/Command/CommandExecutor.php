@@ -99,7 +99,7 @@ class CommandExecutor
             $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : Kernel::ENV_DEV;
         }
         
-        if ($this->input->hasOption('no-interaction')) {
+        if ($this->input->hasOption('no-interaction') && true === $this->input->getOption('no-interaction')) {
             $defaultParameters['--no-interaction'] = true;
         }
 
