@@ -24,7 +24,7 @@
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
             <td><a href="{{ path('sylius_backend_user_show', {'id': user.id}) }}">{{ user.email }}</a></td>
-            <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
+            <td>{{ user.createdAt|sylius_localized_date('d-m-Y H:i') }}</td>
             <td>
                 {{ misc.state_label(user.enabled) }}
             </td>

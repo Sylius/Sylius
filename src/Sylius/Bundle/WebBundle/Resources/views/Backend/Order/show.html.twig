@@ -49,7 +49,7 @@
         <h4>Order Details</h4>
         <dl>
             <dt>{{ 'sylius.order.created_at'|trans }}</dt>
-            <dd>{{ order.createdAt|date }}</dd>
+            <dd>{{ order.createdAt|sylius_localized_date }}</dd>
             <dt>Email</dt>
             <dd>
                 {% if order.user %}
@@ -232,7 +232,7 @@
                             {{ (comment.notifyCustomer ? 'sylius.order.comment.customer.notified' : 'sylius.order.comment.customer.not_notified')|trans }}
                         </span>
                     </td>
-                    <td>{{ comment.createdAt|date }}</td>
+                    <td>{{ comment.createdAt|sylius_localized_date }}</td>
                 </tr>
             {% endfor %}
                 <tr>
@@ -266,8 +266,8 @@
                     <td>{{ unit.inventoryName }}</td>
                     <td>{{ unit.inventoryState|humanize }}</td>
                     <td>{{ unit.shippingState|humanize }}</td>
-                    <td>{{ unit.createdAt|date }}</td>
-                    <td>{{ unit.updatedAt|date }}</td>
+                    <td>{{ unit.createdAt|sylius_localized_date }}</td>
+                    <td>{{ unit.updatedAt|sylius_localized_date }}</td>
                     <td>
                         {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
                             <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">

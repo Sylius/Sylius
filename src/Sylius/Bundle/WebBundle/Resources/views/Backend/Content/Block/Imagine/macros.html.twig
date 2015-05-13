@@ -27,9 +27,9 @@
                         {{ block.publishable ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                     </span>
                 </td>
-                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
-                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|date }}</td>
-                <td>{{ block.updatedAt|date }}</td>
+                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|sylius_localized_date }}</td>
+                <td>{{ block.publishStartDate is empty ? '-' : block.publishStartDate|sylius_localized_date }}</td>
+                <td>{{ block.updatedAt|sylius_localized_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_imagine_block_update', {'id': block.id})) }}

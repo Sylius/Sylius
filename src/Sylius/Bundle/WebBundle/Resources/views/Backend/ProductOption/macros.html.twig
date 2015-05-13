@@ -30,7 +30,7 @@
                         {% endfor %}
                     </ul>
                 </td>
-                <td>{{ option.updatedAt|date }}</td>
+                <td>{{ option.updatedAt|sylius_localized_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_product_option_update', {'id': option.id})) }}

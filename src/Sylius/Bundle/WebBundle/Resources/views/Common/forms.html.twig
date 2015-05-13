@@ -18,6 +18,11 @@
     {% if 'file' == type %}
         <span class="btn-primary btn-lg file-overlay"><i class="icon-folder-open"></i> {{ 'sylius.form.choose_file'|trans }}</span>
     {% endif %}
+
+    {% if 'datepicker' in attr.class %}
+        {% set attr = attr|merge({'data-locale': sylius_locale(), 'data-direction': sylius_direction()}) %}
+    {% endif %}
+
     {{ parent() }}
 {% endspaceless %}
 {% endblock form_widget_simple %}
@@ -61,6 +66,7 @@
 {% block date_widget %}
 {% spaceless %}
     {% if widget == 'single_text' %}
+        {% set attr = attr|merge({'data-calendar': sylius_calendar()}) %}
         {{ block('form_widget_simple') }}
     {% else %}
             {{ '{{ year }} / {{ month }} / {{ day }}'|replace({

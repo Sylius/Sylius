@@ -26,7 +26,7 @@
                     {{ currency.enabled ? 'sylius.yes'|trans : 'sylius.no'|trans }}
                 </span>
             </td>
-            <td>{{ currency.updatedAt|date }}</td>
+            <td>{{ currency.updatedAt|sylius_localized_date }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.edit(path('sylius_backend_currency_update', {'id': currency.id})) }}

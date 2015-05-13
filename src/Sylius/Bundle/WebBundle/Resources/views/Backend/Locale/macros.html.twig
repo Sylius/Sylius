@@ -21,7 +21,7 @@
                 <td>
                     {{ misc.state_label(locale.enabled) }}
                 </td>
-                <td>{{ locale.updatedAt|date }}</td>
+                <td>{{ locale.updatedAt|sylius_localized_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_locale_update', {'id': locale.id})) }}

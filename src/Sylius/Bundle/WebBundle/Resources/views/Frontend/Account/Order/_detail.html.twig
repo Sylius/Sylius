@@ -4,7 +4,7 @@
 
 <div class="row well well-sm" id="information">
     <div class="col-md-6">
-        <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
+        <strong>{{ 'sylius.account.order.created_at'|trans }} {{ order.createdAt|sylius_localized_date() }}</strong><br><br>
         {#{{ 'sylius.account.order.shipment_mode'|trans }} <strong>TODO</strong><br>#}
         {#{{ 'sylius.account.order.payment_mode'|trans }} <strong>TODO</strong><br>#}
     </div>

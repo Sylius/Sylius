@@ -17,7 +17,7 @@
         <tr>
             <td>{{ tax_category.id }}</td>
             <td>{{ tax_category.name }}</td>
-            <td>{{ tax_category.updatedAt|date }}</td>
+            <td>{{ tax_category.updatedAt|sylius_localized_date }}</td>
             <td>
                 <div class="btn-group pull-right">
                     {{ buttons.show(path('sylius_tax_category_show', {'id': tax_category.id})) }}

@@ -15,7 +15,7 @@
             <strong>{{ user.lastName|upper }} {{ user.firstName }}</strong><br><br>
             {{ 'sylius.account.home.id'|trans }} {{ user.id }} <br>
             {{ 'sylius.account.home.email'|trans }} {{ user.email }}<br>
-            {{ 'sylius.account.home.since'|trans }} {{ user.createdAt|date() }}
+            {{ 'sylius.account.home.since'|trans }} {{ user.createdAt|sylius_localized_date() }}
         </div>
     </div>
 

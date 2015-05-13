@@ -18,7 +18,7 @@
             <tr id="{{ shipping_category.id }}">
                 <td>{{ shipping_category.id }}</td>
                 <td>{{ shipping_category.name }}</td>
-                <td>{{ shipping_category.updatedAt|date }}</td>
+                <td>{{ shipping_category.updatedAt|sylius_localized_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_shipping_category_update', {'id': shipping_category.id})) }}

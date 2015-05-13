@@ -83,7 +83,7 @@
             {% endif %}
 
             <td class="updated-at">
-                {{ product.updatedAt|date('Y/m/d') }}
+                {{ product.updatedAt|sylius_localized_date('Y/m/d') }}
             </td>
             <td class="center-text">
                 {% if product.deleted %}

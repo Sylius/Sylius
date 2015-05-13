@@ -20,7 +20,7 @@
             <td>{{ tax_category.id }}</td>
             <td>{{ tax_category.name }}</td>
             <td>{{ tax_category.description|default('sylius.tax_category.no_description'|trans) }}</td>
-            <td>{{ tax_category.updatedAt|date }}</td>
+            <td>{{ tax_category.updatedAt|sylius_localized_date }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_tax_category_update', {'id': tax_category.id})) }}
