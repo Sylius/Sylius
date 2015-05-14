@@ -11,6 +11,10 @@ sylius:
             name: Order comment
             subject: New comment posted on order #{{ order.number }}
 
+        shipment_confirmation:
+            name: Shipment confirmation
+            subject: Your order has been shipped!
+
         user_confirmation:
             name: User confirmation
             subject: Welcome to our store!
