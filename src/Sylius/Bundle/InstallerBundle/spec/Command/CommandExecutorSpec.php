@@ -51,4 +51,33 @@ class CommandExecutorSpec extends ObjectBehavior
 
         $this->runCommand('command', []);
     }
+
+    function it_should_use_passed_options_rather_than_default_params(InputInterface $input, Application $application)
+    {
+        $input->hasOption('no-interaction')
+            ->willReturn(true);
+        $input->getOption('no-interaction')
+            ->willReturn(false);
+        $input->hasOption('env')
+            ->willReturn(true);
+        $input->getOption('env')
+            ->willReturn('dev');
+        $input->hasOption('verbose')
+            ->willReturn(true);
+        $input->getOption('verbose')
+            ->willReturn(true);
+        $arrayInput = new ArrayInput(
+            [
+                'command' => 'command',
+                '--no-debug' => true,
+                '--env' => 'dev',
+                '--no-interaction' => true,
+                '--verbose' => true,
+            ]
+        );
+        $application->setAutoExit(false)->shouldBeCalled();
+        $application->run($arrayInput, new NullOutput())->willReturn(0);
+
+        $this->runCommand('command', [ '--no-interaction' => true]);
+    }
 }
