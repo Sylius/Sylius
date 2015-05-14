@@ -54,6 +54,13 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected $attributes;
 
     /**
+     * Product options.
+     *
+     * @var Collection|Association[]
+     */
+    protected $associations;
+
+    /**
      * Product variants.
      *
      * @var Collection|BaseVariantInterface[]
@@ -96,6 +103,7 @@ class Product extends AbstractTranslatable implements ProductInterface
         parent::__construct();
         $this->availableOn = new \DateTime();
         $this->attributes = new ArrayCollection();
+        $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->createdAt = new \DateTime();
@@ -110,7 +118,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @return null|ArchetypeInterface
+     * {@inheritdoc}
      */
     public function getArchetype()
     {
@@ -118,7 +126,7 @@ class Product extends AbstractTranslatable implements ProductInterface
     }
 
     /**
-     * @param null|ArchetypeInterface $archetype
+     * {@inheritdoc}
      */
     public function setArchetype(BaseArchetypeInterface $archetype = null)
     {
@@ -491,6 +499,38 @@ class Product extends AbstractTranslatable implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function addAssociation(Association $association)
+    {
+        if (!$this->associations->contains($association)) {
+            $this->associations[] = $association;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociation(Association $association)
+    {
+        if ($this->associations->contains($association)) {
+            $this->associations->removeElement($association);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociations()
+    {
+        return $this->associations;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -556,5 +596,10 @@ class Product extends AbstractTranslatable implements ProductInterface
     protected function getTranslationClass()
     {
         return get_class().'Translation';
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

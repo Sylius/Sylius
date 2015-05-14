@@ -1,0 +1,9 @@
+{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
+
+{{ form_errors(form) }}
+
+<fieldset>
+    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
+</fieldset>
+
+{{ form_widget(form._token) }}

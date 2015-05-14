@@ -72,7 +72,7 @@ sylius_product:
                 model: Sylius\Component\Core\Model\ProductTranslation
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
-
+        association_type: ~
 
 sylius_archetype:
     classes:

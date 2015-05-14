@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\Association;
 use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
@@ -301,5 +302,10 @@ class ProductSpec extends ObjectBehavior
         $this->setCreatedAt($date)->shouldReturn($this);
         $this->setUpdatedAt($date)->shouldReturn($this);
         $this->setDeletedAt($date)->shouldReturn($this);
+    }
+
+    function it_should_initialize_associations_collection_by_default()
+    {
+        $this->getAssociations()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 }

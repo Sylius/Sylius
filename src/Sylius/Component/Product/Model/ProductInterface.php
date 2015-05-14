@@ -49,4 +49,18 @@ interface ProductInterface extends
      * @param null|\DateTime $availableOn
      */
     public function setAvailableOn(\DateTime $availableOn = null);
+
+    /**
+     * Add association to product
+     *
+     * @param Association $association
+     */
+    public function addAssociation(Association $association);
+
+    /**
+     * Get associations
+     *
+     * @param Association[] $association
+     */
+    public function getAssociations();
 }
