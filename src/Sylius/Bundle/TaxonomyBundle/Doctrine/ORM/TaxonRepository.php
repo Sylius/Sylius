@@ -31,7 +31,16 @@ class TaxonRepository extends TranslatableResourceRepository implements TaxonRep
             ->setParameter('taxonomy', $taxonomy)
             ->orderBy('o.left')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+    }
+
+    public function findOneByPermalink($permalink)
+    {
+        return $this->getQueryBuilder()
+            ->where('translation.permalink = :permalink')
+            ->setParameter('permalink', $permalink)
+            ->orderBy($this->getAlias() . '.left')
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
