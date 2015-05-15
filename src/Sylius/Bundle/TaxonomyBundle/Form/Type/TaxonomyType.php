@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -32,6 +33,7 @@ class TaxonomyType extends AbstractResourceType
                 'form_type' => 'sylius_taxonomy_translation',
                 'label'    => 'sylius.form.taxonomy.name'
             ))
+            ->addEventSubscriber(new BuildTaxonomyFormListener())
         ;
     }
 

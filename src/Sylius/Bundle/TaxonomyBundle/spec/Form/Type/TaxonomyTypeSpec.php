@@ -40,6 +40,13 @@ class TaxonomyTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
+            ->addEventSubscriber(
+                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener')
+            )
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
             ->willReturn($builder)
         ;
