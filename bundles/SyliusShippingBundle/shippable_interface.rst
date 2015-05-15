@@ -14,10 +14,10 @@ First step is to implement the simple interface, which contains few simple metho
 
     namespace Acme\Bundle\ShopBundle\Entity;
 
-    use Sylius\Bundle\ShippingBundle\Model\ShippableInterface;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface;
+    use Sylius\Component\Shipping\Model\ShippableInterface;
+    use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
-    class Book
+    class Book implements ShippableInterface
     {
         private $shippingCategory;
 
