@@ -11,12 +11,10 @@
 
 namespace Sylius\Component\Rbac\Resolver;
 
-use ArrayIterator;
 use Doctrine\Common\Collections\Collection;
-use RecursiveIterator;
 use Sylius\Component\Rbac\Model\PermissionInterface;
 
-class RecursivePermissionIterator extends ArrayIterator implements RecursiveIterator
+class RecursivePermissionIterator extends \ArrayIterator implements \RecursiveIterator
 {
     public function __construct($permissions)
     {

@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Shipping country rule configuration form type.

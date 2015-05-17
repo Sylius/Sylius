@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * RBAC Persmission type form type.
+ * RBAC Permission type form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -43,7 +43,7 @@ class PermissionType extends AbstractResourceType
 
             if (null === $permission || null === $permission->getId()) {
                 $form->add('code', 'text', array(
-                    'label' => 'sylius.form.permission.code'
+                    'label' => 'sylius.form.permission.code',
                 ));
             } else {
                 $form->add('code', 'text', array(

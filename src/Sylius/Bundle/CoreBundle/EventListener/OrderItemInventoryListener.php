@@ -44,7 +44,7 @@ class OrderItemInventoryListener
 
     public function prePersist(LifecycleEventArgs $args)
     {
-        $item = $args->getEntity();
+        $item = $args->getObject();
 
         if (!$this->supports($item)) {
             return;

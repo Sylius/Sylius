@@ -47,7 +47,7 @@ class Role implements RoleInterface
     protected $parent;
 
     /**
-     * @var Collection
+     * @var Collection|RoleInterface[]
      */
     protected $children;
 
@@ -73,7 +73,7 @@ class Role implements RoleInterface
     protected $level;
 
     /**
-     * @var Collection
+     * @var Collection|PermissionInterface[]
      */
     protected $permissions;
 

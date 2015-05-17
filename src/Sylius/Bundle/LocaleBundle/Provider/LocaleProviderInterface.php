@@ -11,12 +11,12 @@
 
 namespace Sylius\Bundle\LocaleBundle\Provider;
 
-use Sylius\Component\Locale\Provider\LocaleProviderInterface as BaseLocaleProviderInterface;
 use A2lix\TranslationFormBundle\Locale\LocaleProviderInterface as FormLocaleProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface as BaseLocaleProviderInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface LocaleProviderInterface extends BaseLocaleProviderInterface, FormLocaleProviderInterface
 {
-} 
+}

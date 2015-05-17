@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\WebBundle\Behat;
 
+use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Web context.
@@ -66,12 +66,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnThePage($page)
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl($page));
-
-        try {
-            $this->assertStatusCodeEquals(200);
-        } catch (UnsupportedDriverActionException $e) {
-        }
+        $this->assertUrl($this->generatePageUrl($page));
     }
 
     /**
@@ -79,7 +74,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnTheStoreHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_homepage'));
+        $this->assertUrl($this->generateUrl('sylius_homepage'));
     }
 
     /**
@@ -99,11 +94,19 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on my account homepage$/
+     * @Then /^I should be on my account homepage$/
      */
     public function iShouldBeOnMyAccountHomepage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
+        $this->assertUrl($this->generateUrl('sylius_account_homepage'));
+    }
+
+    /**
+     * @Then /^I should be on my account profile page$/
+     */
+    public function iShouldBeOnMyAccountProfilePage()
+    {
+        $this->assertUrl($this->generateUrl('fos_user_profile_show'));
     }
 
     /**
@@ -115,19 +118,12 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on my account password page$/
+     * @Then /^I should be on my account password page$/
+     * @Then /^I should still be on my account password page$/
      */
     public function iShouldBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
-    }
-
-    /**
-     * @Then /^I should still be on my account password page$/
-     */
-    public function iShouldStillBeOnMyAccountPasswordPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
+        $this->assertUrl($this->generateUrl('sylius_account_change_password'));
     }
 
     /**
@@ -139,19 +135,12 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I should be on my account profile edition page$/
+     * @Then /^I should be on my account profile edition page$/
+     * @Then /^I should still be on my account profile edition page$/
      */
     public function iShouldBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_edit'));
-    }
-
-    /**
-     * @Given /^I should still be on my account profile edition page$/
-     */
-    public function iShouldStillBeOnMyProfileEditionPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_edit'));
+        $this->assertUrl($this->generateUrl('sylius_account_profile_edit'));
     }
 
     /**
@@ -159,7 +148,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountOrdersPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_order_index'));
+        $this->assertUrl($this->generateUrl('sylius_account_order_index'));
     }
 
     /**
@@ -180,20 +169,11 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
 
     /**
      * @Then /^I should be on my account addresses page$/
+     * @Then /^I should still be on my account addresses page$/
      */
     public function iShouldBeOnMyAccountAddressesPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_index'));
-        $this->assertStatusCodeEquals(200);
-    }
-
-    /**
-     * @Given /^I should still be on my account addresses page$/
-     */
-    public function iShouldStillBeOnMyAccountAddressesPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_index'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generateUrl('sylius_account_address_index'));
     }
 
     /**
@@ -206,20 +186,11 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
 
     /**
      * @Then /^I should be on my account address creation page$/
+     * @Then /^I should still be on my account address creation page$/
      */
     public function iShouldBeOnMyAccountAddressCreationPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_account_address_create'));
-        $this->assertStatusCodeEquals(200);
-    }
-
-    /**
-     * @Then /^I should still be on my account address creation page$/
-     */
-    public function iShouldStillBeOnMyAccountAddressCreationPage()
-    {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_address_create'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl('sylius_account_address_create'));
     }
 
     /**
@@ -227,8 +198,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnLoginPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('fos_user_security_login'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl('fos_user_security_login'));
     }
 
     /**
@@ -236,8 +206,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnRegistrationPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('fos_user_registration_register'));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl('fos_user_registration_register'));
     }
 
     /**
@@ -284,8 +253,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         $shippingMethod = $this->findOneBy('shipping_method', array('name' => $value));
         $shipment = $this->findOneBy('shipment', array('method' => $shippingMethod));
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl('backend_shipment_show', array('id' => $shipment->getId())));
     }
 
     /**
@@ -301,8 +269,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         $resource = $this->findOneBy($type, array($property => $value));
         $entityManager->getFilters()->enable('softdeleteable');
 
-        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl(sprintf('backend_%s_show', $type), array('id' => $resource->getId())));
     }
 
     /**
@@ -345,8 +312,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         $action = str_replace(array_keys($this->actions), array_values($this->actions), $action);
         $resource = $this->findOneBy($type, array($property => $value));
 
-        $this->assertSession()->addressEquals($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl(sprintf('sylius_backend_%s_%s', $type, $action), array('id' => $resource->getId())));
     }
 
     /**
@@ -387,8 +353,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     {
         $product = $this->findOneByName('product', $name);
 
-        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
-        $this->assertStatusCodeEquals(200);
+        $this->assertUrl($this->generatePageUrl('sylius_backend_product_variant_create', array('productId' => $product->getId())));
     }
 
     /**
@@ -437,9 +402,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iFillInCheckoutAddress($type, $country)
     {
-        $base = sprintf('sylius_checkout_addressing[%sAddress]', $type);
-
-        $this->iFillInAddressFields($base, $country);
+        $this->iFillInAddressFields(sprintf('sylius_checkout_addressing[%sAddress]', $type), $country);
     }
 
     /**
@@ -447,8 +410,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iFillInUserAddress($type, $country)
     {
-        $base = sprintf('%s[%sAddress]', 'sylius_user', $type);
-        $this->iFillInAddressFields($base, $country);
+        $this->iFillInAddressFields(sprintf('%s[%sAddress]', 'sylius_user', $type), $country);
     }
 
     /**
@@ -568,8 +530,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldSeeProductPricesIn($code)
     {
-        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($code);
-        $this->assertSession()->pageTextContains($symbol);
+        $this->assertSession()->pageTextContains(Intl::getCurrencyBundle()->getCurrencySymbol($code));
     }
 
     /**
@@ -585,8 +546,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iChangeTheCurrencyTo($code)
     {
-        $symbol = Intl::getCurrencyBundle()->getCurrencySymbol($code);
-        $this->clickLink($symbol);
+        $this->clickLink(Intl::getCurrencyBundle()->getCurrencySymbol($code));
     }
 
     /**
@@ -613,13 +573,15 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
         switch ($name) {
             case 'English':
                 $text = 'Welcome to Sylius';
-            break;
+                break;
             case 'Polish':
                 $text = 'Witaj w Sylius';
-            break;
+                break;
             case 'German':
                 $text = 'Englisch';
-            break;
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('Unknown locale selected "%s".', $name));
         }
 
         $this->assertSession()->pageTextContains($text);
@@ -922,5 +884,15 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     public function iShouldHaveMyAccessDenied()
     {
         $this->assertStatusCodeEquals(403);
+    }
+
+    /**
+     * @param string $url
+     * @param int    $status
+     */
+    protected function assertUrl($url, $status = 200)
+    {
+        $this->assertSession()->addressEquals($url);
+        $this->assertStatusCodeEquals($status);
     }
 }

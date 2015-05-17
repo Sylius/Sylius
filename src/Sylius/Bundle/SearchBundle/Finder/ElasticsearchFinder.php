@@ -18,7 +18,7 @@ use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
 
 /**
- * Elasticsearch Finder
+ * ElasticSearch Finder
  *
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
@@ -32,7 +32,8 @@ class ElasticsearchFinder extends AbstractFinder
 
     public function __construct(
         SearchIndexRepository $searchRepository,
-        $config, $productRepository,
+        $config,
+        $productRepository,
         $targetIndex,
         QueryLoggerInterface $queryLogger
     ) {
@@ -169,7 +170,7 @@ class ElasticsearchFinder extends AbstractFinder
     /**
      * @param null $facets
      * @param $configuration
-     * @param $taxon
+     * @param string $taxon
      * @param null $types
      *
      * @return mixed
@@ -213,12 +214,11 @@ class ElasticsearchFinder extends AbstractFinder
     {
         $elasticaQuery = new \Elastica\Query();
         $boolFilter    = new \Elastica\Filter\Bool();
-        $query = new \Elastica\Query\QueryString($searchTerm);
+        $query         = new \Elastica\Query\QueryString($searchTerm);
 
         if (!empty($types)) {
             foreach ($types as $type) {
-                $typeFilter = new \Elastica\Filter\Type($type);
-                $boolFilter->addMust($typeFilter);
+                $boolFilter->addMust(new \Elastica\Filter\Type($type));
             }
             $elasticaQuery->setPostFilter($boolFilter);
         }
@@ -232,7 +232,7 @@ class ElasticsearchFinder extends AbstractFinder
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
             $taxonFromRequestFilter->setTerms('taxons', array($preSearchTaxonFilter));
             $boolFilter->addMust($taxonFromRequestFilter);
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         $elasticaQuery->setQuery($query);

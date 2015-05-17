@@ -11,10 +11,10 @@
 
 namespace spec\Sylius\Bundle\ReportBundle\DependencyInjection\Compiler;
 
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-use PhpSpec\ObjectBehavior;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

@@ -13,10 +13,10 @@ namespace spec\Sylius\Component\Archetype\Builder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Archetype\Model\ArchetypeInterface;
+use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
-use Sylius\Component\Archetype\Model\ArchetypeSubjectInterface;
-use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
 

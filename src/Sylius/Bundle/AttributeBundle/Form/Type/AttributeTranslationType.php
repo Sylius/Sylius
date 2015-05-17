@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
-use Sylius\Bundle\AttributeBundle\Form\EventListener\BuildAttributeFormChoicesListener;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Attribute\Model\AttributeTypes;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

@@ -54,11 +54,12 @@ class CommandExecutor
     }
 
     /**
-     * @param $command
-     * @param array $parameters
+     * @param string          $command
+     * @param array           $parameters
+     * @param OutputInterface $output
      * @param OutputInterface $output
      *
-     * @return $this
+     * @return self
      *
      * @throws \Exception
      */
@@ -78,9 +79,8 @@ class CommandExecutor
 
             $errorMessage = sprintf('The command terminated with an error code: %u.', $exitCode);
             $this->output->writeln("<error>$errorMessage</error>");
-            $exception = new \Exception($errorMessage, $exitCode);
 
-            throw $exception;
+            throw new \Exception($errorMessage, $exitCode);
         }
 
         return $this;

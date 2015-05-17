@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\TranslationBundle\DependencyInjection\Mapper;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DatabaseDriverFactory;
+use Sylius\Bundle\TranslationBundle\DependencyInjection\AbstractTranslationExtension;
 use Sylius\Component\Resource\Exception\Driver\InvalidDriverException;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;

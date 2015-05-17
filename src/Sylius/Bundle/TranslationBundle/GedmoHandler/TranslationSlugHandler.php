@@ -10,13 +10,13 @@
 
 namespace Sylius\Bundle\TranslationBundle\GedmoHandler;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Gedmo\Sluggable\SluggableListener;
-use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
-use Gedmo\Tool\Wrapper\AbstractWrapper;
+use Doctrine\Common\Persistence\ObjectManager;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Sluggable\Handler\SlugHandlerInterface;
+use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Tool\Wrapper\AbstractWrapper;
 
 /**
  * This is the handler for the permalink fields that are in translation entities
@@ -120,10 +120,11 @@ class TranslationSlugHandler implements SlugHandlerInterface
             $this->parentSlug = $translation->$options['parentFieldMethod']();
 
             // if needed, remove suffix from parentSlug, so we can use it to prepend it to our slug
-            if(isset($options['suffix'])) {
+            if (isset($options['suffix'])) {
                 $suffix = $options['suffix'];
 
-                if(substr($this->parentSlug, -strlen($suffix)) === $suffix) { //endsWith
+                // endsWith
+                if ($suffix === substr($this->parentSlug, -strlen($suffix))) {
                     $this->parentSlug = substr_replace($this->parentSlug, '', -1 * strlen($suffix));
                 }
             }
@@ -156,22 +157,24 @@ class TranslationSlugHandler implements SlugHandlerInterface
             $config['pathSeparator'] = $this->usedPathSeparator;
             $ea->replaceRelative($object, $config, $target.$config['pathSeparator'], $slug);
             $uow = $this->om->getUnitOfWork();
+
             // update in memory objects
             foreach ($uow->getIdentityMap() as $className => $objects) {
                 // for inheritance mapped classes, only root is always in the identity map
                 if ($className !== $wrapped->getRootObjectName()) {
                     continue;
                 }
+
                 foreach ($objects as $object) {
                     if (property_exists($object, '__isInitialized__') && !$object->__isInitialized__) {
                         continue;
                     }
-                    $oid = spl_object_hash($object);
+
                     $objectSlug = $meta->getReflectionProperty($config['slug'])->getValue($object);
                     if (preg_match("@^{$target}{$config['pathSeparator']}@smi", $objectSlug)) {
                         $objectSlug = str_replace($target, $slug, $objectSlug);
                         $meta->getReflectionProperty($config['slug'])->setValue($object, $objectSlug);
-                        $ea->setOriginalObjectProperty($uow, $oid, $config['slug'], $objectSlug);
+                        $ea->setOriginalObjectProperty($uow, spl_object_hash($object), $config['slug'], $objectSlug);
                     }
                 }
             }
@@ -191,13 +194,11 @@ class TranslationSlugHandler implements SlugHandlerInterface
     public function transliterate($text, $separator, $object)
     {
         if ('' !== $this->parentSlug) {
-            $text = $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
-        } else {
-            // if no parentSlug, apply our prefix
-            $text = $this->prefix.$text;
+            return $this->parentSlug.$this->usedPathSeparator.$text.$this->suffix;
         }
 
-        return $text;
+        // if no parentSlug, apply our prefix
+        return $this->prefix.$text;
     }
 
     /**

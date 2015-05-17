@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Translation\Repository;
 
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Translation\Provider\LocaleProviderInterface;
 

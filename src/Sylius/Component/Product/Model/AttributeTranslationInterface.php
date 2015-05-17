@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -19,4 +20,4 @@ use Sylius\Component\Attribute\Model\AttributeTranslationInterface as BaseAttrib
  */
 interface AttributeTranslationInterface extends BaseAttributeTranslationInterface
 {
-} 
+}

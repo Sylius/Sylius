@@ -11,15 +11,9 @@
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
-use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * API controller for resetting user passwords.

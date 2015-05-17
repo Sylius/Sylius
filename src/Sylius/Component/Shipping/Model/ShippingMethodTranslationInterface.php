@@ -12,7 +12,6 @@
 namespace Sylius\Component\Shipping\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Shipping method translation interface.

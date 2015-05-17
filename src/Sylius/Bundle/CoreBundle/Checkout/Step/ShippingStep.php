@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -28,7 +29,7 @@ use Symfony\Component\Form\FormInterface;
 class ShippingStep extends CheckoutStep
 {
     /**
-     * @var null|ZoneInterface
+     * @var Collection|ZoneInterface[]
      */
     private $zones;
 
@@ -94,7 +95,7 @@ class ShippingStep extends CheckoutStep
 
         return $this->createForm('sylius_checkout_shipping', $order, array(
             'criteria' => array(
-                'zone' => !empty($this->zones) ? array_map(function ($zone) {
+                'zone' => !empty($this->zones) ? array_map(function (ZoneInterface $zone) {
                     return $zone->getId();
                 }, $this->zones) : null,
                 'enabled' => true,
