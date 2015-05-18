@@ -118,6 +118,7 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
+            new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
         );
 
         return $bundles;

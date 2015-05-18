@@ -1,0 +1,46 @@
+{
+    "name": "sylius/theme-bundle",
+    "type": "symfony-bundle",
+    "description": "Themes management for Symfony2 projects.",
+    "keywords": ["themes", "theming"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Kamil Kokot",
+            "homepage": "http://kamil.kokot.me"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                      ">=5.3.3",
+
+        "sylius/resource-bundle":   "0.14.*@dev",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1",
+        "twig/twig":       "~1.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\ThemeBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Bundle\\ThemeBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.14-dev"
+        }
+    }
+}

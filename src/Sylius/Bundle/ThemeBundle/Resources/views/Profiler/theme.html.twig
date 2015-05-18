@@ -1,0 +1,67 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    <div class="sf-toolbar-block">
+        <div class="sf-toolbar-icon">
+            <a href="{{ path('_profiler', { 'token': token, 'panel': name }) }}">
+                {# fake image span #}<span style="width:0px; height: 28px; vertical-align: middle;"></span>
+                <span class="sf-toolbar-status">{{ collector.usedThemes|length }}</span>
+            </a>
+        </div>
+        <div class="sf-toolbar-info">
+            <div class="sf-toolbar-info-piece">
+                <b>Sorted by priority (highest first)</b>
+                <ul>
+                    {% for theme in collector.usedThemes %}
+                        <li>
+                            <strong>[{{ collector.themesPriorities[theme.logicalName]|default('-') }}]</strong> {{ theme.name }} <small>({{ theme.logicalName }})</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon"></span>
+        <strong>Themes</strong>
+        <span class="count">
+            <span>{{ collector.usedThemes|length }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Used themes ({{ collector.usedThemes|length }})</h2>
+    {% set themes = collector.usedThemes %}
+    {% set priority = true %}
+    {{ block('table') }}
+
+    <h2>All themes ({{ collector.allThemes|length }})</h2>
+    {% set themes = collector.allThemes %}
+    {% set priority = false %}
+    {{ block('table') }}
+{% endblock %}
+
+{% block table %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Logical name</th>
+            {% if priority %}<th>Priority</th>{% endif %}
+            <th>Path</th>
+            <th>Description</th>
+        </tr>
+        {% for theme in themes %}
+            <tr>
+                <td>{{ theme.name }}</td>
+                <td>{{ theme.logicalName }}</td>
+                {% if priority %}<td>{{ collector.themesPriorities[theme.logicalName]|default('-') }}</td>{% endif %}
+                <td>{{ theme.path }}</td>
+                <td>{{ theme.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
