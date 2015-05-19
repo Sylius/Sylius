@@ -8,7 +8,7 @@ Feature: Countries and provinces
         Given there is default currency configured
         And there are following locales configured:
             | code  | enabled |
-            | en_US | yes     |
+            | en    | yes     |
           And I am logged in as administrator
           And there are following countries:
             | name    | provinces                       |
@@ -69,7 +69,8 @@ Feature: Countries and provinces
     @javascript
     Scenario: Creating new country with provinces
         Given I am on the country creation page
-         When I fill in "Name" with "Poland"
+         When I click "En"
+          And I fill in "Name" with "Poland"
           And I fill in "ISO name" with "PL"
           And I click "Add province"
           And I click "Add province"
@@ -77,6 +78,7 @@ Feature: Countries and provinces
           And I fill in the 2nd province with "Łódź"
           And I press "Create"
          Then I should see "Country has been successfully created."
+          And "Poland" should appear on the page
           And "Łódź" should appear on the page
           And "Lubusz" should appear on the page
 
@@ -108,7 +110,8 @@ Feature: Countries and provinces
     @javascript
     Scenario: Updating the country and removing province
       Given I am editing country "Ukraine"
-       When I fill in "Name" with "Russia"
+       When I click "En"
+        And I fill in "Name" with "Russia"
         And I fill in "ISO name" with "RU"
         And I remove all the provinces
         And I press "Save changes"

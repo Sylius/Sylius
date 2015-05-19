@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\WebBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
@@ -433,6 +435,29 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     }
 
     /**
+     * @When I fill in the :nth province with :value
+     */
+    public function iFillInTheNthProvinceWith($nth, $value)
+    {
+        $cardinal = ((int) $nth) - 1;
+
+        $this->fillField(sprintf('sylius_country[provinces][%d][name]', $cardinal), $value);
+    }
+
+    /**
+     * @When I remove all the provinces
+     */
+    public function iRemoveAllTheProvinces()
+    {
+        /** @var NodeElement[] $deleteButtons */
+        $deleteButtons = $this->getSession()->getPage()->findAll('css', 'a[data-form-collection="delete"]');
+
+        for ($i = count($deleteButtons); $i > 0; $i--) {
+            $deleteButtons[0]->click();
+        }
+    }
+
+    /**
      * @Given /^I fill in the (billing|shipping) address to (.+)$/
      */
     public function iFillInCheckoutAddress($type, $country)
@@ -523,7 +548,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      * @Then I should not see :button button near :user in :table table
      */
     public function iShouldNotSeeButtonInColumnInTable($button, $user, $table)
-    {   
+    {
         $this->assertSession()->elementExists('css', "#".$table." tr[data-user='$user']");
         $this->assertSession()->elementNotExists('css', "#".$table." tr[data-user='$user'] form input[value=".strtoupper($button)."]");
     }
@@ -867,6 +892,12 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     protected function assertStatusCodeEquals($code)
     {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            // Status code is not available Selenium
+
+            return;
+        }
+
         $this->assertSession()->statusCodeEquals($code);
     }
 
@@ -896,7 +927,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     {
         $this->clickLink('Show deleted');
     }
-    
+
     /**
      * @Then I should see table of :id sorted by lastName
      */
@@ -904,15 +935,15 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     {
         $allNames = $this->getSession()->getPage()->findAll('css', '#'.$id.' > tbody > tr > td > p');
         $allSurnames = array();
-        
+
         foreach ($allNames as $name){
             $spacePosition = strpos($name->getText(), ' ');
             $surname = substr($name->getText(), $spacePosition + 1);
             $allSurnames[] .= $surname;
         }
-        
+
         sort($allSurnames);
-        
+
         $this->assertSession()->elementTextContains('css', '#'.$id.' > tbody > tr > td > p', $allSurnames[0]);
     }
 

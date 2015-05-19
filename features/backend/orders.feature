@@ -69,7 +69,7 @@ Feature: Orders management
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"
          When I press "delete"
-          And I press "delete"
+          And I click "delete" from the confirmation modal
          Then I should be on the order index page
           And I should see "Order has been successfully deleted."
 
