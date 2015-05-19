@@ -232,7 +232,7 @@
         <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
             <argument type="service" id="security.context" />
             <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setUser" priority="100" />
-            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setUser" />
+            <tag name="kernel.event_listener" event="sylius.cart.cart_change" method="setUser" />
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
