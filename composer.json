@@ -170,6 +170,8 @@
     "config": {
         "bin-dir": "bin"
     },
+	"minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "0.14-dev"
