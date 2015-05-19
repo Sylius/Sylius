@@ -24,6 +24,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 class TaxonomyType extends AbstractResourceType
 {
     /**
+     * @var BuildTaxonomyFormListener
+     */
+    private $formListener;
+
+    public function __construct($dataClass, BuildTaxonomyFormListener $formListener, array $validationGroups = array())
+    {
+        $this->formListener = $formListener;
+        parent::__construct($dataClass, $validationGroups);
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -33,7 +45,7 @@ class TaxonomyType extends AbstractResourceType
                 'form_type' => 'sylius_taxonomy_translation',
                 'label'    => 'sylius.form.taxonomy.name'
             ))
-            ->addEventSubscriber(new BuildTaxonomyFormListener())
+            ->addEventSubscriber($this->formListener)
         ;
     }
 

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -22,9 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonomyTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(BuildTaxonomyFormListener $formListener)
     {
-        $this->beConstructedWith('Taxonomy', array('sylius'));
+        $this->beConstructedWith('Taxonomy', $formListener, array('sylius'));
     }
 
     function it_is_initializable()
