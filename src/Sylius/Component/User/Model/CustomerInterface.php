@@ -33,6 +33,11 @@ interface CustomerInterface extends UserAwareInterface, TimestampableInterface, 
     public function getId();
 
     /**
+     * @return boolean
+     */
+    public function hasUser();
+
+    /**
      * @return string
      */
     public function getEmail();

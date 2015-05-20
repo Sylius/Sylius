@@ -18,6 +18,7 @@ use Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType;
 use Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType;
 use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\TokenProviderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,20 +50,16 @@ class UserController extends ResourceController
                 $user->setPlainPassword($changePassword->getNewPassword());
 
                 $dispatcher = $this->get('event_dispatcher');
-                $event = new GenericEvent($user);
-                $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, $event);
+                $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
 
                 $this->domainManager->update($user);
 
                 if ($this->config->isApiRequest()) {
                     return $this->handleView($this->view($user, 204));
                 }
-
-                $url = $this->generateUrl('sylius_account_homepage');
-
                 $this->addFlash('success', 'sylius.account.password.change_success');
 
-                return new RedirectResponse($url);
+                return new RedirectResponse($this->generateUrl('sylius_account_homepage'));
             }
 
             $this->addFlash('error', 'sylius.account.password.invalid');
@@ -97,35 +94,13 @@ class UserController extends ResourceController
     public function resetPasswordAction(Request $request)
     {
         $user = $this->getRepository()->findOneBy(array('confirmationToken' => $request->get('token')));
-
         if (null === $user) {
             throw new NotFoundHttpException('This token does not exist');
         }
 
         $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));
-
-        if (new \DateTime > ($user->getPasswordRequestedAt()->add($lifetime))) {
-
-            $user->setConfirmationToken(null);
-            $user->setPasswordRequestedAt(null);
-
-            $this->domainManager->update($user);
-
-            $this->addFlash('error', 'sylius.account.password.token_expired');
-
-            if ($this->config->isApiRequest()) {
-                return $this->handleView($this->view($user, 400));
-            }
-
-            if (is_numeric($request->get('token'))) {
-                $url = $this->generateUrl('sylius_user_request_password_reset_pin');
-
-                return new RedirectResponse($url);
-            }
-
-            $url = $this->generateUrl('sylius_user_request_password_reset_token');
-
-            return new RedirectResponse($url);
+        if (!$user->isPasswordRequestNonExpired($lifetime)) {
+            return $this->handleExpiredToken($request, $user);
         }
 
         $changePassword = new ChangePassword();
@@ -137,19 +112,17 @@ class UserController extends ResourceController
             $user->setPasswordRequestedAt(null);
 
             $dispatcher = $this->get('event_dispatcher');
-            $event = new GenericEvent($user);
-            $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, $event);
+            $dispatcher->dispatch(UserEvents::PASSWORD_RESET_SUCCESS, new GenericEvent($user));
 
             $this->domainManager->update($user);
-
-            $this->addFlash('success', 'sylius.account.password.change_success');
 
             if ($this->config->isApiRequest()) {
                 return $this->handleView($this->view($user, 204));
             }
-            $url = $this->generateUrl('sylius_user_security_login');
 
-            return new RedirectResponse($url);
+            $this->addFlash('success', 'sylius.account.password.change_success');
+
+            return new RedirectResponse($this->generateUrl('sylius_user_security_login'));
         }
 
         if ($this->config->isApiRequest()) {
@@ -174,21 +147,20 @@ class UserController extends ResourceController
             $user = $this->getRepository()->findOneByEmail($passwordReset->getEmail());
 
             if (null !== $user) {
-                $this->addFlash('success', 'sylius.account.password.reset.success');
-
-                $dispatcher = $this->get('event_dispatcher');
 
                 $user->setConfirmationToken($generator->generateUniqueToken());
                 $user->setPasswordRequestedAt(new \DateTime());
 
                 $this->domainManager->update($user);
 
-                $event = new GenericEvent($user);
-                $dispatcher->dispatch($senderEvent, $event);
+                $dispatcher = $this->get('event_dispatcher');
+                $dispatcher->dispatch($senderEvent, new GenericEvent($user));
 
                 if ($this->config->isApiRequest()) {
                     return $this->handleView($this->view($user, 204));
                 }
+
+                $this->addFlash('success', 'sylius.account.password.reset.success');
 
                 return $this->render(
                     'SyliusWebBundle:Frontend/Account:requestPasswordReset.html.twig',
@@ -227,5 +199,32 @@ class UserController extends ResourceController
         }
 
         return $this->createForm($type, $resource);
+    }
+
+    /**
+     * @param  Request          $request
+     * @param  UserInterface    $user
+     * @return RedirectResponse
+     */
+    protected function handleExpiredToken(Request $request, UserInterface $user)
+    {
+        $user->setConfirmationToken(null);
+        $user->setPasswordRequestedAt(null);
+
+        $this->domainManager->update($user);
+
+        if ($this->config->isApiRequest()) {
+            return $this->handleView($this->view($user, 400));
+        }
+
+        $this->addFlash('error', 'sylius.account.password.token_expired');
+
+        $url = $this->generateUrl('sylius_user_request_password_reset_token');
+
+        if (is_numeric($request->get('token'))) {
+            $url = $this->generateUrl('sylius_user_request_password_reset_pin');
+        }
+
+        return new RedirectResponse($url);
     }
 }

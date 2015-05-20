@@ -124,6 +124,14 @@ class Customer implements CustomerInterface, GroupableInterface
     /**
      * {@inheritdoc}
      */
+    public function hasUser()
+    {
+        return null !== $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getEmail()
     {
         return $this->email;
@@ -353,7 +361,7 @@ class Customer implements CustomerInterface, GroupableInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt)
+    public function setDeletedAt(\DateTime $deletedAt = null)
     {
         $this->deletedAt = $deletedAt;
 

@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Exception\AccountStatusException;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserLoginListener
+class UserAutoLoginListener
 {
     /**
      * @var UserLoginInterface

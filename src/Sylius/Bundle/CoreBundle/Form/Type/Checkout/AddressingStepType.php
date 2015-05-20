@@ -45,7 +45,8 @@ class AddressingStepType extends AbstractResourceType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
                 /* @var CustomerInterface $customer */
                 $customer = $options['customer'];
-                if (null === $customer || !$customer instanceof CustomerInterface) {
+                // if customer does not have user, it is not registered, so we do not preset data
+                if (null === $customer || !$customer instanceof CustomerInterface || !$customer->hasUser()) {
                     return;
                 }
 

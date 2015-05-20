@@ -12,22 +12,16 @@
 namespace Sylius\Component\User\Model;
 
 /**
- * User aware interface.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 interface UserAwareInterface
 {
     /**
-     * Get user.
-     *
      * @return UserInterface
      */
     public function getUser();
 
     /**
-     * Set user.
-     *
      * @param UserInterface $user
      *
      * @return self
