@@ -91,6 +91,7 @@ class ProductRepository extends BaseProductRepository
 
         if ($deleted) {
             $this->_em->getFilters()->disable('softdeleteable');
+            $queryBuilder->andWhere('product.deletedAt IS NOT NULL');
         }
 
         return $this->getPaginator($queryBuilder);
