@@ -34,6 +34,11 @@ class CustomerProfileType extends AbstractResourceType
             ->add('email', 'email', array(
                 'label' => 'sylius.form.customer.email',
             ))
+            ->add('birthday', 'birthday', array(
+                'label'    => 'sylius.form.customer.birthday',
+                'widget'   => 'single_text',
+                'required' => false,
+            ))
             ->add('gender', 'sylius_gender')
         ;
     }

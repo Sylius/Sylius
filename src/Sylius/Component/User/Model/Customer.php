@@ -57,7 +57,7 @@ class Customer implements CustomerInterface, GroupableInterface
     protected $birthday;
 
     /**
-     * @var int
+     * @var string
      */
     protected $gender = CustomerInterface::UNKNOWN_GENDER;
 

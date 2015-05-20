@@ -26,9 +26,9 @@ class GenderType extends AbstractType
     {
         $resolver->setDefaults(array(
             'choices' => array(
-                0 => '',
-                1 => 'sylius.gender.male',
-                2 => 'sylius.gender.female',
+                ''  => '',
+                'm' => 'sylius.gender.male',
+                'f' => 'sylius.gender.female',
             )
         ));
     }

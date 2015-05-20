@@ -16,6 +16,7 @@ sylius:
             groups: Groups
             last_name: Last name
             email: Email
+            birthday: Birthday
             billing_address: Billing address
             different_billing_address: Use different address for billing?
         user_filter:
