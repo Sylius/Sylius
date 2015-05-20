@@ -125,7 +125,11 @@
         "sylius/product-bundle":     "self.version",
         "sylius/promotion":          "self.version",
         "sylius/promotion-bundle":   "self.version",
+        "sylius/rbac":               "self.version",
+        "sylius/rbac-bundle":        "self.version",
         "sylius/registry":           "self.version",
+        "sylius/report":             "self.version",
+        "sylius/report-bundle":      "self.version",
         "sylius/resource":           "self.version",
         "sylius/resource-bundle":    "self.version",
         "sylius/search":             "self.version",
@@ -172,7 +176,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.15-dev"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

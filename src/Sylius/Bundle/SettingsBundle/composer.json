@@ -24,7 +24,7 @@
 
         "symfony/framework-bundle":        "~2.3",
         "doctrine/doctrine-cache-bundle":  "~1.0",
-        "sylius/resource-bundle":          "0.14.*@dev"
+        "sylius/resource-bundle":          "0.15.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",

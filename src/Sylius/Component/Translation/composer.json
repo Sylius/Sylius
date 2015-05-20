@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.3.3",
 
-        "sylius/resource":       "0.14.*@dev",
+        "sylius/resource":       "0.15.*@dev",
         "doctrine/collections" : "~1.2"
     },
     "require-dev": {
