@@ -1,23 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_backend_general_settings:
-    path: /general
+sylius_backend_settings:
+    pattern: /{alias}/{namespace}
     defaults:
         _controller: sylius.controller.settings:updateAction
-        namespace: general
-        template: SyliusWebBundle:Backend/Settings:general.html.twig
-
-sylius_backend_security_settings:
-    path: /security
-    defaults:
-        _controller: sylius.controller.settings:updateAction
-        namespace: security
-        template: SyliusWebBundle:Backend/Settings:security.html.twig
-
-sylius_backend_taxation_settings:
-    path: /taxation
-    defaults:
-        _controller: sylius.controller.settings:updateAction
-        namespace: taxation
-        template: SyliusWebBundle:Backend/Settings:taxation.html.twig
+        namespace:   null
+        template:    "SyliusWebBundle:Backend/Settings:%s.html.twig"

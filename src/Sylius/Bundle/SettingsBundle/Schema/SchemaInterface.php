@@ -33,4 +33,18 @@ interface SchemaInterface
      * @param FormBuilderInterface $builder
      */
     public function buildForm(FormBuilderInterface $builder);
+
+    /**
+     * Does this schema support dynamic namespaces declaration?
+     *
+     * @return bool
+     */
+    public function isDynamic();
+
+    /**
+     * Schema alias.
+     *
+     * @return string
+     */
+    public function getAlias();
 }

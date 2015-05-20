@@ -2,22 +2,23 @@
 
 {% from 'SyliusResourceBundle:Macros:actions.html.twig' import update %}
 
+{% set namespace = app.request.attributes.get('namespace') %}
+
 {% block topbar %}
 <ol class="breadcrumb">
     <li>{{ 'sylius.breadcrumb.configuration'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.taxation_settings'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.oauth_settings'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-cog"></i> {{ 'sylius.settings.taxation_header'|trans|raw }}</h1>
+    <h1><i class="icon-cogs"></i> {{ 'sylius.settings.oauth_header'|trans({'%provider%': namespace|capitalize})|raw }}</h1>
 </div>
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_settings', {'alias': 'taxation'}) }}" method="post" class="form-horizontal" novalidate>
-    {{ form_row(form.default_tax_zone, {'attr': {'class': 'input-lg'}}) }}
+<form action="{{ path('sylius_backend_settings', {'alias': 'oauth', 'namespace': namespace}) }}" method="post" class="form-horizontal" novalidate>
     {{ form_rest(form) }}
     {{ update() }}
 </form>

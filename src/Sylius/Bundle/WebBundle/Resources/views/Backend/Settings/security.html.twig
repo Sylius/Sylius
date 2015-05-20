@@ -16,7 +16,7 @@
 
     {{ form_errors(form) }}
 
-    <form action="{{ path('sylius_backend_security_settings') }}" method="post" class="form-horizontal" novalidate>
+    <form action="{{ path('sylius_backend_settings', {'alias': 'oauth', 'namespace': namespace}) }}" method="post" class="form-horizontal" novalidate>
         {{ form_row(form.enabled, {'attr': {'class': 'input-lg'}}) }}
         {{ form_rest(form) }}
         {{ update() }}

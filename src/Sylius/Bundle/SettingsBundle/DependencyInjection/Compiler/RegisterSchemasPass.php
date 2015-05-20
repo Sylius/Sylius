@@ -35,13 +35,7 @@ class RegisterSchemasPass implements CompilerPassInterface
         $schemaRegistry = $container->getDefinition('sylius.settings.schema_registry');
 
         foreach ($container->findTaggedServiceIds('sylius.settings_schema') as $id => $attributes) {
-            if (!array_key_exists('namespace', $attributes[0])) {
-                throw new \InvalidArgumentException(sprintf('Service "%s" must define the "namespace" attribute on "sylius.settings_schema" tags.', $id));
-            }
-
-            $namespace = $attributes[0]['namespace'];
-
-            $schemaRegistry->addMethodCall('registerSchema', array($namespace, new Reference($id)));
+            $schemaRegistry->addMethodCall('registerSchema', array(new Reference($id), isset($attributes[0]['namespace']) ? $attributes[0]['namespace'] : null));
         }
     }
 }

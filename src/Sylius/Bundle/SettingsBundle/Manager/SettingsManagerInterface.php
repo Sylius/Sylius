@@ -23,17 +23,19 @@ interface SettingsManagerInterface
     /**
      * Load settings from given namespace.
      *
-     * @param string $namespace
+     * @param string      $alias
+     * @param null|string $namespace
      *
      * @return Settings
      */
-    public function loadSettings($namespace);
+    public function loadSettings($alias, $namespace = null);
 
     /**
      * Save settings under given namespace.
      *
-     * @param string   $namespace
-     * @param Settings $settings
+     * @param string      $alias
+     * @param null|string $namespace
+     * @param Settings    $settings
      */
-    public function saveSettings($namespace, Settings $settings);
+    public function saveSettings($alias, $namespace, Settings $settings);
 }

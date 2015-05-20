@@ -21,17 +21,16 @@ class SchemaRegistry implements SchemaRegistryInterface
     /**
      * Schemas.
      *
-     * @var array
+     * @var SchemaInterface[]
      */
-    protected $schemas;
+    protected $schemas = array();
 
     /**
-     * Constructor.
+     * Schema namespaces.
+     *
+     * @var string[]
      */
-    public function __construct()
-    {
-        $this->schemas = array();
-    }
+    protected $namespaces = array();
 
     /**
      * {@inheritdoc}
@@ -44,44 +43,64 @@ class SchemaRegistry implements SchemaRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function registerSchema($namespace, SchemaInterface $schema)
+    public function registerSchema(SchemaInterface $schema, $namespace = null)
     {
-        if ($this->hasSchema($namespace)) {
-            throw new \InvalidArgumentException(sprintf('Schema with namespace "%s" has been already registered', $namespace));
+        $this->schemas[$schema->getAlias()] = $schema;
+        if (null !== $namespace) {
+            $this->namespaces[$namespace] = $schema->getAlias();
         }
-
-        $this->schemas[$namespace] = $schema;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function unregisterSchema($namespace)
+    public function unregisterSchema($alias, $namespace = null)
     {
-        if (!$this->hasSchema($namespace)) {
-            throw new \InvalidArgumentException(sprintf('Schema with namespace "%s" does not exist', $namespace));
-        }
+        $this->resolveSchema($alias, $namespace);
 
-        unset($this->schemas[$namespace]);
+        unset($this->schemas[$alias]);
+        unset($this->namespaces[$alias]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasSchema($namespace)
+    public function hasSchema($alias, $namespace = null)
     {
-        return isset($this->schemas[$namespace]);
+        return $this->resolveSchema($alias, $namespace);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSchema($namespace)
+    public function getSchema($alias, $namespace = null)
     {
-        if (!$this->hasSchema($namespace)) {
-            throw new \InvalidArgumentException(sprintf('Schema with namespace "%s" does not exist', $namespace));
+        return $this->resolveSchema($alias, $namespace, true);
+    }
+
+    /**
+     * @param string      $alias
+     * @param null|string $namespace
+     * @param bool        $returnSchema
+     *
+     * @return bool|SchemaInterface
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function resolveSchema($alias, $namespace = null, $returnSchema = false)
+    {
+        if (isset($this->schemas[$alias])) {
+            return $returnSchema ? $this->schemas[$alias] : true;
         }
 
-        return $this->schemas[$namespace];
+        if (null !== $namespace) {
+            if (isset($this->namespaces[$namespace])) {
+                return $returnSchema ? $this->schemas[$this->namespaces[$namespace]] : true;
+            }
+
+            throw new \InvalidArgumentException(sprintf('Schema with alias "%s" namespace "%s" does not exist.', $alias, $namespace));
+        }
+
+        throw new \InvalidArgumentException(sprintf('Schema with alias "%s" does not exist.', $alias));
     }
 }
