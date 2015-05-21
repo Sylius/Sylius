@@ -81,11 +81,10 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function setCurrency($currency)
     {
-        $channel = $this->channelContext->getChannel();
-        $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
-
         if (null === $customer = $this->customerContext->getCustomer()) {
-            return parent::setCurrency($currency);
+            $channel = $this->channelContext->getChannel();
+
+            return $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
         }
 
         $customer->setCurrency($currency);

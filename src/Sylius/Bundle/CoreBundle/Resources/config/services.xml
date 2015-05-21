@@ -438,12 +438,6 @@
             <argument>%sylius.locale%</argument>
         </service>
 
-        <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.repository.user_oauth" />
-            <argument type="service" id="sylius.manager.user" />
-        </service>
-
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">
             <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius" id="sylius" priority="255" />
         </service>

@@ -17,6 +17,11 @@ Feature: Cart
               | name    | price | taxons       |
               | PHP Top | 85    | PHP T-Shirts |
           And there is default currency configured
+          And there is default channel configured
+          And channel "DEFAULT-WEB" has following configuration:
+              | taxonomy |
+              | Category |
+          And all products assigned to "DEFAULT-WEB" channel
 
     Scenario: The cart is maintained after user log in
         Given I am on the store homepage

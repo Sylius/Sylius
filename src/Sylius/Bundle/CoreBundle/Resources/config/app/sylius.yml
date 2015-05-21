@@ -713,8 +713,8 @@ sylius_user:
     classes:
         user:
             model: Sylius\Component\Core\Model\User
-            controller: Sylius\Bundle\CoreBundle\Controller\UserController
             form:
                 default: Sylius\Bundle\CoreBundle\Form\Type\UserType
         customer:
             model: Sylius\Component\Core\Model\Customer
+            controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
