@@ -22,21 +22,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserType extends AbstractResourceType
 {
     /**
-     * @param string   $dataClass
-     * @param string[] $validationGroups
-     */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        parent::__construct($dataClass, $validationGroups);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('customer', 'sylius_customer')
             ->add('plainPassword', 'password', array(
                 'label' => 'sylius.form.user.password.label',
             ))

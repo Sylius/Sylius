@@ -54,7 +54,8 @@ class CustomerRepository extends EntityRepository
      */
     public function createFilterPaginator($criteria = array(), $sorting = array(), $deleted = false)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder();
+        $queryBuilder = parent::getCollectionQueryBuilder()
+            ->leftJoin($this->getPropertyName('user'), 'user');
 
         if ($deleted) {
             $this->_em->getFilters()->disable('softdeleteable');
@@ -62,17 +63,16 @@ class CustomerRepository extends EntityRepository
 
         if (isset($criteria['query'])) {
             $queryBuilder
-                ->leftJoin($this->getAlias().'.user', 'user')
-                ->where($queryBuilder->expr()->like($this->getAlias().'.emailCanonical', ':query'))
-                ->orWhere($queryBuilder->expr()->like($this->getAlias().'.firstName', ':query'))
-                ->orWhere($queryBuilder->expr()->like($this->getAlias().'.lastName', ':query'))
+                ->where($queryBuilder->expr()->like($this->getPropertyName('emailCanonical'), ':query'))
+                ->orWhere($queryBuilder->expr()->like($this->getPropertyName('firstName'), ':query'))
+                ->orWhere($queryBuilder->expr()->like($this->getPropertyName('lastName'), ':query'))
                 ->orWhere($queryBuilder->expr()->like('user.username', ':query'))
                 ->setParameter('query', '%'.$criteria['query'].'%')
             ;
         }
         if (isset($criteria['enabled'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->eq($this->getAlias().'.enabled', ':enabled'))
+                ->andWhere($queryBuilder->expr()->eq('user.enabled', ':enabled'))
                 ->setParameter('enabled', $criteria['enabled'])
             ;
         }

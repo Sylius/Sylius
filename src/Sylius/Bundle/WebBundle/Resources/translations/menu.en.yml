@@ -9,7 +9,7 @@ sylius:
                 blocks: Blocks
                 configuration: Configuration
                 countries: Countries
-                customer: Customers
+                customer: Customer
                 content: Content
                 channels: Channels
                 dashboard: Dashboard
@@ -38,7 +38,7 @@ sylius:
                 tax_rates: Tax rates
                 taxation_settings: Taxation settings
                 taxonomies: Categorization
-                users: Users
+                customers: Customers
                 zones: Zones
                 emails: Emails
                 roles: Roles
@@ -52,7 +52,7 @@ sylius:
                 content: Content
                 countries: Countries
                 channels: Channels
-                customer: Customers
+                customer: Customer
                 dashboard: Dashboard
                 currencies: Currencies
                 general_settings: General settings
@@ -85,7 +85,7 @@ sylius:
                 tax_rates: Tax rates
                 taxation_settings: Taxation settings
                 taxonomies: Categorization
-                users: Users
+                customers: Customers
                 zones: Zones
                 emails: Emails
                 roles: Roles

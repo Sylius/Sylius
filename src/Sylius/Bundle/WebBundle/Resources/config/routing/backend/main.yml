@@ -12,9 +12,9 @@ sylius_backend_dashboard:
     path: /dashboard
     defaults: { _controller: sylius.controller.backend.dashboard:mainAction }
 
-sylius_backend_user:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/user.yml
-    prefix: /users
+sylius_backend_customer:
+    resource: @SyliusWebBundle/Resources/config/routing/backend/customer.yml
+    prefix: /customers
 
 sylius_backend_group:
     resource: @SyliusWebBundle/Resources/config/routing/backend/group.yml

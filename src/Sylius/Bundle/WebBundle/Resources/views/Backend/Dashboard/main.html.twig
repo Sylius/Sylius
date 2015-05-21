@@ -1,7 +1,7 @@
 {% extends 'SyliusWebBundle:Backend:layout.html.twig' %}
 
 {% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import simple_list as list_orders %}
-{% from 'SyliusWebBundle:Backend/User:macros.html.twig' import simple_list as list_users %}
+{% from 'SyliusWebBundle:Backend/Customer:macros.html.twig' import simple_list as list_customers %}
 
 {% block content %}
 <div class="page-header">
@@ -12,7 +12,7 @@
     <div class="col-md-6">
         <ul class="nav nav-pills nav-justified">
             <li><a href="{{ path('sylius_backend_order_index') }}"><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.backend.quick_links.orders'|trans }}</a></li>
-            <li><a href="{{ path('sylius_backend_user_index') }}"><i class="glyphicon glyphicon-user"></i> {{ 'sylius.backend.quick_links.users'|trans }}</a></li>
+            <li><a href="{{ path('sylius_backend_customer_index') }}"><i class="glyphicon glyphicon-user"></i> {{ 'sylius.backend.quick_links.customers'|trans }}</a></li>
         </ul>
         <hr>
         <ul class="nav nav-pills nav-justified">
@@ -32,8 +32,8 @@
         <a href="{{ path('sylius_backend_order_index') }}" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-shopping-cart"></i> {{ 'sylius.show_all'|trans }}</a>
     </div>
     <div class="col-md-6">
-        {{ list_users(users) }}
-        <a href="{{ path('sylius_backend_user_index') }}" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-user"></i> {{ 'sylius.show_all'|trans }}</a>
+        {{ list_customers(customers) }}
+        <a href="{{ path('sylius_backend_customer_index') }}" class="btn btn-primary btn-block"><i class="glyphicon glyphicon-user"></i> {{ 'sylius.show_all'|trans }}</a>
     </div>
 </div>
 {% endblock %}

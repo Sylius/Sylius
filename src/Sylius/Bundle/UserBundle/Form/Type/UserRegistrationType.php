@@ -21,15 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserRegistrationType extends AbstractResourceType
 {
     /**
-    * @param string   $dataClass
-    * @param string[] $validationGroups
-    */
-    public function __construct($dataClass, array $validationGroups)
-    {
-        parent::__construct($dataClass, $validationGroups);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)

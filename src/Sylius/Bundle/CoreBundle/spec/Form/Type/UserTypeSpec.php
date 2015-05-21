@@ -43,7 +43,6 @@ class UserTypeSpec extends ObjectBehavior
 
     function it_builds_form(FormBuilderInterface $builder)
     {
-        $builder->add('customer', 'sylius_customer')->shouldBeCalled()->willReturn($builder);
         $builder->add('plainPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('enabled', 'checkbox', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('authorizationRoles', 'sylius_role_choice', Argument::any())->shouldBeCalled()->willReturn($builder);

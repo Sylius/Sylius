@@ -41,11 +41,7 @@
                 {% include 'SyliusWebBundle:Backend/Order:_shippingState.html.twig' %}
             </td>
             <td>
-                {% if order.customer.user %}
-                    <p>{{ order.customer.fullName }} <br><a href="{{ path('sylius_backend_user_show', {'id': order.customer.user.id}) }}">{{ order.customer.email }}</a></p>
-                {% else %}
-                    <p>{{ order.customer.fullName }} <br><span title="{{ 'sylius.order.guest'|trans }}">{{ order.customer.email }}</span></p>
-                {% endif %}
+                <p>{{ order.customer.fullName }} <br><a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">{{ order.customer.email }}</a></p>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
             <td>
@@ -85,7 +81,7 @@
         <tr>
             <th>{{ 'sylius.order.number'|trans }}</th>
             <th>{{ 'sylius.order.payment_state'|trans }}</th>
-            <th>{{ 'sylius.order.user'|trans }}</th>
+            <th>{{ 'sylius.order.customer'|trans }}</th>
             <th>{{ 'sylius.order.total'|trans }}</th>
         </tr>
     </thead>
@@ -101,15 +97,10 @@
                 {% include 'SyliusWebBundle:Backend/Order:_paymentState.html.twig' %}
             </td>
             <td style="width: 20%">
-                {% if order.customer.user %}
-                    {{ order.customer.fullname }}<br>
-                    <a href="{{ path('sylius_backend_user_show', {'id': order.customer.user.id}) }}">
-                        {{ order.customer.email }}
-                    </a>
-                {% else %}
-                    {{ order.customer.fullname }}<br>
-                    <span title="{{ 'sylius.order.guest'|trans }}">{{ order.customer.email }}</span>
-                {% endif %}
+                {{ order.customer.fullname }}<br>
+                <a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">
+                    {{ order.customer.email }}
+                </a>
             </td>
             <td>{{ order.total|sylius_price(order.currency) }}</td>
         </tr>

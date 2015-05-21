@@ -15,7 +15,7 @@ use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
-use Sylius\Component\Core\Model\Customer;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -94,7 +94,7 @@ class CoreContext extends DefaultContext
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
-            $order->setCustomer($this->thereIsUser($data['user'], 'sylius', 'ROLE_USER')->getCustomer());
+            $order->setCustomer($this->thereIsCustomer($data['customer']));
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
@@ -174,6 +174,24 @@ class CoreContext extends DefaultContext
                 false,
                 array(),
                 isset($data['created at']) ? new \DateTime($data["created at"]) : null
+            );
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given /^there are following customers:$/
+     */
+    public function thereAreFollowingCustomers(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsCustomer(
+                $data['email'],
+                isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
+                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
+                false,
+                isset($data['created at']) ? new \DateTime($data['created at']) : null
             );
         }
 
@@ -277,6 +295,40 @@ class CoreContext extends DefaultContext
         }
 
         return $user;
+    }
+
+    protected function thereIsCustomer($email, $address = null, $groups = array(), $flush = true, $createdAt = null)
+    {
+        if (null !== $customer = $this->getRepository('customer')->findOneByEmail($email)) {
+            return $customer;
+        }
+
+        $addressData = explode(',', $address);
+        $addressData = array_map('trim', $addressData);
+
+        /* @var $customer CustomerInterface */
+        $customer = $this->getRepository('customer')->createNew();
+        $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+        $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+        $customer->setEmail($email);
+        $customer->setEmailCanonical($email);
+        $customer->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
+        if (null !== $address) {
+            $customer->setShippingAddress($this->createAddress($address));
+        }
+
+        foreach ($groups as $groupName) {
+            if ($group = $this->findOneByName('group', $groupName)) {
+                $customer->addGroup($group);
+            }
+        }
+
+        $this->getEntityManager()->persist($customer);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+
+        return $customer;
     }
 
     /**

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
+use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -26,9 +27,9 @@ class GenderType extends AbstractType
     {
         $resolver->setDefaults(array(
             'choices' => array(
-                ''  => '',
-                'm' => 'sylius.gender.male',
-                'f' => 'sylius.gender.female',
+                CustomerInterface::UNKNOWN_GENDER  => ' ',
+                CustomerInterface::MALE_GENDER => 'sylius.gender.male',
+                CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
             )
         ));
     }

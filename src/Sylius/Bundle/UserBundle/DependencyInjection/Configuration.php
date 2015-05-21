@@ -168,6 +168,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\UserBundle\Form\Type\GroupType')->end()
+                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
                                     ->end()
                                 ->end()
                             ->end()

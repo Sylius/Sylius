@@ -92,7 +92,7 @@ sylius:
             add_product: New product
             orders: Latest orders
             products: Your products
-            users: Users
+            customers: Customers
         statistics:
             header: This month's statistics
             orders_this_month: Total orders
@@ -178,7 +178,10 @@ sylius:
         content: Content
         country:
             index: Countries
-        customers: Customers
+        section:
+            customer: Customer
+        customer:
+            index: Customers
         dashboard: Dashboard
         edit: Edit
         contact_request:
@@ -251,8 +254,6 @@ sylius:
         channel:
             index: Channels
         update: Edit
-        user:
-            index: Users
         permission:
             index: Permissions
         role:
@@ -428,7 +429,7 @@ sylius:
     go_to_dashboard: Go to dashboard
     group:
         create: Create group
-        create_header: Adding new user groups
+        create_header: Adding new customer groups
         id: ID
         index_header: Groups
         name: Name
@@ -951,21 +952,40 @@ sylius:
         update_header: Editing taxonomy
     total_quantity: Total Qty
     unknown: Unknown
-    user:
+    customer:
         billing_address: Billing address
+        create: create customer
+        create_header: New customer
+        email: E-Mail
+        filter:
+            all: Show all customers
+            registered: Show registered customers
+            unconfirmed: Show unconfirmed accounts
+        general_info: Customer "%fullName%" general info
+        first_name: First name
+        id: ID
+        index_header: Customers <small>List of all customers in store</small>
+        last_name: Last name
+        manage: manage customers
+        no_results: There are no customers to display.
+        order:
+            no_results: There are no orders for this customer to display.
+        orders: Customer orders
+        recent_header: Recent customers
+        creation_date: Creation date
+        shipping_address: Shipping address
+        show_header: Customer details
+        update_header: Editing customer
+        groups: Groups
+        no_groups: There are no groups for this customer to display.
+    user:
         create: create user
         create_header: New user
-        email: E-Mail
         enabled: Confirmed?
-        filter:
-            all: Show all users
-            unconfirmed: Unconfirmed accounts
-        first_name: First name
         general_info: User "%username%" general info
         id: ID
         index_header: Users <small>List of all users registered in store</small>
         last_login: Last login
-        last_name: Last name
         impersonate: Log in as this user
         manage: manage users
         no_results: There are no users to display.
@@ -974,20 +994,14 @@ sylius:
             identifier: Identifier
             access_token: Access Token
             none: No OAuth accounts connected.
-        order:
-            no_results: There are no orders for this user to display.
-        orders: User orders
         recent_header: Recent users
         registration_date: Registration date
         register:
             button: Register
             header: Registration <small>Create an account in store</small>
-        shipping_address: Shipping address
         show_header: User details
         update_header: Editing user
         username: Username
-        groups: Groups
-        no_groups: There are no groups for this user to display.
     variant:
         add_image: Add image
         availability: Availability

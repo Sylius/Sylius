@@ -2,4 +2,4 @@
 {% from 'SyliusWebBundle:Backend/Order:macros.html.twig' import list %}
 
 {{ list(orders, customer) }}
-{{ pagination(orders, {'routeName' : 'sylius_backend_user_show', 'routeParams' : {'id' : customer.user.id} }) }}
+{{ pagination(orders, {'routeName' : 'sylius_backend_customer_show', 'routeParams' : {'id' : customer.id} }) }}

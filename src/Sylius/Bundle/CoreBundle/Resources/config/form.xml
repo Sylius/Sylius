@@ -30,7 +30,7 @@
         <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
         <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodEntityType</parameter>
 
-        <parameter key="sylius.form.type.user_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\UserFilterType</parameter>
+        <parameter key="sylius.form.type.customer_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\CustomerFilterType</parameter>
         <parameter key="sylius.form.type.product_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ProductFilterType</parameter>
         <parameter key="sylius.form.type.order_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\OrderFilterType</parameter>
         <parameter key="sylius.form.type.shipment_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\ShipmentFilterType</parameter>
@@ -111,8 +111,8 @@
         </service>
 
         <!-- filters -->
-        <service id="sylius.form.type.user_filter" class="%sylius.form.type.user_filter.class%">
-            <tag name="form.type" alias="sylius_user_filter" />
+        <service id="sylius.form.type.customer_filter" class="%sylius.form.type.customer_filter.class%">
+            <tag name="form.type" alias="sylius_customer_filter" />
         </service>
         <service id="sylius.form.type.product_filter" class="%sylius.form.type.product_filter.class%">
             <tag name="form.type" alias="sylius_product_filter" />
