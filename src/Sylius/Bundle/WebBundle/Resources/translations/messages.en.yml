@@ -314,6 +314,8 @@ sylius:
         forward: Continue
         payment:
             header: Payment method
+        thank_you:
+            header: Thank you for your order
         security:
             existing_customer: Existing Customer
             header: Sign in to the store <small>or create new account</small>

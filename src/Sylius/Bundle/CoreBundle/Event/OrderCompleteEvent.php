@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Response;
 
-class PurchaseCompleteEvent extends GenericEvent
+class OrderCompleteEvent extends GenericEvent
 {
     private $response;
 

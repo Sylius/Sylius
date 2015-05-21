@@ -54,6 +54,7 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
             ->add('payment', 'sylius_checkout_payment')
             ->add('finalize', 'sylius_checkout_finalize')
             ->add('purchase', 'sylius_checkout_purchase')
+            ->add('thank_you', 'sylius_checkout_thank_you')
         ;
 
         $builder

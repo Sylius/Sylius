@@ -1,0 +1,27 @@
+{% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
+
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::PROMOTION_ADJUSTMENT') %}
+
+{% block content %}
+<div class="page-header">
+    {% if order.state == 'confirmed' %}
+        <h1>{{ 'sylius.checkout.thank_you.header'|trans|raw }}</h1>
+    {% else %}
+        <h1>{{ 'sylius.checkout.thank_you.header'|trans|raw }}</h1>
+    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Thank you for your order</h4>
+        <p><strong>Your order number is:</strong> {{ order.number }}</p>
+        <p><strong>Order state: </strong>{{ order.state }}</p>
+        <p><strong>Payment state: </strong>{{ order.paymentState }}</p>
+        <p><strong>Shipping state: </strong>{{ order.shippingState }}</p>
+        <p>Thank you for purchasing. Go back to <a href="{{ path('sylius_homepage') }}">homepage</a></p>
+    </div>
+</div>
+
+{% endblock %}

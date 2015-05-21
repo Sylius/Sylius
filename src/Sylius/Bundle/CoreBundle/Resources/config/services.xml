@@ -30,6 +30,7 @@
         <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
         <parameter key="sylius.checkout_step.purchase.class">Sylius\Bundle\CoreBundle\Checkout\Step\PurchaseStep</parameter>
         <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
+        <parameter key="sylius.checkout_step.thank_you.class">Sylius\Bundle\CoreBundle\Checkout\Step\ThankYouStep</parameter>
 
         <parameter key="sylius.order_processing.inventory_handler.class">Sylius\Component\Core\OrderProcessing\InventoryHandler</parameter>
         <parameter key="sylius.order_processing.state_resolver.class">Sylius\Component\Core\OrderProcessing\StateResolver</parameter>
@@ -43,6 +44,7 @@
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
+        <parameter key="sylius.listener.order_thank_you.class">Sylius\Bundle\CoreBundle\EventListener\OrderThankYouListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_pricing.class">Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
@@ -169,6 +171,12 @@
                 <argument type="service" id="service_container" />
             </call>
             <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
+        </service>
+        <service id="sylius.checkout_step.thank_you" class="%sylius.checkout_step.thank_you.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.step" alias="sylius_checkout_thank_you" />
         </service>
 
         <!-- order processing -->
@@ -306,13 +314,15 @@
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.complete" method="handleRestrictedZone" />
         </service>
         <service id="sylius.listener.purchase" class="%sylius.listener.purchase.class%">
-            <argument type="service" id="sylius.cart_provider" />
-            <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
-            <argument>sylius_checkout_payment</argument>
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
+        </service>
+        <service id="sylius.listener.order_thank_you" class="%sylius.listener.order_thank_you.class%">
+            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="router" />
+            <argument>sylius_checkout_payment</argument>
+            <tag name="kernel.event_listener" event="sylius.checkout.thank_you.complete" method="abandonCart" />
         </service>
         <service id="sylius.listener.checkout_addressing" class="%sylius.listener.checkout_addressing.class%">
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setUserAddressing" />
