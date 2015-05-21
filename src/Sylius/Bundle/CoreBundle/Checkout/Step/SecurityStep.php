@@ -197,6 +197,7 @@ class SecurityStep extends CheckoutStep
     public function complete()
     {
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_COMPLETE, $this->getCurrentCart());
+
         return parent::complete();
     }
 }

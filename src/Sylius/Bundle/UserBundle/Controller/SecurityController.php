@@ -25,11 +25,8 @@ class SecurityController extends Controller
     public function loginAction(Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
-
         $error = $authenticationUtils->getLastAuthenticationError();
-
         $lastUsername = $authenticationUtils->getLastUsername();
-
         $form = $this->get('form.factory')->createNamed('', 'sylius_user_security_login');
 
         return $this->render(
@@ -43,7 +40,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * Login check action. This action should not be called ever.
+     * Login check action. This action should never be called.
      */
     public function checkAction(Request $request)
     {
@@ -51,7 +48,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * Logout action. This action should not be called ever.
+     * Logout action. This action should never be called.
      */
     public function logoutAction(Request $request)
     {

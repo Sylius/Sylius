@@ -35,10 +35,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @var RepositoryInterface
      */
     protected $oauthRepository;
+
     /**
      * @var RepositoryInterface
      */
     protected $userRepository;
+
     /**
      * @var ObjectManager
      */

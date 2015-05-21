@@ -13,12 +13,17 @@ namespace Sylius\Bundle\UserBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CustomerController extends ResourceController
 {
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function updateProfileAction(Request $request)
     {
         $resource = $this->getCustomer();
@@ -47,6 +52,9 @@ class CustomerController extends ResourceController
         );
     }
 
+    /**
+     * @return CustomerInterface|null
+     */
     protected function getCustomer()
     {
         return $this->get('sylius.context.customer')->getCustomer();

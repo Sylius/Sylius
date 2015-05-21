@@ -16,13 +16,18 @@ use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class CustomerContext implements CustomerContextInterface
 {
+    /**
+     * @var SecurityContextInterface
+     */
     private $securityContext;
 
+    /**
+     * @param SecurityContextInterface $securityContext
+     */
     public function __construct(SecurityContextInterface $securityContext)
     {
         $this->securityContext = $securityContext;
