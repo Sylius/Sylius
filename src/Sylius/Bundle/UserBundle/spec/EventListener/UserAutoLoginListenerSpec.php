@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserLoginListenerSpec extends ObjectBehavior
+class UserAutoLoginListenerSpec extends ObjectBehavior
 {
     function let(UserLoginInterface $loginManager)
     {
@@ -32,7 +32,7 @@ class UserLoginListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserLoginListener');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserAutoLoginListener');
     }
 
     function it_logs_user_in($loginManager, GenericEvent $event, CustomerInterface $customer, UserInterface $user)
