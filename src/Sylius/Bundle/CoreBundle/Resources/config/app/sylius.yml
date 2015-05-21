@@ -275,6 +275,13 @@ sylius_rbac:
             form:
                 choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
     permissions:
+        sylius.manage.customer: Manage customers
+        sylius.customer.show: Show customer
+        sylius.customer.index: List customers
+        sylius.customer.create: Create customer
+        sylius.customer.update: Edit customer
+        sylius.customer.delete: Delete customer
+
         sylius.manage.user: Manage users
         sylius.user.show: Show user
         sylius.user.index: List users
