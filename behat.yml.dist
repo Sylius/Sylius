@@ -407,6 +407,7 @@ default:
                 - Sylius\Bundle\ResourceBundle\Behat\BaseContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MailerBundle\Behat\MailerContext
+                - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
                 tags: "@emails && ~@javascript"
         security:

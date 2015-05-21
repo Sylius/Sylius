@@ -43,7 +43,7 @@ class ShipmentType extends AbstractType
         $criteria = $options['criteria'];
         $channel  = $options['channel'];
 
-        $notBlank = new NotBlank();
+        $notBlank = new NotBlank(array('groups' => array('sylius')));
         $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
 
         $builder

@@ -90,7 +90,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\ChannelBundle\Form\Type\ChannelType')->end()
-                                        ->scalarNode('choice')->end()
+                                        ->scalarNode('choice')->defaultValue('%sylius.form.type.resource_choice.class%')->end()
                                     ->end()
                                 ->end()
                             ->end()
