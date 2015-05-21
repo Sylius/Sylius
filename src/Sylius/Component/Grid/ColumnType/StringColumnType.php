@@ -36,10 +36,12 @@ class StringColumnType extends AbstractColumnType
     {
         $resolver
             ->setOptional(array(
-                'path'
+                'path',
+                'sort'
             ))
             ->setAllowedTypes(array(
-                'path' => array('string')
+                'path' => array('string'),
+                'sort' => array('string')
             ))
         ;
     }

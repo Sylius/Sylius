@@ -50,7 +50,7 @@ class BooleanFilter implements FilterInterface
                 'field',
             ))
             ->setAllowedTypes(array(
-                'field' => array('string')
+                'field' => array('string'),
             ))
         ;
     }

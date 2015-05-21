@@ -32,8 +32,13 @@ class Sorter implements SorterInterface
                 continue;
             }
 
+            $options = $grid->getColumn($column)->getOptions();
+
+            $field = isset($options['path']) ? $options['path'] : $column;
+            $field = isset($options['sort']) ? $options['sort'] : $field;
+
             if (in_array($direction, array(SorterInterface::ASC, SorterInterface::DESC))) {
-                $dataSource->getExpressionBuilder()->orderBy($column, $direction);
+                $dataSource->getExpressionBuilder()->orderBy($field, $direction);
             }
         }
     }
