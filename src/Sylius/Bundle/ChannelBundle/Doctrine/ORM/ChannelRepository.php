@@ -21,15 +21,31 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
  */
 class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function findMatchingHostname($hostname)
     {
         $queryBuilder = $this->createQueryBuilder('channel');
 
         $queryBuilder
-            ->andWhere('channel.url LIKE :hostname')
+            ->andWhere($queryBuilder->expr()->like('channel.url', ':hostname'))
             ->setParameter('hostname', '%'.$hostname.'%')
         ;
 
         return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findDefault()
+    {
+        return $this
+            ->getCollectionQueryBuilder()
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getSingleResult()
+        ;
     }
 }

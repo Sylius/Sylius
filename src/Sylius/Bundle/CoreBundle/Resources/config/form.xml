@@ -57,7 +57,8 @@
             <tag name="form.type" alias="sylius_checkout_addressing" />
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_group.order%</argument>
             <argument type="service" id="sylius.context.channel"/>
             <tag name="form.type" alias="sylius_checkout_shipping" />
         </service>
@@ -67,7 +68,8 @@
             <tag name="form.type" alias="sylius_checkout_shipment" />
         </service>
         <service id="sylius.checkout_form.payment" class="%sylius.checkout_form.payment.class%">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_group.order%</argument>
             <argument type="service" id="sylius.context.channel" />
             <tag name="form.type" alias="sylius_checkout_payment" />
         </service>

@@ -74,7 +74,7 @@ class ChannelContext extends DefaultContext
                 isset($data['shipping']) ? $data['shipping'] : null,
                 isset($data['payments']) ? $data['payments'] : null,
                 false
-                );
+            );
         }
 
         $this->getEntityManager()->flush();

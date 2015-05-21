@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class PaymentRepository extends EntityRepository
@@ -28,9 +29,8 @@ class PaymentRepository extends EntityRepository
         $this->_em->getFilters()->disable('softdeleteable');
 
         $queryBuilder = $this->getCollectionQueryBuilder();
-
         $queryBuilder
-            ->leftJoin($this->getAlias().'.order', 'paymentOrder')
+            ->leftJoin($this->getPropertyName('order'), 'paymentOrder')
             ->leftJoin('paymentOrder.billingAddress', 'address')
             ->addSelect('paymentOrder')
             ->addSelect('address')
@@ -38,31 +38,31 @@ class PaymentRepository extends EntityRepository
 
         if (!empty($criteria['number'])) {
             $queryBuilder
-                ->andWhere('paymentOrder.number = :number')
+                ->andWhere($queryBuilder->expr()->eq('paymentOrder.number', ':number'))
                 ->setParameter('number', $criteria['number'])
             ;
         }
         if (!empty($criteria['channel'])) {
             $queryBuilder
-                ->andWhere('paymentOrder.channel = :channel')
+                ->andWhere($queryBuilder->expr()->eq('paymentOrder.channel', ':channel'))
                 ->setParameter('channel', $criteria['channel'])
             ;
         }
         if (!empty($criteria['billingAddress'])) {
             $queryBuilder
-                ->andWhere('address.lastName LIKE :billingAddress')
+                ->andWhere($queryBuilder->expr()->like('address.lastName', ':billingAddress'))
                 ->setParameter('billingAddress', '%'.$criteria['billingAddress'].'%')
             ;
         }
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->gte($this->getAlias().'.createdAt', ':createdAtFrom'))
+                ->andWhere($queryBuilder->expr()->gte($this->getPropertyName('createdAt'), ':createdAtFrom'))
                 ->setParameter('createdAtFrom', date('Y-m-d 00:00:00',strtotime($criteria['createdAtFrom'])))
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->lte($this->getAlias().'.createdAt', ':createdAtTo'))
+                ->andWhere($queryBuilder->expr()->lte($this->getPropertyName('createdAt'), ':createdAtTo'))
                 ->setParameter('createdAtTo', date('Y-m-d 23:59:59', strtotime($criteria['createdAtTo'])))
             ;
         }

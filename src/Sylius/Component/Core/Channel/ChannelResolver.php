@@ -37,8 +37,12 @@ class ChannelResolver implements ChannelResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(Request $request)
+    public function resolve($hostname = null)
     {
-        return $this->channelRepository->findMatchingHostname($request->getHost());
+        if (null === $hostname || null === $channel = $this->channelRepository->findMatchingHostname($hostname)) {
+            return $this->channelRepository->findDefault();
+        }
+
+        return $channel;
     }
 }

@@ -238,6 +238,7 @@ class ProductController extends BaseProductController
     /**
      * @param Request $request
      * @param array $criteria
+     *
      * @return null|ProductInterface
      */
     public function findOr404(Request $request, array $criteria = array())

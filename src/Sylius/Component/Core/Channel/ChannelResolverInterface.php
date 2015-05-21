@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Channel;
 
-use Symfony\Component\HttpFoundation\Request;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
  * Interface for service defining the currently used channel.
@@ -23,9 +23,9 @@ interface ChannelResolverInterface
     /**
      * Get currently used channel.
      *
-     * @param Request $request
+     * @param string $hostname
      *
-     * @return null|ChannelInterface
+     * @return ChannelInterface
      */
-    public function resolve(Request $request);
+    public function resolve($hostname = null);
 }

@@ -26,20 +26,20 @@ class PromotionRepository extends BasePromotionRepository
      */
     public function findActiveByChannel(ChannelInterface $channel)
     {
-        $qb = $this
+        $queryBuilder = $this
             ->getCollectionQueryBuilder()
-            ->orderBy($this->getAlias().'.priority', 'DESC')
+            ->orderBy($this->getPropertyName('priority'), 'DESC')
         ;
 
-        $this->filterByActive($qb);
+        $this->filterByActive($queryBuilder);
 
-        $qb
-            ->innerJoin($this->getAlias().'.channels', 'channel')
-            ->andWhere('channel = :channel')
+        $queryBuilder
+            ->innerJoin($this->getPropertyName('channels'), 'channel')
+            ->andWhere($queryBuilder->expr()->eq('channel', ':channel'))
             ->setParameter('channel', $channel)
         ;
 
-        return $qb
+        return $queryBuilder
             ->getQuery()
             ->getResult()
         ;

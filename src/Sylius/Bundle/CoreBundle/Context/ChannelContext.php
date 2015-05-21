@@ -39,12 +39,23 @@ class ChannelContext extends BaseChannelContext implements ChannelContextInterfa
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getChannel()
+    {
+        if (null === $this->channel) {
+            $this->channel = $this->channelResolver->resolve();
+        }
+        return $this->channel;
+    }
+
+    /**
      * @inheritdoc
      */
     public function onKernelRequest(KernelEvent $event)
     {
         if ($event->getRequestType() === HttpKernelInterface::MASTER_REQUEST) {
-            $this->channel = $this->channelResolver->resolve($event->getRequest());
+            $this->channel = $this->channelResolver->resolve($event->getRequest()->getHost());
         }
     }
 }

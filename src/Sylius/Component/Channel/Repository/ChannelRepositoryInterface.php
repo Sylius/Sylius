@@ -11,6 +11,10 @@
 
 namespace Sylius\Component\Channel\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Sylius\Component\Channel\Model\ChannelInterface;
+
 /**
  * Repository interface for channels.
  *
@@ -22,8 +26,15 @@ interface ChannelRepositoryInterface
      * Find channel best matching given hostname.
      *
      * @param string $hostname
-     *
-     * @return null|ChannelInterface
+     * @return mixed
+     * @throws NonUniqueResultException
      */
     public function findMatchingHostname($hostname);
+
+    /**
+     * @return ChannelInterface
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function findDefault();
 }

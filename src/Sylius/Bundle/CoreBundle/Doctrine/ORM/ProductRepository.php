@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -26,8 +27,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 class ProductRepository extends BaseProductRepository
 {
     /**
-     * Create paginator for products categorized
-     * under given taxon.
+     * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
      * @param array          $criteria
@@ -49,8 +49,7 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
-     * Create paginator for products categorized
-     * under given taxon.
+     * Create paginator for products categorized under given taxon.
      *
      * @param TaxonInterface $taxon
      *

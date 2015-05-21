@@ -23,13 +23,22 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class OrderChannelListener
 {
+    /**
+     * @var ChannelContextInterface
+     */
     protected $channelContext;
 
+    /**
+     * @param ChannelContextInterface $channelContext
+     */
     public function __construct(ChannelContextInterface $channelContext)
     {
         $this->channelContext = $channelContext;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function processOrderChannel(GenericEvent $event)
     {
         $order = $event->getSubject();

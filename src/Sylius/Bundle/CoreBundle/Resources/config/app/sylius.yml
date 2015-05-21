@@ -39,7 +39,8 @@ sylius_channel:
     classes:
         channel:
             model: Sylius\Component\Core\Model\Channel
-            form: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
+            form:
+              default: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
 
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
@@ -284,7 +285,7 @@ sylius_rbac:
         sylius.group.update: Edit group
         sylius.group.delete: Delete group
 
-        sylius.manage.group: Manage channels
+        sylius.manage.channel: Manage channels
         sylius.channel.show: Show channel
         sylius.channel.index: List channels
         sylius.channel.create: Create channel
