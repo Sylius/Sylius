@@ -16,6 +16,7 @@ use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 /**
  * Elasticsearch Finder
@@ -34,13 +35,15 @@ class ElasticsearchFinder extends AbstractFinder
         SearchIndexRepository $searchRepository,
         $config, $productRepository,
         $targetIndex,
-        QueryLoggerInterface $queryLogger
+        QueryLoggerInterface $queryLogger,
+        ChannelContextInterface $channelContext
     ) {
         $this->searchRepository = $searchRepository;
         $this->config = $config;
         $this->productRepository = $productRepository;
         $this->targetIndex = $targetIndex;
         $this->queryLogger = $queryLogger;
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -187,6 +190,13 @@ class ElasticsearchFinder extends AbstractFinder
             $elasticaQuery->setPostFilter($boolFilter);
         }
 
+        if ($channel = $this->channelContext->getChannel()) {
+            $channelFilter = new \Elastica\Filter\Terms();
+            $channelFilter->setTerms('channels', array((string)$channel));
+            $boolFilter->addMust($channelFilter);
+            $elasticaQuery->setFilter($boolFilter);
+        }
+
         $query = new \Elastica\Query\Filtered();
 
         $taxonFromRequestFilter = new \Elastica\Filter\Terms();
@@ -223,6 +233,13 @@ class ElasticsearchFinder extends AbstractFinder
             $elasticaQuery->setPostFilter($boolFilter);
         }
 
+        if ($channel = $this->channelContext->getChannel()) {
+            $channelFilter = new \Elastica\Filter\Terms();
+            $channelFilter->setTerms('channels', array((string)$channel));
+            $boolFilter->addMust($channelFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
+        }
+
         // this is currently the only pre search filter and it's a taxon
         // this should be abstracted out if other types of pre search filters are desired
         if ('all' !== $preSearchTaxonFilter) {
@@ -232,7 +249,7 @@ class ElasticsearchFinder extends AbstractFinder
             $taxonFromRequestFilter = new \Elastica\Filter\Terms();
             $taxonFromRequestFilter->setTerms('taxons', array($preSearchTaxonFilter));
             $boolFilter->addMust($taxonFromRequestFilter);
-            $elasticaQuery->setFilter($boolFilter);
+            $elasticaQuery->setPostFilter($boolFilter);
         }
 
         $elasticaQuery->setQuery($query);

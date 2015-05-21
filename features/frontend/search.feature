@@ -6,6 +6,7 @@ Feature: Search products
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -20,7 +21,12 @@ Feature: Search products
             | Sylius Tee       | 12.99 | PHP T-Shirts | a very nice php t-shirt |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts | symfony t-shirt         |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | doctrine t-shirt        |
+        And all products assigned to "DEFAULT-WEB" channel
         And I populate the index
+        And channel "DEFAULT-WEB" has following configuration:
+          | taxonomy |
+          | Category |
+
 
     Scenario: Search homepage is accessible
         Given I am on homepage

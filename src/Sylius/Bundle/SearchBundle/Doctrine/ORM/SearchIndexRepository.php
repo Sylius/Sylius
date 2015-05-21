@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
@@ -60,6 +61,28 @@ class SearchIndexRepository extends EntityRepository
             ->leftJoin('product.taxons', 'taxon')
             ->where('taxon.name = :taxonName')
             ->setParameter('taxonName', $taxonName)
+        ;
+
+        $filteredIds = array();
+        foreach ($queryBuilder->getQuery()->getArrayResult() as $product) {
+            $filteredIds[$productClassName][] = $product['id'];
+        }
+
+        return $filteredIds;
+    }
+
+    public function getProductIdsFromChannel(ChannelInterface $channel)
+    {
+        $productClassName = $this->productRepository->getClassName();
+
+        // Gets the taxon ids
+        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder
+            ->select('product.id')
+            ->from($productClassName, 'product')
+            ->leftJoin('product.channels', 'channel')
+            ->where('channel.id = :channel')
+            ->setParameter('channel', $channel->getId())
         ;
 
         $filteredIds = array();

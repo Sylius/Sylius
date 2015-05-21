@@ -115,18 +115,22 @@
 
 {% block sylius_shipping_method_choice_widget %}
     {% spaceless %}
-        <div {{ block('widget_container_attributes') }}>
-            {% for child in form %}
-                <div>
-                    {% if shipping_costs[child.vars.value] is defined %}
-                        <span class="pull-right text-muted">{{ shipping_costs[child.vars.value]|sylius_price }}</span>
-                    {% endif %}
-                    <label{% for attrname, attrvalue in child.vars.label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {% if expanded %}
+            <div {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    <div>
+                        {% if shipping_costs[child.vars.value] is defined %}
+                            <span class="pull-right text-muted">{{ shipping_costs[child.vars.value]|sylius_price }}</span>
+                        {% endif %}
+                        <label{% for attrname, attrvalue in child.vars.label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
                         {{ form_widget(child) }}
                         {{ child.vars.label|trans({}, translation_domain) }}
-                    </label>
-                </div>
-            {% endfor %}
-        </div>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{- block('choice_widget_collapsed') -}}
+        {% endif %}
     {% endspaceless %}
 {% endblock %}

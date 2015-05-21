@@ -9,8 +9,9 @@ Feature: Countries and provinces
         And there are following locales configured:
             | code  | enabled |
             | en_US | yes     |
-          And I am logged in as administrator
-          And there are following countries:
+        And there is default channel configured
+        And I am logged in as administrator
+        And there are following countries:
             | name    | provinces                       |
             | France  | Lyon, Toulouse, Rennes, Nancy   |
             | China   |                                 |

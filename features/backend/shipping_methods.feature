@@ -6,10 +6,11 @@ Feature: Shipping methods
 
     Background:
         Given there is default currency configured
-          And I am logged in as administrator
           And there are following locales configured:
             | code  | enabled |
             | en_US | yes     |
+          And there is default channel configured
+          And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                 |
             | UK + Germany | country | United Kingdom, Germany |

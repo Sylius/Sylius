@@ -6,6 +6,7 @@ Feature: Checkout fixed discount promotions
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And I am logged in as user "klaus@example.com"
           And the following countries exist:
             | name    |
@@ -33,6 +34,8 @@ Feature: Checkout fixed discount promotions
             | Shipping to Germany | Discount for orders with shipping country Germany |
             | Ubuntu T-Shirts     | Discount for Ubuntu T-Shirts                      |
             | 3rd order           | Discount for 3rd order                            |
+          And all products assigned to "DEFAULT-WEB" channel
+          And all promotions assigned to "DEFAULT-WEB" channel
           And promotion "3 items" has following rules defined:
             | type       | configuration        |
             | Item count | Count: 3,Equal: true |

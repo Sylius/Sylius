@@ -25,6 +25,12 @@ Feature: Cart taxation
             | name    | price | taxons       | tax category  |
             | PHP Top | 50    | PHP T-Shirts | Taxable Goods |
           And there is default currency configured
+          And there is default channel configured
+          And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
+
 
     Scenario: No taxes are applied for unknown billing address
               when default tax zone is not configured

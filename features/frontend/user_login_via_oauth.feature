@@ -6,6 +6,7 @@ Feature: Sign in to the store via OAuth
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And I am not logged in
         And I am on the store homepage
 

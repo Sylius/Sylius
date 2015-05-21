@@ -10,6 +10,7 @@ Feature: Reports
             | TableReport    | Lorem ipsum | table_report     | table    | Template:SyliusReportBundle:Table:default.html.twig          | user_registration | Period:day,Start:2010-01-01,End:2010-04-01   |
             | BarChartReport | Lorem ipsum | bar_chart_report | chart    | Type:bar,Template:SyliusReportBundle:Chart:default.html.twig | user_registration | Period:month,Start:2010-01-01,End:2010-04-01 |
         And there is default currency configured
+        And there is default channel configured
         And there are following users:
             | email          | enabled  | created at          |
             | beth@foo.com   | yes      | 2010-01-02 12:00:00 |

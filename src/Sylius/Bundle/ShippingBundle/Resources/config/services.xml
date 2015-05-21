@@ -100,6 +100,7 @@
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
             <argument type="service" id="sylius.shipping_methods_resolver" />
             <argument type="service" id="sylius.shipping_calculator_registry" />
+            <argument type="service" id="sylius.repository.shipping_method" />
             <tag name="form.type" alias="sylius_shipping_method_choice" />
         </service>
 

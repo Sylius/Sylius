@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Locale\Model;
 
+use \Locale as Language;
+
 /**
  * Locale model.
  *
@@ -56,6 +58,11 @@ class Locale implements LocaleInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    public function __toString()
+    {
+        return Language::getDisplayName($this->code);
     }
 
     /**

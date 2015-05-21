@@ -32,6 +32,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_addressing',
         'sylius_api',
         'sylius_attribute',
+        'sylius_channel',
         'sylius_contact',
         'sylius_currency',
         'sylius_inventory',

@@ -33,6 +33,13 @@ class LoadProductsData extends DataFixture
      */
     private $totalVariants = 0;
 
+    private  $channels = array(
+        'WEB-UK',
+        'WEB-DE',
+        'WEB-US',
+        'MOBILE'
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -97,6 +104,7 @@ class LoadProductsData extends DataFixture
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('T-Shirts', 'SuperTees'));
         $product->setArchetype($this->getReference('Sylius.Archetype.t_shirt'));
@@ -146,6 +154,7 @@ class LoadProductsData extends DataFixture
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Stickers', 'Stickypicky'));
         $product->setArchetype($this->getReference('Sylius.Archetype.sticker'));
@@ -187,6 +196,7 @@ class LoadProductsData extends DataFixture
         $this->addTranslatedFields($product, $translatedNames);
 
         $this->addMasterVariant($product);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Mugs', 'Mugland'));
         $product->setArchetype($this->getReference('Sylius.Archetype.mug'));
@@ -226,6 +236,7 @@ class LoadProductsData extends DataFixture
         $this->addTranslatedFields($product, $translatedNames);
 
         $this->addMasterVariant($product, $isbn);
+        $this->setChannels($product, $this->faker->randomElements($this->channels, rand(1, 4)));
 
         $this->setTaxons($product, array('Books', 'Bookmania'));
         $product->setArchetype($this->getReference('Sylius.Archetype.book'));
@@ -324,6 +335,19 @@ class LoadProductsData extends DataFixture
         }
 
         $product->setTaxons($taxons);
+    }
+
+    /**
+     * Set channels.
+     *
+     * @param ProductInterface $product
+     * @param array            $channelCodes
+     */
+    protected function setChannels(ProductInterface $product, array $channelCodes)
+    {
+        foreach ($channelCodes as $code) {
+            $product->addChannel($this->getReference('Sylius.Channel.'.$code));
+        }
     }
 
     /**

@@ -21,11 +21,19 @@ sylius:
                 different_billing_address: Use different address for billing?
             payment_method: Payment Method
             shipping_method: Shipping Method
+        promotion:
+            channels: Channel
         coupon:
             per_user_usage_limit: Per-User Usage Limity
         group:
             name: Name
             roles: Roles
+        channel:
+            taxonomies: Taxonomies
+            locales: Locales
+            currencies: Currencies
+            shipping_methods: Shipping Methods
+            payment_methods: Payment Methods
         image:
             file: Image
         locale:
@@ -38,6 +46,7 @@ sylius:
             total_from: From
             total_to: To
             payment_state: Payment state
+            channel: All channels
         page:
             body: Body
             id: ID
@@ -68,6 +77,13 @@ sylius:
             created_at_to: To
             number: Order number
             shipping_address: Ship to name
+            channel: All channels
+        payment_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Order number
+            billing_address: Bill to name
+            channel: All channels
         shipping_method:
             zone: Zone
         taxon:

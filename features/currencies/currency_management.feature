@@ -11,6 +11,7 @@ Feature: Currency management
             | GBP  | 1.16998       | no      |
             | EUR  | 1.00000       | yes     |
             | AUD  | 0.73986       | yes     |
+          And there is default channel configured
           And I am logged in as administrator
 
     Scenario: Browsing all configured currencies

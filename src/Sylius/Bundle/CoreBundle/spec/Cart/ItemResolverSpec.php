@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -32,7 +34,8 @@ class ItemResolverSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         AvailabilityCheckerInterface $availabilityChecker,
         RestrictedZoneCheckerInterface $restrictedZoneChecker,
-        DelegatingCalculatorInterface $priceCalculator
+        DelegatingCalculatorInterface $priceCalculator,
+        ChannelContextInterface $channelContext
     ) {
         $this->beConstructedWith(
             $cartProvider,
@@ -40,7 +43,8 @@ class ItemResolverSpec extends ObjectBehavior
             $formFactory,
             $availabilityChecker,
             $restrictedZoneChecker,
-            $priceCalculator
+            $priceCalculator,
+            $channelContext
         );
     }
 
@@ -84,7 +88,7 @@ class ItemResolverSpec extends ObjectBehavior
         $request->isMethod('POST')->willReturn(true);
         $request->get('id')->willReturn(5);
 
-        $productRepository->find(5)->willReturn(null);
+        $productRepository->findOneBy(array('id' => 5, 'channels' => null))->willReturn(null);
 
         $this
             ->shouldThrow('Sylius\Component\Cart\Resolver\ItemResolvingException')

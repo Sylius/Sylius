@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 
 /**
  * Order item model.
@@ -41,7 +41,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * Promotions applied
      *
-     * @var Collection|PromotionInterface[]
+     * @var Collection|BasePromotionInterface[]
      */
     protected $promotions;
 
@@ -140,7 +140,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPromotion(PromotionInterface $promotion)
+    public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);
     }
@@ -148,7 +148,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function addPromotion(PromotionInterface $promotion)
+    public function addPromotion(BasePromotionInterface $promotion)
     {
         if (!$this->hasPromotion($promotion)) {
             $this->promotions->add($promotion);
@@ -160,7 +160,7 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function removePromotion(PromotionInterface $promotion)
+    public function removePromotion(BasePromotionInterface $promotion)
     {
         if ($this->hasPromotion($promotion)) {
             $this->promotions->removeElement($promotion);

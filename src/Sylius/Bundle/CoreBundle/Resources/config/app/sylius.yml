@@ -4,7 +4,7 @@ sylius_core:
             field: slug
             prefix: /p
             defaults:
-                controller: sylius.controller.product:showAction
+                controller: sylius.controller.product:detailsAction
                 repository: sylius.repository.product
                 sylius:
                     template: SyliusWebBundle:Frontend/Product:show.html.twig
@@ -34,6 +34,13 @@ sylius_api:
     classes:
         api_user:
             model: %sylius.model.user.class%
+
+sylius_channel:
+    classes:
+        channel:
+            model: Sylius\Component\Core\Model\Channel
+            form:
+              default: Sylius\Bundle\CoreBundle\Form\Type\ChannelType
 
 sylius_cart:
     resolver: sylius.cart_item_resolver.default
@@ -114,6 +121,10 @@ sylius_shipping:
 
 sylius_promotion:
     classes:
+        promotion:
+            model: Sylius\Component\Core\Model\Promotion
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
+            form: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
         promotion_subject:
             model: %sylius.model.order.class%
         promotion_coupon:
@@ -134,6 +145,7 @@ sylius_payment:
         payment:
             model: Sylius\Component\Core\Model\Payment
             controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
     gateways:
         dummy: Test
         offline: Offline
@@ -272,6 +284,13 @@ sylius_rbac:
         sylius.group.create: Create group
         sylius.group.update: Edit group
         sylius.group.delete: Delete group
+
+        sylius.manage.channel: Manage channels
+        sylius.channel.show: Show channel
+        sylius.channel.index: List channels
+        sylius.channel.create: Create channel
+        sylius.channel.update: Edit channel
+        sylius.channel.delete: Delete channel
 
         sylius.manage.role: Manage roles
         sylius.role.show: Show role
@@ -562,6 +581,7 @@ sylius_rbac:
         sylius.support: Manage customer support
     permissions_hierarchy:
         sylius.manage.user: [sylius.user.show, sylius.user.index, sylius.user.create, sylius.user.update, sylius.user.delete]
+        sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
         sylius.manage.role: [sylius.role.show, sylius.role.index, sylius.role.create, sylius.role.update, sylius.role.delete]
         sylius.manage.permission: [sylius.permission.show, sylius.permission.index, sylius.permission.create, sylius.permission.update, sylius.permission.delete]
@@ -619,7 +639,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method]
+            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         catalog_manager:
             name: Catalog Manager

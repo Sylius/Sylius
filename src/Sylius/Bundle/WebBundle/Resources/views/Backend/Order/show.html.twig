@@ -32,6 +32,8 @@
     </div>
     <h1>
         <span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}
+        via
+        <span style="color: {{ order.channel.color }};">{{ order.channel.code }}</span>
         {% if order.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
     </h1>
 </div>

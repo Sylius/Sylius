@@ -6,10 +6,11 @@ Feature: Orm indexer event listener
 
     Background:
         Given there is default currency configured
-        And I am logged in as administrator
         And there are following locales configured:
             | code  | enabled |
             | en_US | yes     |
+        And there is default channel configured
+        And I am logged in as administrator
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -24,6 +25,10 @@ Feature: Orm indexer event listener
             | Sylius Tee       | 12.99 | PHP T-Shirts | a very nice php t-shirt |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts | symfony t-shirt         |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts | doctrine t-shirt        |
+        And all products assigned to "DEFAULT-WEB" channel
+        And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Creating simple product and indexing it
         Given I am on the product creation page

@@ -113,6 +113,39 @@ class ProductController extends BaseProductController
         return $this->renderResults($taxon, $paginator, 'productIndex.html', $request->get('page', 1));
     }
 
+
+    /**
+     * Show product details in frontend.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function detailsAction(Request $request)
+    {
+        $channel = $this->get('sylius.context.channel')->getChannel();
+        $product = $this->findOr404($request);
+
+        if (!$product->getChannels()->contains($channel)) {
+            throw new NotFoundHttpException(sprintf(
+                'Requested %s does not exist for channel: %s.',
+                $this->config->getResourceName(),
+                $channel->getName()
+            ));
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('show.html'))
+            ->setTemplateVar($this->config->getResourceName())
+            ->setData($product)
+        ;
+
+        return $this->handleView($view);
+    }
+
     /**
      * Get product history changes.
      *
@@ -202,6 +235,12 @@ class ProductController extends BaseProductController
         return new JsonResponse($results);
     }
 
+    /**
+     * @param Request $request
+     * @param array $criteria
+     *
+     * @return null|ProductInterface
+     */
     public function findOr404(Request $request, array $criteria = array())
     {
         if ($request->attributes->has('_sylius_entity')) {

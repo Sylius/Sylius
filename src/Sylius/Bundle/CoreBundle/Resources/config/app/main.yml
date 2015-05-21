@@ -122,6 +122,9 @@ jms_serializer:
             sylius-contact:
                 namespace_prefix: "Sylius\\Component\\Contact"
                 path: "@SyliusContactBundle/Resources/config/serializer"
+            sylius-channel:
+                namespace_prefix: "Sylius\\Component\\Channel"
+                path: "@SyliusChannelBundle/Resources/config/serializer"
             sylius-core:
                 namespace_prefix: "Sylius\\Component\\Core"
                 path: "@SyliusCoreBundle/Resources/config/serializer"
