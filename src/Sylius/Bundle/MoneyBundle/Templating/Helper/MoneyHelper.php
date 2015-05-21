@@ -31,7 +31,7 @@ class MoneyHelper extends Helper
      * @param string $locale   The locale used to format money.
      * @param string $currency The default currency.
      */
-    public function __construct($locale, $currency)
+    public function __construct($locale, $currency = null)
     {
         $this->locale   = $locale ?: \Locale::getDefault();
         $this->currency = $currency;
