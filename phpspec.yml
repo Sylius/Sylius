@@ -29,6 +29,7 @@ suites:
     Variation         : { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation, src_path: src/Sylius/Component/Variation }
     Mailer            : { namespace: Sylius\Component\Mailer, psr4_prefix: Sylius\Component\Mailer, spec_path: src/Sylius/Component/Mailer, src_path: src/Sylius/Component/Mailer }
     Rbac              : { namespace: Sylius\Component\Rbac, psr4_prefix: Sylius\Component\Rbac, spec_path: src/Sylius/Component/Rbac, src_path: src/Sylius/Component/Rbac }
+    User              : { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User, src_path: src/Sylius/Component/User }
 
     AddressingBundle  : { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
     AttributeBundle   : { namespace: Sylius\Bundle\AttributeBundle, psr4_prefix: Sylius\Bundle\AttributeBundle, spec_path: src/Sylius/Bundle/AttributeBundle, src_path: src/Sylius/Bundle/AttributeBundle }
@@ -59,3 +60,4 @@ suites:
     VariationBundle   : { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle, src_path: src/Sylius/Bundle/VariationBundle }
     MailerBundle      : { namespace: Sylius\Bundle\MailerBundle, psr4_prefix: Sylius\Bundle\MailerBundle, spec_path: src/Sylius/Bundle/MailerBundle, src_path: src/Sylius/Bundle/MailerBundle }
     RbacBundle        : { namespace: Sylius\Bundle\RbacBundle, psr4_prefix: Sylius\Bundle\RbacBundle, spec_path: src/Sylius/Bundle/RbacBundle, src_path: src/Sylius/Bundle/RbacBundle }
+    UserBundle        : { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }

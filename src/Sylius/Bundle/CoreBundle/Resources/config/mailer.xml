@@ -25,8 +25,8 @@
             <argument type="service" id="sylius.email_sender" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.complete" method="sendOrderConfirmationEmail" />
             <tag name="kernel.event_listener" event="sylius.shipment.post_update" method="sendShipmentConfirmationEmail" />
-            <tag name="kernel.event_listener" event="fos_user.registration.completed" method="sendUserConfirmationEmail" />
-            <tag name="kernel.event_listener" event="fos_user.registration.confirmed" method="sendUserConfirmationEmail" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_create" method="sendUserConfirmationEmail" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserConfirmationEmail" />
             <tag name="kernel.event_listener" event="sylius.comment.post_create" method="sendOrderCommentEmail" />
         </service>
     </services>

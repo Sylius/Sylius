@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Checkout\Step;
 
 use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
@@ -32,8 +33,7 @@ class AddressingStep extends CheckoutStep
     {
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-
-        $form = $this->createCheckoutAddressingForm($order, $this->getUser());
+        $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());
 
         return $this->renderStep($context, $order, $form);
     }
@@ -47,8 +47,7 @@ class AddressingStep extends CheckoutStep
 
         $order = $this->getCurrentCart();
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
-
-        $form = $this->createCheckoutAddressingForm($order, $this->getUser());
+        $form = $this->createCheckoutAddressingForm($order, $this->getCustomer());
 
         if ($form->handleRequest($request)->isValid()) {
             $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_PRE_COMPLETE, $order);
@@ -73,8 +72,21 @@ class AddressingStep extends CheckoutStep
         ));
     }
 
-    protected function createCheckoutAddressingForm(OrderInterface $order, UserInterface $user = null)
+    /**
+     * @param  OrderInterface    $order
+     * @param  CustomerInterface $customer
+     * @return FormInterface
+     */
+    protected function createCheckoutAddressingForm(OrderInterface $order, CustomerInterface $customer = null)
     {
-        return $this->createForm('sylius_checkout_addressing', $order, array('user' => $user));
+        return $this->createForm('sylius_checkout_addressing', $order, array('customer' => $customer));
+    }
+
+    /**
+     * @return null|CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        return $this->container->get('sylius.context.customer')->getCustomer();
     }
 }

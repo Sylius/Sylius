@@ -70,15 +70,12 @@ class LoadOrdersData extends DataFixture
             $order->calculateTotal();
             $order->complete();
 
-            if ($i < 4) {
-                $order->setUser($this->getReference('Sylius.User-Administrator'));
-
-                $this->createPayment($order, PaymentInterface::STATE_COMPLETED);
-            } else {
-                $order->setUser($this->getReference('Sylius.User-'.rand(1, 15)));
-
-                $this->createPayment($order);
+            $paymentState = PaymentInterface::STATE_COMPLETED;
+            if (rand(1, 10) < 5) {
+                $paymentState = PaymentInterface::STATE_NEW;
             }
+            $order->setCustomer($this->getReference('Sylius.Customer-'.rand(1, 15)));
+            $this->createPayment($order, $paymentState);
 
             $order->setCompletedAt($this->faker->dateTimeThisDecade);
             $this->setReference('Sylius.Order-'.$i, $order);

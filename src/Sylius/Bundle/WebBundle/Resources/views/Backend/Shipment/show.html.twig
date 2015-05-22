@@ -66,21 +66,15 @@
                     <td><span class="label label-{{ shipment.tracked ? 'primary' : 'default' }}">{{ shipment.tracked ? shipment.tracking : 'sylius.unknown'|trans }}</span></td>
                 </tr>
                 <tr>
-                    <td><strong>{{ 'sylius.order.user'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.order.customer'|trans }}</strong></td>
                     <td>
-                        {% if order.user %}
-                            {{ order.user.fullName }}<br>
-                            <strong>
-                                <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">
-                                    {{ order.user.username }}
-                                </a>
-                            </strong>
-                        {% else %}
-                            {{ order.billingAddress.firstName }} {{ order.billingAddress.lastName }}<br>
-                            <strong>
-                                <span title="{{ 'sylius.order.guest'|trans }}">{{ order.email }}</span>
-                            </strong>
-                        {% endif %}
+                        {% set customer = order.customer %}
+                        {{ customer.fullName }}<br>
+                        <strong>
+                            <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}">
+                                {{ customer.email }}
+                            </a>
+                        </strong>
                     </td>
                 </tr>
                 <tr>

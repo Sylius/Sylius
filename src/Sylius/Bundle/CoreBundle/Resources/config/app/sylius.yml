@@ -245,6 +245,7 @@ sylius_mailer:
         sylius.email.order_comment.name: SyliusWebBundle:Email:orderComment.html.twig
         sylius.email.shipment_confirmation.name: SyliusWebBundle:Email:shipmentConfirmation.html.twig
         sylius.email.user_confirmation.name: SyliusWebBundle:Email:userConfirmation.html.twig
+        sylius.email.password_reset.name: SyliusWebBundle:Email:passwordReset.html.twig
     sender:
         name: Example.com
         address: no-reply@example.com
@@ -261,6 +262,9 @@ sylius_mailer:
         user_confirmation:
             subject: sylius.emails.user_confirmation.subject
             template: SyliusWebBundle:Email:userConfirmation.html.twig
+        password_reset:
+            subject: sylius.emails.user.password_reset.subject
+            template: SyliusWebBundle:Email:passwordReset.html.twig
 
 sylius_rbac:
     classes:
@@ -271,12 +275,12 @@ sylius_rbac:
             form:
                 choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
     permissions:
-        sylius.manage.user: Manage users
-        sylius.user.show: Show user
-        sylius.user.index: List users
-        sylius.user.create: Create user
-        sylius.user.update: Edit user
-        sylius.user.delete: Delete user
+        sylius.manage.customer: Manage customers
+        sylius.customer.show: Show customer
+        sylius.customer.index: List customers
+        sylius.customer.create: Create customer
+        sylius.customer.update: Edit customer
+        sylius.customer.delete: Delete customer
 
         sylius.manage.group: Manage groups
         sylius.group.show: Show group
@@ -580,8 +584,8 @@ sylius_rbac:
         sylius.taxes: Manage taxes
         sylius.support: Manage customer support
     permissions_hierarchy:
-        sylius.manage.user: [sylius.user.show, sylius.user.index, sylius.user.create, sylius.user.update, sylius.user.delete]
         sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
+        sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.customer.delete]
         sylius.manage.group: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]
         sylius.manage.role: [sylius.role.show, sylius.role.index, sylius.role.create, sylius.role.update, sylius.role.delete]
         sylius.manage.permission: [sylius.permission.show, sylius.permission.index, sylius.permission.create, sylius.permission.update, sylius.permission.delete]
@@ -627,8 +631,8 @@ sylius_rbac:
         sylius.marketing: [sylius.manage.promotion, sylius.manage.promotion_coupon, sylius.manage.email]
         sylius.shipping: [sylius.manage.shipment, sylius.manage.shipping_method, sylius.manage.shipping_category]
         sylius.content: [sylius.manage.static_content, sylius.manage.route, sylius.manage.simple_block, sylius.manage.menu, sylius.manage.slideshow, sylius.manage.string_block, sylius.manage.slideshow_block, sylius.manage.imagine_block]
-        sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.user, sylius.manage.group, sylius.accounts]
-        sylius.accounts: [sylius.manage.user, sylius.manage.group]
+        sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.customer, sylius.manage.group, sylius.accounts]
+        sylius.accounts: [sylius.manage.customer, sylius.manage.group]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
         sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
     security_roles:
@@ -688,14 +692,29 @@ sylius_rbac:
         developer:
             name: Developer
             description: Developers Access
-            permissions: [sylius.user.index, sylius.user.show, sylius.manage.api_client]
+            permissions: [sylius.customer.index, sylius.customer.show, sylius.manage.api_client]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
         support:
             name: Support
             description: Support Team
-            permissions: [sylius.support, sylius.user.show, sylius.user.index]
+            permissions: [sylius.support, sylius.customer.show, sylius.customer.index]
             security_roles: [ROLE_ADMINISTRATION_ACCESS]
     roles_hierarchy:
         administrator: [catalog_manager, sales_manager, marketing_manager, accounts_manager, shipping_manager, content_editor, tax_manager, it, support]
         it: [security_auditor, developer]
 
+sylius_user:
+    resetting:
+        token:
+            ttl: PT1S
+            length: 16
+        pin:
+            length: 4
+    classes:
+        user:
+            model: Sylius\Component\Core\Model\User
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\UserType
+        customer:
+            model: Sylius\Component\Core\Model\Customer
+            controller: Sylius\Bundle\CoreBundle\Controller\CustomerController

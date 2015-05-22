@@ -6,7 +6,7 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.customers'|trans }}</li>
+    <li>{{ 'sylius.breadcrumb.section.customer'|trans }}</li>
     <li>{{ 'sylius.breadcrumb.group.index'|trans }}</li>
 </ol>
 {% endblock %}
@@ -15,7 +15,7 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_group_create'), 'sylius.group.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_user_index'), 'sylius.user.manage'|trans) }}
+        {{ buttons.manage(path('sylius_backend_customer_index'), 'sylius.customer.manage'|trans) }}
     </div>
     <h1><i class="glyphicon glyphicon-home"></i> {{ 'sylius.group.index_header'|trans|raw }}</h1>
 </div>

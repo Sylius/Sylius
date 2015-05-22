@@ -38,6 +38,7 @@
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
         <parameter key="sylius.order_processing.taxation_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\TaxationProcessor</parameter>
 
+        <parameter key="sylius.listener.cart_blamer.class">Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener</parameter>
         <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
@@ -48,9 +49,6 @@
         <parameter key="sylius.listener.order_pricing.class">Sylius\Bundle\CoreBundle\EventListener\OrderPricingListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.order_taxation.class">Sylius\Bundle\CoreBundle\EventListener\OrderTaxationListener</parameter>
-        <parameter key="sylius.listener.user_aware.class">Sylius\Bundle\CoreBundle\EventListener\UserAwareListener</parameter>
-        <parameter key="sylius.listener.user_update.class">Sylius\Bundle\CoreBundle\EventListener\UserUpdateListener</parameter>
-        <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\CoreBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.restricted_zone.class">Sylius\Bundle\CoreBundle\EventListener\RestrictedZoneListener</parameter>
         <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
@@ -59,11 +57,11 @@
 
         <parameter key="sylius.promotion_processor.class">Sylius\Bundle\CoreBundle\OrderProcessing\PromotionProcessor</parameter>
         <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.user_loyalty.class">Sylius\Component\Core\Promotion\Checker\UserLoyaltyRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.customer_loyalty.class">Sylius\Component\Core\Promotion\Checker\CustomerLoyaltyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.taxonomy.class">Sylius\Component\Core\Promotion\Checker\TaxonomyRuleChecker</parameter>
         <parameter key="sylius.promotion_rule_checker.contains_product.class">Sylius\Component\Core\Promotion\Checker\ContainsProductRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.user_group.class">Sylius\Component\Core\Promotion\Checker\UserGroupRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.customer_group.class">Sylius\Component\Core\Promotion\Checker\CustomerGroupRuleChecker</parameter>
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
@@ -81,7 +79,6 @@
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
-        <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\CoreBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
@@ -131,7 +128,7 @@
 
         <!-- checker -->
         <service id="sylius.checker.restricted_zone" class="%sylius.checker.restricted_zone.class%">
-            <argument type="service" id="security.context" />
+            <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.zone_matcher" />
         </service>
 
@@ -224,22 +221,11 @@
         </service>
 
         <!-- listeners -->
-        <service id="sylius.listener.user_update" class="%sylius.listener.user_update.class%">
-            <argument type="service" id="fos_user.user_manager" />
-            <tag name="kernel.event_listener" event="sylius.user.post_create" method="processUser" />
-            <tag name="kernel.event_listener" event="sylius.user.post_update" method="processUser" />
-        </service>
-        <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
-            <argument type="service" id="security.context" />
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument>sylius_backend_user_index</argument>
-            <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
-        </service>
-        <service id="sylius.listener.user_aware" class="%sylius.listener.user_aware.class%">
-            <argument type="service" id="security.context" />
-            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setUser" priority="100" />
-            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setUser" />
+        <service id="sylius.listener.cart_blamer" class="%sylius.listener.cart_blamer.class%">
+            <argument type="service" id="sylius.manager.cart" />
+            <argument type="service" id="sylius.cart_provider" />
+            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="blame" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="interactiveBlame" />
         </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
@@ -307,6 +293,11 @@
             <argument type="service" id="sylius.context.currency" />
             <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderCurrency" />
         </service>
+        <service id="sylius.listener.customer_aware" class="%sylius.listener.customer_aware.class%">
+            <argument type="service" id="sylius.context.customer" />
+            <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setCustomer" priority="100" />
+            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setCustomer" />
+        </service>
         <service id="sylius.listener.restricted_zone" class="%sylius.listener.restricted_zone.class%">
             <argument type="service" id="sylius.checker.restricted_zone" />
             <argument type="service" id="sylius.cart_provider" />
@@ -326,7 +317,7 @@
             <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
         </service>
         <service id="sylius.listener.checkout_addressing" class="%sylius.listener.checkout_addressing.class%">
-            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setUserAddressing" />
+            <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setCustomerAddressing" />
         </service>
         <service id="sylius.listener.insufficient_stock_exception" class="%sylius.listener.insufficient_stock_exception.class%">
             <argument type="service" id="router" />
@@ -366,8 +357,8 @@
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
         </service>
-        <service id="sylius.promotion_rule_checker.user_loyalty" class="%sylius.promotion_rule_checker.user_loyalty.class%">
-            <tag name="sylius.promotion_rule_checker" type="user_loyalty" label="User loyalty" />
+        <service id="sylius.promotion_rule_checker.customer_loyalty" class="%sylius.promotion_rule_checker.customer_loyalty.class%">
+            <tag name="sylius.promotion_rule_checker" type="customer_loyalty" label="Customer loyalty" />
         </service>
         <service id="sylius.promotion_rule_checker.shipping_country" class="%sylius.promotion_rule_checker.shipping_country.class%">
             <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />
@@ -378,8 +369,8 @@
         <service id="sylius.promotion_rule_checker.contains_product" class="%sylius.promotion_rule_checker.contains_product.class%">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains Product" />
         </service>
-        <service id="sylius.promotion_rule_checker.user_group" class="%sylius.promotion_rule_checker.user_group.class%">
-            <tag name="sylius.promotion_rule_checker" type="user_group" label="User Group" />
+        <service id="sylius.promotion_rule_checker.customer_group" class="%sylius.promotion_rule_checker.customer_group.class%">
+            <tag name="sylius.promotion_rule_checker" type="customer_group" label="User Group" />
         </service>
         <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
             <argument type="service" id="sylius.repository.adjustment" />
@@ -423,9 +414,9 @@
         <!-- money -->
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
             <argument /> <!-- Storage service name comes from config -->
-            <argument type="service" id="security.context" />
+            <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.settings.manager" />
-            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.manager.customer" />
             <argument type="service" id="sylius.context.channel" />
         </service>
 
@@ -445,11 +436,6 @@
         <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
             <argument type="service" id="sylius.context.channel" />
             <argument>%sylius.locale%</argument>
-        </service>
-
-        <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
-            <argument type="service" id="fos_user.user_manager" />
-            <argument type="service" id="sylius.repository.user_oauth" />
         </service>
 
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
-use Sylius\Component\Core\Model\GroupInterface;
+use Sylius\Component\User\Model\GroupInterface;
 
 /**
  * Group fixtures.
@@ -56,7 +56,6 @@ class LoadGroupsData extends DataFixture
         /* @var $group GroupInterface */
         $group = $this->getGroupRepository()->createNew();
         $group->setName($name);
-        $group->setRoles($roles);
 
         $this->setReference('Sylius.Group.'.$name, $group);
 

@@ -150,7 +150,7 @@ Feature: Checkout fixed discount promotions
           | category | zone         | name | amount |
           | General  | German lands | VAT  | 23     |
         And the following orders were placed:
-          | user              | address                                                |
+          | customer          | address                                                |
           | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
           | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
         And order #000000001 has following items:

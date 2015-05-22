@@ -28,17 +28,17 @@ class OrderController extends ResourceController
      *
      * @throws NotFoundHttpException
      */
-    public function indexByUserAction(Request $request, $id)
+    public function indexByCustomerAction(Request $request, $id)
     {
-        $user = $this->get('sylius.repository.user')->findForDetailsPage($id);
+        $customer = $this->get('sylius.repository.customer')->findForDetailsPage($id);
 
-        if (!$user) {
-            throw new NotFoundHttpException('Requested user does not exist.');
+        if (!$customer) {
+            throw new NotFoundHttpException('Requested customer does not exist.');
         }
 
         $paginator = $this
             ->getRepository()
-            ->createByUserPaginator($user, $this->config->getSorting())
+            ->createByCustomerPaginator($customer, $this->config->getSorting())
         ;
 
         $paginator->setCurrentPage($request->get('page', 1), true, true);
@@ -51,9 +51,9 @@ class OrderController extends ResourceController
         $paginator->getNbResults();
         $entityManager->getFilters()->enable('softdeleteable');
 
-        return $this->render('SyliusWebBundle:Backend/Order:indexByUser.html.twig', array(
-            'user'   => $user,
-            'orders' => $paginator
+        return $this->render('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', array(
+            'customer' => $customer,
+            'orders'   => $paginator
         ));
     }
 

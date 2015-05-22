@@ -4,12 +4,12 @@
 {% block content %}
     <h4>{{ 'sylius.account.address.list'|trans }}</h4>
 
-    {% if user.billingAddress is empty or user.shippingAddress is empty %}
+    {% if customer.billingAddress is empty or customer.shippingAddress is empty %}
         <p>
-        {% if user.billingAddress is empty %}
+        {% if customer.billingAddress is empty %}
             <span class="label label-success">{{ 'sylius.account.address.default.no_billing'|trans }}</span>
         {% endif %}
-        {% if user.shippingAddress is empty %}
+        {% if customer.shippingAddress is empty %}
             <span class="label label-primary">{{ 'sylius.account.address.default.no_shipping'|trans }}</span>
         {% endif %}
         </p>
@@ -25,20 +25,20 @@
                             {{ include('SyliusWebBundle:Frontend/Address:_show.html.twig') }}
                         </td>
                         <td>
-                            {% if address == user.billingAddress %}
+                            {% if address == customer.billingAddress %}
                                 <span id="defaultBillingAddress" class="label label-success">{{ 'sylius.account.address.default.billing'|trans }}</span><br><br>
                             {% endif %}
-                            {% if address == user.shippingAddress %}
+                            {% if address == customer.shippingAddress %}
                                 <span id="defaultShippingAddress" class="label label-info">{{ 'sylius.account.address.default.shipping'|trans }}</span><br><br>
                             {% endif %}
 
-                            {% if address != user.billingAddress %}
+                            {% if address != customer.billingAddress %}
                                 {{ buttons.patch(
                                     path('sylius_account_address_set_default_billing', {'id': address.id}),
                                     'sylius.account.address.action.billing', 'star-empty') }}
                                 <br>
                             {% endif %}
-                            {% if address != user.shippingAddress %}
+                            {% if address != customer.shippingAddress %}
                                 {{ buttons.patch(
                                     path('sylius_account_address_set_default_shipping', {'id': address.id}),
                                     'sylius.account.address.action.shipping', 'star') }}

@@ -8,8 +8,8 @@ sylius:
                 price: Unit price
                 quantity: Quantity
                 variant: Variant
-            user_group:
-                User group
+            customer_group:
+                Customer group
         block:
             body: Body
             id: ID
@@ -24,7 +24,7 @@ sylius:
         promotion:
             channels: Channel
         coupon:
-            per_user_usage_limit: Per-User Usage Limity
+            per_customer_usage_limit: Per-Customer Usage Limit
         group:
             name: Name
             roles: Roles
@@ -116,3 +116,5 @@ sylius:
             product_attribute_value:
                 attribute: Attribute
                 value: Value
+        guest:
+            email: Email

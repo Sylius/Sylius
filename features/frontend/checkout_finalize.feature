@@ -52,7 +52,7 @@ Feature: Checkout finalization
           And I added product "PHP Top" to cart
           And I go to the checkout start page
          When I press "Proceed with your order"
-         Then I should see "This value should not be blank."
+         Then I should see "Please enter your email"
 
     Scenario: Placing the order as Guest with invalid email address
         Given I am not logged in
@@ -60,7 +60,7 @@ Feature: Checkout finalization
           And I go to the checkout start page
          And I fill in "sylius_checkout_guest[email]" with "example"
           And I press "Proceed with your order"
-         Then I should see "This value is not a valid email address."
+         Then I should see "This email is invalid"
 
     Scenario: Placing the order as Guest
         Given I am not logged in

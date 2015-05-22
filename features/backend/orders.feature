@@ -22,7 +22,7 @@ Feature: Orders management
             | category | zone         | name | amount |
             | General  | German lands | VAT  | 23     |
           And the following orders were placed:
-            | user              | address                                                |
+            | customer          | address                                                |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       |
         And order #000000001 has following items:
@@ -122,5 +122,5 @@ Feature: Orders management
 
     Scenario: Sorting order table by appropriate column
         Given I am on the order index page
-         When I follow "User"
+         When I follow "customer"
          Then I should see table of orders sorted by lastName

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,23 +43,24 @@ class AddressingStepType extends AbstractResourceType
                 }
             })
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
-                /* @var $user UserInterface */
-                $user = $options['user'];
-                if (null === $user || !$user instanceof UserInterface) {
+                /* @var CustomerInterface $customer */
+                $customer = $options['customer'];
+                // if customer does not have user, it is not registered, so we do not preset data
+                if (null === $customer || !$customer instanceof CustomerInterface || !$customer->hasUser()) {
                     return;
                 }
 
                 /* @var $order OrderInterface */
                 $order = $event->getData();
-                if ($order->getShippingAddress() === null && $user->getShippingAddress() !== null) {
-                    $address = clone $user->getShippingAddress();
-                    $address->setUser(null);
+                if ($order->getShippingAddress() === null && $customer->getShippingAddress() !== null) {
+                    $address = clone $customer->getShippingAddress();
+                    $address->setCustomer(null);
                     $order->setShippingAddress($address);
                 }
 
-                if ($order->getBillingAddress() === null && $user->getBillingAddress() !== null) {
-                    $address = clone $user->getBillingAddress();
-                    $address->setUser(null);
+                if ($order->getBillingAddress() === null && $customer->getBillingAddress() !== null) {
+                    $address = clone $customer->getBillingAddress();
+                    $address->setCustomer(null);
                     $order->setBillingAddress($address);
                 }
             })
@@ -81,7 +83,7 @@ class AddressingStepType extends AbstractResourceType
 
         $resolver
             ->setDefaults(array(
-                'user' => null,
+                'customer' => null,
                 'cascade_validation' => true
             ))
         ;

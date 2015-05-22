@@ -1,0 +1,37 @@
+sylius_user_registration:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            form: sylius_customer_registration
+            event: register
+            template: SyliusWebBundle:Frontend/User:register.html.twig
+            redirect: sylius_homepage
+            permission: false
+
+sylius_user_security_login:
+    path: /login
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.security:loginAction
+        _sylius:
+            form: sylius_user_security_login
+            template: SyliusWebBundle:Frontend/User:login.html.twig
+            redirect: sylius_homepage
+
+sylius_user_security_check:
+    path: /login_check
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.security:checkAction
+
+sylius_user_security_logout:
+    path: /logout
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.security:logoutAction
+
+sylius_password_resetting:
+    resource: @SyliusUserBundle/Resources/config/routing/password_reset.yml
+    prefix: /resetting

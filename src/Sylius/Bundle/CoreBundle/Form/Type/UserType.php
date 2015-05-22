@@ -11,88 +11,27 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use FOS\UserBundle\Form\Type\ProfileFormType;
+use Sylius\Bundle\UserBundle\Form\Type\UserType as BaseUserType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends ProfileFormType
+/**
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ */
+class UserType extends BaseUserType
 {
-    /** @var string */
-    private $dataClass;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct($dataClass)
-    {
-        $this->dataClass = $dataClass;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
-            ->add('firstName', 'text', array(
-                'label' => 'sylius.form.user.first_name'
-            ))
-            ->add('lastName', 'text', array(
-                'label' => 'sylius.form.user.last_name'
-            ))
-        ;
-
-        $this->buildUserForm($builder, $options);
-
-        $builder
-            ->add('plainPassword', 'password', array(
-                'label' => 'sylius.form.user.password'
-            ))
-            ->add('enabled', 'checkbox', array(
-                'label' => 'sylius.form.user.enabled'
-            ))
-            ->add('groups', 'sylius_group_choice', array(
-                'label'    => 'sylius.form.user.groups',
-                'multiple' => true,
-                'required' => false
-            ))
             ->add('authorizationRoles', 'sylius_role_choice', array(
                 'label'    => 'sylius.form.user.roles',
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false
             ))
-            ->remove('username')
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class'         => $this->dataClass,
-            'validation_groups'  => function (FormInterface $form) {
-                $data = $form->getData();
-                $groups = array('Profile', 'sylius');
-                if ($data && !$data->getId()) {
-                    $groups[] = 'ProfileAdd';
-                }
-
-                return $groups;
-            },
-            'cascade_validation' => true,
-            'intention'          => 'profile',
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_user';
     }
 }

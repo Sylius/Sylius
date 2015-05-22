@@ -60,8 +60,11 @@
             </cascade>
         </one-to-many>
 
-        <many-to-one field="user" target-entity="Sylius\Component\Core\Model\UserInterface" inversed-by="orders">
-            <join-column name="user_id" referenced-column-name="id" nullable="true" />
+        <many-to-one field="customer" target-entity="Sylius\Component\User\Model\CustomerInterface" inversed-by="orders">
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
         </many-to-one>
 
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">

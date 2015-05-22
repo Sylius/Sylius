@@ -46,7 +46,7 @@ class BackendMenuBuilder extends MenuBuilder
 
         $this->addAssortmentMenu($menu, $childOptions, 'main');
         $this->addSalesMenu($menu, $childOptions, 'main');
-        $this->addCustomersMenu($menu, $childOptions, 'main');
+        $this->addCustomerMenu($menu, $childOptions, 'main');
         $this->addMarketingMenu($menu, $childOptions, 'main');
         $this->addSupportMenu($menu, $childOptions, 'main');
         $this->addContentMenu($menu, $childOptions, 'main');
@@ -57,7 +57,7 @@ class BackendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.backend.menu.main.homepage'));
 
         $menu->addChild('logout', array(
-            'route' => 'fos_user_security_logout'
+            'route' => 'sylius_user_security_logout'
         ))->setLabel($this->translate('sylius.backend.logout'));
 
         $this->eventDispatcher->dispatch(MenuBuilderEvent::BACKEND_MAIN, new MenuBuilderEvent($this->factory, $menu));
@@ -88,7 +88,7 @@ class BackendMenuBuilder extends MenuBuilder
         $this->addAssortmentMenu($menu, $childOptions, 'sidebar');
         $this->addSalesMenu($menu, $childOptions, 'sidebar');
         $this->addMarketingMenu($menu, $childOptions, 'sidebar');
-        $this->addCustomersMenu($menu, $childOptions, 'sidebar');
+        $this->addCustomerMenu($menu, $childOptions, 'sidebar');
         $this->addSupportMenu($menu, $childOptions, 'sidebar');
         $this->addContentMenu($menu, $childOptions, 'sidebar');
         $this->addConfigurationMenu($menu, $childOptions, 'sidebar');
@@ -283,18 +283,18 @@ class BackendMenuBuilder extends MenuBuilder
      * @param array         $childOptions
      * @param string        $section
      */
-    protected function addCustomersMenu(ItemInterface $menu, array $childOptions, $section)
+    protected function addCustomerMenu(ItemInterface $menu, array $childOptions, $section)
     {
         $child = $menu
             ->addChild('customer', $childOptions)
             ->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customer', $section)))
         ;
 
-        if ($this->authorizationChecker->isGranted('sylius.user.index')) {
-            $child->addChild('users', array(
-                'route' => 'sylius_backend_user_index',
+        if ($this->authorizationChecker->isGranted('sylius.customer.index')) {
+            $child->addChild('customers', array(
+                'route' => 'sylius_backend_customer_index',
                 'labelAttributes' => array('icon' => 'glyphicon glyphicon-user'),
-            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.users', $section)));
+            ))->setLabel($this->translate(sprintf('sylius.backend.menu.%s.customers', $section)));
         }
         if ($this->authorizationChecker->isGranted('sylius.group.index')) {
             $child->addChild('groups', array(

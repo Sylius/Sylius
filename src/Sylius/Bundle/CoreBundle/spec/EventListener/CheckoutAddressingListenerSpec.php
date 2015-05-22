@@ -12,13 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
 /**
- * Automatic set user's default addressing
+ * Automatic set customer's default addressing
 *
  * @author Liverbool <nukboon@gmail.com>
  */
@@ -35,50 +35,50 @@ class CheckoutAddressingListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow('InvalidArgumentException')
-            ->duringSetUserAddressing($event)
+            ->duringSetCustomerAddressing($event)
         ;
     }
 
-    function it_does_nothing_when_context_doesnt_have_user(GenericEvent $event, OrderInterface $order)
+    function it_does_nothing_when_context_doesnt_have_customer(GenericEvent $event, OrderInterface $order)
     {
         $event->getSubject()->willReturn($order);
 
-        $order->getUser()->willReturn(null);
+        $order->getCustomer()->willReturn(null);
 
-        $this->setUserAddressing($event);
+        $this->setCustomerAddressing($event);
     }
 
-    function it_sets_user_default_addressing_from_order(GenericEvent $event, OrderInterface $order, UserInterface $user, AddressInterface $address)
+    function it_sets_customer_default_addressing_from_order(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
     {
         $event->getSubject()->willReturn($order);
 
-        $order->getUser()->willReturn($user);
+        $order->getCustomer()->willReturn($customer);
 
         $order->getShippingAddress()->willReturn($address);
-        $user->getShippingAddress()->willReturn(null);
-        $user->setShippingAddress($address)->shouldBeCalled();
+        $customer->getShippingAddress()->willReturn(null);
+        $customer->setShippingAddress($address)->shouldBeCalled();
 
         $order->getBillingAddress()->willReturn($address);
-        $user->getBillingAddress()->willReturn(null);
-        $user->setBillingAddress($address)->shouldBeCalled();
+        $customer->getBillingAddress()->willReturn(null);
+        $customer->setBillingAddress($address)->shouldBeCalled();
 
-        $this->setUserAddressing($event);
+        $this->setCustomerAddressing($event);
     }
 
-    function it_does_not_sets_user_addressing_when_user_already_have_default_addresses(GenericEvent $event, OrderInterface $order, UserInterface $user, AddressInterface $address)
+    function it_does_not_set_customer_addressing_when_customer_already_have_default_addresses(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
     {
         $event->getSubject()->willReturn($order);
 
-        $order->getUser()->willReturn($user);
+        $order->getCustomer()->willReturn($customer);
 
         $order->getShippingAddress()->willReturn($address);
-        $user->getShippingAddress()->willReturn($address);
-        $user->setShippingAddress($address)->shouldNotBeCalled();
+        $customer->getShippingAddress()->willReturn($address);
+        $customer->setShippingAddress($address)->shouldNotBeCalled();
 
         $order->getBillingAddress()->willReturn($address);
-        $user->getBillingAddress()->willReturn($address);
-        $user->setBillingAddress($address)->shouldNotBeCalled();
+        $customer->getBillingAddress()->willReturn($address);
+        $customer->setBillingAddress($address)->shouldNotBeCalled();
 
-        $this->setUserAddressing($event);
+        $this->setCustomerAddressing($event);
     }
 }
