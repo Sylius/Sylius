@@ -1,5 +1,5 @@
 @users
-Feature: User groups management
+Feature: Customer groups management
     In order to manage customers
     As a store owner
     I want to be able to group them
@@ -51,12 +51,12 @@ Feature: User groups management
          Then I should be on the group index page
           And I should see group with name "Dealers" in the list
 
-    Scenario: Selecting the groups for user
-        Given I am editing user with username "rick@example.com"
+    Scenario: Selecting the groups for customer
+        Given I am editing customer with email "rick@example.com"
          When I select "Retail Customers" from "Groups"
           And I press "Save changes"
-         Then I should be on the page of user with username "rick@example.com"
-          And "User has been successfully updated." should appear on the page
+         Then I should be on the page of customer with email "rick@example.com"
+          And "Customer has been successfully updated." should appear on the page
 
     Scenario: Accessing the editing form from the list
         Given I am on the group index page

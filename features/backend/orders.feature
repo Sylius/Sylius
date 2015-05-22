@@ -122,5 +122,5 @@ Feature: Orders management
 
     Scenario: Sorting order table by appropriate column
         Given I am on the order index page
-         When I follow "Customer"
+         When I follow "customer"
          Then I should see table of orders sorted by lastName

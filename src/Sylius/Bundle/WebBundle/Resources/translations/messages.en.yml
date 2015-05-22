@@ -565,7 +565,7 @@ sylius:
         taxes: Taxes
         total: Total
         update_header: Editing order
-        customer: Customer
+        customer: customer
         currency: Currency
         state: State
         immutable_warning: Already shipped orders are immutable.

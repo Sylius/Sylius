@@ -242,6 +242,7 @@ default:
                 - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
                 - Sylius\Bundle\WebBundle\Behat\WebContext
                 - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
+                - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
             filters:
                 tags: "@reports && ~@javascript"
 

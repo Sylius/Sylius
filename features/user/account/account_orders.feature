@@ -30,7 +30,7 @@ Feature: User account orders page
         | Book          | 22.50 | 948 |
       And all products assigned to "DEFAULT-WEB" channel
       And the following orders exist:
-        | user                    | shipment                 | address                                                           |
+        | customer                | shipment                 | address                                                           |
         | sylius@example.com      | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France |
         | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |
         | ianmurdock@debian.org   | FedEx                    | Ian Murdock, 3569 New York Avenue, CA 92801, San Francisco, USA   |

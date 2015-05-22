@@ -35,6 +35,6 @@ Feature: Store dashboard
         Given I am on the dashboard page
          Then I should see 2 orders in the list
 
-    Scenario: Viewing recent users
+    Scenario: Viewing recent customers
         Given I am on the dashboard page
-         Then I should see 3 users in the list
+         Then I should see 3 customers in the list
