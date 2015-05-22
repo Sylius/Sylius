@@ -42,7 +42,6 @@ class CommandExecutorSpec extends ObjectBehavior
                 'command' => 'command',
                 '--no-debug' => true,
                 '--env' => 'dev',
-                '--no-interaction' => false,
                 '--verbose' => true,
             )
         );
