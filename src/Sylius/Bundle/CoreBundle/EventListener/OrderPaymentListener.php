@@ -71,6 +71,8 @@ class OrderPaymentListener
     {
         if (false === $this->getOrder($event)->getLastPayment()) {
             $this->paymentProcessor->createPayment($this->getOrder($event));
+        } else {
+            $this->getOrder($event)->getLastPayment()->setDetails(array());
         }
     }
 
