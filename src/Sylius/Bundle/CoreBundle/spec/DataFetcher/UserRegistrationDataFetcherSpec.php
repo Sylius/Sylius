@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\DataFetcher;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository;
+use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Report\DataFetcher\Data;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 

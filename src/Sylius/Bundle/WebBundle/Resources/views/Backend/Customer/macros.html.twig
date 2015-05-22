@@ -1,0 +1,114 @@
+{% macro list(customers) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if customers|length > 0 %}
+<table id="customers" class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('id', 'sylius.customer.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('firstName', 'sylius.address.firstname'|trans) }}</th>
+            <th>{{ sylius_resource_sort('lastName', 'sylius.address.lastname'|trans) }}</th>
+            <th>{{ sylius_resource_sort('email', 'sylius.customer.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('user.createdAt', 'sylius.user.registration_date'|trans) }}</th>
+            <th>{{ sylius_resource_sort('user.enabled', 'sylius.user.enabled'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr id="{{ customer.id }}" data-customer="{{ customer.email }}" {% if customer.deleted %} class="danger"{% endif %}>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.firstName }}</td>
+            <td>{{ customer.lastName }}</td>
+            <td><a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}">{{ customer.email }}</a></td>
+            <td>
+                {% if customer.user is not null %}
+                    {{ customer.user.createdAt|date('d-m-Y H:i') }}
+                {% endif %}
+            </td>
+            <td>
+                {% if customer.user is not null %}
+                    {{ misc.state_label(customer.user.enabled) }}
+                {% endif %}
+            </td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.show(path('sylius_backend_customer_show', {'id': customer.id})) }}
+                    {% if not customer.deleted %}
+                        {% if sylius_is_granted('sylius.customer.update') %}
+                            {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
+                        {% else  %}
+                            Not allowed to edit!
+                        {% endif %}
+                        {% if customer.user is null %}
+                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
+                        {% elseif customer.user.id is not sameas(app.user.id) %}
+                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.customer.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}
+
+{% macro simple_list(customers) %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
+{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
+
+{% if customers|length > 0 %}
+<table id="customers" class="table">
+    <thead>
+        <tr>
+            <th>{{ sylius_resource_sort('email', 'sylius.customer.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('user.enabled', 'sylius.user.enabled'|trans) }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr id="{{ customer.id }}" data-customer="{{ customer.email }}" {% if customer.deleted %} class="danger"{% endif %}>
+            <td>
+                {{ customer.fullname }}<br>
+                <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}">
+                    {{ customer.email }}
+                </a>
+                </td>
+            <td>
+                {% if customer.user is not null %}
+                    {{ misc.state_label(customer.user.enabled) }}
+                {% endif %}
+            </td>
+            <td>
+                <div class="pull-right">
+                    {{ buttons.show(path('sylius_backend_customer_show', {'id': customer.id})) }}
+                    {% if not customer.deleted %}
+                        {{ buttons.edit(path('sylius_backend_customer_update', {'id': customer.id})) }}
+                        {% if customer.user is null %}
+                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
+                        {% elseif customer.user.id is not sameas(app.user.id) %}
+                            {{ buttons.delete(path('sylius_backend_customer_delete', {'id': customer.id})) }}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+{{ alerts.info('sylius.customer.no_results'|trans) }}
+{% endif %}
+
+{% endmacro %}

@@ -41,12 +41,13 @@ class ShipmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $criteria = $options['criteria'];
+        $channel  = $options['channel'];
 
-        $notBlank = new NotBlank();
+        $notBlank = new NotBlank(array('groups' => array('sylius')));
         $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank');
 
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($notBlank, $criteria) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($notBlank, $criteria, $channel) {
                 $form = $event->getForm();
                 $shipment = $event->getData();
 
@@ -54,6 +55,7 @@ class ShipmentType extends AbstractType
                     'label'       => 'sylius.form.checkout.shipping_method',
                     'subject'     => $shipment,
                     'criteria'    => $criteria,
+                    'channel'     => $channel,
                     'expanded'    => true,
                     'constraints' => array(
                         $notBlank
@@ -73,10 +75,12 @@ class ShipmentType extends AbstractType
                 'data_class' => $this->dataClass
             ))
             ->setOptional(array(
-                'criteria'
+                'criteria',
+                'channel'
             ))
             ->setAllowedTypes(array(
-                'criteria'   => array('array')
+                'criteria'   => array('array'),
+                'channel'  => array('Sylius\Component\Channel\Model\ChannelInterface', 'null')
             ))
         ;
     }

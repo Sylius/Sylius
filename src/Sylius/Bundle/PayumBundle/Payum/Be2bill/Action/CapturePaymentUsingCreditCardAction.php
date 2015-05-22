@@ -38,10 +38,10 @@ class CapturePaymentUsingCreditCardAction extends AbstractCapturePaymentAction
 
         $details = array();
         $details['AMOUNT'] = $order->getTotal();
-        $details['CLIENTEMAIL'] = $order->getEmail();
+        $details['CLIENTEMAIL'] = $order->getCustomer()->getEmail();
         $details['CLIENTUSERAGENT'] = $httpRequest->userAgent ?: 'Unknown';
         $details['CLIENTIP'] = $httpRequest->clientIp;
-        $details['CLIENTIDENT'] = $order->getUser() ? $order->getUser()->getId() : $order->getEmail();
+        $details['CLIENTIDENT'] = $order->getCustomer()->getId();
         $details['DESCRIPTION'] = sprintf('Order containing %d items for a total of %01.2f', $order->getItems()->count(), $order->getTotal() / 100);
         $details['ORDERID'] = $payment->getId();
 

@@ -15,6 +15,7 @@ use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -62,7 +63,7 @@ class CoreContext extends DefaultContext
      */
     public function iAmNotLoggedIn()
     {
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_logout'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_logout'));
     }
 
     /**
@@ -93,7 +94,7 @@ class CoreContext extends DefaultContext
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
-            $order->setUser($this->thereIsUser($data['user'], 'sylius'));
+            $order->setCustomer($this->thereIsCustomer($data['customer']));
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
@@ -180,6 +181,24 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Given /^there are following customers:$/
+     */
+    public function thereAreFollowingCustomers(TableNode $table)
+    {
+        foreach ($table->getHash() as $data) {
+            $this->thereIsCustomer(
+                $data['email'],
+                isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
+                isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : array(),
+                false,
+                isset($data['created at']) ? new \DateTime($data['created at']) : null
+            );
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @Given /^there are groups:$/
      * @Given /^there are following groups:$/
      * @Given /^the following groups exist:$/
@@ -192,11 +211,6 @@ class CoreContext extends DefaultContext
         foreach ($table->getHash() as $data) {
             $group = $repository->createNew();
             $group->setName(trim($data['name']));
-
-            $roles = explode(',', $data['roles']);
-            $roles = array_map('trim', $roles);
-
-            $group->setRoles($roles);
 
             $manager->persist($group);
         }
@@ -213,8 +227,8 @@ class CoreContext extends DefaultContext
 
         foreach ($table->getHash() as $data) {
             $address = $this->createAddress($data['address']);
-            $user = $this->thereIsUser($data['user'], 'sylius', null, 'yes', null, array(), false);
-            $user->addAddress($address);
+            $user = $this->thereIsUser($data['user'], 'sylius', 'ROLE_USER', 'yes', null, array(), false);
+            $user->getCustomer()->addAddress($address);
             $manager->persist($address);
             $manager->persist($user);
         }
@@ -224,21 +238,27 @@ class CoreContext extends DefaultContext
 
     public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
     {
-        if (null === $user = $this->getRepository('user')->findOneBy(array('email' => $email))) {
+        if (null === $user = $this->getRepository('user')->findOneByEmail($email)) {
             $addressData = explode(',', $address);
             $addressData = array_map('trim', $addressData);
 
             /* @var $user UserInterface */
             $user = $this->getRepository('user')->createNew();
-            $user->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
-            $user->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $customer = $this->getRepository('customer')->createNew();
+            $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+            $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+            $customer->setEmail($email);
+            $user->setCustomer($customer);
+            $user->setUsername($email);
             $user->setEmail($email);
             $user->setEnabled('yes' === $enabled);
             $user->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
             $user->setPlainPassword($password);
-
+            $user->setUsernameCanonical($email);
+            $user->setEmailCanonical($email);
+            $this->getService('sylius.user.password_updater')->updatePassword($user);
             if (null !== $address) {
-                $user->setShippingAddress($this->createAddress($address));
+                $customer->setShippingAddress($this->createAddress($address));
             }
 
             if (null !== $role) {
@@ -249,7 +269,7 @@ class CoreContext extends DefaultContext
 
             foreach ($groups as $groupName) {
                 if ($group = $this->findOneByName('group', $groupName)) {
-                    $user->addGroup($group);
+                    $user->getCustomer()->addGroup($group);
                 }
             }
 
@@ -275,6 +295,40 @@ class CoreContext extends DefaultContext
         }
 
         return $user;
+    }
+
+    protected function thereIsCustomer($email, $address = null, $groups = array(), $flush = true, $createdAt = null)
+    {
+        if (null !== $customer = $this->getRepository('customer')->findOneByEmail($email)) {
+            return $customer;
+        }
+
+        $addressData = explode(',', $address);
+        $addressData = array_map('trim', $addressData);
+
+        /* @var $customer CustomerInterface */
+        $customer = $this->getRepository('customer')->createNew();
+        $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+        $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+        $customer->setEmail($email);
+        $customer->setEmailCanonical($email);
+        $customer->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
+        if (null !== $address) {
+            $customer->setShippingAddress($this->createAddress($address));
+        }
+
+        foreach ($groups as $groupName) {
+            if ($group = $this->findOneByName('group', $groupName)) {
+                $customer->addGroup($group);
+            }
+        }
+
+        $this->getEntityManager()->persist($customer);
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+
+        return $customer;
     }
 
     /**
@@ -545,11 +599,11 @@ class CoreContext extends DefaultContext
      */
     private function iAmLoggedInAsRole($role, $email = 'sylius@example.com', array $authorizationRoles = array())
     {
-        $this->thereIsUser($email, 'sylius', null, 'yes', null, array(), true, $authorizationRoles);
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+        $this->thereIsUser($email, 'sylius', $role, 'yes', null, array(), true, $authorizationRoles);
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
 
         $this->fillField('Email', $email);
         $this->fillField('Password', 'sylius');
-        $this->pressButton('login');
+        $this->pressButton('Login');
     }
 }

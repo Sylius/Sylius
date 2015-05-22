@@ -22,10 +22,10 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  */
 abstract class Kernel extends BaseKernel
 {
-    const VERSION         = '0.14.0-dev';
-    const VERSION_ID      = '00140';
+    const VERSION         = '0.15.0-dev';
+    const VERSION_ID      = '00150';
     const MAJOR_VERSION   = '0';
-    const MINOR_VERSION   = '14';
+    const MINOR_VERSION   = '15';
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION   = 'DEV';
 
@@ -51,6 +51,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\CartBundle\SyliusCartBundle(),
             new \Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new \Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
+            new \Sylius\Bundle\ChannelBundle\SyliusChannelBundle(),
             new \Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new \Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
             new \Sylius\Bundle\TaxationBundle\SyliusTaxationBundle(),
@@ -68,6 +69,7 @@ abstract class Kernel extends BaseKernel
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\SearchBundle\SyliusSearchBundle(),
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
+            new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
 
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
             new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
@@ -98,7 +100,6 @@ abstract class Kernel extends BaseKernel
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
 
-            new \FOS\UserBundle\FOSUserBundle(),
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),

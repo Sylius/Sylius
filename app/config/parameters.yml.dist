@@ -44,6 +44,7 @@ parameters:
     stripe.publishable_key: EDITME
     stripe.secret_key: EDITME
     stripe.test_mode: true
+    stripe.publishable_key: EDITME
 
     be2bill.identifier: EDITME
     be2bill.password: EDITME

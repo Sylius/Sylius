@@ -25,7 +25,6 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
 {
     protected $configFiles = array(
         'services',
-        'controller'
     );
 
     /**
@@ -62,7 +61,7 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             'auth_code_class'     => $config['classes']['api_auth_code']['model'],
 
             'service'             => array(
-                'user_provider' => 'fos_user.user_provider.username'
+                'user_provider' => 'sylius.user_provider.name_or_email'
             ),
         ));
     }

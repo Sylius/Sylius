@@ -34,6 +34,9 @@
         <![endif]-->
     </head>
     <body>
+    {% if settings.tracking_code %}
+        {{ settings.tracking_code|raw }}
+    {% endif %}
         {# javascripts... #}
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

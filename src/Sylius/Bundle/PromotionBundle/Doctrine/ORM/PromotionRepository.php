@@ -29,7 +29,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     {
         $qb = $this
             ->getCollectionQueryBuilder()
-            ->orderBy($this->getAlias().'.priority', 'DESC')
+            ->orderBy($this->getPropertyName('priority'), 'DESC')
         ;
 
         $this->filterByActive($qb);
@@ -43,9 +43,9 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     protected function getCollectionQueryBuilder()
     {
         return parent::getCollectionQueryBuilder()
-            ->leftJoin($this->getAlias().'.rules', 'r')
+            ->leftJoin($this->getPropertyName('rules'), 'r')
             ->addSelect('r')
-            ->leftJoin($this->getAlias().'.actions', 'a')
+            ->leftJoin($this->getPropertyName('actions'), 'a')
             ->addSelect('a');
     }
 
@@ -58,14 +58,14 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
         return $qb
             ->where(
                 $qb->expr()->orX(
-                    $qb->expr()->isNull($this->getAlias().'.startsAt'),
-                    $qb->expr()->lt($this->getAlias().'.startsAt', ':date')
+                    $qb->expr()->isNull($this->getPropertyName('startsAt')),
+                    $qb->expr()->lt($this->getPropertyName('startsAt'), ':date')
                 )
             )
             ->andWhere(
                 $qb->expr()->orX(
-                    $qb->expr()->isNull($this->getAlias().'.endsAt'),
-                    $qb->expr()->gt($this->getAlias().'.endsAt', ':date')
+                    $qb->expr()->isNull($this->getPropertyName('endsAt')),
+                    $qb->expr()->gt($this->getPropertyName('endsAt'), ':date')
                 )
             )
             ->setParameter('date', $date)

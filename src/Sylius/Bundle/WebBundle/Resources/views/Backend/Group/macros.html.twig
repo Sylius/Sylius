@@ -9,7 +9,6 @@
         <tr>
             <th>{{ sylius_resource_sort('id', 'sylius.group.id'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.group.name'|trans) }}</th>
-            <th>{{ 'sylius.group.roles'|trans }}</th>
             <th></th>
         </tr>
     </thead>
@@ -18,11 +17,6 @@
         <tr id="{{ group.id }}">
             <td>{{ group.id }}</td>
             <td>{{ group.name }}</td>
-            <td>
-                {% for role in group.roles %}
-                    <span class="label label-primary">{{ role }}</span>
-                {% endfor %}
-            </td>
             <td>
                 <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_group_update', {'id': group.id})) }}

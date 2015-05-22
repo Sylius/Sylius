@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_api_channel_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.channel:indexAction
+
+sylius_api_channel_create:
+    path: /
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.channel:createAction
+
+sylius_api_channel_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.channel:updateAction
+
+sylius_api_channel_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.channel:deleteAction
+
+sylius_api_channel_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.channel:showAction

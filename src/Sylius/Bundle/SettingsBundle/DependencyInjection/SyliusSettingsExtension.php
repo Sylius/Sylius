@@ -50,12 +50,6 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
         if (isset($parameterClasses['repository'])) {
             $container->setParameter('sylius.repository.parameter.class', $parameterClasses['repository']);
         }
-
-        if ($container->hasParameter('sylius.config.classes')) {
-            $classes = array_merge($classes, $container->getParameter('sylius.config.classes'));
-        }
-
-        $container->setParameter('sylius.config.classes', $classes);
     }
 
     /**
@@ -65,6 +59,10 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
     {
         if (!$container->hasExtension('doctrine_cache')) {
             throw new \RuntimeException('DoctrineCacheBundle must be registered!');
+        }
+        
+        if (!$container->hasParameter('sylius.cache')) {
+            $container->setParameter('sylius.cache', 'file_system');
         }
 
         $container->prependExtensionConfig('doctrine_cache', array(

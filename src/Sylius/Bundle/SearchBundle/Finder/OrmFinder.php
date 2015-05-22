@@ -12,11 +12,14 @@
 namespace Sylius\Bundle\SearchBundle\Finder;
 
 use Doctrine\ORM\EntityManager;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\SearchBundle\Doctrine\ORM\SearchIndexRepository;
 use Sylius\Bundle\SearchBundle\Query\Query;
 use Sylius\Bundle\SearchBundle\Query\SearchStringQuery;
 use Sylius\Bundle\SearchBundle\Query\TaxonQuery;
 use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 
 /**
  * OrmFinder
@@ -25,13 +28,14 @@ use Sylius\Bundle\SearchBundle\QueryLogger\QueryLoggerInterface;
  */
 class OrmFinder extends AbstractFinder
 {
-    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger)
+    public function __construct(SearchIndexRepository $searchRepository, $config, $productRepository, EntityManager $em, QueryLoggerInterface $queryLogger, ChannelContextInterface $channelContext)
     {
         $this->searchRepository  = $searchRepository;
         $this->config            = $config;
         $this->productRepository = $productRepository;
         $this->em                = $em;
         $this->queryLogger       = $queryLogger;
+        $this->channelContext    = $channelContext;
     }
 
     /**
@@ -69,8 +73,10 @@ class OrmFinder extends AbstractFinder
             $this->initializeFacetGroup($this->facetGroup);
         }
 
+        $channel = $this->channelContext->getChannel();
+
         // First get ALL products from the taxon to get their ids
-        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array());
+        $paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('channels' => $channel));
 
         $ids = array();
         $pages = $paginator->getNbPages();
@@ -108,7 +114,11 @@ class OrmFinder extends AbstractFinder
             $this->facets = $this->calculateNewFacets($facetsArray, $facetFilteredIds);
         }
 
-        $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets));
+        if (count($idsFromAllFacets)) {
+            $this->paginator = $this->productRepository->createByTaxonPaginator($query->getTaxon(), array('id' => $idsFromAllFacets, 'channels' => $channel));
+        } else {
+            $this->paginator = new Pagerfanta(new ArrayAdapter(array()));
+        }
         $this->filters = $query->getAppliedFilters();
 
         return $this;
@@ -124,10 +134,14 @@ class OrmFinder extends AbstractFinder
         }
 
         $finalResults = $facets = array();
-
+        $modelIdsForChannel = $this->searchRepository->getProductIdsFromChannel($this->channelContext->getChannel());
         // get ids and tags from full text search
         foreach ($this->query($query->getSearchTerm(), $this->em) as $modelClass => $modelIdsToTags) {
             $modelIds = array_keys($modelIdsToTags);
+
+            if(isset($modelIdsForChannel[$modelClass])) {
+                $modelIds = array_intersect($modelIds, $modelIdsForChannel[$modelClass]);
+            }
 
             //filter the ids if searchParam is not all
             // TODO: Will refactor pre-search filtering into a service based on the finder configuration

@@ -6,6 +6,7 @@ Feature: Inventory tracking
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And I am logged in as administrator
           And there are following options:
             | name          | presentation | values           |

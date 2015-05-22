@@ -24,8 +24,10 @@ interface SettingsFormFactoryInterface
      * Create the form for given schema.
      *
      * @param string $namespace
+     * @param null|mixed $data
+     * @param array $options
      *
      * @return FormInterface
      */
-    public function create($namespace);
+    public function create($namespace, $data = null, array $options = array());
 }

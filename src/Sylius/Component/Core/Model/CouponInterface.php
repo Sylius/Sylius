@@ -21,18 +21,18 @@ use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 interface CouponInterface extends BaseCouponInterface
 {
     /**
-     * Get per user usage limit.
+     * Get per customer usage limit.
      *
      * @return null|int
      */
-    public function getPerUserUsageLimit();
+    public function getPerCustomerUsageLimit();
 
     /**
-     * Set per user usage limit.
+     * Set per customer usage limit.
      *
-     * @param int $perUserUsageLimit
+     * @param int $perCustomerUsageLimit
      *
      * @return self
      */
-    public function setPerUserUsageLimit($perUserUsageLimit = 0);
+    public function setPerCustomerUsageLimit($perCustomerUsageLimit = 0);
 }

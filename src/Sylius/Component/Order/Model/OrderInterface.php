@@ -33,20 +33,6 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     const STATE_RETURNED    = 'returned';
 
     /**
-     * Get customer email.
-     *
-     * @return string
-     */
-    public function getEmail();
-
-    /**
-     * Set customer email.
-     *
-     * @param string $email
-     */
-    public function setEmail($email);
-
-    /**
      * Has the order been completed by user and can be handled.
      *
      * @return Boolean
@@ -200,7 +186,7 @@ interface OrderInterface extends AdjustableInterface, CommentAwareInterface, Tim
     /**
      * Remove identity from order.
      *
-     * @param IdentityInterface $item
+     * @param IdentityInterface $identity
      */
     public function removeIdentity(IdentityInterface $identity);
 

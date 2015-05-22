@@ -19,8 +19,6 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
  */
 interface AdapterInterface
 {
-    const EVENT_EMAIL_RENDERED = 'sylius.email_rendered';
-
     /**
      * Render an e-mail.
      *

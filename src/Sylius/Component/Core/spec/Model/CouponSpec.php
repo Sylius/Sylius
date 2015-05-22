@@ -25,15 +25,15 @@ class CouponSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\Core\Model\CouponInterface');
     }
 
-    public function it_should_have_zero_per_user_usage_limit_by_default()
+    public function it_should_have_zero_per_customer_usage_limit_by_default()
     {
-        $this->getPerUserUsageLimit()->shouldReturn(0);
+        $this->getPerCustomerUsageLimit()->shouldReturn(0);
     }
 
-    public function its_per_user_usage_limit_should_be_mutable()
+    public function its_per_customer_usage_limit_should_be_mutable()
     {
-        $this->setPerUserUsageLimit(10);
-        $this->getPerUserUsageLimit()->shouldReturn(10);
+        $this->setPerCustomerUsageLimit(10);
+        $this->getPerCustomerUsageLimit()->shouldReturn(10);
     }
 
 }

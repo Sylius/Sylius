@@ -111,7 +111,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_change_password'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_change_password'));
     }
 
     /**
@@ -119,7 +119,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
     }
 
     /**
@@ -127,7 +127,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
     }
 
     /**
@@ -135,7 +135,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_account_profile_edit'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_profile_update'));
     }
 
     /**
@@ -143,7 +143,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_edit'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
     }
 
     /**
@@ -151,7 +151,15 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_edit'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
+    }
+
+    /**
+     * @Given /^I should be on my account profile page$/
+     */
+    public function iShouldBeOnMyProfilePage()
+    {
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_homepage'));
     }
 
     /**
@@ -227,7 +235,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnLoginPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('fos_user_security_login'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_user_security_login'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -236,7 +244,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnRegistrationPage()
     {
-        $this->assertSession()->addressEquals($this->generatePageUrl('fos_user_registration_register'));
+        $this->assertSession()->addressEquals($this->generatePageUrl('sylius_user_registration'));
         $this->assertStatusCodeEquals(200);
     }
 
@@ -522,10 +530,10 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     /**
      * @Then I should not see :button button near :user in :table table
      */
-    public function iShouldNotSeeButtonInColumnInTable($button, $user, $table)
+    public function iShouldNotSeeButtonInColumnInTable($button, $customer, $table)
     {   
-        $this->assertSession()->elementExists('css', "#".$table." tr[data-user='$user']");
-        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-user='$user'] form input[value=".strtoupper($button)."]");
+        $this->assertSession()->elementExists('css', "#".$table." tr[data-customer='$customer']");
+        $this->assertSession()->elementNotExists('css', "#".$table." tr[data-customer='$customer'] form input[value=".strtoupper($button)."]");
     }
 
     /**
@@ -737,11 +745,11 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iLogInWith($email, $password)
     {
-        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_security_login'));
 
         $this->fillField('Email', $email);
         $this->fillField('Password', $password);
-        $this->pressButton('login');
+        $this->pressButton('Login');
     }
 
     /**

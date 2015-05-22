@@ -6,6 +6,7 @@ Feature: Products
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -20,6 +21,10 @@ Feature: Products
             | Sylius Tee       | 12.99 | PHP T-Shirts |
             | Symfony T-Shirt  | 15.00 | PHP T-Shirts |
             | Doctrine T-Shirt | 15.00 | PHP T-Shirts |
+        And all products assigned to "DEFAULT-WEB" channel
+        And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Browsing products by taxon
         Given I am on the store homepage

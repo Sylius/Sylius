@@ -33,7 +33,7 @@ class MoneyHelper extends BaseMoneyHelper
     {
         $this->currencyContext = $currencyContext;
 
-        parent::__construct($locale, $this->getDefaultCurrency());
+        parent::__construct($locale);
     }
 
     /**

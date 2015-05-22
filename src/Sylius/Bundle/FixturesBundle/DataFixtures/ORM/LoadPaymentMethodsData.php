@@ -32,6 +32,7 @@ class LoadPaymentMethodsData extends DataFixture
         $manager->persist($this->createPaymentMethod('Be2bill', 'be2bill_direct'));
         $manager->persist($this->createPaymentMethod('Be2billOffsite', 'be2bill_offsite'));
         $manager->persist($this->createPaymentMethod('StripeCheckout', 'stripe_checkout'));
+        $manager->persist($this->createPaymentMethod('Offline', 'offline'));
 
         $manager->flush();
     }

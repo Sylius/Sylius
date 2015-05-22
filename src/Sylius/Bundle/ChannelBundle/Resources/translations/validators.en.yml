@@ -1,0 +1,7 @@
+sylius:
+    channel:
+        code:
+            not_blank: Please enter channel code.
+            unique: Channel code has to be unique.
+        name:
+            not_blank: Please enter channel name.

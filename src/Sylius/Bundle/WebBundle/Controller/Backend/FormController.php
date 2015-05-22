@@ -43,7 +43,7 @@ class FormController extends Controller
      *
      * @return Response
      */
-    public function filterAction($type, $template = 'SyliusWebBundle:Backend/Form:filter.html.twig')
+    public function filterAction($type, $template)
     {
         return $this->render($template, array(
             'form' => $this->get('form.factory')->createNamed('criteria', $type)->createView()

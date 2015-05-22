@@ -66,8 +66,8 @@ class CommandExecutor
     {
         $parameters = array_merge(
             array('command' => $command),
-            $parameters,
-            $this->getDefaultParameters()
+            $this->getDefaultParameters(),
+            $parameters
         );
 
         $this->application->setAutoExit(false);
@@ -100,7 +100,7 @@ class CommandExecutor
         }
         
         if ($this->input->hasOption('no-interaction')) {
-            $defaultParameters['--no-interaction'] = true;
+            $defaultParameters['--no-interaction'] = $this->input->getOption('no-interaction');
         }
 
         if ($this->input->hasOption('verbose') && true === $this->input->getOption('verbose')) {

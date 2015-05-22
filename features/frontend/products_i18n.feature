@@ -6,6 +6,7 @@ Feature: Browse products, categories, attributes and options in preferred langua
 
     Background:
         Given there is default currency configured
+        And there is default channel configured
         And there are following taxonomies defined:
             | name     |
             | Category |
@@ -43,6 +44,7 @@ Feature: Browse products, categories, attributes and options in preferred langua
         And the following option translations exist
             | option       | presentation | locale |
             | T-Shirt size | Talla        | es     |
+        And all products assigned to "DEFAULT-WEB" channel
 
     Scenario: Seeing translated product, taxonomy and taxon name
         Given I am on the store homepage

@@ -69,6 +69,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 
         $formFactory
             ->createNamed('choices', 'collection', null, array(
+                'label'             => 'sylius.form.attribute.choices',
                 'type'              => 'text',
                 'allow_add'         => true,
                 'allow_delete'      => true,
@@ -100,6 +101,7 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
 
         $formFactory
             ->createNamed('choices', 'collection', null, array(
+                'label'             => 'sylius.form.attribute.choices',
                 'type'              => 'text',
                 'allow_add'         => true,
                 'allow_delete'      => true,

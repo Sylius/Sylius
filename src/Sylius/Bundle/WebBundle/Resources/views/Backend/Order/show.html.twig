@@ -32,6 +32,8 @@
     </div>
     <h1>
         <span class="glyphicon glyphicon-file"></span> {{ 'sylius.order.show_header'|trans({'%number%': order.number}) }}
+        via
+        <span style="color: {{ order.channel.color }};">{{ order.channel.code }}</span>
         {% if order.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
     </h1>
 </div>
@@ -52,10 +54,8 @@
             <dd>{{ order.createdAt|date }}</dd>
             <dt>Email</dt>
             <dd>
-                {% if order.user %}
-                    <a href="{{ path('sylius_backend_user_show', {'id': order.user.id}) }}">{{ order.user.email }}</a>
-                {% else %}
-                    {{ order.email }}
+                {% if order.customer %}
+                    <a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">{{ order.customer.email }}</a>
                 {% endif %}
             </dd>
         </dl>

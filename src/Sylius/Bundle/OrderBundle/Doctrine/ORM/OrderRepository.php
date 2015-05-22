@@ -45,11 +45,11 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     public function isNumberUsed($number)
     {
         return (bool) $this->createQueryBuilder('o')
-            ->select('COUNT(*) > 0')
+            ->select('COUNT(o.id)')
             ->where('o.number = :number')
             ->setParameter('number', $number)
             ->getQuery()
-            ->getSingleScalarResult()
+            ->getSingleScalarResult() > 0
         ;
     }
 

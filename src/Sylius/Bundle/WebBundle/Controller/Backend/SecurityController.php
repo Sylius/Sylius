@@ -48,7 +48,7 @@ class SecurityController extends Controller
             throw new NotFoundHttpException(sprintf('User with username %s does not exist.', $username));
         }
 
-        return $this->redirect($this->generateUrl('sylius_backend_user_show', array('id' => $user->getId())));
+        return $this->redirect($this->generateUrl('sylius_backend_customer_show', array('id' => $user->getCustomer()->getId())));
     }
 
     /**

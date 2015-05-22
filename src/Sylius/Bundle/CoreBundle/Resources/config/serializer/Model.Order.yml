@@ -18,5 +18,7 @@ Sylius\Component\Core\Model\Order:
             expose: true
         user:
             expose: true
+        channel:
+            expose: true
         completedAt:
             expose: true

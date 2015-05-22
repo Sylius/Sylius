@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.controller.frontend.homepage.class">Sylius\Bundle\WebBundle\Controller\Frontend\HomepageController</parameter>
         <parameter key="sylius.controller.frontend.account.profile.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\ProfileController</parameter>
+        <parameter key="sylius.controller.frontend.account.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AccountController</parameter>
         <parameter key="sylius.controller.frontend.account.address.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\AddressController</parameter>
         <parameter key="sylius.controller.frontend.account.order.class">Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController</parameter>
 
@@ -29,9 +30,6 @@
         <parameter key="sylius.menu_builder.frontend.class">Sylius\Bundle\WebBundle\Menu\FrontendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.backend.class">Sylius\Bundle\WebBundle\Menu\BackendMenuBuilder</parameter>
         <parameter key="sylius.menu_builder.locale.class">Sylius\Bundle\WebBundle\Menu\LocaleMenuBuilder</parameter>
-
-        <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
-        <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
     </parameters>
 
     <services>
@@ -46,6 +44,11 @@
             </call>
         </service>
         <service id="sylius.controller.frontend.account.address" class="%sylius.controller.frontend.account.address.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+        <service id="sylius.controller.frontend.account" class="%sylius.controller.frontend.account.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
@@ -81,6 +84,7 @@
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.templating.helper.currency" />
+            <argument type="service" id="sylius.context.channel" />
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
@@ -139,15 +143,6 @@
             <tag name="knp_menu.menu" alias="sylius.backend.sidebar" />
         </service>
 
-        <service id="sylius.form.frontend.profile.type" class="%sylius.form.frontend.profile.type.class%">
-            <tag name="form.type" alias="sylius_user_profile" />
-            <argument>%fos_user.model.user.class%</argument>
-        </service>
-
-        <service id="sylius.user.registration.form.type" class="%sylius.form.frontend.registration.type.class%">
-            <tag name="form.type" alias="sylius_user_registration" />
-            <argument>%fos_user.model.user.class%</argument>
-        </service>
     </services>
 
 </container>

@@ -107,6 +107,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('type')->end()
                                     ->scalarNode('value')->end()
                                     ->arrayNode('values')
+                                        ->performNoDeepMerging()
                                         ->prototype('array')
                                             ->children()
                                                 ->scalarNode('from')->end()

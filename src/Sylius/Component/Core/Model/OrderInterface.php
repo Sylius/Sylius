@@ -13,7 +13,8 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Core\Model\IdentityInterface;
+use Sylius\Component\Channel\Model\ChannelAwareInterface;
+use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
@@ -24,7 +25,13 @@ use Sylius\Component\Promotion\Model\PromotionCouponsAwareSubjectInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends CartInterface, PaymentsSubjectInterface, PromotionCountableSubjectInterface, PromotionCouponsAwareSubjectInterface, UserAwareInterface
+interface OrderInterface extends
+    CartInterface,
+    PaymentsSubjectInterface,
+    PromotionCountableSubjectInterface,
+    PromotionCouponsAwareSubjectInterface,
+    CustomerAwareInterface,
+    ChannelAwareInterface
 {
     const CHECKOUT_STATE_CART       = 'cart';
     const CHECKOUT_STATE_ADDRESSING = 'addressing';
@@ -32,6 +39,13 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     const CHECKOUT_STATE_PAYMENT    = 'payment';
     const CHECKOUT_STATE_FINALIZE   = 'finalize';
     const CHECKOUT_STATE_COMPLETED  = 'completed';
+
+    /**
+     * Get user.
+     *
+     * @return null|UserInterface
+     */
+    public function getUser();
 
     /**
      * Get shipping address.
@@ -159,6 +173,20 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
     public function setCurrency($currency);
 
     /**
+     * Return the exchange rate for this order.
+     *
+     * @return float
+     */
+    public function getExchangeRate();
+
+    /**
+     * Set the exchange rate.
+     *
+     * @param float $exchangeRate
+     */
+    public function setExchangeRate($exchangeRate);
+
+    /**
      * Adds promotion coupon.
      *
      * @param BaseCouponInterface $coupon
@@ -222,7 +250,4 @@ interface OrderInterface extends CartInterface, PaymentsSubjectInterface, Promot
      * @return bool
      */
     public function isInvoiceAvailable();
-
-
-
 }

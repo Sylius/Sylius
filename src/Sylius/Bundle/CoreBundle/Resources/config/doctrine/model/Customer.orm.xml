@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Sylius\Component\Core\Model\Customer" table="sylius_customer">
+        <field name="currency" length="3" nullable="true" />
+        <one-to-one field="billingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
+            <join-column name="billing_address_id" on-delete="SET NULL" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </one-to-one>
+        <one-to-one field="shippingAddress" target-entity="Sylius\Component\Addressing\Model\AddressInterface">
+            <join-column name="shipping_address_id"  on-delete="SET NULL" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </one-to-one>
+
+        <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="customer">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+        <one-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface" mapped-by="customer">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+    </mapped-superclass>
+
+</doctrine-mapping>

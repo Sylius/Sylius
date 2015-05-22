@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +23,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * User account address controller.
+ * Customer account address controller.
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 class AddressController extends FOSRestController
 {
     /**
-     * Get collection of user's addresses.
+     * Get collection of customer's addresses.
      */
     public function indexAction()
     {
@@ -37,8 +38,8 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/index.html.twig')
             ->setData(array(
-                'user' => $this->getUser(),
-                'addresses' => $this->getUser()->getAddresses(),
+                'customer'  => $this->getCustomer(),
+                'addresses' => $this->getCustomer()->getAddresses(),
             ))
         ;
 
@@ -46,19 +47,19 @@ class AddressController extends FOSRestController
     }
 
     /**
-     * Create new user address.
+     * Create new customer address.
      */
     public function createAction(Request $request)
     {
-        $user = $this->getUser();
+        $customer = $this->getCustomer();
         $address = $this->getAddressRepository()->createNew();
         $form = $this->getAddressForm($address);
 
         if ($form->handleRequest($request)->isValid()) {
-            $user->addAddress($address);
+            $customer->addAddress($address);
 
-            $manager = $this->getUserManager();
-            $manager->persist($user);
+            $manager = $this->getCustomerManager();
+            $manager->persist($customer);
             $manager->flush();
 
             $this->addFlash('success', 'sylius.account.address.create');
@@ -70,7 +71,7 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/create.html.twig')
             ->setData(array(
-                'user' => $this->getUser(),
+                'customer' => $this->getCustomer(),
                 'form' => $form->createView()
             ))
         ;
@@ -83,13 +84,13 @@ class AddressController extends FOSRestController
      */
     public function updateAction(Request $request, $id)
     {
-        $user = $this->getUser();
+        $customer = $this->getCustomer();
         $address = $this->findUserAddressOr404($id);
         $form = $this->getAddressForm($address);
 
         if ($form->handleRequest($request)->isValid()) {
-            $manager = $this->getUserManager();
-            $manager->persist($user);
+            $manager = $this->getCustomerManager();
+            $manager->persist($customer);
             $manager->flush();
 
             $this->addFlash('success', 'sylius.account.address.update');
@@ -101,7 +102,7 @@ class AddressController extends FOSRestController
             ->view()
             ->setTemplate('SyliusWebBundle:Frontend/Account:Address/update.html.twig')
             ->setData(array(
-                'user'    => $this->getUser(),
+                'customer'    => $this->getCustomer(),
                 'address' => $address,
                 'form'    => $form->createView()
             ))
@@ -115,13 +116,13 @@ class AddressController extends FOSRestController
      */
     public function deleteAction($id)
     {
-        $user = $this->getUser();
+        $customer = $this->getCustomer();
         $address = $this->findUserAddressOr404($id);
 
-        $user->removeAddress($address);
+        $customer->removeAddress($address);
 
-        $manager = $this->getUserManager();
-        $manager->persist($user);
+        $manager = $this->getCustomerManager();
+        $manager->persist($customer);
         $manager->flush();
 
         $this->addFlash('success', 'sylius.account.address.delete');
@@ -143,22 +144,22 @@ class AddressController extends FOSRestController
     {
         $address = $this->findUserAddressOr404($id);
 
-        $user = $this->getUser();
+        $customer = $this->getCustomer();
 
         if ('billing' === $type) {
-            $user->setBillingAddress($address);
+            $customer->setBillingAddress($address);
 
             $this->addFlash('success', 'sylius.account.address.set_as_billing');
         } elseif ('shipping' === $type) {
-            $user->setShippingAddress($address);
+            $customer->setShippingAddress($address);
 
             $this->addFlash('success', 'sylius.account.address.set_as_shipping');
         } else {
             throw new NotFoundHttpException();
         }
 
-        $manager = $this->getUserManager();
-        $manager->persist($user);
+        $manager = $this->getCustomerManager();
+        $manager->persist($customer);
         $manager->flush();
 
         return $this->redirectToIndex();
@@ -183,9 +184,9 @@ class AddressController extends FOSRestController
     /**
      * @return ObjectManager
      */
-    protected function getUserManager()
+    private function getCustomerManager()
     {
-        return $this->get('sylius.manager.user');
+        return $this->get('sylius.manager.customer');
     }
 
     /**
@@ -217,10 +218,18 @@ class AddressController extends FOSRestController
             throw new NotFoundHttpException('Requested address does not exist.');
         }
 
-        if (!$this->getUser()->hasAddress($address)) {
+        if (!$this->getCustomer()->hasAddress($address)) {
             throw new AccessDeniedException();
         }
 
         return $address;
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        return $this->get('sylius.context.customer')->getCustomer();
     }
 }

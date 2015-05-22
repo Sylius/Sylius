@@ -6,6 +6,7 @@ Feature: Shipments
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And I am logged in as administrator
           And the following zones are defined:
             | name         | type    | members                       |
@@ -32,7 +33,7 @@ Feature: Shipments
             | Heavy    | UK + Poland  | DHL         |
             |          | UK + Poland  | DHL Express |
           And the following orders were placed:
-            | user              | address                                                | shipment |
+            | customer          | address                                                | shipment |
             | klaus@example.com | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany | FedEx    |
             | lars@example.com  | Lars Meine, Fun-Straße 1, 90032, Vienna, Austria       | DHL      |
         And order #000000001 has following items:

@@ -27,13 +27,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class OrderController extends FOSRestController
 {
     /**
-     * List orders of the current user.
+     * List orders of the current customer.
      *
      * @return Response
      */
     public function indexAction()
     {
-        $orders = $this->getOrderRepository()->findBy(array('user' => $this->getUser()), array('updatedAt' => 'desc'));
+        $orders = $this->getOrderRepository()->findBy(array('customer' => $this->getCustomer()), array('updatedAt' => 'desc'));
 
         $view = $this
             ->view()
@@ -47,7 +47,7 @@ class OrderController extends FOSRestController
     }
 
     /**
-     * Get single order of the current user.
+     * Get single order of the current customer.
      *
      * @param string $number
      *
@@ -140,10 +140,17 @@ class OrderController extends FOSRestController
             throw $this->createNotFoundException('The order does not exist.');
         }
 
-        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN') && $this->getUser()->getId() !== $order->getUser()->getId()) {
+        if (!$this->get('security.context')->isGranted('ROLE_SYLIUS_ADMIN')
+            && (!$this->getCustomer() || $this->getCustomer()->getId() !== $order->getCustomer()->getId())
+        ) {
             throw new AccessDeniedException();
         }
 
         return $order;
+    }
+
+    protected function getCustomer()
+    {
+        return $this->get('sylius.context.customer')->getCustomer();
     }
 }

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\RbacBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Rbac\Model\IdentityInterface;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,6 +49,13 @@ class SecurityIdentityProviderSpec extends ObjectBehavior
     {
         $securityContext->getToken()->shouldBeCalled()->willReturn($token);
         $token->getUser()->shouldBeCalled()->willReturn(null);
+
+        $this->getIdentity()->shouldReturn(null);
+    }
+
+    function it_returns_null_if_token_exists_but_its_an_anonymous_user($securityContext, AnonymousToken $token)
+    {
+        $securityContext->getToken()->shouldBeCalled()->willReturn($token);
 
         $this->getIdentity()->shouldReturn(null);
     }

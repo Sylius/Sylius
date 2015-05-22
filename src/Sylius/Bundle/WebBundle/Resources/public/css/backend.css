@@ -22,7 +22,7 @@ img.swan {
     position: absolute;
     z-index: -1000;
     margin-left: 350px;
-    margin-top: -50px;
+    margin-top: -66px;
     height: 300px;
 }
 form.form-signin {
@@ -40,6 +40,13 @@ form.form-signin label {
 }
 form.form-signin .form-control:focus {
     border-color: #1abb9c;
+}
+form.form-signin .btn-success {
+    background-color: #1abb9c;
+    border: none;
+}
+form.form-signin .btn-success:hover {
+    opacity: 0.8;
 }
 
 /* Buttons. */

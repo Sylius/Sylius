@@ -22,8 +22,8 @@
     "require": {
         "php":                      ">=5.3.3",
 
-        "sylius/locale":            "0.14.*@dev",
-        "sylius/resource-bundle":   "0.14.*@dev",
+        "sylius/locale":            "0.15.*@dev",
+        "sylius/resource-bundle":   "0.15.*@dev",
         "symfony/framework-bundle": "~2.3",
         "a2lix/translation-form-bundle": "~2.0"
     },

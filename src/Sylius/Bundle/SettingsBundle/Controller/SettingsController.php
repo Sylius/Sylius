@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\SettingsBundle\Controller;
 
+use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Exception\ValidatorException;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsController extends Controller
+class SettingsController extends FOSRestController
 {
     /**
      * Edit configuration with given namespace.
@@ -39,13 +39,12 @@ class SettingsController extends Controller
     {
         $manager = $this->getSettingsManager();
         $settings = $manager->loadSettings($namespace);
+        $isApiRequest = $this->isApiRequest($request);
 
         $form = $this
             ->getSettingsFormFactory()
-            ->create($namespace)
+            ->create($namespace, $settings, $isApiRequest ? array('csrf_protection' => false) : array())
         ;
-
-        $form->setData($settings);
 
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
@@ -56,6 +55,11 @@ class SettingsController extends Controller
                 $message = $this->getTranslator()->trans($exception->getMessage(), array(), 'validators');
                 $messageType = 'error';
             }
+
+            if ($isApiRequest) {
+                return $this->handleView($this->view($settings, 204));
+            }
+
             $request->getSession()->getBag('flashes')->add($messageType, $message);
 
             if ($request->headers->has('referer')) {
@@ -65,7 +69,7 @@ class SettingsController extends Controller
 
         return $this->render($request->attributes->get('template', 'SyliusSettingsBundle:Settings:update.html.twig'), array(
             'settings' => $settings,
-            'form'     => $form->createView()
+            'form'     => $form->createView(),
         ));
     }
 
@@ -117,5 +121,14 @@ class SettingsController extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    private function isApiRequest(Request $request)
+    {
+        return 'html' !== $request->getRequestFormat();
     }
 }

@@ -33,7 +33,6 @@
         "friendsofsymfony/elastica-bundle":     "^3.0.2",
         "friendsofsymfony/oauth-server-bundle": "~1.4",
         "friendsofsymfony/rest-bundle":         "~1.5",
-        "friendsofsymfony/user-bundle":         "2.0.*@dev",
         "fzaninotto/faker":                     "~1.2",
         "hwi/oauth-bundle":                     "~0.3",
         "incenteev/composer-parameter-handler": "~2.0",
@@ -125,7 +124,11 @@
         "sylius/product-bundle":     "self.version",
         "sylius/promotion":          "self.version",
         "sylius/promotion-bundle":   "self.version",
+        "sylius/rbac":               "self.version",
+        "sylius/rbac-bundle":        "self.version",
         "sylius/registry":           "self.version",
+        "sylius/report":             "self.version",
+        "sylius/report-bundle":      "self.version",
         "sylius/resource":           "self.version",
         "sylius/resource-bundle":    "self.version",
         "sylius/search":             "self.version",
@@ -172,7 +175,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14-dev"
+            "dev-master": "0.15-dev"
         },
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

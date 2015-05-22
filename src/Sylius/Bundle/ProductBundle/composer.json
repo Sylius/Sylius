@@ -24,10 +24,10 @@
 
         "symfony/framework-bundle":        "~2.3",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/resource-bundle":          "0.14.*@dev",
-        "sylius/product":                  "0.14.*@dev",
-        "sylius/archetype-bundle":         "0.14.*@dev",
-        "sylius/translation-bundle":       "0.14.*@dev"
+        "sylius/resource-bundle":          "0.15.*@dev",
+        "sylius/product":                  "0.15.*@dev",
+        "sylius/archetype-bundle":         "0.15.*@dev",
+        "sylius/translation-bundle":       "0.15.*@dev"
     },
     "require-dev": {
         "phpspec/phpspec":   "~2.1",

@@ -19,6 +19,8 @@
     <h1><i class="glyphicon glyphicon-credit-card"></i> {{ 'sylius.payment.index_header'|trans|raw }}</h1>
 </div>
 
+{% render(controller('sylius.controller.backend.form:filterAction', {'type': 'sylius_payment_filter', 'template': 'SyliusWebBundle:Backend/Payment:filterForm.html.twig'})) %}
+
 {{ pagination(payments) }}
 {{ list(payments) }}
 {{ pagination(payments) }}

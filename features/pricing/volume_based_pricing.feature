@@ -6,6 +6,7 @@ Feature: Volume based pricing
 
     Background:
         Given there is default currency configured
+          And there is default channel configured
           And there are following taxonomies defined:
             | name     |
             | Category |
@@ -30,6 +31,10 @@ Feature: Volume based pricing
             | 10-19 | 65.00 |
             | 20-29 | 60.00 |
             | 30+   | 55.99 |
+          And all products assigned to "DEFAULT-WEB" channel
+          And channel "DEFAULT-WEB" has following configuration:
+            | taxonomy |
+            | Category |
 
     Scenario: Volume-based pricing has priority over price attribute
         Given I am on the store homepage

@@ -147,7 +147,7 @@ class ResourceController extends FOSRestController
                     $resources,
                     new Route(
                         $request->attributes->get('_route'),
-                        $request->attributes->get('_route_params')
+                        array_merge($request->attributes->get('_route_params'), $request->query->all())
                     )
                 );
             }
@@ -182,7 +182,7 @@ class ResourceController extends FOSRestController
         $form = $this->getForm($resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $resource = $this->domainManager->create($resource);
+            $resource = $this->domainManager->create($form->getData());
 
             if ($this->config->isApiRequest()) {
                 if ($resource instanceof ResourceEvent) {
@@ -281,6 +281,26 @@ class ResourceController extends FOSRestController
         }
 
         return $this->redirectHandler->redirectToIndex();
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function restoreAction(Request $request)
+    {
+        $this->get('doctrine')->getManager()->getFilters()->disable('softdeleteable');
+        $resource = $this->findOr404($request);
+        $resource->setDeletedAt(null);
+
+        $this->domainManager->update($resource, 'restore_deleted');
+
+        if ($this->config->isApiRequest()) {
+            return $this->handleView($this->view());
+        }
+
+        return $this->redirectHandler->redirectTo($resource);
     }
 
     /**
@@ -418,7 +438,6 @@ class ResourceController extends FOSRestController
                 )
             );
         }
-
         return $resource;
     }
 

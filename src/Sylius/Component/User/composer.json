@@ -1,0 +1,53 @@
+{
+    "name": "sylius/user",
+    "type": "library",
+    "description": "User handling for PHP applications.",
+    "keywords": ["user", "registration", "login", "groups"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Michał Marcinkowski",
+            "email":    "michal.marcinkowski@lakion.com"
+        },
+        {
+            "name":     "Łukasz Chruściel",
+            "email":    "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "sylius/resource": "0.15.*@dev",
+        "sylius/storage":  "0.15.*@dev"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\User\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\User\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}

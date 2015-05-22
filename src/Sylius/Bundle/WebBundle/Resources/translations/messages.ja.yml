@@ -77,7 +77,7 @@ sylius:
     configuration: sylius.breadcrumb.configuration
     country:
       index: sylius.breadcrumb.country.index
-    customers: sylius.breadcrumb.customers
+    customer: sylius.breadcrumb.section.customers
     edit: sylius.breadcrumb.edit
     exchange_rate:
       index: sylius.breadcrumb.exchange_rate.index

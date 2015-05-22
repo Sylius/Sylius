@@ -32,6 +32,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_addressing',
         'sylius_api',
         'sylius_attribute',
+        'sylius_channel',
         'sylius_contact',
         'sylius_currency',
         'sylius_inventory',
@@ -49,6 +50,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_mailer',
         'sylius_taxation',
         'sylius_taxonomy',
+        'sylius_user',
         'sylius_variation',
         'sylius_translation',
         'sylius_rbac',
@@ -61,7 +63,8 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'api_form',
         'templating',
         'twig',
-        'reports'
+        'reports',
+        'mailer'
     );
 
     /**

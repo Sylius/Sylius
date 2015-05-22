@@ -69,7 +69,7 @@
             this.$list.append(prototype);
             this.count = this.count + 1;
 
-            $(document).trigger('collection-form-add', [this.$list.children().first()]);
+            $(document).trigger('collection-form-add', [this.$list.children().last()]);
         },
 
         /**
@@ -95,7 +95,7 @@
 
                 $container.replaceWith(prototype);
             }
-            $(document).trigger('collection-form-update', [this.$list.children().first()]);
+            $(document).trigger('collection-form-update', [$(event.currentTarget)]);
         },
 
         /**

@@ -35,6 +35,9 @@ Feature: Checkout percentage discount promotions
           | Etch    | 20    | Debian T-Shirts |
           | Lenny   | 15    | Debian T-Shirts |
         And there is default currency configured
+        And there is default channel configured
+        And all products assigned to "DEFAULT-WEB" channel
+        And all promotions assigned to "DEFAULT-WEB" channel
 
     Scenario: Fixed discount promotion is applied when the cart
               has the required amount
