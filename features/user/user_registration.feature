@@ -8,8 +8,17 @@ Feature: User registration
         Given there are following users:
             | email       | password |
             | bar@bar.com | foo1     |
-        And there is default currency configured
-        And there is default channel configured
+          And the following customers exist:
+            | email              |
+            | customer@email.com |
+          And the following zones are defined:
+            | name         | type    | members |
+            | Poland       | country | Poland  |
+          And the following orders exist:
+            | customer                | address                                        |
+            | customer@email.com      | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
+          And there is default currency configured
+          And there is default channel configured
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage
@@ -23,6 +32,30 @@ Feature: User registration
           And I press "Register"
          Then I should see "Welcome"
           And I should see "Logout"
+
+    Scenario: Successfully creating account in store for existing customer
+        Given I am on the store homepage
+          And I follow "Register"
+         When I fill in the following:
+            | First name   | John               |
+            | Last name    | Doe                |
+            | Email        | customer@email.com |
+            | Password     | bar1               |
+            | Verification | bar1               |
+          And I press "Register"
+         Then I should see "Welcome"
+          And I should see "Logout"
+
+    Scenario: Viewing orders places as guest after registration
+        Given I registered with email "customer@email.com" and password "sylius"
+         When I display my orders history
+         Then I should see 1 order in the list
+
+    Scenario: Viewing orders places as guest after registration
+        Given I registered with email "customer@email.com" and password "sylius"
+         When I display my address book
+         Then I should see 1 address in the list
+          And I should see "Poland"
 
     Scenario: Trying to register with non verified password
         Given I am on the store homepage

@@ -126,6 +126,7 @@
             <argument type="service" id="sylius.user.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.success" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.user.password_change.success" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
