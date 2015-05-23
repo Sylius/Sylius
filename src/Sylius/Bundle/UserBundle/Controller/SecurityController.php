@@ -29,14 +29,11 @@ class SecurityController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
         $form = $this->get('form.factory')->createNamed('', 'sylius_user_security_login');
 
-        return $this->render(
-            'SyliusWebBundle:Frontend/User:login.html.twig',
-            array(
-                'form'  => $form->createView(),
-                'last_username' => $lastUsername,
-                'error' => $error,
-            )
-        );
+        return $this->renderLogin(array(
+            'form'          => $form->createView(),
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
     }
 
     /**
@@ -53,5 +50,18 @@ class SecurityController extends Controller
     public function logoutAction(Request $request)
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
+    }
+
+    /**
+     * Renders the login template with the given parameters. Overwrite this function in
+     * an extended controller to provide additional data for the login template.
+     *
+     * @param array $data
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function renderLogin(array $data)
+    {
+        return $this->render('SyliusWebBundle:Frontend/User:login.html.twig', $data);
     }
 }
