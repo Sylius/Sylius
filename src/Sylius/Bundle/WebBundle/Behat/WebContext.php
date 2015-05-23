@@ -111,7 +111,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_change_password'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_change_password'));
     }
 
     /**
@@ -119,7 +119,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
     }
 
     /**
@@ -127,7 +127,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
     }
 
     /**
@@ -135,7 +135,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_profile_update'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_profile_update'));
     }
 
     /**
@@ -143,7 +143,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_update'));
     }
 
     /**
@@ -151,7 +151,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_update'));
     }
 
     /**

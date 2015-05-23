@@ -3,7 +3,7 @@
 <h4>{{ 'sylius.form.frontend.profile.title'|trans }}</h4>
 <br>
 
-<form action="{{ path('sylius_user_profile_update') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+<form action="{{ path('sylius_account_profile_update') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
     <fieldset>
         {{ form_widget(form) }}
     </fieldset>
