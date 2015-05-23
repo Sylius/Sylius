@@ -13,7 +13,6 @@ namespace Sylius\Bundle\PromotionBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
-use Sylius\Component\Promotion\Generator\Instruction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -42,7 +41,7 @@ class CouponController extends ResourceController
             ->findOr404($request, array('id' => $promotionId))
         ;
 
-        $form = $this->createForm('sylius_promotion_coupon_generate_instruction', new Instruction());
+        $form = $this->createForm('sylius_promotion_coupon_generate_instruction');
 
         if ($form->handleRequest($request)->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());
