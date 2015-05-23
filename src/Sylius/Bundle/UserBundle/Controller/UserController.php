@@ -24,6 +24,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -32,6 +33,7 @@ class UserController extends ResourceController
 {
     public function changePasswordAction(Request $request)
     {
+        $this->validateAccess();
         $user = $this->getUser();
         $changePassword = new ChangePassword();
         $form = $this->createResourceForm(new UserChangePasswordType(), $changePassword);
@@ -226,5 +228,13 @@ class UserController extends ResourceController
         }
 
         return new RedirectResponse($url);
+    }
+
+    // TODO will be replaced by denyAccessUnlessGranted after bump to Symfony 2.7
+    public function validateAccess()
+    {
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException('You have to be registered user to access this section.');
+        }
     }
 }
