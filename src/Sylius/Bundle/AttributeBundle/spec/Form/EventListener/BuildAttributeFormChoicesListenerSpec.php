@@ -54,38 +54,6 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $this->buildChoices($event);
     }
 
-    function it_builds_choices_collection_for_new_object_without_type(
-        FormEvent $event,
-        Form $form,
-        AttributeInterface $attribute,
-        Form $collectionField,
-        $formFactory
-    ) {
-        $event->getData()->willReturn($attribute);
-        $event->getForm()->willReturn($form);
-
-        $attribute->getType()->willReturn(null);
-        $attribute->getConfiguration()->willReturn(array());
-
-        $formFactory
-            ->createNamed('choices', 'collection', null, array(
-                'label'             => 'sylius.form.attribute.choices',
-                'type'              => 'text',
-                'allow_add'         => true,
-                'allow_delete'      => true,
-                'by_reference'      => false,
-                'auto_initialize'   => false,
-                'mapped'            => false,
-                'data'              => null,
-            ))
-            ->willReturn($collectionField)
-            ->shouldBeCalled()
-        ;
-        $form->add($collectionField)->shouldBeCalled()->willReturn($form);
-
-        $this->buildChoices($event);
-    }
-
     function it_builds_choices_collection_for_choice_attribute(
         FormEvent $event,
         Form $form,
@@ -96,7 +64,6 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
         $event->getData()->willReturn($attribute);
         $event->getForm()->willReturn($form);
 
-        $attribute->getType()->willReturn(AttributeTypes::CHOICE);
         $attribute->getConfiguration()->willReturn(array());
 
         $formFactory
@@ -114,28 +81,6 @@ class BuildAttributeFormChoicesListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
         $form->add($collectionField)->shouldBeCalled()->willReturn($form);
-
-        $this->buildChoices($event);
-    }
-
-    function it_does_not_build_choices_collection_for_other_than_choice_attribute_types(
-        FormEvent $event,
-        Form $form,
-        AttributeInterface $attribute,
-        Form $collectionField,
-        $formFactory
-    ) {
-        $attribute->getType()->willReturn(AttributeTypes::TEXT);
-
-        $event->getData()->willReturn($attribute);
-        $event->getForm()->willReturn($form);
-
-        $formFactory
-            ->createNamed('choices', 'collection', null, Argument::any())
-            ->willReturn($collectionField)
-            ->shouldNotBeCalled()
-        ;
-        $form->add(Argument::any())->shouldNotBeCalled();
 
         $this->buildChoices($event);
     }
