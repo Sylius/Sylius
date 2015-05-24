@@ -265,6 +265,12 @@ sylius_mailer:
         password_reset:
             subject: sylius.emails.user.password_reset.subject
             template: SyliusWebBundle:Email:passwordReset.html.twig
+        reset_password_token:
+            subject: sylius.emails.user.password_reset.subject
+            template: SyliusWebBundle:Email:passwordReset.html.twig
+        reset_password_pin:
+            subject: sylius.emails.user.password_reset.subject
+            template: SyliusWebBundle:Email:passwordReset.html.twig
 
 sylius_rbac:
     classes:
