@@ -112,13 +112,13 @@ Feature: Customers management
           And "umpirsky@gmail.com" should appear on the page
 
     Scenario: Changing customer's password and logging in with new one
-        Given I am editing customer with email "rick@foo.com"
+        Given I am editing customer with email "dale@foo.com"
           And I fill in "Password" with "Sylius!"
          When I press "Save changes"
           And I restart my browser
-          And I log in with "rick@foo.com" and "Sylius!"
+          And I log in with "dale@foo.com" and "Sylius!"
          Then I should be on the sylius homepage page
-          And I should see "Log out"
+          And I should see "Logout"
 
     Scenario: Accessing the customer details page from customers list for deleted customer
         Given I deleted customer with email "rick@foo.com"

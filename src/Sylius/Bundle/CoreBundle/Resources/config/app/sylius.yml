@@ -704,12 +704,6 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_user:
-    resetting:
-        token:
-            ttl: PT1S
-            length: 16
-        pin:
-            length: 4
     classes:
         user:
             model: Sylius\Component\Core\Model\User
