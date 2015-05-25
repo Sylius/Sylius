@@ -39,6 +39,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     /**
      * @var RepositoryInterface
      */
+    protected $customerRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
     protected $userRepository;
 
     /**
@@ -47,14 +52,16 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected $userManager;
 
     /**
+     * @param RepositoryInterface    $customerRepository
      * @param RepositoryInterface    $userRepository
      * @param RepositoryInterface    $oauthRepository
      * @param ObjectManager          $userManager
      * @param CanonicalizerInterface $canonicalizer
      */
-    public function __construct(RepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
+    public function __construct(RepositoryInterface $customerRepository, RepositoryInterface $userRepository,RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
     {
         parent::__construct($userRepository, $canonicalizer);
+        $this->customerRepository   = $customerRepository;
         $this->userRepository   = $userRepository;
         $this->oauthRepository = $oauthRepository;
         $this->userManager = $userManager;
@@ -103,10 +110,12 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $user = $this->userRepository->createNew();
+        $customer = $this->customerRepository->createNew();
+        $user->setCustomer($customer);
 
         // set default values taken from OAuth sign-in provider account
         if (null !== $email = $response->getEmail()) {
-            $user->setEmail($email);
+            $customer->setEmail($email);
         }
 
         if (!$user->getUsername()) {
@@ -140,7 +149,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $user->addOAuthAccount($oauth);
 
         $this->userManager->persist($user);
-        $this->userManager->flush($user);
+        $this->userManager->flush();
 
         return $user;
     }
