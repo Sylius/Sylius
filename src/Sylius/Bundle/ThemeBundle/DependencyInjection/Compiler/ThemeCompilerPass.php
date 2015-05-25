@@ -4,6 +4,7 @@ namespace Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ThemeBundle\Exception\InvalidArgumentException;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -25,6 +26,7 @@ class ThemeCompilerPass implements CompilerPassInterface
         $themeFiles = $container->get('sylius.locator.theme')->locate('theme.json', null, false);
         foreach ($themeFiles as $themeFile) {
             $serializedThemes[] = serialize($loader->load($themeFile));
+            $container->addResource(new FileResource($themeFile));
         }
 
         $definition->addArgument($serializedThemes);
