@@ -5,7 +5,8 @@ Configuration reference
 
     sylius_mailer:
           driver: ~ # The driver used for persistence layer. Currently only `doctrine/orm` is supported.
-          adapter: twig_swiftmailer # Adapter for sending e-mails.
+          sender_adapter: sylius.email_sender.adapter.swiftmailer # Adapter for sending e-mails.
+          renderer_adapter: sylius.email_renderer.adapter.twig # Adapter for rendering e-mails.
           classes:
               email:
                   model:      Sylius\Component\Mailer\Model\Email # The email model class implementing `EmailInterface`.
