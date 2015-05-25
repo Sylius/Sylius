@@ -153,11 +153,11 @@ interface UserInterface extends AdvancedUserInterface, \Serializable, Timestampa
     /**
      * Checks whether the password reset request has expired.
      *
-     * @param integer $ttl Requests older than this many seconds will be considered expired
+     * @param \DateInterval $ttl Requests older than this time interval will be considered expired
      *
      * @return boolean true if the user's password request is non expired, false otherwise
      */
-    public function isPasswordRequestNonExpired($ttl);
+    public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
     /**
      * Gets the last login time.

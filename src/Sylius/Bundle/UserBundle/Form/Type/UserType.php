@@ -52,7 +52,6 @@ class UserType extends AbstractResourceType
 
                 return $groups;
             },
-            'cascade_validation' => true
         ));
     }
 

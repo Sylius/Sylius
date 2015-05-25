@@ -6,6 +6,9 @@ sylius:
             not_blank: Please enter group name.
 
     user:
+        email:
+            not_blank: Please enter your email.
+            invalid: This email is invalid.
         plainPassword:
             not_blank: Please enter your password.
             mismatch: The entered passwords don't match

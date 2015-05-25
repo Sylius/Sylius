@@ -131,10 +131,10 @@ class FrontendMenuBuilder extends MenuBuilder
             '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total'])
         )));
 
-        if ($this->securityContext->isGranted('ROLE_USER')) {
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $route = $this->request === null ? '' : $this->request->get('_route');
 
-            if (1 === preg_match('/^(sylius_account)|(fos_user)/', $route)) {
+            if (1 === preg_match('/^(sylius_account)/', $route)) {
                 $menu->addChild('shop', array(
                     'route' => 'sylius_homepage',
                     'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.shop')),
@@ -312,13 +312,13 @@ class FrontendMenuBuilder extends MenuBuilder
         ))->setLabel($this->translate('sylius.frontend.menu.account.homepage'));
 
         $child->addChild('profile', array(
-            'route' => 'sylius_user_profile_update',
+            'route' => 'sylius_account_profile_update',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.profile')),
             'labelAttributes' => array('icon' => 'icon-info-sign', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.profile'));
 
         $child->addChild('password', array(
-            'route' => 'sylius_user_change_password',
+            'route' => 'sylius_account_change_password',
             'linkAttributes' => array('title' => $this->translate('sylius.frontend.menu.account.password')),
             'labelAttributes' => array('icon' => 'icon-lock', 'iconOnly' => false)
         ))->setLabel($this->translate('sylius.frontend.menu.account.password'));

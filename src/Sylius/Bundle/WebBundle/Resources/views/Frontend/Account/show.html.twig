@@ -10,9 +10,9 @@
         <div class="col-md-7">{{ 'sylius.account.home.outline'|trans }} </div>
         <div class="col-md-5">
             <strong>{{ user.customer.lastName|upper }} {{ user.customer.firstName }}</strong><br><br>
-            {{ 'sylius.account.home.id'|trans }} {{ app.user.id }} <br>
-            {{ 'sylius.account.home.email'|trans }} {{ app.user.customer.email }}<br>
-            {{ 'sylius.account.home.since'|trans }} {{ app.user.createdAt|date() }}
+            {{ 'sylius.account.home.id'|trans }} {{ user.id }} <br>
+            {{ 'sylius.account.home.email'|trans }} {{ user.customer.email }}<br>
+            {{ 'sylius.account.home.since'|trans }} {{ user.createdAt|date() }}
         </div>
     </div>
 

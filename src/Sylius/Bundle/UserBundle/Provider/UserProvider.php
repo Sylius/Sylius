@@ -24,6 +24,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 abstract class UserProvider implements UserProviderInterface
 {
     /**
+     * @var string
+     */
+    protected $supportedUserClass = 'Sylius\Component\User\Model\UserInterface';
+    /**
      * @var UserRepositoryInterface
      */
     protected $userRepository;
@@ -50,7 +54,7 @@ abstract class UserProvider implements UserProviderInterface
         $usernameOrEmail = $this->canonicalizer->canonicalize($usernameOrEmail);
         $user = $this->findUser($usernameOrEmail);
 
-        if (!$user) {
+        if (null === $user) {
             throw new UsernameNotFoundException(
                 sprintf('Username "%s" does not exist.', $usernameOrEmail)
             );
@@ -69,8 +73,13 @@ abstract class UserProvider implements UserProviderInterface
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
+        if (null === $reloadedUser = $this->userRepository->find($user->getId())) {
+            throw new UsernameNotFoundException(
+                sprintf('User with ID "%d" could not be refreshed.', $user->getId())
+            );
+        }
 
-        return $this->userRepository->find($user->getId());
+        return $reloadedUser;
     }
 
     /**
@@ -83,6 +92,6 @@ abstract class UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === 'Sylius\Component\User\Model\UserInterface';
+        return $this->supportedUserClass === $class || is_subclass_of($class, $this->supportedUserClass);
     }
 }
