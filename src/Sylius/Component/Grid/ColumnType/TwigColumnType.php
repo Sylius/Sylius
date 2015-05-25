@@ -49,12 +49,18 @@ class TwigColumnType extends AbstractColumnType
             ->setRequired(array(
                 'template'
             ))
+            ->setOptional(array(
+                'path',
+                'sort'
+            ))
             ->setDefaults(array(
                 'context' => array()
             ))
             ->setAllowedTypes(array(
                 'template' => array('string'),
-                'context'  => array('array')
+                'context'  => array('array'),
+                'path' => array('string'),
+                'sort' => array('string'),
             ))
         ;
     }
