@@ -27,6 +27,8 @@
 
         <parameter key="sylius.templating.locator.class">Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator</parameter>
         <parameter key="sylius.templating.cache_warmer.template_paths.class">Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer</parameter>
+
+        <parameter key="translator.class">Sylius\Bundle\ThemeBundle\Translation\Translator</parameter>
     </parameters>
 
     <services>

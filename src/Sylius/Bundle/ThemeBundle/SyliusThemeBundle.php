@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle;
 
 use Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeCompilerPass;
+use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\ThemeTranslationCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -28,5 +29,6 @@ class SyliusThemeBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new ThemeCompilerPass());
+        $container->addCompilerPass(new ThemeTranslationCompilerPass());
     }
 }
