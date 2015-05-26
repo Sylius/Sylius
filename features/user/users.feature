@@ -1,5 +1,5 @@
 @users
-Feature: Users management
+Feature: Customers management
     In order to manager customers
     As a store owner
     I want to be able to list all customers
@@ -14,6 +14,7 @@ Feature: Users management
           And the following zones are defined:
             | name         | type    | members                       |
             | German lands | country | Germany, Austria, Switzerland |
+            | Poland       | country | Poland                        |
           And there are following users:
             | email          | enabled | address                                                |
             | beth@foo.com   | no      | Klaus Schmitt, Heine-Straße 12, 99734, Berlin, Germany |
@@ -24,9 +25,6 @@ Feature: Users management
             | email          | address                                                 |
             | john@foo.com   | Klaus Schmitt, Heine-Straße 122, 99134, Berlin, Germany |
             | doe@foo.com    | Lars Meine, Fun-Straße 13, 90332, Vienna, Austria       |
-          And the following zones are defined:
-            | name   | type    | members |
-            | Poland | country | Poland  |
           And the following orders were placed:
             | customer     | address                                        |
             | john@foo.com | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
@@ -75,7 +73,7 @@ Feature: Users management
 
     Scenario: Accessing the customer creation form
         Given I am on the customer index page
-          And I follow "create customer"
+         When I follow "create customer"
          Then I should be on the customer creation page
 
     Scenario: Submitting empty form
@@ -112,6 +110,15 @@ Feature: Users management
          Then I should be on the page of customer with email "umpirsky@gmail.com"
           And "Customer has been successfully updated." should appear on the page
           And "umpirsky@gmail.com" should appear on the page
+
+    Scenario: Changing customer's password and logging in with new one
+        Given I am editing customer with email "dale@foo.com"
+          And I fill in "Password" with "Sylius!"
+         When I press "Save changes"
+          And I restart my browser
+          And I log in with "dale@foo.com" and "Sylius!"
+         Then I should be on the sylius homepage page
+          And I should see "Logout"
 
     Scenario: Accessing the customer details page from customers list for deleted customer
         Given I deleted customer with email "rick@foo.com"

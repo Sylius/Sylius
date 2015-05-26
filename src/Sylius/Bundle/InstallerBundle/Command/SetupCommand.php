@@ -61,11 +61,14 @@ EOT
 
         $userManager = $this->get('sylius.manager.user');
         $userRepository = $this->get('sylius.repository.user');
+        $customerRepository = $this->get('sylius.repository.customer');
 
         $rbacInitializer = $this->get('sylius.rbac.initializer');
         $rbacInitializer->initialize();
 
         $user = $userRepository->createNew();
+        $customer = $customerRepository->createNew();
+        $user->setCustomer($customer);
 
         if ($input->getOption('no-interaction')) {
             $exists = null !== $userRepository->findOneByEmail('sylius@example.com');
@@ -74,13 +77,13 @@ EOT
                 return 0;
             }
 
-            $user->setFirstname('Sylius');
-            $user->setLastname('Admin');
+            $customer->setFirstname('Sylius');
+            $customer->setLastname('Admin');
             $user->setEmail('sylius@example.com');
             $user->setPlainPassword('sylius');
         } else {
-            $user->setFirstname($this->ask($output, 'Your firstname:', array(new NotBlank())));
-            $user->setLastname($this->ask($output, 'Lastname:', array(new NotBlank())));
+            $customer->setFirstname($this->ask($output, 'Your firstname:', array(new NotBlank())));
+            $customer->setLastname($this->ask($output, 'Lastname:', array(new NotBlank())));
 
             do {
                 $email = $this->ask($output, 'E-Mail:', array(new NotBlank(), new Email()));

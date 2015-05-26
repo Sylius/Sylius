@@ -326,7 +326,7 @@ class User implements UserInterface
      */
     public function isCredentialsNonExpired()
     {
-        return (null === $this->credentialsExpireAt) || ((new \DateTime()) < $this->credentialsExpireAt);
+        return !$this->hasExpired($this->credentialsExpireAt);
     }
 
     /**
@@ -352,7 +352,7 @@ class User implements UserInterface
      */
     public function isAccountNonExpired()
     {
-        return (null === $this->expiresAt) || ((new \DateTime()) < $this->expiresAt);
+        return !$this->hasExpired($this->expiresAt);
     }
 
     /**
@@ -468,10 +468,9 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function isPasswordRequestNonExpired($ttl)
+    public function isPasswordRequestNonExpired(\DateInterval $ttl)
     {
-        return $this->getPasswordRequestedAt() instanceof \DateTime &&
-        $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
+        return (null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl));
     }
 
     /**
@@ -602,7 +601,7 @@ class User implements UserInterface
      */
     public function isDeleted()
     {
-        return (null !== $this->deletedAt) && ((new \DateTime()) >= $this->deletedAt);
+        return $this->hasExpired($this->deletedAt);
     }
 
     /**
@@ -666,5 +665,13 @@ class User implements UserInterface
         if (null !== $customer) {
             $customer->setUser($this);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasExpired($date)
+    {
+        return (null !== $date) && ((new \DateTime()) >= $date);
     }
 }

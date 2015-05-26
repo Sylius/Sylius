@@ -10,40 +10,27 @@
 (function ( $ ) {
     'use strict';
 
+    var attributeController = {
+        choicesContainer: $('#sylius_form_choice_container'),
+        choicesElement: $('#sylius_product_attribute_type'),
+
+        listen: function()
+        {
+            this.choicesElement.change($.proxy(this.toogleChoices, this));
+            this.toogleChoices();
+        },
+
+        toogleChoices: function()
+        {
+            if ('choice' === this.choicesElement.val()) {
+                this.choicesContainer.show();
+            } else {
+                this.choicesContainer.hide();
+            }
+        }
+    };
+
     $(document).ready(function() {
-        toogleChoices($('#sylius_product_attribute_type').val());
-        $('#sylius_product_attribute_type').change(function (e) {
-            toogleChoices($(this).val());
-        });
-        $('.delete-link').each(function () {
-            var removeLink = $(this);
-            removeLink.on('click', function(e) {
-                e.preventDefault();
-
-                removeLink.parent().parent().remove();
-            });
-        });
-        $('a[data-collection-button="add"]').on('click', function (e) {
-            e.preventDefault();
-
-            var collectionContainer = $('#' + $(this).data('collection'));
-            var item = $('#' + $(this).data('collection') + ' .control-group:last-child');
-            var removeLink = $('<a class="btn btn-danger sylius_product_attribute_choices_' + (collectionContainer.children().length - 1) + '_delete" href="#"><i class="icon-trash"></i></a>');
-            removeLink.on('click', function(e) {
-                e.preventDefault();
-
-                item.remove();
-            });
-            item.find('.controls').append(removeLink);
-        });
+        attributeController.listen();
     });
-
-    function toogleChoices(value)
-    {
-       if (value === 'choice') {
-           $('.attribute-choices-container').show();
-       } else {
-           $('.attribute-choices-container').hide();
-       }
-    }
 })( jQuery );

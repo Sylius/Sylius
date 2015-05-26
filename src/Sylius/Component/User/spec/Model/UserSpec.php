@@ -30,6 +30,37 @@ class UserSpec extends ObjectBehavior
         $this->shouldImplement('Sylius\Component\User\Model\UserInterface');
     }
 
+    function it_has_no_password_requested_at_date_by_default()
+    {
+        $this->getPasswordRequestedAt()->shouldReturn(null);
+    }
+
+    function its_password_requested_at_date_is_mutable()
+    {
+        $date = new \DateTime();
+        $this->setPasswordRequestedAt($date);
+
+        $this->getPasswordRequestedAt()->shouldReturn($date);
+    }
+
+    function it_should_return_true_if_password_request_is_non_expired()
+    {
+        $passwordRequestedAt = new \DateTime('-1 hour');
+        $this->setPasswordRequestedAt($passwordRequestedAt);
+        $ttl = new \DateInterval('P1D');
+
+        $this->isPasswordRequestNonExpired($ttl)->shouldReturn(true);
+    }
+
+    function it_should_return_false_if_password_request_is_expired()
+    {
+        $passwordRequestedAt = new \DateTime('-2 hour');
+        $this->setPasswordRequestedAt($passwordRequestedAt);
+        $ttl = new \DateInterval('PT1H');
+
+        $this->isPasswordRequestNonExpired($ttl)->shouldReturn(false);
+    }
+
     function it_should_return_true_if_user_is_deleted()
     {
         $deletedAt = new \DateTime('yesterday');

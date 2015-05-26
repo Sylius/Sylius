@@ -1,4 +1,9 @@
 sylius:
+    user:
+        password:
+            reset:
+                header: Reset password
+                button: Reset
     form:
         group:
             name: Name

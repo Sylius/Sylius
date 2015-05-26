@@ -111,7 +111,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountPasswordPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_change_password'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_change_password'));
     }
 
     /**
@@ -119,7 +119,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
     }
 
     /**
@@ -127,7 +127,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyAccountPasswordPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_change_password'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_change_password'));
     }
 
     /**
@@ -135,7 +135,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iAmOnMyAccountProfileEditionPage()
     {
-        $this->getSession()->visit($this->generatePageUrl('sylius_user_profile_update'));
+        $this->getSession()->visit($this->generatePageUrl('sylius_account_profile_update'));
     }
 
     /**
@@ -143,7 +143,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_update'));
     }
 
     /**
@@ -151,7 +151,7 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
      */
     public function iShouldStillBeOnMyProfileEditionPage()
     {
-        $this->assertSession()->addressEquals($this->generateUrl('sylius_user_profile_update'));
+        $this->assertSession()->addressEquals($this->generateUrl('sylius_account_profile_update'));
     }
 
     /**
@@ -930,5 +930,45 @@ class WebContext extends DefaultContext implements SnippetAcceptingContext
     public function iShouldHaveMyAccessDenied()
     {
         $this->assertStatusCodeEquals(403);
+    }
+
+    /**
+     * @Given I registered with email :email and password :password
+     */
+    public function iRegisteredWithEmailAndPassword($email, $password)
+    {
+        $this->getSession()->visit($this->generatePageUrl('sylius_user_registration'));
+
+        $this->fillField('First name', $this->faker->firstName);
+        $this->fillField('Last name', $this->faker->lastName);
+        $this->fillField('Email', $email);
+        $this->fillField('Password', $password);
+        $this->fillField('Verification', $password);
+        $this->pressButton('Register');
+    }
+
+    /**
+     * @When /^I display ([^""]*)$/
+     */
+    public function iDisplayPage($page)
+    {
+        $pageMapping = array(
+            'my orders history' => 'sylius_account_order_index',
+            'my address book'   => 'sylius_account_address_index'
+        );
+
+        $this->getSession()->visit($this->generatePageUrl($pageMapping[$page]));
+    }
+
+    /**
+     * @When I restart my browser
+     */
+    public function iRestartMyBrowser()
+    {
+        $session = $this->getSession();
+        $cookie = $session->getCookie('REMEMBERME');
+
+        $session->restart();
+        $session->setCookie('REMEMBERME', $cookie);
     }
 }

@@ -1,0 +1,11 @@
+sylius:
+    user:
+        email:
+            not_exist: User with this email does not exist.
+        password:
+            invalid: Wrong current password.
+            reset:
+                success: Your password has been reset successfully!
+                failed: Failed to reset password.
+            change:
+                success: Your password has been changed successfully!

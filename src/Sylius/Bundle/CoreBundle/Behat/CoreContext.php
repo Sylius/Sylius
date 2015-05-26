@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
@@ -30,6 +31,7 @@ use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\User\Model\GroupableInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CoreContext extends DefaultContext
@@ -94,7 +96,9 @@ class CoreContext extends DefaultContext
             $order->setShippingAddress($address);
             $order->setBillingAddress($address);
 
-            $order->setCustomer($this->thereIsCustomer($data['customer']));
+            $customer = $this->thereIsCustomer($data['customer']);
+            $customer->addAddress($address);
+            $order->setCustomer($customer);
 
             if (isset($data['shipment']) && '' !== trim($data['shipment'])) {
                 $order->addShipment($this->createShipment($data['shipment']));
@@ -182,6 +186,7 @@ class CoreContext extends DefaultContext
 
     /**
      * @Given /^there are following customers:$/
+     * @Given /^the following customers exist:$/
      */
     public function thereAreFollowingCustomers(TableNode $table)
     {
@@ -238,60 +243,16 @@ class CoreContext extends DefaultContext
 
     public function thereIsUser($email, $password, $role = null, $enabled = 'yes', $address = null, $groups = array(), $flush = true, array $authorizationRoles = array(), $createdAt = null)
     {
-        if (null === $user = $this->getRepository('user')->findOneByEmail($email)) {
-            $addressData = explode(',', $address);
-            $addressData = array_map('trim', $addressData);
+        if (null !== $user = $this->getRepository('user')->findOneByEmail($email)) {
+            return $user;
+        }
 
-            /* @var $user UserInterface */
-            $user = $this->getRepository('user')->createNew();
-            $customer = $this->getRepository('customer')->createNew();
-            $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
-            $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
-            $customer->setEmail($email);
-            $user->setCustomer($customer);
-            $user->setUsername($email);
-            $user->setEmail($email);
-            $user->setEnabled('yes' === $enabled);
-            $user->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
-            $user->setPlainPassword($password);
-            $user->setUsernameCanonical($email);
-            $user->setEmailCanonical($email);
-            $this->getService('sylius.user.password_updater')->updatePassword($user);
-            if (null !== $address) {
-                $customer->setShippingAddress($this->createAddress($address));
-            }
+        /* @var $user UserInterface */
+        $user = $this->createUser($email, $password, $role, $enabled, $address, $groups, $authorizationRoles, $createdAt);
 
-            if (null !== $role) {
-                $user->addRole($role);
-            }
-
-            $this->getEntityManager()->persist($user);
-
-            foreach ($groups as $groupName) {
-                if ($group = $this->findOneByName('group', $groupName)) {
-                    $user->getCustomer()->addGroup($group);
-                }
-            }
-
-            foreach ($authorizationRoles as $role) {
-                try {
-                    $authorizationRole = $this->findOneByName('role', $role);
-                } catch (\InvalidArgumentException $exception) {
-                    $authorizationRole = $this->getService('sylius.repository.role')->createNew();
-
-                    $authorizationRole->setCode($role);
-                    $authorizationRole->setName(ucfirst($role));
-                    $authorizationRole->setSecurityRoles(array('ROLE_ADMINISTRATION_ACCESS'));
-
-                    $this->getEntityManager()->persist($authorizationRole);
-                }
-
-                $user->addAuthorizationRole($authorizationRole);
-            }
-
-            if ($flush) {
-                $this->getEntityManager()->flush();
-            }
+        $this->getEntityManager()->persist($user);
+        if ($flush) {
+            $this->getEntityManager()->flush();
         }
 
         return $user;
@@ -303,25 +264,8 @@ class CoreContext extends DefaultContext
             return $customer;
         }
 
-        $addressData = explode(',', $address);
-        $addressData = array_map('trim', $addressData);
-
         /* @var $customer CustomerInterface */
-        $customer = $this->getRepository('customer')->createNew();
-        $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
-        $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
-        $customer->setEmail($email);
-        $customer->setEmailCanonical($email);
-        $customer->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
-        if (null !== $address) {
-            $customer->setShippingAddress($this->createAddress($address));
-        }
-
-        foreach ($groups as $groupName) {
-            if ($group = $this->findOneByName('group', $groupName)) {
-                $customer->addGroup($group);
-            }
-        }
+        $customer = $this->createCustomer($email, $address, $groups, $createdAt);
 
         $this->getEntityManager()->persist($customer);
         if ($flush) {
@@ -526,8 +470,7 @@ class CoreContext extends DefaultContext
      */
     private function createAddress($string)
     {
-        $addressData = explode(',', $string);
-        $addressData = array_map('trim', $addressData);
+        $addressData = $this->processAddress($string);
 
         list($firstname, $lastname) = explode(' ', $addressData[0]);
 
@@ -541,6 +484,19 @@ class CoreContext extends DefaultContext
         $address->setCountry($this->findOneByName('country', $addressData[4]));
 
         return $address;
+    }
+
+    /**
+     * @param  string $address
+     *
+     * @return array
+     */
+    protected function processAddress($address)
+    {
+        $addressData = explode(',', $address);
+        $addressData = array_map('trim', $addressData);
+
+        return $addressData;
     }
 
     /**
@@ -605,5 +561,111 @@ class CoreContext extends DefaultContext
         $this->fillField('Email', $email);
         $this->fillField('Password', 'sylius');
         $this->pressButton('Login');
+    }
+
+    /**
+     * @param GroupableInterface $groupableObject
+     * @param array              $groups
+     */
+    protected function assignGroups(GroupableInterface $groupableObject, array $groups)
+    {
+        foreach ($groups as $groupName) {
+            if ($group = $this->findOneByName('group', $groupName)) {
+                $groupableObject->addGroup($group);
+            }
+        }
+    }
+
+    /**
+     * @param array         $authorizationRoles
+     * @param UserInterface $user
+     */
+    protected function assignAuthorizationRoles(UserInterface $user, array $authorizationRoles = array())
+    {
+        foreach ($authorizationRoles as $role) {
+            try {
+                $authorizationRole = $this->findOneByName('role', $role);
+            } catch (\InvalidArgumentException $exception) {
+                $authorizationRole = $this->createAuthorizationRole($role);
+                $this->getEntityManager()->persist($authorizationRole);
+            }
+
+            $user->addAuthorizationRole($authorizationRole);
+        }
+    }
+
+    /**
+     * @param $email
+     * @param $address
+     * @param $groups
+     * @param $createdAt
+     *
+     * @return CustomerInterface
+     */
+    protected function createCustomer($email, $address = null, $groups = array(), $createdAt = null)
+    {
+        $addressData = $this->processAddress($address);
+
+        $customer = $this->getRepository('customer')->createNew();
+        $customer->setFirstname(null === $address ? $this->faker->firstName : $addressData[0]);
+        $customer->setLastname(null === $address ? $this->faker->lastName : $addressData[1]);
+        $customer->setEmail($email);
+        $customer->setEmailCanonical($email);
+        $customer->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
+        if (null !== $address) {
+            $customer->setShippingAddress($this->createAddress($address));
+        }
+        $this->assignGroups($customer, $groups);
+
+        return $customer;
+    }
+
+    /**
+     * @param $email
+     * @param $password
+     * @param $role
+     * @param $enabled
+     * @param $address
+     * @param $groups
+     * @param array $authorizationRoles
+     * @param $createdAt
+     *
+     * @return UserInterface
+     */
+    protected function createUser($email, $password, $role = null, $enabled = 'yes', $address = null, array $groups = array(), array $authorizationRoles = array(), $createdAt = null)
+    {
+        $user = $this->getRepository('user')->createNew();
+        $customer = $this->createCustomer($email, $address, $groups, $createdAt);
+        $user->setCustomer($customer);
+        $user->setUsername($email);
+        $user->setEmail($email);
+        $user->setEnabled('yes' === $enabled);
+        $user->setCreatedAt(null === $createdAt ? new \DateTime() : $createdAt);
+        $user->setPlainPassword($password);
+        $user->setUsernameCanonical($email);
+        $user->setEmailCanonical($email);
+        $this->getService('sylius.user.password_updater')->updatePassword($user);
+
+        if (null !== $role) {
+            $user->addRole($role);
+        }
+        $this->assignAuthorizationRoles($user, $authorizationRoles);
+
+        return $user;
+    }
+
+    /**
+     * @param  string $role
+     *
+     * @return RoleInterface
+     */
+    protected function createAuthorizationRole($role)
+    {
+        $authorizationRole = $this->getRepository('role')->createNew();
+        $authorizationRole->setCode($role);
+        $authorizationRole->setName(ucfirst($role));
+        $authorizationRole->setSecurityRoles(array('ROLE_ADMINISTRATION_ACCESS'));
+
+        return $authorizationRole;
     }
 }

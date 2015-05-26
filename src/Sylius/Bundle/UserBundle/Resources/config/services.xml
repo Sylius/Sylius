@@ -126,6 +126,7 @@
             <argument type="service" id="sylius.user.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.success" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.user.password_change.success" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
@@ -154,6 +155,7 @@
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%">
+            <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.repository.user" />
             <argument type="service" id="sylius.repository.user_oauth" />
             <argument type="service" id="sylius.manager.user" />

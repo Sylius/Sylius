@@ -34,11 +34,11 @@ fos_oauth_server_token:
 
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix: /connect
+    prefix: /login
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix: /login
+    prefix: /connect
 
 amazon_login:
     path: /login/check-amazon

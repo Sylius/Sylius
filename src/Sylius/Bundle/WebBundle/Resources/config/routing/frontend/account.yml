@@ -7,7 +7,7 @@ sylius_account_homepage:
     defaults:
         _controller: sylius.controller.frontend.account:indexAction
 
-sylius_user_profile_update:
+sylius_account_profile_update:
     path: /profile/edit
     methods: [GET, POST]
     defaults:
@@ -17,7 +17,7 @@ sylius_user_profile_update:
             template: SyliusWebBundle:Frontend/Account:profileUpdate.html.twig
             redirect: sylius_account_homepage
 
-sylius_user_change_password:
+sylius_account_change_password:
     path: /change-password
     methods: [GET, POST]
     defaults:
