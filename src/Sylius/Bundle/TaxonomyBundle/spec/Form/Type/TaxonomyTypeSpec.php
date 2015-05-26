@@ -44,11 +44,13 @@ class TaxonomyTypeSpec extends ObjectBehavior
             ->addEventSubscriber(
                 Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener')
             )
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
