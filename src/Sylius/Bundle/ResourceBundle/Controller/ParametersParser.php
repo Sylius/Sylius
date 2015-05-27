@@ -40,23 +40,13 @@ class ParametersParser
      */
     public function parse(array $parameters, Request $request)
     {
-        if (!isset($parameterNames)) {
-            $parameterNames = array();
-        }
+        $parameterNames = array();
 
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
                 list($parameters[$key], $parameterNames[$key]) = $this->parse($value, $request);
-            }
-
-            if (is_string($value) && 0 === strpos($value, '$')) {
-                $parameterName = substr($value, 1);
-                $parameters[$key] = $request->get($parameterName);
-                $parameterNames[$key] = $parameterName;
-            }
-
-            if (is_string($value) && 0 === strpos($value, 'expr:')) {
-                $parameters[$key] = $this->expression->evaluate(substr($value, 5));
+            } elseif (is_string($value)) {
+                $this->setStringParameter($parameters, $key, $value, $request);
             }
         }
 
@@ -88,5 +78,21 @@ class ParametersParser
         }
 
         return $parameters;
+    }
+
+    /**
+     * @param array   $parameters
+     * @param string  $value
+     * @param $key
+     * @param Request $request
+     */
+    protected function setStringParameter(array &$parameters, $key, $value, Request $request)
+    {
+        if (0 === strpos($value, '$')) {
+            $parameterName = substr($value, 1);
+            $parameters[$key] = $request->get($parameterName);
+        } elseif (0 === strpos($value, 'expr:')) {
+            $parameters[$key] = $this->expression->evaluate(substr($value, 5));
+        }
     }
 }

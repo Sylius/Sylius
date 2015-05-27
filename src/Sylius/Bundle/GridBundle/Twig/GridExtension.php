@@ -48,7 +48,7 @@ class GridExtension extends \Twig_Extension
      * @param ColumnRendererInterface $columnRenderer
      * @param ParmaetersParser        $parametersParser
      */
-    function __construct(FormFactoryInterface $formFactory, ColumnRendererInterface $columnRenderer, ParametersParser $parametersParser)
+    public function __construct(FormFactoryInterface $formFactory, ColumnRendererInterface $columnRenderer, ParametersParser $parametersParser)
     {
         $this->formFactory = $formFactory;
         $this->columnRenderer = $columnRenderer;
@@ -86,7 +86,7 @@ class GridExtension extends \Twig_Extension
 
     /**
      * @param \Twig_Environment $twig
-     * @param GridView $gridView
+     * @param GridView          $gridView
      */
     public function render(\Twig_Environment $twig, GridView $gridView, Configuration $configuration)
     {
@@ -95,8 +95,8 @@ class GridExtension extends \Twig_Extension
 
     /**
      * @param \Twig_Environment $twig
-     * @param GridView $gridView
-     * @param Column $column
+     * @param GridView          $gridView
+     * @param Column            $column
      *
      * @return string
      */
@@ -124,7 +124,7 @@ class GridExtension extends \Twig_Extension
     /**
      * @param \Twig_Environment $twig
      * @param $object
-     * @param GridView $gridView
+     * @param GridView          $gridView
      * @param $field
      */
     public function renderValue(\Twig_Environment $twig, $object, GridView $gridView, $field)
@@ -134,9 +134,9 @@ class GridExtension extends \Twig_Extension
 
     /**
      * @param \Twig_Environment $twig
-     * @param GridView $gridView
-     * @param Action $actionDefinition
-     * @param Request $request
+     * @param GridView          $gridView
+     * @param Action            $actionDefinition
+     * @param Request           $request
      * @param $object
      */
     public function renderAction(\Twig_Environment $twig, GridView $gridView, Action $actionDefinition, Request $request, $object = null)
@@ -148,22 +148,19 @@ class GridExtension extends \Twig_Extension
 
         if (null !== $object) {
             $parameters = $this->parametersParser->process($parameters, $object);
-            $parameters = $parameters[0];
         }
+        // Assign only parameters values
+        $contextParameters = $parameters[0];
 
-        $context = array('action' => $actionDefinition, 'parameters' => $parameters);
-
-        if (null !== $object) {
-            $parameters['resource'] = $object;
-        }
+        $context = array('action' => $actionDefinition, 'parameters' => $contextParameters);
 
         return $twig->render(sprintf('SyliusGridBundle:Action:_%s.html.twig', $actionDefinition->getType()), $context);
     }
 
     /**
      * @param \Twig_Environment $twig
-     * @param Request $request
-     * @param GridView $gridView
+     * @param Request           $request
+     * @param GridView          $gridView
      */
     public function renderFilterForm(\Twig_Environment $twig, Request $request, GridView $gridView)
     {
