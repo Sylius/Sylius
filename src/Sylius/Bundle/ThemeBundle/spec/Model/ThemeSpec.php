@@ -65,4 +65,12 @@ class ThemeSpec extends ObjectBehavior
         $this->equals($secondTheme)->shouldReturn(true);
         $this->equals($thirdTheme)->shouldReturn(false);
     }
+
+    function it_has_hash_code()
+    {
+        $logicalName = "hash/this";
+        $this->setLogicalName($logicalName);
+
+        $this->getHashCode()->shouldReturn(md5($logicalName));
+    }
 }

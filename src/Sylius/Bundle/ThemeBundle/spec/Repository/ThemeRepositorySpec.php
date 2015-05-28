@@ -3,8 +3,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Repository;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Finder\ThemeFinderInterface;
-use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepository;
 

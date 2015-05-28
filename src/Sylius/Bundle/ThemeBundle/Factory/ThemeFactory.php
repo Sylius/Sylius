@@ -40,7 +40,7 @@ class ThemeFactory implements ThemeFactoryInterface
                 'name',
                 'logical_name',
             ])
-            ->setOptional([
+            ->setDefined([
                 'description'
             ])
         ;

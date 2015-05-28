@@ -103,4 +103,12 @@ class Theme implements ThemeInterface
     {
         return $this->path;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHashCode()
+    {
+        return md5($this->logicalName);
+    }
 }

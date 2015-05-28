@@ -18,7 +18,14 @@ interface ThemeRepositoryInterface
     /**
      * @param string $logicalName
      *
-     * @return null|ThemeInterface
+     * @return ThemeInterface|null
      */
     public function findByLogicalName($logicalName);
+
+    /**
+     * @param string $path
+     *
+     * @return ThemeInterface|null
+     */
+    public function findByPath($path);
 }

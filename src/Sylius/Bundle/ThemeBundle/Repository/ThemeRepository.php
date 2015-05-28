@@ -52,4 +52,20 @@ class ThemeRepository implements ThemeRepositoryInterface
 
         return null;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByPath($path)
+    {
+        $path = realpath($path);
+
+        foreach ($this->themes as $theme) {
+            if (false !== strpos($path, $theme->getPath())) {
+                return $theme;
+            }
+        }
+
+        return null;
+    }
 }

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Loader\Loader;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\Loader\LoaderInterface;
@@ -24,11 +25,9 @@ class Translator extends BaseTranslator
     protected $selector;
 
     /**
-     * List of all found themes indexed by absoulte paths of them.
-     *
-     * @var ThemeInterface[]
+     * @var ThemeRepositoryInterface
      */
-    protected $themesPathsToThemes;
+    protected $themeRepository;
 
     /**
      * @var ThemeContextInterface
@@ -47,11 +46,7 @@ class Translator extends BaseTranslator
     {
         $this->selector = $selector;
 
-        $themes = $container->get('sylius.repository.theme')->findAll();
-        foreach ($themes as $theme) {
-            $this->themesPathsToThemes[realpath($theme->getPath())] = $theme;
-        }
-
+        $this->themeRepository = $container->get('sylius.repository.theme');
         $this->themeContext = $container->get('sylius.context.theme');
         $this->resourcesToThemes = new ArrayCollection();
 
@@ -166,15 +161,6 @@ class Translator extends BaseTranslator
      */
     private function mapResourceToTheme($resource)
     {
-        $resource = realpath($resource);
-
-        foreach ($this->themesPathsToThemes as $themePath => $theme) {
-            if (false !== strpos($resource, $themePath)) {
-                $this->resourcesToThemes->set($resource, $theme);
-                return;
-            }
-        }
-
-        $this->resourcesToThemes->set($resource, null);
+        $this->resourcesToThemes->set($resource, $this->themeRepository->findByPath($resource));
     }
 }

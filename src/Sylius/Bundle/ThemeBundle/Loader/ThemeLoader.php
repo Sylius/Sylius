@@ -38,7 +38,7 @@ abstract class ThemeLoader extends Loader
         $themeData = $this->transformResourceContentsToArray(file_get_contents($resource));
 
         $theme = $this->themeFactory->createFromArray($themeData);
-        $theme->setPath(dirname($resource));
+        $theme->setPath(realpath(dirname($resource)));
 
         return $theme;
     }
