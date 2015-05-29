@@ -15,9 +15,17 @@
         $(document).on('click', 'a[data-collection-button="add"]', function(e) {
             e.preventDefault();
             var collectionContainer = $('#' + $(this).data('collection'));
-            var isArray = collectionContainer.data('is-php-array');
             var prototype = $('#' + $(this).data('prototype')).data('prototype');
-            var item = prototype.replace(/__name__/g, collectionContainer.children().length + (undefined == isArray ? 0 : 1));
+
+            // Check if an element with this ID already exists.
+            // If it does, increase the count by one and try again
+            var id = prototype.match(/input.*?id="(.*?)"/);
+            var count = 0;
+            while ($('#' + id[1].replace(/__name__/g, count)).length > 0) {
+                count++;
+            }
+
+            var item = prototype.replace(/__name__/g, count);
             collectionContainer.append(item);
         });
 
