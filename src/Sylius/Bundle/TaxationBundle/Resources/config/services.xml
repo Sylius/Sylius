@@ -26,17 +26,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.type.tax_category" class="%sylius.form.type.tax_category.class%">
-            <argument>%sylius.model.tax_category.class%</argument>
-            <argument>%sylius.validation_group.tax_category%</argument>
-            <tag name="form.type" alias="sylius_tax_category" />
-        </service>
-        <service id="sylius.form.type.tax_rate" class="%sylius.form.type.tax_rate.class%">
-            <argument>%sylius.model.tax_rate.class%</argument>
-            <argument>%sylius.validation_group.tax_rate%</argument>
-            <tag name="form.type" alias="sylius_tax_rate" />
-        </service>
-
         <service id="sylius.form.type.tax_calculator_choice" class="%sylius.form.type.tax_calculator_choice.class%">
             <argument>%sylius.tax_calculators%</argument>
             <tag name="form.type" alias="sylius_tax_calculator_choice" />

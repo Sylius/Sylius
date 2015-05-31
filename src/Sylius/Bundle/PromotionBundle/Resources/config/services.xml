@@ -84,28 +84,6 @@
             <tag name="form.type" alias="sylius_promotion_action_collection" />
         </service>
 
-        <service id="sylius.form.type.promotion" class="%sylius.form.type.promotion.class%">
-            <argument>%sylius.model.promotion.class%</argument>
-            <argument>%sylius.validation_group.promotion%</argument>
-            <tag name="form.type" alias="sylius_promotion" />
-        </service>
-        <service id="sylius.form.type.promotion_coupon" class="%sylius.form.type.promotion_coupon.class%">
-            <argument>%sylius.model.promotion_coupon.class%</argument>
-            <argument>%sylius.validation_group.promotion_coupon%</argument>
-            <tag name="form.type" alias="sylius_promotion_coupon" />
-        </service>
-        <service id="sylius.form.type.promotion_rule" class="%sylius.form.type.promotion_rule.class%">
-            <argument>%sylius.model.promotion_rule.class%</argument>
-            <argument>%sylius.validation_group.promotion_rule%</argument>
-            <argument type="service" id="sylius.registry.promotion_rule_checker" />
-            <tag name="form.type" alias="sylius_promotion_rule" />
-        </service>
-        <service id="sylius.form.type.promotion_action" class="%sylius.form.type.promotion_action.class%">
-            <argument>%sylius.model.promotion_action.class%</argument>
-            <argument>%sylius.validation_group.promotion_action%</argument>
-            <argument type="service" id="sylius.registry.promotion_action" />
-            <tag name="form.type" alias="sylius_promotion_action" />
-        </service>
         <service id="sylius.form.type.promotion_rule_choice" class="%sylius.form.type.promotion_rule_choice.class%">
             <argument>%sylius.promotion_rules%</argument>
             <tag name="form.type" alias="sylius_promotion_rule_choice" />
@@ -139,11 +117,6 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.form.type.promotion_coupon_generate_instruction" class="%sylius.form.type.promotion_coupon_generate_instruction.class%">
-            <argument>%sylius.generator.instructions.class%</argument>
-            <argument>%sylius.validation_group.promotion_coupon_generate_instruction%</argument>
-            <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
-        </service>
         <service id="sylius.generator.promotion_coupon" class="%sylius.generator.promotion_coupon.class%">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />
