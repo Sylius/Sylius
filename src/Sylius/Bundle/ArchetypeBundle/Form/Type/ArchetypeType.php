@@ -28,13 +28,14 @@ class ArchetypeType extends AbstractResourceType
     private $subject;
 
     /**
+     * @param string $name
      * @param string $dataClass
      * @param array  $validationGroups
      * @param string $subject
      */
-    function __construct($dataClass, array $validationGroups, $subject)
+    function __construct($name, $dataClass, array $validationGroups, $subject)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
 
         $this->subject = $subject;
     }

@@ -33,13 +33,14 @@ class VariantType extends AbstractResourceType
     /**
      * Constructor.
      *
+     * @param string $name
      * @param string $dataClass
      * @param array  $validationGroups
      * @param string $variableName
      */
-    public function __construct($dataClass, array $validationGroups, $variableName)
+    public function __construct($name, $dataClass, array $validationGroups, $variableName)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
 
         $this->variableName = $variableName;
     }

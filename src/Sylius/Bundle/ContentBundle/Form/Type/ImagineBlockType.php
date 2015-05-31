@@ -40,17 +40,19 @@ class ImagineBlockType extends AbstractResourceType
     /**
      * ImagineBlockType constructor.
      *
+     * @param string $name
      * @param string $dataClass
      * @param array $validationGroups
      * @param FilterConfiguration $filterConfiguration
      */
     public function __construct(
+        $name,
         $dataClass,
         array $validationGroups,
         FilterConfiguration $filterConfiguration
     ) {
-        $this->dataClass = $dataClass;
-        $this->validationGroups = $validationGroups;
+        parent::__construct($name, $dataClass, $validationGroups);
+
         $this->filterConfiguration = $filterConfiguration;
     }
 

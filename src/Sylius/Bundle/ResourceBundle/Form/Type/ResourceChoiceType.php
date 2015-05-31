@@ -41,13 +41,13 @@ class ResourceChoiceType extends AbstractType
     protected $name;
 
     /**
+     * @param string $name
      * @param string $className
      * @param string $driver
-     * @param string $name
      *
      * @throws UnknownDriverException
      */
-    public function __construct($className, $driver, $name)
+    public function __construct($name, $className, $driver)
     {
         $this->className = $className;
         $this->name = $name;

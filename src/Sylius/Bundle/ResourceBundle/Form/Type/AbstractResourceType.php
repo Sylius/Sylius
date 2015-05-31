@@ -35,11 +35,11 @@ abstract class AbstractResourceType extends AbstractType
     protected $name;
 
     /**
+     * @param string   $name
      * @param string   $dataClass        FQCN
      * @param string[] $validationGroups
-     * @param string $name
      */
-    public function __construct($dataClass, array $validationGroups = array(), $name = 'form')
+    public function __construct($name, $dataClass, array $validationGroups = array())
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;

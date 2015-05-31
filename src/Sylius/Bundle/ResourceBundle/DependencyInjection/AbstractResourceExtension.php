@@ -203,22 +203,21 @@ abstract class AbstractResourceExtension extends Extension
                 }
 
                 $alias = sprintf('%s_%s%s', $this->applicationName, $model, $suffix);
-                // make sure to valid form's name.
                 $alias = preg_replace('/[^a-z0-9_]/i', '_', $alias);
 
                 $definition = new Definition($class);
 
                 if ('choice' === $name) {
                     $definition->setArguments(array(
+                        $alias,
                         $serviceClasses['model'],
                         $config['driver'],
-                        $alias,
                     ));
                 } else {
                     $definition->setArguments(array(
+                        $alias,
                         $serviceClasses['model'],
                         new Parameter(sprintf('%s.validation_group.%s%s', $this->applicationName, $model, $suffix)),
-                        $alias
                     ));
                 }
 

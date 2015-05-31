@@ -25,9 +25,9 @@ abstract class AbstractConfigurationType extends AbstractResourceType
      */
     protected $registry;
 
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $registry)
+    public function __construct($name, $dataClass, array $validationGroups, ServiceRegistryInterface $registry)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
 
         $this->registry = $registry;
     }
