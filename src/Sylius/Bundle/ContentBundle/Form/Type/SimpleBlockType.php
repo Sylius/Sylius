@@ -56,12 +56,4 @@ class SimpleBlockType extends AbstractResourceType
         ;
 
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_simple_block';
-    }
 }

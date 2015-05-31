@@ -32,9 +32,4 @@ class CouponGenerateInstructionType extends AbstractResourceType
             ))
         ;
     }
-
-    public function getName()
-    {
-        return 'sylius_promotion_coupon_generate_instruction';
-    }
 }

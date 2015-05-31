@@ -53,12 +53,4 @@ class ReferenceBlockType extends AbstractResourceType
         ;
 
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_reference_block';
-    }
 }

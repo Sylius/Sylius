@@ -32,12 +32,4 @@ class AdvancedOrderType extends OrderType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_advanced_order';
-    }
 }

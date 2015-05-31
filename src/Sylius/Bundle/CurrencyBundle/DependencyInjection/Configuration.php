@@ -87,7 +87,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Currency\Model\Currency')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\CurrencyBundle\Controller\CurrencyController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')
+                                ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType')->end()

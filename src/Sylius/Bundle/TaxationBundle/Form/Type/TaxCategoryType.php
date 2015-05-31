@@ -36,12 +36,4 @@ class TaxCategoryType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_tax_category';
-    }
 }

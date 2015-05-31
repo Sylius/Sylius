@@ -59,12 +59,4 @@ class SlideshowBlockType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_slideshow_block';
-    }
 }

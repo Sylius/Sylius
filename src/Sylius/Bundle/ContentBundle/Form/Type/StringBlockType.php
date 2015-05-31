@@ -54,11 +54,4 @@ class StringBlockType extends AbstractResourceType
 
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_string_block';
-    }
 }

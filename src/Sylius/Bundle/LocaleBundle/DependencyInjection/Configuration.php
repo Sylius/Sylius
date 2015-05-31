@@ -87,7 +87,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('model')->defaultValue('Sylius\Component\Locale\Model\Locale')->end()
                                 ->scalarNode('controller')->defaultValue('Sylius\Bundle\LocaleBundle\Controller\LocaleController')->end()
                                 ->scalarNode('repository')->end()
-                                ->scalarNode('form')
+                                ->arrayNode('form')
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('default')->defaultValue('Sylius\Bundle\LocaleBundle\Form\Type\LocaleType')->end()

@@ -79,12 +79,4 @@ class CustomerRegistrationType extends AbstractResourceType
             'cascade_validation' => true
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_customer_registration';
-    }
 }

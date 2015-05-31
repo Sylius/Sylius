@@ -32,12 +32,4 @@ class TopicType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_contact_topic';
-    }
 }

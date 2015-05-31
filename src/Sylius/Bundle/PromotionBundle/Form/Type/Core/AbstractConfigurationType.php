@@ -43,12 +43,4 @@ abstract class AbstractConfigurationType extends AbstractResourceType
             'configuration_type',
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_action';
-    }
 }

@@ -93,7 +93,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('model')->defaultValue('Sylius\Component\Archetype\Model\Archetype')->end()
                                     ->scalarNode('controller')->defaultValue('Sylius\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->defaultValue('Sylius\Bundle\TranslationBundle\Doctrine\ORM\TranslatableResourceRepository')->end()
-                                    ->scalarNode('form')
+                                    ->arrayNode('form')
                                         ->addDefaultsIfNotSet()
                                         ->children()
                                             ->scalarNode('default')->defaultValue('Sylius\Bundle\ArchetypeBundle\Form\Type\ArchetypeType')->end()

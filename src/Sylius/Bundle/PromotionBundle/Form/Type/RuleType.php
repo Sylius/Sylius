@@ -54,12 +54,4 @@ class RuleType extends AbstractConfigurationType
             'configuration_type' => RuleInterface::TYPE_ITEM_TOTAL,
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_rule';
-    }
 }

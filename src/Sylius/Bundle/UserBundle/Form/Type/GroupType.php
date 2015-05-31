@@ -32,12 +32,4 @@ class GroupType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_group';
-    }
 }

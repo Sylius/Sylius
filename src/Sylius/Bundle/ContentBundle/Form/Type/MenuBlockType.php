@@ -53,12 +53,4 @@ class MenuBlockType extends AbstractResourceType
         ;
 
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_menu_block';
-    }
 }

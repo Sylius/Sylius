@@ -31,12 +31,4 @@ class TaxonomyTranslationType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_taxonomy_translation';
-    }
 }

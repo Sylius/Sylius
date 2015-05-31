@@ -52,12 +52,4 @@ class GuestType extends AbstractResourceType
             ->setDataLocked(false)
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_checkout_guest';
-    }
 }

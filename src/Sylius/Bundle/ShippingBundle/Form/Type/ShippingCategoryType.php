@@ -36,12 +36,4 @@ class ShippingCategoryType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_shipping_category';
-    }
 }

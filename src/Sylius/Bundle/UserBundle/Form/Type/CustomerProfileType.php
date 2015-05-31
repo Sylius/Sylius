@@ -42,12 +42,4 @@ class CustomerProfileType extends AbstractResourceType
             ->add('gender', 'sylius_gender')
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_customer_profile';
-    }
 }

@@ -52,14 +52,6 @@ class CreditCardType extends AbstractResourceType
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_credit_card';
-    }
-
-    /**
      * Get years to add as choices in expiryYear
      *
      * @return array

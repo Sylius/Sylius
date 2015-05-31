@@ -33,12 +33,4 @@ class ZoneMemberZoneType extends ZoneMemberType
 
         parent::buildForm($builder, $options);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_zone_member_zone';
-    }
 }

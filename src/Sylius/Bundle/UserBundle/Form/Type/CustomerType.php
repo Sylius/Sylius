@@ -46,12 +46,4 @@ class CustomerType extends CustomerProfileType
             'cascade_validation' => true,
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_customer';
-    }
 }

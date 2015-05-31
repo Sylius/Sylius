@@ -69,12 +69,4 @@ class ShippingStepType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_checkout_shipping';
-    }
 }

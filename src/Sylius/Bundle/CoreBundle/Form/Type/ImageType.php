@@ -25,12 +25,4 @@ class ImageType extends AbstractResourceType
             'label' => 'sylius.form.image.file'
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_image';
-    }
 }
