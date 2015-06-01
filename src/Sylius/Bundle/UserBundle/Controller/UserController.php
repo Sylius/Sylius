@@ -20,6 +20,7 @@ use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\TokenProviderInterface;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +62,7 @@ class UserController extends ResourceController
         }
 
         return $this->render(
-            'SyliusWebBundle:Frontend/Account:changePassword.html.twig',
+            $this->getTemplate('frontend_user_change_password'),
             array(
                 'form'  => $form->createView(),
             )
@@ -103,7 +104,7 @@ class UserController extends ResourceController
         }
 
         return $this->render(
-            'SyliusWebBundle:Frontend/Account:resetPassword.html.twig',
+            $this->getTemplate('frontend_user_reset_password'),
             array(
                 'form' => $form->createView(),
                 'user' => $user,
@@ -131,7 +132,7 @@ class UserController extends ResourceController
         }
 
         return $this->render(
-            'SyliusWebBundle:Frontend/Account:requestPasswordReset.html.twig',
+            $this->getTemplate('frontend_user_request_password_reset'),
             array(
                 'form'  => $form->createView(),
             )
@@ -277,5 +278,27 @@ class UserController extends ResourceController
         }
 
         return $user;
+    }
+
+
+    /**
+     * Returns a template name based on bundle's configuration.
+     *
+     * @param string $name Template name
+     *
+     * @param null|string $default Optional default value if no template found with that name.
+     *
+     * @return string Template path
+     */
+    protected function getTemplate($name, $default = null) {
+        try {
+            return $this->container->getParameter(sprintf('sylius.template.%s', $name));
+        } catch (InvalidArgumentException $e) {
+            if (null !== $default) {
+                return $default;
+            }
+
+            throw $e;
+        }
     }
 }

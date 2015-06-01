@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class OrderController extends FOSRestController
+class OrderController extends WebController
 {
     /**
      * List orders of the current customer.
@@ -37,7 +37,7 @@ class OrderController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setTemplate('SyliusWebBundle:Frontend/Account:Order/index.html.twig')
+            ->setTemplate($this->getTemplate('frontend_order_index'))
             ->setData(array(
                 'orders' => $orders,
             ))
@@ -49,20 +49,18 @@ class OrderController extends FOSRestController
     /**
      * Get single order of the current customer.
      *
-     * @param string $number
+     * @param Request $request
      *
      * @return Response
-     *
-     * @throws NotFoundHttpException
-     * @throws AccessDeniedException
      */
-    public function showAction($number)
+    public function showAction(Request $request)
     {
+        $number = $request->get('number');
         $order = $this->findOrderOr404($number);
 
         $view = $this
             ->view()
-            ->setTemplate('SyliusWebBundle:Frontend/Account:Order/show.html.twig')
+            ->setTemplate($this->getTemplate('frontend_order_show'))
             ->setData(array(
                 'order' => $order,
             ))
@@ -75,21 +73,22 @@ class OrderController extends FOSRestController
      * Renders an invoice as PDF.
      *
      * @param Request $request
-     * @param string  $number
      *
      * @return Response
+     *
      * @throws NotFoundHttpException
      * @throws AccessDeniedException
      */
-    public function renderInvoiceAction(Request $request, $number)
+    public function renderInvoiceAction(Request $request)
     {
+        $number = $request->get('number');
         $order = $this->findOrderOr404($number);
 
         if (!$order->isInvoiceAvailable()) {
             throw $this->createNotFoundException('The invoice can not yet be generated.');
         }
 
-        $html = $this->renderView('SyliusWebBundle:Frontend/Account:Order/invoice.html.twig', array(
+        $html = $this->renderView($this->getTemplate('frontend_order_invoice'), array(
             'order' => $order
         ));
 

@@ -11,19 +11,22 @@
 
 namespace Sylius\Bundle\WebBundle\Controller\Frontend\Account;
 
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User account address controller.
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AccountController extends Controller
+class AccountController extends WebController
 {
-    public function indexAction(Request $request)
+    /**
+     * @return Response
+     */
+    public function indexAction()
     {
         $user = $this->getUser();
 
@@ -34,7 +37,7 @@ class AccountController extends Controller
             );
         }
 
-        return $this->render('SyliusWebBundle:Frontend/Account:show.html.twig', array(
+        return $this->render($this->getTemplate('frontend_account'), array(
             'user' => $user
         ));
     }

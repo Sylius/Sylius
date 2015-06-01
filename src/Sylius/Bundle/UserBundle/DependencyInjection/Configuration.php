@@ -67,6 +67,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addValidationGroupsSection($rootNode);
         $this->addClassesSection($rootNode);
+        $this->addTemplatesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -179,6 +180,30 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Adds `templates` section.
+     *
+     * @param ArrayNodeDefinition $node
+     */
+    private function addTemplatesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
+                    ->info('Templates used in the user bundle')
+                    ->children()
+                        ->scalarNode('frontend_user_login')->defaultValue('SyliusWebBundle:Frontend/User:login.html.twig')->end()
+                        ->scalarNode('frontend_profile_edit')->defaultValue('SyliusWebBundle:Frontend/Account:Profile/edit.html.twig')->end()
+                        ->scalarNode('frontend_user_change_password')->defaultValue('SyliusWebBundle:Frontend/Account:changePassword.html.twig')->end()
+                        ->scalarNode('frontend_user_reset_password')->defaultValue('SyliusWebBundle:Frontend/Account:resetPassword.html.twig')->end()
+                        ->scalarNode('frontend_user_request_password_reset')->defaultValue('SyliusWebBundle:Frontend/Account:requestPasswordReset.html.twig')->end()
                     ->end()
                 ->end()
             ->end()

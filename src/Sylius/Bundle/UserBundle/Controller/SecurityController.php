@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\UserBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sylius\Bundle\WebBundle\Controller\WebController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SecurityController extends Controller
+class SecurityController extends WebController
 {
     /**
      * Login form action.
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -39,7 +39,7 @@ class SecurityController extends Controller
     /**
      * Login check action. This action should never be called.
      */
-    public function checkAction(Request $request)
+    public function checkAction()
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
@@ -47,7 +47,7 @@ class SecurityController extends Controller
     /**
      * Logout action. This action should never be called.
      */
-    public function logoutAction(Request $request)
+    public function logoutAction()
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall.');
     }
@@ -62,6 +62,6 @@ class SecurityController extends Controller
      */
     protected function renderLogin(array $data)
     {
-        return $this->render('SyliusWebBundle:Frontend/User:login.html.twig', $data);
+        return $this->render($this->getTemplate('frontend_user_login'), $data);
     }
 }
