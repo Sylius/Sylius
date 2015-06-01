@@ -15,7 +15,7 @@
 
     <entity name="Sylius\Component\Addressing\Model\ZoneMemberZone">
         <many-to-one field="zone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
-            <join-column name="zone_id" referenced-column-name="id" />
+            <join-column name="zone_id" referenced-column-name="id" on-delete="CASCADE" />
         </many-to-one>
     </entity>
 
