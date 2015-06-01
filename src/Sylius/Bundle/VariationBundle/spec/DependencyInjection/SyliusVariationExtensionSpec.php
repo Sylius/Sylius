@@ -45,7 +45,7 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
 
         $variantFormType = new Definition('Some\App\Product\Form\ProductVariantType');
         $variantFormType
-            ->setArguments(array('Some\App\Product\Entity\ProductVariant', '%sylius.validation_group.product_variant%', 'product'))
+            ->setArguments(array('product', 'Some\App\Product\Entity\ProductVariant', '%sylius.validation_group.product_variant%'))
             ->addTag('form.type', array('alias' => 'sylius_product_variant'))
         ;
 
@@ -69,9 +69,10 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
 
         $optionFormType = new Definition('Some\App\Product\Form\OptionType');
         $optionFormType
-            ->setArguments(array('Some\App\Product\Entity\Option',
+            ->setArguments(array(
+                'product',
+                'Some\App\Product\Entity\Option',
                 '%sylius.validation_group.product_option%',
-                'product'
             ))
             ->addTag('form.type', array('alias' => 'sylius_product_option'))
         ;
@@ -80,9 +81,10 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
 
         $optionTranslationFormType = new Definition('Some\App\Product\Form\OptionTranslationType');
         $optionTranslationFormType
-            ->setArguments(array('Some\App\Product\Entity\OptionTranslation',
+            ->setArguments(array(
+                'product',
+                'Some\App\Product\Entity\OptionTranslation',
                 '%sylius.validation_group.product_option_translation%',
-                'product'
             ))
             ->addTag('form.type', array('alias' => 'sylius_product_option_translation'))
         ;
@@ -100,9 +102,9 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
         $optionValueFormType = new Definition('Some\App\Product\Form\OptionValueType');
         $optionValueFormType
             ->setArguments(array(
+                'product',
                 'Some\App\Product\Entity\OptionValue',
                 '%sylius.validation_group.product_option_value%',
-                'product'
             ))
             ->addTag('form.type', array('alias' => 'sylius_product_option_value'))
         ;
@@ -131,7 +133,9 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 'variable' => 'Some\App\Product\Entity\Product',
                 'option' => array(
                     'model' => 'Some\App\Product\Entity\Option',
-                    'form' => 'Some\App\Product\Form\OptionType',
+                    'form' => array(
+                        'default' => 'Some\App\Product\Form\OptionType',
+                    ),
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\OptionTranslation',
                         'form'  => array(
@@ -141,11 +145,15 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 ),
                 'option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
-                    'form' => 'Some\App\Product\Form\OptionValueType',
+                    'form' => array(
+                        'default' => 'Some\App\Product\Form\OptionValueType',
+                    ),
                 ),
                 'variant' => array(
                     'model' => 'Some\App\Product\Entity\ProductVariant',
-                    'form' => 'Some\App\Product\Form\ProductVariantType',
+                    'form' => array(
+                        'default' => 'Some\App\Product\Form\ProductVariantType',
+                    ),
                 ),
             ),
         );
@@ -159,7 +167,9 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                     'variable' => 'Some\App\Product\Entity\Product',
                     'option'   => array(
                         'model' => 'Some\App\Product\Entity\Option',
-                        'form'  => 'Some\App\Product\Form\OptionType',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\OptionType',
+                        ),
                         'translation' => array(
                             'model' => 'Some\App\Product\Entity\OptionTranslation',
                             'form'  => array(
@@ -169,11 +179,15 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                     ),
                     'option_value' => array(
                         'model' => 'Some\App\Product\Entity\OptionValue',
-                        'form'  => 'Some\App\Product\Form\OptionValueType',
+                        'form'  => array(
+                            'default' => 'Some\App\Product\Form\OptionValueType',
+                        ),
                     ),
                     'variant' => array(
                         'model' => 'Some\App\Product\Entity\ProductVariant',
-                        'form'  => 'Some\App\Product\Form\ProductVariantType',
+                        'form'  => array(
+                            'default' =>  'Some\App\Product\Form\ProductVariantType',
+                        ),
                     ),
                 ),
             ),
@@ -184,7 +198,9 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
             'classes' => array(
                 'product_option' => array(
                     'model' => 'Some\App\Product\Entity\Option',
-                    'form'  => 'Some\App\Product\Form\OptionType',
+                    'form'  => array(
+                        'default' => 'Some\App\Product\Form\OptionType',
+                    ),
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\OptionTranslation',
                         'form'  => array(
@@ -194,11 +210,15 @@ class SyliusVariationExtensionSpec extends ObjectBehavior
                 ),
                 'product_option_value' => array(
                     'model' => 'Some\App\Product\Entity\OptionValue',
-                    'form'  => 'Some\App\Product\Form\OptionValueType',
+                    'form'  => array(
+                        'default' => 'Some\App\Product\Form\OptionValueType',
+                    ),
                 ),
                 'product_variant' => array(
                     'model' => 'Some\App\Product\Entity\ProductVariant',
-                    'form'  => 'Some\App\Product\Form\ProductVariantType',
+                    'form'  => array(
+                        'default' => 'Some\App\Product\Form\ProductVariantType',
+                    ),
                 ),
             ),
             'validation_groups' => array(

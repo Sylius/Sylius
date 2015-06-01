@@ -27,7 +27,7 @@ class RuleTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('Rule', array('sylius'), $checkerRegistry);
+        $this->beConstructedWith('sylius_promotion_rule', 'Rule', array('sylius'), $checkerRegistry);
     }
 
     function it_is_initializabled()

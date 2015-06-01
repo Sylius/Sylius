@@ -23,7 +23,7 @@ class OrderItemTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('OrderItem', array('sylius'));
+        $this->beConstructedWith('sylius_order_item', 'OrderItem', array('sylius'));
     }
 
     function it_is_initializable()

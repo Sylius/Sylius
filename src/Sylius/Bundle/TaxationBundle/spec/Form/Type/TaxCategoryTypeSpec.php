@@ -23,7 +23,7 @@ class TaxCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxCategory', array('sylius'));
+        $this->beConstructedWith('sylius_tax_category', 'TaxCategory', array('sylius'));
     }
 
     function it_is_initializable()

@@ -22,7 +22,7 @@ class CustomerTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Sylius\Component\User\Model\Customer', array('sylius'));
+        $this->beConstructedWith('sylius_customer', 'Sylius\Component\User\Model\Customer', array('sylius'));
     }
 
     function it_is_initializable()

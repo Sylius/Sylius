@@ -62,12 +62,14 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
     {
         $this->mockDefaultBehavior($container);
 
+        $container->hasDefinition('sylius.form.type.resource_choice')->willReturn(false);
+
         $definition = new Definition('Sylius\ChoiceFormType');
         $definition
             ->setArguments(array(
+                'sylius_resource_choice',
                 'Sylius\Model',
                 SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
-                'sylius_resource_choice'
             ))
             ->addTag('form.type', array('alias' => 'sylius_resource_choice'));
         $container
@@ -100,6 +102,8 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
     {
         $this->mockDefaultBehavior($container);
 
+        $container->hasDefinition('sylius.form.type.resource')->willReturn(false);
+
         $container
             ->setDefinition(
                 'sylius.form.type.resource',
@@ -129,6 +133,9 @@ class AbstractResourceExtensionSpec extends ObjectBehavior
     function it_should_create_multiple_form_definition(ContainerBuilder $container)
     {
         $this->mockDefaultBehavior($container);
+
+        $container->hasDefinition('sylius.form.type.resource')->willReturn(false);
+        $container->hasDefinition('sylius.form.type.resource_other')->willReturn(false);
 
         $container->setDefinition(
             'sylius.form.type.resource',

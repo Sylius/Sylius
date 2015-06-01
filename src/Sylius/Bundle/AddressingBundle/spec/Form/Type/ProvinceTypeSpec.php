@@ -23,7 +23,7 @@ class ProvinceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Province', array('sylius'));
+        $this->beConstructedWith('sylius_province', 'Province', array('sylius'));
     }
 
     function it_is_initializable()

@@ -44,9 +44,10 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
 
         $attributeFormType = new Definition('Some\App\Product\Form\AttributeType');
         $attributeFormType
-            ->setArguments(array('Some\App\Product\Entity\Attribute',
+            ->setArguments(array(
+                'product',
+                'Some\App\Product\Entity\Attribute',
                 '%sylius.validation_group.product_attribute%',
-                'product'
             ))
         ;
 
@@ -58,9 +59,10 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
 
         $attributeTranslationFormType = new Definition('Some\App\Product\Form\AttributeTranslationType');
         $attributeTranslationFormType
-            ->setArguments(array('Some\App\Product\Entity\AttributeTranslation',
+            ->setArguments(array(
+                'product',
+                'Some\App\Product\Entity\AttributeTranslation',
                 '%sylius.validation_group.product_attribute_translation%',
-                'product'
             ))
         ;
 
@@ -88,9 +90,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
         $attributeValueFormType = new Definition('Some\App\Product\Form\AttributeValueType');
         $attributeValueFormType
             ->setArguments(array(
+                'product',
                 'Some\App\Product\Entity\AttributeValue',
                 '%sylius.validation_group.product_attribute_value%',
-                'product'
             ))
         ;
 
@@ -105,7 +107,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 'subject' => 'Some\App\Product\Entity\Product',
                 'attribute' => array(
                     'model' => 'Some\App\Product\Entity\Attribute',
-                    'form'  => 'Some\App\Product\Form\AttributeType',
+                    'form'  => array(
+                        'default' => 'Some\App\Product\Form\AttributeType',
+                    ),
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\AttributeTranslation',
                         'form'  => array(
@@ -115,7 +119,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 ),
                 'attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
-                    'form'  => 'Some\App\Product\Form\AttributeValueType',
+                    'form'  =>  array(
+                        'default' => 'Some\App\Product\Form\AttributeValueType',
+                    ),
                 ),
             ),
         );
@@ -129,7 +135,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                     'subject' => 'Some\App\Product\Entity\Product',
                     'attribute' => array(
                         'model' => 'Some\App\Product\Entity\Attribute',
-                        'form' => 'Some\App\Product\Form\AttributeType',
+                        'form' =>  array(
+                            'default' => 'Some\App\Product\Form\AttributeType',
+                        ),
                         'translation' => array(
                             'model' => 'Some\App\Product\Entity\AttributeTranslation',
                             'form' => array(
@@ -139,7 +147,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                     ),
                     'attribute_value' => array(
                         'model' => 'Some\App\Product\Entity\AttributeValue',
-                        'form' => 'Some\App\Product\Form\AttributeValueType',
+                        'form' =>  array(
+                            'default' => 'Some\App\Product\Form\AttributeValueType',
+                        ),
                     ),
                 ),
             ),
@@ -149,7 +159,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
             'classes' => array(
                 'product_attribute' => array(
                     'model' => 'Some\App\Product\Entity\Attribute',
-                    'form'  => 'Some\App\Product\Form\AttributeType',
+                    'form'  =>  array(
+                        'default' => 'Some\App\Product\Form\AttributeType',
+                    ),
                     'translation' => array(
                         'model' => 'Some\App\Product\Entity\AttributeTranslation',
                         'form' => array(
@@ -159,7 +171,9 @@ class SyliusAttributeExtensionSpec extends ObjectBehavior
                 ),
                 'product_attribute_value' => array(
                     'model' => 'Some\App\Product\Entity\AttributeValue',
-                    'form'  => 'Some\App\Product\Form\AttributeValueType',
+                    'form'  =>  array(
+                        'default' => 'Some\App\Product\Form\AttributeValueType',
+                    ),
                 ),
             ),
             'validation_groups' => array(

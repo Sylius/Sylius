@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ShippingMethodTranslationTypeSpec extends ObjectBehavior
 {
     function let() {
-        $this->beConstructedWith('ShippingMethodTranslation', array('sylius'));
+        $this->beConstructedWith('sylius_shipping_method_translation', 'ShippingMethodTranslation', array('sylius'));
     }
 
     function it_is_a_form_type()

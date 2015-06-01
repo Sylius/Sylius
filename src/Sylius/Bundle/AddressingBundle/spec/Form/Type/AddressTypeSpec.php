@@ -23,7 +23,7 @@ class AddressTypeSpec extends ObjectBehavior
 {
     function let(EventSubscriberInterface $eventListener)
     {
-        $this->beConstructedWith('Address', array('sylius'), $eventListener);
+        $this->beConstructedWith('sylius_address', 'Address', array('sylius'), $eventListener);
     }
 
     function it_is_initializable()

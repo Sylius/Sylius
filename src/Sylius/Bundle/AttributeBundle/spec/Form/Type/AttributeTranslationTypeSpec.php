@@ -23,7 +23,7 @@ class AttributeTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('AttributeTranslation', array('sylius'), 'server');
+        $this->beConstructedWith('server', 'AttributeTranslation', array('sylius'));
     }
 
     function it_is_initializable()

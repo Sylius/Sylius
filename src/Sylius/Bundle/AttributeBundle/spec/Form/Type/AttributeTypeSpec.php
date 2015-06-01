@@ -27,7 +27,7 @@ class AttributeTypeSpec extends ObjectBehavior
 {
     function let(FormBuilder $builder, FormFactoryInterface $formFactory)
     {
-        $this->beConstructedWith('Attribute', array('sylius'), 'server');
+        $this->beConstructedWith('server', 'Attribute', array('sylius'));
 
         $builder->getFormFactory()->willReturn($formFactory);
     }

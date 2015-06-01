@@ -24,7 +24,7 @@ class OptionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Option', array(), 'server');
+        $this->beConstructedWith('server', 'Option', array(), 'server');
     }
 
     function it_is_initializable()

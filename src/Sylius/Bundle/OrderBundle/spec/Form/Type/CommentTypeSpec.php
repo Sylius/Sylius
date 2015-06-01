@@ -23,7 +23,7 @@ class CommentTypeSpec extends ObjectBehavior
 {
     public function let()
     {
-        $this->beConstructedWith('Comment', array('sylius'));
+        $this->beConstructedWith('sylius_comment', 'Comment', array('sylius'));
     }
 
     public function it_is_initializable()

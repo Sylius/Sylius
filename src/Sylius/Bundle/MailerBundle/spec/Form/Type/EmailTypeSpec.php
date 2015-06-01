@@ -23,7 +23,7 @@ class EmailTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Email', array('sylius'));
+        $this->beConstructedWith('sylius_email', 'Email', array('sylius'));
     }
 
     function it_is_initializable()

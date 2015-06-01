@@ -24,7 +24,7 @@ class ProductTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Product', array('sylius'));
+        $this->beConstructedWith('sylius_product', 'Product', array('sylius'));
     }
 
     function it_is_initializable()

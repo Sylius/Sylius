@@ -29,7 +29,7 @@ class ReportTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {
-        $this->beConstructedWith('Sylius\Component\Report\Model\Report', array('sylius'), $rendererRegistry, $dataFetcherRegistry);
+        $this->beConstructedWith('sylius_report', 'Sylius\Component\Report\Model\Report', array('sylius'), $rendererRegistry, $dataFetcherRegistry);
     }
 
     function it_is_initializable()
