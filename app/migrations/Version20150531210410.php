@@ -88,13 +88,13 @@ class Version20150531210410 extends AbstractMigration
         $this->addSql('DROP TABLE sylius_customer');
         $this->addSql('DROP TABLE sylius_customer_group');
         $this->addSql('DROP INDEX IDX_B97FF0589395C3F3 ON sylius_address');
-        $this->addSql('ALTER TABLE sylius_address CHANGE customer_id user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_address DROP customer_id, ADD user_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE sylius_address ADD CONSTRAINT FK_B97FF058A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_user (id) ON DELETE SET NULL');
         $this->addSql('CREATE INDEX IDX_B97FF058A76ED395 ON sylius_address (user_id)');
         $this->addSql('ALTER TABLE sylius_group ADD roles LONGTEXT NOT NULL COLLATE utf8_unicode_ci COMMENT \'(DC2Type:array)\'');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F97F76A45E237E06 ON sylius_group (name)');
         $this->addSql('DROP INDEX IDX_6196A1F99395C3F3 ON sylius_order');
-        $this->addSql('ALTER TABLE sylius_order ADD email VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, CHANGE customer_id user_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_order ADD email VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, ADD user_id INT DEFAULT NULL, DROP customer_id');
         $this->addSql('ALTER TABLE sylius_order ADD CONSTRAINT FK_6196A1F9A76ED395 FOREIGN KEY (user_id) REFERENCES sylius_user (id)');
         $this->addSql('CREATE INDEX IDX_6196A1F9A76ED395 ON sylius_order (user_id)');
         $this->addSql('ALTER TABLE sylius_promotion_coupon CHANGE per_customer_usage_limit per_user_usage_limit INT DEFAULT NULL');
