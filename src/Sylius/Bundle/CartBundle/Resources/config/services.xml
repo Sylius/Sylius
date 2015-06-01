@@ -68,6 +68,18 @@
         <service id="sylius.repository.cart" alias="sylius.repository.order" />
         <service id="sylius.repository.cart_item" alias="sylius.repository.order_item" />
 
+        <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
+            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.validation_group.cart%</argument>
+            <tag name="form.type" alias="sylius_cart" />
+        </service>
+
+        <service id="sylius.form.type.cart_item" class="%sylius.form.type.cart_item.class%">
+            <argument>%sylius.model.cart_item.class%</argument>
+            <argument>%sylius.validation_group.cart_item%</argument>
+            <tag name="form.type" alias="sylius_cart_item" />
+        </service>
+
         <service id="sylius.cart_provider.default" class="%sylius.cart_provider.default.class%">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.manager.cart" />

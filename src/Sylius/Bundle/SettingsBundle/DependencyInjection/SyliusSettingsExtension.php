@@ -33,23 +33,12 @@ class SyliusSettingsExtension extends AbstractResourceExtension implements Prepe
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        list($config) = $this->configure(
+        $this->configure(
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
         );
-
-        $classes = $config['classes'];
-        $parameterClasses = $classes['parameter'];
-
-        if (isset($parameterClasses['model'])) {
-            $container->setParameter('sylius.model.parameter.class', $parameterClasses['model']);
-        }
-
-        if (isset($parameterClasses['repository'])) {
-            $container->setParameter('sylius.repository.parameter.class', $parameterClasses['repository']);
-        }
     }
 
     /**
