@@ -47,25 +47,6 @@ class ThemeSpec extends ObjectBehavior
         $this->getPath()->shouldReturn("/foo/bar");
     }
 
-    function it_says_whether_themes_are_equal(ThemeInterface $firstTheme, ThemeInterface $secondTheme, ThemeInterface $thirdTheme)
-    {
-        $this->setLogicalName("same/name");
-        $this->setPath("/same/path");
-        
-        $firstTheme->getLogicalName()->willReturn("same/name");
-        $firstTheme->getPath()->willReturn("/different/path");
-
-        $secondTheme->getLogicalName()->willReturn("different/name");
-        $secondTheme->getPath()->willReturn("/same/path");
-
-        $thirdTheme->getLogicalName()->willReturn("different/name");
-        $thirdTheme->getPath()->willReturn("/different/path");
-        
-        $this->equals($firstTheme)->shouldReturn(true);
-        $this->equals($secondTheme)->shouldReturn(true);
-        $this->equals($thirdTheme)->shouldReturn(false);
-    }
-
     function it_has_hash_code()
     {
         $logicalName = "hash/this";

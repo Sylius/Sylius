@@ -20,10 +20,10 @@
         }
     ],
     "require": {
-        "php":                      ">=5.3.3",
+        "php":                      ">=5.4",
 
         "sylius/resource-bundle":   "0.14.*@dev",
-        "symfony/framework-bundle": "~2.3"
+        "symfony/framework-bundle": "~2.7"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.1",

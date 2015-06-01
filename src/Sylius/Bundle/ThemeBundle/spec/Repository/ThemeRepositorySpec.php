@@ -25,9 +25,11 @@ class ThemeRepositorySpec extends ObjectBehavior
     
     function it_returns_themes(ThemeInterface $theme)
     {
+        $theme->getLogicalName()->shouldBeCalled()->willReturn("foo/bar");
+
         $this->beConstructedWith([$theme]);
         
-        $this->findAll()->shouldReturn([$theme]);
+        $this->findAll()->shouldReturn(["foo/bar" => $theme]);
     }
 
     function it_returns_theme_by_its_logical_name(ThemeInterface $firstTheme, ThemeInterface $secondTheme)

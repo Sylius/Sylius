@@ -26,12 +26,7 @@ class ThemeContextSpec extends ObjectBehavior
 
     function it_has_themes(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
     {
-        $firstTheme->equals($firstTheme)->willReturn(true);
-        $firstTheme->equals($secondTheme)->willReturn(false);
         $firstTheme->getLogicalName()->willReturn("foo/bar1");
-
-        $secondTheme->equals($secondTheme)->willReturn(true);
-        $secondTheme->equals($firstTheme)->willReturn(false);
         $secondTheme->getLogicalName()->willReturn("foo/bar2");
 
         $this->getThemes()->shouldHaveCount(0);
@@ -54,7 +49,6 @@ class ThemeContextSpec extends ObjectBehavior
 
     function it_does_not_allow_to_add_theme_twice(ThemeInterface $theme)
     {
-        $theme->equals($theme)->willReturn(true);
         $theme->getLogicalName()->willReturn("foo/bar");
 
         $this->addTheme($theme);
@@ -69,16 +63,9 @@ class ThemeContextSpec extends ObjectBehavior
         ThemeInterface $thirdTheme,
         ThemeInterface $fourthTheme
     ) {
-        $firstTheme->equals(Argument::any())->willReturn(false);
         $firstTheme->getLogicalName()->willReturn("foo/bar1");
-
-        $secondTheme->equals(Argument::any())->willReturn(false);
         $secondTheme->getLogicalName()->willReturn("foo/bar2");
-
-        $thirdTheme->equals(Argument::any())->willReturn(false);
         $thirdTheme->getLogicalName()->willReturn("foo/bar3");
-
-        $fourthTheme->equals(Argument::any())->willReturn(false);
         $fourthTheme->getLogicalName()->willReturn("foo/bar4");
 
         $this->addTheme($firstTheme);
@@ -87,10 +74,10 @@ class ThemeContextSpec extends ObjectBehavior
         $this->addTheme($fourthTheme);
 
         $this->getThemesSortedByPriorityInAscendingOrder()->shouldReturn([
-            $secondTheme,
-            $fourthTheme,
-            $firstTheme,
-            $thirdTheme,
+            "foo/bar2" => $secondTheme,
+            "foo/bar4" => $fourthTheme,
+            "foo/bar1" => $firstTheme,
+            "foo/bar3" => $thirdTheme,
         ]);
     }
 
@@ -100,16 +87,9 @@ class ThemeContextSpec extends ObjectBehavior
         ThemeInterface $thirdTheme,
         ThemeInterface $fourthTheme
     ) {
-        $firstTheme->equals(Argument::any())->willReturn(false);
         $firstTheme->getLogicalName()->willReturn("foo/bar1");
-
-        $secondTheme->equals(Argument::any())->willReturn(false);
         $secondTheme->getLogicalName()->willReturn("foo/bar2");
-
-        $thirdTheme->equals(Argument::any())->willReturn(false);
         $thirdTheme->getLogicalName()->willReturn("foo/bar3");
-
-        $fourthTheme->equals(Argument::any())->willReturn(false);
         $fourthTheme->getLogicalName()->willReturn("foo/bar4");
 
         $this->addTheme($firstTheme);
@@ -118,10 +98,10 @@ class ThemeContextSpec extends ObjectBehavior
         $this->addTheme($fourthTheme);
 
         $this->getThemesSortedByPriorityInDescendingOrder()->shouldReturn([
-            $thirdTheme,
-            $firstTheme,
-            $fourthTheme,
-            $secondTheme,
+            "foo/bar3" => $thirdTheme,
+            "foo/bar1" => $firstTheme,
+            "foo/bar4" => $fourthTheme,
+            "foo/bar2" => $secondTheme,
         ]);
     }
 
@@ -136,10 +116,7 @@ class ThemeContextSpec extends ObjectBehavior
 
     function it_shows_themes_priority(ThemeInterface $firstTheme, ThemeInterface $secondTheme)
     {
-        $firstTheme->equals(Argument::any())->willReturn(false);
         $firstTheme->getLogicalName()->willReturn("foo/bar1");
-
-        $secondTheme->equals(Argument::any())->willReturn(false);
         $secondTheme->getLogicalName()->willReturn("foo/bar2");
 
         $this->addTheme($firstTheme, 5);

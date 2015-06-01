@@ -2,9 +2,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
-use Sylius\Bundle\ThemeBundle\Exception\InvalidArgumentException;
-use Sylius\Bundle\ThemeBundle\Finder\ThemeFinderInterface;
-use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
@@ -23,11 +20,11 @@ class ThemeRepository implements ThemeRepositoryInterface
     public function __construct(array $themes = [])
     {
         foreach ($themes as $theme) {
-            if ($theme instanceof ThemeInterface) {
-                $this->themes[] = $theme;
-            } else {
-                $this->themes[] = unserialize($theme);
+            if (!$theme instanceof ThemeInterface) {
+                $theme = unserialize($theme);
             }
+
+            $this->themes[$theme->getLogicalName()] = $theme;
         }
     }
 
@@ -44,13 +41,7 @@ class ThemeRepository implements ThemeRepositoryInterface
      */
     public function findByLogicalName($logicalName)
     {
-        foreach ($this->themes as $theme) {
-            if ($logicalName === $theme->getLogicalName()) {
-                return $theme;
-            }
-        }
-
-        return null;
+        return isset($this->themes[$logicalName]) ? $this->themes[$logicalName] : null;
     }
 
     /**

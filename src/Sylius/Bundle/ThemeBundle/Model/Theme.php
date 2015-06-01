@@ -35,14 +35,6 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(ThemeInterface $theme)
-    {
-        return $this->getLogicalName() === $theme->getLogicalName() || $this->getPath() === $theme->getPath();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setName($name)
     {
         $this->name = $name;

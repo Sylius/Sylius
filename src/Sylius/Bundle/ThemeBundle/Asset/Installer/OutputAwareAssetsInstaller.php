@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareAssetsInstallerInterface
+class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareInterface
 {
     /**
      * @var OutputInterface
@@ -29,7 +29,7 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareA
     public function installAssets($targetDir, $symlinkMask)
     {
         if ($this->hasOutput()) {
-            if (self::HARD_COPY !== $symlinkMask) {
+            if (AssetsInstallerInterface::HARD_COPY !== $symlinkMask) {
                 $this->output->writeln('Trying to install assets as <comment>symbolic links</comment>.');
             } else {
                 $this->output->writeln('Installing assets as <comment>hard copies</comment>.');
@@ -46,44 +46,18 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareA
     {
         $sources = $this->findAssetsPathsForBundle($bundle);
 
-        if (0 === count($sources)) {
-            $effectiveSymlinkMask = $symlinkMask;
-        } else {
-            if ($this->hasOutput()) {
-                $this->output->writeln(sprintf('Installing assets for <comment>%s</comment>', $bundle->getNamespace(), $targetDir));
-            }
+        if (empty($sources)) {
+            return $symlinkMask;
+        }
 
-            $effectiveSymlinkMask = parent::installBundleAssets($bundle, $targetDir, $symlinkMask);
+        if ($this->hasOutput()) {
+            $this->output->writeln(sprintf('Installing assets for <comment>%s</comment>', $bundle->getNamespace(), $targetDir));
+        }
 
-            if ($this->hasOutput()) {
-                if (self::RELATIVE_SYMLINK === $symlinkMask) {
-                    if (self::SYMLINK === $effectiveSymlinkMask) {
-                        // Wanted to install assets using relative symbolic links, but used absolute symbolic links.
-                        $this->output->writeln('It looks like your system doesn\'t support relative symbolic links, so the assets were installed by using absolute symbolic links.');
-                        return $effectiveSymlinkMask;
-                    }
-                }
+        $effectiveSymlinkMask = parent::installBundleAssets($bundle, $targetDir, $symlinkMask);
 
-                if (self::HARD_COPY !== $symlinkMask) {
-                    if (self::HARD_COPY !== $effectiveSymlinkMask) {
-                        // Wanted to install assets using symbolic links (relative or absolute), and it was successful.
-                        $this->output->writeln('The assets were installed using symbolic links.');
-                        return $effectiveSymlinkMask;
-                    } else {
-                        // Wanted to install assets using symbolic links, but they was copied.
-                        $this->output->writeln('It looks like your system doesn\'t support symbolic links, so the assets were installed by copying them.');
-                        return $effectiveSymlinkMask;
-                    }
-                }
-
-                if (self::HARD_COPY === $symlinkMask) {
-                    if (self::HARD_COPY === $effectiveSymlinkMask) {
-                        // Wanted to install assets by copying, and it was successfull.
-                        $this->output->writeln('The assets were copied.');
-                        return $effectiveSymlinkMask;
-                    }
-                }
-            }
+        if ($this->hasOutput()) {
+            $this->output->writeln($this->provideResultComment($symlinkMask, $effectiveSymlinkMask));
         }
 
         return $effectiveSymlinkMask;
@@ -95,5 +69,35 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareA
     private function hasOutput()
     {
         return null !== $this->output;
+    }
+
+    /**
+     * @param integer $symlinkMask
+     * @param integer $effectiveSymlinkMask
+     *
+     * @return string
+     */
+    private function provideResultComment($symlinkMask, $effectiveSymlinkMask)
+    {
+        if ($effectiveSymlinkMask === $symlinkMask) {
+            switch ($symlinkMask) {
+                case AssetsInstallerInterface::HARD_COPY:
+                    return 'The assets were copied.';
+                case AssetsInstallerInterface::SYMLINK:
+                    return 'The assets were installed using symbolic links.';
+                case AssetsInstallerInterface::RELATIVE_SYMLINK:
+                    return 'The assets were installed using relative symbolic links.';
+            }
+        }
+
+        switch ($symlinkMask + $effectiveSymlinkMask) {
+            case AssetsInstallerInterface::SYMLINK:
+            case AssetsInstallerInterface::RELATIVE_SYMLINK:
+                return 'It looks like your system doesn\'t support symbolic links, so the assets were copied.';
+            case AssetsInstallerInterface::RELATIVE_SYMLINK + AssetsInstallerInterface::SYMLINK:
+                return 'It looks like your system doesn\'t support relative symbolic links, so the assets were installed by using absolute symbolic links.';
+        }
+
+        return 'Something gone bad, can\'t provide the result of assets installing!';
     }
 }

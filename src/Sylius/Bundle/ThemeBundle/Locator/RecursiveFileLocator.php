@@ -3,6 +3,7 @@
 namespace Sylius\Bundle\ThemeBundle\Locator;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -27,7 +28,7 @@ class RecursiveFileLocator implements FileLocatorInterface
      */
     public function locate($name, $currentPath = null, $first = true)
     {
-        if ('' == $name) {
+        if (empty($name)) {
             throw new \InvalidArgumentException('An empty file name is not valid to be located.');
         }
 
@@ -56,12 +57,14 @@ class RecursiveFileLocator implements FileLocatorInterface
             ->in($directories)
         ;
 
-        /** @var \SplFileInfo[] $finder */
-        foreach ($finder as $file) {
-            $filepaths[] = $file->getPathname();
-
-            if (true === $first) {
-                return array_pop($filepaths);
+        /** @var SplFileInfo $file */
+        if (true === $first) {
+            if (null !== $file = $finder->getIterator()->current()) {
+                return $file->getPathname();
+            }
+        } else {
+            foreach ($finder as $file) {
+                $filepaths[] = $file->getPathname();
             }
         }
 

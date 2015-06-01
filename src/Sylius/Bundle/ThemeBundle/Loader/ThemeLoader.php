@@ -2,7 +2,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
-use Sylius\Bundle\ThemeBundle\Exception\InvalidArgumentException;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Symfony\Component\Config\Loader\Loader;
 
@@ -32,7 +31,7 @@ abstract class ThemeLoader extends Loader
     public function load($resource, $type = null)
     {
         if (!file_exists($resource)) {
-            throw new InvalidArgumentException(sprintf('Given theme metadata file "%s" does not exists!', $resource));
+            throw new \InvalidArgumentException(sprintf('Given theme metadata file "%s" does not exists!', $resource));
         }
 
         $themeData = $this->transformResourceContentsToArray(file_get_contents($resource));

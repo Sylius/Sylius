@@ -26,9 +26,9 @@ class PathPackage extends BasePathPackage
     public function __construct(
         $basePath,
         VersionStrategyInterface $versionStrategy,
-        ContextInterface $context = null,
         ThemeContextInterface $themeContext,
-        PathResolverInterface $pathResolver
+        PathResolverInterface $pathResolver,
+        ContextInterface $context = null
     ) {
         parent::__construct($basePath, $versionStrategy, $context);
 
@@ -46,17 +46,15 @@ class PathPackage extends BasePathPackage
         }
 
         $assetPath = $path;
-        if (null !== $this->themeContext) {
-            foreach ($this->themeContext->getThemesSortedByPriorityInDescendingOrder() as $theme) {
-                $availableAssetPath = $this->pathResolver->resolve($path, $theme);
+        foreach ($this->themeContext->getThemesSortedByPriorityInDescendingOrder() as $theme) {
+            $availableAssetPath = $this->pathResolver->resolve($path, $theme);
 
-                if (file_exists($availableAssetPath)) {
-                    $assetPath = $availableAssetPath;
-                    break;
-                }
+            if (file_exists($availableAssetPath)) {
+                $assetPath = $availableAssetPath;
+                break;
             }
         }
-        
-        return $this->getBasePath().ltrim($this->getVersionStrategy()->applyVersion($assetPath), '/');
+
+        return $this->getBasePath() . ltrim($this->getVersionStrategy()->applyVersion($assetPath), '/');
     }
 }

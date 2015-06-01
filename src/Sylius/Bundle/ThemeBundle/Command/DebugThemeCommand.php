@@ -4,6 +4,8 @@ namespace Sylius\Bundle\ThemeBundle\Command;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -30,27 +32,21 @@ class DebugThemeCommand extends ContainerAwareCommand
         /** @var ThemeInterface[] $themes */
         $themes = $this->getContainer()->get('sylius.repository.theme')->findAll();
 
-        if (0 < count($themes)) {
-            $output->writeln("<question>Succesfully loaded themes:</question>");
-
-            $maxName = 4;
-            $maxLogicalName = 12;
-            $maxPath = 4;
-
-            foreach ($themes as $theme) {
-                $maxName = max($maxName, strlen($theme->getName()));
-                $maxLogicalName = max($maxLogicalName, strlen($theme->getLogicalName()));
-                $maxPath = max($maxPath, strlen($theme->getPath()));
-            }
-
-            $format = "%-{$maxName}s  %-{$maxLogicalName}s  %-{$maxPath}s";
-            $formatHeader = "%-" . ($maxName + 19) . "s  %-" . ($maxLogicalName + 19) . "s  %s";
-
-            $output->writeln(sprintf($formatHeader, "<comment>Name</comment>", "<comment>Logical name</comment>", "<comment>Path</comment>"));
-
-            foreach ($themes as $theme) {
-                $output->writeln(sprintf($format, $theme->getName(), $theme->getLogicalName(), $theme->getPath()));
-            }
+        if (empty($themes)) {
+            $output->writeln("<error>There are no themes.</error>");
+            return;
         }
+
+        $output->writeln("<question>Succesfully loaded themes:</question>");
+
+        $table = new Table($output);
+        $table->setHeaders(['Name', 'Logical name', 'Path']);
+
+        foreach ($themes as $theme) {
+            $table->addRow([$theme->getName(), $theme->getLogicalName(), $theme->getPath()]);
+        }
+
+        $table->setStyle("borderless");
+        $table->render();
     }
 }

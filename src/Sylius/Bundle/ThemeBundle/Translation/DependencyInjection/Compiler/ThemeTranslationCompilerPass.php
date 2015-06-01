@@ -18,6 +18,53 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        $dirs = $this->findTranslationsDirs($container);
+
+        if (empty($dirs)) {
+            return;
+        }
+
+        $translator = $container->findDefinition('translator.default');
+
+        // Register translation resources
+        foreach ($dirs as $dir) {
+            $container->addResource(new DirectoryResource($dir));
+        }
+
+        $files = array();
+        $finder = Finder::create()
+            ->files()
+            ->filter(function (\SplFileInfo $file) {
+                return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
+            })
+            ->in($dirs)
+        ;
+
+        /** @var \SplFileInfo[] $finder */
+        foreach ($finder as $file) {
+            $locale = explode('.', $file->getBasename(), 3)[1];
+            if (!isset($files[$locale])) {
+                $files[$locale] = array();
+            }
+
+            $files[$locale][] = (string) $file;
+        }
+
+        $options = array_merge_recursive(
+            $translator->getArgument(3),
+            array('resource_files' => $files)
+        );
+
+        $translator->replaceArgument(3, $options);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     *
+     * @return array
+     */
+    private function findTranslationsDirs(ContainerBuilder $container)
+    {
         /** @var ThemeRepositoryInterface $themeRepository */
         $themeRepository = $container->get('sylius.repository.theme');
         $themes = $themeRepository->findAll();
@@ -35,39 +82,6 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
             }
         }
 
-        $translator = $container->findDefinition('translator.default');
-
-        // Register translation resources
-        if ($dirs) {
-            foreach ($dirs as $dir) {
-                $container->addResource(new DirectoryResource($dir));
-            }
-
-            $files = array();
-            $finder = Finder::create()
-                ->files()
-                ->filter(function (\SplFileInfo $file) {
-                    return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
-                })
-                ->in($dirs)
-            ;
-
-            /** @var \SplFileInfo[] $finder */
-            foreach ($finder as $file) {
-                $locale = explode('.', $file->getBasename(), 3)[1];
-                if (!isset($files[$locale])) {
-                    $files[$locale] = array();
-                }
-
-                $files[$locale][] = (string) $file;
-            }
-
-            $options = array_merge_recursive(
-                $translator->getArgument(3),
-                array('resource_files' => $files)
-            );
-
-            $translator->replaceArgument(3, $options);
-        }
+        return $dirs;
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection\Compiler;
 
-use Sylius\Bundle\ThemeBundle\Exception\InvalidArgumentException;
-use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

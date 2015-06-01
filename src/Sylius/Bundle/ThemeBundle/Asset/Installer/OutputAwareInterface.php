@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface OutputAwareAssetsInstallerInterface extends AssetsInstallerInterface
+interface OutputAwareInterface
 {
     /**
      * @param OutputInterface $output

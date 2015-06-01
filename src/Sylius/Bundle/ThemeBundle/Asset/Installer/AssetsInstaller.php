@@ -54,7 +54,7 @@ class AssetsInstaller implements AssetsInstallerInterface
     /**
      * {@inheritdoc}
      */
-    public function installAssets($targetDir = 'web', $symlinkMask)
+    public function installAssets($targetDir, $symlinkMask)
     {
         // Create the bundles directory otherwise symlink will fail.
         $targetDir = rtrim($targetDir, '/') . '/bundles/';
@@ -90,29 +90,29 @@ class AssetsInstaller implements AssetsInstallerInterface
      */
     public function installDirAssets($originDir, $targetDir, $symlinkMask)
     {
-        try {
-            if (self::RELATIVE_SYMLINK === $symlinkMask) {
-                try {
-                    $this->relativeSymlinkAssets($originDir, $targetDir);
+        if (AssetsInstallerInterface::RELATIVE_SYMLINK === $symlinkMask) {
+            try {
+                $this->relativeSymlinkAssets($originDir, $targetDir);
 
-                    return self::RELATIVE_SYMLINK;
-                } catch (IOException $exception) {
-                    // Do nothing, trying to create non-relative symlinks later.
-                }
+                return AssetsInstallerInterface::RELATIVE_SYMLINK;
+            } catch (IOException $exception) {
+                // Do nothing, trying to create non-relative symlinks later.
             }
+        }
 
-            if (self::HARD_COPY !== $symlinkMask) {
+        if (AssetsInstallerInterface::HARD_COPY !== $symlinkMask) {
+            try {
                 $this->symlinkAssets($originDir, $targetDir);
 
-                return self::SYMLINK;
+                return AssetsInstallerInterface::SYMLINK;
+            } catch (IOException $exception) {
+                // Do nothing, hard copy later.
             }
-        } catch (IOException $exception) {
-            // Do nothing, hard copy later.
         }
 
         $this->hardCopyAssets($originDir, $targetDir);
 
-        return self::HARD_COPY;
+        return AssetsInstallerInterface::HARD_COPY;
     }
 
     /**
@@ -121,7 +121,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      */
     protected function relativeSymlinkAssets($originDir, $targetDir)
     {
-        $this->doInstallDirAssets($originDir, $targetDir, true, true);
+        $this->doInstallAssets($originDir, $targetDir, true, true);
     }
 
     /**
@@ -130,7 +130,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      */
     protected function symlinkAssets($originDir, $targetDir)
     {
-        $this->doInstallDirAssets($originDir, $targetDir, true, false);
+        $this->doInstallAssets($originDir, $targetDir, true, false);
     }
 
     /**
@@ -139,7 +139,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      */
     protected function hardCopyAssets($originDir, $targetDir)
     {
-        $this->doInstallDirAssets($originDir, $targetDir, false, false);
+        $this->doInstallAssets($originDir, $targetDir, false, false);
     }
 
     /**
@@ -148,7 +148,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      * @param boolean $symlink
      * @param boolean $relativeSymlink
      */
-    protected function doInstallDirAssets($originDir, $targetDir, $symlink, $relativeSymlink)
+    protected function doInstallAssets($originDir, $targetDir, $symlink, $relativeSymlink)
     {
         $finder = new Finder();
         $finder->sortByName()->ignoreDotFiles(false)->in($originDir);
@@ -161,27 +161,40 @@ class AssetsInstaller implements AssetsInstallerInterface
         foreach ($finder as $file) {
             if ($file->isDir()) {
                 $this->filesystem->mkdir($targetDir . '/' . $file->getRelativePathname());
-            } else {
-                $targetFile = $targetDir . '/' . $file->getRelativePathname();
-                if (null !== $theme) {
-                    $targetFile = $this->pathResolver->resolve($targetFile, $theme);
-                }
-
-                $originFile = $file->getPathname();
-                if ($relativeSymlink) {
-                    $originFile = rtrim($this->filesystem->makePathRelative($originFile, realpath(dirname($targetFile))), '/');
-                }
-
-                if ($symlink) {
-                    $this->filesystem->symlink($originFile, $targetFile);
-
-                    if (!file_exists($targetFile)) {
-                        throw new IOException('Symbolic link is broken');
-                    }
-                } else {
-                    $this->filesystem->copy($originFile, $targetFile);
-                }
+                continue;
             }
+
+            $targetFile = $targetDir . '/' . $file->getRelativePathname();
+            if (null !== $theme) {
+                $targetFile = $this->pathResolver->resolve($targetFile, $theme);
+            }
+
+            $originFile = $file->getPathname();
+            if ($relativeSymlink) {
+                $originFile = rtrim($this->filesystem->makePathRelative($originFile, realpath(dirname($targetFile))), '/');
+            }
+
+            $this->doInstallAsset($originFile, $targetFile, $symlink);
+        }
+    }
+
+    /**
+     * @param string $originFile
+     * @param string $targetFile
+     * @param boolean $symlink
+     *
+     * @throws IOException When failed to make symbolic link, if requested.
+     */
+    protected function doInstallAsset($originFile, $targetFile, $symlink)
+    {
+        if ($symlink) {
+            $this->filesystem->symlink($originFile, $targetFile);
+
+            if (!file_exists($targetFile)) {
+                throw new IOException('Symbolic link is broken');
+            }
+        } else {
+            $this->filesystem->copy($originFile, $targetFile);
         }
     }
 
@@ -192,14 +205,20 @@ class AssetsInstaller implements AssetsInstallerInterface
      */
     protected function findAssetsPathsForBundle(BundleInterface $bundle)
     {
-        $sources[] = $bundle->getPath() . '/Resources/public';
+        $sources = [];
 
-        foreach ($this->themeRepository->findAll() as $theme) {
-            $sources[] = $theme->getPath() . '/' . $bundle->getName() . '/public';
+        $sourceDir = $bundle->getPath() . '/Resources/public';
+        if (is_dir($sourceDir)) {
+            $sources[] = $sourceDir;
         }
 
-        return array_filter($sources, function ($dir) {
-            return is_dir($dir);
-        });
+        foreach ($this->themeRepository->findAll() as $theme) {
+            $sourceDir = $theme->getPath() . '/' . $bundle->getName() . '/public';
+            if (is_dir($sourceDir)) {
+                $sources[] = $sourceDir;
+            }
+        }
+
+        return $sources;
     }
 }

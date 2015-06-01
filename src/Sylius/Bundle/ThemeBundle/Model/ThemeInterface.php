@@ -8,13 +8,6 @@ namespace Sylius\Bundle\ThemeBundle\Model;
 interface ThemeInterface
 {
     /**
-     * @param ThemeInterface $theme
-     *
-     * @return boolean
-     */
-    public function equals(ThemeInterface $theme);
-
-    /**
      * @param string $name
      */
     public function setName($name);

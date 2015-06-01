@@ -34,13 +34,7 @@ class ThemeContext implements ThemeContextInterface
      */
     public function getTheme($logicalName)
     {
-        foreach ($this->themes as $theme) {
-            if ($logicalName === $theme->getLogicalName()) {
-                return $theme;
-            }
-        }
-
-        return null;
+        return isset($this->themes[$logicalName]) ? $this->themes[$logicalName] : null;
     }
 
     /**
@@ -78,7 +72,7 @@ class ThemeContext implements ThemeContextInterface
         arsort($themesPriority);
 
         foreach ($themesPriority as $logicalName => $priority) {
-            $themes[] = $this->getTheme($logicalName);
+            $themes[$logicalName] = $this->getTheme($logicalName);
         }
 
         return $themes;
@@ -89,13 +83,7 @@ class ThemeContext implements ThemeContextInterface
      */
     public function addTheme(ThemeInterface $theme, $priority = 0)
     {
-        foreach ($this->themes as $existingTheme) {
-            if ($existingTheme->equals($theme)) {
-                return;
-            }
-        }
-
-        $this->themes[] = $theme;
+        $this->themes[$theme->getLogicalName()] = $theme;
         $this->themesPriorities[$theme->getLogicalName()] = $priority;
     }
 
@@ -104,13 +92,8 @@ class ThemeContext implements ThemeContextInterface
      */
     public function removeTheme(ThemeInterface $theme)
     {
-        foreach ($this->themes as $key => $existingTheme) {
-            if ($existingTheme->equals($theme)) {
-                unset($this->themes[$key]);
-                unset($this->themesPriorities[$theme->getLogicalName()]);
-                break;
-            }
-        }
+        unset($this->themes[$theme->getLogicalName()]);
+        unset($this->themesPriorities[$theme->getLogicalName()]);
     }
 
     /**
@@ -127,12 +110,6 @@ class ThemeContext implements ThemeContextInterface
      */
     public function hasTheme(ThemeInterface $theme)
     {
-        foreach ($this->themes as $key => $existingTheme) {
-            if ($existingTheme->equals($theme)) {
-                return true;
-            }
-        }
-
-        return false;
+        return isset($this->themes[$theme->getLogicalName()]);
     }
 }
