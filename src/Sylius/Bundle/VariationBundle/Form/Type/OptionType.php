@@ -23,28 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class OptionType extends AbstractResourceType
 {
     /**
-     * Variable object name.
-     *
-     * @var string
-     */
-    protected $variableName;
-
-    /**
-     * Constructor.
-     *
-     * @param string $name
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $variableName
-     */
-    public function __construct($name, $dataClass, array $validationGroups, $variableName)
-    {
-        parent::__construct($name, $dataClass, $validationGroups);
-
-        $this->variableName = $variableName;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -54,11 +32,11 @@ class OptionType extends AbstractResourceType
                 'label' => 'sylius.form.option.name'
             ))
             ->add('translations', 'a2lix_translationsForms', array(
-                'form_type' => sprintf('sylius_%s_option_translation', $this->variableName),
+                'form_type' => sprintf('sylius_%s_option_translation', $this->name),
                 'label'    => 'sylius.form.option.presentation'
             ))
             ->add('values', 'collection', array(
-                'type' => sprintf('sylius_%s_option_value', $this->variableName),
+                'type' => sprintf('sylius_%s_option_value', $this->name),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -73,6 +51,6 @@ class OptionType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_option', $this->variableName);
+        return sprintf('sylius_%s_option', $this->name);
     }
 }

@@ -24,28 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class VariantType extends AbstractResourceType
 {
     /**
-     * Variable object name.
-     *
-     * @var string
-     */
-    protected $variableName;
-
-    /**
-     * Constructor.
-     *
-     * @param string $name
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $variableName
-     */
-    public function __construct($name, $dataClass, array $validationGroups, $variableName)
-    {
-        parent::__construct($name, $dataClass, $validationGroups);
-
-        $this->variableName = $variableName;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -58,7 +36,7 @@ class VariantType extends AbstractResourceType
         ;
 
         if (!$options['master']) {
-            $builder->addEventSubscriber(new BuildVariantFormListener($this->variableName, $builder->getFormFactory()));
+            $builder->addEventSubscriber(new BuildVariantFormListener($this->name, $builder->getFormFactory()));
         }
     }
 
@@ -81,6 +59,6 @@ class VariantType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_variant', $this->variableName);
+        return sprintf('sylius_%s_variant', $this->name);
     }
 }

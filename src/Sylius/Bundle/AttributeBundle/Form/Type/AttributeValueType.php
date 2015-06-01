@@ -26,36 +26,15 @@ use Symfony\Component\Form\FormView;
 class AttributeValueType extends AbstractResourceType
 {
     /**
-     * Attributes subject name.
-     *
-     * @var string
-     */
-    protected $subjectName;
-
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $subjectName
-     */
-    public function __construct($dataClass, array $validationGroups, $subjectName)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->subjectName = $subjectName;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), array(
-                'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName)
+            ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->name), array(
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->name)
             ))
-            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->subjectName))
+            ->addEventSubscriber(new BuildAttributeValueFormListener($builder->getFormFactory(), $this->name))
         ;
 
         $this->buildAttributeValuePrototypes($builder);
@@ -78,7 +57,7 @@ class AttributeValueType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_attribute_value', $this->subjectName);
+        return sprintf('sylius_%s_attribute_value', $this->name);
     }
 
     /**
@@ -93,7 +72,7 @@ class AttributeValueType extends AbstractResourceType
         $prototypes = array();
         foreach ($attributes as $attribute) {
             $config = array_merge(array(
-                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->subjectName)
+                'label' => sprintf('sylius.form.attribute.%s_attribute_value.value', $this->name)
             ), $attribute->getConfiguration());
             $prototypes[] = $builder->create('value', $attribute->getType(), $config)->getForm();
         }

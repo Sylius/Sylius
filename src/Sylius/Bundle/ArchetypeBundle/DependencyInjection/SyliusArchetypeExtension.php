@@ -85,9 +85,9 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
 
         $archeTypeFormValidationGroups = '%sylius.validation_group.'.$archetypeAlias.'%';
 
-        $archetypeFormType = new Definition($archetypeClasses['form']);
+        $archetypeFormType = new Definition($archetypeClasses['form']['default']);
         $archetypeFormType
-            ->setArguments(array($archetypeClasses['model'], $archeTypeFormValidationGroups, $subject))
+            ->setArguments(array($subject, $archetypeClasses['model'], $archeTypeFormValidationGroups))
             ->addTag('form.type', array('alias' => 'sylius_'.$archetypeAlias))
         ;
 
@@ -100,7 +100,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
 
         $archetypeTranslationFormType = new Definition($archetypeTranslationClasses['form']['default']);
         $archetypeTranslationFormType
-            ->setArguments(array($archetypeTranslationClasses['model'], $archeTypeFormValidationGroups, $subject))
+            ->setArguments(array($subject, $archetypeTranslationClasses['model'], $archeTypeFormValidationGroups))
             ->addTag('form.type', array('alias' => 'sylius_'.$archetypeTranslationAlias))
         ;
 

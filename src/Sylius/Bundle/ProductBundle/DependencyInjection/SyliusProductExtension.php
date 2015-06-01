@@ -92,7 +92,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         'variant'      => array(
                             'model'      => 'Sylius\Component\Product\Model\Variant',
                             'controller' => 'Sylius\Bundle\ProductBundle\Controller\VariantController',
-                            'form'       => 'Sylius\Bundle\ProductBundle\Form\Type\VariantType'
+                            'form'       => array(
+                                'default' => 'Sylius\Bundle\ProductBundle\Form\Type\VariantType',
+                            ),
                         ),
                         'option'       => array(
                             'model'       => 'Sylius\Component\Product\Model\Option',
