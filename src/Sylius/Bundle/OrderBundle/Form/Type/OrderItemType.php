@@ -35,12 +35,4 @@ class OrderItemType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_order_item';
-    }
 }

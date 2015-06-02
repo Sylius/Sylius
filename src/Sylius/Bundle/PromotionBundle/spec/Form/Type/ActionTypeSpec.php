@@ -27,7 +27,7 @@ class ActionTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $actionRegistry)
     {
-        $this->beConstructedWith('Action', array('sylius'), $actionRegistry);
+        $this->beConstructedWith('sylius_action', 'Action', array('sylius'), $actionRegistry);
     }
 
     function it_is_initializabled()

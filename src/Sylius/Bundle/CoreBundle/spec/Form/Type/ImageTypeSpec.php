@@ -17,7 +17,7 @@ class ImageTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Image');
+        $this->beConstructedWith('sylius_', 'Image');
     }
 
     function it_should_be_initializable()

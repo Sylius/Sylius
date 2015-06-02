@@ -45,12 +45,4 @@ class RequestType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_contact_request';
-    }
 }

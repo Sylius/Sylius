@@ -23,7 +23,7 @@ class TaxRateTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxCategory', array('sylius'));
+        $this->beConstructedWith('sylius_tax_rate', 'TaxCategory', array('sylius'));
     }
 
     function it_is_initializable()

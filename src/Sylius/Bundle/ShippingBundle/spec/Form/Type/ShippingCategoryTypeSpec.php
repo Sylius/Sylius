@@ -23,7 +23,7 @@ class ShippingCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShippingCategory', array('sylius'));
+        $this->beConstructedWith('sylius_shipping_category', 'ShippingCategory', array('sylius'));
     }
 
     function it_is_initializable()

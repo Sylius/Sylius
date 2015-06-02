@@ -32,13 +32,14 @@ class ZoneType extends AbstractResourceType
     /**
      * Constructor.
      *
+     * @param string   $name
      * @param string   $dataClass
      * @param string[] $validationGroups
      * @param string[] $scopeChoices
      */
-    public function __construct($dataClass, array $validationGroups, array $scopeChoices = array())
+    public function __construct($name, $dataClass, array $validationGroups, array $scopeChoices = array())
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
 
         $this->scopeChoices = $scopeChoices;
     }
@@ -69,13 +70,5 @@ class ZoneType extends AbstractResourceType
                 ))
             ;
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_zone';
     }
 }

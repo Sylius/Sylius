@@ -24,7 +24,7 @@ class CountryTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Country', array('sylius'));
+        $this->beConstructedWith('sylius_country', 'Country', array('sylius'));
     }
 
     function it_is_initializable()

@@ -24,27 +24,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class AttributeTranslationType extends AbstractResourceType
 {
     /**
-     * Subject name.
-     *
-     * @var string
-     */
-    protected $subjectName;
-
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $subjectName
-     */
-    public function __construct($dataClass, array $validationGroups, $subjectName)
-    {
-       parent::__construct($dataClass, $validationGroups);
-
-        $this->subjectName = $subjectName;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -61,6 +40,6 @@ class AttributeTranslationType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_attribute_translation', $this->subjectName);
+        return sprintf('sylius_%s_attribute_translation', $this->name);
     }
 }

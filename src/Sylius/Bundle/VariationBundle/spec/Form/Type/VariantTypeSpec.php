@@ -21,7 +21,7 @@ class VariantTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Variant', array(), 'server');
+        $this->beConstructedWith('server', 'Variant', array(), 'server');
     }
 
     function it_is_initializable()

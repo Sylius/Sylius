@@ -92,12 +92,4 @@ class MenuType extends AbstractResourceType
 
         parent::setDefaultOptions($resolver);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_menu';
-    }
 }

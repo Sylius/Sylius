@@ -26,7 +26,7 @@ class AttributeValueTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('AttributeValue', array('sylius'), 'server');
+        $this->beConstructedWith('server', 'AttributeValue', array('sylius'));
     }
 
     function it_is_initializable()

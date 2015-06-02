@@ -32,12 +32,4 @@ class ShippingMethodTranslationType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_shipping_method_translation';
-    }
 }

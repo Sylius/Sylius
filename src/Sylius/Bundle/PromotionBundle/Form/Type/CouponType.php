@@ -39,12 +39,4 @@ class CouponType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_coupon';
-    }
 }

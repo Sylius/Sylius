@@ -29,13 +29,14 @@ class PaymentStepType extends AbstractResourceType
     protected $channelContext;
 
     /**
+     * @param string                  $name
      * @param string                  $dataClass
      * @param array                   $validationGroups
      * @param ChannelContextInterface $channelContext
      */
-    public function __construct($dataClass, array $validationGroups = array(), ChannelContextInterface $channelContext)
+    public function __construct($name, $dataClass, array $validationGroups = array(), ChannelContextInterface $channelContext)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
         $this->channelContext = $channelContext;
     }
 
@@ -58,13 +59,5 @@ class PaymentStepType extends AbstractResourceType
                 )
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_checkout_payment';
     }
 }

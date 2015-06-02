@@ -29,13 +29,14 @@ class GuestType extends AbstractResourceType
     private $customerRepository;
 
     /**
+     * @param string              $name
      * @param string              $dataClass
      * @param array               $validationGroups
      * @param RepositoryInterface $customerRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
+    public function __construct($name, $dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
     {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
         $this->customerRepository = $customerRepository;
     }
     /**
@@ -50,13 +51,5 @@ class GuestType extends AbstractResourceType
             ->addEventSubscriber(new CustomerRegistrationFormListener($this->customerRepository))
             ->setDataLocked(false)
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_checkout_guest';
     }
 }

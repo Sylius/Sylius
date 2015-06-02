@@ -37,27 +37,13 @@ class SyliusInventoryExtension extends AbstractResourceExtension
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
         );
 
         $container->setParameter('sylius.backorders', $config['backorders']);
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
-
-        $classes = $config['classes'];
-
-        $container->setParameter('sylius.controller.inventory_unit.class', $classes['inventory_unit']['controller']);
-        $container->setParameter('sylius.model.inventory_unit.class', $classes['inventory_unit']['model']);
-
-        if (array_key_exists('repository', $classes['inventory_unit'])) {
-            $container->setParameter(
-                'sylius.repository.inventory_unit.class',
-                $classes['inventory_unit']['repository']
-            );
-        }
-
-        $container->setParameter('sylius.model.stockable.class', $classes['stockable']['model']);
 
         if (isset($config['events'])) {
             $listenerDefinition = $container->getDefinition('sylius.listener.inventory');

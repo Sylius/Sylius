@@ -31,12 +31,4 @@ class CartItemType extends AbstractResourceType
             ->add('quantity', 'integer', array('attr' => array('min' => 1)))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_cart_item';
-    }
 }

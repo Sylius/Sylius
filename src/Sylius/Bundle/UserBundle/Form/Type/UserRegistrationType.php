@@ -13,7 +13,6 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -33,13 +32,5 @@ class UserRegistrationType extends AbstractResourceType
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_user_registration';
     }
 }

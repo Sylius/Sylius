@@ -23,7 +23,7 @@ class TopicTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Contact', array('sylius'));
+        $this->beConstructedWith('sylius_contact_topic', 'Contact', array('sylius'));
     }
 
     function it_is_initializable()

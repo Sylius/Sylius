@@ -22,23 +22,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ArchetypeTranslationType extends AbstractResourceType
 {
     /**
-     * @var string
-     */
-    private $subject;
-
-    /**
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $subject
-     */
-    function __construct($dataClass, array $validationGroups, $subject)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->subject = $subject;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -55,6 +38,6 @@ class ArchetypeTranslationType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_archetype_translation', $this->subject);
+        return sprintf('sylius_%s_archetype_translation', $this->name);
     }
 }

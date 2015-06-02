@@ -23,7 +23,7 @@ class UserTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith('Sylius\Component\Core\Model\User', array('sylius'), $canonicalizer);
+        $this->beConstructedWith('sylius_user', 'Sylius\Component\Core\Model\User', array('sylius'), $canonicalizer);
     }
 
     function it_is_initializable()

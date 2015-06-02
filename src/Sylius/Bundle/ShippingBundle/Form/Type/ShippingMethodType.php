@@ -45,14 +45,20 @@ class ShippingMethodType extends AbstractResourceType
     /**
      * Constructor.
      *
+     * @param string                       $name
      * @param string                       $dataClass
      * @param array                        $validationGroups
      * @param CalculatorRegistryInterface  $calculatorRegistry
      * @param RuleCheckerRegistryInterface $checkerRegistry
      */
-    public function __construct($dataClass, array $validationGroups, CalculatorRegistryInterface $calculatorRegistry, RuleCheckerRegistryInterface $checkerRegistry)
-    {
-        parent::__construct($dataClass, $validationGroups);
+    public function __construct(
+        $name,
+        $dataClass,
+        array $validationGroups,
+        CalculatorRegistryInterface $calculatorRegistry,
+        RuleCheckerRegistryInterface $checkerRegistry
+    ) {
+        parent::__construct($name, $dataClass, $validationGroups);
 
         $this->calculatorRegistry = $calculatorRegistry;
         $this->checkerRegistry = $checkerRegistry;
@@ -115,13 +121,5 @@ class ShippingMethodType extends AbstractResourceType
                 $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_shipping_method';
     }
 }

@@ -39,12 +39,4 @@ class CurrencyType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_currency';
-    }
 }

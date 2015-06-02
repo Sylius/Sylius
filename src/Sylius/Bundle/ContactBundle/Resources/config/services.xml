@@ -17,16 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sylius.form.type.contact_request" class="%sylius.form.type.contact_request.class%">
-            <argument>%sylius.model.contact_request.class%</argument>
-            <argument>%sylius.validation_group.contact_request%</argument>
-            <tag name="form.type" alias="sylius_contact_request" />
-        </service>
-        <service id="sylius.form.type.contact_topic" class="%sylius.form.type.contact_topic.class%">
-            <argument>%sylius.model.contact_topic.class%</argument>
-            <argument>%sylius.validation_group.contact_topic%</argument>
-            <tag name="form.type" alias="sylius_contact_topic" />
-        </service>
         <service id="sylius.form.type.contact_topic_choice" class="%sylius.form.type.contact_topic_choice.class%">
             <argument>%sylius.model.contact_topic.class%</argument>
             <tag name="form.type" alias="sylius_contact_topic_choice" />

@@ -23,7 +23,7 @@ class CouponTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Coupon', array('sylius'));
+        $this->beConstructedWith('sylius_coupon', 'Coupon', array('sylius'));
     }
 
     function it_should_be_initializable()

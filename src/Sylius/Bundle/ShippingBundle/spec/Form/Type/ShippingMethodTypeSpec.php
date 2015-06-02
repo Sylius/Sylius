@@ -34,7 +34,7 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         FormBuilder $builder,
         FormFactoryInterface $factory
     ) {
-        $this->beConstructedWith('ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
+        $this->beConstructedWith('sylius_shipping_method', 'ShippingMethod', array('sylius'), $calculatorRegistry, $checkerRegistry);
 
         $builder->getFormFactory()->willReturn($factory);
         $checkerRegistry->getCheckers()->willReturn(array());

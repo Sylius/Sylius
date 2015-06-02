@@ -36,12 +36,4 @@ class TaxonType extends AbstractResourceType
             ->addEventSubscriber(new BuildTaxonFormListener($builder->getFormFactory()))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_taxon';
-    }
 }

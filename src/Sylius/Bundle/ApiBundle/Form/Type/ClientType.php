@@ -32,12 +32,4 @@ class ClientType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_api_client';
-    }
 }

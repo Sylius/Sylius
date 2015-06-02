@@ -54,12 +54,4 @@ class UserType extends AbstractResourceType
             },
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_user';
-    }
 }

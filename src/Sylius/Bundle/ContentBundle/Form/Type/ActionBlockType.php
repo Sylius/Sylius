@@ -48,12 +48,4 @@ class ActionBlockType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_action_block';
-    }
 }

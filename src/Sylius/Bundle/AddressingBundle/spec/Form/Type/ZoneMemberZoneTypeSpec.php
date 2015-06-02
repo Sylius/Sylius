@@ -23,7 +23,7 @@ class ZoneMemberZoneTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ZoneMember', array('sylius'));
+        $this->beConstructedWith('sylius_zone_member_zone', 'ZoneMember', array('sylius'));
     }
 
     function it_is_initializable()

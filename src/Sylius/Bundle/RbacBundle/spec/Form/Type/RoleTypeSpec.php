@@ -24,7 +24,7 @@ class RoleTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Role', array('sylius'));
+        $this->beConstructedWith('sylius_role', 'Role', array('sylius'));
     }
 
     function it_is_initializable()

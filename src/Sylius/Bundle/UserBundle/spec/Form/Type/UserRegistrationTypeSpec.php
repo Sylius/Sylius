@@ -23,7 +23,7 @@ class UserRegistrationTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith('Sylius\Component\User\Model\User', array('sylius'), $canonicalizer);
+        $this->beConstructedWith('sylius_user_registration', 'Sylius\Component\User\Model\User', array('sylius'), $canonicalizer);
     }
 
     function it_is_initializable()

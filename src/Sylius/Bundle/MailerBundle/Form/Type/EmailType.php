@@ -54,12 +54,4 @@ class EmailType extends AbstractResourceType
         ;
 
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_email';
-    }
 }

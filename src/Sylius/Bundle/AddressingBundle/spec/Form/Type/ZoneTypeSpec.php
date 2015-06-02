@@ -24,7 +24,7 @@ class ZoneTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Zone', array('sylius'), array('shipping', 'pricing'));
+        $this->beConstructedWith('sylius_zone', 'Zone', array('sylius'), array('shipping', 'pricing'));
     }
 
     function it_is_initializable()

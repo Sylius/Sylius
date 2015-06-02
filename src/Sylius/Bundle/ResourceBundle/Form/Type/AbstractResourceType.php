@@ -30,13 +30,20 @@ abstract class AbstractResourceType extends AbstractType
     protected $validationGroups = array();
 
     /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @param string   $name
      * @param string   $dataClass        FQCN
      * @param string[] $validationGroups
      */
-    public function __construct($dataClass, array $validationGroups = array())
+    public function __construct($name, $dataClass, array $validationGroups = array())
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
+        $this->name = $name;
     }
 
     /**
@@ -48,5 +55,13 @@ abstract class AbstractResourceType extends AbstractType
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

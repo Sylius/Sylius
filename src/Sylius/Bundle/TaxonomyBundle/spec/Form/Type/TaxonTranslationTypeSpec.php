@@ -24,7 +24,7 @@ class TaxonTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxonTranslation', array('sylius'));
+        $this->beConstructedWith('sylius_taxon_translations', 'TaxonTranslation', array('sylius'));
     }
 
     function it_is_initializable()

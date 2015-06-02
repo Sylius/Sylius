@@ -29,13 +29,18 @@ class CustomerRegistrationType extends AbstractResourceType
     private $customerRepository;
 
     /**
+     * @param string              $name
      * @param string              $dataClass
      * @param array               $validationGroups
      * @param RepositoryInterface $customerRepository
      */
-    public function __construct($dataClass, array $validationGroups = array(), RepositoryInterface $customerRepository)
-    {
-        parent::__construct($dataClass, $validationGroups);
+    public function __construct(
+        $name,
+        $dataClass,
+        array $validationGroups = array(),
+        RepositoryInterface $customerRepository
+    ) {
+        parent::__construct($name, $dataClass, $validationGroups);
         $this->customerRepository = $customerRepository;
     }
 
@@ -73,13 +78,5 @@ class CustomerRegistrationType extends AbstractResourceType
             'validation_groups' => $this->validationGroups,
             'cascade_validation' => true
         ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_customer_registration';
     }
 }

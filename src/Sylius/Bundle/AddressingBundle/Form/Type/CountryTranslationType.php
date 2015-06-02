@@ -32,12 +32,4 @@ class CountryTranslationType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_country_translation';
-    }
 }

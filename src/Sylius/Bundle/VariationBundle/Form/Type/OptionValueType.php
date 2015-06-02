@@ -22,27 +22,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class OptionValueType extends AbstractResourceType
 {
     /**
-     * Variable object name.
-     *
-     * @var string
-     */
-    protected $variableName;
-
-    /**
-     * Constructor.
-     *
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $variableName
-     */
-    public function __construct($dataClass, array $validationGroups, $variableName)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->variableName = $variableName;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -59,6 +38,6 @@ class OptionValueType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_option_value', $this->variableName);
+        return sprintf('sylius_%s_option_value', $this->name);
     }
 }

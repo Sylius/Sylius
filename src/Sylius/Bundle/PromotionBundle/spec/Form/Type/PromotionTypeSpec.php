@@ -27,7 +27,7 @@ class PromotionTypeSpec extends ObjectBehavior
         ServiceRegistryInterface $checkerRegistry,
         ServiceRegistryInterface $actionRegistry
     ) {
-        $this->beConstructedWith('Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
+        $this->beConstructedWith('sylius_promotion', 'Promotion', array('sylius'), $checkerRegistry, $actionRegistry);
     }
 
     function it_should_be_initializable()

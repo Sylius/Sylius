@@ -23,7 +23,7 @@ class AdjustmentTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Adjustment', array('sylius'));
+        $this->beConstructedWith('sylius_adjustment', 'Adjustment', array('sylius'));
     }
 
     function it_is_initializable()

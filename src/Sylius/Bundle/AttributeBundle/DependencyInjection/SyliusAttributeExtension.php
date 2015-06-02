@@ -98,9 +98,9 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $attributeTranslationClasses = $attributeClasses['translation'];
         $attributeValueClasses = $config[$attributeValueAlias];
 
-        $attributeFormType = new Definition($attributeClasses['form']);
+        $attributeFormType = new Definition($attributeClasses['form']['default']);
         $attributeFormType
-            ->setArguments(array($attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%', $subject))
+            ->setArguments(array($subject, $attributeClasses['model'], '%sylius.validation_group.'.$attributeAlias.'%'))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeAlias))
         ;
 
@@ -108,7 +108,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $attributeFormTranslationType = new Definition($attributeTranslationClasses['form']['default']);
         $attributeFormTranslationType
-            ->setArguments(array($attributeTranslationClasses['model'], '%sylius.validation_group.'.$attributeTranslationAlias.'%', $subject))
+            ->setArguments(array($subject, $attributeTranslationClasses['model'], '%sylius.validation_group.'.$attributeTranslationAlias.'%'))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeTranslationAlias))
         ;
 
@@ -126,12 +126,12 @@ class SyliusAttributeExtension extends AbstractResourceExtension
 
         $container->setDefinition('sylius.form.type.'.$attributeAlias.'_choice', $attributeChoiceFormType);
 
-        $attributeValueFormType = new Definition($attributeValueClasses['form']);
+        $attributeValueFormType = new Definition($attributeValueClasses['form']['default']);
         $attributeValueFormType
             ->setArguments(array(
+                $subject,
                 $attributeValueClasses['model'],
                 '%sylius.validation_group.'.$attributeValueAlias.'%',
-                $subject
             ))
             ->addTag('form.type', array('alias' => 'sylius_'.$attributeValueAlias))
         ;

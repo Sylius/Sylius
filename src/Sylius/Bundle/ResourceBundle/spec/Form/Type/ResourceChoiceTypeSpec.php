@@ -21,7 +21,7 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
+        $this->beConstructedWith('sylius_country_choice', 'CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
     }
 
     function it_is_initializable()
@@ -41,7 +41,11 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
 
     function it_has_a_parent_type_for_orm_driver()
     {
-        $this->beConstructedWith('CountryModel', SyliusResourceBundle::DRIVER_DOCTRINE_ORM, 'sylius_country_choice');
+        $this->beConstructedWith(
+            'sylius_country_choice',
+            'CountryModel',
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+        );
 
         $this->getParent()->shouldReturn('entity');
     }
@@ -49,9 +53,9 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
     function it_has_a_parent_type_for_mongodb_odm_driver()
     {
         $this->beConstructedWith(
+            'sylius_country_choice',
             'CountryModel',
-            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-            'sylius_country_choice'
+            SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM
         );
 
         $this->getParent()->shouldReturn('document');
@@ -60,9 +64,9 @@ class ResourceChoiceTypeSpec extends ObjectBehavior
     function it_has_a_parent_type_for_phpcr_odm_driver()
     {
         $this->beConstructedWith(
+            'sylius_country_choice',
             'CountryModel',
-            SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM,
-            'sylius_country_choice'
+            SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
         );
 
         $this->getParent()->shouldReturn('phpcr_document');

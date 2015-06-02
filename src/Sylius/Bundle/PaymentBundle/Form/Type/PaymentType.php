@@ -50,12 +50,4 @@ class PaymentType extends AbstractResourceType
             ))
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_payment';
-    }
 }

@@ -22,7 +22,7 @@ class CartTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Cart', array('sylius'));
+        $this->beConstructedWith('sylius_cart', 'Cart', array('sylius'));
     }
 
     function it_is_initializable()

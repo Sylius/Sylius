@@ -23,7 +23,7 @@ class LocaleTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Locale', array('sylius'));
+        $this->beConstructedWith('sylius_locale', 'Locale', array('sylius'));
     }
 
     function it_is_initializable()

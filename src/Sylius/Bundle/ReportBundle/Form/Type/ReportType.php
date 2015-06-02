@@ -44,16 +44,20 @@ class ReportType extends AbstractResourceType
     /**
      * Constructor.
      *
+     * @param string                   $name
+     * @param string                   $dataClass
+     * @param array                    $validationGroups
      * @param ServiceRegistryInterface $rendererRegistry
      * @param ServiceRegistryInterface $dataFetcherRegistry
      */
     public function __construct(
+        $name,
         $dataClass,
         array $validationGroups,
         ServiceRegistryInterface $rendererRegistry,
         ServiceRegistryInterface $dataFetcherRegistry
     ) {
-        parent::__construct($dataClass, $validationGroups);
+        parent::__construct($name, $dataClass, $validationGroups);
 
         $this->rendererRegistry = $rendererRegistry;
         $this->dataFetcherRegistry = $dataFetcherRegistry;
@@ -135,13 +139,5 @@ class ReportType extends AbstractResourceType
                 $view->vars['prototypes'][$group][$group.'_'.$type] = $prototype->createView($view);
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_report';
     }
 }
