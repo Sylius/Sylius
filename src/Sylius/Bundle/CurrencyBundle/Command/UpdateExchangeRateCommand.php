@@ -21,6 +21,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateExchangeRateCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -40,13 +43,16 @@ class UpdateExchangeRateCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Fetching data from external database.');
 
         $container = $this->getContainer();
 
-        /** @var $currencies CurrencyInterface[] */
+        /* @var $currencies CurrencyInterface[] */
         if (!$input->hasOption('all')) {
             $currencies = $container->get('sylius.currency_provider')->getAvailableCurrencies();
         } else {
