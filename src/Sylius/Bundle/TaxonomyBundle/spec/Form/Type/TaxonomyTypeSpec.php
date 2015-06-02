@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -22,9 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class TaxonomyTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(BuildTaxonomyFormListener $formListener)
     {
-        $this->beConstructedWith('Taxonomy', array('sylius'));
+        $this->beConstructedWith('Taxonomy', $formListener, array('sylius'));
     }
 
     function it_is_initializable()
@@ -40,7 +41,16 @@ class TaxonomyTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
+            ->addEventSubscriber(
+                Argument::type('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener')
+            )
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('translations', 'a2lix_translationsForms', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 

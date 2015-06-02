@@ -12,12 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonomyFormListener;
 
 class TaxonomyTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(BuildTaxonomyFormListener $formListener)
     {
-        $this->beConstructedWith('Taxonomy', array('sylius'));
+        $this->beConstructedWith('Taxonomy', $formListener, array('sylius'));
     }
 
     function it_should_be_initializable()
