@@ -42,7 +42,7 @@ class CurrencyCodeChoiceType extends AbstractType
     {
         $choices = null;
 
-        foreach($this->currencyProvider->getAvailableCurrencies() as $currency) {
+        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
             $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
         }
 
