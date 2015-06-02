@@ -57,7 +57,7 @@ class Version20150531210410 extends AbstractMigration
         $this->addSql('ALTER TABLE sylius_order ADD CONSTRAINT FK_6196A1F99395C3F3 FOREIGN KEY (customer_id) REFERENCES sylius_customer (id)');
         $this->addSql('CREATE INDEX IDX_6196A1F99395C3F3 ON sylius_order (customer_id)');
         // create customers based on guest checkouts
-        $this->addSql('INSERT INTO sylius_customer (email, email_canonical, created_at) SELECT sylius_order.email, sylius_order.email, sylius_order.created_at FROM sylius_order LEFT JOIN sylius_customer ON sylius_order.email = sylius_customer.email WHERE sylius_customer.email is NULL');
+        $this->addSql('INSERT INTO sylius_customer (email, email_canonical, created_at) SELECT sylius_order.email, sylius_order.email, sylius_order.created_at FROM sylius_order LEFT JOIN sylius_customer ON sylius_order.email = sylius_customer.email WHERE sylius_customer.email IS NULL AND sylius_order.email IS NOT NULL');
         // associate orders with customers
         $this->addSql('UPDATE sylius_order INNER JOIN sylius_user ON sylius_order.user_id = sylius_user.id INNER JOIN sylius_customer ON sylius_user.customer_id = sylius_customer.id SET sylius_order.customer_id = sylius_customer.id');
         // associate guest orders with customers
