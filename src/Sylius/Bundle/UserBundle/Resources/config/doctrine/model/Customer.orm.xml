@@ -28,7 +28,11 @@
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="birthday" column="birthday" type="datetime" nullable="true" />
-        <field name="gender" column="gender" type="string" length="1" />
+        <field name="gender" column="gender" type="string" length="1">
+            <options>
+                <option name="default">u</option>
+            </options>
+        </field>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
