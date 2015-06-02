@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Content extension.
@@ -30,7 +32,13 @@ class SyliusContentExtension extends AbstractResourceExtension
             $config,
             new Configuration(),
             $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS | self::CONFIGURE_FORMS
         );
+
+        $imagineBlock = $container->getDefinition('sylius.form.type.imagine_block');
+        $imagineBlock->addArgument(new Reference('liip_imagine.filter.configuration'));
+
+        $imagineBlock = $container->getDefinition('sylius.form.type.menu');
+        $imagineBlock->addArgument(new Parameter('cmf_menu.persistence.phpcr.menu_basepath'));
     }
 }
