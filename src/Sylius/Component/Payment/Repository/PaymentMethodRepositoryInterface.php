@@ -17,7 +17,9 @@ namespace Sylius\Component\Payment\Repository;
 interface PaymentMethodRepositoryInterface
 {
     /**
-     * @return array
+     * @param array $options
+     *
+     * @return mixed
      */
-    public function getQueryBuidlerByStatus($disabled);
+    public function getQueryBuidlerForChoiceType(array $options);
 }

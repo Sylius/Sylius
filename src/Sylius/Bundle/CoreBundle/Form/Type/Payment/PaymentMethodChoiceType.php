@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PaymentBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Payment;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType as BasePaymentMethodChoiceType;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Payment method choice type for document/entity/phpcr_document choice form types.
+ * Payment method choice type
  *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
+ * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
-class PaymentMethodChoiceType extends ResourceChoiceType
+class PaymentMethodChoiceType extends BasePaymentMethodChoiceType
 {
     /**
      * {@inheritdoc}
@@ -34,6 +33,7 @@ class PaymentMethodChoiceType extends ResourceChoiceType
         $queryBuilder = function (Options $options) {
             $reposiotryOptions = array(
                 'disabled' => $options['disabled'],
+                'channel' => $options['channel'],
             );
 
             return function (PaymentMethodRepositoryInterface $repository) use ($reposiotryOptions) {
@@ -44,9 +44,11 @@ class PaymentMethodChoiceType extends ResourceChoiceType
         $resolver
             ->setDefaults(array(
                 'query_builder' => $queryBuilder,
-                'disabled' => false,
+                'channel' => null
+            ))
+            ->setAllowedTypes(array(
+                'channel' => array('Sylius\Component\Channel\Model\ChannelInterface', 'null'),
             ))
         ;
     }
-
 }

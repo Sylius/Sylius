@@ -23,14 +23,19 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuidlerByStatus($disabled)
+    public function getQueryBuidlerForChoiceType(array $options)
     {
         $queryBuilder = $this->getCollectionQueryBuilder();
 
-        if (!$disabled) {
+        if (!$options['disabled']) {
             $queryBuilder->where('method.enabled = true');
         }
 
         return $queryBuilder;
+    }
+
+    protected function getAlias()
+    {
+        return 'method';
     }
 }
