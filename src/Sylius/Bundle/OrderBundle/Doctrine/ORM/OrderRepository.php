@@ -63,12 +63,4 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->addSelect('item')
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getAlias()
-    {
-        return 'o';
-    }
 }
