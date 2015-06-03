@@ -28,7 +28,7 @@ class EmailType extends AbstractResourceType
     {
         $builder
             ->add('code', 'text', array(
-                'label' => 'sylius.form.email.code'
+                'label' => 'sylius.form.email.code',
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
@@ -49,10 +49,9 @@ class EmailType extends AbstractResourceType
             ->add('template', 'sylius_email_template_choice', array(
                 'label'       => 'sylius.form.email.template',
                 'required'    => false,
-                'empty_value' => 'sylius.form.email.no_template'
+                'empty_value' => 'sylius.form.email.no_template',
             ))
         ;
-
     }
 
     /**

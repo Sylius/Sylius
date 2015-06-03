@@ -43,8 +43,14 @@ class SwiftMailerAdapter extends AbstractAdapter
     /**
      * {@inheritdoc}
      */
-    public function send(array $recipients, $senderAddress, $senderName, RenderedEmail $renderedEmail, EmailInterface $email, array $data)
-    {
+    public function send(
+        array $recipients,
+        $senderAddress,
+        $senderName,
+        RenderedEmail $renderedEmail,
+        EmailInterface $email,
+        array $data
+    ) {
         $message = \Swift_Message::newInstance()
             ->setSubject($renderedEmail->getSubject())
             ->setFrom(array($senderAddress => $senderName))
