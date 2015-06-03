@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LocaleListener implements EventSubscriberInterface
+class LocaleSubscriber implements EventSubscriberInterface
 {
     /**
      * @var LocaleContextInterface
