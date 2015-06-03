@@ -11,16 +11,17 @@
 
 namespace Sylius\Bundle\UserBundle\OAuth;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
+use Sylius\Component\User\Model\UserOAuthInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Loading and ad-hoc creation of a user by an OAuth sign-in provider account.
@@ -42,27 +43,21 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected $customerRepository;
 
     /**
-     * @var RepositoryInterface
-     */
-    protected $userRepository;
-
-    /**
      * @var ObjectManager
      */
     protected $userManager;
 
     /**
-     * @param RepositoryInterface    $customerRepository
-     * @param RepositoryInterface    $userRepository
-     * @param RepositoryInterface    $oauthRepository
-     * @param ObjectManager          $userManager
-     * @param CanonicalizerInterface $canonicalizer
+     * @param RepositoryInterface     $customerRepository
+     * @param UserRepositoryInterface $userRepository
+     * @param RepositoryInterface     $oauthRepository
+     * @param ObjectManager           $userManager
+     * @param CanonicalizerInterface  $canonicalizer
      */
-    public function __construct(RepositoryInterface $customerRepository, RepositoryInterface $userRepository,RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
+    public function __construct(RepositoryInterface $customerRepository, UserRepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
     {
         parent::__construct($userRepository, $canonicalizer);
-        $this->customerRepository   = $customerRepository;
-        $this->userRepository   = $userRepository;
+        $this->customerRepository = $customerRepository;
         $this->oauthRepository = $oauthRepository;
         $this->userManager = $userManager;
     }
