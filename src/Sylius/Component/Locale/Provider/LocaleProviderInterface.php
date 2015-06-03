@@ -24,4 +24,11 @@ interface LocaleProviderInterface
      * @return LocaleInterface[]
      */
     public function getAvailableLocales();
+
+    /**
+     * @param string $locale
+     *
+     * @return bool
+     */
+    public function isLocaleAvailable($locale);
 }
