@@ -2,6 +2,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler;
 
+use SplFileInfo;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Config\Resource\DirectoryResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -34,13 +35,13 @@ class ThemeTranslationCompilerPass implements CompilerPassInterface
         $files = array();
         $finder = Finder::create()
             ->files()
-            ->filter(function (\SplFileInfo $file) {
+            ->filter(function (SplFileInfo $file) {
                 return 2 === substr_count($file->getBasename(), '.') && preg_match('/\.\w+$/', $file->getBasename());
             })
             ->in($dirs)
         ;
 
-        /** @var \SplFileInfo[] $finder */
+        /** @var SplFileInfo $file */
         foreach ($finder as $file) {
             $locale = explode('.', $file->getBasename(), 3)[1];
             if (!isset($files[$locale])) {

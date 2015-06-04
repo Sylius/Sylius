@@ -97,12 +97,6 @@
             <argument type="service" id="assets.context" />
         </service>
 
-        <service id="sylius.DELETE.request_listener" class="Sylius\Bundle\ThemeBundle\DELETE\KernelRequestListener">
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-            <argument type="service" id="sylius.repository.theme" />
-            <argument type="service" id="sylius.context.theme" />
-        </service>
-
     </services>
 
 </container>

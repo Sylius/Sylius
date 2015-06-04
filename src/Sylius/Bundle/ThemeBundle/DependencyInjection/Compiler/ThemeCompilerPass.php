@@ -21,12 +21,16 @@ class ThemeCompilerPass implements CompilerPassInterface
         $loader = $container->get('sylius.loader.theme');
 
         $serializedThemes = [];
-        $themeFiles = $container->get('sylius.locator.theme')->locate('theme.json', null, false);
-        foreach ($themeFiles as $themeFile) {
-            $serializedThemes[] = serialize($loader->load($themeFile));
-            $container->addResource(new FileResource($themeFile));
-        }
+        try {
+            $themeFiles = $container->get('sylius.locator.theme')->locate('theme.json', null, false);
+            foreach ($themeFiles as $themeFile) {
+                $serializedThemes[] = serialize($loader->load($themeFile));
+                $container->addResource(new FileResource($themeFile));
+            }
 
-        $definition->addArgument($serializedThemes);
+            $definition->addArgument($serializedThemes);
+        } catch (\InvalidArgumentException $e) {
+            // No files found.
+        }
     }
 }

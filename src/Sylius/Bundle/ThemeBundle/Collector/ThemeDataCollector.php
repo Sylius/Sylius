@@ -78,14 +78,9 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        if (null !== $this->themeContext) {
-            $this->usedThemes = $this->themeContext->getThemesSortedByPriorityInDescendingOrder();
-            $this->themesPriorities = $this->themeContext->getThemesPriorities();
-        }
-
-        if (null !== $this->themeRepository) {
-            $this->allThemes = $this->themeRepository->findAll();
-        }
+        $this->usedThemes = $this->themeContext->getThemesSortedByPriorityInDescendingOrder();
+        $this->themesPriorities = $this->themeContext->getThemesPriorities();
+        $this->allThemes = $this->themeRepository->findAll();
     }
 
     /**

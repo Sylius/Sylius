@@ -38,7 +38,7 @@ class Loader implements LoaderInterface
     {
         $messageCatalogue = $this->loader->load($resource, $locale, $domain);
 
-        if (null !== $theme = $this->resourcesToThemes[realpath($resource)]) {
+        if (null !== $theme = $this->resourcesToThemes->get(realpath($resource))) {
             $messages = $messageCatalogue->all($domain);
 
             foreach ($messages as $key => $value) {
