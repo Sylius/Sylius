@@ -278,7 +278,7 @@ class Configuration
 
     public function isFilterable()
     {
-        return (bool) $this->parameters->get('filterable', $this->settings['filterable']);
+        return $this->parameters->get('filterable', $this->settings['filterable']) === true;
     }
 
     public function getCriteria(array $criteria = array())
@@ -290,6 +290,49 @@ class Configuration
         }
 
         return $defaultCriteria;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFilterForm()
+    {
+        return $this->parameters->get('filterable') === 'form';
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilterFormType()
+    {
+        $form = $this->parameters->get('filter_form', array(
+            'type' => sprintf('%s_%s_filter', $this->bundlePrefix, $this->resourceName)
+        ));
+
+        return is_array($form) ? $form['type'] : $form;
+    }
+
+    /**
+     * @param array $default
+     * @return array
+     */
+    public function getFilterFormOptions(array $default = array())
+    {
+        $form = $this->parameters->get('filter_form', array('options' => $default));
+
+        return isset($form['options']) ? $form['options'] : $default;
+    }
+
+    /**
+     * Default values of filter form
+     * @param array $default
+     * @return array
+     */
+    public function getFilterFormDefaults(array $default = array())
+    {
+        $form = $this->parameters->get('filter_form', array('defaults' => $default));
+
+        return isset($form['defaults']) ? $form['defaults'] : $default;
     }
 
     public function isSortable()

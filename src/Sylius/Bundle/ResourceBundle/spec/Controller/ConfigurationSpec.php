@@ -236,6 +236,9 @@ class ConfigurationSpec extends ObjectBehavior
 
         $parameters->get('filterable', Argument::any())->willReturn(null);
         $this->isFilterable()->shouldReturn(false);
+
+        $parameters->get('filterable', Argument::any())->willReturn('form');
+        $this->isFilterable()->shouldReturn(false);
     }
 
     function it_has_no_filterable_parameter(Parameters $parameters)
@@ -285,6 +288,50 @@ class ConfigurationSpec extends ObjectBehavior
         $request->get('criteria', array())->willReturn(array('filter' => 'request'));
 
         $this->getCriteria(array('filter' => 'default'))->shouldReturn(array('filter' => 'request'));
+    }
+
+    function it_checks_if_the_resource_is_filterable_by_form(Parameters $parameters)
+    {
+        $parameters->get('filterable', Argument::any())->willReturn('form');
+        $this->isFilterable()->shouldReturn(true);
+
+        $parameters->get('filterable', Argument::any())->willReturn(true);
+        $this->isFilterable()->shouldReturn(false);
+
+        $parameters->get('filterable', Argument::any())->willReturn(null);
+        $this->isFilterable()->shouldReturn(false);
+    }
+
+    function it_generates_filter_form_type(Parameters $parameters)
+    {
+        $parameters->get('filter_form', Argument::any())->willReturn('sylius_product_filter');
+        $this->getFilterFormType()->shouldReturn('sylius_product_filter');
+
+        $parameters->get('filter_form', Argument::any())->willReturn(array(
+            'type' => 'sylius_product_filter',
+            'options' => array(),
+        ));
+        $this->getFormType()->shouldReturn('sylius_product_filter');
+    }
+
+    function it_has_filter_form_options(Parameters $parameters)
+    {
+        $options = array('options' => array('some_option' => 'value'));
+        $parameters->get('filter_form', array())->willReturn($options);
+        $this->getFilterFormOptions($options)->shouldReturn(array('some_option' => 'value'));
+
+        $parameters->get('filter_form', null)->willReturn($options);
+        $this->getFilterFormOptions($options)->shouldReturn(array('some_option' => 'value'));
+    }
+
+    function it_has_filter_form_defaults(Parameters $parameters)
+    {
+        $defaults = array('defaults' => array('some_option' => 'value'));
+        $parameters->get('filter_form', array())->willReturn($defaults);
+        $this->getFilterFormDefaults($defaults)->shouldReturn(array('some_option' => 'value'));
+
+        $parameters->get('filter_form', null)->willReturn($defaults);
+        $this->getFilterFormDefaults($defaults)->shouldReturn(array('some_option' => 'value'));
     }
 
     function it_checks_if_the_resource_is_sortable(Parameters $parameters)
