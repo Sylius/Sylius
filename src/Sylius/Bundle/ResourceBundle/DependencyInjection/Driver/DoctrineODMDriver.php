@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -38,7 +39,9 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
         $translatableInterface = 'Sylius\Component\Translation\Model\TranslatableInterface';
         $translatable = (interface_exists($translatableInterface) && $reflection->implementsInterface($translatableInterface));
 
-        $repositoryClass = $translatable ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository' : 'Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository';
+        $repositoryClass = $translatable
+            ? 'Sylius\Bundle\TranslationBundle\Doctrine\ODM\MongoDB\TranslatableResourceRepository'
+            : new Parameter('sylius.mongodb_odm.repository.class');
 
         if (isset($classes['repository'])) {
             $repositoryClass = $classes['repository'];
