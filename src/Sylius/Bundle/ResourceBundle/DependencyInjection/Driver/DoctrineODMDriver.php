@@ -49,8 +49,7 @@ class DoctrineODMDriver extends AbstractDatabaseDriver
 
         $unitOfWorkDefinition = new Definition('Doctrine\\ODM\\MongoDB\\UnitOfWork');
         $unitOfWorkDefinition
-            ->setFactoryService($this->getManagerServiceKey())
-            ->setFactoryMethod('getUnitOfWork')
+            ->setFactory(array(new Reference($this->getManagerServiceKey()), 'getUnitOfWork'))
             ->setPublic(false);
 
         $definition = new Definition($repositoryClass);
