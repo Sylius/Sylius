@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildPriceableFormListener implements EventSubscriberInterface
+class BuildPriceableFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface

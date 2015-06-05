@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.form.type.price_calculator_choice.class">Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType</parameter>
         <parameter key="sylius.form.extension.priceable.class">Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension</parameter>
+        <parameter key="sylius.form.subscriber.priceable.class">Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber</parameter>
         <parameter key="sylius.form.type.price_calculator.volume_based.class">Sylius\Bundle\PricingBundle\Form\Type\VolumeBasedConfigurationType</parameter>
         <parameter key="sylius.form.type.price_calculator.volume_based.configuration.class">Sylius\Bundle\PricingBundle\Form\Type\VolumePriceConfigurationType</parameter>
 
@@ -32,6 +33,11 @@
     <services>
         <service id="sylius.registry.price_calculator" class="%sylius.registry.price_calculator.class%">
             <argument>Sylius\Component\Pricing\Calculator\CalculatorInterface</argument>
+        </service>
+
+        <service id="sylius.form.subscriber.priceable" class="%sylius.form.subscriber.priceable.class%">
+            <argument type="service" id="sylius.registry.price_calculator" />
+            <argument type="service" id="form.factory" />
         </service>
 
         <service id="sylius.form.type.price_calculator_choice" class="%sylius.form.type.price_calculator_choice.class%">

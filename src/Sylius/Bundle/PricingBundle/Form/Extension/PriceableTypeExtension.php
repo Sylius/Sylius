@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\Extension;
 
-use Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormListener;
+use Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -37,6 +39,13 @@ class PriceableTypeExtension extends AbstractTypeExtension
      *
      * @var ServiceRegistryInterface
      */
+    protected $formSubscriber;
+
+    /**
+     * Calculator registry.
+     *
+     * @var ServiceRegistryInterface
+     */
     protected $calculatorRegistry;
 
     /**
@@ -44,11 +53,16 @@ class PriceableTypeExtension extends AbstractTypeExtension
      *
      * @param string                   $extendedType
      * @param ServiceRegistryInterface $calculatorRegistry
+     * @param EventSubscriberInterface $formSubscriber
      */
-    public function __construct($extendedType, ServiceRegistryInterface $calculatorRegistry)
-    {
+    public function __construct(
+        $extendedType,
+        ServiceRegistryInterface $calculatorRegistry,
+        EventSubscriberInterface $formSubscriber
+    ) {
         $this->extendedType = $extendedType;
         $this->calculatorRegistry = $calculatorRegistry;
+        $this->formSubscriber = $formSubscriber;
     }
 
     /**
@@ -57,7 +71,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new BuildPriceableFormListener($this->calculatorRegistry, $builder->getFormFactory()))
+            ->addEventSubscriber($this->formSubscriber)
             ->add('pricingCalculator', 'sylius_price_calculator_choice', array(
                 'label' => 'sylius.form.priceable.calculator'
             ))
@@ -65,6 +79,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
 
         $prototypes = array();
 
+        /** @var CalculatorInterface $calculator */
         foreach ($this->calculatorRegistry->all() as $type => $calculator) {
             $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
 
