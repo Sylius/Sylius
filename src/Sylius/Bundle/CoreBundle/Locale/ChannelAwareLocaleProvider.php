@@ -52,6 +52,6 @@ class ChannelAwareLocaleProvider extends LocaleProvider
 
         return $currentChannel->getLocales()->filter(function (LocaleInterface $locale) {
             return $locale->isEnabled();
-        });
+        })->toArray();
     }
 }
