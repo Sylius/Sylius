@@ -80,10 +80,10 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param array   $criteria
-     * @param array   $orderBy
-     * @param integer $limit
-     * @param integer $offset
+     * @param array $criteria
+     * @param array $orderBy
+     * @param int   $limit
+     * @param int   $offset
      *
      * @return array
      */
@@ -159,8 +159,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @param array $criteria
+     * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
@@ -169,18 +168,16 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         }
 
         foreach ($criteria as $property => $value) {
+            $property = $this->getPropertyName($property);
             if (null === $value) {
-                $queryBuilder
-                    ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
+                $queryBuilder->andWhere($queryBuilder->expr()->isNull($property));
             } elseif (is_array($value)) {
-                $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
+                $queryBuilder->andWhere($queryBuilder->expr()->in($property, $value));
             } elseif ('' !== $value) {
+                $parameter = str_replace('.', '_', $property);
                 $queryBuilder
-                    ->andWhere($queryBuilder->expr()->eq(
-                        $this->getPropertyName($property),
-                        ':' . $key = str_replace('.', '_', $property))
-                    )
-                    ->setParameter($key, $value)
+                    ->andWhere($queryBuilder->expr()->eq($property, ':'.$parameter))
+                    ->setParameter($parameter, $value)
                 ;
             }
         }
@@ -188,8 +185,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
     /**
      * @param QueryBuilder $queryBuilder
-     *
-     * @param array $sorting
+     * @param array        $sorting
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
     {
