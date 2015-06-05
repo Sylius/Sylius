@@ -67,7 +67,7 @@ class MenuNodeType extends AbstractResourceType
             ->add('route', null, array(
                 'label' => 'sylius.form.menu_node_block.route'
             ))
-            ->add('content', 'sylius_content_choice', array(
+            ->add('content', 'sylius_static_content_choice', array(
                 'label' => 'sylius.form.menu_node_block.content',
              ))
             ->add('uri', null, array(
