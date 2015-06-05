@@ -15,8 +15,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
-* @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
-*/
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
 class UserReloader implements UserReloaderInterface
 {
     /**

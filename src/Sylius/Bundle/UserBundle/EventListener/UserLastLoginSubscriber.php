@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class UserLastLoginListener implements EventSubscriberInterface
+class UserLastLoginSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ObjectManager

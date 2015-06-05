@@ -24,6 +24,7 @@ class CustomerController extends ResourceController
 {
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function updateProfileAction(Request $request)

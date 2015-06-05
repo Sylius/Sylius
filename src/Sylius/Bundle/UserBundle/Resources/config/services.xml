@@ -40,7 +40,7 @@
         <parameter key="sylius.form.type.user_reset_password.class">Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType</parameter>
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
 
-        <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameListener</parameter>
+        <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
         <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener</parameter>

@@ -20,21 +20,22 @@ use Sylius\Component\User\Model\UserInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class DefaultUsernameListener
+class DefaultUsernameORMListener
 {
     /**
      * @param LifecycleEventArgs $event
      */
     public function prePersist(LifecycleEventArgs $event)
     {
-        $item = $event->getEntity();
+        $user = $event->getEntity();
 
-        if (!$item instanceof UserInterface) {
+        if (!$user instanceof UserInterface) {
             return;
         }
-        $customer = $item->getCustomer();
-        if (null !== $customer && $customer->getEmail() !== $item->getUsername()) {
-            $item->setUsername($customer->getEmail());
+
+        $customer = $user->getCustomer();
+        if (null !== $customer && $customer->getEmail() !== $user->getUsername()) {
+            $user->setUsername($customer->getEmail());
         }
     }
 
@@ -43,14 +44,15 @@ class DefaultUsernameListener
      */
     public function preUpdate(LifecycleEventArgs $event)
     {
-        $item = $event->getEntity();
+        $customer = $event->getEntity();
 
-        if (!$item instanceof CustomerInterface) {
+        if (!$customer instanceof CustomerInterface) {
             return;
         }
-        $user = $item->getUser();
-        if (null !== $user && $user->getUsername() !== $item->getEmail()) {
-            $user->setUsername($item->getEmail());
+
+        $user = $customer->getUser();
+        if (null !== $user && $user->getUsername() !== $customer->getEmail()) {
+            $user->setUsername($customer->getEmail());
             $entityManager = $event->getEntityManager();
             $entityManager->persist($user);
             $entityManager->flush($user);

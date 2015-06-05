@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\UserInterface;
@@ -89,6 +91,7 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
         $this->_em->getFilters()->enable('softdeleteable');
 
         return $result;
@@ -118,6 +121,11 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         ;
     }
 
+    /**
+     * @param array $configuration
+     *
+     * @return array
+     */
     public function getRegistrationStatistic(array $configuration = array())
     {
         $groupBy = '';
@@ -145,18 +153,13 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
             ->fetchAll();
     }
 
-    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
-    {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-
-        return $queryBuilder
-            ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
-            ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
-            ->setParameter('from', $from)
-            ->setParameter('to', $to)
-        ;
-    }
-
+    /**
+     * @param string $email
+     *
+     * @return mixed
+     *
+     * @throws NonUniqueResultException
+     */
     public function findOneByEmail($email)
     {
         $queryBuilder = $this->getQueryBuilder();
@@ -170,6 +173,24 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         return $queryBuilder
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * @param \DateTime $from
+     * @param \DateTime $to
+     *
+     * @return QueryBuilder
+     */
+    protected function getCollectionQueryBuilderBetweenDates(\DateTime $from, \DateTime $to)
+    {
+        $queryBuilder = $this->getCollectionQueryBuilder();
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':from'))
+            ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':to'))
+            ->setParameter('from', $from)
+            ->setParameter('to', $to)
         ;
     }
 }

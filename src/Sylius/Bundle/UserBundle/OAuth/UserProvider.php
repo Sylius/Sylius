@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
+use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProviderAbstract as BaseUserProvider;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
@@ -54,8 +54,13 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param ObjectManager           $userManager
      * @param CanonicalizerInterface  $canonicalizer
      */
-    public function __construct(RepositoryInterface $customerRepository, UserRepositoryInterface $userRepository, RepositoryInterface $oauthRepository, ObjectManager $userManager, CanonicalizerInterface $canonicalizer)
-    {
+    public function __construct(
+        RepositoryInterface $customerRepository,
+        UserRepositoryInterface $userRepository,
+        RepositoryInterface $oauthRepository,
+        ObjectManager $userManager,
+        CanonicalizerInterface $canonicalizer
+    ) {
         parent::__construct($userRepository, $canonicalizer);
         $this->customerRepository = $customerRepository;
         $this->oauthRepository = $oauthRepository;
@@ -96,7 +101,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
-     * Ad-hoc creation of user
+     * Ad-hoc creation of user.
      *
      * @param UserResponseInterface $response
      *
@@ -126,7 +131,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
-     * Attach OAuth sign-in provider account to existing user
+     * Attach OAuth sign-in provider account to existing user.
      *
      * @param UserInterface         $user
      * @param UserResponseInterface $response

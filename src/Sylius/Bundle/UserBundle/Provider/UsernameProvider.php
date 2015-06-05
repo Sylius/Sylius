@@ -14,7 +14,7 @@ namespace Sylius\Bundle\UserBundle\Provider;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UsernameProvider extends UserProvider
+class UsernameProvider extends AbstractUserProvider
 {
     /**
      * {@inheritDoc}

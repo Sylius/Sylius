@@ -38,7 +38,7 @@ class EmailProviderSpec extends ObjectBehavior
 
     function it_should_extend_user_provider()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Provider\UserProvider');
+        $this->shouldHaveType('Sylius\Bundle\UserBundle\Provider\AbstractUserProvider');
     }
 
     function it_supports_sylius_user_model()
