@@ -172,10 +172,12 @@ sylius_order:
             model: Sylius\Component\Core\Model\Order
             controller: Sylius\Bundle\CoreBundle\Controller\OrderController
             repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
-            form: Sylius\Bundle\CoreBundle\Form\Type\OrderType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\OrderType
         order_item:
             model: Sylius\Component\Core\Model\OrderItem
-            form: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+            form:
+                default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
 
 sylius_sequence:
     generators:
