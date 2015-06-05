@@ -31,15 +31,22 @@ class ConfigurationFactory
     protected $settings;
 
     /**
+     * @var string
+     */
+    protected $configurationClass;
+
+    /**
      * Constructor.
      *
      * @param ParametersParser $parametersParser
+     * @param string           $configurationClass
      * @param array            $settings
      */
-    public function __construct(ParametersParser $parametersParser, array $settings)
+    public function __construct(ParametersParser $parametersParser, $configurationClass, array $settings)
     {
         $this->settings = $settings;
         $this->parametersParser = $parametersParser;
+        $this->configurationClass = $configurationClass;
     }
 
     /**
@@ -54,7 +61,7 @@ class ConfigurationFactory
      */
     public function createConfiguration($bundlePrefix, $resourceName, $templateNamespace, $templatingEngine = 'twig')
     {
-        return new Configuration(
+        return new $this->configurationClass(
             $this->parametersParser,
             $bundlePrefix,
             $resourceName,
