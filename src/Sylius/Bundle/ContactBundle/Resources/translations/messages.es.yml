@@ -8,6 +8,6 @@ sylius:
       last_name: Apellidos
       email: Correo electrónico
       message: Mensaje
-      topic: Tema
+      topic: Asunto
     contact_topic:
       title: Título
