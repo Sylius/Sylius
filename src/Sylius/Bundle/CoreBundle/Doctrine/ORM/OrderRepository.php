@@ -198,9 +198,9 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->innerJoin('o.promotionCoupons', 'coupons')
             ->andWhere('o.customer = :customer')
             ->andWhere('o.completedAt IS NOT NULL')
-            ->andWhere($queryBuilder->expr()->in('coupons', ':coupons'))
+            ->andWhere('coupons = :coupon')
             ->setParameter('customer', $customer)
-            ->setParameter('coupons', (array) $coupon)
+            ->setParameter('coupon', $coupon)
         ;
 
         $count = (int) $queryBuilder
@@ -318,7 +318,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
 
 
     /**
-     * {@inheritdoc} 
+     * {@inheritdoc}
      */
     public function revenueBetweenDatesGroupByDate(array $configuration = array())
     {
@@ -344,7 +344,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
-     * {@inheritdoc} 
+     * {@inheritdoc}
      */
     public function ordersBetweenDatesGroupByDate(array $configuration = array())
     {
