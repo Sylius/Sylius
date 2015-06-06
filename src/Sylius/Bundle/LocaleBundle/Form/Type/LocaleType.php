@@ -28,14 +28,13 @@ class LocaleType extends AbstractResourceType
     {
         $builder
             ->add('code', 'locale', array(
-                'label' => 'sylius.form.locale.code'
+                'label' => 'sylius.form.locale.code',
             ))
             ->add('enabled', 'checkbox', array(
                 'required' => false,
                 'label'    => 'sylius.form.locale.enabled',
             ))
         ;
-
     }
 
     /**

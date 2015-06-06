@@ -49,7 +49,6 @@ class LocaleProvider implements LocaleProviderInterface
         }
 
         $this->localeRepository = $localeRepository;
-
         $this->defaultLocale = $defaultLocale;
     }
 
@@ -59,6 +58,14 @@ class LocaleProvider implements LocaleProviderInterface
     public function getAvailableLocales()
     {
         return $this->localeRepository->findBy(array('enabled' => true));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isLocaleAvailable($locale)
+    {
+        return in_array($locale, $this->getLocales());
     }
 
     /**

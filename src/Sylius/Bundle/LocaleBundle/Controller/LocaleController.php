@@ -11,8 +11,12 @@
 
 namespace Sylius\Bundle\LocaleBundle\Controller;
 
+use Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Locale\Context\LocaleContext;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Locale controller.
@@ -21,11 +25,16 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class LocaleController extends ResourceController
 {
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
     public function changeAction(Request $request)
     {
         $locale = $request->get('locale');
 
-        if (!$this->isLocaleAvailable($locale)) {
+        if (!$this->getLocaleProvider()->isLocaleAvailable($locale)) {
             $locale = $this->getLocaleContext()->getDefaultLocale();
         }
 
@@ -43,18 +52,19 @@ class LocaleController extends ResourceController
         return $this->redirect($request->headers->get('referer') ?: '/');
     }
 
+    /**
+     * @return LocaleContext
+     */
     protected function getLocaleContext()
     {
         return $this->get('sylius.context.locale');
     }
 
+    /**
+     * @return ChannelAwareLocaleProvider
+     */
     protected function getLocaleProvider()
     {
         return $this->get('sylius.locale_provider');
-    }
-
-    protected function isLocaleAvailable($locale)
-    {
-        return in_array($locale, $this->getLocaleProvider()->getLocales());
     }
 }

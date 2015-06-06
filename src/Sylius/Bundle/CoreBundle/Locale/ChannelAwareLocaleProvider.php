@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\Locale;
 
+use Sylius\Bundle\LocaleBundle\Provider\LocaleProvider;
 use Sylius\Component\Core\Channel\ChannelContextInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Bundle\LocaleBundle\Provider\LocaleProviderInterface;
 
 /**
  * Locale provider, which returns locales enabled for this channel.
  *
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
  */
-class ChannelAwareLocaleProvider implements LocaleProviderInterface
+class ChannelAwareLocaleProvider extends LocaleProvider
 {
     /**
      * Channel context.
@@ -52,32 +52,6 @@ class ChannelAwareLocaleProvider implements LocaleProviderInterface
 
         return $currentChannel->getLocales()->filter(function (LocaleInterface $locale) {
             return $locale->isEnabled();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLocales()
-    {
-        return array_map(function (LocaleInterface $locale) {
-            return $locale->getCode();
-        }, $this->getAvailableLocales()->toArray());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaultLocale()
-    {
-        return $this->defaultLocale;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequiredLocales()
-    {
-        return array($this->defaultLocale);
+        })->toArray();
     }
 }
