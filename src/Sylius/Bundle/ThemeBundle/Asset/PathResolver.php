@@ -14,8 +14,12 @@ class PathResolver implements PathResolverInterface
      */
     public function resolve($path, ThemeInterface $theme)
     {
-        $dotIndex = strpos($path, '.');
+        $dirname = dirname($path);
+        $basename = basename($path);
 
-        return substr($path, 0, $dotIndex) . '_' . $theme->getHashCode() . substr($path, $dotIndex);
+        $dotIndex = strpos($basename, '.');
+        $basename = substr($basename, 0, $dotIndex) . '_' . $theme->getHashCode() . substr($basename, $dotIndex);
+
+        return $dirname . DIRECTORY_SEPARATOR . $basename;
     }
 }

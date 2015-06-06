@@ -3,7 +3,7 @@
 namespace Sylius\Bundle\ThemeBundle\Command;
 
 use Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstallerInterface;
-use Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstallerInterface;
+use Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,7 +24,7 @@ class AssetsInstallCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('x:assets:install')
+            ->setName('assets:install')
             ->setDefinition(array(
                 new InputArgument('target', InputArgument::OPTIONAL, 'The target directory', 'web'),
             ))
@@ -61,8 +61,8 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $assetsInstaller = $this->getContainer()->get('sylius.theme.assets_installer');
-        if ($assetsInstaller instanceof OutputAwareAssetsInstallerInterface) {
+        $assetsInstaller = $this->getContainer()->get('sylius.theme.asset.assets_installer');
+        if ($assetsInstaller instanceof OutputAwareInterface) {
             $assetsInstaller->setOutput($output);
         }
 

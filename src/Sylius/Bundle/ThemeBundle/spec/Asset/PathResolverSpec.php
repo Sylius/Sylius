@@ -29,4 +29,11 @@ class PathResolverSpec extends ObjectBehavior
 
         $this->resolve('/long/path/asset.min.js', $theme)->shouldReturn('/long/path/asset_HASHCODE.min.js');
     }
+
+    function it_changes_only_filename(ThemeInterface $theme)
+    {
+        $theme->getHashCode()->shouldBeCalled()->willReturn("HASHCODE");
+
+        $this->resolve('/long.path/asset.min.js', $theme)->shouldReturn('/long.path/asset_HASHCODE.min.js');
+    }
 }
