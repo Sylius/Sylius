@@ -25,12 +25,17 @@ class WebTestCase extends BaseWebTestCase
 
     protected function deleteTmpDir($testCase)
     {
-        if (!file_exists($dir = sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$testCase)) {
+        if (!file_exists($dir = $this->getTmpDirPath($testCase))) {
             return;
         }
 
         $fs = new Filesystem();
         $fs->remove($dir);
+    }
+
+    protected function getTmpDirPath($testCase)
+    {
+        return sys_get_temp_dir() . '/' . Kernel::VERSION . '/' . $testCase;
     }
 
     protected static function getKernelClass()

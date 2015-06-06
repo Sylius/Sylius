@@ -1,0 +1,2 @@
+test:
+  theme: 'That should be overrided by first test theme.'
