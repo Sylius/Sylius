@@ -1,0 +1,28 @@
+framework:
+    secret:          test
+    router:
+        resource: "%kernel.root_dir%/%kernel.test_case%/routing.yml"
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  en
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+    test: ~
+
+twig:
+    debug:            false
+    strict_variables: false
+
+assetic:
+    debug:          false
+    use_controller: false
+    bundles:        [ ]
+    filters:
+        cssrewrite: ~
