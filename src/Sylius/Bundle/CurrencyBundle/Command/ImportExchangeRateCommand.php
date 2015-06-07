@@ -19,6 +19,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportExchangeRateCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -32,6 +35,9 @@ class ImportExchangeRateCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Fetching data from external database.');
