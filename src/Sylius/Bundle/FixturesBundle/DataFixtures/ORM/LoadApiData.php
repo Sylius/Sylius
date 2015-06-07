@@ -37,6 +37,7 @@ class LoadApiData extends DataFixture
             true,
             array('ROLE_API')
         );
+        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(array('code' => 'administrator')));
 
         $manager->persist($user);
         $manager->flush();
