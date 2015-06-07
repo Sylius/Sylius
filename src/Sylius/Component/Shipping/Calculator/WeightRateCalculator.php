@@ -26,7 +26,7 @@ class WeightRateCalculator extends Calculator
      */
     public function calculate(ShippingSubjectInterface $subject, array $configuration)
     {
-        return (int) round($configuration['amount'] * ($subject->getShippingWeight() / $configuration['division']));
+        return (int) ($configuration['fixed'] + round($configuration['variable'] * ($subject->getShippingWeight() / $configuration['division'])));
     }
 
     /**
@@ -52,15 +52,18 @@ class WeightRateCalculator extends Calculator
     {
         $resolver
             ->setDefaults(array(
-                'division' => 1
+                'division' => 1,
+                'fixed'    => 0,
             ))
             ->setRequired(array(
-                'amount',
-                'division'
+                'variable',
+                'division',
+                'fixed',
             ))
             ->setAllowedTypes(array(
-                'amount'   => array('numeric'),
-                'division' => array('numeric')
+                'variable' => array('numeric'),
+                'division' => array('numeric'),
+                'fixed'    => array('numeric'),
             ))
         ;
     }
