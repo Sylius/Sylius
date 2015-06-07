@@ -266,6 +266,7 @@ sylius:
         empty: Your cart is empty
         summary:
             add_coupon: Add coupon
+            remove_coupon: Remove
             checkout: Checkout
             clear: Clear cart
             grand_total: Grand total

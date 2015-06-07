@@ -52,6 +52,7 @@ class CartType extends BaseCartType
         $builder
             ->add('promotionCoupons', 'collection', array(
                 'type'         => 'sylius_promotion_coupon_to_code',
+                'required'     => false,
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'by_reference' => false,

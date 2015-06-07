@@ -1,5 +1,4 @@
 {% extends 'SyliusWebBundle:Frontend:layout.html.twig' %}
-
 {% import 'SyliusWebBundle:Frontend/Macros:alerts.html.twig' as alerts %}
 
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
@@ -11,7 +10,7 @@
 {% block javascripts %}
 {{ parent() }}
 {% javascripts output='assets/compiled/frontend_cart_summary.js'
-    'bundles/syliusweb/js/form-collection.js'
+    'bundles/syliusresource/js/form-collection.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
@@ -19,7 +18,7 @@
 
 {% block content %}
 <div class="page-header">
-<h1>{{ 'sylius.cart.summary_header'|trans|raw }}</h1>
+    <h1>{{ 'sylius.cart.summary_header'|trans|raw }}</h1>
 </div>
 
 {% if not cart.empty %}
@@ -78,12 +77,8 @@
     </tfoot>
 </table>
 
-<div id="sylius-cart-coupons" class="well well-sm" data-prototype="{{ form_row(form.promotionCoupons.vars.prototype)|e }}">
-    <div id="sylius-cart-coupons-collection">
-        {% for couponField in form.promotionCoupons %}
-        {{ form_row(couponField, {'label_attr': {'class': 'col-lg-12'}}) }}
-        {% endfor %}
-    </div>
+<div class="col-md-12 well well-sm">
+    {{ form_row(form.promotionCoupons) }}
 </div>
 
 {{ form_rest(form) }}
