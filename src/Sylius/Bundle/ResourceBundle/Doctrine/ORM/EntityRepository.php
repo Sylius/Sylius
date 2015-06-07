@@ -28,6 +28,14 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function getId($id)
+    {
+        return $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         $className = $this->getClassName();

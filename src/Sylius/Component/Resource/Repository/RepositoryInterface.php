@@ -21,6 +21,15 @@ use Doctrine\Common\Persistence\ObjectRepository;
 interface RepositoryInterface extends ObjectRepository
 {
     /**
+     * Convert an ID if needed to the format expected by the ObjectManager
+     *
+     * @param int $id
+     *
+     * @return string
+     */
+    public function getId($id);
+
+    /**
      * Create a new resource
      *
      * @return mixed

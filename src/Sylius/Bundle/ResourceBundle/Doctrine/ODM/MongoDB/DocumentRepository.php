@@ -27,6 +27,14 @@ class DocumentRepository extends BaseDocumentRepository implements RepositoryInt
     /**
      * {@inheritdoc}
      */
+    public function getId($id)
+    {
+        return $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createNew()
     {
         $className = $this->getClassName();
