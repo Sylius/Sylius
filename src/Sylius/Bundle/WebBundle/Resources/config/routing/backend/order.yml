@@ -10,9 +10,14 @@ sylius_backend_order_index:
             template: SyliusWebBundle:Backend/Order:index.html.twig
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting, $deleted]
             paginate: 20
             sortable: true
+            filterable: form
+            filter_form:
+                type: sylius_order_filter
+                defaults:
+                    paymentState: new
+            redirect: sylius_backend_order_index
 
 sylius_backend_order_create:
     path: /new
