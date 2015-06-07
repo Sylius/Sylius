@@ -22,8 +22,8 @@ class NonExistingGeneratorException extends \InvalidArgumentException
     {
         parent::__construct(
             sprintf(
-                'Generator for entity "%s" does not exist. Please consider adding it to your configuration like this: sylius_sequence.generators: %%sylius.model.class%%: sylius.sequence.sequential_number_generator',
-                get_class($entity)
+                'Generator for entity "%s" does not exist. Please consider adding it to your configuration like this: sylius_sequence.generators: %type%: sylius.sequence.sequential_number_generator',
+                $entity->getSequenceType()
             ),
             $e->getCode(),
             $e

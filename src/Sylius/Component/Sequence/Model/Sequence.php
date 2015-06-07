@@ -31,11 +31,19 @@ class Sequence implements SequenceInterface
      */
     protected $type;
 
+    /**
+     * @param string $type
+     */
     public function __construct($type)
     {
         $this->type = $type;
     }
 
+    /**
+     * Get id
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;

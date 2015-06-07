@@ -16,7 +16,7 @@ namespace Sylius\Component\Sequence\Repository;
  *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-interface HashSubjectRepositoryInterface
+interface SequenceSubjectRepositoryInterface
 {
     /**
      * Is the given number used?

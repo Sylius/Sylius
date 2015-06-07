@@ -45,6 +45,12 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->defaultFalse()
                 ->end()
+                ->integerNode('start_number')
+                    ->defaultValue(1)
+                ->end()
+                ->integerNode('number_length')
+                    ->defaultValue(9)
+                ->end()
             ->end()
         ;
 

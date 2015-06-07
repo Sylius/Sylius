@@ -83,9 +83,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('generators')
-                ->useAttributeAsKey('interface')
                 ->prototype('scalar')
-                ->end()
             ->end()
         ;
     }
