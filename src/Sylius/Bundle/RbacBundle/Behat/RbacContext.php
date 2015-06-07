@@ -137,10 +137,10 @@ class RbacContext extends DefaultContext
     public function authorizationChecksAreEnabled()
     {
         $settingsManager = $this->getService('sylius.settings.manager');
-        $settings = $settingsManager->loadSettings('security');
+        $settings = $settingsManager->loadSettings('sylius_security');
 
         $settings->set('enabled', true);
 
-        $settingsManager->saveSettings('security', $settings);
+        $settingsManager->saveSettings('sylius_security', $settings);
     }
 }

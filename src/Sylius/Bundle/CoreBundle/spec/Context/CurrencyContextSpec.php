@@ -37,7 +37,7 @@ class CurrencyContextSpec extends ObjectBehavior
         Settings $settings,
         ChannelContextInterface $channelContext
     ) {
-        $settingsManager->loadSettings('general')->willReturn($settings);
+        $settingsManager->loadSettings('sylius_general')->willReturn($settings);
         $settings->get('currency')->willReturn('EUR');
 
         $this->beConstructedWith($storage, $customerContext, $settingsManager, $customerManager, $channelContext);
